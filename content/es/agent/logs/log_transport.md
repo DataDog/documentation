@@ -30,7 +30,7 @@ Este mecanismo para hacer tests de conectividad solo se ejecuta al iniciar el Ag
 
 Para comprobar qué transporte utiliza el Agent, ejecuta el [comando de estado del Agent][1].
 
-{{< img src="agent/logs/agent-status.png" alt="Estado del Agent"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Estado del Agent" style="width:70%;">}}
 
 **Notas**:
 
@@ -63,7 +63,7 @@ De forma predeterminada, el Datadog Agent utiliza el puerto `443` para enviar su
 
 **El reenvío de logs HTTPS es la configuración recomendada** para obtener la mayor fiabilidad en la recopilación de logs, ya que el sistema de almacenamiento de Datadog devuelve el código de estado `200`:
 
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Esquema de entrada HTTPS"  style="width:80%;">}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Esquema de admisión de HTTPS" style="width:80%;">}}
 
 Al usar HTTP, el Agent envía lotes de logs con los siguientes límites:
 

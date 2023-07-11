@@ -613,6 +613,8 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="RUM エクスプローラーでの機能フラグのエラー検索" style="width:75%;">}}
 
+## トラブルシューティング
+
 ### 機能フラグのデータが期待通りに反映されないのはなぜですか？
 機能フラグは、それが評価されるイベントのコンテキストに表示されます。つまり、機能フラグのコードロジックが実行されるビューに表示されるはずです。
 
@@ -631,9 +633,18 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 調査を行う際、機能フラグに関連する `View Name` のデータをスコープすることも可能です。
 
+### 機能フラグの命名
+
+以下の特殊文字は [機能フラグ追跡][5] ではサポートされていません: `.`、`:`、`+`、`-`、`=`、`&&`、`||`、`>`、`<`、`!`、`(`、`)`、`{`、`}`、`[`、`]`、`^`、`"`、`"`、`~`、`*`、`?`、``。Datadogでは、機能フラグ名にこれらの文字を使用しないことを推奨しています。これらの文字を使用する必要がある場合は、 Datadog にデータを送信する前に文字を置き換えてください。例:
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+```
+
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/dashboards/
 [4]: /ja/monitors/#create-monitors
+[5]: /ja/real_user_monitoring/feature_flag_tracking

@@ -47,7 +47,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 2. To enable log collection, change `logs_enabled: false` to `logs_enabled: true` in your Agent's main configuration file (`datadog.yaml`). See the [Host Agent Log collection documentation][5] for more information and examples.
 3. Once enabled, the Datadog Agent can be configured to [tail log files or listen for logs sent over UDP/TCP][2], [filter out logs or scrub sensitive data][3], and [aggregate multi-line logs][4].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
@@ -62,7 +62,7 @@ Consult the [list of available Datadog log collection endpoints](#logging-endpoi
 
 {{< partial name="logs/logs-languages.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/logs/
 {{% /tab %}}
 
@@ -295,7 +295,7 @@ The TCP endpoint is not recommended for this site. Contact [support][1] for more
 [1]: /help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5" >}}
+{{< site-region region="gov,us5,ap1" >}}
 
 The TCP endpoint is not supported for this site.
 

@@ -94,7 +94,7 @@
             file_name: '_index.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-              
+
         - action: pull-and-push-folder
           branch: master
           globs:
@@ -143,6 +143,11 @@
           - "*/images/*.jpg"
           - "*/images/*.jpeg"
           - "*/images/*.svg"
+          options:
+            front_matters:
+              algolia:
+                subcategory: Marketplace Integrations
+
 
       - repo_name: ansible-datadog
         contents:
@@ -348,7 +353,7 @@
               title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
-      
+
       - repo_name: datadog-static-analyzer-github-action
         contents:
         - action: pull-and-push-file
@@ -423,6 +428,16 @@
           options:
             dest_dir: '/continuous_integration/static_analysis/rules/python-inclusive/'
             path_to_remove: 'rulesets/python-inclusive/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-pandas/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/python-pandas/'
+            path_to_remove: 'rulesets/python-pandas/'
             front_matters:
               disable_edit: true
 

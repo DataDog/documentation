@@ -1,25 +1,31 @@
 ---
-title: メトリクスのユニット
-kind: documentation
 aliases:
-  - /ja/developers/metrics/metrics_units
-  - /ja/developers/metrics/units/
+- /ja/developers/metrics/metrics_units
+- /ja/developers/metrics/units/
 further_reading:
-  - link: /dashboards/
-    tag: ドキュメント
-    text: データを可視化して詳細な情報を把握
+- link: /dashboards/
+  tag: ドキュメント
+  text: データを可視化して詳細な情報を把握
+kind: documentation
+title: メトリクスのユニット
 ---
+
 ## 概要
 
-メトリクス単位は、時系列グラフ、クエリ値ウィジェット、トップリストなどの場所に自動的に表示されます。
+メトリクス単位は、時系列グラフ、クエリ値ウィジェット、トップリストなどの場所に表示されます。
 
-{{< img src="developers/metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位"  style="width:100%;">}}
+{{< img src="metrics/units/redis_dash_metrics_units.png" alt="Redis ダッシュボードのメトリクス単位" style="width:100%;">}}
 
-時系列グラフ上にカーソルを合わせると、関連する単位が表示されます。元データは、わかりやすい表示単位に自動的に変換されます (1 秒未満は ms、毎秒 100 万バイトは MiB/s など)。
+時系列グラフでは、任意のグラフにカーソルを合わせると、関連する単位が表示されます。単位は手動で指定する必要がありますが、単位が設定されていない場合は、桁表記 (たとえば、それぞれ千単位、百万単位、十億単位を表す K、M、G) が使用されます。単位が設定されている場合、生データは、関連する桁数を使用して、読み取り可能な表示単位に自動的に変換されます。
+
+たとえば、3,000,000,000 のデータポイントがある場合:
+
+* このデータポイントの単位を指定していない場合は、「3G」と表示されます。
+* このデータポイントの単位をバイトに指定した場合、「3GB」と表示されます。
 
 単位は、タイムボードグラフの下部にも表示されます。歯車アイコンのドロップダウンから **Metrics Info** を選択することで、メトリクスの説明を表示できます。
 
-{{< img src="developers/metrics/units/annotated_ops.png" alt="アノテーション付き Ops"  style="width:100%;">}}
+{{< img src="metrics/units/annotated_ops.png" alt="アノテーション付き Ops" style="width:100%;">}}
 
 メトリクス単位を変更するには、[Metric Summary][1] ページに移動し、**Metadata** セクションで **Edit** をクリックし、ドロップダウンメニューから `bit` や `byte` などの単位を選択します。
 
@@ -48,13 +54,13 @@ further_reading:
 | 電流     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
 | 電位   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
 | APM         | スパン                                                                                                                                                                                                                                                                                                                       |
-| SYNTHETICS  | run                                                                                                                                                                                                                                                                                                                        |
+| SYNTHETICS  | 実行 / ステップ                                                                                                                                                                                                                                                                                                                       |
 
 ## 数値のフォーマット
 
 ### 単位のないフォーマット
 
-単位のないメトリクスの場合、Datadog は [SI サフィックス][2] `K`、`M`、`G`、`T` を使用します。`T` の後、数値は指数表記に変換されます。これは非常に小さい数値にも使用されます。デフォルトでは、Datadog は小数点以下 2 桁に丸められます。指数表記の場合、デフォルトは小数点以下ゼロです。
+単位のないメトリクスの場合、Datadog は [SI プレフィックス][2] `K`、`M`、`G`、`T` を使用します。`T` の後、数値は指数表記に変換されます。これは微小な数値にも使用されます。デフォルトでは、Datadog は小数点以下 2 桁に丸められます。指数表記の場合、デフォルトは小数点以下ゼロです。
 
 #### 例
 
@@ -92,7 +98,7 @@ further_reading:
 
 - 短い時間は 10 進形式でフォーマットされます。
 - 最小の時間単位はナノ秒です。
-- 非常に長い時間は、10 進形式の日数としてフォーマットされます。
+- 長い時間は、10 進形式の日数としてフォーマットされます。
 
 
 #### 例
@@ -114,4 +120,4 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: https://en.wikipedia.org/wiki/International_System_of_Units
+[2]: https://en.wikipedia.org/wiki/Metric_prefix#List_of_SI_prefixes

@@ -42,46 +42,18 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog .NET library:
 
 {{< tabs >}}
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+{{% ci-agent %}}
 
-If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
-
-If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as using `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
-
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
-
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 {{% /tab %}}
-
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
 
-If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
+{{% ci-agentless %}}
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][1] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-Additionally, configure which [Datadog site][2] to which you want to send data.
-
-`DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Installing the .NET tracer CLI
@@ -180,7 +152,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 When code coverage is available, the Datadog Tracer (v2.31.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][14] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the env var `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`. 
+If you are using [Coverlet][14] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the env var `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
 
 **Note**: When using Intelligent Test Runner, the tracer's built-in code coverage is enabled by default.
 
@@ -231,55 +203,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 3. [Configure the reporting method][13].
 4. Run the benchmark project as you normally do, all benchmark tests will be automatically instrumented.
 
-### Collecting Git metadata
-
-Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
-
-If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
-
-`DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
-**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.<br/>
-**Example**: `develop`
-
-`DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
-**Example**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: Full commit hash.<br/>
-**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: Commit message.<br/>
-**Example**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.<br/>
-**Example**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.<br/>
-**Example**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.<br/>
-**Example**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.<br/>
-**Example**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
+{{% ci-git-metadata %}}
 
 ## Custom instrumentation
 
@@ -864,14 +788,7 @@ await module.CloseAsync();
 
 Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
 
-## Information collected
-
-When CI Visibility is enabled, the following data is collected from your project:
-
-* Test names and durations.
-* Predefined environment variables set by CI providers.
-* Git commit history including the hash, message, author information, and files changed (without file contents).
-* Information from the CODEOWNERS file.
+{{% ci-information-collected %}}
 
 In addition to that, if [Intelligent Test Runner][10] is enabled, the following data is collected from your project:
 

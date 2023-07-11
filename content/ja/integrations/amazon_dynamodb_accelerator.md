@@ -5,32 +5,32 @@ categories:
 - クラウド
 - ログの収集
 dependencies: []
-description: Amazon DynamoDB Accelerator のキーメトリクスを追跡します。
+description: Amazon DynamoDB Accelerator (DAX) のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_dynamodb_accelerator/
 draft: false
 git_integration_title: amazon_dynamodb_accelerator
 has_logo: true
 integration_id: amazon-dynamodb-accelerator
-integration_title: Amazon DynamoDB Accelerator
+integration_title: Amazon DynamoDB Accelerator (DAX)
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_dynamodb_accelerator
-public_title: Datadog-Amazon DynamoDB Accelerator インテグレーション
-short_description: Amazon DynamoDB Accelerator のキーメトリクスを追跡します。
+public_title: Datadog-Amazon DynamoDB Accelerator (DAX) インテグレーション
+short_description: Amazon DynamoDB Accelerator (DAX) のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-DAX は DynamoDB と互換性のあるキャッシュサービスで、要求の厳しいアプリケーションで高速なインメモリパフォーマンスの恩恵を受けることができます。
+Amazon DynamoDB Accelerator (DAX) は DynamoDB と互換性のあるキャッシュサービスで、要求の厳しいアプリケーションで高速なインメモリパフォーマンスの恩恵を受けることができます。
 
-このインテグレーションを有効にすると、すべての Amazon DynamoDB Accelerator メトリクスを Datadog に表示できます。
+このインテグレーションを有効にすると、すべての Amazon DynamoDB Accelerator (DAX) メトリクスを Datadog に表示できます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -48,11 +48,11 @@ DAX は DynamoDB と互換性のあるキャッシュサービスで、要求の
 
 ### イベント
 
-Amazon DynamoDB Accelerator インテグレーションには、イベントは含まれません。
+Amazon DynamoDB Accelerator (DAX) インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon DynamoDB Accelerator インテグレーションには、サービスのチェック機能は含まれません。
+Amazon DynamoDB Accelerator (DAX) インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

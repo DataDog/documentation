@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: lambdatest-software-license
 app_uuid: 19d686c3-df14-485b-8efb-539e3dbc23e9
 assets: {}

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zigiwave-micro-focus-opsbridge-integration
 app_uuid: b904a102-65fe-4e4d-b693-e4ab98086277
 assets:

@@ -40,9 +40,7 @@ DogStatsD is available on Docker Hub and GCR:
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
-
-Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ## How it works
 
@@ -196,7 +194,7 @@ To set [tag cardinality][6] for the metrics collected using origin detection, se
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /getting_started/tagging/assigning_tags/#environment-variables
 [7]: /metrics/custom_metrics/
 {{% /tab %}}

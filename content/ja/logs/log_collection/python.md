@@ -17,13 +17,16 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: Documentation
   text: ログ収集のトラブルシューティングガイド
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Python ログ収集
 ---
 
 ## 概要
 
-Python のログを Datadog に送信するには、Python ロガーを構成してホスト上のファイルにログを記録し、Datadog Agent でそのファイルを追跡します。
+Python のログを Datadog に送信するには、Python ロガーを構成してホスト上のファイルにログを記録し、Datadog Agent でそのファイルを[テール][12]します。
 
 ## ロガーの構成
 
@@ -97,3 +100,4 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 [9]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: /ja/logs/log_configuration/parsing/
 [11]: /ja/logs/explorer/#overview
+[12]: /ja/glossary/#tail

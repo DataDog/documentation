@@ -81,7 +81,7 @@ tile:
 ## セットアップ
 
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Confluent Platform チェックは [Datadog Agent][1] パッケージに含まれています。Confluent Platform コンポーネントサーバーに追加でインストールする必要はありません。
 

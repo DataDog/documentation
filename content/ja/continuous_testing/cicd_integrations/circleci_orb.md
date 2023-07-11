@@ -32,7 +32,7 @@ CircleCI コマンド orb は [datadog-ci][1] をインストールし、`datado
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.3.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
 
 jobs:
   e2e-tests:
@@ -56,7 +56,7 @@ workflows:
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.3.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
 
 jobs:
   e2e-tests:
@@ -82,7 +82,7 @@ Synthetic テストをトリガーするパイプラインの別の例につい�
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.3.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
 
 jobs:
   e2e-tests:
@@ -104,7 +104,7 @@ workflows:
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@2.3.0
+  synthetics-ci: datadog/synthetics-ci-orb@2.4.0
 
 jobs:
   e2e-tests:

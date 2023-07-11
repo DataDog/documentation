@@ -20,11 +20,14 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: ログ収集のトラブルシューティングガイド
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Go ログ収集
 ---
 
-Go のログを Datadog に送信するには、ファイルにログを記録し、Datadog Agent でそのファイルを追跡します。オープンソースのロギングライブラリである [logrus][1] を使用すると、以下のようなセットアップが可能です。
+Go のログを Datadog に送信するには、ファイルにログを記録し、Datadog Agent でそのファイルを[テール][11]します。オープンソースのロギングライブラリである [logrus][1] を使用すると、以下のようなセットアップが可能です。
 
 Datadog は、[カスタムパース規則][2]の使用を避け、ログを JSON で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
 
@@ -127,3 +130,4 @@ func main() {
 [8]: /ja/logs/log_configuration/parsing/?tab=matchers
 [9]: /ja/logs/explorer/#overview
 [10]: /ja/tracing/other_telemetry/connect_logs_and_traces/go/
+[11]: /ja/glossary/#tail

@@ -54,8 +54,8 @@ function loadPage(newUrl) {
             const currentSidebar = document.querySelector('.sidebar');
             const newSidebar = newDocument.querySelector('.sidebar');
 
-            const currentPageIsSearchPage = document.documentElement.dataset.relpermalink.includes("search");
-            const newPageIsSearchPage = newDocument.querySelector("html").dataset.relpermalink.includes("search");
+            const currentPageIsSearchPage = (document.documentElement.dataset.relpermalink || "").includes("search");
+            const newPageIsSearchPage = (newDocument.querySelector("html").dataset.relpermalink || "").includes("search");
 
             // For going from search page (/search) with no sidenav searchbar, to another page with sidenav searchbar
             if (currentPageIsSearchPage && !newPageIsSearchPage) {
