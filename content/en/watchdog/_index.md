@@ -30,7 +30,7 @@ cascade:
         rank: 70
 ---
 
-{{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with two ongoing critical alerts for error rates" >}}
+{{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with one ongoing log anomaly alert for error logs, one resolved log anomaly alert for error logs, and one resolved error rate alert resolved through root cause analysis" >}}
 
 ## Overview
 

@@ -37,7 +37,7 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 
 こちらもご覧ください: [Kubernetes と Cluster Agent の最小バージョン][8]
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Kubernetes に Datadog Agent をインストールするには、以下のオプションがあります。
 

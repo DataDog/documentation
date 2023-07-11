@@ -87,7 +87,7 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 {{< tabs >}}
 {{% tab "標準" %}}

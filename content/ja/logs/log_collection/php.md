@@ -33,7 +33,7 @@ PHP ログを Datadog に送信する場合は、ファイルにログを記録�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}

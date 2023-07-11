@@ -19,6 +19,10 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['ci test', 'ci tests']
 ---
 
 {{< site-region region="gov" >}}

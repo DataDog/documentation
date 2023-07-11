@@ -28,14 +28,14 @@ If you prefer to use CLI, see the [Azure CLI for Datadog][2].
 
 Follow these steps to deploy the integration through [Terraform][13].
 
-1. Configure the [Datadog Terraform provider][15] to interact with the Datadog API through a Terraform configuration. 
+1. Configure the [Datadog Terraform provider][15] to interact with the Datadog API through a Terraform configuration.
 
-2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:  
+2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
     * `azure_tenant_name`: Your Azure Active Directory ID.
     * `client_id`: Your Azure web application secret key.
     * `client_secret`: Your Azure web application secret key.
 
-   See the [Terraform Registry][17] for further example usage and the full list of optional parameters, as well as additional Datadog resources. 
+   See the [Terraform Registry][17] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -141,7 +141,7 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [7]: /integrations/azure_container_service/
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
-[11]: https://app.datadoghq.com/account/settings#agent
+[11]: https://app.datadoghq.com/account/settings/agent/latest
 [12]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview

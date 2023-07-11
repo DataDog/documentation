@@ -68,7 +68,7 @@ Datazoom は INFO レベルに設定されたデータを送信します。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datazoom インテグレーションは、Datadog にログを出力します。Datadog 側でのインストールは必要ありません。
 

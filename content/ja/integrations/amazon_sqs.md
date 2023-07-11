@@ -36,7 +36,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
