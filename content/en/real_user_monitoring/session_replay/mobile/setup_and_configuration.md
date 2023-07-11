@@ -137,16 +137,6 @@ sessionReplay.start()
 
 ## Additional configuration
 
-### Prevent recording uploads when a device battery is at 20% or below
-If an end user's device's battery is at 20% or below, you can enable a setting to prevent session replays from being uploaded. To enable this configuration, add the following snippet into your configuration:
-
-{{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-[ add code snippet here ]
-
-{{< /code-block >}}
-
-
 ### Updating the sample rate for recorded sessions to appear
 Beginning with v1.20.0, the recorder sessions are sampled, and the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
 
