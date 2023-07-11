@@ -37,7 +37,7 @@ Omit it if your project already has Jacoco configured.<br/>
 
 `DD_CIVISIBILITY_JACOCO_PLUGIN_INCLUDES` (Optional)
 : Use this variable to configure the list of packages for which code coverage should be collected.<br/>
-It is optional, but setting this helps to reduce overhead by avoiding coverage collection for core JDK classes and 3rd party dependencies.<br/>
+While this variable is optional, setting it helps to reduce overhead by avoiding coverage collection for core JDK classes and third-party dependencies.<br/>
 Package names should terminate with a `*` and should be separated with colons: `com.myorg.package1.*:com.myorg.package2.*:com.myorg.package3.*`
 or `com.myorg.*` (if you have a common root package).<br/>
 **Default**: `(empty)`
