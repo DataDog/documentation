@@ -41,11 +41,11 @@ The following measures are available:
 | Memory&nbsp;Allocation | Memory allocation rate over the course of the profile. This value can be above the amount of memory on your system because allocated memory can be garbage collected during the profile. |
 | Wall time              | The elapsed time used by the code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while it is running.  |
 
-For each runtime, there is also a broader set of metrics available, which you can see [listed by timeseries][4].
+For each runtime, there is also a broader set of metrics available, which you can see [listed by timeseries][3].
 
 ## Profile types
 
-In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs. See [Profile types][3] for a list of profile types available for each language.
+In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs. See [Profile types][4] for a list of profile types available for each language.
 
 ## Visualizations
 
@@ -111,9 +111,12 @@ Each lane is a **thread**. Threads from a common pool are grouped together. You 
 Lanes are top are runtime activities. They may affect your code performance.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each lane is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+This feature needs to be explicitly enabled for Go, see [prerequisites][1].
 
-TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
+Each lane is a **goroutine**. Goroutines created by the same `go` statement are grouped together. You can expand the group to see each goroutine's details.
+
+Lanes on top are runtime activities that may impact performance.
+[1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
@@ -129,5 +132,5 @@ Lanes are top are runtime activities. They may affect your code performance.
 
 [1]: /tracing/send_traces/#configure-your-environment
 [2]: /tracing/glossary/#services
-[3]: /profiler/profile_types/
-[4]: https://app.datadoghq.com/profiling/search?viz=timeseries
+[3]: https://app.datadoghq.com/profiling/search?viz=timeseries
+[4]: /profiler/profile_types/

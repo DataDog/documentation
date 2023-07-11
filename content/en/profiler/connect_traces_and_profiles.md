@@ -64,19 +64,24 @@ Requires `dd-trace-rb` version 0.49.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Code Hotspots identification is enabled by default [turn on profiling for your Go service][1].
+Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
 
-Require `dd-trace-go` version 1.37.0+.
+To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below.
 
-**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
+```go
+os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
+os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
+```
 
-TODO go timeline recommendation
+This will record up to 1 minute (or 5 MiB) of execution tracing data [every 15 minutes][2].
+
+While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. While this should not have a significant impact for most application, we have [contributed patches][3] to the upcoming go1.21 release that will eliminate this overhead.
+
+Requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or newer.
 
 [1]: /profiler/enabling/go
-[2]: https://github.com/golang/go/issues/35057
-[3]: https://github.com/golang/go/issues/48577
-[4]: https://go-review.googlesource.com/c/go/+/369741/
-[5]: https://go-review.googlesource.com/c/go/+/369983/
+[2]: https://github.com/DataDog/dd-trace-go/issues/2099
+[3]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -158,9 +163,9 @@ Each lane is a **thread**. Threads from a common pool are grouped together. You 
 Lanes on top are runtime activities that may add extra latency. They are unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each lane is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+Each lane is a **goroutine**. We include the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to see each goroutine's details.
 
-TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
+Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
@@ -205,15 +210,9 @@ Requires `dd-trace-py` version 0.54.0+.
 {{< programming-lang lang="go" >}}
 Endpoint profiling is enabled by default when you [turn on profiling for your Go service][1].
 
-Requires `dd-trace-go` version 1.37.0+.
-
-**Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
+Requires `dd-trace-go` version 1.37.0+ and works best with Go version 1.18 or newer.
 
 [1]: /profiler/enabling/go
-[2]: https://github.com/golang/go/issues/35057
-[3]: https://github.com/golang/go/issues/48577
-[4]: https://go-review.googlesource.com/c/go/+/369741/
-[5]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -273,5 +272,3 @@ The following video shows that CPU per request doubled for `/GET train`:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
-[2]: /tracing/trace_collection/custom_instrumentation/java#manually-creating-a-new-span
