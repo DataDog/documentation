@@ -273,6 +273,25 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 {{% /tab %}}
 {{< /tabs >}}
 
+### Verifying setup
+
+To verify you've configured the APM integration with RUM, follow the steps below based on the SDK you installed RUM with.
+
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+1. Visit a page in your application.
+2. In your browser's developer tools, go to the **Network** tab.
+3. Check the request headers for a RUM resource request and verify that at least one comes from Datadog.
+
+{{% /tab %}}
+
+{{% tab "Mobile" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Supported libraries
 
 The following Datadog tracing libraries are supported:
