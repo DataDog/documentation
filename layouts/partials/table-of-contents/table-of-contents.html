@@ -1,5 +1,15 @@
 {{ $ctx := . }}
-
+{{- define "partials/headings" -}}
+  {{- $ctx := .ctx -}}
+  <ul>
+    {{- range $k, $v := .data -}}
+       <li id="{{ $v.ID | anchorize }}">
+          <a href="#{{ $v.ID | anchorize }}">{{ $v.Title }}</a>
+          {{- partial "partials/headings" (dict "data" $v.Headings "ctx" $ctx) -}}
+       </li>
+    {{- end -}}
+  </ul>
+{{- end -}}
 <div class="js-toc-container toc-container">
     <div class="toc">
         <div class="js-toc {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
@@ -28,22 +38,8 @@
                   </ul>
                 </nav>
               {{ else }}
-                {{/*  {{ .TableOfContents }}  */}}
-                <nav id="TableOfContents" class="stefon">
-                  <ul>
-                    {{/*  {{ range (findRE `[^#]#{2}\s[\w\s]+[\n]` $ctx.Page.RawContent) }}  */}}
-                    {{ range (findRE `[^#](#{2}\s.*)|(#{3}\s.*)` $ctx.Page.RawContent) }}
-                      {{$header_two_title := ""}}
-                      {{$header_three_title := ""}}
-
-                      {{ if eq (substr . 0 3) "###"}}
-                        {{ $header_three_title := (replace . "###" "") }}
-                      {{ else }}
-                        {{ $header_two_title := (replace . "##" "") }}
-                      {{ end }}
-                      <li><a href="{{ . | anchorize}}">{{.}}</a></li>
-                    {{ end }}
-                  </ul>
+                <nav id="TableOfContents">
+                  {{- partial "partials/headings" (dict "data" (index .Fragments.Headings 0).Headings "ctx" $ctx) -}}
                 </nav>
               {{ end }}
             {{ end }}
