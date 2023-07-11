@@ -3279,6 +3279,7 @@ main:
     url: mobile_testing/
     parent: ux_monitoring_heading
     identifier: mobile_testing
+    pre: mobile
     weight: 210000
   - name: Mobile App Tests
     url: /mobile_testing/mobile_app_tests
