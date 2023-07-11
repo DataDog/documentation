@@ -24,7 +24,7 @@ If you are using the Java tracer for your applications, you can alternatively ta
 
 ## Prerequisites
 ### Agent JMX image
-The default Datadog Agent image does **not** come with the JMX utilities installed. In order to setup a JMX integration you need to append `-jmx` to your Agent image's tag. 
+The default Datadog Agent image does **not** come with the JMX utilities installed. In order to set up a JMX integration you need to append `-jmx` to your Agent image's tag.
 
 For example, `gcr.io/datadoghq/agent:latest-jmx`.
 
@@ -77,11 +77,11 @@ The Datadog Agent comes with several JMX integrations pre-configured.
 
 These integrations have a `metrics.yaml` file predefined to match the expected pattern of the returned JMX metrics per application. Use these as your `<INTEGRATION_NAME>` as appropriate for your applications in the following sections to take advantage of those configurations. 
 
-Alternatively use the `<INTEGRATION_NAME>` of `jmx` to setup a basic JMX integration and collect the default `jvm.*` metrics only.
+Alternatively use the `<INTEGRATION_NAME>` of `jmx` to set up a basic JMX integration and collect the default `jvm.*` metrics only.
 
 ## Autodiscovery configurations
 
-Once you are using the JMX version of the Datadog Agent image and chosen your `<INTEGRATION_NAME>` you can configure your integration with autodiscovery. Use either:
+Once you are using the JMX version of the Datadog Agent image and choose your `<INTEGRATION_NAME>` you can configure your integration with autodiscovery. Use either:
 
 - [Autodiscovery annotations](#autodiscovery-annotations)
 - [Autodiscovery configuration files](#autodiscovery-configuration-files)
@@ -141,7 +141,7 @@ In this example:
 
 With this configuration the Datadog Agent discovers this pod and makes a request to the JMX Server relative to the `%%host%%` [Autodiscovery template variable][3], resolving to the IP address of the discovered pod. This is why the `java.rmi.server.hostname` is set to the `POD_IP` address previously populated with the [Kubernetes downward API][5].
 
-**Note**: The `JAVA_OPTS` environment variable is commonly used in Java based container images as a startup parameter (ex: `java $JAVA_OPTS -jar app.jar`). If you are using a custom application, or, your application doesn't follow this pattern set these system properties manually.
+**Note**: The `JAVA_OPTS` environment variable is commonly used in Java based container images as a startup parameter (ex: `java $JAVA_OPTS -jar app.jar`). If you are using a custom application, or, your application doesn't follow this pattern, set these system properties manually.
 
 
 ### Example Tomcat Autodiscovery annotations
@@ -254,9 +254,9 @@ instances:
     port: "<JMX_PORT>"
 ```
 
-Replace `<SHORT_IMAGE>` with the short image name of your desired container. For example the container image `gcr.io/CompanyName/my-app:latest` would have short image name of `my-app`. As the Datadog Agent discovers that container it sets up the JMX configuration as described in this file. 
+Replace `<SHORT_IMAGE>` with the short image name of your desired container. For example the container image `gcr.io/CompanyName/my-app:latest` would have a short image name of `my-app`. As the Datadog Agent discovers that container it sets up the JMX configuration as described in this file.
 
-You can alternatively reference and specify [custom identifiers to you containers][4] if you do not want to base this on the short image name.
+You can alternatively reference and specify [custom identifiers to your containers][4] if you do not want to base this on the short image name.
 
 The configuration files similar to the annotations can use [Autodiscovery template variables][3], in this case the `host` configuration is using `%%host%%` to resolve to the IP Address of the discovered container.
 
@@ -317,7 +317,7 @@ spec:
 
 {{% tab "Custom Image" %}}
 ### Custom Agent image with configuration files
-If you can't mount those files in the Agent container (like on AWS ECS), you should re-build the Agent docker image with the desired configuration files in it. For example:
+If you can't mount those files in the Agent container (like on AWS ECS), you should build the Agent docker image with the desired configuration files in it. For example:
 
   ```Dockerfile
   FROM gcr.io/datadoghq/agent:latest-jmx
@@ -331,7 +331,7 @@ Then use this new custom image as your regular containerized Agent.
 {{< /tabs >}}
 
 ### Expose JMX Server
-Similar to the autodiscovery annotations sample, you still need to setup the JMX Server in a way that allows the Agent to access it. This is the same structure as before:
+Similar to the autodiscovery annotations sample, you still need to set up the JMX Server in a way that allows the Agent to access it. This is the same structure as before:
 
 ```yaml
 spec:
