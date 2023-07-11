@@ -28,7 +28,23 @@
                   </ul>
                 </nav>
               {{ else }}
-                {{ .TableOfContents }}
+                {{/*  {{ .TableOfContents }}  */}}
+                <nav id="TableOfContents" class="stefon">
+                  <ul>
+                    {{/*  {{ range (findRE `[^#]#{2}\s[\w\s]+[\n]` $ctx.Page.RawContent) }}  */}}
+                    {{ range (findRE `[^#](#{2}\s.*)|(#{3}\s.*)` $ctx.Page.RawContent) }}
+                      {{$header_two_title := ""}}
+                      {{$header_three_title := ""}}
+
+                      {{ if eq (substr . 0 3) "###"}}
+                        {{ $header_three_title := (replace . "###" "") }}
+                      {{ else }}
+                        {{ $header_two_title := (replace . "##" "") }}
+                      {{ end }}
+                      <li><a href="{{ . | anchorize}}">{{.}}</a></li>
+                    {{ end }}
+                  </ul>
+                </nav>
               {{ end }}
             {{ end }}
         </div>

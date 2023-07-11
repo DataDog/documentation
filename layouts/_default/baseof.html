@@ -61,8 +61,8 @@
           {{ partial "language-region-select.html" . }}
 
           {{ if ne .Params.disable_toc true }}
-            {{/*  {{ partial "table-of-contents/table-of-contents.html" . }}  */}}
-            {{ partial "fragment-toc.html" . }} 
+            {{ partial "table-of-contents/table-of-contents.html" . }}
+            {{/*  {{ partial "fragment-toc.html" . }}   */}}
           {{ end }}
         </aside>
       {{ end }}
