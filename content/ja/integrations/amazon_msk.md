@@ -14,13 +14,13 @@ further_reading:
 git_integration_title: amazon_msk
 has_logo: true
 integration_id: amazon-msk
-integration_title: Amazon Managed Streaming for Apache Kafka
+integration_title: Amazon Managed Streaming for Apache Kafka (MSK)
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_msk
-public_title: Datadog-Amazon Managed Streaming for Apache Kafka インテグレーション
+public_title: Datadog-Amazon Managed Streaming for Apache Kafka (MSK) インテグレーション
 short_description: Amazon MSK のキーメトリクスを追跡
 version: '1.0'
 ---
@@ -81,7 +81,7 @@ Amazon MSK インテグレーションには、サービスのチェック機能
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -11715,19 +11715,23 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role` and
-            `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`
+            (beta), `user` (beta), and `org`.
 
-            The org ID can be obtained through the api/v2/current_user API.'
+            The org ID can be obtained through the api/v2/current_user API.
+
+            The user principal type accepts service account IDs.'
           example:
           - role:00000000-0000-1111-0000-000000000000
           items:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role` and `org`.
+              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
 
-              The org ID can be obtained through the api/v2/current_user API.'
+              The org ID can be obtained through the api/v2/current_user API.
+
+              The user principal type accepts service account IDs.'
             type: string
           type: array
         relation:
@@ -29589,10 +29593,11 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles). The
-    restriction policy
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams
+    (beta), or users (beta)).
 
-    determines who is authorized to perform what actions on the resource.'
+    The restriction policy determines who is authorized to perform what actions on
+    the resource.'
   name: Restriction Policies
 - description: 'The Roles API is used to create and manage Datadog roles, what
 
