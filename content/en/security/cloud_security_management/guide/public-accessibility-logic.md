@@ -1,5 +1,5 @@
 ---
-title: Background for Public Accessibility
+title: How Datadog Determines if Resources are Publicly Accessible
 kind: guide
 further_reading:
 - link: "/security/cspm"
@@ -14,9 +14,9 @@ Datadog uses a graph processing framework to map relationships between cloud res
 
 For more information on network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35]. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
 
-## Resource Dependency Graph
+## Resource dependency graph
 
-The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a Cloudtrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, we will show this relation in the CSPM Resource relationships graph.
+The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a Cloudtrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the CSPM Resource relationships graph.
 
 Use this diagram as a reference for how resources are correlated to determine public accessibility. 
 
@@ -24,7 +24,7 @@ Use this diagram as a reference for how resources are correlated to determine pu
 
 {{< img src="security/cloud_security_management/guide/public_accessibility_relationships.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility" width="75%">}}
 
-## Public Accessibility Logic by Resource
+## Public accessibility logic by resource
 
 The following section details on a resource-by-resource basis the logic behind public accessibility determination for a resource.
 
