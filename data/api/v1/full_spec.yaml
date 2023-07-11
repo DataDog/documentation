@@ -352,7 +352,6 @@ components:
           type: array
       type: object
     AccessRole:
-      default: st
       description: The access role of the user. Options are **st** (standard user),
         **adm** (admin user), or **ro** (read-only user).
       enum:
@@ -360,7 +359,8 @@ components:
       - adm
       - ro
       - ERROR
-      example: st
+      example: ro
+      nullable: true
       type: string
       x-enum-varnames:
       - STANDARD
