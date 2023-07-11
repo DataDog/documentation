@@ -105,7 +105,7 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 
 [1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/

@@ -608,11 +608,31 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
+  - name: Runtime Metrics
+    url: opentelemetry/runtime_metrics
+    identifier: otel_runtime_metrics
+    parent: opentelemetry_top_level
+    weight: 3
+  - name: Java
+    url: opentelemetry/runtime_metrics/java
+    identifier: otel_runtime_metrics_java
+    parent: otel_runtime_metrics
+    weight: 301
+  - name: .NET
+    url: opentelemetry/runtime_metrics/dotnet
+    identifier: otel_runtime_metrics_dotnet
+    parent: otel_runtime_metrics
+    weight: 302
+  - name: Go
+    url: opentelemetry/runtime_metrics/go
+    identifier: otel_runtime_metrics_go
+    parent: otel_runtime_metrics
+    weight: 303
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level

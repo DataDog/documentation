@@ -344,7 +344,7 @@ If you have installed and configured the integrations and Agent as described and
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
 [6]: /integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings#agent
+[8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/google_cloudsql
