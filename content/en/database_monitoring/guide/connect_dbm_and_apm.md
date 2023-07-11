@@ -33,7 +33,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 | DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
 |:-------------------------|:---------:|:---------:|:------------:|
-| `full`                   | {{< X >}} | {{< X >}} | unsupported  |
+| `full`                   | {{< X >}} | {{< X >}} |          |
 | `service`                | {{< X >}} | {{< X >}} | {{< X >}}    |
 
 **Supported application tracers and drivers**
