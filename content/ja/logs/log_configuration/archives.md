@@ -96,7 +96,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 
 {{% tab "Azure Storage" %}}
 
-* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前と種類を指定し、**hot** または **cool** アクセス層を選択します。
+* [Azure ポータル][1]にアクセスし、アーカイブを転送する[ストレージアカウントを作成][2]します。ストレージアカウントの名前を指定し、標準パフォーマンスまたは **Block blob** プレミアムアカウントタイプのいずれかを選択し、**hot** または **cool** アクセス層を選択します。
 * そのストレージアカウントに **container** サービスを作成します。Datadog アーカイブページに追加する必要があるため、コンテナ名をメモしてください。
 
 **注:** まれに最後のデータを書き換える必要があるため、[不変性ポリシー][3]を設定しないでください (通常はタイムアウト)。
@@ -182,16 +182,12 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% tab "Google Cloud Storage" %}}
 
 1. Datadog Google Cloud サービスアカウントに、バケットへアーカイブを書き込むための許可を与えます。
+2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
+3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
 
-   * 新しいサービスアカウントを作成する場合は、[Google Cloud Credentials ページ][1]でこれを実行できます。
-   * 既存のサービスアカウントを更新する場合は、[Google Cloud IAM Admin ページ][2]で実行できます。
+   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud サービスアカウントに Storage Object Admin ロールを追加。" style="width:75%;">}}
 
-2. **Storage** の下に **Storage Object Admin** というロールを追加します。
-
-   {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Datadog Google Cloud サービスアカウントに Storage Object Admin ロールを追加。" style="width:75%;">}}
-
-[1]: https://console.cloud.google.com/apis/credentials
-[2]: https://console.cloud.google.com/iam-admin/iam
+[1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 

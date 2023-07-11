@@ -3,6 +3,7 @@ app_id: oracle
 app_uuid: 34835d2b-a812-4aac-8cc2-d298db851b80
 assets:
   dashboards:
+    DBM Oracle Database Overview: assets/dashboards/dbm_oracle_database_overview.json
     oracle: assets/dashboards/oracle_overview.json
   integration:
     configuration:
@@ -71,7 +72,7 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 #### 前提条件
 
@@ -382,13 +383,12 @@ TCPS on JDBC による Oracle Database への接続の詳細については、�
 
 ## カスタムクエリ
 
-カスタムクエリの指定もサポートされています。各クエリには、次の 3 つのパラメーターを含める必要があります。
+カスタムクエリの指定もサポートされています。各クエリには、次の 2 つのパラメーターを含める必要があります。
 
 | パラメーター       | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metric_prefix` | 各メトリクスのプレフィックス。                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |                                                                                                                                                                
 | `query`         | 実行する SQL です。簡単なステートメントにすることも、複数行のスクリプトにすることもできます。結果のすべての行が評価されます。                                                                                                                                                                                                                                                                                                                        |
-| `columns`       | 列を表すリストです。左から右の順に並べられます。次の 2 つの必須データがあります。<br> a. `type` - 送信方法 (`gauge`、`count` など)。<br> b. name - メトリクス名のサフィックス。これが `metric_prefix` に付加されて完全な名前になります。`type` が `tag` の場合、この列は、このクエリによって収集されるすべてのメトリクスに適用されるタグと見なされます。 |
+| `columns`       | 列を表すリストです。左から右の順に並べられます。次の 2 つの必須データがあります。<br> a. `type` - 送信方法 (`gauge`、`count` など)。<br> b. name - メトリクス名のサフィックス。これは、完全なメトリクス名を形成するために使用されるサフィックスです。`type` が `tag` の場合、この列は、このクエリによって収集されるすべてのメトリクスに適用されるタグと見なされます。 |
 
 オプションで、`tags` パラメーターを使用して、収集される各メトリクスにタグのリストを適用できます。
 
@@ -402,22 +402,21 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
 以下の構成例から作成されます。
 
 ```yaml
-- metric_prefix: oracle.custom_query
-  query: |  # 複数行のスクリプトが必要な場合は、パイプを使用します。
-   SELECT columns
-   FROM tester.test_table
-   WHERE conditions
+- query: | # 複数行のスクリプトが必要な場合は、パイプを使用します。
+    SELECT columns
+    FROM tester.test_table
+    WHERE conditions
   columns:
-  # スキップする列にはこれを入れます。
-  - {}
-  - name: metric1
-    type: gauge
-  - name: tag1
-    type: tag
-  - name: metric2
-    type: count
+    # スキップする列にはこれを入れます。
+    - {}
+    - name: metric1
+      type: gauge
+    - name: tag1
+      type: tag
+    - name: metric2
+      type: count
   tags:
-  - tester:oracle
+    - tester:oracle
 ```
 
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
@@ -439,8 +438,7 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
         tags:
           - db:oracle
         custom_queries:
-          - metric_prefix: oracle.custom_query.locks
-            query: |
+          - query: |
               select blocking_session, username, osuser, sid, serial# as serial, wait_class, seconds_in_wait
               from v_$session
               where blocking_session is not NULL order by blocking_session

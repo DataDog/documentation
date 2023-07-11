@@ -35,16 +35,17 @@ Cloud Workload Security (CWS) は、環境全体のファイル、ネットワ�
 
 * Datadog Agent 7.44 以降。
 * データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.15.0 以降または eBPF 機能のバックポートを備えたプラットフォームを必要とします。CWS は以下の Linux ディストリビューションをサポートしています。
-  * Ubuntu 18.04 以降
+  * Ubuntu LTS (18.04、20.04、22.04)
   * Debian 10 以降
-  * Amazon Linux 2
-  * Fedora 26 以降
-  * SUSE 15 以降
-  * CentOS/RHEL 7.6 以降
+  * Amazon Linux 2 (カーネル 4.15、5.4、5.10) および 2023
+  * SUSE Linux Enterprise Server 12 および 15
+  * Red Hat Enterprise Linux 7、8、9
+  * Oracle Linux 7、8、9
+  * CentOS 7
   * カスタムカーネルビルドはサポートされていません。
 * Cilium や Calico などのカスタム Kubernetes ネットワークプラグインとの互換性については、[トラブルシューティングページ][3]をご参照ください。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 一般的に、CWS のインストールは以下の手順で行います。
 
@@ -56,10 +57,7 @@ Cloud Workload Security (CWS) は、環境全体のファイル、ネットワ�
 
 CWS でリモート構成を使用するには、新規または既存の API キーにリモート構成スコープを追加し、Datadog Agent の構成を更新します。詳しくは、[リモート構成の設定手順][5]を参照してください。
 
-**注**:
-
-- リモート構成を使わない場合、新規および更新された Agent ルールは、Datadog Agent に手動でデプロイする必要があります。
-- 現時点では、リモート構成はデフォルトのルールに対してのみ利用可能です。カスタムルールは、Datadog Agent に手動でデプロイする必要があります。
+**注**: リモート構成を使わない場合、Agent ルールは、Datadog Agent に手動でデプロイする必要があります。
 
 ### CWS Agent の構成
 
@@ -214,7 +212,6 @@ runtime_security_config:
 
   remote_configuration:
     ## @param 有効 - ブール値 - オプション - デフォルト: false
-    ## [Datadog Agent] バージョン 7.42 のみ、リモート構成を有効にする場合
     enabled: true
 ```
 

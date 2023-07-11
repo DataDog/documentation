@@ -86,7 +86,7 @@ MySQL インテグレーションは、MySQL インスタンスのパフォー�
 
 <div class="alert alert-info">このページでは、MySQL Agent の標準的なインテグレーションについて説明します。MySQL のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
 MySQL チェックは [Datadog Agent][3] パッケージに含まれています。MySQL サーバーに追加でインストールする必要はありません。
 
@@ -100,17 +100,10 @@ MySQL チェックは [Datadog Agent][3] パッケージに含まれています
 
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL アカウントの追加、特権の割り当て、アカウントの削除][5]を参照してください。
 
-MySQL 5.6、MySQL 5.7 では、次のコマンドを使って `datadog` ユーザーを作成します。
+以下のコマンドで `datadog` ユーザーを作成します。
 
 ```shell
 mysql> CREATE USER 'datadog'@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-Query OK, 0 rows affected (0.00 sec)
-```
-
-mySQL 8.0 以上の場合は、ネイティブのパスワードハッシュ化メソッドを使用して `datadog` ユーザーを作成します。
-
-```shell
-mysql> CREATE USER 'datadog'@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 

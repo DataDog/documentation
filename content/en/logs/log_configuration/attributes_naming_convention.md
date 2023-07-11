@@ -17,6 +17,9 @@ further_reading:
     - link: 'logs/explorer'
       tag: 'Documentation'
       text: 'Learn how to explore your logs'
+    - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+      tag: "Blog"
+      text: "Use CIDR notation queries to filter your network traffic logs"
 ---
 
 ## Overview

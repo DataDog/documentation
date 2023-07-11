@@ -216,6 +216,91 @@ instances:
 
 ### Kubernetes のサービスアノテーションからの構成
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][1]のと同様です。
+
+```yaml
+ad.datadoghq.com/endpoints.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": <INIT_CONFIG>,
+      "instances": [<INSTANCE_CONFIG>]
+    }
+  }
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
+```
+
+この構文は `%%host%%` [テンプレート変数][11]をサポートしており、この変数が各エンドポイントの IP に置き換えられます。インスタンスには `kube_namespace`、 `kube_service`、`kube_endpoint_ip` のタグが自動的に追加されます。
+
+**注**: カスタムエンドポイントのログ構成は、Docker ソケットのログ収集時のみサポートされ、Kubernetes のログファイル収集はサポートされません。
+
+#### 例: NGINX を使ったサービスに対する HTTP チェックと、サービスのエンドポイントに対する NGINX チェック
+
+このサービスは `nginx` デプロイメントのポッドに関連付けられています。この構成に基づき:
+
+- このサービスの背後にある各 NGINX ポッドに対して、[`nginx`][12] ベースのエンドポイントチェックがディスパッチされます。このチェックは、NGINX ポッドと同じそれぞれのノード上の Agent によって実行されます (ポッドの IP を `%%host%%` として使用します)。
+- [`http_check`][9] ベースのクラスターチェックは、クラスター内の 1 つの Agent にディスパッチされます。このチェックはサービスの IP を `%%host%%` として使用し、自動的にそれぞれのエンドポイントに負荷が分散されます。
+- チェックは、[統合サービスタグ付け][13]ラベルに対応する `env:prod`、`service:my-nginx`、`version:1.19.0` のタグでディスパッチされます。
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    labels:
+        app: nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
+    annotations:
+      ad.datadoghq.com/service.checks: |
+        {
+          "http_check": {
+            "init_config": {},
+            "instances": [
+              {
+                "url": "http://%%host%%",
+                "name": "My Nginx",
+                "timeout": 1
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.checks: |
+        {
+          "nginx": {
+            "init_config": {},
+            "instances": [
+              {
+                "name": "My Nginx Service Endpoints",
+                "nginx_status_url": "http://%%host%%:%%port%%/status/"
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        app: nginx
+```
+
+[1]: /ja/containers/kubernetes/integrations/?tab=kubernetesadv2
+[9]: /ja/integrations/http_check/
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
+
 サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][10]のと同様です。
 
 ```yaml
@@ -274,6 +359,14 @@ spec:
     selector:
         app: nginx
 ```
+
+[9]: /ja/integrations/http_check/
+[10]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging
+{{% /tab %}}
+{{< /tabs >}}
 
 ## その他の参考資料
 

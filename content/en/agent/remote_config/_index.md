@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Using Datadog Audit Trail"
+- link: "https://www.datadoghq.com/blog/remote-configuration-for-datadog/"
+  tag: "Blog"
+  text: "Apply real-time updates to Datadog components with Remote Configuration"
 ---
 
 {{% site-region region="gov" %}}
@@ -67,9 +70,12 @@ The following products and features are supported with Remote Config:
 
 ### Cloud Workload Security (CWS)
 
-<div class="alert alert-info">This feature is in beta.</div>
+<div class="alert alert-info">Remote Configuration for default Agent rules is in beta.</div>
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][3] for more information.
+<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/18hwf0-4AXYzKcQR0AIT1JxhaMFLw90YaDXBaUgdxKLM/prefill">form</a> to request access.</div>
+
+- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][3] for more information.
+- **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to  designated hosts (all hosts or a defined subset of hosts).
 
 ### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>

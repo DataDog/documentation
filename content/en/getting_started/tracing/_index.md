@@ -15,7 +15,7 @@ further_reading:
       text: 'Introduction to Application Performance Monitoring'
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
-      text: 'Join an interactive session to boost your APM understanding'  
+      text: 'Join an interactive session to boost your APM understanding'
 ---
 
 ## Overview
@@ -166,7 +166,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure

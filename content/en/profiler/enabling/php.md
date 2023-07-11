@@ -42,6 +42,12 @@ Datadog recommends running an OS version that is not EOL.
 
 Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
 
+Additionally you need to install `libgcc_s` with:
+
+```shell
+apk add libgcc
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -123,8 +129,8 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: https://github.com/DataDog/dd-trace-php/releases
 [4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling

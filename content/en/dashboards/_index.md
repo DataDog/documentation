@@ -44,6 +44,8 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on better visualizations with Dashboards"
+algolia:
+  tags: ['snapshot']
 cascade:
     algolia:
         rank: 70
@@ -164,7 +166,7 @@ At the top of the dashboard, click on settings and select *Permissions*.
 
 {{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
 
-Use the pop-up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+Use the pop-up to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 

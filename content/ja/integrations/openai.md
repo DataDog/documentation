@@ -68,7 +68,7 @@ Datadog のメトリクス、APM、ログを使用して、[OpenAI][1] Python �
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. Datadog Agent で APM と StatsD を有効化します。例えば、Docker で:
 
@@ -172,6 +172,7 @@ OpenAI インテグレーションには、サービスのチェック機能は�
 お役に立つドキュメント、リンクや記事:
 
 - [Datadog で OpenAI の利用状況を監視する][6]
+- [Datadog で Azure OpenAI を監視する][7]
 
 [1]: https://openai.com/
 [2]: https://ddtrace.readthedocs.io/en/stable/installation_quickstart.html
@@ -179,3 +180,4 @@ OpenAI インテグレーションには、サービスのチェック機能は�
 [4]: https://github.com/DataDog/integrations-core/blob/master/openai/metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/
 [6]: https://www.datadoghq.com/blog/monitor-openai-with-datadog/
+[7]: https://www.datadoghq.com/blog/monitor-azure-openai-with-datadog/

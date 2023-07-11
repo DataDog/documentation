@@ -200,5 +200,5 @@ Read the [metrics summary documentation][22] for more details.
 [18]: /dashboards/functions/
 [19]: /metrics/distributions/
 [20]: https://app.datadoghq.com/metric/summary
-[21]: /account_management/billing/usage_details/
+[21]: /account_management/plan_and_usage/usage_details/
 [22]: /metrics/summary/

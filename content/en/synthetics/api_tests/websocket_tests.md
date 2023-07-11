@@ -167,10 +167,14 @@ These reasons include the following:
 : The SSL connection couldn't be performed. [See the dedicated error page for more information][9].
 
 `TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` errors can happen:
   - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
+
+`WEBSOCKET`
+: The WebSocket connection was closed or cannot be opened. One type of `WEBSOCKET` error can happen:
+  - `WEBSOCKET: Received message longer than the maximum supported length.` indicates that the response message length hits the maximum length (50kb). 
 
 ## Permissions
 
@@ -184,7 +188,7 @@ Access restriction is available for customers using [custom roles][12] on their 
 
 You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 

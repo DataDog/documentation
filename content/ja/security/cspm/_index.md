@@ -19,7 +19,7 @@ Datadog Cloud Security Posture Management (CSPM) は、お使いのクラウド�
 
 ## クラウドリソース全体の誤構成の検出
 
-Datadog の[すぐに使える検出ルール](#manage-out-of-the-box and-custom-detection-rules)を使用して、すべてのクラウドリソースで誤構成を検出、優先順位付け、修正することにより、セキュリティ体制を強化し、継続的にコンプライアンスを実現します。
+Datadog の[すぐに使えるコンプライアンスルール](#manage-out-of-the-box-and-custom-compliance-rules)を使用して、すべてのクラウドリソースで誤構成を検出、優先順位付け、修正することにより、セキュリティ体制を強化し、継続的にコンプライアンスを実現します。
 
 [Overview ページ][1]では、セキュリティ状況の概要を見ることができます。[Security Findings Explorer][2] で、発見内容の詳細や過去の構成を分析することができます。
 
@@ -27,17 +27,17 @@ Datadog の[すぐに使える検出ルール](#manage-out-of-the-box and-custom
 
 ## 業界のフレームワークやベンチマークへの準拠を維持する
 
-CSPM には、セキュリティ専門家チームによって管理された 400 以上のすぐに使える検出ルールが付属しています。これらのルールは、PCI や SOC2 などのコンプライアンス基準や業界ベンチマークに含まれる制御や要件に対応しています。
+CSPM には、セキュリティ専門家チームによって管理された 400 以上のすぐに使えるコンプライアンスルールが付属しています。これらのルールは、PCI や SOC2 などのコンプライアンス基準や業界ベンチマークに含まれる制御や要件に対応しています。
 
 [コンプライアンスレポートを表示][3]すると、コンプライアンスフレームワークの各コントロールに対して、どの程度の成果を上げているかを確認することができます。レポートには、最も多くの不合格の所見を得たリソース、合格/不合格の所見を得たリソース数の包括的な内訳、重大度の高いルール違反の上位 3 つなどの詳細が記載されています。
 
 {{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management のコンプライアンスフレームワーク" width="100%">}}
 
-## すぐに使えるカスタム検出ルールの管理
+## すぐに使えるカスタムコンプライアンスルールの管理
 
-[すぐに使える検出ルール][4]は、最も重要なリスクを表面化させ、すぐに修正するための措置を講じることができます。Datadog は、常に新しいデフォルトルールを開発しており、それらは自動的にお客様のアカウントにインポートされます。各ルールがどのように環境をスキャンするかを定義することで[ルールをカスタマイズ][5]し、[カスタムルールを作成][6]し、[不合格の所見に対するリアルタイム通知を設定](#set-up-real-time-notifications)することが可能です。
+[すぐに使えるコンプライアンスルール][4]は、最も重要なリスクを表面化させ、すぐに修正するための措置を講じることができます。Datadog は、常に新しいデフォルトルールを開発しており、それらは自動的にお客様のアカウントにインポートされます。各ルールがどのように環境をスキャンするかを定義することで[ルールをカスタマイズ][5]し、[カスタムルールを作成][6]し、[不合格の所見に対するリアルタイム通知を設定](#set-up-real-time-notifications)することが可能です。
 
-{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management の検出ルール" width="100%">}}
+{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management のコンプライアンスルール" width="100%">}}
 
 ## リアルタイム通知の設定
 
@@ -49,7 +49,7 @@ CSPM には、セキュリティ専門家チームによって管理された 40
 
 ## 所見の確認と修正
 
-[Security Findings Explorer][10] を使用して詳細を調査します。構成、リソースに適用された検出ルール、リソースの所有者や環境内の場所に関する追加のコンテキストを提供するタグなど、リソースの詳細情報を表示します。発見がビジネスユースケースに一致しない場合、または受け入れられたリスクである場合、最大で無期限に[発見をミュート][13]することが可能です。
+[Security Findings Explorer][10] を使用して詳細を調査します。構成、リソースに適用されたコンプライアンスルール、リソースの所有者や環境内の場所に関する追加のコンテキストを提供するタグなど、リソースの詳細情報を表示します。発見がビジネスユースケースに一致しない場合、または受け入れられたリスクである場合、最大で無期限に[発見をミュート][13]することが可能です。
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management Security Findings Explorer" width="100%">}}
 
@@ -58,6 +58,7 @@ CSPM には、セキュリティ専門家チームによって管理された 40
 {{< whatsnext >}}
   {{< nextlink href="/security/cspm/setup">}}完全なセットアップとコンフィギュレーション{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Cloud Security Management の概要{{< /nextlink >}}
+  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}CSPM の Datadog のロール権限{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}すぐに使えるポスチャ管理クラウドの検出ルール{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}すぐに使えるポスチャ管理インフラストラクチャーの検出ルール{{< /nextlink >}}
   {{< nextlink href="/security/cspm/findings">}} クラウドセキュリティポスチャ管理の知見を学ぶ{{< /nextlink >}}
