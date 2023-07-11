@@ -186,14 +186,14 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of a dashboard to administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
 
 
-| Supported Resources with Granular Access Control  | Team based Access |  Role based Access    |  User / Service Account Based Access  |
-|-------------------------|-----------------------------------|---------------------|--------------------------|
-| [Dashboards][11]       | **✓**                 |      **✓**                     |        **✓**                    |
-| [Monitors][12]   |                                                     |       **✓**           |
-| [Notebooks][6]   | **✓**                   |            **✓**              |         **✓**                   |
-| [Security rules][13]         | **✓**      |        **✓**                    |       **✓**                                |
-| [Service Level Objectives][14]   |  **✓**    | **✓**                         |     **✓**                                        |
-| [Synthetic tests][15] | |**✓**  |   |
+| Supported Resources with Granular Access Control | Team-Based Access | Role-Based Access | User / Service Account-Based Access |
+|--------------------------------------------------|-------------------|-------------------|-------------------------------------|
+| [Dashboards][11]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Monitors][12]                                   |                   | {{< X >}}         |                                     |
+| [Notebooks][6]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Security rules][13]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Service Level Objectives][14]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Synthetic tests][15]                            |                   | {{< X >}}         |                                     |
 
 
 ## Further Reading
