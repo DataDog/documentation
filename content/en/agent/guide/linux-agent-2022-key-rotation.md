@@ -7,8 +7,8 @@ aliases:
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
 
-- The RPM signing key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][1] will be rotated on --month-- --day-- at 12:00 UTC, 2023 and replaced by the key with hash [`7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3`][2]. The first RPM release after that date (6.xx and 7.xx) will require the new key to be trusted to be installed.
-- The DEB signing key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][3] will be rotated on --month-- --day-- at 12:00 UTC, 2023 and replaced by the key with hash [`5F1E256061D813B125E156E8E6266D4AC0962C7D`][4]. APT checks the repo metadata signature so the new key needs to be trusted by this date to install any future or existing version of the Agent from `apt.datadoghq.com`.
+- The RPM signing key with hash [`A4C0B90D7443CF6E4E8AA341F1068E14E09422B3`][1] will be rotated on April 11 at 12:00 UTC, 2022 and replaced by the key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][2]. The first RPM release after that date (6.36 and 7.36) will require the new key to be trusted to be installed.
+- The DEB signing key with hash [`A2923DFF56EDA6E76E55E492D3A80E30382E94DE`][3] will be rotated on May 2 at 12:00 UTC, 2022 and replaced by the key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][4]. APT checks the repo metadata signature so the new key needs to be trusted by this date to install any future or existing version of the Agent from `apt.datadoghq.com`.
 
 Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems to install or upgrade the Agent after the rotation takes place.
 
@@ -26,7 +26,7 @@ Your host automatically trusts the new key (no further action is required) if yo
 - [Puppet module][8] v3.13.0+ (released Aug 11, 2021)
 - [SaltStack formula][9] v3.4+ (released Aug 12, 2021)
 - [Heroku buildpack][10] v1.26+ (released May 26, 2021)
-- [Elastic Beanstalk][11] config templates updated as of Mar 29, 2021 or later (should contain `DATADOG_RPM_KEY_B01082D3.public` under `gpgkey`)
+- [Elastic Beanstalk][11] config templates updated as of Mar 29, 2021 or later (should contain `DATADOG_RPM_KEY_FD4BF915.public` under `gpgkey`)
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
@@ -40,7 +40,7 @@ For hosts running older versions of the install methods listed above or older ve
 
 ## What happens if I don't trust the new key before it is rotated?
 
-Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key results in an error. 
+Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key results in an error.
 
 Possible errors include:
 
@@ -78,10 +78,10 @@ Datadog encourages you to use one of the [install methods](#install-methods-that
 Run the following commands on the host:
 
 ```bash
-$ curl -o /tmp/DATADOG_APT_KEY_C0962C7D https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
-$ sudo apt-key add /tmp/DATADOG_APT_KEY_C0962C7D
+$ curl -o /tmp/DATADOG_APT_KEY_F14F620E https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
+$ sudo apt-key add /tmp/DATADOG_APT_KEY_F14F620E
 $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-$ cat /tmp/DATADOG_APT_KEY_C0962C7D | sudo gpg --import --batch --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg
+$ cat /tmp/DATADOG_APT_KEY_F14F620E | sudo gpg --import --batch --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg
 $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 ```
 
@@ -91,8 +91,8 @@ $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 Run the following commands on the host:
 
 ```
-$ curl -o /tmp/DATADOG_RPM_KEY_B01082D3 https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
-$ sudo rpm --import /tmp/DATADOG_RPM_KEY_B01082D3
+$ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915 https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+$ sudo rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915
 ```
 
 {{% /tab %}}
@@ -116,13 +116,13 @@ Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/a
 Run the following command on the host:
 
 ```bash
-$ rpm -qa | grep gpg-pubkey-b01082d3
+$ rpm -qa | grep gpg-pubkey-fd4bf915
 ```
 
 If the key is trusted, the command has a 0 exit code and outputs:
 
 ```
-gpg-pubkey-b01082d3-5f573efe
+gpg-pubkey-fd4bf915-5f573efe
 ```
 
 Otherwise, the command returns a non-0 exit code with no output.
@@ -141,7 +141,7 @@ Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency
 Upon installation, this package:
 
 - Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also in `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when necessary. **This ensures that the upcoming APT repository signing key is trusted.** Using the package [`datadog-signing-keys` version 1.1.0](#datadog-signing-keys-version-110) is recommended to ensure preparedness for the upcoming key rotation.
-- Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally. 
+- Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally.
 
 For example, to verify that a locally downloaded DEB package was built and signed by Datadog, run the following command:
 
@@ -180,10 +180,10 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 
 **Note**: Agent v5 uses Python 2 which reached end-of-life on January 1, 2021. Datadog recommends [upgrading to Agent v7][13].
 
-[1]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
-[2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
-[3]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
-[4]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
+[1]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+[2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+[3]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
+[4]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [5]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
 [6]: https://github.com/DataDog/chef-datadog
 [7]: https://github.com/DataDog/ansible-datadog
@@ -192,4 +192,4 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
 [11]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk
 [12]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
-[13]: https://app.datadoghq.com/account/settings#agent
+[13]: https://app.datadoghq.com/account/settings/agent/latest
