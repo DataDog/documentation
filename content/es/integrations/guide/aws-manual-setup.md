@@ -6,7 +6,7 @@ further_reading:
   text: Integración con AWS
 - link: https://docs.datadoghq.com/serverless/libraries_integrations/forwarder/
   tag: Documentación
-  text: Función Datadog Forwarder Lambda
+  text: Función Lambda del Datadog Forwarder
 - link: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
   tag: Guía
   text: Enviar logs de servicios de AWS con el destino Datadog Kinesis Firehose
