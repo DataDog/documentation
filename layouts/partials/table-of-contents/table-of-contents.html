@@ -28,23 +28,35 @@
                 </nav>
               {{ else }}
                 {{ if in .RawContent "{{< site-region" }}
-                <nav id="TableOfContents"><ul>
-                  {{ $list := slice }}
-                  {{ $res := (findRE `<h([1-6]).*?>.*<\/h[1-6]>` .Content) }}
-                  {{ $prevH := 0 }}
-                  {{ range $i, $head := $res }}
-                    {{ $res := replaceRE `<h([1-6]).*?id=\"(.*)\".*?>(.*)<\/h[1-6]>` "$1,$2,$3" $head }}
-                    {{ $s := split $res ","}}
-                    {{ $hlevel := (index $s 0) }}
-                    {{ $id := (index $s 1) }}
-                    {{ $title := (index $s 2) }}
-                    {{ $list = $list | append (dict "ID" $id "Title" $title "Headings" "") }}
-                    <li>
-                        <a href="#{{ $id }}">{{ $title }}</a>
-                    </li>
-                  {{ end }}
-                  </ul>
-                </nav>
+                  <nav id="TableOfContents">
+                    <ul>
+                    {{ $res := (findRE `<h([1-6]).*?>.*<\/h[1-6]>` .Content) }}
+                    {{ $prevH := 100 }}
+                    {{ $levelNested := 0 }}
+                    {{ range $i, $head := $res }}
+                      {{ $res := replaceRE `<h([1-6]).*?id=\"(.*)\".*?>(.*)<\/h[1-6]>` "$1,$2,$3" $head }}
+                      {{ $s := split $res ","}}
+                      {{ $hlevel := (index $s 0) }}
+                      {{ $id := (index $s 1) }}
+                      {{ $title := (index $s 2) }}
+
+                      {{ if gt $hlevel $prevH }}
+                          <ul>
+                          {{ $levelNested = $prevH }}
+                      {{ else if le $hlevel $levelNested }}
+                          </li></ul>
+                          {{ $levelNested = 0 }}
+                      {{ else if ne $i 0 }}
+                          </li>
+                      {{ end }}
+
+                      <li>
+                          <a href="#{{ $id }}">{{ $title }}</a>
+
+                      {{ $prevH = $hlevel }}
+                    {{ end }}
+                    </ul>
+                  </nav>
                 {{ else }}
                   {{ .TableOfContents }}
                 {{ end }}
