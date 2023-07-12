@@ -61,9 +61,12 @@ There's also information about the wall time of the most recent test suite run, 
 Hovering over the commit author avatar shows detailed information about the latest commit.
 
 #### Test regressions
-A test run is marked as a regression when its duration is five times the mean and greater than the max duration for the same test in the default branch. The mean and the max of the default branch is calculated over the last week of test runs.
+
+A test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch.
 
 A benchmark test run is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch. A benchmark test has @test.type:benchmark.
+
+The mean and the max of the default branch is calculated over the last week test runs.
 
 Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
@@ -140,7 +143,7 @@ When creating a [dashboard][14] or a [notebook][15], you can use test execution 
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16]. 
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16].
 
 ## Further reading
 
