@@ -75,7 +75,7 @@ NetFlow data is retained for 30 days by default.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /network_monitoring/devices/snmp_metrics/
 [3]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: /agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

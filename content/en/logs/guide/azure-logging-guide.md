@@ -7,6 +7,8 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
+<div class="alert alert-warning">On September 11 2023, <a href="https://nodejs.org/en/blog/announcements/nodejs16-eol">Node.JS 16</a> will reach end of life. Datadog plans to update support for the newer version prior to deprecation. </div>
+
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.

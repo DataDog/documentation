@@ -38,7 +38,7 @@ instances:
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
   def check(self, instance):
-    self.gauge('hello.world', 1)   
+    self.gauge('hello.world', 1)
 {{< /code-block >}}
 6. [Restart the Agent][3]. Within a minute, you should see a new metric show up in the [Metric Summary][4] called `hello.world`.
 
@@ -116,7 +116,7 @@ class LSCheck(AgentCheck):
 
 ## Sending data from a load balancer
 
-A common use case for writing a custom Agent check is to send Datadog metrics from a load balancer. Before you get started, follow the steps in [Configuration](#configuration). 
+A common use case for writing a custom Agent check is to send Datadog metrics from a load balancer. Before you get started, follow the steps in [Configuration](#configuration).
 
 To expand the files to send data from your load balancer:
 
@@ -170,7 +170,7 @@ class HelloCheck(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://app.datadoghq.com/account/settings#agent
+[1]: http://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/guide/agent-configuration-files#agent-configuration-directory
 [3]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary
