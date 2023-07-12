@@ -26,9 +26,10 @@ further_reading:
 ---
 
 ## Overview
-This tutorial walks you through the steps for enabling tracing for Java Application using the Datadog Admission Controller.
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, the application and Agent on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
+This tutorial walks you through the steps to enable tracing for Java Application using the Datadog Admission Controller.
+
+For other scenarios, such as the application and Agent on a host, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
@@ -42,7 +43,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 ## Install the sample application
 
-For the purpose of demonstrating how to instrument your app using Datadog Admission Controller, we are going to use a simple Java app built with Spring. [Here][4] you can find the code.
+To demonstrate how to instrument your app with the Datadog Admission Controller, this tutorial uses a Java app built with Spring. [Here][4] you can find the code.
 
 To get started, clone the repository:
 
@@ -54,7 +55,7 @@ The repository contains a multi-service Java application pre-configured to be ru
 
 ## Start and exercise the sample application 
 
-1. Switch to the  the `/k8s` directory:
+1. Switch to to the `/k8s` directory:
    {{< code-block lang="shell" >}}
 cd springblog/k8s/{{< /code-block >}}
 
@@ -62,7 +63,7 @@ cd springblog/k8s/{{< /code-block >}}
    {{< code-block lang="shell" >}}
 kubectl apply -f ./depl.yaml{{< /code-block >}}
 
-3. Verify that it is up and running with the following command:
+3. Verify that it is running with the following command:
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
@@ -88,21 +89,21 @@ kubectl delete -f ./depl-with-lib-inj.yaml{{< /code-block >}}
 
 ## Instrument your app with Datadog Admission Controller
 
-Now that you have your application working, instrument it using the Datadog Admission Controller. In containerized environments, the process is generally:
+After you have your application working, instrument it using the Datadog Admission Controller. In containerized environments, the process is generally:
 
-1. Install the [Datadog Cluster Agent][5]
-2. Add [Unified Service Tags][6] in pod definition
-3. [Annotate][7] your pod for library injection
-4. [Label][8] your pod to instruct the Datadog Admission controller to mutate the pod
+1. Install the [Datadog Cluster Agent][5].
+2. Add [Unified Service Tags][6] in pod definition.
+3. [Annotate][7] your pod for library injection.
+4. [Label][8] your pod to instruct the Datadog Admission controller to mutate the pod.
 
-No need to add the tracing library (which will be automatically injected), no need to add Datadog variables, and more importantly, no need to deploy a new image or version of your app. This section of the tutorial steps you through this process.
+There's no need to add the tracing library because it's automatically injected. You also don't need to add Datadog variables and deploy a new image or version of your app. This section of the tutorial steps you through this process.
 
 1. Install the Datadog Cluster Agent using [this YAML config file](link) and the following command, specifying your own [Datadog API key](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
     <div class="alert alert-warning">For more detailed information, read <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installing the Datadog Agent on Kubernetes with Helm</a></div>
 
-2. You can check the Datadog Cluster Agent is up and running with the following command:
+2. You can check the Datadog Cluster Agent is running with the following command:
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
@@ -115,14 +116,14 @@ kubectl get pods{{< /code-block >}}
     datadog-agent-kube-state-metrics-86f46b8484-mlqp7   1/1     Running   0         30s
     ```
 
-3. Add [Unified Service Tags][6] to our pod by adding the following block to the [`depl.yaml` file][9]:
+3. Add [Unified Service Tags][6] to the pod by adding the following block to the [`depl.yaml` file][9]:
    {{< code-block lang="yaml" >}}
 labels:
   tags.datadoghq.com/env: "dev"
   tags.datadoghq.com/service: "springfront"
   tags.datadoghq.com/version: "12"{{< /code-block >}}
 
-4. Configure the Datadog Admission Controller to inject a Java tracing library to our app container by adding the following annotation to the pod:
+4. Configure the Datadog Admission Controller to inject a Java tracing library to the app container by adding the following annotation to the pod:
    {{< code-block lang="yaml" >}}
 annotations:
   admission.datadoghq.com/java-lib.version: "latest"{{< /code-block >}}
@@ -166,7 +167,7 @@ annotations:
    {{< code-block lang="shell" >}}
 kubectl apply -f depl-with-lib-inj.yaml{{< /code-block >}}
 
-6. Run the following command to show that the app and Agent are up and running:
+6. Run the following command to show that the app and Agent are running:
    {{< code-block lang="shell" >}}
 kubectl get pods{{< /code-block >}}
 
@@ -251,10 +252,10 @@ Clean up your environment with the following command:
 kubectl delete -f depl-with-lib-inj.yaml
 {{< /code-block >}}
 
-Library injection with the Admission Controller makes it easier to instrument your services, enabling you to view APM traces in just minutes without changing or rebuilding your application. To learn more, read [Datadog Library injection][12].
+Library injection with the Admission Controller simplifies service instrumentation, enabling you to view APM traces without changing or rebuilding your application. To learn more, read [Datadog Library injection][12].
 
 ## Troubleshooting
-If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
+If you're not receiving traces as expected, set up debug mode for the Java tracer. To learn more, read [Enable debug mode][13].
 
 ## Further reading
 
