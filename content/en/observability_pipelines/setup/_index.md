@@ -7,5 +7,6 @@ aliases:
   - /observability_pipelines/installation/
 ---
 
-OP Use Cases:
+For setup instructions, select your use case:
+
 {{< partial name="observability_pipelines/use_cases.html" >}}
