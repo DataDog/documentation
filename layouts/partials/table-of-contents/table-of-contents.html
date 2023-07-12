@@ -1,15 +1,4 @@
 {{ $ctx := . }}
-{{- define "partials/headings" -}}
-  {{- $ctx := .ctx -}}
-  <ul>
-    {{- range $k, $v := .data -}}
-       <li id="{{ $v.ID | anchorize }}">
-          <a href="#{{ $v.ID | anchorize }}">{{ $v.Title }}</a>
-          {{- partial "partials/headings" (dict "data" $v.Headings "ctx" $ctx) -}}
-       </li>
-    {{- end -}}
-  </ul>
-{{- end -}}
 <div class="js-toc-container toc-container">
     <div class="toc">
         <div class="js-toc {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
@@ -38,8 +27,22 @@
                   </ul>
                 </nav>
               {{ else }}
-                <nav id="TableOfContents">
-                  {{- partial "partials/headings" (dict "data" (index .Fragments.Headings 0).Headings "ctx" $ctx) -}}
+                <nav id="TableOfContents"><ul>
+                  {{ $list := slice }}
+                  {{ $res := (findRE `<h([1-6]).*?>.*<\/h[1-6]>` .Content) }}
+                  {{ $prevH := 0 }}
+                  {{ range $i, $head := $res }}
+                    {{ $res := replaceRE `<h([1-6]).*?id=\"(.*)\".*?>(.*)<\/h[1-6]>` "$1,$2,$3" $head }}
+                    {{ $s := split $res ","}}
+                    {{ $hlevel := (index $s 0) }}
+                    {{ $id := (index $s 1) }}
+                    {{ $title := (index $s 2) }}
+                    {{ $list = $list | append (dict "ID" $id "Title" $title "Headings" "") }}
+                    <li>
+                        <a href="#{{ $id }}">{{ $title }}</a>
+                    </li>
+                  {{ end }}
+                  </ul>
                 </nav>
               {{ end }}
             {{ end }}
