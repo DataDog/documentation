@@ -28,11 +28,11 @@ further_reading:
 
 ## Overview
 
-As teams iterate quickly, deploy code and continually make changes to their applications and services, it can be difficult to find the exact change that caused a spike in errors, an increase in latency, or slower page load times. Change overlays enables you to identify when a recent change is causing performance issues within your application or services and helps you identify the source of the problem.
+As teams iterate quickly, deploy code, and continually make changes to their applications and services, it can be difficult to find the exact change that caused a spike in errors, an increase in latency, or slower page load times. Change overlays enable you to identify when a recent change is causing performance issues within your application or services and help you identify the source of the problem.
 
 {{< img src="dashboards/change_overlays/references-graphing-edit-window-with-y-2.png" alt="Change overlays on graphs in a Dashboard" style="width:75%;">}}
 
-By viewing the moment a change occurred in the context of your Datadog observability data, you can easily pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays currently supports [APM service deployments][1].
+By viewing the moment a change occurred in the context of your Datadog observability data, you can pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays currently supports [APM service deployments][1].
 
 
 ## Overlay changes on graphs
@@ -41,9 +41,9 @@ To get started, click the **Overlays** button in the upper right corner of your 
 
 {{< img src="dashboards/change_overlays/overlays_button_dashboard.png" alt="Overlays button on dashboards" style="width:75%;">}}
 
-Overlays will automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
+Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
 
-You can click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
+Click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
 
 
 ### Show faulty deploys
@@ -53,8 +53,8 @@ Use the toggle in the overlays panel to only show [faulty deployments][2] that c
 {{< img src="dashboards/change_overlays/faulty_deployments_toggle.png" alt="Faulty Deployments toggle" style="width:75%;">}}
 
 
-### Overriding automatic detection
-You can override the automatic service detection by using the search bar to find the service of interest. 
+### Override automatic detection
+Override the automatic service detection by using the search bar to find the service of interest. 
 
 {{< img src="dashboards/change_overlays/service_selector.png" alt="Service selector override" style="width:75%;">}}
 
@@ -67,7 +67,7 @@ Click on any overlay on your graph to open a change analysis page, allowing you 
 
 ### APM Deployments
 For APM deployments, you can:
-- Compare the version selected to overall service performance for Requests, Errors, or Latency
+- Compare the version selected to overall service performance for requests, errors, or latency
 - View the rollout of your version by `region`, `env`, or `datacenter`
 - See new Error Tracking issues that have been introduced with the new deployment
 - Check related infrastructure that your service is running on
@@ -75,13 +75,13 @@ For APM deployments, you can:
 {{< img src="dashboards/change_overlays/apm_overlays_side_panel.png" alt="APM overlays side panel" style="width:75%;">}}
 
 ## FAQ
-### When do overlays appears?
-For APM deployments overlays will appear on timeseries graphs that:
+### When do overlays appear?
+For APM deployments, overlays appear on timeseries graphs that:
 1. Are filtered by the `service` tag in the query
-2. That have the `service` set up with the `verion` tag
+2. Have the `service` set up with the `version` tag
 
 ### What are my deployments scoped to?
-For APM deployments, an `env` must be specified. If you have a `env` or `datacenter` template variable set in your dashboard, deployments will be filtered to match the selection. Otherwise the `env` will be defaulted to `prod`. 
+For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`. 
 
 ## Further Reading
 
