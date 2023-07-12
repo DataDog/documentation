@@ -76,7 +76,6 @@ To add a version of an existing mobile application:
 For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
 
 
-For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
 
 ## Permissions
 

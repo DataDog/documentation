@@ -25,7 +25,7 @@ Select **Show only available devices. Available devices load faster** to see the
 
 ### Notifications
 
-Click the **Device Connection Notification** button to enable notifications for when your device is ready and when your device is going to timeout because of inactivity.
+Click the green **Device Connection Notification** button in the **Launch a device to start recording** modal to enable notifications for when your device is ready and when your device is going to timeout because of inactivity.
 
 ## Automatically recorded steps
 

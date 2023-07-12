@@ -21,7 +21,7 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. 
+Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 
 ## Record mobile app tests
 
