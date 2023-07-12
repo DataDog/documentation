@@ -27,6 +27,7 @@
                   </ul>
                 </nav>
               {{ else }}
+                {{ if in .RawContent "{{< site-region" }}
                 <nav id="TableOfContents"><ul>
                   {{ $list := slice }}
                   {{ $res := (findRE `<h([1-6]).*?>.*<\/h[1-6]>` .Content) }}
@@ -44,6 +45,9 @@
                   {{ end }}
                   </ul>
                 </nav>
+                {{ else }}
+                  {{ .TableOfContents }}
+                {{ end }}
               {{ end }}
             {{ end }}
         </div>
