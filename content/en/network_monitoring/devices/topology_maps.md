@@ -29,24 +29,6 @@ Datadog Topology Maps show you the various network elements in your network as a
 2. Enable topology data collection with the `collect_topology: true` setting for your environment:
 
 {{< tabs >}}
-{{% tab "Individual device setup" %}}
-
-If you monitor individual devices through configurations in `conf.d/snmp.d/conf.yaml` files, add `collect_topology` inside the `init_config` section: 
-
-{{< code-block lang="yaml" filename="conf.yaml" disable_copy="true" collapsible="false" >}}
-init_config:
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  collect_topology: true
-instances:
-- ip_address: '<1.2.3.4>'
-  community_string: '<sample-string>'  # enclose with single quote
-  tags:
-    - '<key1>:<val1>'
-    - '<key2>:<val2>'
-{{< /code-block >}}
-{{% /tab %}}
-
 {{% tab "Autodiscovery setup" %}}
 If you use autodiscovery through the `datadog.yaml` file, add `collect_topology` inside the `snmp_listener` section: 
 
@@ -67,6 +49,23 @@ snmp_listener:
       tags:
       - "<key1>:<val1>"
       - "<key2>:<val2>"
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Individual device setup" %}}
+If you monitor individual devices through configurations in `conf.d/snmp.d/conf.yaml` files, add `collect_topology` inside the `init_config` section: 
+
+{{< code-block lang="yaml" filename="conf.yaml" disable_copy="true" collapsible="false" >}}
+init_config:
+  loader: core  # use core check implementation of SNMP integration. recommended
+  use_device_id_as_hostname: true  # recommended
+  collect_topology: true
+instances:
+- ip_address: '<1.2.3.4>'
+  community_string: '<sample-string>'  # enclose with single quote
+  tags:
+    - '<key1>:<val1>'
+    - '<key2>:<val2>'
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
