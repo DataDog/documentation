@@ -71,24 +71,6 @@ If you want to design an efficient pipeline between your Observability Pipelines
 
 You can use Observability Pipelines Worker to process logs, metrics, and traces. However, real-time, vendor-specific data, such as continuous profiling data, is not interoperable and typically does not benefit from processing.
 
-### Choosing where to process data
-
-Observability Pipelines Worker can be deployed anywhere in your infrastructure. Deploy it directly on your node as an agent for local processing, or on separate nodes as an aggregator for remote processing. Where the processing happens depends largely on your use case and environment.
-
-#### Local processing
-
-With local processing, Observability Pipelines Worker is deployed on each node as an agent. 
-
-{{< img src="observability_pipelines/production_deployment_overview/agent.png" alt="A diagram showing two separate nodes, each containing services, other agents, other node data, and an Observability Pipelines Worker, and the node and agent data is sent to the Worker, and then to the sinks" style="width:70%;" >}}
-
-Data is processed on the same node from which the data originated. This provides operational simplicity since the Observability Pipelines Worker has direct access to your data and scales along with your infrastructure.
-
-Local processing is recommended for:
-
-- Simple environments that do not require high durability or high availability.
-- Use cases, such as fast, stateless processing, and streaming delivery, that do not require holding onto data for long periods of time.
-- Operators that can make node-level changes without a lot of friction.
-
 #### Remote processing
 
 For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator. 
