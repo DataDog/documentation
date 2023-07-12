@@ -15,6 +15,7 @@ further_reading:
 
 #### Platform Events
 - [Access management](#access-management-events)
+- [Agent](#agent)
 - [API request](#api-request-events)
 - [Authentication](#authentication-events)
 - [Dashboard](#dashboard-events)
@@ -57,6 +58,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][86] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
+
+### Agent
+
+| Name  | Description of audit event                          | Query in audit explorer              |
+|-------------| --------------------------------------------------  | ------------------------------------ |
+| [Agent Flare created][87] | Datadog Agent flare is created for support tickets| `@evt.name:Datadog Agent @action:created @asset.type:agent_flare` |
 
 ### API request events
 
@@ -315,3 +322,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
 [85]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser
 [86]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Arestriction_policy
+[87]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40asset.type%3Aagent_flare%20%40action%3A%28created
