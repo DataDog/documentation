@@ -51,9 +51,9 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-If the application is open in multiple browser tabs, stopping the RUM session ends the session in all tabs.
+If the application is open in **multiple browser tabs**, stopping the RUM session ends the session in all tabs.
 
-If the application is using the Logs SDK, stopping the RUM session ends the Logs session as well.
+If the application is using the **Logs SDK**, stopping the RUM session ends the Logs session as well.
 
 ### Mobile
 
