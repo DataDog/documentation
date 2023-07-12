@@ -21,7 +21,7 @@ The Cluster Agent can dispatch out two types of checks: [endpoint checks][1] and
 Endpoint checks are dispatched specifically to the regular Datadog Agent on the same node as the application pod endpoints. Executing endpoint checks on the same node as the application endpoint allows proper tagging of the metrics.
 
 Cluster checks monitor internal Kubernetes services, as well as external services like managed databases and network devices, and can be dispatched much more freely.
-The Cluster Check Runners are an optional strategy to have a small set of Agents dedicated to just running the cluster checks, leaving the endpoint checks to the normal Agent. This can be beneficial to control the dispatching of cluster checks, especially when the scale of your cluster checks increases.
+Using Cluster Check Runners is optional. When you use Cluster Check Runners, a small, dedicated set of Agents runs the cluster checks, leaving the endpoint checks to the normal Agent. This strategy can be beneficial to control the dispatching of cluster checks, especially when the scale of your cluster checks increases.
 
 ## Set up
 
