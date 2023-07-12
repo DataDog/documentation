@@ -49,17 +49,15 @@ In the **Profiles** tab, you can see all profile types available for a given lan
 
 ## Visualizations
 
-### Flame Graph
+### Flame graph
 
-Continuous Profiler default visualization is the flame graph.
+The flame graph is the default visualization for Continuous Profiler. It shows how much CPU each method used (since this is a CPU profile) and how each method was called.
 
 {{< img src="profiler/profiling_viz-flamegraph.png" alt="A flame graph" >}}
 
-It shows are how much CPU each method used (since this is a CPU profile) and how each method was called.
+For example, starting from the first row in the previous image, `Thread.run()` called `ThreadPoolExecutor$Worker.run()`, which called `ThreadPoolExecutor.runWorker(ThreadPoolExecutor$Worker)`, and so on.
 
-For example, starting from the first row, `Thread.run()` called `ThreadPoolExecutor$Worker.run()` which called `ThreadPoolExecutor.runWorker(ThreadPoolExecutor$Worker)` and so on.
-
-The width of a frame represents how much of the total CPU it consumed. On the right, you can see a "CPU time by Method" top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
+The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
 ### Single profile
 
