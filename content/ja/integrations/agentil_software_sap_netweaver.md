@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-sap-netweaver
 app_uuid: 5b070928-c509-4826-93db-8b5e9206c355
 assets:

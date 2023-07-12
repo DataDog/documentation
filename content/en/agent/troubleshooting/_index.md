@@ -51,7 +51,7 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://app.datadoghq.com/metric/explorer
 [3]: /agent/troubleshooting/hostname_containers/
 [4]: /agent/proxy/

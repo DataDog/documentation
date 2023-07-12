@@ -32,7 +32,8 @@ title: ネットワークトラフィック
 ## 送信先
 
 [APM][1]
-: `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+: `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+`instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [ライブコンテナ][3] & [ライブプロセス][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
@@ -57,7 +58,7 @@ title: ネットワークトラフィック
 [リモート構成][1]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
-[1]: /ja/agent/guide/how_remote_config_works
+[1]: /ja/agent/remote_config
 {{% /site-region %}}
 
 [Synthetics プライベートロケーション][8]

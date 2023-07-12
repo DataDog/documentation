@@ -101,7 +101,7 @@ Datadog で HAProxy のアクティビティをキャプチャして、以下の
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Haproxy チェックは [Datadog Agent][2] パッケージに含まれています。Haproxy サーバーには何もインストールする必要がありません。
 
