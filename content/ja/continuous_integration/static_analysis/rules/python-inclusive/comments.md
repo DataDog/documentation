@@ -25,8 +25,16 @@ title: 表現に問題がないかコメントをチェックする
 
 ## 非準拠コードの例
 ```python
-# 不正使用を防ぐホワイトリスト名
+# 不正使用を防止するためのホワイトリスト名
 def filter_names(names):
+    pass
+
+# 彼女は自分のコードをチェックする必要があります 
+def new_function_from_helen():
+    pass
+
+# 彼は自分のをチェックする必要があります
+def new_function_from_joe():
     pass
 ```
 

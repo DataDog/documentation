@@ -200,6 +200,55 @@ Amplitude does not support this integration. Create a ticket with Amplitude to r
 {{% /tab %}}
 {{< /tabs >}}
 
+### Custom feature flag management
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```swift
+   Global.rum.addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```kotlin
+   GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
+   ```
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```javascript
+   DdRum.addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### DevCycle integration
 
 {{< tabs >}}
@@ -535,56 +584,6 @@ Statsig does not support this integration. Contact support@statsig.com to reques
 {{% tab "React Native" %}}
 
 Statsig does not currently support this integration. Contact support@statsig.com to request this feature.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-### Custom feature flag management
-
-{{< tabs >}}
-{{% tab "Browser" %}}
-
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
-
-```javascript
-datadogRum.addFeatureFlagEvaluation(key, value);
-```
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
-
-   ```swift
-   Global.rum.addFeatureFlagEvaluation(key, value);
-   ```
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
-
-   ```kotlin
-   GlobalRum.get().addFeatureFlagEvaluation(key, value);
-   ```
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
-
-   ```dart
-   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
-   ```
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
-
-   ```javascript
-   DdRum.addFeatureFlagEvaluation(key, value);
-   ```
 
 {{% /tab %}}
 {{< /tabs >}}

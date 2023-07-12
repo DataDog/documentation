@@ -6578,7 +6578,7 @@ main:
   url: containers/kubernetes/
   weight: 3
 - identifier: containers_kubernetes_installation
-  name: APM に Datadog Agent を構成する
+  name: インストール
   parent: containers_kubernetes
   url: containers/kubernetes/installation
   weight: 301
@@ -6874,7 +6874,7 @@ main:
   url: serverless/aws_lambda
   weight: 1
 - identifier: serverless_aws_lambda_installation
-  name: APM に Datadog Agent を構成する
+  name: インストール
   parent: serverless_aws_lambda
   url: serverless/installation
   weight: 101
