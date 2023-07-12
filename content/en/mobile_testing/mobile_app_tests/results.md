@@ -17,7 +17,6 @@ Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test
 
 {{< img src="mobile_testing/test_details.png" alt="The Test Details page" style="width=80%" >}}
 
-
 Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
 ## Test properties
@@ -71,6 +70,8 @@ Run type
 ### Screenshots and actions
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
+
+{{< img src="mobile_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
 
 ## Failed results
 
