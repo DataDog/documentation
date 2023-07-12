@@ -66,7 +66,7 @@ Datadog にトレースを送信したい Kubernetes アプリケーションに
 
 ### ステップ 1 - Datadog Admission Controller を有効にして、ポッドを変異させます
 
-デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみを変異させます。ポッドの変異を有効にするには、ポッドの spec にラベル `admission.datadoghq.com/enabled: "true"` を追加します。
+デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみを変異させます。ポッドの変異を有効にするには、ポッドのスペックにラベル `admission.datadoghq.com/enabled: "true"` を追加します。
 
 **注**: Datadog Admission Controller で、Cluster Agent で `clusterAgent.admissionController.mutateUnlabelled` (または `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定すると、このポッドラベルがなくても挿入設定を有効にすることが可能です。
 
