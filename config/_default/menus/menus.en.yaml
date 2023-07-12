@@ -2041,8 +2041,8 @@ main:
     parent: profiler
     identifier: profiler_types
     weight: 2
-  - name: Search Profiles
-    url: profiler/search_profiles/
+  - name: Profile Visualizations
+    url: profiler/profile_visualizations/
     parent: profiler
     identifier: profiler_search_profiles
     weight: 3
