@@ -47,11 +47,11 @@ mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 
 Deactivating the legacy integration prevents sending the system metrics twice.
 
-Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. 
+Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
 
 ### Install the Agent
 
-To start collecting Oracle telemetry, first install the Datadog Agent. 
+To start collecting Oracle telemetry, first install the Datadog Agent.
 
 The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
 
@@ -61,7 +61,7 @@ If the latest Agent version is an official Datadog Agent release, like `7.46.0`,
 
 #### Official release
 
-Follow the [instructions for your platform][3]. 
+Follow the [instructions for your platform][3].
 
 #### Beta build
 
@@ -119,7 +119,7 @@ For setup instructions, select your hosting type:
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [6]: https://yum.datadoghq.com/beta/7/x86_64/

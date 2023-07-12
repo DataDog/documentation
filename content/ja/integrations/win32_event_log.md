@@ -66,7 +66,7 @@ Win32 Event Log チェックは、Windows のイベントログを監視して D
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Windows Event Log チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 

@@ -904,7 +904,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
 
             }
         }
-        .modal__all-items {
+        .modal-item-btns {
             margin-top: 28px;
             display: flex;
             justify-content: center;
@@ -914,7 +914,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 width: 75%;
                 gap: 20px 16px;
             }
-            button.modal__item {
+            button.modal-item-btn {
                 width: 96px;
                 height: 60px;
                 background-repeat: no-repeat;

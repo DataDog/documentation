@@ -22,6 +22,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+        tags: ['ci/cd', 'continuous integration']
 ---
 
 {{< site-region region="gov" >}}
