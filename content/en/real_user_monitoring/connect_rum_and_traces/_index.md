@@ -283,11 +283,19 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 1. Visit a page in your application.
 2. In your browser's developer tools, go to the **Network** tab.
-3. Check the request headers for a RUM resource request and verify that at least one comes from Datadog.
+3. Check the request headers for a resource request that you expect to be correlated contains the [correlated headers from Datadog][1].
+
+[1]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 
 {{% tab "Mobile" %}}
+
+1. Visit a page in your application.
+2. In your browser's developer tools, go to the **Network** tab.
+3. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][1].
+
+[1]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
