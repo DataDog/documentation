@@ -62,11 +62,24 @@ def test_simple_case(ddspan):
 ```
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+```csharp
+// inside your test
+var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
+if (scope != null) {
+    scope.Span.SetTag("test.memory.usage", 1e8);
+}
+// test continues normally
+// ...
+```
+{{% /tab %}}
+
+
 {{% tab "JUnit Report Uploads" %}}
 
 For `datadog-ci`, use `DD_METRICS` environment variable or `--metrics` CLI argument:
 ```
-DD_METRICS="test.memory_usage:1000" datadog-ci junit upload --service my-service --metrics test.request.rate:30 report.xml
+DD_METRICS="test.memory.usage:1000" datadog-ci junit upload --service my-service --metrics test.request.rate:30 report.xml
 ```
 {{% /tab %}}
 
