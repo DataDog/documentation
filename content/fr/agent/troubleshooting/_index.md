@@ -44,7 +44,7 @@ Si vous avez répondu `oui` à l'ensemble de ces questions, [exécutez la comman
 
 Si vous n'avez toujours pas résolu votre problème, vous pouvez contacter l'[équipe d'assistance Datadog][9] en envoyant [un flare][10] de votre Agent.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

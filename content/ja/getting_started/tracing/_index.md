@@ -95,7 +95,7 @@ sudo datadog-agent status
 
 ## APM アプリケーション
 
-### APM に Datadog Agent を構成する
+### インストール
 
 アプリケーションを設定する前に、まず Ubuntu VM 上に `pip` をインストールし、次に `flask` と `ddtrace` をインストールします。
 

@@ -37,7 +37,7 @@ SLO 목록 위젯의 전용 [위젯 JSON 스키마 정의][3]는 다음과 같�
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

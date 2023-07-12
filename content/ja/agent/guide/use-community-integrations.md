@@ -81,7 +81,7 @@ Agent v7.21 / v6.21 以前の場合:
 
 <br>
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

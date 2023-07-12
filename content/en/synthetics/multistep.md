@@ -293,7 +293,7 @@ Access restriction is available for customers using [custom roles][18] on their 
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -301,16 +301,16 @@ You can restrict access to a multistep API test based on the roles in your organ
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/
-[3]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[3]: /synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
 [4]: /synthetics/cicd_integrations
 [5]: /synthetics/private_locations
-[6]: /synthetics/search/#search
+[6]: /synthetics/search/#search-for-tests
 [7]: https://restfulapi.net/json-jsonpath/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /monitors/notify/?tab=is_alert#notification
+[10]: /monitors/notify/?tab=is_alert#notify-your-team
 [11]: http://daringfireball.net/projects/markdown/syntax
-[12]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[12]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [13]: /synthetics/guide/synthetic-test-monitors
 [14]: /synthetics/settings/#global-variables
 [15]: /synthetics/api_tests/errors/#ssl-errors

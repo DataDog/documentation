@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-netapp-aiqum
 app_uuid: b96cf12b-48c7-473f-9aac-3f1132a98402
 assets:

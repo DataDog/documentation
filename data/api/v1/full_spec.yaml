@@ -352,7 +352,6 @@ components:
           type: array
       type: object
     AccessRole:
-      default: st
       description: The access role of the user. Options are **st** (standard user),
         **adm** (admin user), or **ro** (read-only user).
       enum:
@@ -360,7 +359,8 @@ components:
       - adm
       - ro
       - ERROR
-      example: st
+      example: ro
+      nullable: true
       type: string
       x-enum-varnames:
       - STANDARD
@@ -2565,6 +2565,38 @@ components:
       - service
       - stat
       type: object
+    FormulaAndFunctionCloudCostDataSource:
+      description: Data source for Cloud Cost queries.
+      enum:
+      - cloud_cost
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - CLOUD_COST
+    FormulaAndFunctionCloudCostQueryDefinition:
+      description: A formula and functions Cloud Cost query.
+      example:
+        data_source: cloud_cost
+        name: query1
+        query: sum:aws.cost.amortized{*}
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/WidgetAggregator'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionCloudCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_query
+          type: string
+        query:
+          description: Query for Cloud Cost data.
+          example: ''
+          type: string
+      required:
+      - data_source
+      - query
+      - name
+      type: object
     FormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -2828,17 +2860,21 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
-      description: Timeseries or Scalar response.
+      description: Timeseries, scalar, or event list response. Event list response
+        formats are supported by Geomap widgets.
       enum:
       - timeseries
       - scalar
+      - event_list
       example: timeseries
       type: string
       x-enum-varnames:
       - TIMESERIES
       - SCALAR
+      - EVENT_LIST
     FormulaAndFunctionSLODataSource:
       description: Data source for SLO measures queries.
       enum:
@@ -2878,6 +2914,7 @@ components:
     FormulaAndFunctionSLOQueryDefinition:
       description: A formula and functions metrics query.
       example:
+        additional_query_filters: '*'
         data_source: slo
         group_mode: overall
         measure: good_events
@@ -2885,6 +2922,10 @@ components:
         slo_id: '12345678910'
         slo_query_type: metric
       properties:
+        additional_query_filters:
+          description: Additional filters applied to the SLO query.
+          example: host:host_a,env:prod
+          type: string
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
         group_mode:
@@ -3226,6 +3267,16 @@ components:
     GeomapWidgetRequest:
       description: An updated geomap widget.
       properties:
+        columns:
+          description: Widget columns.
+          example:
+          - field: timestamp
+            width: auto
+          - field: content
+            width: full
+          items:
+            $ref: '#/components/schemas/ListStreamColumn'
+          type: array
         formulas:
           description: List of formulas that operate on queries.
           items:
@@ -3241,6 +3292,8 @@ components:
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
+        query:
+          $ref: '#/components/schemas/ListStreamQuery'
         response_format:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:

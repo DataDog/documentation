@@ -65,7 +65,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-On **Windows**, use the path `"<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log"`, and verify that the user `ddagentuser` has read and write access to the log file.
+On **Windows**, use the path `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
@@ -170,7 +170,7 @@ List of all available parameters for log collection:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/kubernetes/log/
 [3]: /agent/docker/log/
 [4]: /agent/guide/agent-configuration-files/
