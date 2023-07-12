@@ -6,7 +6,7 @@ aliases:
 ---
 ## Overview
 
-With Cloud SIEM and CWS Security Signal Management, users with the `Security Signals Write` permission can take action on security signal detections generated within the previous thirty days, such as change state, and view signal action history in the Audit Log. Within the signal explorer, users can use dedicated facets to filter signals that have been acted upon and view high-level information about actions within a row. After you take action on a signal, you can see your activity in the Audit Log.
+With Cloud SIEM and CWS Security Signal Management, users with the `Security Signals Write` permission can take action on security signal detections generated within the previous 30 days, such as change state, and view signal action history in the Audit Log. Within the signal explorer, users can use dedicated facets to filter signals that have been acted upon and view high-level information about actions within a row. After you take action on a signal, you can see your activity in the Audit Log.
 
 Security signals can be viewed and managed by navigating to **Security** > **Security Signals** > selecting a Cloud SIEM or CWS signal, and taking actions through the header in the side panel view.
 
@@ -23,7 +23,7 @@ A Security Signal is created when Datadog detects a threat based on a security r
 The status of a signal can be one of the following:
 * **Open**: Datadog Security triggered a detection based on a rule, and the resulting signal is not resolved.
 * **Under Review**: During an active investigation, you can switch the signal state to Under Review. You can move the signal state to Archived or Open from the Under Review state as needed.
-* **Archived**: When you resolve the detection that caused the signal, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within thirty days of being created.
+* **Archived**: When you resolve the detection that caused the signal, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within 30 days of being created.
 
 When you take action on a signal, a confirmation toast appears that allows you to **Undo** the action. You'll see it in a banner above the signal side panel when you save the action. The banner shows the action taken, by who, and when.
 
@@ -46,7 +46,7 @@ To change signal state, follow the instructions below:
 
     - **Open**: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
     - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
-    - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within thirty days of being created.
+    - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an open state within 30 days of being created.
 
 4. Once you save the status, a confirmation toast appears that states which action was taken with the opportunity to "Undo" the action. You'll see it in a banner above the signal side panel when you save the action. The banner shows the action taken, by who, and when.
 
