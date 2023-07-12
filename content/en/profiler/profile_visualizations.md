@@ -1,5 +1,5 @@
 ---
-title: Profile visualizations
+title: Profile Visualizations
 kind: documentation
 aliases:
     - /tracing/profiling/search_profiles/
@@ -21,7 +21,7 @@ further_reading:
 
 {{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
-Go to **APM -> Profiles** and select a service to view its profiles. Select a profile type to view different resources (CPU, Memory, Exception, I/O, ...).
+Go to **APM -> Profiles** and select a service to view its profiles. Select a profile type to view different resources (for example, CPU, Memory, Exception, and I/O).
 
 You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][1]. By default the following facets are available:
 
@@ -61,11 +61,11 @@ For example, starting from the first row, `Thread.run()` called `ThreadPoolExecu
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a "CPU time by Method" top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
-### Single Profile
+### Single profile
 
 By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
 
-To view a specific profile, select `Visualize as Profile list` and click on a line to view a specific profile:
+To view a specific profile, set the **Visualize as** option to **Profile List** and click an item in the list:
 
 {{< img src="profiler/profiling_single-profile.mp4" alt="Select a single profile" video=true >}}
 
@@ -106,23 +106,23 @@ Depending on the runtime and language, the timeline lanes vary:
 
 {{< programming-lang-wrapper langs="java,go,dotnet" >}}
 {{< programming-lang lang="java" >}}
-Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
-Lanes are top are runtime activities that may impact performance
+Lanes on top are runtime activities that may impact performance.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-This feature needs to be explicitly enabled for Go, see [prerequisites][1].
+See [prerequisites][1] to learn how to enable this feature for Go.
 
-Each lane is a **goroutine**. Goroutines created by the same `go` statement are grouped together. You can expand the group to see each goroutine's details.
+Each lane represents a **goroutine**. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
 
 Lanes on top are runtime activities that may impact performance.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
-Lanes are top are runtime activities that may impact performance.
+Lanes on top are runtime activities that may impact performance.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

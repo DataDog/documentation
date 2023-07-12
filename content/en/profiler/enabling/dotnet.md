@@ -8,7 +8,7 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/profile_visualization'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
       text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/dotnet'

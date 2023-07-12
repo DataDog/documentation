@@ -41,7 +41,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 ```
 
 <div class="alert alert-warning">
-  We highly recommend <a href="/profiler/enabling/java/?tab=datadog#requirements">using the Datadog profiler</a> instead of JFR.
+It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#requirements">use the Datadog profiler</a> instead of Java Flight Recorder (JFR).
 </div>
 
 [1]: /profiler/enabling/java
@@ -66,18 +66,18 @@ Requires `dd-trace-rb` version 0.49.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below.
+To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 ```
 
-This will record up to 1 minute (or 5 MiB) of execution tracing data [every 15 minutes][2].
+Setting these variables will record up to 1 minute (or 5 MiB) of execution tracing data [every 15 minutes][2].
 
-While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. While this should not have a significant impact for most application, we have [contributed patches][3] to the upcoming go1.21 release that will eliminate this overhead.
+While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, the upcoming go1.21 release includes [patches][3] to eliminate this overhead.
 
-Requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or newer.
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or newer.
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
@@ -87,7 +87,7 @@ Requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works bes
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
 
-Requires `dd-trace-dotnet` version 2.30.0+.
+This capability requires `dd-trace-dotnet` version 2.30.0+.
 
 [1]: /profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -105,21 +105,21 @@ Requires `dd-trace-php` version 0.71+.
 
 From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
-The values on the left side is the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
+The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
 {{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
-- **VM operations** shows the time taken waiting for VM operations (garbage collections, compilation, safepoints, heap dumps, ...).
+- **VM operations** shows the time taken waiting for VM operations (for example, garbage collections, compilation, safepoints, and heap dumps).
 - **File I/O** shows the time taken waiting for a disk read/write operation to execute.
 - **Socket I/O** shows the time taken waiting for a network read/write operation to execute.
 - **Monitor enter** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
+- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
+- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 - **CPU** shows the time taken executing CPU tasks.
@@ -132,7 +132,7 @@ The values on the left side is the time spent in that method call during the sel
 {{< programming-lang lang="dotnet" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Lock Wait** shows the time a thread is blocked on a lock.
-- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
+- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the previous categories.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 - **CPU** shows the time taken executing CPU tasks.
@@ -146,29 +146,29 @@ Click the plus icon `+` to expand the stack trace to that method **in reverse or
 
 {{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" video=true >}}
 
-The timeline view surface time-based patterns and work distribution over the period of the span.
+The **Timeline** view surfaces time-based patterns and work distribution over the period of the span.
 
-With the span timeline view, you can:
+With the span **Timeline** view, you can:
 
-- Isolate time-consuming methods
-- Sort out complex interactions between threads
-- Surface runtime activity that impacted the request
+- Isolate time-consuming methods.
+- Sort out complex interactions between threads.
+- Surface runtime activity that impacted the request.
 
-Depending on the runtime and language, the timeline lanes vary:
+Depending on the runtime and language, the lanes vary:
 
 {{< programming-lang-wrapper langs="java,go,dotnet" >}}
 {{< programming-lang lang="java" >}}
-Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each lane is a **goroutine**. We include the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to see each goroutine's details.
+Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}

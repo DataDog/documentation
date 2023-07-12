@@ -8,7 +8,7 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/profile_visualization'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
       text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/go'
@@ -77,7 +77,7 @@ To begin profiling applications:
 
 5. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][9].
 
-**Note**: By default only the CPU and Heap profile are enabled. Use [profiler.WithProfileTypes][10] to enable additional [profile types][11].
+**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][10] to enable additional [profile types][11].
 
 ## Configuration
 
@@ -85,7 +85,7 @@ You can set profiler parameters in code with these functions:
 
 | Function | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithService     | String        | The Datadog [service][12] name, for example `my-web-app`.             |
+|  WithService     | String        | The Datadog [service][12] name, for example, `my-web-app`.             |
 |  WithEnv         | String        | The Datadog [environment][13] name, for example, `production`.         |
 |  WithVersion     | String        | The version of your application.                                                                             |
 |  WithTags        | List of strings        | A list of tags to apply to an uploaded profile. Tags must be of the format `<KEY>:<VALUE>`. |
@@ -94,7 +94,7 @@ Alternatively you can set profiler configuration using environment variables:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                                         | String        | The [environment][12] name, for example: `production`. |
+| `DD_ENV`                                         | String        | The [environment][12] name, for example, `production`. |
 | `DD_SERVICE`                                     | String        | The [service][12] name, for example, `web-backend`. |
 | `DD_VERSION`                                     | String        | The [version][12] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
