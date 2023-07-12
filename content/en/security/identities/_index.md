@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management Identity Risks
+title: Cloud Security Management Identities
 kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/"
@@ -9,15 +9,15 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Management Identity Risks is not available in this site.
+Cloud Security Management Identities is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Cloud Security Management Identity Risks is in beta.</div>
+<div class="alert alert-info">Cloud Security Management Identities is in beta.</div>
 
-Datadog Cloud Security Management (CSM) Identity Risks provides in-depth visibility into your organization's AWS IAM risks. Powered by [out-of-the-box detection rules][1], CSM Identity Risks helps you to detect and resolve identity risks on an ongoing basis.
+Datadog Cloud Security Management (CSM) Identities provides in-depth visibility into your organization's AWS IAM risks. Powered by [out-of-the-box detection rules][1], CSM Identities helps you to detect and resolve identity risks on an ongoing basis.
 
-**Note**: At this time, CSM Identity Risks is available for AWS IAM only.
+**Note**: At this time, CSM Identities is available for AWS IAM only.
 
 ## Setup
 
@@ -33,15 +33,15 @@ The [identity health score][4] represents the percentage of your IAM resources t
 
 ## Review active identity risk detections
 
-View a list of available identity risk rules, as well as your organization's active identity risk detections on the [Identity Risks explorer page][3]. Use the **Group by** options to filter by **Rule**, **Resources**, or **None** (detections).
+View a list of available identity risk rules, as well as your organization's active identity risk detections on the [Identities explorer page][3]. Use the **Group by** options to filter by **Rule**, **Resources**, or **None** (detections).
 
 View additional details by selecting a rule, resource, or detection.
 
-{{< img src="security/identity_risks/identity-risks-explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
+{{< img src="security/identities/identity-risks-explorer.png" alt="CSM Identities explorers page" width="100%">}}
 
 When viewing an individual resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
 
-You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks that have been detected for the resource on the **Timeline** tab.
+You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity detections that have been detected for the resource on the **Timeline** tab.
 
 **SCREENSHOT OF RESOURCE SIDE PANEL**
 
