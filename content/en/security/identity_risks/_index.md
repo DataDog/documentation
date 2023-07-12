@@ -23,6 +23,8 @@ Datadog Cloud Security Management (CSM) Identity Risks provides in-depth visibil
 
 If you've already enabled Cloud Security Posture Management (CSPM) for AWS, no additional setup is required. To enable CSPM for AWS, see [Setting up CSPM][2].
 
+*CloudTrail logs forwarding enabled?
+
 ## Track your identity health score
 
 The [identity health score][4] represents the percentage of your IAM resources that are configured securely.
