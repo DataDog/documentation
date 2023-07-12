@@ -15,7 +15,7 @@ further_reading:
 
 <div class="alert alert-warning"><strong>Note</strong>: These custom metrics are <strong>not</strong> <a href="/metrics">Datadog Metrics</a>. They are numerical tags (also known as measures) that represent things like memory usage or request rates.</div>
 
-This guide will walk you through adding and using custom metrics for your tests.
+This guide walks you through adding and using custom metrics for your tests.
 
 ### Add the custom metric to your test
 
@@ -87,7 +87,7 @@ DD_METRICS="test.memory.usage:1000" datadog-ci junit upload --service my-service
 
 ### Facet creation
 
-Now that the test includes this custom metric, the next step is to create a facet.
+The next step is to create a facet for the custom metric you added to the test.
 
 Create a facet by going to [Test Runs][2] and clicking on "Add" on the facet list:
 
@@ -97,7 +97,7 @@ Make sure that the type of facet is "Measure", which represents a numerical valu
 
 {{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
-Your metric is now ready to be used. See in the following sections what you can do with it.
+Your metric is ready to be used. See in the following sections what you can do with it.
 
 ### Graph the evolution of your metric
 
@@ -109,13 +109,13 @@ Use this to track the evolution of the memory usage in your tests, for example.
 
 ### Export your graph
 
-It is possible to export your graph to a [dashboard][3] or a [notebook][4] and even create a [monitor][5] based on it, by clicking on "Export" on the right hand side:
+It is possible to export your graph to a [dashboard][3] or a [notebook][4] and even create a [monitor][5] based on it. To do that, click on "Export" on the right hand side:
 
 {{< img src="/continuous_integration/export_measure.png" text="Export benchmark mean duration graph" style="width:100%" >}}
 
 ### Add a monitor
 
-Get alerted if the value of your metric goes above of below a certain threshold:
+Get alerted if the value of your metric goes above or below a certain threshold:
 
 {{< img src="/continuous_integration/monitor_measure.png" text="Monitor benchmark mean duration" style="width:100%" >}}
 
