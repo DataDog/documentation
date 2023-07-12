@@ -40,7 +40,7 @@ Datadog と Azure DevOps を統合して、次のことを行います。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog で、[Azure DevOps インテグレーションタイル][1]のインストールボタンをクリックします。
 

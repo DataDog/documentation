@@ -67,7 +67,7 @@ import {
     DdSdkReactNativeConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -89,7 +89,15 @@ config.serviceName = 'com.example.reactnative';
 // Optional: let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
 config.verbosity = SdkVerbosity.WARN;
 
-await DdSdkReactNative.initialize(config);
+//Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
+
+export default function App() {
+    return (
+        <DatadogProvider configuration={config}>
+            <Navigation />
+        </DatadogProvider>
+    );
+}
 
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in the RUM dashboard
 ```
@@ -326,6 +334,19 @@ DdSdkReactNative.setAttributes({
     chat_enabled: true,
     campaign_origin: 'example_ad_network'
 });
+```
+
+## Track background events
+
+<div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
+</div>
+
+You can track events such as crashes and network requests when your application is in the background (for example, when no active view is available).
+
+Add the following snippet during initialization in your Datadog configuration:
+
+```javascript
+configuration.trackBackgroundEvents = true;
 ```
 
 ## Data Storage

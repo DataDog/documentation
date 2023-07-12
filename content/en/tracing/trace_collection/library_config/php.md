@@ -117,15 +117,21 @@ Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Pr
 **Default**: `1`<br>
 Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
 
-`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
-: **INI**: `datadog.profiling.experimental_allocation_enabled`. INI available since `0.84.0`.<br>
-**Default**: `0`<br>
-Enable the experimental allocation size and allocation bytes profile type. Added in version `0.84.0`.
+`DD_PROFILING_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
+**Default**: `1`<br>
+Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off due to a limitation of the ZendEngine.<br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence. 
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
+
+`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
+: **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
+**Default**: `0`<br>
+Enable the experimental timeline profile type. Added in version `0.89.0`.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
@@ -320,7 +326,7 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 : **INI**: `datadog.trace.http_post_data_param_allowed`<br>
 **Default**: ""<br>
 A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
-**Example**: 
+**Example**:
   - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
   - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
   - In this scenario, the collected metadata is:
@@ -476,7 +482,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Headers extraction and injection
 
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context. 
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

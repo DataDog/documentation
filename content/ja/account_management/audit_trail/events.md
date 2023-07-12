@@ -56,6 +56,7 @@ title: 監査証跡イベント
 | [ロールアクセスリクエスト][8] | ユーザーが、ロールに対するアクセスリクエストを作成、応答、または削除し、そのアクセスリクエストの値。 | `@evt.name:"Access Management" @asset.type:role_request` |
 | [ユーザーのロール][6] | ユーザーが組織内のロールに追加または削除された。 | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [パスワード][9] | 組織でユーザーがパスワードを変更した。 | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [制限ポリシー][86] | リソースの制限ポリシーが変更されました。 | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 
 ### API リクエストイベント
 
@@ -192,6 +193,8 @@ title: 監査証跡イベント
 | 名前                 | 監査イベントの説明                                                       | 監査エクスプローラーのクエリ                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
 | [トークンリーク][80］ | Datadog は、失効させるべき Datadog API またはアプリケーションキーのリークを検出しました。| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [ログイン方法のオーバーライド][85] | Datadog は、組織に設定されたデフォルトのログイン方法とは異なる、ユーザーのログイン方法のオーバーライドを検出しました。| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
+| [異常なログイン][84] | Datadog は、異常なログインイベントを検出しました。| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 
 ### 機密データスキャナーイベント
 | 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
@@ -309,3 +312,6 @@ title: 監査証跡イベント
 [81]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apasslist_entry
 [82]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apolicy_entry
 [83]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Awaf_custom_rule
+[84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
+[85]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser
+[86]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Arestriction_policy

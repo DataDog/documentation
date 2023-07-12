@@ -32,7 +32,7 @@ draft: false
 git_integration_title: cybersixgill_actionable_alerts
 integration_id: cybersixgill-actionable-alerts
 integration_title: Cybersixgill Actionable Alerts
-integration_version: 0.0.1
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -83,7 +83,7 @@ Cybersixgill Actionable Alerts チェックでは、IP アドレス、ドメイ�
 ## セットアップ
 
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cybersixgill Actionable Alerts チェックをホストにインストールするには
 1. マシンに[開発者ツール][1]をインストールします。
@@ -91,7 +91,7 @@ Cybersixgill Actionable Alerts チェックをホストにインストールす�
 3. ホストに [Datadog Agent をインストールします][2]。
 4. Agent のインストールが完了したら、以下のコマンドを実行し、インテグレーションをインストールします。
 ```
-datadog-agent integration install -t datadog-Cybersixgill Actionable Alerts==1.0.0
+datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0.1
 ```
 
 ### コンフィギュレーション

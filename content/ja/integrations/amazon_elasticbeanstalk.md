@@ -10,7 +10,7 @@ categories:
 - network
 - provisioning
 dependencies: []
-description: Amazon Elastic Beanstalk のキーメトリクスを追跡
+description: AWS Elastic Beanstalk のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
 draft: false
 further_reading:
@@ -20,14 +20,14 @@ further_reading:
 git_integration_title: amazon_elasticbeanstalk
 has_logo: true
 integration_id: amazon-elastic-beanstalk
-integration_title: Amazon Elastic Beanstalk
+integration_title: AWS Elastic Beanstalk
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_elasticbeanstalk
-public_title: Datadog-Amazon Elastic Beanstalk インテグレーション
-short_description: Amazon Elastic Beanstalk のキーメトリクスを追跡
+public_title: Datadog-AWS Elastic Beanstalk インテグレーション
+short_description: AWS Elastic Beanstalk のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
