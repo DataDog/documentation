@@ -101,15 +101,31 @@ For each language library, a data category is collected if it is supported by au
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
-| Name                | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| Email               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
-| Client IP           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Geographic location | <i class="icon-check-bold"></i> |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
 
 [1]: /tracing/trace_collection/compatibility/python/#datastore-compatibility
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+**Note:** Client IP are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> |                                 |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
+
 {{% /tab %}}
 
 {{% /tabs %}}
