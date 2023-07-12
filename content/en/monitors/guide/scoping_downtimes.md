@@ -20,31 +20,35 @@ Downtimes are scheduled for system shutdowns, off-line maintenance, or upgrades 
 
 In most cases, you don't want to completely mute **all** Monitor notifications due to the risk of missing important alerts that are not related to any scheduled maintenance.
 
-This guide illustrates how proper scoping of Downtimes can be done via the UI. Scoping Downtimes is a two-step process. First, you select which Monitors should the Downtime look. Once that's set, you can use a scoping query to filter more granularly which _exact_ notifications shall be muted for each of the Monitors.
+This guide illustrates how proper scoping of Downtimes can be done through the UI. Scoping Downtimes is a two-step process. 
+1. Select the monitor or monitors you want to apply the downtime. 
+2. Scope the query to filter the _exact_ notifications to mute for each of the Monitors.
 
-## Choose which Monitors to silence
+## Choose which monitors to silence
 
-Define which Monitors you want to target with your Downtime as the first step. Overall, there are three different options: target one specific Monitor, multiple Monitors, or all Monitors.
+Define which monitors you want the downtime to target. There are three different options: target one specific monitor, multiple monitors, or all monitors.
 
-### Target one specific Monitor
+### Target one specific monitor
 
-You can choose to temporarily mute exactly one specific Monitors, e.g. if it's being too noisy at the moment or if that is the only one impacted by an upcoming maintenance.
+You can choose to temporarily mute one specific monitor. For example, if it's being too noisy at the moment or if it is the only one impacted by an upcoming maintenance.
 
-To do so, simply select `By Monitor Name` and search for the Monitor in question.
+Select **By Monitor Name** and search for the Monitor in question.
 
-### Target multiple Monitors based on Tags
+### Target multiple monitors based on monitor tags
 
 <div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations and tags assigned to the data you are querying.</div>
 
-A Downtime can be scheduled for Monitors based on their Monitor tags, and further scoped down by tags grouped in the monitor query. To do so, select `By Monitor Tags` and enter the Monitor tags that you want to target. Note, tags are additive, meaning that an input of `env:dev team:automations` will target Monitors that are tagged with **both**, `env:dev` and `team:automations`.
+Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select `By Monitor Tags` and enter the monitor tags that you want to target. 
 
-### Target all Monitors
+**Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` and `team:automations`.
+
+### Target all monitors
 
 Either via `By Monitor Name` or `By Monitor Tags`, you can select to target all Monitors. To do so, simply select the first item in the dropdown menu labeled `All Monitors`.
 
 ## Granularly scope Downtimes
 
-Use group scope to apply additional filters to your Downtime and have more granular control over which Monitors to mute. The group scope of a Downtime is matched **after** the Monitor specific target, meaning if you target multiple Monitors by using tags above, it first needs to find Monitors that are tagged accordingly before matching the group scope.
+Use group scope to apply additional filters to your downtime and have granular control over which monitors to mute. The group scope of a downtime is matched **after** the monitor specific target. If you target multiple monitors by using monitor tags, it first needs to find monitors that are tagged accordingly before it matches the group scope.
 
 The examples in this guide show how the `Group scope` may be applied to monitors where [multi alert grouping][2] is configured
 
@@ -85,7 +89,7 @@ This mutes any alerts that includes the tag `service:web-store`, for example:
 
 ### Mute monitors by the union of tags
 
-To combine multiple tags into a more complex scope, use `OR` unions and avoid creating multiple Downtimes. For instance, yo would like to mute all notifications that relate to your development and staging environment. Do do so, use `env:(dev OR staging)` as your scope query.
+To combine multiple tag values into a more complex scope, use `OR` unions and avoid creating multiple downtimes. For instance, you would like to mute all notifications that relate to either your development or staging environments. Use `env:(dev OR staging)` as your scope query.
 
 | Monitor Group                                                                    | Muted |
 | -----------                                                                      | ----  |
@@ -99,13 +103,13 @@ The union of different tags (e.g. `env:dev OR service:web-store`) is not support
 
 ### Mute monitors by wildcard scopes
 
-Running large upgrades within your infrastructure is not uncommon. Downtimes can help muting all impacted entities, without much extra scripting. For instance, you could be upgrading all hosts of a given service. These hosts could follow certain naming conventions in your organisation, e.g. being prefixed with their related application. Consequently, you could have hundreds of hosts named something like `host:mydemoapplication-host-1`, `host:mydemoapplication-host-2`, and so forth.
+Running large upgrades within your infrastructure is not uncommon. Downtimes can help mute all impacted entities, without much extra scripting. For instance, you could be upgrading all hosts of a given service. These hosts could follow certain naming conventions in your organization, such as being prefixed with their related application. This could result in hundreds of hosts named something like `host:mydemoapplication-host-1`and `host:mydemoapplication-host-2`.
 
-To avoid muting all hosts separately, simply create a Downtime scoped by `host:mydemoapplication-*`. This will match all hosts that are prefixed accordingly. If you convention does the inverse, meaning it ends host names with their related application, can inverse the scope above as well, leading to: `host:*-mydemoapplication`.
+Create a downtime scoped by `host:mydemoapplication-*`. This will match  and mute all hosts that are prefixed accordingly. You can also apply the inverse where the downtime is scoped by `host:*-mydemoapplication`. This will match and mute all hosts that end with `mydemoapplication`.
 
 ### Exclude groups from being muted
 
-If you are running your application and infrastructure on multiple environments, you likely have (at least) one production environment. All other environments might be build for testing, regression checks, or demo purposes. If you would like to avoid receiving alerts for non-production environments, you could set up a Downtime that is scopes as: `env:* -env:prod`. This scope first targets all alerts that have the `env` tag set and then excludes your production environment as a secondary step.
+If you are running your application and infrastructure on multiple environments, you likely have one production environment and multiple non-production environments (for example, testing, regression checks, or demo). To avoid receiving alerts for non-production environments, you could set up a downtime that is scoped with: `env:* -env:prod`. This scope targets all alerts that have the `env` tag set and then excludes your production environment as a secondary step.
 
 ### Multiple monitors scoped with the same tag
 
