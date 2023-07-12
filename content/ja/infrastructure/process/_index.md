@@ -34,7 +34,7 @@ Datadog のライブプロセスにより、インフラストラクチャー上
 
 {{< img src="infrastructure/process/live_processes_main.png" alt="ライブプロセスの概要" >}}
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Agent 5 の場合は、[こちらのバージョン固有のインストール手順に従ってください][1]。Agent 6 または 7 をご利用の場合は、[以下の手順を参照してください][2]。
 

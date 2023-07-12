@@ -30,7 +30,7 @@ AWS Elemental MediaStore は、メディア向けに最適化された AWS の�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

@@ -129,7 +129,7 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -210,6 +210,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -247,6 +249,8 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -298,6 +302,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -336,6 +342,8 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -436,6 +444,8 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}

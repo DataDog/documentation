@@ -7,7 +7,7 @@ kind: documentation
 title: Kubernetes 上の Datadog Agent を DaemonSet で手動でインストール、構成する
 ---
 
-## APM に Datadog Agent を構成する
+## インストール
 DaemonSet を利用して、すべてのノード (または [nodeSelectors を使用して][1]特定のノード) に Datadog Agent をデプロイすることができます。
 
 Datadog Agent を Kubernetes クラスターにインストールするには:
