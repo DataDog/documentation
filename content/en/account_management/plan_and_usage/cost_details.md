@@ -65,7 +65,7 @@ As a sub-organization, you can view the costs for your organization only. This r
 
 {{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a sub-organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
-1. While logged in to the child organization, navigate to [Plan & Usage][2].
+1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
 1. Ensure the **Overall** tab is selected.
 
@@ -103,7 +103,7 @@ From a parent organization, view finalized historical costs aggregated by produc
 
 From a parent organization, view estimated costs aggregated by product and sub-organization.
 
-Estimated cost data is available for the current month. If historical cost data is not available for the prior month, estimated cost data also displays for the prior month.
+Estimated cost data is available for the current month. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
 
 {{< img src="account_management/plan_and_usage/estimated-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
@@ -121,15 +121,15 @@ Estimated cost data is available for the current month. If historical cost data 
 
 ## How billing aggregations affect cost changes
 
-Your Datadog bill varies throughout the month. The type of aggregation used to bill each product determines whether its cost remains stable or increases as the month progresses. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
+Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
 
 ### Percentile and average usage billing
 
-Products billed by the maximum count of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes.
+Products billed by the maximum count (high-water mark) of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes if there is a significant spike in usage.
 
 ### Sum of usage billing
 
-Products billed by the sum of usage throughout the month include indexed logs and ingested logs. For these types of products, expect their costs to increase steadily as the month progresses.
+Products billed by the sum of usage throughout the month include indexed logs and ingested logs. For these types of products, expect their costs to increase or decrease based on changes to usage volume.
 
 ## Further reading
 

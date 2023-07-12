@@ -118,14 +118,14 @@ java -javaagent:dd-java-agent.jar \
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
-## Enabling custom code vulnerability detection
+## Enabling code-level vulnerability detection
 
-If your service runs a [tracing library version that supports Vulnerability Management for Custom Code Vulnerability Detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
+If your service runs a [tracing library version that supports Vulnerability Management for code-Level vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
-To detect custom code vulnerabilities for your service:
+To detect code-level vulnerabilities for your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on custom code vulnerability detection. For details, see [ASM capabilities support][3].
+2. Update your tracing library to at least the minimum version needed to turn on code-level vulnerability detection. For details, see [ASM capabilities support][3].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -195,9 +195,9 @@ Update your ECS task definition JSON file, by adding this in the environment sec
    {{< /tabs >}}
 
 4. Restart your service.
-5. To see Application Vulnerability Management for custom code vulnerabilities in action, browse your service and the custom code vulnerabilities appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Custom Code value.
+5. To see Application Vulnerability Management for code-level vulnerabilities in action, browse your service and the code-level vulnerabilities appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
 
-{{< img src="/security/application_security/Custom_Code_vulnerability.mp4" alt="Video showing Vulnerabilities tab, Custom Code source, and inspecting the custom code vulnerability" video="true" >}}
+{{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code vulnerability" video="true" >}}
 
 If you need additional assistance, contact [Datadog support][5].
 

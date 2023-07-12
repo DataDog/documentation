@@ -29,7 +29,7 @@ Datadog Agent をまだインストールしていない場合は、以下の手
 
 Datadog EU サイトへのインストールと構成には、`SITE=` パラメーターを使用します。以下の構成変数の表を参照してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 **Agent v6.11.0** 以降、Windows Agent のコアと APM/トレースコンポーネントは、`LOCAL_SYSTEM` アカウントではなくインストール時に作成された `ddagentuser` アカウントで実行します。ライブプロセスコンポーネントは、有効になっている場合、`LOCAL_SYSTEM` アカウントで実行します。Datadog Windows Agent ユーザーの詳細については、[こちら][3]を参照してください。
 

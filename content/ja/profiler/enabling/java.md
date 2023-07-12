@@ -66,7 +66,7 @@ Java、Scala、Groovy、Kotlin、Clojure など、すべての JVM ベースの�
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 アプリケーションのプロファイリングを開始するには
 

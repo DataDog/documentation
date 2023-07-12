@@ -37,7 +37,7 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 2.4.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -77,7 +77,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cilium チェックは [Datadog Agent][3] パッケージに含まれていますが、Prometheus のメトリクスを公開するための追加のセットアップが必要です。
 

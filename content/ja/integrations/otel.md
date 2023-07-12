@@ -75,7 +75,7 @@ OpenTelemetry コレクターは、ベンダーに依存しない Agent プロ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [OpenTelemetry コレクターのドキュメント][3]に従って `opentelemetry-collector-contrib` ディストリビューションをインストールするか、Datadog Exporter を含むその他のディストリビューションを使用してください。
 

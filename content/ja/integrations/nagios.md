@@ -80,7 +80,7 @@ Nagios が監視するインフラストラクチャーから Datadog にイベ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Nagios チェックは [Datadog Agent][1] パッケージに含まれています。Nagios サーバーに追加でインストールする必要はありません。
 
