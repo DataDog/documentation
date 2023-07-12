@@ -9,45 +9,42 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Management Identities is not available in this site.
+CSM Identities is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Cloud Security Management Identities is in beta.</div>
+<div class="alert alert-info">CSM Identities is in beta.</div>
 
-Datadog Cloud Security Management (CSM) Identities provides in-depth visibility into your organization's AWS IAM risks. Powered by [out-of-the-box detection rules][1], CSM Identities helps you to detect and resolve identity risks on an ongoing basis.
+Cloud Security Management Identities (CSM Identities) provides in-depth visibility into your organization's AWS IAM risks. Enabling you to detect and resolve identity risks on an ongoing basis, CSM Identities helps 
+secure your cloud infrastructure from IAM-based attacks.
 
-**Note**: At this time, CSM Identities is available for AWS IAM only.
+**Note**: At this time, CSM Identities is available for AWS only.
 
 ## Setup
 
-If you've already enabled Cloud Security Posture Management (CSPM) for AWS, no additional setup is required. To enable CSPM for AWS, see [Setting up CSPM][2].
-
-*CloudTrail logs forwarding enabled?
+To use CSM Identities, you must [configure Cloud Security Posture Management (CSPM) for AWS][2] and [enable CloudTrail logs forwarding][5]. If you've already done this, no additional setup is required.
 
 ## Track your identity health score
 
-The [identity health score][4] represents the percentage of your IAM resources that are configured securely.
+The [identity health score][4] on the [CSM Overview][1] represents the percentage of your IAM resources that are configured securely. The score automatically updates as you resolve your organization's IAM risks.
 
-*Identity health score on CSM overview page.*
+**SCREENSHOT**
 
-## Review active identity risk detections
+## Review and remediate identity risk detections
 
-View a list of available identity risk rules, as well as your organization's active identity risk detections on the [Identities explorer page][3]. Use the **Group by** options to filter by **Rule**, **Resources**, or **None** (detections).
-
-View additional details by selecting a rule, resource, or detection.
+View a list of your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
 
 {{< img src="security/identities/identity-risks-explorer.png" alt="CSM Identities explorers page" width="100%">}}
 
 When viewing an individual resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
 
-You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity detections that have been detected for the resource on the **Timeline** tab.
+You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks detected for the resource on the **Timeline** tab.
 
 **SCREENSHOT OF RESOURCE SIDE PANEL**
 
-On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the detected identity risk. You can also review the configuration of the impacted resource on the **Resource** tab, and a chronological history of the detection on the **Timeline** tab.
+On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also review the configuration of the impacted resource on the **Resource** tab, and a chronological history of the detection on the **Timeline** tab.
 
-**PLACEHOLDER FOR INSIGHTS TAB**.
+**PLACEHOLDER FOR INSIGHTS TAB INFO**.
 
 **SCREENSHOT OF DETECTION SIDE PANEL**
 
@@ -55,7 +52,8 @@ On the side panel for an individual detection, click **Fix in AWS** to open the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules
+[1]: https://app.datadoghq.com/security/csm
 [2]: /security/cspm/setup
 [3]: https://app.datadoghq.com//security/identities
 [4]: /glossary/#identity-health-score
+[5]: /integrations/amazon_cloudtrail#send-logs-to-datadog
