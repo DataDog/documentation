@@ -225,6 +225,11 @@ The `from-key` value is specific to the integration type, and should exclude the
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
+**Default**: `true`
+
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -321,3 +326,4 @@ The following configuration variables are for features that are available for us
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
+[15]: /tracing/configure_data_security#telemetry-collection
