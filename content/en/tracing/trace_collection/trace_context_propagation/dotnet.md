@@ -98,7 +98,7 @@ public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAtt
 
 When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
 
-Also if you need to propagate context for custom purposes (for instance for an integration we do not handle yet or for WCF as we don't have support for the client side), you can use the SpanContextInjection API. Here is an example for WCF where `this` is you WCF client:
+If you need to propagate trace context manually (for libraries that are not instrumented automatically, like the WCF client), you can use the `SpanContextInjection` API. Here is an example for WCF where `this` is the WCF client:
 
 ```csharp
 
