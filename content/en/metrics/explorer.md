@@ -58,6 +58,6 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 
 [1]: https://app.datadoghq.com/metric/explorer
 [2]: /notebooks/
-[3]: /dashboards/#screenboards
+[3]: /dashboards/#screenboardss
 [4]: /dashboards/#timeboards
 [5]: /metrics/introduction/#space-aggregation
