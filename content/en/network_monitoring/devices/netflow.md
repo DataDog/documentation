@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your Netflow-enabled devices.
+Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
 ## Installation
 
