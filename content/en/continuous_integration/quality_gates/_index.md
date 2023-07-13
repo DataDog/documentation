@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" >}}
+{{< callout url="#" header="false" >}}
 Quality Gates Rules are in beta.
 {{< /callout >}}
 
-Quality Gates use GitHub Checks to block or unblock a CI/CD pipeline.
+Quality Gates Rules use GitHub Checks to block or unblock a CI/CD pipeline.
 
 ## Create a rule
 
