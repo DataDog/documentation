@@ -7,20 +7,20 @@ categories:
 - aws
 - log collection
 dependencies: []
-description: Amazon KMS のキー有効期限を追跡。
+description: AWS KMS キーの有効期限を追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_kms/
 draft: false
 git_integration_title: amazon_kms
 has_logo: true
 integration_id: amazon-kms
-integration_title: Amazon Key Management Service
+integration_title: AWS Key Management Service (KMS)
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_kms
-public_title: Datadog-Amazon Key Management Service インテグレーション
-short_description: Amazon KMS のキー有効期限を追跡。
+public_title: Datadog-AWS Key Management Service (KMS) インテグレーション
+short_description: AWS KMS キーの有効期限を追跡します。
 version: '1.0'
 ---
 
@@ -40,7 +40,7 @@ AWS Key Management Service (KMS) は、データの暗号化に使用される�
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `KMS` が有効になっていることを確認します。
 
-2. [Datadog - AWS KMS インテグレーション][3]をインストールします。
+2. [Datadog - AWS Key Management Service (KMS) インテグレーション][3]をインストールします。
 
 ### ログの収集
 

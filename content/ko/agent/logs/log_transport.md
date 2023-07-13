@@ -10,7 +10,7 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#multi-line-aggregation
   tag: 설명서
   text: 멀티라인 로그 집계
-- link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
   tag: 설명서
   text: 와일드카드를 사용해 디렉터리 테일링
 - link: agent/logs/advanced_log_collection/#global-processing-rules

@@ -90,7 +90,7 @@ _Available for Agent versions >6.0_
 3. [Restart the Agent][7]
 
 [1]: http://sinatrarb.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: http://sinatrarb.com/intro.html#Logging
 [4]: http://rack.github.io
 [5]: https://www.rubydoc.info/github/rack/rack/Rack/CommonLogger
