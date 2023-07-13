@@ -293,20 +293,20 @@ The following environment variables configure library injection. You can pass th
 : Turn on or off library injection and specify a location to load configuration from. Optionally, separate multiple values with semicolons to indicate multiple possible locations. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Use exported or default values.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `DD_CONFIG_SOURCES` is not specified, this configuration is used.
+  - `OFF` - No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
 
-`DD_LIBRARY_INJECT`
+`DD_INSTRUMENT_SERVICE_WITH_APM`
 : Set to `FALSE` to turn off library injection altogether.<br>
 **Default**: `TRUE`
 
-`DD_INJECT_DEBUG`
+`DD_APM_INSTRUMENTATION_DEBUG`
 : Set to `TRUE` or `1` to log debug information.<br>
 **Default**: `FALSE`
 
-`DD_OUTPUT_PATHS`
-: A comma-separated list of places to write the debug logs.<br>
+`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`
+: A comma-separated list of places to write logs. Valid values for elements in the list are file urls (`file://PATH`) or `stderr` <br>
 **Default**: `stderr`
 
 <a id="supplying-configuration-source-host"></a>
@@ -399,7 +399,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -408,8 +408,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Launch your services
@@ -502,8 +500,8 @@ output_paths:
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.
+  - `OFF` - No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `library_inject`
@@ -611,7 +609,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -620,8 +618,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Specifying Unified Service Tags on containers
@@ -723,8 +719,8 @@ config_sources: BASIC
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.
+  - `OFF` - No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `library_inject`
@@ -832,7 +828,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -841,8 +837,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Configure the Agent
