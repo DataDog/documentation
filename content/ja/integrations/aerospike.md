@@ -33,7 +33,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.18.0
+integration_version: 1.18.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -178,6 +178,6 @@ Aerospike には、イベントは含まれません。
 
 
 [1]: https://download.aerospike.com/download/client/python/notes.html#5.0.0
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
