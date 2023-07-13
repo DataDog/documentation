@@ -66,7 +66,7 @@ A test run is marked as a regression when its duration is both five times the me
 
 A benchmark test run is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch. A benchmark test has @test.type:benchmark.
 
-The mean and the max of the default branch is calculated over the last week test runs.
+The mean and the max of the default branch is calculated over the last week of test runs.
 
 Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
