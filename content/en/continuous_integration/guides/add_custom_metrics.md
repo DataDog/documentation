@@ -19,9 +19,9 @@ This guide walks you through adding and using custom metrics for your tests.
 
 ### Add the custom metric to your test
 
-Before you can follow this guide, make sure that [Test Visibility][1] is already setup for your language.
+Before you can follow this guide, make sure that [Test Visibility][1] is already set up for your language.
 
-First step is to add the custom metric to your test. The native instrumentation allows you to use the programmatic API:
+First, add the custom metric to your test. The native instrumentation allows you to use the programmatic API:
 
 {{< tabs >}}
 {{% tab "Javascript/Typescript" %}}
@@ -87,13 +87,13 @@ DD_METRICS="test.memory.usage:1000" datadog-ci junit upload --service my-service
 
 ### Facet creation
 
-The next step is to create a facet for the custom metric you added to the test.
+Next, create a facet for the custom metric you added to the test.
 
-Create a facet by going to [Test Runs][2] and clicking on "Add" on the facet list:
+Create a facet by going to [Test Runs][2] and clicking on **Add** on the facet list:
 
 {{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 
-Make sure that the type of facet is "Measure", which represents a numerical value:
+Make sure that the type of facet is **Measure**, which represents a numerical value:
 
 {{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
@@ -101,15 +101,15 @@ Your metric is ready to be used. See in the following sections what you can do w
 
 ### Graph the evolution of your metric
 
-Plot the evolution of your metric across time by selecting the "Timeseries" visualization:
+Plot the evolution of your metric across time by selecting the **Timeseries** visualization:
 
 {{< img src="/continuous_integration/plot_measure.png" text="Plot benchmark mean duration" style="width:100%" >}}
 
-Use this to track the evolution of the memory usage in your tests, for example.
+Use this visualization to track the evolution of the memory usage in your tests, for example.
 
 ### Export your graph
 
-It is possible to export your graph to a [dashboard][3] or a [notebook][4] and even create a [monitor][5] based on it. To do that, click on "Export" on the right hand side:
+It is possible to export your graph to a [dashboard][3] or a [notebook][4] and even create a [monitor][5] based on it. Click **Export** on the right side:
 
 {{< img src="/continuous_integration/export_measure.png" text="Export benchmark mean duration graph" style="width:100%" >}}
 
@@ -119,7 +119,7 @@ Get alerted if the value of your metric goes above or below a certain threshold:
 
 {{< img src="/continuous_integration/monitor_measure.png" text="Monitor benchmark mean duration" style="width:100%" >}}
 
-Use this to inform you about the memory usage reaching a certain threshold, for example.
+Use this type of alert to inform you about the memory usage reaching a certain threshold, for example.
 
 ## Further reading
 
