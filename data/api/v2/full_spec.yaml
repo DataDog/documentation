@@ -2777,9 +2777,16 @@ components:
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
+        agentConstraint:
+          description: The version of the agent.
+          type: string
         category:
           description: The category of the Agent rule.
           example: Process Activity
+          type: string
+        creationAuthorUuId:
+          description: The ID of the user who created the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
         creationDate:
           description: When the Agent rule was created, timestamp in milliseconds.
@@ -2808,6 +2815,15 @@ components:
           description: The name of the Agent rule.
           example: my_agent_rule
           type: string
+        updateAuthorUuId:
+          description: The ID of the user who updated the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
+          type: string
+        updateDate:
+          description: Timestamp in milliseconds when the Agent rule was last updated.
+          example: 1624366480320
+          format: int64
+          type: integer
         updatedAt:
           description: When the Agent rule was last updated, timestamp in milliseconds.
           example: 1624366480320
