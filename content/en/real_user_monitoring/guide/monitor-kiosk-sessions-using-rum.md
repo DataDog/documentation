@@ -14,9 +14,9 @@ Kiosk applications, such as fast food order machines and airline check-in termin
 
 ## Use `stopSession()` when users end their interaction
 
-Use the SDK `stopSession()` method to stop the session when the user finishes their interaction with the application, like when returning to the home screen or logging out, for example. A new session is created as soon as a user interacts with the application again or when a new View is started (mobile only).
+Use the SDK `stopSession()` method to stop the session when the user finishes their interaction with the application, like when returning to the home screen or logging out. A new session is created as soon as a user interacts with the application again or when a new View is started (mobile only).
 
-If a user was identified within the session, you might want to clear user information after calling `stopSession()` to start afresh. See documentation based on your application's framework: [Browser][1], [iOS][2], [Android][3], [Flutter][4], [React Native][5].
+If a user is identified within the session, you may want to clear user information after calling `stopSession()` to start afresh. See documentation based on your application's framework: [Browser][1], [iOS][2], [Android][3], [Flutter][4], [React Native][5].
 
 ### Browser
 
