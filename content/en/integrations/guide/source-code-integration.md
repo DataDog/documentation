@@ -183,7 +183,7 @@ You can directly access a trace in its source repository on GitHub in the [Conti
 
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
 
-[1]: /profiler/search_profiles/
+[1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/search
 {{% /tab %}}
 {{< /tabs >}}

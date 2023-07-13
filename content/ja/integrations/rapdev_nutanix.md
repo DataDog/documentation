@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-nutanix
 app_uuid: 53711ca7-b5f8-4472-b921-e70a3103ede4
 assets:

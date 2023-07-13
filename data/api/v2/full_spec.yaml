@@ -1845,8 +1845,8 @@ components:
       description: Details of the top level pipeline, build, or workflow of your CI.
       properties:
         end:
-          description: Time when the pipeline run finished. The time format must be
-            RFC3339.
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
           example: '2023-05-31T15:30:00Z'
           format: date-time
           type: string
@@ -3137,6 +3137,12 @@ components:
     ConfluentAccountResourceAttributes:
       description: Attributes object for updating a Confluent resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
         id:
           description: The ID associated with a Confluent resource.
           example: resource-id-123
@@ -3277,6 +3283,12 @@ components:
     ConfluentResourceRequestAttributes:
       description: Attributes object for updating a Confluent resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -3319,6 +3331,16 @@ components:
     ConfluentResourceResponseAttributes:
       description: Model representation of a Confluent Cloud resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
+        id:
+          description: The ID associated with the Confluent resource.
+          example: resource_id_abc123
+          type: string
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -3973,7 +3995,13 @@ components:
     DowntimeResponseAttributes:
       description: Downtime details.
       properties:
-        created_at:
+        canceled:
+          description: Time that the downtime was canceled.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          nullable: true
+          type: string
+        created:
           description: Creation time of the downtime.
           example: 2020-01-02T03:04:05.282979+0000
           format: date-time
@@ -3982,7 +4010,7 @@ components:
           $ref: '#/components/schemas/DowntimeDisplayTimezone'
         message:
           $ref: '#/components/schemas/DowntimeMessage'
-        modified_at:
+        modified:
           description: Time that the downtime was last modified.
           example: 2020-01-02T03:04:05.282979+0000
           format: date-time
@@ -4057,7 +4085,7 @@ components:
           description: 'ISO-8601 Datetime to end the downtime. Must include a UTC
             offset of zero. If not provided, the
 
-            downtime starts the moment it is created.'
+            downtime continues forever.'
           example: 2020-01-02 03:04:00+00:00
           format: date-time
           nullable: true
@@ -11687,19 +11715,23 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role` and
-            `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`
+            (beta), `user` (beta), and `org`.
 
-            The org ID can be obtained through the api/v2/current_user API.'
+            The org ID can be obtained through the api/v2/current_user API.
+
+            The user principal type accepts service account IDs.'
           example:
           - role:00000000-0000-1111-0000-000000000000
           items:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role` and `org`.
+              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
 
-              The org ID can be obtained through the api/v2/current_user API.'
+              The org ID can be obtained through the api/v2/current_user API.
+
+              The user principal type accepts service account IDs.'
             type: string
           type: array
         relation:
@@ -18028,6 +18060,10 @@ paths:
         we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
+        Pipeline events can be submitted with a timestamp that is up to 18 hours in
+        the past.
+
+
         This API endpoint is in private beta.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
@@ -22525,15 +22561,21 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'For customers with multiple indexes, the indexes to search
+      - description: 'For customers with multiple indexes, the indexes to search.
 
           Defaults to ''*'' which means all indexes'
-        example: main
+        example:
+        - main
+        - web
+        explode: false
         in: query
-        name: filter[index]
+        name: filter[indexes]
         required: false
         schema:
-          type: string
+          items:
+            description: The name of a log index.
+            type: string
+          type: array
       - description: Minimum timestamp for requested logs.
         example: '2019-01-02T09:42:36.320Z'
         in: query
@@ -27231,7 +27273,7 @@ paths:
         This endpoint is rate limited to `300` requests per hour.
 
 
-        [1]: /logs/guide/collect-multiple-logs-with-pagination'
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
       operationId: ListSpansGet
       parameters:
       - description: Search query following spans syntax.
@@ -27319,7 +27361,7 @@ paths:
         This endpoint is rate limited to `300` requests per hour.
 
 
-        [1]: /logs/guide/collect-multiple-logs-with-pagination'
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
       operationId: ListSpans
       requestBody:
         content:
@@ -29551,10 +29593,11 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles). The
-    restriction policy
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams
+    (beta), or users (beta)).
 
-    determines who is authorized to perform what actions on the resource.'
+    The restriction policy determines who is authorized to perform what actions on
+    the resource.'
   name: Restriction Policies
 - description: 'The Roles API is used to create and manage Datadog roles, what
 

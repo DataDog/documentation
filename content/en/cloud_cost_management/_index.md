@@ -179,6 +179,15 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+
+## Billing conductor
+Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
+
+To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][1]. Ensure the CUR meets [Datadog's requirements][2].
+Once the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
+
+[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
+[2]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -186,7 +195,10 @@ The following out-of-the-box tags are also available for filtering and grouping 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
 {{% site-region region="us3" %}}
-**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+**Notes**: 
+- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+- Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
+- Pay-as-you-go accounts are not supported.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -234,9 +246,9 @@ If your exports are in different storage containers, repeat steps one to seven f
 2. Select the Access Control (IAM) tab.
 3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
-5. Assign these permissions to the subscription.
+5. Assign these permissions to the app registration.
 
-This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
+This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 ### Cost types
 

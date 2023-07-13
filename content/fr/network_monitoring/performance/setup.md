@@ -49,7 +49,7 @@ La collecte de données étant basée sur eBPF, votre plateforme doit utiliser l
 
 #### Windows
 
-La collecte de données se fait via un pilote de périphérique. Elle est disponible à partir de la version 7.27.1 de l'Agent Datadog pour Windows 2012 R2 et ses versions ultérieures (ainsi que pour les systèmes d'exploitation équivalents tels que Windows 10).
+La collecte de données se fait via un pilote de kernel réseau. Elle est disponible à partir de la version 7.27.1 de l'Agent Datadog pour Windows 2012 R2 et ses versions ultérieures (ainsi que pour les systèmes d'exploitation équivalents, tels que Windows 10).
 
 #### macOS
 
@@ -183,7 +183,7 @@ Pour activer NPM pour des hosts Windows, procédez comme suit 
 
 1. Installez l'[Agent Datadog][1 (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
 
-   Lors de l'installation, transmettez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation via l'interface graphique.
+   [OBSOLÈTE] _(version 7.44 et versions antérieures)_Lors de l'installation, passez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation via l'interface graphique.
 
 1. Modifiez `C:\ProgramData\Datadog\system-probe.yaml` en définissant le flag enabled sur `true` :
 

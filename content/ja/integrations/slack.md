@@ -36,7 +36,7 @@ Slack を Datadog に接続し、次の方法でチームのコラボレーシ�
 
 {{% tab "Slack 用アプリケーション" %}}
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Slack のワークスペースに Datadog for Slack をインストールします。
 
@@ -168,7 +168,7 @@ Slack アクションを使用して、インシデントチャンネルで送�
 
 {{% tab "Slack Webhook (レガシー)" %}}
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Slack 用インテグレーションは、Datadog サイトの[インテグレーションタイル][1]を使用してインストールします。
 
