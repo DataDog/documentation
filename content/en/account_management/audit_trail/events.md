@@ -90,7 +90,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Denylist][22] | A user blocked, unblocked, or extended the blocking duration of an IP address or a user ID. | `@evt.name:"Application Security" @asset.type:ip_user_denylist` |
 | [Passlist][81] | A user added, modified, or deleted an entry to the passlist. | `@evt.name:"Application Security" @asset.type:passlist_entry` |
 | [In-App WAF Policy][82] | A user created, modified, or deleted an In-App WAF policy. | `@evt.name:"Application Security" @asset.type:policy_entry` |
-| [In-App WAF Custom Rule][83] | A user created, modified, or deleted an In-App WAF custom rule. | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
+| [In-App WAF Custom Rule][83] | A user validated, created, modified, or deleted an In-App WAF custom rule. | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
 
 ### Audit Trail events
 
@@ -117,7 +117,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [CWS agent rule][31] | A user accessed (fetched) a CWS agent rule in the Cloud Security Platform.| `@evt.name:"Cloud Security Platform" @asset.type:cws_agent_rule @action:accessed` |
 | [Notification profile][32] | A user created, updated, or deleted a notification profile in the Cloud Security Platform. | `@evt.name:"Cloud Security Platform" @asset.type:notification_profile` |
-| [Security rule][33] | A user updated, deleted, or created a security rule and the previous and new values for the rule. | `@evt.name:"Cloud Security Platform" @asset.type:security_rule` |
+| [Security rule][33] | A user validated, updated, deleted, or created a security rule and the previous and new values for the rule. | `@evt.name:"Cloud Security Platform" @asset.type:security_rule` |
 | [Security signal][34] | A user modified the state of a signal or assigned the signal to a user, and the previous and new values for the signal. | `@evt.name:"Cloud Security Platform" @asset.type:security_signal @action:modified` |
 
 ### Dashboard events
