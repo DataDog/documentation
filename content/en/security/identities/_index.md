@@ -42,11 +42,9 @@ You can also review the configuration of the resource on the **Resource** tab, a
 
 **SCREENSHOT OF RELATIONSHIPS SIDE PANEL**
 
-On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also review the configuration of the impacted resource on the **Resource** tab, and a chronological history of the detection on the **Timeline** tab.
+On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to view a list of permissions provisioned on the resource and whether they were used in the last 15 days.
 
-**PLACEHOLDER FOR INSIGHTS TAB INFO**.
-
-**SCREENSHOT OF DETECTION SIDE PANEL**
+{{< img src="security/identities/insights-tab-side-panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
 
 ## Further Reading
 
