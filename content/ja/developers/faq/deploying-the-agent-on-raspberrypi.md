@@ -61,4 +61,4 @@ Raspberry PI デバイスから取り込まれるメトリクスの例:
 
 **注**: Datadog は Raspbian を正式にサポートしていません。
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source
