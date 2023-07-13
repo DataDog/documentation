@@ -91,7 +91,7 @@ To view your organization's muted findings:
 
 To audit the history for a resource:
 
-1. Open the [finding side panel](#explore-your-cloud-misconfigurations-with-findings).
+1. Open the [finding side panel](#explore-your-cloud-misconfigurations).
 2. Select the resource with the muted finding.
 3. If the finding status has changed, click **See Latest State**.
 4. Click **View Finding**.
