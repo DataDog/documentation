@@ -64,7 +64,6 @@
         "minimist": "^1.2.5",
         "mixitup": "^3.3.1",
         "mousetrap": "^1.6.5",
-        "pa11y": "^5.3.0",
         "picturefill": "3.0.2",
         "popper.js": "1.16.1",
         "safe-json-stringify": "^1.2.0",
