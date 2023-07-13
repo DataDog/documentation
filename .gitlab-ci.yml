@@ -423,15 +423,15 @@ test_missing_tms_live:
   tags: ["runner:docker"]
   stage: post-deploy
   cache: []
+  dependencies:
+    - build_preview
   variables:
     GIT_STRATEGY: none
   script:
     - unset NODE_OPTIONS
-    - short_hash="$(git rev-parse HEAD)"
-    - cp "${short_hash}.tar.gz" /app # copy the artifact to the working diretory of this docker container
+    - cp ${ARTIFACT_RESOURCE} /app # copy the artifact to the working diretory of this docker container
     - cd /app # go into working directory
     - ls
-    - tar -xzf "${short_hash}.tar.gz" # extract the dist folder so pa11y can build the full URL map using that directory
     - export CI_PROJECT_DIR="." # override project dir so pa11y script can locate the generated csv and push to s3
     - node ./index.js --env live --site docs --dd_api_key "$(get_secret 'dd_synthetic_api_key_prod')" # run pa11y
   interruptible: true
