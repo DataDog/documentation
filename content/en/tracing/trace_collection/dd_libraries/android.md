@@ -701,7 +701,7 @@ This means that even if users open your application while being offline, no data
 The data on disk will automatically be discarded if it gets too old to ensure the SDK doesn't use too much disk space.
 
 ## Initialization
-The following methods in AndroidTracer.Builder can be used when initializing the Tracer:
+The following methods in `AndroidTracer.Builder` can be used when initializing the `Tracer`:
 
 
 | Method                           | Description                                                                                                                                                                                                                         |
