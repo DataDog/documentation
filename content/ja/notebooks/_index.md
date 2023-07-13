@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/graphing/notebooks/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
   tag: ブログ
@@ -183,7 +186,7 @@ title: ノートブック
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
 1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. ドロップダウンを使用して、ノートブックを編集できる 1 つまたは複数のロールを選択します。
+1. ドロップダウンを使用して、ノートブックを編集できる 1 つまたは複数のロール、チーム (ベータ版)、ユーザー (ベータ版) を選択します。
 1. **Add** をクリックします。
 1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
 1. **Save** をクリックします。

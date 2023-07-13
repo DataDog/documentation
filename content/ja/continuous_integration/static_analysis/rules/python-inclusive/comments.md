@@ -43,4 +43,8 @@ def new_function_from_joe():
 # 不正使用を防ぐ許可リスト名
 def filter_names(names):
     pass
+
+# コメントには問題の履歴がありません
+def foo(bar):
+    baz()
 ```

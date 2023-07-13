@@ -227,7 +227,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [14]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
 [16]: /ja/getting_started/agent/
-[17]: https://app.datadoghq.com/account/settings#agent
+[17]: https://app.datadoghq.com/account/settings/agent/latest
 [18]: https://app.datadoghq.com/infrastructure
 [19]: /ja/integrations/system/
 [20]: /ja/integrations/ntp/
