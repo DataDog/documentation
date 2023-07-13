@@ -72,10 +72,12 @@ By default, the Session Replay recorder masks all recorded content with `*` to e
 
    {{< /code-block >}}
 
-## Understanding how data is masked in Mobile Session Replay
+## Understanding how data is masked
+
+
 ### Text masking
 
-Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, our masking rules apply different strategies to different types of text fields.
+Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.
 
 | Text masking strategy | Description | Example |
 |-----------------------|-------------|---------|
