@@ -26,13 +26,13 @@ To use CSM Identities, you must [configure Cloud Security Posture Management (CS
 
 ## Track your identity health score
 
-The [identity health score][4] on the [CSM Overview][1] represents the percentage of your IAM resources that are configured securely. The score automatically updates as you resolve your organization's IAM risks.
+The [identity health score][4] on the [CSM Overview][1] represents the percentage of your IAM resources that are configured securely. The score automatically updates as you resolve your organization's identity risk detections.
 
 **SCREENSHOT**
 
 ## Review and remediate identity risk detections
 
-View a list of your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
+Review your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
 
 {{< img src="security/identities/identity-risks-explorer.png" alt="CSM Identities explorers page" width="100%">}}
 
@@ -40,7 +40,7 @@ When viewing an individual resource, use the **Relationships** tab to view a gra
 
 You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks detected for the resource on the **Timeline** tab.
 
-**SCREENSHOT OF RESOURCE SIDE PANEL**
+**SCREENSHOT OF RELATIONSHIPS SIDE PANEL**
 
 On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also review the configuration of the impacted resource on the **Resource** tab, and a chronological history of the detection on the **Timeline** tab.
 
