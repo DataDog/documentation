@@ -20,11 +20,9 @@ Downtimes are scheduled for system shutdowns, off-line maintenance, or upgrades 
 
 In most cases, you don't want to completely mute **all** monitor notifications due to the risk of missing important alerts that are not related to any scheduled maintenance.
 
-This guide illustrates how proper scoping of Downtimes can be done through the UI. 
-{{< whatsnext desc="Scoping Downtimes is a two-step process:" >}}
-    {{< nextlink href="monitors/guide/scoping_downtimes/#choose-which-monitors-to-silence" >}}1. Select the monitor or monitors you want to apply the downtime.{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/scoping_downtimes/#granularly-scope-downtimes" >}}2. Scope the query to filter the _exact_ notifications to mute for each of the monitors. {{< /nextlink >}}
-{{< /whatsnext >}}
+This guide illustrates how proper scoping of Downtimes can be done through the UI.Scoping Downtimes is a two-step process:
+1. [Select the monitor or monitors you want to apply the downtime.](#choose-which-monitors-to-silence)
+2. [Scope the query to filter the _exact_ notifications to mute for each of the monitors.](#granularly-scope-downtimes)
 
 ## Choose which monitors to silence
 
