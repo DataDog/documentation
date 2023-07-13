@@ -32,7 +32,7 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. 
 
-Or, if you are unable to login to your website when recording in the iframe recorder, this could mean that your application has a request that is blocked when viewing the console.
+Or, if you are unable to login to your website when recording in the iframe recorder, this could mean that your application has a request that is blocked.
 
 Try opening your website in a pop-up window by clicking **Open in Popup** to record your user journey.  
 
