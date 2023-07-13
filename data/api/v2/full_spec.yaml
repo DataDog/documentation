@@ -4464,6 +4464,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/EventAttributes'
+        message:
+          description: The message of the event.
+          type: string
         tags:
           description: An array of tags associated with the event.
           example:
@@ -4713,6 +4716,10 @@ components:
         request_id:
           description: The identifier of the request.
           example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          description: The request status.
+          example: done
           type: string
         warnings:
           description: 'A list of warnings (non-fatal errors) encountered. Partial
