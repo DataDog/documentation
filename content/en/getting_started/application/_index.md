@@ -161,7 +161,7 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [10]: /service_management/events/
 [11]: /service_management/events/explorer/#event-analytics
 [12]: /dashboards/
-[13]: /dashboards/#screenboardss
+[13]: /dashboards/#screenboards
 [14]: /dashboards/functions/arithmetic/
 [15]: /dashboards/functions/
 [16]: /monitors/
