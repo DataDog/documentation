@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_mobile_vitals.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: Github

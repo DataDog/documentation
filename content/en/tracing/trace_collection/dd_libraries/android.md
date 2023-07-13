@@ -2,8 +2,6 @@
 aliases:
 - /tracing/setup_overview/setup/android
 - /tracing/setup/android
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Collect traces from your Android applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
