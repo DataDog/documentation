@@ -429,7 +429,7 @@ test_missing_tms_live:
     GIT_STRATEGY: none
   script:
     - unset NODE_OPTIONS
-    - cp ${ARTIFACT_RESOURCE} /app # copy the artifact to the working diretory of this docker container
+    - cp -r ${ARTIFACT_RESOURCE} /app # copy the artifact to the working diretory of this docker container
     - cd /app # go into working directory
     - ls
     - export CI_PROJECT_DIR="." # override project dir so pa11y script can locate the generated csv and push to s3
