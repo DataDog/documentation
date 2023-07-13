@@ -19,13 +19,16 @@ The CI Visibility - RUM integration is only available for these versions of `cyp
 
 ### Browser tests and RUM
 
-If you use Cypress for your browser tests and the application being tested is instrumented using [RUM][1], your test results and their generated RUM browser sessions and session replays are automatically linked. A new **Browser Sessions** tab appears in the test detail side panel:
+**Important**: Before you can link your Cypress tests and RUM, make sure that [Test Visibility][1] is already setup for Cypress.
+
+If you use Cypress to run your browser tests and the application being tested is instrumented using [RUM][2], your test results and their generated RUM browser sessions and session replays are automatically linked. A new **Browser Sessions** tab appears in the CI Visibility's test detail side panel:
 
 {{< img src="ci/ci-browser-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 
-The RUM session has all the data that [RUM normally collects][2], so you can debug potential issues in your browser tests, such as unexpected errors:
+The RUM session has all the data that [RUM normally collects][3], so you can debug potential issues in your browser tests, such as unexpected errors:
 
 {{< img src="ci/ci-browser-session-tab-errors.png" alt="Browser Session Tab Errors in Test Detail" style="width:100%;">}}
 
-[1]: /real_user_monitoring/browser/
-[2]: /real_user_monitoring/browser/data_collected/
+[1]: /continuous_integration/tests/javascript/?tab=cypress#instrument-your-tests
+[2]: /real_user_monitoring/browser/
+[3]: /real_user_monitoring/browser/data_collected/
