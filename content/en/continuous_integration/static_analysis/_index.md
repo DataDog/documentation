@@ -89,18 +89,18 @@ Prerequisites:
 
 Configure the following environment variables:
 
-| Name         | Description                                                                                                                | Required |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.              | Yes     |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.      | Yes     |
+| Name         | Description                                                                                                                | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.            | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.    | Yes      |                 |
+| `DD_SITE`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
 Provide the following inputs:
 
-| Name         | Description                                                                                                                | Required | Default         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service` | The name of the service to tag the results with.                                                                                | Yes     |                 |
-| `env`     | The environment to tag the results with. `ci` is a helpful value for this input.                                                                           | No    | `none`          |
-| `site`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.                                                                                 | No    | {{< region-param key="dd_site" code="true" >}}  |
+| Name       | Description                                                                                                                | Required | Default         |
+|------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`  | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`      | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
 
 Add the following to your CI pipeline:
 
@@ -114,7 +114,7 @@ unzip /tmp/ddog-static-analyzer -d /tmp
 /tmp/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV" --site "$DD_SITE"
+datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
 ```
 
 [101]: /account_management/api-app-keys/#api-keys
@@ -131,17 +131,18 @@ You can send results from third-party static analysis tools to Datadog, provided
 To upload a SARIF report:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Install the `datadog-ci` utility:
+2. Optional: Set a [`DD_SITE` variable][103] (default: `datadoghq.com`).
+3. Install the `datadog-ci` utility:
    
    ```bash
    npm install -g @datadog/datadog-ci
    ```
 
-3. Run the third-party static analysis tool on your code and output the results in the SARIF format.
-4. Upload the results to Datadog:
+4. Run the third-party static analysis tool on your code and output the results in the SARIF format.
+5. Upload the results to Datadog:
 
    ```bash
-   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env> --site <dd-site>
+   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
    ```
 
 ## Run Static Analysis in a CI pipeline
