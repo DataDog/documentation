@@ -126,6 +126,10 @@ datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
 
 ### Upload third-party static analysis results to Datadog
 
+<div class="alert alert-info">
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+</div>
+
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. 
 
 To upload a SARIF report:
