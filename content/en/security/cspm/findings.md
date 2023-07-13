@@ -55,16 +55,16 @@ To export the list of findings as a CSV, click **Download as CSV** on the Securi
 
 ## Mute findings
 
-Sometimes, a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, mute the finding for the impacted resource so you can focus on high-severity and critical findings.
+Sometimes a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, you can mute the finding for the impacted resources so you can focus on high-severity and critical findings.
 
 For example, the ['Block Public Access' feature is enabled for S3 bucket][4] rule evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the finding for the S3 bucket.
 
-You can mute pass/fail findings at any time. Muting a finding removes it from the calculation of your posture score.
+You can mute up to 50 findings at a single time. Muting a finding removes it from the calculation of your posture score.
 
-{{< img src="security/cspm/findings/muted-findings2.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
+{{< img src="security/cspm/findings/muted-findings3.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
-1. On the [finding side panel](#explore-your-cloud-misconfigurations), select a resource.
-2. Click **Mute**.
+1. On the [finding side panel](#explore-your-cloud-misconfigurations), select one or more resources.
+2. Select **Actions** > **Mute**.
 3. Select a reason for the mute, for example, a fix is pending, it's a false positive, or it's an accepted risk.
 4. Enter an optional **Description**.
 5. Select the duration of the mute.
@@ -74,8 +74,8 @@ You can mute pass/fail findings at any time. Muting a finding removes it from th
 
 Muted findings automatically unmute after the specified mute duration expires. You can also manually unmute a finding.
 
-1. On the [finding side panel](#explore-your-cloud-misconfigurations), select the resource with the muted finding.
-2. Click **Unmute**.
+1. On the [finding side panel](#explore-your-cloud-misconfigurations), select the resources with the muted finding.
+2. Select **Actions** > **Unute**.
 3. Select a reason for the unmute, for example, there's no pending fix, it was a human error, or it's no longer an accepted risk.
 4. Enter an optional **Description**.
 5. Click **Unmute**.

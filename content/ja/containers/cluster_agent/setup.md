@@ -25,8 +25,6 @@ title: Datadog Cluster Agent のセットアップ
 
 Helm chart v2.7.0+ または Datadog Operator v0.7.0+ を使用して Datadog Agent をデプロイした場合、Cluster Agent はデフォルトで有効化されます。
 
-DaemonSet など、他の方法を使用する場合は、以下の手順に従ってください。
-
 {{< tabs >}}
 {{% tab "Helm" %}}
 
@@ -74,7 +72,7 @@ Datadog Operator v1.0.0 から Cluster Agent はデフォルトで有効にな�
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "手動 (DaemonSet)" %}}
 
 DaemonSet を使用して Datadog Cluster Agent をセットアップするには
 1. [Cluster Agent RBAC 権限を構成します](#configure-cluster-agent-rbac-permissions)。

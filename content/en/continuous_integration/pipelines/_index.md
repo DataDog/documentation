@@ -11,6 +11,10 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['ci pipeline', 'ci pipelines']
 ---
 
 {{< site-region region="gov" >}}

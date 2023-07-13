@@ -31,4 +31,8 @@ if 1.0 <= i:  # use i >= 1.0
 ```python
 if i >= 1:
   pass
+
+if 0 < nextSx <= len(subject):
+    px = nextPx
+    sx = nextSx
 ```

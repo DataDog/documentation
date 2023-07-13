@@ -20,7 +20,7 @@ Data Streams Monitoring を開始するには、Datadog Agent と Python ライ�
 * [Datadog Agent v7.34.0 以降][1]
 * [Python Tracer v1.15.0 以降][2]
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Python は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
 

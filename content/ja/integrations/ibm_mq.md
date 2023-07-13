@@ -71,7 +71,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 IBM MQ チェックは [Datadog Agent][2] パッケージに含まれています。
 

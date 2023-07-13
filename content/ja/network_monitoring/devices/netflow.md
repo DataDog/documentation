@@ -18,7 +18,7 @@ title: NetFlow Monitoring
 
 Datadog で NetFlow Monitoring を使用すると、Netflow 対応デバイスからのフローレコードを視覚化して監視することができます。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 ネットワークデバイスモニタリングで NetFlow Monitoring を使用するには、[Agent][1] のバージョン 7.45 以降を使用していることを確認してください。
 
