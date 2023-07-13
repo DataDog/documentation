@@ -29,7 +29,7 @@ further_reading:
 
 This tutorial walks you through the steps to enable tracing for Java Application using the Datadog Admission Controller.
 
-For other scenarios, such as the application and Agent on a host, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including on a host, in a container, on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
@@ -43,7 +43,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 ## Install the sample application
 
-To demonstrate how to instrument your app with the Datadog Admission Controller, this tutorial uses a Java app built with Spring. [Here][4] you can find the code.
+To demonstrate how to instrument your app with the Datadog Admission Controller, this tutorial uses a Java app built with Spring. You can find the code for the app in the [springblog GitHub repository][4].
 
 To get started, clone the repository:
 
@@ -55,11 +55,11 @@ The repository contains a multi-service Java application pre-configured to be ru
 
 ## Start and exercise the sample application 
 
-1. Switch to to the `/k8s` directory:
+1. Switch to to the `/k8s` subdirectory in the springblog repo:
    {{< code-block lang="shell" >}}
 cd springblog/k8s/{{< /code-block >}}
 
-2. Deploy the workload with this depl.yaml file:
+2. Deploy the workload with the `depl.yaml` file:
    {{< code-block lang="shell" >}}
 kubectl apply -f ./depl.yaml{{< /code-block >}}
 
@@ -96,9 +96,9 @@ After you have your application working, instrument it using the Datadog Admissi
 3. [Annotate][7] your pod for library injection.
 4. [Label][8] your pod to instruct the Datadog Admission controller to mutate the pod.
 
-There's no need to add the tracing library because it's automatically injected. You also don't need to add Datadog variables and deploy a new image or version of your app. This section of the tutorial steps you through this process.
+There's no need to add the tracing library because it's automatically injected. You don't need to redeploy your app yet. This section of the tutorial steps you through the process of adding Datadog variables and deploying a new image or version of your app.
 
-1. Install the Datadog Cluster Agent using [this YAML config file](link) and the following command, specifying your own [Datadog API key](/account_management/api-app-keys/):
+1. From the `k8s` subdirectory, use the following command to install the Datadog Cluster Agent, specifying the `values-with-lib-inj.yaml` config file and your [Datadog API key](/account_management/api-app-keys/):
    {{< code-block lang="shell" >}}
 helm install datadog-agent -f values-with-lib-inj.yaml --set datadog.site='datadoghq.com' --set datadog.apiKey=$DD_API_KEY datadog/datadog{{< /code-block >}}
     <div class="alert alert-warning">For more detailed information, read <a href="/containers/kubernetes/installation/?tab=helm" target="_blank">Installing the Datadog Agent on Kubernetes with Helm</a></div>
@@ -220,7 +220,7 @@ kubectl describe pod springfront{{< /code-block >}}
     /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-qvmtk (ro)
     ```
 
-8. Verify that the Datadog tracing library is injected into the pod by checking the pod logs:
+8. Verify that the Datadog tracing library is injected into the pod by checking the pod logs. For example::
    {{< code-block lang="shell" >}}
 kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
@@ -233,14 +233,14 @@ kubectl logs -f springfront-797b78d6db-jqjdl{{< /code-block >}}
 
 ## View APM traces in Datadog
 
-1. Exercise the app running the following command:
+1. Run the following command:
    {{< code-block lang="shell" >}}
 curl localhost:8080/upstream{{< /code-block >}}
 
 2. Open the Datadog UI and see the two services reporting under the [Service Catalog][11]:
    {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-catalog.png" alt="Springback and springfront services in the Service Catalog." style="width:100%;" >}}
 
-3. Explore Traces and see the associated Service Map as well:
+3. Explore Traces and see the associated Service Map:
     {{< img src="tracing/guide/tutorials/tutorial-admission-controller-traces.png" alt="The flame graph that represents the service." style="width:100%;" >}}
     {{< img src="tracing/guide/tutorials/tutorial-admission-controller-service-map.png" alt="The service map that represents the service." style="width:100%;" >}}
 
