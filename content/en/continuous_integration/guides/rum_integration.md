@@ -1,6 +1,11 @@
 ---
 title: Instrumenting your browser tests with RUM
 kind: guide
+description: Learn how to CI Visibility and RUM
+further_reading:
+  - link: "/continuous_integration/tests"
+    tag: "Documentation"
+    text: "Exploring tests"
 ---
 
 {{< site-region region="gov" >}}
@@ -28,6 +33,11 @@ If you use Cypress to run your browser tests and the application being tested is
 The RUM session has all the data that [RUM normally collects][3], so you can debug potential issues in your browser tests, such as unexpected errors:
 
 {{< img src="ci/ci-browser-session-tab-errors.png" alt="Browser Session Tab Errors in Test Detail" style="width:100%;">}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 
 [1]: /continuous_integration/tests/javascript/?tab=cypress#instrument-your-tests
 [2]: /real_user_monitoring/browser/
