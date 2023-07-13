@@ -3544,6 +3544,11 @@ components:
           description: ID of the dashboard.
           example: q5j-nti-fv6
           type: string
+        integration_id:
+          description: The short name of the integration.
+          nullable: true
+          readOnly: true
+          type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
           readOnly: true
