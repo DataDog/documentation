@@ -707,10 +707,10 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 | Method                           | Description                                                                                                                                                                                                                         |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `setServiceName(<SERVICE_NAME>)	`    | Set the value for the `service`. |
-| `setPartialFlushThreshold(<INT>)` |  When this threshold is reached (you have a specific `<INT>` amount of spans closed waiting) the flush mechanism will be triggered and all the pending closed spans will be processed and sent to intake.|
-| `addGlobalTag(<KEY>, <VALUE>)`     | Set `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
-| `setBundleWithRumEnabled(true)`    | Set to `true` in order to enabled spans to be enriched with the current RUM View information. It will then be possible to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
-| `setSamplingRate(<FLOAT>)`   | Set a value `0-100` in order to define the percentage of Traces to collect. |
+| `setPartialFlushThreshold(<INT>)` |  When this threshold is reached (you have a specific `<INT>` amount of spans closed waiting), the flush mechanism is triggered and all pending closed spans are processed and sent to intake.|
+| `addGlobalTag(<KEY>, <VALUE>)`     | Set a `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
+| `setBundleWithRumEnabled(true)`    | Set to `true` to enable spans to be enriched with the current RUM View information. This enables you to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
+| `setSamplingRate(<FLOAT>)`   | Set a value `0-100` to define the percentage of Traces to collect. |
 
 ## Further Reading
 
