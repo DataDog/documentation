@@ -293,20 +293,20 @@ The following environment variables configure library injection. You can pass th
 : Turn on or off library injection and specify a location to load configuration from. Optionally, separate multiple values with semicolons to indicate multiple possible locations. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Use exported or default values.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `DD_CONFIG_SOURCES` is not specified, this configuration is used.
+  - `OFF` - No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
 
-`DD_LIBRARY_INJECT`
+`DD_INSTRUMENT_SERVICE_WITH_APM`
 : Set to `FALSE` to turn off library injection altogether.<br>
 **Default**: `TRUE`
 
-`DD_INJECT_DEBUG`
+`DD_APM_INSTRUMENTATION_DEBUG`
 : Set to `TRUE` or `1` to log debug information.<br>
 **Default**: `FALSE`
 
-`DD_OUTPUT_PATHS`
-: A comma-separated list of places to write the debug logs.<br>
+`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`
+: A comma-separated list of places to write logs. Valid values for elements in the list are file urls (`file://PATH`) or `stderr` <br>
 **Default**: `stderr`
 
 <a id="supplying-configuration-source-host"></a>
@@ -399,7 +399,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -408,8 +408,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Launch your services
@@ -442,7 +440,7 @@ DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: /tracing/trace_collection/library_config/
@@ -502,8 +500,8 @@ output_paths:
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.
+  - `OFF` - No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `library_inject`
@@ -611,7 +609,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -620,8 +618,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Specifying Unified Service Tags on containers
@@ -638,7 +634,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
 [3]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [4]: /tracing/trace_collection/library_config/
@@ -670,8 +666,9 @@ Any newly started processes are intercepted and the specified instrumentation li
    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    ```
 2. Update your local apt repo and install the library:
    ```sh
@@ -692,7 +689,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    enabled=1
    gpgcheck=1
    repo_gpgcheck=1
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
+   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
    **Note**: Due to a [bug in dnf][2], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
 
@@ -722,8 +719,8 @@ config_sources: BASIC
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.
+  - `OFF` - No injection performed.<br>
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `library_inject`
@@ -831,7 +828,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -840,8 +837,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Configure the Agent
