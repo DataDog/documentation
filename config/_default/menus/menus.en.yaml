@@ -2247,16 +2247,21 @@ main:
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
     weight: 403
+  - name: Quality Gates
+    url: continuous_integration/quality_gates/
+    parent: ci
+    identifier: ci_quality_gates
+    weight: 5
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 5
+    weight: 6
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 6
+    weight: 7
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
