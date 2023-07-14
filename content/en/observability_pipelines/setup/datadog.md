@@ -75,18 +75,18 @@ There are no provider-specific requirements for RPM-based Linux.
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
-1. Download the [sample configuration file][2]
+1. Download the [sample pipeline configuration file][2]
 
-2. Run the following command to start the Observability Pipelines Worker with Docker
+2. Run the following command to start the Observability Pipelines Worker with Docker:
     ```
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
       -p 8282:8282 \
-      -v /tmp/datadog.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      -v datadog.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    `datadog.yaml` is the sample configuration you downloaded in the previous step. 
+    Where `datadog.yaml` is the sample configuration you downloaded in the previous step.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/datadog.yaml
@@ -329,7 +329,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect the Datadog Agent and the Observability Pipelines Worker
+## Connect the Datadog Agent to the Observability Pipelines Worker
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml

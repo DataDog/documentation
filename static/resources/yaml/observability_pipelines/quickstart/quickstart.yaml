@@ -35,3 +35,9 @@ sinks:
       - parse_syslog
     default_api_key: "${DD_API_KEY}"
     compression: gzip
+    ## We've omitted the buffer here to reduce friction when testing locally.
+    ## Consider re-enabling and configuring before deploying to production environments.
+    ## The max_size is currently set to 288GB.
+    # buffer:
+    #       type: disk
+    #       max_size: 309237645312

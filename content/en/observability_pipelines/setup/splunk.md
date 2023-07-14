@@ -42,6 +42,9 @@ You can generate both of these in [Observability Pipelines][3].
 
 ### Provider-specific requirements
 {{< tabs >}}
+{{% tab "Docker" %}}
+Ensure that your machine is configured to run Docker.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
@@ -87,20 +90,20 @@ After you add the input, Splunk creates a token for you. The token is typically 
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
-1. Download the [sample configuration file][2]
+1. Download the [sample pipeline configuration file][2].
 
-2. Run the following command to start the Observability Pipelines Worker with Docker
+2. Run the following command to start the Observability Pipelines Worker with Docker:
     ```
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
       -e SPLUNK_ENDPOINT=<SPLUNK_URL> \
       -e SPLUNK_TOKEN=<SPLUNK_TOKEN> \
-      -p 8282:8282 \
-      -v /tmp/quickstart.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      -p 8088:8088 \
+      -v splunk.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    `datadog.yaml` is the sample configuration you downloaded in the previous step. Be sure to update `SPLUNK_ENDPOINT` and `SPLUNK_TOKEN` with values that match your Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+    Where `splunk.yaml` is the sample configuration you downloaded in the previous step. Be sure to update `SPLUNK_ENDPOINT` and `SPLUNK_TOKEN` with values that match your Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
@@ -322,7 +325,6 @@ so they are only accessible inside your network.
 Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
 NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
-{{% /tab %}}
 
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
@@ -372,6 +374,9 @@ No built-in support for load-balancing is provided, given the single-machine nat
 Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Please ensure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
 {{% /tab %}}
@@ -401,6 +406,7 @@ You can update most Splunk collectors with the IP/URL of the host (or load balan
 Additionally, you must update the Splunk collector with the HEC token you wish to use for authentication, so it matches the one specified in the OP Worker's list of `valid_tokens` in your `pipeline.yaml`.
 
 ```
+# Example pipeline.yaml splunk_receiver source
 sources:
   splunk_receiver:
     type: splunk_hec
