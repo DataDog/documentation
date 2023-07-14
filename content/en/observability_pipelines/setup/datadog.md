@@ -329,7 +329,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect the Agent and the Worker
+## Connect the Datadog Agent and the Observability Pipelines Worker
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
@@ -360,9 +360,10 @@ The sample configuration provided has example processing steps that demonstrate 
 
 ### Processing logs
 The provided logs pipeline does the following:
-
+- **Collects** logs being sent from the Datadog agent the Observability Pipelines Worker
 - **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
+- **Routes** the logs by dual-shipping the data to both Datadog Metrics and Logs. This demonstrates how easy it is to write to multiple destinations!
 
 The following are two important components in the example configuration:
 - `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data.
