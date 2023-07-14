@@ -1,5 +1,5 @@
 ---
-title: Setup and Configuration
+title: Mobile Session Replay Setup and Configuration
 kind: documentation
 description: Describes how to setup and configure Mobile Session Replay
 aliases:

@@ -1,5 +1,5 @@
 ---
-title: Privacy Options
+title: Mobile Session Replay Privacy Options
 kind: documentation
 description: Describes how to configure privacy options for Mobile Session Replay
 aliases:

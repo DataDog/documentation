@@ -1,5 +1,5 @@
 ---
-title: Performance Benchmarks
+title: Mobile Session Replay Performance Benchmarks
 kind: documentation
 description: Describes performance benchmarking for Mobile Session Replay
 aliases:
