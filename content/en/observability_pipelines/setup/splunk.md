@@ -322,6 +322,7 @@ so they are only accessible inside your network.
 Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
 NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
+{{% /tab %}}
 
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
