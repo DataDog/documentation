@@ -11,11 +11,11 @@ aliases:
 
 Use [Incident Settings][1] to customize aspects of the Incident Management experience for your entire organization. The individual settings are categorized and divided into different sub-sections. The main categories are: General, Notifications, and Remediation.
 
-## Core
-
-### General
+## General
 
 The General subsection of Incident Settings is used to define your organization's severity levels and status levels, and to declare incident helper text.
+
+### Information
 
 {{< img src="service_management/incidents/severity_settings.jpeg" alt="Incident Severity Level Settings" style="width:80%;">}}
 
@@ -40,6 +40,8 @@ Use status level settings to:
 {{< img src="service_management/incidents/helper_text_settings.jpeg" alt="Declare Incident Helper Text Settings" style="width:80%;">}}
 
 For the Declare Incident Helper Text settings, you can customize the helper text that appears alongside the severity and status level descriptions in the [Incident Creation Modal][3]. The helper text has Markdown support, which allows indented lists, text formatting, and hyperlinks to other instruction resources for incident responders.
+
+Enable users in your organization to make incidents private and to delete incidents. Private Incidents gives users the ability to limit access to incidents with sensitive information. Incident Deletion gives users the ability to remove incidents from analytics.
 
 ### Property fields
 
@@ -107,26 +109,36 @@ To create a custom responder type:
 
 ### Integrations
 
-{{< img src="service_management/incidents/integration_settings.jpeg" alt="Integration Settings" style="width:80%;">}}
+{{< img src="/service_management/incidents/incident_settings/incident_settings_slack_teams.png" alt="Incident Setting pages showing options for enabling Slack or Microsoft Teams" style="width:80%;" >}}
 
-The integrations settings provide you with additional configurations for setting up the Incident Management features of the Datadog [Slack App][13]. There are two settings to configure:
+The integrations settings provide you with additional configurations for setting up the Incident Management features of the [Slack ][13], [Microsoft Teams][50], and Zoom integrations. 
 
-1. Enabling automatic Slack channel creation for every new incident and the name template for those channels
-2. Enabling the incident updates channel
+#### Slack and Microsoft Teams settings
 
-You can configure either of these settings to use any Slack workspace you have configured in your organization's [Slack integration tile][14].
+There are two settings to configure:
+
+1. Enabling automatic Slack or Microsoft Teams channel creation for every new incident and the name template for those channels.
+2. Enabling the incident updates channel.
+
+You can configure either of these settings to use any Slack or Microsoft Teams workspace you have configured in your organization's [integration tile][14].
 
 By default, dedicated incident channels use `incident-{public_id}` as their name template. 
 
 The `incident` prefix can be changed to any string composed of *lowercase* letters, numbers, and dashes. Datadog recommends you keep your prefix short as Slack enforces an 80 character limit in channel names. Aside from `{public_id}`, you can also add `{date_created}` and `{title}` as variables in the channel name template. 
 
 **Notes:**
-
 - Changing your channel name template does not rename any existing incident channels. The new name template only applies going forward.
 - If you choose to uncheck `{public_id}`, there is a chance two incidents will have duplicate channel names. In this case, the Datadog Slack App automatically appends a random lowercase letter or number to the end of your channel name to prevent the channel creation process from failing. 
 - If you choose to check `{title}`, the Datadog Slack App automatically renames the channel if an incident's title changes.
 
 The incident updates channel sends a message whenever an incident is declared or changes status, severity, or incident commander.
+
+#### Zoom
+
+1. Enable the Zoom integration to automatically attach a Zoom meeting link to every new incident.
+2. From the [global header][51] of the new Incident Detail page, click **Start Zoom Call** to activate the Zoom link.
+
+{{< img src="/service_management/incidents/incident_details/global_header.png" alt="Your image description" style="width:90%;" >}}
 
 ## Notifications
 
@@ -202,7 +214,9 @@ To create a postmortem template:
 [11]: /service_management/incident_management/incident_details/#response-team-section
 [12]: /account_management/rbac/?tab=datadogapplication#pagetitle
 [13]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-[14]: https://app.datadoghq.com/account/settings#integrations/slack
+[14]: https://app.datadoghq.com/account/settings#integrations
 [15]: /service_management/incident_management/incident_details/#notifications-section
 [16]: /monitors/notifications/?tab=is_alert#notify-your-team
 [17]: /service_management/mobile/
+[50]: /integrations/microsoft_teams/#datadog-incident-management-in-microsoft-teams
+[51]: /service_management/incident_management/incident_details/#global-header

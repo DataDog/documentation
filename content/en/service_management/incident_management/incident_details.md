@@ -22,7 +22,11 @@ Every incident in Datadog has its own Incident Details page where you can manage
 
 ## Global header
 
-The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][4]. Configure your postmortem templates in Incident Settings to predefine the structure and content of your postmortems.
+{{< img src="/service_management/incidents/incident_details/global_header.png" alt="Global header on incident detail page showing assigned slack channel, CoScreen, Zoom, and Jira links" style="width:100%;" >}}
+
+The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. For more information on how to configure automatic Slack, Microsoft Teams, or Zoom links with every new incident, see [Incident Settings][52].
+
+After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][4]. Configure your postmortem templates in the [Incident Settings][53] page to predefine the structure and content of your postmortems.
 
 ## Incident details overview section
 
@@ -167,3 +171,5 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [13]: /getting_started/incident_management
 [14]: /account_management/rbac/?tab=datadogapplication
 [15]: /service_management/incident_management/incident_settings/#responder-types
+[52]: /service_management/incident_management/incident_settings#integrations
+[53]: https://app.datadoghq.com/incidents/settings#Postmortems
