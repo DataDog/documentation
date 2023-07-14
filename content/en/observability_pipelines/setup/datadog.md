@@ -83,7 +83,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
       -p 8282:8282 \
-      -v /tmp/quickstart.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      -v /tmp/datadog.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
     `datadog.yaml` is the sample configuration you downloaded in the previous step. 
@@ -305,7 +305,7 @@ No built-in support for load-balancing is provided, given the single-machine nat
 Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
-{{% tab "APT-based Linux" %}}
+{{% tab "Docker" %}}
 By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Please ensure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
@@ -343,11 +343,7 @@ vector:
 
 ```
 
-`OPW_HOST` is the IP of the load balancer or machine you set up earlier. 
-
-For single-host Docker-based installs, this will be the IP address of the underlying host.
-
-For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
+`OPW_HOST` is the IP of the load balancer or machine you set up earlier. For single-host Docker-based installs, this will be the IP address of the underlying host. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
 
 ```shell
 kubectl get svc opw-observability-pipelines-worker
