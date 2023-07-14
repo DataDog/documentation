@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
   text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+- link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
+  tag: "Blog"
+  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
 algolia:
   tags: ['service catalog']
 ---
