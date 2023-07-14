@@ -14423,6 +14423,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/ServiceDefinitionDataAttributes'
+        id:
+          description: Service definition id.
+          type: string
         type:
           description: Service definition type.
           type: string
@@ -14455,6 +14458,30 @@ components:
           type: string
         last-modified-time:
           description: Last modified time of the service definition.
+          type: string
+        origin:
+          description: User defined origin of the service definition.
+          type: string
+        origin-detail:
+          description: User defined origin's detail of the service definition.
+          type: string
+        warnings:
+          description: A list of schema validation warnings.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionMetaWarnings'
+          type: array
+      type: object
+    ServiceDefinitionMetaWarnings:
+      description: Schema validation warnings.
+      properties:
+        instance-location:
+          description: The warning instance location.
+          type: string
+        keyword-location:
+          description: The warning keyword location.
+          type: string
+        message:
+          description: The warning message.
           type: string
       type: object
     ServiceDefinitionRaw:
