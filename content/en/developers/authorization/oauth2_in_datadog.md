@@ -28,29 +28,29 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
    To learn how to derive the `code_challenge` parameter, see the [PKCE](#authorization-code-grant-flow-with-pkce) section. Your application must save `code_verifier` for the token request in Step 5.
 
-   - In order to build the URL for this POST request, use the `domain` query parameter that is provided on the redirect to your `onboarding_url`. 
+   - To build the URL for this GET request, use the `domain` query parameter that is provided on the redirect to your `onboarding_url`. 
    - This parameter is only provided if the user initiates authorization from the Datadog integration tile. See the [Initiate authorization from a third-party location](#Initiate-authorization-from-a-third-party-location) section for more options if the user chooses to initiate authorization externally.  
    - The `domain` query parameter provides the [Datadog site][17] that the authorizing user is in, and will be needed to construct the URL for this POST request to the Authorize endpoint: 
-       - For users authorizing from the US1, Fed1, and EU1 Datadog sites, the URL will be: `https://app.<domain>/oauth2/v1/authorize?...`
-       - For users authorizing from any other Datadog site, the URL will be: `https://<domain>/oauth2/v1/authorize?...`
+       - For users authorizing from the US1, Fed1, and EU1 Datadog sites, the URL is: `https://app.<domain>/oauth2/v1/authorize?...`
+       - For users authorizing from any other Datadog site, the URL is: `https://<domain>/oauth2/v1/authorize?...`
 
-<div class="alert alert-info">The `domain` parameter is new as of July 2023. OAuth clients created before then use the `site` parameter instead. The `site` parameter will continue to be supported, but we encourage use of the `domain` parameter to make API calls more seamless. </div>
+<div class="alert alert-info">The `domain` parameter is new as of July 2023. OAuth clients created before then use the `site` parameter instead. The `site` parameter will continue to be supported, but the `domain` parameter is recommended moving forward. </div>
 
 4. Once a user clicks **Authorize**, Datadog makes a POST request to the authorize endpoint. The user is redirected to the `redirect_uri` that you provided when setting up the OAuth Client with the authorization `code` parameter in the query component.
 
 5. From the `redirect_uri`, make a POST request to the [Datadog token endpoint][10] that includes the authorization code from Step 4, the `code_verifier` from Step 3, your OAuth client ID, and client secret.
 
-   - In order to build the URL for this post request, use the `domain` query parameter that is provided on the redirect to your `redirect_uri`. 
+   - To build the URL for this post request, use the `domain` query parameter that is provided on the redirect to your `redirect_uri`. 
    - The `domain` query parameter provides the [Datadog site][17] that the authorizing user is in, and will be needed to construct the URL for this POST request to the token endpoint: 
-       - For users authorizing from the US1, Fed1, and EU1 Datadog sites, the URL will be: `https://api.<domain>/oauth2/v1/token?...`
-       - For users authorizing from any other Datadog site, the URL will be: `https://<domain>/oauth2/v1/token?...`
+       - For users authorizing from the US1, Fed1, and EU1 Datadog sites, the URL is: `https://api.<domain>/oauth2/v1/token?...`
+       - For users authorizing from any other Datadog site, the URL is: `https://<domain>/oauth2/v1/token?...`
 
 6. Upon success, you receive your `access_token` and `refresh_token` in the response body. Your application should display a confirmation page with the following message: `You may now close this tab`.
 
 7. Use the `access_token` to make calls to Datadog API endpoints by sending it in as a part of the authorization header of your request: ```headers = {"Authorization": "Bearer {}".format(access_token)}```.
-    - Note that API endpoints are different in each Datadog site. For example, if a user is in the EU region, the events endpoint is `https://api.datadoghq.eu/api/v1/events`, while for users in US1, the events endpoint is `https://api.datadoghq.com/api/v1/events`.
+    - **Note***: API endpoints are different in each Datadog site. For example, if a user is in the EU region, the events endpoint is `https://api.datadoghq.eu/api/v1/events`, while for users in US1, the events endpoint is `https://api.datadoghq.com/api/v1/events`.
     - You can use the `domain` query parameter directly in these API calls to ensure the correct endpoint is being contacted. For example, to make a call to the events endpoint, you would build your request URL as `https://api.<domain>/api/v1/events`.
-    - Some endpoints may also require an API key, which is created in Step 8 below. 
+    - Some endpoints may also require an API key, which is created in Step 8. 
 
 8. Call the [API Key Creation endpoint][7] to generate an API key that allows you to send data on behalf of Datadog users.
 
