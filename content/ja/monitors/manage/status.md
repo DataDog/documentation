@@ -94,7 +94,7 @@ title: モニターステータス
 
 メトリクスの進化をさらに詳しく調べるには、ステータスグラフの横にある **Open in a notebook** をクリックします。これにより、モニタークエリのフォーマットされたグラフを含む調査用[ノートブック][8]が生成されます。
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook ボタン" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook ボタン" style="width:90%;">}}
 
 ノートブックはモニターの評価期間と一致し、関連する場合は関連するログを含んでいます。
 
