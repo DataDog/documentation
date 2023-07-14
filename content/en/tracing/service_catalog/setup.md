@@ -70,7 +70,7 @@ This GitHub Action allows you to register your services with the Service Catalog
 
 ## Import data from Backstage 
 
-{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:100%;" >}}
+{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 
