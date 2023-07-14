@@ -25,7 +25,6 @@
               {{- $chunked := slice -}}
               {{- $post_len := len $section_content_words -}}
               {{- if gt $post_len 100000 -}}
-                  {{ warnf "large %i %q" $post_len $page.File.Filename }}
                   {{- $post_len = 100000 -}}
               {{- end -}}
 
