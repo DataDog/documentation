@@ -1,10 +1,10 @@
 {{ define "main" }}
-    {{ $core_product_taxonomy := .Site.Params.core_product }}
+    {{ $core_product_taxonomy := .Site.Params.taxonomy.core_product }}
     {{ $headless := .Site.GetPage "/glossary/terms" }}
     {{ $headless_term_pages := $headless.Resources.ByType "page" }}
     {{ $letters := slice }}
     {{ $products := slice }}
-
+    <p>{{ $core_product_taxonomy}}</p>
     <div 
     class="glossary-main" 
     x-data="{
