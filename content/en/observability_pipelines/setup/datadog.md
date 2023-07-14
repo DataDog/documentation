@@ -89,7 +89,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     `datadog.yaml` is the sample configuration you downloaded in the previous step. 
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
-[2]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
+[2]: /resources/yaml/observability_pipelines/datadog/datadog.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.

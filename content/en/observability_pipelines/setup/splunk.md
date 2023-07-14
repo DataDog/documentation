@@ -83,6 +83,27 @@ After you add the input, Splunk creates a token for you. The token is typically 
 ## Installing the Observability Pipelines Worker
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+
+The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
+
+1. Download the [sample configuration file][2]
+
+2. Run the following command to start the Observability Pipelines Worker with Docker
+    ```
+    docker run -i -e DD_API_KEY=<API_KEY> \
+      -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+      -e DD_SITE=<SITE> \
+      -e SPLUNK_ENDPOINT=<SPLUNK_URL> \
+      -e SPLUNK_TOKEN=<SPLUNK_TOKEN> \
+      -p 8282:8282 \
+      -v /tmp/quickstart.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      datadog/observability-pipelines-worker run
+    ```
+    `datadog.yaml` is the sample configuration you downloaded in the previous step. Be sure to update `SPLUNK_ENDPOINT` and `SPLUNK_TOKEN` with values that match your Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+  
+[1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
+[2]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
@@ -94,7 +115,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     site: "datadoghq.com"
   ```
 
-3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. Replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -236,7 +257,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/linux.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
@@ -282,13 +303,16 @@ After you add the input, Splunk creates a token for you. The token is typically 
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/linux.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Load balancing
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
