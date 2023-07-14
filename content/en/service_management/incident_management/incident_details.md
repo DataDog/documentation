@@ -131,11 +131,12 @@ You can manually create, save as draft, and send notifications directly from thi
 To create a manual notification: 
 
 1. Click the **+ New Notification** button in the top right of the section.
-2. Enter your desired recipients. These can be any notification handles supported by Datadog including emails, Slack channels, PagerDuty handles, webhooks, etc.
+2. Enter your desired recipients. These can be any notification handles supported by Datadog including emails, Slack channels, PagerDuty handles, webhooks, and more.
 3. Select a [Message Template][12].
 4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`. 
    - Template variables are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.
-5. Send your notification or save it as a draft.
+5. Use the `{{incident.created}}` variable to customize your message timezone. This template variable will display the option to set your variable time zone.
+6. Send your notification or save it as a draft.
 
 The Notifications section is separated into lists: Drafts and Sent.
 
