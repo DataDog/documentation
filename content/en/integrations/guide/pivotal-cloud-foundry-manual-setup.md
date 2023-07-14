@@ -1,7 +1,7 @@
 ---
-title: Pivotal Cloud Foundry Manual Setup Guide
+title: Cloud Foundry Manual Setup Guide
 kind: guide
-description: "Steps for manually setting up the Pivotal Cloud Foundry Integration"
+description: "Steps for manually setting up the Cloud Foundry Integration"
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
   tag: "Blog"
@@ -10,27 +10,44 @@ further_reading:
 
 ## Overview
 
-Pivotal Cloud Foundry (PCF) deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to manually set up monitoring for your PCF application.
+Cloud Foundry deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to manually set up monitoring for your Cloud Foundry application.
 
-There are three main components for the PCF integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
+There are three main components for the Cloud Foundry integration with Datadog. First, the buildpack is used to collect custom metrics from your applications. Second, the BOSH Release collects metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
 ## Monitor your applications
 
-Use the **Datadog Pivotal Cloud Foundry Buildpack** to monitor your PCF application. This is a [supply buildpack][2] for PCF that installs the Datadog Container Agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a [supply buildpack][2] for Cloud Foundry that installs the Datadog Container Agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
 
-### Pivotal Cloud Foundry < 1.12
+### Pivotal Cloud Foundry Platform >= 1.12
 
-The Datadog buildpack uses the Pivotal Cloud Foundry [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
+1. Upload the Datadog Cloud Foundry Buildpack. [Download the latest Datadog build pack release][7] and upload it to your Cloud Foundry environment.
 
-For older versions, Pivotal Cloud Foundry provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version in order to use Datadog's buildpack.
+    ```shell
+    cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
+    ```
 
-1. Upload the multi-buildpack back-port. Download the latest multi-buildpack release and upload it to your Pivotal Cloud Foundry environment.
+2. Push your application with the Datadog buildpack and your buildpacks. The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
+
+    ```shell
+    cf push <YOUR_APP> --no-start -b binary_buildpack
+    cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
+    ```
+
+      **If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack**. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
+
+### Pivotal Cloud Foundry Platform < 1.12
+
+The Datadog buildpack uses the Cloud Foundry [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
+
+For older versions, Cloud Foundry provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version in order to use Datadog's buildpack.
+
+1. Upload the multi-buildpack back-port. Download the latest multi-buildpack release and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
     ```
 
-2. Add a multi-buildpack manifest to your application. As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Pivotal Cloud Foundry Buildpack and to your regular buildpack:
+2. Add a multi-buildpack manifest to your application. As detailed in the [usage section][5] of the multi-buildpack repository, create a `multi-buildpack.yml` file at the root of your application and configure it for your environment. Add a link to the Datadog Cloud Foundry Buildpack and to your regular buildpack:
 
     ```yaml
     buildpacks:
@@ -45,38 +62,21 @@ For older versions, Pivotal Cloud Foundry provides a backwards compatible versio
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Your regular buildpack should be the last in the manifest to act as a final buildpack**. To learn more, see [Pivotal Cloud Foundry's How Buildpacks Work][6].
+      **Your regular buildpack should be the last in the manifest to act as a final buildpack**. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
 
-3. Push your application with the multi-buildpack. Ensure that the `multi-buildpack` is the buildpack selected by Pivotal Cloud Foundry for your application:
+3. Push your application with the multi-buildpack. Ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application:
 
     ```shell
     cf push <YOUR_APP> -b multi-buildpack
     ```
 
-### Pivotal Cloud Foundry Platform >= 1.12
-
-1. Upload the Datadog Pivotal Cloud Foundry Buildpack. [Download the latest Datadog build pack release][7] and upload it to your Pivotal Cloud Foundry environment.
-
-    ```shell
-    cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
-    ```
-
-2. Push your application with the Datadog buildpack and your buildpacks. The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
-
-    ```shell
-    cf push <YOUR_APP> --no-start -b binary_buildpack
-    cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
-    ```
-
-      **If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack**. To learn more, see [Pivotal Cloud Foundry's How Buildpacks Work][6].
-
 ### Meta-Buildpack **(deprecated)**
 
 If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a decorator out of the box.
 
-**Note**: Pivotal has deprecated the meta-buildpack in favor of the multi-buildpack.
+**Note**: VMware has deprecated the meta-buildpack in favor of the multi-buildpack.
 
-## Monitor your PCF cluster
+## Monitor your Cloud Foundry cluster
 
 There are two points of integration with Datadog, each of which achieves a different goal:
 
@@ -84,7 +84,7 @@ There are two points of integration with Datadog, each of which achieves a diffe
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
-These integrations are meant for PCF deployment administrators, not end users.
+These integrations are meant for Cloud Foundry deployment administrators, not end users.
 </div>
 
 ### Prerequisites
@@ -176,7 +176,7 @@ bosh update runtime-config runtime.yml
 bosh update-runtime-config -e <BOSH_ENV> runtime.yml
 ```
 
-#### Redeploy your PCF deployment
+#### Redeploy your Cloud Foundry deployment
 
 ```text
 # BOSH CLI v1
@@ -198,9 +198,9 @@ Click on any host to zoom in, then click **system** within its hexagon to make s
 
 {{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data" >}}
 
-#### Collect CAPI metadata and Cluster Agent tags in PCF containers
+#### Collect CAPI metadata and Cluster Agent tags in Cloud Foundry containers
 
-For Datadog Agent versions `7.40.1` and later, you can collect CAPI metadata and Datadog Cluster Agent (DCA) tags from PCF containers. Application labels and annotations are present in the application logs, metrics, and traces. 
+For Datadog Agent versions `7.40.1` and later, you can collect CAPI metadata and Datadog Cluster Agent (DCA) tags from Cloud Foundry containers. Application labels and annotations are present in the application logs, metrics, and traces. 
 
 ### Install the Datadog Cluster Agent (DCA) BOSH release
 
@@ -360,7 +360,7 @@ Once the two releases are linked, the Datadog Cluster Agent automatically provid
 
 ### Deploy the Datadog Firehose Nozzle
 
-Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing PCF deployment that has a working Loggregator Firehose.
+Datadog provides a BOSH release of the Datadog Firehose Nozzle. After uploading the release to your Director, add the Nozzle to an existing deployment, or create a new deployment that only includes the Nozzle. The instructions below assume you're adding it to an existing Cloud Foundry deployment that has a working Loggregator Firehose.
 
 #### Upload Datadog's release to your BOSH Director
 
@@ -393,7 +393,7 @@ Redeploy to add the user.
 
 #### Add Firehose Nozzle jobs
 
-Configure one or more Nozzle jobs in your main PCF deployment manifest (`cf-manifest.yml`):
+Configure one or more Nozzle jobs in your main Cloud Foundry deployment manifest (`cf-manifest.yml`):
 
 ```yaml
 jobs:
