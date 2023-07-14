@@ -14,17 +14,17 @@ further_reading:
 <div class="alert alert-warning">Incident Management is not available on the Datadog {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
+## Overview
+
+{{< img src="/service_management/incidents/incident_details/incident_overview_page.png" alt="Incident details page of an Active SEV-4 incident." style="width:100%;">}}
+
 Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you [create a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs to group related incident data together. The first of these sections is the Overview.
 
 ## Global header
 
-{{< img src="service_management/incidents/incident_global_header.jpeg" alt="Incident Global Header" style="width:80%;">}}
-
 The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][4]. Configure your postmortem templates in Incident Settings to predefine the structure and content of your postmortems.
 
-## Overview section
-
-{{< img src="service_management/incidents/incident_overview.jpeg" alt="Incident Overview Section" style="width:80%;">}}
+## Incident details overview section
 
 Use the Overview section to specify an incident's properties and define customer impact. 
 
@@ -62,7 +62,7 @@ In addition to housing your property fields, the Overview section also provides 
 
 ## Timeline section
 
-{{< img src="service_management/incidents/incident_timeline.jpeg" alt="Incident Timeline" style="width:80%;">}}
+{{< img src="/service_management/incidents/incident_details/incident_details_timeline.png" alt="Incident details Timeline view showing progression of a case escalated to an incident" style="width:100%;">}}
 
 The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
 
@@ -86,8 +86,6 @@ By default, timeline cells are sorted in `oldest first` order, but this can be c
 
 ## Remediation section
 
-{{< img src="service_management/incidents/incident_remediation.jpeg" alt="Incident Remediation Section" style="width:80%;">}}
-
 Use the Remediation section to store any documents or resources that are relevant to the remediation process of an incident, as well as to track key tasks for the remediation process. 
 
 Documents can be added by pasting the document URL and giving the link a human-readable name for quick access.
@@ -104,7 +102,7 @@ As work for different tasks is finished, individual tasks can be marked as compl
 This feature is in open beta.
 </div>
 
-{{< img src="service_management/incidents/incident_response_team.png" alt="The Response Team section of the Incident Details page for a specific incident" style="width:80%;">}}
+{{< img src="/service_management/incidents/incident_details/incident_response_team.png" alt="Incident details reponse team section showing the assigned Incident Commander, Responder, and Communications Lead" style="width:100%;" >}}
 
 In the Response Team section, you can form your response team by adding other users and assigning them roles to carry out in the process of resolving an incident. The two default responder types provided by Datadog are:
 

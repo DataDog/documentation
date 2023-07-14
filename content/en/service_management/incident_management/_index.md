@@ -84,13 +84,11 @@ Declare an incident from an Application Security Management signal by selecting 
 
 #### From the Incidents page
 
-In the [Datadog UI][1], click **New Incident** to create an incident.
+In the [Datadog UI][1], click **Declare Incident** to create an incident.
 
-{{< img src="service_management/incidents/incident_declaration_modal.jpeg" alt="Incident Declaration Modal" style="width:80%;">}}
+{{< img src="/service_management/incidents/declare_incident_make_private.png" alt="Incident Declaration Modal" style="width:80%;">}}
 
-The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][6].
-
-{{< img src="service_management/incidents/incident_information_settings.jpeg" alt="Incident Information Settings" style="width:80%;">}}
+The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][6]. You also have the option to make the incident private to limit access to only responders.
 
 #### From Slack
 
