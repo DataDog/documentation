@@ -89,7 +89,7 @@ With the above text strategies in mind, you have a few different options if you 
 
 The following chart shows how we apply different text masking strategies, using the rules you set up in your configuration, to the below text types.
 
-| Type | `allow all` | `mask all` | `mask user input` |
+| Type | Allow all | Mask all | Mask user input |
 |------|-------------|------------|-------------------|
 | [Sensitive text](#sensitive-text) | Fixed-length mask | Fixed-length mask | Fixed-length mask |
 | [Input and option text](#input-and-option-text) | No mask | Fixed-length mask | Fixed-length mask |
@@ -150,7 +150,7 @@ Hint text is static text in editable text elements or option selectors that is d
 
 The following chart shows how we apply different appearance masking strategies, using the rules you set up in your configuration, to the below text types.
 
-| Type | `allow all` | `mask all` | `mask user input` |
+| Type | Allow all | Mask all | Mask user input |
 |------|-------------|------------|-------------------|
 | [Revealing attributes](#revealing-attributes) |  | {{< X >}} | {{< X >}} |
 | [Other attributes](#other-attributes) |  |  |  |
@@ -170,7 +170,15 @@ Revealing attributes are attributes that can reveal or suggest the value of inpu
 
 
 ### Touch interactions
-Any interaction that happens on a on-screen keyboard is maksed. Interactions with other elements are not asked.
+
+The following chart shows how we apply different touch interaction strategies, using the rules you set up in your configuration, to the below text types. While any interaction that happens on an on-screen keyboard is masked, interactions with other elements are not masked.
+
+| Type | Allow all | Mask all | Mask user input |
+|------|-------------|------------|-------------------|
+| [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Other attributes](#other-attributes) |  |  |  |
+
+#### On-screen keyboard
 
 #### Other elements 
 
