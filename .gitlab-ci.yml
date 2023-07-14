@@ -411,7 +411,7 @@ test_missing_tms_live:
   stage: post-deploy
   cache: []
   dependencies:
-    - build_preview
+    - build_live
   variables:
     GIT_STRATEGY: none
   script:
