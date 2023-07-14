@@ -52,7 +52,7 @@ The Service Catalog is useful for:
 
 ## Browse the Service Catalog
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service](#registering-a-new-service). To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][8]. To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
 
 The Service Catalog list is sortable by service type, service name, and many of the other columns. You can find missing ownership by sorting by team in the Ownership view and looking for blanks. Or you can sort by urgency in the Reliability view and see services with the most triggered monitors.
 
