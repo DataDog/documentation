@@ -74,7 +74,7 @@ By default, the Session Replay recorder masks all recorded content with `*` to e
 
 ## Understanding how data is masked
 
-
+Find below a description of how Datadog's recorder handles masking based on data type and how that data is defined. 
 ### Text masking
 
 Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.
@@ -91,38 +91,100 @@ The following chart shows how we apply different text masking strategies, using 
 
 | Type | `allow all` | `mask all` | `mask user input` |
 |------|-------------|------------|-------------------|
-| Sensitive text | Fixed-length mask | Fixed-length mask | Fixed-length mask |
-| Input and option text | No mask | Fixed-length mask | Fixed-length mask |
-| Static text | No mask | Space-preserving mask | No mask |
-| Hints mask | No mask | Fixed-length mask | No mask |
+| [Sensitive text](#sensitive-text) | Fixed-length mask | Fixed-length mask | Fixed-length mask |
+| [Input and option text](#input-and-option-text) | No mask | Fixed-length mask | Fixed-length mask |
+| [Static text](#static-text) | No mask | Space-preserving mask | No mask |
+| [Hint text](#hint-text) | No mask | Fixed-length mask | No mask |
 
-### Definitions
+#### Sensitive text
+Sensitive text includes passwords, e-mails, and phone numbers marked in a platform-specific way,
+and other forms of sensitivity in text available to each platform.
 
-The following table defines what Datadog's recorder actually records.
+This includes passwords, e-mails and phone numbers in:
 
-| Text type | Includes | Example |
-|-----------|----------|---------|
-| **Sensitive text** | | |
+- Text Field (iOS)
+- Text View (iOS)
+- Edit Text (Android)
+- Address information (iOS + Android)
+- Credit card numbers (iOS)
+- One-time codes (iOS)
 
-## Appearance masking
+#### Input and option text
 
-{{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+Input and option text is text entered by the user with a keyboard or other text-input device, or a custom (non-generic) value in selection elements.
 
-insert code block content
+This includes the below.
 
-{{< /code-block >}}
+- User-entered text in:
+  - Text Field (iOS)
+  - Text View (iOS)
+  - Edit Text (Android)
+- User-selected options in:
+  - Value Picker (iOS + Android)
+  - Segment (iOS)
+  - Drop Down List (Android)
+- Notable exclusions:
+  - Placeholder (hint) texts in Text Field, Text View and Edit Text (not entered by the user)
+  - Non-editable texts in Text View (iOS).
+  - Month, day, and year labels in Date Picker (generic values)
 
-### Definitions
+#### Static text
+Static text is any text that is not directly entered by the user. This includes the below.
 
-## Touch interactions
+All texts in:
 
-{{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+- Checkbox and Radio Button titles (Android)
+- Texts in non-editable Text View (iOS)
+- Month, day and year labels in Date & Time Picker
+- Values updated in response to gesture interaction with input elements, such as the current value of the Slider
+- Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
 
-insert code block content
+#### Hint text
+Hint text is static text in editable text elements or option selectors that is displayed when no value is given. This includes:
 
-{{< /code-block >}}
+- Placeholders in Text Field (iOS), Text View (iOS)
+- Hints in Edit Text (Android)
+- Prompts in Drop Down lists (Android)
 
-### Definitions
+### Appearance masking
+
+The following chart shows how we apply different appearance masking strategies, using the rules you set up in your configuration, to the below text types.
+
+| Type | `allow all` | `mask all` | `mask user input` |
+|------|-------------|------------|-------------------|
+| [Revealing attributes](#revealing-attributes) |  | {{< X >}} | {{< X >}} |
+| [Other attributes](#other-attributes) |  |  |  |
+
+#### Revealing attributes
+
+The following chart shows how we apply different revealing masking strategies, using the rules you set up in your configuration, to the below text types.
+
+| Type | `allow all` | `mask all` | `mask user input` |
+|------|-------------|------------|-------------------|
+| On-screen keyboard | {{< X >}} | {{< X >}} | {{< X >}} |
+| Other elements |  |  |  |
+
+#### Other attributes
+
+The following chart shows how we apply different revealing other strategies, using the rules you set up in your configuration, to the below text types.
+
+| Type | `allow all` | `mask all` | `mask user input` |
+|------|-------------|------------|-------------------|
+| On-screen keyboard | {{< X >}} | {{< X >}} | {{< X >}} |
+| Other elements |  |  |  |
+
+### Touch interactions
+
+The following chart shows how we apply different touch interaction strategies, using the rules you set up in your configuration, to the below text types.
+
+| Type | `allow all` | `mask all` | `mask user input` |
+|------|-------------|------------|-------------------|
+| [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
+| [Other attributes](#other-attributes) |  |  |  |
+
+#### On-screen keyboard
+
+#### Other elements 
 
 ## Fine-grained privacy
 
