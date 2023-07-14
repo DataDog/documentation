@@ -202,8 +202,6 @@ CSM Misconfigurations evaluates resources in increments between 15 minutes and f
 
 To view the findings for your cloud resources, go to the [Misconfigurations Explorer][1].
 
-{{< img src="security/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
-
 ## Explore default compliance rules
 
 CSM Misconfigurations comes with a set of [out-of-the-box compliance rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration compliance rules are added, they are automatically imported into your account.
