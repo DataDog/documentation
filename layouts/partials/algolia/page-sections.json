@@ -71,6 +71,4 @@
   {{- return $order -}}
 {{- end -}}
 
-{{ if eq $page.RelPermalink "/integrations/amazon_cloudfront/" }}
 {{- $ord := partial "partials/headings" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
-{{ end }}
