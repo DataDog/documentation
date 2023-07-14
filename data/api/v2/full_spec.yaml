@@ -15216,6 +15216,17 @@ components:
           $ref: '#/components/schemas/SpansType'
       type: object
     SpansAggregateBucket:
+      description: Spans aggregate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAggregateBucketAttributes'
+        id:
+          description: ID of the spans aggregate.
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansAggregateBucketType'
+      type: object
+    SpansAggregateBucketAttributes:
       description: A bucket values.
       properties:
         by:
@@ -15226,6 +15237,9 @@ components:
             '@state': success
             '@version': abc
           type: object
+        compute:
+          description: The compute data.
+          type: object
         computes:
           additionalProperties:
             $ref: '#/components/schemas/SpansAggregateBucketValue'
@@ -15233,6 +15247,14 @@ components:
             of values for a timeseries.
           type: object
       type: object
+    SpansAggregateBucketType:
+      description: The spans aggregate bucket type.
+      enum:
+      - bucket
+      example: bucket
+      type: string
+      x-enum-varnames:
+      - BUCKET
     SpansAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -15419,6 +15441,10 @@ components:
           example:
             customAttribute: 123
             duration: 2345
+          type: object
+        custom:
+          additionalProperties: {}
+          description: JSON object of custom spans data.
           type: object
         end_timestamp:
           description: End timestamp of your span.
