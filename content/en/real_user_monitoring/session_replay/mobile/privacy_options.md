@@ -157,21 +157,9 @@ The following chart shows how we apply different appearance masking strategies, 
 
 #### Revealing attributes
 
-The following chart shows how we apply different revealing masking strategies, using the rules you set up in your configuration, to the below text types.
-
-| Type | `allow all` | `mask all` | `mask user input` |
-|------|-------------|------------|-------------------|
-| On-screen keyboard | {{< X >}} | {{< X >}} | {{< X >}} |
-| Other elements |  |  |  |
 
 #### Other attributes
 
-The following chart shows how we apply different revealing other strategies, using the rules you set up in your configuration, to the below text types.
-
-| Type | `allow all` | `mask all` | `mask user input` |
-|------|-------------|------------|-------------------|
-| On-screen keyboard | {{< X >}} | {{< X >}} | {{< X >}} |
-| Other elements |  |  |  |
 
 ### Touch interactions
 
