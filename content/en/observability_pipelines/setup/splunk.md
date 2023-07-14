@@ -367,10 +367,22 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect forwarders to the Worker
+## Connect Splunk forwarders to the Observability Pipelines Worker
 After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing collectors to point to the Worker.
 
-For most collectors, changing the URL to the load balancer provisioned by these configurations, and updating the token, should suffice.
+You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines worker.
+
+Additionally, you must update the Splunk collector with the HEC token you wish to use for authentication, so it matches the one specified in the OP Worker's list of `valid_tokens` in your `pipeline.yaml`.
+
+```
+sources:
+  splunk_receiver:
+    type: splunk_hec
+    address: 0.0.0.0:8088
+    valid_tokens:
+        - ${SPLUNK_TOKEN}
+```
+In the sample configuration we have provided, we simply use the same HEC token for the Splunk source and destination.
 
 At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
@@ -379,9 +391,6 @@ The sample Observability Pipelines configuration does the following:
 - **Collects** logs being sent from the Splunk forwarder to the Observability Pipelines Worker. 
 - **Transforms** logs by adding tags to data that has come through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - **Routes** the logs by dual-shipping the data to both Splunk and Datadog. This demonstrates how easy it is to write to multiple destinations!
-
-- **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- **Dual-writes to Datadog.** This demonstrates how easy it is to write to multiple destinations.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
