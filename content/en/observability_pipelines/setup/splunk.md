@@ -104,6 +104,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
