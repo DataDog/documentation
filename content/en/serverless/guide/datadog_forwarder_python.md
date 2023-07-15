@@ -237,13 +237,13 @@ More information and additional parameters can be found in the [macro documentat
         }
     }
     ```
-1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python36`, `Python37`, `Python38`, and `Python39`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python39:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python39:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1].
 
@@ -265,13 +265,13 @@ More information and additional parameters can be found in the [macro documentat
         }
     }
     ```
-1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+1. Replace the placeholder `<AWS_REGION>`, `<RUNTIME>` and `<VERSION>` in the layer ARN with appropriate values. The available `RUNTIME` options are `Python36`, `Python37`, `Python38`, and `Python 39`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Python39:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python39:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. If your Lambda function is configured to use code signing, add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][1].
 
@@ -404,7 +404,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-The available `RUNTIME` options are `Python27`, `Python36`, `Python37`, and `Python38`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
+The available `RUNTIME` options are `Python36`, `Python37`, `Python38`, and `Python39`. The latest `VERSION` is `{{< latest-lambda-layer-version layer="python" >}}`. For example:
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
