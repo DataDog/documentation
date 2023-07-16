@@ -147,6 +147,27 @@ Datadog is able to leverage [Microsot SourceLink](https://github.com/dotnet/sour
 
 {{< /tabs >}}
 
+#### Build inside a docker container
+If your build process is executed in CI within a docker container, you will need to go through the following additional steps to ensure that the build can access the git information:
+
+1. Add the following text to your .dockerignore file:
+
+```
+!.git/HEAD
+!.git/config
+!.git/refs/heads/master
+!.git/refs/heads/main
+```
+
+This will ensure that the build process is able to access a subset of the .git folder, in order to determine the git commit hash and repository url. 
+
+2. Add the following line of code to your `Dockerfile`
+
+```
+COPY .git ./.git
+```
+
+
 ## Configure your repositories
 
 {{< tabs >}}
