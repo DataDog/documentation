@@ -133,7 +133,7 @@ For unified python project settings file:
 2. Set the environment variable **DD_MAIN_PACKAGE**, to the name of the primary Python package.
 {{% /tab %}}
 
-{{% tab "Python" %}}
+{{% tab ".NET" %}}
 Datadog is able to leverage [Microsot SourceLink](https://github.com/dotnet/sourcelink#readme) to extract the git commit SHA and repository URL directly from your .NET assembly. To use this approach:
 1. Open your project file (.csproj) in your IDE, and add a reference to one of the following nuget packages, based on where your git repository is hosted:
    - **GitHub:** [Microsoft.SourceLink.GitHub](https://www.nuget.org/packages/Microsoft.SourceLink.GitHub)
@@ -150,7 +150,7 @@ Datadog is able to leverage [Microsot SourceLink](https://github.com/dotnet/sour
 #### Build inside a docker container
 If your build process is executed in CI within a docker container, you will need to go through the following additional steps to ensure that the build can access the git information:
 
-1. Add the following text to your .dockerignore file:
+1. Add the following text to your `.dockerignore` file. This will ensure that the build process is able to access a subset of the .git folder, in order to determine the git commit hash and repository url. 
 
 ```
 !.git/HEAD
@@ -159,9 +159,7 @@ If your build process is executed in CI within a docker container, you will need
 !.git/refs/heads/main
 ```
 
-This will ensure that the build process is able to access a subset of the .git folder, in order to determine the git commit hash and repository url. 
-
-2. Add the following line of code to your `Dockerfile`
+2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
 
 ```
 COPY .git ./.git
