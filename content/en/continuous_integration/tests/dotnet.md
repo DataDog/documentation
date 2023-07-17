@@ -170,7 +170,7 @@ if (scope != null) {
 // ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
+To create filters or visualizations for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
 
 ### Reporting code coverage
 
