@@ -121,36 +121,47 @@ Ensure your service meets all the following requirements:
 {{% /tab %}}
 
 {{% tab "Python" %}}
-First, upgrade the [Python tracer](https://app.datadoghq.com/apm/service-setup?architecture=host-based&language=python) to v1.12 or higher.
+First, upgrade the [Python tracer][1] to v1.12 or higher.
 
-For standard library:
-1. Install **ddtrace** package
-2. Add `import ddtrace.sourcecode.setuptools_auto` as the first import to the setup.py
-3. Set the environment variable **DD_MAIN_PACKAGE** to the name of the primary Python package.
+For the standard library:
+1. Install the `ddtrace` package.
+2. Add `import ddtrace.sourcecode.setuptools_auto` as the first import to `setup.py`.
+3. Set the environment variable `DD_MAIN_PACKAGE` to the name of the primary Python package.
 
-For unified python project settings file:
-1. Install **hatch-datadog-build-metadata** plugin and configure it to embed git metadata (if project already has urls they must be reconfigured as dynamic and moved to other config section), see official [README](https://github.com/DataDog/hatch-datadog-build-metadata#readme).
-2. Set the environment variable **DD_MAIN_PACKAGE**, to the name of the primary Python package.
+For the unified Python project settings file:
+1. Install the [`hatch-datadog-build-metadata` plugin][2] and configure it to embed git metadata. If the project already has URLs, you must reconfigure them as dynamic and move them to another config section.
+2. Set the environment variable `DD_MAIN_PACKAGE` to the name of the primary Python package.
+
+[1]: https://app.datadoghq.com/apm/service-setup?architecture=host-based&language=python
+[2]: https://github.com/DataDog/hatch-datadog-build-metadata
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-Datadog is able to leverage [Microsot SourceLink](https://github.com/dotnet/sourcelink#readme) to extract the git commit SHA and repository URL directly from your .NET assembly. To use this approach:
-1. Open your project file (.csproj) in your IDE, and add a reference to one of the following nuget packages, based on where your git repository is hosted:
-   - **GitHub:** [Microsoft.SourceLink.GitHub](https://www.nuget.org/packages/Microsoft.SourceLink.GitHub)
-   - **Bitbucket:** [Microsoft.SourceLink.Bitbucket](https://www.nuget.org/packages/Microsoft.SourceLink.Bitbucket)
-   - **GitLab:** [Microsoft.SourceLink.GitLab](https://www.nuget.org/packages/Microsoft.SourceLink.GitLab)
-   - **Azure DevOps:** [Microsoft.SourceLink.AzureRepos.Git](https://www.nuget.org/packages/Microsoft.SourceLink.AzureRepos.Git)
-   - **Azure DevOps Server:** [Microsoft.SourceLink.AzureDevOpsServer.Git](https://www.nuget.org/packages/Microsoft.SourceLink.AzureDevOpsServer.Git)
-2. Upgrade the [.NET tracer](https://github.com/DataDog/dd-trace-dotnet/releases) to v2.25.0 or higher
-3. Ensure that your .pdb files are deployed alongside your .NET assemblies (.dll or .exe), in the same folder.
+Datadog can use [Microsot SourceLink][1] to extract the git commit SHA and repository URL directly from your .NET assembly. To use this approach:
+1. Open your project file (`.csproj`) in your IDE, and add a reference to one of the following NuGet packages, based on where your git repository is hosted:
+   - **GitHub:** [Microsoft.SourceLink.GitHub][2]
+   - **Bitbucket:** [Microsoft.SourceLink.Bitbucket][3]
+   - **GitLab:** [Microsoft.SourceLink.GitLab]()
+   - **Azure DevOps:** [Microsoft.SourceLink.AzureRepos.Git][5]
+   - **Azure DevOps Server:** [Microsoft.SourceLink.AzureDevOpsServer.Git][6]
+2. Upgrade the [.NET tracer][7] to v2.25.0 or higher
+3. Ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
+
+[1]: https://github.com/dotnet/sourcelink
+[2]: https://www.nuget.org/packages/Microsoft.SourceLink.GitHub
+[3]: https://www.nuget.org/packages/Microsoft.SourceLink.Bitbucket
+[4]: https://www.nuget.org/packages/Microsoft.SourceLink.GitLab
+[5]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureRepos.Git
+[6]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureDevOpsServer.Git
+[7]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
 {{< /tabs >}}
 
-#### Build inside a docker container
-If your build process is executed in CI within a docker container, perform the following steps to ensure that the build can access git information:
+#### Build inside a Docker container
+If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access git information:
 
-1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the .git folder, enabling it to determine the git commit hash and repository url. 
+1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL. 
 
 ```
 !.git/HEAD
