@@ -75,7 +75,7 @@ There are no provider-specific requirements for RPM-based Linux.
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
-1. Download the [sample pipeline configuration file][2]
+1. Download the [sample pipeline configuration file][2].
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
     ```
@@ -86,7 +86,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v datadog.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    Where `datadog.yaml` is the sample configuration you downloaded in the previous step.
+    `datadog.yaml` is the sample configuration you downloaded in Step 1.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/datadog.yaml
@@ -306,7 +306,7 @@ Observability Pipelines includes multiple buffering strategies that allow you to
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Please ensure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Make sure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
@@ -343,7 +343,7 @@ vector:
 
 ```
 
-`OPW_HOST` is the IP of the load balancer or machine you set up earlier. For single-host Docker-based installs, this will be the IP address of the underlying host. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
+`OPW_HOST` is the IP of the load balancer or machine you set up earlier. For single-host Docker-based installs, this is the IP address of the underlying host. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
 
 ```shell
 kubectl get svc opw-observability-pipelines-worker
@@ -356,10 +356,10 @@ The sample configuration provided has example processing steps that demonstrate 
 
 ### Processing logs
 The provided logs pipeline does the following:
-- **Collects** logs being sent from the Datadog agent the Observability Pipelines Worker
+- **Collects** logs sent from the Datadog agent the Observability Pipelines Worker.
 - **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
-- **Routes** the logs by dual-shipping the data to both Datadog Metrics and Logs. This demonstrates how easy it is to write to multiple destinations!
+- **Routes** the logs by dual-shipping the data to both Datadog Metrics and Logs.
 
 The following are two important components in the example configuration:
 - `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data.

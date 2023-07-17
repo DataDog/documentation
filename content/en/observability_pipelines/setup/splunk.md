@@ -103,7 +103,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v splunk.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    Where `splunk.yaml` is the sample configuration you downloaded in the previous step. Be sure to update `SPLUNK_ENDPOINT` and `SPLUNK_TOKEN` with values that match your Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+   `splunk.yaml` is the sample configuration you downloaded in Step 1. Be sure to update `SPLUNK_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
@@ -375,7 +375,7 @@ Observability Pipelines includes multiple buffering strategies that allow you to
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Please ensure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Make sure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
@@ -401,9 +401,9 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 ## Connect Splunk forwarders to the Observability Pipelines Worker
 After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing collectors to point to the Worker.
 
-You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines worker.
+You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
 
-Additionally, you must update the Splunk collector with the HEC token you wish to use for authentication, so it matches the one specified in the OP Worker's list of `valid_tokens` in your `pipeline.yaml`.
+Additionally, you must update the Splunk collector with the HEC token you wish to use for authentication, so it matches the one specified in the Observability Pipelines Worker's list of `valid_tokens` in `pipeline.yaml`.
 
 ```
 # Example pipeline.yaml splunk_receiver source
@@ -414,7 +414,7 @@ sources:
     valid_tokens:
         - ${SPLUNK_TOKEN}
 ```
-In the sample configuration we have provided, we simply use the same HEC token for the Splunk source and destination.
+In the sample configuration provided, the same HEC token is used for both the Splunk source and destination.
 
 At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
