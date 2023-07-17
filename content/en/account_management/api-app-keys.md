@@ -32,7 +32,7 @@ The recommended best practice for scoping application keys is to grant your keys
 
 ## Client tokens
 
-For security reasons, API keys cannot be used to send data from a browser, mobile or tv app, as they would be exposed client-side in the JavaScript code. Instead, end user facing applications use client tokens to send data to Datadog.
+For security reasons, API keys cannot be used to send data from a browser, mobile, or tv app, as they would be exposed client-side. Instead, end user facing applications use client tokens to send data to Datadog.
 
  Several types of clients submit data that requires a client token, including the following examples:
 - The log collectors for [web browser][6], [Android][12], [iOS][13], [React Native][14], [Flutter][15] and [Roku][16] submit logs.

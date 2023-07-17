@@ -41,7 +41,7 @@ Install the added pod:
 
 Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
 
-1. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a new RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
+1. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
 {{< site-region region="us" >}}
 ```js
 import {
