@@ -136,7 +136,8 @@ CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "app.jar"]
 
 #### Install tracing library
 
-Tracing should work with the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Java tracing library in your application to capture and submit traces.
+The Dockerfile in the previous step installs and configures the Java tracing library in your application to capture and submit traces.
+Tracing should work with the Dockerfile in the previous step. Alternatively, see [Tracing Java Applications - Instrument your application][2].
 
 [Sample code for a sample Java application][1].
 
