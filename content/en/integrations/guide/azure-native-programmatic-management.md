@@ -19,9 +19,9 @@ The Azure Native integration uses the Datadog resource in Azure to streamline ma
 
 ## Setup
 
-### Terraform
-
 **Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to. 
+
+### Terraform
 
 1. Ensure that you have configured the [Terraform Azure provider][1].
 
