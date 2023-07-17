@@ -30,7 +30,7 @@ further_reading:
 
 As teams iterate quickly, deploy code, and continually make changes to their applications and services, it can be difficult to find the exact change that caused a spike in errors, an increase in latency, or slower page load times. Change overlays enable you to identify when a recent change is causing performance issues within your application or services and help you identify the source of the problem.
 
-{{< img src="dashboards/change_overlays/references-graphing-edit-window-with-y-2.png" alt="Change overlays on graphs in a Dashboard" style="width:75%;">}}
+{{< img src="dashboards/change_overlays/change_overlays.mp4" alt="Change overlays on graphs in a Dashboard" video="true" style="width:75%;">}}
 
 By viewing the moment a change occurred in the context of your Datadog observability data, you can pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays currently supports [APM service deployments][1].
 
