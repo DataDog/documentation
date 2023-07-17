@@ -134,6 +134,10 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Adding custom tags to tests
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> To add custom tags to tests, you must configure <a href="#custom-instrumentation">Custom Instrumentation</a> first.
+</div>
+
 You can add custom tags to your tests by using the current active span:
 
 ```csharp
@@ -141,6 +145,26 @@ You can add custom tags to your tests by using the current active span:
 var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
 if (scope != null) {
     scope.Span.SetTag("test_owner", "my_team");
+}
+// test continues normally
+// ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
+
+### Adding custom metrics to tests
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> To add custom metrics to tests, you must configure <a href="#custom-instrumentation">Custom Instrumentation</a> first.
+</div>
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```csharp
+// inside your test
+var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
+if (scope != null) {
+    scope.Span.SetTag("memory_allocations", 16);
 }
 // test continues normally
 // ...
