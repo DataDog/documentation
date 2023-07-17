@@ -1,9 +1,10 @@
 ---
-title: クエリからグラフまで
-kind: ドキュメント
 aliases:
-  - /ja/dashboards/faq/query-to-the-graph
+- /ja/dashboards/faq/query-to-the-graph
+kind: ドキュメント
+title: クエリからグラフまで
 ---
+
 このページでは主に、さまざまなグラフ設定を選択する際の参考になるように、クエリからグラフまで、Datadog のグラフ作成システムを実行する手順について説明します。
 
 [タイムボード][1]または[スクリーンボード][2]でグラフを作成する場合、エディターまたは JSON タブを使用して高度なクエリを設定できます。以下の例では、特定のサーバー (`host:bubs`) からのメトリクス `system.disk.total` を使用しています。
@@ -57,7 +58,7 @@ Datadog のバックエンドは、グラフの時間範囲に対応するすべ
 
 ### 理由
 
-Datadog はデータを 1 秒の粒度で保存するため、グラフに実際のデータをすべて表示することはできません。詳細については、[グラフのデータの集計方法][5]をご参照ください。
+Datadog はデータを 1 秒の粒度で保存するため、グラフに実際のデータをすべて表示することはできません。詳細については、[メトリクス集計][5]をご参照ください。
 
 たとえば、1 週間のタイムウィンドウでグラフを表示する場合、ブラウザに数十万個の値を送信する必要があります。しかも、画面のごく一部を占めるだけのウィジェット内にすべてのポイントをグラフにして表示することは不可能です。このような理由から、グラフを描画するにはデータの集計手順に進み、ブラウザに送信するポイント数を制限する必要があります。
 
@@ -158,13 +159,13 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 詳細については、[ StatsD メトリクスをカウントグラフで視覚化する方法][9]を参照してください。
 [StatsD/DogStatsD][10] のドキュメントもご覧いただけます。
 
-[1]: /ja/dashboards/timeboard/
-[2]: /ja/dashboards/screenboard/
+[1]: /ja/dashboards/#timeboards
+[2]: /ja/dashboards/#screenboards
 [3]: /ja/agent/
 [4]: /ja/metrics/custom_metrics/
-[5]: /ja/dashboards/faq/how-is-data-aggregated-in-graphs/
+[5]: /ja/dashboards/querying/#aggregate-and-rollup
 [6]: /ja/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /ja/dashboards/functions/rollup/
-[8]: /ja/dashboards/faq/i-m-switching-between-the-sum-min-max-avg-aggregators-but-the-values-look-the-same/
+[8]: /ja/metrics/guide/different-aggregators-look-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[10]: /ja/metrics/dogstatsd_metrics_submission/
+[10]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/

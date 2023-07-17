@@ -16,43 +16,52 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 ## Before you begin
 
 Supported databases
-: postgres, mysql
+: postgres, mysql, sqlserver
 
 Supported Agent versions
-: 7.36.1+
+: 7.46+
 
 Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
 
 
-**Supported tracers**
+APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
-| Language                                 | Library or Framework | Postgres  |   MySQL   |
-|:-----------------------------------------|:---------------------|:---------:|:---------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |
-|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} |
-|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |
-|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |
-|                                          | [pg][8]              | {{< X >}} |           |
-|                                          | [mysql2][7]          |           | {{< X >}} |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |
-|                                          | [psycopg2][12]       | {{< X >}} |           |
-| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||                      |           |
-|                                          | [Npgsql][16]         | {{< X >}} |           |
-|                                          | [MySql.Data][17]     |           | {{< X >}} |
-|                                          | [MySqlConnector][18] |           | {{< X >}} |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
-|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
-|                                          | [MySQLi][21]         |           | {{< X >}} |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |
-|                                          | [postgres][10]       | {{< X >}} |           |
-|                                          | [mysql][13]          |           | {{< X >}} |
-|                                          | [mysql2][14]         |           | {{< X >}} |
+- `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for SQL Server applications.
+- `none` mode disables propagation and does not send any information from applications.
 
+| DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
+|:-------------------------|:---------:|:---------:|:------------:|
+| `full`                   | {{< X >}} | {{< X >}} |          |
+| `service`                | {{< X >}} | {{< X >}} | {{< X >}}    |
 
+**Supported application tracers and drivers**
 
+| Language                                 | Library or Framework | Postgres  |   MySQL   |                SQL Server              |
+|:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |                                        |
+|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} | `service` mode only                    |
+|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} | `service` mode only                    |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
+|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} | `service` mode only                    |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |                                        |
+|                                          | [pg][8]              | {{< X >}} |           |                                        |
+|                                          | [mysql2][7]          |           | {{< X >}} |                                        |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
+|                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
+| **.NET** [dd-trace-dotnet][15] >= 2.26.0 |                      |           |           |                                        |
+|                                          | [Npgsql][16]         | {{< X >}} |           |                                        |
+|                                          | [MySql.Data][17]     |           | {{< X >}} |                                        |
+|                                          | [MySqlConnector][18] |           | {{< X >}} |                                        |
+|                                          | [ADO.NET][24]        |           |           | `service` mode only                    |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |           |                                        |
+|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |                                        |
+|                                          | [MySQLi][21]         |           | {{< X >}} |                                        |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |                                        |
+|                                          | [postgres][10]       | {{< X >}} |           |                                        |
+|                                          | [mysql][13]          |           | {{< X >}} |                                        |
+|                                          | [mysql2][14]         |           | {{< X >}} |                                        |
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -222,9 +231,9 @@ client.query("SELECT 1;")
 
 {{% tab "Python" %}}
 
-Update your app dependencies to include [dd-trace-py>=1.7.0][1]:
+Update your app dependencies to include [dd-trace-py>=1.9.0][1]:
 ```
-pip install "ddtrace>=1.7.0"
+pip install "ddtrace>=1.9.0"
 ```
 
 Install [psycopg2][2] (**Note**: Connecting DBM and APM is not supported for MySQL clients):
@@ -272,7 +281,10 @@ Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing in
 Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_DBM_PROPAGATION_MODE=full`
+   - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
+
+SQL Server does not support full propagation mode due to the inability for the server to cache statements which contain full trace context.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
@@ -360,7 +372,7 @@ Break down active connections for a given host by the upstream APM services maki
 
 {{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
-Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.   
+Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.
 
 ### View the associated trace for a query sample
 
@@ -376,7 +388,7 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
-### Identify potential optimizations using explain plans for database queries in traces 
+### Identify potential optimizations using explain plans for database queries in traces
 
 {{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
@@ -405,3 +417,4 @@ View historical performance of similar queries to those executed in your trace, 
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
+[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview

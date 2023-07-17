@@ -2,7 +2,7 @@
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: Documentation
-  text: Error Tracking
+  text: エラー追跡
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: ブログ
   text: リアルユーザーの監視

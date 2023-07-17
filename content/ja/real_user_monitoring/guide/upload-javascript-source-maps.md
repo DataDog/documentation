@@ -18,7 +18,7 @@ title: JavaScript ソースマップのアップロード
 
 ## コードのインスツルメンテーション
 
-JavaScript バンドルは、ソースコードを縮小化する際に、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように構成します。また、各ソースマップのサイズと関連する縮小化ファイルのサイズを足したものが、**50MB** という制限を超えないことを確認してください。
+JavaScript バンドルは、ソースコードを縮小化する際に、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように構成します。また、各ソースマップのサイズと関連する縮小化ファイルのサイズを足したものが、US1 または EU1 のサイトでは **200 MB**、その他のサイトでは **50 MB** という制限を超えないことを確認してください。
 
 一般的な JavaScript のバンドルソフトについては、以下の構成を参照してください。
 
@@ -75,7 +75,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning"><code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>50MB</b> の制限を超える場合は、ソースコードを複数の小さな塊に分割するようにバンドラーを構成してファイルサイズを小さくしてください。詳しくは、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS によるコードの分割</a>を参照してください。</div>
+<div class="alert alert-warning"><code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>US1 または EU1 サイトでは 200 MB (その他のサイトでは 50 MB)</b> の制限を超える場合は、ソースコードを複数の小さな塊に分割するようにバンドラーを構成してファイルサイズを小さくしてください。詳しくは、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS によるコードの分割</a>を参照してください。</div>
 
 ## ソースマップのアップロード
 
@@ -115,13 +115,15 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 
 CI のパフォーマンスに対するオーバーヘッドを最小限に抑えるため、CLI は短時間 (通常数秒) で必要なだけのソースマップをアップロードできるように最適化されています。
 
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
+
 `service` と `--release-version` パラメーターは、RUM イベントとブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
 
 <div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
 
 サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
 
-スタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。 `.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
+スタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。`.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
 
 <div class="alert alert-info">異なるサブドメインから同じ JavaScript ソースファイルを提供する場合、関連するソースマップを一度アップロードし、完全な URL の代わりに絶対プレフィックスパスを使用することで複数のサブドメインで動作するようにしてください。例えば、<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定します。</div>
 

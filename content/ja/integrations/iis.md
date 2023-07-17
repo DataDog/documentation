@@ -35,9 +35,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iis/README.md
 display_on_public_website: true
@@ -45,7 +43,7 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 2.17.0
+integration_version: 2.19.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -58,10 +56,8 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Windows
-  - Category::Web
   - Category::Log Collection
-  - Category::Autodiscovery
+  - Supported OS::Windows
   configuration: README.md#Setup
   description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
   media: []

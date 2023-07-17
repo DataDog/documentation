@@ -81,7 +81,7 @@ The following instructions grant the Agent permission to login from any host usi
 Create the `datadog` user and grant basic permissions:
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -392,7 +392,7 @@ If you have installed and configured the integrations and Agent as described and
 [1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: /integrations/google_cloudsql

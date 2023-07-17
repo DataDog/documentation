@@ -1,26 +1,26 @@
 ---
 categories:
-- クラウド
 - AWS
+- クラウド
 - ログの収集
+- ネットワーク
 dependencies: []
-description: Amazon PrivateLink のキーメトリクスを追跡
+description: AWS PrivateLink のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_privatelink/
 draft: false
 git_integration_title: amazon_privatelink
 has_logo: true
 integration_id: amazon-privatelink
-integration_title: Amazon PrivateLink
+integration_title: AWS PrivateLink
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_privatelink
-public_title: Datadog-Amazon PrivateLink インテグレーション
-short_description: Amazon PrivateLink のキーメトリクスを追跡
+public_title: Datadog-AWS PrivateLink インテグレーション
+short_description: AWS PrivateLink のキーメトリクスを追跡します。
 version: '1.0'
 ---
-
 
 ## 概要
 
@@ -32,7 +32,7 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -40,7 +40,7 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブで `PrivateLinkEndPoints` と `PrivateLinkServices` が
    有効になっていることを確認します。
-2. [Datadog - Amazon PrivateLink インテグレーション][4]をインストールします。
+2. [Datadog - AWS PrivateLink インテグレーション][4]をインストールします。
 
 ## 収集データ
 
@@ -50,11 +50,11 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 
 ### イベント
 
-Amazon PrivateLink インテグレーションには、イベントは含まれません。
+AWS PrivateLink インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon PrivateLink インテグレーションには、サービスのチェック機能は含まれません。
+AWS PrivateLink インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

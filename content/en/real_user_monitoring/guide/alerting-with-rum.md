@@ -32,7 +32,7 @@ The example above is a search query for a RUM monitor configured for views on th
 
 You can export search queries from the [RUM Explorer][2] to a monitor to retain all the context for the query.
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor.mp4" alt="Export button to the right hand corner of the RUM Explorer" video="true" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor-3.mp4" alt="Export button to the right hand corner of the RUM Explorer" video="true" style="width:100%;" >}}
 
 The example above is a search query for a RUM monitor configured for images that are larger than 1Mb. Large images may reduce your application's performance. 
 

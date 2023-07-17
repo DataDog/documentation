@@ -10,7 +10,7 @@ further_reading:
 - link: profiler/search_profiles
   tag: ドキュメント
   text: 使用可能なプロファイルタイプの詳細
-- link: profiler/profiler_troubleshooting
+- link: profiler/profiler_troubleshooting/python
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
 kind: ドキュメント
@@ -43,7 +43,7 @@ Datadog Profiler には Python 2.7+ と Agent バージョン [7.20.2][2] 以降
 | [Code Hotspots][12]        | 0.44.0 以降                       |
 | [エンドポイントプロファイリング][13]            | 0.54.0 以降                       |
 
-## APM に Datadog Agent を構成する
+## インストール
 
 トレーシングとプロファイリング機能の双方を提供する `ddtrace` をインストールします。
 

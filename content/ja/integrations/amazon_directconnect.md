@@ -6,20 +6,20 @@ categories:
 - aws
 - log collection
 dependencies: []
-description: Amazon Direct Connect のキーメトリクスを追跡。
+description: AWS Direct Connect のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_directconnect/
 draft: false
 git_integration_title: amazon_directconnect
 has_logo: true
 integration_id: amazon-direct-connect
-integration_title: Amazon Direct Connect
+integration_title: AWS Direct Connect
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_directconnect
-public_title: Datadog-Amazon Direct Connect インテグレーション
-short_description: Amazon Direct Connect のキーメトリクスを追跡。
+public_title: Datadog-AWS Direct Connect インテグレーション
+short_description: AWS Direct Connect のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
@@ -36,7 +36,7 @@ version: '1.0'
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DirectConnect` が有効になっていることを確認します。
-2. Amazon Direct Connect のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+2. AWS Direct Connect のメトリクスを収集するために、次の権限を [Datadog IAM ポリシー][3]に追加します。
 
     - `directconnect:DescribeConnections`: 使用できる Direct Connect 接続をリストするために使用されます。
     - `directconnect:DescribeTags`: Direct Connect 接続に適用されるカスタムタグを収集するために使用されます。
@@ -49,14 +49,14 @@ version: '1.0'
 
 #### ログの有効化
 
-Amazon Direct Connect から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS Direct Connect から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_directconnect` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
     - [CloudWatch ロググループに手動トリガーを追加][8]
@@ -86,7 +86,7 @@ AWS Direct Connect インテグレーションには、サービスのチェッ�
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/security-iam.html
 [5]: https://app.datadoghq.com/integrations/amazon-directconnect
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_directconnect/amazon_directconnect_metadata.csv

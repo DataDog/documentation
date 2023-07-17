@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default cloud configuration detection rules"
+  text: "Explore default cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
@@ -189,7 +189,7 @@ Use one of the following methods to enable CSPM for your Google Cloud projects:
 
 5. Restart the Agent.
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://app.datadoghq.com/security/configuration
 [3]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=kubernetes
 
@@ -204,11 +204,11 @@ To view the findings for your cloud resources, go to the [CSPM homepage][1].
 
 {{< img src="security/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
 
-## Explore default detection rules
+## Explore default compliance rules
 
-CSPM comes with a set of [out-of-the-box detection rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration detection rules are added, they are automatically imported into your account.
+CSPM comes with a set of [out-of-the-box compliance rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration compliance rules are added, they are automatically imported into your account.
 
-To filter the default detection rules by cloud provider:
+To filter the default compliance rules by cloud provider:
 
 1. Navigate to **Security** > **Posture Management** > **Compliance Rules**.
 2. Choose one of the following values from the **Tag** facet.
@@ -218,15 +218,15 @@ To filter the default detection rules by cloud provider:
     - **Docker**: framework:cis-docker
     - **Kubernetes**: framework:cis-kubernetes
 
-After you explore the default detection rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
+After you explore the default compliance rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment, and set up notification targets][4].
 
 ## Disable CSPM
 
-Once you've disabled CSPM, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
+Once you've disabled CSPM, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs.
 
 To disable CSPM for your cloud providers:
 
-- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
+- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts.
 - **Azure**: On the **Setup** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
 - **Google Cloud**: On the **Setup** > **Cloud Providers** tab, click the **Google Cloud Platform** tile, and turn off the **CSPM Enabled** toggle for your Google Cloud projects.
 - **Docker**: Set `DD_COMPLIANCE_CONFIG_ENABLED` to `false` in your Docker configuration.
@@ -239,5 +239,4 @@ To disable CSPM for your cloud providers:
 [1]: https://app.datadoghq.com/security/compliance/homepage
 [2]: /security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
-[4]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
-[5]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[4]: /security/cspm/frameworks_and_benchmarks#view-your-compliance-posture

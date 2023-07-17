@@ -33,7 +33,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.17.2
+integration_version: 1.18.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -71,7 +71,7 @@ Aerospike データベースからメトリクスをリアルタイムに取得�
 注: 現在の Aerospike インテグレーションは、Aerospike サーバー v4.9 以上のみで互換性があります。詳細は、Aerospike の [Python クライアントライブラリリリースノート][1]を参照してください。
 これ以前のバージョンの Aerospike サーバーを使用している場合は、Datadog Agent のバージョン 7.29.0 以下を使用して監視することができます。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Aerospike チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -178,6 +178,6 @@ Aerospike には、イベントは含まれません。
 
 
 [1]: https://download.aerospike.com/download/client/python/notes.html#5.0.0
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

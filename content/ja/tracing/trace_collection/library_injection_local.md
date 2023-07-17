@@ -28,21 +28,26 @@ Kubernetes Admission Controller の詳細については、[Kubernetes Admission
 ## 要件
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][3]
+* Java、Python、NodeJS については Datadog [Cluster Agent v7.40+][3]、.NET、Ruby については Datadog [Cluster Agent v7.44+][3]。
 * Datadog Admission Controller が有効になっている。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
-* サポートされているアーキテクチャを持つ Linux 上にデプロイされた Java、JavaScript、Python のアプリケーション。言語ごとにサポートされているアーキテクチャの完全なリストについては、[対応するコンテナレジストリ](#container-registries)を確認してください。
-
-**注:** Python の uWSGI アプリケーションはサポートされていません。
-
+* Python の場合、現時点では uWSGI アプリケーションはサポートされていません。
+* Ruby の場合、ライブラリ挿入のサポートはベータ版です。インスツルメンテーションは、現時点では Ruby on Rails または Hanami アプリケーションに対してのみサポートされています。
+* サポートされているアーキテクチャを持つ Linux 上にデプロイされた Java、JavaScript、Python、.NET、または Ruby のアプリケーション。言語ごとにサポートされているアーキテクチャの完全なリストについては、[対応するコンテナレジストリ](#container-registries)を確認してください。
 
 ## コンテナレジストリ
 
+<div class="alert alert-warning">2023 年 7 月 10 日、Docker Hub は Datadog の Docker Hub レジストリへのダウンロードレート制限を実施するようになります。これらのレジストリからのイメージのプルは、レート制限割り当てにカウントされます。<br/><br/>
+
+Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レート制限が適用されない他のレジストリからプルすることを推奨しています。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリを変更する</a>を参照してください。</div>
+
 Datadog は、インスツルメンテーションライブラリのイメージを gcr.io、Docker Hub、AWS ECR で公開しています。
-| 言語   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
+| Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
+| .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][13] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][23] | [hub.docker.com/r/datadog/dd-lib-ruby-init][24] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][25] |
 
 Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数は、Admission Controller が使用するレジストリを指定します。デフォルト値は、`gcr.io/datadoghq` です。
 
@@ -50,18 +55,18 @@ Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMEN
 
 ## インスツルメンテーションライブラリの挿入の構成
 
-Datadog にトレースを送信したい Kubernetes アプリケーションに対して、Java、JavaScript、または Python のインスツルメンテーションライブラリを自動的に挿入するように Datadog Admission Controller を構成します。大まかに言うと、これには次の手順が含まれます。詳細は以下で説明します。
+Datadog にトレースを送信したい Kubernetes アプリケーションに対して、Java、JavaScript、Python、.NET または Ruby のインスツルメンテーションライブラリを自動的に挿入するように Datadog Admission Controller を構成します。大まかに言うと、これには次の手順が含まれます。詳細は以下で説明します。
 
-1. Datadog Admission Controller を有効にして、ポッドのミュートを行います。
+1. Datadog Admission Controller を有効にして、ポッドを変異させます。
 2. ポッドにアノテーションを付けて、どのインスツルメンテーションライブラリを挿入するか選択します。
 3. 統合サービスタグ付けにより、ポッドにタグを付け、Datadog のテレメトリーを結び付け、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートします。
 4. 新しい構成を適用します。
 
 <div class="alert alert-info">ライブラリを挿入するために、新しいアプリケーションイメージを生成する必要はありません。ライブラリの挿入はインスツルメンテーションライブラリの追加で行われるため、アプリケーションイメージの変更は必要ありません。</div>
 
-### ステップ 1 - Datadog Admission Controller を有効にして、ポッドのミュートを行います
+### ステップ 1 - Datadog Admission Controller を有効にして、ポッドを変異させます
 
-デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみをミュートします。ポッドでミュートを有効にするには、ポッドの仕様にラベル `admission.datadoghq.com/enabled: "true"` を追加します。
+デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみを変異させます。ポッドの変異を有効にするには、ポッドのスペックにラベル `admission.datadoghq.com/enabled: "true"` を追加します。
 
 **注**: Datadog Admission Controller で、Cluster Agent で `clusterAgent.admissionController.mutateUnlabelled` (または `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定すると、このポッドラベルがなくても挿入設定を有効にすることが可能です。
 
@@ -93,11 +98,16 @@ template:
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
 
 利用可能なライブラリのバージョンは、各コンテナレジストリ、および各言語のトレーサーソースレジストリに記載されています。
-- [Java][13]
-- [Javascript][14]
-- [Python][15]
+- [Java][16]
+- [Javascript][17]
+- [Python][18]
+- [.NET][19]
+  - **注**: .NET ライブラリ挿入の場合、アプリケーションコンテナが musl ベースの Linux ディストリビューション (Alpine など) を使用している場合は、ポッドアノテーションに `-musl` というサフィックスを持つタグを指定する必要があります。例えば、ライブラリバージョン `v2.29.0` を使用する場合は、コンテナタグ `v2.29.0-musl` を指定します。
+- [Ruby][20]
 
 **注**: ライブラリのバージョン X を使用してインストルメンテーションを行ったアプリケーションで、ライブラリ挿入を使用して同じトレーサーライブラリのバージョン Y を使用してインストルメンテーションを行う場合、トレーサーは中断されません。むしろ、最初にロードされたライブラリのバージョンが使用されます。ライブラリ挿入は実行前にアドミッションコントローラレベルで行われるため、手動で構成されたライブラリよりも優先されます。
 
@@ -124,7 +134,7 @@ template:
 
 ### ステップ 3 - 統合サービスタグ付けによるポッドへのタグ付け
 
-[統合サービスタグ付け][16]を使用すると、Datadog のテレメトリーを結びつけ、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートすることができます。デプロイメントオブジェクトとポッドテンプレートの両方の仕様に、統合サービスタグ付けを設定します。
+[統合サービスタグ付け][21]を使用すると、Datadog のテレメトリーを結びつけ、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートすることができます。デプロイメントオブジェクトとポッドテンプレートの両方の仕様に、統合サービスタグ付けを設定します。
 以下のラベルを使用して、統合サービスタグを設定します。
 
 ```yaml
@@ -178,7 +188,22 @@ template:
 
 または、`kubectl describe pod <my-pod>` を実行すると、`datadog-lib-init` init コンテナがリストアップされます。
 
-インスツルメンテーションは、Datadog へのテレメトリーの送信も開始します (例えば、[APM][17] へのトレースなど)。
+インスツルメンテーションは、Datadog へのテレメトリーの送信も開始します (例えば、[APM][22] へのトレースなど)。
+
+### インストールに関する問題のトラブルシューティング
+
+アプリケーションポッドの起動に失敗した場合、`kubectl logs <my-pod> --all-containers` を実行してログを出力し、以下の既知の問題と比較してください。
+
+#### .NET のインストールに関する問題
+##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
+
+- **問題**: dotnet ライブラリバージョンのポッドアノテーションには `-musl` サフィックスが含まれていたが、アプリケーションコンテナは glibc を使用する Linux ディストリビューションで実行されている。
+- **解決策**: dotnet ライブラリのバージョンから `-musl` サフィックスを削除してください。
+
+##### `Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /datadog-lib/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so)`
+
+- **問題**: アプリケーションコンテナは musl-libc を使用する Linux ディストリビューション (例えば Alpine) で動作するが、ポッドアノテーションに `-musl` というサフィックスが含まれていない。
+- **解決策**: dotnet ライブラリのバージョンに `-musl` サフィックスを追加してください。
 
 
 [1]: /ja/containers/cluster_agent/admission_controller/
@@ -193,11 +218,19 @@ template:
 [10]: http://gcr.io/datadoghq/dd-lib-python-init
 [11]: http://hub.docker.com/r/datadog/dd-lib-python-init
 [12]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[13]: https://github.com/DataDog/dd-trace-java/releases
-[14]: https://github.com/DataDog/dd-trace-js/releases
-[15]: https://github.com/DataDog/dd-trace-py/releases
-[16]: /ja/getting_started/tagging/unified_service_tagging/
-[17]: https://app.datadoghq.com/apm/traces
+[13]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[14]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[15]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[16]: https://github.com/DataDog/dd-trace-java/releases
+[17]: https://github.com/DataDog/dd-trace-js/releases
+[18]: https://github.com/DataDog/dd-trace-py/releases
+[19]: https://github.com/DataDog/dd-trace-dotnet/releases
+[20]: https://github.com/DataDog/dd-trace-rb/releases
+[21]: /ja/getting_started/tagging/unified_service_tagging/
+[22]: https://app.datadoghq.com/apm/traces
+[23]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
 {{% /tab %}}
 
 {{% tab "Host" %}}
@@ -896,7 +929,7 @@ docker-compose up -d dd-agent
   - key: DD_PROFILING_ENABLED
     value: true
   - key: DD_APPSEC_ENABLED
-    value: true 
+    value: true
   ```
 
   挿入構成ソースの `additional_environment_variables` セクションに設定できるのは、`DD_` で始まる構成キーのみです。

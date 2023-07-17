@@ -130,7 +130,7 @@ func ErrorField(err error) errorField {
             stack = stack[1:]
         }
     }
-    return ErrorField{
+    return errorField{
         kind: reflect.TypeOf(err).String(),
         stack: stack,
         message: err.Error(),
@@ -250,7 +250,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

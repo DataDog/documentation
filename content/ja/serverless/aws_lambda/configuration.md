@@ -27,7 +27,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 
 ### ログ管理
 - [ログから情報をフィルターまたはスクラブする](#filter-or-scrub-information-from-logs)
-- [ログ収集の無効化](#disable-logs-collection)
+- [ログ収集の有効化/無効化](#enabledisable-log-collection)
 - [非 Lambda リソースからログを収集する](#collect-logs-from-non-lambda-resources)
 - [ログのパースと変換](#parse-and-transform-logs)
 - [ログとトレースを接続する](#connect-logs-and-traces)
@@ -39,15 +39,17 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [非 Lambda リソースからログを収集する](#collect-logs-from-non-lambda-resources)
 - [非 Lambda リソースからトレースを収集する](#collect-traces-from-non-lambda-resources)
 - [ログから情報をフィルターまたはスクラブする](#filter-or-scrub-information-from-logs)
-- [ログ収集の無効化](#disable-logs-collection)
+- [ログ収集の有効化/無効化](#enabledisable-log-collection)
 - [ログのパースと変換](#parse-and-transform-logs)
 - [Datadog トレーサーの構成](#configure-the-datadog-tracer)
 - [APM スパンを取り込む際のサンプリングレートの選択](#select-sampling-rates-for-ingesting-apm-spans)
 - [トレースから機密情報をフィルターまたはスクラブする](#filter-or-scrub-sensitive-information-from-traces)
-- [トレース収集の無効化](#disable-trace-collection)
+- [トレース収集の有効化/無効化](#enabledisable-trace-collection)
 - [ログとトレースを接続する](#connect-logs-and-traces)
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信](#submit-custom-metrics)
+- [OpenTelemetry のデータを Datadog に送信する](#send-opentelemetry-data-to-datadog)
+- [プロファイリングデータの収集 (公開ベータ版)](#collect-profiling-data-public-beta)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -58,6 +60,9 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ローカルテスト用の Datadog Lambda 拡張機能の構成](#configure-the-datadog-lambda-extension-for-local-testing)
 - [トラブルシューティング](#troubleshoot)
 - [参考文献](#further-reading)
+
+### セキュリティ
+- [脅威の検出を有効にして攻撃の試みを観測する](#enable-threat-detection-to-observe-attack-attempts)
 
 ### その他
 - [タグを使ったテレメトリー接続](#connect-telemetry-using-tags)
@@ -75,6 +80,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ログとトレースを接続する](#connect-logs-and-traces)
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信](#submit-custom-metrics)
+- [OpenTelemetry のデータを Datadog に送信する](#send-opentelemetry-data-to-datadog)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -85,6 +91,39 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ローカルテスト用の Datadog Lambda 拡張機能の構成](#configure-the-datadog-lambda-extension-for-local-testing)
 - [トラブルシューティング](#troubleshoot)
 - [参考文献](#further-reading)
+
+## 脅威の検出を有効にして攻撃の試みを観測する
+
+サーバーレスアプリケーションを標的にしている攻撃者についてアラートを受け取り、素早く対応できます。
+
+まずは、関数で[トレーシングが有効][43]になっていることを確認します。
+
+脅威の監視を有効にするには、言語に応じて次の環境変数を追加します。
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+   ```
+   Go の関数の場合のみ、さらに以下を追加します。
+   ```yaml
+   environment:
+     DD_UNIVERSAL_INSTRUMENTATION: true
+   ```
+   **NodeJS または Python の関数**の場合は、さらに以下を追加します。
+   ```yaml
+   environment:
+     DD_EXPERIMENTAL_ENABLE_PROXY: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+   ```
+
+関数を再デプロイして呼び出します。数分後、[ASM ビュー][3]に表示されます。
+
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+
+アプリケーションセキュリティ管理の脅威検出のアクションを見るには、既知の攻撃パターンをアプリケーションに送信します。例えば、`acunetix-product` という値を持つ HTTP ヘッダーを送信すると、[セキュリティスキャナー攻撃][44]の試行がトリガーされます。
+   ```sh
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   ```
+アプリケーションを攻撃パターンを送信すると、数分後に[アプリケーションシグナルエクスプローラー][3]に脅威情報が表示されます。
 
 ## タグを使ったテレメトリー接続
 
@@ -182,7 +221,7 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 
 ## リクエストとレスポンスのペイロードを収集する
 
-<div class="alert alert-info">この機能は、Python、Node.js、Go、.NET でサポートされています。</div>
+<div class="alert alert-info">この機能は、Python、Node.js、Go、Java、.NET でサポートされています。</div>
 
 Datadog は [AWS Lambda 関数の JSON リクエストとレスポンスのペイロードを収集し可視化する][5]ことで、サーバーレスアプリケーションへの深い洞察と Lambda 関数障害のトラブルシューティングを支援することが可能です。
 
@@ -325,6 +364,55 @@ Datadog は、Lambda 関数をトリガーする AWS マネージドリソース
 
 この機能を無効にするには、`DD_TRACE_MANAGED_SERVICES` を `false` に設定します。
 
+### DD_SERVICE_MAPPING
+
+`DD_SERVICE_MAPPING` は Lambda 以外のアップストリームの[サービス名][46]を名前変更する環境変数です。これは `old-service:new-service` のペアで動作します。
+
+#### 構文
+
+`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
+
+この変数を操作する方法は 2 つあります。
+
+#### タイプのすべてのサービス名を変更
+
+AWS Lambda インテグレーションに関連するすべてのアップストリームサービスの名前を変更するには、これらの識別子を使用します。
+
+| AWS Lambda インテグレーション | DD_SERVICE_MAPPING Value |
+|---|---|
+| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| `lambda_sns` | `"lambda_sns:newServiceName"` |
+| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| `lambda_s3` | `"lambda_s3:newServiceName"` |
+| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| `lambda_url` | `"lambda_url:newServiceName"` |
+
+#### 特定のサービス名を変更
+
+より詳細なアプローチは、これらのサービス固有の識別子を使用します。
+
+| サービス | 識別子 | DD_SERVICE_MAPPING Value |
+|---|---|---|
+| API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| SNS | トピック名 | `"ExampleTopic:newServiceName"` |
+| SQS | キュー名 | `"MyQueue:newServiceName"` |
+| **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。 | バケット名 | `"example-bucket:newServiceName"` |
+| EventBridge | イベントソース | `"eventbridge.custom.event.sender:newServiceName"` |
+| Kinesis | ストリーム名 | `"MyStream:newServiceName"` |
+| DynamoDB | テーブル名 | `"ExampleTableWithStream:newServiceName"` |
+| Lambda URL | API ID | `"a8hyhsshac:newServiceName"` |
+
+#### 例と説明
+
+| コマンド | 説明 |
+|---|---|
+| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | 全ての `lambda_api_gateway` アップストリームサービスの名前を `new-service-name` に変更します |
+| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | 特定のアップストリームサービス `08se3mvh28.execute-api.eu-west-1.amazonaws.com` の名前を `new-service-name` に変更します |
+
+ダウンストリームサービスの名前の変更については、[トレーサーの構成ドキュメント][45]の `DD_SERVICE_MAPPING` を参照してください。
+
 ## ログから情報をフィルタリングまたはスクラブする
 
 `START` と `END` のログを除外するには、環境変数 `DD_LOGS_CONFIG_PROCESSING_RULES` を `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]` に設定します。また、プロジェクトのルートディレクトリに `datadog.yaml` ファイルを追加して、以下の内容を記述することも可能です。
@@ -341,9 +429,52 @@ Datadog では、`REPORT` ログを残すことを推奨しています。これ
 
 Datadog に送信する前に他のログをスクラブまたはフィルタリングするには、[高度なログ収集][13]を参照してください。
 
-## ログ収集の無効化
+## ログ収集の有効化/無効化
 
 Datadog Lambda 拡張機能によるログ収集は、デフォルトで有効になっています。
+
+{{< tabs >}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # ... その他の必要なパラメーター (Datadog のサイトや API キーなど)
+    enableDDLogs: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # ... その他の必要なパラメーター (Datadog のサイトや API キーなど)
+      enableDDLogs: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new Datadog(this, "Datadog", {
+    // ... その他の必要なパラメーター (Datadog のサイトや API キーなど)
+    enableDatadogLogs: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "その他" %}}
+
+Lambda 関数で環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `true` に設定します。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### ログ収集の無効化
 
 Datadog Forwarder Lambda 関数を使用したログ収集を停止したい場合は、自身の Lambda 関数の CloudWatch ロググループからサブスクリプションフィルターを削除します。
 
@@ -390,6 +521,8 @@ Lambda 関数で環境変数 `DD_SERVERLESS_LOGS_ENABLED` を `false` に設定�
 {{% /tab %}}
 {{< /tabs >}}
 
+詳しくは、[ログ管理][47] をご覧ください。
+
 ## ログのパースと変換
 
 Datadog でログをパースして変換するには、[Datadog ログパイプライン][14]のドキュメントを参照してください。
@@ -418,9 +551,64 @@ Datadog に送信する前にトレースをフィルタリングするには、
 
 データセキュリティのためにトレース属性をスクラブするには、[データセキュリティのための Datadog Agent またはトレーサーの構成][23]を参照してください。
 
-## トレース収集の無効化
+## トレース収集の有効化/無効化
 
-Datadog Lambda 拡張機能によるトレース収集は、デフォルトで有効になっています。Lambda 関数からのトレース収集を停止したい場合は、以下の手順に従ってください。
+Datadog Lambda 拡張機能によるトレース収集は、デフォルトで有効になっています。
+
+Lambda 関数のトレース収集を開始したい場合は、以下の構成を適用します。
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+```sh
+datadog-ci lambda instrument \
+    --tracing true
+    # ... その他の必要な引数 (関数名など)
+```
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # ... その他の必要なパラメーター (Datadog のサイトや API キーなど)
+    enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # ... その他の必要なパラメーター (Datadog のサイトや API キーなど)
+      enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new Datadog(this, "Datadog", {
+    // ... その他の必要なパラメーター (Datadog のサイトや API キーなど)
+    enableDatadogTracing: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "その他" %}}
+
+Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `true` に設定します。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### トレース収集の無効化
+
+Lambda 関数のトレース収集を停止したい場合は、以下の構成を適用します。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -582,6 +770,90 @@ export class ExampleStack extends cdk.Stack {
 
 [カスタムメトリクスの送信][27]により、カスタムビジネスロジックを監視することができます。
 
+## OpenTelemetry のデータを Datadog に送信する
+
+1. OpenTelemetry にスパンを [Datadog Lambda 拡張機能][40]にエクスポートするよう指示します。
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+2. AWS Lambda 用の OpenTelemetry のインスツルメンテーションを追加します。これはトレースレイヤーを追加するようなものです。
+   ```js
+   // instrument.js
+
+   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
+   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new AwsInstrumentation({
+              suppressInternalInstrumentation: true,
+          }),
+          new AwsLambdaInstrumentation({
+              disableAwsContextPropagation: true,
+          }),
+      ],
+   });
+
+   ```
+3. 実行時にインスツルメンテーションを適用します。例えば、Node.js の場合、`NODE_OPTIONS` を使用します。
+
+   ```yaml
+   # serverless.yml
+
+   functions:
+     node:
+       handler: handler.handler
+       environment:
+         NODE_OPTIONS: --require instrument
+   ```
+
+4. `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数を使って OpenTelemetry を有効にします。Datadog 拡張機能 v41 以降を追加してください。Datadog のトレーシングレイヤーを追加しないでください。
+
+   ```yaml
+   # serverless.yml
+
+   provider:
+     name: aws
+     region: sa-east-1
+     runtime: nodejs18.x
+     environment:
+       DD_API_KEY: ${env:DD_API_KEY}
+       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
+     layers:
+       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
+   ```
+
+5. デプロイします。
+
+## プロファイリングデータの収集 (公開ベータ版)
+
+Datadog の [Continuous Profiler][42] は、Python ではバージョン 4.62.0、Layer ではバージョン 62 以前のベータ版で利用できます。このオプション機能は、環境変数 `DD_PROFILING_ENABLED` を `true` に設定することで有効になります。
+
+Continuous Profiler は、実行中のすべての Python コードの CPU とヒープのスナップショットを定期的に取得するスレッドを生成して動作します。これにはプロファイラー自体も含まれることがあります。プロファイラー自身を無視したい場合は、`DD_PROFILING_IGNORE_PROFILER` を `true` に設定します。
+
 ## PrivateLink またはプロキシ経由でテレメトリーを送信する
 
 Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには[プロキシ経由でデータを送信][30]することができます。
@@ -612,7 +884,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 {{% /tab %}}
 {{% tab "AWS Secrets Manager" %}}
 
-Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任意の環境変数について、[AWS Secrets Manager][40] の値の自動取得をサポートしています。これを利用することで、環境変数を Secrets Manager に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
+Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任意の環境変数について、[AWS Secrets Manager][1] の値の自動取得をサポートしています。これを利用することで、環境変数を Secrets Manager に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
 
 1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_USE_HTTP=true` を設定します。
 2. Lambda 関数の IAM ロールの権限に `secretsmanager:GetSecretValue` の権限を追加します。
@@ -624,6 +896,8 @@ Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任�
 8. Lambda 関数の環境変数 `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
 9. Secrets Manager に、ログのデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`と**似た**内容になります。
 10. Lambda 関数の環境変数 `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
+
+[1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
 {{% /tab %}}
 {{% tab "AWS KMS" %}}
@@ -637,6 +911,7 @@ Datadog 拡張機能は、`_KMS_ENCRYPTED` のプレフィックスが付いた�
 5. プロファイリングのデュアルシッピングの場合は、KMS を使用して  `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
 5. ログのデュアルシッピングの場合は、KMS を使用して `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` を暗号化し、`DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
 
+[41]: https://docs.aws.amazon.com/kms/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -752,7 +1027,6 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-
 [1]: /ja/serverless/installation/
 [2]: /ja/serverless/libraries_integrations/extension/
 [3]: /ja/integrations/amazon_web_services/
@@ -792,3 +1066,11 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 [37]: /ja/serverless/guide/extension_motivation/
 [38]: /ja/serverless/guide#install-using-the-datadog-forwarder
 [39]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /ja/serverless/libraries_integrations/extension/
+[41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[42]: /ja/profiler/
+[43]: /ja/serverless/installation#installation-instructions
+[44]: /ja/security/default_rules/security-scan-detected/
+[45]: https://docs.datadoghq.com/ja/tracing/trace_collection/library_config/
+[46]: https://docs.datadoghq.com/ja/tracing/glossary/#services
+[47]: /ja/logs/

@@ -38,20 +38,20 @@
 | Category::Source Control | Integrations that monitor source code collaboration tools such as Git. |
 | Category::Testing | Integrations that monitor technologies that run browser tests, load testing, and more. |
 | Category::Tracing | Integrations that send in or query traces from Datadog, and interact with Datadog APM.  |
-| Offering::Integration | This is an offering that submits or queries data from a user’s Datadog account. |
+| Offering::Integration | This is an offering that submits or queries data from a user's Datadog account. |
 | Offering::Professional Service | This is a paid offering that provides third-party professional services, such as consulting, integration creation, and more to Datadog customers through the Datadog Marketplace. |
 | Offering::Software License | This is a paid offering that provides a subscription to a SaaS product through the Datadog Marketplace. |
 | Offering::UI Extension | This is a custom dashboard widget that displays a rendered, interactive iFrame on the dashboards of Datadog users. |
-| Queried Data Type::Metrics | An integration that reads metrics from a Datadog user’s account. |
-| Queried Data Type::Logs | An integration that reads logs from a Datadog user’s account. |
-| Queried Data Type::Traces | An integration that reads traces from a Datadog user’s account. |
-| Queried Data Type::Events | An integration that reads events from a Datadog user’s account. |
-| Queried Data Type::Incidents | An integration that reads incidents from a Datadog user’s account. |
-| Submitted Data Type::Metrics | An integration that sends metrics into a Datadog user’s account. |
-| Submitted Data Type::Logs | An integration that sends logs into a Datadog user’s account. |
-| Submitted Data Type::Traces | An integration that sends traces into a Datadog user’s account. |
-| Submitted Data Type::Events | An integration that sends events into a Datadog user’s account. |
-| Submitted Data Type::Incidents | An integration that sends incidents into a Datadog user’s account. |
+| Queried Data Type::Metrics | An integration that reads metrics from a Datadog user's account. |
+| Queried Data Type::Logs | An integration that reads logs from a Datadog user's account. |
+| Queried Data Type::Traces | An integration that reads traces from a Datadog user's account. |
+| Queried Data Type::Events | An integration that reads events from a Datadog user's account. |
+| Queried Data Type::Incidents | An integration that reads incidents from a Datadog user's account. |
+| Submitted Data Type::Metrics | An integration that sends metrics into a Datadog user's account. |
+| Submitted Data Type::Logs | An integration that sends logs into a Datadog user's account. |
+| Submitted Data Type::Traces | An integration that sends traces into a Datadog user's account. |
+| Submitted Data Type::Events | An integration that sends events into a Datadog user's account. |
+| Submitted Data Type::Incidents | An integration that sends incidents into a Datadog user's account. |
 | Supported OS::Android | An integration that can run on and query/submit data from Android.  |
 | Supported OS::Any | An integration that can run on and query/submit data from any OS.  |
 | Supported OS::HP-UX | An integration that can run on and query/submit data from HP-UX.  |

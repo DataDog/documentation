@@ -23,7 +23,7 @@ type: multi-code-lang
 
 一般的な APM ドキュメントについては、[セットアップドキュメント][セットアップドキュメント]を参照してください。
 
-アプリケーションが Datadog に情報を送信した後の APM の詳細については、[APM データで可視化する][可視化ドキュメント]をご覧ください。
+アプリケーションが Datadog に情報を送信した後の APM の詳細については、[用語と概念][visualization docs]をご覧ください。
 
 ライブラリ API のドキュメントについては、[YARD ドキュメント][yard docs]をご覧ください。
 
@@ -31,7 +31,7 @@ type: multi-code-lang
 
 [セットアップドキュメント]: https://docs.datadoghq.com/tracing/
 [開発ドキュメント]: https://github.com/DataDog/dd-trace-rb/blob/master/README.md#development
-[可視化ドキュメント]: https://docs.datadoghq.com/tracing/visualization/
+[可視化ドキュメント]: https://docs.datadoghq.com/tracing/glossary/
 [寄稿ドキュメント]: https://github.com/DataDog/dd-trace-rb/blob/master/CONTRIBUTING.md
 [開発ドキュメント]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/DevelopmentGuide.md
 [yard docs]: https://www.rubydoc.info/gems/ddtrace/
@@ -88,6 +88,7 @@ type: multi-code-lang
      - [Redis](#redis)
      - [Resque](#resque)
      - [Rest Client](#rest-client)
+     - [Roda](#roda)
      - [RSpec](#rspec)
      - [Sequel](#sequel)
      - [Shoryuken](#shoryuken)
@@ -178,7 +179,7 @@ macOS での `ddtrace` の使用は、開発ではサポートされています
 
 Microsoft Windows での `ddtrace` の使用は現在サポートされていません。コミュニティの貢献や課題は引き続き受け付けますが、優先順位は低いと判断します。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Ruby アプリケーションにトレースを追加するには、いくつかの簡単なステップを踏むだけです。
 
@@ -528,6 +529,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 | Redis                      | `redis`                    | `>= 3.2`                 | `>= 3.2`                 | *[リンク](#redis)*                    | *[リンク](https://github.com/redis/redis-rb)*                                    |
 | Resque                     | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#resque)*                   | *[リンク](https://github.com/resque/resque)*                                     |
 | Rest Client                | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[リンク](#rest-client)*              | *[リンク](https://github.com/rest-client/rest-client)*                           |
+| Roda                       | `roda`                     | `>= 2.1, <4`             | `>= 2.1, <4`              | *[リンク](#roda)*                     | *[リンク](https://github.com/jeremyevans/roda)*                                  |
 | Sequel                     | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[リンク](#sequel)*                   | *[リンク](https://github.com/jeremyevans/sequel)*                                |
 | Shoryuken                  | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[リンク](#shoryuken)*                | *[リンク](https://github.com/phstc/shoryuken)*                                   |
 | Sidekiq                    | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[リンク](#sidekiq)*                  | *[リンク](https://github.com/mperham/sidekiq)*                                   |
@@ -1655,7 +1657,6 @@ end
 | --- | ----------- | ------- |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にして、トレースヘッダーを受信した場合にこのサービストレースが別のサービスのトレースに接続されるようにします | `true` |
 | `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。  | `false` |
-| `exception_controller` | カスタム例外コントローラークラスを識別するクラスまたはモジュール。トレーサーは、カスタム例外コントローラーを識別できる場合のエラー動作を改善します。デフォルトでは、このオプションを使用しない場合、カスタム例外コントローラーがどのようなものかは「推測」されます。このオプションを指定すると、この識別が容易になります。 | `nil` |
 | `middleware` | トレースミドルウェアを Rails アプリケーションに追加します。ミドルウェアをロードしたくない場合は、`false` に設定します。 | `true` |
 | `middleware_names` | 短絡したミドルウェアリクエストがトレースのリソースとしてミドルウェア名を表示できるようにします。 | `false` |
 | `service_name` | アプリケーションのリクエストをトレースするときに使用されるサービス名（`rack` レベル） | `'<アプリ名>'`（Rails アプリケーションのネームスペースから推測） |
@@ -1884,6 +1885,39 @@ end
 | `service_name` | `rest_client` インスツルメンテーションのサービス名。 | `'rest_client'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
 
+### Roda
+
+Roda インテグレーションはリクエストをトレースします。
+
+`Datadog.configure` で **Roda** インテグレーションを有効にすることができます。分散型トレーシングを行うためには、`use Datadog::Tracing::Contrib::Rack::TraceMiddleware` を通して **Rack** とこのインテグレーションを使用することが推奨されています。
+
+```ruby
+require "roda"
+require "ddtrace"
+
+class SampleApp < Roda
+  use Datadog::Tracing::Contrib::Rack::TraceMiddleware
+
+  Datadog.configure do |c|
+    c.tracing.instrument :roda, **options
+  end
+
+  route do |r|
+    r.root do
+      r.get do
+        'Hello World!'
+      end
+    end
+  end
+end
+```
+
+`options` は以下のキーワード引数です。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `service_name` | `roda` インスツルメンテーションのサービス名。 | `'nil'` |
+
 ### RSpec
 
 RSpec インテグレーションでは、`rspec` テストフレームワーク使用時に、グループ単位や個別での例の実行すべてをトレースできます。
@@ -1992,6 +2026,7 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
+| `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にすると、`sidekiq.push` スパンと `sidekiq.job` スパンの間に親子関係が作成されます。<br /><br />**重要**: *非同期処理のために distributed_tracing を有効にすると、トレースグラフが大幅に変化することがあります。このようなケースには、長時間実行されているジョブ、再試行されたジョブ、遠い将来に予定されているジョブが含まれます。この機能を有効にした後は、必ずトレースを点検してください。* | `false` |
 | `tag_args` | ジョブ引数のタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
 | `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 | `quantize` | ジョブ引数の量子化のためのオプションを含むハッシュ。 | `{}` |
@@ -2138,7 +2173,7 @@ end
 | `tags`                                                  | `DD_TAGS`                      | `nil`                                                             | カスタムタグを `,` で区切った値のペアで指定します (例: `layer:api,team:intake`) これらのタグは全てのトレースに対して設定されます。詳しくは [環境とタグ](#environment-and-tags)を参照してください。                                                          |
 | `time_now_provider`                                     |                                | `->{ Time.now }`                                                  | 時刻の取得方法を変更します。詳しくは、[タイムプロバイダーの設定](#setting-the-time-provide)を参照してください。                                                                                                                              |
 | `version`                                               | `DD_VERSION`                   | `nil`                                                             | アプリケーションのバージョン (例: `2.5`、`202003181415`、`1.3-alpha` など) この値は、すべてのトレースにタグとして設定されます。                                                                                                                        |
-| `telemetry.enabled`                                     | `DD_INSTRUMENTATION_TELEMETRY_ENABLED` | `false`                                                             | Datadog へのテレメトリーデータの送信を有効にすることができます。将来のリリースでは、[こちら](https://docs.datadoghq.com/tracing/configure_data_security/#telemetry-collection)のドキュメントにあるように、デフォルトで `true` に設定される予定です。                                                                                                                                                                                          |
+| `telemetry.enabled`                                     | `DD_INSTRUMENTATION_TELEMETRY_ENABLED` | `true`                                                             | Datadog へのテレメトリーデータの送信を有効にすることができます。将来のリリースでは、[こちら](https://docs.datadoghq.com/tracing/configure_data_security/#telemetry-collection)のドキュメントにあるように、無効にすることも可能です。                                                                                                                                                                                          |
 | **Tracing**                                             |                                |                                                                   |                                                                                                                                                                                                                                           |
 | `tracing.analytics.enabled`                             | `DD_TRACE_ANALYTICS_ENABLED`   | `nil`                                                             | トレース解析の有効/無効を設定します。詳しくは、[サンプリング](#sampling)を参照してください。                                                                                                                                                          |
 | `tracing.distributed_tracing.propagation_extract_style` | `DD_TRACE_PROPAGATION_STYLE_EXTRACT` | `['Datadog','b3multi','b3']` | 抽出する分散型トレーシング伝播フォーマット。`DD_TRACE_PROPAGATION_STYLE` をオーバーライドします。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。                                                                             |

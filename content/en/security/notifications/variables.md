@@ -66,12 +66,12 @@ For more information on the `eval` function, see [Template Variable Evaluation][
 
 ### Local time
 
-Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time 'time_variable' 'timezone'}}`. 
+Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time "time_variable" "timezone"}}`.
 
 For example, to add the last triggered time of the signal in the Tokyo time zone in your notification, include the following in the notification message:
 
 ```
-{{local_time 'last_triggered_at' 'Asia/Tokyo'}}
+{{local_time "last_triggered_at" "Asia/Tokyo"}}
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example, `2021-05-31 23:43:27+09:00`. See the [list of TZ database time zones][3], specifically the `TZ database name` column, to see the list of available time zone values.

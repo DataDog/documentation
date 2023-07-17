@@ -107,31 +107,7 @@ Define the configuration of your browser test.
   
 7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
-## Variables
-
-### Create local variables
-
-To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
-
-`{{ numeric(n) }}`
-: Generates a numeric string with `n` digits.
-
-`{{ alphabetic(n) }}`
-: Generates an alphabetic string with `n` letters.
-
-`{{ alphanumeric(n) }}`
-: Generates an alphanumeric string with `n` characters.
-
-`{{ uuid }}`
-: Generates a version 4 universally unique identifier (UUID).
-
-`{{ date(n unit, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
-
-`{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
-
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
+{{% synthetics-variables %}}
 
 ### Use global variables
 
@@ -140,11 +116,12 @@ You can use the [global variables defined in **Settings**][3] in the **Starting 
 To display a list of available variables:
 
 - In your browser test's details: Type `{{` in the desired field.
+
+  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
+
 - In your browser test's recorder: Import the variable in your test, then type `{{` in the desired field or inject the variable in your application to use it.
 
-{{< img src="synthetics/browser_tests/recording_global_variable.mov" alt="Defining a local variable from global variables" video="true" width="90%" >}}
-
-{{< img src="synthetics/browser_tests/recording_inject_variable.mov" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
 
 For more information about using variables in your browser test recording, see [Browser Test Steps][4]. 
 
@@ -161,7 +138,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][17]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -212,7 +189,7 @@ Access restriction is available for customers using [custom roles][14] on their 
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -234,3 +211,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [14]: /account_management/rbac/#create-a-custom-role
 [15]: /continuous_testing/testing_tunnel
 [16]: /synthetics/guide/browser-tests-passkeys
+[17]: /monitors/notify/variables/?tab=is_alert#conditional-variables

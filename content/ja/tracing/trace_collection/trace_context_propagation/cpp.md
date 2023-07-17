@@ -1,6 +1,10 @@
 ---
 code_lang: cpp
 code_lang_weight: 50
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: C++ トレースコンテキストの伝搬
 type: multi-code-lang
@@ -17,13 +21,13 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 
 挿入スタイルは次を使って構成できます:
 
-- 環境変数: `DD_PROPAGATION_STYLE_INJECT="Datadog B3"`
+- 環境変数: `DD_TRACE_PROPAGATION_STYLE_INJECT="Datadog B3"`
 
 環境変数の値は、挿入が有効になっているヘッダースタイルのカンマ (またはスペース) 区切りリストです。デフォルトでは、Datadog 挿入スタイルのみが有効になっています。
 
 抽出スタイルは次を使って構成できます:
 
-- 環境変数: `DD_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
+- 環境変数: `DD_TRACE_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
 
 環境変数の値は、抽出が有効になっているヘッダースタイルのカンマ (またはスペース) 区切りリストです。デフォルトでは、Datadog 抽出スタイルのみが有効になっています。
 
@@ -68,6 +72,10 @@ void example() {
   // `headers` now populated with the headers needed to propagate the span.
 }
 ```
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter

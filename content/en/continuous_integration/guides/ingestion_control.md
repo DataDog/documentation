@@ -25,7 +25,7 @@ Filters are available for Pipeline Visibility.
 ## Adding an exclusion filter
 Exclusion filters are not required for setting up Pipeline Visibility. By default, all data is ingested and processed.
 
-To create filters for your organization, your user account must have `ci_ingestion_control_write` [permissions][1].
+To create filters for your organization, your user account must have the `ci_ingestion_control_write` [permission][1].
 
 1. In Datadog, navigate to **CI** > **Settings** > **Ingestion Settings**.
 2. Select **Add an Exclusion Filter**.

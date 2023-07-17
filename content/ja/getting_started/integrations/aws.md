@@ -107,7 +107,7 @@ title: AWS の概要
 
 3. **Automatically using CloudFormation** のオプションで、インテグレーションの設定を行います。
     a. インテグレーションする AWS リージョンを選択します。 
-    b. Datadog [API キー][58]を追加します。 
+    b. Datadog [API キー][9]を追加します。 
     c. オプションで、[Datadog Forwarder Lambda][1] でログなどを Datadog に送ります。 
     d. オプションで、[Cloud Security Posture Management][54] (CSPM) を有効にして、クラウド環境、ホスト、コンテナをスキャンして、構成ミスやセキュリティリスクを確認します。
 
@@ -129,8 +129,8 @@ title: AWS の概要
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][63]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
-- [Forwarder Lambda 関数][64]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
+- [Kinesis Firehose destination][10]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Forwarder Lambda 関数][11]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。Lambda 関数からログを介して非同期でトレース、拡張カスタムメトリクス、またはカスタムメトリクスを送信するには、このアプローチを使用する**必要があります**。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
 
 最も利用されている AWS サービスのログを流すには、[AWS サービスのログを有効にする][14]のセクションを読んでください。
 
@@ -159,7 +159,7 @@ Agent がインストールされると、[インフラストラクチャーリ�
 
 #### EC2 起動タイプの ECS
 
-[Amazon ECS のドキュメント][25]を使用して、ECS クラスターの EC2 インスタンスで [Datadog Docker Agent][26] を実行します。[Amazon ECS on EC2][27] で、Datadog アカウントに報告されるメトリクスとイベントを確認します。
+[Amazon ECS のドキュメント][25]を使用して、ECS クラスターの EC2 インスタンスで [Datadog Docker Agent][26] を実行します。[Amazon ECS Data Collection のドキュメント][27]で、Datadog アカウントに報告されるメトリクスとイベントを確認します。
 
 #### Fargate 起動タイプの ECS
 
@@ -204,29 +204,30 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [CSPM の概要][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能なポスチャ管理[クラウド][55]および[インフラストラクチャー][56]の検出ルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
 
 ### トラブルシューティング
-問題が発生した場合は、[トラブルシューティング][57]を必ずご確認ください。
+
+`Datadog is not authorized to perform sts:AssumeRole` というエラーが発生した場合は、専用の[トラブルシューティングページ][2]を参照してください。その他の問題については、[AWS インテグレーショントラブルシューティングガイド][57]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/guide/forwarder/
-[2]: https://aws.amazon.com/cloudtrail/
+[2]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [3]: /ja/api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [6]: /ja/integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
 [8]: https://app.datadoghq.com/integrations/amazon-web-services
-[9]: /ja/integrations/amazon_ec2/#ec2-automuting
-[10]: /ja/integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[11]: /ja/events/explorer
+[9]: https://app.datadoghq.com/organization-settings/api-keys
+[10]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[11]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [12]: https://app.datadoghq.com/dash/integration/7/aws-overview
 [13]: /ja/integrations/#cat-aws
 [14]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
 [16]: /ja/getting_started/agent/
-[17]: https://app.datadoghq.com/account/settings#agent
+[17]: https://app.datadoghq.com/account/settings/agent/latest
 [18]: https://app.datadoghq.com/infrastructure
 [19]: /ja/integrations/system/
 [20]: /ja/integrations/ntp/
@@ -236,7 +237,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [24]: https://aws.amazon.com/fargate/
 [25]: /ja/agent/amazon_ecs/?tab=awscli
 [26]: /ja/agent/docker/?tab=standard
-[27]: /ja/integrations/amazon_ecs
+[27]: /ja/agent/amazon_ecs/data_collected/
 [28]: /ja/integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /ja/agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /ja/agent/kubernetes/?tab=helm
@@ -266,11 +267,4 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [54]: /ja/security/cspm/setup/
 [55]: /ja/security/default_rules/#cat-posture-management-cloud
 [56]: /ja/security/default_rules/#cat-posture-management-infra
-[57]: /ja/integrations/amazon_web_services/?tab=roledelegation#troubleshooting
-[58]: https://app.datadoghq.com/organization-settings/api-keys
-[59]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
-[60]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
-[61]: /ja/integrations/amazon_xray/
-[62]: /ja/getting_started/tagging/using_tags?tab=aws#integrations
-[63]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[64]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[57]: /ja/integrations/guide/aws-integration-troubleshooting/

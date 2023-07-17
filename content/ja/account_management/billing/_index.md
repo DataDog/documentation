@@ -5,7 +5,7 @@ title: 課金
 
 ## 概要
 
-課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月は、実際のサインアップ日に基づいて日割り計算されます。
+課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月 (UTC) は、実際のサインアップ日に基づいて日割り計算されます。
 
 Datadog は、ホストとカスタムメトリクスの数を毎時間測定します。ホストの課金対象数は、この下位 99% の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期急上昇が課金額に影響しないようにしています。カスタムメトリクスの課金対象数は、その月のカスタムメトリクスの時間平均として計算されます。Datadog で[使用量][1]を確認できます。請求ページは Datadog の管理者権限を有するユーザーのみアクセス可能です。
 
@@ -94,7 +94,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 {{< whatsnext desc="課金に関するトピック:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_details/" >}}使用料の詳細{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}使用量の詳細{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}クレジットカード{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}カスタムメトリクス{{< /nextlink >}}

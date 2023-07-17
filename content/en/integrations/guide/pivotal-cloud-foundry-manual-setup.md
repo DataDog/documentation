@@ -345,6 +345,8 @@ The second item `postgres-service-name` is a configuration for a service bound t
 To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
 This dictionary contains a JSONPath object indicating where to find the variable values for the service `postgres-service-name` defined in the `VCAP_SERVICES` environment variable.
 
+See [Cluster Checks][35] for more information about Autodiscovery through the DCA.
+
 #### Improve CCCache performance on cache miss
 
 For Datadog Agent versions `7.40.1` and later, you can add more flags to increase control over the CCCache behavior and the number of API calls:
@@ -501,4 +503,5 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
-[34]: https://docs.datadoghq.com/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
+[34]: /containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
+[35]: /containers/cluster_agent/clusterchecks/

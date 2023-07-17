@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: Github
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: /real_user_monitoring
   tag: Documentation
   text: Datadog Real User Monitoring
@@ -71,7 +71,7 @@ SDK バージョン `1.2.0` からは、`DatadogProvider` コンポーネント�
 - シミュレーターやデバイス向けにプロジェクトを構築します。
 - 右下にネイティブログが表示され始めます。
 
-  {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="ネイティブログを確認することで、データが送信されない原因を突き止めることができます"  >}}
+  {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="ネイティブログを確認することで、データが送信されない原因を突き止めることができます" >}}
 
 "DATADOG" でログをフィルターして、任意のエラーを探すことができます。
 

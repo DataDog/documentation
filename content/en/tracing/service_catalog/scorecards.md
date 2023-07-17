@@ -85,7 +85,7 @@ Click **View Details** from the scorecard, or open the service details side pane
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /monitors/service_level_objectives/
+[2]: /service_management/service_level_objectives/
 [3]: https://app.datadoghq.com/monitors/recommended
 [4]: /tracing/services/deployment_tracking/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/

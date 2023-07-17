@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: ラーニングセンター
   text: Application Performance Monitoring の紹介
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: APM の理解を深めるためのインタラクティブなセッションに参加できます
 kind: documentation
 title: トレースの概要
 ---
@@ -30,7 +33,7 @@ Datadog の APM (アプリケーションパフォーマンス監視機能、ま
 Datadog Agent をインストールする前に、以下のコマンドを使用して [Vagrant Ubuntu 22.04 仮想マシン][4]を設定します。Vagrant の詳細については、[はじめに][5]ページをご参照ください。
 
 ```text
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -76,7 +79,7 @@ sudo datadog-agent status
 
 ```bash
 # /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
+2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
 2019-03-25 20:33:28 INFO (api.go:341) - no data received
 2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
@@ -163,7 +166,7 @@ hello world
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /ja/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure

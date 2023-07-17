@@ -22,6 +22,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
   tag: 'blog'
   text: 'Best practices for continuous testing with Datadog'
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
@@ -53,7 +56,7 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs the [Continuous Testing Explorer][11]. 
+Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12], and by looking at executed jobs in the [Continuous Testing Explorer][11]. 
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 

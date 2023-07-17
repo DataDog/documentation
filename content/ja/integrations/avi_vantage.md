@@ -37,7 +37,7 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 3.2.1
+integration_version: 3.3.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -75,7 +75,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Avi Vantage チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

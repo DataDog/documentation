@@ -7,7 +7,7 @@ description: Set up Error Tracking for your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios Source code
+  text: Source code for dd-sdk-ios
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
   text: Introducing iOS Crash Reporting and Error Tracking
@@ -100,7 +100,9 @@ Depending on your setup, you may need to download .dSYM files from App Store Con
 
 By uploading your .dSYM file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
 
-Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog. 
+Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog.
+
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
 #### Datadog CI
 

@@ -15,14 +15,23 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
   tag: "Blog"
   text: "Monitor CDN performance within your Synthetic tests"
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to enhance your synthetic testing capabilities"
 algolia:
   tags: ['synthetics']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}

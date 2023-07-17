@@ -72,7 +72,7 @@ The default retention period for an audit trail event is seven days. You can set
 
 To explore an audit event, navigate to the [Audit Trail][1] section, also accessible from your [Organization Settings][2] in Datadog.
 
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail Settings in the Organization Settings menu" style="width:30%;">}}
 
 Audit Trail events have the same functionality as logs within the [Log Explorer][4]:
 

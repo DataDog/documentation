@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android ソースコード
+  text: dd-sdk-android のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
@@ -55,6 +55,13 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `device.brand`  | 文字列 | デバイスにより報告されたデバイスのブランド (System User-Agent)。  |
 | `device.model`   | 文字列 | デバイスにより報告されたデバイスモデル (System User-Agent)。    |
 | `device.name` | 文字列 | デバイスにより報告されたデバイス名 (System User-Agent)。  |
+
+### 接続性
+
+以下のネットワーク関連属性は、Datadog が収集したリソースイベントとエラーイベントに自動的にアタッチされます。
+
+| 属性名                           | タイプ   | 説明                                     |
+|------------------------------------------|--------|-------------------------------------------------|
 | `connectivity.status` | 文字列 | デバイスのネットワーク到達可能性の状態 (`connected`、`not connected`、または `maybe`)。 |
 | `connectivity.interfaces` | 文字列 | 利用可能なネットワークインターフェースのリスト (`bluetooth`、`cellular`、`ethernet`、または `wifi` など)。 |
 | `connectivity.cellular.technology` | 文字列 | 携帯電話の接続に使用される無線技術のタイプ。 |

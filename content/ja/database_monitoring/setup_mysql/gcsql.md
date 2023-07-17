@@ -8,7 +8,7 @@ kind: documentation
 title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -35,7 +35,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、できれば GCP コンソールで提供される IP アドレスを介して、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+: Agent は、できれば Google Cloud コンソールで提供される IP アドレスを介して、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
 
 データセキュリティへの配慮
 : Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
@@ -80,7 +80,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -196,7 +196,7 @@ instances:
     username: datadog
     password: '<UNIQUEPASSWORD>' # 先ほどの CREATE USER のステップから
 
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -283,7 +283,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -293,7 +293,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>" \
+      instance_id: "<INSTANCE_ID>"' \
   datadog/datadog
 ```
 
@@ -310,7 +310,7 @@ instances:
     port: 3306
     username: datadog
     password: '<UNIQUEPASSWORD>'
-    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog GCP インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -371,9 +371,12 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探します。または、[データベース][6]のページを参照してください。
 
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
+
 ## Cloud SQL インテグレーションをインストールする
 
-GCP からより包括的なデータベースメトリクスを収集するには、[Cloud SQL インテグレーション][7]をインストールします (オプション)。
+Google Cloud からより包括的なデータベースメトリクスを収集するには、[Cloud SQL インテグレーション][7]をインストールします (オプション)。
 
 
 ## トラブルシューティング

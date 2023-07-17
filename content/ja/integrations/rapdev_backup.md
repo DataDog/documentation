@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-backup
 app_uuid: f0a2c15e-9c53-4645-aedc-5a28af130308
 assets:

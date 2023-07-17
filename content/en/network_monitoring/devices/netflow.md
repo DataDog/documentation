@@ -6,19 +6,23 @@ further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
+- link: "https://www.datadoghq.com/blog/monitor-netflow-with-datadog/"
+  tag: "Blog"
+  text: "Monitor NetFlow traffic data with Datadog"
+- link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+  tag: "Blog"
+  text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
-
-<div class="alert alert-warning">NetFlow Monitoring for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
 
-Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your Netflow-enabled devices.
+Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
 ## Installation
 
-To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.39 or newer.
+To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
 
-**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended.
+**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended as this extra data can be used to enrich your flow records with information such as the device name, model, and vendor, as well as the inbound/outbound interface name.
 
 ## Configuration
 
@@ -43,13 +47,36 @@ network_devices:
 
 After saving your changes, [restart the Agent][4].
 
+## Aggregation
+
+The Datadog Agent automatically aggregates the received NetFlow data in order to limit the number of records sent to the platform while maintaining most of the information. By default there is a 5 minute aggregation interval, during which flow recordings which share the same identifying information (source and destination address and port, protocol, and so forth) will be aggregated together. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
+
+## Enrichment
+
+Your NetFlow data is processed by the Datadog backend and are enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. To disambiguate possible collisions between reused private IPs, you can configure a different `namespace` for each Agent configuration file (with the setting `network_devices.namespace`)
+
+If the NetFlow exporter IP is one of the device IPs, but not the one configured on the SNMP integration, Datadog will attempt to locate the device that the exporter IP belongs to, and will enrich your NetFlow data with it is as long as the match is unique.
+
+## Visualization
+
+You can find the NetFlow page on the [Network Devices page][5].
+{{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" >}}
+
+This data is also available in Dashboards, Notebooks, and more for more precise queries and for correlating with other sources of data.
+{{< img src="network_device_monitoring/netflow/notebook.png" alt="Notebook" >}}
+
+## Retention
+
+NetFlow data is retained for 30 days by default.
+
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /network_monitoring/devices/snmp_metrics/
 [3]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: /agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[5]: https://app.datadoghq.com/infrastructure/devices?facets=&viewTab=netflow

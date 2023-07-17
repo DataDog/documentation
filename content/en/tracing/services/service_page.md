@@ -22,6 +22,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+algolia:
+  tags: ['service page']
 ---
 
 {{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
@@ -207,8 +209,8 @@ View common patterns in your service's logs, and use facets like status in the s
 [2]: /tracing/services/resource_page/
 [3]: /monitors/types/apm/
 [4]: /tracing/error_tracking/
-[5]: /monitors/service_level_objectives/
-[6]: /monitors/incident_management/
+[5]: /service_management/service_level_objectives/
+[6]: /service_management/incident_management/
 [7]: /watchdog/
 [8]: /tracing/metrics/metrics_namespace/
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

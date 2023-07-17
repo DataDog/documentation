@@ -19,7 +19,18 @@ Datadog では、AWS SAM をご利用のお客様のサーバーレスアプリ�
 
 ## インストール
 
-AWS アカウントでマクロを使用可能にするには、Datadog のテンプレートで CloudFormation スタックをデプロイします。このデプロイには、CloudFormation マクロリソースと、マクロを実行したときに呼び出される Lambda 関数が含まれます。このスタックを有効にすると、同じアカウントにデプロイされた他の CloudFormation スタックにマクロを使用できるようになります。アカウントのマクロ定義に関する詳細は、[CloudFormation ドキュメントページ][3]を参照してください。
+AWS アカウントで Datadog サーバーレスマクロを使用可能にするには、Datadog のテンプレートで CloudFormation スタックをデプロイします。このデプロイには、CloudFormation マクロリソースと、マクロを実行したときに呼び出される Lambda 関数が含まれます。このスタックを有効にすると、同じアカウントにデプロイされた他の CloudFormation スタックにマクロを使用できるようになります。アカウントのマクロ定義に関する詳細は、[CloudFormation ドキュメントページ][3]を参照してください。
+
+**注:** Datadog サーバーレスマクロは、変換したいスタックを含む各リージョンで一度だけ作成する必要があります。
+
+### オプション 1: AWS Console
+
+[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=sa-east-1#/stacks/quickCreate?stackName=datadog-serverless-macro&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml)
+
+上記の `Launch Stack` テンプレートリンクを使用して、AWS アカウントで Datadog サーバーレスマクロスタックを作成します。
+
+
+### オプション 2: AWS CLI
 
 初めてインストールする場合は、以下のようにデプロイします。
 
@@ -29,17 +40,6 @@ aws cloudformation create-stack \
   --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
   --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
 ```
-
-新しいリリース後にマクロを更新する場合は、同じパラメータを使い `update-stack` メソッドを使用します。また、最新の [リリース](https://github.com/DataDog/datadog-cloudformation-macro/releases) からマクロのバージョンを指定することもできます。それには、`latest.yml` をリリースバージョンに置き換えます（例、`0.1.2.yml`）。
-
-```bash
-aws cloudformation update-stack \
-  --stack-name datadog-serverless-macro \
-  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
-  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
-```
-
-**注:** マクロは、AWS アカウントのリージョンに 1 回デプロイするだけで、同じリージョンにデプロイされたすべての CloudFormation スタックに使用できます。
 
 ## AWS SAM での使用
 
@@ -97,6 +97,18 @@ Resources:
           DD_API_KEY_SECRET_ARN: "arn:aws:secretsmanager:us-west-2:123456789012:secret:DdApiKeySecret-e1v5Yn7TvIPc-d1Qc4E"
           DD_ENV: "dev"
 ```
+
+## 更新
+新リリース後にマクロを更新する場合は、`update-stack` メソッドを使用します。
+
+```bash
+aws cloudformation update-stack \
+  --stack-name datadog-serverless-macro \
+  --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+  --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+```
+
+また、最新の [リリース](https://github.com/DataDog/datadog-cloudformation-macro/releases)からマクロのバージョンを指定することもできます。それには、`latest.yml` をリリースバージョンに置き換えます (例: `0.1.2.yml`)。
 
 ## コンフィギュレーション
 

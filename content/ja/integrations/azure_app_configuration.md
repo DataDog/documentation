@@ -8,7 +8,7 @@ doc_link: https://docs.datadoghq.com/integrations/azure_app_configuration/
 draft: false
 git_integration_title: azure_app_configuration
 has_logo: true
-integration_id: ''
+integration_id: azure-app-configuration
 integration_title: Microsoft Azure App Configuration
 integration_version: ''
 is_public: true
@@ -27,7 +27,7 @@ Azure App Configuration は、アプリケーションの設定と機能フラ�
 [Datadog Azure インテグレーション][1]を利用することで、Azure App Configuration からメトリクスを収集し、リクエストの着信やレイテンシー、スロットリングエラーをモニタリングすることができます。
 
 ## セットアップ
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

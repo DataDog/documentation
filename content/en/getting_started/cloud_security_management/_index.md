@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes with Datadog Workflows"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to elevate your security and threat detection"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -24,7 +27,7 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Deployment
 
-1. Install the [Datadog Agent (version 7.44 or above)][4]. 
+1. Install the [Datadog Agent (version 7.44 or above)][4].
 2. Enable CSM for for your cloud resources and infrastructure:
     - **CWS**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
     - **CSPM**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
@@ -50,7 +53,7 @@ This guide walks you through best practices for getting your team up and running
 [1]: /security/cloud_security_management/
 [2]: /security/cspm/
 [3]: /security/cloud_workload_security/
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /security/cloud_workload_security/setup/?tab=kubernetes
 [6]: /security/cloud_workload_security/setup/?tab=docker
 [7]: /security/cloud_workload_security/setup/?tab=hostothers

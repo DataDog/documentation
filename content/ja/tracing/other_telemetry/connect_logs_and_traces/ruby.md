@@ -68,6 +68,6 @@ logger.warn('これはトレースされないオペレーションです。')
 Datadog::Tracing.trace('my.operation') { logger.warn('これはトレースされるオペレーションです。') }
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] これはトレースされるオペレーションです。
 ```
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
