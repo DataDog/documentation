@@ -218,7 +218,7 @@ To filter the default compliance rules by cloud provider:
     - **Docker**: framework:cis-docker
     - **Kubernetes**: framework:cis-kubernetes
 
-After you explore the default compliance rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
+After you explore the default compliance rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment, and set up notification targets][4].
 
 ## Disable CSPM
 
@@ -239,5 +239,4 @@ To disable CSPM for your cloud providers:
 [1]: https://app.datadoghq.com/security/compliance/homepage
 [2]: /security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
-[4]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
-[5]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[4]: /security/cspm/frameworks_and_benchmarks#view-your-compliance-posture
