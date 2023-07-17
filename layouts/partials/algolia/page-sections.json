@@ -9,7 +9,7 @@
 {{ $section_header := "" }}
 {{ $section_content := "" }}
 
-{{- define "partials/headings" -}}
+{{- define "partials/heading-sections" -}}
   {{- $ctx := .ctx -}}
   {{- $hugo_context := .ctx.context -}}
   {{- $page := .ctx.page -}}
@@ -22,7 +22,7 @@
   {{- $section_content_words := "" -}}
   {{- $order := .order -}}
   {{- range $v := .data -}}
-      {{- $restr := printf "<h([1-6]).*?id=\"%s\".*?>.*<\\/h[1-6]>" $v.ID -}}
+      {{- $restr := printf "<h([1-4]).*?id=\"%s\".*?>.*<\\/h[1-4]>" $v.ID -}}
       {{- $heading_html := index (findRE $restr $page.Content 1) 0 | default "" -}}
       {{- $content_starting_after_header := index (split $page.Content $heading_html) 1 -}}
       {{- $next_heading_html := index (findRE `<h([1-6]).*?>.*<\/h[1-6]>` $content_starting_after_header 1) 0 | default "" -}}
@@ -66,9 +66,9 @@
           {{- end -}}
           {{- $order = add $order 1 -}}
       {{- end -}}
-      {{- $order = partial "partials/headings" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
+      {{- $order = partial "partials/heading-sections" (dict "data" $v.Headings "ctx" $ctx "order" $order) -}}
   {{- end -}}
   {{- return $order -}}
 {{- end -}}
 
-{{- $ord := partial "partials/headings" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
+{{- $ord := partial "partials/heading-sections" (dict "data" $page.Fragments.Headings "ctx" . "order" 0) -}}
