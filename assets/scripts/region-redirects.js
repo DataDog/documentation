@@ -83,13 +83,16 @@ function regionOnChangeHandler(region) {
 }
 
 /**
- * Hides Hugo TOC items that are not {{% site-region %}} specific
+ * Hides Hugo TOC items that are not {{ site-region }} shortcode specific
  * @param {boolean} regionSelected - region selected via site select dropdown
  */
 function hideNonRegionSpecificTOC(regionSelected=false) {
     const allTOCItems = document.querySelectorAll('#TableOfContents li')
     const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3, .site-region-container.d-none > h2')
     const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
+
+    const tabNestedHeaders = document.querySelectorAll('.code-tabs > .tab-content > .tab-pane > h3')
+    const tabNestedHeaderIDs = [...tabNestedHeaders].map(el => `#${el.id}`)
 
     allTOCItems.forEach(item => {
         const refID = item.querySelector('a')?.hash
@@ -98,6 +101,11 @@ function hideNonRegionSpecificTOC(regionSelected=false) {
             item.classList.remove('d-none')
         }
         if(hiddenHeaderIDs.includes(refID)){
+            // since the headers are hidden, also hide the related toc item
+            item.classList.add('d-none')
+        }
+        if(tabNestedHeaderIDs.includes(refID)){
+            // hide all toc items related to headers that are nested in {{tabs}}. 
             item.classList.add('d-none')
         }
     })
