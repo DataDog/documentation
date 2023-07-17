@@ -15,10 +15,10 @@ This guide expands on the [C++ APM docs][1] to provide step-by-step instructions
 
 ### Basic environment
 
-First, spin up a fresh `ubuntu/xenial64` Vagrant box and `ssh` into it with:
+First, spin up a fresh `ubuntu/jammy64` Vagrant box and `ssh` into it with:
 
 ```bash
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```

@@ -33,7 +33,7 @@ If you haven't already, create a [Datadog account][3].
 Before installing the Datadog Agent, set up a [Vagrant Ubuntu 22.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
 
 ```text
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -79,7 +79,7 @@ And in `trace-agent.log`:
 
 ```bash
 # /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
+2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
 2019-03-25 20:33:28 INFO (api.go:341) - no data received
 2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0

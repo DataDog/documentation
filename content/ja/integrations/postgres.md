@@ -51,7 +51,7 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 13.7.0
+integration_version: 14.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
