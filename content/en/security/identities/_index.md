@@ -40,7 +40,7 @@ When viewing an individual resource, use the **Relationships** tab to view a gra
 
 You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks detected for the resource on the **Timeline** tab.
 
-**SCREENSHOT OF RELATIONSHIPS SIDE PANEL**
+{{< img src="security/identities/insights-tab-side-panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
 
 On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to view a list of permissions provisioned on the resource and whether they were used in the last 15 days.
 
