@@ -111,7 +111,7 @@ To create a custom responder type:
 
 {{< img src="/service_management/incidents/incident_settings/incident_settings_slack_teams.png" alt="Incident Setting pages showing options for enabling Slack or Microsoft Teams" style="width:80%;" >}}
 
-The integrations settings provide you with additional configurations for setting up the Incident Management features of the [Slack ][13], [Microsoft Teams][50], and Zoom integrations. 
+The integrations settings provide additional configurations for the Incident Management features of the [Slack ][13], [Microsoft Teams][14], and Zoom integrations. 
 
 #### Slack and Microsoft Teams settings
 
@@ -120,7 +120,7 @@ There are two settings to configure:
 1. Enabling automatic Slack or Microsoft Teams channel creation for every new incident and the name template for those channels.
 2. Enabling the incident updates channel.
 
-You can configure either of these settings to use any Slack or Microsoft Teams workspace you have configured in your organization's [integration tile][14].
+You can configure either of these settings to use any Slack or Microsoft Teams workspace you have configured in your organization's [integration tile][15].
 
 By default, dedicated incident channels use `incident-{public_id}` as their name template. 
 
@@ -136,7 +136,7 @@ The incident updates channel sends a message whenever an incident is declared or
 #### Zoom
 
 1. Enable the Zoom integration to automatically attach a Zoom meeting link to every new incident.
-2. From the [global header][51] of the new Incident Detail page, click **Start Zoom Call** to activate the Zoom link.
+2. From the [global header][16] of the new Incident Detail page, click **Start Zoom Call** to activate and assign a Zoom link to the incident.
 
 {{< img src="/service_management/incidents/incident_details/global_header.png" alt="Your image description" style="width:90%;" >}}
 
@@ -146,7 +146,7 @@ The incident updates channel sends a message whenever an incident is declared or
 
 {{< img src="service_management/incidents/message_templates_settings.jpeg" alt="Message Template Settings" style="width:80%;">}}
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications][15], or automated notification rules. Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications][17], or automated notification rules. Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. To better organize a large number of message templates, each template requires a category during the creation process.
 
 To create a message template:
 
@@ -171,7 +171,7 @@ To configure a new notification rule:
 
 1. Click **New Rule**.
 2. Under **For incidents matching...**, select the incident property field `key:value` pairs you want notifications to be sent for. By default, these filters are empty, and a notification rule triggers for any incident.
-3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][16]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][17] for this option to appear.
+3. **Notify**: Select your notification recipients. Notifications can be sent to any of Datadog's existing [notification integrations][18]. If you want to notify a recipient's mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the [Datadog mobile app][19] for this option to appear.
 4. **With Template**: Select the desired message template you want the notification rule to use.
 5. **Renotify on updates to**: Choose which incident properties trigger renotifications. Whenever one or more of the selected properties changes, a new notification is sent. Note that you cannot renotify on properties that are already in your filters (see step 2, above).
 6. Click **Save**
@@ -214,9 +214,9 @@ To create a postmortem template:
 [11]: /service_management/incident_management/incident_details/#response-team-section
 [12]: /account_management/rbac/?tab=datadogapplication#pagetitle
 [13]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
-[14]: https://app.datadoghq.com/account/settings#integrations
-[15]: /service_management/incident_management/incident_details/#notifications-section
-[16]: /monitors/notifications/?tab=is_alert#notify-your-team
-[17]: /service_management/mobile/
-[50]: /integrations/microsoft_teams/#datadog-incident-management-in-microsoft-teams
-[51]: /service_management/incident_management/incident_details/#global-header
+[14]: /integrations/microsoft_teams/#datadog-incident-management-in-microsoft-teams
+[15]: https://app.datadoghq.com/account/settings#integrations
+[16]: /service_management/incident_management/incident_details/#global-header
+[17]: /service_management/incident_management/incident_details/#notifications-section
+[18]: /monitors/notifications/?tab=is_alert#notify-your-team
+[19]: /service_management/mobile/
