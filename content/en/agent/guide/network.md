@@ -193,6 +193,7 @@ The information is structured as JSON following this schema:
     "logs": {...},                         // <-- same for the logs Agent data
     "process": {...},                      // <-- same for the process Agent data
     "orchestrator": {...},                 // <-- same for the process Agent data
+    "remote-configuration": {...},         // <-- used by the Agent to retrieve its dynamic configuration
     "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
     "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
     "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)

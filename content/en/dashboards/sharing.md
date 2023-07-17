@@ -124,7 +124,7 @@ Datadog has a [dedicated API][7] allowing you to interact with your shared graph
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /dashboards/#timeboards
-[3]: /dashboards/#screenboard
+[3]: /dashboards/#screenboards
 [4]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
 [5]: /help/
 [6]: https://app.datadoghq.com/organization-settings/public-sharing/settings

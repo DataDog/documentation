@@ -72,5 +72,5 @@ The `forecast()` function has two parameters:
 
 [1]: /monitors/types/anomaly/
 [2]: /monitors/types/outlier/
-[3]: /monitors/types/forecasts/#forecast-algorithms
+[3]: /monitors/types/forecasts/?tab=linear#algorithms
 [4]: /monitors/types/anomaly/?s=anomaly%20algorithm#seasonality
