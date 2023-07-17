@@ -287,7 +287,7 @@ The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
 **Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules which are not valid regular expressions are ignored.
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
 
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
@@ -315,7 +315,7 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **Default**: `null`<br>
-Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Starting version `0.90.0`, changes to `datadog.version` at run-time through ini_set are also applied to the current root span.
+Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
