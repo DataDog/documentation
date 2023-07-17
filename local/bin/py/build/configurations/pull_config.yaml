@@ -60,6 +60,18 @@
           # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
           - networks/model/domain/azure_services.go
 
+      - repo_name: integrations-internal-core
+        contents:
+
+        - action: integrations
+          branch: main
+          globs:
+          - "*/metadata.csv"
+          - "*/manifest.json"
+          - "*/assets/service_checks.json"
+          - "*/README.md"
+          - "*/datadog_checks/*/__about__.py"
+
       - repo_name: dogweb
 
         contents:
@@ -110,18 +122,6 @@
 
         - action: integrations
           branch: master
-          globs:
-          - "*/metadata.csv"
-          - "*/manifest.json"
-          - "*/assets/service_checks.json"
-          - "*/README.md"
-          - "*/datadog_checks/*/__about__.py"
-
-      - repo_name: integrations-internal-core
-        contents:
-
-        - action: integrations
-          branch: main
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
@@ -439,7 +439,7 @@
             path_to_remove: 'rulesets/python-pandas/'
             front_matters:
               disable_edit: true
-              
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
