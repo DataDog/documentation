@@ -172,6 +172,8 @@ if (scope != null) {
 
 To create filters or visualizations for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
 
+Read more about custom metrics in [Add Custom Metrics Guide][15].
+
 ### Reporting code coverage
 
 When code coverage is available, the Datadog Tracer (v2.31.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
@@ -837,3 +839,4 @@ In addition to that, if [Intelligent Test Runner][10] is enabled, the following 
 [12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://github.com/coverlet-coverage/coverlet
+[15]: /continuous_integration/guides/add_custom_metrics/?tab=net
