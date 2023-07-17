@@ -233,47 +233,6 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
 {{< /tabs >}}
 {{< /site-region >}}
 
-{{< site-region region="ap1" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                    logsEnabled = true,
-                    tracesEnabled = true,
-                    crashReportsEnabled = true,
-                    rumEnabled = true
-                )
-                .useSite(DatadogSite.AP1)
-                .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
-    }
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-    public class SampleApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Configuration configuration =
-                    new Configuration.Builder(true, true, true, true)
-                            .useSite(DatadogSite.AP1)
-                            .build();
-            Credentials credentials = new Credentials( < CLIENT_TOKEN >, <ENV_NAME >, <APP_VARIANT_NAME >, <
-            APPLICATION_ID >);
-            Datadog.initialize(this, credentials, configuration, trackingConsent);
-        }
-    }
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
-
    To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
