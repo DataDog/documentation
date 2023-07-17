@@ -32,7 +32,7 @@ As teams iterate quickly, deploy code, and continually make changes to their app
 
 {{< img src="dashboards/change_overlays/change_overlays.mp4" alt="Change overlays on graphs in a Dashboard" video="true" style="width:75%;">}}
 
-By viewing the moment a change occurred in the context of your Datadog observability data, you can pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays currently supports [APM service deployments][1].
+By viewing the moment a change occurred in the context of your Datadog observability data, you can pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays supports [APM service deployments][1].
 
 
 ## Overlay changes on graphs
