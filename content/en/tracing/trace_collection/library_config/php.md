@@ -105,7 +105,7 @@ Whether to enable distributed tracing.
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Default**: `null`<br>
-Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Starting version `0.90.0`, changes to `datadog.version` at run-time through ini_set are also applied to the current root span.
+Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Starting version `0.90.0`, changes to `datadog.version` at run-time through `ini_set` are also applied to the current root span.
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
