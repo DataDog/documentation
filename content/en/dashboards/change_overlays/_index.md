@@ -80,7 +80,7 @@ For APM deployments, overlays appear on timeseries graphs that:
 1. Are filtered by the `service` tag in the query
 2. Have the `service` set up with the `version` tag
 
-### What are my deployments scoped to?
+### What are deployments scoped to?
 For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`. 
 
 ## Further Reading
