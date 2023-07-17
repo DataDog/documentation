@@ -3,9 +3,9 @@ cascade:
   algolia:
     category: 지침
     rank: 20
-    subcategory: CI 가시성 가이드
+    subcategory: CI Visibility 가이드
 disable_toc: true
-kind: 가이드
+kind: guide
 private: true
 title: CI Visibility 가이드
 ---
@@ -26,5 +26,5 @@ title: CI Visibility 가이드
 
 
 {{< whatsnext desc="Quality Gates 가이드:" >}}
-{{< nextlink href="/continuous_integration/guides/github_gating" >}}Datadog 모니터로 GitHub Actions 배포 게이팅하기{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/guides/github_gating" >}}Datadog 모니터로 GitHub Actions Deployments 게이팅하기{{< /nextlink >}}
 {{< /whatsnext >}}
