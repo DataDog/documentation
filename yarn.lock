@@ -4464,7 +4464,6 @@ __metadata:
     minimist: ^1.2.5
     mixitup: ^3.3.1
     mousetrap: ^1.6.5
-    pa11y: ^5.3.0
     picturefill: 3.0.2
     popper.js: 1.16.1
     postcss-import: ^12.0.1
@@ -8943,7 +8942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pa11y@npm:^5.2.0, pa11y@npm:^5.3.0":
+"pa11y@npm:^5.2.0":
   version: 5.3.0
   resolution: "pa11y@npm:5.3.0"
   dependencies:

@@ -2777,9 +2777,16 @@ components:
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
+        agentConstraint:
+          description: The version of the agent.
+          type: string
         category:
           description: The category of the Agent rule.
           example: Process Activity
+          type: string
+        creationAuthorUuId:
+          description: The ID of the user who created the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
         creationDate:
           description: When the Agent rule was created, timestamp in milliseconds.
@@ -2808,6 +2815,15 @@ components:
           description: The name of the Agent rule.
           example: my_agent_rule
           type: string
+        updateAuthorUuId:
+          description: The ID of the user who updated the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
+          type: string
+        updateDate:
+          description: Timestamp in milliseconds when the Agent rule was last updated.
+          example: 1624366480320
+          format: int64
+          type: integer
         updatedAt:
           description: When the Agent rule was last updated, timestamp in milliseconds.
           example: 1624366480320
@@ -3528,6 +3544,11 @@ components:
           description: ID of the dashboard.
           example: q5j-nti-fv6
           type: string
+        integration_id:
+          description: The short name of the integration.
+          nullable: true
+          readOnly: true
+          type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
           readOnly: true
@@ -3995,7 +4016,13 @@ components:
     DowntimeResponseAttributes:
       description: Downtime details.
       properties:
-        created_at:
+        canceled:
+          description: Time that the downtime was canceled.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          nullable: true
+          type: string
+        created:
           description: Creation time of the downtime.
           example: 2020-01-02T03:04:05.282979+0000
           format: date-time
@@ -4004,7 +4031,7 @@ components:
           $ref: '#/components/schemas/DowntimeDisplayTimezone'
         message:
           $ref: '#/components/schemas/DowntimeMessage'
-        modified_at:
+        modified:
           description: Time that the downtime was last modified.
           example: 2020-01-02T03:04:05.282979+0000
           format: date-time
@@ -4079,7 +4106,7 @@ components:
           description: 'ISO-8601 Datetime to end the downtime. Must include a UTC
             offset of zero. If not provided, the
 
-            downtime starts the moment it is created.'
+            downtime continues forever.'
           example: 2020-01-02 03:04:00+00:00
           format: date-time
           nullable: true
@@ -4437,6 +4464,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/EventAttributes'
+        message:
+          description: The message of the event.
+          type: string
         tags:
           description: An array of tags associated with the event.
           example:
@@ -4686,6 +4716,10 @@ components:
         request_id:
           description: The identifier of the request.
           example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          description: The request status.
+          example: done
           type: string
         warnings:
           description: 'A list of warnings (non-fatal errors) encountered. Partial
@@ -10874,6 +10908,10 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/RUMApplicationListAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
@@ -11709,19 +11747,23 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role` and
-            `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`
+            (beta), `user` (beta), and `org`.
 
-            The org ID can be obtained through the api/v2/current_user API.'
+            The org ID can be obtained through the api/v2/current_user API.
+
+            The user principal type accepts service account IDs.'
           example:
           - role:00000000-0000-1111-0000-000000000000
           items:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role` and `org`.
+              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
 
-              The org ID can be obtained through the api/v2/current_user API.'
+              The org ID can be obtained through the api/v2/current_user API.
+
+              The user principal type accepts service account IDs.'
             type: string
           type: array
         relation:
@@ -14381,6 +14423,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/ServiceDefinitionDataAttributes'
+        id:
+          description: Service definition id.
+          type: string
         type:
           description: Service definition type.
           type: string
@@ -14413,6 +14458,30 @@ components:
           type: string
         last-modified-time:
           description: Last modified time of the service definition.
+          type: string
+        origin:
+          description: User defined origin of the service definition.
+          type: string
+        origin-detail:
+          description: User defined origin's detail of the service definition.
+          type: string
+        warnings:
+          description: A list of schema validation warnings.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionMetaWarnings'
+          type: array
+      type: object
+    ServiceDefinitionMetaWarnings:
+      description: Schema validation warnings.
+      properties:
+        instance-location:
+          description: The warning instance location.
+          type: string
+        keyword-location:
+          description: The warning keyword location.
+          type: string
+        message:
+          description: The warning message.
           type: string
       type: object
     ServiceDefinitionRaw:
@@ -15147,6 +15216,17 @@ components:
           $ref: '#/components/schemas/SpansType'
       type: object
     SpansAggregateBucket:
+      description: Spans aggregate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAggregateBucketAttributes'
+        id:
+          description: ID of the spans aggregate.
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansAggregateBucketType'
+      type: object
+    SpansAggregateBucketAttributes:
       description: A bucket values.
       properties:
         by:
@@ -15157,6 +15237,9 @@ components:
             '@state': success
             '@version': abc
           type: object
+        compute:
+          description: The compute data.
+          type: object
         computes:
           additionalProperties:
             $ref: '#/components/schemas/SpansAggregateBucketValue'
@@ -15164,6 +15247,14 @@ components:
             of values for a timeseries.
           type: object
       type: object
+    SpansAggregateBucketType:
+      description: The spans aggregate bucket type.
+      enum:
+      - bucket
+      example: bucket
+      type: string
+      x-enum-varnames:
+      - BUCKET
     SpansAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -15350,6 +15441,10 @@ components:
           example:
             customAttribute: 123
             duration: 2345
+          type: object
+        custom:
+          additionalProperties: {}
+          description: JSON object of custom spans data.
           type: object
         end_timestamp:
           description: End timestamp of your span.
@@ -29583,10 +29678,11 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles). The
-    restriction policy
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams
+    (beta), or users (beta)).
 
-    determines who is authorized to perform what actions on the resource.'
+    The restriction policy determines who is authorized to perform what actions on
+    the resource.'
   name: Restriction Policies
 - description: 'The Roles API is used to create and manage Datadog roles, what
 

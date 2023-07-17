@@ -10,7 +10,7 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#multi-line-aggregation
   tag: ドキュメント
   text: 複数行のログの集約
-- link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
   tag: ドキュメント
   text: ワイルドカードを使用したディレクトリの追跡
 - link: agent/logs/advanced_log_collection/#global-processing-rules
@@ -170,7 +170,7 @@ logs:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/kubernetes/log/
 [3]: /ja/agent/docker/log/
 [4]: /ja/agent/guide/agent-configuration-files/

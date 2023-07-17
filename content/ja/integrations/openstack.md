@@ -38,7 +38,7 @@ draft: false
 git_integration_title: openstack
 integration_id: openstack
 integration_title: OpenStack (レガシー)
-integration_version: 1.13.1
+integration_version: 1.13.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

@@ -69,10 +69,10 @@ Investigate details using the [Security Findings Explorer][10]. View detailed in
 [2]: https://app.datadoghq.com/security/compliance
 [3]: /security/cspm/frameworks_and_benchmarks
 [4]: /security/default_rules/#cat-posture-management-cloud
-[5]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
+[5]: /security/cspm/frameworks_and_benchmarks#view-your-compliance-posture
 [6]: /security/cspm/custom_rules
-[7]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
-[8]: /security/notifications/
+[7]: /security/notifications/
+[8]: /security/notifications/#notification-channels
 [9]: /security/notifications/#detection-rule-notifications
 [10]: /security/cspm/findings
 [11]: /security/default_rules/#cat-posture-management-infra

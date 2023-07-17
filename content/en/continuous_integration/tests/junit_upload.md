@@ -250,53 +250,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][8] binary is required.
-
-If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
-
-`DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
-**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.<br/>
-**Example**: `develop`
-
-`DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
-**Example**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: Full commit hash.<br/>
-**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: Commit message.<br/>
-**Example**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.<br/>
-**Example**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.<br/>
-**Example**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.<br/>
-**Example**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.<br/>
-**Example**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
+{{% ci-git-metadata %}}
 
 ## Git metadata upload
 
@@ -358,7 +312,7 @@ For mobile apps (Swift, Android):
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][9] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][8] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
@@ -503,5 +457,4 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /logs/
 [7]: /getting_started/site/
-[8]: https://git-scm.com/downloads
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://www.w3schools.com/xml/xpath_syntax.asp

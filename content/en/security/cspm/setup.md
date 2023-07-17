@@ -189,7 +189,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 
 5. Restart the Agent.
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://app.datadoghq.com/security/configuration
 [3]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=kubernetes
 
@@ -224,7 +224,7 @@ Once you've disabled CSM Misconfigurations, your previous findings and the homep
 
 To disable CSM Misconfigurations for your cloud providers:
 
-- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
+- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts.
 - **Azure**: On the **Setup** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
 - **Google Cloud**: On the **Setup** > **Cloud Providers** tab, click the **Google Cloud Platform** tile, and turn off the **CSPM Enabled** toggle for your Google Cloud projects.
 - **Docker**: Set `DD_COMPLIANCE_CONFIG_ENABLED` to `false` in your Docker configuration.
@@ -237,5 +237,5 @@ To disable CSM Misconfigurations for your cloud providers:
 [1]: https://app.datadoghq.com/security/compliance/
 [2]: /security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
-[4]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
-[5]: /security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[4]: /security/cspm/compliance_rules#customize-how-your-environment-is-scanned-by-each-rule
+[5]: /security/cspm/compliance_rules#set-notification-targets-for-compliance-rules

@@ -11,9 +11,7 @@ Cloud Security Management Threats (CSM Threats) monitors file, network, and proc
 
 Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as AWS EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
 
-<div class="alert alert-warning">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
-
-CSM Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
+CWS uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
