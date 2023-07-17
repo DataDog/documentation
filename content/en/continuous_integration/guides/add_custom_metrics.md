@@ -89,7 +89,7 @@ DD_METRICS="test.memory.usage:1000" datadog-ci junit upload --service my-service
 
 Next, create a facet for the custom metric you added to the test.
 
-Create a facet by going to [Test Runs][2] and clicking on **Add** on the facet list:
+Create a facet by going to [Test Runs][2] and clicking **Add** on the facet list:
 
 {{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 

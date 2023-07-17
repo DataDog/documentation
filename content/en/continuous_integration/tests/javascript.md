@@ -346,7 +346,7 @@ Read more about custom metrics in [Add Custom Metrics Guide][6].
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][7], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
+If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
 
 
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
