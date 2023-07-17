@@ -16,6 +16,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Boundary
+  logs:
+    source: boundary
   monitors:
     '[Boundary] High active connections': assets/monitors/active_connections.json
 author:
@@ -71,12 +73,12 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Boundary チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 #### リスナー
 
@@ -136,6 +138,25 @@ Boundary インテグレーションには、イベントは含まれません�
 ### サービスのチェック
 {{< get-service-checks-from-git "boundary" >}}
 
+
+### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. Boundary のログの収集を開始するには、次のコンフィギュレーションブロックを `boundary.d/conf.yaml` ファイルに追加します。
+
+    ```yaml
+    logs:
+       - type: file
+         source: boundary
+         path: /var/log/boundary/events.ndjson
+    ```
+
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`boundary.d/conf.yaml` ファイルのサンプル][4]を参照してください。
 
 ## トラブルシューティング
 

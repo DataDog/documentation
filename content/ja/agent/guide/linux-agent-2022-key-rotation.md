@@ -192,4 +192,4 @@ DEB ベースのシステム (Debian/Ubuntu) の Agent v5 ユーザーは、ロ�
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
 [11]: https://docs.datadoghq.com/ja/integrations/amazon_elasticbeanstalk
 [12]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
-[13]: https://app.datadoghq.com/account/settings#agent
+[13]: https://app.datadoghq.com/account/settings/agent/latest

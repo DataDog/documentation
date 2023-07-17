@@ -35,16 +35,17 @@ Cloud Workload Security (CWS) は、環境全体のファイル、ネットワ�
 
 * Datadog Agent 7.44 以降。
 * データ収集は eBPF を使用して行われるため、Datadog は最低限、基底の Linux カーネルバージョン 4.15.0 以降または eBPF 機能のバックポートを備えたプラットフォームを必要とします。CWS は以下の Linux ディストリビューションをサポートしています。
-  * Ubuntu 18.04 以降
+  * Ubuntu LTS (18.04、20.04、22.04)
   * Debian 10 以降
-  * Amazon Linux 2
-  * Fedora 26 以降
-  * SUSE 15 以降
-  * CentOS/RHEL 7.6 以降
+  * Amazon Linux 2 (カーネル 4.15、5.4、5.10) および 2023
+  * SUSE Linux Enterprise Server 12 および 15
+  * Red Hat Enterprise Linux 7、8、9
+  * Oracle Linux 7、8、9
+  * CentOS 7
   * カスタムカーネルビルドはサポートされていません。
 * Cilium や Calico などのカスタム Kubernetes ネットワークプラグインとの互換性については、[トラブルシューティングページ][3]をご参照ください。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 一般的に、CWS のインストールは以下の手順で行います。
 

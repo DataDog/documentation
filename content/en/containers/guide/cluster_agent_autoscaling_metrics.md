@@ -419,7 +419,7 @@ By batching these queries, the Cluster Agent can perform them more efficiently a
 
 This means that the Cluster Agent performs roughly 120 API requests per hour per 35 `DatadogMetric` objects. As you add more `DatadogMetric` objects or add the autoscaling functionality to additional Kubernetes clusters, this increases the number of calls to fetch metrics within the same org.
 
-The Cluster Agent also queries for the past five minutes of data by default for each of these metric queries. This is to ensure the Cluster Agent is scaling off *recent* data. However, if your metric queries are relying on data from one of the cloud integrations (AWS, Azure, GCP, etc.), these are [fetched at a slight delay][7] and are not be covered within the five minute interval. In these cases, provide the environment variables to the Cluster Agent to increase the date range and data age allowed for the metric queries.
+The Cluster Agent also queries for the past five minutes of data by default for each of these metric queries. This is to ensure the Cluster Agent is scaling off *recent* data. However, if your metric queries are relying on data from one of the cloud integrations (AWS, Azure, GCP, etc.), these are [fetched at a slight delay][7] and are not covered within the five minute interval. In these cases, provide the environment variables to the Cluster Agent to increase the date range and data age allowed for the metric queries.
 
 ```yaml
 - name: DD_EXTERNAL_METRICS_PROVIDER_BUCKET_SIZE

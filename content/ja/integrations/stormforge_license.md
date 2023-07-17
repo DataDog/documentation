@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: stormforge-stormforge-license
 app_uuid: 8de4db8e-f741-4168-9ef2-4594623b3605
 assets: {}

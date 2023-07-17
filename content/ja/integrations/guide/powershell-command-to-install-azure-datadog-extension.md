@@ -17,7 +17,8 @@ title: Azure Datadog 拡張機能をインストールするコマンド
 Datadog は、Azure インスタンスへの Agent デプロイを支援する Azure 拡張機能を提供しています。
 
 * [ワンクリックで Datadog をデプロイできる Azure モニタリングのご紹介][1]
-* [Azure インテグレーションドキュメント][2]
+* [Azure Native インテグレーション][2] _US3 のみ_
+* [標準の Azure インテグレーション][7] _全サイト_
 
 GUI のインストールに代わる方法として、コマンドラインがあります。
 Azure インスタンスで Datadog Agent を拡張機能として実行するには、環境に合ったコマンドを使用します。`<SITE_PARAMETER>` を [Datadog サイトページ][3]の Datadog アカウント**サイトパラメーター**値に、`<DATADOG_API_KEY>` を [Datadog API キー][4]に置き換えます。
@@ -142,8 +143,9 @@ Azure `connectedmachine` 拡張機能を設定するための構文の詳細に�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
-[2]: /ja/integrations/azure/#deploy-agents
+[2]: /ja/integrations/guide/azure-native-manual-setup/#virtual-machine-agent
 [3]: /ja/getting_started/site/#access-the-datadog-site
 [4]: /ja/account_management/api-app-keys/#api-keys
 [5]: /ja/integrations/azure_arc/
 [6]: https://learn.microsoft.com/en-us/cli/azure/connectedmachine/extension
+[7]: /ja/integrations/guide/azure-manual-setup/#agent-installation

@@ -2,7 +2,7 @@
 aliases:
 - /ja/workflows/access
 - /ja/workflows/service_accounts
-description: ワークフローへのアクセスおよび認証
+description: Workflow Automation へのアクセスおよび認証
 disable_toc: false
 further_reading:
 - link: /integrations/
@@ -93,7 +93,7 @@ Editor
 
 特定の接続の権限を変更するには、以下の手順に従います。
 
-1. [Workflows 一覧][9]に移動します。
+1. [Workflow Automation ページ][9]に移動します。
 1. 右上の **Connections** をクリックします。接続の一覧が表示されます。
 1. 詳細な権限を設定したい接続にカーソルを合わせます。右側に、**Edit**、**Permissions**、**Delete** のアイコンが表示されます。
 1. 南京錠 (** Permissions**) のアイコンをクリックします。

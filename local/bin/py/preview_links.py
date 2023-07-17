@@ -1,5 +1,6 @@
 from mako.template import Template
 import argparse
+import re
 
 parser=argparse.ArgumentParser()
 
@@ -12,13 +13,33 @@ args=parser.parse_args()
 
 comment_template = Template(filename='local/bin/py/preview-links-template.mako')
 
+pattern1 = re.compile('content/en/(.*?).md')
+pattern2 = re.compile('content/en/glossary/terms/(.*?).md')
+
+def compile_filename(filename):
+    if pattern2.match(filename):
+        filename = filename.replace('content/en/', '').replace('terms/', '#').replace('.md', '')
+        return filename
+    elif pattern1.match(filename):
+        filename = filename.replace('content/en/', '').replace('_index', '').replace('.md', '')
+        return filename
+
+def sort_files(file_string):
+    final_array = []
+    initial_array = file_string.split(" ")
+    for filename in initial_array:
+        if filename.endswith('.md'):
+            if pattern1.match(filename) or pattern2.match(filename):
+                final_array.append(compile_filename(filename))
+    return final_array        
+
 # It looks like renamed files are counted as removed/added. I'm going to leave "renamed" in for
 # now to see if this behavior is consistent. 
 with open('.github/preview-links-template.md', 'w') as f:
     f.write(comment_template.render(
-                deleted = args.deleted.split(" ") if args.deleted else False,
-                renamed = args.renamed.split(" ") if args.renamed else False,
-                modified = args.modified.split(" ") if args.modified else False,
-                added = args.added.split(" ") if args.added else False            
+                deleted = sort_files(args.deleted) if args.deleted else False,
+                renamed = sort_files(args.renamed) if args.renamed else False,
+                modified = sort_files(args.modified) if args.modified else False,
+                added = sort_files(args.added) if args.added else False
                 )
             )

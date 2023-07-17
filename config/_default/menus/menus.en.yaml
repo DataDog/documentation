@@ -454,7 +454,7 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_installation
     weight: 301
-  - name: Configuration
+  - name: Further Configuration
     url: containers/kubernetes/configuration
     parent: containers_kubernetes
     identifier: containers_kubernetes_configuration
@@ -608,11 +608,31 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
+  - name: Runtime Metrics
+    url: opentelemetry/runtime_metrics
+    identifier: otel_runtime_metrics
+    parent: opentelemetry_top_level
+    weight: 3
+  - name: Java
+    url: opentelemetry/runtime_metrics/java
+    identifier: otel_runtime_metrics_java
+    parent: otel_runtime_metrics
+    weight: 301
+  - name: .NET
+    url: opentelemetry/runtime_metrics/dotnet
+    identifier: otel_runtime_metrics_dotnet
+    parent: otel_runtime_metrics
+    weight: 302
+  - name: Go
+    url: opentelemetry/runtime_metrics/go
+    identifier: otel_runtime_metrics_go
+    parent: otel_runtime_metrics
+    weight: 303
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -734,24 +754,11 @@ main:
     url: dashboards/sharing/
     parent: dashboards
     weight: 8
-  - name: Graphing with JSON
-    url: dashboards/graphing_json/
-    parent: dashboards
-    identifier: graphing_json
-    weight: 9
-  - name: Widget JSON schema
-    url: dashboards/graphing_json/widget_json/
-    parent: graphing_json
-    weight: 801
-  - name: Request JSON schema
-    url: dashboards/graphing_json/request_json/
-    parent: graphing_json
-    weight: 802
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
-    identifier: guides
-    weight: 9
+    identifier: dashboards_guides
+    weight: 99
   - name: Serverless
     url: serverless
     pre: serverless
@@ -1243,7 +1250,7 @@ main:
     pre: mobile
     parent: service_management_heading
     weight: 60000
-  - name: Workflows
+  - name: Workflow Automation
     url: service_management/workflows/
     pre: workflows
     identifier: workflows
@@ -1873,86 +1880,116 @@ main:
     parent: service_catalog
     identifier: service_catalog_guides
     weight: 907
+  - name: Dynamic Instrumentation
+    url: dynamic_instrumentation/
+    identifier: dyninst
+    parent: tracing
+    weight: 10
+  - name: Enabling
+    url: dynamic_instrumentation/enabling
+    identifier: dyninst_enable
+    parent: dyninst
+    weight: 1001
+  - name: Java
+    url: dynamic_instrumentation/enabling/java
+    identifier: dyninst_enable_java
+    parent: dyninst_enable
+    weight: 101
+  - name: Python
+    url: dynamic_instrumentation/enabling/python
+    identifier: dyninst_enable_python
+    parent: dyninst_enable
+    weight: 102
+  - name: .NET
+    url: dynamic_instrumentation/enabling/dotnet
+    identifier: dyninst_enable_dotnet
+    parent: dyninst_enable
+    weight: 103
+  - name: Expression Language
+    url: dynamic_instrumentation/expression-language
+    identifier: dyninst_explang
+    parent: dyninst
+    weight: 1002
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
     identifier: tracing_error_tracking
-    weight: 10
+    weight: 11
   - name: Error Tracking Explorer
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
-    weight: 801
+    weight: 1101
   - name: Custom Grouping
     url: tracing/error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
-    weight: 1208
+    weight: 1102
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
     identifier: tracing_data_security
-    weight: 11
+    weight: 12
   - name: Guides
     url: tracing/guide/
     parent: tracing
     identifier: tracing_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: tracing/troubleshooting/
     parent: tracing
     identifier: tracing_troubleshooting
-    weight: 13
+    weight: 14
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1201
+    weight: 1401
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1202
+    weight: 1402
   - name: Connection Errors
     url: tracing/troubleshooting/connection_errors
     identifier: tracing_troubleshooting_connection_errors
     parent: tracing_troubleshooting
-    weight: 1203
+    weight: 1403
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1204
+    weight: 1404
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1205
+    weight: 1405
   - name: Agent Resource Usage
     url: tracing/troubleshooting/agent_apm_resource_usage
     identifier: tracing_troubleshooting_agent_usage
     parent: tracing_troubleshooting
-    weight: 1206
+    weight: 1406
   - name: Correlated Logs
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1207
+    weight: 1407
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1208
+    weight: 1408
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1209
+    weight: 1409
   - name: APM Quantization
     url: tracing/troubleshooting/quantization
     identifier: tracing_troubleshooting_quantization
     parent: tracing_troubleshooting
-    weight: 1210
+    weight: 1410
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
@@ -2009,8 +2046,8 @@ main:
     parent: profiler
     identifier: profiler_types
     weight: 2
-  - name: Search Profiles
-    url: profiler/search_profiles/
+  - name: Profile Visualizations
+    url: profiler/profile_visualizations/
     parent: profiler
     identifier: profiler_search_profiles
     weight: 3
@@ -2180,6 +2217,11 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_dotnet
     weight: 301
+  - name: Java
+    url: continuous_integration/intelligent_test_runner/java/
+    parent: intelligent_test_runner
+    identifier: ci_itr_java
+    weight: 302
   - name: JavaScript and TypeScript
     url: continuous_integration/intelligent_test_runner/javascript/
     parent: intelligent_test_runner
@@ -2190,16 +2232,36 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 306
+  - name: Static Analysis
+    url: continuous_integration/static_analysis/
+    parent: ci
+    identifier: ci_static_analysis
+    weight: 4
+  - name: Rules
+    url: continuous_integration/static_analysis/rules
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_rules
+    weight: 401
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_circleci_orbs
+    weight: 402
+  - name: GitHub Actions
+    url: continuous_integration/static_analysis/github_actions
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_github_actions
+    weight: 403
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 4
+    weight: 5
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 5
+    weight: 6
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -2362,7 +2424,7 @@ main:
     pre: datastreams-monitoring
     identifier: data_streams
     parent: apm_heading
-    weight: 170000
+    weight: 166000
   - name: Troubleshooting
     url: data_streams/troubleshooting
     identifier: data_streams_troubleshooting
@@ -2600,17 +2662,21 @@ main:
   - name: Setup
     url: observability_pipelines/setup/
     parent: observability_pipelines
+    identifier: observability_pipelines_setup
     weight: 1
-  - name: Production Deployment Overview
+  - name: Datadog
+    url: observability_pipelines/setup/datadog
+    parent: observability_pipelines_setup
+    weight: 101
+  - name: Splunk
+    url: observability_pipelines/setup/splunk
+    parent: observability_pipelines_setup
+    weight: 110
+  - name: Deployment
     url: observability_pipelines/production_deployment_overview/
     parent: observability_pipelines
     identifier: observability_pipelines_production_deployment_overview
     weight: 2
-  - name: Architecture Design and Principles
-    url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_architecture_design_and_principles
-    weight: 201
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -3619,11 +3685,16 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
+  - name: Track Roku Errors
+    url: real_user_monitoring/error_tracking/roku/
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_roku
+    weight: 1408
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1408
+    weight: 1409
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -3845,7 +3916,7 @@ main:
     parent: dev_tools
     identifier: ide_integrations
     weight: 7
-  - name: IntelliJ IDEA
+  - name: IntelliJ Platform
     url: developers/ide_integrations/idea/
     parent: ide_integrations
     identifier: ide_integrations_idea
@@ -4005,6 +4076,10 @@ main:
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
     weight: 801
+  - name: Cost Details
+    url: account_management/plan_and_usage/cost_details/
+    parent: account_management_plan_and_usage
+    weight: 802
   - name: Billing
     url: account_management/billing/
     parent: account_management
@@ -4654,9 +4729,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListMonitorDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4666,9 +4743,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4678,9 +4757,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -4690,9 +4771,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CancelDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -4714,9 +4797,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -4726,9 +4811,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
@@ -9875,6 +9962,46 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Spans
+    url: /api/latest/spans/
+    identifier: spans
+    generated: true
+  - name: Search spans
+    url: '#search-spans'
+    identifier: spans-search-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpans
+      unstable: []
+      order: 2
+  - name: Get a list of spans
+    url: '#get-a-list-of-spans'
+    identifier: spans-get-a-list-of-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpansGet
+      unstable: []
+      order: 1
+  - name: Aggregate spans
+    url: '#aggregate-spans'
+    identifier: spans-aggregate-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateSpans
+      unstable: []
+      order: 3
   - name: Spans Metrics
     url: /api/latest/spans-metrics/
     identifier: spans-metrics

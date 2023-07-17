@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rollbar-license
 app_uuid: 8b08ddce-a1be-4438-9889-ba4113de9a93
 assets: {}

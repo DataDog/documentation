@@ -64,7 +64,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Databricks Spark アプリケーションを [Datadog Spark インテグレーション][3]で監視します。適切なクラスターの[コンフィギュレーション](#configuration)方法に従って、クラスターに [Datadog Agent][4] をインストールしてください。
 
@@ -194,13 +194,13 @@ fi
 
 dbutils.fs.put("dbfs:/<init-script-folder>/datadog-install-driver-workers.sh","""
 #!/bin/bash
-cat <<EOF > /tmp/start_datadog.sh
-
-#!/bin/bash
 
 date -u +"%Y-%m-%d %H:%M:%S UTC"
 echo "Running on the driver? $DB_IS_DRIVER"
 echo "Driver ip: $DB_DRIVER_IP"
+
+cat <<EOF > /tmp/start_datadog.sh
+#!/bin/bash
 
 if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
 
