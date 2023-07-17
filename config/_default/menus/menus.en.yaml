@@ -745,10 +745,15 @@ main:
     parent: dashboards
     weight: 6
     identifier: dashboards_temp_variables
+  - name: Overlays
+    url: dashboards/change_overlays/
+    parent: dashboards
+    weight: 7
+    identifier: dashboards_overlays
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 7
+    weight: 8
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
