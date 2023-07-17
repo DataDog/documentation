@@ -155,8 +155,7 @@ If your build process is executed in CI within a docker container, perform the f
 ```
 !.git/HEAD
 !.git/config
-!.git/refs/heads/master
-!.git/refs/heads/main
+!.git/refs
 ```
 
 2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
