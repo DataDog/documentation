@@ -107,6 +107,12 @@ Whether to enable distributed tracing.
 **Default**: `null`<br>
 Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
+`DD_LOGS_INJECTION`
+: **INI**: `datadog.logs_injection`<br>
+**Default**: `0`<br>
+Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+See [logs correlation documentation][16] for more information.
+
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
@@ -152,6 +158,13 @@ The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
 : **INI**: `datadog.service_mapping`<br>
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
+
+`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
+: **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
+**Default**: `0`<br>
+Enable printing of the full 128-bit ID when formatting trace IDs for logs correlation.
+When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
+When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
@@ -501,3 +514,4 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/
+[16]: /tracing/other_telemetry/connect_logs_and_traces/php
