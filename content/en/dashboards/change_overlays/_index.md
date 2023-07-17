@@ -65,7 +65,7 @@ Click on any overlay on your graph to open a change analysis page, allowing you 
 
 {{< img src="dashboards/change_overlays/change_overlays_side_panel.png" alt="Change overlays side panel" style="width:75%;">}}
 
-### APM Deployments
+### APM deployments
 For APM deployments, you can:
 - Compare the version selected to overall service performance for requests, errors, or latency
 - View the rollout of your version by `region`, `env`, or `datacenter`
