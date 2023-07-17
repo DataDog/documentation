@@ -147,25 +147,25 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
     - Supported Account Types: `Accounts in this organizational directory only (Datadog)`
     - Redirect URI: {{< region-param key="dd_full_site" code="true" >}}
 
-{{< img src="integrations/azure/Azure_create_ad.png" alt="Azure create app" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/Azure_create_ad.png" alt="Azure create app" popup="true" style="width:80%;" >}}
 
 #### Giving read permissions to the application
 
 1. To assign access at the individual subscription level, navigate to **Subscriptions** through the search box or the left sidebar.
 
-{{< img src="integrations/azure/subscriptions_icon.png" alt="Subscriptions icon" popup="true" style="width:25%">}}
+{{< img src="integrations/guide/azure_manual_setup/subscriptions_icon.png" alt="Subscriptions icon" popup="true" style="width:25%">}}
 
 To assign access at the Management Group level, navigate to **Management Groups** and select the Management Group that contains the set of subscriptions you would like to monitor.
 **Note**: Assigning access at the Management Group level means that any new subscriptions added to the group are automatically discovered and monitored by Datadog.
 
-{{< img src="integrations/azure/azure_management_groups_icon.png" alt="Management groups icon" popup="true" style="width:25%">}}
+{{< img src="integrations/guide/azure_manual_setup/azure_management_groups_icon.png" alt="Management groups icon" popup="true" style="width:25%">}}
 
 To configure monitoring for the entire tenant, assign access to the **Tenant Root Group**.
 
 2. Click on the subscription you would like to monitor.
 3. Select **Access control (IAM)** in the subscription menu and click **Add** > **Add role assignment**:
 
-    {{< img src="integrations/azure/azure-add-role.png" alt="Add Role Assignment" popup="true" style="width:80%">}}
+    {{< img src="integrations/guide/azure_manual_setup/azure-add-role.png" alt="Add Role Assignment" popup="true" style="width:80%">}}
 
 4. For **Role**, select **Monitoring Reader**. Under **Select**, choose the name of the Application you just created:
 
@@ -181,7 +181,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 2. For the same app, go to **Manage** > **Certificates and secrets**.
 3. Add a new **Client Secret** called `datadogClientSecret`, select a timeframe for **Expires**, and click **Add**:
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="Azure client secret" popup="true" style="width:80%">}}
+    {{< img src="integrations/guide/azure_manual_setup/Azure_client_secret.png" alt="Azure client secret" popup="true" style="width:80%">}}
 
 4. When the key value is shown, copy and paste the value in the [Datadog Azure integration tile][10] under **Client Secret** and click **Install Integration** or **Update Configuration**.
 
