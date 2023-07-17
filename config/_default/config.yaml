@@ -128,3 +128,6 @@ outputFormats:
     notAlternative: true
 
 timeout: "45s"
+
+build:
+  noJSConfigInAssets: true
