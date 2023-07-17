@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for VS Code integrates with Datadog to accelerate your development.
+The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
 
 {{< img src="/developers/ide_integrations/vscode/datadog-vscode.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
