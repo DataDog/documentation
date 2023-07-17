@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/dotnet'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -402,8 +402,8 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
 [5]: /tracing/trace_collection/

@@ -343,7 +343,7 @@ See the [Agent log files documentation][12].
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
 [6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

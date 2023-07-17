@@ -32,7 +32,7 @@ draft: false
 git_integration_title: vsphere
 integration_id: vsphere
 integration_title: vSphere
-integration_version: 6.2.2
+integration_version: 6.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

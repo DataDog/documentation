@@ -352,7 +352,6 @@ components:
           type: array
       type: object
     AccessRole:
-      default: st
       description: The access role of the user. Options are **st** (standard user),
         **adm** (admin user), or **ro** (read-only user).
       enum:
@@ -360,7 +359,8 @@ components:
       - adm
       - ro
       - ERROR
-      example: st
+      example: ro
+      nullable: true
       type: string
       x-enum-varnames:
       - STANDARD
@@ -2565,6 +2565,38 @@ components:
       - service
       - stat
       type: object
+    FormulaAndFunctionCloudCostDataSource:
+      description: Data source for Cloud Cost queries.
+      enum:
+      - cloud_cost
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - CLOUD_COST
+    FormulaAndFunctionCloudCostQueryDefinition:
+      description: A formula and functions Cloud Cost query.
+      example:
+        data_source: cloud_cost
+        name: query1
+        query: sum:aws.cost.amortized{*}
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/WidgetAggregator'
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionCloudCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_query
+          type: string
+        query:
+          description: Query for Cloud Cost data.
+          example: ''
+          type: string
+      required:
+      - data_source
+      - query
+      - name
+      type: object
     FormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -2828,6 +2860,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response
