@@ -88,7 +88,7 @@ For APM deployments, an `env` must be specified. If you have an `env` or `datace
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/services/deployment_tracking/
-[2]: watchdog/faulty_deployment_detection/
+[2]: /watchdog/faulty_deployment_detection/
 [3]: /dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
