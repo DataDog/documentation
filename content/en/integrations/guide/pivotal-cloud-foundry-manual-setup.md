@@ -33,7 +33,7 @@ Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applic
     cf v3-push <YOUR_APP> -b datadog-cloudfoundry-buildpack -b <YOUR-BUILDPACK-1> -b <YOUR-FINAL-BUILDPACK>
     ```
 
-      **If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack**. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
+      **Note**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
 
 ### Pivotal Cloud Foundry Platform < 1.12
 
