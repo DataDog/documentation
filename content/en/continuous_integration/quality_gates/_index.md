@@ -22,14 +22,16 @@ Using Quality Gates, you have control over what is merged into the default branc
 
 ## Set up Quality Gates
 
-There are two main steps required to set up Quality Gates: create one or more rules and add the `datadog-ci gate evaluate` command in your CI pipeline.
+There are two main steps required to set up Quality Gates:
+1. Create one or more rules.
+2. Add the `datadog-ci gate evaluate` command in your CI pipeline.
 
 ## Create a rule
 
 To create Quality Gates rules for your organization, your user account must have the `quality_gate_rules_write` [permission][1].
 
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
-2. Select the rule type.
+2. Select the rule type. You can choose between `Static Analysis` and `Test`.
 3. Define the rule scope. The rule scope defines when the rules should be evaluated. For example, you can scope a rule so that
 it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to "select when to evaluate" and add included
 or excluded values for the scope name. More information on rule scopes ([AM] ADD LINK TO SECTION BELOW).
@@ -40,16 +42,16 @@ violations with "error" severity and "security" category being introduced in a s
 {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 5. Select whether the rule should block the pipeline or not when it fails. Non-blocking rules are still evaluated, but
 they do not block the pipeline when they fail.
-6. Select the rule name.
-7. Click on "Save Rule".
+6. Select a rule name that describes the rule that you are creating.
+7. Click on **Save Rule**.
 
 A rule starts being evaluated as soon as it is created.
 
 ## Datadog-ci gate evaluate
 
-Quality Gates evaluation is invoked by calling the [`datadog-ci gate evaluate`][4] command. The command:
+Quality Gates evaluation is invoked by calling the [`datadog-ci gate evaluate`][4] command. This command:
 1. Retrieves all the impacted rules based on the current pipeline context (branch, repository).
-The rules that are retrieved vary based on the pipeline context, the rules scopes and eventual custom scopes ([AM] ADD LINK TO SECTION BELOW).
+The rules that are retrieved vary based on the pipeline context, the rules scopes and eventual custom scopes (more info in the rule scope section) ([AM] ADD LINK TO SECTION BELOW).
 2. Evaluates all the impacted rules.
 3. If one or more blocking rules fail, the command fails as well, blocking the pipeline.
 
@@ -70,7 +72,7 @@ DD_BETA_COMMANDS_ENABLED=true DATADOG_API_KEY=<API_KEY> DATADOG_APP_KEY=<APP_KEY
 The behavior of the command can be modified using the following flags:
 - **--fail-on-empty**: when this flag is specified, the command fails if no matching rules were found in Datadog
 based on the current command scope. By default, the command succeeds.
-- **-fail-if-unavailable**: when this flag is specified, the command fails if one or more rules could not be evaluated.
+- **--fail-if-unavailable**: when this flag is specified, the command fails if one or more rules could not be evaluated.
 By default, the command succeeds.
 - **--no-wait**: by default, the command waits 30 seconds for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
@@ -78,7 +80,11 @@ avoiding incorrect evaluation. If, in your pipeline, the job containing the `dat
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
 Note that, if used incorrectly, this flag might result in inaccurate rule evaluations.
 
-Custom scopes ([AM] ADD LINK TO SECTION BELOW) can be added by using the following option one or more times: **--scope**.
+Custom scopes ([AM] ADD LINK TO SECTION BELOW) can be added by using the following option one or more times: **--scope**:
+
+{{< code-block lang="shell" >}}
+datadog-ci gate evaluate --scope team:backend --scope team:frontend
+{{< /code-block >}}
 
 The command logs can be examined to understand what was the overall gate evaluation status, along with information
 about all the rules that were evaluated.
@@ -88,7 +94,7 @@ about all the rules that were evaluated.
 ## Rule scope
 
 When creating a rule, you can define its scope, which states when it should be evaluated.
-The rule scope is then matched with the `datadog-ci gate evaluate` ([AM] ADD LINK TO SECTION ABOVE) command context to understand whether the rule should be evaluated or not.
+The rule scope is then checked based on the context passed by the `datadog-ci gate evaluate` command to understand whether the rule should be evaluated or not.
 
 For each scope name (for example, "branch"), you can either select included or excluded values.
 When included values are selected, the rule is evaluated if one or more included values are passed as part of the command context.
@@ -118,7 +124,7 @@ For example, you can create a rule that is evaluated for the repository `example
 
 {{< img src="ci/rule_scope_example_repository_team_backend.png" alt="Rule scope for example-repository and team backend" style="width:90%;">}}
 
-The rule is evaluated when this command is invoked in a CI pipeline of the `example-repo` repository:
+The rule is evaluated when this command is invoked in a CI pipeline of the `example-repository` repository:
 - `datadog-ci gate evaluate --scope team:backend`
 
 The rule is not evaluated when the following commands are invoked instead:
@@ -129,13 +135,13 @@ The rule is not evaluated when the following commands are invoked instead:
 
 You can edit a Quality Gate rule by clicking on the edit icon in the [rules page][2]:
 
-{{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
+{{< img src="ci/edit_quality_gate_rule.png" alt="Edit a Quality Gates rule" style="width:90%;">}}
 
 ## Delete a rule
 
 You can delete a Quality Gate rule by clicking on the deletion icon in the [rules page][2]:
 
-{{< img src="ci/edit_quality_gate_rule.png" alt="Edit a Quality Gates rule" style="width:90%;">}}
+{{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
 
 ## Permissions
 
