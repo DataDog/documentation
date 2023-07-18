@@ -2,13 +2,10 @@ datadog:
   apiKey: "<datadog_api_key>"
   pipelineId: "<observability_pipelines_configuration_id>"
   site: "datadoghq.com"
-
-## The remote configuration env var must be set so that the OP worker 
-## boots up with RC enabled. In this Helm chart, the pipelineConfig 
-## key is notably omitted in lieu of retrieving the config from Datadog.
-env:
-  - name: DD_OP_REMOTE_CONFIGURATION_ENABLED
-    value: true
+  ## The remote configuration env var must be set so that the OP worker 
+  ## boots up with RC enabled. In this Helm chart, the pipelineConfig 
+  ## key is notably omitted in lieu of retrieving the config from Datadog.
+  remoteConfigurationEnabled: true
 
 ## Autoscaling
 ##

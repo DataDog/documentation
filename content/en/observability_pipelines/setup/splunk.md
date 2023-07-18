@@ -315,7 +315,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
+Production-oriented setup is not covered by these Docker instructions, and you should defer to your company's standards for load balancing in containerized environments. If you are testing on your local machine, configuring a load balancer is unnecessary.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.

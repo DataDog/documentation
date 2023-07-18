@@ -40,7 +40,7 @@ You can generate both of these in [Observability Pipelines][3].
 ### Provider-specific requirements
 {{< tabs >}}
 {{% tab "Docker" %}}
-There are no provider-specific requirements for Docker.
+Ensure that your machine is configured to run Docker.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
@@ -246,7 +246,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
+Production-oriented setup is not covered by these Docker instructions, and you should defer to your company's standards for load balancing in containerized environments. If you are testing on your local machine, configuring a load balancer is unnecessary.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.

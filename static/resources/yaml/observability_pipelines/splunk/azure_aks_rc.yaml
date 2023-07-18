@@ -2,17 +2,16 @@ datadog:
   apiKey: "<datadog_api_key>"
   pipelineId: "<observability_pipelines_configuration_id>"
   site: "datadoghq.com"
+  ## The remote configuration env var must be set so that the OP worker 
+  ## boots up with RC enabled. In this Helm chart, the pipelineConfig 
+  ## key is notably omitted in lieu of retrieving the config from Datadog.
+  remoteConfigurationEnabled: true
 
-## The remote configuration env var must be set so that the OP worker 
-## boots up with RC enabled. In this Helm chart, the pipelineConfig 
-## key is notably omitted in lieu of retrieving the config from Datadog.
 env:
   - name: SPLUNK_HEC_ENDPOINT
     value: <https://your.splunk.index:8088/>
   - name: SPLUNK_TOKEN
     value: <a_random_token_usually_a_uuid>
-  - name: DD_OP_REMOTE_CONFIGURATION_ENABLED
-    value: true
 
 ## Autoscaling
 ##
