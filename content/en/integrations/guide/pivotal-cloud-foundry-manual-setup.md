@@ -62,7 +62,7 @@ For older versions, Cloud Foundry provides a backwards compatible version of thi
 
       Do not use the `latest` version here (replace `x.y.z` with the specific version you want to use).
 
-      **Your regular buildpack should be the last in the manifest to act as a final buildpack**. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
+      **Note**: Your regular buildpack should be the last one listed in the manifest. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
 
 3. Push your application with the multi-buildpack. Ensure that the `multi-buildpack` is the buildpack selected by Cloud Foundry for your application:
 
