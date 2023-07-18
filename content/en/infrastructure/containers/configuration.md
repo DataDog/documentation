@@ -192,3 +192,6 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/containers
+[2]: /infrastructure/containers
