@@ -50,6 +50,11 @@ These tutorials walk you through setting up a sample multi-service application w
 {{< /whatsnext >}}
 <br>
 
+{{< whatsnext desc="Service Observability" >}}
+    {{< nextlink href="/tracing/guide/new_apm_experience/" >}}Opt in to the new APM troubleshooting experience{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
