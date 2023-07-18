@@ -26,7 +26,7 @@ Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applic
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
     ```
 
-2. Push your application with the Datadog buildpack and your buildpacks. The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
+2. Push your application, including both the Datadog buildpack and your regular buildpacks. The process to push your application with multiple buildpacks is described in [Pushing an App with Multiple Buildpacks][3].
 
     ```shell
     cf push <YOUR_APP> --no-start -b binary_buildpack
