@@ -54,8 +54,8 @@ Intelligent Test Runner for Cypress를 실행하려면 웹 애플리케이션에
 
 {{< img src="continuous_integration/itr_overview.png" alt="Datadog의 CI 섹션에 있는 테스트 서비스 설정에서 Intelligent test runner 활성화.">}}
 
-#### 스위트(suite) 건너뛰기
-Javascript를 위한 Intelligent test runner는 개별 테스트보다 전체 _테스트 스위트(suite)_(테스트 파일)을 건너뜁니다.
+#### 스위트 건너뛰기
+Javascript를 위한 Intelligent test runner는 개별 테스트가 아닌 전체 _테스트 스위트_(테스트 파일)를 건너뜁니다.
 
 ## 참고 자료
 
