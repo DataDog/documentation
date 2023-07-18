@@ -1,7 +1,7 @@
 ---
-title: Setting Up Database Monitoring for RDS Oracle
+title: Setting Up Database Monitoring for Oracle Autonomous Database
 kind: documentation
-description: Install and configure Database Monitoring for RDS Oracle
+description: Install and configure Database Monitoring for Oracle Autonomous Database
 private: true
 is_beta: true
 further_reading:
@@ -44,54 +44,61 @@ CREATE USER datadog IDENTIFIED BY your_password ;
 
 ```SQL
 grant create session to datadog ;
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATABASE','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$INSTANCE','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_FEATURE_USAGE_STATISTICS','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PROCESS','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CON_SYSMETRIC','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACE_USAGE_METRICS','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACES','DATADOG','SELECT',p_grant_option => false); 
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLCOMMAND','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAFILE','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SGAINFO','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
+grant select on v$session to datadog ;
+grant select on v$database to datadog ;
+grant select on v$containers to datadog;
+grant select on v$sqlstats to datadog ;
+grant select on v$instance to datadog ;
+grant select on dba_feature_usage_statistics to datadog ;
+grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V$PROCESS to datadog ;
+grant select on V$SESSION to datadog ;
+grant select on V$CON_SYSMETRIC to datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to datadog ;
+grant select on CDB_TABLESPACES to datadog ;
+grant select on V$SQLCOMMAND to datadog ;
+grant select on V$DATAFILE to datadog ;
+grant select on V$SYSMETRIC to datadog ;
+grant select on V$SGAINFO to datadog ;
+grant select on V$PDBS to datadog ;
+grant select on CDB_SERVICES to datadog ;
+grant select on V$OSSTAT to datadog ;
+grant select on V$PARAMETER to datadog ;
+grant select on V$SQLSTATS to datadog ;
+grant select on V$CONTAINERS to datadog ;
+grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
+grant select on V$SQL to datadog ;
 ```
 
 ## Configure the Agent
+
+Download the wallet zip file from the Oracle Cloud and unzip it.
 
 To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
+Set the `protocol` and `wallet` configuration parameters.
+
 ```yaml
 init_config:
 instances:
-  - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
+  - server: '<HOST_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
     password: '<PASSWORD>'
+    protocol: TCPS
+    wallet: <YOUR_WALLET_DIRECTORY>
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-  - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
+  - server: '<HOST_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
     password: '<PASSWORD>'
+    protocol: TCPS
+    wallet: <YOUR_WALLET_DIRECTORY>
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'

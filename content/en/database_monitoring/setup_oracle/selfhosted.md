@@ -64,11 +64,27 @@ grant select on V_$SQLCOMMAND to c##datadog ;
 grant select on V_$DATAFILE to c##datadog ;
 grant select on V_$SYSMETRIC to c##datadog ;
 grant select on V_$SGAINFO to c##datadog ;
+grant select on V_$PDBS to c##datadog ;
+grant select on CDB_SERVICES to c##datadog ;
+grant select on V_$OSSTAT to c##datadog ;
+grant select on V_$PARAMETER to c##datadog ;
+grant select on V_$SQLSTATS to c##datadog ;
+grant select on V_$CONTAINERS to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$SQL to c##datadog ;
+```
+
+If you conifgured custom queries that run on a PDB, you must grant `set container` privilege to the `C##DATADOG` user:
+
+```SQL
+connect / as sysdba
+alter session set container = your_pdb ;
+grant set container to c##datadog ;
 ```
 
 ### Create view
 
-Log on as `sysdba`, create a new `view`, and give the Agent user access to it:
+Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
@@ -171,7 +187,7 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.y
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
@@ -179,7 +195,7 @@ instances:
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
@@ -187,6 +203,8 @@ instances:
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
+
+The Agent connects only to CDB. It queries the information about PDBs while connected to CDB. Don't create connections to individual PDBs.
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] to learn more about how these tags are used in Datadog.
 
