@@ -1,5 +1,5 @@
 ---
-title: Cloud Foundry Manual Setup Guide
+title: Cloud Foundry Setup Guide
 kind: guide
 description: "Steps for manually setting up the Cloud Foundry Integration"
 further_reading:
