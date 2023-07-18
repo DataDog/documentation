@@ -1,7 +1,7 @@
 ---
 title: Cloud Foundry Setup Guide
 kind: guide
-description: "Steps for manually setting up the Cloud Foundry Integration"
+description: "Steps for setting up the Cloud Foundry Integration"
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
   tag: "Blog"
