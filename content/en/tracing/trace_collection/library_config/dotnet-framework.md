@@ -227,7 +227,7 @@ The `from-key` value is specific to the integration type, and should exclude the
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
+: Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
 #### Automatic instrumentation optional configuration
