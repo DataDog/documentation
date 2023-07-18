@@ -97,13 +97,13 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
-      -e SPLUNK_ENDPOINT=<SPLUNK_URL> \
+      -e SPLUNK_HEC_ENDPOINT=<SPLUNK_URL> \
       -e SPLUNK_TOKEN=<SPLUNK_TOKEN> \
       -p 8088:8088 \
       -v splunk.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-   `splunk.yaml` is the sample configuration you downloaded in Step 1. Be sure to update `SPLUNK_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+   `splunk.yaml` is the sample configuration you downloaded in Step 1. Be sure to update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
@@ -119,7 +119,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     site: "datadoghq.com"
   ```
 
-3. Replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -155,7 +155,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     site: "datadoghq.com"
   ```
 
-3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -191,7 +191,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     site: "datadoghq.com"
   ```
 
-3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -249,7 +249,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
-    SPLUNK_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
     SPLUNK_TOKEN=<SPLUNK_TOKEN>
     EOF
     ```
@@ -295,7 +295,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
-    SPLUNK_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
     SPLUNK_TOKEN=<SPLUNK_TOKEN>
     EOF
     ```
