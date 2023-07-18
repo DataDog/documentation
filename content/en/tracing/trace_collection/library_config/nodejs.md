@@ -131,6 +131,28 @@ Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD
 **Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
 Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
 
+`DD_PEER_SERVICE_MAPPING`
+: **Configuration**: `peerServiceMapping`<br>
+**Default**: N/A<br>
+**Example**: `localhost:my-mysql-db,my-very-complex-hostname:simplehost`<br>
+Provide peer service name remapping. Accepts comma separated `original-peer-service:wanted-peer-service` pairs, with or without spaces.
+
+`DD_TRACE_SPAN_ATTRIBUTE_SCHEMA`
+: **Configuration**: `spanAttributeSchema`<br>
+**Default**: `v0`<br>
+**Example**: `v1`<br>
+Specify naming convention version for span service names and operation names.
+Available versions:
+| Version | Effect                                                   |
+|---------|----------------------------------------------------------|
+| v0      | Original naming convention                               |
+| v1      | Flattened service names and consistency across languages |
+
+`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
+: **Configuration**: `removeIntegrationServiceNames`<br>
+**Default**: `false`<br>
+Make all service names match plugin-level configuration or `DD_SERVICE`, removing all variable suffixes and prefixes.
+
 `DD_TRACE_DISABLED_PLUGINS`
 : **Configuration**: N/A<br>
 **Default**: N/A<br>
