@@ -51,7 +51,7 @@ These tutorials walk you through setting up a sample multi-service application w
 <br>
 
 {{< whatsnext desc="Service Observability" >}}
-    {{< nextlink href="/tracing/guide/tracing/guide/service-page-opt-in/" >}}Opt in to the new APM troubleshooting experience{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/tracing/guide/service-page-opt-in/" >}}Opt in to the new Service Page and Service Types {{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
