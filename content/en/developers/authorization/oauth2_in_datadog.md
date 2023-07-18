@@ -60,7 +60,7 @@ For more information about client creation and publishing, see [OAuth for Datado
 
 ### Initiate authorization from a third-party location 
 
-Users should start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url`. The user's Datadog site is required in order to make API calls on behalf of the user and recieve an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information is not sent. 
+Users should start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url`. The user's Datadog site is required in order to make API calls on behalf of the user and receive an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information will not be provided. 
 
 Additionally, when users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when returning to the integration tile). 
 
