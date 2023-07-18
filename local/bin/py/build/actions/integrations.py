@@ -848,10 +848,10 @@ class Integrations:
                         print(e)
                         print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                         sys.exit(1)
-            else:
-                if exists(out_name):
-                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
-                    remove(out_name)
+            # else:
+            #     if exists(out_name):
+            #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+            #         remove(out_name)
 
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
