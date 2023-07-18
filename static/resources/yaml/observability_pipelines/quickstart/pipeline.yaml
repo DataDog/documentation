@@ -1,5 +1,5 @@
 ## SOURCES: Data sources that Observability Pipelines Worker collects data from.
-## For a QuickStart use case, we are using generate_syslog to generate sample data.
+## For a Quickstart use case, we are using generate_syslog to generate sample data.
 sources:
   generate_syslog:
     type: demo_logs
