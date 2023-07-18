@@ -25,7 +25,7 @@
       {{- $restr := printf "<h([1-4]).*?id=\"%s\".*?>.*<\\/h[1-4]>" $v.ID -}}
       {{- $heading_html := index (findRE $restr $page.Content 1) 0 | default "" -}}
       {{- $content_starting_after_header := index (split $page.Content $heading_html) 1 -}}
-      {{- $next_heading_html := index (findRE `<h([1-6]).*?>.*<\/h[1-6]>` $content_starting_after_header 1) 0 | default "" -}}
+      {{- $next_heading_html := index (findRE `<h([1-4]).*?>.*<\/h[1-4]>` $content_starting_after_header 1) 0 | default "" -}}
       {{- $content_block := index (split $content_starting_after_header $next_heading_html) 0 -}}
       {{- $section_header := $heading_html | plainify | htmlUnescape | safeHTML -}}
       {{- $section_content = $content_block | plainify | htmlUnescape | safeHTML -}}
