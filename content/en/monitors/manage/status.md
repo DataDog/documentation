@@ -114,7 +114,7 @@ To scope down the **Status & History** view to specific groups, use the filter f
 
 For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][8] with a formatted graph of the monitor query.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook button" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook button" style="width:90%;">}}
 
 The notebook matches the monitor evaluation period time range and includes related logs where relevant.
 

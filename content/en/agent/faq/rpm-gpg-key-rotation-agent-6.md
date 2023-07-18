@@ -54,10 +54,12 @@ Run the following commands on the host:
 
 ```bash
 $ curl -o /tmp/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+$ curl -o /tmp/DATADOG_RPM_KEY_B01082D3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 $ curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 
 $ rpm --import /tmp/DATADOG_RPM_KEY_CURRENT.public
+$ rpm --import /tmp/DATADOG_RPM_KEY_B01082D3.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -79,6 +81,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -94,6 +97,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```

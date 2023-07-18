@@ -148,6 +148,6 @@ For example, enter `$region` in the event overlays search box. This searches for
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#defining-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /logs/explorer/facets/
 [3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures

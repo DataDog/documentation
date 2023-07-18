@@ -1142,7 +1142,7 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
 [5]: https://docs.datadoghq.com/real_user_monitoring/guide/enrich-and-control-rum-data/
 [6]: https://docs.datadoghq.com/real_user_monitoring/faq/proxy_rum_data/
-[7]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
+[7]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [9]: https://docs.datadoghq.com/getting_started/site/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
