@@ -62,6 +62,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
     {{< nextlink href="/dashboards/querying" >}}Querying: See the formatting options for graph queries{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions" >}}Functions: Modify metric queries and resulting graphs{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
+    {{< nextlink href="/dashboards/change_overlays" >}}Overlays: Automatically overlay change events on graphs{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
 {{< /whatsnext >}}
 
