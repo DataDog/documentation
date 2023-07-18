@@ -182,7 +182,7 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-**Note**: Instead of using Orchestrion, you can also [manually install the Go tracer][12].
+**Note**: Instead of using Orchestrion, you can also [manually install the Go tracer][1].
 
 #### Explanation
 
