@@ -100,13 +100,13 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -e SPLUNK_HEC_ENDPOINT=<SPLUNK_URL> \
       -e SPLUNK_TOKEN=<SPLUNK_TOKEN> \
       -p 8088:8088 \
-      -v splunk.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      -v pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-   `splunk.yaml` is the sample configuration you downloaded in Step 1. Be sure to update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+   `pipeline.yaml` is the sample configuration you downloaded in Step 1. Be sure to update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
-[2]: /resources/yaml/observability_pipelines/splunk/splunk.yaml
+[2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
