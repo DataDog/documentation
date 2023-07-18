@@ -1,7 +1,8 @@
 {{ $app_id := .Params.app_id | default "" }}
 {{ $media := .Params.tile.media | default slice}}
 {{ $asset_len := ($media | default slice) | len  }}
-{{ $isScrollableCarousel := (gt $asset_len 3)}}
+{{ $is_scrollable_carousel := (gt $asset_len 3)}}
+{{ $carousel_item_vertical := newScratch }}
 
 <div 
 @keydown.window.left="navigateCarousel('prev')"
@@ -12,7 +13,7 @@ x-data="{
     scrollByHeight: 0,
     activeBtnOffsetTop: 0,
     verticalCarouselEl: $refs.verticalCarousel,
-    isScrollable: {{$isScrollableCarousel}},
+    isScrollable: {{$is_scrollable_carousel}},
     navigateCarousel (direction) {
         // Navigates the carousel based on the provided direction.
 
@@ -105,7 +106,7 @@ x-data="{
                 {{ range $idx, $elm := $media }}
                 <div
                 @click="{{if not $elm.vimeo_id}}$store.integrationsModal.openModal(activeSlide){{end}}" 
-                id="{{add $idx 1}}-horizontal" 
+                id="carousel-item-horizontal-{{add $idx 1}}" 
                 class="carousel-item__horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}" 
                 :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
                 x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
@@ -151,8 +152,12 @@ x-data="{
         x-ref="verticalCarousel"
         @resize.window="navigateVerticalNavOnResize()">
             {{ range $idx, $elm := $media }}
-                {{ if and (gt $idx (sub $asset_len 4)) $isScrollableCarousel}}
+                {{ $base_idx := (sub $asset_len 4) }}
+                {{ if and (gt $idx $base_idx) $is_scrollable_carousel}}
+                {{ $carousel_item_vertical.Set "idx" (sub $idx $base_idx) }}
                 <button 
+                id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
+                data-index="{{ add $idx 1 }}"
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
@@ -162,7 +167,10 @@ x-data="{
                 {{ end }}
             {{ end }}
             {{ range $idx, $elm := $media }}
+            {{ $carousel_item_vertical.Add "idx" 1 }}
             <button
+            id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
+            data-index="{{ add $idx 1 }}"
             class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
@@ -171,8 +179,11 @@ x-data="{
             </button>
             {{ end }}
             {{ range $idx, $elm := first 1 $media }}
-                {{ if $isScrollableCarousel}}
+                {{ if $is_scrollable_carousel}}
+                {{ $carousel_item_vertical.Add "idx" 1 }}
                 <button 
+                id='carousel-item-vertical-{{ $carousel_item_vertical.Get "idx" }}'
+                data-index="{{ add $idx 1 }}"
                 class="carousel-item__vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
@@ -187,6 +198,7 @@ x-data="{
     <div class="carousel-item-descriptions p-0">
         {{ range $idx, $el := $media }}
         <div 
+        id="carousel-item-description-{{ add $idx 1 }}"
         class="carousel-item-description" 
         :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
         x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">

@@ -297,7 +297,7 @@ If you have installed and configured the integrations and Agent as described and
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[6]: https://app.datadoghq.com/account/settings#agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
