@@ -37,6 +37,7 @@ Consult on this page:
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
+* [Dependencies](#dependencies)
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional tabs](#additional-tabs)
@@ -70,6 +71,16 @@ The service page features summary cards with highlights on your service health. 
 
 Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary highlights how your services react to application threats.
 
+## Dependencies
+
+{{< callout btn_hidden="true" header="Opt in to the private beta!">}}
+The Dependency map is in private beta. For information on opting in, see [Opt in to the new APM troubleshooting experience][20].
+{{< /callout >}}
+
+Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
+
+{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section" style="width:100%;">}}
+
 ## Out-of-the-box graphs
 
 Datadog provides [out-of-the-box graphs][8] for any given Service:
@@ -77,7 +88,7 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
 * Requests - Choose to display:
     *  The **Total amount of requests and errors**
     *  The amount of **Requests and errors per second**
-* Latency -  Choose to display:
+* Latency - Choose to display:
     *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
     *  The **Latency distribution**	
     *  The **Apdex score** for web services; [learn more about Apdex][9]
@@ -87,7 +98,7 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
     * The **% Error Rate**
 * Dependency Map:
     * The **Dependency Map** showing upstream and downstream services.
-* **Sub-services**: When there are multiple services involved, a fourth graph (in the same toggle option as the Dependency Map) breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*. 
+* **Sub-services**: When there are multiple services involved, a fourth graph (in the same toggle option as the Dependency Map) breaks down your **Total time spent**/**%of time spent**/**Avg time per request** of your service by *services* or *type*.
     
     This represents the total, relative, and average time spent by traces in downstream services from the current service to the other *services* or *type*.
     
@@ -224,4 +235,4 @@ View common patterns in your service's logs, and use facets like status in the s
 [17]: https://www.datadoghq.com/blog/log-patterns/
 [18]: /security/application_security/how-appsec-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
-
+[20]: /tracing/guide/new-apm-exper/

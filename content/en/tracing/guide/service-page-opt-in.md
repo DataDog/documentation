@@ -1,5 +1,5 @@
 ---
-title: Opt in to the new APM troubleshooting experience
+title: New Service Page and Service Types
 kind: Guide
 disable_toc: false
 further_reading:
@@ -15,10 +15,10 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Opt in to the private beta!">}}
-The new APM troubleshooting experience is in private beta.
+The features described on this page are in private beta.
 {{< /callout >}}
 
-The new APM troubleshooting experience adds a dependency map to the [Service Page][1], and an _Inferred Service_ object to the [Service Map][2] and [Service Catalog][3] pages.
+Follow the steps below to enable the new dependency map on the [Service Page][1], and add the _Inferred Service_ type to the [Service Map][2] and [Service Catalog][3] pages.
 
 ## Dependency map
 
