@@ -134,9 +134,7 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Adding custom tags to tests
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> To add custom tags to tests, you must configure <a href="#custom-instrumentation">Custom Instrumentation</a> first.
-</div>
+To add custom tags to tests, configure [custom instrumentation](#custom-instrumentation) first.
 
 You can add custom tags to your tests by using the current active span:
 
@@ -154,9 +152,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-<div class="alert alert-warning">
-  <strong>Note:</strong> To add custom metrics to tests, you must configure <a href="#custom-instrumentation">Custom Instrumentation</a> first.
-</div>
+To add custom metrics to tests, configure [custom instrumentation](#custom-instrumentation) first.
 
 Just like tags, you can add custom metrics to your tests by using the current active span:
 
@@ -172,7 +168,7 @@ if (scope != null) {
 
 To create filters or visualizations for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
 
-Read more about custom metrics in [Add Custom Metrics Guide][15].
+Read more about custom metrics in the [Add Custom Metrics Guide][15].
 
 ### Reporting code coverage
 
