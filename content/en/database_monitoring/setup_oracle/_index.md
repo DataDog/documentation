@@ -113,7 +113,7 @@ The Agent doesn't require any external Oracle clients.
 
 ### Upgrading from a previous Agent release
 
-Execute all `grant` permission commands according to the documentation for your hosting type, because new features need access to the system views that were not previously granted to the Datadog database user account.
+Execute all `grant` permission commands according to the documentation for your hosting type, because new features need access to system views that were not previously granted to the Datadog database user account.
 
 ## Setup
 
