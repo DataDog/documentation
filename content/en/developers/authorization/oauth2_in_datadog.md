@@ -42,7 +42,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
    - To build the URL for this post request, use the `domain` query parameter that is provided on the redirect to your `redirect_uri`. 
    - The `domain` query parameter provides the [Datadog site][17] that the authorizing user is in, and will be needed to construct the URL for this POST request to the token endpoint: 
-       - For users authorizing from the US1, Fed1, and EU1 Datadog sites, the URL is: `https://api.<domain>/oauth2/v1/token?...`
+       - For users authorizing from the US1, Fed1, and EU1 Datadog sites, the URL is: `https://app.<domain>/oauth2/v1/token?...`
        - For users authorizing from any other Datadog site, the URL is: `https://<domain>/oauth2/v1/token?...`
 
 6. Upon success, you receive your `access_token` and `refresh_token` in the response body. Your application should display a confirmation page with the following message: `You may now close this tab`.
