@@ -51,7 +51,7 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 14.0.0
+integration_version: 14.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -537,7 +537,7 @@ PostgreSQL チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#postgres
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
