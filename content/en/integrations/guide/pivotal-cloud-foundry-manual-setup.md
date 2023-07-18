@@ -41,7 +41,7 @@ The Datadog buildpack uses the Cloud Foundry [Pushing an App with Multiple Build
 
 For older versions, Cloud Foundry provides a backwards compatible version of this feature in the form of a [multi-buildpack][4]. You must install and configure this version to use Datadog's buildpack.
 
-1. Upload the multi-buildpack back-port. Download the latest multi-buildpack release and upload it to your Cloud Foundry environment.
+1. Download the latest multi-buildpack release and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack multi-buildpack ./multi-buildpack-v-x.y.z.zip 99 --enable
