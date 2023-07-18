@@ -3,6 +3,9 @@ algolia:
   tags:
   - データベースモニタリング
   - dbm
+cascade:
+  algolia:
+    rank: 70
 description: Database Monitoring について学び、始めましょう
 further_reading:
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
@@ -82,7 +85,7 @@ UI で **[APM > Databases][1]** をクリックして、Database Monitoring に�
 - クエリの効率を改善し、大きなテーブルでのコストのかかる順次スキャンを節約します。
 - クエリの計画が時間の経過とともにどのように変化するかを確認します。
 
-{{< img src="database_monitoring/dbm-explain-plan.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### 強化されたダッシュボードですべてを視覚化
 
