@@ -20,7 +20,7 @@ Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applic
 
 ### Pivotal Cloud Foundry Platform >= 1.12
 
-1. Upload the Datadog Cloud Foundry Buildpack. Download the [latest Datadog build pack release][7] and upload it to your Cloud Foundry environment.
+1. Download the [latest Datadog buildpack release][7] and upload it to your Cloud Foundry environment.
 
     ```shell
     cf create-buildpack datadog-cloudfoundry-buildpack ./datadog-cloudfoundry-buildpack-latest.zip
