@@ -99,7 +99,7 @@ Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内�
 **注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: /ja/agent/kubernetes/
 [3]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -200,10 +200,10 @@ datadog:
         containers:
             processAgent:
                 env:
-                - name: DD_SCRUB_ARGS 
+                - name: DD_SCRUB_ARGS
                   value: "true"
                 - name: DD_CUSTOM_SENSITIVE_WORDS
-                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+                  value: "personal_key,*token,*token,sql*,*pass*d*"
 ```
 
 
@@ -224,7 +224,7 @@ datadog:
             processAgent:
                 env:
                 - name: DD_STRIP_PROCESS_ARGS
-                  value: "true" 
+                  value: "true"
 ```
 
 {{% /tab %}}
