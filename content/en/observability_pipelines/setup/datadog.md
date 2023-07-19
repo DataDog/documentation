@@ -192,7 +192,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/datadog.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
@@ -238,7 +238,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/datadog.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
