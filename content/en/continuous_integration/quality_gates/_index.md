@@ -12,7 +12,7 @@ further_reading:
 ## Overview
 
 {{< callout url="#" header="false" >}}
-Quality Gates Rules are in beta.
+Quality Gates are in beta.
 {{< /callout >}}
 
 Quality Gates allows you to gate your workflows based on signals in Datadog.
@@ -161,7 +161,7 @@ You can view information about who created, modified, and deleted Quality Gates 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions
-[2]: https://app.datadog.com/ci/quality-gates
+[2]: https://app.datadoghq.com/ci/quality-gates
 [3]: https://app.datadoghq.com/audit-trail
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
