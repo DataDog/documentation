@@ -74,7 +74,9 @@ Datadog Security includes [Application Security Management](#application-securit
 
 Cloud Security Management includes [Misconfigurations][11], and [Threats][12]. To learn more, check out the dedicated [Guided Tour][13].
 
-To get started with Datadog Security, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+
+To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ## Further Reading
 
