@@ -148,7 +148,7 @@ You can delete a Quality Gate rule by clicking on the deletion icon in the [rule
 The `quality_gate_rules_write` [permission][1] is required to create and edit Quality Gate rules.
 The `quality_gate_rules_read` [permission][1] is required to view Quality Gate rules.
 
-## Traceability
+## Track changes in rules
 
 You can view information about who created, modified, and deleted Quality Gates rules in [Audit Trail][3].
 
