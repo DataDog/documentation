@@ -1,7 +1,9 @@
 ---
-title: Connecting DBM and APM
-kind: guide
+title: Connect Database Monitoring and Traces
+kind: documentation
 beta: true
+aliases: 
+- /database_monitoring/guide/connect_dbm_and_apm/
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
