@@ -18,6 +18,14 @@ aliases:
 
 To better understand the instructions from this guide, familiarize yourself with the [key concepts][1] first. A better understanding on how things work helps you identify the missing pieces and narrow down probable causes.
 
+## Serverless Flare
+
+Serverless flare is a command that collects important data about your Lambda function and submits it to Datadog support for diagnostic purposes. To help troubleshoot issues encountered with Datadog monitoring, use the command: `datadog-ci lambda flare`.
+
+This command collects data such as environment variables, the Lambda configuration file, and recent CloudWatch logs. The command then submits the collected data to Datadog support via a ticket that matches your provided Zendesk case ID.
+
+For more information, read the [Serverless Flare documentation](https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation).
+
 ## Use the Datadog Lambda Extension instead of the Forwarder
 
 If you are still using the [Datadog Forwarder Lambda function][2] for data collection, consider adopting the [Datadog Lambda Extension][3] instead. Because the technical limitations of the Forwarder Lambda cause a number of known issues, migrating to the Lambda Extension can resolve them automatically.
@@ -38,7 +46,7 @@ To ensure the actual changes made to your Lambda functions are expected, try set
 
 ## Collect debugging logs
 
-Enable verbose debugging logs by setting the environment variable `DD_LOG_LEVEL` to `debug` on your Lambda functions. If you are using the [Datadog Forwarder Lambda function][2] for data forwarding from logs, also set `DD_LOG_LEVEL` to `debug` on the Forwarder Lambda function. 
+Enable verbose debugging logs by setting the environment variable `DD_LOG_LEVEL` to `debug` on your Lambda functions. If you are using the [Datadog Forwarder Lambda function][2] for data forwarding from logs, also set `DD_LOG_LEVEL` to `debug` on the Forwarder Lambda function.
 
 If you have issues with tracing, set the environment variable `DD_TRACE_DEBUG` to `true` for extra debugging logs from the Datadog Tracer.
 
@@ -46,7 +54,7 @@ To avoid unnecessary costs, disable the debugging logs after you collect enough 
 
 ## Check the AWS integration
 
-Datadog can collect metrics and resource tags from AWS through an [integration with AWS][10] (optional). If you are missing certain metrics from CloudWatch and Lambda resource tags, ensure that the AWS integration is properly configured. 
+Datadog can collect metrics and resource tags from AWS through an [integration with AWS][10] (optional). If you are missing certain metrics from CloudWatch and Lambda resource tags, ensure that the AWS integration is properly configured.
 
 ## Ensure the tags are configured
 
