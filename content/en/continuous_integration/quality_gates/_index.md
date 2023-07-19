@@ -9,6 +9,10 @@ further_reading:
   text: "Learn about Test Visibility"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
 {{< callout url="#" header="false" >}}
 Quality Gates are in beta.
 {{< /callout >}}
@@ -142,9 +146,11 @@ You can edit a Quality Gate rule by clicking on the edit icon in the [rules page
 
 ## Delete a rule
 
-You can delete a Quality Gate rule by clicking on the deletion icon in the [rules page][2]:
+You can delete a Quality Gate rule by clicking on the deletion icon in the [rules page][2]
 
 {{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
+
+or by editing the rule and clicking **Delete Rule** at the end of the page.
 
 ## Permissions
 
