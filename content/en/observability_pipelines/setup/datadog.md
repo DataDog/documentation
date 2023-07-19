@@ -355,10 +355,10 @@ At this point, your observability data should be going to the Worker and is avai
 The sample configuration provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format.
 
 ### Processing logs
-The provided logs pipeline does the following:
+The sample Observability Pipelines configuration does the following:
 - **Collects** logs sent from the Datadog agent the Observability Pipelines Worker.
-- **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
+- **Tags logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
+- **Corrects the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
 - **Routes** the logs by dual-shipping the data to both Datadog Metrics and Logs.
 
 The following are two important components in the example configuration:
