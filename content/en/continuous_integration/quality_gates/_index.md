@@ -16,7 +16,7 @@ Quality Gates Rules are in beta.
 {{< /callout >}}
 
 Quality Gates allows you to gate your workflows based on signals in Datadog.
-For example, you can block a Pull Request from being merged if it introduces new flaky tests, even if the tests are passing.
+For example, you can block a Pull Request from being merged if it introduces new [flaky tests][8], even if the tests are passing.
 
 Using Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed. ([AM] ADD SENTENCE)
 
@@ -36,7 +36,7 @@ To create Quality Gates rules for your organization, your user account must have
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline as well. You can select one of the existing rule conditions for the rule type you have selected.
 
    The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" severity and "security" category being introduced in a specific commit:
-   
+
    {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
 5. Select whether the rule should block the pipeline or not when it fails. Non-blocking rules are still evaluated, but
@@ -48,8 +48,9 @@ A rule starts being evaluated as soon as it is created.
 
 ## Datadog-ci gate evaluate
 
+To use quality gates, [`datadog-ci`][7] version should be higher or equal than `2.16.0`.
 
-You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command. 
+You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
 This command allows you to:
 
@@ -148,18 +149,12 @@ You can delete a Quality Gate rule by clicking on the deletion icon in the [rule
 
 ## Permissions
 
-The `quality_gate_rules_write` [permission][1] is required to create and edit Quality Gate rules.
-The `quality_gate_rules_read` [permission][1] is required to view Quality Gate rules.
+The `quality_gate_rules_write` [permission](#permission) is required to create and edit Quality Gate rules.
+The `quality_gate_rules_read` [permission](#permission) is required to view Quality Gate rules.
 
 ## Track changes in rules
 
 You can view information about who created, modified, and deleted Quality Gates rules in [Audit Trail][3].
-
-## Limitations during beta
-
-There are limitations for the beta version of the Quality Gate product:
-1. Currently only two rule types can be selected when creating rules: static analysis and tests.
-2. There are some rare cases in which the Quality Gates result are not correct, specifically in case of internal Datadog issues.
 
 ## Further Reading
 
@@ -171,3 +166,5 @@ There are limitations for the beta version of the Quality Gate product:
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: https://github.com/DataDog/datadog-ci/blob/master/README.md
+[8]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/
