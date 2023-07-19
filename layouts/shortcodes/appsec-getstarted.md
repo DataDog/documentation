@@ -14,4 +14,4 @@ In general, setting up Application Security Management (ASM) involves:
 [101]: https://app.datadoghq.com/account/settings#agent
 [102]: https://app.datadoghq.com/services?lens=Security
 [103]: /tracing/trace_collection/dd_libraries/
-[104]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[104]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration

@@ -127,7 +127,15 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang lang="java" >}}
+[Java サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
+
+[Datadog プロファイラーを使用する][2]必要があります。JFR はサポートされていません。
+
+[1]: /ja/profiler/enabling/java
+[2]: /ja/profiler/enabling/java/?tab=datadog#requirements
+{{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
 [Python サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
@@ -175,24 +183,33 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### フレームグラフをエンドポイントごとにスコープする
+### エンドポイントプロファイリング
 
 エンドポイントプロファイリングは、Web サービスの任意のエンドポイントでフレームグラフをスコープし、遅いエンドポイント、レイテンシーが多いエンドポイント、エンドユーザーエクスペリエンスが悪い原因となっているエンドポイントを見つけることができます。これらのエンドポイントは、デバッグが難しく、なぜ遅いのかを理解するのが困難な場合があります。遅い原因は、エンドポイントが多くの CPU サイクルを消費するなど、意図しない大量のリソースを消費している可能性があります。
 
 エンドポイントプロファイリングを利用すると、以下のことが可能になります。
 
 - エンドポイント全体のレスポンスタイムを遅くしているボトルネックとなるメソッドを特定する。
-- CPU やウォールタイムなどの貴重なリソースを消費する上位のエンドポイントを切り分ける。これは、一般的にパフォーマンスを向上させるためにサービスを最適化しようとしている場合に特に役立ちます。
+- CPU、メモリ、例外などの貴重なリソースを消費する上位のエンドポイントを切り分ける。これは、一般的にパフォーマンスを向上させるためにサービスを最適化しようとしている場合に特に役立ちます。
 - サードパーティのコードやランタイムライブラリが、エンドポイントの速度低下やリソース消費の重さの原因になっているかどうかを把握する。
 
-{{< img src="profiler/endpoint_agg_gif.mp4" alt="エンドポイント集計による遅いエンドポイントのトラブルシューティング" video=true >}}
-
+{{< img src="profiler/endpoint_agg.mp4" alt="エンドポイント集計による遅いエンドポイントのトラブルシューティング" video=true >}}
 
 ### 最もリソースを消費しているエンドポイントを追跡する
 
 CPU やウォールタイムなどの貴重なリソースを消費している上位のエンドポイントを追跡することは価値があります。このリストは、エンドポイントが回帰していないか、あるいは新たに導入したエンドポイントが大幅にリソースを消費してサービス全体の速度を低下させていないかどうかを確認するのに役立ちます。
 
-{{< img src="profiler/endpoint_metric.mp4" alt="上位のエンドポイントの消費リソースのグラフ化" video=true >}}
+次のイメージは、`GET /store_history` が CPU の 20% を消費して定期的にこのサービスに影響を与えていることを示しています。
+
+{{< img src="profiler/endpoint_metric.png" alt="上位のエンドポイントの消費リソースのグラフ化" >}}
+
+### リクエストごとの平均リソース消費量の追跡
+
+`Per endpoint call` を選択すると、トラフィックが時間の経過とともに変化しても、動作の変化を確認できます。これは、プログレッシブロールアウトのサニティチェックや日々のトラフィックパターンの分析に役立ちます。
+
+次のビデオは、`/GET train` のリクエストあたりの CPU が 2 倍になったことを示しています。
+
+{{< img src="profiler/endpoint_per_request.mp4" alt="リクエストごとに多くのリソースを使用し始めたエンドポイントのトラブルシューティング" video=true >}}
 
 ## その他の参考資料
 

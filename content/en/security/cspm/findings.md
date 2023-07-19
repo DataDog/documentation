@@ -39,9 +39,9 @@ Findings are displayed on the [Security Findings Explorer][1]. Aggregate finding
 
 {{< img src="security/cspm/findings/posture-management-overview3.png" alt="An overview of the Posture Management Findings page" style="width:100%;">}}
 
-Select a finding to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mapping, and suggested remediation steps. Click **View Finding** to see details about the misconfigured resource.
+Select a finding to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mappings, and suggested remediation steps.
 
-{{< img src="security/cspm/findings/finding-side-panel2.png" alt="Ranked order resources in the side panel" style="width:65%;">}}
+{{< img src="security/cspm/findings/finding-side-panel3.png" alt="A list of impacted resources in the side panel" style="width:65%;">}}
 
 Group by **Resources** on the Security Findings Explorer and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
 
@@ -91,7 +91,7 @@ To view your organization's muted findings:
 
 To audit the history for a resource:
 
-1. Open the [finding side panel](#explore-your-cloud-misconfigurations-with-findings).
+1. Open the [finding side panel](#explore-your-cloud-misconfigurations).
 2. Select the resource with the muted finding.
 3. If the finding status has changed, click **See Latest State**.
 4. Click **View Finding**.

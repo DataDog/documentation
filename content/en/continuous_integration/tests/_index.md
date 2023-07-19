@@ -19,6 +19,10 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['ci test', 'ci tests']
 ---
 
 {{< site-region region="gov" >}}
@@ -43,9 +47,33 @@ further_reading:
 
 ## Test suite level visibility
 
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project. 
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project. On the [Test Runs][4] page, you can filter by test level: session, module, suite and test. Each test level represents a different level of aggregation of tests.
+
+{{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
+
+### Sessions
+  
+Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
+
+### Module
+  
+The definition of module changes slightly per language:
+
+* In .NET a test module groups every test that is run under the same [unit test project][8].
+* In Swift a test module groups every test that is run for a given bundle.
+* In JavaScript the test modules map one-to-one to test sessions.
+* In Java a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution.
+
+An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][9].
+
+### Suite
+  
+A test suite is a group of tests exercising the same unit of code.
+
+An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][10].
 
 ### Compatibility
+
 Not every language supported by CI Visibility has support for test suite level visibility:
 
 * [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`.
@@ -62,7 +90,7 @@ When creating a [dashboard][14] or a [notebook][15], you can use test execution 
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16]. 
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16].
 
 ## Further reading
 

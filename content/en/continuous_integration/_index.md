@@ -19,9 +19,13 @@ further_reading:
   - link: "/continuous_integration/tests/"
     tag: "Documentation"
     text: "Explore test data to find and fix problem tests"
+  - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+    tag: "Blog"
+    text: "Best practices for monitoring static web applications"
 cascade:
     algolia:
         rank: 70
+        tags: ['ci/cd', 'continuous integration']
 ---
 
 {{< site-region region="gov" >}}

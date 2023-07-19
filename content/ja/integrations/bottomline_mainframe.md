@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: bottomline-mainframe
 app_uuid: 249f45de-03cc-45f3-8a57-c40ce33e62a3
 assets: {}

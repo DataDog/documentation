@@ -81,7 +81,7 @@ To mitigate such attacks, the PKCE extension includes the following parameters t
 | Parameter             | Definition                                                                                                                           |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Code Verifier         | A dynamically-generated cryptographic random string.                                                                                 |
-| Code Challenge        | A transformation of the code verifier.                                                                                               |
+| Code Challenge        | A transformation of the code verifier. The `code_challenge` must use a `base64url` encoding.                                           |
 | Code Challenge Method | The method used to derive the `code_challenge` from the `code_verifier`. You must use [SHA-256][16] to compute the `code_challenge`. |
 
 The [PKCE protocol][11] integrates with the authorization code grant flow by completing the following actions:

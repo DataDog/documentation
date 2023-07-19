@@ -92,5 +92,5 @@ See the [Agent Troubleshooting documentation][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source
 [2]: /agent/troubleshooting/

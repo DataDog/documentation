@@ -608,11 +608,31 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
+  - name: Runtime Metrics
+    url: opentelemetry/runtime_metrics
+    identifier: otel_runtime_metrics
+    parent: opentelemetry_top_level
+    weight: 3
+  - name: Java
+    url: opentelemetry/runtime_metrics/java
+    identifier: otel_runtime_metrics_java
+    parent: otel_runtime_metrics
+    weight: 301
+  - name: .NET
+    url: opentelemetry/runtime_metrics/dotnet
+    identifier: otel_runtime_metrics_dotnet
+    parent: otel_runtime_metrics
+    weight: 302
+  - name: Go
+    url: opentelemetry/runtime_metrics/go
+    identifier: otel_runtime_metrics_go
+    parent: otel_runtime_metrics
+    weight: 303
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -725,10 +745,15 @@ main:
     parent: dashboards
     weight: 6
     identifier: dashboards_temp_variables
+  - name: Overlays
+    url: dashboards/change_overlays/
+    parent: dashboards
+    weight: 7
+    identifier: dashboards_overlays
   - name: Sharing
     url: dashboards/sharing/
     parent: dashboards
-    weight: 7
+    weight: 8
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
@@ -1692,6 +1717,11 @@ main:
     parent: tracing
     identifier: tracing_other_telemetry
     weight: 5
+  - name: Connect DBM and Traces
+    url: database_monitoring/connect_dbm_and_apm/
+    parent: tracing_other_telemetry
+    identifier: tracing_connect_dbm
+    weight: 400
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: tracing_other_telemetry
@@ -2021,8 +2051,8 @@ main:
     parent: profiler
     identifier: profiler_types
     weight: 2
-  - name: Search Profiles
-    url: profiler/search_profiles/
+  - name: Profile Visualizations
+    url: profiler/profile_visualizations/
     parent: profiler
     identifier: profiler_search_profiles
     weight: 3
@@ -2212,6 +2242,11 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_dotnet
     weight: 501
+  - name: Java
+    url: continuous_integration/intelligent_test_runner/java/
+    parent: intelligent_test_runner
+    identifier: ci_itr_java
+    weight: 502
   - name: JavaScript and TypeScript
     url: continuous_integration/intelligent_test_runner/javascript/
     parent: intelligent_test_runner
@@ -2373,31 +2408,36 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_troubleshooting_sql_server
     weight: 107
+  - name: Connecting DBM and Traces
+    url: database_monitoring/connect_dbm_and_apm/
+    parent: dbm
+    identifier: dbm_connect_dbm_and_apm
+    weight: 5
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
     identifier: dbm_data_collected
-    weight: 5
+    weight: 6
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
-    weight: 6
+    weight: 7
   - name: Exploring Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples
-    weight: 7
+    weight: 8
   - name: Troubleshooting
     url: database_monitoring/troubleshooting/
     parent: dbm
     identifier: dbm_troubleshooting
-    weight: 8
+    weight: 9
   - name: Guides
     url: database_monitoring/guide/
     parent: dbm
     identifier: dbm_guides
-    weight: 9
+    weight: 10
   - name: Universal Service Monitoring
     url: universal_service_monitoring/
     pre: usm
@@ -2652,17 +2692,21 @@ main:
   - name: Setup
     url: observability_pipelines/setup/
     parent: observability_pipelines
+    identifier: observability_pipelines_setup
     weight: 1
-  - name: Production Deployment Overview
+  - name: Datadog
+    url: observability_pipelines/setup/datadog
+    parent: observability_pipelines_setup
+    weight: 101
+  - name: Splunk
+    url: observability_pipelines/setup/splunk
+    parent: observability_pipelines_setup
+    weight: 110
+  - name: Deployment
     url: observability_pipelines/production_deployment_overview/
     parent: observability_pipelines
     identifier: observability_pipelines_production_deployment_overview
     weight: 2
-  - name: Architecture Design and Principles
-    url: observability_pipelines/production_deployment_overview/architecture_design_and_principles/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_architecture_design_and_principles
-    weight: 201
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -4715,9 +4759,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListMonitorDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4727,9 +4773,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4739,9 +4787,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -4751,9 +4801,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CancelDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -4775,9 +4827,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -4787,9 +4841,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
@@ -9951,7 +10007,7 @@ api:
       operationids:
         - ListSpans
       unstable: []
-      order: 3
+      order: 2
   - name: Get a list of spans
     url: '#get-a-list-of-spans'
     identifier: spans-get-a-list-of-spans
@@ -9963,7 +10019,7 @@ api:
       operationids:
         - ListSpansGet
       unstable: []
-      order: 4
+      order: 1
   - name: Aggregate spans
     url: '#aggregate-spans'
     identifier: spans-aggregate-spans
@@ -9975,7 +10031,7 @@ api:
       operationids:
         - AggregateSpans
       unstable: []
-      order: 2
+      order: 3
   - name: Spans Metrics
     url: /api/latest/spans-metrics/
     identifier: spans-metrics

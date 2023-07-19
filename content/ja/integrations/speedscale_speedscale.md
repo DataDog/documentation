@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: speedscale-speedscale
 app_uuid: beb5efb1-63d5-4030-840d-7dbf6a92a4d6
 assets: {}

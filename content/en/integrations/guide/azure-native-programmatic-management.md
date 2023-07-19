@@ -17,11 +17,17 @@ further_reading:
 
 The Azure Native integration uses the Datadog resource in Azure to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This method involves creating the [azurerm_datadog_monitor][3] resource and assigning it the [Monitoring Reader role][4] to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
 
-**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
+## Setup
 
-1. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment:
+**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to. 
 
-## Azure Datadog Monitor resource
+### Terraform
+
+1. Ensure that you have configured the [Terraform Azure provider][1].
+
+2. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment with Terraform:
+
+#### Azure Datadog Monitor resource
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -49,7 +55,7 @@ resource "azurerm_datadog_monitor" "example" {
 
 {{< /code-block >}}
 
-### Monitoring Reader role
+#### Monitoring Reader role
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -67,12 +73,13 @@ resource "azurerm_role_assignment" "example" {
 
 {{< /code-block >}}
 
-2. Run `terraform apply`.
+3. Run `terraform apply`.
 
-### Log collection
+## Log collection
 
 Once the Datadog resource is set up in your Azure account, configure log collection through the Azure Portal. See [Configure metrics and logs][5] in the Azure documentation for more information.
 
+[1]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 [2]: /integrations/guide/azure-portal/
 [3]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
 [4]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment

@@ -84,7 +84,7 @@ Datadog-Azure IoT Edge インテグレーションを使用すると IoT Edge �
 
 以下の手順に従って、このチェックをデバイスホストで実行中の IoT Edge デバイスにインストール、構成します。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Azure IoT Edge チェックは [Datadog Agent][2] パッケージに含まれています。
 
