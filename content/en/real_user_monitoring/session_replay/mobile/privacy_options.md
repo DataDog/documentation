@@ -156,25 +156,23 @@ The following chart shows how we apply different appearance masking strategies, 
 | [Other attributes](#other-attributes) |  |  |  |
 
 #### Revealing attributes
+Revealing attributes are attributes that can reveal or suggest the value of input elements and can be used to infer a user's input or selection. This includes:
 
+**Shapes**
+- Background of selected option in Segment (iOS)
+- Circle surrounding the selected date in a Date Picker (iOS)
+- Selection mark in Checkbox (Android)
+- Thumb of a Slider (iOS and Android)
 
-#### Other attributes
+**Text attributes**
+- The color of a label rendering the the selected date in Date Picker (iOS)
+- The position of the first and last option in Value Picker (iOS and Android)
 
 
 ### Touch interactions
-
-The following chart shows how we apply different touch interaction strategies, using the rules you set up in your configuration, to the below text types.
-
-| Type | `allow all` | `mask all` | `mask user input` |
-|------|-------------|------------|-------------------|
-| [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Other attributes](#other-attributes) |  |  |  |
-
-#### On-screen keyboard
+Any interaction that happens on a on-screen keyboard is maksed. Interactions with other elements are not asked.
 
 #### Other elements 
-
-## Fine-grained privacy
 
 {{< tabs >}}
 {{% tab "Android" %}}
