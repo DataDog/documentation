@@ -2,6 +2,7 @@
 title: Advanced Options for Mobile App Test Steps
 kind: documentation
 description: Configure advanced options for Mobile Test Steps
+is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
@@ -16,6 +17,10 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic Monitoring Data Security"
 ---
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
+  Mobile Application Testing is in private beta. To request access, complete the form.
+{{< /callout >}} 
 
 ## Overview
 

@@ -3,6 +3,7 @@ title: Mobile Application Testing and Monitoring
 kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 disable_sidebar: true
+is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
@@ -20,6 +21,10 @@ cascade:
   algolia:
     tags: ['mobile_testing']
 ---
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
+  Mobile Application Testing is in private beta. To request access, complete the form.
+{{< /callout >}} 
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 

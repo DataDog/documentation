@@ -1,6 +1,7 @@
 ---
 title: Mobile Application Testing Settings
 kind: documentation
+is_beta: true
 further_reading:
 - link: "/mobile_testing/mobile_app_tests"
   tag: "Documentation"
@@ -10,6 +11,10 @@ further_reading:
   text: "Run your Synthetic tests in a CI pipeline"
 ---
 {{< jqmath-vanilla >}}
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
+  Mobile Application Testing is in private beta. To request access, complete the form.
+{{< /callout >}} 
 
 ## Overview
 

@@ -2,6 +2,7 @@
 title: Mobile App Tests
 kind: documentation
 description: Learn how to start monitoring key business flows with mobile app tests.
+is_beta: true
 further_reading:
 - link: "/mobile_testing/settings"
   tag: "Documentation"
@@ -13,6 +14,10 @@ further_reading:
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
 ---
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
+  Mobile Application Testing is in private beta. To request access, complete the form.
+{{< /callout >}} 
 
 ## Overview
 
