@@ -28,7 +28,7 @@ Complete the following steps to enable Database Monitoring with your database:
 
 ## Agent database user setup
 
-The Datadog Agent requires read-only access to the database server in order to collect samples.
+The Datadog Agent requires read-only access to the database server to collect samples.
 
 ### Create user
 
