@@ -157,13 +157,14 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   ddlambda.Metric(
     "coffee_house.order_value", // Metric name
     12.45, // Metric value
-    "product:latte", "order:online" // Associated tags
+    "product:latte", "order:online", // Associated tags
   )
 
   // Create a custom span
   s, _ := tracer.StartSpanFromContext(ctx, "child.span")
   time.Sleep(100 * time.Millisecond)
   s.Finish()
+  return "ok", nil
 }
 ```
 
