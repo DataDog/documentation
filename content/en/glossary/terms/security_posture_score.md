@@ -5,7 +5,6 @@ synonyms:
   - compliance score
 core_product:
   - security
-  - csm
 ---
 
 The security posture score represents the percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][1] and [Infrastructure][2] detection rules. 
