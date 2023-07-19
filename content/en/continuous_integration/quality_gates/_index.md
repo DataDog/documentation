@@ -164,7 +164,7 @@ There are limitations for the beta version of the Quality Gate product:
 
 [1]: /account_management/rbac/permissions
 [2]: https://app.datadog.com/ci/quality-gates
-[3]: https://www.datadoghq.com/product/audit-trail
+[3]: https://app.datadoghq.com/audit-trail
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
