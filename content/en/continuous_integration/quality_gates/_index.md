@@ -32,7 +32,7 @@ To create Quality Gates rules for your organization, your user account must have
 
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
 2. Select the rule type. You can choose between `Static Analysis` and `Test`.
-3. Define the rule scope. The rule scope defines when the rules should be evaluated. For example, you can scope a rule so that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope name. More information on rule scopes ([AM] ADD LINK TO SECTION BELOW).
+3. Define the rule scope. The rule scope defines when the rules should be evaluated. For example, you can scope a rule so that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope name. More information on [rule scopes](#rule-scope).
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline as well. You can select one of the existing rule conditions for the rule type you have selected.
 
    The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" severity and "security" category being introduced in a specific commit:
@@ -52,20 +52,20 @@ To use quality gates, [`datadog-ci`][7] version should be higher or equal than `
 
 You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
-This command allows you to:
+This command:
 
 1. Retrieves all the impacted rules based on the current pipeline context (branch, repository).
-The rules that are retrieved vary based on the pipeline context, the rules scopes and eventual custom scopes (more info in the rule scope section) ([AM] ADD LINK TO SECTION BELOW).
+The rules that are retrieved vary based on the pipeline context, the [rules scopes](#rule-scope) and eventual [custom scopes](#custom-scope).
 2. Evaluates all the impacted rules.
 3. If one or more blocking rules fail, the command fails as well, blocking the pipeline.
 
 <div class="alert alert-danger"><strong>Note:</strong> for the command to work properly, it's important that the events (tests, static analysis violations)
-are sent to Datadog **before** the <code>datadog-ci gate evaluate</code> command is executed.
+are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</code> command is executed.
 Otherwise, the rules might have an incorrect behavior due to the absence of the events.
 </div>
 
 The command requires the `DATADOG_API_KEY` and `DATADOG_APP_KEY` environment variables to point to your [Datadog API Key][5]
-and [Datadog Application Key][6]. Also, you need to define the `DD_BETA_COMMANDS_ENABLED` environment
+and [Datadog Application Key][6]. Also, you need to set the `DD_BETA_COMMANDS_ENABLED` environment
 variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site.
 The default site is US1 (datadoghq.com).
 
@@ -84,7 +84,7 @@ avoiding incorrect evaluation. If, in your pipeline, the job containing the `dat
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
 Note that, if used incorrectly, this flag might result in inaccurate rule evaluations.
 
-Custom scopes ([AM] ADD LINK TO SECTION BELOW) can be added by using the following option one or more times: **--scope**:
+[Custom scopes](#custom-scope) can be added by using the following option one or more times: **--scope**:
 
 {{< code-block lang="shell" >}}
 datadog-ci gate evaluate --scope team:backend --scope team:frontend
@@ -101,10 +101,10 @@ When creating a rule, you can define its scope, which states when it should be e
 The rule scope is then checked based on the context passed by the `datadog-ci gate evaluate` command to understand whether the rule should be evaluated or not.
 
 For each scope name (for example, "branch"), you can either select included or excluded values.
-When included values are selected, the rule is evaluated if one or more included values are passed as part of the command context.
-When excluded values are selected, the rule is evaluated if none of the excluded values are passed as part of the command context.
+When included values are selected, the rule is evaluated if one or more included values are part of the command context.
+When excluded values are selected, the rule is evaluated if none of the excluded values are part of the command context.
 
-For example, to create a rule that is evaluated in all branches but `main` of the `example-repository`, you can define the following scope:
+For example, to create a rule that is evaluated in all branches but `main` of the `example-repository` repository, you can define the following scope:
 
 {{< img src="ci/scope_not_main_example_repository.png" alt="Rule scope for example-repository and not main branch" style="width:90%;">}}
 
@@ -121,7 +121,7 @@ In addition to branch and repository, you can define custom scope names to furth
 Custom scopes can be added when creating a rule in the following way:
 1. Click on **+ Add Filter** and select **Custom Scope**
 2. Define the scope name, for example, `team`.
-3. Define the scope included or excluded values. This follows the same logic ([AM] ADD LINK TO SECTION ABOVE) defined for branch and repository.
+3. Define the scope included or excluded values.
 
 Differently from "branch" and "repository" scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the **--scope** option.
 For example, you can create a rule that is evaluated for the repository `example-repository` but only when the team is `backend`:
@@ -133,7 +133,7 @@ The rule is evaluated when this command is invoked in a CI pipeline of the `exam
 
 The rule is not evaluated when the following commands are invoked instead:
 - `datadog-ci gate evaluate`, as it does not define any team.
-- `datadog-ci gate evaluate --scope team:api --scope team:frontend`, as it defines teams different from "backend".
+- `datadog-ci gate evaluate --scope team:api --scope team:frontend`, as it defines teams different from `backend`.
 
 ## Edit a rule
 
@@ -149,8 +149,8 @@ You can delete a Quality Gate rule by clicking on the deletion icon in the [rule
 
 ## Permissions
 
-The `quality_gate_rules_write` [permission](#permission) is required to create and edit Quality Gate rules.
-The `quality_gate_rules_read` [permission](#permission) is required to view Quality Gate rules.
+The [`quality_gate_rules_write` permission][1] is required to create and edit Quality Gate rules.
+The [`quality_gate_rules_read` permission][1] is required to view Quality Gate rules.
 
 ## Track changes in rules
 
