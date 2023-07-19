@@ -162,7 +162,7 @@ There are limitations for the beta version of the Quality Gate product:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/permissions/#ci-visibility
+[1]: /account_management/rbac/permissions
 [2]: https://app.datadog.com/ci/quality-gates
 [3]: https://www.datadoghq.com/product/audit-trail
 [4]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/gate/README.md
