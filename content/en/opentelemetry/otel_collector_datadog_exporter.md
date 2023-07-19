@@ -637,7 +637,6 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
 
 If you are using the Datadog Exporter to also send OpenTelemetry traces to Datadog, use the `trace_parser` operator to extract the `trace_id` from each trace and add it to the associated logs. Datadog automatically correlates the related logs and traces. See [Connect OpenTelemetry Traces and Logs][18] for more information.
 
-
 {{< img src="logs/log_collection/logs_traces_correlation.png" alt="The trace panel showing a list of logs correlated with the trace" style="width:70%;">}}
 ### Host name resolution
 
