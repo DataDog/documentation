@@ -22,7 +22,7 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][2].
 
-{{< img src="security/cspm/overview_page.png" alt="Cloud Security Posture Management overview page" width="100%">}}
+{{< img src="security/cspm/overview_page2.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -30,13 +30,13 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance frameworks" width="100%">}}
+{{< img src="security/cspm/compliance_frameworks.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom compliance rules
 
 [Out-of-the-box compliance rules][4] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][5] by defining how each rule scans your environment, [create custom rules][6], and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
-{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management compliance rules" width="100%">}}
+{{< img src="security/cspm/compliance_rules.png" alt="CSM Misconfigurations compliance rules" width="100%">}}
 
 ## Set up real-time notifications
 
@@ -44,13 +44,13 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 
 Use template variables and Markdown to [customize notification messages][9]. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
 
-{{< img src="security/cspm/rule_notification_setup.png" alt="Cloud Security Posture Management rule notification setup page" width="100%">}}
+{{< img src="security/cspm/rule_notification_setup2.png" alt="CSM Misconfigurations rule notification setup page" width="100%">}}
 
 ## Review and remediate findings
 
 Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
 
-{{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
+{{< img src="security/cspm/findings_explorer.png" alt="CSM Misconfigurations Findings Explorer" width="100%">}}
 
 ## Get started
 

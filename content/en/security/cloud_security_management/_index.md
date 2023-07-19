@@ -39,7 +39,7 @@ Datadog Cloud Security Management (CSM) delivers real-time threat detection and 
 
 Cloud Security Management includes [Misconfigurations](#cloud-security-posture-management), and [Threats](#cloud-workload-security).
 
-{{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
+{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Misconfigurations
 
