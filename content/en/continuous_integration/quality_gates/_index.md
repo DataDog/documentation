@@ -48,7 +48,11 @@ A rule starts being evaluated as soon as it is created.
 
 ## Datadog-ci gate evaluate
 
-Quality Gates evaluation is invoked by calling the [`datadog-ci gate evaluate`][4] command. This command:
+
+You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command. 
+
+This command allows you to:
+
 1. Retrieves all the impacted rules based on the current pipeline context (branch, repository).
 The rules that are retrieved vary based on the pipeline context, the rules scopes and eventual custom scopes (more info in the rule scope section) ([AM] ADD LINK TO SECTION BELOW).
 2. Evaluates all the impacted rules.
