@@ -17,21 +17,23 @@ Datadog tracing libraries collect data from an instrumented application. That da
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
-### Sensitive data 
+### Personal information in trace data
 
-Opening sentence
+Datadog’s APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, we can group data into categories with a focus on attributes that may contain personal information about your employees and end-users. 
 
-| Data category       | Description                                                                                                            |
+The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries. 
+
+| Category            | Description                                                                                                            |
 |:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
-| Name                | The real name of an internal user (your employee) or end-user.                                                         |
-| Email               | The email address of an internal user (employee) or end-user.                                                          |
+| Name                | The full name of an internal user (your employee) or end-user.                                                         |
+| Email               | The email address of an internal user (your employee) or end-user.                                                     |
 | Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request. |
 | Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                           |
 | Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                            |
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
 
-For each language library, a data category is collected if it is supported by automatic instrumentation and collection is enabled by default. The data category can also be obfuscated by default. 
+The table below describes the default behavior of each language tracing library with regard to whether a data category is collected and whether it is obfuscated by default.
 
 {{% tabs %}}
 
@@ -130,14 +132,7 @@ For each language library, a data category is collected if it is supported by au
 
 {{% /tabs %}}
 
-
-The Application Security Management product also collects the following HTTP data in traces (obfuscation is applied):
-
-| Category     | Description                                                                                                                               |
-|:-------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| HTTP body    | The HTTP request or response payload, which may contain personal information that can be reasonable linked to an individual or household. |
-| HTTP cookies | The Set-Cookie HTTP response header sent by the server that can be sent by the user's browser in the HTTP request header.                 |
-| HTTP headers | The HTTP request or response headers.                                                                                                     |
+If you have enabled the Application Security Management product, the tracing libraries collect HTTP request data to help you understand why the request was flagged as suspicious. You can read more about [data privacy][13] in the Application Security Management product.
 
 ## Agent
 
@@ -502,3 +497,4 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [10]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
 [12]: /sensitive_data_scanner/
+[13]: /security/application_security/how-appsec-works/#data-privacy
