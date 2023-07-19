@@ -1,5 +1,5 @@
 ---
-title: Troubleshoot Serverless Monitoring
+title: Troubleshoot AWS Lambda Monitoring
 kind: documentation
 further_reading:
 - link: '/serverless/installation/'
