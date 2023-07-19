@@ -18,11 +18,11 @@ aliases:
 
 To better understand the instructions from this guide, familiarize yourself with the [key concepts][1] first. A better understanding on how things work helps you identify the missing pieces and narrow down probable causes.
 
-## Serverless Flare
+## Serverless flare
 
 Serverless flare is a command that collects important data about your Lambda function and submits it to Datadog support for diagnostic purposes. To help troubleshoot issues encountered with Datadog monitoring, use the command: `datadog-ci lambda flare`.
 
-This command collects data such as environment variables, the Lambda configuration file, and recent CloudWatch logs. The command then submits the collected data to Datadog support via a ticket that matches your provided Zendesk case ID.
+This command collects data such as environment variables, the Lambda configuration file, and recent CloudWatch logs. The command then submits the collected data to Datadog support through the ticket that matches your provided Zendesk case ID.
 
 For more information, read the [Serverless Flare documentation](https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation).
 
