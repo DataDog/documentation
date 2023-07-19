@@ -150,7 +150,7 @@ The `quality_gate_rules_read` [permission][1] is required to view Quality Gate r
 
 ## Traceability
 
-You can view information about who created, modified, and deleted Quality Gates rules using Datadog's [Audit Trail][3] product.
+You can view information about who created, modified, and deleted Quality Gates rules in [Audit Trail][3].
 
 ## Limitations during beta
 
