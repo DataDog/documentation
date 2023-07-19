@@ -190,7 +190,6 @@ To fill in the placeholders:
 - Replace `<FORWARDER_ARN>` with Forwarder ARN (see the [Forwarder documentation][2]).
 - Replace `<SERVICE>` and `<ENV>` with your service and environment values.
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][3] before you can use the macro.
 
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
@@ -252,7 +251,7 @@ The minor version of the `datadog-lambda-js` package always matches the layer ve
 
 #### Using the layer
 
-[Configure the layers][1] for your Lambda function using the ARN in the following format.
+[Configure the layers][8] for your Lambda function using the ARN in the following format.
 
 ```
 # For us,us3,us5,eu, and ap1 regions
@@ -270,11 +269,6 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-l
 ```
 
 If your Lambda function is configured to use code signing, you must add Datadog's Signing Profile ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) to your function's [Code Signing Configuration][2] before you can add the Datadog Lambda library as a layer.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-{{< /tabs >}}
-
 
 #### Using the package
 
@@ -311,13 +305,15 @@ Subscribe the Datadog Forwarder Lambda function to each of your function's log g
 1. [Install the Datadog Forwarder if you haven't][6].
 2. [Subscribe the Datadog Forwarder to your function's log groups][7].
 
-
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
 [4]: /serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/serverless/forwarder/
 [7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[8]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
