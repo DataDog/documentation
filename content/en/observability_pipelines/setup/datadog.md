@@ -246,7 +246,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-Production-oriented setup is not covered by these Docker instructions, and you should defer to your company's standards for load balancing in containerized environments. If you are testing on your local machine, configuring a load balancer is unnecessary.
+Production-oriented setup is not included in the Docker instructions. Instead, refer to your company's standards for load balancing in containerized environments. If you are testing on your local machine, configuring a load balancer is unnecessary.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.
