@@ -59,10 +59,6 @@ You can prevent a step screenshot from being captured at test execution by click
 
 This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
 
-## Subtests
-
-The advanced options for [subtests][3] allow you to choose where you want your subtest to be played and set the behavior of your mobile app test if the subtest fails.
-
 ### Set failure behavior
 
 Click **Continue with test if this step fails** to ensure your mobile app test continues if the subtest fails.
@@ -73,4 +69,3 @@ Click **Continue with test if this step fails** to ensure your mobile app test c
 
 [1]: /mobile_testing/mobile_app_tests/steps/
 [2]: /data_security/synthetics/
-[3]: /mobile_testing/mobile_app_tests/steps/#subtests

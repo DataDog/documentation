@@ -136,22 +136,6 @@ Add a name to the step and enter a deep link URI.
 
 For more information about additional configuration in test steps, see [Advanced Options for Mobile App Test Steps][4].
 
-### Subtests
-
-You can run mobile app tests within other mobile app tests to reuse existing workflows up to two levels of nesting.
-
-To use an existing mobile app test as a subtest, click **Add New Subtest**, select a mobile app test from the dropdown menu, and click **Add Subtest**.
-
-To convert steps from your current mobile app test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. By default, a subtest executes in sequence with the previous steps of the parent test. 
-
-{{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Add a subtest in a browser test" style="width:60%;" >}}
-
-In order to override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. A variable always uses the value that was first assigned to it. 
-
-For more information about advanced options for subtests, see [Advanced Options for Mobile App Test Steps][5].
-
-If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][6].
-
 ## Manage step order
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
@@ -170,5 +154,3 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 [2]: /synthetics/settings/#global-variables
 [3]: /synthetics/guide/browser-tests-totp/
 [4]: /mobile_testing/mobile_app_tests/advanced_options
-[5]: /mobile_testing/mobile_app_tests/advanced_options#subtests
-[6]: /synthetics/guide/reusing-browser-test-journeys/
