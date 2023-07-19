@@ -9,16 +9,15 @@ further_reading:
   text: "Learn about Test Visibility"
 ---
 
-## Overview
-
 {{< callout url="#" header="false" >}}
 Quality Gates are in beta.
 {{< /callout >}}
 
 Quality Gates allows you to gate your workflows based on signals in Datadog.
-For example, you can block a Pull Request from being merged if it introduces new [flaky tests][8], even if the tests are passing.
+For example, you can block code from being merged if it introduces new [flaky tests][8], even if the tests are passing.
 
-Using Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed. ([AM] ADD SENTENCE)
+Using Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed.
+This allows you to ensure that the code running in production is meeting high quality standards, reducing incidents and unwanted behaviors.
 
 ## Set up Quality Gates
 
