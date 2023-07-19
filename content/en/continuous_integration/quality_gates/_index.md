@@ -33,11 +33,12 @@ To create Quality Gates rules for your organization, your user account must have
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
 2. Select the rule type. You can choose between `Static Analysis` and `Test`.
 3. Define the rule scope. The rule scope defines when the rules should be evaluated. For example, you can scope a rule so that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope name. More information on rule scopes ([AM] ADD LINK TO SECTION BELOW).
-4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline as well.
-You can select one of the existing rule conditions for the rule type you have selected.
-The following example shows how to create a static analysis rule that will fail when there are one or more static analysis
-violations with "error" severity and "security" category being introduced in a specific commit:
-{{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
+4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline as well. You can select one of the existing rule conditions for the rule type you have selected.
+
+   The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" severity and "security" category being introduced in a specific commit:
+   
+   {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
+
 5. Select whether the rule should block the pipeline or not when it fails. Non-blocking rules are still evaluated, but
 they do not block the pipeline when they fail.
 6. Select a rule name that describes the rule that you are creating.
