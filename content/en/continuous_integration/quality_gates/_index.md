@@ -42,7 +42,7 @@ To create Quality Gates rules for your organization, your user account must have
 5. Select whether the rule should block the pipeline or not when it fails. Non-blocking rules are still evaluated, but
 they do not block the pipeline when they fail.
 6. Select a rule name that describes the rule that you are creating.
-7. Click on **Save Rule**.
+7. Click **Save Rule**.
 
 A rule starts being evaluated as soon as it is created.
 
