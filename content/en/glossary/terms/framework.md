@@ -6,7 +6,7 @@ synonyms:
   - compliance benchmark
 core_product:
   - security
-  - cspm
+  - csm
 ---
 
 A collection of requirements that map to an industry benchmark or regulatory standard.

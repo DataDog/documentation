@@ -152,10 +152,6 @@ core_product:
     - name: csm
       requires_all_keyvals:
         - 'core_product:security'
-    - name: cspm
-      requires_all_keyvals:
-        - 'specific_interest:compliance'
-        - 'core_product:security'
     - name: cwpp
       requires_all_keyvals:
         - 'core_product:security'
