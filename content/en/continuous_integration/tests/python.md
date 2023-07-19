@@ -28,6 +28,7 @@ Supported test frameworks:
 * pytest >= 3.0.0
   * pytest < 5 when using Python 2
 * pytest-benchmark >= 3.1.0
+  * Python >= 3.7
 
 ## Configuring reporting method
 
