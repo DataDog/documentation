@@ -61,7 +61,7 @@ The dedicated [widget JSON schema definition][5] for the query value widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/querying/#overview
-[2]: /tracing/app_analytics/search/#search-bar
+[2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
 [4]: /api/v1/dashboards/
 [5]: /dashboards/graphing_json/widget_json/

@@ -24,8 +24,12 @@ title: 読み取り用のオープンフラグを定義しない
 ## 非準拠コードの例
 ```python
 def print_foo():
-  with open("myfile.txt", "r") as myfile:  # "r" フラグの指定は不要
+  with open("myfile.txt", "r") as myfile:  # "r" フラグの指定は不要です
     content = myfile.read()
+
+  with open(path, "rb") as f:
+    for chunk in iter(lambda: f.read(4096), b""):
+        hasher.update(chunk)
 ```
 
 ## 準拠コードの例

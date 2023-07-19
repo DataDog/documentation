@@ -33,7 +33,7 @@ further_reading:
 
 ## Overview
 
-This guide provides an overview of the process for integrating an Amazon Web Services(AWS) account with Datadog using Datadog's CloudFormation template. 
+This guide provides an overview of the process for integrating an Amazon Web Services(AWS) account with Datadog using Datadog's CloudFormation template.
 
 At a high level, this involves creating an IAM role and associated policy to enable Datadog's AWS account to make API calls into your AWS account for collecting or pushing data. The template also deploys the [Datadog Forwarder][1] Lambda function for sending logs to Datadog. Using the CloudFormation template provides all the tools needed to send this data to your Datadog account, and Datadog maintains the CloudFormation template to provide the latest functionality.
 
@@ -149,7 +149,7 @@ By default the Datadog AWS integration crawls the CloudWatch API for AWS-provide
 Once the Agent is installed, it's graphically represented within the [Infrastructure List][18] with a bone icon:
 {{< img src="getting_started/integrations/infrastructure-list.png" alt="The infrastructure list showing two hosts in a list format. Both hosts show the AWS icon for the AWS integration and 'aws' shown in a blue box to show they are associated with the AWS integration. One host also shows a dog-bone icon and blue boxes for 'ntp' and 'system'.">}}
 
-The screen shot above shows the host with the Datadog Agent reporting data from the [System][19] and [NTP][20] checks. The System check provides metrics around CPU, memory, filesystem, and I/O, providing additional insights into the host. You can enable additional [integrations][21] to suit the environment and use case, or additionally use [DogStatsD][22] to send custom metrics directly to Datadog. 
+The screen shot above shows the host with the Datadog Agent reporting data from the [System][19] and [NTP][20] checks. The System check provides metrics around CPU, memory, filesystem, and I/O, providing additional insights into the host. You can enable additional [integrations][21] to suit the environment and use case, or additionally use [DogStatsD][22] to send custom metrics directly to Datadog.
 
 See the [FAQ on why you should install the Datadog Agent on your cloud instances][23] for more information about the benefits of this approach.
 
@@ -178,7 +178,7 @@ Because Fargate pods are managed by AWS, they exclude host-based system checks l
 Use the [EKS Anywhere documentation][32] for on-premises Kubernetes clusters.
 
 ### Create additional Datadog resources
-In addition to using the Datadog UI or [API][33], you can create many [Datadog resources][34] with the [CloudFormation Registry][35]. For visibility and troubleshooting, use [dashboards][36] to display key data, apply [Functions][37], and find [Metric Correlations][38]. 
+In addition to using the Datadog UI or [API][33], you can create many [Datadog resources][34] with the [CloudFormation Registry][35]. For visibility and troubleshooting, use [dashboards][36] to display key data, apply [Functions][37], and find [Metric Correlations][38].
 
 To get notified of any unwanted or unexpected behavior in your account, create [monitors][39]. Monitors consistently evaluate the data reported to your account, and send [Notifications][40] to ensure that the right information gets to the right team members. Review the [List of Notification Integrations][41] for all the ways to notify your team.
 
@@ -189,7 +189,7 @@ To get notified of any unwanted or unexpected behavior in your account, create [
 You can unify the metrics, traces, and logs from your AWS Lambda functions running serverless applications in Datadog. Check out [Serverless][42] for instructions on instrumenting your application, installing [Serverless Libraries and Integrations][43], implementing [Distributed Tracing with Serverless Applications][44], or [Serverless Troubleshooting][45].
 
 ### APM
-To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][46] integration or from a host with the Datadog Agent using [APM][47]. Then, read [Explore Datadog APM][48] for a better understanding of how to use this data to gain insights into your application performance. 
+To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][46] integration or from a host with the Datadog Agent using [APM][47]. Then, read [Explore Datadog APM][48] for a better understanding of how to use this data to gain insights into your application performance.
 
 Additionally, you can use [Watchdog][49], an algorithmic feature for APM performance and infrastructure metrics, to automatically detect and be notified about potential application issues.
 
@@ -227,7 +227,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [14]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
 [16]: /getting_started/agent/
-[17]: https://app.datadoghq.com/account/settings#agent
+[17]: https://app.datadoghq.com/account/settings/agent/latest
 [18]: https://app.datadoghq.com/infrastructure
 [19]: /integrations/system/
 [20]: /integrations/ntp/

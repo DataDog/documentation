@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
   tag: "Blog"
   text: "Monitor CDN performance within your Synthetic tests"
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
