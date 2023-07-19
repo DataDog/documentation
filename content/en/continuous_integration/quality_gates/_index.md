@@ -34,7 +34,7 @@ To create Quality Gates rules for your organization, your user account must have
 3. Define the rule scope. The rule scope defines when the rules should be evaluated. For example, you can scope a rule so that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope name. More information on [rule scopes](#rule-scope).
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline as well. You can select one of the existing rule conditions for the rule type you have selected.
 
-   The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" severity and "security" category being introduced in a specific commit:
+   The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
 
    {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
