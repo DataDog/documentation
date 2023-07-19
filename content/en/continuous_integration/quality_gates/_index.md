@@ -17,7 +17,7 @@ further_reading:
 Quality Gates are in beta.
 {{< /callout >}}
 
-Quality Gates allows you to gate your workflows based on signals in Datadog.
+Quality Gates allows you to gate your workflows based on signals in Datadog.  You can create two types of rules types: Static Analysis and Tests.
 For example, you can block code from being merged if it introduces new [flaky tests][8], even if the tests are passing.
 
 Using Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed.
@@ -35,8 +35,8 @@ To create Quality Gates rules for your organization, your user account must have
 
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
 2. Select the rule type. You can choose between `Static Analysis` and `Test`.
-3. Define the rule scope. The rule scope defines when the rules should be evaluated. For example, you can scope a rule so that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope name. More information on [rule scopes](#rule-scope).
-4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline as well. You can select one of the existing rule conditions for the rule type you have selected.
+3. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. More information on [rule scopes](#rule-scope).
+4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected.
 
    The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
 
@@ -57,9 +57,8 @@ You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate eva
 
 This command:
 
-1. Retrieves all the impacted rules based on the current pipeline context (branch, repository).
-The rules that are retrieved vary based on the pipeline context, the [rules scopes](#rule-scope) and eventual [custom scopes](#custom-scope).
-2. Evaluates all the impacted rules.
+1. Retrieves all the rules that have [rules scopes](#rule-scope) and [custom scopes](#custom-scope) matching the current pipeline context (repository, branch, or custom scope passed in the command).
+2. Evaluates all the matching rules.
 3. If one or more blocking rules fail, the command fails as well, blocking the pipeline.
 
 <div class="alert alert-danger"><strong>Note:</strong> for the command to work properly, it's important that the events (tests, static analysis violations)
@@ -79,7 +78,7 @@ DD_BETA_COMMANDS_ENABLED=true DATADOG_API_KEY=<API_KEY> DATADOG_APP_KEY=<APP_KEY
 The behavior of the command can be modified using the following flags:
 - **--fail-on-empty**: when this flag is specified, the command fails if no matching rules were found in Datadog
 based on the current command scope. By default, the command succeeds.
-- **--fail-if-unavailable**: when this flag is specified, the command fails if one or more rules could not be evaluated.
+- **--fail-if-unavailable**: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
 - **--no-wait**: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
@@ -100,18 +99,18 @@ about all the rules that were evaluated.
 
 ## Rule scope
 
-When creating a rule, you can define its scope, which states when it should be evaluated.
-The rule scope is then checked based on the context passed by the `datadog-ci gate evaluate` command to understand whether the rule should be evaluated or not.
+When creating a rule, you can define a scope, which states when the rule should be evaluated. 
+The rules, which have a matching scope to the context of the `datadog-ci gate evaluate` command, are evaluated. 
 
-For each scope name (for example, "branch"), you can either select included or excluded values.
+For each scope (for example, `branch`), you can either select included or excluded values.
 When included values are selected, the rule is evaluated if one or more included values are part of the command context.
-When excluded values are selected, the rule is evaluated if none of the excluded values are part of the command context.
+When excluded values are selected, the rule is evaluated if the excluded values are not part of the command context.
 
 For example, to create a rule that is evaluated in all branches but `main` of the `example-repository` repository, you can define the following scope:
 
 {{< img src="ci/scope_not_main_example_repository.png" alt="Rule scope for example-repository and not main branch" style="width:90%;">}}
 
-If a rule does not contain a scope name, it is evaluated for all values of that scope name.
+If a rule does not contain a scope, it is evaluated for all values for that scope.
 For example, if a rule does not contain the `repository` scope, it is evaluated for all repositories. If the rule scope is
 set to `always evaluate`, the rule is evaluated on all repositories and branches.
 
@@ -119,15 +118,16 @@ set to `always evaluate`, the rule is evaluated on all repositories and branches
 
 ### Custom scope
 
-In addition to branch and repository, you can define custom scope names to further filter rules that are evaluated for a specific CI pipeline.
+In addition to branch and repository, you can define a custom scope to filter rules that are evaluated for a specific CI pipeline.
 
-Custom scopes can be added when creating a rule in the following way:
-1. Click on **+ Add Filter** and select **Custom Scope**
+To add a custom scope when creating a rule:
+
+1. Click **+ Add Filter** and select **Custom Scope**.
 2. Define the scope name, for example, `team`.
-3. Define the scope included or excluded values.
+3. Define the scope's included or excluded values.
 
-Differently from "branch" and "repository" scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the **--scope** option.
-For example, you can create a rule that is evaluated for the repository `example-repository` but only when the team is `backend`:
+Unliked the `branch` and `repository` scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the **--scope** option.
+For example, you can create a rule that is evaluated for the `example-repository` repository, but only when the team is `backend`:
 
 {{< img src="ci/rule_scope_example_repository_team_backend.png" alt="Rule scope for example-repository and team backend" style="width:90%;">}}
 
@@ -138,19 +138,15 @@ The rule would **not** be evaluated when the following commands are invoked inst
 - `datadog-ci gate evaluate`, as it does not define any team.
 - `datadog-ci gate evaluate --scope team:api --scope team:frontend`, as it defines teams different from `backend`.
 
-## Edit a rule
+## Manage rules
 
-You can edit a Quality Gate rule by clicking on the edit icon in the [rules page][2]:
+To edit a Quality Gate rule, click the **Edit** icon to the right of the **Creator** avatar on the [Quality Gate Rules page][2].
 
 {{< img src="ci/edit_quality_gate_rule.png" alt="Edit a Quality Gates rule" style="width:90%;">}}
 
-## Delete a rule
-
-You can delete a Quality Gate rule by clicking on the deletion icon in the [rules page][2]
+To delete a Quality Gate rule, click the **Delete** icon next to the **Edit** button on the [Quality Gate Rules page][2]. Alternatively, you can edit the rule and click **Delete Rule**.
 
 {{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
-
-or by editing the rule and clicking **Delete Rule** at the end of the page.
 
 ## Permissions
 
