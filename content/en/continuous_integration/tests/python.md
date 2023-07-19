@@ -89,6 +89,20 @@ def test_simple_case(ddspan):
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
 
+### Instrumenting pytest-benchmark tests
+
+To instrument your benchmark tests with `pytest-benchmark`, simply run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog will detect metrics from `pytest-benchmark` automatically:
+
+```python
+def square_value(value):
+    return value * value
+
+
+def test_square_value(benchmark):
+    result = benchmark(square_value, 5)
+    assert result == 25
+```
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
