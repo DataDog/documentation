@@ -77,7 +77,7 @@ The behavior of the command can be modified using the following flags:
 based on the current command scope. By default, the command succeeds.
 - **--fail-if-unavailable**: when this flag is specified, the command fails if one or more rules could not be evaluated.
 By default, the command succeeds.
-- **--no-wait**: by default, the command waits 30 seconds for the events (tests, static analysis violations) to arrive to Datadog.
+- **--no-wait**: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluation. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
@@ -127,10 +127,10 @@ For example, you can create a rule that is evaluated for the repository `example
 
 {{< img src="ci/rule_scope_example_repository_team_backend.png" alt="Rule scope for example-repository and team backend" style="width:90%;">}}
 
-The rule is evaluated when this command is invoked in a CI pipeline of the `example-repository` repository:
+The rule would be evaluated when this command is invoked in a CI pipeline of the `example-repository` repository:
 - `datadog-ci gate evaluate --scope team:backend`
 
-The rule is not evaluated when the following commands are invoked instead:
+The rule would **not** be evaluated when the following commands are invoked instead:
 - `datadog-ci gate evaluate`, as it does not define any team.
 - `datadog-ci gate evaluate --scope team:api --scope team:frontend`, as it defines teams different from `backend`.
 
