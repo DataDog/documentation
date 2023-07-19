@@ -57,16 +57,16 @@ Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMEN
 
 Datadog にトレースを送信したい Kubernetes アプリケーションに対して、Java、JavaScript、Python、.NET または Ruby のインスツルメンテーションライブラリを自動的に挿入するように Datadog Admission Controller を構成します。大まかに言うと、これには次の手順が含まれます。詳細は以下で説明します。
 
-1. Datadog Admission Controller を有効にして、ポッドのミュートを行います。
+1. Datadog Admission Controller を有効にして、ポッドを変異させます。
 2. ポッドにアノテーションを付けて、どのインスツルメンテーションライブラリを挿入するか選択します。
 3. 統合サービスタグ付けにより、ポッドにタグを付け、Datadog のテレメトリーを結び付け、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートします。
 4. 新しい構成を適用します。
 
 <div class="alert alert-info">ライブラリを挿入するために、新しいアプリケーションイメージを生成する必要はありません。ライブラリの挿入はインスツルメンテーションライブラリの追加で行われるため、アプリケーションイメージの変更は必要ありません。</div>
 
-### ステップ 1 - Datadog Admission Controller を有効にして、ポッドのミュートを行います
+### ステップ 1 - Datadog Admission Controller を有効にして、ポッドを変異させます
 
-デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみをミュートします。ポッドでミュートを有効にするには、ポッドの仕様にラベル `admission.datadoghq.com/enabled: "true"` を追加します。
+デフォルトでは、Datadog Admission Controller は、特定のラベルでラベル付けされたポッドのみを変異させます。ポッドの変異を有効にするには、ポッドのスペックにラベル `admission.datadoghq.com/enabled: "true"` を追加します。
 
 **注**: Datadog Admission Controller で、Cluster Agent で `clusterAgent.admissionController.mutateUnlabelled` (または `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定すると、このポッドラベルがなくても挿入設定を有効にすることが可能です。
 

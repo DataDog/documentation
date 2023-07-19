@@ -30,11 +30,12 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
-- orchestration
 - configuration & deployment
-- notification
+- containers
 - log collection
+- network
+- notification
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_on_public_website: true
@@ -42,7 +43,7 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.2.0
+integration_version: 2.2.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -52,19 +53,20 @@ public_title: Consul
 short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::コンテナ
-  - Category::オーケストレーション
   - Category::構成 & デプロイ
-  - Category::通知
+  - Category::コンテナ
   - Category::ログの収集
+  - Category::ネットワーク
+  - Category::通知
+  - Category::オーケストレーション
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
   media: []
@@ -98,7 +100,7 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 

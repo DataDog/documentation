@@ -11,6 +11,9 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
+  tag: "Blog"
+  text: "Best practices for tagging your monitors"
 ---
 
 Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-netapp-ontap
 app_uuid: c744f76a-7d04-4daf-bf7b-0902fbedd76d
 assets:

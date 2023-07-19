@@ -28,7 +28,7 @@ title: 고급 로그 수집 설정
 * [로그에서 민감한 데이터 스크러빙](#scrub-sensitive-data-from-your-logs)
 * [다중 줄 로그 집계](#multi-line-aggregation)
 * [일반적으로 사용되는 예제 복사](#commonly-used-log-processing-rules)
-* [와일드카드를 사용하여 디렉터리 모니터링](#tail-directories-by-using-wildcards)
+* [와일드카드를 사용하여 디렉터리 모니터링](#tail-directories-using-wildcards)
 * [로그 파일 인코딩 지정](#log-file-encodings)
 * [글로벌 처리 규칙 정의](#global-processing-rules)
 

@@ -77,7 +77,7 @@ See [Dynamic Instrumentation][5] for information about setting snapshot and metr
 
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/

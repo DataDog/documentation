@@ -26,7 +26,7 @@ RUM モバイルアプリのパフォーマンスダッシュボードにアク�
 
 様々なアプリケーションのバージョンに渡るメトリクスを表示する折れ線グラフで、アプリケーションの全体的な健全性とパフォーマンスを理解することができます。アプリケーションのバージョンでフィルターをかけたり、特定のセッションやビューを表示するには、グラフをクリックしてください。
 
-{{< img src="real_user_monitoring/ios/rum_explorer_mobile_vitals.png" alt="RUM エクスプローラーのイベントタイミングとモバイルバイタル" style="width:90%;">}}
+{{< img src="real_user_monitoring/ios/rum_explorer_mobile_vitals-3.png" alt="RUM エクスプローラーのイベントタイミングとモバイルバイタル" style="width:90%;">}}
 
 また、RUM エクスプローラーでビューを選択し、セッションでのアプリケーションのユーザー体験に直接関連する推奨ベンチマーク範囲を観察することができます。**Refresh Rate Average** などのメトリクスをクリックし、**Search Views With Poor Performance** (パフォーマンスの悪いビューを検索) をクリックすると、検索クエリにフィルターが適用され、追加のビューが調査されます。
 

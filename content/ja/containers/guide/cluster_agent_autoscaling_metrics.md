@@ -41,7 +41,7 @@ v1.0.0 の時点で、Datadog Cluster Agent のカスタムメトリクスサー
 2. Kubernetes の[集計層][3]を有効化します。
 3. 有効な [Datadog API キー**および**アプリケーションキー][8]。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 {{< tabs >}}
 {{% tab "Helm" %}}

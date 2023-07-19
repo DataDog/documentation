@@ -85,16 +85,36 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * The monitor's query was recently changed.
 * The monitor's timeframe is too short for a metric that provides data infrequently.
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
+* The query you are filtering by is not working as expected.
 
 The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `service` and `host`, but you only want to receive alerts for the `service`. The status graph shows the monitor's status grouped by `service`. You can see the `host` subgroups by clicking **View all** which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][13].
 
 {{< img src="monitors/monitor_status/monitor_status_group_subgroup.png" alt="Monitor status grouped by service, highlighting option to view subgroups " style="width:100%;" >}}
 
+#### Filter the monitor status by groups or events
+
+To scope down the **Status & History** view to specific groups, use the filter field and enter the attributes you want to filter by. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
+
+- Filters are case sensitive, `env:prod` and `env:Prod` do not return the same monitor groups. Datadog recommends practicing uniformity in tags. For more information, see [Getting Started with Tags][31]. 
+- Queries automatically append a wildcard. To apply specific filters, surround your query with double quotes (`"`).
+  For example, take the following query which does not use double quotes:
+  ```
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-1
+  ```
+  The monitor returns the follow groups even though you expect the query to show one specific group.
+  ```
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-10
+  availability-zone:us-central1-a,instance-type:*,name:gke-demo-12
+  ```
+
+  Surrounding the query with double quotes returns the expected group: 
+  `"availability-zone:us-central1-a,instance-type:*,name:gke-demo-1"`
+
 #### Investigate a Monitor in a Notebook
 
 For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][8] with a formatted graph of the monitor query.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook button" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook button" style="width:90%;">}}
 
 The notebook matches the monitor evaluation period time range and includes related logs where relevant.
 
@@ -152,3 +172,5 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [11]: /events/
 [12]: https://app.datadoghq.com/monitors#create/import
 [13]: /monitors/configuration/?tab=thresholdalert#notification-aggregation
+[30]: /monitors/manage/search/#query
+[31]: /getting_started/tagging/

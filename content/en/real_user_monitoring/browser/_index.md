@@ -1649,7 +1649,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
 [14]: /getting_started/site/
-[15]: /getting_started/tagging/#defining-tags
+[15]: /getting_started/tagging/#define-tags
 [16]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [17]: /real_user_monitoring/session_replay/
 [18]: /real_user_monitoring/session_replay/privacy_options
