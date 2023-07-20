@@ -60,8 +60,6 @@ For quick questions, post in the _#serverless_ channel of the [Datadog Slack com
 
 If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], first create a Zendesk ticket. Next, use the `serverless flare` command to automatically collect and submit data about your Lambda function to Datadog Support.
 
-<div class="alert alert-info">For more information about serverless flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">serverless flare documentation</a>.</div>
-
 If you don't want to use the flare command, include the following information to your ticket:
 1. Basic information about your Lambda function: ARN, runtime, handler, layers, environment variables, and tags. Focus on one function first if you have the same issue with many.
 2. If the Lambda function is configured to send data through logs using the Datadog Forwarder Lambda function, include basic information about the Forwarder Lambda function, as well as the subscription filters configured on your Lambda function's log group.
@@ -70,6 +68,8 @@ If you don't want to use the flare command, include the following information to
 5. Debugging logs from your own Lambda function.
 6. Debugging logs from the Datadog Forwarder Lambda function (if used).
 7. The project configuration files, with **redacted hardcoded secrets**, such as `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json`, and `webpack.config.json`.
+
+<div class="alert alert-info">For more information about serverless flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">serverless flare documentation</a>.</div>
 
 ## Further Reading
 
