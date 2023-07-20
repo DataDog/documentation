@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" header="false" >}}
+{{< callout url="http://dtdg.co/code-quality" header="false" >}}
 Quality Gates are in beta.
 {{< /callout >}}
 
