@@ -22,7 +22,7 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][2].
 
-{{< img src="security/cspm/overview_page2.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
+{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -30,7 +30,7 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/compliance_frameworks.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/compliance_page.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom compliance rules
 
@@ -43,8 +43,6 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 [Send real-time notifications][7] when a new misconfiguration is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][8].
 
 Use template variables and Markdown to [customize notification messages][9]. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
-
-{{< img src="security/cspm/rule_notification_setup2.png" alt="CSM Misconfigurations rule notification setup page" width="100%">}}
 
 ## Review and remediate findings
 

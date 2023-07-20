@@ -2870,7 +2870,7 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
-  - name: Security Findings Explorer
+  - name: Misconfigurations Explorer
     url: /security/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer

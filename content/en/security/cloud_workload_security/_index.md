@@ -18,7 +18,7 @@ CWS uses the Datadog Agent to monitor your environment. If you don't already hav
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-{{< img src="security/cws/cws_overview.png" alt="Cloud Workload Security overview page" width="100%">}}
+{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
@@ -26,7 +26,7 @@ CSM Threats comes with more than 50 out-of-the-box detection rules that are main
 
 Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
-{{< img src="security/cws/cws_detection_rules.png" alt="Cloud Workload Security detection rules in the Datadog app" width="100%">}}
+{{< img src="security/cws/threats_detection_rules.png" alt="CSM Threats detection rules in the Datadog app" width="100%">}}
 
 ## Model expected workload behavior
 
@@ -42,7 +42,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 Investigate and triage security signals in the [Security Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
-{{< img src="security/cws/cws_signals.png" alt="Cloud Workload Security signals in the Datadog app" width="100%">}}
+{{< img src="security/cws/threats_explorer.png" alt="CSM Threats Explorer page" width="100%">}}
 
 ## Get started
 
