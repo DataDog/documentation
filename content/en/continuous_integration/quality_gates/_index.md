@@ -17,7 +17,7 @@ further_reading:
 Quality Gates are in private beta. To request access, complete the form.
 {{< /callout >}}
 
-Quality Gates allows you to gate your workflows based on signals in Datadog.  You can create two types of rules: Static Analysis and Tests.
+Quality Gates allows you to gate your workflows based on signals in Datadog. You can create two types of rules: Static Analysis and Tests.
 For example, you can block code from being merged if it introduces new [flaky tests][8] or code style violations; issues that wouldn't normally fail your CI/CD pipelines and end up deployed to production.
 
 Using Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed.
