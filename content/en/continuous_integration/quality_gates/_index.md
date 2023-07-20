@@ -25,9 +25,9 @@ This allows you to ensure that the code running in production is meeting high qu
 
 ## Set up Quality Gates
 
-There are two main steps required to set up Quality Gates:
+There are two main steps required to set up and use Quality Gates:
 1. Create one or more rules in Datadog's UI.
-2. Add the `datadog-ci gate evaluate` command in your CI pipeline.
+2. Invoke Quality Gates by using the `datadog-ci gate evaluate` command in your CI pipeline.
 
 ## Create a rule
 
@@ -49,9 +49,9 @@ they do not block the pipeline when they fail.
 8. Click **Save Rule**.
 
 
-## Datadog-ci gate evaluate
+## Invoking quality gates
 
-To use quality gates, [`datadog-ci`][7] version should be higher or equal than `2.16.0`.
+To use quality gates, your [`datadog-ci`][7] version should be higher or equal than `2.16.0`.
 
 You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
@@ -78,16 +78,16 @@ DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DA
 
 The behavior of the command can be modified using the following flags:
 - `--fail-on-empty`: when this flag is specified, the command fails if no matching rules were found in Datadog
-based on the current command scope. By default, the command succeeds.
+based on the current pipeline context. By default, the command succeeds.
 - `--fail-if-unavailable`: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
 - `--no-wait`: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
-avoiding incorrect evaluation. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
+avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
 Note that, if used incorrectly, this flag might result in inaccurate rule evaluations.
 
-[Custom scopes](#custom-scope) can be added by using the following option one or more times: **--scope**:
+[Custom scopes](#custom-scope) can be added by using the following option one or more times: `--scope`:
 
 {{< code-block lang="shell" >}}
 datadog-ci gate evaluate --scope team:backend --scope team:frontend
@@ -120,7 +120,7 @@ For example, if a rule does not contain the `repository` scope, it is evaluated 
 
 ### Custom scope
 
-In addition to branch and repository, you can define a custom scope to filter rules that are evaluated for a specific CI pipeline.
+In addition to branch and repository, you can define custom scopes to filter rules that are evaluated for a specific CI pipeline.
 
 To add a custom scope when creating a rule:
 
@@ -128,7 +128,7 @@ To add a custom scope when creating a rule:
 2. Define the scope name, for example, `team`.
 3. Define the scope's included or excluded values.
 
-Unlike the `branch` and `repository` scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the **--scope** option.
+Unlike the `branch` and `repository` scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the `--scope` option.
 For example, you can create a rule that is evaluated for the `example-repository` repository, but only when the team is `backend`:
 
 {{< img src="ci/rule_scope_example_repository_team_backend.png" alt="Rule scope for example-repository and team backend" style="width:90%;">}}
