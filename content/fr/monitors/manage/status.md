@@ -95,7 +95,7 @@ Le graphique Evaluation Graph illustre le comportement précis de la requête du
 
 Pour obtenir encore plus de détails sur l'évolution de vos métriques, cliquez sur l'option **Open in a notebook** en regard du graphique de statut. Cela génère un [notebook][6] d'analyse, avec un graphique mis en forme représentant la requête du monitor.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Bouton Open in a notebook" style="width:60%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Bouton Open in a notebook" style="width:60%;">}}
 
 Le notebook utilise l'intervalle d'évaluation du monitor et propose des logs associés, lorsque cela s'avère pertinent.
 

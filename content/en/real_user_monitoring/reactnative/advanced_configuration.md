@@ -435,4 +435,4 @@ const configuration = {
 [9]: /getting_started/site/
 [11]: /real_user_monitoring/frustration_signals/
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
-[15]: /getting_started/tagging/#defining-tags
+[15]: /getting_started/tagging/#define-tags

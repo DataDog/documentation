@@ -30,7 +30,7 @@ Customize your log collection configuration:
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Aggregate multi-line logs](#multi-line-aggregation)
 * [Copy commonly used examples](#commonly-used-log-processing-rules)
-* [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
+* [Use wildcards to monitor directories](#tail-directories-using-wildcards)
 * [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
@@ -129,7 +129,7 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -210,6 +210,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -247,6 +249,8 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -298,6 +302,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -336,6 +342,8 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -436,6 +444,8 @@ spec:
 ```
 
 **Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -547,9 +557,9 @@ Automatic multi-line detection detects logs that begin and comply with the follo
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][3] to see a list of examples.
 
-## Tail directories by using wildcards
+## Tail directories using wildcards
 
-If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
+If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
 
 * Using `path: /var/log/myapp/*.log`:
   * Matches all `.log` file contained in the `/var/log/myapp/` directory.

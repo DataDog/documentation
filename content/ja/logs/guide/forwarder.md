@@ -22,7 +22,7 @@ Forwarder を使用して AWS Lambda のログから Datadog にメトリクス�
 
 Datadog Forwarder による AWS サービスのログ送信については、[Datadog Lambda 関数で AWS Services のログを送信するガイド][2]をお読みください。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を自動インストールすることを推奨しています。また、[Terraform](#terraform) を使用するか[手動で](#manual)設定プロセスを完了することもできます。インストールが完了したら、[トリガーの設定][4]により、S3 バケットや CloudWatch ロググループなどのログソースに Forwarder をサブスクライブすることができます。
 

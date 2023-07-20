@@ -80,7 +80,7 @@ Calico チェックは、Calico で設定した Kubernetes クラスターのネ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Calico チェックは [Datadog Agent][2] パッケージに含まれています。
 

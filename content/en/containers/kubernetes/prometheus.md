@@ -73,7 +73,7 @@ metadata:
           ]
         }
       }
-    
+
 spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER>'
@@ -135,7 +135,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% tab "Kubernetes (AD v2)" %}}
 
    **Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
-   
+
    ```yaml
      # (...)
     spec:
@@ -258,7 +258,7 @@ If the Cluster Agent is enabled, inside its manifest `cluster-agent-deployment.y
 - name: DD_PROMETHEUS_SCRAPE_ENABLED
   value: "true"
 - name: DD_PROMETHEUS_SCRAPE_SERVICE_ENDPOINTS
-  value: "true" 
+  value: "true"
 ```
 
 {{% /tab %}}
@@ -287,9 +287,8 @@ Only the parameters [on this page][2] are supported for OpenMetrics v2 with Auto
 
 The Autodiscovery configuration can be based on container names, Kubernetes annotations, or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
-`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
-
-`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
+- `kubernetes_container_names` is a list of container names to target, in regular expression format.
+- `kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -338,9 +337,8 @@ Only the parameters [on this page][2] are supported for OpenMetrics v2 with Auto
 
 The Autodiscovery configuration can be based on container names, Kubernetes annotations, or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
-`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
-
-`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
+- `kubernetes_container_names` is a list of container names to target, in regular expression format.
+- `kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -387,7 +385,7 @@ Official integrations have their own dedicated directories. There's a default in
 [7]: /agent/kubernetes/#installation
 [8]: /getting_started/tagging/
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[10]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[10]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [11]: /resources/yaml/prometheus.yaml
 [12]: https://app.datadoghq.com/metric/summary
 [13]: /agent/faq/template_variables/

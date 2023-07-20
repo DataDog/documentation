@@ -38,7 +38,7 @@ x-cloak x-show="$store.integrationsModal.isOpen"
                 <div class="modal-items">
                     {{ range $idx, $elm := $media }}
                     <div
-                    id="{{add $idx 1}}-modal" 
+                    id="modal-item-{{add $idx 1}}" 
                     class="modal-item h-100 position-relative {{if $elm.vimeo_id}}video-item{{end}}" 
                     :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
                     x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})"
@@ -68,6 +68,7 @@ x-cloak x-show="$store.integrationsModal.isOpen"
                 <div class="modal-item-descriptions">
                     {{ range $idx, $el := $media }}
                     <div 
+                    id="modal-item-description-{{ add $idx 1 }}"
                     class="modal-item-description" 
                     :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
                     x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
@@ -84,10 +85,11 @@ x-cloak x-show="$store.integrationsModal.isOpen"
         </div>
 
         {{/*  ALL ITEMS  */}}
-        <div class="modal__all-items mx-auto">
+        <div class="modal-item-btns mx-auto">
             {{ range $idx, $elm := $media }}
             <button
-            class="modal__item p-0"
+            id="modal-item-btn-{{ add $idx 1 }}"
+            class="modal-item-btn p-0"
             :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
             @click="selectCarouselItem({{ $idx }})"
             :style="{backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"

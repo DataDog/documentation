@@ -266,18 +266,6 @@ When `true`, user principal is collected. Available for versions 0.61+.
 **Default**: `true`<br>
 When `true`, the tracer collects [telemetry data][6]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
-`dd.trace.128.bit.traceid.generation.enabled`
-: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
-**Default**: `false` <br>
-Enable generation of 128-bit trace IDs. By default, only 64-bit IDs are generated.
-
-`dd.trace.128.bit.traceid.logging.enabled`
-: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
-**Default**: `false` <br>
-Enable printing of the full 128-bit ID when formatting a span within logs using MDC.
-When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
-When true, the trace ID is printed as a full 128-bit ID in hexadecimal format, except if the ID itself is only 64 bits - in which case, it is formatted as an integer.
-
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
@@ -434,7 +422,7 @@ Available since version 1.9.0
 
 #### Deprecated extraction and injection settings
 
-These extraction and and injection settings for `b3` (both B3 multi header and B3 single header) are deprecated since version 1.9.0.
+These extraction and injection settings have been deprecated in favor of the `dd.trace.propagation.style.inject`, `dd.trace.propagation.style.extract`, and `dd.trace.propagation.style` settings since version 1.9.0. See [Propagating Java Trace Context][13]. The previous `b3` setting for both B3 multi header and B3 single header has been replaced with the new settings `b3multi` and `b3single`.
 
 `dd.propagation.style.inject`
 : **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
