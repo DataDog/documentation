@@ -2717,6 +2717,12 @@ components:
           type: array
         complianceSignalOptions:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -2777,9 +2783,16 @@ components:
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
+        agentConstraint:
+          description: The version of the agent.
+          type: string
         category:
           description: The category of the Agent rule.
           example: Process Activity
+          type: string
+        creationAuthorUuId:
+          description: The ID of the user who created the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
         creationDate:
           description: When the Agent rule was created, timestamp in milliseconds.
@@ -2808,6 +2821,15 @@ components:
           description: The name of the Agent rule.
           example: my_agent_rule
           type: string
+        updateAuthorUuId:
+          description: The ID of the user who updated the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
+          type: string
+        updateDate:
+          description: Timestamp in milliseconds when the Agent rule was last updated.
+          example: 1624366480320
+          format: int64
+          type: integer
         updatedAt:
           description: When the Agent rule was last updated, timestamp in milliseconds.
           example: 1624366480320
@@ -3527,6 +3549,11 @@ components:
         id:
           description: ID of the dashboard.
           example: q5j-nti-fv6
+          type: string
+        integration_id:
+          description: The short name of the integration.
+          nullable: true
+          readOnly: true
           type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
@@ -4443,6 +4470,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/EventAttributes'
+        message:
+          description: The message of the event.
+          type: string
         tags:
           description: An array of tags associated with the event.
           example:
@@ -4692,6 +4722,10 @@ components:
         request_id:
           description: The identifier of the request.
           example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          description: The request status.
+          example: done
           type: string
         warnings:
           description: 'A list of warnings (non-fatal errors) encountered. Partial
@@ -10880,6 +10914,10 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/RUMApplicationListAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
@@ -14391,6 +14429,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/ServiceDefinitionDataAttributes'
+        id:
+          description: Service definition id.
+          type: string
         type:
           description: Service definition type.
           type: string
@@ -14423,6 +14464,30 @@ components:
           type: string
         last-modified-time:
           description: Last modified time of the service definition.
+          type: string
+        origin:
+          description: User defined origin of the service definition.
+          type: string
+        origin-detail:
+          description: User defined origin's detail of the service definition.
+          type: string
+        warnings:
+          description: A list of schema validation warnings.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionMetaWarnings'
+          type: array
+      type: object
+    ServiceDefinitionMetaWarnings:
+      description: Schema validation warnings.
+      properties:
+        instance-location:
+          description: The warning instance location.
+          type: string
+        keyword-location:
+          description: The warning keyword location.
+          type: string
+        message:
+          description: The warning message.
           type: string
       type: object
     ServiceDefinitionRaw:
@@ -15157,6 +15222,17 @@ components:
           $ref: '#/components/schemas/SpansType'
       type: object
     SpansAggregateBucket:
+      description: Spans aggregate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAggregateBucketAttributes'
+        id:
+          description: ID of the spans aggregate.
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansAggregateBucketType'
+      type: object
+    SpansAggregateBucketAttributes:
       description: A bucket values.
       properties:
         by:
@@ -15167,6 +15243,9 @@ components:
             '@state': success
             '@version': abc
           type: object
+        compute:
+          description: The compute data.
+          type: object
         computes:
           additionalProperties:
             $ref: '#/components/schemas/SpansAggregateBucketValue'
@@ -15174,6 +15253,14 @@ components:
             of values for a timeseries.
           type: object
       type: object
+    SpansAggregateBucketType:
+      description: The spans aggregate bucket type.
+      enum:
+      - bucket
+      example: bucket
+      type: string
+      x-enum-varnames:
+      - BUCKET
     SpansAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -15360,6 +15447,10 @@ components:
           example:
             customAttribute: 123
             duration: 2345
+          type: object
+        custom:
+          additionalProperties: {}
+          description: JSON object of custom spans data.
           type: object
         end_timestamp:
           description: End timestamp of your span.
@@ -16822,6 +16913,8 @@ components:
         id:
           description: ID of the user invitation.
           type: string
+        relationships:
+          $ref: '#/components/schemas/UserInvitationRelationships'
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object

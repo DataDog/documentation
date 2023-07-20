@@ -46,13 +46,13 @@ cascade:
 {{< whatsnext desc="Azure guides:" >}}
     {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure manual setup guide{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native manual setup guide{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure status and count metrics{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Managing the Azure Native Integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Azure integration programmatic management guide{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Azure Native integration programmatic management guide{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Managing the Azure Native Integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework with Datadog{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure troubleshooting{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure architecture and configuration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure status and count metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Azure VMs appear in the app without metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Commands to install the Azure Datadog extension{{< /nextlink >}}

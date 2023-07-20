@@ -63,6 +63,7 @@ title: ダッシュボード
     {{< nextlink href="/dashboards/querying" >}}クエリ: グラフクエリのフォーマットオプションを見る{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions" >}}関数: メトリクスクエリや結果のグラフを修正する{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}テンプレート変数: ダッシュボードのウィジェットを動的にフィルターする{{< /nextlink >}}
+    {{< nextlink href="/dashboards/change_overlays" >}}オーバーレイ: 変更イベントをグラフに自動的にオーバーレイする{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: ダッシュボードをプログラムで管理する{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -167,7 +168,7 @@ tags:audit,dash
 
 {{< img src="dashboards/dashboard-menu-permissions.png" alt="ダッシュボードの設定メニュー" style="width:50%;">}}
 
-ポップアップを使用して、自分、自分のロールを持つ組織内の全員、または組織内の特定のロールにアクセスを制限することができます。
+ポップアップを使用して、ダッシュボードを編集できる 1 つまたは複数のロール、チーム (ベータ版)、ユーザー (ベータ版) を選択します。
 
 {{< img src="dashboards/access_popup.png" alt="ダッシュボードにアクセスするためのロールを選択するためのドロップダウンメニューを備えたダイアログボックス。" style="width:70%;">}}
 
