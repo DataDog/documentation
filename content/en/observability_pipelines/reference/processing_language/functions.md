@@ -1,0 +1,5 @@
+---
+title: Functions
+---
+
+Lorem ipsum
