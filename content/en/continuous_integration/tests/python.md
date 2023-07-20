@@ -92,7 +92,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Instrumenting pytest-benchmark tests
 
-To instrument your benchmark tests with `pytest-benchmark`, simply run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog will detect metrics from `pytest-benchmark` automatically:
+To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog detects metrics from `pytest-benchmark` automatically:
 
 ```python
 def square_value(value):
