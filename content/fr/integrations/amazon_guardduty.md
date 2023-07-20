@@ -6,22 +6,22 @@ categories:
 - security
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
-description: Rassemblez vos logs AWS GuardDuty.
+description: Rassemblez vos logs Amazon GuardDuty.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
 integration_id: amazon-guardduty
-integration_title: AWS GuardDuty
+integration_title: Amazon GuardDuty
 is_public: true
 kind: integration
 name: amazon_guardduty
-public_title: Intégration Datadog/AWS GuardDuty
-short_description: Rassemblez vos logs AWS GuardDuty.
+public_title: Intégration Datadog/Amazon GuardDuty
+short_description: Rassemblez vos logs Amazon GuardDuty.
 version: '1.0'
 ---
 
 ## Présentation
 
-Datadog s'intègre à AWS GuardDuty par l'intermédiaire d'une fonction Lambda qui transmet les résultats de GuardDuty à la solution Log Management de Datadog.
+Datadog s'intègre à Amazon GuardDuty par l'intermédiaire d'une fonction Lambda qui transmet les résultats de GuardDuty à la solution Log Management de Datadog.
 
 ## Configuration
 
