@@ -2,6 +2,8 @@
   <div class="row">
     <div class="col-12 order-1">
         <h1 id="pagetitle" class="newnew">{{ .Title }}</h1>
+        <p>{{ .Params.content | safeHTML }}</p>
+
     </div>
     <div class="col-12">
         {{ partial "breadcrumbs.html" . }}
@@ -9,29 +11,66 @@
   </div>
   {{ partial "translate_status_banner/translate_status_banner.html" . }} 
 
-  <div class="standard-attributes-main">
-    <p>{{ .Params.content | safeHTML }}</p>
-    <div>
-      <table class="standard-attributes-table">
+  {{ $products := slice }}
+  <div 
+  class="standard-attributes-main row"
+  x-data="{
+    filterValue: '',
+    resetFilteredList (selectedFilter) {
+      if (selectedFilter !== this.filterValue) {
+          this.filteredLetters = []
+      }
+    },
+    pushState (productParamValue) {
+      const newParam = `?product=${productParamValue}`
+      window.history.pushState({param: newParam },'', newParam)
+      window.scroll(0, 0)
+    },
+    shouldShowAttribute (productSource) {
+      return productSource.includes(this.filterValue)
+    }
+  }">
+    <div class="table-wrapper order-md-1">
+      <table>
         <thead class="table-header">
           <tr>
             <th>Source</th>
             <th>Attribute Name</th>
             <th>Type</th>
             <th>Description</th>
+            <th>Domain</th>
           </tr>
         </thead>
         <tbody class="table-body">
           {{ range .Params.attributes }}
-          <tr class="table-row">
-            <td>{{ .product_source | safeHTML }}</td>
+          {{ $product_source_string := (delimit .product_source ",") }}
+          <tr 
+          class="table-row"
+          x-cloak x-show="shouldShowAttribute('{{ $product_source_string }}')" 
+          x-transition.opacity.duration.250ms
+          >
+            <td>
+              {{ range .product_source }}
+                {{ if in . "icon-"}}
+                <i class="{{ . }}" title="{{ substr . 5 }}" style="font-size:18px;color:#7c3eb9;vertical-align:middle"></i> 
+                {{ else if eq . "*"}}
+                *
+                {{ else}}
+                {{/*  {{< img src="/integrations_logos/android-logo.png" alt="Android" style="width:100%;" >}}  */}}
+                {{ end }}
+              {{ end }}
+            </td>
             <td>{{ .name }}</td>
             <td>{{ .type }}</td>
             <td>{{ .description | markdownify }}</td>
+            <td>{{ .domain }}</td>
           </tr>
+            <!-- Build $products slice for filtering section (.filters-standard-attributes) -->
+          {{ $products = $products | append .product_source }}
           {{ end }}
         </tbody>
       </table>
+
       {{/*  <div class="standard-attributes-grid">
         <div class="grid-header">
           <span>Attribute Name</span>
@@ -49,6 +88,27 @@
         </div>
       </div>  */}}
     </div>
+
+    <nav id="standard-attributes-nav">
+      {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
+      <div class="filters-standard-attributes">
+        {{ if  $products }}
+            <button 
+            @click="resetFilteredList($el.dataset.filter); filterValue = ''; pushState('all')"
+            :class="(filterValue === 'all' || !filterValue) && 'active'"
+            class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
+        {{ end }}
+        {{ range $products | uniq | sort }}
+            <button 
+            @click="resetFilteredList('{{ . }}'); filterValue = '{{ . }}'; pushState('{{ . }}')"
+            :class="($el.dataset.filter === filterValue) && 'active'"
+            class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            data-filter="{{ . }}">{{ cond (eq . "*") "*" ((substr . 5) | upper) }}</button>
+        {{ end }}
+      </div>
+    </nav>
+
   </div>
 
 
