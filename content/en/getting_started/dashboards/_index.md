@@ -111,7 +111,7 @@ There are two ways to create links from a dashboard to any target URL:
 
 ### Share your dashboards outside of the Datadog site
 
-Click **Configure Public URL** in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][13]
+Click **Configure Public URL** in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][13].
 
 Integrate with your team communications by using the [Slack integration][14] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
 
