@@ -105,7 +105,7 @@ set to `always evaluate`, the rule is evaluated on all repositories and branches
 
 {{< img src="ci/rule_scope_always_evaluate.png" alt="Rule scope for rules always evaluated" style="width:90%;">}}
 
-The rules, which have a matching scope to the context of the `datadog-ci gate evaluate` command, are evaluated.
+When the `datadog-ci gate evaluate` command is invoked, the rules having a scope matching the command context are evaluated.
 
 For each scope (for example, `branch`), you can either select included or excluded values.
 When included values are selected, the rule is evaluated if one or more included values are part of the command context.
