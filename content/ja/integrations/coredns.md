@@ -39,7 +39,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 2.4.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -74,7 +74,7 @@ CoreDNS からリアルタイムにメトリクスを取得して、DNS エラ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 CoreDNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

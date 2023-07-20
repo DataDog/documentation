@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-cdn-performance-with-synthetic-testing/"
   tag: "Blog"
   text: "Monitor CDN performance within your Synthetic tests"
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
@@ -49,9 +52,15 @@ API tests allow you to launch [single][4] or [chained][5] requests to perform ve
 
 ## Record browser tests
 
-Use [Synthetic browser tests][14] to monitor how your customers experience your webpages from around the world with end-to-end tests.
+Use [Synthetic browser tests][14] to monitor how your customers experience your webpages end-to-end from around the world.
 
 {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+
+## Record mobile application tests
+
+Use [Synthetic mobile application tests][21] to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
+
+{{< img src="mobile_app_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
 ## Launch private locations
 
@@ -106,3 +115,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [18]: /getting_started/synthetics
 [19]: /getting_started/synthetics/private_location
 [20]: /continuous_testing/explorer/
+[21]: /mobile_testing

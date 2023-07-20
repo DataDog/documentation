@@ -218,43 +218,4 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
-    <tr>
-        <td rowspan="3">
-            Web Jobs
-        </td>
-        <td>
-            Standard + Premium
-        </td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-    </tr>
-    <tr>
-        <td>
-            Consumption
-        </td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-    </tr>
-    <tr>
-        <td>
-            App Service Environment (Isolated)
-        </td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-        <td>IM, IL</td>
-    </tr>
 </table>

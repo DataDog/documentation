@@ -39,9 +39,9 @@ Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使�
 
 {{< img src="security/cspm/findings/posture-management-overview3.png" alt="ポスチャ管理の診断結果ページの概要" style="width:100%;">}}
 
-発見を選択すると、そのルールで評価されたリソース、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。誤構成されたリソースの詳細を表示するには、**View Finding** をクリックします。
+発見を選択すると、そのルールで評価されたリソース、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。
 
-{{< img src="security/cspm/findings/finding-side-panel2.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
+{{< img src="security/cspm/findings/finding-side-panel3.png" alt="サイドパネルにある影響を受けたリソースのリスト" style="width:65%;">}}
 
 Security Findings Explorer で **Resources** でグループ化し、リソースを選択すると、そのリソースに対して評価されたコンプライアンスルールの全リストとそのステータスが表示されます。
 
@@ -59,12 +59,12 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 
 例えば、['Block Public Access' feature is enabled for S3 bucket][4] ルールは、S3 バケットが一般にアクセス可能かどうかを評価します。一般に共有されることを意図した静的アセットを持つ S3 バケットがある場合、その S3 バケットに対する発見をミュートすることができます。
 
-合格・不合格の発見は、いつでもミュートすることができます。発見をミュートすると、その発見はポスチャスコアの計算から除外されます。
+一度に最大 50 の発見をミュートすることができます。発見をミュートすると、その発見はポスチャスコアの計算から除外されます。
 
-{{< img src="security/cspm/findings/muted-findings2.png" alt="Mute findings ダイアログボックスには、ミュートの理由と期間を指定するためのフィールドがあります" style="width:100%;">}}
+{{< img src="security/cspm/findings/muted-findings2.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
-1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、リソースを選択します。
-2. **Mute** をクリックします。
+1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、1 つ以上のリソースを選択します。
+2. **Actions** > **Mute** を選択します。
 3. ミュートの理由を選択します。例えば、修正待ち、誤検出、受容されたリスクなどです。
 4. オプションで **Description** を入力します。
 5. ミュートの継続時間を選択します。
@@ -75,7 +75,7 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 ミュートされた発見は、指定されたミュート時間が経過すると自動的にミュートが解除されます。また、手動でミュートを解除することもできます。
 
 1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、ミュートされた発見のあるリソースを選択します。
-2. **Unmute** をクリックします。
+2. **Actions** > **Unute** を選択します。
 3. ミュート解除の理由を選択します。例えば、未解決の修正がない、ヒューマンエラーである、または受け入れ可能なリスクでなくなった、などです。
 4. オプションで **Description** を入力します。
 5. **Unmute** をクリックします。
@@ -91,7 +91,7 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 
 リソースの履歴を監査するには
 
-1. [発見サイドパネル](#explore-your-cloud-misconfigurations-with-findings)を開きます。
+1. [発見サイドパネル](#explore-your-cloud-misconfigurations)を開きます。
 2. ミュートされた発見のあるリソースを選択します。
 3. 発見ステータスが変更された場合は、**See Latest State** をクリックします。
 4. **View Finding** をクリックします。

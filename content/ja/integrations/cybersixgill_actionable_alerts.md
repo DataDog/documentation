@@ -83,7 +83,7 @@ Cybersixgill Actionable Alerts チェックでは、IP アドレス、ドメイ�
 ## セットアップ
 
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cybersixgill Actionable Alerts チェックをホストにインストールするには
 1. マシンに[開発者ツール][1]をインストールします。

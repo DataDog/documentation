@@ -284,7 +284,7 @@ Follow [these instructions][2] to install and configure the Ruby tracing library
 ### 3. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][10] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 

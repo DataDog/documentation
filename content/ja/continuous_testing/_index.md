@@ -1,4 +1,7 @@
 ---
+cascade:
+  algolia:
+    rank: 70
 description: CI/CD パイプラインで並行して実行される Continuous Testing のテスト数をカスタマイズして、テストカバレッジを向上させることができます。
 disable_sidebar: true
 further_reading:
@@ -53,7 +56,7 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 ## トラブルシューティングの高速化
 
-統一されたモニタリングプラットフォームでテストを実行することにより、失敗したテストの根本原因を迅速に発見し、MTTR を短縮することができます。Datadog [APM インテグレーション][12]によって表示される相関メトリクス、トレース、ログによって、ツールを切り替えることなくトラブルシューティングのための完全なコンテキストを取得することができ、[Continuous Testing Explorer][11] で実行ジョブを見ることでができます。
+統一された監視プラットフォームでテストを実行することで、失敗したテスト実行の根本原因を迅速に見つけ、MTTR を短縮することができます。Datadog の [APM インテグレーション][12]や[Continuous Testing Explorer][11] で実行されたジョブを確認することで、関連するメトリクス、トレース、ログが表示され、ツールを切り替えることなく、トラブルシューティングのための完全なコンテキストを得ることができます。
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="Continuous Testing エクスプローラーの CI バッチ" style="width:100%;">}}
 

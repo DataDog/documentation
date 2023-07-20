@@ -78,7 +78,7 @@ Rollups should usually be avoided in [monitor][5] queries, because of the possib
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /dashboards/functions/#proceed-to-time-aggregation
+[1]: /dashboards/functions/#add-a-function
 [2]: /metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [4]: /metrics/custom_metrics/type_modifiers/

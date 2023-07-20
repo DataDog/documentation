@@ -72,7 +72,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Postfix チェックは [Datadog Agent][2] パッケージに含まれています。Postfix サーバーに追加でインストールする必要はありません。
 
