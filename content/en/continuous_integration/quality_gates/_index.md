@@ -26,7 +26,7 @@ This allows you to ensure that the code running in production is meeting high qu
 ## Set up Quality Gates
 
 There are two main steps required to set up Quality Gates:
-1. Create one or more rules.
+1. Create one or more rules in Datadog's UI.
 2. Add the `datadog-ci gate evaluate` command in your CI pipeline.
 
 ## Create a rule
