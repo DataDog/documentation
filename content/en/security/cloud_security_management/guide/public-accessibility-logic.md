@@ -22,7 +22,7 @@ Use this diagram as a reference for how resources are correlated to determine pu
 
 **Note**: Not all resources with the Publicly Accessible attribute are shown in this diagram.
 
-{{< img src="security/cloud_security_management/guide/public_accessibility_relationships.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility" width="75%">}}
+{{< img src="security/cloud_security_management/guide/public_accessibility_relationships.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility" width="100%">}}
 
 ## Public accessibility logic by resource
 
@@ -42,7 +42,7 @@ An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 |The bucket’s `public_access_block_configuration` AND the bucket account’s public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
 |The bucket’s grant list contains a uri value of `http://acs.amazonaws.com/groups/global/AllUsers` or `/AuthenticatedUsers`. |`AllUsers` gives anyone in the world access to the bucket. `AuthenticatedUsers` gives any AWS authenticated user in the world access to the bucket. |
 
-**OR**
+***OR***
 
 * _Bucket Policy-determined access:_
 
@@ -107,18 +107,6 @@ An [RDS DB Snapshot][16] (`aws_rds_db_snapshot`) is considered publicly accessib
 
 See [Sharing a DB snapshot][17] for more information.
 
-### Amazon EC2 Instance
-
-An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
-
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|It has one or more [public IP addresses][18].|A public IP address allows your instance to be reached from the internet.|
-|It's in a public [subnet][4].|-|
-|It's associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
-
-See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access.
-
 ### Amazon Elastic Load Balancer
 
 An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if:
@@ -128,7 +116,42 @@ An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if:
 |The [scheme][21] is set to `internet-facing`.|The scheme determines whether the load balancer is an internal load balancer or an internet-facing load balancer.|
 |It is associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all ip addresses are able to gain access. |
 
-See [Internet-facing Classic Load Balancers][20] for more information.
+See [Create an Application Load Balancer][20] for more information about internet-facing load balancers.
+
+### Amazon EC2 Instance
+
+An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
+
+* _“Public subnet”-determined access:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|It has one or more [public IP addresses][18].|A public IP address allows your instance to be reached from the internet.|
+|It's in a public [subnet][4].|-|
+|It's associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
+
+***OR***
+
+* _ELB-determined access through autoscaling group:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|A security group (call it `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`|This opens the load balancer to incoming traffic from the internet on a specific port|
+|The load balancer has a listener accepting traffic on port `X`|A [listener][37] is a process that checks for connection requests, using the protocol and port that you configure|
+|The load balancer has a target group forwarding traffic to some port `Y`|[Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify|
+|An autoscaling group is attached to the load balancer’s target group|-|
+|The EC2 instance is part of the autoscaling group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (e.g. `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|This opens the EC2 instance to traffic coming from the load balancer. The security group must allow traffic from the load balancer, and thus must be open either to all IPs, all IPs in the VPC, or that specific security group.|
+
+***OR***
+
+* _ELB-determined access through target group alone:_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|Criteria 1, 2 and 3 from above (_ELB-determined access through autoscaling group_) apply|-|
+|The EC2 instance is listed as a target of the target group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (e.g. `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|Because the instance is listed as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group allows traffic from the load balancer.|
+
+See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
 ### Amazon Elasticsearch Domain
 
@@ -206,7 +229,7 @@ See [Amazon SQS security best practices][33] for more information about public S
 [17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html
 [18]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses
 [19]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html
-[20]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-internet-facing-load-balancers.html
+[20]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html
 [21]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
 [22]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
 [23]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html#vpc-architecture
@@ -222,3 +245,6 @@ See [Amazon SQS security best practices][33] for more information about public S
 [33]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-security-best-practices.html
 [34]: https://docs.aws.amazon.com/
 [35]: https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html
+[36]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html
+[37]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
+[38]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
