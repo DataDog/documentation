@@ -38,6 +38,7 @@ instances:
     password: '<PASSWORD>'
     dbm: true
     tags:  # Optional
+      - rac_cluster:<CLUSTER_NAME>
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<RAC_NODE_2>:<PORT>'
