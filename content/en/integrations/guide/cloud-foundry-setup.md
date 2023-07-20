@@ -25,7 +25,7 @@ Read the [Datadog VMware Tanzu Application Service architecture][32] guide for m
 
 Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
 
-### Pivotal Cloud Foundry Platform >= 1.12
+### Multiple Buildpacks (recommended)
 
 1. Download the [latest Datadog buildpack release][7] and upload it to your Cloud Foundry environment.
 
@@ -42,7 +42,7 @@ Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applic
 
       **Note**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
 
-### Pivotal Cloud Foundry Platform < 1.12
+### Multi-Buildpack (deprecated)
 
 The Datadog buildpack uses the Cloud Foundry [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
 
@@ -63,7 +63,6 @@ For older versions, Cloud Foundry provides a backwards compatible version of thi
     ```
 
       The URLs for the Datadog Buildpack are:
-
       - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
       - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
