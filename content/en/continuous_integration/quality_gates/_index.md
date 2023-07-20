@@ -76,11 +76,11 @@ DD_BETA_COMMANDS_ENABLED=true DATADOG_API_KEY=<API_KEY> DATADOG_APP_KEY=<APP_KEY
 {{< /code-block >}}
 
 The behavior of the command can be modified using the following flags:
-- **--fail-on-empty**: when this flag is specified, the command fails if no matching rules were found in Datadog
+- --fail-on-empty: when this flag is specified, the command fails if no matching rules were found in Datadog
 based on the current command scope. By default, the command succeeds.
-- **--fail-if-unavailable**: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
+- --fail-if-unavailable: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
-- **--no-wait**: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
+- --no-wait: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluation. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
@@ -99,8 +99,8 @@ about all the rules that were evaluated.
 
 ## Rule scope
 
-When creating a rule, you can define a scope, which states when the rule should be evaluated. 
-The rules, which have a matching scope to the context of the `datadog-ci gate evaluate` command, are evaluated. 
+When creating a rule, you can define a scope, which states when the rule should be evaluated.
+The rules, which have a matching scope to the context of the `datadog-ci gate evaluate` command, are evaluated.
 
 For each scope (for example, `branch`), you can either select included or excluded values.
 When included values are selected, the rule is evaluated if one or more included values are part of the command context.
