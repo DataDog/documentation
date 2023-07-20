@@ -70,9 +70,11 @@ The command requires the `DATADOG_API_KEY` and `DATADOG_APP_KEY` environment var
 and [Datadog Application Key][6]. Also, you need to set the `DD_BETA_COMMANDS_ENABLED` environment
 variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
 
-{{< code-block lang="shell" >}}
-DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DATADOG_API_KEY=<API_KEY> DATADOG_APP_KEY=<APP_KEY> datadog-ci gate evaluate
-{{< /code-block >}}
+<pre>
+<code>
+DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DATADOG_API_KEY=&lt;API_KEY&gt; DATADOG_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
+</code>
+</pre>
 
 The behavior of the command can be modified using the following flags:
 - --fail-on-empty: when this flag is specified, the command fails if no matching rules were found in Datadog
