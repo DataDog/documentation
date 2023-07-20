@@ -126,7 +126,7 @@ To add a custom scope when creating a rule:
 2. Define the scope name, for example, `team`.
 3. Define the scope's included or excluded values.
 
-Unliked the `branch` and `repository` scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the **--scope** option.
+Unlike the `branch` and `repository` scopes, custom scopes need to be provided in the `datadog-ci gate evaluate` command using the **--scope** option.
 For example, you can create a rule that is evaluated for the `example-repository` repository, but only when the team is `backend`:
 
 {{< img src="ci/rule_scope_example_repository_team_backend.png" alt="Rule scope for example-repository and team backend" style="width:90%;">}}
