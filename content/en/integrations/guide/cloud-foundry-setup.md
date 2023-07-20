@@ -87,6 +87,7 @@ If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a deco
 There are two points of integration with Datadog, each of which achieves a different goal:
 
 - **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
+- **Datadog Cluster Agent BOSH release** - Install the Datadog Cluster Agent on a BOSH managed VM in your deployment to collect cluster-level and application-level metadata for improved tagging capabilities in your applications and containers.
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
