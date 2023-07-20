@@ -19,7 +19,7 @@ If the configurations described here do not cover your compliance requirements, 
 
 ### Personal information in trace data
 
-Datadog’s APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, we can group data into categories with a focus on attributes that may contain personal information about your employees and end-users. 
+Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users. 
 
 The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed. 
 
@@ -132,7 +132,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% /tabs %}}
 
-If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM will automatically redact certain data and allows users to configure their own detection rules. You can learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
+If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
 
 ## Agent
 
@@ -423,7 +423,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 
 ### HTTP
 
-Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries support a number of configuration options to control sensitive data collected in HTTP spans.
+Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
     
 #### Redact query strings
 
