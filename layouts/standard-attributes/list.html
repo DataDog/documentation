@@ -13,24 +13,23 @@
 
   {{ $products := slice }}
   <div 
-  class="standard-attributes-main row"
+  class="standard-attributes-main row w-100"
   x-data="{
     filterValue: '',
-    resetFilteredList (selectedFilter) {
-      if (selectedFilter !== this.filterValue) {
-          this.filteredLetters = []
-      }
-    },
-    pushState (productParamValue) {
-      const newParam = `?product=${productParamValue}`
-      window.history.pushState({param: newParam },'', newParam)
+    queryValue: '',
+    pushState (productParamValue, isFiltered=true) {
+      const newParam = isFiltered ? `?product=${productParamValue}`: `?search=${productParamValue}`
+      window.history.replaceState({param: newParam },'', newParam)
       window.scroll(0, 0)
     },
-    shouldShowAttribute (productSource) {
-      return productSource.includes(this.filterValue)
+    shouldShowAttribute (dataset) {
+      const queryValues = this.queryValue.split(' ')
+      //return dataset.includes(this.filterValue)
+      return queryValues.some(word => dataset.includes(word))
     }
   }">
-    <div class="table-wrapper order-md-1">
+    <div 
+    class="table-wrapper order-md-1">
       <table>
         <thead class="table-header">
           <tr>
@@ -43,10 +42,15 @@
         </thead>
         <tbody class="table-body">
           {{ range .Params.attributes }}
-          {{ $product_source_string := (delimit .product_source ",") }}
+
+          {{/*  concatenating the attr info  */}}
+          {{ $pad := newScratch }}
+          {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replace .description ";" "")) }}
+          {{ $attribute_info := delimit ($pad.Get "attribute_info") ";" }}
+
           <tr 
           class="table-row"
-          x-cloak x-show="shouldShowAttribute('{{ $product_source_string }}')" 
+          x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')" 
           x-transition.opacity.duration.250ms
           >
             <td>
@@ -70,43 +74,33 @@
           {{ end }}
         </tbody>
       </table>
-
-      {{/*  <div class="standard-attributes-grid">
-        <div class="grid-header">
-          <span>Attribute Name</span>
-          <span>Type</span>
-          <span>Description</span>
-        </div>
-        <div class="grid-body">
-          {{ range $idx, $attr := .Params.attributes }}
-          <div class="grid-row {{ if (modBool $idx 2) }}even{{ end }}">
-            <span>{{ $attr.name }}</span>
-            <span>{{ $attr.type }}</span>
-            <span>{{ $attr.description }}</span>
-          </div>
-          {{ end }}
-        </div>
-      </div>  */}}
     </div>
 
-    <nav id="standard-attributes-nav">
+    <nav id="standard-attributes-nav" class="mb-3">
       {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
       <div class="filters-standard-attributes">
         {{ if  $products }}
             <button 
-            @click="resetFilteredList($el.dataset.filter); filterValue = ''; pushState('all')"
+            @click="filterValue = ''; pushState('all')"
             :class="(filterValue === 'all' || !filterValue) && 'active'"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
         {{ end }}
         {{ range $products | uniq | sort }}
             <button 
-            @click="resetFilteredList('{{ . }}'); filterValue = '{{ . }}'; pushState('{{ . }}')"
+            @click="filterValue = '{{ . }}'; pushState('{{ . }}')"
             :class="($el.dataset.filter === filterValue) && 'active'"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             data-filter="{{ . }}">{{ cond (eq . "*") "*" ((substr . 5) | upper) }}</button>
         {{ end }}
       </div>
+      {{/*  SEARCH  */}}
+      <form 
+      class="search-standard-attributes mt-2"
+      @submit.prevent="pushState(queryValue, false)">
+        {{/*  when i click submit, i want the value to   */}}
+        <input type="text" placeholder="Search here" class="w-100" x-model="queryValue">
+      </form>
     </nav>
 
   </div>
