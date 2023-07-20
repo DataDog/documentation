@@ -16907,6 +16907,8 @@ components:
         id:
           description: ID of the user invitation.
           type: string
+        relationships:
+          $ref: '#/components/schemas/UserInvitationRelationships'
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object

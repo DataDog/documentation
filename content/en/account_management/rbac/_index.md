@@ -183,7 +183,7 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 ## Restrict access to individual resources (granular access controls)
 
-Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of a dashboard to administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
+Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of payment methods to billing administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
 
 
 | Supported Resources with Granular Access Control | Team-Based Access | Role-Based Access | User / Service Account-Based Access |
