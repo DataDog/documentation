@@ -33,32 +33,49 @@ further_reading:
     text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
 ---
 
-## Overview
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
+CSM leverages the Datadog Agent and platform-wide cloud integrations. It includes:
 
-Cloud Security Management includes [Misconfigurations](#cloud-security-posture-management), and [Threats](#cloud-workload-security).
+- [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
+- [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
+- **Vulnerabilities**: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
+- **Identities**: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 
-{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
-## Misconfigurations
+## Prioritize and remediate important security issues
 
-[CSM Misconfigurations][1] tracks the security hygiene and compliance posture of your production environment, can automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria.
+The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as publicly accessible, privileged role, and production environment.
 
-{{< img src="security/cspm_overview.png" alt="Cloud Security Posture Management scores in Datadog" width="100%">}}
+When remediated, these issues can meaningfully improve your organization's security. Use the inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
 
-## Threats
+{{< img src="security/csm/security_inbox.png" alt="The security inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
 
-[CSM Threats][2] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. CSM Threats uses the unified Datadog Agent, so if you're already using Datadog to monitor your environment, there's no need to provision additional resources.
+## Track your organization's health
 
-{{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
+Available for [CSM Misconfigurations][2] and CSM Identities, the posture and identity health scores help you track your organization's overall health.
 
-To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
+- **Posture score**: The percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+- **Identity health score**: The percentage of your IAM resources that are configured securely.
+
+The scores automatically update as you resolve your organization's identity risk detections and security posture findings. Muting a finding or detection also removes it from the calculation of the score.
+
+**SCREENSHOT HERE**
+
+## Explore issues in-depth using explorers
+
+Use the Explorers to ...
+
+## Next steps
+
+To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed information on how to set up and configure CSM.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cspm/
-[2]: /security/cloud_workload_security/
+[1]: /security/cloud_workload_security/
+[2]: /security/cspm/
 [3]: https://app.datadoghq.com/security/configuration
+[4]: https://app.datadoghq.com/security/
