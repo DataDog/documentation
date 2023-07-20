@@ -122,7 +122,7 @@ See [Create an Application Load Balancer][20] for more information about interne
 
 An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
-* _“Public subnet”-determined access:_
+* _"Public subnet"-determined access:_
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
