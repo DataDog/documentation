@@ -2717,6 +2717,12 @@ components:
           type: array
         complianceSignalOptions:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -16907,6 +16913,8 @@ components:
         id:
           description: ID of the user invitation.
           type: string
+        relationships:
+          $ref: '#/components/schemas/UserInvitationRelationships'
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object
@@ -17193,33 +17201,28 @@ components:
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
+            incident_notification_settings_write: Configure Incidents Notification
+              settings.
             incident_read: View incidents in Datadog.
-            incident_settings_write: Configure Incidents settings.
+            incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
-            metric_tags_write: Create and edit tag configurations for custom metrics.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. The ability to write monitors is not required to set
-              downtimes.
+              an organization. Mute and unmute hosts. The ability to write monitors
+              is not required to set downtimes.
             monitors_read: View monitors.
-            org_management: Edit organization configurations, including authentication
-              and certain security preferences.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
-            security_monitoring_findings_write: Mute CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
-            synthetics_default_settings_read: View the default settings for Synthetic
-              Monitoring.
-            synthetics_default_settings_write: Create and edit default settings for
-              Synthetic Monitoring.
-            teams_manage: Manage Teams. Create, delete, rename, and edit the metadata
+            synthetics_read: List and view configured Synthetic tests and test results.
+            synthetics_write: Create, edit, and delete Synthetic tests.
+            teams_manage: Manage Teams. Create, delete, rename, and edit metadata
               of all Teams. To control Team membership across all Teams, use the User
               Access Manage permission.
-            teams_read: Read Teams data. View Team names, metadata, and which users
-              are on each Team.
+            teams_read: Read Teams data. A User with this permission can view Team
+              names, metadata, and which Users are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -17461,10 +17464,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all span-based metrics
       tags:
       - Spans Metrics
@@ -17561,10 +17560,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a span-based metric
       tags:
       - Spans Metrics
@@ -18982,7 +18977,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_read
+        - monitors_downtime
       summary: Get all downtimes
       tags:
       - Downtimes
@@ -21257,11 +21252,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - org_management
       summary: Get IP Allowlist
       tags:
       - IP Allowlist
@@ -21292,11 +21282,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - org_management
       summary: Update IP Allowlist
       tags:
       - IP Allowlist
@@ -23112,7 +23097,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - metrics_read
       summary: List tags by metric name
       tags:
       - Metrics
@@ -23729,7 +23715,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_read
+        - monitors_downtime
       summary: Get active downtimes for a monitor
       tags:
       - Downtimes
@@ -23769,7 +23755,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List permissions
       tags:
       - Roles
@@ -24228,8 +24215,6 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - timeseries_query
-        - metrics_read
-        - metric_tags_write
       summary: Query timeseries data across multiple products
       tags:
       - Metrics
@@ -24405,7 +24390,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List roles
       tags:
       - Roles
@@ -24529,7 +24515,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get a role
       tags:
       - Roles
@@ -24736,7 +24723,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List permissions for a role
       tags:
       - Roles
@@ -24903,7 +24891,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get all users of a role
       tags:
       - Roles

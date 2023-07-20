@@ -3339,12 +3339,43 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
     weight: 6
+  - name: Mobile Application Testing
+    url: mobile_testing/
+    parent: ux_monitoring_heading
+    identifier: mobile_testing
+    pre: mobile
+    weight: 210000
+  - name: Mobile App Tests
+    url: /mobile_testing/mobile_app_tests
+    parent: mobile_testing
+    identifier: mobile_testing_mobile_app_tests
+    weight: 1
+  - name: Test Steps
+    url: /mobile_testing/mobile_app_tests/steps
+    parent: mobile_testing_mobile_app_tests
+    identifier: mobile_testing_mobile_app_tests_steps
+    weight: 101
+  - name: Test Results
+    url: /mobile_testing/mobile_app_tests/results
+    parent: mobile_testing_mobile_app_tests
+    identifier: mobile_testing_mobile_app_tests_results
+    weight: 102
+  - name: Advanced Options for Steps
+    url: /mobile_testing/mobile_app_tests/advanced_options
+    parent: mobile_testing_mobile_app_tests
+    identifier: mobile_testing_mobile_app_tests_advanced_options
+    weight: 103
+  - name: Settings
+    url: /mobile_testing/settings
+    parent: mobile_testing
+    identifier: mobile_testing_settings
+    weight: 2
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 210000
+    weight: 220000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -3739,7 +3770,7 @@ main:
     pre: network
     identifier: nm_parent
     parent: infrastructure_heading
-    weight: 220000
+    weight: 230000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -3979,13 +4010,13 @@ main:
     pre: api
     identifier: api
     parent: essentials_heading
-    weight: 220000
+    weight: 240000
   - name: CoScreen
     url: coscreen/
     pre: coscreen
     identifier: coscreen
     parent: essentials_heading
-    weight: 230000
+    weight: 250000
   - name: Troubleshooting
     url: coscreen/troubleshooting
     identifier: coscreen_troubleshooting
@@ -3996,7 +4027,7 @@ main:
     pre: cog-2
     identifier: account_management
     parent: administration_heading
-    weight: 230000
+    weight: 260000
   - name: Switching Between Orgs
     url: account_management/org_switching/
     parent: account_management
@@ -4127,7 +4158,7 @@ main:
     pre: security-lock
     identifier: data_security
     parent: administration_heading
-    weight: 240000
+    weight: 270000
   - name: Agent
     url: data_security/agent/
     parent: data_security

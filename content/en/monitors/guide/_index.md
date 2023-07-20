@@ -39,6 +39,7 @@ cascade:
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}
