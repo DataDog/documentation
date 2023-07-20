@@ -2,6 +2,7 @@
 title: New Service Page and Service Types
 kind: Guide
 disable_toc: false
+private: true
 further_reading:
 - link: "/tracing/services/"
   tag: "Documentation"
