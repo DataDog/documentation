@@ -2717,6 +2717,12 @@ components:
           type: array
         complianceSignalOptions:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         isEnabled:
           description: Whether the rule is enabled.
           example: true
