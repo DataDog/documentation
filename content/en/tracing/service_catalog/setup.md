@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/github"
   tag: "Documentation"
   text: "Learn about the GitHub Integration"
+- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+  tag: "Blog"
+  text: "Import Backstage YAML files into Datadog"
 ---
 
 ## Overview
