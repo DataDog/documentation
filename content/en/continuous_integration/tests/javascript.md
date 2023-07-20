@@ -63,49 +63,19 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 
 {{< tabs >}}
 
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
+{{% ci-agent %}}
 
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the environment variables in the build pods to communicate with the local Datadog Agent.
-
-If you are not using Kubernetes or can't use [Datadog Admission Controller][2] and the CI provider is using a container-based executor, set the `DD_TRACE_AGENT_URL` environment variable (which defaults to `http://localhost:8126`) in the build container running the tracer to an endpoint that is accessible from within that container. _Note that using `localhost` inside the build references the container itself and not the underlying worker node or any container where the Agent might be running_.
-
-`DD_TRACE_AGENT_URL` includes the protocol and port (for example, `http://localhost:8126`) and takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`, and is the recommended configuration parameter to configure the Datadog Agent's URL for CI Visibility.
-
-If you still have issues connecting to the Datadog Agent, use the [Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method). **Note**: by using this method, there will be no correlation between tests and infrastructure metrics.
-
-
-[1]: /agent
-[2]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
 
-If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
+{{% ci-agentless %}}
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][1] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-Additionally, configure which [Datadog site][2] to which you want to send data.
-
-`DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Installing the JavaScript tracer
@@ -153,7 +123,23 @@ You can add custom tags to your tests by using the current active span:
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
+
+### Adding custom metrics to tests
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```javascript
+  it('sum function can sum', () => {
+    const testSpan = require('dd-trace').scope().active()
+    testSpan.setTag('memory_allocations', 16)
+    // test continues normally
+    // ...
+  })
+```
+Read more about custom metrics in [Add Custom Metrics Guide][2].
+
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -177,6 +163,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 Custom tags are not supported for Playwright.
 
+### Adding custom metrics to tests
+
+Custom metrics are not supported for Playwright.
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -211,14 +200,30 @@ You can add custom tags to your test by grabbing the current active span:
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
+
+### Adding custom metrics to tests
+
+You may also add custom metrics to your test by grabbing the current active span:
+
+```javascript
+  When('the function is called', function () {
+    const stepSpan = require('dd-trace').scope().active()
+    testSpan.setTag('memory_allocations', 16)
+    // test continues normally
+    // ...
+  })
+```
+Read more about custom metrics in [Add Custom Metrics Guide][2]
+
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
 
 ### Cypress version 10 or later
 
-Use the Cypress API documentation to [learn how to write plugins][101] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -265,7 +270,7 @@ module.exports = defineConfig({
 
 These are the instructions if you're using a version older than `cypress@10`.
 
-1. Set [`pluginsFile`][102] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][103]:
+1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
    {{< code-block lang="json" filename="cypress.json" >}}
    {
      "pluginsFile": "dd-trace/ci/cypress/plugin"
@@ -281,7 +286,7 @@ These are the instructions if you're using a version older than `cypress@10`.
    {{< /code-block >}}
    <div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
-2. Add the following line to the **top level** of your [`supportFile`][104]:
+2. Add the following line to the **top level** of your [`supportFile`][4]:
    {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
    // Your code can be before this line
    // require('./commands')
@@ -307,34 +312,51 @@ For example:
 ```javascript
 beforeEach(() => {
   cy.task('dd:addTags', {
-    'before.each':
-    'certain.information'
+    'before.each': 'certain.information'
   })
 })
 it('renders a hello world', () => {
   cy.task('dd:addTags', {
-    'team.owner': 'ui',
-    'test.importance': 3
+    'team.owner': 'ui'
   })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][105] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
+
+### Adding custom metrics to tests
+
+To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
+
+For example:
+
+```javascript
+it('renders a hello world', () => {
+  cy.task('dd:addTags', {
+    'memory_allocations': 16
+  })
+  cy.get('.hello-world')
+    .should('have.text', 'Hello World')
+})
+```
+
+Read more about custom metrics in [Add Custom Metrics Guide][6].
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][106], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][107].
+If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
 
 
-[101]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
-[102]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[103]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[104]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[105]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[106]: /real_user_monitoring/browser/#setup
-[107]: /continuous_integration/guides/rum_integration/
+[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[3]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[7]: /real_user_monitoring/browser/#setup
+[8]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -382,55 +404,7 @@ The following is a list of the most important configuration settings that can be
 
 All other [Datadog Tracer configuration][7] options can also be used.
 
-## Collecting Git metadata
-
-Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
-
-If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
-
-`DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
-**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.<br/>
-**Example**: `develop`
-
-`DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
-**Example**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: Full commit hash.<br/>
-**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: Commit message.<br/>
-**Example**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.<br/>
-**Example**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.<br/>
-**Example**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.<br/>
-**Example**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.<br/>
-**Example**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
+{{% ci-git-metadata %}}
 
 ## Git metadata upload
 
@@ -447,7 +421,9 @@ From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uplo
   <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use Jest, Mocha, Cypress, Playwright, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+
+Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
 The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
 
@@ -555,12 +531,12 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=c
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
+[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][9] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][9].
+If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
 
 ### Cypress interactive mode
 
@@ -619,14 +595,7 @@ forEach([
 
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
-## Information collected
-
-When CI Visibility is enabled, the following data is collected from your project:
-
-* Test names and durations.
-* Predefined environment variables set by CI providers.
-* Git commit history including the hash, message, author information, and files changed (without file contents).
-* Information from the CODEOWNERS file.
+{{% ci-information-collected %}}
 
 In addition to that, if [Intelligent Test Runner][20] is enabled, the following data is collected from your project:
 
@@ -645,9 +614,9 @@ In addition to that, if [Intelligent Test Runner][20] is enabled, the following 
 [6]: https://istanbul.js.org/
 [7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: /continuous_integration/guides/rum_integration/
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
+[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[10]: /real_user_monitoring/browser/
+[11]: /continuous_integration/guides/rum_integration/
 [12]: https://docs.cypress.io/api/plugins/before-run-api
 [13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
 [14]: https://docs.cypress.io/api/plugins/after-run-api

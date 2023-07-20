@@ -44,7 +44,7 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.4.2
+integration_version: 5.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -85,7 +85,7 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
@@ -542,7 +542,7 @@ Elasticsearch チェックは、Elasticsearch クラスターの全体的なス�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/elastic/images/elasticsearch-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
 [5]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/

@@ -126,4 +126,4 @@ Each color block represents a unique tag value for each tag.
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
 [2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-[3]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
+[3]: https://docs.datadoghq.com/getting_started/tagging/#define-tags

@@ -16,6 +16,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: IBM ACE
+  logs:
+    source: ibm_ace
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -71,6 +73,10 @@ tile:
 
 IBM ACE からメトリクスメッセージを消費するためには、[IBM MQ][3] サーバーが必要です。
 
+<div class="alert alert-warning">
+Linux の場合は、先に進む前に、必ず<a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ のセットアップ</a>の説明に従って環境変数 LD_LIBRARY_PATH を設定してください。
+</div>
+
 ### IBM ACE
 
 1. バージョン 12.0.2.0 以上がインストールされていることを確認します。
@@ -121,12 +127,12 @@ IBM ACE からメトリクスメッセージを消費するためには、[IBM M
     ```
 5. IBM ACE を再起動します。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 IBM ACE チェックは [Datadog Agent][6] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 1. ibm_ace のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_ace.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_ace.d/conf.yaml][7] を参照してください。
 
@@ -149,6 +155,25 @@ IBM ACE インテグレーションには、イベントは含まれません。
 ### サービスのチェック
 {{< get-service-checks-from-git "ibm_ace" >}}
 
+
+### ログの収集
+
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+
+    ```yaml
+    logs_enabled: true
+    ```
+
+2. IBM ACE のログの収集を開始するには、次のコンフィギュレーションブロックを `ibm_ace.d/conf.yaml` ファイルに追加します。
+
+    ```yaml
+    logs:
+      - type: file
+        path: /home/aceuser/ace-server/log/integration_server.txt
+        source: ibm_ace
+    ```
+
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`ibm_ace.d/conf.yaml` ファイルのサンプル][7]を参照してください。
 
 ## トラブルシューティング
 

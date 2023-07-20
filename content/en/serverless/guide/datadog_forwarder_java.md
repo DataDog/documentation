@@ -53,21 +53,12 @@ dependencies {
 
 ### Instrument
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
+
 1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
     ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
-
-    ```yaml
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:<VERSION>
-    ```
-{{< /site-region >}}
 
 2. Configure the following environment variables on your function:
 
@@ -207,17 +198,10 @@ Then redeploy your Lambda function.
 
 If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` Lambda layer and change it to:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ```
-{{< /site-region >}}
 
-{{< site-region region="ap1" >}}
-```
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:4
-```
-{{< /site-region >}}
 
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics
