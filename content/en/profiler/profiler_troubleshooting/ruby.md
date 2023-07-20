@@ -69,7 +69,7 @@ Rarely, native extensions or libraries called by them may have missing or incorr
 The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
-* [Using the `passenger` gem/Phusion Passenger web server.][11] (Auto-detected starting from 1.13.0+)
+* [Using the `passenger` gem/Phusion Passenger web server][11] (Auto-detected starting from 1.13.0 or later).
 
 In these cases, the profiler automatically detects the incompatibility and applies a workaround.
 
