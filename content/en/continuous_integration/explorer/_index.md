@@ -72,7 +72,7 @@ An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, whi
 Test run data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: https://app.datadoghq.com/dashboards/list
+[102]: https://app.datadoghq.com/dashboard/lists
 [103]: https://app.datadoghq.com/notebook/list
 [104]: https://learn.microsoft.com/en-us/visualstudio/test/create-a-unit-test-project?view=vs-2022#to-create-a-unit-test-project
 [105]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
@@ -106,13 +106,10 @@ You can see aggregated data about pipeline executions over the selected time fra
 
 Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, and more.)
 
-{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs" style="width:100%;">}}
+{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs for Duration, Errored, and Executions" style="width:100%;">}}
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [**Analytics**][105] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
-
-{{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
 CI pipeline data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
