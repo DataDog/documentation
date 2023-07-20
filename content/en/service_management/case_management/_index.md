@@ -70,7 +70,13 @@ By default, cases have a 15-month retention policy which can be extended if need
 
 ## Workflow automation
 
-Automate the creation of cases. In a new or existing workflow, add a step in the [workflow builder][5] and search for "case management". Select **Create Case** or **Update the status from a Case**.
+Automate the creation of cases. In a new or existing workflow, add a step in the [workflow builder][5] and search for "case management". Select the **Create Case** action or **Update the status from a Case**. 
+
+To attach associated monitors to your case, add the monitor URL link in the Workflows Create Case action in the **Attachment Links** field.
+
+{{< img src="service_management/case_management/workflows_attachment_link.png" alt="Add monitor links in the Workflows Create Case action in the Attachment Links field" style="width:100%;" >}}
+
+If the case is created from a **Monitor or Security signal** trigger, the URL is available in the **Source** tab of the trigger.
 
 ## Take action
 
