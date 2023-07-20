@@ -21,7 +21,7 @@ If the configurations described here do not cover your compliance requirements, 
 
 Datadog’s APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, we can group data into categories with a focus on attributes that may contain personal information about your employees and end-users. 
 
-The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries. 
+The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed. 
 
 | Category            | Description                                                                                                            |
 |:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
@@ -132,7 +132,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% /tabs %}}
 
-If you have enabled the Application Security Management product, the tracing libraries collect HTTP request data to help you understand why the request was flagged as suspicious. You can read more about [data privacy][13] in the Application Security Management product.
+If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM will automatically redact certain data and allows users to configure their own detection rules. You can learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
 
 ## Agent
 
