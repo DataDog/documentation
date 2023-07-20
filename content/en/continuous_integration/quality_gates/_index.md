@@ -42,8 +42,8 @@ To create Quality Gates rules for your organization, your user account must have
 
    {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
-5. Select whether the rule should block the pipeline or not when it fails. Non-blocking rules are still evaluated, but
-they do not block the pipeline when they fail.
+5. Select whether the rule should block the pipeline or not when it fails.
+   Non-blocking rules are helpful when rolling out a new rule and wanting to verify its behavior before making it blocking.
 6. Select the time window over which the query will be evaluated.
 7. Select a rule name that describes the rule that you are creating.
 8. Click **Save Rule**.
@@ -57,7 +57,7 @@ You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate eva
 
 This command:
 
-1. Retrieves all the rules that have [rules scopes](#rule-scope) and [custom scopes](#custom-scope) matching the current pipeline context (repository, branch, or custom scope passed in the command).
+1. Retrieves all the rules that have [rule scopes](#rule-scope) and [custom scopes](#custom-scope) matching the current pipeline context (repository, branch, or custom scope passed in the command).
 2. Evaluates all the matching rules.
 3. If one or more blocking rules fail, the command fails as well, blocking the pipeline.
 
@@ -109,9 +109,9 @@ When the `datadog-ci gate evaluate` command is invoked, the rules having a scope
 
 For each scope (for example, `branch`), you can either select included or excluded values.
 When included values are selected, the rule is evaluated if one or more included values are part of the command context.
-When excluded values are selected, the rule is evaluated if the excluded values are not part of the command context.
+When excluded values are selected, the rule is not evaluated if any of the excluded values are part of the command context.
 
-For example, to create a rule that is evaluated in all branches but `main` of the `example-repository` repository, you can define the following scope:
+For example, to create a rule that is evaluated in all branches except `main` of the `example-repository` repository, you can define the following scope:
 
 {{< img src="ci/scope_not_main_example_repository.png" alt="Rule scope for example-repository and not main branch" style="width:90%;">}}
 
