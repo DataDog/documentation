@@ -44,8 +44,9 @@ To create Quality Gates rules for your organization, your user account must have
 
 5. Select whether the rule should block the pipeline or not when it fails. Non-blocking rules are still evaluated, but
 they do not block the pipeline when they fail.
-6. Select a rule name that describes the rule that you are creating.
-7. Click **Save Rule**.
+6. Select the time window over which the query will be evaluated.
+7. Select a rule name that describes the rule that you are creating.
+8. Click **Save Rule**.
 
 
 ## Datadog-ci gate evaluate
