@@ -47,7 +47,6 @@ they do not block the pipeline when they fail.
 6. Select a rule name that describes the rule that you are creating.
 7. Click **Save Rule**.
 
-A rule starts being evaluated as soon as it is created.
 
 ## Datadog-ci gate evaluate
 
