@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle" class="newnew">{{ .Title }}</h1>
+    </div>
+    <div class="col-12">
+        {{ partial "breadcrumbs.html" . }}
+    </div>
+  </div>
+  {{ partial "translate_status_banner/translate_status_banner.html" . }} 
+
+  <div class="standard-attributes-main">
+    <p>{{ .Params.content | safeHTML }}</p>
+    <div>
+      <table class="standard-attributes-table">
+        <thead class="table-header">
+          <tr>
+            <th>Source</th>
+            <th>Attribute Name</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody class="table-body">
+          {{ range .Params.attributes }}
+          <tr class="table-row">
+            <td>{{ .product_source | safeHTML }}</td>
+            <td>{{ .name }}</td>
+            <td>{{ .type }}</td>
+            <td>{{ .description | markdownify }}</td>
+          </tr>
+          {{ end }}
+        </tbody>
+      </table>
+      {{/*  <div class="standard-attributes-grid">
+        <div class="grid-header">
+          <span>Attribute Name</span>
+          <span>Type</span>
+          <span>Description</span>
+        </div>
+        <div class="grid-body">
+          {{ range $idx, $attr := .Params.attributes }}
+          <div class="grid-row {{ if (modBool $idx 2) }}even{{ end }}">
+            <span>{{ $attr.name }}</span>
+            <span>{{ $attr.type }}</span>
+            <span>{{ $attr.description }}</span>
+          </div>
+          {{ end }}
+        </div>
+      </div>  */}}
+    </div>
+  </div>
+
+
+  {{ .Content }}
+{{ end }}
