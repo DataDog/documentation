@@ -68,11 +68,10 @@ Otherwise, the rules might have an incorrect behavior due to the absence of the 
 
 The command requires the `DATADOG_API_KEY` and `DATADOG_APP_KEY` environment variables to point to your [Datadog API Key][5]
 and [Datadog Application Key][6]. Also, you need to set the `DD_BETA_COMMANDS_ENABLED` environment
-variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site.
-The default site is US1 (datadoghq.com).
+variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
 
 {{< code-block lang="shell" >}}
-DD_BETA_COMMANDS_ENABLED=true DATADOG_API_KEY=<API_KEY> DATADOG_APP_KEY=<APP_KEY> datadog-ci gate evaluate
+DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DATADOG_API_KEY=<API_KEY> DATADOG_APP_KEY=<APP_KEY> datadog-ci gate evaluate
 {{< /code-block >}}
 
 The behavior of the command can be modified using the following flags:
