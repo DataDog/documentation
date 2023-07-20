@@ -14,10 +14,10 @@ Cloud Foundry deployments can send metrics and events to Datadog. You can track 
 
 There are four main components for the Cloud Foundry integration with Datadog.
 
-- __The Cloud Foundry Buildpack:__ is used to collect custom metrics, logs, traces, and profiles from your Cloud Foundry applications.
-- __The Agent BOSH Release:__ is used to collect events and metrics from BOSH VMs and sends them to Datadog.
-- __The Cluster Agent BOSH Release:__  is used to collect cluster-level and application-level metadata from the CAPI and the BBS and container tags.
-- __The Firehose Nozzle:__ collects all other metrics from the Loggregator Firehose in your infrastructure.
+- **The Cloud Foundry Buildpack -** is used to collect custom metrics, logs, traces, and profiles from your Cloud Foundry applications.
+- **The Agent BOSH Release -** is used to collect events and metrics from BOSH VMs and sends them to Datadog.
+- **The Cluster Agent BOSH Release -**  is used to collect cluster-level and application-level metadata from the CAPI and the BBS and container tags.
+- **The Firehose Nozzle -** collects all other metrics from the Loggregator Firehose in your infrastructure.
 
 Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
