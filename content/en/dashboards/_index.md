@@ -179,7 +179,6 @@ If you manage your dashboards with Terraform, you can use the latest version of 
 
 **Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
 
-
 #### High-density mode
 
 High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
