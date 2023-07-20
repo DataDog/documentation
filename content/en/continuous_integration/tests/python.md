@@ -88,6 +88,24 @@ def test_simple_case(ddspan):
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
 
+### Adding custom metrics to tests
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```python
+from ddtrace import tracer
+
+# Declare `ddspan` as argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("memory_allocations", 16)
+    # test continues normally
+    # ...
+```
+Read more about custom metrics in [Add Custom Metrics Guide][1].
+
+[1]: /continuous_integration/guides/add_custom_metrics/?tab=python
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
