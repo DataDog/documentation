@@ -98,7 +98,11 @@ about all the rules that were evaluated.
 
 ## Rule scope
 
-When creating a rule, you can define a scope, which states when the rule should be evaluated.
+When creating a rule, you can define a scope, which states when the rule should be evaluated. If the rule scope is
+set to `always evaluate`, the rule is evaluated on all repositories and branches.
+
+{{< img src="ci/rule_scope_always_evaluate.png" alt="Rule scope for rules always evaluated" style="width:90%;">}}
+
 The rules, which have a matching scope to the context of the `datadog-ci gate evaluate` command, are evaluated.
 
 For each scope (for example, `branch`), you can either select included or excluded values.
@@ -110,10 +114,7 @@ For example, to create a rule that is evaluated in all branches but `main` of th
 {{< img src="ci/scope_not_main_example_repository.png" alt="Rule scope for example-repository and not main branch" style="width:90%;">}}
 
 If a rule does not contain a scope, it is evaluated for all values for that scope.
-For example, if a rule does not contain the `repository` scope, it is evaluated for all repositories. If the rule scope is
-set to `always evaluate`, the rule is evaluated on all repositories and branches.
-
-{{< img src="ci/rule_scope_always_evaluate.png" alt="Rule scope for rules always evaluated" style="width:90%;">}}
+For example, if a rule does not contain the `repository` scope, it is evaluated for all repositories.
 
 ### Custom scope
 
