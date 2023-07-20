@@ -39,8 +39,8 @@ An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The bucket’s `public_access_block_configuration` AND the bucket account’s public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
-|The bucket’s grant list contains a uri value of `http://acs.amazonaws.com/groups/global/AllUsers` or `/AuthenticatedUsers`. |`AllUsers` gives anyone in the world access to the bucket. `AuthenticatedUsers` gives any AWS authenticated user in the world access to the bucket. |
+|The bucket's `public_access_block_configuration` and the bucket account's public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
+|The bucket's grant list contains a URI value of `http://acs.amazonaws.com/groups/global/AllUsers` or `/AuthenticatedUsers`. |`AllUsers` gives anyone in the world access to the bucket. `AuthenticatedUsers` gives any AWS authenticated user in the world access to the bucket. |
 
 ***OR***
 
@@ -48,8 +48,8 @@ An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The bucket’s `public_access_block_configuration` AND the bucket account’s public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
-|The bucket’s policy statement allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that cross-account access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
+|The bucket's `public_access_block_configuration` and the bucket account's public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
+|The bucket's policy statement allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that cross-account access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 
@@ -59,7 +59,7 @@ A [Cloudtrail Trail][3] (`aws_cloudtrail_trail`) is considered publicly accessib
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The trail’s `s3_bucket_name` is set to an S3 bucket that is considered publicly accessible. |Cloudtrail Trails are log files that are delivered to S3 buckets. If the trail is stored in a public S3 bucket, then that trail is publicly accessible. |
+|The trail's `s3_bucket_name` is set to an S3 bucket that is considered publicly accessible. |Cloudtrail Trails are log files that are delivered to S3 buckets. If the trail is stored in a public S3 bucket, then that trail is publicly accessible. |
 
 ### Amazon VPC Subnet
 
@@ -113,10 +113,10 @@ An ELB (`aws_elbv2_load_balancer`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The [scheme][21] is set to `internet-facing`.|The scheme determines whether the load balancer is an internal load balancer or an internet-facing load balancer.|
-|It is associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all ip addresses are able to gain access. |
+|The [scheme][21] is set to `internet-facing`.|The scheme determines whether the load balancer is an internal load balancer or an Internet-facing load balancer.|
+|It is associated with a [security group][12] that has rules allowing access from a CIDR range of `"0.0.0.0/0"`, or an IPv6 CIDR range of `"::/0"`. |A security group controls inbound traffic to a VPC. With an open CIDR range, all IP addresses are able to gain access. |
 
-See [Create an Application Load Balancer][20] for more information about internet-facing load balancers.
+See [Create an Application Load Balancer][20] for more information about Internet-facing load balancers.
 
 ### Amazon EC2 Instance
 
@@ -136,11 +136,11 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|A security group (call it `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`|This opens the load balancer to incoming traffic from the internet on a specific port|
+|A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`.|This opens the load balancer to incoming traffic from the Internet on a specific port.|
 |The load balancer has a listener accepting traffic on port `X`|A [listener][37] is a process that checks for connection requests, using the protocol and port that you configure|
-|The load balancer has a target group forwarding traffic to some port `Y`|[Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify|
-|An autoscaling group is attached to the load balancer’s target group|-|
-|The EC2 instance is part of the autoscaling group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (e.g. `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|This opens the EC2 instance to traffic coming from the load balancer. The security group must allow traffic from the load balancer, and thus must be open either to all IPs, all IPs in the VPC, or that specific security group.|
+|The load balancer has a target group forwarding traffic to some port `Y`.|[Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
+|An autoscaling group is attached to the load balancer's target group.|-|
+|The EC2 instance is part of the autoscaling group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|This opens the EC2 instance to traffic coming from the load balancer. The security group must allow traffic from the load balancer, and thus must be open either to all IPs, all IPs in the VPC, or that specific security group.|
 
 ***OR***
 
@@ -148,8 +148,8 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|Criteria 1, 2 and 3 from above (_ELB-determined access through autoscaling group_) apply|-|
-|The EC2 instance is listed as a target of the target group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (e.g. `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|Because the instance is listed as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group allows traffic from the load balancer.|
+|Criteria 1, 2 and 3 from above (_ELB-determined access through autoscaling group_) apply. |-|
+|The EC2 instance is listed as a target of the target group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|Because the instance is listed as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group allows traffic from the load balancer.|
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 
@@ -180,7 +180,7 @@ An [EBS snapshot][28] (`aws_ebs_snapshot`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|`create_volume_permission` is set to `all`.|Each snapshot contains all of the information that is needed to restore the snapshot’s data to a new EBS volume. If anyone can create a volume from the snapshot, that information is publicly accessible.|
+|`create_volume_permission` is set to `all`.|Each snapshot contains all of the information that is needed to restore the snapshot's data to a new EBS volume. If anyone can create a volume from the snapshot, that information is publicly accessible.|
 
 See [Share an Amazon EBS snapshot][29] for information about public EBS snapshots and how to make them private.
 
@@ -190,8 +190,8 @@ An [EKS cluster][30] (`aws_eks_cluster`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|`endpoint_public_access` is set to `true` in the cluster’s configuration.|This setting makes the cluster publicly accessible when combined with an open public CIDR. |
-|The cluster’s `public_access_cidrs` contains an open CIDR block (`"0.0.0.0/0"`).|You can limit the CIDR blocks that can access the public endpoint of the EKS cluster. An open CIDR block means anyone on the internet can access the endpoint.|
+|`endpoint_public_access` is set to `true` in the cluster's configuration.|This setting makes the cluster publicly accessible when combined with an open public CIDR. |
+|The cluster's `public_access_cidrs` contains an open CIDR block (`"0.0.0.0/0"`).|You can limit the CIDR blocks that can access the public endpoint of the EKS cluster. An open CIDR block means anyone on the internet can access the endpoint.|
 
 See [Amazon EKS cluster endpoint access control][31] for more information on public EKS clusters.
 
