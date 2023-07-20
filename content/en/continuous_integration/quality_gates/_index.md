@@ -14,7 +14,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="http://dtdg.co/code-quality" header="false" >}}
-Quality Gates are in beta.
+Quality Gates are in private beta. To request access, complete the form.
 {{< /callout >}}
 
 Quality Gates allows you to gate your workflows based on signals in Datadog.  You can create two types of rules: Static Analysis and Tests.
@@ -150,8 +150,8 @@ To delete a Quality Gate rule, click the **Delete** icon next to the **Edit** bu
 
 ## Permissions
 
-The [`quality_gate_rules_write` permission][1] is required to create and edit Quality Gate rules.
-The [`quality_gate_rules_read` permission][1] is required to view Quality Gate rules.
+Only users with the `quality_gate_rules_write` permission can create and edit Quality Gate rules. Users with the `quality_gate_rules_read` permission can view Quality Gate rules.
+For more information, see the [RBAC Permissions documentation][1].
 
 ## Track changes in rules
 
