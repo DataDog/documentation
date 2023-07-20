@@ -77,11 +77,11 @@ DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DA
 </pre>
 
 The behavior of the command can be modified using the following flags:
-- --fail-on-empty: when this flag is specified, the command fails if no matching rules were found in Datadog
+- `--fail-on-empty`: when this flag is specified, the command fails if no matching rules were found in Datadog
 based on the current command scope. By default, the command succeeds.
-- --fail-if-unavailable: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
+- `--fail-if-unavailable`: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
-- --no-wait: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
+- `--no-wait`: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluation. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
