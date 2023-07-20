@@ -215,4 +215,4 @@ Some resources allow you to restrict access to individual resources by roles, [T
 [13]: /security_platform/detection_rules/#limit-edit-access
 [14]: /service_management/service_level_objectives/#permissions
 [15]: /synthetics/browser_tests/#permissions
-[16]: https://docs.datadoghq.com/account_management/teams/
+[16]: /account_management/teams/
