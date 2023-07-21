@@ -288,14 +288,48 @@ To verify you've configured the APM integration with RUM, follow the steps below
 [1]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
+{{% tab "Android" %}}
 
-{{% tab "Mobile" %}}
+1. Run your application from Android Studio.
+2. Visit a screen in your application.
+3. Open Android Studio's [Network Inspector][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
-1. Visit a page in your application.
-2. In your browser's developer tools, go to the **Network** tab.
-3. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][1].
+[1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
 
-[1]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+1. Run your application from XCode.
+2. Visit a screen in your application.
+3. Open XCode's [Network Connections and HTTP Traffic instrument][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+1. Run your application from [software].
+2. Visit a screen in your application.
+3. Open [software]'s [Network Connections and HTTP Traffic instrument][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+
+[1]: 
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+1. Run your application from [software].
+2. Visit a screen in your application.
+3. Open [software]'s [Network Connections and HTTP Traffic instrument][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+
+[1]: 
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=datadog#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}
