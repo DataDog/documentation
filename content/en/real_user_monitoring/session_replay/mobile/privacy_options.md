@@ -135,7 +135,7 @@ All texts in:
 
 - Checkbox and Radio Button titles (Android)
 - Texts in non-editable Text View (iOS)
-- Month, day and year labels in Date & Time Picker
+- Month, day and year labels in the date and time picker
 - Values updated in response to gesture interaction with input elements, such as the current value of the Slider
 - Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
 
@@ -207,5 +207,3 @@ The following chart shows how we apply different touch interaction strategies, u
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Troubleshooting
