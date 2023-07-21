@@ -50,6 +50,8 @@ The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized secu
 
 When remediated, these issues can meaningfully improve your organization's security. Use the inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
 
+<div class="alert alert-info">At this time, security issues are available for AWS only.</div>
+
 {{< img src="security/csm/security_inbox.png" alt="The security inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
 
 ## Track your organization's health
