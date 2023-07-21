@@ -73,7 +73,7 @@ nav_sections:
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
       - title: Mobile Application Testing
-        link: mobile_testing/
+        link: mobile_app_testing/
         icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
       - title: Continuous Testing

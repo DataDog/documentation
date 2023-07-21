@@ -3320,35 +3320,35 @@ main:
     identifier: continuous_testing_troubleshooting
     weight: 6
   - name: Mobile Application Testing
-    url: mobile_testing/
+    url: mobile_app_testing/
     parent: ux_monitoring_heading
-    identifier: mobile_testing
+    identifier: mobile_app_testing
     pre: mobile
     weight: 210000
   - name: Mobile App Tests
-    url: /mobile_testing/mobile_app_tests
-    parent: mobile_testing
-    identifier: mobile_testing_mobile_app_tests
+    url: /mobile_app_testing/mobile_app_tests
+    parent: mobile_app_testing
+    identifier: mobile_app_testing_mobile_app_tests
     weight: 1
   - name: Test Steps
-    url: /mobile_testing/mobile_app_tests/steps
-    parent: mobile_testing_mobile_app_tests
-    identifier: mobile_testing_mobile_app_tests_steps
+    url: /mobile_app_testing/mobile_app_tests/steps
+    parent: mobile_app_testing_mobile_app_tests
+    identifier: mobile_app_testing_mobile_app_tests_steps
     weight: 101
   - name: Test Results
-    url: /mobile_testing/mobile_app_tests/results
-    parent: mobile_testing_mobile_app_tests
-    identifier: mobile_testing_mobile_app_tests_results
+    url: /mobile_app_testing/mobile_app_tests/results
+    parent: mobile_app_testing_mobile_app_tests
+    identifier: mobile_app_testing_mobile_app_tests_results
     weight: 102
   - name: Advanced Options for Steps
-    url: /mobile_testing/mobile_app_tests/advanced_options
-    parent: mobile_testing_mobile_app_tests
-    identifier: mobile_testing_mobile_app_tests_advanced_options
+    url: /mobile_app_testing/mobile_app_tests/advanced_options
+    parent: mobile_app_testing_mobile_app_tests
+    identifier: mobile_app_testing_mobile_app_tests_advanced_options
     weight: 103
   - name: Settings
-    url: /mobile_testing/settings
-    parent: mobile_testing
-    identifier: mobile_testing_settings
+    url: /mobile_app_testing/settings
+    parent: mobile_app_testing
+    identifier: mobile_app_testing_settings
     weight: 2
   - name: Real User Monitoring
     url: real_user_monitoring/
