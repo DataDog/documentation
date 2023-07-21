@@ -92,7 +92,7 @@ function hideTOCItems(shouldResetTOC=false) {
     const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3, .site-region-container.d-none > h2')
     const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
     
-    const tabNestedHeaders = document.querySelectorAll('.code-tabs > .tab-content > .tab-pane > h3')
+    const tabNestedHeaders = document.querySelectorAll('.code-tabs > .tab-content > .tab-pane > h3, .code-tabs > .tab-content > .tab-pane > h2')
     const tabNestedHeaderIDs = [...tabNestedHeaders].map(el => `#${el.id}`)
     
     allTOCItems.forEach(item => {
