@@ -29,9 +29,9 @@ Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_rea
 
 ### Feature Access
 
-Estimated Cost Summary (parent organization) and Cost Chargebacks are available out-of-the-box if your organization meets the feature criteria.
+[Estimated Cost Summary (parent organization)][7] and [Cost Chargebacks][8] are available out-of-the-box if your organization meets the feature criteria.
 
-Estimated Cost Summary (sub-organization) is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or [Support][6].
+[Estimated Cost Summary (sub-organization)][9] is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or [Support][6].
 
 ## Cost summary
 
@@ -143,3 +143,6 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
 [6]: https://docs.datadoghq.com/help/
+[7]: /account_management/plan_and_usage/cost_details/#estimated-cost-summary-parent-organization
+[8]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
+[9]: /account_management/plan_and_usage/cost_details/#estimated-cost-summary-sub-organization
