@@ -85,7 +85,7 @@ By default, the command succeeds.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
-Iif used incorrectly, this flag may result in inaccurate rule evaluations.
+If used incorrectly, this flag may result in inaccurate rule evaluations.
 
 [Custom scopes](#custom-scope) can be added by using the following option one or more times: `--scope`:
 
