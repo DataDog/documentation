@@ -301,9 +301,9 @@ To verify you've configured the APM integration with RUM, follow the steps below
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-1. Run your application from XCode.
+1. Run your application from Xcode.
 2. Visit a screen in your application.
-3. Open XCode's [Network Connections and HTTP Traffic instrument][1].
+3. Open Xcode's [Network Connections and HTTP Traffic instrument][1].
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
