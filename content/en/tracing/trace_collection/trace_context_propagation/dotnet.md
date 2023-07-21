@@ -29,7 +29,7 @@ You can use the following environment variables to configure injection and extra
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
 
-Starting from version 2.22.0, the default injection style is `tracecontext, Datadog`, so the W3C context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
+Starting from version 2.34.0, the default injection style is `Datadog`. From version 2.22.0 to 2.33.0, the default injection style is `tracecontext, Datadog`, so the W3C context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
 
 In most cases, headers extraction and injection are transparent. There are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In that case, you can add a custom trace using the following code:
 
