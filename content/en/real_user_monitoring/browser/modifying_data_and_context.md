@@ -515,7 +515,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** view events can not be discarded.
+**Note**: View events cannot be discarded.
 
 ## User session
 
