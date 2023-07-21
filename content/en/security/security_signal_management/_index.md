@@ -6,7 +6,7 @@ aliases:
 ---
 ## Overview
 
-With Cloud SIEM and CSM Threats Security Signal Management, users with the `Security Signals Write` permission can take action on security signal detections generated within the previous two days, such as change state, and view signal action history in the Audit Log. Within the signal explorer, users can use dedicated facets to filter signals that have been acted upon and view high-level information about actions within a row. After you take action on a signal, you can see your activity in the Audit Log.
+With Cloud SIEM and Cloud Security Management Threats (CSM Threats), users with the `Security Signals Write` permission can take action on security signal detections generated within the previous two days, such as change state, and view signal action history in the Audit Log. Within the signal explorer, users can use dedicated facets to filter signals that have been acted upon and view high-level information about actions within a row. After you take action on a signal, you can see your activity in the Audit Log.
 
 Security signals can be viewed and managed by navigating to **Security** > **Security Signals** > selecting a Cloud SIEM or CSM Threats signal, and taking actions through the header in the side panel view.
 

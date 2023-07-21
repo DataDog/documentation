@@ -35,20 +35,20 @@ further_reading:
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM leverages the Datadog Agent and platform-wide cloud integrations. It includes:
+CSM leverages the Datadog Agent and platform-wide cloud integrations and includes:
 
 - [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
+- **Identity Risks**: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 - **Vulnerabilities**: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
-- **Identities**: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 
-{{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
+{{< img src="security/csm/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
 ## Prioritize and remediate important security issues
 
 The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as publicly accessible, privileged role, and production environment.
 
-When remediated, these issues can meaningfully improve your organization's security. Use the inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
+When these issues are remediated, it can meaningfully improve your organization's security. Use the inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
 
 <div class="alert alert-info">At this time, security issues are available for AWS only.</div>
 
@@ -56,18 +56,29 @@ When remediated, these issues can meaningfully improve your organization's secur
 
 ## Track your organization's health
 
-Available for [CSM Misconfigurations][2] and CSM Identities, the posture and identity health scores help you track your organization's overall health.
+Available for [CSM Misconfigurations][2] and CSM Identity Risks, the posture and identity health scores help you track your organization's overall health.
 
-- **Posture score**: The percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+- **[Posture score][5]**: The percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 - **Identity health score**: The percentage of your IAM resources that are configured securely.
 
 The scores automatically update as you resolve your organization's identity risk detections and security posture findings. Muting a finding or detection also removes it from the calculation of the score.
 
 **SCREENSHOT HERE**
 
-## Explore issues in-depth using explorers
+## Explore and remediate issues using explorers
 
-Use the Explorers to ...
+Use the Explorers page to review and remediate your organization's detections and findings. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
+
+Use the Explorers page to review and remediate your organization's detections and findings. View additional details on the side panel, including:
+
+- The detailed configuration of a resource.
+- The detection or compliance rules applied to the resource.
+- Tags applied to resource that provide additional context about who owns the resource and where it resides in your environment.
+- Descriptions and guidelines based on industry resources for remediating detections.
+- Use the time selector to explore your security configuration posture at any point in the past.
+- Fix in AWS console.
+
+{{< img src="security/cws/threats_explorer.png" alt="CSM Explorer page" width="100%">}}
 
 ## Next steps
 
@@ -81,3 +92,4 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [2]: /security/cspm/
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/
+[5]: /glossary/#posture-score

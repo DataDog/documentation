@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-From the [Security Signals Explorer][1], correlate and triage security signals. You can also access [Cloud SIEM][2], [CSM Misconfigurations][3], [CSM Threats][4], and [Application Security Management][5] dashboards from this page.
+From the [Security Signals Explorer][1], correlate and triage security signals. You can also access [Cloud SIEM][2], [Cloud Security Management Misconfigurations (CSM Misconfigurations)][3], [Cloud Security Management Threats (CSM Threats)][4], and [Application Security Management][5] dashboards from this page.
 
 ## Explore your Security Signals
 
