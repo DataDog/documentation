@@ -138,7 +138,7 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 ## Reduce overhead when using the profiler
 
-The different profilers have a fixed cpu and memory overhead. Because such a fixed overhead per profiled application exists, *the more profiled applications, the higher the overhead!*
+The [different profile types][3] have a fixed CPU and memory overhead. Because such a fixed overhead per profiled application exists, *the more profiled applications, the higher the overhead.*
 
 ### Avoid enabling the profiler machine-wide
 
@@ -151,7 +151,9 @@ Datadog does not recommend enabling the profiler at machine-level or for all IIS
 ### Linux Containers
 
 The exact value can vary but the fixed overhead cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
-However, in that case, you should expect a cpu consumption increase; even for idle services because the profiler threads will always scan the application's threads. The less available core, the more the cpu consumption will increase. Disabling the wall time profiler with the setting `DD_PROFILING_WALLTIME_ENABLED=0` will decrease the cpu consumption due to the profiler. If this is not enough, increase the cpu cores available for your containers.
+However, in that case, you should expect a CPU consumption increase; even for idle services because the profiler threads will always scan the application's threads. The less available core, the more the CPU consumption will increase. 
+
+Disabling the wall time profiler with the setting `DD_PROFILING_WALLTIME_ENABLED=0` will decrease the CPU consumption due to the profiler. If this is not enough, increase the CPU cores available for your containers.
 
 ### Disabling the profiler
 
@@ -189,3 +191,4 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 
 [1]: /tracing/troubleshooting/#tracer-debug-logs
 [2]: /help/
+[3]: /profiler/profile_types/?code-lang=dotnet
