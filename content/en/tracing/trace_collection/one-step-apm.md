@@ -32,6 +32,12 @@ For the one-line command that installs the Agent with APM for your Linux host, V
 
 Start [exploring the performance observability of your services in Datadog][2].
 
+## Removing 1-Step APM Configuration from your Agent
+
+To remove this configuration from an Agent:
+
+tktk
+
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/services/
 
