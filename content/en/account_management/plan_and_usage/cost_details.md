@@ -13,10 +13,6 @@ further_reading:
   text: "Managing multiple-organization accounts"
 ---
 
-{{< callout url="http://docs.datadoghq.com/help/">}}
-  Estimated Cost Summary and Cost Chargebacks are in beta. To request access and confirm your organization is supported, contact your account representative or Support.
-{{< /callout >}} 
-
 ## Overview
 
 Estimated Cost Summary and Cost Chargebacks help you understand your estimated month-to-date and historical Datadog costs.
@@ -30,6 +26,12 @@ You can break down your costs by sub-organization and by product to:
 To view the Estimated Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
 
 Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Estimated Cost Summary and Cost Chargebacks data.
+
+### Feature Access
+
+Estimated Cost Summary (parent organization) and Cost Chargebacks are available out-of-the-box if your organization meets the feature criteria.
+
+Estimated Cost Summary (sub-organization) is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or [Support][2].
 
 ## Cost summary
 
@@ -45,7 +47,7 @@ The cost summary functionality changes according to whether you use Datadog as a
 
 {{< img src="account_management/plan_and_usage/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
-1. While logged in to the parent organization, navigate to [Plan & Usage][2].
+1. While logged in to the parent organization, navigate to [Plan & Usage][3].
 1. Click the **Usage** tab.
 1. For a multi-organization, ensure the **Overall** tab is selected.
 
@@ -57,7 +59,7 @@ Use the search facets at the left to filter the cost by **Products** or by **Sub
 
 To download the data as a comma separated value file, click **Download as CSV**.
 
-See [Get estimated cost across your account][3] to query estimated cost data through the API.
+See [Get estimated cost across your account][4] to query estimated cost data through the API.
 
 ### Estimated Cost Summary (sub-organization)
 
@@ -65,7 +67,7 @@ As a sub-organization, you can view the costs for your organization only. This r
 
 {{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a sub-organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
-1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
+1. While logged in to the sub-organization, navigate to [Plan & Usage][3].
 1. Click the **Usage** tab.
 1. Ensure the **Overall** tab is selected.
 
@@ -77,7 +79,7 @@ Use the search facets at the left to filter the cost by **Products**. Use the **
 
 To download the data as a comma separated value file, click **Download as CSV**.
 
-See [Get estimated cost across your account][3] to query estimated cost data through the API.
+See [Get estimated cost across your account][4] to query estimated cost data through the API.
 
 ## Cost chargebacks
 
@@ -91,7 +93,7 @@ From a parent organization, view finalized historical costs aggregated by produc
 
 {{< img src="account_management/plan_and_usage/historical-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
-1. While logged in to the parent organization, navigate to [Plan & Usage][2].
+1. While logged in to the parent organization, navigate to [Plan & Usage][3].
 1. Select the **Usage** tab.
 1. Click **Individual Organizations**.
 1. Ensure the **Billable** and **Cost** toggles are selected.
@@ -107,7 +109,7 @@ Estimated cost data is available for the current month. If historical cost data 
 
 {{< img src="account_management/plan_and_usage/estimated-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
-1. While logged in to the parent organization, navigate to [Plan & Usage][2].
+1. While logged in to the parent organization, navigate to [Plan & Usage][3].
 1. Select the **Usage** tab.
 1. Click **Individual Organizations**.
 1. Ensure the **Billable** and **Cost** toggles are selected.
@@ -116,12 +118,12 @@ Estimated cost data is available for the current month. If historical cost data 
 ### Download
 
 - To download historical or estimated cost chargeback data as a comma separated value file, click **Download as CSV**.
-- See [Get historical cost across your account][4] to query historical cost chargeback data through the API.
-- See [Get estimated cost across your account][3] to query estimated cost chargeback data through the API.
+- See [Get historical cost across your account][5] to query historical cost chargeback data through the API.
+- See [Get estimated cost across your account][4] to query estimated cost chargeback data through the API.
 
 ## How billing aggregations affect cost changes
 
-Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
+Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][6] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
 
 ### Percentile and average usage billing
 
@@ -136,7 +138,8 @@ Products billed by the sum of usage throughout the month include indexed logs an
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/
-[2]: https://app.datadoghq.com/billing/usage
-[3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
-[4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
-[5]: /account_management/plan_and_usage/cost_details/#cost-summary
+[2]: /https://docs.datadoghq.com/help/
+[3]: https://app.datadoghq.com/billing/usage
+[4]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
+[5]: /api/latest/usage-metering/#get-historical-cost-across-your-account
+[6]: /account_management/plan_and_usage/cost_details/#cost-summary
