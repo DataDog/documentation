@@ -102,6 +102,8 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
       features:
         cws:
           enabled: true
+        remoteConfiguration:
+          enabled: true // Default: false
     ```
 
     See the [Datadog Operator documentation][2] for additional configuration options.
