@@ -272,7 +272,7 @@ You can use the following properties in `Datadog.Configuration` when creating th
 
 You can use the following properties in `RUM.Configuration` when enabling RUM:
 
-`ssessionSampleRate`
+`sessionSampleRate`
 : Sets the sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, `100.0` means all sessions are sent to Datadog. If not configured, the default value of `100.0` is used.
 
 `uiKitViewsPredicate`
@@ -287,7 +287,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `viewEventMapper`
 : Sets the data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`sresourceEventMapper`
+`resourceEventMapper`
 : Sets the data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `actionEventMapper`
