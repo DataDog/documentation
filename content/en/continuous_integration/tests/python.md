@@ -142,3 +142,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [4]: /tracing/trace_collection/dd_libraries/python/
 [5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
+[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
