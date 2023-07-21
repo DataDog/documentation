@@ -3,11 +3,7 @@
     "attributes": {
       "formulas": [
         {
-          "formula": "a",
-          "limit": {
-            "count": 10,
-            "order": "desc"
-          }
+          "formula": "a"
         }
       ],
       "from": 1671612804000,

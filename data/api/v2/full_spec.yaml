@@ -10634,6 +10634,17 @@ components:
             name property.
           example: a+b
           type: string
+      required:
+      - formula
+      type: object
+    QueryFormulaWithLimit:
+      description: A formula for calculation based on one or more queries.
+      properties:
+        formula:
+          description: Formula string, referencing one or more queries with their
+            name property.
+          example: a+b
+          type: string
         limit:
           $ref: '#/components/schemas/FormulaLimit'
       required:
@@ -12296,7 +12307,7 @@ components:
         formulas:
           description: List of formulas to be calculated and returned as responses.
           items:
-            $ref: '#/components/schemas/QueryFormula'
+            $ref: '#/components/schemas/QueryFormulaWithLimit'
           type: array
         from:
           description: Start date (inclusive) of the query in milliseconds since the
