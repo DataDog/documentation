@@ -3,11 +3,11 @@ title: Connect to Datadog over AWS PrivateLink
 kind: guide
 ---
 
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
+{{% site-region region="us3,us5,eu,gov,ap1" %}}
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
 
 ## Overview
@@ -242,4 +242,4 @@ Additional helpful documentation, links, and articles:
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
 [3]: /agent/logs
 [4]: /integrations/amazon_web_services/#log-collection
-{{< /site-region >}}
+{{% /site-region %}}
