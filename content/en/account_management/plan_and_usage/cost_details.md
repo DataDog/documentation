@@ -27,12 +27,6 @@ To view the Estimated Cost Summary and Cost Chargebacks data, you must be a Data
 
 Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Estimated Cost Summary and Cost Chargebacks data.
 
-### Feature Access
-
-[Estimated Cost Summary (parent organization)][7] and [Cost Chargebacks][8] are available out-of-the-box if your organization meets the feature criteria.
-
-[Estimated Cost Summary (sub-organization)][9] is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or [Support][6].
-
 ## Cost summary
 
 Use the cost summary to:
@@ -45,7 +39,7 @@ Use the cost summary to:
 
 The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated costs for the parent organization and each sub-organization. 
 
-{{< img src="account_management/plan_and_usage/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+{{< img src="account_management/plan_and_usage/cost_details/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -62,6 +56,8 @@ To download the data as a comma separated value file, click **Download as CSV**.
 See [Get estimated cost across your account][3] to query estimated cost data through the API.
 
 ### Estimated Cost Summary (sub-organization)
+
+<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
@@ -142,7 +138,3 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
-[6]: https://docs.datadoghq.com/help/
-[7]: /account_management/plan_and_usage/cost_details/#estimated-cost-summary-parent-organization
-[8]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
-[9]: /account_management/plan_and_usage/cost_details/#estimated-cost-summary-sub-organization
