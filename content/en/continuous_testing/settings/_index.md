@@ -11,7 +11,7 @@ further_reading:
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "/mobile_testing/mobile_app_tests/"
+- link: "/mobile_app_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Configure a Mobile App Test"
 - link: "/synthetics/guide/explore-rum-through-synthetics/"
