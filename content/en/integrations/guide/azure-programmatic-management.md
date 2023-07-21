@@ -35,7 +35,7 @@ Follow these steps to deploy the integration through [Terraform][13].
     * `client_id`: Your Azure web application secret key.
     * `client_secret`: Your Azure web application secret key.
 
-   See the [Terraform Registry][17] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
+   See the [Datadog Azure integration resource][17] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -145,7 +145,7 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [12]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
-[15]: /integrations/terraform/#overview
+[15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [16]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide

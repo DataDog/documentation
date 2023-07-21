@@ -43,7 +43,7 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 2.19.0
+integration_version: 2.19.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -141,7 +141,7 @@ IIS チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/windows/#agent-check-directory-structure
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example

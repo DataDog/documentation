@@ -2,7 +2,14 @@ The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header]
 
 Both sets of content is embedded in the Datadog Tracer library package and loaded locally. See examples of the templates for [HTML][101] and [JSON][102] in the Datadog Java tracer source code on GitHub.
 
-The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables. Alternatively, you can use the `dd.appsec.http.blocked.template.html` or `dd.appsec.http.blocked.template.json` configuration entries.
+The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables within your application deployment file. Alternatively, you can use the `dd.appsec.http.blocked.template.html` or `dd.appsec.http.blocked.template.json` configuration entries.
+
+Example:
+
+```
+DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML=<path_to_file.html>
+```
+
 
 By default, the page shown in response to a blocked action looks like this:
 

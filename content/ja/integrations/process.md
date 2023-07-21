@@ -28,7 +28,7 @@ draft: false
 git_integration_title: プロセス
 integration_id: システム
 integration_title: プロセス
-integration_version: 2.3.2
+integration_version: 2.3.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -148,7 +148,7 @@ tile:
 プロセスのリソース消費を監視する方法 (または理由) について理解するには、この[ブログ記事][10]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/monitors/create/types/process_check/?tab=checkalert
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/process/datadog_checks/process/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

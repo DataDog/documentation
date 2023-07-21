@@ -53,7 +53,7 @@ sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-age
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/proxy
 [3]: https://yum.datadoghq.com/stable/6
 [4]: https://yum.datadoghq.com/stable/7
