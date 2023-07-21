@@ -58,7 +58,7 @@ If you want to enrich the data collected with your AWS Lambda resource tags, mak
 
 For quick questions, post in the _#serverless_ channel of the [Datadog Slack community][11].
 
-If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], first create a Zendesk ticket. Next, use the `serverless flare` command to automatically collect and submit data about your Lambda function to Datadog Support.
+If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], first create a Zendesk ticket. Next, use the `datadog-ci serverless flare` command to automatically collect and submit data about your Lambda function to Datadog Support.
 
 If you don't want to use the flare command, include the following information to your ticket:
 1. Basic information about your Lambda function: ARN, runtime, handler, layers, environment variables, and tags. Focus on one function first if you have the same issue with many.
