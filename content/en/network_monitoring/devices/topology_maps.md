@@ -12,67 +12,48 @@ further_reading:
 
 ## Overview
 
-Datadog Topology Maps show you the various network elements in your network as an interactive graph. Inspect the details and flows of your switches, routers, and other devices to gain insights into your network, and use the data to enhance troubleshooting, prediction capabilities, and network management.
+Topology maps provide an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts. 
 
-{{< img src="/network_device_monitoring/topology_maps/topology_map.png" alt="The topology maps page in the Datadog application" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/topology_maps/topology_map_overview.png" alt="The topology maps page with single device selected" style="width:80%;" >}}
 
 ## Setup
+
+The Datadog Agent version 7.46 and later automatically collects topology data. No additional installation is necessary.
 
 ### Prerequisites
 
 1. LLDP is enabled on the device with LLDP data exposed through SNMP.
-2. Agent version 7.45 or later is installed.
+2. Datadog Agent version 7.46 or later is installed.
 
-### Enable Topology data collection
+## Investigating devices
 
-1. Follow the instructions for setting up [NDM Metrics collection][1].
-2. Enable topology data collection with the `collect_topology: true` setting for your environment:
+In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Click on a device to see the options:
 
-{{< tabs >}}
-{{% tab "Autodiscovery setup" %}}
-If you use autodiscovery through the `datadog.yaml` file, add `collect_topology` inside the `snmp_listener` section: 
+{{< img src="/network_device_monitoring/topology_maps/topology_map_device_options.png" alt="The topology map with a device selected, displaying the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
 
-{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="true" collapsible="false" >}}
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # number of workers used to discover devices concurrently
-  discovery_interval: 3600  # interval between each autodiscovery in seconds
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  collect_topology: true
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR subnet
-      snmp_version: 2
-      port: 161
-      community_string: '***'  # enclose with single quote
-      tags:
-      - "<key1>:<val1>"
-      - "<key2>:<val2>"
-{{< /code-block >}}
-{{% /tab %}}
+### Inspect
 
-{{% tab "Individual device setup" %}}
-If you monitor individual devices through configurations in `conf.d/snmp.d/conf.yaml` files, add `collect_topology` inside the `init_config` section: 
+Choose **Inspect** to see the device's interface connections. Click on any of the connected interfaces for further investigation.
 
-{{< code-block lang="yaml" filename="conf.yaml" disable_copy="true" collapsible="false" >}}
-init_config:
-  loader: core  # use core check implementation of SNMP integration. recommended
-  use_device_id_as_hostname: true  # recommended
-  collect_topology: true
-instances:
-- ip_address: '<1.2.3.4>'
-  community_string: '<sample-string>'  # enclose with single quote
-  tags:
-    - '<key1>:<val1>'
-    - '<key2>:<val2>'
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
+{{< img src="/network_device_monitoring/topology_maps/topology_map_device_inspect.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
 
-### Validation
+### View device details
 
-Verify that the device is exposing LLDP data with the following command:
+Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory. 
+
+{{< img src="/network_device_monitoring/topology_maps/topology_map_device_details.png" alt="The View device details view of an individual device" style="width:80%;" >}}
+
+From this view, you can also view the device's interfaces in the **Interfaces** tab.
+
+{{< img src="/network_device_monitoring/topology_maps/topology_map_device_details_interfaces.png" alt="The View device details view of an individual device with the Interfaces tab selected" style="width:80%;" >}}
+
+### View flow details
+
+Choose **View flow details** to open the NetFlow tab filtered by the device's `@device.ip` for a detailed exploration of the device's sources, destinations, and volume.
+
+### Troubleshooting
+
+If you don't see your device, verify that it's exposing LLDP data with the following command:
 
 ```yaml
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.0.8802
