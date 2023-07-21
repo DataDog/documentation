@@ -24,8 +24,7 @@
     },
     shouldShowAttribute (dataset) {
       const queryValues = this.queryValue.split(' ')
-      //return dataset.includes(this.filterValue)
-      return queryValues.some(word => dataset.includes(word.toLowerCase()))
+      return queryValues.some(word => dataset.includes(word.toLowerCase())) && dataset.includes(this.filterValue)
     }
   }">
     <div 
