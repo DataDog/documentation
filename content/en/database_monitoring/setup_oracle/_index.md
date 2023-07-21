@@ -21,8 +21,6 @@ The features described on this page are in private beta.
 - **Deployment configurations**: Self-managed, RDS, RAC, Exadata
 - **Architecture**: Multi-tenant
 
-The following deployment configurations, components, and features are not supported: Oracle Autonomous Database and Data Guard.
-
 ## Prerequisites
 
 ### Install the Oracle integration
