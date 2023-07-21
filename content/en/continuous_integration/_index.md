@@ -19,6 +19,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
     tag: "Blog"
     text: "Configure pipeline alerts with Datadog CI monitors"
+  - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+    tag: "Blog"
+    text: "Best practices for monitoring static web applications"
 cascade:
     algolia:
         rank: 70

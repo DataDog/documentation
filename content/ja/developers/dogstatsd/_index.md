@@ -40,9 +40,7 @@ DogStatsD は、Docker Hub と GCR で利用できます。
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">2023 年 7 月 10 日、Docker Hub は Datadog の Docker Hub レジストリへのダウンロードレート制限を実施するようになります。これらのレジストリからのイメージのプルは、レート制限割り当てにカウントされます。<br/><br/>
-
-Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レート制限が適用されない他のレジストリからプルすることを推奨しています。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリを変更する</a>を参照してください。</div>
+<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
 ## UDS の仕組み
 
@@ -196,7 +194,7 @@ env:
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: /ja/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[5]: /ja/developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /ja/getting_started/tagging/assigning_tags/#environment-variables
 [7]: /ja/metrics/custom_metrics/
 {{% /tab %}}
