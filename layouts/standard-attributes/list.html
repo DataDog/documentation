@@ -25,7 +25,7 @@
     shouldShowAttribute (dataset) {
       const queryValues = this.queryValue.split(' ')
       //return dataset.includes(this.filterValue)
-      return queryValues.some(word => dataset.includes(word))
+      return queryValues.some(word => dataset.includes(word.toLowerCase()))
     }
   }">
     <div 
@@ -46,7 +46,7 @@
           {{/*  concatenating the attr info  */}}
           {{ $pad := newScratch }}
           {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replace .description ";" "")) }}
-          {{ $attribute_info := delimit ($pad.Get "attribute_info") ";" }}
+          {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
 
           <tr 
           class="table-row"
