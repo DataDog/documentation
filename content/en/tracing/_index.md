@@ -58,13 +58,15 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Send traces to Datadog
 
-As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
+As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers, or serverless functions takes just minutes.
 
-[Add the Datadog Tracing Library][2] for your environment and language, whether you are [tracing a proxy][3] or tracing across [AWS Lambda functions][4] and hosts, using automatic instrumentation, dd-trace-api, or [OpenTelemetry][5].
+<div class="alert alert-info">
+<strong>Beta: 1-Step APM onboarding</strong> - Enable APM when you install the Datadog Agent on your hosts and containers. Your services are automatically instrumented without having to modify the code, quickly getting you up and running with application performance monitoring. For more information, read <a href="/tracing/trace_collection/one-step-apm">1-Step APM Onboarding</a>.
+</div>
 
-{{< partial name="apm/apm-compatibility.html" >}}
+Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], using automatic or custom instrumentation, or instrumenting with [OpenTelemetry][5].
 
-<br>
+**Read [Sending Traces to Datadog][2] to get started.**
 
 ## Control and manage data flowing into and being kept by Datadog
 
@@ -118,10 +120,10 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/
-[2]: /tracing/trace_collection/dd_libraries/java
+[2]: /tracing/trace_collection/
 [3]: /tracing/trace_collection/proxy_setup/
 [4]: /serverless/distributed_tracing
-[5]: /opentelemetry/otel_tracing/
+[5]: /trace_collection/otel_instrumentation/
 [6]: /tracing/trace_pipeline/ingestion_controls/
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
