@@ -37,10 +37,9 @@ further_reading:
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
 
-Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), [Cloud Workload Security (CWS)](#cloud-workload-security), and [CSM Identities](#csm-identities).
+Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), [Cloud Workload Security (CWS)](#cloud-workload-security), and [CSM Identity Risks](#csm-identity-risks).
 
 {{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
-
 
 ## Cloud Security Posture Management
 
@@ -56,11 +55,11 @@ Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#c
 
 To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
 
-## CSM Identities
+## CSM Identity Risks
 
-CSM Identities provides in-depth visibility into your organization's AWS IAM risks and helps you to resolve them on an ongoing basis.
+[CSM Identity Risks][4] provides in-depth visibility into your organization's AWS IAM risks and helps you to resolve them on an ongoing basis.
 
-**Screenshot**
+{{< img src="security/identity_risks/identity-risks-explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
 
 ## Further reading
 
@@ -69,3 +68,4 @@ CSM Identities provides in-depth visibility into your organization's AWS IAM ris
 [1]: /security/cspm/
 [2]: /security/cloud_workload_security/
 [3]: https://app.datadoghq.com/security/configuration
+[4]: /security/identity_risks
