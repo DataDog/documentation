@@ -45,9 +45,6 @@ If the `histogram_buckets_as_distributions` parameter is `true`, `_bucket` sampl
 
 `collect_counters_with_distributions` can be used to send `_count` and `_sum` values as `count`s alongside the distribution.
 
-### GaugeHistogram
-
-TBD.
 
 ### Summary
 
