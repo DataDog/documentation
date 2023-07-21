@@ -44,7 +44,7 @@ CI Visibility enables developers to identify the reasons behind a test or pipeli
 
 ## Improve test reliability and create traces
 
-CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. Using the same libraries you are using to trace application performance with [APM][5], you can instrument your tests and generate traces from your testing frameworks as they execute in CI. 
+CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. You can instrument your tests and generate traces from your testing frameworks as they execute in CI. 
 
 ## Increase efficiency through seamless integrations
 
@@ -68,7 +68,6 @@ See [Pipeline Visibility][3] and [Test Visibility][4] for instructions on settin
 [2]: https://app.datadoghq.com/notebook/list
 [3]: /continuous_integration/pipelines/
 [4]: /continuous_integration/tests/
-[5]: /tracing/
 [6]: /monitors/types/ci/
 [7]: /continuous_integration/explorer/
 [8]: /continuous_integration/pipelines/custom_commands/

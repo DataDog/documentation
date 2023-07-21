@@ -47,7 +47,7 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Test Traits      | The traits of the test such as `category:flaky`.                       |
 | Test Type        | The type of the test such as `test`.                                   |
 
-You can filter by test level: session, module, suite and test. Each test level represents a different level of aggregation of tests.
+You can filter by test level: session, module, suite, and test run. Each test level represents a different level of aggregation of tests.
 
 {{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
 
