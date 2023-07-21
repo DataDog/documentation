@@ -13,10 +13,6 @@ further_reading:
   text: "Managing multiple-organization accounts"
 ---
 
-{{< callout url="http://docs.datadoghq.com/help/">}}
-  Estimated Cost Summary and Cost Chargebacks are in beta. To request access and confirm your organization is supported, contact your account representative or Support.
-{{< /callout >}} 
-
 ## Overview
 
 Estimated Cost Summary and Cost Chargebacks help you understand your estimated month-to-date and historical Datadog costs.
@@ -30,6 +26,12 @@ You can break down your costs by sub-organization and by product to:
 To view the Estimated Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
 
 Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Estimated Cost Summary and Cost Chargebacks data.
+
+### Feature Access
+
+Estimated Cost Summary (parent organization) and Cost Chargebacks are available out-of-the-box if your organization meets the feature criteria.
+
+Estimated Cost Summary (sub-organization) is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or [Support][6].
 
 ## Cost summary
 
@@ -140,3 +142,4 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
+[6]: https://docs.datadoghq.com/help/
