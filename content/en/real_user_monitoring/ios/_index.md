@@ -325,6 +325,8 @@ configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
 
 [DDRUM enableWithConfiguration:configuration];
 ```
+{{% /tab %}}
+{{% /tabs %}}
 
 To monitor requests sent from the `URLSession` instance as resources, assign `DDURLSessionDelegate()` as a `delegate` of that `URLSession`:
 
