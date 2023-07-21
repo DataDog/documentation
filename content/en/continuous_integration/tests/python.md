@@ -95,16 +95,14 @@ Just like tags, you can add custom metrics to your tests by using the current ac
 ```python
 from ddtrace import tracer
 
-# Declare `ddspan` as argument to your test
+# Declare `ddspan` as an argument to your test
 def test_simple_case(ddspan):
     # Set your tags
     ddspan.set_tag("memory_allocations", 16)
     # test continues normally
     # ...
 ```
-Read more about custom metrics in [Add Custom Metrics Guide][1].
-
-[1]: /continuous_integration/guides/add_custom_metrics/?tab=python
+Read more about custom metrics in the [Add Custom Metrics Guide][7].
 
 ## Configuration settings
 
