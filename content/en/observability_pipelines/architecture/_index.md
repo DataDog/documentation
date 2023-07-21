@@ -15,7 +15,6 @@ Deploy Observability Pipelines Worker into your infrastructure, like any other s
 
 This guide walks you through the recommended aggregator architecture for new Observability Pipelines Worker users. Specifically, these topics include:
 
-- [Configuring the Observability Pipelines Worker](#configuring-the-observability-pipelines-worker) to collect, process, and route data. 
 - [Optimizing the instance][3] so you can horizontally scale the Observability Pipelines Worker aggregator. 
 - Starting points to estimate your resource capacity for [capacity planning and scaling][4] the Observability Pipelines Worker.
 - Determining your [network topology and configurations][5] for the Observability Pipelines Worker.
