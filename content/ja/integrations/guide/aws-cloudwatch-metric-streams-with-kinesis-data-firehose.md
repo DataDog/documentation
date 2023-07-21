@@ -57,7 +57,7 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 
 2. まだ接続していない場合は、AWS アカウントを Datadog に接続します。詳細については、[CloudFormation のセットアップ手順][2]を参照してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 {{< tabs >}}
 {{% tab "CloudFormation" %}}

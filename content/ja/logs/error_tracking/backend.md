@@ -130,7 +130,7 @@ func ErrorField(err error) errorField {
             stack = stack[1:]
         }
     }
-    return ErrorField{
+    return errorField{
         kind: reflect.TypeOf(err).String(),
         stack: stack,
         message: err.Error(),

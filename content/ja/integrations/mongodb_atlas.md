@@ -72,7 +72,7 @@ MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、以
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 MongoDB Atlas インテグレーションは、Atlas ポータルにログインすることによってインストールできます。
 

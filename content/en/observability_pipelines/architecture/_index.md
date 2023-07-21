@@ -9,7 +9,7 @@ aliases:
 
 The Observability Pipelines Worker's (OPW) aggregator architecture deploys the Observability Pipelines Worker as a standalone service for centralized data processing and routing:
 
-{{< img src="observability_pipelines/production_deployment_overview/aggregator_role.png" alt="A diagram showing the network load balancer receiving data from various sources and sending the data to the Observability Pipelines Worker aggregator, which has multiple Workers in different availability zones and sends data to various sinks" style="width:100%;" >}}
+{{< img src="observability_pipelines/production_deployment_overview/aggregator_role2.png" alt="A diagram showing the network load balancer receiving data from various sources and sending the data to the Observability Pipelines Worker aggregator, which has multiple Workers in different availability zones and sends data to various sinks" style="width:100%;" >}}
 
 Deploy Observability Pipelines Worker into your infrastructure, like any other service to intercept and manipulate data, and then forward it to your destinations. Each Observability Pipelines Worker instance operates independently, so that you can scale the architecture with a simple load balancer.
 

@@ -19,6 +19,10 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['ci test', 'ci tests']
 ---
 
 {{< site-region region="gov" >}}
@@ -59,6 +63,16 @@ For each branch, the list shows test results for its latest commit: a consolidat
 There's also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
 
 Hovering over the commit author avatar shows detailed information about the latest commit.
+
+#### Test regressions
+
+A test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch.
+
+A benchmark test run is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch. A benchmark test has @test.type:benchmark.
+
+The mean and the max of the default branch is calculated over the last week of test runs.
+
+Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 #### Investigate for more details
 
@@ -136,7 +150,11 @@ When creating a [dashboard][15] or a [notebook][16], you can use test execution 
 
 ## Alert on test data
 
+<<<<<<< HEAD
 When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][17]. 
+=======
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16].
+>>>>>>> master
 
 ## Further reading
 
@@ -155,7 +173,13 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [11]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
 [12]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
 [13]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
+<<<<<<< HEAD
 [14]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
 [15]: https://app.datadoghq.com/dashboard/lists
 [16]: https://app.datadoghq.com/notebook/list
 [17]: /monitors/types/ci/
+=======
+[14]: https://app.datadoghq.com/dashboard/lists
+[15]: https://app.datadoghq.com/notebook/list
+[16]: /monitors/types/ci/
+>>>>>>> master

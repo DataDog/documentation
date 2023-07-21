@@ -14,7 +14,9 @@ further_reading:
 
 ## Overview
 
-This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports.
+This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports. 
+
+This guide applies to pipelines created using the [public CI Visibility Pipelines API][3]. Integrations with other CI providers may vary.
 
 ## Data model
 
@@ -43,7 +45,7 @@ When sending repeated IDs with different timestamps, the user interface may exhi
 
 The normal run of a pipeline execution follows the flow depicted below:
 
-{{< img src="ci/ci-pipeline-normal-execution-flow.png" alt="Depiction of a normal pipeline execution" style="width:100%;">}}
+{{< img src="ci/pipeline-normal-execution-flow.png" alt="Depiction of a normal pipeline execution" style="width:100%;">}}
 
 Depending on the provider, some levels may be missing. For example, stages may not exist, and jobs may run in parallel or sequence, or a combination of both.
 
@@ -83,9 +85,9 @@ The actual values of the IDs are not important. What matters is that they are co
 
 If a pipeline is indefinitely blocked due to requiring manual intervention, a pipeline event payload must be sent as soon as the pipeline reaches the blocked state. The pipeline status must be set to `blocked`. 
 
-The remaining pipeline data must be sent in separate payloads with a different pipeline unique ID. In the second pipeline, you can set `is_resumed` to `true` to signal that the execution was resumed from a blocked pipeline.
+{{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="Flow of a blocked pipeline execution" style="width:100%;">}}
 
-{{< img src="ci/ci-pipeline-blocked-pipelines-execution.png" alt="Flow of a blocked pipeline execution" style="width:90%;">}}
+The remaining pipeline data must be sent in separate payloads with a different pipeline unique ID. In the second pipeline, you can set `is_resumed` to `true` to signal that the execution was resumed from a blocked pipeline.
 
 ### Downstream pipelines
 

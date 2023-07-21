@@ -69,6 +69,7 @@ Rarely, native extensions or libraries called by them may have missing or incorr
 The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
+* [Using the `passenger` gem/Phusion Passenger web server][11] (Auto-detected starting from 1.13.0 or later).
 
 In these cases, the profiler automatically detects the incompatibility and applies a workaround.
 
@@ -101,3 +102,4 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 [8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
 [9]: https://bugs.mysql.com/bug.php?id=83109
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
+[11]: https://github.com/DataDog/dd-trace-rb/issues/2976
