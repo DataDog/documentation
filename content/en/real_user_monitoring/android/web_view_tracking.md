@@ -30,8 +30,8 @@ Set up the web page you want rendered on your mobile Android and Android TV appl
 
 ### Update your existing SDK setup
 
-1. If you want to forward RUM events coming from web page, download the [latest version][2] of RUM Android SDK and setup RUM feature following the [dedicated guide][3].
-2. If you want to forward Log events coming from web page, download the [latest version][4] of Logs Android SDK and setup Logs feature following the [dedicated guide][5].
+1. If you want to forward RUM events coming from web pages, download the [latest version][2] of RUM Android SDK and setup RUM feature following the [dedicated guide][3].
+2. If you want to forward Log events coming from web pages, download the [latest version][4] of Logs Android SDK and setup Logs feature following the [dedicated guide][5].
 3. Add the Gradle dependency by declaring the `dd-sdk-android-webview` library as a dependency in the module-level `build.gradle` file:
 
     ```groovy
@@ -40,7 +40,7 @@ Set up the web page you want rendered on your mobile Android and Android TV appl
     }
     ```
 
-4. Enable tracking for web view you want with the following code snippet:
+4. Enable tracking for web views with the following code snippet:
 
    ```kotlin
      WebViewTracking.enable(webView, allowedHosts)

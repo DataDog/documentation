@@ -368,7 +368,7 @@ If you are still unsure, you can see if running `(cd android && ./gradlew tasks 
 
 #### Manually on each build
 
-In your `android/app/build.gradle` file, add the [latest version of plugin][15] and configure it **at the very top of the file**:
+In your `android/app/build.gradle` file, add the [latest version of the plugin][15] and configure it **at the top of the file**:
 
 ```groovy
 plugins {

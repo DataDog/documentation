@@ -32,11 +32,11 @@ If you use Jetpack Compose in your application, take a look at Datadog's [dedica
 
 ### RxJava
 
-If you use RxJava in your application, take a look at Datadog's [dedicated RxJava library][8].
+If you use RxJava in your application, see Datadog's [dedicated RxJava library][8].
 
 ### Picasso
  
-If you use Picasso, let it use your `OkHttpClient` instrumented with Datadog SDK for RUM and APM information about network requests made by Picasso.
+If you use Picasso, use it with the `OkHttpClient` that's been instrumented with Datadog SDK for RUM and APM information about network requests made by Picasso.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -61,7 +61,7 @@ If you use Picasso, let it use your `OkHttpClient` instrumented with Datadog SDK
  
 ### Retrofit
  
-If you use Retrofit, let it use your `OkHttpClient` instrumented with Datadog SDK for RUM and APM information about network requests made with Retrofit.
+If you use Retrofit, use it with the `OkHttpClient` that's been instrumented with Datadog SDK for RUM and APM information about network requests made with Retrofit.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -84,7 +84,7 @@ If you use Retrofit, let it use your `OkHttpClient` instrumented with Datadog SD
  
 ### SQLDelight
  
-If you use SQLDelight in your application, take a look at Datadog's [dedicated SQLDelight library][4].
+If you use SQLDelight in your application, see Datadog's [dedicated SQLDelight library][4].
  
 ### SQLite
  
@@ -125,7 +125,7 @@ RUM error event for it.
  
 ### Apollo (GraphQL)
  
-If you use Apollo, let it use your `OkHttpClient` instrumented with Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
+If you use Apollo, use it with the `OkHttpClient` that's been instrumented with Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}

@@ -52,7 +52,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## Migrating to 2.0.0
 
-If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. Check our [migration guide][1] to get more information.
+If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][1] for more information.
 
 ## Further Reading
 
