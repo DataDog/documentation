@@ -30,9 +30,13 @@ If you use Glide to load images in your application, take a look at Datadog's [d
 
 If you use Jetpack Compose in your application, take a look at Datadog's [dedicated Jetpack Compose library][7].
 
+### RxJava
+
+If you use RxJava in your application, take a look at Datadog's [dedicated RxJava library][8].
+
 ### Picasso
  
-If you use Picasso, let it use your `OkHttpClient` for RUM and APM information about network requests made by Picasso.
+If you use Picasso, let it use your `OkHttpClient` instrumented with Datadog SDK for RUM and APM information about network requests made by Picasso.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -57,7 +61,7 @@ If you use Picasso, let it use your `OkHttpClient` for RUM and APM information a
  
 ### Retrofit
  
-If you use Retrofit, let it use your `OkHttpClient` for RUM and APM information about network requests made with Retrofit.
+If you use Retrofit, let it use your `OkHttpClient` instrumented with Datadog SDK for RUM and APM information about network requests made with Retrofit.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -80,7 +84,7 @@ If you use Retrofit, let it use your `OkHttpClient` for RUM and APM information 
  
 ### SQLDelight
  
-If you use SQLDelight, take a look at Datadog's [dedicated SQLDelight library][4].
+If you use SQLDelight in your application, take a look at Datadog's [dedicated SQLDelight library][4].
  
 ### SQLite
  
@@ -121,12 +125,12 @@ RUM error event for it.
  
 ### Apollo (GraphQL)
  
-If you use Apollo, let it use your `OkHttpClient` for RUM and APM information about all the queries performed through Apollo client.
+If you use Apollo, let it use your `OkHttpClient` instrumented with Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-        val apolloClient =  ApolloClient.builder()
+        val apolloClient = ApolloClient.builder()
             .okHttpClient(okHttpClient)
             .serverUrl(<APOLLO_SERVER_URL>)
             .build()
@@ -134,7 +138,7 @@ If you use Apollo, let it use your `OkHttpClient` for RUM and APM information ab
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        final ApolloClient apolloClient = new ApolloClient.builder()
+        ApolloClient apolloClient = new ApolloClient.builder()
             .okHttpClient(okHttpClient)
             .serverUrl(<APOLLO_SERVER_URL>)
             .build();
@@ -150,10 +154,11 @@ If you use the Leanback API to add actions into your Android TV application, tak
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-coil
-[2]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-fresco
-[3]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-glide
-[4]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-sqldelight
+[1]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-coil
+[2]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-fresco
+[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-glide
+[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-sqldelight
 [5]: https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper
-[6]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-tv
-[7]: https://github.com/Datadog/dd-sdk-android/tree/master/dd-sdk-android-compose
+[6]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-tv
+[7]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-compose
+[8]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rx

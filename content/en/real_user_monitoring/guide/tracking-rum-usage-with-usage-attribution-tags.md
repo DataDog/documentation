@@ -38,7 +38,7 @@ To set tags for **mobile sessions**, use the [`addAttribute`][5] method. Here's 
 
 ```javascript
 //Android
-GlobalRum.addAttribute('department', 'marketing')
+GlobalRumMonitor.addAttribute('department', 'marketing')
 
 //iOS
 Global.rum.addAttribute(forKey: 'department', value: 'marketing')
