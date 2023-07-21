@@ -11,7 +11,7 @@ cascade:
 further_reading:
 - link: /monitors/types/ci/
   tag: 설명서
-  text: CI 파이프라인 모니터 생성
+  text: CI Pipeline 모니터 생성
 - link: /continuous_integration/troubleshooting/
   tag: 설명서
   text: CI Visibility 문제 해결
