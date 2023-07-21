@@ -38,13 +38,13 @@ To create Quality Gates rules for your organization, your user account must have
 3. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. More information on [rule scopes](#rule-scope).
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected.
 
-   The following example shows how to create a static analysis rule that will fail when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
+The following example shows how to create a static analysis rule that fails when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
 
    {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
 5. Select whether the rule should block the pipeline or not when it fails.
    Non-blocking rules are helpful when rolling out a new rule and wanting to verify its behavior before making it blocking.
-6. Select the time window over which the query will be evaluated.
+6. Select the time window over which the query is evaluated.
 7. Select a rule name that describes the rule that you are creating.
 8. Click **Save Rule**.
 
@@ -61,7 +61,7 @@ This command:
 2. Evaluates all the matching rules.
 3. If one or more blocking rules fail, the command fails as well, blocking the pipeline.
 
-<div class="alert alert-danger"><strong>Note:</strong> for the command to work properly, it's important that the events (tests, static analysis violations)
+<div class="alert alert-danger">For the command to work properly, it's important that the events (tests, static analysis violations)
 are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</code> command is executed.
 Otherwise, the rules might have an incorrect behavior due to the absence of the events.
 </div>
@@ -85,7 +85,7 @@ By default, the command succeeds.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
 called several minutes after the related events are sent to Datadog, you could skip this waiting time by specifying the `--no-wait` flag.
-Note that, if used incorrectly, this flag might result in inaccurate rule evaluations.
+Iif used incorrectly, this flag may result in inaccurate rule evaluations.
 
 [Custom scopes](#custom-scope) can be added by using the following option one or more times: `--scope`:
 
