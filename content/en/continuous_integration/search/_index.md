@@ -105,25 +105,15 @@ Metrics shown include build frequency, failure rate, average duration, and 95th 
 
 You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error.
 
-## Pipeline details and branches
+## Pipeline details and executions
 
-Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame, and can display branches other than the default.
+Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame.
 
 {{< img src="ci/pipeline_branch_overview_updated.png" alt="Pipeline Details page for a single pipeline" style="width:100%;">}}
 
-Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
+Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, error rates, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
 
-When viewing the _default_ branch for a pipeline, each stage and job summary table on the page contains a _Duration Change_ graph that visualizes the absolute and relative change in duration of stages and jobs, along with a graph of _Errored Executions_.
-
-{{< img src="ci/pipeline_job_summary_duration_change.png" alt="Job summary table on the Pipeline Details page, for the default branch" style="width:100%;">}}
-
-When viewing a feature branch for a pipeline, there are two graphs for _Errored Executions_: one for failed executions in this feature branch, and another for comparing failures in this branch to other failures. You have the option to toggle between `Other Branches` and `Specific Branch`. Selecting `Other Branches` compares failed executions in this feature branch with aggregated failures across all other branches to help you distinguish between introduced (local) execution failures and inherited (global) execution failures. Toggling to `Specific Branch` directly compares failed executions in this feature branch with failed executions in another branch of your choice to help you specifically track changes in pipeline performance.
-
-Optionally, you can directly compare failed executions in this feature branch with failed executions in another branch of your choice.
-
-{{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="Stage summary table" style="width:100%;">}}
-
-The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
+The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
 ### Explore connections to services, resources, and network events
 
