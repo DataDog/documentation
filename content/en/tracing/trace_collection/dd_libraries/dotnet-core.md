@@ -76,9 +76,10 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 ### Installation
 
 1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
-2. [Install the tracer.](#install-the-tracer)
-3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-4. [View your live data.](#view-your-live-data)
+2. [Choose your instrumentation method](#choose-your-instrumentation-method)
+3. [Install the tracer.](#install-the-tracer)
+4. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
+5. [View your live data.](#view-your-live-data)
 
 ### Configure the Datadog Agent for APM
 
@@ -131,9 +132,18 @@ For all other environments, see the [Integrations documentation][4] for that env
 
 {{< /tabs >}}
 
-### Install the tracer
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
+
+### Choose your instrumentation method
+
+After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
+
+See the following pages for supported deployment scenarios and languages:
+
+- [Inject the instrumentation library locally][11] (at the Agent); or
+- Directly adding the tracing library in the application, as described [on the rest of this page](#install-the-tracer). Read more about [compatibility information][1].
+
+### Install the tracer
 
 You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
@@ -494,3 +504,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [4]: /tracing/trace_collection/library_config/dotnet-core/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[11]: /tracing/_trace_collection/library_injection_local/

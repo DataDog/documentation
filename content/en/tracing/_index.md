@@ -64,9 +64,9 @@ As you transition from monoliths to microservices, setting up Datadog APM across
 <strong>Beta: 1-Step APM onboarding</strong> - Enable APM when you install the Datadog Agent on your hosts and containers. Your services are automatically instrumented without having to modify the code, quickly getting you up and running with application performance monitoring. For more information, read <a href="/tracing/trace_collection/one-step-apm">1-Step APM Onboarding</a>.
 </div>
 
-Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], using automatic or custom instrumentation, or instrumenting with [OpenTelemetry][5].
-
 **Read [Sending Traces to Datadog][2] to get started.**
+
+Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], using automatic or custom instrumentation, or instrumenting with [OpenTelemetry][5].
 
 ## Control and manage data flowing into and being kept by Datadog
 

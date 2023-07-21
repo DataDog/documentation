@@ -31,7 +31,7 @@ To enable the Agent for APM, select your language:
 
 <br/>
 
-In containerized, serverless, or certain other environments, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be properly received, so ensure you have followed instructions for both components.
+If you don't use the 1-Step APM onboarding option, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be properly received from containerized, serverless, or certain other environments. Ensure you have followed instructions for both components.
 
 ## Step 2 - Instrument your application 
 
