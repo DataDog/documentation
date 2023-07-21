@@ -54,7 +54,7 @@ instances:
 
 The Agent connects only to CDB. It queries the information about PDBs while connected to CDB. Don't create connections to individual PDBs.
 
-Set the `rac_cluster` configuration parameter to the name of your RAC cluster or some user friendly alias. The `rac_cluster` filter helps you select all RAC nodes in the dashboard. You can set an additional filter for the database of interest.
+Set the `rac_cluster` configuration parameter to the name of your RAC cluster or some user friendly alias. The `rac_cluster` filter helps you select all RAC nodes in the [Oracle dashboard][8]. You can set an additional filter for the database of interest.
 
 ### Validate
 
@@ -67,6 +67,7 @@ Set the `rac_cluster` configuration parameter to the name of your RAC cluster or
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: /database_monitoring/setup_oracle/selfhosted
+[8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
 ## Further reading
 
