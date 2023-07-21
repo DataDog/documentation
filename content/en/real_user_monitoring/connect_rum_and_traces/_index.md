@@ -332,6 +332,18 @@ To verify you've configured the APM integration with RUM, follow the steps below
 [2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=datadog#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
+{{% tab "Roku" %}}
+
+1. Run your application from [software].
+2. Visit a screen in your application.
+3. Open [software]'s [Network Connections and HTTP Traffic instrument][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+
+[1]: 
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=datadog#how-are-rum-resources-linked-to-traces
+
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported libraries
