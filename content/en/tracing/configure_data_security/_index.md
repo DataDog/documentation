@@ -85,11 +85,13 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "PHP" %}}
 
-| Category            | Collected                       | Obfuscated                      |
+**Note:** Name and email are not collected by default and must be enabled.
+
+| Category            |            Collected            |           Obfuscated            |
 |:--------------------|:-------------------------------:|:-------------------------------:|
-| Name                |                                 |                                 |
-| Email               |                                 |                                 |
-| Client IP           |                                 |                                 |
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
 | Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
