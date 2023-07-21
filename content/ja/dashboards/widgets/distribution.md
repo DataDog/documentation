@@ -75,7 +75,7 @@ APM リクエスト分布で、X 軸にパーセンタイルマーカーを追�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/widgets/heat_map/
+[1]: /ja/dashboards/widgets/heatmap/
 [2]: /ja/dashboards/widgets/#full-screen
 [3]: /ja/api/latest/dashboards/
 [4]: /ja/dashboards/graphing_json/widget_json/

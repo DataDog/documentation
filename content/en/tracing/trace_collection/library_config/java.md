@@ -59,7 +59,7 @@ Optional path to a file where configuration properties are provided one per each
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
 **Default**: `null`<br>
-**Example**: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+**Example**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 Dynamically rename services via configuration. Useful for making databases have distinct names across different services.
 
 `dd.writer.type`
@@ -422,7 +422,7 @@ Available since version 1.9.0
 
 #### Deprecated extraction and injection settings
 
-These extraction and and injection settings for `b3` (both B3 multi header and B3 single header) are deprecated since version 1.9.0.
+These extraction and injection settings have been deprecated in favor of the `dd.trace.propagation.style.inject`, `dd.trace.propagation.style.extract`, and `dd.trace.propagation.style` settings since version 1.9.0. See [Propagating Java Trace Context][13]. The previous `b3` setting for both B3 multi header and B3 single header has been replaced with the new settings `b3multi` and `b3single`.
 
 `dd.propagation.style.inject`
 : **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>

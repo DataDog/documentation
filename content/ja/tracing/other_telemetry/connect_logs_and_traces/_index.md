@@ -8,7 +8,7 @@ title: ログとトレースの接続
 type: multi-code-lang
 ---
 
-{{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="トレースのログ"  style="width:100%;">}}
+{{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="トレースのログ" style="width:100%;">}}
 
 Datadog APM と Datadog Log Management の間の相関関係は、ログの属性としてトレース ID、スパン ID、`env`、`service`、`version` を挿入することで改善されています。これらのフィールドを使用すると、特定のサービスとバージョンに関連付けられた正確なログ、または観測された[トレース][1]に関連付けられたすべてのログを見つけることができます。
 

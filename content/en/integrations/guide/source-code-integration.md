@@ -17,7 +17,7 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li><li>.NET</li><li>Ruby</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
 </div>
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
@@ -44,7 +44,7 @@ To link data to a specific commit, tag your telemetry with `git.commit.sha` and 
 
 <div class="alert alert-warning">
 This approach requires Docker, or containerd >= 1.5.6. It doesn't support containers running on AWS Fargate.
-For additional container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=other#tag-your-telemetry">Other</a> section.
+For additional container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> tab.
 </div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:
@@ -100,7 +100,7 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 Datadog only captures the repository URL, the commit SHA of the current branch, and a list of tracked file paths—Datadog does not ingest or store any user code.
 
-### Embed Git information in your artifacts
+### Embed git information in your artifacts on CI
 
 You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically link the active commit to your APM service.
 
@@ -109,7 +109,7 @@ Select one of the following languages that supports embedding git information:
 {{< tabs >}}
 {{% tab "Go" %}}
 
-[Go embeds version control information][101] in binaries starting in version 1.18. 
+[Go embeds version control information][1] in binaries starting in version 1.18. 
 
 Ensure your service meets all the following requirements:
 
@@ -117,24 +117,64 @@ Ensure your service meets all the following requirements:
 * You are using a version of the Datadog Go Tracer >= 1.48.0.
 * Your application was built as a module using `go.mod`, and the module path is your code repository's URL.
 
-[101]: https://tip.golang.org/doc/go1.18
+[1]: https://tip.golang.org/doc/go1.18
 {{% /tab %}}
-{{% tab "Java" %}}
 
-Based on your Java setup, there are libraries that can inject version control information in the Java artifact. These plugins generate a `git.properties` file in the root directory of your application's JAR archive.
+{{% tab "Python" %}}
+First, upgrade the [Python tracer][1] to v1.12 or higher.
 
-1. Install the `version-control-information` injector library:
+For the standard library:
+1. Install the `ddtrace` package.
+2. Add `import ddtrace.sourcecode.setuptools_auto` as the first import to `setup.py`.
+3. Set the environment variable `DD_MAIN_PACKAGE` to the name of the primary Python package.
 
-   - For Maven, install and set up [`git-commit-id-maven-plugin`][101].
-   - For Gradle, install and set up [`gradle-git-properties`][102].
+For the unified Python project settings file:
+1. Install the [`hatch-datadog-build-metadata` plugin][2] and configure it to embed git metadata. If the project already has URLs, you must reconfigure them as dynamic and move them to another config section.
+2. Set the environment variable `DD_MAIN_PACKAGE` to the name of the primary Python package.
 
-2. Upgrade the [Datadog Java Tracer][103] to version 1.12.1 or later.
-
-[101]: https://github.com/git-commit-id/git-commit-id-maven-plugin
-[102]: https://github.com/n0mer/gradle-git-properties
-[103]: https://github.com/DataDog/dd-trace-java
+[1]: https://app.datadoghq.com/apm/service-setup?architecture=host-based&language=python
+[2]: https://github.com/DataDog/hatch-datadog-build-metadata
 {{% /tab %}}
+
+{{% tab ".NET" %}}
+Datadog can use [Microsot SourceLink][1] to extract the git commit SHA and repository URL directly from your .NET assembly. To use this approach:
+1. Open your project file (`.csproj`) in your IDE, and add a reference to one of the following NuGet packages, based on where your git repository is hosted:
+   - **GitHub:** [Microsoft.SourceLink.GitHub][2]
+   - **Bitbucket:** [Microsoft.SourceLink.Bitbucket][3]
+   - **GitLab:** [Microsoft.SourceLink.GitLab]()
+   - **Azure DevOps:** [Microsoft.SourceLink.AzureRepos.Git][5]
+   - **Azure DevOps Server:** [Microsoft.SourceLink.AzureDevOpsServer.Git][6]
+2. Upgrade the [.NET tracer][7] to v2.25.0 or higher
+3. Ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
+
+[1]: https://github.com/dotnet/sourcelink
+[2]: https://www.nuget.org/packages/Microsoft.SourceLink.GitHub
+[3]: https://www.nuget.org/packages/Microsoft.SourceLink.Bitbucket
+[4]: https://www.nuget.org/packages/Microsoft.SourceLink.GitLab
+[5]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureRepos.Git
+[6]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureDevOpsServer.Git
+[7]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
+
 {{< /tabs >}}
+
+#### Build inside a Docker container
+If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access git information:
+
+1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL. 
+
+```
+!.git/HEAD
+!.git/config
+!.git/refs
+```
+
+2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
+
+```
+COPY .git ./.git
+```
+
 
 ## Configure your repositories
 
@@ -198,7 +238,7 @@ You can directly access a trace in its source repository on GitHub in the [Conti
 
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
 
-[1]: /profiler/search_profiles/
+[1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/search
 {{% /tab %}}
 {{< /tabs >}}

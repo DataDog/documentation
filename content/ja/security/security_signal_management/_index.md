@@ -6,7 +6,7 @@ title: Security Signal Management
 ---
 ## 概要
 
-Cloud SIEM と CWS Security Signal Management では、`Security Signals Write` 権限を持つユーザーは、過去 2 日以内に発生したセキュリティシグナルの検出に対して状態の変更などのアクションを行い、シグナルのアクション履歴を監査ログで確認することが可能です。シグナルエクスプローラーでは、専用のファセットを使用して、アクションを起こしたシグナルをフィルタリングし、行内のアクションに関する概要情報を表示することができます。シグナルにアクションを起こした後、監査ログでアクティビティを確認することができます。
+Cloud SIEM と CWS Security Signal Management では、`Security Signals Write` 権限を持つユーザーは、過去 30 日以内に発生したセキュリティシグナルの検出に対して状態の変更などのアクションを行い、シグナルのアクション履歴を監査ログで確認することが可能です。シグナルエクスプローラーでは、専用のファセットを使用して、アクションを起こしたシグナルをフィルタリングし、行内のアクションに関する概要情報を表示することができます。シグナルにアクションを起こした後、監査ログでアクティビティを確認することができます。
 
 セキュリティシグナルは、**Security** > **Security Signals** > Cloud SIEM または CWS シグナルを選択し、サイドパネルビューのヘッダーからアクションを起こすことで表示および管理できます。
 
@@ -23,7 +23,7 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 シグナルのステータスは、以下のいずれかになります。
 * **Open**: Datadog Security は、ルールに基づいて検出をトリガーし、結果のシグナルは解決されていません。
 * **Under Review**: 調査の実施中、シグナルの状態を Under Review に切り替えることができます。必要に応じて、シグナルの状態を Under Review から Archived または Open に移動することができます。
-* **Archived**: シグナルの原因となった検出を解決すると、**Archived** 状態に移行することができます。アーカイブされた問題が再浮上した場合、またはさらなる調査が必要な場合、作成から 2 日以内であれば、シグナルをオープン状態に戻すことができます。
+* **Archived**: シグナルの原因となった検出を解決すると、**Archived** 状態に移行することができます。アーカイブされた問題が再浮上した場合、またはさらなる調査が必要な場合、作成から 30 日以内であれば、シグナルをオープン状態に戻すことができます。
 
 シグナルに対してアクションを起こすと、確認のトーストが表示され、アクションを **Undo** (取り消す) ことができます。アクションを保存すると、シグナルのサイドパネルの上にバナーで表示されます。バナーには、いつ、誰が、どのようなアクションを行ったかが表示されます。
 
@@ -46,7 +46,7 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 
     - **Open**: Datadog Security は、ルールに基づいて検出をトリガーし、結果のシグナルはまだ解決されていません。
     - **Under Review**: 調査の実施中、シグナルの状態を **Under Review** に切り替えることができます。**Under Review** の状態から、必要に応じてシグナルの状態を **Archived** または **Open** に移動することができます。
-    - **Archived**: シグナルの原因となった検出が解決されると、**Archived** 状態に移行することができます。アーカイブされた問題が再浮上した場合、またはさらなる調査が必要な場合、作成から 2 日以内であれば、シグナルをオープン状態に戻すことができます。
+    - **Archived**: シグナルの原因となった検出が解決されると、**Archived** 状態に移行することができます。アーカイブされた問題が再浮上した場合、またはさらなる調査が必要な場合、作成から 30 日以内であれば、シグナルをオープン状態に戻すことができます。
 
 4. ステータスを保存すると、どのアクションが実行されたかを示す確認のトーストが表示され、そのアクションを "Undo" (取り消す) ことができます。アクションを保存すると、シグナルのサイドパネルの上にバナーで表示されます。バナーには、いつ、誰が、どのようなアクションを行ったかが表示されます。
 
@@ -56,7 +56,7 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 
 サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、Application Security Management のシグナルからインシデントを宣言します。
 
-{{< img src="monitors/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
+{{< img src="service_management/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
 
 ## セキュリティシグナルアクションの監査証跡
 
@@ -70,6 +70,6 @@ Datadog Security で行われたアクションによって生成された監査
 [1]: /ja/account_management/rbac/?tab=datadogapplication#pagetitle
 [2]: /ja/account_management/rbac/permissions/#cloud-security-platform
 [3]: /ja/security/notifications/rules/
-[4]: /ja/monitors/incident_management/#pagetitle
+[4]: /ja/service_management/incident_management/#pagetitle
 [5]: /ja/account_management/audit_trail/#overview
 [6]: /ja/account_management/audit_trail/#retention

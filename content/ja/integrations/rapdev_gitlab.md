@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-gitlab
 app_uuid: 629973c5-63ac-4f17-a9c2-5bda5b6677b4
 assets:

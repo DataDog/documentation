@@ -25,13 +25,13 @@ further_reading:
   text: Envoy ドキュメント
 - link: https://www.nginx.com/
   tag: ドキュメント
-  text: Nginx Web サイト
+  text: NGINX ウェブサイト
 - link: https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentracing/
   tag: ドキュメント
-  text: Nginx Ingress Controller OpenTracing
+  text: NGINX Ingress Controller OpenTracing
 - link: https://github.com/opentracing-contrib/nginx-opentracing
   tag: ソースコード
-  text: OpenTracing 対応 Nginx プラグイン
+  text: OpenTracing 対応 NGINX プラグイン
 - link: https://istio.io/
   tag: ドキュメント
   text: Istio ウェブサイト
@@ -280,44 +280,29 @@ DD_TRACE_SAMPLING_RULES=[{"service": "envoy-proxy","sample_rate": 0.1}]
 
 | Envoy バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
-| v1.24 | v1.2.1 |
-| v1.23 | v1.2.1 |
-| v1.22 | v1.2.1 |
-| v1.21 | v1.2.1 |
-| v1.20 | v1.2.1 |
-| v1.19 | v1.2.1 |
-| v1.18 | v1.2.1 |
-| v1.17 | v1.1.5 |
-| v1.16 | v1.1.5 |
-| v1.15 | v1.1.5 |
+| v1.18.x - v1.26.0 | v1.2.1 |
+| v1.15.x - v1.17.x | v1.1.5 |
 | v1.14 | v1.1.3 |
-| v1.13 | v1.1.1 |
-| v1.12 | v1.1.1 |
-| v1.11 | v0.4.2 |
-| v1.10 | v0.4.2 |
-| v1.9 | v0.3.6 |
+| v1.12.x - v1.13.x | v1.1.1 |
+| v1.10.x - v1.11.x | v0.4.2 |
+| v1.9.x | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [3]: /ja/tracing/setup/cpp/#environment-variables
 {{% /tab %}}
-{{% tab "Nginx" %}}
+{{% tab "NGINX" %}}
 
-Datadog APM は、複数の構成で Nginx をサポートしています。
-- 新しい Datadog モジュールによって提供されるトレースで、プロキシとして動作する Nginx。
-- OpenTracing モジュールによって提供されるトレースで、プロキシとして動作する Nginx。
-- Kubernetes の Ingress コントローラーとしての Nginx。
+Datadog APM は、複数の構成で NGINX をサポートしています。
+- Datadog モジュールによって提供されるトレースで、プロキシとして動作する NGINX。
+- OpenTracing モジュールによって提供されるトレースで、プロキシとして動作する NGINX。
+- Kubernetes の Ingress コントローラーとしての NGINX。
 
-## Nginx と Datadog モジュールの組み合わせ
-Datadog は分散型トレーシングのために Nginx モジュールを提供しています。
-
-<div class="alert alert-warning">
-Datadog Nginx モジュールはベータ版です。フィードバックは<a href="https://docs.datadoghq.com/help/">サポート</a>までご連絡ください。
-新しいモジュールの使用感についてぜひお聞かせください。
-</div>
+## NGINX と Datadog モジュールの組み合わせ
+Datadog は分散型トレーシングのために NGINX モジュールを提供しています。
 
 ### モジュールのインストール
-Datadog Nginx モジュールは、サポートされた Docker イメージにそれぞれ 1 バージョンずつあります。[最新の nginx-datadog GitHub リリース][1]から適切なファイルをダウンロードし、Nginx の modules ディレクトリに解凍してモジュールをインストールします。
+Datadog NGINX モジュールは、サポートされた Docker イメージにそれぞれ 1 バージョンずつあります。[最新の nginx-datadog GitHub リリース][1]から適切なファイルをダウンロードし、NGINX の modules ディレクトリに解凍してモジュールをインストールします。
 
 例えば、Docker イメージ [nginx:1.23.2-alpine][3] と互換性のあるモジュールは、各リリースに `nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz` というファイルとして含まれています。Docker イメージ [amazonlinux:2.0.20230119.1][2] と互換性のあるモジュールは、各リリースに `amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz` というファイルとして含まれています。
 
@@ -328,49 +313,47 @@ get_latest_release() {
 BASE_IMAGE=nginx:1.23.2-alpine
 BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="nginx_$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
+tarball="$BASE_IMAGE_WITHOUT_COLONS-ngx_http_datadog_module.so.tgz"
 wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
 tar -xzf "$tarball" -C /usr/lib/nginx/modules
 rm "$tarball"
 ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
 ```
 
-### Nginx 構成と Datadog モジュールの組み合わせ
-Nginx 構成の一番上のセクションで、Datadog モジュールをロードします。
+### NGINX 構成と Datadog モジュールの組み合わせ
+NGINX 構成の一番上のセクションで、Datadog モジュールをロードします。
 
 ```nginx
 load_module modules/ngx_http_datadog_module.so;
 ```
 
-デフォルトの構成では、ローカルの Datadog Agent に接続し、すべての Nginx ロケーションのトレースを生成します。カスタム構成は、nginx 構成の `http` セクション内の `datadog` JSON ブロックで指定します。
+デフォルトの構成では、ローカルの Datadog Agent に接続し、すべての NGINX ロケーションに対するトレースを生成します。Datadog モジュールの [API ドキュメント][15]で説明されている専用の `datadog_*` ディレクティブを使用して、カスタム構成を指定します。
 
-例えば、以下の Nginx の構成では、サービス名を `usage-internal-nginx` に、サンプリング量を 10% に設定しています。
+例えば、以下の NGINX の構成では、サービス名を `usage-internal-nginx` に、サンプリング量を 10% に設定しています。
 
 ```nginx
 load_module modules/ngx_http_datadog_module.so;
 
 http {
-  datadog {
-    "service": "usage-internal-nginx",
-    "sample_rate": 0.1
-  }
+  datadog_service_name usage-internal-nginx;
+  datadog_sample_rate 0.1;
+
+  # サーバー、ロケーション...
 }
 ```
 
-`datadog` ディレクティブがサポートするフィールドや、モジュールがサポートする他の構成ディレクティブについては、[API ドキュメント](https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md)を参照してください。
+## NGINX と OpenTracing モジュールの組み合わせ
+OpenTracing プロジェクトは、分散型トレーシングのための NGINX モジュールを提供します。このモジュールは、Datadog プラグインのような OpenTracing と互換性のあるプラグインをロードします。
 
-## Nginx と OpenTracing モジュールの組み合わせ
-OpenTracing プロジェクトは、分散型トレーシングのための Nginx モジュールを提供します。このモジュールは、Datadog プラグインのような OpenTracing と互換性のあるプラグインをロードします。
-
-### プラグインのインストール
+### Datadog OpenTracing Plugin のインストール
 
 **注**: このプラグインは、古いバージョンの `libstdc++` を使用する Linux ディストリビューションでは機能しません。これには、RHEL/Centos 7 および AmazonLinux 1 が含まれます。
-これの回避策は、Docker コンテナから Nginx を実行することです。Dockerfile の例が[こちら][4]にあります。
+これの回避策は、Docker コンテナから NGINX を実行することです。Dockerfile の例が[こちら][2]にあります。
 
 次のプラグインをインストールする必要があります。
 
-- OpenTracing 対応 Nginx プラグイン - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][5] - `/usr/lib/nginx/modules` にインストール
-- Datadog OpenTracing C++ プラグイン - [linux-amd64-libdd_opentracing_plugin.so.gz][6] - `/usr/local/lib` など、Nginx にアクセス可能な場所にインストール
+- OpenTracing NGINX モジュール - [linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz][5] - `/usr/lib/nginx/modules` にインストール
+- Datadog OpenTracing C++ プラグイン - [linux-amd64-libdd_opentracing_plugin.so.gz][6] - `/usr/local/lib` など、NGINX にアクセス可能な場所にインストール
 
 次のコマンドを使用してモジュールをダウンロードしてインストールします。
 
@@ -384,17 +367,17 @@ get_latest_release() {
 NGINX_VERSION=1.17.3
 OPENTRACING_NGINX_VERSION="$(get_latest_release opentracing-contrib/nginx-opentracing)"
 DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-# OpenTracing 用の Nginx プラグインをインストールします
+# OpenTracing NGINX モジュールをインストールします
 wget https://github.com/opentracing-contrib/nginx-opentracing/releases/download/${OPENTRACING_NGINX_VERSION}/linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz
 tar zxf linux-amd64-nginx-${NGINX_VERSION}-ot16-ngx_http_module.so.tgz -C /usr/lib/nginx/modules
-# Datadog Opentracing C++ プラグインをインストールします
+# Datadog OpenTracing C++ プラグインをインストールします
 wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
 gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
 ```
 
-### Nginx 構成と OpenTracing モジュールの組み合わせ
+### NGINX 構成と OpenTracing モジュールの組み合わせ
 
-OpenTracing モジュールを Nginx コンフィギュレーションに読み込む必要があります。
+OpenTracing モジュールを NGINX コンフィギュレーションに読み込む必要があります。
 
 ```nginx
 # OpenTracing モジュールを読み込む
@@ -412,7 +395,7 @@ load_module modules/ngx_http_opentracing_module.so;
     opentracing_load_tracer /usr/local/lib/libdd_opentracing_plugin.so /etc/nginx/dd-config.json;
 ```
 
-`log_format with_trace_id` ブロックは、ログとトレースの相関関係を構築するためのものです。完全なフォーマットについては、[Nginx config][7] のサンプルファイルを参照してください。値 `$opentracing_context_x_datadog_trace_id` はトレース ID をキャプチャし、`$opentracing_context_x_datadog_parent_id` はスパン ID をキャプチャします。
+`log_format with_trace_id` ブロックは、ログとトレースの相関関係を構築するためのものです。完全なフォーマットについては、[NGINX config][5] のサンプルファイルを参照してください。値 `$opentracing_context_x_datadog_trace_id` はトレース ID をキャプチャし、`$opentracing_context_x_datadog_parent_id` はスパン ID をキャプチャします。
 
 トレーシングが必要なサーバー内の `location` ブロックに次の指示を追加します。
 
@@ -433,24 +416,21 @@ Datadog トレーシングの実装コンフィグファイルには、次の指
 }
 ```
 
-`service` 値は Nginx の使用に合わせて意味のある値に変更できます。
-Nginx をコンテナまたはオーケストレーション環境で使用している場合は、`agent_host` 値を変更する必要があります。
+`service` 値は NGINX の使用に合わせて意味のある値に変更できます。
+NGINX をコンテナまたはオーケストレーション環境で使用している場合は、`agent_host` 値を変更する必要があります。
 
 完成例
 
 * [nginx.conf][7]
 * [dd-config.json][8]
 
-このコンフィギュレーションが完了すると、Nginx への HTTP リクエストが開始し Datadog トレースを伝達します。リクエストは APM UI に表示されます。
+このコンフィギュレーションが完了すると、NGINX への HTTP リクエストが開始し Datadog トレースを伝達します。リクエストは APM UI に表示されます。
 
-## Nginx サンプリング
+### NGINX サンプリングと OpenTracing モジュールの組み合わせ
 
-Datadog に送信される Nginx トレースの量を制御するには、コンフィギュレーション JSON で `sample_rate` プロパティを `0.0` (0%) から `1.0` (100%) の間の値に設定して、サンプリングレートを指定します。
-- Datadog モジュールを使用している場合、JSON の
-  構成は [datadog][9] ディレクティブにあります。
-- OpenTracing モジュールを使用している場合、
-  JSON 構成は `opentracing_load_tracer` の引数として渡される
-  ファイル (上記の例では `/etc/nginx/dd-config.json`) になります。
+OpenTracing モジュールによって Datadog に送信される NGINX トレースの量を制御するには、コンフィギュレーション JSON で `sample_rate` プロパティを `0.0` (0%) と `1.0` (100%) の間の値に設定して、サンプリングレートを指定します。
+
+JSON 構成は `opentracing_load_tracer` の引数として渡されるファイル (上の例では `/etc/nginx/dd-config.json`) を指します。
 
 ```json
 {
@@ -462,9 +442,9 @@ Datadog に送信される Nginx トレースの量を制御するには、コ�
 }
 ```
 
-サンプルレートを指定しない場合、[Datadog Agent が算出したサンプリングレート][10] (10 トレース/秒/Agent) が適用されます。
+サンプルレートを指定しない場合、[Datadog Agent が算出したサンプリングレート][10] (デフォルトで 10 トレース/秒/Agent) が適用されます。
 
-`sampling_rules` 構成パラメータで、**サービスごとの**サンプリングレートを設定します。パラメータ `sampling_limit_per_second` を設定して、サービスインスタンスごとに秒あたりのトレース数を設定することで、レート制限を設定します。`sampling_limit_per_second` が設定されていない場合、1 秒間に 100 個のトレースという制限が適用されます。
+`sampling_rules` 構成パラメーターで**サービスごとの**サンプリングレートを設定します。パラメーター `sampling_limit_per_second` に NGINX ワーカーごとの 1 秒あたりのトレース数を設定することで、全体のレート制限を設定します。`sampling_limit_per_second` の値が設定されていない場合、デフォルトの制限値である 100 トレース/秒が適用されます。
 
 例えば、`nginx` というサービスのトレースの 50% を送信するには (1 秒間に最大 `50` トレース)
 
@@ -481,12 +461,12 @@ Datadog に送信される Nginx トレースの量を制御するには、コ�
 
 [dd-opentracing-cpp][11] ライブラリのサンプリング構成オプションについては、[リポジトリドキュメント][12]で詳しく説明しています。
 
-## Kubernetes 対応 Nginx Ingress コントローラー
+## Ingress-NGINX Controller for Kubernetes
 
-[Kubernetes ingress-nginx][13] コントローラーのバージョン 0.23.0 以降には、OpenTracing 対応 Nginx プラグインが含まれています。
+[Ingress-NGINX Controller for Kubernetes][13] バージョン 0.23.0+ には OpenTracing NGINX モジュールが含まれています。
 
-このプラグインを有効化するには、ConfigMap を作成または編集して `enable-opentracing: "true"` と、トレースの送信先となる `datadog-collector-host` に設定します。
-ConfigMap 名は nginx-ingress コントローラーコンテナのコマンドライン引数により明示的に引用し、`--configmap=$(POD_NAMESPACE)/nginx-configuration` をデフォルトに設定します。
+Datadog トレーシングを有効化するには、ConfigMap を作成または編集して `enable-opentracing: "true"` と、トレースの送信先となる `datadog-collector-host` に設定します。
+ConfigMap 名は Ingress-NGINX Controller コンテナのコマンドライン引数により明示的に引用し、`--configmap=$(POD_NAMESPACE)/nginx-configuration` をデフォルトに設定します。
 ingress-nginx が Helm チャートからインストールされた場合は、この ConfigMap の名前は `Release-Name-nginx-ingress-controller` となります。 
 
 Ingress コントローラーは `nginx.conf` と `/etc/nginx/opentracing.json` 双方のファイルを管理します。すべての `location` ブロックでトレーシングが有効化されます。
@@ -527,30 +507,31 @@ data:
 上記はデフォルトの `nginx-ingress-controller.ingress-nginx` サービス名をオーバーライドします。
 
 ### Ingress Controller サンプリング
-Nginx Ingress Controller for Kubernetes は、Datadog のトレーシングライブラリである `dd-opentracing-cpp` の [v1.2.1][14] を使用しています。
+固定サンプリングレートを設定するには、Ingress コントローラーの [ConfigMap][17] で [datadog-sample-rate][16] オプションを使用します。例えば、サンプリングレートを 40% に設定するには
 
-Datadog に送信される Ingress Controller のトレースの量を制御するには、全てのトレースにマッチするサンプリングルールを指定します。ルールに構成された `sample_rate` は、サンプリングされるトレースの比率を決定します。ルールが指定されていない場合、サンプリングはデフォルトで 100% になります。
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.7.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  datadog-collector-host: $HOST_IP
+  enable-opentracing: "true"
+  datadog-sample-rate: "0.4"
+```
 
-環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サンプリングルールを指定します。Ingress Controller でサンプリングルールを定義するには、以下のようにします。
-
-1. Ingress Controller の `ConfigMap` の `data` セクションに以下の [main-snippet][14] を追加して、環境変数をワーカープロセスに転送するよう Nginx に指示を出します。
-   ```yaml
-   data:
-     main-snippet: "env DD_TRACE_SAMPLING_RULES;"
-   ```
-
-2. Ingress Controller の `Deployment` の `env` セクションで、環境変数に値を指定します。例えば、Ingress Controller から発信されるトレースを 10% 保つようにするには
-   ```yaml
-   env:
-   - name: DD_TRACE_SAMPLING_RULES
-     value: '[{"sample_rate": 0.1}]'
-   ```
-   [Datadog Agent が算出したサンプリングレート][10] (デフォルトで Agent あたり 10 トレース/秒) を使用するには、サンプリングルールの空の配列を指定します。
-   ```yaml
-   env:
-   - name: DD_TRACE_SAMPLING_RULES
-     value: '[]'
-   ```
+<div class="alert alert-warning">
+Datadog トレースインテグレーションのバグのため、<a
+href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-priority-sampling">datadog-priority-sampling</a> オプションは効果がなく、<a
+href="https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent">Datadog Agent によって計算された</a>サンプリングレートを使用することはできません。現在、このバグの解決に取り組んでいます。
+</div>
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
 [2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
@@ -566,6 +547,9 @@ Datadog に送信される Ingress Controller のトレースの量を制御す�
 [12]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
+[15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
+[17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -577,7 +561,7 @@ Datadog は、Istio 環境のあらゆる側面を監視するため、以下を
 
 Istio 環境での Datadog の使用について、詳細は [Istio のブログをご参照ください][3]。
 
-Datadog APM は Istio v1.1.3 以降のバージョンに対応しており、Kubernetes クラスター上でご利用いただけます。
+Datadog APM は、[対応する Istio のリリース][13]で利用できます。
 
 ## Datadog Agent のインストール
 
@@ -665,21 +649,11 @@ spec:
 
 | Istio バージョン | C++ トレーサーバージョン |
 |---------------|--------------------|
-| v1.15.x | v1.2.1 |
-| v1.14.x | v1.2.1 |
-| v1.13.x | v1.2.1 |
-| v1.12.x | v1.2.1 |
-| v1.11.x | v1.2.1 |
-| v1.10.x | v1.2.1 |
-| v1.9.x | v1.2.1 |
-| v1.8.x | v1.1.5 |
-| v1.7.x | v1.1.5 |
+| v1.9.x - v1.17.x | v1.2.1 |
+| v1.7.x - v1.8.x | v1.1.5 |
 | v1.6.x | v1.1.3 |
-| v1.5.x | v1.1.1 |
-| v1.4.x | v1.1.1 |
-| v1.3.x | v1.1.1 |
-| v1.2.x | v0.4.2 |
-| v1.1.3 | v0.4.2 |
+| v1.3.x - v1.5.x | v1.1.1 |
+| v1.1.3 - v1.2.x | v0.4.2 |
 
 
 ## デプロイおよびサービス
@@ -729,9 +703,54 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 [10]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /ja/tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
+{{% /tab %}}
+{{% tab "Kong" %}}
+
+Datadog APM は、[Kong Gateway][1] で [kong-plugin-ddtrace][2] プラグインを利用して利用できます。
+
+## インストール
+
+プラグインは `luarocks` を使ってインストールします。
+```
+luarocks install kong-plugin-ddtrace
+```
+
+Kong Gateway はバンドルされているプラグインではないので、有効にする前に構成する必要があります。有効にするには、環境変数 `KONG_PLUGINS` に `bundled` と `ddtrace` を含めるか、`/etc/kong/kong.conf` に `plugins=bundled,ddtrace` を設定してください。次に、Kong Gateway を再起動すると変更が適用されます。
+
+```
+# KONG_PLUGINS 環境変数を設定するか、/etc/kong/kong.conf を編集して ddtrace プラグインを有効にします
+export KONG_PLUGINS=bundled,ddtrace
+kong restart
+```
+
+## 構成
+
+プラグインは、グローバルまたは Kong Gateway の特定のサービスで有効にすることができます。
+
+```
+# グローバルに有効
+curl -i -X POST --url http://localhost:8001/plugins/ --data 'name=ddtrace'
+# 特定のサービスのみ有効
+curl -i -X POST --url http://localhost:8001/services/example-service/plugins/ --data 'name=ddtrace'
+```
+
+プラグイン内のサービス名や環境などを設定するためのオプションが用意されています。
+以下の例では、`prod` 環境に `mycorp-internal-api` というサービス名を設定しています。
+```
+curl -i -X POST --url http://localhost:8001/plugins/ --data 'name=ddtrace' --data 'config.service_name=mycorp-internal-api' --data 'config.environment=prod'
+```
+
+その他の構成オプションは、[kong-plugin-ddtrace][3] のプラグインドキュメントに記載されています。
+
+
+[1]: https://docs.konghq.com/gateway/latest/
+[2]: https://github.com/DataDog/kong-plugin-ddtrace
+[3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
+
 {{% /tab %}}
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

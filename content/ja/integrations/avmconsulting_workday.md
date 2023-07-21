@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: avmconsulting-workday
 app_uuid: 72aa287e-21c7-473a-9efd-523d9687f7f1
 assets:

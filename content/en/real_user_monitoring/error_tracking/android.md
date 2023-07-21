@@ -35,6 +35,8 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Upload your mapping file
 
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
 {{< tabs >}}
 {{% tab "US" %}}
 
@@ -151,7 +153,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitations
 
-Mapping files are limited to 100 Mb when targeting our US1 site, and 50 Mb for other sites. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+Mapping files are limited to 200 MB when targeting our US1 or EU1 sites, and 50 MB for other sites. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.

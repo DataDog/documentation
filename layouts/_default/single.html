@@ -1,5 +1,14 @@
 {{ define "main" }}
-  <h1 id="pagetitle">{{ .Title }}</h1>
-  {{ partial "translate_status_banner/translate_status_banner.html" . }}
-  {{ .Content }}
+  <div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle">{{ .Title }}</h1>
+    </div>
+    <div class="col-12">
+        {{ partial "breadcrumbs.html" . }}
+    </div>
+  </div>
+  {{ partial "translate_status_banner/translate_status_banner.html" . }} 
+
+  {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
+  {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 {{ end }}

@@ -2,17 +2,20 @@
 aliases:
 - /ja/continuous_integration/explore_tests/
 further_reading:
+- link: /monitors/types/ci/
+  tag: Documentation
+  text: CI Test モニターの作成
 - link: /continuous_integration/guides/find_flaky_tests/
-  tag: ガイド
+  tag: Documentation
   text: 不安定なテストを見つける
 - link: /continuous_integration/guides/rum_integration/
-  tag: ガイド
+  tag: ドキュメント
   text: CI Visibility と RUM の連動
 - link: /continuous_integration/troubleshooting/
-  tag: ドキュメント
-  text: トラブルシューティング CI
+  tag: Documentation
+  text: CI の表示に関するトラブルシューティング
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
-  tag: GitHub
+  tag: ブログ
   text: CI Visibility と RUM を使ったエンドツーエンドのテストのトラブルシューティング
 kind: documentation
 title: テストの確認
@@ -22,13 +25,13 @@ title: テストの確認
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-Datadog の CI メニューの下にある [Tests][1] ページは、テストの重要なメトリクスと結果を表示することで、CI 状態のテストファーストビューを提供します。これは、主に関連するコードで作業していることが主な理由で (それらが実行されているパイプラインをメンテナンスしていることは大きな理由ではない)、懸念されるパフォーマンスの問題やテストの失敗を調査するのに役立ちます。
+## 概要
+
+[**Tests**][1] ページは、テストからの重要なメトリクスと結果を表示することで、CI 状態のテストファーストビューを提供します。パイプラインを保守しているのではなく、関連するコードを保守しているため、最も気になるパフォーマンス問題やテストの失敗を調査するのに役立ちます。
 
 ## セットアップ
 
-
-
-{{< whatsnext desc="Datadog でテストの視覚化を設定するための言語を選択します。" >}}
+{{< whatsnext desc="Datadog で Test Visibility を設定するための言語を選択します。" >}}
     {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
@@ -39,7 +42,7 @@ Datadog の CI メニューの下にある [Tests][1] ページは、テスト�
 {{< /whatsnext >}}
 ## テストを確認する
 
-Tests ページには、_Branches_ ビューと _Default Branches_ ビューが表示されます。
+テストを表示するには、**CI** > **Tests** に移動し、[**Branches**](#branches-view) または [**Default Branches** ビュー](#default-branches-view)のどちらかを選択します。
 
 ### Branches ビュー
 
@@ -56,6 +59,11 @@ Tests ページの [Branches][2] ビューには、テスト結果を報告し�
 最新のテストスイート実行の実時間、およびデフォルトのブランチの平均実時間との比較に関する情報もあります。_実時間_は、テストスイートが実行されている間に経過する現実の時間です。これは、テストが同時に実行されたときのすべてのテスト時間の合計よりも小さくなります。自分のブランチの実時間をデフォルトのブランチの実時間と比較すると、自分のコミットがテストスイートにパフォーマンス回帰をもたらしているかどうかを判断するのに役立ちます。
 
 コミット作成者のアバターにカーソルを合わせると、最新のコミットに関する詳細情報が表示されます。
+
+#### ベンチマークテスト回帰
+ベンチマークテストの実行時間は、デフォルトブランチの同じテストの平均値よりも標準偏差が 5 倍大きい場合に、回帰としてマークされます。デフォルトブランチの平均は、直近の 200 回のテスト実行から計算されます。ベンチマークテストには @test.type:benchmark があります。
+
+ベンチマークテスト回帰はコミットごとに評価され、パフォーマンス回帰を特定のコード変更に関連付ける努力がなされます。
 
 #### 詳細な情報を調べる
 
@@ -103,7 +111,8 @@ APM でインスツルメントされ、インテグレーションテストに�
 
 * .NET では、テストモジュールは、同じ[ユニットテストプロジェクト][8]の下で実行されるすべてのテストをグループ化します。
 * Swift では、テストモジュールは、与えられたバンドルに対して実行されるすべてのテストをグループ化します。
-* JavaScript では、テストモジュールはありません。
+* JavaScript では、テストモジュールはテストセッションに一対一でマッピングされます。
+* Java では、テストモジュールは、同じ Maven Surefire/Failsafe または Gradle Test タスク実行で実行されるすべてのテストをグループ化します。
 
 モジュールの例としては、`SwiftLintFrameworkTests` があり、これは [`SwiftLint`][9] のテストターゲットに対応します。
 
@@ -117,15 +126,19 @@ CI Visibility がサポートするすべての言語が、テストスイート
 
 * [Swift][11] は `dd-sdk-swift-testing>=2.1.0` から完全にサポートされています。
 * [.NET][12] は `dd-trace-dotnet>2.16.0` から完全にサポートされています。
-* [Javascript][13] は `dd-trace-js>=3.3.0` から限定的にサポートされています。
-* Java はテストスイートレベルの視覚化をサポートしていません。
+* [JavaScript][13] は `dd-trace-js>=3.3.0` から限定的にサポートされています。
+* Java は `dd-trace-java>=1.12.0` から完全にサポートされています。
 * JUnit レポートのアップロードはテストスイートレベルの視覚化をサポートしていません。
 
 さらに、テストスイートレベルの視覚化は、エージェントレスモードでのみサポートされています。
 
-## CI テストデータについて伝達する
+## CI テストデータの使用
 
-[ダッシュボード][14]と[ノートブック][15]でウィジェットを作成すると、テスト実行データを利用できます。
+[ダッシュボード][14]または[ノートブック][15]を作成する際、検索クエリでテスト実行データを使用すると、視覚化ウィジェットのオプションが更新されます。
+
+## テストデータのアラート
+
+[**Test Runs** ページ][4]で、失敗したテストや不安定なテスト、CI テストのパフォーマンスを評価する場合、**Create Monitor** をクリックして、[CI Test モニター][16]を作成します。
 
 ## その他の参考資料
 
@@ -146,3 +159,4 @@ CI Visibility がサポートするすべての言語が、テストスイート
 [13]: /ja/continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
 [14]: https://app.datadoghq.com/dashboard/lists
 [15]: https://app.datadoghq.com/notebook/list
+[16]: /ja/monitors/types/ci/

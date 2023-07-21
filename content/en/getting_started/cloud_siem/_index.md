@@ -25,9 +25,15 @@ further_reading:
     - link: "/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/"
       tag: "Documentation"
       text: "Google Cloud configuration guide for Cloud SIEM"
+    - link: "/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/"
+      tag: "Documentation"
+      text: "Azure configuration guide for Cloud SIEM"
     - link: "/security/notifications/variables/"
       tag: "Documentation"
       text: "Learn more about notification variables to customize notifications"
+    - link: "https://dtdg.co/fe"
+      tag: "Foundation Enablement"
+      text: "Join an interactive session to elevate your security and threat detection"
     - link: "https://securitylabs.datadoghq.com/"
       tag: "Security Labs"
       text: "Read about security-related topics on Datadog's Security Labs"
@@ -48,7 +54,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
     - [Cloud Audit logs][6]
     - [Identity Provider logs][7]
     - SaaS and Workspace logs
-    - Third-party security integrations (for example, AWS GuardDuty)
+    - Third-party security integrations (for example, Amazon GuardDuty)
 
 2. Enable [Cloud SIEM][8].
 

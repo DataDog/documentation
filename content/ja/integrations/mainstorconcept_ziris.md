@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: mainstorconcept-ziris
 app_uuid: dc8b4d40-72a3-46c2-9f9a-ffaadaeacb83
 assets:
@@ -85,26 +87,23 @@ tile:
     image_url: images/thumbnail_mainstorconcept_ziris.PNG
     media_type: ビデオ
     vimeo_id: 630489680
-  - caption: z/OS と JDBC ダッシュボード
-    image_url: images/datadog_Dashboard_JDBC.PNG
-    media_type: image
   - caption: z/IRIS で作成したスパン付きサービスマップ
     image_url: images/datadog-service-map-with-spans-created-by-ziris.png
     media_type: image
   - caption: z/IRIS ダッシュボード
     image_url: images/datadog-ziris-dashboards.png
     media_type: image
-  - caption: z/OS Connect ダッシュボード
-    image_url: images/datadog_Dashboard_z_OS_Connect.PNG
-    media_type: image
-  - caption: 'トレースエクスプローラー: z/OS アプリケーションのパフォーマンス測定にフィルターをかける'
+  - caption: トレースエクスプローラーで z/OS アプリケーションのパフォーマンスを分析する
     image_url: images/datadog-trace-explorer-filtering-zos-application-performance-measurements.png
     media_type: image
-  - caption: z/IRIS - メインフレーム包括的な観測可能性
-    image_url: images/thumbnail_mainstorconcept_ziris.PNG
+  - caption: z/IRIS はフレームグラフとスパンリストを拡張します
+    image_url: images/datadog-annotated-zosconnect-cics-db2-trace-page.png
     media_type: image
-  - caption: 'z/IRIS: コンポーネントデザイン'
-    image_url: images/datadog_ziris_opentelemetry_traces.PNG
+  - caption: z/IRIS は Datadog とインテグレーションします
+    image_url: images/ziris-otel-integration-with-datadog.png
+    media_type: image
+  - caption: CICS サービスページ
+    image_url: images/datadog-annotated-cics-service-page.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -116,23 +115,38 @@ tile:
 
 ## 概要
 
-[z/IRIS][1] は、メインフレーム以外の世界で、メインフレームを包括するパフォーマンス監視を提供するために構築されたプラグインソフトウェアソリューションです。
+バックエンドのメインフレームアプリケーションからのトレースとメトリクスを追加して、エンタープライズ観測可能性の実践を強化し、[z/IRIS][1] で以下の利点を使用します。
 
-DevOps チームは、ビジネスアプリケーションに対するメインフレームのパフォーマンスと、ピークパフォーマンスをどのように維持または達成できるかを理解したいと考えています。z/IRIS では、DevOps のためのメインフレームの観測可能性がコアコンセプトとなっています。チームは、Datadog を使用して、メインフレームリソースの使用状況を評価し、パフォーマンスを継続的に分析し、アプリケーション間でメトリクスとデータを比較することができます。
+* クラウドやサーバーにホストされているサービスやアプリケーションと、メインフレームとの関係を可視化します。
+* メインフレームアプリケーションがエンドユーザーエクスペリエンスにどのように貢献しているかを検出します。
+* [Datadog Watchdog][23] を活用して、デジタルビジネスサービスに影響を与える z/OS アプリケーションの異常を自動的に検出することにより、平均復元時間 (MTTR) を短縮します。
+* 共有可能なダッシュボードとインターフェイスを使用して、クロスプラットフォームのインシデント分析を支援することにより、アプリケーションチームとメインフレームプラットフォーム管理者間のコミュニケーションを大幅に改善します。
 
-z/IRIS をアクティブにした後、Datadog ユーザーは次のことを行うことができます。
 
-* メインフレームでホストされているサービスやアプリケーションに依存しているアプリケーションを特定する。
-* メインフレームサービスのレイテンシーを 1 リクエストレベルまで監視する。
-* 組織の SLI に関連する異常やしきい値を超えた場合に対応するモニターを作成する。
-* メインフレームアプリケーションのパフォーマンスを、ビジネスサービスのコンテキスト内でエンドツーエンドで分析する。
+z/IRIS は、IBM System Z メインフレーム上で動作するトランザクションやアプリケーションからのテレメトリー (トレースやメトリクス) を Datadog に送信します。
+
+有効にすると、
+
+ * Datadog [Service Map][24] には、CICS、MQ、Db2 などの z/OS サービスとのインテグレーションが表示されます。
+ * コールレート、エラーレート、レイテンシーは、メインフレームのサービスで有効なパフォーマンス指標です。
+ * フレームグラフとスパンリストが、メインフレームアプリケーションへのリクエストの流れを可視化します。
+ * トレースページには、関連するエラーメッセージ z/OS システムを含みます。
+
+
+z/IRIS テレメトリーは、メインフレームの内部オペレーションへの可視性を拡張することで、開発者と運用者の体験を向上させます。Datadog ユーザーは、以下のことができるようになります。
+
+* z/IRIS ダッシュボードを有効にし、z/OS システムとアプリケーションの健全性を監視します。
+* メインフレームアプリケーションの SLO 違反についてチームにアラートを出すためのモニターを作成します。
+* メインフレームアプリケーションが総レスポンスタイムと全体的な可用性にどのように寄与しているかを分析します。
+* メインフレーム内外の変化により、アプリケーションの動作や安定性がどのように変化するかを検証します。
+* エンドユーザーエクスペリエンスに影響を与えるメインフレームアプリケーションから報告されるエラーメッセージにアクセスします。
 
 ### インテグレーション方法
 
 z/IRIS は、2 つの方法で Datadog とインテグレーションします。
 
-* **OpenTelemetry (OTEL):** この観測可能性フレームワークは、APM インテグレーションを標準化し、Datadog によって完全にサポートされています。Datadog 環境にトレースとメトリクスをエクスポートするように構成された OpenTelemetry Collector にトレースとメトリクスをストリームするように、z/IRIS を簡単に構成することができます。
-* **Datadog API (ベータ版):** また、Datadog Agent API と HTTP REST API を通じて、それぞれトレースとイベントをストリーミングすることも可能です。このインテグレーションは、OpenTelemetry がまだ組織内で利用できない場合に、概念実証を加速するのに役立ちます。
+* **OpenTelemetry (OTEL):** この観測可能性フレームワークは、APM インテグレーションを標準化し、Datadog によって完全にサポートされています。z/IRIS は、Datadog 環境にテレメトリーをエクスポートするように構成された OpenTelemetry Collector にトレースとメトリクスをストリームします。
+* **Datadog APIs (ベータ版):** z/IRIS は、Datadog Agent API を使用したトレース、および DatadogのHTTP REST API を使用したイベントのストリーミングが可能です。このインテグレーションは、z/IRIS を評価する際の管理工数を削減するためのトライアルや概念実証 (POC) プロジェクトでのみ利用でき、本番ユースケースには最適ではありません。
 
 z/IRIS のインテグレーション可能性についての詳細な情報は、[z/IRIS ドキュメント][3]を参照してください。
 
@@ -140,38 +154,36 @@ z/IRIS のインテグレーション可能性についての詳細な情報は�
 
 スパンは、作業単位またはプロセスを表します。スパンは、分散型トレーシングの構成要素で、リクエストがいつトリガーされたか、リクエストがアプリケーションやサービスをどのように流れたかを描写するものです。
 
-z/IRIS は、IBM Z メインフレームアプリケーションのプロセスや作業単位を表すスパンによって Datadog のトレースを拡張します。
-
-トレースの拡張により、Datadog ユーザーは、クラウドやその他のオンプレミスプラットフォームでホストされているアプリケーションが、z/OS でホストされているアプリケーションにどのように依存しているかについての新しい洞察を得ることができます。さらに、メインフレームベースのアプリケーションのエラーレート、コールレート、リクエストレイテンシーなど、標準的なキーパフォーマンス指標を得ることができます。
+z/IRIS は、IBM Z メインフレームアプリケーションのプロセスやトランザクションを表すスパンによって、Datadog のトレースを拡張します。トレースを拡張することで、メインフレーム上のサービスがクラウドやサーバーのアプリケーションによってどのように消費されるかについて、ユーザーは新たな洞察を得ることができます。メインフレームベースのアプリケーションのエラーレート、コールレート、リクエストレイテンシーなどのパフォーマンス指標が有効になるため、メインフレームインテグレーションの健全性を特定することができます。
 
 #### スパン
 
-z/IRIS は、以下のメインフレームアプリケーションのスパンを作成します。
+z/IRIS は、以下のメインフレームシステムで処理されるトランザクションおよびオペレーションに対してスパンを作成します。
 
 * [Db2 for z/OS][4]
 * [z/OS Connect][5]
-* [バッチジョブの手順と TSO ユーザーセッション][6]
-* [MQ for z/OS][7]
-* [CICS トランザクション][8]
+* [IBM MQ for z/OS][7]
+* [CICS Transaction Server (CICS TS)][8]
+* [一括ジョブ][6]
+* [TSO ユーザーアクティビティ][6]
 
 このリストは常に増加しています。上記に掲載されていない z/OS アプリケーションやサブシステムのサポートに関するリクエストは、[ziris@mainstorconcept.com][2] までご連絡ください。
 
 #### ワークフローのトレース
 
-スパンが生成されると、z/IRIS はスパンがアップストリームアプリケーショントレースと論理的な関係を持っているかどうかをチェックします。もしそうなら、必要な相関コンテキストがスパンに追加され、Datadog は自動的にスパンを関連トレースに追加します。
+z/IRIS は、メインフレーム上のオペレーションが外部のアプリケーションリクエストによってトリガーされたことを特定し、生成されたスパンがアプリケーションリクエストのトレースに追加されるようにします。例えば、クラウドアプリケーションがメインフレームアプリケーションにリクエストを送信して処理する場合、z/IRIS はメインフレームアプリケーションの処理が外部リクエストに関連していることを検出し、メインフレームアプリケーションからのスパンがクラウドアプリケーションリクエストのトレースに追加されるようにします。
 
-以下のリクエストワークフローは、スパン相関をトリガーします。
+z/IRIS Workflow トレースでは、以下のリクエストワークフローが追跡されます。
 
-* z/OS Connect を処理する REST API リクエスト
-* Db2 for z/OS System-of-Record で処理される z/OS Connect API
-* Db2 for z/OS への JDBC コール
-* IBM MQ for z/OS への JMS アプリケーションメッセージ (チャンネル間通信を含む)
-* MQ for z/OS から CICS へのトランザクション
-* 1 つのバッチジョブのステップを相関させてトレースを形成する
+* REST API リクエスト -> z/OS Connect EE -> SOR (CICS TS、Db2 for z/OS、IMS または IBM MQ) -> Db2 for z/OS 
+* JDBC -> Db2 for z/OS
+* IBM MQ (Linux、Windows、AIX) -> IBM MQ for z/OS -> CICS TS -> Db2 for z/OS 
+* CICS TS -> Db2 for z/OS
+
 
 #### タグ
 
-z/OS 上のリクエスト処理に関する追加のメタデータは、[Datadog トレースエクスプローラー][9]で特定のトレースをフィルターするのに便利なタグを通じて提供され、[Datadog Watchdog Insights][10] のための追加のインサイトとしても役立ちます。
+リクエスト、リソース使用率、関連する z/OS システムに関するメタデータは、[トレースエクスプローラー][9]でクエリを行うために使用できるタグを通して提供され、この情報は [Watchdog Insights][10] で処理され、メインフレームサービスで検出された異常をユーザーに警告します。
 
 以下は、z/IRIS で作成されたすべてのタグの完全なリストです。
 
@@ -449,16 +461,16 @@ z/OS 上のリクエスト処理に関する追加のメタデータは、[Datad
 
 ### メインフレームメトリクス
 
-* [RMF メトリクス][11] 
-    * RMF メトリクスは、カスタマイズ可能な間隔で、カスタマイズ可能な詳細レベルで、リソース使用率メトリク スを提供します。
+* [インフラストラクチャーメトリクス][11] 
+    * z/OS システムのリソース利用を監視します。インフラストラクチャーメトリクスは、CPU (一般的なプロセッサーや zIIP エンジンなど) の使用率と競合をサポートします。
 
 * [z/OS Connect メトリクス][12]
-    * z/IRIS ストリームは、IBM の z/OS Connect SMF タイプ 123 バージョン 1 および 2 のレコードのデータを使用して作成されたメトリクスです。
+    * 着信リクエスト、リターンコード、リクエストメソッド、サーバーレイテンシー、サービスプロバイダー (SOR など) のレイテンシーなど、z/OS Connect サーバーのアクティビティとパフォーマンスを監視します。
 
 * [MQ メトリクス][13]
-    * MQ 統計レコード (SMF タイプ 115) には、システム内のさまざまなリソースからの多数の統計情報が含まれています。z/IRIS は、監視、分析、およびアラートを目的とした最も重要なパフォーマンス指標に焦点を当て、z/OS MQ メトリクスを導入します。
+    * z/OS 上の MQ キューマネージャーのアクティビティと、そのリソース (ストレージ、バッファプール、ログ、チャネルなど) の健全性を監視します。
 
-お探しのメトリクスはこれではありませんか？あなたの組織にとって重要な機能をお探しですか？機能のご要望は [info@mainstorconcept.com][2] までお送りください。
+お探しのメトリクスはこれではありませんか？あなたの組織にとって重要な機能をお探しですか？機能のご要望は [ziris@mainstorconcept.com][2] までお送りください。
 
 ### 民間企業による製品提供
 
@@ -508,5 +520,8 @@ z/OS 上のリクエスト処理に関する追加のメタデータは、[Datad
 [20]: mailto:support@mainstorconcept.com
 [21]: https://service.mainstorconcept.com/mscportal/login
 [22]: https://www.datadoghq.com/blog/mainframe-monitoring-mainstorconcept-datadog-marketplace/
+[23]: https://docs.datadoghq.com/ja/watchdog/
+[24]: https://docs.datadoghq.com/ja/tracing/services/services_map/
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/mainstorconcept-ziris" target="_blank">こちらをクリック</a>してください。

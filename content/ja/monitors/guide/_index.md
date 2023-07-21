@@ -15,6 +15,7 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}テンプレート変数の評価{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}監視範囲{{< /nextlink >}}
     {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}ダウンタイムによるアラートの抑制{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}ダウンタイムのスコープ{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}数値に変化がない場合のアラート{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートの作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}モニターの依存関係の作成{{< /nextlink >}}
@@ -31,7 +32,6 @@ title: モニターガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="一般ガイド:" >}}
-    {{< nextlink href="monitors/guide/slo-checklist" >}}SLO チェックリスト{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターの RBAC の設定方法{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Synthetic テストでモニターを作成する方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}異常モニター{{< /nextlink >}}

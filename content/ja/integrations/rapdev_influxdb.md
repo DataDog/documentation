@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-influxdb
 app_uuid: e560c4c8-7983-4338-bc41-30b121a4ac98
 assets:

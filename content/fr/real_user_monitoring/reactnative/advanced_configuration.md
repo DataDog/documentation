@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/advanced_configuration.md
 description: Découvrez les options de configuration avancées disponibles pour votre
   configuration React Native.
 further_reading:
@@ -15,7 +13,36 @@ title: Configuration avancée du RUM pour React Native
 ---
 ## Présentation
 
-Si vous n'avez pas encore installé le SDK, consultez les [instructions de configuration intégrées à l'application][1] ou reportez-vous à la [documentation sur la configuration du RUM pour React Native][2].
+Si vous n'avez pas encore installé le SDK, consultez les [instructions de configuration dans l'application][1] ou reportez-vous à la [documentation sur la configuration du RUM pour React Native][2].
+
+## Tests avec Jest
+
+Pour tester des applications avec `'@datadog/mobile-react-native'`, vous devrez potentiellement suivre des étapes supplémentaires. En effet, les environnements de testing ne comportent pas de modules Native.
+
+Datadog propose des simulations du package `'@datadog/mobile-react-native'`. Pour les utiliser avec [Jest][4], ajoutez ce qui suit dans le fichier de configuration de Jest :
+
+```javascript
+jest.mock('@datadog/mobile-react-native', () => {
+    return require('@datadog/mobile-react-native/jest/mock');
+});
+```
+
+Si vous initialisez le SDK avec le composant `DatadogProvider`, le suivi automatique des interactions, erreurs et ressources est désactivé dans vos tests.
+
+Toutes les méthodes de SDK sont simulées à l'aide de `jest.fn()`. Vous pouvez donc vérifier si une méthode de SDK Datadog a été appelée :
+
+```javascript
+import { DdLogs } from '@datadog/mobile-react-native';
+
+describe('App', () => {
+    it('calls DdLogs.debug on mount', () => {
+        renderer.create(<App />);
+        expect(DdLogs.debug).toHaveBeenCalledWith('app started');
+    });
+});
+```
+
+Si vous n'utilisez pas Jest comme lanceur de test, vous devez créer les simulations pour votre lanceur.
 
 ## Instrumentation manuelle
 
@@ -82,6 +109,67 @@ const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
 //...
 DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 ```
+
+## Modifier ou ignorer des événements RUM
+
+Pour modifier les attributs d'un événement RUM avant de l'envoyer à Datadog, ou pour ignorer complètement un événement, utilisez l'API Event Mappers lors de la configuration du SDK RUM React Native :
+
+```javascript
+const config = new DdSdkReactNativeConfiguration(
+    '<TOKEN_CLIENT>',
+    '<NOM_ENVIRONNEMENT>',
+    '<ID_APPLICATION_RUM>',
+    true, // surveiller les interactions utilisateur (comme les boutons touchés)
+    true, // surveiller les ressources XHR
+    true // surveiller les erreurs
+);
+config.logEventMapper = event => event;
+config.errorEventMapper = event => event;
+config.resourceEventMapper = event => event;
+config.actionEventMapper = event => event;
+```
+
+Chaque mapper correspond à une fonction dotée d'une signature `(T) -> T?`, où `T` est un type d'événement RUM concret. Cela permet de modifier des parties de l'événement avant son envoi, ou de l'ignorer complètement.
+
+Par exemple, pour censurer des informations sensibles du `message` d'une erreur RUM, implémentez une fonction `redacted` personnalisée et utilisez-la dans `errorEventMapper` :
+
+```javascript
+config.errorEventMapper = event => {
+    event.message = redacted(event.message);
+    return event;
+};
+```
+
+Lorsque le mapper d'erreur, de ressource ou d'action renvoie la valeur `null`, l'événement est complètement ignoré et n'est donc pas envoyé à Datadog.
+
+Selon le type de l'événement, seules certaines propriétés peuvent être modifiées :
+
+| Type d'événement    | Clé d'attribut            | Description                        |
+| ------------- | ------------------------ | ---------------------------------- |
+| LogEvent      | `logEvent.message`       | Le message du log.                |
+|               | `logEvent.context`       | Les attributs personnalisés du log.      |
+| ActionEvent   | `actionEvent.context`    | Les attributs personnalisés de l'action.   |
+| ErrorEvent    | `errorEvent.message`     | Message d'erreur.                     |
+|               | `errorEvent.source`      | La source de l'erreur.               |
+|               | `errorEvent.stacktrace`  | Stacktrace de l'erreur.           |
+|               | `errorEvent.context`     | Les attributs personnalisés de l'erreur.    |
+|               | `errorEvent.timestampMs` | Le timestamp de l'erreur.            |
+| ResourceEvent | `resourceEvent.context`  | Les attributs personnalisés de la ressource. |
+
+Les événements incluent des éléments de contexte supplémentaires :
+
+| Type d'événement    | Clé de l'attribut de contexte                            | Description                                                             |
+| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
+| LogEvent      | `logEvent.additionalInformation.userInfo`        | Contient les informations globales sur l'utilisateur définies par `DdSdkReactNative.setUser`.        |
+|               | `logEvent.additionalInformation.attributes`      | Contient les attributs globaux définis par `DdSdkReactNative.setAttributes`. |
+| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][5] correspond à l'action ou à `undefined`.  |
+|               | `actionEvent.additionalInformation.userInfo`     | Contient les informations globales sur l'utilisateur définies par `DdSdkReactNative.setUser`.        |
+|               | `actionEvent.additionalInformation.attributes`   | Contient les attributs globaux définis par `DdSdkReactNative.setAttributes`. |
+| ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | Contient les informations globales sur l'utilisateur définies par `DdSdkReactNative.setUser`.        |
+|               | `errorEvent.additionalInformation.attributes`    | Contient les attributs globaux définis par `DdSdkReactNative.setAttributes`. |
+| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][6] correspond à la ressource ou à `undefined`.       |
+|               | `resourceEvent.additionalInformation.userInfo`   | Contient les informations globales sur l'utilisateur définies par `DdSdkReactNative.setUser`.        |
+|               | `resourceEvent.additionalInformation.attributes` | Contient les attributs globaux définis par `DdSdkReactNative.setAttributes`. |
 
 ## Durées des ressources
 
@@ -193,5 +281,8 @@ const configuration = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/fr/real_user_monitoring/reactnative
+[2]: /fr/real_user_monitoring/reactnative
 [3]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
+[4]: https://jestjs.io/
+[5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
+[6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

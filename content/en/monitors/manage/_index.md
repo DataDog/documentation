@@ -11,6 +11,9 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
+  tag: "Blog"
+  text: "Best practices for tagging your monitors"
 ---
 
 Use the [Manage Monitors][1] page to search, delete, mute, or resolve your monitors and edit monitor tags in bulk. You can also clone or edit individual monitors from the search results.
@@ -69,7 +72,7 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add up t
 [3]: /monitors/manage/status/#mute
 [4]: /monitors/manage/status/#resolve
 [5]: /account_management/teams/
-[6]: /mobile/#monitors
+[6]: /service_management/mobile/#monitors
 [7]: https://apps.apple.com/app/datadog/id1391380318
 [8]: https://play.google.com/store/apps/details?id=com.datadog.app
 [9]: https://app.datadoghq.com/monitors/triggered

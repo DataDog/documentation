@@ -35,12 +35,14 @@ further_reading:
 
 The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes. The official [Docker image][2] is available on Docker Hub, GCR, and ECR-Public.
 
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
 Images are available for 64-bit x86 and Arm v8 architectures.
 
-| ECR-Public    | Docker Hub          | GCR        |
-|----------------|--------------|-----------|
-| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
- |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
+| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          |
+| [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
@@ -283,7 +285,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [5]: https://hub.docker.com/r/datadog/docker-dd-agent
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[8]: https://app.datadoghq.com/account/settings#agent/docker
+[8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [9]: /agent/basic_agent_usage/#supported-os-versions
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /agent/guide/compose-and-the-datadog-agent/

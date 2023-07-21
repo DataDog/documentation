@@ -1,27 +1,36 @@
 ---
-title: Red Hat 用 Agent の基本的な使用方法
+aliases:
+- /ja/guides/basic_agent_usage/redhat/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Red Hat
-aliases:
-  - /ja/guides/basic_agent_usage/redhat/
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+title: Red Hat 用 Agent の基本的な使用方法
 ---
+
 ## 概要
 
 このページでは、Red Hat 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: RedHat 6 以降がサポートされます。
+**注**:
+- 64 ビット x86 アーキテクチャでは、RedHat/CentOS 6 以降がサポートされています。Agent 6.33.0/7.33.0 以降は、AlmaLinux/Rocky 8 以降がサポートされています。
+- 64 ビット Arm v8 アーキテクチャでは、RedHat/CentOS 8 以降がサポートされています。Agent 6.33.0/7.33.0 以降は、AlmaLinux/Rocky 8 以降がサポートされています。
 
 ## コマンド
 
@@ -70,7 +79,8 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 | コマンドの使用方法の表示              | `sudo service datadog-agent`                      |
 | チェックの実行                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
-{{% /tab %}}
+{{< /tabs >}}
+
 {{< /tabs >}}
 
 **注**: ご使用のシステムで `service` ラッパーを使用できない場合は、以下を使用してください。
@@ -80,6 +90,8 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 * `initctl` ベースのシステムの場合: `sudo initctl start/stop/restart/status datadog-agent`
 
 [サービスライフサイクルコマンドについては、こちらを参照してください][2]。
+
+
 
 
 
@@ -113,7 +125,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 ## トラブルシューティング
 
-[Agent のトラブルシューティングドキュメントは、こちらを参照してください][2]。
+[Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
 ## 埋め込み Agent の使用
 

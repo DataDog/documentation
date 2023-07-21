@@ -4,6 +4,10 @@ kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
 ---
 
 The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
@@ -49,7 +53,28 @@ function processIncomingQueueMessage($message) {
 );
 ```
 
+Alternatively, starting with version **0.87.0**, if the raw headers are available, a function `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` is provided. Note that the header names must be in lowercase.
 
+```php
+$headers = [
+	"x-datadog-trace-id" => "1234567890",
+	"x-datadog-parent-id" => "987654321",
+];
+
+\DDTrace\consume_distributed_tracing_headers($headers);
+```
+
+To extract the trace context directly as headers, a function `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` is provided. Its sole optional argument accepts an array of injection style names. It defaults to the configured injection style.
+
+```php
+$headers = DDTrace\generate_distributed_tracing_headers();
+// Store headers somewhere, inject them in an outbound request, ...
+// These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
+```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [7]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

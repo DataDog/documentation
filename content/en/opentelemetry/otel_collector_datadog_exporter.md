@@ -22,9 +22,9 @@ further_reading:
 
 The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
 
-{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OTel Collector -> Datadog" style="width:100%;">}}
+{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
-## Setting up the OTel Collector with the Datadog Exporter
+## Setting up the OpenTelemetry Collector with the Datadog Exporter
 
 To run the OpenTelemetry Collector along with the Datadog Exporter:
 
@@ -93,7 +93,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, otlp]
+      receivers: [hostmetrics, prometheus, otlp]
       processors: [batch]
       exporters: [datadog]
     traces:
@@ -170,7 +170,8 @@ filelog:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
     - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog. 
 
-#### Using Kubernetes
+<details>
+<summary><strong>Optional: Using Kubernetes</strong></summary>
 
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 
@@ -235,6 +236,7 @@ spec:
           hostPath:
             path: /var/lib/docker/containers
 ```
+</details>
 
 ### 5. Run the collector
 
@@ -254,7 +256,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 1. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib`][1].
 
-2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4138.
+2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4318.
 
 3. Run the container and expose the necessary port, using the previously defined `collector.yaml` file. For example, considering you are using port 4317:
 
@@ -304,7 +306,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
 {{% /tab %}}
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Using a DaemonSet is the most common and recommended way to configure OTel collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
+Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
 
 1. Use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 
@@ -658,9 +660,12 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 
 ## Out-of-the-box dashboards
 
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
 
-{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
+1. Install the [OpenTelemetry integration][23].
+2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+
+   {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][21]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][22] you choose to enable.
 
@@ -690,3 +695,4 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[23]: https://app.datadoghq.com/integrations/otel

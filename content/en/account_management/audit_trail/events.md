@@ -15,6 +15,7 @@ further_reading:
 
 #### Platform Events
 - [Access management](#access-management-events)
+- [Agent](#agent)
 - [API request](#api-request-events)
 - [Authentication](#authentication-events)
 - [Dashboard](#dashboard-events)
@@ -38,6 +39,7 @@ further_reading:
 - [Service Level Objectives](#service-level-objectives-slo-events)
 - [Synthetic Monitoring](#synthetic-monitoring-events)
 - [Reference Tables](#reference-table-events)
+- [Workflows](#workflow-events)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -56,6 +58,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Role access request][8] | A user created, responded to, or deleted an access request for a role, and the value of the access request. | `@evt.name:"Access Management" @asset.type:role_request` |
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [Restriction policy][86] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
+
+### Agent
+
+| Name  | Description of audit event                          | Query in audit explorer              |
+|-------------| --------------------------------------------------  | ------------------------------------ |
+| [Agent flare created][87] | Datadog Agent flare is created for support tickets| `@evt.name:Datadog Agent @action:created @asset.type:agent_flare` |
 
 ### API request events
 
@@ -82,7 +91,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Denylist][22] | A user blocked, unblocked, or extended the blocking duration of an IP address or a user ID. | `@evt.name:"Application Security" @asset.type:ip_user_denylist` |
 | [Passlist][81] | A user added, modified, or deleted an entry to the passlist. | `@evt.name:"Application Security" @asset.type:passlist_entry` |
 | [In-App WAF Policy][82] | A user created, modified, or deleted an In-App WAF policy. | `@evt.name:"Application Security" @asset.type:policy_entry` |
-| [In-App WAF Custom Rule][83] | A user created, modified, or deleted an In-App WAF custom rule. | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
+| [In-App WAF Custom Rule][83] | A user validated, created, modified, or deleted an In-App WAF custom rule. | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
 
 ### Audit Trail events
 
@@ -109,7 +118,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [CWS agent rule][31] | A user accessed (fetched) a CWS agent rule in the Cloud Security Platform.| `@evt.name:"Cloud Security Platform" @asset.type:cws_agent_rule @action:accessed` |
 | [Notification profile][32] | A user created, updated, or deleted a notification profile in the Cloud Security Platform. | `@evt.name:"Cloud Security Platform" @asset.type:notification_profile` |
-| [Security rule][33] | A user updated, deleted, or created a security rule and the previous and new values for the rule. | `@evt.name:"Cloud Security Platform" @asset.type:security_rule` |
+| [Security rule][33] | A user validated, updated, deleted, or created a security rule and the previous and new values for the rule. | `@evt.name:"Cloud Security Platform" @asset.type:security_rule` |
 | [Security signal][34] | A user modified the state of a signal or assigned the signal to a user, and the previous and new values for the signal. | `@evt.name:"Cloud Security Platform" @asset.type:security_signal @action:modified` |
 
 ### Dashboard events
@@ -192,6 +201,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
 | [Token leaked][80] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [Login method override][85] | Datadog has detected a user login method override that is different from the default login methods set for the organization.| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
+| [Unusual login][84] | Datadog has detected a unusual login event.| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -221,6 +232,14 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Reference Table][78] | A user created, deleted, or modified a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
 | [Reference Table File][79] | A user uploaded a file or imported a file with a cloud provider for a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |                                                      |
+
+### Workflow events
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Workflow][88] | A user created, deleted, or modified a workflow, or a workflow executed. | `@evt.name:"Workflows" @asset.type:workflow @action:(created OR deleted OR modified OR executed)` |
+| [Workflow Schedule][89] | A user created, deleted, or modified a schedule for a workflow. | `@evt.name:"Workflows" @asset.type:workflow_schedule @action:(created OR deleted OR modified)` |   
+| [Workflow Action][90] | A user responded to a Slack prompt during the execution of a workflow. | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` | 
+| [Custom Connection][91] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` | 
 
 ## Further Reading
 
@@ -309,3 +328,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [81]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apasslist_entry
 [82]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apolicy_entry
 [83]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Awaf_custom_rule
+[84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
+[85]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser
+[86]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Arestriction_policy
+[87]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40asset.type%3Aagent_flare%20%40action%3Acreated
+[88]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow%20%40action%3A%28modified%20OR%20created%20OR%20deleted%20OR%20executed%29
+[89]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_schedule%20%40action%3A%28modified%20OR%20created%20OR%20deleted%29
+[90]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_action%20%40action%3Aresponded
+[91]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Custom%20Connections%22%20%40asset.type%3Acustom_connection

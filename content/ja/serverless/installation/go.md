@@ -170,6 +170,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 ## 次のステップ
 
 - おめでとうございます。[Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][4]を有効にします。
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][2]を参照してください
 - [高度な構成][3]を参照して以下のことを行ってください。
     - タグを使ったテレメトリー接続
@@ -185,3 +186,4 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [1]: https://app.datadoghq.com/functions
 [2]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /ja/serverless/configuration/
+[4]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework
