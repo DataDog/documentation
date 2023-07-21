@@ -3,11 +3,13 @@ title: Mobile App Test Steps
 kind: documentation
 description: Learn how to automatically record and manually set steps in a mobile test recording.
 is_beta: true
+aliases:
+- /mobile_testing/mobile_app_tests/steps
 further_reading:
-- link: "/mobile_testing/mobile_app_tests/"
+- link: "/mobile_app_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
-- link: "/mobile_testing/mobile_app_tests/advanced_options"
+- link: "/mobile_app_testing/mobile_app_tests/advanced_options"
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
@@ -24,7 +26,7 @@ Steps represent individually recorded interactions or assertions that you want t
 
 To start recording and adding steps, select a device to launch a mobile app test from the dropdown menu and click **Launch Device**. 
 
-{{< img src="mobile_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
+{{< img src="mobile_app_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
 
 Select **Show only available devices. Available devices load faster** to see the most available devices for shorter testing wait times. 
 
@@ -47,7 +49,7 @@ In addition to automatically creating steps by interacting directly with your de
 Assertions allow you to validate the content displayed (or not displayed) within a particular section of your test flow.
 
 
-{{< img src="mobile_testing/assertions.png" alt="Options for assertions in a mobile test" style="width:60%;" >}}
+{{< img src="mobile_app_testing/assertions.png" alt="Options for assertions in a mobile test" style="width:60%;" >}}
 
 
 To create a step, select an assertion type:
@@ -77,29 +79,29 @@ Create this assertion step to have your mobile app test confirm that the text yo
 
 In addition to automatically recording steps based on your device interactions, you can also manually create steps by clicking **Special Actions**. 
 
-{{< img src="mobile_testing/special_actions.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
+{{< img src="mobile_app_testing/special_actions.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
 
 #### Tap
 
 Interacting with elements with a tap on your mobile application records a step.
 
-{{< img src="mobile_testing/tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
 
 #### Double tap
 
 Interacting with elements with a double tap on your mobile application records a step.
 
-{{< img src="mobile_testing/double_tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/double_tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
 
 #### Type text
 
 Interacting with a text input field on your mobile application, adding a name, and setting a value records a step.
 
-{{< img src="mobile_testing/type_text.mp4" alt="Recording a Type Text step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/type_text.mp4" alt="Recording a Type Text step in a mobile test" video=true >}}
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
-{{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
+{{< img src="mobile_app_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
 
 To use a variable on automatically recorded steps, add a step name and specify the variable value to input the variable value while recording. 
 
@@ -109,7 +111,7 @@ Mobile app tests automatically scroll to the elements that need to be interacted
 
 Specify the number of pixels you want the mobile app test to scroll vertically and horizontally.
 
-{{< img src="mobile_testing/scroll_step.png" alt="Scroll step in a mobile test recording" style="width:60%;" >}}
+{{< img src="mobile_app_testing/scroll_step.png" alt="Scroll step in a mobile test recording" style="width:60%;" >}}
 
 By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile app test to scroll on.
 
@@ -117,13 +119,13 @@ By default, the **Scroll** step scrolls through the entire page. If you need to 
 
 Interacting with the **Back** button below the mobile application records a step.
 
-{{< img src="mobile_testing/press_back.mp4" alt="Recording a Press Back step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/press_back.mp4" alt="Recording a Press Back step in a mobile test" video=true >}}
 
 #### Wait
 
 If you know that a page or page element takes more than 60 seconds to load, you can add a wait step with a max value of 300 seconds.
 
-{{< img src="mobile_testing/wait_step.png" alt="Recording a Wait step in a mobile test" style="width:60%;" >}}
+{{< img src="mobile_app_testing/wait_step.png" alt="Recording a Wait step in a mobile test" style="width:60%;" >}}
 
 By default, mobile app tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. This additional time is systematically added to **every run** of your mobile app test's recording.
 
@@ -131,13 +133,13 @@ By default, mobile app tests wait for a page to be fully loaded before performin
 
 Add a name to the step and select **Portrait** or **Landscape** mode.
 
-{{< img src="mobile_testing/rotate_device.png" alt="Recording a Rotate Device step in a mobile test" style="width:60%" >}}
+{{< img src="mobile_app_testing/rotate_device.png" alt="Recording a Rotate Device step in a mobile test" style="width:60%" >}}
 
 #### Open deep link
 
 Add a name to the step and enter a deep link URI.
 
-{{< img src="mobile_testing/open_deep_link.png" alt="Recording an Open Deep Link step in a mobile test" style="width:60%" >}}
+{{< img src="mobile_app_testing/open_deep_link.png" alt="Recording an Open Deep Link step in a mobile test" style="width:60%" >}}
 
 For more information about additional configuration in test steps, see [Advanced Options for Mobile App Test Steps][4].
 
@@ -149,13 +151,13 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
 3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
 
-{{< img src="mobile_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
+{{< img src="mobile_app_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile_testing/mobile_app_tests/#variables
+[1]: /mobile_app_testing/mobile_app_tests/#variables
 [2]: /synthetics/settings/#global-variables
 [3]: /synthetics/guide/browser-tests-totp/
-[4]: /mobile_testing/mobile_app_tests/advanced_options
+[4]: /mobile_app_testing/mobile_app_tests/advanced_options

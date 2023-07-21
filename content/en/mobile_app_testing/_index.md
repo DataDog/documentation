@@ -4,14 +4,16 @@ kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 disable_sidebar: true
 is_beta: true
+aliases:
+- /mobile_testing
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "/mobile_testing/mobile_app_tests"
+- link: "/mobile_app_testing/mobile_app_tests"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
-- link: "/mobile_testing/settings"
+- link: "/mobile_app_testing/settings"
   tag: "Documentation"
   text: "Learn how to upload your iOS or Android mobile applications"
 - link: "/continuous_testing/"
@@ -32,7 +34,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 [Record mobile app tests][1] for Android and iOS using the no-code test recorder, which makes it easy to create robust and comprehensive tests.
 
-{{< img src="mobile_testing/mobile-test-screenshots.mp4" alt="Examples of the recording workflow for a Synthetic Mobile Test" video="true" >}}
+{{< img src="mobile_app_testing/mobile-test-screenshots.mp4" alt="Examples of the recording workflow for a Synthetic Mobile Test" video="true" >}}
 
 ## Run tests on CI or manually run tests
 
@@ -48,9 +50,9 @@ Create [search queries and visualizations][5] for your Synthetic test runs or ba
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile_testing/mobile_app_tests
-[2]: /mobile_testing/mobile_app_tests/#run-tests-in-ci
+[1]: /mobile_app_testing/mobile_app_tests
+[2]: /mobile_app_testing/mobile_app_tests/#run-tests-in-ci
 [3]: /continuous_testing
-[4]: /mobile_testing/mobile_app_tests/#scheduling-and-alerting
+[4]: /mobile_app_testing/mobile_app_tests/#scheduling-and-alerting
 [5]: /continuous_testing/explorer
 [6]: https://app.datadoghq.com/synthetics/explorer
