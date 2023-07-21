@@ -18,7 +18,7 @@ Quality Gates are in private beta. To request access, complete the form.
 {{< /callout >}}
 
 Quality Gates allows you to gate your workflows based on signals in Datadog. You can create two types of rules: Static Analysis and Tests.
-For example, you can block code from being merged if it introduces new [flaky tests][8] or code style violations; issues that wouldn't normally fail your CI/CD pipelines and end up deployed to production.
+For example, you can block code from being merged if it introduces new [flaky tests][8] or code security violations; issues that wouldn't normally fail your CI/CD pipelines and end up deployed to production.
 
 Using Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed.
 This allows you to ensure that the code running in production is meeting high quality standards, reducing incidents, and minimizing unwanted behaviors.
@@ -142,11 +142,11 @@ The rule would **not** be evaluated when the following commands are invoked inst
 
 ## Manage rules
 
-To edit a Quality Gate rule, click the **Edit** icon to the right of the **Creator** avatar on the [Quality Gate Rules page][2].
+To edit a Quality Gates rule, click the **Edit** icon to the right of the **Creator** avatar on the [Quality Gates Rules page][2].
 
 {{< img src="ci/edit_quality_gate_rule.png" alt="Edit a Quality Gates rule" style="width:90%;">}}
 
-To delete a Quality Gate rule, click the **Delete** icon next to the **Edit** button on the [Quality Gate Rules page][2]. Alternatively, you can edit the rule and click **Delete Rule**.
+To delete a Quality Gates rule, click the **Delete** icon next to the **Edit** button on the [Quality Gates Rules page][2]. Alternatively, you can edit the rule and click **Delete Rule**.
 
 {{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
 
