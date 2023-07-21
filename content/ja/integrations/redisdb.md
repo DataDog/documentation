@@ -44,7 +44,7 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 4.7.0
+integration_version: 4.8.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -473,6 +473,6 @@ Redis チェックには、イベントは含まれません。
 - [Redis パフォーマンスメトリクスの監視方法][3]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

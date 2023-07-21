@@ -102,6 +102,6 @@ default_zero(avg:custom_metric{*})
 {{< /whatsnext >}}
 
 [1]: /metrics/guide/interpolation-the-fill-modifier-explained/
-[2]: /getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[2]: /dashboards/functions/#add-a-function
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
 [4]: /metrics/

@@ -169,7 +169,7 @@ sudo journalctl -u datadog-fips-proxy
 1. `dd-agent` ユーザーが `systemd-journal` グループに属していることを確認してください。詳しくは、[journald インテグレーション][5]のドキュメントを参照してください。
 1. [Agent を再起動します][6]。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [3]: /ja/logs/
 [4]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory

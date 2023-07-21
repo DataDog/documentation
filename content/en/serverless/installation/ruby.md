@@ -224,7 +224,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Lambda library
 
     The Datadog Lambda Library can be installed as a layer or a gem. For most functions, Datadog recommends installing the library as a layer. If your Lambda function is deployed as a container image, you must install the library as a gem.
@@ -292,84 +291,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
       Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][2].
 
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://gallery.ecr.aws/datadog/lambda-extension
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. Install the Datadog Lambda library
-
-    The Datadog Lambda Library can be installed as a layer or a gem. For most functions, Datadog recommends installing the library as a layer. If your Lambda function is deployed as a container image, you must install the library as a gem.
-
-    The minor version of the `datadog-lambda` gem always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
-
-    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
-
-      ```sh
-      # Use this format for AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
-
-      # Use this format for AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
-      ```
-
-      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Ruby2-7`, and `Ruby3-2`.
-
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `ddtrace` by adding them to your Gemfile as an alternative:
-
-      ```Gemfile
-      gem 'datadog-lambda'
-      gem 'ddtrace'
-      ```
-
-      `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
-
-      Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
-
-      ```dockerfile
-      FROM <base image>
-
-      # assemble your container image
-
-      RUN yum -y install gcc gmp-devel make
-      RUN bundle config set path 'vendor/bundle'
-      RUN bundle install
-      ```
-
-2. Install the Datadog Lambda Extension
-
-    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
-
-      ```sh
-      # Use this format for x86-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-      # Use this format for arm64-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-      ```
-
-      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
-    
-    - Option B: Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
-
-      ```dockerfile
-      COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
-      ```
-
-      Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][2].
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://gallery.ecr.aws/datadog/lambda-extension
-{{< /site-region >}}
-
 3. Configure your Lambda functions
 
     Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
@@ -393,6 +314,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://gallery.ecr.aws/datadog/lambda-extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}

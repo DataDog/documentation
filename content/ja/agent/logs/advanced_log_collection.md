@@ -31,7 +31,7 @@ title: ログ収集の高度な構成
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行のログを集計する](#multi-line-aggregation)
 * [よく使われる例をコピーする](#commonly-used-log-processing-rules)
-* [ディレクトリを監視するためにワイルドカードを使用する](#tail-directories-by-using-wildcards)
+* [ディレクトリを監視するためにワイルドカードを使用する](#tail-directories-using-wildcards)
 * [ログファイルのエンコーディングを指定する](#log-file-encodings)
 * [グローバルな処理ルールを定義する](#global-processing-rules)
 
