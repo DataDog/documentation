@@ -150,11 +150,7 @@ When creating a [dashboard][15] or a [notebook][16], you can use test execution 
 
 ## Alert on test data
 
-<<<<<<< HEAD
 When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][17]. 
-=======
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16].
->>>>>>> master
 
 ## Further reading
 
@@ -173,13 +169,7 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [11]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
 [12]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
 [13]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-<<<<<<< HEAD
 [14]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
 [15]: https://app.datadoghq.com/dashboard/lists
 [16]: https://app.datadoghq.com/notebook/list
 [17]: /monitors/types/ci/
-=======
-[14]: https://app.datadoghq.com/dashboard/lists
-[15]: https://app.datadoghq.com/notebook/list
-[16]: /monitors/types/ci/
->>>>>>> master
