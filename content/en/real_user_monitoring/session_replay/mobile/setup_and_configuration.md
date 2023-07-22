@@ -19,6 +19,8 @@ further_reading:
 
 All Session Replay SDK versions can be found in the [Maven Snapshots Repository][1].
 
+To set up Mobile Session Replay for Android:
+
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
 2. In order to use the SNAPSHOTS in your Gradle dependencies, add this repository as a source in your repository configuration in your `build.gradle` file:
 
@@ -69,11 +71,11 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
 Session Replay is in private beta for iOS. As such, installation steps differ from those for integrating the Datadog RUM SDK.
 </div>
 
-**Note**: When installing Session Replay for iOS, instead of using git tags, the library needs to be fetched directly from the [`session-replay-beta`][1] branch.
-
-Before starting installation, make sure you've [setup and initialized the Datadog iOS RUM SDK][2].
+**Note**: When installing Session Replay for iOS, instead of using Git tags, the library needs to be fetched directly from the [`session-replay-beta`][1] branch.
 
 ### Installation with CocoaPods
+
+Before starting installation, make sure you've [set up and initialized the Datadog iOS RUM SDK][2].
 
 1. Link both RUM and Session Replay SDKs using git branches in `Podfile` and run `pod install` (or `pod update` if you're upgrading from an existing installation):
 
@@ -132,12 +134,18 @@ sessionReplay = SessionReplay.initialize(with: configuration)
 sessionReplay.start()
 ```
 
+[1]: https://github.com/DataDog/dd-sdk-ios/tree/session-replay-beta
+[2]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[3]: https://github.com/DataDog/dd-sdk-ios
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Additional configuration
 
-### Updating the sample rate for recorded sessions to appear
+{{< tabs >}}
+{{% tab "Android" %}}
+### Update the sample rate for recorded sessions to appear
 Beginning with v1.20.0, the recorder sessions are sampled, and the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
 
 {{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
@@ -149,14 +157,11 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder()
 
 {{< /code-block >}}
 
-
-## Troubleshooting
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
 {{% /tab %}}
+
 {{% tab "iOS" %}}
+
+### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. If everything works correctly, you should see following logs in the Xcode console soon (about 30 seconds) after launching the application:
 
@@ -170,6 +175,8 @@ To validate whether Session Replay data is being sent from the app, enable the `
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://github.com/DataDog/dd-sdk-ios/tree/session-replay-beta
-[2]: /real_user_monitoring/ios/?tab=swift
-[3]: https://github.com/DataDog/dd-sdk-ios
+## Privacy options
+
+See [Privacy Options][1].
+
+[1]: /real_user_monitoring/session_replay/mobile/privacy_options

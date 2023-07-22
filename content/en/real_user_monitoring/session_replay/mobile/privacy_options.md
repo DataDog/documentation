@@ -29,19 +29,28 @@ By enabling Mobile Session Replay, you can automatically mask sensitive elements
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-   insert code block content
-
    {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "iOS" %}}
 
-[ add iOS content]
+   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   // mask all text elements
+   let configuration = SessionReplayConfiguration(privacy: .maskAll)
+   sessionReplay = SessionReplay.initialize(with: configuration)
+   sessionReplay.start()
 
-   insert code block content
+   // mask only input elements
+   let configuration = SessionReplayConfiguration(privacy: .maskUserInput)
+   sessionReplay = SessionReplay.initialize(with: configuration)
+   sessionReplay.start()
+
+   // no masking; all text is revealed
+   let configuration = SessionReplayConfiguration(privacy: .allowAll)
+   sessionReplay = SessionReplay.initialize(with: configuration)
+   sessionReplay.start()
 
    {{< /code-block >}}
 
@@ -156,7 +165,9 @@ The following chart shows how we apply different appearance masking strategies, 
 | [Other attributes](#other-attributes) |  |  |  |
 
 #### Revealing attributes
-Revealing attributes are attributes that can reveal or suggest the value of input elements and can be used to infer a user's input or selection. This includes:
+Revealing attributes are attributes that can reveal or suggest the value of input elements and can be used to infer a user's input or selection.
+
+This includes:
 
 **Shapes**
 - Background of selected option in Segment (iOS)
@@ -168,15 +179,14 @@ Revealing attributes are attributes that can reveal or suggest the value of inpu
 - The color of a label rendering the the selected date in Date Picker (iOS)
 - The position of the first and last option in Value Picker (iOS and Android)
 
-
 ### Touch interactions
 
 The following chart shows how we apply different touch interaction strategies, using the rules you set up in your configuration, to the below text types. While any interaction that happens on an on-screen keyboard is masked, interactions with other elements are not masked.
 
 | Type | Allow all | Mask all | Mask user input |
 |------|-------------|------------|-------------------|
-| [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Other attributes](#other-attributes) |  |  |  |
+| [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
 
 #### On-screen keyboard
 

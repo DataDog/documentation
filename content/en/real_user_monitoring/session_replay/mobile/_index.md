@@ -26,9 +26,9 @@ Learn how to [Setup and Configure Mobile Session Replay][1].
 
 See [Privacy Options][2].
 
-## Performance benchmarking
+## How Mobile Session Replay impacts app performance
 
-See [Performance Benchmarking][3].
+See [How Mobile Session Replay Impacts App Performance][3].
 
 ## Troubleshooting
 
@@ -40,5 +40,5 @@ Learn how to [Troubleshoot Mobile Session Replay][4].
 
 [1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
-[3]: /real_user_monitoring/session_replay/mobile/performance_benchmarking
+[3]: /real_user_monitoring/session_replay/mobile/app_performance
 [4]: /real_user_monitoring/session_replay/mobile/troubleshooting
