@@ -19,7 +19,7 @@ further_reading:
 
 The Network Topology map provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts. 
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_overview.png" alt="The network topology map" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search.mp4" alt="The network topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" style="width:80%;" >}}
 
 ## Setup
 
