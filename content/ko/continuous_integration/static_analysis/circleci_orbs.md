@@ -1,7 +1,7 @@
 ---
 dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md
-description: Datadog과 CircleCI를 사용해 CI 파이프라인에서 Static Analysis 작업 실행
+description: Datadog과 CircleCI를 사용해 CI 파이프라인에서 Static Analysis 작업을 실행하세요.
 kind: 도움말
 title: Static Analysis와 CircleCI Orbs
 ---
@@ -34,7 +34,7 @@ rulesets:
   - python-inclusive
 ```
 
-## 워크플로우
+## 워크플로
 
 Datadog Static Analysis 작업을 실행하기 위해 `.circleci`에서 파일을 생성합니다.
 
@@ -64,18 +64,18 @@ workflows:
 
 | 이름         | 설명                                                                                                                | 필수 |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|
-| `DD_API_KEY` | Datadog API 키입니다. 이 키는 [Datadog 조직][2]에서 생성되고 비밀로 저장되어야 합니다.              | 예     |
-| `DD_APP_KEY` | Datadog 애플리케이션 키입니다. 이 키는 [Datadog 조직][3]에서 생성되고 비밀로 저장되어야 합니다.      | 예     |
+| `DD_API_KEY` | Datadog API 키입니다. 이 키는 [Datadog 조직][2]에서 생성되고 비밀로 저장되어야 합니다.              | Yes     |
+| `DD_APP_KEY` | Datadog 애플리케이션 키입니다. 이 키는 [Datadog 조직][3]에서 생성되고 비밀로 저장되어야 합니다.      | Yes     |
 
 ## 입력 사항
 
 워크플로를 사용자 지정하려면 Static Analysis에 대해 다음 파라미터를 설정하세요.
 
-| 이름         | 설명                                                                                                                | 필수 | 기본 설정         |
+| 이름         | 설명                                                                                                                | 필수 | 기본값         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service` | 결과에 태그를 지정할 서비스입니다.                                                                                | 예     |                 |
-| `env`     | 결과에 태그를 지정할 환경입니다. Datadog은 `ci`를 입력 값으로 권장합니다.                 | 아니요    | `none`          |
-| `site`    | 정보를 전송할 [Datadog 사이트][4]입니다.                                                                                 | 아니요    | `datadoghq.com` | 
+| `service` | 결과에 태그를 지정할 서비스입니다.                                                                                | Yes     |                 |
+| `env`     | 결과에 태그를 지정할 환경입니다. Datadog은 `ci`를 입력 값으로 권장합니다.                 | No    | `none`          |
+| `site`    | 정보를 전송할 [Datadog 사이트][4]입니다.                                                                                 | No    | `datadoghq.com` | 
 
 [1]: https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project
 [2]: https://docs.datadoghq.com/ko/account_management/api-app-keys/#api-keys
