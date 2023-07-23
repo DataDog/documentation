@@ -105,7 +105,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-Once all Agent configuration is complete, [restart the Datadog Agent][4].
+After all Agent configuration is complete, [restart the Datadog Agent][4].
 
 ### Validate
 
