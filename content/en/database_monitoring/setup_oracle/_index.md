@@ -122,7 +122,7 @@ For setup instructions, select your hosting type:
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.44.1-dbm-oracle-beta-0.32-1.x86_64.msi
+[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.32-1.x86_64.msi
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [6]: https://yum.datadoghq.com/beta/7/x86_64/
 [7]: https://apt.datadoghq.com/dists/beta/7/
