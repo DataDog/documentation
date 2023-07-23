@@ -23,7 +23,7 @@ Database Monitoring provides deep visibility into your Oracle databases by expos
 
 ## Setup
 
-Complete the following steps to enable Database Monitoring with your database:
+Complete the following steps to enable Database Monitoring:
 
 Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][7].
 
