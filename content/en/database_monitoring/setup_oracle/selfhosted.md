@@ -204,7 +204,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-The Agent connects only to CDB. It queries the information about PDBs while connected to CDB. Don't create connections to individual PDBs.
+The Agent connects only to the root multitenant container database (CDB). It queries the information about pluggable databases (PDB) while connected to the root CDB. Don't create connections to individual PDBs.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
