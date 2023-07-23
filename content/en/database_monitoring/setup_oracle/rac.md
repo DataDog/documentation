@@ -27,7 +27,7 @@ Complete the following steps to enable Database Monitoring:
 
 Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][7].
 
-You must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
+You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
 
 ```yaml
 init_config:
