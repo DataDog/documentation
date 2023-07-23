@@ -55,7 +55,7 @@ The Agent does not need to run on the same server nor the same platform as the m
 
 Datadog recommends you install the version listed in the [Latest Agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
 
-If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is a beta build, such as `7.44.1~dbm~oracle~beta~0.32`, follow the instructions in [Beta build](#beta-build).
+If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.32`, follow the instructions in [Beta build](#beta-build).
 
 #### Official release
 
@@ -71,7 +71,7 @@ Set `DD_API_KEY` and run the following commands to install the beta release, for
 
 ```shell
 export DD_AGENT_DIST_CHANNEL=beta
-export DD_AGENT_MINOR_VERSION="44.1~dbm~oracle~beta~0.32-1"
+export DD_AGENT_MINOR_VERSION="46.0~dbm~oracle~beta~0.32-1"
 
 DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
@@ -85,7 +85,7 @@ Download the MSI file for the [beta build][4].
 Set `APIKEY` and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
 
 ```shell
-start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.32-1.x86_64.msi APIKEY="" SITE="datadoghq.com"
+start /wait msiexec /qn /i datadog-agent-7.46.0-dbm-oracle-beta-0.32-1.x86_64.msi APIKEY="" SITE="datadoghq.com"
 ```
 
 ##### Docker
@@ -95,15 +95,15 @@ The docker beta images can be found [here][9].
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.44.1-dbm-oracle-beta-0.32
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.46.0-dbm-oracle-beta-0.32
 ```
 
 ##### Latest Agent version
 
 The following beta builds contain implemented Oracle DBM features:
-- Linux: `7.44.1~dbm~oracle~beta~0.32-1`
-- Windows: `7.44.1-dbm-oracle-beta-0.32-1`
-- Docker: `7.44.1-dbm-oracle-beta-0.32`
+- Linux: `7.46.0~dbm~oracle~beta~0.32-1`
+- Windows: `7.46.0-dbm-oracle-beta-0.32-1`
+- Docker: `7.46.0-dbm-oracle-beta-0.32`
 
 ### Oracle client
 
