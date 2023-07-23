@@ -21,7 +21,7 @@ The features described on this page are in private beta.
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
-Complete the following steps to enable Database Monitoring with your database:
+Complete the following steps to enable Database Monitoring:
 
 1. [Agent database user setup](#agent-database-user-setup).
 2. [Install the Agent][1].
