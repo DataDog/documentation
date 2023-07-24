@@ -18,7 +18,7 @@ aliases:
     - /serverless/datadog_lambda_library/ruby/
 ---
 
-<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder or plan on using custom metrics in your lambda fucntions, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
+<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder or plan on using custom metrics in your Lambda functions, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
