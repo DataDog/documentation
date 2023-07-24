@@ -190,6 +190,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
 | [Audit Trail settings][67] | A user modified Audit Trail settings and what the previous and new settings are. | `@evt.name:"Organization Management" @asset.type:audit_logs_settings` |
+| [Child org created][92] | A user created a new child organization for an existing Datadog organization. | `@evt.name:"Organization Management" @asset.type:organization @action:created` |
 
 ### Real User Monitoring events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -336,3 +337,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [89]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_schedule%20%40action%3A%28modified%20OR%20created%20OR%20deleted%29
 [90]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_action%20%40action%3Aresponded
 [91]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Custom%20Connections%22%20%40asset.type%3Acustom_connection
+[92]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Organization%20Management%22%20%40asset.type%3Aorganization%20%40action%3Acreated
