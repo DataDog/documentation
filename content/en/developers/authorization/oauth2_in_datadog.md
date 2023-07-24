@@ -67,7 +67,7 @@ Additionally, when users initiate authorization from the Datadog integration til
 
 Datadog recommends that partners prompt users to initiate authorization from Datadog, rather than from their own platform.
 
-While it is not recommended, if you would still like to support initiating authorization from a third-party location anywhere outside of the Datadog integration tile, ensure that you are able to support users in all Datadog sites, and are willing to continue to support new Datadog sites as they may be created. To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region.
+While Datadog does not recommend supporting initiating authorization from a third-party location anywhere outside of the Datadog integration tile, you must ensure that you are able to support users in all Datadog sites, and are willing to continue to support new Datadog sites as they may be created if you would like to. To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region.
 
 ## Authorization code grant flow with PKCE
 
