@@ -43,7 +43,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
     .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
     ```
 
-    In your project, please link the following libraries:
+    In your project, link the following libraries:
 	```
 	DatadogCore
 	DatadogTrace
@@ -57,7 +57,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
     github "DataDog/dd-sdk-ios"
     ```
 
-    In Xcode, please link the following frameworks:
+    In Xcode, link the following frameworks:
     ```
     DatadogInternal.xcframework
     DatadogCore.xcframework
@@ -257,26 +257,23 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 	{{< /tabs >}}
 	{{< /site-region >}}
 
-    To comply with GDPR regulations, the SDK requires the `trackingConsent` value at initialization.
+	To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
+	The `trackingConsent` can be one of the following values:
 
-    Use one of the following values for `trackingConsent`:
+	- `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+	- `.granted`: The SDK starts collecting the data and sends it to Datadog.
+	- `.notGranted`: The SDK does not collect any data: logs, traces, and RUM events are not sent to Datadog.
 
-    - `.pending` - the SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
-    - `.granted` - the SDK starts collecting the data and sends it to Datadog.
-    - `.notGranted` - the SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
+	To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
 
-    To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
+	The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
 
-    The SDK changes its behavior according to the new value.
+	- If changed to `.granted`, the SDK send all current and future data to Datadog;
+	- If changed to `.notGranted`, the SDK wipe all current data and stop collecting any future data.
 
-    For example, if the current tracking consent is `.pending`:
+	Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
-    - If changed to `.granted`, the SDK sends all current and future data to Datadog.
-    - If changed to `.notGranted`, the SDK wipes all current data and does not collect future data.
-
-    Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][11], which can't be read by any other app installed on the device.
-
-    When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level.
+	When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level. 
 
     {{< tabs >}}
     {{% tab "Swift" %}}
@@ -291,7 +288,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
     {{% /tab %}}
     {{< /tabs >}}
 
-3. Datadog tracer implements the [Open Tracing standard][8]. Configure and enable the shared an Open Tracing `Tracer` as `Tracer.shared()`. You only need to do it once, usually in your `AppDelegate` code:
+3. Datadog tracer implements the [Open Tracing standard][8]. Configure and enable the shared an Open Tracing `Tracer` as `Tracer.shared()`:
 
     {{< tabs >}}
     {{% tab "Swift" %}}
@@ -304,7 +301,7 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
         )
     )
 
-    let tracer = Tracer.shared();
+    let tracer = Tracer.shared()
     ```
     {{% /tab %}}
     {{% tab "Objective-C" %}}

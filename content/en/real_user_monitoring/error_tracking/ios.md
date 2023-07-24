@@ -108,7 +108,7 @@ Depending on your setup, you may need to download .`dSYM` files from App Store C
 
 | Bitcode Enabled | Description |
 |---|---|
-| Yes | dSYM files are available once [App Store Connect][6] completes processing your application's build. |
+| Yes | dSYM files are available after [App Store Connect][6] completes processing your application's build. |
 | No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
 ### Upload your dSYM file

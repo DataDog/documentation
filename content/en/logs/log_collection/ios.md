@@ -45,7 +45,7 @@ The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 	.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 	```
 
-	In your project, please link the following libraries:
+	In your project, link the following libraries:
 	```
 	DatadogCore
 	DatadogLogs
@@ -59,7 +59,7 @@ The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 	github "DataDog/dd-sdk-ios"
 	```
 
-	In Xcode, please link the following frameworks:
+	In Xcode, link the following frameworks:
 	```
 	DatadogInternal.xcframework
 	DatadogCore.xcframework
@@ -308,10 +308,10 @@ The `dd-sdk-ios` library supports all versions of iOS 11 or later.
 
 	The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
 
-	- If changed to `.granted`, the SDK will send all current and future data to Datadog;
-	- If changed to `.notGranted`, the SDK will wipe all current data and will not collect any future data.
+	- If changed to `.granted`, the SDK send all current and future data to Datadog;
+	- If changed to `.notGranted`, the SDK wipe all current data and stop collecting any future data.
 
-	Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6], which cannot be read by any other app installed on the device.
+	Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
 	When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level. 
 

@@ -50,7 +50,7 @@ To integrate using Apple's Swift Package Manager, add the following as a depende
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 ```
 
-In your project, please link the following libraries:
+In your project, link the following libraries:
 ```
 DatadogCore
 DatadogWebViewTracking
@@ -64,7 +64,7 @@ You can use [Carthage][5] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-In Xcode, please link the following frameworks:
+In Xcode, link the following frameworks:
 ```
 DatadogWebViewTracking.xcframework
 ```
