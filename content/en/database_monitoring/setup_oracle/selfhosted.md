@@ -74,7 +74,7 @@ grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
 grant select on V_$SQL to c##datadog ;
 ```
 
-If you conifgured custom queries that run on a PDB, you must grant `set container` privilege to the `C##DATADOG` user:
+If you conifgured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:
 
 ```SQL
 connect / as sysdba
@@ -204,7 +204,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-The Agent connects only to the root multitenant container database (CDB). It queries the information about pluggable databases (PDB) while connected to the root CDB. Don't create connections to individual PDBs.
+The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
