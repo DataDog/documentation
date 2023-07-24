@@ -5,7 +5,7 @@ kind: guide
 
 {{% site-region region="us3,us5,eu,gov,ap1" %}}
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 {{% site-region region="us" %}}
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
@@ -23,7 +23,7 @@ Datadog exposes AWS PrivateLink endpoints in **us-east-1**.
 However, to route traffic to Datadog's PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
 
 {{< tabs >}}
-{{% tab "us-east-1" %}}
+{{% tab "us-east-1" %}} 
 
 1. Connect the AWS Console to region **us-east-1** and create a VPC endpoint.
 
@@ -238,8 +238,8 @@ Additional helpful documentation, links, and articles:
 - [Enable log collection with the Agent][3]
 - [Collect logs from your AWS services][4]
 
-{{< /site-region >}}
 [1]: https://aws.amazon.com/privatelink/
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
 [3]: /agent/logs
 [4]: /integrations/amazon_web_services/#log-collection
+{{% /site-region %}}
