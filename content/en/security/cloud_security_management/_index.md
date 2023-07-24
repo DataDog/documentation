@@ -54,12 +54,9 @@ When these issues are remediated, it can meaningfully improve your organization'
 
 ## Track your organization's health
 
-Available for [CSM Misconfigurations][2] and CSM Identity Risks, the posture and identity health scores help you track your organization's overall health.
+Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
-- **[Posture score][5]**: The percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
-- **Identity health score**: The percentage of your IAM resources that are configured securely.
-
-The scores automatically update as you resolve your organization's identity risk detections and security posture findings. Muting a finding or detection also removes it from the calculation of the score.
+Improve your organization's score by remediating findings, either by resolving the underlying issue or by muting the finding.
 
 {{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organizations' overall health" width="100%">}}
 
