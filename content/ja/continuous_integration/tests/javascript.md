@@ -69,7 +69,7 @@ Datadog にテスト結果を報告するには、Datadog の JavaScript ライ�
 
 {{% /tab %}}
 
-{{% tab ""クラウド CI プロバイダー (Agentless)" %}}
+{{% tab "クラウド CI プロバイダー (Agentless)" %}}
 
 <div class="alert alert-info">Agentless モードは、Datadog JavaScript ライブラリのバージョン >= 2.5.0 で使用できます</div>
 
