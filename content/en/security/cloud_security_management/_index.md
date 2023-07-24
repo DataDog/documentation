@@ -71,9 +71,6 @@ Use the Explorers page to review and remediate your organization's detections an
 
 Use the Explorers page to review and remediate your organization's detections and findings. View additional details on the side panel, including:
 
-- The detailed configuration of a resource.
-- The detection or compliance rules applied to the resource.
-- Tags applied to resource that provide additional context about who owns the resource and where it resides in your environment.
 - Descriptions and guidelines based on industry resources for remediating detections.
 - Use the time selector to explore your security configuration posture at any point in the past.
 - Fix in AWS console.
