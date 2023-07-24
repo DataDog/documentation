@@ -3,8 +3,10 @@ title: Mobile App Tests
 kind: documentation
 description: Learn how to start monitoring key business flows with mobile app tests.
 is_beta: true
+aliases:
+- /mobile_testing/mobile_app_tests
 further_reading:
-- link: "/mobile_testing/settings"
+- link: "/mobile_app_testing/settings"
   tag: "Documentation"
   text: "Learn about mobile test settings"
 - link: "/synthetics/browser_tests"
@@ -27,7 +29,7 @@ Mobile app tests can run on a schedule, on-demand, or directly within your [CI/C
 
 You can create mobile app tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
 
-{{< img src="mobile_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
+{{< img src="mobile_app_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 
 ### Flakiness 
 
@@ -70,7 +72,7 @@ You can specify how much time a test needs to fail before triggering a notificat
 
 By default, mobile app tests are set up for on-demand testing, meaning these tests can run [directly in a CI pipeline](#run-tests-in-ci).
 
-{{< img src="mobile_testing/alerting_rules.png" alt="Scheduling and alerting conditions for a mobile test" style="width:90%" >}}
+{{< img src="mobile_app_testing/alerting_rules.png" alt="Scheduling and alerting conditions for a mobile test" style="width:90%" >}}
 
 You can customize alert conditions to define how often you want to send an alert and the circumstances under which you want a test to send a notification alert.
 
@@ -145,7 +147,7 @@ You can restrict access to a mobile app test based on the roles in your organiza
 
 [1]: /continuous_testing/cicd_integrations/
 [2]: https://app.datadoghq.com/synthetics/settings/mobile-applications
-[3]: /mobile_testing/settings/
+[3]: /mobile_app_testing/settings/
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: https://daringfireball.net/projects/markdown/syntax
 [6]: /monitors/notify/variables/?tab=is_alert#conditional-variables
@@ -153,7 +155,7 @@ You can restrict access to a mobile app test based on the roles in your organiza
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
-[11]: /mobile_testing/mobile_app_tests/steps/
+[11]: /mobile_app_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options

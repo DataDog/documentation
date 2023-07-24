@@ -2,8 +2,10 @@
 title: Mobile Application Testing Settings
 kind: documentation
 is_beta: true
+aliases:
+- /mobile_testing/settings
 further_reading:
-- link: "/mobile_testing/mobile_app_tests"
+- link: "/mobile_app_testing/mobile_app_tests"
   tag: "Documentation"
   text: "Learn how to create a mobile test"
 - link: "/continuous_testing/cicd_integrations"
@@ -20,7 +22,7 @@ further_reading:
 
 Manage your uploaded mobile applications and your parallelization settings on the [Synthetic Monitoring & Continuous Testing Settings page][1].
 
-{{< img src="mobile_testing/applications_list.png" alt="Mobile Applications Settings" style="width:100%;">}}
+{{< img src="mobile_app_testing/applications_list.png" alt="Mobile Applications Settings" style="width:100%;">}}
 
 ## Create an application
 
@@ -74,7 +76,7 @@ To add a version of an existing mobile application:
 4. Optionally, select **Mark this version as latest**.
 5. Click **Add Version**.
 
-{{< img src="mobile_testing/add_new_version.png" alt="Add a new version of a mobile application" style="width:50%;">}}
+{{< img src="mobile_app_testing/add_new_version.png" alt="Add a new version of a mobile application" style="width:50%;">}}
 
 ## Customize your parallelization
 
@@ -97,5 +99,5 @@ If you are using the [custom role feature][3], add your user to any custom role 
 [3]: /account_management/rbac/#custom-roles
 [4]: https://developer.android.com/tools/bundletool
 [5]: https://app.datadoghq.com/synthetics/settings/mobile-applications
-[6]: /mobile_testing/mobile_app_tests/
+[6]: /mobile_app_testing/mobile_app_tests/
 [7]: /continuous_testing/settings/
