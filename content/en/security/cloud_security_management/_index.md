@@ -63,7 +63,7 @@ Available for [CSM Misconfigurations][2] and CSM Identity Risks, the posture and
 
 The scores automatically update as you resolve your organization's identity risk detections and security posture findings. Muting a finding or detection also removes it from the calculation of the score.
 
-**SCREENSHOT HERE**
+{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organizations' overall health" width="100%">}}
 
 ## Explore and remediate issues using explorers
 
