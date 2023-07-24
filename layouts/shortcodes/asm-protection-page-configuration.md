@@ -1,14 +1,90 @@
-The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header][103] is pointing to HTML, like `text/html`, the HTML content is used. Otherwise, the JSON one is used. 
+The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header][103] is pointing to HTML, like `text/html`, the HTML content is used. Otherwise, the JSON one is used.
 
-Both sets of content is embedded in the Datadog Tracer library package and loaded locally. See examples of the templates for [HTML][101] and [JSON][102] in the Datadog Java tracer source code on GitHub.
+Both sets of content are embedded in the Datadog Tracer library package and loaded locally. See examples of the templates for [HTML][101] and [JSON][102] in the Datadog Java tracer source code on GitHub.
 
-The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables within your application deployment file. Alternatively, you can use the `dd.appsec.http.blocked.template.html` or `dd.appsec.http.blocked.template.json` configuration entries.
+The HTML and JSON content can both be changed using the `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML` and `DD_APPSEC_HTTP_BLOCKED_TEMPLATE_JSON` environment variables within your application deployment file.
 
 Example:
 
 ```
 DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML=<path_to_file.html>
 ```
+
+
+Alternatively, you can use the configuration entry.
+
+{{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
+
+{{< programming-lang lang="java" >}}
+
+```java
+
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="dotnet" >}}
+
+```csharp
+
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go" >}}
+
+
+```go
+
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+
+```ruby
+# config/initializers/datadog.rb
+
+Datadog.configure do |c|
+  # To configure the text/html blocking page
+  c.appsec.block.templates.html = '<path_to_file.html>'
+  # To configure the application/json blocking page
+  c.appsec.block.templates.json = '<path_to_file.json>'
+  # customize the status code that would be use on the blocking page
+  c.appsec.block.status = 401
+  # Only apply when the status code is [301, 302, 303, 307, 308]
+  # The value would be used to populate the Location HTTP header
+  c.appsec.block.location = "https://youhavebeenredirected.com"
+end
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="php" >}}
+
+```php
+
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+
+
+```javascript
+
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="python" >}}
+
+
+```python
+
+```
+
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
 
 
 By default, the page shown in response to a blocked action looks like this:
