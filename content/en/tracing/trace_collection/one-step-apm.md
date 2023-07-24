@@ -157,6 +157,9 @@ For example, for a Docker Linux container:
            datadog_apm_instrumentation_enabled: "host"
    ```
 2. Deploy.
+3. [Explore the performance observability of your services in Datadog][2].
+
+[2]: /tracing/service_catalog/
 
 {{% /tab %}}
 
