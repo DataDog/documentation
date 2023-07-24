@@ -113,7 +113,7 @@ To create a custom responder type:
 
 {{< img src="/service_management/incidents/incident_settings/incident_settings_slack_teams.png" alt="Incident Setting pages showing options for enabling Slack or Microsoft Teams" style="width:80%;" >}}
 
-The integrations settings provide additional configurations for the Incident Management features of the [Slack ][13], [Microsoft Teams][14], and Zoom integrations. 
+The integrations settings provide additional configurations for the Incident Management features of the [Slack ][13] and [Microsoft Teams][14]. 
 
 #### Slack and Microsoft Teams settings
 
@@ -134,13 +134,6 @@ The `incident` prefix can be changed to any string composed of *lowercase* lette
 - If you choose to check `{title}`, the Datadog Slack App automatically renames the channel if an incident's title changes.
 
 The incident updates channel sends a message whenever an incident is declared or changes status, severity, or incident commander.
-
-#### Zoom
-
-1. Enable the Zoom integration to automatically attach a Zoom meeting link to every new incident.
-2. From the [global header][16] of the new Incident Detail page, click **Start Zoom Call** to activate and assign a Zoom link to the incident.
-
-{{< img src="/service_management/incidents/incident_details/global_header.png" alt="Your image description" style="width:90%;" >}}
 
 ## Notifications
 
