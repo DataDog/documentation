@@ -34,7 +34,7 @@ In addition to providing an overview of your network's physical connections, you
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_hover.png" alt="The network topology map with the cursor hovering over a device" style="width:80%;" >}}
 
- Click on a device to see the options:
+ You can also click on a device to see the following options:
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_options.png" alt="The network topology map with a device selected, displaying the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
 
