@@ -332,7 +332,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces
 
-<div class="alert alert-warning">Sending custom metrics instrumented with the Extension is not currently supported in the Ruby runtime. If you require custom metrics,see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a> instead.</div>
+<div class="alert alert-warning">Sending custom metrics instrumented with the Extension is not currently supported in the Ruby runtime. If you require custom metrics, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a> instead.</div>
 
 ## Further Reading
 
