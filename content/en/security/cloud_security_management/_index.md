@@ -46,11 +46,9 @@ CSM leverages the Datadog Agent and platform-wide cloud integrations and include
 
 ## Prioritize and remediate important security issues
 
-The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as publicly accessible, privileged role, and production environment.
+The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as being publicly accessible, attached to privileged roles, and residing in production environments.
 
-When these issues are remediated, it can meaningfully improve your organization's security. Use the inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
-
-<div class="alert alert-info">At this time, security issues are available for AWS only.</div>
+When these issues are remediated, it can meaningfully improve your organization's security. Use the Security Inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
 
 {{< img src="security/csm/security_inbox.png" alt="The security inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
 
