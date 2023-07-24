@@ -43,7 +43,7 @@ For the Declare Incident Helper Text settings, you can customize the helper text
 
 {{< img src="service_management/incidents/incident_settings/private_incidents_delete_incidents.png" alt="Incident settings for enabling or disabling private and delete incidents" style="width:80%;" >}}
 
-Enable users in your organization to make incidents private and to delete incidents. Private Incidents gives users the ability to limit access to incidents with sensitive information so that only responders of the incident can see it the details. Any previously created notification rules will not be sent when an incident is private. Incident Deletion gives users the ability to remove the incidents from the UI, including the analytics.
+Enable users in your organization to make incidents private and to delete incidents. Private Incidents gives users the ability to limit access to incidents with sensitive information so that only responders of the incident can see it the details. Any previously created notification rules will not be sent when an incident is private. Incident Deletion gives users the ability to remove the incidents from the UI, including the analytics. By default, incident deletion is disabled.
 
 ### Property fields
 
