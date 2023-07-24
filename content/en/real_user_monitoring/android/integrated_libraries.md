@@ -36,7 +36,7 @@ If you use RxJava in your application, see Datadog's [dedicated RxJava library][
 
 ### Picasso
  
-If you use Picasso, use it with the `OkHttpClient` that's been instrumented with Datadog SDK for RUM and APM information about network requests made by Picasso.
+If you use Picasso, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made by Picasso.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -61,7 +61,7 @@ If you use Picasso, use it with the `OkHttpClient` that's been instrumented with
  
 ### Retrofit
  
-If you use Retrofit, use it with the `OkHttpClient` that's been instrumented with Datadog SDK for RUM and APM information about network requests made with Retrofit.
+If you use Retrofit, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made with Retrofit.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -125,7 +125,7 @@ RUM error event for it.
  
 ### Apollo (GraphQL)
  
-If you use Apollo, use it with the `OkHttpClient` that's been instrumented with Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
+If you use Apollo, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
