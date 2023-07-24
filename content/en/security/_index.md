@@ -46,7 +46,7 @@ cascade:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-CSM Misconfigurations is not currently available in US1-FED.
+CSM Misconfigurations is not available in the selected site.
 </div>
 {{< /site-region >}}
 
@@ -70,7 +70,7 @@ Datadog Security includes [Application Security Management](#application-securit
 
 ## Cloud Security Management
 
-[Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+[Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
 CSM includes [Threats][12], [Misconfigurations][11], Identity Risks, and Vulnerabilities. To learn more, check out the dedicated [Guided Tour][13].
 
