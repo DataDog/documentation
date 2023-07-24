@@ -55,13 +55,13 @@ To instrument an application written in a language that does not have official l
 
 <div class="alert alert-info">This method is in beta for host and container deployments.</a></div>
 
-Inject the tracing library locally at the Agent without modifying your application code.
+[Inject the tracing library locally at the Agent without modifying your application code.][4]
 
 ### Option 3 - Kubernetes: Inject the library remotely from the Datadog UI
 
 <div class="alert alert-info">This method is in beta for Kubernetes deployments.</a></div>
 
-Inject the tracing library remotely from the Datadog UI.
+[Inject the tracing library remotely from the Datadog UI.][5]
 
 ## APM Setup Tutorials
 
@@ -90,3 +90,5 @@ The following tutorials provide a walk-through of setting up distributed tracing
 [1]: /tracing/trace_collection/compatibility/
 [2]: /developers/community/libraries/#apm-tracing-client-libraries
 [3]: /profiler/enabling/
+[4]: /tracing/trace_collection/library_injection_local/
+[5]: /tracing/trace_collection/library_injection_remote/
