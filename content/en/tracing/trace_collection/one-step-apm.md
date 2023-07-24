@@ -34,9 +34,78 @@ Start [exploring the performance observability of your services in Datadog][2].
 
 ## Removing 1-Step APM Configuration from your Agent
 
-To remove this configuration from an Agent:
+If you no longer want to collect trace data, you can remove APM enablement either for all services on the host or container, or for specific services (for example, operating system processes, anti-virus apps). Run the following commands directly on the hosts or containers involved.
 
-tktk
+### Removing APM for all services on the infrastructure
+
+Running the following commands and restarting the infrastructure removes library injectors and stops the production of traces.
+
+{{< tabs >}}
+{{% tab "Hosts and VMs" %}}
+
+1. Run:
+   ```shell
+   dd-host-install --uninstall
+   ```
+2. Restart your host.
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+1. Run:
+   ```shell
+   dd-container-install --uninstall
+   ```
+2. Restart your container.
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+1. Run:
+   ```shell
+   tktk
+   ```
+2. Restart your cluster.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Removing instrumentation for specific services
+
+Running the following commands and restarting the service stops the library from being injected into the service, stops the production of traces from that service.
+
+
+{{< tabs >}}
+{{% tab "Hosts and VMs" %}}
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+
+   ```shell
+   DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
+   ```
+2. Re-start the service.
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+   ```shell
+   docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
+   ```
+2. Restart the service.
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+1. Run:
+   ```shell
+   tktk
+   ```
+2. Restart the service.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/services/
