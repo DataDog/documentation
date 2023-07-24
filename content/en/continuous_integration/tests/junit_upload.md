@@ -203,13 +203,13 @@ This is the full list of options available when using the `datadog-ci junit uplo
 : Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
 **Environment variable**: (none)<br/>
 **Default**: (none)<br/>
-**Example**: `team:backend`<br/>
+**Example**: `coverage_enabled:true`<br/>
 
 `--report-metrics`
 : Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
 **Environment variable**: (none)<br/>
 **Default**: (none)<br/>
-**Example**: `coverage:80`<br/>
+**Example**: `coverage_percentage:35`<br/>
 
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
