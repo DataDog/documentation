@@ -165,7 +165,7 @@ Click on a violation to open a side panel that contains information about the sc
 The content of the violation is shown in tabs:
 
 * Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][3].
-* Fix: One or more code fixes that can resolve the violation, which you can copy and paste.
+* Fixes: One or more code fixes that can resolve the violation, which you can copy and paste.
 * Event: JSON metadata regarding the the Static Analysis violation event.
 
 ### Using suggested fixes
