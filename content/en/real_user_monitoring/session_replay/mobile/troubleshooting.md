@@ -7,6 +7,15 @@ further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
       tag: Documentation
       text: Mobile Session Replay
+    - link: '/real_user_monitoring/session_replay/mobile/setup_and_configuration'
+      tag: Documentation
+      text: Setup and Configure Mobile Session Replay
+    - link: '/real_user_monitoring/session_replay/mobile/app_performance'
+      tag: Documentation
+      text: How Mobile Session Replay Impacts App Performance
+    - link: '/real_user_monitoring/session_replay/mobile/privacy_options'
+      tag: Documentation
+      text: Mobile Session Replay Privacy Options
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
@@ -37,3 +46,7 @@ At any time during the lifetime of the host app, it's possible to change the tra
 
 ## For my sessions that are very short, I see I have a replay attached but I am unable to view the replay
 When sessions are 1 nanosecond long, we are unable to process the record and thus there would be no replay attached. 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

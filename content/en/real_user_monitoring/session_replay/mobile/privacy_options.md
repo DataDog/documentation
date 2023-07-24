@@ -7,6 +7,15 @@ further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
       tag: Documentation
       text: Mobile Session Replay
+    - link: '/real_user_monitoring/session_replay/mobile/app_performance'
+      tag: Documentation
+      text: How Mobile Session Replay Impacts App Performance
+    - link: '/real_user_monitoring/session_replay/mobile/setup_and_configuration'
+      tag: Documentation
+      text: Setup and Configure Mobile Session Replay
+    - link: '/real_user_monitoring/session_replay/mobile/troubleshooting'
+      tag: Documentation
+      text: Troubleshoot Mobile Session Replay
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
@@ -20,7 +29,13 @@ Default privacy options for Session Replay are designed to protect end user priv
 
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
-## Configuration
+## Configuring masking modes
+
+Using the masking modes below, you can override the default setup on a per-application basis.
+
+### Mask all text elements
+
+By default, the `mask all` setting is enabled for all data. this setting enabled, all text content on screen is replaced with X's.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -42,10 +57,59 @@ By enabling Mobile Session Replay, you can automatically mask sensitive elements
    sessionReplay = SessionReplay.initialize(with: configuration)
    sessionReplay.start()
 
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Mask only input elements
+
+With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+[ add android content]
+
+   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
    // mask only input elements
    let configuration = SessionReplayConfiguration(privacy: .maskUserInput)
    sessionReplay = SessionReplay.initialize(with: configuration)
    sessionReplay.start()
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Allow all (no masking)
+
+With the `allow all` setting enabled, all text is revealed.
+
+**Note**: Even with this option enabled, any sensitive text fields such as passwords, emails, phone numbers, and addresses are still masked. For more information, see [Text masking definitions](#text-masking-definitions).
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+[ add android content]
+
+   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
    // no masking; all text is revealed
    let configuration = SessionReplayConfiguration(privacy: .allowAll)
@@ -56,16 +120,6 @@ By enabling Mobile Session Replay, you can automatically mask sensitive elements
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Masking modes
-
-By default, the `mask all` setting is enabled for all data. Using the masking modes below, you can override the default setup on a per-application basis.
-
-| Masking mode | Description | Example |
-|--------------|-------------|---------|
-| `mask all` | All text content on screen is replaced with X's. | {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all.png" alt="Enable mask all to replace all text content on the screen with X's" style="width:40%;">}} |
-| `mask user input` | Any input field is replaced with anonymized text. | {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-user-input.png" alt="Enable mask all to replace all text content on the screen with X's" style="width:40%;">}} |
-| `allow all` | All text is revealed. <br> <br> **Note**: Even with this option enabled, any sensitive text fields such as passwords, emails, phone numbers, and addresses are still masked. | {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all.png" alt="Enable mask all to replace all text content on the screen with X's" style="width:40%;">}} |
 
 ### Unmask data in all recorded content
 By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, add this option to **unmask data in all recorded content**:
@@ -79,10 +133,10 @@ By default, the Session Replay recorder masks all recorded content with `*` to e
 
    {{< /code-block >}}
 
-## Understanding how data is masked
+## Understanding how and what data is masked
 
 Find below a description of how Datadog's recorder handles masking based on data type and how that data is defined. 
-### Text masking
+### Text masking strategies
 
 Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.
 
@@ -102,6 +156,10 @@ The following chart shows how we apply different text masking strategies, using 
 | [Input and option text](#input-and-option-text) | No mask | Fixed-length mask | Fixed-length mask |
 | [Static text](#static-text) | No mask | Space-preserving mask | No mask |
 | [Hint text](#hint-text) | No mask | Fixed-length mask | No mask |
+
+### Text masking definitions
+
+Find below a description of how Datadog's recorder treats each text type.
 
 #### Sensitive text
 Sensitive text includes passwords, e-mails, and phone numbers marked in a platform-specific way,
@@ -185,3 +243,7 @@ The following chart shows how we apply different touch interaction strategies, u
 |------|-------------|------------|-------------------|
 | [Other attributes](#other-attributes) |  |  |  |
 | [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
