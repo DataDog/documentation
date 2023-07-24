@@ -30,7 +30,7 @@ Set up the web page you want rendered on your mobile iOS and tvOS application wi
 
 ### Declare `DatadogWebViewTracking` as a dependency
 
-To enable Crash Reporting, make sure to also enable [RUM][3] and/or [Logs][5]. Then, add the package according to your dependency manager and update your initialize snippet.
+To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][5]. Then, add the package according to your dependency manager and update your initialize snippet.
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}

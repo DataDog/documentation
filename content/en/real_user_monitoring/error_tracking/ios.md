@@ -34,7 +34,7 @@ If you have not set up the iOS SDK yet, follow the [in-app setup instructions][1
 
 ### Add Crash Reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][2] and/or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
@@ -54,7 +54,7 @@ To integrate using Apple's Swift Package Manager, add the following as a depende
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
 ```
 
-In your project, please link the following libraries:
+In your project, link the following libraries:
 ```
 DatadogCrashReporting
 ```
@@ -67,7 +67,7 @@ You can use [Carthage][5] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-In Xcode, please link the following frameworks:
+In Xcode, link the following frameworks:
 ```
 DatadogCrashReporting.xcframework
 CrashReporter.xcframework
@@ -104,12 +104,12 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files. 
 
-Depending on your setup, you may need to download .dSYM files from App Store Connect or find them on your local machine. 
+Depending on your setup, you may need to download .`dSYM` files from App Store Connect or find them on your local machine. 
 
 | Bitcode Enabled | Description |
 |---|---|
 | Yes | dSYM files are available once [App Store Connect][6] completes processing your application's build. |
-| No | Xcode exports .dSYM files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
+| No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
 ### Upload your dSYM file
 
