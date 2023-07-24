@@ -100,6 +100,8 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
     # values.yaml file
     spec:
       features:
+        remoteConfiguration:
+          enabled: true
         cws:
           enabled: true
     ```
