@@ -22,7 +22,7 @@ Every incident in Datadog has its own Incident Details page where you can manage
 
 ## Global header
 
-The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. For more information on how to configure automatic Slack and Microsoft Teams links with every new incident, see [Incident Settings][4].
+The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. For more information on how to configure automatic links with every new incident for Slack and Microsoft Teams links, see [Incident Settings][4].
 
 After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][5]. Configure your postmortem templates in the [Incident Settings][6] page to predefine the structure and content of your postmortems.
 
@@ -44,7 +44,7 @@ Properties are divided into the following three sections:
 * Why it happened
 * Attributes
 
-In [Incident Settings][7], add additional property fields using the `<KEY>:<VALUE>` pairs from your Datadog metric tags, or create custom ones. Assign values to an incident's properties to easily search for a subset of incidents on the [Incident Homepage][8] and to form queries when using [Incident Management Analytics][9]. You can also reorder your property fields and move them to different headings so the most important properties are in prominent locations.
+In [Incident Settings][7], add additional property fields using the `<KEY>:<VALUE>` pairs from your Datadog metric tags, or create custom ones. Assign values to an incident's properties to enable you to search for a subset of incidents on the [Incident Homepage][8] and to form queries when using [Incident Management Analytics][9]. You can also reorder your property fields and move them to different headings so the most important properties are in prominent locations.
 
 If your incident is customer-facing, specify the details in the Impact section:
 
