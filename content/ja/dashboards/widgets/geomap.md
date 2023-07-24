@@ -38,7 +38,7 @@ title: ジオマップ ウィジェット
   |セキュリティシグナル <br> アプリケーションセキュリティ <br> 監査証跡 | クエリの構成については、[ログ検索ドキュメント][3]を参照してください。 |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
-  [2]: /getting_started/tagging/#defining-tags
+  [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
@@ -53,7 +53,7 @@ title: ジオマップ ウィジェット
 |RUM | RUM クエリの構成については、[RUM ドキュメント][4]を参照してください。 |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
-  [2]: /getting_started/tagging/#defining-tags
+  [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /real_user_monitoring/explorer/search_syntax/
   {{% /tab %}}
@@ -80,7 +80,7 @@ title: ジオマップ ウィジェット
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/log_configuration/processors/#geoip-parser
-[2]: /ja/getting_started/tagging/#defining-tags
+[2]: /ja/getting_started/tagging/#define-tags
 [3]: /ja/logs/search_syntax/
 [4]: /ja/logs/logs_to_metrics/
 [5]: /ja/dashboards/querying/
