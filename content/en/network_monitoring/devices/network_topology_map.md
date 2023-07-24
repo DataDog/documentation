@@ -11,9 +11,7 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-  The Network Topology Map is in public beta.
-{{< /callout >}}
+<div class="alert alert-warning">The Network Topology Map for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
 
@@ -32,7 +30,7 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 ## Investigating devices
 
-In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and 
+In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_hover.png" alt="The network topology map with the cursor hovering over a device" style="width:80%;" >}}
 
