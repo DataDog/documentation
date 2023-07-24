@@ -312,20 +312,21 @@ To verify you've configured the APM integration with RUM, follow the steps below
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-1. Run your application from [software].
+1. Run your application from Xcode (respectively Android Studio).
 2. Visit a screen in your application.
-3. Open [software]'s [Network Connections and HTTP Traffic instrument][1].
-4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+3. Open Xcode's [Network Connections and HTTP Traffic instrument][1] (resp. Android Studio's [Network Inspector][2]).
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][3].
 
-[1]: 
-[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[3]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
 1. Run your application from [software].
 2. Visit a screen in your application.
-3. Open [software]'s [Network Connections and HTTP Traffic instrument][1].
+3. Open Flutter's [Dev Tools](https://docs.flutter.dev/tools/devtools/overview) and navigate to the [Network View] (https://docs.flutter.dev/tools/devtools/network).
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: 
