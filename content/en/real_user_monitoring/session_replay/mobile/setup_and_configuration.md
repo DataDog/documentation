@@ -67,9 +67,6 @@ To set up Mobile Session Replay for Android:
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-<div class="alert alert-warning">
-Session Replay is in private beta for iOS. As such, installation steps differ from those for integrating the Datadog RUM SDK.
-</div>
 
 **Note**: When installing Session Replay for iOS, instead of using Git tags, the library needs to be fetched directly from the [`session-replay-beta`][1] branch.
 
