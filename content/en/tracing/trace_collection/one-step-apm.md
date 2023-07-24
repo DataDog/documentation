@@ -1,11 +1,11 @@
 ---
-title: 1-Step APM Onboarding
+title: 1-Step APM Instrumentation
 kind: documentation
 is_beta: true
 ---
 
 <div class="alert alert-info">
-<strong>1-Step APM onboarding is in beta!</strong> <p>This feature is available in Datadog Agent version x.x:</p>
+<strong>1-Step APM Instrumentation is in beta!</strong> <p>This feature is available in Datadog Agent version x.x:</p>
 <ul>
 <li>on Linux hosts and VMs</li>
 <li>on Docker containers</li>
@@ -13,7 +13,7 @@ is_beta: true
 </ul>
 <p>for tracing Java, Python, Node.js, and .NET services. Try it out!</p> 
 
-<p>For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services. <a href="tktk">Fill out this form to request access</a>.</p>
+<p>For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services. <a href="http://dtdg.co/apm-onboarding">Fill out this form to request access</a>.</p>
 </div>
 
 ## Enable APM on your services in one step
@@ -28,49 +28,13 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION
 
 For the one-line command that installs the Agent with APM for your Linux host, VM, or Docker container, see the [Agent Installation page][1].
 
-## What's next
+Then, start [exploring the performance observability of your services in Datadog][2].
 
-Start [exploring the performance observability of your services in Datadog][2].
+## Removing 1-step APM instrumentation from your Agent
 
-### Removing 1-Step APM Configuration from your Agent
+If you no longer want to collect trace data for a particular service, or for all services on a particular host, VM, container, or Kubernetes cluster, you can remove APM instrumentation either by running the following commands directly on the infrastructure involved.
 
-If you no longer want to collect trace data, you can remove APM enablement either for all services on the host or container, or for specific services (for example, operating system processes, anti-virus apps). Run the following commands directly on the hosts or containers involved.
-
-#### Removing APM for all services on the infrastructure
-
-Running the following commands and restarting the infrastructure removes library injectors and stops the production of traces.
-
-{{< tabs >}}
-{{% tab "Hosts and VMs" %}}
-
-1. Run:
-   ```shell
-   dd-host-install --uninstall
-   ```
-2. Restart your host.
-
-{{% /tab %}}
-
-{{% tab "Docker" %}}
-
-1. Run:
-   ```shell
-   dd-container-install --uninstall
-   ```
-2. Restart your container.
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-1. Run:
-   ```shell
-   tktk
-   ```
-2. Restart your cluster.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Removing instrumentation for specific services
+### Removing instrumentation for specific services
 
 Running the following commands and restarting the service stops the library from being injected into the service, stops the production of traces from that service.
 
@@ -105,6 +69,41 @@ Running the following commands and restarting the service stops the library from
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Removing APM for all services on the infrastructure
+
+Running the following commands and restarting the infrastructure removes library injectors and stops the production of traces.
+
+{{< tabs >}}
+{{% tab "Hosts and VMs" %}}
+
+1. Run:
+   ```shell
+   dd-host-install --uninstall
+   ```
+2. Restart your host.
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+1. Run:
+   ```shell
+   dd-container-install --uninstall
+   ```
+2. Restart your container.
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+1. Run:
+   ```shell
+   tktk
+   ```
+2. Restart your cluster.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

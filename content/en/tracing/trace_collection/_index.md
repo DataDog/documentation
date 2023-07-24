@@ -23,15 +23,15 @@ To configure your application to send traces to Datadog:
 
 ## Step 1 - Configure the Datadog Agent for APM
 
-<div class="alert alert-info"><strong>Beta</strong>: If you use <a href="/tracing/trace_collection/one-step-apm">1-Step APM onboarding</a> when you install or update your Agent to the latest version, <strong>you're done!</strong> With this option, APM is configured in the Agent and all your services on that host, VM, or Docker container are automatically instrumented and report APM traces to Datadog. <a href="/tracing/services">Start exploring!</a></div>
+<div class="alert alert-info"><strong>Beta</strong>: If you use <a href="/tracing/trace_collection/one-step-apm">1-Step APM Instrumentation</a> when you install or update your Agent to the latest version, <strong>you're done!</strong> With this option, APM is configured in the Agent and all your services on that host, VM, or Docker container are automatically instrumented and report APM traces to Datadog. <a href="/tracing/services">Start exploring!</a></div>
 
-To enable the Agent for APM, select your language:
+Alternatively, to enable the Agent for APM, select your language:
 
 {{< partial name="apm/apm-languages.html" >}}
 
 <br/>
 
-If you don't use the 1-Step APM onboarding option, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be properly received from containerized, serverless, or certain other environments. Ensure you have followed instructions for both components.
+If you don't use the 1-Step APM Instrumentation option, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be properly received from containerized, serverless, or certain other environments. Ensure you have followed instructions for both components.
 
 ## Step 2 - Instrument your application 
 
@@ -51,17 +51,21 @@ For setup instructions, select your language:
 
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][2].
 
-### Option 2 - Kubernetes: Inject the library locally at the Agent
+### Option 2 - Inject the library locally at the Agent
 
-<div class="alert alert-info">This method is in beta for host and container deployments.</a></div>
+<div class="alert alert-info">This method is in beta for Linux host and container deployments.</a></div>
 
-[Inject the tracing library locally at the Agent without modifying your application code.][4]
+For Kubernetes, host, and containers, you can [inject the tracing library locally at the Agent without modifying your application code.][4]
 
-### Option 3 - Kubernetes: Inject the library remotely from the Datadog UI
+On Kubernetes, you can inject the library into applications written in Java, Python, Node.js, .NET, and Ruby.
+
+**Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
+
+### Option 3 - Inject the library remotely from the Datadog UI
 
 <div class="alert alert-info">This method is in beta for Kubernetes deployments.</a></div>
 
-[Inject the tracing library remotely from the Datadog UI.][5]
+For Kubernetes, you can [inject the Java, Python, and Node.js tracing libraries remotely from the Datadog UI.][5]
 
 ## APM Setup Tutorials
 

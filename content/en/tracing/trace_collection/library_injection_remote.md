@@ -8,7 +8,7 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-Remote instrumentation is in beta. Contact your CSM or account manager if you would like to access it.
+Remote instrumentation is in beta. <a href="http://dtdg.co/apm-onboarding">Use this form to request access.</a>
 {{< /callout >}}
 
 ## Overview
