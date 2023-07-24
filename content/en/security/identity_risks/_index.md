@@ -32,26 +32,26 @@ The [identity health score][4] on the [CSM Overview][1] represents the percentag
 
 ## Review and remediate identity risk detections
 
-Review your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
+Review your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
 
-{{< img src="security/identity_risks/identity-risks-explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
 
 When viewing an individual resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
 
 You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks detected for the resource on the **Timeline** tab.
 
-{{< img src="security/identity_risks/insights-tab-side-panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
+{{< img src="security/identity_risks/relationships_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
 
-On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to view a list of permissions provisioned on the resource and whether they were used in the last 15 days.
+On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to view the permissions provisioned on the resource and whether they were used in the last 15 days.
 
-{{< img src="security/identity_risks/insights-tab-side-panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
+{{< img src="security/identity_risks/insights_tab_side_panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/csm
-[2]: /security/cspm/setup
-[3]: https://app.datadoghq.com//security/identities
+[2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
+[3]: https://app.datadoghq.com/security/identities
 [4]: /glossary/#identity-health-score
 [5]: /integrations/amazon_cloudtrail#send-logs-to-datadog

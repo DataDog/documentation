@@ -53,13 +53,13 @@ Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#c
 
 {{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
-
 ## CSM Identity Risks
 
-[CSM Identity Risks][4] provides in-depth visibility into your organization's AWS IAM risks and helps you to resolve them on an ongoing basis.
+[CSM Identity Risks][4] provides in-depth visibility into your organization's AWS IAM risks and helps you to resolve them on an ongoing basis. Enabling you to detect and resolve identity risks on an ongoing basis, CSM Identity Risks helps secure your cloud infrastructure from IAM-based attacks.
 
-{{< img src="security/identity_risks/identity-risks-explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
+<div class="alert alert-info">CSM Identity Risks is in beta.</div>
+
+To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
 
 ## Further reading
 
