@@ -186,9 +186,6 @@ The following chart shows how we apply different touch interaction strategies, u
 | [Other attributes](#other-attributes) |  |  |  |
 | [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
 
-#### On-screen keyboard
-
-#### Other elements 
 
 {{< tabs >}}
 {{% tab "Android" %}}
