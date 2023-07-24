@@ -117,7 +117,7 @@ For example, for a Docker Linux container:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-1. Install Helm.
+1. Install [Helm][5].
 2. Add the Datadog Helm repository: 
    ```shell
    helm repo add datadog https://helm.datadoghq.com
@@ -126,7 +126,7 @@ For example, for a Docker Linux container:
    ```shell
    helm repo update
    ```
-4. Create an empty `datadog-values.yaml` file, and override the default values, if desired. 
+4. Create an empty `datadog-values.yaml` file, and override the [default values][3], if desired. See [these useful examples][4].
 5. Deploy the Datadog Agent by running one of the following commands:
    For Helm v3:
    ```shell
@@ -142,6 +142,9 @@ For example, for a Docker Linux container:
 
 [1]: /agent/remote_config
 [2]: /tracing/service_catalog/
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[4]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
+[5]: https://v3.helm.sh/docs/intro/install/
 
 {{% /tab %}}
 {{% tab "Ansible for Linux VMs" %}}
