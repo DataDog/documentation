@@ -13855,6 +13855,10 @@ components:
     SensitiveDataScannerGetConfigResponseData:
       description: Response data related to the scanning groups.
       properties:
+        attributes:
+          additionalProperties: {}
+          description: Attributes of the Sensitive Data configuration.
+          type: object
         id:
           description: ID of the configuration.
           type: string
@@ -14038,6 +14042,9 @@ components:
         has_highlight_enabled:
           description: Whether or not scanned events are highlighted in Logs or RUM
             for the org.
+          type: boolean
+        has_multi_pass_enabled:
+          description: Whether or not scanned events have multi-pass enabled.
           type: boolean
         is_pci_compliant:
           description: Whether or not the org is compliant to the payment card industry
@@ -14274,6 +14281,9 @@ components:
     SensitiveDataScannerStandardPatternAttributes:
       description: Attributes of the Sensitive Data Scanner standard pattern.
       properties:
+        description:
+          description: Description of the standard pattern.
+          type: string
         name:
           description: Name of the standard pattern.
           type: string
