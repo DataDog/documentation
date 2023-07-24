@@ -185,30 +185,3 @@ The following chart shows how we apply different touch interaction strategies, u
 |------|-------------|------------|-------------------|
 | [Other attributes](#other-attributes) |  |  |  |
 | [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
-
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-[ add android content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-[ add iOS content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
