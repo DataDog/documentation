@@ -143,7 +143,7 @@ sessionReplay.start()
 {{< tabs >}}
 {{% tab "Android" %}}
 ### Update the sample rate for recorded sessions to appear
-Beginning with v1.20.0, the recorder sessions are sampled, and the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
+Beginning with v1.20.0, the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
 
 {{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
