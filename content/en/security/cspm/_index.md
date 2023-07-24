@@ -20,7 +20,7 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it eas
 
 Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#manage-out-of-the-box-and-custom-compliance-rules). 
 
-View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][2].
+View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Misconfigurations Explorer][2].
 
 {{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
@@ -46,7 +46,7 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate findings
 
-Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
+Investigate details using the [Misconfigurations Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
 
 {{< img src="security/cspm/findings_explorer.png" alt="CSM Misconfigurations Findings Explorer" width="100%">}}
 

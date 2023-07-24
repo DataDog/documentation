@@ -70,9 +70,9 @@ Datadog Security includes [Application Security Management](#application-securit
 
 ## Cloud Security Management
 
-[Cloud Security Management][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
+[Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-Cloud Security Management includes [Threats][12], [Misconfigurations][11], Identity Risks, and Vulnerabilities. To learn more, check out the dedicated [Guided Tour][13].
+CSM includes [Threats][12], [Misconfigurations][11], Identity Risks, and Vulnerabilities. To learn more, check out the dedicated [Guided Tour][13].
 
 {{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues" width="100%">}}
 
