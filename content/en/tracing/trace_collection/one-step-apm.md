@@ -32,11 +32,11 @@ For the one-line command that installs the Agent with APM for your Linux host, V
 
 Start [exploring the performance observability of your services in Datadog][2].
 
-## Removing 1-Step APM Configuration from your Agent
+### Removing 1-Step APM Configuration from your Agent
 
 If you no longer want to collect trace data, you can remove APM enablement either for all services on the host or container, or for specific services (for example, operating system processes, anti-virus apps). Run the following commands directly on the hosts or containers involved.
 
-### Removing APM for all services on the infrastructure
+#### Removing APM for all services on the infrastructure
 
 Running the following commands and restarting the infrastructure removes library injectors and stops the production of traces.
 
@@ -70,7 +70,7 @@ Running the following commands and restarting the infrastructure removes library
 {{% /tab %}}
 {{< /tabs >}}
 
-### Removing instrumentation for specific services
+#### Removing instrumentation for specific services
 
 Running the following commands and restarting the service stops the library from being injected into the service, stops the production of traces from that service.
 
