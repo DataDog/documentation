@@ -20,7 +20,7 @@ further_reading:
       text: 'Use DNS resolution to monitor cloud and external endpoints'
 ---
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring" >}}
+{{< img src="network_performance_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
 
 <div class="alert alert-info">
 Upgrade to agent version 7.33 to enable DNS monitoring.
@@ -42,23 +42,23 @@ Are you looking for Network Device Monitoring instead? See the [NDM setup instru
 
 ## Queries
 
-Use the source and destination search bars at the top of the page to query for dependencies between a client (_source_), which makes the DNS request, and a DNS server (_destination_), which responds to the DNS request. The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
+Use the search bar at the top of the page to query for dependencies between a client, which makes the DNS request, and a DNS server, which responds to the DNS request. The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
 
-To refine your search to a particular client, aggregate and filter DNS traffic using tags in the source search bar. In the default view, the source is aggregated by the `service` tag. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
+To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
 {{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring default view" style="width:100%;">}}
 
-To refine your search to a particular DNS server, filter the destination search bar using tags. To configure your destination display, select one of the following options from the **Group by** dropdown menu:
+To refine your search to a particular DNS server, filter the search bar using server tags. To configure your server display, select one of the following options from the **Group by** dropdown menu:
 
 * `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
 * `host`: The host name of the DNS server.
 * `service`: The service running on the DNS server.
 * `IP`: The IP of the DNS server.
-* `dns_query`: **requires agent version 7.33 or higher** The domain that was queried.
+* `dns_query`: **requires Agent version 7.33 or later** The domain that was queried.
 
 This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
 
-{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="Query of pods making requests to multiple DNS servers" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_query_example.png" alt="Query with client_availability_zone:us-central1-b and client_env: prod entered into the Search for field, pod_name selected in the View clients as dropdown, and host selected in the View servers as dropdown" style="width:100%;">}}
 
 ## Metrics
 
