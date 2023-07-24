@@ -22,13 +22,7 @@ secure your cloud infrastructure from IAM-based attacks.
 
 ## Setup
 
-To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][5]. If you've already done this, no additional setup is required.
-
-## Track your identity health score
-
-The [identity health score][4] on the [CSM Overview][1] represents the percentage of your IAM resources that are configured securely. The score automatically updates as you resolve your organization's identity risk detections.
-
-**SCREENSHOT HERE**
+To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4]. If you've already done this, no additional setup is required.
 
 ## Review and remediate identity risk detections
 
@@ -53,5 +47,4 @@ On the side panel for an individual detection, click **Fix in AWS** to open the 
 [1]: https://app.datadoghq.com/security/csm
 [2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
 [3]: https://app.datadoghq.com/security/identities
-[4]: /glossary/#identity-health-score
-[5]: /integrations/amazon_cloudtrail#send-logs-to-datadog
+[4]: /integrations/amazon_cloudtrail#send-logs-to-datadog
