@@ -13,6 +13,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/log-management-policies/"
       tag: "Blog"
       text: "How to implement log management policies with your teams"
+algolia:
+  tags: ['log usage']
 ---
 
 ## Overview
