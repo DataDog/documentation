@@ -35,7 +35,9 @@ Using the masking modes below, you can override the default setup on a per-appli
 
 ### Mask all text elements
 
-By default, the `mask all` setting is enabled for all data. this setting enabled, all text content on screen is replaced with X's.
+By default, the `mask all` setting is enabled for all data. With this setting enabled, all text content on screen is replaced with X's, as shown below.
+
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all.png" alt="What your application screen may resemble when `mask all` is enabled." style="width:60%;">}}
 
 {{< tabs >}}
 {{% tab "Android" %}}
