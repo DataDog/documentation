@@ -65,15 +65,9 @@ The scores automatically update as you resolve your organization's identity risk
 
 {{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organizations' overall health" width="100%">}}
 
-## Explore and remediate issues using explorers
+## Explore and remediate issues using Explorers
 
-Use the Explorers page to review and remediate your organization's detections and findings. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
-
-Use the Explorers page to review and remediate your organization's detections and findings. View additional details on the side panel, including:
-
-- Descriptions and guidelines based on industry resources for remediating detections.
-- Use the time selector to explore your security configuration posture at any point in the past.
-- Fix in AWS console.
+Use the Explorers page to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
 {{< img src="security/cws/threats_explorer.png" alt="CSM Explorer page" width="100%">}}
 
@@ -90,3 +84,4 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/
 [5]: /glossary/#posture-score
+[6]: /security/notifications/
