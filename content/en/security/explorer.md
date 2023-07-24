@@ -45,7 +45,7 @@ The first seen and last seen date are updated, if new data is made available fro
 
 To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can troubleshoot without having to pivot to Log Explorer. For example, in the Context section, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
 
-Below the header of Cloud SIEM and Cloud Workload Security signals are tabs with detailed information related to the signal:
+Below the header of Cloud SIEM and CSM Threats signals are tabs with detailed information related to the signal:
 
 - `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed along with any security profiles related to the signal and any suppression suggestions, if available (CSM Threats only).
 - `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users can also pivot into rule modification, such as modifying suppression queries for the rule.
