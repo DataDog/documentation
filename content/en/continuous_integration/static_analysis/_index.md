@@ -167,6 +167,9 @@ The content of the violation is shown in tabs:
 * Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
 * Event: JSON metadata regarding the the Static Analysis violation event.
 
+### Using suggested fixes
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
