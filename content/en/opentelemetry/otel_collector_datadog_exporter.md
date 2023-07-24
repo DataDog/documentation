@@ -674,7 +674,7 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 The [Docker Stats][27] receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts.
 
-Use the following configuration to enable additional attributes on the Docker Stats receiver that populate the containers overview dashboard:
+Use the following configuration to enable additional attributes on the Docker Stats receiver that populates the containers overview dashboard:
 
 ```yaml
   docker_stats:
