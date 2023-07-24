@@ -2,6 +2,8 @@
 title: Gating your GitHub Actions Deployments with Datadog Monitors
 kind: guide
 description: Learn how to use Datadog monitors to perform quality checks prior to deploying your GitHub applications.
+aliases:
+  - /continuous_integration/guides/github_gating
 further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
     tag: "Blog"
