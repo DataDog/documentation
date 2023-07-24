@@ -1,5 +1,5 @@
 ---
-title: New Service Page and Service Types
+title: New Service page and Inferred Services
 kind: Guide
 disable_toc: false
 private: true
@@ -19,7 +19,15 @@ further_reading:
 The features described on this page are in private beta.
 {{< /callout >}}
 
-Follow the steps below to enable the new dependency map on the [Service Page][1], and add the _Inferred Service_ type to the [Service Map][2] and [Service Catalog][3] pages.
+Follow the steps below to enable the new dependency map on the [Service Page][1], and add _Inferred services_  to the [Service Map][2] and [Service Catalog][3] pages.
+
+## Inferred services
+
+Datadog can automatically discover the dependencies for an instrumented service, such as a database or a third-party API even if that dependency hasn't been instrumented yet. Datadog infers the presence of these dependencies and their performance based on information on the exit spans, outgoing spans, and outbound requests of your instrumented services.
+
+To determine the names and types of the inferred services, Datadog uses span attributes. Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
+
+To change the default names for inferred services, [set the `peer.service` tag manually](#peer-service-mapping).
 
 ## Dependency map
 
