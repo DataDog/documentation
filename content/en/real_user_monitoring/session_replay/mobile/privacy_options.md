@@ -57,8 +57,6 @@ By enabling Mobile Session Replay, you can automatically mask sensitive elements
 {{% /tab %}}
 {{< /tabs >}}
 
-After configuring your 
-
 ## Masking modes
 
 By default, the `mask all` setting is enabled for all data. Using the masking modes below, you can override the default setup on a per-application basis.
