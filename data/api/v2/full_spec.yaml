@@ -5202,8 +5202,10 @@ components:
       x-enum-varnames:
       - FINDING
     FormulaLimit:
-      description: Message for specifying limits to the number of values returned
+      description: 'Message for specifying limits to the number of values returned
         by a query.
+
+        This limit is only for scalar queries and has no effect on timeseries queries.'
       properties:
         count:
           description: The number of results to which to limit.
