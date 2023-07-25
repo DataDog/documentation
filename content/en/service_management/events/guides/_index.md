@@ -37,8 +37,7 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
     {{< nextlink href="/service_management/events/guides/migrating_to_new_events_features/" >}}Migrating to the New Events Features{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /help/
