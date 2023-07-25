@@ -4137,6 +4137,8 @@ components:
           example: 2020-01-02 03:04:00+00:00
           format: date-time
           type: string
+      required:
+      - start
       type: object
     DowntimeScheduleRecurrenceCreateUpdateRequest:
       additionalProperties: {}
@@ -5200,8 +5202,10 @@ components:
       x-enum-varnames:
       - FINDING
     FormulaLimit:
-      description: Message for specifying limits to the number of values returned
+      description: 'Message for specifying limits to the number of values returned
         by a query.
+
+        This limit is only for scalar queries and has no effect on timeseries queries.'
       properties:
         count:
           description: The number of results to which to limit.
