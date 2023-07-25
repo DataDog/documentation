@@ -200,6 +200,8 @@ From an individual dashboard, copy, import, or export a dashboard's JSON using t
 
 #### Delete dashboard
 
+<div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
+
 Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
 
 ## Dashboard details
