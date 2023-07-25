@@ -1536,8 +1536,13 @@ Telemetry data (such as errors and debug logs) about SDK execution is sent to Da
 
 `excludedActivityUrls`
 : Optional<br/>
-**Type:** List<br/>
+**Type**: List<br/>
 A list of request origins ignored when computing the page activity. See [How page activity is calculated][16].
+
+`workerUrl`
+: Optional<br/>
+**Type**: String<br/>
+URL pointing to the Datadog Browser SDK Worker JavaScript file. It can be either relative or absolute but is required to have the same origin as the Web application. See [Content Security Policy guidelines][22] for more information.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
@@ -1656,3 +1661,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [19]: /getting_started/tagging/using_tags
 [20]: /real_user_monitoring/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
+[22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
