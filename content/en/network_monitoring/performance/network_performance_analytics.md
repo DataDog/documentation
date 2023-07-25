@@ -1,10 +1,11 @@
 ---
-title: Network Page
+title: Network Analytics Page
 kind: documentation
 description: Explore your Network data between each source and destination across your stack.
 aliases:
     - /network_performance_monitoring/network_table
     - /network_performance_monitoring/network_page
+    - /network_monitoring/performance/network_page
 further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
