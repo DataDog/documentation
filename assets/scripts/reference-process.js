@@ -15,6 +15,16 @@ if(!input || !output) {
   process.exit(1);
 }
 
+// reading cue.json export
+let s = fs.readFileSync('data/cue.json', 'utf8');
+let d = JSON.parse(s);
+Object.entries(d["remap"])
+  .filter(([key, value]) => ["errors", "functions"].includes(key))
+  .forEach(([key, value]) => {
+    console.log(key);
+  }
+);
+
 let fileString = fs.readFileSync(input, 'utf8');
 fileString = fileString.replace('  "$ref": "#/definitions/vector::config::builder::ConfigBuilder",', '');
 let fileData = JSON.parse(fileString);
