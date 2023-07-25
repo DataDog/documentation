@@ -20193,16 +20193,21 @@ components:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
             dashboards_public_share: Generate public and authenticated links to share
-              dashboards externally.
+              dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. The ability to write monitors is not required to set
-              downtimes.
+              an organization. Mute and unmute hosts. The ability to write monitors
+              is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
+            slos_corrections: Apply, edit, and delete SLO status corrections. A user
+              with this permission can make status corrections, even if they do not
+              have permission to edit those SLOs.
+            slos_read: View SLOs and status corrections.
+            slos_write: Create, edit, and delete SLOs.
             synthetics_global_variable_read: View, search, and use Synthetics global
               variables.
             synthetics_global_variable_write: Create, edit, and delete global variables
@@ -28328,6 +28333,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Get all SLOs
       tags:
       - Service Level Objectives
@@ -28365,6 +28375,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_write
       summary: Create an SLO object
       tags:
       - Service Level Objectives
@@ -28427,6 +28442,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_write
       summary: Bulk Delete SLO Timeframes
       tags:
       - Service Level Objectives
@@ -28476,6 +28496,11 @@ paths:
           description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
@@ -28517,6 +28542,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Get all SLO corrections
       tags:
       - Service Level Objective Corrections
@@ -28560,6 +28590,11 @@ paths:
           description: SLO Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_corrections
       summary: Create an SLO correction
       tags:
       - Service Level Objective Corrections
@@ -28760,6 +28795,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Search for SLOs
       tags:
       - Service Level Objectives
@@ -28816,6 +28856,11 @@ paths:
           description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_write
       summary: Delete an SLO
       tags:
       - Service Level Objectives
@@ -28860,6 +28905,11 @@ paths:
           description: Not found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Get an SLO's details
       tags:
       - Service Level Objectives
@@ -28910,6 +28960,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_write
       summary: Update an SLO
       tags:
       - Service Level Objectives
@@ -28955,6 +29010,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Get Corrections For an SLO
       tags:
       - Service Level Objectives
@@ -29039,6 +29099,11 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
