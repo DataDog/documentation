@@ -20,8 +20,8 @@ further_reading:
       tag: Documentation
       text: Session Replay
 ---
-
-## Some parts of the application are blank or not visible in the player
+## Session replays
+### Some parts of the application are blank or not visible in the player
 
 Mobile Session Replay only supports native frameworks. Within these frameworks, there may be certain components or screens missing, such as:
 
@@ -32,20 +32,20 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 - Views that use direct canvas drawing
 - Advanced text styling
 
-## The session replay rendering looks does not exactly mirror my application
+### The session replay rendering looks does not exactly mirror my application
 Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images. 
+### For sessions that are very short, I see a replay attached, but am unable to view the replay
+When sessions are 1 nanosecond long, we are unable to process the record and thus there would be no replay attached. 
 
-## I need to account for mobile app consent when collecting mobile session replays
+## Mobile app consent
+### I need to account for mobile app consent when collecting mobile session replays
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. Upon starting the SDK, a tracking consent value needs to be set to one of the following:
 
 - If the value is **not granted**, then no data is ever written on disk. 
 - If the value is **pending**, the data is written in a temporary folder which cannot be uploaded to Datadog. 
 - If the value is **granted**, data is written in an "upload" folder, which is processed in the background, and eventually uploaded to Datadog.
 
-At any time during the lifetime of the host app, it's possible to change the tracking consent. When the consent changes from pending to granted, the data in the temporary folder is moved to the "upload" folder. 
-
-## For my sessions that are very short, I see I have a replay attached but I am unable to view the replay
-When sessions are 1 nanosecond long, we are unable to process the record and thus there would be no replay attached. 
+At any time during the lifetime of the host app, it's possible to change the tracking consent. When the consent changes from pending to granted, the data in the temporary folder is moved to the "upload" folder.
 
 ## Further reading
 

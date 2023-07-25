@@ -148,10 +148,11 @@ sessionReplay.start()
 {{< /tabs >}}
 
 ## Additional configuration
+### Update the sample rate for recorded sessions to appear
 
 {{< tabs >}}
 {{% tab "Android" %}}
-### Update the sample rate for recorded sessions to appear
+
 Beginning with v1.20.0, the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
 
 {{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
@@ -164,10 +165,22 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder()
 {{< /code-block >}}
 
 {{% /tab %}}
-
 {{% tab "iOS" %}}
 
+This configuration option is not available for iOS.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Validate whether Session Replay data is being sent
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+This configuration option is not available for Android.
+
+{{% /tab %}}
+{{% tab "iOS" %}}
 
 To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. If everything works correctly, you should see following logs in the Xcode console soon (about 30 seconds) after launching the application:
 
@@ -181,7 +194,7 @@ To validate whether Session Replay data is being sent from the app, enable the `
 {{% /tab %}}
 {{< /tabs >}}
 
-## Privacy options
+### Privacy options
 
 See [Privacy Options][1].
 
