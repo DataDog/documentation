@@ -3732,7 +3732,7 @@ main:
     identifier: ndm_profiles
     weight: 304
   - name: Network Topology Map
-    url: network_monitoring/devices/topology_maps
+    url: network_monitoring/devices/network_topology_map.md
     parent: ndm
     identifier: ndm_topology_map
     weight: 305
