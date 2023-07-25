@@ -1,11 +1,11 @@
 ---
-title: 1-Step APM Instrumentation
+title: Single Step APM Instrumentation
 kind: documentation
 is_beta: true
 ---
 
 <div class="alert alert-info">
-<strong>1-Step APM Instrumentation is in beta!</strong> <p>This feature is available in Datadog Agent version x.x:</p>
+<strong>Single Step APM Instrumentation is in beta!</strong> <p>This feature is available in Datadog Agent version x.x:</p>
 <ul>
 <li>on Linux hosts and VMs</li>
 <li>on Docker containers</li>
@@ -170,7 +170,7 @@ For example, for a Docker Linux container:
 {{< /tabs >}}
 
 
-## Removing 1-step APM instrumentation from your Agent
+## Removing Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service (for example, operating system services or AntiVirus), or for all services on a particular host, VM, container, or Kubernetes deployment, you can remove APM instrumentation by running one of the following commands directly on the infrastructure involved.
 
