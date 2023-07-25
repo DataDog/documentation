@@ -16,11 +16,13 @@ further_reading:
 
 This page provides a step-by-step overview on how to implement the OAuth protocol end-to-end on your application once your **confidential** client is created. 
 
-### Implement the OAuth protocol
+## Implement the OAuth protocol
 
 1. Create and configure your OAuth client in the [Developer Platform][16]. 
 
 2. After a user installs your integration, they can click the **Connect Accounts** button to connect their account in the **Configure** tab of the integration tile. 
+
+   ![Connect Accounts button](/static/images/developers/authorization/connect-accounts.png)
 
    When a user clicks this button, they are directed to the `onboarding_url` that you provided as a part of the OAuth client creation process. This page should be the sign-in page for your platform.
 
@@ -50,20 +52,21 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
 8. Call the [API Key Creation endpoint][7] to generate an API key that allows you to send data on behalf of Datadog users.
 
-   If the `API_KEYS_WRITE` scope has not been added to your client, this step fails. This endpoint generates an API Key that is only shown once. **Store this value in a secure database or location**. 
+   If the `API_KEYS_WRITE` scope has not been added to your client, this step fails. This endpoint generates an API Key that is only shown once, and cannot be re-generated unless the user deletes it within their Datadog account. **Store this value in a secure database or location**. 
 
-For more information about client creation and publishing, see [OAuth for Datadog Integrations][5].
+For more information about OAuth client creation, testing and publishing, see [OAuth for Datadog Integrations][5].
 
 ### Initiate authorization from a third-party location 
 
-
 Users can start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url`. The user's Datadog site is required to make API calls on behalf of the user and receive an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information is not provided. 
 
-Additionally, when users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when they return to the integration tile). 
+Additionally, when users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when they return to the Datadog integration tile). 
 
 Datadog recommends that partners prompt users to initiate authorization from Datadog, rather than from their own platform.
 
-While Datadog does not recommend supporting initiating authorization from a third-party location anywhere outside of the Datadog integration tile, you must ensure that you are able to support users in all Datadog sites, and are willing to continue to support new Datadog sites as they may be created if you would like to. To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region.
+While Datadog does not recommend supporting initiating authorization from a third-party location anywhere outside of the Datadog integration tile, if you do choose to go down this path then you must ensure that you are able to support users in all Datadog sites, and are willing to continue to support new Datadog sites as they may be created. This usually includes implementing a way for the user to manually input their site onto your platform while authorizing. 
+
+Keep in mind that organizations may have subdomains as well (i.e. https://subdomain.datadgohq.com). To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region.
 
 ## Authorization code grant flow with PKCE
 
