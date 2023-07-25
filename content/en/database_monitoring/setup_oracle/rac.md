@@ -2,8 +2,6 @@
 title: Setting Up Database Monitoring for Oracle RAC
 kind: documentation
 description: Install and configure Database Monitoring for Oracle RAC
-private: true
-is_beta: true
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
