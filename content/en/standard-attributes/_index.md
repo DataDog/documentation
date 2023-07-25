@@ -568,36 +568,42 @@ attributes:
     description: Start of the event in milliseconds from epoch.
     product_source: 
       - icon-rum
+      - android
     type: integer
     domain: Core
   - name: connectivity.status
     description: Status of device network reachability (`connected`, `not connected`, or `maybe`).
     product_source: 
       - icon-rum
+      - android
     type: string
     domain: Connectivity
   - name: connectivity.interfaces
     description: The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).
     product_source: 
       - icon-rum
+      - android
     type: string
     domain: Connectivity
   - name: connectivity.cellular.technology
     description: The type of a radio technology used for cellular connection.
     product_source: 
       - icon-rum
+      - android
     type: string
     domain: Connectivity
   - name: connectivity.cellular.carrier_name
     description: The name of the SIM carrier.
     product_source: 
       - icon-rum
+      - android
     type: string
     domain: Connectivity
   - name: view.name
     description: Customizable name of the view corresponding to the event.
     product_source: 
       - icon-rum
+      - android
     type: string
     domain: Views
 

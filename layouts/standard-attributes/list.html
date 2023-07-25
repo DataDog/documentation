@@ -1,4 +1,5 @@
 {{ define "main" }}
+  {{ $ctx := . }}
   <div class="row">
     <div class="col-12 order-1">
         <h1 id="pagetitle" class="newnew">{{ .Title }}</h1>
@@ -52,14 +53,17 @@
           x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')" 
           x-transition.opacity.duration.250ms
           >
-            <td>
-              {{ range .product_source }}
+            <td class="d-flex">
+              {{ range $idx, $el := .product_source }}
                 {{ if in . "icon-"}}
-                <i class="{{ . }}" title="{{ substr . 5 }}" style="font-size:18px;color:#7c3eb9;vertical-align:middle"></i> 
+                  <i class="{{ . }} {{ if $idx }}ms-1{{ end }}" title="{{ substr . 5 }}" style="font-size:18px;color:#7c3eb9;vertical-align:middle"></i> 
+                {{ else if or (eq . "android") (eq . "ios") (eq . "flutter") (eq . "roku")}}
+                  {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") }}
+                  {{ if $int_logo }}
+                  <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}"/>
+                  {{ end }}
                 {{ else if eq . "*"}}
-                *
-                {{ else}}
-                {{/*  {{< img src="/integrations_logos/android-logo.png" alt="Android" style="width:100%;" >}}  */}}
+                  *
                 {{ end }}
               {{ end }}
             </td>
