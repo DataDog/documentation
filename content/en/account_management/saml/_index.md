@@ -137,7 +137,7 @@ With JIT provisioning, a user is created within Datadog the first time they try 
 
 Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][2]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
-Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only** or even **Administrators**.
+Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only**, **Administrators**, or any custom role.
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default" style="width:50%;" >}}
 

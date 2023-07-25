@@ -1,4 +1,6 @@
 ---
+aliases:
+- /fr/agent/faq/kubernetes-secrets
 further_reading:
 - link: /agent/autodiscovery/
   tag: Documentation
@@ -52,7 +54,7 @@ Dans l'exemple ci-dessus, le handle de secret est la chaîne `{"env": "prod", "c
 Il n'est pas nécessaire d'échapper les caractères `[` et `]` de l'expression. Par exemple :
 
 ```text
-“ENC[user_array[1234]]”
+"ENC[user_array[1234]]"
 ```
 
 Dans l'exemple ci-dessus, le handle de secret est la chaîne `user_array[1234]`.
@@ -76,7 +78,7 @@ L'APM et la surveillance de processus s'exécutent dans leur propre processus/se
 
 De par sa nature, l'exécutable fourni par l'utilisateur doit implémenter tout mécanisme de gestion d'erreurs qu'un utilisateur peut exiger. Inversement, l'Agent doit être redémarré si un secret doit être actualisé en mémoire (par exemple, en cas de révocation de mot de passe).
 
-L'utilisation d'un exécutable fourni par l'utilisateur présent un certain nombre d'avantages :
+L'utilisation d'un exécutable fourni par l'utilisateur présente un certain nombre d'avantages :
 
 * L'Agent ne peut pas tenter de charger en mémoire des paramètres pour lesquels il n'existe pas de handle de secret.
 * L'utilisateur peut limiter la visibilité de l'Agent afin d'autoriser uniquement l'accès aux secrets requis (par exemple, en limitant la liste des secrets accessibles dans le backend de gestion de clés).
@@ -232,10 +234,27 @@ Le script `readsecret_multiple_providers.sh` vous permet de lire des secrets à 
 | Lecture depuis des fichiers        | `ENC[fichier@/chemin/vers/fichier]`                        |
 | Secrets Kubernetes     | `ENC[secret_k8@espace_nommage/nom/clé]` |
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Pour utiliser cet exécutable avec le chart Helm, définissez-le comme suit :
+```yaml
+datadog:
+  [...]
+  secretBackend:
+    command: "/readsecret_multiple_providers.sh"
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
 Pour utiliser cet exécutable, définissez la variable d'environnement `DD_SECRET_BACKEND_COMMAND` comme indiqué ci-dessous :
 ```
 DD_SECRET_BACKEND_COMMAND=/readsecret_multiple_providers.sh
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Exemple de lecture depuis un fichier
 L'Agent peut lire un fichier spécifique en tenant compte du chemin fourni. Ce fichier peut être récupéré à partir de [secrets Kubernetes](#secrets-kubernetes), de [secrets Docker Swarm](#secrets-docker-swarm) ou de toute autre méthode personnalisée.
@@ -301,6 +320,8 @@ roleRef:
 ```
 Ce `Role` permet d'accéder à `Secret: database-secret` dans l'espace de nommage `Namespace: database`. Le `RoleBinding` associe l'autorisation au compte de service `ServiceAccount: datadog-agent` dans l'espace de nommage `Namespace: default`. Vous devez effectuer manuellement cet ajout dans votre cluster pour vos ressources déployées.
 
+En plus de ces autorisations, si vous utilisez le fournisseur de secrets Kubernetes, vous devez faire en sorte que le script puisse lire les données provenant de plusieurs fournisseurs `"/readsecret_multiple_providers.sh"`.
+
 ### (Obsolète) Scripts pour la lecture à partir de fichiers
 Depuis la version 7.32 de l'Agent Datadog, le script `readsecret_multiple_providers.sh` est inclus. Datadog vous conseille d'utiliser ce script à la place des scripts `/readsecret.py` et `/readsecret.sh` de la version 6.12 de l'Agent. Veuillez noter que vous pouvez toujours utiliser les scripts `/readsecret.py` et `/readsecret.sh` inclus pour lire des fichiers.
 
@@ -345,7 +366,7 @@ Exemple sous Linux :
 ```shell
 $> datadog-agent secret
 === Checking executable rights ===
-Executable path: /path/to/you/executable
+Executable path: /chemin/vers/votre/exécutable
 Check Rights: OK, the executable has the correct rights
 
 Rights Detail:
@@ -365,18 +386,17 @@ Secrets handle decrypted:
 {{% tab "Windows" %}}
 
 Exemple sous Windows (en tant qu'administrateur Powershell)  :
-
 ```powershell
-PS C:\> & '%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe' secret
+PS C:\> & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" secret
 === Checking executable rights ===
-Executable path: C:\path\to\you\executable.exe
+Executable path: C:\chemin\vers\votre\exécutable.exe
 Check Rights: OK, the executable has the correct rights
 
 Rights Detail:
 Acl list:
 stdout:
 
-Path   : Microsoft.PowerShell.Core\FileSystem::C:\path\to\you\executable.exe
+Path   : Microsoft.PowerShell.Core\FileSystem::C:\chemin\vers\votre\exécutable.exe
 Owner  : BUILTIN\Administrators
 Group  : WIN-ITODMBAT8RG\None
 Access : NT AUTHORITY\SYSTEM Allow  FullControl
@@ -405,21 +425,21 @@ Pour vérifier rapidement comment les configurations du check sont résolues, vo
 ```shell
 sudo -u dd-agent -- datadog-agent configcheck
 
-=== un check ===
+=== a check ===
 Source: File Configuration Provider
 Instance 1:
-host: <déchiffré_host>
-port: <déchiffré_port>
-password: <déchiffré_motdepasse>
+host: <host_décrypté>
+port: <port_décrypté>
+password: <mot_de_passe_obfusqué>
 ~
 ===
 
-=== un autre check ===
+=== another check ===
 Source: File Configuration Provider
 Instance 1:
-host: <déchiffré_host2>
-port: <déchiffré_port2>
-password: <déchiffré_motdepasse2>
+host: <host_décrypté_2>
+port: <port_décrypté_2>
+password: <mot_de_passe_obfusqué_2>
 ~
 ===
 ```
@@ -435,7 +455,7 @@ Pour tester une commande ou la déboguer en dehors de l'Agent, vous pouvez repro
 #### Linux
 
 ```bash
-sudo su dd-agent - bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /chemin/vers/la/secret_backend_command"
+sudo -u dd-agent bash -c "echo '{\"version\": \"1.0\", \"secrets\": [\"secret1\", \"secret2\"]}' | /chemin/vers/la/secret_backend_command"
 ```
 
 L'utilisateur `dd-agent` est créé lors de l'installation de l'Agent Datadog,
