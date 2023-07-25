@@ -134,6 +134,8 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Adding custom tags to tests
 
+To add custom tags to tests, configure [custom instrumentation](#custom-instrumentation) first.
+
 You can add custom tags to your tests by using the current active span:
 
 ```csharp
@@ -147,6 +149,26 @@ if (scope != null) {
 ```
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
+
+### Adding custom metrics to tests
+
+To add custom metrics to tests, configure [custom instrumentation](#custom-instrumentation) first.
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```csharp
+// inside your test
+var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
+if (scope != null) {
+    scope.Span.SetTag("memory_allocations", 16);
+}
+// test continues normally
+// ...
+```
+
+To create filters or visualizations for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
+
+Read more about custom metrics in the [Add Custom Metrics Guide][15].
 
 ### Reporting code coverage
 
@@ -813,3 +835,4 @@ In addition to that, if [Intelligent Test Runner][10] is enabled, the following 
 [12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://github.com/coverlet-coverage/coverlet
+[15]: /continuous_integration/guides/add_custom_metrics/?tab=net
