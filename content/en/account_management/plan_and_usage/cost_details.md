@@ -13,10 +13,6 @@ further_reading:
   text: "Managing multiple-organization accounts"
 ---
 
-{{< callout url="http://docs.datadoghq.com/help/">}}
-  Estimated Cost Summary and Cost Chargebacks are in beta. To request access and confirm your organization is supported, contact your account representative or Support.
-{{< /callout >}} 
-
 ## Overview
 
 Estimated Cost Summary and Cost Chargebacks help you understand your estimated month-to-date and historical Datadog costs.
@@ -43,7 +39,7 @@ Use the cost summary to:
 
 The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated costs for the parent organization and each sub-organization. 
 
-{{< img src="account_management/plan_and_usage/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+{{< img src="account_management/plan_and_usage/cost_details/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -60,6 +56,8 @@ To download the data as a comma separated value file, click **Download as CSV**.
 See [Get estimated cost across your account][3] to query estimated cost data through the API.
 
 ### Estimated Cost Summary (sub-organization)
+
+<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 

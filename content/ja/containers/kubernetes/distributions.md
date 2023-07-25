@@ -278,7 +278,7 @@ agents:
           cpu: 100m
           memory: 200Mi
 
-    priorityClassCreate: true
+  priorityClassCreate: true
 
 providers:
   gke:
