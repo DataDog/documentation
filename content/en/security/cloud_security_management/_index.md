@@ -58,7 +58,7 @@ The order in which security issues are prioritized is based on the following cri
 
 Remediating security issues can meaningfully improve your organization's security. Use the **Security Inbox** to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
 
-{{< img src="security/csm/security_inbox.png" alt="The security inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
+{{< img src="security/csm/security_inbox.png" alt="The Security Inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
 
 ## Track your organization's health
 
@@ -66,7 +66,7 @@ Available for [CSM Misconfigurations][2], the [security posture score][5] helps 
 
 Improve your organization's score by remediating findings, either by resolving the underlying issue or by muting the finding.
 
-{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organizations' overall health" width="100%">}}
+{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
 
 ## Explore and remediate issues using Explorers
 
