@@ -113,10 +113,10 @@ curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/datadog-static-analyzer
 unzip /tmp/datadog-static-analyzer
 
 # Run Static Analysis
-/tmp/datadog-static-analyzer -i . -o results.sarif -f sarif --cpus "CPU_COUNT"
+/tmp/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif --cpus "CPU_COUNT"
 
 # Upload results
-datadog-ci sarif upload results.sarif --service "SERVICE" --env "ENV"
+datadog-ci sarif upload /tmp/report.sarif --service "SERVICE" --env "ENV"
 ```
 
 <div class="alert alert-info">
