@@ -34,7 +34,7 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 
 ### The session replay rendering looks does not exactly mirror my application
 Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images. 
-### For sessions that are very short, I see a replay attached, but am unable to view the replay
+### For sessions that are very short, I see a replay attached, but I'm unable to view the replay
 When sessions are 1 nanosecond long, we are unable to process the record and thus there would be no replay attached. 
 
 ## Mobile app consent
