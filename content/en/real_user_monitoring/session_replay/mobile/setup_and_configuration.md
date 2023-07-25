@@ -31,25 +31,8 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
 To set up Mobile Session Replay for Android:
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
-2. In order to use the SNAPSHOTS in your Gradle dependencies, add this repository as a source in your repository configuration in your `build.gradle` file:
 
-   ```kotlin
-     repositories {
-          maven {
-           url ="https://oss.sonatype.org/content/repositories/snapshots"
-          }
-          }
-
-          dependencies {
-             implementation 'com.datadoghq:dd-sdk-android-core:2.0.0'
-             implementation 'com.datadoghq:dd-sdk-android-rum:2.0.0'
-             implementation 'com.datadoghq:dd-sdk-android-session-replay:2.0.0'
-             implementation 'com.datadoghq:dd-sdk-android-session-replay-material:2.0.0  // in case you need material support
-
-          }
-   ```
-
-3. Once the DD SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
+2. Once the DD SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
    ```kotlin
       val config = Configuration.Builder(
          logsEnabled = true,
