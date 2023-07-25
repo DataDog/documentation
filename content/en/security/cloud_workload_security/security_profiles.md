@@ -1,10 +1,10 @@
 ---
-title: CSM Threats Workload Security Profiles
+title: Workload Security Profiles
 kind: documentation
 further_reading:
   - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
-    text: "Setting Up Cloud Security Management Threats"
+    text: "Setting Up CSM Threats"
   - link: "/security/cloud_workload_security/workload_security_rules"
     tag: "Documentation"
     text: "Managing CSM Threats Detection Rules"
@@ -14,7 +14,7 @@ Workload Security Profiles provides a baseline of expected workload activity thr
 
 ## Compatibility
 
-For Workload Security Profiles to be compatible with your Datadog configuration, you must have [CSM Threats enabled][1], use Datadog Agent 7.44 or later, and have activity snapshots enabled. Workload Security Profiles are enabled by default and support containerized workloads only.
+For Workload Security Profiles to be compatible with your Datadog configuration, you must have [Cloud Security Management Threats enabled][1], use Datadog Agent 7.44 or later, and have activity snapshots enabled. Workload Security Profiles are enabled by default and support containerized workloads only.
 
 ## How Workload Security Profiles are generated
 

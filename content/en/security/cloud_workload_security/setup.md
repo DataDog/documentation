@@ -1,5 +1,5 @@
 ---
-title: Setting up CSM Threats
+title: Setting up Cloud Security Management Threats
 kind: documentation
 description: "Follow the setup and installation instructions to get started with CSM Threats."
 aliases:
