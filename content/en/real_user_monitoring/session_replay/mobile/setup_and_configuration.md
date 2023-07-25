@@ -54,9 +54,6 @@ To set up Mobile Session Replay for Android:
       Datadog.registerFeature(sessionReplayFeature)
    ```
 
-[1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
-[2]: /real_user_monitoring/android/?tab=kotlin
-
 {{% /tab %}}
 {{% tab "iOS" %}}
 
