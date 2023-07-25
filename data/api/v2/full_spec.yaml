@@ -1635,7 +1635,6 @@ components:
       description: The missing value to use if there is a string valued facet.
       type: string
     CIAppGroupByTotal:
-      default: false
       description: A resulting object to put the given computes in over all the matching
         records.
       oneOf:
@@ -11235,7 +11234,6 @@ components:
       description: The missing value to use if there is string valued facet.
       type: string
     RUMGroupByTotal:
-      default: false
       description: A resulting object to put the given computes in over all the matching
         records.
       oneOf:
