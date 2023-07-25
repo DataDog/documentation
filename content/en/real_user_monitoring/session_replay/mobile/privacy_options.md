@@ -74,7 +74,10 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 [ add android content]
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
+        val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+            .setPrivacy(SessionReplayPrivacy.MASK_USER_INPUT)
+            .build()
+        SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
 {{% /tab %}}
