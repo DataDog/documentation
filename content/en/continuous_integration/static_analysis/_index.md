@@ -120,7 +120,7 @@ datadog-ci sarif upload results.sarif --service "SERVICE" --env "ENV"
 ```
 
 <div class="alert alert-info">
-  Add `--enable_performance_statistics` to your static analysis command to get execution time statistics for analyzed files.
+  Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
 </div>
 
 [101]: /account_management/api-app-keys/#api-keys
