@@ -1,5 +1,5 @@
 ---
-title: Network Analytics Page
+title: Network Analytics
 kind: documentation
 description: Explore your Network data between each source and destination across your stack.
 aliases:
