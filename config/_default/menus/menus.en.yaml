@@ -3731,7 +3731,7 @@ main:
     parent: ndm
     identifier: ndm_profiles
     weight: 304
-  - name: Topology Maps
+  - name: Network Topology Map
     url: network_monitoring/devices/topology_maps
     parent: ndm
     identifier: ndm_topology_maps
