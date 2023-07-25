@@ -113,11 +113,12 @@ npm install -g @datadog/datadog-ci
 # Download the latest Datadog static analyzer:
 # https://github.com/DataDog/datadog-static-analyzer/releases
 DATADOG_STATIC_ANALYZER_URL=https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip
-curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/datadog-static-analyzer
-unzip /tmp/datadog-static-analyzer
+curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/ddog-static-analyzer.zip
+unzip /tmp/ddog-static-analyzer.zip -d /tmp
+mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 
 # Run Static Analysis
-/tmp/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif --cpus <cpu_count>
+/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif --cpus <cpu_count>
 
 # Upload results
 datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
