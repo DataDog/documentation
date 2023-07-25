@@ -3,14 +3,16 @@ title: Advanced Options for Mobile App Test Steps
 kind: documentation
 description: Configure advanced options for Mobile Test Steps
 is_beta: true
+aliases:
+- /mobile_testing/mobile_app_tests/advanced_options
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/mobile_testing/mobile_app_tests/"
+- link: "/mobile_app_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn how to create mobile app tests"
-- link: "/mobile_testing/mobile_app_tests/steps/"
+- link: "/mobile_app_testing/mobile_app_tests/steps/"
   tag: "Documentation"
   text: "Learn how to create steps in mobile app tests"
 - link: "/data_security/synthetics/"
@@ -46,13 +48,13 @@ If a mobile app test cannot locate an element, it retries the step for 60 second
 
 You can customize this timeout up to 60 seconds if you want your test to wait for less time to be able to find the step targeted element.
 
-{{< img src="mobile_testing/timeout.png" alt="Wait for 30 seconds before declaring the test step as failed" style="width:50%" >}}
+{{< img src="mobile_app_testing/timeout.png" alt="Wait for 30 seconds before declaring the test step as failed" style="width:50%" >}}
 
 ## Optional step
 
 In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **Continue with test if this step fails**. If the step fails after the amount of minutes specified on the timeout option, then the mobile app test moves on and executes the next step.
 
-{{< img src="mobile_testing/failure_behavior.png" alt="Choose if the test should fail or continue if the test step fails" style="width:50%" >}}
+{{< img src="mobile_app_testing/failure_behavior.png" alt="Choose if the test should fail or continue if the test step fails" style="width:50%" >}}
 
 Optionally, click **Consider entire test as failed if this step fails** to ensure important steps are performing.
 
@@ -60,7 +62,7 @@ Optionally, click **Consider entire test as failed if this step fails** to ensur
 
 You can prevent a step screenshot from being captured at test execution by clicking **Do not capture screenshot for this step**. 
 
-{{< img src="mobile_testing/no_screenshots.png" alt="Do not capture a screenshot for this test step" style="width:50%" >}}
+{{< img src="mobile_app_testing/no_screenshots.png" alt="Do not capture a screenshot for this test step" style="width:50%" >}}
 
 This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
 
@@ -72,5 +74,5 @@ Click **Continue with test if this step fails** to ensure your mobile app test c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile_testing/mobile_app_tests/steps/
+[1]: /mobile_app_testing/mobile_app_tests/steps/
 [2]: /data_security/synthetics/

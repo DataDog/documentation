@@ -3,8 +3,10 @@ title: Mobile App Test Results
 kind: documentation
 description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs. 
 is_beta: true
+aliases:
+- /mobile_testing/mobile_app_tests/results
 further_reading:
-- link: "/mobile_testing/mobile_app_tests/"
+- link: "/mobile_app_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
 - link: "/service_management/events/explorer"
@@ -20,7 +22,7 @@ further_reading:
 
 Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
 
-{{< img src="mobile_testing/test_details.png" alt="The Test Details page" style="width=80%" >}}
+{{< img src="mobile_app_testing/test_details.png" alt="The Test Details page" style="width=80%" >}}
 
 Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
@@ -41,7 +43,7 @@ In the **Properties** section, you can see the test ID, test creation and edit d
 
 In the **History** section, you can see the **Global Uptime** graph, which displays the total uptime of all test locations in a given time interval. The global uptime takes into consideration the [alert conditions][4] configured for a test. 
 
-{{< img src="mobile_testing/history.png" alt="The History graph displays global uptime" style="width=80%" >}}
+{{< img src="mobile_app_testing/history.png" alt="The History graph displays global uptime" style="width=80%" >}}
 
 ## Sample results
 
@@ -76,7 +78,7 @@ Run type
 
 Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
 
-{{< img src="mobile_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
+{{< img src="mobile_app_testing/screenshot-and-action.png" alt="Screenshots and actions in the Sample Runs section of the test details" style="width=80%" >}}
 
 ## Failed results
 
@@ -110,11 +112,11 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [1]: /synthetics/guide/synthetic-test-monitors/
 [2]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [3]: /continuous_testing/cicd_integrations
-[4]: /mobile_testing/mobile_app_tests/#scheduling-and-alert
+[4]: /mobile_app_testing/mobile_app_tests/#scheduling-and-alert
 [5]: /synthetics/guide/uptime-percentage-widget/
 [6]: /help
 [7]: https://app.datadoghq.com/event/explorer
 [8]: /getting_started/synthetics/browser_test#select-locations
 [9]: /synthetics/private_locations
-[10]: /mobile_testing/mobile_app_tests/steps
+[10]: /mobile_app_testing/mobile_app_tests/steps
 [11]: https://app.datadoghq.com/synthetics/tests

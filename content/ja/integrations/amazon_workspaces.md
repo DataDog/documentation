@@ -12,13 +12,13 @@ draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
 integration_id: amazon-workspaces
-integration_title: AWS Workspaces
+integration_title: Amazon WorkSpaces
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_workspaces
-public_title: Datadog-AWS Workspaces インテグレーション
+public_title: Datadog-Amazon WorkSpaces インテグレーション
 short_description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。
 version: '1.0'
 ---
@@ -27,7 +27,7 @@ version: '1.0'
 
 Amazon WorkSpaces は、AWS クラウド上で実行されるフルマネージド型のセキュアなデスクトップコンピューティングサービスです。
 
-このインテグレーションを有効にすると、Datadog にすべての Workspaces メトリクスを表示できます。
+このインテグレーションを有効にすると、Datadog にすべての Amazon WorkSpaces メトリクスを表示できます。
 
 ## セットアップ
 
@@ -66,11 +66,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS WorkSpaces インテグレーションには、イベントは含まれません。
+Amazon WorkSpaces インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS WorkSpaces インテグレーションには、サービスのチェック機能は含まれません。
+Amazon WorkSpaces インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

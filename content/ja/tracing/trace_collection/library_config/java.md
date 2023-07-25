@@ -266,21 +266,9 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 **デフォルト**: `true`<br>
 `true` の場合、トレーサーは[テレメトリーデータ][6]を収集します。バージョン 0.104+ で利用可能です。バージョン 0.115+ では `true` がデフォルトとなります。
 
-`dd.trace.128.bit.traceid.generation.enabled`
-: **環境変数**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
-**デフォルト**: `false` <br>
-128 ビットのトレース ID の生成を有効にします。デフォルトでは、64 ビットの ID のみが生成されます。
-
-`dd.trace.128.bit.traceid.logging.enabled`
-: **環境変数**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
-**デフォルト**: `false` <br>
-MDC を使ってログ内のスパンをでフォーマットするときに、完全な 128 ビット ID を出力できるようにします。
-false (デフォルト) の場合、トレース ID の下位 64 ビットのみが出力され、整数としてフォーマットされます。つまり、トレース ID が 64 ビットしかない場合、完全な ID が出力されます。
-true の場合、トレース ID は 16 進数形式で 128 ビットの完全な ID として出力されます。これは、ID 自体が 64 ビットしかない場合でも同じです。
-
 **注**:
 
-- 両方に同じキータイプが設定された場合、システムプロパティコンフィギュレーションが優先されます。
+- 両方に同じキータイプが設定された場合、システムプロパティ構成が優先されます。
 - システムプロパティは JVM パラメーターとして使用できます。
 - デフォルトで、アプリケーションからの JMX メトリクスは、DogStatsD によりポート `8125` で Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっている][7]ことを確認してください。
 
@@ -381,12 +369,12 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.sl
 
 デバッグアプリのログに、`Tracing is disabled, not installing instrumentations.` と表示されます。
 
-#### `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`
+#### `dd.jmxfetch.config.dir` と `dd.jmxfetch.config`
 
 構成サンプル
 
 - 以下のいずれかのコンビネーションを使用: `DD_JMXFETCH_CONFIG_DIR=<ディレクトリパス>` + `DD_JMXFETCH_CONFIG=conf.yaml`
-- または直接指定: `DD_JMXFETCH_CONFIG=<ディレクトリパス>/conf.yaml`
+- または直接指定: `DD_JMXFETCH_CONFIG=<DIRECTORY_PATH>/conf.yaml`
 
 `conf.yaml` で以下の内容を使用します。
 
@@ -434,7 +422,7 @@ JMX フェッチを使った Java メトリクス収集についての詳細は 
 
 #### 非推奨の抽出と挿入の設定
 
-これらの `b3` (B3 マルチヘッダーおよび B3 シングルヘッダーの両方) 用の抽出および挿入の設定は、バージョン 1.9.0. 以降、非推奨となっています。
+これらの抽出と挿入の設定は廃止され、バージョン 1.9.0 以降では `dd.trace.propagation.style.inject`、`dd.trace.propagation.style.extract`、`dd.trace.propagation.style` の設定に変更されました。[Java トレースコンテキストの伝播][13]を参照してください。B3 マルチヘッダーと B3 シングルヘッダーに対する以前の `b3` 設定は、新しい `b3multi` と `b3single` 設定に置き換えられました。
 
 `dd.propagation.style.inject`
 : **環境変数**: `DD_PROPAGATION_STYLE_INJECT`<br>
