@@ -56,6 +56,12 @@ Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#c
 
 To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
 
+## CSM Vulnerabilities
+
+Datadog [Infrastructure Vulnerability Management][4] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities the [Container Images][5] and [hosts][6] in your infrastructure.
+
+<div class="alert alert-info">Infrastructure Vulnerability Management is in beta.</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -63,3 +69,6 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][3]
 [1]: /security/cspm/
 [2]: /security/cloud_workload_security/
 [3]: https://app.datadoghq.com/security/configuration
+[4]: https://app.datadoghq.com/security/infra-vulnerability
+[5]: https://app.datadoghq.com/containers/images
+[6]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
