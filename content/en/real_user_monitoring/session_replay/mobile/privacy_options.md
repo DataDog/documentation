@@ -131,7 +131,7 @@ By default, the Session Replay recorder masks all recorded content with `*` to e
 
    {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-   val sessionReplayConfig = SessionReplayConfiguration.Builder()
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     ...
    .setSessionReplayPrivacy(SessionReplayPrivacy.[PRIVACY])
    .build()
