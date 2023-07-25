@@ -106,7 +106,21 @@ Provide the following inputs:
   Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
 </div>
 
+Select an analyzer for your architecture and OS:
+
+| Architecture | OS        | Name                                                    |
+|--------------|-----------|---------------------------------------------------------|
+| `aarch64`    | `Darwin`  | `datadog-static-analyzer-aarch64-apple-darwin.zip`      |
+| `aarch64`    | `Linux`   | `datadog-static-analyzer-aarch64-unknown-linux-gnu.zip` |
+| `x86_64`     | `Darwin`  | `datadog-static-analyzer-x86_64-apple-darwin.zip`       |
+| `x86_64`     | `Linux`   | `datadog-static-analyzer-x86_64-pc-windows-msvc.zip`    |
+| `x86_64`     | `Windows` | `datadog-static-analyzer-x86_64-unknown-linux-gnu.zip`  |
+
 Add the following to your CI pipeline:
+
+<div class="alert alert-info">
+  The following example uses the `x86_64` `Linux` version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the `DATADOG_STATIC_ANALYZER_URL` value below. You can view all releases on our [GitHub Releases][104] page.
+</div>
 
 ```bash
 # Install dependencies
@@ -129,6 +143,7 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 [101]: /account_management/api-app-keys/#api-keys
 [102]: /account_management/api-app-keys/#application-keys
 [103]: /getting_started/site/
+[104]: https://github.com/DataDog/datadog-static-analyzer/releases
 
 {{% /tab %}}
 {{< /tabs >}}
