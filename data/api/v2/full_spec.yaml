@@ -4137,6 +4137,8 @@ components:
           example: 2020-01-02 03:04:00+00:00
           format: date-time
           type: string
+      required:
+      - start
       type: object
     DowntimeScheduleRecurrenceCreateUpdateRequest:
       additionalProperties: {}
