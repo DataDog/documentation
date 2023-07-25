@@ -55,11 +55,16 @@
           x-transition.opacity.duration.250ms
           >
             <td class="d-flex">
+              {{$ctx_product_source := .product_source}}
               {{ range $idx, $el := .product_source }}
                 {{ if in . "icon-"}}
                   <i class="{{ . }} {{ if $idx }}ms-1{{ end }}" title="{{ substr . 5 }}" style="font-size:18px;color:#7c3eb9;vertical-align:middle"></i> 
                 {{ else if or (eq . "android") (eq . "ios") (eq . "flutter") (eq . "roku")}}
-                  {{/*  At some point verify that the attr has RUM included in the list of product sources  */}}
+                  {{/*  Verify platorm sources (i.e. android, ios, roku etc. ) are accompanied by RUM source in  product_source list */}}
+                  {{ if not (in $ctx_product_source "icon-rum") }}
+                    {{ errorf "Sources 'android', 'flutter', 'roku', and 'ios' must be accompanied by 'icon-rum' source. fix source %q" . }}
+                    {{ errorf "in %q" $ctx.File.Path }}
+                  {{ end }}
                   {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") }}
                   {{ if $int_logo }}
                   <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}"/>
