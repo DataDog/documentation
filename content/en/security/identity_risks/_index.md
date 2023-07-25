@@ -15,7 +15,7 @@ CSM Identity Risks is not available in this site.
 
 <div class="alert alert-info">CSM Identity Risks is in beta.</div>
 
-Cloud Security Management Identity Risks (CSM Identity Risks) helps you secure your cloud infrastructure from IAM-based attacks by providing in-depth visibility into your organization's AWS IAM risks. 
+Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's AWS IAM risks. Enabling you to detect and resolve identity risks on an ongoing basis, CSM Identity Risks helps secure your cloud infrastructure from IAM-based attacks.
 
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 
