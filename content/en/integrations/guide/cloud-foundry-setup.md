@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Cloud Foundry deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to manually set up monitoring for your Cloud Foundry application.
+Cloud Foundry deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to set up monitoring for your Cloud Foundry environment.
 
 There are four main components for the Cloud Foundry integration with Datadog.
 
@@ -23,7 +23,7 @@ Read the [Datadog VMware Tanzu Application Service architecture][32] guide for m
 
 ## Monitor your applications
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent, a lightweight version of the agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
 
 ### Multiple Buildpacks (recommended)
 
@@ -84,10 +84,10 @@ If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a deco
 
 ## Monitor your Cloud Foundry cluster
 
-There are two points of integration with Datadog, each of which achieves a different goal:
+There are three points of integration with Datadog, each of which achieves a different goal:
 
 - **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
-- **Datadog Cluster Agent BOSH release** - Install the Datadog Cluster Agent on a BOSH managed VM in your deployment to collect cluster-level and application-level metadata for improved tagging capabilities in your applications and containers.
+- **Datadog Cluster Agent BOSH release** - Deploy one Datadog Cluster Agent job. The job queries the CAPI and BBS API to collect cluster-level and application-level metadata to provide improved tagging capabilities in your applications and containers.
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
