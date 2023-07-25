@@ -48,7 +48,15 @@ CSM leverages the Datadog Agent and platform-wide cloud integrations and include
 
 The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as being publicly accessible, attached to privileged roles, and residing in production environments.
 
-When these issues are remediated, it can meaningfully improve your organization's security. Use the Security Inbox to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
+The order in which security issues are prioritized is based on the following criteria:
+
+- Higher severity issues are listed first
+- Whether an issue has a threat attached to it
+- Number of related risks (publicly accessible, production environment, misconfiguration, vulnerability).
+- Number of resources impacted
+- Discovered date (newer issues are listed first)
+
+Remediating security issues can meaningfully improve your organization's security. Use the **Security Inbox** to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
 
 {{< img src="security/csm/security_inbox.png" alt="The security inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
 
@@ -62,7 +70,7 @@ Improve your organization's score by remediating findings, either by resolving t
 
 ## Explore and remediate issues using Explorers
 
-Use the Explorers page to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+Use the [Explorers page][7] to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
 {{< img src="security/cws/threats_explorer.png" alt="CSM Explorer page" width="100%">}}
 
@@ -80,3 +88,4 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [4]: https://app.datadoghq.com/security/
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
+[7]: https://app.datadoghq.com/security?product=cws
