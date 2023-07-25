@@ -29,7 +29,7 @@ The Datadog Agent Manager GUI is browser-based. The port the GUI runs on can be 
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| IOS           | 12                           |  Mobile Safari          |
+| iOS           | 12                           |  Mobile Safari          |
 
 ### Start the Datadog Agent Manager
 

@@ -29,7 +29,7 @@ Datadog Agent Manager GUI はブラウザベースです。GUI が実行され�
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| IOS           | 12                           |  Mobile Safari          |
+| iOS           | 12                           |  Mobile Safari          |
 
 ### Datadog Agent Manager を起動する
 
