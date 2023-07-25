@@ -5,12 +5,12 @@ aliases:
 - /ja/integrations/faq/does-datadog-support-aws-alb-application-load-balancer/
 - /ja/integrations/faq/where-are-my-elb-latency-metrics/
 categories:
-- cloud
-- web
 - aws
+- cloud
 - log collection
+- network
 dependencies: []
-description: Amazon Load Balancer のキーメトリクスを追跡
+description: Amazon Elastic Load Balancing のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_elb/
 draft: false
 further_reading:
@@ -20,14 +20,14 @@ further_reading:
 git_integration_title: amazon_elb
 has_logo: true
 integration_id: amazon-elb
-integration_title: Amazon Load Balancer
+integration_title: Amazon Elastic Load Balancing
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_elb
-public_title: Datadog-Amazon Load Balancer インテグレーション
-short_description: Amazon Load Balancer のキーメトリクスを追跡
+public_title: Datadog-Amazon Elastic Load Balancing インテグレーション
+short_description: Amazon Elastic Load Balancing のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
@@ -57,7 +57,7 @@ Datadog は、AWS が提供する 3 つのバリエーションの Elastic Load 
     | `elasticloadbalancing:DescribeInstanceHealth` | インスタンスの状態を追加します。                                       |
     | `elasticloadbalancing:DescribeTargetGroups`   | 指定したターゲットグループまたはすべてのターゲットグループを説明します。 |
 
-3. [Datadog - AWS ELB インテグレーション][5]をインストールします。
+3. [Datadog - Amazon Elastic Load Balancing インテグレーション][5]をインストールします。
 
 ### ログの収集
 
@@ -97,11 +97,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Elastic Load Balancing インテグレーションには、イベントは含まれません。
+Amazon Elastic Load Balancing インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS Elastic Load Balancing インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Elastic Load Balancing インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
