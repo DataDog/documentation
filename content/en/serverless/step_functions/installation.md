@@ -48,8 +48,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
     - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
-5. Enable tracing on your Step Functions. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-<!-- Where is this environment variable set? -->
+5. Enable tracing on your Step Functions by setting the environment variable `DD_TRACE_ENABLED` to `true`.
 6. For Node.JS and Python runtimes, you can go also [link your step functions with Lambda traces](#associated-lambda-tracing) with associated Lambda tracing.
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
@@ -70,8 +69,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 
    Take note of your Forwarder's ARN.
 3. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
-4. Enable tracing on your Step Function. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-<!-- Where is this environment variable set? -->
+4. Enable tracing on your Step Function by setting the environment variable `DD_TRACE_ENABLED` to `true`.
 5. Instrument your Step Function.
 
    ```shell
