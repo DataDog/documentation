@@ -1,0 +1,26 @@
+---
+title: How to monitor UTM campaigns in RUM
+kind: guide
+description: Learn how to use RUM & Session Replay to monitor trends in user behavior and feature adoption.
+---
+
+## Overview
+
+UTM (Urchin Tracking Module) tracking is a parameter added in a URL to help track the performance of specific campaigns and identify attribution paths for how visitors arrived on your website. In this guide, we’ll walk through the types of UTM parameters Datadog RUM collects and how you can use RUM to monitor their use.
+
+## Data collected
+
+UTM campaigns are connected to View events in RUM. These are collected automatically by the Browser SDK and can be viewed as facets in the RUM explorer. The UTM parameters Datadog collects can be defined as the following:
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `view.url_query.utm_source`     | string | The parameter in the URL tracking the source of traffic. |
+| `view.url_query.utm_medium`        | string | The parameter in the URL tracking the channel where the traffic is coming from.    |
+| `view.url_query.utm_campaign`  | string | The paramter in the URL identifying the specific marketing campaign tied to that view.              |
+| `view.url_query.utm_content`  | string | The paramter in the URL identifying the specific element a user clicked within a marketing campaign.           |
+| `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
+
+## Use cases
+
+### Identifying how users arrive at my site.
+To measure how users arrive at my site, you can use the '@view.url_query.utm_medium' facet. This shows different mediums such as social, organic, search, Google campaigns, or even specific events like a webinar. You can watch session replays from users who come to your website from the different mediums and observe if any noticeable patterns occur between groups.
