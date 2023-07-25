@@ -607,6 +607,55 @@ TraceConfiguration config = new TraceConfiguration.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
+## Kotlin Extensions
+
+### Running a lambda within a Span
+
+To monitor the performance of a given lambda, you can use the `withinSpan()` method. By default, a scope will be created for the span, but you can disable this behavior by setting the `activate` parameter to false.
+
+```kotlin
+    withinSpan("<SPAN_NAME>", parentSpan, activate) {
+        // Your code here
+    }
+```
+
+### Span extension methods
+
+You can mark a span as having an error using one of the following `error()` methods.
+
+```kotlin
+    val span = tracer.buildSpan("<SPAN_NAME>").start()
+    try {
+        // …
+    } catch (e: IOException) {
+        span.setError(e)
+    }
+    span.finish()
+```
+
+```kotlin
+    val span = tracer.buildSpan("<SPAN_NAME>").start()
+    if (invalidState) {
+        span.setError("Something unexpected happened")
+    }
+    span.finish()
+```
+
+### Tracing SQLite transaction
+
+If you are using `SQLiteDatabase` to persist data locally, you can trace the database transaction using the following method:
+
+```kotlin
+   sqliteDatabase.transactionTraced("<SPAN_NAME>", isExclusive) { database ->
+        // Your queries here
+        database.insert("<TABLE_NAME>", null, contentValues)
+
+        // Decorate the Span
+        setTag("<TAG_KEY>", "<TAG_VALUE>")
+   }
+```
+It behaves like the `SQLiteDatabase.transaction` method provided in the `core-ktx` AndroidX package and only requires a span operation name.
+
 ## Integrations
 
 In addition to manual tracing, the Datadog SDK provides the following integrations.
@@ -675,28 +724,7 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
 
 In this case trace sampling decision made by the upstream interceptor for a particular request will be respected by the downstream interceptor.
 
-Because the way the OkHttp Request is executed (using a Thread pool), the request span won't be automatically linked with the span that triggered the request. You can manually provide a parent span in the `OkHttp Request.Builder` as follows:
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-val request = Request.Builder()
-        .url(requestUrl)
-        .tag(Span::class.java, parentSpan)
-        .build()
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-final Request request = new Request.Builder()
-        .url(requestUrl)
-        .tag(Span.class, parentSpan)
-        .build();
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-or if you are using the extensions provided in the `dd-sdk-android-ktx` library:
+Because the way the OkHttp Request is executed (using a Thread pool), the request span won't be automatically linked with the span that triggered the request. You can manually provide a parent span in the `OkHttp Request.Builder` as follows by using `Request.Builder.parentSpan` extension method:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -709,9 +737,10 @@ val request = Request.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Request request = new Request.Builder()
+Request.Builder requestBuilder = new Request.Builder()
         .url(requestUrl)
-        .parentSpan(parentSpan)
+Request request = OkHttpRequestExtKt
+        .parentSpan(requestBuilder, parentSpan)
         .build();
 ```
 {{% /tab %}}

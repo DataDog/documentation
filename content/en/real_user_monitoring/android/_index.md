@@ -374,6 +374,33 @@ Add the following snippet during RUM configuration:
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
 </div>
 
+### Kotlin Extensions
+
+#### `Closeable` extension
+
+You can monitor `Closeable` instance usage by using `useMonitored` method, it will report any error happened to Datadog and close the resource afterwards.
+
+```kotlin
+val closeable: Closeable = ...
+closeable.useMonitored {
+    // Your code here
+}
+
+```
+
+#### Track local assets as RUM resources
+
+You can track access to the assets by using `getAssetAsRumResource` extension method:
+
+```kotlin
+val inputStream = context.getAssetAsRumResource(fileName)
+```
+
+Usage of the local resources can be tracked by using `getRawResAsRumResource` extension method:
+
+```kotlin
+val inputStream = context.getRawResAsRumResource(id)
+```
 
 ## Further Reading
 
