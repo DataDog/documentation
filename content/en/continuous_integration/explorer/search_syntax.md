@@ -23,7 +23,6 @@ There are two types of terms:
 
 To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
-|              |                                                                                                        |                              |
 | **Operator** | **Description**                                                                                        | **Example**                  |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | authentication AND failure   |
