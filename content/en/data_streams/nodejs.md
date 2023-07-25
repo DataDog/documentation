@@ -16,7 +16,7 @@ further_reading:
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Python libraries:
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Node.js libraries:
 * [Datadog Agent v7.34.0 or later][1]
 * [Node.js Tracer v2.39.0, v3.26.0, v4.5.0, or later][2]
 
