@@ -158,7 +158,7 @@ Beginning with v1.20.0, the default sample rate is 0 (meaning that no sessions a
 
 {{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-val sessionReplayConfig = SessionReplayConfiguration.Builder()
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
  ...
 .setSessionReplaySampleRate([YOUR_SAMPLE_RATE_HERE])
 .build()
