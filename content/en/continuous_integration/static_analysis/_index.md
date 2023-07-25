@@ -119,7 +119,7 @@ Select an analyzer for your architecture and OS:
 Add the following to your CI pipeline:
 
 <div class="alert alert-info">
-  The following example uses the `x86_64` `Linux` version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the `DATADOG_STATIC_ANALYZER_URL` value below. You can view all releases on our [GitHub Releases][104] page.
+  The following example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the DATADOG_STATIC_ANALYZER_URL value below. You can view all releases on our <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
 
 ```bash
@@ -143,7 +143,6 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 [101]: /account_management/api-app-keys/#api-keys
 [102]: /account_management/api-app-keys/#application-keys
 [103]: /getting_started/site/
-[104]: https://github.com/DataDog/datadog-static-analyzer/releases
 
 {{% /tab %}}
 {{< /tabs >}}
