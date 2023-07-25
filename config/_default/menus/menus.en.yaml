@@ -2865,11 +2865,41 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
+  - name: Threats
+    url: security/cloud_workload_security/
+    parent: csm
+    identifier: cloud_workload_security
+    weight: 1
+  - name: Setup
+    url: security/cloud_workload_security/setup
+    parent: cloud_workload_security
+    identifier: cws_setup
+    weight: 201
+  - name: Managing Detection Rules
+    url: security/cloud_workload_security/workload_security_rules
+    parent: cloud_workload_security
+    identifier: cws_workload_security_rules
+    weight: 202
+  - name: Security Profiles
+    url: security/cloud_workload_security/security_profiles
+    parent: cloud_workload_security
+    identifier: cws_workload_security_profiles
+    weight: 203
+  - name: Creating Custom Agent Rules
+    url: security/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 204
+  - name: CWS Events Formats
+    url: security/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
+    weight: 205
   - name: Misconfigurations
     url: security/cspm/
     parent: csm
     identifier: cspm
-    weight: 1
+    weight: 5
   - name: Setup
     url: security/cspm/setup
     parent: cspm
@@ -2910,36 +2940,6 @@ main:
     parent: cspm
     identifier: resource_catalog
     weight: 109
-  - name: Threats
-    url: security/cloud_workload_security/
-    parent: csm
-    identifier: cloud_workload_security
-    weight: 5
-  - name: Setup
-    url: security/cloud_workload_security/setup
-    parent: cloud_workload_security
-    identifier: cws_setup
-    weight: 201
-  - name: Managing Detection Rules
-    url: security/cloud_workload_security/workload_security_rules
-    parent: cloud_workload_security
-    identifier: cws_workload_security_rules
-    weight: 202
-  - name: Security Profiles
-    url: security/cloud_workload_security/security_profiles
-    parent: cloud_workload_security
-    identifier: cws_workload_security_profiles
-    weight: 203
-  - name: Creating Custom Agent Rules
-    url: security/cloud_workload_security/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 204
-  - name: CWS Events Formats
-    url: security/cloud_workload_security/backend
-    parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 205
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
