@@ -41,7 +41,8 @@ To set up Mobile Session Replay for Android:
           }
 
           dependencies {
-             implementation 'com.datadoghq:dd-sdk-android:1.19.0-sr-beta1-SNAPSHOT'
+             implementation 'com.datadoghq:dd-sdk-android-core:2.0.0'
+             implementation 'com.datadoghq:dd-sdk-android-rum:2.0.0'
              implementation 'com.datadoghq:dd-sdk-android-session-replay:1.19.0-sr-beta1-SNAPSHOT'
              implementation 'com.datadoghq:dd-sdk-android-session-replay-material:1.19.0-sr-beta1-SNAPSHOT' // in case you need material support
 
