@@ -63,7 +63,7 @@ To set up Mobile Session Replay for Android:
       ...
 
       Datadog.initialize(context, credentials, config, trackingConsent) 
-      val sessionReplayConfig = SessionReplayConfiguration.Builder()
+      val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
          // in case you need material extension support
          .addExtensionSupport(MaterialExtensionSupport()) 
          .build()
