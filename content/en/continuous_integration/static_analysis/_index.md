@@ -118,7 +118,7 @@ unzip /tmp/ddog-static-analyzer.zip -d /tmp
 mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
 
 # Run Static Analysis
-/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif --cpus <cpu_count>
+/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
 datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
