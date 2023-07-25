@@ -99,6 +99,8 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 
 With the `allow all` setting enabled, all text is revealed.
 
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all.png" alt="What your application screen may resemble when `allow all` is enabled." style="width:60%;">}}
+
 **Note**: Even with this option enabled, any sensitive text fields such as passwords, emails, phone numbers, and addresses are still masked. For more information, see [Text masking definitions](#text-masking-definitions).
 
 {{< tabs >}}
