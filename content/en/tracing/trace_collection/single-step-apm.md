@@ -18,9 +18,9 @@ is_beta: true
 
 ## Enable APM on your services in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM (with the `DD_APM_INSTRUMENTATION_ENABLED` parameter) and to inject the Datadog tracing library into your code for automatic instrumentation, without any additional installation or configuration steps. You need only restart the services to start sending trace data to Datadog.
+If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM (with the `DD_APM_INSTRUMENTATION_ENABLED` parameter) and to inject the Datadog tracing library into your code for automatic instrumentation, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
-For the commands that install the Agent with APM for your Linux host, VM, Docker container, Kubernetes, or Ansible for Linux VMs, see the [Agent Installation page][1]. The following examples show generally how it works on each infrastructure type. 
+The following examples show generally how it works on each infrastructure type. 
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -115,38 +115,7 @@ For example, for a Docker Linux container:
 
 
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
 
-1. Install [Helm][5].
-2. Add the Datadog Helm repository: 
-   ```shell
-   helm repo add datadog https://helm.datadoghq.com
-   ```
-3. Fetch the latest version of newly added charts: 
-   ```shell
-   helm repo update
-   ```
-4. Create an empty `datadog-values.yaml` file, and override the [default values][3], if desired. See [these useful examples][4].
-5. Deploy the Datadog Agent by running one of the following commands:
-   For Helm v3:
-   ```shell
-   helm install <RELEASE_NAME> -f datadog-values.yaml --set datadog.site='<YOUR_DD_SITE>' --set datadog.apm.instrumentation_enabled='true' --set datadog.apiKey=<YOUR_DD_KEY> datadog/datadog
-   ```
-   Or for Helm v1 or v2:
-   ```shell
-   helm install -f datadog-values.yaml --name <RELEASE_NAME> --set datadog.site='<YOUR_DD_SITE>' --set datadog.apm.instrumentation_enabled='true' --set datadog.apiKey=<YOUR_DD_KEY> datadog/datadog
-   ```
-   This installs, configures, and starts the Agent with APM and [Remote Configuration][1] enabled, and sets up library injection for automatic instrumentation.
-6. Start the deployments.
-7. [Explore the performance observability of your services in Datadog][2].
-
-[1]: /agent/remote_config
-[2]: /tracing/service_catalog/
-[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
-[4]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
-[5]: https://v3.helm.sh/docs/intro/install/
-
-{{% /tab %}}
 {{% tab "Ansible for Linux VMs" %}}
 
 1. Add the following instruction to your playbook:
@@ -172,7 +141,7 @@ For example, for a Docker Linux container:
 
 ## Removing Single Step APM instrumentation from your Agent
 
-If you don't want to collect trace data for a particular service (for example, operating system services or AntiVirus), or for all services on a particular host, VM, container, or Kubernetes deployment, you can remove APM instrumentation by running one of the following commands directly on the infrastructure involved.
+If you don't want to collect trace data for a particular service, or for all services on a particular host, VM, or container, you can remove APM instrumentation by running one of the following commands directly on the infrastructure involved.
 
 ### Removing instrumentation for specific services
 
@@ -199,15 +168,7 @@ Running the following commands and restarting the service stops the library from
    ```
 2. Restart the service.
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
 
-1. Run:
-   ```shell
-   tktk
-   ```
-2. Restart the service.
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Removing APM for all services on the infrastructure
@@ -233,15 +194,7 @@ Running the following commands and restarting the infrastructure removes library
    ```
 2. Restart your container.
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
 
-1. Run:
-   ```shell
-   tktk
-   ```
-2. Restart your cluster.
-
-{{% /tab %}}
 {{< /tabs >}}
 
 
