@@ -453,10 +453,10 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
-You can disable this telemetry collection with either of these settings:
+You can disable this telemetry collection using either of these settings:
 
 {{< tabs >}}
-{{% tab "In datadog.yaml" %}}
+{{% tab "datadog.yaml" %}}
 
 ```yaml
 apm_config:
@@ -465,7 +465,7 @@ apm_config:
 ```
 
 {{% /tab %}}
-{{% tab "In Your Environment" %}}
+{{% tab "Environment variables" %}}
 
 ```bash
 export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
