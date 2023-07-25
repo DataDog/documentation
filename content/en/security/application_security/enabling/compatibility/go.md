@@ -39,7 +39,8 @@ The Go Datadog Trace library is open source. View the [GitHub repository][2] for
 The Go Datadog Trace Library has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5]. 
 
 You must be running Datadog Agent v5.21.1+
- 
+
+Starting from tracer version 1.53.0, ASM does not require [CGO][15] anymore.
 
 ## Integrations
 
@@ -94,27 +95,6 @@ You must be running Datadog Agent v5.21.1+
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [sql][14]          | {{< X >}} |   {{< X >}}    |
-
-
-
-### Enabling CGO
-
-Compiling your code with ASM enabled involves [CGO][15] and therefore requires:
-
-- The `gcc` compiler for the target `GOOS` and `GOARCH`.
-- The C library headers.
-- The CGO bindings enabled. This is controlled by the `CGO_ENABLED` environment variable which is enabled by default when compiling natively.
-
-To install the above requirements:
-
-| Operating system     | Console command |
-|----------------------|-----------------|
-| Debian, Ubuntu       | `$ apt install gcc libc6-dev`   |
-| Alpine               | `$ apk add gcc musl-dev`        |
-| RHEL, CentOS, Fedora | `$ yum install gcc glibc-devel` |
-| macOS                | `$ xcode-select --install`      |
-
-**Note**: The Go toolchain disables CGO when cross-compiling and so, CGO needs to be explicitly enabled.
 
 
 [1]: /agent/remote_config/#enabling-remote-configuration
