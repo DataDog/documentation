@@ -160,7 +160,6 @@ Beginning with v1.20.0, the default sample rate is 0 (meaning that no sessions a
 
 val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
  ...
-.setSessionReplaySampleRate([YOUR_SAMPLE_RATE_HERE])
 .build()
 
 {{< /code-block >}}
