@@ -39,6 +39,9 @@ You can generate both of these in [Observability Pipelines][3].
 
 ### Provider-specific requirements
 {{< tabs >}}
+{{% tab "Docker" %}}
+Ensure that your machine is configured to run Docker.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
@@ -68,6 +71,26 @@ There are no provider-specific requirements for RPM-based Linux.
 ## Installing the Observability Pipelines Worker
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+
+The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
+
+1. Download the [sample pipeline configuration file][2].
+
+2. Run the following command to start the Observability Pipelines Worker with Docker:
+    ```
+    docker run -i -e DD_API_KEY=<API_KEY> \
+      -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+      -e DD_SITE=<SITE> \
+      -p 8282:8282 \
+      -v pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      datadog/observability-pipelines-worker run
+    ```
+    `pipeline.yaml` is the sample configuration you downloaded in Step 1.
+  
+[1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
+[2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
@@ -85,7 +108,7 @@ There are no provider-specific requirements for RPM-based Linux.
         -f aws_eks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 1. Download the [Helm chart][1] for Azure AKS.
@@ -104,7 +127,7 @@ There are no provider-specific requirements for RPM-based Linux.
       -f azure_aks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart][1] for Google GKE.
@@ -123,7 +146,7 @@ There are no provider-specific requirements for RPM-based Linux.
       -f google_gke.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/google_gke.yaml
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 1. Run the following commands to set up APT to download through HTTPS:
@@ -136,7 +159,7 @@ There are no provider-specific requirements for RPM-based Linux.
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog-observability-pipelines-worker.list"
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -169,7 +192,7 @@ There are no provider-specific requirements for RPM-based Linux.
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/linux.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
@@ -215,13 +238,16 @@ There are no provider-specific requirements for RPM-based Linux.
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/quickstart/linux.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Load balancing
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+Production-oriented setup is not included in the Docker instructions. Instead, refer to your company's standards for load balancing in containerized environments. If you are testing on your local machine, configuring a load balancer is unnecessary.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
@@ -279,6 +305,9 @@ No built-in support for load-balancing is provided, given the single-machine nat
 Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Make sure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
 {{% /tab %}}
@@ -300,7 +329,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect the Agent and the Worker
+## Connect the Datadog Agent to the Observability Pipelines Worker
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
@@ -314,7 +343,7 @@ vector:
 
 ```
 
-`OPW_HOST` is the IP of the load balancer or machine you set up earlier. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
+`OPW_HOST` is the IP of the load balancer or machine you set up earlier. For single-host Docker-based installs, this is the IP address of the underlying host. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
 
 ```shell
 kubectl get svc opw-observability-pipelines-worker
@@ -326,10 +355,11 @@ At this point, your observability data should be going to the Worker and is avai
 The sample configuration provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format.
 
 ### Processing logs
-The provided logs pipeline does the following:
-
-- **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
+The sample Observability Pipelines configuration does the following:
+- **Collects** logs sent from the Datadog agent the Observability Pipelines Worker.
+- **Tags logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
+- **Corrects the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
+- **Routes** the logs by dual-shipping the data to both Datadog Metrics and Logs.
 
 The following are two important components in the example configuration:
 - `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data.

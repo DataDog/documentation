@@ -1,5 +1,4 @@
 {{ $ctx := . }}
-
 <div class="js-toc-container toc-container">
     <div class="toc">
         <div class="js-toc {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
@@ -28,7 +27,11 @@
                   </ul>
                 </nav>
               {{ else }}
-                {{ .TableOfContents }}
+                {{ if in .RawContent "{{< site-region" }}
+                  {{ partial "table-of-contents/scraped-toc.html" . }}
+                {{ else }}
+                  {{ .TableOfContents }}
+                {{ end }}
               {{ end }}
             {{ end }}
         </div>
