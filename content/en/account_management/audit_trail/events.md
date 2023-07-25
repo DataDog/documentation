@@ -111,11 +111,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### CI Visibility events
 | Name                            | Description of audit event                                   | Query in audit explorer                                               |
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------|
-| [Repository Default Branch][30] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`             |
-| [Test Service Settings][92]     | A user created or modified the settings of a Test Service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings`  |
-| [GitHub Account Settings][93]   | A user has modified the GitHub Account Settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins`                |
+| [Repository default branch][30] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`             |
+| [Test service settings][92]     | A user created or modified the settings of a test service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings`  |
+| [GitHub account settings][93]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins`                |
 | [Exclusion filters][94]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters`      |
-| [Quality Gates Rule][95]        | A user has created, modified or deleted a Quality Gate Rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates_rule`     |
+| [Quality gates rule][95]        | A user has created, modified or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates_rule`     |
 
 ### Cloud Security Platform events
 | Name | Description of audit event                                          | Query in audit explorer                           |
