@@ -3786,7 +3786,7 @@ main:
     parent: npm
     identifier: npm_setup
     weight: 101
-  - name: Network Performance Analytics
+  - name: Network Analytics
     url: network_monitoring/performance/network_performance_analytics/
     parent: npm
     identifier: npm_analytics
