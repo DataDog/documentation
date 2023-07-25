@@ -85,7 +85,6 @@ Prerequisites:
 
 - UnZip
 - Node.js 14 or later
-- Java 17 or later
 
 Configure the following environment variables:
 
@@ -95,27 +94,34 @@ Configure the following environment variables:
 | `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.    | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
-Provide the following inputs:
-
-| Name       | Description                                                                                                                | Required | Default         |
-|------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`  | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`      | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| Name        | Description                                                                                                                | Required | Default         |
+|-------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`   | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`       | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| `cpu_count` | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                      | No       |                 |
 
 Add the following to your CI pipeline:
 
 ```bash
 # Install dependencies
-npm install -g @datadog/datadog-ci
-curl -L http://dtdg.co/latest-static-analyzer > /tmp/ddog-static-analyzer
-unzip /tmp/ddog-static-analyzer -d /tmp
+npm install -g @datadog/datadog-ci 
 
-# Run Static Analysis (requires a pre-installed JVM)
-/tmp/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
+# Download the latest Datadog static analyzer:
+# https://github.com/DataDog/datadog-static-analyzer/releases
+DATADOG_STATIC_ANALYZER_URL=https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip
+curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/datadog-static-analyzer
+unzip /tmp/datadog-static-analyzer
+
+# Run Static Analysis
+/tmp/datadog-static-analyzer -i . -o results.sarif -f sarif --cpus "CPU_COUNT"
 
 # Upload results
-datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
+datadog-ci sarif upload results.sarif --service "SERVICE" --env "ENV"
 ```
+
+<div class="alert alert-info">
+  Add `--enable_performance_statistics` to your static analysis command to get execution time statistics for analyzed files.
+</div>
 
 [101]: /account_management/api-app-keys/#api-keys
 [102]: /account_management/api-app-keys/#application-keys
