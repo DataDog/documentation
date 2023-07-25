@@ -47,7 +47,7 @@ Propagation styles to use when injecting tracing headers. For example, use `DD_T
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
-Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` will look for `B3` headers first, and will only use `Datadog` headers if those are not available.
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
