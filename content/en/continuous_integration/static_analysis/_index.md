@@ -100,6 +100,10 @@ Configure the following environment variables:
 | `env`       | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
 | `cpu_count` | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                      | No       |                 |
 
+<div class="alert alert-info">
+  Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
+</div>
+
 Add the following to your CI pipeline:
 
 ```bash
@@ -118,10 +122,6 @@ unzip /tmp/datadog-static-analyzer
 # Upload results
 datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 ```
-
-<div class="alert alert-info">
-  Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
-</div>
 
 [101]: /account_management/api-app-keys/#api-keys
 [102]: /account_management/api-app-keys/#application-keys
