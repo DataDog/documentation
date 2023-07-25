@@ -173,7 +173,7 @@ The content of the violation is shown in tabs:
 
 In Datadog Static Analysis, there are two types of suggested fixes:
 
-1. **Default Suggested Fix:** For simple violations, fixes are immediately available as part of the business logic of the violation's underlying static analysis rule
+1. **Default Suggested Fix:** For simple violations, fixes are immediately available as part of the business logic of the violation's underlying static analysis rule.
 2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which uses OpenAI's GPT4 to generate a suggested fix on the fly. You have a choice between "Text" and "Unified Text" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
 
 The two types of fixes are distinguished visually in the UI with different labels.
