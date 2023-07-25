@@ -642,7 +642,7 @@ If you are using the Datadog Exporter to also send OpenTelemetry traces to Datad
 
 The host name that OpenTelemetry signals are tagged with is obtained based on the following sources in order, falling back to the next one if the current one is unavailable or invalid:
 
-1. From [resource attributes][22], for example `host.name` (many others are supported).
+1. From [resource attributes][19], for example `host.name` (many others are supported).
 2. The `hostname` field in the exporter configuration.
 3. Cloud provider API.
 4. Kubernetes host name.
@@ -651,7 +651,7 @@ The host name that OpenTelemetry signals are tagged with is obtained based on th
 
 ## Deployment-based limitations
 
-The OpenTelemetry Collector has [two primary deployment methods][23]: Agent and Gateway. Depending on your deployment method, some components are not available.
+The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and Gateway. Depending on your deployment method, some components are not available.
 
 | Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
 | --- | --- | --- | --- | --- |
@@ -662,17 +662,17 @@ The OpenTelemetry Collector has [two primary deployment methods][23]: Agent and 
 
 Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
 
-1. Install the [OpenTelemetry integration][24].
+1. Install the [OpenTelemetry integration][21].
 2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
 
    {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
-The **Host Metrics** dashboard is for data collected from the [host metrics receiver][25]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][26] you choose to enable.
+The **Host Metrics** dashboard is for data collected from the [host metrics receiver][22]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][23] you choose to enable.
 
 
 ### Containers overview dashboard
 
-The [Docker Stats][27] receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts.
+The [Docker Stats][24] receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts.
 
 Use the following configuration to enable additional attributes on the Docker Stats receiver that populates the containers overview dashboard:
 
@@ -688,6 +688,10 @@ Use the following configuration to enable additional attributes on the Docker St
       container.memory.rss:
         enabled: true
       container.blockio.io_serviced_recursive:
+        enabled: true
+      container.uptime:
+        enabled: true
+      container.memory.hierarchical_memory_limit:
         enabled: true
 ```
 
@@ -715,12 +719,9 @@ The minimum required OpenTelemetry Collector version that supports this feature 
 [16]: https://opentelemetry.io/docs/collector/deployment/#agent
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
 [18]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
-[19]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
-[20]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L53-L57
-[21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter/examples/k8s-chart
-[22]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
-[23]: https://opentelemetry.io/docs/collector/deployment/
-[24]: https://app.datadoghq.com/integrations/otel
-[25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[26]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[27]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
+[19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
+[20]: https://opentelemetry.io/docs/collector/deployment/
+[21]: https://app.datadoghq.com/integrations/otel
+[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
