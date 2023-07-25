@@ -107,7 +107,10 @@ With the `allow all` setting enabled, all text is revealed.
 [ add android content]
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
+            val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+            .setPrivacy(SessionReplayPrivacy.ALLOW)
+            .build()
+        SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
 {{% /tab %}}
