@@ -52,7 +52,7 @@ The order in which security issues are prioritized is based on the following cri
 
 - Higher severity issues are listed first
 - Whether an issue has a threat attached to it
-- Number of related risks (publicly accessible, production environment, misconfiguration, vulnerability).
+- Number of related risks (publicly accessible, production environment, misconfiguration, vulnerability)
 - Number of resources impacted
 - Discovered date (newer issues are listed first)
 
