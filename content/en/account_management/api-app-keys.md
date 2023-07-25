@@ -40,7 +40,7 @@ For security reasons, API keys cannot be used to send data from a browser, mobil
 
 Client tokens are unique to your organization. To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
 
-**Note:** When a user who created a client token is deactivated, the client token remains active.
+**Note**: When a user who created a client token is deactivated, the client token remains active.
 
 ## Add an API key or client token
 

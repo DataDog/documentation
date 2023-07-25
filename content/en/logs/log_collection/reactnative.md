@@ -154,7 +154,7 @@ config.site = 'AP1';
 {{< /site-region >}}
 
    
-2. Import the React Native logger
+2. Import the React Native logger:
 
    ```javascript
    import { DdLogs } from '@datadog/mobile-react-native';
