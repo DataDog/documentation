@@ -45,7 +45,8 @@
 
           {{/*  concatenating the attr info  */}}
           {{ $pad := newScratch }}
-          {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replace .description ";" "")) }}
+          {{/*  {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replace .description ";" "")) }}  */}}
+          {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replaceRE "(`|')" "" .description )) }}
           {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
 
           <tr 
