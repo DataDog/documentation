@@ -41,7 +41,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 5. From the `redirect_uri`, make a POST request to the [Datadog token endpoint][10] that includes the authorization code from Step 4, the `code_verifier` from Step 3, your OAuth client ID, and client secret.
 
    - To build the URL for this post request, use the `site` query parameter that is provided on the redirect to your `redirect_uri`. 
-   - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as their subdomain if applicable. It is required to construct the URL for this POST request to the token endpoint: `https://api.<site>/oauth2/v1/token?...`.
+   - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as their subdomain if applicable. It is required to construct the URL for this POST request to the token endpoint: `https://<site>/oauth2/v1/token?...`.
 
 6. Upon success, you receive your `access_token` and `refresh_token` in the response body. Your application should display a confirmation page with the following message: `You may now close this tab`.
 
