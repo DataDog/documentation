@@ -77,11 +77,11 @@ Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you 
 Inferred services and the new Service Page layout are in private beta. To request access, complete the form.
 {{< /callout >}}
 
-Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
+Use the Dependency Map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
 
-For more information, see [New Service page and Inferred Services][20].
+For more information, see [New Service page and inferred services][20].
 
-{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section" style="width:100%;">}}
+{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section of the APM Services page" style="width:100%;">}}
 
 ## Out-of-the-box graphs
 
