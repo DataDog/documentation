@@ -12,7 +12,7 @@ further_reading:
 
 ### Requirements
 * The full Step Function execution length must be less than 15 minutes for full traces.
-* [Associated Lambda tracing][1] is supported for Node.JS and Python runtimes.
+* [Linked Lambda traces][1] are supported for Node.JS and Python runtimes.
 
 ### Setup
 
@@ -21,7 +21,7 @@ further_reading:
 
 For developers using [Serverless Framework][4] to deploy their serverless applications, use the Datadog Serverless Framework Plugin.
 
-1. If you have not already, install the [Datadog Serverless Framework Plugin][1]:
+1. If you have not already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
 
     ```shell
     serverless plugin install --name serverless-plugin-datadog
@@ -32,6 +32,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
    Take note of your Forwarder's ARN.
 
 3. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
+   {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:80%;" >}}
 
 4. Add the following to your `serverless.yml`:
 
@@ -48,7 +49,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
     - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder, as noted previously.
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
-5. Enable tracing on your Step Functions by setting the environment variable `DD_TRACE_ENABLED` to `true`.
+
 6. For Node.JS and Python runtimes, you can go also [link your step functions with Lambda traces](#associated-lambda-tracing) with associated Lambda tracing.
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
