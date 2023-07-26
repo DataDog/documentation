@@ -156,4 +156,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
-[27]: https://app.datadoghq.com/apis/catalog
+[27]: /tracing/api_catalog/
