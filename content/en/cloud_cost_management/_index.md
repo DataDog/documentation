@@ -179,6 +179,15 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+
+## Billing conductor
+Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
+
+To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][1]. Ensure the CUR meets [Datadog's requirements][2].
+Once the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
+
+[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
+[2]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -186,7 +195,10 @@ The following out-of-the-box tags are also available for filtering and grouping 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
 {{% site-region region="us3" %}}
-**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+**Notes**: 
+- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+- Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
+- Pay-as-you-go accounts are not supported.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -207,7 +219,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
   
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. 
+5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. Export names must be unique.
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
@@ -218,8 +230,8 @@ Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Da
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
-4. Select the Access Control (IAM) tab.
-5. Click **Add**.  
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
@@ -232,11 +244,11 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 1. Navigate to your [subscriptions][4] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
-3. Click **Add**.
+3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
-5. Assign these permissions to the subscription.
+5. Assign these permissions to the app registration.
 
-This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
+This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 ### Cost types
 

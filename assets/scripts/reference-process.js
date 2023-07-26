@@ -34,16 +34,16 @@ $RefParser.dereference(fileData)
       const allData = {"sources":[], "transforms":[], "sinks": []};
 
       // add to global data our processed components
-      buildSection("vector::sources::Sources", deref, allData);
-      buildSection("vector::transforms::Transforms", deref, allData);
-      buildSection("vector::sinks::Sinks", deref, allData);
+      buildSection("vector::sources::Sources", deref, allData, ["file", "socket", "exec"]);
+      buildSection("vector::transforms::Transforms", deref, allData, ["lua"]);
+      buildSection("vector::sinks::Sinks", deref, allData, ["file", "websocket"]);
 
       // write it out to the file
       fs.writeFileSync("./data/reference/schema.tables.json", safeJsonStringify(allData, null, 2), 'utf8');
     });
 
 
-function buildSection(specStr, deref, allData) {
+function buildSection(specStr, deref, allData, componentsToSkip) {
   const skiplabels = ["Unit Test", "Unit Test Stream"];
   const specStrSplit = specStr.split('::');
   const name = specStrSplit[specStrSplit.length - 1].toLowerCase();
@@ -51,30 +51,32 @@ function buildSection(specStr, deref, allData) {
   const dataEntries = Object.entries(deref['definitions'][specStr]["oneOf"]);
   // const entryLen = dataEntries.length;
   dataEntries.forEach(([key, value]) => {
-      const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
-      const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
-      let entryData = {
-        "description1": value.description || "",
-        "description2": value.allOf[0].description || "",
-        "title": value.allOf[0].title || "",
-        "metadata": value._metadata || {},
-        "simple": yaml.dump(simpleExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
-        "advanced": yaml.dump(advancedExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
-        "html": {}
-      };
-      let lastChar = entryData.description1.slice(-1);
-      if (lastChar === '.') {
-        entryData.description1 = entryData.description1.slice(0, -1);
-      }
-      table = null;
-      try {
-        table = schemaTable("request", value.allOf[0], true);
-      } catch (e) {
-        console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
-      }
-      entryData["html"] = table;
-      if(!skiplabels.includes(entryData["metadata"]["docs::label"]) && !skiplabels.includes(entryData["metadata"]["docs::human_name"])) {
-        allData[name].push(entryData);
+      if(!componentsToSkip.includes(value._metadata.logical_name.toLowerCase())) {
+        const Sx = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[0] : value.allOf[0];
+        const Sx2 = ("allOf" in value.allOf[0]) ? value.allOf[0].allOf[1] : value.allOf[0];
+        let entryData = {
+          "description1": value.description || "",
+          "description2": value.allOf[0].description || "",
+          "title": value.allOf[0].title || "",
+          "metadata": value._metadata || {},
+          "simple": yaml.dump(simpleExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
+          "advanced": yaml.dump(advancedExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
+          "html": {}
+        };
+        let lastChar = entryData.description1.slice(-1);
+        if (lastChar === '.') {
+          entryData.description1 = entryData.description1.slice(0, -1);
+        }
+        table = null;
+        try {
+          table = schemaTable("request", value.allOf[0], true);
+        } catch (e) {
+          console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
+        }
+        entryData["html"] = table;
+        if(!skiplabels.includes(entryData["metadata"]["docs::label"]) && !skiplabels.includes(entryData["metadata"]["docs::human_name"])) {
+          allData[name].push(entryData);
+        }
       }
   });
 }

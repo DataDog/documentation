@@ -35,12 +35,13 @@ Cloud Workload Security (CWS) monitors file, network, and process activity acros
 
 * Datadog Agent 7.44 or later.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
-  * Ubuntu 18.04 or later
+  * Ubuntu LTS (18.04, 20.04, and 22.04)
   * Debian 10 or later
-  * Amazon Linux 2
-  * Fedora 26 or later
-  * SUSE 15 or later
-  * CentOS/RHEL 7.6 or later
+  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
+  * SUSE Linux Enterprise Server 12 and 15
+  * Red Hat Enterprise Linux 7, 8, and 9
+  * Oracle Linux 7, 8, and 9
+  * CentOS 7
   * Custom kernel builds are not supported.
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
@@ -85,7 +86,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
 4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
 {{% /tab %}}
 
@@ -99,6 +100,8 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
     # values.yaml file
     spec:
       features:
+        remoteConfiguration:
+          enabled: true
         cws:
           enabled: true
     ```
@@ -214,7 +217,7 @@ runtime_security_config:
     enabled: true
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}

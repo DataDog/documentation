@@ -415,7 +415,7 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [2]: /tracing/trace_collection/dd_libraries/python/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/python/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://ddtrace.readthedocs.io/en/stable/versioning.html
 [8]: https://app.datadoghq.com/event/explorer

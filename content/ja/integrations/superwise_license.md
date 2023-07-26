@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: superwise-license
 app_uuid: f15082a6-d0ed-4f6f-a315-f7cbcaae6823
 assets: {}

@@ -241,7 +241,7 @@ class Integrations:
                 self.process_service_checks(file_name)
 
             elif file_name.endswith(".md"):
-                self.process_integration_readme(file_name, marketplace)
+                self.process_integration_readme(file_name, marketplace, content)
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
@@ -641,7 +641,7 @@ class Integrations:
 
         return collision_name
 
-    def process_integration_readme(self, file_name, marketplace=False):
+    def process_integration_readme(self, file_name, marketplace=False, content=None):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
@@ -653,6 +653,8 @@ class Integrations:
         7. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
+        if content is None:
+            content = {}
         no_integration_issue = True
         tab_logic = False
         metrics = glob.glob(
@@ -826,11 +828,11 @@ class Integrations:
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
                         new_file_name, collision_name))
                     result = self.add_integration_frontmatter(
-                        collision_name, result, dependencies, integration_id, integration_version, manifest_json
+                        collision_name, result, dependencies, integration_id, integration_version, manifest_json, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
                 else:
                     result = self.add_integration_frontmatter(
-                        new_file_name, result, dependencies, integration_id, integration_version
+                        new_file_name, result, dependencies, integration_id, integration_version, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
 
                 with open(out_name, "w", ) as out:
@@ -846,13 +848,13 @@ class Integrations:
                         print(e)
                         print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                         sys.exit(1)
-            else:
-                if exists(out_name):
-                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
-                    remove(out_name)
+            # else:
+            #     if exists(out_name):
+            #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+            #         remove(out_name)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None
+        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -860,6 +862,8 @@ class Integrations:
         :param content: string of markdown content
         :return: formatted string
         """
+        if extra_fm is None:
+            extra_fm = {}
         fm = {}
         template = "---\n{front_matter}\n---\n\n{content}\n"
         if file_name not in self.initial_integration_files:
@@ -903,6 +907,7 @@ class Integrations:
                             # add the alias from the list
                             item['aliases'].remove(single_alias)
                             print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
+                item.update(extra_fm)
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
@@ -910,7 +915,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content

@@ -3,6 +3,9 @@ further_reading:
 - link: https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show
   tag: ドキュメント
   text: ウィジェットを追加し表示内容を調整
+- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
+  tag: ブログ
+  text: パワーパックでダッシュボードウィジェットを再利用可能なグループに保存する
 - link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
   tag: ガイド
   text: 適切なダッシュボードを維持するためのベストプラクティス
@@ -91,5 +94,7 @@ title: パワーパックでグラフの専門知識を拡大する
 ### 情報を発信する
 
 パワーパックを作成したら、そのことを組織に知らせましょう。パワーパックについて伝えることは、パワーパックの存在を知らせると同時に、質問を受けるチャンネルにもなります。メールやメッセージングプラットフォームなどのコミュニケーションチャンネルを通じて、パワーパックの名前を組織で共有し、そのパワーパックが誰を対象としているかを明記し、それが表示される場所を記述してください。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

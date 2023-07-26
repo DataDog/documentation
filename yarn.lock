@@ -1706,48 +1706,48 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@datadog/browser-core@npm:4.29.1":
-  version: 4.29.1
-  resolution: "@datadog/browser-core@npm:4.29.1"
-  checksum: 8bc45cf4151cb8c07b09de8c670c0484c478c23d9151f18e652f32d19c69bbd889f861db3742dc605ec0c601bc79483cb346ab6bb527b3c237827e5c5bef0475
+"@datadog/browser-core@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@datadog/browser-core@npm:4.44.0"
+  checksum: 3ea5e011325adeb34eb63c3597aa309044dfdd7164dd6e88f2f2bcd4648cbc240bac94c806a5972cbcc4447a5ae06153123a4be6a83be516ba2203d0b5e6b80c
   languageName: node
   linkType: hard
 
-"@datadog/browser-logs@npm:^4.29.1":
-  version: 4.29.1
-  resolution: "@datadog/browser-logs@npm:4.29.1"
+"@datadog/browser-logs@npm:^4.44.0":
+  version: 4.44.0
+  resolution: "@datadog/browser-logs@npm:4.44.0"
   dependencies:
-    "@datadog/browser-core": 4.29.1
+    "@datadog/browser-core": 4.44.0
   peerDependencies:
-    "@datadog/browser-rum": 4.29.1
+    "@datadog/browser-rum": 4.44.0
   peerDependenciesMeta:
     "@datadog/browser-rum":
       optional: true
-  checksum: 45e2cde795710d8d537e72eda166c5ed9b7c4ef54e842326db79d98a9fb0c72443d25ef7992423625d866f84c8a82929dce2fd27a128cb022977a78b73693999
+  checksum: f8ba22f888f0569ab98c4ec17469e27304759ce463d7a8fe6df35f8e15c134cc7ed1bd903b07310c090134631e77f0cc85b79c60da8b99b3a7f0e6776d15e3d6
   languageName: node
   linkType: hard
 
-"@datadog/browser-rum-core@npm:4.29.1":
-  version: 4.29.1
-  resolution: "@datadog/browser-rum-core@npm:4.29.1"
+"@datadog/browser-rum-core@npm:4.44.0":
+  version: 4.44.0
+  resolution: "@datadog/browser-rum-core@npm:4.44.0"
   dependencies:
-    "@datadog/browser-core": 4.29.1
-  checksum: 8870d4bc24d6a1d7a3d86cb64c2edabde18c0c478df0a221b33d4f7655e6b0f6ec79a40969982c95b5fbe83cd39baa133ea8f8475c65e9c82254031aefddb8a8
+    "@datadog/browser-core": 4.44.0
+  checksum: ade4e1fa9988d86bd97138ebe8a53877a18cdac204b5320d73086ae9ac155533b146d32aa8e3efe5f92375e9792be348bff4fc52d5a2a04d42af1d6e89cd9ba3
   languageName: node
   linkType: hard
 
-"@datadog/browser-rum@npm:^4.29.1":
-  version: 4.29.1
-  resolution: "@datadog/browser-rum@npm:4.29.1"
+"@datadog/browser-rum@npm:^4.44.0":
+  version: 4.44.0
+  resolution: "@datadog/browser-rum@npm:4.44.0"
   dependencies:
-    "@datadog/browser-core": 4.29.1
-    "@datadog/browser-rum-core": 4.29.1
+    "@datadog/browser-core": 4.44.0
+    "@datadog/browser-rum-core": 4.44.0
   peerDependencies:
-    "@datadog/browser-logs": 4.29.1
+    "@datadog/browser-logs": 4.44.0
   peerDependenciesMeta:
     "@datadog/browser-logs":
       optional: true
-  checksum: 6c6433f130ec9b503a2b25afb05d1374e7e5e85f798808015622eeb6139dedb97a6c045a90cc70401ad3de8d442a54484166f4ce7ae03d94c6ad937f65154608
+  checksum: 1e3fae4ed24cb1fbdf506d1eb218150453fe39f0303142c0616f3b2604503f4eadf5965b106b6e0d437088c096bbe19331c1d7eb9109e2763b0dcf3025506ede
   languageName: node
   linkType: hard
 
@@ -4425,8 +4425,8 @@ __metadata:
     "@babel/plugin-proposal-object-rest-spread": ^7.18.6
     "@babel/polyfill": ^7.4.4
     "@babel/preset-env": ^7.18.6
-    "@datadog/browser-logs": ^4.29.1
-    "@datadog/browser-rum": ^4.29.1
+    "@datadog/browser-logs": ^4.44.0
+    "@datadog/browser-rum": ^4.44.0
     "@datadog/datadog-ci": ^1.2.0
     "@popperjs/core": ^2.11
     a11y: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz"
@@ -4464,7 +4464,6 @@ __metadata:
     minimist: ^1.2.5
     mixitup: ^3.3.1
     mousetrap: ^1.6.5
-    pa11y: ^5.3.0
     picturefill: 3.0.2
     popper.js: 1.16.1
     postcss-import: ^12.0.1
@@ -5675,7 +5674,7 @@ __metadata:
 
 "fsevents@patch:fsevents@^2.1.2#~builtin<compat/fsevents>":
   version: 2.2.1
-  resolution: "fsevents@patch:fsevents@npm%3A2.2.1#~builtin<compat/fsevents>::version=2.2.1&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A2.2.1#~builtin<compat/fsevents>::version=2.2.1&hash=df0bf1"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -5684,7 +5683,7 @@ __metadata:
 
 "fsevents@patch:fsevents@~2.1.2#~builtin<compat/fsevents>":
   version: 2.1.3
-  resolution: "fsevents@patch:fsevents@npm%3A2.1.3#~builtin<compat/fsevents>::version=2.1.3&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A2.1.3#~builtin<compat/fsevents>::version=2.1.3&hash=31d12a"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -8943,7 +8942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pa11y@npm:^5.2.0, pa11y@npm:^5.3.0":
+"pa11y@npm:^5.2.0":
   version: 5.3.0
   resolution: "pa11y@npm:5.3.0"
   dependencies:
@@ -10275,14 +10274,14 @@ __metadata:
 
 "resolve@patch:resolve@1.1.7#~builtin<compat/resolve>":
   version: 1.1.7
-  resolution: "resolve@patch:resolve@npm%3A1.1.7#~builtin<compat/resolve>::version=1.1.7&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.1.7#~builtin<compat/resolve>::version=1.1.7&hash=3bafbf"
   checksum: e9dbca78600ae56835c43a09f1276876c883e4b4bbd43e2683fa140671519d2bdebeb1c1576ca87c8c508ae2987b3ec481645ac5d3054b0f23254cfc1ce49942
   languageName: node
   linkType: hard
 
 "resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.13.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.18.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.3.2#~builtin<compat/resolve>":
   version: 1.19.0
-  resolution: "resolve@patch:resolve@npm%3A1.19.0#~builtin<compat/resolve>::version=1.19.0&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.19.0#~builtin<compat/resolve>::version=1.19.0&hash=c3c19d"
   dependencies:
     is-core-module: ^2.1.0
     path-parse: ^1.0.6
@@ -10292,7 +10291,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7

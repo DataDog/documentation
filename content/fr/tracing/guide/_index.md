@@ -5,8 +5,6 @@ aliases:
 disable_toc: true
 kind: guide
 private: true
-aliases:
-  - /fr/tracing/getting_further/
 cascade:
     algolia:
         rank: 20

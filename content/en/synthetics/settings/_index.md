@@ -14,6 +14,12 @@ further_reading:
 - link: "/synthetics/multistep/"
   tag: "Documentation"
   text: "Configure a Multistep API Test"
+- link: "/synthetics/browser_tests/"
+  tag: "Documentation"
+  text: "Configure a Browser Test"
+- link: "/mobile_app_testing/mobile_app_tests"
+  tag: "Documentation"
+  text: "Configure a Mobile Test"
 - link: "/synthetics/private_locations/"
   tag: "Documentation"
   text: "Create a Private Location"
@@ -34,6 +40,7 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 * [Default Settings](#default-settings)
 * [Integration Settings](#integration-settings)
 * [Continuous Testing Settings][2]
+* [Mobile Applications Settings][18]
 
 ## Private locations
 
@@ -41,7 +48,7 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 ## Global variables
 
-Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4] and [multistep API tests][5] as well as [browser tests][6] of your test suite. 
+Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4], [multistep API tests][5], [browser tests][6], and [mobile app tests][17] of your test suite. 
 
 To create a global variable, navigate to the **Global Variables** tab on the [**Synthetic Monitoring & Continuous Testing** > **Settings** page][7] and click **+ New Global Variable**.
 
@@ -133,7 +140,7 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
 
 
-For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test configuration][10], and [Steps documentation][16].
+For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test][10], [Mobile app test][19], and [Browser Test Steps documentation][16].
 
 ### Permissions
 
@@ -145,7 +152,7 @@ Access restriction is available for customers using [custom roles][11] on their 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
@@ -220,8 +227,11 @@ If you are using the [custom role feature][12], add your user to any custom role
 [9]: /synthetics/multistep?tab=requestoptions#use-variables
 [10]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /account_management/rbac/?tab=datadogapplication#custom-role
+[12]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
 [16]: /synthetics/browser_tests/actions/#use-variables
+[17]: /mobile_app_testing/mobile_app_tests/
+[18]: /mobile_app_testing/settings/
+[19]: /mobile_app_testing/mobile_app_tests/#use-global-variables

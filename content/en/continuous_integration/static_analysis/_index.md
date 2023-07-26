@@ -89,18 +89,18 @@ Prerequisites:
 
 Configure the following environment variables:
 
-| Name         | Description                                                                                                                | Required |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.              | Yes     |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.      | Yes     |
+| Name         | Description                                                                                                                | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.            | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.    | Yes      |                 |
+| `DD_SITE`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
 Provide the following inputs:
 
-| Name         | Description                                                                                                                | Required | Default         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service` | The name of the service to tag the results with.                                                                                | Yes     |                 |
-| `env`     | The environment to tag the results with. `ci` is a helpful value for this input.                                                                           | No    | `none`          |
-| `site`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.                                                                                 | No    | {{< region-param key="dd_site" code="true" >}}  |
+| Name       | Description                                                                                                                | Required | Default         |
+|------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`  | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`      | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
 
 Add the following to your CI pipeline:
 
@@ -114,7 +114,7 @@ unzip /tmp/ddog-static-analyzer -d /tmp
 /tmp/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV" --site "$DD_SITE"
+datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
 ```
 
 [101]: /account_management/api-app-keys/#api-keys
@@ -126,22 +126,27 @@ datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV" --
 
 ### Upload third-party static analysis results to Datadog
 
+<div class="alert alert-info">
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+</div>
+
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. 
 
 To upload a SARIF report:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Install the `datadog-ci` utility:
+2. Optional: Set a [`DD_SITE` variable][103] (default: `datadoghq.com`).
+3. Install the `datadog-ci` utility:
    
    ```bash
    npm install -g @datadog/datadog-ci
    ```
 
-3. Run the third-party static analysis tool on your code and output the results in the SARIF format.
-4. Upload the results to Datadog:
+4. Run the third-party static analysis tool on your code and output the results in the SARIF format.
+5. Upload the results to Datadog:
 
    ```bash
-   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env> --site <dd-site>
+   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
    ```
 
 ## Run Static Analysis in a CI pipeline
@@ -154,13 +159,30 @@ After you configure your CI pipelines to run the Datadog Static Analyzer, violat
 
 Each violation is associated with a specific commit and branch from your repository on which the CI pipeline ran. The rows represent every violation per commit. 
 
-Click on a violation to open a side panel that contains information about the scope of the violation and where it originated. 
+Click on a violation to open a side panel that contains information about the scope of the violation and where it originated.
+{{< img src="ci/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
 
 The content of the violation is shown in tabs:
 
 * Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][3].
-* Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
-* Event: JSON metadata regarding the the Static Analysis violation event.
+* Fixes: One or more code fixes that can resolve the violation, which you can copy and paste.
+* Event: JSON metadata regarding the Static Analysis violation event.
+
+### Using suggested fixes
+{{< img src="ci/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
+
+In Datadog Static Analysis, there are two types of suggested fixes:
+
+1. **Default Suggested Fix:** For simple violations, fixes are immediately available as part of the business logic of the violation's underlying static analysis rule.
+2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT4 to generate a suggested fix on the fly. You have a choice between "Text" and "Unified Text" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
+
+The two types of fixes are distinguished visually in the UI with different labels.
+
+Default Suggested Fixes:
+{{< img src="ci/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:80%;">}}
+
+AI Suggested Fixes:
+{{< img src="ci/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:80%;">}}
 
 ## Further Reading
 
@@ -171,3 +193,4 @@ The content of the violation is shown in tabs:
 [3]: /integrations/github/
 [4]: /account_management/api-app-keys/
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
+[103]: /getting_started/site/

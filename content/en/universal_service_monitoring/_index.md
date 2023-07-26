@@ -37,7 +37,7 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 Required Agent version
 : Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40.
 
-Your containerized service must be running on one of the following supported platforms
+Your service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater
 
@@ -56,6 +56,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 - If on Linux:
     - Your service is running in a container.
+    - For non-containerized services see the [instructions here](#support-for-non-containerized-services).
 - If on Windows and using IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -773,6 +774,35 @@ After enabling Universal Service Monitoring, you can:
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
+### Support for non-containerized services
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in *beta* to monitor services running bare-metal on Linux virtual machines.
+</div>
+
+Requires agent of version 7.42+
+
+{{< tabs >}}
+{{% tab "Configuration File" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```conf
+DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Path exclusion and replacement
 

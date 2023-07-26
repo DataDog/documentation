@@ -10,7 +10,7 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#multi-line-aggregation
   tag: ドキュメント
   text: 複数行のログの集約
-- link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
   tag: ドキュメント
   text: ワイルドカードを使用したディレクトリの追跡
 - link: agent/logs/advanced_log_collection/#global-processing-rules

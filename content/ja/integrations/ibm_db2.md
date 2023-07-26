@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 1.11.2
+integration_version: 1.11.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -71,7 +71,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれています。
 
@@ -85,7 +85,7 @@ IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれていま�
 sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
 ```
 
-注: Python 2 が動作する Agent をお使いの場合は、代わりに `ibm_db==3.0.1` を使用してください。
+注: Python 2 が動作する Agent をお使いの場合は、`ibm_db=3.1.0` の代わりに `ibm_db==3.0.1` を使用してください。
 
 ##### Windows
 
@@ -237,27 +237,35 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### オフラインで `ibm_db` クライアントライブラリをインストールする
 
-エアギャップ環境、または制限されたネットワーク上で `pip install ibm_db==3.0.1` を実行できない場合、以下の方法で `ibm_db` をインストールすることが可能です。
+エアギャップ環境、または制限されたネットワーク上で `pip install ibm_db==x.y.z` (`x.y.z` はバージョン番号) を実行できない場合、以下の方法で `ibm_db` をインストールすることが可能です。
 
-**注**: 以下の例は Ubuntu マシンを想定していますが、ほとんどのオペレーティングシステムで同様の手順が可能です。
 
-1. ネットワークに接続できるマシンで、[ソース tarball ][6] をダウンロードします。
-
-   ```
-   curl -Lo ibm_db.tar.gz https://github.com/ibmdb/python-ibmdb/archive/refs/tags/v3.1.0.tar.gz
-   ```
-
-1. 制限されたホストにファイルを転送し、アーカイブを展開します。
+1. ネットワークにアクセスできるマシンで、[`ibm_db` ライブラリ][6]と [ODBC と CLI][7] のソース tarball をダウンロードします。ODBC と CLI は `ibm_db` ライブラリが必要とするため、別途ダウンロードする必要がありますが、`pip` 経由ではダウンロードできません。以下のスクリプトは `ibm_db==x.y.z`  (`x.y.z` はバージョン番号) のアーカイブファイルを Linux マシンにインストールします。
 
    ```
-   tar xvf ibm_db.tar.gz
+   curl -Lo ibm_db.tar.gz https://github.com/ibmdb/python-ibmdb/archive/refs/tags/vx.y.z.tar.gz
+
+   curl -Lo linuxx64_odbc_cli.tar.gz https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/linuxx64_odbc_cli.tar.gz
    ```
 
-1. Agent に組み込まれた [`pip`][7] を使用して、以下のコマンドを実行します。
+1. 制限されたホストに 2 つのファイルを転送し、アーカイブを展開します。
 
    ```
-   /opt/datadog-agent/embedded/bin/pip install --no-index --no-deps --no-build-isolation  python-ibmdb- 
-   3.1.0/IBM_DB/ibm_db/
+   tar -xvf ibm_db.tar.gz
+
+   tar -xvf linuxx64_odbc_cli.tar.gz
+   ```
+
+1. 環境変数 `IBM_DB_HOME` に `/clidriver` が `linuxx64_odbc_cli.tar.gz` から展開された場所を設定します。これにより、`ibm_db` ライブラリが新しいバージョンの ODBC と CLI をインストールするのを防ぐことができます (これは失敗するため)。
+
+   ```
+   export IBM_DB_HOME=/path/to/clidriver
+   ```
+
+1. Agent に組み込まれた [`pip`][8] を使用して、`ibm_db` ライブラリをローカルにインストールします。このライブラリのファイルは `ibm_db.tar.gz` から展開された `python-ibmdb-x.y.z` にコンテナとして含まれています。
+
+   ```
+   /opt/datadog-agent/embedded/bin/pip install --no-index --no-deps --no-build-isolation  /path/to/python-ibmdb-x.y.z/IBM_DB/ibm_db/
    ```
 
 以下のエラーが発生した場合
@@ -279,19 +287,15 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
       [end of output]
 ```
 
-`gcc` のインストールが必要な場合があります。これは以下で行います。
+`gcc` をインストールする必要があるかもしれません。
 
-```
-apt-get install gcc
-```
-
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM DB2 の監視][9]
+- [Datadog を使用した IBM DB2 の監視][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
@@ -300,6 +304,7 @@ apt-get install gcc
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://pypi.org/project/ibm-db/#files
-[7]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
+[7]: https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/
+[8]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitor-db2-with-datadog

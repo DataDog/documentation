@@ -60,7 +60,7 @@ nav_sections:
       icon: log
       link: logs/
       title: ログ管理
-    - desc: アプリケーションとインフラストラクチャーの脅威と構成ミスを検出する
+    - desc: アプリケーションとインフラストラクチャーの脅威、脆弱性、構成ミスを検出する
       icon: security-platform
       link: security/
       title: セキュリティ
@@ -104,14 +104,22 @@ nav_sections:
       icon: database-2
       link: database_monitoring/
       title: データベース モニタリング
+    - desc: データストリーミングパイプラインのパフォーマンスを追跡、改善
+      icon: datastreams-monitoring
+      link: data_streams/
+      title: Data Streams Monitoring
     - desc: テレメトリーパイプラインの管理・監視
       icon: パイプライン
       link: observability_pipelines/
-      title: Observability Pipelines（観測データの制御）
+      title: 観測可能性パイプライン
     - desc: コードを変更することなく、サービスを発見、マッピング、監視する
       icon: usm
       link: universal_service_monitoring/
       title: ユニバーサルサービスモニタリング
+    - desc: 技術スタック全体のプロセスの自動化とオーケストレーション
+      icon: ワークフロー
+      link: ワークフロー
+      title: ワークフローの自動化
 - nav_section:
   - name: コンフィギュレーション
   - navtiles:

@@ -135,6 +135,6 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aix
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 [3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

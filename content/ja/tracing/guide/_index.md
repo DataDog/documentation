@@ -5,7 +5,7 @@ aliases:
 cascade:
   algolia:
     category: ガイド
-    rank: 20
+    rank: 50
     subcategory: APM ガイド
 disable_toc: true
 kind: ガイド
@@ -41,6 +41,7 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> AWS ECS with EC2 で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> AWS ECS with Fargate で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Admission Controller で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホストの Go アプリケーションでトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Go アプリケーションとコンテナ内の Datadog Agent でトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> EC2 で AWS ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
