@@ -33,7 +33,7 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 ## Requirements
 
-- Windows operating system version 10 or higher (64-bit OS is highly recommended for optimal performance)
+- Windows operating system version 10 or higher
 - Visual Studio 2022 Community, Professional or Enterprise edition (64-bit)
 - .NET Framework 4.8 or higher
 - **Datadog Account** The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
