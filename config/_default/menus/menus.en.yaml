@@ -1244,6 +1244,12 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 4
+  # will uncomment this when the zoom integration is publicly released
+  # - name: Zoom Integration
+  #   url: service_management/incident_management/zoom_integration
+  #   parent: incidents
+  #   identifier: zoom_integration
+  #   weight: 5
   - name: Mobile Application
     url: service_management/mobile/
     identifier: mobile
