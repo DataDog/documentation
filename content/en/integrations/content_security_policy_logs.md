@@ -188,7 +188,11 @@ Alternatively, starting from [version TODO][8], you can self-host the Datadog Br
 
 * or install the [`@datadog/browser-worker` NPM package][9] and use your build tool to include it in the built assets (see documentation for [Webpack 4][10], [Webpack 5][11], [Vite][12], [Rollup][13]).
 
-Keep in mind that you need to host it on the *same origin* as your Web application. It cannot be hosted on a separate domain (ex: no third party CDN host) or a different scheme. This is a browser restriction (see [MDN documentation][14]: "This script must obey the same-origin policy").
+Requirements:
+
+* Make sure the Worker major version matches the Browser SDK version you are using.
+
+* Host this file on the *same origin* as your Web application. It cannot be hosted on a separate domain (ex: no third party CDN host) or a different scheme. This is a browser restriction (see [MDN documentation][14]: "This script must obey the same-origin policy").
 
 ### CDN bundle URL
 
