@@ -36,20 +36,19 @@ if (copyButtons.length) {
 // EVENT FUNCTION
 function copyCode (event, btn){
     const codeSnippetElement = event.target
-    .closest('.code-snippet')
-    .querySelector('.chroma');
+        .closest('.code-snippet')
+        .querySelector('.chroma');
 
-    // Create a range object
+    const windowSelection = window.getSelection();
     const range = document.createRange();
-    // Select the node
-    range.selectNode(codeSnippetElement);
-    // create system clipboard object
-    const Clipboard = navigator.clipboard
-    // write code snippet text
-    Clipboard.writeText(codeSnippetElement.textContent).then(() => {
-        btn.textContent = "Copied!";
-        setTimeout(function() {
-            btn.textContent = "Copy"
-        }, 1000)
-    })
+    range.selectNodeContents(codeSnippetElement);
+    windowSelection.removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    windowSelection.removeAllRanges();
+
+    btn.textContent = "Copied!";
+    setTimeout(function() {
+        btn.textContent = "Copy"
+    }, 1000)
 }
