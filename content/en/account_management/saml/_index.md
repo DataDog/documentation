@@ -95,7 +95,7 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 ## Additional features
 
-To map attributes in your Identity Provider (IdP)'s response to Datadog roles and teams, see [SAML group mapping][22]. 
+To map attributes in your identity provider's response to Datadog roles and teams, see [SAML group mapping][22].
 
 The following features can be enabled through the [SAML Configuration dialog][19]:
 

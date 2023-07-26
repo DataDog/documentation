@@ -1,6 +1,10 @@
 ---
 title: SAML Group Mapping
 kind: documentation
+further_reading:
+- link: "/account_management/saml/"
+  tag: "Documentation"
+  text: "Single sign on with SAML"
 ---
 
 ## Mapping SAML attributes to Datadog roles
@@ -31,7 +35,7 @@ When a user logs in who has the specified identity provider attribute, they are 
   <strong>Important:</strong> If a user does <i>not</i> match any mapping, they lose any roles they had previously and are prevented from logging into the org with SAML. Double-check your mapping definitions and inspect your own assertions before enabling Mappings to prevent any scenarios where your users are unable to login.
 </div>
 
-You can make changes to a mapping by clicking the **pencil** icon or removing it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
+You can make changes to a mapping by clicking the **pencil** icon or remove it by clicking the **garbage** icon. These actions affect only the mapping, not the identity provider attributes or the Datadog roles.
 
 Alternatively, you can create and change mappings of SAML attributes to Datadog roles with the `authn_mappings` endpoint. For more information, see [Federated Authentication to Role Mapping API][4].
 
