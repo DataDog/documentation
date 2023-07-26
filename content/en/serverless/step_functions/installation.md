@@ -61,7 +61,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 [7]: serverless/libraries_integrations/plugin/#configuration-parameters
 {{% /tab %}}
 {{% tab "Datadog Serverless CLI" %}}
-1. If you have not already, install the [Datadog Serverless CLI][1].
+1. If you have not already, install the [Datadog Serverless CLI][1] v2.18.0+.
 
    ```shell
    npm install -g @datadog/datadog-ci
