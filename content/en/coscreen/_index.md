@@ -30,6 +30,8 @@ After installing CoScreen, launch the desktop app and sign up.
 {{% tab "Web" %}}
 The [CoScreen web app][1] is supported in Chrome v87+, Edge v87+, and Safari v16+.
 
+The CoScreen web app has limited functionality. To make full use of CoScreen's features, use the desktop app.
+
 [1]: https://app.coscreen.co/
 {{% /tab %}}
 {{< /tabs >}}
@@ -49,7 +51,7 @@ You can also add your closest collaborators to the list of _Your Collaborators_ 
 
 ### Share windows
 
-You can share application windows in multiple ways.
+With the CoScreen desktop app, you can share application windows in multiple ways.
 
 #### Select individual windows to be shared
 
