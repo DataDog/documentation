@@ -319,7 +319,7 @@ See [`ViewTrackingStrategy`][5] to enable automatic tracking of all your views (
 
 ### Initialize RUM Interceptor to track network events
 
-1. Add and enable Trace feature, see [Datadog Android Trace Collection documentation][16] to learn how.
+1. If you want to have distributed tracing, add and enable Trace feature, see [Datadog Android Trace Collection documentation][16] to learn how.
 2. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
     ```groovy

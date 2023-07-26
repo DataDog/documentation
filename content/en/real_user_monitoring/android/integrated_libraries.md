@@ -16,19 +16,19 @@ This page lists integrated libraries you can use for Android and Android TV Moni
  
 ### Coil
  
-If you use Coil to load images in your application, take a look at Datadog's [dedicated Coil library][1].
+If you use Coil to load images in your application, see Datadog's [dedicated Coil library][1].
  
 ### Fresco
  
-If you use Fresco to load images in your application, take a look at Datadog's [dedicated Fresco library][2].
+If you use Fresco to load images in your application, see Datadog's [dedicated Fresco library][2].
  
 ### Glide
  
-If you use Glide to load images in your application, take a look at Datadog's [dedicated Glide library][3].
+If you use Glide to load images in your application, see Datadog's [dedicated Glide library][3].
 
 ### Jetpack Compose
 
-If you use Jetpack Compose in your application, take a look at Datadog's [dedicated Jetpack Compose library][7].
+If you use Jetpack Compose in your application, see Datadog's [dedicated Jetpack Compose library][7].
 
 ### RxJava
 
@@ -148,7 +148,11 @@ If you use Apollo, use it with the `OkHttpClient` that's been instrumented with 
 
 ### Android TV (Leanback)
 
-If you use the Leanback API to add actions into your Android TV application, take a look at Datadog's [dedicated Android TV library][6].
+If you use the Leanback API to add actions into your Android TV application, see Datadog's [dedicated Android TV library][6].
+
+### Kotlin Coroutines
+
+If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for RUM][9] and with [extensions for Trace][10].
 
 ## Further Reading
 
@@ -162,3 +166,5 @@ If you use the Leanback API to add actions into your Android TV application, tak
 [6]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-tv
 [7]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-compose
 [8]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rx
+[9]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rum-coroutines
+[10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
