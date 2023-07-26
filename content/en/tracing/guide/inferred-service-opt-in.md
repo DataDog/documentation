@@ -19,7 +19,7 @@ further_reading:
 Inferred services and the new Service Page layout are in private beta. To request access, complete the form.
 {{< /callout >}}
 
-Follow the steps below to enable the new dependency map on the [Service Page][1], and add _Inferred services_ to the [Service Map][2] and [Service Catalog][3] pages.
+Follow the steps below to enable the new dependency map on the [Service Page][1], and add _inferred services_ to the [Service Map][2] and [Service Catalog][3] pages.
 
 ## Inferred services
 
