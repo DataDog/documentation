@@ -4137,6 +4137,8 @@ components:
           example: 2020-01-02 03:04:00+00:00
           format: date-time
           type: string
+      required:
+      - start
       type: object
     DowntimeScheduleRecurrenceCreateUpdateRequest:
       additionalProperties: {}
@@ -5200,8 +5202,10 @@ components:
       x-enum-varnames:
       - FINDING
     FormulaLimit:
-      description: Message for specifying limits to the number of values returned
+      description: 'Message for specifying limits to the number of values returned
         by a query.
+
+        This limit is only for scalar queries and has no effect on timeseries queries.'
       properties:
         count:
           description: The number of results to which to limit.
@@ -11628,6 +11632,8 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToTeamLinkData'
           type: array
+        links:
+          $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
     RelationshipToUser:
       description: Relationship to user.
@@ -11655,6 +11661,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToUserTeamPermissionData'
+        links:
+          $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
@@ -13855,6 +13863,10 @@ components:
     SensitiveDataScannerGetConfigResponseData:
       description: Response data related to the scanning groups.
       properties:
+        attributes:
+          additionalProperties: {}
+          description: Attributes of the Sensitive Data configuration.
+          type: object
         id:
           description: ID of the configuration.
           type: string
@@ -14038,6 +14050,9 @@ components:
         has_highlight_enabled:
           description: Whether or not scanned events are highlighted in Logs or RUM
             for the org.
+          type: boolean
+        has_multi_pass_enabled:
+          description: Whether or not scanned events have multi-pass enabled.
           type: boolean
         is_pci_compliant:
           description: Whether or not the org is compliant to the payment card industry
@@ -14274,6 +14289,9 @@ components:
     SensitiveDataScannerStandardPatternAttributes:
       description: Attributes of the Sensitive Data Scanner standard pattern.
       properties:
+        description:
+          description: Description of the standard pattern.
+          type: string
         name:
           description: Name of the standard pattern.
           type: string
@@ -16165,22 +16183,6 @@ components:
       required:
       - data
       type: object
-    TeamData:
-      description: A team
-      properties:
-        attributes:
-          $ref: '#/components/schemas/TeamAttributes'
-        id:
-          description: The team's identifier
-          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
-          type: string
-        type:
-          $ref: '#/components/schemas/TeamType'
-      required:
-      - attributes
-      - id
-      - type
-      type: object
     TeamIncluded:
       description: Included resources related to the team
       oneOf:
@@ -16394,11 +16396,19 @@ components:
         user_team_permissions:
           $ref: '#/components/schemas/RelationshipToUserTeamPermission'
       type: object
+    TeamRelationshipsLinks:
+      description: Links attributes.
+      properties:
+        related:
+          description: Related link.
+          example: /api/v2/team/c75a4a8e-20c7-11ee-a3a5-da7ad0900002/links
+          type: string
+      type: object
     TeamResponse:
       description: Response with a team
       properties:
         data:
-          $ref: '#/components/schemas/TeamData'
+          $ref: '#/components/schemas/Team'
       type: object
     TeamType:
       default: team
@@ -16475,6 +16485,72 @@ components:
           items:
             $ref: '#/components/schemas/TeamIncluded'
           type: array
+        links:
+          $ref: '#/components/schemas/TeamsResponseLinks'
+        meta:
+          $ref: '#/components/schemas/TeamsResponseMeta'
+      type: object
+    TeamsResponseLinks:
+      description: Teams response links.
+      properties:
+        first:
+          description: First link.
+          type: string
+        last:
+          description: Last link.
+          nullable: true
+          type: string
+        next:
+          description: Next link.
+          type: string
+        prev:
+          description: Previous link.
+          nullable: true
+          type: string
+        self:
+          description: Current link.
+          type: string
+      type: object
+    TeamsResponseMeta:
+      description: Teams response metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/TeamsResponseMetaPagination'
+      type: object
+    TeamsResponseMetaPagination:
+      description: Teams response metadata.
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
       type: object
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
@@ -17116,6 +17192,10 @@ components:
           items:
             $ref: '#/components/schemas/UserTeam'
           type: array
+        links:
+          $ref: '#/components/schemas/TeamsResponseLinks'
+        meta:
+          $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
     UserUpdateAttributes:
       description: Attributes of the edited user.

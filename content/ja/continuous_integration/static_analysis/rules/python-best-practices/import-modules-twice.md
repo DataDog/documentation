@@ -23,13 +23,18 @@ import logging  # 同じモジュールを再度インポートしないでく�
 
 ```
 
-```python
-import logging
-from logging import foo # 同じモジュールを再度インポートしないでください。
-
-```
-
 ## 準拠コードの例
 ```python
+import typing
+from typing import cast
+```
+
+```python
 import logging
+```
+
+```python
+import logging
+from logging import foo # from import を使用しているため問題はありません
+
 ```

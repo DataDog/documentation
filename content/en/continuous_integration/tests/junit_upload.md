@@ -262,7 +262,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][9] is supported from `datadog-ci>=2.17`.
+[Test suite level visibility][9] is supported from `datadog-ci>=2.17.0`.
 
 ## Collecting repository and commit metadata
 

@@ -14,7 +14,7 @@ Go ライブラリでは、指定されたトレーサーのバージョンで�
 | -------------------------------- | ----------------------------|
 | Threat Detection| 1.47.0  |
 | Threat Protection |  1.50.0   |
-| Vulnerability Management for Open Source Software (OSS) | 非対応 |
+| Vulnerability Management for Open Source Software (OSS) | 1.49.0 |
 | Vulnerability Management for Code-level (ベータ版) | 非対応 |
 
 Go でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 1.50.0 です。
@@ -51,11 +51,10 @@ Datadog Agent v5.21.1+ を実行している必要があります
 - アプリケーション内の攻撃フローを確認するための分散型トレーシング
 
 ##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
 - **Vulnerability Management for Code-level** はサポートされていません
 
 
-| フレームワーク         | 脅威検知のサポートの有無    | 脅威保護のサポートの有無                                              |
+| フレームワーク         | Threat Detection のサポートの有無    | Threat Detection のサポートの有無                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [Gin][6]          | {{< X >}} | {{< X >}}               |
 | [Gorilla Mux][8] | {{< X >}} | {{< X >}}        |
@@ -70,10 +69,9 @@ Datadog Agent v5.21.1+ を実行している必要があります
 - リクエストベースのブロッキング
 
 ##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
 - **Vulnerability Management for Code-level** はサポートされていません
 
-| フレームワーク         | 脅威検知のサポートの有無    | 脅威保護のサポートの有無                                              |
+| フレームワーク         | Threat Detection のサポートの有無    | Threat Detection のサポートの有無                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [gRPC][11]          | {{< X >}} |       |
 | [chi][12] | {{< X >}} | {{< X >}}        |
@@ -90,11 +88,10 @@ Datadog Agent v5.21.1+ を実行している必要があります
 - エラーとスタックトレースの取得
 
 ##### ASM の機能に関する備考
-- **Vulnerability Management for OSS** はサポートされていません
 - **Vulnerability Management for Code-level** はサポートされていません
 - **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
 
-| フレームワーク         | 脅威検知のサポートの有無    | 脅威保護のサポートの有無                                              |
+| フレームワーク         | Threat Detection のサポートの有無    | Threat Detection のサポートの有無                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
 | [sql][14]          | {{< X >}} |   {{< X >}}    |
 

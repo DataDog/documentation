@@ -7,9 +7,9 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/dotnet
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server バージョン 2012 以降
 
 サーバーレス
-: Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
+: Azure App Services - 公開ベータ版 (Web アプリのみ、関数はサポートされていません)
 
 対応する .NET ランタイム (64 ビットアプリケーション)
 : .NET Framework 4.6.1+<br/>
@@ -402,8 +402,8 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/getting_started/profiler/
 [5]: /ja/tracing/trace_collection/
