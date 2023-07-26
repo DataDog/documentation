@@ -22,7 +22,7 @@ further_reading:
 ---
 
 ## Overview
-Session Replay leverages the existing mechanisms of batching and smart upload from the Datadog SDK core. These mechanisms allow for efficient and optimized data transfer from your app to the Datadog servers. By batching multiple events together and intelligently uploading them at appropriate intervals, Session Replay minimizes the overall impact on network and bandwidth usage while ensuring an efficient utilization of network resources.
+Session Replay leverages the existing mechanisms of batching and smart upload from the Datadog SDK core. These mechanisms enable efficient and optimized data transfer from your application to Datadog servers. By batching multiple events together and intelligently uploading them at appropriate intervals, Session Replay minimizes the overall impact on network and bandwidth usage while ensuring an efficient utilization of network resources.
 
 This page describes how the Mobile Session Replay SDK is designed to support a seamless user experience without impacting your application's performance.
 
