@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ### Requirements
-* States must last less than 15 minutes for full traces.
+* The full Step Function execution length must be less than 15 minutes for full traces.
 * [Associated Lambda tracing][1] is supported for Node.JS and Python runtimes.
 
 ### Setup
@@ -41,7 +41,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
         site: <DATADOG_SITE>
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
-          subscribeToStepFunctionLogs: true
+          enableStepFunctionTracing: true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
@@ -69,8 +69,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 
    Take note of your Forwarder's ARN.
 3. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
-4. Enable tracing on your Step Function by setting the environment variable `DD_TRACE_ENABLED` to `true`.
-5. Instrument your Step Function.
+4. Instrument your Step Function.
 
    ```shell
    datadog-ci stepfunctions instrument --step-function <STEP_FUNCTION_ARN> --forwarder <FORWARDER_ARN>
