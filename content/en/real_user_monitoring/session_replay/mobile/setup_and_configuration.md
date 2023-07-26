@@ -54,17 +54,21 @@ To set up Mobile Session Replay for Android:
       Datadog.registerFeature(sessionReplayFeature)
    ```
 
+[1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
+[2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
+You can install Mobile Session Replay with either CocoaPods or Swift Package Manager.
 
 **Note**: When installing Session Replay for iOS, instead of using Git tags, the library needs to be fetched directly from the [`session-replay-beta`][1] branch.
 
 ### Installation with CocoaPods
 
-Before starting installation, make sure you've [set up and initialized the Datadog iOS RUM SDK][2].
+1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][2].
 
-1. Link both RUM and Session Replay SDKs using git branches in `Podfile` and run `pod install` (or `pod update` if you're upgrading from an existing installation):
+2. Link both RUM and Session Replay SDKs using git branches in `Podfile` and run `pod install` (or `pod update` if you're upgrading from an existing installation):
 
    ```ruby
 
@@ -73,7 +77,7 @@ Before starting installation, make sure you've [set up and initialized the Datad
 
    ```
 
-2. To verify installation, check `Podfile.lock`. Both pods should list the same version. For example:
+3. To verify installation, check `Podfile.lock`. Both pods should list the same version. For example:
 
    ```ruby
      PODS:
@@ -84,7 +88,9 @@ Before starting installation, make sure you've [set up and initialized the Datad
 
 ### Installation with Swift Package Manager
 
-Link RUM and Session Replay SDKs by specifying the [`dd-sdk-ios`][3] repository URL and the `session-replay-beta` branch. Ensure that the most recent commit is fetched.
+1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][2].
+
+2. Link RUM and Session Replay SDKs by specifying the [`dd-sdk-ios`][3] repository URL and the `session-replay-beta` branch. Ensure that the most recent commit is fetched.
 
 ### Enabling Session Replay in the app
 

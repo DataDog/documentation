@@ -33,11 +33,12 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 - Advanced text styling
 
 ### The session replay rendering looks does not exactly mirror my application
-Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images. 
-### For sessions that are very short, I see a replay attached, but I'm unable to view the replay
-When sessions are 1 nanosecond long, we are unable to process the record and thus there would be no replay attached. 
+Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images.
 
-## Mobile app consent
+### For sessions that are very short, I see a replay attached, but I'm unable to view the replay
+When sessions are 1 nanosecond long, Datadog is unable to process the record, so there is no replay attached.
+
+## Data security
 ### I need to account for mobile app consent when collecting mobile session replays
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. Upon starting the SDK, a tracking consent value needs to be set to one of the following:
 

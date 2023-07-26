@@ -42,14 +42,16 @@ By default, the `mask all` setting is enabled for all data. With this setting en
 {{< tabs >}}
 {{% tab "Android" %}}
 
-[ add android content]
-
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
+   // mask all text elements
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+       .setPrivacy(SessionReplayPrivacy.MASK_ALL)
+       .build()
+   SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
 {{% /tab %}}
-
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
@@ -71,17 +73,16 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 {{< tabs >}}
 {{% tab "Android" %}}
 
-[ add android content]
-
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-        val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-            .setPrivacy(SessionReplayPrivacy.MASK_USER_INPUT)
-            .build()
-        SessionReplay.enable(sessionReplayConfig)
+
+   // mask only input elements
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+       .setPrivacy(SessionReplayPrivacy.MASK_USER_INPUT)
+       .build()
+   SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
 {{% /tab %}}
-
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
@@ -106,17 +107,16 @@ With the `allow all` setting enabled, all text is revealed.
 {{< tabs >}}
 {{% tab "Android" %}}
 
-[ add android content]
-
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-            val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-            .setPrivacy(SessionReplayPrivacy.ALLOW)
-            .build()
-        SessionReplay.enable(sessionReplayConfig)
+
+   // no masking; all text is revealed
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+      .setPrivacy(SessionReplayPrivacy.ALLOW)
+      .build()
+   SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
 
 {{% /tab %}}
-
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
@@ -134,6 +134,9 @@ With the `allow all` setting enabled, all text is revealed.
 ### Unmask data in all recorded content
 By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, add this option to **unmask data in all recorded content**:
 
+{{< tabs >}}
+{{% tab "Android" %}}
+
    {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
@@ -142,6 +145,14 @@ By default, the Session Replay recorder masks all recorded content with `*` to e
    .build()
 
    {{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+This option is not available for iOS.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Understanding how and what data is masked
 
