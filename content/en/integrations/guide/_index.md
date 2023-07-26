@@ -26,7 +26,7 @@ cascade:
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag=" kafka" >}}Agent failed to retrieve RMIServer stub{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag=" network" >}}Send TCP/UDP host metrics to the Datadog API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag=" snmp" >}}SNMP commonly used and compatible OIDs{{< /nextlink >}} 
-    {{< nextlink href="integrations/guide/pivotal-cloud-foundry-manual-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry manual setup{{< /nextlink >}}     
+    {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry manual setup{{< /nextlink >}}     
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS guides:" >}}
