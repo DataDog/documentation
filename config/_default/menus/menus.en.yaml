@@ -4089,38 +4089,42 @@ main:
     identifier: account_management_saml
     parent: account_management
     weight: 4
+  - name: User Group Mapping
+    url: account_management/saml/mapping/
+    parent: account_management_saml
+    weight: 401
   - name: Active Directory
     url: account_management/saml/activedirectory/
     parent: account_management_saml
-    weight: 401
+    weight: 402
   - name: Auth0
     url: account_management/saml/auth0/
     parent: account_management_saml
-    weight: 402
+    weight: 403
   - name: Azure
     url: account_management/saml/azure/
     parent: account_management_saml
-    weight: 403
+    weight: 404
   - name: Google
     url: account_management/saml/google/
     parent: account_management_saml
-    weight: 404
+    weight: 405
   - name: NoPassword
     url: account_management/saml/lastpass/
     parent: account_management_saml
-    weight: 405
+    weight: 406
   - name: Okta
     url: account_management/saml/okta/
     parent: account_management_saml
-    weight: 406
+    weight: 407
   - name: SafeNet
     url: account_management/saml/safenet/
     parent: account_management_saml
-    weight: 407
+    weight: 408
   - name: Troubleshooting
     url: account_management/saml/troubleshooting/
     parent: account_management_saml
-    weight: 408
+    weight: 409
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
