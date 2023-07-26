@@ -1,7 +1,6 @@
 ---
 title: Service Scorecards (Beta)
 kind: documentation
-is_beta: true
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
