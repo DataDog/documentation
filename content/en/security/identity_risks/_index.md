@@ -15,13 +15,15 @@ CSM Identity Risks is not available in this site.
 
 <div class="alert alert-info">CSM Identity Risks is in beta.</div>
 
-Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's AWS IAM risks. Enabling you to detect and resolve identity risks on an ongoing basis, CSM Identity Risks helps secure your cloud infrastructure from IAM-based attacks.
+Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's AWS IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 
 ## Setup
 
 To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4]. If you've already done this, no additional setup is required.
+
+**Note**: If you've enabled [Cloud Security Posture Management][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
 
 ## Review and remediate identity risk detections
 
@@ -35,7 +37,7 @@ You can also review the configuration of the resource on the **Resource** tab, a
 
 {{< img src="security/identity_risks/relationships_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
 
-On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to view the permissions provisioned on the resource and whether they were used in the last 15 days.
+On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to get additional insights about the detection (for example, the permissions provisioned on the resource and whether they were used in the last 15 days).
 
 {{< img src="security/identity_risks/insights_tab_side_panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
 
@@ -47,3 +49,5 @@ On the side panel for an individual detection, click **Fix in AWS** to open the 
 [2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
 [3]: https://app.datadoghq.com/security/identities
 [4]: /integrations/amazon_cloudtrail#send-logs-to-datadog
+[5]: /security/cspm/
+[6]: /security/cloud_siem/

@@ -55,7 +55,7 @@ Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#c
 
 ## CSM Identity Risks
 
-[CSM Identity Risks][4] provides in-depth visibility into your organization's AWS IAM risks. Enabling you to detect and resolve identity risks on an ongoing basis, CSM Identity Risks helps secure your cloud infrastructure from IAM-based attacks.
+[CSM Identity Risks][4] provides in-depth visibility into your organization's AWS IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
 <div class="alert alert-info">CSM Identity Risks is in beta.</div>
 
