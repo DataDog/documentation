@@ -184,7 +184,7 @@ worker-src blob:;
 
 Alternatively, starting from [version TODO][8], you can self-host the Datadog Browser SDK Worker JavaScript file and provide the `workerUrl` option to initialize the [RUM Browser SDK][8]. To do so, you can either:
 
-* download it from https://unpkg.com/@datadog/browser-worker , and store it alongside your Web application assets;
+* download it from https://unpkg.com/@datadog/browser-worker, and store it alongside your Web application assets;
 
 * or install the [`@datadog/browser-worker` NPM package][9] and use your build tool to include it in the built assets (see documentation for [Webpack 4][10], [Webpack 5][11], [Vite][12], [Rollup][13]).
 
