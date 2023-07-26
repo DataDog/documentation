@@ -38,15 +38,26 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 - **Datadog Account** The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2]
 
-## Setup
-
-1. Download and install the extension from the official [Visual Studio Marketplace][4]
-2. In Visual Studio, go to Tools -> Options -> Datadog
-3. Click **Sign In**, to sign-in with your Datadog account
-
 ## Getting Started
 
-1. Open your .NET solution in Visual Studio
+### Download and install the extension
+
+1. In Visual Studio, go to Extensions -> Manage Extensions
+2. Search for **Datadog**
+3. Click **Download**
+4. Restart Visual Studio
+
+Alternatively, you can download the extension from the official [Visual Studio Marketplace][4]
+
+### Sign-in with your Datadog account
+
+1. In Visual Studio, go to Tools -> Options -> Datadog
+2. Click the **Sign In** button
+3. In the browser window that opens, select your site and organization, then authorize access to the platform
+
+### Link a service
+
+1. Open a .NET solution file with Visual Studio
 2. Go to Extensions -> Datadog -> Linked Services
 3. Click the **Add Service** button
 4. Select the services that are related to your .NET solution
