@@ -734,7 +734,7 @@ SERVICE=<service>
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.  
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.
    [DEPRECATED] _(version 7.44 or previous)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
@@ -818,7 +818,20 @@ Add the following entry:
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
+{{% tab "Helm" %}}
 
+The following example drops the endpoint `/my-api` and replaces `/my-apy-2` with `/new-version`.
+
+```
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES
+          value: '[{"pattern":"/my-api","repl":""},{"pattern":"/my-api-2","repl":"/new-version"}]'
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
