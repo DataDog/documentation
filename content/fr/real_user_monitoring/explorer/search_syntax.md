@@ -29,7 +29,7 @@ Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser 
 
 Utilisez la fonctionnalité de saisie automatique de la barre de recherche pour compléter vos requêtes en utilisant des valeurs existantes.
 
-{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete1.png" alt="Saisie automatique dans la barre de recherche" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete2.png" alt="Saisie automatique dans la barre de recherche" style="width:90%;" >}}
 
 ## Échapper des caractères spéciaux
 
