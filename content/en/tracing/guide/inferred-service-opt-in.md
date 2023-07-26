@@ -257,8 +257,8 @@ For example, to set the `peer.service` value for all Dalli spans, use
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /services/service_page/
-[2]: /services/services_map/
+[1]: /tracing/services/service_page/
+[2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
