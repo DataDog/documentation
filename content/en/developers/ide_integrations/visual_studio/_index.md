@@ -16,21 +16,42 @@ further_reading:
 
 ## Overview
 
-The Datadog extension for Visual Studio helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data. Together with the Continuous Profiler, the plugin helps you to reduce latency and lower cloud costs by highlighting code lines that:
+The Datadog plugin for Visual Studio users helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
 
-* Consume the most CPU
-* Allocate the most memory
-* Spend the most time on locks, disk I/O, socket I/O, and more
+The **Code Insights** view keeps you informed about:
+
+- Issues from Error Tracking
+- Vulnerability reports by Application Security Management
+- Flaky tests detected by CI Visibility
+- Profiling insights from Watchdog Insights
+
+The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code lines that:
+
+- Consume the most CPU
+- Allocate the most memory
+- Spend the most time on locks, disk I/O, and socket I/O
 
 ## Requirements
 
-* **Visual Studio 2022** version 17 or higher
-* **Datadog Account** The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-* **Continuous Profiling** To display code-level insights, the plugin requires Continuous Profiling instrumented on your .NET Services. For more information, see [Getting Started with the Continuous Profiler][2].
+- Windows operating system version 10 or higher (64-bit OS is highly recommended for optimal performance)
+- Visual Studio 2022 Community, Professional or Enterprise edition (64-bit)
+- .NET Framework 4.8 or higher
+- **Datadog Account** The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2]
 
 ## Setup
 
-Download and install the extension from the official [Visual Studio Marketplace][4].
+1. Download and install the extension from the official [Visual Studio Marketplace][4]
+2. In Visual Studio, go to Tools -> Options -> Datadog
+3. Click **Sign In**, to sign-in with your Datadog account
+
+## Getting Started
+
+1. Open your .NET solution in Visual Studio
+2. Go to Extensions -> Datadog -> Linked Services
+3. Click the **Add Service** button
+4. Select the services that are related to your .NET solution
+5. Save the .NET solution file
 
 ## Feedback
 
