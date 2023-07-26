@@ -850,7 +850,7 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-The following example drops the endpoint `/my-api` and replaces `/my-apy-2` with `/new-version`.
+The following example drops the endpoint `/my-api` and replaces `/my-api-2` with `/new-version`.
 
 ```
 agents:
