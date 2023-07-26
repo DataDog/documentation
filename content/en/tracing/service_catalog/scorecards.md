@@ -2,7 +2,6 @@
 title: Service Scorecards (Beta)
 kind: documentation
 is_beta: true
-private: true
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
@@ -13,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-  Service Scorecards are in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
+Service Scorecards are in public beta.
 {{< /callout >}}
 
 ## Overview
