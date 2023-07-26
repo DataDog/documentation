@@ -22,7 +22,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
 2. After a user installs your integration, they can click the **Connect Accounts** button to connect their account in the **Configure** tab of the integration tile. 
 
-   ![Connect Accounts button](/static/images/developers/authorization/connect-accounts.png)
+   {{< img src="developers/authorization/connect-accounts.png" alt="Click the Connect Accounts button" style="width:100%;" >}}
 
    When a user clicks this button, they are directed to the `onboarding_url` that you provided as a part of the OAuth client creation process. This page should be the sign-in page for your platform.
 
