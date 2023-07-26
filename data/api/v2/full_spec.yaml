@@ -10144,6 +10144,8 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+        type:
+          $ref: '#/components/schemas/OnDemandConcurrencyCapType'
       type: object
     OnDemandConcurrencyCapAttributes:
       description: On-demand concurrency cap attributes.
@@ -10159,6 +10161,13 @@ components:
         data:
           $ref: '#/components/schemas/OnDemandConcurrencyCap'
       type: object
+    OnDemandConcurrencyCapType:
+      description: On-demand concurrency cap type.
+      enum:
+      - on_demand_concurrency_cap
+      type: string
+      x-enum-varnames:
+      - ON_DEMAND_CONCURRENCY_CAP
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
       properties:
