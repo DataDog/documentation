@@ -10,13 +10,13 @@ disable_sidebar: true
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in beta.
+The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 ## Supported Oracle versions, features, and architectures
 
 - **Versions**: 19c and 21c
-- **Deployment configurations**: Self-managed, RDS, RAC, Exadata
+- **Deployment configurations**: Self-managed, RDS, RAC, Exadata, Autonomous database
 - **Architecture**: Multi-tenant
 
 ## Prerequisites
@@ -111,6 +111,12 @@ The Agent doesn't require any external Oracle clients.
 
 Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
+<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+
 ## Setup
 
 For setup instructions, select your hosting type:
@@ -127,3 +133,4 @@ For setup instructions, select your hosting type:
 [8]: https://ddagent-windows-stable.s3.amazonaws.com/
 [9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
 [10]: /database_monitoring/architecture/
+[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
