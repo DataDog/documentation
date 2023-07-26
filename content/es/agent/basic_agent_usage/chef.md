@@ -66,7 +66,7 @@ depends 'yum', '< 5.0'
 1. Añade el cookbook a tu servidor de Chef con [Berkshelf][5] o [Knife][6]:
     ```text
     # Berksfile
-    cookbook 'datadog', '~> 4.0.0'
+    cookbook 'datadog', '~> 4.0'
     ```
 
     ```shell
