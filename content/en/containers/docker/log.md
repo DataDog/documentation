@@ -212,7 +212,7 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 {{% /tab %}}
-{{% tab "Docker-Compose" %}}
+{{% tab "Docker Compose" %}}
 
 Add the following label in your `docker-compose.yaml` file:
 
