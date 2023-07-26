@@ -29,17 +29,10 @@ This page describes how the Mobile Session Replay SDK is designed to support a s
 ## Main thread
 The system responsible for capturing the current screen of your application runs in the UI Thread, which can potentially cause UI updates to be delayed. However, Datadog uses highly optimized processes to minimize the workload the SDK performs in the UI Thread.
 
-On iOS, pessimistic single screen captures take no longer than 10 ms and screens are captured every 100 ms.
-
-On Android, median single screen captures take N ms and screens are captured not more often than every M ms. All the processing of the collected data happens on a background thread without impacting your application's performance.
+Screens are captured between 64 ms to 100ms  (depending on the platform) and single screen capture takes 3 ms.  All the processing of the collected data happens on background thread, not affecting app’s performance.
 
 ## Network
-To minimize the total upload volume, Datadog employs a highly optimized wire format. As a result, you can expect to see an average bandwidth usage of around 12 KB/s for data sent to the Datadog servers on iOS, and X KB/s on Android. When image recording is enabled, applications with image-heavy content may experience a slightly higher initial volume. In cases when the device is disconnected from the network, the data is buffered to the device's disk storage until a high-bandwidth connection is reestablished.
-
-## Disk
-To ensure on-device persistence, event data is streamed to cache storage. Disk access has been optimized to minimize the number of input/output (IO) cycles required when writing and uploading the data to the Datadog servers. Datadog utilizes temporary storage that can be reclaimed by the operating system if your application requires critical storage space.
-
-Datadog is committed to delivering the highest level of performance and efficiency with the Session Replay for mobile, which on average, stores 190 KB/s to disk on iOS, and X KB/s on Android. Again in this case, image-heavy content may result in slightly higher initial volume.
+To minimize the total upload volume, Datadog employs a highly optimized wire format. As a result, you can expect to see an average bandwidth usage of around 12 KB/s for data sent to the Datadog servers on iOS, and 1.22 KB/s on Android. When image recording is enabled, applications with image-heavy content may experience a slightly higher initial volume. In cases when the device is disconnected from the network, the data is buffered to the device's disk storage until a high-bandwidth connection is reestablished.
 
 ## App size
 Datadog's SDK follows strict standards and aims to minimize the inclusion of third-party dependencies. This approach ensures that the SDK leverages as much native framework code as possible. As a result, the Android package is only 2.1 MB for the AAR file. On iOS, Datadog provides a pre-built binary that is approximately 6 MB in size. These optimizations allow for a more efficient and lightweight integration of Datadog's SDK into your projects.
