@@ -73,11 +73,13 @@ Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you 
 
 ## Dependencies
 
-{{< callout btn_hidden="true" header="Opt in to the private beta!">}}
-The Dependency map is in private beta. For information on opting in, see [Opt in to the new APM troubleshooting experience][20].
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
+Inferred services and the new Service Page layout are in private beta. To request access, complete the form.
 {{< /callout >}}
 
 Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
+
+For more information, see [New Service page and Inferred Services][20].
 
 {{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section" style="width:100%;">}}
 
@@ -235,4 +237,4 @@ View common patterns in your service's logs, and use facets like status in the s
 [17]: https://www.datadoghq.com/blog/log-patterns/
 [18]: /security/application_security/how-appsec-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
-[20]: /tracing/guide/new-apm-exper/
+[20]: /tracing/guide/inferred-service-opt-in/

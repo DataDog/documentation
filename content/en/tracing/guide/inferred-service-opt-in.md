@@ -15,11 +15,11 @@ further_reading:
   text: "Add the Datadog Tracing Library"
 ---
 
-{{< callout btn_hidden="true" header="Opt in to the private beta!">}}
-The features described on this page are in private beta.
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
+Inferred services and the new Service Page layout are in private beta. To request access, complete the form.
 {{< /callout >}}
 
-Follow the steps below to enable the new dependency map on the [Service Page][1], and add _Inferred services_  to the [Service Map][2] and [Service Catalog][3] pages.
+Follow the steps below to enable the new dependency map on the [Service Page][1], and add _Inferred services_ to the [Service Map][2] and [Service Catalog][3] pages.
 
 ## Inferred services
 
@@ -27,7 +27,7 @@ Datadog can automatically discover the dependencies for an instrumented service,
 
 To determine the names and types of the inferred services, Datadog uses span attributes. Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
-To change the default names for inferred services, [set the `peer.service` tag manually](#peer-service-mapping).
+If you're using the Go, Java, or NodeJS tracer, you can customize the default names for inferred services. For more information, see the "Peer Service Mapping" section for your language below.
 
 ## Dependency map
 
@@ -57,7 +57,7 @@ The minimum Java tracer version required is 1.16.0. Regular updates to the lates
 
 [Download the latest Java tracer version][1].
 
-Add the following environment variables to your tracer settings or system properties:
+To opt in, add the following environment variables or system properties to your tracer settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -74,7 +74,7 @@ Remove the following settings from your configuration:
 
 #### Peer service mapping
 
-Peer service values are extracted automatically from a best effort process. You can map specific values to peer services using the following settings:
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -96,7 +96,7 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 The minimum Go tracer version required is [`v1.52.0`][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-Add the following environment variables to your tracer settings or system properties:
+To opt in, add the following environment variables or system properties to your tracer settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -105,7 +105,7 @@ Add the following environment variables to your tracer settings or system proper
 
 #### Peer service mapping
 
-Peer service values are extracted automatically from a best effort process. You can map specific values to peer services using the following settings:
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
 
 | Environment variable | System property |
 | ---  | ----------- |
@@ -123,13 +123,76 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 {{% /tab %}}
 
+{{% tab "NodeJS" %}}
+
+The minimum NodeJS tracer version required is [4.8.1][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+
+The following modules are not supported:
+- Http
+- Http2
+- Next
+- Fetch
+- Aws-sdk
+- Couchbase
+
+To opt in, add the following environment variables or system properties to your tracer settings:
+
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `spanComputePeerService=true` |
+| `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `spanRemoveIntegrationFromService=true` |
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `peerServiceMapping` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, you'd use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
+
+[1]: coming-soon
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+The minimum PHP tracer version required is [0.90.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+
+To opt in, add the following environment variables or system properties to your tracer settings:
+
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `datadog.trace.peer_service_defaults_enabled=true` |
+| `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `datadog.trace.remove_integration_service_names_enabled=true` |
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+
+| Environment variable | System property |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `datadog.trace.peer_service_mapping` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, you'd use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
+
+[1]: https://github.com/DataDog/dd-trace-php/releases/tag/0.90.0
+{{% /tab %}}
+
 {{% tab ".NET" %}}
 
 The minimum .NET tracer version required is [`v2.32.0`][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
-
-Add the following environment variables to your tracer settings or system properties:
-- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
-- `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 As of tracer version `v2.32.0`, the following libraries are supported:
 - HttpClient and WebRequest
@@ -140,7 +203,11 @@ As of tracer version `v2.32.0`, the following libraries are supported:
 - MongoDB
 - Kafka spans
 
-[1]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.32.0
+To opt in, add the following environment variables to your tracer settings or system properties:
+- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
+- `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.32.0
 
 {{% /tab %}}
 
@@ -148,7 +215,7 @@ As of tracer version `v2.32.0`, the following libraries are supported:
 
 The minimum Python tracer version required is [`v1.16.0`][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-Add the following environment variables to your tracer settings or system properties:
+To opt in, add the following environment variables to your tracer settings or system properties:
 
 Add the following environment variables to your tracer settings or system properties:
 - `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
@@ -158,6 +225,30 @@ As of tracer version `v1.16.0` all libraries are supported except for Boto2.
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.16.0
 
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+The minimum Ruby tracer version required is [`v1.13`][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+
+To opt in, add the following environment variables to your tracer settings or system properties:
+- `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
+
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the `DD_TRACE_PEER_SERVICE_MAPPING` environment variable. The environment variable accepts a comma-separated list of key-value pairs.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, you'd use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
+
+You can also set the `peer.service` value for spans generated by a specific integration. In this case, the setting you define overrides any value that the tracer would have automatically assigned. To set a value for an integration, use the syntax `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE` for your environment variable.
+
+For example, to set the `peer.service` value for all Dalli spans, use
+`DD_TRACE_DALLI_PEER_SERVICE = billing-api`.
+
+[1]: coming-soon
 {{% /tab %}}
 
 {{< /tabs >}}
