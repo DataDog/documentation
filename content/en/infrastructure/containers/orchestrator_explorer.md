@@ -123,17 +123,15 @@ For a detailed dashboard of this resource, click the View Dashboard in the top r
 
 ### Resource utilization
 
-Click on **Resource Utilization**, to the right of the **Cluster Map** button.
+_For the Resource Utilization page, see [Resource Utilization][13]_.
+
+Within the Kubernetes Explorer tab you can explore a selection of resource utilization metrics.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
-This view displays your CPU and memory usage over time. This information helps you detect where resources may be over- or under-provisioned.
+All of these columns support sorting, so you can quickly pinpoint individual workloads based to their resource utilization.
 
-Click on any row in the table to view informatiion about a specific resource in a side panel.
-
-{{< img src="infrastructure/livecontainers/resource_utilization_panel.png" alt="Container Resource Utilization Side Panel Details" style="width:80%;">}}
-
-In the above screenshot, pods are grouped by cluster name. The side panel is opened for pods within a particular cluster. Average CPU and memory usage for these pods is displayed.
+{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Container Resource Utilization Sorted Columns" style="width:80%;">}}
 
 ## Notes and known issues
 
@@ -147,4 +145,5 @@ In the above screenshot, pods are grouped by cluster name. The side panel is ope
 [10]: /metrics
 [11]: /tracing
 [12]: /events
+[13]: /infrastructure/containers/kubernetes_resource_utilization
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
