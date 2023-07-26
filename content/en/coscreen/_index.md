@@ -39,8 +39,6 @@ The [CoScreen web app][1] is supported in Chrome v87+, Edge v87+, and Safari v16
 
 If you were invited to a CoScreen, click on the link. You can click on **Join from browser** to join the CoScreen through the web app, or you can launch the desktop app. You can also join manually by entering your meeting link or ID.
 
-{{< img src="coscreen/coscreen_join.mp4" alt="In the CoScreen desktop app, use the '+' (Start New Session) button in the upper right to open a tray with two options: 'New CoScreen' to create a new CoScreen, and 'Join a CoScreen' to manually enter the meeting link or ID of an existing CoScreen." width=40% video="true">}}
-
 When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the main menu. You can rejoin these at any time.
 
 ### Invite your collaborators
