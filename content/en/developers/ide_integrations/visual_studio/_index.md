@@ -20,10 +20,9 @@ The Datadog plugin for Visual Studio users helps you to improve software perform
 
 The **Code Insights** view keeps you informed about:
 
-- Issues from Error Tracking
-- Vulnerability reports by Application Security Management
-- Flaky tests detected by CI Visibility
-- Profiling insights from Watchdog Insights
+- Issues from [Error Tracking][5]
+- [Vulnerability][6] reports by Application Security Management
+- Profiling insights from [Watchdog Insights][7]
 
 The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code lines that:
 
@@ -65,3 +64,6 @@ Let us know what you think about the extension! Provide feedback on our [discuss
 [2]: /getting_started/profiler/
 [3]: https://www.datadoghq.com/
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
+[5]: https://docs.datadoghq.com/tracing/error_tracking/
+[6]: https://docs.datadoghq.com/security/application_security/vulnerability_management/
+[7]: https://docs.datadoghq.com/watchdog/insights
