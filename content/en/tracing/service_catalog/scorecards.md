@@ -10,7 +10,7 @@ further_reading:
   text: "Improve service health and performance with Service Scorecards"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" header="false" >}}
 Service Scorecards are in public beta.
 {{< /callout >}}
 
