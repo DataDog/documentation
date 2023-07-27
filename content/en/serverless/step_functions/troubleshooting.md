@@ -15,7 +15,7 @@ kind: documentation
 - Enable `DEBUG` logs on the Datadog Lambda Forwarder by setting the environment variable `DD_LOG_LEVEL` to `debug`.
 
 ### Verify that logs are searchable on Live Search
-In Datadog, go to [*Logs*][1] > [*Live Tail*][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times.
+In Datadog, go to [**Logs > Live Tail**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times.
 
 #### Search historic logs
 To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, go to **Logs** > **Configuration** and then open the [**Indexes**][4] tab. Click the **New Index** button in the upper right.

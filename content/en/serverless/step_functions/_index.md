@@ -25,7 +25,7 @@ Serverless Monitoring for AWS Step Functions enables you to:
 - Get an overview of the state of all of your Step Functions in one unified app view
 - View end-to-end traces for a single Step Function execution and its associated logs and metrics
 - Monitor associated Lambda function and view linked Lambda traces
-- Set monitors on certain trace, metric, log error, or anomaly associated with a Step Function
+- Set monitors on a certain trace, metric, log error, or anomaly associated with a Step Function
 
 To get started, follow the [installation instructions][1].
 

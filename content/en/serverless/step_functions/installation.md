@@ -19,7 +19,7 @@ further_reading:
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-For developers using [Serverless Framework][4] to deploy their serverless applications, use the Datadog Serverless Framework Plugin.
+For developers using [Serverless Framework][4] to deploy serverless applications, use the Datadog Serverless Framework Plugin.
 
 1. If you have not already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
 
@@ -50,7 +50,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
-5. For Node.JS and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
+5. For Node.js and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
 [2]: /logs/guide/forwarder/
@@ -82,7 +82,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
-5. For Node.JS and Python runtimes, add the flag `-- mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
+5. For Node.js and Python runtimes, add the flag `-- mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
 
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder/
@@ -118,7 +118,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 4. Enable tracing on your Step Functions. Set the environment variable `DD_TRACE_ENABLED` to `true`.
 <!-- Where is this environment variable set? -->
 5. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog. The `service` tag defaults to the state machine's name.
-6. For Node.JS and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `OutputPath` and `Parameters` keys with the following: 
+6. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `OutputPath` and `Parameters` keys with the following: 
 
    ```json
    "OutputPath": "$.Payload",
@@ -181,7 +181,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 ## See your Step Function traces in Datadog
 
-After you have invoked your state machine, go to the [Trace Explorer][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see all traces associated with that state machine. 
+After you have invoked your state machine, go to the [**Trace Explorer**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see all traces associated with that state machine. 
 
 If you cannot see your traces, see [Troubleshooting][5].
 
