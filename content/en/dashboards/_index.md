@@ -74,6 +74,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page 
 
 ### Dashboards
 Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+**Note**: Dashboards have a maximum width of 12 grid squares.
 
 ### Timeboards
 Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
