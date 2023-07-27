@@ -1,0 +1,52 @@
+---
+title: Best Practices for RUM Sampling
+kind: guide
+description: Guide for RUM sampling.
+further_reading:
+- link: '/monitors/create/types/real_user_monitoring/'
+  tag: 'Documentation'
+  text: 'Learn about RUM Monitors'
+---
+
+## Overview
+
+Sampling in Datadog's Real User Monitoring product enables you to collect data from a certain percentage of user traffic.
+
+This guide walks you through various best practices for RUM sampling so that you capture the sessions and collect data based on your 
+
+## Sampling configuration
+
+### Configure the variable names that correspond with the SDK version
+
+Sessions are randomly sampled based on the percentage listed in the [SDK configuration][1]. To that end, make sure to use the correct configuration variable names for the SDK version that is being used.
+
+### Configure the sampling rate
+Before each new user session, the SDK draws a random floating-point number between 0 and 1, which is then compared to the value that is set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the value is higher, the session is not kept and events do not get collected at all until the end of the session.
+
+You can set the sampling rate via the SDK ([Browser][2], [Android][3], [iOS][4], [React Native][5], [Flutter][6], [Roku][7]), then deploy it in the application code.
+
+Only sessions that are sampled are available in RUM. For example, if the sampling rate is set to 60%, then 60% of all sessions and metrics (such as Core Web Vitals and usage numbers) are visible in RUM.
+
+The random sampling is by session, not by user.
+
+In terms of a recommended sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweak it based on the data you need.
+
+### Adjusting sampling during live outages
+
+If a bug or incident occurs, you can increase sampling to collect 100% of your user traffic to ensure no session is missed. You need to deploy a code change to achieve this.
+
+### Accounting for mobile devices that go offline or crash
+
+RUM ensures availability of data when user devices are offline. In case of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network becomes available, and the battery is high enough to ensure the RUM SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/guide/sampling-browser-plans/#overview
+[2]: /real_user_monitoring/guide/sampling-browser-plans/#overview
+[3]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#initialization-parameters
+[4]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#sample-rum-sessions
+[5]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
+[6]: /real_user_monitoring/flutter/advanced_configuration/#sample-rum-sessions
+[7]: /real_user_monitoring/roku/#initialize-the-library
