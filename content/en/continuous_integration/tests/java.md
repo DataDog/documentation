@@ -48,6 +48,7 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 
 {{% ci-agentless %}}
 
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -57,57 +58,26 @@ You only need to download the tracer library once for each server.
 
 If the tracer library is already available locally on the server, you can proceed directly to running the tests.
 
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded tracer JAR:
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.14.0
-{{< /code-block >}}
-
-Run the command below to download the tracer JAR to your local Maven repository:
-
-{{< code-block lang="shell" >}}
-mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadoghq:dd-java-agent:$DD_TRACER_VERSION
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
-
-{{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.14.0
-{{< /code-block >}}
-
-Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded JAR:
-
-{{< code-block lang="shell" >}}
-DD_TRACER_FOLDER=... // e.g. ~/.datadog
+export DD_TRACER_FOLDER=... // e.g. ~/.datadog
 {{< /code-block >}}
 
 Run the command below to download the tracer JAR to the specified folder:
 
 {{< code-block lang="shell" >}}
-curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar --output $DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar
+wget -O $DD_TRACER_FOLDER/dd-java-agent.jar https://dtdg.co/latest-java-tracer
 {{< /code-block >}}
 
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-
-{{% /tab %}}
-{{< /tabs >}}
+You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the tracer library.
 
 ## Running your tests
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Make sure to set the `DD_TRACER_VERSION` environment variable to the tracer version you have previously downloaded.
+Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
 
 Run your tests using the `MAVEN_OPTS` environment variable to specify the path to the Datadog Java Tracer JAR.
 
@@ -120,18 +90,19 @@ When specifying tracer arguments, include the following:
 For example:
 
 {{< code-block lang="shell" >}}
-MVN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
-MAVEN_OPTS=-javaagent:$MVN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
+MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app \
-mvn clean verify -Pdd-civisibility
+mvn clean verify
 {{< /code-block >}}
+
+Either `mvn verify` or `mvn test` goals are fine, depending on whether you want to execute Maven Failsafe plugin to run integration tests (if you have any) or not.
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Make sure to set the `DD_TRACER_VERSION` environment variable to the tracer version you have previously downloaded, and the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
 
 Run your tests using the `org.gradle.jvmargs` system property to specify the path to the Datadog Java Tracer JAR.
 
@@ -144,8 +115,8 @@ When specifying tracer arguments, include the following:
 For example:
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test -Pdd-civisibility --rerun-tasks -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar=\
+./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
+-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app

@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/java'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -183,8 +183,6 @@ For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionS
 
 The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine has been enabled by default since 1.7.0.
 
-or:
-
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.wall.enabled=true
@@ -295,8 +293,8 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [1]: /tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [3]: /profiler/profiler_troubleshooting/#java-8-support
-[4]: https://app.datadoghq.com/account/settings#agent/overview
-[5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
 [8]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler

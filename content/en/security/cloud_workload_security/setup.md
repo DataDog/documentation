@@ -86,7 +86,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
 4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
 {{% /tab %}}
 
@@ -100,6 +100,8 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
     # values.yaml file
     spec:
       features:
+        remoteConfiguration:
+          enabled: true
         cws:
           enabled: true
     ```
@@ -215,7 +217,7 @@ runtime_security_config:
     enabled: true
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}

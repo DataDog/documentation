@@ -295,7 +295,7 @@ For help troubleshooting the Agent:
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /agent/basic_agent_usage/?tab=agentv6v7
-[18]: https://app.datadoghq.com/account/settings#agent/
+[18]: https://app.datadoghq.com/account/settings/agent/latest
 [19]: /agent/guide/agent-commands/#agent-status-and-information
 [20]: /developers/service_checks/#visualize-your-service-check-in-datadog
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml

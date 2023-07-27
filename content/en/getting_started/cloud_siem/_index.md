@@ -54,7 +54,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
     - [Cloud Audit logs][6]
     - [Identity Provider logs][7]
     - SaaS and Workspace logs
-    - Third-party security integrations (for example, AWS GuardDuty)
+    - Third-party security integrations (for example, Amazon GuardDuty)
 
 2. Enable [Cloud SIEM][8].
 

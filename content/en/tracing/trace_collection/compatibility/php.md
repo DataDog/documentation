@@ -99,14 +99,14 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CodeIgniter    | 3.x                  | PHP 7+                     | Generic web tracing             |
 | Drupal         |                      | All supported PHP versions | Generic web tracing             |
 | FuelPHP        | 1.1                  | PHP 7+                     | Generic web tracing             |
-| Laminas        |                      | All supported PHP versions | Framework-level instrumentation |     
+| Laminas        |                      | All supported PHP versions | Framework-level instrumentation |
 | Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-level instrumentation |
 | Laravel 8      | 8.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
 | Lumen          |   5.2+                 | All supported PHP versions | Framework-level instrumentation |
 | Magento        | 1, 2                 | All supported PHP versions | Generic web tracing             |
 | Neos Flow      | 1.1                  | All supported PHP versions | Generic web tracing             |
 | Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
-| RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentationq |
+| RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-level instrumentation |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x | All supported PHP versions | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |

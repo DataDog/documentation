@@ -148,7 +148,7 @@ Create a new Function App or use an existing Function App and skip to the next s
 
 1. In the Azure portal, navigate to the **Function Apps** overview and click **Create**.
 2. Select a subscription, resource group, region, and enter a name for your function app.
-3. Select **Publish to Code, Runtime stack to Node.js, and Version to 16 LTS**.
+3. Select **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS**.
 4. Select an operating system and plan type.
 5. Click **Next:Hosting**.
 6. Select a storage account.
@@ -229,7 +229,7 @@ If you are unfamiliar with Azure functions, see [Getting started with Azure Func
 
 1. In the [Azure portal][2], navigate to the **Function Apps** overview and click **Create**.
 2. Select a subscription, resource group, region, and enter a name for your function apps. 
-3. Select **Publish to Code, Runtime stack to Node.js, and Version to 16 LTS**.
+3. Select **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS**.
 4. Select Operating System **Windows** and a plan type.
 5. Click **Next:Hosting**.
 6. Select a storage account.

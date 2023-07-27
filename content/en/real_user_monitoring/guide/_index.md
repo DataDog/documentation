@@ -19,8 +19,9 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting Started with RUM Deployment Tracking{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting Started with Feature Flag Tracking{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}

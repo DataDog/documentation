@@ -19,6 +19,10 @@ Une session correspond à une visite de votre application Web ou mobile par un u
 
 Une session expire au bout de 15 minutes d'inactivité, et est limitée à 4 heures au total. Au bout de 4 heures, une nouvelle session est automatiquement créée.
 
+## Quelle est la durée des enregistrements Session Replay ?
+
+La durée des enregistrements Session Replay varie selon la longueur de la session. Par exemple, si vos enregistrements ne durent qu'entre cinq et huit secondes, cela signifie que l'utilisateur a terminé sa session après cette durée.
+
 ## Quelles sont les données recueillies par les solutions RUM et Session Replay de Datadog ?
 
 Datadog recueille toutes les pages visitées par vos utilisateurs finaux ainsi que les données de télémétrie pertinentes, telles que le chargement des ressources (XHR, images, fichiers CSS et scripts JS), les erreurs frontend, les rapports de crash et les tâches longues. Toutes ces données sont incluses dans les sessions utilisateur. Pour la solution Session Replay, Datadog crée un iframe basé sur les snapshots du DOM. La facturation est calculée en fonction du nombre de milliers de sessions ingérées par le service Real User Monitoring (RUM) Datadog.

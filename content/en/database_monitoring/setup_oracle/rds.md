@@ -61,6 +61,14 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLCOMMAND','DATADOG','SELECT',
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAFILE','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SGAINFO','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
 ```
 
 ## Configure the Agent
@@ -74,7 +82,7 @@ init_config:
 instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
-    username: 'c##datadog'
+    username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
     tags:  # Optional
@@ -82,15 +90,13 @@ instances:
       - 'env:<CUSTOM_ENV>'
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
-    username: 'c##datadog'
+    username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
-
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] to learn more about how these tags are used in Datadog.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
