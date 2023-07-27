@@ -19,7 +19,7 @@ further_reading:
   text: "Monitor notifications"
 ---
 
-## Overview 
+## Overview
 
 Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors. Downtimes silence all monitors' alerts and notifications, but do not prevent monitor states transitions.
 
@@ -29,13 +29,14 @@ To schedule a [monitor downtime][1] in Datadog navigate to _Monitors > Manage Do
 
 To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
 
+// TODO replace image
 {{< img src="/monitors/downtimes/downtime_fm_monitor.png" alt="Add a downtime schedule from an individual monitor with Mute" style="width:100%;" >}}
 
 ## Choose what to silence
 
 Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
 
-**Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope. 
+**Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
 ### By Monitor Name
 
@@ -46,12 +47,49 @@ Search or use the dropdown menu to choose which monitors to silence. If the fiel
 Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
 ### Downtime scope
+Use group scope to apply additional filters to your downtime and have granular control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it first needs to find monitors that are tagged accordingly before it matches the group scope.
 
-The downtime query follows the same syntax as the Monitors Search, for more information see the [Search Monitors][4] documentation. The `Group scope` field does not apply to [simple alert monitors][5] since those monitors aggregate over all reporting sources. For single alert monitors select `All` for the Group scope.
+The downtime scope is matched with two possible targets: a monitor's query filter or the monitor's group names.
 
-If a multi alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi alert monitor is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
+#### Scoping on monitor group names
+As previously mentioned, group scopes can be applied to gain more granular control over which monitors to mute. For instance, a monitor is looking at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are therefore anticipating slow requests and potential errors.
 
-To include all groups in the scope of a Downtime that applies to multi alert monitors, select `All` for the `Group scope`.
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Status graph showing downtime for group service:web-store" style="width:90%;">}}
+
+You would like to make sure that `service:web-store` related notifications are muted and that other critical alerts for the remaining services are delivered as usual. For that, simply enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
+
+**Note**: this approach also works with groups that have multiple dimensions, e.g. `service` and `host`. Creating a Downtime on `service:web-store` would mute all groups that include said service, e.g. `service:web-store,host:a` or `service:web-store,host:b`.
+
+#### Scoping on monitor query filter
+It is common to filter a monitor query to only look at dimensions you care about. You can create Downtimes that target those same dimensions. This approach doesn't require you to add additional grouping to a monitor where it wouldn't really be necessary.
+
+{{< img src="/monitors/downtimes/downtime_scope_query.png" alt="Example of a monitor's query filter" style="width:100%;" >}}
+
+The monitor above will be muted by a Downtime that matches the monitor specific target and is scoped by `env:prod`.
+
+#### Downtime scope syntax
+The Downtime scope query follows the same common [Search Syntax][19] that many other products across the platform support. To include all groups in the scope of a Downtime, type `*` for the `Group scope`. Further examples of group scopes include:
+
+| Downtime group scope | Explanation |
+| ------------------- | ---------------------- |
+| `service:web-store`       | Mutes all notifications about the `web-store` service. |
+| `service:web-store AND env:dev`       | Mutes all notifications about the `web-store` service running on the `dev` environment. |
+| `env:(dev OR staging)`       | Mutes any notification related to either the `dev` or `staging` environment. |
+| `service:web-store AND env:(dev OR staging)`       | Mutes any notification related to the `web-store` service running in either the `dev` or `staging` environment. |
+| `host:authentication-*`       | Mutes any notification that relates to a host whose name is prefixed with `authentication-`. |
+| `host:*-prod-cluster`       | Mutes any notification that relates to a host whose name is suffixed with `-prod-cluster`. |
+| `host:*-prod-cluster`       | Mutes any notification that relates to a host whose name is suffixed with `-prod-cluster`. |
+| `service:webstore AND -env:prod`       | Mutes any notification about the `web-store` service that is **not** running on the `prod` environment. |
+
+#### Downtime scope limitations
+While Downtime scope queries follow the common [Search Syntax][19], there are a few limitations that are **not supported**. These include:
+
+* More than two levels of nesting, e.g. `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
+* Negation is only supported for key/value pairs and tags with `OR`, e.g. `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, `-service(A B)`, etc. are not supported.
+* Top level ORs are not supported, e.g. `service:A OR host:X`. This requires two separate Downtimes.
+* Keyless tags, e.g. `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
+* Question mark wildcards: `service:auth?` are not supported. Use `*` instead if you need to use wildcards.
+* Invalid characters within the key: `en&v:prod` is not a valid Downtime scope and will be rejected.
 
 ## Set a downtime schedule
 
@@ -164,3 +202,4 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [16]: /integrations/amazon_ec2/#ec2-automuting
 [17]: /integrations/google_compute_engine/#gce-automuting
 [18]: /integrations/azure_vm/#automuting-monitors
+[19]: /logs/explorer/search_syntax/
