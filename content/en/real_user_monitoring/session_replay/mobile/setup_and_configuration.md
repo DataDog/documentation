@@ -32,7 +32,7 @@ To set up Mobile Session Replay for Android:
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
 
-2. Once the DD SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
+2. Once the Datadog SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
    ```kotlin
       val config = Configuration.Builder(
          logsEnabled = true,
