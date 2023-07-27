@@ -109,7 +109,7 @@ Before getting started, ensure you have the following prerequisites:
     a. Select the AWS regions to integrate with.  
     b. Add your Datadog [API key][9].  
     c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
-    d. Optionally, enable [Cloud Security Management Misconfigurations][54] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+    d. Optionally, enable [Cloud Security Management Misconfigurations (CSM Misconfigurations)][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
 5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
