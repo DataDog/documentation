@@ -25,18 +25,14 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 ### Prerequisites
 
-1. LLDP (Link Layer Discovery Protocol) is enabled on the device with LLDP data exposed through SNMP.
+1. LLDP (Link Layer Discovery Protocol) and CDP (Cisco Discovery Protocol) are enabled on the device with this data exposed through SNMP.
 2. Datadog Agent version 7.46 or later is installed.
 
 ## Investigating devices
 
-In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics.
+In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics. You can also click on a device to see the following options:
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_hover.png" alt="The network topology map with the cursor hovering over a device" style="width:80%;" >}}
-
- You can also click on a device to see the following options:
-
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_options.png" alt="The network topology map with a device selected, displaying the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_options.png" alt="The network topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
 
 ### Inspect
 
@@ -60,10 +56,14 @@ Choose **View flow details** to open the NetFlow tab filtered by the device's `@
 
 ### Troubleshooting
 
-If you don't see your device, verify that it's exposing LLDP data with the following command:
+If you don't see your device, verify that it's exposing LLDP and CDP data with the following commands:
 
 ```yaml
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.0.8802
+```
+
+```yaml
+sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 ```
 
 ## Further Reading
