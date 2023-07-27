@@ -32,13 +32,13 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics. You can also click on a device to see the following options:
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_options.png" alt="The network topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_detail_menu.png" alt="The network topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
 
 ### Inspect
 
 Choose **Inspect** to see the device's interface connections. Click on any of the connected interfaces for further investigation.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view.png" alt="The Inspect view of an individual device, displaying the device's interface connections" style="width:80%;" >}}
 
 ### View device details
 
