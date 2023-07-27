@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting Mobile Session Replay
 kind: documentation
-description: Describes how to troubleshoot Mobile Session Replay
+description: How to troubleshoot Mobile Session Replay.
 aliases:
 further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'

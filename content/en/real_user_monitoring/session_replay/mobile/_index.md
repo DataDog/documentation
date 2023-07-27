@@ -1,7 +1,7 @@
 ---
 title: Mobile Session Replay
 kind: documentation
-description: Describes how to setup Session Replay for mobile devices
+description: Setting up Session Replay for mobile devices.
 aliases:
 further_reading:
     - link: '/real_user_monitoring/session_replay'
@@ -10,7 +10,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Mobile Session Replay is in public beta for native mobile apps. As such, there is no billing for this feature at the time.
+Mobile Session Replay is in public beta for native mobile apps. There is no billing for this feature.
 </div>
 
 ## Overview

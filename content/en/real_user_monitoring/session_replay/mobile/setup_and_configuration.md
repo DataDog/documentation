@@ -1,7 +1,7 @@
 ---
 title: Mobile Session Replay Setup and Configuration
 kind: documentation
-description: Describes how to setup and configure Mobile Session Replay
+description: Setting up and configuring Mobile Session Replay.
 aliases:
 further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
@@ -71,13 +71,12 @@ You can install Mobile Session Replay with either CocoaPods or Swift Package Man
 2. Link both RUM and Session Replay SDKs using git branches in `Podfile` and run `pod install` (or `pod update` if you're upgrading from an existing installation):
 
    ```ruby
-
      pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :branch => 'session-replay-beta'
      pod 'DatadogSDKSessionReplay', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :branch => 'session-replay-beta'
 
    ```
 
-3. To verify installation, check `Podfile.lock`. Both pods should list the same version. For example:
+3. To verify installation, check `Podfile.lock`. Both pods list the same version. For example:
 
    ```ruby
      PODS:
@@ -140,7 +139,7 @@ sessionReplay.start()
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Beginning with v1.19.0, the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
+Beginning with v1.19.0, the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, set the desired sample rate in the configuration:
 
 {{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
@@ -170,7 +169,7 @@ Datadog.setVerbosity(Log.DEBUG)
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. If everything works correctly, you should see following logs in the Xcode console soon (about 30 seconds) after launching the application:
+To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. The following logs display in the Xcode console soon (about 30 seconds) after launching the application:
 
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 

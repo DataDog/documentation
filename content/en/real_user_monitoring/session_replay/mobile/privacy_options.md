@@ -1,7 +1,7 @@
 ---
 title: Mobile Session Replay Privacy Options
 kind: documentation
-description: Describes how to configure privacy options for Mobile Session Replay
+description: Configure privacy options for Mobile Session Replay.
 aliases:
 further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
@@ -25,7 +25,7 @@ further_reading:
 
 Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
 
-Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected.
+Default privacy options for Session Replay protect end user privacy and prevent sensitive organizational information from being collected.
 
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
@@ -157,7 +157,7 @@ Depending on how you've configured your privacy settings, the type of text, and 
 
 With the above text strategies in mind, you have a few different options if you want to override the default privacy rule of `mask` in your configuration.
 
-The following chart shows how we apply different text masking strategies, using the rules you set up in your configuration, to the below text types.
+The following chart shows how Datadog applies different text masking strategies, using the rules you set up in your configuration, to the below text types.
 
 | Type | Allow all | Mask all | Mask user input |
 |------|-------------|------------|-------------------|

@@ -1,7 +1,7 @@
 ---
 title: How Mobile Session Replay Impacts App Performance
 kind: documentation
-description: Describes performance benchmarking for Mobile Session Replay
+description: Performance benchmarking for Mobile Session Replay.
 aliases:
 further_reading:
     - link: '/real_user_monitoring/session_replay/mobile'
@@ -24,7 +24,7 @@ further_reading:
 ## Overview
 Session Replay leverages the existing mechanisms of batching and smart upload from the Datadog SDK core. These mechanisms enable efficient and optimized data transfer from your application to Datadog servers. By batching multiple events together and intelligently uploading them at appropriate intervals, Session Replay minimizes the overall impact on network and bandwidth usage while ensuring an efficient utilization of network resources.
 
-This page describes how the Mobile Session Replay SDK is designed to support a seamless user experience without impacting your application's performance.
+Mobile Session Replay SDK supports a seamless user experience without impacting your application's performance.
 
 ## Main thread
 The system responsible for capturing the current screen of your application runs in the UI Thread, which can potentially cause UI updates to be delayed. However, Datadog uses highly optimized processes to minimize the workload the SDK performs in the UI Thread.
