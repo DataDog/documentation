@@ -69,6 +69,8 @@ By default, the `mask all` setting is enabled for all data. With this setting en
 
 With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
 
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input.png" alt="What your application screen may resemble when user input fields are masked." style="width:60%;">}}
+
 {{< tabs >}}
 {{% tab "Android" %}}
 
