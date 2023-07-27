@@ -106,7 +106,7 @@ Recurring downtimes are useful for recurring maintenance windows. Set a recurrin
 When a single downtime of a recurring downtime ends, the single downtime is cancelled and a new downtime is created with the same constraints and updated start and end times. <br>
 **Note**: The original creator is associated with all the newly created downtimes.
 
-{{< img src="/monitors/downtimes/downtime_recurring_rrule.png" alt="Fields for scheduling recurring downtime with RRULE" style="width:90%;">}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" style="width:100%;" >}}
 
 Use [recurrence rules][6] (RRULEs) to define downtimes schedules. Use the official [RRULE generator][7] as a tool to generate recurring rules. A common use case is to use RRULES to define downtimes on specific days of the month, for example, on the third Monday of each month. For more use cases on recurrence, see the guide to [Suppress alerts with Downtimes][8].
 
