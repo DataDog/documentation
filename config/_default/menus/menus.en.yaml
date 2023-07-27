@@ -2413,7 +2413,7 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_troubleshooting_sql_server
     weight: 107
-  - name: Setting up Oracle
+  - name: Setting Up Oracle
     url: database_monitoring/setup_oracle/
     parent: dbm
     identifier: dbm_setup_oracle
