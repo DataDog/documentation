@@ -20,7 +20,7 @@ The groups widget allows you to keep similar graphs together on your dashboard. 
 1. Add several widgets to your dashboard.
 2. Select multiple widgets with the click and drag feature, or press Shift and click.
 3. Click on the **Group** option.
-  {{< img src="dashboards/widgets/group/widget-group-button.png" alt="Group option that appears after you select multiple widget." style="width:100%;" >}}
+  {{< img src="dashboards/widgets/group/widget-group-button.png" alt="Group option that appears after you select multiple widgets" style="width:100%;" >}}
 4. Click the pencil icon in the upper right corner of your group to choose a name and apply a style to your group.
 
 ## API
