@@ -1,5 +1,5 @@
 ---
-title: Service Scorecards (Beta)
+title: Service Scorecards
 kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/"
@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Service Scorecards are in public beta.
+Service Scorecards are in beta.
 {{< /callout >}}
 
 ## Overview
