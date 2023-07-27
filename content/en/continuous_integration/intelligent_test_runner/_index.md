@@ -75,4 +75,4 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [1]: /continuous_integration/tests/
 [2]: https://app.datadoghq.com/ci/settings/test-service
 [3]: https://app.datadoghq.com/ci/test-runs
-[4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner-beta
+[4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
