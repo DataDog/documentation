@@ -26,7 +26,7 @@ Choose a name, set the index filter to `Source:stepfunction`, leave everything e
 
 If your organization has an existing all-encompassing index with a low limit, place your new index at the top.
 
-**Note**: Log indexation is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily turn on indexation, debug, and turn off indexation afterwards.
+**Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][6] for more information.
 
 ## Lambda traces are not merging with Step Function traces
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
@@ -43,3 +43,4 @@ If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces
 [2]: https://app.datadoghq.com/logs/livetail
 [3]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
 [4]: https://app.datadoghq.com/logs/pipelines/indexes
+[6]: /logs/log_configuration/indexes/
