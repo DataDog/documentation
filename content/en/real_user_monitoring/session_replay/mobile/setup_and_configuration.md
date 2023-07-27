@@ -30,7 +30,7 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
 
 To set up Mobile Session Replay for Android:
 
-1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
+1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2] with views instrumentation enabled.
 
 2. Once the Datadog SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
    ```kotlin
@@ -66,7 +66,7 @@ You can install Mobile Session Replay with either CocoaPods or Swift Package Man
 
 ### Installation with CocoaPods
 
-1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][2].
+1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][2] with views instrumentation enabled.
 
 2. Link both RUM and Session Replay SDKs using git branches in `Podfile` and run `pod install` (or `pod update` if you're upgrading from an existing installation):
 
@@ -163,14 +163,16 @@ This configuration option is not available for iOS.
 {{< tabs >}}
 {{% tab "Android" %}}
 
-This configuration option is not available for Android.
+{{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+Datadog.setVerbosity(Log.DEBUG)
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. If everything works correctly, you should see following logs in the Xcode console soon (about 30 seconds) after launching the application:
 
-{{< code-block lang="swift" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
 [DATADOG SDK] 🐶 → 18:21:29.812 ⏳ (session-replay) Uploading batch...
 [DATADOG SDK] 🐶 → 18:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]

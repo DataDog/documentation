@@ -35,9 +35,9 @@ Using the masking modes below, you can override the default setup on a per-appli
 
 ### Mask all text elements
 
-By default, the `mask all` setting is enabled for all data. With this setting enabled, all text content on screen is replaced with X's, as shown below.
+By default, the `mask` setting is enabled for all data. With this setting enabled, all text content on screen is masked, as shown below.
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all.png" alt="What your application screen may resemble when `mask all` is enabled." style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all.png" alt="What your application screen may resemble when `mask` is enabled." style="width:60%;">}}
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -46,7 +46,7 @@ By default, the `mask all` setting is enabled for all data. With this setting en
 
    // mask all text elements
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-       .setPrivacy(SessionReplayPrivacy.MASK_ALL)
+       .setPrivacy(SessionReplayPrivacy.MASK)
        .build()
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}
@@ -56,12 +56,14 @@ By default, the `mask all` setting is enabled for all data. With this setting en
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
+    // mask all text elements
     SessionReplay.enable(
         with: SessionReplay.Configuration(
             replaySampleRate: sampleRate,
             defaultPrivacyLevel: .mask
         )
     )
+
    {{< /code-block >}}
 
 {{% /tab %}}
@@ -89,22 +91,25 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+   
+   // mask only input elements
     SessionReplay.enable(
         with: SessionReplay.Configuration(
             replaySampleRate: sampleRate,
             defaultPrivacyLevel: .maskUserInput
         )
     )
+
    {{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Allow all (no masking)
+### Allow (no masking)
 
 With the `allow` setting enabled, all text is revealed.
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all.png" alt="What your application screen may resemble when `allow all` is enabled." style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all.png" alt="What your application screen may resemble when `allow` is enabled." style="width:60%;">}}
 
 **Note**: Even with this option enabled, any sensitive text fields, such as passwords, emails, phone numbers, and addresses are still masked. For more information, see [Text masking definitions](#text-masking-definitions).
 
@@ -124,36 +129,15 @@ With the `allow` setting enabled, all text is revealed.
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+   // no masking; all text is revealed
     SessionReplay.enable(
         with: SessionReplay.Configuration(
             replaySampleRate: sampleRate,
             defaultPrivacyLevel: .allow
         )
     )
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Unmask data in all recorded content
-By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, add this option to **unmask data in all recorded content**:
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-   {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-    ...
-   .setSessionReplayPrivacy(SessionReplayPrivacy.[PRIVACY])
-   .build()
 
    {{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-This option is not available for iOS.
 
 {{% /tab %}}
 {{< /tabs >}}
