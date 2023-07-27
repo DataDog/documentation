@@ -12,7 +12,7 @@ further_reading:
 
 ### Requirements
 * The full Step Function execution length must be less than 15 minutes for full traces.
-* [Linked Lambda traces][1] are supported for Node.JS (layer v94+) and Python (layer v75+) runtimes.
+* Linked Lambda traces are supported for Node.JS (layer v94+) and Python (layer v75+) runtimes.
 
 ### Setup
 
@@ -116,7 +116,6 @@ For developers using [Serverless Framework][4] to deploy serverless applications
      4. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
      5. Enter a filter name. You can choose to name it "empty filter" and leave the *Filter pattern* box blank.
 4. Enable tracing on your Step Functions. Set the environment variable `DD_TRACE_ENABLED` to `true`.
-<!-- Where is this environment variable set? -->
 5. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog. The `service` tag defaults to the state machine's name.
 6. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `OutputPath` and `Parameters` keys with the following: 
 
@@ -130,7 +129,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
    The `JsonMerge` [intrinsic function][6] merges the [Step Functions context object][7] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
 
-   **Example**:
+**Example**:
 
 {{< highlight json "hl_lines=4-7" >}}
 "Lambda Read From DynamoDB": {
@@ -185,7 +184,6 @@ After you have invoked your state machine, go to the [**Trace Explorer**][2] in 
 
 If you cannot see your traces, see [Troubleshooting][5].
 
-[1]: #associated-lambda-tracing
 [2]: https://app.datadoghq.com/apm/traces
 [3]: /serverless/installation/#installation-instructions
 [5]: /serverless/step_functions/troubleshooting
