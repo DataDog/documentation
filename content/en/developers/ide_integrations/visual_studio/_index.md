@@ -32,9 +32,9 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 ## Requirements
 
-- Windows operating system version 10 or higher
+- Windows 10 or higher
+- .NET Framework 4.7.2 or higher
 - Visual Studio 2022 Community, Professional or Enterprise edition (64-bit)
-- .NET Framework 4.8 or higher
 - **Datadog Account** The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2]
 
@@ -62,6 +62,23 @@ Alternatively, you can download the extension from the official [Visual Studio M
 3. Click the **Add Service** button
 4. Select the services that are related to your .NET solution
 5. Save the .NET solution file
+
+## Usage
+
+After you add a service to your solution, right-click on the service and click **Profile** to open a Profiling tab for the service. A profiling tab displays data for only one service, but you can have multiple tabs open simultaneously.
+
+The Profiling tab shows Continuous Profiling information for the service in a selected environment, aggregated over a specific time frame. Available views are:
+
+- Top list: Displays a list of the most resource intensive methods for the current profiling measure.
+- Flame graph: A flame graph representing stack traces in the profiles.
+
+You can specify the following parameters for the profiling data:
+
+- The profile type to be displayed
+- The environment in which the service is running
+- The time frame for the profile samples to be aggregated
+
+The available profiling types usually include options like **CPU Time** and **Allocated Memory**, but are determined by the platform and vary by language.
 
 ## Feedback
 
