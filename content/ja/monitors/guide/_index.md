@@ -39,6 +39,7 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}ローカルタイムゾーンを考慮した異常検出モニターの更新方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}モニター設定の変更が反映されない{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}モニターと Statuspage のインテグレーション{{< /nextlink >}}
+{{< nextlink href="monitors/guide/github_gating" >}}GitHub Actions のデプロイを Datadog モニターで選別する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}
