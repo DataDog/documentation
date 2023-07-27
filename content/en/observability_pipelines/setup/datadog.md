@@ -317,6 +317,14 @@ transforms:
       .tags.sender = "observability_pipelines_worker"
       .tags.opw_aggregator = get_hostname!()
 
+## This buffer configuration is split into the following, totaling the 288GB
+## provisioned automatically by the Terraform module:
+## - 240GB buffer for logs
+## - 48GB buffer for metrics
+##
+## This should work for the vast majority of OP Worker deployments and should rarely
+## need to be adjusted. If you do change it, be sure to update the `ebs-drive-size-gb`
+## parameter.
 sinks:
   datadog_logs:
     type: datadog_logs
