@@ -12,7 +12,7 @@ further_reading:
 
 ### Requirements
 * The full Step Function execution length must be less than 15 minutes for full traces.
-* Linked Lambda traces are supported for Node.JS (layer v94+) and Python (layer v75+) runtimes.
+* Linked Lambda traces are supported for Node.js (layer v94+) and Python (layer v75+) runtimes.
 
 ### Setup
 
