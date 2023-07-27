@@ -50,7 +50,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
-5. For Node.JS and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces.
+5. For Node.JS and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
 [2]: /logs/guide/forwarder/
@@ -59,6 +59,7 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 [5]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [6]: logs/guide/forwarder/?tab=cloudformation#installation
 [7]: serverless/libraries_integrations/plugin/#configuration-parameters
+[8]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Datadog Serverless CLI" %}}
 1. If you have not already, install the [Datadog Serverless CLI][1] v2.18.0+.
@@ -81,13 +82,14 @@ For developers using [Serverless Framework][4] to deploy their serverless applic
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
-5. For Node.JS and Python runtimes, add the flag `-- mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces.
+5. For Node.JS and Python runtimes, add the flag `-- mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
 
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder/
 [3]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [4]: logs/guide/forwarder/?tab=cloudformation#installation
 [5]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
+[6]: /serverless/installation/#installation-instructions
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -163,6 +165,8 @@ Alternatively, if you have business logic defined in the payload, you could also
     }
 {{< /highlight >}}
 
+If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][3].
+
 [1]: /logs/guide/forwarder/
 [2]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
 [3]: /logs/guide/forwarder/?tab=cloudformation#installation
@@ -183,5 +187,5 @@ If you cannot see your traces, see [Troubleshooting][5].
 
 [1]: #associated-lambda-tracing
 [2]: https://app.datadoghq.com/apm/traces
-
+[3]: /serverless/installation/#installation-instructions
 [5]: /serverless/step_functions/troubleshooting
