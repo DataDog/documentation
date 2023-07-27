@@ -12,7 +12,7 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Generic actions are workflow actions which are not associated with a tool or integration. This allows you to overcome any action that may not be currently present in the Actions catalog. 
+Generic actions are workflow actions that are not associated with a tool or integration. They allow you to overcome any action that may not be currently present in the Actions catalog. 
 As with all workflow actions, you can use the [context variables][1] tab to access any values available in the workflow context.
 You can also [request for a new action or entire integration][5]. 
 
