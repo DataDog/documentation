@@ -44,7 +44,7 @@ Are you looking for Network Device Monitoring instead? See the [NDM setup instru
 
 Use the search bar at the top of the page to query for dependencies between a client, which makes the DNS request, and a DNS server, which responds to the DNS request. The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
 
-To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
+In the default view, the client is automatically grouped by the most common tags, so each row in the table represents a service that is making DNS requests to some DNS server. To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. 
 
 {{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring default view" style="width:100%;">}}
 
@@ -64,7 +64,7 @@ This example shows all flows from pods in the production environment's availabil
 
 Your DNS metrics are displayed through the graphs and the associated table.
 
-**Note:** Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
+**Note**: Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
 
 The following DNS metrics are available:
 
