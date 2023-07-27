@@ -82,7 +82,7 @@ The site parameter is an SDK [initialization parameter][1]. Datadog intake origi
 
 The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation.
 
-Example: with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the SDK will send requests to an URL looking like this: `https://example.org/datadog-intake-proxy?ddforward=%2Ffoo%2Fv2%2Fbar%3Fbaz%3D1`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/foo/v2/bar?baz=1`.
+For example, with a `site` set to `datadoghq.eu` and a `proxy` set to `https://example.org/datadog-intake-proxy`, the RUM Browser SDK sends requests to an URL that looks this: `https://example.org/datadog-intake-proxy?ddforward=%2Ffoo%2Fv2%2Fbar%3Fbaz%3D1`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/foo/v2/bar?baz=1`.
 
 ## Legacy proxy setups
 
