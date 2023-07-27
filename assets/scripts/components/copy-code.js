@@ -38,7 +38,7 @@ function copyCode (event, btn){
     const codeSnippetElement = event.target
     .closest('.code-snippet')
     .querySelector('.chroma');
-
+    
     // Create a range object
     const range = document.createRange();
     // Select the node
@@ -46,7 +46,7 @@ function copyCode (event, btn){
     // create system clipboard object
     const Clipboard = navigator.clipboard
     // write code snippet text
-    Clipboard.writeText(codeSnippetElement.textContent).then(() => {
+    Clipboard.writeText(codeSnippetElement.innerText).then(() => {
         btn.textContent = "Copied!";
         setTimeout(function() {
             btn.textContent = "Copy"

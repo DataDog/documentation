@@ -189,7 +189,7 @@ Datadog Google Cloud インテグレーションでは、サービスアカウ�
 
 5. Agent を再起動します。
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://app.datadoghq.com/security/configuration
 [3]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=kubernetes
 
@@ -218,7 +218,7 @@ CSPM では、クラウドリソースを評価し、潜在的なコンフィギ
     - **Docker**: framework:cis-docker
     - **Kubernetes**: framework:cis-kubernetes
 
-デフォルトのコンプライアンスルールに目を通した後は、[Security Findings Explorer][3] でクラウドのコンフィギュレーションミスを確認して対策を行い、 [各ルールが自社の環境をどのようにスキャンするかをカスタマイズ][4]して、[通知ターゲットを設定][5]することができます。
+デフォルトのコンプライアンスルールに目を通した後は、[Security Findings Explorer][3] でクラウドのコンフィギュレーションミスを確認して対策を行い、各ルールが自社の環境をどのようにスキャンするかをカスタマイズして、[通知ターゲットを設定][4]することができます。
 
 ## CSPM の無効化
 
@@ -239,5 +239,4 @@ CSPM を無効にした後も、これまでの知見やホームページはア
 [1]: https://app.datadoghq.com/security/compliance/homepage
 [2]: /ja/security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
-[4]: /ja/security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule
-[5]: /ja/security/cspm/frameworks_and_benchmarks#set-notification-targets-for-detection-rules
+[4]: /ja/security/cspm/frameworks_and_benchmarks#view-your-compliance-posture

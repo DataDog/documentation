@@ -1,5 +1,5 @@
 ---
-description: Créez des métriques custom à partir de vos événements RUM
+description: Créez des métriques custom à partir de vos événements RUM.
 further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
@@ -7,7 +7,7 @@ further_reading:
     et mobile
 - link: /real_user_monitoring/explorer/
   tag: Documentation
-  text: Apprendre à créer des requêtes dans RUM Explorer
+  text: Découvrir comment créer des requêtes dans le RUM Explorer
 - link: /real_user_monitoring/explorer/search/#event-types/
   tag: Documentation
   text: En savoir plus sur les types d'événements RUM
@@ -19,7 +19,7 @@ further_reading:
   text: Générer des métriques basées sur RUM pour suivre les tendances historiques
     relatives à l'expérience client
 kind: documentation
-title: Générer des métriques custom à partir des événements RUM
+title: Générer des métriques custom à partir d'événements RUM
 ---
 
 ## Présentation
@@ -32,9 +32,9 @@ Les métriques custom basées sur RUM vous permettent de synthétiser à moindre
 
 ## Créer une métrique custom basée sur RUM
 
-Pour créer une métrique custom à partir des données d'événement RUM, accédez à [**UX Monitoring** > **Generate Metrics**][4] et cliquez sur **+ New Metric**.
+Pour créer une métrique custom à partir de données d'événement RUM, accédez à [**UX Monitoring** > **Setup & Configuration** > **Generate Metrics**][4] et cliquez sur **+ New Metric**.
 
-{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="Cliquez sur + New Metric pour créer une métrique custom basée sur RUM" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="Cliquez sur + New Metric pour créer une métrique custom basée sur RUM" width="80%" >}}
 
 Pour créer une métrique custom à partir d'une requête de recherche dans le [RUM Explorer][5], cliquez sur le bouton **Export** et sélectionnez **Generate new metric** dans le menu déroulant.
 
@@ -48,7 +48,7 @@ Pour créer une métrique custom à partir d'une requête de recherche dans le [
    - Sélectionnez `*` pour calculer le nombre d'événements RUM renvoyés par votre requête de recherche.
    - Vous pouvez également saisir un attribut d'événement tel que `@action.target` pour agréger une valeur numérique et créer une métrique `count` ou `distribution` correspondante.
 
-   Si la facette utilisée pour les attributs RUM est une mesure, la valeur de la métrique correspond à celle de l'attribut RUM.
+   Si la facette utilisée pour l'attribut RUM est une mesure, la valeur de la métrique correspond à celle de l'attribut RUM.
 
 5. Dans le menu déroulant à côté de **group by**, sélectionnez un chemin pour le regroupement. Le nom du tag de métriques correspond à l'attribut d'origine ou au nom du tag, mais sans le symbole `@`. Les métriques custom générées à partir des événements RUM ne contiennent aucun tag, sauf si vous avez explicitement choisi d'en ajouter. Pour créer des tags de métriques, utilisez une dimension d'attribut ou de tag déjà présente dans vos événements RUM, comme `@error.source` ou `env`.
 
@@ -73,8 +73,8 @@ Les sessions et les vues sont considérées comme actives si une application est
 
    Supposons que vous avez une métrique custom basée sur RUM qui calcule le nombre de sessions utilisateur ayant obtenu plus de cinq erreurs. Une session portant l'ID `123` a atteint cinq erreurs à 11 h et a pris fin à 12 h.
 
-   - En comptabilisant la session ou la vue dès qu'elle correspond à la requête, vous incrémentez la valeur de la métrique count de un au timestamp de 11 h.
-   - En comptabilisant la session ou la vue inactive, vous incrémentez la valeur de la métrique count de un au timestamp de 12 h.
+   - En comptabilisant la session ou la vue dès qu'elle correspond à la requête, vous incrémentez la valeur de la métrique count d'une unité au timestamp de 11 h.
+   - En comptabilisant la session ou la vue inactive, vous incrémentez la valeur de la métrique count d'une unité au timestamp de 12 h.
 
 ## Gérer des métriques custom basées sur RUM
 
@@ -82,13 +82,13 @@ Vous pouvez générer une métrique count représentant le nombre d'événements
 
 ### Modifier une métrique custom basée sur RUM
 
-Pour modifier une métrique, passez votre curseur sur une métrique et cliquez sur l'icône **Edit** en haut à droite.
+Pour modifier une métrique, passez votre curseur dessus et cliquez sur l'icône **Edit** en haut à droite.
 
-- Filter query : modifiez le groupe d'événements RUM correspondants agrégés en métrique.
-- Aggregation groups : modifiez les tags pour gérer la cardinalité des métriques générées.
-- Percentile selection : cliquez sur **Calculate percentiles** pour supprimer ou générer des métriques en centiles.
+- Filtre de requête : modifiez l'ensemble d'événements RUM correspondants qui sont agrégés en métriques.
+- Groupes d'agréation : modifiez les tags afin de gérer la cardinalité des métriques générées
+- Sélection de centiles : cliquez sur **Calculate percentiles** pour supprimer ou générer des métriques en centiles.
 
-Comme il est impossible de renommer une métrique existante, nous vous recommandons d'en créer une autre.
+Puisqu'il est impossible de renommer une métrique existante, il est recommandé d'en créer une autre.
 
 ### Supprimer une métrique custom basée sur RUM
 
@@ -96,11 +96,11 @@ Pour que votre métrique custom ne génère plus de points de données et ne soi
 
 ## Utilisation
 
-Vous pouvez utiliser des métriques custom basées sur RUM pour les actions suivantes :
+Les métriques custom basées sur RUM vous permettent d'accomplir ce qui suit :
 
 - Visualiser les tendances sur une période définie dans un [dashboard][12]
-- Déclencher une alerte lorsqu'une métrique se comporte de manière anormale dans un [monitor d'anomalies][13]
-- Déclencher une alerte lorsqu'une métrique est sur le point de franchir un seuil dans un [monitor de prévision][14]
+- Déclencher une alerte lorsqu'une métrique se comporte de manière anormale dans un [monitor d'anomalie][13]
+- Déclencher une alerte lorsqu'une métrique va franchir un seuil dans un [monitor de prévision][14]
 - Créer des [SLO basés sur des métriques][15] pour suivre les objectifs de performance axés sur l'utilisateur de vos équipes et organisations
 
 ## Pour aller plus loin
@@ -121,4 +121,4 @@ Vous pouvez utiliser des métriques custom basées sur RUM pour les actions suiv
 [12]: /fr/dashboards/querying/#configuring-a-graph
 [13]: /fr/monitors/types/anomaly/
 [14]: /fr/monitors/types/forecasts/
-[15]: /fr/monitors/service_level_objectives/metric/
+[15]: /fr/service_management/service_level_objectives/metric/

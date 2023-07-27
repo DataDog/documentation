@@ -18,7 +18,7 @@ further_reading:
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
 kind: documentation
-title: Kubernetes トレース収集
+title: Kubernetes APM - トレース収集
 ---
 
 アプリケーションのトレースを収集するには、[Kubernetes クラスターで Datadog Agent を実行する][1]必要があります。

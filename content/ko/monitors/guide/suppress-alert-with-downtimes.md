@@ -219,7 +219,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 [다운타임 페이지 관리][1]를 열어 새 다운타임을 추가하세요. `recurring`을 선택하세요.
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="다운타임 반복 규칙" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.jpg" alt="다운타임 반복 규칙" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}

@@ -21,6 +21,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly を使用した RUM のリモート構成{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM デプロイメント追跡の概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザ RUM:" >}}
