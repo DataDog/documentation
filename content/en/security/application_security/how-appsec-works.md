@@ -125,7 +125,7 @@ For more information, read [Application Vulnerability Management][5].
 
 ## API security
 
-<div class="alert alert-info">API security is in beta.</div>
+<div class="alert alert-info">API security is in private beta.</div>
 
 Datadog Application Security Management (ASM) provides visibility into threats targeting your APIs. Use the [API Catalog][27] to view an API's health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both ASM and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
