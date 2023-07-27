@@ -49,23 +49,23 @@ You can filter to traffic where the client or server matches a CIDR using `CIDR(
 
 {{< img src="network_performance_monitoring/network_analytics/recommended_query_options.png" alt="The Network Analytics page in Datadog displaying three recommended queries" style="width:80%;">}}
 
-Recommended queries allow you to jumpstart your investigation into your network – whether it’s troubleshooting a network issue or gaining a better understanding of your network. There are three recommended queries at the top of the Analytics page as well as three recommended queries at the top of the DNS page. These queries allow you to easily access commonly used queries, and also provide a quick view into any changes that occurred to that query in the last hour. 
+Recommended queries allow you to jump-start your investigation into your network – whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. Three recommended queries are provided at the top of the Analytics page, and three others at the top of the DNS page. Use these queries to access commonly used data, and see any changes in that data in the last hour. 
 
-To run a recommended query, click on the tile to run it in your analytics page. Hovering over the tile will give you a more detailed description of what data the query is showing you.
+To run a recommended query, click on the tile. Hovering over the tile displays a more detailed description of the data the query returns.
 
 {{< img src="network_performance_monitoring/network_analytics/recommended_query_detail.png" alt="The detail view of a recommended query displaying a description and query information, with four query dimensions displayed: Search for, View clients as, View servers as, and Visualize as" style="width:80%;">}}
 
 ### Summary graphs
 
-Summary graphs are configurable graphs that you can modify to provide the most useful visualizations for your network. You can display up to three summary graphs at a time, and can change which metric to visualize as well as the visualization type itself. In order to change the metric you want to metric you want to visualize, you can click on the title of each graph and select in the dropdown which metric you’d like to see instead. 
+The summary graphs are a condensed view of your network, which you can modify to display volume, throughput, connections, or latency as needed. Display up to three summary graphs at a time, and change the data and visualization type to suit your organization. To update a graph's data source, click on the graph's title and make a selection from the dropdown.
 
 {{< img src="network_performance_monitoring/network_analytics/summary_graph_options.png" alt="The summary graph section of the Network Analytics page, displaying the available options to filter the data: Volume Sent, Throughput Sent, Volume Received, Throughput Received, Established Connections, Closed Connections, Established Connections / Second, Closed Connections / Second, and TCP Latency" style="width:80%;">}}
 
-To change a visualization type of a graph, click on the pencil icon in the top right corner of the graph. Depending on the metric you’re displaying, you can choose from up to six different types of visualizations shown below.
+To change the visualization type, click on the pencil icon in the top right corner of the graph. Select from the options available, as shown in the screenshot below.
 
-{{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type options with Area, Line, Bars, Toplist, Change, and Piechart" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type with Area, Line, Bars, Toplist, Change, and Piechart" style="width:80%;">}}
 
-To hide a specific graph, click on the hide icon next to the pencil icon. You can display as little as one graph or as many as three graphs. If you want to add more graphs, click on the plus button on the right side of the summary graph and select which graph you’d like to add back to the summary graph section. You can also reset the graphs to the default graphs when adding a new graph.
+To hide a specific graph, click on the hide icon next to the pencil icon. You can display as little as one graph or as many as three graphs. To add graphs, click on the plus icon `+` on the right side of the summary graph and select the graph to add. You can also reset the graphs to the default graphs when adding a new graph.
 
 {{< img src="network_performance_monitoring/network_analytics/summary_graphs_reset_graphs.png" alt="The summary graphs section displaying the options to Add graph and Reset Graphs" style="width:80%;">}}
 
