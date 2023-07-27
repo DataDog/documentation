@@ -13,7 +13,7 @@ DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML=<path_to_file.html>
 
 Alternatively, you can use the configuration entry.
 
-{{< programming-lang-wrapper langs="java,dotnet,ruby,php,nodejs,python" >}}
+{{< programming-lang-wrapper langs="java,dotnet,ruby,php,nodejs" >}}
 
 {{< programming-lang lang="java" >}}
 
@@ -67,15 +67,6 @@ datadog.appsec.http_blocked_template_json = <path_to_file.json>
 
 
 ```javascript
-
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="python" >}}
-
-
-```python
 
 ```
 
