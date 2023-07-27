@@ -12,7 +12,7 @@ further_reading:
 
 Sampling in Datadog's Real User Monitoring product enables you to collect data from a certain percentage of user traffic.
 
-This guide walks you through various best practices for RUM sampling so that you capture the sessions and collect data based on your 
+This guide walks you through various best practices for RUM sampling so that you capture the sessions and collect data based on your monitoring needs.
 
 ## Sampling configuration
 
