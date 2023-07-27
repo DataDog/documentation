@@ -17,13 +17,12 @@ Datadog Workflow Automation provides actions that can be performed against your 
 In addition to the workflow actions listed below, you can:
 - Use the [HTTP action][1] to make a request to any endpoint.
 - Implement [data transformation actions][2] to perform necessary operations on the information flowing through your workflow.
-- Leverage [logic steps][3] to control the flow of your workflow as you perform these series of actions.
+- Leverage logic steps to control the flow of your workflow as you perform these series of actions.
 
-For information on creating workflows, see [build workflows][4].
+For information on creating workflows, see [build workflows][3].
 
 See below for a list of all available workflow actions. Click an action to see its description, inputs, outputs, and parameters.
 
 [1]: /service_management/workflows/actions_catalog/generic_actions/#http
 [2]: /service_management/workflows/actions_catalog/generic_actions/#data-transformation
-[3]: /service_management/workflows/actions_catalog/generic_actions/#logic
-[4]: /service_management/workflows/build/
+[3]: /service_management/workflows/build/
