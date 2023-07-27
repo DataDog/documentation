@@ -51,14 +51,14 @@ end
 
 {{< programming-lang lang="php" >}}
 
-```php
+```dosini
 ; 98-ddtrace.ini
 
 ; Customises the HTML output provided on a blocked request
-;datadog.appsec.http_blocked_template_html = <path_to_file.html>
+datadog.appsec.http_blocked_template_html = <path_to_file.html>
 
 ; Customises the JSON output provided on a blocked request
-;datadog.appsec.http_blocked_template_json = <path_to_file.json>
+datadog.appsec.http_blocked_template_json = <path_to_file.json>
 ```
 
 {{< /programming-lang >}}
