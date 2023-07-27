@@ -55,30 +55,13 @@ Alternatively, you can download the extension from the official [Visual Studio M
 2. Click the **Sign In** button
 3. In the browser window that opens, select your site and organization, then authorize access to the platform
 
-### Link a service
+### Link services
 
 1. Open a .NET solution file with Visual Studio
 2. Go to Extensions -> Datadog -> Linked Services
 3. Click the **Add Service** button
 4. Select the services that are related to your .NET solution
 5. Save the .NET solution file
-
-## Usage
-
-After you add a service to your solution, right-click on the service and click **Profile** to open a Profiling tab for the service. A profiling tab displays data for only one service, but you can have multiple tabs open simultaneously.
-
-The Profiling tab shows Continuous Profiling information for the service in a selected environment, aggregated over a specific time frame. Available views are:
-
-- Top list: Displays a list of the most resource intensive methods for the current profiling measure.
-- Flame graph: A flame graph representing stack traces in the profiles.
-
-You can specify the following parameters for the profiling data:
-
-- The profile type to be displayed
-- The environment in which the service is running
-- The time frame for the profile samples to be aggregated
-
-The available profiling types usually include options like **CPU Time** and **Allocated Memory**, but are determined by the platform and vary by language.
 
 ## Feedback
 
