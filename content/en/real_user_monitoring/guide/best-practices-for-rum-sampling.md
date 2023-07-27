@@ -29,7 +29,7 @@ Only sessions that are sampled are available in RUM. For example, if the samplin
 
 The random sampling is by session, not by user.
 
-In terms of a recommended sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweak it based on the data you need.
+In terms of setting an ideal sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweak it based on the data you need.
 
 ### Adjusting sampling during live outages
 
