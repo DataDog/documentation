@@ -719,7 +719,11 @@ For example, assume there is a `signupLogger`, defined with all the other logger
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+datadogLogs.createLogger('signupLogger', {
+  level: 'info',
+  handler: 'http',
+  context: { env: 'staging' }
+)
 ```
 
 It can now be used in a different part of the code with:
@@ -737,7 +741,11 @@ For example, assume there is a `signupLogger`, defined with all the other logger
 
 ```javascript
 window.DD_LOGS.onReady(function () {
-  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', {
+    level: 'info',
+    handler: 'http',
+    context: { env: 'staging' }
+  )
 })
 ```
 
@@ -758,7 +766,11 @@ For example, assume there is a `signupLogger`, defined with all the other logger
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', {
+    level: 'info',
+    handler: 'http',
+    context: { env: 'staging' }
+  })
 }
 ```
 
