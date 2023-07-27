@@ -15,7 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Serverless Monitoring for AWS Lambda"
 ---
-<div class="alert alert-warning">This feature is in public beta. You can provide feedback by filling out the following <a href="https://docs.google.com/forms/d/e/1FAIpQLSe9BZIxSt4XMKsjZ2xnZCSEGDWbWw75-zMNM6yy3c3QzHx9hg/viewform?usp=sf_link">feedback form</a>.</div>
+<div class="alert alert-warning">This feature is in public beta. You can provide feedback by filling out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSe9BZIxSt4XMKsjZ2xnZCSEGDWbWw75-zMNM6yy3c3QzHx9hg/viewform?usp=sf_link">feedback form</a>.</div>
 
 {{< img src="serverless/step_functions/overview3.png" alt="An AWS Step Function span displayed in a flame graph visualization." style="width:100%;" >}}
 
