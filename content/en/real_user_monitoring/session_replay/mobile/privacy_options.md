@@ -56,10 +56,12 @@ By default, the `mask all` setting is enabled for all data. With this setting en
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
-   // mask all text elements
-   let configuration = SessionReplayConfiguration(privacy: .maskAll)
-   sessionReplay = SessionReplay.initialize(with: configuration)
-   sessionReplay.start()
+    SessionReplay.enable(
+        with: SessionReplay.Configuration(
+            replaySampleRate: sampleRate,
+            defaultPrivacyLevel: .mask
+        )
+    )
    {{< /code-block >}}
 
 {{% /tab %}}
@@ -87,10 +89,12 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-   // mask only input elements
-   let configuration = SessionReplayConfiguration(privacy: .maskUserInput)
-   sessionReplay = SessionReplay.initialize(with: configuration)
-   sessionReplay.start()
+    SessionReplay.enable(
+        with: SessionReplay.Configuration(
+            replaySampleRate: sampleRate,
+            defaultPrivacyLevel: .maskUserInput
+        )
+    )
    {{< /code-block >}}
 
 {{% /tab %}}
@@ -98,7 +102,7 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 
 ### Allow all (no masking)
 
-With the `allow all` setting enabled, all text is revealed.
+With the `allow` setting enabled, all text is revealed.
 
 {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all.png" alt="What your application screen may resemble when `allow all` is enabled." style="width:60%;">}}
 
@@ -120,11 +124,12 @@ With the `allow all` setting enabled, all text is revealed.
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-
-   // no masking; all text is revealed
-   let configuration = SessionReplayConfiguration(privacy: .allowAll)
-   sessionReplay = SessionReplay.initialize(with: configuration)
-   sessionReplay.start()
+    SessionReplay.enable(
+        with: SessionReplay.Configuration(
+            replaySampleRate: sampleRate,
+            defaultPrivacyLevel: .allow
+        )
+    )
    {{< /code-block >}}
 
 {{% /tab %}}
@@ -166,7 +171,7 @@ Depending on how you've configured your privacy settings, the type of text, and 
 | Space-preserving mask | Each visible character is replaced with a lowercase "x" | `"Hello world"` → `"xxxxx xxxxx"` |
 | Fixed-length mask | The entire text field is replaced with a constant of three asterisks (***) | `"Hello world"` → `"***"`
 
-With the above text strategies in mind, you have a few different options if you want to override the default privacy rule of `mask all` in your configuration.
+With the above text strategies in mind, you have a few different options if you want to override the default privacy rule of `mask` in your configuration.
 
 The following chart shows how we apply different text masking strategies, using the rules you set up in your configuration, to the below text types.
 
