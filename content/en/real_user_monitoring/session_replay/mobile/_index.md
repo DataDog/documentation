@@ -15,7 +15,7 @@ Mobile Session Replay is in public beta for native mobile apps. There is no bill
 
 ## Overview
 
-Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Simulating user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
+Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
 
 {{< img src="real_user_monitoring/session_replay/mobile/mobile_replay.mp4" alt="An example of a Mobile Session Replay recording" video="true" style="width:60%;">}}
 

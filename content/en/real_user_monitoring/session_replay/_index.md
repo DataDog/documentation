@@ -37,7 +37,7 @@ To reduce Session Replay's network impact and ensure the Session Replay recorder
 
 ## Setup
 
-Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][1] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. For setup in mobile environments, see [Mobile Session Replay][5].
+Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. For setup in mobile environments, see [Mobile Session Replay][5].
 
 <div class="alert alert-info">You must be on the latest version of the SDK (v3.6.0 or later)</div>
 
@@ -67,10 +67,8 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ## Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][2], which includes replays.
+To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6], which includes replays.
 
-[1]: /real_user_monitoring/browser/#setup
-[2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
 ## Mobile Session Replay
 
 Learn more about the [Session Replay for Mobile][5].
@@ -81,5 +79,6 @@ Learn more about the [Session Replay for Mobile][5].
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /real_user_monitoring/session_replay/web
+[4]: /real_user_monitoring/session_replay/
 [5]: /real_user_monitoring/session_replay/mobile/
+[6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
