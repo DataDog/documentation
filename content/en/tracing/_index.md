@@ -61,7 +61,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers, or serverless functions takes just minutes.
 
 <div class="alert alert-info">
-<strong>Beta: Single Step APM Instrumentation</strong> - Enable APM when you install the Datadog Agent on your hosts and containers. Your services are automatically instrumented without having to modify the code, quickly getting you up and running with application performance monitoring. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
+<strong>Beta: Single Step APM Instrumentation</strong> - Enable APM instrumentation when you install the Datadog Agent to get started quickly with application performance monitoring. This option automatically instruments your services without you needing to modify the code. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
 </div>
 
 **Read [Sending Traces to Datadog][2] to get started.**

@@ -37,11 +37,11 @@ Select your language:
 
 ## Step 2 - Instrument your application 
 
-When you add the Datadog tracing library to your code, it instruments the service and sends traces to the Datadog Agent, which sends them to the Datadog backend to be shown in the UI.
+When you add the Datadog tracing library to your code, it instruments the service and sends traces to the Datadog Agent. The Agent then sends the traces to the Datadog backend to be displayed in the UI.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
 
-Depending on your application language and the infrastructure you deploy on, you have the following options for how to instrument the application.
+Depending on the programming language and infrastructure you use, you have the following options to instrument your application.
 
 ### Option 1 - Add the library directly to your application code
 
@@ -57,9 +57,8 @@ To instrument an application written in a language that does not have official l
 
 For Kubernetes, hosts, and containers, you can inject the tracing library locally at the Agent without modifying your application code. For more information and instructions, read [Injecting Libraries Locally][4].
 
-On Kubernetes, you can inject the library into applications written in Java, Python, Node.js, .NET, and Ruby.
-
-**Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
+- For Kubernetes, you can inject the library into applications written in Java, Python, Node.js, .NET, and Ruby.
+- **Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
 
 ### Option 3 - Inject the library remotely from the Datadog UI
 
@@ -68,7 +67,7 @@ For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries f
 
 ## APM Setup Tutorials
 
-The following tutorials provide a walk-through of setting up distributed tracing on a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the direct method (Option 1, above):
+The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the direct method ([Option 1](#option-1---add-the-library-directly-to-your-application-code)):
 
 {{< whatsnext desc="Choose your language and environment:" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
@@ -88,7 +87,9 @@ The following tutorials provide a walk-through of setting up distributed tracing
     {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Go Application in AWS ECS with Fargate{{< /nextlink >}}
 
 {{< /whatsnext >}}
-<br>
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/compatibility/
 [2]: /developers/community/libraries/#apm-tracing-client-libraries

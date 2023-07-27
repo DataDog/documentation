@@ -111,7 +111,7 @@ See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
 - [Inject the instrumentation library from the Datadog UI][12] (beta); or
-- Directly adding the tracing library in the application, as described [on the rest of this page](#instrument-your-application). Read more about [compatibility information][1].
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
 ### Instrument your application
 
@@ -142,8 +142,8 @@ After the agent is installed, to begin tracing your applications:
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
 | `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, `1.3-alpha`, etc.) |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version x.x.x, if [Agent Remote Configuration][16] is enabled where ever this service runs, you can set `DD_LOGS_INJECTION` from the service's details page in [Service Catalog][17]. |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version x.x.x, if [Agent Remote Configuration][16] is enabled where ever this service runs, you can set `DD_TRACE_SAMPLE_RATE` from the service's details page in [Service Catalog][17].     |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version x.x.x, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` from the service's details page in [Service Catalog][17]. |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version x.x.x, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` from the service's details page in [Service Catalog][17].     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
 
 Additional [configuration options](#configuration) are described below.

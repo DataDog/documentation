@@ -140,7 +140,7 @@ See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
 - [Inject the instrumentation library from the Datadog UI][12] (beta); or
-- Directly adding the tracing library in the application, as described [on the rest of this page](#instrument-your-application). Read more about [compatibility information][1].
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
 ### Instrument your application
 
