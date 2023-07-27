@@ -37,7 +37,7 @@ Using the masking modes below, you can override the default setup on a per-appli
 
 By default, the `mask` setting is enabled for all data. With this setting enabled, all text content on screen is masked, as shown below.
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all.png" alt="What your application screen may resemble when `mask` is enabled." style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="What your application screen may resemble when `mask` is enabled." style="width:50%;">}}
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -73,7 +73,7 @@ By default, the `mask` setting is enabled for all data. With this setting enable
 
 With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input.png" alt="What your application screen may resemble when user input fields are masked." style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input-2.png" alt="What your application screen may resemble when user input fields are masked." style="width:50%;">}}
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -109,7 +109,7 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 
 With the `allow` setting enabled, all text is revealed.
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all.png" alt="What your application screen may resemble when `allow` is enabled." style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all-2.png" alt="What your application screen may resemble when `allow` is enabled." style="width:50%;">}}
 
 **Note**: Even with this option enabled, any sensitive text fields, such as passwords, emails, phone numbers, and addresses are still masked. For more information, see [Text masking definitions](#text-masking-definitions).
 
