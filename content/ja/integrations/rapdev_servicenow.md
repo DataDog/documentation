@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-servicenow
 app_uuid: 50d76130-5970-43e1-a055-0cd5d681d9b7
 assets:

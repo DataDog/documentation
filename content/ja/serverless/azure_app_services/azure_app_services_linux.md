@@ -58,7 +58,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 **General settings** で、**Startup Command** のフィールドに以下を追加します。
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.2.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.3.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service の構成: Azure UI の Settings の Configuration セクションにある、Stack の設定です。スタック、メジャーバージョン、マイナーバージョンのフィールドの下には、上記の curl コマンドで入力される Startup Command フィールドがあります。" style="width:100%;" >}}

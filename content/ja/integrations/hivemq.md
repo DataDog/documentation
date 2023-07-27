@@ -34,7 +34,7 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.6.1
+integration_version: 1.6.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

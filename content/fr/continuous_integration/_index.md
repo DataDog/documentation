@@ -1,6 +1,9 @@
 ---
 aliases:
 - /fr/ci
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=CI%20Visibility
   tag: Notes de version
@@ -22,7 +25,7 @@ kind: documentation
 title: Continuous Integration Visibility
 ---
 
-{{< vimeo 664357090 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>

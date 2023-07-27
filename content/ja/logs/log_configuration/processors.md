@@ -18,9 +18,9 @@ title: プロセッサー
 
 ## 概要
 
-{{< img src="logs/processing/processors/processing_overview.png" alt="プロセッサー" >}}
-
 プロセッサーは[パイプライン][1]の中で実行され、データ構造化アクションを完了し、ログを豊かにする属性を生成します。
+
+{{< img src="logs/log_configuration/processor/processor_overview.png" alt="プロセッサー" style="width:100%" >}}
 
 [ログコンフィギュレーション設定][1]で、[Grok パーサー](#grok-parser) や [日付リマッパー](#remapper) などの処理系を設定して、ログの属性を抽出・作成・再マッピングし、ファセット検索を充実させることが可能です。
 
@@ -37,9 +37,9 @@ title: プロセッサー
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、Grok プロセッサープロセッサーを定義します。
+[**Pipelines** ページ][1]で Grok プロセッサーを定義します。
 
-{{< img src="logs/processing/processors/parser.png" alt="パース" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
 
 **Parse my logs** をクリックして、基底のパイプラインを流れるログの 3 つのパースルールのセットを始動させます。そこから属性の名前を絞り込み、必要に応じて他のタイプのログに新しいルールを追加します。この機能を使用するには、対応するログがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
 
@@ -67,10 +67,10 @@ title: プロセッサー
 | パラメーター            | タイプ             | 必須 | 説明                                             |
 |----------------------|------------------|----------|---------------------------------------------------------|
 | `type`               | 文字列           | はい      | プロセッサーのタイプ。                                  |
-| `name`               | 文字列           | いいえ       | プロセッサーの名前。                                  |
-| `is_enabled`         | Boolean          | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。  |
+| `name`               | 文字列           | ✕       | プロセッサーの名前。                                  |
+| `is_enabled`         | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。  |
 | `source`             | 文字列           | はい      | パースするログ属性の名前。デフォルト: `message`。 |
-| `samples`            | 文字列の配列 | いいえ       | この Grok パーサーのサンプルログのリストです（最大 5）。     |
+| `samples`            | 文字列の配列 | ✕       | この Grok パーサーのサンプルログのリストです（最大 5）。     |
 | `grok.support_rules` | 文字列           | はい      | grok パーサーのサポート規則のリスト。             |
 | `grok.match_rules`   | 文字列           | はい      | grok パーサーの照合規則のリスト。               |
 
@@ -102,20 +102,19 @@ Datadog でカスタム日付と時間形式をパースする方法について
 
 **注**:
 
-* **過去 18 時間および未来 2 時間までのログイベントを送信できます**。
+* ログイベントは過去 18 時間、未来の 2 時間まで送信が可能です。
 * ISO 8601-1:2019 では、基本フォーマットは `T[hh][mm][ss]`、拡張フォーマットは `T[hh]:[mm]:[ss]` です。それ以前のバージョンでは、どちらのフォーマットでも T (時刻を表す) が省略されています。
 * ログにデフォルトの属性が含まれず、独自の日付属性も定義していない場合、Datadog は、ログを受信した日付をタイムスタンプとします。
 * 複数のログ日付リマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
-
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、ログ日付リマッパープロセッサーを定義します。
+[**Pipelines** ページ][1]でログ日付リマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="日付属性の定義" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/date_remapper.png" alt="日付属性の定義" style="width:80%;" >}}
 
-{{< img src="logs/processing/processors/log_date_remapper_example.png" alt="ログエクスプローラーのサイドパネルに表示される日付と時間" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/date_remapper_example.png" alt="ログエクスプローラーのサイドパネルに表示される日付と時間" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -136,7 +135,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
 | `name`       | 文字列           | いいえ       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。 |
+| `is_enabled` | Boolean          | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
 
 [1]: /ja/api/v1/logs-pipelines/
@@ -168,9 +167,9 @@ Datadog でカスタム日付と時間形式をパースする方法について
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、ログステータスリマッパープロセッサーを定義します。
+[**Pipelines** ページ][1]でログステータスリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="ログエクスプローラーでのログの重大度" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper_processor.png" alt="ログ重大度リマッピング" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -190,8 +189,8 @@ Datadog でカスタム日付と時間形式をパースする方法について
 | パラメーター    | タイプ             | 必須 | 説明                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。 |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
 
 [1]: /ja/api/v1/logs-pipelines/
@@ -207,9 +206,9 @@ Datadog でカスタム日付と時間形式をパースする方法について
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、ログサービスリマッパープロセッサーを定義します。
+[**Pipelines** ページ][1]でログサービスリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="サービスリマッパープロセッサータイル" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/service_remapper.png" alt="サービスリマッパープロセッサー" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -229,8 +228,8 @@ Datadog でカスタム日付と時間形式をパースする方法について
 | パラメーター    | タイプ             | 必須 | 説明                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。 |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。                           |
 
 [1]: /ja/api/v1/logs-pipelines/
@@ -250,9 +249,9 @@ Datadog でカスタム日付と時間形式をパースする方法について
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、ログメッセージリマッパープロセッサーを定義します。
+[**Pipelines** ページ][1]でログメッセージリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/message_processor.png" alt="メッセージプロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/message_processor.png" alt="メッセージプロセッサー" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -272,8 +271,8 @@ Datadog でカスタム日付と時間形式をパースする方法について
 | パラメーター    | タイプ             | 必須 | 説明                                           |
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                |
-| `is_enabled` | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。 |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
 | `sources`    | 文字列の配列 | はい      | ソース属性の配列。デフォルト: `msg`。            |
 
 [1]: /ja/api/v1/logs-pipelines/
@@ -284,7 +283,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 
 リマッパープロセッサーは、任意のソース属性やタグを、別のターゲット属性やタグにリマップします。例えば、`user` を `firstname` にリマップして、ログエクスプローラーのログをターゲットにすることができます。
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="リマップ後の属性" style="width:50%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="リマップ後の属性" style="width:60%;">}}
 
 タグ/属性名の制約については、[属性とタグのドキュメント][5]に説明があります。いくつかの追加の制約は、`:` や `,` として適用され、ターゲットタグ/属性名では許可されません。
 
@@ -295,9 +294,9 @@ Datadog でカスタム日付と時間形式をパースする方法について
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、リマッパープロセッサーを定義します。たとえば、`user` を `user.firstname` に再マップします。
+[**Pipelines** ページ][1]で、リマッパープロセッサーを定義します。たとえば、`user` を `user.firstname` に再マップします。
 
-{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="属性リマッパープロセッサータイル" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/remapper.png" alt="属性リマッパープロセッサー" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -323,15 +322,15 @@ Datadog でカスタム日付と時間形式をパースする方法について
 | パラメーター              | タイプ             | 必須 | 説明                                                                    |
 |------------------------|------------------|----------|--------------------------------------------------------------------------------|
 | `type`                 | 文字列           | はい      | プロセッサーのタイプ。                                                         |
-| `name`                 | 文字列           | いいえ       | プロセッサーの名前。                                                         |
-| `is_enabled`           | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。                          |
-| `source_type`          | 文字列           | いいえ       | ソースがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。 |
+| `name`                 | 文字列           | ✕      | プロセッサーの名前。                                                         |
+| `is_enabled`           | Boolean          | ✕      | プロセッサーが有効になっているかどうか。デフォルト: `false`。                          |
+| `source_type`          | 文字列           | ✕      | ソースがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。 |
 | `sources`              | 文字列の配列 | はい      | ソース属性またはタグの配列。                                             |
 | `target`               | 文字列           | はい      | ソースの再マップ先になる最終的な属性またはタグの名前。                           |
-| `target_type`          | 文字列           | いいえ       | ターゲットがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。    |
-| `target_format`        | 文字列           | いいえ       | 属性値を別の型にキャストするかを定義します。可能な値には、`auto`、`string`、`integer` があり、デフォルトは `auto` です。`auto` に設定するとキャストは適用されません。  |
-| `preserve_source`      | Boolean          | いいえ       | 再マップされたソース要素を削除または維持します。デフォルト: `false`。               |
-| `override_on_conflict` | Boolean          | いいえ       | ターゲット要素が既に設定されている場合に上書きするかどうか。デフォルト: `false`。            |
+| `target_type`          | 文字列           | ✕      | ターゲットがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。    |
+| `target_format`        | 文字列           | ✕      | 属性値を別の型にキャストするかを定義します。可能な値には、`auto`、`string`、`integer` があり、デフォルトは `auto` です。`auto` に設定するとキャストは適用されません。  |
+| `preserve_source`      | Boolean          | ✕      | 再マップされたソース要素を削除または維持します。デフォルト: `false`。               |
+| `override_on_conflict` | Boolean          | ✕      | ターゲット要素が既に設定されている場合に上書きするかどうか。デフォルト: `false`。            |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
@@ -346,9 +345,9 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、URL パーサープロセッサーを定義します。
+[**Pipelines** ページ][1]で URL パーサープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/url_processor_tile.png" alt="URL プロセッサータイル" style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="URL プロセッサータイル" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -367,9 +366,9 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 | パラメーター    | タイプ             | 必須 | 説明                                                                                                          |
 |--------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                                                                               |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                                                                               |
-| `is_enabled` | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                |
-| `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト:  `http.url`                                                                      |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                                                                               |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                |
+| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `http.url`。                                                                      |
 | `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト: `http.url_details`。 |
 
 {{% /tab %}}
@@ -386,9 +385,9 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、ユーザーエージェントプロセッサーを定義します。
+[**Pipelines** ページ][1]でユーザーエージェントプロセッサーを定義します。
 
-{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="ユーザーエージェントプロセッサータイル" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/useragent_processor.png" alt="ユーザーエージェントプロセッサータイル" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -410,11 +409,11 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 | パラメーター    | タイプ             | 必須 | 説明                                                                                                                 |
 |--------------|------------------|----------|-----------------------------------------------------------------------------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                                                                                      |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                                                                                      |
-| `is_enabled` | Boolean          | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                      |
-| `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト: `http.useragent`。                                                                      |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                                                                                      |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                      |
+| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `http.useragent`。                                                                      |
 | `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト: `http.useragent_details`。 |
-| `is_encoded` | Boolean          | いいえ       | ソース属性が URL エンコードされているかどうかを定義します。デフォルト: `false`。                                                     |
+| `is_encoded` | Boolean          | ✕       | ソース属性が URL エンコードされているかどうかを定義します。デフォルト: `false`。                                                     |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
@@ -434,13 +433,13 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、カテゴリプロセッサーを定義します。たとえば、Web アクセスログをステータスコード範囲に基づいて分類 (応答コード 200 ～ 299 の場合は「OK」、応答コード 300 ～ 399 の場合は「通知」など) するには、次のプロセッサーを追加します。
+[**Pipelines** ページ][1]で、カテゴリプロセッサーを定義します。たとえば、Web アクセスログをステータスコード範囲に基づいて分類 (応答コード 200 ～ 299 の場合は「OK」、応答コード 300 ～ 399 の場合は「通知」など) するには、次のプロセッサーを追加します。
 
-{{< img src="logs/processing/processors/category_processor.png" alt="カテゴリプロセッサー" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/category_processor.png" alt="カテゴリプロセッサー" style="width:80%;" >}}
 
 このプロセッサーは、次のような結果をもたらします。
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="カテゴリプロセッサー結果" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/category_processor_result.png" alt="カテゴリプロセッサー結果" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -464,8 +463,8 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 | パラメーター    | タイプ            | 必須 | 説明                                                                                                |
 |--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
 | `type`       | 文字列          | はい      | プロセッサーのタイプ。                                                                                     |
-| `name`       | 文字列          | いいえ       | プロセッサーの名前。                                                                                     |
-| `is_enabled` | Boolean         | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。                                                      |
+| `name`       | 文字列          | ✕       | プロセッサーの名前。                                                                                     |
+| `is_enabled` | Boolean         | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`                                                      |
 | `categories` | オブジェクトの配列 | はい      | フィルターと名前の配列。フィルターはログに一致するかどうかを識別し、名前はログにカスタム値を割り当てるために使用されます。 |
 | `target`     | 文字列          | はい      | 一致するカテゴリによって値が定義されるターゲット属性の名前。                              |
 
@@ -481,10 +480,9 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 
 デフォルトでは、属性がない場合は計算がスキップされます。*Replace missing attribute by 0* を選択すると、属性値がない場合は自動的に 0 を挿入して、常に計算が行われます。
 
-**注**: ログの属性にない場合、または数値に変換できない場合、属性が見つからないと表示されることがあります。
-
 **注**:
 
+* ログの属性にない場合、または数値に変換できない場合、属性が見つからないと表示されることがあります。
 * 演算子 `-` は、属性名にも使用されるため、式内ではスペースで区切る必要があります。
 * ターゲット属性が既に存在している場合は、式の結果で上書きされます。
 * 結果は小数第 9 位に丸められます。たとえば、式の結果が `0.1234567891` の場合、実際に属性に格納される値は `0.123456789` になります。
@@ -493,9 +491,9 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、算術演算プロセッサーを定義します。
+[**Pipelines** ページ][1]で算術演算プロセッサーを定義します。
 
-{{< img src="logs/processing/processors/arithmetic_processor.png" alt="算術演算プロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/arithmetic_processor.png" alt="算術演算プロセッサー" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -517,11 +515,11 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 | パラメーター            | タイプ    | 必須 | 説明                                                                                                                                  |
 |----------------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`               | 文字列  | はい      | プロセッサーのタイプ。                                                                                                                       |
-| `name`               | 文字列  | いいえ       | プロセッサーの名前。                                                                                                                       |
-| `is_enabled`         | Boolean | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                                       |
+| `name`               | 文字列  | ✕       | プロセッサーの名前。                                                                                                                       |
+| `is_enabled`         | Boolean | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                                       |
 | `expression`         | 文字列  | はい      | 1 つ以上のログ属性間の算術演算。                                                                                     |
 | `target`             | 文字列  | はい      | 算術演算の結果を格納する属性の名前。                                                                  |
-| `is_replace_missing` | Boolean | いいえ       | `true` の場合は、`expression` 内の欠落している属性をすべて 0 に置き換えます。`false` の場合は、属性が欠落していると演算をスキップします。デフォルト: `false`。 |
+| `is_replace_missing` | Boolean | ✕       | `true` の場合は、`expression` 内の欠落している属性をすべて 0 に置き換えます。`false` の場合は、属性が欠落していると演算をスキップします。デフォルト: `false`。 |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
@@ -543,9 +541,9 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、ストリングビルダープロセッサーを定義します。
+[**Pipelines** ページ][1]でストリングビルダープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="ストリングビルダープロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/stringbuilder_processor.png" alt="ストリングビルダープロセッサー" style="width:80%;">}}
 
 以下のようなログがある場合、テンプレート `Request %{http.method} %{http.url} was answered with response %{http.status_code}` を使って、結果を返します。例:
 
@@ -565,22 +563,25 @@ URL パーサープロセッサーは URL からクエリパラメーターな�
 }
 ```
 
+以下を返します。
+
 ```text
 リクエスト GET https://app.datadoghq.com/users に対する応答 200
 ```
 
-**注**: `http` はオブジェクトであり、ブロック内で使用することはできません (`%{http}` は失敗します)。一方、`%{http.method}`、`%{http.status_code}`、または `%{http.url}` は、対応する値を返します。ブロックは、値の配列や配列内の特定の属性に対して使用することができます。例えば、 `%{array_ids}` というブロックを追加すると、以下のような値が返されます。
+**注**: `http` はオブジェクトであり、ブロック内で使用することはできません (`%{http}` は失敗します)。一方、`%{http.method}`、`%{http.status_code}`、または `%{http.url}` は、対応する値を返します。ブロックは、値の配列や配列内の特定の属性に対して使用することができます。
 
-```text
-123,456,789
-```
+* 例えば、 `%{array_ids}` というブロックを追加すると、以下のような値が返されます。
 
-`%{array_users}` はオブジェクトリストのため戻り値はありません。
-しかし、`%{array_users.first_name}` は次のように配列に含まれる `first_name` のリストを返します:
+   ```text
+   123,456,789
+   ```
 
-```text
-John,Jack
-```
+* `%{array_users}` はオブジェクトリストのため戻り値はありません。しかし、`%{array_users.first_name}` は次のように配列に含まれる `first_name` のリストを返します:
+
+  ```text
+  John,Jack
+  ```
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -606,7 +607,7 @@ John,Jack
 | `is_enabled`         | Boolean | ✕       | プロセッサーが有効になっているかどうかを示します。デフォルトは `false` です。                                                                                          |
 | `template`           | 文字列  | 〇      | 1 つまたは複数の属性と生テキストを使用した数式です。                                                                                               |
 | `target`             | 文字列  | 〇      | テンプレートの結果を含む属性名です。                                                                               |
-| `is_replace_missing` | Boolean | ✕       | `true` の場合は、`template` 内の欠落している属性をすべて空の文字列に置き換えます。`false` の場合 (デフォルト) は、属性が欠落していると演算をスキップします。 |
+| `is_replace_missing` | Boolean | ✕       | `true` の場合は、`template` 内の欠落している属性をすべて空の文字列に置き換えます。`false` の場合は、属性が欠落していると演算をスキップします。デフォルト: `false`。 |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
@@ -619,13 +620,13 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP プロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/geoip_processor.png" alt="GeoIP プロセッサー" style="width:80%;">}}
 
 ほとんどの要素は `name` と `iso_code` (大陸の場合は `code`) 属性を含んでいます。`subdivision` は国が使用する最初のレベルの細分化で、アメリカ合衆国の場合は "States"、フランスの場合は "Departments" となります。
 
 例えば、geoIP パーサーは `network.client.ip` 属性から位置を抽出し、それを `network.client.geoip` 属性に格納します。
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP 例" style="width:60%;">}}
+{{< img src="logs/log_configuration/processor/geoip_example_blurred.png" alt="GeoIP 例" style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -645,10 +646,10 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 | パラメーター    | タイプ             | 必須 | 説明                                                                                                               |
 |--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                                                                                    |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                                                                                    |
-| `is_enabled` | Boolean          | いいえ       | ロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                     |
-| `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト: `network.client.ip`                                                                  |
-| `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト:  `network.client.geoip`  |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                                                                                    |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                     |
+| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `network.client.ip`。                                                                  |
+| `target`     | 文字列           | はい      | `sources` から抽出されたすべての詳細を含む親属性の名前。デフォルト:  `network.client.geoip`。  |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
@@ -656,27 +657,31 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 
 ## ルックアッププロセッサー
 
-ルックアッププロセッサーを使用して、ログ属性と [Reference Table (ベータ版)][7] またはプロセッサーマッピングテーブルに保存された人間が読める値との間のマッピングを定義することができます。
+ルックアッププロセッサーを使用して、ログ属性と [Reference Table][7] またはプロセッサーマッピングテーブルに保存された人間が読める値との間のマッピングを定義することができます。
 
-例えば、ルックアッププロセッサーを使用して、内部サービス ID を人間が読めるサービス名にマッピングすることができます。
-
-また、本番環境への接続を試みた MAC アドレスが、盗まれたマシンのリストに含まれているかどうかの確認にも使用できます。
+たとえば、ルックアッププロセッサーで内部のサービス ID をマップし、読んで意味の通るサービス名を割り当てることができます。また、このプロセッサーで本番環境に接続を試みた MAC アドレスと盗難に遭ったマシンのリストを照合し、接続元をチェックすることが可能です。
 
 {{< tabs >}}
 {{% tab "UI" %}}
-
-{{< img src="logs/processing/processors/lookup_processor.png" alt="ルックアッププロセッサー" style="width:80%;">}}
 
 ルックアッププロセッサーは、以下の動作を行います。
 
 * 現在のログにソース属性が含まれていないかを確認する。
 * ソース属性の値がマッピングテーブルに存在するかをチェックする。
   * 存在する場合、テーブルにターゲット属性を作成し、対応する値を割り当てる。
-  * (オプション) マッピングテーブルに値が存在しない場合、デフォルト値でターゲット属性を作成する。
+  * オプションとして、マッピングテーブルで値が見つからなかった場合、`fallbackValue` フィールドにデフォルトのフォールバック値を設定したターゲット属性を作成します。**Manual Mapping** タブでは、`source_key,target_value` ペアのリストを手動で入力するか、CSV ファイルをアップロードすることができます。
 
-マッピングテーブルには、Reference Table を選択する、手動で `source_key,target_value` のリストを入力する、または CSV ファイルをアップロードすることで値を入力できます。
+    {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="ルックアッププロセッサー" style="width:80%;">}}
 
-マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されますが、Reference Table はより大容量のファイルサイズをサポートしています。
+    マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されます。しかし、Reference Table はより大容量のファイルサイズをサポートしています。
+
+  * オプションとして、マッピングテーブルで値が見つからない場合は、リファレンステーブルの値でターゲット属性を作成します。[Reference Table][101] の値は、**Reference Table** タブで選択できます。
+
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="ルックアッププロセッサー" 
+    style="width:80%;">}}
+
+
+[101]: /ja/integrations/guide/reference-tables/
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -698,12 +703,12 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 | パラメーター        | タイプ             | 必須 | 説明                                                                                                                                                              |
 |------------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`           | 文字列           | はい      | プロセッサーのタイプ。                                                                                                                                                   |
-| `name`           | 文字列           | いいえ       | プロセッサーの名前。                                                                                                                                                   |
-| `is_enabled`     | Boolean          | はい      | プロセッサーが有効になっているかどうかを示します。デフォルトは `false` です。                                                                                                                     |
+| `name`           | 文字列           | ✕       | プロセッサーの名前。                                                                                                                                                   |
+| `is_enabled`     | Boolean          | はい      | プロセッサーが有効になっているかどうか。デフォルト: `false`。                                                                                                                     |
 | `source`         | 文字列           | はい      | ルックアップを実行する際に使用したソース属性です。                                                                                                                             |
 | `target`         | 文字列           | はい      | マッピングリスト内 (マッピングリスト内で見つからない場合は `default_lookup` ) の対応する値を含む属性名です。                                |
 | `lookup_table`   | 文字列の配列 | はい      | ソース属性値とそれに関連するターゲット属性値のマッピングテーブルです。[ "source_key1,target_value1", "source_key2,target_value2" ] のような形式で示されます。 |
-| `default_lookup` | 文字列           | いいえ       | リスト上にソースの値がない場合、ターゲット属性に設定する値です。                                                                                          |
+| `default_lookup` | 文字列           | ✕       | リスト上にソースの値がない場合、ターゲット属性に設定する値です。                                                                                          |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}
@@ -720,9 +725,9 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、トレースリマッパープロセッサーを定義します。次のように、プロセッサータイルでトレース ID 属性パスを入力します。
+[**Pipelines** ページ][1]で、トレースリマッパープロセッサーを定義します。次のように、プロセッサータイルでトレース ID 属性パスを入力します。
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="トレース ID プロセッサー" style="width:80%;">}}
+{{< img src="logs/log_configuration/processor/trace_processor.png" alt="トレース ID プロセッサー" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -742,9 +747,9 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 | パラメーター    | タイプ             | 必須 | 説明                                            |
 |--------------|------------------|----------|--------------------------------------------------------|
 | `type`       | 文字列           | はい      | プロセッサーのタイプ。                                 |
-| `name`       | 文字列           | いいえ       | プロセッサーの名前。                                 |
-| `is_enabled` | Boolean          | いいえ       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
-| `sources`    | 文字列の配列 | いいえ       | ソース属性の配列。デフォルト: `dd.trace_id`。    |
+| `name`       | 文字列           | ✕       | プロセッサーの名前。                                 |
+| `is_enabled` | Boolean          | ✕       | プロセッサーが有効になっているかどうか。デフォルト: `false`。 |
+| `sources`    | 文字列の配列 | ✕       | ソース属性の配列。デフォルト: `dd.trace_id`。    |
 
 [1]: /ja/api/v1/logs-pipelines/
 {{% /tab %}}

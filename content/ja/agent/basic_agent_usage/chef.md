@@ -45,22 +45,9 @@ Datadog Chef クックブックは 12.7 以降の `chef-client` と互換性が�
 
 #### Chef
 
-**Chef 12 ユーザー**: Chef 12 のバージョンによっては、依存性による制約をさらに受けます。
-
-```ruby
-# Chef < 12.14
-'yum'、'< 5.0' に依存
-```
-
-```ruby
-# Chef < 12.9
-'apt'、'< 6.0.0' に依存
-'yum'、'< 5.0' に依存
-```
-
 **Chef 13 ユーザー**: Chef 13 と `chef_handler` 1.x を使用している場合、`dd-handler` レシピを使用できないことがあります。現在のところ、依存性のあるクックブック `chef_handler` を 2.1 以降へアップデートすることで、これを回避できます。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. [Berkshelf][5] または [Knife][6] を使用して、クックブックを Chef サーバーに追加します。
     ```text
@@ -225,7 +212,7 @@ run_list %w(
 | Agent のバージョンを固定     | `'agent_version'` または `'agent6_version'`               | 全バージョンで `'agent_version'`        |
 | package_action の変更 | `'agent_package_action'` または `'agent6_package_action'` | 全バージョンで `'agent_package_action'` |
 | APT repo URL の変更   | `'aptrepo'` または `'agent6_aptrepo'`                     | 全バージョンで `'aptrepo'`              |
-| APT repo dist の変更  | `'aptrepo_dist'` または `'agent6_aptrepo_dist'`           | 全バージョンで `'aptrepo_dist'`         |
+| APT リポジトリディストリビューションの変更  | `'aptrepo_dist'` または `'agent6_aptrepo_dist'`   | 全バージョンで `'aptrepo_dist'`         |
 | YUM repo の変更       | `'yumrepo'` または `'agent6_yumrepo'`                     | 全バージョンで `'yumrepo'`              |
 | SUSE repo の変更      | `'yumrepo_suse'` または `'agent6_yumrepo_suse'`           | 全バージョンで `'yumrepo_suse'`         |
 
@@ -274,7 +261,7 @@ Agent をアンインストールするには、`dd-agent` レシピを削除し
 
 [デフォルトのレシピ][8]はプレースホルダーです。
 
-### エージェント
+### Agent
 
 [dd-agent レシピ][9]が、対象システムに Datadog Agent をインストールし、[Datadog API キー][4]を設定して、ローカルのシステムメトリクスに関するレポートを送信するサービスを開始します。
 

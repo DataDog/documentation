@@ -72,7 +72,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 InsightFinder のインテグレーションを構成してデータを送信するには、[InsightFinder-Datadog インテグレーション][2]を参照してください。Datadog [API キーおよびアプリケーションキー][3]が必要です。
 

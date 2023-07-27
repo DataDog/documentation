@@ -15,7 +15,7 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}テンプレート変数の評価{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}監視範囲{{< /nextlink >}}
     {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}ダウンタイムによるアラートの抑制{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}ダウンタイムスケジュールのスコープ{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}ダウンタイムのスコープ{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}数値に変化がない場合のアラート{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートの作成{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}モニターの依存関係の作成{{< /nextlink >}}
@@ -39,6 +39,7 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}ローカルタイムゾーンを考慮した異常検出モニターの更新方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}モニター設定の変更が反映されない{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}モニターと Statuspage のインテグレーション{{< /nextlink >}}
+{{< nextlink href="monitors/guide/github_gating" >}}GitHub Actions のデプロイを Datadog モニターで選別する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}

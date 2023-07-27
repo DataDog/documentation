@@ -66,7 +66,7 @@ CSPM [概要][20]のページで、各フレームワークのコンプライア
 
 ルールを選択すると、誤構成されたリソースの詳細、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。
 
-{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding.png" alt="コンプライアンスルールのサイドパネルには、ルールに関する情報と、失敗した検出結果のリソースが含まれています" style="width:75%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding2.png" alt="コンプライアンスルールのサイドパネルには、ルールに関する情報と、失敗した検出結果のリソースが含まれています" style="width:75%;">}}
 
 ## その他の参考資料
 

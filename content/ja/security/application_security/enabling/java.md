@@ -117,14 +117,14 @@ java -javaagent:dd-java-agent.jar \
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="シグナルエクスプローラーとその詳細、脆弱性エクスプローラーとその詳細をビデオでご紹介しています。" video="true" >}}
 
-## カスタムコードの脆弱性検出の有効化
+## コードレベルの脆弱性検出の有効化
 
-[カスタムコードの脆弱性検出のための Vulnerability Management をサポートするトレーシングライブラリのバージョン][3]を実行しているサービスでは、`DD_IAST_ENABLED=true` 環境変数に設定してサービスを再起動することで機能を有効にしてください。
+[コードレベルの脆弱性検出のための Vulnerability Management をサポートするトレーシングライブラリのバージョン][3]を実行しているサービスでは、`DD_IAST_ENABLED=true` 環境変数に設定してサービスを再起動することで機能を有効にしてください。
 
-サービスのカスタムコードの脆弱性を検出するには
+サービスのコードレベルの脆弱性を検出するには
 
 1. [Datadog Agent][6] をバージョン 7.41.1 以上に更新します。
-2. トレーシングライブラリを、カスタムコードの脆弱性検出を有効にするために必要な最小限のバージョンに更新します。詳しくは、[ASM 機能サポート][3]を参照してください。
+2. トレーシングライブラリを、コードレベルの脆弱性検出を有効にするために必要な最小限のバージョンに更新します。詳しくは、[ASM 機能サポート][3]を参照してください。
 3. アプリケーションの構成に `DD_IAST_ENABLED=true` 環境変数を追加します。
 
    コマンドラインから
@@ -194,9 +194,9 @@ spec:
    {{< /tabs >}}
 
 4. サービスを再起動します。
-5. カスタムコードの脆弱性に対する Application Vulnerability Management を実際に見るには、サービスをブラウズすると、カスタムコードの脆弱性が [Vulnerability Explorer][4] に表示されます。`SOURCE` 列には、Custom Code の値が表示されます。
+5. コードレベルの脆弱性に対する Application Vulnerability Management を実際に見るには、サービスをブラウズすると、コードレベルの脆弱性が [Vulnerability Explorer][4] に表示されます。`SOURCE` 列には、Code の値が表示されます。
 
-{{< img src="/security/application_security/Custom_Code_vulnerability.mp4" alt="Vulnerabilities タブ、Custom Code ソース、カスタムコードの脆弱性を検査する様子を示すビデオ" video="true" >}}
+{{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Vulnerabilities タブ、Code ソース、コードの脆弱性を検査する様子を示すビデオ" video="true" >}}
 
 さらにサポートが必要な場合は、[Datadog サポート][5]にお問い合わせください。
 

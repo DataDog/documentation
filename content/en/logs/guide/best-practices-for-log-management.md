@@ -13,6 +13,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/log-management-policies/"
       tag: "Blog"
       text: "How to implement log management policies with your teams"
+algolia:
+  tags: ['log usage']
 ---
 
 ## Overview
@@ -134,6 +136,12 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
 7. Click **Create**.
 
+#### Alert on indexed logs volume since the beginning of the month
+
+Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `datadog_is_excluded:false` to only count indexed logs and the [metric monitor cumulative window][28] to monitor the count since the beginning of the month. 
+
+{{< img src="logs/guide/monthly_usage_monitor.png" alt="Setup a monitor to alert for the count of indexed logs since the beginning of the month" style="width:70%;">}}
+
 #### Alert on indexes reaching their daily quota
 
 [Set up a daily quota][16] on indexes to prevent indexing more than a given number of logs per day. If an index has a daily quota, Datadog recommends that you set the [monitor that notifies on that index's volume](#alert-when-an-indexed-log-volume-passes-a-specified-threshold) to alert when 80% of this quota is reached within the past 24 hours.
@@ -214,3 +222,4 @@ If you want to see user activities, such as who changed the retention of an inde
 [25]: /account_management/audit_trail/events/
 [26]: /account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
+[28]: /monitors/configuration/?tab=thresholdalert#evaluation-window

@@ -50,7 +50,7 @@ README ファイルの中には以下のセクションが必要です。
 - **Events**: インテグレーションがイベントを提供する場合は、それらのイベントのリストです。
 - **Service checks**: インテグレーションがサービスチェックを提供する場合は、それらのサービスチェックのリストです。
 
-[レイアウト全体の詳細については、こちらを参照してください][10]。
+詳細については、[Agent ベースのインテグレーションを作成する][1]を参照してください。
 
 #### `check.py`
 
@@ -246,7 +246,7 @@ $ bundle exec rake exec["nosetests my_integration/test/test_*.py -A 'not require
 
 Datadog は、環境のテストに Docker コンテナを使用します。これは、推奨されるアプローチです。コンテナは軽量で簡単に管理でき、毎回のテストランに一貫性のある標準化された環境を提供します。
 
-Datadog MySQL インテグレーションを例に挙げると、[`ci/mysql.rake` ファイル][21]は、[公式 MySQL コンテナ][22]を使用し、以下の 4 つのメインタスクを含みます
+例えば、Datadog MySQL インテグレーション用の [`ci/mysql.rake` ファイル][21]は、[公式 MySQL コンテナ][22]を使用し、以下の 4 つのメインタスクを含みます。
 
 1. `before_install` - 新しい Docker テスト環境を開始する前に、以前の Docker テスト環境を確実に停止して削除してください。
 2. `install` - インストールタスクは、Docker `run` を実行して MySQL テストサーバーを起動します。
@@ -278,7 +278,7 @@ Datadog Agent のディレクトリ構造の詳細については、[新しい�
 * テストクラスター。単一のソフトウェアインスタンスをテストする方が簡単なことは当然ですが、現実的な使用方法を代表する複数のセットアップに対してテストを実行する方がさらに有益です。たとえば、MongoDB は通常、シャーディング機能や Replica Set 機能と共に使用されるので、[テスト][24]はそれを反映しています。
 * 未加工のメトリクスだけでなく、算出メトリクスを生成することも考慮します。たとえば、多くのデータベースが持つクエリは、遅いですが、あまり実行されていません。したがって、パーセンタイルを見るとよいことがよくあります。たとえば、Datadog MySQL インテグレーションには、[95 パーセンタイルクエリ実行時間][2]の算出メトリクスが含まれます。
 
-[1]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto
+[1]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration
 [2]: https://www.ruby-lang.org
 [3]: https://www.ruby-lang.org/en/documentation/installation
 [4]: https://www.gnu.org/software/wget
@@ -287,7 +287,6 @@ Datadog Agent のディレクトリ構造の詳細については、[新しい�
 [7]: https://rubygems.org/gems/datadog-sdk-testing
 [8]: https://github.com/DataDog/integrations-extras
 [9]: https://virtualenv.pypa.io/en/stable
-[10]: /ja/developers/integrations/#new-integration-documentation
 [11]: https://docs.datadoghq.com/ja/developers/integrations/
 [12]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests
 [13]: https://github.com/DataDog/dd-agent/blob/master/ci/common.rb

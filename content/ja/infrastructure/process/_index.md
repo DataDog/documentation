@@ -34,7 +34,7 @@ Datadog のライブプロセスにより、インフラストラクチャー上
 
 {{< img src="infrastructure/process/live_processes_main.png" alt="ライブプロセスの概要" >}}
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Agent 5 の場合は、[こちらのバージョン固有のインストール手順に従ってください][1]。Agent 6 または 7 をご利用の場合は、[以下の手順を参照してください][2]。
 
@@ -99,7 +99,7 @@ Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内�
 **注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: /ja/agent/kubernetes/
 [3]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -200,10 +200,10 @@ datadog:
         containers:
             processAgent:
                 env:
-                - name: DD_SCRUB_ARGS 
+                - name: DD_SCRUB_ARGS
                   value: "true"
                 - name: DD_CUSTOM_SENSITIVE_WORDS
-                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+                  value: "personal_key,*token,*token,sql*,*pass*d*"
 ```
 
 
@@ -224,7 +224,7 @@ datadog:
             processAgent:
                 env:
                 - name: DD_STRIP_PROCESS_ARGS
-                  value: "true" 
+                  value: "true"
 ```
 
 {{% /tab %}}

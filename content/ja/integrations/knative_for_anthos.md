@@ -35,7 +35,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Knati
 
 ### メトリクスの収集
 
-#### APM に Datadog Agent を構成する
+#### インストール
 
 [Google Cloud Platform インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 

@@ -12,7 +12,7 @@ draft: false
 git_integration_title: amazon_sqs
 has_logo: true
 integration_id: amazon-sqs
-integration_title: Amazon SQS
+integration_title: Amazon Simple Queue Service (SQS)
 integration_version: ''
 is_public: true
 kind: インテグレーション
@@ -21,7 +21,7 @@ monitors:
   sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
   sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
 name: amazon_sqs
-public_title: Datadog-Amazon SQS インテグレーション
+public_title: Datadog-Amazon Simple Queue Service (SQS) インテグレーション
 short_description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
 version: '1.0'
 ---
@@ -36,7 +36,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -50,7 +50,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
     詳細については、AWS ウェブサイト上の [SQS ポリシー][4]を参照してください。
 
-3. [Datadog - AWS SQS インテグレーション][5]をインストールします。
+3. [Datadog - Amazon SQS インテグレーション][5]をインストールします。
 
 ### ログの収集
 
@@ -80,15 +80,22 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS SQS インテグレーションには、イベントは含まれません。
+Amazon SQS インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS SQS インテグレーションには、サービスのチェック機能は含まれません。
+Amazon SQS インテグレーションには、サービスのチェック機能は含まれません。
+
+## すぐに使えるモニタリング
+
+Amazon SQS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+
+- Amazon SQS ダッシュボード: すぐに使える [Amazon SQS ダッシュボード][10]を使用して、SQS キューの包括的な概要を得ることができます。
+- 推奨モニター: [Amazon SQS の推奨モニター][11]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -99,4 +106,6 @@ AWS SQS インテグレーションには、サービスのチェック機能は
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [8]: https://app.datadoghq.com/logs
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://app.datadoghq.com/screen/integration/6/aws-sqs
+[11]: https://app.datadoghq.com/monitors/recommended
+[12]: https://docs.datadoghq.com/ja/help/

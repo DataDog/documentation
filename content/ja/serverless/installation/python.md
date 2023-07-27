@@ -23,7 +23,7 @@ title: Python サーバーレスアプリケーションのインスツルメン
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。アプリケーションがコンテナイメージとしてデプロイされる場合は、「コンテナイメージ」の指示に従うことが*必要です*。
 
@@ -419,6 +419,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ## 次のステップ
 
 - [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][6]を有効にします。
 - [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][2]を参照してください
 - [高度な構成][3]を参照して以下のことを行ってください。
@@ -475,3 +476,4 @@ def get_message():
 [3]: /ja/serverless/configuration/
 [4]: /ja/serverless/custom_metrics?tab=python
 [5]: /ja/tracing/custom_instrumentation/python/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework
