@@ -131,6 +131,12 @@ The commands related to log collection are:
 `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
 : To collect containers logs from files. Available in the Datadog Agent 6.27.0/7.27.0+
 
+**Note**: If using Docker Compose, the value for `DD_CONTAINER_EXCLUDE` must not be quoted. Configure the environment variable in your docker-compose.yaml file like the example below:
+
+```yaml
+environment:
+    - DD_CONTAINER_EXCLUDE=image:datadog/agent:*
+```
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
@@ -212,7 +218,7 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 {{% /tab %}}
-{{% tab "Docker-Compose" %}}
+{{% tab "Docker Compose" %}}
 
 Add the following label in your `docker-compose.yaml` file:
 

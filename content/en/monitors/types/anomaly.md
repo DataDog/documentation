@@ -19,7 +19,9 @@ further_reading:
 - link: "dashboards/functions/algorithms/#anomalies"
   tag: "Documentation"
   text: Anomalies function
-
+algolia:
+  rank: 70
+  tags: ['anomaly', 'anomaly monitor']
 ---
 
 ## Overview
