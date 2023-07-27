@@ -31,10 +31,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
    Take note of your Forwarder's ARN.
 
-3. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
-   {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
-
-4. Add the following to your `serverless.yml`:
+3. Add the following to your `serverless.yml`:
 
     ```yaml
     custom:
@@ -42,7 +39,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
         site: <DATADOG_SITE>
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
-          enableStepFunctionTracing: true
+        enableStepFunctionTracing: true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
@@ -50,7 +47,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][7].
 
-5. For Node.js and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
+4. For Node.js and Python runtimes, set `mergeStepFunctionAndLambdaTraces:true` in your `serverless.yaml` file. This links your Step Function traces with Lambda traces. If you have not instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][8].
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/
 [2]: /logs/guide/forwarder/
@@ -70,9 +67,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 2. Ensure you have deployed the [Datadog Lambda Forwarder][2], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.66.0+. You may need to [update your Forwarder][3].
 
    Take note of your Forwarder's ARN.
-3. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
-   {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
-4. Instrument your Step Function.
+3. Instrument your Step Function.
 
    ```shell
    datadog-ci stepfunctions instrument --step-function <STEP_FUNCTION_ARN> --forwarder <FORWARDER_ARN>
@@ -82,7 +77,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
-5. For Node.js and Python runtimes, add the flag `-- mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
+4. For Node.js and Python runtimes, add the flag `-- mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
 
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder/
@@ -94,6 +89,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 {{% tab "Custom" %}}
 
 1. Enable all logging for your Step Function. In your AWS console, open your state machine. Click *Edit* and find the Logging section. There, set *Log level* to `ALL` and enable the *Include execution data* checkbox.
+   {{< img src="serverless/step_functions/aws_log.png" alt="AWS UI, Logging section, showing log level set to ALL." style="width:100%;" >}}
 
 2. Ensure you have deployed the [Datadog Lambda Forwarder][1], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.66.0+. You may need to [update your Forwarder][2].
 
@@ -180,7 +176,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 ## See your Step Function traces in Datadog
 
-After you have invoked your state machine, go to the [**Trace Explorer**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see all traces associated with that state machine. 
+After you have invoked your state machine, go to the [**Trace Explorer**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see all traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
 
 If you cannot see your traces, see [Troubleshooting][5].
 
