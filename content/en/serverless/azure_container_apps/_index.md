@@ -388,9 +388,10 @@ CMD php-fpm; nginx -g daemon off;
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
+- **`DD_AZURE_SUBSCRIPTION_ID`**: the Azure Subscription ID associated with the Container App resource (Required)
+- **`DD_AZURE_RESOURCE_GROUP`**: the Azure Resouce Group associated with the Container App resource (Required)
+
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
-- `DD_AZURE_SUBSCRIPTION_ID`: the Azure Subscription ID associated with the Container App resource 
-- `DD_AZURE_RESOURCE_GROUP`: the Azure Resouce group associated with the Container App resource
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
@@ -429,6 +430,7 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 |`DD_API_KEY`| [Datadog API Key][6] - **Required**|
 | `DD_SITE` | [Datadog site][4] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][], Node, .NET and PHP. See additional docs for Python, Go and Ruby |
 | `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
 | `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
 | `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
@@ -458,3 +460,10 @@ RUN apt-get update && apt-get install -y ca-certificates
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /metrics/distributions/
 [9]: /metrics/#time-and-space-aggregation
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[11]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[12]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[13]: /tracing/other_telemetry/connect_logs_and_traces/php
+[14]: /tracing/other_telemetry/connect_logs_and_traces/python
+[15]: /tracing/other_telemetry/connect_logs_and_traces/go
+[16]: /tracing/other_telemetry/connect_logs_and_traces/ruby
