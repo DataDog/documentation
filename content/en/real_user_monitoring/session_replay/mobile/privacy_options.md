@@ -142,9 +142,9 @@ With the `allow` setting enabled, all text is revealed.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Understanding how and what data is masked
+## How and what data is masked
 
-Find below a description of how Datadog's recorder handles masking based on data type and how that data is defined. 
+This section describes how the Datadog recorder handles masking based on data type and how that data is defined. 
 ### Text masking strategies
 
 Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.
