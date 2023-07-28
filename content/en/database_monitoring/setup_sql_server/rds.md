@@ -35,7 +35,7 @@ Supported SQL Server versions
 
 ## Configure the AWS integration
 
-Enable Standard Collection in the Resource Collection section of your Amazon Web Services integration tile.
+Enable Standard Collection in the Resource Collection section of your [Amazon Web Services integration tile](https://app.datadoghq.com/integrations/amazon-web-services).
 
 ## Grant the Agent access
 
