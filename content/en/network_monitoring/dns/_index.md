@@ -42,19 +42,19 @@ Are you looking for Network Device Monitoring instead? See the [NDM setup instru
 
 ## Queries
 
-Use the search bar at the top of the page to query for dependencies between a client, which makes the DNS request, and a DNS server, which responds to the DNS request. The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
+Use the search bar at the top of the page to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
 
 To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
 {{< img src="network_performance_monitoring/dns_client_search.png" alt="The DNS monitoring page with client_service:ad-server entered into the search bar, pod_name entered for View clients as, and network.dns_query entered for View servers as" style="width:100%;">}}
 
-To refine your search to a particular DNS server, filter the search bar using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
+To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
 
 * `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
 * `host`: The host name of the DNS server.
 * `service`: The service running on the DNS server.
 * `IP`: The IP of the DNS server.
-* `dns_query`: **requires Agent version 7.33 or later** The domain that was queried.
+* `dns_query`: (Requires Agent version 7.33 or later) The domain that was queried.
 
 This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
 
