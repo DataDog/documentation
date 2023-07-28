@@ -1,7 +1,7 @@
 ---
 title: Mobile Vitals
 kind: documentation
-description: Discover insights about your iOS application's health and performance.
+description: Discover insights about your Android application's health and performance.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub

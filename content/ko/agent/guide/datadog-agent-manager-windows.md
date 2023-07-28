@@ -29,7 +29,7 @@ Datadog Agent Manager GUI는 브라우저 기반입니다. GUI 실행 포트는 
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| IOS           | 12                           |  모바일 Safari          |
+| iOS           | 12                           |  모바일 Safari          |
 
 ### Datadog Agent Manager 시작하기
 

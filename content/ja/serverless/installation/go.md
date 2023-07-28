@@ -79,7 +79,6 @@ custom:
 
 AWS のリージョンやアーキテクチャに応じた ARN 形式で、Datadog Lambda 拡張機能の [Lambda レイヤーを Lambda 関数に追加][1]します。
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```sh
 # AWS 商用リージョンにデプロイされた x86 ベースの Lambda にはこの形式を使用します
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
@@ -93,30 +92,13 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< late
 # AWS GovCloud リージョンにデプロイされた arm64 ベースの Lambda にはこの形式を使用します
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```sh
-# AWS 商用リージョンにデプロイされた x86 ベースの Lambda にはこの形式を使用します
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-# AWS 商用リージョンにデプロイされた arm64 ベースの Lambda にはこの形式を使用します
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-# AWS GovCloud リージョンにデプロイされた x86 ベースの Lambda にはこの形式を使用します
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-# AWS GovCloud リージョンにデプロイされた arm64 ベースの Lambda にはこの形式を使用します
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-```
-{{< /site-region >}}
 
 `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
 ### 必要な環境変数を構成する
 
 - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
-- `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][2]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+- `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][2]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue` 権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -164,6 +146,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   s, _ := tracer.StartSpanFromContext(ctx, "child.span")
   time.Sleep(100 * time.Millisecond)
   s.Finish()
+return "ok", nil
 }
 ```
 

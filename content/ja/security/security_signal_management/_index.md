@@ -61,11 +61,11 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 ## セキュリティシグナルアクションの監査証跡
 
 管理者またはセキュリティチームのメンバーは、[Datadog 監査証跡][5]を使用して、セキュリティ製品内でチームがどのようなアクションを起こしているかを確認できます。個人として、自身のアクションをストリームで確認することも可能です。
-監査証跡エクスプローラーは、実行されたすべてのシグナルアクションを表示します。**Organization Settings** に移動し、**Security** の **Audit Logs Settings** を選択します。
+監査証跡エクスプローラーは、実行されたすべてのシグナルアクションを表示します。**Organization Settings** に移動し、**Compliance** の **Audit Trail** を選択します。
 
-Datadog Security で行われたアクションによって生成された監査ログを排他的に表示するには、次のいずれかの手順に従います。
-* クエリ `@evt.name:"Security Monitoring"` を使用します。
-* "Event Name" ファセットの下にある "Security Monitoring" ファセットを選択します。
+Datadog Cloud Security で行われたアクションによって生成された監査ログを排他的に表示するには、次のいずれかの手順に従います。
+* クエリ `@evt.name:"Cloud Security Platform"` を使用します。
+* "Event Name" ファセットの下にある "Cloud Security Platform" ファセットを選択します。
 
 [1]: /ja/account_management/rbac/?tab=datadogapplication#pagetitle
 [2]: /ja/account_management/rbac/permissions/#cloud-security-platform
