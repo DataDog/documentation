@@ -125,15 +125,7 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 {{% tab "NodeJS" %}}
 
-The minimum NodeJS tracer versions required are [2.42.0][1], [3.29.0][2], or [4.8.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
-
-The following modules are not supported:
-- http
-- http2
-- next
-- fetch
-- aws-sdk
-- couchbase
+The minimum NodeJS tracer versions required are [2.44.0][1], [3.31.0][2], or [4.10.0][3]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
 To opt in, add the following environment variables or system properties to your tracer settings:
 
@@ -158,9 +150,9 @@ For example, if you're using environment variables and you need to rename the pe
 DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 ```
 
-[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v2.42.0
-[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.29.0
-[3]: https://github.com/DataDog/dd-trace-js/releases/tag/v4.8.0
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v2.44.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.31.0
+[3]: https://github.com/DataDog/dd-trace-js/releases/tag/v4.10.0
 
 {{% /tab %}}
 
@@ -195,22 +187,13 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 {{% tab ".NET" %}}
 
-The minimum .NET tracer version required is [v2.32.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
-
-As of tracer version `v2.32.0`, the following libraries are supported:
-- HttpClient and WebRequest
-- ADO.NET spans
-- WCF server
-- gRPC server
-- Elasticsearch
-- MongoDB
-- Kafka spans
+The minimum .NET tracer version required is [v2.35.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
 To opt in, add the following environment variables to your tracer settings or system properties:
 - `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.32.0
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.35.0
 
 {{% /tab %}}
 
