@@ -20,6 +20,8 @@ further_reading:
 aliases:
     - /tracing/getting_further/metrics_namespace
     - /tracing/guide/metrics_namespace
+algolia:
+  tags: ['trace metrics']
 ---
 
 ## Overview
