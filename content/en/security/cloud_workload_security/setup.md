@@ -172,13 +172,14 @@ Add the following settings to the `env` section of `security-agent` and `system-
             env:
               - name: DD_REMOTE_CONFIGURATION_ENABLED
                 value: "true"
-              - name: system-probe
-                [...]
-                env:
-                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-                    value: "true"
-                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                    value: "true" [...]
+          - name: system-probe
+            [...]
+            env:
+              - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
+                value: "true"
+              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                value: "true"
+          [...]
 ```
 
 {{% /tab %}}
