@@ -27,8 +27,6 @@ The Serverless view shows key metrics for your Step Functions in one place to ea
 ### Reduce Step Function debugging time with detailed execution traces.
 You can view end-to-end traces for a single Step Function execution and its associated logs, errors, and metrics - to easily identify issues in your step function logic. Step function spans also contain rich metadata for step inputs and outputs, associated lambda traces, and step duration length that can make it easy to reproduce bugs and fix bottlenecks.
 
-{{< img src="serverless/step_functions/overview3.png" alt="An AWS Step Function span displayed in a flame graph visualization." style="width:100%;" >}}
-
 To get started, follow the [installation instructions][1].
 
 ## Further Reading
