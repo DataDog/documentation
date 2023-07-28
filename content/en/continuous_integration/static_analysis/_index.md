@@ -85,7 +85,6 @@ Prerequisites:
 
 - UnZip
 - Node.js 14 or later
-- Java 17 or later
 
 Configure the following environment variables:
 
@@ -97,24 +96,48 @@ Configure the following environment variables:
 
 Provide the following inputs:
 
-| Name       | Description                                                                                                                | Required | Default         |
-|------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`  | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`      | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| Name        | Description                                                                                                                | Required | Default         |
+|-------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`   | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`       | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| `cpu_count` | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+
+<div class="alert alert-info">
+  Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
+</div>
+
+Select an analyzer for your architecture and OS:
+
+| Architecture | OS        | Name                                                    | Link                                                                                                                                          |
+|--------------|-----------|---------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------|
+| `aarch64`    | `Darwin`  | `datadog-static-analyzer-aarch64-apple-darwin.zip`      | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-aarch64-apple-darwin.zip)      |
+| `aarch64`    | `Linux`   | `datadog-static-analyzer-aarch64-unknown-linux-gnu.zip` | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-aarch64-unknown-linux-gnu.zip) |
+| `x86_64`     | `Darwin`  | `datadog-static-analyzer-x86_64-apple-darwin.zip`       | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-apple-darwin.zip)       |
+| `x86_64`     | `Linux`   | `datadog-static-analyzer-x86_64-unknown-linux-gnu.zip`  | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip)  |
+| `x86_64`     | `Windows` | `datadog-static-analyzer-x86_64-pc-windows-msvc.zip`    | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-pc-windows-msvc.zip)    |
 
 Add the following to your CI pipeline:
 
+<div class="alert alert-info">
+  The following example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the DATADOG_STATIC_ANALYZER_URL value below. You can view all releases on our <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
+</div>
+
 ```bash
 # Install dependencies
-npm install -g @datadog/datadog-ci
-curl -L http://dtdg.co/latest-static-analyzer > /tmp/ddog-static-analyzer
-unzip /tmp/ddog-static-analyzer -d /tmp
+npm install -g @datadog/datadog-ci 
 
-# Run Static Analysis (requires a pre-installed JVM)
-/tmp/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
+# Download the latest Datadog static analyzer:
+# https://github.com/DataDog/datadog-static-analyzer/releases
+DATADOG_STATIC_ANALYZER_URL=https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip
+curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/ddog-static-analyzer.zip
+unzip /tmp/ddog-static-analyzer.zip -d /tmp
+mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
+
+# Run Static Analysis
+/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
+datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 ```
 
 [101]: /account_management/api-app-keys/#api-keys
@@ -127,7 +150,7 @@ datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
 ### Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. 

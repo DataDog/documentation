@@ -30,12 +30,12 @@ CLI を使用したい場合は、[Datadog の Azure CLI][2] を参照してく�
 
 1. [Datadog Terraform プロバイダー][15]を構成し、Terraform の構成で Datadog API と対話するように設定します。
 
-2. 以下の例を基本テンプレートとして、Terraform の構成ファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
+2. 以下の例を基本テンプレートとして、Terraform のコンフィギュレーションファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
     * `azure_tenant_name`: Azure Active Directory ID。
     * `client_id`: Azure Web アプリケーションのシークレットキー。
     * `client_secret`: Azure Web アプリケーションのシークレットキー。
 
-   さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、[Terraform Registry][17] を参照してください。
+   さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、Terraform レジストリの [Datadog Azure インテグレーションリソース][17]ページを参照してください。
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -141,11 +141,11 @@ Terraform を使用して、Datadog Agent 拡張機能を作成および管理�
 [7]: /ja/integrations/azure_container_service/
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
-[11]: https://app.datadoghq.com/account/settings#agent
+[11]: https://app.datadoghq.com/account/settings/agent/latest
 [12]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
-[15]: /ja/integrations/terraform/#overview
+[15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [16]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /ja/logs/guide/azure-logging-guide
