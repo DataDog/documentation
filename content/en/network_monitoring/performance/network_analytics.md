@@ -49,9 +49,11 @@ You can filter to traffic where the client or server matches a CIDR using `CIDR(
 
 {{< img src="network_performance_monitoring/network_analytics/recommended_query_options.png" alt="The Network Analytics page in Datadog displaying three recommended queries" style="width:80%;">}}
 
-Recommended queries allow you to jump-start your investigation into your network – whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. Three recommended queries are provided at the top of the Analytics page, and three others at the top of the DNS page. Use these queries to access commonly used data, and see any changes in that data in the last hour. 
+Recommended queries allow you to jump-start your investigation into your network – whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. The recommended queries help you quickly find relevant network information without the need to search for group the traffic. For example, the recommended query `Find dependencies of service: web-store` populates the search bar with the query `client_service: web-store` and displays the top services that the service web-store is sending traffic to within the network, and therefore its downstream dependencies. 
 
-To run a recommended query, click on the tile. Hovering over the tile displays a more detailed description of the data the query returns.
+Any available recommended queries are provided at the top of the Analytics page, and there are three recommended queries at the top of the DNS page. Use these queries to access commonly used data, and see any changes in that data in the last hour. 
+
+To run a recommended query, click on the tile. Hovering over the tile displays a description and summary of the data the query returns.
 
 {{< img src="network_performance_monitoring/network_analytics/recommended_query_detail.png" alt="The detail view of a recommended query displaying a description and query information, with four query dimensions displayed: Search for, View clients as, View servers as, and Visualize as" style="width:80%;">}}
 
