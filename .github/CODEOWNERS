@@ -85,4 +85,4 @@ content/en/logs/error_tracking/browser_and_mobile.md            @Datadog/rum-bro
 content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-browser @DataDog/documentation
 
 # Observability Pipelines
-static/resources/yaml/observability_pipelines                   @DataDog/observability-pipelines @DataDog/documentation
+static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines @DataDog/vector @DataDog/vector-admin @DataDog/documentation
