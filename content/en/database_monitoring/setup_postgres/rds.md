@@ -16,6 +16,7 @@ Database Monitoring provides deep visibility into your Postgres databases by exp
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
 
+1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
@@ -38,6 +39,10 @@ Proxies, load balancers, and connection poolers
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+## Configure the AWS integration
+
+Enable Standard Collection in the Resource Collection section of your Amazon Web Services integration tile.
 
 ## Configure Postgres settings
 
