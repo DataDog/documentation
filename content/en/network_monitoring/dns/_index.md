@@ -23,7 +23,7 @@ further_reading:
 {{< img src="network_performance_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
 
 <div class="alert alert-info">
-Upgrade to agent version 7.33 to enable DNS monitoring.
+Upgrade to Agent version 7.33 or later to enable DNS monitoring.
 </div>
 
 DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
