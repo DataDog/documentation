@@ -315,7 +315,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
@@ -360,7 +360,7 @@ metadata:
       [
         {
           "server": "%%host%%", 
-          "user": "datadog",
+          "username": "datadog",
           "password": "<UNIQUEPASSWORD>"
         }
       ]
@@ -385,7 +385,7 @@ metadata:
           "instances": [
             {
               "server": "%%host%%", 
-              "user": "datadog",
+              "username": "datadog",
               "password": "<UNIQUEPASSWORD>"
             }
           ]
@@ -445,7 +445,7 @@ metadata:
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"mysql\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"user\": \"datadog\",\"password\": \"<UNIQUEPASSWORD>\"}]"
+      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"username\": \"datadog\",\"password\": \"<UNIQUEPASSWORD>\"}]"
     }
   }]
 }

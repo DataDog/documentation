@@ -38,7 +38,7 @@ Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブ�
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Datadog で AWS Lambda をトレースするためのアーキテクチャ図" >}}
 
-Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。トレーサーは、[インストール手順][5]を使用してインストールできます。すでに拡張機能をインストールしている場合は、環境変数 `DD_ENABLE_TRACING` が `true` に設定されていることを確認してください。
+Datadog Python、Node.js、Ruby、Go、Java、.NET のトレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。トレーサーは[インストール手順][5]を使ってインストールできます。すでに拡張機能をインストールしている場合は、環境変数 `DD_TRACE_ENABLED` が `true` に設定されていることを確認してください。
 
 ### ランタイムの推奨事項
 
