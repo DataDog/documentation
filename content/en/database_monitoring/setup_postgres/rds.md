@@ -42,7 +42,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable Standard Collection in the Resource Collection section of your [Amazon Web Services integration tile](https://app.datadoghq.com/integrations/amazon-web-services).
+Enable Standard Collection in the Resource Collection section of your [Amazon Web Services integration tile][13].
 
 ## Configure Postgres settings
 
@@ -425,3 +425,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
+[13]: /integrations/amazon-web-services

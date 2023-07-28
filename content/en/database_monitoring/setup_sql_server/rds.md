@@ -35,7 +35,7 @@ Supported SQL Server versions
 
 ## Configure the AWS integration
 
-Enable Standard Collection in the Resource Collection section of your [Amazon Web Services integration tile](https://app.datadoghq.com/integrations/amazon-web-services).
+Enable Standard Collection in the Resource Collection section of your [Amazon Web Services integration tile][2].
 
 ## Grant the Agent access
 
@@ -99,3 +99,4 @@ To collect more comprehensive database metrics and logs from AWS, install the [R
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_rds
+[2]: /integrations/amazon-web-services
