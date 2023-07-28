@@ -31,7 +31,7 @@ To set up RUM Browser Monitoring, create a RUM application:
    - Select a [privacy setting][18] for Session Replay in the dropdown menu.
 2. Deploy the changes to your application. Once your deployment is live, Datadog collects events from your users' browsers.
 3. Visualize the [data collected][2] in [dashboards][3] or create a search query in the [RUM Explorer][16].
-4. (Optional) [Connect RUM and Traces][12] to start linking requests from your web and mobile applications to their corresponding backend traces. You can refer to this list of [initialization parameters](#initialization-parameters).
+4. (Optional) Initialize the RUM SDK with the `allowedTracingUrls` parameter to [Connect RUM and Traces][12] if you want to start linking requests from your web and mobile applications to their corresponding backend traces. See the full list of [initialization parameters](#initialization-parameters).
 
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
