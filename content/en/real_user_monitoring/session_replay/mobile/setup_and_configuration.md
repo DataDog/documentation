@@ -36,13 +36,13 @@ To set up Mobile Session Replay for Android:
 
 3. Enable Session Replay in your app:
 
-{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
- // in case you need material extension support
- .addExtensionSupport(MaterialExtensionSupport()) 
- .build()
-SessionReplay.enable(sessionReplayConfig)
-{{< /code-block >}}
+   {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+    // in case you need material extension support
+    .addExtensionSupport(MaterialExtensionSupport()) 
+    .build()
+   SessionReplay.enable(sessionReplayConfig)
+   {{< /code-block >}}
 
 [1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
@@ -54,25 +54,25 @@ To set up Mobile Session Replay for iOS:
 
 1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][1] with views instrumentation enabled.
 
-2. Link Datadog Session Replay library to your project. Depending on your package manager:
+2. Link the Datadog Session Replay library to your project based on your package manager:
 
-| Package manager            | Installation step                                                                           |
-|----------------------------|---------------------------------------------------------------------------------------------|
-| [CocoaPods][2]             | Add `pod 'DatadogSessionReplay'` to your `Podfile`.                                         |
-| [Swift Package Manager][3] | Add `DatadogSessionReplay` library as a dependency to your app target.                      |
-| [Carthage][4]              | Add `DatadogSessionReplay.xcframework` as a dependency to your app target.                  |
+   | Package manager            | Installation step                                                                           |
+   |----------------------------|---------------------------------------------------------------------------------------------|
+   | [CocoaPods][2]             | Add `pod 'DatadogSessionReplay'` to your `Podfile`.                                         |
+   | [Swift Package Manager][3] | Add `DatadogSessionReplay` library as a dependency to your app target.                      |
+   | [Carthage][4]              | Add `DatadogSessionReplay.xcframework` as a dependency to your app target.                  |
 
 3. Enable Session Replay in your app:
 
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-import DatadogSessionReplay
+   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+   import DatadogSessionReplay
 
-SessionReplay.enable(
-    with: SessionReplay.Configuration(
-        replaySampleRate: sampleRate
-    )
-)
-{{< /code-block >}}
+   SessionReplay.enable(
+       with: SessionReplay.Configuration(
+           replaySampleRate: sampleRate
+       )
+   )
+   {{< /code-block >}}
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
 [2]: https://cocoapods.org/
