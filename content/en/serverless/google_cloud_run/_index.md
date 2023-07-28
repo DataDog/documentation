@@ -449,6 +449,8 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 |`DD_API_KEY`| [Datadog API Key][7] - **Required**|
 | `DD_SITE` | [Datadog site][5] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][19], [Node][20], [.NET][21] and [PHP][22]. See additional docs for [Python][23], [Go][24] and [Ruby][25] |
+| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
 | `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
 | `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |
@@ -488,3 +490,10 @@ RUN apt-get update && apt-get install -y ca-certificates
 [16]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
 [17]: /tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
 [18]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
+[19]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[20]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[21]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[22]: /tracing/other_telemetry/connect_logs_and_traces/php
+[23]: /tracing/other_telemetry/connect_logs_and_traces/python
+[24]: /tracing/other_telemetry/connect_logs_and_traces/go
+[25]: /tracing/other_telemetry/connect_logs_and_traces/ruby
