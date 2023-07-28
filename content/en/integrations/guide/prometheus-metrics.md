@@ -60,7 +60,7 @@ For [Prometheus/OpenMetrics `summary`][107], `_count` and `_sum` values are mapp
 [109]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 
 {{% /tab %}}
-{{% tab "Before OpenMetrics v2.0.0" %}}
+{{% tab "Legacy Version" %}}
 ### Counter
 
 By default, [Prometheus/OpenMetrics `counter`][101] maps to Datadog's `count`.
