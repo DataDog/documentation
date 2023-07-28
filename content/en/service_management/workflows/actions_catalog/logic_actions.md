@@ -28,24 +28,24 @@ The **For each** action allows you to execute a specific action iteratively for 
 
 The action is made up of the For each step and an inner step that you intend to perform iteratively. The output of the a For each step is an array of outputs from the inner step.
 
-For example, using For each together with a CloudFlare action, you could iterate over and block a list of IP addresses. In this scenario, the CloudFlare action is placed inside a For each step and the list of IP addresses is added to the For each step as an **Input list**. When the workflow runs, the CloudFlare action runs for each value in the list, accessing the current IP value and blocking it.
+For example, using For each together with a CloudFlare action, you could iterate over and block a list of IP addresses. In this scenario, the CloudFlare action is placed inside a For each step and the list of IP addresses is added to the For each step as an **Input list**. When the workflow runs, the CloudFlare step repeats for each value in the list, accessing the current IP value and blocking it.
 
 To configure a **For each** iteration:
 1. Click the plus (**+**) icon on your workflow canvas to open the [action catalog][1].
 1. Search for and select the **For each** step.
 1. To select an inner action to repeat, drag an existing step from your canvas into the **For each** step, or click the plus (**+**) icon inside the **For each** step and make a selection from the action catalog.
-1. Click on the **For each** step and enter an **Input list** for the step to iterate over.
-1. Toggle **Continue on error** if you want the action to continue down the list of remaining values if an error is encountered.
+1. Click the **For each** step and enter an **Input list** for the step to iterate over.
+1. Toggle **Continue on error** if you want the action to continue down the list of remaining values when an error is encountered.
 1. Configure the inner action. To access the current value in the input list, use the **{{Current.value}}** variable. To access the index of the current value, use **{{Current.index}}**.
 1. **Save** and **Run** the action.
 
-When a run completes, the workflow enters **Debug** mode. Click on the For each step to see:
+When a run completes, the workflow enters **Debug** mode. Select the For each step to see:
 * The output of each iteration
 * The number of completed and failed iterations.
 
 You can delete the inner step by:
-- Clicking on the inner step and selecting **Delete**.
-- Clicking on the **For each** step and selecting **Clear**.
+- Clicking the inner step and selecting **Delete**.
+- Clicking the For each step and selecting **Clear**.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
