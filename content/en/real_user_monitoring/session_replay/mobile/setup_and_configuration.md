@@ -32,7 +32,7 @@ To set up Mobile Session Replay for Android:
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2] with views instrumentation enabled.
 
-2. Import the Datadog Session Replay dependency.
+2. Declare the Datadog Session Replay as a [dependency][3].
 
 3. Enable Session Replay in your app:
 
@@ -46,6 +46,7 @@ To set up Mobile Session Replay for Android:
 
 [1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+[3]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin#declare-the-sdk-as-a-dependency
 
 {{% /tab %}}
 {{% tab "iOS" %}}
