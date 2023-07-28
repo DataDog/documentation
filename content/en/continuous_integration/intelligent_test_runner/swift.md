@@ -11,7 +11,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Swift is in beta.{{< /callout >}} 
+{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Swift is in beta.{{< /callout >}}
 
 ## Compatibility
 
