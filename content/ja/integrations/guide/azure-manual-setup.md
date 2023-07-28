@@ -147,25 +147,25 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
     - サポート対象のアカウントの種類: `この組織ディレクトリのアカウントのみ (Datadog)`
     - リダイレクト URI: {{< region-param key="dd_full_site" code="true" >}}
 
-{{< img src="integrations/azure/Azure_create_ad.png" alt="Azure でアプリを作成" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/Azure_create_ad.png" alt="Azure でアプリを作成" popup="true" style="width:80%;" >}}
 
 #### 読み取りアクセス許可をアプリケーションに付与する
 
 1. 個々のサブスクリプションレベルでアクセスを割り当てるには、検索ボックスまたは左サイドバーから **Subscriptions** に移動してください。
 
-{{< img src="integrations/azure/subscriptions_icon.png" alt="サブスクリプションアイコン" popup="true" style="width:25%">}}
+{{< img src="integrations/guide/azure_manual_setup/subscriptions_icon.png" alt="サブスクリプションアイコン" popup="true" style="width:25%">}}
 
 管理グループレベルでアクセスを割り当てるには、**Management Groups** に移動して、監視したいサブスクリプションのセットを含む管理グループを選択します。
 **注**: 管理グループレベルでアクセスを割り当てることは、グループに追加された新しいサブスクリプションが、Datadog によって自動的に検出され、監視されることを意味します。
 
-{{< img src="integrations/azure/azure_management_groups_icon.png" alt="管理グループアイコン" popup="true" style="width:25%">}}
+{{< img src="integrations/guide/azure_manual_setup/azure_management_groups_icon.png" alt="管理グループアイコン" popup="true" style="width:25%">}}
 
 テナント全体の監視を構成するには、**Tenant Root Group** にアクセス権を割り当てます。
 
 2. 監視するサブスクリプションをクリックします。
 3. サブスクリプションのメニューで **Access control (IAM)** を選択し、**Add** > **Add role assignment** を選択します。
 
-    {{< img src="integrations/azure/azure-add-role.png" alt="ロールの割り当ての追加" popup="true" style="width:80%">}}
+    {{< img src="integrations/guide/azure_manual_setup/azure-add-role.png" alt="ロールの割り当ての追加" popup="true" style="width:80%">}}
 
 4. **Role** には、**Monitoring Reader** を選択します。**Select** では、前の手順で作成したアプリケーションの名前を選択します。
 
@@ -181,7 +181,7 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
 2. 同じアプリで、**Manage** > **Certificates and secrets** と移動します。
 3. `datadogClientSecret` という新しい **Client Secret** を追加し、**Expires** に期間を選択して **Add** をクリックします。
 
-    {{< img src="integrations/azure/Azure_client_secret.png" alt="Azure のクライアントシークレット" popup="true" style="width:80%">}}
+    {{< img src="integrations/guide/azure_manual_setup/Azure_client_secret.png" alt="Azure のクライアントシークレット" popup="true" style="width:80%">}}
 
 4. キー値が表示されたら、コピーして [Datadog Azure インテグレーションタイル][10]の **Client Secret** に貼り付け、**Install Integration** または **Update Configuration** をクリックします。
 
@@ -249,4 +249,4 @@ Azure 環境から Datadog へのログ転送を設定するには、[Azure ロ�
 [13]: /ja/integrations/guide/azure-native-manual-setup/
 [14]: https://portal.azure.com
 [15]: https://app.datadoghq.com/organization-settings/api-keys
-[16]: https://app.datadoghq.com/account/settings#agent
+[16]: https://app.datadoghq.com/account/settings/agent/latest

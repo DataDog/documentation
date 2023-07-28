@@ -1,6 +1,7 @@
 ---
 title: Intelligent Test Runner for Swift
 kind: documentation
+is_beta: true
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -9,6 +10,8 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting CI"
 ---
+
+{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Swift is in beta.{{< /callout >}}
 
 ## Compatibility
 

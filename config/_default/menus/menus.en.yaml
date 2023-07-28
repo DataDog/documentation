@@ -814,43 +814,58 @@ main:
     parent: serverless_aws_lambda
     identifier: libraries_integrations
     weight: 109
+  - name: AWS Step Functions
+    url: serverless/step_functions
+    parent: serverless
+    identifier: serverless_step_functions
+    weight: 2
+  - name: Installation
+    url: serverless/step_functions/installation
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_installation
+    weight: 201
+  - name: Troubleshooting
+    url: serverless/step_functions/troubleshooting
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_troubleshooting
+    weight: 202
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 2
+    weight: 3
   - name: Linux - Code
     url: serverless/azure_app_services/azure_app_services_linux
     parent: serverless_app_services
-    weight: 201
+    weight: 301
   - name: Linux - Container
     url: serverless/azure_app_services/azure_app_services_container
     parent: serverless_app_services
-    weight: 202
+    weight: 302
   - name: Windows - Code
     url: serverless/azure_app_services/azure_app_services_windows
     parent: serverless_app_services
-    weight: 203
+    weight: 303
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
     identifier: serverless_container_apps
-    weight: 3
+    weight: 4
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 4
+    weight: 5
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 5
+    weight: 6
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 6
+    weight: 7
   - name: Cloud Cost
     url: cloud_cost_management/
     identifier: cloud_cost_top_level
@@ -2212,61 +2227,86 @@ main:
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
     weight: 210
+  - name: Search and Manage
+    url: continuous_integration/search/
+    parent: ci
+    identifier: ci_search
+    weight: 3
+  - name: Explorer
+    url: continuous_integration/explorer/
+    parent: ci
+    identifier: ci_explorer
+    weight: 4
+  - name: Search Syntax
+    url: continuous_integration/explorer/search_syntax/
+    parent: ci_explorer
+    identifier: ci_explorer_search_syntax
+    weight: 401
+  - name: Facets
+    url: continuous_integration/explorer/facets/
+    parent: ci_explorer
+    identifier: ci_explorer_facets
+    weight: 402
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
     identifier: intelligent_test_runner
-    weight: 3
+    weight: 5
   - name: .NET
     url: continuous_integration/intelligent_test_runner/dotnet/
     parent: intelligent_test_runner
     identifier: ci_itr_dotnet
-    weight: 301
+    weight: 501
   - name: Java
     url: continuous_integration/intelligent_test_runner/java/
     parent: intelligent_test_runner
     identifier: ci_itr_java
-    weight: 302
+    weight: 502
   - name: JavaScript and TypeScript
     url: continuous_integration/intelligent_test_runner/javascript/
     parent: intelligent_test_runner
     identifier: ci_itr_javascript
-    weight: 303
+    weight: 503
   - name: Swift
     url: continuous_integration/intelligent_test_runner/swift/
     parent: intelligent_test_runner
     identifier: ci_itr_swift
-    weight: 306
+    weight: 506
   - name: Static Analysis
     url: continuous_integration/static_analysis/
     parent: ci
     identifier: ci_static_analysis
-    weight: 4
+    weight: 6
   - name: Rules
     url: continuous_integration/static_analysis/rules
     parent: ci_static_analysis
     identifier: ci_static_analysis_rules
-    weight: 401
+    weight: 601
   - name: CircleCI Orbs
     url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
     identifier: ci_static_analysis_circleci_orbs
-    weight: 402
+    weight: 602
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
-    weight: 403
+    weight: 603
+  - name: Quality Gates
+    url: continuous_integration/quality_gates/
+    parent: ci
+    identifier: ci_quality_gates
+    weight: 7
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 5
+    weight: 8
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 6
+    weight: 9
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -3329,12 +3369,43 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_troubleshooting
     weight: 6
+  - name: Mobile Application Testing
+    url: mobile_app_testing/
+    parent: ux_monitoring_heading
+    identifier: mobile_app_testing
+    pre: mobile
+    weight: 210000
+  - name: Mobile App Tests
+    url: /mobile_app_testing/mobile_app_tests
+    parent: mobile_app_testing
+    identifier: mobile_app_testing_mobile_app_tests
+    weight: 1
+  - name: Test Steps
+    url: /mobile_app_testing/mobile_app_tests/steps
+    parent: mobile_app_testing_mobile_app_tests
+    identifier: mobile_app_testing_mobile_app_tests_steps
+    weight: 101
+  - name: Test Results
+    url: /mobile_app_testing/mobile_app_tests/results
+    parent: mobile_app_testing_mobile_app_tests
+    identifier: mobile_app_testing_mobile_app_tests_results
+    weight: 102
+  - name: Advanced Options for Steps
+    url: /mobile_app_testing/mobile_app_tests/advanced_options
+    parent: mobile_app_testing_mobile_app_tests
+    identifier: mobile_app_testing_mobile_app_tests_advanced_options
+    weight: 103
+  - name: Settings
+    url: /mobile_app_testing/settings
+    parent: mobile_app_testing
+    identifier: mobile_app_testing_settings
+    weight: 2
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 210000
+    weight: 220000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -3729,7 +3800,7 @@ main:
     pre: network
     identifier: nm_parent
     parent: infrastructure_heading
-    weight: 220000
+    weight: 230000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -3969,13 +4040,13 @@ main:
     pre: api
     identifier: api
     parent: essentials_heading
-    weight: 220000
+    weight: 240000
   - name: CoScreen
     url: coscreen/
     pre: coscreen
     identifier: coscreen
     parent: essentials_heading
-    weight: 230000
+    weight: 250000
   - name: Troubleshooting
     url: coscreen/troubleshooting
     identifier: coscreen_troubleshooting
@@ -3986,7 +4057,7 @@ main:
     pre: cog-2
     identifier: account_management
     parent: administration_heading
-    weight: 230000
+    weight: 260000
   - name: Switching Between Orgs
     url: account_management/org_switching/
     parent: account_management
@@ -4037,38 +4108,42 @@ main:
     identifier: account_management_saml
     parent: account_management
     weight: 4
+  - name: User Group Mapping
+    url: account_management/saml/mapping/
+    parent: account_management_saml
+    weight: 401
   - name: Active Directory
     url: account_management/saml/activedirectory/
     parent: account_management_saml
-    weight: 401
+    weight: 402
   - name: Auth0
     url: account_management/saml/auth0/
     parent: account_management_saml
-    weight: 402
+    weight: 403
   - name: Azure
     url: account_management/saml/azure/
     parent: account_management_saml
-    weight: 403
+    weight: 404
   - name: Google
     url: account_management/saml/google/
     parent: account_management_saml
-    weight: 404
+    weight: 405
   - name: NoPassword
     url: account_management/saml/lastpass/
     parent: account_management_saml
-    weight: 405
+    weight: 406
   - name: Okta
     url: account_management/saml/okta/
     parent: account_management_saml
-    weight: 406
+    weight: 407
   - name: SafeNet
     url: account_management/saml/safenet/
     parent: account_management_saml
-    weight: 407
+    weight: 408
   - name: Troubleshooting
     url: account_management/saml/troubleshooting/
     parent: account_management_saml
-    weight: 408
+    weight: 409
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
@@ -4117,7 +4192,7 @@ main:
     pre: security-lock
     identifier: data_security
     parent: administration_heading
-    weight: 240000
+    weight: 270000
   - name: Agent
     url: data_security/agent/
     parent: data_security

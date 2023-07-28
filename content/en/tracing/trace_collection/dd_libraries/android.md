@@ -2,8 +2,6 @@
 aliases:
 - /tracing/setup_overview/setup/android
 - /tracing/setup/android
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Collect traces from your Android applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
@@ -699,6 +697,18 @@ All the spans are first stored on the local device in batches. Each batch follow
 This means that even if users open your application while being offline, no data will be lost.
 
 The data on disk will automatically be discarded if it gets too old to ensure the SDK doesn't use too much disk space.
+
+## Initialization
+The following methods in `AndroidTracer.Builder` can be used when initializing the `Tracer`:
+
+
+| Method                           | Description                                                                                                                                                                                                                         |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setServiceName(<SERVICE_NAME>)	`    | Set the value for the `service`. |
+| `setPartialFlushThreshold(<INT>)` |  When this threshold is reached (you have a specific `<INT>` amount of spans closed waiting), the flush mechanism is triggered and all pending closed spans are processed and sent to intake.|
+| `addGlobalTag(<KEY>, <VALUE>)`     | Set a `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
+| `setBundleWithRumEnabled(true)`    | Set to `true` to enable spans to be enriched with the current RUM View information. This enables you to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
+| `setSamplingRate(<FLOAT>)`   | Set a value `0-100` to define the percentage of Traces to collect. |
 
 ## Further Reading
 

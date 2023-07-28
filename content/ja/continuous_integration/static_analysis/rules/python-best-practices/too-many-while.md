@@ -2,7 +2,7 @@
 dependencies: []
 disable_edit: true
 kind: documentation
-title: ネストされた while を使いすぎない
+title: ネストされたループと条件を使いすぎない
 ---
 ## メタデータ
 **ID:** `python-best-practices/too-many-while`
