@@ -12,7 +12,7 @@ draft: false
 git_integration_title: amazon_sqs
 has_logo: true
 integration_id: amazon-sqs
-integration_title: Amazon SQS
+integration_title: Amazon Simple Queue Service (SQS)
 integration_version: ''
 is_public: true
 kind: インテグレーション
@@ -21,7 +21,7 @@ monitors:
   sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
   sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
 name: amazon_sqs
-public_title: Datadog-Amazon SQS インテグレーション
+public_title: Datadog-Amazon Simple Queue Service (SQS) インテグレーション
 short_description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
 version: '1.0'
 ---
@@ -50,7 +50,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
     詳細については、AWS ウェブサイト上の [SQS ポリシー][4]を参照してください。
 
-3. [Datadog - AWS SQS インテグレーション][5]をインストールします。
+3. [Datadog - Amazon SQS インテグレーション][5]をインストールします。
 
 ### ログの収集
 
@@ -80,18 +80,18 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS SQS インテグレーションには、イベントは含まれません。
+Amazon SQS インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS SQS インテグレーションには、サービスのチェック機能は含まれません。
+Amazon SQS インテグレーションには、サービスのチェック機能は含まれません。
 
 ## すぐに使えるモニタリング
 
-AWS SQS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+Amazon SQS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
 
-- AWS SQS ダッシュボード: すぐに使える [AWS SQS ダッシュボード][10]を使用して、SQS キューの包括的な概要を得ることができます。
-- 推奨モニター: [AWS SQS の推奨モニター][11]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+- Amazon SQS ダッシュボード: すぐに使える [Amazon SQS ダッシュボード][10]を使用して、SQS キューの包括的な概要を得ることができます。
+- 推奨モニター: [Amazon SQS の推奨モニター][11]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
 
 ## トラブルシューティング
 

@@ -6,7 +6,7 @@ categories:
 - security
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md
-description: Amazon GuardDuty ログを収集
+description: Amazon GuardDuty ログを収集します。
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
 integration_id: amazon-guardduty
@@ -15,13 +15,13 @@ is_public: true
 kind: integration
 name: amazon_guardduty
 public_title: Datadog-Amazon GuardDuty インテグレーション
-short_description: Amazon GuardDuty ログを収集
+short_description: Amazon GuardDuty ログを収集します。
 version: '1.0'
 ---
 
 ## 概要
 
-Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリューションに送信する Lambda 関数を通じて Amazon GuardDuty と統合されます。
+Datadog は、GuardDuty の調査結果を Datadog のログ管理ソリューションに送信する Lambda 関数を介して Amazon GuardDuty とインテグレーションします。
 
 ## セットアップ
 

@@ -53,7 +53,7 @@ title: Cloud Security Management の概要
 [1]: /ja/security/cloud_security_management/
 [2]: /ja/security/cspm/
 [3]: /ja/security/cloud_workload_security/
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /ja/security/cloud_workload_security/setup/?tab=kubernetes
 [6]: /ja/security/cloud_workload_security/setup/?tab=docker
 [7]: /ja/security/cloud_workload_security/setup/?tab=hostothers
