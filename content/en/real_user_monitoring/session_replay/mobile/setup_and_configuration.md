@@ -32,27 +32,18 @@ To set up Mobile Session Replay for Android:
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2] with views instrumentation enabled.
 
-2. Once the Datadog SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
-   ```kotlin
-      val config = Configuration.Builder(
-         logsEnabled = true,
-         tracesEnabled = true,
-         crashReportsEnabled = true,
-         rumEnabled = true
-      )
-      ...
-      .build()
+2. Import Datadog Session Replay dependency.
 
-      ...
+3. Enable Session Replay in your app:
 
-      Datadog.initialize(context, credentials, config, trackingConsent) 
-      val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-         // in case you need material extension support
-         .addExtensionSupport(MaterialExtensionSupport()) 
-         .build()
-      val sessionReplayFeature = SessionReplayFeature(sessionReplayConfig)
-      Datadog.registerFeature(sessionReplayFeature)
-   ```
+{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+ // in case you need material extension support
+ .addExtensionSupport(MaterialExtensionSupport()) 
+ .build()
+val sessionReplayFeature = SessionReplayFeature(sessionReplayConfig)
+Datadog.registerFeature(sessionReplayFeature)
+{{< /code-block >}}
 
 [1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
@@ -60,104 +51,69 @@ To set up Mobile Session Replay for Android:
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-You can install Mobile Session Replay with either CocoaPods or Swift Package Manager.
+To set up Mobile Session Replay for iOS:
 
-**Note**: When installing Session Replay for iOS, instead of using Git tags, the library needs to be fetched directly from the [`session-replay-beta`][1] branch.
+1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][1] with views instrumentation enabled.
 
-### Installation with CocoaPods
+2. Link Datadog Session Replay library to your project. Depending on your package manager:
 
-1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][2] with views instrumentation enabled.
+| Package manager            | Installation step                                                                           |
+|----------------------------|---------------------------------------------------------------------------------------------|
+| [CocoaPods][2]             | Add `pod 'DatadogSessionReplay'` to your `Podfile`.                                         |
+| [Swift Package Manager][3] | Add `DatadogSessionReplay` library as a dependency to your app target.                      |
+| [Carthage][4]              | Add `DatadogSessionReplay.xcframework` as a dependency to your app target.                  |
 
-2. Link both RUM and Session Replay SDKs using git branches in `Podfile` and run `pod install` (or `pod update` if you're upgrading from an existing installation):
+3. Enable Session Replay in your app:
 
-   ```ruby
-     pod 'DatadogSDK', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :branch => 'session-replay-beta'
-     pod 'DatadogSDKSessionReplay', :git => 'https://github.com/DataDog/dd-sdk-ios.git', :branch => 'session-replay-beta'
-
-   ```
-
-3. To verify installation, check `Podfile.lock`. Both pods list the same version. For example:
-
-   ```ruby
-     PODS:
-       - DatadogSDK (1.19.0-sr-beta3)
-       - DatadogSDKSessionReplay (1.19.0-sr-beta3):
-         - DatadogSDK (= 1.19.0-sr-beta3)
-   ```
-
-### Installation with Swift Package Manager
-
-1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][2].
-
-2. Link RUM and Session Replay SDKs by specifying the [`dd-sdk-ios`][3] repository URL and the `session-replay-beta` branch. Ensure that the most recent commit is fetched.
-
-### Enabling Session Replay in the app
-
-To enable Session Replay in the code, import `DatadogSessionReplay` dependency and call `SessionReplay.initialize(with:),` followed by `.start()`. Both must happen after initializing the RUM SDK.
-
-The following snippet illustrates a basic example in `AppDelegate.swift`:
-
-```swift
-import Datadog
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 import DatadogSessionReplay
 
-var sessionReplay: SessionReplayController!
-
-// enable RUM SDK:
-Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: .granted,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<rum-application-id>",
-            clientToken: "<client-token>",
-            environment: "<environment>"
-        )
-        .trackUIKitRUMViews()
-        .trackUIKitRUMActions()
-        .build()
+SessionReplay.enable(
+    with: SessionReplay.Configuration(
+        replaySampleRate: sampleRate
+    )
 )
+{{< /code-block >}}
 
-Global.rum = RUMMonitor.initialize()
-
-// enable Session Replay:
-let configuration = SessionReplayConfiguration(privacy: .maskAll)
-sessionReplay = SessionReplay.initialize(with: configuration)
-sessionReplay.start()
-```
-
-[1]: https://github.com/DataDog/dd-sdk-ios/tree/session-replay-beta
-[2]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
-[3]: https://github.com/DataDog/dd-sdk-ios
+[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+[2]: https://cocoapods.org/
+[3]: https://www.swift.org/package-manager/
+[4]: https://github.com/Carthage/Carthage
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Additional configuration
-### Update the sample rate for recorded sessions to appear
+### Set the sample rate for recorded sessions to appear
+
+Sample rate is a required parameter in Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 means no replays will be recorded and 100 means all RUM sessions will contain replay.
+
+This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% will be included in RUM, and within those sessions, only 20% will have replays.
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Beginning with v1.19.0, the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, set the desired sample rate in the configuration:
-
-{{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
+{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
  ...
 .build()
-
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-This configuration option is not available for iOS.
+{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+var sessionReplayConfig = SessionReplay.Configuration(
+    replaySampleRate: sampleRate
+)
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Validate whether Session Replay data is being sent
+
+To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK:
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -169,12 +125,16 @@ Datadog.setVerbosity(Log.DEBUG)
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. The following logs display in the Xcode console soon (about 30 seconds) after launching the application:
-
 {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
+Datadog.verbosityLevel = .debug
+{{< /code-block >}}
 
-[DATADOG SDK] 🐶 → 18:21:29.812 ⏳ (session-replay) Uploading batch...
-[DATADOG SDK] 🐶 → 18:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]
+If everything is fine, following logs should appear in the Xcode debug console in about 30 seconds after launching the app:
+
+{{< code-block lang="bash" filename="Xcode console" disable_copy="true" >}}
+
+[DATADOG SDK] 🐶 → 10:21:29.812 ⏳ (session-replay) Uploading batch...
+[DATADOG SDK] 🐶 → 10:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]
 
 {{< /code-block >}}
 
