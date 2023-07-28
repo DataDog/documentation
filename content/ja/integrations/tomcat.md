@@ -45,7 +45,7 @@ draft: false
 git_integration_title: tomcat
 integration_id: tomcat
 integration_title: Tomcat
-integration_version: 1.11.1
+integration_version: 1.11.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

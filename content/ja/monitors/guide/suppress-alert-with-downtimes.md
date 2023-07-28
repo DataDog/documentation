@@ -219,7 +219,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 [Manage Downtime ページ][1]を開いて新しいダウンタイムを追加し、`recurring` を選択します。
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule ダウンタイム" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.jpg" alt="rrule ダウンタイム" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}

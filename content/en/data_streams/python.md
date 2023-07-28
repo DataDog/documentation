@@ -18,7 +18,7 @@ further_reading:
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Python libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Python Tracer v1.15.0 or later][2]
+* [Python Tracer v1.16.0 or later][2]
 
 ### Installation
 

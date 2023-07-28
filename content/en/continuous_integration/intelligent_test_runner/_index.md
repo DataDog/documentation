@@ -34,6 +34,7 @@ Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/python" >}}Python{{< /nextlink >}}
