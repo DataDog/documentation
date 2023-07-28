@@ -367,7 +367,7 @@ Initialize LaunchDarkly's SDK and create an inspector reporting feature flags ev
  For more information about initializing LaunchDarkly's SDK, see [LaunchDarkly's JavaScript SDK documentation][1].
 
 ```javascript
-const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
   inspectors: [
     {
       type: "flag-used",
