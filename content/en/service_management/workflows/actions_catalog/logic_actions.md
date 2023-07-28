@@ -28,7 +28,7 @@ The **For each** action allows you to execute a specific action iteratively for 
 
 The action is made up of the For each step and an inner step that you intend to perform iteratively. The output of the a For each step is an array of outputs from the inner step.
 
-For example, using For each together with a CloudFlare action, you could iterate over and block a list of IP addresses. In this scenario, the CloudFlare action is placed inside a For each step and the list of IP addresses is added to the For each step as an **Input list**. When the workflow runs, the CloudFlare step repeats for each value in the list, accessing the current IP value and blocking it.
+For example, using For each together with a CloudFlare action, you could iterate over and block a list of IP addresses. In this scenario, you would add the list of IP addresses as an **Input list** in the For each step. Next, you would add a CloudFlare action as an inner step and configure it to block the current value in the iteration loop. When the workflow runs, the CloudFlare step would repeat for each value in the list, accessing the current IP value and blocking it.
 
 To configure a **For each** iteration:
 1. Click the plus (**+**) icon on your workflow canvas to open the [action catalog][1].
@@ -40,7 +40,7 @@ To configure a **For each** iteration:
 1. **Save** and **Run** the action.
 
 When a run completes, the workflow enters **Debug** mode. Select the For each step to see:
-* The output of each iteration
+* The output of each iteration.
 * The number of completed and failed iterations.
 
 You can delete the inner step by:
