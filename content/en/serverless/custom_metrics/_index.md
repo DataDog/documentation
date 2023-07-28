@@ -60,7 +60,7 @@ Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metr
 1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
 1. Follow the sample code or instructions below to submit your custom metric.
 
-{{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,dotnet,other" >}}
+{{< programming-lang-wrapper langs="python,nodeJS,go,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
 
 ```python
