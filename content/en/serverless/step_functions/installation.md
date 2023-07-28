@@ -111,6 +111,10 @@ For developers using [Serverless Framework][4] to deploy serverless applications
      3. Under *Add trigger*, in the *Trigger configuration* section, use the *Select a source* dropdown to select `CloudWatch Logs`.
      4. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
      5. Enter a filter name. You can choose to name it "empty filter" and leave the *Filter pattern* box blank.
+
+<div class="alert alert-warning"> If you are using a different instrumentation method such as Serverless Framework or datadog-ci, enabling autosubscription may create duplicated logs. Choose one configuration method to avoid this behavior.</a>.</div>
+
+
 4. Enable tracing on your Step Function by adding a `DD_TRACE_ENABLED` tag. Set the value to `true`.
 5. Set up tags. Open your AWS console and go to your Step Functions state machine. Open the *Tags* section and add `env:<ENV_NAME>` and `service:<SERVICE_NAME>` tags. The `env` tag is required to see traces in Datadog, and it defaults to `dev`. The `service` tag defaults to the state machine's name.
 6. For Node.js and Python runtimes, you can link your Step Function traces to Lambda traces. On the Lambda Task, set the `OutputPath` and `Parameters` keys with the following: 
@@ -174,12 +178,14 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 
 
-## See your Step Function traces in Datadog
+## See your Step Function metrics, logs, and traces in Datadog
 
-After you have invoked your state machine, go to the [**Trace Explorer**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see all traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
+After you have invoked your state machine, go to the [**Serverless app**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see the relevant metrics, logs, and traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
+
+{{< img src="serverless/step_functions/stepfunctionfullview.png" alt="An AWS Step Function flame graph displayed in the serverless view." style="width:100%;" >}}
 
 If you cannot see your traces, see [Troubleshooting][5].
 
-[2]: https://app.datadoghq.com/apm/traces
+[2]: https://app.datadoghq.com/functions?search=&cloud=aws&entity_view=step_functions
 [3]: /serverless/installation/#installation-instructions
 [5]: /serverless/step_functions/troubleshooting
