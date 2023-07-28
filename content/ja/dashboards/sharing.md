@@ -33,7 +33,7 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 
 
 1. ダッシュボードのページで、右上にあるエクスポートアイコンをクリックします。
-2. **Generate public URL** を選択すると、*Sharing: On* ポップアップモーダルが表示されます。
+2. **Configure public URL** を選択すると、*Sharing: On* ポップアップモーダルが表示されます。
 3. **Time & Variable Settings** で、タイムフレームの希望オプションと、ユーザーがそれを変更できるかどうか、および選択可能なテンプレート変数に表示されるタグを構成します。
 4. URL をコピーして、**Done** をクリックします。
 
@@ -44,7 +44,7 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 1 つ以上の特定のメールアドレスを承認してダッシュボードページを表示するには
 
 1. ダッシュボードのページで、右上にあるエクスポートアイコンをクリックします。
-2. **Generate public URL** を選択すると、*Sharing: On* ポップアップモーダルが表示されます。
+2. **Configure public URL** を選択すると、*Sharing: On* ポップアップモーダルが表示されます。
 3. このダッシュボードにアクセスできるユーザーを指定するには、**Only specified people** を選択します。
 4. ダッシュボードを共有したい人のメールアドレスを入力します。
 5. **Time & Variable Settings** で、タイムフレームの希望オプションと、ユーザーがそれを変更できるかどうか、および選択可能なテンプレート変数に表示されるタグを構成します。
@@ -124,7 +124,7 @@ Datadog には、共有グラフ（埋め込み）とやり取りするための
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /ja/dashboards/#timeboards
-[3]: /ja/dashboards/#screenboard
+[3]: /ja/dashboards/#screenboards
 [4]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
 [5]: /ja/help/
 [6]: https://app.datadoghq.com/organization-settings/public-sharing/settings

@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
+  tag: "blog"
+  text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
 algolia:
   tags: ['ecs']
 ---
@@ -234,7 +237,7 @@ To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar cont
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.3",
+            "image": "datadog/fips-proxy:0.5.4",
             "portMappings": [
                 {
                     "containerPort": 9803,

@@ -15,13 +15,13 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
 
 1. Configure the [Datadog Terraform provider][2] to interact with the Datadog API through a Terraform configuration.
 
-{{< site-region region="us,us3,us5,ap1,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
    * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
    * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
-   See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
+   See the [Datadog AWS integration resource][2] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
    ```hcl
    data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
@@ -160,5 +160,5 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.terraform.io
-[2]: https://docs.datadoghq.com/integrations/terraform/#overview
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [5]: https://app.datadoghq.com/screen/integration/7/aws-overview

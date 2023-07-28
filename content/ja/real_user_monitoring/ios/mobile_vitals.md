@@ -16,13 +16,17 @@ title: モバイル バイタル
 
 リアルユーザーモニタリングは、[MetricKit][1] にインスピレーションを得た、一連のメトリクスを提供するモバイルバイタルを提供し、モバイルアプリケーションの応答性、安定性、リソース消費に関するインサイトの取得に役立てることができます。モバイルバイタルは、不良、中程度、良好の 3 種類です。
 
-モバイルバイタルは、**UX Monitoring > Performance Monitoring** に移動してアプリケーションをクリックすると、アプリケーションの **Performance Overview** ページに表示されます。アプリケーションのモバイルパフォーマンスダッシュボードから、**Mobile Vitals** のグラフをクリックすると、バージョンによるフィルターを適用したり、フィルターをかけたセッションを調べることができます。
+アプリケーションのモバイルバイタルは、**UX Monitoring > Performance Summary** に移動してアプリケーションを選択することで表示できます。
 
-{{< img src="real_user_monitoring/ios/ios-mobile-vitals-new.png" alt="Performance タブのモバイルバイタル" style="width:100%;">}}
+{{< img src="real_user_monitoring/ios/ios_mobile_vitals-3.png" alt="Performance タブのモバイルバイタル" style="width:90%;">}}
+
+RUM モバイルアプリのパフォーマンスダッシュボードにアクセスするには、アプリケーションサマリーページから Monitor Performance Metrics セクションまでスクロールダウンし、**Performance Overview** をクリックします。
+
+{{< img src="real_user_monitoring/ios/ios-performance-dashboard.png" alt="Performance Summary タブから iOS のモバイルパフォーマンスダッシュボードにアクセス" style="width:90%;">}}
 
 様々なアプリケーションのバージョンに渡るメトリクスを表示する折れ線グラフで、アプリケーションの全体的な健全性とパフォーマンスを理解することができます。アプリケーションのバージョンでフィルターをかけたり、特定のセッションやビューを表示するには、グラフをクリックしてください。
 
-{{< img src="real_user_monitoring/ios/rum_explorer_mobile_vitals.png" alt="RUM エクスプローラーのイベントタイミングとモバイルバイタル" style="width:90%;">}}
+{{< img src="real_user_monitoring/ios/rum_explorer_mobile_vitals-3.png" alt="RUM エクスプローラーのイベントタイミングとモバイルバイタル" style="width:90%;">}}
 
 また、RUM エクスプローラーでビューを選択し、セッションでのアプリケーションのユーザー体験に直接関連する推奨ベンチマーク範囲を観察することができます。**Refresh Rate Average** などのメトリクスをクリックし、**Search Views With Poor Performance** (パフォーマンスの悪いビューを検索) をクリックすると、検索クエリにフィルターが適用され、追加のビューが調査されます。
 

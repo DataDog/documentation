@@ -1,5 +1,5 @@
 ---
-description: iOS アプリケーションの健全性とパフォーマンスに関するインサイトを発見することができます。
+description: Android アプリケーションの健全性とパフォーマンスに関するインサイトを発見することができます。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
@@ -15,13 +15,17 @@ title: モバイル バイタル
 
 リアルユーザーモニタリングは、[Android Vitals][1] にインスピレーションを得た、一連のメトリクスを提供するモバイルバイタルを提供し、モバイルアプリケーションの応答性、安定性、リソース消費に関するインサイトの取得に役立てることができます。モバイルバイタルは、不良、中程度、良好の 3 種類です。
 
-モバイルバイタルは、**UX Monitoring > Performance Monitoring** に移動してアプリケーションをクリックすると、アプリケーションの **Performance Overview** ページに表示されます。アプリケーションのモバイルパフォーマンスダッシュボードから、**Mobile Vitals** のグラフをクリックすると、バージョンによるフィルターを適用したり、フィルターをかけたセッションを調べることができます。
+アプリケーションのモバイルバイタルは、**UX Monitoring > Performance Summary** に移動してアプリケーションを選択することで表示できます。
 
-{{< img src="real_user_monitoring/android/android-mobile-vitals-new.png" alt="RUM エクスプローラーのモバイルバイタル" style="width:100%;">}}
+{{< img src="real_user_monitoring/android/android_performance-summary.png" alt="Performance Summary タブのモバイルバイタル" style="width:90%;">}}
+
+RUM モバイルアプリのパフォーマンスダッシュボードにアクセスするには、アプリケーションサマリーページから Monitor Performance Metrics セクションまでスクロールダウンし、**Performance Overview** をクリックします。
+
+{{< img src="real_user_monitoring/android/mobile-performance-dashboard-3.png" alt="Performance Overview のモバイルバイタルの詳細" style="width:90%;">}}
 
 様々なアプリケーションのバージョンに渡るメトリクスを表示する折れ線グラフで、アプリケーションの全体的な健全性とパフォーマンスを理解することができます。アプリケーションのバージョンでフィルターをかけたり、特定のセッションやビューを表示するには、グラフをクリックしてください。
 
-{{< img src="real_user_monitoring/android/refresh_rate_and_mobile_vitals.png" alt="イベントのタイミングとモバイル バイタル" style="width:70%;">}}
+{{< img src="real_user_monitoring/android/android_mobile_vitals_3.png" alt="RUM エクスプローラーのイベントタイミングとモバイルバイタル" style="width:90%;">}}
 
 また、RUM エクスプローラーでビューを選択し、セッションでのアプリケーションのユーザー体験に直接関連する推奨ベンチマーク範囲を観察することができます。**Refresh Rate Average** などのメトリクスをクリックし、**Search Views With Poor Performance** (パフォーマンスの悪いビューを検索) をクリックすると、検索クエリにフィルターが適用され、追加のビューが調査されます。
 

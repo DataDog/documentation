@@ -176,7 +176,12 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 前の CREATE USER ステップから
+    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップから
+
+
+     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog AWS インテグレーションを構成します。
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 **注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。

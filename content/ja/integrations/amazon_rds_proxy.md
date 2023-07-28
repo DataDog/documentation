@@ -30,7 +30,7 @@ Amazon RDS Proxy は、Amazon Relational Database Service (RDS) 用のフルマ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 まだの方は、[Amazon Web Services とのインテグレーション][1]を最初に設定してください。
 また、[Amazon RDS とのインテグレーション][2]の有効化も必要です。

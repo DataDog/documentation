@@ -37,7 +37,7 @@ Error Tracking automatically indexes a predefined list of attributes from your i
 
 ## Inspect an issue
 
-Click on any issue to open the issue panel which contains information about seasonality patterns, stack traces, and the error's distribution across environments and sources. The **What Happened** section displays the first and last versions that are impacted by the error, plus an indication of when they were impacted. This metadata is kept beyond your standard log retention.
+Click on any issue to open the issue panel, which contains information about seasonality patterns, stack traces, and the error's distribution across environments and sources. The **What Happened** section displays the first and last versions that are impacted by the error, plus an indication of when they were impacted. This metadata is kept beyond your standard log retention.
 
 If the errors grouped into an issue have different stack traces, click **Group Into Patterns**. 
 

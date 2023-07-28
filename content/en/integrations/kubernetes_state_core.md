@@ -175,6 +175,9 @@ datadog:
 `kubernetes_state.apiservice.condition`
 : The condition of this API service. Tags:`apiservice` `condition` `status`.
 
+`kubernetes_state.configmap.count`
+: Number of ConfigMaps. Tags:`kube_namespace`.
+
 `kubernetes_state.daemonset.count`
 : Number of DaemonSets. Tags:`kube_namespace`.
 
@@ -236,10 +239,10 @@ datadog:
 : Number of endpoints. Tags:`kube_namespace`.
 
 `kubernetes_state.endpoint.address_available`
-: Number of addresses available in endpoint. Tags:`endpoint` `kube_namespace`.
+: Number of addresses available in endpoint. Tags:`kube_endpoint` `kube_namespace`.
 
 `kubernetes_state.endpoint.address_not_ready`
-: Number of addresses not ready in endpoint. Tags:`endpoint` `kube_namespace`.
+: Number of addresses not ready in endpoint. Tags:`kube_endpoint` `kube_namespace`.
 
 `kubernetes_state.namespace.count`
 : Number of namespaces. Tags:`phase`.
@@ -387,6 +390,9 @@ datadog:
 
 `kubernetes_state.pdb.pods_total`
 : Total number of pods counted by this disruption budget. Tags:`kube_namespace` `poddisruptionbudget`.
+
+`kubernetes_state.secret.count`
+: Number of Secrets. Tags:`kube_namespace`
 
 `kubernetes_state.secret.type`
 : Type about secret. Tags:`kube_namespace` `secret` `type`.

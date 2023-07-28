@@ -34,7 +34,7 @@ For Agent v7.21+ / v6.21+:
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
-   The version for the integration can be found in the respective changelog on the integration's Github repository 
+   The version for the integration can be found in the respective changelog on the integration's Github repository
 2. Configure your integration similar to core [integrations][1].
 3. [Restart the Agent][2].
 
@@ -71,13 +71,19 @@ For Agent < v7.21 / v6.21:
 5. Configure your integration similar to core [integrations][3].
 6. [Restart the Agent][4].
 
-
 [1]: https://github.com/DataDog/integrations-extras
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /getting_started/integrations/
 [4]: /agent/guide/agent-commands/#restart-the-agent
+
+
 {{% /tab %}}
 {{< /tabs >}}
+
+If your site restricts network access, ensure your have added all of the [`ip-ranges`][5] to your inclusion list, or download the integration manually.
+
+[5]: /agent/guide/network
+
 
 <br>
 
@@ -86,4 +92,4 @@ For Agent < v7.21 / v6.21:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-extras
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest

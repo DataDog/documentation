@@ -25,12 +25,27 @@ For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the cod
 If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
 
 To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
+
+#### Attributes for error tracking
+
+There are specific attributes that have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking use the following attribute names:
+
+| Attribute            | Description                                                             |
+|----------------------|-------------------------------------------------------------------------|
+| `error.stack`        | Actual stack trace                                                      |
+| `error.message`      | Error message contained in the stack trace                              |
+| `error.kind`         | The type or "kind" of an error (for example, "Exception", or "OSError") |
+
+**Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
+
+For more information, see the complete [source code attributes documentation][11].
+
 ### C# and .NET
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -52,7 +67,7 @@ try {
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -75,7 +90,7 @@ static void Main(string[] args)
 {{% /tab %}}
 {{% tab "Log4Net" %}}
 
-If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -105,7 +120,7 @@ class Program
 
 #### Logrus
 
-If you have not setup log collection for Go, see the [Go Log Collection documentation][3].
+If you have not set up log collection for Go, see the [Go Log Collection documentation][3].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -130,7 +145,7 @@ func ErrorField(err error) errorField {
 			stack = stack[1:]
 		}
     }
-    return ErrorField{
+    return errorField{
         kind: reflect.TypeOf(err).String(),
         stack: stack,
         message: err.Error(),
@@ -145,7 +160,7 @@ log.WithFields(log.Fields{
 
 ### Java (parsed)
 
-If you have not setup log collection for Java, see the [Java Log Collection documentation][4]. Ensure your logs are tagged with `source:java`.
+If you have not set up log collection for Java, see the [Java Log Collection documentation][4]. Ensure your logs are tagged with `source:java`.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
@@ -184,7 +199,7 @@ try {
 
 #### Winston (JSON)
 
-If you have not setup log collection for Node.js, see the [Node.js Log Collection documentation][5].
+If you have not set up log collection for Node.js, see the [Node.js Log Collection documentation][5].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -220,7 +235,7 @@ except:
 
 #### Lograge (JSON)
 
-If you have not setup log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
 
 To log a caught exception yourself, you may optionally use:
 
@@ -264,3 +279,4 @@ end
 [8]: /logs/log_configuration/processors/?tab=ui#remapper
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /logs/log_collection/
+[11]: /logs/log_configuration/attributes_naming_convention/#source-code

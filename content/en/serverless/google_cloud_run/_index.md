@@ -284,7 +284,7 @@ Follow [these instructions][2] to install and configure the Ruby tracing library
 ### 3. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][10] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -298,7 +298,6 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
-  --allow-unauthenticated
 
 ```
 
@@ -331,9 +330,9 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ### OpenTelemetry
 
-Follow these steps to send OpenTelemetry (OTel) data to Datadog.
+Follow these steps to send OpenTelemetry data to Datadog.
 
-1. Tell OTel to export spans to Datadog `serverless-init`.
+1. Tell OpenTelemetry to export spans to Datadog `serverless-init`.
 
    ```js
    // instrument.js
@@ -360,7 +359,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    provider.register();
    ```
 
-2. Add OTel's instrumentation for Express. This is akin to adding `ddtrace`.
+2. Add OpenTelemetry's instrumentation for Express. This is akin to adding `ddtrace`.
 
    ```js
    // instrument.js
@@ -400,7 +399,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
    ```
-5. Enable OTel in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
+5. Enable OpenTelemetry in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
 
    ```
    # Dockerfile

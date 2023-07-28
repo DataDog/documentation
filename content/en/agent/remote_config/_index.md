@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Using Datadog Audit Trail"
+- link: "https://www.datadoghq.com/blog/remote-configuration-for-datadog/"
+  tag: "Blog"
+  text: "Apply real-time updates to Datadog components with Remote Configuration"
 ---
 
 {{% site-region region="gov" %}}
@@ -37,7 +40,7 @@ After you submit configuration changes in the respective Datadog product UI for 
 
 The following diagram illustrates how Remote Configuration works:
 
-{{<img src="agent/guide/RC_Diagram_v4.png" alt="Users configure features in the UI, the config is stored in Datadog, the Agent requests config updates." width="90%" style="center">}}
+{{<img src="agent/remote_config/RC_Diagram_v5.png" alt="Users configure features in the UI, the config is stored in Datadog, the Agent requests config updates." width="90%" style="center">}}
 
 1. You configure select product features in the Datadog UI.
 2. The product feature configurations are securely stored within Datadog.
@@ -67,9 +70,12 @@ The following products and features are supported with Remote Config:
 
 ### Cloud Workload Security (CWS)
 
-<div class="alert alert-info">This feature is in beta.</div>
+<div class="alert alert-info">Remote Configuration for default Agent rules is in beta.</div>
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][3] for more information.
+<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/18hwf0-4AXYzKcQR0AIT1JxhaMFLw90YaDXBaUgdxKLM/prefill">form</a> to request access.</div>
+
+- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][3] for more information.
+- **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 ### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>
@@ -113,7 +119,7 @@ To enable Remote Configuration:
 
 4. Select an existing API key or create a new API key, and enable the Remote Config capability on the key:
 
-   {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
+   {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
 
 5. Update your Agent configuration file:
 
@@ -189,6 +195,18 @@ To authenticate and authorize the Agent to receive configurations and security d
 
 **Note:** If you have [`api_keys_write`][5] RBAC permission, but are missing Remote Configuration [Organization][8] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
 
+### Review Remote Configuration status events
+
+Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][8]. The following table describes the meaning of each status:
+
+  | Status           | Description                                      |
+  |------------------|--------------------------------------------------|
+  | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully to Datadog. This is the optimal state you want your Agents to be in for Remote Configuration.                                               |    
+  | ERROR          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize with Datadog for Remote Configuration operation. The most likely cause is the API Key used by the Agent is not Remote Configuration-enabled. To fix the issue, enable Remote Configuration capability on the API Key used by the Agent.                                                 | 
+  | CONNECTION ERROR        |   The Agent deployed in your environment has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the Agent cannot be found in the Remote Configuration service. The most likely cause is that the Agent is unable to reach [Remote Configuration endpoints][17]. To fix the issue, allow outbound HTTPS access to Remote Configuration endpoints from your environment. This status displays when the Agent version is `7.45.0` or higher. 
+  | DISABLED       |   The Agent deployed in your environment has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. Set `remote_config.enabled` to true if you want to enable Remote Configuration on the Agent. This status displays when the Agent version is `7.45.0` or higher. | 
+  | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            | 
+  | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -211,3 +229,4 @@ To authenticate and authorize the Agent to receive configurations and security d
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
 [17]: /agent/guide/network
 [18]: /agent/proxy/
+
