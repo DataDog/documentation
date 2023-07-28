@@ -30,7 +30,7 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/compliance_page.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom compliance rules
 
