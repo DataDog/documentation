@@ -362,4 +362,4 @@ If you have installed and configured the integrations and Agent as described and
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
-[10]: /integrations/amazon-web-services
+[10]: https://app.datadoghq.com/integrations/amazon-web-services

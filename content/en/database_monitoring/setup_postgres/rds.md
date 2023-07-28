@@ -425,4 +425,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
-[13]: /integrations/amazon-web-services
+[13]: https://app.datadoghq.com/integrations/amazon-web-services

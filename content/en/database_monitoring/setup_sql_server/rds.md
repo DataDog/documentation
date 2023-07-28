@@ -99,4 +99,4 @@ To collect more comprehensive database metrics and logs from AWS, install the [R
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_rds
-[2]: /integrations/amazon-web-services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
