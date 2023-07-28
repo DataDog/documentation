@@ -21,11 +21,13 @@ further_reading:
 
 AWS Step Functions is a serverless orchestration service that lets developers create and manage multi-step application workflows. In addition to getting Cloudwatch metrics from Datadog's [AWS Step Functions integration][2], Datadog also provides native AWS Step Function monitoring and tracing.
 
-Serverless Monitoring for AWS Step Functions enables you to:
-- Get an overview of the state of all of your Step Functions in one unified app view
-- View end-to-end traces for a single Step Function execution and its associated logs and metrics
-- Monitor associated Lambda function and view linked Lambda traces
-- Set monitors on a certain trace, metric, log error, or anomaly associated with a Step Function
+### Monitor the overall health of Step Functions in the Serverless view
+The Serverless view shows key metrics for your Step Functions in one place to easily get a snapshot of the health of your Step Functions. You can drill into any Step Function to view all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions. 
+
+### Reduce Step Function debugging time with detailed execution traces.
+You can view end-to-end traces for a single Step Function execution and its associated logs, errors, and metrics - to easily identify issues in your step function logic. Step function spans also contain rich metadata for step inputs and outputs, associated lambda traces, and step duration length that can make it easy to reproduce bugs and fix bottlenecks.
+
+{{< img src="serverless/step_functions/overview3.png" alt="An AWS Step Function span displayed in a flame graph visualization." style="width:100%;" >}}
 
 To get started, follow the [installation instructions][1].
 
