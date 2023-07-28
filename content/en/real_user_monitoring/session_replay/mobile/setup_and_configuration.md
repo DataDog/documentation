@@ -41,8 +41,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
  // in case you need material extension support
  .addExtensionSupport(MaterialExtensionSupport()) 
  .build()
-val sessionReplayFeature = SessionReplayFeature(sessionReplayConfig)
-Datadog.registerFeature(sessionReplayFeature)
+SessionReplay.enable(sessionReplayConfig)
 {{< /code-block >}}
 
 [1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
