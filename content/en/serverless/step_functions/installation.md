@@ -178,7 +178,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 
 
-## See your Step Function Metrics, Logs, and Traces on Datadog
+## See your Step Function metrics, logs, and traces in Datadog
 
 After you have invoked your state machine, go to the [**Serverless app**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see the relevant metrics, logs, and traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
 
