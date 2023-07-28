@@ -42,7 +42,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable Standard Collection in the Resource Collection section of your [Amazon Web Services integration tile][13].
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][13].
 
 ## Configure Postgres settings
 
