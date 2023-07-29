@@ -77,8 +77,8 @@ Cluster Agent が公開される Kubernetes サービスの名前。デフォル
 
 API サーバーと通信しているクライアントのタイムアウト (秒単位)。デフォルトは `60` 秒です。
 
-`DD_EXPVAR_PORT`
-: Datadog Cluster Agent から [expvar][2] パブリック変数を取得するためのポート。デフォルトはポート `5000`。
+`DD_METRICS_PORT`                              
+: Datadog Cluster Agent のメトリクスを公開するポート。デフォルトはポート `5000` です。
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`
 複数のオートスケーラーからのメトリクスバッチを処理するための待機時間 (秒単位)。デフォルトは `10` 秒です。
