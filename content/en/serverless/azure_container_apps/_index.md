@@ -408,7 +408,7 @@ az containerapp up \
 
 ### 3. Results
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+Once the deployment is completed, your custom metrics and traces will be sent to Datadog. To view the live tail of your Azure Container App traces, visit the [Trace View][10] filtered to `@origin:containerapp`. 
 
 ## Additional configurations
 
@@ -458,3 +458,4 @@ RUN apt-get update && apt-get install -y ca-certificates
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /metrics/distributions/
 [9]: /metrics/#time-and-space-aggregation
+[10]: https://app.datadoghq.com/apm/traces?query=%40_top_level%3A1%20%40origin%3Acontainerapp&cols=core_service%2Ccore_resource_name%2Clog_duration%2Clog_http.method%2Clog_http.status_code&historicalData=false&messageDisplay=inline&sort=desc&spanType=service-entry
