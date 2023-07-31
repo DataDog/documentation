@@ -34,9 +34,11 @@ Screens are captured between 64 ms to 100 ms (depending on the platform) and sin
 ## Network
 To minimize the total upload volume, Datadog employs a highly optimized wire format. As a result, you can expect to see an average bandwidth usage of around 12 KB/s for data sent to the Datadog servers on iOS, and 1.22 KB/s on Android. When image recording is enabled, applications with image-heavy content may experience a slightly higher initial volume. In cases when the device is disconnected from the network, the data is buffered to the device's disk storage until a high-bandwidth connection is reestablished.
 
-## App size
-Datadog's SDK follows strict standards and aims to minimize the inclusion of third-party dependencies. This approach ensures that the SDK leverages as much native framework code as possible. On Android, the binary size produced by our own code in the AAR package is 480 kB. More infomration here [https://github.com/DataDog/dd-sdk-android/blob/develop/docs/sdk_performance.md?plain=1#L119]. On iOS, the size of exported `*.ipa` file will be higher by approximately 200 kB.
+## Application size
+Datadog's SDK follows strict standards and aims to minimize the inclusion of third-party dependencies. This approach ensures that the SDK leverages as much native framework code as possible. On Android, the binary size produced by Datadog's own code in the AAR package is 480 kB. See more information on the application size impact [here][1]. On iOS, the size of exported `*.ipa` file will be higher by approximately 200 kB.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/dd-sdk-android/blob/develop/docs/sdk_performance.md?plain=1#L119
