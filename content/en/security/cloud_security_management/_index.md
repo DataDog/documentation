@@ -63,7 +63,7 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][3]
 
 ## Vulnerabilities
 
-[CSM Vulnerabilities][4] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][5] and [hosts][6] in your infrastructure.
+[CSM Vulnerabilities][5] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][6] and [hosts][7] in your infrastructure.
 
 <div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
 
@@ -74,10 +74,7 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][3]
 [1]: /security/cspm/
 [2]: /security/cloud_workload_security/
 [3]: https://app.datadoghq.com/security/configuration
-<<<<<<< HEAD
 [4]: /security/identity_risks
-=======
-[4]: https://app.datadoghq.com/security/infra-vulnerability
-[5]: https://app.datadoghq.com/containers/images
-[6]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
->>>>>>> master
+[5]: https://app.datadoghq.com/security/infra-vulnerability
+[6]: https://app.datadoghq.com/containers/images
+[7]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
