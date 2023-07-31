@@ -330,4 +330,4 @@ The **Security** tab highlights potential network threats and findings detected 
 [7]: /security/cspm/
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution
-[10]: https://app.datadoghq.com/network/dns
+[10]: /network_monitoring/dns/#recommended-queries
