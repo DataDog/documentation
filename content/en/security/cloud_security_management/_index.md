@@ -35,12 +35,11 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Security Management delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
 
-Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), [Cloud Workload Security (CWS)](#cloud-workload-security), and [Vulnerabilities](#vulnerabilities).
+Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), [Cloud Workload Security (CWS)](#cloud-workload-security), [Identity Risks](#identity-risks), and [Vulnerabilities](#vulnerabilities).
 
 {{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
-
 
 ## Cloud Security Posture Management
 
@@ -54,11 +53,17 @@ Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#c
 
 {{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
+## Identity Risks
+
+[CSM Identity Risks][4] provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
+
+<div class="alert alert-info">CSM Identity Risks is in beta.</div>
+
 To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
 
 ## Vulnerabilities
 
-[CSM Vulnerabilities][4] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][5] and [hosts][6] in your infrastructure.
+[CSM Vulnerabilities][5] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][6] and [hosts][7] in your infrastructure.
 
 <div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
 
@@ -69,6 +74,7 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][3]
 [1]: /security/cspm/
 [2]: /security/cloud_workload_security/
 [3]: https://app.datadoghq.com/security/configuration
-[4]: https://app.datadoghq.com/security/infra-vulnerability
-[5]: https://app.datadoghq.com/containers/images
-[6]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
+[4]: /security/identity_risks
+[5]: https://app.datadoghq.com/security/infra-vulnerability
+[6]: https://app.datadoghq.com/containers/images
+[7]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
