@@ -29,7 +29,7 @@ To use CSM CIEM, you must [enable resource collection for AWS][2] and [enable Cl
 
 Review your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
 
-{{< img src="security/identity_risks/identity_risks_explorer.png" alt="CSM CIEM explorers page" width="100%">}}
+{{< img src="security/ciem/identity_risks_explorer.png" alt="CSM CIEM explorers page" width="100%">}}
 
 When viewing an individual resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
 
@@ -39,7 +39,7 @@ You can also review the configuration of the resource on the **Resource** tab, a
 
 On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to get additional insights about the detection (for example, the permissions provisioned on the resource and whether they were used in the last 15 days).
 
-{{< img src="security/identity_risks/insights_tab_side_panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
+{{< img src="security/ciem/insights_tab_side_panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
 
 ## Further Reading
 

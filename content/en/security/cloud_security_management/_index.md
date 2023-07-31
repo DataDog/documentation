@@ -68,4 +68,4 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][3]
 [1]: /security/cspm/
 [2]: /security/cloud_workload_security/
 [3]: https://app.datadoghq.com/security/configuration
-[4]: /security/identity_risks
+[4]: /security/ciem
