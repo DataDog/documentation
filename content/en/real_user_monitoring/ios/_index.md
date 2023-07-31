@@ -206,10 +206,10 @@ Datadog.initialize(
   with: Datadog.Configuration(
     clientToken: "<client token>",
     env: "<environment>",
-    service: "<service name>",
-    site: .us5
+    site: .us5,
+    service: "<service name>"    
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -238,10 +238,10 @@ Datadog.initialize(
   with: Datadog.Configuration(
     clientToken: "<client token>",
     env: "<environment>",
-    service: "<service name>",
-    site: .us1_fed
+    site: .us1_fed,
+    service: "<service name>"
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -270,10 +270,10 @@ Datadog.initialize(
   with: Datadog.Configuration(
     clientToken: "<client token>",
     env: "<environment>",
-    service: "<service name>",
-    site: .ap1
+    site: .ap1,
+    service: "<service name>"
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}

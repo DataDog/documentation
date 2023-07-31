@@ -86,7 +86,7 @@ Datadog.initialize(
         env: "<environment>",
         service: "<service name>"
     ), 
-    trackingConsent: .trackingConsent
+    trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -113,10 +113,10 @@ Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
-        service: "<service name>",
-        site: .eu1
+        site: .eu1,
+        service: "<service name>"
     ), 
-    trackingConsent: .trackingConsent
+    trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -144,10 +144,10 @@ Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
-        service: "<service name>",
-        site: .us3
+        site: .us3,
+        service: "<service name>"
     ), 
-    trackingConsent: .trackingConsent
+    trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -175,10 +175,10 @@ Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
-        service: "<service name>",
-        site: .us5
+        site: .us5,
+        service: "<service name>"
     ), 
-    trackingConsent: .trackingConsent
+    trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -206,10 +206,10 @@ Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
-        service: "<service name>",
-        site: .us1_fed
+        site: .us1_fed,
+        service: "<service name>"
     ), 
-    trackingConsent: .trackingConsent
+    trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -237,10 +237,10 @@ Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
-        service: "<service name>",
-        site: .ap1
+        site: .ap1,
+        service: "<service name>"
     ), 
-    trackingConsent: .trackingConsent
+    trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -296,7 +296,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 import DatadogTrace
 
 Trace.enable(
-    configuration: Trace.Configuration(
+    with: Trace.Configuration(
         networkInfoEnabled: true
     )
 )
@@ -450,8 +450,8 @@ This sets additional tracing headers on your request so your backend can extract
 import DatadogTrace
 
 Trace.enable(
-    configuration: Trace.Configuration(
-        urlSessionTracking: URLSessionTracking(
+    with: Trace.Configuration(
+        urlSessionTracking: Trace.Configuration.URLSessionTracking(
             firstPartyHostsTracing: .trace(hosts: ["example.com", "api.yourdomain.com"])
         )
     )

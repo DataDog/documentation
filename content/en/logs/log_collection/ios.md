@@ -335,7 +335,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```swift
 let logger = Logger.create(
 	with: Logger.Configuration(
-		name: "<logger name>"
+		name: "<logger name>",
 		networkInfoEnabled: true,
 		remoteLogThreshold: .info,
 		consoleLogFormat: .shortWith(prefix: "[iOS App] ")

@@ -140,10 +140,10 @@ Find more details and available options in the [`DDRUMMonitor` class][9].
 
 In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
-- `.startResourceLoading(resourceKey:request:)`
-- `.stopResourceLoading(resourceKey:response:)`
-- `.stopResourceLoadingWithError(resourceKey:error:)`
-- `.stopResourceLoadingWithError(resourceKey:errorMessage:)`
+- `.startResource(resourceKey:request:)`
+- `.stopResource(resourceKey:response:)`
+- `.stopResourceWithError(resourceKey:error:)`
+- `.stopResourceWithError(resourceKey:errorMessage:)`
 
 For example:
 
@@ -723,7 +723,7 @@ Datadog.initialize(
         kCFProxyPasswordKey: "proxypass" 
     ]
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 
