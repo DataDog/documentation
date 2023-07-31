@@ -27,7 +27,7 @@ title: ログモニター
 
 Datadog で[ログモニター][3]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> Logs* の順に進みます。
 
-<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 ログモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 ログモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/#アラートのグループ化">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
 ### 検索クエリを定義する
 
@@ -90,7 +90,7 @@ Datadog で[ログモニター][3]を作成するには、メインナビゲー�
 | グループ化された Multi Alert ログ数    | 最大 10 個のログサンプル。                |
 | グループ化されていない Simple-Alert メジャー   | 最大 10 個のログサンプル。                |
 | グループ化された Simple-Alert メジャー     | 最大 10 個のファセット値またはメジャー値。    |
-| グループ化された Multi Alert ログ数    | 最大 10 個のファセット値またはメジャー値。    |
+| グループ化された Multi-Alert Log メジャー  | 最大 10 個のファセット値またはメジャー値。    |
 
 これらの通知の送信に、Slack、Jira、webhooks、Microsoft Teams、Pagerduty、電子メールを使用することができます。**注**: サンプルはリカバリ通知には表示されません。
 

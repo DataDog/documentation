@@ -100,6 +100,8 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
     # values.yaml file
     spec:
       features:
+        remoteConfiguration:
+          enabled: true
         cws:
           enabled: true
     ```
@@ -170,13 +172,14 @@ Add the following settings to the `env` section of `security-agent` and `system-
             env:
               - name: DD_REMOTE_CONFIGURATION_ENABLED
                 value: "true"
-              - name: system-probe
-                [...]
-                env:
-                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-                    value: "true"
-                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                    value: "true" [...]
+          - name: system-probe
+            [...]
+            env:
+              - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
+                value: "true"
+              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                value: "true"
+          [...]
 ```
 
 {{% /tab %}}

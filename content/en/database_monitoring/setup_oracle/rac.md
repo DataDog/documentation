@@ -2,8 +2,6 @@
 title: Setting Up Database Monitoring for Oracle RAC
 kind: documentation
 description: Install and configure Database Monitoring for Oracle RAC
-private: true
-is_beta: true
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
@@ -16,22 +14,45 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta.
+The features described on this page are in private beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
 ## Setup
 
-Complete the following steps to enable Database Monitoring with your database:
+Complete the following steps to enable Database Monitoring:
 
-1. Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][7].
+Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle databases][7].
 
-2. Add the following custom tag to each node:
-    ```yaml
-    tags:
-      - rac_cluster:your_cluster_name
-    ```
+You must configure the Agent for each Real Application Cluster (RAC) node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic. The collected data from each RAC node is aggregated in the frontend.
+
+```yaml
+init_config:
+instances:
+  - server: '<RAC_NODE_1>:<PORT>'
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    username: 'c##datadog'
+    password: '<PASSWORD>'
+    dbm: true
+    tags:  # Optional
+      - rac_cluster:<CLUSTER_NAME>
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+  - server: '<RAC_NODE_2>:<PORT>'
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    username: 'c##datadog'
+    password: '<PASSWORD>'
+    dbm: true
+    tags:  # Optional
+      - rac_cluster:<CLUSTER_NAME>
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+```
+
+The Agent connects only to CDB. It queries the information about PDBs while connected to CDB. Don't create connections to individual PDBs.
+
+Set the `rac_cluster` configuration parameter to the name of your RAC cluster or some user friendly alias. The `rac_cluster` filter helps you select all RAC nodes in the [DBM Oracle Database Overview dashboard][8]. You can set an additional filter for the database of interest.
 
 ### Validate
 
@@ -44,6 +65,7 @@ Complete the following steps to enable Database Monitoring with your database:
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: /database_monitoring/setup_oracle/selfhosted
+[8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
 ## Further reading
 

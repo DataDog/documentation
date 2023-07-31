@@ -18,7 +18,7 @@ aliases:
     - /serverless/datadog_lambda_library/ruby/
 ---
 
-<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
+<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder or plan on using custom metrics in your Lambda functions, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
@@ -323,8 +323,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][4].
-- Turn on [threat monitoring][9] to get alerted on attackers targeting your service.
-- See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
+- Turn on [threat monitoring][7] to get alerted on attackers targeting your service.
 - See the [troubleshooting guide][5] if you have trouble collecting the telemetry
 - See the [advanced configurations][6] to
     - connect your telemetry using tags
@@ -333,52 +332,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces
 
-### Monitor custom business logic
-
-To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][7] and the APM guide for [custom instrumentation][8].
-
-```ruby
-require 'ddtrace'
-require 'datadog/lambda'
-
-Datadog::Lambda.configure_apm do |c|
-# Enable the instrumentation
-end
-
-def handler(event:, context:)
-    # Apply the Datadog wrapper
-    Datadog::Lambda::wrap(event, context) do
-        # Add custom tags to the lambda function span,
-        # does NOT work when X-Ray tracing is enabled
-        current_span = Datadog::Tracing.active_span
-        current_span.set_tag('customer.id', '123456')
-
-        some_operation()
-
-        Datadog::Tracing.trace('hello.world') do |span|
-          puts "Hello, World!"
-        end
-
-        # Submit a custom metric
-        Datadog::Lambda.metric(
-          'coffee_house.order_value', # metric name
-          12.45, # metric value
-          time: Time.now.utc, # optional, must be within last 20 mins
-          "product":"latte", # tag
-          "order":"online" # another tag
-        )
-    end
-end
-
-# Instrument the function
-def some_operation()
-    Datadog::Tracing.trace('some_operation') do |span|
-        # Do something here
-    end
-end
-```
-
-For more information on custom metric submission, see [Serverless Custom Metrics][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
+<div class="alert alert-warning">Sending custom metrics instrumented with the Extension is not supported in the Ruby runtime. If you require custom metrics, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumenting using the Datadog Forwarder</a> instead.</div>
 
 ## Further Reading
 
@@ -391,6 +345,5 @@ For more information on custom metric submission, see [Serverless Custom Metrics
 [4]: https://app.datadoghq.com/functions
 [5]: /serverless/guide/troubleshoot_serverless_monitoring/
 [6]: /serverless/configuration
-[7]: /serverless/custom_metrics?tab=ruby
+[7]: /security/application_security/enabling/serverless/?tab=serverlessframework
 [8]: /tracing/custom_instrumentation/ruby/
-[9]: /security/application_security/enabling/serverless/?tab=serverlessframework

@@ -13,13 +13,13 @@ draft: false
 git_integration_title: amazon_sns
 has_logo: true
 integration_id: amazon-sns
-integration_title: Amazon SNS
+integration_title: Amazon Simple Notification Service (SNS)
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_sns
-public_title: Datadog-Amazon SNS インテグレーション
+public_title: Datadog-Amazon Simple Notification Service (SNS) インテグレーション
 short_description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
 version: '1.0'
 ---
@@ -28,7 +28,7 @@ version: '1.0'
 
 ## 概要
 
-SNS を Datadog に接続すると、以下のことができます。
+Amazon Simple Notification Service (SNS) を Datadog に接続すると、次のことが可能になります。
 
 - SNS メッセージをイベントとしてストリームに表示できます。
 - アラートおよびイベント通知を SNS に送信できます。
@@ -50,7 +50,7 @@ SNS を Datadog に接続すると、以下のことができます。
     | `sns:ListTopics` | 取得可能なトピックを一覧表示するために使用されます。                        |
     | `sns:Publish`    | 通知 (モニターまたはイベントフィード) を公開するために使用されます。|
 
-3. [Datadog - AWS SNS インテグレーション][5]をインストールします。
+3. [Datadog - Amazon SNS インテグレーション][5]をインストールします。
 
 ### イベント収集
 
@@ -105,13 +105,13 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS SNS インテグレーションには、トピックサブスクリプションのイベントが含まれます。下のイベント例を参照してください。
+Amazon SNS インテグレーションには、トピックサブスクリプションのイベントが含まれます。下のイベント例を参照してください。
 
-{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="AWS SNS イベント" >}}
+{{< img src="integrations/amazon_sns/aws_sns_event.png" alt="Amazon SNS イベント" >}}
 
 ### サービスのチェック
 
-AWS SNS インテグレーションには、サービスのチェック機能は含まれません。
+Amazon SNS インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

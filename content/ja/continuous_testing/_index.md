@@ -18,10 +18,10 @@ further_reading:
   tag: ドキュメント
   text: Continuous Testing と CI/CD のトラブルシューティング
 - link: https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/
-  tag: blog
+  tag: ブログ
   text: Datadog Continuous Testing により、自信を持ってリリースすることができます
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
-  tag: blog
+  tag: ブログ
   text: Datadog を使った継続的テストのベストプラクティス
 kind: documentation
 title: Continuous Testing
@@ -33,7 +33,7 @@ Datadog Continuous Testing は、製品のライフサイクル全体におけ�
 
 ## 簡単かつスピーディーにテストを実行
 
-[コードレス Web レコーダー][2]、[並行テスト実行][3]、内蔵のマルチロケーションテストなどの拡張性の高い機能を使用して、QA チームの時間と労力を節約します。
+コードレス [Web レコーダー][2]、[モバイルアプリレコーダー][15]、[並行テスト実行][3]、内蔵のマルチロケーションテストなどの拡張性の高い機能を使用して、QA チームの時間と労力を節約します。
 
 {{< img src="continuous_testing/continuous_testing_selection.png" alt="Continuous Testing の設定ページで、テストを順次実行するか、同時に実行するテストの数をカスタマイズするかを選択します" style="width:100%;">}}
 
@@ -42,7 +42,7 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 ## テストの信頼性向上 
 
-テストコードを実装する代わりに、[Synthetic モニタリングの回復力、拡張性、コードレステスト][4]を使用してソフトウェアを構築することができます。自己修復ブラウザテストと自動テスト再試行により、偽陽性を最小化し、テスト結果に自信を持つことができます。ユーザーに最高の体験をさせるために、[クロスブラウザテスト][2]を自動化することができます。
+テストコードを実装する代わりに、[Synthetic モニタリングの回復力、拡張性、コードレステスト][4]を使用してソフトウェアを構築することができます。自己修復ブラウザテスト、モバイルアプリテスト、自動テスト再試行により、誤検知を最小化し、テスト結果に自信を持つことができます。ユーザーに最高の体験をさせるために、[クロスブラウザテスト][2]と[モバイルアプリケーションテスト][16]を自動化することができます。
 
 ## シームレスなインテグレーションで効率アップ
 
@@ -56,7 +56,7 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 ## トラブルシューティングの高速化
 
-統一された監視プラットフォームでテストを実行することで、失敗したテスト実行の根本原因を迅速に見つけ、MTTR を短縮することができます。Datadog の [APM インテグレーション][12]や[Continuous Testing Explorer][11] で実行されたジョブを確認することで、関連するメトリクス、トレース、ログが表示され、ツールを切り替えることなく、トラブルシューティングのための完全なコンテキストを得ることができます。
+統一された監視プラットフォームでテストを実行することで、失敗したテスト実行の根本原因を迅速に見つけ、MTTR を短縮することができます。[Synthetic Monitoring & Continuous Testing Explorer][11] で実行されたジョブを確認することで、Datadog の [APM インテグレーション][12]で可視化された相関メトリクス、トレース、ログを通じて、ツールを切り替えることなく、トラブルシューティングのための完全なコンテキストを得ることができます。
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="Continuous Testing エクスプローラーの CI バッチ" style="width:100%;">}}
 
@@ -68,7 +68,7 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
 
 ## 準備はいいですか？
 
-[Synthetic テスト][4]をいくつか構成したら、お好みの [CI/CD プロバイダー][1]のドキュメントを参照するか、CI/CD パイプラインで [datadog-ci NPM パッケージ][14]を使用します。その後、[Continuous Testing エクスプローラー][11]でバッチ実行の詳細について調べ始めます。
+[Synthetic テスト][4]をいくつか構成したら、お好みの [CI/CD プロバイダー][1]のドキュメントを参照するか、CI/CD パイプラインで [datadog-ci NPM パッケージ][14]を使用します。その後、[Synthetic Monitoring & Continuous Testing エクスプローラー][11]でバッチ実行の詳細について調べ始めます。
 
 ## その他の参考資料
 
@@ -83,3 +83,5 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
 [12]: /ja/synthetics/apm/
 [13]: https://app.datadoghq.com/synthetics/create#
 [14]: /ja/continuous_testing/cicd_integrations/configuration
+[15]: /ja/mobile_app_testing/mobile_app_tests
+[16]: /ja/mobile_app_testing/

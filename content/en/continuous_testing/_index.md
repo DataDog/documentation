@@ -83,5 +83,5 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [12]: /synthetics/apm/
 [13]: https://app.datadoghq.com/synthetics/create#
 [14]: /continuous_testing/cicd_integrations/configuration
-[15]: /mobile_testing/mobile_app_tests
-[16]: /mobile_testing/
+[15]: /mobile_app_testing/mobile_app_tests
+[16]: /mobile_app_testing/

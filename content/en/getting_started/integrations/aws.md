@@ -189,7 +189,7 @@ To get notified of any unwanted or unexpected behavior in your account, create [
 You can unify the metrics, traces, and logs from your AWS Lambda functions running serverless applications in Datadog. Check out [Serverless][42] for instructions on instrumenting your application, installing [Serverless Libraries and Integrations][43], implementing [Distributed Tracing with Serverless Applications][44], or [Serverless Troubleshooting][45].
 
 ### APM
-To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][46] integration or from a host with the Datadog Agent using [APM][47]. Then, read [Explore Datadog APM][48] for a better understanding of how to use this data to gain insights into your application performance.
+To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][46] integration or from a host with the Datadog Agent using [APM][47]. Then, read the [APM documentation][48] for a better understanding of how to use this data to gain insights into your application performance.
 
 Additionally, you can use [Watchdog][49], an algorithmic feature for APM performance and infrastructure metrics, to automatically detect and be notified about potential application issues.
 
@@ -258,7 +258,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [45]: /serverless/troubleshooting
 [46]: /integrations/amazon_xray/
 [47]: /tracing/trace_collection/
-[48]: /tracing/#explore-datadog-apm
+[48]: /tracing/
 [49]: /watchdog/
 [50]: /getting_started/cloud_siem/
 [51]: /security/default_rules/#cat-log-detection
