@@ -25,8 +25,6 @@ CSM Vulnerabilities offers vulnerabilities in the Container Images on your hosts
 - View your container images on the [container images][2] page. 
 - Observe the number of vulnerabilities that exist in the container images (column name `VULNERABILITIES`).
 
-{{< img src="security/infrastructure_vulnerabilities/container_image_2.png" alt="Images overview page highlighting the vulnerabilities and container column sort feature" width="100%">}}
-
 View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab:
 
 {{< img src="security/infrastructure_vulnerabilities/container_vulnerability.png" alt="Container Images overview page highlighting the vulnerabilities tab" width="100%">}}
