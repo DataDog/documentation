@@ -1,19 +1,19 @@
 ---
-title: Setting up Infrastructure Vulnerability Management 
+title: Setting up Cloud Security Management Vulnerabilities
 kind: documentation
 further_reading:
 - link: "/security/infrastructure_vulnerability/"
   tag: "Documentation"
-  text: "Infrastructure Vulnerability Management"
+  text: "CSM Vulnerabilities"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Infrastructure Vulnerability Management is not available on the US1-FED Datadog site.
+CSM Vulnerabilities is not available on the US1-FED Datadog site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Infrastructure Vulnerability Management is in beta.</div>
+<div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
 
 ## Prerequisites
 

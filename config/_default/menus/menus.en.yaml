@@ -2955,14 +2955,14 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 205
-  - name: Infrastructure Vulnerability Management
-    url: security/infrastructure_vulnerability
+  - name: Infrastructure Vulnerabilities
+    url: security/infrastructure_vulnerabilities
     parent: csm
-    identifier: infrastructure_vulnerability_management
+    identifier: infrastructure_vulnerabilities
     weight: 18
   - name: Setup
-    url: security/infrastructure_vulnerability/setup
-    parent: infrastructure_vulnerability_management
+    url: security/infrastructure_vulnerabilities/setup
+    parent: infrastructure_vulnerabilities
     identifier: infra_vm_setup
     weight: 201
   - name: Default Detection Rules
