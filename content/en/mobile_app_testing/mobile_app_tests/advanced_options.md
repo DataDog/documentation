@@ -19,16 +19,13 @@ further_reading:
   text: "Learn about Synthetic Monitoring Data Security"
 ---
 
-{{% site-region region="us3,us5,eu,gov,ap1" %}}
-<div class="alert alert-warning">
-  Mobile Application Testing is only supported for Datadog customers using the US1 site.
-</div>
-{{% /site-region %}}
+{{< site-region region="us3,us5,gov,eu,ap1" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported.</div>
+{{< /site-region >}}
 
-{{< callout url="#" header="false" btn_hidden="true" >}}
-  Mobile Application Testing is in limited availability.
-{{< /callout >}} 
-
+{{< site-region region="us" >}}
+<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< /site-region >}}
 
 ## Overview
 
