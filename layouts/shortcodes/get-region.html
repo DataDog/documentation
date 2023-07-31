@@ -4,14 +4,6 @@
   {{- $content := "" -}}
   {{- if eq $region "us" -}}
       {{- $content = "us-east-1" -}}
-  {{- else if eq $region "u3" -}}
-      {{- $content = "us-west-1" -}} 
-  {{- else if eq $region "us5" -}}
-      {{- $content = "us-central-1" -}} 
-  {{- else if eq $region "eu" -}}
-      {{- $content = "eu-central-1" -}}
-  {{- else if eq $region "gov" -}}
-      {{- $content = "us-gov-west-1" -}} 
   {{- else if eq $region "ap1" -}}
       {{- $content = "ap-northeast-1" -}}
   {{- end -}}
