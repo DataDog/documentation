@@ -59,20 +59,6 @@ To run a recommended query, click on the tile. Hovering over the tile displays a
 
 {{< img src="network_performance_monitoring/network_analytics/recommended_query_detail.png" alt="The detail view of a recommended query displaying a description and query information, with four query dimensions displayed: Search for, View clients as, View servers as, and Visualize as" style="width:80%;">}}
 
-### Summary graphs
-
-The summary graphs are a condensed view of your network, which you can modify to display volume, throughput, connections, or latency as needed. Display up to three summary graphs at a time, and change the data and visualization type to suit your organization. To update a graph's data source, click on the graph's title and make a selection from the dropdown menu.
-
-{{< img src="network_performance_monitoring/network_analytics/summary_graph_options.png" alt="The summary graph section of the Network Analytics page, displaying the available options to filter the data: Volume Sent, Throughput Sent, Volume Received, Throughput Received, Established Connections, Closed Connections, Established Connections / Second, Closed Connections / Second, and TCP Latency" style="width:80%;">}}
-
-To change the visualization type, click on the pencil icon in the top right corner of the graph. Select from the options available, as shown in the screenshot below.
-
-{{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type with Area, Line, Bars, Toplist, Change, and Piechart" style="width:80%;">}}
-
-To hide a specific graph, click on the hide icon next to the pencil icon. You can display as little as one graph or as many as three graphs. To add graphs, click on the plus icon `+` on the right side of the summary graph and select the graph to add. You can also reset the graphs to the default graphs when adding a new graph.
-
-{{< img src="network_performance_monitoring/network_analytics/summary_graphs_reset_graphs.png" alt="The summary graphs section displaying the options to Add graph and Reset Graphs" style="width:80%;">}}
-
 ### Facet panels
 
 You can use the facet panels to browse through all of the tags available on your flows, or filter traffic when you don't remember the exact tags you were looking for. Facet panels mirror the tags in your search bar query. Switch between the facet panels with the **Client** and **Server** tabs on top:
@@ -109,6 +95,20 @@ To learn more, see the [search syntax][1] documentation.
 ### Group by
 
 Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
+
+## Summary graphs
+
+The summary graphs are a condensed view of your network, which you can modify to display volume, throughput, connections, or latency as needed. Display up to three summary graphs at a time, and change the data and visualization type to suit your organization. To update a graph's data source, click on the graph's title and make a selection from the dropdown menu.
+
+{{< img src="network_performance_monitoring/network_analytics/summary_graph_options.png" alt="The summary graph section of the Network Analytics page, displaying the available options to filter the data: Volume Sent, Throughput Sent, Volume Received, Throughput Received, Established Connections, Closed Connections, Established Connections / Second, Closed Connections / Second, and TCP Latency" style="width:80%;">}}
+
+To change the visualization type, click on the pencil icon in the top right corner of the graph. Select from the options available, as shown in the screenshot below.
+
+{{< img src="network_performance_monitoring/network_analytics/summary_graph_visualization_options.png" alt="The summary graph visualization options, displaying options to adjust Y-Axis Scale with Linear, Log, Pow, and Sqrt, and to adjust Graph Type with Area, Line, Bars, Toplist, Change, and Piechart" style="width:80%;">}}
+
+To hide a specific graph, click on the hide icon next to the pencil icon. You can display as little as one graph or as many as three graphs. To add graphs, click on the plus icon `+` on the right side of the summary graph and select the graph to add. You can also reset the graphs to the default graphs when adding a new graph.
+
+{{< img src="network_performance_monitoring/network_analytics/summary_graphs_reset_graphs.png" alt="The summary graphs section displaying the options to Add graph and Reset Graphs" style="width:80%;">}}
 
 ## Network data
 
