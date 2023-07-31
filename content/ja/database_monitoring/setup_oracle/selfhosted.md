@@ -4,18 +4,16 @@ further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle インテグレーション
-is_beta: true
 kind: documentation
-private: true
 title: セルフホストの Oracle のデータベースモニタリングの設定
 ---
 
 {{< site-region region="gov" >}}
-データベースモニタリングはこのサイトでサポートされていません。</div>
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">
-このページで説明されている機能は非公開ベータ版です。
+このページで説明されている機能はベータ版です。フィードバックやリクエストについては、カスタマーサクセスマネージャーにお問い合わせください。
 </div>
 
 データベースモニタリングは、クエリサンプルを公開することで、Oracle データベースを深く可視化し、さまざまなワークロードをプロファイリングして問題を診断します。
@@ -63,11 +61,27 @@ grant select on V_$SQLCOMMAND to c##datadog ;
 grant select on V_$DATAFILE to c##datadog ;
 grant select on V_$SYSMETRIC to c##datadog ;
 grant select on V_$SGAINFO to c##datadog ;
+grant select on V_$PDBS to c##datadog ;
+grant select on CDB_SERVICES to c##datadog ;
+grant select on V_$OSSTAT to c##datadog ;
+grant select on V_$PARAMETER to c##datadog ;
+grant select on V_$SQLSTATS to c##datadog ;
+grant select on V_$CONTAINERS to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$SQL to c##datadog ;
+```
+
+プラグ可能データベース (PDB) 上で実行するカスタムクエリを構成した場合は、`C##DATADOG` ユーザーに `set container` 権限を付与する必要があります。
+
+```SQL
+connect / as sysdba
+alter session set container = your_pdb ;
+grant set container to c##datadog ;
 ```
 
 ### ビューの作成
 
-`sysdba` としてログオンし、新しい `view` を作成し、Agent ユーザーにアクセス権を与えます。
+`sysdba` としてログオンし、`sysdba` スキーマに新しい `view` を作成し、Agent ユーザーにアクセス権を与えます。
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
@@ -170,30 +184,30 @@ Oracle Agent のコンフィギュレーションファイル `/etc/datadog-agen
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
+    service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
+    service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
 
-`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog でどのように使用されるかについてさらに詳しくは、[統合サービスタグ付け][3]を参照してください。
+Agent は、root マルチテナントコンテナデータベース (CDB) にのみ接続します。root CDB に接続している間、PDB に関する情報をクエリします。個々の PDB への接続を作成しないでください。
 
 すべての Agent の構成が完了したら、[Datadog Agent を再起動][4]します。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `oracle-dbm` を探します。Datadog の[ダッシュボード][7]と[データベース][6]のページへ移動して開始します。
+[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `oracle-dbm` を探します。Datadog の[ダッシュボード][7]と[データベース][6]のページに移動して開始します。
 
 [1]: /ja/database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
@@ -203,6 +217,6 @@ instances:
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
