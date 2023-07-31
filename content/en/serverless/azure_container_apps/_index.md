@@ -388,8 +388,8 @@ CMD php-fpm; nginx -g daemon off;
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- **`DD_AZURE_SUBSCRIPTION_ID`**: the Azure Subscription ID associated with the Container App resource (Required)
-- **`DD_AZURE_RESOURCE_GROUP`**: the Azure Resouce Group associated with the Container App resource (Required)
+- **`DD_AZURE_SUBSCRIPTION_ID`**: The Azure Subscription ID associated with the Container App resource (Required).
+- **`DD_AZURE_RESOURCE_GROUP`**: The Azure Resouce Group associated with the Container App resource (Required).
 
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
