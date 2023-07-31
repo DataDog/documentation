@@ -5,7 +5,7 @@ is_beta: true
 ---
 
 <div class="alert alert-info">
-<strong>Single Step APM Instrumentation is in beta!</strong> <p>This feature is available in Datadog Agent version x.x:</p>
+<strong>Single Step APM Instrumentation is in beta!</strong> <p> This feature is available in the latest Datadog Agent version.</p>
 <ul>
 <li>On Linux hosts and VMs</li>
 <li>On Docker containers</li>

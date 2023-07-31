@@ -33,14 +33,6 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's
 
 ## Installation and getting started
 
-### Follow the in-app documentation (recommended)
-
-Follow the [Quick start instructions][2] in Datadog for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
-
 ### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
