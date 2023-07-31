@@ -219,7 +219,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
   
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. Export names must be unique.
+5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.

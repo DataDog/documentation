@@ -2,8 +2,6 @@
 title: Setting Up Database Monitoring for Oracle Exadata
 kind: documentation
 description: Install and configure Database Monitoring for Oracle Exadata
-private: true
-is_beta: true
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
@@ -16,7 +14,7 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta.
+The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.

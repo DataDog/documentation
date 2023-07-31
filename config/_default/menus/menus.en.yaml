@@ -1259,12 +1259,6 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 4
-  # will uncomment this when the zoom integration is publicly released
-  # - name: Zoom Integration
-  #   url: service_management/incident_management/zoom_integration
-  #   parent: incidents
-  #   identifier: zoom_integration
-  #   weight: 5
   - name: Mobile Application
     url: service_management/mobile/
     identifier: mobile
@@ -1302,6 +1296,11 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
+  - name: Logic Actions
+    url: service_management/workflows/actions_catalog/logic_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_logic_actions
+    weight: 102
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
@@ -2328,7 +2327,7 @@ main:
     url: database_monitoring/setup_postgres/
     parent: dbm
     identifier: dbm_setup_postgres
-    weight: 2
+    weight: 5
   - name: Self-hosted
     url: database_monitoring/setup_postgres/selfhosted
     parent: dbm_setup_postgres
@@ -2368,7 +2367,7 @@ main:
     url: database_monitoring/setup_mysql/
     parent: dbm
     identifier: dbm_setup_mysql
-    weight: 3
+    weight: 10
   - name: Self-hosted
     url: database_monitoring/setup_mysql/selfhosted
     parent: dbm_setup_mysql
@@ -2408,7 +2407,7 @@ main:
     url: database_monitoring/setup_sql_server/
     parent: dbm
     identifier: dbm_setup_sql_server
-    weight: 4
+    weight: 15
   - name: Self-hosted
     url: database_monitoring/setup_sql_server/selfhosted/
     parent: dbm_setup_sql_server
@@ -2434,36 +2433,71 @@ main:
     parent: dbm_setup_sql_server
     identifier: dbm_troubleshooting_sql_server
     weight: 107
+  - name: Setting Up Oracle
+    url: database_monitoring/setup_oracle/
+    parent: dbm
+    identifier: dbm_setup_oracle
+    weight: 20
+  - name: Self-hosted
+    url: database_monitoring/setup_oracle/selfhosted/
+    parent: dbm_setup_oracle
+    identifier: dbm_setup_oracle_selfhosted
+    weight: 101
+  - name: RDS
+    url: database_monitoring/setup_oracle/rds/
+    parent: dbm_setup_oracle
+    identifier: dbm_setup_oracle_rds
+    weight: 105
+  - name: RAC
+    url: database_monitoring/setup_oracle/rac/
+    parent: dbm_setup_oracle
+    identifier: dbm_setup_oracle_rac
+    weight: 110
+  - name: Exadata
+    url: database_monitoring/setup_oracle/exadata/
+    parent: dbm_setup_oracle
+    identifier: dbm_setup_oracle_exadata
+    weight: 115
+  - name: Exadata
+    url: database_monitoring/setup_oracle/exadata/
+    parent: dbm_setup_oracle
+    identifier: dbm_setup_oracle_exadata
+    weight: 120
+  - name: Autonomous Database
+    url: database_monitoring/setup_oracle/autonomous_database/
+    parent: dbm_setup_oracle
+    identifier: dbm_setup_oracle_autonomous_database
+    weight: 125
   - name: Connecting DBM and Traces
     url: database_monitoring/connect_dbm_and_apm/
     parent: dbm
     identifier: dbm_connect_dbm_and_apm
-    weight: 5
+    weight: 25
   - name: Data Collected
     url: database_monitoring/data_collected
     parent: dbm
     identifier: dbm_data_collected
-    weight: 6
+    weight: 30
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
     identifier: dbm_query_metrics
-    weight: 7
+    weight: 35
   - name: Exploring Query Samples
     url: database_monitoring/query_samples/
     parent: dbm
     identifier: dbm_query_samples
-    weight: 8
+    weight: 40
   - name: Troubleshooting
     url: database_monitoring/troubleshooting/
     parent: dbm
     identifier: dbm_troubleshooting
-    weight: 9
+    weight: 45
   - name: Guides
     url: database_monitoring/guide/
     parent: dbm
     identifier: dbm_guides
-    weight: 10
+    weight: 50
   - name: Universal Service Monitoring
     url: universal_service_monitoring/
     pre: usm
