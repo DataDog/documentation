@@ -44,11 +44,11 @@ Choose **Inspect** to see the device's interface connections. Click on any of th
 
 Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory. 
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details.png" alt="The View device details view of an individual device" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
 
 From this view, you can also view the device's interfaces in the **Interfaces** tab.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_interfaces.png" alt="The View device details view of an individual device with the Interfaces tab selected" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_interfaces_tab.png" alt="The View device details tab of an individual device with the Interfaces tab selected" style="width:80%;" >}}
 
 ### View flow details
 
