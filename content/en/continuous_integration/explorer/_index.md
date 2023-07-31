@@ -54,7 +54,7 @@ You can filter by test level: session, module, suite, and test run. Each test le
 ### Sessions
 Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
 
-For JUnit report uploads there is 1 session per report file upload.
+For JUnit report uploads there is 1 session per report file uploaded.
 
 ### Module
 The definition of module changes slightly per language:
