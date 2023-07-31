@@ -391,7 +391,7 @@ Once the container is built and pushed to your registry, the last step is to set
 - **`DD_AZURE_SUBSCRIPTION_ID`**: The Azure Subscription ID associated with the Container App resource (Required).
 - **`DD_AZURE_RESOURCE_GROUP`**: The Azure Resouce Group associated with the Container App resource (Required).
 
-- `DD_TRACE_ENABLED`: set to `true` to enable tracing
+- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
