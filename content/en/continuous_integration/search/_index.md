@@ -71,9 +71,19 @@ For each branch, the list shows test results for its latest commit: a consolidat
 
 #### Test suite performance
 
-There's also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
+There is also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
 
 Hovering over the commit author avatar shows detailed information about the latest commit.
+
+#### Test regressions
+
+A test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch.
+
+A benchmark test run is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch. A benchmark test has `@test.type:benchmark`.
+
+The mean and the max of the default branch is calculated over the last week of test runs.
+
+Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 #### Investigate for more details
 
@@ -127,10 +137,10 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
 
-Job log collection is supported for a limited set of providers:
+Job log collection is supported for the following providers:
 
 - [GitHub Actions][4]
-- [GitLab][5] (beta)
+- [GitLab][5]
 - [Jenkins][6]
 
 ## Further reading

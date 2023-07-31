@@ -54,6 +54,8 @@ You can filter by test level: session, module, suite, and test run. Each test le
 ### Sessions
 Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
 
+For JUnit report uploads there is 1 session per report file uploaded.
+
 ### Module
 The definition of module changes slightly per language:
 
@@ -61,6 +63,7 @@ The definition of module changes slightly per language:
 * In Swift, a test module groups every test that is run for a given bundle.
 * In JavaScript, the test modules map one-to-one to test sessions.
 * In Java, a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution.
+* In JUnit report uploads, the test modules map one-to-one to test sessions.
 
 An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][105].
 

@@ -24,7 +24,7 @@ further_reading:
 git_integration_title: amazon_lambda
 has_logo: true
 integration_id: amazon-lambda
-integration_title: Amazon Lambda
+integration_title: AWS Lambda
 integration_version: ''
 is_public: true
 kind: インテグレーション
@@ -35,7 +35,7 @@ monitors:
   lambda_high_throttles: assets/monitors/lambda_high_throttles.json
   lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
-public_title: Datadog-Amazon Lambda インテグレーション
+public_title: Datadog-AWS Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
 version: '1.0'
 ---
@@ -44,7 +44,7 @@ version: '1.0'
 
 ## 概要
 
-Amazon Lambda は、イベントに応答してコードを実行し、そのコードが必要とするコンピューティングリソースを自動的に管理するコンピューティングサービスです。
+AWS Lambda は、イベントに応答してコードを実行し、そのコードが必要とするコンピューティングリソースを自動的に管理するコンピューティングサービスです。
 
 このインテグレーションを有効にすると、CloudWatch メトリクスが収集されるようになります。このページでは、Lambda 関数のカスタムメトリクス、ログ、トレースを設定する方法についても説明します。
 
@@ -59,7 +59,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 #### AWS Lambda メトリクス
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Lambda` が有効になっていることを確認します。
-2. Amazon Lambda のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [Lambda ポリシー][4]を参照してください。
+2. AWS Lambda のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [Lambda ポリシー][4]を参照してください。
 
     | AWS アクセス許可     | 説明                                  |
     | ------------------ | -------------------------------------------- |

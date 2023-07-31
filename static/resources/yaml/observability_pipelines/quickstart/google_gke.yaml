@@ -110,9 +110,6 @@ pipelineConfig:
         - parse_syslog
       encoding:
         codec: json
-      buffer:
-          type: disk
-          max_size: 154618822656
     datadog_logs:
       type: datadog_logs
       inputs:

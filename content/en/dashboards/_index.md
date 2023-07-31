@@ -73,7 +73,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+Dashboards are on a grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in realtime, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
 
 ### Timeboards
 Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
@@ -199,6 +199,8 @@ From an individual dashboard, copy, import, or export a dashboard's JSON using t
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
 #### Delete dashboard
+
+<div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
 
 Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
 

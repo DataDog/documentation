@@ -1,6 +1,6 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
-import { redirectToRegion } from '../region-redirects';
+import { redirectToRegion, hideTOCItems } from '../region-redirects';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
@@ -222,12 +222,12 @@ function loadPage(newUrl) {
             }
 
             const {pageCodeLang} = document.documentElement.dataset;
-
             addCodeTabEventListeners();
             addCodeBlockVisibilityToggleEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);
+            hideTOCItems(true)
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
