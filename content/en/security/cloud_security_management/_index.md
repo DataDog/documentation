@@ -37,7 +37,7 @@ further_reading:
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
 
-Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), [Cloud Workload Security (CWS)](#cloud-workload-security), and [CSM Identity Risks](#csm-identity-risks).
+Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), [Cloud Workload Security (CWS)](#cloud-workload-security), and [CSM CIEM](#csm-ciem).
 
 {{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
@@ -53,11 +53,11 @@ Cloud Security Management includes [Cloud Security Posture Management (CSPM)](#c
 
 {{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
-## CSM Identity Risks
+## Cloud Infrastructure Entitlement Management
 
-[CSM Identity Risks][4] provides in-depth visibility into your organization's AWS IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
+[CSM CIEM][4] provides in-depth visibility into your organization's AWS IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
-<div class="alert alert-info">CSM Identity Risks is in beta.</div>
+<div class="alert alert-info">CSM CIEM is in beta.</div>
 
 To get started with Datadog Security, navigate to the [Setup & Configuration][3] section in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections to learn more about each area of the platform.
 
