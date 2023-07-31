@@ -71,7 +71,7 @@ There are no provider-specific requirements for APT-based Linux.
 There are no provider-specific requirements for RPM-based Linux.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-In order to run the Worker in your AWS account, you will need administrative access to that account. You will need to collect the following pieces of information to run the Worker instances:
+In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
 * The VPC ID your instances will run in.
 * The subnet IDs your instances will run in.
 * The AWS region your VPC is located in.
