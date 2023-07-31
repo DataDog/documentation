@@ -27,7 +27,7 @@ Datadog can automatically discover the dependencies for an instrumented service,
 
 To determine the names and types of the inferred services, Datadog uses span attributes. Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
-If you're using the Go, Java, NodeJS, PHP, or Ruby tracer, you can customize the default names for inferred services. For more information, see the "Peer Service Mapping" section for your language below.
+If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred services. For more information, see the "Peer Service Mapping" section for your language below.
 
 ## Dependency map
 
