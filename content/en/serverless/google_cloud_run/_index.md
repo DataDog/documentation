@@ -348,7 +348,7 @@ EXPOSE 8080
 CMD php-fpm; nginx -g daemon off;
 ```
 
-**Note**: The datadog-init ENTRYPOINT wraps your process and collects logs from it. To get logs working properly, you must ensure your apache, nginx, or php processes are writing output to stdout.
+**Note**: The `datadog-init` ENTRYPOINT wraps your process and collects logs from it. To get logs working properly, ensure that your Apache, NGINX, or PHP processes are writing output to `stdout`.
 
 #### Explanation
 
