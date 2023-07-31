@@ -27,15 +27,15 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][2] and 
 
 ## Review and remediate identity risks
 
-Review your organization's active identity risks on the [Identity Risks page][3]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual detections). View additional details on the side panel.
+Review your organization's active identity risks on the [Identity Risks page][3]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
 {{< img src="security/identity_risks/identity_risks_explorer.png" alt="CSM Identity Risks page" width="100%">}}
 
-You can review the configuration of the resource on the **Resource** tab.
+On the side panel, you can review the configuration of the resource on the **Resource** tab.
 
 {{< img src="security/identity_risks/resource_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
 
-On the side panel, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to get additional insights about the detection (for example, the permissions provisioned on the resource and whether they were used in the last 15 days).
+Click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to get additional insights about the identity risk (for example, the permissions provisioned on the resource and whether they were used in the last 15 days).
 
 {{< img src="security/identity_risks/insights_tab_side_panel.png" alt="The Insights tab shows a list of permissions provisioned on the resource" width="80%">}}
 
