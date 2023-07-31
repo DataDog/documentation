@@ -58,7 +58,7 @@ The Overview tab on Anomaly Detection Security Signals have three main sections,
 
 ## Notifications
 
-Notifications can be used to alert you via slack or email when anomaly signals are generated. They can also be used to trigger webhooks or Datadog Workflows, enabling automated remediation pipelines. This is done with [Security Notification Rules][3]. To specifically target anomaly signals in a notification rule, use the rule criteria “rule_id:anomaly_detection”.
+Notifications can be used to alert you via slack or email when anomaly signals are generated. They can also be used to trigger webhooks or Datadog Workflows, enabling automated remediation pipelines. This is done with [Security Notification Rules][3]. To specifically target anomaly signals in a notification rule, use the rule criteria `rule_id:anomaly_detection`.
 
 ## Audit Trail for Anomaly Signals Actions
 
