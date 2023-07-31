@@ -50,6 +50,8 @@ Runtime Anomaly Detection Signals allow you to evaluate runtime behavior. When n
 
 The Overview tab on Anomaly Detection Security Signals have three main sections, visible here:
 
+{{< img src="security/cws/security_profiles/runtime-anomaly-detection-signal-sidepanel.png" alt="A CWS runtime anomaly detection signal with three parts described below." width="50%">}}
+
 - What Happened explains which container was impacted and describes how to evaluate the signal. Here, we see that a container with the short image name “cws-webapp-v2” was impacted.
 - Suggested Next Steps provides essential pivots into Datadog observability tools such as Infrastructure Monitoring, access to the Security Profile to review known behavior for the service, and links to escalate the workflow using Case Management or Incidents, along with any custom-defined workflows. If the signal is benign, you can add it to the Security Profile of your workload to mark it as normal activity and avoid generating signals if the same behavior is observed again.
 - Anomaly Detected displays a list of Anomaly Events in chronological order. Here, we see that a shell script was downloaded, made executable, and launched.
