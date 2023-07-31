@@ -2,7 +2,6 @@
 title: Mobile App Test Results
 kind: documentation
 description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs. 
-is_beta: true
 aliases:
 - /mobile_testing/mobile_app_tests/results
 further_reading:
@@ -14,9 +13,16 @@ further_reading:
   text: "Learn about the Events Explorer"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
-  Mobile Application Testing is in private beta. To request access, complete the form.
+{{% site-region region="us3,us5,eu,gov,ap1" %}}
+<div class="alert alert-warning">
+  Mobile Application Testing is only supported for Datadog customers using the US1 site.
+</div>
+{{% /site-region %}}
+
+{{< callout url="#" header="false" btn_hidden="true" >}}
+  Mobile Application Testing is in limited availability.
 {{< /callout >}} 
+
 
 ## Overview
 

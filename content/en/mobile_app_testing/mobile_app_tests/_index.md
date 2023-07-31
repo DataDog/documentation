@@ -2,7 +2,6 @@
 title: Mobile App Tests
 kind: documentation
 description: Learn how to start monitoring key business flows with mobile app tests.
-is_beta: true
 aliases:
 - /mobile_testing/mobile_app_tests
 further_reading:
@@ -17,8 +16,14 @@ further_reading:
   text: "Best practices for maintaining end-to-end tests"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
-  Mobile Application Testing is in private beta. To request access, complete the form.
+{{% site-region region="us3,us5,eu,gov,ap1" %}}
+<div class="alert alert-warning">
+  Mobile Application Testing is only supported for Datadog customers using the US1 site.
+</div>
+{{% /site-region %}}
+
+{{< callout url="#" header="false" btn_hidden="true" >}}
+  Mobile Application Testing is in limited availability.
 {{< /callout >}} 
 
 ## Overview
