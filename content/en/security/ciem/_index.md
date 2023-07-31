@@ -15,7 +15,7 @@ CSM CIEM is not available in this site.
 
 <div class="alert alert-info">CSM CIEM is in beta.</div>
 
-Cloud Infrastructure Entitlement Management (CSM CIEM) provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
+Cloud Security Management Cloud Infrastructure Entitlement Management (CSM CIEM) provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
 <div class="alert alert-info">At this time, CSM CIEM is available for AWS only.</div>
 
@@ -35,7 +35,7 @@ When viewing an individual resource, use the **Relationships** tab to view a gra
 
 You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks detected for the resource on the **Timeline** tab.
 
-{{< img src="security/identity_risks/relationships_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
+{{< img src="security/ciem/relationships_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
 
 On the side panel for an individual detection, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to get additional insights about the detection (for example, the permissions provisioned on the resource and whether they were used in the last 15 days).
 
