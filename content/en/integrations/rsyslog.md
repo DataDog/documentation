@@ -53,7 +53,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="443" template="DatadogFormat")
    }
    ```
 
@@ -132,7 +132,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
       ruleset(name="infiles") {
-          action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
+          action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
    3. Restart the Rsyslog service:
@@ -188,7 +188,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="443" template="DatadogFormat")
    }
    ```
 
@@ -267,7 +267,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
       ruleset(name="infiles") {
-          action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
+          action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
    3. Restart the Rsyslog service:
@@ -325,7 +325,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="443" template="DatadogFormat")
    }
    ```
 
@@ -404,7 +404,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
       ## Define the destination for the logs
       $DefaultNetstreamDriverCAFile /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
       ruleset(name="infiles") {
-          action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="10516" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
+          action(type="omfwd" protocol="tcp" target="intake.logs.datadoghq.com" port="443" template="DatadogFormat" StreamDriver="gtls" StreamDriverMode="1" StreamDriverAuthMode="x509/name" StreamDriverPermittedPeers="*.logs.datadoghq.com" )
       }
       ```
    3. Restart the Rsyslog service:
