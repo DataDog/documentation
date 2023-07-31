@@ -143,7 +143,7 @@ In addition to [tracking resources automatically](#automatically-track-network-r
 - `.startResource(resourceKey:request:)`
 - `.stopResource(resourceKey:response:)`
 - `.stopResourceWithError(resourceKey:error:)`
-- `.stopResourceWithError(resourceKey:errorMessage:)`
+- `.stopResourceWithError(resourceKey:message:)`
 
 For example:
 
@@ -156,12 +156,12 @@ import DatadogRUM
 
 let rum = RUMMonitor.shared()
 
-rum.startResourceLoading(
+rum.startResource(
     resourceKey: "resource-key", 
     request: request
 )
 
-rum.stopResourceLoading(
+rum.stopResource(
     resourceKey: "resource-key",
     response: response
 )
@@ -171,13 +171,13 @@ rum.stopResourceLoading(
 ```objective-c
 // in your network client:
 
-[[DDRUMMonitor shared] startResourceLoadingWithResourceKey:@"resource-key"
-                                                   request:request
-                                                attributes:@{}];
+[[DDRUMMonitor shared] startResourceWithResourceKey:@"resource-key"
+                                            request:request
+                                         attributes:@{}];
 
-[[DDRUMMonitor shared] stopResourceLoadingWithResourceKey:@"resource-key"
-                                                 response:response
-                                               attributes:@{}];
+[[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
+                                          response:response
+                                        attributes:@{}];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -279,7 +279,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
 
 `uiKitActionsPredicate`
-: Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMUserActionsPredicate`](#automatically-track-user-actions) customized for your app.
+: Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMActionsPredicate`](#automatically-track-user-actions) customized for your app.
 
 `urlSessionTracking`
 : Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
