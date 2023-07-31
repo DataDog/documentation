@@ -2969,7 +2969,7 @@ main:
     url: security/cloud_workload_security/
     parent: csm
     identifier: cloud_workload_security
-    weight: 2
+    weight: 5
   - name: Setup
     url: security/cloud_workload_security/setup
     parent: cloud_workload_security
@@ -2995,21 +2995,31 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 205
+  - name: Infrastructure Vulnerabilities
+    url: security/infrastructure_vulnerabilities
+    parent: csm
+    identifier: infrastructure_vulnerabilities
+    weight: 18
+  - name: Setup
+    url: security/infrastructure_vulnerabilities/setup
+    parent: infrastructure_vulnerabilities
+    identifier: infra_vm_setup
+    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
-    weight: 4
+    weight: 20
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
     identifier: csm_guides
-    weight: 6
+    weight: 25
   - name: Troubleshooting
     url: security/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
-    weight: 7
+    weight: 30
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
