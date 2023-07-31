@@ -54,11 +54,11 @@ If you have trouble applying the Datadog standard `service`, `env`, and `version
 
 If you want to enrich the data collected with your AWS Lambda resource tags, make sure the [Datadog integration for AWS][10] is properly configured.
 
-## Get help with serverless flare
+## Get help with Serverless Flare
 
 For quick questions, post in the _#serverless_ channel of the [Datadog Slack community][11].
 
-If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], first create a Zendesk ticket. Next, use the `datadog-ci serverless flare` command to automatically collect and submit data about your Lambda function to Datadog Support.
+If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], first create a Zendesk ticket. Next, download the [Datadog CLI](https://github.com/DataDog/datadog-ci/#how-to-install-the-cli). Finally, use the `datadog-ci serverless flare` command to automatically collect and submit data about your Lambda function to Datadog Support.
 
 If you don't want to use the flare command, include the following information to your ticket:
 1. Basic information about your Lambda function: ARN, runtime, handler, layers, environment variables, and tags. Focus on one function first if you have the same issue with many.
