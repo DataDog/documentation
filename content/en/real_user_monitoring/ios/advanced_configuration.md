@@ -99,9 +99,9 @@ To create visualizations in your dashboards, [create a measure][4] first.
 
 ### Custom Actions
 
-In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addUserAction(type:name:)` API. 
+In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API. 
 
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addUserAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startUserAction(type:name:)` or `.stopUserAction(type:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
 
 For example:
 
@@ -115,7 +115,7 @@ import DatadogRUM
 let rum = RUMMonitor.shared()
 
 @IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
-    rum.addUserAction(
+    rum.addAction(
         type: .tap,
         name: sender.currentTitle ?? "",
     )
@@ -126,7 +126,7 @@ let rum = RUMMonitor.shared()
 ```objective-c
 - (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
     NSString *name = sender.currentTitle ? sender.currentTitle : @"";
-    [[DDRUMMonitor shared] addUserActionWithType:DDRUMUserActionTypeTap name:name attributes:@{}];
+    [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
 }
 ```
 {{% /tab %}}

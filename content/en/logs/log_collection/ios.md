@@ -213,7 +213,7 @@ configuration.service = @"<service name>";
 configuration.site = [DDSite us5];
 
 [DDDatadog initializeWithConfiguration:configuration
-						trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];
 
 [DDLogs enable];
 ```
@@ -233,10 +233,10 @@ Datadog.initialize(
 	with: Datadog.Configuration(
 		clientToken: "<client token>",
 		env: "<environment>",
-		service: "<service name>",
-		site: .us1_fed
+		site: .us1_fed,
+		service: "<service name>"
 	), 
-	trackingConsent: .trackingConsent
+	trackingConsent: trackingConsent
 )
 
 Logs.enable()
@@ -251,7 +251,7 @@ configuration.service = @"<service name>";
 configuration.site = [DDSite us1_fed];
 
 [DDDatadog initializeWithConfiguration:configuration
-						trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];
 
 [DDLogs enable];
 ```
@@ -271,10 +271,10 @@ Datadog.initialize(
 	with: Datadog.Configuration(
 		clientToken: "<client token>",
 		env: "<environment>",
-		service: "<service name>",
-		site: .ap1
+		site: .ap1,
+		service: "<service name>"
 	), 
-	trackingConsent: .trackingConsent
+	trackingConsent: trackingConsent
 )
 
 Logs.enable()
@@ -289,7 +289,7 @@ configuration.service = @"<service name>";
 configuration.site = [DDSite ap1];
 
 [DDDatadog initializeWithConfiguration:configuration
-						trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];
 
 [DDLogs enable];
 ```
@@ -350,10 +350,6 @@ configuration.networkInfoEnabled = YES;
 configuration.remoteLogThreshold = [DDLogLevel info];
 configuration.printLogsToConsole = YES;
 
-[builder sendNetworkInfo:YES];
-[builder setWithDatadogReportingThreshold:.info];
-[builder printLogsToConsole:YES];
-
 DDLogger *logger = [DDLogger createWithConfiguration:configuration];
 ```
 {{% /tab %}}
@@ -403,7 +399,7 @@ logger.info("Clicked OK", attributes: ["context": "onboarding flow"])
 
 ### Initialization
 
-The following methods in `Logger.Builder` can be used when initializing the logger to send logs to Datadog:
+The following methods in `Logger.Configuration` can be used when initializing the logger to send logs to Datadog:
 
 | Method | Description |
 |---|---|

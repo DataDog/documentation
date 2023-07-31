@@ -114,7 +114,7 @@ Datadog.initialize(
     env: "<environment>",
     service: "<service name>"
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -142,10 +142,10 @@ Datadog.initialize(
   with: Datadog.Configuration(
     clientToken: "<client token>",
     env: "<environment>",
-    service: "<service name>",
-    site: .eu1
+    site: .eu1,
+    service: "<service name>"
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
@@ -174,10 +174,10 @@ Datadog.initialize(
   with: Datadog.Configuration(
     clientToken: "<client token>",
     env: "<environment>",
-    service: "<service name>",
-    site: .us3
+    site: .us3,
+    service: "<service name>"
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}

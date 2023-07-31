@@ -90,7 +90,7 @@ Datadog.initialize(
     env: "<environment>",
     service: "<service name>"
   ), 
-  trackingConsent: .trackingConsent
+  trackingConsent: trackingConsent
 )
 
 CrashReporting.enable()
@@ -104,7 +104,7 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files. 
 
-Depending on your setup, you may need to download .`dSYM` files from App Store Connect or find them on your local machine. 
+Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
 
 | Bitcode Enabled | Description |
 |---|---|
