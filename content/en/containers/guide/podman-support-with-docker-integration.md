@@ -9,7 +9,7 @@ Podman is a daemonless container engine for developing, managing, and running OC
 
 With Podman, we can deploy rootless or rootful containers. Rootless containers can be run by users that do not have admin rights, whereas rootful containers are the ones that run as root.
 The main advantage that rootless containers provide is that potential attackers cannot gain root permissions on the host when the container is compromised.
-The Datadog Agent works both with rootless and rootful containers.
+The Datadog Agent works with both rootless and rootful containers.
 
 ## Requirements
 
