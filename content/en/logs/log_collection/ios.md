@@ -89,7 +89,7 @@ Datadog.initialize(
 		env: "<environment>",
 		service: "<service name>"
 	), 
-	trackingConsent: .trackingConsent
+	trackingConsent: trackingConsent
 )
 
 Logs.enable()
@@ -101,7 +101,7 @@ DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"
 configuration.service = @"<service name>";
 
 [DDDatadog initializeWithConfiguration:configuration
-						trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];
 
 [DDLogs enable];
 ```
@@ -121,10 +121,10 @@ Datadog.initialize(
 	with: Datadog.Configuration(
 		clientToken: "<client token>",
 		env: "<environment>",
-		service: "<service name>",
-		site: .eu1
+		site: .eu1,
+		service: "<service name>"
 	), 
-	trackingConsent: .trackingConsent
+	trackingConsent: trackingConsent
 )
 
 Logs.enable()
@@ -137,7 +137,7 @@ configuration.service = @"<service name>";
 configuration.site = [DDSite eu1];
 
 [DDDatadog initializeWithConfiguration:configuration
-						trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];
 
 [DDLogs enable];
 ```
@@ -157,10 +157,10 @@ Datadog.initialize(
 	with: Datadog.Configuration(
 		clientToken: "<client token>",
 		env: "<environment>",
-		service: "<service name>",
-		site: .us3
+		site: .us3,
+		service: "<service name>"
 	), 
-	trackingConsent: .trackingConsent
+	trackingConsent: trackingConsent
 )
 
 Logs.enable()
@@ -175,7 +175,7 @@ configuration.service = @"<service name>";
 configuration.site = [DDSite us3];
 
 [DDDatadog initializeWithConfiguration:configuration
-						trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];
 
 [DDLogs enable];
 ```
@@ -195,10 +195,10 @@ Datadog.initialize(
 	with: Datadog.Configuration(
 		clientToken: "<client token>",
 		env: "<environment>",
-		service: "<service name>",
-		site: .us5
+		site: .us5,
+		service: "<service name>"
 	), 
-	trackingConsent: .trackingConsent
+	trackingConsent: trackingConsent
 )
 
 Logs.enable()
