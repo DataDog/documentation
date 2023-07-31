@@ -22,11 +22,11 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
 
-| Dockerhub.io | GCR.io | public.ecr.aws |
-|----|----|----|
-|datadog/serverless-init|gcr.io/datadoghq/serverless-init|public.ecr.aws/datadog/serverless-init|
+| dockerhub.io | gcr.io | public.ecr.aws |
+| ---- | ---- | ---- |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-Images are tagged based on Semantic Versioning, with each new version receiving three relevant tags:
+Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
 
 * `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
