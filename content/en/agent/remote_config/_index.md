@@ -40,7 +40,7 @@ After you submit configuration changes in the respective Datadog product UI for 
 
 The following diagram illustrates how Remote Configuration works:
 
-{{<img src="agent/guide/RC_Diagram_v4.png" alt="Users configure features in the UI, the config is stored in Datadog, the Agent requests config updates." width="90%" style="center">}}
+{{<img src="agent/remote_config/RC_Diagram_v5.png" alt="Users configure features in the UI, the config is stored in Datadog, the Agent requests config updates." width="90%" style="center">}}
 
 1. You configure select product features in the Datadog UI.
 2. The product feature configurations are securely stored within Datadog.
@@ -75,7 +75,7 @@ The following products and features are supported with Remote Config:
 <div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/18hwf0-4AXYzKcQR0AIT1JxhaMFLw90YaDXBaUgdxKLM/prefill">form</a> to request access.</div>
 
 - **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][3] for more information.
-- **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to  designated hosts (all hosts or a defined subset of hosts).
+- **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 ### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>
@@ -119,7 +119,7 @@ To enable Remote Configuration:
 
 4. Select an existing API key or create a new API key, and enable the Remote Config capability on the key:
 
-   {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
+   {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
 
 5. Update your Agent configuration file:
 

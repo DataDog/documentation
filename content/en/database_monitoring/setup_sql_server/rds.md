@@ -21,9 +21,10 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
+1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
-3. [Install the RDS integration](#install-the-rds-integration)
+1. [Install the Agent](#install-the-agent)
+1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
@@ -31,6 +32,10 @@ Supported SQL Server versions
 : 2014, 2016, 2017, 2019
 
 {{% dbm-sqlserver-before-you-begin %}}
+
+## Configure the AWS integration
+
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][2].
 
 ## Grant the Agent access
 
@@ -94,3 +99,4 @@ To collect more comprehensive database metrics and logs from AWS, install the [R
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_rds
+[2]: https://app.datadoghq.com/integrations/amazon-web-services

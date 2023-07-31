@@ -3,6 +3,7 @@ title: Set Up Observability Pipelines in your Splunk Environment
 kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk
+  - /observability_pipelines/guide/setup_splunk_environment
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
@@ -23,7 +24,7 @@ The [Observability Pipelines Worker][1] can collect, process, and route logs and
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring Splunk to send logs through the Worker, to dual-write to Datadog.
 
-{{< img src="observability_pipelines/guide/splunk/setup.png" alt="A diagram of a couple of Splunk Heavy Forwarders sending their data through the Observability Pipelines aggregator." >}}
+{{< img src="observability_pipelines/guide/splunk/setup2.png" alt="A diagram of a couple of Splunk Heavy Forwarders sending their data through the Observability Pipelines aggregator." >}}
 
 ## Assumptions
 * You are using a log collector that is compatible with the Splunk HTTP Event Collector (HEC) protocol.
@@ -227,12 +228,12 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog-observability-pipelines-worker.list"
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Run the following commands to update your local `apt` repo and install the Worker:

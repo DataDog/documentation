@@ -2,8 +2,6 @@
 title: Setting Up Database Monitoring for Self-Hosted Oracle
 kind: documentation
 description: Install and configure Database Monitoring for Self-Hosted Oracle
-private: true
-is_beta: true
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
@@ -16,7 +14,7 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta.
+The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
@@ -64,11 +62,27 @@ grant select on V_$SQLCOMMAND to c##datadog ;
 grant select on V_$DATAFILE to c##datadog ;
 grant select on V_$SYSMETRIC to c##datadog ;
 grant select on V_$SGAINFO to c##datadog ;
+grant select on V_$PDBS to c##datadog ;
+grant select on CDB_SERVICES to c##datadog ;
+grant select on V_$OSSTAT to c##datadog ;
+grant select on V_$PARAMETER to c##datadog ;
+grant select on V_$SQLSTATS to c##datadog ;
+grant select on V_$CONTAINERS to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$SQL to c##datadog ;
+```
+
+If you conifgured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:
+
+```SQL
+connect / as sysdba
+alter session set container = your_pdb ;
+grant set container to c##datadog ;
 ```
 
 ### Create view
 
-Log on as `sysdba`, create a new `view`, and give the Agent user access to it:
+Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
@@ -171,7 +185,7 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.y
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
@@ -179,7 +193,7 @@ instances:
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
@@ -188,7 +202,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] to learn more about how these tags are used in Datadog.
+The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 

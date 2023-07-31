@@ -14,6 +14,7 @@ aliases:
 
 {{< whatsnext desc="Cloud Security Posture Management Guides" >}}
     {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Writing Custom CSPM Rules with Rego{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/public-accessibility-logic" >}}How Datadog Determines if Resources are Publicly Accessible{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides" >}}

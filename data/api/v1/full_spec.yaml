@@ -18108,6 +18108,11 @@ components:
             Management hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        workflow_executions_usage_sum:
+          description: Sum of all workflows executed over all hours in the current
+            date for all organizations.
+          format: int64
+          type: integer
       type: object
     UsageSummaryDateOrg:
       description: Global hourly report of all data billed by Datadog for a given
@@ -18531,6 +18536,11 @@ components:
         vuln_management_host_count_top99p:
           description: Shows the 99th percentile of all Application Vulnerability
             Management hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        workflow_executions_usage_sum:
+          description: Sum of all workflows executed over all hours in the current
+            date for the given org.
           format: int64
           type: integer
       type: object
@@ -19004,6 +19014,11 @@ components:
         vuln_management_host_count_top99p_sum:
           description: Shows the 99th percentile of all Application Vulnerability
             Management hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        workflow_executions_usage_agg_sum:
+          description: Sum of all workflows executed over all hours in the current
+            months for all organizations.
           format: int64
           type: integer
       type: object

@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - suivi des erreurs
 description: Découvrez comment retrouver et gérer les erreurs recueillies depuis vos
   applications Web et mobiles.
 further_reading:
@@ -32,9 +35,9 @@ title: Error Tracking pour les applications Web et mobiles
 
 Afin d'optimiser le fonctionnement de votre système, il est essentiel de surveiller en permanence les erreurs recueillies par Datadog. Lorsque les événements d'erreur sont nombreux et divers, il est difficile de savoir lesquels doivent être traités en priorité. En assurant le suivi, le triage et le debugging des plantages recueillis depuis vos applications Web et mobiles, vous pouvez minimiser l'impact des erreurs critiques sur l'expérience utilisateur.
 
-Une fois le suivi des erreurs configuré pour les **applications Web et mobiles** dans RUM, les problèmes détectés commencent à apparaître sous forme de cartes. Vous pouvez consulter les problèmes en cours, les problèmes ignorés ou l'ensemble d'entre eux, les trier par volume ou par ancienneté, et les filtrer en fonction de n'importe quelle facette par défaut ou personnalisée.
-
 {{< img src="real_user_monitoring/error_tracking/page.png" alt="Error Tracking Explorer pour RUM affichant les problèmes associés aux rapports de crash dans vos applications Web et mobiles" style="width:100%;" >}}
+
+Après avoir configuré [RUM][2] pour le suivi des erreurs des **applications Web et mobiles**, les problèmes détectés commencent à apparaître sous forme de cartes. Accédez à [**UX Monitoring** > **Error Tracking**][3] pour consulter les problèmes en cours, les problèmes ignorés ou tous les problèmes, les trier par volume ou par ancienneté, et les filtrer en fonction de n'importe quelle facette par défaut ou personnalisée sur vos applications Web et mobiles.
 
 La solution Error Tracking vous permet de :
 
@@ -58,6 +61,8 @@ La solution Error Tracking vous permet de :
 
 La solution Error Tracking regroupe automatiquement les plantages recueillis depuis vos applications Web et mobiles sous forme de catégories dans l'[Error Tracking Explorer][1]. 
 
+{{< img src="real_user_monitoring/error_tracking/page.png" alt="Error Tracking Explorer pour RUM affichant les problèmes associés aux rapports de crash dans vos applications Web et mobiles" style="width:100%;" >}}
+
 Cliquez sur un problème pour visualiser les informations de debugging telles que la stack trace, les sessions utilisateur et les métadonnées, y compris l'emplacement de l'utilisateur, la version et les attributs personnalisés inclus dans vos rapports de crash. 
 
 ## Pour aller plus loin
@@ -65,3 +70,5 @@ Cliquez sur un problème pour visualiser les informations de debugging telles qu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
+[2]: /fr/real_user_monitoring/
+[3]: https://app.datadoghq.com/rum/error-tracking

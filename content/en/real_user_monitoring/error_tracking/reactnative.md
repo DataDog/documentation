@@ -42,7 +42,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<RUM_APPLICATION_ID>',
     true,
     true,
-    true // enable javascript crash reporting
+    true // enable JavaScript crash reporting
 );
 config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
@@ -112,7 +112,7 @@ yarn add react-native-performance-limiter # or npm install react-native-performa
 (cd ios && pod install)
 ```
 
-Crash the javascript thread from your app:
+Crash the JavaScript thread from your app:
 
 ```javascript
 import { crashJavascriptThread } from 'react-native-performance-limiter';
@@ -165,7 +165,7 @@ DATADOG_XCODE="../node_modules/.bin/datadog-ci react-native xcode"
 
 This script runs a command that takes care of uploading the source maps with all the correct parameters. For more information, see the [datadog-ci documentation][12].
 
-Open your `.xcworkspace` with XCode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
+Open your `.xcworkspace` with Xcode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
 
 ```shell
 set -e
@@ -178,7 +178,7 @@ export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 /bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
 ```
 
-For the upload to work, you need to provide your Datadog API key. If you use a command-line tool or an external service, you can specify it as a `DATADOG_API_KEY` environment variable. If you run the build from XCode, create a `datadog-ci.json` file at the root of your project containing the API key:
+For the upload to work, you need to provide your Datadog API key. If you use a command-line tool or an external service, you can specify it as a `DATADOG_API_KEY` environment variable. If you run the build from Xcode, create a `datadog-ci.json` file at the root of your project containing the API key:
 
 ```json
 {
@@ -190,7 +190,7 @@ You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SIT
 
 #### Automatically on each release build (React Native < 0.69)
 
-Open your `.xcworkspace` with XCode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
+Open your `.xcworkspace` with Xcode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
 
 ```shell
 set -e
@@ -202,7 +202,7 @@ export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 
 This script runs a command that takes care of uploading the source maps with all the correct parameters. For more information, see the [datadog-ci documentation][12].
 
-For the upload to work, you need to provide your Datadog API key. If you use a command-line tool or an external service, you can specify it as a `DATADOG_API_KEY` environment variable. If you run the build from XCode, create a `datadog-ci.json` file at the root of your project containing the API key:
+For the upload to work, you need to provide your Datadog API key. If you use a command-line tool or an external service, you can specify it as a `DATADOG_API_KEY` environment variable. If you run the build from Xcode, create a `datadog-ci.json` file at the root of your project containing the API key:
 
 ```json
 {
@@ -214,9 +214,9 @@ You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SIT
 
 #### Manually on each build
 
-To output a source map, you need to edit the XCode build phase "Bundle React Native Code and Images".
+To output a source map, you need to edit the Xcode build phase "Bundle React Native Code and Images".
 
-1. Open the `ios/YourAppName.xcworkspace` file in XCode.
+1. Open the `ios/YourAppName.xcworkspace` file in Xcode.
 2. In the left panel, select the "File" icon and click on your project.
 3. In the central panel, select "Build Phases" from the top bar.
 
@@ -230,7 +230,7 @@ export SOURCEMAP_FILE=./build/main.jsbundle.map # <- add this line to output sou
 
 Moving forward, you can find the source maps for your bundle on every iOS build.
 
-To find the path to your bundle file from XCode, display the Report Navigator on XCode and filter by `BUNDLE_FILE` for its location.
+To find the path to your bundle file from XCode, display the Report Navigator on Xcode and filter by `BUNDLE_FILE` for its location.
 
 The usual location is `~/Library/Developer/Xcode/DerivedData/YourAppName-verylonghash/Build/Intermediates.noindex/ArchiveIntermediates/YourAppName/BuildProductsPath/Release-iphoneos/main.jsbundle`, where `YourAppName` is the name of your app, and `verylonghash` is a 28 letter hash.
 
@@ -337,7 +337,7 @@ The bundle file location depends on your React Native (RN) and Android Gradle Pl
 The Android Gradle Plugin version is specified in the `android/build.gradle` file under `com.android.tools.build:gradle`, for instance: `classpath("com.android.tools.build:gradle:7.3.1")`.
 
 If your application has more comprehensive variants, replace `release` by your variant's name in the paths.
-If you specified a `bundleAssetName` in your react config in `android/app/build.gradle`, replace `index.android.bundle` by its value.
+If you specified a `bundleAssetName` in your React config in `android/app/build.gradle`, replace `index.android.bundle` by its value.
 
 After running your build, upload your source map by running this from your React Native project root:
 

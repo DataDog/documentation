@@ -24,7 +24,7 @@ Supported Agent versions
 : 7.46+
 
 Data privacy
-: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
+: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
 
 
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.

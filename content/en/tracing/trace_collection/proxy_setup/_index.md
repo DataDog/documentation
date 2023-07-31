@@ -43,6 +43,8 @@ aliases:
 - /tracing/setup_overview/nginx/
 - /tracing/setup_overview/istio/
 - /tracing/setup_overview/proxy_setup/
+algolia:
+  tags: ['proxies','tracing proxies','proxy']
 ---
 
 You can set up tracing to include collecting trace information about proxies.
