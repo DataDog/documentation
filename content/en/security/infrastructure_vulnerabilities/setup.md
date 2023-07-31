@@ -102,7 +102,7 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][7],
 
 ## Setup for host vulnerability scanning
 
-**Note**: Container and host SBOM can be enabled at the same time by combining the [containers][11] setup with the following setup for hosts configuration:
+**Note**: Container and host SBOM can be enabled at the same time by combining the [containers](#setup-for-container-image-scanning) setup with the following setup for hosts configuration:
 
 ```yaml
 agents:
@@ -122,7 +122,6 @@ agents:
 [5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [6]: /containers/kubernetes/installation/?tab=helm
 [10]: https://www.cisa.gov/sbom
-[11]: /security/infrastructure_vulnerability/setup/#setup-for-container-image-scanning
 
 ## Further reading
 
