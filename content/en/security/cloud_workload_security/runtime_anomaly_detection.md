@@ -44,9 +44,9 @@ If the behavior is not known in the profile, then the event (or events) are then
 
 ## Inspect a Runtime Anomaly Signal
 
-Runtime Anomaly Detection Signals allow you to evaluate runtime behavior. When new anomalies are surfaced, you can escalate them using Case Management or Incidents. If you investigate and find they are benign, similar signals can be suppressed and the behavior can be added to the service’s Security Profile, indicating that it is expected behavior for the application.
-
 *For more information about investigating Security Signals, see the Security [Signals Explorer docs][4].*
+
+Runtime Anomaly Detection Signals allow you to evaluate runtime behavior. When new anomalies are surfaced, you can escalate them using Case Management or Incidents. If you investigate and find they are benign, similar signals can be suppressed and the behavior can be added to the service’s Security Profile, indicating that it is expected behavior for the application.
 
 The Overview tab on Anomaly Detection Security Signals have three main sections, visible here:
 
