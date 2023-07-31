@@ -3901,21 +3901,26 @@ main:
     parent: ndm
     identifier: ndm_profiles
     weight: 304
+  - name: Network Topology Map
+    url: network_monitoring/devices/network_topology_map
+    parent: ndm
+    identifier: ndm_topology_map
+    weight: 305
   - name: Data Collected
     url: network_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 305
+    weight: 306
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 306
+    weight: 307
   - name: Guides
     url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 307
+    weight: 308
   - name: Developers
     url: developers/
     pre: dev-code
