@@ -233,6 +233,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Run the following commands to update your local `apt` repo and install the Worker:
