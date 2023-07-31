@@ -237,33 +237,33 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 
 When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-**Note**: Injection on arm64 is not currently supported.
+**Note**: Injection on arm64 is not supported.
 
 ## Install both library injection and the Datadog Agent
 
-If the host does not already have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+**Requirements**: A host running Linux.
 
-```
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
-The value of `DD_API_KEY` should be your Datadog API key. 
-
-By default, running the script installs support for Java, Node.JS, Python, Ruby, and .NET. If you want to select which language support is installed, also set the DD_APM_INSTRUMENTATION_LANGUAGES environment variable. The valid values are java, js, python, ruby, and dotnet. Use a comma-separated list to specify more than one language: 
-
-```
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```shell
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-Exit and open a new shell to use the preload library.
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
-### Requirements
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
 
-- A host running Linux 
+Exit and open a new shell to use the injection library.
 
 ## Install only library injection
 
-If the host already has a Datadog Agent installed, the injection libraries can be be installed manually:
+**Requirements**: 
+- A host running Linux.
+- A recent [Datadog Agent v7][1] installation.
+
+If the host already has a Datadog Agent installed, you can install just the injection libraries:
 
 1. Ensure your [Agent is running][2].
 
@@ -286,7 +286,7 @@ If the host already has a Datadog Agent installed, the injection libraries can b
 
 After enabling host injection, make sure that the `/etc/datadog-agent/datadog.yaml` configuration file has the following lines at the end:
 
-```
+```yaml
 # BEGIN LD PRELOAD CONFIG
 apm_config:
   receiver_socket: /opt/datadog/apm/inject/run/apm.socket
@@ -297,37 +297,31 @@ remote_configuration:
 # END LD PRELOAD CONFIG
 ```
 
-If they are not present, add them and restart the Datadog agent. If these properties are set to different values, change them to match.
-
-### Requirements
-
-- A host running Linux 
-- A recent [Datadog Agent v7][1] installation
+If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
 
 ## Next steps
 
-If you haven't already, install your app and any support languages or libraries it requires. 
+If you haven't already, install your app and any supporting languages or libraries it requires. 
 
-When an app written in a supported language is launched, it will be automatically injected with tracing enabled.
+When an app that is written in a supported language is launched, it is automatically injected with tracing enabled.
 
 ## Configure the injection
 
-Host injection is configured in one of two ways:
-- Environment variables set on the process being launched
-- A configuration file stored in `/etc/datadog-agent/inject/host_config.yaml`
+Configure host injection is configured in one the following ways:
+- Set environment variables on the process being launched.
+- Specify the configuration in the file `/etc/datadog-agent/inject/host_config.yaml`.
 
-Values in the environment variables override settings in the configuration file on a per-process basis.
+Values in environment variables override settings in the configuration file on a per-process basis.
 
 ### Configuration file
 
 | Property name | Purpose | Default value | Valid values | 
 | --------- | ----------- | ------------- | ----------- | 
-|log_level  | The logging level|off|off, debug, info, warn, error|
-|output_paths|The location where log output is written|stderr|stderr or a file:// URL|
-|env|The default environment assigned to a process|none|n/a|
-|config_sources|The default configuration for a process|BASIC|See “Config Sources”|
+|`log_level`  | The logging level|`off`|`off`, `debug`, `info`, `warn`, `error`|
+|`output_paths`|The location where log output is written|`stderr`|`stderr` or a `file://` URL|
+|`env`|The default environment assigned to a process|none|n/a|
+|`config_sources`|The default configuration for a process|`BASIC`|See [Config Sources](#config-sources)|
 
-The valid values for config_sources are discussed in the “Config Sources” section.
 
 #### Example
 
@@ -344,74 +338,55 @@ config_sources: BASIC
 
 The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command.
 
-Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and only affects the process currently being launched. 
+Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched. 
 
 |Config file property|Environment Variable|
 | --------- | ----------- |  
-|log_level|DD_APM_INSTRUMENTATION_DEBUG|
-|output_paths|DD_APM_INSTRUMENTATION_OUTPUT_PATHS|
-|env|DD_ENV|
-|config_sources|DD_CONFIG_SOURCES|
+|`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
+|`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
+|`env`|`DD_ENV`|
+|`config_sources`|`DD_CONFIG_SOURCES`|
 
-The `DD_APM_INSTRUMENTATION_DEBUG` environment variable is limited to the values `true` and `false` (default value `false`). Setting it to `true` sets `log_level` to `debug` and setting it to `false` (or not setting it at all) uses the `log_level` specified in the configuration file. There’s no way to set the logging level to anything besides `debug` via environment variable.
+The `DD_APM_INSTRUMENTATION_DEBUG` environment variable is limited to the values `true` and `false` (default value `false`). Setting it to `true` sets `log_level` to `debug` and setting it to `false` (or not setting it at all) uses the `log_level` specified in the configuration file. The environment variable can only set the log level to `debug`, not any other log level values.
 
 The `DD_INSTRUMENT_SERVICE_WITH_APM` controls whether or not injection is enabled. It defaults to `TRUE`. Set it to `FALSE` to turn off library injection altogether.
 
-### Config Sources
+### Config sources
 
 By default, the following settings are enabled in an instrumented process:
 - Tracing
-- Log Injection
-  - This will only automatically enable log injection when the customer is using structured logging (usually, JSON output). For logs to appear in non-structured logs, the customer will need to change their application’s log configuration to include placeholders for trace id and span id. See https://docs.datadoghq.com/tracing/other_telemetry/connect_logs_and_traces/ for more information.
-- Health Metrics
-- Runtime Metrics
+- Log injection, assuming the application uses structured logging (usually JSON). For traces to appear in non-structured logs, you must change your application’s log configuration to include placeholders for trace ID and span ID. See [Connect Logs and Traces][6] for more information.
+- Health metrics
+- Runtime metrics
 
 You can change these settings for all instrumented processes by setting the `config_sources` property in the configuration file or for a single process by setting the `DD_CONFIG_SOURCES` environment variable for the process. The valid settings for config sources are:
 
 |Configuration Source Name|Meaning|
 | --------- | ----------- |  
-|BASIC|Apply the configurations specified above. If no configuration source is specified, this is the default.|
-|LOCAL:PATH|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: LOCAL:/opt/config/my_process_config.yaml|
-|BLOB:URL| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1 |
+|`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
+|`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
+|`BLOB:URL`| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
 
-The words BASIC, LOCAL, and BLOB must be upper-case.
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
 
-Config Source values can be separated by semicolons to indicate multiple possible locations. For example: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
 
-`DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC`
-
-This checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration. The first configuration that returns without an error will be used. 
-
-Configuration is never merged across configuration sources.
+```yaml
+DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
 
 #### Blob storage support
-The supported blob storage solutions are AWS S3, GCP GCS and Azure Blob
-
-##### AWS S3
-The URL should be set with the `s3://` prefix.
-
-If you have authenticated with the AWS CLI, it will use those credentials.
-See https://docs.aws.amazon.com/sdk-for-go/api/aws/session/ to configure credentials via environment variables.
-
-##### GCP GCS
-The URL should be set with the `gs://` prefix.
-
-It uses Application Default Credentials, if you have authenticated via gcloud auth application-default login, it will use those credentials
-
-See https://cloud.google.com/docs/authentication#service-accounts to configure credentials via environment variables.
-
-##### Azure Blob
-The URL should be set with the `azblob://` prefix and should point to a storage container name.
-
-It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (i.e bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`
-
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
+The supported blob storage solutions are:
+- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
 
 <a id="supplying-configuration-source-host"></a>
 
 ### Supplying configuration source
 
-The config file for LOCAL and BLOB can be formatted as JSON:
+The config file for `LOCAL` and `BLOB` can be formatted as JSON:
 
 ```json
 {
@@ -438,7 +413,7 @@ The config file for LOCAL and BLOB can be formatted as JSON:
 }
 ```
 
-or as YAML:
+Or as YAML:
 
 ```yaml
 ---
@@ -547,6 +522,9 @@ Exercise your application to start generating telemetry data, which you can see 
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
+[6]: /tracing/other_telemetry/connect_logs_and_traces/
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
 {{% tab "Agent on host, app in containers" %}}
@@ -562,28 +540,30 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 ## Install both library injection and the Datadog Agent
 
-If the host does not already have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+**Requirements**:
+- A host running Linux.
+- [Docker Engine][2].
 
-```
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
-The value of `DD_API_KEY` should be your Datadog API key. 
-
-By default, running the script installs support for Java, Node.JS, Python, Ruby, and .NET. If you want to select which language support is installed, also set the DD_APM_INSTRUMENTATION_LANGUAGES environment variable. The valid values are java, js, python, ruby, and dotnet. Use a comma-separated list to specify more than one language: 
-
-```
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```shell
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-### Requirements
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
-- A host running Linux 
-- [Docker Engine][2]
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
 
 ## Install only library injection
 
-If the host already has a Datadog Agent installed, the injection libraries can be be installed manually:
+**Requirements**: 
+- A host running Linux.
+- A recent [Datadog Agent v7][1] installation.
+- [Docker Engine][2].
+
+If the host already has a Datadog Agent installed, you can install just the injection libraries:
 
 1. Ensure your [Agent is running][3].
 
@@ -604,7 +584,7 @@ If the host already has a Datadog Agent installed, the injection libraries can b
 
 After enabling host injection, make sure that the `/etc/datadog-agent/datadog.yaml` configuration file has the following lines at the end:
 
-```
+```yaml
 # BEGIN LD PRELOAD CONFIG
 apm_config:
   receiver_socket: /opt/datadog/apm/inject/run/apm.socket
@@ -615,13 +595,8 @@ remote_configuration:
 # END LD PRELOAD CONFIG
 ```
 
-If they are not present, add them and restart the Datadog agent. If these properties are set to different values, change them to match.
+If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
 
-### Requirements
-
-- A host running Linux 
-- A recent [Datadog Agent v7][1] installation
-- [Docker Engine][2]
 
 ## Configure Docker injection
 
@@ -641,19 +616,19 @@ config_sources: BASIC
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-The words BASIC, LOCAL, and BLOB must be upper-case.
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
 
-Config Source values can be separated by semicolons to indicate multiple possible locations. For example: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
 
-`config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC`
-
-This checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration. The first configuration that returns without an error will be used. 
+```yaml
+config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
 
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 `log_level`
-: Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.
-**Default**: info
+: Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.<br>
+**Default**: `info`
 
 `output_paths`
 : A list of one or more places to write logs.<br>
@@ -695,7 +670,7 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 
 ```
 
-or as YAML:
+Or as YAML:
 ```yaml
 ---
 version: 1
@@ -753,27 +728,11 @@ The following table shows how the injection configuration values map to the corr
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
 #### Blob storage support
-The supported blob storage solutions are AWS S3, GCP GCS and Azure Blob
-
-##### AWS S3
-The URL should be set with the `s3://` prefix.
-
-If you have authenticated with the AWS CLI, it will use those credentials.
-See https://docs.aws.amazon.com/sdk-for-go/api/aws/session/ to configure credentials via environment variables.
-
-##### GCP GCS
-The URL should be set with the `gs://` prefix.
-
-It uses Application Default Credentials, if you have authenticated via gcloud auth application-default login, it will use those credentials
-
-See https://cloud.google.com/docs/authentication#service-accounts to configure credentials via environment variables.
-
-##### Azure Blob
-The URL should be set with the `azblob://` prefix and should point to a storage container name.
-
-It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (i.e bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`
-
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
+The supported blob storage solutions are:
+- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
 ### Basic configuration settings
 
@@ -807,6 +766,9 @@ Exercise your application to start generating telemetry data, which you can see 
 [3]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
+
 {{% /tab %}}
 
 {{% tab "Agent and app in separate containers" %}}
@@ -817,21 +779,24 @@ When your Agent and services are running in separate Docker containers on the sa
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-## Requirements
-
-- [Docker Engine][1]
+**Requirements**:
+- [Docker Engine][1].
 
 **Note**: Injection on arm64 is not supported.
 
 ## Install the preload library
 
-We provide a shell script to automatically install docker injection support. Docker must already be installed on the host machine.
+Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
+```shell
 bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
-By default, This installs language libraries for all supported	languages. Set the DD_APM_INSTRUMENTATION_LANGUAGES variable to limit the installed languages:
+This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
+```shell
 DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
 ## Configure Docker injection
 
@@ -851,13 +816,14 @@ config_sources: BASIC
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
   - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-The words BASIC, LOCAL, and BLOB must be upper-case.
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
 
-Config Source values can be separated by semicolons to indicate multiple possible locations. For example: 
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
 
-`config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC`
+```yaml
+config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
 
-This checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration. The first configuration that returns without an error will be used. 
 
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
@@ -904,7 +870,7 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 
 ```
 
-or as YAML:
+Or as YAML:
 ```yaml
 ---
 version: 1
@@ -962,27 +928,11 @@ The following table shows how the injection configuration values map to the corr
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
 #### Blob storage support
-The supported blob storage solutions are AWS S3, GCP GCS and Azure Blob
-
-##### AWS S3
-The URL should be set with the `s3://` prefix.
-
-If you have authenticated with the AWS CLI, it will use those credentials.
-See https://docs.aws.amazon.com/sdk-for-go/api/aws/session/ to configure credentials via environment variables.
-
-##### GCP GCS
-The URL should be set with the `gs://` prefix.
-
-It uses Application Default Credentials, if you have authenticated via gcloud auth application-default login, it will use those credentials
-
-See https://cloud.google.com/docs/authentication#service-accounts to configure credentials via environment variables.
-
-##### Azure Blob
-The URL should be set with the `azblob://` prefix and should point to a storage container name.
-
-It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (i.e bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`
-
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
+The supported blob storage solutions are:
+- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 ### Basic configuration settings
 
@@ -1057,6 +1007,8 @@ Exercise your application to start generating telemetry data, which you can see 
 [2]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 [3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
 
