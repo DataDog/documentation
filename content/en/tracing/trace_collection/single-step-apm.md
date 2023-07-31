@@ -9,7 +9,6 @@ is_beta: true
 <ul>
 <li>On Linux hosts and VMs</li>
 <li>On Docker containers</li>
-<li>If installed with Ansible</li>
 </ul>
 <p>It supports tracing Java, Python, Node.js, and .NET services. Try it out!</p> 
 
@@ -51,90 +50,25 @@ For example, for a Docker Linux container:
    ```
 2. Configure the Agent in Docker:
    ```shell
-   docker run -d --name dd-agent \
-   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-   -v /proc/:/host/proc/:ro \
-   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-   -v /opt/datadog/apm:/opt/datadog/apm \
-   -v /sys/kernel/debug:/sys/kernel/debug \
-   -e DD_API_KEY= "<YOUR_DD_API_KEY>" \
-   -e DD_SITE="<YOUR_DD_SITE>" \
-   -e DD_APM_INSTRUMENTATION_ENABLED=true \
-   -e DD_APM_NON_LOCAL_TRAFFIC=true \
-   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-   -e DD_AC_EXCLUDE=name:datadog-agent \
-   -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-   -e DD_USE_DOGSTATSD=true \
-   -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-   -e DD_REMOTE_CONFIGURATION_ENABLED=true \
-   --cap-add SYS_ADMIN \
-   --cap-add SYS_RESOURCE \
-   --cap-add SYS_PTRACE \
-   --c2ap-add NET_ADMIN \
-   --cap-add NET_BROADCAST \
-   --cap-add NET_RAW \
-   --cap-add IPC_LOCK \
-   --cap-add CHOWN \
-   --security-opt apparmor:unconfined \
-   gcr.io/datadoghq/agent:7
+   docker run -d --name dd-agent \  
+     -e DD_API_KEY=${DD_API_KEY} \
+     -e DD_APM_ENABLED=true \
+     -e DD_APM_NON_LOCAL_TRAFFIC=true \
+     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
+     -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
+     -v /opt/datadog/apm:/opt/datadog/apm \
+     -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     gcr.io/datadoghq/agent:7
    ```
-   Or, for Amazon Linux earlier than version 2:
-   ```shell
-   docker run -d --name dd-agent \
-   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-   -v /proc/:/host/proc/:ro \
-   -v /cgroup/:/host/sys/fs/cgroup:ro \
-   -v /opt/datadog/apm:/opt/datadog/apm \
-   -v /sys/kernel/debug:/sys/kernel/debug \
-   -e DD_API_KEY= "..." \
-   -e DD_SITE="datadoghq.com" \
-   -e DD_APM_INSTRUMENTATION_ENABLED=true \
-   -e DD_APM_NON_LOCAL_TRAFFIC=true \
-   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-   -e DD_AC_EXCLUDE=name:datadog-agent \
-   -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-   -e DD_USE_DOGSTATSD=true \
-   -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-   -e DD_REMOTE_CONFIGURATION_ENABLED=true \
-   --cap-add SYS_ADMIN \
-   --cap-add SYS_RESOURCE \
-   --cap-add SYS_PTRACE \
-   --cap-add NET_ADMIN \
-   --cap-add NET_BROADCAST \
-   --cap-add NET_RAW \
-   --cap-add IPC_LOCK \
-   --cap-add CHOWN \
-   --security-opt apparmor:unconfined \
-   gcr.io/datadoghq/agent:7
-   ```
-2. Restart the Docker containers.
-3. [Explore the performance observability of your services in Datadog][2].
+  
+3. Restart the Docker containers.
+4. [Explore the performance observability of your services in Datadog][2].
 
 [1]: /agent/remote_config
 [2]: /tracing/service_catalog/
 
-
 {{% /tab %}}
-
-{{% tab "Ansible for Linux VMs" %}}
-
-1. Add the following instruction to your playbook:
-   ```yaml
-   hosts: servers
-       roles:
-           - { role: datadog.datadog, become: yes }
-       vars:
-           datadog_api_key: "<YOUR_DD_KEY>"
-           datadog_site: "<YOUR_DD_SITE>" 
-           datadog_apm_instrumentation_enabled: "host"
-   ```
-2. Deploy.
-3. [Explore the performance observability of your services in Datadog][2].
-
-[2]: /tracing/service_catalog/
-
-{{% /tab %}}
-
 
 {{< /tabs >}}
 
