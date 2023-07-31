@@ -15,7 +15,7 @@ CSM Identity Risks is not available in this site.
 
 <div class="alert alert-info">CSM Identity Risks is in beta.</div>
 
-Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's AWS IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
+Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 
@@ -46,7 +46,7 @@ On the side panel for an individual detection, click **Fix in AWS** to open the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/csm
-[2]: /integrations/amazon_web_services/?tab=roledelegation#resource-collection
+[2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [3]: https://app.datadoghq.com/security/identities
 [4]: /integrations/amazon_cloudtrail#send-logs-to-datadog
 [5]: /security/cspm/
