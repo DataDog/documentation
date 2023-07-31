@@ -33,7 +33,7 @@ Review your organization's active identity risks on the [Identity Risks page][3]
 
 You can review the configuration of the resource on the **Resource** tab.
 
-{{< img src="security/identity_risks/relationships_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
+{{< img src="security/identity_risks/resource_tab_side_panel.png" alt="The Relationships tab shows a a graphical representation of the connections with other resources" width="80%">}}
 
 On the side panel, click **Fix in AWS** to open the AWS console to remediate the identity risk. You can also use the **Insights** tab to get additional insights about the detection (for example, the permissions provisioned on the resource and whether they were used in the last 15 days).
 
