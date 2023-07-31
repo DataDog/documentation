@@ -230,7 +230,7 @@ As of tracer version `v1.16.0` all libraries are supported except for Boto2.
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-The minimum Ruby tracer version required is [v1.13][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
+The minimum Ruby tracer version required is [v1.13.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
 To opt in, add the following environment variables to your tracer settings or system properties:
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
