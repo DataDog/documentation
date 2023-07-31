@@ -47,13 +47,11 @@ You can filter to traffic where the client or server matches a CIDR using `CIDR(
 
 ### Recommended queries
 
-{{< img src="network_performance_monitoring/network_analytics/recommended_query_options.png" alt="The Network Analytics page in Datadog displaying three recommended queries" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_analytics/recommended_query_options.png" alt="The Network Analytics page in Datadog displaying three recommended queries">}}
 
 Recommended queries allow you to begin investigating into your network–whether you're troubleshooting a specific issue or gaining a better overall understanding of your network. The recommended queries help you quickly find relevant network information without needing to search for or group the traffic. For example, the recommended query `Find dependencies of service: web-store` populates the search bar with the query `client_service: web-store` and displays the top services that the service web-store is sending traffic to within the network, and therefore its downstream dependencies. 
 
 Any available recommended queries are provided at the top of the Analytics page, and there are three recommended queries at the top of the [DNS page][10]. Use these queries to access commonly used data, and see any changes in that data in the last hour. 
-
-{{< img src="network_performance_monitoring/network_analytics/recommended_queries_dns.png" alt="Recommended queries in the DNS page" >}}
 
 To run a recommended query, click on the tile. Hovering over the tile displays a description and summary of the data the query returns.
 
