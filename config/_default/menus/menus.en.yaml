@@ -2940,10 +2940,10 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 205
-  - name: Identity Risks
-    url: security/identity_risks/
+  - name: CIEM
+    url: security/ciem/
     parent: csm
-    identifier: csm_identity_risks
+    identifier: csm_ciem
     weight: 15
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management

@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management Identity Risks
+title: Cloud Infrastructure Entitlement Management
 kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/"
@@ -9,19 +9,19 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-CSM Identity Risks is not available in this site.
+CSM CIEM is not available in this site.
 </div>
 {{< /site-region >}}
 
-<div class="alert alert-info">CSM Identity Risks is in beta.</div>
+<div class="alert alert-info">CSM CIEM is in beta.</div>
 
-Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
+Cloud Infrastructure Entitlement Management (CSM CIEM) provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
-<div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
+<div class="alert alert-info">At this time, CSM CIEM is available for AWS only.</div>
 
 ## Setup
 
-To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4]. If you've already done this, no additional setup is required.
+To use CSM CIEM, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4]. If you've already done this, no additional setup is required.
 
 **Note**: If you've enabled [Cloud Security Posture Management][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
 
@@ -29,7 +29,7 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][2] and 
 
 Review your organization's active identity risk detections on the [Identity Risks Explorer page][3]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual detections). View additional details on the side panel by selecting a resource or detection.
 
-{{< img src="security/identity_risks/identity_risks_explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer.png" alt="CSM CIEM explorers page" width="100%">}}
 
 When viewing an individual resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
 
