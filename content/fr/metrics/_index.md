@@ -68,7 +68,7 @@ Une requête de métrique suit systématiquement deux étapes préliminaires d'�
 
 {{< whatsnext desc="Visualisations les plus utilisées pour représenter des métriques :">}}
     {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Widget Valeur de requête</u> : rassemblez les résultats des deux étapes d'évaluation au sein d'une valeur unique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top List</u> : obtenez une seule valeur par groupe.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top list</u> : obtenez une seule valeur par groupe.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 En outre, Datadog propose de nombreux autres types de graphiques et de widgets pour les visualisations. Pour en savoir plus, consultez notre [série d'articles de blog sur la représentation graphique des métriques][7] (en anglais).
@@ -173,7 +173,7 @@ Consultez la [section Metrics Summary][21] pour en savoir plus.
 
 ## Pour aller plus loin
 
-{{< whatsnext desc=""Pour approfondir vos connaissances sur les métriques, consultez les ressources suivantes :">}}
+{{< whatsnext desc="Pour approfondir vos connaissances sur les métriques, consultez les ressources suivantes :">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtrage avancé</u> : filtrez vos données afin de restreindre le contexte des métriques renvoyées.{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>Métriques de distribution</u> : calculez les centiles globaux pour l'intégralité de votre ensemble de données.{{< /nextlink >}}
     {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> : découvrez comment contrôler vos volumes de métriques custom avec des configurations de tags et d'agrégations grâce à Metrics without Limits™.{{< /nextlink >}}
