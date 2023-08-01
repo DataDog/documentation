@@ -57,17 +57,17 @@ Not every language supported by CI Visibility has support for test suite level v
 * [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
 * [JavaScript][13] has limited support since `dd-trace-js>=3.3.0`.
 * Java has complete support since `dd-trace-java>=1.12.0`.
-* JUnit report uploads does not support test suite level visibility.
+* [JUnit report uploads][14] has complete support since `datadog-ci>=2.17.0`.
 
 Additionally, test suite level visibility is only supported in Agentless mode.
 
 ## Use CI tests data
 
-When creating a [dashboard][14] or a [notebook][15], you can use test execution data in your search query, which updates the visualization widget options.
+When creating a [dashboard][15] or a [notebook][16], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16].
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][17]. 
 
 ## Further reading
 
@@ -83,6 +83,7 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [11]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
 [12]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
 [13]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[14]: https://app.datadoghq.com/dashboard/lists
-[15]: https://app.datadoghq.com/notebook/list
-[16]: /monitors/types/ci/
+[14]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/notebook/list
+[17]: /monitors/types/ci/
