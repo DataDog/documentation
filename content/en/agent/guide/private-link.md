@@ -167,28 +167,21 @@ Use the list below to map service and DNS name to different parts of Datadog:
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`.
 
-  For example, in the case of the Datadog metrics endpoint for `us-east-1`:
+  For example, in the case of the Datadog metrics endpoint for <code>{{< get-region >}}</code>:
 
-{{% site-region region="us"%}}
-```bash
-aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8 | jq '.ServiceDetails[0].PrivateDnsName'
-```
-{{% /site-region %}}
-{{% site-region region="ap1"%}}
-```bash
-aws ec2 describe-vpc-endpoint-services --service-names com.amazonaws.vpce.ap-northeast-1.vpce-svc-09a8006e245d1e7b8 | jq '.ServiceDetails[0].PrivateDnsName'
-```
-{{% /site-region %}}
+<div class="site-region-container">
+  <div class="highlight">
+    <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line">aws ec2 describe-vpc-endpoint-services --service-names {{< aws-privatelink-metrics-service-name >}} | jq '.ServiceDetails[0].PrivateDnsName'</span></code></pre>
+  </div>
+</div>
 
-
-
-This returns `metrics.agent.datadoghq.com`, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
+This returns <code>metrics.agent.{{< site-fqdn >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
 
 2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **{{< get-region >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
    **Notes**:
       - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]
-      - The Agent sends telemetry to versioned endpoints, for example, `<version>-app.agent.datadoghq.com` which resolves to `metrics.agent.datadoghq.com` through a CNAME alias. Therefore, you only need to set up a private hosted zone for `metrics.agent.datadoghq.com`.
+      - The Agent sends telemetry to versioned endpoints, for example, <code>[version]-app.agent.{{< site-fqdn >}}</code> which resolves to <code>metrics.agent.{{< site-fqdn >}}</code> through a CNAME alias. Therefore, you only need to set up a private hosted zone for <code>metrics.agent.{{< site-fqdn >}}</code>.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
