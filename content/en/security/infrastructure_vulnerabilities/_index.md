@@ -20,7 +20,7 @@ CSM Vulnerabilities is not available on the US1-FED Datadog site.
 Cloud Security Management Vulnerabilities (CSM Vulnerabilities) combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It scans for vulnerabilities in the [container images][2] and [hosts][4] in your infrastructure.
 
 ## Review the health of your container images
-CSM Vulnerabilities offers vulnerabilities in the Container Images on your hosts.
+CSM Vulnerabilities offers vulnerabilities in the container images on your hosts.
 
 - View your container images on the [container images][2] page. 
 - Observe the number of vulnerabilities that exist in the container images (column name `VULNERABILITIES`).
@@ -34,7 +34,7 @@ View additional details about any vulnerability by clicking the container image 
 ## Identify impacted infrastructure
 
 - Click any vulnerability to see more information. 
-- Click **View Vulnerability in CSM** to view all related infrastructure impacted by this vulnerability:
+- Click **View Vulnerability in CSM** to view all related infrastructure impacted by this vulnerability.
 
 This opens the CSM [Vulnerabilities][1] page which includes information about: 
 
