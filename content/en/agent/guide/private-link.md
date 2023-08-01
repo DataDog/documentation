@@ -46,16 +46,16 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
-| Datadog                   | PrivateLink service name                                     | Private DNS name                                  |
-|---------------------------|--------------------------------------------------------------| ------------------------------------------------- |
-| Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> | `agent-http-intake.logs.datadoghq.com`            |
-| Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  | `http-intake.logs.datadoghq.com`                  |
-| API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        | `api.datadoghq.com`                               |
-| Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    | `metrics.agent.datadoghq.com`                     |
-| Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> | `orchestrator.datadoghq.com`                      |
-| Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    | `process.datadoghq.com`                           |
-| Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  | `intake.profile.datadoghq.com`                    |
-| Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     | `trace.agent.datadoghq.com`                       |
+| Datadog                   | PrivateLink service name                                     | Private DNS name                                      |
+|---------------------------|--------------------------------------------------------------|-------------------------------------------------------|
+| Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> | <code>agent-http-intake.logs.{{< site-fqdn >}}</code> |
+| Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  | <code>http-intake.logs.{{< site-fqdn >}}</code>       |
+| API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        | <code>api.{{< site-fqdn >}}</code>                    |
+| Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    | <code>metrics.agent.{{< site-fqdn >}}</code>          |
+| Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> | <code>orchestrator.{{< site-fqdn >}}</code>           |
+| Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    | <code>process.{{< site-fqdn >}}</code>                |
+| Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  | <code>intake.profile.{{< site-fqdn >}}</code>         |
+| Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     | <code>trace.agent.{{< site-fqdn >}}</code>            |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
@@ -154,16 +154,16 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog                   | PrivateLink service name                                     | Private DNS name                                  |
-  |---------------------------|--------------------------------------------------------------| ------------------------------------------------- |
-  | Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> | `agent-http-intake.logs.datadoghq.com`            |
-  | Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  | `http-intake.logs.datadoghq.com`                  |
-  | API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        | `api.datadoghq.com`                               |
-  | Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    | `metrics.agent.datadoghq.com`                     |
-  | Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> | `orchestrator.datadoghq.com`                      |
-  | Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    | `process.datadoghq.com`                           |
-  | Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  | `intake.profile.datadoghq.com`                    |
-  | Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     | `trace.agent.datadoghq.com`                       |
+  | Datadog                   | PrivateLink service name                                     | Private DNS name                                      |
+  |---------------------------|--------------------------------------------------------------|-------------------------------------------------------|
+  | Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> | <code>agent-http-intake.logs.{{< site-fqdn >}}</code> |
+  | Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  | <code>http-intake.logs.{{< site-fqdn >}}</code>       |
+  | API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        | <code>api.{{< site-fqdn >}}</code>                    |
+  | Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    | <code>metrics.agent.{{< site-fqdn >}}</code>          |
+  | Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> | <code>orchestrator.{{< site-fqdn >}}</code>           |
+  | Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    | <code>process.{{< site-fqdn >}}</code>                |
+  | Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  | <code>intake.profile.{{< site-fqdn >}}</code>         |
+  | Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     | <code>trace.agent.{{< site-fqdn >}}</code>            |
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`.
 
