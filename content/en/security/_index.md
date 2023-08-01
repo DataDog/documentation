@@ -17,10 +17,10 @@ further_reading:
     text: "Begin detecting threats with Cloud SIEM"
   - link: "/security/cspm/setup"
     tag: "Documentation"
-    text: "Start tracking misconfigurations with Cloud Security Posture Management"
+    text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with Cloud Workload Security"
+    text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://securitylabs.datadoghq.com/"
     tag: "Security Labs"
     text: "Read about security-related topics on Datadog's Security Labs blog"
@@ -44,19 +44,11 @@ cascade:
         rank: 70
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
 
-Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
-
-Check out the [30-second Product Guided Tour](https://www.datadoghq.com/guided-tour/security/) to see more.
+Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
 
 ## Application Security Management
 
@@ -70,19 +62,15 @@ Check out the [30-second Product Guided Tour](https://www.datadoghq.com/guided-t
 
 {{< img src="security/security_monitoring/cloud_siem_overview.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
-## Cloud Security Posture Management
+## Cloud Security Management
 
-[Cloud Security Posture Management (CSPM)][7] tracks the security hygiene and compliance posture of your production environment, can automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-security-management/) to see more.
+[Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-{{< img src="security/cspm_overview.png" alt="Cloud Security Posture Management scores in Datadog" width="100%">}}
+CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
-## Cloud Workload Security
+{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues" width="100%">}}
 
-[Cloud Workload Security (CWS)][8] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. Cloud Workload Security uses the unified Datadog Agent, so if you're already using Datadog to monitor your environment, there's no need to provision additional resources. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-security-management/) to see more.
-
-{{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
-
-To get started with Datadog Security, navigate to the [Setup & Configuration][9] section in the Datadog app, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ## Further Reading
 
@@ -97,3 +85,10 @@ To get started with Datadog Security, navigate to the [Setup & Configuration][9]
 [7]: /security/cspm/
 [8]: /security/cloud_workload_security/
 [9]: https://app.datadoghq.com/security/configuration
+[10]: /security/cloud_security_management/
+[11]: /security/cspm/
+[12]: /security/cloud_workload_security/
+[13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
+[14]: https://www.datadoghq.com/guided-tour/security/
+[15]: /security/identity_risks/
+[16]: /security/infrastructure_vulnerabilities/
