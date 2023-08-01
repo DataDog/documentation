@@ -53,7 +53,7 @@ If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, th
 
 #### Findings
 
-Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Posture Management.
+Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Management Misconfigurations.
 
 #### Threats
 
@@ -65,7 +65,7 @@ Clicking on a resource opens a side panel with details including:
 
 - **Resource information** such as the resource type, name, account, and tags associated with the resource.
 - **Security findings** including the security rules and latest status.
-- **Real-time threat signals** detected on the asset by Cloud Workload Security.
+- **Real-time threat signals** detected on the asset by Cloud Security Management Threats.
 - **Resource definition** in JSON showing the full configuration of the asset.
 - An interactive asset relationship graph displaying the assets connected to the resource.
 

@@ -2920,56 +2920,11 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
-  - name: Cloud Security Posture Management
-    url: security/cspm/
-    parent: csm
-    identifier: cspm
-    weight: 1
-  - name: Setup
-    url: security/cspm/setup
-    parent: cspm
-    identifier: cspm_setup
-    weight: 101
-  - name: Compliance Rules
-    url: security/cspm/compliance_rules
-    parent: cspm
-    identifier: cspm_detection_rules
-    weight: 102
-  - name: Custom Rules
-    url: security/cspm/custom_rules
-    parent: cspm
-    identifier: custom_rules
-    weight: 103
-  - name: Cloud Resources Schema
-    url: security/cspm/custom_rules/schema/
-    parent: cspm
-    identifier: cspm_schema_gcp_test
-    weight: 104
-  - name: Compliance Reports
-    url: security/cspm/frameworks_and_benchmarks
-    parent: cspm
-    identifier: cspm_frameworks_benchmarks
-    weight: 106
-  - name: Security Findings Explorer
-    url: /security/cspm/findings
-    parent: cspm
-    identifier: cspm_findings_explorer
-    weight: 107
-  - name: Signals Explorer
-    url: /security/cspm/signals_explorer/
-    parent: cspm
-    identifier: signals
-    weight: 108
-  - name: Resource Catalog
-    url: /security/cspm/resource_catalog
-    parent: cspm
-    identifier: resource_catalog
-    weight: 109
-  - name: Cloud Workload Security
+  - name: Threats
     url: security/cloud_workload_security/
     parent: csm
     identifier: cloud_workload_security
-    weight: 5
+    weight: 1
   - name: Setup
     url: security/cloud_workload_security/setup
     parent: cloud_workload_security
@@ -2995,6 +2950,51 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 205
+  - name: Misconfigurations
+    url: security/cspm/
+    parent: csm
+    identifier: cspm
+    weight: 5
+  - name: Setup
+    url: security/cspm/setup
+    parent: cspm
+    identifier: cspm_setup
+    weight: 101
+  - name: Compliance Rules
+    url: security/cspm/compliance_rules
+    parent: cspm
+    identifier: cspm_detection_rules
+    weight: 102
+  - name: Custom Rules
+    url: security/cspm/custom_rules
+    parent: cspm
+    identifier: custom_rules
+    weight: 103
+  - name: Cloud Resources Schema
+    url: security/cspm/custom_rules/schema/
+    parent: cspm
+    identifier: cspm_schema_gcp_test
+    weight: 104
+  - name: Compliance Reports
+    url: security/cspm/frameworks_and_benchmarks
+    parent: cspm
+    identifier: cspm_frameworks_benchmarks
+    weight: 106
+  - name: Misconfigurations Explorer
+    url: /security/cspm/findings
+    parent: cspm
+    identifier: cspm_findings_explorer
+    weight: 107
+  - name: Signals Explorer
+    url: /security/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 108
+  - name: Resource Catalog
+    url: /security/cspm/resource_catalog
+    parent: cspm
+    identifier: resource_catalog
+    weight: 109
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm
