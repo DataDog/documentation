@@ -12,8 +12,9 @@ title: Cloud Security Management ガイド
     {{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}カスタムルールの作成ガイドライン{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Cloud Security Posture Management Guides" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Rego によるカスタム CSPM ルールの作成{{< /nextlink >}}
+{{< whatsnext desc="Cloud Security Posture Management ガイド" >}}
+    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Rego によるカスタム CSPM ルールの記述{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/public-accessibility-logic" >}}Datadog がリソースがパブリックアクセス可能かどうかを判断する方法{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="全般ガイド" >}}

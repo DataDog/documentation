@@ -2,6 +2,8 @@
 title: Cloud Foundry Setup Guide
 kind: guide
 description: "Steps for setting up the Cloud Foundry Integration"
+aliases:
+- /integrations/guide/pivotal-cloud-foundry-manual-setup
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
   tag: "Blog"
@@ -10,15 +12,22 @@ further_reading:
 
 ## Overview
 
-Cloud Foundry deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to manually set up monitoring for your Cloud Foundry application.
+Cloud Foundry deployments can send metrics and events to Datadog. You can track the health and availability of all nodes in a deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. This page walks you through how to set up monitoring for your Cloud Foundry environment.
 
-There are three main components for the Cloud Foundry integration with Datadog. First, the buildpack is used to collect custom metrics, logs, traces, and profiles from your applications. Second, the Agent and Cluster Agent BOSH Releases collect metrics from the platform. Third, the Loggregator Firehose Nozzle collects all other metrics from your infrastructure. Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
+There are four main components for the Cloud Foundry integration with Datadog.
+
+- **The Cloud Foundry Buildpack -** used to collect custom metrics, logs, traces, and profiles from your Cloud Foundry applications.
+- **The Agent BOSH Release -** used to collect events and metrics from BOSH VMs and sends them to Datadog.
+- **The Cluster Agent BOSH Release -**  used to collect cluster-level and application-level metadata from the CAPI and the BBS and container tags.
+- **The Firehose Nozzle -** collects all other metrics from the Loggregator Firehose in your infrastructure.
+
+Read the [Datadog VMware Tanzu Application Service architecture][32] guide for more information.
 
 ## Monitor your applications
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent (a lightweight version of the Agent), Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
 
-### Pivotal Cloud Foundry Platform >= 1.12
+### Multiple Buildpacks (recommended)
 
 1. Download the [latest Datadog buildpack release][7] and upload it to your Cloud Foundry environment.
 
@@ -35,7 +44,7 @@ Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry applic
 
       **Note**: If you were using a single buildpack before, it should be the last one loaded so it acts as a final buildpack. To learn more, see [Cloud Foundry's How Buildpacks Work][6].
 
-### Pivotal Cloud Foundry Platform < 1.12
+### Multi-Buildpack (deprecated)
 
 The Datadog buildpack uses the Cloud Foundry [Pushing an App with Multiple Buildpacks][3] feature that was introduced in version `1.12`.
 
@@ -51,12 +60,11 @@ For older versions, Cloud Foundry provides a backwards compatible version of thi
 
     ```yaml
     buildpacks:
-      - "https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-3.1.0.zip"
+      - "https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-4.36.0.zip"
       - "https://github.com/cloudfoundry/ruby-buildpack#v1.7.18" # Replace this with your regular buildpack
     ```
 
       The URLs for the Datadog Buildpack are:
-
       - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip`
       - `https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-x.y.z.zip`
 
@@ -78,9 +86,10 @@ If you are a [meta-buildpack][8] user, Datadog's buildpack can be used as a deco
 
 ## Monitor your Cloud Foundry cluster
 
-There are two points of integration with Datadog, each of which achieves a different goal:
+There are three points of integration with Datadog, each of which achieves a different goal:
 
 - **Datadog Agent BOSH release** - Install the Datadog Agent on every node in your deployment to track system, network, and disk metrics. Enable any other Agent checks you wish.
+- **Datadog Cluster Agent BOSH release** - Deploy one Datadog Cluster Agent job. The job queries the CAPI and BBS API to collect cluster-level and application-level metadata to provide improved tagging capabilities in your applications and containers.
 - **Datadog Firehose Nozzle** - Deploy one or more Datadog Firehose Nozzle jobs. The jobs tap into your deployment's Loggregator Firehose and send all non-container metrics to Datadog.
 
 <div class="alert alert-warning">
