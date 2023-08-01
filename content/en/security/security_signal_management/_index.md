@@ -6,9 +6,9 @@ aliases:
 ---
 ## Overview
 
-With Cloud SIEM and CWS Security Signal Management, users with the `Security Signals Write` permission can take action on security signal detections generated within the previous 30 days, such as change state, and view signal action history in the Audit Log. Within the signal explorer, users can use dedicated facets to filter signals that have been acted upon and view high-level information about actions within a row. After you take action on a signal, you can see your activity in the Audit Log.
+With Cloud SIEM and Cloud Security Management Threats (CSM Threats), users with the `Security Signals Write` permission can take action on security signal detections generated within the previous 30 days, such as change state, and view signal action history in the Audit Log. Within the signal explorer, users can use dedicated facets to filter signals that have been acted upon and view high-level information about actions within a row. After you take action on a signal, you can see your activity in the Audit Log.
 
-Security signals can be viewed and managed by navigating to **Security** > **Security Signals** > selecting a Cloud SIEM or CWS signal, and taking actions through the header in the side panel view.
+Security signals can be viewed and managed by navigating to **Security** > **Security Signals** > selecting a Cloud SIEM or CSM Threats signal, and taking actions through the header in the side panel view.
 
 ## Role-based access control for security signal management
 
@@ -52,7 +52,7 @@ To change signal state, follow the instructions below:
 
 Any security signal warning of a possible disruption to your organization's services can be considered an incident. It is often necessary to have a set framework for handling these threats. [Incident Management][4] provides a system to effectively identify and mitigate incidents.
 
-Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+Declare an incident directly from a Cloud SIEM or CSM Threats signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 
 Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 

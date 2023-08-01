@@ -113,7 +113,7 @@ pipelineConfig:
       compression: gzip
       buffer:
           type: disk
-          max_size: 154618822656
+          max_size: 150323855359
     splunk_logs:
       type: splunk_hec_logs
       inputs:
@@ -124,4 +124,4 @@ pipelineConfig:
         codec: json
       buffer:
           type: disk
-          max_size: 154618822656
+          max_size: 150323855359

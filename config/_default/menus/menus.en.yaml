@@ -2920,56 +2920,11 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
-  - name: Cloud Security Posture Management
-    url: security/cspm/
-    parent: csm
-    identifier: cspm
-    weight: 1
-  - name: Setup
-    url: security/cspm/setup
-    parent: cspm
-    identifier: cspm_setup
-    weight: 101
-  - name: Compliance Rules
-    url: security/cspm/compliance_rules
-    parent: cspm
-    identifier: cspm_detection_rules
-    weight: 102
-  - name: Custom Rules
-    url: security/cspm/custom_rules
-    parent: cspm
-    identifier: custom_rules
-    weight: 103
-  - name: Cloud Resources Schema
-    url: security/cspm/custom_rules/schema/
-    parent: cspm
-    identifier: cspm_schema_gcp_test
-    weight: 104
-  - name: Compliance Reports
-    url: security/cspm/frameworks_and_benchmarks
-    parent: cspm
-    identifier: cspm_frameworks_benchmarks
-    weight: 106
-  - name: Security Findings Explorer
-    url: /security/cspm/findings
-    parent: cspm
-    identifier: cspm_findings_explorer
-    weight: 107
-  - name: Signals Explorer
-    url: /security/cspm/signals_explorer/
-    parent: cspm
-    identifier: signals
-    weight: 108
-  - name: Resource Catalog
-    url: /security/cspm/resource_catalog
-    parent: cspm
-    identifier: resource_catalog
-    weight: 109
-  - name: Cloud Workload Security
+  - name: Threats
     url: security/cloud_workload_security/
     parent: csm
     identifier: cloud_workload_security
-    weight: 2
+    weight: 1
   - name: Setup
     url: security/cloud_workload_security/setup
     parent: cloud_workload_security
@@ -2995,21 +2950,81 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 205
+  - name: Misconfigurations
+    url: security/cspm/
+    parent: csm
+    identifier: cspm
+    weight: 5
+  - name: Setup
+    url: security/cspm/setup
+    parent: cspm
+    identifier: cspm_setup
+    weight: 101
+  - name: Compliance Rules
+    url: security/cspm/compliance_rules
+    parent: cspm
+    identifier: cspm_detection_rules
+    weight: 102
+  - name: Custom Rules
+    url: security/cspm/custom_rules
+    parent: cspm
+    identifier: custom_rules
+    weight: 103
+  - name: Cloud Resources Schema
+    url: security/cspm/custom_rules/schema/
+    parent: cspm
+    identifier: cspm_schema_gcp_test
+    weight: 104
+  - name: Compliance Reports
+    url: security/cspm/frameworks_and_benchmarks
+    parent: cspm
+    identifier: cspm_frameworks_benchmarks
+    weight: 106
+  - name: Misconfigurations Explorer
+    url: /security/cspm/findings
+    parent: cspm
+    identifier: cspm_findings_explorer
+    weight: 107
+  - name: Signals Explorer
+    url: /security/cspm/signals_explorer/
+    parent: cspm
+    identifier: signals
+    weight: 108
+  - name: Resource Catalog
+    url: /security/cspm/resource_catalog
+    parent: cspm
+    identifier: resource_catalog
+    weight: 109
+  - name: Identity Risks
+    url: security/identity_risks/
+    parent: csm
+    identifier: csm_identity_risks
+    weight: 15
+  - name: Infrastructure Vulnerabilities
+    url: security/infrastructure_vulnerabilities
+    parent: csm
+    identifier: infrastructure_vulnerabilities
+    weight: 18
+  - name: Setup
+    url: security/infrastructure_vulnerabilities/setup
+    parent: infrastructure_vulnerabilities
+    identifier: infra_vm_setup
+    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
-    weight: 4
+    weight: 20
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
     identifier: csm_guides
-    weight: 6
+    weight: 25
   - name: Troubleshooting
     url: security/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
-    weight: 7
+    weight: 30
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
@@ -3886,21 +3901,26 @@ main:
     parent: ndm
     identifier: ndm_profiles
     weight: 304
+  - name: Network Topology Map
+    url: network_monitoring/devices/network_topology_map
+    parent: ndm
+    identifier: ndm_topology_map
+    weight: 305
   - name: Data Collected
     url: network_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 305
+    weight: 306
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 306
+    weight: 307
   - name: Guides
     url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 307
+    weight: 308
   - name: Developers
     url: developers/
     pre: dev-code
