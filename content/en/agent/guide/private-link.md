@@ -46,10 +46,10 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
-| Datadog                   | PrivateLink service name                                                          | Private DNS name                                                       |
-|---------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | {{< region-param key="agent_http_endpoint" code="true">}}            |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | {{< region-param key="http_endpoint" code="true">}}                  |
+| Datadog                   | PrivateLink service name                                                        | Private DNS name                                                       |
+|---------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | {{< region-param key="agent_http_endpoint" code="true">}}              |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | {{< region-param key="http_endpoint" code="true">}}                    |
 | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        | <code>api.{{< region-param key="dd_site" >}}</code>                    |
 | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
 | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
@@ -117,8 +117,8 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
-| Datadog                   | PrivateLink service name                                                          |
-|---------------------------|-----------------------------------------------------------------------------------|
+| Datadog                   | PrivateLink service name                                                        |
+|---------------------------|---------------------------------------------------------------------------------|
 | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} |
 | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  |
 | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        |
@@ -154,8 +154,8 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog                   | PrivateLink service name                                                          | Private DNS name                                                       |
-  |---------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|
+  | Datadog                   | PrivateLink service name                                                        | Private DNS name                                                       |
+  |---------------------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------|
   | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
   | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code>       |
   | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        | <code>api.{{< region-param key="dd_site" >}}</code>                    |
@@ -165,7 +165,11 @@ Use the list below to map service and DNS name to different parts of Datadog:
   | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
   | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
 
-  You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`.
+  You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command: 
+  
+  ```bash
+  aws ec2 describe-vpc-endpoint-services --service-names <service-name>`
+  ```
 
   For example, in the case of the Datadog metrics endpoint for {{< region-param key="aws_region" code="true" >}}:
 
