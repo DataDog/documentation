@@ -104,6 +104,45 @@ This page contains instructions for setting up the Orchestrator Explorer using a
       value: "true"
     ```
 
+4. (Optional) Set collectors under instances section to specify the resources to be collected. Create `orchestrator.yaml` in ConfigMap. Sample configuration:
+
+     ```yaml
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: orchestrator-config
+      data:
+        orchestrator.yaml: |-
+          ad_identifiers:
+            - _kube_orchestrator
+          init_config:
+          instances:
+            - collectors:
+              - batch/v1/cronjobs
+     ```
+
+     Acceptable values for `collectors` are `<collector_name>` (e.g "cronjobs") or `<apigroup_and_version>/<collector_name>` (e.g. "batch/v1/cronjobs"). For CRDs, only `<apigroup_and_version>/<collector_name>` is accepted.
+
+     Mount it to Cluster agent container.
+   
+     ```yaml
+     containers:
+       - name: cluster-agent
+         ...
+         volumeMounts:
+           - name: orchestrator-config
+             mountPath: /conf.d
+             readOnly: true
+     ...
+     volumes:
+       - name: orchestrator-config
+         configMap:
+           name: orchestrator-config
+           items:
+           - key: orchestrator.yaml
+             path: orchestrator.yaml    
+     ```
+
 In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, add the following options in the `env` section of both the Cluster Agent and the Process Agent:
 
   ```yaml
