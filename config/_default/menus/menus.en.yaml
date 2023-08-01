@@ -3861,21 +3861,26 @@ main:
     parent: npm
     identifier: npm_setup
     weight: 101
-  - name: Network Page
-    url: network_monitoring/performance/network_page/
+  - name: Overview Page
+    url: network_monitoring/performance/overview_page/
     parent: npm
-    identifier: npm_page
+    identifier: npm_overview_page
     weight: 102
+  - name: Network Analytics
+    url: network_monitoring/performance/network_analytics/
+    parent: npm
+    identifier: npm_analytics
+    weight: 103
   - name: Network Map
     url: network_monitoring/performance/network_map/
     parent: npm
     identifier: npm_map
-    weight: 103
+    weight: 104
   - name: Guides
     url: network_monitoring/performance/guide/
     identifier: npm_guides
     parent: npm
-    weight: 104
+    weight: 105
   - name: DNS Monitoring
     url: network_monitoring/dns/
     parent: nm_parent
