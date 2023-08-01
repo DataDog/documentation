@@ -2940,16 +2940,21 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
     weight: 203
+  - name: Runtime Anomaly Detection
+    url: security/cloud_workload_security/runtime_anomaly_detection
+    parent: cloud_workload_security
+    identifier: cws_workload_anomaly_detection
+    weight: 204
   - name: Creating Custom Agent Rules
     url: security/cloud_workload_security/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 204
+    weight: 205
   - name: CWS Events Formats
     url: security/cloud_workload_security/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 205
+    weight: 206
   - name: Misconfigurations
     url: security/cspm/
     parent: csm
@@ -8331,7 +8336,8 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
