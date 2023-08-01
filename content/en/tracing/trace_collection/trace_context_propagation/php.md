@@ -18,7 +18,7 @@ The PHP Tracer supports the following styles:
 
 - Datadog: `Datadog`
 - W3C Trace Context: `tracecontext`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
 - B3 Single Header: `B3 single header`
 
 You can use the following environment variables to configure the PHP tracing library injection and extraction styles. For instance:

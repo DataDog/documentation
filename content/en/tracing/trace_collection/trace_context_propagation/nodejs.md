@@ -17,7 +17,7 @@ You can configure injection and extraction styles for distributed headers.
 The Node.js Tracer supports the following styles:
 
 - Datadog: `Datadog`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
 - W3C Trace Context: `tracecontext`
 - B3 Single Header: `B3 single header`
 

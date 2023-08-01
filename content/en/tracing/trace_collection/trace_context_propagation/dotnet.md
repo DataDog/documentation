@@ -17,10 +17,10 @@ You can configure injection and extraction styles for distributed headers.
 
 The .NET Tracer supports the following styles:
 
-- W3C Trace Context: `tracecontext` (`W3C` is deprecated)
+- W3C Trace Context: `tracecontext` (`W3C` alias is deprecated)
 - Datadog: `Datadog`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
+- B3 Single Header: `B3 single header` (`B3SingleHeader` alias is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:
 
