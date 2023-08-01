@@ -44,12 +44,6 @@ cascade:
         rank: 70
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
@@ -72,7 +66,7 @@ Datadog Security includes [Application Security Management](#application-securit
 
 [Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM includes [Threats][12], [Misconfigurations][11], Identity Risks, and Vulnerabilities. To learn more, check out the dedicated [Guided Tour][13].
+CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
 {{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues" width="100%">}}
 
@@ -96,3 +90,5 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [12]: /security/cloud_workload_security/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
+[15]: /security/identity_risks/
+[16]: /security/infrastructure_vulnerabilities/

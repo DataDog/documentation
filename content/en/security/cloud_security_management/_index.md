@@ -39,8 +39,8 @@ CSM leverages the Datadog Agent and platform-wide cloud integrations and include
 
 - [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
-- **Identity Risks**: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
-- **Vulnerabilities**: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
+- [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
+- [**Vulnerabilities**][9]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
 
 {{< img src="security/csm/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
@@ -95,3 +95,5 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security?product=cws
+[8]: /security/identity_risks/
+[9]: /security/infrastructure_vulnerabilities/

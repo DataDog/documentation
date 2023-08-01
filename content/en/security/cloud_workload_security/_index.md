@@ -42,7 +42,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 Investigate and triage security signals in the [Security Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
-{{< img src="security/cws/threats_explorer.png" alt="CSM Threats Explorer page" width="100%">}}
+{{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 
 ## Get started
 
