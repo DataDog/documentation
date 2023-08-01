@@ -30,14 +30,14 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 ## Setup
 
-Datadog exposes AWS PrivateLink endpoints in **{{< get-region >}}**.
+Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region" >}}**.
 
-However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-region >}}</code> from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
+However, to route traffic to Datadog's PrivateLink offering in {{< region-param key="aws_region" code="true" >}} from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
 
 {{< tabs >}}
 {{% tab "Connect from same region" %}}
 
-1. Connect the AWS Console to region **{{< get-region >}}** and create a VPC endpoint.
+1. Connect the AWS Console to region **{{< region-param key="aws_region" >}}** and create a VPC endpoint.
 
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 
@@ -46,16 +46,16 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
 
-| Datadog                   | PrivateLink service name                                     | Private DNS name                                      |
-|---------------------------|--------------------------------------------------------------|-------------------------------------------------------|
-| Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> | <code>agent-http-intake.logs.{{< site-fqdn >}}</code> |
-| Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  | <code>http-intake.logs.{{< site-fqdn >}}</code>       |
-| API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        | <code>api.{{< site-fqdn >}}</code>                    |
-| Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    | <code>metrics.agent.{{< site-fqdn >}}</code>          |
-| Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> | <code>orchestrator.{{< site-fqdn >}}</code>           |
-| Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    | <code>process.{{< site-fqdn >}}</code>                |
-| Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  | <code>intake.profile.{{< site-fqdn >}}</code>         |
-| Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     | <code>trace.agent.{{< site-fqdn >}}</code>            |
+| Datadog                   | PrivateLink service name                                                          | Private DNS name                                                       |
+|---------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | {{< region-param key="agent_http_endpoint" code="true">}}            |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | {{< region-param key="http_endpoint" code="true">}}                  |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        | <code>api.{{< region-param key="dd_site" >}}</code>                    |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}    | <code>process.{{< region-param key="dd_site" >}}</code>                |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
@@ -108,7 +108,7 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 
 ### Amazon VPC peering
 
-1. Connect the AWS Console to region **{{< get-region >}}** and create a VPC endpoint.
+1. Connect the AWS Console to region **{{< region-param key="aws_region" >}}** and create a VPC endpoint.
 
 {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:80%;" >}}
 
@@ -117,16 +117,16 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
 
-| Datadog                   | PrivateLink service name                                     |
-|---------------------------|--------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> |
-| Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  |
-| API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        |
-| Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    |
-| Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> |
-| Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    |
-| Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  |
-| Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     |
+| Datadog                   | PrivateLink service name                                                          |
+|---------------------------|-----------------------------------------------------------------------------------|
+| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} |
+| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        |
+| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    |
+| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} |
+| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}    |
+| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  |
+| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 
@@ -148,44 +148,44 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 
 ### Amazon Route53
 
-1. Create a [Route53 private hosted zone][3] for each service you have created an AWS PrivateLink endpoint for. Attach the private hosted zone to the VPC in <code>{{< get-region >}}</code>.
+1. Create a [Route53 private hosted zone][3] for each service you have created an AWS PrivateLink endpoint for. Attach the private hosted zone to the VPC in {{< region-param key="aws_region" code="true" >}}.
 
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Create a Route53 private hosted zone" style="width:80%;" >}}
 
 Use the list below to map service and DNS name to different parts of Datadog:
 
-  | Datadog                   | PrivateLink service name                                     | Private DNS name                                      |
-  |---------------------------|--------------------------------------------------------------|-------------------------------------------------------|
-  | Logs (Agent HTTP intake)  | <code>{{< aws-privatelink-logs-agent-service-name >}}</code> | <code>agent-http-intake.logs.{{< site-fqdn >}}</code> |
-  | Logs (User HTTP intake)   | <code>{{< aws-privatelink-logs-user-service-name >}}</code>  | <code>http-intake.logs.{{< site-fqdn >}}</code>       |
-  | API                       | <code>{{< aws-privatelink-api-service-name >}}</code>        | <code>api.{{< site-fqdn >}}</code>                    |
-  | Metrics                   | <code>{{< aws-privatelink-metrics-service-name >}}</code>    | <code>metrics.agent.{{< site-fqdn >}}</code>          |
-  | Containers                | <code>{{< aws-privatelink-containers-service-name >}}</code> | <code>orchestrator.{{< site-fqdn >}}</code>           |
-  | Process                   | <code>{{< aws-privatelink-process-service-name >}}</code>    | <code>process.{{< site-fqdn >}}</code>                |
-  | Profiling                 | <code>{{< aws-privatelink-profiling-service-name >}}</code>  | <code>intake.profile.{{< site-fqdn >}}</code>         |
-  | Traces                    | <code>{{< aws-privatelink-traces-service-name >}}</code>     | <code>trace.agent.{{< site-fqdn >}}</code>            |
+  | Datadog                   | PrivateLink service name                                                          | Private DNS name                                                       |
+  |---------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------|
+  | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
+  | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}  | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code>       |
+  | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}        | <code>api.{{< region-param key="dd_site" >}}</code>                    |
+  | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}    | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
+  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
+  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}    | <code>process.{{< region-param key="dd_site" >}}</code>                |
+  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}  | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}     | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
 
   You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following CLI command: `aws ec2 describe-vpc-endpoint-services --service-names <service-name>`.
 
-  For example, in the case of the Datadog metrics endpoint for <code>{{< get-region >}}</code>:
+  For example, in the case of the Datadog metrics endpoint for {{< region-param key="aws_region" code="true" >}}:
 
 <div class="site-region-container">
   <div class="highlight">
-    <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line">aws ec2 describe-vpc-endpoint-services --service-names {{< aws-privatelink-metrics-service-name >}} | jq '.ServiceDetails[0].PrivateDnsName'</span></code></pre>
+    <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line">aws ec2 describe-vpc-endpoint-services --service-names {{< region-param key="aws_private_link_metrics_service_name" >}} | jq '.ServiceDetails[0].PrivateDnsName'</span></code></pre>
   </div>
 </div>
 
-This returns <code>metrics.agent.{{< site-fqdn >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
+This returns <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
 
-2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **{{< get-region >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
+2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
 
    **Notes**:
       - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]
-      - The Agent sends telemetry to versioned endpoints, for example, <code>[version]-app.agent.{{< site-fqdn >}}</code> which resolves to <code>metrics.agent.{{< site-fqdn >}}</code> through a CNAME alias. Therefore, you only need to set up a private hosted zone for <code>metrics.agent.{{< site-fqdn >}}</code>.
+      - The Agent sends telemetry to versioned endpoints, for example, <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> which resolves to <code>metrics.agent.{{< region-param key="dd_site" >}}</code> through a CNAME alias. Therefore, you only need to set up a private hosted zone for <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
 
-3. Configure VPC peering and routing between the VPC in <code>{{< get-region >}}</code> that contains the Datadog PrivateLink endpoints and the VPC in the region where the Datadog Agents run.
+3. Configure VPC peering and routing between the VPC in {{< region-param key="aws_region" code="true" >}} that contains the Datadog PrivateLink endpoints and the VPC in the region where the Datadog Agents run.
 
 4. If the VPCs are in different AWS accounts, the VPC containing the Datadog Agent must be authorized to associate with the Route53 private hosted zones before continuing. Create a [VPC association authorization][5] for each Route53 private hosted zone using the region and VPC ID of the VPC where the Datadog Agent runs. This option is not available in the AWS Console. It must be configured using the AWS CLI, SDK, or API.
 
@@ -199,13 +199,13 @@ This returns <code>metrics.agent.{{< site-fqdn >}}</code>, the private hosted zo
 
 #### Troubleshooting DNS resolution and connectivity
 
-The DNS names should resolve to IP addresses contained within the CIDR block of the VPC in <code>{{< get-region >}}</code>, and connections to `port 443` should succeed.
+The DNS names should resolve to IP addresses contained within the CIDR block of the VPC in {{< region-param key="aws_region" code="true" >}}, and connections to `port 443` should succeed.
 
 {{< img src="agent/guide/private_link/successful-setup.png" alt="Connection to port 443 should be successful" style="width:80%;" >}}
 
 If DNS is resolving to public IP addresses, then the Route53 zone has **not** been associated with the VPC in the alternate region, or the A record does not exist.
 
-If DNS resolves correctly, but connections to `port 443` are failing, then VPC peering or routing may be misconfigured, or port 443 may not be allowed outbound to the CIDR block of the VPC in <code>{{< get-region >}}</code>.
+If DNS resolves correctly, but connections to `port 443` are failing, then VPC peering or routing may be misconfigured, or port 443 may not be allowed outbound to the CIDR block of the VPC in {{< region-param key="aws_region" code="true" >}}.
 
 The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settings toggled on. Specifically, `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See [Amazon VPC settings][6].
 
