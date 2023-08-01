@@ -180,7 +180,44 @@ CMD ["./mvnw", "spring-boot:run"]
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Add the following instructions and arguments to your Dockerfile.
+[Manually install][1] the Go tracer before you deploy your application. Add the following instructions and arguments to your Dockerfile.
+
+```
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+ENTRYPOINT ["/app/datadog-init"]
+ENV DD_SERVICE=datadog-demo-run-go
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+CMD ["/path/to/your-go-binary"]
+```
+
+#### Explanation
+
+1. Copy the Datadog `serverless-init` into your Docker image.
+   ```
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+   ```
+
+2. Change the entrypoint to wrap your application into the Datadog `serverless-init` process
+   ```
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+
+3. (Optional) Add Datadog tags.
+   ```
+   ENV DD_SERVICE=datadog-demo-run-go
+   ENV DD_ENV=datadog-demo
+   ENV DD_VERSION=1
+   ```
+
+4. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
+   ```
+   CMD ["/path/to/your-go-binary"]
+   ```
+
+#### Orchestrion
+
+**Note**: [Orchestrion][2] is a tool for automatically instrumentation of Go code, which is currently in Private Beta. With Orchestrion, it is possible to instrument your Go applications via Dockerfile instruction. If you are interested in participating in the Beta or providing feedback on Orchestrion, please open a Github issue or reach out to support. 
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -194,41 +231,8 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-**Note**: Instead of using Orchestrion, you can also [manually install the Go tracer][1].
-
-#### Explanation
-
-1. Copy the Datadog `serverless-init` into your Docker image.
-   ```
-   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-   ```
-
-2. Install Orchestrion, which modifies the source code and automatically adds tracing. Do this before you `go build` your app.
-   ```
-   RUN go install github.com/datadog/orchestrion@latest
-   RUN orchestrion -w ./
-   RUN go mod tidy
-   ```
-   If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
-
-3. Change the entrypoint to wrap your application into the Datadog `serverless-init` process
-   ```
-   ENTRYPOINT ["/app/datadog-init"]
-   ```
-
-4. (Optional) Add Datadog tags.
-   ```
-   ENV DD_SERVICE=datadog-demo-run-go
-   ENV DD_ENV=datadog-demo
-   ENV DD_VERSION=1
-   ```
-
-5. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
-   ```
-   CMD ["/path/to/your-go-binary"]
-   ```
-
 [1]: /tracing/trace_collection/library_config/go/ 
+[2]: https://github.com/DataDog/orchestrion
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
