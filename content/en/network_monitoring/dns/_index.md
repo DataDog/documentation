@@ -12,7 +12,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-coredns-with-datadog/'
       tag: 'Blog'
       text: 'Monitor CoreDNS with Datadog'
-    - link: '/network_monitoring/performance/network_page'
+    - link: '/network_monitoring/performance/network_analytics'
       tag: 'Documentation'
       text: 'Explore network data between each source and destination.'
     - link: 'https://www.datadoghq.com/blog/dns-resolution-datadog/'
@@ -113,5 +113,5 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 
 [1]: /network_monitoring/performance/
 [2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /network_monitoring/performance/network_page#table
+[3]: /network_monitoring/performance/network_analytics#table
 [4]: /network_monitoring/performance/network_analytics/#recommended-queries

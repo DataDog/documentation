@@ -451,7 +451,7 @@ For additional information around these capabilities, see [Cloud service enhance
 
   [1]: /integrations/azure
   [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
