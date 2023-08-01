@@ -35,7 +35,7 @@ Datadog exposes AWS PrivateLink endpoints in **{{< get-region >}}**.
 However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-region >}}</code> from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
 
 {{< tabs >}}
-{{% tab "Region-Based" %}}
+{{% tab "Connect from same region" %}}
 
 1. Connect the AWS Console to region **{{< get-region >}}** and create a VPC endpoint.
 
@@ -104,7 +104,7 @@ However, to route traffic to Datadog's PrivateLink offering in <code>{{< get-reg
 [5]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 
-{{% tab "VPC Peering" %}}
+{{% tab "Connect from another region using VPC Peering" %}}
 
 ### Amazon VPC peering
 
