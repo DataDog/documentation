@@ -81,7 +81,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
         runtime:
           enabled: true
     ```
-    **Optional, to enable Runtime Anomaly Detection** add the following field to the `values.yaml` file:
+    **Optional**: To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
@@ -116,7 +116,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
           enabled: true
     ```
 
-    **Optional, to enable Runtime Anomaly Detection** add the following field to the `values.yaml` file:
+    **Optional** To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
@@ -238,7 +238,7 @@ runtime_security_config:
     enabled: true
 ```
 
-**Optional, to enable Runtime Anomaly Detection** add the following field to the `system-probe.yaml` file:
+**Optional**: To enable Runtime Anomaly Detection, add the following to the `system-probe.yaml` file:
 ```bash
 # /etc/datadog-agent/system-probe.yaml file
 runtime_security_config:
