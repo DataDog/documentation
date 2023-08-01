@@ -63,7 +63,7 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: https://app.datadoghq.com/security/compliance/homepage
+[1]: https://app.datadoghq.com/security/csm
 [2]: https://app.datadoghq.com/security/compliance
 [3]: /security/cspm/frameworks_and_benchmarks
 [4]: /security/default_rules/#cat-posture-management-cloud
