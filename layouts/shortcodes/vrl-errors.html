@@ -1,0 +1,25 @@
+{{ $errors := $.Site.Data.reference.errors | default (dict) }}
+{{ range $code, $obj := $errors}}
+  <div class="py-3" style="border-bottom:2px solid #DADADA">
+    <h2>{{ $obj.code}} {{ $obj.title }}</h2>
+    <p>{{ $obj.description | markdownify }}</p>
+    {{ with $obj.rationale }}
+      <strong>Rationale</strong>
+      <p>{{ . | markdownify }}</p>
+    {{ end }}
+    {{ with $obj.resolution }}
+      <strong>Resolution</strong>
+      <p>{{ . | markdownify }}</p>
+    {{ end }}
+    {{ with $obj.examples }}
+      <h3>Examples</h3>
+      {{ range $ex := . }}
+        <p>{{ $ex.title | markdownify }}</p>
+        <strong>VRL program</strong>
+        {{ print "```bash\n" $ex.source "\n```" | markdownify }}
+        <strong>How to fix it</strong>
+        {{ print "```diff\n" $ex.diff "\n```" | markdownify }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

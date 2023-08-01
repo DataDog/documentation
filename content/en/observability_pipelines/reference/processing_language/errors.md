@@ -2,4 +2,4 @@
 title: Errors
 ---
 
-Lorem ipsum
+{{< vrl-errors >}}

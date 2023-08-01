@@ -2,4 +2,4 @@
 title: Functions
 ---
 
-Lorem ipsum
+{{< vrl-functions >}}
