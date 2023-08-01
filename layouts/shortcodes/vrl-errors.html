@@ -13,12 +13,13 @@
     {{ end }}
     {{ with $obj.examples }}
       <h3>Examples</h3>
-      {{ range $ex := . }}
+      {{ range $i, $ex := . }}
+        <h4>Example {{ add $i 1 }}</h4>
         <p>{{ $ex.title | markdownify }}</p>
         <strong>VRL program</strong>
         {{ print "```bash\n" $ex.source "\n```" | markdownify }}
         <strong>How to fix it</strong>
-        {{ print "```diff\n" $ex.diff "\n```" | markdownify }}
+        {{ highlight $ex.diff "diff" }}
       {{ end }}
     {{ end }}
   </div>
