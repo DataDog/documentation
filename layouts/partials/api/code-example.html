@@ -262,15 +262,15 @@
                       {{ partial "accordion-card" (dict "count" $i "item" $item "body" .Content "lang" $lang "operationid" $operationid "version" $version ) }}
                     {{ else }}
                       <div class="card">
-                      <div class="card-header p-0">
-                        <h5 class="m-0">
-                          <button class="btn btn-link collapsed font-bold" disabled>
-                            {{ $item.description }}
-                          </button>
-                        </h5>
+                        <div class="card-header p-0">
+                          <h5 class="m-0">
+                            <button class="btn btn-link collapsed font-bold" disabled>
+                              {{ $item.description }}
+                            </button>
+                          </h5>
+                        </div>
                       </div>
                       {{ highlight .Content $lang.syntax "" }}
-                      </div>
                     {{ end }}
                   {{ end }}
               {{ end }}
@@ -293,9 +293,9 @@
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
             <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
+              {{/*  <div class="code-button-wrapper position-absolute">
                   <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-              </div>
+              </div>  */}}
               <div class="card">
                 <div class="card-header p-0">
                   <h5 class="m-0">

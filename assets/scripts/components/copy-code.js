@@ -2,7 +2,7 @@
 
 function initCopyCode () {
     // Add copy button to fenced codeblocks of specific languages
-    const dataLangs = ['shell']
+    const dataLangs = ['shell', 'java', 'go', 'python', 'ruby', 'typescript', 'java']
     const highlights = document.querySelectorAll("div.highlight")
 
     highlights.forEach(highlightEl => {
