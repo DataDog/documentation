@@ -77,8 +77,8 @@ The following environment variables are supported:
 `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  
 : Timeout (in seconds) of the client communicating with the API server. Defaults to `60` seconds.
 
-`DD_EXPVAR_PORT`                              
-: Port for fetching [expvar][2] public variables from the Datadog Cluster Agent. Defaults to port `5000`.
+`DD_METRICS_PORT`                              
+: Port to expose Datadog Cluster Agent metrics. Defaults to port `5000`.
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   
 : Time waited (in seconds) to process a batch of metrics from multiple autoscalers. Defaults to `10` seconds.

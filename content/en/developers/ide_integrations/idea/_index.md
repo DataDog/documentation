@@ -15,10 +15,6 @@ further_reading:
   text: "Learn about the JetBrains Toolbox."
 ---
 
-{{< callout url="#" btn_hidden="true">}}
-  The Datadog plugin for IntelliJ IDEA and GoLand is in public beta. It is intended for developers who use Datadog products, such as the <a href="https://docs.datadoghq.com/logs/explorer/">Log Explorer</a> and the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>, for their Java and Go services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
-{{< /callout >}}
-
 ## Overview
 
 The Datadog plugin for the IntelliJ Platform (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
