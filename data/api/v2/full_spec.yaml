@@ -2320,7 +2320,8 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the Log search syntax.
+          description: The search query following the CI Visibility Explorer search
+            syntax.
           example: '@ci.provider.name:github AND @ci.status:error'
           type: string
         to:
@@ -2607,7 +2608,8 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the Log search syntax.
+          description: The search query following the CI Visibility Explorer search
+            syntax.
           example: '@test.service:web-ui-tests AND @test.status:fail'
           type: string
         to:
@@ -18300,14 +18302,11 @@ paths:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
         details about how pipeline executions are modeled and what execution types
-        we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
+        we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
         Pipeline events can be submitted with a timestamp that is up to 18 hours in
-        the past.
-
-
-        This API endpoint is in private beta.'
+        the past.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
         content:
@@ -18377,10 +18376,12 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This API endpoint is in private beta. Request access
+        [here](https://docs.google.com/forms/d/e/1FAIpQLSdNejCvhMbdBW5nnGly1yvmYMn2Wpj4JOI0zKIiEx6O6I2dbQ/viewform).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
-      description: The API endpoint to aggregate CI Visibility pipeline events into
-        buckets of computed metrics and timeseries.
+      description: Use this API endpoint to aggregate CI Visibility pipeline events
+        into buckets of computed metrics and timeseries.
       operationId: AggregateCIAppPipelineEvents
       requestBody:
         content:
@@ -18411,7 +18412,7 @@ paths:
   /api/v2/ci/pipelines/events:
     get:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -18493,7 +18494,7 @@ paths:
   /api/v2/ci/pipelines/events/search:
     post:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
