@@ -18,12 +18,9 @@ Supported databases
 Supported Agent versions
 : 7.36.1+
 
-Supported tagging formats
-: [sqlcommenter][2], [marginalia][3]
-
 
 ## Manual tag injection
-Using any database API supporting execution of SQL statements, add a comment in your statement with tags formatted as per the [sqlcommenter][2] or [marginalia][3] formats.
+Using any database API supporting execution of SQL statements, add a comment in your statement with tags formatted as `<YOUR_KEY>:'<YOUR_VALUE>'`. The value must be in quotes.
 
 ```sql
 /*key='val'*/ SELECT * from FOO
@@ -41,7 +38,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Tag SQL statement with key:val
+	// Tag SQL statement with key:'val'
 	rows, err := db.Query("/*key='val'*/ SELECT * from FOO")
 	if err != nil {
 		log.Fatal(err)
@@ -65,6 +62,4 @@ When you select a query, the custom tags are shown on the **Sample Details** pag
 {{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="View custom tags on explain plans.">}}
 
 [1]: /database_monitoring/#getting-started
-[2]: https://google.github.io/sqlcommenter
-[3]: https://github.com/basecamp/marginalia
 [4]: /database_monitoring/query_samples/
