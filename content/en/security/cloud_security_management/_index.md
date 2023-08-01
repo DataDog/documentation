@@ -72,7 +72,7 @@ Improve your organization's score by remediating findings, either by resolving t
 
 Use the [Issues page][7] to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/cws/threats_page.png" alt="CSM Explorer page" width="100%">}}
+{{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 
 ## Next steps
 
