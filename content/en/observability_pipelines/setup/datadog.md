@@ -83,10 +83,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
       -p 8282:8282 \
-      -v pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    `pipeline.yaml` is the sample configuration you downloaded in Step 1.
+    `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
