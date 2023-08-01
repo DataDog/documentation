@@ -5,6 +5,8 @@ further_reading:
 - link: "/security/infrastructure_vulnerability/"
   tag: "Documentation"
   text: "CSM Vulnerabilities"
+aliases:
+  - /security/infrastructure_vulnerability/setup/
 ---
 
 {{< site-region region="gov" >}}
