@@ -81,6 +81,16 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
         runtime:
           enabled: true
     ```
+    **Optional**: To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+   
+    ```yaml
+    # values.yaml file
+    datadog:
+      securityAgent:
+        runtime:
+          security_profile:
+            enabled: true
+    ```
 
 3. Restart the Agent.
 4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
@@ -104,6 +114,17 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
           enabled: true
         cws:
           enabled: true
+    ```
+
+    **Optional** To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+   
+    ```yaml
+    # values.yaml file
+    spec:
+      features:
+        cws:
+          security_profile:
+            enabled: true
     ```
 
     See the [Datadog Operator documentation][2] for additional configuration options.
@@ -215,6 +236,16 @@ runtime_security_config:
 
   remote_configuration:
     ## @param enabled - boolean - optional - default: false
+    enabled: true
+```
+
+**Optional**: To enable Runtime Anomaly Detection, add the following to the `system-probe.yaml` file:
+```bash
+# /etc/datadog-agent/system-probe.yaml file
+runtime_security_config:
+  security_profile:
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable Runtime Anomaly Detection.
     enabled: true
 ```
 
