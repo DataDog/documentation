@@ -1,5 +1,5 @@
 ---
-title: Monitor Browser RUM Data for Electron JS Apps 
+title: Monitor RUM Data for Electron JS Apps 
 kind: guide
 beta: true
 description: Learn how monitor desktop applications that use Electron.js through the browser RUM SDK
@@ -12,7 +12,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-    Electron.js support for browser RUM is in beta.
+    Electron.js support for RUM is in beta.
 </div>
 
 ## Overview
