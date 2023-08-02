@@ -219,7 +219,7 @@ CMD ["/path/to/your-go-binary"]
 
 #### Orchestrion
 
-**Note**: [Orchestrion][2] is a tool for automatically instrumentation of Go code, which is currently in Private Beta. With Orchestrion, it is possible to instrument your Go applications via Dockerfile instruction. If you are interested in participating in the Beta or providing feedback on Orchestrion, please open a Github issue or reach out to support. 
+**Note**: [Orchestrion][2] is a tool for automatically instrumenting Go code, which is currently in Private Beta. With Orchestrion, it is possible to instrument your Go applications through Dockerfile. If you are interested in participating in the Beta or providing feedback on Orchestrion, please open a Github issue or reach out to support. 
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
