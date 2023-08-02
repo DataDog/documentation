@@ -73,13 +73,19 @@ If you have followed all the troubleshooting steps above and want help from [Dat
     datadog-ci lambda flare -f <function-arn> -e <email> -c <case-id> --with-logs
     ```
 
-This command will attach the following info to your Zendesk case:
-1. Basic information about your Lambda function: ARN, runtime, handler, layers, environment variables, and tags.
-2. The installation method you followed, such as _Serverless Framework_ or _AWS CDK_.
-3. Recent CloudWatch logs from your Lambda function.
-4. The project configuration files, such as `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json`, and `webpack.config.json`.
-
 <div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">command documentation</a>.</div>
+
+## Get help manually
+
+If you don't want to use Serverless Flare, include the following information in your ticket:
+
+1. Basic information about your Lambda function:ARN, runtime, handler, layers, environment variables, and tags. Focus on one function first if you have the same issue with many.
+2. If the Lambda function is configured to send data through logs using the Datadog Forwarder Lambda function, include basic information about the Forwarder Lambda function, as well as the subscription filters configured on your Lambda function's log group.
+3. The installation method you followed, such as _Serverless Framework_ or _AWS CDK_.
+4. The alternative installation method you attempted, such as _Datadog CLI_ or _Custom_.
+5. Debugging logs from your own Lambda function.
+6. Debugging logs from the Datadog Forwarder Lambda function (if used).
+7. The project configuration files, with **redacted hardcoded secrets**, such as `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json`, and `webpack.config.json`.
 
 ## Further Reading
 
