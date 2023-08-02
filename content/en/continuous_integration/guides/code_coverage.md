@@ -75,11 +75,30 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
+If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
 
 
 [101]: https://github.com/coverlet-coverage/coverlet
 {{% /tab %}}
+
+{{% tab "JUnit Report Uploads" %}}
+
+### Compatibility
+* `datadog-ci>=2.17.2`
+
+It is also possible to upload a code coverage percentage value when using JUnit Report uploads:
+
+```shell
+datadog-ci junit upload --service <service_name> --report-metrics=test.code_coverage.lines_pct:85 <path>
+```
+
+In this example `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
+
+<div class="alert alert-warning"><strong>Note</strong>: The code coverage report needs to be generated in a different process. The JUnit report uploads will not generate code coverage reports.</div>
+<div class="alert alert-warning"><strong>Note</strong>: The reported metric name must be exactly <code>test.code_coverage.lines_pct</code></div>
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Graph code coverage
@@ -91,7 +110,7 @@ Reported code coverage appears on the **Coverage** tab in a test session details
 
 ### Export your graph
 
-You can export your graph to a [dashboard][2] or a [notebook][3] and create a [monitor][4] based on it. 
+You can export your graph to a [dashboard][2] or a [notebook][3] and create a [monitor][4] based on it.
 
 Click **Export** on the right side:
 

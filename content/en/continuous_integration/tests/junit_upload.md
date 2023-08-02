@@ -232,6 +232,18 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
+`--report-tags`
+: Key-value pairs in the form of `key:value` to be attached to the session instead of to every test.<br/>
+**Default**: (none)<br/>
+**Example**: `team:backend`<br/>
+
+`--report-metrics`
+: Key-value numerical pairs in the form of `key:number` to be attached to the session instead of to every test.<br/>
+**Default**: (none)<br/>
+**Example**: `test.code_coverage.lines_pct:82`<br/>
+
+
+
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
 
@@ -446,6 +458,17 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 
 The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
+
+## Reporting code coverage
+
+It is possible to report code coverage for a given JUnit report via the `--report-metrics` option, by setting the `test.code_coverage.lines_pct` metric:
+
+```shell
+datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
+```
+
+Read more about code coverage in Datadog in [code coverage in Datadog guide][9].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -458,3 +481,4 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: /continuous_integration/guides/code_coverage/?tab=junitreportuploads
