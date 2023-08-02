@@ -83,7 +83,7 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
 12. Click **Next**.
 13. If you've already created the policy, search for it on this page and select it. Otherwise, click **Create Policy**, which opens in a new window, and follow the instructions from the previous section.
-14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to use Datadog's [Cloud Security Posture Management product][5] (CSPM).
+14. Optionally, attach the <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit Policy</a> to the role to use [Cloud Security Management Misconfigurations][5].
 15. Click **Next**.
 16. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description.
 17. Click **Create Role**.
