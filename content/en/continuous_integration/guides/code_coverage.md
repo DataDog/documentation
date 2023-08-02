@@ -15,10 +15,10 @@ further_reading:
 
 ## Report code coverage
 
-Before you can follow this guide, make sure that [Test Visibility][1] is already set up for your language.
+Ensure that [Test Visibility][1] is already set up for your language.
 
 {{< tabs >}}
-{{% tab "Javascript/Typescript" %}}
+{{% tab "JavaScript/TypeScript" %}}
 
 ### Compatibility
 
@@ -29,7 +29,7 @@ Before you can follow this guide, make sure that [Test Visibility][1] is already
 
 When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
 
-To instrument tests with Istanbul, the easiest way is to use [`nyc`][2]:
+To instrument tests with Istanbul, you can use [`nyc`][2]:
 
 ```json
 {
@@ -40,13 +40,13 @@ To instrument tests with Istanbul, the easiest way is to use [`nyc`][2]:
 }
 ```
 
-Then use:
+Then, use:
 
 ```
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
 
-Jest includes istanbul by default, so you can simply do:
+Jest includes Istanbul by default, so you can do:
 
 ```json
 {
@@ -55,6 +55,8 @@ Jest includes istanbul by default, so you can simply do:
   }
 }
 ```
+
+Then, use:
 
 ```
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run test:coverage
@@ -71,34 +73,38 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 ### Compatibility
 * `dd-trace>=2.31.0`.
 
-When code coverage is available, the Datadog Tracer (v2.31.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the env var `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
+If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
 
 
-[1]: https://github.com/coverlet-coverage/coverlet
+[101]: https://github.com/coverlet-coverage/coverlet
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Graph code coverage
 
-The reported code coverage can be seen in the **Coverage** tab in the test session detail:
+Reported code coverage appears on the **Coverage** tab in a test session details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
 
 ### Export your graph
 
-It is possible to export your graph to a [dashboard][2] or a [notebook][3] and even create a [monitor][4] based on it. Click **Export** on the right side:
+You can export your graph to a [dashboard][2] or a [notebook][3] and create a [monitor][4] based on it. 
+
+Click **Export** on the right side:
 
 {{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:100%" >}}
 
 
 ### Add a monitor
 
-Get alerted whenever code coverage for your service drops below a certain threshold:
+Get alerted whenever code coverage for your service drops below a certain threshold using a CI Test Monitor:
 
 {{< img src="/continuous_integration/code_coverage_monitor.png" text="Test sessions code coverage tab" style="width:100%" >}}
+
+For more information, see [CI Monitors][5].
 
 ## Further reading
 
@@ -109,3 +115,4 @@ Get alerted whenever code coverage for your service drops below a certain thresh
 [2]: /dashboards
 [3]: /notebooks
 [4]: /monitors
+[5]: /monitors/types/ci

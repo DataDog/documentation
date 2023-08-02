@@ -69,7 +69,7 @@ Install or update the `dd-trace` command using one of the following ways:
     * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][4]
     * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][5]
 
-- Or by downloading [from the github release page][6].
+- Or by downloading [from the GitHub release page][6].
 
 ## Instrumenting tests
 
@@ -174,13 +174,13 @@ Read more about custom metrics in the [Add Custom Metrics Guide][9].
 
 When code coverage is available, the Datadog Tracer (v2.31.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][10] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the env var `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
+If you are using [Coverlet][10] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
 **Note**: When using Intelligent Test Runner, the tracer's built-in code coverage is enabled by default.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-Read more about code coverage in Datadog in [code coverage in Datadog guide][11].
+Read more about code coverage in Datadog in the [Code Coverage guide][11].
 
 ### Instrumenting BenchmarkDotNet tests
 
