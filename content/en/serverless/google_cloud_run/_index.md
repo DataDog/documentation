@@ -183,7 +183,7 @@ CMD ["./mvnw", "spring-boot:run"]
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-[Manually install][1] the Go tracer before you deploy your application. Add the following instructions and arguments to your Dockerfile.
+[Manually install][1] the Go tracer before you deploy your application. Add the following instructions and arguments to your Dockerfile:
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
