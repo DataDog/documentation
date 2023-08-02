@@ -22,5 +22,5 @@ Click on the buttons below to filter by different parts of Datadog Security. OOT
 [1]: /security/detection_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cspm/
-[4]: /security/cloud_workload_security/
+[4]: /security/threats/
 [5]: /security/application_security/

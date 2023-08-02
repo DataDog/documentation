@@ -18,7 +18,7 @@ further_reading:
   - link: "/security/cspm/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
-  - link: "/security/cloud_workload_security/setup"
+  - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://securitylabs.datadoghq.com/"
@@ -83,11 +83,10 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [5]: /logs/
 [6]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
 [7]: /security/cspm/
-[8]: /security/cloud_workload_security/
 [9]: https://app.datadoghq.com/security/configuration
 [10]: /security/cloud_security_management/
 [11]: /security/cspm/
-[12]: /security/cloud_workload_security/
+[12]: /security/threats/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/identity_risks/

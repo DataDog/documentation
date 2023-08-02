@@ -111,5 +111,5 @@ Click the **Timeline** tab to view a chronological history of the finding. Hover
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
-[3]: /security/cloud_workload_security/
+[3]: /security/threats/
 [4]: /security/default_rules/cis-aws-1.5.0-2.1.5/

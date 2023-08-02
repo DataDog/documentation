@@ -48,20 +48,20 @@ Investigate and triage security signals in the [Security Signals Explorer][8]. V
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cloud_workload_security/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Threats{{< /nextlink >}}
-  {{< nextlink href="/security/cloud_workload_security/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/cloud_workload_security/setup/?tab=kubernetes#requirements
+[1]: /security/threats/setup/?tab=kuberneteshelm#prerequisites
 [2]: /agent/
 [3]: /security/notifications/
 [4]: /security/notifications/#notification-channels
 [5]: /security/notifications/#detection-rule-notifications
-[6]: /security/cloud_workload_security/agent_expressions
-[7]: /security/cloud_workload_security/setup
+[6]: /security/threats/agent_expressions
+[7]: /security/threats/setup
 [8]: /security/explorer
 [9]: /network_monitoring/performance/
-[10]: /security/cloud_workload_security/security_profiles
+[10]: /security/threats/security_profiles

@@ -5,13 +5,13 @@ aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
   - /security/cloud_workload_security/workload_security_rules
 further_reading:
-- link: "/security/cloud_workload_security/setup"
+- link: "/security/threats/setup"
   tag: "Documentation"
   text: "Setting Up CSM Threats"
-- link: "/security/cloud_workload_security/agent_expressions"
+- link: "/security/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
-- link: "security/cloud_workload_security/backend"
+- link: "security/threats/backend"
   tag: "Documentation"
   text: "CSM Threats Events"
 - link: "/security/notifications/variables/"
@@ -173,10 +173,10 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/#cat-workload-security
-[2]: /security/cloud_workload_security/agent_expressions
+[2]: /security/threats/agent_expressions
 [3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
-[7]: /security/cloud_workload_security/setup#remote-configuration
+[7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
 [8]: /security/explorer

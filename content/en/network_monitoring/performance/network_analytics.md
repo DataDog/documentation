@@ -322,7 +322,7 @@ The **Security** tab highlights potential network threats and findings detected 
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
-[6]: /security/cloud_workload_security/
+[6]: /security/threats/
 [7]: /security/cspm/
 [8]: /security/detection_rules/
 [9]: /network_monitoring/performance/setup/#enhanced-resolution

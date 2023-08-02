@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /security/cloud_workload_security/security_profiles
 further_reading:
-  - link: "/security/cloud_workload_security/setup"
+  - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Setting Up CSM Threats"
-  - link: "/security/cloud_workload_security/workload_security_rules"
+  - link: "/security/threats/workload_security_rules"
     tag: "Documentation"
     text: "Managing CSM Threats Detection Rules"
 ---
@@ -87,7 +87,6 @@ To accept the suggestion, click **Suppress Signals**, then click **Add Suppressi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_workload_security/setup
+[1]: /security/threats/setup
 [2]: https://app.datadoghq.com/security/workload/profiles
 [3]: /security/explorer
-[4]: /security/cloud_workload_security/setup
