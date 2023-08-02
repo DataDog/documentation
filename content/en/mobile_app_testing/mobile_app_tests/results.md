@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="us3,us5,gov,eu,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported.</div>
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
 {{< /site-region >}}
 
 {{< site-region region="us" >}}
