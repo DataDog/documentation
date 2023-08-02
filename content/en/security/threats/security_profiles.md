@@ -1,6 +1,8 @@
 ---
 title: Workload Security Profiles
 kind: documentation
+aliases:
+  - /security/cloud_workload_security/security_profiles
 further_reading:
   - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"

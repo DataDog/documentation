@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/
   - /security/cspm/#glossary
-  - /security/cspm
+  - /security/cspm/
 algolia:
   tags: ['cspm']
 ---

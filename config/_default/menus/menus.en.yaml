@@ -2921,37 +2921,37 @@ main:
     identifier: csm
     weight: 181500
   - name: Threats
-    url: security/cloud_workload_security/
+    url: security/threats/
     parent: csm
     identifier: cloud_workload_security
     weight: 1
   - name: Setup
-    url: security/cloud_workload_security/setup
+    url: security/threats/setup
     parent: cloud_workload_security
     identifier: cws_setup
     weight: 201
   - name: Managing Detection Rules
-    url: security/cloud_workload_security/workload_security_rules
+    url: security/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
   - name: Security Profiles
-    url: security/cloud_workload_security/security_profiles
+    url: security/threats/security_profiles
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
     weight: 203
   - name: Runtime Anomaly Detection
-    url: security/cloud_workload_security/runtime_anomaly_detection
+    url: security/threats/runtime_anomaly_detection
     parent: cloud_workload_security
     identifier: cws_workload_anomaly_detection
     weight: 204
   - name: Creating Custom Agent Rules
-    url: security/cloud_workload_security/agent_expressions
+    url: security/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
     weight: 205
   - name: CWS Events Formats
-    url: security/cloud_workload_security/backend
+    url: security/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 206

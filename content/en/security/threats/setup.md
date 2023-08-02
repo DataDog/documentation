@@ -5,6 +5,7 @@ description: "Follow the setup and installation instructions to get started with
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
+  - security/cloud_workload_security/setup
 further_reading:
 - link: "/getting_started/cloud_security_management"
   tag: "Documentation"

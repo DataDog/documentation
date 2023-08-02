@@ -1,6 +1,8 @@
 ---
 title: Runtime Anomaly Detection
 kind: documentation
+aliases:
+  - /security/cloud_workload_security/runtime_anomaly_detection
 further_reading:
 - link: "/security/cloud_workload_security/setup"
   tag: "Documentation"
