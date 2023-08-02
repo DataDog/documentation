@@ -151,4 +151,4 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
   ```
 
   [1]: /containers/cluster_agent/
-  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
+  [2]: /containers/cluster_agent/setup/?tab=daemonset
