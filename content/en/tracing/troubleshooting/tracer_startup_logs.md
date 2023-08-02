@@ -49,6 +49,8 @@ Log files are saved in the following directories by default. Use the `DD_TRACE_L
 
 **Note:** On Linux, you must create the logs directory before you enable debug mode.
 
+Starting on version `2.19.0` the `DD_TRACE_LOGFILE_RETENTION_DAYS` configuration was introduced, during the tracer's startup it looks at the current logging directory then deletes log files equal to and older than the given amount of days, the default value is **31**, use said configuration to change this timeframe.
+
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
 - `dotnet-tracer-native.log` contains the diagnostics logs, if any are generated.
