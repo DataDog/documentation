@@ -35,7 +35,13 @@ The Resource Catalog is useful for:
 
 ## Browse the Resource Catalog
 
-On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown on two views: List and Map.
+On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown in the ownership and security tabs, with two views: List and Map.
+
+**Ownership Tab**:
+The ownership tab allows you to understand the resource ownership information such as team, service, on-call, and contact. This page allows users to proactively identify lack of ownership information and resolve it prior to an incident occurring. 
+
+**Security Tab**:
+The security tab allows you to gain a clear understanding of resources with security risk. By viewing findings and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
 
 ### List view
 
@@ -53,7 +59,7 @@ If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, th
 
 #### Findings
 
-Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Posture Management.
+Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Management Misconfigurations.
 
 #### Threats
 
@@ -65,7 +71,7 @@ Clicking on a resource opens a side panel with details including:
 
 - **Resource information** such as the resource type, name, account, and tags associated with the resource.
 - **Security findings** including the security rules and latest status.
-- **Real-time threat signals** detected on the asset by Cloud Workload Security.
+- **Real-time threat signals** detected on the asset by Cloud Security Management Threats.
 - **Resource definition** in JSON showing the full configuration of the asset.
 - An interactive asset relationship graph displaying the assets connected to the resource.
 

@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The steps required for setting up Database Monitoring in Datadog varies based on the type of database you're using (Postgres, MySQL, SQL Server), and the host provider (self-hosted, AWS, Google Cloud SQL, or Azure). No matter which database or host provider you use, to be able to use Database Monitoring for your databases, you need the following:
+The steps required for setting up Database Monitoring in Datadog vary based on the type of database you're using (Postgres, MySQL, SQL Server), and the host provider (self-hosted, AWS, Google Cloud SQL, or Azure). No matter which database or host provider you use, to be able to use Database Monitoring for your databases, you need the following:
 
 * [A Datadog Agent][1]
 * Host for your Datadog Agent

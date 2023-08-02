@@ -9,6 +9,9 @@ further_reading:
 - link: /integrations/github
   tag: ドキュメント
   text: GitHub インテグレーションについて
+- link: https://www.datadoghq.com/blog/service-catalog-backstage-yaml/
+  tag: ブログ
+  text: Backstage の YAML ファイルを Datadog にインポート
 kind: documentation
 title: サービスカタログの設定
 ---
@@ -37,7 +40,7 @@ Datadog サービスカタログは、デフォルトで APM、USM、RUM から�
 
 ## サービス定義の GitHub への保存と編集
 
-[GitHub インテグレーション][6]を構成し、Service Catalog でサービスの定義を表示する場所から、GitHub で保存・編集可能な場所に直接リンクするようにします。
+[GitHub インテグレーション][6]を構成し、サービスカタログでサービスの定義を表示する場所から、GitHub で保存・編集可能な場所に直接リンクするようにします。
 
 GitHub インテグレーションをインストールするには、[インテグレーションタイル][7]に移動し、**Repo Configuration** タブにある **Link GitHub Account** をクリックします。
 
@@ -49,7 +52,7 @@ Datadog は各リポジトリのルートにある `service.datadog.yaml` ファ
 
 サービス定義に GitHub インテグレーションを設定すると、サービスの **Definition** タブに **Edit in Github** ボタンが表示され、GitHub にリンクして変更をコミットすることができるようになります。
 
-{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="Service Catalog のサービスの Definition タブに Edit in Github ボタンが表示されるようになった" style="width:90%;" >}}
+{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="サービスカタログのサービスの Definition タブに Edit in Github ボタンが表示されるようになった" style="width:90%;" >}}
 
 リポジトリの YAML ファイルを更新すると、その変更はサービスカタログに伝搬されます。
 
@@ -67,6 +70,28 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 
 この GitHub Action を使用すると、Datadog にこの情報を送信するタイミングを完全に制御しながら、GitHub Action を使用してサービスカタログにサービスを登録し、組織独自のその他のコンプライアンスチェックを実装することができます。
 
+
+## Backstage からのデータのインポート
+
+{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="バックステージのメタデータ、リンク、定義をハイライトするサービスパネル" style="width:90%;" >}}
+
+Backstage に登録されているデータやサービスをすでに使用している場合、これらのサービスを Datadog に直接インポートすることができます。
+
+API や Terraform を使う場合は、リクエストの YAML を置き換えてください。
+
+GitHub インテグレーションを使用する場合は、Backstage YAML を Datadog の読み取り権限を持つリポジトリに直接保存します。Datadog はリポジトリの root フォルダにある [`catalog-info.yaml`][15] という名前のファイルをスキャンします。
+
+インポートの際は、以下の処理が行われます。
+- Datadog は Backstage YAML 内の `kind:component` のみをサービスとして認識します。
+- `name` は `DD-SERVICE` に変換されます
+- `namespace` の値がカスタムタグとマッピングされます
+- `lifecycle` は `lifecycle` にマッピングされます
+- `owner` は `team` にマッピングされます
+- `metadata.links` は `links` にマッピングされます
+- `metadata.description` は `description` にマッピングされます
+- その他の `specs` の値はカスタムタグにマッピングされます
+
+
 ## 他の Datadog テレメトリーデータで報告されているサービスを発見する
 
 インフラストラクチャーメトリクスなどの既存の Datadog テレメトリーから他のサービスを検出するには、ページ上部の [**Setup &amp; Config** タブ][3]に移動して、**Import Entries** タブをクリックしてください。`DD_SERVICE` [タグ][5]を含む他の Datadog テレメトリーからサービスをインポートすることができます。
@@ -79,7 +104,7 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 
 {{< img src="tracing/service_catalog/clear_imported_services.png" alt="サービスカタログのセットアップと構成セクションで、以前にインポートしたサービスの削除を確認します" style="width:90%;" >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -97,3 +122,4 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
+[15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
