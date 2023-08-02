@@ -29,7 +29,17 @@ Only sessions that are sampled are available in RUM. For example, if the samplin
 
 The random sampling is by session, not by user.
 
-In terms of setting an ideal sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweak it based on the data you need.
+### The effect of sampling on data and metrics that are available in RUM
+RUM metrics (such as Core Web Vitals and usage numbers) are calculated based on sessions that are sampled. For example, if the sampling rate is set to capture 60% of sessions, then the Core Web Vitals and total number of sessions are calculated based on 60% of those sessions. 
+
+### Recommended sampling rate
+In terms of setting an ideal sampling rate, it depends on the amount of traffic you see and the data you are looking for. Datadog recommends starting with a sampling rate you are comfortable with based on your budget and estimated traffic, then tweak it based on the data you need. Learn more about how [sessions are defined][9] in RUM.
+
+### Sampling based on specific attributes
+Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is not supported. If this is a feature request that is critical for your business needs, create a ticket with [Datadog Support][8].
+
+### Changing the sampling rate in the Datadog RUM UI
+Changing the sampling rate in the Datadog RUM UI is not supported. If this is a feature request that is critical for your business needs, create a ticket with [Datadog Support][8].
 
 ### Adjusting sampling during live outages
 
@@ -50,3 +60,5 @@ RUM ensures availability of data when user devices are offline. In case of low-n
 [5]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
 [6]: /real_user_monitoring/flutter/advanced_configuration/#sample-rum-sessions
 [7]: /real_user_monitoring/roku/#initialize-the-library
+[8]: /help
+[9]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions
