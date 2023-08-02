@@ -47,7 +47,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [mysql2][7]          |           | {{< X >}} |                                        |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
 |                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
-| **.NET** [dd-trace-dotnet][15] >= 2.26.0 |                      |           |           |                                        |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 | [CommandType.StoredProcedure][25] are unsupported.|           |           |                                        |
 |                                          | [Npgsql][16]         | {{< X >}} |           |                                        |
 |                                          | [MySql.Data][17]     |           | {{< X >}} |                                        |
 |                                          | [MySqlConnector][18] |           | {{< X >}} |                                        |
@@ -415,3 +415,4 @@ View historical performance of similar queries to those executed in your trace, 
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
 [24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
