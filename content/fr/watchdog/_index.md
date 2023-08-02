@@ -32,7 +32,7 @@ kind: Documentation
 title: Datadog WatchdogTM
 ---
 
-{{< img src="watchdog/watchdog.png" alt="Page Watchdog Alerts affichant deux alertes critiques en cours liées aux taux d'erreur" >}}
+{{< img src="watchdog/watchdog.png" alt="La page d'alertes de Watchdog, avec une alerte d'anomalie en cours dans des logs d'erreur, une alerte d'anomalie résolue dans des logs d'erreur et une alerte de taux d'erreur résolue via une analyse des causes d'origine" >}}
 
 ## Présentation
 
