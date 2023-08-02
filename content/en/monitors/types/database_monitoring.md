@@ -14,7 +14,7 @@ Some examples of these event types include when queries are waiting on the resol
 
 To create a new DBM monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Database Monitoring**][2] in the UI.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 DBM monitors per account. If you are encountering this limit, consider using <a href="/monitors/types/database_monitoring/#creating-monitors-from-scratch">simple alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 DBM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
 ## Define the search query
 
@@ -48,7 +48,7 @@ Note: The monitor you configure alerts over the **unique value count** of the fa
 
 ### Set alert conditions
 
-1. Set an alert to trigger whenever a metric is `above`, `above or equal to`, `below`, or `below or equal to` a threshold that you define. For help configuring the options in this view, see [Configure Monitors][5].
+1. Set an alert to trigger whenever a query result is `above`, `above or equal to`, `below`, or `below or equal to` a threshold that you define. For help configuring the options in this view, see [Configure Monitors][5].
 2. Determine your desired behavior for when data is missing for 5 minutes, for example, `evaluate as zero`, `show NO DATA`, `show NO DATA and notify`, or `show OK`.
 
 #### No data and below alerts
