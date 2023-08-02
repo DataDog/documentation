@@ -128,7 +128,11 @@ For more information, see the [Azure integration documentation][4].
 
 1. Click **Add Another Role**, and select the **Storage Object Viewer** role and **Save**.
 
-{{< img src="path/to/your/image-name-here.png" alt="Google Cloud console showing the configuration to select Storage Object Viewer" style="width:100%;" >}}
+{{< img src="integrations/guide/reference-tables/gcp_principal_storageObjectViewer.png" alt="Google Cloud console showing the configuration to select Storage Object Viewer" style="width:100%;" >}}
+
+After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
+
+{{< img src="static/images/integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
 
 [1]: /integrations/google_cloud_platform/#setup
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
