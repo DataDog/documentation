@@ -58,9 +58,9 @@ Datadog supports associating the following resources with team handles:
 - [Dashboards][2]
 - [Incidents][3]
 - [Monitors][4]
-- [Resource Catalog][14]
-- [Service Catalog][5]
-- [Service Level Objectives][6]
+- [Resource Catalog][5]
+- [Service Catalog][6]
+- [Service Level Objectives][7]
 - Synthetic Tests, Global Variables, Private Locations
 
 ## Filter
@@ -78,14 +78,14 @@ The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][7]         | Team handle                                                                      |
-| [Resource Catalog][14]   | Team handle                                                                      |
-| [Service Catalog][8]    | Team handle                                                                      |
-| [Incidents][9]          | Team handle                                                                      |
-| [Monitors][10]          | Team handle                                                                      |
-| [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
-| [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
-| [Service Level Objectives][13] | Team handle                                                                 |
+| [Dashboards][8]         | Team handle                                                                      |
+| [Resource Catalog][5]   | Team handle                                                                      |
+| [Service Catalog][9]    | Team handle                                                                      |
+| [Incidents][10]          | Team handle                                                                      |
+| [Monitors][11]          | Team handle                                                                      |
+| [APM Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][9]) |
+| [Logs Error Tracking][13] | Service owned by teams (determined by ownership inside the [Service Catalog][9]) |
+| [Service Level Objectives][14] | Team handle                                                                 |
 | [Data Streams Monitoring][15]  | Team handle                                                                 |
 | [Synthetic Tests][16]          | Team handle                                                                 |
 
@@ -108,6 +108,10 @@ Under the team's settings, specify which users can modify the team membership. T
 
 Users with the `user_access_manage` permission can set default rules on who can add or remove members, or edit team details. Set default rules with the **Default Settings** button on the team directory page. Override these policies for an individual team on the team details panel.
 
+### SAML attribute mapping
+
+To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][17].
+
 ### Delegate team management
 
 For an open membership model, configure your default team settings so **Anyone in the organization** can add or remove members. Assign the `teams_manage` permission to the appropriate roles to let anyone create teams or edit team details.
@@ -120,15 +124,16 @@ To enforce a strict membership model, configure your default team settings so **
 [2]: /dashboards/#edit-details
 [3]: /service_management/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[5]: /tracing/service_catalog/setup#add-service-definition-metadata
-[6]: /service_management/service_level_objectives/#slo-tags
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: https://app.datadoghq.com/services
-[9]: https://app.datadoghq.com/incidents
-[10]: https://app.datadoghq.com/monitors/manage
-[11]: https://app.datadoghq.com/apm/error-tracking
-[12]: https://app.datadoghq.com/logs/error-tracking
-[13]: https://app.datadoghq.com/slo/manage
-[14]: /security/misconfigurations/resource_catalog
+[5]: /security/misconfigurations/resource_catalog
+[6]: /tracing/service_catalog/setup#add-service-definition-metadata
+[7]: /service_management/service_level_objectives/#slo-tags
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/services
+[10]: https://app.datadoghq.com/incidents
+[11]: https://app.datadoghq.com/monitors/manage
+[12]: https://app.datadoghq.com/apm/error-tracking
+[13]: https://app.datadoghq.com/logs/error-tracking
+[14]: https://app.datadoghq.com/slo/manage
 [15]: https://app.datadoghq.com/data-streams
 [16]: https://app.datadoghq.com/synthetics
+[17]: /account_management/saml/mapping/#map-saml-attributes-to-teams
