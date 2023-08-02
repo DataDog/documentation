@@ -16872,6 +16872,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         timeseries:
           description: List of usage data reported for each requested hour.
           items:
