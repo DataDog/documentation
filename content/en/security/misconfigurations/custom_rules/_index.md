@@ -10,7 +10,7 @@ further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
-- link: "security/cspm/frameworks_and_benchmarks"
+- link: "security/misconfigurations/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true
@@ -87,6 +87,6 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
 [4]: /security/cloud_security_management/guide/writing_rego_rules/
-[5]: /security/cspm/frameworks_and_benchmarks/#set-notification-targets-for-detection-rules
+[5]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/

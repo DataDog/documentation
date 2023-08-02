@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
   text: "Cloud Security Management"
-- link: "/security/cspm/custom_rules/schema/"
+- link: "/security/misconfigurations/custom_rules/schema/"
   tag: "Documentation"
   text: "CSM Misconfigurations cloud resources schema"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
@@ -51,24 +51,24 @@ This guide walks you through best practices for getting your team up and running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/
-[2]: /security/cspm/
+[2]: /security/misconfigurations/
 [3]: /security/threats/
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /security/threats/setup/?tab=kuberneteshelm#configure-the-csm-threats-agent
 [6]: /security/threats/setup/?tab=docker#configure-the-csm-threats-agent
 [7]: /security/threats/setup/?tab=hostothers#configure-the-csm-threats-agent
-[8]: /security/cspm/setup?tab=kubernetes
-[9]: /security/cspm/setup?tab=docker
-[10]: /security/cspm/setup?tab=aws
-[11]: /security/cspm/setup?tab=azure
-[12]: /security/cspm/setup?tab=gcp
+[8]: /security/misconfigurations/setup?tab=kubernetes
+[9]: /security/misconfigurations/setup?tab=docker
+[10]: /security/misconfigurations/setup?tab=aws
+[11]: /security/misconfigurations/setup?tab=azure
+[12]: /security/misconfigurations/setup?tab=googlecloud
 [13]: https://app.datadoghq.com/security/csm
 [14]: /security/default_rules/#cat-cloud-security-management
-[15]: /security/cspm/signals_explorer/
-[16]: /security/cspm/findings/
+[15]: /security/misconfigurations/signals_explorer/
+[16]: /security/misconfigurations/findings/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
-[19]: /security/cspm/custom_rules
+[19]: /security/misconfigurations/custom_rules
 [20]: /security/threats/agent_expressions
-[21]: /security/cspm/frameworks_and_benchmarks
+[21]: /security/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview

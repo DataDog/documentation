@@ -117,7 +117,7 @@ The rule deprecation process is as follows:
 [1]: /security/default_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cloud_siem/log_detection_rules/
-[4]: /security/cspm/
+[4]: /security/misconfigurations/
 [5]: /security/threats/
 [6]: /security/application_security/
 [7]: /tracing/

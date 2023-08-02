@@ -5,7 +5,7 @@ aliases:
   - /security_platform/cspm/resource_catalog
   - /security/cspm/resource_catalog
 further_reading:
-- link: "/security/cspm/custom_rules/schema/"
+- link: "/security/misconfigurations/custom_rules/schema/"
   tag: "Documentation"
   text: "Cloud Resource Schema"
 ---

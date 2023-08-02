@@ -65,7 +65,7 @@ At the top of the side panel, you can configure the rule or send a notification 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cspm/findings/
+[1]: /security/misconfigurations/findings/
 [2]: /security/cloud_siem/
 [3]: /security/threats/
 [4]: /security/explorer

@@ -15,7 +15,7 @@ further_reading:
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
-  - link: "/security/cspm/setup"
+  - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
@@ -82,10 +82,9 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [4]: /security/cloud_siem
 [5]: /logs/
 [6]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
-[7]: /security/cspm/
 [9]: https://app.datadoghq.com/security/configuration
 [10]: /security/cloud_security_management/
-[11]: /security/cspm/
+[11]: /security/misconfigurations/
 [12]: /security/threats/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/

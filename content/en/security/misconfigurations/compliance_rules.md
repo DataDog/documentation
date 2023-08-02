@@ -7,13 +7,13 @@ aliases:
   - /security/cspm/detection_rules
   - /security/cspm/compliance_rules
 further_reading:
-  - link: "/security/cspm/setup"
+  - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: Getting Started with CSM Misconfigurations
-  - link: "/security/cspm/custom_rules/"
+  - link: "/security/misconfigurations/custom_rules/"
     tag: "Documentation"
     text: Custom Rules
-  - link: "/security/cspm/frameworks_and_benchmarks/"
+  - link: "/security/misconfigurations/frameworks_and_benchmarks/"
     tag: "Documentation"
     text: Findings Reports
 ---
@@ -89,7 +89,7 @@ The rule deprecation process is as follows:
 [1]: /security/default_rules/#cat-posture-management-cloud
 [2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
-[4]: /security/cspm/frameworks_and_benchmarks
+[4]: /security/misconfigurations/frameworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
 [6]: https://docs.datadoghq.com/security_monitoring/default_rules/cis-docker-1.2.0-3.22/
 [7]: /security/notifications/
@@ -100,7 +100,7 @@ The rule deprecation process is as follows:
 [17]: /integrations/servicenow/
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
-[20]: /security/cspm/custom_rules/
+[20]: /security/misconfigurations/custom_rules/
 [21]: /security/notifications/rules/
-[22]: /security/cspm/signals_explorer/
+[22]: /security/misconfigurations/signals_explorer/
 [23]: /security/detection_rules/#rule-and-generated-signal-options

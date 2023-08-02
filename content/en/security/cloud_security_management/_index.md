@@ -7,7 +7,7 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security/cspm/setup"
+  - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
@@ -89,7 +89,7 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats/
-[2]: /security/cspm/
+[2]: /security/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration
 [4]: https://app.datadoghq.com/security/
 [5]: /glossary/#posture-score

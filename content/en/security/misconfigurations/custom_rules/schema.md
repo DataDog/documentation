@@ -21,4 +21,4 @@ CSM Misconfigurations is not available in the selected site.
 
 When you [write custom rules for CSM Misconfigurations][1], you specify the resource types that are referenced by the rules.
 
-[1]: /security/cspm/custom_rules/
+[1]: /security/misconfigurations/custom_rules/

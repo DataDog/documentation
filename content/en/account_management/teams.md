@@ -129,6 +129,6 @@ To enforce a strict membership model, configure your default team settings so **
 [11]: https://app.datadoghq.com/apm/error-tracking
 [12]: https://app.datadoghq.com/logs/error-tracking
 [13]: https://app.datadoghq.com/slo/manage
-[14]: /security/cspm/resource_catalog
+[14]: /security/misconfigurations/resource_catalog
 [15]: https://app.datadoghq.com/data-streams
 [16]: https://app.datadoghq.com/synthetics
