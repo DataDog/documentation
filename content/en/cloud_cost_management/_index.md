@@ -42,7 +42,7 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup) and select the AWS account from the dropdown menu to pull costs from.
+Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup) and select an AWS account from the dropdown menu to pull costs from.
 
 **Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 
