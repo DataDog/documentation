@@ -200,7 +200,7 @@ CMD ["/path/to/your-go-binary"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Change the entrypoint to wrap your application into the Datadog `serverless-init` process
+2. Change the entrypoint to wrap your application into the Datadog `serverless-init` process.
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
