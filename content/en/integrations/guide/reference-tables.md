@@ -108,7 +108,6 @@ For more information, see the [Azure integration documentation][4].
 
 **Note**: The upload from cloud object storage supports files up to 200MB.
 
-
 [1]: https://app.datadoghq.com/integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
@@ -133,6 +132,8 @@ For more information, see the [Azure integration documentation][4].
 After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
 
 {{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
+
+**Note**: The upload from cloud object storage supports files up to 200MB.
 
 [1]: /integrations/google_cloud_platform/#setup
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
