@@ -59,7 +59,7 @@ Ces tutoriels vous expliquent comment configurer un exemple d'application dotée
 {{< whatsnext desc="Configuration de l'échantillonnage de l'ingestion" >}}
     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Contrôler le volume d'ingestion de spans avec les mécanismes d'ingestion{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Échantillonnage de l'ingestion avec OpenTelemetry{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Scénarios d'utilisation de l'échantillonnage de l'ingestion{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Scénarios d'utilisation de l'échantillonnage de l'ingestion{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
