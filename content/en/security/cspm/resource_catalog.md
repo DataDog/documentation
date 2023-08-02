@@ -35,7 +35,13 @@ The Resource Catalog is useful for:
 
 ## Browse the Resource Catalog
 
-On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown on two views: List and Map.
+On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown in the ownership and security tabs, with two views: List and Map.
+
+**Ownership Tab**:
+The ownership tab allows you to understand the resource ownership information such as team, service, on-call, and contact. This page allows users to proactively identify lack of ownership information and resolve it prior to an incident occurring. 
+
+**Security Tab**:
+The security tab allows you to gain a clear understanding of resources with security risk. By viewing findings and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
 
 ### List view
 
