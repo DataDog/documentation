@@ -62,8 +62,8 @@ If you have followed all the troubleshooting steps above and want help from [Dat
 
 {{< tabs >}}
 {{% tab "Serverless Flare" %}}
-1. Create a [Zendesk ticket](https://help.datadoghq.com/hc/en-us/requests/new)
-2. Download the latest version of the [Datadog CLI](https://github.com/DataDog/datadog-ci/#how-to-install-the-cli)
+1. Create a [Zendesk ticket](https://help.datadoghq.com/hc/en-us/requests/new).
+2. Download the latest version of the [Datadog CLI](https://github.com/DataDog/datadog-ci/#how-to-install-the-cli).
 
     ```sh
     npm install -g @datadog/datadog-ci
@@ -72,7 +72,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
 3. Use the serverless flare command from the root of your project directory to automatically collect and submit data about your Lambda function to Datadog Support.
 
     ```sh
-    datadog-ci lambda flare -f <function-arn> -e <email> -c <case-id> --with-logs
+    datadog-ci lambda flare -f <function_arn> -e <email> -c <case_id> --with-logs
     ```
 
 <div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">command documentation</a>.</div>
