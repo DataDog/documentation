@@ -3,7 +3,6 @@ title: Trace Queries
 kind: documentation
 description: "Trace Queries"
 is_beta: true
-private: true
 further_reading:
 - link: 'tracing/trace_explorer'
   tag: 'Documentation'
@@ -14,7 +13,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-Trace Queries is in private beta. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
+Trace Queries is in beta. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
 {{< /beta-callout >}}
 
 ## Overview
