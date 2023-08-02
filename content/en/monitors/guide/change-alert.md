@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Metric monitors are one of the most commonly used type of monitor. Monitors that use a change alert detection method can be a bit confusing given their nature and additional options. Use this guide to learn how change alert monitors work and how to troubleshoot change alert evaluations.
+Metric monitors are one of the most commonly used type of monitor. This guide clarifies the change alert detection method's behavior and its additional options. Learn how change alert monitors work and how to troubleshoot change alert evaluations.
 
 ## What are change alert monitors?
 Here is a breakdown of how monitors with the change detection method work: 
@@ -53,33 +53,33 @@ In both cases, `Change`, and `% Change` can be either positive or negative.
 
 ## Troubleshooting a change alert evaluation
 
-Change alerts can be mistaken to be false positives. You can reconstruct the metric queries with Notebooks to verify the results of your monitor evaluation. 
+To verify the results of your change alert evaluation, reconstruct the metric queries with a Notebook. 
 Take this change alert monitor with the following settings. 
 
-{{< img src="monitors/guide/change-alert/example_monitor_config.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="monitors/guide/change-alert/example_monitor_config.png" alt="The create monitor page with a change alert selected, evaluating the percent change of the average of the metric system.load.1 over the last 5 minutes compared to the last 30 minutes" style="width:100%;" >}}
 
 Monitor Query:
-```pct_change(avg(last_5m),last_30m):<QUERY> > -50```
+```pct_change(avg(last_5m),last_30m):<METRIC> > -50```
 
 This is a break down of the query with the following conditions:
 1. Aggregation of **avg**.
 2. Uses **% change**.
 3. Evaluation window of **5 minutes**.
 4. Timeshift of **30 minutes** or 1800 seconds.
-5. Threshold of > -50
+5. Threshold of **> -50**.
 
 ### Reconstructing the query
 
 1. Use a [notebook][2] and the [timeshift function][3] to reconstruct the data used by the monitor at a specific evaluation. 
     - Query of data points at the current time (this is the normal query <QUERY>).
     - Query of data points N minutes ago (this is the normal query + timeshift(-1800)).
-    - The timeshift function uses a **negative** duration because you're shifting the data back. Combine these queries along with the % change formula from the table 
+    - The timeshift function uses a **negative** duration because you're shifting the data back. Combine these queries along with the % change formula from the table.
     - **Note**: Since this example only has one metric, it's also possible to use a single query (a) and add the formula `((a - timeshift(a, -1800)) / timeshift(a, -1800)) * 100`
-    {{< img src="monitors/guide/change-alert/notebook_query_reconstruct_timeshift.png" alt="Your image description" style="width:100%;" >}}
+    {{< img src="monitors/guide/change-alert/notebook_query_reconstruct_timeshift.png" alt="The edit screen of a cell in a notebook, titled Reconstruct Change Alert query, configured as a timeseries using the average of the metric system.load.1, from everywhere, with the formula ((a - timeshift(a, -1800)) / timeshift(a, -1800)) * 100 being applied" style="width:100%;" >}}
 2. Compare the monitor's history graph with the notebook graph. Are the values comparable?
 3. Apply the aggregation. 
     - To compare your notebook graph to the change alert monitor evaluation, scope your timeframe to match the change alert. 
-    - For example, if you are looking to verify the value of a monitor evaluation at 1:30, scope your notebook to 1:25 - 1:30. 
+    - For example, if you are looking to verify the value of a monitor evaluation over the last five minutes at 1:30, scope your notebook to 1:25 - 1:30. 
 
 ## Further reading
 
