@@ -44,7 +44,7 @@ draft: false
 git_integration_title: mysql
 integration_id: mysql
 integration_title: MySQL
-integration_version: 10.2.2
+integration_version: 10.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -315,7 +315,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
@@ -360,7 +360,7 @@ metadata:
       [
         {
           "server": "%%host%%", 
-          "user": "datadog",
+          "username": "datadog",
           "password": "<UNIQUEPASSWORD>"
         }
       ]
@@ -385,7 +385,7 @@ metadata:
           "instances": [
             {
               "server": "%%host%%", 
-              "user": "datadog",
+              "username": "datadog",
               "password": "<UNIQUEPASSWORD>"
             }
           ]
@@ -445,7 +445,7 @@ metadata:
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"mysql\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"user\": \"datadog\",\"password\": \"<UNIQUEPASSWORD>\"}]"
+      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"username\": \"datadog\",\"password\": \"<UNIQUEPASSWORD>\"}]"
     }
   }]
 }
@@ -661,7 +661,7 @@ MySQL チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#mysql
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

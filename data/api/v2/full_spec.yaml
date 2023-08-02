@@ -731,9 +731,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -796,9 +794,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -1506,25 +1502,15 @@ components:
       properties:
         attributes:
           additionalProperties: {}
-          description: JSON object of attributes from CI Visibility events.
+          description: JSON object of attributes from CI Visibility test events.
           example:
             customAttribute: 123
             duration: 2345
           type: object
-        service:
-          description: 'The name of the application or service generating CI Visibility
-            events.
-
-            It is used to switch from CI Visibility to APM, so make sure you define
-            the same
-
-            value when you use both products.'
-          example: web-ui-tests
-          type: string
         tags:
           $ref: '#/components/schemas/TagsEventAttribute'
-        timestamp:
-          $ref: '#/components/schemas/TimestampEventAttribute'
+        test_level:
+          $ref: '#/components/schemas/CIAppTestLevel'
       type: object
     CIAppGitInfo:
       description: 'If pipelines are triggered due to actions to a Git repository,
@@ -1686,13 +1672,29 @@ components:
         stored by Datadog.
       properties:
         attributes:
-          $ref: '#/components/schemas/CIAppEventAttributes'
+          $ref: '#/components/schemas/CIAppPipelineEventAttributes'
         id:
           description: Unique ID of the event.
           example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
           type: string
         type:
           $ref: '#/components/schemas/CIAppPipelineEventTypeName'
+      type: object
+    CIAppPipelineEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from CI Visibility pipeline events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        ci_level:
+          $ref: '#/components/schemas/CIAppPipelineLevel'
+        tags:
+          $ref: '#/components/schemas/TagsEventAttribute'
       type: object
     CIAppPipelineEventJob:
       description: Details of a CI job.
@@ -2215,6 +2217,22 @@ components:
         meta:
           $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
+    CIAppPipelineLevel:
+      description: Pipeline execution level.
+      enum:
+      - pipeline
+      - stage
+      - job
+      - step
+      - custom
+      example: pipeline
+      type: string
+      x-enum-varnames:
+      - PIPELINE
+      - STAGE
+      - JOB
+      - STEP
+      - CUSTOM
     CIAppPipelinesAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
         of pipeline events from your organization.
@@ -2302,7 +2320,8 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the Log search syntax.
+          description: The search query following the CI Visibility Explorer search
+            syntax.
           example: '@ci.provider.name:github AND @ci.status:error'
           type: string
         to:
@@ -2488,6 +2507,20 @@ components:
         meta:
           $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
+    CIAppTestLevel:
+      description: Test run level.
+      enum:
+      - session
+      - module
+      - suite
+      - test
+      example: test
+      type: string
+      x-enum-varnames:
+      - SESSION
+      - MODULE
+      - SUITE
+      - TEST
     CIAppTestsAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
         of test events from your organization.
@@ -2525,7 +2558,7 @@ components:
         links:
           $ref: '#/components/schemas/CIAppResponseLinks'
         meta:
-          $ref: '#/components/schemas/CIAppResponseMetadata'
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
     CIAppTestsBucketResponse:
       description: Bucket values.
@@ -2575,7 +2608,8 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the Log search syntax.
+          description: The search query following the CI Visibility Explorer search
+            syntax.
           example: '@test.service:web-ui-tests AND @test.status:fail'
           type: string
         to:
@@ -2621,6 +2655,7 @@ components:
           type: string
       type: object
     CloudConfigurationComplianceRuleOptions:
+      additionalProperties: {}
       description: 'Options for cloud_configuration rules.
 
         Fields `resourceType` and `regoRule` are mandatory when managing custom `cloud_configuration`
@@ -2692,6 +2727,16 @@ components:
       description: How to generate compliance signals. Useful for cloud_configuration
         rules only.
       properties:
+        defaultActivationStatus:
+          description: The default activation status.
+          nullable: true
+          type: boolean
+        defaultGroupByFields:
+          description: The default group by fields.
+          items:
+            type: string
+          nullable: true
+          type: array
         userActivationStatus:
           description: Whether signals will be sent.
           nullable: true
@@ -4141,6 +4186,8 @@ components:
           example: 2020-01-02 03:04:00+00:00
           format: date-time
           type: string
+      required:
+      - start
       type: object
     DowntimeScheduleRecurrenceCreateUpdateRequest:
       additionalProperties: {}
@@ -5204,8 +5251,10 @@ components:
       x-enum-varnames:
       - FINDING
     FormulaLimit:
-      description: Message for specifying limits to the number of values returned
+      description: 'Message for specifying limits to the number of values returned
         by a query.
+
+        This limit is only for scalar queries and has no effect on timeseries queries.'
       properties:
         count:
           description: The number of results to which to limit.
@@ -5299,9 +5348,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -10146,6 +10193,8 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/OnDemandConcurrencyCapAttributes'
+        type:
+          $ref: '#/components/schemas/OnDemandConcurrencyCapType'
       type: object
     OnDemandConcurrencyCapAttributes:
       description: On-demand concurrency cap attributes.
@@ -10161,6 +10210,13 @@ components:
         data:
           $ref: '#/components/schemas/OnDemandConcurrencyCap'
       type: object
+    OnDemandConcurrencyCapType:
+      description: On-demand concurrency cap type.
+      enum:
+      - on_demand_concurrency_cap
+      type: string
+      x-enum-varnames:
+      - ON_DEMAND_CONCURRENCY_CAP
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
       properties:
@@ -10466,9 +10522,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -11636,6 +11690,8 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToTeamLinkData'
           type: array
+        links:
+          $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
     RelationshipToUser:
       description: Relationship to user.
@@ -11663,6 +11719,8 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RelationshipToUserTeamPermissionData'
+        links:
+          $ref: '#/components/schemas/TeamRelationshipsLinks'
       type: object
     RelationshipToUserTeamPermissionData:
       description: Related user team permission data
@@ -13101,6 +13159,7 @@ components:
       - data
       type: object
     SecurityMonitoringSignalAttributes:
+      additionalProperties: {}
       description: 'The object containing all signal attributes and their
 
         associated values.'
@@ -13218,6 +13277,21 @@ components:
           format: int32
           maximum: 1000
           type: integer
+      type: object
+    SecurityMonitoringSignalMetadataType:
+      default: signal_metadata
+      description: The type of event.
+      enum:
+      - signal_metadata
+      example: signal_metadata
+      type: string
+      x-enum-varnames:
+      - SIGNAL_METADATA
+    SecurityMonitoringSignalResponse:
+      description: Security Signal response data object.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignal'
       type: object
     SecurityMonitoringSignalRuleCreatePayload:
       description: Create a new signal correlation rule.
@@ -13387,7 +13461,7 @@ components:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
         correlatedByFields:
-          description: Fields to group by.
+          description: Fields to correlate by.
           items:
             description: Field.
             type: string
@@ -13401,6 +13475,18 @@ components:
           description: Default Rule ID to match on signals.
           example: d3f-ru1-e1d
           type: string
+        distinctFields:
+          description: Field for which the cardinality is measured. Sent as an array.
+          items:
+            description: Field.
+            type: string
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field.
+            type: string
+          type: array
         metrics:
           description: Group of target fields to aggregate over.
           items:
@@ -13453,6 +13539,10 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/SecurityMonitoringSignalStateUpdateAttributes'
+        id:
+          description: The unique ID of the security signal.
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalMetadataType'
       required:
       - attributes
       type: object
@@ -13503,6 +13593,11 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/SecurityMonitoringSignalTriageAttributes'
+        id:
+          description: The unique ID of the security signal.
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalMetadataType'
       type: object
     SecurityMonitoringSignalTriageUpdateResponse:
       description: The response returned after all triage operations, containing the
@@ -13678,8 +13773,6 @@ components:
           description: Query to run on logs.
           example: a > 3
           type: string
-      required:
-      - query
       type: object
     SecurityMonitoringStandardRuleResponse:
       description: Rule.
@@ -13759,6 +13852,11 @@ components:
       properties:
         handle:
           description: The handle for this user account.
+          type: string
+        icon:
+          description: Gravatar icon associated to the user.
+          example: /path/to/matching/gravatar/icon
+          readOnly: true
           type: string
         id:
           description: Numerical ID assigned by Datadog to this user account.
@@ -13863,6 +13961,10 @@ components:
     SensitiveDataScannerGetConfigResponseData:
       description: Response data related to the scanning groups.
       properties:
+        attributes:
+          additionalProperties: {}
+          description: Attributes of the Sensitive Data configuration.
+          type: object
         id:
           description: ID of the configuration.
           type: string
@@ -14046,6 +14148,9 @@ components:
         has_highlight_enabled:
           description: Whether or not scanned events are highlighted in Logs or RUM
             for the org.
+          type: boolean
+        has_multi_pass_enabled:
+          description: Whether or not scanned events have multi-pass enabled.
           type: boolean
         is_pci_compliant:
           description: Whether or not the org is compliant to the payment card industry
@@ -14282,6 +14387,9 @@ components:
     SensitiveDataScannerStandardPatternAttributes:
       description: Attributes of the Sensitive Data Scanner standard pattern.
       properties:
+        description:
+          description: Description of the standard pattern.
+          type: string
         name:
           description: Name of the standard pattern.
           type: string
@@ -16173,22 +16281,6 @@ components:
       required:
       - data
       type: object
-    TeamData:
-      description: A team
-      properties:
-        attributes:
-          $ref: '#/components/schemas/TeamAttributes'
-        id:
-          description: The team's identifier
-          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
-          type: string
-        type:
-          $ref: '#/components/schemas/TeamType'
-      required:
-      - attributes
-      - id
-      - type
-      type: object
     TeamIncluded:
       description: Included resources related to the team
       oneOf:
@@ -16402,11 +16494,19 @@ components:
         user_team_permissions:
           $ref: '#/components/schemas/RelationshipToUserTeamPermission'
       type: object
+    TeamRelationshipsLinks:
+      description: Links attributes.
+      properties:
+        related:
+          description: Related link.
+          example: /api/v2/team/c75a4a8e-20c7-11ee-a3a5-da7ad0900002/links
+          type: string
+      type: object
     TeamResponse:
       description: Response with a team
       properties:
         data:
-          $ref: '#/components/schemas/TeamData'
+          $ref: '#/components/schemas/Team'
       type: object
     TeamType:
       default: team
@@ -16483,6 +16583,72 @@ components:
           items:
             $ref: '#/components/schemas/TeamIncluded'
           type: array
+        links:
+          $ref: '#/components/schemas/TeamsResponseLinks'
+        meta:
+          $ref: '#/components/schemas/TeamsResponseMeta'
+      type: object
+    TeamsResponseLinks:
+      description: Teams response links.
+      properties:
+        first:
+          description: First link.
+          type: string
+        last:
+          description: Last link.
+          nullable: true
+          type: string
+        next:
+          description: Next link.
+          type: string
+        prev:
+          description: Previous link.
+          nullable: true
+          type: string
+        self:
+          description: Current link.
+          type: string
+      type: object
+    TeamsResponseMeta:
+      description: Teams response metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/TeamsResponseMetaPagination'
+      type: object
+    TeamsResponseMetaPagination:
+      description: Teams response metadata.
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
       type: object
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
@@ -16657,11 +16823,6 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
-    TimestampEventAttribute:
-      description: Timestamp of your event.
-      example: '2019-01-02T09:42:36.320Z'
-      format: date-time
-      type: string
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -16710,6 +16871,10 @@ components:
           type: string
         public_id:
           description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
           type: string
         timeseries:
           description: List of usage data reported for each requested hour.
@@ -17124,6 +17289,10 @@ components:
           items:
             $ref: '#/components/schemas/UserTeam'
           type: array
+        links:
+          $ref: '#/components/schemas/TeamsResponseLinks'
+        meta:
+          $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
     UserUpdateAttributes:
       description: Attributes of the edited user.
@@ -18137,14 +18306,11 @@ paths:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
         details about how pipeline executions are modeled and what execution types
-        we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
+        we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
         Pipeline events can be submitted with a timestamp that is up to 18 hours in
-        the past.
-
-
-        This API endpoint is in private beta.'
+        the past.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
         content:
@@ -18214,10 +18380,12 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This API endpoint is in private beta. Request access
+        [here](https://docs.google.com/forms/d/e/1FAIpQLSdNejCvhMbdBW5nnGly1yvmYMn2Wpj4JOI0zKIiEx6O6I2dbQ/viewform).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
-      description: The API endpoint to aggregate CI Visibility pipeline events into
-        buckets of computed metrics and timeseries.
+      description: Use this API endpoint to aggregate CI Visibility pipeline events
+        into buckets of computed metrics and timeseries.
       operationId: AggregateCIAppPipelineEvents
       requestBody:
         content:
@@ -18248,7 +18416,7 @@ paths:
   /api/v2/ci/pipelines/events:
     get:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -18330,7 +18498,7 @@ paths:
   /api/v2/ci/pipelines/events/search:
     post:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -22830,7 +22998,7 @@ paths:
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
-          Defaults value is 3600 (1 hour), maximum value is 1,209,600 (2 weeks).'
+          Default value is 3600 (1 hour), maximum value is 2,592,000 (30 days).'
         example: 3600
         in: query
         name: window[seconds]
@@ -26027,7 +26195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringSignal'
+                $ref: '#/components/schemas/SecurityMonitoringSignalResponse'
           description: OK
         '404':
           $ref: '#/components/responses/NotFoundResponse'

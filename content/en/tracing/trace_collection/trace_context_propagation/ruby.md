@@ -16,17 +16,17 @@ Datadog APM tracer supports [B3][6] and [W3C (TraceParent)][7] header extraction
 
 Distributed headers injection and extraction is controlled by configuring injection and extraction styles. The following styles are supported:
 
-- `Datadog`: The default
+- `Datadog`: Datadog style headers
 - `b3multi`: B3 multiple-headers
 - `b3`: B3 single-header
 - `tracecontext`: W3C Trace Context
-- `none`: No-op.
+- `none`: No-op
 
 Injection styles can be configured using:
 
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,b3`
 
-The value of the environment variable is a comma-separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
+The value of the environment variable is a comma-separated list of header styles that are enabled for injection. By default only `Datadog` injection style is enabled.
 
 Extraction styles can be configured using:
 
@@ -35,6 +35,8 @@ Extraction styles can be configured using:
 The value of the environment variable is a comma-separated list of header styles that are enabled for extraction. 
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+
+The default extraction styles are, in order, `Datadog`, `b3multi`, and `b3`.
 
 You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 

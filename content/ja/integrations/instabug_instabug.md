@@ -32,10 +32,10 @@ pricing:
   includes_assets: true
   metric: datadog.marketplace.instabug.instabug
   product_id: instabug
-  short_description: 月間 75,000 セッションを上限とするパフォーマンスと安定性のオールインワンツール
+  short_description: 月間 250,000 セッションを上限とするパフォーマンスと安定性のオールインワンツール
   tag: セッション
-  unit_label: 75,000 セッション
-  unit_price: 450
+  unit_label: 250,000 セッション
+  unit_price: 540
 public_title: Instabug
 short_description: 優れたモバイルアプリのパフォーマンスを実現
 supported_os:
@@ -109,11 +109,12 @@ Jira、GitHub、Slack などのインテグレーションで、ワークフロ�
 
 お役に立つドキュメント、リンクや記事:
 
-- [Instabug ドキュメント][3]
+- [Instabug ドキュメント][4]
 
 [1]: https://dashboard.instabug.com/signup
 [2]: mailto:contactus@instabug.com
-[3]: https://docs.instabug.com
+[3]: mailto:support@instabug.com
+[4]: https://docs.instabug.com
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">こちらをクリック</a>してください。

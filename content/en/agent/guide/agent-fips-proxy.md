@@ -325,11 +325,11 @@ While the images provided are constructed with security in mind, they have not b
 
 **4. Are all incoming and outgoing Agent communications FIPS supported?**
 
-The Datadog Agent FIPS Proxy only secures communication originating from the Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Agent or originating from the Agent are not covered by this solution.
+The Datadog Agent FIPS Proxy only secures communication originating from the Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Agent or originating from the Agent are not made FIPS-compliant by this solution.
 
 **5. Are all communications between the Cluster Agent and Node Agents FIPS supported?**
 
-The Datadog Agent FIPS Proxy only secures communication originating from the Cluster Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Cluster Agent or originating from the Cluster Agent are not covered by this solution.
+The Datadog Agent FIPS Proxy only secures communication originating from the Cluster Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Cluster Agent or originating from the Cluster Agent are not made FIPS-compliant by this solution.
 
 **6. Is FIPS compliance retained if we rebuild or reconfigure the Datadog Agent FIPS Proxy to fit our deployment or testing needs?**
 

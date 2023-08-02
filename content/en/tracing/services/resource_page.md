@@ -4,6 +4,9 @@ kind: documentation
 aliases:
 - /tracing/visualization/resource/
 further_reading:
+- link: "https://www.datadoghq.com/blog/dependency-map-navigator/"
+  tag: "Blog"
+  text: "Pinpoint performance issues in downstream services with the Dependency Map Navigator"
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"

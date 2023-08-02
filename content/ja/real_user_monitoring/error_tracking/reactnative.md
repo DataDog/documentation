@@ -111,7 +111,7 @@ yarn add react-native-performance-limiter # or npm install react-native-performa
 (cd ios && pod install)
 ```
 
-アプリから javascript のスレッドをクラッシュさせます。
+アプリから JavaScript のスレッドをクラッシュさせます。
 
 ```javascript
 import { crashJavascriptThread } from 'react-native-performance-limiter';
@@ -164,7 +164,7 @@ DATADOG_XCODE="../node_modules/.bin/datadog-ci react-native xcode"
 
 このスクリプトは、すべての正しいパラメーターでソースマップをアップロードすることを担当するコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
 
-XCode で `.xcworkspace` を開き、プロジェクト > Build Phases > Bundle React Native code and images を選択します。スクリプトを以下のように編集します。
+Xcode で `.xcworkspace` を開き、プロジェクト > Build Phases > Bundle React Native code and images を選択します。スクリプトを以下のように編集します。
 
 ```shell
 set -e
@@ -177,7 +177,7 @@ export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 /bin/sh -c "$WITH_ENVIRONMENT $REACT_NATIVE_XCODE"
 ```
 
-アップロードを動作させるためには、Datadog API キーを指定する必要があります。コマンドラインツールや外部サービスを利用する場合は、環境変数 `DATADOG_API_KEY` として指定します。XCode からビルドを実行する場合は、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
+アップロードを動作させるためには、Datadog API キーを指定する必要があります。コマンドラインツールや外部サービスを利用する場合は、環境変数 `DATADOG_API_KEY` として指定します。Xcode からビルドを実行する場合は、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
 
 ```json
 {
@@ -189,7 +189,7 @@ export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 
 #### 各リリースビルドで自動的に (React Native < 0.69)
 
-XCode で `.xcworkspace` を開き、プロジェクト > Build Phases > Bundle React Native code and images を選択します。スクリプトを以下のように編集します。
+Xcode で `.xcworkspace` を開き、プロジェクト > Build Phases > Bundle React Native code and images を選択します。スクリプトを以下のように編集します。
 
 ```shell
 set -e
@@ -201,7 +201,7 @@ export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 
 このスクリプトは、すべての正しいパラメーターでソースマップをアップロードすることを担当するコマンドを実行します。詳細については、[datadog-ci のドキュメント][12]を参照してください。
 
-アップロードを動作させるためには、Datadog API キーを指定する必要があります。コマンドラインツールや外部サービスを利用する場合は、環境変数 `DATADOG_API_KEY` として指定します。XCode からビルドを実行する場合は、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
+アップロードを動作させるためには、Datadog API キーを指定する必要があります。コマンドラインツールや外部サービスを利用する場合は、環境変数 `DATADOG_API_KEY` として指定します。Xcode からビルドを実行する場合は、API キーを含む `datadog-ci.json` ファイルをプロジェクトのルートに作成します。
 
 ```json
 {
@@ -213,9 +213,9 @@ export SOURCEMAP_FILE=$DERIVED_FILE_DIR/main.jsbundle.map
 
 #### 各ビルドで手動
 
-ソースマップを出力するためには、XCode のビルドフェーズ "Bundle React Native Code and Images” を編集する必要があります。
+ソースマップを出力するためには、Xcode のビルドフェーズ "Bundle React Native Code and Images” を編集する必要があります。
 
-1. XCode で `ios/YourAppName.xcworkspace` ファイルを開きます。
+1. Xcode で `ios/YourAppName.xcworkspace` ファイルを開きます。
 2. 左側のパネルで、”File" アイコンを選択し、プロジェクトをクリックします。
 3. 中央のパネルで、上のバーから "Build Phases” を選択します。
 
@@ -229,7 +229,7 @@ export SOURCEMAP_FILE=./build/main.jsbundle.map # <- ソースマップの出力
 
 今後、すべての iOS ビルドで、バンドル用のソースマップを見つけることができます。
 
-XCode からバンドルファイルのパスを見つけるには、XCode の Report Navigator を表示し、`BUNDLE_FILE` でフィルターをかけてその場所を確認します。
+Xcode からバンドルファイルのパスを見つけるには、Xcode の Report Navigator を表示し、`BUNDLE_FILE` でフィルターをかけてその場所を確認します。
 
 通常の場所は `~/Library/Developer/Xcode/DerivedData/YourAppName-verylonghash/Build/Intermediates.noindex/ArchiveIntermediates/YourAppName/BuildProductsPath/Release-iphoneos/main.jsbundle` で、`YourAppName` はアプリ名で `verylonghash` は 28 文字のハッシュです。
 
@@ -336,7 +336,7 @@ Android では、ソースマップファイルは `android/app/build/generated/
 Android Gradle Plugin のバージョンは `android/build.gradle` ファイル内の `com.android.tools.build:gradle` で指定します。例: `classpath("com.android.tools.build:gradle:7.3.1")`
 
 もし、アプリケーションがより包括的なバリアントを持っている場合は、パス中の `release` をバリアント名に置き換えてください。
-`android/app/build.gradle` の react 構成で `bundleAssetName` を指定した場合は、 `index.android.bundle` をその値で置き換えてください。
+`android/app/build.gradle` の React 構成で `bundleAssetName` を指定した場合は、 `index.android.bundle` をその値で置き換えてください。
 
 ビルドを実行した後、React Native プロジェクトのルートからこのコマンドを実行して、ソースマップをアップロードします。
 

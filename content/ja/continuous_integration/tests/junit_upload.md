@@ -191,9 +191,16 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **例**: `team:backend`<br/>
 **注**: `--tags` と `DD_TAGS` 環境変数を使用して指定されたタグがマージされます。`--tags` と `DD_TAGS` の両方に同じキーが表示される場合、環境変数 `DD_TAGS` の値が優先されます。
 
+`--metrics`
+: すべてのテストにアタッチされる Key-value 形式のキーと値の数値のペア (`--metrics` パラメーターは複数回指定できます)。`DD_METRICS` を使用してメトリクスを指定する場合は、カンマを使用してメトリクスを区切ります (例: `memory_allocations:13,test_importance:2`)。<br/>
+**環境変数**: `DD_METRICS`<br/>
+**デフォルト**: (none)<br/>
+**例**: `memory_allocations:13`<br/>
+**注**: `--metrics` と `DD_METRICS` 環境変数を使用して指定されたメトリクスがマージされます。`--metrics` と `DD_METRICS` の両方に同じキーが表示される場合、環境変数 `DD_METRICS` の値が優先されます。
+
 `--xpath-tag`
-:  キーと xpath 表現を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
-サポートされている表現の詳細については、[XPath 表現によるメタデータの提供](#providing-metadata-with-xpath-expressions)を参照してください。<br/>
+:  キーと xpath 式を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
+サポートされている式の詳細については、[XPath 式によるメタデータの提供](#providing-metadata-with-xpath-expressions)を参照してください。<br/>
 **デフォルト**: (none)<br/>
 **例**: `test.suite=/testcase/@classname`<br/>
 **注**: `--xpath-tag` を使用し、`--tags` または `DD_TAGS` 環境変数とともに指定されたタグはマージされます。xpath-tag の値は通常テストごとに異なるため、最優先されます。
@@ -211,6 +218,19 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 `--dry-run`
 : 実際にファイルを Datadog にアップロードせずにコマンドを実行します。他のすべてのチェックが実行されます。<br/>
 **デフォルト**: `false`
+
+`--skip-git-metadata-upload`
+: Git メタデータのアップロードをスキップするために使用するフラグ。Git メタデータをアップロードしたい場合は、--skip-git-metadata-upload=0 または --skip-git-metadata-upload=false を渡すことができます。<br/>
+**デフォルト**: `true`<br/>
+
+`--git-repository-url`
+: Git メタデータを取得するリポジトリの URL。このオプションが渡されなかった場合、URL はローカルの Git リポジトリから取得されます。<br/>
+**デフォルト**: local git repository<br/>
+**例**: `git@github.com:DataDog/documentation.git`<br/>
+
+`--verbose`
+: コマンドの出力に詳細情報を追加するために使用するフラグ<br/>
+**デフォルト**: `false`<br/>
 
 位置引数
 : JUnit XML レポートが配置されているファイルパスまたはディレクトリ。ディレクトリを渡すと、CLI はその中のすべての `.xml` ファイルを検索します。
@@ -230,53 +250,7 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 
 ## リポジトリの収集とメタデータのコミット
 
-Datadog は、テスト結果を可視化し、リポジトリやコミットごとにグループ化するために Git 情報を使用します。Git のメタデータは、Datadog の CI CLI が CI プロバイダーの環境変数やプロジェクトパスのローカルな `.git` フォルダ (あれば) から収集します。このディレクトリを読み込むには、[`git`][8] バイナリが必要です。
-
-サポートされていない CI プロバイダーでテストを実行する場合や、`.git` フォルダがない場合は、環境変数を使って Git の情報を手動で設定することができます。これらの環境変数は、自動検出された情報よりも優先されます。Git の情報を提供するために、以下の環境変数を設定します。
-
-`DD_GIT_REPOSITORY_URL`
-: コードが格納されているリポジトリの URL。HTTP と SSH の両方の URL に対応しています。<br/>
-**例**: `git@github.com:MyCompany/MyApp.git`、`https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: テスト中の Git ブランチ。タグ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `develop`
-
-`DD_GIT_TAG`
-: テストされる Git タグ (該当する場合)。ブランチ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: フルコミットハッシュ。<br/>
-**例**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: コミットのメッセージ。<br/>
-**例**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: コミット作成者名。<br/>
-**例**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: コミット作成者メールアドレス。<br/>
-**例**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: ISO 8601 形式のコミット作成者の日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: コミットのコミッター名。<br/>
-**例**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: コミットのコミッターのメールアドレス。<br/>
-**例**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: ISO 8601 形式のコミットのコミッターの日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
+{{% ci-git-metadata %}}
 
 ## Git メタデータのアップロード
 
@@ -313,7 +287,7 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 
 `runtime.version`
 : ランタイムのバージョン。<br/>
-**例**: `5.0.0`, `3.1.7`
+**例**: `5.0.0`、`3.1.7`
 
 `runtime.vendor`
 : ランタイムベンダーの名前 (該当する場合)。例えば、Java ランタイムを使用する場合。<br/>
@@ -334,13 +308,13 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 **例**: `iPhone 12 Pro Simulator`、`iPhone 13 (QA team)`
 
 
-## XPath 表現によるメタデータの提供
+## XPath 式によるメタデータの提供
 
 アップロードされた XML レポートに含まれるすべてのテストにカスタムタグをグローバルに適用する `--tags` CLI パラメーターと `DD_TAGS` 環境変数に加え、`--xpath-tag` パラメーターは、XML 内の各種属性から各テストにタグを追加するカスタムルールを提供します。
 
-提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][9] 表現になります。
+提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][8] 式になります。
 
-XPath 構文が馴染みが深いため使用されますが、サポートされている表現は下記のみとなります。
+XPath 構文が馴染みが深いため使用されますが、サポートされている式は下記のみとなります。
 
 `/testcase/@attribute-name`
 :  `<testcase attribute-name="value">` の XML 属性。
@@ -483,5 +457,4 @@ Datadog に送信する値は文字列なので、ファセットは辞書順で
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /ja/logs/
 [7]: /ja/getting_started/site/
-[8]: https://git-scm.com/downloads
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://www.w3schools.com/xml/xpath_syntax.asp

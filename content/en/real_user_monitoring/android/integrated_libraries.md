@@ -16,23 +16,27 @@ This page lists integrated libraries you can use for Android and Android TV Moni
  
 ### Coil
  
-If you use Coil to load images in your application, take a look at Datadog's [dedicated Coil library][1].
+If you use Coil to load images in your application, see Datadog's [dedicated Coil library][1].
  
 ### Fresco
  
-If you use Fresco to load images in your application, take a look at Datadog's [dedicated Fresco library][2].
+If you use Fresco to load images in your application, see Datadog's [dedicated Fresco library][2].
  
 ### Glide
  
-If you use Glide to load images in your application, take a look at Datadog's [dedicated Glide library][3].
+If you use Glide to load images in your application, see Datadog's [dedicated Glide library][3].
 
 ### Jetpack Compose
 
-If you use Jetpack Compose in your application, take a look at Datadog's [dedicated Jetpack Compose library][7].
+If you use Jetpack Compose in your application, see Datadog's [dedicated Jetpack Compose library][7].
+
+### RxJava
+
+If you use RxJava in your application, see Datadog's [dedicated RxJava library][8].
 
 ### Picasso
  
-If you use Picasso, let it use your `OkHttpClient` for RUM and APM information about network requests made by Picasso.
+If you use Picasso, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made by Picasso.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -57,7 +61,7 @@ If you use Picasso, let it use your `OkHttpClient` for RUM and APM information a
  
 ### Retrofit
  
-If you use Retrofit, let it use your `OkHttpClient` for RUM and APM information about network requests made with Retrofit.
+If you use Retrofit, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made with Retrofit.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -80,7 +84,7 @@ If you use Retrofit, let it use your `OkHttpClient` for RUM and APM information 
  
 ### SQLDelight
  
-If you use SQLDelight, take a look at Datadog's [dedicated SQLDelight library][4].
+If you use SQLDelight in your application, see Datadog's [dedicated SQLDelight library][4].
  
 ### SQLite
  
@@ -121,12 +125,12 @@ RUM error event for it.
  
 ### Apollo (GraphQL)
  
-If you use Apollo, let it use your `OkHttpClient` for RUM and APM information about all the queries performed through Apollo client.
+If you use Apollo, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-        val apolloClient =  ApolloClient.builder()
+        val apolloClient = ApolloClient.builder()
             .okHttpClient(okHttpClient)
             .serverUrl(<APOLLO_SERVER_URL>)
             .build()
@@ -134,7 +138,7 @@ If you use Apollo, let it use your `OkHttpClient` for RUM and APM information ab
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        final ApolloClient apolloClient = new ApolloClient.builder()
+        ApolloClient apolloClient = new ApolloClient.builder()
             .okHttpClient(okHttpClient)
             .serverUrl(<APOLLO_SERVER_URL>)
             .build();
@@ -144,16 +148,23 @@ If you use Apollo, let it use your `OkHttpClient` for RUM and APM information ab
 
 ### Android TV (Leanback)
 
-If you use the Leanback API to add actions into your Android TV application, take a look at Datadog's [dedicated Android TV library][6].
+If you use the Leanback API to add actions into your Android TV application, see Datadog's [dedicated Android TV library][6].
+
+### Kotlin Coroutines
+
+If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for RUM][9] and with [extensions for Trace][10].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-coil
-[2]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-fresco
-[3]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-glide
-[4]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-sqldelight
+[1]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-coil
+[2]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-fresco
+[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-glide
+[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-sqldelight
 [5]: https://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper
-[6]: https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-tv
-[7]: https://github.com/Datadog/dd-sdk-android/tree/master/dd-sdk-android-compose
+[6]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-tv
+[7]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-compose
+[8]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rx
+[9]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rum-coroutines
+[10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
