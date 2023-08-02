@@ -47,7 +47,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [mysql2][7]          |           | {{< X >}} |                                        |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
 |                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 | [CommandType.StoredProcedure][25] are unsupported.|           |           |                                        |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 | [CommandType.StoredProcedure][25] not supported.|           |           |                                        |
 |                                          | [Npgsql][16]         | {{< X >}} |           |                                        |
 |                                          | [MySql.Data][17]     |           | {{< X >}} |                                        |
 |                                          | [MySqlConnector][18] |           | {{< X >}} |                                        |
