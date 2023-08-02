@@ -2956,47 +2956,47 @@ main:
     identifier: cws_backend_event_schema_documentation
     weight: 206
   - name: Misconfigurations
-    url: security/cspm/
+    url: security/misconfigurations/
     parent: csm
     identifier: cspm
     weight: 5
   - name: Setup
-    url: security/cspm/setup
+    url: security/misconfigurations/setup
     parent: cspm
     identifier: cspm_setup
     weight: 101
   - name: Compliance Rules
-    url: security/cspm/compliance_rules
+    url: security/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 102
   - name: Custom Rules
-    url: security/cspm/custom_rules
+    url: security/misconfigurations/custom_rules
     parent: cspm
     identifier: custom_rules
     weight: 103
   - name: Cloud Resources Schema
-    url: security/cspm/custom_rules/schema/
+    url: security/misconfigurations/custom_rules/schema/
     parent: cspm
     identifier: cspm_schema_gcp_test
     weight: 104
   - name: Compliance Reports
-    url: security/cspm/frameworks_and_benchmarks
+    url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
   - name: Misconfigurations Explorer
-    url: /security/cspm/findings
+    url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 107
   - name: Signals Explorer
-    url: /security/cspm/signals_explorer/
+    url: /security/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 108
   - name: Resource Catalog
-    url: /security/cspm/resource_catalog
+    url: /security/misconfigurations/resource_catalog
     parent: cspm
     identifier: resource_catalog
     weight: 109

@@ -3,6 +3,7 @@ title: Signals Explorer
 kind: documentation
 aliases:
   - /security_platform/cspm/signals_explorer
+  - /security/cspm/signals_explorer
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

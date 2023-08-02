@@ -1,6 +1,8 @@
 ---
 title: Custom Rules
 kind: documentation
+aliases:
+  - /security/cspm/custom_rules
 further_reading:
 - link: "security/cloud_security_management/guide/writing_rego_rules"
   tag: "Guide"

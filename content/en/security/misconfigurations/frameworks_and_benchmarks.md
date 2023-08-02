@@ -3,6 +3,7 @@ title: Compliance Reports
 kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
+  - /security/cspm/frameworks_and_benchmarks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
