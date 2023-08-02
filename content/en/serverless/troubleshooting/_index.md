@@ -82,7 +82,7 @@ This command will attatch to following info to your Zendesk case:
 6. Debugging logs from the Datadog Forwarder Lambda function (if used).
 7. The project configuration files, with **redacted hardcoded secrets**, such as `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json`, and `webpack.config.json`.
 
-<div class="alert alert-info">For more information about serverless flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">serverless flare documentation</a>.</div>
+<div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">command documentation</a>.</div>
 
 ## Further Reading
 
