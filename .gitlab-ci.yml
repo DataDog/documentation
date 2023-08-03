@@ -28,6 +28,7 @@ variables:
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
+  PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
 
 
 # ================== copy scripts =============== #
@@ -133,10 +134,14 @@ build_preview:
   script:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
+    - touch preview_error.log # Create log file for errors
+    - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
+    - echo "error...testing errors" >&2
+    - exit 1
     - build_site
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -154,7 +159,16 @@ build_preview:
       - .htmltest.yml
       - ./logs
       - ./public/redirects.txt
+  after_script:
+    - |
+      if [ -s $PREVIEW_ERROR_LOG ]; then
+        echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)"; 
+      fi # Output the error to the console
   interruptible: true
+  artifacts:
+    when: on_failure
+    paths:
+      - $PREVIEW_ERROR_LOG # This will be created on failure
 
 link_checks_preview:
   <<: *base_template
@@ -505,3 +519,28 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+
+####################################
+#                                  #
+#      Failure Notifications       #
+#                                  # 
+####################################
+failure_notification_preview:
+  <<: *build_template
+  <<: *preview_setup
+  stage: cleanup
+  environment: "preview"
+  variables:
+    <<: *preview_variables
+    GIT_STRATEGY: none
+  script:
+    - |
+      if [ -s preview_error.log ]; then
+        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed with the following error: $(cat preview_error.log)";
+      else
+        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed due to an error, please check your pipeline"; # Safety in case the error log is empty
+      fi
+    - notify_slack.py "${SLACK_MESSAGE}" --status="#ab0000" --previewSite="false" --link="${CI_PIPELINE_URL}" --buttonContent="Gitlab Pipeline :looking:"
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+      when: on_failure
