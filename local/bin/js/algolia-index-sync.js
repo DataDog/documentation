@@ -23,8 +23,7 @@ const getIndexName = () => {
 const updateSettings = (index) => {
     const settings = {
         searchableAttributes: [
-            'unordered(tags)',
-            'unordered(title)',
+            'unordered(title), unordered(tags)',
             'unordered(section_header)',
             'unordered(content)'
         ],
