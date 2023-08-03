@@ -3626,6 +3626,15 @@ components:
           maximum: 5
           readOnly: true
           type: integer
+        tags:
+          description: List of team names representing ownership of a dashboard.
+          items:
+            description: The name of a Datadog team, formatted as `team:<name>`
+            type: string
+          maxItems: 5
+          nullable: true
+          readOnly: true
+          type: array
         title:
           description: Title of the dashboard.
           readOnly: true
