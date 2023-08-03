@@ -82,7 +82,7 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 `Require MFA` を無効にしたままにしてください。詳しくは、AWS のドキュメント、[第三者にお客様の AWS リソースへのアクセスを許可する際の外部 ID の使用方法][2]をご覧ください。
 12. **Next** をクリックします。
 13. すでにポリシーを作成している場合は、このページで検索し、選択してください。そうでない場合は、新しいウィンドウで開く **Create Policy** をクリックし、前のセクションの指示に従います。
-14. オプションで、Datadog の[クラウドセキュリティポスチャ管理製品][5] (CSPM) を使用するための <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit ポリシー</a>をロールにアタッチします。
+14. オプションで、[Cloud Security Management Misconfigurations][5] を使用するための <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS SecurityAudit ポリシー</a>をロールにアタッチします。
 15. **Next** をクリックします。
 16. ロールに `DatadogIntegrationRole` などの名前を付け、適切な説明を入力します。
 17. **Create Role** をクリックします。

@@ -32,6 +32,7 @@ JUnit テストレポートファイルは、テスト名とスイート名、�
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+
 ### スタンドアロンバイナリ  (ベータ版)
 
 <div class="alert alert-warning"><strong>注</strong>: スタンドアロンバイナリは<strong>ベータ版</strong>であり、その安定性は保証されていません。</div>
@@ -198,10 +199,22 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **例**: `memory_allocations:13`<br/>
 **注**: `--metrics` と `DD_METRICS` 環境変数を使用して指定されたメトリクスがマージされます。`--metrics` と `DD_METRICS` の両方に同じキーが表示される場合、環境変数 `DD_METRICS` の値が優先されます。
 
+`--report-tags`
+: `key:value` 形式のキーと値のペア。`--tags` パラメーターと同じような働きをしますが、これらのタグはセッションレベルでのみ適用され、環境変数 `DD_TAGS` とマージされません。<br/>
+**環境変数**: (なし)<br/>
+**デフォルト**: (なし)<br/>
+**例**: `coverage_enabled:true`<br/>
+
+`--report-metrics`
+: `key:123` 形式のキーと値のペア。`--metrics` パラメーターと同じような働きをしますが、これらのタグはセッションレベルでのみ適用され、環境変数 `DD_METRICS` とマージされません。<br/>
+**環境変数**: (なし)<br/>
+**デフォルト**: (なし)<br/>
+**例**: `coverage_percentage:35`<br/>
+
 `--xpath-tag`
 :  キーと xpath 式を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
 サポートされている式の詳細については、[XPath 式によるメタデータの提供](#providing-metadata-with-xpath-expressions)を参照してください。<br/>
-**デフォルト**: (none)<br/>
+**デフォルト**: (なし)<br/>
 **例**: `test.suite=/testcase/@classname`<br/>
 **注**: `--xpath-tag` を使用し、`--tags` または `DD_TAGS` 環境変数とともに指定されたタグはマージされます。xpath-tag の値は通常テストごとに異なるため、最優先されます。
 
@@ -220,16 +233,16 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **デフォルト**: `false`
 
 `--skip-git-metadata-upload`
-: Git メタデータのアップロードをスキップするために使用するフラグ。Git メタデータをアップロードしたい場合は、--skip-git-metadata-upload=0 または --skip-git-metadata-upload=false を渡すことができます。<br/>
+: git メタデータのアップロードをスキップするために使用するフラグ。git メタデータをアップロードしたい場合は、--skip-git-metadata-upload=0 または --skip-git-metadata-upload=false を渡すことができます。<br/>
 **デフォルト**: `true`<br/>
 
 `--git-repository-url`
-: Git メタデータを取得するリポジトリの URL。このオプションが渡されなかった場合、URL はローカルの Git リポジトリから取得されます。<br/>
-**デフォルト**: local git repository<br/>
+: git メタデータを取得するリポジトリの URL。この引数を渡さなかった場合、URL はローカルの git リポジトリから取得されます。<br/>
+**デフォルト**: ローカルの git リポジトリ<br/>
 **例**: `git@github.com:DataDog/documentation.git`<br/>
 
 `--verbose`
-: コマンドの出力に詳細情報を追加するために使用するフラグ<br/>
+: コマンドの出力の詳細度を高めるために使用するフラグ<br/>
 **デフォルト**: `false`<br/>
 
 位置引数
@@ -247,6 +260,9 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 : 結果をアップロードする [Datadog サイト][7]。<br/>
 **デフォルト**: `datadoghq.com`<br/>
 **選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+
+### テストスイートレベルの視覚化との互換性
+[テストスイートレベルの視覚化][9]は、`datadog-ci>=2.17.0` からサポートされています。
 
 ## リポジトリの収集とメタデータのコミット
 
@@ -357,7 +373,7 @@ datadog-ci junit upload --service service_name \
 {{% /tab %}}
 
 {{% tab "属性からタグを追加" %}}
-各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
+各テストに `value 1`、`value 2` の値とともに `custom_tag` を追加する方法:
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -377,7 +393,7 @@ datadog-ci junit upload --service service_name \
 {{% /tab %}}
 
 {{% tab "testsuite プロパティからタグを追加" %}}
-各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
+各テストに `value 1`、`value 2` の値とともに `custom_tag` を追加する方法:
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -411,7 +427,7 @@ datadog-ci junit upload --service service_name \
 
 特定のテストに追加のタグを指定するもう 1 つの方法は、`<testsuite>` または `<testcase>` 要素内に `<property name="dd_tags[key]" value="value">` 要素を含める方法です。これらのタグを `<testcase>` 要素に追加すると、そのテストスパンにタグが格納されます。タグを `<testsuite>` 要素に追加すると、そのスイートの全てのテストスパンにタグが格納されます。
 
-この処理を行うには、 `<property>` 要素の `name` 属性が `dd_tags[key]` という形式である必要があります。ここで `key` は追加されるカスタムタグの名前です。その他のプロパティは無視されます。
+この処理を行うには、`<property>` 要素の `name` 属性が `dd_tags[key]` という形式である必要があります。ここで `key` は追加されるカスタムタグの名前です。その他のプロパティは無視されます。
 
 **例**: `<testcase>` 要素にタグを追加する。
 
@@ -446,7 +462,7 @@ datadog-ci junit upload --service service_name \
 
 Datadog に送信する値は文字列なので、ファセットは辞書順で表示されます。文字列の代わりに整数を送信するには、`--metrics` フラグと `DD_METRICS` 環境変数を使用します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -458,3 +474,4 @@ Datadog に送信する値は文字列なので、ファセットは辞書順で
 [6]: /ja/logs/
 [7]: /ja/getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: /ja/continuous_integration/tests/#test-suite-level-visibility
