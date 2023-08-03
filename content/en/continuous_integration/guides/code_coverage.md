@@ -84,18 +84,17 @@ If you are using [Coverlet][101] to compute your code coverage, indicate the pat
 {{% tab "JUnit Report Uploads" %}}
 
 ### Compatibility
-* `datadog-ci>=2.17.2`
+* `datadog-ci>=2.17.2`.
 
-It is also possible to upload a code coverage percentage value when using JUnit Report uploads:
+You can upload a code coverage percentage value when using JUnit Report uploads:
 
 ```shell
 datadog-ci junit upload --service <service_name> --report-metrics=test.code_coverage.lines_pct:85 <path>
 ```
 
-In this example `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
+In this example, `85` is the percentage of lines covered by your tests and needs to be generated with a different tool.
 
-<div class="alert alert-warning"><strong>Note</strong>: The code coverage report needs to be generated in a different process. The JUnit report uploads will not generate code coverage reports.</div>
-<div class="alert alert-warning"><strong>Note</strong>: The reported metric name must be exactly <code>test.code_coverage.lines_pct</code></div>
+The code coverage report needs to be generated in a different process, otherwise the JUnit report uploads will not generate code coverage reports. The reported metric name must be `test.code_coverage.lines_pct`.
 
 {{% /tab %}}
 
@@ -103,7 +102,7 @@ In this example `85` is the percentage of lines covered by your tests and needs 
 
 ### Graph code coverage
 
-Reported code coverage appears on the **Coverage** tab in a test session details page:
+Reported code coverage appears on the **Coverage** tab in a test session's details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
@@ -114,7 +113,7 @@ You can export your graph to a [dashboard][2] or a [notebook][3] and create a [m
 
 Click **Export** on the right side:
 
-{{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:100%" >}}
+{{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:60%" >}}
 
 
 ### Add a monitor
