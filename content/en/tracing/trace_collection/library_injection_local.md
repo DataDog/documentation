@@ -233,7 +233,7 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 
 {{% tab "Host" %}}
 
-<div class="alert alert-info">Tracing Library Injection on a host is in beta.</a></div>
+<div class="alert alert-info">Tracing Library Injection on a host is in beta.</div>
 
 When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
@@ -529,7 +529,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% tab "Agent on host, app in containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</a></div>
+<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</div>
 
 
 When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
@@ -773,7 +773,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{% tab "Agent and app in separate containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection in containers is in beta.</a></div>
+<div class="alert alert-info">Tracing Library Injection in containers is in beta.</div>
 
 When your Agent and services are running in separate Docker containers on the same host, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
