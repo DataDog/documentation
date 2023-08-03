@@ -526,12 +526,10 @@ set_redirect_metadata_live:
 #                                  # 
 ####################################
 failure_notification_preview:
-  <<: *build_template
-  <<: *preview_setup
+  <<: *base_template
   stage: cleanup
   environment: "preview"
   variables:
-    <<: *preview_variables
     GIT_STRATEGY: none
   script:
     - |
