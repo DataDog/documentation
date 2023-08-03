@@ -451,14 +451,14 @@ AWS ECS での設定については、[AWS ECS][1] ドキュメントページ�
 
   [1]: /integrations/azure
   [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /ja/network_monitoring/dns/

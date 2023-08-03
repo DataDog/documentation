@@ -23,7 +23,7 @@ Follow the steps below to enable the new dependency map on the [Service Page][1]
 
 ## Inferred services
 
-Datadog can automatically discover the dependencies for an instrumented service, such as a database or a third-party API even if that dependency hasn't been instrumented yet. Datadog infers the presence of these dependencies and their performance based on information on the exit spans, outgoing spans, and outbound requests of your instrumented services.
+Datadog can automatically discover the dependencies for an instrumented service, such as a database or a third-party API even if that dependency hasn't been instrumented yet. Datadog infers the presence of these dependencies and their performance based on information on the outbound requests of your instrumented services.
 
 To determine the names and types of the inferred services, Datadog uses span attributes. Inferred external APIs use the default naming scheme `net.peer.name`. For example, `api.stripe.com`, `api.twilio.com`, `us6.api.mailchimp.com`. Inferred databases use the default naming scheme `db.instance`.
 
