@@ -1,26 +1,34 @@
 {{ $errors := $.Site.Data.reference.errors | default (dict) }}
 {{ range $code, $obj := $errors}}
   <div class="py-3" style="border-bottom:2px solid #DADADA">
-    <h2>{{ $obj.code}} {{ $obj.title }}</h2>
-    <p>{{ $obj.description | markdownify }}</p>
+    <h2>{{ $obj.code }} {{ $obj.title }}</h2>
+    <p>{{ (replaceRE `\[([^\[]+)\](\(.*\))` "$1" $obj.description) | markdownify }}</p>
     {{ with $obj.rationale }}
       <strong>Rationale</strong>
-      <p>{{ . | markdownify }}</p>
+      <p>{{ (replaceRE `\[([^\[]+)\](\(.*\))` "$1" .) | markdownify }}</p>
     {{ end }}
     {{ with $obj.resolution }}
       <strong>Resolution</strong>
-      <p>{{ . | markdownify }}</p>
+      <p>{{ (replaceRE `\[([^\[]+)\](\(.*\))` "$1" .) | markdownify }}</p>
     {{ end }}
     {{ with $obj.examples }}
-      <h3>Examples</h3>
-      {{ range $i, $ex := . }}
-        <h4>Example {{ add $i 1 }}</h4>
-        <p>{{ $ex.title | markdownify }}</p>
-        <strong>VRL program</strong>
-        {{ print "```bash\n" $ex.source "\n```" | markdownify }}
-        <strong>How to fix it</strong>
-        {{ highlight $ex.diff "diff" }}
-      {{ end }}
+      <p>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$obj.code}}" aria-expanded="false" aria-controls="collapse{{$obj.code}}">
+          Examples
+        </button>
+      </p>
+      <div class="collapse" id="collapse{{$obj.code}}">
+        <div class="card card-body">
+          {{ range $i, $ex := . }}
+            <h4>Example {{ add $i 1 }}</h4>
+            <p>{{ $ex.title | markdownify }}</p>
+            <strong>VRL program</strong>
+            {{ print "```bash\n" $ex.source "\n```" | markdownify }}
+            <strong>How to fix it</strong>
+            {{ highlight $ex.diff "diff" }}
+          {{ end }}
+        </div>
+      </div>
     {{ end }}
   </div>
 {{ end }}
