@@ -3676,21 +3676,26 @@ main:
     parent: rum
     identifier: rum_session_replay
     weight: 6
-  - name: Privacy Options
+  - name: Mobile
+    url: real_user_monitoring/session_replay/mobile
+    parent: rum_session_replay
+    identifier: rum_session_replay_mobile
+    weight: 601
+  - name: Browser Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 601
-  - name: Developer Tools
+    weight: 602
+  - name: Browser Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 602
-  - name: Troubleshooting
+    weight: 603
+  - name: Browser Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 603
+    weight: 604
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
