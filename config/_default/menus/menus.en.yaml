@@ -1811,65 +1811,65 @@ main:
     url: tracing/trace_explorer/search/
     parent: trace_explorer
     identifier: span_search
-    weight: 501
+    weight: 601
   - name: Query Syntax
     url: tracing/trace_explorer/query_syntax/
     parent: trace_explorer
     identifier: span_query_syntax
-    weight: 502
+    weight: 602
   - name: Span Facets
     url: tracing/trace_explorer/facets/
     parent: trace_explorer
     identifier: span_facets
-    weight: 503
+    weight: 603
   - name: Span Visualizations
     url: tracing/trace_explorer/visualize/
     parent: trace_explorer
     identifier: visualize_spans
-    weight: 504
+    weight: 604
   - name: Trace View
     url: tracing/trace_explorer/trace_view/
     parent: trace_explorer
-    weight: 505
+    weight: 605
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 506
+    weight: 606
   - name: Service Observability
     url: tracing/services/
     parent: tracing
     identifier: tracing_services
-    weight: 7
+    weight: 8
   - name: Services List
     url: tracing/services/services_list/
     parent: tracing_services
     identifier: tracing_services_list
-    weight: 601
+    weight: 801
   - name: Service Page
     url: tracing/services/service_page/
     parent: tracing_services
     identifier: tracing_service_page
-    weight: 602
+    weight: 802
   - name: Resource Page
     url: tracing/services/resource_page/
     parent: tracing_services
     identifier: tracing_resource_page
-    weight: 603
+    weight: 803
   - name: Deployment Tracking
     url: tracing/services/deployment_tracking/
     parent: tracing_services
     identifier: tracing_deployment_tracking
-    weight: 604
+    weight: 804
   - name: Service Map
     url: tracing/services/services_map/
     parent: tracing_services
     identifier: tracing_service_map
-    weight: 605
+    weight: 805
   - name: APM Monitors
     url: /monitors/create/types/apm/
     parent: tracing_services
     identifier: tracing_apm_monitors
-    weight: 607
+    weight: 807
   - name: Service Catalog
     url: tracing/service_catalog/
     parent: tracing
