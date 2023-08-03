@@ -2281,7 +2281,7 @@ main:
     url: continuous_integration/intelligent_test_runner/python/
     parent: intelligent_test_runner
     identifier: ci_itr_python
-    weight: 308
+    weight: 504
   - name: Swift
     url: continuous_integration/intelligent_test_runner/swift/
     parent: intelligent_test_runner
