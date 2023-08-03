@@ -330,11 +330,11 @@ Agent からのアウトバウンド接続については、[ネットワーク�
 
 **4. Agent のすべての入出力通信は FIPS に対応していますか？**
 
-Datadog Agent FIPS Proxy は、Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Agent で終了する、または Agent から発信される他の形式の通信は、このソリューションの対象外です。
+Datadog Agent FIPS Proxy は、Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Agent で終了する、または Agent から発信される他の形式の通信は、このソリューションでは FIPS に準拠しません。
 
 **5. Cluster Agent と Node Agent 間の通信はすべて FIPS に対応していますか？**
 
-Datadog Agent FIPS Proxy は、Cluster Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Cluster Agent で終了する、または Cluster Agent から発信される他の形式の通信は、このソリューションの対象外です。
+Datadog Agent FIPS Proxy は、Cluster Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Cluster Agent で終了する、または Cluster Agent から発信される他の形式の通信は、このソリューションでは FIPS に準拠しません。
 
 **6. デプロイやテストのニーズに合わせて Datadog Agent FIPS Proxy を再構築または再構成しても、FIPS コンプライアンスは維持されますか？**
 
