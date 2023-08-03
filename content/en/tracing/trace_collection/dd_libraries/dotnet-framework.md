@@ -60,13 +60,7 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ## Installation and getting started
 
 <div class="alert alert-info">
-  <div class="alert-info">
-    <div><strong>Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/service-setup">Quickstart instructions</a></strong> in the Datadog app for the best experience, including:</div>
-    <div>- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
-    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
-    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div><br/>
-    <div>Also, to set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.</div>
-  </div>
+  To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
 </div>
 
 <div class="alert alert-warning">
@@ -76,9 +70,10 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 ### Installation
 
 1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
-2. [Install the tracer.](#install-the-tracer)
-3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-4. [View your live data.](#view-your-live-data)
+2. [Choose your instrumentation method](#choose-your-instrumentation-method)
+3. [Install the tracer.](#install-the-tracer)
+4. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
+5. [View your live data.](#view-your-live-data)
 
 ### Configure the Datadog Agent for APM
 
@@ -123,6 +118,17 @@ For all other environments, see the [Integrations documentation][4] for that env
 {{% /tab %}}
 
 {{< /tabs >}}
+
+
+### Choose your instrumentation method
+
+After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
+
+See the following pages for supported deployment scenarios and languages:
+
+- [Inject the instrumentation library locally][11] (at the Agent); or
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
+
 
 ### Install the tracer
 
@@ -343,3 +349,4 @@ dotnet.exe example.dll
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[11]: /tracing/_trace_collection/library_injection_local/

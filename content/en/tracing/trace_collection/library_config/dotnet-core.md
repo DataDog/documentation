@@ -139,7 +139,8 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`. <br
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][11].
+For more information, see [Ingestion Mechanisms][11].<br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
@@ -168,7 +169,8 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 : **TracerSettings property**:`HeaderTags` <br>
 Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.
+Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -242,7 +244,8 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].<br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. 
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
@@ -316,3 +319,5 @@ The following configuration variables are for features that are available for us
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /tracing/configure_data_security#telemetry-collection
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services

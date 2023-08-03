@@ -27,7 +27,7 @@ AWS Step Functions では、ビジュアルなワークフローを使用して�
 
 このインテグレーションを有効にすると、Datadog にすべての Step Functions メトリクスを表示できます。
 
-<div class="alert alert-warning">Datadog のネイティブ AWS Step Function モニタリングは、非公開ベータ版で利用可能です。この機能を試してみたい方は、カスタマーサクセスマネージャーに連絡するか、<a href="https://docs.google.com/forms/d/e/1FAIpQLScoePnzEw9nLhFpCsJTbWlXcShKBgTLNegTcIA4dEm_IbGAjA/viewform">フォーム</a>からリクエストしてください。</div>
+<div class="alert alert-warning">Datadog のネイティブ AWS Step Function モニタリングは、公開ベータ版で利用可能です。強化されたメトリクスとトレースで Step Function をインスツルメンテーションするには、<a href="https://docs.datadoghq.com/serverless/step_functions">サーバーレスのドキュメント<a>をご覧ください。</div>
 
 ## セットアップ
 
