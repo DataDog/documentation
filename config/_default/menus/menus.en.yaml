@@ -1905,11 +1905,16 @@ main:
     parent: service_catalog
     identifier: service_catalog_guides
     weight: 907
+  - name: API Catalog
+    url: /tracing/api_catalog/
+    identifier: api_catalog
+    parent: tracing
+    weight: 10
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst
     parent: tracing
-    weight: 10
+    weight: 11
   - name: Enabling
     url: dynamic_instrumentation/enabling
     identifier: dyninst_enable
@@ -1939,7 +1944,7 @@ main:
     url: tracing/error_tracking/
     parent: tracing
     identifier: tracing_error_tracking
-    weight: 11
+    weight: 12
   - name: Error Tracking Explorer
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
@@ -1954,17 +1959,17 @@ main:
     url: tracing/configure_data_security/
     parent: tracing
     identifier: tracing_data_security
-    weight: 12
+    weight: 13
   - name: Guides
     url: tracing/guide/
     parent: tracing
     identifier: tracing_guides
-    weight: 13
+    weight: 14
   - name: Troubleshooting
     url: tracing/troubleshooting/
     parent: tracing
     identifier: tracing_troubleshooting
-    weight: 14
+    weight: 15
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
@@ -2920,11 +2925,46 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
-  - name: Cloud Security Posture Management
+  - name: Threats
+    url: security/cloud_workload_security/
+    parent: csm
+    identifier: cloud_workload_security
+    weight: 1
+  - name: Setup
+    url: security/cloud_workload_security/setup
+    parent: cloud_workload_security
+    identifier: cws_setup
+    weight: 201
+  - name: Managing Detection Rules
+    url: security/cloud_workload_security/workload_security_rules
+    parent: cloud_workload_security
+    identifier: cws_workload_security_rules
+    weight: 202
+  - name: Security Profiles
+    url: security/cloud_workload_security/security_profiles
+    parent: cloud_workload_security
+    identifier: cws_workload_security_profiles
+    weight: 203
+  - name: Runtime Anomaly Detection
+    url: security/cloud_workload_security/runtime_anomaly_detection
+    parent: cloud_workload_security
+    identifier: cws_workload_anomaly_detection
+    weight: 204
+  - name: Creating Custom Agent Rules
+    url: security/cloud_workload_security/agent_expressions
+    parent: cloud_workload_security
+    identifier: cws_agent_expressions
+    weight: 205
+  - name: CWS Events Formats
+    url: security/cloud_workload_security/backend
+    parent: cloud_workload_security
+    identifier: cws_backend_event_schema_documentation
+    weight: 206
+  - name: Misconfigurations
     url: security/cspm/
     parent: csm
     identifier: cspm
-    weight: 1
+    weight: 5
   - name: Setup
     url: security/cspm/setup
     parent: cspm
@@ -2950,7 +2990,7 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
-  - name: Security Findings Explorer
+  - name: Misconfigurations Explorer
     url: /security/cspm/findings
     parent: cspm
     identifier: cspm_findings_explorer
@@ -2965,51 +3005,36 @@ main:
     parent: cspm
     identifier: resource_catalog
     weight: 109
-  - name: Cloud Workload Security
-    url: security/cloud_workload_security/
+  - name: Identity Risks
+    url: security/identity_risks/
     parent: csm
-    identifier: cloud_workload_security
-    weight: 2
+    identifier: csm_identity_risks
+    weight: 15
+  - name: Infrastructure Vulnerabilities
+    url: security/infrastructure_vulnerabilities
+    parent: csm
+    identifier: infrastructure_vulnerabilities
+    weight: 18
   - name: Setup
-    url: security/cloud_workload_security/setup
-    parent: cloud_workload_security
-    identifier: cws_setup
+    url: security/infrastructure_vulnerabilities/setup
+    parent: infrastructure_vulnerabilities
+    identifier: infra_vm_setup
     weight: 201
-  - name: Managing Detection Rules
-    url: security/cloud_workload_security/workload_security_rules
-    parent: cloud_workload_security
-    identifier: cws_workload_security_rules
-    weight: 202
-  - name: Security Profiles
-    url: security/cloud_workload_security/security_profiles
-    parent: cloud_workload_security
-    identifier: cws_workload_security_profiles
-    weight: 203
-  - name: Creating Custom Agent Rules
-    url: security/cloud_workload_security/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 204
-  - name: CWS Events Formats
-    url: security/cloud_workload_security/backend
-    parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 205
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
-    weight: 4
+    weight: 20
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
     identifier: csm_guides
-    weight: 6
+    weight: 25
   - name: Troubleshooting
     url: security/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
-    weight: 7
+    weight: 30
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
@@ -3841,21 +3866,26 @@ main:
     parent: npm
     identifier: npm_setup
     weight: 101
-  - name: Network Page
-    url: network_monitoring/performance/network_page/
+  - name: Overview Page
+    url: network_monitoring/performance/overview_page/
     parent: npm
-    identifier: npm_page
+    identifier: npm_overview_page
     weight: 102
+  - name: Network Analytics
+    url: network_monitoring/performance/network_analytics/
+    parent: npm
+    identifier: npm_analytics
+    weight: 103
   - name: Network Map
     url: network_monitoring/performance/network_map/
     parent: npm
     identifier: npm_map
-    weight: 103
+    weight: 104
   - name: Guides
     url: network_monitoring/performance/guide/
     identifier: npm_guides
     parent: npm
-    weight: 104
+    weight: 105
   - name: DNS Monitoring
     url: network_monitoring/dns/
     parent: nm_parent
@@ -3886,21 +3916,26 @@ main:
     parent: ndm
     identifier: ndm_profiles
     weight: 304
+  - name: Network Topology Map
+    url: network_monitoring/devices/network_topology_map
+    parent: ndm
+    identifier: ndm_topology_map
+    weight: 305
   - name: Data Collected
     url: network_monitoring/devices/data
     parent: ndm
     identifier: ndm_data
-    weight: 305
+    weight: 306
   - name: Troubleshooting
     url: network_monitoring/devices/troubleshooting
     parent: ndm
     identifier: ndm_trouble
-    weight: 306
+    weight: 307
   - name: Guides
     url: network_monitoring/devices/guide/
     parent: ndm
     identifier: ndm_guide
-    weight: 307
+    weight: 308
   - name: Developers
     url: developers/
     pre: dev-code
@@ -8311,7 +8346,8 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/

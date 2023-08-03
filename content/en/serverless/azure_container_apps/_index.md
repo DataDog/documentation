@@ -20,13 +20,25 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 ### Dockerfile
 
+Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+
+| dockerhub.io | gcr.io | public.ecr.aws |
+| ---- | ---- | ---- |
+| datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
+
+Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
+
+* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
+* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
+* `latest`, `latest-apline`: use these to follow the latest version release, which may include breaking changes
+
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
 
 Add the following instructions and arguments to your Dockerfile.
 
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
@@ -40,7 +52,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 1. Copy the Datadog `serverless-init` into your Docker image.
 
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. Copy the Datadog Node.JS tracer into your Docker image. 
@@ -76,7 +88,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 Add the following instructions and arguments to your Dockerfile.
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 RUN pip install --target /dd_tracer/python/ ddtrace
 ENV DD_SERVICE=datadog-demo-run-python
 ENV DD_ENV=datadog-demo
@@ -89,7 +101,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 
 1. Copy the Datadog `serverless-init` into your Docker image.
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. Install the Datadog Python tracer. 
@@ -122,7 +134,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 Add the following instructions and arguments to your Dockerfile.
 
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
@@ -135,7 +147,7 @@ CMD ["./mvnw", "spring-boot:run"]
 
 1. Copy the Datadog `serverless-init` into your Docker image.
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. Add the Datadog Java tracer to your Docker image. 
@@ -168,7 +180,7 @@ CMD ["./mvnw", "spring-boot:run"]
 Add the following instructions and arguments to your Dockerfile.
 
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 RUN go install github.com/datadog/orchestrion@latest
 RUN orchestrion -w ./
 RUN go mod tidy
@@ -185,7 +197,7 @@ CMD ["/path/to/your-go-binary"]
 
 1. Copy the Datadog `serverless-init` into your Docker image.
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. Install Orchestrion, which modifies the source code and automatically adds tracing. Do this before you `go build` your app.
@@ -220,7 +232,7 @@ CMD ["/path/to/your-go-binary"]
 Add the following instructions and arguments to your Dockerfile.
 
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
@@ -233,7 +245,7 @@ CMD ["dotnet", "helloworld.dll"]
 
 1. Copy the Datadog `serverless-init` into your Docker image.
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. Copy the Datadog .NET tracer into your Docker image.
@@ -268,7 +280,7 @@ CMD ["dotnet", "helloworld.dll"]
 Add the following instructions and arguments to your Dockerfile.
 
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -281,7 +293,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 1. Copy the Datadog `serverless-init` into your Docker image.
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. (Optional) add Datadog tags
@@ -315,7 +327,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 Add the following instructions and arguments to your Dockerfile.
 ```
-COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
 RUN php /datadog-setup.php --php-bin=all
 ENV DD_SERVICE=datadog-demo-run-ruby
@@ -341,7 +353,7 @@ CMD php-fpm; nginx -g daemon off;
 
 1. Copy the Datadog `serverless-init` into your Docker image.
    ```
-   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
 2. Copy and install the Datadog PHP tracer.
@@ -388,9 +400,10 @@ CMD php-fpm; nginx -g daemon off;
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: set to `true` to enable tracing
-- `DD_AZURE_SUBSCRIPTION_ID`: the Azure Subscription ID associated with the Container App resource 
-- `DD_AZURE_RESOURCE_GROUP`: the Azure Resouce group associated with the Container App resource
+- **`DD_AZURE_SUBSCRIPTION_ID`**: The Azure Subscription ID associated with the Container App resource (Required).
+- **`DD_AZURE_RESOURCE_GROUP`**: The Azure Resouce Group associated with the Container App resource (Required).
+
+- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
@@ -429,6 +442,7 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 |`DD_API_KEY`| [Datadog API Key][6] - **Required**|
 | `DD_SITE` | [Datadog site][4] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
+| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
 | `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
 | `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
 | `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
@@ -458,3 +472,10 @@ RUN apt-get update && apt-get install -y ca-certificates
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/manage-secrets
 [8]: /metrics/distributions/
 [9]: /metrics/#time-and-space-aggregation
+[10]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2
+[11]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[12]: /tracing/other_telemetry/connect_logs_and_traces/dotnet?tab=serilog
+[13]: /tracing/other_telemetry/connect_logs_and_traces/php
+[14]: /tracing/other_telemetry/connect_logs_and_traces/python
+[15]: /tracing/other_telemetry/connect_logs_and_traces/go
+[16]: /tracing/other_telemetry/connect_logs_and_traces/ruby

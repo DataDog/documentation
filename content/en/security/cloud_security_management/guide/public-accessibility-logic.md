@@ -4,7 +4,7 @@ kind: guide
 further_reading:
 - link: "/security/cspm"
   tag: "Documentation"
-  text: "Cloud Security Posture Management"
+  text: "Start tracking misconfigurations with CSM Misconfigurations"
 - link: "/security/default_rules/#cat-cloud-security-management"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
@@ -16,7 +16,7 @@ For more information on network reachability, see the [AWS documentation][34] an
 
 ## Resource dependency graph
 
-The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a Cloudtrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the CSPM Resource relationships graph.
+The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a Cloudtrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations Resource relationships graph.
 
 Use this diagram as a reference for how resources are correlated to determine public accessibility. 
 
