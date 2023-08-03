@@ -6,7 +6,7 @@ private: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logging"
   tag: "Blog"
-  text: "Flex Logging"
+  text: "Store and analyze high-volume logs efficiently with Flex Logs"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Indexes"
@@ -16,7 +16,7 @@ further_reading:
 ---
 
 {{< callout url="https://docs.google.com/forms/d/15FJG6RTFMmp7c7aRE8bcTy6B1Tt8ia4OmiesQa_zkZ4/viewform?edit_requested=true" btn_hidden="false" header="Request Access!">}}
-Flex Logs is in Limited Availability, but you can request access! Use this form to submit your request today. Once approved, you can consolidate your logs and rein in storage costs without sacrificing availability!
+Flex Logs is in Limited Availability, but you can request access! Use this form to submit your request today.
 {{< /callout >}}
 
 ## Overview
