@@ -87,7 +87,7 @@ Utilisez les contrôles d'accès granulaires pour limiter les [rôles][10] capab
 1. Sélectionnez **Permissions**.
 1. Cliquez sur **Restrict Access**.
 1. La boîte de dialogue affiche alors les membres de votre organisation disposant de l'autorisation **Viewer** par défaut.
-1. Utilisez le menu déroulant pour sélectionner un ou plusieurs rôles autorisés à modifier la règle de sécurité.
+1. Depuis la liste déroulante, sélectionnez les rôles, équipes (bêta) ou utilisateurs (bêta) autorisés à modifier la règle de sécurité.
 1. Cliquez sur **Add**.
 1. La boîte de dialogue indique alors que le rôle sélectionné possède l'autorisation **Editor**.
 1. Cliquez sur **Save**.

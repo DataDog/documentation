@@ -31,6 +31,8 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
+algolia:
+  tags: ['inbox']
 ---
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
@@ -77,12 +79,6 @@ Use the [Issues page][7] to review and remediate your organization's detections 
 ## Next steps
 
 To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed information on how to set up and configure CSM.
-
-## Vulnerabilities
-
-[CSM Vulnerabilities][5] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][6] and [hosts][7] in your infrastructure.
-
-<div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
 
 ## Further reading
 

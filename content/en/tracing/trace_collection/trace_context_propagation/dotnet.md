@@ -11,16 +11,16 @@ further_reading:
 ---
 
 
-The Datadog APM Tracer supports [B3][5] and [W3C (TraceParent)][6] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][5] and [W3C Trace Context][6] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
 The .NET Tracer supports the following styles:
 
-- W3C: `tracecontext` (`W3C` is deprecated)
+- W3C Trace Context: `tracecontext` (`W3C` alias is deprecated)
 - Datadog: `Datadog`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
+- B3 Single Header: `B3 single header` (`B3SingleHeader` alias is deprecated)
 
 You can use the following environment variables to configure injection and extraction styles:
 
@@ -29,7 +29,7 @@ You can use the following environment variables to configure injection and extra
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
 
-Starting from version 2.22.0, the default injection style is `tracecontext, Datadog`, so the W3C context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
+Starting from version 2.22.0, the default injection style is `tracecontext, Datadog`, so the W3C Trace Context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
 
 In most cases, headers extraction and injection are transparent. There are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In that case, you can add a custom trace using the following code:
 
