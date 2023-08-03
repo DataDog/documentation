@@ -534,7 +534,7 @@ failure_notification_preview:
   script:
     - |
       if [ -s preview_error.log ]; then
-        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed with the following error: tail -n 10 preview_error.log";
+        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed with the following error: $(tail -n 10 preview_error.log)";
       else
         SLACK_MESSAGE=":siren: A gitlab job for your branch has failed due to an error, please check your pipeline"; # Safety in case the error log is empty
       fi
