@@ -1,5 +1,5 @@
 ---
-title: Flex Logging
+title: Flex Logs
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 private: true
@@ -16,12 +16,12 @@ further_reading:
 ---
 
 {{< callout url="https://docs.google.com/forms/d/15FJG6RTFMmp7c7aRE8bcTy6B1Tt8ia4OmiesQa_zkZ4/viewform?edit_requested=true" btn_hidden="false" header="Request Access!">}}
-Datadog Apps is in Limited Availability, but you can request access! Use this form to submit your request today. Once approved, you can consolidate your logs and rein in storage costs without sacrificing availability!
+Flex Logs is in Limited Availability, but you can request access! Use this form to submit your request today. Once approved, you can consolidate your logs and rein in storage costs without sacrificing availability!
 {{< /callout >}}
 
 ## Overview
 
-Flex Logging decouples log storage and log query compute. This allows you to store all your logs and have more flexibility to choose which use cases you want to serve. You can keep high-volume logs for long periods of time and store all your logs with Datadog, across all use cases and budgets.
+Flex Logs decouples log storage and log query compute. This allows you to store all your logs and have more flexibility to choose which use cases you want to serve. You can keep high-volume logs for long periods of time and store all your logs with Datadog, across all use cases and budgets.
 
 Security, Compliance, and Engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Long term analysis requirements are not limited to security teams. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of entities like users, hosts, and IP addresses are better served with logs over straight metrics.
 
@@ -29,12 +29,12 @@ This overview highlights the main features of Flex Tier storage, the differences
 
 ## Configure storage tiers
 
-Flex Logging is set up within Log index configurations. [Index filters][1] that apply to that index also apply to Flex logs.
+Flex Logs is set up within Log index configurations. [Index filters][1] that apply to that index also apply to Flex logs.
 
 Configure in the [Logs Index Configuration][2] page:
 
 1. Go to [**Logs > Configuration > Indexes**][2].
-2. Edit the index you wish to enable with Flex Logging.
+2. Edit the index you wish to enable with Flex Logs or create a new index.
 3. Select **Flex Tier** and set the retention under *Configure Storage Tier and Retention*.
 
 {{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Options for the Flex tier storage within the index configuration" style="width:100%;" >}}
