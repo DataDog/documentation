@@ -78,12 +78,6 @@ Use the [Issues page][7] to review and remediate your organization's detections 
 
 To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed information on how to set up and configure CSM.
 
-## Vulnerabilities
-
-[CSM Vulnerabilities][5] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][6] and [hosts][7] in your infrastructure.
-
-<div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
