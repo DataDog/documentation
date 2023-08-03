@@ -10,15 +10,16 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Python (using `pytest`) in beta.{{< /callout >}}
+
 ## Compatibility
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
-* `pytest>=24.8.0`
-  * From `ddtrace>=1.17.0`.
-  * From `Python>=3.6`.
+* `pytest>=6.8.0`
+  * From `ddtrace>=2.0`.
+  * From `Python>=3.7`.
   * Requires `coverage>=5.5`.
-
 
 ## Setup
 
@@ -30,22 +31,24 @@ To enable Intelligent Test Runner, set the following environment variables:
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-`DD_CIVISIBILITY_ITR_ENABLED` (Optional)
-: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
 After setting these environment variables, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_APP_KEY=$APP_KEY pytest --ddtrace
 {{< /code-block >}}
 
-
 #### UI activation
 In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
+## Disabling the Intelligent Test Runner
+
+The Intelligent Test Runner can be disabled at runtime, regardless of the settings applied in the UI activation section above, by setting the `DD_CIVISIBILITY_ITR_DISABLED` environment variable to `true`.
+
+`DD_CIVISIBILITY_ITR_DISABLED` (Optional)
+: Disables the Intelligent Test Runner from running.<br/>
+**Default**: `false`
 
 ## Further Reading
 
