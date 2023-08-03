@@ -26,7 +26,8 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent  が RMIServer スタブの取得に失敗した{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag="network" >}}TCP/UDP のホストメトリクスを Datadog API に送信する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}よく使われる SNMP と互換性のある OID{{< /nextlink >}} 
-{{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}OpenMetrics ベースのインテグレーションのバージョン管理{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS ガイド:" >}}
