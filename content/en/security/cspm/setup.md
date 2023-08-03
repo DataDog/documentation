@@ -46,7 +46,7 @@ Use one of the following methods to enable CSM Misconfigurations for your AWS ac
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][3] to activate CSM Misconfigurations for your account.
-3. On the **Setup** > **Cloud Providers** tab, click the **[AWS][4]** tile.
+3. On the **Setup** > **Cloud Providers** tab, click the **[AWS][3]** tile.
 4. To enable CSM Misconfigurations for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
@@ -57,8 +57,7 @@ Use one of the following methods to enable CSM Misconfigurations for your AWS ac
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
-[3]: https://app.datadoghq.com/security/configuration
-[4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=amazon-web-services
+[3]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 
@@ -78,7 +77,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Azure 
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
-3. On the **Setup** > **Cloud Providers** tab, click the **[Azure][3]** tile.
+3. On the **Setup** > **Cloud Providers** tab, click the **[Azure][2]** tile.
 4. Enable CSM Misconfigurations for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
 
 #### Azure integration tile
@@ -88,8 +87,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Azure 
 3. Click **Update Configuration**.
 
 [1]: https://docs.datadoghq.com/integrations/azure
-[2]: https://app.datadoghq.com/security/configuration
-[3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=azure
+[2]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 
@@ -131,7 +129,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
-3. On the **Setup** > **Cloud Providers** tab, click the **[Google Cloud Platform][3]** tile.
+3. On the **Setup** > **Cloud Providers** tab, click the **[Google Cloud Platform][2]** tile.
 4. Enable CSM Misconfigurations for your Google Cloud projects by turning on the **CSPM Enabled** toggle.
 
 #### Google Cloud integration tile
@@ -141,8 +139,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 3. Click **Update Configuration**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
-[2]: https://app.datadoghq.com/security/configuration
-[3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=google-cloud-platform
+[2]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://support.google.com/cloud/answer/6293499?hl=en
 [5]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
 [6]: https://console.cloud.google.com/apis/library/compute.googleapis.com
@@ -158,13 +155,11 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
-3. On the **Setup** > **Host and containers** tab, click the **[Docker][2]** tile.
+3. On the **Setup** > **Host and containers** tab, click the **[Docker][1]** tile.
 4. Click **Select API key** to choose the API key you want to use with CSM Misconfigurations.
 5. Copy the automatically generated command and run it in your Docker environment to enable CSM Misconfigurations.
 
-[1]: https://app.datadoghq.com/security/configuration
-[2]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=docker
-
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -173,7 +168,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
 2. Navigate to **Security** > **Setup**.
-3. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
+3. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
 4. Add the following to the `datadog` section of the `values.yaml` file:
     ```yaml
     # values.yaml file
@@ -190,8 +185,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 5. Restart the Agent.
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: https://app.datadoghq.com/security/configuration
-[3]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=kubernetes
+[2]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 {{< /tabs >}}
