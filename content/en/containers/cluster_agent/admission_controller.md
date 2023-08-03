@@ -190,7 +190,7 @@ Possible options:
 - By using the Datadog Admission Controller, users can skip configuring the application Pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
 - Specific networking rules are required in private clusters as the Datadog Admission Controller webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000` :
     - In a GKE private cluster, you need to [add a Firewall Rule for the control plane][4]. By default, in the network for the cluster, there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
-    - In an EKS private cluster, the **node security group** (on which the Datadog Cluster Agent is) should be edited [to add an Inbound rule][5] allowing TCP port `8000` with the `Source` referencing the **cluster security group** (corresponding to the EKS control plane).
+    - In an EKS private cluster, the **node security group** (on which the Datadog Cluster Agent is) should be edited [to add an Inbound rule][5] allowing TCP port `8000` with the `Source` referencing the **cluster security group** (automatically created by AWS corresponding to the EKS control plane).
 
 
 ## Further Reading
