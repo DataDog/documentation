@@ -140,8 +140,6 @@ build_preview:
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
-    - echo "error...testing errors" >&2
-    - exit 1
     - build_site
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
