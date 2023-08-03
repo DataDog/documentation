@@ -58,7 +58,7 @@ If you want to enrich the data collected with your AWS Lambda resource tags, mak
 
 For quick questions, post in the _#serverless_ channel of the [Datadog Slack community][11].
 
-If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], use one of the following methods to send important configuration info to support.
+If you have followed all the troubleshooting steps above and want help from [Datadog Support][12], use one of the following methods to send relevant configuration information to support.
 
 {{< tabs >}}
 {{% tab "Serverless Flare" %}}
@@ -69,7 +69,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
     npm install -g @datadog/datadog-ci
     ```
 
-3. Use the serverless flare command from the root of your project directory to automatically collect and submit data about your Lambda function to Datadog Support.
+3. Use the Serverless Flare command from the root of your project directory to automatically collect and submit data about your Lambda function to Datadog Support.
 
     ```sh
     datadog-ci lambda flare -f <function_arn> -e <email> -c <case_id> --with-logs
