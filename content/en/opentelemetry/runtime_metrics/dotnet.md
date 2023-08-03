@@ -18,7 +18,7 @@ If you have instrumented your .NET applications with [OpenTelemetry automatic in
 
 If you have instrumented your .NET application with [OpenTelemetry manual instrumentation][4], see the documentation for the [OpenTelemetry.Instrumentation.Runtime library][5].
 
-The default metric export interval for the .NET OTel SDK is different from the default for the Datadog .NET SDK. We recommend setting the [OTEL_METRIC_EXPORT_INTERVAL][7] environment variable on your .NET service to match the default Datadog metric export interval for viewing integration metric graphs:
+The default metric export interval for the .NET OTel SDK is different from the default for the Datadog .NET SDK. Datadog recommends setting the [OTEL_METRIC_EXPORT_INTERVAL][7] environment variable on your .NET service to match the default Datadog metric export interval for viewing integration metric graphs:
 - `OTEL_METRIC_EXPORT_INTERVAL=10000`
 
 ## Runtime metric mappings
