@@ -82,7 +82,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
 Create a [Zendesk ticket](https://help.datadoghq.com/hc/en-us/requests/new), and include the following information in your ticket:
 
 1. Basic information about your Lambda function: ARN, runtime, handler, layers, environment variables, and tags. Focus on one function first if you have the same issue with many.
-2. If the Lambda function is configured to send data through logs using the Datadog Forwarder Lambda function, include basic information about the Forwarder Lambda function, as well as the subscription filters configured on your Lambda function's log group.
+2. If the Lambda function is configured to send data through logs using the Datadog Forwarder, include basic information about the Forwarder Lambda function. Also, provide the subscription filters configured on your Lambda function's log group.
 3. The installation method you followed, such as _Serverless Framework_ or _AWS CDK_.
 4. The alternative installation method you attempted, such as _Datadog CLI_ or _Custom_.
 5. Debugging logs from your own Lambda function.
