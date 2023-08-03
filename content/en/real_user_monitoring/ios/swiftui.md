@@ -28,7 +28,7 @@ To instrument a `SwiftUI.View`, add the following method to your view declaratio
 
 ```swift
 import SwiftUI
-import Datadog
+import DatadogRUM
 
 struct FooView: View {
 
@@ -49,7 +49,7 @@ To instrument a tap action on a `SwiftUI.View`, add the following method to your
 
 ```swift
 import SwiftUI
-import Datadog
+import DatadogRUM
 
 struct BarView: View {
 
