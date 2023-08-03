@@ -10,7 +10,7 @@ code_lang_weight: 20
 
 - You are successfully [sending OpenTelemetry metrics to Datadog][1].
 - You have installed the language integration for [.NET][2].
-- Minimum .NET OTel SDK version of [1.5.0][6]
+- Minimum .NET OTel SDK version of [1.5.0][6].
 
 ## OpenTelemetry SDK configuration
 
