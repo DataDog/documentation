@@ -880,6 +880,9 @@ components:
             customAttribute: 123
             duration: 2345
           type: object
+        message:
+          description: Message of the event.
+          type: string
         service:
           description: 'Name of the application or service generating Audit Logs events.
 
