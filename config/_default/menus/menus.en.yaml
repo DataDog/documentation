@@ -1830,10 +1830,6 @@ main:
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
     weight: 606
-  - name: Trace Queries
-    url: tracing/trace_queries/
-    parent: tracing
-    weight: 7
   - name: Service Observability
     url: tracing/services/
     parent: tracing
