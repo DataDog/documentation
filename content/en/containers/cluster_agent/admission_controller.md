@@ -188,7 +188,9 @@ Possible options:
 - The Admission Controller needs to be deployed and configured before the creation of new application Pods. It cannot update Pods that already exist.
 - To disable the Admission Controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - By using the Datadog Admission Controller, users can skip configuring the application Pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
-- In a private cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
+- Specific networking rules are required in private clusters as the Datadog Admission Controller webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000` :
+    - In a GKE private cluster, you need to [add a Firewall Rule for the control plane][4]. By default, in the network for the cluster, there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
+    - In an EKS private cluster, the **node security group** (on which the Datadog Cluster Agent is) should be edited [to add an Inbound rule][5] allowing TCP port `8000` with the `Source` referencing the **cluster security group** (corresponding to the EKS control plane).
 
 
 ## Further Reading
@@ -199,3 +201,4 @@ Possible options:
 [2]: /tracing/trace_collection/library_injection_local/
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
+[5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
