@@ -40,7 +40,7 @@ The Go Datadog Trace Library has a [version support policy][3] defined for Go ve
 
 You must be running Datadog Agent v5.21.1+
 
-Starting from tracer version 1.53.0, ASM does not require [CGO][15] anymore.
+Starting from tracer version 1.53.0, ASM does not require [CGO][15].
 
 ## Integrations
 
