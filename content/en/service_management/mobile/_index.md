@@ -15,15 +15,16 @@ further_reading:
   text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
 
-The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog mobile app enables you to view alerts, dashboards, application performance, and incidents from Datadog on your mobile device. When you receive an alert while on-the-go, you'll be able to investigate the impact and track the incident through the Datadog mobile app.
 
 ## Installing
 
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
+  {{< img src="service_management/mobile/mobile-app-qr-codes.png" alt="Download the Datadog Mobile App" style="width:80%;">}}
 
 ### Logging in
 
-You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
+You can log in using standard authentication, Google authentication, or [SAML][3] - for US, EU, and Japan regions.
 
 #### Enabling SAML
 
@@ -52,6 +53,14 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 ##### SAML IdP initiated login
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
+
+## Using the Datadog Mobile App
+
+At the top of your home page, you can find the name of the organization you are logged into. Underneath, there are several sections showing the content you interact with often: Starred Items, Monitor Saved Views, Open Incidents, and Recent. You can fully customize the content displayed in each section (except Recent), and which order the sections appear on your home page by selecting "Edit" at the bottom of the page.
+
+The second tab at the bottom of the mobile app is Search. Here, you can see a search bar with recent searches, in addition to Monitors, Dashboards, Services, and Incidents buttons to browse by product.
+
+On the account tab, you'll find your name and email, an option to switch organizations, the Datadog status page, settings, and contact options.
 
 ## Monitors
 
@@ -453,10 +462,6 @@ For Handoff to work, each device must:
 - Have Handoff enabled
 
 For more information about Handoff, read the [Apple Handoff documentation][19].
-
-## Account
-
-Switch organizations or log out from the Account page.
 
 ## Troubleshooting
 
