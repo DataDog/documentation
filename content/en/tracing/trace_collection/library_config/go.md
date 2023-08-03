@@ -129,7 +129,7 @@ Added in version 1.54.0. Only compatible with the Datadog Agent 7.26.0+.
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **Default**: `false` <br>
 Enable client IP collection from relevant IP headers in HTTP request spans.
-Added in version 1.54.0.
+Added in version 1.47.0
 
 
 ## Configure APM environment name
