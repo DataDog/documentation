@@ -1496,6 +1496,11 @@ components:
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
         graph\u2019s x-axis is quantity rather than time."
       properties:
+        custom_links:
+          description: A list of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         legend_size:
           deprecated: true
           description: (Deprecated) The widget legend was replaced by a tooltip and

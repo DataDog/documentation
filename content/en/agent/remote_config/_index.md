@@ -13,7 +13,7 @@ further_reading:
   text: "Dynamic Instrumentation"
 - link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
-  text: "Setting Up Cloud Workload Security"
+  text: "Setting Up CSM Threats"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Using Datadog Audit Trail"
@@ -31,7 +31,7 @@ further_reading:
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 Once you enable Remote Configuration on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
@@ -62,19 +62,20 @@ The following products and features are supported with Remote Config:
 
 - **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote instrumentation][2] for more information.
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+- **Configure tracing library settings in the UI**: Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
 
 ### Dynamic Instrumentation
 <div class="alert alert-info">This feature is in beta.</div>
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
-### Cloud Workload Security (CWS)
+### CSM Threats
 
 <div class="alert alert-info">Remote Configuration for default Agent rules is in beta.</div>
 
 <div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/18hwf0-4AXYzKcQR0AIT1JxhaMFLw90YaDXBaUgdxKLM/prefill">form</a> to request access.</div>
 
-- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][3] for more information.
+- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up CSM Threats][3] for more information.
 - **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 ### Observability Pipelines
@@ -157,7 +158,7 @@ datadog:
 6. Restart your Agent for the changes to take effect. 
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
-- [CWS default agent rules][9] update automatically as released.
+- [CSM Threats default agent rules][9] update automatically as released.
 - [Datadog Remote instrumentation][2] is enabled.
 - [APM Agent-level sampling rates][10] are applied.  
 - [Dynamic Instrumentation][11] is enabled.
@@ -229,4 +230,4 @@ Gain visibility into the Remote Configuration status of your Agent through the [
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
 [17]: /agent/guide/network
 [18]: /agent/proxy/
-
+[19]: /tracing/service_catalog/
