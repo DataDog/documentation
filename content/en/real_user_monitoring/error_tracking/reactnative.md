@@ -368,11 +368,11 @@ If you are still unsure, you can see if running `(cd android && ./gradlew tasks 
 
 #### Manually on each build
 
-In your `android/app/build.gradle` file, add the plugin and configure it **at the very top of the file**:
+In your `android/app/build.gradle` file, add the [latest version of the plugin][15] and configure it **at the top of the file**:
 
 ```groovy
 plugins {
-    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.5.1"
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
 }
 
 datadog {
@@ -418,7 +418,7 @@ Inside the loop, add the following snippet:
 [3]: /real_user_monitoring/reactnative/
 [4]: /real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
-[6]: https://github.com/datadog/dd-sdk-android-gradle-plugin
+[6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://github.com/cwhenderson20/react-native-crash-tester
 [9]: https://fastlane.tools/
 [10]: https://appcenter.ms/
@@ -426,3 +426,4 @@ Inside the loop, add the following snippet:
 [12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
+[15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin

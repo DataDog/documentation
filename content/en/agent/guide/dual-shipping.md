@@ -288,7 +288,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Posture Management (CSPM)
+## Cloud Security Management Misconfigurations
 
 ### YAML configuration
 
@@ -313,7 +313,7 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% agent-dual-shipping %}}
 
-## Cloud Workload Security (CWS)
+## Cloud Security Management Threats
 
 ### YAML configuration
 In `datadog.yaml`:

@@ -26,22 +26,22 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onResume() {
-         GlobalRum.get().startView(viewKey, viewName, viewAttributes)
+         GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
        }
 
        fun onPause() {
-         GlobalRum.get().stopView(viewKey, viewAttributes)
+         GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onResume() {
-            GlobalRum.get().startView(viewKey, viewName, viewAttributes);
+            GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
        }
        
        public void onPause() {
-            GlobalRum.get().stopView(viewKey, viewAttributes);
+            GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
        }
    ```
 {{% /tab %}}
@@ -54,14 +54,14 @@ In addition to RUM's default attributes, you can measure where your application 
 {{% tab "Kotlin" %}}
    ```kotlin
       fun onHeroImageLoaded() {
-            GlobalRum.get().addTiming("hero_image")
+            GlobalRumMonitor.get().addTiming("hero_image")
       } 
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onHeroImageLoaded() {
-            GlobalRum.get().addTiming("hero_image");
+            GlobalRumMonitor.get().addTiming("hero_image");
        }
    ```
 {{% /tab %}}
@@ -71,7 +71,7 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 
 ### Custom Actions
 
-In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addUserAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startUserAction` and `RumMonitor#stopUserAction`.
+In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
 
 Note the action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
 
@@ -79,14 +79,14 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onUserInteraction() { 
-            GlobalRum.get().addUserAction(actionType, name, actionAttributes)
+            GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onUserInteraction() {
-            GlobalRum.get().addUserAction(actionType, name, actionAttributes);
+            GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
        }
    ```
 {{% /tab %}}
@@ -105,7 +105,7 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
         response: Response?,
         throwable: Throwable?
     ): Map<String, Any?> {
-        val headers = request.headers()
+        val headers = request.headers
         return headers.names().associate {
             "headers.${it.lowercase(Locale.US)}" to headers.values(it).first()
         }
@@ -115,7 +115,6 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-
 public class CustomRumResourceAttributesProvider implements RumResourceAttributesProvider {
     @NonNull
     @Override
@@ -147,12 +146,12 @@ In addition to [tracking resources automatically][6], you can also track specifi
 {{% tab "Kotlin" %}}
    ```kotlin
        fun loadResource() {
-            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
+            GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
             try {
               // do load the resource
-              GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
+              GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
             } catch (e: Exception) {
-              GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
+              GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
             } 
        }
    ```
@@ -160,12 +159,12 @@ In addition to [tracking resources automatically][6], you can also track specifi
 {{% tab "Java" %}}
    ```java
        public void loadResource() {
-            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes);
+            GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
             try {
                 // do load the resource
-                GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes);
+                GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
             } catch (Exception e) {
-                GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e);
+                GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
             }
        }
    ```
@@ -176,11 +175,9 @@ In addition to [tracking resources automatically][6], you can also track specifi
 
 To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][9].
 
-
    ```kotlin
-      GlobalRum.get().addError(message, source, throwable, attributes)
+      GlobalRumMonitor.get().addError(message, source, throwable, attributes)
    ```
-
 
 ## Track custom global attributes
 
@@ -203,7 +200,7 @@ The following attributes are **optional**, you should provide **at least one** o
 | usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
-To identify user sessions, use the `setUser` API, for example:
+To identify user sessions, use the `setUserInfo` API, for example:
 
 ```kotlin
 Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
@@ -211,13 +208,13 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ### Track attributes
 
-   ```kotlin
-      // Adds an attribute to all future RUM events
-      GlobalRum.addAttribute(key, value)
- 
-      // Removes an attribute to all future RUM events
-      GlobalRum.removeAttribute(key)
-   ```
+```kotlin
+    // Adds an attribute to all future RUM events
+    GlobalRumMonitor.addAttribute(key, value)
+
+    // Removes an attribute to all future RUM events
+    GlobalRumMonitor.removeAttribute(key)
+```
 
 ## Track widgets
  
@@ -225,32 +222,25 @@ Widgets are not automatically tracked with the SDK. To send UI interactions from
 
 
 ## Initialization parameters
- 
+
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
-`trackInteractions(Array<ViewAttributesProvider>)` 
+`setFirstPartyHosts()` 
+: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`.
+
+`useSite(DatadogSite)` 
+: Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
+ 
+You can use the following methods in `RumConfiguration.Builder` when creating the RUM configuration to enable RUM feature:
+
+`trackUserInteractions(Array<ViewAttributesProvider>)` 
 : Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
 
 `useViewTrackingStrategy(strategy)` 
 : Defines the strategy used to track views. Depending on your application's architecture, you can choose one of several implementations of [`ViewTrackingStrategy`][4] or implement your own.
 
-`addPlugin(DatadogPlugin, Feature)`
-: Adds a plugin implementation for a specific feature (`CRASH`, `LOG`, `TRACE`, or `RUM`). The plugin is registered once the feature is initialized and unregistered when the feature is stopped.
-
 `trackLongTasks(durationThreshold)` 
 : Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog.
-
-`setFirstPartyHosts()` 
-: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`.
-
-`useEUEndpoints()` 
-: Switches target data to EU endpoints.
-
-`useUSEndpoints()` 
-: Switches target data to US endpoints.
-
-`useGovEndpoints()` 
-: Switches target data to US1-FED endpoints.
 
 `setBatchSize([SMALL|MEDIUM|LARGE])` 
 : Defines the individual batch size for requests sent to Datadog.
@@ -261,10 +251,10 @@ You can use the following methods in `Configuration.Builder` when creating the D
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
 : Sets the preferred frequency for collecting mobile vitals.
 
-`sampleRumSessions(<samplingRate>)` 
-: Sets the RUM sessions sampling rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
+`setSessionSampleRate(<sampleRate>)` 
+: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
-`setRumXxxEventMapper()` 
+`setXxxEventMapper()` 
 : Sets the data scrubbing callbacks for views, actions, resources, and errors.
 
  
@@ -290,14 +280,14 @@ For instance, to set each fragment as a distinct view, use the following configu
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val configuration = Configuration.Builder(true, true, true, true)
+       val rumConfig = RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       final Configuration configuration = new Configuration.Builder(true, true, true, true)
+       RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
         .build();
    ```
@@ -310,7 +300,7 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val configuration = Configuration.Builder(true, true, true, true)
+       val rumConfig = RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(
         ActivityViewTrackingStrategy(
             trackExtras = true,
@@ -327,7 +317,7 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        Configuration configuration = new Configuration.Builder(true, true, true, true)
+        RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
             .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
                 true,
                 new ComponentPredicate<Activity>() {
@@ -353,7 +343,17 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 
 ### Automatically track network requests
 
-To get timing information in resources (such as third-party providers, network requests) such as time to first byte or DNS resolution, customize the `okHttpClient` to add the [EventListener][8] factory:
+To get timing information in resources (such as third-party providers, network requests) such as time to first byte or DNS resolution, customize the `OkHttpClient` to add the [EventListener][8] factory:
+
+1. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+2. Add add the [EventListener][8] factory:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -366,7 +366,7 @@ To get timing information in resources (such as third-party providers, network r
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(new DatadogInterceptor())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
@@ -381,7 +381,8 @@ Long running operations performed on the main thread can impact the visual perfo
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val config = Configuration.Builder(true, true, true, true)
+       val rumConfig = RumConfiguration.Builder(applicationId)
+        // …
         .trackLongTasks(durationThreshold)
         .build()
    ```
@@ -389,7 +390,7 @@ Long running operations performed on the main thread can impact the visual perfo
 For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
    ```kotlin
-      val configuration = Configuration.Builder(…)
+      val rumConfig = RumConfiguration.Builder(applicationId)
         // …
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build()
@@ -397,7 +398,8 @@ For example, to replace the default `100 ms` duration, set a custom threshold in
 {{% /tab %}}
 {{% tab "Java" %}}
   ```java
-      Configuration configuration = new Configuration.Builder(true, true, true, true)
+      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+        // …
         .trackLongTasks(durationThreshold)
         .build();
    ```
@@ -405,7 +407,7 @@ For example, to replace the default `100 ms` duration, set a custom threshold in
 For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
 
    ```java
-      Configuration configuration = new Configuration.Builder(…)
+      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         // …
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build();
@@ -421,25 +423,25 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val config = Configuration.Builder(true, true, true, true)
-        ...
-        .setRumErrorEventMapper(rumErrorEventMapper)
-        .setRumActionEventMapper(rumActionEventMapper)
-        .setRumResourceEventMapper(rumResourceEventMapper)
-        .setRumViewEventMapper(rumViewEventMapper)
-        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+       val rumConfig = RumConfiguration.Builder(applicationId)
+        // ...
+        .setErrorEventMapper(rumErrorEventMapper)
+        .setActionEventMapper(rumActionEventMapper)
+        .setResourceEventMapper(rumResourceEventMapper)
+        .setViewEventMapper(rumViewEventMapper)
+        .setLongTaskEventMapper(rumLongTaskEventMapper)
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
   ```java
-      Configuration config = new Configuration.Builder(true, true, true, true)
-        ...
-        .setRumErrorEventMapper(rumErrorEventMapper)
-        .setRumActionEventMapper(rumActionEventMapper)
-        .setRumResourceEventMapper(rumResourceEventMapper)
-        .setRumViewEventMapper(rumViewEventMapper)
-        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+        // ...
+        .setErrorEventMapper(rumErrorEventMapper)
+        .setActionEventMapper(rumActionEventMapper)
+        .setResourceEventMapper(rumResourceEventMapper)
+        .setViewEventMapper(rumViewEventMapper)
+        .setLongTaskEventMapper(rumLongTaskEventMapper)
         .build();
 
    ```
@@ -479,14 +481,14 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
 ## Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RumMonitor][2] as a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
 
 ```kotlin
-val monitor = RumMonitor.Builder()
+val rumConfig = RumConfiguration.Builder(applicationId)
         // Here 75% of the RUM sessions are sent to Datadog
-        .sampleRumSessions(75.0f)
+        .setSessionSampleRate(75.0f)
         .build()
-GlobalRum.registerIfAbsent(monitor)
+Rum.enable(rumConfig)
 ```
 
 ## Further Reading

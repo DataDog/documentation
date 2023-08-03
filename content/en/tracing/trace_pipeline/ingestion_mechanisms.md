@@ -737,7 +737,7 @@ Similarly, control the trace sampling rate in other SDKs by using similar parame
 |-------------|-----------------------|--------------------|
 | Browser     | `traceSampleRate`     | [v4.30.0][8]       |
 | iOS         | `tracingSamplingRate` | [1.11.0][9] _Sampling rate is reported in the Ingestion Control Page since [1.13.0][16]_ |
-| Android     | `traceSamplingRate`   | [1.13.0][10] _Sampling rate is reported in the Ingestion Control Page since [1.15.0][17]_ |
+| Android     | `traceSampleRate`   | [1.13.0][10] _Sampling rate is reported in the Ingestion Control Page since [1.15.0][17]_ |
 | Flutter     | `tracingSamplingRate` | [1.0.0][11] |
 | React Native | `tracingSamplingRate` | [1.0.0][12] _Sampling rate is reported in the Ingestion Control Page since [1.2.0][18]_  |
 
