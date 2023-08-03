@@ -42,7 +42,7 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup) and select an AWS account from the dropdown menu to pull costs from.
+Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
 
 **Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 
@@ -179,6 +179,7 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[7]: https://app.datadoghq.com/cost/setup
 
 ## Billing conductor
 Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
@@ -251,7 +252,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 ### Configure Cloud Costs in Datadog
-Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup?cloud=azure) and follow the steps.
+Navigate to [Setup & Configuration][5] and follow the steps.
 
 ### Cost types
 
@@ -266,6 +267,7 @@ You can visualize your ingested data using the following cost types:
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
 [4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
+[5]: https://app.datadoghq.com/cost/setup?cloud=azure
 {{% /tab %}}
 {{< /tabs >}}
 
