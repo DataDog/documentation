@@ -192,7 +192,7 @@ Added in version 1.17.0. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\` on Windows, `/var/log/datadog/dotnet` on Linux
 
 `DD_TRACE_LOGFILE_RETENTION_DAYS`
-: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files equal to and older than the given amount of days. Added in version 2.19.0. <br>
+: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
 **Default**: `31`
 
 `DD_TRACE_LOGGING_RATE`
