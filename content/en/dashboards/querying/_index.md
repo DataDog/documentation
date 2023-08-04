@@ -230,7 +230,7 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [9]: /metrics/#time-aggregation
 [10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /dashboards/functions/rollup/
-[12]: /dashboards/functions/#apply-functions-optional
+[12]: /dashboards/functions/#function-types
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /logs/explorer/search_syntax/
 [15]: /dashboards/widgets/timeseries/#event-overlay

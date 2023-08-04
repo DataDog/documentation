@@ -47,7 +47,7 @@ title: ダウンタイムスケジュールのスコープ
 
 ## モニタータグで
 
-スケジュールされたダウンタイムが共通のモニタータグに基づいており、スコープ内のモニターが 1 つの group by スコープを持つマルチアラートモニターである場合、`Group scope` フィールドを使用して、スコープ内のモニターが共通に持つグループをサイレントにできます。 
+スケジュールされたダウンタイムが共通のモニタータグに基づいており、スコープ内のモニターが 1 つの group by スコープを持つマルチアラートモニターである場合、`Group scope` フィールドを使用して、スコープ内のモニターが共通に持つグループをサイレントにできます。
 
 ### それぞれが 1 つの "group by" スコープを持つ 2 つのマルチアラートモニターには、共通の `downtime:true` モニタータグがあります。
 
@@ -57,15 +57,15 @@ title: ダウンタイムスケジュールのスコープ
 4. このダウンタイムは、グループ  `service:web-store` に制限されています。
 5. 影響を受けるモニターをプレビューすると、両方のモニターのスコープにグループ `service:web-store` が含まれていることがわかります。
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="'By Monitor Tags' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.png" alt="'By Monitor Tags' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:80%;">}}
 
 6. *モニター A* は、ダウンタイムが開始されたことを示していますが、スコープ内のグループのみです: `service:web-store`
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.jpg" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.png" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 7. *モニター B* は、`service:web-store` のダウンタイムが開始されたことを示しています。すべてのモニターのグループ (`host` ごと) は `service:web-store` に属しているため、このモニターのダウンタイム中にすべてのホストがミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.jpg" alt="グループ service:web-store と影響を受ける両ホストのダウンタイムを示す評価グラフ" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.png" alt="グループ service:web-store と影響を受ける両ホストのダウンタイムを示す評価グラフ" style="width:80%;">}}
 
 ## その他の参考資料
 

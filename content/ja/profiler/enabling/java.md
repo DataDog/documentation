@@ -7,9 +7,9 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/java
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
@@ -25,11 +25,11 @@ type: multi-code-lang
 dd-trace-java バージョン 1.0.0 では、Java アプリケーションの CPU プロファイルデータを生成するエンジンとして、2 つのオプションがあります。[Java Flight Recorder (JFR)][2] または Datadog Profiler です。バージョン 1.7.0 以降では、Datadog プロファイラーがデフォルトとなっています。それぞれのプロファイラーエンジンには、異なる副作用、要件、利用可能な構成、および制限があり、このページでは、それぞれについて説明します。どちらか一方、または両方のエンジンを有効にすることができます。両方を有効にすると、両方のプロファイルタイプが同時にキャプチャされます。
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
 
 JDK の最小バージョン:
 
-- OpenJDK 8u352+、11.0.17+、17.0.5+
+- OpenJDK 8u352+、11.0.17+、17.0.5+ (その上に構築された Amazon Corretto、Azul Zulu その他のビルドを含む)
 - Oracle JDK 8u352+、11.0.17+、17.0.5+
 - OpenJ9 JDK 8u372+、11.0.18+、17.0.6+
 
@@ -134,7 +134,7 @@ Datadog Profiler は、CPU、ウォールクロック、アロケーション、
 
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
 
 dd-trace-java バージョン 1.7.0+ では、Datadog Profiler がデフォルトで有効になっています。Datadog CPU プロファイリングは perf イベントを通してスケジュールされ、JFR CPU プロファイリングよりも正確です。CPU プロファイリングを有効にするには
 
@@ -295,8 +295,8 @@ export DD_PROFILING_DDPROF_CSTACK=dwarf
 [1]: /ja/tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [3]: /ja/profiler/profiler_troubleshooting/#java-8-support
-[4]: https://app.datadoghq.com/account/settings#agent/overview
-[5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
 [8]: /ja/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler

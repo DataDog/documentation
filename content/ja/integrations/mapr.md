@@ -33,7 +33,7 @@ draft: false
 git_integration_title: mapr
 integration_id: mapr
 integration_title: MapR
-integration_version: 1.9.1
+integration_version: 1.9.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -171,7 +171,7 @@ MapR チェックには、イベントは含まれません。
 
 
 [1]: https://mapr.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://mapr.com/docs/61/AdministratorGuide/Monitoring.html
 [4]: https://mapr.com/docs/61/AdministratorGuide/c-managing-users-and-groups.html
 [5]: https://docs.datafabric.hpe.com/52/SecurityGuide/t_config_impersonation_notsecure.html?hl=secure%2Ccluster

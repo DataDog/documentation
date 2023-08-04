@@ -123,7 +123,6 @@ You can add custom tags to your tests by using the current active span:
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
-[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 
 ### Adding custom metrics to tests
 
@@ -137,6 +136,10 @@ Just like tags, you can add custom metrics to your tests by using the current ac
     // ...
   })
 ```
+Read more about custom metrics in [Add Custom Metrics Guide][2].
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -197,7 +200,6 @@ You can add custom tags to your test by grabbing the current active span:
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
-[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 
 ### Adding custom metrics to tests
 
@@ -211,6 +213,10 @@ You may also add custom metrics to your test by grabbing the current active span
     // ...
   })
 ```
+Read more about custom metrics in [Add Custom Metrics Guide][2]
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -306,14 +312,12 @@ For example:
 ```javascript
 beforeEach(() => {
   cy.task('dd:addTags', {
-    'before.each':
-    'certain.information'
+    'before.each': 'certain.information'
   })
 })
 it('renders a hello world', () => {
   cy.task('dd:addTags', {
-    'team.owner': 'ui',
-    'test.importance': 3
+    'team.owner': 'ui'
   })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
@@ -324,7 +328,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
+To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
 
 For example:
 
@@ -337,9 +341,12 @@ it('renders a hello world', () => {
     .should('have.text', 'Hello World')
 })
 ```
+
+Read more about custom metrics in [Add Custom Metrics Guide][6].
+
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
+If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
 
 
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
@@ -347,8 +354,9 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[6]: /real_user_monitoring/browser/#setup
-[7]: /continuous_integration/guides/rum_integration/
+[6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[7]: /real_user_monitoring/browser/#setup
+[8]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}

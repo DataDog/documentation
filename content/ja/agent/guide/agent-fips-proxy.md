@@ -78,7 +78,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 環境変数 `DD_FIPS_MODE` を設定すると、Agent と一緒に FIPS パッケージがインストールされ、Agent がプロキシを使用するように構成されます。この方法を使用する場合、追加の構成手順はありませんが、[インストールを検証する](#verify-your-installation)必要があります。
@@ -169,7 +169,7 @@ sudo journalctl -u datadog-fips-proxy
 1. `dd-agent` ユーザーが `systemd-journal` グループに属していることを確認してください。詳しくは、[journald インテグレーション][5]のドキュメントを参照してください。
 1. [Agent を再起動します][6]。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [3]: /ja/logs/
 [4]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -330,11 +330,11 @@ Agent からのアウトバウンド接続については、[ネットワーク�
 
 **4. Agent のすべての入出力通信は FIPS に対応していますか？**
 
-Datadog Agent FIPS Proxy は、Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Agent で終了する、または Agent から発信される他の形式の通信は、このソリューションの対象外です。
+Datadog Agent FIPS Proxy は、Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Agent で終了する、または Agent から発信される他の形式の通信は、このソリューションでは FIPS に準拠しません。
 
 **5. Cluster Agent と Node Agent 間の通信はすべて FIPS に対応していますか？**
 
-Datadog Agent FIPS Proxy は、Cluster Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Cluster Agent で終了する、または Cluster Agent から発信される他の形式の通信は、このソリューションの対象外です。
+Datadog Agent FIPS Proxy は、Cluster Agent から発信される Datadog インテーク API エンドポイントを対象とした通信のみを保護します。つまり、Cluster Agent で終了する、または Cluster Agent から発信される他の形式の通信は、このソリューションでは FIPS に準拠しません。
 
 **6. デプロイやテストのニーズに合わせて Datadog Agent FIPS Proxy を再構築または再構成しても、FIPS コンプライアンスは維持されますか？**
 

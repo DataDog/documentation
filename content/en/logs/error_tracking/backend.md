@@ -45,7 +45,7 @@ For more information, see the complete [source code attributes documentation][11
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -67,7 +67,7 @@ try {
 {{% /tab %}}
 {{% tab "NLog" %}}
 
-If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -90,7 +90,7 @@ static void Main(string[] args)
 {{% /tab %}}
 {{% tab "Log4Net" %}}
 
-If you have not setup log collection for C#, see the [C# Log Collection documentation][1].
+If you have not set up log collection for C#, see the [C# Log Collection documentation][1].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -120,7 +120,7 @@ class Program
 
 #### Logrus
 
-If you have not setup log collection for Go, see the [Go Log Collection documentation][3].
+If you have not set up log collection for Go, see the [Go Log Collection documentation][3].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -145,7 +145,7 @@ func ErrorField(err error) errorField {
 			stack = stack[1:]
 		}
     }
-    return ErrorField{
+    return errorField{
         kind: reflect.TypeOf(err).String(),
         stack: stack,
         message: err.Error(),
@@ -160,7 +160,7 @@ log.WithFields(log.Fields{
 
 ### Java (parsed)
 
-If you have not setup log collection for Java, see the [Java Log Collection documentation][4]. Ensure your logs are tagged with `source:java`.
+If you have not set up log collection for Java, see the [Java Log Collection documentation][4]. Ensure your logs are tagged with `source:java`.
 
 {{< tabs >}}
 {{% tab "Log4j" %}}
@@ -199,7 +199,7 @@ try {
 
 #### Winston (JSON)
 
-If you have not setup log collection for Node.js, see the [Node.js Log Collection documentation][5].
+If you have not set up log collection for Node.js, see the [Node.js Log Collection documentation][5].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -235,7 +235,7 @@ except:
 
 #### Lograge (JSON)
 
-If you have not setup log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
 
 To log a caught exception yourself, you may optionally use:
 

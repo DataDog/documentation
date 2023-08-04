@@ -39,9 +39,9 @@ Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使�
 
 {{< img src="security/cspm/findings/posture-management-overview3.png" alt="ポスチャ管理の診断結果ページの概要" style="width:100%;">}}
 
-発見を選択すると、そのルールで評価されたリソース、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。誤構成されたリソースの詳細を表示するには、**View Finding** をクリックします。
+発見を選択すると、そのルールで評価されたリソース、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。
 
-{{< img src="security/cspm/findings/finding-side-panel2.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
+{{< img src="security/cspm/findings/finding-side-panel3.png" alt="サイドパネルにある影響を受けたリソースのリスト" style="width:65%;">}}
 
 Security Findings Explorer で **Resources** でグループ化し、リソースを選択すると、そのリソースに対して評価されたコンプライアンスルールの全リストとそのステータスが表示されます。
 
@@ -91,7 +91,7 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 
 リソースの履歴を監査するには
 
-1. [発見サイドパネル](#explore-your-cloud-misconfigurations-with-findings)を開きます。
+1. [発見サイドパネル](#explore-your-cloud-misconfigurations)を開きます。
 2. ミュートされた発見のあるリソースを選択します。
 3. 発見ステータスが変更された場合は、**See Latest State** をクリックします。
 4. **View Finding** をクリックします。

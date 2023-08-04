@@ -79,7 +79,6 @@ For more information and additional settings, see the [plugin documentation][1].
 
 [Add the Lambda layer][1] of Datadog Lambda Extension to your Lambda functions, using the ARN format based on your AWS region and architecture:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```sh
 # Use this format for x86-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
@@ -93,23 +92,6 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< late
 # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```sh
-# Use this format for x86-based Lambda deployed in AWS commercial regions
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-# Use this format for arm64-based Lambda deployed in AWS commercial regions
-arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-# Use this format for x86-based Lambda deployed in AWS GovCloud regions
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-# Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-```
-{{< /site-region >}}
 
 Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
@@ -157,13 +139,14 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   ddlambda.Metric(
     "coffee_house.order_value", // Metric name
     12.45, // Metric value
-    "product:latte", "order:online" // Associated tags
+    "product:latte", "order:online", // Associated tags
   )
 
   // Create a custom span
   s, _ := tracer.StartSpanFromContext(ctx, "child.span")
   time.Sleep(100 * time.Millisecond)
   s.Finish()
+  return "ok", nil
 }
 ```
 

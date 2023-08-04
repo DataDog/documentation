@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
   text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+- link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
+  tag: "Blog"
+  text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
 algolia:
   tags: ['service catalog']
 ---
@@ -52,7 +55,7 @@ The Service Catalog is useful for:
 
 ## Browse the Service Catalog
 
-On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service](#registering-a-new-service). To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
+On the [Service Catalog page][1], see the list of services in your Datadog organization which are either detected from collected data or manually declared by someone [registering the service][8]. To find a particular service, search by its name. To filter the list, select one or more facets. For example, to see detected services without a service definition yet, click the **Ownership Info > Telemetry Only** facet. You may find it helpful to filter by your team name or scope the metrics displayed to particular environments and clusters in order to see only matching services in the list.
 
 The Service Catalog list is sortable by service type, service name, and many of the other columns. You can find missing ownership by sorting by team in the Ownership view and looking for blanks. Or you can sort by urgency in the Reliability view and see services with the most triggered monitors.
 
@@ -129,7 +132,9 @@ Clicking on a service opens a side panel with details including:
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.
+- **Beta: Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][16] enabled, you can adjust the [trace sampling rate][18] (from 0.0 to 1.0), enable [Log Injection][17] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
 
+  {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
 
@@ -172,3 +177,6 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [13]: /tracing/metrics/metrics_namespace/
 [14]: /tracing/guide/configuring-primary-operation/
 [15]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
+[16]: /agent/remote_config/
+[17]: /tracing/other_telemetry/connect_logs_and_traces/
+[18]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling

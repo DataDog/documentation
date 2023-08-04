@@ -170,7 +170,7 @@ logs:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/kubernetes/log/
 [3]: /ja/agent/docker/log/
 [4]: /ja/agent/guide/agent-configuration-files/

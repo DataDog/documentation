@@ -20,10 +20,25 @@ title: 特定の例外がない限り、raise ステートメントを使用し�
 ```python
 def myfunc():
   raise  # 特定の例外を使用する必要があります
+
+if foo:
+  raise
+else:
+  func1()
+  raise
+
+for v in list:
+  do_something()
+  raise
 ```
 
 ## 準拠コードの例
 ```python
 def myfunc():
   raise MyException
+
+try:
+  foo()
+except MyException:
+  raise  # 例外を再発生させます
 ```

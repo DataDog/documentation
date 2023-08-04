@@ -19,11 +19,16 @@ title: type の代わりに isinstance を使う
 ## 非準拠コードの例
 ```python
 # 次のように記述する代わりに isinstance を使用します
-type(Foo()) == Foo
-
+if type(Foo()) == Foo:
+    print("is foo")
 ```
 
 ## 準拠コードの例
 ```python
-isinstance(Bar(), Foo)
+raise ValueError("target %s config %s has type of %s" % (target, config_content, type(config_content)))
+```
+
+```python
+if isinstance(Bar(), Foo):
+    print("foo")
 ```

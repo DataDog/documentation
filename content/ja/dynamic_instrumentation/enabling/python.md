@@ -9,7 +9,7 @@ further_reading:
   text: Datadog Agent の概要
 is_beta: true
 kind: ドキュメント
-private: true
+private: false
 title: Python のダイナミックインスツルメンテーションを有効にする
 type: multi-code-lang
 ---
@@ -19,7 +19,7 @@ type: multi-code-lang
 ## インストール
 
 
-1. Agent をバージョン [7.41.1][2]+ にインストールまたはアップグレードします。
+1. Agent のバージョン[7.44.0][2] 以上をインストールするか、アップグレードします。
 2. まだ APM を有効にしていない場合は、Agent の構成で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
 
 3. トレースとダイナミックインスツルメンテーションの両方を提供する `ddtrace` をインストールします。
@@ -28,7 +28,7 @@ type: multi-code-lang
    pip install ddtrace
    ```
 
-   **注**: ダイナミックインスツルメンテーションは、`ddtrace` ライブラリバージョン 1.7.5 以降で利用可能です。
+   **注**: ダイナミックインスツルメンテーションは、`ddtrace` ライブラリバージョン 1.15.0 以降で利用可能です。
 
 4. `DD_DYNAMIC_INSTRUMENTATION_ENABLED` 環境変数を `true` に設定し、ダイナミックインスツルメンテーションを有効にしてサービスを稼働させます。`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の統合サービスタグを指定すると、プローブをフィルターしたりグループ化したり、アクティブなクライアントをこれらの次元でターゲットにすることができるようになります。
 {{< tabs >}}
@@ -77,7 +77,7 @@ DynamicInstrumentation.enable()
 
 
 [1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/dynamic-instrumentation
 [4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: /ja/dynamic_instrumentation/

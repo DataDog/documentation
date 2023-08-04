@@ -439,7 +439,7 @@
             path_to_remove: 'rulesets/python-pandas/'
             front_matters:
               disable_edit: true
-              
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file

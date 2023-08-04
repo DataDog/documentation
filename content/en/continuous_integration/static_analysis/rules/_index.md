@@ -190,7 +190,7 @@ python_best_practices_data:
 python_code_style_data:
   - link: "/continuous_integration/static_analysis/rules/python-code-style/assignment-names"
     tag: "assignment-names"
-    text: "variable names muse use snake_case"
+    text: "variable names must use snake_case"
   - link: "/continuous_integration/static_analysis/rules/python-code-style/class-name"
     tag: "class-name"
     text: "class name should be CamelCase"

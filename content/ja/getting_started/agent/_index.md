@@ -105,7 +105,7 @@ Datadog UI で、**Integrations &gt; Agent** に移動し、Ubuntu を選択し�
 Ubuntu の 1 行インストールコマンドの例:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 最新のインストール方法については、お使いの OS のアプリ内 [Agent インストールページ][18]をご覧ください。

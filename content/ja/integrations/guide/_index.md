@@ -26,7 +26,8 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/agent-failed-to-retrieve-rmiserver-stub" tag="kafka" >}}Agent  が RMIServer スタブの取得に失敗した{{< /nextlink >}}
     {{< nextlink href="integrations/guide/send-tcp-udp-host-metrics-to-the-datadog-api/" tag="network" >}}TCP/UDP のホストメトリクスを Datadog API に送信する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}よく使われる SNMP と互換性のある OID{{< /nextlink >}} 
-{{< nextlink href="integrations/guide/pivotal-cloud-foundry-manual-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}OpenMetrics ベースのインテグレーションのバージョン管理{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS ガイド:" >}}
@@ -42,18 +43,18 @@ title: インテグレーションガイド
 {{< nextlink href="integrations/guide/aws-integration-and-cloudwatch-faq" tag="AWS" >}}AWS インテグレーションと CloudWatch の FAQ{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Azure ガイド" >}}
+{{< whatsnext desc="Azure ガイド:" >}}
     {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure 手動セットアップガイド{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native 手動セットアップガイド{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework と Datadog{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-status-metric" tag="Azure" >}}Azure のステータスとカウントのメトリクス{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Azure ネイティブインテグレーションの管理{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Azure インテグレーションプログラム管理ガイド{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Azure Native インテグレーションプログラム管理ガイド{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-troubleshooting" tag="Azure" >}}Azure のトラブルシューティング{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure アーキテクチャと構成{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag="Azure" >}}Azure VM がメトリクスなしでアプリに表示される{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag="Azure" >}}インフラストラクチャーリストのパワーダウンした Azure VM{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Azure Native インテグレーションの管理{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Datadog による Azure クラウド採用フレームワーク{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure のトラブルシューティング{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure のアーキテクチャと構成{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure ステータスとカウントメトリクス{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}メトリクスなしでアプリに表示される Azure VM{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}インフラストラクチャーリスト上のパワーダウンした Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Azure Datadog 拡張機能をインストールするコマンド{{< /nextlink >}}
 {{< /whatsnext >}}
 

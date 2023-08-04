@@ -2,15 +2,15 @@
 further_reading:
 - link: /security/cloud_workload_security/workload_security_rules
   tag: Documentation
-  text: クラウドワークロードセキュリティルールの管理
+  text: CSM Threats ルールの管理
 - link: /security/cloud_workload_security/agent_expressions
   tag: Documentation
   text: Agent 式の構文
 kind: ガイド
-title: カスタム Cloud Workload Security ルールの記述のためのガイドライン
+title: カスタム CSM Threats ルールの記述のためのガイドライン
 ---
 
-ある時点で、独自の[カスタム Cloud Workload Security (CWS) Agent ルール][1]を書きたいと思うことがあるかもしれません。独自のルールを書く場合、効率のために最適化するために使用できる戦略がいくつかあります。
+ある時点で、独自の[カスタム Cloud Security Management Threats (CSM Threats) Agent ルール][1]を書きたいと思うことがあるかもしれません。独自のルールを書く場合、効率のために最適化するために使用できる戦略がいくつかあります。
 
 ## 属性
 
@@ -32,7 +32,7 @@ title: カスタム Cloud Workload Security ルールの記述のためのガイ
 
 ## 承認者と廃棄者
 
-CWS は、ポリシー内のどのルールもトリガーすべきでないイベントをフィルターするために、承認者と廃棄者という概念を使用します。承認者と廃棄者は、ポリシーレベルでのみイベントを許可または拒否します。個々のルールに作用するわけではありません。
+CSM Threats は、ポリシー内のどのルールもトリガーすべきでないイベントをフィルターするために、承認者と廃棄者という概念を使用します。承認者と廃棄者は、ポリシーレベルでのみイベントを許可または拒否します。個々のルールに作用するわけではありません。
 
 承認者は、Datadog Agent のカーネルレベルで許可リストとして機能します。例えば、特定のファイルのオープンは、`open` イベントの承認者となり、承認者のいないファイルの `open` イベントは、フィルタリングされます。同様に、廃棄者は Agent の中で拒否リストとして機能します。廃棄者は、ルールにマッチしないイベントを意図的にフィルタリングします。Agent は、実行時に廃棄者でフィルタリングするイベントを学習します。
 

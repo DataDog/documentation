@@ -31,8 +31,12 @@ This page provides information to help you troubleshot issues with CI Visibility
 4. If you still don't see any results, [contact Support][2] for troubleshooting help.
 
 ### You are uploading JUnit test reports with `datadog-ci` but some or all tests are missing
-If you are uploading JUnit test report files with `datadog-ci` CLI, make sure that the timestamp of the reported tests is not older than **18 hours** before the moment the report is uploaded.
+If you are uploading JUnit test report files with `datadog-ci` CLI and you do not see the tests, it is likely the tests are being discarded because the report is considered incorrect.
 
+The following aspects make a JUnit test report incorrect:
+* A timestamp of the reported tests that is older than **18 hours** before the moment the report is uploaded.
+* A testsuite without a name.
+  
 ### Data appears in test runs but not tests
 
 If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [**Tests**][5] section.

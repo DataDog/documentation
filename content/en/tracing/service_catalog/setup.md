@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/github"
   tag: "Documentation"
   text: "Learn about the GitHub Integration"
+- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+  tag: "Blog"
+  text: "Import Backstage YAML files into Datadog"
 ---
 
 ## Overview
@@ -70,16 +73,16 @@ This GitHub Action allows you to register your services with the Service Catalog
 
 ## Import data from Backstage 
 
+{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
+
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 
-If you use API or Terraform, replace the content of YAML content in your requests. 
-If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission.
+If you use API or Terraform, replace the YAMLs in your requests. 
 
-**Note**: The file must be named `service.datadog.yaml` and be located at the root folder of a repo.
-
+If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
 
 Upon import, the following occurs:
-- Datadog only recognizes `kind:component` and `spec.type=service` in Backstage YAMLs as services
+- Datadog only recognizes `kind:component` in Backstage YAMLs as services
 - `name` gets converted to `DD-SERVICE`
 - `namespace` values get mapped to custom tags
 - `lifecycle` gets mapped to `lifecycle`
@@ -119,4 +122,5 @@ To remove your imported services from the default **Explore** view, click **Clea
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
+[15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
 

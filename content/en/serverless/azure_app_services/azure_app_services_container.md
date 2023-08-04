@@ -30,7 +30,7 @@ Make sure you have a [Datadog API Key][1] and are using a programming language [
 
 #### Install Agent with Dockerfile
 
-{{< programming-lang-wrapper langs="nodejs,python,go" >}}
+{{< programming-lang-wrapper langs="nodejs,python,go,java" >}}
 {{< programming-lang lang="nodejs" >}}
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
@@ -114,6 +114,36 @@ Follow [these instructions][2] to install and configure the Go tracing library i
 
 [1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/go
 [2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+
+```
+# copy the Datadog `serverless-init` into your Docker image
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# install the java tracing library
+ADD https://dtdg.co/latest-java-tracer dd-java-agent.jar
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
+ENTRYPOINT ["/app/datadog-init"]
+
+# execute your binary application wrapped in the entrypoint
+CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "app.jar"]
+```
+
+#### Install tracing library
+
+The Dockerfile in the previous step installs and configures the Java tracing library in your application to capture and submit traces.
+Tracing should work with the Dockerfile in the previous step. Alternatively, see [Tracing Java Applications - Instrument your application][2].
+
+[Sample code for a sample Java application][1].
+
+[1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/java/springboot
+[2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}

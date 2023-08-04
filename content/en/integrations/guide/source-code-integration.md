@@ -17,7 +17,7 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li><li>Ruby</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li><li>.NET</li><li>Ruby</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
 </div>
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
@@ -119,7 +119,62 @@ Ensure your service meets all the following requirements:
 
 [1]: https://tip.golang.org/doc/go1.18
 {{% /tab %}}
+
+{{% tab "Python" %}}
+First, upgrade the [Python tracer][1] to v1.12 or higher.
+
+For the standard library:
+1. Install the `ddtrace` package.
+2. Add `import ddtrace.sourcecode.setuptools_auto` as the first import to `setup.py`.
+3. Set the environment variable `DD_MAIN_PACKAGE` to the name of the primary Python package.
+
+For the unified Python project settings file:
+1. Install the [`hatch-datadog-build-metadata` plugin][2] and configure it to embed git metadata. If the project already has URLs, you must reconfigure them as dynamic and move them to another config section.
+2. Set the environment variable `DD_MAIN_PACKAGE` to the name of the primary Python package.
+
+[1]: https://app.datadoghq.com/apm/service-setup?architecture=host-based&language=python
+[2]: https://github.com/DataDog/hatch-datadog-build-metadata
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+Datadog can use [Microsot SourceLink][1] to extract the git commit SHA and repository URL directly from your .NET assembly. To use this approach:
+1. Open your project file (`.csproj`) in your IDE, and add a reference to one of the following NuGet packages, based on where your git repository is hosted:
+   - **GitHub:** [Microsoft.SourceLink.GitHub][2]
+   - **Bitbucket:** [Microsoft.SourceLink.Bitbucket][3]
+   - **GitLab:** [Microsoft.SourceLink.GitLab]()
+   - **Azure DevOps:** [Microsoft.SourceLink.AzureRepos.Git][5]
+   - **Azure DevOps Server:** [Microsoft.SourceLink.AzureDevOpsServer.Git][6]
+2. Upgrade the [.NET tracer][7] to v2.25.0 or higher
+3. Ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
+
+[1]: https://github.com/dotnet/sourcelink
+[2]: https://www.nuget.org/packages/Microsoft.SourceLink.GitHub
+[3]: https://www.nuget.org/packages/Microsoft.SourceLink.Bitbucket
+[4]: https://www.nuget.org/packages/Microsoft.SourceLink.GitLab
+[5]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureRepos.Git
+[6]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureDevOpsServer.Git
+[7]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
+
 {{< /tabs >}}
+
+#### Build inside a Docker container
+If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access git information:
+
+1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL. 
+
+```
+!.git/HEAD
+!.git/config
+!.git/refs
+```
+
+2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
+
+```
+COPY .git ./.git
+```
+
 
 ## Configure your repositories
 
