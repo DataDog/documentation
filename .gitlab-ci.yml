@@ -160,7 +160,7 @@ build_preview:
       - ./public/redirects.txt
   after_script:
     - |
-      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+      if [[ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]]; then
         echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
         notify_slack.py ":siren: A gitlab job for your branch has failed with the following error: $(tail -n 10 preview_error.log)" --status="#ab0000" --previewSite="false" --link="${CI_PIPELINE_URL}" --buttonContent="Gitlab Pipeline :looking:";
       fi # Output the error to the console
