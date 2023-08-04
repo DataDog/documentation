@@ -28,7 +28,6 @@ title: Guides sur les logs
     {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Envoyer des logs Azure avec la ressource Datadog{{< /nextlink >}}    
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Recueillir des logs Heroku{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Envoyer des logs de services AWS avec la fonction Lambda Datadog{{< /nextlink >}}
-    {{< nextlink href="logs/guide/collect-heroku-logs" >}}Recueillir des logs Heroku{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Dépannage pour la collecte de logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Guide de dépannage pour la collecte de logs Docker{{< /nextlink >}}
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Guide de dépannage pour la collecte de logs de la fonction Lambda{{< /nextlink >}}
