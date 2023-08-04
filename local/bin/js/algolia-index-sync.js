@@ -26,7 +26,8 @@ const updateSettings = (index) => {
             'unordered(tags)',
             'unordered(title)',
             'unordered(section_header)',
-            'unordered(content)'
+            'unordered(content)',
+            'unordered(relpermalink)'
         ],
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
         customRanking: ['desc(rank)'],
