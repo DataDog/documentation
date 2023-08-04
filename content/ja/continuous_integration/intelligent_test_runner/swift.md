@@ -6,9 +6,12 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: トラブルシューティング CI
+is_beta: true
 kind: documentation
 title: Swift のための Intelligent Test Runner
 ---
+
+{{< callout url="#" btn_hidden="true" >}}Swift のための Intelligent Test Runner はベータ版です。{{< /callout >}}
 
 ## 互換性
 
