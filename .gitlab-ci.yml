@@ -160,14 +160,11 @@ build_preview:
       - ./public/redirects.txt
   after_script:
     - |
-      if [ -s $PREVIEW_ERROR_LOG ]; then
-        echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)"; 
+      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+        echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
+        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed with the following error: $(tail -n 10 preview_error.log)";
       fi # Output the error to the console
   interruptible: true
-  artifacts:
-    when: on_failure
-    paths:
-      - $PREVIEW_ERROR_LOG # This will be created on failure
 
 link_checks_preview:
   <<: *base_template
@@ -530,13 +527,9 @@ failure_notification_preview:
   environment: "preview"
   variables:
     GIT_STRATEGY: none
+    SLACK_MESSAGE: ":siren: A gitlab job for your branch has failed due to an error, please check your pipeline"; # Safety in case the error log is empty
+
   script:
-    - |
-      if [ -s preview_error.log ]; then
-        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed with the following error: $(tail -n 10 preview_error.log)";
-      else
-        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed due to an error, please check your pipeline"; # Safety in case the error log is empty
-      fi
     - notify_slack.py "${SLACK_MESSAGE}" --status="#ab0000" --previewSite="false" --link="${CI_PIPELINE_URL}" --buttonContent="Gitlab Pipeline :looking:"
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
