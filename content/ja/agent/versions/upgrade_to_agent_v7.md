@@ -19,7 +19,7 @@ Agent v7 は Python 3 のカスタムチェックにのみ対応しています�
 Agent をバージョン 6 からバージョン 7 にアップグレードするために、以下の Agent インストールコマンドを実行します。
 
 以下のコマンドは、Amazon Linux、CentOS、Debian、Fedora、Red Hat、Ubuntu、および SUSE で動作します。
-: `DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
+: `DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -31,16 +31,16 @@ Agent をバージョン 6 からバージョン 7 にアップグレードす�
 
 **注**: Windows インストーラーの利用可能な全バージョンのリンクは、[JSON 形式で提供されています][3]。
 
-[1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
+[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[3]: https://windows-agent.datadoghq.com/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
 Agent をバージョン 6 からバージョン 7 にアップグレードするには、環境変数 `DD_AGENT_MAJOR_VERSION=7` を使用して Agent インストールコマンドを実行します。
 
 ```shell
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 {{% /tab %}}
@@ -54,7 +54,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 Agent をバージョン 5 からバージョン 7 にアップグレードするには、環境変数 `DD_UPGRADE="true"` を使用して Agent インストールコマンドを実行します。Agent v7 インストーラーにより、v5 のコンフィギュレーションがアップグレード中に自動的に変換されます。
 
 以下のコマンドは、Amazon Linux、CentOS、Debian、Fedora、Red Hat、Ubuntu、および SUSE で動作します。
-: `DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
+: `DD_UPGRADE="true" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -69,7 +69,7 @@ Agent をバージョン 5 からバージョン 7 にアップグレードす�
 Agent をバージョン 5 からバージョン 7 にアップグレードするには、環境変数 `DD_AGENT_MAJOR_VERSION=7` と `DD_UPGRADE="true"` を使用して Agent インストールコマンドを実行します。Agent v7 インストーラーにより、v5 のコンフィギュレーションがアップグレード中に自動的に変換されます。
 
 ```shell
-DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 {{% /tab %}}
