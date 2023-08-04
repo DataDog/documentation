@@ -1496,6 +1496,11 @@ components:
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
         graph\u2019s x-axis is quantity rather than time."
       properties:
+        custom_links:
+          description: A list of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         legend_size:
           deprecated: true
           description: (Deprecated) The widget legend was replaced by a tooltip and
@@ -3968,6 +3973,7 @@ components:
       - appsec_usage
       - browser_usage
       - container_excl_agent_usage
+      - ci_visibility_itr_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -4003,6 +4009,7 @@ components:
       - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
+      - CI_VISIBILITY_ITR_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -7507,6 +7514,8 @@ components:
       - appsec_percentage
       - browser_usage
       - browser_percentage
+      - ci_visibility_itr_usage
+      - ci_visibility_itr_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -7576,6 +7585,8 @@ components:
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
+      - CI_VISIBILITY_ITR_USAGE
+      - CI_VISIBILITY_ITR_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -7683,6 +7694,15 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        ci_visibility_itr_percentage:
+          description: The percentage of Git committers for Intelligent Test Runner
+            usage by tag(s).
+          format: double
+          type: number
+        ci_visibility_itr_usage:
+          description: The Git committers for Intelligent Test Runner usage by tag(s).
           format: double
           type: number
         container_excl_agent_percentage:
@@ -16570,6 +16590,13 @@ components:
           format: int64
           nullable: true
           type: integer
+        ci_visibility_itr_committers:
+          description: Shows the total count of all active Git committers for Intelligent
+            Test Runner in the current month. A committer is active if they commit
+            at least 3 times in a given month.
+          format: int64
+          nullable: true
+          type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
@@ -17781,6 +17808,11 @@ components:
             the current month for all organizations.
           format: int64
           type: integer
+        ci_visibility_itr_committers_hwm:
+          description: Shows the high-water mark of all CI visibility intelligent
+            test runner committers over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         ci_visibility_pipeline_committers_hwm:
           description: Shows the high-water mark of all CI visibility pipeline committers
             over all hours in the current month for all organizations.
@@ -18206,6 +18238,12 @@ components:
         ci_test_indexed_spans_sum:
           description: Shows the sum of all CI test indexed spans over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_itr_committers_hwm:
+          description: Shows the high-water mark of all CI visibility intelligent
+            test runner committers over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         ci_visibility_pipeline_committers_hwm:
@@ -18642,6 +18680,11 @@ components:
         ci_test_indexed_spans_agg_sum:
           description: Shows the sum of all CI test indexed spans over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_itr_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility intelligent
+            test runner committers over all hours in the current months for all organizations.
           format: int64
           type: integer
         ci_visibility_pipeline_committers_hwm_sum:

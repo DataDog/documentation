@@ -16,6 +16,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "/monitors/guide/change-alert"
+  tag: "Documentation"
+  text: "Troubleshoot change alert monitors"
 ---
 
 ## Overview

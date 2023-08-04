@@ -105,7 +105,7 @@ pipelineConfig:
     ## steps with tags set up. Datadog recommends these tag assignments.
     ## They show which data has been moved over to OP and what still needs
     ## to be moved.
-    LOGS_YOUR_STEPS:
+    logs_enrich:
       type: remap
       inputs:
         - logs_remove_wrong_level
@@ -119,9 +119,9 @@ pipelineConfig:
     logs_finish_ddtags:
       type: remap
       inputs:
-        - LOGS_YOUR_STEPS
+        - logs_enrich
       source: |
-        .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+        .ddtags = encode_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
 
     metrics_add_dd_tags:
       type: remap
@@ -159,4 +159,4 @@ pipelineConfig:
       default_api_key: "${DD_API_KEY}"
       buffer:
         type: disk
-        max_size: 51539607552
+        max_size: 42949672959
