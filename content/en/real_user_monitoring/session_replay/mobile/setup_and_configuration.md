@@ -32,11 +32,17 @@ To set up Mobile Session Replay for Android:
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2] with views instrumentation enabled.
 
-2. Declare the Datadog Session Replay as a [dependency][3].
+2. Declare the Datadog Session Replay as a dependency:
+  {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+    implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
+    implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
+    // in case you need material support
+    implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
+   {{< /code-block >}}
 
 3. Enable Session Replay in your app:
 
-   {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
     // in case you need material extension support
     .addExtensionSupport(MaterialExtensionSupport()) 
@@ -93,7 +99,7 @@ This sample rate is applied in addition to the RUM sample rate. For example, if 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
 val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
  ...
 .build()
@@ -118,7 +124,7 @@ To validate whether Session Replay data is being sent from the app, you can enab
 {{< tabs >}}
 {{% tab "Android" %}}
 
-{{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
 Datadog.setVerbosity(Log.DEBUG)
 {{< /code-block >}}
 
