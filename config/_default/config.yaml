@@ -59,8 +59,8 @@ module:
        target: layouts/partials/language-selector-docs.html
      - source: assets/styles/components/_announcement-banner.scss
        target: assets/styles/components/_announcement-banner.scss
-     - source: assets/styles/components/_footer.scss
-       target: assets/styles/components/_footer.scss
+     - source: assets/styles/components/_main-footer.scss
+       target: assets/styles/components/_main-footer.scss
      - source: assets/styles/base/_variables.scss
        target: assets/styles/base/_modules_variables.scss
      - source: assets/styles/components/_main-nav.scss
