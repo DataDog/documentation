@@ -1,6 +1,6 @@
 ---
 aliases: null
-description: Datadog、B3、W3C のヘッダーを抽出・挿入し、分散型トレーシングのコンテキストを伝搬させます。
+description: Datadog、B3、W3C Trace Context のヘッダーを抽出・挿入し、分散型トレーシングのコンテキストを伝搬させます。
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
