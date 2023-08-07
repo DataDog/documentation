@@ -1,17 +1,18 @@
-// Script to add copy-clipboard functionality to code snippets within the code-block shortcode and fenced codeblocks
+// Script to add copy-clipboard functionality to copy buttons within code-block shortcodes, fenced codeblocks and highlight hugo functions
 
 function initCopyCode () {
-    // Add copy button to fenced codeblocks of specific languages
-    const dataLangs = ['shell', 'java', 'go', 'python', 'ruby', 'typescript', 'java']
+    // Add copy button to certain codeblocks of specific languages
+    const fencedLang = ['shell']
+    const pulledLang = ['java', 'go', 'python', 'ruby', 'typescript', 'java'] // using the highlight hugo function
     const highlights = document.querySelectorAll("div.highlight")
 
     highlights.forEach(highlightEl => {
         const codeLang = highlightEl.querySelector('[data-lang]').dataset.lang
         const isNotInCodeBlockShortcode = !highlightEl.parentElement.classList.contains('code-snippet')
 
-        const shouldAddCopyBtn = dataLangs.includes(codeLang) && isNotInCodeBlockShortcode
+        const shouldAddCopyBtn = [...fencedLang, ...pulledLang].includes(codeLang) && isNotInCodeBlockShortcode
         if(shouldAddCopyBtn){
-            highlightEl.classList.add('code-snippet','fenced')
+            highlightEl.classList.add('code-snippet', 'fenced')
             const copyBtn = `
             <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>

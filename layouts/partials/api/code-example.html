@@ -136,38 +136,39 @@
                         <div class="code-button-wrapper position-absolute">
                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                         </div>
+
+                        {{/* Do not change indent of html below as it will change the indentation of the curl code block. CURL code examples not using `highlight` hugo function */}}
                         <pre class="chroma">
-  {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
-  <code class="language-fallback" data-lang="fallback">
-  {{- with $endpoint.action.requestBody -}}
-      {{- with .content -}}
-          {{- range $contentType, $requestBody := . -}}
-              {{- with $requestBody.examples -}}
-                  {{- range $exampleId, $exampleDefinition := . -}}
-                      {{- $exampleValue := "" }}
-                      {{- with $exampleDefinition.externalValue -}}
-                        {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
-                          {{- $exampleValue = .Content }}
-                        {{- end -}}
-                      {{- else -}}
-                        {{- $exampleValue = $exampleDefinition.value -}}
-                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
-                            {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
-                        {{- end -}}
-                      {{- end -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
-                  {{- end -}}
-              {{- else -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
-              {{- end -}}
-          {{- end -}}
-      {{- end -}}
-  {{- else -}}
-{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
-  {{- end -}}
-  </code>
-  {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
+                          <code class="language-fallback" data-lang="fallback">
+                          {{- with $endpoint.action.requestBody -}}
+                              {{- with .content -}}
+                                  {{- range $contentType, $requestBody := . -}}
+                                      {{- with $requestBody.examples -}}
+                                          {{- range $exampleId, $exampleDefinition := . -}}
+                                            {{- $exampleValue := "" }}
+                                            {{- with $exampleDefinition.externalValue -}}
+                                              {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
+                                                {{- $exampleValue = .Content }}
+                                              {{- end -}}
+                                            {{- else -}}
+                                              {{- $exampleValue = $exampleDefinition.value -}}
+                                              {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                                                  {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                                              {{- end -}}
+                                            {{- end -}}
+                                            {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                          {{- end -}}
+                                      {{- else -}}
+                                        {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                                      {{- end -}}
+                                  {{- end -}}
+                              {{- end -}}
+                          {{- else -}}
+                            {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+                          {{- end -}}
+                          </code>
                         </pre>
+                        {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
 
                       </div>
                     </div>
@@ -181,45 +182,51 @@
 
           {{ if or (eq $fileNonExistCount $fileCount) (not (index $codeExampleLookup $operationid)) }}
             <div class="card">
-            <div class="card-header p-0">
-              <h5 class="m-0">
-                <button class="btn btn-link font-bold" disabled>
-                  {{ $endpoint.action.summary }}
-                </button>
-              </h5>
-            </div>
-            <pre class="chroma">
-{{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
-<code class="language-fallback" data-lang="fallback">
-{{- with $endpoint.action.requestBody -}}
-    {{- with .content -}}
-        {{- range $contentType, $requestBody := . -}}
-            {{- with $requestBody.examples -}}
-                {{- range $exampleId, $exampleDefinition := . -}}
-                    {{- $exampleValue := "" }}
-                    {{- with $exampleDefinition.externalValue -}}
-                      {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
-                        {{- $exampleValue = .Content }}
+              <div class="card-header p-0">
+                <h5 class="m-0">
+                  <button class="btn btn-link font-bold" disabled>
+                    {{ $endpoint.action.summary }}
+                  </button>
+                </h5>
+              </div>
+              <div class="card-body p-0 code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                    <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
+                </div>
+
+                {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
+                <pre class="chroma">
+                  <code class="language-fallback" data-lang="fallback">
+                  {{- with $endpoint.action.requestBody -}}
+                      {{- with .content -}}
+                          {{- range $contentType, $requestBody := . -}}
+                              {{- with $requestBody.examples -}}
+                                  {{- range $exampleId, $exampleDefinition := . -}}
+                                      {{- $exampleValue := "" }}
+                                      {{- with $exampleDefinition.externalValue -}}
+                                        {{- with $resourcePage.Resources.GetMatch (path.Base .) -}}
+                                          {{- $exampleValue = .Content }}
+                                        {{- end -}}
+                                      {{- else -}}
+                                        {{- $exampleValue = $exampleDefinition.value -}}
+                                        {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
+                                            {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
+                                        {{- end -}}
+                                      {{- end -}}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                                  {{- end -}}
+                              {{- else -}}
+                  {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                              {{- end -}}
+                          {{- end -}}
                       {{- end -}}
-                    {{- else -}}
-                      {{- $exampleValue = $exampleDefinition.value -}}
-                      {{- if (or (hasPrefix $contentType "application/json") (hasPrefix $contentType "text/json")) -}}
-                          {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
-                      {{- end -}}
-                    {{- end -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
-                {{- end -}}
-            {{- else -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- else -}}
-{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
-{{- end -}}
-</code>
-{{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
-           </pre>
+                  {{- else -}}
+                  {{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+                  {{- end -}}
+                  </code>
+                </pre>
+                {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
+              </div>
             </div>
           {{ end }}
       </div>
@@ -292,10 +299,10 @@
         {{ $lang := index $context.Site.Params.code_languages $file_extension }}
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
-            <div class="code-snippet">
-              {{/*  <div class="code-button-wrapper position-absolute">
+            <div>
+              <div class="code-button-wrapper position-absolute">
                   <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-              </div>  */}}
+              </div>
               <div class="card">
                 <div class="card-header p-0">
                   <h5 class="m-0">
