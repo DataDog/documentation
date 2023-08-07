@@ -7529,6 +7529,18 @@ api:
         - GetCostByOrg
       unstable: []
       order: 45
+  - name: Get hourly CI Committers Detailed
+    url: '#get-hourly-ci-committers-detailed'
+    identifier: usage-metering-get-hourly-ci-committers-detailed
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUsageCICommittersDetailed
+      unstable: []
+      order: 2
   - name: Get hourly usage for application security
     url: '#get-hourly-usage-for-application-security'
     identifier: usage-metering-get-hourly-usage-for-application-security
