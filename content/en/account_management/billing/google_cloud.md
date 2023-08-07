@@ -5,9 +5,9 @@ kind: documentation
 
 ## Overview
 
-Datadog bills for hosts running the Agent and all GCE instances picked up by the Google Cloud integration. Services outside of GCE, such as [Dataflow][6], may create billable GCE hosts in Datadog. To see which hosts are billed, navigate to the GCE page in the Google Cloud console. You are not billed twice if you are running the Agent on a GCE instance picked up by the Google Cloud integration.
+Datadog bills for hosts running the Agent and all GCE instances picked up by the Google Cloud integration. Services outside of GCE, such as [Dataflow][6], may create billable GCE hosts in Datadog. You are not billed twice if you are running the Agent on a GCE instance picked up by the Google Cloud integration.
 
-Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing.
+Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, and others) are not part of monthly billing. To see which hosts are billed, navigate to the GCE page in the Google Cloud console and view the list of running hosts. Unless excluded through tags with [Google Cloud metric exclusion](#google-cloud-metric-exclusion), hosts listed on this page are sending data to Datadog and are billed as hosts.
 
 ## Google Cloud metric exclusion
 
