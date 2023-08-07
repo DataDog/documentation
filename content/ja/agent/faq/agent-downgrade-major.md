@@ -15,7 +15,7 @@ title: Agent を以前のメジャーバージョンにダウングレードす�
 次に、[v6 から v7 へのアップグレード][2]手順に従った場合、Agent をバージョン 7 からバージョン 6 にダウングレードするために、以下の Agent インストールコマンドを実行します。
 
 ```shell
-DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
+DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"
 ```
 
 このコマンドは、Amazon Linux、CentOS、Debian、Fedora、Red Hat、Ubuntu、および SUSE のサポートされているすべてのバージョンで動作します。
@@ -34,9 +34,9 @@ DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-ag
 **注**: Windows インストーラーの利用可能な全バージョンのリンクは、[JSON 形式で提供されています][4]。
 
 [1]: /ja/agent/guide/how-do-i-uninstall-the-agent/
-[2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
+[2]: https://windows-agent.datadoghq.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[4]: https://windows-agent.datadoghq.com/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -45,7 +45,7 @@ DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-ag
 次に、[v6 から v7 へのアップグレード][2]手順に従った場合、Agent をバージョン 7 からバージョン 6 にダウングレードするために、環境変数 `DD_AGENT_MAJOR_VERSION=6` で Agent インストールコマンドを実行します。
 
 ```shell
-DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 [1]: /ja/agent/guide/how-do-i-uninstall-the-agent/

@@ -87,7 +87,7 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [1]: /security/threats/
 [2]: /security/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration
-[4]: https://app.datadoghq.com/security/
+[4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security?product=cws

@@ -46,6 +46,11 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< partial name="dbm/dbm-setup-mysql" >}}
 <p></p>
 
+### Oracle
+
+{{< partial name="dbm/dbm-setup-oracle" >}}
+<p></p>
+
 ### SQL Server
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
