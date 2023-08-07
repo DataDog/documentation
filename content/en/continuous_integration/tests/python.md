@@ -94,7 +94,6 @@ class MyTest(unittest.TestCase):
         assert True
 {{< /code-block >}}
 
-
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
