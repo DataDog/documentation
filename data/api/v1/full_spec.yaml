@@ -4000,6 +4000,10 @@ components:
       - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
+      - sds_evt_events_usage
+      - sds_log_events_usage
+      - sds_spans_events_usage
+      - sds_rum_events_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -4036,6 +4040,10 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
+      - SDS_EVT_EVENTS_USAGE
+      - SDS_LOG_EVENTS_USAGE
+      - SDS_SPANS_EVENTS_USAGE
+      - SDS_RUM_EVENTS_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7570,6 +7578,10 @@ components:
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
       - vuln_management_hosts_percentage
+      - sds_evt_events
+      - sds_log_events
+      - sds_spans_events
+      - sds_rum_events
       - '*'
       type: string
       x-enum-varnames:
@@ -7641,6 +7653,10 @@ components:
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
+      - SDS_EVT_EVENTS
+      - SDS_LOG_EVENTS
+      - SDS_SPANS_EVENTS
+      - SDS_RUM_EVENTS
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7897,6 +7913,38 @@ components:
           type: number
         profiled_host_usage:
           description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        sds_evt_events_percentage:
+          description: The percentage of Sensitive Data Scanner events usage by tag(s).
+          format: double
+          type: number
+        sds_evt_events_usage:
+          description: The Sensitive Data Scanner events usage by tag(s).
+          format: double
+          type: number
+        sds_log_events_percentage:
+          description: The percentage of Sensitive Data Scanner logs usage by tag(s).
+          format: double
+          type: number
+        sds_log_events_usage:
+          description: The Sensitive Data Scanner logs usage by tag(s).
+          format: double
+          type: number
+        sds_rum_events_percentage:
+          description: The percentage of Sensitive Data Scanner RUM usage by tag(s).
+          format: double
+          type: number
+        sds_rum_events_usage:
+          description: The Sensitive Data Scanner RUM usage by tag(s).
+          format: double
+          type: number
+        sds_spans_events_percentage:
+          description: The percentage of Sensitive Data Scanner spans usage by tag(s).
+          format: double
+          type: number
+        sds_spans_events_usage:
+          description: The Sensitive Data Scanner spans usage by tag(s).
           format: double
           type: number
         snmp_percentage:
