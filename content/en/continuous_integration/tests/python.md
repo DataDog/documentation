@@ -27,6 +27,7 @@ Supported Python interpreters:
 Supported test frameworks:
 * pytest >= 3.0.0
   * pytest < 5 when using Python 2
+* unittest >= Python 2.7
 
 ## Configuring reporting method
 
@@ -59,6 +60,8 @@ For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
+### Using pytest
+
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="shell" >}}
@@ -70,6 +73,27 @@ If you also want to enable the rest of the APM integrations to get more informat
 {{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
+
+### Using unittest
+
+To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+
+{{< code-block lang="shell" >}}
+DD_SERVICE=my-python-app DD_ENV=ci ddtrace-run python -m unittest
+{{< /code-block >}}
+
+Alternatively, if you wish to enable `unittest` instrumentation manually, use `patch()` to enable the integration:
+
+{{< code-block lang="python" >}}
+from ddtrace import patch
+import unittest
+patch(unittest=True)
+
+class MyTest(unittest.TestCase):
+    def test_will_pass(self):
+        assert True
+{{< /code-block >}}
+
 
 ### Adding custom tags to tests
 
