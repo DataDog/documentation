@@ -61,6 +61,7 @@ For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
+### Using pytest
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="shell" >}}
@@ -73,7 +74,7 @@ If you also want to enable the rest of the APM integrations to get more informat
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
-### Instrumenting pytest-benchmark tests
+### Using pytest-benchmark
 
 To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog detects metrics from `pytest-benchmark` automatically:
 
