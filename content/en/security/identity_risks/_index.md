@@ -5,6 +5,9 @@ further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
   text: "Learn more about Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
+  tag: "Blog"
+  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
