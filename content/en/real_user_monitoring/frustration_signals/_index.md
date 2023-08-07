@@ -23,21 +23,24 @@ Frustration signals help you identify your application's highest points of user 
 RUM collects three types of frustration signals:
 
 Rage Clicks
-: A user clicks on an element more than three times in a one-second sliding window.
+: A user clicks on an element more than three times in a one-second sliding window. Only available for Browser RUM.
 
 Dead Clicks
-: A user clicks on a static element that produces no action on the page.
+: A user clicks on a static element that produces no action on the page. Only available for Browser RUM.
 
-Error Clicks
-: A user clicks on an element right before a JavaScript error occurs.
+Error Clicks / Error Taps
+: A user clicks or taps on an element right before an error (e.g. JavaScript error) occurs. Available for both Browser and Mobile RUM.
 
 ## Requirements
+
+{{< tabs >}}
+{{% tab "Browser RUM" %}}
 
 First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-```
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
@@ -45,6 +48,64 @@ window.DD_RUM.init({
 ```
 
 Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
+
+{{% /tab %}}
+{{% tab "Android RUM" %}}
+
+First, you need the Android RUM SDK version >= 1.15.0.
+
+To start collecting frustration signals, add the following to your SDK configuration:
+
+```kotlin
+.trackInteractions(true)
+.trackFrustrations(true)
+```
+
+{{% /tab %}}
+{{% tab "iOS RUM" %}}
+
+First, you need the iOS RUM SDK version >= 1.13.0.
+
+To start collecting frustration signals, add the following to your SDK configuration:
+
+```swift
+.trackUIKitRUMActions()
+.trackFrustrations()
+```
+
+{{% /tab %}}
+{{% tab "React Native RUM" %}}
+
+First, you need the React Native RUM SDK version >= 1.5.0.
+
+To start collecting frustration signals, add the following to your SDK configuration:
+
+```js
+const config = new DdSdkReactNativeConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true, // track user interactions (such as a tap on buttons)
+    true, // track XHR resources
+    true // track errors
+);
+
+config.trackFrustrations(true);
+```
+
+{{% /tab %}}
+{{% tab "Flutter RUM" %}}
+
+First, you need the Flutter RUM Plugin version >= 1.2.0.
+
+To start collecting frustration signals, add the following to your Plugin configuration:
+
+```
+xxx
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Usage
 
@@ -74,7 +135,7 @@ Frustration Count
 
 #### Sessions
 
-Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (`rage click`, `dead click`, or `error click`) and the event timeline, which shows what occurred during the session.
+Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (`rage click`, `dead click`, `error click`, or `error tap`) and the event timeline, which shows what occurred during the session.
 
 #### Views
 
@@ -109,6 +170,10 @@ A session replay's user journey details the events that occur in chronological o
 {{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Frustration signals appear in a browser recording" style="width:90%;" >}}
 
  For more information, see the [Session Replay documentation][8].
+ 
+<div class="alert alert-warning">
+Session Replay is only available for Browser RUM at the moment.
+</div>
 
 ## Create alerts for frustration signals
 
