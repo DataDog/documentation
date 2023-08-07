@@ -1,7 +1,7 @@
 ---
-title: Setting up Cloud Workload Security
+title: Setting up Cloud Security Management Threats
 kind: documentation
-description: "Follow the setup and installation instructions to get started with Cloud Workload Security."
+description: "Follow the setup and installation instructions to get started with CSM Threats."
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
@@ -29,12 +29,12 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
-Cloud Workload Security (CWS) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Prerequisites
 
 * Datadog Agent 7.44 or later.
-* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
+* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CSM Threats supports the following Linux distributions:
   * Ubuntu LTS (18.04, 20.04, and 22.04)
   * Debian 10 or later
   * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
@@ -47,19 +47,19 @@ Cloud Workload Security (CWS) monitors file, network, and process activity acros
 
 ## Installation
 
-In general, installing CWS involves the following steps:
+In general, installing CSM Threats involves the following steps:
 
 ### Enable Remote Configuration
 
-<div class="alert alert-info">Remote Configuration for CWS is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CSM Threats, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
 
-To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
+To use Remote Configuration with CSM Threats, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
 
 **Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
-### Configure the CWS Agent
+### Configure the CSM Threats Agent
 
 #### Follow the in-app documentation (recommended)
 
@@ -80,6 +80,16 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
       securityAgent:
         runtime:
           enabled: true
+    ```
+    **Optional**: To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+   
+    ```yaml
+    # values.yaml file
+    datadog:
+      securityAgent:
+        runtime:
+          security_profile:
+            enabled: true
     ```
 
 3. Restart the Agent.
@@ -104,6 +114,17 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
           enabled: true
         cws:
           enabled: true
+    ```
+
+    **Optional** To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+   
+    ```yaml
+    # values.yaml file
+    spec:
+      features:
+        cws:
+          security_profile:
+            enabled: true
     ```
 
     See the [Datadog Operator documentation][2] for additional configuration options.
@@ -142,7 +163,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
+  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CSM Threats network events
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
@@ -172,13 +193,14 @@ Add the following settings to the `env` section of `security-agent` and `system-
             env:
               - name: DD_REMOTE_CONFIGURATION_ENABLED
                 value: "true"
-              - name: system-probe
-                [...]
-                env:
-                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
-                    value: "true"
-                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                    value: "true" [...]
+          - name: system-probe
+            [...]
+            env:
+              - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED
+                value: "true"
+              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                value: "true"
+          [...]
 ```
 
 {{% /tab %}}
@@ -201,7 +223,7 @@ remote_configuration:
 # /etc/datadog-agent/security-agent.yaml file
 runtime_security_config:
   ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable full Cloud Workload Security.
+  ## Set to true to enable full CSM Threats.
   enabled: true
 ```
 
@@ -209,11 +231,21 @@ runtime_security_config:
 # /etc/datadog-agent/system-probe.yaml file
 runtime_security_config:
   ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable full Cloud Workload Security.
+  ## Set to true to enable full CSM Threats.
   enabled: true
 
   remote_configuration:
     ## @param enabled - boolean - optional - default: false
+    enabled: true
+```
+
+**Optional**: To enable Runtime Anomaly Detection, add the following to the `system-probe.yaml` file:
+```bash
+# /etc/datadog-agent/system-probe.yaml file
+runtime_security_config:
+  security_profile:
+    ## @param enabled - boolean - optional - default: false
+    ## Set to true to enable Runtime Anomaly Detection.
     enabled: true
 ```
 

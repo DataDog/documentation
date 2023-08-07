@@ -5,26 +5,26 @@ categories:
 - ログの収集
 - ネットワーク
 dependencies: []
-description: Amazon VPN のキーメトリクスを追跡
+description: AWS VPN のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
 draft: false
 git_integration_title: amazon_vpn
 has_logo: true
 integration_id: amazon-vpn
-integration_title: Amazon VPN
+integration_title: AWS VPN
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_vpn
-public_title: Datadog-Amazon VPN インテグレーション
-short_description: Amazon VPN のキーメトリクスを追跡
+public_title: Datadog-AWS VPN インテグレーション
+short_description: AWS VPN のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Virtual Private Network (VPN) を使用すると、ユーザーネットワークまたはデバイスから AWS グローバルネットワークへの安全なプライベートトンネルを確立できます。
+AWS VPN を使用すると、ユーザーネットワークまたはデバイスから AWS グローバルネットワークへの安全なプライベートトンネルを確立できます。
 
 このインテグレーションを有効にすると、Datadog にすべての VPN メトリクスを表示できます。
 
@@ -37,20 +37,20 @@ Amazon Virtual Private Network (VPN) を使用すると、ユーザーネット�
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `VPN` が有効になっていることを確認します。
-2. [Datadog - Amazon VPN インテグレーション][3]をインストールします。
+2. [Datadog - AWS VPN インテグレーション][3]をインストールします。
 
 ### ログの収集
 
 #### ログの有効化
 
-Amazon VPN から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS VPN から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_vpn` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon VPN ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS VPN ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -63,11 +63,11 @@ Amazon VPN から S3 バケットまたは CloudWatch のいずれかにログ�
 
 ### イベント
 
-Amazon VPN インテグレーションには、イベントは含まれません。
+AWS VPN インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon VPN インテグレーションには、サービスのチェック機能は含まれません。
+AWS VPN インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

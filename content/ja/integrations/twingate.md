@@ -159,6 +159,12 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
 ## トラブルシューティング
 ご不明な点は、[Twingate のサポートチーム][7]までお問い合わせください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Twingate の製品を使ってネットワークアクセスを監視する][8]
+
 [1]: https://www.twingate.com/
 [2]: https://docs.datadoghq.com/ja/getting_started/agent/
 [3]: https://docs.twingate.com/docs/connector-real-time-logs
@@ -166,3 +172,4 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/dashboard/lists
 [7]: https://help.twingate.com/hc/en-us
+[8]: https://www.datadoghq.com/blog/monitor-network-access-with-twingate/

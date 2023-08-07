@@ -33,12 +33,11 @@ Error Tracking Explorer を使用すると、さまざまな問題を見つけ�
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="エラー追跡の時間範囲" style="width:80%;" >}}
 
-
 Explorer の右上に、タイムラインの形式で時間範囲が表示されます。ここで、選択した期間内に発生したエラーとともに問題を確認できます。プリセットされた期間をドロップダウンから選択することで、期間を変更できます。
 
 ### ファセット
 
-{{< img src="real_user_monitoring/error_tracking/facet.png" alt="エラー追跡ファセット" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/facets_panel.png" alt="エラー追跡ファセット" style="width:100%;" >}}
 
 Error Tracking により、問題は事前定義された属性リストに自動的に指数化され、ファセットが作成されます。ファセットは、選択した期間の 1 つの属性の個別メンバーをすべて表示するほか、確認された問題の数など基本的な分析も提供します。ファセットを使用すると、特定の属性に基づいて問題を絞り込んだり、切り口を変えたりすることができます。
 
@@ -46,11 +45,11 @@ Error Tracking により、問題は事前定義された属性リストに自�
 
 問題をクリックすると、問題パネルが開いて詳細が表示されます。
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_upper_part.png" alt="エラー追跡問題パネルの上部" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="この問題の総括的見解を示すエラー追跡問題パネルの上部" style="width:80%;" >}}
 
 パネルの右上には、トラブルシューティングの際に必要となる情報の詳細が表示されます。ここで、問題発生の初日および最終日、総発生回数、一定期間に発生した回数など、問題のライフサイクルについて確認できます。
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="エラー追跡問題パネルの下部" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="エラーサンプルを示すエラー追跡パネルの下部" style="width:80%;" >}}
 
 問題パネルの下部では、関連する問題からのエラーサンプルにアクセスできます。各エラーサンプルには、トラブルシューティングに役立つ情報が含まれています。例:
 

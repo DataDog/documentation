@@ -848,7 +848,20 @@ Add the following entry:
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
+{{% tab "Helm" %}}
 
+The following example drops the endpoint `/my-api` and replaces `/my-api-2` with `/new-version`.
+
+```
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES
+          value: '[{"pattern":"/my-api","repl":""},{"pattern":"/my-api-2","repl":"/new-version"}]'
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading

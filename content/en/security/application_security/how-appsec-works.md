@@ -123,6 +123,12 @@ Datadog ASM offers built-in detection capabilities that warn you about the vulne
 
 For more information, read [Application Vulnerability Management][5].
 
+## API security
+
+<div class="alert alert-info">API security is in private beta.</div>
+
+Datadog Application Security Management (ASM) provides visibility into threats targeting your APIs. Use the [API Catalog][27] to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both ASM and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+
 ## How Datadog ASM protects against Log4Shell
 
 Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
@@ -150,3 +156,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
+[27]: /tracing/api_catalog/
