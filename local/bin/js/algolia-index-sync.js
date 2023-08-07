@@ -29,7 +29,7 @@ const updateSettings = (index) => {
             'unordered(relpermalink)',
             'unordered(content)'
         ],
-        ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
+        ranking: ['exact', 'words', 'filters', 'typo', 'attribute', 'proximity', 'custom'],
         customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
