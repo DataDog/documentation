@@ -73,6 +73,20 @@ If you also want to enable the rest of the APM integrations to get more informat
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
+### Instrumenting pytest-benchmark tests
+
+To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog detects metrics from `pytest-benchmark` automatically:
+
+```python
+def square_value(value):
+    return value * value
+
+
+def test_square_value(benchmark):
+    result = benchmark(square_value, 5)
+    assert result == 25
+```
+
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
@@ -89,20 +103,6 @@ def test_simple_case(ddspan):
 ```
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
-
-### Instrumenting pytest-benchmark tests
-
-To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog detects metrics from `pytest-benchmark` automatically:
-
-```python
-def square_value(value):
-    return value * value
-
-
-def test_square_value(benchmark):
-    result = benchmark(square_value, 5)
-    assert result == 25
-```
 
 ### Adding custom metrics to tests
 
