@@ -24,7 +24,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 
 ## Agent Self tests
 
-In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and that Cloud Workload Security is able to detect system events, you can manually trigger self tests by running the following command:
+In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and that Cloud Security Management Threats (CSM Threats) is able to detect system events, you can manually trigger self tests by running the following command:
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
@@ -45,18 +45,18 @@ You can now see events coming from the `runtime-security-agent` in the Log Explo
 
 ## Compatibility with custom Kubernetes network plugins
 
-The network based detections of Cloud Workload Security rely on the traffic control sub-system of the Linux kernel. This sub-system is known to introduce race conditions if multiple vendors try to insert, replace, or delete filters on the "clsact" ingress qdisc. Follow the checklist below to ensure that Cloud Workload Security is properly configured:
+The network based detections of CSM Threats rely on the traffic control sub-system of the Linux kernel. This sub-system is known to introduce race conditions if multiple vendors try to insert, replace, or delete filters on the "clsact" ingress qdisc. Follow the checklist below to ensure that CSM Threats is properly configured:
 
 * Check if your vendor leverages eBPF traffic control classifiers. If they do not, you can ignore this paragraph.
 * Check if your vendor returns TC_ACT_OK or TC_ACT_UNSPEC after granting access to a network packet. If they return TC_ACT_UNSPEC, you can ignore this paragraph.
 * Check which priority your vendor attaches their eBPF classifiers to:
-  * If they use priority 1, CWS network detections do not work inside your containers.
+  * If they use priority 1, CSM Threats network detections do not work inside your containers.
   * If they use priority 2 to 10, make sure to configure `runtime_security_config.network.classifier_priority` to a number strictly below the priority chosen by your vendor.
   * If they use priority 11 or higher, you can ignore this paragraph.
 
 For example, there is a known race with Cilium 1.9 and lower with the Datadog Agent (version 7.36 to 7.39.1, 7.39.2 excluded) that may happen when a new pod is started. The race can lead to loss of connectivity inside the pod, depending on how Cilium is configured.
 
-Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should disable the network based detections of Cloud Workload Security by following the steps below:
+Ultimately, if the Datadog Agent or your third party vendors cannot be configured to prevent the issue from happening, you should disable the network based detections of CSM Threats by following the steps below:
 
 * Add the following parameter to your `system-probe.yaml` configuration file on host based installations:
 ```yaml

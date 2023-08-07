@@ -104,6 +104,22 @@ def test_square_value(benchmark):
     assert result == 25
 ```
 
+### Adding custom metrics to tests
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```python
+from ddtrace import tracer
+
+# Declare `ddspan` as an argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("memory_allocations", 16)
+    # test continues normally
+    # ...
+```
+Read more about custom metrics in the [Add Custom Metrics Guide][7].
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
@@ -142,3 +158,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [4]: /tracing/trace_collection/dd_libraries/python/
 [5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
+[7]: /continuous_integration/guides/add_custom_metrics/?tab=python

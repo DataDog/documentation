@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: ioconnect-mulesoft-anypoint
 app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:

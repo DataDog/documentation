@@ -24,8 +24,3 @@ title: CI Visibility ガイド
     {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}取り込み制御の除外フィルターを作成する{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}パイプラインデータモデルと実行タイプを理解する{{< /nextlink >}}
 {{< /whatsnext >}}
-
-
-{{< whatsnext desc="品質の選別ガイド:" >}}
-    {{< nextlink href="/continuous_integration/guides/github_gating" >}}GitHub Actions のデプロイを Datadog モニターで選別する{{< /nextlink >}}
-{{< /whatsnext >}}

@@ -7,7 +7,7 @@ further_reading:
   text: "Cloud Security Management"
 - link: "/security/cspm/custom_rules/schema/"
   tag: "Documentation"
-  text: "CSPM cloud resources schema"
+  text: "CSM Misconfigurations cloud resources schema"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes with Datadog Workflows"
@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-[Datadog Cloud Security Management][1] (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure. Powered by observability data, CSM includes [Cloud Security Posture Management (CSPM)][2] and [Cloud Workload Security (CWS)][3].
+[Datadog Cloud Security Management][1] (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure. Powered by observability data, CSM includes [Misconfigurations][2] and [Threats][3].
 
 This guide walks you through best practices for getting your team up and running with CSM.
 
@@ -29,17 +29,17 @@ This guide walks you through best practices for getting your team up and running
 
 1. Install the [Datadog Agent (version 7.44 or above)][4].
 2. Enable CSM for for your cloud resources and infrastructure:
-    - **CWS**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
-    - **CSPM**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
+    - **CSM Threats**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
+    - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
-4. Review [500+ out-of-the-box CWS and CSPM detection rules][14].
-5. Explore [security signals][15] and review [CSPM findings][16].
+4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
+5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
 6. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
 ## Phase 2: Customization
 
-1. Set up [CWS suppression rules][18] to reduce noise.
-2. Create custom detection rules for [CSPM][19] and [CWS][20].
+1. Set up [CSM Threats suppression rules][18] to reduce noise.
+2. Create custom detection rules for [CSM Misconfigurations][19] and [CSM Threats][20].
 
 ## Phase 3: Reports and dashboards
 

@@ -54,7 +54,7 @@ title: Cloud SIEM の概要
     - [クラウド監査ログ][6]。
     - [ID プロバイダーログ][7]
     - SaaS と Workspace のログ
-    - サードパーティセキュリティインテグレーション (例: AWS GuardDuty)
+    - サードパーティセキュリティインテグレーション (例: Amazon GuardDuty)
 
 2. [Cloud SIEM][8] を有効にします。
 

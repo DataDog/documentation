@@ -148,7 +148,7 @@ Datadog-Azure [関数を Event Hub トリガー][2]でセットアップし、Da
 
 1. Azure ポータルで、**Function Apps** 概要に移動し、**Create** をクリックします。
 2. サブスクリプション、リソースグループ、地域を選択し、関数アプリの名前を入力します。
-3. **Publish to Code, Runtime stack to Node.js, and Version to 16 LTS** を選択します。
+3. **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS** を選択します。
 4. オペレーティングシステムとプランタイプを選択します。
 5. **Next:Hosting** をクリックします。
 6. ストレージアカウントを選択します。
@@ -229,7 +229,7 @@ Azure 関数に馴染みのない方は、[Azure 関数入門][7]をご覧くだ
 
 1. [Azure ポータル][2]で、**Function Apps** 概要に移動し、**Create** をクリックします。
 2. サブスクリプション、リソースグループ、地域を選択し、関数アプリの名前を入力します。
-3. **Publish to Code, Runtime stack to Node.js, and Version to 16 LTS** を選択します。
+3. **Publish to Code, Runtime stack to Node.js, and Version to 18 LTS** を選択します。
 4. オペレーティングシステム **Windows** とプランタイプを選択します。
 5. **Next:Hosting** をクリックします。
 6. ストレージアカウントを選択します。

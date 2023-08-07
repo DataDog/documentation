@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/github"
   tag: "Documentation"
   text: "Learn about the GitHub Integration"
+- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+  tag: "Blog"
+  text: "Import Backstage YAML files into Datadog"
 ---
 
 ## Overview
@@ -79,7 +82,7 @@ If you use API or Terraform, replace the YAMLs in your requests.
 If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
 
 Upon import, the following occurs:
-- Datadog only recognizes `kind:component` and `spec.type=service` in Backstage YAMLs as services
+- Datadog only recognizes `kind:component` in Backstage YAMLs as services
 - `name` gets converted to `DD-SERVICE`
 - `namespace` values get mapped to custom tags
 - `lifecycle` gets mapped to `lifecycle`

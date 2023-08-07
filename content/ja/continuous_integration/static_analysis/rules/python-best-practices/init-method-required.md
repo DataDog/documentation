@@ -27,6 +27,13 @@ class Foo:  # __init__ を定義する必要があります
 
 ## 準拠コードの例
 ```python
+class Foo(Bar):
+
+  def foo():
+      pass
+```
+
+```python
 class UserLoginTest(TestCase):
     def setUp(self):
         self.username = 'testuser'

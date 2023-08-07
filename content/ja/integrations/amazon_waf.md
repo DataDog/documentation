@@ -13,13 +13,13 @@ draft: false
 git_integration_title: amazon_waf
 has_logo: true
 integration_id: amazon-waf
-integration_title: Amazon Web Application Firewall
+integration_title: AWS WAF
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_waf
-public_title: Datadog-Amazon Web Application Firewall インテグレーション
+public_title: Datadog-AWS WAF インテグレーション
 short_description: 許可およびブロックされたリクエストを追跡。
 version: '1.0'
 ---

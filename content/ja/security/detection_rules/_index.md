@@ -28,9 +28,9 @@ title: 検出ルール
 
 - [Cloud SIEM][2] では、ログ検出を使用して、収集したログをリアルタイムで分析します。環境に合わせて[カスタム検出ルール][3]を作成することも可能です。
 
-- [Cloud Security Posture Management][4] では、クラウドコンフィギュレーションおよびインフラストラクチャーコンフィギュレーション検出ルールを使用して、クラウド環境の状態をスキャンします。
+- [Cloud Security Management Misconfigurations][4] では、クラウド構成およびインフラストラクチャー構成検出ルールを使用して、クラウド環境の状態をスキャンします。
 
-- [Cloud Workload Security][5] を使用して、Datadog Agent はアクティブにシステムのアクティビティを監視し、検出ルールに対して評価を行います。
+- [Cloud Security Management Threats][5] を使用して、Datadog Agent はアクティブにシステムのアクティビティを監視し、検出ルールに対して評価を行います。
 
 - [Application Security Management][6] (ASM) は、Datadog [APM][7]、[Datadog Agent][8]、検出ルールを活用し、アプリケーション環境における脅威を検出します。
 
@@ -106,7 +106,7 @@ title: 検出ルール
 
 1. ルールに非推奨の日付が書かれた警告が表示されています。UI では、警告が以下に表示されます。
     - シグナルサイドパネルの **Rule Details > Playbook** セクション
-    - Findings サイドパネル (CSPM のみ)
+    - Findings サイドパネル (CSM Misconfigurations のみ)
     - その特定のルールの[ルールエディター](#rule-and-generated-signal-options)
 2. ルールが非推奨になると、ルールが削除されるまでに 15 か月の期間があります。これは、シグナルの保持期間が 15 か月であるためです。この間、UI で[ルールの複製](#rule-and-generated-signal-options)を行うと、ルールを再び有効にすることができます。
 3. 一度削除されたルールは、複製して再度有効にすることはできません。
