@@ -28,9 +28,9 @@ For each monitoring option, there are [default detection rules][1] that work out
 
 - [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time. You can also create [custom detection rules][3] to tailor to your environment.
 
-- [Cloud Security Posture Management][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
+- [Cloud Security Management Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
 
-- With [Cloud Workload Security][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
+- With [Cloud Security Management Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
@@ -106,7 +106,7 @@ The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
     - Signal side panel's **Rule Details > Playbook** section
-    - Findings side panel (CSPM only)
+    - Findings side panel (CSM Misconfigurations only)
     - [Rule editor](#rule-and-generated-signal-options) for that specific rule 
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#rule-and-generated-signal-options) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.

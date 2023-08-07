@@ -52,7 +52,7 @@ For any given error, you can access the file path, line number, and a code snipp
 2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Optionally, configure the plugin to upload files to the EU region by configuring the plugin in your `build.gradle` script:
    
-   ```
+   ```groovy
    datadog {
        site = "EU1"
    }
@@ -135,7 +135,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | The version name of the application (by default, the version declared in the `android` block of your `build.gradle` script).                                                                                                               |
 | `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
-| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, or US1_FED).                                                                                                                                       |
+| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, or AP1).                                                                                                                                       |
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
 | `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, "none" is ignored, "warn" logs a warning, and "fail" fails the build with an error (default). |
 
@@ -158,7 +158,7 @@ Mapping files are limited to 200 MB when targeting our US1 or EU1 sites, and 50 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
 
-```
+```groovy
 datadog {
     mappingFileTrimIndents = true
     mappingFilePackageAliases = mapOf(
@@ -176,6 +176,6 @@ datadog {
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/android/#setup
-[4]: https://github.com/DataDog/dd-sdk-android
-[5]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[3]: /real_user_monitoring/android/#setup
+[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
+[5]: /real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters

@@ -28,23 +28,67 @@ You can perform the following:
 
 Set up the web page you want rendered on your mobile iOS and tvOS application with the RUM Browser SDK first. For more information, see [RUM Browser Monitoring][1].
 
+### Declare `DatadogWebViewTracking` as a dependency
+
+To enable Crash Reporting, make sure to also enable [RUM][3] and, or [Logs][5]. Then, add the package according to your dependency manager and update your initialization snippet.
+
+{{< tabs >}}
+{{% tab "CocoaPods" %}}
+
+You can use [CocoaPods][4] to install `dd-sdk-ios`:
+```
+pod 'DatadogWebViewTracking'
+```
+
+[4]: https://cocoapods.org/
+
+{{% /tab %}}
+{{% tab "Swift Package Manager (SPM)" %}}
+
+To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
+```swift
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+```
+
+In your project, link the following libraries:
+```
+DatadogCore
+DatadogWebViewTracking
+```
+
+{{% /tab %}}
+{{% tab "Carthage" %}}
+
+You can use [Carthage][5] to install `dd-sdk-ios`:
+```
+github "DataDog/dd-sdk-ios"
+```
+
+In Xcode, link the following frameworks:
+```
+DatadogWebViewTracking.xcframework
+```
+
+[5]: https://github.com/Carthage/Carthage
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Instrument your web views
 
-The RUM iOS SDK provides APIs for you to control web view tracking. To add Web View Tracking, declare the following as an extension of `WKUserContentController`.
+The RUM iOS SDK provides APIs for you to control web view tracking. To enable Web View Tracking, provide the `WKWebView` instance.
 
-`trackDatadogEvents(in hosts: Set<String>)`
-: Enables RUM event tracking in a web view for certain `hosts`.
-
-`stopTrackingDatadogEvents()`
-: Disables RUM event tracking in a web view. When a web view is about to be de-allocated or you are done with the web view, call this API.
-
-For example:
-
-```
+```swift
 import WebKit
-import Datadog
- 
-webView.configuration.userContentController.trackDatadogEvents(in: ["example.com"])
+import DatadogWebViewTracking
+
+let webView = WKWebView(...)
+WebViewTracking.enable(webView: webView, hosts: ["example.com"])
+```
+
+To disable Web View Tracking:
+```swift
+WebViewTracking.disable(webView: webView)
 ```
 
 ## Access your web views
@@ -65,3 +109,4 @@ Click **Open View waterfall** to navigate from the session to a resource waterfa
 [2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.10.0-beta1
 [3]: /real_user_monitoring/ios/
 [4]: https://app.datadoghq.com/rum/explorer
+[5]: https://docs.datadoghq.com/logs/log_collection/ios
