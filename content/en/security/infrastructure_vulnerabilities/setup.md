@@ -19,7 +19,7 @@ CSM Vulnerabilities is not available on the US1-FED Datadog site.
 
 ## Prerequisites
 
-- [Cloud Security Management (CSM)][1] (using [CSM Threats][2] or [CSM Misconfigurations][3]).
+- [Cloud Security Management][1] (using [Threats][2] or [Misconfigurations][3]).
 - [Datadog Agent][4] 7.46.0 or higher.
 - [containerd][5] v1.5.6 or higher.
 - [Helm Chart][6] v3.33.6 or higher.
