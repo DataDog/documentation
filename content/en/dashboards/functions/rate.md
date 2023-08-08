@@ -33,7 +33,7 @@ further_reading:
 |:---------|:---------------------------------------------------------------|:-----------------------|
 | `dt()`   | Graph the time difference in seconds between submitted points. | `dt(<METRIC_NAME>{*})` |
 
-The dt() function will only return one timeseries regardless of how many groups are involved. Within that one timeseries, it considers the time difference of all the submitted points across the various groups.
+The dt() function returns only one timeseries regardless of how many groups are involved. Within that one timeseries, it considers the time difference of all the submitted points across the various groups.
 
 ## Value difference
 
