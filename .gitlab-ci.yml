@@ -382,7 +382,7 @@ manage_ignored_translations:on-schedule:
 # its too noisy to run all the time but we want some insight so its running on schedule
 link_checks:on-schedule:
   <<: *base_template
-  <<: *live_rules
+  <<: *live_schedule_rules
   stage: post-deploy
   cache: {}
   environment: "live"
