@@ -48,6 +48,9 @@ agents:
           value: "true"
 ```
 
+[5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[6]: /containers/kubernetes/installation/?tab=helm
+
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}
@@ -117,6 +120,8 @@ container_image:
   enabled: true
 ```
 
+[5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -182,6 +187,8 @@ agents:
 ```
 
 {{% /tab %}}
+
+{{< /tabs >}}
 
 [1]: /security/cloud_security_management
 [2]: /security/cloud_workload_security/
