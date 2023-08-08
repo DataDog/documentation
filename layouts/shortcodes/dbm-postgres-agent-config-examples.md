@@ -85,7 +85,7 @@ Note: if `include` is empty, the Agent will monitor all logical databases on the
 
 By default, the Agent is limited to finding and monitoring 100 databases on the host. This limit can be increased with the `max_databases` parameter, but note that the Agent will have to connect to each database at every collection. This means for hosts with many databases, the time to collect metrics may exceed the default collection interval, and thus the collection interval should also be increased.
 
-If the relations to monitor in each database differ, then databases must be specified using distinct instance blocks. This is described in [`Advanced Configuration`](/database_monitoring/setup_postgres/advanced_configuration#monitoring-relation-metrics-for-multiple-logical-databases). For Agent versions <= 7.46, databases also must be specified in distinct blocks.
+To use database autodiscovery, metrics on all tables will be collected for each database specified. For more granular relation metrics collection per database, databases must be specified using distinct instance blocks. This is described in [`Advanced Configuration`](/database_monitoring/setup_postgres/advanced_configuration#monitoring-relation-metrics-for-multiple-logical-databases). For Agent versions <= 7.46, databases also must be specified in distinct blocks.
 ```yaml
 init_config:
 instances:
