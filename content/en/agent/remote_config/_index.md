@@ -49,7 +49,7 @@ The following diagram illustrates how Remote Configuration works:
 
 **Note**: Configuration changes applied through Remote Configuration are not shown in your Agent configuration file.
 
-## Support products and feature capabilities
+## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
 
 ### Application Security Management (ASM)
