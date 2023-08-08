@@ -165,14 +165,10 @@ agents:
 {{% tab "Hosts" %}}
 
 ```yaml
-agents:
-  containers:
-    agent:
-      env:
-        - name: DD_SBOM_ENABLED
-          value: "true"
-        - name: DD_SBOM_HOST_ENABLED
-          value: "true"
+sbom:
+  enabled: true
+  host:
+    enabled: true
 ```
 
 {{% /tab %}}
