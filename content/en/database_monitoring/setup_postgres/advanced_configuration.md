@@ -43,6 +43,46 @@ instances:
       replace_digits: true
 ```
 
+## Agent version <=7.46: Monitoring relation metrics for multiple logical databases
+In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database). This is also necessary in Agent 7.47 to specify different relations to monitor per logical database.
+
+Specify a single "DBM" instance to collect DBM telemetry from all databases. Additionally, specify all logical databases the Agent must connect to. It is important to only have `dbm: true` on one configuration instance per host in order to prevent duplication of metrics.
+```yaml
+init_config:
+instances:
+  # This instance is the "DBM" instance. It will connect to the
+  # `postgres` database and send DBM telemetry from all databases
+  - dbm: true
+    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+  # This instance only collects data from the `on_sale` database
+  # and collects relation metrics from tables prefixed by "2022_"
+  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    dbname: on_sale
+    dbstrict: true
+    relations:
+      - relation_regex: 2022_.*
+        relkind:
+          - r
+          - i
+  # This instance only collects data from the `inventory` database
+  # and collects relation metrics only from the specified tables
+  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    dbname: inventory
+    dbstrict: true
+    relations:
+      - relation_name: products
+      - relation_name: external_seller_products
+```
+
 ## Raising the sampling rate
 
 If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently.

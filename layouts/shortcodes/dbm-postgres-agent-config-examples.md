@@ -74,9 +74,16 @@ instances:
 ```
 
 ### Monitoring relation metrics for multiple logical databases
-In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database).
+In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database). 
 
-Specify a single "DBM" instance to collect DBM telemetry from all databases. Additionally, specify all logical databases the Agent must connect to. It is important to only have `dbm: true` on one configuration instance per host in order to prevent duplication of metrics.
+For version 7.47, specify a single "DBM" instance to collect DBM telemetry from all databases. 
+In a `database-autodiscovery` block, set enabled to `True`. Then, specify the logical databases to monitor under the `include` list. Use a regular expression to match the names of the databases: e.g., if `inventory` should be monitored, but not `inventory_1`, then specify `inventory$` in the include list. Databases can also be excluded from monitoring under `exclude`. 
+
+The Agent will rediscover databases every 10 minutes by default. This parameter can be changed under the `refresh` configuration option.
+
+Note: if `include` is empty, the Agent will monitor all logical databases on the host. By default, the Agent is limited to finding and monitoring 100 databases on the host. 
+
+If the relations to monitor in each database differ, then databases must be specified using distinct instance blocks. This is described in `Advanced Configuration`. For Agent version <= 7.46, databases also must be specified in distinct blocks.
 ```yaml
 init_config:
 instances:
@@ -87,30 +94,22 @@ instances:
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-  # This instance only collects data from the `on_sale` database
-  # and collects relation metrics from tables prefixed by "2022_"
-  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
-    port: 5432
-    username: datadog
-    password: '<PASSWORD>'
-    dbname: on_sale
+    database_autodiscovery:
+      enabled: True
+      include: 
+        - inventory$
+        - products$
+        - user*
+      exclude:
+        - users_deprecated$
+      refresh:
+        - 1000
     dbstrict: true
     relations:
-      - relation_regex: 2022_.*
+      - relation_regex: .*
         relkind:
           - r
           - i
-  # This instance only collects data from the `inventory` database
-  # and collects relation metrics only from the specified tables
-  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
-    port: 5432
-    username: datadog
-    password: '<PASSWORD>'
-    dbname: inventory
-    dbstrict: true
-    relations:
-      - relation_name: products
-      - relation_name: external_seller_products
 ```
 
 ### Working with hosts through a proxy
