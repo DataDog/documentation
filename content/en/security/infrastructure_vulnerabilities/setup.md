@@ -21,8 +21,6 @@ CSM Vulnerabilities is not available on the US1-FED Datadog site.
 
 - [Cloud Security Management][1] (using [Threats][2] or [Misconfigurations][3]).
 - [Datadog Agent][4] 7.46.0 or higher.
-- [containerd][5] v1.5.6 or higher.
-- [Helm Chart][6] v3.33.6 or higher.
 
 ## Setup for container image scanning
 
@@ -31,7 +29,9 @@ CSM Vulnerabilities is not available on the US1-FED Datadog site.
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-Agent version `>= 7.46.0`:
+- Agent version `>= 7.46.0`:
+- [containerd][5] v1.5.6 or higher.
+- [Helm Chart][6] v3.33.6 or higher.
 
 Add the following to your `values.yaml` helm configuration file:
 
@@ -100,11 +100,33 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][7],
 [7]: /containers/amazon_ecs/?tab=awscli#setup
 
 {{% /tab %}}
+
+{{% tab "Host based install" %}}
+
+- Agent version `>= 7.46.0`:
+- [containerd][5] v1.5.6 or higher.
+
+Add the following to your `datadog.yaml` configuration file:
+
+```yaml
+sbom:
+  enabled: true
+  container_image:
+    enabled: true
+container_image:
+  enabled: true
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Setup for host vulnerability scanning
 
 **Note**: Container and host SBOM can be enabled at the same time by combining the [containers](#setup-for-container-image-scanning) setup with the following setup for hosts configuration:
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
 
 ```yaml
 agents:
@@ -116,6 +138,50 @@ agents:
         - name: DD_SBOM_HOST_ENABLED
           value: "true"
 ```
+
+{{% /tab %}}
+
+{{% tab "ECS EC2" %}}
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+             ...
+            "environment": [
+              ...
+              {
+                "name": "DD_SBOM_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_HOST_ENABLED",
+                "value": "true"
+              }
+            ]
+        }
+    ]
+  ...
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Host based install" %}}
+
+```yaml
+agents:
+  containers:
+    agent:
+      env:
+        - name: DD_SBOM_ENABLED
+          value: "true"
+        - name: DD_SBOM_HOST_ENABLED
+          value: "true"
+```
+
+{{% /tab %}}
 
 [1]: /security/cloud_security_management
 [2]: /security/cloud_workload_security/
