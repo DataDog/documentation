@@ -498,7 +498,7 @@ by the Datadog Agent</a>. We are working to resolve this bug.
 [17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
 [18]: https://docs.datadoghq.com/tracing/glossary/#resources
 [19]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_resource_name
-[19]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_location
+[20]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_location
 [21]: http://nginx.org/en/docs/http/ngx_http_map_module.html
 {{% /tab %}}
 {{% tab "Istio" %}}
