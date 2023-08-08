@@ -44,7 +44,8 @@ The following diagram illustrates how Remote Configuration works:
 
 1. You configure select product features in the Datadog UI.
 2. The product feature configurations are securely stored within Datadog.
-3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
+3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog.
+4. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
 
 **Note**: Configuration changes applied through Remote Configuration are not shown in your Agent configuration file.
 
