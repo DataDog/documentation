@@ -83,7 +83,7 @@ The Agent will rediscover databases every 10 minutes by default. This parameter 
 
 Note: if `include` is empty, the Agent will monitor all logical databases on the host. By default, the Agent is limited to finding and monitoring 100 databases on the host. 
 
-If the relations to monitor in each database differ, then databases must be specified using distinct instance blocks. This is described in `Advanced Configuration`. For Agent version <= 7.46, databases also must be specified in distinct blocks.
+If the relations to monitor in each database differ, then databases must be specified using distinct instance blocks. This is described in [`Advanced Configuration`](/database_monitoring/setup_postgres/advanced_configuration#monitoring-relation-metrics-for-multiple-logical-databases). For Agent versions <= 7.46, databases also must be specified in distinct blocks.
 ```yaml
 init_config:
 instances:
