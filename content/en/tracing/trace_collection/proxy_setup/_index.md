@@ -347,6 +347,65 @@ http {
 }
 ```
 
+### Resource Name
+Associated with each Datadog span is a [resource name][18]. The
+[default value][19] is `$request_method $uri`. For example,
+`GET /api/book/0-345-24223-8/title`.
+
+The resource name affects how traces are indexed by Datadog. This can be
+problematic if there are a large number of distinct resource names for a
+service.
+
+In the example above, there is a distinct resource name for every book. Better
+would be a resource name denoting "get book title," but without indicating
+the specific book. The `http.url` tag will still contain the full URI.
+
+There are two ways to configure NGINX to normalize such high cardinality
+resource names.
+
+#### Use `$datadog_location` instead of `$uri`
+If the `location` block corresponding to book titles already pulls apart the
+URI's structure, then the [name of the `location`][20] itself can be used instead of
+the full URI. This prevents high cardinality.
+```nginx
+location ~ /api/book/(?<ISBN>[^/]+)/title {
+  datadog_resource_name "$request_method $datadog_location";
+  proxy_pass http://bookinfosvc/?isbn=$ISBN&attr=title;
+}
+```
+The resulting resource name for a GET request for
+"/api/book/0-345-24223-8/title" would be
+`GET /api/book/(?<isbn>[^/]+)/title`.
+
+This technique is not useful in the common case where most or all locations are
+of the form `location /`. In those cases, use `map` as described in the
+following section.
+
+#### Use `map` to normalize the URI
+NGINX's [map][21] directive allows custom variables to be defined. This can be
+used to derive a low cardinality resource name from a high cardinality URI.
+```nginx
+load_module modules/ngx_http_datadog_module.so;
+
+http {
+  map $uri $uri_without_book {
+    /api/book/[^/]+/(.*)    /api/book/?/$1
+    default    $uri
+  }
+
+  server {
+    # ...
+    location /api {
+      datadog_resource_name "$request_method $uri_without_book";
+      proxy_pass http://apisvc;
+    }
+  }
+}
+```
+The resulting resource name for a GET request for
+"/api/book/0-345-24223-8/title" would be
+`GET /api/book/?/title`.
+
 ## Ingress-NGINX Controller for Kubernetes
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
@@ -437,6 +496,10 @@ by the Datadog Agent</a>. We are working to resolve this bug.
 [15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
 [17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
+[18]: https://docs.datadoghq.com/tracing/glossary/#resources
+[19]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_resource_name
+[19]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md#datadog_location
+[21]: http://nginx.org/en/docs/http/ngx_http_map_module.html
 {{% /tab %}}
 {{% tab "Istio" %}}
 
