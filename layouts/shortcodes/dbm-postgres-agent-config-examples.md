@@ -76,7 +76,7 @@ instances:
 ### Monitoring relation metrics for multiple logical databases
 In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database). 
 
-For version 7.47, specify a single "DBM" instance to collect DBM telemetry from all databases. 
+For version 7.48, specify a single "DBM" instance to collect DBM telemetry from all databases. 
 In that instance, define a `database-autodiscovery` block. Set enabled to `True`. Then, specify the logical databases to monitor under the `include` list. Use a regular expression to match the names of the databases: for example, if `inventory` should be monitored, but not `inventory_1`, then specify `inventory$` in the include list. Databases can also be excluded from monitoring under `exclude`. 
 If `include` is empty, the Agent will monitor all logical databases on the host. 
 
@@ -84,7 +84,7 @@ The Agent will rediscover databases every 10 minutes by default. This parameter 
 
 By default, the Agent is limited to finding and monitoring 100 databases on the host. This limit can be increased with the `max_databases` parameter, but note that the Agent will have to connect to each database at every collection. This means for hosts with many databases, the time to collect metrics may exceed the default collection interval, and thus the collection interval should also be increased.
 
-When using database autodiscovery, metrics on all tables will be collected for each database specified. For more granular relation monitoring per database, databases must be specified as distinct instances. This is described in [`Advanced Configuration`](/database_monitoring/setup_postgres/advanced_configuration#monitoring-relation-metrics-for-multiple-logical-databases). For Agent versions < 7.47, databases also must be specified as distinct instances.
+When using database autodiscovery, metrics on all tables will be collected for each database specified. For more granular relation monitoring per database, databases must be specified as distinct instances. This is described in [`Advanced Configuration`](/database_monitoring/setup_postgres/advanced_configuration#monitoring-relation-metrics-for-multiple-logical-databases). For Agent versions < 7.48, databases also must be specified as distinct instances.
 ```yaml
 init_config:
 instances:
