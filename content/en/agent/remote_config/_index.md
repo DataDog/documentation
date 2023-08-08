@@ -206,7 +206,14 @@ Gain visibility into the Remote Configuration status of your Agent through the [
 
 ## Opting out of Remote Configuration at the Agent level
 
-Starting with Agent version 7.47.0, remote_configuration.enabled is set to true by default in the Agent. This will cause the agent to request configuration updates from the Datadog site. To receive configurations from Datadog, you still need to enable Remote Configuration at the organization level and enable Remote Configuration capability on your API Key from the Datadog UI, and allow outbound HTTPS access to Remote Configuration [endpoints][17] from your environment. If you don't want your agent to send configuration requests to Datadog, you can set remote_configuration.enabled to false in the Agent.
+Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
+
+To receive configurations from Datadog, you need to take the following steps:
+- Enable Remote Configuration at the organization level.
+- Enable Remote Configuration capability on your API Key from the Datadog UI.
+- Allow outbound HTTPS access to Remote Configuration [endpoints][17] from your environment.
+
+If you don't want your Agent to send configuration requests to Datadog, you can set `remote_configuration.enabled` to `false` in the Agent.
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
