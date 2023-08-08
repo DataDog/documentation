@@ -78,7 +78,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 環境変数 `DD_FIPS_MODE` を設定すると、Agent と一緒に FIPS パッケージがインストールされ、Agent がプロキシを使用するように構成されます。この方法を使用する場合、追加の構成手順はありませんが、[インストールを検証する](#verify-your-installation)必要があります。

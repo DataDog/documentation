@@ -55,37 +55,33 @@ title: Datadog における Test Visibility
 
 CI Visibility がサポートするすべての言語が、テストスイートレベルの視覚化をサポートしているわけではありません。
 
-* [Swift][11] は `dd-sdk-swift-testing>=2.1.0` から完全にサポートされています。
-* [.NET][12] は `dd-trace-dotnet>2.16.0` から完全にサポートされています。
-* [JavaScript][13] は `dd-trace-js>=3.3.0` から限定的にサポートされています。
-* Java は `dd-trace-java>=1.12.0` から完全にサポートされています。
-* [JUnit レポートのアップロード][14]は、`datadog-ci>=2.17.0` から完全にサポートされています。
-
-さらに、テストスイートレベルの視覚化は、エージェントレスモードでのみサポートされています。
+* [Swift][2] は `dd-sdk-swift-testing>=2.1.0` から完全にサポートされています。
+* [.NET][3] は `dd-trace-dotnet>2.16.0` から完全にサポートされています。
+* [JavaScript][4] は `dd-trace-js>=3.3.0` から限定的にサポートされています。
+* [Java][5] は `dd-trace-java>=1.12.0` から完全にサポートされています。
+* [JUnit レポートのアップロード][6]は、`datadog-ci>=2.17.0` から完全にサポートされています。
+* [Python][7] は `dd-trace-py>=1.14.0` から完全にサポートされています。
 
 ## CI テストデータの使用
 
-[ダッシュボード][15]または[ノートブック][16]を作成する際、検索クエリでテスト実行データを使用すると、視覚化ウィジェットのオプションが更新されます。
+[ダッシュボード][8]または[ノートブック][9]を作成する際、検索クエリでテスト実行データを使用すると、視覚化ウィジェットのオプションが更新されます。
 
 ## テストデータのアラート
 
-[**Test Runs** ページ][4]で、失敗したテストや不安定なテスト、CI テストのパフォーマンスを評価する場合、**Create Monitor** をクリックして、[CI Test モニター][17]を作成します。
+[**Test Runs** ページ][10]で、失敗したテストや不安定なテスト、CI テストのパフォーマンスを評価する場合、**Create Monitor** をクリックして、[CI Test モニター][11]を作成します。
 
 ## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/test-services?view=branches
-[3]: https://app.datadoghq.com/ci/test-services?view=default-branches
-[4]: https://app.datadoghq.com/ci/test-runs
-[5]: https://www.datadoghq.com/auto-instrumentation/
-[6]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
-[7]: /ja/tracing/
-[11]: /ja/continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[12]: /ja/continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[13]: /ja/continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[14]: /ja/continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
-[15]: https://app.datadoghq.com/dashboard/lists
-[16]: https://app.datadoghq.com/notebook/list
-[17]: /ja/monitors/types/ci/
+[2]: /ja/continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
+[3]: /ja/continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
+[4]: /ja/continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
+[5]: /ja/continuous_integration/tests/java/#compatibility
+[6]: /ja/continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
+[7]: /ja/continuous_integration/tests/python/#compatibility
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: https://app.datadoghq.com/ci/test-runs
+[11]: /ja/monitors/types/ci/
