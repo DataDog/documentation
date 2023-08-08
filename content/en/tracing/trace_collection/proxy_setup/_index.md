@@ -389,8 +389,8 @@ load_module modules/ngx_http_datadog_module.so;
 
 http {
   map $uri $uri_without_book {
-    /api/book/[^/]+/(.*)    /api/book/?/$1
-    default    $uri
+    /api/book/[^/]+/(.*)    /api/book/?/$1;
+    default    $uri;
   }
 
   server {
