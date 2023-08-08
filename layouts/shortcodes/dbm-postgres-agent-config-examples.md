@@ -88,7 +88,9 @@ If the relations to monitor in each database differ, then databases must be spec
 init_config:
 instances:
   # This instance is the "DBM" instance. It will connect to the
-  # `postgres` database and send DBM telemetry from all databases
+  # `inventory` and `product` databases, and all databases prefixed by `user`
+  # except for `users_deprecated`. It will send DBM telemetry from all databases,
+  # but collect relation metrics on only the databases specified by `database_autodiscovery`.
   - dbm: true
     host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
