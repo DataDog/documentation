@@ -107,9 +107,9 @@ func main() {
 }
 ```
 
-**Incomplete Span Logs**
+**Abandoned Span Logs**
 
-In addition to debug mode, the Datadog Go Tracer supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10` minutes), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. 
+The Datadog Go Tracer also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs will appear at the Warn level.
 
 Debugging abandoned spans can also be enabled during the `Start` config:
 
