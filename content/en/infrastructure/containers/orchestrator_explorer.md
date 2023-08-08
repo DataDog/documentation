@@ -131,7 +131,7 @@ Within the Kubernetes Explorer, tab you can explore a selection of resource util
 
 All of these columns support sorting, which helps you to pinpoint individual workloads based on their resource utilization.
 
-{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Container Resource Utilization Sorted Columns" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Container Resource Utilization Sorted Columns" style="width:50%;">}}
 
 ## Notes and known issues
 
