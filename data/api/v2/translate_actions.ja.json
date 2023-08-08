@@ -100,23 +100,23 @@
     "request_schema_description": "AuthN Mapping の更新リクエスト。"
   },
   "CreateCIAppPipelineEvent": {
-    "description": "パイプラインイベントを HTTP 経由で Datadog プラットフォームに送信します。パイプライン実行がどのようにモデル化され、どのような実行タイプをサポートするかについては、[ガイド](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/)を参照してください。\n\nパイプラインイベントは、過去 18 時間までのタイムスタンプで送信できます。\n\nこの API エンドポイントは非公開ベータ版です。",
+    "description": "パイプラインイベントを HTTP 経由で Datadog プラットフォームに送信します。パイプライン実行がどのようにモデル化され、どのような実行データタイプをサポートしているかについては、[Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/) を参照してください。\n\nパイプラインイベントは、過去 18 時間までのタイムスタンプで送信できます。",
     "summary": "パイプラインイベントの送信",
     "request_description": "",
     "request_schema_description": "リクエストオブジェクト。"
   },
   "AggregateCIAppPipelineEvents": {
-    "description": "CI Visibility パイプラインイベントを、計算されたメトリクスとタイムシリーズのバケットに集計する API エンドポイント。",
+    "description": "この API エンドポイントを使用して、CI Visibility パイプラインイベントを、計算されたメトリクスとタイムシリーズのバケットに集計します。",
     "summary": "Aggregate pipelines events",
     "request_description": "",
     "request_schema_description": "組織からパイプラインイベントの集計バケットを取得するリクエストと共に送信されたオブジェクト。"
   },
   "ListCIAppPipelineEvents": {
-    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のパイプラインイベントを確認するために使用します。",
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のパイプラインイベントを確認するために使用します。",
     "summary": "パイプラインのイベント一覧の取得"
   },
   "SearchCIAppPipelineEvents": {
-    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
     "summary": "パイプラインイベントの検索",
     "request_description": "",
     "request_schema_description": "パイプライン検索のリクエスト。"
