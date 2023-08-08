@@ -44,8 +44,7 @@ The following diagram illustrates how Remote Configuration works:
 
 1. You configure select product features in the Datadog UI.
 2. The product feature configurations are securely stored within Datadog.
-3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog.
-4. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
+3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
 
 **Note**: Configuration changes applied through Remote Configuration are not shown in your Agent configuration file.
 
@@ -208,7 +207,7 @@ Gain visibility into the Remote Configuration status of your Agent through the [
 
 Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
 
-To receive configurations from Datadog, you need to take the following steps:
+To receive configurations from Datadog, you also need to take the following steps:
 - Enable Remote Configuration at the organization level.
 - Enable Remote Configuration capability on your API Key from the Datadog UI.
 - Allow outbound HTTPS access to Remote Configuration [endpoints][17] from your environment.
@@ -217,7 +216,7 @@ If you don't want your Agent to send configuration requests to Datadog, you can 
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-Change `remote_configuration.enabled` from `true` to `false` in your configuration YAML file:
+Change `remote_configuration.enabled` from `true` to `false` in your [configuration YAML file][21]:
 ```yaml
 remote_configuration:
   enabled: false
@@ -267,3 +266,4 @@ datadog:
 [18]: /agent/proxy/
 [19]: /tracing/service_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
+[21]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
