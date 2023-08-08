@@ -217,7 +217,7 @@ If you don't want your Agent to send configuration requests to Datadog, you can 
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-Change remote_configuration.enabled from true to false in your configuration YAML file:
+Change `remote_configuration.enabled` from `true` to `false` in your configuration YAML file:
 ```yaml
 remote_configuration:
   enabled: false
