@@ -1,16 +1,18 @@
-export function getHitData(hit, qry = '') {
+export function getHitData(hit, searchQuery = '') {
     const title = hit.title ? hit.title : hit.type;
     const cleanRelPermalink =
         hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
-    const orMatches = qry.split(' ').filter(word => word).join('|');
+
+        // What does orMatches mean?
+    const orMatches = searchQuery.split(' ').filter(word => word.length > 2).join('|');
     const regexQry = new RegExp(`(${orMatches})`, 'gi');
     let highlightedTitle = (hit._highlightResult.title.value || title);
     let highlightedContent = (hit._highlightResult.content.value || '');
     
-    // if(qry) {
-    //   highlightedTitle = highlightedTitle.replace(regexQry, '<mark>$1</mark>');
-    //   highlightedContent = highlightedContent.replace(regexQry, '<mark>$1</mark>');
-    // }
+    if (searchQuery) {
+      highlightedTitle = highlightedTitle.includes('<mark>') ? highlightedTitle : highlightedTitle.replace(regexQry, '<mark>$1</mark>');
+      highlightedContent = highlightedContent.includes('<mark>') ? highlightedContent : highlightedContent.replace(regexQry, '<mark>$1</mark>');
+    }
 
     return {
         relpermalink: cleanRelPermalink,
