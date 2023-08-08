@@ -117,7 +117,7 @@ To enable Remote Configuration:
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 
 5. Update your Agent configuration file:
-Note: This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, remote_configuration.enabled is set to true by default in the Agent.
+**Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent.
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
