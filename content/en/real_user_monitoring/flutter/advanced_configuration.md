@@ -35,7 +35,46 @@ final _router = GoRouter(
 MaterialApp.router(
   routerConfig: _router,
   // Your remaining setup
-)
+);
+```
+
+If you are using `ShellRoutes`, you will need to supply a separate observer to each `ShellRoute` (see [this bug][11] for why).
+
+```dart
+final _router = GoRouter(
+  routes: [
+    ShellRoute(build: shellBuilder),
+    routes: [
+      // Additional routes
+    ],
+    observers: [
+      DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+    ],
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+);
+```
+
+Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, ensure that you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
+
+```dart
+GoRoute(
+  name: 'My Home',
+  path: '/path',
+  pageBuilder: (context, state) {
+    return MaterialPage(
+      key: state.pageKey,       // Necessary for GoRouter to call Observers
+      name: name,               // Needed for Datadog to get the right route name
+      child: _buildContent(),
+    );
+  },
+),
 ```
 
 ### AutoRoute
@@ -308,3 +347,4 @@ This means that even if users open your application while offline, no data is lo
 [8]: https://pub.dev/packages?q=go_router
 [9]: https://pub.dev/packages/auto_route
 [10]: https://pub.dev/packages/beamer
+[11]: https://github.com/flutter/flutter/issues/112196
