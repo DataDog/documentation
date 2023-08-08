@@ -125,11 +125,11 @@ For a detailed dashboard of this resource, click the View Dashboard in the top r
 
 _For the Resource Utilization page, see [Resource Utilization][13]_.
 
-Within the Kubernetes Explorer tab you can explore a selection of resource utilization metrics.
+Within the Kubernetes Explorer, tab you can explore a selection of resource utilization metrics.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
-All of these columns support sorting, so you can quickly pinpoint individual workloads based to their resource utilization.
+All of these columns support sorting, which helps you to pinpoint individual workloads based on their resource utilization.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Container Resource Utilization Sorted Columns" style="width:80%;">}}
 
