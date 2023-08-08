@@ -425,7 +425,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 [2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: /ja/account_management/api-app-keys/
 [4]: /ja/tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /ja/getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer
