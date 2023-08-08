@@ -74,11 +74,14 @@ static/images/marketplace
 # security rules
 content/en/security/default_rules/*.md
 !content/en/security/default_rules/_index.md
+content/en/security/cloud_workload_security/agent_expressions.md
+content/en/security/cloud_workload_security/backend.md
 content/en/security/threats/agent_expressions.md
 content/en/security/threats/backend.md
 content/en/security_platform/
 
 # cspm cloud resource schemas
+content/en/security/cspm/custom_rules/*.md
 content/en/security/misconfigurations/custom_rules/*.md
 !content/en/security/misconfigurations/custom_rules/_index.md
 !content/en/security/misconfigurationspm/custom_rules/schema.md
