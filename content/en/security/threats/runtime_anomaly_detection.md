@@ -12,9 +12,9 @@ further_reading:
   text: "Workload Security Profiles"
 ---
 
-Cloud Security Management Threats (CSM Threats) Runtime Anomaly Detection provides out-of-the-box detection of unusual behavior on your containerized workloads using a model based on [Workload Security Profiles][6]. It allows your security Agents to observe processes spawned by your applications, along with network traffic and file access. It can then alert you when the runtime behavior of your containers change.
+Cloud Security Management Threats (CSM Threats) Runtime Anomaly Detection provides out-of-the-box detection of unusual behavior on your containerized workloads using a model based on [Workload Security Profiles][6]. It allows your security Agents to observe processes spawned by your applications, along with network traffic and file access. It can then alert you when the runtime behavior of your containers changes.
 
-By profiling your application as it runs, Runtime Anomaly Detection can detect attacks within containerized environments. Designed to integrate seamlessly with rule-based detections, Anomaly Detection helps aggregate suspicious activity directly from your Agent, complementing rules that detect a wide array of attacks with detailed context on unusual behavior within your application’s environment. Anomaly Detection, unlike rule-based approaches, can identify when workloads:
+By profiling your application as it runs, Runtime Anomaly Detection can detect attacks within containerized environments. Designed to integrate seamlessly with rule-based detections, Anomaly Detection helps aggregate suspicious activity directly from your Agent, complementing rules that detect a wide array of attacks with detailed context on unusual behavior within your application's environment. Anomaly Detection, unlike rule-based approaches, can identify when workloads:
 - launch new custom commands (such as cryptominers).
 - access local files for the first time.
 - make new DNS resolutions (for example, to exfiltrate data).

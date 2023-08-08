@@ -29,9 +29,9 @@ Chaque option de surveillance inclut des [règles de détection par défaut][1].
 
 - La solution [Cloud SIEM][2] tire profit de la détection des logs pour analyser en temps réel les logs ingérés. Vous pouvez également créer des [règles de détection personnalisées][3] pour répondre aux besoins de votre environnement.
 
-- La solution [Cloud Security Posture Management][4] exploite des règles de détection de configuration cloud et d'infrastructure pour analyser l'intégrité de votre environnement cloud.
+- La solution [Cloud Security Posture Misconfigurations][4] exploite des règles de détection de configuration cloud et d'infrastructure pour analyser l'intégrité de votre environnement cloud.
 
-- Avec [Cloud Workload Security][5], l'Agent Datadog surveille activement l'activité système et procède à son évaluation sur la base d'un ensemble de règles de détection.
+- Avec [Cloud Security Management Threats][5], l'Agent Datadog surveille activement l'activité système et procède à son évaluation sur la base d'un ensemble de règles de détection.
 
 - [Application Security Management][6] (ASM) tire profit de la solution [APM][7] Datadog, de l'[Agent Datadog][8] et des règles de détection afin d'identifier les menaces à l'encontre de l'environnement de votre application.
 
@@ -107,7 +107,7 @@ Le processus d'obsolescence des règles suit les étapes suivantes :
 
 1. Un avertissement avec la date d'obsolescence est ajouté à la règle. Cet avertissement s'affiche à différents endroits de l'interface :
     - Dans la section **Rule Details > Playbook** du volet latéral des signaux
-    - Dans le volet latéral des findings (CSPM uniquement)
+    - Dans le volet latéral des findings (CSM Misconfigurations uniquement)
     - Dans l'[éditeur de règle](#options-relatives-aux-regles-et-aux-signaux-generes) de la règle en question
 2. Une fois la règle obsolète, elle reste disponible pendant 15 mois avant d'être supprimée, car les signaux sont conservés pendant 15 mois. Durant cette période, vous pouvez réactiver la règle en [la dupliquant](#options-relatives-aux-regles-et-aux-signaux-generes) dans l'interface.
 3. Après que la règle a été supprimée, vous ne pouvez plus la dupliquer ni la réactiver.
