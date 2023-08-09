@@ -17,10 +17,10 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li><li>.NET</li><li>Ruby</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li><li>.NET</li><li>Ruby</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul>
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
+Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
@@ -33,7 +33,7 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Link active commits
 
-You can link active commits by either [tagging your telemetry](#tag-your-telemetry) or [embedding git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifact. 
+You can link active commits by either [tagging your telemetry](#tag-your-telemetry) or [embedding git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifact.
 
 ### Tag your telemetry
 
@@ -109,7 +109,7 @@ Select one of the following languages that supports embedding git information:
 {{< tabs >}}
 {{% tab "Go" %}}
 
-[Go embeds version control information][1] in binaries starting in version 1.18. 
+[Go embeds version control information][1] in binaries starting in version 1.18.
 
 Ensure your service meets all the following requirements:
 
@@ -161,7 +161,7 @@ Datadog can use [Microsot SourceLink][1] to extract the git commit SHA and repos
 #### Build inside a Docker container
 If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access git information:
 
-1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL. 
+1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL.
 
 ```
 !.git/HEAD
@@ -181,7 +181,7 @@ COPY .git ./.git
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-If you are a GitHub SaaS user, install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to link your telemetry with your source code. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
+Install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to link your telemetry with your source code. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
 
 By setting up the GitHub integration, you can see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
 
@@ -189,6 +189,10 @@ By setting up the GitHub integration, you can see inline code snippets in **Erro
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
+
+<div class="alert alert-warning">
+Self-hosted instances or private URLs are not supported.
+</div>
 
 To link telemetry to your source code, Datadog collects metadata for every commit SHA from your Git repository with the [`datadog-ci git-metadata upload`][1] command.
 
@@ -245,7 +249,7 @@ You can directly access a trace in its source repository on GitHub in the [Conti
 
 ### Inline source code
 
-If you are a GitHub SaaS user, install Datadog's [GitHub integration][2] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][8]. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
+If you are a GitHub user, install Datadog's [GitHub integration][2] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][8]. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
 
 1. Navigate to [**APM** > **Error Tracking**][1].
 2. Click on an issue. The **Issue Details** panel appears on the right.
