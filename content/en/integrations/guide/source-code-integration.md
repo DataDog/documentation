@@ -188,16 +188,6 @@ By setting up the GitHub integration, you can see inline code snippets in **Erro
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
-{{% tab "GitLab" %}}
-
-<div class="alert alert-warning">
-Self-hosted instances or private URLs are not supported.
-</div>
-
-If you are a GitLab SaaS user, no setup is required to link your telemetry with your source code.
-
-By using GitLab integration, you can see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
-{{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
 <div class="alert alert-warning">
@@ -259,7 +249,25 @@ You can directly access a trace in its source repository on GitHub in the [Conti
 
 ### Inline source code
 
-If you are a GitHub or GitLab SaaS user, configure your [provider integration](#configure-your-repositories) to directly inline code snippets from your repository in your stack traces in [Error Tracking][8].
+{{< tabs >}}
+{{% tab "GitHub" %}}
+
+Install Datadog's [GitHub integration][1] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][2]. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
+
+[1]: https://app.datadoghq.com/integrations/github/
+[2]: /tracing/error_tracking/
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+<div class="alert alert-warning">
+Self managed GitLab is not supported.
+</div>
+
+If you are a GitLab.com user, no setup is required to inline code snippets from your GitLab repository in your stack traces in [Error Tracking][1].
+
+[1]: /tracing/error_tracking/
+{{% /tab %}}
+{{< /tabs >}}
 
 1. Navigate to [**APM** > **Error Tracking**][1].
 2. Click on an issue. The **Issue Details** panel appears on the right.
