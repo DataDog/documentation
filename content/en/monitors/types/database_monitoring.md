@@ -31,7 +31,7 @@ If you don't wish to [create your monitor from scratch](#creating-monitors-from-
 
 {{< img src="database_monitoring/dbm_event_monitor/dbm_common_monitor_types.png" alt="Example OOTB monitors related to waiting queries and long running queries" style="width:100%;" >}}
 
-Any feedback on these existing monitor types and other ones you would like to see should be shared with your Customer Success Manager.
+Any feedback on these existing monitor types and other ones you would like to see should be shared with your Customer Success Manager or the [Support Team][9].
 
 ### Creating monitors from scratch
 
@@ -180,3 +180,4 @@ The explain-plan cost of a query has recovered to below {{threshold}}.
 [6]: /monitors/configuration/?tab=thresholdalert#set-alert-conditions
 [7]: /monitors/configuration/?tab=thresholdalert#notify-your-team
 [8]: https://app.datadoghq.com/databases/list
+[9]: /help/
