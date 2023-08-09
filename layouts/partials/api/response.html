@@ -104,12 +104,8 @@
                             </div>
                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $operationid }}-{{ $response_code }}-example">
                                 <div class="code-snippet-wrapper">
-                                    <div class="code-snippet">
-                                        <div class="code-button-wrapper position-absolute">
-                                            <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-                                        </div>
-                                        {{ $json }}
-                                    </div>
+                                    {{/*  $json = highlight hugo function  */}}
+                                    {{ $json }}
                                 </div>
                             </div>
                         </div>
