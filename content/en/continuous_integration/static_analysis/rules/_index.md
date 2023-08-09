@@ -494,11 +494,7 @@ A set of rules to check that pandas code is used appropriately.
 
 **Ruleset ID:** `python-security`
 
-# Python Security
-
-This ruleset is focused on analyzing code and finding any security issues in your code. It covers the OWASP10 and the SANS25 errors.
-
-It inspects Python code and finds security and vulnerability issues such as:
+Rules focused on finding security and vulnerability issues in your Python code including those found in the OWASP10 and SANS25.
  
  - Use of bad encryption and hashing protocols
  - Lack of access control
