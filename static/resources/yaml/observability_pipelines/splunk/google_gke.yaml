@@ -79,8 +79,23 @@ pipelineConfig:
       address: 0.0.0.0:8088
       valid_tokens:
           - ${SPLUNK_TOKEN}
+    splunk_tcpout:
+      type: socket
+      mode: tcp
+      address: 0.0.0.0:8089
 
   transforms:
+    ## This step removes some extra metadata added by the `socket` source
+    ## that isn't needed in Splunk.
+    cleanup_socket:
+      type: remap
+      inputs:
+        - splunk_tcpout
+      source: |
+        del(.source_type)
+        del(.host)
+        del(.port)
+
     ## This is a placeholder for your own remap (or other transform)
     ## steps with tags set up. Datadog recommends these tag assignments.
     ## They show which data has been moved over to OP and what still needs
@@ -89,6 +104,7 @@ pipelineConfig:
       type: remap
       inputs:
         - splunk_receiver
+        - cleanup_socket
       source: |
         .sender = "observability_pipelines_worker"
         .opw_aggregator = get_hostname!()
