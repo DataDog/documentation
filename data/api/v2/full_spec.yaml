@@ -7869,7 +7869,9 @@ components:
       description: Paging settings
       properties:
         cursor:
-          description: The returned paging point to use to get the next results
+          description: 'The returned paging point to use to get the next results.
+          
+            Note: paging is limited to 1000 results.'
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
