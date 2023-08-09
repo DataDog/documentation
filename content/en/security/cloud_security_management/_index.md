@@ -7,10 +7,10 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
     text: "See What's New in Datadog Security Compliance"
-  - link: "/security/cspm/setup"
+  - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
-  - link: "/security/cloud_workload_security/setup"
+  - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
@@ -31,6 +31,8 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
+algolia:
+  tags: ['inbox']
 ---
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
@@ -78,20 +80,14 @@ Use the [Issues page][7] to review and remediate your organization's detections 
 
 To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed information on how to set up and configure CSM.
 
-## Vulnerabilities
-
-[CSM Vulnerabilities][5] combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It offers visibility into the vulnerabilities on the [Container Images][6] and [hosts][7] in your infrastructure.
-
-<div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_workload_security/
-[2]: /security/cspm/
+[1]: /security/threats/
+[2]: /security/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration
-[4]: https://app.datadoghq.com/security/
+[4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security?product=cws

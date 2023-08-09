@@ -2,7 +2,6 @@
 title: Advanced Options for Mobile App Test Steps
 kind: documentation
 description: Configure advanced options for Mobile Test Steps
-is_beta: true
 aliases:
 - /mobile_testing/mobile_app_tests/advanced_options
 further_reading:
@@ -20,9 +19,13 @@ further_reading:
   text: "Learn about Synthetic Monitoring Data Security"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
-  Mobile Application Testing is in private beta. To request access, complete the form.
-{{< /callout >}} 
+{{< site-region region="us3,us5,gov,eu,ap1" >}}
+<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
+{{< /site-region >}}
+
+{{< site-region region="us" >}}
+<div class="alert alert-info">Mobile Application Testing is in limited availability and is only supported for the Datadog US1 site.</div>
+{{< /site-region >}}
 
 ## Overview
 

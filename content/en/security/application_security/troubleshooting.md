@@ -369,7 +369,6 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The ASM libr
 
 **Note:** ASM only outputs logs when it is enabled. Use the environment variable `DD_APPSEC_ENABLED=1` to enable ASM.
 
-
 [1]: /tracing/troubleshooting/tracer_startup_logs/
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}

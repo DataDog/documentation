@@ -306,8 +306,8 @@ Cuando la variable `datadog_windows_download_url` no está definida, se usa el p
 
 | Versión del Agent | URL predeterminada del paquete MSI de Windows                                                  |
 |---------------|----------------------------------------------------------------------------------|
-| 6             | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi |
-| 7             | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi |
+| 6             | https://windows-agent.datadoghq.com/datadog-agent-6-latest.amd64.msi |
+| 7             | https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi |
 
 Para sobreescribir este comportamiento predeterminado, cambia esta variable por algo que no sea una cadena vacía.
 
@@ -317,8 +317,8 @@ Cuando la variable `datadog_macos_download_url` no está definida, se usa el paq
 
 | Versión del Agent | URL predeterminada del paquete DMG de macOS                                |
 |---------------|--------------------------------------------------------------|
-| 6             | https://s3.amazonaws.com/dd-agent/datadog-agent-6-latest.dmg |
-| 7             | https://s3.amazonaws.com/dd-agent/datadog-agent-7-latest.dmg |
+| 6             | https://install.datadoghq.com/datadog-agent-6-latest.dmg |
+| 7             | https://install.datadoghq.com/datadog-agent-7-latest.dmg |
 
 Para sobreescribir el comportamiento por defecto, cambia esta variable a un valor distinto de una cadena vacía.
 

@@ -48,7 +48,7 @@ Datadog ASM は、Security Signal から直接、攻撃者を境界でブロッ�
 
 ## Denylist
 
-永久的または一時的にブロックされた攻撃者の IP アドレスや認証ユーザーは、_Denylist_ に追加されます。[Denylist ページ][7]でリストを管理します。
+永久的または一時的にブロックされた攻撃者の IP アドレスや認証ユーザーは、_Denylist_ に追加されます。[Denylist ページ][7]でリストを管理します。Denylist は、個別 IP だけではなく IP 範囲 (CIDR ブロック) のブロックもサポートしています。
 
 ## Passlist
 

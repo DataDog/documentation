@@ -880,6 +880,9 @@ components:
             customAttribute: 123
             duration: 2345
           type: object
+        message:
+          description: Message of the event.
+          type: string
         service:
           description: 'Name of the application or service generating Audit Logs events.
 
@@ -3623,6 +3626,15 @@ components:
           maximum: 5
           readOnly: true
           type: integer
+        tags:
+          description: List of team names representing ownership of a dashboard.
+          items:
+            description: The name of a Datadog team, formatted as `team:<name>`
+            type: string
+          maxItems: 5
+          nullable: true
+          readOnly: true
+          type: array
         title:
           description: Title of the dashboard.
           readOnly: true
@@ -16871,6 +16883,10 @@ components:
           type: string
         public_id:
           description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
           type: string
         timeseries:
           description: List of usage data reported for each requested hour.

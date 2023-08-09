@@ -5,6 +5,9 @@ further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
   text: "Learn more about Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
+  tag: "Blog"
+  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,7 +32,7 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][2] and 
 
 Review your organization's active identity risks on the [Identity Risks page][3]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
-{{< img src="security/identity_risks/identity_risks_explorer.png" alt="CSM Identity Risks page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_page.png" alt="CSM Identity Risks page" width="100%">}}
 
 On the side panel, you can review the configuration of the resource on the **Resource** tab.
 
