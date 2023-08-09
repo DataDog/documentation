@@ -19,16 +19,16 @@ function initCopyCode () {
 // Adds copy button to code examples that use the highlight hugo function or are fenced code blocks in markdown
 function addCopyButton () {
     const fencedLang = ['shell'] // target specific fenced codeblocks by language
-    const pulledLang = ['java', 'go', 'python', 'ruby', 'typescript', 'json', 'yaml'] // target specific highlight hugo functions by language 
     const highlights = document.querySelectorAll("div.highlight")
 
     highlights.forEach(highlightEl => {
         const codeLang = highlightEl.querySelector('[data-lang]').dataset.lang
-        const isNotInCodeBlockShortcode = !highlightEl.parentElement.classList.contains('code-snippet')
+        const isNestedInAppendableContainer = highlightEl.parentElement.classList.contains('append-copy-btn') //  
+        const isFencedCodeExample = [...fencedLang].includes(codeLang) // markdown fenced code block
 
-        const shouldAddCopyBtn = [...fencedLang, ...pulledLang].includes(codeLang) && isNotInCodeBlockShortcode
+        const shouldAddCopyBtn = isFencedCodeExample || isNestedInAppendableContainer
         if(shouldAddCopyBtn){
-            highlightEl.classList.add('code-snippet', 'appended-copy-btn')
+            highlightEl.classList.add('code-snippet', 'js-appended-copy-btn')
             const copyBtn = `
             <div class="code-button-wrapper position-absolute">
                 <button class="btn text-primary js-copy-button">Copy</button>

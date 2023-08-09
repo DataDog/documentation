@@ -86,7 +86,7 @@
       </h5>
     </div>
     <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">
-      <div class="card-body p-0">
+      <div class="card-body p-0 append-copy-btn">
         {{ highlight $body $lang.syntax "" }}
       </div>
     </div>
@@ -134,7 +134,7 @@
                             <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
                         </div>
 
-                        {{/* Do not change indent of html below as it will change the indentation of the curl code block. CURL code examples not using `highlight` hugo function */}}
+                        {{/* Do not change indent of html below as it will change the indentation of the curl code block. CURL code examples dont use `highlight` hugo function */}}
                         <pre class="chroma">
                           <code class="language-fallback" data-lang="fallback">
                           {{- with $endpoint.action.requestBody -}}
@@ -256,7 +256,7 @@
     {{ $numOfCodeExamples := (index ($s.Get "itemCounts") $lang.name) }}
     {{ $myItems := (index ($s.Get "items") $lang.name) }}
     {{ if gt $numOfCodeExamples 0 }}
-    <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
+    <div class="code-snippet-wrapper js-code-block append-copy-btn" data-code-lang-block="{{ $lang.name }}">
       {{ if gt $numOfCodeExamples 1 }}<div class="example-accordion" id="accordion-{{ $operationid | lower }}-{{ $version }}-{{ $lang.name }}">{{ end }}
         {{ range $i, $item := $myItems | first 3 }}
             {{ $fileStr := (printf "%s%s.%s" $operationid $item.suffix $file_extension) }}
@@ -295,10 +295,7 @@
         {{ $lang := index $context.Site.Params.code_languages $file_extension }}
         {{ if ne $file_extension "sh"}}
           <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang.name }}">
-            <div>
-              <div class="code-button-wrapper position-absolute">
-                  <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-              </div>
+            <div class="append-copy-btn">
               <div class="card">
                 <div class="card-header p-0">
                   <h5 class="m-0">

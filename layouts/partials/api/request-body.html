@@ -118,7 +118,7 @@
                                         </div>
                                         {{ end }}
                                         <div id="{{ $operationid | lower }}-{{ $version }}-request-example-{{ $i }}" class="collapse {{if eq $i 0}}show{{ end }}" data-bs-parent="#accordion-{{ $operationid | lower }}-{{ $version }}-json">
-                                          <div class="card-body p-0">
+                                          <div class="card-body p-0 append-copy-btn">
                                               {{ range . }}
                                                 {{ (highlight (.Content) "json" "") }}
                                               {{ end }}

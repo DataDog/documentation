@@ -64,7 +64,7 @@
                         </h5>
                       </div>
                       <div id="{{ $data.metadata.logical_name | lower }}-example-simple" class="collapse show" data-bs-parent="#{{ $data.metadata.logical_name | lower }}-accordion-parent" style>
-                        <div class="card-body p-0">
+                        <div class="card-body p-0 append-copy-btn">
                             {{ highlight $data.simple "yaml" "" }}
                         </div>
                       </div>
@@ -78,7 +78,7 @@
                         </h5>
                       </div>
                       <div id="{{ $data.metadata.logical_name | lower }}-example-advanced" class="collapse" data-bs-parent="#{{ $data.metadata.logical_name | lower }}-accordion-parent" style>
-                        <div class="card-body p-0">
+                        <div class="card-body p-0 append-copy-btn">
                             {{ highlight $data.advanced "yaml" "" }}
                         </div>
                       </div>
