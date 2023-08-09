@@ -31,6 +31,6 @@ export function getHitData(hit, searchQuery = '') {
     filtering out short/common terms that may cause inaccurate highlighting
 */
 const getFilteredMatchingWords = (searchQuery) => {
-    const stopWords = ['the', 'and']
+    const stopWords = ['the', 'and', 'for']
     return searchQuery.split(' ').filter(word => word.length > 2 && !stopWords.includes(word))
 }
