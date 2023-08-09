@@ -8,7 +8,7 @@ kind: documentation
 
 With the [Database Monitoring (DBM)][1] monitor type, you can create monitors and alert on the data surfaced in DBM. These monitors can be configured to alert you when a DBM event type deviates from a predefined threshold over a given period of time.
 
-A few common monitors are listed below (click for setup instructions):
+A few common monitoring scenarios (click for setup instructions):
 - [Number of waiting queries](#number-of-waiting-queries)
 - [Number of queries exceeding a given duration](#queries-exceeding-30-seconds)
 - Explain-plan cost ([for all queries](#explain-plan-cost-all-queries) or [a single query signature](#explain-plan-cost-single-query-signature))
@@ -73,11 +73,11 @@ For more information about the **Notify your team** and **Say what's happening**
 
 ### Number of waiting queries
 
-<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
+{{< img src="database_monitoring/dbm_event_monitor/waiting_queries_monitor.png" alt="A configured metrics query for monitoring the number of waiting database queries" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** for additional insight into the range of typical values.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the number of waiting queries does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** to gain context on the range of typical values.
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the number of waiting queries does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -86,11 +86,9 @@ with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-The waiting queries on {{host.name}}, which exceeded {{threshold}} 
-at {{first_triggered_at}}, have recovered.
+The number of waiting queries on {{host.name}}, which exceeded {{threshold}},
+has recovered.
 {{/is_recovery}}
-
-View the query result at {{databasemonitoring.link}}.
 {{< /code-block >}}
 1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
@@ -98,63 +96,56 @@ View the query result at {{databasemonitoring.link}}.
 
 ### Queries exceeding 30 seconds
 
-<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
+{{< img src="database_monitoring/dbm_event_monitor/long_running_queries_monitor.png" alt="A configured metrics query for monitoring the number of long-running database queries" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In **Common monitor types**, click **Long Running Queries**.
 1. Update the query filter to **Duration:>30s**.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Optionally, exclude any outlier hosts by adding **-Host:<YOUR_HOST_NAME>** to the query filters, using autocomplete as it appears.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the values on the chart don't exceed `2000`, you might set **alert threshold** to `3000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the values on the chart don't exceed `2000`, you might set **alert threshold** to `3000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The number of queries with a duration of >30s has exceeded 
-{{threshold}} on {{host.name}}.
+{{threshold}} on {{host.name}} with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
 The number of queries with a duration of >30s on {{host.name}}, 
-which exceeded {{threshold}}, has recovered to {{ok_threshold}}. 
+which exceeded {{threshold}}, has recovered.
 {{/is_recovery}}
-
-View the query here: {{databasemonitoring.link}}.
 {{< /code-block >}}
 1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
-### Explain-plan cost: All queries
+### Explain-plan cost: all queries
 
-<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
+{{< img src="database_monitoring/dbm_event_monitor/explain_plan_avg_monitor.png" alt="A configured metrics query for monitoring the explain-plan cost of all queries" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. Under **Define the search query**, make the following updates: 
     - Change **Query Samples** to **Explain Plans**
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**
-    [SCREENSHOT GOES HERE]
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-The average explain-plan cost has exceeded {{threshold}}.
+The average explain-plan cost has exceeded {{threshold}} with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-The average explain-plan cost, which exceeded {{threshold}}, 
-has recovered to {{ok_threshold}}. 
+The average explain-plan cost, which exceeded {{threshold}}, has recovered. 
 {{/is_recovery}}
-
-View the query here: {{databasemonitoring.link}}.
 {{< /code-block >}}
 1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
-### Explain-plan cost: Single query signature
+### Explain-plan cost: single query signature
 
-<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
+{{< img src="database_monitoring/dbm_event_monitor/explain_plan_single_query_monitor.png" alt="A configured metrics query for monitoring the explain-plan cost of a single query" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. Under **Define the search query**, make the following updates: 
@@ -165,19 +156,17 @@ View the query here: {{databasemonitoring.link}}.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
 1. From the multiple query plans shown on the chart, choose one to monitor. Add a **@db.query_signature:<YOUR_QUERY_SIGNATURE>** filter to your query, using autocomplete as it appears.
 1. Click the **x** on the **by Query Signature (@db.query_signature)** grouping, which has become redundant.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-The following explain-plan-cost query has exceeded {{threshold}}.
+The following explain-plan-cost query has exceeded {{threshold}} 
+with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-The explain-plan-cost query that exceeded {{threshold}} 
-has recovered to {{ok_threshold}}.
+The explain-plan-cost query that exceeded {{threshold}} has recovered.
 {{/is_recovery}}
-
-View the query here: {{databasemonitoring.link}}.
 {{< /code-block >}}
 1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
