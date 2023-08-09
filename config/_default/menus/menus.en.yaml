@@ -1327,6 +1327,11 @@ main:
     parent: tracing
     identifier: tracing_trace_collection
     weight: 2
+  - name: Single Step APM Instrumentation
+    url: tracing/trace_collection/single-step-apm/
+    parent: tracing_trace_collection
+    identifier: single_step_apm
+    weight: 100
   - name: Instrumenting with Datadog Tracing Libraries
     url: tracing/trace_collection/dd_libraries/
     parent: tracing_trace_collection
