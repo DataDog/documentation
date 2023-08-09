@@ -334,7 +334,7 @@ python_security_data:
     text: "do not let all users write permissions"
   - link: "/continuous_integration/static_analysis/rules/python-security/hardcoded-tmp-file"
     tag: "hardcoded-tmp-file"
-    text: "Do not hardcoded tmp file or directory"
+    text: "Do not hardcode temp file or directory"
   - link: "/continuous_integration/static_analysis/rules/python-security/html-string-from-parameters"
     tag: "html-string-from-parameters"
     text: "Avoid HTML built in strings"
