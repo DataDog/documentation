@@ -11,7 +11,7 @@ further_reading:
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
-- link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
+- link: "/security/threats/setup"
   tag: "Documentation"
   text: "Setting Up CSM Threats"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
@@ -248,7 +248,7 @@ datadog:
 
 [1]: /getting_started/site/
 [2]: /tracing/trace_collection/library_injection_remote/
-[3]: /security/cloud_workload_security/setup
+[3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
 [6]: /security/application_security/enabling/compatibility/

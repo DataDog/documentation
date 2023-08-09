@@ -3,6 +3,7 @@ title: Signals Explorer
 kind: documentation
 aliases:
   - /security_platform/cspm/signals_explorer
+  - /security/cspm/signals_explorer
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
@@ -64,7 +65,7 @@ At the top of the side panel, you can configure the rule or send a notification 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/security/cspm/findings/
-[2]: https://docs.datadoghq.com/security/cloud_siem/
-[3]: https://docs.datadoghq.com/security/cloud_workload_security/
-[4]: https://docs.datadoghq.com/security/explorer
+[1]: /security/misconfigurations/findings/
+[2]: /security/cloud_siem/
+[3]: /security/threats/
+[4]: /security/explorer
