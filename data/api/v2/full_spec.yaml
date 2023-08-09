@@ -8354,7 +8354,9 @@ components:
           $ref: '#/components/schemas/LogsGroupByHistogram'
         limit:
           default: 10
-          description: The maximum buckets to return for this group by
+          description: 'The maximum buckets to return for this group by.
+          
+            Note: total cardinality is limited to 10000. If grouping by multiple dimensions, the product of limits must not exceed 10000.'
           format: int64
           type: integer
         missing:
