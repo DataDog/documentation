@@ -13,7 +13,9 @@ further_reading:
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
-{{< img src="service_management/workflows/hero2.png" alt="Graphic showing three purposes of Workflow Automation: Orchestrate, Automate, and Break down Silos" >}}
+## Overview
+
+{{< vimeo url="https://vimeo.com/852419580" poster="/images/poster/workflow_automation.png" >}}
 
 Datadog Workflow Automation allows you to orchestrate and automate your end-to-end processes. Build workflows made up of [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
 
