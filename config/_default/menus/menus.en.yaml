@@ -2561,54 +2561,59 @@ main:
     url: logs/log_collection/flutter/
     parent: log_collection
     weight: 104
+  - name: React Native
+    identifier: log_react_native
+    url: logs/log_collection/reactnative/
+    parent: log_collection
+    weight: 105
   - name: Roku
     identifier: log_roku
     url: logs/log_collection/roku/
     parent: log_collection
-    weight: 105
+    weight: 106
   - name: C#
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 108
+    weight: 109
   - name: NodeJS
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 109
+    weight: 110
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 110
+    weight: 111
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 111
+    weight: 112
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 112
+    weight: 113
   - name: OpenTelemetry
     url: opentelemetry/otel_logs/
     parent: log_collection
     identifier: log_collection_opentelemetry
-    weight: 113
+    weight: 114
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 114
+    weight: 115
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
