@@ -31,19 +31,13 @@ Select your language:
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,php,cpp,dotnet-core,dotnet-framework" >}}
 {{< programming-lang lang="java" >}}
 
-### Compatibility requirements
-
-The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
-
-For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
-
-### Installation and getting started
-
-#### Configure the Datadog Agent for APM
+Compatibility requirements
+: The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
+: For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
-##### Containers
+#### Containers
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][18].
 
@@ -82,13 +76,11 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 {{< /site-region >}}
 
-
-
-##### AWS Lambda
+#### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][19] documentation.
 
-##### Other environments
+#### Other environments
 
 Tracing is available for a number of other environments, such as  [Heroku][20], [Cloud Foundry][21], [AWS Elastic Beanstalk][22], and [Azure App Service][23].
 
@@ -120,14 +112,9 @@ For other environments, refer to the [Integrations][24] documentation for that e
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-### Compatibility requirements
-The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
-
-For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
-
-### Installation and getting started
-
-#### Configure the Datadog Agent for APM
+Compatibility requirements
+: The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
+: For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
 Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data by default at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
@@ -222,9 +209,9 @@ Ruby
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-### Compatibility requirements
-
-The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+Compatibility requirements
+: The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`.
+: For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ### Configure the Datadog Agent for APM
 
@@ -281,9 +268,9 @@ For other environments, refer to the [Integrations][5] documentation for that en
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-### Compatibility requirements
-
-The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+Compatibility requirements
+: The latest Node.js Tracer supports versions `>=14`.
+: For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ### Installation and getting started
 
@@ -349,11 +336,9 @@ Read [tracer settings][3] for a list of initialization options.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-### Compatibility requirements
-
-The latest PHP Tracer supports versions >= 5.4.x.
-
-For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+Compatibility requirements
+: The latest PHP Tracer supports versions >= 5.4.x.
+: For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 #### Installation and getting started
 
@@ -458,13 +443,9 @@ For other environments, see the [Integrations][5] documentation for that environ
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-core" >}}
 
-### Compatibility requirements
-
-#### Supported .NET Core runtimes
-
-The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
-
-For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+Compatibility requirements
+: The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
+: For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ### Installation and getting started
 
@@ -536,13 +517,9 @@ For all other environments, see the [Integrations documentation][4] for that env
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-framework" >}}
 
-### Compatibility requirements
-
-#### Supported .NET Framework runtimes
-
-The .NET Tracer supports instrumentation on .NET Framework >= 4.6.1.
-
-For a full list of Datadog's .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+Compatibility requirements
+: The .NET Tracer supports instrumentation on .NET Framework >= 4.6.1.
+: For a full list of Datadog's .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ### Installation and getting started
 
