@@ -347,7 +347,7 @@ http {
 }
 ```
 
-### Resource Name
+### Resource name
 Associated with each Datadog span is a [resource name][18]. The
 [default value][19] is `$request_method $uri`. For example,
 `GET /api/book/0-345-24223-8/title`.
@@ -356,9 +356,7 @@ The resource name affects how traces are indexed by Datadog. This can be
 problematic if there are a large number of distinct resource names for a
 service.
 
-In the example above, there is a distinct resource name for every book. Better
-would be a resource name denoting "get book title," but without indicating
-the specific book. The `http.url` tag will still contain the full URI.
+In the example above, there is a distinct resource name for every book. A better approach would be to have a resource name denoting "get book title," but without indicating the specific book. The `http.url` tag will still contain the full URI.
 
 There are two ways to configure NGINX to normalize such high cardinality
 resource names.
