@@ -498,7 +498,7 @@ A set of rules to check that pandas code is used appropriately.
 
 This ruleset is focused on analyzing code and finding any security issues in your code. It covers the OWASP10 and the SANS25 errors.
 
-It inspects Python code and finds security and vulnerabilities issues such as:
+It inspects Python code and finds security and vulnerability issues such as:
  
  - Use of bad encryption and hashing protocols
  - Lack of access control
