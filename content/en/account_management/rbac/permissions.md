@@ -27,7 +27,7 @@ By default, existing users are associated with one of the three out-of-the-box r
 - Datadog Standard
 - Datadog Read-Only
 
-All users can read all data types. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
+All users with one of these roles can read all data types. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
 
 **Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user in order to enforce the new role permissions.
 
