@@ -188,7 +188,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 - Postgres SQL
 - ScalikeJDBC
 
-**Integrations Disabled By Default**
+### Integrations Disabled By Default
 
 The following instrumentations are disabled by default and can be enabled with the following settings:
 
