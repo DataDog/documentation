@@ -48,6 +48,8 @@ The following metrics are collected by default after enabling runtime metrics:
 
 {{< get-metrics-from-git "python" >}}
 
+**Note**: The Python runtime metrics are submitted as distributions. This behavior will be deprecated in the future and metrics will instead be submitted as gauges.
+
 Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][7].
 
 ## Further Reading
