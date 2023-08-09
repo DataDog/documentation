@@ -3,6 +3,7 @@ title: Compliance Reports
 kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
+  - /security/cspm/frameworks_and_benchmarks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
@@ -92,5 +93,5 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
-[21]: /security/cspm/detection_rules
+[21]: /security/misconfigurations/detection_rules
 [22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
