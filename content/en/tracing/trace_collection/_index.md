@@ -29,21 +29,21 @@ If you don't use the Single Step APM Instrumentation option, APM-specific config
 
 Select your language:
 
-{{< tabs >}}
-{{% tab "Java" %}}
-## Compatibility requirements
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,php,cpp,dotnet-core,dotnet-framework" >}}
+{{< programming-lang lang="java" >}}
+### Compatibility requirements
 
 The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
 For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
-## Installation and getting started
+### Installation and getting started
 
-### Configure the Datadog Agent for APM
+#### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
-#### Containers
+##### Containers
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -84,13 +84,13 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
-#### AWS Lambda
+##### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
 
 [1]: /tracing/serverless_functions/
 
-#### Other Environments
+##### Other environments
 
 Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
@@ -103,34 +103,32 @@ For other environments, refer to the [Integrations][5] documentation for that en
 [5]: /integrations/
 [6]: /help/
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 Python
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 Ruby
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 Go
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 Node.js
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 PHP
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 C++
-{{% /tab %}}
-{{% tab ".NET Core" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet-core" >}}
 .NET Core
-{{% /tab %}}
-{{% tab ".NET Framework" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet-framework" >}}
 .Net Framework
-{{% /tab %}}
-{{< /tabs >}}
-
-<br/>
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Step 2 - Instrument your application 
 
@@ -144,10 +142,10 @@ Depending on the programming language and infrastructure you use, you have the f
 
 For setup instructions, select your language:
 
-{{< tabs >}}
-{{% tab "Java" %}}
+{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,php,cpp,dotnet-core,dotnet-framework" >}}
+{{< programming-lang lang="java" >}}
 
-## Choose your instrumentation method
+#### Choose your instrumentation method
 
 After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
 
@@ -157,7 +155,7 @@ See the following pages for supported deployment scenarios and languages:
 - [Inject the instrumentation library from the Datadog UI][12] (beta); or
 - Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
-### Instrument your application
+##### Instrument your application
 
 <div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
@@ -193,11 +191,11 @@ After the agent is installed, to begin tracing your applications:
 Additional [configuration options](#configuration) are described below.
 
 
-### Add the Java Tracer to the JVM
+##### Add the Java Tracer to the JVM
 
 Use the documentation for your application server to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
-#### Spring Boot
+###### Spring Boot
 
 If your app is called `my_app.jar`, create a `my_app.conf`, containing:
 
@@ -210,7 +208,7 @@ For more information, see the [Spring Boot documentation][1].
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
 
-#### Tomcat
+###### Tomcat
 
 Open your Tomcat startup script file, for example `setenv.sh` on Linux, and add:
 
@@ -226,7 +224,7 @@ set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 If a `setenv` file does not exist, create it in the `./bin` directory of the Tomcat project folder.
 
 
-#### JBoss
+###### JBoss
 
 - In standalone mode:
 
@@ -255,7 +253,7 @@ For more details, see the [JBoss documentation][1].
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
 
-#### Jetty
+###### Jetty
 
 If you use `jetty.sh` to start Jetty as a service, edit it to add:
 
@@ -269,7 +267,7 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-#### WebSphere
+###### WebSphere
 
 In the administrative console:
 
@@ -298,7 +296,7 @@ For additional details and options, see the [WebSphere docs][1].
 
 - Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
-## Automatic instrumentation
+#### Automatic instrumentation
 
 Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it can modify class files at load time.
 
@@ -311,38 +309,36 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 - Errors and stack traces which are unhandled by the application
 - A total count of traces (requests) flowing through the system
 
-## Configuration
+#### Configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
-{{% /tab %}}
-{{% tab "Python" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
 Python
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 Ruby
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
 Go
-{{% /tab %}}
-{{% tab "Node.js" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
 Node.js
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
 PHP
-{{% /tab %}}
-{{% tab "C++" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="cpp" >}}
 C++
-{{% /tab %}}
-{{% tab ".NET Core" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet-core" >}}
 .NET Core
-{{% /tab %}}
-{{% tab ".NET Framework" %}}
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet-framework" >}}
 .Net Framework
-{{% /tab %}}
-{{< /tabs >}}
-
-<br>
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][2].
 
@@ -358,7 +354,7 @@ For Kubernetes, hosts, and containers, you can inject the tracing library locall
 
 For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. For more information and instructions, read [Injecting Libraries Remotely][5].
 
-## APM Setup Tutorials
+## APM setup tutorials
 
 The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the direct method ([Option 1](#option-1---add-the-library-directly-to-your-application-code)):
 
