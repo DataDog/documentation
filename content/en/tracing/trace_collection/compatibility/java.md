@@ -76,7 +76,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Play                    | 2.3-2.8    | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
-| Spark Java              | 2.3+       | [Beta][#integrations-disabled-by-default] | `sparkjava` (requires `jetty`) |
+| Spark Java              | 2.3+       | [Beta](#integrations-disabled-by-default) | `sparkjava` (requires `jetty`) |
 | Spring Boot             | 1.5        | Fully Supported | `spring-web` or `spring-webflux`               |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
@@ -121,7 +121,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
-| Grizzly HTTP Client      | 1.9+        | [Beta][#integrations-disabled-by-default] | `grizzly-client`     |
+| Grizzly HTTP Client      | 1.9+        | [Beta](#integrations-disabled-by-default) | `grizzly-client`     |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
@@ -131,7 +131,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Ning HTTP Client         | 1.9.0+      | [Beta][#integrations-disabled-by-default] | `ning`               |
+| Ning HTTP Client         | 1.9.0+      | [Beta](#integrations-disabled-by-default) | `ning`               |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
