@@ -495,7 +495,21 @@ By default, a 288GB EBS drive is allocated to each instance, and the sample conf
 ## Connect Splunk forwarders to the Observability Pipelines Worker
 After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing collectors to point to the Worker.
 
-You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
+### Heavy/Universal Forwarder
+The sample configurations provided allow for sending raw Splunk data over TCP to the Worker. You can do this by adding the following content to your Splunk `outputs.conf` and restart your forwarder:
+
+```
+[tcpout]
+compressed=false
+sendCookedData=false
+defaultGroup=opw
+
+[tcpout:opw]
+server=<OPW LOAD BALANCER/DNS>:8089
+```
+
+### HEC
+For collectors that send data over HEC, you must update the collector to point to the load balancer IP / DNS you provisioned earlier.
 
 For Terraform installs, the `lb-dns` output provides the necessary value.
 
