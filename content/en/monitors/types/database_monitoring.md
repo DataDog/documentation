@@ -77,8 +77,8 @@ For more information about the **Notify your team** and **Say what's happening**
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the number of waiting queries stays below `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
-1. Add yourself to the notification recipients. See [Notifications][4]. You can use this text for the monitor message:
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the number of waiting queries stays below `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 Waiting queries on {{host.name}} have exceeded {{threshold}} 
@@ -90,7 +90,7 @@ The number of waiting queries on {{host.name}}, which exceeded {{threshold}},
 has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
-1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
+1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
@@ -102,8 +102,8 @@ has recovered.
 1. In **Common monitor types**, click **Long Running Queries**.
 1. Update the query filter to **Duration:>30s**.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **alert threshold** to `2500` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
-1. Add yourself to the notification recipients. See [Notifications][4]. You can use this text for the monitor message:
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **alert threshold** to `2500` to represent unusual activity. For configuration details, [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The number of queries with a duration of >30s has exceeded 
@@ -115,7 +115,7 @@ The number of queries with a duration of >30s on {{host.name}},
 which exceeded {{threshold}}, has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
-1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
+1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
@@ -128,8 +128,8 @@ which exceeded {{threshold}}, has recovered.
     - Change **Query Samples** to **Explain Plans**
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost stays below `85,000` on the chart, you might set **alert threshold** to `90,000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
-1. Add yourself to the notification recipients. See [Notifications][4]. You can use this text for the monitor message:
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost stays below `85,000` on the chart, you might set **alert threshold** to `90,000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The average explain-plan cost has exceeded {{threshold}} with a value of {{value}}.
@@ -139,7 +139,7 @@ The average explain-plan cost has exceeded {{threshold}} with a value of {{value
 The average explain-plan cost, which exceeded {{threshold}}, has recovered. 
 {{/is_recovery}}
 {{< /code-block >}}
-1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
+1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
@@ -154,10 +154,10 @@ The average explain-plan cost, which exceeded {{threshold}}, has recovered.
     - Change **(everything)** to **Query Signature (@db.query_signature)**
     - Change the result limit to **top 5** to focus on the most expensive queries.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. From the multiple query plans shown on the chart, choose one to monitor. Add a **@db.query_signature:<YOUR_QUERY_SIGNATURE>** filter to your query, using autocomplete as it appears.
-1. Click the **x** on the **by Query Signature (@db.query_signature)** grouping, which has become redundant.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost stays below `85,000` on the chart, you might set **alert threshold** to `90,000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
-1. Add yourself to the notification recipients. See [Notifications][4]. You can use this text for the monitor message:
+1. From the multiple query signatures shown on the chart, choose one to monitor. Add a `@db.query_signature:<YOUR_QUERY_SIGNATURE>` filter to your query, using autocomplete as it appears.
+1. Click the **X** on the **by Query Signature (@db.query_signature)** grouping, which has become redundant.
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost stays below `85,000` on the chart, you might set **alert threshold** to `90,000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 The explain-plan cost of a query has exceeded {{threshold}} 
@@ -168,7 +168,7 @@ with a value of {{value}}.
 The explain-plan cost of a query has recovered to below {{threshold}}.
 {{/is_recovery}}
 {{< /code-block >}}
-1. Optionally, edit the settings under **Define permissions and audit notifications** to choose who can edit the monitor and whom to notify on edit.
+1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
