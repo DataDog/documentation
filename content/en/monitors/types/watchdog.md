@@ -37,13 +37,13 @@ An APM alert is created when Watchdog detects anomalous behavior on your system'
 
 Select the scope to be alerted on by configuring:
 
-* The type of Watchdog anomaly: Error Rates, Latency, Hits, or any of them
-* The value for APM primary tags ([instruction to configure APM primary and second primary tags][1])
-* The [APM service][2] (choose `Any services` to monitor them all)
-* The [APM resource][3] (choose `*` to monitor them all)
+* The type of Watchdog anomaly: Error Rates, Latency, Hits, or any APM alert
+* The value for APM primary tags (see the [Set primary tags to scope][1] page for instructions to configure APM primary and second primary tags)
+* The [APM service][2] (choose `Any services` to monitor all services)
+* The [APM resource][3] of a service (choose `*` to monitor all resources of a service)
 * The dimensions you want to [group notifications by][4]
 
-After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time.
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [2]: /tracing/services/service_page/
@@ -58,11 +58,11 @@ After your selections are made, the graph at the top of the monitor creation pag
 
 Select the scope to be alerted on by configuring:
 
-* The Infrastructure integration to cover (select `Any Infrastructure alert` to cover them all): [full list of covered integrations by Watchdog infrastructure][1])
+* The Infrastructure integration to cover (select `Any Infrastructure alert` to cover them all). See the [Watchdog overview][1] for a full list of integrations covered by Watchdog infrastructure)
 * The Tags available for the selected integration
 * The dimensions you want to [group notifications by][2]
 
-After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time.
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
 
 [1]: /watchdog/#overview
 [2]: /monitors/configuration/?tab=thresholdalert#alert-grouping
@@ -77,14 +77,14 @@ A logs alert indicates that either a new pattern of error logs has been detected
 
 Select the scope to be alerted on by configuring:
 
-* The environment (leave it empty to alert on all environments): coming from the `env` tag in your logs
-* The service (leave it empty to alert on all services): coming from the `service` [reserved attribute][2] in your logs
-* The log source (leave it empty to alert on all sources): coming from the `source` [reserved attribute][2] in your logs
-* The log status (leave it empty to alert on all status): coming from the `status` [reserved attribute][2] in your logs
-* The log anomaly type (`new Error` or `Spike in existing logs`): indicates whether the anomaly describes a new pattern of error logs or an increase in an existing pattern of error logs.
+* The environment (leave empty to alert on all environments). These values are derived from the `env` tag in your logs
+* The service (leave empty to alert on all services). These values are derived from the `service` [reserved attribute][2] in your logs
+* The log source (leave empty to alert on all sources). These values are derived from the `source` [reserved attribute][2] in your logs
+* The log status (leave empty to alert on all status). These values are derived from the `status` [reserved attribute][2] in your logs
+* The log anomaly type (`new Error` or `Spike in existing logs`) determines whether the anomaly describes a new pattern of error logs or an increase in an existing pattern of error logs
 * The dimensions you want to [group notifications by][1]
 
-After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time.
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
 
 [1]: /monitors/configuration/?tab=thresholdalert#alert-grouping
 [2]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
