@@ -73,11 +73,11 @@ For more information about the **Notify your team** and **Say what's happening**
 
 ### Number of waiting queries
 
-<p>SCREENSHOT GOES HERE</p>
+<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
 
-1. In Datadog, navigate to [**Monitors > New Monitor > Database Monitoring**][2].
+1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** for additional insight into the range of typical values.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the number of waiting queries typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000`, since that would represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the number of waiting queries does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -98,14 +98,14 @@ View the query result at {{databasemonitoring.link}}.
 
 ### Queries exceeding 30 seconds
 
-<p>SCREENSHOT GOES HERE</p>
+<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
 
-1. In Datadog, navigate to [**Monitors > New Monitor > Database Monitoring**][2].
+1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In **Common monitor types**, click **Long Running Queries**.
 1. Update the query filter to **Duration:>30s**.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
 1. Optionally, exclude any outlier hosts by adding **-Host:<YOUR_HOST_NAME>** to the query filters, using autocomplete as it appears.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the value typically does not exceed `2000` on the chart, you might set **alert threshold** to `3000`, since that would represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the values on the chart don't exceed `2000`, you might set **alert threshold** to `3000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -126,15 +126,15 @@ View the query here: {{databasemonitoring.link}}.
 
 ### Explain-plan cost: All queries
 
-<p>SCREENSHOT GOES HERE</p>
+<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
 
-1. In Datadog, navigate to [**Monitors > New Monitor > Database Monitoring**][2].
+1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. Under **Define the search query**, make the following updates: 
     - Change **Query Samples** to **Explain Plans**
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**
     [SCREENSHOT GOES HERE]
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000`, since that would represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -154,19 +154,18 @@ View the query here: {{databasemonitoring.link}}.
 
 ### Explain-plan cost: Single query signature
 
-<p>SCREENSHOT GOES HERE</p>
+<p>SCREENSHOT OF CONFIGURED QUERY GOES HERE</p>
 
-1. In Datadog, navigate to [**Monitors > New Monitor > Database Monitoring**][2].
+1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. Under **Define the search query**, make the following updates: 
     - Change **Query Samples** to **Explain Plans**
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**
     - Change **(everything)** to **Query Signature (@db.query_signature)**
     - Change the result limit to **top 5** to focus on the most expensive queries.
-    [SCREENSHOT GOES HERE]
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
 1. From the multiple query plans shown on the chart, choose one to monitor. Add a **@db.query_signature:<YOUR_QUERY_SIGNATURE>** filter to your query, using autocomplete as it appears.
-1. Click the **x** on the redundant **by Query Signature (@db.query_signature)** grouping.
-1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000`, since that would represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Click the **x** on the **by Query Signature (@db.query_signature)** grouping, which has become redundant.
+1. Choose an alerting threshold, then enter your chosen value in the **alert threshold** box. For example, if the cost typically does not exceed `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. See [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Configure the monitor notifications to alert the desired recipients. See [Notifications][4]. You can use this text for the monitor message:
 {{< code-block lang="text" >}}
 {{#is_alert}}
