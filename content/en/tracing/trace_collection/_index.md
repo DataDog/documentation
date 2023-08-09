@@ -18,7 +18,6 @@ further_reading:
   text: "Compatibility requirements"
 ---
 
-
 To configure your application to send traces to Datadog:
 
 ## Step 1 - Configure the Datadog Agent for APM
@@ -31,6 +30,7 @@ Select your language:
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,php,cpp,dotnet-core,dotnet-framework" >}}
 {{< programming-lang lang="java" >}}
+
 ### Compatibility requirements
 
 The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
@@ -45,7 +45,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 ##### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][18].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -82,26 +82,40 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 {{< /site-region >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+
 
 ##### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-[1]: /tracing/serverless_functions/
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][19] documentation.
 
 ##### Other environments
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for a number of other environments, such as  [Heroku][20], [Cloud Foundry][21], [AWS Elastic Beanstalk][22], and [Azure App Service][23].
 
-For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][24] documentation for that environment and [contact support][25] if you are encountering any setup issues.
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
-[5]: /integrations/
-[6]: /help/
+[1]: /tracing/compatibility_requirements/java
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[4]: /account_management/billing/apm_tracing_profiler/
+[5]: /profiler/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[9]: /tracing/trace_collection/library_config/java/
+[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
+[11]: /tracing/_trace_collection/library_injection_local/
+[12]: /tracing/_trace_collection/library_injection_remote/
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services
+[18]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[19]: /tracing/serverless_functions/
+[20]: /agent/basic_agent_usage/heroku/#installation
+[21]: /integrations/cloud_foundry/#trace-collection
+[22]: /integrations/amazon_elasticbeanstalk/
+[23]: /infrastructure/serverless/azure_app_services/#overview
+[24]: /integrations/
+[25]: /help/
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -444,15 +458,15 @@ For other environments, see the [Integrations][5] documentation for that environ
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-core" >}}
 
-# Compatibility requirements
+### Compatibility requirements
 
-### Supported .NET Core runtimes
+#### Supported .NET Core runtimes
 
 The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
 
 For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
-## Installation and getting started
+### Installation and getting started
 
 <div class="alert alert-info">
     To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
@@ -466,7 +480,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
   To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
 </div>
 
-### Installation
+#### Installation
 
 1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
 2. [Choose your instrumentation method](#choose-your-instrumentation-method)
@@ -474,13 +488,13 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 4. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 5. [View your live data.](#view-your-live-data)
 
-### Configure the Datadog Agent for APM
+#### Configure the Datadog Agent for APM
 
 [Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
-#### Containers
+##### Containers
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
 
@@ -506,7 +520,7 @@ For more information on how to configure these settings, see [Configuration](#co
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
-#### Other Environments
+##### Other Environments
 
 Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
@@ -663,10 +677,7 @@ If your app is called `my_app.jar`, create a `my_app.conf`, containing:
 JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 ```
 
-For more information, see the [Spring Boot documentation][1].
-
-
-[1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+For more information, see the [Spring Boot documentation][20].
 
 ###### Tomcat
 
@@ -708,10 +719,8 @@ set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
 <option value="-javaagent:/path/to/dd-java-agent.jar"/>
 ```
 
-For more details, see the [JBoss documentation][1].
+For more details, see the [JBoss documentation][21].
 
-
-[1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
 
 ###### Jetty
 
@@ -740,9 +749,8 @@ In the administrative console:
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-For additional details and options, see the [WebSphere docs][1].
+For additional details and options, see the [WebSphere docs][22].
 
-[1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
 
 **Note**
 
@@ -772,6 +780,27 @@ Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mi
 #### Configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
+
+[1]: /tracing/compatibility_requirements/java
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[4]: /account_management/billing/apm_tracing_profiler/
+[5]: /profiler/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[9]: /tracing/trace_collection/library_config/java/
+[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
+[11]: /tracing/_trace_collection/library_injection_local/
+[12]: /tracing/_trace_collection/library_injection_remote/
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services
+[18]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[19]: /tracing/serverless_functions/
+[20]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+[21]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
+[22]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -1869,7 +1898,7 @@ See the following pages for supported deployment scenarios and languages:
 
 Install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis, so developers can manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
 
-#### Windows}
+#### Windows
 
 To install the .NET Tracer machine-wide:
 
