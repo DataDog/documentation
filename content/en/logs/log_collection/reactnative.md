@@ -23,8 +23,8 @@ Send logs to Datadog from your React Native Mobile applications with [Datadog's 
 
 1. To install with NPM, run:
 
-```sh
-npm install @datadog/mobile-react-native
+   ```sh
+   npm install @datadog/mobile-react-native
 ```
 
 To install with Yarn, run:
@@ -39,9 +39,9 @@ Install the added pod:
 (cd ios && pod install)
 ```
 
-Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
+   Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
 
-1. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
+2. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library, as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
 {{< site-region region="us" >}}
 ```js
 import {
@@ -154,13 +154,13 @@ config.site = 'AP1';
 {{< /site-region >}}
 
    
-2. Import the React Native logger:
+3. Import the React Native logger:
 
    ```javascript
    import { DdLogs } from '@datadog/mobile-react-native';
    ```
 
-1. Send a custom log entry directly to Datadog with one of the following functions:
+4. Send a custom log entry directly to Datadog with one of the following functions:
 
     ```javascript
         DdLogs.debug('A debug message.', { customAttribute: 'something' })
