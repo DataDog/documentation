@@ -13,9 +13,7 @@ further_reading:
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
-## Overview
-
-{{< vimeo url="https://vimeo.com/852419580" poster="/images/poster/workflow_automation.png" >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
 
 Datadog Workflow Automation allows you to orchestrate and automate your end-to-end processes. Build workflows made up of [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
 
@@ -38,10 +36,6 @@ Below are a few examples of workflows you can build:
 - Automatically create investigative notebooks of malicious IPs to be detected by Security Signals, and then block these IPs in CloudFlare with the click of a button.
 - Execute workflows to roll back to stable versions of your application directly from the Dashboards you use to track the health of your systems.
 - Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process.
-
-Watch the video below to see a workflow configured to redeploy a Lambda function when it experiences a high error rate.
-
-{{< wistia 0klmggfhaf>}}
 
 ## Further reading
 
