@@ -719,7 +719,11 @@ Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+datadogLogs.createLogger('signupLogger', {
+  level: 'info',
+  handler: 'http',
+  context: { env: 'staging' }
+)
 ```
 
 Vous pouvez à présent l'utiliser dans une autre partie du code avec :
@@ -737,7 +741,11 @@ Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous 
 
 ```javascript
 window.DD_LOGS.onReady(function () {
-  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', {
+    level: 'info',
+    handler: 'http',
+    context: { env: 'staging' }
+  )
 })
 ```
 
@@ -758,7 +766,11 @@ Par exemple, imaginons que vous disposez d'un `signupLogger`, défini avec tous 
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', {
+    level: 'info',
+    handler: 'http',
+    context: { env: 'staging' }
+  })
 }
 ```
 
@@ -1142,7 +1154,7 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [4]: https://github.com/DataDog/browser-sdk/blob/main/packages/logs/BROWSER_SUPPORT.md
 [5]: https://docs.datadoghq.com/fr/real_user_monitoring/guide/enrich-and-control-rum-data/
 [6]: https://docs.datadoghq.com/fr/real_user_monitoring/faq/proxy_rum_data/
-[7]: https://docs.datadoghq.com/fr/getting_started/tagging/#defining-tags
+[7]: https://docs.datadoghq.com/fr/getting_started/tagging/#define-tags
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [9]: https://docs.datadoghq.com/fr/getting_started/site/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error

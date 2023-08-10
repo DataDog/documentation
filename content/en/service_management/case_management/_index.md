@@ -10,6 +10,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
+algolia:
+  tags: ['inbox']
 ---
 
 {{< img src="/service_management/case_management/case_managment_overview.png" alt="View all your cases on the main Case Management page" style="width:100%;" >}}

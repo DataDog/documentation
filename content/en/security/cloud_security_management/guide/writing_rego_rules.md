@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/default_rules"
   tag: "Documentation"
   text: "Explore default Posture Management cloud configuration detection rules"
-- link: "/security/cspm/frameworks_and_benchmarks"
+- link: "/security/misconfigurations/frameworks_and_benchmarks"
   tag: "Guide"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true
@@ -15,12 +15,12 @@ is_beta: true
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not available in this site.
+CSM Misconfigurations is not available in the selected site.
 </div>
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true">}}
-Writing custom rules is a beta feature available to all CSPM customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
+Writing custom rules is a beta feature available to all Cloud Security Management Misconfigurations (CSM Misconfigurations) customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
 {{< /callout >}} 
 
 
@@ -30,7 +30,7 @@ Open Policy Agent (OPA) provides [Rego][1], an open source policy language with 
 
 ## The template module
 
-Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. Datadog CSPM uses a module template like the one below to simplify writing rules:
+Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. CSM Misconfigurations uses a module template like the one below to simplify writing rules:
 
 ```python
 package datadog

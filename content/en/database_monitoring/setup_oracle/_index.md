@@ -3,8 +3,6 @@ title: Setting up Oracle
 kind: documentation
 description: Setting up Database Monitoring on an Oracle database
 disable_sidebar: true
-private: true
-is_beta: true
 ---
 
 {{< site-region region="gov" >}}
@@ -12,13 +10,13 @@ is_beta: true
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta.
+The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 ## Supported Oracle versions, features, and architectures
 
 - **Versions**: 19c and 21c
-- **Deployment configurations**: Self-managed, RDS, RAC, Exadata
+- **Deployment configurations**: Self-managed, RDS, RAC, Exadata, Autonomous Database
 - **Architecture**: Multi-tenant
 
 ## Prerequisites
@@ -73,7 +71,7 @@ Set `DD_API_KEY` and run the following commands to install the beta release, for
 export DD_AGENT_DIST_CHANNEL=beta
 export DD_AGENT_MINOR_VERSION="46.0~dbm~oracle~beta~0.33-1"
 
-DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ##### Windows
@@ -113,6 +111,12 @@ The Agent doesn't require any external Oracle clients.
 
 Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
+<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+
 ## Setup
 
 For setup instructions, select your hosting type:
@@ -122,10 +126,11 @@ For setup instructions, select your hosting type:
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.msi
+[4]: https://windows-agent.datadoghq.com/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.msi
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [6]: https://yum.datadoghq.com/beta/7/x86_64/
 [7]: https://apt.datadoghq.com/dists/beta/7/
-[8]: https://ddagent-windows-stable.s3.amazonaws.com/
+[8]: https://windows-agent.datadoghq.com/
 [9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
 [10]: /database_monitoring/architecture/
+[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example

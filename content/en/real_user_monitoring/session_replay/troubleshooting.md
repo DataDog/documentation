@@ -1,5 +1,5 @@
 ---
-title: Session Replay Troubleshooting
+title: Session Replay Browser Troubleshooting
 kind: documentation
 description: Learn how to troubleshoot issues with Session Replay.
 further_reading:

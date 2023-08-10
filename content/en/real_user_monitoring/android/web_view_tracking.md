@@ -30,31 +30,25 @@ Set up the web page you want rendered on your mobile Android and Android TV appl
 
 ### Update your existing SDK setup
 
-1. Download the [latest version][2] of the RUM Android SDK.
-2. Edit your existing Android SDK setup from [RUM Android Monitoring][3].
-3. Add tracking for web views with the following example:
+1. If you want to forward RUM events coming from web pages, download the [latest version][2] of RUM Android SDK and setup RUM feature following the [dedicated guide][3].
+2. If you want to forward Log events coming from web pages, download the [latest version][4] of Logs Android SDK and setup Logs feature following the [dedicated guide][5].
+3. Add the Gradle dependency by declaring the `dd-sdk-android-webview` library as a dependency in the module-level `build.gradle` file:
 
-   ```
-            val configuration = Configuration.Builder(
-                    rumEnabled = true
-                )
-               .useSite()
-               .trackInteractions()
-               .setWebViewTrackingHosts(hosts)
-               .trackLongTasks(durationThreshold)
-               .useViewTrackingStrategy(strategy)
-               .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-webview:x.x.x"
     }
-   ```
+    ```
 
-4. Configure the `DatadogEventBridge` for web views you want to track in your mobile Android application using `DatadogEventBridge.setup(webView)` in the configuration file when you initialize the RUM Android SDK.
+4. Enable tracking for web views with the following code snippet:
+
+   ```kotlin
+     WebViewTracking.enable(webView, allowedHosts)
+   ```
 
 ## Access your web views
 
-Your web views appear in the [RUM Explorer][4] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android. 
+Your web views appear in the [RUM Explorer][6] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android. 
 
 Filter on your Android and Android TV applications, and click a session. A side panel with a list of events in the session appears. 
 
@@ -67,6 +61,8 @@ Click **Open View waterfall** to navigate from the session to a resource waterfa
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/#npm
-[2]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android/1.12.0-beta1/aar
+[2]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [3]: /real_user_monitoring/android/?tab=kotlin#setup
-[4]: https://app.datadoghq.com/rum/explorer
+[4]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
+[5]: /logs/log_collection/android/?tab=kotlin#setup
+[6]: https://app.datadoghq.com/rum/explorer
