@@ -150,6 +150,7 @@ Alternatively, if you have business logic defined in the payload, you could also
       "Resource": "arn:aws:states:::lambda:invoke",
       "Parameters": {
         "Payload": {
+          ...
           "Execution.$": "$$.Execution",
           "State.$": "$$.State",
           "StateMachine.$": "$$.StateMachine"
