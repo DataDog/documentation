@@ -96,8 +96,8 @@ For other environments, refer to the [Integrations][24] documentation for that e
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
-[11]: /tracing/_trace_collection/library_injection_local/
-[12]: /tracing/_trace_collection/library_injection_remote/
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
 [18]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -561,7 +561,6 @@ Tracing is available for other environments including, [Heroku][1], [Cloud Found
 
 For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
 
-
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
@@ -760,8 +759,8 @@ If needed, configure the tracing library to send application performance telemet
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
-[11]: /tracing/_trace_collection/library_injection_local/
-[12]: /tracing/_trace_collection/library_injection_remote/
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
 [18]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -820,7 +819,9 @@ If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [relea
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
-Ruby
+
+{{< ruby-trace >}}
+
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -833,6 +834,12 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
 For configuration instructions and details about using the API, see the Datadog [API documentation][4].
+
+[3]: tracing/trace_collection/library_config/python/
+[4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
@@ -956,6 +963,12 @@ esbuild.build({
 #### Configuration
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+
+[1]: /tracing/compatibility_requirements/nodejs
+[4]: tracing/trace_collection/library_config/nodejs
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/
 
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
@@ -1363,6 +1376,19 @@ For Apache, run:
 (. /etc/apache2/envvars; strace -f apache2 -X)
 ```
 
+[1]: /tracing/compatibility_requirements/php
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: /tracing/glossary/
+[5]: https://app.datadoghq.com/apm/services
+[6]: /tracing/trace_collection/library_config/php/
+[7]: /tracing/guide/trace-php-cli-scripts/
+[8]: https://packages.sury.org/php/
+[9]: https://wiki.debian.org/HowToGetABacktrace
+[10]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
@@ -1516,6 +1542,12 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
 
+[1]: /tracing/setup/envoy/
+[2]: /tracing/setup/nginx/
+[3]: /tracing/compatibility_requirements/cpp
+[4]: https://app.datadoghq.com/apm/service-setup
+[5]: /tracing/trace_collection/library_config/cpp/
+
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-core" >}}
 
@@ -1536,7 +1568,7 @@ You can install the Datadog .NET Tracer machine-wide so that all services on the
 
 To install the .NET Tracer machine-wide:
 
-1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][16]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
@@ -1548,7 +1580,7 @@ You can also script the MSI setup by running the following in PowerShell: `Start
 
 To install the .NET Tracer machine-wide:
 
-1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
+1. Download the latest [.NET Tracer package][16] that supports your operating system and architecture.
 
 2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
 
@@ -1564,9 +1596,6 @@ To install the .NET Tracer machine-wide:
    Other distributions
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
 
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-
 #### NuGet
 
 <div class="alert alert-warning">
@@ -1575,9 +1604,7 @@ To install the .NET Tracer machine-wide:
 
 To install the .NET Tracer per-application:
 
-1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
-
-[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
+1. Add the `Datadog.Trace.Bundle` [NuGet package][15] to your application.
 
 #### Enable the tracer for your service
 
@@ -1635,11 +1662,8 @@ For information about the different methods for setting environment variables, s
 
 #### NuGet
 
-Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][1].
-Docker examples are also available in the [repository][2].
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
-[2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][13].
+Docker examples are also available in the [repository][14].
 
 #### View your live data
 
@@ -1667,11 +1691,8 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace` [NuGet package][12] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-
-[1]: https://www.nuget.org/packages/Datadog.Trace
 
 #### Linux
 
@@ -1680,11 +1701,8 @@ To use custom instrumentation in your .NET application:
 </div>
 
 To use custom instrumentation in your .NET application:
-1. Add the `Datadog.Trace` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace` [NuGet package][12] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-
-[1]: https://www.nuget.org/packages/Datadog.Trace
 
 #### NuGet
 
@@ -1847,6 +1865,19 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 3. Restart the .NET service for the environment variables to take effect.
 
+[1]: /tracing/trace_collection/compatibility/dotnet-core
+[2]: /agent/
+[3]: https://app.datadoghq.com/apm/traces
+[4]: /tracing/trace_collection/library_config/dotnet-core/
+[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[11]: /tracing/_trace_collection/library_injection_local/
+[12]: https://www.nuget.org/packages/Datadog.Trace
+[13]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
+[14]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+[15]: https://www.nuget.org/packages/Datadog.Trace.Bundle
+[16]: https://github.com/DataDog/dd-trace-dotnet/releases
+
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-framework" >}}
@@ -1871,13 +1902,11 @@ Install the Datadog .NET Tracer machine-wide so that all services on the machine
 
 To install the .NET Tracer machine-wide:
 
-1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][6]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
 You can also script the MSI setup by running the following in PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 
 #### NuGet
 
@@ -1887,11 +1916,7 @@ You can also script the MSI setup by running the following in PowerShell: `Start
 
 To install the .NET Tracer per-application:
 
-1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
-
-
-[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
-
+1. Add the `Datadog.Trace.Bundle` [NuGet package][6] to your application.
 
 #### Enable the tracer for your service
 
@@ -1932,14 +1957,8 @@ For information about the different methods for setting environment variables, s
 
 ##### NuGet
 
-Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][1].
-Docker examples are also available in the [repository][2].
-
-
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
-[2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
-
+Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][12].
+Docker examples are also available in the [repository][13].
 
 #### View your live data
 
@@ -1967,11 +1986,8 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][1] to your application.
+1. Add the `Datadog.Trace` [NuGet package][6] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-
-[1]: https://www.nuget.org/packages/Datadog.Trace
 
 #### NuGet
 
@@ -1991,7 +2007,7 @@ To attach automatic instrumentation to your service, set the required environmen
 
 #### Windows services
 
-##### Registry Editor}
+##### Registry Editor
 
 In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
 
@@ -2044,6 +2060,16 @@ SET DD_RUNTIME_METRICS_ENABLED=true
 rem Start application
 dotnet.exe example.dll
 ```
+
+[1]: /tracing/compatibility_requirements/dotnet-framework
+[2]: /agent/
+[3]: https://app.datadoghq.com/apm/traces
+[4]: /tracing/trace_collection/library_config/dotnet-framework/
+[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[6]: https://www.nuget.org/packages/Datadog.Trace.Bundle
+[11]: /tracing/_trace_collection/library_injection_local/
+[12]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
+[13]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
