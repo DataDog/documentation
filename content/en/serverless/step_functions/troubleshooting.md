@@ -34,7 +34,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 - In your AWS console, open your Step Function and ensure that your state machine has `"Payload.$": "States.JsonMerge($$, $, false)"` on the Lambda steps.
 - Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][3].
 
-## I can only see `aws.stepfunctions` root span but none of the step spans
+## I can only see `aws.stepfunctions` root span but cannot see any step spans
 Please enable `Include execution data` option on the state machine's logging. By enabling this option, log execution input, data passed between states, and execution output will be logged in the logs which are then used by Datadog backend to construct these step spans for you.
 
 ## Some step spans are missing in the traces
