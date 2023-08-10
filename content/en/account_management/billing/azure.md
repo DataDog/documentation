@@ -5,8 +5,9 @@ kind: documentation
 
 ## Overview
 
-Datadog bills for all [Azure Virtual Machines being monitored in Datadog][1]. These machines are billable regardless of whether the Datadog Agent is installed. You are not billed twice if you are running the Agent on an Azure VM picked up by the Azure integration. Additionally, Datadog counts the nodes inside of Azure App Service Plans as billable hosts.  
-**Note**: Any Shared, Dynamic, or Free tier App Service Plans do not have any associated node counts and do not impact your Datadog bill.
+Datadog bills for all [Azure Virtual Machines being monitored in Datadog][1]. These machines are billable regardless of whether the Datadog Agent is installed. You are not billed twice if you are running the Agent on an Azure VM picked up by the Azure integration. Additionally, Datadog counts the nodes inside of Azure App Service Plans as billable hosts.
+
+**Note**: Shared, Dynamic, and Free tier App Service Plans do not have any associated node counts and do not impact your Datadog bill.
 
 The Azure integration collects metrics for all other Azure resources (such as Azure SQL DB, Azure Redis Cache, Azure Load Balancer, and others) without any impact on monthly billing. For a comprehensive list of metrics collected, see [Supported metrics with Azure Monitor][6].
 
