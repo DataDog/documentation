@@ -18,9 +18,23 @@
   x-data="{
     filterValue: '',
     queryValue: '',
-    pushState (productParamValue, isFiltered=true) {
-      const newParam = isFiltered ? `?product=${productParamValue}`: `?search=${productParamValue}`
-      window.history.replaceState({param: newParam },'', newParam)
+    pushState (filtering=true) {
+      const url = new URL(window.location.href);
+
+      if(filtering){
+        url.searchParams.set('product', this.filterValue);
+      }else if(!filtering){
+        url.searchParams.set('search', this.queryValue);
+      }
+
+      if(!this.queryValue) {
+        url.searchParams.delete('search')
+      }
+      if(!this.filterValue) {
+        url.searchParams.delete('product')
+      }
+
+      window.history.replaceState(null,'', url.toString())
       window.scroll(0, 0)
     },
     shouldShowAttribute (dataset) {
@@ -91,14 +105,14 @@
       <div class="filters-standard-attributes">
         {{ if  $products }}
             <button 
-            @click="filterValue = ''; pushState('all')"
+            @click="filterValue = ''; pushState()"
             :class="(filterValue === 'all' || !filterValue) && 'active'"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
         {{ end }}
         {{ range $products | uniq | sort }}
             <button 
-            @click="filterValue = '{{ . }}'; pushState('{{ . }}')"
+            @click="filterValue = '{{ . }}'; pushState()"
             :class="($el.dataset.filter === filterValue) && 'active'"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             data-filter="{{ . }}">{{ if (eq . "*")}} * {{else if (in . "icon-") }}{{((substr . 5) | upper)}} {{ else }}RUM {{. | upper}}{{end}}</button>
@@ -106,10 +120,8 @@
       </div>
       {{/*  SEARCH  */}}
       <form 
-      class="search-standard-attributes mt-2"
-      @submit.prevent="pushState(queryValue, false)">
-        {{/*  when i click submit, i want the value to   */}}
-        <input type="text" placeholder="Search here" class="w-100" x-model="queryValue">
+      class="search-standard-attributes mt-2">
+        <input type="text" placeholder="Search here" class="w-100" x-model="queryValue" @input.debounce="pushState(false)">
       </form>
     </nav>
 
