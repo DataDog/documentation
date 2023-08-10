@@ -184,6 +184,8 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
+
+
 #### AWS Lambda
 
 To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
@@ -205,7 +207,9 @@ For other environments, refer to the [Integrations][5] documentation for that en
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
-Ruby
+
+{{< ruby-trace >}}
+
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 

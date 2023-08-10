@@ -1,0 +1,15 @@
+// Grab single sourced dd-trace-rb content to include on the Ruby tab in Sending Traces to Datadog
+
+<div id="ruby-content"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/3.0.8/marked.min.js"></script>
+
+<script>
+  fetch('https://raw.githubusercontent.com/DataDog/dd-trace-rb/release/docs/GettingStarted.md')
+    .then(response => response.text())
+    .then(data => {
+      var htmlContent = marked(data); // Convert markdown to HTML
+      document.getElementById('ruby-content').innerHTML = htmlContent;
+    })
+    .catch(error => console.error('An error occurred:', error));
+</script>
