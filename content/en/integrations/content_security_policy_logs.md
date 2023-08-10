@@ -182,7 +182,7 @@ If you are using Session Replay, make sure to allow workers with `blob:` URI sch
 worker-src blob:;
 ```
 
-Alternatively, starting from [version TODO][8], you can self-host the Datadog Browser SDK Worker JavaScript file and provide the `workerUrl` option to initialize the [RUM Browser SDK][8]. To do so, you can either:
+Alternatively, starting from [version 4.46.0][8], you can self-host the Datadog Browser SDK Worker JavaScript file and provide the `workerUrl` option to initialize the [RUM Browser SDK][8]. To do so, you can either:
 
 * download it from https://unpkg.com/@datadog/browser-worker, and store it alongside your Web application assets;
 
@@ -213,7 +213,7 @@ script-src https://www.datadoghq-browser-agent.com
 [5]: /logs/log_collection/javascript/#initialization-parameters
 [6]: /real_user_monitoring/browser/#setup
 [7]: /logs/log_collection/javascript/#cdn-async
-[8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#TODO
+[8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4460
 [9]: https://www.npmjs.com/package/@datadog/browser-worker
 [10]: https://v4.webpack.js.org/loaders/file-loader/
 [11]: https://webpack.js.org/guides/asset-modules/#url-assets
