@@ -136,9 +136,9 @@ RPM の GPG 署名キーはフィンガープリント `60A389A44A0C32BAE3C03F0B
   * [Datadog Puppet モジュール][12]リリース [3.20.0][13]
   * [Datadog SaltStack 式][14]リリース [3.5][15]
   * Datadog Agent 6/7 Linux インストールスクリプト、2023 年 1 月 12 日 13 時 (UTC) にバージョン 1.13.0 を以下の場所にリリースしました。
-    * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh][16]
-    * [https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh][17]
-    * [https://s3.amazonaws.com/dd-agent/scripts/install_script.sh][18] (非推奨となりましたが、更新しました。)
+    * [https://install.datadoghq.com/scripts/install_script_agent6.sh][16]
+    * [https://install.datadoghq.com/scripts/install_script_agent7.sh][17]
+    * [https://install.datadoghq.com/scripts/install_script.sh][18] (非推奨となり、もはや推奨されませんが、更新されました。)
   * [Datadog Agent 5 Linux インストールスクリプト][19]が 2023 年 1 月 12 日 16:25 UTC にその[ダウンロード場所][19]にリリースされました
 
 
@@ -158,7 +158,7 @@ RPM の GPG 署名キーはフィンガープリント `60A389A44A0C32BAE3C03F0B
 [13]: https://github.com/DataDog/puppet-datadog-agent/releases/tag/v3.20.0
 [14]: https://github.com/DataDog/datadog-formula
 [15]: https://github.com/DataDog/datadog-formula/releases/tag/3.5
-[16]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh
-[17]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
-[18]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+[16]: https://install.datadoghq.com/scripts/install_script_agent6.sh
+[17]: https://install.datadoghq.com/scripts/install_script_agent7.sh
+[18]: https://install.datadoghq.com/scripts/install_script.sh
 [19]: https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh

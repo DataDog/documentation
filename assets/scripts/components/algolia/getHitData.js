@@ -6,10 +6,11 @@ export function getHitData(hit, qry = '') {
     const regexQry = new RegExp(`(${orMatches})`, 'gi');
     let highlightedTitle = (hit._highlightResult.title.value || title);
     let highlightedContent = (hit._highlightResult.content.value || '');
-    if(qry) {
-      highlightedTitle = highlightedTitle.replace(regexQry, '<mark>$1</mark>');
-      highlightedContent = highlightedContent.replace(regexQry, '<mark>$1</mark>');
-    }
+    
+    // if(qry) {
+    //   highlightedTitle = highlightedTitle.replace(regexQry, '<mark>$1</mark>');
+    //   highlightedContent = highlightedContent.replace(regexQry, '<mark>$1</mark>');
+    // }
 
     return {
         relpermalink: cleanRelPermalink,

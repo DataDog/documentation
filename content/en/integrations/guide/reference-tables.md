@@ -108,11 +108,35 @@ For more information, see the [Azure integration documentation][4].
 
 **Note**: The upload from cloud object storage supports files up to 200MB.
 
-
 [1]: https://app.datadoghq.com/integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
 [4]: /integrations/azure/
+
+{{% /tab %}}
+
+{{% tab "Google Cloud storage" %}}
+
+1. If you have not set up a Google Cloud integration with Datadog or you are using legacy Google project ID files (legacy projects are indicated in your GCP integration tile), follow the instructions for setting up the [Google Cloud Platform integration][1]. This involves creating a [Google Cloud service account][2].
+
+1. From the Google Cloud console, navigate to the project from which you would like to import Reference Tables.
+
+1. Navigate to the Google Cloud console **IAM & Admin section**. Under **View By Principals**, search for the service account you would like to use with Reference Tables. 
+
+1. Click the pencil icon in the rightmost column to edit the principal. 
+
+1. Click **Add Another Role**, and select the **Storage Object Viewer** role and **Save**.
+
+{{< img src="integrations/guide/reference-tables/gcp_principal_storageObjectViewer.png" alt="Google Cloud console showing the configuration to select Storage Object Viewer" style="width:100%;" >}}
+
+After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
+
+{{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
+
+**Note**: The upload from cloud object storage supports files up to 200MB.
+
+[1]: /integrations/google_cloud_platform/#setup
+[2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /tab %}}
 {{< /tabs >}}
