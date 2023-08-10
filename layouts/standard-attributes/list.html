@@ -34,7 +34,7 @@
         url.searchParams.delete('product')
       }
 
-      window.history.replaceState(null,'', url.toString())
+      window.history.pushState(null,'', url.toString())
       window.scroll(0, 0)
     },
     shouldShowAttribute (dataset) {
@@ -43,8 +43,8 @@
     },
     updateWithURLParams () {
       const url = new URL(window.location.href)
-      this.filterValue = url.searchParams.get('product')
-      this.searchValue = url.searchParams.get('search')
+      this.filterValue = url.searchParams.get('product') || ''
+      this.searchValue = url.searchParams.get('search') || ''
     }
   }"
   x-init="updateWithURLParams()">
