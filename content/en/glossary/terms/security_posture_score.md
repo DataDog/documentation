@@ -25,4 +25,4 @@ You can improve your score by remediating findings, either by fixing the underly
 
 [1]: /security/default_rules/#cat-posture-management-cloud
 [2]: /security/default_rules/#cat-posture-management-infra
-[3]: /security/cspm/
+[3]: /security/misconfigurations/
