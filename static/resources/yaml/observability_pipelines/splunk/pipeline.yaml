@@ -12,7 +12,7 @@ transforms:
   ## steps with tags set up. Datadog recommends these tag assignments.
   ## They show which data has been moved over to OP and what still needs
   ## to be moved.
-  LOGS_YOUR_STEPS:
+  logs_enrich:
     type: remap
     inputs:
       - splunk_receiver
@@ -32,7 +32,7 @@ sinks:
   datadog_logs:
     type: datadog_logs
     inputs:
-      - LOGS_YOUR_STEPS
+      - logs_enrich
     default_api_key: "${DD_API_KEY}"
     compression: gzip
     buffer:
@@ -41,7 +41,7 @@ sinks:
   splunk_logs:
     type: splunk_hec_logs
     inputs:
-      - LOGS_YOUR_STEPS
+      - logs_enrich
     endpoint: ${SPLUNK_HEC_ENDPOINT}
     default_token: ${SPLUNK_TOKEN}
     encoding:

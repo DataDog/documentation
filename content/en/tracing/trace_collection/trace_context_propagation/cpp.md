@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
+Datadog APM tracer supports [B3][11] headers extraction and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The supported styles for C++ are:
 

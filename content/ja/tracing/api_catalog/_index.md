@@ -8,8 +8,8 @@ kind: documentation
 title: Datadog API カタログ
 ---
 
-{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" >}}
-  Datadog API カタログはベータ版です。このフォームでアクセスをリクエストしてください。
+{{< callout url="https://www.datadoghq.com/api-catalog-public-beta-request/" >}}
+API カタログは数に限りがあります。早期アクセスはこちらのフォームをご利用ください。
 {{< /callout >}} 
 
 {{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API カタログは、API エンドポイントのリストと、そのエラー率、P99 レイテンシー、リクエスト数、および所有チームを表示し、検索、フィルター、スコープ機能を備えています。" style="width:100%;" >}}
