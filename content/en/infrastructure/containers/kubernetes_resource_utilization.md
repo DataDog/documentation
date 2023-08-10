@@ -67,7 +67,7 @@ To help find this balance, adjust the graphs to look at a longer timespan, and a
 
 ### Known limitations
 
-Metrics are not displayed for groups containing at least one pod with container(s) that do not set requests or limits, as Datadog cannot infer the usage percentage without them. These groups without metrics appear last, regardless of the sorting order.
+Metrics are not displayed for groups containing at least one pod with containers that do not set requests or limits, as Datadog cannot infer the usage percentage without them. These groups without metrics appear last, regardless of the sorting order.
 
 The summation of resource requests and limits for a group is independent of the state of resources belonging to that group. These values may differ from the ones displayed on companion metric graphs.
 
