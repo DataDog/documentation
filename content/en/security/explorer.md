@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
     tag: "Blog"
     text: "Secure serverless applications with Datadog ASM"
+  - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+    tag: "Blog"
+    text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview

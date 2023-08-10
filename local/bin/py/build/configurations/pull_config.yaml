@@ -572,7 +572,7 @@
           globs:
             - "generated/md/external/*.md"
           options:
-            dest_dir: '/security/cspm/custom_rules/'
+            dest_dir: '/security/misconfigurations/custom_rules/'
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
@@ -604,7 +604,7 @@
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
           options:
-            dest_dir: '/security/cloud_workload_security/'
+            dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: dd-source

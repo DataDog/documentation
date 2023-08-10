@@ -20,18 +20,16 @@ CSM Vulnerabilities is not available on the US1-FED Datadog site.
 ## Prerequisites
 
 - [Cloud Security Management][1] (using [Threats][2] or [Misconfigurations][3]).
-- [Datadog Agent][4] 7.46.0 or higher.
-- [containerd][5] v1.5.6 or higher.
-- [Helm Chart][6] v3.33.6 or higher.
+- [Datadog Agent][4] 7.46.0 or later.
+- [containerd][5] v1.5.6 or later (Kubernetes and hosts only).
+- [Helm Chart][6] v3.33.6 or later (Kubernetes only).
 
 ## Setup for container image scanning
 
-**Note**: This enables the Container Image Metadata collection and [Software Bill of Materials][10] collection in your Datadog Agent (allowing you to scan libraries present in container images, and detect vulnerabilities).
+The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
-
-Agent version `>= 7.46.0`:
 
 Add the following to your `values.yaml` helm configuration file:
 
@@ -51,8 +49,6 @@ agents:
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}
-
-**Note**: Container image vulnerability scanning on ECS EC2 instances is only available on Agent version `7.46.0` or higher.
 
 To enable container image vulnerability scanning on your [ECS EC2 instances][7], add the following environment variables to your `datadog-agent` container definition:
 
@@ -82,7 +78,8 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][7],
   ...
 }
 ```
-**Note**: If the agent fails to extract the SBOM from some container images, increase the Agent memory in the container definition:
+
+If the Agent fails to extract the SBOM from the container image, increase the Agent memory in the container definition:
 
 ```yaml
 {
@@ -100,11 +97,30 @@ To enable container image vulnerability scanning on your [ECS EC2 instances][7],
 [7]: /containers/amazon_ecs/?tab=awscli#setup
 
 {{% /tab %}}
+
+{{% tab "Hosts" %}}
+
+Add the following to your `datadog.yaml` configuration file:
+
+```yaml
+sbom:
+  enabled: true
+  container_image:
+    enabled: true
+container_image:
+  enabled: true
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Setup for host vulnerability scanning
 
 **Note**: Container and host SBOM can be enabled at the same time by combining the [containers](#setup-for-container-image-scanning) setup with the following setup for hosts configuration:
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
 
 ```yaml
 agents:
@@ -117,9 +133,51 @@ agents:
           value: "true"
 ```
 
+{{% /tab %}}
+
+{{% tab "ECS EC2" %}}
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+             ...
+            "environment": [
+              ...
+              {
+                "name": "DD_SBOM_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_HOST_ENABLED",
+                "value": "true"
+              }
+            ]
+        }
+    ]
+  ...
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Hosts" %}}
+
+```yaml
+sbom:
+  enabled: true
+  host:
+    enabled: true
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 [1]: /security/cloud_security_management
-[2]: /security/cloud_workload_security/
-[3]: /security/cspm/
+[2]: /security/threats/
+[3]: /security/misconfigurations/
 [4]: /agent/
 [5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [6]: /containers/kubernetes/installation/?tab=helm
