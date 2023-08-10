@@ -34,6 +34,13 @@ If your organization has an existing all-encompassing index with a low limit, pl
 - In your AWS console, open your Step Function and ensure that your state machine has `"Payload.$": "States.JsonMerge($$, $, false)"` on the Lambda steps.
 - Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][3].
 
+## I can only see `aws.stepfunctions` root span but none of the step spans
+Please enable `Include execution data` option on the state machine's logging. By enabling this option, log execution input, data passed between states, and execution output will be logged in the logs which are then used by Datadog backend to construct these step spans for you.
+
+## Some step spans are missing in the traces
+- For actions, we support basic actions of Lambda and DynamoDB, e.g. Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem... etc.
+- For different flows, we do not support `Wait`, `Choice`, `Map`, `Success`, `Fail`, and `Pass`. For `Parrallel` flow, you would be able to see 
+
 #### Notes
 Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.
 
