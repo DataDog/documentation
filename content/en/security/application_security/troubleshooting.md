@@ -564,7 +564,7 @@ See the Application Security [set up documentation][11] to validate you you are 
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Some or all IAST/Custom Code vulnerabilities not detected
+## Some or all IAST/Custom Code vulnerabilities are not detected
 
 ### Confirm IAST is enabled
 
