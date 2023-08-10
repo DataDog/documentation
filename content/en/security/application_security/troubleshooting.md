@@ -564,6 +564,16 @@ See the Application Security [set up documentation][11] to validate you you are 
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
+## Some or all IAST/Custom Code vulnerabilities not detected
+
+### Confirm IAST is enabled
+
+Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corresponding system property for your language is enabled.
+
+### For Python+Flask, call the entrypoint patch function
+
+If you're running a Flask application ensure that you are calling the `ddtrace_iast_flask_patch()` function at the top level of the module and before calling `app.run()`, see: [Flask integration documentation](https://ddtrace.readthedocs.io/en/stable/integrations.html#flask).
+
 ## Need more help?
 
 If you continue to have issues with ASM, contact [Datadog support][1] with the following information:
