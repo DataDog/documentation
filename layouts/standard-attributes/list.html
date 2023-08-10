@@ -17,17 +17,17 @@
   class="standard-attributes-main row w-100"
   x-data="{
     filterValue: '',
-    queryValue: '',
+    searchValue: '',
     pushState (filtering=true) {
-      const url = new URL(window.location.href);
+      const url = new URL(window.location.href)
 
       if(filtering){
-        url.searchParams.set('product', this.filterValue);
+        url.searchParams.set('product', this.filterValue)
       }else if(!filtering){
-        url.searchParams.set('search', this.queryValue);
+        url.searchParams.set('search', this.searchValue)
       }
 
-      if(!this.queryValue) {
+      if(!this.searchValue) {
         url.searchParams.delete('search')
       }
       if(!this.filterValue) {
@@ -38,10 +38,16 @@
       window.scroll(0, 0)
     },
     shouldShowAttribute (dataset) {
-      const queryValues = this.queryValue.split(' ')
-      return queryValues.some(word => dataset.includes(word.toLowerCase())) && dataset.includes(this.filterValue)
+      const searchValues = this.searchValue.split(' ')
+      return searchValues.some(word => dataset.includes(word.toLowerCase())) && dataset.includes(this.filterValue)
+    },
+    updateWithURLParams () {
+      const url = new URL(window.location.href)
+      this.filterValue = url.searchParams.get('product')
+      this.searchValue = url.searchParams.get('search')
     }
-  }">
+  }"
+  x-init="updateWithURLParams()">
     <div 
     class="table-wrapper order-md-1">
       <table>
@@ -60,7 +66,7 @@
           {{/*  concatenating the attr info  */}}
           {{ $pad := newScratch }}
           {{/*  {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replace .description ";" "")) }}  */}}
-          {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replaceRE "(`|')" "" .description )) }}
+          {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain .type (replaceRE "(`|')" "" .description )) }}
           {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
 
           <tr 
@@ -121,7 +127,7 @@
       {{/*  SEARCH  */}}
       <form 
       class="search-standard-attributes mt-2">
-        <input type="text" placeholder="Search here" class="w-100" x-model="queryValue" @input.debounce="pushState(false)">
+        <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
       </form>
     </nav>
 
