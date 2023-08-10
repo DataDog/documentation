@@ -4,14 +4,15 @@ kind: documentation
 aliases:
   - /security_platform/cspm/getting_started
   - /security/cspm/getting_started
+  - /security/cspm/setup
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore default cloud configuration compliance rules"
-- link: "security/cspm/findings"
+- link: "security/misconfigurations/findings"
   tag: "Documentation"
   text: "Search and explore CSM Misconfigurations findings"
-- link: "security/cspm/frameworks_and_benchmarks"
+- link: "security/misconfigurations/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 - link: "/getting_started/cloud_security_management"
@@ -231,5 +232,5 @@ To disable CSM Misconfigurations for your cloud providers:
 [1]: https://app.datadoghq.com/security/compliance/
 [2]: /security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
-[4]: /security/cspm/compliance_rules#customize-how-your-environment-is-scanned-by-each-rule
-[5]: /security/cspm/compliance_rules#set-notification-targets-for-compliance-rules
+[4]: /security/misconfigurations/compliance_rules#customize-how-your-environment-is-scanned-by-each-rule
+[5]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules

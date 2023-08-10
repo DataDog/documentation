@@ -26,6 +26,12 @@ further_reading:
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: "Blog"
+  text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview
