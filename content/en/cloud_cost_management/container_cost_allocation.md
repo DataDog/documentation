@@ -106,7 +106,7 @@ Here is a sample query that displays all Kubernetes cluster cost, broken down by
 
 ## Tags
 
-Datadog applies additional tags to cost metrics where container costs are allocated.
+Datadog applies additional tags from various sources to cost metrics. Conflicts are resolved by favoring higher-specificity tags such as container tags over lower-specificity tags such as host tags.
 
 ### Kubernetes
 
