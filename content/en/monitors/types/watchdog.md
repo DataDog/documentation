@@ -52,7 +52,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-infra.png" alt="Configuring a Watchdog Monitor on Infrastructure" style="width:55%;">}}
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-infra.png" alt="Configuring a Watchdog Monitor on Infrastructure" style="width:80%;">}}
 
 ### Select sources {#select-sources-2}
 
@@ -71,7 +71,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 
 A logs alert indicates that either a new pattern of error logs has been detected or that there has been an increase in an existing pattern of error logs.
 
-{{< img src="/monitors/monitor_types/watchdog/log_anomaly_monitor.png" alt="The Watchdog monitor's edit page showing the alert category set to logs, alert type as log anomaly, env set to production, service set to ad-server, and the monitor's title is Anomaly Detected in Production Ad Server" style="width:80%;">}}
+{{< img src="/monitors/monitor_types/watchdog/log_anomaly_monitor.png" alt="The Watchdog monitor's edit page showing the alert category set to logs, alert type as log anomaly, env set to production, service set to ad-server, and the monitor's title is Anomaly Detected in Production Ad Server" style="width:55%;">}}
 
 ### Select sources {#select-sources-3}
 
