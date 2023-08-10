@@ -441,6 +441,16 @@
             front_matters:
               disable_edit: true
 
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/python-security/'
+            path_to_remove: 'rulesets/python-security/'
+            front_matters:
+              disable_edit: true
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
