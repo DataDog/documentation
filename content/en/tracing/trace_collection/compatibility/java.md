@@ -86,7 +86,7 @@ Beta integrations are disabled by default but can be enabled individually:
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
-**Integrations Disabled By Default**
+### Integrations Disabled By Default
 
 The following instrumentations are disabled by default and can be enabled with the following settings:
 
