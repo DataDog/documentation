@@ -65,12 +65,12 @@
 
           {{/*  concatenating the attr info  */}}
           {{ $pad := newScratch }}
-          {{/*  {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain (replace .description ";" "")) }}  */}}
           {{ $pad.Set "attribute_info" (slice (delimit .product_source ";") .name .domain .type (replaceRE "(`|')" "" .description )) }}
           {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
 
           <tr 
           class="table-row"
+          :class="shouldShowAttribute('{{ $attribute_info }}') && 'show'"
           x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')" 
           x-transition.opacity.duration.250ms
           >
