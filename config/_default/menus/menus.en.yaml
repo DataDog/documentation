@@ -2561,54 +2561,59 @@ main:
     url: logs/log_collection/flutter/
     parent: log_collection
     weight: 104
+  - name: React Native
+    identifier: log_react_native
+    url: logs/log_collection/reactnative/
+    parent: log_collection
+    weight: 105
   - name: Roku
     identifier: log_roku
     url: logs/log_collection/roku/
     parent: log_collection
-    weight: 105
+    weight: 106
   - name: C#
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 108
+    weight: 109
   - name: NodeJS
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 109
+    weight: 110
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 110
+    weight: 111
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 111
+    weight: 112
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 112
+    weight: 113
   - name: OpenTelemetry
     url: opentelemetry/otel_logs/
     parent: log_collection
     identifier: log_collection_opentelemetry
-    weight: 113
+    weight: 114
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 114
+    weight: 115
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -2931,82 +2936,82 @@ main:
     identifier: csm
     weight: 181500
   - name: Threats
-    url: security/cloud_workload_security/
+    url: security/threats/
     parent: csm
     identifier: cloud_workload_security
     weight: 1
   - name: Setup
-    url: security/cloud_workload_security/setup
+    url: security/threats/setup
     parent: cloud_workload_security
     identifier: cws_setup
     weight: 201
   - name: Managing Detection Rules
-    url: security/cloud_workload_security/workload_security_rules
+    url: security/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
   - name: Security Profiles
-    url: security/cloud_workload_security/security_profiles
+    url: security/threats/security_profiles
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
     weight: 203
   - name: Runtime Anomaly Detection
-    url: security/cloud_workload_security/runtime_anomaly_detection
+    url: security/threats/runtime_anomaly_detection
     parent: cloud_workload_security
     identifier: cws_workload_anomaly_detection
     weight: 204
   - name: Creating Custom Agent Rules
-    url: security/cloud_workload_security/agent_expressions
+    url: security/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
     weight: 205
   - name: CWS Events Formats
-    url: security/cloud_workload_security/backend
+    url: security/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 206
   - name: Misconfigurations
-    url: security/cspm/
+    url: security/misconfigurations/
     parent: csm
     identifier: cspm
     weight: 5
   - name: Setup
-    url: security/cspm/setup
+    url: security/misconfigurations/setup
     parent: cspm
     identifier: cspm_setup
     weight: 101
   - name: Compliance Rules
-    url: security/cspm/compliance_rules
+    url: security/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 102
   - name: Custom Rules
-    url: security/cspm/custom_rules
+    url: security/misconfigurations/custom_rules
     parent: cspm
     identifier: custom_rules
     weight: 103
   - name: Cloud Resources Schema
-    url: security/cspm/custom_rules/schema/
+    url: security/misconfigurations/custom_rules/schema/
     parent: cspm
     identifier: cspm_schema_gcp_test
     weight: 104
   - name: Compliance Reports
-    url: security/cspm/frameworks_and_benchmarks
+    url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
   - name: Misconfigurations Explorer
-    url: /security/cspm/findings
+    url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 107
   - name: Signals Explorer
-    url: /security/cspm/signals_explorer/
+    url: /security/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 108
   - name: Resource Catalog
-    url: /security/cspm/resource_catalog
+    url: /security/misconfigurations/resource_catalog
     parent: cspm
     identifier: resource_catalog
     weight: 109

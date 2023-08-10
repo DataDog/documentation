@@ -85,7 +85,6 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
-| WCF (server)                    | built-in                                                                                             | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
