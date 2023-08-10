@@ -44,7 +44,8 @@ instances:
 ```
 
 ## Monitoring relation metrics for multiple logical databases
-For Agent versions < 7.48, in order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database). This is also necessary in Agent 7.48 if some subset of relations needs to be monitored per database, instead of monitoring every relation on each database.
+For Agent versions < 7.48, in order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database). 
+This configuration is also necessary in Agent 7.48 to specify only certain relations for each database.
 
 Specify a single "DBM" instance to collect DBM telemetry from all databases. Additionally, specify all logical databases the Agent must connect to. It is important to only have `dbm: true` on one configuration instance per host in order to prevent duplication of metrics.
 ```yaml
