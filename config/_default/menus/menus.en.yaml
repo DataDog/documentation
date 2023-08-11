@@ -907,6 +907,11 @@ main:
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_explorer
     weight: 302
+  - name: Kubernetes Resource Utilization
+    url: infrastructure/containers/kubernetes_resource_utilization
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_resource_utilization
+    weight: 303
   - name: Processes View
     url: infrastructure/process/
     parent: infrastructure
@@ -1322,6 +1327,11 @@ main:
     parent: tracing
     identifier: tracing_trace_collection
     weight: 2
+  - name: Single Step APM Instrumentation
+    url: tracing/trace_collection/single-step-apm/
+    parent: tracing_trace_collection
+    identifier: single_step_apm
+    weight: 100
   - name: Instrumenting with Datadog Tracing Libraries
     url: tracing/trace_collection/dd_libraries/
     parent: tracing_trace_collection
@@ -1806,65 +1816,65 @@ main:
     url: tracing/trace_explorer/search/
     parent: trace_explorer
     identifier: span_search
-    weight: 501
+    weight: 601
   - name: Query Syntax
     url: tracing/trace_explorer/query_syntax/
     parent: trace_explorer
     identifier: span_query_syntax
-    weight: 502
+    weight: 602
   - name: Span Facets
     url: tracing/trace_explorer/facets/
     parent: trace_explorer
     identifier: span_facets
-    weight: 503
+    weight: 603
   - name: Span Visualizations
     url: tracing/trace_explorer/visualize/
     parent: trace_explorer
     identifier: visualize_spans
-    weight: 504
+    weight: 604
   - name: Trace View
     url: tracing/trace_explorer/trace_view/
     parent: trace_explorer
-    weight: 505
+    weight: 605
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 506
+    weight: 606
   - name: Service Observability
     url: tracing/services/
     parent: tracing
     identifier: tracing_services
-    weight: 7
+    weight: 8
   - name: Services List
     url: tracing/services/services_list/
     parent: tracing_services
     identifier: tracing_services_list
-    weight: 601
+    weight: 801
   - name: Service Page
     url: tracing/services/service_page/
     parent: tracing_services
     identifier: tracing_service_page
-    weight: 602
+    weight: 802
   - name: Resource Page
     url: tracing/services/resource_page/
     parent: tracing_services
     identifier: tracing_resource_page
-    weight: 603
+    weight: 803
   - name: Deployment Tracking
     url: tracing/services/deployment_tracking/
     parent: tracing_services
     identifier: tracing_deployment_tracking
-    weight: 604
+    weight: 804
   - name: Service Map
     url: tracing/services/services_map/
     parent: tracing_services
     identifier: tracing_service_map
-    weight: 605
+    weight: 805
   - name: APM Monitors
     url: /monitors/create/types/apm/
     parent: tracing_services
     identifier: tracing_apm_monitors
-    weight: 607
+    weight: 807
   - name: Service Catalog
     url: tracing/service_catalog/
     parent: tracing
@@ -1905,11 +1915,16 @@ main:
     parent: service_catalog
     identifier: service_catalog_guides
     weight: 907
+  - name: API Catalog
+    url: /tracing/api_catalog/
+    identifier: api_catalog
+    parent: tracing
+    weight: 10
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst
     parent: tracing
-    weight: 10
+    weight: 11
   - name: Enabling
     url: dynamic_instrumentation/enabling
     identifier: dyninst_enable
@@ -1939,7 +1954,7 @@ main:
     url: tracing/error_tracking/
     parent: tracing
     identifier: tracing_error_tracking
-    weight: 11
+    weight: 12
   - name: Error Tracking Explorer
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
@@ -1954,17 +1969,17 @@ main:
     url: tracing/configure_data_security/
     parent: tracing
     identifier: tracing_data_security
-    weight: 12
+    weight: 13
   - name: Guides
     url: tracing/guide/
     parent: tracing
     identifier: tracing_guides
-    weight: 13
+    weight: 14
   - name: Troubleshooting
     url: tracing/troubleshooting/
     parent: tracing
     identifier: tracing_troubleshooting
-    weight: 14
+    weight: 15
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
@@ -2551,54 +2566,59 @@ main:
     url: logs/log_collection/flutter/
     parent: log_collection
     weight: 104
+  - name: React Native
+    identifier: log_react_native
+    url: logs/log_collection/reactnative/
+    parent: log_collection
+    weight: 105
   - name: Roku
     identifier: log_roku
     url: logs/log_collection/roku/
     parent: log_collection
-    weight: 105
+    weight: 106
   - name: C#
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 108
+    weight: 109
   - name: NodeJS
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 109
+    weight: 110
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 110
+    weight: 111
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 111
+    weight: 112
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 112
+    weight: 113
   - name: OpenTelemetry
     url: opentelemetry/otel_logs/
     parent: log_collection
     identifier: log_collection_opentelemetry
-    weight: 113
+    weight: 114
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 114
+    weight: 115
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -2921,77 +2941,82 @@ main:
     identifier: csm
     weight: 181500
   - name: Threats
-    url: security/cloud_workload_security/
+    url: security/threats/
     parent: csm
     identifier: cloud_workload_security
     weight: 1
   - name: Setup
-    url: security/cloud_workload_security/setup
+    url: security/threats/setup
     parent: cloud_workload_security
     identifier: cws_setup
     weight: 201
   - name: Managing Detection Rules
-    url: security/cloud_workload_security/workload_security_rules
+    url: security/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
   - name: Security Profiles
-    url: security/cloud_workload_security/security_profiles
+    url: security/threats/security_profiles
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
     weight: 203
+  - name: Runtime Anomaly Detection
+    url: security/threats/runtime_anomaly_detection
+    parent: cloud_workload_security
+    identifier: cws_workload_anomaly_detection
+    weight: 204
   - name: Creating Custom Agent Rules
-    url: security/cloud_workload_security/agent_expressions
+    url: security/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 204
+    weight: 205
   - name: CWS Events Formats
-    url: security/cloud_workload_security/backend
+    url: security/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 205
+    weight: 206
   - name: Misconfigurations
-    url: security/cspm/
+    url: security/misconfigurations/
     parent: csm
     identifier: cspm
     weight: 5
   - name: Setup
-    url: security/cspm/setup
+    url: security/misconfigurations/setup
     parent: cspm
     identifier: cspm_setup
     weight: 101
   - name: Compliance Rules
-    url: security/cspm/compliance_rules
+    url: security/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 102
   - name: Custom Rules
-    url: security/cspm/custom_rules
+    url: security/misconfigurations/custom_rules
     parent: cspm
     identifier: custom_rules
     weight: 103
   - name: Cloud Resources Schema
-    url: security/cspm/custom_rules/schema/
+    url: security/misconfigurations/custom_rules/schema/
     parent: cspm
     identifier: cspm_schema_gcp_test
     weight: 104
   - name: Compliance Reports
-    url: security/cspm/frameworks_and_benchmarks
+    url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
   - name: Misconfigurations Explorer
-    url: /security/cspm/findings
+    url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 107
   - name: Signals Explorer
-    url: /security/cspm/signals_explorer/
+    url: /security/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
     weight: 108
   - name: Resource Catalog
-    url: /security/cspm/resource_catalog
+    url: /security/misconfigurations/resource_catalog
     parent: cspm
     identifier: resource_catalog
     weight: 109
@@ -3666,21 +3691,26 @@ main:
     parent: rum
     identifier: rum_session_replay
     weight: 6
-  - name: Privacy Options
+  - name: Mobile
+    url: real_user_monitoring/session_replay/mobile
+    parent: rum_session_replay
+    identifier: rum_session_replay_mobile
+    weight: 601
+  - name: Browser Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 601
-  - name: Developer Tools
+    weight: 602
+  - name: Browser Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 602
-  - name: Troubleshooting
+    weight: 603
+  - name: Browser Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 603
+    weight: 604
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
@@ -3856,21 +3886,26 @@ main:
     parent: npm
     identifier: npm_setup
     weight: 101
-  - name: Network Page
-    url: network_monitoring/performance/network_page/
+  - name: Overview Page
+    url: network_monitoring/performance/overview_page/
     parent: npm
-    identifier: npm_page
+    identifier: npm_overview_page
     weight: 102
+  - name: Network Analytics
+    url: network_monitoring/performance/network_analytics/
+    parent: npm
+    identifier: npm_analytics
+    weight: 103
   - name: Network Map
     url: network_monitoring/performance/network_map/
     parent: npm
     identifier: npm_map
-    weight: 103
+    weight: 104
   - name: Guides
     url: network_monitoring/performance/guide/
     identifier: npm_guides
     parent: npm
-    weight: 104
+    weight: 105
   - name: DNS Monitoring
     url: network_monitoring/dns/
     parent: nm_parent
@@ -8331,7 +8366,8 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
@@ -10215,6 +10251,18 @@ api:
     url: /api/latest/teams/
     identifier: teams
     generated: true
+  - name: Get user memberships
+    url: '#get-user-memberships'
+    identifier: teams-get-user-memberships
+    parent: teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUserMemberships
+      unstable: []
+      order: 1
   - name: Update permission setting for team
     url: '#update-permission-setting-for-team'
     identifier: teams-update-permission-setting-for-team

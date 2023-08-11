@@ -26,20 +26,19 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 
 {{% appsec-getstarted %}}
 - One of the [supported APM tracing integrations][1].
-- [CGO][2] is enabled in your build environment, along with the C library headers and the C toolchain for your compilation target. For detailed instructions, see [Enabling CGO][3]
 
 ## Get started
 
-1. **Update your program's dependencies** with the latest version of the Datadog Go library (version 1.36.0 or later):
+1. **Update your program's dependencies** with the latest version of the Datadog Go library (version 1.53.0 or later):
 
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][4].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 
-2. **Recompile your program** and enable ASM and CGO:
+2. **Recompile your program** and enable ASM:
    ```console
-   $ env CGO_ENABLED=1 go build -v -tags appsec my-program
+   $ go build -v -tags appsec my-program
    ```
 
 3. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
@@ -111,6 +110,4 @@ Update your application's ECS task definition JSON file, by adding this in the e
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/enabling/compatibility/go#supported-frameworks
-[2]: https://github.com/golang/go/wiki/cgo
-[3]: /security/application_security/enabling/compatibility/go#enabling-cgo
-[4]: /security/application_security/enabling/compatibility/go#compatibility
+[2]: /security/application_security/enabling/compatibility/go#compatibility

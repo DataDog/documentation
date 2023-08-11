@@ -40,7 +40,7 @@ Clicking anywhere on an alert overview card opens the alerts details pane.
 In addition to repeating the information in the alert overview card, the **Overview** tab may contain one or more of the following fields:
 - Expected Bounds: Click the **Show expected bounds** checkbox. The graph changes color to differentiate between expected and anomalous behavior.
 - Suggested Next Steps: Describes steps for investigation and triage of the anomalous behavior.
-- Correlated dashboards: Suggests some of your dashboards that are related to the alert. Datadog highlights which of the dashboard's metrics are related to the insights in the alert.
+- Related dashboards: Suggests some of your dashboards that are correlated to the alert. Datadog highlights which of the dashboard's metrics are related to the insights in the alert.
 
 The **Monitors** tab lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 

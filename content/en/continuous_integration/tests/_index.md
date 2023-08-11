@@ -47,43 +47,39 @@ cascade:
 
 ## Test suite level visibility
 
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project. 
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
 
 ### Compatibility
 
 Not every language supported by CI Visibility has support for test suite level visibility:
 
-* [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`.
-* [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
-* [JavaScript][13] has limited support since `dd-trace-js>=3.3.0`.
-* Java has complete support since `dd-trace-java>=1.12.0`.
-* [JUnit report uploads][14] has complete support since `datadog-ci>=2.17.0`.
-
-Additionally, test suite level visibility is only supported in Agentless mode.
+* [Swift][2] has complete support since `dd-sdk-swift-testing>=2.1.0`.
+* [.NET][3] has complete support since `dd-trace-dotnet>2.16.0`.
+* [JavaScript][4] has limited support since `dd-trace-js>=3.3.0`.
+* [Java][5] has complete support since `dd-trace-java>=1.12.0`.
+* [JUnit report uploads][6] has complete support since `datadog-ci>=2.17.0`.
+* [Python][7] has complete support since `dd-trace-py>=1.14.0`
 
 ## Use CI tests data
 
-When creating a [dashboard][15] or a [notebook][16], you can use test execution data in your search query, which updates the visualization widget options.
+When creating a [dashboard][8] or a [notebook][9], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][17]. 
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][10], click **Create Monitor** to create a [CI Test monitor][11].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/test-services?view=branches
-[3]: https://app.datadoghq.com/ci/test-services?view=default-branches
-[4]: https://app.datadoghq.com/ci/test-runs
-[5]: https://www.datadoghq.com/auto-instrumentation/
-[6]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
-[7]: /tracing/
-[11]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[12]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[13]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[14]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
-[15]: https://app.datadoghq.com/dashboard/lists
-[16]: https://app.datadoghq.com/notebook/list
-[17]: /monitors/types/ci/
+[2]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
+[3]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
+[4]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
+[5]: /continuous_integration/tests/java/#compatibility
+[6]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
+[7]: /continuous_integration/tests/python/#compatibility
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: https://app.datadoghq.com/ci/test-runs
+[11]: /monitors/types/ci/

@@ -29,10 +29,6 @@ algolia:
   tags: ['service catalog']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Service Catalog is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
 ## Overview
@@ -132,7 +128,9 @@ Clicking on a service opens a side panel with details including:
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.
+- **Beta: Active library configuration** for Java and .NET services with the latest Agent configured with [Remote Configuration][16] enabled, you can adjust the [trace sampling rate][18] (from 0.0 to 1.0), enable [Log Injection][17] to correlate traces and logs data, and specify HTTP header tags to be applied to all traces coming into Datadog from this service. In the Setup Guidance tab, beside **Active Library Configuration**, click **Edit** to change these settings and immediately apply them without restarting the service.
 
+  {{< img src="tracing/service_catalog/service_details_remote_config.png" alt="Configuration options for the service in the Datadog UI" style="width:80%;" >}}
 
 Click **View Related** and select a page from the dropdown menu to navigate into related pages in Datadog, such as the APM Service page and service map for this service, or related telemetry data pages, such as Distributed Tracing, Infrastructure, Network Performance, Log Management, RUM, and Continuous Profiler.
 
@@ -175,3 +173,6 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [13]: /tracing/metrics/metrics_namespace/
 [14]: /tracing/guide/configuring-primary-operation/
 [15]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics
+[16]: /agent/remote_config/
+[17]: /tracing/other_telemetry/connect_logs_and_traces/
+[18]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
