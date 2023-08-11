@@ -165,14 +165,10 @@ agents:
 {{% tab "Hosts" %}}
 
 ```yaml
-agents:
-  containers:
-    agent:
-      env:
-        - name: DD_SBOM_ENABLED
-          value: "true"
-        - name: DD_SBOM_HOST_ENABLED
-          value: "true"
+sbom:
+  enabled: true
+  host:
+    enabled: true
 ```
 
 {{% /tab %}}
@@ -180,8 +176,8 @@ agents:
 {{< /tabs >}}
 
 [1]: /security/cloud_security_management
-[2]: /security/cloud_workload_security/
-[3]: /security/cspm/
+[2]: /security/threats/
+[3]: /security/misconfigurations/
 [4]: /agent/
 [5]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [6]: /containers/kubernetes/installation/?tab=helm
