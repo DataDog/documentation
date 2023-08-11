@@ -46,7 +46,7 @@ To install the GitHub integration, navigate to the [integration tile][7] and cli
 
 ### Service definition YAML files
 
-Datadog scans for the `service.datadog.yaml` file at the root of each repository with read permissions. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
+Datadog scans for `service.datadog.yaml` files anywhere within each repository with read permissions. You can register multiple services by creating multiple `service.datadog.yaml` files or in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
 
 ### Modify service definition
 
