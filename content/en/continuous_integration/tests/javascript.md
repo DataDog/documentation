@@ -406,6 +406,8 @@ The following is a list of the most important configuration settings that can be
 
 All other [Datadog Tracer configuration][8] options can also be used.
 
+## Collecting Git metadata
+
 {{% ci-git-metadata %}}
 
 ## Git metadata upload

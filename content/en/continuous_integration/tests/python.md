@@ -128,6 +128,8 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][6] options can also be used.
 
+## Collecting Git metadata
+
 {{% ci-git-metadata %}}
 
 {{% ci-information-collected %}}
