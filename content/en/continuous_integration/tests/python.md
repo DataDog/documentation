@@ -76,7 +76,7 @@ DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 
 ### Using pytest-benchmark
 
-To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest` and Datadog detects metrics from `pytest-benchmark` automatically:
+To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest`, and Datadog detects metrics from `pytest-benchmark` automatically:
 
 ```python
 def square_value(value):
