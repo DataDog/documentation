@@ -10,11 +10,25 @@
             {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
-            {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
             {{ $category := $page.Params.algolia.category | default "Documentation" }}
             {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
             {{ $rank := $page.Params.algolia.rank | default 70 }}
+
+            {{/* Filtering out "Further Reading" sections from full page records */}}
+            {{/* replaceRE + split in the absence of native splitRE function */}}
+            {{ $split_content_on_level_two_headers := replaceRE "<h2.*?id=\".*?\".*?>" "REPLACEME" $page.Content }}
+            {{ $split_content_array := split $split_content_on_level_two_headers "REPLACEME" }}
+            {{ $filtered_content_array := slice }}
+
+            {{ range $split_content_array }}
+                {{ if not (in . "Further Reading") }}
+                    {{ $filtered_content_array = $filtered_content_array | append . }}
+                {{ end }}
+            {{ end }}
+
+            {{ $filtered_full_page_content := delimit $filtered_content_array " " }}
+            {{ $filtered_full_page_content = $filtered_full_page_content | plainify | htmlUnescape | safeHTML | truncate 10000}}
 
             {{- /* record for each individual section (split by h2 header) */ -}}
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
@@ -23,7 +37,7 @@
             {{ $record := (
                 dict "objectID" $object_id
                 "title" $title
-                "content" $content
+                "content" $filtered_full_page_content
                 "type" $page.Type
                 "relpermalink" $page.RelPermalink
                 "full_url" $page.Permalink
