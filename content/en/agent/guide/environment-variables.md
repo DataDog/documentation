@@ -58,7 +58,7 @@ In general, use the following rules:
 
 **Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
 
-### Exceptions
+## Exceptions
 
 - Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
 
@@ -67,7 +67,7 @@ In general, use the following rules:
   - **APM Trace Agent**
 
       - [Docker APM Agent Environment Variables][5]
-      - [trace-agent env.go][6]
+      - [trace-agent config/apm.go][6]
       - example
 
           ```yaml
@@ -80,7 +80,7 @@ In general, use the following rules:
 
   - **Live Process Agent**
 
-      - [process-agent config.go][7]
+      - [process-agent config/config.go][7]
       - example
 
           ```yaml
@@ -91,6 +91,21 @@ In general, use the following rules:
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
 
+## Using environment variables in systemd units
+
+In Operating Systems that uses SystemD to manage services, environment variables - global (e.g. `/etc/environment`) or session-based (e.g. `export VAR=value`) - are not generally made available to services unless configured to do so. See [SystemD Exec man page][8] for more details.
+
+From Datadog Agent 7.45,the Datadog Agent service (`datadog-agent.service` unit) can optionally load environment variables assignments from a file (`<ETC_DIR>/environment`).
+
+- Create `/etc/datadog-agent/environment` if it does not exist.
+- Define newline-separated environment variable assignments. Example:
+  ```
+  GODEBUG=x509ignoreCN=0,x509sha1=1
+  DD_HOSTNAME=myhost.local
+  DD_TAGS=env:dev service:foo
+  ```
+- Restart the service for changes to take effect
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,7 +113,8 @@ In general, use the following rules:
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
 [5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env_test.go
-[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go
+[8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment
