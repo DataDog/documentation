@@ -26,22 +26,22 @@ Android RUM は、ユーザーアクティビティ、画面、エラー、ネ�
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onResume() {
-         GlobalRum.get().startView(viewKey, viewName, viewAttributes)
+         GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
        }
 
        fun onPause() {
-         GlobalRum.get().stopView(viewKey, viewAttributes)
+         GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onResume() {
-            GlobalRum.get().startView(viewKey, viewName, viewAttributes);
+            GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
        }
 
        public void onPause() {
-            GlobalRum.get().stopView(viewKey, viewAttributes);
+            GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
        }
    ```
 {{% /tab %}}
@@ -54,14 +54,14 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% tab "Kotlin" %}}
    ```kotlin
       fun onHeroImageLoaded() {
-            GlobalRum.get().addTiming("hero_image")
+            GlobalRumMonitor.get().addTiming("hero_image")
       } 
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onHeroImageLoaded() {
-            GlobalRum.get().addTiming("hero_image");
+            GlobalRumMonitor.get().addTiming("hero_image");
        }
    ```
 {{% /tab %}}
@@ -71,7 +71,7 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 
 ### カスタムアクション
 
-[アクションを自動追跡する][5]ほかに、`RumMonitor#addUserAction` で特定のカスタムユーザーアクション（タップ、クリック、スクロールなど）を追跡することも可能です。継続的なアクションの追跡（リストをスクロールするユーザーの追跡）には、`RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を使用します。
+[アクションを自動追跡する][5]ほかに、`RumMonitor#addAction` で特定のカスタムユーザーアクション (タップ、クリック、スクロールなど) を追跡することも可能です。継続的なアクションの追跡 (リストをスクロールするユーザーの追跡) には、`RumMonitor#startAction` および `RumMonitor#stopAction` を使用します。
 
 アクションタイプは、"カスタム"、"クリック"、"タップ"、"スクロール"、"スワイプ"、"戻る" のいずれかを指定する必要があることに注意してください。
 
@@ -79,14 +79,14 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onUserInteraction() { 
-            GlobalRum.get().addUserAction(actionType, name, actionAttributes)
+            GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onUserInteraction() {
-            GlobalRum.get().addUserAction(actionType, name, actionAttributes);
+            GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
        }
    ```
 {{% /tab %}}
@@ -105,7 +105,7 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
         response: Response?,
         throwable: Throwable?
     ): Map<String, Any?> {
-        val headers = request.headers()
+        val headers = request.headers
         return headers.names().associate {
             "headers.${it.lowercase(Locale.US)}" to headers.values(it).first()
         }
@@ -115,7 +115,6 @@ class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-
 public class CustomRumResourceAttributesProvider implements RumResourceAttributesProvider {
     @NonNull
     @Override
@@ -147,12 +146,12 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 {{% tab "Kotlin" %}}
    ```kotlin
        fun loadResource() {
-            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes)
+            GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
             try {
               // リソースをロードします
-              GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes)
+              GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
             } catch (e: Exception) {
-              GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e)
+              GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
             } 
        }
    ```
@@ -160,12 +159,12 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 {{% tab "Java" %}}
    ```java
        public void loadResource() {
-            GlobalRum.get().startResource(resourceKey, method, url, resourceAttributes);
+            GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
             try {
                 // リソースをロードします
-                GlobalRum.get().stopResource(resourceKey, resourceKind, additionalAttributes);
+                GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
             } catch (Exception e) {
-                GlobalRum.get().stopResourceWithError(resourceKey, message, origin, e);
+                GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
             }
        }
    ```
@@ -176,11 +175,9 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 特定のエラーを追跡するには、エラーが発生したときにメッセージ、ソース、例外、追加属性でモニターに通知します。[エラー属性ドキュメント][9]をご参照ください。
 
-
    ```kotlin
-      GlobalRum.get().addError(message, source, throwable, attributes)
+      GlobalRumMonitor.get().addError(message, source, throwable, attributes)
    ```
-
 
 ## カスタムグローバル属性の追跡
 
@@ -203,7 +200,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 | usr.name  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
 | usr.email | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
 
-ユーザーセッションを識別するには、`setUser` API を使用します。例:
+ユーザーセッションを識別するには、`setUserInfo` API を使用します。例:
 
 ```kotlin
 Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
@@ -211,13 +208,13 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ### 属性の追跡
 
-   ```kotlin
-      // 今後のすべての RUM イベントに属性を追加
-      GlobalRum.addAttribute(key, value)
+```kotlin
+    // 今後のすべての RUM イベントに属性を追加
+    GlobalRumMonitor.addAttribute(key, value)
 
-      // 今後のすべての RUM イベントから属性を削除
-      GlobalRum.removeAttribute(key)
-   ```
+    // 今後のすべての RUM イベントから属性を削除
+    GlobalRumMonitor.removeAttribute(key)
+```
 
 ## ウィジェットの追跡
 
@@ -228,49 +225,42 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`Configuration.Builder` で以下のメソッドを使用できます。
 
-`trackInteractions(Array<ViewAttributesProvider>)` 
+`setFirstPartyHosts()` 
+: トレースが有効で、`first-party` のカテゴリーに入る RUM リソースを持つホストを定義します。
+
+`useSite(DatadogSite)` 
+: ターゲットデータを EU1、US1、US3、US5、US1_FED、および AP1 のサイトに切り替えます。
+
+RUM を有効にするよう RUM 構成を作成する際、`RumConfiguration.Builder` で以下のメソッドを使用できます。
+
+`trackUserInteractions(Array<ViewAttributesProvider>)` 
 : ユーザーインタラクション (タップ、スクロール、スワイプなど) の追跡を有効にします。このパラメーターを使用すると、ユーザーが操作したウィジェットに基づいて、カスタム属性を RUM アクションイベントに追加できます。
 
 `useViewTrackingStrategy(strategy)` 
 : ビューの追跡に使用される戦略を定義します。ご使用のアプリケーションのアーキテクチャにより、[`ViewTrackingStrategy`][4] の実装から 1 つを選択するか、独自のものを実装します。
 
-`addPlugin(DatadogPlugin, Feature)`
-: 特定の機能 (`CRASH`、`LOG`、`TRACE`、または `RUM`) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。
-
 `trackLongTasks(durationThreshold)` 
 : メインスレッドで `durationThreshold` より時間がかかっているタスクを Datadog でロングタスクとして追跡できます。
-
-`setFirstPartyHosts()` 
-: トレースが有効で、`first-party` のカテゴリーに入る RUM リソースを持つホストを定義します。
-
-`useEUEndpoints()` 
-: ターゲットデータを EU エンドポイントに変更します。
-
-`useUSEndpoints()` 
-: ターゲットデータを US エンドポイントに変更します。
-
-`useGovEndpoints()` 
-: ターゲットデータを US1-FED エンドポイントに変更します。
 
 `setBatchSize([SMALL|MEDIUM|LARGE])` 
 : Datadog に送信されるリクエストの個別のバッチサイズを定義します。
 
 `setUploadFrequency([FREQUENT|AVERAGE|RARE])` 
-: Datadog エンドポイントに対し作成されたリクエストの頻度を定義します（リクエストがある場合）。
+: Datadog エンドポイントに対し作成されたリクエストの頻度を定義します (リクエストがある場合)。
 
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])` 
 : モバイルバイタルを収集するための好ましい頻度を設定します。
 
-`sampleRumSessions(<samplingRate>)` 
-: RUM セッションのサンプリングレートを設定します（0 の値は RUM イベントの送信がなかったことを示し、100 の値はすべてのセッションが維持されたことを示します）。
+`setSessionSampleRate(<sampleRate>)` 
+: RUM セッションのサンプルレートを設定します (0 の値は RUM イベントが送信されないことを意味し、100 の値はすべてのセッションが保持されることを意味します)。
 
-`setRumXxxEventMapper()` 
+`setXxxEventMapper()` 
 : ビュー、アクション、リソース、エラーのデータスクラビングコールバックを設定します。
 
 
 ### ビューの自動追跡
 
-ビュー（アクティビティやフラグメントなど）を自動追跡するには、初期化時に追跡ストラテジーを提供する必要があります。ご使用のアプリケーションのアーキテクチャにより、以下のストラテジーから 1 つ選択します。
+ビュー (アクティビティやフラグメントなど) を自動追跡するには、初期化時に追跡ストラテジーを提供する必要があります。ご使用のアプリケーションのアーキテクチャにより、以下のストラテジーから 1 つ選択します。
 
 `ActivityViewTrackingStrategy`
 : アプリケーションの各アクティビティが個別のビューとみなされます。
@@ -282,22 +272,22 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 : すべてのアクティビティまたはフラグメントが個別のビューとみなされます。
 
 `NavigationViewTrackingStrategy`
-: Android Jetpack Navigation ライブラリのユーザーに推奨。各ナビゲーション先が個別のビューとしみなされます。
+: Android Jetpack Navigation ライブラリのユーザーに推奨。各ナビゲーション先が個別のビューとみなされます。
 
 
-たとえば、各フラグメントを個別のビューとして設定するには、[セットアップ][1]で以下のコンフィギュレーションを使用します。
+たとえば、各フラグメントを個別のビューとして設定するには、[セットアップ][1]で以下の構成を使用します。
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val configuration = Configuration.Builder(true, true, true, true)
+       val rumConfig = RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(FragmentViewTrackingStrategy(...))
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       final Configuration configuration = new Configuration.Builder(true, true, true, true)
+       RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(new FragmentViewTrackingStrategy(...))
         .build();
    ```
@@ -310,7 +300,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val configuration = Configuration.Builder(true, true, true, true)
+       val rumConfig = RumConfiguration.Builder(applicationId)
         .useViewTrackingStrategy(
         ActivityViewTrackingStrategy(
             trackExtras = true,
@@ -327,7 +317,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-        Configuration configuration = new Configuration.Builder(true, true, true, true)
+        RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
             .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
                 true,
                 new ComponentPredicate<Activity>() {
@@ -353,7 +343,17 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ### ネットワークリクエストの自動追跡
 
-リソース（サードパーティプロバイダー、ネットワークリクエストなど）で、最初の 1 バイトまで、またはDNS 解決などのタイミング情報を取得するには、`okHttpClient` をカスタマイズして[EventListener][8] ファクトリを追加します。
+リソース (サードパーティプロバイダー、ネットワークリクエストなど) で、最初の 1 バイトまで、または DNS 解決などのタイミング情報を取得するには、`OkHttpClient` をカスタマイズして [EventListener][8] ファクトリーを追加します。
+
+1. モジュールレベルの `build.gradle` ファイルで、`dd-sdk-android-okhttp` ライブラリに Gradle 依存関係を追加します。
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+2. [EventListener][8] ファクトリーの追加
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -366,7 +366,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
-       final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+       OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(new DatadogInterceptor())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
@@ -381,7 +381,8 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val config = Configuration.Builder(true, true, true, true)
+       val rumConfig = RumConfiguration.Builder(applicationId)
+        // ...
         .trackLongTasks(durationThreshold)
         .build()
    ```
@@ -389,7 +390,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 たとえば、デフォルトの `100 ms` の実行時間を置換するため、コンフィギュレーションでカスタム閾値を設定します。
 
    ```kotlin
-      val configuration = Configuration.Builder(...)
+      val rumConfig = RumConfiguration.Builder(applicationId)
         // ...
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build()
@@ -397,7 +398,8 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{% /tab %}}
 {{% tab "Java" %}}
   ```java
-      Configuration configuration = new Configuration.Builder(true, true, true, true)
+      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+        // ...
         .trackLongTasks(durationThreshold)
         .build();
    ```
@@ -405,7 +407,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 たとえば、デフォルトの `100 ms` の実行時間を置換するため、コンフィギュレーションでカスタム閾値を設定します。
 
    ```java
-      Configuration configuration = new Configuration.Builder(...)
+      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
         // ...
         .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
         .build();
@@ -421,25 +423,25 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
-       val config = Configuration.Builder(true, true, true, true)
-        ...
-        .setRumErrorEventMapper(rumErrorEventMapper)
-        .setRumActionEventMapper(rumActionEventMapper)
-        .setRumResourceEventMapper(rumResourceEventMapper)
-        .setRumViewEventMapper(rumViewEventMapper)
-        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+       val rumConfig = RumConfiguration.Builder(applicationId)
+        // ...
+        .setErrorEventMapper(rumErrorEventMapper)
+        .setActionEventMapper(rumActionEventMapper)
+        .setResourceEventMapper(rumResourceEventMapper)
+        .setViewEventMapper(rumViewEventMapper)
+        .setLongTaskEventMapper(rumLongTaskEventMapper)
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
   ```java
-      Configuration config = new Configuration.Builder(true, true, true, true)
-        ...
-        .setRumErrorEventMapper(rumErrorEventMapper)
-        .setRumActionEventMapper(rumActionEventMapper)
-        .setRumResourceEventMapper(rumResourceEventMapper)
-        .setRumViewEventMapper(rumViewEventMapper)
-        .setRumLongTaskEventMapper(rumLongTaskEventMapper)
+      RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+        // ...
+        .setErrorEventMapper(rumErrorEventMapper)
+        .setActionEventMapper(rumActionEventMapper)
+        .setResourceEventMapper(rumResourceEventMapper)
+        .setViewEventMapper(rumViewEventMapper)
+        .setLongTaskEventMapper(rumLongTaskEventMapper)
         .build();
 
    ```
@@ -479,14 +481,14 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ## RUM セッションのサンプリング
 
-アプリケーションが Datadog RUM に送信するデータを制御するには、[RumMonitor を初期化][2]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。
+アプリケーションが Datadog RUM に送信するデータを制御するには、[RUM 機能を初期化][2]し、RUM セッションのサンプルレートを 0～100 パーセントの間で指定します。
 
 ```kotlin
-val monitor = RumMonitor.Builder()
+val rumConfig = RumConfiguration.Builder(applicationId)
         // ここでは RUM セッションの 75% を Datadog へ送信
-        .sampleRumSessions(75.0f)
+        .setSessionSampleRate(75.0f)
         .build()
-GlobalRum.registerIfAbsent(monitor)
+Rum.enable(rumConfig)
 ```
 
 ## その他の参考資料

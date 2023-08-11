@@ -175,7 +175,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
   internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
     override fun track(exposure: Exposure) {
         // Send the feature flag when Amplitude reports the exposure
-        GlobalRum.get().addFeatureFlagEvaluation(
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
             exposure.flagKey,
             exposure.variant.orEmpty()
         )
@@ -226,7 +226,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```kotlin
-   GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -472,7 +472,7 @@ For more information about initializing Split's SDK, see Split's [Android SDK do
   internal class DatadogSplitImpressionListener : ImpressionListener {
     override fun log(impression: Impression) {
         // Send the feature flag when Split reports the impression
-        GlobalRum.get().addFeatureFlagEvaluation(
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
             impression.split(),
             impression.treatment()
         )

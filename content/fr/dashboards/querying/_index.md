@@ -26,7 +26,7 @@ Depuis les widgets, ouvrez l'éditeur de graphiques en cliquant sur l'icône en 
 
 Lorsque vous ouvrez l'éditeur de graphiques pour la première fois, vous accédez à l'onglet **Edit**. De là, vous pouvez utiliser l'interface pour définir la plupart des paramètres. Voici un exemple :
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit des graphiques" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Onglet Edit d'un graphique" style="width:100%;" >}}
 
 ## Configuration d'un graphique
 
@@ -48,7 +48,7 @@ Sélectionnez votre visualisation à partir des [widgets][3] disponibles.
 
 Choisissez la métrique à représenter en la recherchant ou en la sélectionnant dans la liste déroulante à côté de **Metric**. Si vous ne savez pas quelle métrique utiliser, la liste déroulante de métriques fournit des informations supplémentaires, y compris `unit`, `type`, `interval`, `description`, `tags` et le nombre de `tag values`. 
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Liste déroulante de sélection de métriques" responsive="true" style="width:100%;">}}
 
 Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou un [Notebook][5], ou consultez la liste des métriques sur la page [Metrics Summary][6].
 
@@ -56,11 +56,10 @@ Explorez vos métriques plus en détail depuis la page [Metrics Explorer][4] ou 
 
 La métrique choisie peut être filtrée en fonction d'un host ou d'un tag à l'aide du menu déroulant **from** à droite de la métrique. Le filtre par défaut est *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Filtre sur un graphique" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="Filtrer le graphique avec le champ 'from', à l'aide de template variables et d'une logique booléenne" style="width:100%;" >}}
 
-Vous pouvez également utiliser le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards, comme suit :
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="Création d'un graphique avec filtres booléens" style="width:75%;" >}} 
+- Utilisez le [filtrage avancé][7] dans le menu déroulant `from` pour évaluer les requêtes avec des filtres basés sur un opérateur booléen ou des wildcards.
+- Filtrez de façon dynamique des requêtes grâce aux template variables. Ajoutez le caractère `$` devant la clé d'un tag pour filtrer automatiquement le graphique en fonction du tag sélectionné dans la liste déroulante des template variables. Pour en savoir plus, consultez la section [Template variables][16].
 
 Pour en savoir plus sur les tags, consultez la [documentation relative au tagging][8].
 
@@ -231,7 +230,8 @@ Les graphiques partagés vous permettent de visualiser des représentations d'un
 [9]: /fr/metrics/#time-aggregation
 [10]: /fr/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /fr/dashboards/functions/rollup/
-[12]: /fr/dashboards/functions/#apply-functions-optional
+[12]: /fr/dashboards/functions/#function-types
 [13]: /fr/metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /fr/logs/explorer/search_syntax/
 [15]: /fr/dashboards/widgets/timeseries/#event-overlay
+[16]: /fr/dashboards/template_variables/

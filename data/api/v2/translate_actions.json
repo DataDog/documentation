@@ -100,23 +100,23 @@
     "request_schema_description": "Request to update an AuthN Mapping."
   },
   "CreateCIAppPipelineEvent": {
-    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThis API endpoint is in private beta.",
+    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
     "request_description": "",
     "request_schema_description": "Request object."
   },
   "AggregateCIAppPipelineEvents": {
-    "description": "The API endpoint to aggregate CI Visibility pipeline events into buckets of computed metrics and timeseries.",
+    "description": "Use this API endpoint to aggregate CI Visibility pipeline events into buckets of computed metrics and timeseries.",
     "summary": "Aggregate pipelines events",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of pipeline events from your organization."
   },
   "ListCIAppPipelineEvents": {
-    "description": "List endpoint returns CI Visibility pipeline events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest pipeline events.",
+    "description": "List endpoint returns CI Visibility pipeline events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest pipeline events.",
     "summary": "Get a list of pipelines events"
   },
   "SearchCIAppPipelineEvents": {
-    "description": "List endpoint returns CI Visibility pipeline events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "description": "List endpoint returns CI Visibility pipeline events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search pipelines events",
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
@@ -1299,5 +1299,9 @@
   "ListUserPermissions": {
     "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
     "summary": "Get a user permissions"
+  },
+  "GetUserMemberships": {
+    "description": "Get a list of memberships for a user",
+    "summary": "Get user memberships"
   }
 }
