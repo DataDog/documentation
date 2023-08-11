@@ -1543,7 +1543,7 @@ A list of request origins ignored when computing the page activity. See [How pag
 `workerUrl`
 : Optional<br/>
 **Type**: String<br/>
-URL pointing to the Datadog Browser SDK Worker JavaScript file. It can be either relative or absolute but is required to have the same origin as the Web application. See [Content Security Policy guidelines][22] for more information.
+URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 

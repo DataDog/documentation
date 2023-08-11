@@ -182,17 +182,15 @@ If you are using Session Replay, make sure to allow workers with `blob:` URI sch
 worker-src blob:;
 ```
 
-Alternatively, starting from [version 4.46.0][8], you can self-host the Datadog Browser SDK Worker JavaScript file and provide the `workerUrl` option to initialize the [RUM Browser SDK][8]. To do so, you can either:
+Alternatively, starting from [version 4.46.0][8], you can self-host the Datadog Browser SDK Worker JavaScript file and provide the `workerUrl` option to initialize the [RUM Browser SDK][8] by doing one of the following:
 
-* download it from https://unpkg.com/@datadog/browser-worker, and store it alongside your Web application assets;
-
-* or install the [`@datadog/browser-worker` NPM package][9] and use your build tool to include it in the built assets (see documentation for [Webpack 4][10], [Webpack 5][11], [Vite][12], [Rollup][13]).
+* Download it from https://unpkg.com/@datadog/browser-worker, and store it alongside your Web application assets.
+* Install the [`@datadog/browser-worker` NPM package][9] and use your build tool to include it in the built assets (see documentation for [Webpack 4][10], [Webpack 5][11], [Vite][12], and [Rollup][13]).
 
 Requirements:
 
 * Make sure the Worker major version matches the Browser SDK version you are using.
-
-* Host this file on the *same origin* as your Web application. It cannot be hosted on a separate domain (ex: no third party CDN host) or a different scheme. This is a browser restriction (see [MDN documentation][14]: "This script must obey the same-origin policy").
+* Host the file on the same origin as your web application. Due to [browser restrictions][14], it cannot be hosted on a separate domain (for example, a third-party CDN host) or a different scheme.
 
 ### CDN bundle URL
 
