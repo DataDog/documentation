@@ -58,7 +58,7 @@ In general, use the following rules:
 
 **Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
 
-## Exceptions
+### Exceptions
 
 - Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
 
@@ -80,7 +80,7 @@ In general, use the following rules:
 
   - **Live Process Agent**
 
-      - [process-agent config/config.go][7]
+      - [process-agent config/process.go][7]
       - example
 
           ```yaml
