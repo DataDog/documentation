@@ -19549,6 +19549,7 @@ components:
     WidgetComparator:
       description: Comparator to apply.
       enum:
+      - '='
       - '>'
       - '>='
       - <
@@ -19556,6 +19557,7 @@ components:
       example: '>'
       type: string
       x-enum-varnames:
+      - EQUAL_TO
       - GREATER_THAN
       - GREATER_THAN_OR_EQUAL_TO
       - LESS_THAN
