@@ -1561,7 +1561,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
 * Compile against dd-opentracing-cpp, where the Datadog lib is compiled in and configured in code
 * Dynamic loading, where the Datadog OpenTracing library is loaded at runtime and configured via JSON
 
-##### Compile against dd-opentracing-cpp
+#### Compile against dd-opentracing-cpp
 
 ```bash
 # Requires the "jq" command, which can be installed via
@@ -1621,7 +1621,7 @@ g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentraci
 ./tracer_example
 ```
 
-##### Dynamic loading
+#### Dynamic loading
 
 ```bash
 get_latest_release() {
@@ -1767,7 +1767,7 @@ For information about the different methods for setting environment variables, s
 
 #### Windows
 
-#### Internet Information Services (IIS)
+##### Internet Information Services (IIS)
 
 1. The .NET Tracer MSI installer adds all required environment variables. There are no environment variables you need to configure.
 
@@ -1788,7 +1788,7 @@ For information about the different methods for setting environment variables, s
    </div>
 
 
-#### Services not in IIS
+##### Services not in IIS
 
 <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
 
@@ -1869,11 +1869,9 @@ To attach automatic instrumentation to your service, you must set the required e
 
 ##### Windows
 
-###### Windows services
-
 <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> if you installed the tracer using the MSI.</div>
 
-##### Registry Editor
+###### Registry Editor
 
 In the Registry Editor, create a multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` key and set the value data to:
 
@@ -1884,14 +1882,14 @@ CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
 
-##### PowerShell
+###### PowerShell
 
 ```powershell
 [string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 
-##### IIS
+###### IIS
 
 After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. To set additional environment variables that are inherited by all IIS sites, perform the following steps:
 
@@ -1909,7 +1907,7 @@ After installing the MSI, no additional configuration is needed to automatically
 
 {{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Using the Registry Editor to create environment variables for all IIS sites" >}}
 
-#### Console applications
+###### Console applications
 
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
 
@@ -2218,42 +2216,6 @@ dotnet.exe example.dll
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][2].
 
 ### Option 2 - Inject the library locally at the Agent
-
-{{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,php,cpp,dotnet-core,dotnet-framework" >}}
-{{< programming-lang lang="java" >}}
-
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it can modify class files at load time.
-
-**Note:** Classes loaded with remote ClassLoader are not instrumented automatically.
-
-Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mixture of both. Instrumentation generally captures the following info:
-
-- Timing duration is captured using the JVM's NanoTime clock unless a timestamp is provided from the OpenTracing API
-- Key/value tag pairs
-- Errors and stack traces which are unhandled by the application
-- A total count of traces (requests) flowing through the system
-
-[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="go" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="nodejs" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="php" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="cpp" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet-core" >}}
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet-framework" >}}
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
 
 For Kubernetes, hosts, and containers, you can inject the tracing library locally at the Agent without modifying your application code. For more information and instructions, read [Injecting Libraries Locally][4].
 
