@@ -880,6 +880,9 @@ components:
             customAttribute: 123
             duration: 2345
           type: object
+        message:
+          description: Message of the event.
+          type: string
         service:
           description: 'Name of the application or service generating Audit Logs events.
 
@@ -3623,6 +3626,15 @@ components:
           maximum: 5
           readOnly: true
           type: integer
+        tags:
+          description: List of team names representing ownership of a dashboard.
+          items:
+            description: The name of a Datadog team, formatted as `team:<name>`
+            type: string
+          maxItems: 5
+          nullable: true
+          readOnly: true
+          type: array
         title:
           description: Title of the dashboard.
           readOnly: true
@@ -29626,6 +29638,43 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-undo:
+        type: safe
+  /api/v2/users/{user_uuid}/memberships:
+    get:
+      description: Get a list of memberships for a user
+      operationId: GetUserMemberships
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTeamsResponse'
+          description: Represents a user's association to a team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get user memberships
+      tags:
+      - Teams
+      x-menu-order: 1
       x-undo:
         type: safe
 security:

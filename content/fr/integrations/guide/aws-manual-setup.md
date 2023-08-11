@@ -82,7 +82,7 @@ Créez un rôle IAM pour que Datadog puisse utiliser les autorisations définies
 Assurez-vous de laisser l'option `Require MFA` désactivée. Pour en savoir plus, consultez la section [Procédure d'utilisation d'un ID externe lorsque vous accordez l'accès à vos ressources AWS à un tiers][2] de la documentation AWS.
 12. Cliquez sur **Next**.
 13. Si vous avez déjà créé la stratégie, retrouvez-la sur cette page et sélectionnez-la. Sinon, cliquez sur **Create Policy**, qui s'ouvre dans une nouvelle fenêtre, et suivez les instructions de la section précédente.
-14. Si vous le souhaitez, vous pouvez ajouter la <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">stratégie AWS SecurityAudit</a> au rôle pour utiliser la solution [Cloud Security Posture Management product][5] (CSPM) de Datadog.
+14. Si vous le souhaitez, associez la <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">stratégie SecurityAudit AWS</a> au rôle pour tirer profit de la solution [Cloud Security Management Misconfigurations][5].
 15. Cliquez sur **Next**.
 16. Saisissez le nom `DatadogIntegrationRole` ou un nom similaire pour le rôle, ainsi qu'une description pertinente.
 17. Cliquez sur **Create Role**.

@@ -30,31 +30,25 @@ Real User Monitoring により、Android と Android TV のハイブリッドア
 
 ### 既存の SDK のセットアップを更新する
 
-1. RUM Android SDK の[最新バージョン][2]をダウンロードします。
-2. [RUM Android Monitoring][3] から既存の Android SDK の設定を編集します。
-3. 以下の例で、Web ビューの追跡を追加します。
+1. Web ページからの RUM イベントを転送したい場合は、RUM Android SDK の[最新バージョン][2]をダウンロードし、[専用ガイド][3]に従って RUM 機能をセットアップしてください。
+2. Web ページからのログイベントを転送したい場合は、Logs Android SDK の[最新バージョン][4]をダウンロードし、[専用ガイド][5]に従ってログ機能をセットアップしてください。
+3. モジュールレベルの `build.gradle` ファイルで `dd-sdk-android-webview` ライブラリを依存関係として宣言し、Gradle 依存関係を追加します。
 
-   ```
-            val configuration = Configuration.Builder(
-                    rumEnabled = true
-                )
-               .useSite()
-               .trackInteractions()
-               .setWebViewTrackingHosts(hosts)
-               .trackLongTasks(durationThreshold)
-               .useViewTrackingStrategy(strategy)
-               .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-webview:x.x.x"
     }
-   ```
+    ```
 
-4. RUM Android SDK を初期化する際に、コンフィギュレーションファイルの `DatadogEventBridge.setup(webView)` を用いて、モバイル Android アプリケーションで追跡したい Web ビューの `DatadogEventBridge` を構成します。
+4. 以下のコードスニペットで Web ビューの追跡を有効にします。
+
+   ```kotlin
+     WebViewTracking.enable(webView, allowedHosts)
+   ```
 
 ## Web ビューにアクセスする
 
-Web ビューは、関連する `service` と `source` 属性とともに [RUM エクスプローラー][4]に表示されます。`service` 属性は Web ビューが生成された Web コンポーネントを示し、`source` 属性は Android などのモバイルアプリケーションのプラットフォームを表します。
+Web ビューは、関連する `service` と `source` 属性とともに [RUM エクスプローラー][6]に表示されます。`service` 属性は Web ビューが生成された Web コンポーネントを示し、`source` 属性は Android などのモバイルアプリケーションのプラットフォームを表します。
 
 Android や Android TV のアプリケーションでフィルタリングし、セッションをクリックします。セッションのイベント一覧が表示されたサイドパネルが表示されます。
 
@@ -67,6 +61,8 @@ Android や Android TV のアプリケーションでフィルタリングし、
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/browser/#npm
-[2]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android/1.12.0-beta1/aar
+[2]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
 [3]: /ja/real_user_monitoring/android/?tab=kotlin#setup
-[4]: https://app.datadoghq.com/rum/explorer
+[4]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
+[5]: /ja/logs/log_collection/android/?tab=kotlin#setup
+[6]: https://app.datadoghq.com/rum/explorer
