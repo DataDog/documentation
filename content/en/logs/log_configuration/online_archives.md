@@ -14,6 +14,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/online-archives-datadog/"
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
+algolia:
+  tags: ['online archives']
 ---
 
 <div class="alert alert-warning">
