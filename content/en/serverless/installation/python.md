@@ -246,6 +246,84 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+1. Add the correct Lambda Layer to your `aws_lambda_function` [Terraform resource][1] `layers` argument
+
+Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
+
+
+{{% tab "AWS Commercial Region with x86-based Lambda" %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}`
+{{% /tab %}}
+
+{{% tab "AWS Commercial Region with arm64-based Lambda " %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with x86-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with arm64-based Lambda" %}}
+` arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}`
+{{% /tab %}}
+
+2. Add the correct Lambda Extension to the `layers` argument
+
+Replace <AWS_REGION> with a valid AWS region such as us-east-1. 
+
+{{% tab "AWS Commercial Region with x86-based Lambda" %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+{{% tab "AWS Commercial Region with arm64-based Lambda " %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with x86-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with arm64-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+3. Set your Lambda `handler` argument to `datadog_lambda.handler.handler`. 
+
+
+#### Full example
+
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  …
+
+  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+
+  layers = [
+    "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}",
+    "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:45"
+  ]
+
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+
+  environment {
+    variables = {
+      DD_SITE                     = <DATADOG SITE>
+      DD_API_KEY_SECRET_ARN       = <API KEY>
+      DD_LAMBDA_HANDLER           = <LAMBDA HANDLER>
+    }
+  }
+}
+```
+
+To fill in the environment variables,
+- Replace <DATADOG_SITE> with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+- Replace <DATADOG_API_KEY_SECRET_ARN> with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The secretsmanager:GetSecretValue permission is required. For quick testing, you can use apiKey instead and set the Datadog API key in plaintext.
+- Set the environment variable DD_LAMBDA_HANDLER to your original handler, for example, `myfunc.handler`.
+`
+[1]https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>

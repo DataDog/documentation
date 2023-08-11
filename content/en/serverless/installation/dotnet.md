@@ -143,6 +143,85 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [2]: https://github.com/DataDog/dd-trace-dotnet/releases
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+1. Add the correct Lambda Layer to your `aws_lambda_function` [Terraform resource][1] `layers` argument
+
+Replace <AWS_REGION> with a valid AWS region such as us-east-1. The available RUNTIME options are Node12-x, Node14-x, Node16-x and Node18-x.
+
+{{% tab "AWS Commercial Region with x86-based Lambda" %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
+{{% /tab %}}
+
+{{% tab "AWS Commercial Region with arm64-based Lambda " %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with x86-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with arm64-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}`
+{{% /tab %}}
+
+2. Add the correct Lambda Extension to the `layers` argument
+
+Replace <AWS_REGION> with a valid AWS region such as us-east-1. 
+
+{{% tab "AWS Commercial Region with x86-based Lambda" %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+{{% tab "AWS Commercial Region with arm64-based Lambda " %}}
+`arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with x86-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+{{% tab "AWS GovCloud Regions with arm64-based Lambda" %}}
+`arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}`
+{{% /tab %}}
+
+3. Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+
+
+#### Full example
+
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  …
+
+  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+
+  layers = [
+    "arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}",
+    "arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:45"
+  ]
+
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+
+  environment {
+    variables = {
+      DD_SITE                     = <DATADOG SITE>
+      DD_API_KEY_SECRET_ARN       = <API KEY>
+      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
+    }
+  }
+}
+```
+
+To fill in the environment variables,
+- Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`
+- Replace <DATADOG_SITE> with datadoghq.com (ensure the correct SITE is selected on the right).
+- Replace <DATADOG_API_KEY_SECRET_ARN> with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The secretsmanager:GetSecretValue permission is required. For quick testing, you can use apiKey instead and set the Datadog API key in plaintext.
+- Set the environment variable DD_LAMBDA_HANDLER to your original handler, for example, myfunc.handler.
+
+[1]https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+{{% /tab %}}
+
 {{% tab "Custom" %}}
 
 1. Install the Datadog Tracer
