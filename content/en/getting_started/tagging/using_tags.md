@@ -145,9 +145,9 @@ When creating a new monitor, use *metric tags* in the:
 
 ## Metrics
 
-Use tags in the [Metrics Explorer][8] to filter metrics over tags or display multiple graphs by tag key. The example below graphs a metric over `service:coffee-house` and displays one graph per `host`.
+Use tags in the [Metrics Explorer][8] to filter metrics over tags or display multiple graphs by tag key. The example below graphs a metric over `service:web-store`.
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="Manage Monitors Tags" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="A metric graph scoped to an individual tag" style="width:80%;">}}
 
 ## Integrations
 

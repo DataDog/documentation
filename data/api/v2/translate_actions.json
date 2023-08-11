@@ -1299,5 +1299,9 @@
   "ListUserPermissions": {
     "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
     "summary": "Get a user permissions"
+  },
+  "GetUserMemberships": {
+    "description": "Get a list of memberships for a user",
+    "summary": "Get user memberships"
   }
 }
