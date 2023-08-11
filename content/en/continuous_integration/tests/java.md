@@ -146,7 +146,7 @@ Specifying `org.gradle.jvmargs` in the command line overrides the value specifie
 
 ## Configuration
 
-Most cases are covered with default configuration values.
+Default configuration values work well in most cases.
 
 However, if there is a need to fine-tune the tracer behavior, [Datadog Tracer configuration][3] options can be used.
 
