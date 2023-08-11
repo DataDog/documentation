@@ -252,7 +252,9 @@ You can directly access a trace in its source repository on GitHub in the [Conti
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-Install Datadog's [GitHub integration][1] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][2]. When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
+Install Datadog's [GitHub integration][1] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][2].
+
+**Note:** When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
 
 [1]: https://app.datadoghq.com/integrations/github/
 [2]: /tracing/error_tracking/
