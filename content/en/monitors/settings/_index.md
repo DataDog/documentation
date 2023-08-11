@@ -60,7 +60,7 @@ To make a tag optional but require that monitors with the tag use specific value
 
 To configure monitor tag policies, you must be assigned a role with the `MONITOR_CONFIG_POLICY_WRITE_PERMISSION` permission.
 
-For more information, see [Role Based Access Control][1] and [Role Permissions][2].
+For more information, see [Role Based Access Control][2] and [Role Permissions][3].
 
 
 ## Deleted monitors
@@ -73,3 +73,5 @@ Use the Deleted Monitors tab to restore deleted monitors. From the list, select 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/settings
+[2]: /account_management/rbac/
+[3]: /account_management/rbac/permissions/
