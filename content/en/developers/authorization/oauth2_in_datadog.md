@@ -34,7 +34,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
    - This parameter is only provided if the user initiates authorization from the Datadog integration tile. See the [Initiate authorization from a third-party location](#Initiate-authorization-from-a-third-party-location) section for more options if the user chooses to initiate authorization externally.  
    - The `domain` query parameter provides the [Datadog site][17] that the authorizing user is in, and is required to construct the URL for this GET request to the Authorize endpoint: `https://api.<domain>/oauth2/v1/authorize?...`.
 
-<div class="alert alert-info">The `domain` parameter was introduced in July 2023, and previous OAuth clients use the `site` parameter for this step. While the `site` parameter is still supported, Datadog recommends using the `domain` parameter for the `Authorize` endpoint. </div>
+<div class="alert alert-info">The `domain` parameter was introduced in July 2023, and previous OAuth clients use the `site` parameter for this step. While the `site` parameter is still supported, Datadog recommends using the `domain` parameter for the `Authorize` endpoint. Store this value in a secure database or location for later use with additional API endpoints.</div>
 
 4. Once a user clicks **Authorize**, Datadog makes a POST request to the authorize endpoint. The user is redirected to the `redirect_uri` that you provided when setting up the OAuth Client with the authorization `code` parameter in the query component.
 

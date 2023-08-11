@@ -6,6 +6,7 @@ app_uuid: c744f76a-7d04-4daf-bf7b-0902fbedd76d
 assets:
   dashboards:
     NetApp OnTap - Disk: assets/dashboards/crest_data_systems_netapp_ontap_disk.json
+    NetApp OnTap - Events: assets/dashboards/crest_data_systems_netapp_ontap_events.json
     NetApp OnTap - LUN: assets/dashboards/crest_data_systems_netapp_ontap_lun.json
     NetApp OnTap - Overview: assets/dashboards/crest_data_systems_netapp_ontap_overview.json
     NetApp OnTap - Volume: assets/dashboards/crest_data_systems_netapp_ontap_volume.json

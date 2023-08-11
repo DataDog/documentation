@@ -150,7 +150,7 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 ### Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. 
@@ -182,30 +182,13 @@ After you configure your CI pipelines to run the Datadog Static Analyzer, violat
 
 Each violation is associated with a specific commit and branch from your repository on which the CI pipeline ran. The rows represent every violation per commit. 
 
-Click on a violation to open a side panel that contains information about the scope of the violation and where it originated.
-{{< img src="ci/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
+Click on a violation to open a side panel that contains information about the scope of the violation and where it originated. 
 
 The content of the violation is shown in tabs:
 
 * Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][3].
-* Fixes: One or more code fixes that can resolve the violation, which you can copy and paste.
-* Event: JSON metadata regarding the Static Analysis violation event.
-
-### Using suggested fixes
-{{< img src="ci/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
-
-In Datadog Static Analysis, there are two types of suggested fixes:
-
-1. **Default Suggested Fix:** For simple violations, fixes are immediately available as part of the business logic of the violation's underlying static analysis rule.
-2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT4 to generate a suggested fix on the fly. You have a choice between "Text" and "Unified Text" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
-
-The two types of fixes are distinguished visually in the UI with different labels.
-
-Default Suggested Fixes:
-{{< img src="ci/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:80%;">}}
-
-AI Suggested Fixes:
-{{< img src="ci/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:80%;">}}
+* Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
+* Event: JSON metadata regarding the the Static Analysis violation event.
 
 ## Further Reading
 

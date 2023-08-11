@@ -20,7 +20,7 @@ Provide an `error.fingerprint` attribute that Error Tracking can use to group er
 If `error.fingerprint` is provided, the grouping behavior follows these rules:
 
 * Custom grouping takes precedence over the default strategy.
-* Custom grouping can be applied only to a subset of your error logs and can co-exist with the default strategy.
+* Custom grouping can be applied only to a subset of your error logs and can coexist with the default strategy.
 * The content of `error.fingerprint` is used as-is without any modification.
 * Logs from the same service and with the same `error.fingerprint` attribute are grouped into the same issue.
 * Logs with different `service` attributes are grouped into different issues.

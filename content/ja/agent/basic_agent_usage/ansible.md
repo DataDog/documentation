@@ -311,8 +311,8 @@ Datadog Ansible ロールは、Linux のみを対象として、Datadog Agent v5
 
 | Agent バージョン | デフォルトの Windows MSI パッケージ URL                                                  |
 |---------------|----------------------------------------------------------------------------------|
-| 6             | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi |
-| 7             | https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi |
+| 6             | https://windows-agent.datadoghq.com/datadog-agent-6-latest.amd64.msi |
+| 7             | https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi |
 
 デフォルトの動作を上書きするには、この変数に空の文字列ではなく、何か別の値を設定してください。
 
@@ -322,8 +322,8 @@ Datadog Ansible ロールは、Linux のみを対象として、Datadog Agent v5
 
 | Agent バージョン | macOS DMG パッケージのデフォルトの URL                                |
 |---------------|--------------------------------------------------------------|
-| 6             | https://s3.amazonaws.com/dd-agent/datadog-agent-6-latest.dmg |
-| 7             | https://s3.amazonaws.com/dd-agent/datadog-agent-7-latest.dmg |
+| 6             | https://install.datadoghq.com/datadog-agent-6-latest.dmg |
+| 7             | https://install.datadoghq.com/datadog-agent-7-latest.dmg |
 
 デフォルトの動作を上書きするには、この変数に空の文字列ではなく、何か別の値を設定してください。
 
