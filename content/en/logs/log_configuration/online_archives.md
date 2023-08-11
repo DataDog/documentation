@@ -15,6 +15,8 @@ further_reading:
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
 algolia:
+  rank: 80
+  category: documentation
   tags: ['online archives']
 ---
 
