@@ -17,6 +17,12 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
   tag: "Learning Center"
   text: "Going Deeper with Logs Processing"
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: "Blog"
+  text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview

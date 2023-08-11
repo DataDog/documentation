@@ -62,11 +62,11 @@ Ce graphique linéaire affiche la latence (en millisecondes) des utilisateurs (e
 
 #### Visualisations supplémentaires
 
-Datadog fournit différents types de visualisations, afin que chacun puisse représenter et visualiser facilement ses métriques. Pour représenter des métriques, les deux visualisations suivantes sont les plus utilisées :
+Datadog fournit différents types de visualisations, afin que chacun puisse représenter et visualiser facilement ses métriques.
 
 Une requête de métrique suit systématiquement deux étapes préliminaires d'évaluation, à savoir une agrégation temporelle, puis une agrégation spatiale. Consultez la rubrique [Anatomie d'une requête de métrique][6] pour en savoir plus.
 
-{{< whatsnext desc="Visualisations les plus utilisées pour représenter des métriques :">}}
+{{< whatsnext desc="Deux types de visualisations particulièrement utiles pour représenter des métriques :">}}
     {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Widget Valeur de requête</u> : rassemblez les résultats des deux étapes d'évaluation au sein d'une valeur unique.{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top list</u> : obtenez une seule valeur par groupe.{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -138,7 +138,7 @@ RPM の GPG 署名キーはフィンガープリント `60A389A44A0C32BAE3C03F0B
   * Datadog Agent 6/7 Linux インストールスクリプト、2023 年 1 月 12 日 13 時 (UTC) にバージョン 1.13.0 を以下の場所にリリースしました。
     * [https://install.datadoghq.com/scripts/install_script_agent6.sh][16]
     * [https://install.datadoghq.com/scripts/install_script_agent7.sh][17]
-    * [https://install.datadoghq.com/scripts/install_script.sh][18] (非推奨となりましたが、更新しました。)
+    * [https://install.datadoghq.com/scripts/install_script.sh][18] (非推奨となり、もはや推奨されませんが、更新されました。)
   * [Datadog Agent 5 Linux インストールスクリプト][19]が 2023 年 1 月 12 日 16:25 UTC にその[ダウンロード場所][19]にリリースされました
 
 

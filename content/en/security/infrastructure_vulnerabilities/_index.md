@@ -2,9 +2,12 @@
 title: Cloud Security Management Vulnerabilities
 kind: documentation
 further_reading:
- - link: "/security/infrastructure_vulnerabilities/setup"
-   tag: "Documentation"
-   text: "Setting up CSM Vulnerabilities"
+- link: "/security/infrastructure_vulnerabilities/setup"
+  tag: "Documentation"
+  text: "Setting up CSM Vulnerabilities"
+- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
+  tag: "Blog"
+  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
