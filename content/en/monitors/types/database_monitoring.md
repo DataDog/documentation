@@ -11,7 +11,7 @@ With the [Database Monitoring (DBM)][1] monitor type, you can create monitors an
 A few common monitoring scenarios (click for setup instructions):
 - [Number of waiting queries](#number-of-waiting-queries)
 - [Number of queries exceeding a given duration](#queries-exceeding-30-seconds)
-- Explain-plan cost ([for all queries](#explain-plan-cost-all-queries) or [a single query signature](#explain-plan-cost-single-query-signature))
+- [Significant changes in explain-plan cost](#change-in-explain-plan-cost)
 
 ## Monitor creation
 
@@ -73,11 +73,14 @@ For more information about the **Notify your team** and **Say what's happening**
 
 ### Number of waiting queries
 
+This monitor detects whether the number of waiting queries has exceeded a given threshold.
+
 {{< img src="database_monitoring/dbm_event_monitor/waiting_queries_monitor.png" alt="A configured metrics query for monitoring the number of waiting database queries" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** to gain context on the range of typical values.
 1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the number of waiting queries stays below `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -96,6 +99,8 @@ has recovered.
 
 ### Queries exceeding 30 seconds
 
+This monitor detects whether the number of long-running queries has exceeded a given threshold.
+
 {{< img src="database_monitoring/dbm_event_monitor/long_running_queries_monitor.png" alt="A configured metrics query for monitoring the number of long-running database queries" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
@@ -103,6 +108,7 @@ has recovered.
 1. Update the query filter to **Duration:>30s**.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
 1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **alert threshold** to `2500` to represent unusual activity. For configuration details, [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -119,58 +125,47 @@ which exceeded {{threshold}}, has recovered.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
-### Explain-plan cost: all queries
+### Change in explain-plan cost
 
-{{< img src="database_monitoring/dbm_event_monitor/explain_plan_avg_monitor.png" alt="A configured metrics query for monitoring the explain-plan cost of all queries" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/explain_plan_cost_monitor.png" alt="A monitor configured to track changes in average daily explain-plan cost" style="width:100%;" >}}
+
+This monitor detects a significant change in daily average explain-plan cost by comparing the results of two queries:
+
+- Query **a** reflects the current explain-plan cost
+- Query **b** reflects the explain-plan cost a week ago
+
+This allows the comparison of two consecutive Mondays, for example.
+
+With minor changes, the monitor can instead reflect hourly averages, measure the difference between today and yesterday, group by query signature instead of host, and so on.
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. Under **Define the search query**, make the following updates: 
-    - Change **Query Samples** to **Explain Plans**
-    - Change __*__ to **Explain Plan Cost (@db.plan.cost)**
-1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost stays below `85,000` on the chart, you might set **alert threshold** to `90,000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Under **Define the search query**, make the following updates:
+    - Change **Query Samples** to **Explain Plans**.
+    - Change __*__ to **Explain Plan Cost (@db.plan.cost)**. Typing "cost" into the field populates the autocomplete options.
+    - Change **(everything)** to **Host (host)**.
+1. Click the **∑** button (the **Add function** button) and type "rollup" to populate the autocomplete suggestions. Choose **moving_rollup**. Leave the other fields unchanged to monitor the aggregated hourly average explain-plan cost for each host.
+1. Click **Add Query** to create query **b**, a copy of query **a**.
+1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
+1. In the **b** query, click the the **∑** button (the **Add function** button). Choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the typical cost variation from week to week.
+1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set **alert threshold** to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3]. 
+1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-The average explain-plan cost has exceeded {{threshold}} with a value of {{value}}.
+The daily average explain-plan cost on {{host.name}} has increased by at least {{threshold}} 
+versus one week ago, with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-The average explain-plan cost, which exceeded {{threshold}}, has recovered. 
+The daily average explain-plan cost on {{host.name}} has recovered to within {{threshold}}
+of the cost on this day last week.
 {{/is_recovery}}
 {{< /code-block >}}
 1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
 1. Click **Create** to save the monitor.
 
-### Explain-plan cost: single query signature
-
-{{< img src="database_monitoring/dbm_event_monitor/explain_plan_single_query_monitor.png" alt="A configured metrics query for monitoring the explain-plan cost of a single query" style="width:100%;" >}}
-
-1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. Under **Define the search query**, make the following updates: 
-    - Change **Query Samples** to **Explain Plans**
-    - Change __*__ to **Explain Plan Cost (@db.plan.cost)**
-    - Change **(everything)** to **Query Signature (@db.query_signature)**
-    - Change the result limit to **top 5** to focus on the most expensive queries.
-1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the range of typical values.
-1. From the multiple query signatures shown on the chart, choose one to monitor. Add a `@db.query_signature:<YOUR_QUERY_SIGNATURE>` filter to your query, using autocomplete as it appears.
-1. Click the **X** on the **by Query Signature (@db.query_signature)** grouping, which has become redundant.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the cost stays below `85,000` on the chart, you might set **alert threshold** to `90,000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
-1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
-{{< code-block lang="text" >}}
-{{#is_alert}}
-The explain-plan cost of a query has exceeded {{threshold}} 
-with a value of {{value}}.
-{{/is_alert}}
-
-{{#is_recovery}}
-The explain-plan cost of a query has recovered to below {{threshold}}.
-{{/is_recovery}}
-{{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
-1. Click **Create** to save the monitor.
 
 [1]: /database_monitoring/
 [2]: https://app.datadoghq.com/monitors/create/database-monitoring
