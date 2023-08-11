@@ -31,6 +31,7 @@ aliases:
   - /videos/two_minute_intro/
   - /videos/unshare_screenboards/
   - /videos/weekly_monitor_report/
+  - video-categories/%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%82%B0%E3%83%A9%E3%83%95/
 ---
 
 Datadog is an extensive platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.
