@@ -43,7 +43,7 @@
 
       const datasetArr = dataset.split(';')
       const searchValues = this.searchValue.split(' ')
-      const containsFilteredValue = datasetArr.[0].includes(this.filterValue) // checks product attrs in dataset 
+      const containsFilteredValue = datasetArr[0].includes(this.filterValue) // checks product attrs in dataset 
       const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
 
       return containsSearchValues && containsFilteredValue
