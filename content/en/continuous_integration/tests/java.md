@@ -148,7 +148,7 @@ Specifying `org.gradle.jvmargs` in the command line overrides the value specifie
 
 Default configuration values work well in most cases.
 
-However, if there is a need to fine-tune the tracer behavior, [Datadog Tracer configuration][3] options can be used.
+However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer configuration][3] options can be used.
 
 ### Collecting Git metadata
 
@@ -343,4 +343,4 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
 [4]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
-[4]: /tracing/trace_collection/compatibility/java#integrations
+[5]: /tracing/trace_collection/compatibility/java#integrations
