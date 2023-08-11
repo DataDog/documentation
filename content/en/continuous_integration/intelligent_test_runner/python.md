@@ -27,7 +27,7 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 To enable Intelligent Test Runner, set the following environment variables:
 
-`DD_APPLICATION_KEY` (Required)
+`DD_APP_KEY` (Required)
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
