@@ -4,6 +4,8 @@ kind: documentation
 type: multi-code-lang
 aliases:
 - /tracing/trace_collection/open_standards/
+algolia:
+  tags: ['opentracing']
 ---
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
