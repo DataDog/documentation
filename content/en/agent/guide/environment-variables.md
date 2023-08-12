@@ -93,18 +93,18 @@ In general, use the following rules:
 
 ## Using environment variables in systemd units
 
-In Operating Systems that uses SystemD to manage services, environment variables - global (e.g. `/etc/environment`) or session-based (e.g. `export VAR=value`) - are not generally made available to services unless configured to do so. See [SystemD Exec man page][8] for more details.
+In operating systems that uses systemd to manage services, environment variables—global (for example, `/etc/environment`) or session-based (for example, `export VAR=value`)—are not generally made available to services unless configured to do so. See [systemd Exec manual page][8] for more details.
 
-From Datadog Agent 7.45,the Datadog Agent service (`datadog-agent.service` unit) can optionally load environment variables assignments from a file (`<ETC_DIR>/environment`).
+From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit) can optionally load environment variables assignments from a file (`<ETC_DIR>/environment`).
 
-- Create `/etc/datadog-agent/environment` if it does not exist.
-- Define newline-separated environment variable assignments. Example:
+1. Create `/etc/datadog-agent/environment` if it does not exist.
+2. Define newline-separated environment variable assignments. Example:
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
   DD_TAGS=env:dev service:foo
   ```
-- Restart the service for changes to take effect
+3. Restart the service for changes to take effect
 
 ## Further Reading
 
