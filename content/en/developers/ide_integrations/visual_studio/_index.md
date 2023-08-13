@@ -45,7 +45,7 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 1. In Visual Studio, go to **Extensions** > **Manage Extensions**.
 2. Search for **Datadog**
 3. Click **Download**
-4. Restart Visual Studio
+4. Restart Visual Studio.
 
 Alternatively, you can download the extension from the official [Visual Studio Marketplace][4]
 
