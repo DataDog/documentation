@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for Visual Studio users helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog extension for Visual Studio helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
 
 The **Code Insights** view keeps you informed about:
 
