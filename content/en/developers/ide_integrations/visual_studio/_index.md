@@ -57,11 +57,11 @@ Alternatively, you can download the extension from the official [Visual Studio M
 
 ### Link services
 
-1. Open a .NET solution file with Visual Studio
-2. Go to Extensions -> Datadog -> Linked Services
-3. Click the **Add Service** button
-4. Select the services that are related to your .NET solution
-5. Save the .NET solution file
+1. Open a .NET solution file with Visual Studio.
+2. Go to **Extensions** > **Datadog** > **Linked Services**.
+3. Click **Add Service**.
+4. Select the services that are related to your .NET solution.
+5. Save the .NET solution file.
 
 ## Feedback
 
