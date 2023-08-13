@@ -21,7 +21,7 @@ The Datadog extension for Visual Studio helps you to improve software performanc
 The **Code Insights** view keeps you informed about:
 
 - Issues from [Error Tracking][5]
-- [Vulnerability][6] reports by Application Security Management
+- [Vulnerability][6] reports from Application Security Management
 - Profiling insights from [Watchdog Insights][7]
 
 The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code lines that:
