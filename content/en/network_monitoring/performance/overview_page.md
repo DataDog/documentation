@@ -16,7 +16,7 @@ The NPM overview page provides a high-level overview of your network, from costl
 
 ## External network traffic
 
-Use the **External Network Traffic** section to get an overview of costly network traffic. Egress traffic that leaves your network is a common cost source, so determining which external endpoints have the most traffic reaching them is helpful to ensure that traffic volume remains within an expected range. For example, **Top AWS gateway users** shows top endpoints communicating to an AWS Internet Gateway or AWS NAT Gateway. **AWS private link eligible traffic** shows traffic that could leverage AWS Private Link to reduce the overall cost of traffic.  
+Use the **External Network Traffic** section to get an overview of costly network traffic. Egress traffic that leaves your network is a common cost source, so determining which external endpoints have the most traffic reaching them is helpful to ensure that traffic volume remains within an expected range. For example, **Top AWS gateway users** shows top endpoints communicating to an AWS Internet Gateway or AWS NAT Gateway. **AWS PrivateLink eligible traffic** shows traffic that could leverage AWS PrivateLink to reduce the overall cost of traffic.  
 
 To dig deeper into any of these areas, click the **View in Analytics** button at the bottom right of each section of the overview page. The Analytics page opens with the query pre-populated so you can continue your investigation.
 

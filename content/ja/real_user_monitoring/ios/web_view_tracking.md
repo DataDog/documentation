@@ -28,23 +28,67 @@ Real User Monitoring により、iOS と tvOS のハイブリッドアプリケ�
 
 モバイル iOS および tvOS アプリケーションでレンダリングしたい Web ページを、まず RUM Browser SDK で設定します。詳しくは、[RUM ブラウザモニタリング][1]をご覧ください。
 
+### `DatadogWebViewTracking` を依存関係として宣言します。
+
+クラッシュレポートを有効にするには、[RUM][3] と (または) [Logs][5] も有効にしてください。その後、依存関係マネージャーに従ってパッケージを追加し、初期化スニペットを更新します。
+
+{{< tabs >}}
+{{% tab "CocoaPods" %}}
+
+[CocoaPods][4] を使用して、`dd-sdk-ios` をインストールできます。
+```
+pod 'DatadogWebViewTracking'
+```
+
+[4]: https://cocoapods.org/
+
+{{% /tab %}}
+{{% tab "Swift Package Manager (SPM)" %}}
+
+Apple の Swift Package Manager を使用して統合するには、`Package.swift` に以下を依存関係として追加します。
+```swift
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+```
+
+プロジェクトで、以下のライブラリをリンクします。
+```
+DatadogCore
+DatadogWebViewTracking
+```
+
+{{% /tab %}}
+{{% tab "Carthage" %}}
+
+[Carthage][5] を使用して、`dd-sdk-ios` をインストールできます。
+```
+github "DataDog/dd-sdk-ios"
+```
+
+Xcode で、以下のフレームワークをリンクします。
+```
+DatadogWebViewTracking.xcframework
+```
+
+[5]: https://github.com/Carthage/Carthage
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Web ビューをインスツルメントする
 
-RUM iOS SDK は、Web ビュー追跡を制御するための API を提供します。Web ビュー追跡を追加するには、`WKUserContentController` の拡張として、以下を宣言します。
+RUM iOS SDK は、Web ビュー追跡を制御するための API を提供します。Web ビュー追跡を有効にするには、`WKWebView` インスタンスを提供します。
 
-`trackDatadogEvents(in hosts: Set<String>)`
-: 特定の `hosts` に対して、Web ビューで RUM イベント追跡を有効にします。
-
-`stopTrackingDatadogEvents()`
-: Web ビューの RUM イベント追跡を無効にします。Web ビューの割り当てが解除されようとしているとき、または Web ビューの使用が終了したときに、この API を呼び出します。
-
-例:
-
-```
+```swift
 import WebKit
-import Datadog
+import DatadogWebViewTracking
 
-webView.configuration.userContentController.trackDatadogEvents(in: ["example.com"])
+let webView = WKWebView(...)
+WebViewTracking.enable(webView: webView, hosts: ["example.com"])
+```
+
+Web ビュー追跡を無効にする場合
+```swift
+WebViewTracking.disable(webView: webView)
 ```
 
 ## Web ビューにアクセスする
@@ -65,3 +109,4 @@ iOS や tvOS のアプリケーションでフィルタリングし、セッシ�
 [2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.10.0-beta1
 [3]: /ja/real_user_monitoring/ios/
 [4]: https://app.datadoghq.com/rum/explorer
+[5]: https://docs.datadoghq.com/ja/logs/log_collection/ios

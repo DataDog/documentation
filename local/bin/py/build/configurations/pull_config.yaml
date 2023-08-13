@@ -440,6 +440,16 @@
             front_matters:
               disable_edit: true
 
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/python-security/'
+            path_to_remove: 'rulesets/python-security/'
+            front_matters:
+              disable_edit: true
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
@@ -572,7 +582,7 @@
           globs:
             - "generated/md/external/*.md"
           options:
-            dest_dir: '/security/cspm/custom_rules/'
+            dest_dir: '/security/misconfigurations/custom_rules/'
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
@@ -604,7 +614,7 @@
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
           options:
-            dest_dir: '/security/cloud_workload_security/'
+            dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: dd-source

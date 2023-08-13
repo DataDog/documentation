@@ -11,6 +11,9 @@ aliases:
 - /ja/tracing/advanced/
 - /ja/tracing/api
 - /ja/tracing/faq/distributed-tracing/
+cascade:
+  algolia:
+    rank: 70
 description: パフォーマンス向上のためにコードを操作する
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=APM
@@ -57,13 +60,15 @@ Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]�
 
 ## Datadog へトレースを送信
 
-モノリスからマイクロサービスに移行すると、ホスト、コンテナ、またはサーバーレス機能全体の Datadog APM の設定に数分しかかかりません。
+モノリスからマイクロサービスに移行すると、ホスト、コンテナ、またはサーバーレス関数全体の Datadog APM の設定に数分しかかかりません。
 
-トレースの対象が[プロキシ][3]または [AWS Lambda 関数][4]およびホスト全体なのか、また自動インスツルメンテーション、dd-trace-api、または [OpenTelemetry][5] のいずれを使用するのかに応じて、ご使用の環境および言語に [Datadog Tracing Library を追加][2]します。
+<div class="alert alert-info">
+<strong>ベータ版: シングルステップ APM インスツルメンテーション</strong> - Datadog Agent のインストール時に APM インスツルメンテーションを有効にして、アプリケーションパフォーマンスモニタリングを素早く開始することができます。このオプションは、コードを変更することなく、自動的にサービスをインスツルメンテーションします。詳細については、<a href="/tracing/trace_collection/single-step-apm">シングルステップ APM インスツルメンテーション</a>をお読みください。
+</div>
 
-{{< partial name="apm/apm-compatibility.html" >}}
+**始めるには[トレースを Datadog に送信する][2]をお読みください。**
 
-<br>
+[プロキシのトレース][3]、[AWS Lambda 関数][4]のトレース、自動インスツルメンテーションやカスタムインスツルメンテーションの使用、[OpenTelemetry][5] によるインスツルメンテーションなど、環境と言語に合わせて Datadog トレーシングライブラリを追加します。
 
 ## Datadog に流入するデータ、Datadog が保持するデータの制御と管理
 
@@ -117,10 +122,10 @@ CPU、メモリ、または I/O を最も多く消費するコード行を特定
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/glossary/
-[2]: /ja/tracing/trace_collection/dd_libraries/java
+[2]: /ja/tracing/trace_collection/
 [3]: /ja/tracing/trace_collection/proxy_setup/
 [4]: /ja/serverless/distributed_tracing
-[5]: /ja/opentelemetry/otel_tracing/
+[5]: /ja/tracing/trace_collection/otel_instrumentation/
 [6]: /ja/tracing/trace_pipeline/ingestion_controls/
 [7]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /ja/tracing/trace_pipeline/generate_metrics/
