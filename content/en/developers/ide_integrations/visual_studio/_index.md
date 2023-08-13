@@ -52,7 +52,7 @@ Alternatively, you can download the extension from the official [Visual Studio M
 ### Sign-in with your Datadog account
 
 1. In Visual Studio, go to Tools -> Options -> Datadog
-2. Click the **Sign In** button
+2. Click **Sign In**.
 3. In the browser window that opens, select your site and organization and authorize access to the platform.
 
 ### Link services
