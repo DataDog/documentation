@@ -64,17 +64,42 @@ To refine your current view to match a Watchdog Insight, hover over the top righ
 {{< tabs >}}
 {{% tab "Log Management" %}}
 
+**Error outliers**
 
+Error outliers display fields such as [faceted tags or attributes][1] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
+
+Typical examples of error outliers include `env:staging`, `docker_image:acme:3.1`, and `http.useragent_details.browser.family:curl`.
+
+In the **banner card** view, you can see:
+
+  * The field name.
+  * The proportion of errors and overall logs that the field contributes to.
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
+
+In the **side panel card** view, you can see the main [log pattern][2] of error logs with the field.
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="Error Outlier card (L)" style="width:100%;" >}}
+
+In the **full side panel** view, you can see:
+
+  * The timeseries of error logs that contain the field.
+  * Tags that are often associated with the error logs.
+  * A comprehensive list of [log patterns][2].
+
+{{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
+
+[1]: /logs/explorer/facets/
+[2]: /logs/explorer/analytics/patterns
 {{% /tab %}}
 {{% tab "APM" %}}
 
-
+TODO
 
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
-- Error outlier
-- Latency outlier
+TODO
 
 {{% /tab %}}
 {{% tab "Databases" %}}
@@ -82,8 +107,42 @@ To refine your current view to match a Watchdog Insight, hover over the top righ
 {{% /tab %}}
 {{% tab "RUM" %}}
 
+**Error Outlier**
+
+Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root cause of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
+
+In the **banner card** view, you can see:
+
+* The field name
+* The proportion of total errors and overall RUM events that the field contributes to
+* Related tags
+
+In the **full side panel**, you can see a timeseries graph about the total number of RUM errors with the field along with a impact pie charts and a list of RUM events that contain the field.
+
+{{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Error Outlier full side panel" style="width:100%;" >}}
+
+**Latency Outlier**
+
+Latency outliers display fields such as [faceted tags or attributes][1] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
+
+Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
+
+In the **banner card** view, you can see:
+
+* The field name
+* The performance metric value containing the field and the baseline for the rest of the data
+
+In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
+
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
+
+[1]: /real_user_monitoring/explorer/search/#facets
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Serverless" %}}
+
+TODO
 
 For serverless infrastructures, Watchdog surfaces the following outliers:
 
@@ -96,7 +155,10 @@ For serverless infrastructures, Watchdog surfaces the following outliers:
 - `Runtime Duration Up/Down`
 
 {{% /tab %}}
-{{% tab "Processes" %}}
+{{% tab "Live Processes" %}}
+
+TODO
+For live Processes Watchdog calculate outliers on the following metrics:
 
 - CPU
 - Memory
@@ -104,7 +166,8 @@ For serverless infrastructures, Watchdog surfaces the following outliers:
 {{% /tab %}}
 {{% tab "Containers" %}}
 
-- 
+TODO
+For Containers Watchdog calculate outliers on the following:
 
 {{% /tab %}}
 {{< /tabs >}}
