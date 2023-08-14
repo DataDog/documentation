@@ -36,9 +36,9 @@ If your test framework is not supported, you can try instrumenting your tests us
 ## Setup
 
 To set up Test Visibility for Java, you need to perform the following steps:
-1. Configure tracer reporting method
-2. Download tracer library to the hosts where your tests are executed
-3. Run your tests with the tracer attached
+1. Configure tracer reporting method.
+2. Download tracer library to the hosts where your tests are executed.
+3. Run your tests with the tracer attached.
 
 ### Configuring reporting method
 
