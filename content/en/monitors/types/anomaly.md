@@ -67,7 +67,7 @@ The range of accepted values for recovery window is between 121 minutes (`4h*(1-
 Another example:
 * `Threshold`: 80%
 * `Trigger window`: 4h
-The range of accepted values for recovery window is between 121 minutes (`4h*(1-0.8) +1 min = 49 minutes`) and 4h.
+The range of accepted values for recovery window is between 49 minutes (`4h*(1-0.8) +1 min = 49 minutes`) and 4h.
 
 ### Advanced options
 
