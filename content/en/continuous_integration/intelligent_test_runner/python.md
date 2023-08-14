@@ -10,7 +10,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< callout header="false" url="#" btn_hidden="true" >}}Intelligent Test Runner for Python (using `pytest`) in beta.{{< /callout >}}
+{{< callout header="false" url="#" btn_hidden="true" >}}Intelligent Test Runner for Python (using pytest) in beta.{{< /callout >}}
 
 ## Compatibility
 
