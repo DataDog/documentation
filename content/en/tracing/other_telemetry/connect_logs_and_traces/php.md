@@ -116,7 +116,7 @@ For instance, you would append those two attributes to your logs with:
 ?>
 ```
 
-If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1:
+If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1, add the following configuration:
 
 ```php
 <?php
@@ -132,7 +132,7 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 ?>
 ```
 
-For monolog v2:
+For monolog v2, add the following configuration:
 
 ```php
 <?php
