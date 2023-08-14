@@ -35,7 +35,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 - Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][3].
 
 ## I can see the `aws.stepfunctions` root span but I cannot see any step spans
-Please enable `Include execution data` option on the state machine's logging. By enabling this option, log execution input, data passed between states, and execution output will be logged in the logs which are then used by Datadog backend to construct these step spans for you.
+Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
 
 ## Some step spans are missing in the traces
 - For actions, we support basic actions of Lambda and DynamoDB. For example, Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem and more.
