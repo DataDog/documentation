@@ -32,14 +32,14 @@ Select your language:
 {{< programming-lang lang="java" >}}
 
 Compatibility requirements
-: The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
-: For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
+: The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][1].
+: For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][2].
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 #### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][18].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][3].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -78,49 +78,37 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 #### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][19] documentation.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][4] documentation.
 
 #### Other environments
 
-Tracing is available for a number of other environments, such as  [Heroku][20], [Cloud Foundry][21], [AWS Elastic Beanstalk][22], and [Azure App Service][23].
+Tracing is available for a number of other environments, such as  [Heroku][5], [Cloud Foundry][6], [AWS Elastic Beanstalk][7], and [Azure App Service][8].
 
-For other environments, refer to the [Integrations][24] documentation for that environment and [contact support][25] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][9] documentation for that environment and [contact support][10] if you are encountering any setup issues.
 
-[1]: /tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/service-setup
-[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
-[4]: /account_management/billing/apm_tracing_profiler/
-[5]: /profiler/
-[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: /tracing/trace_collection/library_config/java/
-[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
-[11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
-[16]: /agent/remote_config/
-[17]: https://app.datadoghq.com/services
-[18]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[19]: /tracing/serverless_functions/
-[20]: /agent/basic_agent_usage/heroku/#installation
-[21]: /integrations/cloud_foundry/#trace-collection
-[22]: /integrations/amazon_elasticbeanstalk/
-[23]: /infrastructure/serverless/azure_app_services/#overview
-[24]: /integrations/
-[25]: /help/
 
+[1]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
+[2]: /tracing/compatibility_requirements/java
+[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[4]: /tracing/serverless_functions/
+[5]: /agent/basic_agent_usage/heroku/#installation
+[6]: /integrations/cloud_foundry/#trace-collection
+[7]: /integrations/amazon_elasticbeanstalk/
+[8]: /infrastructure/serverless/azure_app_services/#overview
+[9]: /integrations/
+[10]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
 Compatibility requirements
 : The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
-: For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][9] page.
+: For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
 Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data by default at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 #### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][7].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -184,29 +172,29 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 #### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][8] documentation.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][3] documentation.
 
 #### Other environments
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for a number of other environments, such as  [Heroku][4], [Cloud Foundry][5], and [AWS Elastic Beanstalk][6].
 
-For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][7] documentation for that environment and [contact support][8] if you are encountering any setup issues.
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /tracing/serverless_functions/
-[9]: /tracing/trace_collection/compatibility/python
 
+[1]: /tracing/trace_collection/compatibility/python
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /tracing/serverless_functions/
+[4]: /agent/basic_agent_usage/heroku/#installation
+[5]: /integrations/cloud_foundry/#trace-collection
+[6]: /integrations/amazon_elasticbeanstalk/
+[7]: /integrations/
+[8]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
 #### Setup the Datadog Agent for tracing
 
-Before installing `ddtrace`, [install the Datadog Agent](https://docs.datadoghq.com/agent/), to which `ddtrace` will send trace data.
+Before installing `ddtrace`, [install the Datadog Agent][1], to which `ddtrace` will send trace data.
 
 Then configure the Datadog Agent to accept traces. To do this, either:
 
@@ -214,7 +202,7 @@ Then configure the Datadog Agent to accept traces. To do this, either:
 
 OR
 
- - Add `apm_enabled: true` to the [Agent's configuration file](https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file)
+ - Add `apm_enabled: true` to the [Agent's configuration file][2]
 
 *Additionally, in containerized environments...*
 
@@ -222,9 +210,9 @@ OR
 
 OR
 
- - Add `apm_non_local_traffic: true` to the [Agent's configuration file](https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file).
+ - Add `apm_non_local_traffic: true` to the [Agent's configuration file][2].
 
-See the specific setup instructions for [Docker](https://docs.datadoghq.com/agent/docker/apm/?tab=ruby), [Kubernetes](https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm), [Amazon ECS](https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ruby) or [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection) to ensure that the Agent is configured to receive traces in a containerized environment.
+See the specific setup instructions for [Docker][3], [Kubernetes][4], [Amazon ECS][5] or [Fargate][6] to ensure that the Agent is configured to receive traces in a containerized environment.
 
 ##### Configuring trace data ingestion
 
@@ -238,7 +226,7 @@ You may change the protocol or port the Agent listens for trace data using the f
 
 OR
 
- - Add `apm_config: receiver_port: <port>` to the [Agent's configuration file](https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file)
+ - Add `apm_config: receiver_port: <port>` to the [Agent's configuration file][2]
 
  **For Unix Domain Socket (UDS)**:
 
@@ -246,20 +234,26 @@ OR
 
 OR
 
- - Add `apm_config: receiver_socket: <path-to-socket-file>` to the [Agent's configuration file](https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file)
+ - Add `apm_config: receiver_socket: <path-to-socket-file>` to the [Agent's configuration file][2]
 
+[1]: https://docs.datadoghq.com/agent/
+[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[3]: https://docs.datadoghq.com/agent/docker/apm/?tab=ruby
+[4]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm
+[5]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ruby
+[6]: https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 Compatibility requirements
 : The latest Node.js Tracer supports versions `>=14`.
-: For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][7] page.
+: For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 #### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][8].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -290,38 +284,38 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 #### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][9] documentation.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][3] documentation.
 
 #### Other environments
 
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for other environments, including [Heroku][4], [Cloud Foundry][5], and [AWS Elastic Beanstalk][6].
 
-For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
+For other environments, see the [Integrations][7] documentation for that environment and [contact support][8] if you encounter setup issues.
 
-Read [tracer settings][3] for a list of initialization options.
+Read [tracer settings][6] for a list of initialization options.
 
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-[7]: /tracing/trace_collection/compatibility/nodejs
-[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /tracing/serverless_functions/
 
+[1]: /tracing/trace_collection/compatibility/nodejs
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /tracing/serverless_functions/
+[4]: /agent/basic_agent_usage/heroku/#installation
+[5]: /integrations/cloud_foundry/#trace-collection
+[6]: /integrations/amazon_elasticbeanstalk/
+[7]: /integrations/
+[8]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
 Compatibility requirements
 : The latest PHP Tracer supports versions >= 5.4.x.
-: For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][7] page.
+: For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 #### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][8].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -351,27 +345,27 @@ Install and configure the Datadog Agent to receive traces from your now instrume
 
 #### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][9] documentation.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][3] documentation.
 
 #### Other environments
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for a number of other environments, such as  [Heroku][4], [Cloud Foundry][5], and [AWS Elastic Beanstalk][6].
 
-For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][7] documentation for that environment and [contact support][8] if you are encountering any setup issues.
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-[7]: /tracing/trace_collection/compatibility/php
-[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /tracing/serverless_functions/
 
+[1]: /tracing/trace_collection/compatibility/php
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /tracing/serverless_functions/
+[4]: /agent/basic_agent_usage/heroku/#installation
+[5]: /integrations/cloud_foundry/#trace-collection
+[6]: /integrations/amazon_elasticbeanstalk/
+[7]: /integrations/
+[8]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][8] and [Nginx][9]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][7] page.
+**Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
 
 #### Configure the Datadog Agent for APM
 
@@ -379,7 +373,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
 #### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][10].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][4].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -392,31 +386,31 @@ To connect to the Agent using Unix Domain Sockets, use `DD_TRACE_AGENT_URL` inst
 
 #### AWS Lambda
 
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][11] documentation.
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][5] documentation.
 
 #### Other Environments
 
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for other environments, including [Heroku][6], [Cloud Foundry][7], and [AWS Elastic Beanstalk][8].
 
-For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
+For other environments, see the [Integrations][9] documentation for that environment and [contact support][10] if you encounter setup issues.
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-[7]: /tracing/trace_collection/compatibility/cpp
-[8]: /tracing/trace_collection/proxy_setup/?tab=envoy
-[9]: /tracing/trace_collection/proxy_setup/?tab=nginx
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /tracing/serverless_functions/
 
+[1]: /tracing/trace_collection/proxy_setup/?tab=envoy
+[2]: /tracing/trace_collection/proxy_setup/?tab=nginx
+[3]: /tracing/trace_collection/compatibility/cpp
+[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /tracing/serverless_functions/
+[6]: /agent/basic_agent_usage/heroku/#installation
+[7]: /integrations/cloud_foundry/#trace-collection
+[8]: /integrations/amazon_elasticbeanstalk/
+[9]: /integrations/
+[10]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-core" >}}
 
 Compatibility requirements
 : The .NET Tracer supports instrumentation on .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7.
-: For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][6].
+: For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 <div class="alert alert-info">
     To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
@@ -446,7 +440,7 @@ For containerized, serverless, and cloud environments:
 
 ##### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][7].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
 2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
 
@@ -470,24 +464,24 @@ For more information on how to configure these settings, see [Configuration](#co
 
 ##### Other environments
 
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for other environments, including [Heroku][3], [Cloud Foundry][4], and [AWS Elastic Beanstalk][5].
 
-For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you encounter setup issues.
+For all other environments, see the [Integrations documentation][6] for that environment and contact [Datadog support][7] if you encounter setup issues.
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /integrations/
-[5]: /help/
-[6]: /tracing/trace_collection/compatibility/dotnet-core
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
+[1]: /tracing/trace_collection/compatibility/dotnet-core
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/basic_agent_usage/heroku/#installation
+[4]: /integrations/cloud_foundry/#trace-collection
+[5]: /integrations/amazon_elasticbeanstalk/
+[6]: /integrations/
+[7]: /help/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-framework" >}}
 
 Compatibility requirements
 : The .NET Tracer supports instrumentation on .NET Framework >= 4.6.1.
-: For a full list of Datadog's .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][6].
+: For a full list of Datadog's .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 <div class="alert alert-info">
   To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
@@ -513,7 +507,7 @@ For containerized, serverless, and cloud environments:
 
 ##### Containers
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][7].
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
 2. See the specific setup instructions to configure the Agent to receive traces in a containerized environment:
 
@@ -530,18 +524,18 @@ For containerized, serverless, and cloud environments:
 
 ##### Other environments
 
-Tracing is available for other environments including, [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+Tracing is available for other environments including, [Heroku][3], [Cloud Foundry][4], and [AWS Elastic Beanstalk][5].
 
-For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
+For all other environments, see the [Integrations documentation][6] for that environment and contact [Datadog support][7] if you are encountering setup issues.
 
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /integrations/
-[5]: /help/
-[6]: /tracing/trace_collection/compatibility/dotnet-framework
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
+[1]: /tracing/trace_collection/compatibility/dotnet-framework
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/basic_agent_usage/heroku/#installation
+[4]: /integrations/cloud_foundry/#trace-collection
+[5]: /integrations/amazon_elasticbeanstalk/
+[6]: /integrations/
+[7]: /help/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -575,7 +569,7 @@ After the agent is installed, to begin tracing your applications:
    ```
 
    **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
-   For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
+   For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][1] for any specific version.
 
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
@@ -583,16 +577,16 @@ After the agent is installed, to begin tracing your applications:
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
 
-    **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][4] for more information.
+    **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][2] for more information.
 
 | Environment Variable      | System Property                     | Description|
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
 | `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, `1.3-alpha`, etc.) |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][3] |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][4] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][5] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][6] UI. |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][5] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][6] UI.     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
 
 Additional [configuration options](#configuration) are described below.
@@ -610,7 +604,7 @@ If your app is called `my_app.jar`, create a `my_app.conf`, containing:
 JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 ```
 
-For more information, see the [Spring Boot documentation][20].
+For more information, see the [Spring Boot documentation][7].
 
 ##### Tomcat
 
@@ -652,7 +646,7 @@ set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
 <option value="-javaagent:/path/to/dd-java-agent.jar"/>
 ```
 
-For more details, see the [JBoss documentation][21].
+For more details, see the [JBoss documentation][8].
 
 
 ##### Jetty
@@ -682,7 +676,7 @@ In the administrative console:
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-For additional details and options, see the [WebSphere docs][22].
+For additional details and options, see the [WebSphere docs][9].
 
 
 **Note**
@@ -693,35 +687,27 @@ For additional details and options, see the [WebSphere docs][22].
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     For more information, see the [Oracle documentation][7].
+     For more information, see the [Oracle documentation][10].
 
 - Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
-
-[1]: /tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/service-setup
-[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
-[4]: /account_management/billing/apm_tracing_profiler/
-[5]: /profiler/
-[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
-[7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: /tracing/trace_collection/library_config/java/
-[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
-[11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
-[16]: /agent/remote_config/
-[17]: https://app.datadoghq.com/services
-[18]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[19]: /tracing/serverless_functions/
-[20]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
-[21]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
-[22]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][11] for details.
 
 
+
+[1]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[2]: /account_management/billing/apm_tracing_profiler/
+[3]: /profiler/
+[4]: /tracing/other_telemetry/connect_logs_and_traces/java/
+[5]: /agent/remote_config/
+[6]: https://app.datadoghq.com/services
+[7]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
+[8]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
+[9]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
+[10]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[11]: /tracing/trace_collection/library_config/java/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -751,16 +737,16 @@ Once you've finished setup and are running the tracer with your application, you
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][1] for details.
 
 #### Upgrading to v1
 
-If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [release notes][5] in the library documentation for full details.
+If you are upgrading to ddtrace v1, review the [upgrade guide][2] and the [release notes][3] in the library documentation for full details.
 
-[3]: /tracing/trace_collection/library_config/python/
-[4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
 
+[1]: /tracing/trace_collection/library_config/python/
+[2]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
+[3]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -867,7 +853,7 @@ If your application does not use the supported gems (Rails or Hanami) above, you
 
 #### Configuring OpenTelemetry
 
-You can send OpenTelemetry traces directly to the Datadog Agent (without `ddtrace`) by using OTLP. Check out our documentation on [OTLP ingest in the Datadog Agent](https://docs.datadoghq.com/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent) for details.
+You can send OpenTelemetry traces directly to the Datadog Agent (without `ddtrace`) by using OTLP. Check out our documentation on [OTLP ingest in the Datadog Agent][1] for details.
 
 #### Connect your application to the Datadog Agent
 
@@ -886,7 +872,7 @@ If your Agent runs on a different host or container than your application, or yo
 
 #### Final steps for installation
 
-After setting up, your services will appear on the [APM services page](https://app.datadoghq.com/apm/services) within a few minutes. Learn more about [using the APM UI][visualization docs].
+After setting up, your services will appear on the [APM services page][2] within a few minutes. Learn more about [using the APM UI][visualization docs].
 
 #### Manual instrumentation
 
@@ -998,6 +984,8 @@ You can also get the current active trace using the `active_trace` method. This 
 current_trace = Datadog::Tracing.active_trace
 ```
 
+[1]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent
+[2]: https://app.datadoghq.com/apm/services
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -1007,17 +995,14 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 #### Library configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][2] for details.
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][4].
+For configuration instructions and details about using the API, see the Datadog [API documentation][3].
+
 
 [1]: /tracing/compatibility_requirements/go
-[3]: tracing/trace_collection/library_config/python/
-[4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
-[11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
-
+[2]: tracing/trace_collection/library_config/python/
+[3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -1033,7 +1018,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
     npm install dd-trace@latest-node12
     ```
     For more information on our distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
-    If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][5] to assess any breaking changes.
+    If you are upgrading from a previous major version of the library (0.x, 1.x, or 2.x) to another major version (2.x or 3.x), read the [Migration Guide][2] to assess any breaking changes.
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
@@ -1126,14 +1111,12 @@ esbuild.build({
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
+
 
 [1]: /tracing/compatibility_requirements/nodejs
-[4]: tracing/trace_collection/library_config/nodejs
-[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
-
+[2]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[3]: tracing/trace_collection/library_config/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -1169,7 +1152,7 @@ php datadog-setup.php --php-bin=all --enable-profiling
 
 This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 
-Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
+Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][1].
 
 When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
 
@@ -1199,15 +1182,15 @@ Automatic instrumentation captures:
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][2] for details.
 
 #### Tracing short- and long-running CLI scripts
 
-Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI Scripts][7] for more information.
+Additional steps are required for instrumenting CLI scripts. Read [Trace PHP CLI Scripts][3] for more information.
 
 #### Upgrading
 
-To upgrade the PHP tracer, [download the latest release][5] and follow the same steps as [installing the extension](#install-the-extension).
+To upgrade the PHP tracer, [download the latest release][1] and follow the same steps as [installing the extension](#install-the-extension).
 
 Once the installation is completed restart PHP (PHP-FPM or the Apache SAPI).
 
@@ -1292,7 +1275,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 **HP installed from the Sury Debian DPA**
 
-If PHP was installed from the [Sury Debian DPA][8], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
+If PHP was installed from the [Sury Debian DPA][4], debug symbols are already available from the DPA. For example, for PHP-FPM 7.2:
 
 ```
 apt update
@@ -1301,7 +1284,7 @@ apt install -y php7.2-fpm-dbgsym
 
 **PHP installed from a different package**
 
-The Debian project maintains a wiki page with [instructions to install debug symbols][9].
+The Debian project maintains a wiki page with [instructions to install debug symbols][5].
 
 Edit the file `/etc/apt/sources.list`:
 
@@ -1351,7 +1334,7 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 **PHP installed from `ppa:ondrej/php`**
 
-If PHP was installed from the [`ppa:ondrej/php`][10], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
+If PHP was installed from the [`ppa:ondrej/php`][6], edit the apt source file `/etc/apt/sources.list.d/ondrej-*.list` by adding the `main/debug` component.
 
 Before:
 
@@ -1387,7 +1370,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][11] from the `ddebs` can be found in the Ubuntu documentation.
+If the `-dbg` and `-dbgsym` packages cannot be found, enable the `ddebs` repositories. Detailed information about how to [install debug symbols][7] from the `ddebs` can be found in the Ubuntu documentation.
 
 For example, for Ubuntu 18.04+, enable the `ddebs` repo:
 
@@ -1397,7 +1380,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Import the signing key (make sure the [signing key is correct][12]):
+Import the signing key (make sure the [signing key is correct][8]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -1474,7 +1457,7 @@ When using Apache, run:
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][13] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
+The resulting Valgrind trace is printed by default to the standard error, follow the [official documentation][9] to print to a different target. The expected output is similar to the example below for a PHP-FPM process:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -1540,19 +1523,16 @@ For Apache, run:
 (. /etc/apache2/envvars; strace -f apache2 -X)
 ```
 
-[1]: /tracing/compatibility_requirements/php
-[2]: https://app.datadoghq.com/apm/service-setup
-[3]: /tracing/glossary/
-[5]: https://app.datadoghq.com/apm/services
-[6]: /tracing/trace_collection/library_config/php/
-[7]: /tracing/guide/trace-php-cli-scripts/
-[8]: https://packages.sury.org/php/
-[9]: https://wiki.debian.org/HowToGetABacktrace
-[10]: https://launchpad.net/~ondrej/+archive/ubuntu/php
-[11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-[12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
-[13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
 
+[1]: https://app.datadoghq.com/apm/services
+[2]: /tracing/trace_collection/library_config/php/
+[3]: /tracing/guide/trace-php-cli-scripts/
+[4]: https://packages.sury.org/php/
+[5]: https://wiki.debian.org/HowToGetABacktrace
+[6]: https://launchpad.net/~ondrej/+archive/ubuntu/php
+[7]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
+[8]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
+[9]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
@@ -1702,14 +1682,10 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][1] for details.
 
-[1]: /tracing/setup/envoy/
-[2]: /tracing/setup/nginx/
-[3]: /tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/service-setup
-[5]: /tracing/trace_collection/library_config/cpp/
 
+[1]: /tracing/trace_collection/library_config/cpp/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-core" >}}
 
@@ -1721,19 +1697,18 @@ You can install the Datadog .NET Tracer machine-wide so that all services on the
 
 To install the .NET Tracer machine-wide:
 
-1. Download the [.NET Tracer MSI installer][16]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
 You can also script the MSI setup by running the following in PowerShell: `Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-apm.msi'`
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 
 #### Linux
 
 To install the .NET Tracer machine-wide:
 
-1. Download the latest [.NET Tracer package][16] that supports your operating system and architecture.
+1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
 
 2. Run one of the following commands to install the package and create the .NET tracer log directory `/var/log/datadog/dotnet` with the appropriate permissions:
 
@@ -1757,7 +1732,7 @@ To install the .NET Tracer machine-wide:
 
 To install the .NET Tracer per-application:
 
-1. Add the `Datadog.Trace.Bundle` [NuGet package][15] to your application.
+1. Add the `Datadog.Trace.Bundle` [NuGet package][2] to your application.
 
 #### Enable the tracer for your service
 
@@ -1815,8 +1790,8 @@ For information about the different methods for setting environment variables, s
 
 #### NuGet
 
-Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][13].
-Docker examples are also available in the [repository][14].
+Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][3].
+Docker examples are also available in the [repository][4].
 
 #### View your live data
 
@@ -1824,11 +1799,11 @@ After enabling the .NET Tracer for your service:
 
 1. Restart your service.
 2. Create application load.
-3. In Datadog, navigate to [**APM** > **APM Traces**][3].
+3. In Datadog, navigate to [**APM** > **APM Traces**][5].
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][6] for details.
 
 #### Custom instrumentation
 
@@ -1842,7 +1817,7 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][12] to your application.
+1. Add the `Datadog.Trace` [NuGet package][7] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 ##### Linux
@@ -1852,7 +1827,7 @@ To use custom instrumentation in your .NET application:
 </div>
 
 To use custom instrumentation in your .NET application:
-1. Add the `Datadog.Trace` [NuGet package][12] to your application.
+1. Add the `Datadog.Trace` [NuGet package][7] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 ##### NuGet
@@ -1861,7 +1836,7 @@ To use custom instrumentation in your .NET application:
 
 1. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][5].
+For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][8].
 
 #### Configuring process environment variables
 
@@ -1981,7 +1956,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     DD_LOGS_INJECTION=true
     DD_RUNTIME_METRICS_ENABLED=true
     ```
-2. In the service's configuration file, reference this as an [`EnvironmentFile`][1] in the service block:
+2. In the service's configuration file, reference this as an `EnvironmentFile` in the service block:
 
     ```ini
     [Service]
@@ -1998,7 +1973,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
 
 When using `systemctl` to run .NET applications as a service, you can also set environment variables to be loaded for all services run by `systemctl`.
 
-1. Set the required environment variables by running [`systemctl set-environment`][6]:
+1. Set the required environment variables by running [`systemctl set-environment`][9]:
 
     ```bash
     systemctl set-environment CORECLR_ENABLE_PROFILING=1
@@ -2014,20 +1989,17 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 
 3. Restart the .NET service for the environment variables to take effect.
 
-[1]: /tracing/trace_collection/compatibility/dotnet-core
-[2]: /agent/
-[3]: https://app.datadoghq.com/apm/traces
-[4]: /tracing/trace_collection/library_config/dotnet-core/
-[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
-[11]: /tracing/_trace_collection/library_injection_local/
-[12]: https://www.nuget.org/packages/Datadog.Trace
-[13]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
-[14]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
-[15]: https://www.nuget.org/packages/Datadog.Trace.Bundle
-[16]: https://github.com/DataDog/dd-trace-dotnet/releases
 
 
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: https://www.nuget.org/packages/Datadog.Trace.Bundle
+[3]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
+[4]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+[5]: https://app.datadoghq.com/apm/traces
+[6]: /tracing/trace_collection/library_config/dotnet-core/
+[7]: https://www.nuget.org/packages/Datadog.Trace
+[8]: /tracing/trace_collection/custom_instrumentation/dotnet/
+[9]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-framework" >}}
 
@@ -2041,7 +2013,7 @@ Install the Datadog .NET Tracer machine-wide so that all services on the machine
 
 To install the .NET Tracer machine-wide:
 
-1. Download the [.NET Tracer MSI installer][6]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
@@ -2055,7 +2027,7 @@ You can also script the MSI setup by running the following in PowerShell: `Start
 
 To install the .NET Tracer per-application:
 
-1. Add the `Datadog.Trace.Bundle` [NuGet package][6] to your application.
+1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
 #### Enable the tracer for your service
 
@@ -2096,8 +2068,8 @@ For information about the different methods for setting environment variables, s
 
 ##### NuGet
 
-Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][12].
-Docker examples are also available in the [repository][13].
+Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][2].
+Docker examples are also available in the [repository][3].
 
 #### View your live data
 
@@ -2107,11 +2079,11 @@ After enabling the .NET Tracer for your service:
 
 2. Create application load.
 
-3. In Datadog, navigate to [**APM** > **APM Traces**][3].
+3. In Datadog, navigate to [**APM** > **APM Traces**][4].
 
 #### Configuration
 
-If needed, configure the tracing library to send application performance telemetry data, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+If needed, configure the tracing library to send application performance telemetry data, including setting up Unified Service Tagging. Read [Library Configuration][5] for details.
 
 #### Custom instrumentation
 
@@ -2125,7 +2097,7 @@ Your setup for custom instrumentation depends on your automatic instrumentation 
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][6] to your application.
+1. Add the `Datadog.Trace` [NuGet package][1] to your application.
 2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 #### NuGet
@@ -2134,7 +2106,7 @@ To use custom instrumentation in your .NET application:
 
 1. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
-For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][5].
+For more information on adding spans and tags for custom instrumentation, see the [.NET Custom Instrumentation documentation][6].
 
 #### Configuring process environment variables
 
@@ -2200,31 +2172,28 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-[1]: /tracing/compatibility_requirements/dotnet-framework
-[2]: /agent/
-[3]: https://app.datadoghq.com/apm/traces
-[4]: /tracing/trace_collection/library_config/dotnet-framework/
-[5]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[6]: https://www.nuget.org/packages/Datadog.Trace.Bundle
-[11]: /tracing/_trace_collection/library_injection_local/
-[12]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
-[13]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 
+[1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
+[2]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
+[3]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+[4]: https://app.datadoghq.com/apm/traces
+[5]: /tracing/trace_collection/library_config/dotnet-framework/
+[6]: /tracing/trace_collection/custom_instrumentation/dotnet/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][2].
+To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
 
 ### Option 2 - Inject the library locally at the Agent
 
-For Kubernetes, hosts, and containers, you can inject the tracing library locally at the Agent without modifying your application code. For more information and instructions, read [Injecting Libraries Locally][4].
+For Kubernetes, hosts, and containers, you can inject the tracing library locally at the Agent without modifying your application code. For more information and instructions, read [Injecting Libraries Locally][2].
 
 - For Kubernetes, you can inject the library into applications written in Java, Python, Node.js, .NET, and Ruby.
 - **Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
 
 ### Option 3 - Inject the library remotely from the Datadog UI
 
-For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. For more information and instructions, read [Injecting Libraries Remotely][5].
+For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. For more information and instructions, read [Injecting Libraries Remotely][3].
 
 ## APM setup tutorials
 
@@ -2252,8 +2221,6 @@ The following tutorials guide you through setting up distributed tracing for a s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/compatibility/
-[2]: /developers/community/libraries/#apm-tracing-client-libraries
-[3]: /profiler/enabling/
-[4]: /tracing/trace_collection/library_injection_local/
-[5]: /tracing/trace_collection/library_injection_remote/
+[1]: /developers/community/libraries/#apm-tracing-client-libraries
+[2]: /tracing/trace_collection/library_injection_local/
+[3]: /tracing/trace_collection/library_injection_remote/
