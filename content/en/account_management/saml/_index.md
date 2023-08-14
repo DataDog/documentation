@@ -7,6 +7,8 @@ further_reading:
 - link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
+algolia:
+  tags: ['saml']
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
