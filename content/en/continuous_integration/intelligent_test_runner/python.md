@@ -50,7 +50,7 @@ The Intelligent Test Runner can be disabled at runtime, regardless of the settin
 : Disables the Intelligent Test Runner from running.<br/>
 **Default**: `false`
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
