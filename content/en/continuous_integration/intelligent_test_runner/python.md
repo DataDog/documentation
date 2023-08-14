@@ -10,8 +10,6 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Python (using `pytest`) in beta.{{< /callout >}}
-
 ## Compatibility
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
