@@ -901,11 +901,7 @@ class Integrations:
                 for redirect, aliases in CUSTOM_REDIRECTS.items():
                     if redirect == item.get('name'):
                         for alias in aliases['aliases']:
-                            item.setdefault('aliases', []).append(alias)
-                #        if item.get('aliases'): 
-                #            item["aliases"] += aliases["aliases"]
-                #        else:
-                #            item["aliases"] = aliases["aliases"]         
+                            item.setdefault('aliases', []).append(alias)         
                 # remove aliases that point to the page they're located on
                 # get the current slug from the doc_link
                 if item.get('name'):
