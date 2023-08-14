@@ -201,5 +201,5 @@ The content of the violation is shown in tabs:
 [3]: /integrations/github/
 [4]: /account_management/api-app-keys/
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: /rules
+[6]: /continuous_integration/static_analysis/rules
 [103]: /getting_started/site/
