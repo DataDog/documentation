@@ -3,7 +3,8 @@ title: Cloud Security Management Misconfigurations
 kind: documentation
 aliases:
   - /security_platform/cspm/
-  - security/cspm/#glossary
+  - /security/cspm/#glossary
+  - /security/cspm/
 algolia:
   tags: ['cspm']
 ---
@@ -21,6 +22,8 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it eas
 Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#manage-out-of-the-box-and-custom-compliance-rules). 
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Misconfigurations Explorer][2].
+
+CSM Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new findings as soon as a scan is completed, and stores a complete history of all findings for the past 15 months so they are available in case of an investigation or audit.
 
 {{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
@@ -53,26 +56,26 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cspm/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/misconfigurations/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for CSM Misconfigurations{{< /nextlink >}}
-  {{< nextlink href="/security/cspm/findings">}} Learn about CSM Misconfigurations findings{{< /nextlink >}}
+  {{< nextlink href="/security/misconfigurations/findings">}} Learn about CSM Misconfigurations findings{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/security/csm
 [2]: https://app.datadoghq.com/security/compliance
-[3]: /security/cspm/frameworks_and_benchmarks
+[3]: /security/misconfigurations/frameworks_and_benchmarks
 [4]: /security/default_rules/#cat-posture-management-cloud
-[5]: /security/cspm/frameworks_and_benchmarks#view-your-compliance-posture
-[6]: /security/cspm/custom_rules
+[5]: /security/misconfigurations/frameworks_and_benchmarks#view-your-compliance-posture
+[6]: /security/misconfigurations/custom_rules
 [7]: /security/notifications/
 [8]: /security/notifications/#notification-channels
 [9]: /security/notifications/#detection-rule-notifications
-[10]: /security/cspm/findings
+[10]: /security/misconfigurations/findings
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[13]: /security/cspm/findings#mute-findings
+[13]: /security/misconfigurations/findings#mute-findings

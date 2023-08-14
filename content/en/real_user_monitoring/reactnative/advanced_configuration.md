@@ -44,7 +44,7 @@ describe('App', () => {
 
 If you use a test runner other than Jest, you need to create the mocks for your test runner.
 
-## Initialization paramaters
+## Initialization parameters
 
 You can specify the following parameters in your configuration when initializing the SDK:
 
