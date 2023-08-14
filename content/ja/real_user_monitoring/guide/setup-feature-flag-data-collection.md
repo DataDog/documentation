@@ -122,7 +122,7 @@ Datadog は、以下とのインテグレーションをサポートしていま
 
 Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告する露出リスナーを作成します。
 
-Amplitude の SDK の初期化については、Amplitude の [JavaScript SDK ドキュメント][1]を参照してください。
+Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
   const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
@@ -367,7 +367,7 @@ LaunchDarkly の SDK を初期化し、以下に示すコードスニペット�
 LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
-const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
   inspectors: [
     {
       type: "flag-used",
@@ -643,6 +643,7 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /ja/real_user_monitoring/browser/#setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/dashboards/
 [4]: /ja/monitors/#create-monitors
