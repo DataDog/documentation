@@ -10251,6 +10251,18 @@ api:
     url: /api/latest/teams/
     identifier: teams
     generated: true
+  - name: Get user memberships
+    url: '#get-user-memberships'
+    identifier: teams-get-user-memberships
+    parent: teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUserMemberships
+      unstable: []
+      order: 1
   - name: Update permission setting for team
     url: '#update-permission-setting-for-team'
     identifier: teams-update-permission-setting-for-team
