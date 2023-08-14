@@ -45,12 +45,6 @@ Using Static Analysis provides organizations with the following benefits:
 
 To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify which rulesets to use.
 
-```yaml
-rulesets:
-  - <ruleset-name>
-  - <ruleset-name>
-```
-
 For example, for Python rules:
 
 ```yaml
@@ -59,6 +53,14 @@ rulesets:
   - python-best-practices
   - python-inclusive
 ```
+
+A `static-analysis.datadog.yml` file supports the following:
+
+| Name               | Description                                                                               | Required | Default |
+|--------------------|-------------------------------------------------------------------------------------------|----------|---------|
+| `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
+| `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
+| `ignore-gitignore` | Controls if the Datadog Static Analysis will analyze the content in a `.gitignore` file.  | `false`  | `true`  |
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
@@ -199,4 +201,5 @@ The content of the violation is shown in tabs:
 [3]: /integrations/github/
 [4]: /account_management/api-app-keys/
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
+[6]: /rules
 [103]: /getting_started/site/
