@@ -38,7 +38,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 Please enable `Include execution data` option on the state machine's logging. By enabling this option, log execution input, data passed between states, and execution output will be logged in the logs which are then used by Datadog backend to construct these step spans for you.
 
 ## Some step spans are missing in the traces
-- For actions, we support basic actions of Lambda and DynamoDB, e.g. Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem... etc.
+- For actions, we support basic actions of Lambda and DynamoDB. For example, Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem and more.
 - For different flows, we do not support `Wait`, `Choice`, `Map`, `Success`, `Fail`, and `Pass`. For `Parrallel` flow, you would be able to see parallel executing spans stacking on top of each other, but there will be no `Parrallel` spans showing on the flamegraph.
 
 #### Notes
