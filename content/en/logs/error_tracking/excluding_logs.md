@@ -20,7 +20,7 @@ Filters can be reordered in the table by clicking on the right side of each row 
 
 ### Scope
 
-Exclusion filters are scoped only to Error Tracking. To exclude logs from Log Management, see [Filtering Logs](/agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs).
+An Error Tracking exclusion filter only impacts which issues are processed by Error Tracking. To filter logs from Log Management, [Create a log exclusion filter][3]. To exclude logs from being sent to Datadog, see [Filter Logs][2].
 
 ## Filter setup
 
@@ -40,3 +40,4 @@ This example creates an exclusion filter for logs matching `env:staging`, but th
 
 [1]: https://app.datadoghq.com/error-tracking/settings/exclusion-filters
 [2]: /agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs
+[3]: /logs/guide/getting-started-lwl/#3-create-a-log-pattern-exclusion-filter
