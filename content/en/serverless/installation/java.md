@@ -231,8 +231,6 @@ resource "aws_lambda_function" "lambda" {
     <DATADOG_EXTENSION_ARN>
   ]
 
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
-
   environment {
     variables = {
       DD_SITE                     = <DATADOG_SITE>
@@ -256,7 +254,7 @@ Fill in variables accordingly:
             <td>Commercial</td>
             <td>
                 <code>
-                arn:aws:lambda:&lt;AWS_REGION*gt;:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
                 </code>
             </td>
         </tr>
@@ -264,7 +262,7 @@ Fill in variables accordingly:
             <td>GovCloud</td>
             <td>
                 <code>
-                arn:aws-us-gov:lambda:&lt;AWS_REGION*gt;:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
                 </code>
                 </td>
         </tr>
@@ -331,8 +329,6 @@ resource "aws_lambda_function" "lambda" {
     "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-java:11",
     "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
   ]
-
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
 
   environment {
     variables = {

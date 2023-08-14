@@ -275,7 +275,6 @@ resource "aws_lambda_function" "lambda" {
     variables = {
       DD_SITE                     = <DATADOG_SITE>
       DD_API_KEY_SECRET_ARN       = <API_KEY>
-      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
       DD_LAMBDA_HANDLER           = <LAMBDA_HANDLER>
     }
   }
@@ -379,7 +378,6 @@ resource "aws_lambda_function" "lambda" {
     variables = {
       DD_SITE                     = datadoghq.com
       DD_API_KEY_SECRET_ARN       = "arn:aws..."
-      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
       DD_LAMBDA_HANDLER           = "myfunc.handler"
     }
   }

@@ -158,14 +158,11 @@ resource "aws_lambda_function" "lambda" {
     <DATADOG_EXTENSION_ARN>
   ]
 
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
-
   environment {
     variables = {
       DD_SITE                     = <DATADOG_SITE>
       DD_API_KEY_SECRET_ARN       = <API_KEY>
       AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
-      DD_LAMBDA_HANDLER           = <LAMBDA_HANDLER>
     }
   }
 }
@@ -246,7 +243,7 @@ resource "aws_lambda_function" "lambda" {
   # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
 
   layers = [
-    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}",
+    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-dotnet:9",
     "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
   ]
 
@@ -257,8 +254,6 @@ resource "aws_lambda_function" "lambda" {
       DD_SITE                     = "datadoghq.com"
       DD_API_KEY_SECRET_ARN       = "arn:aws..."
       AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
-      DD_LAMBDA_HANDLER           = "myfunc.handler"
-
     }
   }
 }
