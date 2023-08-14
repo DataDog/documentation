@@ -18,15 +18,31 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(searchQuery, clickthroughLink = '') {
+function sendSearchRumAction(searchQuery, clickthroughLink = '', clickPosition = -1) {
     if (window.DD_RUM && window._DATADOG_SYNTHETICS_BROWSER === undefined && searchQuery !== '') {
-        window.DD_RUM.addAction('userSearch', {
+        const userSearchData = {
             query: searchQuery.toLowerCase(),
             page: window.location.pathname,
-            lang: getPageLanguage(),
-            clickthroughLink
-        });
+            lang: getPageLanguage()
+        }
+
+        if (clickthroughLink) {
+            userSearchData.clickthroughLink = clickthroughLink
+        }
+
+        if (clickPosition >= 0) {
+            userSearchData.clickPosition = clickPosition
+        }
+
+        window.DD_RUM.addAction('userSearch', userSearchData)
     }
+}
+
+const getSearchResultClickPosition = (targetHref, hitsArray, page) => {
+    const { pathname, hash } = new URL(targetHref)
+    const relPath = `${pathname}${hash}`
+    const clickedSearchResultIndexOnPage = hitsArray.findIndex(hit => hit.relpermalink == relPath)
+    return clickedSearchResultIndexOnPage + (page * 10)
 }
 
 const { env } = document.documentElement.dataset;
@@ -210,7 +226,10 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
                 do {
                     if (target.href) {
-                        sendSearchRumAction(search.helper.state.query, target.href);
+                        const hitsArray = search.helper.lastResults.hits
+                        const page = search.helper.state.page
+                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, page)
+                        sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
                         window.history.pushState({}, '', target.href);
                         window.location.reload();
                     }
