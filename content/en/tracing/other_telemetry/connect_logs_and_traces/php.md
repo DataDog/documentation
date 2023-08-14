@@ -163,7 +163,7 @@ If your application uses JSON logs format, you can add a first-level key `dd` th
 ?>
 ```
 
-For monolog v3:
+For monolog v3, add the following configuration:
 
 ```php
 <?php
@@ -178,6 +178,8 @@ For monolog v3:
 ?>
 ```
 
+If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] and add `extra.dd.trace_id` to the **Trace Id Attributes** field.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -189,3 +191,4 @@ For monolog v3:
 [5]: https://github.com/laminas/laminas-log
 [6]: /getting_started/tagging/unified_service_tagging
 [7]: /logs/log_configuration/pipelines
+[8]: https://app.datadoghq.com/logs/pipelines/remapping
