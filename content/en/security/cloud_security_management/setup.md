@@ -3,11 +3,13 @@ title: Setting Up Cloud Security Management
 kind: documentation
 ---
 
-Cloud Security Management (CSM)
+Cloud Security Management (CSM) 
 
 CSM is built around the concept of packages
 
 Note you can enable other features...
+
+Each package includes access the
 
 | Package           | Features                   |
 |-------------------|----------------------------|
@@ -18,6 +20,7 @@ Note you can enable other features...
 ## CSM Enterprise
 
 ### Enable resource scanning for cloud accounts
+
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -35,7 +38,7 @@ Use one of the following methods to enable CSM Misconfigurations for your AWS ac
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][3] to activate CSM Misconfigurations for your account.
 3. On the **Setup** > **Cloud Providers** tab, click the **[AWS][3]** tile.
-4. To enable CSM Misconfigurations for an AWS account, turn on the **Collect Resources** toggle.
+4. To enable CSM Misconfigurations for an AWS account, turn on the **Resource Scanning** toggle.
 
 #### AWS integration tile
 
@@ -66,7 +69,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Azure 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
 3. On the **Setup** > **Cloud Providers** tab, click the **[Azure][2]** tile.
-4. Enable CSM Misconfigurations for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
+4. Enable CSM Misconfigurations for your Azure subscriptions by turning on the **Resource Scanning** toggle.
 
 #### Azure integration tile
 
@@ -113,12 +116,13 @@ The Datadog Google Cloud integration uses service accounts to create an API conn
 
 Use one of the following methods to enable CSM Misconfigurations for your Google Cloud projects:
 
-#### Security Setup
+#### CSM Configuration page
 
-1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
-3. On the **Setup** > **Cloud Providers** tab, click the **[Google Cloud Platform][2]** tile.
-4. Enable CSM Misconfigurations for your Google Cloud projects by turning on the **CSPM Enabled** toggle.
+1. On the **[Cloud Security Management Configuration][2]** page, click **Cloud Accounts**.
+2. Click **GCP** to view a list of available GCP projects.
+3. To enable resource collection for a project, click the **Resource Scanning** toggle.
+4. To enable resource collection for a project, toggle **Resource Scanning** to the on position.
+5. Click **Done**.
 
 #### Google Cloud integration tile
 
@@ -148,3 +152,5 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 ## Workload Security
 
 ### Enable CSM on the Agent for hosts and containers
+
+1. On the **Security** > **Setup** page, 
