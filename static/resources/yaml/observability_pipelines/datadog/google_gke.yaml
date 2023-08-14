@@ -141,6 +141,7 @@ pipelineConfig:
       inputs:
         - logs_finish_ddtags
       default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
       compression: gzip
       buffer:
          type: disk
@@ -150,6 +151,7 @@ pipelineConfig:
       inputs:
         - metrics_add_dd_tags
       default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
       buffer:
         type: disk
         max_size: 42949672959
