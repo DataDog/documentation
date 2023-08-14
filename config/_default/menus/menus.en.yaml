@@ -2940,11 +2940,16 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
+  - name: Setup
+    url: security/cloud_security_management/setup
+    parent: csm
+    identifier: csm_setup
+    weight: 1
   - name: Threats
     url: security/threats/
     parent: csm
     identifier: cloud_workload_security
-    weight: 1
+    weight: 3
   - name: Setup
     url: security/threats/setup
     parent: cloud_workload_security
