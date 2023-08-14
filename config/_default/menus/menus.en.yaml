@@ -6568,19 +6568,6 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
-  - name: Mute or unmute a finding
-    url: '#mute-or-unmute-a-finding'
-    identifier: security-monitoring-mute-or-unmute-a-finding
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateFinding
-      unstable:
-        - v2
-      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
