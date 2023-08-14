@@ -74,6 +74,8 @@ persistence:
 ## getting started with OP. It sets up data proxying and provides hooks
 ## for your own processing steps.
 pipelineConfig:
+  ## SOURCES: Data sources that Observability Pipelines Worker collects data from.
+  ## For a Datadog use case, we will receive data from the Datadog agent.
   sources:
     datadog_agent:
       address: 0.0.0.0:8282
