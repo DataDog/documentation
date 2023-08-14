@@ -1024,7 +1024,7 @@ For configuration instructions and details about using the API, see the Datadog 
 
 
 [1]: /tracing/compatibility_requirements/go
-[2]: tracing/trace_collection/library_config/python/
+[2]: /tracing/trace_collection/library_config/python/
 [3]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
@@ -1139,7 +1139,7 @@ If needed, configure the tracing library to send application performance telemet
 
 [1]: /tracing/compatibility_requirements/nodejs
 [2]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[3]: tracing/trace_collection/library_config/nodejs
+[3]: /tracing/trace_collection/library_config/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
