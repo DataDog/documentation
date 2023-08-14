@@ -243,6 +243,62 @@ OR
 [5]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ruby
 [6]: https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection
 {{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+
+Compatibility requirements
+: The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`.
+: For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][7] page.
+
+Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+
+#### Containers
+
+1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][8].
+
+2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
+
+{{< partial name="apm/apm-containers.html" >}}
+</br>
+
+3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
+
+   A similar rule applies to all metrics sent by the Go tracer (including Runtime Metrics and internal telemetry): the client attempts to send Dogstatsd data to the Unix domain socket `/var/run/datadog/dsd.socket` and defaults to `http://localhost:8125` if that does not exist.
+
+   If you require different hosts or ports, use one or more of the following environment variables. The examples show the defaults, but you can set them to other values as well.
+
+   ```
+   DD_AGENT_HOST=localhost   # The host to send traces and metrics to. Defaults to localhost.
+   DD_TRACE_AGENT_PORT=8126  # The port to send traces to. Defaults to 8126.
+   DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
+   ```
+
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
+
+4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+
+{{< /site-region >}}
+
+#### AWS Lambda
+
+To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][9] documentation.
+
+
+#### Other Environments
+
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
+
+For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+
+[1]: /agent/basic_agent_usage/heroku/#installation
+[2]: /integrations/cloud_foundry/#trace-collection
+[3]: /integrations/amazon_elasticbeanstalk/
+[5]: /integrations/
+[6]: /help/
+[7]: /tracing/compatibility_requirements/go
+[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[9]: /tracing/serverless_functions/
+
+{{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
 Compatibility requirements
@@ -353,7 +409,6 @@ Tracing is available for a number of other environments, such as  [Heroku][4], [
 
 For other environments, refer to the [Integrations][7] documentation for that environment and [contact support][8] if you are encountering any setup issues.
 
-
 [1]: /tracing/trace_collection/compatibility/php
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [3]: /tracing/serverless_functions/
@@ -365,9 +420,9 @@ For other environments, refer to the [Integrations][7] documentation for that en
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-**Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
-
-#### Configure the Datadog Agent for APM
+<div class="alert alert-info">
+<strong>Note</strong>: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as <a href="/tracing/trace_collection/proxy_setup/?tab=envoy">Envoy</a> and <a href="/tracing/trace_collection/proxy_setup/?tab=nginx">Nginx</a>. For compatibility requirements for the C++ Tracer, visit the <a href="/tracing/trace_collection/compatibility/cpp">Compatibility Requirements</a> page.
+</div>
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
@@ -413,32 +468,14 @@ Compatibility requirements
 : For a full list of Datadog's .NET Core library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 <div class="alert alert-info">
-    To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+    To set up Datadog APM in AWS Lambda, see <a href="/tracing/serverless_functions/">Tracing Serverless Functions</a>, in Azure App Service, see <a href="/serverless/azure_app_services/">Tracing Azure App Service</a>.
 </div>
-
-<div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
-</div>
-
-<div class="alert alert-info">
-  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
-</div>
-
-#### Installation
-
-1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
-2. [Choose your instrumentation method](#option-2---inject-the-library-locally-at-the-agent)
-3. [Install the tracer.](#install-the-tracer)
-4. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-5. [View your live data.](#view-your-live-data)
-
-#### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
-##### Containers
+#### Containers
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
@@ -462,12 +499,11 @@ For more information on how to configure these settings, see [Configuration](#co
 
 {{< /site-region >}}
 
-##### Other environments
+#### Other environments
 
 Tracing is available for other environments, including [Heroku][3], [Cloud Foundry][4], and [AWS Elastic Beanstalk][5].
 
 For all other environments, see the [Integrations documentation][6] for that environment and contact [Datadog support][7] if you encounter setup issues.
-
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -484,28 +520,14 @@ Compatibility requirements
 : For a full list of Datadog's .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 <div class="alert alert-info">
-  To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
+  To set up Datadog APM in AWS Lambda, see <a href="/tracing/serverless_functions/">Tracing Serverless Functions</a>, in Azure App Service, see <a href="/serverless/azure_app_services/">Tracing Azure App Service</a>.
 </div>
-
-<div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
-</div>
-
-#### Installation
-
-1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
-2. [Choose your instrumentation method](#option-2---inject-the-library-locally-at-the-agent)
-3. [Install the tracer.](#install-the-tracer)
-4. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-5. [View your live data.](#view-your-live-data)
-
-#### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic on `http://localhost:8126`.
 
 For containerized, serverless, and cloud environments:
 
-##### Containers
+#### Containers
 
 1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][2].
 
@@ -522,12 +544,11 @@ For containerized, serverless, and cloud environments:
 
 {{< /site-region >}}
 
-##### Other environments
+#### Other environments
 
 Tracing is available for other environments including, [Heroku][3], [Cloud Foundry][4], and [AWS Elastic Beanstalk][5].
 
 For all other environments, see the [Integrations documentation][6] for that environment and contact [Datadog support][7] if you are encountering setup issues.
-
 
 [1]: /tracing/trace_collection/compatibility/dotnet-framework
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -536,6 +557,7 @@ For all other environments, see the [Integrations documentation][6] for that env
 [5]: /integrations/amazon_elasticbeanstalk/
 [6]: /integrations/
 [7]: /help/
+
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -872,7 +894,7 @@ If your Agent runs on a different host or container than your application, or yo
 
 #### Final steps for installation
 
-After setting up, your services will appear on the [APM services page][2] within a few minutes. Learn more about [using the APM UI][visualization docs].
+After setting up, your services will appear on the [APM services page][2] within a few minutes. Learn more about [using the APM UI][3].
 
 #### Manual instrumentation
 
@@ -984,8 +1006,9 @@ You can also get the current active trace using the `active_trace` method. This 
 current_trace = Datadog::Tracing.active_trace
 ```
 
-[1]: https://docs.datadoghq.com/tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent
+[1]: /tracing/setup_overview/open_standards/#otlp-ingest-in-datadog-agent
 [2]: https://app.datadoghq.com/apm/services
+[3]: /tracing/glossary/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -1538,8 +1561,8 @@ For Apache, run:
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your C++ applications in one of two ways:
 
-* Compile against dd-opentracing-cpp, where the Datadog lib is compiled in and configured in code
-* Dynamic loading, where the Datadog OpenTracing library is loaded at runtime and configured via JSON
+* [Compile against dd-opentracing-cpp](#compile-against-dd-opentracing-cpp), where the Datadog lib is compiled in and configured in code
+* [Dynamic loading](#dynamic-loading), where the Datadog OpenTracing library is loaded at runtime and configured via JSON
 
 #### Compile against dd-opentracing-cpp
 
@@ -1688,6 +1711,10 @@ If needed, configure the tracing library to send application performance telemet
 [1]: /tracing/trace_collection/library_config/cpp/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet-core" >}}
+
+<div class="alert alert-info">
+  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
+</div>
 
 #### Install the tracer
 
