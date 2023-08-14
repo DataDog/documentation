@@ -147,22 +147,7 @@ For monolog v2:
   ?>
 ```
 
-For monolog v3:
-
-```php
-<?php
-  $logger->pushProcessor(function ($record) {
-        $context = \DDTrace\current_context();
-        $record->extra['dd'] = [
-            'trace_id' => $context['trace_id'],
-            'span_id'  => $context['span_id'],
-        ];
-        return $record;
-    });
-?>
-```
-
-If your application uses json logs format instead of appending trace_id and span_id to the log message you can add first-level key "dd" containing these ids:
+If your application uses JSON logs format, you can add a first-level key `dd` that contains the `trace_id` and `span_id`, instead of appending `trace_id` and `span_id` to the log message:
 
 ```php
 <?php
@@ -175,6 +160,21 @@ If your application uses json logs format instead of appending trace_id and span
 
       return $record;
   });
+?>
+```
+
+For monolog v3:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+        $context = \DDTrace\current_context();
+        $record->extra['dd'] = [
+            'trace_id' => $context['trace_id'],
+            'span_id'  => $context['span_id'],
+        ];
+        return $record;
+    });
 ?>
 ```
 
