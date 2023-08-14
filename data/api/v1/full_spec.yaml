@@ -14893,6 +14893,9 @@ components:
           maximum: 10
           minimum: 0
           type: integer
+        persistCookies:
+          description: Persist cookies across redirects.
+          type: boolean
         port:
           description: Port to use when performing the test.
           format: int64
@@ -19549,6 +19552,7 @@ components:
     WidgetComparator:
       description: Comparator to apply.
       enum:
+      - '='
       - '>'
       - '>='
       - <
@@ -19556,6 +19560,7 @@ components:
       example: '>'
       type: string
       x-enum-varnames:
+      - EQUAL_TO
       - GREATER_THAN
       - GREATER_THAN_OR_EQUAL_TO
       - LESS_THAN
