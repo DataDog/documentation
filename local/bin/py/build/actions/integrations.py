@@ -386,7 +386,6 @@ class Integrations:
         set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
-        
         names = [
             d.get("name", "").lower()
             for d in self.datafile_json
