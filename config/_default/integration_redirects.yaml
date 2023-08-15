@@ -1,2 +1,1 @@
-akamai_datastream_2:
-  aliases: ['/integrations/akamai_datastream']
+akamai_datastream_2: ['/integrations/akamai_datastream']
