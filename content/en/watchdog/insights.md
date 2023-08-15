@@ -30,7 +30,7 @@ When visiting most of Datadog product explorers or pages, Watchdog returns two t
 
 ## Explore insights
 
-The Watchdog Insights carousel  sits near the top of the following product pages:
+The Watchdog Insights carousel sits near the top of the following product pages:
 
 - [Log explorer][1]
 - APM:
@@ -94,7 +94,49 @@ In the **full side panel** view, you can see:
 {{% /tab %}}
 {{% tab "APM" %}}
 
-TODO
+APM Outliers are available on all APM pages where the carousel is available:
+ - [Trace explorer](/tracing/trace_explorer/?tab=listview)
+ - [Service Page](/tracing/services/service_page/)
+ - [Resource Page](/tracing/services/resource_page/)
+
+**Error outliers**
+
+Error outliers display fields such as tags containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
+
+Typical examples of error outliers include `env:staging`, `availability_zone:us-east-1a`, `cluster_name:chinook`, and `version:v123456`.
+
+In the **banner card** view, you can see:
+
+  * The field name.
+  * The proportion of errors and overall traces that the field contributes to.
+
+{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:100%;" >}}
+
+In the **full side panel** view, you can see:
+
+  * The timeseries of error traces that contain the field.
+  * Tags that are often associated with the error traces.
+  * A comprehensive list of related Error Tracking Issues and failing spans.
+
+{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
+
+**Latency Outlier**
+
+Latency outliers display fields such as tags that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of APM spans.
+
+Latency outliers are computed for the span duration.
+
+In the **banner card** view, you can see:
+
+* The field name
+* The latency distribution for spans containing the tag and the baseline for the rest of the data
+* A percentile of interest latency value for the outlier tag and the difference with the baseline for the rest of the data
+
+{{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_s_card.png" alt="Latency Outlier banner card" style="width:100%;" >}}
+
+In the **full side panel**, you can see a latency distribution graph for the tag and the baseline with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
+
+{{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Profiling" %}}
@@ -132,7 +174,7 @@ In the **banner card** view, you can see:
 * The field name
 * The performance metric value containing the field and the baseline for the rest of the data
 
-In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
+In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
@@ -162,7 +204,7 @@ For live Processes Watchdog calculate outliers on the following metrics:
 
 - CPU
 - Memory
-  
+
 {{% /tab %}}
 {{% tab "Containers" %}}
 
