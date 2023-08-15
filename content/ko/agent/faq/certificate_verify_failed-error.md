@@ -110,7 +110,7 @@ restart-service -Force datadogagent
   `datadog.conf`를 업데이트한 후, 윈도우즈 서비스 관리자에서 Datadog 서비스를 재시작하세요.
 
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[1]: https://windows-agent.datadoghq.com/ddagent-cli-latest.msi
 [2]: https://app.datadoghq.com/account/settings?agent_version=5#agent
 [3]: /ko/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
 [4]: /ko/agent/versions/upgrade_to_agent_v6/?tab=linux

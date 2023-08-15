@@ -22,7 +22,7 @@ further_reading:
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
 
-By enriching your RUM data with feature flag data, you can be confident that your feature will successfully launch without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
+By enriching your RUM data with feature flag data, you can be confident that your feature successfully launches without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
 ## Setup
 
@@ -122,7 +122,7 @@ Datadog supports integrations with:
 
 Initialize Amplitude's SDK and and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
-For more information about initializing Amplitude's SDK, see Apmplitude's [JavaScript SDK documentation][1].
+For more information about initializing Amplitude's SDK, see Amplitude's [JavaScript SDK documentation][1].
 
 ```javascript
   const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
@@ -175,7 +175,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
   internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
     override fun track(exposure: Exposure) {
         // Send the feature flag when Amplitude reports the exposure
-        GlobalRum.get().addFeatureFlagEvaluation(
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
             exposure.flagKey,
             exposure.variant.orEmpty()
         )
@@ -226,7 +226,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```kotlin
-   GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -367,7 +367,7 @@ Initialize LaunchDarkly's SDK and create an inspector reporting feature flags ev
  For more information about initializing LaunchDarkly's SDK, see [LaunchDarkly's JavaScript SDK documentation][1].
 
 ```javascript
-const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
   inspectors: [
     {
       type: "flag-used",
@@ -472,7 +472,7 @@ For more information about initializing Split's SDK, see Split's [Android SDK do
   internal class DatadogSplitImpressionListener : ImpressionListener {
     override fun log(impression: Impression) {
         // Send the feature flag when Split reports the impression
-        GlobalRum.get().addFeatureFlagEvaluation(
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
             impression.split(),
             impression.treatment()
         )
@@ -598,24 +598,24 @@ Feature flags appear in the context of your RUM Sessions, Views, and Errors as a
 Search through all the data collected by RUM in the [RUM Explorer][2] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][3] and [monitors][4]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute.
 
 #### Sessions
-Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you will find all sessions in the given time frame where your feature flag was evaluated.
+Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you can find all sessions in the given time frame where your feature flag was evaluated.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Search Sessions for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
 #### Views
-Filtering your **Views** with the `@feature_flags.{flag_name}` attribute, you will find the specific views in the given time frame where your feature flag was evaluated.
+Filtering your **Views** with the `@feature_flags.{flag_name}` attribute, you can find the specific views in the given time frame where your feature flag was evaluated.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
 #### Errors
-Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you will find all the errors in the given time frame that occurred on the View where your feature flag was evaluated
+Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you can find all the errors in the given time frame that occurred on the View where your feature flag was evaluated
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
 ## Troubleshooting
 
 ### Why doesn't my feature flag data reflect what I expect to see?
-Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
+Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
 
@@ -643,6 +643,7 @@ datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /real_user_monitoring/browser/#setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

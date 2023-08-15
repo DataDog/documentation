@@ -3,6 +3,7 @@ title: Set Up Observability Pipelines in your Splunk Environment
 kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk
+  - /observability_pipelines/guide/setup_splunk_environment
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
@@ -23,7 +24,7 @@ The [Observability Pipelines Worker][1] can collect, process, and route logs and
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring Splunk to send logs through the Worker, to dual-write to Datadog.
 
-{{< img src="observability_pipelines/guide/splunk/setup.png" alt="A diagram of a couple of Splunk Heavy Forwarders sending their data through the Observability Pipelines aggregator." >}}
+{{< img src="observability_pipelines/guide/splunk/setup2.png" alt="A diagram of a couple of Splunk Heavy Forwarders sending their data through the Observability Pipelines aggregator." >}}
 
 ## Assumptions
 * You are using a log collector that is compatible with the Splunk HTTP Event Collector (HEC) protocol.
@@ -42,6 +43,9 @@ You can generate both of these in [Observability Pipelines][3].
 
 ### Provider-specific requirements
 {{< tabs >}}
+{{% tab "Docker" %}}
+Ensure that your machine is configured to run Docker.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
@@ -66,6 +70,12 @@ There are no provider-specific requirements for APT-based Linux.
 {{% tab "RPM-based Linux" %}}
 There are no provider-specific requirements for RPM-based Linux.
 {{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
+* The VPC ID your instances will run in.
+* The subnet IDs your instances will run in.
+* The AWS region your VPC is located in.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Setting up the Splunk index
@@ -83,6 +93,28 @@ After you add the input, Splunk creates a token for you. The token is typically 
 ## Installing the Observability Pipelines Worker
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+
+The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
+
+1. Download the [sample pipeline configuration file][2].
+
+2. Run the following command to start the Observability Pipelines Worker with Docker:
+    ```
+    docker run -i -e DD_API_KEY=<API_KEY> \
+      -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+      -e DD_SITE=<SITE> \
+      -e SPLUNK_HEC_ENDPOINT=<SPLUNK_URL> \
+      -e SPLUNK_TOKEN=<SPLUNK_TOKEN> \
+      -p 8088:8088 \
+      -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
+      datadog/observability-pipelines-worker run
+    ```
+   `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1. Be sure to update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+  
+[1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
+[2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
@@ -94,7 +126,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     site: "datadoghq.com"
   ```
 
-3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -130,7 +162,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     site: "datadoghq.com"
   ```
 
-3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -166,7 +198,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     site: "datadoghq.com"
   ```
 
-3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+3. replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
   ```yaml
   env:
     - name: SPLUNK_HEC_ENDPOINT
@@ -202,12 +234,12 @@ After you add the input, Splunk creates a token for you. The token is typically 
 2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
 
     ```
-    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog-observability-pipelines-worker.list"
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. Run the following commands to update your local `apt` repo and install the Worker:
@@ -224,7 +256,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
-    SPLUNK_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
     SPLUNK_TOKEN=<SPLUNK_TOKEN>
     EOF
     ```
@@ -236,7 +268,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/linux.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
@@ -270,7 +302,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
-    SPLUNK_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
     SPLUNK_TOKEN=<SPLUNK_TOKEN>
     EOF
     ```
@@ -282,13 +314,81 @@ After you add the input, Splunk creates a token for you. The token is typically 
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/linux.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
+{{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+Setup the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+```
+module "opw" {
+    source     = "https://github.com/DataDog/opw-terraform//aws"
+    vpc-id     = "{VPC ID}"
+    subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
+    region     = "{REGION}"
+
+    datadog-api-key = "{DATADOG API KEY}"
+    pipeline-id = "{OP PIPELINE ID}"
+    environment = {
+      "SPLUNK_TOKEN": "<SPLUNK TOKEN>",
+    }
+    pipeline-config = <<EOT
+sources:
+  splunk_receiver:
+    type: splunk_hec
+    address: 0.0.0.0:8088
+    valid_tokens:
+        - $${SPLUNK_TOKEN}
+
+transforms:
+  ## This is a placeholder for your own remap (or other transform)
+  ## steps with tags set up. Datadog recommends these tag assignments.
+  ## They show which data has been moved over to OP and what still needs
+  ## to be moved.
+  LOGS_YOUR_STEPS:
+    type: remap
+    inputs:
+      - splunk_receiver
+    source: |
+      .sender = "observability_pipelines_worker"
+      .opw_aggregator = get_hostname!()
+
+## This buffer configuration is split into 144GB buffers for both of the Datadog and Splunk sinks.
+##
+## This should work for the vast majority of OP Worker deployments and should rarely
+## need to be adjusted. If you do change it, be sure to update the size the `ebs-drive-size-gb` parameter.
+sinks:
+  datadog_logs:
+    type: datadog_logs
+    inputs:
+      - LOGS_YOUR_STEPS
+    default_api_key: "$${DD_API_KEY}"
+    compression: gzip
+    buffer:
+        type: disk
+        max_size: 154618822656
+  splunk_logs:
+    type: splunk_hec_logs
+    inputs:
+      - LOGS_YOUR_STEPS
+    endpoint: <SPLUNK HEC ENDPOINT>
+    default_token: $${SPLUNK_TOKEN}
+    encoding:
+      codec: json
+    buffer:
+        type: disk
+        max_size: 154618822656
+EOT
+}
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Load balancing
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+Production-oriented setup is not included in the Docker instructions. Instead, refer to your company's standards for load balancing in containerized environments. If you are testing on your local machine, configuring a load balancer is unnecessary.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
@@ -340,12 +440,18 @@ No built-in support for load-balancing is provided, given the single-machine nat
 {{% tab "RPM-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
 {{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Buffering
 Observability Pipelines includes multiple buffering strategies that allow you to increase the resilience of your cluster to downstream faults. The provided sample configurations use disk buffers, the capacities of which are rated for approximately 10 minutes of data at 10Mbps/core for Observability Pipelines deployments. That is often enough time for transient issues to resolve themselves, or for incident responders to decide what needs to be done with the observability data.
 
 {{< tabs >}}
+{{% tab "Docker" %}}
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker`. Make sure that your host machine has a sufficient amount of storage capacity allocated to the container's mountpoint.
+{{% /tab %}}
 {{% tab "AWS EKS" %}}
 For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
 {{% /tab %}}
@@ -365,12 +471,30 @@ By default, the Observability Pipelines Worker's data directory is set to `/var/
 
 Where possible, it is recommended to have a separate SSD mounted at that location.
 {{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+By default, a 288GB EBS drive is allocated to each instance, and the sample configuration above is set to use that for buffering.
+{{% /tab %}}
 {{< /tabs >}}
 
-## Connect forwarders to the Worker
+## Connect Splunk forwarders to the Observability Pipelines Worker
 After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing collectors to point to the Worker.
 
-For most collectors, changing the URL to the load balancer provisioned by these configurations, and updating the token, should suffice.
+You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
+
+For Terraform installs, the `lb-dns` output provides the necessary value.
+
+Additionally, you must update the Splunk collector with the HEC token you wish to use for authentication, so it matches the one specified in the Observability Pipelines Worker's list of `valid_tokens` in `pipeline.yaml`.
+
+```
+# Example pipeline.yaml splunk_receiver source
+sources:
+  splunk_receiver:
+    type: splunk_hec
+    address: 0.0.0.0:8088
+    valid_tokens:
+        - ${SPLUNK_TOKEN}
+```
+In the sample configuration provided, the same HEC token is used for both the Splunk source and destination.
 
 At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
@@ -379,9 +503,6 @@ The sample Observability Pipelines configuration does the following:
 - **Collects** logs being sent from the Splunk forwarder to the Observability Pipelines Worker. 
 - **Transforms** logs by adding tags to data that has come through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - **Routes** the logs by dual-shipping the data to both Splunk and Datadog. This demonstrates how easy it is to write to multiple destinations!
-
-- **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- **Dual-writes to Datadog.** This demonstrates how easy it is to write to multiple destinations.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

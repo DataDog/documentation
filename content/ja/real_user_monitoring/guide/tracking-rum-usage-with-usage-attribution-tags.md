@@ -38,7 +38,7 @@ datadogRum.setGlobalContextProperty('department', 'marketing');
 
 ```javascript
 //Android
-GlobalRum.addAttribute('department', 'marketing')
+GlobalRumMonitor.addAttribute('department', 'marketing')
 
 //iOS
 Global.rum.addAttribute(forKey: 'department', value: 'marketing')

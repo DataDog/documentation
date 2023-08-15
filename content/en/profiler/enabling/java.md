@@ -183,8 +183,6 @@ For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionS
 
 The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine has been enabled by default since 1.7.0.
 
-or:
-
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.wall.enabled=true

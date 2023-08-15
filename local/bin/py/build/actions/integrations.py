@@ -8,6 +8,7 @@ import re
 import shutil
 import sys
 from collections import defaultdict
+from pathlib import Path
 
 import yaml
 import markdown2
@@ -45,6 +46,8 @@ finally:
             for tag in get_non_deprecated_classifiers():
                 file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
             file.write(''.join(file_content) + '\n')
+
+CUSTOM_REDIRECTS = yaml.safe_load(Path('config/_default/integration_redirects.yaml').read_text())
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
@@ -383,7 +386,6 @@ class Integrations:
         set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
-
         names = [
             d.get("name", "").lower()
             for d in self.datafile_json
@@ -848,10 +850,10 @@ class Integrations:
                         print(e)
                         print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                         sys.exit(1)
-            else:
-                if exists(out_name):
-                    print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
-                    remove(out_name)
+            # else:
+            #     if exists(out_name):
+            #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+            #         remove(out_name)
 
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
@@ -894,6 +896,11 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
+                # Add custom aliases
+                for redirect, aliases in CUSTOM_REDIRECTS.items():
+                    if redirect == item.get('name'):
+                        for alias in aliases:
+                            item.setdefault('aliases', []).append(alias)
                 # remove aliases that point to the page they're located on
                 # get the current slug from the doc_link
                 if item.get('name'):

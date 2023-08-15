@@ -139,7 +139,7 @@ JIT プロビジョニングを使用すると、初めてログインしよう�
 
 <mrk mid="82" mtype="seg">オーガニゼーションによっては、一部のユーザーを Datadog に招待したくない場合があります。</mrk><mrk mid="83" mtype="seg">アカウントに対する SAML の動作を変更したい場合は、[Datadog のサポートチーム][2]にお問い合わせください。</mrk><mrk mid="84" mtype="seg">特定のユーザーが Datadog にアクセスできないようにする場合は、オーガニゼーション側で、Datadog にアサーションを送信しないように IdP を構成する必要があります。</mrk>
 
-管理者は、新しい JIT ユーザーにデフォルトのロールを設定できます。デフォルトのロールは **Standard** ですが、新しい JIT ユーザーを **Read-Only** や **Administrators** として追加することもできます。
+管理者は、新しい JIT ユーザーにデフォルトのロールを設定できます。デフォルトのロールは **Standard** ですが、新しい JIT ユーザーを **Read-Only** や **Administrators**、またはカスタムロールとして追加することもできます。
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="SAML JIT デフォルト" style="width:50%;" >}}
 

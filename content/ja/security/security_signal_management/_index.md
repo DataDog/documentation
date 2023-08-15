@@ -6,9 +6,9 @@ title: Security Signal Management
 ---
 ## 概要
 
-Cloud SIEM と CWS Security Signal Management では、`Security Signals Write` 権限を持つユーザーは、過去 30 日以内に発生したセキュリティシグナルの検出に対して状態の変更などのアクションを行い、シグナルのアクション履歴を監査ログで確認することが可能です。シグナルエクスプローラーでは、専用のファセットを使用して、アクションを起こしたシグナルをフィルタリングし、行内のアクションに関する概要情報を表示することができます。シグナルにアクションを起こした後、監査ログでアクティビティを確認することができます。
+Cloud SIEM と Cloud Security Management Threats (CSM Threats) では、`Security Signals Write` 権限を持つユーザーは、過去 30 日以内に発生したセキュリティシグナルの検出に対して状態の変更などのアクションを行い、シグナルのアクション履歴を監査ログで確認することが可能です。シグナルエクスプローラーでは、専用のファセットを使用して、アクションを起こしたシグナルをフィルタリングし、行内のアクションに関する概要情報を表示することができます。シグナルにアクションを起こした後、監査ログでアクティビティを確認することができます。
 
-セキュリティシグナルは、**Security** > **Security Signals** > Cloud SIEM または CWS シグナルを選択し、サイドパネルビューのヘッダーからアクションを起こすことで表示および管理できます。
+セキュリティシグナルは、**Security** > **Security Signals** > Cloud SIEM または CSM Threats シグナルを選択し、サイドパネルビューのヘッダーからアクションを起こすことで表示および管理できます。
 
 ## セキュリティシグナル管理のためのロールベースのアクセス制御
 
@@ -52,7 +52,7 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 
 組織のサービスに支障をきたす可能性を警告するセキュリティシグナルは、インシデントと見なされることがあります。このような脅威を処理するために、一定のフレームワークを持つことが必要になることがよくあります。[インシデント管理][4]は、インシデントを効果的に識別し、緩和するためのシステムを提供します。
 
-サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または Cloud Workload Security のシグナルから直接インシデントを宣言することができます。
+サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または CSM Threats のシグナルから直接インシデントを宣言することができます。
 
 サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、Application Security Management のシグナルからインシデントを宣言します。
 
@@ -61,11 +61,11 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 ## セキュリティシグナルアクションの監査証跡
 
 管理者またはセキュリティチームのメンバーは、[Datadog 監査証跡][5]を使用して、セキュリティ製品内でチームがどのようなアクションを起こしているかを確認できます。個人として、自身のアクションをストリームで確認することも可能です。
-監査証跡エクスプローラーは、実行されたすべてのシグナルアクションを表示します。**Organization Settings** に移動し、**Security** の **Audit Logs Settings** を選択します。
+監査証跡エクスプローラーは、実行されたすべてのシグナルアクションを表示します。**Organization Settings** に移動し、**Compliance** の **Audit Trail** を選択します。
 
-Datadog Security で行われたアクションによって生成された監査ログを排他的に表示するには、次のいずれかの手順に従います。
-* クエリ `@evt.name:"Security Monitoring"` を使用します。
-* "Event Name" ファセットの下にある "Security Monitoring" ファセットを選択します。
+Datadog Cloud Security で行われたアクションによって生成された監査ログを排他的に表示するには、次のいずれかの手順に従います。
+* クエリ `@evt.name:"Cloud Security Platform"` を使用します。
+* "Event Name" ファセットの下にある "Cloud Security Platform" ファセットを選択します。
 
 [1]: /ja/account_management/rbac/?tab=datadogapplication#pagetitle
 [2]: /ja/account_management/rbac/permissions/#cloud-security-platform

@@ -50,7 +50,7 @@ dependencies {
 
 1. Accédez à [**UX Monitoring** > **RUM Applications** > **New Application**][2].
 2. Sélectionnez le type d'application `android` et attribuez un nom à l'application, afin de générer un ID d'application Datadog unique ainsi qu'un token client.
-3. Pour instrumenter vos vues Web, cliquez sur le bouton **Instrument your webviews**. Pour en savoir plus, consultez la section [Suivi des vues Web iOS][13].
+3. Pour instrumenter vos vues Web, cliquez sur le bouton **Instrument your webviews**. Pour en savoir plus, consultez la section [Suivi des vues Web][13].
 4. Pour désactiver la collecte automatique des IP client ou des données de géolocalisation, décochez les cases correspondant à ces paramètres. Pour en savoir plus, consultez la section [Données RUM recueillies (Android)][15].
 
    {{< img src="real_user_monitoring/android/android-new-application.png" alt="Créer une application RUM application pour Android dans Datadog" style="width:90%;">}}

@@ -39,11 +39,11 @@ Two optional processes are spawned by the Agent if enabled in the `datadog.yaml`
 
 On Windows the services are listed as:
 
-| Service               | Description             |
-|-----------------------|-------------------------|
-| DatadogAgent          | "Datadog Agent"         |
-| datadog-trace-agent   | "Datadog Trace Agent"   |
-| datadog-process-agent | "Datadog Process Agent" |
+| Service               | Description           |
+|-----------------------|-----------------------|
+| DatadogAgent          | Datadog Agent         |
+| datadog-trace-agent   | Datadog Trace Agent   |
+| datadog-process-agent | Datadog Process Agent |
 
 By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 

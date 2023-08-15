@@ -123,7 +123,6 @@ You can add custom tags to your tests by using the current active span:
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
-[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 
 ### Adding custom metrics to tests
 
@@ -137,6 +136,10 @@ Just like tags, you can add custom metrics to your tests by using the current ac
     // ...
   })
 ```
+Read more about custom metrics in [Add Custom Metrics Guide][2].
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -197,7 +200,6 @@ You can add custom tags to your test by grabbing the current active span:
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
-[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 
 ### Adding custom metrics to tests
 
@@ -211,6 +213,10 @@ You may also add custom metrics to your test by grabbing the current active span
     // ...
   })
 ```
+Read more about custom metrics in [Add Custom Metrics Guide][2]
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -306,14 +312,12 @@ For example:
 ```javascript
 beforeEach(() => {
   cy.task('dd:addTags', {
-    'before.each':
-    'certain.information'
+    'before.each': 'certain.information'
   })
 })
 it('renders a hello world', () => {
   cy.task('dd:addTags', {
-    'team.owner': 'ui',
-    'test.importance': 3
+    'team.owner': 'ui'
   })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
@@ -324,7 +328,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
+To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourNumericalTags: 1 })` in your test or hooks.
 
 For example:
 
@@ -337,9 +341,12 @@ it('renders a hello world', () => {
     .should('have.text', 'Hello World')
 })
 ```
+
+Read more about custom metrics in [Add Custom Metrics Guide][6].
+
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
+If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
 
 
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
@@ -347,8 +354,9 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[6]: /real_user_monitoring/browser/#setup
-[7]: /continuous_integration/guides/rum_integration/
+[6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
+[7]: /real_user_monitoring/browser/#setup
+[8]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -373,6 +381,8 @@ When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or l
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
+Read more about code coverage in Datadog in [code coverage in Datadog guide][7].
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer.
@@ -394,7 +404,7 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][7] options can also be used.
+All other [Datadog Tracer configuration][8] options can also be used.
 
 {{% ci-git-metadata %}}
 
@@ -523,29 +533,29 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=c
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][9] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
+[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
+If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][12].
 
 ### Cypress interactive mode
 
-Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][12], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][13], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][14].
 
 ### Cypress `after:run` event
 
-Datadog requires usage of the Cypress [`after:run` event][14]. Cypress only allows a single listener for this event, so if your custom Cypress plugin requires `after:run`, it is incompatible with `dd-trace`.
+Datadog requires usage of the Cypress [`after:run` event][15]. Cypress only allows a single listener for this event, so if your custom Cypress plugin requires `after:run`, it is incompatible with `dd-trace`.
 
 ### Mocha parallel tests
-Mocha's [parallel mode][15] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
+Mocha's [parallel mode][16] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Cucumber parallel tests
-Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
+Cucumber's [parallel mode][17] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][17] is not supported.
+Jest's [test.concurrent][18] is not supported.
 
 ## Best practices
 
@@ -564,7 +574,7 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][18] instead:
+And use [`test.each`][19] instead:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -572,7 +582,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][19]:
+For `mocha`, use [`mocha-each`][20]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -589,7 +599,7 @@ When you use this approach, both the testing framework and CI Visibility can tel
 
 {{% ci-information-collected %}}
 
-In addition to that, if [Intelligent Test Runner][20] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][21] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
@@ -604,17 +614,18 @@ In addition to that, if [Intelligent Test Runner][20] is enabled, the following 
 [4]: /tracing/trace_collection/dd_libraries/nodejs
 [5]: https://github.com/DataDog/dd-trace-js#version-release-lines-and-maintenance
 [6]: https://istanbul.js.org/
-[7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: /real_user_monitoring/browser/
-[11]: /continuous_integration/guides/rum_integration/
-[12]: https://docs.cypress.io/api/plugins/before-run-api
-[13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[14]: https://docs.cypress.io/api/plugins/after-run-api
-[15]: https://mochajs.org/#parallel-tests
-[16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
-[17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[19]: https://www.npmjs.com/package/mocha-each
-[20]: /continuous_integration/intelligent_test_runner/
+[7]: /continuous_integration/guides/code_coverage/?tab=javascripttypescript
+[8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
+[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[11]: /real_user_monitoring/browser/
+[12]: /continuous_integration/guides/rum_integration/
+[13]: https://docs.cypress.io/api/plugins/before-run-api
+[14]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[15]: https://docs.cypress.io/api/plugins/after-run-api
+[16]: https://mochajs.org/#parallel-tests
+[17]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
+[18]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[19]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[20]: https://www.npmjs.com/package/mocha-each
+[21]: /continuous_integration/intelligent_test_runner/

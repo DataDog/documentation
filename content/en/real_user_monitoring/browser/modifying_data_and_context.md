@@ -515,6 +515,8 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: View events cannot be discarded.
+
 ## User session
 
 Adding user information to your RUM sessions can help you:

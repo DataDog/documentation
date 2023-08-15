@@ -14,7 +14,9 @@ further_reading:
 
 ## Overview
 
-This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports.
+This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports. 
+
+This guide applies to pipelines created using the [public CI Visibility Pipelines API][3]. Integrations with other CI providers may vary.
 
 ## Data model
 

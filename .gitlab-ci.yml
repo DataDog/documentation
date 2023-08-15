@@ -28,6 +28,7 @@ variables:
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
+  PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
 
 
 # ================== copy scripts =============== #
@@ -35,6 +36,7 @@ before_script:
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
   - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
   - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
+  - chmod +x /usr/local/bin/*.py # make python scripts executable by the runner
   - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
   - mkdir -p logs
   # set common env variables for this shell
@@ -103,7 +105,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-17080079
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-18726195
   tags:
     - "arch:amd64"
   rules:
@@ -126,12 +128,14 @@ build_preview:
   variables:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
-    MESSAGE: ":gift_heart: Your preview site is available!\nNow running tests..."
+    MESSAGE: ":gift_heart: Your preview site is available! Now running tests..."
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
+    - touch preview_error.log # Create log file for errors
+    - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
@@ -142,9 +146,10 @@ build_preview:
     - in-isolation deploy_site > logs/deploy.txt
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
-    - notify_slack "Your branch ${CI_COMMIT_REF_NAME} is ready for preview.\n<${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834" "true"
+    - notify_slack.py  "Your branch ${CI_COMMIT_REF_NAME} is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." --status="#31b834" --previewSite="true"
     - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
   artifacts:
+    when: always
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
@@ -153,6 +158,12 @@ build_preview:
       - .htmltest.yml
       - ./logs
       - ./public/redirects.txt
+      - $PREVIEW_ERROR_LOG
+  after_script:
+    - |
+      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+        echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
+      fi # Output the error to the console
   interruptible: true
 
 link_checks_preview:
@@ -173,7 +184,7 @@ link_checks_preview:
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack.py "${RESULT}" --status="#31b834"; fi
   artifacts:
     paths:
       - ./tmp/.htmltest
@@ -281,7 +292,7 @@ build_live:
     LOCAL: "False"
   script:
     - dog --config "$HOME/.dogrc" event post "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
-    - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
+    - notify_slack.py "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" --status="#FFD700"
     - touch Makefile.config
     - make clean-examples
     - make dependencies
@@ -321,7 +332,7 @@ test_live_link_checks:
   after_script:
     - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
     - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack.py "${RESULT}" --status="#31b834"; fi
   artifacts:
     paths:
       - ./tmp/.htmltest
@@ -371,7 +382,7 @@ manage_ignored_translations:on-schedule:
 # its too noisy to run all the time but we want some insight so its running on schedule
 link_checks:on-schedule:
   <<: *base_template
-  <<: *live_rules
+  <<: *live_schedule_rules
   stage: post-deploy
   cache: {}
   environment: "live"
@@ -404,18 +415,40 @@ test_missing_tms_live:
   script:
     - check_missing_tms
 
-test_pa11y:
-  <<: *base_template
-  <<: *live_schedule_rules
+# template for what runs in pa11y to avoid duplication
+.pa11y_live_template: &pa11y_live_template
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-17812916
+  tags: ["runner:docker"]
   stage: post-deploy
-  cache:
-    - *yarn_cache
-  environment: "live"
+  cache: []
   dependencies:
     - build_live
+  variables:
+    GIT_STRATEGY: none
   script:
-    - yarn install --immutable
-    - node ./local/bin/js/pa11y.js --env live --dd_api_key $(get_secret 'dd-api-key')
+    - unset NODE_OPTIONS
+    - cp -r ${ARTIFACT_RESOURCE} /app # copy the artifact to the working diretory of this docker container
+    - cd /app # go into working directory
+    - export CI_PROJECT_DIR="." # override project dir so pa11y script can locate the generated csv and push to s3
+    - node ./index.js --env live --site docs --dd_api_key "$(get_secret 'dd_synthetic_api_key_prod')" # run pa11y
+  interruptible: true
+
+run_pa11y:schedule:
+  <<: *pa11y_live_template
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
+      when: always
+    - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+      when: never
+
+run_pa11y:manual:
+  <<: *pa11y_live_template
+  allow_failure: true # https://gitlab.com/gitlab-org/gitlab/-/issues/39534 Need to allow failure to not get a blocked status
+  rules:
+    - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
+      when: never
+    - if: $CI_COMMIT_TAG == null
+      when: manual
 
 tag_successful_live_pipeline:
   <<: *base_template
@@ -482,3 +515,26 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+
+####################################
+#                                  #
+#      Failure Notifications       #
+#                                  # 
+####################################
+failure_notification_preview:
+  <<: *base_template
+  stage: cleanup
+  environment: "preview"
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - |
+      if [ -s preview_error.log ]; then
+        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed with the following error: $(tail -n 10 preview_error.log)";
+      else
+        SLACK_MESSAGE=":siren: A gitlab job for your branch has failed due to an error, please check your pipeline"; # Safety in case the error log is empty
+      fi
+    - notify_slack.py "${SLACK_MESSAGE}" --status="#ab0000" --previewSite="false" --link="${CI_PIPELINE_URL}" --buttonContent="Gitlab Pipeline :looking:"
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+      when: on_failure

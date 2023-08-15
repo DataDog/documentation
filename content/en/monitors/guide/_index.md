@@ -35,10 +35,12 @@ cascade:
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/change-alert" >}}Change Alert monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}

@@ -21,27 +21,17 @@ After creating a role, assign or remove permissions to this role directly by [up
 
 ## Overview
 
-### General permissions
-
-General permissions provide the base level of access for your role. [Advanced Permissions](#advanced-permissions) are explicitly defined permissions that augment the base permissions.
-
-{{< permissions group="General" >}}
-
-**Note**: There is no `read-only` permission as it is defined by the lack of the `standard` permission for a role.
-
-### Advanced permissions
-
 By default, existing users are associated with one of the three out-of-the-box roles:
 
 - Datadog Admin
 - Datadog Standard
-- Datadog Read-Only.
+- Datadog Read-Only
 
-All users can read all data types. Admin and Standard users have write permissions on assets.
+All users with one of these roles can read all data types. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage.
 
 **Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user in order to enforce the new role permissions.
 
-In addition to the general permissions, you can define more granular permissions for specific assets or data types. In the tables below, find the details of these options and the impact they have on each available permission.
+Each asset type has corresponding read and write permissions. In the tables below, find the details of these permissions.
 
 {{% permissions %}}
 

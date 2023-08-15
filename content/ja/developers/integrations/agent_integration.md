@@ -48,7 +48,7 @@ Agent ベースのインテグレーションを構築するプロセスは、�
 
 必要な Datadog Agent インテグレーション開発ツールは以下の通りです。
 
-- Python v3.8、[pipx][2]、Agent Integration Developer Tool (`ddev`)。インストール方法については、[Datadog Agent Integration Developer Tool のインストール][3]を参照してください。
+- Python v3.9、[pipx][2]、Agent Integration Developer Tool (`ddev`)。インストール方法については、[Datadog Agent Integration Developer Tool のインストール][3]を参照してください。
 - フルテストスイートを実行するための [Docker][4]。
 - git [コマンドライン][5]または [GitHub デスクトップクライアント][19]。
 

@@ -109,7 +109,7 @@ Before getting started, ensure you have the following prerequisites:
     a. Select the AWS regions to integrate with.  
     b. Add your Datadog [API key][9].  
     c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
-    d. Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+    d. Optionally, enable [Cloud Security Posture Management][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
 5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
@@ -189,7 +189,7 @@ To get notified of any unwanted or unexpected behavior in your account, create [
 You can unify the metrics, traces, and logs from your AWS Lambda functions running serverless applications in Datadog. Check out [Serverless][42] for instructions on instrumenting your application, installing [Serverless Libraries and Integrations][43], implementing [Distributed Tracing with Serverless Applications][44], or [Serverless Troubleshooting][45].
 
 ### APM
-To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][46] integration or from a host with the Datadog Agent using [APM][47]. Then, read [Explore Datadog APM][48] for a better understanding of how to use this data to gain insights into your application performance.
+To dig even deeper and gather more data from your applications and AWS services, enable collecting distributed traces from either the [AWS X-Ray][46] integration or from a host with the Datadog Agent using [APM][47]. Then, read the [APM documentation][48] for a better understanding of how to use this data to gain insights into your application performance.
 
 Additionally, you can use [Watchdog][49], an algorithmic feature for APM performance and infrastructure metrics, to automatically detect and be notified about potential application issues.
 
@@ -199,9 +199,9 @@ Additionally, you can use [Watchdog][49], an algorithmic feature for APM perform
 
 Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the out-of-the-box [Log Detection Rules][51]. These rules are customizable, and when threats are detected, they generate security signals which can be accessed on the [Security Signals Explorer][52]. To ensure that the correct team is notified, use [Notification Rules][53] to configure notification preferences across multiple rules.
 
-#### CSPM
+#### Cloud Security Posture Management
 
-Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][55] and [Infrastructure][56] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
+Use the [Setting Up CSM Misconfigurations][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box [Cloud][55] and [Infrastructure][56] compliance rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
 
@@ -258,13 +258,13 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [45]: /serverless/troubleshooting
 [46]: /integrations/amazon_xray/
 [47]: /tracing/trace_collection/
-[48]: /tracing/#explore-datadog-apm
+[48]: /tracing/
 [49]: /watchdog/
 [50]: /getting_started/cloud_siem/
 [51]: /security/default_rules/#cat-log-detection
 [52]: /security/explorer/
 [53]: /security/notifications/rules/
-[54]: /security/cspm/setup/
+[54]: /security/misconfigurations/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/

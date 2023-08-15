@@ -44,6 +44,10 @@ Supported .NET runtimes (64-bit applications)
 .NET 6<br/>
 .NET 7
 
+<div class="alert alert-warning">
+  <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
+</div>
+
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
@@ -142,7 +146,7 @@ To install the .NET Profiler per-webapp:
 ## Enabling the Profiler
 
 <div class="alert alert-info">
-  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you have enabled it machine-wide, see the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead related to enabling the profiler for all system applications.
+  <strong>Note</strong>: Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you do have enabled it machine-wide, read the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead that is associated with enabling the profiler for all system applications.
 </div>
 
 {{< tabs >}}

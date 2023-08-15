@@ -99,7 +99,7 @@ Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内�
 **注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: /ja/agent/kubernetes/
 [3]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -200,10 +200,10 @@ datadog:
         containers:
             processAgent:
                 env:
-                - name: DD_SCRUB_ARGS 
+                - name: DD_SCRUB_ARGS
                   value: "true"
                 - name: DD_CUSTOM_SENSITIVE_WORDS
-                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+                  value: "personal_key,*token,*token,sql*,*pass*d*"
 ```
 
 
@@ -224,7 +224,7 @@ datadog:
             processAgent:
                 env:
                 - name: DD_STRIP_PROCESS_ARGS
-                  value: "true" 
+                  value: "true"
 ```
 
 {{% /tab %}}
@@ -368,7 +368,7 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 ### ネットワークパフォーマンスモニタリング
 
-[ネットワークの概要][11]で依存関係を調べる際、相互に通信するエンドポイント（サービスなど）の基底のインフラストラクチャーで実行される処理を確認できます。プロセスメタデータを使用して、ネットワークの接続の悪さ（TCP の再送信数が多いことから）やネットワークの呼び出し遅延の高さ（TCP ラウンドトリップタイムが長いことから）の原因が、エンドポイントのリソースを消費する重いワークロードであり、結果、通信の健全性や効率性に影響を与えているかを判断できます。
+[Network Analytics][11] ページで依存関係を調べる際、相互に通信するエンドポイント (サービスなど) の基底のインフラストラクチャーで実行される処理を確認できます。プロセスメタデータを使用して、ネットワークの接続の悪さ (TCP の再送信数が多いことから) やネットワークの呼び出し遅延の高さ (TCP ラウンドトリップタイムが長いことから) の原因が、エンドポイントのリソースを消費する重いワークロードであり、結果、通信の健全性や効率性に影響を与えているかを判断できます。
 
 ## リアルタイムの監視
 
@@ -393,5 +393,5 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 [8]: /ja/dashboards/widgets/timeseries/#pagetitle
 [9]: /ja/infrastructure/livecontainers/
 [10]: /ja/tracing/
-[11]: /ja/network_monitoring/performance/network_page
+[11]: /ja/network_monitoring/performance/network_analytics
 [12]: /ja/agent/guide/agent-commands/#restart-the-agent
