@@ -180,7 +180,7 @@ python_best_practices_data:
   text: ネストされた if 条件を使いすぎない
 - link: /continuous_integration/static_analysis/rules/python-best-practices/too-many-while
   tag: too-many-while
-  text: ネストされた while を使いすぎない
+  text: ネストされたループや条件を使いすぎない
 - link: /continuous_integration/static_analysis/rules/python-best-practices/type-check-isinstance
   tag: type-check-isinstance
   text: type の代わりに isinstance を使う
@@ -211,6 +211,9 @@ python_design_data:
   tag: function-too-long
   text: 関数は 100 行以下でなければならない
 python_django_data:
+- link: /continuous_integration/static_analysis/rules/python-django/http-response-from-request
+  tag: http-response-from-request
+  text: ユーザーデータのサニタイズの欠如
 - link: /continuous_integration/static_analysis/rules/python-django/http-response-with-json-dumps
   tag: http-response-with-json-dumps
   text: JSON データを送信するには、HttpResponse の代わりに JsonResponse を使う
@@ -229,10 +232,49 @@ python_django_data:
 - link: /continuous_integration/static_analysis/rules/python-django/no-unicode-on-models
   tag: no-unicode-on-models
   text: __unicode__ を使用しない
+- link: /continuous_integration/static_analysis/rules/python-django/open-filename-from-request
+  tag: open-filename-from-request
+  text: リクエストからのファイル名
+- link: /continuous_integration/static_analysis/rules/python-django/os-system-from-request
+  tag: os-system-from-request
+  text: 受信リクエストからのコマンド
+- link: /continuous_integration/static_analysis/rules/python-django/subprocess-from-request
+  tag: subprocess-from-request
+  text: 受信リクエストからのコマンド
 - link: /continuous_integration/static_analysis/rules/python-django/use-convenience-imports
   tag: use-convenience-imports
   text: 可能な限りコンビニエンスインポートを使用する
 python_flask_data:
+- link: /continuous_integration/static_analysis/rules/python-flask/disable-sqlalchemy-text
+  tag: disable-sqlalchemy-text
+  text: text() は SQL インジェクションにつながるので使用しない
+- link: /continuous_integration/static_analysis/rules/python-flask/html-format-from-user-input
+  tag: html-format-from-user-input
+  text: API 呼び出しのための未サニタイズデータの使用
+- link: /continuous_integration/static_analysis/rules/python-flask/listen-all-interfaces
+  tag: listen-all-interfaces
+  text: アプリケーションはすべてのインターフェイスをリッスンすべきではない
+- link: /continuous_integration/static_analysis/rules/python-flask/no-render-template-string
+  tag: no-render-template-string
+  text: 文字列で作成されたテンプレートを使用しない
+- link: /continuous_integration/static_analysis/rules/python-flask/open-file-unsanitized-data
+  tag: open-file-unsanitized-data
+  text: ファイルを開くための未サニタイズデータの使用
+- link: /continuous_integration/static_analysis/rules/python-flask/os-system-unsanitized-data
+  tag: os-system-unsanitized-data
+  text: プロセスを作成するための未サニタイズデータの使用
+- link: /continuous_integration/static_analysis/rules/python-flask/secure-cookie
+  tag: secure-cookie
+  text: クッキーが安全でセキュアであることを確認する
+- link: /continuous_integration/static_analysis/rules/python-flask/sqlalchemy-injection
+  tag: sqlalchemy-injection
+  text: SQL クエリを発行するための未サニタイズデータの使用
+- link: /continuous_integration/static_analysis/rules/python-flask/ssrf-requests
+  tag: ssrf-requests
+  text: API 呼び出しのための未サニタイズデータの使用
+- link: /continuous_integration/static_analysis/rules/python-flask/urlopen-unsanitized-data
+  tag: urlopen-unsanitized-data
+  text: API を開くための未サニタイズデータの使用
 - link: /continuous_integration/static_analysis/rules/python-flask/use-jsonify
   tag: use-jsonify
   text: JSON 出力には、json.dumps の代わりに jsonify を使う
@@ -246,6 +288,113 @@ python_inclusive_data:
 - link: /continuous_integration/static_analysis/rules/python-inclusive/variable-name
   tag: variable-name
   text: 表現に問題がないか変数名をチェックする
+python_pandas_data:
+- link: /continuous_integration/static_analysis/rules/python-pandas/arith-operator-not-functions
+  tag: arith-operator-not-functions
+  text: 関数の代わりに算術演算子を使用する
+- link: /continuous_integration/static_analysis/rules/python-pandas/avoid-inplace
+  tag: avoid-inplace
+  text: inplace=True の使用は避ける
+- link: /continuous_integration/static_analysis/rules/python-pandas/comp-operator-not-function
+  tag: comp-operator-not-function
+  text: 値の比較には、関数ではなく演算子を使用する
+- link: /continuous_integration/static_analysis/rules/python-pandas/import-as-pd
+  tag: import-as-pd
+  text: コーディングガイドラインに従って pandas をインポートする
+- link: /continuous_integration/static_analysis/rules/python-pandas/isna-instead-of-isnull
+  tag: isna-instead-of-isnull
+  text: isnull の代わりに isna を使用する
+- link: /continuous_integration/static_analysis/rules/python-pandas/loc-not-ix
+  tag: loc-not-ix
+  text: ix より iloc か loc を優先する
+- link: /continuous_integration/static_analysis/rules/python-pandas/notna-instead-of-notnull
+  tag: notna-instead-of-notnull
+  text: notna を notnull より優先する
+- link: /continuous_integration/static_analysis/rules/python-pandas/pivot-table
+  tag: pivot-table
+  text: pivot または unstack の代わりに pivot_table を使用する
+- link: /continuous_integration/static_analysis/rules/python-pandas/use-read-csv-not-read-table
+  tag: use-read-csv-not-read-table
+  text: read_csv を read_table より優先する
+python_security_data:
+- link: /continuous_integration/static_analysis/rules/python-security/asyncio-subprocess-create-shell
+  tag: asyncio-subprocess-create-shell
+  text: シェルコマンドの安全でない実行
+- link: /continuous_integration/static_analysis/rules/python-security/asyncio-subprocess-exec
+  tag: asyncio-subprocess-exec
+  text: シェルコマンドの安全でない実行
+- link: /continuous_integration/static_analysis/rules/python-security/avoid-random
+  tag: avoid-random
+  text: secrets パッケージを random パッケージよりも優先的に使用する
+- link: /continuous_integration/static_analysis/rules/python-security/aws-boto-credentials
+  tag: aws-boto-credentials
+  text: 値をハードコーディングせずに環境変数を使用する
+- link: /continuous_integration/static_analysis/rules/python-security/deserialize-untrusted-data
+  tag: deserialize-untrusted-data
+  text: データのシリアル化または逆シリアル化で安全でない関数を避ける
+- link: /continuous_integration/static_analysis/rules/python-security/file-write-others
+  tag: file-write-others
+  text: すべてのユーザーに書き込み権限を与えない
+- link: /continuous_integration/static_analysis/rules/python-security/hardcoded-tmp-file
+  tag: hardcoded-tmp-file
+  text: 一時ファイルやディレクトリをハードコーディングしない
+- link: /continuous_integration/static_analysis/rules/python-security/html-string-from-parameters
+  tag: html-string-from-parameters
+  text: HTML が組み込まれた文字列を避ける
+- link: /continuous_integration/static_analysis/rules/python-security/insecure-hash-functions
+  tag: insecure-hash-functions
+  text: 安全でない関数を使用しない
+- link: /continuous_integration/static_analysis/rules/python-security/insecure-jwt
+  tag: insecure-jwt
+  text: JWT の署名が検証済みであることを確認する
+- link: /continuous_integration/static_analysis/rules/python-security/insecure-ssl-protocols
+  tag: insecure-ssl-protocols
+  text: 安全でない暗号化プロトコルを使用しない
+- link: /continuous_integration/static_analysis/rules/python-security/jinja-autoescape
+  tag: jinja-autoescape
+  text: 自動エスケープを true に設定する
+- link: /continuous_integration/static_analysis/rules/python-security/mktemp
+  tag: mktemp
+  text: 一時ファイルが安全であることを確認する
+- link: /continuous_integration/static_analysis/rules/python-security/no-empty-array-as-parameter
+  tag: no-empty-array-as-parameter
+  text: デフォルトのパラメーターとして空の配列を使用しない
+- link: /continuous_integration/static_analysis/rules/python-security/no-eval
+  tag: no-eval
+  text: eval の使用は安全でない可能性がある
+- link: /continuous_integration/static_analysis/rules/python-security/os-spawn
+  tag: os-spawn
+  text: サニタイジングなしでの spawn プロセスの呼び出し
+- link: /continuous_integration/static_analysis/rules/python-security/os-system
+  tag: os-system
+  text: サニタイジングなしでのコマンドの実行
+- link: /continuous_integration/static_analysis/rules/python-security/request-verify
+  tag: request-verify
+  text: verify を True にする
+- link: /continuous_integration/static_analysis/rules/python-security/requests-http
+  tag: requests-http
+  text: 暗号化なしで http 呼び出しを行わない
+- link: /continuous_integration/static_analysis/rules/python-security/requests-timeout
+  tag: requests-timeout
+  text: 外部リソースの呼び出しでタイムアウトが設定されていない
+- link: /continuous_integration/static_analysis/rules/python-security/ruamel-unsafe-yaml
+  tag: ruamel-unsafe-yaml
+  text: 安全でない YAML の逆シリアル化を使用しない
+- link: /continuous_integration/static_analysis/rules/python-security/sql-server-security-credentials
+  tag: sql-server-security-credentials
+  text: ハードコーディングされた資格情報を渡さない
+- link: /continuous_integration/static_analysis/rules/python-security/ssl-unverified-context
+  tag: ssl-unverified-context
+  text: 証明書の検証をバイパスしない
+- link: /continuous_integration/static_analysis/rules/python-security/subprocess-shell-true
+  tag: subprocess-shell-true
+  text: シェルの引数により不必要な権限が与えられる
+- link: /continuous_integration/static_analysis/rules/python-security/variable-sql-statement-injection
+  tag: variable-sql-statement-injection
+  text: SQL インジェクションを避ける
+- link: /continuous_integration/static_analysis/rules/python-security/yaml-load
+  tag: yaml-load
+  text: 信頼できない YAML の逆シリアル化を避ける
 title: Static Analysis ルール
 ---
 
@@ -324,6 +473,38 @@ Flask のベストプラクティスとセキュリティに特化したルー�
 Python のコードとコメントで不適切な表現を避けるためのルール。
 
 {{< sa-rule-list "python_inclusive_data" >}}
+
+<br>
+
+### pandas を使ったデータサイエンスのグッドプラクティス
+
+**ルールセット ID:** `python-pandas`
+
+pandas コードが適切に使用されていることを確認するための一連のルール。
+
+ - `import` 宣言がコーディングガイドライン違反に従っていることを確認する。
+ - 非推奨のコードやメソッドを避ける。
+ - 可能な限り非効率なコードを避ける。
+
+{{< sa-rule-list "python_pandas_data" >}}
+
+<br>
+
+### Python コードが安全でセキュアなことを確認する
+
+**ルールセット ID:** `python-security`
+
+OWASP10 および SANS25 に記載されているものを含め、Python コード内のセキュリティや脆弱性の問題を発見することに焦点を当てたルール。
+
+ - 粗悪な暗号化およびハッシュ化プロトコルの使用
+ - アクセス制御の欠如
+ - セキュリティの誤構成
+ - SQL インジェクション
+ - 資格情報のハードコーディング
+ - シェルインジェクション
+ - 安全でない逆シリアル化
+
+{{< sa-rule-list "python_security_data" >}}
 
 <br>
 
