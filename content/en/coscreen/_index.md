@@ -97,6 +97,8 @@ The shared terminal appears for you and all other participants in the CoScreen s
 
 To stop sharing, click the **Unshare** tab on the terminal window, or on the button in the meeting menu. 
 
+For privacy, CoTerm uses [Sensitive Data Scanner][8] and entropy filters to detect and obfuscate sensitive data.
+
 **Note**: Unsharing closes the terminal.
 
 ### Integrations
@@ -141,3 +143,4 @@ For all the details on how CoScreen enables secure collaboration, read the [CoSc
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
+[8]: /sensitive_data_scanner/
