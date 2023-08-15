@@ -4097,11 +4097,16 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
-  - name: Visual Studio Code
+  - name: VS Code
     url: developers/ide_integrations/vscode/
     parent: ide_integrations
     identifier: ide_integrations_vscode
     weight: 802
+  - name: Visual Studio
+    url: developers/ide_integrations/visual_studio/
+    parent: ide_integrations
+    identifier: ide_integrations_visual_studio
+    weight: 803
   - name: Community
     url: developers/community/
     parent: dev_tools

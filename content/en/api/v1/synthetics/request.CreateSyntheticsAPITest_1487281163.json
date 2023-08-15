@@ -71,7 +71,8 @@
         "scope": "yoyo",
         "tokenApiAuthentication": "header",
         "type": "oauth-client"
-      }
+      },
+      "persistCookies": true
     }
   },
   "locations": [
