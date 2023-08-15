@@ -71,4 +71,4 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: monitors/guide/as-count-in-monitor-evaluations/
+[1]: /monitors/guide/as-count-in-monitor-evaluations
