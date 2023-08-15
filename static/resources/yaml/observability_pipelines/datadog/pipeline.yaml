@@ -31,7 +31,7 @@ transforms:
   ## steps with tags set up. Datadog recommends these tag assignments.
   ## They show which data has been moved over to OP and what still needs
   ## to be moved.
-  LOGS_YOUR_STEPS:
+  logs_enrich:
     type: remap
     inputs:
       - logs_remove_wrong_level

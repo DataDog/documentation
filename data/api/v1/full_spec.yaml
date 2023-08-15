@@ -14893,6 +14893,9 @@ components:
           maximum: 10
           minimum: 0
           type: integer
+        persistCookies:
+          description: Persist cookies across redirects.
+          type: boolean
         port:
           description: Port to use when performing the test.
           format: int64
