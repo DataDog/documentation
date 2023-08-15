@@ -2,7 +2,7 @@
 title: Monitor RUM Data for Electron JS Apps 
 kind: guide
 beta: true
-description: Learn how monitor desktop applications that use Electron.js through the browser RUM SDK
+description: Learn how to monitor desktop applications built with Electron.js through the browser RUM SDK
 aliases:
 - /real_user_monitoring/guide/getting-started-feature-flags/
 further_reading:
