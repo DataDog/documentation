@@ -11,7 +11,7 @@ further_reading:
   tag: Documentation
   text: Datadog で CSP 違反の検出と集計を行う
 kind: documentation
-title: セッションリプレイのトラブルシューティング
+title: セッションリプレイブラウザのトラブルシューティング
 ---
 
 ## 概要

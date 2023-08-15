@@ -49,7 +49,8 @@ type: multi-code-lang
 `dd.logs.injection`
 : **環境変数**: `DD_LOGS_INJECTION`<br>
 **デフォルト**: `true`<br>
-Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の有効化。詳しくは、[高度な使用方法][2]を参照してください。
+Datadog のトレース ID とスパン ID に対する MDC キーの自動挿入を有効にします。詳細については、[高度な使用方法][2]を参照してください。<br><br>
+**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_LOGS_INJECTION` を設定できます。
 
 `dd.trace.config`
 : **環境変数**: `DD_TRACE_CONFIG`<br>
@@ -97,7 +98,8 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 **デフォルト**: `null`<br>
 **例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 大文字・小文字を区別しないヘッダーキーとタグ名のマップを受け取り、一致するヘッダー値を自動的にタグとしてトレースに適用します。また、タグ名を指定しないエントリーも受け入れ、それぞれ `http.request.headers.<header-name>` と `http.response.headers.<header-name>` という形式のタグに自動的にマップされます。<br><br>
-バージョン 0.96.0 以前は、この設定はリクエストヘッダータグにのみ適用されました。以前の動作に戻すには、`Ddd.trace.header.tags.legacy.parsing.enabled=true` を追加するか、環境変数 `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true` を設定することで可能です。
+バージョン 0.96.0 以前は、この設定はリクエストヘッダータグにのみ適用されました。以前の動作に戻すには、設定 `-Ddd.trace.header.tags.legacy.parsing.enabled=true` または環境変数 `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true` を追加することで可能です。<br><br>
+**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_TRACE_HEADER_TAGS` を設定できます。
 
 `dd.trace.request_header.tags`
 : **環境変数**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -453,3 +455,5 @@ JMX フェッチを使った Java メトリクス収集についての詳細は 
 [11]: /ja/tracing/compatibility_requirements/java#disabling-integrations
 [12]: /ja/integrations/java/?tab=host#metric-collection
 [13]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[16]: /ja/agent/remote_config/
+[17]: https://app.datadoghq.com/services

@@ -2,7 +2,7 @@
 title: How Datadog Determines if Resources are Publicly Accessible
 kind: guide
 further_reading:
-- link: "/security/cspm"
+- link: "/security/misconfigurations"
   tag: "Documentation"
   text: "Start tracking misconfigurations with CSM Misconfigurations"
 - link: "/security/default_rules/#cat-cloud-security-management"

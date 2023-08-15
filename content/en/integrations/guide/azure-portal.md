@@ -282,4 +282,4 @@ To disable, uncheck the box and click **Save**.
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 [6]: /serverless/azure_app_services
 [7]: /serverless/azure_app_services/#requirements
-[8]: /security/cspm/
+[8]: /security/misconfigurations/
