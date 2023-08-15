@@ -45,7 +45,7 @@ Find [Case Management][1] in the Service Management menu.
 
 Use **Inboxes** to filter the list of cases to the ones most relevant to your work. Datadog automatically creates inboxes with filters for cases assigned to you, created by you, or associated with your [Teams][2].
 
-{{< img src="/service_management/case_management/add_new_inbox.png" alt="Inboxes left panel highlighting the option to add new inboxes" style="width:100%;" >}}
+{{< img src="/service_management/case_management/add_new_inbox.png" alt="Inboxes left panel highlighting the option to add new inboxes" style="width:85%;" >}}
 
 To filter cases based on a search query, create a custom inbox:
 1. On the [Case Management page][1], next to **Other Inboxes**, click **Add**. The [Create a new inbox][3] page appears.
@@ -53,6 +53,8 @@ To filter cases based on a search query, create a custom inbox:
 1. In the search box, enter a query. The **Inbox Preview** refreshes to show you the cases that match the current search query.
 1. (Optional) Send a notification with third party tools such as Slack, PagerDuty, or Webhooks. Click on **+ Add Recipient Type** and select from the pre-configured channels or recipients. A notification is sent every time a case matching the query is created.
 1. Click **Save Inbox**.
+
+{{< img src="service_management/case_management/inbox_config.png" alt="Inbox configuration displaying third-party notification options" style="width:100%;" >}}
 
 ### Bulk actions
 
