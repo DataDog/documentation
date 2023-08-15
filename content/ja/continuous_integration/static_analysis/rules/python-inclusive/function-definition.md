@@ -33,6 +33,9 @@ def foo_blacklist():
 # 大文字と小文字が混在している場合でも、blacklist という名前を使用しないでください
 def BlaCKliSt_NaMeS():
     pass
+
+def wHiTeLisT_NaMeS():
+    pass
 ```
 
 ```python
