@@ -104,6 +104,45 @@ DaemonSet を使用した Orchestrator Explorer のセットアップ方法を�
       value: "true"
     ```
 
+4. (オプション) 収集されるリソースを指定するには、インスタンスセクションでコレクターを設定します。ConfigMap 内に `orchestrator.yaml` を作成します。構成例:
+
+     ```yaml
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: orchestrator-config
+      data:
+        orchestrator.yaml: |-
+          ad_identifiers:
+            - _kube_orchestrator
+          init_config:
+          instances:
+            - collectors:
+              - batch/v1/cronjobs
+     ```
+
+     `collectors` で使用可能な値は `<collector_name>` (例: "cronjobs") または `<apigroup_and_version>/<collector_name>` (例: "batch/v1/cronjobs") です。CRD の場合は、`<apigroup_and_version>/<collector_name>` のみ使用できます。
+
+   Cluster Agent のコンテナにマウントします。
+
+     ```yaml
+     containers:
+       - name: cluster-agent
+         ...
+         volumeMounts:
+           - name: orchestrator-config
+             mountPath: /conf.d
+             readOnly: true
+     ...
+     volumes:
+       - name: orchestrator-config
+         configMap:
+           name: orchestrator-config
+           items:
+           - key: orchestrator.yaml
+             path: orchestrator.yaml    
+     ```
+
 一部のセットアップでは、Process Agent と Cluster Agent で Kubernetes クラスター名が自動検出されません。この場合、機能は起動せず、Cluster Agent ログで以下のような警告が表示されます。`Orchestrator explorer enabled but no cluster name set: disabling`。この場合、Cluster Agent と Process Agent の両方の `env` セクションに以下のオプションを追加します。
 
   ```yaml
@@ -112,4 +151,4 @@ DaemonSet を使用した Orchestrator Explorer のセットアップ方法を�
   ```
 
   [1]: /containers/cluster_agent/
-  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
+  [2]: /containers/cluster_agent/setup/?tab=daemonset
