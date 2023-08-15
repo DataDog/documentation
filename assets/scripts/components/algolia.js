@@ -7,6 +7,12 @@ import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { debounce } from '../utils/debounce';
 
+const { env } = document.documentElement.dataset;
+const pageLanguage = getPageLanguage();
+const algoliaConfig = getConfig(env).algoliaConfig;
+const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+let indexName = algoliaConfig.index;
+
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
 
@@ -38,18 +44,19 @@ function sendSearchRumAction(searchQuery, clickthroughLink = '', clickPosition =
     }
 }
 
-const getSearchResultClickPosition = (targetHref, hitsArray, page) => {
-    const { pathname, hash } = new URL(targetHref)
+const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHitsPerPage, page) => {
+    let clickedTargetRelPermalink = clickedTargetHref
+
+    if (env === 'preview') {
+        const commitRef = document.documentElement.dataset.commitRef
+        clickedTargetRelPermalink = clickedTargetRelPermalink.replace(`/${commitRef}`, '')
+    }
+
+    const { pathname, hash } = new URL(clickedTargetRelPermalink)
     const relPath = `${pathname}${hash}`
     const clickedSearchResultIndexOnPage = hitsArray.findIndex(hit => hit.relpermalink == relPath)
-    return clickedSearchResultIndexOnPage + (page * 10)
+    return clickedSearchResultIndexOnPage + (page * numberOfHitsPerPage)
 }
-
-const { env } = document.documentElement.dataset;
-const pageLanguage = getPageLanguage();
-const algoliaConfig = getConfig(env).algoliaConfig;
-const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-let indexName = algoliaConfig.index;
 
 function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
@@ -228,7 +235,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     if (target.href) {
                         const hitsArray = search.helper.lastResults.hits
                         const page = search.helper.state.page
-                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, page)
+                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page)
                         sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
                         window.history.pushState({}, '', target.href);
                         window.location.reload();
