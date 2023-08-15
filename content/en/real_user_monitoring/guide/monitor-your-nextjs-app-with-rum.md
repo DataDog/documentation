@@ -17,7 +17,7 @@ To set up Datadog RUM browser monitoring:
 
 1. Navigate to **[UX Monitoring > Real User Monitoring][2]**.
 2. Click the **New Application** button.
-3. Make sure JS is selected, then enter a name for your application and click **Create New RUM Application**. A `clientToken` and `applicationId` are atuomatically generated for your application.
+3. Make sure JS is selected, then enter a name for your application and click **Create New RUM Application**. A `clientToken` and `applicationId` are automatically generated for your application.
 4. Instrument your application through [npm][3], [CDN async][4], or [CDN sync][5].
 5. Follow the in-app steps to verify your installation.
 6. Deploy the changes to your application. Once your deployment is live, Datadog collects events from user browsers.
