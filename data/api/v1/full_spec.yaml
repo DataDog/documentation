@@ -4000,6 +4000,7 @@ components:
       - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
+      - sds_scanned_bytes_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -4036,6 +4037,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
+      - SDS_SCANNED_BYTES_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7570,6 +7572,8 @@ components:
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
       - vuln_management_hosts_percentage
+      - sds_scanned_bytes_usage
+      - sds_scanned_bytes_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7641,6 +7645,8 @@ components:
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SDS_SCANNED_BYTES_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7897,6 +7903,14 @@ components:
           type: number
         profiled_host_usage:
           description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_percentage:
+          description: The percentage of Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_usage:
+          description: The total Sensitive Data Scanner usage by tag(s).
           format: double
           type: number
         snmp_percentage:
