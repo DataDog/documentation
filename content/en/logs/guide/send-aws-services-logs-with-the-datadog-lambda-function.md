@@ -145,9 +145,20 @@ If you are collecting logs from a CloudWatch log group, configure the trigger to
 For Terraform users, you can provision and manage your triggers using the [aws_cloudwatch_log_subscription_filter][1] resource. See sample code below.
 
 ```conf
+data "aws_cloudwatch_log_group" "some_log_group" {
+  name = "/some/log/group"
+}
+
+resource "aws_lambda_permission" "lambda_permission" {
+  action        = "lambda:InvokeFunction"
+  function_name = "datadog-forwarder" # this is the default but may be different in your case
+  principal     = "logs.${data.aws_region.current.name}.amazonaws.com"
+  source_arn    = data.aws_cloudwatch_log_group.some_log_group.arn
+}
+
 resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
   name            = "datadog_log_subscription_filter"
-  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /aws/lambda/my_lambda_name
+  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /some/log/group
   destination_arn = <DATADOG_FORWARDER_ARN> # for example,  arn:aws:lambda:us-east-1:123:function:datadog-forwarder
   filter_pattern  = ""
 }
