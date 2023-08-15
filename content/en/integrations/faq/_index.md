@@ -12,7 +12,6 @@ aliases:
     - /integrations/faq/extra-hosts-with-name-n-a-reporting-data
     - /integrations/faq/redis-integration-error-unknown-command-config
     - /integrations/faq/snmp
-    - /integrations/faq/
 ---
 
 ## Amazon Web Services
