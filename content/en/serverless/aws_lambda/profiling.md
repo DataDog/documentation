@@ -22,7 +22,7 @@ Continuous Profiler for AWS Lambda is in public beta. During the beta period, pr
 
 To enable profiling:
 
-1. Ensure you have [installed the associated tracing library in your Lambda function.
+1. Ensure you have [installed the associated tracing library][2] in your Lambda function.
 2. Set the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of running code. This includes the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
