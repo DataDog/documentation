@@ -24,7 +24,7 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(searchQuery, clickthroughLink = '', clickPosition = -1) {
+function sendSearchRumAction(searchQuery, clickthroughLink = '', clickedLinkPosition = -1) {
     if (window.DD_RUM && window._DATADOG_SYNTHETICS_BROWSER === undefined && searchQuery !== '') {
         const userSearchData = {
             query: searchQuery.toLowerCase(),
@@ -36,15 +36,15 @@ function sendSearchRumAction(searchQuery, clickthroughLink = '', clickPosition =
             userSearchData.clickthroughLink = clickthroughLink
         }
 
-        if (clickPosition >= 0) {
-            userSearchData.clickPosition = clickPosition
+        if (clickedLinkPosition >= 0) {
+            userSearchData.clickPosition = clickedLinkPosition
         }
 
         window.DD_RUM.addAction('userSearch', userSearchData)
     }
 }
 
-const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHitsPerPage, page) => {
+const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHitsPerPage, currentPage) => {
     let clickedTargetRelPermalink = clickedTargetHref
 
     if (env === 'preview') {
@@ -55,7 +55,7 @@ const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHits
     const { pathname, hash } = new URL(clickedTargetRelPermalink)
     const relPath = `${pathname}${hash}`
     const clickedSearchResultIndexOnPage = hitsArray.findIndex(hit => hit.relpermalink == relPath)
-    return clickedSearchResultIndexOnPage + (page * numberOfHitsPerPage)
+    return clickedSearchResultIndexOnPage + (currentPage * numberOfHitsPerPage)
 }
 
 function loadInstantSearch(currentPageWasAsyncLoaded) {
