@@ -23,28 +23,30 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
+### Test Visibility setup
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
-To enable Intelligent Test Runner, set the following environment variables:
+### UI activation
+You, or a user in your organization with "Intelligent Test Runner Activation" permissions, must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
+
+{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+
+### Environment variables
+To enable Intelligent Test Runner, the `DD_APP_KEY` environment variable is required:
 
 `DD_APP_KEY` (Required)
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-After setting these environment variables, run your tests as you normally do:
+After setting this environment variable, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_APP_KEY=$APP_KEY pytest --ddtrace
 {{< /code-block >}}
 
-#### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
-
 ## Disabling the Intelligent Test Runner
 
-The Intelligent Test Runner can be disabled at runtime, regardless of the settings applied in the UI activation section above, by setting the `DD_CIVISIBILITY_ITR_DISABLED` environment variable to `true`.
+Set the `DD_CIVISIBILITY_ITR_DISABLED` environment variable to `true` to disable the Intelligent Test Runner at runtime. This environment variable takes precedence over the settings in the [Test Service Settings][3] page.
 
 `DD_CIVISIBILITY_ITR_DISABLED` (Optional)
 : Disables the Intelligent Test Runner from running.<br/>
