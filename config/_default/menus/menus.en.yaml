@@ -2950,11 +2950,6 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 3
-  - name: Setup
-    url: security/threats/setup
-    parent: cloud_workload_security
-    identifier: cws_setup
-    weight: 201
   - name: Managing Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
@@ -2985,11 +2980,6 @@ main:
     parent: csm
     identifier: cspm
     weight: 5
-  - name: Setup
-    url: security/misconfigurations/setup
-    parent: cspm
-    identifier: cspm_setup
-    weight: 101
   - name: Compliance Rules
     url: security/misconfigurations/compliance_rules
     parent: cspm

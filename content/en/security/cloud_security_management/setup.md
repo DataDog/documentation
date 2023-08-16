@@ -1,6 +1,40 @@
 ---
 title: Setting Up Cloud Security Management
 kind: documentation
+aliases:
+  - /security_platform/cloud_workload_security/getting_started
+  - /security/cloud_workload_security/getting_started
+  - /security/cloud_workload_security/setup
+  - /security/threats/setup
+  - /security_platform/cspm/getting_started
+  - /security/cspm/getting_started
+  - /security/cspm/setup
+  - /security/misconfigurations/setup
+further_reading:
+- link: "/getting_started/cloud_security_management"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Security Management"
+- link: "security/default_rules"
+  tag: "Documentation"
+  text: "Explore default cloud configuration compliance rules"
+- link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
+  tag: "Blog"
+  text: "Learn more about Datadog Cloud Runtime Security"
+- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
+  tag: "Blog"
+  text: "How to detect security threats in your systems' Linux processes"
+- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The PwnKit vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
+  tag: "Blog"
+  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
+- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
+  tag: "Blog"
+  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
+- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
+  tag: "Blog"
+  text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
 Cloud Security Management (CSM) 
@@ -147,7 +181,13 @@ Use one of the following methods to enable CSM for your Google Cloud projects:
 
 ## Enable CSM on the Agent for hosts and containers
 
-To enable CSM on the Agent for hosts and containers, 
+To enable CSM on the Agent for hosts and containers, follow the in-app instructions on the **[Cloud Security Management Setup page][1]**. The setup page shows ...
+
+ for the best experience, including step-by-step instructions scoped to your deployment configuration.
+
+Click **Enable** to view the 
+
+For each...
 
 *The current UI provides instructions on how to enable, not the ability to do so from the UI...
 
@@ -165,18 +205,20 @@ To enable CSM on the Agent for hosts and containers,
   * Custom kernel builds are not supported.
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
-The next...
+### Remote Configuration
 
-1. On the **[Cloud Security Management Setup page][1]**, click **Hosts and containers**.
-2. For each..., click **Enable**.
-3. Follow the in-app instructions to enable CSM.
+<div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-instructions below...
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. Available for CSM Threats, Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+
+To use Remote Configuration with CSM Threats, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
+
+**Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
 
-1. If you have not already, install the [Datadog Agent][1].
+1. If you haven't already, install the [Datadog Agent][1].
 
 2. Add the following to the `datadog` section of the `values.yaml` file:
 
@@ -201,16 +243,15 @@ instructions below...
     ```
 
 3. Restart the Agent.
-4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
-
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
+
 {{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
-1. If you have not already, install the [Datadog Agent][1].
+1. If you haven't already, install the [Datadog Agent][1].
 
 2. Add the following to the `datadog` section of the `values.yaml` file:
 
@@ -239,9 +280,9 @@ instructions below...
 
 3. Restart the Agent.
 
-
 [1]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -500,5 +541,23 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
+## Disable CSM Misconfigurations
+
+Once you've disabled CSM Misconfigurations, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
+
+To disable CSM Misconfigurations for your cloud providers:
+
+- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts.
+- **Azure**: On the **Setup** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
+- **Google Cloud**: On the **Setup** > **Cloud Providers** tab, click the **Google Cloud Platform** tile, and turn off the **CSPM Enabled** toggle for your Google Cloud projects.
+- **Docker**: Set `DD_COMPLIANCE_CONFIG_ENABLED` to `false` in your Docker configuration.
+- **Kubernetes**: In the `datadog` section of the `values.yaml` file, set `compliance` > `enabled` to `false`.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [3]: /security/cloud_security_management/troubleshooting
+[4]: /agent/remote_config
+[5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
