@@ -134,7 +134,7 @@ In the **banner card** view, you can see:
 
 {{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_s_card.png" alt="Latency Outlier banner card" style="width:100%;" >}}
 
-In the **full side panel**, you can see a latency distribution graph for the tag and the baseline with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
+In the **full side panel**, you can see a latency distribution graph for the tag and the baseline. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
 
 {{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
@@ -174,7 +174,7 @@ In the **banner card** view, you can see:
 * The field name
 * The performance metric value containing the field and the baseline for the rest of the data
 
-In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
+In the **full side panel**, you can see a timeseries graph about the performance metric. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
