@@ -69,7 +69,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Redshift Logs                   | S3             |
 | S3 Access Logs                  | S3             |
 
-**Note**: [Subscriptions filters][48] are not created automatically.
+**Note**: [Subscription filters][48] are not created automatically by the DatadogForwarder. Create them directly on a Log Group.
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][43] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
