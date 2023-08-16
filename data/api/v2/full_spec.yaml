@@ -29640,6 +29640,43 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
+  /api/v2/users/{user_uuid}/memberships:
+    get:
+      description: Get a list of memberships for a user
+      operationId: GetUserMemberships
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTeamsResponse'
+          description: Represents a user's association to a team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get user memberships
+      tags:
+      - Teams
+      x-menu-order: 1
+      x-undo:
+        type: safe
 security:
 - apiKeyAuth: []
   appKeyAuth: []
