@@ -2,6 +2,12 @@
 title: RUM React Native Advanced Configuration
 kind: documentation
 description: Learn about advanced configuration options for your React Native setup.
+code_lang: react-native
+type: multi-code-lang
+code_lang_weight: 40
+aliases:
+    - /real_user_monitoring/reactnative/advanced_configuration/
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
 further_reading:
     - link: https://github.com/DataDog/dd-sdk-reactnative
       tag: GitHub

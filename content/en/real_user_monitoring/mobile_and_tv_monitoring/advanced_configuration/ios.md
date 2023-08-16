@@ -1,6 +1,12 @@
 ---
 title: RUM iOS Advanced Configuration
 kind: documentation
+code_lang: ios
+type: multi-code-lang
+code_lang_weight: 20
+aliases:
+    - /real_user_monitoring/ios/advanced_configuration
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
     tag: "Github"

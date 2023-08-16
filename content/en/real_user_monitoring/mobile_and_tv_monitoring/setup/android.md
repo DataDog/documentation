@@ -1,6 +1,12 @@
 ---
-title: RUM Android and Android TV Monitoring
+title: RUM Android and Android TV Monitoring Setup
 kind: documentation
+aliases:
+    - /real_user_monitoring/android/
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+code_lang: android
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: Github

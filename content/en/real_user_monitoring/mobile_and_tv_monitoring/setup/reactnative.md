@@ -1,7 +1,13 @@
 ---
-title: React Native Monitoring
+title: RUM React Native Monitoring Setup
 kind: documentation
 description: Collect RUM data from your React Native projects.
+aliases:
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+    - /real_user_monitoring/reactnative/
+code_lang: react-native
+type: multi-code-lang
+code_lang_weight: 40
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub

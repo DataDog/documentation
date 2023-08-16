@@ -1,6 +1,9 @@
 ---
 title: RUM Android Data Collected
 kind: documentation
+code_lang: android
+type: multi-code-lang
+code_lang_weight: 10
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
