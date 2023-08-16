@@ -2,6 +2,12 @@
 title: RUM Flutter Advanced Configuration
 kind: documentation
 description: Learn how to configure Flutter Monitoring.
+code_lang: flutter
+type: multi-code-lang
+code_lang_weight: 30
+aliases:
+    - /real_user_monitoring/flutter/advanced_configuration
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub

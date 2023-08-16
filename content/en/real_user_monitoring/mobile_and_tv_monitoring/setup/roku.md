@@ -1,7 +1,13 @@
 ---
-title: RUM Roku Channel Monitoring
+title: RUM Roku Channel Monitoring Setup
 kind: documentation
 is_beta: true
+aliases:
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+    - /real_user_monitoring/roku/
+code_lang: roku
+type: multi-code-lang
+code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
   tag: Github

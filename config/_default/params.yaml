@@ -66,6 +66,11 @@ code_languages:
     example_file: example.ts
 
 code_language_ids:
+    android: Android
+    ios: iOS
+    flutter: Flutter
+    react-native: React Native
+    roku: Roku
     java: Java
     cpp: 'C++'
     php: PHP

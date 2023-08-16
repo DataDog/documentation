@@ -2,6 +2,9 @@
 title: RUM Flutter Data Collected
 kind: documentation
 description: Learn about the data collected by Flutter Monitoring.
+code_lang: flutter
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub

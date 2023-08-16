@@ -1,7 +1,13 @@
 ---
-title: Flutter Monitoring
+title: RUM Flutter Monitoring Setup
 kind: documentation
 description: Collect RUM data from your Flutter projects.
+aliases:
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+    - /real_user_monitoring/flutter/
+code_lang: flutter
+type: multi-code-lang
+code_lang_weight: 30
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: Blog

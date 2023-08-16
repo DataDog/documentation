@@ -1,6 +1,12 @@
 ---
 title: RUM Android Advanced Configuration
 kind: documentation
+code_lang: android
+type: multi-code-lang
+code_lang_weight: 10
+aliases:
+    - /real_user_monitoring/android/advanced_configuration/
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
