@@ -42,7 +42,7 @@ You can require a tag but allow users to specify their own values. In this examp
 
 {{< img src="monitors/settings/monitor_tag_enforcement_key_only.png" alt="The Monitors Settings page displaying a tag policy in which only the tag is required" >}}
 
-### Optional tag with mandatory values
+### Optional tag with mandatory values bla
 
 To make a tag optional but require that monitors with the tag use specific values, enter the values for the tag in the **Values** field. In this example, the `env` tag is optional. However, if a monitor uses this tag, the value must be set to `dev`, `staging`, or `prod`.
 
