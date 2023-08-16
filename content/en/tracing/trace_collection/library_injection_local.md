@@ -77,14 +77,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 2 - Annotate your pods for library injection
@@ -118,16 +119,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
-    annotations:
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 3 - Tag your pods with Unified Service Tags
@@ -136,13 +138,11 @@ With [Unified Service Tags][21], you can tie Datadog telemetry together and navi
 Set Unified Service tags by using the following labels:
 
 ```yaml
-...
-    metadata:
-        labels:
-            tags.datadoghq.com/env: "<ENV>"
-            tags.datadoghq.com/service: "<SERVICE>"
-            tags.datadoghq.com/version: "<VERSION>"
-...
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
 ```
 
 **Note**: It is not necessary to set the _environment variables_ for universal service tagging (`DD_ENV`, `DD_SERVICE`, `DD_VERSION`) in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
@@ -157,18 +157,20 @@ metadata:
     tags.datadoghq.com/env: "prod" # Unified service tag - Deployment Env tag
     tags.datadoghq.com/service: "my-service" # Unified service tag - Deployment Service tag
     tags.datadoghq.com/version: "1.1" # Unified service tag - Deployment Version tag
-...
-template:
-  metadata:
-    labels:
+  # (...)
+spec:
+  template:
+    metadata:
+      labels:
         tags.datadoghq.com/env: "prod" # Unified service tag - Pod Env tag
         tags.datadoghq.com/service: "my-service" # Unified service tag - Pod Service tag
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
-    annotations:
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 4 - Apply the configuration
