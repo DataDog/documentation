@@ -297,8 +297,8 @@ build_live:
     - make clean-examples
     - make dependencies
     - yarn run prebuild
-    - build_site
-    - in-isolation deploy_site
+    - build_site.py
+    - in-isolation deploy_site.py
     - in-isolation create_artifact
     - in-isolation create_artifact_ignored
     - in-isolation create_artifact_cached
