@@ -78,7 +78,8 @@ This monitor detects whether the number of waiting queries has exceeded a given 
 {{< img src="database_monitoring/dbm_event_monitor/waiting_queries_monitor.png" alt="A configured metrics query for monitoring the number of waiting database queries" style="width:100%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
-1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** to gain context on the range of typical values.
+1. In the **Common monitor types** box, click **Waiting Queries**. 
+1. To gain context on the range of typical values, set the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
 1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the number of waiting queries stays below `3000` on the chart, you might set **alert threshold** to `4000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
