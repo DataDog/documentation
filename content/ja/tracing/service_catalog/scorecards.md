@@ -6,14 +6,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-scorecards/
   tag: ブログ
   text: サービススコアカードでサービスの健全性とパフォーマンスを改善
-is_beta: true
 kind: documentation
-private: true
-title: サービススコアカード (ベータ版)
+title: サービススコアカード
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-  サービススコアカードはベータ版です。組織で有効にするには、<a href="/help">サポート</a>にご連絡ください。
+{{< callout url="#" btn_hidden="true" header="false" >}}
+サービススコアカードはベータ版です。
 {{< /callout >}}
 
 ## 概要
