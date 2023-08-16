@@ -118,7 +118,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をインストールします
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do
@@ -210,7 +210,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールします
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do
@@ -263,7 +263,7 @@ else
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:worker"
 
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールします
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   # バージョン 7.40 以降で Agent が失敗しないように datadog.yaml でホスト名を明示的に構成します
   # 変更点は https://github.com/DataDog/datadog-agent/issues/14152 をご覧ください
@@ -312,7 +312,7 @@ if [ \$DB_IS_DRIVER ]; then
   DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","spark_host_ip:\${SPARK_LOCAL_IP}","spark_node:driver"
 
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールします
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   # Datadog Agent がインストールされるのを待ちます
   while [ -z \$datadoginstalled ]; do

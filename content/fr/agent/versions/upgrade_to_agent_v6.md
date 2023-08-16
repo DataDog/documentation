@@ -22,7 +22,7 @@ Si l'Agent v5 est déjà installé, un script est disponible pour installer ou 
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
 La commande suivante fonctionne sous Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu et SUSE :
-: `DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"`
+: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
 
 **Remarque** : le processus d'importation n'importe pas automatiquement les checks **custom** de l'Agent. Ce comportement est délibéré : nous ne pouvons par garantir la compatibilité totale et immédiate de ces checks.
 
@@ -37,7 +37,7 @@ L'installation en une étape n'est pas disponible pour Windows. Référez-vous �
 Le programme d'installation de l'Agent v6 peut automatiquement convertir les configurations v5 lors de l'upgrade :
 
 ```shell
-DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
+DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
 
 **Remarque** : le processus d'importation n'importe pas automatiquement les checks **custom** de l'Agent. Ce comportement est délibéré : nous ne pouvons par garantir la compatibilité totale et immédiate de ces checks.
@@ -392,7 +392,7 @@ Où :
 
 **Remarque** : `datadog.conf` est automatiquement converti en `datadog.yaml` lors de l'upgrade.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-6-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
 {{% /tab %}}
 {{% tab "macOS" %}}
 
