@@ -37,19 +37,17 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
-Cloud Security Management (CSM) 
+Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
 
-CSM is built around the concept of packages
-
-Note you can enable other features...
-
-Each package includes access the
+CSM is available in three packages: CSM Enterprise, CSM Pro, and Workload Security. Each package includes access to a specific set of features, as shown in the following table:
 
 | Package           | Features                   | Setup instructions                                                                                                                                                                                    |
 |-------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | CSM Enterprise    | Threats, Misconfigurations | [Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts) and [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers) |
 | CSM Pro           | Misconfigurations          | [Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts)                                                                                                           |
 | Workload Security | Threats                    | [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers)                                                                                                 |
+
+**Note**: You can enable other features that aren't included in your package at any time by following the instructions.
 
 ## Enable resource scanning for cloud accounts
 
@@ -540,18 +538,6 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Disable CSM Misconfigurations
-
-Once you've disabled CSM Misconfigurations, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
-
-To disable CSM Misconfigurations for your cloud providers:
-
-- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts.
-- **Azure**: On the **Setup** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
-- **Google Cloud**: On the **Setup** > **Cloud Providers** tab, click the **Google Cloud Platform** tile, and turn off the **CSPM Enabled** toggle for your Google Cloud projects.
-- **Docker**: Set `DD_COMPLIANCE_CONFIG_ENABLED` to `false` in your Docker configuration.
-- **Kubernetes**: In the `datadog` section of the `values.yaml` file, set `compliance` > `enabled` to `false`.
 
 ## Further Reading
 
