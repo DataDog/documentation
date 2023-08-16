@@ -108,7 +108,7 @@ This monitor detects whether the number of long-running queries has exceeded a g
 1. In **Common monitor types**, click **Long Running Queries**.
 1. Update the query filter to **Duration:>30s**.
 1. To gain context on the range of typical values, set the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
-1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **alert threshold** to `2500` to represent unusual activity. For configuration details, [Set alert conditions][6] and [Advanced alert conditions][3].
+1. Enter your chosen alerting threshold value in the **Alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **Alert threshold** to `2500` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
