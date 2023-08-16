@@ -123,7 +123,7 @@ which exceeded {{threshold}}, has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
 1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert** in the modal, then **Run Test**.
+1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
 1. Click **Create** to save the monitor.
 
 ### Change in explain-plan cost
