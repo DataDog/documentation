@@ -498,4 +498,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [4]: /tracing/trace_collection/library_config/dotnet-core/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
-[11]: /tracing/_trace_collection/library_injection_local/
+[11]: /tracing/trace_collection/library_injection_local/
