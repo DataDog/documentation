@@ -54,7 +54,9 @@ By clicking **Authorize** when logging in, you link the mobile device you're usi
 
 If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
 
-## Using the Datadog Mobile App
+# Using the Datadog Mobile App
+
+{{< img src="service_management/mobile/mobile-home-overview.png" alt="The Datadog Mobile App" style="width:80%;">}}
 
 At the top of your home page, you can find the name of the organization you are logged into. Underneath, there are several sections showing the content you interact with often: Starred Items, Monitor Saved Views, Open Incidents, and Recent. You can fully customize the content displayed in each section (except Recent), and which order the sections appear on your home page by selecting "Edit" at the bottom of the page.
 
