@@ -144,7 +144,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
     - Change **Query Samples** to **Explain Plans**.
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**. Typing "cost" into the field populates the autocomplete options.
     - Change **(everything)** to **Host (host)**.
-1. Click the **∑** button (the **Add function** button) and type "rollup" to populate the autocomplete suggestions. Choose **moving_rollup**. Leave the other fields unchanged to monitor the aggregated hourly average explain-plan cost for each host.
+1. Click the **∑** button and type **rollup** to populate the autocomplete suggestions. Choose **moving_rollup**. 
 1. Click **Add Query** to create query **b**, a copy of query **a**.
 1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
 1. In the **b** query, click the the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
