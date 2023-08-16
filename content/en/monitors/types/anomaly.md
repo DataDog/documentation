@@ -56,18 +56,18 @@ Trigger window
 : How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
 Recovery window
-: How much time is required for the metric to not be considered anomalous so the alert recovers. It is recommended to set it to the same as the `trigger window`. 
+: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**. 
 
-**Note**: The range of accepted value for the `Recovery Window` depends on the `Trigger Window` and the `Alert Threshold` to make sure the monitor can't both satisfy the recovery and alert condition at the same time.
+**Note**: The range of accepted values for the **Recovery Window** depends on the **Trigger Window** and the **Alert Threshold** to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
 Example:
 * `Threshold`: 50%
 * `Trigger window`: 4h
-The range of accepted values for recovery window is between 121 minutes (`4h*(1-0.5) +1 min = 121 minutes`) and 4h. Indeed setting a recovery window below 121 minutes could lead to a 4h timeframe with both 50% of anomalous point and the last 120 minutes with no anomalous points.
+The range of accepted values for the recovery window is between 121 minutes (`4h*(1-0.5) +1 min = 121 minutes`) and 4 hours. Setting a recovery window below 121 minutes could lead to a 4 hour timeframe with both 50% of anomalous points and the last 120 minutes with no anomalous points.
 
 Another example:
 * `Threshold`: 80%
 * `Trigger window`: 4h
-The range of accepted values for recovery window is between 49 minutes (`4h*(1-0.8) +1 min = 49 minutes`) and 4h.
+The range of accepted values for the recovery window is between 49 minutes (`4h*(1-0.8) +1 min = 49 minutes`) and 4 hours.
 
 ### Advanced options
 
