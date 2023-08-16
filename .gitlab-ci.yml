@@ -143,7 +143,7 @@ build_preview:
     - build_site.py
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
-    - in-isolation deploy_site.py > logs/deploy.txt
+    - in-isolation deploy_site.py
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack.py  "Your branch ${CI_COMMIT_REF_NAME} is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." --status="#31b834" --previewSite="true"
