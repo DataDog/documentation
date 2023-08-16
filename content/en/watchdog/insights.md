@@ -51,7 +51,7 @@ Expand the carousel for an overview. The highest priority insights (based on `St
 
 Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
-Every insight comes with embedded interactions and a side panel with troubleshooting information. The insight interactions and side panel vary based on the Watchdog Insight type.
+Every outlier comes with embedded interactions and a side panel with troubleshooting information. The insight interactions and side panel vary based on the Watchdog Insight type.
 
 **Filter on Insight query**:
 
