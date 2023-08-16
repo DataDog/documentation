@@ -79,11 +79,19 @@ This monitor detects whether the number of waiting queries has exceeded a given 
 
 {{< img src="database_monitoring/dbm_event_monitor/waiting_queries_monitor.png" alt="A configured metrics query for monitoring the number of waiting database queries" style="width:80%;" >}}
 
+#### Build the monitoring query
+
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In the **Common monitor types** box, click **Waiting Queries**. 
+
+#### Set the alert threshold
+
 1. To gain context on the range of typical values, set the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
 1. Enter your chosen alerting threshold value in the **Alert threshold** box. For example, if the number of waiting queries stays below `3000` on the chart, you might set **Alert threshold** to `4000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
+
+#### Configure notifications
+
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -97,6 +105,9 @@ has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
 1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
+
+#### Verify and save the monitor
+
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
 1. Click **Create** to save the monitor.
 
@@ -106,12 +117,20 @@ This monitor detects whether the number of long-running queries has exceeded a g
 
 {{< img src="database_monitoring/dbm_event_monitor/long_running_queries_monitor.png" alt="A configured metrics query for monitoring the number of long-running database queries" style="width:80%;" >}}
 
+#### Build the monitoring query
+
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In **Common monitor types**, click **Long Running Queries**.
 1. Update the query filter to **Duration:>30s**.
+
+#### Set the alert threshold
+
 1. To gain context on the range of typical values, set the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
 1. Enter your chosen alerting threshold value in the **Alert threshold** box. For example, if the values on the chart stay below `2000`, you might set **Alert threshold** to `2500` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3].
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
+
+#### Configure notifications
+
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -125,6 +144,9 @@ which exceeded {{threshold}}, has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
 1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
+
+#### Verify and save the monitor
+
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
 1. Click **Create** to save the monitor.
 
@@ -141,18 +163,29 @@ This allows the comparison of two consecutive Mondays, for example.
 
 With minor changes, the monitor can instead reflect hourly averages, measure the difference between today and yesterday, group by query signature instead of host, and so on.
 
+#### Build the first monitoring query
+
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. Under **Define the search query**, make the following updates:
     - Change **Query Samples** to **Explain Plans**.
     - Change __*__ to **Explain Plan Cost (@db.plan.cost)**. Typing "cost" into the field populates the autocomplete options.
     - Change **(everything)** to **Host (host)**.
 1. Click the **∑** button and type **rollup** to populate the autocomplete suggestions. Choose **moving_rollup**. 
+
+#### Build the second monitoring query
+
 1. Click **Add Query** to create query **b**, a copy of query **a**.
 1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
 1. In the **b** query, click the the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+
+#### Set the alert threshold
+
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the typical cost variation from week to week.
 1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set **alert threshold** to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3]. 
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
+
+#### Configure notifications
+
 1. Under **Notify your team**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
@@ -166,6 +199,9 @@ of the cost on this day last week.
 {{/is_recovery}}
 {{< /code-block >}}
 1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
+
+#### Verify and save the monitor
+
 1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
 1. Click **Create** to save the monitor.
 
