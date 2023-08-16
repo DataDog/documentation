@@ -147,7 +147,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 1. Click the **∑** button (the **Add function** button) and type "rollup" to populate the autocomplete suggestions. Choose **moving_rollup**. Leave the other fields unchanged to monitor the aggregated hourly average explain-plan cost for each host.
 1. Click **Add Query** to create query **b**, a copy of query **a**.
 1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
-1. In the **b** query, click the the **∑** button (the **Add function** button). Choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+1. In the **b** query, click the the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
 1. In the dropdown menu at the top of the chart, expand the time frame to **Past 1 Month** to gain context on the typical cost variation from week to week.
 1. Enter your chosen alerting threshold value in the **alert threshold** box. For example, if the difference in explain-plan cost stays below `8000` on the chart, you might set **alert threshold** to `9000` to represent unusual activity. For configuration details, see [Set alert conditions][6] and [Advanced alert conditions][3]. 
 1. Use the red shaded area on the chart to verify that your alert won't trigger too rarely or too often, and adjust the threshold value as needed.
