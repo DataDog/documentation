@@ -206,7 +206,7 @@ If you need to pass a more complex custom configuration for your Datadog-JMX int
 
 When using this method, the Agent needs a configuration file and an optional `metrics.yaml` file for the metrics to collect. These files can either be mounted into the Agent pod or built into the container image. 
 
-The configuration file naming convention is to first identify the `<INTEGRATION NAME>` from the [prerequisite steps of available integrations](#available-jmx-integrations). Once this is determined the Agent needs a configuration file named relative to that integration—_or_ within that integration's config directory. 
+The configuration file naming convention is to first identify your desired integration name from the [prerequisite steps of available integrations](#available-jmx-integrations). Once this is determined, the Agent needs a configuration file named relative to that integration—_or_ within that integration's config directory. 
 
 For example, for the [Tomcat][81] integration, create _either_:
 - `/etc/datadog-agent/conf.d/tomcat.yaml`, or
