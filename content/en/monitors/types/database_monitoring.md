@@ -8,10 +8,12 @@ kind: documentation
 
 With the [Database Monitoring (DBM)][1] monitor type, you can create monitors and alert on the data surfaced in DBM. These monitors can be configured to alert you when a DBM event type deviates from a predefined threshold over a given period of time.
 
-A few common monitoring scenarios (click for setup instructions):
+Common monitoring scenarios include
 - [Number of waiting queries](#number-of-waiting-queries)
 - [Number of queries exceeding a given duration](#queries-exceeding-30-seconds)
 - [Significant changes in explain-plan cost](#change-in-explain-plan-cost)
+
+For step-by-step instructions, see [Example monitors](#example-monitors).
 
 ## Monitor creation
 
@@ -29,7 +31,7 @@ If you don't wish to [create your monitor from scratch](#creating-monitors-from-
 - Waiting Queries
 - Long Running Queries
 
-{{< img src="database_monitoring/dbm_event_monitor/dbm_common_monitor_types.png" alt="Example OOTB monitors related to waiting queries and long running queries" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/dbm_common_monitor_types.png" alt="Example OOTB monitors related to waiting queries and long running queries" style="width:80%;" >}}
 
 Any feedback on these existing monitor types and other ones you would like to see should be shared with your Customer Success Manager or the [Support Team][9].
 
@@ -41,7 +43,7 @@ Any feedback on these existing monitor types and other ones you would like to se
 
 2. Construct a search query using the same logic as in the <a href="https://docs.datadoghq.com/database_monitoring/query_samples/">DBM Query Samples</a> activity and explain plan explorer. This means that you should select one or more **facets** to include in the search bar. For example, if you wanted to alert on the waiting queries executed by user `postgresadmin`, then your search bar would look like this:
 
-{{< img src="database_monitoring/dbm_event_monitor/dbm_example_query_no_group_by.png" alt="An example search query containing two facets in the search bar." style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/dbm_example_query_no_group_by.png" alt="An example search query containing two facets in the search bar." style="width:80%;" >}}
 
 Note: The monitor you configure alerts over the **unique value count** of the facets.
 
@@ -75,7 +77,7 @@ For more information about the **Notify your team** and **Say what's happening**
 
 This monitor detects whether the number of waiting queries has exceeded a given threshold.
 
-{{< img src="database_monitoring/dbm_event_monitor/waiting_queries_monitor.png" alt="A configured metrics query for monitoring the number of waiting database queries" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/waiting_queries_monitor.png" alt="A configured metrics query for monitoring the number of waiting database queries" style="width:80%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In the **Common monitor types** box, click **Waiting Queries**. Use the dropdown menu at the top of the chart to set the time frame to **Past 1 Month** to gain context on the range of typical values.
@@ -101,7 +103,7 @@ has recovered.
 
 This monitor detects whether the number of long-running queries has exceeded a given threshold.
 
-{{< img src="database_monitoring/dbm_event_monitor/long_running_queries_monitor.png" alt="A configured metrics query for monitoring the number of long-running database queries" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/long_running_queries_monitor.png" alt="A configured metrics query for monitoring the number of long-running database queries" style="width:80%;" >}}
 
 1. In Datadog, go to [**Monitors > New Monitor > Database Monitoring**][2].
 1. In **Common monitor types**, click **Long Running Queries**.
@@ -127,7 +129,7 @@ which exceeded {{threshold}}, has recovered.
 
 ### Change in explain-plan cost
 
-{{< img src="database_monitoring/dbm_event_monitor/explain_plan_cost_monitor.png" alt="A monitor configured to track changes in average daily explain-plan cost" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/explain_plan_cost_monitor.png" alt="A monitor configured to track changes in average daily explain-plan cost" style="width:80%;" >}}
 
 This monitor detects a significant change in daily average explain-plan cost by comparing the results of two queries:
 
