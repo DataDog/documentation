@@ -24,6 +24,18 @@ def foo(bar):
 
 ## 準拠コードの例
 ```python
+ctx1.set_baggage_item("test", 3)
+ctx2 = SpanContext()
+# テストファイル内のアサートはエラーを発生させない
+assert "test" not in ctx2._baggage
+```
+
+```python
+def foo(bar):
+  assert bar  # テストコードではアサート OK (ファイル名参照)
+```
+
+```python
 def foo(bar):
   assert bar  # テストコードではアサート OK
 ```

@@ -22,12 +22,30 @@ title: クラス名はキャメルケースでなければならない
 
 ## 非準拠コードの例
 ```python
+class _runtimeMetricsStatus(type):
+    pass
+```
+
+```python
 class myClass(Parent):
     def __init__(self):
         pass
+
+
 ```
 
 ## 準拠コードの例
+```python
+class REQUESTS_MODE(IntEnum):
+    AGENTLESS_EVENTS = 0
+    EVP_PROXY_EVENTS = 1
+```
+
+```python
+class _RuntimeMetricsStatus(type):
+    pass
+```
+
 ```python
 class Migration(migrations.Migration):
 
@@ -51,4 +69,20 @@ class Migration(migrations.Migration):
 class MyClass(Parent):
     def __init__(self):
         pass
+
+class TestRestapiV4Lock(FunctionalTestController):
+    pass
+
+class TestS3Storage(TestCase):
+    pass
+
+
+class TestS35Storage(TestCase):
+    pass
+
+
+
+class TestS35Storage(TestCase):
+    pass
+
 ```
