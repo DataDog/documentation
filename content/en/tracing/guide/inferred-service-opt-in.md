@@ -37,7 +37,7 @@ Use the dependency map to visualize service-to-service communication and gain in
 
 ## Opt in
 
-To opt in, you must adjust your Datadog Agent and APM Tracer configurations.
+To opt in, you must adjust your Datadog Agent and APM Tracer configurations. After these changes, you might have [migration actions to take](#global-default-service-naming-migration).
 
 ### Datadog Agent configuration
 
@@ -254,6 +254,21 @@ For example, to set the `peer.service` value for all Dalli spans, use
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Global default service naming migration
+
+When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations. Rather than including the name of associated integration (for example, gRCP calls as `service:<DD_SERVICE>-grpc-client`), spans from the downstream service are tagged with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
+
+Consequently, if you have existing:
+
+- APM metrics
+- APM custom span metrics
+- Trace analytics
+- Retention filters
+- Sensitive data scans
+- Monitors, dashboards, or notebooks that query those things
+
+Update those items to use the global default service name (`<DD_SERVICE>`) instead.
 
 ## Further reading
 
