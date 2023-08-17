@@ -258,40 +258,9 @@ An overlay is then set on the function with pink pills hihglighting the differen
 {{% /tab %}}
 {{% tab "Live Processes" %}}
 
-**CPU usage outlier**
+For Live Processes, the Watchdog insight carousel is reflecting [all the Processes anomalies][1] for the current context of the Live process explorer.
 
-In the **banner card** view, you can see:
-
-  * The integration impacted by the CPU outlier
-  * The command for the process impacted by the CPU outlier
-    
-{{< img src="watchdog/small_card_processes_cpu.png" alt="Process outlier on CPU usage" style="width:60%;">}}
-
-In the **full side panel**, you can see instructions on how to investigate such issues:
-
-{{< img src="watchdog/side_panel_processes_cpu.png" alt="Side panel for CPU outliers on live processes" style="width:80%;">}}
-
-As well as related metrics for that given integration as well as related processes running this integration: 
-
-{{< img src="watchdog/side_panel_processes_cpu_details.png" alt="Side panel with related metrics for CPU outliers on live processes" style="width:80%;">}}
-
-**Memory usage outlier**
-
-In the **banner card** view, you can see:
-
-  * The integration impacted by the Memory outlier
-  * The command for the process impacted by the Memory outlier
-    
-{{< img src="watchdog/small_card_processes_memory.png" alt="Process outlier on Memory usage" style="width:60%;">}}
-
-In the **full side panel**, you can see instructions on how to resolve the lock pressure:
-
-{{< img src="watchdog/side_panel_processes_memory.png" alt="Side panel for Memory outliers on live processes" style="width:80%;">}}
-
-As well as related metrics for that given integration as well as related processes running this integration: 
-
-{{< img src="watchdog/side_panel_processes_memory_details.png" alt="Side panel with related metrics for Memory outliers on live processes" style="width:80%;">}}
-
+[1]: /watchdog/#overview
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
