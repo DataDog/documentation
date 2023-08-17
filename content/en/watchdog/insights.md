@@ -180,7 +180,24 @@ In the **full side panel**, you can see instructions on how to improve regex com
 
 {{% /tab %}}
 {{% tab "Databases" %}}
-TODO
+
+For Databases, Watchdog surfaces insights on the following metrics:
+
+- `CPU`
+- `Commits `
+- `IO`
+- `Background`
+- `Concurrency`
+- `Idle`
+
+Find the databases impacted by one or multiple outliers thanks to the insight carousel
+
+{{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:80%;">}}
+
+An overlay is then set on the databases with pink pills hihglighting the different insights and giving more information about what happened. 
+
+{{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:80%;">}}
+
 {{% /tab %}}
 {{% tab "RUM" %}}
 
@@ -219,7 +236,7 @@ In the **full side panel**, you can see a timeseries graph about the performance
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
-For serverless infrastructures, Watchdog surfaces the following outliers:
+For serverless infrastructures, Watchdog surfaces the following insights:
 
 - `Cold Start Ratio Up/Down`
 - `Error Invocation Ratio Up/Down`
