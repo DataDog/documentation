@@ -44,6 +44,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Serverless explorer][8]
     - [Containers explorer][9]
 - [Real User Monitoring (RUM) explorer][10]
+- [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
@@ -145,7 +146,7 @@ TODO
 
 {{% /tab %}}
 {{% tab "Databases" %}}
-
+TODO
 {{% /tab %}}
 {{% tab "RUM" %}}
 
@@ -231,3 +232,4 @@ For Containers Watchdog calculate outliers on the following:
 [10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
+[13]: https://app.datadoghq.com/rum/error-tracking
