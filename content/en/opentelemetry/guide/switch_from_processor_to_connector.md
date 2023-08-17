@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="" header="false" btn_hidden="true" >}}
-  Datadog connector for the OpenTelemetry Collector is in beta. 
+  Datadog Connector for the OpenTelemetry Collector is in beta. 
 {{< /callout >}} 
 
 ## Overview
@@ -71,7 +71,7 @@ processors:
 
 ### Example
 
-Here's a full example with all of the new configuration:
+In the following full example, the `traces/2` pipeline samples the traces, and the `traces` pipeline doesn't. The metrics generated from both pipelines are ingested into a single metrics pipeline, but the Datadog Connector ensures the resulting number of stats are accurate.
 
 ```yaml
 processors:
