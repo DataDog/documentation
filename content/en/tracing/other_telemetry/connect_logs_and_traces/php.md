@@ -116,7 +116,7 @@ For instance, you would append those two attributes to your logs with:
 ?>
 ```
 
-If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1:
+If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1, add the following configuration:
 
 ```php
 <?php
@@ -132,7 +132,7 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 ?>
 ```
 
-For monolog v2:
+For monolog v2, add the following configuration:
 
 ```php
 <?php
@@ -147,22 +147,7 @@ For monolog v2:
   ?>
 ```
 
-For monolog v3:
-
-```php
-<?php
-  $logger->pushProcessor(function ($record) {
-        $context = \DDTrace\current_context();
-        $record->extra['dd'] = [
-            'trace_id' => $context['trace_id'],
-            'span_id'  => $context['span_id'],
-        ];
-        return $record;
-    });
-?>
-```
-
-If your application uses json logs format instead of appending trace_id and span_id to the log message you can add first-level key "dd" containing these ids:
+If your application uses JSON logs format, you can add a first-level key `dd` that contains the `trace_id` and `span_id`, instead of appending `trace_id` and `span_id` to the log message:
 
 ```php
 <?php
@@ -178,6 +163,23 @@ If your application uses json logs format instead of appending trace_id and span
 ?>
 ```
 
+For monolog v3, add the following configuration:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+        $context = \DDTrace\current_context();
+        $record->extra['dd'] = [
+            'trace_id' => $context['trace_id'],
+            'span_id'  => $context['span_id'],
+        ];
+        return $record;
+    });
+?>
+```
+
+If you are ingesting your logs as JSON, go to [Preprocessing for JSON logs][8] and add `extra.dd.trace_id` to the **Trace Id Attributes** field.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -189,3 +191,4 @@ If your application uses json logs format instead of appending trace_id and span
 [5]: https://github.com/laminas/laminas-log
 [6]: /getting_started/tagging/unified_service_tagging
 [7]: /logs/log_configuration/pipelines
+[8]: https://app.datadoghq.com/logs/pipelines/remapping
