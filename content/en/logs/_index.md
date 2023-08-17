@@ -5,6 +5,7 @@ description: "Configure your Datadog Agent to gather logs from your host, contai
 disable_sidebar: true
 aliases:
   - /guides/logs/
+  - /en/logs
   - /logs/logging_without_limits
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
