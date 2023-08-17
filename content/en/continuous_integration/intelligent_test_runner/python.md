@@ -65,7 +65,7 @@ The [Datadog Application key][1] must be set using the `DD_APP_KEY` environment 
 ## Running tests with the Intelligent Test Runner enabled
 
 ### Environment variable
-<div class="alert alert-info">Setting DD_CIVISIBILITY_AGENTLESS_ENABLED to true is required while the Intelligent Test Runner support for `pytest` is in beta. </div>
+<div class="alert alert-info">Setting DD_CIVISIBILITY_AGENTLESS_ENABLED to true is required while the Intelligent Test Runner support for pytest is in beta. </div>
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED` (Optional)
 : Run the Intelligent Test Runner in agentless mode (also applies to test visibility).
