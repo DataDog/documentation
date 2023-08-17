@@ -220,7 +220,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
-You can directly access a trace in its source repository on GitHub in [Error Tracking][1].
+You can directly access a trace in its source repository on the Git provider in [Error Tracking][1].
 
 1. Navigate to [**APM** > **Error Tracking**][2].
 2. Click on an issue. The **Issue Details** panel appears on the right.
@@ -234,7 +234,7 @@ You can directly access a trace in its source repository on GitHub in [Error Tra
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can directly access a trace in its source repository on GitHub in the [Continuous Profiler][1].
+You can directly access a trace in its source repository on the Git provider in the [Continuous Profiler][1].
 
 1. Navigate to [**APM** > **Profile Search**][2].
 2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears on the right.
