@@ -99,6 +99,29 @@ instances:
         - users_deprecated$
 ```
 
+## Schema collection
+Starting with Agent version 7.48.0, schema collection can be enabled if `database_autodiscovery` is enabled. Once schema collection is enabled, you will be able to view the schemas of your databases on the `Schemas` tab of your database host. See [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for additional configuration options.
+
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    collect_schemas: # Enable schema collection
+      enabled: true
+    relations: 
+      - relation_regex: .* # required
+    database_autodiscovery:
+      enabled: true # required
+      include:
+        - inventory$
+        - products$
+        - user*
+```
+
 ### Working with hosts through a proxy
 If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Use the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
