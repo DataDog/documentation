@@ -58,12 +58,12 @@ processors:
            exporters: [datadog]
      {{< /highlight >}}
 5. Add the Connector configuration to `metrics` section:
-```yaml
-    metrics:
-      receivers: [datadog/connector]
-      processors: [batch]
-      exporters: [datadog]
-```
+   ```yaml
+       metrics:
+         receivers: [datadog/connector]
+         processors: [batch]
+         exporters: [datadog]
+   ```
 
 ## Example
 
