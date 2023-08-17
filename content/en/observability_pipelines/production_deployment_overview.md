@@ -138,4 +138,4 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
 [2]: /observability_pipelines/reference/sources/
 [4]: /network_monitoring/performance/
-[5]: /observability_pipelines/production_deployment_overview/aggregator_architecture/
+[5]: /observability_pipelines/architecture/
