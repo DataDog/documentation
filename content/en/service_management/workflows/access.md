@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
-- link: "/service_management/service_management/workflows/actions_catalog"
+- link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
   text: "See the list of workflow actions"
 ---
