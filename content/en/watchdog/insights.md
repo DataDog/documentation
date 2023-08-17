@@ -58,7 +58,7 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
 
-{{< img src="watchdog/filter_on_insight.png" alt=Filtering the explorer on the insight context" >}}
+{{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" >}}
 
 ## Outlier types
 
