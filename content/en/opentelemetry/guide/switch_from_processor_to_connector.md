@@ -25,13 +25,12 @@ The Datadog Connector for the OpenTelemetry Collector allows APM metrics to be c
 
 To switch to using the Datadog Connector, change the following Agent configurations:
 
-1. Replace the Datadog Processor configuration from `processors` with the Datadog Connector configuration from `connectors`:
-{{< highlight yaml "hl_lines=8-15" >}}
-# Remove this section
+1. Add the `connectors` section:
+{{< highlight yaml "hl_lines=7-14" >}}
 processors:
    probabilistic_sampler:
      sampling_percentage: 20
-     # add the "datadog" processor definition
+     # Add the "datadog" processor definition
   datadog:
 
 # Add this section
@@ -46,7 +45,7 @@ processors:
 
 3. Duplicate the `service.pipelines.trace` configuration for the sampled trace pipeline.
 4. Add the Datadog Connector to the duplicated pipeline configuration that isn't sampled:
-     {{< highlight yaml "hl_lines=6" >}}
+     {{< highlight yaml "hl_lines=3-6" >}}
      service:
        pipelines:
          traces:
@@ -58,7 +57,49 @@ processors:
            processors: [batch, probabilistic_sampler]
            exporters: [datadog]
      {{< /highlight >}}
+5. Add the Connector configuration to `metrics` section:
+```yaml
+    metrics:
+      receivers: [datadog/connector]
+      processors: [batch]
+      exporters: [datadog]
+```
 
+## Example
+
+Here's a full example with all of the new configuration:
+
+```yaml
+processors:
+  probabilistic_sampler:
+    sampling_percentage: 20
+
+ connectors:
+  # Add the "datadog" connector definition and further configurations
+   datadog:
+
+   exporters:
+     datadog:
+     api:
+     key: ${env:DD_API_KEY}
+
+service:
+  pipelines:
+     traces:
+        receivers: [otlp]
+        processors: [batch]
+        exporters: [datadog/connector]
+
+     traces/2: # This pipeline uses sampling
+        receivers: [otlp]
+        processors: [batch, probabilistic_sampler]
+        exporters: [datadog]
+
+     metrics:
+        receivers: [datadog/connector]
+        processors: [batch]
+        exporters: [datadog]
+```
 
 ## Further reading
 
