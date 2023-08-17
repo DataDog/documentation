@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: hardware-sentry
 app_uuid: daade024-2095-4a73-afe5-35afbe9e2b12
 assets:

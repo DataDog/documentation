@@ -6,26 +6,26 @@ categories:
 - cloud
 - log collection
 dependencies: []
-description: Amazon Firehose のキーメトリクスを追跡。
+description: Amazon Kinesis Data Firehose のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_firehose/
 draft: false
 git_integration_title: amazon_firehose
 has_logo: true
 integration_id: amazon-firehose
-integration_title: Amazon Firehose
+integration_title: Amazon Kinesis Data Firehose
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_firehose
-public_title: Datadog-Amazon Firehose インテグレーション
-short_description: Amazon Firehose のキーメトリクスを追跡。
+public_title: Datadog-Amazon Kinesis Data Firehose インテグレーション
+short_description: Amazon Kinesis Data Firehose のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Firehose は、AWS にストリーミングデータをロードする最も簡単な方法です。
+Amazon Kinesis Data Firehose は、AWS にストリーミングデータをロードする最も簡単な方法です。
 
 このインテグレーションを有効にすると、Datadog にすべての Firehose メトリクスを表示できます。
 
@@ -38,20 +38,20 @@ Amazon Firehose は、AWS にストリーミングデータをロードする最
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Firehose` が有効になっていることを確認します。
-2. [Datadog - AWS Firehose インテグレーション][3]をインストールします。
+2. [Datadog - Amazon Kinesis Data Firehose インテグレーション][3]をインストールします。
 
 ### ログの収集
 
 #### ログの有効化
 
-Amazon Firehose から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Amazon Kinesis Data Firehose から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_firehose` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Firehose ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Kinesis Data Firehose ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -66,11 +66,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Kinesis Firehose インテグレーションには、イベントは含まれません。
+Amazon Kinesis Data Firehose インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS AWS Kinesis Firehose インテグレーションには、サービスのチェック機能は含まれません。
+Amazon Kinesis Data Firehose インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

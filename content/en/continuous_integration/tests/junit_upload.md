@@ -32,6 +32,7 @@ Install the [`datadog-ci`][3] CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+
 ### Standalone binary (beta)
 
 <div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
@@ -191,6 +192,23 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
+`--metrics`
+: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--metrics` parameter can be specified multiple times). When specifying metrics using `DD_METRICS`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
+**Environment variable**: `DD_METRICS`<br/>
+**Default**: (none)<br/>
+**Example**: `memory_allocations:13`<br/>
+**Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
+
+`--report-tags`
+: Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
+**Default**: (none)<br/>
+**Example**: `test.code_coverage.enabled:true`<br/>
+
+`--report-metrics`
+: Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
+**Default**: (none)<br/>
+**Example**: `test.code_coverage.lines_pct:82`<br/>
+
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
 See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-expressions) for more details on the supported expressions.<br/>
@@ -212,6 +230,20 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Runs the command without actually uploading the file to Datadog. All other checks are performed.<br/>
 **Default**: `false`
 
+`--skip-git-metadata-upload`
+: Flag used to skip git metadata upload. If you want to upload git metadata, you may pass --skip-git-metadata-upload=0 or --skip-git-metadata-upload=false.<br/>
+**Default**: `true`<br/>
+
+`--git-repository-url`
+: The repository URL to retrieve git metadata from. If it is not passed, the URL is retrieved from the local git repository.<br/>
+**Default**: local git repository<br/>
+**Example**: `git@github.com:DataDog/documentation.git`<br/>
+
+`--verbose`
+: Flag used to add extra verbosity to the output of the command<br/>
+**Default**: `false`<br/>
+
+
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
 
@@ -228,55 +260,14 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
+### Test suite level visibility compatibility
+[Test suite level visibility][9] is supported from `datadog-ci>=2.17.0`.
+
 ## Collecting repository and commit metadata
 
-Datadog uses Git information for visualizing your test results and grouping them by repository and commit. Git metadata is collected by the Datadog CI CLI from CI provider environment variables and the local `.git` folder in the project path, if available. To read this directory, the [`git`][8] binary is required.
+## Collecting Git metadata
 
-If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
-
-`DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
-**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.<br/>
-**Example**: `develop`
-
-`DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
-**Example**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: Full commit hash.<br/>
-**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: Commit message.<br/>
-**Example**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.<br/>
-**Example**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.<br/>
-**Example**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.<br/>
-**Example**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.<br/>
-**Example**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
+{{% ci-git-metadata %}}
 
 ## Git metadata upload
 
@@ -338,7 +329,7 @@ For mobile apps (Swift, Android):
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][9] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][8] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
@@ -472,6 +463,17 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 
 The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
+
+## Reporting code coverage
+
+It is possible to report code coverage for a given JUnit report via the `--report-metrics` option, by setting the `test.code_coverage.lines_pct` metric:
+
+```shell
+datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
+```
+
+Read more about code coverage in Datadog in [code coverage in Datadog guide][10].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -483,5 +485,6 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /logs/
 [7]: /getting_started/site/
-[8]: https://git-scm.com/downloads
-[9]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: /continuous_integration/tests/#test-suite-level-visibility
+[10]: /continuous_integration/guides/code_coverage/?tab=junitreportuploads

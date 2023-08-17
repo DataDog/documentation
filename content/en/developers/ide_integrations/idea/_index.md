@@ -1,5 +1,5 @@
 ---
-title: Datadog Plugin For IntelliJ IDEA
+title: Datadog Plugin for the IntelliJ Platform
 kind: documentation
 disable_toc: false
 is_beta: true
@@ -15,13 +15,9 @@ further_reading:
   text: "Learn about the JetBrains Toolbox."
 ---
 
-{{< callout url="#" btn_hidden="true">}}
-  The Datadog plugin for IntelliJ IDEA is in public beta. It is intended for Java developers who use Datadog products, such as the <a href="https://docs.datadoghq.com/logs/explorer/">Log Explorer</a> and the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>, for their Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
-{{< /callout >}}
-
 ## Overview
 
-The Datadog plugin for IntelliJ IDEA helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog plugin for the IntelliJ Platform (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -41,8 +37,8 @@ The **Logs Navigation** support opens the Datadog Log Explorer with a view match
 ## Requirements
 
 - **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Java Services. For more information, see [Getting Started with the Continuous Profiler][2].
-- **JetBrains Toolbox**: To use the [View in IntelliJ](#view-in-intellij-idea) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
+- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2].
+- **JetBrains Toolbox**: To use the [View in IDE](#view-in-ide) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
 
 ## Setup
 
@@ -51,7 +47,7 @@ The **Logs Navigation** support opens the Datadog Log Explorer with a view match
 1. Click **Plugins** and search for `Datadog`.
 1. Click **Install** to download and install the plugin in your IDE.
 1. If you receive a prompt notifying you that Datadog is a third-party plugin, click **Accept**.
-1. Click **Restart IDE** to restart IDEA.
+1. Click **Restart IDE**.
 
 {{< img src="/developers/ide_integrations/idea/marketplace.png" alt="The Datadog plugin" style="width:100%;" >}}
 
@@ -61,17 +57,17 @@ Alternatively, you can install the plugin from the [JetBrains Marketplace][4].
 
 ### Log in to Datadog
 
-After installing the Datadog plugin and restarting IDEA, log in to Datadog:
-1. With a file or project open in IDEA, click the **Datadog** tool window.
+After installing the Datadog plugin and restarting the IDE, log in to Datadog:
+1. With a file or project open in the IDE, click the **Datadog** tool window.
 1. Click **Log in...**.
 1. In the browser window that opens, select your site and organization, then authorize access to the platform.
 
-**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login IDEA is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
+**Note**: For most users, one login is all that is required. If you're using a multi-org setup, check to ensure that the correct account is active. To find out which login your IDE is using, click **Settings** -> **Tools** -> **Datadog**, and check which account is active.
 
 ### Link a service
 
 To provide relevant data from the Datadog platform, add related services to your project:
-1. With your project open in IDEA, open the **Datadog** tool window and select **Manage Linked Services...** from the **Options** menu.
+1. With your project open in the IDE, open the **Datadog** tool window and select **Manage Linked Services...** from the **Options** menu.
 1. A settings dialog opens, click the plus icon (**+**).
 1. Search for and select the services that you want to add to the current project.
 
@@ -88,7 +84,7 @@ Code Insights include a detailed description for each issue, and links to:
 - The related source code location
 - The Datadog platform for additional information
 
-Developers can dismiss individual insights and set filters to view the categories of insights that they are most interested to see.
+You can dismiss individual insights and set filters to view the categories of insights that you are interested in.
 
 ## Continuous Profiler
 
@@ -149,20 +145,20 @@ When the Continuous Profiler tab is active, the plugin adds code highlights to t
 - Click the icon to open the top list Profiling tab or open Profiling in Datadog.
   {{< img src="/developers/ide_integrations/idea/interest-options.png" alt="Click the Datadog icon to open the Profiling data in a tab or in Datadog" style="width:100%;" >}}
 
-The active Profiling tab also affects the IDEA project tree view, which is annotated with the selected profile's metrics:
+The active Profiling tab also affects the project tree view, which is annotated with the selected profile's metrics:
 {{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java source files. Look for the **View Logs** links following the log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java or Go source files. Look for the **View Logs** links following the log statements in your source code:
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
 Clicking the link opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
-## View in IntelliJ IDEA
+## View in IDE
 
-The **View in IntelliJ** feature provides a link from the Datadog platform directly to your source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IntelliJ IDEA** feature provides a link from the Datadog platform directly to your Java source files (not yet available for Go). Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 

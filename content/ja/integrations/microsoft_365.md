@@ -109,7 +109,7 @@ Datadog は、`Audit.General`、`Audit.Exchange`、`Audit.Sharepoint`、`Audit.A
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Datadog Microsoft 365 タイル][24]を使用してインテグレーションをインストールします。
 

@@ -5,6 +5,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show"
   tag: "Documentation"
   text: Add widgets and refine what they show
+- link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
+  tag: "Blog"
+  text: "Save dashboard widgets in reusable groups with Powerpacks"
 - link: "https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/"
   tag: "Guide"
   text: Best practices for maintaining relevant dashboards
@@ -91,5 +94,7 @@ Each Powerpack user decides whether to save a variable to their dashboard to all
 ### Spread the word
 
 Once your Powerpack is created, let your organization know about it. Communicating about your pack both announces the pack and provides a channel for any questions. Share the name of your Powerpack with your organization through communication channels like email or messaging platforms, specify who the pack is intended for, and describe where you expect it to appear. 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

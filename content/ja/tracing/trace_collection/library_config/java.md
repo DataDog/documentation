@@ -49,7 +49,8 @@ type: multi-code-lang
 `dd.logs.injection`
 : **環境変数**: `DD_LOGS_INJECTION`<br>
 **デフォルト**: `true`<br>
-Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の有効化。詳しくは、[高度な使用方法][2]を参照してください。
+Datadog のトレース ID とスパン ID に対する MDC キーの自動挿入を有効にします。詳細については、[高度な使用方法][2]を参照してください。<br><br>
+**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_LOGS_INJECTION` を設定できます。
 
 `dd.trace.config`
 : **環境変数**: `DD_TRACE_CONFIG`<br>
@@ -97,7 +98,8 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 **デフォルト**: `null`<br>
 **例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 大文字・小文字を区別しないヘッダーキーとタグ名のマップを受け取り、一致するヘッダー値を自動的にタグとしてトレースに適用します。また、タグ名を指定しないエントリーも受け入れ、それぞれ `http.request.headers.<header-name>` と `http.response.headers.<header-name>` という形式のタグに自動的にマップされます。<br><br>
-バージョン 0.96.0 以前は、この設定はリクエストヘッダータグにのみ適用されました。以前の動作に戻すには、`Ddd.trace.header.tags.legacy.parsing.enabled=true` を追加するか、環境変数 `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true` を設定することで可能です。
+バージョン 0.96.0 以前は、この設定はリクエストヘッダータグにのみ適用されました。以前の動作に戻すには、設定 `-Ddd.trace.header.tags.legacy.parsing.enabled=true` または環境変数 `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true` を追加することで可能です。<br><br>
+**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_TRACE_HEADER_TAGS` を設定できます。
 
 `dd.trace.request_header.tags`
 : **環境変数**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -266,21 +268,9 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 **デフォルト**: `true`<br>
 `true` の場合、トレーサーは[テレメトリーデータ][6]を収集します。バージョン 0.104+ で利用可能です。バージョン 0.115+ では `true` がデフォルトとなります。
 
-`dd.trace.128.bit.traceid.generation.enabled`
-: **環境変数**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
-**デフォルト**: `false` <br>
-128 ビットのトレース ID の生成を有効にします。デフォルトでは、64 ビットの ID のみが生成されます。
-
-`dd.trace.128.bit.traceid.logging.enabled`
-: **環境変数**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
-**デフォルト**: `false` <br>
-MDC を使ってログ内のスパンをでフォーマットするときに、完全な 128 ビット ID を出力できるようにします。
-false (デフォルト) の場合、トレース ID の下位 64 ビットのみが出力され、整数としてフォーマットされます。つまり、トレース ID が 64 ビットしかない場合、完全な ID が出力されます。
-true の場合、トレース ID は 16 進数形式で 128 ビットの完全な ID として出力されます。これは、ID 自体が 64 ビットしかない場合でも同じです。
-
 **注**:
 
-- 両方に同じキータイプが設定された場合、システムプロパティコンフィギュレーションが優先されます。
+- 両方に同じキータイプが設定された場合、システムプロパティ構成が優先されます。
 - システムプロパティは JVM パラメーターとして使用できます。
 - デフォルトで、アプリケーションからの JMX メトリクスは、DogStatsD によりポート `8125` で Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっている][7]ことを確認してください。
 
@@ -381,12 +371,12 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.sl
 
 デバッグアプリのログに、`Tracing is disabled, not installing instrumentations.` と表示されます。
 
-#### `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`
+#### `dd.jmxfetch.config.dir` と `dd.jmxfetch.config`
 
 構成サンプル
 
 - 以下のいずれかのコンビネーションを使用: `DD_JMXFETCH_CONFIG_DIR=<ディレクトリパス>` + `DD_JMXFETCH_CONFIG=conf.yaml`
-- または直接指定: `DD_JMXFETCH_CONFIG=<ディレクトリパス>/conf.yaml`
+- または直接指定: `DD_JMXFETCH_CONFIG=<DIRECTORY_PATH>/conf.yaml`
 
 `conf.yaml` で以下の内容を使用します。
 
@@ -434,7 +424,7 @@ JMX フェッチを使った Java メトリクス収集についての詳細は 
 
 #### 非推奨の抽出と挿入の設定
 
-これらの `b3` (B3 マルチヘッダーおよび B3 シングルヘッダーの両方) 用の抽出および挿入の設定は、バージョン 1.9.0. 以降、非推奨となっています。
+これらの抽出と挿入の設定は廃止され、バージョン 1.9.0 以降では `dd.trace.propagation.style.inject`、`dd.trace.propagation.style.extract`、`dd.trace.propagation.style` の設定に変更されました。[Java トレースコンテキストの伝播][13]を参照してください。B3 マルチヘッダーと B3 シングルヘッダーに対する以前の `b3` 設定は、新しい `b3multi` と `b3single` 設定に置き換えられました。
 
 `dd.propagation.style.inject`
 : **環境変数**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -465,3 +455,5 @@ JMX フェッチを使った Java メトリクス収集についての詳細は 
 [11]: /ja/tracing/compatibility_requirements/java#disabling-integrations
 [12]: /ja/integrations/java/?tab=host#metric-collection
 [13]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[16]: /ja/agent/remote_config/
+[17]: https://app.datadoghq.com/services

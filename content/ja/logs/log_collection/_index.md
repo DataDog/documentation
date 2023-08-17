@@ -295,7 +295,7 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 [1]: /ja/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5" >}}
+{{< site-region region="gov,us5,ap1" >}}
 
 このサイトでは、TCP エンドポイントはサポートされていません。
 

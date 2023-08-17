@@ -73,7 +73,7 @@ Agent の lighttpd チェックは、アップタイム、処理バイト数、�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 

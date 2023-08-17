@@ -399,10 +399,11 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 ## 次のステップ
 
-- [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができます。
+- [Serverless Homepage][4] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][9]を有効にします。
 - [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください
-- テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][2]を参照してください
-- [高度な構成][3]を参照して以下のことを行ってください。
+- テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][5]を参照してください
+- [高度な構成][6]を参照して以下のことを行ってください。
     - タグを使ったテレメトリー接続
     - AWS API Gateway、SQS などのテレメトリーを収集する
     - Lambda のリクエストとレスポンスのペイロードを取得する
@@ -411,7 +412,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 ### カスタムビジネスロジックの監視
 
-カスタムビジネスロジックを監視するには、以下のサンプルコードを使用してカスタムメトリクスまたはスパンを送信します。その他のオプションについては、[サーバーレスアプリケーションのためのカスタムメトリクスの送信][4]および[カスタムインスツルメンテーション][5]のための APM ガイドを参照してください。
+カスタムビジネスロジックを監視するには、以下のサンプルコードを使用してカスタムメトリクスまたはスパンを送信します。その他のオプションについては、[サーバーレスアプリケーションのためのカスタムメトリクスの送信][7]および[カスタムインスツルメンテーション][8]のための APM ガイドを参照してください。
 
 ```ruby
 require 'ddtrace'
@@ -454,15 +455,19 @@ def some_operation()
 end
 ```
 
-カスタムメトリクス送信の詳細については、[Serverless Custom Metrics][4] を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][5]の Datadog APM ドキュメントを参照してください。
+カスタムメトリクス送信の詳細については、[Serverless Custom Metrics][7] を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][8]の Datadog APM ドキュメントを参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/functions
-[2]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
-[3]: /ja/serverless/configuration/
-[4]: /ja/serverless/custom_metrics?tab=ruby
-[5]: /ja/tracing/custom_instrumentation/ruby/
+[1]: /ja/serverless/forwarder/
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[3]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: https://app.datadoghq.com/functions
+[5]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[6]: /ja/serverless/configuration
+[7]: /ja/serverless/custom_metrics?tab=ruby
+[8]: /ja/tracing/custom_instrumentation/ruby/
+[9]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

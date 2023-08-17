@@ -26,7 +26,7 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 初めてグラフエディターを開くと、**Edit** タブが表示されます。UI からほとんどの設定を選択できます。以下に例を示します。
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="グラフエディターの Edit タブ" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="グラフエディターの Edit タブ" style="width:100%;" >}}
 
 ## グラフを構成する
 
@@ -48,7 +48,7 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 検索するか、**Metric** の隣にあるドロップダウンから選択して、グラフ化したいメトリクスを選択します。使用するメトリクスが分からない場合は、メトリクスのドロップダウンから `unit`、`type`、`interval`、`description`、`tags`、および `tag values` の数などの追加情報を得ることができます。
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:100%;">}}
 
 [メトリクスエクスプローラー][4]や[ノートブック][5]でメトリクスをさらに詳しく調べたり、[メトリクスの概要][6]ページでメトリクスのリストを閲覧することができます。
 
@@ -56,11 +56,10 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 選択したメトリクスには、メトリクスの右側にある **from** ドロップダウンからホストまたはタグによるフィルターを設定することができます。デフォルトでは *(everywhere)* に設定されています。
 
-{{< img src="dashboards/querying/filter-2.png" alt="グラフの作成フィルター" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="テンプレート変数とブール値ロジックを使用し、'from' フィールドでグラフをフィルター" style="width:100%;" >}}
 
-`from` ドロップダウン内の[高度なフィルタリング][7]を使用して、以下のようなブール型またはワイルドカードでフィルタリングされたクエリを評価することも可能です。
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="ブール型フィルターでグラフを作成" style="width:75%;" >}} 
+- `from` ドロップダウン内の[高度なフィルタリング][7]を使用して、ブール型またはワイルドカードでフィルタリングされたクエリを評価します。
+- テンプレート変数を使用して、クエリを動的にフィルターします。タグキーと一緒に `$` を追加すると、グラフはテンプレート変数のドロップダウンで選択したタグを自動的に適用します。詳細は[テンプレート変数のドキュメント][16]を参照してください。
 
 タグの詳細は、[タグ付けに関するドキュメント][8]を参照してください。
 
@@ -235,3 +234,4 @@ status:error / status:info
 [13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /ja/logs/explorer/search_syntax/
 [15]: /ja/dashboards/widgets/timeseries/#event-overlay
+[16]: /ja/dashboards/template_variables/

@@ -38,7 +38,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   |Security Signals <br> Application Security <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
-  [2]: /getting_started/tagging/#defining-tags
+  [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
@@ -53,7 +53,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   |RUM   | See the [RUM documentation][4] to configure a RUM query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
-  [2]: /getting_started/tagging/#defining-tags
+  [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
   [4]: /real_user_monitoring/explorer/search_syntax/
   {{% /tab %}}
@@ -80,7 +80,7 @@ The dedicated [widget JSON schema definition][9] for the change widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_configuration/processors/#geoip-parser
-[2]: /getting_started/tagging/#defining-tags
+[2]: /getting_started/tagging/#define-tags
 [3]: /logs/search_syntax/
 [4]: /logs/logs_to_metrics/
 [5]: /dashboards/querying/

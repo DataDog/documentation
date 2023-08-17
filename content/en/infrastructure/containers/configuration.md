@@ -103,6 +103,7 @@ The following table presents the list of collected resources and the minimal Age
 | ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
 | Services | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+| VerticalPodAutoscalers | 7.27.0 | 7.46.0 | 3.6.8 | 1.16.0 |
 
 **Note**: After version 1.22, Cluster Agent version numbering follows Agent release numbering, starting with version 7.39.0.
 
@@ -174,7 +175,6 @@ Then, upgrade your Helm chart.
 
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}

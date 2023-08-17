@@ -307,7 +307,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: datadog-read-secrets
-  namespace: example
+  namespace: database
 subjects:
   - kind: ServiceAccount
     name: datadog-agent

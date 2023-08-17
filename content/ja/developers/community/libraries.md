@@ -132,6 +132,9 @@ Datadog 通知を取り込む Moogsoft [リスナー][44]。
 
 この[ライブラリ][54]を使用すると、pid ファイルを指定して StatsD からプロセス情報を生成できます。これは [GitterHQ][55] によって作成されました。
 
+### Pulumi
+Pulumi 用の Datadog [リソースプロバイダー][67]を使用すると、Datadog リソースを構成することができます。
+
 ### SaltStack
 
 * [Datadog SaltStack Formula][56]
@@ -193,7 +196,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [31]: https://github.com/wimactel
 [34]: /ja/logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://web.oz.com/
+[36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
 [39]: https://bitbucket.org/atlassian/jiradog/src/master/
@@ -224,3 +227,4 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [64]: mailto:opensource@datadoghq.com
 [65]: https://github.com/SpeedCurve-Metrics/heroku-buildpack-php-ddtrace
 [66]: https://www.speedcurve.com/
+[67]: https://github.com/pulumi/pulumi-datadog

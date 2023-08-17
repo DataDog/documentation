@@ -76,7 +76,7 @@ Pulumi インテグレーションは、Datadog で利用可能な任意のク�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Pulumi と Datadog のインテグレーション][2]では、Datadog SDK を使用してリソースの管理およびプロビジョニングを行います。
 

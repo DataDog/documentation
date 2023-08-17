@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 2.3.2
+integration_version: 2.3.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -75,7 +75,7 @@ IBM WAS Datadog インテグレーションは、有効になっている PMI �
 
 このチェックはデフォルトで、JDBC、JVM、スレッドプール、および Servlet Session Manager のメトリクスを収集します。オプションで追加のメトリクスを指定して、"custom_queries" セクションに収集することができます。例については、[サンプルチェック構成][3]を参照してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 IBM WAS チェックは [Datadog Agent][4] パッケージに含まれています。
 

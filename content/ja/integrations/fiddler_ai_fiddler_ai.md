@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: fiddler-ai-license
 app_uuid: cbad9445-1ce9-466e-b16f-073437eddff5
 assets: {}

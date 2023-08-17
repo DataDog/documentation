@@ -23,6 +23,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
   tag: "Blog"
   text: "Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications"
+- link: "https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/"
+  tag: "Blog"
+  text: "Monitor runtime metrics from OTel-instrumented apps with Datadog APM"
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
 cascade:

@@ -99,6 +99,11 @@ Discard SSL errors when private location is using a proxy to send requests to Da
 **Default**: `10`<br>
 Maximum number of tests executed in parallel.
 
+`maxNumberMessagesToFetch`
+: **Type**: Number <br>
+**Default**: `10`<br>
+Maximum number of tests fetched from Datadog.
+
 `enableStatusProbes`
 : **Type**: Boolean <br>
 Enables the readiness and liveness of private location probes. This enables two endpoints: `http://127.0.0.1:8080/liveness` and `http://127.0.0.1:8080/readiness`.

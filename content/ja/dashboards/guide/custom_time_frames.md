@@ -63,4 +63,18 @@ Datadog のビューの多くでは、特定のタイムフレームに合わせ
   * 月: `mo`、`mos`、`mon`、`mons`、`month`、`months`
 * `today`、`yesterday`、`this month`、`this year`、`last year` は入力時に計算が行われます。時間の経過により継続的に更新されることはありません。
 
+## URL
+
+ダッシュボードの URL で時間クエリを操作できます。
+
+次のようなダッシュボード URL を考えてみましょう。
+
+```
+https://app.datadoghq.com/dash/host/<DASHBOARD_ID>?from_ts=<QUERY_START>&to_ts=<QUERY_END>&live=true
+```
+
+* `from_ts` パラメーターはクエリ開始時刻の Unix ミリ秒単位のタイムスタンプです。例えば、`1683518770980` です。
+* `to_ts` パラメーターはクエリ終了時刻の Unix ミリ秒単位のタイムスタンプです。例えば、`1683605233205` です。
+* `live=true` は、クエリが保存または共有されたときに相対時間指定が保持されることを示します。`live=false` を使用することもできます。
+
 [1]: /ja/dashboards/#display-utc-time

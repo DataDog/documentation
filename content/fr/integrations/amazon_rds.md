@@ -313,9 +313,16 @@ Surveille le statut du [réplica en lecture][8]. Ce check renvoie l'un des statu
 - WARNING - Arrêté
 - UNKNOWN - Autre
 
+## Fonctionnalités de surveillance prêtes à l'emploi
+
+L'intégration AWS RDS propose des fonctionnalités de surveillance prêtes à l'emploi vous permettant de surveiller et d'optimiser vos performances.
+
+- Dashboard AWS RDS : bénéficiez d'une vue d'ensemble détaillée de vos instances RDS grâce au [dashboard AWS RDS][9] prêt à l'emploi.
+- Monitors recommandés : activez les [monitors AWS RDS recommandés][10] pour détecter les problèmes de façon proactive et recevoir des alertes sans attendre.
+
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
@@ -329,4 +336,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][9].
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[9]: https://docs.datadoghq.com/fr/help/
+[9]: https://app.datadoghq.com/dash/integration/62/aws-rds
+[10]: https://app.datadoghq.com/monitors/recommended
+[11]: https://docs.datadoghq.com/fr/help/

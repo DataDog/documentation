@@ -113,6 +113,8 @@ apm_config:
   obfuscation:
     redis:
       enabled: true
+      # true の場合、すべての引数を単一の "?" で置き換えます。
+      remove_all_args: true
 ```
 
 [1]: /ja/tracing/glossary/#spans

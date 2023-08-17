@@ -34,4 +34,16 @@ plop = "super" + "awesome" + "text"
 "my {0} string".format(awesome)
 f"my {awesome} string"
 plop = "superawesometext"
+
+function(
+    tags = (
+    user_tags
+    + s.get("tags", [])
+    + [
+        f"schedule_id:{s['_id']}",
+        f"schedule_name:{s['schedule_name']}",
+        f"git_ref:{schedule_git_ref}",
+    ]
+)
+)
 ```

@@ -30,6 +30,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitoring-kubernetes-era"
     tag: "Blog"
     text: "Monitoring in the Kubernetes era"
+  - link: "https://www.datadoghq.com/blog/monitor-kubernetes-events/"
+    tag: "Blog"
+    text: "Troubleshoot with Kubernetes events"
 ---
 
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}

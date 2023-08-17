@@ -100,23 +100,23 @@
     "request_schema_description": "AuthN Mapping の更新リクエスト。"
   },
   "CreateCIAppPipelineEvent": {
-    "description": "パイプラインイベントを HTTP で Datadog プラットフォームに送信します。\n\nこの API エンドポイントは非公開ベータ版です。",
+    "description": "パイプラインイベントを HTTP 経由で Datadog プラットフォームに送信します。パイプライン実行がどのようにモデル化され、どのような実行データタイプをサポートしているかについては、[Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/) を参照してください。\n\nパイプラインイベントは、過去 18 時間までのタイムスタンプで送信できます。",
     "summary": "パイプラインイベントの送信",
     "request_description": "",
     "request_schema_description": "リクエストオブジェクト。"
   },
   "AggregateCIAppPipelineEvents": {
-    "description": "CI Visibility パイプラインイベントを、計算されたメトリクスとタイムシリーズのバケットに集計する API エンドポイント。",
+    "description": "この API エンドポイントを使用して、CI Visibility パイプラインイベントを、計算されたメトリクスとタイムシリーズのバケットに集計します。",
     "summary": "Aggregate pipelines events",
     "request_description": "",
     "request_schema_description": "組織からパイプラインイベントの集計バケットを取得するリクエストと共に送信されたオブジェクト。"
   },
   "ListCIAppPipelineEvents": {
-    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のパイプラインイベントを確認するために使用します。",
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のパイプラインイベントを確認するために使用します。",
     "summary": "パイプラインのイベント一覧の取得"
   },
   "SearchCIAppPipelineEvents": {
-    "description": "リストエンドポイントは、[ログ検索クエリ](https://docs.datadoghq.com/logs/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
+    "description": "リストエンドポイントは、[検索クエリ](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/)に一致する CI Visibility パイプラインイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、複雑なイベントのフィルターと検索を構築するために使用します。",
     "summary": "パイプラインイベントの検索",
     "request_description": "",
     "request_schema_description": "パイプライン検索のリクエスト。"
@@ -182,6 +182,30 @@
     "summary": "ダッシュボードリストのアイテムを更新する",
     "request_description": "ダッシュボードリストの新しいダッシュボード。",
     "request_schema_description": "更新するダッシュボードのリストを含むリクエスト。"
+  },
+  "ListDowntimes": {
+    "description": "すべてのスケジュール済みダウンタイムを取得します。",
+    "summary": "すべてのダウンタイムを取得する"
+  },
+  "CreateDowntime": {
+    "description": "ダウンタイムのスケジュールを設定します。",
+    "summary": "ダウンタイムをスケジュールする",
+    "request_description": "ダウンタイムリクエスト本文のスケジュールを設定します。",
+    "request_schema_description": "ダウンタイム作成のリクエスト。"
+  },
+  "CancelDowntime": {
+    "description": "ダウンタイムをキャンセルします。",
+    "summary": "ダウンタイムをキャンセルする"
+  },
+  "GetDowntime": {
+    "description": "`downtime_id` でダウンタイムの詳細を取得します。",
+    "summary": "ダウンタイムを取得する"
+  },
+  "UpdateDowntime": {
+    "description": "`downtime_id` でダウンタイムを更新します。",
+    "summary": "ダウンタイムを更新する",
+    "request_description": "ダウンタイムのリクエスト本文を更新します。",
+    "request_schema_description": "ダウンタイム編集のリクエスト。"
   },
   "ListEvents": {
     "description": "リストエンドポイントは、イベント検索クエリに一致するイベントを返します。\n[結果は、ログと同様にページ区切りされます](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination)。\n\nこのエンドポイントは、最新のイベントを確認するために使用します。",
@@ -683,6 +707,10 @@
     "request_description": "更新内容の説明。",
     "request_schema_description": "モニター構成ポリシーの編集リクエスト。"
   },
+  "ListMonitorDowntimes": {
+    "description": "指定したモニターのすべてのアクティブダウンタイムを取得。",
+    "summary": "モニターのアクティブなダウンタイムを取得"
+  },
   "ListPermissions": {
     "description": "名前、説明、ID を含むすべてのアクセス許可のリストを返します。",
     "summary": "アクセス許可を一覧表示する"
@@ -1073,6 +1101,22 @@
     "summary": "既存のインシデントサービスを更新する",
     "request_description": "インシデントサービスのペイロード。",
     "request_schema_description": "インシデントサービスペイロードを使用してリクエストを更新します。"
+  },
+  "AggregateSpans": {
+    "description": "スパンをバケットに集計し、メトリクスと時系列を計算するための API エンドポイント。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。",
+    "summary": "スパンを集計する",
+    "request_description": "",
+    "request_schema_description": "組織から集計スパンのリストを取得するリクエストと共に送信されたオブジェクト。"
+  },
+  "ListSpansGet": {
+    "description": "リストエンドポイントは、スパン検索クエリに一致するスパンを返します。\n[結果はページ分割されます][1]。\n\n最新のスパンを見るには、このエンドポイントを使用してください。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "summary": "スパンのリストを取得する"
+  },
+  "ListSpans": {
+    "description": "リストエンドポイントは、スパン検索クエリに一致するスパンを返します。\n[結果はページ分割されます][1]。\n\n複雑なスパンのフィルターと検索を構築するには、このエンドポイントを使用してください。\nこのエンドポイントは 1 時間あたり `300` リクエストにレート制限されています。\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "summary": "スパンを検索する",
+    "request_description": "",
+    "request_schema_description": "スパンリストのリクエスト。"
   },
   "GetOnDemandConcurrencyCap": {
     "description": "オンデマンド同時実行の上限を取得します。",

@@ -66,7 +66,7 @@ Win32 Event Log チェックは、Windows のイベントログを監視して D
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Windows Event Log チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
@@ -130,7 +130,7 @@ Windows Event Viewer で Event Log のチャンネル名を見つけるには、
 
 Windows Event Log を Datadog イベントとして収集するには、`win32_event_log.d/conf.yaml` コンフィギュレーションファイルの `instances:` セクションでチャンネルを設定します。
 
-Datadog Agent は、Windows Event Log を Datadog イベントとして収集するために、2 つの方法で構成することができます。それぞれの方法には、チャンネルとフィルターの構成構文があります ([イベントのフィルタリング](?tab=events#filtering-events)を参照)。
+Datadog Agent は、Windows Event Log を Datadog イベントとして収集するために、2 つの方法で構成することができます。それぞれの方法には、チャンネルとフィルターの構成構文があります。詳しくは、[イベントのフィルタリング](?tab=events#filtering-events)を参照してください。
 
 * 最新の方法は、Event Log API を使用します。Datadog では、以下のレガシーな方法よりもパフォーマンスが良いため、Event Log API を使用することを推奨しています。
 
@@ -270,7 +270,25 @@ Datadog では、フィルターに最新の方法を使用することを推奨
         - 7036
   ```
 
-レガシーな方法は、フィルターのデフォルトモードです。
+[`query` オプション][2]を使用して、[XPATH または構造化 XML クエリ][3]でイベントをフィルターすることができます。Datadog は、Event Viewer に表示されるイベントが Datadog Agent に収集させたいものと一致するまで、Event Viewer のフィルターエディタでクエリを作成することを推奨します。`filters` オプションは `query` オプションを使用すると無視されます。
+
+  ```yaml
+  init_config:
+  instances:
+    # Critical、Warning、Error イベントを収集します
+    - path: Application
+      legacy_mode: false
+      query: '*[System[(Level=1 or Level=2 or Level=3)]]'
+
+    - path: Application
+      legacy_mode: false
+      query: |
+        <QueryList>
+          <Query Id="0" Path="Application">
+            <Select Path="Application">*[System[(Level=1 or Level=2 or Level=3)]]</Select>
+          </Query>
+        </QueryList>
+ ```
 
 * レガシーな方法には、以下のフィルターが含まれています。
 
@@ -279,11 +297,13 @@ Datadog では、フィルターに最新の方法を使用することを推奨
   - `source_name`: 使用可能な任意のソース名
   - `event_id`: Windows EventLog ID
 
+* レガシーメソッドは `query` オプションをサポートしていません。最新のメソッド (`legacy_mode: false` を設定) と Logs Tailer だけが `query` オプションをサポートしています。
+
   このフィルター例では、レガシーな方法を使用しています。
 
   ```yaml
   instances:
-    # Default
+    # Legacy
     # The following captures errors and warnings from SQL Server which
     # puts all events under the MSSQLSERVER source and tag them with #sqlserver.
     - tags:
@@ -306,10 +326,44 @@ Datadog では、フィルターに最新の方法を使用することを推奨
   ```
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example
+[2]: https://github.com/DataDog/integrations-core/blob/10296a69722b75098ed0b45ce55f0309a1800afd/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example#L74-L89
+[3]: https://learn.microsoft.com/en-us/windows/win32/wes/consuming-events
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-各フィルターについて、コンフィギュレーションファイル `win32_event_log.d/conf.yaml` にログ処理ルールを追加します。
+イベントログのフィルターには、 `log_processing_rules` 正規表現オプションと同様に `query` を使用することができます。Datadog では、Windows Event Log の生成速度が速く、CPU とメモリの使用量が `log_processing_rules` フィルターよりも少ない `query` オプションの使用を推奨しています。`log_processing_rules` フィルターを使用すると、Agent は各イベントを処理し、正規表現で除外されてもフォーマットするように強制されます。`query` オプションを使用すると、これらのイベントは Agent に報告されません。
+
+`query` オプションを使用すると、[XPATH または構造化 XML クエリ][1]でイベントをフィルターすることができます。`query` オプションは `log_processing_rules` によって処理されるイベントの数を減らし、パフォーマンスを向上させることができます。XPath や XML クエリの構文には式の制限があります。フィルターを追加するには、`log_processing_rules` フィルターを使用してください。
+
+Datadog は、Event Viewer に表示されるイベントが Agent に収集させたいものと一致するまで、Event Viewer のフィルターエディタでクエリを作成してテストすることを推奨します。
+
+![Filter Current Log][2]
+
+次に、Agent 構成にクエリをコピーアンドペーストします。
+
+```yaml
+  # Critical、Warning、Error イベントを収集します
+  - type: windows_event
+    channel_path: Application
+    source: windows.events
+    service: Windows       
+    query: '*[System[(Level=1 or Level=2 or Level=3)]]'
+
+  - type: windows_event
+    channel_path: Application
+    source: windows.events
+    service: Windows       
+    query: |
+      <QueryList>
+        <Query Id="0" Path="Application">
+          <Select Path="Application">*[System[(Level=1 or Level=2 or Level=3)]]</Select>
+        </Query>
+      </QueryList>
+```
+
+![XML Query][3]
+
+`query` オプションに加えて、ログ処理ルールでイベントをさらにフィルターすることができます。
 
 フィルターの例としては、以下のようなものがあります。
 
@@ -365,14 +419,14 @@ logs:
         pattern: '"EventID":(?:{"value":)?"(101|201|301)"'
 ```
 
-**注**: このパターンはログの形式によって異なる場合があります。[Agent `stream-logs` サブコマンド][8]を使用すると、この形式を表示することができます。
+**注**: このパターンはログの形式によって異なる場合があります。[Agent `stream-logs` サブコマンド][4]を使用すると、この形式を表示することができます。
 
-ログをフィルタリングする例については、[高度なログ収集のドキュメント][7]を参照してください。
+ログをフィルタリングする例については、[高度なログ収集のドキュメント][5]を参照してください。
 
 #### レガシーイベント
 _Agent バージョン 7.41 未満に適用されます_
 
-Legacy Provider EventID は、[Windows Event Schema][3] で見られるように、ログの形式を変更する `Qualifiers` 属性を持っています。これらのイベントは、Windows イベントビューアで見ることができる、次のような XML 形式を持っています。
+Legacy Provider EventID は、[Windows Event Schema][6] で見られるように、ログの形式を変更する `Qualifiers` 属性を持っています。これらのイベントは、Windows イベントビューアで見ることができる、次のような XML 形式を持っています。
 ```xml
 <EventID Qualifiers="16384">3</EventID>
 ```
@@ -404,9 +458,12 @@ logs:
         pattern: '"EventID":"(101|201|301)"'
 ```
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/
-[2]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs
-[3]: https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-systempropertiestype-complextype
+[1]: https://learn.microsoft.com/en-us/windows/win32/wes/consuming-events
+[2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/filter-event-viewer.png
+[3]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/xml-query-event-viewer.png
+[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/
+[5]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile#filter-logs
+[6]: https://learn.microsoft.com/en-us/windows/win32/wes/eventschema-systempropertiestype-complextype
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -474,15 +531,36 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ヘルプが必要ですか？[Datadog サポート][9]に [Agent Flare][10] でお問い合わせください。
+
+### ログ処理ルールが機能しない
+
+ログ処理ルールを使用してログをフィルターする場合、生のログが構成した正規表現 (regex) パターンに一致することを確認してください。以下の構成では、ログレベルは `warning` または `error` のいずれかでなければなりません。それ以外の値は除外されます。
+
+```yaml
+    - type: windows_event
+      channel_path: System
+      source: windows.events
+      service: Windows       
+      log_processing_rules:
+      - type: include_at_match
+        name: system_errors_and_warnings
+        pattern: '"level":"((?i)warning|error)"'
+```
+
+ログ処理ルールをトラブルシューティングするには
+1. `log_processing_rules` スタンザを削除するかコメントアウトします。
+1. Agent を再起動します。
+1. キャッチしようとしている値を含むテストログを送信してください。ログが Datadog に表示される場合は、正規表現に問題がある可能性があります。正規表現とログファイルを比較して、正しいフレーズをキャプチャしていることを確認してください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Windows Server 2012 の監視][10]
-- [Windows Server 2012 メトリクスの収集方法][11]
-- [Datadog を使用した Windows Server 2012 の監視][12]
+- [高度なログの収集][11]
+- [Windows Server 2012 の監視][12]
+- [Windows Server 2012 メトリクスの収集方法][13]
+- [Datadog を使用した Windows Server 2012 の監視][14]
 
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging
@@ -494,6 +572,8 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 [7]: https://raw.githubusercontent.com/DataDog/integrations-core/master/win32_event_log/images/windows-defender-operational-event-log-properties.png
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
-[11]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
-[12]: https://www.datadoghq.com/blog/windows-server-monitoring
+[10]: https://docs.datadoghq.com/ja/agent/troubleshooting/send_a_flare/?tab=agentv6v7
+[11]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile
+[12]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
+[13]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
+[14]: https://www.datadoghq.com/blog/windows-server-monitoring

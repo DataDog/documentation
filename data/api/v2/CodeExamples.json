@@ -148,6 +148,20 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Schedule a downtime returns \"OK\" response"
+    }
+  ],
+  "UpdateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",
@@ -731,6 +745,25 @@
       "group": "service_definition",
       "suffix": "_2619874414",
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
+    }
+  ],
+  "AggregateSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Aggregate spans returns \"OK\" response"
+    }
+  ],
+  "ListSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Search spans returns \"OK\" response"
+    },
+    {
+      "group": "spans",
+      "suffix": "_3495563906",
+      "description": "Search spans returns \"OK\" response with pagination"
     }
   ],
   "CreateSpansMetric": [

@@ -11,7 +11,7 @@ further_reading:
   text: Comment gérer des fichiers de log avec Logrotate
 - link: /agent/logs/advanced_log_collection
   tag: Documentation
-  text: Advanced log collection configurations
+  text: Configurations avancées pour la collecte de logs
 - link: /logs/log_configuration/processors
   tag: Documentation
   text: Découvrir comment traiter vos logs
@@ -48,7 +48,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 2. Pour activer la collecte de logs, remplacez `logs_enabled: false` par `logs_enabled: true` dans le principal fichier de configuration de votre Agent (`datadog.yaml`). Consultez la section [Collecte de logs de l'Agent de host][5] pour obtenir plus de détails et d'exemples.
 3. Une fois la collecte activée, vous pouvez configurer l'Agent Datadog afin de [suivre les fichiers de log ou de détecter les logs envoyés via UDP/TCP][2], de [filtrer les logs ou de nettoyer les données sensibles][3] et d'[agréger les logs multiligne][4].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/logs/#custom-log-collection
 [3]: /fr/agent/logs/advanced_log_collection/#filter-logs
 [4]: /fr/agent/logs/advanced_log_collection/#multi-line-aggregation
@@ -63,7 +63,7 @@ Consultez la [liste des endpoints de collecte de logs Datadog](#endpoints-de-jou
 
 {{< partial name="logs/logs-languages.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/logs/
 {{% /tab %}}
 
@@ -91,7 +91,7 @@ Choisissez un fournisseur de conteneurs ou d'orchestrateurs et suivez les instru
 
 {{% tab "Environnement sans serveur" %}}
 
-Utilisez le Forwarder Datadog, une fonction Lambda AWS qui transmet des logs à Datadog depuis votre environnement. Pour activer la collecte de logs dans votre environnement AWS sans serveur, consultez la section [Forwarder Datadog][1].
+Utilisez le Forwarder Datadog, une fonction AWS Lambda qui transmet des logs à Datadog depuis votre environnement. Pour activer la collecte de logs dans votre environnement AWS sans serveur, consultez la section [Forwarder Datadog][1].
 
 [1]: /fr/serverless/forwarder
 {{% /tab %}}
@@ -296,7 +296,7 @@ Il n'est pas recommandé d'utiliser l'endpoint TCP pour ce site. Contactez l'[as
 [1]: /fr/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5" >}}
+{{< site-region region="gov,us5,ap1" >}}
 
 L'endpoint TCP n'est pas pris en charge par ce site.
 

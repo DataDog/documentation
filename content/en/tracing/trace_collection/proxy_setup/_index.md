@@ -43,6 +43,8 @@ aliases:
 - /tracing/setup_overview/nginx/
 - /tracing/setup_overview/istio/
 - /tracing/setup_overview/proxy_setup/
+algolia:
+  tags: ['proxies','tracing proxies','proxy']
 ---
 
 You can set up tracing to include collecting trace information about proxies.
@@ -526,35 +528,35 @@ To set a different service name per Ingress using annotations:
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
 
 ### Ingress Controller Sampling
-The Ingress-NGINX Controller for Kubernetes uses `dd-opentracing-cpp` as its
-underlying Datadog tracing library.
+To set a fixed sampling rate, use the [datadog-sample-rate][16] option in the
+ingress controller's [ConfigMap][17]. For example, to set the sampling rate to
+40%:
 
-To control the volume of Ingress Controller traces that are sent to Datadog,
-specify a sampling rule that matches all traces. The `sample_rate` configured
-in the rule determines the proportion of traces that are sampled. If no
-rules are specified, then sampling defaults to 100%.
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.7.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  datadog-collector-host: $HOST_IP
+  enable-opentracing: "true"
+  datadog-sample-rate: "0.4"
+```
 
-Specify sampling rules by using the `DD_TRACE_SAMPLING_RULES` environment
-variable. To define sampling rules in the Ingress Controller:
-
-1. Instruct NGINX to forward the environment variable to its worker processes by adding the following [main-snippet][14] to the `data` section of the Ingress Controller's `ConfigMap`:
-   ```yaml
-   data:
-     main-snippet: "env DD_TRACE_SAMPLING_RULES;"
-   ```
-
-2. Specify a value for the environment variable in the `env` section of the Ingress Controller's `Deployment`. For example, to keep 10% of traces originating from the Ingress Controller:
-   ```yaml
-   env:
-   - name: DD_TRACE_SAMPLING_RULES
-     value: '[{"sample_rate": 0.1}]'
-   ```
-   To use the [Datadog Agent calculated sampling rates][10] (10 traces per second per Agent by default), specify an empty array of sampling rules:
-   ```yaml
-   env:
-   - name: DD_TRACE_SAMPLING_RULES
-     value: '[]'
-   ```
+<div class="alert alert-warning">
+Due to a bug in the Datadog tracing integration, the <a
+href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-priority-sampling">datadog-priority-sampling</a>
+option has no effect, and it is not possible to use the sampling rates <a
+href="https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent">calculated
+by the Datadog Agent</a>. We are working to resolve this bug.
+</div>
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
 [2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
@@ -571,6 +573,8 @@ variable. To define sampling rules in the Ingress Controller:
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 [15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
+[17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
 {{% /tab %}}
 {{% tab "Istio" %}}
 

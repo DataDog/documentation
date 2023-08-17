@@ -179,6 +179,15 @@ Datadog は取り込まれたコストデータにすぐに使えるタグを追
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+
+## Billing conductor
+Billing conductor は、請求レートのカスタマイズ、クレジットや手数料の分配、諸経費の分担など、お客様のご判断で請求書を簡素化することができます。また、CUR に含めるアカウントを選択することもできます。
+
+Billing conductor CUR を作成するには、[AWS Cost and Usage Reports ユーザーガイド][1]に従ってください。CUR が [Datadog の要件][2]を満たしていることを確認します。
+Billing conductor CUR を作成したら、上記のクラウドコストマネジメントの説明に従って、Datadog で設定します。
+
+[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
+[2]: https://docs.datadoghq.com/ja/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -186,7 +195,10 @@ Datadog は取り込まれたコストデータにすぐに使えるタグを追
 Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure インテグレーションを設定し、**amortized** と **actual** のエクスポートをセットアップする必要があります。さらに、Datadog はコンテナからエクスポートを読み取る権限が必要です。
 
 {{% site-region region="us3" %}}
-**注**: US3 のお客様であれば、Azure ポータルから推奨される [Datadog リソース方法][1]を使用して Datadog インテグレーションをセットアップしているかと思います。クラウドコストマネジメントに対応するためには、[App Registration の作成][2]が必要です。
+**注**: 
+- Datadog の **US3** サイトを使用している場合、Azure ポータルから推奨される [Datadog リソース方法][1]を使用して Datadog Azure Native インテグレーションをセットアップしているかと思います。クラウドコストマネジメントに対応するためには、[App Registration の作成][2]が必要です。
+- Microsoft Customer Agreement のエクスポートは、サブスクリプションレベルで構成する必要があります。Enterprise プランの場合は、すべてのサブスクリプションにオンボードするように請求アカウントを構成できます。
+- 従量課金制のアカウントには対応していません。
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /ja/integrations/azure/?tab=azurecliv20#setup
@@ -207,7 +219,7 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 
 {{< img src="cloud_cost/new_export.png" alt="Metric: Actual、Export type: Daily、File Partitioning: On のエクスポートの詳細" >}}
 
-5. エクスポートのためのストレージアカウント、コンテナ、およびディレクトリを選択します。**注:** 請求エクスポートは、エクスポートが対象としているサブスクリプションに保存される必要はありません。複数のサブスクリプションのエクスポートを作成する場合、Datadog は 1 つのサブスクリプションのストレージアカウントに保存することを推奨しています。
+5. エクスポートのためのストレージアカウント、コンテナ、およびディレクトリを選択します。**注:** 請求エクスポートは、任意のサブスクリプションに保存できます。複数のサブスクリプションのエクスポートを作成する場合、Datadog は同じストレージアカウントに保存することを推奨しています。エクスポート名は一意でなければなりません。
 6. **Create** を選択します。
 
 メトリクス **Amortized Cost (usage and purchases)** について、ステップ 1～6 を繰り返します。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨します。より速く処理するために、**Run Now** をクリックして最初のエクスポートを手動で生成します。
@@ -218,8 +230,8 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 1. Exports タブで、エクスポートの Storage Account をクリックし、移動します。
 2. Containers タブをクリックします。
 3. 請求書の入っているストレージコンテナを選びます。
-4. Access Control (IAM) タブを選択します。
-5. **Add** をクリックします。
+4. Access Control (IAM) タブを選択し、**Add** をクリックします。
+5. **Add role assignment** を選択します。
 6. **Storage Blob Data Reader** を選択し、Next をクリックします。
 7. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
     - **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
@@ -232,15 +244,15 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 
 1. [サブスクリプション][4]に移動し、サブスクリプションの名前をクリックします。
 2. Access Control (IAM) タブを選択します。
-3. **Add** をクリックします。
+3. **Add** をクリックし、次に **Add role assignment** をクリックします。
 4. **Cost Management Reader** を選択し、Next をクリックします。
-5. これらの権限をサブスクリプションに割り当てます。
+5. これらの権限をアプリ登録に割り当てます。
 
-これにより、Azure Cost Management に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
+これにより、Microsoft Cost Management に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
 
 ### コストタイプ
 
-インジェストしたデータは、以下のコストタイプで可視化することができます。
+インジェストしたデータは、以下のコストタイプで視覚化することができます。
 
 | コストタイプ            | 説明           |
 | -------------------- | --------------------- |
@@ -274,7 +286,7 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 
 ## ダッシュボードに表示されるクラウドコスト
 
-インフラストラクチャーの支出を、関連する使用量メトリクスと一緒に可視化することで、潜在的な非効率性と節約の機会を発見することができます。Datadog ダッシュボードのウィジェットにクラウドコストを追加するには、*Cloud Cost* データソースを選択します。
+インフラストラクチャーの支出を、関連する使用量メトリクスと一緒に視覚化することで、潜在的な非効率性と節約の機会を発見することができます。Datadog ダッシュボードのウィジェットにクラウドコストを追加するには、*Cloud Cost* データソースを選択します。
 
 {{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト" >}}
 

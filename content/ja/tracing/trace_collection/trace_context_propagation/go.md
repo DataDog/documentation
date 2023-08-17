@@ -11,7 +11,7 @@ type: multi-code-lang
 ---
 
 
-Datadog APM トレーサーは、分散型トレーシングのために [B3][8] や [W3C][10] のヘッダーの抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのために [B3][8] や [W3C Trace Context][10] のヘッダーの抽出と挿入をサポートしています。
 
 分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`tracecontext`、`Datadog`、`B3`、`B3 single header` のスタイルがサポートされています。
 

@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
-- link: "/service_management/service_management/workflows/actions_catalog"
+- link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
   text: "See the list of workflow actions"
 ---
@@ -20,15 +20,6 @@ A few tools control access and authentication for workflows and their components
 ## Workflow identity
 
 A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default, a workflow uses the Datadog user identity of its author.
-
-### Claim ownership of a workflow
-
-<div class="alert alert-info">To claim ownership of a workflow, your Datadog user must have the roles and permissions required by the workflow's connections.</div>
-
-
-1. Click the cog (**Settings**) icon.
-1. Select **Take ownership of workflow**. This option only appears if you are not already the owner of the workflow.
-1. Click **Confirm** to take ownership of the workflow.
 
 ### Use a service account
 

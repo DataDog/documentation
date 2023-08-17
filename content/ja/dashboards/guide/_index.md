@@ -30,6 +30,8 @@ title: グラフ作成ガイド
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}メトリクスベースの SLO クエリをスコープする{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}APM 統計グラフを構成する{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}バージョン履歴{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON を使ったグラフ化
+    {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="関数:" >}}

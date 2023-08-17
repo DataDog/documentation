@@ -33,12 +33,12 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | latest               |
+| .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
 | .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
-| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommeded       |
-| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommeded       |
-| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommeded       |
+| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
  Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
 
@@ -85,7 +85,6 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
-| WCF (server)                    | built-in                                                                                             | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.

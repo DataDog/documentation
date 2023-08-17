@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: kitepipe-atomwatch
 app_uuid: c9c6ace5-9793-48da-a4be-7bbd4c3e9b06
 assets:

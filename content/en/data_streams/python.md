@@ -18,7 +18,7 @@ further_reading:
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Python libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Python Tracer v1.15.0 or later][2]
+* [Python Tracer v1.16.0 or later][2]
 
 ### Installation
 
@@ -33,6 +33,9 @@ environment:
 ### Libraries Supported
 Data Streams Monitoring supports the [confluent-kafka library][3].
 
+### Monitoring SQS Pipelines
+Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As AWS SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or less message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -40,3 +43,4 @@ Data Streams Monitoring supports the [confluent-kafka library][3].
 [1]: /agent
 [2]: /tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
+[4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html

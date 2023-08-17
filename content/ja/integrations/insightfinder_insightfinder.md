@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: insightfinder-insightfinder-license
 app_uuid: 6f2fcb70-c087-412a-b221-360ba6a1c68f
 assets:

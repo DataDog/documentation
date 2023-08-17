@@ -32,7 +32,7 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
