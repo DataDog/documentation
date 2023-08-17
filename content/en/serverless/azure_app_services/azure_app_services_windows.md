@@ -47,7 +47,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
 
     <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
-3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
+3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
     - .NET Framework 4.6.1 and later
     - .NET Core 2.1
@@ -169,7 +169,7 @@ Learn more about [custom metrics][12].
     <div class="alert alert-warning">Support for Java Web Apps is in beta for extension v2.4+. There are no billing implications for tracing Java Web Apps during this period.<br/><br/>
     Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
-3. The Datadog Java APM extension supports all Java runtimes on Windows OS. Azure App Service does not support extensions on Linux. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
+3. The Datadog Java APM extension supports all Java runtimes on Windows OS. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
@@ -239,6 +239,82 @@ Learn more about [custom metrics][10].
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
 [9]: /developers/dogstatsd/?tab=java#code
 [10]: /metrics/
+{{% /tab %}}
+{{% tab "Node.js" %}}
+### Requirements
+
+1. If you haven't already, set up the [Microsoft Azure integration][1] first.
+
+2. The extension supports Azure App Service Web Apps.
+    <div class="alert alert-warning">Support for Node Web Apps is in beta for extension v0.0.2+. There are no billing implications for tracing Node Web Apps during this period.<br/><br/>
+    Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+
+3. The Datadog Node APM extension supports all Node runtimes on Windows OS. For more details about automatically instrumented libraries, see the [Tracer documentation][2].
+
+4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
+
+### Installation
+
+1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
+
+2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure Web App you wish to instrument with Datadog.
+
+3. Go to the Application settings tab of the Configuration page.
+    {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
+4. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][4].
+    {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="api key page" >}}
+5. Configure optional application settings:
+    - Set the `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+    - Set `DD_ENV` to group your traces and custom statistics.
+    - Set `DD_SERVICE` to specify a service name (defaults to your web app name).
+    - See a full list of [optional configuration variables][5].
+6. Click **Save** (this restarts your application).
+7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
+8. Go to the Azure extensions page and select the Datadog APM extension.
+9. Accept the legal terms, click **OK**, and wait for the installation to complete. **Note**: the web app must be in a stopped state for this step to complete successfully.
+10. Start the main application, click **Start**:
+    {{< img src="infrastructure/serverless/azure_app_services/start.png" alt="Start" >}}
+
+### Application logging from Azure Web Apps
+
+Sending logs from your application in Azure App Service to Datadog requires streaming logs to Datadog directly from your app. Submitting logs with this method allows for trace ID injection, which makes it possible to connect logs and traces in Datadog.
+
+**Note**: Trace ID injection occurs inside your application. Azure Resource logs are generated by Azure in the management plane, and therefore do not include the trace ID.
+
+See instructions for [Agentless logging with Node][6] to configure application logging for Node in Azure App Service.
+
+### Custom metrics with DogStatsD
+
+The Azure App Service extension includes an instance of [DogStatsD][7] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps with the extension.
+
+Writing custom metrics and checks in this environment is similar to the process for doing so with an application on a standard host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
+
+1. Initialize DogStatsD and write custom metrics in your application.
+2. Deploy your code to a supported Azure web app.
+3. Install the Datadog App Service extension.
+
+To send metrics use this code:
+
+```js
+// Import the Tracer to use its DogStatsd client
+const tracer = require('/home/SiteExtensions/Datadog.AzureAppServices.Node.Apm/v0_0_1/Tracer/node_modules/dd-trace');
+
+// Send a metric
+tracer.dogstatsd.increment('sample.startup');
+```
+
+More in depth example about [custom metrics in Node.js][10]. Learn more about [custom metrics][11].
+
+[1]: /integrations/azure
+[2]: /tracing/setup/nodejs/
+[3]: https://portal.azure.com/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
+[6]: /logs/log_collection/nodejs/?tab=serilog#agentless-logging
+[7]: /developers/dogstatsd
+[9]: /developers/dogstatsd/?tab=nodejs#code
+[10]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[11]: /metrics/
 {{% /tab %}}
 {{< /tabs >}}
 
