@@ -42,7 +42,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
 - Infrastructure:
     - [Live Processes explorer][7]
     - [Serverless explorer][8]
-    - [Containers explorer][9]
+    - [Kubernetes explorer][9]
 - [Real User Monitoring (RUM) explorer][10]
 - [Error Tracking issue side panel][13]
 
@@ -241,18 +241,46 @@ An overlay is then set on the function with pink pills hihglighting the differen
 {{% /tab %}}
 {{% tab "Live Processes" %}}
 
-TODO
-For live Processes Watchdog calculate outliers on the following metrics:
+**CPU usage outlier**
 
-- CPU
-- Memory
+In the **banner card** view, you can see:
+
+  * The integration impacted by the CPU outlier
+  * The command for the process impacted by the CPU outlier
+    
+{{< img src="watchdog/small_card_processes_cpu.png" alt="Process outlier on CPU usage" style="width:60%;">}}
+
+In the **full side panel**, you can see instructions on how to investigate such issues:
+
+{{< img src="watchdog/side_panel_processes_cpu.png" alt="Side panel for CPU outliers on live processes" style="width:80%;">}}
+
+As well as related metrics for that given integration as well as related processes running this integration: 
+
+{{< img src="watchdog/side_panel_processes_cpu_details.png" alt="Side panel with related metrics for CPU outliers on live processes" style="width:80%;">}}
+
+**Memory usage outlier**
+
+In the **banner card** view, you can see:
+
+  * The integration impacted by the Memory outlier
+  * The command for the process impacted by the Memory outlier
+    
+{{< img src="watchdog/small_card_processes_memory.png" alt="Process outlier on Memory usage" style="width:60%;">}}
+
+In the **full side panel**, you can see instructions on how to resolve the lock pressure:
+
+{{< img src="watchdog/side_panel_processes_memory.png" alt="Side panel for Memory outliers on live processes" style="width:80%;">}}
+
+As well as related metrics for that given integration as well as related processes running this integration: 
+
+{{< img src="watchdog/side_panel_processes_memory_details.png" alt="Side panel with related metrics for Memory outliers on live processes" style="width:80%;">}}
 
 {{% /tab %}}
-{{% tab "Containers" %}}
+{{% tab "Kubernetes" %}}
 
-TODO
-For Containers Watchdog calculate outliers on the following:
+For containers, the Watchdog insight carousel is reflecting [all the Kubernetes anomalies][1] for the current context of the Kubernetes explorer.
 
+[1]: /watchdog/#overview
 {{% /tab %}}
 {{< /tabs >}}
 
