@@ -146,11 +146,11 @@ In the **banner card** view, you can see:
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
     
-{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" >}}
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:100%;">}}
 
 In the **full side panel**, you can see instructions on how to resolve the lock pressure:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" >}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" style="width:100%;">}}
 
 **Garbage collection outlier**
 
@@ -159,11 +159,11 @@ In the **banner card** view, you can see:
   * The name of the impacted service
   * The amount of CPU time used to perform the Garbage Collection
 
-{{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" >}}
+{{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" style="width:100%;">}}
 
 In the **full side panel**, you can see instructions on how to better configure the Garbage Collection to free up some CPU time:
 
-{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" >}}
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" style="width:100%;">}}
 
 **Regex compilation outlier**
 
@@ -172,11 +172,11 @@ In the **banner card** view, you can see:
   * The name of the impacted service
   * The amount of CPU time spent on compiling regexes
 
-{{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" >}}
+{{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" style="width:100%;">}}
 
 In the **full side panel**, you can see instructions on how to improve regex compilation time and examples of functions within your code that could be improved with it:
 
-{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" >}}
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}
@@ -219,8 +219,6 @@ In the **full side panel**, you can see a timeseries graph about the performance
 {{% /tab %}}
 {{% tab "Serverless" %}}
 
-TODO
-
 For serverless infrastructures, Watchdog surfaces the following outliers:
 
 - `Cold Start Ratio Up/Down`
@@ -231,6 +229,15 @@ For serverless infrastructures, Watchdog surfaces the following outliers:
 - `Init Duration Up/Down`
 - `Runtime Duration Up/Down`
 
+Find the serverless functions impacted by one or multiple outliers thanks to the `Watchdog Insights` facet:
+
+{{< img src="watchdog/side_panel_serverless_facet_insights.png" alt="Facet to filter the Serverless Functions with insights" style="width:60%;">}}
+
+An overlay is then set on the function with pink pills hihglighting the different insights and giving more information about what happened. An `error` button also links [to instructions][1] on how to address those for your function:
+
+{{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:80%;">}}
+
+[1]: /serverless/guide/serverless_warnings/#errors
 {{% /tab %}}
 {{% tab "Live Processes" %}}
 
