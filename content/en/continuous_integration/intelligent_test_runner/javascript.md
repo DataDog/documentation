@@ -31,12 +31,12 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility setup
+### Test Visibility Setup
 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Javascript and Typescript][2]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
 ### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
+You or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
