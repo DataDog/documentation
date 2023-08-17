@@ -104,7 +104,7 @@ Datadog UI에서 **Integrations > Agent**로 이동해 우분투용 [Agent 설�
 호스트 상에 Datadog Agent를 설치하려면 [Datadog API 키][2]로 업데이트된 [원 라인 설치 명령][19]을 사용합니다.
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 ### 검증

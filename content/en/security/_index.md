@@ -2,9 +2,10 @@
 title: Datadog Security
 kind: documentation
 aliases:
-  - compliance_monitoring
-  - cloud_siem
-  - security_platform
+  - /compliance_monitoring
+  - /cloud_siem
+  - /security_platform
+  - /security/security_monitoring
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"

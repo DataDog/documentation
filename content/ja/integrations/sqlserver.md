@@ -41,7 +41,7 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 12.0.0
+integration_version: 13.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -260,7 +260,7 @@ SQL Server チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#sqlserver
 [5]: https://docs.microsoft.com/en-us/sql/t-sql/statements/grant-server-permissions-transact-sql?view=sql-server-ver15
 [6]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab
