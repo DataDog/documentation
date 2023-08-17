@@ -10,39 +10,44 @@ further_reading:
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
-A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing where a user clicks helps you understand if users engage with your page the way you expect and if they are finding all of your call to actions (CTAs) and important buttons. Visualizing these interactions in a heatmap makes it easy to understand complex data at a glance. Taking the insights from heatmaps helps you make UI decisions to optimize your user experience and increase retention.
+A heatmap (or heat map) is a visualization of your users engagement and interaction overlaid on Session Replay data. RUM has three different types of heatmaps:
+
+- Clickmaps: View user interactions (clicks) to understand if users engage with your page the way you expect 
+- Top Elements: View a ranking of up to the top 10 most interacted with elements on a given page.
+- Scrollmaps: View how far users scroll down a page, including where the average fold of a page falls. The average fold is the farthest point down a page that a user can see on their device when they open up the page and don’t do any scrolling.
+
+With each heatmap, you can understand complex data at a glance and take the insights to optimize your user experience.
+
 
 ## Prerequisites
 
 To get started with heatmaps:
 
-- You must be on the latest version of the SDK (v4.40.0 or later)
+- For Clickmaps, You must be on the latest version of the SDK (v4.40.0 or later) and for Scrollmaps, you must be on (v4.47.0 or later)
 - Enable [Session Replay][1].
-- Set`trackUserInteractions: true` in the SDK initialization to enable action tracking.
+- Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (requirement for clickmaps).
 
-### Getting started
+## Getting started
 
-On the view list page, select your application and view. 
+On the view list page, select your application and view. You can select the type of heatmap you would like to view as well.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap-view-list.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
 
-This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. A heatmap displays the aggregate of where all users (sessions) clicked on a single view, with the view being a single page within an application. Each session is one user's activity and includes everything they did, including all pages they viewed and all actions they clicked.
-
-To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
+This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-filters.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
-## Insights
+## Clickmaps
 
-The right panel helps you understand the data in the heatmap:
+A Clickmap shows you the most interacted with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
-- The popularity of the selected page in the context of the selected application.
-- The total number of unique users viewing the page.
-- The actions on the page where a frustration signal occurred.
+Each clickmap also offers analytics such as:
+
+- Where that page ranks out of all other visited pages
+- Unique user counts to that page
+- Any frustration signals on that page
 
 {{< img src="real_user_monitoring/heatmaps/insights-panel.png" alt="Data showing top insights detected in the heatmap." style="width:60%;">}}
-
-You can click into any of these queries to pivot to an analytical view of these data points.
 
 Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
 
@@ -51,7 +56,19 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 {{< img src="real_user_monitoring/heatmaps/actions.jpeg" alt="Shows an example action and the information you can get about that action." style="width:60%;">}}
 
-### Next steps
+## Top Elements
+
+Top elements allow for a more focused view of click actions on a given view by picking the top most interacted elements and ranking them. The ranking on the map itself corresponds to the action name on the side.
+
+By clicking on any action name from the panel, the corresponding action will be highlighted in the map.
+
+## Scrollmaps
+
+Scrollmaps show a visual of the aggregate scroll activity on a given page. By looking at a scrollmap you can see how far users scroll to each percentile, along with where the average fold of the page falls.
+
+You can interact with the floating blue bar on a scrollmap by dragging it to the point of the page you wish to see how many users arrived at.
+
+## Next steps
 
 After understanding analytics, the next step is to understand the action in the context of other data outside of heatmaps. This might mean pivoting to the [RUM explorer][4] or building a funnel that includes the action in order to [analyze conversion rates][5]. You can also watch associated [session replays][1] to visually see a user performing the action in the context of their overall session.
 
