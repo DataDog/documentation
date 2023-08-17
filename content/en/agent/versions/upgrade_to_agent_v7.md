@@ -19,7 +19,7 @@ Agent v7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">C
 Run the following Agent installation command in order to upgrade your Agent from version 6 to version 7:
 
 The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE:
-: `DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
+: `DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -31,16 +31,16 @@ The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ub
 
 **Note**: Links to all available versions of the Windows Installer are [provided in JSON format][3].
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://windows-agent.datadoghq.com/installers.json
+[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
 Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` in order to upgrade your Agent from version 6 to version 7:
 
 ```shell
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
 
 {{% /tab %}}
@@ -54,7 +54,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 Run the Agent installation command with the environment variable `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
 
 The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE:
-: `DD_UPGRADE="true" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
+: `DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -69,7 +69,7 @@ The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ub
 Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` and `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
 
 ```shell
-DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
+DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
 ```
 
 {{% /tab %}}

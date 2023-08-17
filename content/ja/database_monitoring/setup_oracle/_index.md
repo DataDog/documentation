@@ -73,7 +73,7 @@ RHEL と Ubuntu のベータビルドがあるリポジトリはそれぞれ[こ
 export DD_AGENT_DIST_CHANNEL=beta
 export DD_AGENT_MINOR_VERSION="46.0~dbm~oracle~beta~0.32-1"
 
-DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 ##### Windows
@@ -122,10 +122,10 @@ Agent は外部の Oracle クライアントを必要としません。
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://windows-agent.datadoghq.com/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.32-1.x86_64.msi
+[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.32-1.x86_64.msi
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [6]: https://yum.datadoghq.com/beta/7/x86_64/
 [7]: https://apt.datadoghq.com/dists/beta/7/
-[8]: https://windows-agent.datadoghq.com/
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/
 [9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
 [10]: /ja/database_monitoring/architecture/

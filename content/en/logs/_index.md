@@ -5,6 +5,7 @@ description: "Configure your Datadog Agent to gather logs from your host, contai
 disable_sidebar: true
 aliases:
   - /guides/logs/
+  - /en/logs
   - /logs/logging_without_limits
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
@@ -31,6 +32,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
     tag: "Blog"
     text: "Use CIDR notation queries to filter your network traffic logs"
+  - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+    tag: "Blog"
+    text: "Monitor 1Password with Datadog Cloud SIEM"
 cascade:
     algolia:
         rank: 70
