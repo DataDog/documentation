@@ -41,18 +41,40 @@ Cloud Security Management (CSM) delivers real-time threat detection and continuo
 
 CSM is available in three packages: CSM Enterprise, CSM Pro, and Workload Security. Each package includes access to a specific set of features, as shown in the following table:
 
-| Package           | Features                   | Setup instructions                                                                                                                                                                                    |
-|-------------------|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CSM Enterprise    | Threats, Misconfigurations | [Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts) and [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers) |
-| CSM Pro           | Misconfigurations          | [Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts)                                                                                                           |
-| Workload Security | Threats                    | [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers)                                                                                                 |
+| Package           | Features                                              | Setup instructions                                                                                                                                                                                    |
+|-------------------|-------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CSM Enterprise    | Threats, Misconfigurations (cloud accounts and Agent) | [Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts) and [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers) |
+| CSM Pro           | Misconfigurations (cloud accounts only)               | [Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts)                                                                                                           |
+| Workload Security | Threats                                               | [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers)                                                                                                 |
 
 **Note**: You can enable other features that aren't included in your package at any time by following the instructions.
+
+<table>
+    <tr>
+        <td>Package</td>
+        <td>Features</td>
+        <td>Setup instructions</td>
+    </tr>
+    <tr>
+        <td>CSM Enterprise</td>
+        <td>Threats, Misconfigurations (cloud accounts and Agent)</td>
+        <td>[Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts) and [Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers)</td>
+    </tr>
+    <tr>
+        <td>CSM Pro</td>
+        <td>Misconfigurations (cloud accounts only)</td>
+        <td>[Enable resource scanning for cloud accounts](#enable-resource-scanning-for-cloud-accounts)</td>
+    </tr>
+    <tr>
+        <td>Workload Security</td>
+        <td>Threats</td>
+        <td>[Enable CSM on the Agent for hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers)</td>
+    </tr>
+</table>
 
 ## Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
-
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -179,15 +201,9 @@ Use one of the following methods to enable CSM for your Google Cloud projects:
 
 ## Enable CSM on the Agent for hosts and containers
 
-To enable CSM on the Agent for hosts and containers, follow the in-app instructions on the **[Cloud Security Management Setup page][1]**. The setup page shows ...
+To enable CSM on the Agent for hosts and containers, navigate to the **[Cloud Security Management Setup page][1]**. The setup page shows a list of hosts and containers with information on the operating system and installed Agent version. Click **Enable** and follow the in-app instructions to enable CSM.
 
- for the best experience, including step-by-step instructions scoped to your deployment configuration.
-
-Click **Enable** to view the 
-
-For each...
-
-*The current UI provides instructions on how to enable, not the ability to do so from the UI...
+for the best experience, including step-by-step instructions scoped to your deployment configuration.
 
 ### Prerequisites
 
@@ -537,6 +553,47 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 ```
 
 {{% /tab %}}
+
+{{% tab "Docker Misconfigurations" %}}
+
+### Enable CSM Misconfigurations for Docker
+
+1. Navigate to **Security** > **Setup**.
+2. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
+3. On the **Setup** > **Host and containers** tab, click the **[Docker][1]** tile.
+4. Click **Select API key** to choose the API key you want to use with CSM Misconfigurations.
+5. Copy the automatically generated command and run it in your Docker environment to enable CSM Misconfigurations.
+
+[1]: https://app.datadoghq.com/security/configuration/csm/setup
+{{% /tab %}}
+
+{{% tab "Kubernetes Misconfigurations" %}}
+
+### Enable CSM Misconfigurations for Kubernetes
+
+1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
+2. Navigate to **Security** > **Setup**.
+3. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
+4. Add the following to the `datadog` section of the `values.yaml` file:
+    ```yaml
+    # values.yaml file
+    datadog:
+    [...]
+      # Add this to enable  CSM Misconfigurations and  CSM Threats
+      securityAgent:
+        runtime:
+          enabled: true
+        compliance:
+          enabled: true
+    ```
+
+5. Restart the Agent.
+
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
+[2]: https://app.datadoghq.com/security/configuration/csm/setup
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading
