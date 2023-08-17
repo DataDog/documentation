@@ -4,6 +4,7 @@ aliases:
 - /ja/guides/monitoring/
 - /ja/guides/alerting/
 - /ja/guides/monitors/the-conditions
+- /ja/monitoring
 cascade:
   algolia:
     rank: 70
