@@ -26,7 +26,7 @@ When visiting most of Datadog product explorers or pages, Watchdog returns two t
 - Anomalies: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organisation's data. Access the full list in the [Watchdog Alert explorer][12].
 - Outliers: Calculated on the product data matching the active query, it surfaces tags that either appear too frequently in some event types (e.g: errors) or drive some continuous metrics upwards (e.g: latency).
 
-<<PICTURE FOR AN EXPLORER>>
+{{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
 ## Explore insights
 
@@ -58,7 +58,7 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
 
-<<<<IMAGE TO INCLUDE>>>>>>>
+{{< img src="watchdog/filter_on_insight.png" alt=Filtering the explorer on the insight context" >}}
 
 ## Outlier types
 
