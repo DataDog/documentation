@@ -23,8 +23,8 @@ Investigating an incident requires trial and error. Drawing from their experienc
 
 When visiting most of Datadog product explorers or pages, Watchdog returns two types of insights:
 
-- Anomalies: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organisation's data. Access the full list in the [Watchdog Alert explorer][12].
-- Outliers: Calculated on the product data matching the active query, it surfaces tags that either appear too frequently in some event types (e.g: errors) or drive some continuous metrics upwards (e.g: latency).
+- **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organisation's data. Access the full list in the [Watchdog Alert explorer][12].
+- **Outliers**: Calculated on the product data matching the active query, it surfaces tags that either appear too frequently in some event types (e.g: errors) or drive some continuous metrics upwards (e.g: latency).
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -78,10 +78,6 @@ In the **banner card** view, you can see:
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
 
-In the **side panel card** view, you can see the main [log pattern][2] of error logs with the field.
-
-{{< img src="logs/explorer/watchdog_insights/error_outlier_l_card.png" alt="Error Outlier card (L)" style="width:100%;" >}}
-
 In the **full side panel** view, you can see:
 
   * The timeseries of error logs that contain the field.
@@ -111,7 +107,7 @@ In the **banner card** view, you can see:
   * The field name.
   * The proportion of errors and overall traces that the field contributes to.
 
-{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:100%;" >}}
+{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:50%;" >}}
 
 In the **full side panel** view, you can see:
 
@@ -142,7 +138,45 @@ In the **full side panel**, you can see a latency distribution graph for the tag
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
-TODO
+**Lock pressure outlier**
+
+In the **banner card** view, you can see:
+
+  * The name of the impacted service
+  * The number of threads impacted
+  * The potential CPU savings (and estimated cost savings)
+    
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" >}}
+
+In the **full side panel**, you can see instructions on how to resolve the lock pressure:
+
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" >}}
+
+**Garbage collection outlier**
+
+In the **banner card** view, you can see:
+
+  * The name of the impacted service
+  * The amount of CPU time used to perform the Garbage Collection
+
+{{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" >}}
+
+In the **full side panel**, you can see instructions on how to better configure the Garbage Collection to free up some CPU time:
+
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" >}}
+
+**Regex compilation outlier**
+
+In the **banner card** view, you can see:
+
+  * The name of the impacted service
+  * The amount of CPU time spent on compiling regexes
+
+{{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" >}}
+
+In the **full side panel**, you can see instructions on how to improve regex compilation time and examples of functions within your code that could be improved with it:
+
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" >}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}
