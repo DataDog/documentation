@@ -50,7 +50,7 @@ The [Datadog Application key][2] must be specified in the [Agent Configuration F
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 ### Environment variable
-The [Datadog Application key][1] must be set using the `DD_APP_KEY` environment variable in order to enable the Intelligent Test Runner:
+The [Datadog Application key][1] must be set using the `DD_APP_KEY` environment variable to enable the Intelligent Test Runner:
 
 `DD_APP_KEY` (Required)
 : The [Datadog Application key][1] used to query the tests to be skipped.<br/>
