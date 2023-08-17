@@ -17,7 +17,7 @@ further_reading:
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
 * `pytest>=6.8.0`
-  * From `ddtrace>=1.18.0`.
+  * From `ddtrace>=1.19.0`.
   * From `Python>=3.7`.
   * Requires `coverage>=5.5`.
 
@@ -31,26 +31,51 @@ You, or a user in your organization with "Intelligent Test Runner Activation" pe
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
-### Environment variables
-To enable Intelligent Test Runner, the `DD_APP_KEY` environment variable is required:
+### Configuring the test runner environment
 
-`DD_APP_KEY` (Required)
+{{< tabs >}}
+
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+#### Additional Datadog Agent configuration
+
+The [Datadog Application key][2] must be specified in the [Agent Configuration File][1]
+
+`app_key` (Required)
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-After setting this environment variable, run your tests as you normally do:
+[1]: /agent/guide/agent-configuration-files
+[2]: /organization-settings/application-keys
+{{% /tab %}}
+
+{{% tab "Cloud CI provider (Agentless)" %}}
+### Environment variable
+The [Datadog Application key][1] must be set using the `DD_APP_KEY` environment variable in order to enable the Intelligent Test Runner:
+
+`DD_APP_KEY` (Required)
+: The [Datadog Application key][1] used to query the tests to be skipped.<br/>
+**Default**: `(empty)`
+
+[1]: /organization-settings/application-keys
+{{% /tab %}}
+
+{{< /tabs >}}
+
+
+## Running tests with the Intelligent Test Runner enabled
+
+### Environment variable
+<div class="alert alert-info">Setting DD_CIVISIBILITY_AGENTLESS_ENABLED to true is required while the Intelligent Test Runner support for `pytest` is in beta. </div>
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Optional)
+: Run the Intelligent Test Runner in agentless mode (also applies to test visibility).
+**Default**: `(false)`
+
+After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_APP_KEY=$APP_KEY pytest --ddtrace
+DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddtrace
 {{< /code-block >}}
-
-## Disabling the Intelligent Test Runner
-
-Set the `DD_CIVISIBILITY_ITR_DISABLED` environment variable to `true` to disable the Intelligent Test Runner at runtime. This environment variable takes precedence over the settings in the [Test Service Settings][3] page.
-
-`DD_CIVISIBILITY_ITR_DISABLED` (Optional)
-: Disables the Intelligent Test Runner from running.<br/>
-**Default**: `false`
 
 ## Further reading
 
