@@ -110,7 +110,7 @@ restart-service -Force datadogagent
   Après la mise à jour de `datadog.conf`, redémarrez le service Datadog à partir du gestionnaire de services Windows.
 
 
-[1]: https://windows-agent.datadoghq.com/ddagent-cli-latest.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [2]: https://app.datadoghq.com/account/settings?agent_version=5#agent
 [3]: /fr/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
 [4]: /fr/agent/versions/upgrade_to_agent_v6/?tab=linux

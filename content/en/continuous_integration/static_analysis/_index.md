@@ -26,11 +26,12 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and adhere to coding best practices early in the Software Development Life Cycle (SDLC) to ensure only the highest quality code makes it to production. 
+Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and security vulnerabilities early in the Software Development Life Cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
 
 Using Static Analysis provides organizations with the following benefits:
 
 * Static Analysis takes the guesswork out of adhering to an organization's code standards, enabling your development team to ship compliant code without significant impacts to developer velocity.
+* An organization's applications are less likely to be vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
@@ -49,8 +50,9 @@ For example, for Python rules:
 
 ```yaml
 rulesets:
-  - python-code-style
   - python-best-practices
+  - python-security
+  - python-code-style
   - python-inclusive
 ```
 
