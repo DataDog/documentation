@@ -40,11 +40,11 @@ processors:
 # Add this section
  connectors:
   # Add the Datadog Connector definition and further configurations
-  datadog:
-     exporters:
-        datadog:
-           api:
-              key: ${env:DD_API_KEY}
+    datadog/connector:
+ exporters:
+    datadog:
+      api:
+        key: ${env:DD_API_KEY}
 {{< /highlight >}}
 
 2. Duplicate the `service.pipelines.trace` configuration for the sampled trace pipeline.
@@ -78,14 +78,14 @@ processors:
   probabilistic_sampler:
     sampling_percentage: 20
 
- connectors:
+connectors:
   # Add the "datadog" connector definition and further configurations
-   datadog:
+   datadog/connector:
 
-   exporters:
-     datadog:
-        api:
-           key: ${env:DD_API_KEY}
+exporters:
+  datadog:
+      api:
+        key: ${env:DD_API_KEY}
 
 service:
   pipelines:
