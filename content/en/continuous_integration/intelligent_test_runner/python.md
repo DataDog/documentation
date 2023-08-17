@@ -45,7 +45,7 @@ The [Datadog Application key][2] must be specified in the [Agent Configuration F
 **Default**: `(empty)`
 
 [1]: /agent/guide/agent-configuration-files
-[2]: /organization-settings/application-keys
+[2]: https://app.datadoghq.com/organization-settings/application-keys
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
@@ -56,7 +56,7 @@ The [Datadog Application key][1] must be set using the `DD_APP_KEY` environment 
 : The [Datadog Application key][1] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-[1]: /organization-settings/application-keys
+[1]: https://app.datadoghq.com/organization-settings/application-keys
 {{% /tab %}}
 
 {{< /tabs >}}
