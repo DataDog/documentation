@@ -45,7 +45,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
     - [Containers explorer][9]
 - [Real User Monitoring (RUM) explorer][10]
 
-Expand the carousel for an overview. The highest priority insights (based on `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
+Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
 {{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights carousel on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" >}}
 
