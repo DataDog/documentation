@@ -72,14 +72,16 @@ CSM is available in three packages: CSM Enterprise, CSM Pro, and Workload Securi
     </tr>
 </table>
 
-## Enable resource scanning for cloud accounts
+## CSM Enterprise
+
+### Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-### Set up the Datadog AWS integration
+#### Set up the Datadog AWS integration
 
 If you haven't already, set up the [Amazon Web Services integration][1]. For CSM Misconfigurations, you must also add the [required permissions][2] for resource collection.
 
@@ -87,14 +89,14 @@ If you haven't already, set up the [Amazon Web Services integration][1]. For CSM
 
 Use one of the following methods to enable CSM for your AWS accounts:
 
-#### CSM Setup page
+##### CSM Setup page
 
 1. On the **[Cloud Security Management Setup][3]** page, click **Cloud accounts**.
 2. Expand the **AWS** section.
 3. To enable resource collection for an account, click the **Resource Scanning** toggle.
 4. Click **Done**.
 
-#### Amazon Web Services integration page
+##### Amazon Web Services integration page
 
 1. On the **[Amazon Web Services][4]** integration page, select an AWS account.
 2. On the **Resource Collection** tab, select the **Cloud Security Posture Management Collection** checkbox.
@@ -109,24 +111,24 @@ Use one of the following methods to enable CSM for your AWS accounts:
 
 {{% tab "Azure" %}}
 
-### Set up the Datadog Azure integration
+#### Set up the Datadog Azure integration
 
 If you haven't already, set up the [Microsoft Azure integration][1].
 
 **Note**: To access the full set of Azure compliance rules for CSM Misconfigurations, you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the Microsoft Graph API.
 
-### Enable CSM for your Azure subscriptions
+#### Enable CSM for your Azure subscriptions
 
 Use one of the following methods to enable CSM for your Azure subscriptions:
 
-#### CSM Setup page
+##### CSM Setup page
 
 1. On the **[Cloud Security Management Setup page][2]**, click **Cloud accounts**.
 2. Expand the **Azure** section.
 3. To enable resource collection for a subscription, click the **Resource Scanning** toggle.
 4. Click **Done**.
 
-#### Azure integration page
+##### Azure integration page
 
 1. On the **[Azure integration page][3]**, select an Azure app registration.
 2. Under **Resource Collection**, select the **Collect resources for Cloud Security Posture Management** checkbox.
@@ -140,13 +142,13 @@ Use one of the following methods to enable CSM for your Azure subscriptions:
 
 {{% tab "Google Cloud" %}}
 
-### Set up the Datadog Google Cloud Platform integration
+#### Set up the Datadog Google Cloud Platform integration
 
 The Datadog Google Cloud Platform integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection for CSM Misconfigurations, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
 
 **Note**: [Google Cloud billing][4], the [Cloud Monitoring API][5], the [Compute Engine API][6], and the [Cloud Asset API][7] must all be enabled for the projects you wish to monitor.
 
-#### Google Cloud
+##### Google Cloud
 
 1. Navigate to the **[Google Cloud credentials page][8]** for the Google Cloud project where you would like to set up the Datadog integration.
 2. Click **Create credentials** and select **Service account**.
@@ -159,7 +161,7 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
 6. On the **Keys** tab, click **New Key**, then select **Create new key**.
 7. Select **JSON** and click **Create** to download the JSON key.
 
-#### Datadog
+##### Datadog
 
 1. In Datadog, navigate to the **[Google Cloud Platform integration page][9]**.
 2. On the **Configuration** tab, locate the service account and select **Upload Private Key File** to integrate the project with Datadog.
@@ -168,18 +170,18 @@ The Datadog Google Cloud Platform integration uses service accounts to create an
     - Repeat the process above to use multiple service accounts.
     - Use the same service account by updating the `project_id` in the downloaded JSON file. Then, upload the file to Datadog as described in steps 1-3.
 
-### Enable CSM for your Google Cloud projects
+#### Enable CSM for your Google Cloud projects
 
 Use one of the following methods to enable CSM for your Google Cloud projects:
 
-#### CSM Setup page
+##### CSM Setup page
 
 1. On the **[Cloud Security Management Setup page][2]**, click **Cloud accounts**.
 2. Expand the **GCP** section.
 3. To enable resource collection for a project, click the **Resource Scanning** toggle.
 4. Click **Done**.
 
-#### Google Cloud Platform integration page
+##### Google Cloud Platform integration page
 
 1. On the **[Google Cloud Platform integration page][10]**, select a Google Cloud project.
 2. Under **Resource Collection**, select the **Enable Cloud Security Posture Management** checkbox.
@@ -199,13 +201,13 @@ Use one of the following methods to enable CSM for your Google Cloud projects:
 
 {{< /tabs >}}
 
-## Enable CSM on the Agent for hosts and containers
+### Enable CSM on the Agent for hosts and containers
 
 To enable CSM on the Agent for hosts and containers, navigate to the **[Cloud Security Management Setup page][1]**. The setup page shows a list of hosts and containers with information on the operating system and installed Agent version. Click **Enable** and follow the in-app instructions to enable CSM.
 
 for the best experience, including step-by-step instructions scoped to your deployment configuration.
 
-### Prerequisites
+#### Prerequisites
 
 * Datadog Agent 7.44 or later.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CSM Threats supports the following Linux distributions:
@@ -219,7 +221,7 @@ for the best experience, including step-by-step instructions scoped to your depl
   * Custom kernel builds are not supported.
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
-### Remote Configuration
+#### Remote Configuration
 
 <div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
@@ -556,7 +558,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 {{% tab "Docker Misconfigurations" %}}
 
-### Enable CSM Misconfigurations for Docker
+#### Enable CSM Misconfigurations for Docker
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
@@ -569,7 +571,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 {{% tab "Kubernetes Misconfigurations" %}}
 
-### Enable CSM Misconfigurations for Kubernetes
+#### Enable CSM Misconfigurations for Kubernetes
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
 2. Navigate to **Security** > **Setup**.
