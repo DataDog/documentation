@@ -26,7 +26,7 @@ The Datadog Connector for the OpenTelemetry Collector allows APM metrics to be c
 To switch to using the Datadog Connector, change the following Agent configurations:
 
 1. Replace the Datadog Processor configuration from `processors` with the Datadog Connector configuration from `connectors`:
-{{< highlight yaml "hl_lines=8-11" >}}
+{{< highlight yaml "hl_lines=8-15" >}}
 # Remove this section
 processors:
    probabilistic_sampler:
@@ -38,10 +38,14 @@ processors:
  connectors:
   # Add the Datadog Connector definition and further configurations
   datadog:
+     exporters:
+        datadog:
+        api:
+        key: ${env:DD_API_KEY}
 {{< /highlight >}}
 
 3. Duplicate the `service.pipelines.trace` configuration for the sampled trace pipeline.
-4. Add the Datadog Connector to the pipeline that isn't sampled:
+4. Add the Datadog Connector to the duplicated pipeline configuration that isn't sampled:
      {{< highlight yaml "hl_lines=6" >}}
      service:
        pipelines:
