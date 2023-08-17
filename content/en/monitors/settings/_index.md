@@ -30,7 +30,7 @@ Monitor tag policies allow you to enforce data validation on tags and tag values
 ### Configure monitor tag policies
 
 1. Navigate to the **Monitors** > **Settings** page.
-2. Configure tag policies. There are three data validation rules that are enforced through tag policies:
+2. Open the "Tag policies" tab. There are three data validation rules that are enforced through tag policies:
     - Require tags with mandatory values
     - Require tags only
     - Optional tags with mandatory values
@@ -64,9 +64,14 @@ For more information, see [Role Based Access Control][2] and [Role Permissions][
 
 
 ## Deleted monitors
-Use the Deleted Monitors tab to restore deleted monitors. From the list, select all monitors to restore and click **Restore**. Monitors are permanently deleted after 7 days.
+Deleted Monitors allow you to restore recently deleted Datadog monitors. Monitors are retained for 7 days before being permanently deleted.
 
-{{< img src="monitors/recently_deleted.png" alt="Restore deleted monitor" style="width:100%;">}}
+### Restore deleted monitor
+1. Navigate to the **Monitors** > **Settings** page.
+2. Open "Deleted Monitors" tab.
+3. Click the **Restore** button to restore all the selected monitors or restore them individually.
+
+{{< img src="monitors/settings/recently_deleted.png" alt="Restore deleted monitor" style="width:100%;">}}
 
 ## Further Reading
 
