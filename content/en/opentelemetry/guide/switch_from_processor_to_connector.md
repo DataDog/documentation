@@ -17,9 +17,13 @@ further_reading:
 
 ## Overview
 
-If you use the soon-to-be deprecated [Datadog Processor][1] in your OpenTelemetry Collector pipeline for APM metrics, switch to use the [Datadog Connector][2] instead. 
+If you use the soon-to-be deprecated [Datadog Processor][1] in your OpenTelemetry Collector pipeline for APM metrics, switch to use [Datadog Connector][2] instead.
 
-The Datadog Connector for the OpenTelemetry Collector allows APM metrics to be calculated on 100% of the trace data, even when sampling is applied. It also complies with the OpenTelemetry standard better than the Datadog Processor does.
+## Advantages of Datadog Connector
+
+The Datadog Connector for the OpenTelemetry Collector allows APM metrics to be calculated on 100% of the trace data, even when sampling is applied. Sampling is a technique that takes a subset of data to filter a percentage of the total data, which can reduce the overall costs of data transmission and storage.
+
+The Datadog Processor has to convert trace data to metrics data to retain APM stats in case the traces sent through the pipeline are sampled. The Datadog Connector improves this necessary data transmission while complying better with the OpenTelemetry standard and still retaining the APM stats passed through it.
 
 ## Switch your Agent OpenTelemetry Collector configuration
 
@@ -39,12 +43,12 @@ processors:
   datadog:
      exporters:
         datadog:
-        api:
-        key: ${env:DD_API_KEY}
+           api:
+              key: ${env:DD_API_KEY}
 {{< /highlight >}}
 
-3. Duplicate the `service.pipelines.trace` configuration for the sampled trace pipeline.
-4. Add the Datadog Connector to the duplicated pipeline configuration that isn't sampled:
+2. Duplicate the `service.pipelines.trace` configuration for the sampled trace pipeline.
+3. Add the Datadog Connector to the duplicated pipeline configuration that isn't sampled:
      {{< highlight yaml "hl_lines=3-6" >}}
      service:
        pipelines:
@@ -57,7 +61,7 @@ processors:
            processors: [batch, probabilistic_sampler]
            exporters: [datadog]
      {{< /highlight >}}
-5. Add the Connector configuration to `metrics` section:
+4. Add the Connector configuration to `metrics` section:
    ```yaml
        metrics:
          receivers: [datadog/connector]
@@ -65,7 +69,7 @@ processors:
          exporters: [datadog]
    ```
 
-## Example
+### Example
 
 Here's a full example with all of the new configuration:
 
@@ -80,8 +84,8 @@ processors:
 
    exporters:
      datadog:
-     api:
-     key: ${env:DD_API_KEY}
+        api:
+           key: ${env:DD_API_KEY}
 
 service:
   pipelines:
