@@ -136,7 +136,7 @@ def security_rules(content, content_dir):
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
                     # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
-                    f"/security_monitoring/default_rules/{p.stem}"
+                    f"/security_monitoring/default_rules/{p.stem.lower()}"
                 ],
                 "rule_category": [],
                 "integration_id": "",
