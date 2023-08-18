@@ -11,10 +11,6 @@ aliases:
   - /security/default_rules/cis-aws-1.3.0-1.14
 disable_sidebar: true
 cascade:
-    algolia:
-        rank: 11
-        category: Documentation
-        subcategory: Security Detection Rules
 - _target:
     path: /security/default_rules/google-cloud-storage-bucket-enumerated.md
   aliases: /security_monitoring/default_rules/gcp-gcs-bucket-enumerated
@@ -48,6 +44,12 @@ cascade:
 - _target:
     path: /security/default_rules/aws-iam-new-aws-account-assumerole.md
   aliases: security/default_rules/cloudtrail-aws-new-aws-account-assumerole
+- _target:
+    path: /security/**/*.md
+  algolia:
+    rank: 11
+    category: Documentation
+    subcategory: Security Detection Rules
 ---
 
 Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration. For more information, see the Detection Rules documentation.
