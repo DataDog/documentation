@@ -22,12 +22,12 @@ Supported Authentication Types
 : [IAM][2]
 
 
-## Configure IAM Authentication
+## Configure IAM authentication
 
 AWS supports IAM Authentication to RDS and Aurora databases. In order to configure the Agent to connect using IAM, do the following:
 
 1. Turn on IAM authentication on your [RDS][3] or [Aurora][4] instance
-2. Create a new IAM role, and then attach the following policy:
+2. Create a IAM role, and then attach the following policy:
 ```shell
 {
     "Version": "2012-10-17",
