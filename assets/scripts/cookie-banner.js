@@ -40,6 +40,6 @@ window.addEventListener('load', function () {
 
             // replace Cookie link with Prefs div
             return (cookieLink && document.getElementById('teconsent').innerHTML.length > 0) ? cookieLink.replaceWith(prefsElement) : false;
-        }, 500);
+        }, 5000);
     }
 });
