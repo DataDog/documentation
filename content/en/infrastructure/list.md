@@ -95,7 +95,7 @@ The Agent configuration is scrubbed of any sensitive information and only contai
 
 This feature is enabled by default in Agent version >= 7.47.0/6.47.0.
 
-To modify this behavior, change the value of `inventories_configuration_enabled` setting in your [Agent configuration file][6] (true to send the configuration and false to disable it).
+To modify this behavior, set the value of the `inventories_configuration_enabled` setting in your [Agent configuration file][6] to `true` to send the configuration, or `false` to disable it.
 
 Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable to enable or disable this feature.
 
