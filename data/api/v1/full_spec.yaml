@@ -647,6 +647,14 @@ components:
     AzureAccount:
       description: Datadog-Azure integrations configured for your organization.
       properties:
+        app_service_plan_filters:
+          description: 'Limit the Azure app service plans that are pulled into Datadog
+            using tags.
+
+            Only app service plans that match one of the defined tags are imported
+            into Datadog.'
+          example: key:value,filter:example
+          type: string
         automute:
           description: Silence monitors for expected Azure VM shutdowns.
           example: true
@@ -659,6 +667,15 @@ components:
           description: Your Azure web application secret key.
           example: testingx./Sw*g/Y33t..R1cH+hScMDt
           type: string
+        cspm_enabled:
+          description: Enable Cloud Security Management Misconfigurations for your
+            organization.
+          example: true
+          type: boolean
+        custom_metrics_enabled:
+          description: Enable custom metrics for your organization.
+          example: true
+          type: boolean
         errors:
           description: Errors in your configuration.
           example:
@@ -3969,6 +3986,7 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - apm_usm_usage
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
@@ -4000,11 +4018,13 @@ components:
       - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
+      - sds_scanned_bytes_usage
       type: string
       x-enum-varnames:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APM_USM_USAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
@@ -4036,6 +4056,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
+      - SDS_SCANNED_BYTES_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7510,6 +7531,8 @@ components:
       - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
+      - apm_usm_usage
+      - apm_usm_percentage
       - appsec_usage
       - appsec_percentage
       - browser_usage
@@ -7570,6 +7593,8 @@ components:
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
       - vuln_management_hosts_percentage
+      - sds_scanned_bytes_usage
+      - sds_scanned_bytes_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7581,6 +7606,8 @@ components:
       - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
+      - APM_USM_USAGE
+      - APM_USM_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
@@ -7641,6 +7668,8 @@ components:
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SDS_SCANNED_BYTES_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7667,6 +7696,15 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        apm_usm_percentage:
+          description: The percentage of APM and Universal Service Monitoring host
+            usage by tag(s).
+          format: double
+          type: number
+        apm_usm_usage:
+          description: The APM and Universal Service Monitoring host usage by tag(s).
           format: double
           type: number
         appsec_fargate_percentage:
@@ -7897,6 +7935,14 @@ components:
           type: number
         profiled_host_usage:
           description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_percentage:
+          description: The percentage of Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_usage:
+          description: The total Sensitive Data Scanner usage by tag(s).
           format: double
           type: number
         snmp_percentage:
@@ -14893,6 +14939,9 @@ components:
           maximum: 10
           minimum: 0
           type: integer
+        persistCookies:
+          description: Persist cookies across redirects.
+          type: boolean
         port:
           description: Port to use when performing the test.
           format: int64
@@ -19549,6 +19598,7 @@ components:
     WidgetComparator:
       description: Comparator to apply.
       enum:
+      - '='
       - '>'
       - '>='
       - <
@@ -19556,6 +19606,7 @@ components:
       example: '>'
       type: string
       x-enum-varnames:
+      - EQUAL_TO
       - GREATER_THAN
       - GREATER_THAN_OR_EQUAL_TO
       - LESS_THAN

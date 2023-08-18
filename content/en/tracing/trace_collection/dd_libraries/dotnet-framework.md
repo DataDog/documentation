@@ -349,4 +349,4 @@ dotnet.exe example.dll
 [3]: https://app.datadoghq.com/apm/traces
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[11]: /tracing/_trace_collection/library_injection_local/
+[11]: /tracing/trace_collection/library_injection_local/

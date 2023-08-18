@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
+  - /security/guide/how-appsec-works/
 further_reading:
 - link: "/security/application_security/enabling/compatibility"
   tag: "Documentation"
