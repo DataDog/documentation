@@ -299,11 +299,13 @@ build_live:
     - make clean-examples
     - make dependencies
     - yarn run prebuild
-    - build_site.py
-    - in-isolation deploy_site.py
-    - in-isolation create_artifact
-    - in-isolation create_artifact_ignored
-    - in-isolation create_artifact_cached
+    - yarn build:hugo:${CI_ENVIRONMENT_NAME}
+    - assume_marketing_deploy_role
+    - yarn run deploy:${CI_ENVIRONMENT_NAME}Assets > logs/deploy-assets.txt
+    - yarn run deploy:${CI_ENVIRONMENT_NAME} > logs/deploy-site.txt
+    - create_artifact
+    - create_artifact_ignored
+    - create_artifact_cached
     - remove_static_from_repo
     - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
   artifacts:
