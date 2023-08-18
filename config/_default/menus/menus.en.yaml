@@ -799,21 +799,26 @@ main:
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_deployment_tracking
     weight: 106
+  - name: Continous Profiler
+    url: serverless/aws_lambda/profiling
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
+    weight: 107
   - name: Securing Functions
     url: /serverless/securing_functions
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_securing_functions
-    weight: 107
+    weight: 108
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
-    weight: 108
+    weight: 109
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
     parent: serverless_aws_lambda
     identifier: libraries_integrations
-    weight: 109
+    weight: 110
   - name: AWS Step Functions
     url: serverless/step_functions
     parent: serverless
@@ -4097,11 +4102,16 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
-  - name: Visual Studio Code
+  - name: VS Code
     url: developers/ide_integrations/vscode/
     parent: ide_integrations
     identifier: ide_integrations_vscode
     weight: 802
+  - name: Visual Studio
+    url: developers/ide_integrations/visual_studio/
+    parent: ide_integrations
+    identifier: ide_integrations_visual_studio
+    weight: 803
   - name: Community
     url: developers/community/
     parent: dev_tools
@@ -10251,6 +10261,18 @@ api:
     url: /api/latest/teams/
     identifier: teams
     generated: true
+  - name: Get user memberships
+    url: '#get-user-memberships'
+    identifier: teams-get-user-memberships
+    parent: teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUserMemberships
+      unstable: []
+      order: 1
   - name: Update permission setting for team
     url: '#update-permission-setting-for-team'
     identifier: teams-update-permission-setting-for-team

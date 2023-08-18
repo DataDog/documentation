@@ -4,6 +4,7 @@ kind: documentation
 description: "Overview of the mechanisms in the tracer and the Agent that control trace ingestion."
 aliases:
 - /tracing/trace_ingestion/mechanisms
+- /tracing/trace_pipeline/ingestion_mechanisms//
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"

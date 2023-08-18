@@ -1,6 +1,8 @@
 ---
 title: Getting Started with Application Security Management
 kind: documentation
+aliases:
+- /security/security_monitoring/getting_started/
 further_reading:
 - link: "/security/application_security/terms"
   tag: "Documentation"

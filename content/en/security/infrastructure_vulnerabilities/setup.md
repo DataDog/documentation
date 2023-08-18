@@ -2,7 +2,7 @@
 title: Setting up Cloud Security Management Vulnerabilities
 kind: documentation
 further_reading:
-- link: "/security/infrastructure_vulnerability/"
+- link: "/security/infrastructure_vulnerabilities/"
   tag: "Documentation"
   text: "CSM Vulnerabilities"
 aliases:

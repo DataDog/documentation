@@ -35,4 +35,8 @@ if i >= 1:
 if 0 < nextSx <= len(subject):
     px = nextPx
     sx = nextSx
+
+if 1 in ctx:
+  print("foo")
+
 ```
