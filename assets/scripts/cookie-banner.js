@@ -13,7 +13,7 @@ window.addEventListener('load', function () {
         divA.id = "teconsent";
         divA.style = "cursor: pointer; color:#fff"
         divB.id = "consent-banner";
-        divB.style = "position:fixed; bottom:0px; right:0px; width:100%; z-index:-1";
+        divB.style = "position:fixed; bottom:0px; right:0px; width:100%; z-index:999999";
         document.body.appendChild(divA);
         document.body.appendChild(divB);
         
@@ -34,10 +34,6 @@ window.addEventListener('load', function () {
                         }
                     });
                 });
-
-                if (target.style.display !== 'none') {
-                    target.parentElement.style.setProperty('z-index', '999999', 'important');
-                }
 
                 observer.observe(target, { attributes: true, attributeFilter: ['style'] });
             }
