@@ -54,9 +54,11 @@ GRANT rds_iam TO db-user;
 
 **Note:** Replace `db-user` with the IAM role information.
 
-4. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at ec2 launch time.
+4. Complete the setup steps for your [RDS][6] or [Aurora][7] instance.
 
-5. Update your postgres instance config with an `aws` block which specifies the `region` of the RDS instance:
+5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at ec2 launch time.
+
+6. Update your postgres instance config with an `aws` block which specifies the `region` of the RDS instance:
 
 ```yaml
 instances:
@@ -75,4 +77,6 @@ That's it!
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.Enabling.html
 [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+[6]: /database_monitoring/setup_postgres/rds/#grant-the-agent-access
+[7]: /database_monitoring/setup_postgres/aurora/#grant-the-agent-access
 
