@@ -37,7 +37,7 @@ cascade:
     subcategory: Integrations
     tags: ['eks logging']
 - _target:
-    path: /integrations/win32_event_log/
+    path: /integrations/win32_event_log.md
   aliases:
     - /integrations/eventviewer/
   algolia:
@@ -46,19 +46,19 @@ cascade:
     subcategory: Integrations
     tags: ['event viewer']
 - _target:
-    path: /integrations/lambdatest_license/
+    path: /integrations/lambdatest_license.md
   aliases:
     - /integrations/lambdatest_software_license/
 - _target:
-    path: /integrations/mongo/
+    path: /integrations/mongo.md
   aliases:
     - /integrations/mongodb/
 - _target:
-    path: /integrations/rapdev_validator/
+    path: /integrations/rapdev_validator.md
   aliases:
     - /integrations/rapdev_dashboard_widget_pack/
 - _target:
-    path: /integrations/wmi_check/
+    path: /integrations/wmi_check.md
   aliases:
     - /integrations/wmi/
 - _target:
