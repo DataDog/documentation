@@ -114,7 +114,7 @@ Hiding facets is specific to your own troubleshooting context and does not impac
 
 ### Group facets
 
-Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
+Facets are grouped into meaningful themes to ease navigation in the facet list. Assigning or reassigning a group for a facet only affects the display in the facet list and has no impact on search and analytics capabilities.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
 
