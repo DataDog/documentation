@@ -1,5 +1,5 @@
 ---
-title: Tagging SQL Statements
+title: Connecting with Managed Authentication
 kind: guide
 ---
 {{< site-region region="gov" >}}
