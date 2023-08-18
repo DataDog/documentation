@@ -61,6 +61,12 @@ cascade:
     path: /integrations/wmi_check/
   aliases:
     - /integrations/wmi/
+- _target:
+    path: /integrations/*.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
 
 ---
 
