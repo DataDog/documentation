@@ -9,12 +9,6 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
-    path: /integrations/*.md
-  algolia:
-    rank: 60
-    category: Documentation
-    subcategory: Integrations
-- _target:
     path: /integrations/azure.md
   algolia:
     rank: 60
@@ -44,24 +38,29 @@ cascade:
     tags: ['eks logging']
 - _target:
     path: /integrations/win32_event_log/
-    aliases:
-      - /integrations/eventviewer/
+  aliases:
+    - /integrations/eventviewer/
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['event viewer']
 - _target:
     path: /integrations/lambdatest_license/
-    aliases:
-      - /integrations/lambdatest_software_license/
+  aliases:
+    - /integrations/lambdatest_software_license/
 - _target:
     path: /integrations/mongo/
-    aliases:
-      - /integrations/mongodb/
+  aliases:
+    - /integrations/mongodb/
 - _target:
     path: /integrations/rapdev_validator/
-    aliases:
-      - /integrations/rapdev_dashboard_widget_pack/
+  aliases:
+    - /integrations/rapdev_dashboard_widget_pack/
 - _target:
     path: /integrations/wmi_check/
-    aliases:
-      - /integrations/wmi/
+  aliases:
+    - /integrations/wmi/
 
 ---
 
