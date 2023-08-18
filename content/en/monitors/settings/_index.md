@@ -64,8 +64,7 @@ For more information, see [Role Based Access Control][2] and [Role Permissions][
 
 
 ## Deleted monitors
-Monitors are retained for 7 days before being permanently deleted. Restore recently deleted Datadog monitors:
-
+Monitors are retained for 7 days before being permanently deleted. To restore recently deleted Datadog monitors:
 1. Navigate to the [**Monitors** > **Settings**][1] page.
 2. Open "Deleted Monitors" tab.
 3. Click the **Restore** button to restore all the selected monitors or restore them individually.
