@@ -9,6 +9,10 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
+    path: /integrations/akamai_datastream_2.md
+  aliases:
+    - /integrations/akamai_datastream
+- _target:
     path: /integrations/azure.md
   algolia:
     rank: 60
