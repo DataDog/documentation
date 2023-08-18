@@ -25,12 +25,18 @@ fs.writeFileSync(
     'utf8'
 );
 
-/*Object.entries(d["remap"])
-  .filter(([key, value]) => ["errors", "functions"].includes(key))
+const funcsdata = {};
+Object.entries(d["remap"])
+  .filter(([key, value]) => ["functions"].includes(key))
   .forEach(([key, value]) => {
-    console.log(key);
+    console.log(key, value);
+    if(!funcsdata.hasOwnProperty(value["category"])) {
+      funcsdata[value["category"]] = [];
+    }
+    funcsdata[value["category"]].push(value);
   }
-);*/
+);
+console.log(funcsdata);
 
 let fileString = fs.readFileSync(input, 'utf8');
 fileString = fileString.replace('  "$ref": "#/definitions/vector::config::builder::ConfigBuilder",', '');
