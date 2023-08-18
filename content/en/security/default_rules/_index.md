@@ -7,6 +7,8 @@ aliases:
   - /security_monitoring/default_rules/
   - /cloud_siem/default_rules/
   - /security_platform/default_rules/
+  - /security/default_rules/aws-rds-enabled-encryption
+  - /security/default_rules/cis-aws-1.3.0-1.14
 disable_sidebar: true
 cascade:
     algolia:
