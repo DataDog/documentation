@@ -48,7 +48,7 @@ The Watchdog Insights carousel sits near the top of the following product pages:
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
-{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights carousel on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" >}}
+{{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights carousel on the Logs Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" style="width:100%;>}}
 
 Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
@@ -58,7 +58,7 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
 
-{{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" >}}
+{{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;>}}
 
 ## Outlier types
 
@@ -107,7 +107,7 @@ In the **banner card** view, you can see:
   * The field name.
   * The proportion of errors and overall traces that the field contributes to.
 
-{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:50%;" >}}
+{{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:30%;" >}}
 
 In the **full side panel** view, you can see:
 
@@ -129,7 +129,7 @@ In the **banner card** view, you can see:
 * The latency distribution for spans containing the tag and the baseline for the rest of the data
 * A percentile of interest latency value for the outlier tag and the difference with the baseline for the rest of the data
 
-{{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_s_card.png" alt="Latency Outlier banner card" style="width:100%;" >}}
+{{< img src="tracing/trace_explorer/watchdog_insights/latency_outliers_s_card.png" alt="Latency Outlier banner card" style="width:30%;" >}}
 
 In the **full side panel**, you can see a latency distribution graph for the tag and the baseline. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
 
@@ -146,7 +146,7 @@ In the **banner card** view, you can see:
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
     
-{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:100%;">}}
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:50%;">}}
 
 In the **full side panel**, you can see instructions on how to resolve the lock pressure:
 
@@ -159,7 +159,7 @@ In the **banner card** view, you can see:
   * The name of the impacted service
   * The amount of CPU time used to perform the Garbage Collection
 
-{{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" style="width:100%;">}}
+{{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" style="width:30%;">}}
 
 In the **full side panel**, you can see instructions on how to better configure the Garbage Collection to free up some CPU time:
 
@@ -172,7 +172,7 @@ In the **banner card** view, you can see:
   * The name of the impacted service
   * The amount of CPU time spent on compiling regexes
 
-{{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" style="width:100%;">}}
+{{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" style="width:30%;">}}
 
 In the **full side panel**, you can see instructions on how to improve regex compilation time and examples of functions within your code that could be improved with it:
 
@@ -192,11 +192,11 @@ For Databases, Watchdog surfaces insights on the following metrics:
 
 Find the databases impacted by one or multiple outliers thanks to the insight carousel
 
-{{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:80%;">}}
+{{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:100%;">}}
 
 An overlay is then set on the databases with pink pills hihglighting the different insights and giving more information about what happened. 
 
-{{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:80%;">}}
+{{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "RUM" %}}
@@ -248,11 +248,11 @@ For serverless infrastructures, Watchdog surfaces the following insights:
 
 Find the serverless functions impacted by one or multiple outliers thanks to the `Watchdog Insights` facet:
 
-{{< img src="watchdog/side_panel_serverless_facet_insights.png" alt="Facet to filter the Serverless Functions with insights" style="width:60%;">}}
+{{< img src="watchdog/side_panel_serverless_facet_insights.png" alt="Facet to filter the Serverless Functions with insights" style="width:30%;">}}
 
 An overlay is then set on the function with pink pills hihglighting the different insights and giving more information about what happened. An `error` button also links [to instructions][1] on how to address those for your function:
 
-{{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:80%;">}}
+{{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:100%;">}}
 
 [1]: /serverless/guide/serverless_warnings/#errors
 {{% /tab %}}
