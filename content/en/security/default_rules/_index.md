@@ -45,7 +45,7 @@ cascade:
     path: /security/default_rules/aws-iam-new-aws-account-assumerole.md
   aliases: security/default_rules/cloudtrail-aws-new-aws-account-assumerole
 - _target:
-    path: /security/**/*.md
+    path: /security/default_rules/*.md
   algolia:
     rank: 11
     category: Documentation
