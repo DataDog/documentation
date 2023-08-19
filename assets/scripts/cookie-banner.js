@@ -13,30 +13,14 @@ window.addEventListener('load', function () {
         divA.id = "teconsent";
         divA.style = "cursor: pointer; color:#fff"
         divB.id = "consent-banner";
-        divB.style = "position:fixed; bottom:0px; right:0px; width:100%; z-index:999999";
+        divB.style = "position:fixed; bottom:0px; right:0px; width:100%;";
         document.body.appendChild(divA);
         document.body.appendChild(divB);
         
         // update Cookie link
         this.setTimeout(function () {
-            // const target = document.getElementById('truste-consent-track');
             const prefsElement = document.getElementById('teconsent');
             const cookieLink = document.querySelector('footer a[href*="/cookies"]');
-
-            // if (target) {
-            //     // update z-index on banner
-            //     const observer = new MutationObserver(function (mutations) {
-            //         mutations.forEach(function () {
-            //             if (target.style.display === 'none') {
-            //                 target.parentElement.style.zIndex = -1
-            //             } else {
-            //                 target.parentElement.style.setProperty('z-index', '999999', 'important');
-            //             }
-            //         });
-            //     });
-
-            //     observer.observe(target, { attributes: true, attributeFilter: ['style'] });
-            // }
 
             // replace Cookie link with Prefs div
             return (cookieLink && document.getElementById('teconsent').innerHTML.length > 0) ? cookieLink.replaceWith(prefsElement) : false;
