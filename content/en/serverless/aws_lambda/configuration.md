@@ -406,8 +406,6 @@ For a more granular approach, use these service-specific identifiers:
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-For more details on renaming downstream services, see `DD_TRACE_PEER_SERVICE_MAPPING` in the [tracer's config documentation][45]. To learn more about upstream non-Lambda service renaming, consult the [services names documentation][46].
-
 ## Filter or scrub information from logs
 
 To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
