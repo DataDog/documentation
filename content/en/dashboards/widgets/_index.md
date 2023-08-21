@@ -48,7 +48,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 {{< whatsnext desc="Display your widgets under groups: ">}}
     {{< nextlink href="/dashboards/widgets/group"
         img="dashboards/widgets/icons/group-default_light_large.svg">}} Group{{< /nextlink >}}
-    {{< nextlink href="dashboards/widgets/icons/group-powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group-powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
