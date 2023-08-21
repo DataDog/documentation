@@ -76,7 +76,7 @@ For Intelligent Test Runner for Cypress to work, you must instrument your web ap
 
 
 #### Suite skipping
-Intelligent test runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
+Intelligent Test Runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
 
 ## Further Reading
 
