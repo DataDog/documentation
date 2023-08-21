@@ -41,8 +41,10 @@ further_reading:
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
 cascade:
-    algolia:
-        rank: 70
+- _target:
+    path: /security/default_rules/google-cloud-storage-bucket-enumerated.md
+  aliases:
+    - /security_monitoring/default_rules/gcp-gcs-bucket-enumerated
 ---
 
 ## Overview

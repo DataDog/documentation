@@ -22,6 +22,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
   tag: "Blog"
   text: "Monitor 1Password with Datadog Cloud SIEM"
+cascade:
+_target:
+  path: cloud_siem/investigator.md
+aliases:
+  - /security_monitoring/coolbeans
 ---
 ## Overview
 
