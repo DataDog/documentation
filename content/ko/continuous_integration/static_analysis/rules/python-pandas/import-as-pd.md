@@ -24,7 +24,7 @@ import pandas as pd
 
 ## 규정 비준수 코드 예
 ```python
-import pandas # should use import pandas as pd
+import pandas # pandas 가져오기를 pd로 사용해야 함
 
 
 import pandas as foo
