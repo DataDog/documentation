@@ -352,17 +352,31 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
-### DD_SERVICE_MAPPING
+### Renaming upstream and downstream services
 
-`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda [services names][46]. It operates with `old-service:new-service` pairs.
+This section explains how to rename both upstream and downstream services using specific environment variables. You can use these mappings for more clarity in your instrumentation or for easier identification in your data visualization.
+
+#### Overview
+
+- `DD_SERVICE_MAPPING` allows renaming of upstream non-Lambda services.
+- `DD_TRACE_PEER_SERVICE_MAPPING` enables the remapping of the `peer.service` tag across all instrumentation.
+
+Both mappings operate using the format: `old-name:new-name`. Multiple pairs can be defined using a comma to separate them.
 
 #### Syntax
 
-`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
+- For upstream services: `DD_SERVICE_MAPPING=old-name1:new-name1,old-name2:new-name2,...`
+- For downstream services: `DD_TRACE_PEER_SERVICE_MAPPING=old-name1:new-name1,old-name2:new-name2,...`
 
-There are two ways to interact with this variable:
+#### Examples with description
 
-#### Rename all services of a type
+| Command | Description |
+|---|---|
+| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
+| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
+| `DD_TRACE_PEER_SERVICE_MAPPING="old-service1:new-service1"` | Remaps `old-service1` downstream to `new-service1` |
+
+#### Rename all services of a type (Upstream)
 
 To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
 
@@ -377,7 +391,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
 
-#### Rename specific services
+#### Rename specific services (Upstream)
 
 For a more granular approach, use these service-specific identifiers:
 
@@ -392,14 +406,7 @@ For a more granular approach, use these service-specific identifiers:
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-#### Examples with description
-
-| Command | Description |
-|---|---|
-| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
-| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
-
-For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][45].
+For more details on renaming downstream services, see `DD_TRACE_PEER_SERVICE_MAPPING` in the [tracer's config documentation][45]. To learn more about upstream non-Lambda service renaming, consult the [services names documentation][46].
 
 ## Filter or scrub information from logs
 
