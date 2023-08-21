@@ -31,7 +31,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility Setup
+### Test visibility setup
 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Javascript and Typescript][2]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
@@ -46,46 +46,18 @@ You or a user in your organization with "Intelligent Test Runner Activation" per
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-#### Additional Datadog Agent configuration
-
-In addition to the [Datadog API Key][1], the [Datadog Application key][2] must be specified in the [Agent Configuration File][3]
-
-`app_key` (Required)
-: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-`api_key` (Required)
-: The [Datadog API key][1] used to upload the test results.<br/>
-**Default**: `(empty)`
+{{% ci-itr-agent %}}
 
 After configuring the Datadog Agent, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 {{< /code-block >}}
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://app.datadoghq.com/organization-settings/application-keys
-[3]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
-#### Environment variables
-
-To enable Intelligent Test Runner in Agentless mode, set the following environment variables:
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][1] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][2] used to upload the test results.<br/>
-**Default**: `(empty)`
+{{% ci-itr-agentless %}}
 
 After setting these environment variables, run your tests as you normally do:
 
@@ -93,8 +65,6 @@ After setting these environment variables, run your tests as you normally do:
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY DD_APPLICATION_KEY=$DD_APPLICATION_KEY yarn test
 {{< /code-block >}}
 
-[1]: /organization-settings/application-keys
-[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
 {{< /tabs >}}
