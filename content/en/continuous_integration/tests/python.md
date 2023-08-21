@@ -30,7 +30,7 @@ Supported test frameworks:
 * pytest-benchmark >= 3.1.0
   * Python >= 3.7
 * unittest >= Python 2.7
-  
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Python library:
@@ -93,6 +93,7 @@ def test_square_value(benchmark):
 ### Using unittest
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+It is important to note to set `DD_CIVISIBILITY_UNITTEST_ENABLED` to `true` in order to enable the `unittest` integration.
 
 {{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci ddtrace-run python -m unittest
@@ -109,7 +110,7 @@ class MyTest(unittest.TestCase):
     def test_will_pass(self):
         assert True
 {{< /code-block >}}
-  
+
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
