@@ -16208,6 +16208,17 @@ components:
     TeamAttributes:
       description: Team attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         created_at:
           description: Creation date of the team
           format: date-time
@@ -16221,6 +16232,12 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         link_count:
           description: The number of links belonging to the team
           format: int32
@@ -16247,6 +16264,12 @@ components:
           maximum: 2147483647
           readOnly: true
           type: integer
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16267,6 +16290,17 @@ components:
     TeamCreateAttributes:
       description: Team creation attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -16275,11 +16309,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16550,6 +16596,17 @@ components:
     TeamUpdateAttributes:
       description: Team update attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         color:
           description: An identifier for the color representing the team
           format: int32
@@ -16564,11 +16621,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
