@@ -7869,7 +7869,8 @@ components:
       description: Paging settings
       properties:
         cursor:
-          description: The returned paging point to use to get the next results
+          description: 'The returned paging point to use to get the next results.
+            Note: at most 1000 results can be paged.'
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
@@ -8354,7 +8355,11 @@ components:
           $ref: '#/components/schemas/LogsGroupByHistogram'
         limit:
           default: 10
-          description: The maximum buckets to return for this group by
+          description: 'The maximum buckets to return for this group by. Note: at
+            most 10000 buckets are allowed.
+
+            If grouping by multiple facets, the product of limits must not exceed
+            10000.'
           format: int64
           type: integer
         missing:
@@ -8369,7 +8374,7 @@ components:
     LogsGroupByHistogram:
       description: 'Used to perform a histogram computation (only for measure facets).
 
-        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+        Note: at most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
       properties:
         interval:
           description: The bin size of the histogram buckets
@@ -8747,7 +8752,7 @@ components:
     LogsQueryOptions:
       description: 'Global query options that are used during the query.
 
-        Note: You should only supply timezone or time offset but not both otherwise
+        Note: you should supply either timezone or time offset, but not both. Otherwise,
         the query will fail.'
       properties:
         timeOffset:
@@ -8791,7 +8796,7 @@ components:
       properties:
         after:
           description: 'The cursor to use to get the next results, if any. To make
-            the next request, use the same.
+            the next request, use the same
 
             parameters with the addition of the `page[cursor]`.'
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
@@ -16203,6 +16208,17 @@ components:
     TeamAttributes:
       description: Team attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         created_at:
           description: Creation date of the team
           format: date-time
@@ -16216,6 +16232,12 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         link_count:
           description: The number of links belonging to the team
           format: int32
@@ -16242,6 +16264,12 @@ components:
           maximum: 2147483647
           readOnly: true
           type: integer
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16262,6 +16290,17 @@ components:
     TeamCreateAttributes:
       description: Team creation attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -16270,11 +16309,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16545,6 +16596,17 @@ components:
     TeamUpdateAttributes:
       description: Team update attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         color:
           description: An identifier for the color representing the team
           format: int32
@@ -16559,11 +16621,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name

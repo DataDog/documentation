@@ -154,6 +154,6 @@ You can choose to set your organization homepage to a Dashboard List or an indiv
 [9]: /account_management/rbac/
 [10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
-[12]: /events/guides/email/
+[12]: /service_management/events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview
 [14]: /account_management/org_settings/oauth_apps

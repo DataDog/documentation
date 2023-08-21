@@ -224,5 +224,5 @@ If needed, configure the tracing library to send application performance telemet
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[11]: /tracing/_trace_collection/library_injection_local/
-[12]: /tracing/_trace_collection/library_injection_remote/
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/

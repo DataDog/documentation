@@ -110,7 +110,7 @@ restart-service -Force datadogagent
   `datadog.conf` が更新された後、Windows サービスマネージャーから Datadog サービスを再起動します。
 
 
-[1]: https://windows-agent.datadoghq.com/ddagent-cli-latest.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [2]: https://app.datadoghq.com/account/settings/agent/5?platform=overview
 [3]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
 [4]: /ja/agent/versions/upgrade_to_agent_v6/?tab=linux

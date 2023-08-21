@@ -76,92 +76,92 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : TCP: `agent-intake.logs.datadoghq.com`<br>
 HTTP: `agent-http-intake.logs.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][203]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `tcp-encrypted-intake.logs.datadoghq.com`<br>
 `lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.datadoghq.com`<br>
 `http-encrypted-intake.logs.datadoghq.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[203]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="eu" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : TCP: `agent-intake.logs.datadoghq.eu`<br>
 HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `tcp-encrypted-intake.logs.datadoghq.eu`<br>
 `lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
 `gcp-encrypted-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.datadoghq.eu`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="ap1" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
 `gcp-encrypted-intake.logs.ddog-gov.com`<br>
 `http-encrypted-intake.logs.ddog-gov.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 All other Agent data
@@ -441,7 +441,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [2]: /database_monitoring/
 [3]: /infrastructure/livecontainers/
 [4]: /infrastructure/process/
-[5]: /infrastructure/livecontainers/#kubernetes-resources-1
+[5]: /infrastructure/containers/#kubernetes-orchestrator-explorer
 [6]: /real_user_monitoring/
 [7]: /profiler/
 [8]: /synthetics/private_locations

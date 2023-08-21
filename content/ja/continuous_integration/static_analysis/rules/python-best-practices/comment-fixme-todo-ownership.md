@@ -29,11 +29,19 @@ def my_function():
 
 ## 準拠コードの例
 ```python
-# TODO(bob) この関数を修正します
+# TODO(bob) この関数を修正
 def my_function():
     pass
 
-# FIXME(julien) この関数を修正します
+# FIXME(julien) この関数を修正
 def my_other_function():
+    pass
+
+# FIXME[julien] この関数を修正
+def my_other_function():
+    pass
+
+# TODO[bob] この関数を修正
+def my_function():
     pass
 ```
