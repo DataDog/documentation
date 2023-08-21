@@ -3045,6 +3045,11 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 20
+  - name: Workflow Automation
+    url: security/cloud_security_management/workflows
+    parent: csm
+    identifier: csm_workflow_automation
+    weight: 23
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
