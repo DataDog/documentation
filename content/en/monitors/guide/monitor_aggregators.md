@@ -15,7 +15,9 @@ further_reading:
 ## Overview
 Configure your monitor query to send alerts based on how the data is aggregated with one of the four aggregation methods: average, maximum, minimum, and sum. For this guide, take the same example metric values over a 10 minute evaluation window and apply the different aggregators to see how each monitor would react. 
 
-All the examples assume that the monitor alerts when the values are *above* a certain threshold. 
+All the examples assume that:
+- Queries are calculated with the [`classic_eval_path`][9].
+- The monitor alerts when the values are *above* a certain threshold. 
 
 {{< img src="monitors/guide/monitor_aggregators/metric_values_example.png" alt="Example metric values over a 10 minute evaluation window [10, 15, 12, 8, 11, 14, 13, 25, 37, 45, 50]" style="width:100%;" >}}
 
@@ -72,3 +74,4 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/guide/as-count-in-monitor-evaluations
+[9]: /monitors/guide/as-count-in-monitor-evaluations/#2-ways-to-calculate
