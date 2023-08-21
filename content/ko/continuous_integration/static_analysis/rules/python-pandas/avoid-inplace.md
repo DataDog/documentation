@@ -20,12 +20,12 @@ title: inplace=True를 사용하지 마십시오.
 
  - [pandas inplace=True를 사용하지 말아야 하는 이유](https://towardsdatascience.com/why-you-should-probably-never-use-pandas-inplace-true-9f9f211849e4?gi=ae387a166946)
 
-## 비준수 코드 예
+## 규정 비준수 코드 예
 ```python
 df.drop(['a'], axis=1, inplace=True)
 ```
 
-## 준수 코드 예
+## 규정 준수 코드 예
 ```python
 df.drop(['a'], axis=1, inplace=False)
 ```
