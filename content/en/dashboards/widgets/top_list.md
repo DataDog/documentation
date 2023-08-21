@@ -16,7 +16,7 @@ further_reading:
   text: "Context Links"
 ---
 
-The top list visualization enables you to display a list of Tag values like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc:
+The top list visualization enables you to display a list of Tag values with the most or least of any metric or event value, such as highest consumers of CPU, hosts with the least disk space, or cloud products with the highest costs.
 
 ## Setup
 
