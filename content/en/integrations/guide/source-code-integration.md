@@ -234,7 +234,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can directly access a trace in its source repository on the Git provider in the [Continuous Profiler][1].
+You can see links from profile frames to their source repository in the [Continuous Profiler][1].
 
 1. Navigate to [**APM** > **Profile Search**][2].
 2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears on the right.
