@@ -159,7 +159,7 @@ When set to `true` db spans get assigned the instance name as the service name
 `dd.trace.elasticsearch.body-and-params.enabled`
 : **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_AND_PARAMS_ENABLED` <br>
 **Default**: `false`<br>
-When set to `true` the body and query string parameters get added to Elasticsearch and OpenSearch spans
+When set to `true`, the body and query string parameters are added to Elasticsearch and OpenSearch spans.
 
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
