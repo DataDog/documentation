@@ -19,11 +19,22 @@ window.addEventListener('load', function () {
         
         // update Cookie link
         this.setTimeout(function () {
+            const banner = document.getElementById('consent-banner');
             const prefsElement = document.getElementById('teconsent');
             const cookieLink = document.querySelector('footer a[href*="/cookies"]');
 
+            if (banner) {
+                // listen for click and remove banner to avoid interfering with 
+                document.addEventListener('click', function (event) {
+                    var targetElement = event.target;
+                    if (targetElement.matches('#truste-consent-required') || targetElement.matches('#truste-consent-button')) {
+                        banner.remove();
+                    }
+                });
+            }
+
             // replace Cookie link with Prefs div
             return (cookieLink && document.getElementById('teconsent').innerHTML.length > 0) ? cookieLink.replaceWith(prefsElement) : false;
-        }, 500);
+        }, 200);
     }
 });
