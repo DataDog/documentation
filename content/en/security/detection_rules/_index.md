@@ -5,6 +5,7 @@ aliases:
   - /security_monitoring/detection_rules/
   - /cloud_siem/detection_rules/
   - /security_platform/detection_rules/
+  - /security/security_monitoring/log_detection_rules/
 further_reading:
 - link: "/cloud_siem/default_rules"
   tag: "Documentation"
@@ -117,8 +118,8 @@ The rule deprecation process is as follows:
 [1]: /security/default_rules/
 [2]: /security/cloud_siem/
 [3]: /security/cloud_siem/log_detection_rules/
-[4]: /security/cspm/
-[5]: /security/cloud_workload_security/
+[4]: /security/misconfigurations/
+[5]: /security/threats/
 [6]: /security/application_security/
 [7]: /tracing/
 [8]: /agent/

@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 algolia:
   tags: ['inbox']
 ---
@@ -38,17 +41,20 @@ You can create or update cases from several other locations in Datadog:
 
 Find [Case Management][1] in the Service Management menu.
 
-### Filter cases
+### Filter cases with Inboxes
 
 Use **Inboxes** to filter the list of cases to the ones most relevant to your work. Datadog automatically creates inboxes with filters for cases assigned to you, created by you, or associated with your [Teams][2].
 
-{{< img src="/service_management/case_management/add_new_inbox.png" alt="Inboxes left panel highlighting the option to add new inboxes" style="width:100%;" >}}
+{{< img src="/service_management/case_management/add_new_inbox.png" alt="Inboxes left panel highlighting the option to add new inboxes" style="width:85%;" >}}
 
 To filter cases based on a search query, create a custom inbox:
 1. On the [Case Management page][1], next to **Other Inboxes**, click **Add**. The [Create a new inbox][3] page appears.
 1. Give the inbox a **Name**
 1. In the search box, enter a query. The **Inbox Preview** refreshes to show you the cases that match the current search query.
+1. (Optional) Send a notification with third-party tools such as Slack, PagerDuty, or Webhooks. Click **+ Add Recipient Type** and select from the pre-configured channels or recipients. A notification is sent every time a case matching the query is created.
 1. Click **Save Inbox**.
+
+{{< img src="service_management/case_management/inbox_config.png" alt="Inbox configuration displaying third-party notification options" style="width:100%;" >}}
 
 ### Bulk actions
 

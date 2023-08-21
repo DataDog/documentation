@@ -155,7 +155,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : **TracerSettings プロパティ**: `GlobalSamplingRate` <br>
 **デフォルト**: デフォルトは、Datadog Agent から返される率です<br>
 取り込み率コントロールを有効にします。このパラメーターは、サンプリングするスパンのパーセンテージを表す浮動小数点数です。有効な値は `0.0` から `1.0` までです。
-詳しくは、[取り込みメカニズム][6]を参照してください。
+詳しくは、[取り込みメカニズム][6]を参照してください。<br><br>
+**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_SAMPLE_RATE` を設定できます。
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings プロパティ**: `CustomSamplingRules`<br>
@@ -182,7 +183,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : **TracerSettings プロパティ**:`HeaderTags` <br>
 大文字と小文字を区別しないヘッダーキーとタグ名のキーと値のペアのカンマ区切りリストを受け入れ、一致するヘッダー値をルートスパンのタグとして自動的に適用します。特定のタグ名のないエントリも受け入れます。<br>
 **例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。
+バージョン 1.18.3 で追加されました。レスポンスヘッダーのサポートとタグ名なしのエントリはバージョン 1.26.0 で追加されました。<br><br>
+**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_TRACE_HEADER_TAGS` を設定できます。
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : 関連する IP ヘッダーからクライアント IP を収集できるようにします。<br>
@@ -252,7 +254,8 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_LOGS_INJECTION`
 : **TracerSettings プロパティ**: `LogsInjectionEnabled` <br>
 アプリケーションログに相関識別子を自動的に注入することを有効または無効にします。 <br>
-ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。
+ロガーは `trace_id` のマッピングを正しく設定する `source` を持つ必要があります。.NET アプリケーションのデフォルトのソースである `csharp` は、自動的にこれを行います。詳しくは、[トレース ID パネルの相関するログ][5]を参照してください。<br><br>
+**ベータ版**: バージョン 2.35.0 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] の UI で `DD_LOGS_INJECTION` を設定できます。
 
 `DD_RUNTIME_METRICS_ENABLED`
 : .NET ランタイムメトリクスを有効にします。有効な値は `true` または `false` です。<br>
@@ -315,7 +318,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 [3]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /ja/getting_started/tagging/unified_service_tagging/
 [5]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#head-based-sampling
+[6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#head-based-sampling
 [7]: /ja/tracing/trace_collection/compatibility/dotnet-framework/#integrations
 [8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
@@ -324,3 +327,5 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 [13]: /ja/agent/guide/network/#configure-ports
 [14]: /ja/tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /ja/tracing/configure_data_security#telemetry-collection
+[16]: /ja/agent/remote_config/
+[17]: https://app.datadoghq.com/services

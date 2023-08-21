@@ -7,6 +7,7 @@ aliases:
   - /guides/monitoring/
   - /guides/alerting/
   - /guides/monitors/the-conditions
+  - /monitoring
 description: "Create monitors, notify your teams when it matters, and manage your monitors using the alerting platform"
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Alerting"

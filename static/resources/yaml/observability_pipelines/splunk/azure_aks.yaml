@@ -108,6 +108,7 @@ pipelineConfig:
       inputs:
         - logs_enrich
       default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
       compression: gzip
       buffer:
           type: disk
