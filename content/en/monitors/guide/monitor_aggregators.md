@@ -16,7 +16,7 @@ further_reading:
 Configure your monitor query to send alerts based on how the data is aggregated with one of the four aggregation methods: average, maximum, minimum, and sum. For this guide, take the same example metric values over a 10 minute evaluation window and apply the different aggregators to see how each monitor would react. 
 
 All the examples assume that:
-- Queries are calculated with the [`classic_eval_path`][9].
+- Queries are calculated with the [`classic_eval_path`][1].
 - The monitor alerts when the values are *above* a certain threshold. 
 
 {{< img src="monitors/guide/monitor_aggregators/metric_values_example.png" alt="Example metric values over a 10 minute evaluation window [10, 15, 12, 8, 11, 14, 13, 25, 37, 45, 50]" style="width:100%;" >}}
@@ -59,7 +59,7 @@ You want a monitor to alert if the minimum metric value is above 10 at any point
 **ALERT** state, the value at 3:01 (15) is above 10.
 
 ## Sum
-The monitor takes the values in the evaluation window and compares **the sum value** against the defined threshold. This aggregator adds the value of each data point, not the number of data points. A use case would be for a metric that counts occurrences of errors or restarts. This is why *as_count()* metrics have to use the sum aggregator. For more information, see the [as_count() in monitor evaluations][1] guide.
+The monitor takes the values in the evaluation window and compares **the sum value** against the defined threshold. This aggregator adds the value of each data point, not the number of data points. A use case would be for a metric that counts occurrences of errors or restarts. This is why *as_count()* metrics have to use the sum aggregator. For more information, see the [as_count() in monitor evaluations][2] guide.
 
 ##### Example
 You want a monitor to send a notification when the sum of values over the past 10 minutes goes over 250. What state is this monitor in at minute 3:10?
@@ -73,5 +73,5 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/guide/as-count-in-monitor-evaluations
-[9]: /monitors/guide/as-count-in-monitor-evaluations/#2-ways-to-calculate
+[1]: /monitors/guide/as-count-in-monitor-evaluations/#2-ways-to-calculate
+[2]: /monitors/guide/as-count-in-monitor-evaluations
