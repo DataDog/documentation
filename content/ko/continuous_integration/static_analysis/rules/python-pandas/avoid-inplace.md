@@ -2,7 +2,7 @@
 dependencies: []
 disable_edit: true
 kind: documentation
-title:  inplace=True를 사용하지 마십시오.
+title: inplace=True를 사용하지 마십시오.
 ---
 ## 메타데이터
 **ID:** `python-pandas/avoid-inplace`
@@ -15,9 +15,6 @@ title:  inplace=True를 사용하지 마십시오.
 
 ## 설명
 `inplace=True`는 성능에 명확한 영향을 미치지 않고, 잠재적으로 위험하며, 정상적으로 작동하지 않으므로 사용하지 않는 것이 좋습니다.
-
-
-
 
 #### 자세히 알아보기
 
