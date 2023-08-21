@@ -51,7 +51,7 @@ The following example shows how to create a static analysis rule that fails when
 
 ## Invoking quality gates
 
-To use quality gates, your [`datadog-ci`][7] version should be higher or equal than `2.19.0`.
+To use quality gates, your [`datadog-ci`][7] version should be `2.19.0` or later.
 
 You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
