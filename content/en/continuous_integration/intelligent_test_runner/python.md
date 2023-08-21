@@ -36,39 +36,22 @@ You, or a user in your organization with "Intelligent Test Runner Activation" pe
 {{< tabs >}}
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-#### Additional Datadog Agent configuration
-
-The [Datadog Application key][2] must be specified in the [Agent Configuration File][1]
-
-`app_key` (Required)
-: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-[1]: /agent/guide/agent-configuration-files
-[2]: https://app.datadoghq.com/organization-settings/application-keys
+{{% ci-itr-agent %}}
 {{% /tab %}}
 
-{{% tab "Cloud CI provider (Agentless)" %}}
-### Environment variable
-The [Datadog Application key][1] must be set using the `DD_APP_KEY` environment variable to enable the Intelligent Test Runner:
-
-`DD_APP_KEY` (Required)
-: The [Datadog Application key][1] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
-[1]: https://app.datadoghq.com/organization-settings/application-keys
+{{% tab "Cloud CI Provider (Agentless)" %}}
+{{% ci-itr-agentless %}}
 {{% /tab %}}
 
 {{< /tabs >}}
 
-
 ## Running tests with the Intelligent Test Runner enabled
 
 ### Environment variable
-<div class="alert alert-info">Setting DD_CIVISIBILITY_AGENTLESS_ENABLED to true is required while the Intelligent Test Runner support for pytest is in beta. </div>
+<div class="alert alert-info">Setting DD_CIVISIBILITY_ITR_ENABLED to true is required while the Intelligent Test Runner support for pytest is in beta. </div>
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED` (Optional)
-: Run the Intelligent Test Runner in agentless mode (also applies to test visibility).
+`DD_CIVISIBILITY_ITR_ENABLED` (Optional)
+: Enable the Intelligent Test Runner coverage and test skipping features<br />
 **Default**: `(false)`
 
 After completing setup, run your tests as you normally do:
