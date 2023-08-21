@@ -62,7 +62,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
 
 
-## Common Use Cases
+## Common use cases
 
 ### Add custom attributes to the current or local root span
 
