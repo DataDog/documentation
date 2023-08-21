@@ -81,7 +81,8 @@ The behavior of the command can be modified using the following flags:
 based on the current pipeline context. By default, the command succeeds.
 - `--fail-if-unavailable`: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
-- `--timeout`: the command will stop its execution after the specified timeout in seconds. The default timeout is 10 minutes.
+- `--timeout`: the command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes.
+The command typically completes within a few minutes, but it could take longer due to processing delays in Datadog.
 - `--no-wait`: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
