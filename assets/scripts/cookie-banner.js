@@ -26,7 +26,7 @@ window.addEventListener('load', function () {
             if (banner) {
                 // listen for click and remove banner to avoid interfering with 
                 document.addEventListener('click', function (event) {
-                    var targetElement = event.target;
+                    const targetElement = event.target;
                     if (targetElement.matches('#truste-consent-required') || targetElement.matches('#truste-consent-button')) {
                         banner.remove();
                     }
