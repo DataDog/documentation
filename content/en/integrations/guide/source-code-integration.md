@@ -220,7 +220,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
-You can directly access a trace in its source repository on the Git provider in [Error Tracking][1].
+You can see links from stack frames to their source repository in [Error Tracking][1].
 
 1. Navigate to [**APM** > **Error Tracking**][2].
 2. Click on an issue. The **Issue Details** panel appears on the right.
