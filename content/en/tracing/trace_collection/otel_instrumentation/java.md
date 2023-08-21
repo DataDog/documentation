@@ -77,7 +77,7 @@ Span rootSpan = Context.current().get(localRootSpanKey);
 rootSpan.setAttributes("some-key", "some-value");
 ```
 
-**Note:** When no current or local root span, the returned span will not be `null` but invalid, and attributes will not be set.
+**Note:** If there isn't a current or local root span, the returned span is invalid, not `null`, and attributes are not set.
 
 ## Further Reading
 
