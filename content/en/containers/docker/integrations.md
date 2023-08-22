@@ -47,7 +47,7 @@ Each tab in sections below shows a different way to apply integration templates 
 * [A configuration file mounted within the Agent](?tab=file#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
 
-**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint.
+**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the container, and then use Autodiscovery in the Agent to find the container and query the endpoint.
 
 ## Configuration
 
