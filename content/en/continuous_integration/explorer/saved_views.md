@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the [CI Visibility Explorer][2] (Pipeline Executions and Test Runs pages) and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [CI Visibility Explorer][2] ([**Pipeline Executions**][3] and [**Test Runs** pages][1]) and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
 
 Saved views can keep track of your:
 
@@ -71,3 +71,4 @@ In the default view entry in the **Views** panel, you can:
 
 [1]: https://app.datadoghq.com/ci/test-runs
 [2]: /continuous_integration/explorer/
+[3]: https://app.datadoghq.com/ci/pipeline-executions
