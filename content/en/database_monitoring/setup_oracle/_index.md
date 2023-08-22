@@ -21,43 +21,29 @@ The features described on this page are in beta. Contact your Customer Success M
 
 ## Prerequisites
 
-### Install the Oracle integration
-
-On the [Integrations][1] page in Datadog, install the [Oracle integration][2] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
-
-### Upgrade the Oracle integration in your Agent
-
-You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
-
-Use the following command to migrate the Oracle integration from the legacy integration to the new one:
-
-```shell
-cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
-```
-
-Deactivate the legacy integration:
-
-```shell
-mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
-```
-
-Deactivating the legacy integration prevents sending the system metrics twice.
-
-Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
-
 ### Install the Agent
 
 To start collecting Oracle telemetry, first install the Datadog Agent.
+
+### Oracle client
+
+The Agent doesn't require any external Oracle clients.
 
 #### Host requirements
 
 The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
 
-#### Agent version
+#### Recommended Agent version
 
-Datadog recommends you install the version listed in the [Latest Agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
+Datadog recommends you install the version listed below:
+- Linux: `7.46.0~dbm~oracle~beta~0.33-1`
+- Windows: `7.46.0-dbm-oracle-beta-0.33-1`
+- Docker: `7.46.0-dbm-oracle-beta-0.33`
 
-If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. If the latest Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
+These contain all the implemented Oracle monitoring features and bug fixes.
+
+- If the recommended Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. 
+- If the recommended Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
 
 #### Beta build installation
 
@@ -106,9 +92,29 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 {{% /tab %}}
 {{< /tabs >}}
 
-### Oracle client
+### Install the Oracle integration
 
-The Agent doesn't require any external Oracle clients.
+On the [Integrations][1] page in Datadog, install the [Oracle integration][2] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
+
+### Upgrade the Oracle integration in your Agent
+
+You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
+
+Use the following command to migrate the Oracle integration from the legacy integration to the new one:
+
+```shell
+cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
+```
+
+Deactivate the legacy integration:
+
+```shell
+mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
+```
+
+Deactivating the legacy integration prevents sending the system metrics twice.
+
+Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
 
 ### Upgrading from a previous Agent release
 
