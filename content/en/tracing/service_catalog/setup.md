@@ -91,6 +91,10 @@ Upon import, the following occurs:
 - `metadata.description` gets mapped to `description`
 - Other `specs` values get mapped to custom tags
 
+## Import data from ServiceNow
+
+You can populate your Datadog Service Catalog with services from your ServiceNow CMDB with Service Ingestion feature in ServiceNow integration. Learn about how to start [here][16].
+
 
 ## Discover services being reported in other Datadog telemetry data
 
@@ -123,4 +127,4 @@ To remove your imported services from the default **Explore** view, click **Clea
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
-
+[16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
