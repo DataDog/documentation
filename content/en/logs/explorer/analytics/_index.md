@@ -40,7 +40,7 @@ Aggregations are supported for **indexed logs only**. If you need to perform agg
 
 ## Group logs by fields
 
-When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the value of one or multiple log facets. 
+When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the query search values. 
 
 On top of these aggregates, you can extract the following measures:
 
@@ -48,7 +48,7 @@ On top of these aggregates, you can extract the following measures:
 - **unique count** of coded values for a facet per group
 - **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group
 
-Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
+Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
 ### Visualize log groups
 
