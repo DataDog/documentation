@@ -21,13 +21,13 @@ The features described on this page are in beta. Contact your Customer Success M
 
 ## Prerequisites
 
+### Overview
+- An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be [installed](#install-the-agent).
+- If you are upgrading from a previous Agent version, additional [upgrade steps](#upgrade-from-a-previous-agent-release) are required.
+- The Oracle integration must be [installed](#install-the-oracle-integration). 
+- Existing installations of the the Oracle integration may require an update to [your Agent configuration](#upgrade-the-oracle-integration-in-your-agent), depending on when the integration was originally installed.
+
 ### Install the Agent
-
-To start collecting Oracle telemetry, first install the Datadog Agent.
-
-### Oracle client
-
-The Agent doesn't require any external Oracle clients.
 
 #### Host requirements
 
@@ -45,12 +45,16 @@ These contain all the implemented Oracle monitoring features and bug fixes.
 - If the recommended Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. 
 - If the recommended Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
 
+### Oracle client
+
+The Agent doesn't require any external Oracle clients.
+
 #### Beta build installation
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The repository with RHEL and Ubuntu beta builds are [here][6] and [here][7], respectively. The `7.46.0~dbm~oracle~beta~0.33-1` build contains Oracle DBM features.
+The repository with RHEL and Ubuntu beta builds are [here][6] and [here][7], respectively.
 
 Set `DD_API_KEY` and run the following commands to install the beta release, for example:
 
@@ -66,7 +70,7 @@ DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-The repository with Windows builds is [here][8]. The `7.46.0-dbm-oracle-beta-0.33-1` build contains Oracle DBM features.
+The repository with Windows builds is [here][8].
 
 Download the MSI file for the [beta build][4].
 
@@ -80,7 +84,7 @@ start /wait msiexec /qn /i datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.ms
 
 {{% /tab %}}
 {{% tab "Docker" %}}
-The Docker beta images can be found [here][9]. The `7.46.0-dbm-oracle-beta-0.33` build contains Oracle DBM features.
+The Docker beta images can be found [here][9].
 
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
@@ -91,6 +95,10 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 [9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
 {{% /tab %}}
 {{< /tabs >}}
+
+### Upgrade from a previous Agent release
+
+Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
 ### Install the Oracle integration
 
@@ -115,10 +123,6 @@ mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 Deactivating the legacy integration prevents sending the system metrics twice.
 
 Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
-
-### Upgrading from a previous Agent release
-
-Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
 ## Custom queries
 
