@@ -50,7 +50,12 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 ## Limitations
 
 <div class="alert alert-warning"><p>
-Datadog can accept uploads up to 300 MB (except AP1 and GovCloud sites, where the limit is 50 MB).
+{{< site-region region="us,us3,us5,eu" >}}
+Datadog can accept uploads up to 300 MB.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Datadog can accept uploads up to 50 MB.
+{{< /site-region >}}
 </p></div>
 
 To compute the size of your source maps and bundle, run the following command:
