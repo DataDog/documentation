@@ -49,21 +49,22 @@ Since the Agent doesn't require an external Oracle client, remove the `jdbc_driv
 
 To start collecting Oracle telemetry, first install the Datadog Agent.
 
+#### Host requirements
+
 The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
+
+#### Agent version
 
 Datadog recommends you install the version listed in the [Latest Agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
 
-If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build](#beta-build).
+If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. If the latest Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
 
-#### Official release
+#### Beta build installation
 
-Follow the [instructions for your platform][3].
+{{< tabs >}}
+{{% tab "Linux" %}}
 
-#### Beta build
-
-##### Linux
-
-The repository with RHEL and Ubuntu beta builds are [here][6] and [here][7], respectively.
+The repository with RHEL and Ubuntu beta builds are [here][6] and [here][7], respectively. The `7.46.0~dbm~oracle~beta~0.33-1` build contains Oracle DBM features.
 
 Set `DD_API_KEY` and run the following commands to install the beta release, for example:
 
@@ -74,9 +75,12 @@ export DD_AGENT_MINOR_VERSION="46.0~dbm~oracle~beta~0.33-1"
 DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-##### Windows
+[6]: https://yum.datadoghq.com/beta/7/x86_64/
+[7]: https://apt.datadoghq.com/dists/beta/7/
+{{% /tab %}}
+{{% tab "Windows" %}}
 
-The repository with Windows builds is [here][8].
+The repository with Windows builds is [here][8]. The `7.46.0-dbm-oracle-beta-0.33-1` build contains Oracle DBM features.
 
 Download the MSI file for the [beta build][4].
 
@@ -85,10 +89,12 @@ Set `APIKEY` and run the following command in the command prompt inside the dire
 ```shell
 start /wait msiexec /qn /i datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.msi APIKEY="" SITE="datadoghq.com"
 ```
+[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.msi
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/
 
-##### Docker
-
-The Docker beta images can be found [here][9].
+{{% /tab %}}
+{{% tab "Docker" %}}
+The Docker beta images can be found [here][9]. The `7.46.0-dbm-oracle-beta-0.33` build contains Oracle DBM features.
 
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
@@ -96,12 +102,9 @@ Set `DD_API_KEY` and run the following command to install the beta release, for 
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.46.0-dbm-oracle-beta-0.33
 ```
 
-##### Latest Agent version
-
-The following beta builds contain implemented Oracle DBM features:
-- Linux: `7.46.0~dbm~oracle~beta~0.33-1`
-- Windows: `7.46.0-dbm-oracle-beta-0.33-1`
-- Docker: `7.46.0-dbm-oracle-beta-0.33`
+[9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Oracle client
 
@@ -126,11 +129,6 @@ For setup instructions, select your hosting type:
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.msi
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
-[6]: https://yum.datadoghq.com/beta/7/x86_64/
-[7]: https://apt.datadoghq.com/dists/beta/7/
-[8]: https://ddagent-windows-stable.s3.amazonaws.com/
-[9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
 [10]: /database_monitoring/architecture/
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
