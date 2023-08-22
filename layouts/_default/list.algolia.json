@@ -30,7 +30,7 @@
             {{ $filtered_full_page_content := delimit $filtered_content_array " " }}
             {{ $filtered_full_page_content = $filtered_full_page_content | plainify | htmlUnescape | safeHTML | truncate 10000 }}
 
-            {{ /* record for each individual section (split by h2 header) */ }}
+            {{/* record for each individual section (split by h2 header) */}}
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
 
             {{- /* Full page record */ -}}
