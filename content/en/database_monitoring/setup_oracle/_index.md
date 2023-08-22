@@ -23,7 +23,7 @@ The features described on this page are in beta. Contact your Customer Success M
 
 ### Install the Oracle integration
 
-On the [Integrations][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an [Oracle dashboard][5] in your account which can be used to monitor the performance of your Oracle databases.
+On the [Integrations][1] page in Datadog, install the [Oracle integration][2] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
 
 ### Upgrade the Oracle integration in your Agent
 
@@ -88,7 +88,7 @@ start /wait msiexec /qn /i datadog-agent-7.46.0-dbm-oracle-beta-0.33-1.x86_64.ms
 
 ##### Docker
 
-The docker beta images can be found [here][9].
+The Docker beta images can be found [here][9].
 
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
