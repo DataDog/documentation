@@ -55,7 +55,7 @@ You can:
 
 ## Default views
 
-You can set a [saved view](#saved-views) to be your default landing page in the [CI Visibility Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [CI Visibility Explorer][2]. Default views are set per user and have no impact on your organization. 
 
 Temporarily override your default saved view by completing an action in the UI or opening links in the Explorer that embeds a different configuration.
 
