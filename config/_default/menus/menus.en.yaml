@@ -2945,6 +2945,21 @@ main:
     parent: csm
     identifier: csm_setup
     weight: 1
+  - name: CSM Enterprise
+    url: security/cloud_security_management/setup/csm_enterprise
+    parent: csm_setup
+    identifier: csm_setup_enterprise
+    weight: 10000
+  - name: CSM Pro
+    url: security/cloud_security_management/setup/csm_pro
+    parent: csm_setup
+    identifier: csm_setup_pro
+    weight: 10005
+  - name: CSM Workload Security
+    url: security/cloud_security_management/setup/workload_security
+    parent: csm_setup
+    identifier: csm_setup_workload_security
+    weight: 10010
   - name: Threats
     url: security/threats/
     parent: csm
