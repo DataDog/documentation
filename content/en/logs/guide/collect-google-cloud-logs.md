@@ -40,12 +40,11 @@ For applications running in GCE or GKE, the [Datadog Agent][13] can be used to c
 
 2. Give that topic an explicit name such as `export-logs-to-datadog` and click _Create_.
 
+**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on how to set up a monitor to be automatically notified if you get close to those limits.
+
 ### Subscription to Google Cloud Pub/Sub
 
-1. [Setup the Pub/Sub to forward logs to Datadog](#forward-logs-to-datadog).
-2. [Configure exports from Google Cloud logs to the Pub/Sub](#export-logs-from-google-cloud).
-
-**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on how to set up a monitor to be automatically notified if you get close to those limits.
+This method uses a subscription with a **Push** delivery type.
 
 #### Forward logs to Datadog
 
