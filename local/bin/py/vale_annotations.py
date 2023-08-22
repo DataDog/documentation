@@ -6,6 +6,8 @@ import sys
 
 log_list = []
 
+# TODO: Only check modified lines
+
 def parse_log(log_filename, log_data):
     severity = log_data.get('Severity')
     line = log_data.get('Line')
