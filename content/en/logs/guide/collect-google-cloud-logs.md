@@ -21,7 +21,7 @@ Pulling logs from a Google Cloud Pub/Sub topic with the Datadog Dataflow templat
 
 You can collect your Google Cloud logs in Datadog by pushing them through a subscription to a [Google Cloud Pub/Sub][10] topic or by pulling them from the topic with the [Datadog Dataflow template][11] (beta).
 
-For applications running in GCE or GKE, the Datadog Agent can be used to collect logs locally. GCP service logs are collected with Google Cloud Logging and sent to a Cloud Pub/Sub with a HTTP Push forwarder. 
+For applications running in GCE or GKE, the [Datadog Agent][13] can be used to collect logs locally. GCP service logs are collected with Google Cloud Logging and sent to a Cloud Pub/Sub with a HTTP Push forwarder. 
 
 ## Setup
 
@@ -153,3 +153,4 @@ You can optionally sample logs while querying by using the [sample function][9].
 [10]: https://cloud.google.com/pubsub/docs/overview
 [11]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [12]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+[13]: /agent/
