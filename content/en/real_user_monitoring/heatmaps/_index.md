@@ -60,6 +60,8 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 Top elements allow for a more focused view of click actions on a given view by picking the top most interacted elements and ranking them. The ranking on the map itself corresponds to the action name on the side.
 
+{{< img src="real_user_monitoring/heatmaps/top-elements.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
+
 By clicking on any action name from the panel, the corresponding action will be highlighted in the map.
 
 ## Scrollmaps
@@ -67,6 +69,12 @@ By clicking on any action name from the panel, the corresponding action will be 
 Scrollmaps show a visual of the aggregate scroll activity on a given page. By looking at a scrollmap you can see how far users scroll to each percentile, along with where the average fold of the page falls.
 
 You can interact with the floating blue bar on a scrollmap by dragging it to the point of the page you wish to see how many users arrived at.
+
+{{< img src="real_user_monitoring/heatmaps/scrollmaps-floating-bar.png" alt="A screenshot of the scrollable bar within Scrollmaps." style="width:100%;">}}
+
+To the right of the scrollmap, is an insight panel. The panel provides queries based on data in the map like direct links to a list of all views where the user scrolled past a given percentile. Below the insights is a Minimap and a Distribution graph, allowing you to granularly analyze scroll data at each percentile to identify where the biggest dropoff occurs.
+
+{{< img src="real_user_monitoring/heatmaps/scrollmaps-insights-panel.png" alt="A screenshot of the queries for scroll data insights" style="width:100%;">}}
 
 ## Next steps
 
