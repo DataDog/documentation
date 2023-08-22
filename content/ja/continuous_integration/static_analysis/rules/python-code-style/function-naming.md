@@ -9,7 +9,7 @@ title: 関数名とパラメーターには snake_case を使用する
 
 **言語:** Python
 
-**重大度:** エラー
+**重大度:** 通知
 
 **カテゴリー:** Code Style
 
@@ -31,9 +31,19 @@ def my_function(myParameter, otherParameter):
 ```python
 def myFunction(arg1, arg2):
   pass
+
+def myOtherFunction():
+  pass
 ```
 
 ## 準拠コードの例
+```python
+# 多くのテストフレームワークで使用される名前。警告を出さないこと
+def tearDown(self):
+    """各テストケースの後で、ダミーのトレーサーをリセットして削除"""
+    super(TracerTestCase, self).tearDown()
+```
+
 ```python
 class TestModel(unittest.TestCase):
     def setUp(self):  # ファイル model_test.py で使用され、setUp と tearDown のルールをスキップします

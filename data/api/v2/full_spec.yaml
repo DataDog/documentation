@@ -643,7 +643,6 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
@@ -785,7 +784,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
-      type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
       properties:
@@ -880,6 +878,9 @@ components:
             customAttribute: 123
             duration: 2345
           type: object
+        message:
+          description: Message of the event.
+          type: string
         service:
           description: 'Name of the application or service generating Audit Logs events.
 
@@ -1163,8 +1164,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SAMLAssertionAttribute'
       - $ref: '#/components/schemas/Role'
-      properties: {}
-      type: object
     AuthNMappingRelationships:
       description: All relationships associated with AuthN Mapping.
       properties:
@@ -1502,25 +1501,15 @@ components:
       properties:
         attributes:
           additionalProperties: {}
-          description: JSON object of attributes from CI Visibility events.
+          description: JSON object of attributes from CI Visibility test events.
           example:
             customAttribute: 123
             duration: 2345
           type: object
-        service:
-          description: 'The name of the application or service generating CI Visibility
-            events.
-
-            It is used to switch from CI Visibility to APM, so make sure you define
-            the same
-
-            value when you use both products.'
-          example: web-ui-tests
-          type: string
         tags:
           $ref: '#/components/schemas/TagsEventAttribute'
-        timestamp:
-          $ref: '#/components/schemas/TimestampEventAttribute'
+        test_level:
+          $ref: '#/components/schemas/CIAppTestLevel'
       type: object
     CIAppGitInfo:
       description: 'If pipelines are triggered due to actions to a Git repository,
@@ -1682,13 +1671,29 @@ components:
         stored by Datadog.
       properties:
         attributes:
-          $ref: '#/components/schemas/CIAppEventAttributes'
+          $ref: '#/components/schemas/CIAppPipelineEventAttributes'
         id:
           description: Unique ID of the event.
           example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
           type: string
         type:
           $ref: '#/components/schemas/CIAppPipelineEventTypeName'
+      type: object
+    CIAppPipelineEventAttributes:
+      description: JSON object containing all event attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from CI Visibility pipeline events.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        ci_level:
+          $ref: '#/components/schemas/CIAppPipelineLevel'
+        tags:
+          $ref: '#/components/schemas/TagsEventAttribute'
       type: object
     CIAppPipelineEventJob:
       description: Details of a CI job.
@@ -2211,6 +2216,22 @@ components:
         meta:
           $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
+    CIAppPipelineLevel:
+      description: Pipeline execution level.
+      enum:
+      - pipeline
+      - stage
+      - job
+      - step
+      - custom
+      example: pipeline
+      type: string
+      x-enum-varnames:
+      - PIPELINE
+      - STAGE
+      - JOB
+      - STEP
+      - CUSTOM
     CIAppPipelinesAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
         of pipeline events from your organization.
@@ -2298,7 +2319,8 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the Log search syntax.
+          description: The search query following the CI Visibility Explorer search
+            syntax.
           example: '@ci.provider.name:github AND @ci.status:error'
           type: string
         to:
@@ -2484,6 +2506,20 @@ components:
         meta:
           $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
+    CIAppTestLevel:
+      description: Test run level.
+      enum:
+      - session
+      - module
+      - suite
+      - test
+      example: test
+      type: string
+      x-enum-varnames:
+      - SESSION
+      - MODULE
+      - SUITE
+      - TEST
     CIAppTestsAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets
         of test events from your organization.
@@ -2521,7 +2557,7 @@ components:
         links:
           $ref: '#/components/schemas/CIAppResponseLinks'
         meta:
-          $ref: '#/components/schemas/CIAppResponseMetadata'
+          $ref: '#/components/schemas/CIAppResponseMetadataWithPagination'
       type: object
     CIAppTestsBucketResponse:
       description: Bucket values.
@@ -2571,7 +2607,8 @@ components:
           type: string
         query:
           default: '*'
-          description: The search query following the Log search syntax.
+          description: The search query following the CI Visibility Explorer search
+            syntax.
           example: '@test.service:web-ui-tests AND @test.status:fail'
           type: string
         to:
@@ -3585,6 +3622,15 @@ components:
           maximum: 5
           readOnly: true
           type: integer
+        tags:
+          description: List of team names representing ownership of a dashboard.
+          items:
+            description: The name of a Datadog team, formatted as `team:<name>`
+            type: string
+          maxItems: 5
+          nullable: true
+          readOnly: true
+          type: array
         title:
           description: Title of the dashboard.
           readOnly: true
@@ -3848,7 +3894,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/DowntimeMonitorIdentifierId'
       - $ref: '#/components/schemas/DowntimeMonitorIdentifierTags'
-      type: object
     DowntimeMonitorIdentifierId:
       additionalProperties: {}
       description: Object of the monitor identifier.
@@ -4083,13 +4128,11 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/DowntimeMonitorIncludedItem'
-      type: object
     DowntimeScheduleCreateRequest:
       description: Schedule for the downtime.
       oneOf:
       - $ref: '#/components/schemas/DowntimeScheduleRecurrencesCreateRequest'
       - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
-      type: object
     DowntimeScheduleCurrentDowntimeResponse:
       description: 'The most recent actual start and end dates for a recurring downtime.
         For a canceled downtime,
@@ -4271,13 +4314,11 @@ components:
       oneOf:
       - $ref: '#/components/schemas/DowntimeScheduleRecurrencesResponse'
       - $ref: '#/components/schemas/DowntimeScheduleOneTimeResponse'
-      type: object
     DowntimeScheduleUpdateRequest:
       description: Schedule for the downtime.
       oneOf:
       - $ref: '#/components/schemas/DowntimeScheduleRecurrencesUpdateRequest'
       - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
-      type: object
     DowntimeScope:
       description: The scope to which the downtime applies. Must follow the [common
         search syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
@@ -5833,7 +5874,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
       - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-      type: object
     IncidentAttachmentData:
       description: A single incident attachment.
       example:
@@ -5948,7 +5988,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
       - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-      type: object
     IncidentAttachmentUpdateData:
       description: A single incident attachment.
       properties:
@@ -6054,7 +6093,6 @@ components:
       description: An object related to an attachment that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -6135,7 +6173,6 @@ components:
       - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
       required:
       - type
-      type: object
     IncidentFieldAttributesMultipleValue:
       description: A field with potentially multiple values selected.
       properties:
@@ -6266,7 +6303,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SlackIntegrationMetadata'
       - $ref: '#/components/schemas/JiraIntegrationMetadata'
-      type: object
     IncidentIntegrationMetadataPatchData:
       description: Incident integration metadata data for a patch request.
       properties:
@@ -6320,7 +6356,6 @@ components:
         in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentIntegrationMetadataType:
       default: incident_integrations
       description: Integration metadata resource type.
@@ -6500,7 +6535,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/IncidentAttachmentData'
-      type: object
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
       properties:
@@ -6800,7 +6834,6 @@ components:
         included payload.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentServiceRelationships:
       description: The incident service's relationships.
       properties:
@@ -6959,7 +6992,6 @@ components:
         payload.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentTeamRelationships:
       description: The incident team's relationships.
       properties:
@@ -7086,7 +7118,6 @@ components:
       description: The timeline cell's attributes for a create request.
       oneOf:
       - $ref: '#/components/schemas/IncidentTimelineCellMarkdownCreateAttributes'
-      type: object
     IncidentTimelineCellMarkdownContentType:
       default: markdown
       description: Type of the Markdown timeline cell.
@@ -7288,7 +7319,6 @@ components:
       description: An object related to an incident todo that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentTodoType:
       default: incident_todos
       description: Todo resource type.
@@ -7819,7 +7849,8 @@ components:
       description: Paging settings
       properties:
         cursor:
-          description: The returned paging point to use to get the next results
+          description: 'The returned paging point to use to get the next results.
+            Note: at most 1000 results can be paged.'
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
           type: string
       type: object
@@ -8027,7 +8058,6 @@ components:
       required:
       - type
       - integration
-      type: object
     LogsArchiveDefinition:
       description: The definition of an archive.
       properties:
@@ -8057,7 +8087,6 @@ components:
       required:
       - type
       - integration
-      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -8304,7 +8333,11 @@ components:
           $ref: '#/components/schemas/LogsGroupByHistogram'
         limit:
           default: 10
-          description: The maximum buckets to return for this group by
+          description: 'The maximum buckets to return for this group by. Note: at
+            most 10000 buckets are allowed.
+
+            If grouping by multiple facets, the product of limits must not exceed
+            10000.'
           format: int64
           type: integer
         missing:
@@ -8319,7 +8352,7 @@ components:
     LogsGroupByHistogram:
       description: 'Used to perform a histogram computation (only for measure facets).
 
-        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+        Note: at most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
       properties:
         interval:
           description: The bin size of the histogram buckets
@@ -8697,7 +8730,7 @@ components:
     LogsQueryOptions:
       description: 'Global query options that are used during the query.
 
-        Note: You should only supply timezone or time offset but not both otherwise
+        Note: you should supply either timezone or time offset, but not both. Otherwise,
         the query will fail.'
       properties:
         timeOffset:
@@ -8741,7 +8774,7 @@ components:
       properties:
         after:
           description: 'The cursor to use to get the next results, if any. To make
-            the next request, use the same.
+            the next request, use the same
 
             parameters with the addition of the `page[cursor]`.'
           example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
@@ -9610,7 +9643,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/MetricDistinctVolume'
       - $ref: '#/components/schemas/MetricIngestedIndexedVolume'
-      type: object
     MetricVolumesResponse:
       description: Response object which includes a single metric's volume.
       properties:
@@ -9649,7 +9681,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/Metric'
       - $ref: '#/components/schemas/MetricTagConfiguration'
-      type: object
     MetricsAndMetricTagConfigurationsResponse:
       description: Response object that includes metrics and metric tag configurations.
       properties:
@@ -9792,12 +9823,10 @@ components:
       description: Configuration for the policy.
       oneOf:
       - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicy'
-      type: object
     MonitorConfigPolicyPolicyCreateRequest:
       description: Configuration for the policy.
       oneOf:
       - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest'
-      type: object
     MonitorConfigPolicyResourceType:
       default: monitor-config-policy
       description: Monitor configuration policy resource type.
@@ -12289,7 +12318,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
-      type: object
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12398,10 +12426,13 @@ components:
       type: object
     ScalarQuery:
       description: An individual scalar query to one of the basic Datadog data sources.
+      example:
+        aggregator: avg
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       oneOf:
       - $ref: '#/components/schemas/MetricsScalarQuery'
       - $ref: '#/components/schemas/EventsScalarQuery'
-      type: object
     ScalarResponse:
       description: A message containing the response to a scalar query.
       properties:
@@ -12714,7 +12745,6 @@ components:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleCreatePayload'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleCreatePayload'
       - $ref: '#/components/schemas/CloudConfigurationRuleCreatePayload'
-      type: object
     SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
       description: 'If true, signals in non-production environments have a lower severity
         than what is defined by the rule case, which can reduce signal noise.
@@ -12945,7 +12975,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
-      type: object
     SecurityMonitoringRuleQueryAggregation:
       description: The aggregation type.
       enum:
@@ -12972,7 +13001,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
-      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -13909,7 +13937,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SensitiveDataScannerRuleIncludedItem'
       - $ref: '#/components/schemas/SensitiveDataScannerGroupIncludedItem'
-      type: object
     SensitiveDataScannerGetConfigResponse:
       description: Get all groups response.
       properties:
@@ -14638,6 +14665,7 @@ components:
           description: "Service owner\u2019s Slack channel."
           example: https://yourcompany.slack.com/archives/channel123
           type: string
+      type: object
     ServiceDefinitionV1Info:
       description: Basic information about a service.
       properties:
@@ -16153,6 +16181,17 @@ components:
     TeamAttributes:
       description: Team attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         created_at:
           description: Creation date of the team
           format: date-time
@@ -16166,6 +16205,12 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         link_count:
           description: The number of links belonging to the team
           format: int32
@@ -16192,6 +16237,12 @@ components:
           maximum: 2147483647
           readOnly: true
           type: integer
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16212,6 +16263,17 @@ components:
     TeamCreateAttributes:
       description: Team creation attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -16220,11 +16282,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16249,8 +16323,6 @@ components:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/TeamLink'
       - $ref: '#/components/schemas/UserTeamPermission'
-      properties: {}
-      type: object
     TeamLink:
       description: Team link
       properties:
@@ -16495,6 +16567,17 @@ components:
     TeamUpdateAttributes:
       description: Team update attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         color:
           description: An identifier for the color representing the team
           format: int32
@@ -16509,11 +16592,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16705,10 +16800,12 @@ components:
     TimeseriesQuery:
       description: An individual timeseries query to one of the basic Datadog data
         sources.
+      example:
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       oneOf:
       - $ref: '#/components/schemas/MetricsTimeseriesQuery'
       - $ref: '#/components/schemas/EventsTimeseriesQuery'
-      type: object
     TimeseriesResponse:
       description: A message containing the response to a timeseries query.
       properties:
@@ -16785,11 +16882,6 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
-    TimestampEventAttribute:
-      description: Timestamp of your event.
-      example: '2019-01-02T09:42:36.320Z'
-      format: date-time
-      type: string
     Unit:
       description: Object containing the metric unit family, scale factor, name, and
         short name.
@@ -16838,6 +16930,10 @@ components:
           type: string
         public_id:
           description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
           type: string
         timeseries:
           description: List of usage data reported for each requested hour.
@@ -17099,7 +17195,6 @@ components:
       - $ref: '#/components/schemas/Organization'
       - $ref: '#/components/schemas/Permission'
       - $ref: '#/components/schemas/Role'
-      type: object
     UserResponseRelationships:
       description: Relationships of the user object returned by the API.
       properties:
@@ -17345,6 +17440,7 @@ components:
             monitors_read: View monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -18269,14 +18365,11 @@ paths:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
         details about how pipeline executions are modeled and what execution types
-        we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
+        we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
         Pipeline events can be submitted with a timestamp that is up to 18 hours in
-        the past.
-
-
-        This API endpoint is in private beta.'
+        the past.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
         content:
@@ -18346,10 +18439,12 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+      x-unstable: '**Note**: This API endpoint is in private beta. Request access
+        [here](https://docs.google.com/forms/d/e/1FAIpQLSdNejCvhMbdBW5nnGly1yvmYMn2Wpj4JOI0zKIiEx6O6I2dbQ/viewform).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
-      description: The API endpoint to aggregate CI Visibility pipeline events into
-        buckets of computed metrics and timeseries.
+      description: Use this API endpoint to aggregate CI Visibility pipeline events
+        into buckets of computed metrics and timeseries.
       operationId: AggregateCIAppPipelineEvents
       requestBody:
         content:
@@ -18380,7 +18475,7 @@ paths:
   /api/v2/ci/pipelines/events:
     get:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -18462,7 +18557,7 @@ paths:
   /api/v2/ci/pipelines/events/search:
     post:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+        a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -24156,8 +24251,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_findings_write
       summary: Mute or unmute a finding
       tags:
       - Security Monitoring
@@ -27741,9 +27834,9 @@ paths:
         dd_team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"handle-{{
-              unique_hash }}\",\n      \"name\": \"name-{{ unique_hash }}\"\n    },\n
-              \   \"type\": \"team\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"test-handle-{{
+              unique_hash }}\",\n      \"name\": \"test-name-{{ unique_hash }}\"\n
+              \   },\n    \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
@@ -29590,6 +29683,43 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-undo:
+        type: safe
+  /api/v2/users/{user_uuid}/memberships:
+    get:
+      description: Get a list of memberships for a user
+      operationId: GetUserMemberships
+      parameters:
+      - description: None
+        in: path
+        name: user_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTeamsResponse'
+          description: Represents a user's association to a team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get user memberships
+      tags:
+      - Teams
+      x-menu-order: 1
       x-undo:
         type: safe
 security:

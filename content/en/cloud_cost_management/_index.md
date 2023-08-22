@@ -42,7 +42,7 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup) and select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
+Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
 
 **Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 
@@ -179,6 +179,7 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+[7]: https://app.datadoghq.com/cost/setup
 
 ## Billing conductor
 Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
@@ -195,7 +196,7 @@ Once the billing conductor CUR is created, follow the Cloud Cost Management inst
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
 {{% site-region region="us3" %}}
-**Notes**: 
+**Notes**:
 - If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
 - Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
 - Pay-as-you-go accounts are not supported.
@@ -216,10 +217,10 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
     - Metric: **Actual Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
-  
+
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. Export names must be unique.
+5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
@@ -236,7 +237,7 @@ Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Da
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
     - Select *review + assign*.
- 
+
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
 ### Configure Cost Management Reader access
@@ -249,6 +250,9 @@ If your exports are in different storage containers, repeat steps one to seven f
 5. Assign these permissions to the app registration.
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
+
+### Configure Cloud Costs in Datadog
+Navigate to [Setup & Configuration][5] and follow the steps.
 
 ### Cost types
 
@@ -263,26 +267,27 @@ You can visualize your ingested data using the following cost types:
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
 [4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
+[5]: https://app.datadoghq.com/cost/setup?cloud=azure
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tag pipelines 
+## Tag pipelines
 
 <div class="alert alert-info">Tag pipelines is a beta feature.</div>
 
-You can use [tag pipelines][1] to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic. 
+You can use [tag pipelines][1] to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic.
 
 ### Rule types
 
 <div class="alert alert-warning"> A maximum of 100 rules can be created. </div>
 
-There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
+There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic.
 
 **Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
 
-**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
+**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
 
-The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
+The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag.
 
 ## Cloud costs in dashboards
 

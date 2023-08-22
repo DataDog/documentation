@@ -65,6 +65,8 @@ The [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] allo
 
 To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, preprend the [Datadog Processor][11] in front of your sampling processor in the collectors' traces pipeline. The processor is available with OpenTelemetry Collector Contrib v0.69.0+.
 
+<div class="alert alert-info"><strong>Beta</strong>: Alternatively, use the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> to calculate APM metrics on unsampled data. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> for more information.</div>
+
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
 ### Sampling with the Datadog Agent

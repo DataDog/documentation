@@ -132,7 +132,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 | プラットフォーム      | コマンド                                                                     |
 |---------------|-----------------------------------------------------------------------------|
-| Kubernetes    | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Kubernetes    | `kubectl exec -n <NAMESPACE> -it <CLUSTER_POD_NAME> -- datadog-cluster-agent flare <CASE_ID>` |
 | Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}

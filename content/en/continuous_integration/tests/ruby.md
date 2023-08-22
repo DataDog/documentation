@@ -46,8 +46,6 @@ If you are not using Kubernetes or can't use [Datadog Admission Controller][2] a
 
 `DD_TRACE_AGENT_URL` includes the protocol and port (for example, `http://localhost:8126`) and takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`, and is the recommended configuration parameter to configure the Datadog Agent's URL for CI Visibility.
 
-If you still have issues connecting to the Datadog Agent, use the [Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method). **Note**: By using this method, there will be no correlation between tests and infrastructure metrics.
-
 ### Using a cloud CI provider
 
 If you are using a cloud CI provider with no access to the underlying worker nodes, such as GitHub Actions or CircleCI, run the Datadog Agent in a container as a build service. This method is also available for an on-premises CI provider that uses a container-based executor if installing the Datadog Agent on each worker node is not an option.
@@ -422,6 +420,8 @@ The following environment variable can be used to configure the location of the 
 **Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][6] options can also be used.
+
+## Collecting Git metadata
 
 {{% ci-git-metadata %}}
 

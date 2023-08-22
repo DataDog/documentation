@@ -46,7 +46,7 @@ NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio 
 
 {{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>セットアップ</u>: ネットワークデータを収集するように Agent を構成します。{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/performance/network_page" >}}<u>ネットワークページ</u>: 利用可能な各クライアントとサーバー間のネットワークデータをグラフ化します。{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>ネットワーク分析</u>: 利用可能な各クライアントとサーバー間のネットワークデータをグラフ化します。{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>ネットワークマップ</u>: タグ間でネットワークデータをマッピングします。{{< /nextlink >}}
 {{< /whatsnext >}}
 

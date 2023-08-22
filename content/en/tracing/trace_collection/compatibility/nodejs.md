@@ -168,7 +168,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [1]: https://semver.org/
 [2]: https://github.com/DataDog/dd-trace-js/releases
 [3]: /help/
-[4]: https://nodejs.org/en/about/releases/
+[4]: https://github.com/nodejs/release#release-schedule
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com

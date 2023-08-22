@@ -23,16 +23,29 @@ further_reading:
 
 Supported test frameworks:
 * JUnit >= 4.10 and >= 5.3
-  * Also includes any test framework based on JUnit, such as Spock Framework and Cucumber-Junit. **Note**: Only Cucumber v1, which uses JUnit 4, is supported.
 * TestNG >= 6.4
+* Spock >= 2.0
+* Cucumber >= 5.4.0 (earlier versions have limited support)
 
 Supported build systems:
 * Gradle >= 2.0
 * Maven >= 3.2.1
 
-## Configuring reporting method
+If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
-To report test results to Datadog, you need to configure the Datadog Java library:
+## Setup
+
+To set up Test Visibility for Java, you need to perform the following steps:
+1. Configure tracer reporting method.
+2. Download tracer library to the hosts where your tests are executed.
+3. Run your tests with the tracer attached.
+
+### Configuring reporting method
+
+This step involves configuring how Datadog Java Tracer injected into your tests reports data to Datadog.
+There are two main options:
+* Reporting the data to Datadog Agent, which will forward it to Datadog.
+* Reporting the data directly to Datadog.
 
 {{< tabs >}}
 
@@ -52,7 +65,7 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Downloading tracer library
+### Downloading tracer library
 
 You only need to download the tracer library once for each server.
 
@@ -72,7 +85,7 @@ wget -O $DD_TRACER_FOLDER/dd-java-agent.jar https://dtdg.co/latest-java-tracer
 
 You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the tracer library.
 
-## Running your tests
+### Running your tests
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -131,6 +144,20 @@ Specifying `org.gradle.jvmargs` in the command line overrides the value specifie
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configuration
+
+Default configuration values work well in most cases.
+
+However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer configuration][3] options can be used.
+
+### Collecting Git metadata
+
+{{% ci-git-metadata %}}
+
+## Extensions
+
+The [dd-trace-api][4] library exposes a set of APIs that can be used to extend the tracer's functionality programmatically.
+
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the current active span:
@@ -145,55 +172,21 @@ if (span != null) {
 // ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Java custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets.
 
-## Manual testing API
+For more information about adding tags, see the [Adding Tags][2] section of the Java custom instrumentation documentation.
+
+### Using manual testing API
 
 If you use one of the supported testing frameworks, the Java Tracer automatically instruments your tests and sends the results to the Datadog backend.
 
 If you are using a framework that is not supported, or an ad-hoc testing solution, you can harness the manual testing API, which also reports test results to the backend.
 
-### Adding manual API dependency
-
-Manual API classes are available in the `com.datadoghq:dd-trace-api` artifact.
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Add the trace API dependency to your Maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<dependency>
-    <groupId>com.datadoghq</groupId>
-    <artifactId>dd-trace-api</artifactId>
-    <version>$VERSION</version>
-    <scope>test</scope>
-</dependency>
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-trace-api?style=flat-square
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-Add the trace API dependency to your Maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-dependencies {
-    testImplementation "com.datadoghq:dd-trace-api:$VERSION"
-}
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-trace-api?style=flat-square
-{{% /tab %}}
-{{< /tabs >}}
-
-### Domain model
+#### Domain model
 
 The API is based around four concepts: test session, test module, test suite, and test.
 
-#### Test session
+##### Test session
 
 A test session represents a project build, which typically corresponds to execution of a test command issued by a user or by a CI script.
 
@@ -201,7 +194,7 @@ To start a test session, call `datadog.trace.api.civisibility.CIVisibility#start
 
 When all your tests have finished, call `datadog.trace.api.civisibility.DDTestSession#end`, which forces the library to send all remaining test results to the backend.
 
-#### Test module
+##### Test module
 
 A test module represents a smaller unit of work within a project build, typically corresponding to a project module. For example, a Maven submodule or Gradle subproject.
 
@@ -209,7 +202,7 @@ To start a test mode, call `datadog.trace.api.civisibility.DDTestSession#testMod
 
 When the module has finished building and testing, call `datadog.trace.api.civisibility.DDTestModule#end`.
 
-#### Test Suite
+##### Test Suite
 
 A test suite comprises a set of tests that share common functionality.
 They can share a common initialization and teardown, and can also share some variables.
@@ -219,7 +212,7 @@ Create test suites in a test module by calling `datadog.trace.api.civisibility.D
 
 Call `datadog.trace.api.civisibility.DDTestSuite#end` when all the related tests in the suite have finished their execution.
 
-#### Test
+##### Test
 
 A test represents a single test case that is executed as part of a test suite.
 Usually it corresponds to a method that contains testing logic.
@@ -228,7 +221,7 @@ Create tests in a suite by calling `datadog.trace.api.civisibility.DDTestSuite#t
 
 Call `datadog.trace.api.civisibility.DDTest#end` when a test has finished execution.
 
-### Code Example
+#### Code Example
 
 The following code represents a simple usage of the API:
 
@@ -304,12 +297,6 @@ public class ManualTest {
 
 Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so that all the test info is flushed to Datadog.
 
-## Configuration settings
-
-[Datadog Tracer configuration][2] options can be used for fine-tuning the tracer behavior.
-
-{{% ci-git-metadata %}}
-
 {{% ci-information-collected %}}
 
 ## Troubleshooting
@@ -343,7 +330,7 @@ While the best approach is such cases is to update the tests, there is also a qu
 The integrations provide additional insights into what happens in the tested code and are especially useful in integration tests, to monitor things like HTTP requests or database calls.
 They are enabled by default.
 
-To disable a specific integration, refer to the [Datadog Tracer Compatibility][3] table for the relevant configuration property names.
+To disable a specific integration, refer to the [Datadog Tracer Compatibility][5] table for the relevant configuration property names.
 For example, to disable `OkHttp3` client request integration, add `dd.integration.okhttp-3.enabled=false` to the list of `-javaagent` arguments.
 
 To disable all integrations, augment the list of `-javaagent` arguments with `dd.trace.enabled=false`.
@@ -352,6 +339,8 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
-[2]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
-[3]: /tracing/trace_collection/compatibility/java#integrations
+[1]: #using-manual-testing-api
+[2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+[3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
+[4]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[5]: /tracing/trace_collection/compatibility/java#integrations

@@ -129,18 +129,18 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\
 
 ## Orchestrator
 
-### YAML configuration
-In `datadog.yaml`:
+### HELM configuration
+In Datadog `values.yaml`:
 ```yaml
-orchestrator_explorer:
-  [...]
-  orchestrator_additional_endpoints:
-    "https://orchestrator.datadoghq.com":
-    - apikey2
-    - apikey3
-    "https://orchestrator.datadoghq.eu":
-    - apikey4
+clusterAgent:
+...
+  datadog_cluster_yaml:
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.ddog-gov.com":
+        - apikey2 
 ```
+
 
 ### Environment variable configuration
 
@@ -288,7 +288,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Posture Management (CSPM)
+## Cloud Security Management Misconfigurations
 
 ### YAML configuration
 
@@ -313,7 +313,7 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% agent-dual-shipping %}}
 
-## Cloud Workload Security (CWS)
+## Cloud Security Management Threats
 
 ### YAML configuration
 In `datadog.yaml`:
