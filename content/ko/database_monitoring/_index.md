@@ -38,7 +38,7 @@ Datadog 데이터베이스 모니터링을 사용하면 호스트 전반에 있�
 
 Datadog 데이터베이스 모니터링은 자체 호스팅과 **Postgres**, **MySQL**, **SQL Server**의 관리형 클라우드 버전을 지원합니다. Datadog 데이터베이스 모니터링을 시작하려면 데이터베이스를 설정하고 Datadog Agent를 설치하세요. 설정 지침을 확인하려면 데이터베이스 기술을 선택하세요:
 
-### 포스트그레스
+### Postgres
 
 {{< partial name="dbm/dbm-setup-postgres" >}}
 <p></p>
