@@ -7,7 +7,7 @@ You, or a user in your organization with "Intelligent Test Runner Activation" pe
 
 The Intelligent Test Runner requires an [application key][102] mapped to an owner [role][103] with the **CI Visibility Read** (`ci_visibility_read`) permission.
 
-For more information on roles and permissions, visit the CI Visibility section of our the [Datadog Role Permissions documentation][104].
+For more information on roles and permissions, see the CI Visibility section of the [Datadog Role Permissions documentation][104].
 
 [101]: https://app.datadoghq.com/ci/settings/test-service
 [102]: https://app.datadoghq.com/organization-settings/application-keys
