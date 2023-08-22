@@ -93,7 +93,7 @@ Upon import, the following occurs:
 
 ## Import data from ServiceNow
 
-You can populate your Datadog Service Catalog with services from your ServiceNow CMDB with Service Ingestion feature in ServiceNow integration. Learn about how to start [here][16].
+You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
 
 
 ## Discover services being reported in other Datadog telemetry data
