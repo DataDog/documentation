@@ -34,7 +34,7 @@ Datadog Agent는 CPU, 메모리, 네트워크 활동과 같은 시스템 메트�
 
 ### 자체 호스팅 데이터베이스
 
-{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="자체 호스팅 설정은 에이전트를 호스팅하는 데이터베이스 호스트에서 데이터베이스 프로세스를 거칩니다. 그런 다음 인터넷에 연결한 후 Datadog의 백엔드로 이동합니다.">}}
+{{< img src="database_monitoring/dbm_architecture_self-hosted.png" alt="자체 호스팅 설정은 Agent를 호스팅하는 데이터베이스 호스트에서 데이터베이스 프로세스를 거칩니다. 그런 다음 인터넷에 연결한 후 Datadog의 백엔드로 이동합니다.">}}
 
 자체 호스팅 설정의 경우, Datadog Agent는 운영 체제 호스트에서 시스템 메트릭을 수집하고 데이터베이스에서 직접 데이터베이스 메트릭을 수집하며 데이터베이스 로그에서 로그 이벤트를 수집합니다.
 
@@ -64,15 +64,15 @@ Agent에 데이터베이스에 대한 읽기 전용 액세스를 부여하고 �
 
 Agent가 데이터베이스 인스턴스에 연결할 수 있는 경우 모든 클라우드 VM(예: EC2)에 Agent를 설치할 수 있습니다.
 
-자체 Kubernetes 클러스터를 실행하지 않는 경우, Datadog은 클라우드 공급자의 오케스트레이션 도구를 사용할 것을 권장합니다. 예를 들어, [Agent가 이미 Docker 컨테이너로 존재하기 때문에][10] [AWS ECS][9]를 사용해 Datadog 에이전트를 호스팅할 수 있습니다.
+자체 Kubernetes 클러스터를 실행하지 않는 경우, Datadog은 클라우드 공급자의 오케스트레이션 도구를 사용할 것을 권장합니다. 예를 들어, [Agent가 이미 Docker 컨테이너로 존재하기 때문에][10] [AWS ECS][9]를 사용해 Datadog Agent를 호스팅할 수 있습니다.
 
 ### 쿠버네티스(Kubernetes)
 
-[Kubernetes][11]에서 앱을 실행하는 경우, [데이터베이스 모니터링이 포함된 Datadog Cluster Agent][12]를 사용하여 포드 전체에 [클러스터 검사][13]를 실행할 수 있습니다.
+[Kubernetes][11]에서 앱을 실행하는 경우, [데이터베이스 모니터링이 포함된 Datadog Cluster Agent][12]를 사용하여 파드 전체에 [클러스터 검사][13]를 실행할 수 있습니다.
 
 {{< img src="database_monitoring/dbm_architecture_clusters.png" alt="클라우드 공급자의 데이터베이스 인스턴스는 Kubernetes 클러스터 노드에 연결된 후 인터넷을 통해 Datadog 백엔드에 연결됩니다. 클라우드 API는 Datadog AWS 통합에 직접 연결됩니다.">}}
 
-[Cluster Agent][14]는 데이터베이스 인스턴스를 에이전트 풀에 자동으로 배포합니다. 이렇게 하면 각 노드 기반 Agent 파드가 해당 검사를 실행하는 것과 달리 각 검사의 인스턴스 하나만 실행됩니다. Cluster Agent는 구성을 보유하고 노드 기반 Agents에 동적으로 디스패치합니다. 각 노드의  Agents는 10초마다 Cluster Agent에 연결하여 실행할 구성을 검색합니다.
+[Cluster Agent][14]는 데이터베이스 인스턴스를  Agents 풀에 자동으로 배포합니다. 이렇게 하면 각 노드 기반 Agent 파드가 해당 검사를 실행하는 것과 달리 각 검사의 인스턴스 하나만 실행됩니다. Cluster Agent는 구성을 보유하고 노드 기반 Agents에 동적으로 디스패치합니다. 각 노드의  Agents는 10초마다 Cluster Agent에 연결하여 실행할 구성을 검색합니다.
 
 Agent가 보고를 중단하면 Cluster Agent는 활성 풀에서 해당 Agent를 제거하고 다른 Agents로 구성을 디스패치합니다. 이렇게 하면 클러스터에서 노드를 추가하거나 제거해도 항상 하나의 인스턴스만 실행되도록 할 수 있습니다. 이는 Cluster Agent가 클러스터 검사를 여러 노드에 분산하기 때문에 데이터베이스 인스턴스 수가 많은 경우 중요합니다.
 
