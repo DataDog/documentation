@@ -17440,6 +17440,7 @@ components:
             monitors_read: View monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -24250,8 +24251,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_findings_write
       summary: Mute or unmute a finding
       tags:
       - Security Monitoring
