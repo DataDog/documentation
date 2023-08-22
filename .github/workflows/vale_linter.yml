@@ -1,0 +1,42 @@
+name: Vale
+on:
+  pull_request:
+    paths:
+    - 'content/en/**/*.md'
+    - 'layouts/shortcodes/**/*.md'
+
+jobs:    
+  vale:
+      # Vale has better masOS support.
+      runs-on: macos-latest
+      timeout-minutes: 5
+      steps:
+      - uses: actions/checkout@v3
+      
+      - name: install vale
+        run: brew install vale
+      
+      - name: Clone Datadog Vale
+        uses: actions/checkout@v3
+        with:
+          repository: DataDog/datadog-vale
+          path: datadog-vale
+      
+      # Replace path to styles in config. This is so the path works in both the 
+      # runner and locally from the repo.
+      - name: Edit StylesPath in Vale config file 
+        run: sed -i '' 's/\.\.\/datadog-vale\/styles/datadog-vale\/styles/' .vale.ini
+      
+      - name: Find changed files
+        id: changed_files
+        uses: tj-actions/changed-files@v37
+      
+      # Uses --no-exit here so the job continues to the next step and annotates the PR.
+      # Outputs to a JSON file cos it was easier to pass to the next step.
+      - name: Run vale on changed files
+        run: vale ${{ steps.changed_files.outputs.all_changed_files }} --output=JSON --no-exit > vale_output.json
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: python local/bin/py/vale_annotations.py
