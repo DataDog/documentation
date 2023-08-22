@@ -718,7 +718,7 @@ class Integrations:
         result = ''
         display_on_public = True
         
-        # Don't try to build markdown if the file display_on_public_website is False
+        # Don't try to build markdown if display_on_public_website is False
         if manifest_json and "/dogweb/" not in file_name:
             if not manifest_json["display_on_public_website"]:
                 display_on_public = False
