@@ -55,7 +55,7 @@ Axis controls are available through the UI and the JSON editor.
 They allow you to:
 
 * Clip the x and y-axes to specific ranges.
-* Automatically change x-axis bounds based on a percentile or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove "outlier" bins.
+* Automatically change x-axis bounds based on a percentile or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove "outlier" bins.
 * Change the y-axis scale from linear to log.
 
 {{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="Distribution axis control preferences" style="width:80%;">}}

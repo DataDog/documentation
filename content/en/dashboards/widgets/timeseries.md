@@ -104,7 +104,7 @@ To add markers for additional data sets, click **Add Marker** in the **Markers**
 Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis in order to:
 
 * Clip the y-axis to specific ranges.
-* Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove the "outliers" series.
+* Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
 The following configuration options are available:
