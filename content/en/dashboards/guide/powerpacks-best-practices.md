@@ -2,6 +2,9 @@
 title: Scale Graphing Expertise with Powerpacks
 kind: guide
 further_reading:
+- link: "/dashboards/widgets/powerpack"
+  tag: "Documentation"
+  text: Powerpack Widget
 - link: "https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show"
   tag: "Documentation"
   text: Add widgets and refine what they show

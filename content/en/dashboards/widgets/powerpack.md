@@ -6,6 +6,12 @@ further_reading:
 - link: "/dashboards/guide/powerpacks-best-practices/"
   tag: "Guide"
   text: "Scale Graphing Expertise with Powerpacks"
+- link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
+  tag: "Blog"
+  text: "Save dashboard widgets in reusable groups with Powerpacks"
+- link: "/dashboards/widgets/group/"
+  tag: "Documentation"
+  text: Group Widget
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
@@ -15,19 +21,22 @@ further_reading:
 
 <div class="alert alert-info">Powerpack widgets are not supported on screenboards.</div>
 
-Powerpacks allow you to templatize a group of widgets as a reusable dashboard building block to scale graphing expertise in your org.Powerpacks are either preset (created by Datadog, available to all customers) or custom (created by a user, available only within their organization). For more information on Powerpack best practices, see the [Scale Graphing expertise with Powerpacks][1] guide.
+Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. Powerpacks are either preset (created by Datadog, available to all customers) or custom (created by a user, available only within their organization). For more information on Powerpack best practices, see the [Scale Graphing expertise with Powerpacks][1] guide.
 
 ## Setup
 
 ### Creating a Powerpack
 
 Create a Powerpack from an existing group on a dashboard: 
-1. From the group's header, click the "Save as Powerpack" icon. 
+
+{{< img src="dashboards/widgets/powerpack/group_header_icons.png" alt="Dashboard group header icons highting the Save as Powerpack icon option" style="width:80%;" >}}
+
+1. From a dashboard group's header, click the "Save as Powerpack" icon. 
 1. Fill out details to make this powerpack discoverable to your organization. 
 1. Add tags under "Add Search Categories" to organize your Powerpacks. This allows team members to find the correct Powerpack to add to their dashboard.
 1. Choose which filters should be configurable for the users of this powerpack. 
 
-**Note**: After creating a Powerpack, the original group will be replaced with an instance of the Powerpack.
+**Note**: After creating a Powerpack, the original group is replaced with an instance of the Powerpack.
 
 ### Updating a Powerpack
 
@@ -36,13 +45,16 @@ Changes to a Powerpack sync across all dashboards where your Powerpack is used.
 To make changes to the look or layout of a Powerpack:
 1. Hover over the header and click the kebab menu.
 1. Select **Edit Powerpack Layout** from the Powerpack Actions menu.
-1. Make any desired changes to the Powerpack layout or any individual widget and select **Confirm Changes** in the header.
-1. Verify the instances of the Powerpack that are updated on other dashboards.
+1. Make any desired changes to the Powerpack layout or any individual widget and select **Confirm Changes**.
+1. If this Powerpack is used in multiple dashboard, a prompt opens up to verify the instances of the Powerpack that are affected by this update.
+
+{{< img src="dashboards/widgets/powerpack/powerpack_actions_menu.png" alt="Action menu options to update a Powerpack and the Powerpack instance accessed through kebab on powerpack header" style="width:80%;" >}}
 
 To make changes to the Powerpack Details:
 1. Hover over the header and click the kebab menu.
 1. Select **Edit Powerpack Details** from the Powerpack Actions menu.
 1. Make changes to the Powerpack info, the search categories, or filter configuration and select **Update Powerpack**.
+1. If this Powerpack is used in multiple dashboard, a prompt opens to verify the instances of the Powerpack that are affected by this update.
 
 **Note**: You must have [edit permissions](#powerpack-permissions) to make any updates to the Powerpack or to modify the permissions.
 
@@ -53,20 +65,23 @@ After you create a Powerpack, you can add an instance of that Powerpack to multi
 
 To add a powerpack instance to the dashboard:
 1. Click the "Powerpacks" tab of the widget tray to find available powerpacks. You can search with text as well as the predefined tags. 
-1. Click the desired Powerpack to add to your dashboard.
-1. Customize the display of the powerpack instance with the *Header Style* selection. 
+1. Click the desired Powerpack to add to your dashboard to open the configuration for the powerpack instance.
 1. Select filter values and how the filters are controlled.
     * Powerpack filters - the selected value applies to widgets inside the powerpack instance.
     * Dashboard filters - is controlled by dashboard template variables.
+1. Click **Confirm**. 
 
 ### Customizing a Powerpack instance
+
 Changes to a powerpack instance do not apply to other powerpack instances in other dashboards. 
 
-To customize how Powerpack instances are displayed on your dashboard:
-1.Hover over the header and click the kebab menu.
+To customize Powerpack instances displayed on your dashboard:
+1. Click the kebab menu on the instance header.
 1. Select **Edit Display Options** from the Instance Actions menu.
 1. Choose new styling options for the header, update the group title, or configure the filters used by your powerpack.
-1. Configure the tag values of your powerpack instance. For example, if the Powerpack is configured with `env:*`, in your powerpack instance, you can specify the value with `env:prod`. Additionally, if you check Add to dashboard, you can use this as a dashboard template variable.
+1. Configure the tag values of your powerpack instance. Check **Add to dashboard**, to use this as a dashboard template variable.
+
+{{< img src="dashboards/widgets/powerpack/instance_configuration_modal.png" alt="Configuration options for a Powerpack instance" style="width:100%;" >}}
 
 ## Powerpack permissions
 
