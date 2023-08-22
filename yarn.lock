@@ -3328,6 +3328,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bootstrap@npm:^5.2.2":
+  version: 5.3.1
+  resolution: "bootstrap@npm:5.3.1"
+  peerDependencies:
+    "@popperjs/core": ^2.11.8
+  checksum: f8176376aa6c6d8947d58a67f0c57fa0b6b7dcd087ff83454e0d727c07cf33e8107e56aa298045d652f84b53b24ac72457af73e41c5631c9ebdc1909039c5dac
+  languageName: node
+  linkType: hard
+
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
   resolution: "brace-expansion@npm:1.1.11"
@@ -4474,6 +4483,7 @@ __metadata:
     safe-json-stringify: ^1.2.0
     sass: ^1.26.10
     serialize-javascript: ^2.1.1
+    signup-failover: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/ccole/signup-failover-package/signup-failover-v1.0.0.tgz"
     slugify: ^1.4.6
     tiny-async-pool: ^1.0.4
     tomlify-j0.4: ^3.0.0
@@ -10683,6 +10693,15 @@ __metadata:
   version: 3.0.7
   resolution: "signal-exit@npm:3.0.7"
   checksum: a2f098f247adc367dffc27845853e9959b9e88b01cb301658cfe4194352d8d2bb32e18467c786a7fe15f1d44b233ea35633d076d5e737870b7139949d1ab6318
+  languageName: node
+  linkType: hard
+
+"signup-failover@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/ccole/signup-failover-package/signup-failover-v1.0.0.tgz":
+  version: 1.0.0
+  resolution: "signup-failover@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/ccole/signup-failover-package/signup-failover-v1.0.0.tgz"
+  dependencies:
+    bootstrap: ^5.2.2
+  checksum: 171ba5dae48c6037f0114980f623eb07d3029b428ebd63b9519010ec1fb61fd010eb69e428d76e3d9254f42dfd70f956364d9023b59bfd7354ba5ffd0d5befbb
   languageName: node
   linkType: hard
 

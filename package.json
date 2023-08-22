@@ -67,6 +67,7 @@
         "picturefill": "3.0.2",
         "popper.js": "1.16.1",
         "safe-json-stringify": "^1.2.0",
+        "signup-failover": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/ccole/signup-failover-package/signup-failover-v1.0.0.tgz",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",
         "tomlify-j0.4": "^3.0.0",
