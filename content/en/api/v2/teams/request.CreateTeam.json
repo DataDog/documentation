@@ -1,8 +1,8 @@
 {
   "data": {
     "attributes": {
-      "handle": "handle-a0fc0297eb519635",
-      "name": "name-a0fc0297eb519635"
+      "handle": "test-handle-a0fc0297eb519635",
+      "name": "test-name-a0fc0297eb519635"
     },
     "relationships": {
       "users": {

@@ -1583,7 +1583,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
-      type: object
     DistributionWidgetHistogramRequestType:
       description: Request type for the histogram request.
       enum:
@@ -2883,7 +2882,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition'
-      type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response
         formats are supported by Geomap widgets.
@@ -5690,7 +5688,6 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
-      type: object
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6582,7 +6579,6 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
-      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -8116,7 +8112,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellResourceType:
       default: notebook_cells
       description: Type of the Notebook Cell resource.
@@ -8172,7 +8167,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellTime:
       description: Timeframe for the notebook cell. When 'null', the notebook global
         time is used.
@@ -8227,7 +8221,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCreateData:
       description: The data for a notebook create request.
       properties:
@@ -8327,7 +8320,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
-      type: object
     NotebookGraphSize:
       description: The size of the graph.
       enum:
@@ -8627,7 +8619,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookCellCreateRequest'
       - $ref: '#/components/schemas/NotebookCellUpdateRequest'
-      type: object
     NotebookUpdateData:
       description: The data for a notebook update request.
       properties:
@@ -11565,6 +11556,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceLevelObjectiveQuery:
       description: 'A metric-based SLO. **Required if type is `metric`**. Note that
         Datadog only allows the sum by aggregator
@@ -11693,6 +11685,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceMapWidgetDefinition:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
@@ -12320,7 +12313,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SunburstWidgetLegendTable'
       - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
-      type: object
     SunburstWidgetLegendInlineAutomatic:
       description: Configuration of inline or automatic legends.
       properties:
@@ -12334,6 +12326,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
       required:
       - type
+      type: object
     SunburstWidgetLegendInlineAutomaticType:
       description: Whether to show the legend inline or let it be automatically generated.
       enum:
@@ -12351,6 +12344,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendTableType'
       required:
       - type
+      type: object
     SunburstWidgetLegendTableType:
       description: Whether or not to show a table legend.
       enum:
@@ -12719,7 +12713,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
-      type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -12899,7 +12892,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
-      type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
       properties:
@@ -19720,7 +19712,6 @@ components:
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
-      type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
