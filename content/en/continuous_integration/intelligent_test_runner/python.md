@@ -26,10 +26,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
 ### Test Visibility setup
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
-### UI activation
-You, or a user in your organization with "Intelligent Test Runner Activation" permissions, must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+{{% ci-itr-activation-instructions %}}
 
 ### Configuring the test runner environment
 
@@ -66,4 +63,3 @@ DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddt
 
 [1]: /continuous_integration/tests/python
 [2]: https://app.datadoghq.com/organization-settings/application-keys
-[3]: https://app.datadoghq.com/ci/settings/test-service

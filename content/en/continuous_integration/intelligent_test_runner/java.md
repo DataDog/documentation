@@ -19,15 +19,29 @@ Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`.
 
 ## Setup
 
+### Test Visibility setup
+
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
-To enable Intelligent Test Runner, set the following environment variables:
+{{% ci-itr-activation-instructions %}}
 
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-If you are reporting data through the Agent, then the agent process requires the key.<br/>
-If you are using Agentless mode, then the tracer process uses the key.<br/>
-**Default**: `(empty)`<br/>
+### Configuring the test runner environment
+
+{{< tabs >}}
+
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% ci-itr-agent %}}
+{{% /tab %}}
+
+{{% tab "Cloud CI Provider (Agentless)" %}}
+{{% ci-itr-agentless %}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Additional environment variables
+
+To enable Intelligent Test Runner, set the following environment variables:
 
 `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` (Optional)
 : Intelligent Test Runner requires [Jacoco][4] for collecting code coverage.<br/>
@@ -68,12 +82,6 @@ mvn clean verify
 
 {{% /tab %}}
 {{< /tabs >}}
-
-
-#### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
 ## Further Reading
 
