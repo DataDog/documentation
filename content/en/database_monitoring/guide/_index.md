@@ -16,7 +16,7 @@ cascade:
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Setting up Heroku Postgres for Database Monitoring{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}Tagging Database Statements{{< /nextlink >}}
-    {{< nextlink href="database_monitoring/guide/managed_authentication" >}}Managed Authentication{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/managed_authentication" >}}Connecting with Managed Authentication{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL Server guides:" >}}
