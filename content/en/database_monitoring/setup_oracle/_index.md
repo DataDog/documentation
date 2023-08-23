@@ -100,7 +100,7 @@ Execute all `grant` permission commands according to the documentation for your 
 
 ### Install the Oracle integration
 
-On the [Integrations][1] page in Datadog, install the [Oracle integration][2] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
+On the Integrations page in Datadog, install the [Oracle integration][2] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
 
 ### Upgrade the Oracle integration in your Agent
 
