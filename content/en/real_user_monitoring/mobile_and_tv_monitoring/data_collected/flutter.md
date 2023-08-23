@@ -5,6 +5,8 @@ description: Learn about the data collected by Flutter Monitoring.
 code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+- /real_user_monitoring/flutter/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub

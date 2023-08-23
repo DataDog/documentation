@@ -4,6 +4,8 @@ kind: documentation
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
+aliases:
+- /real_user_monitoring/android/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub

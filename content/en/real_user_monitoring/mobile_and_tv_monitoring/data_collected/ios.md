@@ -4,6 +4,8 @@ kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+- /real_user_monitoring/ios/data_collected/
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
     tag: "Github"

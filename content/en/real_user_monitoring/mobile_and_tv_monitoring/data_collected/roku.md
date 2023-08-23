@@ -5,6 +5,8 @@ is_beta: true
 code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+- /real_user_monitoring/roku/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
   tag: GitHub

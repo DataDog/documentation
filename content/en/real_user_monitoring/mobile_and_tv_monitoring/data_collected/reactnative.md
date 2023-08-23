@@ -2,9 +2,11 @@
 title: RUM React Native Data Collected
 kind: documentation
 description: Learn about the data collected by React Native Monitoring.
-code_lang: react-native
+code_lang: reactnative
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+- /real_user_monitoring/reactnative/data_collected/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub

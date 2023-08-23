@@ -23,7 +23,6 @@ further_reading:
   text: Explore Datadog RUM
 ---
 
-## Further Reading
+For information about data collected within RUM monitoring, choose a platform:
 
-{{< partial name="whats-next/whats-next.html" >}}
-
+{{< partial name="rum/rum-getting-started-mobile-data-collected.html" >}}

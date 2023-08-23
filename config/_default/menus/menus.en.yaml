@@ -3601,6 +3601,31 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_data_collected
     weight: 207
+  - name: Android
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/android
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_android
+    weight: 207
+  - name: iOS
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_ios
+    weight: 208
+  - name: Flutter
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_flutter
+    weight: 209
+  - name: React Native
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/reactnative
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_reactnative
+    weight: 210
+  - name: Roku
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_roku
+    weight: 211
   - name: Mobile Vitals
     url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
     parent: mobile_and_tv_monitoring
