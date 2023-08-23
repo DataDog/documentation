@@ -152,6 +152,20 @@ To delete a Quality Gates rule, click the **Delete** icon next to the **Edit** b
 
 {{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
 
+## Enable GitHub checks creation
+
+[GitHub checks][9] can be automatically created on the commits in which the quality gates rules are evaluated. This allows you to see the results of
+the rule evaluations directly in GitHub. When this feature is enabled, there will be one GitHub check created for each rule evaluated.
+The check will contain additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
+
+To enable this feature:
+1. Go to the [GitHub integration tile][10]. If you do not have this integration set up, or you don't have a GitHub app within the integration,
+you can follow [this guide][11] to set up one.
+2. Grant `Checks: Write` access to the GitHub application.
+
+After the permission is granted, you should be able to see the checks in GitHub. Note that a current limitation
+is that you cannot re-run a check to re-run the related Quality Gates rule.
+
 ## Permissions
 
 Only users with the `quality_gate_rules_write` permission can create and edit Quality Gate rules. Users with the `quality_gate_rules_read` permission can view Quality Gate rules.
@@ -173,3 +187,6 @@ You can view information about who created, modified, and deleted Quality Gates 
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/blob/master/README.md
 [8]: /continuous_integration/guides/flaky_test_management/
+[9]: https://docs.github.com/en/rest/checks?apiVersion=2022-11-28
+[10]: https://app.datadoghq.com/integrations/github
+[11]: https://docs.datadoghq.com/integrations/github/
