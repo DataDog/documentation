@@ -73,7 +73,7 @@ To add a powerpack instance to the dashboard:
 
 ### Customizing a Powerpack instance
 
-Changes to a powerpack instance do not apply to other powerpack instances in other dashboards. 
+Changes to a powerpack instance **do not** apply to other powerpack instances in other dashboards. 
 
 To customize Powerpack instances displayed on your dashboard:
 1. Click the kebab menu on the instance header.
