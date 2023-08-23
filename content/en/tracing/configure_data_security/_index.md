@@ -261,7 +261,7 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string`: If true, obfuscates query strings in URLs.
+* `remove_query_string`: If true, obfuscates query strings in URLs (`http.url`).
 * `remove_paths_with_digits`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
 
 
