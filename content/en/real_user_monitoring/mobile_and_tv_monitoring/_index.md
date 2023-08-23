@@ -2,6 +2,7 @@
 title: Mobile and TV Monitoring
 kind: documentation
 description: tk
+type: multi-code-lang
 further_reading:
 - link: '/real_user_monitoring/session_replay/'
   tag: 'Documentation'
