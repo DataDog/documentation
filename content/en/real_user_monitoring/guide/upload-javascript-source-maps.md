@@ -18,7 +18,16 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 ## Instrument your code
 
-Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. Also, ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300 MB** (except AP1 and GovCloud sites, where the limit is **50 MB**).
+Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
+
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300 MB**.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50 MB**.
+{{< /site-region >}}
+</div>
 
 See the following configurations for popular JavaScript bundlers.
 
