@@ -1,6 +1,6 @@
 #### Additional Datadog Agent configuration
 
-In addition to the [Datadog API Key][101], a [Datadog application key][102] must be specified in the [Agent Configuration File][103]
+In addition to the [Datadog API Key][101], a [Datadog application key][102] must be specified in the [Agent Configuration File][103].
 
 `app_key` (Required)
 : The [Datadog application key][102] used to query the tests to be skipped.<br/>
