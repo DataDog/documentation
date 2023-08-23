@@ -19,6 +19,10 @@ The features described on this page are in private beta. Contact your Customer S
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
+<div class="alert alert-danger">
+Before completing the steps below, verify that you have met <a href="/database_monitoring/setup_oracle">the prerequisites</a> for Database Monitoring.
+</div>
+
 ## Setup
 
 Complete the following steps to enable Database Monitoring:

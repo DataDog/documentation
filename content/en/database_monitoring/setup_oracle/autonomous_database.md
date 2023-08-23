@@ -19,10 +19,9 @@ The features described on this page are in beta. Contact your Customer Success M
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
-Complete the following steps to enable Database Monitoring:
-
-1. [Agent database user setup](#agent-database-user-setup).
-2. [Install the Agent][1].
+<div class="alert alert-danger">
+Before completing the steps below, verify that you have met <a href="/database_monitoring/setup_oracle">the prerequisites</a> for Database Monitoring.
+</div>
 
 ## Agent database user setup
 
@@ -109,7 +108,7 @@ After all Agent configuration is complete, [restart the Datadog Agent][4].
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
 
-[1]: /database_monitoring/setup_oracle/#install-agent
+[1]: /database_monitoring/setup_oracle
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
