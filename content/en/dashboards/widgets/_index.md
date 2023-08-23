@@ -117,6 +117,15 @@ To access the widget overview directly, click the full-screen button on the top 
 
 Additional options are available for [timeseries widgets][1].
 
+## Unit overrides
+
+Customize unit values displayed on widgets to add context to your data. For more use cases and information, see the [Customize your visualizations with unit overrides][7] guide.
+- Unit override: choose to display units in the family of 'memory', and have Datadog take care of displaying the appropriate scale depending on data (such as megabytes or gigabytes).
+- Unit and scale override: fix units to a single scale (display data in megabytes regardless of value).
+- Define custom units: define completely custom units (like 'tests' instead of a generic count).
+
+**Note**: This is not an alternative for assigning units to your data.
+
 ## Custom links
 
 Custom links connect data values to URLs such as a Datadog page or your AWS console.
@@ -177,3 +186,4 @@ To download data from a timeseries, table, or top list widget in CSV format, cli
 [4]: /notebooks/
 [5]: /tracing/services/service_page/
 [6]: /tracing/services/resource_page/
+[7]: /dashboards/guide/unit-override
