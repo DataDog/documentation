@@ -45,7 +45,7 @@ Source errors include code-level information about the error. More information a
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.type`    | string | The error type (or error code in some cases).                   |
+| `error.type`    | string | The error type (or error code in some cases).                     |
 
 ## Collect errors manually
 
@@ -58,7 +58,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][4] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace. Errors sent with any other source (such as `console`) will not be processed by Error Tracking.
+**Note**: The [Error Tracking][4] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace. Errors sent with any other source (such as `console`) are not be processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -238,7 +238,7 @@ For more information about cross-origin scripts and why details are hidden, see 
 Get visibility into cross-origin scripts by following these two steps:
 1. Call JavaScript libraries with [`crossorigin="anonymous"`][7].
 
-    With `crossorigin="anonymous"`, the request to fetch the script is performed securely. No sensitive data is forwarded via cookies or HTTP authentication.
+    With `crossorigin="anonymous"`, the request to fetch the script is performed securely. No sensitive data is forwarded through cookies or HTTP authentication.
 
 2. Configure the [`Access-Control-Allow-Origin`][8] HTTP response header:
 
