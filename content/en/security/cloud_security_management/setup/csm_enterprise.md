@@ -5,8 +5,6 @@ kind: documentation
 
 The Cloud Security Management (CSM) Enterprise package...
 
-To activate CSM Enterprise, you must [configure resource scanning for your cloud accounts](#enable-resource-scanning-for-cloud-accounts) and [enable CSM on the Agent for your hosts and containers](#enable-csm-on-the-agent-for-hosts-and-containers).
-
 ## Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
@@ -65,9 +63,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
 
-1. If you haven't already, install the [Datadog Agent][1].
-
-2. Add the following to the `datadog` section of the `values.yaml` file:
+1. Add the following to the `datadog` section of the `values.yaml` file:
 
     ```yaml
     # values.yaml file
@@ -78,7 +74,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
         runtime:
           enabled: true
     ```
-    **Optional**: To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
@@ -91,16 +87,13 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 3. Restart the Agent.
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
+[1]: /security/threats/runtime_anomaly_detection
 
 {{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
-1. If you haven't already, install the [Datadog Agent][1].
-
-2. Add the following to the `datadog` section of the `values.yaml` file:
+1. Add the following to the `spec` section of the `values.yaml` file:
 
     ```yaml
     # values.yaml file
@@ -112,7 +105,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
           enabled: true
     ```
 
-    **Optional** To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+1. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
@@ -127,14 +120,15 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 3. Restart the Agent.
 
-[1]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator
+
+[1]: /security/threats/runtime_anomaly_detection
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 
-The following command can be used to start the Runtime Security Agent and `system-probe` in a Docker environment:
+Use the following command to start the Runtime Security Agent and `system-probe` in a Docker environment:
 
 {{< code-block lang="shell" filename="docker-runtime-security.sh" >}}
 
@@ -203,9 +197,9 @@ Add the following settings to the `env` section of `security-agent` and `system-
 
 {{% tab "Host (Others)" %}}
 
-For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
+For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
-By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated.
+By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
 
 ```bash
 # /etc/datadog-agent/datadog.yaml file
@@ -235,7 +229,8 @@ runtime_security_config:
     enabled: true
 ```
 
-**Optional**: To enable Runtime Anomaly Detection, add the following to the `system-probe.yaml` file:
+**Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `system-probe.yaml` file:
+
 ```bash
 # /etc/datadog-agent/system-probe.yaml file
 runtime_security_config:
@@ -245,7 +240,8 @@ runtime_security_config:
     enabled: true
 ```
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
+[1]: /security/threats/runtime_anomaly_detection
+
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}
@@ -386,47 +382,6 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 ```
 
 {{% /tab %}}
-
-{{% tab "Docker Misconfigurations" %}}
-
-### Enable CSM Misconfigurations for Docker
-
-1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
-3. On the **Setup** > **Host and containers** tab, click the **[Docker][1]** tile.
-4. Click **Select API key** to choose the API key you want to use with CSM Misconfigurations.
-5. Copy the automatically generated command and run it in your Docker environment to enable CSM Misconfigurations.
-
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-{{% /tab %}}
-
-{{% tab "Kubernetes Misconfigurations" %}}
-
-### Enable CSM Misconfigurations for Kubernetes
-
-1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
-2. Navigate to **Security** > **Setup**.
-3. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
-4. Add the following to the `datadog` section of the `values.yaml` file:
-    ```yaml
-    # values.yaml file
-    datadog:
-    [...]
-      # Add this to enable  CSM Misconfigurations and  CSM Threats
-      securityAgent:
-        runtime:
-          enabled: true
-        compliance:
-          enabled: true
-    ```
-
-5. Restart the Agent.
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: https://app.datadoghq.com/security/configuration/csm/setup
-
-{{% /tab %}}
-
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup

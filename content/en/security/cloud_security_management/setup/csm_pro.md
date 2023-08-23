@@ -3,9 +3,7 @@ title: Setting Up CSM Pro
 kind: documentation
 ---
 
-The Cloud Security Management (CSM) Pro package 
-
-To activate CSM Pro, you must [enable resource scanning for your cloud accounts](#enable-resource-scanning-for-cloud-accounts).
+The Cloud Security Management (CSM) Pro package...
 
 ## Enable resource scanning for cloud accounts
 
