@@ -22,10 +22,10 @@ Configure your JavaScript bundler such that when minifying your source code, it 
 
 <div class="alert alert-warning">
 {{< site-region region="us,us3,us5,eu" >}}
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300 MB**.
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300** MB.
 {{< /site-region >}}
 {{< site-region region="ap1,gov" >}}
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50 MB**.
+Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50** MB.
 {{< /site-region >}}
 </div>
 
