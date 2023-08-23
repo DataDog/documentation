@@ -64,7 +64,9 @@ datadog:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+In EKS cluster Operator can be installed via [Helm Chart][5] or as [EKS Add-on][6]
+
+The configuration below is meant to work with either setup, when the Agent is installed in the same namespace as the Datadog Operator.
 
 ```yaml
 kind: DatadogAgent
@@ -609,3 +611,5 @@ spec:
 [2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
 [3]: /containers/cluster_agent/admission_controller
 [4]: https://github.com/Azure/AKS/releases/tag/2022-10-30
+[5]: /getting_started/containers/datadog_operator
+[6]: /agent/guide/operator-eks-addon
