@@ -9,15 +9,18 @@ code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
-  tag: Blog
-  text: Monitor Flutter application performance with Datadog Mobile RUM
+- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
+  tag: Documentation
+  text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
+- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
+  tag: Blog
+  text: Monitor Flutter application performance with Datadog Mobile RUM
 
 ---
 ## Overview

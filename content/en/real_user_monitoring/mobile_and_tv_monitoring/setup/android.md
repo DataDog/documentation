@@ -8,6 +8,9 @@ code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
 further_reading:
+- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
+  tag: Documentation
+  text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android
   tag: Github
   text: Source code for dd-sdk-android

@@ -4,11 +4,14 @@ kind: documentation
 description: Collect RUM data from your React Native projects.
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/
-    - /real_user_monitoring/reactnative/
+    - /real_user_monitoring/react-native/
 code_lang: react-native
 type: multi-code-lang
 code_lang_weight: 40
 further_reading:
+- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/reactnative
+  tag: Documentation
+  text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
   text: Source code for dd-sdk-reactnative
