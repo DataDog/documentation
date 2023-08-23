@@ -21,10 +21,10 @@ further_reading:
 
 Investigating an incident requires trial and error. Drawing from their experience, engineers familiar with a particular area know where to first look for potential problems. Using Watchdog Insights allows all engineers, including less experienced ones, to pay attention to the most important data and accelerate their incident investigations.
 
-When visiting most of Datadog product explorers or pages, Watchdog returns two types of insights:
+Throughout most of Datadog, Watchdog returns two types of insights:
 
-- **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organisation's data. Access the full list in the [Watchdog Alert explorer][12].
-- **Outliers**: Calculated on the product data matching the active query, it surfaces tags that either appear too frequently in some event types (e.g: errors) or drive some continuous metrics upwards (e.g: latency).
+- **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
+- **Outliers**: Calculated on the product data matching the active query, outliers surface tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -34,16 +34,16 @@ The Watchdog Insights carousel sits near the top of the following product pages:
 
 - [Log explorer][1]
 - APM:
-    - [Trace explorer][2]
+    - [Trace Explorer][2]
     - [Service Page][3]
     - [Resource Page][4]
-    - [Database explorer][5]
-    - [Profile explorer][6]
+    - [Database Explorer][5]
+    - [Profile Explorer][6]
 - Infrastructure:
-    - [Live Processes explorer][7]
-    - [Serverless explorer][8]
-    - [Kubernetes explorer][9]
-- [Real User Monitoring (RUM) explorer][10]
+    - [Processes Explorer][7]
+    - [Serverless Explorer][8]
+    - [Kubernetes Explorer][9]
+- [Real User Monitoring (RUM) Explorer][10]
 - [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
@@ -52,11 +52,11 @@ Expand the carousel for an overview. The highest priority insights (based on `In
 
 Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
-Every outlier comes with embedded interactions and a side panel with troubleshooting information. The insight interactions and side panel vary based on the Watchdog Insight type.
+Every outlier comes with embedded interactions and a side panel with troubleshooting information. Each Insight's interactions and side panel vary based on the Watchdog Insight type.
 
-**Filter on Insight query**:
+### Filter on Insight query
 
-To refine your current view to match a Watchdog Insight, hover over the top right corner of an insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
@@ -65,24 +65,24 @@ To refine your current view to match a Watchdog Insight, hover over the top righ
 {{< tabs >}}
 {{% tab "Log Management" %}}
 
-**Error outliers**
+### Error outliers
 
-Error outliers display fields such as [faceted tags or attributes][1] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
+Error outliers display fields such as [faceted tags or attributes][1] containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root causes of problems.
 
 Typical examples of error outliers include `env:staging`, `docker_image:acme:3.1`, and `http.useragent_details.browser.family:curl`.
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
-  * The field name.
-  * The proportion of errors and overall logs that the field contributes to.
+  * The field name
+  * The proportion of errors and overall logs that the field contributes to
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 73.3% of total errors and a blue bar with 8.31% of total errors" style="width:50%;" >}}
 
-In the **full side panel** view, you can see:
+In the full side panel view, you can see:
 
-  * The timeseries of error logs that contain the field.
-  * Tags that are often associated with the error logs.
-  * A comprehensive list of [log patterns][2].
+  * The timeseries of error logs that contain the field
+  * Tags that are often associated with the error logs
+  * A comprehensive list of [log patterns][2]
 
 {{< img src="logs/explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
 
@@ -91,39 +91,39 @@ In the **full side panel** view, you can see:
 {{% /tab %}}
 {{% tab "APM" %}}
 
-APM Outliers are available on all APM pages where the carousel is available:
- - [Trace explorer](/tracing/trace_explorer/?tab=listview)
+APM outliers are available on all APM pages where the Watchdog Insights carousel is available:
+ - [Trace Explorer](/tracing/trace_explorer/?tab=listview)
  - [Service Page](/tracing/services/service_page/)
  - [Resource Page](/tracing/services/resource_page/)
 
-**Error outliers**
+### Error outliers
 
 Error outliers display fields such as tags containing characteristics of errors that match the current query. Statistically overrepresented `key:value` pairs among errors provide hints into the root cause of problems.
 
 Typical examples of error outliers include `env:staging`, `availability_zone:us-east-1a`, `cluster_name:chinook`, and `version:v123456`.
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
-  * The field name.
-  * The proportion of errors and overall traces that the field contributes to.
+  * The field name
+  * The proportion of errors and overall traces that the field contributes to
 
 {{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_s_card.png" alt="The error outlier card showing a red bar with 24.2% of total errors and a blue bar with 12.1% of total errors" style="width:30%;" >}}
 
-In the **full side panel** view, you can see:
+In the full side panel view, you can see:
 
-  * The timeseries of error traces that contain the field.
-  * Tags that are often associated with the error traces.
-  * A comprehensive list of related Error Tracking Issues and failing spans.
+  * The timeseries of error traces that contain the field
+  * Tags that are often associated with the error traces
+  * A comprehensive list of related Error Tracking Issues and failing spans
 
 {{< img src="tracing/trace_explorer/watchdog_insights/error_outlier_side_panel.png" alt="Error Outlier side panel" style="width:100%;" >}}
 
-**Latency Outlier**
+### Latency outliers
 
 Latency outliers display fields such as tags that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of APM spans.
 
 Latency outliers are computed for the span duration.
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
 * The field name
 * The latency distribution for spans containing the tag and the baseline for the rest of the data
@@ -131,16 +131,16 @@ In the **banner card** view, you can see:
 
 {{< img src="tracing/trace_explorer/watchdog_insights/latency_outliers_s_card.png" alt="Latency Outlier banner card" style="width:30%;" >}}
 
-In the **full side panel**, you can see a latency distribution graph for the tag and the baseline. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
+In the full side panel, you can see a latency distribution graph for the tag and the baseline. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of APM events that contain the field.
 
 {{< img src="tracing/trace_explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
-**Lock pressure outlier**
+### Lock pressure outlier
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
   * The name of the impacted service
   * The number of threads impacted
@@ -148,40 +148,40 @@ In the **banner card** view, you can see:
     
 {{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:50%;">}}
 
-In the **full side panel**, you can see instructions on how to resolve the lock pressure:
+In the full side panel, you can see instructions on how to resolve the lock pressure:
 
 {{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" style="width:100%;">}}
 
-**Garbage collection outlier**
+### Garbage collection outlier
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
   * The name of the impacted service
-  * The amount of CPU time used to perform the Garbage Collection
+  * The amount of CPU time used to perform garbage collection
 
 {{< img src="watchdog/small_card_profiling_garbage_collection.png" alt="Profiling insight on Garbage Collection" style="width:30%;">}}
 
-In the **full side panel**, you can see instructions on how to better configure the Garbage Collection to free up some CPU time:
+In the full side panel, you can see instructions on how to better configure garbage collection to free up some CPU time:
 
 {{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" style="width:100%;">}}
 
-**Regex compilation outlier**
+### Regex compilation outlier
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
   * The name of the impacted service
   * The amount of CPU time spent on compiling regexes
 
 {{< img src="watchdog/small_card_profiling_regex_compilation.png" alt="Profiling insight on Regex Compilation" style="width:30%;">}}
 
-In the **full side panel**, you can see instructions on how to improve regex compilation time and examples of functions within your code that could be improved with it:
+In the full side panel, you can see instructions on how to improve regex compilation time, as well as examples of functions within your code that could be improved:
 
 {{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}
 
-For Databases, Watchdog surfaces insights on the following metrics:
+For Database Monitoring, Watchdog surfaces insights on the following metrics:
 
 - `CPU`
 - `Commits `
@@ -190,43 +190,43 @@ For Databases, Watchdog surfaces insights on the following metrics:
 - `Concurrency`
 - `Idle`
 
-Find the databases impacted by one or multiple outliers thanks to the insight carousel
+Find the databases impacted by one or multiple outliers by using the Insight carousel.
 
 {{< img src="watchdog/side_panel_dbm_insights.png" alt="Carousel to filter the Databases with Insights" style="width:100%;">}}
 
-An overlay is then set on the databases with pink pills hihglighting the different insights and giving more information about what happened. 
+An overlay is then set on the databases, with pink pills highlighting the different Insights and giving more information about what happened. 
 
 {{< img src="watchdog/overlay_database_insight.png" alt="Watchdog insight overlay on the database to highlight what is happening" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "RUM" %}}
 
-**Error Outlier**
+### Error outlier
 
-Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root cause of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
+Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root causes of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
 * The field name
 * The proportion of total errors and overall RUM events that the field contributes to
 * Related tags
 
-In the **full side panel**, you can see a timeseries graph about the total number of RUM errors with the field along with a impact pie charts and a list of RUM events that contain the field.
+In the full side panel, you can see a timeseries graph about the total number of RUM errors with the field, along with impact pie charts and a list of RUM events that contain the field.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Error Outlier full side panel" style="width:100%;" >}}
 
-**Latency Outlier**
+### Latency outlier
 
 Latency outliers display fields such as [faceted tags or attributes][1] that are associated with performance bottlenecks that match the current search query. `key:value` pairs with worse performance than the baseline can provide hints into the performance bottlenecks among a subset of real users.
 
 Latency outliers are computed for [Core Web Vitals][2] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][3]. For more information, see [Monitoring Page Performance][2].
 
-In the **banner card** view, you can see:
+In the banner card view, you can see:
 
 * The field name
 * The performance metric value containing the field and the baseline for the rest of the data
 
-In the **full side panel**, you can see a timeseries graph about the performance metric. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
+In the full side panel, you can see a timeseries graph about the performance metric. The X axis has increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
@@ -246,25 +246,25 @@ For serverless infrastructures, Watchdog surfaces the following insights:
 - `Init Duration Up/Down`
 - `Runtime Duration Up/Down`
 
-Find the serverless functions impacted by one or multiple outliers thanks to the `Watchdog Insights` facet:
+Find the serverless functions impacted by one or multiple outliers by using the Insights carousel.
 
 {{< img src="watchdog/side_panel_serverless_facet_insights.png" alt="Facet to filter the Serverless Functions with insights" style="width:30%;">}}
 
-An overlay is then set on the function with pink pills hihglighting the different insights and giving more information about what happened. An `error` button also links [to instructions][1] on how to address those for your function:
+An overlay is then set on the function, with pink pills highlighting the different insights and giving more information about what happened.
 
 {{< img src="watchdog/overlay_serverless_insight.png" alt="Watchdog insight overlay on the function to highlight what is happening" style="width:100%;">}}
 
 [1]: /serverless/guide/serverless_warnings/#errors
 {{% /tab %}}
-{{% tab "Live Processes" %}}
+{{% tab "Processes" %}}
 
-For Live Processes, the Watchdog insight carousel is reflecting [all the Processes anomalies][1] for the current context of the Live process explorer.
+For Process Explorer, the Watchdog Insight carousel reflects [all Process anomalies][1] for the current context of the Process Explorer.
 
 [1]: /watchdog/#overview
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-For containers, the Watchdog insight carousel is reflecting [all the Kubernetes anomalies][1] for the current context of the Kubernetes explorer.
+For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kubernetes anomalies][1] for the current context of the Kubernetes Explorer.
 
 [1]: /watchdog/#overview
 {{% /tab %}}
