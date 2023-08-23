@@ -81,6 +81,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 ## Setting up the Splunk index
 
 <div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
+
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
 
@@ -88,7 +89,7 @@ To receive logs from the Observability Pipelines Worker, you must provision a HE
 2. Add a new HTTP Event Collector input and assign it a name.
 3. Select the indexes where you want the logs to be sent.
 
-After you add the input, Splunk creates a token for you. The token is typically in a UUID format. In the sample configurations provided in later sections in this article, you will add this token to the configuration so that the Observability Pipelines Worker can authenticate itself.
+After you add the input, Splunk creates a token for you. The token is typically in a UUID format. In the sample configurations provided in later sections in this article, add this token to the configuration so that the Observability Pipelines Worker can authenticate itself.
 
 ## Installing the Observability Pipelines Worker
 
@@ -118,7 +119,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
     datadog:
       apiKey: "<datadog_api_key>"
@@ -154,7 +155,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "Azure AKS" %}}
 1. Download the [Helm chart][1] for Azure AKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
     datadog:
       apiKey: "<datadog_api_key>"
@@ -190,7 +191,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart][1] for Google GKE.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
     datadog:
       apiKey: "<datadog_api_key>"
