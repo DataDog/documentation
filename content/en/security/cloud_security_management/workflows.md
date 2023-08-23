@@ -5,7 +5,7 @@ kind: documentation
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools. 
 
-When combined with [Cloud Security Management (CSM)][2], it enables you to automate your security-related workflows. For example, you can create workflows that allow you to intervene when a [PLACEHOLDER - Slack], or automatically create a Jira ticket when [PLACEHOLDER].
+When combined with [Cloud Security Management (CSM)][2], it enables you to automate your security-related workflows. For example, you can create workflows that allow you to [block access to an AWS S3 bucket via an interactive Slack message](#block-access-to-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## Trigger a workflow
 
@@ -25,9 +25,9 @@ After running the workflow, additional information is shown in the side panel. Y
 
 For detailed instructions on how to create a workflow, see the [Workflow Automation docs][3].
 
-### Slack...
+### Block access to S3 bucket via Slack
 
-### Create a Jira issue when a new security issue is detected 
+### Automatically create and assign a Jira issue
 
 [1]: /service_management/workflows
 [2]: /security/cloud_security_management/
