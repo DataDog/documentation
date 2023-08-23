@@ -3,6 +3,12 @@ further_reading:
 - link: /network_monitoring/devices/profiles
   tag: ドキュメント
   text: ネットワークデバイスモニタリングのプロファイルの使用
+- link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
+  tag: ブログ
+  text: Datadog で NetFlow トラフィックデータを監視する
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
+  tag: ブログ
+  text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
 is_beta: true
 kind: documentation
 title: NetFlow Monitoring
@@ -10,9 +16,9 @@ title: NetFlow Monitoring
 
 ## 概要
 
-Datadog で NetFlow Monitoring を使用すると、Netflow 対応デバイスからのフローレコードを視覚化して監視することができます。
+Datadog で NetFlow Monitoring を使用すると、NetFlow 対応デバイスからのフローレコードを視覚化して監視することができます。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 ネットワークデバイスモニタリングで NetFlow Monitoring を使用するには、[Agent][1] のバージョン 7.45 以降を使用していることを確認してください。
 
@@ -69,7 +75,7 @@ NetFlow データは、デフォルトで 30 日間保持されます。
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/network_monitoring/devices/snmp_metrics/
 [3]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

@@ -4,7 +4,7 @@ code_lang_weight: 80
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
-  text: W3C Trace Context に対応した OTel インスツルメンテーションされたアプリのモニタリング
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: .NET トレースコンテキストの伝搬
 type: multi-code-lang

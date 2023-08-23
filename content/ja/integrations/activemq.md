@@ -83,7 +83,7 @@ ActiveMQ チェックは、ブローカーとキュー、プロデューサー�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Agent の ActiveMQ チェックは [Datadog Agent][3] パッケージに含まれています。ActiveMQ ノードに追加でインストールする必要はありません。
 
@@ -220,7 +220,7 @@ ActiveMQ XML からメトリクスをリアルタイムに取得すると、以�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ActiveMQ XML チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

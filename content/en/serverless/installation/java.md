@@ -217,9 +217,133 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+Use this format for your [Terraform resource][1]:
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+
+  layers = [
+    <DATADOG_TRACER_ARN>,
+    <DATADOG_EXTENSION_ARN>
+  ]
+
+  environment {
+    variables = {
+      DD_SITE                     = <DATADOG_SITE>
+      DD_API_KEY_SECRET_ARN       = <API_KEY>
+      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
+    }
+  }
+}
+```
+
+Fill in variables accordingly:
+
+1. Replace `<DATADOG_TRACER_ARN>` with the ARN of the appropriate Datadog tracer depending on your type of region:
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>LAYERS</th>
+        </tr>
+        <tr>
+            <td>Commercial</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+                </code>
+            </td>
+        </tr>
+        <tr>
+            <td>GovCloud</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+                </code>
+                </td>
+        </tr>
+    </table>
+
+   In each ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>ARCHITECTURE</th>
+            <th>LAYERS</th>
+        </tr>
+        <tr>
+            <td rowspan=2>Commercial</td>
+            <td>x86_64</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+            </td>
+        <tr>
+            <td>arm64</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+                </td>
+        </tr>
+        <tr>
+            <td rowspan=2>GovCloud</td>
+            <td>x86_64</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+                </td>
+        <tr>
+            <td>arm64</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+            </td>
+        </tr>
+    </table>
+
+3. Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+
+4. Replace `<API_KEY>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, use `DD_API_KEY` instead of `DD_API_KEY_SECRET_ARN` and set the value to your Datadog API key in plaintext.
+
+#### Full example
+
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+
+  layers = [
+    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-java:11",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+  ]
+
+  environment {
+    variables = {
+      DD_SITE                     = datadoghq.com
+      DD_API_KEY_SECRET_ARN       = "arn:aws..."
+      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
+    }
+  }
+}
+```
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+{{% /tab %}}
 {{% tab "Custom" %}}
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Tracer
 
     [Configure the layers][1] for your Lambda function using the ARN in the following format:
@@ -254,53 +378,13 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. Install the Datadog Tracer
-
-    [Configure the layers][1] for your Lambda function using the ARN in the following format:
-
-    ```sh
-    # Use this format for Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
-
-    # Use this format for Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
-    ```
-
-    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
-
-2. Install the Datadog Lambda Extension
-
-    [Configure the layers][1] for your Lambda function using the ARN in the following format:
-
-    ```sh
-    # Use this format for x86-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for arm64-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-    ```
-
-    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-{{< /site-region >}}
-
 3. Set the required environment variables
 
     - Set `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
     - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}

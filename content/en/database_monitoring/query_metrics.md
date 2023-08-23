@@ -52,7 +52,7 @@ On the left side of the view are lists of facets for filtering the list of queri
 
 - **Core**: Services, hosts, environments.
 - **Database**: Postgres has `database` and `user` facets. MySQL has `schema` facets.
-- **Infrastructure** Traditional Datadog infrastructure tags collected by the Agent.
+- **Infrastructure**: Traditional Datadog infrastructure tags collected by the Agent.
 
 Select or clear facets to find the list of queries you're interested in.
 
@@ -116,7 +116,7 @@ The **Hosts Running This Query** tab lists the hosts that run this query, with a
 
 ## Database Monitoring dashboards
 
-For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at to top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
+For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at the top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
 
 ## Further Reading
 

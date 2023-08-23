@@ -177,7 +177,7 @@ python_best_practices_data:
     text: "do not use too many nested if conditions"
   - link: "/continuous_integration/static_analysis/rules/python-best-practices/too-many-while"
     tag: "too-many-while"
-    text: "do not use too many nested while"
+    text: "do not use too many nested loops and conditions "
   - link: "/continuous_integration/static_analysis/rules/python-best-practices/type-check-isinstance"
     tag: "type-check-isinstance"
     text: "use isinstance instead of type"
@@ -190,7 +190,7 @@ python_best_practices_data:
 python_code_style_data:
   - link: "/continuous_integration/static_analysis/rules/python-code-style/assignment-names"
     tag: "assignment-names"
-    text: "variable names muse use snake_case"
+    text: "variable names must use snake_case"
   - link: "/continuous_integration/static_analysis/rules/python-code-style/class-name"
     tag: "class-name"
     text: "class name should be CamelCase"
@@ -208,6 +208,9 @@ python_design_data:
     tag: "function-too-long"
     text: "functions must have less than 100 lines"
 python_django_data:
+  - link: "/continuous_integration/static_analysis/rules/python-django/http-response-from-request"
+    tag: "http-response-from-request"
+    text: "Lack of sanitization of user data"
   - link: "/continuous_integration/static_analysis/rules/python-django/http-response-with-json-dumps"
     tag: "http-response-with-json-dumps"
     text: "use JsonResponse instead of HttpResponse to send JSON data"
@@ -226,10 +229,49 @@ python_django_data:
   - link: "/continuous_integration/static_analysis/rules/python-django/no-unicode-on-models"
     tag: "no-unicode-on-models"
     text: "do not use __unicode__"
+  - link: "/continuous_integration/static_analysis/rules/python-django/open-filename-from-request"
+    tag: "open-filename-from-request"
+    text: "Filename coming from the request"
+  - link: "/continuous_integration/static_analysis/rules/python-django/os-system-from-request"
+    tag: "os-system-from-request"
+    text: "Command coming from incoming request"
+  - link: "/continuous_integration/static_analysis/rules/python-django/subprocess-from-request"
+    tag: "subprocess-from-request"
+    text: "Command coming from incoming request"
   - link: "/continuous_integration/static_analysis/rules/python-django/use-convenience-imports"
     tag: "use-convenience-imports"
     text: "use convenience imports whenever possible"
 python_flask_data:
+  - link: "/continuous_integration/static_analysis/rules/python-flask/disable-sqlalchemy-text"
+    tag: "disable-sqlalchemy-text"
+    text: "Do not use text() as it leads to SQL injection"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/html-format-from-user-input"
+    tag: "html-format-from-user-input"
+    text: "Use of unsanitized data to make API calls"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/listen-all-interfaces"
+    tag: "listen-all-interfaces"
+    text: "Your application should not listen on all interfaces"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/no-render-template-string"
+    tag: "no-render-template-string"
+    text: "Do not use template created with strings"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/open-file-unsanitized-data"
+    tag: "open-file-unsanitized-data"
+    text: "Use of unsanitized data to open file"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/os-system-unsanitized-data"
+    tag: "os-system-unsanitized-data"
+    text: "Use of unsanitized data to create processes"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/secure-cookie"
+    tag: "secure-cookie"
+    text: "Make sure cookies are safe and secure"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/sqlalchemy-injection"
+    tag: "sqlalchemy-injection"
+    text: "Use of unsanitized data to issue SQL queries"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/ssrf-requests"
+    tag: "ssrf-requests"
+    text: "Use of unsanitized data to make API calls"
+  - link: "/continuous_integration/static_analysis/rules/python-flask/urlopen-unsanitized-data"
+    tag: "urlopen-unsanitized-data"
+    text: "Use of unsanitized data to open API"
   - link: "/continuous_integration/static_analysis/rules/python-flask/use-jsonify"
     tag: "use-jsonify"
     text: "use jsonify instead of json.dumps for JSON output"
@@ -243,6 +285,113 @@ python_inclusive_data:
   - link: "/continuous_integration/static_analysis/rules/python-inclusive/variable-name"
     tag: "variable-name"
     text: "check variable names for wording issues"
+python_pandas_data:
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/arith-operator-not-functions"
+    tag: "arith-operator-not-functions"
+    text: "Use arithmetic operator instead of a function"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/avoid-inplace"
+    tag: "avoid-inplace"
+    text: "Avoid using inplace=True"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/comp-operator-not-function"
+    tag: "comp-operator-not-function"
+    text: "Use operators to compare values, not functions"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/import-as-pd"
+    tag: "import-as-pd"
+    text: "Import pandas according to coding guidelines"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/isna-instead-of-isnull"
+    tag: "isna-instead-of-isnull"
+    text: "Use isna instead of isnull"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/loc-not-ix"
+    tag: "loc-not-ix"
+    text: "prefer iloc or loc rather than ix"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/notna-instead-of-notnull"
+    tag: "notna-instead-of-notnull"
+    text: "prefer notna to notnull"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/pivot-table"
+    tag: "pivot-table"
+    text: "Use pivot_table instead of pivot or unstack"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/use-read-csv-not-read-table"
+    tag: "use-read-csv-not-read-table"
+    text: "prefer read_csv to read_table"
+python_security_data:
+  - link: "/continuous_integration/static_analysis/rules/python-security/asyncio-subprocess-create-shell"
+    tag: "asyncio-subprocess-create-shell"
+    text: "Unsafe execution of shell commands"
+  - link: "/continuous_integration/static_analysis/rules/python-security/asyncio-subprocess-exec"
+    tag: "asyncio-subprocess-exec"
+    text: "Unsafe execution of shell commands"
+  - link: "/continuous_integration/static_analysis/rules/python-security/avoid-random"
+    tag: "avoid-random"
+    text: "use secrets package over random package"
+  - link: "/continuous_integration/static_analysis/rules/python-security/aws-boto-credentials"
+    tag: "aws-boto-credentials"
+    text: "use env vars over hardcoded values"
+  - link: "/continuous_integration/static_analysis/rules/python-security/deserialize-untrusted-data"
+    tag: "deserialize-untrusted-data"
+    text: "avoid unsafe function to (de)serialize data"
+  - link: "/continuous_integration/static_analysis/rules/python-security/file-write-others"
+    tag: "file-write-others"
+    text: "do not let all users write permissions"
+  - link: "/continuous_integration/static_analysis/rules/python-security/hardcoded-tmp-file"
+    tag: "hardcoded-tmp-file"
+    text: "Do not hardcode temp file or directory"
+  - link: "/continuous_integration/static_analysis/rules/python-security/html-string-from-parameters"
+    tag: "html-string-from-parameters"
+    text: "Avoid HTML built in strings"
+  - link: "/continuous_integration/static_analysis/rules/python-security/insecure-hash-functions"
+    tag: "insecure-hash-functions"
+    text: "Do not use insecure functions"
+  - link: "/continuous_integration/static_analysis/rules/python-security/insecure-jwt"
+    tag: "insecure-jwt"
+    text: "Ensure JWT signatures are verified"
+  - link: "/continuous_integration/static_analysis/rules/python-security/insecure-ssl-protocols"
+    tag: "insecure-ssl-protocols"
+    text: "Do not use insecure encryption protocols"
+  - link: "/continuous_integration/static_analysis/rules/python-security/jinja-autoescape"
+    tag: "jinja-autoescape"
+    text: "Auto escape should be set to true"
+  - link: "/continuous_integration/static_analysis/rules/python-security/mktemp"
+    tag: "mktemp"
+    text: "Make sure temporary files are secure"
+  - link: "/continuous_integration/static_analysis/rules/python-security/no-empty-array-as-parameter"
+    tag: "no-empty-array-as-parameter"
+    text: "Do not use empty array as default parameter"
+  - link: "/continuous_integration/static_analysis/rules/python-security/no-eval"
+    tag: "no-eval"
+    text: "use of eval can be insecure"
+  - link: "/continuous_integration/static_analysis/rules/python-security/os-spawn"
+    tag: "os-spawn"
+    text: "Call of a spawn process without sanitization"
+  - link: "/continuous_integration/static_analysis/rules/python-security/os-system"
+    tag: "os-system"
+    text: "Command execution without sanitization"
+  - link: "/continuous_integration/static_analysis/rules/python-security/request-verify"
+    tag: "request-verify"
+    text: "verify should be True"
+  - link: "/continuous_integration/static_analysis/rules/python-security/requests-http"
+    tag: "requests-http"
+    text: "Do not make http calls without encryption"
+  - link: "/continuous_integration/static_analysis/rules/python-security/requests-timeout"
+    tag: "requests-timeout"
+    text: "no timeout was given on call to external resource"
+  - link: "/continuous_integration/static_analysis/rules/python-security/ruamel-unsafe-yaml"
+    tag: "ruamel-unsafe-yaml"
+    text: "Do not use insecure YAML deserialization"
+  - link: "/continuous_integration/static_analysis/rules/python-security/sql-server-security-credentials"
+    tag: "sql-server-security-credentials"
+    text: "do not pass hardcoded credentials"
+  - link: "/continuous_integration/static_analysis/rules/python-security/ssl-unverified-context"
+    tag: "ssl-unverified-context"
+    text: "should not bypass certificate verification"
+  - link: "/continuous_integration/static_analysis/rules/python-security/subprocess-shell-true"
+    tag: "subprocess-shell-true"
+    text: "shell argument leads to unnecessary privileges"
+  - link: "/continuous_integration/static_analysis/rules/python-security/variable-sql-statement-injection"
+    tag: "variable-sql-statement-injection"
+    text: "Avoid SQL injections"
+  - link: "/continuous_integration/static_analysis/rules/python-security/yaml-load"
+    tag: "yaml-load"
+    text: "avoid deserializing untrusted YAML"
 further_reading:
   - link: "/continuous_integration/static_analysis/"
     tag: "Documentation"
@@ -324,6 +473,38 @@ Rules specifically for Flask best practices and security.
 Rules for Python to avoid inappropriate wording in the code and comments.
 
 {{< sa-rule-list "python_inclusive_data" >}}
+
+<br>
+
+### Good practices for data science with pandas
+
+**Ruleset ID:** `python-pandas`
+
+A set of rules to check that pandas code is used appropriately.
+
+ - Ensures `import` declarations follow coding guidelines.
+ - Avoid deprecated code and methods.
+ - Avoid inefficient code whenever possible.
+
+{{< sa-rule-list "python_pandas_data" >}}
+
+<br>
+
+### Ensure your Python code is safe and secure
+
+**Ruleset ID:** `python-security`
+
+Rules focused on finding security and vulnerability issues in your Python code, including those found in the OWASP10 and SANS25.
+ 
+ - Use of bad encryption and hashing protocols
+ - Lack of access control
+ - Security misconfiguration
+ - SQL injections
+ - Hardcoded credentials
+ - Shell injection
+ - Unsafe deserialization
+
+{{< sa-rule-list "python_security_data" >}}
 
 <br>
 

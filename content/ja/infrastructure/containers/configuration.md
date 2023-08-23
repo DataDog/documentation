@@ -103,12 +103,13 @@ password::::== <MY_PASSWORD>
 | ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
 | サービス | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
 | Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+| VerticalPodAutoscalers | 7.27.0 | 7.46.0 | 3.6.8 | 1.16.0 |
 
 **注**: バージョン 1.22 以降、Cluster Agent のバージョン番号は、バージョン 7.39.0 以降、Agent のリリース番号に従います。
 
 ### カスタムタグをリソースに追加
 
-カスタムタグを Kubernetes リソースに追加すると、Kubernetes リソースビュ内のフィルタリングが容易になります。
+カスタムタグを Kubernetes リソースに追加すると、Kubernetes リソースビュー内のフィルタリングが容易になります。
 
 追加タグは、`DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` 環境変数を通して追加されます。
 
@@ -175,7 +176,6 @@ clusterAgent:
 [1]: https://github.com/DataDog/helm-charts
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 
-
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -189,7 +189,7 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -4,14 +4,14 @@ code_lang_weight: 0
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
-  text: W3C Trace Context に対応した OTel インスツルメンテーションされたアプリのモニタリング
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: Java トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][13] と [W3C (トレースコンテキスト)][14] のヘッダー抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのための [B3][13] と [W3C Trace Context][14] のヘッダー抽出と挿入をサポートしています。
 
 分散ヘッダーの挿入と抽出のスタイルを構成することができます。
 

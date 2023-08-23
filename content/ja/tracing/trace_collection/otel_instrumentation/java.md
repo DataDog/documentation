@@ -1,7 +1,7 @@
 ---
 code_lang: java
 code_lang_weight: 0
-description: OTel API で Java アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
+description: OpenTelemetry API で Java アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
@@ -17,19 +17,19 @@ type: multi-code-lang
 
 - Datadog Java トレーシングライブラリ `dd-trace-java` バージョン 1.10.0 以上。
 
-特記されている通り、Datadog のライブラリに実装されている以下の OTel 機能:
+特記されている通り、Datadog のライブラリに実装されている以下の OpenTelemetry 機能:
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|-------------------------------------------|
-| [OTel コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
 | [スパンプロセッサー][2]                  | 非サポート                                          | 
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 
 
-## Datadog トレーシングライブラリを使用するための OTel の構成
+## Datadog トレーシングライブラリを使用するための OpenTelemetry の構成
 
-1. [OTel Java Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OTel インスツルメンテーションを Java コードに追加します。
+1. [OpenTelemetry Java Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OpenTelemetry インスツルメンテーションを Java コードに追加します。
 1. [Datadog トレーシングライブラリを JVM に][11]追加します。
 1. `dd.trace.otel.enabled` システムプロパティを `true` に設定します。
 

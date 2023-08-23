@@ -68,7 +68,7 @@ Datadog Blueprints アドオンでは、Blueprints を使用して Amazon EKS �
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ```
 npm install @datadog/datadog-eks-blueprints-addon

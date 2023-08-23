@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/github"
   tag: "Documentation"
   text: "Learn about the GitHub Integration"
+- link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+  tag: "Blog"
+  text: "Import Backstage YAML files into Datadog"
 ---
 
 ## Overview
@@ -67,6 +70,32 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
+
+## Import data from Backstage 
+
+{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
+
+If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
+
+If you use API or Terraform, replace the YAMLs in your requests. 
+
+If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
+
+Upon import, the following occurs:
+- Datadog only recognizes `kind:component` in Backstage YAMLs as services
+- `name` gets converted to `DD-SERVICE`
+- `namespace` values get mapped to custom tags
+- `lifecycle` gets mapped to `lifecycle`
+- `owner` gets mapped to `team`
+- `metadata.links` gets mapped to `links`
+- `metadata.description` gets mapped to `description`
+- Other `specs` values get mapped to custom tags
+
+## Import data from ServiceNow
+
+You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
+
+
 ## Discover services being reported in other Datadog telemetry data
 
 To discover other services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
@@ -97,4 +126,5 @@ To remove your imported services from the default **Explore** view, click **Clea
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-
+[15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
+[16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion

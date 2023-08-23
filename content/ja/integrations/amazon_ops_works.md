@@ -14,13 +14,13 @@ draft: false
 git_integration_title: amazon_ops_works
 has_logo: true
 integration_id: amazon-opsworks
-integration_title: Amazon OpsWorks
+integration_title: AWS OpsWorks
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ops_works
-public_title: Datadog-Amazon OpsWorks インテグレーション
+public_title: Datadog-AWS OpsWorks インテグレーション
 short_description: AWS OpsWorks のリソース使用状況を追跡。
 version: '1.0'
 ---
@@ -46,14 +46,14 @@ AWS OpsWorks は、あらゆる形式と規模のアプリケーションを簡�
 
 #### ログの有効化
 
-Amazon OpsWorks から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS OpsWorks から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_ops_work` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon OpsWorks ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS OpsWorks ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -68,11 +68,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Ops Works インテグレーションには、イベントは含まれません。
+AWS OpsWorks インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS Ops Works インテグレーションには、サービスのチェック機能は含まれません。
+AWS OpsWorks インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

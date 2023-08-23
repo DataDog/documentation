@@ -1,5 +1,5 @@
 ---
-title: Cluster Checks with Autodiscovery
+title: Cluster Checks
 kind: documentation
 aliases:
     - /agent/autodiscovery/clusterchecks
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Agent automatically discovers containers and creates check configurations by using [Autodiscovery mechanism][1].
+The Datadog Agent automatically discovers containers and creates check configurations by using the [Autodiscovery mechanism][1].
 
 _Cluster checks_ extend this mechanism to monitor noncontainerized workloads, including:
 

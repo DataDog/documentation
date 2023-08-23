@@ -38,7 +38,7 @@ instances:
 from checks import AgentCheck
 class HelloCheck(AgentCheck):
   def check(self, instance):
-    self.gauge('hello.world', 1)   
+    self.gauge('hello.world', 1)
 {{< /code-block >}}
 6. [Agent を再起動します][3]。1 分以内に、[メトリクスサマリー][4]に `hello.world` という新しいメトリクスが表示されます。
 
@@ -170,7 +170,7 @@ class HelloCheck(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://app.datadoghq.com/account/settings#agent
+[1]: http://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/guide/agent-configuration-files#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary

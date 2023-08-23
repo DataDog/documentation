@@ -70,11 +70,14 @@ Datadog Agent でリモート構成を有効にすると、設定されている
 
 ### クラウドワークロードセキュリティ (CWS)
 
-<div class="alert alert-info">これはベータ版の機能です。</div>
+<div class="alert alert-info">デフォルト Agent ルールのリモート構成はベータ版です。</div>
+
+<div class="alert alert-info">カスタムルールのリモート構成は非公開ベータ版です。この<a href="https://docs.google.com/forms/d/e/1FAIpQLSe5Emr7y_Jg3ShcC44HlYtalxKgHUocFAz8dq87xSkjfeALTg/viewform">フォーム</a>にご記入の上、アクセスをリクエストしてください。</div>
 
 - **自動デフォルト Agent ルールアップデート**: 新しい Agent の検出や機能強化がリリースされると、Datadog が管理しているデフォルトの Agent ルールを自動的に受信し、更新します。詳しくは、[Cloud Workload Security の設定][3]をご覧ください。
+- **カスタム Agent ルールの自動デプロイ**: カスタム Agent ルールを指定したホスト (すべてのホストまたは定義したホストのサブセット) に自動的にデプロイします。
 
-### Observability Pipelines（観測データの制御）
+### 観測可能性パイプライン
 <div class="alert alert-info">これは非公開ベータ版の機能です。</div>
 
 - **[観測可能性パイプラインワーカー][4] (OPW) をリモートでデプロイし、更新する**: Datadog UI でパイプラインを構築・編集し、環境内で稼働している OPW インスタンスに構成変更をロールアウトします。

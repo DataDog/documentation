@@ -148,6 +148,20 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Schedule a downtime returns \"OK\" response"
+    }
+  ],
+  "UpdateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",
@@ -733,6 +747,25 @@
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
     }
   ],
+  "AggregateSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Aggregate spans returns \"OK\" response"
+    }
+  ],
+  "ListSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Search spans returns \"OK\" response"
+    },
+    {
+      "group": "spans",
+      "suffix": "_3495563906",
+      "description": "Search spans returns \"OK\" response with pagination"
+    }
+  ],
   "CreateSpansMetric": [
     {
       "group": "spans_metrics",
@@ -766,6 +799,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Create a team returns \"CREATED\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_252121814",
+      "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
   "UpdateTeamLink": [

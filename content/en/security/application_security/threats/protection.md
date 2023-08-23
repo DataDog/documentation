@@ -48,7 +48,7 @@ Create workflows from the available [blueprints][18] and run them directly from 
 
 ## Denylist
 
-Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7].
+Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7]. A denylist supports blocking individual IPs as well as a range of IPs (CIDR blocks).
 
 ## Passlist
 

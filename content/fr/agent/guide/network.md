@@ -29,7 +29,8 @@ L'intégralité du trafic de l'Agent est envoyé via SSL. La destination dépend
 ## Destinations
 
 [APM][1]
-: `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+: `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+`instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}

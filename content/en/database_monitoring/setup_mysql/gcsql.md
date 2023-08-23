@@ -392,7 +392,7 @@ If you have installed and configured the integrations and Agent as described and
 [1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: /integrations/google_cloudsql

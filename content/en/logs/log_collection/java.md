@@ -25,9 +25,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/java-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and standardize Java logs"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
-To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent.
 
 Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event. For example:
 
@@ -536,3 +539,4 @@ To generate this JSON:
 [11]: https://github.com/logstash/logstash-logback-encoder
 [12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [13]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /glossary/#tail

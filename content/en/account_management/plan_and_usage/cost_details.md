@@ -13,10 +13,6 @@ further_reading:
   text: "Managing multiple-organization accounts"
 ---
 
-{{< callout url="http://docs.datadoghq.com/help/">}}
-  Estimated Cost Summary and Cost Chargebacks are in beta. To request access and confirm your organization is supported, contact your account representative or Support.
-{{< /callout >}} 
-
 ## Overview
 
 Estimated Cost Summary and Cost Chargebacks help you understand your estimated month-to-date and historical Datadog costs.
@@ -43,7 +39,7 @@ Use the cost summary to:
 
 The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated costs for the parent organization and each sub-organization. 
 
-{{< img src="account_management/plan_and_usage/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+{{< img src="account_management/plan_and_usage/cost_details/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -61,11 +57,13 @@ See [Get estimated cost across your account][3] to query estimated cost data thr
 
 ### Estimated Cost Summary (sub-organization)
 
+<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
 {{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a sub-organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
-1. While logged in to the child organization, navigate to [Plan & Usage][2].
+1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
 1. Ensure the **Overall** tab is selected.
 
@@ -103,7 +101,7 @@ From a parent organization, view finalized historical costs aggregated by produc
 
 From a parent organization, view estimated costs aggregated by product and sub-organization.
 
-Estimated cost data is available for the current month. If historical cost data is not available for the prior month, estimated cost data also displays for the prior month.
+Estimated cost data is available for the current month. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
 
 {{< img src="account_management/plan_and_usage/estimated-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
@@ -121,15 +119,15 @@ Estimated cost data is available for the current month. If historical cost data 
 
 ## How billing aggregations affect cost changes
 
-Your Datadog bill varies throughout the month. The type of aggregation used to bill each product determines whether its cost remains stable or increases as the month progresses. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
+Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
 
 ### Percentile and average usage billing
 
-Products billed by the maximum count of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes.
+Products billed by the maximum count (high-water mark) of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes if there is a significant spike in usage.
 
 ### Sum of usage billing
 
-Products billed by the sum of usage throughout the month include indexed logs and ingested logs. For these types of products, expect their costs to increase steadily as the month progresses.
+Products billed by the sum of usage throughout the month include indexed logs and ingested logs. For these types of products, expect their costs to increase or decrease based on changes to usage volume.
 
 ## Further reading
 

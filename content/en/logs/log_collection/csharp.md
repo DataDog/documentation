@@ -25,6 +25,9 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 To send your C# logs to Datadog, use one of the following approaches:
@@ -37,7 +40,7 @@ This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Micr
 
 ## File-tail logging with the Datadog Agent
 
-The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
+The recommended approach for C# log collection is to output your logs to a file and then [tail][20] that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
@@ -648,3 +651,4 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [17]: /logs/log_configuration/pipelines/?tab=source
 [18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[20]: /glossary/#tail

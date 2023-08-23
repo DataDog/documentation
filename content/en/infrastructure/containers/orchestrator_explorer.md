@@ -9,7 +9,7 @@ kind: documentation
 
 The Datadog Agent and Cluster Agent can retrieve Kubernetes resources for the [Orchestrator Explorer][1]. This feature allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
-Orchestrator Explorer requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**. 
+Orchestrator Explorer requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
 
 **Note**: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
 
@@ -20,7 +20,7 @@ Ensure that you have [enabled the Process Agent][2]. If you are using Datadog Op
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Orchestrator Explorer is enabled in the Datadog Operator by default. 
+The Orchestrator Explorer is enabled in the Datadog Operator by default.
 
 For verification, ensure that the `features.orchestratorExplorer.enabled` parameter is set to `true` in your `datadog-agent.yaml`:
 
@@ -42,9 +42,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you are using the [official Helm chart][1], Orchestrator Explorer is enabled by default.
+If you are using the [official Helm chart][3], Orchestrator Explorer is enabled by default.
 
-For verification, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your [`values.yaml`][2] file:
+For verification, ensure that the `orchestratorExplorer.enabled` parameter is set to `true` in your [`values.yaml`][4] file:
 
 ```yaml
 datadog:
@@ -57,14 +57,13 @@ datadog:
 
 Then, upgrade your Helm chart.
 
-
-[1]: https://github.com/DataDog/helm-charts
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[3]: https://github.com/DataDog/helm-charts
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Manual" %}}
-For manual setup, see [Set up Orchestrator Explorer with DaemonSet][1].
+For manual setup, see [Set up Orchestrator Explorer with DaemonSet][5].
 
-[1]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
+[5]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -104,9 +103,12 @@ Click on any row in the table or on any object in a Cluster Map to view informat
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="A view of resources in the side panel, opened to processes." style="width:80%;">}}
 
-This panel is useful for troubleshooting and finding information about a selected container or resource, such as:
+The side panel's **YAML** tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history, so you can compare what changed over time and across different versions.
 
-* **YAML**: A detailed YAML overview for the resource.
+{{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="A view of resources in the side panel, showing the yaml history feature" style="width:80%;">}}
+
+The other tabs show more information for troubleshooting the selected resource:
+
 * [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
 * [**APM**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
@@ -121,17 +123,15 @@ For a detailed dashboard of this resource, click the View Dashboard in the top r
 
 ### Resource utilization
 
-Click on **Resource Utilization**, to the right of the **Cluster Map** button. 
+_For the Resource Utilization page, see [Resource Utilization][13]_.
+
+Within the Kubernetes Explorer, tab you can explore a selection of resource utilization metrics.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
 
-This view displays your CPU and memory usage over time. This information helps you detect where resources may be over- or under-provisioned.
+All of these columns support sorting, which helps you to pinpoint individual workloads based on their resource utilization.
 
-Click on any row in the table to view informatiion about a specific resource in a side panel.
-
-{{< img src="infrastructure/livecontainers/resource_utilization_panel.png" alt="Container Resource Utilization Side Panel Details" style="width:80%;">}}
-
-In the above screenshot, pods are grouped by cluster name. The side panel is opened for pods within a particular cluster. Average CPU and memory usage for these pods is displayed.
+{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Container Resource Utilization Sorted Columns" style="width:50%;">}}
 
 ## Notes and known issues
 
@@ -145,4 +145,5 @@ In the above screenshot, pods are grouped by cluster name. The side panel is ope
 [10]: /metrics
 [11]: /tracing
 [12]: /events
+[13]: /infrastructure/containers/kubernetes_resource_utilization
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog

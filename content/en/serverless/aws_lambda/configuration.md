@@ -27,7 +27,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 
 ### Logs
 - [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Disable logs collection](#disable-logs-collection)
+- [Enable/disable logs collection](#enabledisable-log-collection)
 - [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
 - [Parse and transform logs](#parse-and-transform-logs)
 - [Connect logs and traces](#connect-logs-and-traces)
@@ -39,12 +39,12 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
 - [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
 - [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Disable logs collection](#disable-logs-collection)
+- [Enable/disable logs collection](#enabledisable-log-collection)
 - [Parse and transform logs](#parse-and-transform-logs)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
 - [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
-- [Disable trace collection](#disable-trace-collection)
+- [Enable/disable trace collection](#enabledisable-trace-collection)
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
@@ -429,9 +429,52 @@ Datadog recommends keeping the `REPORT` logs, as they are used to populate the i
 
 To scrub or filter other logs before sending them to Datadog, see [Advanced Log Collection][13].
 
-## Disable logs collection
+## Enable/disable log collection
 
-Logs collection through the Datadog Lambda extension is enabled by default.
+Log collection through the Datadog Lambda extension is enabled by default.
+
+{{< tabs >}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # ... other required parameters, such as the Datadog site and API key
+    enableDDLogs: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # ... other required parameters, such as the Datadog site and API key
+      enableDDLogs: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new Datadog(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
+    enableDatadogLogs: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "Others" %}}
+
+Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `true` on your Lambda functions.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Disable log collection
 
 If you want to stop collecting logs using the Datadog Forwarder Lambda function, remove the subscription filter from your own Lambda function's CloudWatch log group.
 
@@ -478,6 +521,8 @@ Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` on your Lam
 {{% /tab %}}
 {{< /tabs >}}
 
+For more information, see [Log Management][47].
+
 ## Parse and transform logs
 
 To parse and transform your logs in Datadog, see documentation for [Datadog log pipelines][14].
@@ -506,9 +551,64 @@ To filter traces before sending them to Datadog, see [Ignoring Unwanted Resource
 
 To scrub trace attributes for data security, see [Configure the Datadog Agent or Tracer for Data Security][23].
 
-## Disable trace collection
+## Enable/disable trace collection
 
-Trace collection through the Datadog Lambda extension is enabled by default. If you want to stop collecting traces from your Lambda functions, follow the instructions below:
+Trace collection through the Datadog Lambda extension is enabled by default. 
+
+If you want to start collecting traces from your Lambda functions, apply the configurations below:
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+```sh
+datadog-ci lambda instrument \
+    --tracing true
+    # ... other required arguments, such as function names
+```
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # ... other required parameters, such as the Datadog site and API key
+    enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # ... other required parameters, such as the Datadog site and API key
+      enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new Datadog(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
+    enableDatadogTracing: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "Others" %}}
+
+Set the environment variable `DD_TRACE_ENABLED` to `true` on your Lambda functions.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Disable trace collection
+
+If you want to stop collecting traces from your Lambda functions, apply the configurations below:
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -973,3 +1073,4 @@ If you have trouble configuring your installations, set the environment variable
 [44]: /security/default_rules/security-scan-detected/
 [45]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
 [46]: https://docs.datadoghq.com/tracing/glossary/#services
+[47]: /logs/

@@ -7,6 +7,8 @@ further_reading:
   - link: "/observability_pipelines/guide/custom-metrics-governance"
     tag: "Documentation"
     text: "Use Observability Pipelines to govern custom metrics"
+algolia:
+  tags: ['custom metrics billing']
 ---
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.

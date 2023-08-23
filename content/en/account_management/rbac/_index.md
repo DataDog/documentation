@@ -181,17 +181,20 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 {{< img src="account_management/rbac/role_templates.png" alt="Role Templates dropdown menu with Datadog Billing Admin Role selected" style="width:90%;">}}
 
-## Restrict access to individual resources
+## Restrict access to individual resources (granular access controls)
 
-Once you have RBAC roles set up, you can restrict access to individual resources by user role.
+Some resources allow you to restrict access to individual resources by roles, [Teams][16] (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of payment methods to billing administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
 
-The following resources allow granular access control:
-- [Dashboards][11]
-- [Monitors][12]
-- [Notebooks][6]
-- [Security rules][13]
-- [Service Level Objectives][14]
-- [Synthetic tests][15]
+
+| Supported Resources with Granular Access Control | Team-Based Access | Role-Based Access | User / Service Account-Based Access |
+|--------------------------------------------------|-------------------|-------------------|-------------------------------------|
+| [Dashboards][11]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Monitors][12]                                   |                   | {{< X >}}         |                                     |
+| [Notebooks][6]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Security rules][13]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Service Level Objectives][14]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Synthetic tests][15]                            |                   | {{< X >}}         |                                     |
+
 
 ## Further Reading
 
@@ -212,3 +215,4 @@ The following resources allow granular access control:
 [13]: /security_platform/detection_rules/#limit-edit-access
 [14]: /service_management/service_level_objectives/#permissions
 [15]: /synthetics/browser_tests/#permissions
+[16]: /account_management/teams/

@@ -31,17 +31,29 @@ title: Python テスト
 * pytest >= 3.0.0
   * Python 2 を使用する場合は pytest < 5
 
-## Datadog Agent をインストールする
+## 報告方法の構成
 
-Datadog にテスト結果を報告するには、Datadog Agent をインストールする必要があります。
+Datadog にテスト結果を報告するには、Datadog Python ライブラリを構成する必要があります。
 
-### オンプレミスの CI プロバイダーを使用する
+{{< tabs >}}
 
-Jenkins や自己管理型の GitLab CI などのオンプレミスの CI プロバイダー上でテストを実行している場合は、[Agent のインストール手順][1]に従って各ワーカーノードに Datadog Agent をインストールします。
+{{% tab "オンプレミス CI プロバイダー (Datadog Agent)" %}}
 
-CI プロバイダーがコンテナベースのエグゼキューターを使用している場合は、ビルド内の `localhost` の使用で Datadog Agent が実行されている基底のワーカーノードではなく、コンテナ自体を参照するため、すべてのビルド (デフォルトは `http://localhost:8126`) の `DD_AGENT_HOST` 環境変数をビルドコンテナ内からアクセス可能なエンドポイントに設定します。
+Jenkins や自己管理型の GitLab CI などのオンプレミスの CI プロバイダー上でテストを実行している場合は、[Agent のインストール手順][1]に従って各ワーカーノードに Datadog Agent をインストールします。これは、テスト結果が基盤となるホストのメトリクスに自動的にリンクされるため、推奨されるオプションです。
 
-Kubernetes エグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] を使用することをお勧めします。これにより、ビルドポッドの `DD_AGENT_HOST` 環境変数が自動的に設定されてローカルの Datadog Agent と通信します。
+Kubernetes エグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] を使用することをお勧めします。これにより、ビルドポッドの環境変数が自動的に設定されてローカルの Datadog Agent と通信します。
+
+Kubernetes を使用していない場合、または [Datadog Admission Controller][2] を使用できない場合で、CI プロバイダーがコンテナベースのエクゼキュータを使用している場合は、トレーサーを実行するビルドコンテナ内の環境変数 `DD_TRACE_AGENT_URL` (デフォルトは `http://localhost:8126`) を、そのコンテナ内からアクセス可能なエンドポイントに設定します。_ビルドコンテナ内で `localhost` を使用すると、コンテナ自体を参照し、基盤となるワーカーノードや Container Agent が動作しているコンテナを参照しないことに注意してください_。
+
+`DD_TRACE_AGENT_URL` は、プロトコルとポート (例えば、`http://localhost:8126`) を含み、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先され、CI Visibility のために Datadog Agent の URL を構成するために推奨される構成パラメーターです。
+
+それでも Datadog Agent への接続に問題がある場合は、[Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method) を使用してください。**注**: この方法を使用すると、テストとインフラストラクチャーメトリクスの相関がなくなります。
+
+[1]: /ja/agent/
+[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
+{{% tab "クラウド CI プロバイダー (エージェントレス)" %}}
 
 ### クラウドの CI プロバイダーを使用する
 
@@ -49,243 +61,25 @@ GitHub Actions や CircleCI など、基底のワーカーノードにアクセ�
 
 単純な結果フォワーダーとして機能するコンテナとして Datadog Agent を実行するには、Docker イメージ `gcr.io/datadoghq/agent:latest` と次の環境変数を使用します。
 
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
+: Agentless モードを有効または無効にします。<br/>
+**デフォルト**: `false`
+
 `DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][3]。<br/>
+: テスト結果のアップロードに使用される [Datadog API キー][1]。<br/>
 **デフォルト**: (なし)
 
-`DD_INSIDE_CI` (必須)
-: 基底のホストにアクセスできないため、Datadog Agent コンテナの監視を無効にします。<br/>
-**デフォルト**: `false`<br/>
-**必要な値**: `true`
-
-`DD_HOSTNAME` (必須)
-: 基底のホストを監視できないため、テストに関連付けられたホスト名のレポートを無効にします。<br/>
-**デフォルト**: (自動検出)<br/>
-**必要な値**: `none`
-
-{{< site-region region="us3,us5,eu,ap1" >}}
-さらに、選択したサイトを使用するように Datadog サイトを構成します ({{< region-param key="dd_site_name" >}}):
+さらに、データを送信する [Datadog サイト][2]を構成します。
 
 `DD_SITE`
 : 結果をアップロードする Datadog サイト。<br/>
 **デフォルト**: `datadoghq.com`<br/>
 **選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-{{< /site-region >}}
 
-#### CI プロバイダーのコンフィギュレーション例
-
-次のセクションでは、Agent を実行し、テスト情報を報告するよう構成するために必要となる CI プロバイダー固有の手順をご説明します。
-
-{{< tabs >}}
-{{% tab "Azure Pipelines" %}}
-
-Azure Pipelines で Datadog Agent を実行するには、[リソースセクション][1]で新しいコンテナを定義し、それを [サービスコンテナ][2]として宣言しているジョブと関連付けます。
-
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
-variables:
-  ddApiKey: $(DD_API_KEY)
-
-resources:
-  containers:
-    - container: dd_agent
-      image: gcr.io/datadoghq/agent:latest
-      ports:
-        - 8126:8126
-      env:
-        DD_API_KEY: $(ddApiKey)
-        DD_INSIDE_CI: "true"
-        DD_HOSTNAME: "none"
-
-jobs:
-  - job: test
-    services:
-      dd_agent: dd_agent
-    steps:
-      - script: make test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-`<DD_SITE>` を選択したサイトに置き換えます: {{< region-param key="dd_site" code="true" >}}
-
-{{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
-variables:
-  ddApiKey: $(DD_API_KEY)
-
-resources:
-  containers:
-    - container: dd_agent
-      image: gcr.io/datadoghq/agent:latest
-      ports:
-        - 8126:8126
-      env:
-        DD_API_KEY: $(ddApiKey)
-        DD_INSIDE_CI: "true"
-        DD_HOSTNAME: "none"
-        DD_SITE: "<DD_SITE>"
-
-jobs:
-  - job: test
-    services:
-      dd_agent: dd_agent
-    steps:
-      - script: make test
-{{< /code-block >}}
-{{< /site-region >}}
-
-[Datadog API キー][3]を、キー `DD_API_KEY` と合わせて[プロジェクト環境変数][4]に追加します。
-
-[1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=schema
-[2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /ja/getting_started/site/
 {{% /tab %}}
-{{% tab "GitLab CI" %}}
 
-GitLab で Agent を実行するには、 [サービス][1]下で Agent コンテナを定義します。
-
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
-variables:
-  DD_API_KEY: $DD_API_KEY
-  DD_INSIDE_CI: "true"
-  DD_HOSTNAME: "none"
-  DD_AGENT_HOST: "datadog-agent"
-
-test:
-  services:
-    - name: gcr.io/datadoghq/agent:latest
-  script:
-    - make test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-
-`<DD_SITE>` を選択したサイトに置き換えます: {{< region-param key="dd_site" code="true" >}}
-
-{{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
-variables:
-  DD_API_KEY: $DD_API_KEY
-  DD_INSIDE_CI: "true"
-  DD_HOSTNAME: "none"
-  DD_AGENT_HOST: "datadog-agent"
-  DD_SITE: "<DD_SITE>"
-
-test:
-  services:
-    - name: gcr.io/datadoghq/agent:latest
-  script:
-    - make test
-{{< /code-block >}}
-{{< /site-region >}}
-
-[Datadog API キー][2]を、キー `DD_API_KEY` と合わせて[プロジェクト環境変数][3]に追加します。
-
-[1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
-
-GitHub Actions で Agent を実行するには、[Datadog Agent GitHub Action][1] `datadog/agent-github-action` を使用します。
-
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" >}}
-jobs:
-  test:
-    steps:
-      - name: Start the Datadog Agent locally
-        uses: datadog/agent-github-action@v1
-        with:
-          api_key: ${{ secrets.DD_API_KEY }}
-      - run: make test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-
-`<datadog_site>` を選択したサイトに置き換えます: {{< region-param key="dd_site" code="true" >}}
-
-{{< code-block lang="yaml" >}}
-jobs:
-  test:
-    steps:
-      - name: Start the Datadog Agent locally
-        uses: datadog/agent-github-action@v1
-        with:
-          api_key: ${{ secrets.DD_API_KEY }}
-          datadog_site: <datadog_site>
-      - run: make test
-{{< /code-block >}}
-{{< /site-region >}}
-
-[Datadog API キー][2]を、キー `DD_API_KEY` と合わせて[プロジェクト環境変数][3]に追加します。
-
-[1]: https://github.com/marketplace/actions/datadog-agent
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{% /tab %}}
-{{% tab "CircleCI" %}}
-
-CircleCI で Agent を実行するには、テストを実行する前に  [datadog/agent CircleCI orb][1] を使用して Agent コンテナを起動し、結果が Datadog に送信されたことを確認してから停止します。
-
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" filename=".circleci/config.yml" >}}
-version: 2.1
-
-orbs:
-  datadog-agent: datadog/agent@0
-
-jobs:
-  test:
-    docker:
-      - image: circleci/<language>:<version_tag>
-    steps:
-      - checkout
-      - datadog-agent/setup
-      - run: make test
-      - datadog-agent/stop
-
-workflows:
-  test:
-    jobs:
-      - test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-
-`<DD_SITE>` を選択したサイトに置き換えます: {{< region-param key="dd_site" code="true" >}}
-
-{{< code-block lang="yaml" filename=".circleci/config.yml" >}}
-version: 2.1
-
-orbs:
-  datadog-agent: datadog/agent@0
-
-jobs:
-  test:
-    docker:
-      - image: circleci/<language>:<version_tag>
-    environment:
-      DD_SITE: "<DD_SITE>"
-    steps:
-      - checkout
-      - datadog-agent/setup
-      - run: make test
-      - datadog-agent/stop
-
-workflows:
-  test:
-    jobs:
-      - test
-{{< /code-block >}}
-{{< /site-region >}}
-
-[Datadog API キー][2]を、キー `DD_API_KEY` と合わせて[プロジェクト環境変数][3]に追加します。
-
-[1]: https://circleci.com/developer/orbs/orb/datadog/agent
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://circleci.com/docs/2.0/env-vars/
-{{% /tab %}}
 {{< /tabs >}}
 
 

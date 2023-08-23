@@ -36,6 +36,8 @@ sources:
   dst: "data/partials/*.{lang}.yaml"
 - src: "i18n/en.json"
   dst: "i18n/{lang}.json"
+- src: "layouts/shortcodes/*.md"
+  dst: "layouts/shortcodes/*.{lang}.md"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
 - src: "config/_default/menus/menus.en.yaml"
@@ -48,3 +50,4 @@ sources:
   dst: "content/{lang}/workflows/actions_catalog/_index.md"
 - src: "content/en/workflows/actions_catalog/generic_actions.md"
   dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
+

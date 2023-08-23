@@ -40,7 +40,7 @@ Datadog プロファイラーには Ruby 2.3+ が必要です (JRuby と Truffle
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 アプリケーションのプロファイリングを開始するには
 

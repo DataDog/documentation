@@ -4,6 +4,9 @@ algolia:
   - watchdog
 aliases:
 - /ja/tracing/watchdog
+cascade:
+  algolia:
+    rank: 70
 description: アプリケーションとインフラストラクチャーの潜在的な問題を自動的に検出
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Watchdog
@@ -28,7 +31,7 @@ kind: ドキュメント
 title: Datadog WatchdogTM
 ---
 
-{{< img src="watchdog/watchdog.png" alt="エラーレートに関する 2 つの継続的な重要アラートを表示する Watchdog Alerts ページ" >}}
+{{< img src="watchdog/watchdog.png" alt="Watchdog Alerts ページには、エラーログの進行中のログ異常アラートが 1 つ、エラーログの解決済みログ異常アラートが 1 つ、根本原因分析によって解決されたエラーレートアラートが 1 つ表示されています" >}}
 
 ## 概要
 

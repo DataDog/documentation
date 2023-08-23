@@ -76,6 +76,7 @@ title: ログ検索構文
 | `@http.url_details.path:"/api/v1/test"`                              | 属性 `http.url_details.path` に `/api/v1/test` と一致するすべてのログを検索します。                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | 属性 `http.url` に、`/api/v1/` で始まる値を含むすべてのログを検索します。                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | 200 から 299 の `http.status_code` 値を含み、`http.url_details.path` 属性に `/api/v1/` で始まる値を含むすべてのログを検索します。 |
+| `-@http.status_code:*`                                                | `http.status_code` 属性を含まないすべてのログを検索します |
 
 ### CIDR 表記による検索
 CIDR (Classless Inter Domain Routing) は、IP アドレスの範囲 (CIDR ブロックとも呼ばれる) を簡潔に定義することができる表記法です。CIDR は、ネットワーク (VPC など) またはサブネットワーク (VPC 内のパブリック/プライベートサブネットなど) を定義するために最もよく使用されます。

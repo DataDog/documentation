@@ -7,7 +7,7 @@ title: ライブラリのリモート挿入
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-リモートインスツルメンテーションはベータ版です。アクセスを希望される方は、CSM またはアカウントマネージャーにお問い合わせください。
+リモートインスツルメンテーションはベータ版です。<a href="http://dtdg.co/apm-onboarding">アクセスをリクエストするには、こちらのフォームをご利用ください。</a>
 {{< /callout >}}
 
 ## 概要
@@ -35,5 +35,5 @@ Kubernetes デプロイでリモートインスツルメンテーションを設
    {{< img src="tracing/trace_collection/remote-instrumentation-setup-page.png" alt="リモートインスツルメンテーションの設定ページ" style="width:100%;" >}}
 
 [1]: /ja/tracing/trace_collection/
-[2]: /ja/agent/guide/how_remote_config_works/?tab=configurationyamlfile#prerequisites
+[2]: /ja/agent/remote_config/?tab=configurationyamlfile#prerequisites
 [5]: /ja/tracing/trace_collection/library_injection_local/

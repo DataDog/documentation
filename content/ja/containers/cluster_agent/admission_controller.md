@@ -24,7 +24,7 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 
 - Datadog Cluster Agent v7.40+
 
-## セットアップ
+## 構成
 {{< tabs >}}
 {{% tab "Operator" %}}
 
@@ -133,55 +133,9 @@ Cluster Agent のデプロイに環境変数を追加し、Admission Controller 
 {{% /tab %}}
 {{< /tabs >}}
 
-## 使用方法
-
-Datadog Admission Controller は、`admission.datadoghq.com/mutate-pods: "true"` とラベル付けされたネームスペース内のポッドリソースを変異することができます。Admission Controller ができることは以下の通りです。
-
-- [環境変数](#injected-environment-variables)を挿入する
-- ポッドのコンテナに追加のボリュームをマウントする (例えば、Agent ソケットをマウントするために `/var/run/datadog-agent` など)
-- [ポッドトポロジースプレッド制約](#pod-topology-spread-constraints)を管理する
-
-### 環境変数を挿入する
-
-欠落している環境変数のみが追加されます。例えば、ポッドマニフェストが `DD_ENV: foo` を定義している場合、その値は Admission Controller によって変更されることはありません。
-
-| 名前 | 説明 |
-| ---- | ----------- |
-| `AVAILABILITY_ZONE` | ポッドが稼働しているクラウドプロバイダーのアベイラビリティゾーン |
-| `CONSUL_HTTP_ADDR` | Consul HTTP のエンドポイント |
-| `DD_DATACENTER` | データセンター名 (例: `US1` または `AP1`) |
-| `DD_ENTITY_ID` | 発信点検出のためのポッド ID。Agent がメトリクスにポッドのタグをアタッチするために使用します。 |
-| `DD_ENV` | データセンター環境 (例: `staging` または `prod`) |
-| `DD_SERVICE` | 以下のポッドラベルのいずれかから継承されたコンテナサービス: `tags.datadoghq.com/service`、`service` |
-| `DD_SITE` | データセンターの Datadog サイト (例: `datadoghq.com` または `ap1.datadoghq.com`) |
-| `DD_VERSION` | 以下のポッドラベルのいずれかから継承されたコンテナバージョン: `tags.datadoghq.com/version`、`version` |
-| `HOST_IP` | ポッドがスケジュールされている Kubernetes ノードの IP |
-| `K8S_CLUSTER_DNS_SERVICE_IP` | Kubernetes クラスターの DNS を提供するサービスの IP (例: CoreDNS IP) |
-| `K8S_CLUSTER_INFRA_DOMAIN` | Kubernetes クラスターの発見可能な DNS ドメイン |
-| `K8S_CLUSTER_LOCAL_DOMAIN` | Kubernetes クラスターのローカル DNS ドメイン |
-| `K8S_CLUSTER_NAME` | Kubernetes クラスターの名前 |
-| `POD_IP` | Kubernetes ポッドの IP |
-| `POD_NAMESPACE` | ポッドが実行しているネームスペース |
-| `POD_SERVICE_ACCOUNT` | ポッドの Kubernetes サービスアカウント |
-| `STATSD_URL` | ポッドの StatsD エンドポイント (例: `unix:///var/run/datadog-agent/statsd.sock`) |
-| `TRACE_AGENT_URL` | Trace Agent のエンドポイント |
-| `VAULT_ADDR` | データセンターの Vault エンドポイント |
-| `VAULT_AUTH_PATH` | Kubernetes クラスターの Vault auth マウント |
-| `VAULT_ROLE` | ポッドの Vault auth ロール。デフォルトは `initContainers` の `VAULT_AUTH_BATCH_ROLE` と `containers` の `VAULT_AUTH_SERVICE_ROLE` です。`VAULT_ROLE` は事実上非推奨です。代わりに、`VAULT_AUTH_BATCH_ROLE` と `VAULT_AUTH_SERVICE_ROLE` を明示的に使用してください。 |
-| `VAULT_AUTH_BATCH_ROLE` | 更新不可の Vault バッチトークンを取得するためのポッドの Vault auth ロール。すべての `initContainers` に対して構成する必要があります。
-| `VAULT_AUTH_SERVICE_ROLE` | 更新可能な Vault サービストークンを取得するためのポッドの Vault auth ロール。 |
-
-### ポッドトポロジースプレッド制約
-
-_トポロジースプレッド制約_は、ポッドがクラスターにどのように拡散されるかを制御する Kubernetes の機能です。Datadog Admission Controller は、StatefulSet にアタッチされており、**且つ**そのポッドテンプレートに以下のアノテーションのいずれかを持つポッドにスプレッド制約を適用します。
-
-- `datadoghq.com/topologySpreadConstraints: ScheduleAnyway`
-- `datadoghq.com/topologySpreadConstraints: DoNotSchedule`
-
-Kubernetes の[トポロジースプレッド制約][5]のドキュメントをご参照ください。
-
 ### インスツルメンテーションライブラリの挿入
 Cluster Agent (バージョン 7.39 以降) を構成して、インスツルメンテーションライブラリを挿入することができます。詳しくは、[Admission Controller によるインスツルメンテーションライブラリの挿入][2]を参照してください。
+
 
 ### APM および DogStatsD
 
@@ -245,4 +199,3 @@ Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプ
 [2]: /ja/tracing/trace_collection/library_injection_local/
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
-[5]: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods

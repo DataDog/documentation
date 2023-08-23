@@ -507,30 +507,31 @@ data:
 上記はデフォルトの `nginx-ingress-controller.ingress-nginx` サービス名をオーバーライドします。
 
 ### Ingress Controller サンプリング
-Ingress-NGINX Controller for Kubernetes は、基礎となる Datadog トレーシングライブラリとして `dd-opentracing-cpp` を使用しています。
+固定サンプリングレートを設定するには、Ingress コントローラーの [ConfigMap][17] で [datadog-sample-rate][16] オプションを使用します。例えば、サンプリングレートを 40% に設定するには
 
-Datadog に送信される Ingress Controller のトレースの量を制御するには、全てのトレースにマッチするサンプリングルールを指定します。ルールに構成された `sample_rate` は、サンプリングされるトレースの比率を決定します。ルールが指定されていない場合、サンプリングはデフォルトで 100% になります。
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.7.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  datadog-collector-host: $HOST_IP
+  enable-opentracing: "true"
+  datadog-sample-rate: "0.4"
+```
 
-環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サンプリングルールを指定します。Ingress Controller でサンプリングルールを定義するには、以下のようにします。
-
-1. Ingress Controller の `ConfigMap` の `data` セクションに以下の [main-snippet][14] を追加して、環境変数をワーカープロセスに転送するよう NGINX に指示を出します。
-   ```yaml
-   data:
-     main-snippet: "env DD_TRACE_SAMPLING_RULES;"
-   ```
-
-2. Ingress Controller の `Deployment` の `env` セクションで、環境変数に値を指定します。例えば、Ingress Controller から発信されるトレースを 10% 保つようにするには
-   ```yaml
-   env:
-   - name: DD_TRACE_SAMPLING_RULES
-     value: '[{"sample_rate": 0.1}]'
-   ```
-   [Datadog Agent が算出したサンプリングレート][10] (デフォルトで Agent あたり 10 トレース/秒) を使用するには、サンプリングルールの空の配列を指定します。
-   ```yaml
-   env:
-   - name: DD_TRACE_SAMPLING_RULES
-     value: '[]'
-   ```
+<div class="alert alert-warning">
+Datadog トレースインテグレーションのバグのため、<a
+href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-priority-sampling">datadog-priority-sampling</a> オプションは効果がなく、<a
+href="https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent">Datadog Agent によって計算された</a>サンプリングレートを使用することはできません。現在、このバグの解決に取り組んでいます。
+</div>
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
 [2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
@@ -547,6 +548,8 @@ Datadog に送信される Ingress Controller のトレースの量を制御す�
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 [15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
+[16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
+[17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
 {{% /tab %}}
 {{% tab "Istio" %}}
 
@@ -706,7 +709,7 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 
 Datadog APM は、[Kong Gateway][1] で [kong-plugin-ddtrace][2] プラグインを利用して利用できます。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 プラグインは `luarocks` を使ってインストールします。
 ```
@@ -721,7 +724,7 @@ export KONG_PLUGINS=bundled,ddtrace
 kong restart
 ```
 
-## コンフィギュレーション
+## 構成
 
 プラグインは、グローバルまたは Kong Gateway の特定のサービスで有効にすることができます。
 

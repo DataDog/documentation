@@ -55,6 +55,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
       logCollection:
         enabled: true
   ```
+  For all configuration options, see the [Operator configuration spec][6].
 
 4. Deploy the Datadog Agent:
   ```bash
@@ -97,3 +98,4 @@ helm delete my-datadog-operator
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/account/settings#api
+[6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

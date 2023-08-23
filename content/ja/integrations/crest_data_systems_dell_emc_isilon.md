@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-dell-emc-isilon
 app_uuid: 1c1b7c48-0c7c-46f2-9f0c-f68c74419244
 assets:

@@ -54,10 +54,12 @@ package gpg-pubkey-e09422b3 is not installed
 
 ```bash
 $ curl -o /tmp/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+$ curl -o /tmp/DATADOG_RPM_KEY_B01082D3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 $ curl -o /tmp/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 $ curl -o /tmp/DATADOG_RPM_KEY_E09422B3.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 
 $ rpm --import /tmp/DATADOG_RPM_KEY_CURRENT.public
+$ rpm --import /tmp/DATADOG_RPM_KEY_B01082D3.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_FD4BF915.public
 $ rpm --import /tmp/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -79,6 +81,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -94,6 +97,7 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+       https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
        https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 ```
@@ -106,7 +110,7 @@ gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
 **注**: この方法は、SUSE ベースのシステムでは動作しません。代わりに [インポートコマンド](#import-command)を使ってください。
 
 [1]: https://yum.datadoghq.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/chef-datadog
 [4]: https://github.com/DataDog/ansible-datadog
 [5]: https://github.com/DataDog/puppet-datadog-agent

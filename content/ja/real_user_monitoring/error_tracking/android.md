@@ -35,6 +35,8 @@ Android のクラッシュレポートとエラー追跡を有効にすると、
 
 ## マッピングファイルのアップロード
 
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
+
 {{< tabs >}}
 {{% tab "US" %}}
 
@@ -50,7 +52,7 @@ Android のクラッシュレポートとエラー追跡を有効にすると、
 2. [Datadog 専用の API キーを作成][2]し、環境変数として `DD_API_KEY` または `DATADOG_API_KEY` という名前でエクスポートします。また、プロジェクトのルートに `datadog-ci.json` ファイルがあれば、その中の `apiKey` プロパティから取得することも可能です。
 3. オプションとして、`build.gradle` スクリプトでプラグインを構成して、EU リージョンにファイルをアップロードするように構成します。
 
-   ```
+   ```groovy
    datadog {
        site = "EU1"
    }
@@ -133,7 +135,7 @@ datadog {
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | アプリケーションのバージョン名 (デフォルトでは `build.gradle` スクリプトの `android` ブロックで宣言されたバージョン)。                                                                                                               |
 | `serviceName`              | アプリケーションのサービス名 (デフォルトでは `build.gradle` スクリプトの `android` ブロックで宣言されたアプリケーションのパッケージ名)。                                                                                                                          |
-| `site`                     | データをアップロードする Datadog サイト (US1、US3、US5、EU1、または US1_FED)。                                                                                                                                       |
+| `site`                     | データをアップロードする Datadog サイト (US1、US3、US5、EU1、US1_FED、または AP1)。                                                                                                                                       |
 | `remoteRepositoryUrl`      | ソースコードがデプロイされたリモートリポジトリの URL。これを指定しない場合、この値はタスクの実行時に Git コンフィギュレーションから解決されます。                     |
 | `checkProjectDependencies` | このプロパティは、Datadog Android SDK が依存関係に含まれているかどうかをプラグインがチェックするかどうかを制御します。チェックしない場合、"none" は無視され、"warn" は警告をログに記録し、"fail" はエラーでビルドに失敗します (デフォルト)。 |
 
@@ -156,7 +158,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 - `mappingFileTrimIndents` オプションを `true` に設定します。これにより、ファイルサイズが平均で 5% 小さくなります。
 - `mappingFilePackagesAliases` のマップを設定します。これは、パッケージ名をより短いエイリアスで置き換えるものです。**注**: Datadog のスタックトレースは元のパッケージ名の代わりに同じエイリアスを使うので、サードパーティの依存関係にはこのオプションを使うのがよいでしょう。
 
-```
+```groovy
 datadog {
     mappingFileTrimIndents = true
     mappingFilePackageAliases = mapOf(
@@ -174,6 +176,6 @@ datadog {
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/#setup
-[4]: https://github.com/DataDog/dd-sdk-android
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[3]: /ja/real_user_monitoring/android/#setup
+[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
+[5]: /ja/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters

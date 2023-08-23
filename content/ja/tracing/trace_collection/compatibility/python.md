@@ -90,6 +90,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [PyODBC][39]                       | 4.0 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
 | [Redis][40]                        | 2.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
 | [Redis][40] [redis-py-cluster][41] | 1.3.5 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [snowflake-connector-python][62]   | 2.1 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#snowflake
 | [SQLAlchemy][42]                   | 1.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][43]                      | 完全対応   | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][44]                      | 0.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
@@ -183,3 +184,4 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 [59]: https://urllib3.readthedocs.io/en/stable/
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
 [61]: https://gunicorn.org/
+[62]: https://snowflake.com/

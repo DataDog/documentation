@@ -22,11 +22,14 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: "Documentation"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'  
 ---
 
 ## Overview
 
-To send your PHP logs to Datadog, log to a file and then tail that file with your Datadog Agent. This page details setup examples for the [Monolog][8], [Zend-Log][9], and [Symfony][10] logging libraries.
+To send your PHP logs to Datadog, log to a file and then [tail][14] that file with your Datadog Agent. This page details setup examples for the [Monolog][8], [Zend-Log][9], and [Symfony][10] logging libraries.
 
 ## Setup
 
@@ -550,3 +553,4 @@ Add the following:
 [11]: /agent/logs/?tab=tailfiles#activate-log-collection
 [12]: /agent/logs/?tab=tailfiles#custom-log-collection
 [13]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[14]: /glossary/#tail

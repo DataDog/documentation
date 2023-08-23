@@ -27,7 +27,7 @@ Azure SQL Managed Instance は、広範な SQL サーバーエンジンの互換
 Datadog Azure インテグレーションを使用して SQL Managed Instances からメトリクスを収集できます。
 
 ## セットアップ
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

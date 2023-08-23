@@ -2,6 +2,8 @@
 app_id: apache-apisix
 app_uuid: b842d639-caf6-4b3a-8115-52458b9a0753
 assets:
+  dashboards:
+    Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
   integration:
     configuration: {}
     events:
@@ -72,11 +74,11 @@ Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 以下の構成方法に従ってください。
 
-### コンフィギュレーション
+### 構成
 
 1. すでに Datadog を使用していて、Datadog Agent がインストールされている場合は、ポート 8125/UDP がファイアウォールで許可されていることを確認してください。例えば、Apache APISIX Agent は、Datadog Agent のポート 8125 に到達することができます。すでにこれを構成している場合は、ステップ 3 までスキップできます。
 

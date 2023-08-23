@@ -74,7 +74,7 @@ Agent の Memcache チェックを使用して、Memcache のメモリ使用量�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 

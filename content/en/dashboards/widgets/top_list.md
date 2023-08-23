@@ -60,8 +60,8 @@ The dedicated [widget JSON schema definition][5] for the top list widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/querying/
-[2]: /tracing/app_analytics/search/#search-bar
+[2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
 [4]: /api/v1/dashboards/
 [5]: /dashboards/graphing_json/widget_json/
-[6]: /dashboards/guide/context-links/#overview
+[6]: /dashboards/guide/context-links

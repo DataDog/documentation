@@ -12,4 +12,4 @@ kind: faq
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/LICENSE
 [2]: https://github.com/DataDog/datadog-agent
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest

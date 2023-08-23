@@ -28,7 +28,7 @@ SwiftUI のサポートは、SDK [v1.9.0][1] で導入されました。
 
 ```swift
 import SwiftUI
-import Datadog
+import DatadogRUM
 
 struct FooView: View {
 
@@ -49,7 +49,7 @@ struct FooView: View {
 
 ```swift
 import SwiftUI
-import Datadog
+import DatadogRUM
 
 struct BarView: View {
 

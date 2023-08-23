@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: Code source dd-sdk-ios
+  text: Code source de dd-sdk-ios
 - link: /real_user_monitoring/
   tag: Documentation
   text: Service Real User Monitoring (RUM) de Datadog
@@ -65,6 +65,13 @@ Les attributs sur l'appareil suivants sont joints automatiquement à tous les é
 | `device.brand`                       | chaîne | La marque d'appareil indiquée par l'appareil (User-Agent système)                                           |
 | `device.model`                       | chaîne | Le modèle d'appareil indiqué par l'appareil (User-Agent système)                                           |
 | `device.name`                        | chaîne | Le nom d'appareil indiqué par l'appareil (User-Agent système)                                            |
+
+### Connectivité
+
+Les attributs réseau suivants sont joints automatiquement à tous les événements de ressource et d'erreur recueillis par Datadog :
+
+| Nom de l'attribut                           | Type   | Description                                     |
+|------------------------------------------|--------|-------------------------------------------------|
 | `connectivity.status`                | chaîne | Le statut de l'accessibilité au réseau de l'appareil (`connected`, `not connected`, `maybe`).                           |
 | `connectivity.interfaces`            | chaîne | La liste des interfaces réseau disponibles (par exemple, `bluetooth`, `cellular`, `ethernet` ou `wifi`). |
 | `connectivity.cellular.technology`   | chaîne | Le type de technologie radio utilisée pour la connexion cellulaire.                                              |

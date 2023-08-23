@@ -217,7 +217,7 @@ Remplacez la valeur du paramètre fictif `<SITE_DATADOG>` par {{< region-param k
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="downtime avec rrule"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.jpg" alt="downtime avec rrule"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
