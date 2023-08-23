@@ -31,5 +31,9 @@ firstVariable, secondVariable = functioncall()
 
 ## 準拠コードの例
 ```python
+hello = 1
+```
+
+```python
 fooBAr = foobar()
 ```

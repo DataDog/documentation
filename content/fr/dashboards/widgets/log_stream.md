@@ -14,7 +14,7 @@ further_reading:
 ---
 Affichez un flux de logs correspondant à la requête de votre choix :
 
-{{< img src="dashboards/widgets/log_stream/log_stream.png" alt="Flux de logs" >}}
+{{< img src="dashboards/widgets/log_stream/log_stream_config.png" alt="Flux de logs" >}}
 
 ## Configuration
 
@@ -23,8 +23,6 @@ Affichez un flux de logs correspondant à la requête de votre choix :
 1. Saisissez une [requête de recherche][1] pour filtrer le flux de logs.
 2. Modifiez les colonnes de façon à afficher les valeurs de vos [facettes][2] et [mesures][2].
 3. Attribuez un titre à votre graphique ou laissez le champ vide pour utiliser le titre suggéré.
-
-{{< img src="dashboards/widgets/log_stream/log_stream_setup.png" alt="Configuration du flux de logs" style="width:90%;">}}
 
 ## API
 
