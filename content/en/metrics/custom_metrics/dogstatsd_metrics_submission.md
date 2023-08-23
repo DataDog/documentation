@@ -43,7 +43,7 @@ After you [install DogStatsD][1], the following functions are available for subm
 : Used to decrement a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
 `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. 
+: Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 : **Note:** `count` is not supported in Python.
 
 **Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
@@ -54,7 +54,7 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -203,6 +203,16 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+tracer.dogstatsd.increment('example_metric.increment', 1, ['environment:dev']);
+tracer.dogstatsd.decrement('example_metric.decrement', 1, ['environment:dev']);
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 After running the code above, your metrics data is available to graph in Datadog:
@@ -226,7 +236,7 @@ Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember
 
 **Note:** Metrics submission calls are asynchronous. If you want to ensure metrics are submitted, call `flush` before the program exits.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -369,6 +379,20 @@ while (TRUE) {
 }
 ```
 {{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+let i = 0;
+while(true) {
+  i++;
+  tracer.dogstatsd.gauge('example_metric.gauge', i, ['environment:dev']);
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 After running the code above, your metric data is available to graph in Datadog:
@@ -822,7 +846,7 @@ The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` m
 
 Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -959,6 +983,18 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+while(true) {
+  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, ['environment:dev']);
+  await new Promise(r => setTimeout(r, 2000));
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 The above instrumentation calculates the `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. Distributions can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores.
@@ -1033,7 +1069,7 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter.
 
 The following code only adds the `environment:dev` and `account:local` tags to the `example_metric.increment` metric:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1076,6 +1112,12 @@ or an array:
 ```php
 <?php
 $statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+```javascript
+tracer.dogstatsd.increment('example_metric.increment', 1, ['environment:dev', 'account:local']);
 ```
 {{< /programming-lang >}}
 

@@ -10,7 +10,7 @@ title: Python トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
-Datadog APM トレーサーは、分散型トレーシングのために [B3][2] や [W3C][3] のヘッダーの抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのために [B3][2] や [W3C Trace Context][3] のヘッダーの抽出と挿入をサポートしています。
 
 分散したヘッダーの挿入と抽出は、挿入および抽出スタイルを構成することで制御されます。`tracecontext`、`datadog`、`B3`、`B3 single header` のスタイルがサポートされています。
 

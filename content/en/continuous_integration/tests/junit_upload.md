@@ -201,15 +201,13 @@ This is the full list of options available when using the `datadog-ci junit uplo
 
 `--report-tags`
 : Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
-**Environment variable**: (none)<br/>
 **Default**: (none)<br/>
-**Example**: `coverage_enabled:true`<br/>
+**Example**: `test.code_coverage.enabled:true`<br/>
 
 `--report-metrics`
 : Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
-**Environment variable**: (none)<br/>
 **Default**: (none)<br/>
-**Example**: `coverage_percentage:35`<br/>
+**Example**: `test.code_coverage.lines_pct:82`<br/>
 
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
@@ -245,17 +243,6 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
-`--report-tags`
-: Key-value pairs in the form of `key:value` to be attached to the session instead of to every test.<br/>
-**Default**: (none)<br/>
-**Example**: `team:backend`<br/>
-
-`--report-metrics`
-: Key-value numerical pairs in the form of `key:number` to be attached to the session instead of to every test.<br/>
-**Default**: (none)<br/>
-**Example**: `test.code_coverage.lines_pct:82`<br/>
-
-
 
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
@@ -277,6 +264,8 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 [Test suite level visibility][9] is supported from `datadog-ci>=2.17.0`.
 
 ## Collecting repository and commit metadata
+
+## Collecting Git metadata
 
 {{% ci-git-metadata %}}
 
