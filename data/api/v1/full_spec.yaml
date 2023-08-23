@@ -4513,6 +4513,7 @@ components:
       - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - trace_stream
       - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
@@ -4526,6 +4527,7 @@ components:
       - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - TRACE_STREAM
       - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
