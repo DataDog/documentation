@@ -65,6 +65,41 @@ CSM is available in three packages: CSM Enterprise, CSM Pro, and CSM Workload Se
         <td><ul><li>Threats</li></ul></td>
     </tr>
 </table>
+<table>
+   <tr>
+      <th>Package</th>
+      <th>Features</th>
+   </tr>
+   <tr>
+      <td rowspan="4">
+         CSM Enterprise
+      </td>
+   </tr>
+   <tr>
+      <td>Threats</td>
+   </tr>
+   <tr>
+      <td>Identity Risks</td>
+   </tr>
+   <tr>
+      <td>Vulnerabilities (hosts and container images)</td>
+   </tr>
+   <tr>
+      <td rowspan="3">CSM Pro</td>
+   </tr>
+   <tr>
+      <td>Misconfigurations (cloud accounts)</td>
+   </tr>
+   <tr>
+      <td>Vulnerabilities (container images)</td>
+   </tr>
+   <tr>
+      <td rowspan="2">CSM Workload Security</td>
+   </tr>
+   <tr>
+      <td>Threats</td>
+   </tr>
+</table>
 
 **Note**: You can enable other features that aren't included in your package at any time by following the instructions.
 
