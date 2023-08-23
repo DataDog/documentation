@@ -1024,6 +1024,16 @@ dl {
 
 // Breakpoint styles go here...
 
+
+@media (min-width: 1470px) {
+  .container {
+      max-width: 1440px !important;
+  }
+  .container__content {
+      max-width: 1680px !important;
+  }
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1170px !important;
