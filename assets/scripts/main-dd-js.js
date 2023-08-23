@@ -1,5 +1,5 @@
 import Modal from 'bootstrap/js/dist/modal';
-const getSignupFailover = require('signup-failover');
+import { getSignupFailover } from 'signup-failover';
 
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/tab';
@@ -25,7 +25,7 @@ document.querySelectorAll('.sign-up-trigger').forEach(item => {
     item.addEventListener('click', (event) => {
         event.preventDefault();
 
-        getSignupFailover.getSignupFailover().then((failoverEnabled) => {
+        getSignupFailover().then((failoverEnabled) => {
 
             failoverEnabled = true;
             if (failoverEnabled) {
