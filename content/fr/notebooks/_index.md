@@ -131,7 +131,7 @@ Les notebooks peuvent être configurés de façon à prendre automatiquement des
 
 {{< img src="notebooks/cog_snapshots.png" alt="Option du menu des paramètres permettant d'activer les snapshots" style="width:100%;">}}
 
- Les notebooks pour lesquels la prise de snapshots automatique est activée enregistrent une image statique des graphiques avec un intervalle fixe (par exemple, `Aug 18, 12:00 am – Aug 19, 11:59 pm`). Si un graphique est modifié, tant qu'il possède toujours un intervalle fixe, les snapshots sont mis à jour. Si vous appliquez une durée globale (par exemple, `Past 1 Hour`), les snapshots sont supprimés.
+ Les notebooks pour lesquels la prise de snapshots automatique est activée enregistrent une image statique des graphiques avec un intervalle fixe (par exemple, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). Si un graphique est modifié, tant qu'il possède toujours un intervalle fixe, les snapshots sont mis à jour. Si vous appliquez une durée globale (par exemple, `Past 1 Hour`), les snapshots sont supprimés.
 
  Vous pouvez afficher un aperçu du snapshot existant sur n'importe quel graphique avec un intervalle fixe. Pour ce faire, pendant que vous modifiez un graphique, passez le curseur sur l'icône en forme d'appareil photo.
 

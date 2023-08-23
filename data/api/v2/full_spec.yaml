@@ -17425,6 +17425,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            dashboards_public_share: Generate public and authenticated links to share
+              dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -17438,12 +17440,28 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
+            slos_corrections: Apply, edit, and delete SLO status corrections. A user
+              with this permission can make status corrections, even if they do not
+              have permission to edit those SLOs.
+            slos_read: View SLOs and status corrections.
+            slos_write: Create, edit, and delete SLOs.
+            synthetics_global_variable_read: View, search, and use Synthetics global
+              variables.
+            synthetics_global_variable_write: Create, edit, and delete global variables
+              for Synthetics.
+            synthetics_private_location_read: View, search, and use Synthetics private
+              locations.
+            synthetics_private_location_write: Create and delete private locations
+              in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
             teams_manage: Manage Teams. Create, delete, rename, and edit metadata

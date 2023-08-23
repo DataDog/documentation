@@ -4513,6 +4513,7 @@ components:
       - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - trace_stream
       - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
@@ -4526,6 +4527,7 @@ components:
       - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - TRACE_STREAM
       - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
@@ -20292,17 +20294,33 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_service_catalog_read: View service catalog and service definitions.
+            apm_service_catalog_write: Add, modify, and delete service catalog definitions
+              when those definitions are maintained by Datadog.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
+            incident_notification_settings_write: Configure Incidents Notification
+              settings.
+            incident_read: View incidents in Datadog.
+            incident_settings_write: Configure Incident Settings.
+            incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
+            security_monitoring_filters_read: Read Security Filters.
+            security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_rules_read: Read Detection Rules.
+            security_monitoring_rules_write: Create and edit Detection Rules.
+            security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -20318,6 +20336,11 @@ components:
               in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
+            teams_manage: Manage Teams. Create, delete, rename, and edit metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. A User with this permission can view Team
+              names, metadata, and which Users are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -29453,11 +29476,6 @@ paths:
           description: OK
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_default_settings_read
       summary: Get the default locations
       tags:
       - Synthetics

@@ -93,6 +93,6 @@ Le [schéma JSON][4] utilisé pour le widget Résumé des monitors est le suivan
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/monitors/manage/
-[2]: /fr/monitors/manage/#manage-triggered-monitors-with-group-level-granularity
+[2]: /fr/monitors/manage/#grouped-results
 [3]: /fr/api/v1/dashboards/
 [4]: /fr/dashboards/graphing_json/widget_json/
