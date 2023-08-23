@@ -2272,6 +2272,11 @@ main:
     parent: ci_explorer
     identifier: ci_explorer_facets
     weight: 402
+  - name: Saved Views
+    url: continuous_integration/explorer/saved_views/
+    parent: ci_explorer
+    identifier: ci_explorer_saved_views
+    weight: 402
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
