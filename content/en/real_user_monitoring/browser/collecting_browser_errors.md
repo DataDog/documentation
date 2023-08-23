@@ -140,6 +140,88 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect React rendering errors
+
+Error boundaries are React components that catch rendering errors anywhere in its child component tree and display a fallback UI. React error boundaries offer the capability to collect the component stack. Compared to error stack traces, React error boundaries provide more detailed information about the hierarchy of components involved, which ease developer identifying and fixing errors.
+
+If your React application throws an error during rendering, React removes its UI from the screen by default. To modify this behavior, you can instrument the React router to monitor React rendering errors with the RUM Browser SDK `addError()` API.
+
+The collected rendering error stack contains the component stack, which is unminified like any other error stack traces once you've uploaded sourcemaps.
+
+**Note**: These instructions are specific to the **React Router v6** library.
+
+To instrument React error boundaries for monitoring, use the following:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+class ErrorBoundary extends React.Component {
+  ...
+
+  componentDidCatch(error, info) {
+    const renderingError = new Error(error.message);
+    renderingError.name = `ReactRenderingError`;
+    renderingError.stack = info.componentStack;
+    renderingError.cause = error;
+ 
+    datadogRum.addError(renderingError);
+  }
+
+  ...
+}
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+
+```javascript
+class ErrorBoundary extends React.Component {
+  ...
+
+  componentDidCatch(error, info) {
+    const renderingError = new Error(error.message);
+    renderingError.name = `ReactRenderingError`;
+    renderingError.stack = info.componentStack;
+    renderingError.cause = error;
+ 
+    DD_RUM.onReady(function() {
+       DD_RUM.addError(renderingError);
+    });
+  }
+
+  ...
+}
+```
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+class ErrorBoundary extends React.Component {
+  ...
+
+  componentDidCatch(error, info) {
+    const renderingError = new Error(error.message);
+    renderingError.name = `ReactRenderingError`;
+    renderingError.stack = info.componentStack;
+    renderingError.cause = error;
+ 
+     window.DD_RUM &&
+       window.DD_RUM.addError(renderingError);
+
+  }
+
+  ...
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Troubleshooting
 
 ### Script error
@@ -176,3 +258,4 @@ Get visibility into cross-origin scripts by following these two steps:
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [8]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
+[9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
