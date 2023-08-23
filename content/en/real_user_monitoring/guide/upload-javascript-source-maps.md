@@ -84,7 +84,14 @@ See the following example:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the 300 MB</b> limit (except AP1 and GovCloud sites, where the limit is 50 MB), reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.</div>
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **300** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **50** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+</div>
 
 ## Upload your source maps
 
