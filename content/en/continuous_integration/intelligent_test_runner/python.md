@@ -62,4 +62,3 @@ DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddt
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/python
-[2]: https://app.datadoghq.com/organization-settings/application-keys

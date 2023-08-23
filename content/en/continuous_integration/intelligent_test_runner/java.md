@@ -44,7 +44,7 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1
 To enable Intelligent Test Runner, set the following environment variables:
 
 `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` (Optional)
-: Intelligent Test Runner requires [Jacoco][4] for collecting code coverage.<br/>
+: Intelligent Test Runner requires [Jacoco][2] for collecting code coverage.<br/>
 Set this variable to a valid Jacoco version (such as `0.8.10`) if you want the tracer to run your build with Jacoco injected.<br/>
 Omit it if your project already has Jacoco configured.<br/>
 **Default**: `(empty)`
@@ -88,6 +88,4 @@ mvn clean verify
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/java
-[2]: https://app.datadoghq.com/organization-settings/application-keys
-[3]: https://app.datadoghq.com/ci/settings/test-service
-[4]: https://www.jacoco.org/jacoco/
+[2]: https://www.jacoco.org/jacoco/
