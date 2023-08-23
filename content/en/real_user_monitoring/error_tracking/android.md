@@ -154,10 +154,10 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ## Limitations
 
 {{< site-region region="us,us3,us5,eu" >}}
-Mapping files are limited to 300 MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+Mapping files are limited to **300** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 {{< /site-region >}}
 {{< site-region region="ap1,gov" >}}
-Mapping files are limited to 50 MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+Mapping files are limited to **50** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 {{< /site-region >}}
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
