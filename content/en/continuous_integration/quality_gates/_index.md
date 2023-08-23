@@ -163,8 +163,9 @@ To enable this feature:
 you can follow [this guide][11] to set up one.
 2. Grant `Checks: Write` access to the GitHub application.
 
-After the permission is granted, you should be able to see the checks in GitHub. Note that a current limitation
-is that you cannot re-run a check to re-run the related Quality Gates rule.
+After the permission is granted, you should be able to see the checks in GitHub.
+
+**Note**: a current limitation is that you cannot re-run a check to re-run the related Quality Gates rule.
 
 ## Permissions
 
