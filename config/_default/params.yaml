@@ -69,7 +69,7 @@ code_language_ids:
     android: Android
     ios: iOS
     flutter: Flutter
-    react-native: React Native
+    reactnative: React Native
     roku: Roku
     java: Java
     cpp: 'C++'

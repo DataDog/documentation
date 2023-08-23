@@ -9,6 +9,9 @@ code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
 further_reading:
+- link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
+  tag: Documentation
+  text: RUM Roku Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-roku
   tag: Github
   text: dd-sdk-roku Source code

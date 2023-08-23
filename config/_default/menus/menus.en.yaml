@@ -3570,37 +3570,57 @@ main:
     url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_advanced
-    weight: 202
+    weight: 206
+  - name: Android
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_android
+    weight: 206
+  - name: iOS
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_ios
+    weight: 207
+  - name: Flutter
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_flutter
+    weight: 208
+  - name: React Native
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/reactnative
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_reactnative
+    weight: 209
+  - name: Roku
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_roku
+    weight: 210
   - name: Data Collected
     url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_data_collected
-    weight: 203
+    weight: 207
   - name: Mobile Vitals
     url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_vitals
-    weight: 204
+    weight: 208
   - name: Web View Tracking
     url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_web_view_tracking
-    weight: 205
+    weight: 209
   - name: Integrated Libraries
     url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_integrated_libraries
-    weight: 206 
+    weight: 210
   - name: Troubleshooting
     url: real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
-    weight: 207
-  - name: Other Integrations
-    url: real_user_monitoring/mobile_and_tv_monitoring/other_integrations/
-    parent: mobile_and_tv_monitoring
-    identifier: rum_mobile_other_integrations
-    weight: 208
+    weight: 211
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
