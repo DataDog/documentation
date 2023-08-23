@@ -22,10 +22,8 @@ The features described on this page are in beta. Contact your Customer Success M
 ## Prerequisites
 
 ### Overview
-- An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be [installed](#install-the-agent).
-- If you are upgrading from a previous Agent version, additional [upgrade steps](#upgrade-from-a-previous-agent-release) are required.
-- The Oracle integration must be [installed](#install-the-oracle-integration). 
-- Existing installations of the the Oracle integration may require an update to [your Agent configuration](#upgrade-the-oracle-integration-in-your-agent), depending on when the integration was originally installed.
+- An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be [installed](#install-the-agent). If you are upgrading from a previous Agent version, additional [upgrade steps](#upgrade-from-a-previous-agent-release) are required.
+- The Oracle integration must be [installed](#install-the-oracle-integration). Existing installations may require [an update to your Agent configuration](#upgrade-the-oracle-integration-in-your-agent), depending on when the integration was installed.
 
 ### Install the Agent
 
@@ -42,8 +40,8 @@ Datadog recommends you install the version listed below:
 
 These contain all the implemented Oracle monitoring features and bug fixes.
 
-- If the recommended Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. 
-- If the recommended Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
+- If your recommended Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. 
+- If your recommended Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
 
 ### Oracle client
 
