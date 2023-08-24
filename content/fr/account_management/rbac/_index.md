@@ -214,7 +214,7 @@ Vous avez la possibilité de limiter l'accès à certaines ressources à des rô
 [10]: /fr/api/latest/roles/#create-role
 [11]: /fr/dashboards/#permissions
 [12]: /fr/monitors/notify/#permissions
-[13]: /fr/security_platform/detection_rules/#limit-edit-access
+[13]: /fr/security/detection_rules/#limit-edit-access
 [14]: /fr/service_management/service_level_objectives/#permissions
 [15]: /fr/synthetics/browser_tests/#permissions
 [16]: /fr/account_management/teams/
