@@ -100,7 +100,7 @@ Apply a formula on one or multiple queries by clicking on the `+ Add` button nex
 
 {{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="The query editor with a formula dividing query A by query B" style="width:100%;" >}}
 
-To apply formulas with multiple queries, all queries must be grouped by the same facet. In the example above, both queries are grouped by `Webstore Store Name`.
+To apply formulas with multiple queries, all queries must be grouped by the same query search value. In the example above, both queries are grouped by `Webstore Store Name`.
 
 You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][12] on the proportion of error logs in all logs to compare current data with data from one week before:
 
