@@ -53,8 +53,8 @@ The following metrics provide insight into your mobile application's performance
 [2]: /real_user_monitoring/android/mobile_vitals/
 [3]: https://docs.flutter.dev/perf/ui-performance
 [4]: https://docs.flutter.dev/tools/devtools/performance
-[5]: https://developer.android.com/topic/performance/vitals/frozen [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
-[6]: https://developer.android.com/topic/performance/vitals/anr [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
+[5]: https://developer.android.com/topic/performance/vitals/frozen
+[6]: https://developer.android.com/topic/performance/vitals/anr
 [7]: https://docs.flutter.dev/reference/crash-reporting
 [8]: /real_user_monitoring/error_tracking/flutter
 [9]: https://docs.flutter.dev/perf/best-practices#build-and-display-frames-in-16ms
