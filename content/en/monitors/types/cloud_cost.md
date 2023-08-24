@@ -15,6 +15,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
+  tag: "Blog"
+  text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
 ---
 
 ## Overview

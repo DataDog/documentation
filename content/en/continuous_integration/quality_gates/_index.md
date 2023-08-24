@@ -51,7 +51,7 @@ The following example shows how to create a static analysis rule that fails when
 
 ## Invoking quality gates
 
-To use quality gates, your [`datadog-ci`][7] version should be higher or equal than `2.16.0`.
+To use quality gates, your [`datadog-ci`][7] version should be `2.19.0` or later.
 
 You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
@@ -66,13 +66,13 @@ are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</
 Otherwise, the rules might have an incorrect behavior due to the absence of the events.
 </div>
 
-The command requires the `DATADOG_API_KEY` and `DATADOG_APP_KEY` environment variables to point to your [Datadog API Key][5]
+The command requires the `DD_API_KEY` and `DD_APP_KEY` environment variables to point to your [Datadog API Key][5]
 and [Datadog Application Key][6]. Also, you need to set the `DD_BETA_COMMANDS_ENABLED` environment
 variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
 
 <pre>
 <code>
-DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DATADOG_API_KEY=&lt;API_KEY&gt; DATADOG_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
+DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DD_API_KEY=&lt;API_KEY&gt; DD_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
 </code>
 </pre>
 
@@ -81,6 +81,8 @@ The behavior of the command can be modified using the following flags:
 based on the current pipeline context. By default, the command succeeds.
 - `--fail-if-unavailable`: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
+- `--timeout`: the command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes.
+The command typically completes within a few minutes, but it could take longer due to processing delays in Datadog.
 - `--no-wait`: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is

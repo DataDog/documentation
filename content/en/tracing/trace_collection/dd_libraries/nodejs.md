@@ -33,14 +33,6 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's
 
 ## Installation and getting started
 
-### Follow the in-app documentation (recommended)
-
-Follow the [Quick start instructions][2] in Datadog for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
-
 ### Configure the Datadog Agent for APM
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
@@ -103,9 +95,18 @@ For other environments, see the [Integrations][5] documentation for that environ
 
 Read [tracer settings][3] for a list of initialization options.
 
-### Instrument your application
+### Choose your instrumentation method
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
+After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
+
+See the following pages for supported deployment scenarios and languages:
+
+- [Inject the instrumentation library locally][11] (at the Agent);
+- [Inject the instrumentation library from the Datadog UI][12] (beta); or
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
+
+
+### Instrument your application
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
@@ -223,3 +224,5 @@ If needed, configure the tracing library to send application performance telemet
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/

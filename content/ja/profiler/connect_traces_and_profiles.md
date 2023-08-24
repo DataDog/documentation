@@ -40,9 +40,9 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-以下が必要です:
-- OpenJDK 11+ および `dd-trace-java` バージョン 0.65.0+、または
-- OpenJDK 8: 8u282+ および `dd-trace-java` バージョン 0.77.0+。
+<div class="alert alert-warning">
+Java Flight Recorder (JFR) の代わりに <a href="/profiler/enabling/java/?tab=datadog#requirements">Datadog プロファイラーを使用する</a>ことを強くお勧めします。
+</div>
 
 [1]: /ja/profiler/enabling/java
 {{< /programming-lang >}}
@@ -66,21 +66,28 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 [Go サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-`dd-trace-go` バージョン 1.37.0+ が必要です。
+新しい[タイムライン機能](#span-execution-timeline-view) (ベータ版) を有効にするには、以下の環境変数を設定してください。
 
-**注:** この機能は、Go バージョン 1.18 以降で最もよく機能します。Go 1.17 以下にはいくつかのバグがあり、特に CGO を多用する場合、この機能の精度が落ちることがあります ([GH-35057][2]、[GH-48577][3]、[CL-369741][4]、および [CL-369983][5] 参照)。
+```go
+os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
+os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
+```
+
+これらの変数を設定すると、最大 1 分 (または 5 MiB) の実行トレースデータが [15 分ごとに][2]記録されます。
+
+実行トレースを記録している間、アプリケーションがガベージコレクションのように CPU 使用率の増加を観測する可能性があります。ほとんどのアプリケーションでは大きな影響はないはずですが、Go 1.21 にはこのオーバーヘッドをなくすための[パッチ][3]が含まれています。
+
+この機能を使用するには、`dd-trace-go` バージョン 1.37.0 以降 (タイムラインベータは 1.52.0 以降) が必要で、Go バージョン 1.18 以降 (タイムラインベータは 1.21 以降) で最適に動作します。
 
 [1]: /ja/profiler/enabling/go
-[2]: https://github.com/golang/go/issues/35057
-[3]: https://github.com/golang/go/issues/48577
-[4]: https://go-review.googlesource.com/c/go/+/369741/
-[5]: https://go-review.googlesource.com/c/go/+/369983/
+[2]: https://github.com/DataDog/dd-trace-go/issues/2099
+[3]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 [.NET サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-`dd-trace-dotnet` バージョン 2.7.0+ が必要です。
+この機能を使用するには `dd-trace-dotnet` バージョン 2.30.0+ が必要です。
 
 [1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -94,22 +101,82 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### スパンからプロファイリングデータにリンクする
+### スパン実行の内訳
 
 各トレースのビューから、選択したスパンの範囲内のプロファイリングデータが Code Hotspots タブに表示されます。
 
-左側の値は、選択したスパンにおいて、そのメソッド呼び出しに費やされた時間です。ランタイムと言語によって、このタイプのリストは異なります。
-
-- **メソッドの実行時間**は、コードの各メソッドが実行された全体の時間を示します。
+左側の値は、選択されたスパンの間にそのメソッド呼び出しに費やされた時間を表します。ランタイムと言語によって、カテゴリーは異なります。
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang lang="java" >}}
 - **CPU** は、CPU タスクを実行するのに費やした時間を示します。
 - **Synchronization** は、モニター待ちの時間、スレッドがスリープしている時間、パークしている時間などを表示します。
-- **VM オペレーション** (Java のみ) は、ガベージコレクションに関連しない (ヒープダンプなど) VM のオペレーション待機に費やした時間を示します。
+- **VM operations** は、VM オペレーション (例えば、ガベージコレクション、コンパイル、セーフポイント、ヒープダンプ) の待ち時間を示します。
 - **ファイル I/O** は、ディスクの読み取り/書き込み動作の実行待ちに費やした時間を示します。
 - **ソケット I/O** は、ネットワークの読み取り/書き込み動作の実行待ちに費やした時間を示します。
 - **Monitor enter** は、スレッドがロックでブロックされている時間を表示します。
-- **Uncategorized** は、上記のカテゴリーに分類できないスパンの実行に要した時間を表示します。
+- **Uncategorized** は、前述のカテゴリーに分類できないスパンの実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+- **CPU** は、CPU タスクを実行するのに費やした時間を示します。
+- **Lock Wait** は、スレッドがロックでブロックされている時間を表示します。
+- **Uncategorized** は、前述のカテゴリーに分類できないスパンの実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+- **CPU** は、CPU タスクを実行するのに費やした時間を示します。
+- **Uncategorized** は、CPU 実行以外のスパン実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+- **CPU** は、CPU タスクを実行するのに費やした時間を示します。
+- **Off-CPU** は、CPU 実行以外のスパン実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+- **CPU** は、CPU タスクを実行するのに費やした時間を示します。
+- **Lock Wait** は、スレッドがロックでブロックされている時間を表示します。
+- **Uncategorized** は、前述のカテゴリーに分類できないスパンの実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+- **CPU** は、CPU タスクを実行するのに費やした時間を示します。
+- **Uncategorized** は、CPU 実行以外のスパン実行に要した時間を表示します。
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 プラスアイコン `+` をクリックすると、スタックトレースをそのメソッドに**逆順**に展開します。値の上にカーソルを置くと、カテゴリー別に説明される時間の割合が表示されます。
+
+### スパン実行タイムラインビュー
+
+{{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots タブには、時間とスレッドに渡る実行の内訳を示すタイムラインビューがあります" video=true >}}
+
+**Timeline** ビューは、スパンの期間における時間ベースのパターンと作業分布を表示します。
+
+スパンの **Timeline** ビューでは、次のことが可能です。
+
+- 時間のかかるメソッドを分離する。
+- スレッド間の複雑な相互作用を整理する。
+- リクエストに影響を与えたランタイムアクティビティを表面化する。
+
+ランタイムや言語によって、レーンは異なります。
+
+{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang lang="java" >}}
+各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
+
+上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビ ティです。これらはリクエスト自体に関係ないこともあります。
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+各レーンは **goroutine** を表します。これには、選択されたスパンを開始した goroutine と、その goroutine が作成した goroutine とその子孫が含まれます。同じ `go` ステートメントで作成された goroutine はグループ化されます。グループを展開して各 goroutine の詳細を見ることができます。
+
+上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
+
+タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [Datadog のプロファイリングタイムラインによる Go リクエストレイテンシーのデバッグ][2]を参照してください。
+
+[2]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
+
+上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### プロファイルをトレースから閲覧する
 
@@ -131,7 +198,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 {{< programming-lang lang="java" >}}
 [Java サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-[Datadog プロファイラーを使用する][2]必要があります。JFR はサポートされていません。
+[Datadog プロファイラーの使用][2]が必要です。JFR はサポートされていません。
 
 [1]: /ja/profiler/enabling/java
 [2]: /ja/profiler/enabling/java/?tab=datadog#requirements
@@ -147,15 +214,9 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 {{< programming-lang lang="go" >}}
 [Go サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-go` バージョン 1.37.0+ が必要です。
-
-**注:** この機能は、Go バージョン 1.18 以降で最もよく機能します。Go 1.17 以下にはいくつかのバグがあり、特に CGO を多用する場合、この機能の精度が落ちることがあります ([GH-35057][2]、[GH-48577][3]、[CL-369741][4]、および [CL-369983][5] 参照)。
+`dd-trace-go` バージョン 1.37.0 以上が必要で、Go バージョン 1.18 以降で最適に動作します。
 
 [1]: /ja/profiler/enabling/go
-[2]: https://github.com/golang/go/issues/35057
-[3]: https://github.com/golang/go/issues/48577
-[4]: https://go-review.googlesource.com/c/go/+/369741/
-[5]: https://go-review.googlesource.com/c/go/+/369983/
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -199,7 +260,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 CPU やウォールタイムなどの貴重なリソースを消費している上位のエンドポイントを追跡することは価値があります。このリストは、エンドポイントが回帰していないか、あるいは新たに導入したエンドポイントが大幅にリソースを消費してサービス全体の速度を低下させていないかどうかを確認するのに役立ちます。
 
-次のイメージは、`GET /store_history` が CPU の 20% を消費して定期的にこのサービスに影響を与えていることを示しています。
+次のイメージは、`GET /store_history` がこのサービスの CPU の 20% を消費して定期的に影響を与えていることを示しています。
 
 {{< img src="profiler/endpoint_metric.png" alt="上位のエンドポイントの消費リソースのグラフ化" >}}
 
@@ -211,9 +272,6 @@ CPU やウォールタイムなどの貴重なリソースを消費している�
 
 {{< img src="profiler/endpoint_per_request.mp4" alt="リクエストごとに多くのリソースを使用し始めたエンドポイントのトラブルシューティング" video=true >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /ja/profiler/profiler_troubleshooting#reduce-overhead-from-default-setup
-[2]: /ja/tracing/trace_collection/custom_instrumentation/java#manually-creating-a-new-span

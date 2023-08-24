@@ -115,7 +115,10 @@ Each lane represents a **goroutine**. Goroutines created by the same `go` statem
 
 Lanes on top are runtime activities that may impact performance.
 
+For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Debug Go Request Latency with Datadog's Profiling Timeline][2].
+
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
+[2]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.

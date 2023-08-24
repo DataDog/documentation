@@ -33,12 +33,11 @@ Each item listed in the Error Tracking Explorer is an issue and contains high-le
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range" style="width:80%;" >}}
 
-
 The time range appears on the top right of the Explorer as a timeline. This feature allows you to display issues having error occurrences within the selected time period. Change the time range by selecting a preset range from the dropdown.
 
 ### Facets
 
-{{< img src="real_user_monitoring/error_tracking/facet.png" alt="Error Tracking Facets" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/facets_panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
@@ -46,11 +45,11 @@ Error Tracking automatically indexes a predefined list of attributes from your i
 
 Click on any issue to open the issue panel and see more information about it.
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary.png" alt="Upper part of the Error Tracking issue panel offering a summarized view of the issue" style="width:80%;" >}}
 
 The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand its lifecycle: first and last occurrence dates, total count, as well as the count over time for the given issue.
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
 
 The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you information while troubleshooting, for example:
 
