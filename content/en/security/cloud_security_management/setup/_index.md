@@ -39,13 +39,7 @@ further_reading:
 
 Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
 
-CSM is available in three packages: CSM Enterprise, CSM Pro, and CSM Workload Security. Each package includes access to a specific set of features, as shown in the following table:
-
-| Package               | Features                                              |
-|-----------------------|-------------------------------------------------------|
-| CSM Enterprise        | Threats, Misconfigurations (cloud accounts and Agent) |
-| CSM Pro               | Misconfigurations (cloud accounts only)               |
-| CSM Workload Security | Threats                                               |
+CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. Each package includes access to a specific set of features, as shown in the following table:
 
 <table>
     <tr>
@@ -54,54 +48,19 @@ CSM is available in three packages: CSM Enterprise, CSM Pro, and CSM Workload Se
     </tr>
     <tr>
         <td>CSM Enterprise</td>
-        <td><ul><li>Threats</li><li>Misconfigurations (cloud accounts and Agent)</li><li>Identity Risks</li><li>Vulnerabilities (hosts and container images)</li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (hosts and container images)</a></li></ul></td>
     </tr>
     <tr>
         <td>CSM Pro</td>
-        <td><ul><li>Misconfigurations (cloud accounts)</li><li>Vulnerabilities (container images)</li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
         <td>CSM Workload Security</td>
-        <td><ul><li>Threats</li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
     </tr>
 </table>
-<table>
-   <tr>
-      <th>Package</th>
-      <th>Features</th>
-   </tr>
-   <tr>
-      <td rowspan="4">
-         CSM Enterprise
-      </td>
-   </tr>
-   <tr>
-      <td>Threats</td>
-   </tr>
-   <tr>
-      <td>Identity Risks</td>
-   </tr>
-   <tr>
-      <td>Vulnerabilities (hosts and container images)</td>
-   </tr>
-   <tr>
-      <td rowspan="3">CSM Pro</td>
-   </tr>
-   <tr>
-      <td>Misconfigurations (cloud accounts)</td>
-   </tr>
-   <tr>
-      <td>Vulnerabilities (container images)</td>
-   </tr>
-   <tr>
-      <td rowspan="2">CSM Workload Security</td>
-   </tr>
-   <tr>
-      <td>Threats</td>
-   </tr>
-</table>
 
-**Note**: You can enable other features that aren't included in your package at any time by following the instructions.
+**Note**: You can enable other features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
 
 ## Prerequisites
 
@@ -130,13 +89,14 @@ CSM is available in three packages: CSM Enterprise, CSM Pro, and CSM Workload Se
   * Oracle Linux 7, 8, and 9
   * CentOS 7
   * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[3]: /security/cloud_security_management/troubleshooting
-[4]: /agent/remote_config
-[5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
+[1]: /security/cloud_security_management/setup/csm_enterprise
+[2]: /security/cloud_security_management/setup/csm_pro
+[3]: /security/security/cloud_security_management/setup/csm_workload_security
+[4]: https://app.datadoghq.com/security/configuration/csm/setup
+[5]: /security/cloud_security_management/troubleshooting

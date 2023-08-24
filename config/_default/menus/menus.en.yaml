@@ -2956,7 +2956,7 @@ main:
     identifier: csm_setup_pro
     weight: 10005
   - name: CSM Workload Security
-    url: security/cloud_security_management/setup/workload_security
+    url: security/cloud_security_management/setup/csm_workload_security
     parent: csm_setup
     identifier: csm_setup_workload_security
     weight: 10010

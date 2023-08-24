@@ -3,7 +3,9 @@ title: Setting Up CSM Workload Security
 kind: documentation
 ---
 
-The Cloud Security Management (CSM) Workload Security package...
+Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
+
+CSM is available in three packages: CSM Enterprise, CSM Pro, and CSM Workload Security. Each package includes access to a specific set of features, as shown in the following table:
 ## Prerequisites
 
 * Datadog Agent 7.44 or later.
