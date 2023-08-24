@@ -40,7 +40,7 @@ These new cost metrics include all of your AWS cloud costs. This allows you to c
 
 For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
 
-If you enabled AWS Split Cost Allocation, these metrics will allocate ECS costs by actual usage instead of just requested usage, providing more granular detail. 
+If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail. 
 
 ## Cost allocation
 
