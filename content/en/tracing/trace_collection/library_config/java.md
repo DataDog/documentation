@@ -199,7 +199,7 @@ When set to `true` query string parameters and fragment get added to web server 
 `dd.http.server.route-based-naming`
 : **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
 **Default**: `true`<br>
-When set to `false` http framework routes will not be used for resource names. _This can change resource names and derived metrics if changed._
+When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
