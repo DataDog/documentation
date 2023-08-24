@@ -10,7 +10,8 @@ further_reading:
   text: "Learn how to build dashboards using JSON"
 ---
 
-The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options.
+The **Notes & Links** widget is similar to the [free text widget][1] but contains more formatting and display options. 
+  Note. The Notes & Links widget does not support inline HTML. 
 
 ## Setup
 
