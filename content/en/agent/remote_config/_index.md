@@ -59,7 +59,7 @@ The following products and features are supported with Remote Configuration:
 
 ### Application Performance Monitoring (APM)
 
-- **Configure tracing library settings in the UI** (Public Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
+- **Configure tracing library settings in the UI** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
 - **Remotely instrument your Kubernetes services with APM** (Private Beta): Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote instrumentation][2] for more information.
 - **Remotely set Agent sampling rate** (Private Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
