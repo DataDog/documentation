@@ -74,9 +74,10 @@ For Intelligent Test Runner for Cypress to work, you must instrument your web ap
 ## Suite skipping
 Intelligent Test Runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
 
-## Note about changing test durations
 
-In some frameworks, such as `jest`, there are cache mechanisms that make tests faster after the running of tests has gone on for a while (see [jest cache][5] docs). If Intelligent Test Runner is skipping all but a few test files, these suites might run slower than they usually do. This is because they run with a colder cache than they usually do.
+## Note about changing test durations
+
+In some frameworks, such as `jest`, there are cache mechanisms that make tests faster after other tests have run (see [jest cache][5] docs). If Intelligent Test Runner is skipping all but a few test files, these suites might run slower than they usually do. This is because they run with a colder cache than they usually do. Regardless of this, total execution time for your test command should still be reduced.
 
 ## Further Reading
 
