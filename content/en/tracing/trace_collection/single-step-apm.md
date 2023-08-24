@@ -7,10 +7,11 @@ is_beta: true
 <div class="alert alert-info">
 <strong>Single Step APM Instrumentation is in beta!</strong> <p> This feature is available in the latest Datadog Agent version.</p>
 <ul>
+<li>On x86_64 architectures only</li>
 <li>On Linux hosts and VMs</li>
 <li>On Docker containers</li>
 </ul>
-<p>It supports tracing Java, Python, Node.js, and .NET services. Try it out!</p> 
+<p>It supports tracing Java, Python, Ruby, Node.js, and .NET services. Try it out!</p> 
 
 <p>For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services. <a href="http://dtdg.co/apm-onboarding">Fill out this form to request access</a>.</p>
 </div>
