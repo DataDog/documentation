@@ -716,14 +716,21 @@ class Integrations:
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace iterations
         result = ''
-        if not marketplace:
+        display_on_public = True
+        
+        # Don't try to build markdown if display_on_public_website is False
+        if manifest_json and "/dogweb/" not in file_name:
+            if not manifest_json["display_on_public_website"]:
+                display_on_public = False
+        
+        if not marketplace and display_on_public:
             try:
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
                 print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
-        else:
+        elif marketplace:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
@@ -741,6 +748,8 @@ class Integrations:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
                     result = updated_markdown
+        else:
+            print(f'Skipping markdown for: {file_name}')            
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
