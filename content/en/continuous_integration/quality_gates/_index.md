@@ -187,6 +187,6 @@ You can view information about who created, modified, and deleted Quality Gates 
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/blob/master/README.md
 [8]: /continuous_integration/guides/flaky_test_management/
-[9]: https://docs.github.com/en/rest/checks?apiVersion=2022-11-28
+[9]: https://docs.github.com/en/rest/checks
 [10]: https://app.datadoghq.com/integrations/github
 [11]: https://docs.datadoghq.com/integrations/github/
