@@ -25,8 +25,8 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 ### Prerequisites
 
-1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled via SNMP.
-3. Datadog Agent version 7.46 or later is installed.
+1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
+1. Datadog Agent version 7.46 or later is installed.
 
 ## Investigating devices
 
