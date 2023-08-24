@@ -89,5 +89,5 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 [1]: /security/cloud_security_management/setup/csm_enterprise
 [2]: /security/cloud_security_management/setup/csm_pro
-[3]: /security/security/cloud_security_management/setup/csm_workload_security
+[3]: /security/setup/csm_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
