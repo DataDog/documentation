@@ -1,6 +1,9 @@
 ---
 title: Integrated Libraries
 kind: documentation
+aliases:
+- /real_user_monitoring/android/integrated_libraries/
+- /real_user_monitoring/reactnative/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub

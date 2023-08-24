@@ -7,7 +7,7 @@ aliases:
     - /real_user_monitoring/roku/
 code_lang: roku
 type: multi-code-lang
-code_lang_weight: 50
+code_lang_weight: 60
 further_reading:
 - link: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
   tag: Documentation

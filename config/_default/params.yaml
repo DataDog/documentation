@@ -68,9 +68,13 @@ code_languages:
 code_language_ids:
     android: Android
     ios: iOS
+    expo: Expo
     flutter: Flutter
+    otel: OTel
     reactnative: React Native
+    codepush: CodePush
     roku: Roku
+    swiftui: Swift UI
     java: Java
     cpp: 'C++'
     php: PHP

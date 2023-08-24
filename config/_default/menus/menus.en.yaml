@@ -3556,16 +3556,36 @@ main:
     parent: rum_mobile_setup
     identifier: rum_mobile_setup_ios
     weight: 203
+  - name: SwiftUI
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/swiftui
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_swiftui
+    weight: 204
+  - name: OTel
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/otel
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_otel
+    weight: 205
   - name: React Native
     url: real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
     parent: rum_mobile_setup
     identifier: rum_mobile_setup_reactnative
-    weight: 204
+    weight: 206
+  - name: CodePush
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/codepush
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_codepush
+    weight: 207
+  - name: Expo
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/expo
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_expo
+    weight: 208
   - name: Roku
     url: real_user_monitoring/mobile_and_tv_monitoring/setup/roku
     parent: rum_mobile_setup
     identifier: rum_mobile_setup_roku
-    weight: 205
+    weight: 209
   - name: Advanced Configuration
     url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration
     parent: mobile_and_tv_monitoring
