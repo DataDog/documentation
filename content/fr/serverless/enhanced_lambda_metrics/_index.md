@@ -52,7 +52,7 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 `aws.lambda.enhanced.produced_bytes`
 : Mesure le nombre d'octets renvoyés par une fonction.
 
-`aws.lambda.enhanced.estimated_cost`  
+`aws.lambda.enhanced.estimated_cost`
 : Mesure le coût total estimé de l'invocation de la fonction (en dollars).
 
 `aws.lambda.enhanced.timeouts`
