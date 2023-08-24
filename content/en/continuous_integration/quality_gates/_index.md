@@ -158,8 +158,7 @@ A [GitHub check][9] can be automatically created for each rule evaluated. When t
 The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
 
 To enable GitHub Checks:
-1. Go to the [GitHub integration tile][10]. If you do not have this integration set up, or you don't have a GitHub app within the integration,
-you can follow [this guide][11] to set up one.
+1. Go to the [GitHub integration tile][10]. If you do not have this integration set up, or you don't have a GitHub app within the integration, follow [the GitHub integration documentation][11] to set one up.
 2. Grant `Checks: Write` access to the GitHub application.
 
 After the permission is granted, you should be able to see the checks in GitHub.
