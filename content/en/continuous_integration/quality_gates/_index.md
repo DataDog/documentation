@@ -157,7 +157,7 @@ To delete a Quality Gates rule, click the **Delete** icon next to the **Edit** b
 A [GitHub check][9] can be automatically created for each rule evaluated. When this feature is enabled, you will see the evaluation results directly in GitHub.
 The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
 
-To enable this feature:
+To enable GitHub Checks:
 1. Go to the [GitHub integration tile][10]. If you do not have this integration set up, or you don't have a GitHub app within the integration,
 you can follow [this guide][11] to set up one.
 2. Grant `Checks: Write` access to the GitHub application.
