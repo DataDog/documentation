@@ -32,9 +32,8 @@ Start by [logging into Postman][4]. Datadog recommends [downloading the Postman 
 <div class="postman-run-button"
 data-postman-action="collection/fork"
 data-postman-visibility="public"
-data-postman-var-1="20651290-aafdb099-43ae-4df4-b612-5c8de0af546f"
-data-postman-collection-url="entityId=20651290-aafdb099-43ae-4df4-b612-5c8de0af546f&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJhcHBsaWNhdGlvbl9rZXkiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9XQ=="></div>
+data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -44,7 +43,6 @@ data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsIn
     ));
   }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
 </script>
-
 </br>This collection works in Postman for Web or in your Postman application. It may take several seconds to load.
 
 ### Postman environment setup
