@@ -24,7 +24,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{% tab "Azure" %}}
 
-{{% csm-setup-aws %}}
+{{% csm-setup-azure %}}
 
 {{% /tab %}}
 

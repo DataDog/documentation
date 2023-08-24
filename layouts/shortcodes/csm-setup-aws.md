@@ -1,6 +1,6 @@
 ### Set up the Datadog AWS integration
 
-If you haven't already, set up the [Amazon Web Services integration][1]. For CSM Misconfigurations, you must also add the [required permissions][2] for resource collection.
+If you haven't already, set up the [Amazon Web Services integration][1].You must also add the [required permissions][2] for resource collection.
 
 ### Enable CSM for your AWS accounts
 

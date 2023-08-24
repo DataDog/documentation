@@ -1,6 +1,6 @@
 ### Set up the Datadog Google Cloud Platform integration
 
-The Datadog Google Cloud Platform integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection for CSM Misconfigurations, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
+The Datadog Google Cloud Platform integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
 
 **Note**: [Google Cloud billing][4], the [Cloud Monitoring API][5], the [Compute Engine API][6], and the [Cloud Asset API][7] must all be enabled for the projects you wish to monitor.
 
