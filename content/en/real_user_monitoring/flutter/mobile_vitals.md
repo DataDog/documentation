@@ -55,9 +55,9 @@ The following metrics provide insight into your mobile application's performance
 [4]: https://docs.flutter.dev/tools/devtools/performance
 [5]: https://developer.android.com/topic/performance/vitals/frozen [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
 [6]: https://developer.android.com/topic/performance/vitals/anr [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
-[7]: https://developer.android.com/topic/performance/vitals/crash [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
+[7]: https://docs.flutter.dev/reference/crash-reporting
 [8]: /real_user_monitoring/error_tracking/flutter
-[9]: https://developer.android.com/topic/performance/power [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
-[10]: https://developer.android.com/reference/java/lang/OutOfMemoryError [ NEED TO REPLACE WITH FLUTTER DOC LINK IF STILL RELEVANT ]
+[9]: https://docs.flutter.dev/perf/best-practices#build-and-display-frames-in-16ms
+[10]: https://docs.flutter.dev/tools/devtools/memory
 [11]: https://docs.flutter.dev/perf/best-practices#control-build-cost 
 [12]: https://docs.flutter.dev/perf/ui-performance#identifying-problems-in-the-gpu-graph
