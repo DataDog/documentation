@@ -3,11 +3,8 @@ title: Setting Up CSM Workload Security
 kind: documentation
 ---
 
-The Cloud Security Management (CSM) Workload Security package includes Threats
+Cloud Security Management (CSM) Workload Security includes [CSM Threats][1]. For additional information on the CSM packages, see [Setting up Cloud Security Management][2].
 
-Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
-
-CSM is available in three packages: CSM Enterprise, CSM Pro, and CSM Workload Security. Each package includes access to a specific set of features, as shown in the following table:
 ## Prerequisites
 
 {{% csm-prereqs-enterprise-ws %}}
@@ -360,6 +357,8 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
+[1]: /security/threats
+[2]: /security/cloud_security_management/setup
 [4]: /agent/remote_config
 [5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [6]: https://app.datadoghq.com/security/configuration/csm/setup

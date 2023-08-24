@@ -3,7 +3,13 @@ title: Setting Up CSM Enterprise
 kind: documentation
 ---
 
-The Cloud Security Management (CSM) Enterprise package...
+Cloud Security Management (CSM) Enterprise includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (hosts and container images). 
+
+For additional information on the CSM packages, see [Setting up Cloud Security Management][8].
+
+## Prerequisites
+
+{{% csm-prereqs-enterprise-ws %}}
 
 ## Enable resource scanning for cloud accounts
 
@@ -32,31 +38,17 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ## Enable CSM on the Agent for hosts and containers
 
-To enable CSM on the Agent for hosts and containers, navigate to the **[Cloud Security Management Setup page][1]**. The setup page shows a list of hosts and containers with information on the operating system and installed Agent version. Click **Enable** and follow the in-app instructions to enable CSM.
+To enable CSM on the Agent for hosts and containers, navigate to the **[Cloud Security Management Setup page][5]**. The setup page shows a list of hosts and containers with information on the operating system and installed Agent version. Click **Enable** and follow the in-app instructions to enable CSM.
 
 for the best experience, including step-by-step instructions scoped to your deployment configuration.
-
-### Prerequisites
-
-* Datadog Agent 7.44 or later.
-* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CSM Threats supports the following Linux distributions:
-  * Ubuntu LTS (18.04, 20.04, and 22.04)
-  * Debian 10 or later
-  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
-  * SUSE Linux Enterprise Server 12 and 15
-  * Red Hat Enterprise Linux 7, 8, and 9
-  * Oracle Linux 7, 8, and 9
-  * CentOS 7
-  * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
 ### Remote Configuration
 
 <div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. Available for CSM Threats, Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+[Remote Configuration][6] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. Available for CSM Threats, Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
 
-To use Remote Configuration with CSM Threats, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
+To use Remote Configuration with CSM Threats, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][7] for more information.
 
 **Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
@@ -384,7 +376,11 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://app.datadoghq.com/security/configuration/csm/setup
-[3]: /security/cloud_security_management/troubleshooting
-[4]: /agent/remote_config
-[5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
+[1]: /security/threats
+[2]: /security/misconfigurations
+[3]: /security/identity_risks
+[4]: /security/infrastructure_vulnerabilities
+[5]: https://app.datadoghq.com/security/configuration/csm/setup
+[6]: /agent/remote_config
+[7]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
+[8]: /security/cloud_security_management/setup
