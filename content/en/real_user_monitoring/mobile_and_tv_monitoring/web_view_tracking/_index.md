@@ -2,17 +2,17 @@
 title: Web View Tracking
 kind: documentation
 aliases:
-- /real_user_monitoring/android/web_view_tracking
-- /real_user_monitoring/ios/web_view_tracking
-- /real_user_monitoring/flutter/web_view_tracking
-- /real_user_monitoring/reactnative/web_view_tracking
+  - /real_user_monitoring/android/web_view_tracking
+  - /real_user_monitoring/ios/web_view_tracking
+  - /real_user_monitoring/flutter/web_view_tracking
+  - /real_user_monitoring/reactnative/web_view_tracking
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
-  text: Source code for dd-sdk-android
-- link: /real_user_monitoring
-  tag: Documentation
-  text: Explore Datadog RUM
+  - link: https://github.com/DataDog/dd-sdk-android
+    tag: Github
+    text: Source code for dd-sdk-android
+  - link: /real_user_monitoring
+    tag: Documentation
+    text: Explore Datadog RUM
 ---
 
 ## Overview
