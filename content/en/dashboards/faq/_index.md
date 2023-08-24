@@ -7,6 +7,7 @@ aliases:
     - /graphing/faq/how-to-merge-screenboards
     - /graphing/faq/false-spikes-sometimes-appear-on-my-sum-graph
     - /graphing/faq/
+    - /dashboards/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value/
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}

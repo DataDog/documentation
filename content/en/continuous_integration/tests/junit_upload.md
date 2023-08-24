@@ -265,6 +265,8 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ## Collecting repository and commit metadata
 
+## Collecting Git metadata
+
 {{% ci-git-metadata %}}
 
 ## Git metadata upload

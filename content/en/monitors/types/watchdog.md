@@ -67,7 +67,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 [1]: /watchdog/#overview
 [2]: /monitors/configuration/?tab=thresholdalert#alert-grouping
 {{% /tab %}}
-{{% tab "Logs (beta)" %}}
+{{% tab "Logs" %}}
 
 A logs alert indicates that either a new pattern of error logs has been detected or that there has been an increase in an existing pattern of error logs.
 

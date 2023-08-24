@@ -31,7 +31,7 @@ Static Analysis is a clear-box software testing technique that analyzes a progra
 Using Static Analysis provides organizations with the following benefits:
 
 * Static Analysis takes the guesswork out of adhering to an organization's code standards, enabling your development team to ship compliant code without significant impacts to developer velocity.
-* An organization's applications are less likely to be vulnerable to security breaches over time due to new vulnerabilities being caught before code reaches to production through SAST scans.
+* An organization's applications are less vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
@@ -46,12 +46,6 @@ Using Static Analysis provides organizations with the following benefits:
 
 To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify which rulesets to use.
 
-```yaml
-rulesets:
-  - <ruleset-name>
-  - <ruleset-name>
-```
-
 For example, for Python rules:
 
 ```yaml
@@ -61,6 +55,14 @@ rulesets:
   - python-code-style
   - python-inclusive
 ```
+
+A `static-analysis.datadog.yml` file supports the following:
+
+| Name               | Description                                                                               | Required | Default |
+|--------------------|-------------------------------------------------------------------------------------------|----------|---------|
+| `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
+| `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
+| `ignore-gitignore` | Determines whether Datadog Static Analysis will analyze the content in a `.gitignore` file.  | `false`  | `true`  |
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
@@ -227,4 +229,5 @@ bar = 2
 [3]: /integrations/github/
 [4]: /account_management/api-app-keys/
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
+[6]: /continuous_integration/static_analysis/rules
 [103]: /getting_started/site/

@@ -1,8 +1,8 @@
 ---
 further_reading:
-- link: /security/cspm
+- link: /security/misconfigurations
   tag: ドキュメント
-  text: Cloud Security Posture Management
+  text: CSM Misconfigurations で誤構成の追跡を開始
 - link: /security/default_rules/#cat-cloud-security-management
   tag: ドキュメント
   text: すぐに使える検出ルール
@@ -16,7 +16,7 @@ Datadog は、クラウドリソース間の関係をマッピングするグラ
 
 ## リソース依存関係グラフ
 
-下の図は、他のリソースが公開されているかどうかを判断するために、関連リソースがどのように使用されるかを示しています。たとえば、S3 の公開バケットに格納されている Cloudtrail Trail は、それ自体が公開されています。リソースが別のリソースが原因で公開されている場合、その関係性が CSPM リソース関係性グラフに示されます。
+下の図は、他のリソースが公開されているかどうかを判断するために、関連リソースがどのように使用されるかを示しています。たとえば、S3 の公開バケットに格納されている Cloudtrail Trail は、それ自体が公開されています。リソースが別のリソースが原因で公開されている場合、その関係性が Cloud Security Management Misconfigurations リソース関係性グラフに示されます。
 
 この図は、リソース同士の相関関係から公開状況を判断する際の参考にしてください。
 

@@ -182,6 +182,16 @@ If you are using Session Replay, make sure to allow workers with `blob:` URI sch
 worker-src blob:;
 ```
 
+Alternatively, starting from [version 4.47.0][8], you can self-host the Datadog Browser SDK Worker JavaScript file and provide the `workerUrl` option to initialize the [RUM Browser SDK][8] by doing one of the following:
+
+* Download it from https://unpkg.com/@datadog/browser-worker, and store it alongside your Web application assets.
+* Install the [`@datadog/browser-worker` NPM package][9] and use your build tool to include it in the built assets (see documentation for [Webpack 4][10], [Webpack 5][11], [Vite][12], and [Rollup][13]).
+
+Requirements:
+
+* Make sure the Worker major version matches the Browser SDK version you are using.
+* Host the file on the same origin as your web application. Due to [browser restrictions][14], it cannot be hosted on a separate domain (for example, a third-party CDN host) or a different scheme.
+
 ### CDN bundle URL
 
 If you are using the CDN async or CDN sync setup for [Real User Monitoring][6] or [browser log collection][7], also add the following `script-src` entry:
@@ -201,3 +211,10 @@ script-src https://www.datadoghq-browser-agent.com
 [5]: /logs/log_collection/javascript/#initialization-parameters
 [6]: /real_user_monitoring/browser/#setup
 [7]: /logs/log_collection/javascript/#cdn-async
+[8]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4470
+[9]: https://www.npmjs.com/package/@datadog/browser-worker
+[10]: https://v4.webpack.js.org/loaders/file-loader/
+[11]: https://webpack.js.org/guides/asset-modules/#url-assets
+[12]: https://vitejs.dev/guide/assets.html#new-url-url-import-meta-url
+[13]: https://github.com/rollup/plugins/tree/master/packages/url/#readme
+[14]: https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker
