@@ -116,6 +116,10 @@ After all Agent configuration is complete, [restart the Datadog Agent][4].
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

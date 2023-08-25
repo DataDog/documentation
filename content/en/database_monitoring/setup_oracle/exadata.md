@@ -39,6 +39,10 @@ Configure the Agent by following the instructions for [self-hosted Oracle databa
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][6] page in Datadog to get started.
 
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging

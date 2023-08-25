@@ -209,6 +209,10 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][7] and [Databases][6] page in Datadog to get started.
 
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
 [1]: /database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging

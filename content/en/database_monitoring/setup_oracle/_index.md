@@ -32,7 +32,7 @@ Before Database Monitoring can be configured for Oracle, the following prerequis
     - [Install the Oracle integration](#install-the-oracle-integration)
     - [Verify an existing Oracle integration installation](#verify-your-existing-oracle-integration)
 
-### Setup instructions
+### Setup
 If the above prerequisites are met, follow the setup instructions for your hosting type:
 {{< partial name="dbm/dbm-setup-oracle" >}}
 
@@ -136,10 +136,6 @@ mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 Deactivating the legacy integration prevents sending the system metrics twice.
 
 Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
-
-## Custom queries
-
-Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 

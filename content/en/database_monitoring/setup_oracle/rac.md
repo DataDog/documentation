@@ -71,6 +71,10 @@ Set the `rac_cluster` configuration parameter to the name of your RAC cluster or
 [7]: /database_monitoring/setup_oracle/selfhosted
 [8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
