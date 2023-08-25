@@ -118,7 +118,7 @@ Les traces sont créées dans vos applications instrumentées et sont transmises
 
 [Améliorez la latence des applications][16] et optimisez les ressources de calcul avec le profiling continu en production. Vous pourrez ainsi identifier les lignes de code qui sollicitent le plus le processeur, la mémoire et l'E/S.
 
-{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+{{< img src="tracing/index/Profiling.png" alt="Profiling" style="width:100%;">}}
 
 
 ## Pour aller plus loin

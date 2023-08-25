@@ -76,6 +76,8 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
+**Note:** IAM authentication is also supported. Please see [the guide][14] on how to configure this for your RDS instance.
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -426,3 +428,4 @@ If you have installed and configured the integrations and Agent as described and
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
 [13]: https://app.datadoghq.com/integrations/amazon-web-services
+[14]: /database_monitoring/guide/managed_authentication

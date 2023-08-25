@@ -20,6 +20,7 @@ Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in 
 ## Prerequisites
 
 1. Set up and configure [AWS Cloud Cost integration][1].
+2. (Optional) Enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
 1. At least one of the following must be running:
     - [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances.
     - [**Datadog Container Monitoring**][3] in ECS tasks.
@@ -38,6 +39,8 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
 
 For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
+
+If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail. 
 
 ## Cost allocation
 
@@ -58,6 +61,8 @@ For ECS allocation, Datadog determines which tasks ran on each EC2 instance used
 Based on the CPU or memory usage of each task (as reported in the CUR), Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
 
 Once all tasks have been assigned a cost based on their resource reservations, some instance cost is left over. This is the cost of unreserved resources, which is called **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
+
+If you enabled AWS Split Cost Allocation, ECS tasks will have costs allocated based on their actual usage, with an additional `is_workload_idle` tag that will represent any usage that is requested but unused. For instance, a task that requests 2GB of memory but only uses 1GB will have the remaining 1GB worth of cost tagged as `is_workload_idle`. 
 
 ### ECS on Fargate
 
@@ -138,3 +143,4 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 [2]: /containers/kubernetes/installation/?tab=operator
 [3]: /containers/amazon_ecs/?tab=awscli
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
+[5]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html

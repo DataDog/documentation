@@ -643,7 +643,6 @@ components:
       description: An object related to an API key.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     APIKeyUpdateAttributes:
       description: Attributes used to update an API Key.
       properties:
@@ -785,7 +784,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
-      type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
       properties:
@@ -1166,8 +1164,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SAMLAssertionAttribute'
       - $ref: '#/components/schemas/Role'
-      properties: {}
-      type: object
     AuthNMappingRelationships:
       description: All relationships associated with AuthN Mapping.
       properties:
@@ -3898,7 +3894,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/DowntimeMonitorIdentifierId'
       - $ref: '#/components/schemas/DowntimeMonitorIdentifierTags'
-      type: object
     DowntimeMonitorIdentifierId:
       additionalProperties: {}
       description: Object of the monitor identifier.
@@ -4133,13 +4128,11 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/DowntimeMonitorIncludedItem'
-      type: object
     DowntimeScheduleCreateRequest:
       description: Schedule for the downtime.
       oneOf:
       - $ref: '#/components/schemas/DowntimeScheduleRecurrencesCreateRequest'
       - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
-      type: object
     DowntimeScheduleCurrentDowntimeResponse:
       description: 'The most recent actual start and end dates for a recurring downtime.
         For a canceled downtime,
@@ -4321,13 +4314,11 @@ components:
       oneOf:
       - $ref: '#/components/schemas/DowntimeScheduleRecurrencesResponse'
       - $ref: '#/components/schemas/DowntimeScheduleOneTimeResponse'
-      type: object
     DowntimeScheduleUpdateRequest:
       description: Schedule for the downtime.
       oneOf:
       - $ref: '#/components/schemas/DowntimeScheduleRecurrencesUpdateRequest'
       - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
-      type: object
     DowntimeScope:
       description: The scope to which the downtime applies. Must follow the [common
         search syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
@@ -5883,7 +5874,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
       - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-      type: object
     IncidentAttachmentData:
       description: A single incident attachment.
       example:
@@ -5998,7 +5988,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/IncidentAttachmentPostmortemAttributes'
       - $ref: '#/components/schemas/IncidentAttachmentLinkAttributes'
-      type: object
     IncidentAttachmentUpdateData:
       description: A single incident attachment.
       properties:
@@ -6104,7 +6093,6 @@ components:
       description: An object related to an attachment that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
@@ -6185,7 +6173,6 @@ components:
       - $ref: '#/components/schemas/IncidentFieldAttributesMultipleValue'
       required:
       - type
-      type: object
     IncidentFieldAttributesMultipleValue:
       description: A field with potentially multiple values selected.
       properties:
@@ -6316,7 +6303,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SlackIntegrationMetadata'
       - $ref: '#/components/schemas/JiraIntegrationMetadata'
-      type: object
     IncidentIntegrationMetadataPatchData:
       description: Incident integration metadata data for a patch request.
       properties:
@@ -6370,7 +6356,6 @@ components:
         in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentIntegrationMetadataType:
       default: incident_integrations
       description: Integration metadata resource type.
@@ -6550,7 +6535,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/IncidentAttachmentData'
-      type: object
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
       properties:
@@ -6850,7 +6834,6 @@ components:
         included payload.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentServiceRelationships:
       description: The incident service's relationships.
       properties:
@@ -7009,7 +6992,6 @@ components:
         payload.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentTeamRelationships:
       description: The incident team's relationships.
       properties:
@@ -7136,7 +7118,6 @@ components:
       description: The timeline cell's attributes for a create request.
       oneOf:
       - $ref: '#/components/schemas/IncidentTimelineCellMarkdownCreateAttributes'
-      type: object
     IncidentTimelineCellMarkdownContentType:
       default: markdown
       description: Type of the Markdown timeline cell.
@@ -7338,7 +7319,6 @@ components:
       description: An object related to an incident todo that is included in the response.
       oneOf:
       - $ref: '#/components/schemas/User'
-      type: object
     IncidentTodoType:
       default: incident_todos
       description: Todo resource type.
@@ -8078,7 +8058,6 @@ components:
       required:
       - type
       - integration
-      type: object
     LogsArchiveDefinition:
       description: The definition of an archive.
       properties:
@@ -8108,7 +8087,6 @@ components:
       required:
       - type
       - integration
-      type: object
     LogsArchiveDestinationAzure:
       description: The Azure archive destination.
       properties:
@@ -9665,7 +9643,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/MetricDistinctVolume'
       - $ref: '#/components/schemas/MetricIngestedIndexedVolume'
-      type: object
     MetricVolumesResponse:
       description: Response object which includes a single metric's volume.
       properties:
@@ -9704,7 +9681,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/Metric'
       - $ref: '#/components/schemas/MetricTagConfiguration'
-      type: object
     MetricsAndMetricTagConfigurationsResponse:
       description: Response object that includes metrics and metric tag configurations.
       properties:
@@ -9847,12 +9823,10 @@ components:
       description: Configuration for the policy.
       oneOf:
       - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicy'
-      type: object
     MonitorConfigPolicyPolicyCreateRequest:
       description: Configuration for the policy.
       oneOf:
       - $ref: '#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest'
-      type: object
     MonitorConfigPolicyResourceType:
       default: monitor-config-policy
       description: Monitor configuration policy resource type.
@@ -12344,7 +12318,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
-      type: object
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12453,10 +12426,13 @@ components:
       type: object
     ScalarQuery:
       description: An individual scalar query to one of the basic Datadog data sources.
+      example:
+        aggregator: avg
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       oneOf:
       - $ref: '#/components/schemas/MetricsScalarQuery'
       - $ref: '#/components/schemas/EventsScalarQuery'
-      type: object
     ScalarResponse:
       description: A message containing the response to a scalar query.
       properties:
@@ -12769,7 +12745,6 @@ components:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleCreatePayload'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleCreatePayload'
       - $ref: '#/components/schemas/CloudConfigurationRuleCreatePayload'
-      type: object
     SecurityMonitoringRuleDecreaseCriticalityBasedOnEnv:
       description: 'If true, signals in non-production environments have a lower severity
         than what is defined by the rule case, which can reduce signal noise.
@@ -13000,7 +12975,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
-      type: object
     SecurityMonitoringRuleQueryAggregation:
       description: The aggregation type.
       enum:
@@ -13027,7 +13001,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SecurityMonitoringStandardRuleResponse'
       - $ref: '#/components/schemas/SecurityMonitoringSignalRuleResponse'
-      type: object
     SecurityMonitoringRuleSeverity:
       description: Severity of the Security Signal.
       enum:
@@ -13964,7 +13937,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SensitiveDataScannerRuleIncludedItem'
       - $ref: '#/components/schemas/SensitiveDataScannerGroupIncludedItem'
-      type: object
     SensitiveDataScannerGetConfigResponse:
       description: Get all groups response.
       properties:
@@ -14693,6 +14665,7 @@ components:
           description: "Service owner\u2019s Slack channel."
           example: https://yourcompany.slack.com/archives/channel123
           type: string
+      type: object
     ServiceDefinitionV1Info:
       description: Basic information about a service.
       properties:
@@ -16208,6 +16181,17 @@ components:
     TeamAttributes:
       description: Team attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         created_at:
           description: Creation date of the team
           format: date-time
@@ -16221,6 +16205,12 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         link_count:
           description: The number of links belonging to the team
           format: int32
@@ -16247,6 +16237,12 @@ components:
           maximum: 2147483647
           readOnly: true
           type: integer
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16267,6 +16263,17 @@ components:
     TeamCreateAttributes:
       description: Team creation attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         description:
           description: Free-form markdown description/content for the team's homepage
           type: string
@@ -16275,11 +16282,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16304,8 +16323,6 @@ components:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/TeamLink'
       - $ref: '#/components/schemas/UserTeamPermission'
-      properties: {}
-      type: object
     TeamLink:
       description: Team link
       properties:
@@ -16550,6 +16567,17 @@ components:
     TeamUpdateAttributes:
       description: Team update attributes
       properties:
+        avatar:
+          description: Unicode representation of the avatar for the team, limited
+            to a single grapheme
+          example: "\U0001F951"
+          nullable: true
+          type: string
+        banner:
+          description: Banner selection for the team
+          format: int64
+          nullable: true
+          type: integer
         color:
           description: An identifier for the color representing the team
           format: int32
@@ -16564,11 +16592,23 @@ components:
           example: example-team
           maxLength: 195
           type: string
+        hidden_modules:
+          description: Collection of hidden modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
         name:
           description: The name of the team
           example: Example Team
           maxLength: 200
           type: string
+        visible_modules:
+          description: Collection of visible modules for the team
+          items:
+            description: String identifier of the module
+            type: string
+          type: array
       required:
       - handle
       - name
@@ -16760,10 +16800,12 @@ components:
     TimeseriesQuery:
       description: An individual timeseries query to one of the basic Datadog data
         sources.
+      example:
+        data_source: metrics
+        query: avg:system.cpu.user{*} by {env}
       oneOf:
       - $ref: '#/components/schemas/MetricsTimeseriesQuery'
       - $ref: '#/components/schemas/EventsTimeseriesQuery'
-      type: object
     TimeseriesResponse:
       description: A message containing the response to a timeseries query.
       properties:
@@ -17153,7 +17195,6 @@ components:
       - $ref: '#/components/schemas/Organization'
       - $ref: '#/components/schemas/Permission'
       - $ref: '#/components/schemas/Role'
-      type: object
     UserResponseRelationships:
       description: Relationships of the user object returned by the API.
       properties:
@@ -17384,6 +17425,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            dashboards_public_share: Generate public and authenticated links to share
+              dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -17397,11 +17440,28 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
+            slos_corrections: Apply, edit, and delete SLO status corrections. A user
+              with this permission can make status corrections, even if they do not
+              have permission to edit those SLOs.
+            slos_read: View SLOs and status corrections.
+            slos_write: Create, edit, and delete SLOs.
+            synthetics_global_variable_read: View, search, and use Synthetics global
+              variables.
+            synthetics_global_variable_write: Create, edit, and delete global variables
+              for Synthetics.
+            synthetics_private_location_read: View, search, and use Synthetics private
+              locations.
+            synthetics_private_location_write: Create and delete private locations
+              in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
             teams_manage: Manage Teams. Create, delete, rename, and edit metadata
@@ -24209,8 +24269,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - security_monitoring_findings_write
       summary: Mute or unmute a finding
       tags:
       - Security Monitoring
@@ -27794,9 +27852,9 @@ paths:
         dd_team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"handle-{{
-              unique_hash }}\",\n      \"name\": \"name-{{ unique_hash }}\"\n    },\n
-              \   \"type\": \"team\"\n  }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"test-handle-{{
+              unique_hash }}\",\n      \"name\": \"test-name-{{ unique_hash }}\"\n
+              \   },\n    \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
