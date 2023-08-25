@@ -62,7 +62,7 @@ A `static-analysis.datadog.yml` file supports the following:
 |--------------------|-------------------------------------------------------------------------------------------|----------|---------|
 | `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
 | `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
-| `ignore-gitignore` | Determines whether Datadog Static Analysis will analyze the content in a `.gitignore` file.  | `false`  | `false` |
+| `ignore-gitignore` | Determines whether Datadog Static Analysis analyzes the content in a `.gitignore` file.   | `false`  | `false` |
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
