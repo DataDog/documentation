@@ -21,7 +21,7 @@ further_reading:
 
 <div class="alert alert-info">Powerpack widgets are not supported on screenboards.</div>
 
-Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. Powerpacks are either preset (created by Datadog, available to all customers) or custom (created by a user, available only within their organization). For more information on Powerpack best practices, see the [Scale Graphing expertise with Powerpacks][1] guide.
+Powerpacks are templated groups of widgets that scale graphing expertise as reusable dashboard building blocks. Powerpacks are either preset (created by Datadog, available to all customers) or custom (created by a user, and only available within their organization). For more information on Powerpack best practices, see the [Scale Graphing expertise with Powerpacks][1] guide.
 
 ## Setup
 
@@ -46,7 +46,7 @@ To make changes to the look or layout of a Powerpack:
 1. Hover over the header and click the kebab menu.
 1. Select **Edit Powerpack Layout** from the Powerpack Actions menu.
 1. Make any desired changes to the Powerpack layout or any individual widget and select **Confirm Changes**.
-1. If this Powerpack is used in multiple dashboard, a prompt opens up to verify the instances of the Powerpack that are affected by this update.
+1. If this Powerpack is used in multiple dashboards, a prompt opens up to verify the instances of the Powerpack that are affected by this update.
 
 {{< img src="dashboards/widgets/powerpack/powerpack_actions_menu.png" alt="Action menu options to update a Powerpack and the Powerpack instance accessed through kebab on powerpack header" style="width:80%;" >}}
 
@@ -54,7 +54,7 @@ To make changes to the Powerpack Details:
 1. Hover over the header and click the kebab menu.
 1. Select **Edit Powerpack Details** from the Powerpack Actions menu.
 1. Make changes to the Powerpack info, the search categories, or filter configuration and select **Update Powerpack**.
-1. If this Powerpack is used in multiple dashboard, a prompt opens to verify the instances of the Powerpack that are affected by this update.
+1. If this Powerpack is used in multiple dashboards, a prompt opens to verify the instances of the Powerpack that are affected by this update.
 
 **Note**: You must have [edit permissions](#powerpack-permissions) to make any updates to the Powerpack or to modify the permissions.
 
@@ -68,7 +68,7 @@ To add a powerpack instance to the dashboard:
 1. Click the desired Powerpack to add to your dashboard to open the configuration for the powerpack instance.
 1. Select filter values and how the filters are controlled.
     * Powerpack filters - the selected value applies to widgets inside the powerpack instance.
-    * Dashboard filters - is controlled by dashboard template variables.
+    * Dashboard filters - controlled by dashboard template variables.
 1. Click **Confirm**. 
 
 ### Customizing a Powerpack instance

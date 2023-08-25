@@ -25,7 +25,7 @@ Powerpacks are templated groups of widgets that scale graphing expertise as reus
 Powerpacks are either preset (created by Datadog) or custom (created by a user).
 
 - Preset Powerpacks provide out-of-the-box views for common monitoring patterns like performance metrics or feature usage. They are often linked to a specific product or integration (like `RUM Page Views`) and are maintained by Datadog.
-- Custom Powerpacks can be created by anyone with dashboard write permissions to help users share and standardize internal best practices. Custom powerpacks are synced, and layout changes will update all instances where the powerpack is used.
+- Anyone with dashboard write permissions can create custom Powerpacks to help users share and standardize internal best practices. Custom powerpacks are synced, and layout changes will update all instances where the powerpack is used.
 
  
 This guide addresses best practices for creating and sharing custom Powerpacks.
