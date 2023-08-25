@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
   tag: "Blog"
   text: "Datadog NPM now supports Consul networking"
+- link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
+  tag: "Blog"
+  text: "Quickstart network investigations with NPM's story-centric UX"
 algolia:
   tags: ['npm', 'network performance monitoring']
 ---
@@ -44,7 +47,7 @@ NPM makes it simple to monitor complex networks with built in support for Linux 
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/performance/network_page" >}}<u>Network Page</u>: Graph your network data between each client and server available.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
 {{< /whatsnext >}}
 

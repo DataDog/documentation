@@ -38,7 +38,7 @@ Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog pr
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Diagramme de l'architecture de tracing d'AWS Lambda avec Datadog" >}}
 
-Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda. Vous pouvez installer le traceur en suivant les [instructions d'installation][5]. Si vous avez déjà installé l'extension, vérifiez que la variable d'environnement `DD_ENABLE_TRACING` est définie sur `true`.
+Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda. Vous pouvez installer le traceur en suivant les [instructions d'installation][5]. Si vous avez déjà installé l'extension, vérifiez que la variable d'environnement `DD_ENABLE_ENABLED` est définie sur `true`.
 
 ### Recommandations de runtime
 
@@ -110,7 +110,7 @@ En savoir plus sur le [tracing via des applications sans serveur Azure .NET][15]
 
 ### Environnements hybrides
 
-Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vos fonctions Lambda et vos hosts, vos traces dressent automatiquement un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions Lambda AWS, de hosts sur site ou de services gérés.
+Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vos fonctions Lambda et vos hosts, vos traces dressent automatiquement un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions AWS Lambda, de hosts sur site ou de services gérés.
 
 Si vous avez installé `dd-trace` sur vos hosts avec l'Agent Datadog, et si le tracing de vos fonctions sans serveur passe par AWS X-Ray, il est nécessaire de fusionner les traces pour afficher une trace unique et associée dans votre infrastructure. Consultez la section [Fusion de traces sans serveur][6] pour en savoir plus sur la fusion de traces entre `dd-trace` et AWS X-Ray.
 
@@ -139,11 +139,11 @@ Il existe deux scénarios justifiant l'instrumentation des bibliothèques de tra
 Voici des instructions de configuration pour les deux scénarios évoqués ci-dessus :
 
 - [Fusion de traces dans un environnement principalement sans serveur](#fusion-de-traces-dans-un-environnement-aws-sans-serveur)
-- [Fusion de traces entre des fonctions Lambda AWS et des hosts](#configurer-le-tracing-de-fonctions-aws-lambda-et-de-hosts)
+- [Fusion de traces entre des fonctions AWS Lambda et des hosts](#configurer-le-tracing-de-fonctions-aws-lambda-et-de-hosts)
 
 ### Fusion de traces dans un environnement AWS sans serveur
 
-AWS X-Ray propose à la fois un service AWS backend (le tracing actif d'AWS X-Ray) et un ensemble de bibliothèques client. [Lorsque le service AWS backend est activé indépendamment dans la console Lambda][2], vous disposez des spans `Initialization` et `Invocation` pour vos fonctions Lambda AWS. Vous pouvez également activer le tracing actif d'AWS X-Ray depuis les consoles API Gateway et Step Function.
+AWS X-Ray propose à la fois un service AWS backend (le tracing actif d'AWS X-Ray) et un ensemble de bibliothèques client. [Lorsque le service AWS backend est activé indépendamment dans la console Lambda][18], vous disposez des spans `Initialization` et `Invocation` pour vos fonctions AWS Lambda. Vous pouvez également activer le tracing actif d'AWS X-Ray depuis les consoles API Gateway et Step Function.
 
 Le SDK AWS X-Ray et les bibliothèques client de l'APM Datadog (`dd-trace`) accèdent directement à la fonction pour ajouter des métadonnées et des spans aux appels en aval. Si vous utilisez `dd-trace` pour effectuer le tracing au niveau du gestionnaire, voici à quoi ressemble la configuration finale :
 
@@ -154,11 +154,11 @@ Le SDK AWS X-Ray et les bibliothèques client de l'APM Datadog (`dd-trace`) acc
 
 ### Configurer le tracing de fonctions AWS Lambda et de hosts
 
-Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vos fonctions Lambda et vos hosts, vos traces dressent automatiquement un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions Lambda AWS, de hosts sur site ou de services gérés.
+Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vos fonctions Lambda et vos hosts, vos traces dressent automatiquement un tableau complet des requêtes qui franchissent les limites de votre infrastructure, qu'il s'agisse de fonctions AWS Lambda, de hosts sur site ou de services gérés.
 
 Si vous avez installé `dd-trace` sur vos hosts avec l'Agent Datadog, et si le tracing de vos fonctions sans serveur Node.js ou Python passe par AWS X-Ray, voici à quoi ressemble la configuration finale :
 
-1. Vous avez installé l'[intégration AWS X-Ray][2] pour le tracing de vos fonctions Lambda. Par la même occasion, vous avez activé le tracing actif d'AWS X-Ray et installé les bibliothèques client X-Ray.
+1. Vous avez installé l'[intégration AWS X-Ray][18] pour le tracing de vos fonctions Lambda. Par la même occasion, vous avez activé le tracing actif d'AWS X-Ray et installé les bibliothèques client X-Ray.
 2. Vous avez installé la [bibliothèque Lambda Datadog pour votre runtime Lambda][4] et défini la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
 3. La solution [APM Datadog][20] est configurée sur vos hosts et votre infrastructure à base de conteneurs.
 
@@ -252,9 +252,9 @@ Pour extraire le contexte des traces indiqué ci-dessus à partir de la fonction
 - Si vous utilisez TypeScript ou un bundler comme webpack, vous devez `import` ou `require` votre module Node.js à l'emplacement où les fonctions d'extraction sont définies. Ainsi, le module est compilé et groupé au sein de votre package de déploiement Lambda.
 - Si vos fonctions Lambda Node.js s'exécutent sur `arm64`, vous devez [définir la fonction d'extraction dans le code de votre fonction][26] au lieu d'utiliser la variable d'environnement `DD_TRACE_EXTRACTOR`.
 
-#### Fonctions d'extraction d'échantillons
+#### Extraits de fonction d'extraction
 
-Le code suivant décrit les fonctions d'extraction d'échantillons que vous pouvez utiliser pour propager le contexte des traces à l'échelle d'un système tiers ou d'une API ne prenant pas en charge les en-têtes HTTP standard.
+Le code suivant comporte des extraits de fonction d'extraction que vous pouvez utiliser pour propager le contexte des traces à l'échelle d'un système tiers ou d'une API ne prenant pas en charge les en-têtes HTTP standard.
 
 {{< tabs >}}
 {{% tab "Python" %}}

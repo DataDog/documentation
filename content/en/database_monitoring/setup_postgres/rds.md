@@ -16,6 +16,7 @@ Database Monitoring provides deep visibility into your Postgres databases by exp
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
 
+1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
@@ -38,6 +39,10 @@ Proxies, load balancers, and connection poolers
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+## Configure the AWS integration
+
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][13].
 
 ## Configure Postgres settings
 
@@ -70,6 +75,8 @@ Create the `datadog` user:
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
+
+**Note:** IAM authentication is also supported. Please see [the guide][14] on how to configure this for your RDS instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -420,3 +427,5 @@ If you have installed and configured the integrations and Agent as described and
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
+[13]: https://app.datadoghq.com/integrations/amazon-web-services
+[14]: /database_monitoring/guide/managed_authentication

@@ -26,11 +26,12 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and adhere to coding best practices early in the Software Development Life Cycle (SDLC) to ensure only the highest quality code makes it to production. 
+Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and security vulnerabilities early in the Software Development Life Cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
 
 Using Static Analysis provides organizations with the following benefits:
 
 * Static Analysis takes the guesswork out of adhering to an organization's code standards, enabling your development team to ship compliant code without significant impacts to developer velocity.
+* An organization's applications are less vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
@@ -45,20 +46,26 @@ Using Static Analysis provides organizations with the following benefits:
 
 To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify which rulesets to use.
 
-```yaml
-rulesets:
-  - <ruleset-name>
-  - <ruleset-name>
-```
-
 For example, for Python rules:
 
 ```yaml
 rulesets:
-  - python-code-style
   - python-best-practices
+  - python-security
+  - python-code-style
   - python-inclusive
+ignore-paths:
+  - path/to/ignore
+  - **.js
 ```
+
+A `static-analysis.datadog.yml` file supports the following:
+
+| Name               | Description                                                                               | Required | Default |
+|--------------------|-------------------------------------------------------------------------------------------|----------|---------|
+| `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
+| `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
+| `ignore-gitignore` | Determines whether Datadog Static Analysis analyzes the content in a `.gitignore` file.   | `false`  | `false` |
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
@@ -196,16 +203,25 @@ The content of the violation is shown in tabs:
 
 In Datadog Static Analysis, there are two types of suggested fixes:
 
-1. **Default Suggested Fix:** For simple violations, fixes are immediately available as part of the business logic of the violation's underlying static analysis rule.
-2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT4 to generate a suggested fix on the fly. You have a choice between "Text" and "Unified Text" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
+1. **Default Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
+2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
 
 The two types of fixes are distinguished visually in the UI with different labels.
 
-Default Suggested Fixes:
-{{< img src="ci/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:80%;">}}
+*Default Suggested Fixes:*
+{{< img src="ci/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
 
-AI Suggested Fixes:
-{{< img src="ci/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:80%;">}}
+*AI Suggested Fixes:*
+{{< img src="ci/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
+
+### Ignoring violations
+You can ignore a specific instance of a violation by commenting `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
+
+```python
+#no-dd-sa
+foo = 1
+bar = 2
+```
 
 ## Further Reading
 
@@ -216,4 +232,5 @@ AI Suggested Fixes:
 [3]: /integrations/github/
 [4]: /account_management/api-app-keys/
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
+[6]: /continuous_integration/static_analysis/rules
 [103]: /getting_started/site/

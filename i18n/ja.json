@@ -272,6 +272,9 @@
   "request": {
     "other": "リクエスト"
   },
+  "resources": {
+    "other": "リソース"
+  },
   "model": {
     "other": "モデル"
   },

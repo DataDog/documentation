@@ -3,6 +3,7 @@ title: Best Practices for OPW Aggregator Architecture
 kind: Documentation
 aliases:
   - /observability_pipelines/production_deployment_overview/aggregator_architecture
+  - /observability_pipelines/aggregator_architecture/
 ---
 
 ## Overview
