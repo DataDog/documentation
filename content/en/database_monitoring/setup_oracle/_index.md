@@ -19,11 +19,24 @@ The features described on this page are in beta. Contact your Customer Success M
 - **Deployment configurations**: Self-managed, RDS, RAC, Exadata, Autonomous Database
 - **Architecture**: Multi-tenant
 
-## Prerequisites
+## Overview
 
-### Overview
-- An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be [installed](#install-the-agent). If you are upgrading from a previous Agent version, additional [upgrade steps](#upgrade-from-a-previous-agent-release) are required.
-- The Oracle integration must be [installed](#install-the-oracle-integration). Existing installations may require [an update to your Agent configuration](#upgrade-the-oracle-integration-in-your-agent), depending on when the integration was installed.
+### Prerequisites
+
+Before Database Monitoring can be configured for Oracle, the following prerequisites must be met:
+
+1. An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be installed.
+    - [Install the Agent](#install-the-agent)
+    - [Upgrade an existing Agent installation](#upgrade-from-a-previous-agent-release)
+2. The Oracle integration must be installed.
+    - [Install the Oracle integration](#install-the-oracle-integration)
+    - [Verify an existing Oracle integration installation](#verify-your-existing-oracle-integration)
+
+### Setup instructions
+If the above prerequisites are met, follow the setup instructions for your hosting type:
+{{< partial name="dbm/dbm-setup-oracle" >}}
+
+## Prerequisite details
 
 ### Install the Agent
 
@@ -43,7 +56,7 @@ These contain all the implemented Oracle monitoring features and bug fixes.
 - If your recommended Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. 
 - If your recommended Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
 
-### Oracle client
+#### Oracle client
 
 The Agent doesn't require any external Oracle clients.
 
@@ -94,7 +107,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 {{% /tab %}}
 {{< /tabs >}}
 
-### Upgrade from a previous Agent release
+### Upgrade an existing Agent installation
 
 Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
@@ -102,9 +115,11 @@ Execute all `grant` permission commands according to the documentation for your 
 
 On the Integrations page in Datadog, install the [Oracle integration][2] for your organization. This installs an [Oracle dashboard][5] in your account that can be used to monitor the performance of your Oracle databases.
 
-### Upgrade the Oracle integration in your Agent
+### Verify your existing Oracle integration
 
-You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
+You can skip this step if this is your first time installing the Oracle integration. 
+
+For an existing installation, verify that your configuration is located in the `conf.d/oracle-dbm.d/` directory. You may need to migrate the legacy configuration from the `conf.d/oracle.d/` directory.
 
 Use the following command to migrate the Oracle integration from the legacy integration to the new one:
 
@@ -127,12 +142,6 @@ Since the Agent doesn't require an external Oracle client, remove the `jdbc_driv
 Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
-
-## Setup
-
-For setup instructions, select your hosting type:
-
-{{< partial name="dbm/dbm-setup-oracle" >}}
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
