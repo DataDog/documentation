@@ -19,7 +19,7 @@ further_reading:
 
 The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
 
-{{< img src="tracing/visualization/services_map/service_map_overview-2.png" alt="Service Map Overview" >}}
+{{< img src="tracing/visualization/services_map/service_map_overview_3.png" alt="Service Map Overview" >}}
 
 ## Setup
 
@@ -59,7 +59,7 @@ A node is collapsed when there are two services in the filter (applied through t
 
 Clicking on a service reveals further filtering options:
 
-{{< img src="tracing/visualization/services_map/servicetag-2.png" alt="Service Map tag" style="width:40%;">}}
+{{< img src="tracing/visualization/services_map/service_map_inspect_menu_2.png" alt="Service Map tag" style="width:40%;">}}
 
 The service tag has a special meaning in Datadog, and is used both to identify APM services and to link them to other parts of the product.
 
