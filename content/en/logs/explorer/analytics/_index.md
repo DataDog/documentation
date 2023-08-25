@@ -40,15 +40,15 @@ Aggregations are supported for **indexed logs only**. If you need to perform agg
 
 ## Group logs by fields
 
-When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the value of one or multiple log facets. 
+When aggregating indexed logs by **Fields**, all logs matching your query filter are aggregated into groups based on the query search values. 
 
 On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
-- **unique count** of coded values for a facet per group
-- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a facet per group
+- **unique count** of coded values for a query search value per group
+- **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a query search value per group
 
-Individual logs with multiple values for a single facet belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
+Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
 
 ### Visualize log groups
 
@@ -100,7 +100,7 @@ Apply a formula on one or multiple queries by clicking on the `+ Add` button nex
 
 {{< img src="logs/explorer/group/multiple_query_formula.jpg" alt="The query editor with a formula dividing query A by query B" style="width:100%;" >}}
 
-To apply formulas with multiple queries, all queries must be grouped by the same facet. In the example above, both queries are grouped by `Webstore Store Name`.
+To apply formulas with multiple queries, all queries must be grouped by the same query search value. In the example above, both queries are grouped by `Webstore Store Name`.
 
 You can apply a function to a formula by clicking on the `Σ` icon. Here is an example of how to apply a [Timeshift function][12] on the proportion of error logs in all logs to compare current data with data from one week before:
 

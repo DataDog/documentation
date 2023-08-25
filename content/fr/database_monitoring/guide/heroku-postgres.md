@@ -67,7 +67,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-Enfin, on configure l'Agent Datadog pour activer le check Postgres à l'aide des nouveaux identifiants :
+Enfin, il ne reste plus qu'à configurer l'Agent Datadog pour activer le check Postgres à l'aide des nouveaux identifiants :
 
 ```shell
 # Vérifiez que vous êtes dans le répertoire racine de votre application
