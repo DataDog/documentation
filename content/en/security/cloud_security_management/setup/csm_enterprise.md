@@ -154,6 +154,7 @@ docker run -d --name dd-agent \
   -v /:/host/root:ro \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
+  -e DD_COMPLIANCE_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CSM Threats network events
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
