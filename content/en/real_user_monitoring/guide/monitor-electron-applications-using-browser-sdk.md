@@ -29,7 +29,7 @@ To install the Datadog Browser SDK to support Electron apps:
 
 1. Set up and install [RUM Browser Monitoring][2] inside **every renderer process**, following the steps for CDN sync, CDN async, or npm.
 
-2. Set the `allowFallbackToLocalStorage` parameter to true in the RUM initialization configuration of each renderer process, as shown below. 
+2. Set the `allowFallbackToLocalStorage` parameter to `true` in the RUM initialization configuration of each renderer process, as shown below. 
 
    **Note**: This setting allows Datadog to collect RUM without relying on browser cookies.
    
@@ -46,7 +46,7 @@ To install the Datadog Browser SDK to support Electron apps:
      });
    ```
  
-3. Once you've configured the SDK correctly, you can see data in the [RUM Explorer][4].
+3. Once you've configured the SDK correctly, your data populates the [RUM Explorer][4].
 
 ## Troubleshooting
 
@@ -56,7 +56,7 @@ The same-origin policy prevents tracking an application for the same session in 
 This means that an application that uses Electron to embed a landing page, then later redirects the user to a website hosted on the Internet results in two sessions being created for that user - one for the embedded local files (`file://`) landing part of the application, and one for the remote part (`https://` files available on the internet).
 
 ### Short-lived sessions for instances with multiple windows at once
-An issue with local storage replication latency between windows can cause a short-lived session to be created (<1 second). To workaround this, ensure multiple windows are created and initialized with a gap of more than 10 ms.
+An issue with local storage replication latency between windows can cause a short-lived session to be created (<1 second). To work around this, ensure multiple windows are created and initialized with a gap of more than 10 ms.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
