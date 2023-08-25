@@ -191,7 +191,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
     ```
 
-    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}` or `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest` or `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 3. Configure your Lambda functions
 
