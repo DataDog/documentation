@@ -85,7 +85,7 @@ When installing the Agent on a domain controller, there is no notion of local us
 
 If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. A password must be specified for the installation to succeed.
 
-If the specified user account is from a parent domain, the installer will use that user account. Please make sure there exists a user acount in the parent domain before installation, as the installer will not create a user account in the parent domain.
+If the specified user account is from a parent domain, the installer will use that user account. Please ensure there exists a user acount in the parent domain before installation, as the installer never creates a user account in the parent domain.
 
 ##### Read-only domain controllers
 
