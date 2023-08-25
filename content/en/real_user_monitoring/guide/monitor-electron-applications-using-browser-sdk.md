@@ -31,7 +31,7 @@ To install the Datadog Browser SDK to support Electron apps:
 
 2. Set the `allowFallbackToLocalStorage` parameter to `true` in the RUM initialization configuration of each renderer process, as shown below. 
 
-   **Note**: This setting allows Datadog to collect RUM without relying on browser cookies.
+   **Note**: This setting allows Datadog to collect RUM data without relying on browser cookies.
    
    - If you are targeting pages **available on the internet** (using the `https://` protocol), you **do not** need this parameter.
    - if you are embedding pages **inside your application** (using the `file://` protocol), Datadog needs to store sessions in local storage, as cookies are not available. 
