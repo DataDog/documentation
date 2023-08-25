@@ -71,6 +71,8 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
+**Note:** IAM authentication is also supported. Please see [the guide][13] on how to configure this for your Aurora instance.
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -419,3 +421,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
+[13]: /database_monitoring/guide/managed_authentication
