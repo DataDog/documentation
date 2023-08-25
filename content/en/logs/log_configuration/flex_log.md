@@ -9,7 +9,7 @@ further_reading:
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
-  text: "Indexes"
+  text: "Log Indexes"
 - link: "/logs/log_configuration/archives"
   tag: "Documentation"
   text: "Log Archives"
@@ -23,15 +23,15 @@ Flex Logs is in Limited Availability, but you can request access! Use this form 
 
 Flex Logs decouples log storage and log query compute. This allows you to store all your logs and have more flexibility to choose which use cases you want to serve. You can keep high-volume logs for long periods of time and store all your logs with Datadog, across all use cases and budgets.
 
-Security, Compliance, and Engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Long term analysis requirements are not limited to security teams. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of entities like users, hosts, and IP addresses are better served with logs over straight metrics.
+Security, compliance, and engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Long term analysis requirements are not limited to security teams. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of entities like users, hosts, and IP addresses are better served with logs over straight metrics.
 
 This overview highlights the main features of Flex Tier storage, the differences between Standard, Flex storage options for your log data, and the use cases for Flex Tier storage.
 
 ## Configure storage tiers
 
-Flex Logs is set up within Log index configurations. [Index filters][1] that apply to that index also apply to Flex logs.
+Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex logs.
 
-Configure in the [Logs Index Configuration][2] page:
+Configure Flex Tier in the [Logs Index Configuration][2] page:
 
 1. Go to [**Logs > Configuration > Indexes**][2].
 2. Edit the index you wish to enable with Flex Logs or create a new index.
@@ -40,8 +40,8 @@ Configure in the [Logs Index Configuration][2] page:
 {{< img src="logs/log_configuration/flex_logging/flex_configuration.png" alt="Options for the Flex tier storage within the index configuration" style="width:100%;" >}}
 
 **Notes**:
-- If both are selected, logs are stored in the Standard tier until the end of the configured retention period before they are stored in the Flex tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
-- Adding the Standard tier to a Flex index applies to new logs, not pre-existing logs in the Flex index.
+- If both are selected, logs are stored in the Standard Tier until the end of the configured retention period before they are stored in the Flex Tier. For example, you select Standard Tier with a retention of 3 days and Flex Tier with a retention of 90 days. The logs in that index are first stored in the Standard Tier for 3 days and then stored in the Flex Tier for the remaining 87 days totalling a 90 day retention.
+- Adding the Standard Tier to a Flex index applies to new logs, not pre-existing logs in the Flex index.
 
 ## Search Flex indexes
 
@@ -53,7 +53,7 @@ In the Log Explorer, toggle the **Include Flex Indexes** option to include Flex 
 
 ## Use cases for Flex storage
 
-Flex tier storage is useful for storing logs where long running security/audit investigations, data completeness and compliance requirements are more important than sub-second response times. Some example use cases for Flex storage include:
+Flex Tier storage is useful for storing logs where long running security/audit investigations, data completeness and compliance requirements are more important than sub-second response times. Some example use cases for Flex storage include:
 - Retaining logs for long term auditing.
 - Retaining logs for compliance and legal reasons.
 - Need all logs for security investigations.
