@@ -40,11 +40,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
-cascade:
-- _target:
-    path: /security/default_rules/google-cloud-storage-bucket-enumerated.md
-  aliases:
-    - /security_monitoring/default_rules/gcp-gcs-bucket-enumerated
 ---
 
 ## Overview
