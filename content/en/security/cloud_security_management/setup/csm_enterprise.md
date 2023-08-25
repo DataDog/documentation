@@ -36,21 +36,29 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
-## Enable CSM on the Agent for hosts and containers
+## Configure CSM on the Agent for hosts and containers
 
-To enable CSM on the Agent for hosts and containers, navigate to the **[Cloud Security Management Setup page][5]**. The setup page shows a list of hosts and containers with information on the operating system and installed Agent version. Click **Enable** and follow the in-app instructions to enable CSM.
-
-for the best experience, including step-by-step instructions scoped to your deployment configuration.
-
-### Remote Configuration
+### Enable Remote Configuration
 
 <div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
-[Remote Configuration][6] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. Available for CSM Threats, Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CSM Threats, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
 
-To use Remote Configuration with CSM Threats, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][7] for more information.
+To use Remote Configuration with CSM Threats, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
 
 **Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
+
+### Configure the Agent
+
+#### Follow the in-app instructions (recommended)
+
+To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][6] and click **Hosts and containers**.
+
+{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+
+For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions to enable CSM Workload Security.
+
+Alternatively, use the following examples to enable CSM Enterprise:
 
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
@@ -64,6 +72,8 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
         enabled: true
       securityAgent:
         runtime:
+          enabled: true
+        compliance:
           enabled: true
     ```
 2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
