@@ -55,7 +55,7 @@ rulesets:
   - python-code-style
   - python-inclusive
 ignore-paths:
-  - path/to/tests
+  - path/to/ignore
   - **.js
 ```
 
