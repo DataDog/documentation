@@ -19,13 +19,15 @@ further_reading:
 
 You can install and configure the Datadog Browser SDK to start monitoring applications built using Electron JS.
 
+**Note**: The Browser SDK only supports monitoring the *renderer processes* of an application. It does not initialize or monitor anything installed on the *main process*. For more information, see Electron's documentation on its [renderer process][3].
+
+{{< img src="real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/diagram_electron-js-browser-rum.png" alt="The Datadog Browser SDK only supports monitoring the renderer processes of an Electron application" style="width:100%" >}}
+
 ## Installation
 
 To install the Datadog Browser SDK to support Electron apps:
 
-1. Set up and install [RUM Browser Monitoring][2] inside every renderer process, following the steps for CDN sync, CDN async, or npm.
-
-   **Note**: The Browser SDK only supports monitoring the *renderer processes* of an application. It does not initialize or monitor anything installed on the *main process*. For more information, see Electron's documentation on its [renderer process][3].
+1. Set up and install [RUM Browser Monitoring][2] inside **every renderer process**, following the steps for CDN sync, CDN async, or npm.
 
 2. Set the `allowFallbackToLocalStorage` parameter to true in the RUM initialization configuration of each renderer process, as shown below. 
 
