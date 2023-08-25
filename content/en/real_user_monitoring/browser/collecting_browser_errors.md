@@ -142,7 +142,7 @@ try {
 
 ### Collect React rendering errors
 
-Error boundaries are React components that catch rendering errors anywhere in its child component tree and display a fallback UI. React error boundaries offer the capability to collect the component stack. Compared to error stack traces, React error boundaries provide more detailed information about the hierarchy of components involved, which ease developer identifying and fixing errors.
+Error boundaries are React components that catch rendering errors anywhere in its child component tree and display a fallback UI. React error boundaries offer the capability to collect the component stack. Compared to error stack traces, React error boundaries provide more detailed information about the hierarchy of components involved. The additional information helps developers identify and fix errors.
 
 If your React application throws an error during rendering, React removes its UI from the screen by default. To modify this behavior, you can instrument the React router to monitor React rendering errors with the RUM Browser SDK `addError()` API.
 
