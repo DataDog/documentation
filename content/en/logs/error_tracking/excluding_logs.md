@@ -24,7 +24,7 @@ Filters can be reordered in the table by clicking on the right side of each row 
 
 ## Filter setup
 
-This example creates an exclusion filter for logs matching `env:staging`, but the steps are similar for any query.
+The example described below creates an exclusion filter for logs matching `env:staging`, but the steps are similar for any query.
 
 {{< img src="logs/error_tracking/configured_exclusion_filter.png" alt="Exclusion filter configuration for ignoring staging logs" style="width:100%" >}}
 
