@@ -25,8 +25,7 @@ Powerpacks are templated groups of widgets that scale graphing expertise as reus
 Powerpacks are either preset (created by Datadog) or custom (created by a user).
 
 - Preset Powerpacks provide out-of-the-box views for common monitoring patterns like performance metrics or feature usage. They are often linked to a specific product or integration (like `RUM Page Views`) and are maintained by Datadog.
-- Anyone with dashboard write permissions can create custom Powerpacks to help users share and standardize internal best practices. Custom powerpacks are synced, and layout changes will update all instances where the powerpack is used.
-
+- Anyone with dashboard write permissions can create custom Powerpacks to help users share and standardize internal best practices. Updates to custom Powerpacks are synced to all its Powerpack instances, so you don't have to make individual updates across multiple dashboards.
  
 This guide addresses best practices for creating and sharing custom Powerpacks.
 
@@ -97,10 +96,10 @@ Each Powerpack user decides whether to save a variable to their dashboard to all
 
 ### Updating a Powerpack
 
-Changes made to an existing custom powerpack are reflected across all instances of the same powerpack. This can simplify the process of updating duplicate content across several dashboards. Click **Edit Powerpack Layout** to edit synced powerpack instances.
+Changes made to an existing custom Powerpack are reflected across all instances of the same Powerpack. This can simplify the process of updating duplicate content across several dashboards. Click **Edit Powerpack Layout** to edit synced Powerpack instances.
 
 ### Permissions
-By default, edit permissions for Powerpacks are restricted to the author. Editing permission can be modified at any time through the kebab menu in the widget tray or in the header of a powerpack instance.
+By default, edit permissions for Powerpacks are restricted to the author. Editing permission can be modified at any time through the kebab menu in the widget tray or in the header of a Powerpack instance.
 
 ### Spread the word
 
