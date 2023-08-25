@@ -196,7 +196,7 @@ public class ShoppingCartController : Controller
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag avec `setTag`.
+L'interface utilisateur de Datadog utilise les tags pour définir des métadonnées au niveau des spans. Vous pouvez configurer une instrumentation automatique pour les tags personnalisés en récupérant la span active à partir du traceur global et en définissant un tag dans le tableau `meta`.
 
 ```php
 <?php
@@ -288,6 +288,6 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [5]: /fr/tracing/glossary/#services
 [6]: https://app.datadoghq.com/apm/traces
 [7]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
-[8]: https://app.datadoghq.com/apm/analytics
+[8]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [9]: /fr/tracing/trace_explorer/query_syntax/
 [10]: /fr/tracing/guide/alert_anomalies_p99_database/
