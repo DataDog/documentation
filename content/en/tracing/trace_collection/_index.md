@@ -99,7 +99,7 @@ Depending on the programming language and infrastructure you use, you have the f
 
 For Kubernetes, hosts, and containers, you can inject the tracing library locally without modifying your application code. For more information and instructions, read [Injecting Libraries Locally][2].
 
-- For Kubernetes, you can inject the library into applications written in Java, Python, Node.js, .NET, and Ruby.
+- For Kubernetes, you can inject the library into applications written in Java, Python, Ruby (Beta), Node.js, and .NET.
 - **Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
 
 ### Option 2 - Add the library directly to your application code
