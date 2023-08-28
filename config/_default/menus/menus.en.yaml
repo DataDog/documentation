@@ -2763,11 +2763,16 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
-  - name: Excluding Logs
+  - name: Exclude Logs
     url: logs/error_tracking/excluding_logs
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_excluding_logs
     weight: 605
+  - name: Identify Suspect Commits
+    url: logs/error_tracking/suspect_commits
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_suspect_commits
+    weight: 606
   - name: Guides
     url: logs/guide/
     parent: log_management
