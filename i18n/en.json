@@ -59,6 +59,22 @@
     "other": "The <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community program</a> is a network built by Datadog users for Datadog users to help each other find answers to questions or to share product tips and tricks."
   },
 
+  "foundation_enablement_sentence": {
+    "other": "<a href=\"https://dtdg.co/fe_sessions/\" target=\"_blank\" rel=\"noopener\">Sign up</a> for one of our live, expert led foundation enablement sessions on a variety of Datadog features and products."
+  },
+
+  "learning_center_sentence": {
+    "other": "Take a self-guided, <a href=\"https://learn.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">hands-on course</a> to learn and practice key Datadog concepts."
+  },
+
+  "learning_resources": {
+    "other": "Learning Resources"
+  },
+
+  "learning_sentence": {
+    "other": "Enrich your knowledge in the Datadog platform through live or self-guided resources."
+  },
+
   "agent_started_sentence": {
     "other": "To get started using the Agent, select your platform."
   },
@@ -226,6 +242,14 @@
 
   "event_stream_messaging": {
     "other": "contact us<br>on slack"
+  },
+
+  "learning_center": {
+    "other": "datadog<br>learning learning_center"
+  },
+
+  "foundation_enablement": {
+    "other": "join a live<br>enablement session"
   },
 
   "questions": {
