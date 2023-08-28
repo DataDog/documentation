@@ -366,7 +366,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 {{< tabs >}} {{% tab "Browser RUM" %}}
 
-**Note**: If you are using a backend framework such as Next.js / Vercel that is tracing with OpenTelemetry, you need to follow these steps.
+**Note**: If you are using a backend framework such as Next.js/Vercel that is tracing with OpenTelemetry, you need to follow these steps.
 
 1. Set up RUM to connect with APM as described above.
 
