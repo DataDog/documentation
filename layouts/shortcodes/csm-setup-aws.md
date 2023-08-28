@@ -1,6 +1,6 @@
 ### Set up the Datadog AWS integration
 
-If you haven't already, set up the [Amazon Web Services integration][1].You must also add the [required permissions][2] for resource collection.
+If you haven't already, set up the [Amazon Web Services integration][1]. You must also add the [required permissions][2] for resource collection.
 
 ### Enable CSM for your AWS accounts
 
@@ -18,6 +18,31 @@ Use one of the following methods to enable CSM for your AWS accounts:
 1. On the **[Amazon Web Services][4]** integration page, select an AWS account.
 2. On the **Resource Collection** tab, select the **Cloud Security Posture Management Collection** checkbox.
 3. Click **Save**.
+
+### Exclude resources from evaluation
+
+You can use resource tags to create filters that include or exclude resources from being evaluated by CSM. The filters must be specified as a comma-separated list of `key:value` pairs.
+
+| Format                       | Value        |
+|------------------------------|--------------|
+| Allowlist                    | `key:value`  |
+| Blocklist                    | `!key:value` |
+| Single character wildcard    | `?`          |
+| Multiple characters wildcard | `*`          |
+
+The allowlist enables you to specify tags that must be applied to a resource in order for CSM to evaluate it. Allowlist tags are evaluated as OR statements. In other words, at least one of the allowlist tags must be present in order for a resource to be evaluated. In contrast, blocklisted tags are evaluated as AND statements and take precedence over allowlist tags.
+
+**Examples**:
+
+- `datadog:monitored, env:prod*` collects metrics for resources that have at least one of these tags.
+- `!env:staging, !testing` excludes resources that have both tags.
+- `datadog:monitored !region:us-east1` collects metrics for resources that have the tag `datadog:monitored`, so long as the resource does not have the `region:us-east1` tag applied to it.
+
+1. On the **[Cloud Security Management Setup][3]** page, click **Cloud accounts**.
+2. Expand the **AWS** section.
+3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
+4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
+5. Click **Save**.
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-management-misconfigurations
