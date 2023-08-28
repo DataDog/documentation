@@ -73,7 +73,7 @@ export function handleLanguageBasedRedirects() {
 
 				logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 	
-				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
+				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: '.datadoghq.com'});
 
 				window.location.replace( window.location.origin + `${ previewPath }/${ uri }${getQueryString(params)}`.replace(/\/+/g,'/') );
 			} else {
@@ -104,7 +104,7 @@ export function handleLanguageBasedRedirects() {
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
 
-				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath});
+				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: '.datadoghq.com'});
 
 				window.location.replace( dest );
 			}
