@@ -31,12 +31,12 @@ Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your da
 
 #### Y-axis controls
 
-Y-axis controls are available through the UI and the JSON editor. 
+Y-axis controls are available through the UI and the JSON editor.
 
 They allow you to:
 
 * Clip the y-axis to specific ranges.
-* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one of both ends of the graph (lower and upper) in order to remove "outliers" series.
+* Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
 Change the Y-axis scale by expanding the *Y-Axis Controls* button.

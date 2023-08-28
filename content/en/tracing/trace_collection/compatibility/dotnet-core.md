@@ -33,8 +33,8 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | latest               |
+| .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
 | .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
 | .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |

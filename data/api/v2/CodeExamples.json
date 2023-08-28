@@ -799,6 +799,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Create a team returns \"CREATED\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_252121814",
+      "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
   "UpdateTeamLink": [

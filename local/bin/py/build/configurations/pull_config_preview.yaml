@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -630,6 +630,7 @@
             bundle_excludes:
               - "com.datadoghq.test"
               - "com.datadoghq.sample"
+              - "com.datadoghq.internal"
 
       - repo_name: web-ui
         contents:

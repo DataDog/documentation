@@ -14,6 +14,8 @@ further_reading:
     - link: '/real_user_monitoring/dashboards/'
       tag: 'Documentation'
       text: 'Learn about RUM dashboards'
+algolia:
+  tags: ['user actions']
 ---
 
 ## Overview

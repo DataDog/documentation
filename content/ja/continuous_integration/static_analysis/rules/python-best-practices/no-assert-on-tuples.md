@@ -18,10 +18,12 @@ title: タプルにアサートしない
 
 ## 非準拠コードの例
 ```python
-assert (1, 2)  # タプルにアサートしない
+assert (1, 2)  # タプルにアサートしないでください
 ```
 
 ## 準拠コードの例
 ```python
 assert x
+
+assert exitcode == 42, (stdout, stderr)
 ```

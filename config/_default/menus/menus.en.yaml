@@ -799,21 +799,26 @@ main:
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_deployment_tracking
     weight: 106
+  - name: Continous Profiler
+    url: serverless/aws_lambda/profiling
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
+    weight: 107
   - name: Securing Functions
     url: /serverless/securing_functions
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_securing_functions
-    weight: 107
+    weight: 108
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
-    weight: 108
+    weight: 109
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
     parent: serverless_aws_lambda
     identifier: libraries_integrations
-    weight: 109
+    weight: 110
   - name: AWS Step Functions
     url: serverless/step_functions
     parent: serverless
@@ -2267,6 +2272,11 @@ main:
     parent: ci_explorer
     identifier: ci_explorer_facets
     weight: 402
+  - name: Saved Views
+    url: continuous_integration/explorer/saved_views/
+    parent: ci_explorer
+    identifier: ci_explorer_saved_views
+    weight: 402
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
@@ -2287,6 +2297,11 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_javascript
     weight: 503
+  - name: Python
+    url: continuous_integration/intelligent_test_runner/python/
+    parent: intelligent_test_runner
+    identifier: ci_itr_python
+    weight: 504
   - name: Swift
     url: continuous_integration/intelligent_test_runner/swift/
     parent: intelligent_test_runner
@@ -2748,6 +2763,11 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
+  - name: Excluding Logs
+    url: logs/error_tracking/excluding_logs
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_excluding_logs
+    weight: 605
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -4097,11 +4117,16 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
-  - name: Visual Studio Code
+  - name: VS Code
     url: developers/ide_integrations/vscode/
     parent: ide_integrations
     identifier: ide_integrations_vscode
     weight: 802
+  - name: Visual Studio
+    url: developers/ide_integrations/visual_studio/
+    parent: ide_integrations
+    identifier: ide_integrations_visual_studio
+    weight: 803
   - name: Community
     url: developers/community/
     parent: dev_tools
@@ -10251,6 +10276,18 @@ api:
     url: /api/latest/teams/
     identifier: teams
     generated: true
+  - name: Get user memberships
+    url: '#get-user-memberships'
+    identifier: teams-get-user-memberships
+    parent: teams
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetUserMemberships
+      unstable: []
+      order: 1
   - name: Update permission setting for team
     url: '#update-permission-setting-for-team'
     identifier: teams-update-permission-setting-for-team

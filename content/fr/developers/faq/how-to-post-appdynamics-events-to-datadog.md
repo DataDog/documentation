@@ -27,7 +27,7 @@ Pour commencer, créez un template HTTP de violation unique de la stratégie Dat
 }
 ```
 
-{{< img src="developers/faq/step_1_appdynamics.png" alt="appdynamics_étape_1"  >}}
+{{< img src="developers/faq/step_1_appdynamics.png" alt="appdynamics_étape_1" >}}
 
 Dernier événement :
 
@@ -48,7 +48,7 @@ Dernier événement :
 }
 ```
 
-{{< img src="developers/faq/latest_event.png" alt="dernier_événement"  >}}
+{{< img src="developers/faq/latest_event.png" alt="dernier_événement" >}}
 
 Vous pouvez également utiliser des templates d'e-mail :
 
@@ -62,6 +62,6 @@ Vous pouvez également utiliser des templates d'e-mail :
 }
 ```
 
-{{< img src="developers/faq/email_template.png" alt="template_e-mail"  >}}
+{{< img src="developers/faq/email_template.png" alt="template_e-mail" >}}
 
 [1]: https://www.appdynamics.com/support
