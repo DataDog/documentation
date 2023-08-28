@@ -21,6 +21,12 @@ Installing Operator as an add-on requires following prerequisites:
 
 ## Installing Operator
 
+There are certain differences when using add-on, compared to the regular [Helm installation][4]:
+* During Operator installation images must be pulled only from EKS repository, this can't be change by user.
+* Operator Helm Chart values which can be overriden is restricted by following [schema file][3].
+
+These restriction are necessary to make Operator compliant with the add-on policies, allow EKS ensure safety of the installation, and disable features not yet supported in add-on environment.
+
 {{< tabs >}}
 {{% tab "Console" %}}
 
@@ -28,8 +34,6 @@ Installing Operator as an add-on requires following prerequisites:
 * Go to the EKS cluster in the AWS console.
 * Go to add-on tab, select *Get more add-ons*.
 * Find *Datadog Operator*, select and follow the prompts to complete the installation.
-
-To verify installation confirm datadog-operator pod is running.
 
 {{% /tab %}}
 {{% tab "CLI" %}}
@@ -52,9 +56,38 @@ To delete add-on run:
 {{% /tab %}}
 {{< /tabs >}}
 
-Opereator add-on version 0.1.x installs Operator only. For Agent setup one has to follow steps 2-4 from Operator [installation guide][1].
+To verify wheather installation was successful, confirm that datadog-operator pod is running either via Console, `eksctl` or AWS CLI.
+
+## Configuring Agent
+
+Operator add-on 0.1.x installs Operator only. For Agent setup one can follow steps 2-4 from the Operator [installation guide][2].
+By default Operator will use default Agent and Cluster agent image settings and pull them from non-EKS registry.
+If user wants to pull images from EKS repository, one can add `global.registry` setting in the manifest:
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
+      apm:
+        enabled: true
+      logCollection:
+        enabled: true
+  ```
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/getting_started/containers/datadog_operator?s=Autopilot#installation-and-deployment
-[2]: https://aws.amazon.com/marketplace/pp/prodview-wedp6r37fkufe
+[1]: https://aws.amazon.com/marketplace/pp/prodview-wedp6r37fkufe
+[2]: /getting_started/containers/datadog_operator
+[3]: https://github.com/DataDog/helm-charts/blob/operator-eks-addon/charts/operator-eks-addon/aws_mp_configuration_schema.json
+[4]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
