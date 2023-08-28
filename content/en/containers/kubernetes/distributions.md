@@ -401,7 +401,7 @@ spec:
           effect: NoSchedule
 ```
 
-**Note**: The nodeAgent Security Context override is necessary for the Log Collection and APM - Trace Collection via the `/var/run/datadog/apm/apm.socket` socket. It can be omitted if these features are not enabled.
+**Note**: The nodeAgent Security Context override is necessary for Log Collection and APM - Trace Collection with the `/var/run/datadog/apm/apm.socket` socket. It can be omitted if these features are not enabled.
 
 {{% /tab %}}
 {{< /tabs >}}
