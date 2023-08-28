@@ -215,6 +215,7 @@ Job log collection is supported for the following providers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://app.datadoghq.com/ci/test-runs
 [2]: https://app.datadoghq.com/ci/test-services?view=branches
 [3]: https://app.datadoghq.com/ci/test-services?view=default-branches
 [4]: /continuous_integration/pipelines/github/#enable-log-collection

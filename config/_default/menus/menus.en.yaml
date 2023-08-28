@@ -2302,41 +2302,66 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 506
+  - name: Connect Test Visibility
+    url: continuous_integration/integrate_tests/
+    parent: ci
+    identifier: ci_integrate_tests
+    weight: 6
+  - name: Developer Workflows
+    url: continuous_integration/integrate_tests/developer_workflows
+    parent: ci_integrate_tests
+    identifier: ci_integrate_tests_developer_workflows
+    weight: 601
+  - name: Code Coverage
+    url: continuous_integration/integrate_tests/code_coverage
+    parent: ci_integrate_tests
+    identifier: ci_integrate_tests_code_coverage
+    weight: 602
+  - name: Instrument Browser Tests with RUM
+    url: continuous_integration/integrate_tests/browser_tests
+    parent: ci_integrate_tests
+    identifier: ci_integrate_tests_browser_tests
+    weight: 603
+  - name: Instrument Swift Tests with RUM
+    url: continuous_integration/integrate_tests/swift_tests
+    parent: ci_integrate_tests
+    identifier: ci_integrate_tests_swift_tests
+    weight: 604
   - name: Static Analysis
     url: continuous_integration/static_analysis/
     parent: ci
     identifier: ci_static_analysis
-    weight: 6
+    weight: 7
   - name: Rules
     url: continuous_integration/static_analysis/rules
     parent: ci_static_analysis
     identifier: ci_static_analysis_rules
-    weight: 601
+    weight: 701
   - name: CircleCI Orbs
     url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
     identifier: ci_static_analysis_circleci_orbs
-    weight: 602
+    weight: 702
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
-    weight: 603
+    weight: 703
   - name: Quality Gates
     url: continuous_integration/quality_gates/
     parent: ci
     identifier: ci_quality_gates
-    weight: 7
+    weight: 8
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 8
+    weight: 9
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 9
+    weight: 10
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
