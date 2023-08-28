@@ -46,21 +46,21 @@ Search or use the dropdown menu to choose which monitors to silence. If the fiel
 Schedule a downtime based on one or more [monitor tags][3]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
 ### Downtime scope
-Use group scope to apply additional filters to your downtime and have granular control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it first needs to find monitors that are tagged accordingly before it matches the group scope.
+Use group scope to apply additional filters to your downtime and have more control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it finds monitors that are tagged before it matches the group scope.
 
 The downtime scope is matched with two possible targets: a monitor's query filter or the monitor's group names.
 
 #### Scoping on monitor group names
-As previously mentioned, group scopes can be applied to gain more granular control over which monitors to mute. For instance, a monitor is looking at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are therefore anticipating slow requests and potential errors.
+Group scopes can be applied to gain more control over which monitors to mute. For instance, a monitor is looking at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are anticipating slow requests and potential errors.
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Status graph showing downtime for group service:web-store" style="width:90%;">}}
 
-You would like to make sure that `service:web-store` related notifications are muted and that other critical alerts for the remaining services are delivered as usual. For that, simply enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
+You would like to make sure that `service:web-store` related notifications are muted and other critical alerts for the remaining services are delivered as usual. Enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
 
-**Note**: this approach also works with groups that have multiple dimensions, e.g. `service` and `host`. Creating a Downtime on `service:web-store` would mute all groups that include said service, e.g. `service:web-store,host:a` or `service:web-store,host:b`.
+**Note**: this also works with groups that have multiple dimensions, for example `service` and `host`. Creating a Downtime on `service:web-store` would mute all groups that include said service, for example `service:web-store,host:a` or `service:web-store,host:b`.
 
 #### Scoping on monitor query filter
-It is common to filter a monitor query to only look at dimensions you care about. You can create Downtimes that target those same dimensions. This approach doesn't require you to add additional grouping to a monitor where it wouldn't really be necessary.
+Filter a monitor query to only look at dimensions you care about. You can create Downtimes that target specific dimensions so you don't have to add additional grouping.
 
 {{< img src="/monitors/downtimes/downtime_scope_query.png" alt="Example of a monitor's query filter" style="width:100%;" >}}
 
@@ -81,7 +81,7 @@ The Downtime scope query follows the same common [Search Syntax][19] that many o
 | `service:webstore AND -env:prod`       | Mutes any notification about the `web-store` service that is **not** running on the `prod` environment. |
 
 #### Downtime scope limitations
-While Downtime scope queries follow the common [Search Syntax][19], there are a few limitations that are **not supported**. These include:
+There are a few limitations that are **not supported** which include:
 
 * More than two levels of nesting, e.g. `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
 * Negation is only supported for key/value pairs and tags with `OR`, e.g. `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, `-service(A B)`, etc. are not supported.
