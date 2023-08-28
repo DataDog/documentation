@@ -235,7 +235,7 @@ Since Agent 7.26, no specific configuration is required for GKE (whether you run
 
 GKE Autopilot requires some configuration, shown below.
 
-Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may quickly lead the Agent container to OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent in order to ensure it is scheduled.
+Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may rapidly lead the Agent container to OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
