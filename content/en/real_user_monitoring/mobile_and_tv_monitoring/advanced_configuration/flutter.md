@@ -7,7 +7,6 @@ type: multi-code-lang
 code_lang_weight: 30
 aliases:
     - /real_user_monitoring/flutter/advanced_configuration
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub

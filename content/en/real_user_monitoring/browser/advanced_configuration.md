@@ -1,10 +1,14 @@
 ---
-title: Modifying RUM Data and Context
+title: Advanced Configuration
 kind: documentation
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/advanced_configuration/
+  - /real_user_monitoring/browser/modifying_data_and_context/
 further_reading:
+- link: "/real_user_monitoring/browser/tracking_user_actions"
+  tag: Documentation
+  text: "Tracking User Actions"
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Real User Monitoring"
@@ -24,7 +28,7 @@ further_reading:
 
 ## Overview
 
-There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
+There are various ways you can modify the [data and context collected][1] by RUM, to support your needs for:
 
 - Protecting sensitive data like personally identifiable information.
 - Connecting a user session with your internal identification of that user, to help with support.

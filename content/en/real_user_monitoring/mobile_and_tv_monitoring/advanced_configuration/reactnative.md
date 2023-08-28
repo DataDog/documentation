@@ -7,7 +7,6 @@ type: multi-code-lang
 code_lang_weight: 40
 aliases:
     - /real_user_monitoring/react-native/advanced_configuration/
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/react-native
 further_reading:
     - link: https://github.com/DataDog/dd-sdk-reactnative
       tag: GitHub

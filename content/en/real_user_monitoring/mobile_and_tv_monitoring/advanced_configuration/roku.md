@@ -7,7 +7,6 @@ type: multi-code-lang
 code_lang_weight: 50
 aliases:
     - /real_user_monitoring/roku/advanced_configuration/
-    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
   tag: GitHub
