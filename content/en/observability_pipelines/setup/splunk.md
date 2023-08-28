@@ -278,7 +278,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
     name = Observability Pipelines Worker
-    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/x86_64/
+    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/\$basearch/
     enabled=1
     gpgcheck=1
     repo_gpgcheck=1

@@ -2763,6 +2763,11 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
+  - name: Excluding Logs
+    url: logs/error_tracking/excluding_logs
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_excluding_logs
+    weight: 605
   - name: Guides
     url: logs/guide/
     parent: log_management

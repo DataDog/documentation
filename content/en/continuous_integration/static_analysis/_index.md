@@ -54,6 +54,9 @@ rulesets:
   - python-security
   - python-code-style
   - python-inclusive
+ignore-paths:
+  - path/to/ignore
+  - **.js
 ```
 
 A `static-analysis.datadog.yml` file supports the following:
@@ -62,7 +65,7 @@ A `static-analysis.datadog.yml` file supports the following:
 |--------------------|-------------------------------------------------------------------------------------------|----------|---------|
 | `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
 | `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
-| `ignore-gitignore` | Determines whether Datadog Static Analysis will analyze the content in a `.gitignore` file.  | `false`  | `true`  |
+| `ignore-gitignore` | Determines whether Datadog Static Analysis analyzes the content in a `.gitignore` file.   | `false`  | `false` |
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
@@ -200,8 +203,8 @@ The content of the violation is shown in tabs:
 
 In Datadog Static Analysis, there are two types of suggested fixes:
 
-1. **Default Suggested Fix:** For simple violations, fixes are immediately available as part of the business logic of the violation's underlying static analysis rule.
-2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Text" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
+1. **Default Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
+2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
 
 The two types of fixes are distinguished visually in the UI with different labels.
 

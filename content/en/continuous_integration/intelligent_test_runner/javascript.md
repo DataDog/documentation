@@ -71,8 +71,13 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 For Intelligent Test Runner for Cypress to work, you must instrument your web application with code coverage. You can read more about enabling code coverage in the [Cypress documentation][3]. To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the global variable `window.__coverage__`. This is what `dd-trace` uses to collect code coverage for Intelligent Test Runner.
 
 
-#### Suite skipping
+## Suite skipping
 Intelligent Test Runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
+
+
+## Inconsistent test durations
+
+In some frameworks, such as `jest`, there are cache mechanisms that make tests faster after other tests have run (see [jest cache][4] docs). If Intelligent Test Runner is skipping all but a few test files, these suites might run slower than they usually do. This is because they run with a colder cache. Regardless of this, total execution time for your test command should still be reduced.
 
 ## Further Reading
 
@@ -81,3 +86,4 @@ Intelligent Test Runner for Javascript skips entire _test suites_ (test files) r
 [1]: https://www.npmjs.com/package/nyc
 [2]: /continuous_integration/tests/javascript
 [3]: https://docs.cypress.io/guides/tooling/code-coverage#Instrumenting-code
+[4]: https://jestjs.io/docs/cli#--cache
