@@ -42,13 +42,13 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 
 1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 
-   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://windows-agent.datadoghq.com/installers.json">installer list</a>.</div>
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">installer list</a>.</div>
 
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
@@ -105,7 +105,7 @@ Each configuration item is added as a property to the command line. The followin
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
-[1]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: /agent/proxy/
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /network_monitoring/performance
@@ -117,7 +117,7 @@ Agent 7 only supports Python 3. Before upgrading, confirm that your custom check
 If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][2] and then upgrade to Datadog Agent version >= 6.
 
 [1]: /agent/guide/python-3/
-[2]: https://windows-agent.datadoghq.com/ddagent-cli-latest.exe
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -404,6 +404,8 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 
 他のすべての [Datadog トレーサー構成][7]オプションも使用できます。
 
+## リポジトリの収集とメタデータのコミット
+
 {{% ci-git-metadata %}}
 
 ## Git メタデータのアップロード

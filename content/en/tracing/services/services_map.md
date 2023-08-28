@@ -19,7 +19,7 @@ further_reading:
 
 The Service Map decomposes your application into all its component [services][1] and draws the observed dependencies between these services in real time, so you can identify bottlenecks and understand how data flows through your architecture.
 
-{{< img src="tracing/visualization/services_map/service_map_overview-2.png" alt="Service Map Overview" >}}
+{{< img src="tracing/visualization/services_map/service_map_overview_3.png" alt="Service Map Overview" >}}
 
 ## Setup
 
@@ -29,9 +29,13 @@ The Service Map visualizes data collected by Datadog APM and RUM. Setup is not r
 
 The Service Map provides an overview of your services and their health. This cuts through the noise and isolates problem areas. Also, you can access other telemetry collected by Datadog directly from this view.
 
+## Grouping by Team or Application
+
+The Service Map can be grouped by team or application to create a clear picture of service ownership and application dependencies. This is particularly useful as it enables visualization of complex microservice architecture on a more granular level to help organizations quickly reach the information they need. 
+
 ## Filtering versus changing scopes
 
-The Service Map can be filtered using [facets][2] or a fuzzy string match on service names. Facets are tags that Datadog automatically applies to service data, and include service type (for example, web server, database, cache), last deploy time, or monitor status. Filtering is particularly useful in a microservices environment with hundreds or thousands of nodes. In addition, you can scope the Service Map to a specific time range, which helps keep track of your evolving architecture.
+The Service Map can be filtered using [facets][2] or a fuzzy string match on service names. Facets are tags that Datadog automatically applies to service data, and include service type (for example, web server, database, cache), last deploy time, or monitor status. Filtering is particularly useful in a microservices environment with hundreds or thousands of nodes. Services can also be filtered by incident status to identify those involved in an ongoing or resolved incident and extract key information from the associated Service Page including incident data, resources, and Datadog Teams information. In addition, you can scope the Service Map to a specific time range, which helps keep track of your evolving architecture.
 
 Services are also scoped by `env`, and optionally a [Second Primary Tag][3]. Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
@@ -55,7 +59,7 @@ A node is collapsed when there are two services in the filter (applied through t
 
 Clicking on a service reveals further filtering options:
 
-{{< img src="tracing/visualization/services_map/servicetag-2.png" alt="Service Map tag" style="width:40%;">}}
+{{< img src="tracing/visualization/services_map/service_map_inspect_menu_2.png" alt="Service Map tag" style="width:40%;">}}
 
 The service tag has a special meaning in Datadog, and is used both to identify APM services and to link them to other parts of the product.
 

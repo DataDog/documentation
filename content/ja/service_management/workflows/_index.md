@@ -13,7 +13,7 @@ kind: documentation
 title: ワークフローの自動化
 ---
 
-{{< img src="service_management/workflows/hero2.png" alt="Workflow Automation の 3 つの目的であるオーケストレーション、自動化、サイロの破壊を示すグラフィック" >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
 
 Datadog Workflow Automation は、エンドツーエンドプロセスのオーケストレーションと自動化を可能にします。インフラストラクチャーやツールに接続する[アクション][1]で構成されるワークフローを構築します。これらのアクションは、データおよび論理演算子も実行できるため、分岐、決定、データ演算を含む複雑なフローを構築することができます。
 
@@ -37,11 +37,7 @@ Datadog では、あらかじめ構成されたフローをすぐに使える[�
 - システムの健全性を追跡するために使用しているダッシュボードから直接、アプリケーションの安定バージョンにロールバックするワークフローを実行します。
 - GitHub にある機能フラグのコンフィギュレーションファイルを自動的に更新し、プルリクエストやマージのプロセスを自動化することで、機能フラグを管理します。
 
-Lambda 関数が高いエラーレートを経験したときに再デプロイするように構成されたワークフローを以下のビデオでご覧ください。
-
-{{< wistia 0klmggfhaf>}}
-
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
