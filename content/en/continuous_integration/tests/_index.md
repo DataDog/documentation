@@ -60,19 +60,21 @@ When you run your tests with CI Visibility, the library detects and reports info
 
 The following tags are automatically collected to identify test configurations, and some may only apply to specific platforms:
 
-* `os.platform`: Name of the operating system where the tests are run.
-* `os.family`: Family of the operating system where the tests are run.
-* `os.version`: Version of the operating system where the tests are run.
-* `os.architecture`: Architecture of the operating system where the tests are run.
-* `runtime.name`: Name of the runtime system for the tests.
-* `runtime.version`: Version of the runtime system.
-* `runtime.vendor`: Vendor that built the runtime platform where the tests are run.
-* `runtime.architecture`: Architecture of the runtime system for the tests.
-* `device.model`: The device model running the tests.
-* `device.name`: Name of the device.
-* `ui.appearance`: User Interface style.
-* `ui.orientation`: Orientation the UI is run in.
-* `ui.localization`: Language of the application.
+| Tag Name               | Description                                                     |
+|------------------------|-----------------------------------------------------------------|
+| `os.platform`          | Name of the operating system where the tests are run.           |
+| `os.family`            | Family of the operating system where the tests are run.         |
+| `os.version`           | Version of the operating system where the tests are run.        |
+| `os.architecture`      | Architecture of the operating system where the tests are run.   |
+| `runtime.name`         | Name of the runtime system for the tests.                       |
+| `runtime.version`      | Version of the runtime system.                                  |
+| `runtime.vendor`       | Vendor that built the runtime platform where the tests are run. |
+| `runtime.architecture` | Architecture of the runtime system for the tests.               |
+| `device.model`         | The device model running the tests.                             |
+| `device.name`          | Name of the device.                                             |
+| `ui.appearance`        | User Interface style.                                           |
+| `ui.orientation`       | Orientation the UI is run in.                                   |
+| `ui.localization`      | Language of the application.                                    |
 
 ## Custom configurations
 

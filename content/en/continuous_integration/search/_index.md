@@ -1,6 +1,9 @@
 ---
 title: Search and Manage CI Tests and Pipelines 
 description: Learn how to search for your CI tests and pipelines.
+aliases:
+- /continuous_integration/guides/find_flaky_tests/
+- /continuous_integration/guides/flaky_test_management/
 further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"
@@ -63,11 +66,15 @@ To see your tests, navigate to [**CI** > **Tests**][8] and select between the [*
 
 The [Branches][2] view of the Tests page lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
 
-In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you) by enabling the **My branches** toggle and adding the email addresses you use in your Git configuration.
+In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you), enable the **My branches** toggle and add the email addresses you use in your Git configuration.
 
 #### Test results
 
-For each branch, the list shows test results for its latest commit: a consolidated number of tests broken down by status (which takes into account retries) and the number of new flaky tests introduced by the commit (a flaky test is defined as a test that both passes and fails on the same commit).
+For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, wall time, the percentage of change compared to the default branch, when the commit was last updated, and the avatar of the author of the commit.
+
+Click on a branch to explore the test details page, which includes information about the branch's latest commits, flaky tests, test performance, common error types, and all test runs.
+
+{{< img src="continuous_integration/test_details.png" alt="Test Details page for a single branch" style="width:100%;">}}
 
 #### Test suite performance
 
@@ -99,11 +106,72 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 
 A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
-The Default Branches view shows similar information to the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
+The Default Branches view shows similar information to the Branches view, but applied to the default branch. It compares the current wall time with the average default branch wall time to give you an indication of how your test suite performance is trending over time.
 
-Click on a row to see the analytics for tests run on the default branch, similar to examining for test run details from the Branches view.
+### New flaky tests
 
-For more information about test configuration tags, see [Test Configurations][1].
+For each branch, the list shows the number of new flaky tests introduced by the commit, the number of flaky commits, a comparison of the current wall time with the average default branch wall time, and the branch's latest commit details. 
+
+A *flaky test* is a test that exhibit both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the test passes, that test is unreliable as proof of quality code.
+
+Flaky tests introduce risk and unpredictability into your CI system and end product. When people have to remember which tests are flaky, they lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
+
+Use the following information to help prioritize flaky tests:
+
+* **Average duration**: The average time the test takes to run.
+* **First flaked** and **Last flaked**: The date and commit SHAs for when the test first and most recently exhibited flaky behavior.
+* **Commits flaked**: The number of commits in which the test exhibited flaky behavior.
+* **Failure rate**: The percentage of test runs that have failed for this test since it first flaked.
+* **Trend**: A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
+
+Once you identify a flaky test you want to fix, click on the test to see links to view the most recent failed test run or the first flaky test run.
+
+{{< img src="continuous_integration/flaky_test_options.png" alt="Advanced options for flaky tests" style="width:100%;">}}
+
+If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
+
+New flaky tests are tests that exhibit flaky behavior and didn't previously exist in the Flaky Tests table for the current branch or default branch of the repository.
+
+<div class="alert alert-info">The table is limited to the 1000 flaky tests with the highest number of commits flaked for the selected time frame.</div>
+
+### Test Runs page
+
+1. Navigate to the [Test Runs][1] page.
+2. In the facets list on the left sidebar, expand the **New Flaky** facet in the **Test** section, and check `true`.
+All test runs that exhibited flakey behavior for the first time as per the definition above are displayed.
+
+### Branches page
+
+1. On the [Tests][2] page, select the **Branches** view.
+2. Filter the table to see branches, services, or commits of interest to you.
+3. Look at the **New Flaky** column to see the number of new flaky tests introduced by the latest commit as per the definition above.
+
+#### Ignore new flaky tests detected by mistake
+
+You can ignore new flaky tests for a particular commit if you determine that those flaky tests were detected by mistake. The tests reappear if the commit exhibits flakiness again.
+
+Click on the **New Flaky** number and then click **Ignore flaky tests**.
+
+{{< img src="ci/ignore-new-flaky-tests.png" alt="Ignore all new flaky tests for a commit" style="width:100%;">}}
+
+### Known flaky failed tests
+
+Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
+
+### Test Runs page
+
+1. Navigate to the [Test Runs][1] page.
+2. In the facets list on the left sidebar, expand the **Known Flaky** facet in the **Test** section, and check `true`.
+Failed test runs that were known to be flaky as per the definition above are displayed.
+
+### Branches page
+
+1. On the [Tests][2] page, select the **Branches** view.
+2. Filter the table to see any branches, services, or commits of interest.
+3. The **Failed** column contains the number of failed tests and known flaky failed tests in the latest commit.
+
+{{< img src="ci/known-flaky-failed-tests.png" alt="CI Tests Branches view with a branch selected and a text box in the Failed column displaying 1 tests failed and 1 known flaky" style="width:100%;">}}
+
 
 ## Search for pipelines
 
@@ -147,7 +215,6 @@ Job log collection is supported for the following providers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/guides/test_configurations
 [2]: https://app.datadoghq.com/ci/test-services?view=branches
 [3]: https://app.datadoghq.com/ci/test-services?view=default-branches
 [4]: /continuous_integration/pipelines/github/#enable-log-collection
