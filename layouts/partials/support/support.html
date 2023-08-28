@@ -73,7 +73,7 @@
             <div class="col">
                 <a class="card h-100" href="https://learn.datadoghq.com/">
                     <div class="card-body text-center py-2 px-1">
-                        {{ partial "img.html" (dict "root" . "src" "icon-lc.png" "class" "" "alt" "Learning Center" "width" "42.5") }}
+                        {{ partial "img.html" (dict "root" . "src" "icon_lc.png" "class" "" "alt" "Learning Center" "width" "42.5") }}
                         <p class="title">{{ i18n "learning_center" | safeHTML }}</p>
                     </div>
                 </a>
@@ -89,26 +89,25 @@
             <p>{{ i18n "learning_center_sentence" | safeHTML}}</p>
         </div>
     </div>
-
     <hr/>
-    <div class="row foot">
-        <div class="col"></div>
-        <div class="col-8 col-md-6 col-lg-4">
-            <div class="row">
-                <div class="col text-center">
-                    <a href="http://status.datadoghq.com/" target="_blank" rel="noopener">
-                        {{ partial "img.html" (dict "root" . "src" "icon_status.png" "class" "" "alt" "status" "height" "50") }}
-                        <span>{{ i18n "status_page" }}</span>
-                    </a>
-                </div>
-                <div class="col text-center">
-                    <a href="https://twitter.com/DatadogOps" target="_blank" rel="noopener">
-                        {{ partial "img.html" (dict "root" . "src" "icon_twitter.png" "class" "" "alt" "twitter" "height" "50") }}
-                        <span>{{ i18n "ops_twitter" }}</span>
-                    </a>
-                </div>
+</div>
+<div class="row foot">
+    <div class="col"></div>
+    <div class="col-8 col-md-6 col-lg-4">
+        <div class="row">
+            <div class="col text-center">
+                <a href="http://status.datadoghq.com/" target="_blank" rel="noopener">
+                    {{ partial "img.html" (dict "root" . "src" "icon_status.png" "class" "" "alt" "status" "height" "50") }}
+                    <span>{{ i18n "status_page" }}</span>
+                </a>
+            </div>
+            <div class="col text-center">
+                <a href="https://twitter.com/DatadogOps" target="_blank" rel="noopener">
+                    {{ partial "img.html" (dict "root" . "src" "icon_twitter.png" "class" "" "alt" "twitter" "height" "50") }}
+                    <span>{{ i18n "ops_twitter" }}</span>
+                </a>
             </div>
         </div>
-        <div class="col"></div>
     </div>
+    <div class="col"></div>
 </div>
