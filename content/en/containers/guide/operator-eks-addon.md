@@ -30,7 +30,6 @@ These restriction are necessary to make Operator compliant with the add-on polic
 {{< tabs >}}
 {{% tab "Console" %}}
 
-* Subscribe [Datadog Operator][1] product.
 * Go to the EKS cluster in the AWS console.
 * Go to add-on tab, select *Get more add-ons*.
 * Find *Datadog Operator*, select and follow the prompts to complete the installation.
