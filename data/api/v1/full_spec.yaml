@@ -28648,6 +28648,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 25
           format: int64
           type: integer
       responses:
@@ -28674,6 +28675,10 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
