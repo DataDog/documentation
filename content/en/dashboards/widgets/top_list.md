@@ -37,7 +37,7 @@ The top list visualization enables you to display a list of Tag values with the 
 Configure the optional Display Mode features to add context to your top list visualization.
 
 * Display multiple stacked groups to show a break down of each dimension in your query. **Stacked** is enabled by default, you can switch to **Flat**.
-* Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode.
+* Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.**Note**: relative display is only available for count data, such as log events.
 * Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
 * Add [context links][6] to connect data visualizations across Datadog.
 
