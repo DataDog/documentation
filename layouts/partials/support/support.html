@@ -62,7 +62,7 @@
     <div class="container cards-dd tile-nav">
         <div class="row row-cols-1 row-cols-sm-3 g-3 g-sm-4 mb-2 mb-sm-3">
             <div class="col">
-                <a class="card h-100" href="https://dtdg.co/fe_sessions/">
+                <a class="card h-100" href="https://dtdg.co/fe_sessions">
                     <div class="card-body text-center py-2 px-1">
                         {{ partial "img.html" (dict "root" . "src" "icon_fe.png" "class" "" "alt" "Foundation Enablement" "width" "42.5") }}
                         <p class="title">{{ i18n "foundation_enablement" | safeHTML }}</p>
@@ -70,10 +70,18 @@
                 </a>
             </div>
             <div class="col">
-                <a class="card h-100" href="https://learn.datadoghq.com/">
+                <a class="card h-100" href="https://dtdg.co/47QnE99">
                     <div class="card-body text-center py-2 px-1">
                         {{ partial "img.html" (dict "root" . "src" "icon_lc.png" "class" "" "alt" "Learning Center" "width" "42.5") }}
                         <p class="title">{{ i18n "learning_center" | safeHTML }}</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a class="card h-100" href="https://dtdg.co/3PeuldT">
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "icon_webinar.png" "class" "" "alt" "Datadog Webinars" "width" "42.5") }}
+                        <p class="title">{{ i18n "webinars" | safeHTML }}</p>
                     </div>
                 </a>
             </div>
@@ -86,6 +94,9 @@
         </div>
         <div class="col-12 col-md-4 mb-4">
             <p>{{ i18n "learning_center_sentence" | safeHTML}}</p>
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+            <p>{{ i18n "webinars_sentence" | safeHTML}}</p>
         </div>
     </div>
 

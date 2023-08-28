@@ -60,11 +60,11 @@
   },
 
   "foundation_enablement_sentence": {
-    "other": "<a href=\"https://dtdg.co/fe_sessions/\" target=\"_blank\" rel=\"noopener\">Sign up</a> for one of our live, expert led foundation enablement sessions on a variety of Datadog features and products."
+    "other": "<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">Sign up</a> for one of our live, expert led foundation enablement sessions on a variety of Datadog features and products."
   },
 
   "learning_center_sentence": {
-    "other": "Take a self-guided, <a href=\"https://learn.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">hands-on course</a> to learn and practice key Datadog concepts."
+    "other": "Take a self-guided, <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">hands-on course</a> to learn and practice key Datadog concepts."
   },
 
   "learning_resources": {
@@ -73,6 +73,10 @@
 
   "learning_sentence": {
     "other": "Enrich your knowledge in the Datadog platform through live or self-guided resources."
+  },
+
+  "webinars_sentence": {
+    "other": "Attend upcoming or watch recorded <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">Datadog webinars</a> on a variety of product topics."
   },
 
   "agent_started_sentence": {
@@ -250,6 +254,10 @@
 
   "foundation_enablement": {
     "other": "join a live<br>enablement session"
+  },
+
+  "webinars": {
+    "other": "Datadog<br>webinars"
   },
 
   "questions": {
