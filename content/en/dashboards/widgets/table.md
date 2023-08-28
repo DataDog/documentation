@@ -35,13 +35,16 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
 #### Column formatting
-Customize the visualization of cell values for each column with Column Formatting Rules. Create color codes for your data to visualize trends and changes.
-* Threshold formatting: highlight cells with colors when specific value ranges are met.
-* Range formatting: color code cells with a range of values.
-* Text formatting: replace cells with alias text values to improve readability.
-* Visualize trending information: track progress of your metrics and events over multiple groups. Trends are based on the selected timeframe.
 
-{{< img src="dashboards/widgets/table/trend_visualization.png" alt="Configuration to view trend visualizations as a column in tables" style="width:100%;" >}}
+Customize the visualization of cell values for each column with Column Formatting Rules. Create color codes for your data to visualize trends and changes.
+* Text formatting: replace cells with alias text values to improve readability.
+* Visualize data: Choose between **Number**, **Trend**, and **Bar** to track progress of your metrics and events over multiple groups. Trends are based on the selected timeframe. 
+
+{{< img src="dashboards/widgets/table/column_viz_conditional_format.png" alt="Configuration to view visualizations in a column on Table widget with conditional formatting" style="width:100%;" >}}
+
+Add conditional formatting to visualizations. Click **+ Add Rule** or **+ Add Conditional Format**.
+* Threshold formatting: highlight cells with colors when specific value ranges are met. **Note**: for Trends, the graph is formatted based on whether the query meets the threshold, **not** the datapoint displayed.
+* Range formatting: color code cells with a range of values.
 
 #### Context links
 
