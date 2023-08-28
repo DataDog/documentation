@@ -157,6 +157,7 @@ function showRegionSnippet(newSiteRegion) {
     if (externalLinks) {
         externalLinks.forEach(link => {
             link.href = `https://${config.dd_full_site[newSiteRegion]}${link.pathname}${link.search}${link.hash}`;
+            link.target = '_blank'
         });
     }
 }
