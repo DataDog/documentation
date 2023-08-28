@@ -32,7 +32,7 @@ To measure how users arrive at your site, you can use the '@view.url_query.utm_m
 
 In the above query, we can count all views of a page, such as the landing page, where the campaign is running. This can help you understand if certain pages are getting more visits and you should increase advertising spend toward that specific page.
 
-### Analyzing a UTM source by country
+### Analyze a UTM source by country
 
 {{< img src="real_user_monitoring/guide/UTM-by-country.png" alt="Screenshot of UTM source by country" style="width:90%;">}}
 
