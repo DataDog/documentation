@@ -51,7 +51,7 @@ Additional requirements for profiling [Code Hotspots][11]:
  - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
  - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
 
-[3]: /profiler/profiler_troubleshooting/#java-8-support
+[3]: /profiler/profiler_troubleshooting/java/#java-8-support
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
