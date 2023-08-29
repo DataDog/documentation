@@ -140,13 +140,12 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Collect React rendering errors
+### React error boundaries instrumentation 
 
 If your React application throws an error during rendering, React removes its UI from the screen by default. To modify this behavior, you can instrument the React router to monitor React rendering errors with the RUM Browser SDK `addError()` API.
 
 The collected rendering error stack contains the component stack, which is unminified like any other error stack traces once you've uploaded sourcemaps.
 
-**Note**: These instructions are specific to the **React Router v6** library.
 
 To instrument React error boundaries for monitoring, use the following:
 
