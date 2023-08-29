@@ -18,6 +18,7 @@ further_reading:
     tag: "Documentation"
     text: "RUM Dashboards"
 ---
+## Overview
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
@@ -140,14 +141,15 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### React error boundaries instrumentation 
+### Collect React rendering errors
 
-If your React application throws an error during rendering, React removes its UI from the screen by default. To modify this behavior, you can instrument the React router to monitor React rendering errors with the RUM Browser SDK `addError()` API.
+You can instrument the React error boundaries to monitor React rendering errors using the RUM Browser SDK `addError()` API.
 
 The collected rendering error stack contains the component stack, which is unminified like any other error stack traces once you've uploaded sourcemaps.
 
-
 To instrument React error boundaries for monitoring, use the following:
+
+**Note**: These instructions are specific to the **React Router v6** library.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
