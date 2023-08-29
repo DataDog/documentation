@@ -46,11 +46,11 @@ export function handleLanguageBasedRedirects() {
 	const baseURL = thisUrl.hostname;
 	const subdomain = baseURL.split('.')[0];
 	const subMatch = enabledSubdomains.filter((i) => subdomain === i);
+    const cookieDomain = subdomain === 'localhost' ? 'localhost' : '.datadoghq.com';
 	let uri = thisUrl.pathname;
 	let previewPath = '';
 	let acceptLanguage = 'en';
 	let logMsg = '';
-    const cookieDomain = subdomain === 'localhost' ? 'localhost' : '.datadoghq.com';
    
 	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1);
     
