@@ -2327,11 +2327,6 @@ main:
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
     weight: 603
-  - name: VSCode Extension
-    url: continuous_integration/static_analysis/vscode_extension
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_vscode_extension
-    weight: 604
   - name: Quality Gates
     url: continuous_integration/quality_gates/
     parent: ci

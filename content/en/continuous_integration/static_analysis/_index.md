@@ -38,8 +38,8 @@ Using Static Analysis provides organizations with the following benefits:
 ## Integrations
 
 ### Local code
-{{< whatsnext desc="Static Analysis can be run locally in the VSCode editor:">}}
-    {{< nextlink href="continuous_integration/static_analysis/vscode_extension" >}}VSCode Extension{{< /nextlink >}}
+{{< whatsnext desc="Running Static Analysis locally helps engineers catch issues as they work, reducing time spent in code reviews. The Datadog VSCode Extension offers this feature:">}}
+    {{< nextlink href="continuous_integration/static_analysis/vscode_extension" >}}Datadog VSCode Extension{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### CI pipeline
