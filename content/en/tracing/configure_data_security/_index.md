@@ -247,7 +247,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Http" %}}
 
-HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
+HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http` or `web`:
 
 ```yaml
 apm_config:
@@ -261,8 +261,8 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string`: If true, obfuscates query strings in URLs.
-* `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+* `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
+* `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
 
 
 [1]: /tracing/glossary/#spans
@@ -453,7 +453,26 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
-To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
+You can disable this telemetry collection using either of these settings:
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+apm_config:
+  telemetry:
+    enabled: false
+```
+
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
+```bash
+export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## PCI DSS compliance for compliance for APM
 

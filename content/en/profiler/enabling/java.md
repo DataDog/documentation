@@ -22,16 +22,16 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-As of dd-trace-java version 1.0.0, you have two options for the engine that generates CPU profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of version 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
+As of dd-trace-java 1.0.0, you have two options for the engine that generates profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of dd-trace-java 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
 
 Minimum JDK versions:
-
-- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it, including Amazon Corretto, Azul Zulu, and others)
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
 - Oracle JDK 8u352+, 11.0.17+, 17.0.5+
-- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+
+- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime)
+- Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
 The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
@@ -41,22 +41,17 @@ The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there
 {{% tab "JFR" %}}
 
 Minimum JDK versions:
-- OpenJDK 11+
-- Oracle JDK 11+
-- [OpenJDK 8 (version 1.8.0.262/8u262+)][3]
-- Azul Zulu 8 (version 1.8.0.212/8u212+).
-
-JFR is not supported in OpenJ9.
-
-**Note**: Enabling the Java Flight Recorder for OracleJDK may require a commercial license from Oracle. Reach out to your Oracle representative to confirm whether this is part of your license.
+- OpenJDK [1.8.0.262/8u262+][3], 11+ (including builds on top of it: Amazon Corretto, and others)
+- Oracle JDK 11+ (Enabling the JFR may require a commercial license from Oracle. Reach out to your Oracle representative to confirm whether this is part of your license)
+- Azul Zulu 8 (version 1.8.0.212/8u212+), 11+.
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
 Additional requirements for profiling [Code Hotspots][11]:
- - OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
- - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+.
+ - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
+ - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
 
-[3]: /profiler/profiler_troubleshooting/#java-8-support
+[3]: /profiler/profiler_troubleshooting/java/#java-8-support
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
@@ -182,8 +177,6 @@ For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionS
 ### Datadog profiler wallclock engine
 
 The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine has been enabled by default since 1.7.0.
-
-or:
 
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+

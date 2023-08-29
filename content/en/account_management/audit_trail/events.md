@@ -109,9 +109,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User login][29]                     | A user logs into Datadog and the authentication method used.                                  | `@evt.name:Authentication @action:login`                |
 
 ### CI Visibility events
-| Name                            | Description of audit event                                                                             | Query in audit explorer                                                                          |
-|---------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [Repository Default Branch][30] | A user modified the default branch of a repository, and the previous and new values for the default branch. | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`   
+| Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
+|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Repository default branch][30] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
+| [Test service settings][93]     | A user created or modified the settings of a test service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings (@action:created OR @action:modified)`            |
+| [GitHub account settings][94]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
+| [Exclusion filters][95]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
+| [Quality gates rule][96]        | A user has created, modified or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 
 ### Cloud Security Platform events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -195,8 +199,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 ### Real User Monitoring events
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [RUM application created][68] | A user created or deleted an application in RUM and the type of the application (Browser, Flutter, IOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
-| [RUM application modified][69] | A user modified an application in RUM, the new value of the application, and the type of the application (Browser, Flutter, IOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:modified` |
+| [RUM application created][68] | A user created or deleted an application in RUM and the type of the application (Browser, Flutter, iOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| [RUM application modified][69] | A user modified an application in RUM, the new value of the application, and the type of the application (Browser, Flutter, iOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:modified` |
 
 ### Security Notification events
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
@@ -238,9 +242,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Workflow][88] | A user created, deleted, or modified a workflow, or a workflow executed. | `@evt.name:"Workflows" @asset.type:workflow @action:(created OR deleted OR modified OR executed)` |
-| [Workflow Schedule][89] | A user created, deleted, or modified a schedule for a workflow. | `@evt.name:"Workflows" @asset.type:workflow_schedule @action:(created OR deleted OR modified)` |   
-| [Workflow Action][90] | A user responded to a Slack prompt during the execution of a workflow. | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` | 
-| [Custom Connection][91] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` | 
+| [Workflow Schedule][89] | A user created, deleted, or modified a schedule for a workflow. | `@evt.name:"Workflows" @asset.type:workflow_schedule @action:(created OR deleted OR modified)` |
+| [Workflow Action][90] | A user responded to a Slack prompt during the execution of a workflow. | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` |
+| [Custom Connection][91] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
 
 ## Further Reading
 
@@ -275,7 +279,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [27]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Aapplication_key
 [28]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Apublic_api_key
 [29]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40action%3Alogin
-[30]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table_file%20%40action%3A%28uploaded%20OR%20imported%29
+[30]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_repository%20%40action%3Amodified
 [31]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%E2%80%9CCloud%20Security%20Platform%E2%80%9D%20%40asset.type%3Acws_agent_rule%20%40action%3Aaccessed
 [32]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Cloud%20Security%20Platform%22%20%40asset.type%3Anotification_profile
 [33]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Cloud%20Security%20Platform%22%20%40asset.type%3Asecurity_rule
@@ -338,3 +342,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [90]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_action%20%40action%3Aresponded
 [91]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Custom%20Connections%22%20%40asset.type%3Acustom_connection
 [92]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Organization%20Management%22%20%40asset.type%3Aorganization%20%40action%3Acreated
+[93]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_test_service_settings%20%28%40action%3Acreated%20OR%20%40action%3Amodified%29
+[94]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Agithub_opt_ins%20%28%40action%3Amodified%20OR%20%40action%3Adeleted%29
+[95]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_exclusion_filters%20%40action%3Amodified
+[96]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_quality_gates%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29

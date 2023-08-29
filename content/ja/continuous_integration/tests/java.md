@@ -308,6 +308,8 @@ public class ManualTest {
 
 [Datadog トレーサーの構成][2]オプションは、トレーサーの挙動を微調整するために利用可能です。
 
+## リポジトリの収集とメタデータのコミット
+
 {{% ci-git-metadata %}}
 
 {{% ci-information-collected %}}

@@ -37,7 +37,7 @@ The Log Explorer supports [queries across multiple indexes][7].
 
 ### Add indexes
 
-Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 10 by default.
+Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
 
 {{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 

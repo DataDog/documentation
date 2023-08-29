@@ -1,5 +1,5 @@
 ---
-description: iOS アプリケーションの健全性とパフォーマンスに関するインサイトを発見することができます。
+description: Android アプリケーションの健全性とパフォーマンスに関するインサイトを発見することができます。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub

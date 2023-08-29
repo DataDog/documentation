@@ -18,6 +18,7 @@ title: CI Visibility ガイド
     {{< nextlink href="/continuous_integration/guides/pull_request_comments" >}}GitHub のプルリクエストコメントでテストサマリーを有効にする{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/developer_workflows" >}}Datadog で開発者のワークフローを強化する{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/add_custom_metrics" >}}カスタムメトリクスをテストに追加する{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/code_coverage" >}}Datadog のコードカバレッジ{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Pipeline Visibility ガイド:" >}}
