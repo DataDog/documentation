@@ -20,7 +20,9 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 **Notes**: 
 
+{{< site-region region="us,us3,us5,eu,ap1," >}}
 - If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
+{{< /site-region >}}
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Azure][3], [Google][5], [LastPass][6], [Okta][7], and [SafeNet][8].
 - SAML configuration requires [Datadog Administrator][9] access.
 
