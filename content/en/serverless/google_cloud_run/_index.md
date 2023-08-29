@@ -480,7 +480,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ## Alternative configurations
 
-### Alternatives to Entrypoint
+### Alternatives to entrypoint
 
 If you have already defined an entrypoint inside of your Dockerfile, you can instead modify the CMD argument.
 

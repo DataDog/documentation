@@ -461,7 +461,7 @@ Metrics are calculated based on 100% of the application’s traffic, and remain 
 
 ## Alternative configurations
 
-### Alternatives to Entrypoint
+### Alternatives to entrypoint
 
 If you have already defined an entrypoint inside of your Dockerfile, you can instead modify the CMD argument.
 
