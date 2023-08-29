@@ -71,7 +71,9 @@ export function handleLanguageBasedRedirects() {
         // By default, set the lang_pref cookie based on the url path. This can be overriden by the subsequent logic below
         const langCookie = Cookies.get('lang_pref');
         let tmpCurLang = curLang.length == 0 ? ['en'] : curLang;
+        let firstTimeFlag = false;
         if (!langCookie || langCookie != tmpCurLang[0]) {
+            firstTimeFlag = true;
             Cookies.set("lang_pref", tmpCurLang[0], {path: cookiePath, domain: cookieDomain});
         }
 
@@ -92,7 +94,7 @@ export function handleLanguageBasedRedirects() {
 			}
 		}
 
-		else if ( Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 ) {
+		else if ( Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 && !firstTimeFlag) {
 			acceptLanguage = Cookies.get('lang_pref');
 
 			logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage }`;
