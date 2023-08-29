@@ -2,9 +2,12 @@
 title: Getting Started with Datadog Sites
 kind: documentation
 further_reading:
- - link: 'https://learn.datadoghq.com/courses/dd-201'
-   tag: 'Learning Center'
-   text: 'Datadog 201: Becoming a Power User'
+- link: 'https://learn.datadoghq.com/courses/dd-201'
+  tag: 'Learning Center'
+  text: 'Datadog 201: Becoming a Power User'
+- link: '/agent/guide/dual-shipping/'
+  tag: 'Guide'
+  text: 'Dual Shipping'
 algolia:
   tags: ['site','datadog site']
 ---
@@ -29,7 +32,6 @@ You can identify which site you are on by matching your Datadog website URL to t
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 
 **Note**: To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
-
 
 ## SDK domains
 
