@@ -35,7 +35,7 @@ Images are tagged based on semantic versioning, with each new version receiving 
 The latest tag of /serverless-init will be applied to Beta9 through 9/1/2023 to provide additional time for Beta users to adjust and include the additional required `DD_AZURE_SUBSCRIPTION_ID` and `DD_RESOURCE_GROUP` variables
 </div>
 
-* `latest`, `latest-apline`: use these to follow the latest version release, which may include breaking changes
+* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
