@@ -2,7 +2,7 @@
 {{ $single_permission_group := .Get "group" }}
 
 {{/* Passing a single permission group name allows us to render one set of permissions at a time.   Currently this is used to separate General from Advanced Permissions on the account_management/rbac/permissions page, but could be re-used elsewhere in the future. */}}
-
+<p>testing> {{$permissions_data}} +testing</p>
 {{ if ne $permissions_data nil }}
   {{ if ne $single_permission_group nil }}
     {{ $permissions_data := index $permissions_data $single_permission_group }}
