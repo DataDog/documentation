@@ -121,7 +121,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 
 ### Create a custom filter
 
-You can also create custom Security Filters in order to restrict analysis to explicitly specified logs. For example, you can choose to analyze logs from AWS Cloudtrail with a filter that matches only `source:cloudtrail`.
+You can also create custom Security Filters in order to restrict analysis to explicitly specified logs. For example, you can choose to analyze logs from AWS CloudTrail with a filter that matches only `source:cloudtrail`.
 
 **API call:**
 

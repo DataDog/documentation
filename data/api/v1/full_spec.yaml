@@ -1583,7 +1583,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
-      type: object
     DistributionWidgetHistogramRequestType:
       description: Request type for the histogram request.
       enum:
@@ -2883,7 +2882,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition'
-      type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response
         formats are supported by Geomap widgets.
@@ -3986,6 +3984,7 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - apm_usm_usage
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
@@ -4023,6 +4022,7 @@ components:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APM_USM_USAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
@@ -4513,6 +4513,7 @@ components:
       - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - trace_stream
       - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
@@ -4526,6 +4527,7 @@ components:
       - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - TRACE_STREAM
       - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
@@ -5688,7 +5690,6 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
-      type: object
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6580,7 +6581,6 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
-      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -7529,6 +7529,8 @@ components:
       - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
+      - apm_usm_usage
+      - apm_usm_percentage
       - appsec_usage
       - appsec_percentage
       - browser_usage
@@ -7602,6 +7604,8 @@ components:
       - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
+      - APM_USM_USAGE
+      - APM_USM_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
@@ -7690,6 +7694,15 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        apm_usm_percentage:
+          description: The percentage of APM and Universal Service Monitoring host
+            usage by tag(s).
+          format: double
+          type: number
+        apm_usm_usage:
+          description: The APM and Universal Service Monitoring host usage by tag(s).
           format: double
           type: number
         appsec_fargate_percentage:
@@ -8101,7 +8114,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellResourceType:
       default: notebook_cells
       description: Type of the Notebook Cell resource.
@@ -8157,7 +8169,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellTime:
       description: Timeframe for the notebook cell. When 'null', the notebook global
         time is used.
@@ -8212,7 +8223,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCreateData:
       description: The data for a notebook create request.
       properties:
@@ -8312,7 +8322,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
-      type: object
     NotebookGraphSize:
       description: The size of the graph.
       enum:
@@ -8612,7 +8621,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookCellCreateRequest'
       - $ref: '#/components/schemas/NotebookCellUpdateRequest'
-      type: object
     NotebookUpdateData:
       description: The data for a notebook update request.
       properties:
@@ -11550,6 +11558,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceLevelObjectiveQuery:
       description: 'A metric-based SLO. **Required if type is `metric`**. Note that
         Datadog only allows the sum by aggregator
@@ -11678,6 +11687,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceMapWidgetDefinition:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
@@ -12305,7 +12315,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SunburstWidgetLegendTable'
       - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
-      type: object
     SunburstWidgetLegendInlineAutomatic:
       description: Configuration of inline or automatic legends.
       properties:
@@ -12319,6 +12328,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
       required:
       - type
+      type: object
     SunburstWidgetLegendInlineAutomaticType:
       description: Whether to show the legend inline or let it be automatically generated.
       enum:
@@ -12336,6 +12346,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendTableType'
       required:
       - type
+      type: object
     SunburstWidgetLegendTableType:
       description: Whether or not to show a table legend.
       enum:
@@ -12704,7 +12715,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
-      type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -12884,7 +12894,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
-      type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
       properties:
@@ -19705,7 +19714,6 @@ components:
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
-      type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
@@ -20286,17 +20294,33 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_service_catalog_read: View service catalog and service definitions.
+            apm_service_catalog_write: Add, modify, and delete service catalog definitions
+              when those definitions are maintained by Datadog.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
+            incident_notification_settings_write: Configure Incidents Notification
+              settings.
+            incident_read: View incidents in Datadog.
+            incident_settings_write: Configure Incident Settings.
+            incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
+            security_monitoring_filters_read: Read Security Filters.
+            security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_rules_read: Read Detection Rules.
+            security_monitoring_rules_write: Create and edit Detection Rules.
+            security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -20312,6 +20336,11 @@ components:
               in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
+            teams_manage: Manage Teams. Create, delete, rename, and edit metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. A User with this permission can view Team
+              names, metadata, and which Users are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -28619,6 +28648,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 25
           format: int64
           type: integer
       responses:
@@ -28645,6 +28675,10 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29447,11 +29481,6 @@ paths:
           description: OK
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_default_settings_read
       summary: Get the default locations
       tags:
       - Synthetics

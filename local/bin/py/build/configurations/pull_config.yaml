@@ -629,6 +629,7 @@
             bundle_excludes:
               - "com.datadoghq.test"
               - "com.datadoghq.sample"
+              - "com.datadoghq.internal"
 
       - repo_name: web-ui
         contents:
