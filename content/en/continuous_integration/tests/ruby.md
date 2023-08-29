@@ -397,6 +397,21 @@ Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Ruby custom instrumentation documentation.
 
+### Adding custom metrics to tests
+
+Like tags, you can add custom metrics to your tests by using the current active span:
+
+```ruby
+require 'ddtrace'
+
+# inside your test
+Datadog::Tracing.active_span&.set_tag('memory_allocations', 16)
+# test continues normally
+# ...
+```
+
+For more information on custom metrics, see the [Add Custom Metrics Guide][7].
+
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code by using a `Datadog.configure` block, or using environment variables:
@@ -438,3 +453,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [4]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
+[7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
