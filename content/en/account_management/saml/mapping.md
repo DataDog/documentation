@@ -17,6 +17,8 @@ You can map attributes to the following principals:
 
  Users with the Access Management permission can assign or remove Datadog principals based on a user's SAML-assigned attributes.
 
+ Setting up a mapping from SAML attributes to Datadog entities allows you to manage users solely in your identity provider. The system then provisions users in Datadog according to the mappings you set up.
+
 ## Prerequisites
 
 It's important to understand what is sent in an assertion before turning on mappings, as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][3]. Datadog recommends cross-referencing with [built-in browser tooling][4] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][5] **before** creating mappings.
@@ -78,6 +80,8 @@ Alternatively, you can create and change mappings of SAML attributes to Datadog 
 7. If you have not already done so, enable mappings by clicking **Enable Mappings**.
 
 Make changes to a mapping by clicking the pencil (**Edit**) icon, or remove a mapping by clicking the garbage (**Delete**) icon. These actions affect only the mapping, not the identity provider attributes or the Datadog Team.
+
+**Note:** Unlike Roles, Teams do not affect the login experience in any way. Datadog uses Team mapping purely as a provisioning source. For example, when a user does not belong to any Teams, they can still sign in to Datadog.
 
 [1]: /account_management/rbac/
 [2]: /account_management/teams/
