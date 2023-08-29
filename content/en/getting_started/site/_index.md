@@ -28,6 +28,9 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 
+**Note**: To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
+
+
 ## SDK domains
 
 See [Supported endpoints for SDK domains][2].
@@ -53,4 +56,5 @@ The Datadog for Government site (US1-FED) is meant to allow US government agenci
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[2]: /agent/guide/dual-shipping/
+[3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
