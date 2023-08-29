@@ -88,13 +88,13 @@ instances:
 ```
 
 
-## Configure Azure Managed Identity authentication
+## Configure Azure managed identity authentication
 
 
 Azure allows users to configure managed identity authentication for any resource, which can access [Azure AD][15]. The Datadog Agent supports both [user and system assigned][10] managed identity authentication to your cloud databases.
 
 
-### Connect to Postgresql
+### Connect to postgresql
 
 
 In order to configure authentication to your Postgresql Flexible or Single Server instance, do the following:
@@ -217,7 +217,7 @@ CREATE USER [dbm-datadog-test-identity] FOR LOGIN [dbm-datadog-test-identity];
 5. Update your instance config, with the `managed_identity` config block:
 
 
-**Note**: using the [ODBC Driver 17 for SQL Server][18] or greater is required in order to use this feature.
+**Note**: using the [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
 
 
 ```yaml
