@@ -10,7 +10,7 @@ Urchin Tracking Module (UTM) tracking is a parameter that can be added to a URL 
 
 ## Data collected
 
-UTM campaigns are connected to [View][1] events in RUM. These are collected automatically by the Browser SDK and can be viewed as facets in the RUM Explorer. The UTM parameters Datadog collects can be defined as the following:
+UTM campaigns are connected to [View][1] events in RUM. The campaign data is collected automatically by the Browser SDK and can be viewed as facets in the RUM Explorer. The UTM parameters Datadog collects can be defined as the following:
 
 | Field                | Type   | Description                                                   |
 |-------------------------------|--------|---------------------------------------------------------------|
