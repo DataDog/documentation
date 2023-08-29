@@ -1,5 +1,5 @@
 ---
-title: Search and Manage CI Tests and Pipelines 
+title: Search and Manage CI Pipelines and Tests
 description: Learn how to search for your CI tests and pipelines.
 further_reading:
 - link: "/continuous_integration/explorer"
