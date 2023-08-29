@@ -13,7 +13,7 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
-    - link: 'https://dtdg.co/fe'
+    - link: 'https://corpsite-preview.datadoghq.com/ccole/tem-lang-pref/technical-enablement/sessions'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to boost your APM understanding'
 ---
