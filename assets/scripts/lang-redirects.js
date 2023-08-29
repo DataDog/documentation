@@ -50,9 +50,10 @@ export function handleLanguageBasedRedirects() {
 	let previewPath = '';
 	let acceptLanguage = 'en';
 	let logMsg = '';
-
+    const cookieDomain = subdomain === 'localhost' ? 'localhost' : '.datadoghq.com';
+   
 	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1);
-
+    
 	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
 		instead of being appended to the end
 		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
@@ -66,14 +67,22 @@ export function handleLanguageBasedRedirects() {
 	}
 
 	if ( subMatch.length ) {
-		// order of precedence: url > cookie > header
+
+        // By default, set the lang_pref cookie based on the url path. This can be overriden by the subsequent logic below
+        const langCookie = Cookies.get('lang_pref');
+        let tmpCurLang = curLang.length == 0 ? ['en'] : curLang;
+        if (!langCookie || langCookie != tmpCurLang[0]) {
+            Cookies.set("lang_pref", tmpCurLang[0], {path: cookiePath, domain: cookieDomain});
+        }
+
+        // order of precedence: url > cookie > header
 		if ( params['lang_pref'] ) {
 			if (allowedLanguages.indexOf(params['lang_pref']) !== -1) {
 				acceptLanguage = params['lang_pref'];
 
 				logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
 	
-				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: '.datadoghq.com'});
+				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: cookieDomain});
 
 				window.location.replace( window.location.origin + `${ previewPath }/${ uri }${getQueryString(params)}`.replace(/\/+/g,'/') );
 			} else {
@@ -104,11 +113,13 @@ export function handleLanguageBasedRedirects() {
 
 				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
 
-				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: '.datadoghq.com'});
+				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: cookieDomain});
 
 				window.location.replace( dest );
 			}
 		}
+
+
 	}
 	if ( window.DD_LOGS ) {
 		window.DD_LOGS.logger.info("Lang-Redirects", { log: logMsg, requested_url: baseURL, subdomain, uri, acceptLanguage, previewPath });
