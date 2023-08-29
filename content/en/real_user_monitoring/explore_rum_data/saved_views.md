@@ -1,6 +1,8 @@
 ---
 title: Saved Views
 kind: documentation
+aliases:
+- /real_user_monitoring/explorer/saved_views
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

@@ -3731,48 +3731,48 @@ main:
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 604
-  - name: Explorer
-    url: real_user_monitoring/explorer/
+  - name: Explore RUM Data
+    url: real_user_monitoring/explore_rum_data/
     parent: rum
     identifier: rum_explorer
     weight: 7
   - name: Search RUM Events
-    url: real_user_monitoring/explorer/search/
+    url: real_user_monitoring/explore_rum_data/search/
     parent: rum_explorer
     identifier: rum_explorer_search
     weight: 701
   - name: Search Syntax
-    url: real_user_monitoring/explorer/search_syntax/
+    url: real_user_monitoring/explore_rum_data/search_syntax/
     parent: rum_explorer
     identifier: rum_explorer_search_syntax
     weight: 702
   - name: Group
-    url: real_user_monitoring/explorer/group/
+    url: real_user_monitoring/explore_rum_data/group/
     parent: rum_explorer
     identifier: rum_explorer_group
     weight: 703
   - name: Visualize
-    url: real_user_monitoring/explorer/visualize/
+    url: real_user_monitoring/explore_rum_data/visualize/
     parent: rum_explorer
     identifier: rum_explorer_visualize
     weight: 704
   - name: Events
-    url: real_user_monitoring/explorer/events/
+    url: real_user_monitoring/explore_rum_data/events/
     parent: rum_explorer
     identifier: rum_explorer_events
     weight: 705
   - name: Export
-    url: real_user_monitoring/explorer/export/
+    url: real_user_monitoring/explore_rum_data/export/
     parent: rum_explorer
     identifier: rum_explorer_export
     weight: 706
   - name: Saved Views
-    url: real_user_monitoring/explorer/saved_views/
+    url: real_user_monitoring/explore_rum_data/saved_views/
     parent: rum_explorer
     identifier: rum_explorer_saved_views
     weight: 707
   - name: Watchdog Insights for RUM
-    url: real_user_monitoring/explorer/watchdog_insights/
+    url: real_user_monitoring/explore_rum_data/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
     weight: 708

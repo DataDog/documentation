@@ -5,6 +5,7 @@ description: ""
 aliases:
   - /real_user_monitoring/rum_analytics
   - /real_user_monitoring/analytics
+  - /real_user_monitoring/explorer/analytics
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

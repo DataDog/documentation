@@ -1,6 +1,8 @@
 ---
 title: Visualize
 kind: documentation
+aliases:
+- /real_user_monitoring/explorer/visualize
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
@@ -92,8 +94,9 @@ A tree map helps you organize and show data as a percentage of a whole in a visu
 The following tree map shows the percentage breakdown by **View Name**.
 
 {{< img src="real_user_monitoring/explorer/visualize/tree-map.png" alt="Tree map in the RUM Explorer" style="width:90%;">}}
+
 ## Pie charts
-A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
+A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, or countries within your log data.
 
 The following pie chart shows the percentage breakdown by **View Path**.
 

@@ -1,6 +1,8 @@
 ---
 title: Export RUM Events and Graphs
 kind: documentation
+aliases:
+- /real_user_monitoring/explorer/export
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
