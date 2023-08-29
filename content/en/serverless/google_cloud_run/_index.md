@@ -79,7 +79,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
 
    ```
    ENTRYPOINT ["/app/datadog-init"]
@@ -125,7 +125,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -171,7 +171,7 @@ CMD ["./mvnw", "spring-boot:run"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -203,7 +203,7 @@ CMD ["/path/to/your-go-binary"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Change the entrypoint to wrap your application into the Datadog `serverless-init` process:
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -273,7 +273,7 @@ CMD ["dotnet", "helloworld.dll"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application into the Datadog `serverless-init` process.
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -320,7 +320,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
    ENV DD_TRACE_PROPAGATION_STYLE=datadog
    ```
 
-4. Change the entrypoint to wrap your application into the Datadog `serverless-init` process.
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -382,7 +382,7 @@ CMD php-fpm; nginx -g daemon off;
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application into the Datadog serverless-init process
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. **Note**: If you already have an entrypoint defined inside your Dockerfile, you have [alternative configuration options](#alternative-configurations).
    ```
    ENTRYPOINT ["/app/datadog-init"]
    ```
@@ -478,6 +478,30 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
 
+## Alternative configurations
+
+### Alternatives to Entrypoint
+
+If you have already defined an entrypoint inside of your Dockerfile, you can instead modify the CMD argument.
+
+**Note**: As long as your command to run is passed as an argument to datadog-init, you will receive full instrumentation.
+
+The below code snippet illustates how to modify your Dockerfile to instrument Cloud Run without modifying your entrypoint.
+
+```
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+ENTRYPOINT ["/app/datadog-init"]
+
+CMD ["your", "start", "command"]
+```
+
+would become this:
+
+```
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+
+CMD ["/app/datadog-init", "your", "start", "command"]
+```
 
 ## Troubleshooting
 
