@@ -10,28 +10,7 @@ further_reading:
 ## Overview
 
 {{< tabs >}}
-{{% tab "Tests" %}}
 
-The [Tests page][101] is useful for developers who want to keep an eye on their test results. 
-
-{{< img src="/continuous_integration/tests.png" text="CI Tests page" style="width:100%" >}}
-
-You can access low-level and immediate insights:
-
-- See what tests are failing and why.
-- See your last commit's test results.
-- View the wall time of your tests in your feature branch and compare it to the default branch, to identify if you're about to introduce a performance regression.
-- Find out if your commit introduces a new flaky test that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
-
-You can also access high-level accumulation and trends:
-
-- See the effects that changed code, added tests, and increased complexity have on your test suite performance over time.
-- See which tests have become slower over time and identify the commit that introduced the regression.
-- Take advantage of Datadog's automatic test flakiness detection and tracking, which shows you which tests are becoming more or less unreliable over time.
-
-[101]: https://app.datadoghq.com/ci/test-services
-
-{{% /tab %}}
 {{% tab "Pipelines" %}}
 
 The [Pipelines page][101] is useful for developers who want to keep an eye on the build pipeline for their service.
@@ -50,10 +29,66 @@ You can access high-level accumulation and trends, including:
 - How each pipeline has run, over time, and with what results and trends.
 - The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it makes the biggest difference.
 
+## Search for pipelines
+
+To see your pipelines, navigate to [**CI** > **Pipelines**][7].
+
+The [Pipelines page][7] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
+
+Metrics shown include build frequency, failure rate, average duration, and 95th percentile duration. This information reveals which pipelines are high-usage and potentially high resource consumers. The last build result, duration, and last runtime show you the effect of the last commit.
+
+You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error.
+
+## Pipeline details and executions
+
+Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame.
+
+{{< img src="ci/pipeline_branch_overview_updated.png" alt="Pipeline Details page for a single pipeline" style="width:100%;">}}
+
+Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, error rates, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
+
+The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
+
+### Explore connections to services, resources, and network events
+
+Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
+
+Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
+
+{{< img src="ci/ci-pipeline-execution.png" alt="Pipeline execution view with trace info and flamegraph display" style="width:100%;">}}
+
+### Explore connections to logs
+
+If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
+
+Job log collection is supported for the following providers:
+
+- [GitHub Actions][4]
+- [GitLab][5]
+- [Jenkins][6]
+
 [101]: https://app.datadoghq.com/ci/pipelines
 
 {{% /tab %}}
-{{< /tabs >}}
+
+{{% tab "Tests" %}}
+
+The [Tests page][101] is useful for developers who want to keep an eye on their test results. 
+
+{{< img src="/continuous_integration/tests.png" text="CI Tests page" style="width:100%" >}}
+
+You can access low-level and immediate insights:
+
+- See what tests are failing and why.
+- See your last commit's test results.
+- View the wall time of your tests in your feature branch and compare it to the default branch, to identify if you're about to introduce a performance regression.
+- Find out if your commit introduces a new flaky test that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
+
+You can also access high-level accumulation and trends:
+
+- See the effects that changed code, added tests, and increased complexity have on your test suite performance over time.
+- See which tests have become slower over time and identify the commit that introduced the regression.
+- Take advantage of Datadog's automatic test flakiness detection and tracking, which shows you which tests are becoming more or less unreliable over time.
 
 ## Search for tests
 
@@ -105,43 +140,10 @@ Click on a row to see the analytics for tests run on the default branch, similar
 
 For more information about test configuration tags, see [Test Configurations][1].
 
-## Search for pipelines
+[101]: https://app.datadoghq.com/ci/test-services
+{{% /tab %}}
 
-To see your pipelines, navigate to [**CI** > **Pipelines**][7].
-
-The [Pipelines page][7] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
-
-Metrics shown include build frequency, failure rate, average duration, and 95th percentile duration. This information reveals which pipelines are high-usage and potentially high resource consumers. The last build result, duration, and last runtime show you the effect of the last commit.
-
-You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error.
-
-## Pipeline details and executions
-
-Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame.
-
-{{< img src="ci/pipeline_branch_overview_updated.png" alt="Pipeline Details page for a single pipeline" style="width:100%;">}}
-
-Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, error rates, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
-
-The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
-
-### Explore connections to services, resources, and network events
-
-Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
-
-Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
-
-{{< img src="ci/ci-pipeline-execution.png" alt="Pipeline execution view with trace info and flamegraph display" style="width:100%;">}}
-
-### Explore connections to logs
-
-If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
-
-Job log collection is supported for the following providers:
-
-- [GitHub Actions][4]
-- [GitLab][5]
-- [Jenkins][6]
+{{< /tabs >}}
 
 ## Further reading
 
