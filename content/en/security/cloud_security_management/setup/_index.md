@@ -37,6 +37,8 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
+<div class="alert alert-info">Cloud Security Management offerings are now available in three separate packages: CSM Enterprise, CSM Pro, and CSM Workload Security. For more information, see <a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Changes to Datadog Cloud Security Management</a>.</div>
+
 Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
 
 CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. Each package includes access to a specific set of features, as shown in the following table:
