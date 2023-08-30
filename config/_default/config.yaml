@@ -57,8 +57,8 @@ module:
        target: layouts/partials/footer_link.html
      - source: layouts/partials/language-selector-docs.html
        target: layouts/partials/language-selector-docs.html
-     - source: layouts/partials/modal-demo-signup.html
-       target: layouts/partials/modal-demo-signup.html
+     - source: layouts/partials/modals/modal-header-demo-signup.html
+       target: layouts/partials/modals/modal-header-demo-signup.html
      - source: assets/styles/components/_demo-request-modal.scss
        target: assets/styles/components/_demo-request-modal.scss
      - source: assets/styles/components/_announcement-banner.scss
