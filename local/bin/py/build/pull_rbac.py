@@ -47,7 +47,7 @@ def pull_rbac():
         # ignores UI template roles ('Datadog Billing Admin Role' and 'Datadog Security Admin Role')
         default_roles_data = roles_json.get('data', [])[0:3] 
         dr_data_len = len(default_roles_data)
-        print('Pulled? ', default_roles_data)
+
         for permission in permissions_data:
             group_name = permission['attributes']['group_name']
             permission_name = permission['attributes']['name']
@@ -75,6 +75,7 @@ def pull_rbac():
             else:
                 permission.setdefault('role_name', permission_role_name[0:-5]) # add role name without ' Role' to permission dictionary
                 formatted_permissions_dict.setdefault(group_name, []).append(permission) # {group_name: permissions[]}
+                print('permission!!: ', permission)
 
         formatted_permissions_json = json.dumps(formatted_permissions_dict)
 
