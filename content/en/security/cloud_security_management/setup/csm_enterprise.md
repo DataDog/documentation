@@ -227,6 +227,12 @@ remote_configuration:
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable remote configuration.
   enabled: true
+
+compliance_config:
+ ## @param enabled - boolean - optional - default: false
+ ## Set to true to enable CIS benchmarks for CSPM.
+ #
+ enabled: true
 ```
 
 ```bash
@@ -235,6 +241,12 @@ runtime_security_config:
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable full CSM Threats.
   enabled: true
+
+compliance_config:
+ ## @param enabled - boolean - optional - default: false
+ ## Set to true to enable CIS benchmarks for CSPM.
+ #
+ enabled: true
 ```
 
 ```bash
