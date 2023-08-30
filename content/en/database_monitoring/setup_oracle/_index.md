@@ -46,15 +46,15 @@ The Agent does not need to run on the same server nor the same platform as the m
 
 #### Recommended Agent version
 
-Datadog recommends you install the version listed below:
+Datadog recommends you install the beta version listed below, as these contain all the implemented Oracle monitoring features and bug fixes:
 - Linux: `7.46.0~dbm~oracle~beta~0.33-1`
 - Windows: `7.46.0-dbm-oracle-beta-0.33-1`
 - Docker: `7.46.0-dbm-oracle-beta-0.33`
 
-These contain all the implemented Oracle monitoring features and bug fixes.
+If you prefer an official Datadog Agent release, a minimum version of `7.46.0` is recommended.
 
-- If your recommended Agent version is an official Datadog Agent release, like `7.46.0`, follow the [instructions for your platform][3]. 
-- If your recommended Agent version is a beta build, such as `7.46.0~dbm~oracle~beta~0.33`, follow the instructions in [Beta build installation](#beta-build-installation).
+- To install a beta build, see [Beta build installation](#beta-build-installation).
+- To install the latest official release, follow the [instructions for your platform][3]. 
 
 #### Oracle client
 
@@ -109,9 +109,13 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 ### Upgrade an existing Agent installation
 
-If you have an existing Agent installation, 
+<div class="alert alert-info">For the latest Oracle monitoring features and bug fixes, <a href="/database_monitoring/setup_oracle/?tab=linux#recommended-agent-version">install the recommended beta version</a> instead of upgrading your existing Agent below.</div>
 
-1. Verify that your Agent version meets the recommended minimum of `7.46.0`, upgrading as necessary. See [Upgrade Between Minor Versions][15]. If you're upgrading between major versions, see [Upgrade to Datadog Agent v7][20].
+If you have an existing Agent installation:
+
+1. Verify that your Agent version meets the recommended minimum of `7.46.0`, upgrading to a newer version if necessary.
+    - To upgrade from `>7.0.0`, see [Upgrade Between Minor Versions][15].
+    - To upgrade from v5 or v6, see [Upgrade to Datadog Agent v7][20].
 2. Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
 ### Install the Oracle integration
