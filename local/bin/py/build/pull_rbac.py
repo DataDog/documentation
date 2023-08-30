@@ -25,11 +25,13 @@ def pull_rbac():
     try:
         permissions_res = requests.get(permissions_api_endpoint, headers=headers)
         roles_res = requests.get(roles_api_endpoint, headers=headers)
-
+        
         permissions_res.raise_for_status()
-
+        roles_res.raise_for_status()
+        
         permissions_json = permissions_res.json()
         roles_json = roles_res.json()
+
     except Exception as e:
         if getenv("CI_COMMIT_REF_NAME"):
             print('\x1b[31mERROR\x1b[0m: RBAC api request failed. Aborting')
@@ -45,7 +47,7 @@ def pull_rbac():
         # ignores UI template roles ('Datadog Billing Admin Role' and 'Datadog Security Admin Role')
         default_roles_data = roles_json.get('data', [])[0:3] 
         dr_data_len = len(default_roles_data)
-
+        print('Pulled? ', default_roles_data)
         for permission in permissions_data:
             group_name = permission['attributes']['group_name']
             permission_name = permission['attributes']['name']
