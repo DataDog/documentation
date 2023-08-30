@@ -109,7 +109,10 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 ### Upgrade an existing Agent installation
 
-Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
+If you have an existing Agent installation, 
+
+1. Verify that your Agent version meets the recommended minimum of `7.46.0`, upgrading as necessary. See [Upgrade Between Minor Versions][15]. If you're upgrading between major versions, see [Upgrade to Datadog Agent v7][20].
+2. Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
 ### Install the Oracle integration
 
@@ -137,11 +140,12 @@ Deactivating the legacy integration prevents sending the system metrics twice.
 
 Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+If the above prerequisites are met, follow the [setup instructions](#setup) for your hosting type.
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [10]: /database_monitoring/architecture/
-[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[15]: /agent/versions/upgrade_between_agent_minor_versions/?tab=linux
+[20]: 

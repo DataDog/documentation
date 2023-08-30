@@ -43,6 +43,8 @@ Configure the Agent by following the instructions for [self-hosted Oracle databa
 
 Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
 
+<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
@@ -51,6 +53,7 @@ Database Monitoring supports custom queries for Oracle databases. To learn more 
 [6]: https://app.datadoghq.com/databases
 [7]: /database_monitoring/setup_oracle/selfhosted
 [8]: /database_monitoring/setup_oracle/rac
+[11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 
 ## Further reading
 
