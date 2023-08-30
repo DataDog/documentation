@@ -308,6 +308,11 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][5] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
+`DD_HTTP_SERVER_ROUTE_BASED_NAMING`
+: **INI**: `datadog.http_server_route_based_naming`<br>
+**Default**: `true`<br>
+Enable route-based naming for HTTP server requests. Set to `true` to use the integration-specific root span's resource name format. When `false`, the HTTP method and path are used instead. Added in version `0.89.0`.
+
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
 **Default**: `1.0`<br>
