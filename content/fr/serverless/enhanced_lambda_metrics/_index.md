@@ -22,13 +22,13 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 `aws.lambda.enhanced.invocations`     
 : Mesure le nombre de fois qu'une fonction est appelée en réponse à un événement ou à une invocation d'un appel API.
 
-`aws.lambda.enhanced.errors`          
+`aws.lambda.enhanced.errors`
 : Mesure le nombre d'invocations ayant échoué en raison d'erreurs dans la fonction.
 
 `aws.lambda.enhanced.max_memory_used` 
 : Mesure la quantité de mémoire maximale (en Mo) utilisée par la fonction.
 
-`aws.lambda.enhanced.duration`        
+`aws.lambda.enhanced.duration`
 : Mesure le nombre de secondes écoulées entre le moment où le code de la fonction commence à s'exécuter suite à une invocation et l'arrêt de son exécution.
 
 `aws.lambda.enhanced.billed_duration` 
@@ -43,13 +43,22 @@ Les métriques Lambda optimisées en temps réel suivantes sont disponibles. Ell
 `aws.lambda.enhanced.post_runtime_duration`
 : Mesure le nombre de millisecondes écoulées entre le moment où le code de la fonction renvoie la réponse au client et le moment où la fonction arrête de s'exécuter, ce qui correspond à la durée ajoutée par les exécutions de l'extension Lambda.
 
-`aws.lambda.enhanced.estimated_cost`  
+`aws.lambda.enhanced.response_latency`
+: Mesure le nombre de millisecondes écoulées entre la réception de la requête d'invocation et l'envoi au client du premier octet de la réponse.
+
+`aws.lambda.enhanced.response_duration`
+: Mesure le nombre de millisecondes écoulées entre l'envoi au client du premier octet et du dernier octet de la réponse.
+
+`aws.lambda.enhanced.produced_bytes`
+: Mesure le nombre d'octets renvoyés par une fonction.
+
+`aws.lambda.enhanced.estimated_cost`
 : Mesure le coût total estimé de l'invocation de la fonction (en dollars).
 
-`aws.lambda.enhanced.timeouts`  
+`aws.lambda.enhanced.timeouts`
 : Mesure le nombre de fois qu'une fonction a expiré.
 
-`aws.lambda.enhanced.out_of_memory`  
+`aws.lambda.enhanced.out_of_memory`
 : Mesure le nombre de fois qu'une fonction est arrivée à court de mémoire.
 
 ## Activer les métriques Lambda optimisées

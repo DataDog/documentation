@@ -39,7 +39,7 @@ draft: false
 git_integration_title: temporal
 integration_id: temporal
 integration_title: Temporal
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -76,7 +76,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Temporal チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -103,9 +103,16 @@ Temporal チェックは [Datadog Agent][3] パッケージに含まれていま
 
 2. [公式ドキュメント][6]に従って、Temporal Cluster がログをファイルに出力するように構成します。
 
-3. `temporal.d/conf.yaml` ファイルの logs 構成ブロックのコメントを外して編集し、`path` に Temporal Cluster で構成したファイルを指すように設定します。
+3. `temporal.d/conf.yaml` ファイルの logs 構成ブロックのコメントを解除して編集し、`path` が Temporal Cluster で構成したファイルを指すように設定します。
 
-3. [Agent を再起動します][7]。
+  ```yaml
+  logs:
+    - type: file
+      path: /var/log/temporal/temporal-server.log
+      source: temporal
+  ```
+
+4. [Agent を再起動します][7]。
 
 ### 検証
 
@@ -136,7 +143,7 @@ Temporal インテグレーションは、Temporal Cluster からログを収集
 
 [1]: https://temporal.io/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.temporal.io/references/configuration#prometheus
 [5]: https://github.com/DataDog/integrations-core/blob/master/temporal/datadog_checks/temporal/data/conf.yaml.example
 [6]: https://docs.temporal.io/references/configuration#log

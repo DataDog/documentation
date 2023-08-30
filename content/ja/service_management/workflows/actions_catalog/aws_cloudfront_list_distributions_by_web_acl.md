@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_cloudfront_list_distributions_by_web_acl
 bundle: com.datadoghq.aws.cloudfront
 bundle_title: AWS CloudFront
 description: WAF の Web ACL に関連するディストリビューションをリストアップします。

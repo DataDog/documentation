@@ -28,7 +28,7 @@ Personaliza tu configuración de recopilación de logs:
 * [Limpiar los datos confidenciales de tus logs](#scrub-sensitive-data-from-your-logs)
 * [Agregar logs multilínea](#multi-line-aggregation)
 * [Copiar los ejemplos más utilizados](#commonly-used-log-processing-rules)
-* [Usar comodines para monitorizar directorios](#tail-directories-by-using-wildcards)
+* [Usar comodines para monitorizar directorios](#tail-directories-using-wildcards)
 * [Especificar las codificaciones del archivo de logs](#log-file-encodings)
 * [Definir las reglas generales de procesamiento](#global-processing-rules)
 

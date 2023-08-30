@@ -9,7 +9,7 @@ further_reading:
   text: Datadog Agent の概要
 is_beta: true
 kind: ドキュメント
-private: true
+private: false
 title: Java のダイナミックインスツルメンテーションを有効にする
 type: multi-code-lang
 ---
@@ -20,9 +20,9 @@ type: multi-code-lang
 
 Datadog ダイナミックインスツルメンテーションライブラリは、JDK バージョン 8 以降でサポートされています。
 
-## APM に Datadog Agent を構成する
+## インストール
 
-1. Agent をバージョン [7.41.1][2]+ にインストールまたはアップグレードします。
+1. Agent のバージョン[7.44.0][2] 以上をインストールするか、アップグレードします。
 2. まだ APM を有効にしていない場合は、Agent の構成で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
 
 3. `dd-java-agent.jar` をダウンロードします。
@@ -30,7 +30,7 @@ Datadog ダイナミックインスツルメンテーションライブラリは
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-   **注**: ダイナミックインスツルメンテーションは、バージョン 1.8.0 以降の `dd-java-agent.jar` ライブラリで利用可能です。
+   **注**: ダイナミックインスツルメンテーションは、バージョン 1.15.0 以降の `dd-java-agent.jar` ライブラリで利用可能です。
 
 3. `-Ddd.dynamic.instrumentation.enabled` フラグ、または `DD_DYNAMIC_INSTRUMENTATION_ENABLED` 環境変数を `true` に設定し、ダイナミックインスツルメンテーションを有効にしてサービスを稼働させます。`dd.service`、`dd.env`、`dd.version` の統合サービスタグを指定すると、プローブをフィルターしたりグループ化したり、アクティブなクライアントをこれらの次元でターゲットにすることができるようになります。
    {{< tabs >}}

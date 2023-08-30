@@ -10,20 +10,20 @@ further_reading:
   text: テスト結果とパフォーマンスを確認する
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
-  text: トラブルシューティング CI
+  text: CI のトラブルシューティング
 kind: documentation
 title: Java テスト
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点では CI Visibility は使用できません。</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
 ## 互換性
 
 対応するテストフレームワーク:
 * JUnit >= 4.10 および >= 5.3
-* また、Spock Framework や Cucumber-Junit など、JUnit をベースにしたテストフレームワークも含まれます。**注**: JUnit 4 を使用する Cucumber v1 のみがサポートされています。
+  * また、Spock Framework や Cucumber-Junit などの JUnit ベースのテストフレームワークもすべて含まれます。 **注**: JUnit 4 を使用する Cucumber v1 にのみ対応しています。
 * TestNG >= 6.4
 
 対応するビルドシステム:
@@ -32,108 +32,52 @@ title: Java テスト
 
 ## 報告方法の構成
 
-Datadog にテスト結果を報告するには、Datadog の Java ライブラリを構成する必要があります。
+Datadog にテスト結果を報告するには、Datadog Java ライブラリを構成する必要があります。
 
 {{< tabs >}}
 
-{{% tab "オンプレミス CI プロバイダー (Datadog Agent)" %}}
+{{% tab "オンプレミスの CI プロバイダー (Datadog Agent)" %}}
 
-Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
+{{% ci-agent %}}
 
-CI プロバイダーがコンテナベースのエグゼキューターを使用している場合、すべてのビルドで `DD_AGENT_HOST` 環境変数 (デフォルトは `http://localhost:8126`) を、ビルドコンテナの中からアクセスできるエンドポイントに設定します。これは、ビルド内で `localhost` を使用すると、Datadog Agent が動作している基礎となるワーカーノードではなく、コンテナ自体が参照されてしまうためです。
-
-Kubernetes のエグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] の使用を推奨しており、これは自動的にビルドポッドの環境変数 `DD_AGENT_HOST` を設定してローカルの Datadog Agent と通信させます。
-
-
-[1]: /ja/agent/
-[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
-{{% tab "クラウド CI プロバイダー (Agentless)" %}}
+{{% tab "クラウドの CI プロバイダー (Agentless)" %}}
 
-<div class="alert alert-info">Agentless モードは、Datadog Java ライブラリのバージョン >= 0.101.0 で使用できます</div>
+<div class="alert alert-info">Agentless モードは Datadog Java ライブラリのバージョン >= 0.101.0 で利用できます。</div>
 
-GitHub Actions や CircleCI など、基盤となるワーカーノードにアクセスできないクラウド CI プロバイダーを使用している場合は、Agentless モードを使用するようにライブラリを構成します。そのためには、以下の環境変数を設定します。
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
-: Agentless モードを有効または無効にします。<br/>
-**デフォルト**: `false`
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][1]。<br/>
-**デフォルト**: `(empty)`
-
-さらに、どの [Datadog サイト][2]にデータを送信するかを構成します。
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][2]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+{{% ci-agentless %}}
 
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/getting_started/site/
-{{< /tabs >}}
-
+{{% /tab %}}
 {{< /tabs >}}
 
 ## トレーサーライブラリのダウンロード
 
 トレーサーライブラリのダウンロードは、サーバーごとに 1 回だけ行う必要があります。
 
-トレースライブラリがすでにサーバー上でローカルで利用可能な場合は、直接テストの実行に進むことができます。
+トレーサーライブラリがすでにサーバー上でローカルで利用可能な場合は、直接テストの実行に進むことができます。
 
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-[Maven リポジトリ][1]からアクセスできるアーティファクトの最新バージョン (前の `v` は削除: ![Maven Central][2]) で、変数 `DD_TRACER_VERSION` を宣言します。
+ダウンロードしたトレーサー JAR ファイルの保存先となるフォルダーへのパスで、変数 `DD_TRACER_FOLDER` を宣言します。
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // 例: 1.14.0
-{{< /code-block >}}
-
-以下のコマンドを実行して、トレーサーの JAR ファイルをローカルの Maven リポジトリにダウンロードします。
-
-{{< code-block lang="shell" >}}
-mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadoghq:dd-java-agent:$DD_TRACER_VERSION
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-[Maven リポジトリ][1]からアクセスできるアーティファクトの最新バージョン (前の `v` は削除: ![Maven Central][2]) で、変数 `DD_TRACER_VERSION` を宣言します。
-
-{{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // 例: 1.14.0
-{{< /code-block >}}
-
-ダウンロードした JAR ファイルの保存先となるフォルダーへのパスで、変数 `DD_TRACER_FOLDER` を宣言します。
-
-{{< code-block lang="shell" >}}
-DD_TRACER_FOLDER=... // 例: ~/.datadog
+export DD_TRACER_FOLDER=... // e.g. ~/.datadog
 {{< /code-block >}}
 
 以下のコマンドを実行して、トレーサーの JAR ファイルを指定したフォルダーにダウンロードします。
 
 {{< code-block lang="shell" >}}
-curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar --output $DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar
+wget -O $DD_TRACER_FOLDER/dd-java-agent.jar https://dtdg.co/latest-java-tracer
 {{< /code-block >}}
 
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-
-{{% /tab %}}
-{{< /tabs >}}
+`java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` コマンドを実行すると、トレーサーライブラリのバージョンを確認できます。
 
 ## テストの実行
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-環境変数が `DD_TRACER_VERSION` が、あらかじめダウンロードしているトレーサーのバージョンに設定されていることを確認してください。
+`DD_TRACER_FOLDER` 変数には、トレーサーをダウンロードしたパスを設定してください。
 
 環境変数 `MAVEN_OPTS` を使って Datadog Java トレーサー JAR ファイルへのパスを指定し、テストを実行します。
 
@@ -146,32 +90,33 @@ curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSI
 例:
 
 {{< code-block lang="shell" >}}
-MVN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
-MAVEN_OPTS=-javaagent:$MVN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
+MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app \
-mvn clean verify -Pdd-civisibility
+mvn clean verify
 {{< /code-block >}}
+
+`mvn verify` または `mvn test` ゴールは、インテグレーションテストを実行するために Maven Failsafe プラグインを実行するかどうかに応じて、どちらでも構いません。
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-環境変数 `DD_TRACER_VERSION` があらかじめダウンロードしたトレーサーのバージョンに、そして変数 `DD_TRACER_FOLDER` がトレーサーのダウンロード先のパスに設定されていることを確認します。
+`DD_TRACER_FOLDER` 変数には、トレーサーをダウンロードしたパスを設定してください。
 
 システムプロパティ `org.gradle.jvmargs` を使って Datadog Java トレーサー JAR ファイルへのパスを指定し、テストを実行します。
 
 トレーサーの引数を指定する際は、以下の情報を設定します。
 
-* `dd.civisibility.enabled` プロパティを `true` に設定して、CI Visibility を有効にします。
+* プロパティ `dd.civisibility.enabled` を `true` に設定して、CI Visibility を有効にします。
 *  `dd.env property` を使用して、テストが実行される環境を定義します (例: 開発者のワークステーションでテストを実行するときは `local`、CI プロバイダーで実行するときは `ci`)。
-* テストされるサービスまたはライブラリの名前を `dd.service property`  で定義します。
+* テストされるサービスまたはライブラリの名前を `dd.service property` で定義します。
 
 例:
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test -Pdd-civisibility --rerun-tasks -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar=\
+./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
+-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app
@@ -359,69 +304,15 @@ public class ManualTest {
 
 最後に必ず `datadog.trace.api.civisibility.DDTestSession#end` を呼び出し、すべてのテスト情報を Datadog に流すようにします。
 
-## コンフィギュレーション設定
+## 構成設定
 
-[Datadog トレーサーのコンフィギュレーション][2]オプションは、トレーサーの挙動を微調整するために利用可能です。
+[Datadog トレーサーの構成][2]オプションは、トレーサーの挙動を微調整するために利用可能です。
 
-### Git のメタデータを収集する
+## リポジトリの収集とメタデータのコミット
 
-Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、コミットごとにグループ化するために Git の情報を使用します。Git のメタデータは、CI プロバイダーの環境変数や、プロジェクトパス内のローカルな `.git` フォルダがあれば、そこからテストインスツルメンテーションによって自動的に収集されます。
+{{% ci-git-metadata %}}
 
-サポートされていない CI プロバイダーでテストを実行する場合や、`.git` フォルダがない場合は、環境変数を使って Git の情報を手動で設定することができます。これらの環境変数は、自動検出された情報よりも優先されます。Git の情報を提供するために、以下の環境変数を設定します。
-
-`DD_GIT_REPOSITORY_URL`
-: コードが格納されているリポジトリの URL。HTTP と SSH の両方の URL に対応しています。<br/>
-**例**: `git@github.com:MyCompany/MyApp.git`、`https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: テスト中の Git ブランチ。タグ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `develop`
-
-`DD_GIT_TAG`
-: テストされる Git タグ (該当する場合)。ブランチ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: フルコミットハッシュ。<br/>
-**例**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: コミットのメッセージ。<br/>
-**例**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: コミット作成者名。<br/>
-**例**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: コミット作成者メールアドレス。<br/>
-**例**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: ISO 8601 形式のコミット作成者の日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: コミットのコミッター名。<br/>
-**例**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: コミットのコミッターのメールアドレス。<br/>
-**例**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: ISO 8601 形式のコミットのコミッターの日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
-
-## 収集した情報
-
-CI Visibility を有効にすると、プロジェクトから以下のデータが収集されます。
-
-* テストの名前と時間。
-* CI プロバイダーが設定する事前定義された環境変数。
-* Git のコミット履歴。ハッシュ、メッセージ、作成者情報、変更されたファイル (ファイルの内容は含まず) が含まれます。
-* ソースコード情報: テストクラスのソースへの相対パス、テストメソッドの行番号。
-* CODEOWNERS ファイルからの情報。
+{{% ci-information-collected %}}
 
 ## トラブルシューティング
 
@@ -429,7 +320,7 @@ CI Visibility を有効にすると、プロジェクトから以下のデータ
 
 最新バージョンのトレーサーを使用していることを確認してください。
 
-ビルドシステムとテストフレームワークが CI Visibility でサポートされていることを確認します。[サポートされているビルドシステムとテストフレームワーク](#compatibility) のリストを参照してください。
+ビルドシステムとテストフレームワークが CI Visibility でサポートされていることを確認します。[サポートされているビルドシステムとテストフレームワーク](#compatibility)のリストを参照してください。
 
 トレーサーの引数で、プロパティ `dd.civisibility.enabled` が `true` に設定されていることを確認します。
 

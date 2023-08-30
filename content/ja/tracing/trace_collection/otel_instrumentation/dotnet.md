@@ -1,7 +1,7 @@
 ---
 code_lang: dotnet
 code_lang_weight: 80
-description: OTel API で .NET アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
+description: OpenTelemetry API で .NET アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
@@ -17,19 +17,19 @@ type: multi-code-lang
 
 - Datadog .NET トレースライブラリ `dd-trace-dotnet` バージョン 2.21.0 以上。
 
-特記されている通り、Datadog のライブラリに実装されている以下の OTel 機能:
+特記されている通り、Datadog のライブラリに実装されている以下の OpenTelemetry 機能:
 
-| 機能                               | サポートノート                       |
-|---------------------------------------|--------------------------------------|
-| OTel コンテキスト伝搬              | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
-| [スパンプロセッサー][2]                  | 非サポート                                          |
-| [スパンエクスポーター][3]                   | 非サポート                                            |
-| トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
+| 機能                               | サポートノート                                           |
+|---------------------------------------|---------------------------------------------------------|
+| OpenTelemetry コンテキスト伝搬     | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
+| [スパンプロセッサー][2]                  | 非サポート                                             |
+| [スパンエクスポーター][3]                   | 非サポート                                             |
+| トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。                |
 
 
-## Datadog トレースプロバイダーを使用するための OTel の構成
+## Datadog トレースプロバイダーを使用するための OpenTelemetry の構成
 
-1. [OTel .NET Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OTel インスツルメンテーションを .NET コードに追加します。
+1. [OpenTelemetry .NET Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OpenTelemetry インスツルメンテーションを .NET コードに追加します。
 2. Datadog .NET トレーシングライブラリをインストールし、[.NET Framework サービス][10]または [.NET Core (および .NET 5+) サービス][11]のトレーサーを有効にします。
 3. `DD_TRACE_OTEL_ENABLED` 環境変数を `true` に設定します。
 4. アプリケーションを実行します。

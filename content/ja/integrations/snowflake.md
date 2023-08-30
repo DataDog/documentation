@@ -35,7 +35,7 @@ draft: false
 git_integration_title: snowflake
 integration_id: snowflake
 integration_title: Snowflake
-integration_version: 4.5.2
+integration_version: 4.5.4
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -142,10 +142,10 @@ datadog-agent integration install datadog-snowflake==2.0.1
         #
       - account: <ORG_NAME>-<ACCOUNT_NAME>
 
-        ## @param user - string - required
+        ## @param username - string - required
         ## Login name for the user.
         #
-        user: <USER>
+        username: <USER>
 
         ## @param password - string - required
         ## Password for the user
@@ -371,7 +371,7 @@ Snowflake には、イベントは含まれません。
 
 
 [1]: https://www.snowflake.com/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-v6-python-3/?tab=hostagent
 [4]: https://docs.snowflake.com/en/sql-reference/account-usage.html#enabling-account-usage-for-other-roles
 [5]: https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example

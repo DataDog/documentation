@@ -85,7 +85,7 @@ Datadog で CouchDB データをキャプチャすると、以下のことが可
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 CouchDB チェックは [Datadog Agent][2] パッケージに含まれています。CouchDB サーバーに追加でインストールする必要はありません。
 

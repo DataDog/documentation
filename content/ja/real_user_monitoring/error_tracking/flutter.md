@@ -70,6 +70,8 @@ DatadogSdk.instance.initialize(configuration);
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms
 ```
 
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
+
 オプションの完全なリストは、`datadog-ci` [Flutter Symbols のドキュメント][6]を参照してください。
 
 ## 高度な構成 - フレーバーとビルド番号

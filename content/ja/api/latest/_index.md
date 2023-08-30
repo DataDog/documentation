@@ -42,7 +42,7 @@ API を実行するには、[![Postman で実行][3]](https://god.gw.postman.com
 {{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 Maven - この依存関係をプロジェクトの POM に追加します。
 ```xml
 <dependency>
@@ -118,7 +118,7 @@ application {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-legacy" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 ```sh
 pip install datadog
 ```
@@ -129,7 +129,7 @@ import datadog
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 ```console
 pip3 install datadog-api-client
 ```
@@ -140,7 +140,7 @@ import datadog_api_client
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-legacy" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 ```sh
 gem install dogapi
 ```
@@ -151,7 +151,7 @@ require 'dogapi'
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
@@ -162,7 +162,7 @@ require 'datadog_api_client'
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
@@ -177,7 +177,7 @@ import (
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
-#### APM に Datadog Agent を構成する
+#### インストール
 パッケージは [@datadog/datadog-api-client][1] の下にあり、NPM または Yarn を介してインストールできます。
 
 ```js

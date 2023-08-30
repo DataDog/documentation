@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-syntheticemail
 app_uuid: c3b29bd1-fb32-44ed-aaf5-34d6b8d84bbb
 assets:

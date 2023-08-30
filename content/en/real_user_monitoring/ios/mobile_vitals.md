@@ -26,7 +26,7 @@ To access the RUM mobile app performance dashboard, scroll down to the Monitor P
 
 Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph. 
 
-{{< img src="real_user_monitoring/ios/rum_explorer_mobile_vitals.png" alt="Event Timings and Mobile Vitals in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/ios/rum_explorer_mobile_vitals-3.png" alt="Event Timings and Mobile Vitals in the RUM Explorer" style="width:90%;">}}
 
 You can also select a view in the RUM Explorer and observe recommended benchmark ranges that directly correlate to your application's user experience in the session. Click on a metric such as **Refresh Rate Average** and click **Search Views With Poor Performance** to apply a filter in your search query and examine additional views.
 

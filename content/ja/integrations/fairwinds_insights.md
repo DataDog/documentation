@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: fairwinds-insights
 app_uuid: a488d774-fd45-4765-b947-e48792c6ab32
 assets:

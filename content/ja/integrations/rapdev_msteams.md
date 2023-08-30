@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-msteams
 app_uuid: 38da0072-43b5-44e8-a303-1e504bcc0879
 assets:
@@ -59,7 +61,7 @@ pricing:
   short_description: 会議参加者 1 人あたりの単価
   tag: meeting_participant
   unit_label: 会議参加者
-  unit_price: 1.0
+  unit_price: 0.1
 public_title: Microsoft Teams
 short_description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
 supported_os:

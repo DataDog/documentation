@@ -10,6 +10,7 @@ further_reading:
 kind: documentation
 title: RUM React Native の高度な構成
 ---
+
 ## 概要
 
 まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[React Native セットアップドキュメント][2]を参照してください。
@@ -105,7 +106,7 @@ React Native のクラッシュの収集を有効にします。
 : オプション<br/>
 **タイプ**: ブール値<br/>
 **デフォルト**: `true` <br/>
-[ユーザーのフラストレーションの自動収集][11]を有効にします。`trackInteractions: true` を意味します。
+[ユーザーのフラストレーションの自動収集][11]を有効にします。エラータップにのみ対応しています。`trackInteractions: true` を意味します。
 
 `nativeCrashReportEnabled`
 : オプション<br/>
@@ -251,12 +252,7 @@ DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 // RUM Resource を手動で追跡
 DdRum.startResource(
-    '<res-key>',
-    'GET',
-    'http://www.example.com/api/v1/test',
-    {},
-    Date.now()
-);
+    '<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
 //...
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 
@@ -279,10 +275,10 @@ const config = new DdSdkReactNativeConfiguration(
     true, // XHR リソースの追跡
     true // エラーの追跡
 );
-config.logEventMapper = event => event;
-config.errorEventMapper = event => event;
-config.resourceEventMapper = event => event;
-config.actionEventMapper = event => event;
+config.logEventMapper = (event) => event;
+config.errorEventMapper = (event) => event;
+config.resourceEventMapper = (event) => event;
+config.actionEventMapper = (event) => event;
 ```
 
 各マッパーは `(T) -> T?` というシグネチャを持つ関数で、 `T` は具象的な RUM イベントの型です。これは、送信される前にイベントの一部を変更したり、イベントを完全に削除したりすることができます。
@@ -290,7 +286,7 @@ config.actionEventMapper = event => event;
 例えば、RUM のエラー `message` から機密情報を削除するには、カスタム `redacted` 関数を実装して、それを `errorEventMapper` で使用します。
 
 ```javascript
-config.errorEventMapper = event => {
+config.errorEventMapper = (event) => {
     event.message = redacted(event.message);
     return event;
 };
@@ -339,11 +335,7 @@ config.errorEventMapper = event => {
 アプリの起動時に多くのアニメーションが含まれている場合、これらのアニメーション中にコードを実行すると、一部のデバイスでアニメーションが遅延する可能性があります。Datadog React Native SDK for RUM の実行を、現在のアニメーションが全て開始された後に遅延させるには、構成で `initializationMode` を `InitializationMode.ASYNC` に設定します。
 
 ```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration,
-    InitializationMode
-} from '@datadog/mobile-react-native';
+import { DatadogProvider, DatadogProviderConfiguration, InitializationMode } from '@datadog/mobile-react-native';
 
 const datadogConfiguration = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
@@ -379,10 +371,7 @@ SDK を初期化する前に待ちたい状況があるかもしれません。�
 その場合、アプリを最初から自動インスツルメンテーション (ユーザーインタラクション、XHR リソース、エラーを自動的に収集) し、SDK を初期化する前に最大 100 の RUM およびスパンイベントを記録することが可能です。
 
 ```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProvider, DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const datadogAutoInstrumentation = {
     trackErrors: true,
@@ -411,11 +400,7 @@ export default function App() {
 構成に次のキーがある場合:
 
 ```js
-import {
-    ProxyConfig,
-    SdkVerbosity,
-    TrackingConsent
-} from '@datadog/mobile-react-native';
+import { ProxyConfig, SdkVerbosity, TrackingConsent } from '@datadog/mobile-react-native';
 
 const configuration = {
     clientToken: '<CLIENT_TOKEN>',

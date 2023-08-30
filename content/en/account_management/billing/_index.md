@@ -94,7 +94,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 
 {{< whatsnext desc="Specific billing topics:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_details/" >}}Usage details{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Usage details{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}Usage Metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Credit card{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}

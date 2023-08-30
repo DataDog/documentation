@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_cloudfront_getAWSCloudFrontDistribution
 bundle: com.datadoghq.aws.cloudfront
 bundle_title: AWS CloudFront
 description: ディストリビューションの詳細を取得します。

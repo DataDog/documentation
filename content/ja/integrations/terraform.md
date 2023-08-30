@@ -62,7 +62,7 @@ Datadog Terraform プロバイダーは Terraform コンフィギュレーショ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介して利用することができます。
 

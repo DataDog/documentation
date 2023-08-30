@@ -94,7 +94,7 @@ title: 모니터 상태
 
 메트릭 평가를 더 자세히 살펴보려면 상태 그래프에서 **노트북에서 열기**를 클릭합니다. 그러면 모니터 쿼리에 대한 형식화된 그래프와 함께 조사 [노트북][8]이 생성됩니다.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="노트북에서 열기 버튼" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="노트북에서 열기 버튼" style="width:90%;">}}
 
 노트북은 모니터 평가 기간 범위와 일치해야 하며 해당 경우 관련 로그를 포함합니다.
 

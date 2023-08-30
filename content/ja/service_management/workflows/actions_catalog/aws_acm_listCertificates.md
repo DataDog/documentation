@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_acm_listCertificates
 bundle: com.datadoghq.aws.acm
 bundle_title: AWS Certificate Manager
 description: 証明書の ARN とドメイン名の一覧を取得します。

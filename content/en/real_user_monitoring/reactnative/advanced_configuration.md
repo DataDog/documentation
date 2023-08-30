@@ -3,15 +3,14 @@ title: RUM React Native Advanced Configuration
 kind: documentation
 description: Learn about advanced configuration options for your React Native setup.
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
-  text: Source code for dd-sdk-reactnative
-- link: real_user_monitoring/reactnative/
-  tag: Documentation
-  text: Learn about React Native monitoring
-
-
+    - link: https://github.com/DataDog/dd-sdk-reactnative
+      tag: GitHub
+      text: Source code for dd-sdk-reactnative
+    - link: real_user_monitoring/reactnative/
+      tag: Documentation
+      text: Learn about React Native monitoring
 ---
+
 ## Overview
 
 If you have not set up the SDK yet, follow the [in-app setup instructions][1] or see the [React Native RUM setup documentation][2].
@@ -45,7 +44,7 @@ describe('App', () => {
 
 If you use a test runner other than Jest, you need to create the mocks for your test runner.
 
-## Initialization paramaters
+## Initialization parameters
 
 You can specify the following parameters in your configuration when initializing the SDK:
 
@@ -107,7 +106,7 @@ Add a suffix to the reported version of the app. Accepted characters are alphanu
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `true` <br/>
-Enables [automatic collection of user frustrations][11]. Implies `trackInteractions: true`.
+Enables [automatic collection of user frustrations][11]. Only error taps are supported. Implies `trackInteractions: true`.
 
 `nativeCrashReportEnabled`
 : Optional<br/>
@@ -254,13 +253,7 @@ DdRum.addTiming('<timing-name>');
 DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 // Track RUM Resource manually
-DdRum.startResource(
-    '<res-key>',
-    'GET',
-    'http://www.example.com/api/v1/test',
-    {},
-    Date.now()
-);
+DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
 //…
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 
@@ -283,10 +276,10 @@ const config = new DdSdkReactNativeConfiguration(
     true, // track XHR resources
     true // track errors
 );
-config.logEventMapper = event => event;
-config.errorEventMapper = event => event;
-config.resourceEventMapper = event => event;
-config.actionEventMapper = event => event;
+config.logEventMapper = (event) => event;
+config.errorEventMapper = (event) => event;
+config.resourceEventMapper = (event) => event;
+config.actionEventMapper = (event) => event;
 ```
 
 Each mapper is a function with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent, or dropping the event entirely.
@@ -294,7 +287,7 @@ Each mapper is a function with a signature of `(T) -> T?`, where `T` is a concre
 For example, to redact sensitive information from a RUM error `message`, implement a custom `redacted` function and use it in `errorEventMapper`:
 
 ```javascript
-config.errorEventMapper = event => {
+config.errorEventMapper = (event) => {
     event.message = redacted(event.message);
     return event;
 };
@@ -343,11 +336,7 @@ Resource tracking provides the following timings:
 If your app includes a lot of animations when it starts, running code during these animations might delay them on some devices. To delay the Datadog React Native SDK for RUM to run after all current animations are started, set the `initializationMode` to `InitializationMode.ASYNC` in your configuration:
 
 ```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration,
-    InitializationMode
-} from '@datadog/mobile-react-native';
+import { DatadogProvider, DatadogProviderConfiguration, InitializationMode } from '@datadog/mobile-react-native';
 
 const datadogConfiguration = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
@@ -383,10 +372,7 @@ There may be situations where you want to wait before initializing the SDK. For 
 In that case, you can auto-instrument your app from the start (automatically collect user interactions, XHR resources, and errors) and record up to 100 RUM and span events before initializing the SDK.
 
 ```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProvider, DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const datadogAutoInstrumentation = {
     trackErrors: true,
@@ -415,11 +401,7 @@ export default function App() {
 Where your configuration has the following keys:
 
 ```js
-import {
-    ProxyConfig,
-    SdkVerbosity,
-    TrackingConsent
-} from '@datadog/mobile-react-native';
+import { ProxyConfig, SdkVerbosity, TrackingConsent } from '@datadog/mobile-react-native';
 
 const configuration = {
     clientToken: '<CLIENT_TOKEN>',
@@ -453,4 +435,4 @@ const configuration = {
 [9]: /getting_started/site/
 [11]: /real_user_monitoring/frustration_signals/
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
-[15]: /getting_started/tagging/#defining-tags
+[15]: /getting_started/tagging/#define-tags

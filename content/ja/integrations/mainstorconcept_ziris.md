@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: mainstorconcept-ziris
 app_uuid: dc8b4d40-72a3-46c2-9f9a-ffaadaeacb83
 assets:

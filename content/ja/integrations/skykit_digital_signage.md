@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: skykit-digital-signage-license
 app_uuid: f1d99715-3b71-4caa-9682-09224b8419dd
 assets: {}

@@ -97,6 +97,9 @@ Agent バージョン >= 6.19 または 7.19 が必要です。
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
 ```
 
+**注:** Continuous Profiler 製品の追加エンドポイントへのアップロードは、ベストエフォート型配信で行われます。
+* メインエンドポイントが最も優先されます。追加のエンドポイントへのアップロードは、メインエンドポイントへのアップロードが正常に完了した後にのみ処理されます。
+* 追加エンドポイントからの応答は、プロファイラーに転送されません。追加エンドポイントへの配信中に発生したエラーは、Agent のエラーログに記録されます。
 
 ## ライブプロセス
 

@@ -247,12 +247,130 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
 [2]: https://docs.datadoghq.com/fr/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+Utilisez ce format pour votre [ressource Terraform][1] :
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Assurez-vous de choisir les couches adéquates en fonction de votre architecture Lambda et de vos régions
+
+  layers = [
+    <ARN_TRACEUR_DATADOG>,
+    <ARN_EXTENSION_DATADOG>
+  ]
+
+  handler = "datadog_lambda.handler.handler"
+
+  environment {
+    variables = {
+      DD_SITE                     = <SITE_DATADOG>
+      DD_API_KEY_SECRET_ARN       = <CLÉ_API>
+      DD_LAMBDA_HANDLER           = <GESTIONNAIRE_LAMBDA>
+    }
+  }
+}
+```
+
+Renseignez les variables adéquates :
+
+1. Remplacez `<ARN_TRACEUR_DATADOG>` par l'ARN du traceur Datadog adéquat en fonction de votre région et de votre architecture :
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>ARCHITECTURE</th>
+            <th>LAYER</th>
+        </tr>
+        <tr>
+            <td rowspan=2>Commercial</td>
+            <td>x86_64</td>
+            <td><code>arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-&lt;RUNTIME&gt;:{{< latest-lambda-layer-version layer="python" >}}</code></td>
+        <tr>
+            <td>arm64</td>
+            <td><code>arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-&lt;RUNTIME&gt;-ARM:{{< latest-lambda-layer-version layer=python" >}}</code></td>
+        </tr>
+        <tr>
+            <td rowspan=2>GovCloud</td>
+            <td>x86_64</td>
+            <td><code>arn:aws:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-&lt;RUNTIME&gt;:{{< latest-lambda-layer-version layer="python" >}}</code></td>
+        <tr>
+            <td>arm64</td>
+            <td><code>arn:aws:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-&lt;RUNTIME&gt;-ARM:{{< latest-lambda-layer-version layer="python" >}}</code></td>
+        </tr>
+    </table>
+
+   Dans l'ARN, remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Remplacez `<RUNTIME>` par `Python37`, `Python38` ou `Python39`.
+
+2. Remplacez `<ARN_EXTENSION_DATADOG>` par l'ARN de l'extension Lambda Datadog adéquate en fonction de votre région et de votre architecture.
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>ARCHITECTURE</th>
+            <th>LAYER</th>
+        </tr>
+        <tr>
+            <td rowspan=2>Commercial</td>
+            <td>x86_64</td>
+            <td><code>arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}</code></td>
+        <tr>
+            <td>arm64</td>
+            <td><code>arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}</code></td>
+        </tr>
+        <tr>
+            <td rowspan=2>GovCloud</td>
+            <td>x86_64</td>
+            <td><code>arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}</code></td>
+        </tr>
+        <tr>
+            <td>arm64</td>
+            <td><code>arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}</code></td>
+        </tr>
+    </table>
+
+   Dans l'ARN, remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+
+3. Remplacez `<DATADOG_SITE>` par {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
+
+4. Remplacez `CLÉ_API` par l'ARN du secret AWS où votre clé d'API Datadog est stockée de façon sécurisée. La clé doit être stockée sous forme de chaîne de texte brut (et non en tant que blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour effectuer un test rapide, vous pouvez également utiliser `DD_API_KEY` au lieu de `DD_API_KEY_SECRET_ARN` et définir la valeur sur votre clé d'API Datadog sous forme de texte brut.
+
+5. Remplacez `GESTIONNAIRE_LAMBDA` par votre gestionnaire d'origine, par exemple `myfunc.handler`.
+
+#### Exemple complet
+
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Assurez-vous de choisir les couches adéquates en fonction de votre architecture Lambda et de vos régions AWS
+
+  layers = [
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python39:78",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+  ]
+
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+
+  environment {
+    variables = {
+      DD_SITE                     = "datadoghq.com"
+      DD_API_KEY_SECRET_ARN       = "arn:aws..."
+      DD_LAMBDA_HANDLER           = "myfunc.handler"
+
+    }
+  }
+}
+```
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+{{% /tab %}}
 {{% tab "Configuration personnalisée" %}}
 
 <div class="alert alert-info">Si vous n'utilisez pas l'un des outils de développement sans serveur pris en charge par Datadog, tels que Serverless Framework ou AWS CDK, Datadog vous recommande vivement d'instrumenter vos applications sans serveur avec l'<a href="./?tab=datadogcli">interface de ligne de commande Datadog</a>.</div>
 
-
-{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Installer la bibliothèque Lambda Datadog
 
     La bibliothèque Lambda Datadog peut être importée en tant que couche (conseillé) _OU_ en tant que package Python.
@@ -275,7 +393,7 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
       ```
 
-      Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options `RUNTIME` disponibles sont `Python37`, `Python38` et `Python39`.
+      Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Python37`, `Python38`, `Python39`, `Python310` et `Python311`.
 
     - Option B : si vous ne pouvez pas utiliser la couche Lambda Datadog prédéfinie, vous avez la possibilité d'installer localement le package `datadog-lambda` et ses dépendances dans le dossier du projet de votre fonction via votre gestionnaire de package Python préféré, par exemple `pip`.
 
@@ -307,77 +425,6 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
 
     Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[5]: https://pypi.org/project/datadog-lambda/
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. Installer la bibliothèque Lambda Datadog
-
-    La bibliothèque Lambda Datadog peut être importée en tant que couche (conseillé) _OU_ en tant que package Python.
-
-    La version mineure du package `datadog-lambda` correspond toujours à la version de la couche. Par exemple, datadog-lambda v0.5.0 correspond au contenu de la version 5 de la couche.
-
-    - Option A : [configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format ci-dessous :
-
-      ```sh
-      # Use this format for x86-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
-
-      # Use this format for arm64-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
-
-      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
-
-      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
-      ```
-
-      Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options `RUNTIME` disponibles sont `Python37`, `Python38` et `Python39`.
-
-    - Option B : si vous ne pouvez pas utiliser la couche Lambda Datadog prédéfinie, vous avez la possibilité d'installer localement le package `datadog-lambda` et ses dépendances dans le dossier du projet de votre fonction via votre gestionnaire de package Python préféré, par exemple `pip`.
-
-      ```sh
-      pip install datadog-lambda -t ./
-      ```
-
-      **Remarque** : `datadog-lambda` dépend de `ddtrace`, qui a recours à des extensions natives ; il doit donc être installé et compilé dans un environnement Linux avec la bonne architecture (`x86_64` ou `arm64`). Par exemple, vous pouvez utiliser [dockerizePip][2] pour le plug-in Serverless Framework et [--use-container][3] pour AWS SAM. Pour en savoir plus, consultez la [documentation relative à l'ajout de dépendances à votre package de déploiement de fonction][4].
-
-      Consultez la [dernière version][5].
-
-2. Installer l'extension Lambda Datadog
-
-    [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
-
-    ```sh
-    # Use this format for x86-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for arm64-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-    ```
-
-    Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[5]: https://pypi.org/project/datadog-lambda/
-{{< /site-region >}}
-
-
-
 3. Rediriger la fonction du gestionnaire
 
     - Définissez le gestionnaire de votre fonction sur `datadog_lambda.handler.handler`.
@@ -408,7 +455,11 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
         return {'hello': 'world'}
     ```
 
-
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
 [6]: https://docs.datadoghq.com/fr/serverless/guide/handler_wrapper
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://aws.github.io/chalice/
@@ -419,6 +470,7 @@ La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur
 ## Et ensuite ?
 
 - Vous pouvez désormais visualiser des métriques, logs et traces sur la [page d'accueil Serverless][1].
+- Activez la [surveillance des menaces][6] pour recevoir des alertes en cas d'attaques ciblant votre service.
 - Consultez l'exemple de code pour [surveiller une logique opérationnelle personnalisée](#surveiller-une-logique operationnelle-personnalisee).
 - Consultez le [guide de dépannage][2] si vous ne parvenez pas à recueillir les données de télémétrie.
 - Examinez les [configurations avancées][3] pour :
@@ -475,3 +527,4 @@ def get_message():
 [3]: /fr/serverless/configuration/
 [4]: /fr/serverless/custom_metrics?tab=python
 [5]: /fr/tracing/custom_instrumentation/python/
+[6]: /fr/security/application_security/enabling/serverless/?tab=serverlessframework

@@ -2,8 +2,6 @@
 aliases:
 - /ja/tracing/setup_overview/setup/android
 - /ja/tracing/setup/android
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Android アプリケーションからトレースを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android

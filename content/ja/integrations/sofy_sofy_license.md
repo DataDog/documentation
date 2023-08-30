@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: sofy-sofy-license
 app_uuid: da7fd688-3ed6-4ecc-808a-604fba2ae168
 assets: {}

@@ -40,6 +40,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
   tag: "Blog"
   text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
@@ -76,6 +79,29 @@ Select an application type to start collecting RUM data:
 {{< partial name="rum/rum-getting-started.html" >}}
 
 </br>
+
+### Capabilities and platform support
+
+**Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
+
+The following table shows which RUM capabilities are supported on each platform:
+
+| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | Notes |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
+| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
+| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** supports only manual action tracking. |
+| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for **React Native** |
+| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
+| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
+| Session Replay | {{< X >}} |  |  |  |  |  |  |
+| Heatmaps | {{< X >}} |  |  |  |  |  |  |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains
 

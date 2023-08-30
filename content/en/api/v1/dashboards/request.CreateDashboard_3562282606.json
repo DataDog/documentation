@@ -25,7 +25,8 @@
                 "slo_id": "string",
                 "measure": "slo_status",
                 "group_mode": "overall",
-                "slo_query_type": "metric"
+                "slo_query_type": "metric",
+                "additional_query_filters": "*"
               }
             ],
             "response_format": "scalar",

@@ -7,11 +7,11 @@ code_lang_weight: 30
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'
-      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
+      text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
 ---
 
 
-The Datadog APM tracer supports extraction and injection of [B3][8] and [W3C][10] headers for distributed tracing.
+The Datadog APM tracer supports extraction and injection of [B3][8] and [W3C Trace Context][10] headers for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Supported styles are:

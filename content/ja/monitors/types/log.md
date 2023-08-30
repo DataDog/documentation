@@ -12,6 +12,9 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
+- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
+  tag: ブログ
+  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
 kind: documentation
 title: ログモニター
 ---
@@ -24,7 +27,7 @@ title: ログモニター
 
 Datadog で[ログモニター][3]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> Logs* の順に進みます。
 
-<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 ログモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 ログモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/#アラートのグループ化">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
 ### 検索クエリを定義する
 
@@ -78,7 +81,7 @@ Datadog で[ログモニター][3]を作成するには、メインナビゲー�
 
 #### ログのサンプルと違反値トップリスト
 
-ログモニターがトリガーされると、サンプルまたは値が通知メッセージに追加されます。
+ログモニターがトリガーされると、サンプルまたは値を通知メッセージに追加できます。メッセージのないログはサンプルに含まれません。モニターのメッセージにログ属性の内容を追加するには、モニターのメッセージ本文に直接ログモニター[テンプレート変数][9]を使用します。
 
 | モニター設定                    | 通知メッセージに追加可能な値 |
 |----------------------------------|--------------------------------------|
@@ -87,7 +90,7 @@ Datadog で[ログモニター][3]を作成するには、メインナビゲー�
 | グループ化された Multi Alert ログ数    | 最大 10 個のログサンプル。                |
 | グループ化されていない Simple-Alert メジャー   | 最大 10 個のログサンプル。                |
 | グループ化された Simple-Alert メジャー     | 最大 10 個のファセット値またはメジャー値。    |
-| グループ化された Multi Alert ログ数    | 最大 10 個のファセット値またはメジャー値。    |
+| グループ化された Multi-Alert Log メジャー  | 最大 10 個のファセット値またはメジャー値。    |
 
 これらの通知の送信に、Slack、Jira、webhooks、Microsoft Teams、Pagerduty、電子メールを使用することができます。**注**: サンプルはリカバリ通知には表示されません。
 
@@ -113,3 +116,4 @@ Datadog で[ログモニター][3]を作成するには、メインナビゲー�
 [6]: /ja/logs/explorer/facets/#measures
 [7]: /ja/monitors/configuration/#advanced-alert-conditions
 [8]: /ja/monitors/notify/
+[9]: /ja/monitors/notify/variables/?tab=is_alert#matching-attributetag-variables

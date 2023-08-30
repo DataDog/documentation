@@ -9,7 +9,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility パイプライン",
-    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計します。"
+    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計し、Datadog サイトに送信します。"
   },
   "ci-visibility-tests": {
     "name": "CI Visibility テスト",
@@ -30,6 +30,10 @@
   "dashboard-lists": {
     "name": "ダッシュボードリスト",
     "description": "API を介してすべてのダッシュボードを整理、検索、およびチームや組織と共有できます。"
+  },
+  "downtimes": {
+    "name": "ダウンタイム",
+    "description": "**注**: Downtime V2 は現在非公開ベータ版です。アクセスをリクエストするには、[Datadog サポート](https://docs.datadoghq.com/help/)までご連絡ください。\n\n[ダウンタイム設定](https://docs.datadoghq.com/monitors/notify/downtimes)を使用すると、アラートからいくつかのスコープをグローバルに除外することができ、モニター通知をより詳細に制御できます。ダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
   },
   "events": {
     "name": "イベント",
@@ -105,7 +109,7 @@
   },
   "restriction-policies": {
     "name": "制限ポリシー",
-    "description": "制限ポリシーは、リソースのアクセス制御ルールを定義し、一連の関係 (編集者と閲覧者など) を、許可されたプリンシパル (ロールなど) のセットにマッピングします。制限ポリシーは、リソースに対して誰がどのようなアクションを実行することが認可されるかを決定します。"
+    "description": "制限ポリシーは、リソースのアクセス制御ルールを定義し、一連の関係 (編集者と閲覧者など) を、許可されたプリンシパル (ロール、チーム (ベータ版)、ユーザー (ベータ版) など) のセットにマッピングします。制限ポリシーは、リソースに対して誰がどのようなアクションを実行することが認可されるかを決定します。"
   },
   "roles": {
     "name": "ロール",
@@ -126,6 +130,10 @@
   "service-definition": {
     "name": "サービス定義",
     "description": "サービス定義の作成、更新、取得、削除を行うための API。"
+  },
+  "spans": {
+    "name": "スパン",
+    "description": "Datadog プラットフォームから HTTP 経由でスパンを検索し、集計します。"
   },
   "spans-metrics": {
     "name": "スパンメトリクス",

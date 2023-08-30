@@ -4,7 +4,7 @@ further_reading:
   tag: ブログ
   text: Datadog で Azure App Service 上の Linux Web アプリを監視する
 kind: documentation
-title: Azure App Service - Linux
+title: Azure App Service - Linux コード
 ---
 ## 概要
 
@@ -28,7 +28,7 @@ title: Azure App Service - Linux
 - `DD_CUSTOM_METRICS_ENABLED` (オプション) は[カスタムメトリクス](#custom-metrics)を有効にします。
 - `DD_SITE` は Datadog サイト[パラメーター][2]です。サイトは {{< region-param key="dd_site" code="true" >}} です。この値のデフォルトは `datadoghq.com` です。
 - `DD_SERVICE` はこのプログラムで使用するサービス名です。デフォルトは `package.json` の名前フィールドの値です。
-- `DD_START_APP` はアプリケーションの起動に使用するコマンドです。例えば、`node ./bin/www` です。
+- `DD_START_APP` はアプリケーションの起動に使用するコマンドです。例えば、`node ./bin/www` です (Tomcat で動作するアプリケーションでは不要です)。
 
 ### 起動コマンドを特定する
 
@@ -42,7 +42,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 | .NET コア | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br />**注**: コマンドの `.dll` ファイル名は、`.dll` ファイルのファイル名と一致する必要があります。場合によっては、Web アプリと一致しないことがあります。         |
 | PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します                                                                                                                                                                           |
 | Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。                                                                                                                                      |
-| Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | アプリを起動するためのコマンド。                                                                                                                                                                                                     |
+| Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | アプリを起動するためのコマンドです。Tomcat で動作するアプリケーションでは不要です。                                                                                                                                                                                                  |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
@@ -58,7 +58,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 **General settings** で、**Startup Command** のフィールドに以下を追加します。
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.3.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service の構成: Azure UI の Settings の Configuration セクションにある、Stack の設定です。スタック、メジャーバージョン、マイナーバージョンのフィールドの下には、上記の curl コマンドで入力される Startup Command フィールドがあります。" style="width:100%;" >}}
@@ -68,14 +68,6 @@ curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datad
 
 ```
   az webapp deploy --resource-group <group-name> --name <app-name> --src-path <path-to-datadog-wrapper> --type=startup
-```
-
-あるいは、このスクリプトをアプリケーションの一部としてアップロードし、一般設定の起動コマンドをその場所として設定することもできます (例えば、`/home/site/wwwroot/datadog_wrapper` など)。
-
-すでに起動スクリプトを使用している場合は、以下の curl コマンドをスクリプトの最後に追加します。
-
-```
- curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
 ```
 
 [8]: https://github.com/DataDog/datadog-aas-linux/releases

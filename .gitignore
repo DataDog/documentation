@@ -76,12 +76,15 @@ content/en/security/default_rules/*.md
 !content/en/security/default_rules/_index.md
 content/en/security/cloud_workload_security/agent_expressions.md
 content/en/security/cloud_workload_security/backend.md
+content/en/security/threats/agent_expressions.md
+content/en/security/threats/backend.md
 content/en/security_platform/
 
 # cspm cloud resource schemas
 content/en/security/cspm/custom_rules/*.md
-!content/en/security/cspm/custom_rules/_index.md
-!content/en/security/cspm/custom_rules/schema.md
+content/en/security/misconfigurations/custom_rules/*.md
+!content/en/security/misconfigurations/custom_rules/_index.md
+!content/en/security/misconfigurationspm/custom_rules/schema.md
 
 # compliance rules
 content/en/compliance_monitoring/default_rules/*.md
@@ -98,6 +101,12 @@ content/en/continuous_testing/cicd_integrations/github_actions.md
 content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
 
+# Static Analysis
+content/en/continuous_integration/static_analysis/github_actions.md
+content/en/continuous_integration/static_analysis/circleci_orbs.md
+content/en/continuous_integration/static_analysis/rules/
+!content/en/continuous_integration/static_analysis/rules/_index.md
+
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
 content/en/serverless/libraries_integrations/macro.md
@@ -110,6 +119,7 @@ content/en/service_management/workflows/actions_catalog/*
 data/workflows/
 !content/en/service_management/workflows/actions_catalog/_index.md
 !content/en/service_management/workflows/actions_catalog/generic_actions.md
+!content/en/service_management/workflows/actions_catalog/logic_actions.md
 
 # semantic tag colors
 layouts/shortcodes/semantic-color.md

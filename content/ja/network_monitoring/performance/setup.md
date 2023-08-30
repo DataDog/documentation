@@ -48,7 +48,7 @@ Datadog の ネットワークパフォーマンスモニタリング (NPM) は 
 
 #### Windows OS
 
-データ収集はデバイスドライバを使用して行われます。Datadog Agent バージョン 7.27.1、Windows バージョン 2012 R2 (および Windows 10 を含む同等のデスクトップ OS) 以降でサポートされます。
+データ収集はネットワークカーネルデバイスドライバーを使用して行われます。Datadog Agent バージョン 7.27.1、Windows バージョン 2012 R2 (および Windows 10 を含む同等のデスクトップ OS) 以降でサポートされます。
 
 #### macOS
 
@@ -182,7 +182,7 @@ Windows ホストのネットワークパフォーマンスモニタリングを
 
 1. [Datadog Agent][1]（バージョン 7.27.1 以降）をインストールし、ネットワークドライバコンポーネントを有効にします。
 
-   インストール時に `ADDLOCAL="MainApplication,NPM"` を `msiexec` コマンドに渡すか、Agent のインストールを GUI で実行する際に "Network Performance Monitoring" を選択します。
+   [非推奨] _(バージョン 7.44 以下)_ インストール時に `ADDLOCAL="MainApplication,NPM"` を `msiexec` コマンドに渡すか、Agent のインストールを GUI で実行する際に "Network Performance Monitoring" を選択します。
 
 1. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
 
@@ -451,14 +451,14 @@ AWS ECS での設定については、[AWS ECS][1] ドキュメントページ�
 
   [1]: /integrations/azure
   [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /ja/network_monitoring/dns/

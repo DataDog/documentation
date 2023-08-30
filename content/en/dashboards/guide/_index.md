@@ -30,6 +30,8 @@ cascade:
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphing with JSON
+    {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Functions:" >}}

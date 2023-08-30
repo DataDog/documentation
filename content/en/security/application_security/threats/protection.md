@@ -41,9 +41,14 @@ To get started, navigate to **Security > Application Security > Configuration > 
 
 **Note**: You must instrument your services to be able to block authenticated attackers. See [User Monitoring and Protection][15] for more details.
 
+## Block attackers at the perimeter - integrate ASM with your existing WAF deployments
+
+Datadog ASM enables customers to block attackers at the perimeter, directly from the Security Signal. ASM integrates with [Workflows][17] to push the attackers' IP addresses to perimeter Web Application Firewalls (AWS WAF, Cloudflare, Fastly) and ensure requests from these attackers are blocked at the edge even before they enter the customer's environment.
+Create workflows from the available [blueprints][18] and run them directly from ASM's Signal side panel.
+
 ## Denylist
 
-Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7].
+Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7]. A denylist supports blocking individual IPs as well as a range of IPs (CIDR blocks).
 
 ## Passlist
 
@@ -121,3 +126,5 @@ As important as it is for you to be able to apply protection granularly and redu
 [14]: https://app.datadoghq.com/security/configuration/asm/rules
 [15]: /security/application_security/threats/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [16]: https://app.datadoghq.com/security/configuration/asm/protection-behaviour
+[17]: https://docs.datadoghq.com/service_management/workflows/
+[18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY

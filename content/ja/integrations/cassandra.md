@@ -84,7 +84,7 @@ Cassandra からメトリクスをリアルタイムに取得すると、以下�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cassandra チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。このインテグレーションには、Oracle の JDK を使用することをお勧めします。
 
@@ -101,6 +101,8 @@ Cassandra チェックは [Datadog Agent][2] パッケージに含まれてい�
 ##### ログの収集
 
 _Agent バージョン 6.0 以降で利用可能_
+
+コンテナ環境の場合は、[Kubernetes Log Collection][7] または [Docker Log Collection][8] のページの指示に従ってください。
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -125,13 +127,13 @@ _Agent バージョン 6.0 以降で利用可能_
 
     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル cassandra.d/conf.yaml][5] を参照してください。
 
-    スタックトレースが単一のログとして適切に集計されるようにするために、[複数行の処理ルール][7]を追加できます。
+    スタックトレースが単一のログとして適切に集計されるようにするために、[複数行の処理ルール][9]を追加できます。
 
 3. [Agent を再起動します][6]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションで `cassandra` を探します。
+[Agent の status サブコマンドを実行][10]し、Checks セクションで `cassandra` を探します。
 
 ## 収集データ
 
@@ -153,28 +155,28 @@ Cassandra チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-- [Cassandra パフォーマンスメトリクスの監視方法][9]
-- [Cassandra メトリクスの収集方法][10]
-- [Datadog を使用した Cassandra の監視][11]
+- [Cassandra パフォーマンスメトリクスの監視方法][11]
+- [Cassandra メトリクスの収集方法][12]
+- [Datadog を使用した Cassandra の監視][13]
 
 
 
 
 ## Cassandra Nodetool インテグレーション
 
-![Cassandra のデフォルトのダッシュボード][12]
+![Cassandra のデフォルトのダッシュボード][14]
 
 ## 概要
 
-このチェックは、[jmx インテグレーション][13]では収集できない Cassandra クラスターのメトリクスを収集します。このメトリクスの収集には `nodetool` ユーティリティを使用します。
+このチェックは、[jmx インテグレーション][15]では収集できない Cassandra クラスターのメトリクスを収集します。このメトリクスの収集には `nodetool` ユーティリティを使用します。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
@@ -183,7 +185,7 @@ Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含ま�
 
 #### ホスト
 
-1. [Agent のコンフィギュレーションディレクトリ][14]のルートにある `conf.d/` フォルダーの `cassandra_nodetool.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cassandra_nodetool.d/conf.yaml][15] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][16]のルートにある `conf.d/` フォルダーの `cassandra_nodetool.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cassandra_nodetool.d/conf.yaml][17] を参照してください。
 
    ```yaml
    init_config:
@@ -202,21 +204,21 @@ Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含ま�
 
 #### ログの収集
 
-Cassandra Nodetool ログは Cassandra インテグレーションにより収集されます。[Cassandra のログ収集の手順][16]をご確認ください。
+Cassandra Nodetool ログは Cassandra インテグレーションにより収集されます。[Cassandra のログ収集の手順][18]をご確認ください。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "コンテナ化" xxx -->
 
 #### コンテナ化
 
-コンテナ環境では、ポッドに公式の [Prometheus エクスポーター][17]を使用し、Agent のオートディスカバリーでポッドを見つけ、エンドポイントをクエリします。
+コンテナ環境では、ポッドに公式の [Prometheus エクスポーター][19]を使用し、Agent のオートディスカバリーでポッドを見つけ、エンドポイントをクエリします。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][8]し、Checks セクションで `cassandra_nodetool` を探します。
+[Agent の `status` サブコマンドを実行][10]し、Checks セクションで `cassandra_nodetool` を探します。
 
 ## 収集データ
 
@@ -238,9 +240,9 @@ Cassandra_nodetool チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-- [Cassandra パフォーマンスメトリクスの監視方法][9]
-- [Cassandra メトリクスの収集方法][10]
-- [Datadog を使用した Cassandra の監視][11]
+- [Cassandra パフォーマンスメトリクスの監視方法][11]
+- [Cassandra メトリクスの収集方法][12]
+- [Datadog を使用した Cassandra の監視][13]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard.png
@@ -249,14 +251,16 @@ Cassandra_nodetool チェックには、イベントは含まれません。
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[9]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
-[10]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
-[11]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
-[12]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard.png
-[13]: https://github.com/DataDog/integrations-core/tree/master/cassandra
-[14]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[15]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example
-[16]: https://github.com/DataDog/integrations-core/tree/master/cassandra#log-collection
-[17]: https://github.com/prometheus/jmx_exporter
+[7]: https://docs.datadoghq.com/ja/containers/kubernetes/log/
+[8]: https://docs.datadoghq.com/ja/containers/docker/log/
+[9]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
+[12]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
+[13]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
+[14]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard.png
+[15]: https://github.com/DataDog/integrations-core/tree/master/cassandra
+[16]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[17]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example
+[18]: https://github.com/DataDog/integrations-core/tree/master/cassandra#log-collection
+[19]: https://github.com/prometheus/jmx_exporter

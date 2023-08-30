@@ -49,8 +49,8 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
-| `pg_stat_statements.track_utility` | `0` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `0` means only queries like SELECT, UPDATE, and DELETE are tracked. |
-| `track_io_timing` | `1` | Optional. Enables collection of block read and write times for queries. |
+| `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
+| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 
 ## Grant the Agent access
@@ -70,6 +70,8 @@ Create the `datadog` user:
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
+
+**Note:** IAM authentication is also supported. Please see [the guide][13] on how to configure this for your Aurora instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -414,8 +416,9 @@ If you have installed and configured the integrations and Agent as described and
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
 [6]: /integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings#agent
+[8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
+[13]: /database_monitoring/guide/managed_authentication

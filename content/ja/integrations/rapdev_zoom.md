@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-zoom
 app_uuid: a79217b7-6499-4de5-8ebd-73a91d227644
 assets:

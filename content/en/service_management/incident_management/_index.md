@@ -76,7 +76,7 @@ You can also add a monitor to an existing incident.
 
 #### From a Security Signal
 
-Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 
 Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
@@ -84,13 +84,11 @@ Declare an incident from an Application Security Management signal by selecting 
 
 #### From the Incidents page
 
-In the [Datadog UI][1], click **New Incident** to create an incident.
+In the [Datadog UI][1], click **Declare Incident** to create an incident.
 
-{{< img src="service_management/incidents/incident_declaration_modal.jpeg" alt="Incident Declaration Modal" style="width:80%;">}}
+{{< img src="/service_management/incidents/declare_incident_make_private.png" alt="Incident Declaration Modal" style="width:80%;">}}
 
-The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][6].
-
-{{< img src="service_management/incidents/incident_information_settings.jpeg" alt="Incident Information Settings" style="width:80%;">}}
+The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][6]. You also have the option to make the incident private to limit access to only responders.
 
 #### From Slack
 
@@ -114,32 +112,20 @@ For more information about the Datadog Slack integration, check out [the docs][7
 For {{< region-param key="dd_site_name" >}} customers who use Slack, stay informed about the Slack app by filing a ticket at https://help.datadoghq.com/.
 {{< /site-region >}}
 
-### Describing the incident
+## Describing the incident
 
 No matter where you create an incident, it's important to describe it as thoroughly as possible to share the information with other people involved in your company's incident management process.
 
 When you create an incident, an incident modal comes up. This modal has several core elements:
 
-**Severity Level**: Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN.
-
-* SEV-1: Critical impact
-* SEV-2: High impact
-* SEV-3: Moderate impact
-* SEV-4: Low impact
-* SEV-5: Minor issue
-* UNKNOWN: Initial investigation
-
-**Note**: You can customize the description of each severity level to fit the requirements of your organization.
-
-**Title**: Give your incident a descriptive title.
-
-**Signals**: The reason(s) you are declaring the incident. These can be graphs, logs, or other key visuals.
-
-**Incident commander**: This person is assigned as the leader of the incident investigation.
-
-**Additional notifications**: Notify other teams or people.
-
-Click on **Declare Incident** to finish creating your incident.
+| Incident elements    | Description |
+| ----------- | ----------- |
+| Title | (Required) Give your incident a descriptive title. |
+| Severity Level| (Required) Denotes the severity of your incident, from SEV-1 (most severe) to SEV-5 (least severe). If your incident is under initial investigation, and you do not know the severity yet, select UNKNOWN. <br> **Note**: You can customize the description of each severity level to fit the requirements of your organization.|
+| Incident Commander | This person is assigned as the leader of the incident investigation. |
+| Attributes (Teams) | Assign the appropriate group of users to an incident using [Datadog Teams][9]. Members of the assigned team are automatically invited to the Slack channels. |
+| Notifications | Specify a user, Slack channel or external email to send notifications of this incident to.  |
+| Notes & Links | You can customize the description of each severity level to fit the requirements of your organization. Include links to graphs, monitors, or security signals for additional awareness. |
 
 ### Updating the incident and the incident timeline
 
@@ -170,17 +156,17 @@ As the status of an incident changes, Datadog tracks time-to-resolution as follo
 
 #### Assessment fields
 
-Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][9]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
+Assessment fields are the metadata and context that you can define per incident. These fields are [key:value metric tags][10]. These field keys are added in settings, and the values are then available when you are assessing the impact of an incident on the overview page. For example, you can add an Application field. The following fields are available for assessment in all incidents:
 
 * **Root Cause**: This text field allows you to enter the description of the root cause, triggers, and contributing factors of the incident.
 * **Detection Method**: Specify how the incident was detected with these default options: customer, employee, monitor, other, or unknown.
-* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][10].
+* **Services**: If you have APM configured, your APM services are available for incident assessment. To learn more about configuring your services in APM, see [the docs][11].
     * If you are not using Datadog APM, you can upload service names as a CSV. Any values uploaded via CSV are only be available within Incident Management for incident assessment purposes.
     * Datadog deduplicates service names case-insensitively, so if you use "My Service" or "my service", only the manually added one is shown.
     * Datadog overrides APM service names in favor of the manually uploaded list.
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM.
-* **Teams**: Choose from the [teams][11] defined in your organization. It is not necessary to upload a list of teams from a CSV file. 
+* **Teams**: Choose from the [teams][9] defined in your organization. It is not necessary to upload a list of teams from a CSV file. 
 
 ## Data collected
 
@@ -219,9 +205,9 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [6]: /service_management/incident_management/incident_settings#information
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: /integrations/slack/
-[9]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
-[10]: /tracing/#2-instrument-your-application
-[11]: /account_management/teams/
+[9]: /account_management/teams/
+[10]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
+[11]: /tracing/#2-instrument-your-application
 [12]: /service_management/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
 [14]: /integrations/opsgenie/

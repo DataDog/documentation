@@ -71,11 +71,11 @@ OpenTelemetry は、テレメトリーデータのベンダーに依存しない
 
 OpenTelemetry コレクターは、ベンダーに依存しない Agent プロセスで、Datadog エクスポーターを通じてテレメトリーデータを Datadog サーバーに直接エクスポートします (Agent のインストールは必要ありません)。インスツルメンテーションされたアプリケーションからのメトリクスとトレース、および一般的なシステムメトリクスをレポートします。
 
-ホストメトリクスは OTel ホストメトリクスのデフォルトダッシュボードに表示されますが、OpenTelemetry コレクターを使用して任意のメトリクスを Datadog に送信することができます。ホストメトリクスレシーバーで生成されるような `system.*` や `process.*` 以下のメトリクスは、Datadog Agent からのメトリクスと衝突しないように、`otel.system.*` や `otel.process.*` に名前変更されています。さらに、OpenTelemetry コレクターのメトリクスは、OTel コレクターメトリクスのデフォルトダッシュボードに表示されます。
+ホストメトリクスは OpenTelemetry ホストメトリクスのデフォルトダッシュボードに表示されますが、OpenTelemetry コレクターを使用して任意のメトリクスを Datadog に送信することができます。ホストメトリクスレシーバーで生成されるような `system.*` や `process.*` 以下のメトリクスは、Datadog Agent からのメトリクスと衝突しないように、`otel.system.*` や `otel.process.*` に名前変更されています。さらに、OpenTelemetry コレクターのメトリクスは、OpenTelemetry コレクターメトリクスのデフォルトダッシュボードに表示されます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [OpenTelemetry コレクターのドキュメント][3]に従って `opentelemetry-collector-contrib` ディストリビューションをインストールするか、Datadog Exporter を含むその他のディストリビューションを使用してください。
 

@@ -68,7 +68,7 @@ Datadog のメトリクス、APM、ログを使用して、[OpenAI][1] Python �
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. Datadog Agent で APM と StatsD を有効化します。例えば、Docker で:
 

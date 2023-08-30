@@ -35,7 +35,7 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、Ope
 
 **注**: OpenTelemetry はメトリクス API のインスツルメント (`Gauge`、`Counter`、`UpDownCounter`、`Histogram` など) を提供しており、それらの計測値は OTLP メトリクス (Sum、Gauge、Histogram) としてエクスポートすることが可能です。OTLP メトリクスの他のソースも可能です。アプリケーションやライブラリは、生成する OTLP のメトリクスをカスタマイズすることができます。生成される OTLP メトリクスとそのカスタマイズ方法を理解するために、OpenTelemetry SDK または OTLP 生成アプリケーションのドキュメントをお読みください。
 
-**注**: OpenTelemetry プロトコルは、メトリクスを時間で表現する 2 つの方法をサポートしています。[累積一時性とデルタ一時性][2]があり、以下に説明するメトリクスに影響します。CUMULATIVE に設定すると、アプリケーション (またはコレクター) の起動時にいくつかのデータポイントを破棄する可能性があるため、OTel 実装の一時性設定を **DELTA** に設定します。詳細については、[OpenTelemetry によるデルタ一時性メトリクスの生成][3]をお読みください。
+**注**: OpenTelemetry プロトコルは、メトリクスを時間で表現する 2 つの方法をサポートしています。[累積一時性とデルタ一時性][2]があり、以下に説明するメトリクスに影響します。CUMULATIVE に設定すると、アプリケーション (またはコレクター) の起動時にいくつかのデータポイントを破棄する可能性があるため、OpenTelemetry 実装の一時性設定を **DELTA** に設定します。詳細については、[OpenTelemetry によるデルタ一時性メトリクスの生成][3]をお読みください。
 
 ## メトリクスタイプ
 
@@ -137,13 +137,22 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターは、デ
 
 OpenTelemetry は、ホスト名に関する特定のセマンティック規則を定義しています。OTLP ペイロードが既知のホスト名属性を持つ場合、Datadog はこれらの規則に従い、その値をホスト名として使用しようとします。セマンティック規則は、以下の順序で考慮されます。
 
+1. 存在する場合に二重タグを避ける `host` 属性。
 1. `datadog.host.name`、Datadog 固有のホスト名規則
 1. クラウドプロバイダー固有の規則、`cloud.provider` セマンティック規則がベース
 1. Kubernetes 固有のセマンティック規約である `k8s.node.name` と `k8s.cluster.name`
 1. `host.id`、一意のホスト ID
 1. `host.name`、システムホスト名
 
-存在しない場合、Datadog はペイロードにシステムレベルのホスト名を割り当てます。
+以下のホスト名は無効とみなされ、破棄されます。
+1. `0.0.0.0`
+1. `127.0.0.1`
+1. `localhost`
+1. `localhost.localdomain`
+1. `localhost6.localdomain6`
+1. `ip6-localhost`
+
+有効なホスト名が存在しない場合、Datadog はペイロードにシステムレベルのホスト名を割り当てます。
 リモートホストからデータを送信する場合、パイプラインに ['resource detection' プロセッサー][1]を追加することで、正確なホスト名解決を行うことができます。
 
 ### 例

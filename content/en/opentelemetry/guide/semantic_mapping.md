@@ -3,11 +3,11 @@ title: OpenTelemetry Semantic Conventions and Datadog Conventions
 kind: documentation
 ---
 
-OpenTelemetry (OTel) makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OTel semantic conventions to Datadog's semantic conventions.
+OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
 
 ### Unified Service Tagging
 
-| OTel convention | Datadog convention |
+| OpenTelemetry convention | Datadog convention |
 | --- | --- |
 | `deployment.environment` | `env` |
 | `service.name` | `service` |
@@ -17,7 +17,7 @@ For more information, see [Unified Service Tagging][2].
 
 ### Containers
 
-| OTel convention | Datadog convention |
+| OpenTelemetry convention | Datadog convention |
 | --- | --- |
 | `container.id` | `container_id` |
 | `container.name` | `container_name` |
@@ -26,7 +26,7 @@ For more information, see [Unified Service Tagging][2].
 
 ### Cloud
 
-| OTel convention | Datadog convention |
+| OpenTelemetry convention | Datadog convention |
 | --- | --- |
 | `cloud.provider` | `cloud_provider` |
 | `cloud.region` | `region` |
@@ -34,7 +34,7 @@ For more information, see [Unified Service Tagging][2].
 
 ### ECS
 
-| OTel convention | Datadog convention |
+| OpenTelemetry convention | Datadog convention |
 | --- | --- |
 | `aws.ecs.task.family` | `task_family` |
 | `aws.ecs.task.arn` | `task_arn` |
@@ -44,7 +44,7 @@ For more information, see [Unified Service Tagging][2].
 
 ### Kubernetes
 
-| OTel convention | Datadog convention |
+| OpenTelemetry convention | Datadog convention |
 | --- | --- |
 | `k8s.container.name` | `kube_container_name` |
 | `k8s.cluster.name` | `kube_cluster_name` |

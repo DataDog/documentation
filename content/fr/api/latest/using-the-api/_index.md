@@ -2,6 +2,7 @@
 title: Utiliser l'API
 type: api
 ---
+
 {{< h2 >}}Utiliser l'API{{< /h2 >}}
 
 Utilisez l'API HTTP de Datadog pour accéder automatiquement à la plateforme Datadog. Vous pouvez utiliser l'API pour envoyer des données à Datadog, créer des représentations visuelles de données et gérer votre compte.
@@ -17,7 +18,7 @@ Endpoints d'intégration disponibles :
 - [Intégration AWS][1]
 - [Intégration de logs AWS][2]
 - [Intégration Azure][3]
-- [Intégration GCP][4]
+- [Intégration Google Cloud][4]
 - [Intégration Slack][5]
 - [Intégration PagerDuty][6]
 - [Intégration Webhooks][7]
@@ -27,7 +28,7 @@ Endpoints d'intégration disponibles :
 Utilisez ces endpoints pour envoyer et récupérer des données dans Datadog :
 
 - Les endpoints de [métriques][8] vous permettent d'envoyer des données de [métriques][9] afin de les représenter graphiquement sur les dashboards de Datadog et de les interroger sur l'intervalle de votre choix.
-- Les endpoints d'[événements][10] vous permettent d'envoyer et de récupérer des événements dans le [flux d'événements Datadog][11].
+- Les endpoints d'[événements][10] vous permettent d'envoyer et de récupérer des événements dans l'[Events Explorer Datadog][11].
 - Utilisez les endpoints de [surveillance Synthetic][12] pour créer, lancer et interrompre des [tests Synthetic][13], ou visualiser leurs résultats.
 - Utilisez l'[API de tracing de l'Agent][14] pour envoyer des traces à l'Agent Datadog afin de les transmettre par la suite à Datadog.
 

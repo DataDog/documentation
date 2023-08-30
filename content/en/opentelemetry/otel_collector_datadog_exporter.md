@@ -22,9 +22,9 @@ further_reading:
 
 The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
 
-{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OTel Collector -> Datadog" style="width:100%;">}}
+{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
-## Setting up the OTel Collector with the Datadog Exporter
+## Setting up the OpenTelemetry Collector with the Datadog Exporter
 
 To run the OpenTelemetry Collector along with the Datadog Exporter:
 
@@ -256,7 +256,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 1. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib`][1].
 
-2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4138.
+2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4318.
 
 3. Run the container and expose the necessary port, using the previously defined `collector.yaml` file. For example, considering you are using port 4317:
 
@@ -306,7 +306,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
 {{% /tab %}}
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Using a DaemonSet is the most common and recommended way to configure OTel collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
+Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
 
 1. Use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 
@@ -662,12 +662,44 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 
 Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
 
-1. Install the [OpenTelemetry integration][23].
+1. Install the [OpenTelemetry integration][21].
 2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
 
    {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
-The **Host Metrics** dashboard is for data collected from the [host metrics receiver][21]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][22] you choose to enable.
+The **Host Metrics** dashboard is for data collected from the [host metrics receiver][22]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][23] you choose to enable.
+
+
+### Containers overview dashboard
+
+<div class="alert alert-info">The Container Overview dashboard is in private beta. <a href="https://forms.gle/g3ndvTnepWY4Bvuh7">Fill out this form</a> to try it out.</div>
+
+<div class="alert alert-warning">This feature is affected by <a href="/containers/guide/docker-deprecation/">Docker deprecation in Kubernetes</a> and you might not be able to use <code>dockerstatsreceiver</code> for OpenTelemetry with Kubernetes version 1.24+.</div>
+
+The [Docker Stats][24] receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts.
+
+Use the following configuration to enable additional attributes on the Docker Stats receiver that populates the containers overview dashboard:
+
+```yaml
+  docker_stats:
+    metrics:
+      container.network.io.usage.rx_packets:
+        enabled: true
+      container.network.io.usage.tx_packets:
+        enabled: true
+      container.cpu.usage.system:
+        enabled: true
+      container.memory.rss:
+        enabled: true
+      container.blockio.io_serviced_recursive:
+        enabled: true
+      container.uptime:
+        enabled: true
+      container.memory.hierarchical_memory_limit:
+        enabled: true
+```
+
+The minimum required OpenTelemetry Collector version that supports this feature is v0.78.0. 
 
 ## Further Reading
 
@@ -693,6 +725,7 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [18]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
 [19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
 [20]: https://opentelemetry.io/docs/collector/deployment/
-[21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[23]: https://app.datadoghq.com/integrations/otel
+[21]: https://app.datadoghq.com/integrations/otel
+[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver

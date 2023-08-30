@@ -24,7 +24,7 @@ Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more deta
 
 - Datadog Cluster Agent v7.40+
 
-## Setup
+## Configuration
 {{< tabs >}}
 {{% tab "Operator" %}}
 
@@ -133,55 +133,9 @@ Finally, run the following commands:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Usage
-
-Datadog Admission Controller can mutate pod resources in namespaces that are labelled with `admission.datadoghq.com/mutate-pods: "true"`. The Admission Controller can:
-
-- Inject [environment variables](#injected-environment-variables)
-- Mount extra volumes in the pod's containers (for example, `/var/run/datadog-agent` to mount the Agent socket)
-- Manage [pod topology spread constraints](#pod-topology-spread-constraints)
-
-### Injected environment variables
-
-Only missing environment variables are added. For example, if a pod manifest defines `DD_ENV: foo`, its value is not mutated by the Admission Controller.
-
-| Name | Description |
-| ---- | ----------- |
-| `AVAILABILITY_ZONE` | Cloud provider availability zone where the pod is running |
-| `CONSUL_HTTP_ADDR` | Endpoint for Consul HTTP |
-| `DD_DATACENTER` | Datacenter name (for example, `US1` or `AP1`) |
-| `DD_ENTITY_ID` | Pod ID for origin detection. This is used by the Agent to attach the pod's tags to metrics. |
-| `DD_ENV` | Datacenter environment (for example, `staging` or `prod`) |
-| `DD_SERVICE` | The container service inherited from one of the following pod labels: `tags.datadoghq.com/service`, `service` |
-| `DD_SITE` | Datadog site for the datacenter (for example, `datadoghq.com` or `ap1.datadoghq.com`) |
-| `DD_VERSION` | The container version inhertied from one of the following pod labels: `tags.datadoghq.com/version`, `version` |
-| `HOST_IP` | IP of the Kubernetes node on which the pod is scheduled |
-| `K8S_CLUSTER_DNS_SERVICE_IP` | IP of service providing DNS for the Kubernetes cluster (for example, your CoreDNS IP) |
-| `K8S_CLUSTER_INFRA_DOMAIN` | Discoverable DNS domain of the Kubernetes cluster |
-| `K8S_CLUSTER_LOCAL_DOMAIN` | Local DNS domain of the Kubernetes cluster |
-| `K8S_CLUSTER_NAME` | Name of the Kubernetes cluster |
-| `POD_IP` | IP of the Kubernetes pod |
-| `POD_NAMESPACE` | Namespace the pod is running in |
-| `POD_SERVICE_ACCOUNT` | Kubernetes service account for the pod |
-| `STATSD_URL` | StatsD endpoint for the pod (for example, `unix:///var/run/datadog-agent/statsd.sock`) |
-| `TRACE_AGENT_URL` | Trace Agent endpoint |
-| `VAULT_ADDR` | Vault endpoint for the datacenter |
-| `VAULT_AUTH_PATH` | Vault auth mount for the Kubernetes cluster |
-| `VAULT_ROLE` | Vault auth role for the pod. Defaults to the `VAULT_AUTH_BATCH_ROLE` for `initContainers` and `VAULT_AUTH_SERVICE_ROLE` for `containers`. `VAULT_ROLE` is effectively deprecated—instead, explicitly use `VAULT_AUTH_BATCH_ROLE` and `VAULT_AUTH_SERVICE_ROLE`. |
-| `VAULT_AUTH_BATCH_ROLE` | Vault auth role for the pod to retrieve a non-renewable Vault batch token. Should be configured for all `initContainers`.
-| `VAULT_AUTH_SERVICE_ROLE` | Vault auth role for the pod to retrieve a renewable Vault service token. |
-
-### Pod topology spread constraints
-
-_Topology spread constraints_ is a Kubernetes feature that controls how pods are spread across a cluster. The Datadog Admission Controller applies spread constraints on pods that are attached to a StatefulSet **and** have one of the following annotations in its pod template:
-
-- `datadoghq.com/topologySpreadConstraints: ScheduleAnyway`
-- `datadoghq.com/topologySpreadConstraints: DoNotSchedule`
-
-See Kubernetes' documentation on [topology spread constraints][5].
-
 ### Instrumentation library injection
 You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information.
+
 
 ### APM and DogStatsD
 
@@ -234,7 +188,9 @@ Possible options:
 - The Admission Controller needs to be deployed and configured before the creation of new application Pods. It cannot update Pods that already exist.
 - To disable the Admission Controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - By using the Datadog Admission Controller, users can skip configuring the application Pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
-- In a private cluster, you need to [add a Firewall Rule for the control plane][4]. The webhook handling incoming connections receives the request on port `443` and directs it to a service implemented on port `8000`. By default, in the Network for the cluster there should be a Firewall Rule named like `gke-<CLUSTER_NAME>-master`. The "Source filters" of the rule match the "Control plane address range" of the cluster. Edit this Firewall Rule to allow ingress to the TCP port `8000`.
+- Private clusters need specific networking rules because Datadog's Admission Controller webhook receives requests on port `443` and directs to a service on port `8000`:
+    - In a GKE private cluster, you need to [add a firewall rule for the control plane][4]. By default, the network for the cluster should have a firewall rule named `gke-<CLUSTER_NAME>-master`. This rule's source filters match the cluster's control plane address range. Edit this firewall rule to allow ingress to the TCP port `8000`.
+    - In an EKS private cluster, you need to [add an inbound rule for the node security group][5], where the Datadog Cluster Agent is located. Edit this rule to allow TCP port `8000` with the `Source` referencing the cluster security group (automatically created by AWS corresponding to the EKS control plane).
 
 
 ## Further Reading
@@ -245,4 +201,4 @@ Possible options:
 [2]: /tracing/trace_collection/library_injection_local/
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
-[5]: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#spread-constraints-for-pods
+[5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components

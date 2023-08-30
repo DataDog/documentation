@@ -37,7 +37,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -130,15 +130,22 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 {{< get-service-checks-from-git "amazon_ec2" >}}
 
 
+## すぐに使えるモニタリング
+
+AWS EC2 インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+
+- AWS EC2 Overview ダッシュボード: すぐに使える [AWS EC2 Overview ダッシュボード][20]を使用して、EC2 インスタンスの包括的な概要を得ることができます。
+- 推奨モニター: [AWS EC2 の推奨モニター][21]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][18]までお問合せください。
 
 ## その他の参考資料
 
-- [EC2 モニタリングのキーメトリクス][20]
-- [EC2 メトリクスの収集方法][21]
-- [Datadog で EC2 インスタンスを監視する方法][22]
+- [EC2 モニタリングのキーメトリクス][22]
+- [EC2 メトリクスの収集方法][23]
+- [Datadog で EC2 インスタンスを監視する方法][24]
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -159,6 +166,8 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 [17]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/amazon_ec2_metadata.csv
 [18]: https://docs.datadoghq.com/ja/help/
 [19]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2/service_checks.json
-[20]: https://www.datadoghq.com/blog/ec2-monitoring
-[21]: https://www.datadoghq.com/blog/collecting-ec2-metrics
-[22]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog
+[20]: https://app.datadoghq.com/dash/integration/60/aws-ec2-overview
+[21]: https://app.datadoghq.com/monitors/recommended
+[22]: https://www.datadoghq.com/blog/ec2-monitoring
+[23]: https://www.datadoghq.com/blog/collecting-ec2-metrics
+[24]: https://www.datadoghq.com/blog/monitoring-ec2-instances-with-datadog
