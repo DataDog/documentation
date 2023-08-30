@@ -141,11 +141,11 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Collect React rendering errors
+### React error boundaries instrumentation 
 
 You can instrument the React error boundaries to monitor React rendering errors using the RUM Browser SDK `addError()` API.
 
-The collected rendering error stack contains the component stack, which is unminified like any other error stack traces once you've uploaded sourcemaps.
+The collected rendering errors contain a component stack, which is unminified like any other error stack traces once you've uploaded sourcemaps.
 
 To instrument React error boundaries for monitoring, use the following:
 
