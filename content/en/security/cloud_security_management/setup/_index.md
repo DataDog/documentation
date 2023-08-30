@@ -78,6 +78,10 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 {{% tab "CSM Pro" %}}
 
+To [enable CSM Pro][1], you must set up the Datadog cloud account integrations for AWS, Azure, and Google Cloud Platform.
+
+[1]: /security/cloud_security_management/setup/csm_pro
+
 {{% /tab %}}
 
 {{% tab "CSM Workload Security" %}}
