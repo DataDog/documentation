@@ -28441,6 +28441,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 1000
           format: int64
           type: integer
       - description: The specific offset to use as the beginning of the returned response.
@@ -28486,6 +28487,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
