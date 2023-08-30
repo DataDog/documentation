@@ -10,16 +10,20 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Default out-of-the-box Role</th>
       </tr>
     </thead>
     <tbody>
       {{- range $permissions_data -}}
         {{- if ne .attributes.name nil -}}
-        <tr>
+        <tr id="{{- .id -}}">
           <td>
             <code>{{- .attributes.name -}}</code>
           </td>
           <td>{{- .attributes.description -}}</td>
+          <td class="text-nowrap">
+            {{- .role_name -}}
+          </td>
         </tr>
         {{- end -}}
       {{ end }}
