@@ -66,7 +66,7 @@ You can dismiss individual insights and set filters to view the categories of in
   Static Analysis is only supported in Python.
 </div>
 
-[**Static Analysis**][14] improves the quality and security of code by enforcing [rules][15] such as "do not allow the `any` type". If Static Analysis is [set up in the repository][16], the Datadog extension will highlight rule violations and suggest fixes.
+[**Static Analysis**][14] improves the quality and security of code by enforcing [rules][15] such as "do not use insecure encryption protocols". If Static Analysis is [set up in the repository][16], the Datadog extension will highlight rule violations and suggest fixes.
 
 ## Synthetic Tests
 The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in the IDE. You can identify and address potential issues resulting from code changes before they are deployed into production and impact your end users.
