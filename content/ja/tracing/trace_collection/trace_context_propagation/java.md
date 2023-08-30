@@ -1,13 +1,17 @@
 ---
 code_lang: java
 code_lang_weight: 0
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: Java トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][13] と [W3C (トレースコンテキスト)][14] のヘッダー抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのための [B3][13] と [W3C Trace Context][14] のヘッダー抽出と挿入をサポートしています。
 
 分散ヘッダーの挿入と抽出のスタイルを構成することができます。
 
@@ -35,6 +39,10 @@ Java トレーサーは、以下のスタイルをサポートしています。
 複数の抽出スタイルが有効になっている場合、抽出試行はスタイルの構成順で実行され、最初に成功した抽出値が使われます。
 
 コンテキスト伝播の設定およびその他の構成の詳細については、[Java トレーシングライブラリの構成][1]をお読みください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/library_config/java/#headers-extraction-and-injection
 [13]: https://github.com/openzipkin/b3-propagation

@@ -115,9 +115,8 @@ Une fois l'Agent installé, procédez comme suit pour commencer à tracer vos ap
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-   **Remarque :** pour télécharger une version majeure spécifique, utilisez plutôt le lien `https://dtdg.co/java-tracer-vX` en remplaçant `vX` par la version souhaitée.
-   Par exemple, utilisez `https://dtdg.co/java-tracer-v0` pour télécharger la dernière version 0.
-   Vous pouvez également récupérer n'importe quelle version spécifique depuis le [référentiel Maven][3] de Datadog.
+   **Remarque :** pour télécharger le dernier build d'une version **majeure** spécifique, utilisez plutôt le lien `https://dtdg.co/java-tracer-vX` en remplaçant `X` par la version majeure souhaitée.
+   Par exemple, utilisez `https://dtdg.co/java-tracer-v1` pour obtenir le dernier build de la version 1. Les numéros des versions mineures ne doivent pas être inclus. Vous pouvez également récupérer n'importe quelle version spécifique depuis le [référentiel Maven][3] de Datadog.
 
 2. Pour exécuter votre application à partir d'un IDE, d'un script d'application Maven ou Gradle, ou de la commande `java -jar`, avec le profileur en continu, le suivi des déploiements et l'injection de logs (si vous envoyez des logs à Datadog), ajoutez l'argument JVM `-javaagent` et les options de configuration suivantes, le cas échéant :
 

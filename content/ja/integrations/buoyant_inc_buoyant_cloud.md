@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: buoyant-inc-buoyant-cloud
 app_uuid: b17ccba3-3278-4923-b22a-542002b3fd5e
 assets: {}

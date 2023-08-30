@@ -40,7 +40,7 @@ title: Synthetic Monitoring & Continuous Testing メトリクス
 
 ### 一般的なメトリクス
 
-{{< get-metrics-from-git "synthetics" "synthetics.test_runs datadog.estimated_usage.synthetics" >}}
+{{< get-metrics-from-git "synthetics" "synthetics.test_runs synthetics.test_run_steps datadog.estimated_usage.synthetics" >}}
 
 ### API テスト
 

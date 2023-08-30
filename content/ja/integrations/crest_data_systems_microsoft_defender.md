@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-microsoft-defender
 app_uuid: 137062cb-83a8-4c46-83e6-7a84efa859ef
 assets:

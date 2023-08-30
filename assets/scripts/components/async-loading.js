@@ -1,6 +1,7 @@
 import { updateTOC, buildTOCMap } from './table-of-contents';
 import initCodeTabs from './codetabs';
-import { redirectToRegion } from '../region-redirects';
+import { redirectToRegion, hideTOCItems } from '../region-redirects';
+import { initCopyCode } from './copy-code';
 import { initializeIntegrations } from './integrations';
 import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
@@ -54,8 +55,8 @@ function loadPage(newUrl) {
             const currentSidebar = document.querySelector('.sidebar');
             const newSidebar = newDocument.querySelector('.sidebar');
 
-            const currentPageIsSearchPage = document.documentElement.dataset.relpermalink.includes("search");
-            const newPageIsSearchPage = newDocument.querySelector("html").dataset.relpermalink.includes("search");
+            const currentPageIsSearchPage = (document.documentElement.dataset.relpermalink || "").includes("search");
+            const newPageIsSearchPage = (newDocument.querySelector("html").dataset.relpermalink || "").includes("search");
 
             // For going from search page (/search) with no sidenav searchbar, to another page with sidenav searchbar
             if (currentPageIsSearchPage && !newPageIsSearchPage) {
@@ -222,13 +223,14 @@ function loadPage(newUrl) {
             }
 
             const {pageCodeLang} = document.documentElement.dataset;
-
             addCodeTabEventListeners();
             addCodeBlockVisibilityToggleEventListeners();
             activateCodeLangNav(pageCodeLang)
             redirectCodeLang();
             toggleMultiCodeLangNav(pageCodeLang);
-
+            hideTOCItems(true)
+            initCopyCode()
+            
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
 

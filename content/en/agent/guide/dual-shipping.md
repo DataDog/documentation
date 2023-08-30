@@ -97,6 +97,9 @@ Requires Agent version >= 6.19 or 7.19.
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
 ```
 
+**Note:** Uploads to additional endpoints for the Continuous Profiler product are done through best-effort delivery.
+* The main endpoint has the highest priority. Uploads to additional endpoints are only handled after uploads to the main endpoint have completed successfully.
+* Responses from additional endpoints are not forwarded back to the profiler. Any errors during delivery to additional endpoints are logged in the Agent error logs.
 
 ## Live Processes
 
@@ -126,18 +129,18 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\
 
 ## Orchestrator
 
-### YAML configuration
-In `datadog.yaml`:
+### HELM configuration
+In Datadog `values.yaml`:
 ```yaml
-orchestrator_explorer:
-  [...]
-  orchestrator_additional_endpoints:
-    "https://orchestrator.datadoghq.com":
-    - apikey2
-    - apikey3
-    "https://orchestrator.datadoghq.eu":
-    - apikey4
+clusterAgent:
+...
+  datadog_cluster_yaml:
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.ddog-gov.com":
+        - apikey2 
 ```
+
 
 ### Environment variable configuration
 
@@ -285,7 +288,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Posture Management (CSPM)
+## Cloud Security Management Misconfigurations
 
 ### YAML configuration
 
@@ -310,7 +313,7 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% agent-dual-shipping %}}
 
-## Cloud Workload Security (CWS)
+## Cloud Security Management Threats
 
 ### YAML configuration
 In `datadog.yaml`:

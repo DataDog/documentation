@@ -25,7 +25,7 @@ Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発�
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Datadog の [Agent ダウンロードページ][1]に、ワンステップの ksh インストールスクリプトが用意されています。このスクリプトは、以下の環境変数をサポートします。
 

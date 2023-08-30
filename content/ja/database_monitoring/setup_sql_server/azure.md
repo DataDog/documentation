@@ -350,7 +350,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_ENDPOINT_ADDRESS>'
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 ### Kubernetes サービスアノテーションで構成する

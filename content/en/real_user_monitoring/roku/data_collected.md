@@ -63,10 +63,6 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                         |
 | `device.model`                       | string | The device model as reported by the device (System User-Agent).                                         |
 | `device.name`                        | string | The device name as reported by the device (System User-Agent).                                          |
-| `connectivity.status`                | string | Status of device network reachability (`connected`, `not connected`, or `maybe`).                       |
-| `connectivity.interfaces`            | string | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`). |
-| `connectivity.cellular.technology`   | string | The type of a radio technology used for cellular connection.                                            |
-| `connectivity.cellular.carrier_name` | string | The name of the SIM carrier.                                                                            |
 
 
 ### Operating system

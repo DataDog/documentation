@@ -23,7 +23,7 @@ further_reading:
   text: セッションリプレイブラウザ開発ツールによるトラブルシューティング
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: ブログ
-  text: Datadog RUM イベントと OTel インスツルメンテーションされたアプリケーションのトレースを相関させる
+  text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
 kind: documentation
 title: RUM とトレースの接続
 ---

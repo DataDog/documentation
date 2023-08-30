@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/python'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -126,8 +126,8 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [4]: https://app.datadoghq.com/profiling
 [5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [6]: /getting_started/profiler/

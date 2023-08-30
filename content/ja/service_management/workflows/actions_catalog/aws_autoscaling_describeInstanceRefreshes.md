@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_autoscaling_describeInstanceRefreshes
 bundle: com.datadoghq.aws.autoscaling
 bundle_title: AWS Autoscaling
 description: 指定したオートスケーリンググループのインスタンスリフレッシュに関する情報を取得します。

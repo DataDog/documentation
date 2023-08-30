@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - site
+  - Datadog サイト
 further_reading:
 - link: https://learn.datadoghq.com/courses/dd-201
   tag: ラーニングセンター

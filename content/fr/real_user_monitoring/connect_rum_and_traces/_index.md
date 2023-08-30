@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - rum traces
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: GitHub
@@ -21,7 +24,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: Blog
   text: Mettre en corrélation les événements RUM Datadog avec les traces de vos applications
-    instrumentées via OTel
+    instrumentées via OpenTelemetry
 kind: documentation
 title: Associer RUM à vos traces
 ---
@@ -34,11 +37,13 @@ L'intégration d'APM avec la fonctionnalité Real User Monitoring vous permet de
 
 Grâce aux données frontend de la fonctionnalité RUM et aux données relatives au backend, à l'infrastructure et aux logs provenant de l'injection d'ID de trace, vous pouvez identifier la cause de vos problèmes, où qu'ils se trouvent dans votre pile. Ainsi, vous saisissez parfaitement l'expérience que vous offrez à vos utilisateurs.
 
+Pour commencer à envoyer les traces de votre application iOS à Datadog, consultez la section [Collecte de traces iOS][1].
+
 ## Utilisation
 
 ### Prérequis
 
--   Vous avez configuré le [tracing APM][1] pour les services ciblés par vos applications RUM.
+-   Vous avez configuré le [tracing APM][2] pour les services ciblés par vos applications RUM.
 -   Vos services utilisent un serveur HTTP.
 -   Vos serveurs HTTP utilisent [une bibliothèque prenant en charge le tracing distribué](#bibliotheques-prises-en-charge).
 -   Vous avez configuré ce qui suit en fonction de votre SDK :
@@ -48,13 +53,16 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 
 ### Configurer RUM
 
+**Remarque :** la configuration de RUM et des traces nécessite l'utilisation des données APM facturées dans RUM, ce qui peut affecter votre facture APM.
+
 {{< tabs >}}
 {{% tab "RUM Browser" %}}
 
-1.  Configurez la [surveillance Browser RUM][1].
+1. Configurez la [surveillance Browser RUM][1].
 
-2.  Initialisez le SDK RUM. Configurez le paramètre d'initialisation `allowedTracingUrls` avec la liste des origines internes first party appelées par votre application Browser.
+2. Initialisez le SDK RUM. Configurez le paramètre d'initialisation `allowedTracingUrls` avec la liste des origines internes first party appelées par votre application Browser.
 
+   Pour une **installation via npm** :
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -66,6 +74,25 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
         allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
     })
     ```
+
+   Pour une **installation via CDN** :
+
+   ```javascript
+   window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<http://datadoghq.com|datadoghq.com>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+   ```
 
     Pour associer RUM à vos traces, vous devez indiquer votre application Browser dans le champ `service`.
 
@@ -93,9 +120,17 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 {{% /tab %}}
 {{% tab "RUM pour Android" %}}
 
-1.  Configurez la [surveillance Android RUM][1].
+1. Configurez la [surveillance Android RUM][1].
+2. Configurez la [collecte de traces Android][2].
+3. Ajoutez la dépendance Gradle à la bibliothèque `dd-sdk-android-okhttp` dans le fichier `build.gradle` au niveau du module :
 
-2.  Configurez l'intercepteur `OkHttpClient` avec la liste des origines internes first party appelées par votre application Android.
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+4. Configurez l'intercepteur `OkHttpClient` avec la liste des origines internes first party appelées par votre application Android.
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -108,23 +143,24 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 
     Par défaut, tous les sous-domaines des hosts répertoriés sont tracés. Par exemple, si vous ajoutez `example.com`, vous activez également le tracing de `api.example.com` et `foo.example.com`.
 
-3.  _(Facultatif)_ Configurez le paramètre `traceSamplingRate` pour conserver un certain pourcentage des traces backend. Si ce paramètre n'est pas défini, 20 % des traces issues des requêtes d'application sont envoyées à Datadog. Pour conserver 100 % des traces backend :
+3.  _(Facultatif)_ Configurez le paramètre `traceSampler` pour conserver un certain pourcentage des traces backend. Si ce paramètre n'est pas défini, 20 % des traces issues des requêtes d'application sont envoyées à Datadog. Pour conserver 100 % des traces backend :
 
 ```java
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(RumInterceptor(traceSamplingRate = 100f))
+       .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
        .build()
   ```
 
 **Remarque** : le paramètre `traceSamplingRate` **n'affecte pas** l'échantillonnage des sessions RUM. Seules les traces backend sont filtrées.
 
 [1]: /fr/real_user_monitoring/android/
+[2]: /fr/tracing/trace_collection/dd_libraries/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "RUM pour iOS" %}}
 
-1.  Configurez la [surveillance iOS RUM][1].
+1. Configurez la [surveillance iOS RUM][1].
 
-2.  Appelez la fonction builder `trackURLSession(firstPartyHosts:)` avec la liste des origines internes first party appelées par votre application iOS.
+2. Appelez la fonction builder `trackURLSession(firstPartyHosts:)` avec la liste des origines internes first party appelées par votre application iOS.
     ```swift
     Datadog.initialize(
         appContext: .init(),
@@ -177,9 +213,9 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 {{% /tab %}}
 {{% tab "RUM pour React Native" %}}
 
-1.  Configurez la [surveillance React Native RUM][1].
+1. Configurez la [surveillance React Native RUM][1].
 
-2.  Configurez le paramètre d'initialisation `firstPartyHosts` pour définir la liste des origines internes first party appelées par votre application React Native.
+2. Configurez le paramètre d'initialisation `firstPartyHosts` pour définir la liste des origines internes first party appelées par votre application React Native.
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
@@ -220,21 +256,110 @@ Grâce aux données frontend de la fonctionnalité RUM et aux données relatives
 [2]: /fr/real_user_monitoring/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
+
+
+{{% tab "RUM pour Roku" %}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">RUM pour Roku n'est pas disponible pour le site US1-FED de Datadog.</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-info">RUM pour Roku est en version bêta.</div>
+
+1. Configurez la [surveillance Roku RUM][1].
+
+2. Utilisez le composant `datadogroku_DdUrlTransfer` pour lancer vos requêtes réseau.
+    ```brightscript
+        ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
+        ddUrlTransfer.SetUrl(url)
+        ddUrlTransfer.EnablePeerVerification(false)
+        ddUrlTransfer.EnableHostVerification(false)
+        result = ddUrlTransfer.GetToString()
+    ```
+
+[1]: /fr/real_user_monitoring/roku/
+{{< /site-region >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Vérification de la configuration
+
+Pour vérifier que vous avez bien configuré l'intégration d'APM avec RUM, suivez les étapes ci-dessous en fonction du SDK avec lequel vous avez installé RUM.
+
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+1. Consultez une page dans votre application.
+2. Dans les outils de développement de votre navigateur, accédez à l'onglet **Network**.
+3. Examinez les en-têtes de requête, trouvez une requête de ressource qui devrait être corrélée, et vérifiez qu'elle contient les [en-têtes de mise en corrélation de Datadog][1].
+
+[1]: /fr/real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+1. Exécutez votre application depuis Android Studio.
+2. Consultez un écran dans votre application.
+3. Ouvrez l'[outil d'inspection de réseau][1] d'Android Studio.
+4. Examinez les en-têtes de requête, trouvez une ressource RUM, et vérifiez que les [en-têtes requis sont définis par le SDK][2].
+
+[1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+1. Exécutez votre application depuis Xcode.
+2. Consultez un écran dans votre application.
+3. Ouvrez l'[instrument Network Connections and HTTP Traffic][1] de Xcode.
+4. Examinez les en-têtes de requête, trouvez une ressource RUM, et vérifiez que les [en-têtes requis sont définis par le SDK][2].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+1. Exécutez votre application depuis Xcode (iOS) ou Android Studio (Android).
+2. Consultez un écran dans votre application.
+3. Ouvrez l'[instrument Network Connections and HTTP Traffic][1] de Xcode ou l'[outil d'inspection de réseau][2] d'Android Studio.
+4. Examinez les en-têtes de requête, trouvez une ressource RUM, et vérifiez que les [en-têtes requis sont définis par le SDK][3].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[3]: https://docs.datadoghq.com/fr/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+1. Exécutez votre application depuis l'IDE de votre choix ou via `flutter run`.
+2. Consultez un écran dans votre application.
+3. Ouvrez les [outils de développement][1] de Flutter et accédez à la [vue Réseau][2].
+4. Examinez les en-têtes de requête, trouvez une ressource RUM, et vérifiez que les [en-têtes requis sont définis par le SDK][3].
+
+[1]: https://docs.flutter.dev/tools/devtools/overview
+[2]: https://docs.flutter.dev/tools/devtools/network
+[3]: https://docs.datadoghq.com/fr/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Bibliothèques compatibles
 
 Les bibliothèques de tracing Datadog suivantes sont prises en charge :
 
-| Bibliothèque                             | Version minimale                                                                                                             |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][2]                  | [0.22.0][3]                |
-| [Go][4]                  | [1.10.0][5]                |
-| [Java][6]                  | [0.24.1][7]                |
-| [Ruby][8]                  | [0.20.0][9]                |
-| [JavaScript][10]                  | [0.10.0][11]                |
-| [PHP][12]                  | [0.33.0][13]                |
-| [.NET][14]                  | [1.18.2][15]                |
+| Bibliothèque          | Version minimale |
+| ---------------- | --------------- |
+| [Python][3]      | [0.22.0][4]     |
+| [Go][5]          | [1.10.0][6]     |
+| [Java][7]        | [0.24.1][8]     |
+| [Ruby][9]        | [0.20.0][10]     |
+| [JavaScript][11] | [0.10.0][12]    |
+| [PHP][13]        | [0.33.0][14]    |
+| [.NET][15]       | [1.18.2][16]    |
 
 
 ## Prise en charge d'OpenTelemetry
@@ -408,7 +533,7 @@ Exemple pour le propagateur b3 multiple headers :
 {{% /tab %}}
 {{< /tabs >}}
 
-Ces en-têtes HTTP ne sont pas ajoutés à la liste blanche du mécanisme CORS. Vous devez donc [configurer Access-Control-Allow-Headers][16] sur le serveur traitant les requêtes que le SDK surveille. Le serveur doit également accepter les [requêtes préliminaires][17] (requêtes OPTIONS), qui sont transmises par le SDK avant chaque requête.
+Ces en-têtes HTTP ne sont pas ajoutés à la liste blanche du mécanisme CORS. Vous devez donc [configurer Access-Control-Allow-Headers][17] sur le serveur traitant les requêtes que le SDK surveille. Le serveur doit également accepter les [requêtes préliminaires][18] (requêtes OPTIONS), qui sont transmises par le SDK avant chaque requête.
 
 ## Cela a-t-il une incidence sur les quotas d'APM ?
 
@@ -416,28 +541,29 @@ Le fait d'associer RUM à vos traces peut considérablement augmenter les volume
 
 ## Pendant combien de temps les traces sont-elles conservées ?
 
-Ces traces restent disponibles pendant 15 minutes dans l'explorateur [Live Search][18]. Pour augmenter la durée de rétention des traces, créez des [filtres de rétention][19]. Définissez des tags de span spécifiques sur ces filtres pour ne conserver que les traces associées aux pages et aux actions utilisateur qui vous intéressent.
+Ces traces restent disponibles pendant 15 minutes dans l'explorateur [Live Search][19]. Pour augmenter la durée de rétention des traces, créez des [filtres de rétention][20]. Définissez des tags de span spécifiques sur ces filtres pour ne conserver que les traces associées aux pages et aux actions utilisateur qui vous intéressent.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing
-[2]: /fr/tracing/trace_collection/dd_libraries/python/
-[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[4]: /fr/tracing/trace_collection/dd_libraries/go/
-[5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: /fr/tracing/trace_collection/dd_libraries/java/
-[7]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[8]: /fr/tracing/trace_collection/dd_libraries/ruby/
-[9]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[10]: /fr/tracing/trace_collection/dd_libraries/nodejs/
-[11]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[12]: /fr/tracing/trace_collection/dd_libraries/php/
-[13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[14]: /fr/tracing/trace_collection/dd_libraries/dotnet-core/
-[15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
-[17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[18]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
-[19]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
+[1]: /fr/tracing/trace_collection/dd_libraries/ios/?tab=swiftpackagemanagerspm
+[2]: /fr/tracing
+[3]: /fr/tracing/trace_collection/dd_libraries/python/
+[4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[5]: /fr/tracing/trace_collection/dd_libraries/go/
+[6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[7]: /fr/tracing/trace_collection/dd_libraries/java/
+[8]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[9]: /fr/tracing/trace_collection/dd_libraries/ruby/
+[10]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[11]: /fr/tracing/trace_collection/dd_libraries/nodejs/
+[12]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[13]: /fr/tracing/trace_collection/dd_libraries/php/
+[14]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[15]: /fr/tracing/trace_collection/dd_libraries/dotnet-core/
+[16]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[17]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+[19]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
+[20]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters

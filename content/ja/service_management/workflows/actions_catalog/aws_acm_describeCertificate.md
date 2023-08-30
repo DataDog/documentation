@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_acm_describeCertificate
 bundle: com.datadoghq.aws.acm
 bundle_title: AWS Certificate Manager
 description: 指定された ACM 証明書の詳細なメタデータを返します。

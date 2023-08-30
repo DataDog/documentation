@@ -15,13 +15,13 @@ title: AWS と Terraform のインテグレーション
 
 1. [Datadog Terraform プロバイダー][2]を構成し、Terraform の構成で Datadog API と対話するように設定します。
 
-{{< site-region region="us,us3,us5,ap1,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 2. 以下の例を基本テンプレートとして、Terraform の構成ファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
    * `AWS_PERMISSIONS_LIST`: Datadog AWS インテグレーションが必要とする IAM ポリシー。現在のリストは、[Datadog AWS インテグレーション][1]のドキュメントで確認できます。
    * `AWS_ACCOUNT_ID`: AWS アカウント ID。
 
-   さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、[Terraform Registry][2] を参照してください。
+   さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、Terraform レジストリの [Datadog AWS インテグレーションリソース][2]ページを参照してください。
 
    ```hcl
    data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
@@ -160,5 +160,5 @@ title: AWS と Terraform のインテグレーション
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.terraform.io
-[2]: https://docs.datadoghq.com/ja/integrations/terraform/#overview
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [5]: https://app.datadoghq.com/screen/integration/7/aws-overview

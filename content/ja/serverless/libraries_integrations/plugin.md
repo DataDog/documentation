@@ -61,7 +61,6 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `enabled`                     | `false` に設定すると、Datadog プラグインが非アクティブ状態になります。デフォルトは `true` です。たとえば、`enabled: ${strToBool(${env:DD_PLUGIN_ENABLED, true})}` の環境変数を使用してこのオプションを制御し、デプロイ時にプラグインを有効化 / 無効化することができます。また、`--stage` を通じて渡された値を使用してこのオプションを制御することもできます。[こちらの例](#disable-plugin-for-particular-environment)をご覧ください。 |
 | `customHandler`               | 設定すると、指定されたハンドラーがすべての関数のハンドラーとして設定されます。 |
 | `failOnError`                 | このプラグインを設定すると、Datadog カスタムモニターの作成または更新が失敗した場合にエラーが生成されます。これは、デプロイ後に発生しますが、`serverless deploy` の結果が 0 以外の終了コードを返す原因になります（ユーザー CI を失敗にするため）。デフォルトは `false` です。 |
-| `integrationTesting`          | インテグレーションテストを実行するときに `true` に設定します。これにより、Forwarder ARN と追加した Datadog モニターの出力リンクの検証要件がバイパスされます。デフォルトは `false` です。 |
 | `logLevel`                    | ログのレベル。拡張ロギングの場合 `DEBUG` に設定します。 |
 | `skipCloudformationOutputs`   | スタックに Datadog Cloudformation Outputs を追加するのをスキップしたい場合は、`true` に設定します。これは、スタックの作成に失敗する原因となる 200 の出力制限に遭遇している場合に有効です。 |
 | `enableColdStartTracing`      | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。 |

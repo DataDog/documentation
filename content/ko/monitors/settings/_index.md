@@ -54,7 +54,7 @@ title: 모니터 태그 정책
 
 자세한 내용은  [Role Based Access Control][1] 또는 [Role Permissions][2] 을 참고하세요.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

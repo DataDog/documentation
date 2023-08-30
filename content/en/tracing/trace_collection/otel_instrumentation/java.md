@@ -1,7 +1,7 @@
 ---
 title: Custom Instrumentation of Java Applications with the OpenTelemetry API
 kind: documentation
-description: 'Instrument your Java application with OTel API to send traces to Datadog.'
+description: 'Instrument your Java application with OpenTelemetry API to send traces to Datadog.'
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -17,19 +17,19 @@ further_reading:
 
 - Datadog Java tracing library `dd-trace-java` version 1.10.0 or greater.
 
-The following OTel features implemented in the Datadog library as noted:
+The following OpenTelemetry features implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
 |---------------------------------------|-------------------------------------------|
-| [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog tracing library
+## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OTel instrumentation to your Java code following the [OTel Java Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Java code following the [OpenTelemetry Java Manual Instrumentation documentation][5].
 1. Add the [Datadog tracing library to the JVM][11].
 1. Set the `dd.trace.otel.enabled` system property to `true`.
 

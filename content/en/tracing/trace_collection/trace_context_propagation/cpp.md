@@ -4,11 +4,15 @@ kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
 ---
 
 ## Overview
 
-Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
+Datadog APM tracer supports [B3][11] headers extraction and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The supported styles for C++ are:
 
@@ -68,6 +72,10 @@ void example() {
   // `headers` now populated with the headers needed to propagate the span.
 }
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter

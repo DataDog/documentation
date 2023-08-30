@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: moogsoft
 app_uuid: db3d32c6-1127-4bd5-b270-01aa573616b7
 assets:

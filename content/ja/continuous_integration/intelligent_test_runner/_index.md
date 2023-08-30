@@ -34,6 +34,7 @@ Intelligent Test Runner を設定する前に、特定の言語に対して [Tes
 
 {{< whatsnext desc="Datadog で Intelligent Test Runner をセットアップする言語を選択します。" >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
 {{< /whatsnext >}}

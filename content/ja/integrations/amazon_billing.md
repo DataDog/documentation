@@ -14,20 +14,20 @@ draft: false
 git_integration_title: amazon_billing
 has_logo: true
 integration_id: amazon-billing
-integration_title: AWS Billing
+integration_title: AWS Billing and Cost Management
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_billing
-public_title: Datadog-AWS Billing インテグレーション
+public_title: Datadog-AWS Billing and Cost Management インテグレーション
 short_description: AWS アカウントの支払実績と支払予測を監視
 version: '1.0'
 ---
 
 ## 概要
 
-AWS Billing を使用すると、CloudWatch の使用量を含む AWS インフラストラクチャーの予測課金額やコストを追跡できます。
+AWS Billing and Cost Management を使用すると、CloudWatch の使用量を含む AWS インフラストラクチャーの予測課金額やコストを追跡できます。
 
 このインテグレーションを有効にすると、請求メトリクスを Datadog に表示できます。
 
@@ -47,7 +47,7 @@ AWS Billing を使用すると、CloudWatch の使用量を含む AWS インフ�
     | `budgets:ViewBudget` | AWS の予算メトリクスの表示に使用されます。|
 
 3. [AWS コンソール][5]内で請求メトリクスを有効にします。
-4. [Datadog - AWS Billing インテグレーション][6]をインストールします。
+4. [Datadog - AWS Billing and Cost Management インテグレーション][6]をインストールします。
 5. [AWS 予算を作成][7]して、[メトリクス](#metrics)の受信を開始します。
 
 **注**: AWS の予算メトリクスは、AWS プライマリアカウントからのみ収集できます。
@@ -88,11 +88,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Billing インテグレーションには、イベントは含まれません。
+AWS Billing and Cost Management インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS Billing インテグレーションには、サービスのチェック機能は含まれません。
+AWS Billing and Cost Management インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

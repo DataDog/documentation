@@ -28,7 +28,7 @@ Azure Container Apps を使用すると、サーバーレスコンテナを使�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 

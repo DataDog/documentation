@@ -15,6 +15,124 @@ further_reading:
 
 If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2].
 
+## Automatic View Tracking
+
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. Here, we document how to integrate with the most popular routing packages.
+
+### go_router
+
+Since [go_router][8], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    // Your route information here
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+);
+```
+
+If you are using ShellRoutes, you need to supply a separate observer to each `ShellRoute`, as shown below. See [this bug][11] for more information.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    ShellRoute(build: shellBuilder),
+    routes: [
+      // Additional routes
+    ],
+    observers: [
+      DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+    ],
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+);
+```
+
+Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, ensure that you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
+
+```dart
+GoRoute(
+  name: 'My Home',
+  path: '/path',
+  pageBuilder: (context, state) {
+    return MaterialPage(
+      key: state.pageKey,       // Necessary for GoRouter to call Observers
+      name: name,               // Needed for Datadog to get the right route name
+      child: _buildContent(),
+    );
+  },
+),
+```
+
+### AutoRoute
+
+[AutoRoute][9] can use a `DatadogNavigationObserver` provided as one of the `navigatorObservers` as part of its `config` method.
+
+```dart
+return MaterialApp.router(
+  routerConfig: _router.config(
+    navigatorObservers: () => [
+      DatadogNavigationObserver(
+        datadogSdk: DatadogSdk.instance,
+      ),
+    ],
+  ),
+  // Your remaining setup
+);
+```
+
+However, if you are using AutoRoute's tab routing, you need to extend Datadog's default observer with AutoRoute's `AutoRouteObserver` interface.
+
+```dart
+class DatadogAutoRouteObserver extends DatadogNavigationObserver
+    implements AutoRouterObserver {
+  DatadogAutoRouteObserver({required super.datadogSdk});
+
+  // only override to observer tab routes
+  @override
+  void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
+    datadogSdk.rum?.startView(route.path, route.name);
+  }
+
+  @override
+  void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
+    datadogSdk.rum?.startView(route.path, route.name);
+  }
+}
+```
+
+This new object replaces the simpler `DatadogNavigationObserver` in creation of AutoRoute's config.
+
+### Beamer
+
+[Beamer][10] can use the `DatadogNavigationObserver` as an argument to `BeamerDelegate`:
+
+```dart
+final routerDelegate = BeamerDelegate(
+  locationBuilder: RoutesLocationBuilder(
+    routes: {
+      // Your route config
+    },
+  ),
+  navigatorObservers: [
+    DatadogNavigationObserver(DatadogSdk.instance),
+  ]
+);
+```
+
 ## Enrich user sessions
 
 Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
@@ -226,3 +344,7 @@ This means that even if users open your application while offline, no data is lo
 [5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogNavigationObserver-class.html
+[8]: https://pub.dev/packages?q=go_router
+[9]: https://pub.dev/packages/auto_route
+[10]: https://pub.dev/packages/beamer
+[11]: https://github.com/flutter/flutter/issues/112196

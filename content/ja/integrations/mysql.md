@@ -44,7 +44,7 @@ draft: false
 git_integration_title: mysql
 integration_id: mysql
 integration_title: MySQL
-integration_version: 10.2.2
+integration_version: 10.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -86,7 +86,7 @@ MySQL インテグレーションは、MySQL インスタンスのパフォー�
 
 <div class="alert alert-info">このページでは、MySQL Agent の標準的なインテグレーションについて説明します。MySQL のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
 MySQL チェックは [Datadog Agent][3] パッケージに含まれています。MySQL サーバーに追加でインストールする必要はありません。
 
@@ -100,17 +100,10 @@ MySQL チェックは [Datadog Agent][3] パッケージに含まれています
 
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL アカウントの追加、特権の割り当て、アカウントの削除][5]を参照してください。
 
-MySQL 5.6、MySQL 5.7 では、次のコマンドを使って `datadog` ユーザーを作成します。
+以下のコマンドで `datadog` ユーザーを作成します。
 
 ```shell
 mysql> CREATE USER 'datadog'@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-Query OK, 0 rows affected (0.00 sec)
-```
-
-mySQL 8.0 以上の場合は、ネイティブのパスワードハッシュ化メソッドを使用して `datadog` ユーザーを作成します。
-
-```shell
-mysql> CREATE USER 'datadog'@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
@@ -322,7 +315,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "user": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
@@ -367,7 +360,7 @@ metadata:
       [
         {
           "server": "%%host%%", 
-          "user": "datadog",
+          "username": "datadog",
           "password": "<UNIQUEPASSWORD>"
         }
       ]
@@ -392,7 +385,7 @@ metadata:
           "instances": [
             {
               "server": "%%host%%", 
-              "user": "datadog",
+              "username": "datadog",
               "password": "<UNIQUEPASSWORD>"
             }
           ]
@@ -452,7 +445,7 @@ metadata:
     "dockerLabels": {
       "com.datadoghq.ad.check_names": "[\"mysql\"]",
       "com.datadoghq.ad.init_configs": "[{}]",
-      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"user\": \"datadog\",\"password\": \"<UNIQUEPASSWORD>\"}]"
+      "com.datadoghq.ad.instances": "[{\"server\": \"%%host%%\", \"username\": \"datadog\",\"password\": \"<UNIQUEPASSWORD>\"}]"
     }
   }]
 }
@@ -668,7 +661,7 @@ MySQL チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#mysql
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

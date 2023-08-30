@@ -42,7 +42,7 @@ Kubernetes State Metrics Core は、より詳細なメトリクスとタグを�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメージに含まれているため、Kubernetes サーバーに他に何もインストールする必要はありません。
 
@@ -235,10 +235,10 @@ datadog:
 : エンドポイントの数。タグ:`kube_namespace`。
 
 `kubernetes_state.endpoint.address_available`
-: エンドポイントで使用可能なアドレスの数。タグ: `endpoint` `kube_namespace`。
+: エンドポイントで使用可能なアドレスの数。タグ: `kube_endpoint` `kube_namespace`。
 
 `kubernetes_state.endpoint.address_not_ready`
-: エンドポイントで準備ができていないアドレスの数。タグ: `endpoint` `kube_namespace`。
+: エンドポイントで準備ができていないアドレスの数。タグ: `kube_endpoint` `kube_namespace`。
 
 `kubernetes_state.namespace.count`
 : ネームスペースの数。タグ: `phase`。

@@ -83,7 +83,7 @@ Datadog Agent のパラメーター `max_traces_per_second` または環境変�
 例えば、`my-service` という名前のサービスのトレースの 20% を送信するには
 
 ```
-DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
+DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 [サンプリングルールの取り込みメカニズム][6]について詳しくはこちら。
@@ -133,13 +133,13 @@ DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 - バックエンドサービス `web-store` の **トレースサンプリングルール** を構成し、Mongo スパンを含むトレース全体の 10% を保持します。
 
   ```
-  DD_TRACE_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 0.1}]
+  DD_TRACE_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 0.1}]'
   ```
 
 - オプションとして、すべての `web-store` スパンを保持したい場合は、バックエンドサービス `web-store` のスパンの 100% を保持する**シングルスパンサンプリングルール**を構成してください。このサンプリングでは、上記の 10% 以外のデータベース呼び出しスパンは取り込まれません。
 
   ```
-  DD_SPAN_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 1}]
+  DD_SPAN_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 1}]'
   ```
 
   **注**: スパンサンプリングルールの構成は、取り込みスパンから得られる[スパンベースメトリクス][8]を使用する場合に特に有効です。

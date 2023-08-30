@@ -40,24 +40,6 @@ title: Agent ガイド
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Agent をアンインストールするにはどうしたらいいですか？{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="コンテナガイド:" >}}
-    {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}JMX を使用したオートディスカバリー{{< /nextlink >}}
-    {{< nextlink href="agent/guide/build-container-agent" >}}Datadog Agent イメージの構築{{< /nextlink >}}
-    {{< nextlink href="agent/guide/autodiscovery-management" >}}Agent でコンテナのディスカバリーを管理{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifiers パラメーターを使用して、指定されたコンテナにオートディスカバリーのコンフィギュレーションファイルテンプレートを適用{{< /nextlink >}}
-    {{< nextlink href="agent/guide/operator-advanced" >}}Datadog Operator の高度なセットアップ{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Docker 環境のコンテナイメージ{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/compose-and-the-datadog-agent" >}}コンポーズと Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/docker-deprecation" >}}Kubernetes における Docker の廃止{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Podman コンテナランタイムとの Docker インテグレーションの使用{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/changing_container_registry" >}}コンテナレジストリの変更{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/template_variables" >}}オートディスカバリーテンプレート変数{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/auto_conf" >}}オートディスカバリーの自動構成{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/how-to-import-datadog-resources-into-terraform/" >}}Datadog のリソースを Terraform にインポートする方法{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/kubernetes-cluster-name-detection/" >}}Kubernetes クラスター名検出{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/kubernetes-legacy/" >}}Kubernetes レガシー{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< whatsnext desc="Agent v5 ガイド:" >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Agent v5 のオートディスカバリー{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Agent v5 における基本的な Kubernetes エージェントの利用方法{{< /nextlink >}}

@@ -7,8 +7,11 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイについて
+- link: /integrations/content_security_policy_logs
+  tag: Documentation
+  text: Datadog で CSP 違反の検出と集計を行う
 kind: documentation
-title: セッションリプレイのトラブルシューティング
+title: セッションリプレイブラウザのトラブルシューティング
 ---
 
 ## 概要

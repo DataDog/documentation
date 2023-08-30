@@ -1,7 +1,7 @@
 {{ $dot := . }}
 <div class="dbm-setup-oracle">
   <div class="container cards-dd">
-    <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+    <div class="row row-cols-2 row-cols-sm-5 g-2 g-xl-3 justify-content-sm-center">
       <div class="col">
         <a class="card h-100" href="/database_monitoring/setup_oracle/selfhosted">
           <div class="card-body text-center py-2 px-1">
@@ -15,6 +15,30 @@
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/amazon_rds.png" "class" "img-fluid" "alt" "RDS" "width" "175") }}
             <br/>RDS
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_oracle/rac">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/oracle.png" "class" "img-fluid" "alt" "RAC" "width" "175") }}
+            <br/>RAC
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_oracle/exadata">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/oracle.png" "class" "img-fluid" "alt" "Exadata" "width" "175") }}
+            <br/>Exadata
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="/database_monitoring/setup_oracle/autonomous_database">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/oracle.png" "class" "img-fluid" "alt" "Selfhosted" "width" "175") }}
+            <br/>Autonomous<br/>Database
           </div>
         </a>
       </div>

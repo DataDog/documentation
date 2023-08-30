@@ -4,17 +4,21 @@ kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
 ---
 
-The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][7] and [W3C Trace Context][10] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
 The PHP Tracer supports the following styles:
 
 - Datadog: `Datadog`
-- W3C: `tracecontext`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
+- W3C Trace Context: `tracecontext`
+- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
 - B3 Single Header: `B3 single header`
 
 You can use the following environment variables to configure the PHP tracing library injection and extraction styles. For instance:
@@ -68,6 +72,9 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 // These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [7]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

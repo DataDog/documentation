@@ -96,7 +96,7 @@ hostname: mymachine.mydomain
 
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/tagging/#defining-tags
+[3]: /getting_started/tagging/#define-tags
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -138,7 +138,7 @@ hostname: mymachine.mydomain
 
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/tagging/#defining-tags
+[3]: /getting_started/tagging/#define-tags
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -399,7 +399,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#defining-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /integrations/#cat-cloud
 [4]: /getting_started/agent/#setup

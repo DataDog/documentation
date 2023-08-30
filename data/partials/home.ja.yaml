@@ -60,7 +60,7 @@ nav_sections:
       icon: log
       link: logs/
       title: ログ管理
-    - desc: アプリケーションとインフラストラクチャーの脅威と構成ミスを検出する
+    - desc: アプリケーションとインフラストラクチャーの脅威、脆弱性、構成ミスを検出する
       icon: security-platform
       link: security/
       title: セキュリティ
@@ -68,6 +68,10 @@ nav_sections:
       icon: 外形監視
       link: synthetics/
       title: Synthetic モニタリング
+    - desc: モバイルアプリケーションにおけるユーザージャーニーとビジネストランザクションの監視
+      icon: モバイル
+      link: mobile_app_testing/
+      title: モバイルアプリケーションテスト
     - desc: CI/CD プロバイダーでコードレスインテグレーションとエンドツーエンドテストを実施する
       icon: continuous-testing
       link: continuous_testing/
@@ -75,7 +79,7 @@ nav_sections:
     - desc: アプリケーションのユーザーエクスペリエンスを把握、観察、分析
       icon: rum
       link: real_user_monitoring/
-      title: リアルユーザーモニタリング (RUM)
+      title: リアルユーザーモニタリング
     - desc: タグ付きオブジェクトを使用して、ネットワークトラフィックに関するデータを収集し、グラフ化
       icon: ネットワーク
       link: network_monitoring/
@@ -95,7 +99,7 @@ nav_sections:
     - desc: CI パイプラインのテストメトリクス、ビルド結果、パイプラインの実行を確認
       icon: ci
       link: continuous_integration/
-      title: CI Visibility （CI/CDの可視化）
+      title: CI Visibility
     - desc: 観測可能性とコストデータを統合し、クラウド費用をコントロールする
       icon: cloud-cost-management
       link: cloud_cost_management/
@@ -103,15 +107,23 @@ nav_sections:
     - desc: 充実したダッシュボード、クエリメトリクス、クエリサンプルを参照
       icon: database-2
       link: database_monitoring/
-      title: データベース モニタリング
+      title: データベースモニタリング
+    - desc: データストリーミングパイプラインのパフォーマンスを追跡、改善
+      icon: datastreams-monitoring
+      link: data_streams/
+      title: Data Streams Monitoring
     - desc: テレメトリーパイプラインの管理・監視
       icon: パイプライン
       link: observability_pipelines/
-      title: Observability Pipelines（観測データの制御）
+      title: 観測可能性パイプライン
     - desc: コードを変更することなく、サービスを発見、マッピング、監視する
       icon: usm
       link: universal_service_monitoring/
       title: ユニバーサルサービスモニタリング
+    - desc: 技術スタック全体のプロセスの自動化とオーケストレーション
+      icon: ワークフロー
+      link: ワークフロー
+      title: ワークフローの自動化
 - nav_section:
   - name: コンフィギュレーション
   - navtiles:

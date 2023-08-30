@@ -19,7 +19,7 @@ title: .NET テスト
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点では CI Visibility は使用できません。</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
 ## 互換性
@@ -34,54 +34,26 @@ title: .NET テスト
 * MsTestV2 14 以上
 * [BenchmarkDotNet 0.13.2][11] 以上
 
-### テストスイートレベルの可視化の互換性
-[テストスイートレベルの可視化][1]は `dd-trace-dotnet>=2.16.0` からサポートされるようになりました。
+### テストスイートレベルの視覚化
+[テストスイートレベルの視覚化][1]は `dd-trace-dotnet>=2.16.0` からサポートされています。
 
 ## 報告方法の構成
 
-Datadog にテスト結果を報告するには、Datadog の .NET ライブラリを構成する必要があります。
+Datadog にテスト結果を報告するには、Datadog .NET ライブラリを構成する必要があります。
 
 {{< tabs >}}
+{{% tab "オンプレミスの CI プロバイダー (Datadog Agent)" %}}
 
-{{% tab "オンプレミス CI プロバイダー (Datadog Agent)" %}}
+{{% ci-agent %}}
 
-Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
-
-CI プロバイダーがコンテナベースのエグゼキューターを使用している場合、ビルド内の `localhost` の使用ではコンテナ自体を参照しており、Datadog Agent が動作している基礎となるワーカーノードではないため、すべてのビルドで `DD_AGENT_HOST` 環境変数 (デフォルトは `http://localhost:8126`) を、ビルドコンテナの中からアクセスできるエンドポイントに設定します。
-
-Kubernetes のエグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] の使用を推奨しており、これは自動的にビルドポッドの環境変数 `DD_AGENT_HOST` を設定してローカルの Datadog Agent と通信させます。
-
-
-[1]: /ja/agent/
-[2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
 {{% /tab %}}
+{{% tab "クラウドの CI プロバイダー (Agentless)" %}}
 
-{{% tab "クラウド CI プロバイダー (Agentless)" %}}
+<div class="alert alert-info">Agentless モードは Datadog .NET ライブラリのバージョン >= 2.5.1 で利用できます。</div>
 
-<div class="alert alert-info">Agentless モードは、Datadog .NET ライブラリのバージョン >= 2.5.1 で使用できます</div>
+{{% ci-agentless %}}
 
-GitHub Actions や CircleCI など、基盤となるワーカーノードにアクセスできないクラウド CI プロバイダーを使用している場合は、Agentless モードを使用するようにライブラリを構成します。そのためには、以下の環境変数を設定します。
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
-: Agentless モードを有効または無効にします。<br/>
-**デフォルト**: `false`
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][1]。<br/>
-**デフォルト**: `(empty)`
-
-さらに、どの [Datadog サイト][2]にデータを送信するかを構成します。
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][2]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/getting_started/site/
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## .NET トレーサー CLI のインストール
@@ -131,15 +103,15 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 すべてのテストは自動的にインスツルメントされます。
 
-## コンフィギュレーション設定
+## 構成設定
 
-コマンドライン引数または環境変数を使用して、CLI のデフォルトコンフィギュレーションを変更できます。コンフィギュレーション設定の完全なリストについては、以下を実行してください。
+コマンドライン引数または環境変数を使用して、CLI のデフォルト構成を変更できます。構成設定の完全なリストについては、以下を実行してください。
 
 {{< code-block lang="shell" >}}
 dd-trace ci run --help
 {{< /code-block >}}
 
-次のリストは、主要なコンフィギュレーション設定のデフォルト値を示しています。
+次のリストは、主要な構成設定のデフォルト値を示しています。
 
 `--dd-service`
 : テスト中のサービスまたはライブラリの名前。<br/>
@@ -158,7 +130,7 @@ dd-trace ci run --help
 **環境変数**: `DD_TRACE_AGENT_URL`<br/>
 **デフォルト**: `http://localhost:8126`
 
-他のすべての [Datadog トレーサーコンフィギュレーション][6]オプションも使用できます。
+他のすべての [Datadog トレーサー構成][6]オプションも使用できます。
 
 ### テストにカスタムタグを追加する
 
@@ -180,7 +152,7 @@ if (scope != null) {
 
 コードカバレッジが利用できる場合、Datadog トレーサー (v2.31.0+) は、テストセッションの `test.code_coverage.lines_pct` タグでそれを報告します。
 
-コードカバレッジの計算に [Coverlet][14] を使用している場合、`dd-trace` を実行する際に `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` 環境変数にレポートファイルへのパスを指定します。レポートファイルは、OpenCover または Cobertura 形式である必要があります。また、環境変数 `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` で、Datadog トレーサーに内蔵されているコードカバレッジ計算を有効にできます。
+コードカバレッジの計算に [Coverlet][14] を使用している場合、`dd-trace` を実行する際に `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` 環境変数にレポートファイルへのパスを指定します。レポートファイルは、OpenCover または Cobertura 形式である必要があります。または、環境変数 `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` で、Datadog トレーサーに内蔵されているコードカバレッジ計算を有効にできます。
 
 **注**: Intelligent Test Runner を使用する場合、トレーサーに内蔵されたコードカバレッジはデフォルトで有効になっています。
 
@@ -188,7 +160,7 @@ if (scope != null) {
 
 ### BenchmarkDotNet テストのインスツルメンテーション
 
-ベンチマークテストをインスツルメンテーションするために必要なこと
+ベンチマークテストをインスツルメンテーションするには
 
 1. [`Datadog.Trace.BenchmarkDotNet` NuGet パッケージ][12]をプロジェクトに追加します (例えば、`dotnet add package Datadog.Trace.BenchmarkDotNet` を使用します)。
 2. `DatadogDiagnoser` 属性または `WithDatadog()` 拡張機能を使って、 `Datadog.Trace.BenchmarkDotNet` エクスポーターを使用するようにプロジェクトを構成してください。例:
@@ -231,55 +203,9 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 3. [報告方法を構成します][13]。
 4. 通常通りベンチマークプロジェクトを実行すると、すべてのベンチマークテストが自動的にインスツルメンテーションされます。
 
-### Git のメタデータを収集する
+## リポジトリの収集とメタデータのコミット
 
-Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、コミットごとにグループ化するために Git の情報を使用します。Git のメタデータは、CI プロバイダーの環境変数や、プロジェクトパス内のローカルな `.git` フォルダがあれば、そこからテストインスツルメンテーションによって自動的に収集されます。
-
-サポートされていない CI プロバイダーでテストを実行する場合や、`.git` フォルダがない場合は、環境変数を使って Git の情報を手動で設定することができます。これらの環境変数は、自動検出された情報よりも優先されます。Git の情報を提供するために、以下の環境変数を設定します。
-
-`DD_GIT_REPOSITORY_URL`
-: コードが格納されているリポジトリの URL。HTTP と SSH の両方の URL に対応しています。<br/>
-**例**: `git@github.com:MyCompany/MyApp.git`、`https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: テスト中の Git ブランチ。タグ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `develop`
-
-`DD_GIT_TAG`
-: テストされる Git タグ (該当する場合)。ブランチ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: フルコミットハッシュ。<br/>
-**例**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: コミットのメッセージ。<br/>
-**例**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: コミット作成者名。<br/>
-**例**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: コミット作成者メールアドレス。<br/>
-**例**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: ISO 8601 形式のコミット作成者の日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: コミットのコミッター名。<br/>
-**例**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: コミットのコミッターのメールアドレス。<br/>
-**例**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: ISO 8601 形式のコミットのコミッターの日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
+{{% ci-git-metadata %}}
 
 ## カスタムインスツルメンテーション
 
@@ -864,14 +790,7 @@ await module.CloseAsync();
 
 最後に必ず `module.Close()` または `module.CloseAsync()` を呼び出し、すべてのテストデータを Datadog に流すようにします。
 
-## 収集した情報
-
-CI Visibility を有効にすると、プロジェクトから以下のデータが収集されます。
-
-* テストの名前と時間。
-* CI プロバイダーが設定する事前定義された環境変数。
-* Git のコミット履歴。ハッシュ、メッセージ、作成者情報、変更されたファイル (ファイルの内容は含まず) が含まれます。
-* CODEOWNERS ファイルからの情報。
+{{% ci-information-collected %}}
 
 さらに、[Intelligent Test Runner][10] を有効にすると、プロジェクトから以下のデータが収集されます。
 

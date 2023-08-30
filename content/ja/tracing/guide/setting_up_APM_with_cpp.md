@@ -15,10 +15,10 @@ title: C++ による APM の設定
 
 ### 基本の環境
 
-最初に、新しい `ubuntu/xenial64` Vagrant ボックスをスピンアップし、それに対して `ssh` を実行します。
+最初に、新しい `ubuntu/jammy64` Vagrant ボックスをスピンアップし、それに対して `ssh` を実行します。
 
 ```bash
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -166,4 +166,4 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

@@ -132,6 +132,9 @@ Send health metrics from Phusion's Passenger server using the [passenger-datadog
 
 This [library][54] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][55].
 
+### Pulumi
+The Datadog [resource provider][67] for Pulumi lets you configure Datadog resources.
+
 ### SaltStack
 
 * [Datadog SaltStack Formula][56]
@@ -224,3 +227,4 @@ If you've written a Datadog library and would like to add it to this page, send 
 [64]: mailto:opensource@datadoghq.com
 [65]: https://github.com/SpeedCurve-Metrics/heroku-buildpack-php-ddtrace
 [66]: https://www.speedcurve.com/
+[67]: https://github.com/pulumi/pulumi-datadog

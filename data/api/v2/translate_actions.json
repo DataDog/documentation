@@ -99,18 +99,24 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "CreateCIAppPipelineEvent": {
+    "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
+    "summary": "Send pipeline event",
+    "request_description": "",
+    "request_schema_description": "Request object."
+  },
   "AggregateCIAppPipelineEvents": {
-    "description": "The API endpoint to aggregate CI Visibility pipeline events into buckets of computed metrics and timeseries.",
+    "description": "Use this API endpoint to aggregate CI Visibility pipeline events into buckets of computed metrics and timeseries.",
     "summary": "Aggregate pipelines events",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of pipeline events from your organization."
   },
   "ListCIAppPipelineEvents": {
-    "description": "List endpoint returns CI Visibility pipeline events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest pipeline events.",
+    "description": "List endpoint returns CI Visibility pipeline events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest pipeline events.",
     "summary": "Get a list of pipelines events"
   },
   "SearchCIAppPipelineEvents": {
-    "description": "List endpoint returns CI Visibility pipeline events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "description": "List endpoint returns CI Visibility pipeline events that match a [search query](https://docs.datadoghq.com/continuous_integration/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search pipelines events",
     "request_description": "",
     "request_schema_description": "The request for a pipelines search."
@@ -122,11 +128,11 @@
     "request_schema_description": "The object sent with the request to retrieve aggregation buckets of test events from your organization."
   },
   "ListCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
+    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest test events.",
     "summary": "Get a list of tests events"
   },
   "SearchCIAppTestEvents": {
-    "description": "List endpoint returns CI Visibility test events that match a log search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
+    "description": "List endpoint returns CI Visibility test events that match a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to build complex events filtering and search.",
     "summary": "Search tests events",
     "request_description": "",
     "request_schema_description": "The request for a tests search."
@@ -176,6 +182,30 @@
     "summary": "Update items of a dashboard list",
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
+  },
+  "ListDowntimes": {
+    "description": "Get all scheduled downtimes.",
+    "summary": "Get all downtimes"
+  },
+  "CreateDowntime": {
+    "description": "Schedule a downtime.",
+    "summary": "Schedule a downtime",
+    "request_description": "Schedule a downtime request body.",
+    "request_schema_description": "Request for creating a downtime."
+  },
+  "CancelDowntime": {
+    "description": "Cancel a downtime.",
+    "summary": "Cancel a downtime"
+  },
+  "GetDowntime": {
+    "description": "Get downtime detail by `downtime_id`.",
+    "summary": "Get a downtime"
+  },
+  "UpdateDowntime": {
+    "description": "Update a downtime by `downtime_id`.",
+    "summary": "Update a downtime",
+    "request_description": "Update a downtime request body.",
+    "request_schema_description": "Request for editing a downtime."
   },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
@@ -677,12 +707,16 @@
     "request_description": "Description of the update.",
     "request_schema_description": "Request for editing a monitor configuration policy."
   },
+  "ListMonitorDowntimes": {
+    "description": "Get all active downtimes for the specified monitor.",
+    "summary": "Get active downtimes for a monitor"
+  },
   "ListPermissions": {
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
   "ListFindings": {
-    "description": "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "description": "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
   "GetFinding": {
@@ -700,7 +734,7 @@
     "summary": "Get all processes"
   },
   "QueryScalarData": {
-    "description": "Query scalar values (as seen on Query Value, Table and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
+    "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
     "request_description": "",
     "request_schema_description": "A wrapper request around one scalar query to be executed."
@@ -1068,6 +1102,22 @@
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
   },
+  "AggregateSpans": {
+    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
+    "summary": "Aggregate spans",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve a list of aggregated spans from your organization."
+  },
+  "ListSpansGet": {
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest spans.\nThis endpoint is rate limited to `300` requests per hour.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "summary": "Get a list of spans"
+  },
+  "ListSpans": {
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex spans filtering and search.\nThis endpoint is rate limited to `300` requests per hour.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "summary": "Search spans",
+    "request_description": "",
+    "request_schema_description": "The request for a spans list."
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"
@@ -1249,5 +1299,9 @@
   "ListUserPermissions": {
     "description": "Get a user permission set. Returns a list of the user’s permissions\ngranted by the associated user's roles.",
     "summary": "Get a user permissions"
+  },
+  "GetUserMemberships": {
+    "description": "Get a list of memberships for a user",
+    "summary": "Get user memberships"
   }
 }

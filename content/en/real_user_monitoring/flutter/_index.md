@@ -37,6 +37,8 @@ To initialize the Datadog Flutter SDK for RUM, see [Setup][3].
 
 ## Automatically track views
 
+### Flutter Navigator v1
+
 The [Datadog Flutter Plugin][4] can automatically track named routes using the `DatadogNavigationObserver` on your MaterialApp:
 
 ```dart
@@ -50,9 +52,33 @@ MaterialApp(
 
 This works if you are using named routes or if you have supplied a name to the `settings` parameter of your `PageRoute`.
 
-Alternatively, you can use the `DatadogRouteAwareMixin` property in conjunction with the `DatadogNavigationObserverProvider` property to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`.
+If you are not using named routes, you can use `DatadogRouteAwareMixin` in conjunction with the `DatadogNavigationObserverProvider` widget to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`.
 
-To rename your views or supply custom paths, provide a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
+### Flutter Navigator v2
+
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [go_router][11], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    // Your route information here
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+)
+```
+
+For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][12].
+
+
+### Renaming Views
+
+For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
 
 ```dart
 RumViewInfo? infoExtractor(Route<dynamic> route) {
@@ -72,7 +98,6 @@ var observer = DatadogNavigationObserver(
   viewInfoExtractor: infoExtractor,
 );
 ```
-
 
 ## Automatically track resources
 
@@ -109,3 +134,5 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
+[11]: https://pub.dev/packages/go_router
+[12]: /real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking

@@ -1,0 +1,41 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "on_right_yaxis": false,
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "mymetric",
+                "query": "avg:system.cpu.user{*}"
+              }
+            ],
+            "response_format": "timeseries",
+            "display_type": "line"
+          },
+          {
+            "response_format": "timeseries",
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "mymetricoverlay",
+                "query": "avg:system.cpu.user{*}"
+              }
+            ],
+            "style": {
+              "palette": "purple",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "overlay"
+          }
+        ]
+      }
+    }
+  ]
+}

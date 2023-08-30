@@ -82,7 +82,7 @@ Datadog による Oracle WebLogic のモニタリングでは、以下のこと�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 WebLogic チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

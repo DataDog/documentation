@@ -200,13 +200,13 @@ def extract_sourced_and_cached_content_from_pull_config(self, configuration):
                     ]
                     content_temp["globs"] = content["globs"]
 
-                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows"):
+                    if content["action"] in ("pull-and-push-folder", "pull-and-push-file", "security-rules", "compliance-rules", "workflows", "marketplace-integrations"):
                         content_temp["options"] = content["options"]
 
                     self.list_of_sourced_contents.append(content_temp)
                 else:
                     output_content = content.get('options', {}).get('output_content', True)
-                    
+
                     if output_content != False:
                         self.list_of_cached_contents.append(content)
 
@@ -278,7 +278,7 @@ def download_cached_content_into_repo(self):
     if self.cache_enabled:
         print('Copying integrations from cache...')
         shutil.copytree(f'temp/{self.relative_en_content_path}/integrations', f'{self.relative_en_content_path}/integrations', dirs_exist_ok=True)
-        
+
         # Copying generated data files
         if os.path.isdir('temp/data'):
             print('Copying generated data from cache...')

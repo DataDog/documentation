@@ -15,6 +15,9 @@ further_reading:
 - link: logs/explorer
   tag: ドキュメント
   text: ログの調査方法
+- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
+  tag: ブログ
+  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
 kind: documentation
 title: 属性とエイリアス設定
 ---

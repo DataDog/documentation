@@ -24,7 +24,7 @@ Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します�
 
 - Datadog Cluster Agent v7.40+
 
-## コンフィギュレーション
+## 構成
 {{< tabs >}}
 {{% tab "Operator" %}}
 
@@ -153,11 +153,11 @@ Helm チャートに `mutateUnlabelled: true` という Agent 構成を追加す
 
 | mutateUnlabelled | ポッドラベル                               | 挿入可否 |
 |------------------|-----------------------------------------|-----------|
-| `true`           | ラベルなし                                | 〇       |
-| `true`           | `admission.datadoghq.com/enabled=true`  | 〇       |
+| `true`           | ラベルなし                                | はい       |
+| `true`           | `admission.datadoghq.com/enabled=true`  | はい       |
 | `true`           | `admission.datadoghq.com/enabled=false` | ✕        |
 | `false`          | ラベルなし                                | ✕        |
-| `false`          | `admission.datadoghq.com/enabled=true`  | 〇       |
+| `false`          | `admission.datadoghq.com/enabled=true`  | はい       |
 | `false`          | `admission.datadoghq.com/enabled=false` | ✕        |
 
 

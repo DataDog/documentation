@@ -28,7 +28,7 @@ Datadog Profiler には Go 1.12 以降が必要です。
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 アプリケーションのプロファイリングを開始するには
 

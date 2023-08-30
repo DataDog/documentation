@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-sophos
 app_uuid: 86b68ae7-ba52-4160-bbf5-e1455fafa677
 assets:

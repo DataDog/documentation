@@ -18,7 +18,7 @@ title: Datadog ソースコードインテグレーション
 ## 概要
 
 <div class="alert alert-info">
-ソースコードインテグレーションは以下をサポートします:</br></br>言語:<ul><li>Go</li><li>Java</li><li>JavaScript (トランスパイルされた JavaScript はサポートしていません)</li><li>Python</li></ul></br>Git プロバイダー:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> セルフホストインスタンスやプライベート URL はサポートされていません。
+ソースコードインテグレーションは以下をサポートします:</br></br>言語:<ul><li>Go</li><li>Java</li><li>JavaScript (トランスパイルされた JavaScript はサポートしていません)</li><li>Python</li><li>Ruby</li></ul></br>Git プロバイダー:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> セルフホストインスタンスやプライベート URL はサポートされていません。
 </div>
 
 Datadog のソースコードインテグレーションは、GitHub、GitLab、Bitbucket、Azure DevOps でホストされている Git リポジトリとテレメトリーを接続することが可能です。[ソースコードインテグレーション][7]を有効にすると、ソースコードの関連行に素早くアクセスして、スタックトレース、スロープロファイル、その他の問題をデバッグすることができます。

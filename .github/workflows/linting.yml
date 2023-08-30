@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
     - 'content/en/**/*'
+    - 'layouts/shortcodes/**/*.md'
 
 jobs:
   prose:

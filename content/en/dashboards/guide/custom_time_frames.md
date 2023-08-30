@@ -63,4 +63,18 @@ Both fixed and relative custom time frames are supported:
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
 * `today`, `yesterday`, `this month`, `this year`, and `last year` are calculated when entered. They won't continue to update as time passes.
 
+## URLs
+
+You can manipulate time queries in the URL of a dashboard.
+
+Consider the following dashboard URL:
+
+```
+https://app.datadoghq.com/dash/host/<DASHBOARD_ID>?from_ts=<QUERY_START>&to_ts=<QUERY_END>&live=true
+```
+
+* The `from_ts` parameter is the Unix milliseconds timestamp of the query starting time. For example, `1683518770980`.
+* The `to_ts` parameter is the Unix milliseconds timestamp of the query ending time. For example, `1683605233205`.
+* `live=true` indicates that relative time specifications are retained when a query is saved or shared. You can also use `live=false`.
+
 [1]: /dashboards/#display-utc-time

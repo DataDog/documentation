@@ -136,6 +136,10 @@ Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodisc
 
 You can define an integration template in multiple forms: as Kubernetes pod annotations, Docker labels, a configuration file mounted within the Agent, a ConfigMap, and key-value stores. See the [Autodiscovery Integration Templates][4] documentation for further details.
 
+### Notes
+
+If you are using Autodiscovery and an application is deployed on a new node, you may experience some delay in seeing metrics appear in Datadog. When you switch to a new node, it takes time for the Datadog Agent to collect metadata from your application.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

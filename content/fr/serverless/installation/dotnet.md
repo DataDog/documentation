@@ -17,7 +17,7 @@ title: Instrumenter des applications .NET sans serveur
 
 ## Installation
 
-Datadog propose de nombreuses méthodes différentes pour instrumenter vos applications sans serveur. Choisissez celle qui répond le mieux à vos besoins ci-dessous. Nous vous conseillons d'utiliser l'interface de ligne de commande Datadog.
+Datadog propose de nombreuses méthodes différentes pour instrumenter vos applications sans serveur. Choisissez celle qui répond le mieux à vos besoins ci-dessous. Nous vous conseillons d'utiliser l'interface de ligne de commande Datadog. Vous *devez* suivre les instructions fournies dans l'onglet « Image de conteneur » si votre application est déployée en tant qu'image de conteneur.
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande Datadog" %}}
@@ -145,9 +145,10 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 {{% /tab %}}
 {{% tab "Configuration personnalisée" %}}
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Installer le Tracer Datadog
 
-   [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+    [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
 
     ```sh
     # Use this format for x86-based Lambda deployed in AWS commercial regions
@@ -163,11 +164,11 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
     ```
 
-   Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+    Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
 
 2. Installer l'extension Lambda Datadog
 
-   [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+    [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
 
     ```sh
     # Use this format for x86-based Lambda deployed in AWS commercial regions
@@ -183,30 +184,77 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
     ```
 
-   Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+    Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+
+    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Installer le Tracer Datadog
+
+    [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    ```
+
+    Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+
+2. Installer l'extension Lambda Datadog
+
+    [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+
+    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
 
 3. Définir les variables d'environnement requises
 
-    - Définir `AWS_LAMBDA_EXEC_WRAPPER` sur`/opt/datadog_wrapper`.
+    - Définissez `AWS_LAMBDA_EXEC_WRAPPER` sur `/opt/datadog_wrapper`.
     - Définissez `DD_SITE` sur {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
-    - Définissez `DD_API_KEY_SECRET_ARN` sur l'ARN du secret AWS où votre [clé d'API Datadog][2] est stockée en toute sécurité. La clé doit être stockée sous forme de chaîne de texte brut (et non un blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour un test rapide, vous pouvez également utiliser `DD_API_KEY` et définir la clé d'API Datadog sous forme de texte brut.
+    - Définissez `DD_API_KEY_SECRET_ARN` sur l'ARN du secret AWS où votre [clé d'API Datadog][2] est stockée en toute sécurité. La clé doit être stockée sous forme de chaîne de texte brut (et non en tant que blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour effectuer un test rapide, vous pouvez également utiliser `DD_API_KEY` et définir la clé d'API Datadog sous forme de texte brut.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Et ensuite ?
-
-- Vous pouvez désormais afficher les métriques, les logs et les traces sur la [Page d'accueil sans serveur][1].
-- Envoyez une [métrique custom][2] ou un [span APM][3] pour surveiller votre logique opérationnelle.
-- Consultez le [guide de dépannage][4] si vous ne parvenez pas à recueillir les données de télémétrie
-- Vérifiez les [configurations avancées][5] pour
-    - associer des données de télémétrie à l'aide de tags
-    - recueillir les données de télémétrie pour AWS API Gateway, SQS, etc.
-    - capturer les charges utiles des requêtes et des réponses de Lambda
-    - associer les erreurs de vos fonctions Lambda à votre code source
-    - filtrer ou nettoyer des informations sensibles des logs ou des traces
+- Vous pouvez désormais visualiser des métriques, logs et traces sur la [page d'accueil Serverless][1].
+- Activez la [surveillance des menaces][6] pour recevoir des alertes lorsque des acteurs malveillants ciblent votre service.
+- Envoyez une [métrique custom][2] ou une [span APM][3] pour surveiller votre logique opérationnelle.
+- Consultez le [guide de dépannage][4] si vous ne parvenez pas à recueillir les données de télémétrie.
+- Examinez les [configurations avancées][5] pour :
+    - Associer des données de télémétrie à l'aide de tags
+    - Recueillir des données de télémétrie pour AWS API Gateway, SQS, etc.
+    - Capturer les charges utiles des requêtes et des réponses Lambda
+    - Associer les erreurs de vos fonctions Lambda à votre code source
+    - Filtrer ou nettoyer des informations sensibles des logs ou des traces
 
 ## Pour aller plus loin
 
@@ -218,3 +266,4 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [3]: /fr/tracing/custom_instrumentation/dotnet/
 [4]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /fr/serverless/configuration/
+[6]: /fr/security/application_security/enabling/serverless/?tab=serverlessframework

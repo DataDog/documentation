@@ -2,6 +2,9 @@
 aliases:
 - /ja/guides/logs/
 - /ja/logs/logging_without_limits
+cascade:
+  algolia:
+    rank: 70
 description: Datadog Agent を設定して、ホスト、コンテナー、およびサービスからログを収集します。
 disable_sidebar: true
 further_reading:
@@ -26,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/
   tag: ブログ
   text: Datadog でファイアウォールのログを監視する
+- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
+  tag: ブログ
+  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
 kind: Documentation
 title: ログ管理
 ---

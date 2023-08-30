@@ -99,7 +99,7 @@ See the standard [Daemonset installation][2] and the [Docker Agent][3] informati
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -200,10 +200,10 @@ datadog:
         containers:
             processAgent:
                 env:
-                - name: DD_SCRUB_ARGS 
+                - name: DD_SCRUB_ARGS
                   value: "true"
                 - name: DD_CUSTOM_SENSITIVE_WORDS
-                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+                  value: "personal_key,*token,*token,sql*,*pass*d*"
 ```
 
 
@@ -224,7 +224,7 @@ datadog:
             processAgent:
                 env:
                 - name: DD_STRIP_PROCESS_ARGS
-                  value: "true" 
+                  value: "true"
 ```
 
 {{% /tab %}}
@@ -368,7 +368,7 @@ In [APM Traces][10], you can click on a service's span to see the processes runn
 
 ### Network Performance Monitoring
 
-When you inspect a dependency in the [Network Overview][11], you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
+When you inspect a dependency in the [Network Analytics][11] page, you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
 ## Real-time monitoring
 
@@ -393,6 +393,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
-[11]: /network_monitoring/performance/network_page
+[11]: /network_monitoring/performance/network_analytics
 [12]: /agent/guide/agent-commands/#restart-the-agent
 
