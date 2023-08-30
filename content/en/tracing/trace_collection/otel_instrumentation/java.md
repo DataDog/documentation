@@ -29,7 +29,6 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 | [Span Exporters][3]                               | Unsupported                                                        |
 | Trace/span [ID generators][4]                     | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].|
 | [Metrics][7], [Baggage][14] and [Context][10] API | Unsupported                                                        |
-| Instrumentation [annotations][6]                  | Unsupported                                                        |
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
@@ -79,6 +78,39 @@ rootSpan.setAttributes("some-key", "some-value");
 
 **Note:** If there isn't a current or local root span, the returned span is invalid, not `null`, and attributes are not set.
 
+### Add custom spans using annotations
+
+First add a dependency to the `opentelemetry-instrumentation-annotations` library.
+
+Using Maven:
+```xml
+  <!-- OpenTelemetry instrumentation annotations -->
+  <dependency>
+          <groupId>io.opentelemetry.instrumentation</groupId>
+          <artifactId>opentelemetry-instrumentation-annotations</artifactId>
+          <version>${io.opentelemtry.version}</version>
+      </dependency>
+  <dependency>
+```
+
+Using Gradle:
+```groovy
+  // OpenTelemetry instrumentation annotations
+  implementation "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:${opentelemetryVersion}"
+```
+
+Then annotate your methods with the `@WithSpan` annotation to create a new span each call, and its parameters with the `@SpanAttribute` annotation to capture the arguments as span attributes:
+
+```java
+@WithSpan
+public void myMethod(@SpanAttribute("parameter1") String parameter1,
+    @SpanAttribute("parameter2") long parameter2) {
+    <...>
+}
+```
+
+**Note:** Using the `@AddingSpanAttributes` method annotation instead of `@WithSpan` allows capturing method arguments using the `@SpanAttribute` annotation without creating a new span. The current span will be updated if any. 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -88,7 +120,6 @@ rootSpan.setAttributes("some-key", "some-value");
 [3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/java/manual/
-[6]: https://opentelemetry.io/docs/instrumentation/java/automatic/annotations/
 [7]: https://opentelemetry.io/docs/specs/otel/metrics/api/
 [8]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [9]: /tracing/trace_collection/trace_context_propagation/java/
