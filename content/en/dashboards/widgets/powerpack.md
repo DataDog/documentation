@@ -94,10 +94,6 @@ To make changes to the edit permissions for a Powerpack:
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
 
-The dedicated [widget JSON schema definition][3] for the widget is:
-
-{{< dashboards-widgets-api >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
