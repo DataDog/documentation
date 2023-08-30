@@ -25,12 +25,15 @@ further_reading:
 ## Compatibility
 
 Supported Ruby interpreters:
+
 * Ruby >= 2.1
 * JRuby >= 9.2
 
 Supported test frameworks:
-* Cucumber >= 3.0
+
 * RSpec >= 3.0.0
+* Minitest >= 5.0.0
+* Cucumber >= 3.0
 
 ## Installing the Datadog Agent
 
@@ -309,6 +312,85 @@ See the [Ruby tracer installation docs][4] for more details.
 ## Instrumenting your tests
 
 {{< tabs >}}
+{{% tab "RSpec" %}}
+
+The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
+
+To activate your integration, add this to the `spec_helper.rb` file:
+
+```ruby
+require 'rspec'
+require 'datadog/ci'
+
+Datadog.configure do |c|
+  # Only activates test instrumentation on CI
+  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
+
+  # Configures the tracer to ensure results delivery
+  c.ci.enabled = true
+
+  # The name of the service or library under test
+  c.service = 'my-ruby-app'
+
+  # Enables the RSpec instrumentation
+  c.ci.instrument :rspec
+end
+```
+
+Run your tests as you normally do, specifying the environment where tests are being run in the `DD_ENV` environment variable.
+
+You could use the following environments:
+
+* `local` when running tests on a developer workstation
+* `ci` when running them on a CI provider
+
+For example:
+
+```bash
+DD_ENV=ci bundle exec rake spec
+```
+
+{{% /tab %}}
+
+{{% tab "Minitest" %}}
+
+The Minitest integration traces all executions of tests when using the `minitest` framework.
+
+To activate your integration, add this to the `test_helper.rb` file:
+
+```ruby
+require 'minitest'
+require 'datadog/ci'
+
+Datadog.configure do |c|
+  # Only activates test instrumentation on CI
+  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
+
+  # Configures the tracer to ensure results delivery
+  c.ci.enabled = true
+
+  # The name of the service or library under test
+  c.service = 'my-ruby-app'
+
+  c.ci.instrument :minitest
+end
+```
+
+Run your tests as you normally do, specifying the environment where tests are being run in the `DD_ENV` environment variable.
+
+You could use the following environments:
+
+* `local` when running tests on a developer workstation
+* `ci` when running them on a CI provider
+
+For example:
+
+```bash
+DD_ENV=ci bundle exec rake test
+```
+
+{{% /tab %}}
+
 {{% tab "Cucumber" %}}
 
 The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
@@ -341,42 +423,16 @@ Datadog.configure do |c|
 end
 ```
 
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally do, specifying the environment where tests are being run in the `DD_ENV` environment variable.
+You could use the following environments:
+
+* `local` when running tests on a developer workstation
+* `ci` when running them on a CI provider
+
+For example:
 
 ```bash
 DD_ENV=ci bundle exec rake cucumber
-```
-
-{{% /tab %}}
-{{% tab "RSpec" %}}
-
-The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
-
-To activate your integration, add this to the `spec_helper.rb` file:
-
-```ruby
-require 'rspec'
-require 'datadog/ci'
-
-Datadog.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
-
-  # Configures the tracer to ensure results delivery
-  c.ci.enabled = true
-
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the RSpec instrumentation
-  c.ci.instrument :rspec
-end
-```
-
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
-
-```bash
-DD_ENV=ci bundle exec rake spec
 ```
 
 {{% /tab %}}
