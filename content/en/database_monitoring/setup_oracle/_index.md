@@ -148,4 +148,4 @@ If the above prerequisites are met, follow the [setup instructions](#setup) for 
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [10]: /database_monitoring/architecture/
 [15]: /agent/versions/upgrade_between_agent_minor_versions/?tab=linux
-[20]: 
+[20]: /agent/versions/upgrade_to_agent_v7/?tab=linux
