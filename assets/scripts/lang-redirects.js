@@ -58,6 +58,19 @@ export function handleLanguageBasedRedirects() {
 		instead of being appended to the end
 		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
 	*/
+
+
+    // Remove legacy site-specific domain cookie
+    if(Cookies.get('lang_pref', { domain: 'docs.datadoghq.com' })) {
+        console.log('removing legacy cookie: live');
+        Cookies.remove('lang_pref', { domain: 'docs.datadoghq.com' });
+    }
+
+    if(Cookies.get('lang_pref', { domain: 'docs-staging.datadoghq.com' })) {
+        console.log('removing legacy cookie: staging');
+        Cookies.remove('lang_pref', { domain: 'docs-staging.datadoghq.com' });
+    }
+
 	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
 		const commitRef = `/${document.documentElement.dataset.commitRef}`;
 
