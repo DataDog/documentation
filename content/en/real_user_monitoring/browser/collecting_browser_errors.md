@@ -149,8 +149,6 @@ The collected rendering errors contain a component stack, which is unminified li
 
 To instrument React error boundaries for monitoring, use the following:
 
-**Note**: These instructions are specific to the **React Router v6** library.
-
 {{< tabs >}}
 {{% tab "NPM" %}}
 
