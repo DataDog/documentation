@@ -102,6 +102,20 @@ ENV DD_VERSION=1
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
 {{< /highlight >}}
 
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+ENV DD_SERVICE=datadog-demo-run-nodejs
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
+
+CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
+{{< /highlight >}}
+
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
 [1]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
@@ -161,6 +175,19 @@ ENV DD_VERSION=1
 CMD ["/app/datadog-init", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 {{< /highlight >}}
 
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+RUN pip install --target /dd_tracer/python/ ddtrace
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["your_entrypoint.sh", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
+{{< /highlight >}}
+
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
 [1]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
@@ -178,6 +205,20 @@ ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["./mvnw", "spring-boot:run"]
 ```
+
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
+ENV DD_SERVICE=datadog-demo-run-nodejs
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
+
+CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
+{{< /highlight >}}
 
 #### Explanation
 
@@ -220,6 +261,19 @@ ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 CMD ["/app/datadog-init", "./mvnw", "spring-boot:run"]
+{{< /highlight >}}
+
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ENV DD_SERVICE=datadog-demo-run-java
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["your_entrypoint.sh", "./mvnw", "spring-boot:run"]
 {{< /highlight >}}
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
@@ -273,6 +327,18 @@ ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 CMD ["/app/datadog-init", "/path/to/your-go-binary"]
+{{< /highlight >}}
+
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+ENV DD_SERVICE=datadog-demo-run-go
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 {{< /highlight >}}
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
@@ -354,6 +420,19 @@ ENV DD_VERSION=1
 CMD ["/app/datadog-init", "dotnet", "helloworld.dll"]
 {{< /highlight >}}
 
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+ENV DD_SERVICE=datadog-demo-run-dotnet
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["your_entrypoint.sh", "dotnet", "helloworld.dll"]
+{{< /highlight >}}
+
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=linux#custom-instrumentation
@@ -413,6 +492,19 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 CMD ["/app/datadog-init", "rails", "server", "-b", "0.0.0.0"]
+{{< /highlight >}}
+
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+ENV DD_SERVICE=datadog-demo-run-ruby
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+ENTRYPOINT ["/app/datadog-init"]
+CMD ["your_entrypoint.sh", "rails", "server", "-b", "0.0.0.0"]
 {{< /highlight >}}
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
@@ -500,15 +592,25 @@ ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
-# use the following for an apache and mod_php based image
 RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
 EXPOSE 8080
 CMD ["/app/datadog-init", "apache2-foreground"]
+{{< /highlight >}}
 
-# use the following for an nginx and php-fpm based image
+If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead.
+
+{{< highlight dockerfile "hl_lines=6" >}}
+COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
+RUN php /datadog-setup.php --php-bin=all
+ENV DD_SERVICE=datadog-demo-run-ruby
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+ENTRYPOINT ["/app/datadog-init"]
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 EXPOSE 8080
-CMD php-fpm; nginx -g daemon off;
+CMD your_entrypoint.sh php-fpm; your_entrypoint.sh nginx -g daemon off;
 {{< /highlight >}}
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
