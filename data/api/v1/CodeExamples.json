@@ -340,6 +340,11 @@
       "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3792639844",
+      "description": "Create a point geomap widget defining the style for the request"
     }
   ],
   "CreatePublicDashboard": [
