@@ -26,8 +26,6 @@ document.querySelectorAll('.sign-up-trigger').forEach(item => {
         event.preventDefault();
 
         getSignupFailover().then((failoverEnabled) => {
-
-            failoverEnabled = true;
             if (failoverEnabled) {
                 const demoModal = document.querySelector('#signupDemo');
                 const signupDemoModal = demoModal ? new Modal(demoModal) : null;
