@@ -1,11 +1,28 @@
 ---
 title: Setting Up CSM Enterprise
 kind: documentation
+further_reading:
+  - link: "/security/cloud_security_management/setup"
+    tag: "Documentation"
+    text: "Setting up Cloud Security Management"
+  - link: "/security/threats/"
+    tag: "Documentation"
+    text: "Cloud Security Management Threats"
+  - link: "/security/misconfigurations/"
+    tag: "Documentation"
+    text: "Cloud Security Management Misconfigurations"
+  - link: "/security/identity_risks/"
+    tag: "Documentation"
+    text: "Cloud Security Management Identity Risks"
+  - link: "/security/infrastructure_vulnerabilities/"
+    tag: "Documentation"
+    text: "Cloud Security Management Vulnerabilities"
+  - link: "/agent/remote_config"
+    tag: "Documentation"
+    text: "Remote Configuration"
 ---
 
-Cloud Security Management (CSM) Enterprise includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (hosts and container images). 
-
-For additional information on the CSM packages, see [Setting up Cloud Security Management][8].
+The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
 ## Prerequisites
 
@@ -386,6 +403,10 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats
 [2]: /security/misconfigurations

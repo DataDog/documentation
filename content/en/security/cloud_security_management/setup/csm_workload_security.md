@@ -1,9 +1,19 @@
 ---
 title: Setting Up CSM Workload Security
 kind: documentation
+further_reading:
+  - link: "/security/cloud_security_management/setup"
+    tag: "Documentation"
+    text: "Setting up Cloud Security Management"
+  - link: "/security/threats/"
+    tag: "Documentation"
+    text: "Cloud Security Management Threats"
+  - link: "/agent/remote_config"
+    tag: "Documentation"
+    text: "Remote Configuration"
 ---
 
-Cloud Security Management (CSM) Workload Security includes [CSM Threats][1]. For additional information on the CSM packages, see [Setting up Cloud Security Management][2].
+The Cloud Security Management (CSM) Workload Security package includes [CSM Threats][1]. To learn more about the available CSM packages, see [Setting up Cloud Security Management][2].
 
 ## Prerequisites
 
@@ -356,6 +366,10 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threats
 [2]: /security/cloud_security_management/setup
