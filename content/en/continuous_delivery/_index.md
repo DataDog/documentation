@@ -21,7 +21,7 @@ CD Visibility enables developers to x, y, and z. Further, it also provides build
 
 ## Improve pipeline reliability
 
-CD Visibility [core feature allows you to do X].
+CD Visibility contains Software Delivery Insights and DORA metrics that enable to [do X].
 
 ## Increase efficiency through seamless integrations
 

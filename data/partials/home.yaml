@@ -100,14 +100,10 @@ nav_sections:
         link: watchdog/
         icon: watchdog
         desc: Detect and surface application and infrastructure anomalies
-      - title: CI Visibility
+      - title: Software Delivery
         link: continuous_integration/
         icon: ci
-        desc: See test metrics, build results, and pipeline executions for your CI pipeline
-      - title: CD Visibility
-        link: continuous_delivery/
-        icon: ci
-        desc: See software delivery metrics, insights, and signals for your CD provider
+        desc: See software delivery metrics, results, and insights for your CI/CD pipeline
       - title: Cloud Cost Management
         link: cloud_cost_management/
         icon: cloud-cost-management

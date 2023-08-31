@@ -14,7 +14,7 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 5000000
-  - name: Continuous Integration & Delivery
+  - name: Software Delivery
     identifier: ci_visibility_heading
     weight: 6000000
   - name: Log Management
