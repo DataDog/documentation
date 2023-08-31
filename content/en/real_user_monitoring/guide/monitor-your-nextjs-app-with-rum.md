@@ -15,7 +15,7 @@ further_reading:
 
 Follow the steps below to set up Datadog RUM browser monitoring.
 
-### Create a new application
+### Create an application
 
 1. Navigate to **[UX Monitoring > Real User Monitoring][2]**.
 2. Click the **New Application** button.
