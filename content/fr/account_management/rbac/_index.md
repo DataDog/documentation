@@ -32,23 +32,23 @@ Lorsque vous attribuez des autorisations à un rôle, tous les utilisateurs asso
 
 Si un utilisateur dans une [organisation enfant][1] dispose de l'autorisation `org_management`, cela ne signifie pas que c'est aussi le cas dans l'organisation parente. Les rôles des utilisateurs ne sont pas partagés entre les organisations parent et enfant.
 
-**Remarque** : si vous avez recours à un fournisseur d'identité SAML, vous pouvez l'intégrer à Datadog pour l'authentification et mapper des attributs d'identité à des rôles Datadog par défaut ou personnalisés. Consultez [Authentification unique avec SAML][1] pour en savoir plus.
+**Remarque** : si vous avez recours à un fournisseur d'identité SAML, vous pouvez l'intégrer à Datadog pour l'authentification et mapper des attributs d'identité à des rôles Datadog par défaut ou personnalisés. Consultez la section [Authentification unique avec SAML][2] pour en savoir plus.
 
 ## Rôles Datadog par défaut
 
 Rôle Admin Datadog
-: Utilisateurs ayant accès aux informations de facturation, autorisés à révoquer des clés API et capables de gérer des utilisateurs et de configurer [des dashboards en lecture seule][2]. Ils peuvent également accorder le rôle d'administrateur à un utilisateur standard.
+: Utilisateurs ayant accès aux informations de facturation, autorisés à révoquer des clés API et capables de gérer des utilisateurs et de configurer [des dashboards en lecture seule][3]. Ils peuvent également accorder le rôle d'administrateur à un utilisateur standard.
  
 
 Rôle Standard Datadog
 : Utilisateurs autorisés à consulter et à modifier toutes les fonctionnalités de surveillance offertes par Datadog, telles que les [dashboards][3], les [monitors][4], les [événements][5] et les [notebooks][6]. Ils peuvent également inviter d'autres utilisateurs à rejoindre une organisation.
 
 Rôle Read-Only Datadog
-: Utilisateurs n'ayant aucun droit de modification dans Datadog. Ce rôle est particulièrement utile lorsque vous souhaitez partager des vues spécifiques en lecture seule avec un client ou lorsqu'un membre d'un service souhaite partager un [dashboard][2] avec une personne qui n'en fait pas partie.
+: Utilisateurs n'ayant aucun droit de modification dans Datadog. Ce rôle est particulièrement utile lorsque vous souhaitez partager des vues spécifiques en lecture seule avec un client ou lorsqu'un membre d'un service souhaite partager un [dashboard][3] avec une personne d'un autre service.
 
 ## Rôles personnalisés
 
-Les rôles personnalisés offrent à votre organisation la possibilité de créer de nouveaux rôles disposant d'autorisations uniques. Gérez vos rôles personnalisés sur le site de Datadog, avec l'[API Role Datadog][6] ou directement via SAML. Poursuivez votre lecture pour découvrir comment créer, mettre à jour et supprimer un rôle. Consultez la section [Autorisations des rôles Datadog][7] pour en savoir plus sur les autorisations disponibles. Seuls les utilisateurs disposant de l'autorisation User Access Management peuvent créer ou modifier des rôles dans Datadog.
+Les rôles personnalisés offrent à votre organisation la possibilité de créer des rôles dotés d'autorisations uniques. Gérez vos rôles personnalisés sur le site de Datadog, avec l'[API Role Datadog][7] ou directement via SAML. Poursuivez votre lecture pour découvrir comment créer, mettre à jour et supprimer un rôle. Consultez la section [Autorisations des rôles Datadog][8] pour en savoir plus sur les autorisations disponibles. Seuls les utilisateurs disposant de l'autorisation User Access Management peuvent créer ou modifier des rôles dans Datadog.
 
 ### Activer les rôles personnalisés
 
