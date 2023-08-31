@@ -37,6 +37,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Shopify ストアで RUM を有効にする{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Squarespace ストアで RUM を有効にする{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="セッションリプレイ" >}}
