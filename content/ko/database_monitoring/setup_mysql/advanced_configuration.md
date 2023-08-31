@@ -5,7 +5,7 @@ title: MySQL 데이터베이스 모니터링을 위한 고급 설정
 ---
 
 {{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
+<div class="alert alert-warning">이 사이트에서는 Database Monitoring이 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 ## `events_statements_summary_by_digest` 잘라내기
