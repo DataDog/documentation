@@ -12393,6 +12393,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetic multistep API test.
@@ -25933,6 +25935,7 @@ paths:
         name: page_size
         required: false
         schema:
+          default: 100
           example: 20
           format: int32
           maximum: 1000
@@ -25969,6 +25972,9 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-pagination:
+        limitParam: page_size
+        pageParam: page
       x-undo:
         type: safe
     post:
@@ -28441,6 +28447,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 1000
           format: int64
           type: integer
       - description: The specific offset to use as the beginning of the returned response.
@@ -28486,6 +28493,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29516,14 +29527,19 @@ paths:
       - description: Used for pagination. The number of tests returned in the page.
         in: query
         name: page_size
+        required: false
         schema:
-          type: string
+          default: 100
+          format: int64
+          type: integer
       - description: Used for pagination. Which page you want to retrieve. Starts
           at zero.
         in: query
         name: page_number
+        required: false
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -29554,6 +29570,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-pagination:
+        limitParam: page_size
+        pageParam: page_number
+        resultsPath: tests
       x-undo:
         type: safe
     post:
