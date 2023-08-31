@@ -76,6 +76,8 @@ Postgres がレプリケーションされている場合、以下の SQL コマ
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
+**注:** IAM 認証もサポートされています。RDS インスタンスでのこの構成方法については、[ガイド][14]を参照してください。
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -426,3 +428,4 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [11]: /ja/integrations/amazon_rds
 [12]: /ja/database_monitoring/troubleshooting/?tab=postgres
 [13]: https://app.datadoghq.com/integrations/amazon-web-services
+[14]: /ja/database_monitoring/guide/managed_authentication
