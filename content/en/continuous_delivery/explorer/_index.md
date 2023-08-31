@@ -40,6 +40,6 @@ Export your view in the [CD Visibility Explorer][4] to reuse it later or in diff
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_delivery/search
-[2]: /continuous_delivery/search_syntax
+[2]: /continuous_delivery/explorer/search_syntax
 [3]: /continuous_delivery/explorer/facets
 [4]: https://app.datadoghq.com/cd/executions

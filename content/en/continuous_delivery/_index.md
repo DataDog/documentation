@@ -42,5 +42,5 @@ See [Pipeline Visibility][1] for instructions on setting up CD Visibility with y
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_delivery/pipelines
-[2]: /continous_integration/explorer
-[3]: /monitors/types/cd
+[2]: /continuous_delivery/explorer
+[3]: /monitors/types/ci
