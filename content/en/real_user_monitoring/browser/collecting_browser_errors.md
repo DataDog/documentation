@@ -143,9 +143,9 @@ try {
 
 ### React error boundaries instrumentation 
 
-You can instrument the React error boundaries to monitor React rendering errors using the RUM Browser SDK `addError()` API.
+You can instrument the React [error boundaries][5] to monitor React rendering errors using the RUM Browser SDK `addError()` API.
 
-The collected rendering errors contain a component stack, which is unminified like any other error stack traces once you've uploaded sourcemaps.
+The collected rendering errors contain a component stack, which is unminified like any other error stack traces once you've [uploaded sourcemaps][6].
 
 To instrument React error boundaries for monitoring, use the following:
 
@@ -227,17 +227,17 @@ For security reasons, browsers hide details from errors triggered by cross-origi
 
 {{< img src="real_user_monitoring/browser/script-error.png" alt="Real User Monitoring script error example" style="width:75%;" >}}
 
-For more information about cross-origin scripts and why details are hidden, see [CORS][5] and [this Note on Global Event Handlers][6]. Some possible reasons for this error include:
+For more information about cross-origin scripts and why details are hidden, see [CORS][7] and [this Note on Global Event Handlers][8]. Some possible reasons for this error include:
 - Your JavaScript files are hosted on a different hostname (for instance, `example.com` includes assets from `static.example.com`).
 - Your website includes JavaScript libraries hosted on a CDN.
 - Your website includes third-party JavaScript libraries hosted on the provider's servers.
 
 Get visibility into cross-origin scripts by following these two steps:
-1. Call JavaScript libraries with [`crossorigin="anonymous"`][7].
+1. Call JavaScript libraries with [`crossorigin="anonymous"`][9].
 
     With `crossorigin="anonymous"`, the request to fetch the script is performed securely. No sensitive data is forwarded through cookies or HTTP authentication.
 
-2. Configure the [`Access-Control-Allow-Origin`][8] HTTP response header:
+2. Configure the [`Access-Control-Allow-Origin`][10] HTTP response header:
 
     - `Access-Control-Allow-Origin: *` to allow all origins to fetch the resource.
     - `Access-Control-Allow-Origin: example.com` to specify a single allowed origin. If the server supports clients from multiple origins, it must return the origin for the specific client making the request.
@@ -251,8 +251,10 @@ Get visibility into cross-origin scripts by following these two steps:
 [2]: /real_user_monitoring/browser/modifying_data_and_context/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [4]: /real_user_monitoring/error_tracking
-[5]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-[6]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
-[7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
-[8]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
-[9]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[5]: https://legacy.reactjs.org/docs/error-boundaries.html
+[6]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs#upload-your-source-maps
+[7]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+[8]: https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes
+[9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
+[11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
