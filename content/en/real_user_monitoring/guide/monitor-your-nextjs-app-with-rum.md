@@ -9,7 +9,8 @@ further_reading:
 ---
 
 ## Overview
-[Next.js][1] is a JavaScript framework that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend applications for browser-related metrics that give insight into performance and user behavior.
+
+[Next.js][1] is a JavaScript framework that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend and backend applications for browser-related metrics that you give insight into performance and user behavior.
 
 ## Setup
 
