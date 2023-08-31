@@ -31,7 +31,7 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 [4]: https://cloud.google.com/architecture/identity/single-sign-on
 [5]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
 [6]: https://developer.okta.com/docs/concepts/saml/
-[7]: https://help.safenetid.com/operator/Content/STA/Apps/Apps_SAML.htm
+[7]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
 [8]: /account_management/users/default_roles/
 {{% /site-region %}}
 
@@ -44,7 +44,7 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 [4]: https://cloud.google.com/architecture/identity/single-sign-on
 [5]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
 [6]: https://developer.okta.com/docs/concepts/saml/
-[7]: https://help.safenetid.com/operator/Content/STA/Apps/Apps_SAML.htm
+[7]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
 [8]: /account_management/users/default_roles/
 {{% /site-region %}}
 
