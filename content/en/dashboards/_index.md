@@ -137,7 +137,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Version history
 
-From a dashboard click on the settings icon then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
+From a dashboard, click on the settings icon and then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
 
 #### Generate public URL
 
@@ -214,7 +214,7 @@ Under the title, the avatar tells you who created the dashboard.
 
 From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. 
 
-To add suggested dashboards list you need to add `[[suggested_dashboards]]` inside the dashboard description. 
+To add a suggested dashboards list, add `[[suggested_dashboards]]` inside the dashboard description. 
 
 ### Edit details
 
