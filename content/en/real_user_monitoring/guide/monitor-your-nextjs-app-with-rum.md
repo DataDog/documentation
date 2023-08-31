@@ -30,7 +30,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
    If using NPM, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file
+   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
 
   **Note**: Because the RUM SDK needs to run on the client to collect telemetry data, the file where it is initialized through the NPM package must be a [client component][5].
@@ -89,7 +89,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
    If using CDN async, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file
+   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
    - The Next.js external scripts need to be loaded like in [this page][5].
 
@@ -150,17 +150,15 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    {{% /tab %}}
    {{% tab "CDN sync" %}}
 
-   If using CDN async, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+   If using CDN sync, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file
+   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
    - The Next.js external scripts need to be loaded like in [this page][5].
 
    **Note**: The Next.js scripts include import and export lines, and includes curly braces and backticks between the `Script id`, where all instances of `Script` are in uppercase.
 
    {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
-
-   // Paste the CDN sync snippet here without first <script> and last </script> lines like below
 
    import Script from "next/script";
 
@@ -219,7 +217,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
 2. Follow the in-app steps to verify your installation.
 3. Deploy the changes to your application. Once your deployment is live, Datadog collects events from user browsers.
-4. You can now visualize the [data collected][3] in your Next.js application using [dashboards][4].
+4. You can visualize the [data collected][3] in your Next.js application using [dashboards][4].
 
 ## Backend monitoring 
 
