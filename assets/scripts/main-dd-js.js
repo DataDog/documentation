@@ -33,7 +33,6 @@ document.querySelectorAll('.sign-up-trigger').forEach(item => {
                   signupDemoModal.show(item);
                 }
             } else {
-                console.log('failover not enabled');
                 const signupModal = new Modal(document.getElementById('signupModal'))
                 signupModal.show(item)
             }
