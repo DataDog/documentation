@@ -3320,6 +3320,20 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/GeomapWidgetStyle'
+      type: object
+    GeomapWidgetStyle:
+      description: The style for the points coming from this request.
+      properties:
+        color_by:
+          description: Field used for coloring the points based on a value.
+          example: status
+          type: string
+        palette:
+          description: Defines the color of all the points for this request.
+          example: classic
+          type: string
       type: object
     GraphSnapshot:
       description: Object representing a graph snapshot.
