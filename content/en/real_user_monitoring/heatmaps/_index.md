@@ -31,7 +31,7 @@ To get started with heatmaps:
 
 On the view list page, select your application and view. You can select the type of heatmap you would like to view as well.
 
-{{< img src="real_user_monitoring/heatmaps/heatmap-view-list.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
+{{< img src="real_user_monitoring/heatmaps/view-list-updated.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
 
 This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
 
@@ -41,13 +41,13 @@ This will take you to the [heatmap page][3] for a particular view. You can switc
 
 A Clickmap shows you the most interacted with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
+{{< img src="real_user_monitoring/heatmaps/clickmap-updated.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
+
 Each clickmap also offers analytics such as:
 
 - Where that page ranks out of all other visited pages
 - Unique user counts to that page
 - Any frustration signals on that page
-
-{{< img src="real_user_monitoring/heatmaps/insights-panel.png" alt="Data showing top insights detected in the heatmap." style="width:60%;">}}
 
 Below the panel are all actions that occurred on the page, listed by frequency. When you click into an action, you can understand more about that interaction, for example:
 
@@ -67,6 +67,8 @@ By clicking on any action name from the panel, the corresponding action will be 
 ## Scrollmaps
 
 Scrollmaps show a visual of the aggregate scroll activity on a given page. By looking at a scrollmap you can see how far users scroll to each percentile, along with where the average fold of the page falls.
+
+{{< img src="real_user_monitoring/heatmaps/scrollmaps.png" alt="Scrollmap of the chairs page." style="width:100%;">}}
 
 You can interact with the floating blue bar on a scrollmap by dragging it to the point of the page you wish to see how many users arrived at.
 
