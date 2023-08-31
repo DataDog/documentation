@@ -33,33 +33,56 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
 
+  **Note**: Because the RUM SDK needs to run on the client to collect telemetry data, the file where it is initialized through the NPM package must be a [client component][5].
+
    {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
 
-   import { datadogRum } from '@datadog/browser-rum';
+    "use client";
 
-   datadogRum.init({
-       applicationId: '<YOUR_APPLICATION_ID>',
-       clientToken: '<CLIENT_TOKEN>',
-       site: 'datadoghq.com',
-       service:'nextjs-test',
-       env:'<ENV_NAME>',
-       // Specify a version number to identify the deployed version of your application in Datadog 
-       // version: '1.0.0', 
-       sessionSampleRate:100,
-       sessionReplaySampleRate: 20,
-       trackUserInteractions: true,
-       trackResources: true,
-       trackLongTasks: true,
-       defaultPrivacyLevel:'mask-user-input'
-   });
-       
-   datadogRum.startSessionReplayRecording();
+    import Link from "next/link";
+    import { datadogRum } from "@datadog/browser-rum";
+    import { useEffect } from "react";
+
+    datadogRum.init({
+      applicationId: "<YOUR_APPLICATION_ID>",
+      clientToken: "<CLIENT_TOKEN>",
+      site: "datadoghq.com",
+      service: "next-app-router-rum-npm",
+      env: "<ENV_NAME>",
+      // Specify a version number to identify the deployed version of your application in Datadog
+      // version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      trackUserInteractions: true,
+      trackResources: true,
+      trackLongTasks: true,
+      defaultPrivacyLevel: "mask-user-input",
+    });
+
+    datadogRum.startSessionReplayRecording();
+
+    export default function RootLayout({
+      children,
+    }: {
+      children: React.ReactNode;
+    }) {
+      useEffect(() => {}, []);
+      return (
+        <html lang="en">
+          <body>
+            {children}
+          </body>
+        </html>
+      );
+    }
+
    {{< /code-block >}}
 
    [1]: https://nextjs.org/docs/app
    [2]: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
    [3]: https://nextjs.org/docs/pages
    [4]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
+   [5]: https://nextjs.org/docs/app/building-your-application/rendering/client-components#using-client-components-in-nextjs
 
    {{% /tab %}}
    {{% tab "CDN async" %}}
@@ -85,36 +108,37 @@ Follow the steps below to set up Datadog RUM browser monitoring.
        <html lang="en">
          <Script id="datadog-rum">
            {`
-           (function(h,o,u,n,d) {
-             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-             d=o.createElement(u);d.async=1;d.src=n
-             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-           })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-           window.DD_RUM.onReady(function() {
-             window.DD_RUM.init({
-               clientToken: '<CLIENT_TOKEN>',
-               applicationId: '<YOUR_APPLICATION_ID>',
-               site: 'datadoghq.com',
-               service: 'next-app-router-rum',
-               env: '<ENV_NAME>',
-               // Specify a version number to identify the deployed version of your application in Datadog 
-               // version: '1.0.0', 
-               sessionSampleRate: 100,
-               sessionReplaySampleRate: 20,
-               trackUserInteractions: true,
-               trackResources: true,
-               trackLongTasks: true,
-               defaultPrivacyLevel: 'mask-user-input',
-             });
+             (function(h,o,u,n,d) {
+               h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+               d=o.createElement(u);d.async=1;d.src=n
+               n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
+             window.DD_RUM.onReady(function() {
+               window.DD_RUM.init({
+                 clientToken: '<CLIENT_TOKEN>',
+                 applicationId: '<YOUR_APPLICATION_ID>',
+                 site: 'datadoghq.com',
+                 service: 'next-app-router-rum',
+                 env: '<ENV_NAME>',
+                 // Specify a version number to identify the deployed version of your application in Datadog 
+                 // version: '1.0.0', 
+                 sessionSampleRate: 100,
+                 sessionReplaySampleRate: 20,
+                 trackUserInteractions: true,
+                 trackResources: true,
+                 trackLongTasks: true,
+                 defaultPrivacyLevel: 'mask-user-input',
+               });
 
-             window.DD_RUM.startSessionReplayRecording();
-           })
+               window.DD_RUM.startSessionReplayRecording();
+             })
            `}
          </Script>
-         <body className={inter.className}>{children}</body>
+         <body>{children}</body>
        </html>
      );
    }
+
    {{< /code-block >}}
 
    [1]: https://nextjs.org/docs/app
@@ -138,45 +162,51 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
    // Paste the CDN sync snippet here without first <script> and last </script> lines like below
 
-   import Script from 'next/script'
-    
-   function Home() {
+   import Script from "next/script";
+
+   export default function RootLayout({
+     children,
+   }: {
+     children: React.ReactNode;
+   }) {
      return (
-       <div className="container">
-         <Script id="datadog-rum">
-
-         <Script
+       <html lang="en">
+         <body>
+           <Script
+             id="dd-rum-sync"
              src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js"
-             type="text/javascript">
-         </Script>
+             type="text/javascript"
+             strategy="beforeInteractive"
+           />
+           <Script id="datadog-rum">
+             {`
+               window.DD_RUM && window.DD_RUM.init({
+                 clientToken: '<CLIENT_TOKEN>',
+                 applicationId: '<YOUR_APPLICATION_ID>',
+                 site: 'datadoghq.com',
+                 service: 'rum-cdn-async',
+                 env: '<ENV_NAME>',
+                 // Specify a version number to identify the deployed version of your application in Datadog 
+                 // version: '1.0.0', 
+                 sessionSampleRate: 100,
+                 sessionReplaySampleRate: 20,
+                 trackUserInteractions: true,
+                 trackResources: true,
+                 trackLongTasks: true,
+                 defaultPrivacyLevel: 'mask-user-input',
+               });
 
-             window.DD_RUM && window.DD_RUM.init({
-               clientToken: '<CLIENT_TOKEN>',
-               applicationId: '<YOUR_APPLICATION_ID',
-               site: 'datadoghq.com',
-               service: 'nextjs-test',
-               env: '<ENV_NAME>',
-               // Specify a version number to identify the deployed version of your application in Datadog 
-               // version: '1.0.0', 
-               sessionSampleRate: 100,
-               sessionReplaySampleRate: 20,
-               trackUserInteractions: true,
-               trackResources: true,
-               trackLongTasks: true,
-               defaultPrivacyLevel: 'mask-user-input',
-             });
+               window.DD_RUM &&
+               window.DD_RUM.startSessionReplayRecording();
+             `}
+           </Script>
+           {children}
+         </body>
+       </html>
+     );
+   }
 
-             window.DD_RUM &&
-             window.DD_RUM.startSessionReplayRecording();
-
-         </Script>
-             </div>
-           )
-         }
-          
-         export default Home
-
-      {{< /code-block >}}
+   {{< /code-block >}}
 
    [1]: https://nextjs.org/docs/app
    [2]: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
