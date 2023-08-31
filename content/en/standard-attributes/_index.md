@@ -12,37 +12,49 @@ attributes:
   - name: host
     description: The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your telemetry. The Agent sets this value automatically.
     product_source: 
-      - "*"
+      - "icon-log"
+      - "icon-rum"
+      - "icon-apm"
     type: string
     domain: Reserved
   - name: source
     description: This corresponds to the integration name, the technology from which the data originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example, `nginx`, `postgresql`, and so on.
     product_source: 
-      - "*"
+      - "icon-log"
+      - "icon-rum"
+      - "icon-apm"
     type: string
     domain: Reserved
   - name: status
     description: This corresponds to the level/severity of the data. For logs, it is used to define [log patterns](/logs/explorer/patterns/) and has a dedicated layout in the Datadog Log UI.
     product_source: 
-      - "*"
+      - "icon-log"
+      - "icon-rum"
+      - "icon-apm"
     type: string
     domain: Reserved
   - name: service
     description: The name of the application or service generating the data. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In RUM, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
     product_source: 
-      - "*"
+      - "icon-log"
+      - "icon-rum"
+      - "icon-apm"
     type: string
     domain: Reserved
   - name: trace_id
     description: The Trace ID used for traces. It is used to correlate your traces with other data, including logs.
     product_source: 
-      - "*"
+      - "icon-log"
+      - "icon-rum"
+      - "icon-apm"
     type: number
     domain: Reserved
   - name: message
     description: The body of a log entry, highlighted and displayed in logs Live Tail, where it is indexed for full text search.
     product_source: 
-      - "*"
+      - "icon-log"
+      - "icon-rum"
+      - "icon-apm"
     type: string
     domain: Reserved
   - name: network.client.ip
@@ -568,44 +580,38 @@ attributes:
     description: Start of the event in milliseconds from epoch.
     product_source: 
       - icon-rum
-      - android
     type: integer
-    domain: Core
+    domain: Core (Android)
   - name: connectivity.status
     description: Status of device network reachability (`connected`, `not connected`, or `maybe`).
     product_source: 
       - icon-rum
-      - android
     type: string
-    domain: Connectivity
+    domain: Connectivity (Android)
   - name: connectivity.interfaces
     description: The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).
     product_source: 
       - icon-rum
-      - android
     type: string
-    domain: Connectivity
+    domain: Connectivity (Android)
   - name: connectivity.cellular.technology
     description: The type of a radio technology used for cellular connection.
     product_source: 
       - icon-rum
-      - android
     type: string
-    domain: Connectivity
+    domain: Connectivity (Android)
   - name: connectivity.cellular.carrier_name
     description: The name of the SIM carrier.
     product_source: 
       - icon-rum
-      - android
     type: string
-    domain: Connectivity
+    domain: Connectivity (Android)
   - name: view.name
     description: Customizable name of the view corresponding to the event.
     product_source: 
       - icon-rum
-      - android
     type: string
-    domain: Views
+    domain: Views (Android)
 
 ---
 
