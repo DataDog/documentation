@@ -446,7 +446,7 @@ By default, a 288GB EBS drive is allocated to each instance, and the sample conf
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
-vector:
+observability_pipelines_worker:
   logs:
     enabled: true
     url: "http://<OPW_HOST>:8282"
