@@ -55,7 +55,7 @@ Error Tracking enables you to:
 
 Error Tracking automatically categorizes crashes collected from your web and mobile applications into issues in the [Error Tracking Explorer][1]. 
 
-{{< img src="real_user_monitoring/error_tracking/error_tracking_page.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_panel.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
 
 Click on an issue to view debugging information, such as the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports. 
 

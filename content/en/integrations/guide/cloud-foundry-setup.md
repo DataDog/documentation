@@ -2,6 +2,8 @@
 title: Cloud Foundry Setup Guide
 kind: guide
 description: "Steps for setting up the Cloud Foundry Integration"
+aliases:
+- /integrations/guide/pivotal-cloud-foundry-manual-setup
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"
   tag: "Blog"
@@ -23,7 +25,7 @@ Read the [Datadog VMware Tanzu Application Service architecture][32] guide for m
 
 ## Monitor your applications
 
-Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent, a lightweight version of the agent, Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
+Use the **Datadog Cloud Foundry Buildpack** to monitor your Cloud Foundry application. This is a Cloud Foundry [supply buildpack][2] that installs the Datadog Container Agent (a lightweight version of the Agent), Datadog Trace Agent for APM, and Datadog DogStatsD binary file in the container your app is running on.
 
 ### Multiple Buildpacks (recommended)
 

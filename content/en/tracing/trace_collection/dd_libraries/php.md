@@ -22,6 +22,9 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
+- link: "https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md"
+  tag: "Github"
+  text: "Contributing to the open source project"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -33,18 +36,6 @@ The latest PHP Tracer supports versions >= 5.4.x.
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
-
-### Follow the in-app documentation (recommended)
-
-Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable ingesting 100% of traces during setup.
-
-For descriptions of terminology used in APM, take a look at the [official documentation][3].
-
-For details about open-source contributions to the PHP tracer, refer to the [contributing guide][4].
 
 ### Configure the Datadog Agent for APM
 
@@ -515,7 +506,6 @@ For Apache, run:
 [1]: /tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
 [6]: /tracing/trace_collection/library_config/php/
 [7]: /tracing/guide/trace-php-cli-scripts/

@@ -14,6 +14,10 @@ title: Guides d'utilisation de la solution Database Monitoring
 {{< /site-region >}}
 
 {{< whatsnext desc="Guides généraux :" >}}
-    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Configurer Heroku Postgres pour Database Monitoring{{< /nextlink >}}
-    {{< nextlink href="database_monitoring/guide/connect_dbm_and_apm" >}}Connecter DBM et APM{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Configurer Heroku Postgres pour la solution Database Monitoring{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}Appliquer des tags aux instructions SQL{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Guide pour SQL Server :" >}}
+    {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Explorer les groupes de disponibilité AlwaysOn SQL Server{{< /nextlink >}}
 {{< /whatsnext >}}

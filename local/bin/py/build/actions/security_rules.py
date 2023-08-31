@@ -136,30 +136,19 @@ def security_rules(content, content_dir):
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
                     # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
-                    f"/security_monitoring/default_rules/{p.stem}"
+                    f"/security_monitoring/default_rules/{p.stem.lower()}"
                 ],
                 "rule_category": [],
                 "integration_id": "",
                 "is_beta": is_beta
             }
 
-            # we need to get the path relative to the repo root for comparisons
-            extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
+            # get path relative to the repo root for comparisons
+            relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
             # lets build up this categorization for filtering purposes
 
-            # previous categorization
-            if relative_path.startswith('configuration'):
-                page_data['rule_category'].append('Posture Management (Cloud)')
-                page_data['rule_category'].append('Cloud Security Management')
-            elif relative_path.startswith('runtime'):
-                if 'compliance' in relative_path:
-                    page_data['rule_category'].append('Posture Management (Infra)')
-                    page_data['rule_category'].append('Cloud Security Management')
-                else:
-                    page_data['rule_category'].append('Workload Security')
-                    page_data['rule_category'].append('Cloud Security Management')
-
-            # new categorization
+            tags = data.get('tags', [])
+            # add to 'rule_category' list
             if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                 if 'signal-correlation/production' in relative_path:
                     page_data['rule_category'].append('Cloud SIEM (Signal Correlation)')
@@ -168,21 +157,24 @@ def security_rules(content, content_dir):
 
             if 'posture-management' in relative_path:
                 if 'cloud-configuration' in relative_path:
-                    page_data['rule_category'].append('Posture Management (Cloud)')
-                    page_data['rule_category'].append('Cloud Security Management')
+                    page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
+
+                    if tags and 'dd_rule_type:combination' in tags:
+                        page_data['rule_category'].append('CSM Security Issues')
+                    if tags and 'dd_rule_type:ciem' in tags:
+                        page_data['rule_category'].append('CSM Identity Risks')
+
                 if 'infrastructure-configuration' in relative_path:
-                    page_data['rule_category'].append('Posture Management (Infra)')
-                    page_data['rule_category'].append('Cloud Security Management')
+                    page_data['rule_category'].append('CSM Misconfigurations (Infra)')
 
             if 'workload-security' in relative_path:
-                page_data['rule_category'].append('Workload Security')
-                page_data['rule_category'].append('Cloud Security Management')
+                page_data['rule_category'].append('CSM Threats')
 
             if 'application-security' in relative_path:
                 page_data['rule_category'].append('Application Security')
 
-            tags = data.get('tags', [])
             if tags:
+                # add 'tags' as frontmatter
                 for tag in tags:
                     if ':' in tag:
                         key, value = tag.split(':')

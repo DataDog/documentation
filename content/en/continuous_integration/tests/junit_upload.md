@@ -32,6 +32,7 @@ Install the [`datadog-ci`][3] CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+
 ### Standalone binary (beta)
 
 <div class="alert alert-warning"><strong>Note</strong>: The standalone binaries are in <strong>beta</strong> and their stability is not guaranteed.</div>
@@ -198,6 +199,16 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `memory_allocations:13`<br/>
 **Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
 
+`--report-tags`
+: Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
+**Default**: (none)<br/>
+**Example**: `test.code_coverage.enabled:true`<br/>
+
+`--report-metrics`
+: Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
+**Default**: (none)<br/>
+**Example**: `test.code_coverage.lines_pct:82`<br/>
+
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
 See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-expressions) for more details on the supported expressions.<br/>
@@ -232,6 +243,7 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
+
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
 
@@ -248,7 +260,12 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
+### Test suite level visibility compatibility
+[Test suite level visibility][9] is supported from `datadog-ci>=2.17.0`.
+
 ## Collecting repository and commit metadata
+
+## Collecting Git metadata
 
 {{% ci-git-metadata %}}
 
@@ -446,6 +463,17 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 
 The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
+
+## Reporting code coverage
+
+It is possible to report code coverage for a given JUnit report via the `--report-metrics` option, by setting the `test.code_coverage.lines_pct` metric:
+
+```shell
+datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
+```
+
+Read more about code coverage in Datadog in [code coverage in Datadog guide][10].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -458,3 +486,5 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: /continuous_integration/tests/#test-suite-level-visibility
+[10]: /continuous_integration/guides/code_coverage/?tab=junitreportuploads

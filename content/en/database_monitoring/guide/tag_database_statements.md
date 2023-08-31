@@ -13,7 +13,7 @@ This guide assumes that you have configured [Database Monitoring][1].
 ## Before you begin
 
 Supported databases
-: postgres, mysql, sqlserver
+: Postgres, MySQL, SQL Server
 
 Supported Agent versions
 : 7.36.1+

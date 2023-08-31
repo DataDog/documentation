@@ -1,7 +1,6 @@
 ---
 title: Connect Database Monitoring and Traces
 kind: documentation
-beta: true
 aliases: 
 - /database_monitoring/guide/connect_dbm_and_apm/
 ---
@@ -9,22 +8,18 @@ aliases:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
-</div>
-
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
 ## Before you begin
 
 Supported databases
-: postgres, mysql, sqlserver
+: Postgres, MySQL, SQL Server
 
 Supported Agent versions
 : 7.46+
 
 Data privacy
-: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
+: Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third parties that have been granted access to the database.
 
 
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
@@ -52,11 +47,11 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [mysql2][7]          |           | {{< X >}} |                                        |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
 |                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
-| **.NET** [dd-trace-dotnet][15] >= 2.26.0 |                      |           |           |                                        |
-|                                          | [Npgsql][16]         | {{< X >}} |           |                                        |
-|                                          | [MySql.Data][17]     |           | {{< X >}} |                                        |
-|                                          | [MySqlConnector][18] |           | {{< X >}} |                                        |
-|                                          | [ADO.NET][24]        |           |           | `service` mode only                    |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                      |           |           |                                        |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                                        |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                                        |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                                        |
+|                                          | [ADO.NET][24] *        |           |           | `service` mode only                    |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |           |                                        |
 |                                          | [pdo][20]            | {{< X >}} | {{< X >}} |                                        |
 |                                          | [MySQLi][21]         |           | {{< X >}} |                                        |
@@ -64,6 +59,8 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [postgres][10]       | {{< X >}} |           |                                        |
 |                                          | [mysql][13]          |           | {{< X >}} |                                        |
 |                                          | [mysql2][14]         |           | {{< X >}} |                                        |
+
+\* [CommandType.StoredProcedure][25] not supported
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -420,3 +417,4 @@ View historical performance of similar queries to those executed in your trace, 
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
 [24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
+[25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set

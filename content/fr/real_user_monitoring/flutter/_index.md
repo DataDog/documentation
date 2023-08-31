@@ -37,6 +37,8 @@ Pour initialiser le SDK Flutter Datadog pour RUM, consultez la rubrique [Configu
 
 ## Suivi automatique des vues
 
+### Version 1 du navigateur Flutter
+
 Le [plug-in Flutter Datadog][4] peut surveiller automatiquement les routes nommées à l'aide de `DatadogNavigationObserver` sur votre MaterialApp :
 
 ```dart
@@ -50,9 +52,33 @@ MaterialApp(
 
 Cette méthode fonctionne si vous utilisez des routes nommées ou si vous avez indiqué un nom pour le paramètre `settings` de votre `PageRoute`.
 
-Sinon, vous pouvez utiliser les propriétés `DatadogRouteAwareMixin` et `DatadogNavigationObserverProvider` pour lancer et arrêter automatiquement vos vues RUM. `DatadogRouteAwareMixin` vous permet de faire passer n'importe quelle logique de l'état `initState` à l'état `didPush`.
+Si vous n'utilisez pas de routes nommées, vous pouvez vous servir de `DatadogRouteAwareMixin` et du widget `DatadogNavigationObserverProvider` pour lancer et arrêter automatiquement vos vues RUM. `DatadogRouteAwareMixin` vous permet de faire passer n'importe quelle logique de l'état `initState` à l'état `didPush`.
 
-Pour renommer vos vues ou fournir des chemins personnalisés, ajoutez un rappel [`viewInfoExtractor`][8]. Cette fonction peut adopter le comportement par défaut de l'observateur en appelant `defaultViewInfoExtractor`. Exemple :
+### Version 2 du navigateur Flutter
+
+Si vous utilisez la version 2.0 du navigateur Flutter, qui repose sur le constructeur `MaterialApp.router`, la configuration varie selon le middleware de routing utilisé (le cas échéant). Puisque [go_router][11] utilise la même interface d'observation que la version 1 du navigateur Flutter, l'observateur `DatadogNavigationObserver` peut être ajouté aux autres observateurs sous la forme d'un paramètre de `GoRouter`.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    // Ajouter les informations sur les routes
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Terminer la configuration
+)
+```
+
+Pour découvrir des exemples de routeurs autres que `go_router`, consultez la rubrique relative au [suivi automatique des vues][12].
+
+
+### Renommer des vues
+
+Pour toutes les configurations, vous pouvez renommer vos vues ou fournir des chemins personnalisés, en ajoutant un rappel [`viewInfoExtractor`][8]. Cette fonction peut adopter le comportement par défaut de l'observateur en appelant `defaultViewInfoExtractor`. Exemple :
 
 ```dart
 RumViewInfo? infoExtractor(Route<dynamic> route) {
@@ -72,7 +98,6 @@ var observer = DatadogNavigationObserver(
   viewInfoExtractor: infoExtractor,
 );
 ```
-
 
 ## Suivre automatiquement des ressources
 
@@ -109,3 +134,5 @@ Pour activer le [tracing distribué][6] Datadog, vous devez définir la proprié
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
+[11]: https://pub.dev/packages/go_router
+[12]: /fr/real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking
