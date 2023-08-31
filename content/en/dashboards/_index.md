@@ -137,7 +137,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Version history
 
-From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
+From a dashboard click on the settings icon then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
 
 #### Generate public URL
 
@@ -163,9 +163,7 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-At the top of the dashboard, click on settings and select *Permissions*.
-
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
+At the top of the dashboard, click on configure and select *Permissions*.
 
 Use the pop-up to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
 
@@ -206,11 +204,11 @@ Use this option to permanently delete your dashboard. You are prompted to confir
 
 ## Dashboard details
 
-From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A dropdown panel opens.
+From an individual dashboard, hover over the dashboard title to view and edit dashboard details. A popover panel opens.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
-Under the title, a byline tells you who created the dashboard.
+Under the title, the avatar tells you who created the dashboard.
 
 ### Suggested dashboards and active users
 
