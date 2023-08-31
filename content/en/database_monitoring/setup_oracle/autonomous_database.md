@@ -66,6 +66,7 @@ grant select on V$SQLSTATS to datadog ;
 grant select on V$CONTAINERS to datadog ;
 grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
 grant select on V$SQL to datadog ;
+grant select on V$PGASTAT to datadog ;
 ```
 
 ## Configure the Agent
