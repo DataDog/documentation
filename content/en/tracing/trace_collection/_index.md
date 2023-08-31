@@ -115,7 +115,7 @@ For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries f
 
 ## APM setup tutorials
 
-The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the direct method ([Option 2](#option-2---add-the-library-directly-to-your-application-code)):
+The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the direct method ([Option 2](#option-2---manually-instrument-your-application)):
 
 {{< whatsnext desc="Choose your language and environment:" >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
