@@ -210,20 +210,21 @@ From an individual dashboard, hover over the dashboard title to view and edit da
 
 Under the title, the avatar tells you who created the dashboard.
 
-### Suggested dashboards and active users
+### Suggested dashboards
 
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details view displays a list of the most active users of this dashboard.
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. 
+
+To add suggested dashboards list you need to add [[suggested_dashboards]] inside the dashboard description. 
 
 ### Edit details
 
 Update Markdown-supported dashboard descriptions or associate [teams][18] with a dashboard:
 
 1. Open the dashboard you wish to edit.
-1. Click the caret icon next to the dashboard title. A dropdown panel opens.
-1. Click **Edit**. The panel changes to edit mode.
+1. Hover the dashboard title. A dropdown panel opens.
+1. Click on the dashboard title or description to edit them. 
+1. Once done editing click the done button.
 1. Select up to 5 teams from the **Teams** dropdown.
-1. Enter a description in the text box. Format your text in Markdown.
-1. Click **Save**.
 
 
 ## Dashboard list
