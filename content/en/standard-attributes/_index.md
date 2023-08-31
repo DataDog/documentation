@@ -6,7 +6,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Ensuring the security of the data sent to Datadog'
 filter_all: All
-content: "Welcome to Datadog's Data Dictionary page! Here, you'll find a comprehensive and organized resource that unlocks the power of data understanding within the Datadog platform.<br></br>With our Data Dictionary, you'll gain insights into data sources, understand the meaning and context of each data point, and establish consistent naming conventions and definitions across your organization. This shared understanding eliminates ambiguity, fosters collaboration, and accelerates data-driven decision-making."
+content: "The following table lists the attributes automatically applied to data sent to Datadog by the Agent by each of the RUM, Logs, and APM products, as applicable to the data domain. Optionally, filter the list by product or search by keyword or description text to find the attributes you're interested in."
 
 attributes:
   - name: host
