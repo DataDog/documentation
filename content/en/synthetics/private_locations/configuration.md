@@ -29,7 +29,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 Arguments set in the launch command have precedence over the configuration file. However, these options are not stored and are consequently only relevant for a given launch.
 
-## Configuration options
+## Top configuration options
 
 ### Datadog site configuration
 
@@ -124,7 +124,7 @@ Overrides variables used in tests running on the Private Location with environme
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
 All variables imported this way are obfuscated. 
 
-## Private locations admin
+### Private locations admin
 
 `config`
 : **Type**: String <br>
@@ -134,7 +134,7 @@ Path to JSON configuration file.
 `logFormat`
 : **Type**: String <br>
 **Default**: `pretty`<br>
-Format log output between `"pretty"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.
+Format log output between `"compact"`, `"pretty"`, `"pretty-compact"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.
 
 `verbosity`
 : **Type**: Number <br>
@@ -146,12 +146,29 @@ Verbosity level (for example, `-v`, `-vv`, and `-vvv`).
 **Default**: `none`<br>
 Display worker configuration parameters without secrets.
 
-`help`
+**Note**: Private Location containers output logs to stdout/stderr without saving them within the container.
+
+## All configuration options
+
+`allowedDomainNames`
+: **Type**: Array <br>
+**Default**: `none`<br>
+Grant access to domain names in test. Has precedence over --blockedDomainNames, for example: `--allowedDomainNames="*.example.com"`.
+
+`blockedDomainNames`
+: **Type**: Array <br>
+**Default**: `none`<br>
+Deny access to domain names in tests, for example: `--blockedDomainNames="example.org" --blockedDomainNames="*.com"`.
+
+`enableIPv6`
+: **Type**: Boolean <br>
+**Default**: `false`<br>
+Use IPv6 to perform tests. **Note**: IPv6 in Docker is only supported with Linux host.
+
+`version`
 : **Type**: Boolean <br>
 **Default**: `none`<br>
-Show help.
-
-**Note**: Private Location containers output logs to stdout/stderr without saving them within the container.
+Show version number of the worker.
 
 ## Further Reading
 
