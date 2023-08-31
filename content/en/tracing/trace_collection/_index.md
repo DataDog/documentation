@@ -81,8 +81,6 @@ For other environments, see the [Integrations][5] documentation for that environ
 {{% /tab %}}
 {{< /tabs >}}
 
-For more language-specific details, see the [Tracing Library][4] pages.
-
 ## Step 2 - Instrument your application 
 
 When you add the Datadog tracing library to your code, it instruments the service and sends traces to the Datadog Agent. The Agent then sends the traces to the Datadog backend to be displayed in the UI.
@@ -91,18 +89,18 @@ When you add the Datadog tracing library to your code, it instruments the servic
 
 Depending on the programming language and infrastructure you use, you have the following options to instrument your application:
 
-- [Inject the library locally without modifying your application code](#option-2---inject-the-library-locally-without-modifying-code)
-- [Add the library directly to your application code](#option-1---add-the-library-directly-to-your-application-code)
-- [Inject the library from the Datadog UI](#option-3---inject-the-library-from-the-datadog-ui)
+- [Auto-instrument your application](#option-1---auto-instrument-your-application)
+- [Manually instrument your application](#option-2---manually-instrument-your-application)
+- [Auto-instrument your application from the Datadog UI](#option-3---auto-instrument-your-application-from-the-datadog-ui)
 
-### Option 1 - Inject the library locally without modifying your application code
+### Option 1 - Auto-instrument your application
 
-For Kubernetes, hosts, and containers, you can inject the tracing library locally without modifying your application code. For more information and instructions, read [Injecting Libraries Locally][2].
+For Kubernetes, hosts, and containers, you can auto-instrument your application by injecting the tracing library into your application. For more information and instructions, read [Injecting Libraries Locally][2].
 
 - For Kubernetes, you can inject the library into applications written in Java, Python, Ruby (Beta), Node.js, and .NET.
 - **Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
 
-### Option 2 - Add the library directly to your application code
+### Option 2 - Manually instrument your application
 
 For setup instructions, select your language:
 
@@ -111,7 +109,7 @@ For setup instructions, select your language:
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
 
 
-### Option 3 - Inject the library from the Datadog UI
+### Option 3 - Auto-instrument your application from the Datadog UI
 
 For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. For more information and instructions, read [Injecting Libraries Remotely][3].
 
