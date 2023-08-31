@@ -36,9 +36,10 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 
 **Examples**:
 
+- `!env:staging` excludes resources that have the `env:staging` tag.
 - `datadog:monitored, env:prod*` collects metrics for resources that have at least one of these tags.
-- `!env:staging, !testing` excludes resources that have both tags.
-- `datadog:monitored !region:us-east1` collects metrics for resources that have the tag `datadog:monitored`, so long as the resource does not have the `region:us-east1` tag applied to it.
+- `!env:staging, !testing` excludes resources that have both the `env:staging` and `testing` tags.
+- `datadog:monitored !region:us-east1` collects metrics for resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
 
 1. On the **[Cloud Security Management Setup][2]** page, click **Cloud accounts**.
 2. Expand the **Azure** section.
