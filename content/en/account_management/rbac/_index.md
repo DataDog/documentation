@@ -212,7 +212,7 @@ Some resources allow you to restrict access to individual resources by roles, [T
 [10]: /api/latest/roles/#create-role
 [11]: /dashboards/#permissions
 [12]: /monitors/notify/#permissions
-[13]: /security_platform/detection_rules/#limit-edit-access
+[13]: /security/detection_rules/#limit-edit-access
 [14]: /service_management/service_level_objectives/#permissions
 [15]: /synthetics/browser_tests/#permissions
 [16]: /account_management/teams/

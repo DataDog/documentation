@@ -10,7 +10,7 @@ title: Azure App Service - Code Linux
 
 Cette méthode d'instrumentation permet d'ajouter les fonctionnalités de surveillance suivantes aux charges de travail Azure App Service sous Linux :
 
-- Tracing APM distribué complet via l'instrumentation automatique
+- Tracing APM entièrement distribué via l'instrumentation automatique
 - Vues service et trace personnalisées affichant les métriques et métadonnées Azure App Service pertinentes
 - Prise en charge de l'instrumentation APM manuelle pour personnaliser les spans
 - Injection des `Trace_ID` dans les logs d'application

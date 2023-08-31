@@ -59,7 +59,7 @@ Once [log collection][7] is enabled, set up [custom log collection][8] to tail y
 
       - type: file
         path: "<PATH_TO_PYTHON_LOG>.log"
-        service: "<YOUR_APPLICATION>"
+        service: "<SERVICE_NAME>"
         source: python
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
