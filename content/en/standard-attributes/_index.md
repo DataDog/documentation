@@ -62,37 +62,37 @@ attributes:
     product_source: 
       - icon-log
     type: string
-    domain: Network/communications
+    domain: Network communications
   - name: network.destination.ip
     description: The IP address the client connected to.
     product_source: 
       - icon-log
     type: string
-    domain: Network/communications
+    domain: Network communications
   - name: network.client.port
     description: The port of the client that initiated the connection.
     product_source: 
       - icon-log
     type: number
-    domain: Network/communications
+    domain: Network communications
   - name: network.destination.port
     description: The TCP port the client connected to.
     product_source: 
       - icon-log
     type: number
-    domain: Network/communications
+    domain: Network communications
   - name: network.bytes_read
     description: Total number of bytes transmitted from the client to the server when the log is emitted.
     product_source: 
       - icon-log
     type: number
-    domain: Network/communications
+    domain: Network communications
   - name: network.bytes_written
     description: Total number of bytes transmitted from the server to the client when the log is emitted.
     product_source: 
       - icon-log
     type: number
-    domain: Network/communications
+    domain: Network communications
   - name: network.client.geoip.country.name
     description: Name of the country.
     product_source: 
