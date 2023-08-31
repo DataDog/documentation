@@ -15,7 +15,7 @@ cascade:
         rank: 70
 ---
 
-{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of hostmap filtered to ngnix hosts" video="true">}}
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}
 
 ## Overview
 
