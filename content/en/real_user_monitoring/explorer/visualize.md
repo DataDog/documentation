@@ -1,8 +1,6 @@
 ---
 title: Visualize
 kind: documentation
-aliases:
-- /real_user_monitoring/explorer/visualize
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

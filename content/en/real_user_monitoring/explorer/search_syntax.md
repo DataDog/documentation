@@ -1,8 +1,6 @@
 ---
 title: Search Syntax
 kind: documentation
-aliases:
-- /real_user_monitoring/explorer/search_syntax
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

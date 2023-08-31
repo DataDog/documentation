@@ -3,7 +3,6 @@ title: RUM Explorer
 kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
-- /real_user_monitoring/explorer
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

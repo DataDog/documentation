@@ -1,8 +1,6 @@
 ---
 title: Search RUM Events
 kind: documentation
-aliases:
-- /real_user_monitoring/explorer/search
 further_reading:
 - link: "/real_user_monitoring/explorer/group/"
   tag: "Documentation"

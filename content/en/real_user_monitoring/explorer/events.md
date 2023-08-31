@@ -1,8 +1,6 @@
 ---
 title: Events Side Panel
 kind: documentation
-aliases:
-- /real_user_monitoring/explorer/events
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
