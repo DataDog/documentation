@@ -22,7 +22,7 @@ Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in 
 1. Set up and configure [AWS Cloud Cost integration][1].
 2. (Optional) Enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
 1. At least one of the following must be running:
-    - [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances. Ensure that the [**Orchestrator Explorer**][6] is enabled in your Agent configuration.
+    - [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances. Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
     - [**Datadog Container Monitoring**][3] in ECS tasks.
 
 ## Cost metrics
