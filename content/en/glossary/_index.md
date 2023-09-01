@@ -5,6 +5,7 @@ cascade:
 scrollspy:
     target: '#glossary-nav'
     offset: 5
+filter_all: All
 ---
 
 {{< jqmath-vanilla >}}

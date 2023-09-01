@@ -62,7 +62,7 @@ Amazon Elemental MediaConvert は、オフラインビデオコンテンツを�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

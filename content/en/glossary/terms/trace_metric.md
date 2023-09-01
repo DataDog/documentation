@@ -1,5 +1,7 @@
 ---
 title: trace metric
+core_product:
+  - apm
 ---
 Trace metrics are automatically collected and kept with a 15-month retention policy similar to any other [Datadog metric][1]. They can be used to identify and alert on hits, errors, or latency. Statistics and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
 
@@ -15,7 +17,7 @@ Trace metrics are useful for monitoring. APM monitors can be set up on the [New 
 
 {{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="trace metrics monitor" >}}
 
-[1]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/
+[1]: /developers/guide/data-collection-resolution-retention/
 [2]: https://app.datadoghq.com/metric/summary
 [3]: https://app.datadoghq.com/monitors
 [4]: /tracing/services/service_page/

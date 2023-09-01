@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-reactnative"
     tag: "Github"
-    text: "dd-sdk-reactnative Source code"
+    text: "Source code for dd-sdk-reactnative"
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "Datadog Real User Monitoring"

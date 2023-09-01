@@ -49,7 +49,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 **注**: [Datadog ログインテグレーション][1]を使ってログをパースしていない場合は、カスタムログパースルールによって `dd.trace_id`、`dd.span_id`、`dd.service`、`dd.env`、`dd.version` が文字列としてパースされていることを確実にする必要があります。詳しくは、[関連するログがトレース ID パネルに表示されない][2]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

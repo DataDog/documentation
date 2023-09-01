@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md
 description: Recueillez des logs à partir de vos applications Android.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
@@ -12,6 +10,7 @@ further_reading:
 kind: documentation
 title: Collecte de logs Android
 ---
+
 Envoyez des logs à Datadog à partir de vos applications Android avec la [bibliothèque de logging côté client `dd-sdk-android` de Datadog][1]. Vous pourrez notamment :
 
 * Envoyer des logs vers Datadog au format JSON en natif
@@ -20,7 +19,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
 * Enregistrer les adresses IP et user agents réels du client
 * Optimiser l'utilisation du réseau grâce aux envois groupés automatiques
 
-## Configuration
+## Implémentation
 
 1. Ajoutez la dépendance Gradle en définissant la bibliothèque en tant que dépendance dans le fichier `build.gradle` au niveau du module :
 
@@ -30,7 +29,7 @@ Envoyez des logs à Datadog à partir de vos applications Android avec la [bibli
     }
     ```
 
-2. Initialisez la bibliothèque avec le contexte de votre application, le consentement au suivi ainsi que le [token client Datadog][2] et l'ID d'application générés lors de la création d'une application RUM depuis l'interface Datadog (consulter la section [Débuter avec la collecte de données RUM sur Android][6] pour en savoir plus). Pour des raisons de sécurité, vous devez utiliser un token client : il n'est pas possible d'utiliser des [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-android`. En effet, elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2] :
+2. Initialisez la bibliothèque avec le contexte de votre application, le consentement au suivi ainsi que le [token client Datadog][2] et l'ID d'application générés lors de la création d'une application RUM depuis l'interface Datadog (consulter la section [Surveillance Android avec RUM][6] pour en savoir plus). Pour des raisons de sécurité, vous devez utiliser un token client : il n'est pas possible d'utiliser des [clés d'API Datadog][3] pour configurer la bibliothèque `dd-sdk-android`. En effet, elles risqueraient d'être exposées côté client dans le bytecode de l'APK de l'application Android. Pour en savoir plus sur la configuration d'un token client, consultez la [documentation dédiée][2]. La valeur `NOM_VARIANTE_APPLICATION` spécifie la variante de l'application qui génère des données.
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -474,10 +473,10 @@ Si votre codebase existante utilise Timber, vous pouvez transmettre tous ces log
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android
-[2]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#client-tokens
-[3]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/fr/logs/processing/attributes_naming_convention/
-[5]: https://docs.datadoghq.com/fr/tagging/
-[6]: https://docs.datadoghq.com/fr/real_user_monitoring/android/?tab=us
-[7]: https://docs.datadoghq.com/fr/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[2]: /fr/account_management/api-app-keys/#client-tokens
+[3]: /fr/account_management/api-app-keys/#api-keys
+[4]: /fr/logs/processing/attributes_naming_convention/
+[5]: /fr/tagging/
+[6]: /fr/real_user_monitoring/android/?tab=us
+[7]: /fr/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [8]: https://source.android.com/security/app-sandbox

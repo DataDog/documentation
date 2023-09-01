@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: sedai-sedai-license
 app_uuid: a87aa14a-36af-42dd-850e-30fc70c8cd91
 assets: {}

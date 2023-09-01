@@ -1,9 +1,11 @@
 ---
 categories:
 - cloud
-- kubernetes
+- コンテナ
 - google cloud
+- kubernetes
 - ログの収集
+- ネットワーク
 dependencies: []
 description: GKE リソースの使用状況を監視します。
 doc_link: https://docs.datadoghq.com/integrations/google_kubernetes_engine/
@@ -11,13 +13,13 @@ draft: false
 git_integration_title: google_kubernetes_engine
 has_logo: true
 integration_id: google-kubernetes-engine
-integration_title: Google Kubernetes Engine
+integration_title: Google Kubernetes Engine, Cloud
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_kubernetes_engine
-public_title: Datadog-Google Kubernetes Engine インテグレーション
+public_title: Datadog-Google Kubernetes Engine, Cloud インテグレーション
 short_description: GKE リソースの使用状況を監視します。
 version: '1.0'
 ---
@@ -46,18 +48,19 @@ Google Kubernetes Engine からメトリクスを取得して、以下のこと�
 
 #### インストール
 
-まだの方は、まず[Google Cloud Platform とのインテグレーション][1]を設定してください。標準のメトリクスとプリセットダッシュボードについては、他のインストール手順はありません。
+1. まだの方は、まず[Google Cloud Platform とのインテグレーション][1]を設定してください。標準のメトリクスとプリセットダッシュボードについては、他のインストール手順はありません。
 
-拡張ダッシュボードを表示し、APM トレース、ロギング、プロファイリング、セキュリティ、およびその他の Datadog サービスを有効にするには、[GKE クラスターに Datadog Agent をインストールします][2]。
+2. 拡張ダッシュボードを表示し、APM トレース、ロギング、プロファイリング、セキュリティ、およびその他の Datadog サービスを有効にするには、[GKE クラスターに Datadog Agent をインストールします][2]。
 
+3. コントロールプレーンメトリクスを入力するには、[GKE コントロールプレーンメトリクスを有効にする][3]必要があります。コントロールプレーンメトリクスは、Google が GKE で管理している Kubernetes コントロールプレーンの動作を可視化するものです。
 
 ### ログの収集
 
-Google Kubernetes Engine のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][3] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Kubernetes Engine のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][4] をまだセットアップしていない場合は、これをセットアップしてください。
 
 これが完了したら、Google Kubernetes Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
-1. [GCP Logs Explorer ページ][4]にアクセスし、Kubernetes と GKE のログをフィルタリングします。
+1. [GCP Logs Explorer ページ][5]にアクセスし、Kubernetes と GKE のログをフィルタリングします。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
@@ -81,12 +84,13 @@ Google Kubernetes Engine インテグレーションには、サービスのチ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 [1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/ja/integrations/gke/?tab=standard
-[3]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/?tab=datadogussite#log-collection
-[4]: https://console.cloud.google.com/logs/viewer
-[5]: https://github.com/DataDog/dogweb/blob/prod/integration/google_kubernetes_engine/google_kubernetes_engine_metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[3]: https://cloud.google.com/stackdriver/docs/solutions/gke/managing-metrics#enable-control-plane-metrics
+[4]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[5]: https://console.cloud.google.com/logs/viewer
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_kubernetes_engine/google_kubernetes_engine_metadata.csv
+[7]: https://docs.datadoghq.com/ja/help/

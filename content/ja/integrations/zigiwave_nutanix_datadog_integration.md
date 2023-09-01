@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zigiwave-nutanix-integration
 app_uuid: df66726a-0691-4c82-827c-f474ae98e4f5
 assets:

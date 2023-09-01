@@ -23,7 +23,7 @@ further_reading:
   text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
-  text: "Datadog Standard Attributes"
+  text: "Datadog standard attributes"
 ---
 
 ## Overview
@@ -266,6 +266,16 @@ Source errors include code-level information about the error. For more informati
 | `action.frustration.type:dead_click`  | string | The dead clicks detected by the RUM Browser SDK.              |
 | `action.frustration.type:rage_click`  | string | The rage clicks detected by the RUM Browser SDK.              |
 | `action.frustration.type:error_click` | string | The error clicks detected by the RUM Browser SDK.             |
+
+### UTM attributes
+
+| Field                | Type   | Description                                                   |
+|-------------------------------|--------|---------------------------------------------------------------|
+| `view.url_query.utm_source`     | string | The parameter in the URL tracking the source of traffic. |
+| `view.url_query.utm_medium`        | string | The parameter in the URL tracking the channel where the traffic is coming from.    |
+| `view.url_query.utm_campaign`  | string | The paramter in the URL identifying the specific marketing campaign tied to that view.              |
+| `view.url_query.utm_content`  | string | The paramter in the URL identifying the specific element a user clicked within a marketing campaign.           |
+| `view.url_query.utm_term` | string | The parameter in the URL tracking the keyword a user searched to trigger a given campaign.             |
 
 ## Further Reading
 

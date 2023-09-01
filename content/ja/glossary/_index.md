@@ -1,6 +1,7 @@
 ---
 cascade:
   disable_toc: true
+filter_all: All
 scrollspy:
   offset: 5
   target: '#glossary-nav'

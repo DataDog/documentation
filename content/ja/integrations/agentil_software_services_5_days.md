@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-services-5-days
 app_uuid: 4fc93d92-e67b-4c45-b5fd-ebfed8529223
 assets: {}
@@ -10,8 +12,6 @@ author:
   vendor_id: agentil-software
 categories:
 - マーケットプレイス
-- クラウド
-- モニタリング
 - sap
 dependencies: []
 display_on_public_website: true
@@ -40,12 +40,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Any
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Professional Service
+  - Supported OS::Any
   configuration: README.md#Setup
   description: Agentil のインテグレーションを実装するための 5 日間のサービス
   media:

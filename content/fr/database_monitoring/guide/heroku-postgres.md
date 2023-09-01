@@ -44,7 +44,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 Créez la fonction suivante dans la base de données :
 
-```
+```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
    l_query TEXT,
    OUT explain JSON
@@ -67,7 +67,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-Enfin, on configure l'Agent Datadog pour activer le check Postgres à l'aide des nouveaux identifiants :
+Enfin, il ne reste plus qu'à configurer l'Agent Datadog pour activer le check Postgres à l'aide des nouveaux identifiants :
 
 ```shell
 # Vérifiez que vous êtes dans le répertoire racine de votre application
@@ -112,7 +112,7 @@ fi
 Effectuez le déploiement sur Heroku :
 
 ```shell
-# Déployer sur Heroku
+# Déployer sur Heroku 
 git add .
 git commit -m "Activation de l'intégration postgres"
 git push heroku main

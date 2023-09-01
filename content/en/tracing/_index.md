@@ -30,6 +30,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
     tag: "Blog"
     text: "Monitor your Linux web apps on Azure App Service with Datadog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to boost your APM understanding"  
+
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -39,6 +43,9 @@ aliases:
   - /tracing/faq/distributed-tracing/
 algolia:
   tags: ['apm', 'application performance monitoring', 'distributed tracing']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
@@ -51,13 +58,15 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Send traces to Datadog
 
-As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
+As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers, or serverless functions takes just minutes.
 
-[Add the Datadog Tracing Library][2] for your environment and language, whether you are [tracing a proxy][3] or tracing across [AWS Lambda functions][4] and hosts, using automatic instrumentation, dd-trace-api, or [OpenTelemetry][5].
+<div class="alert alert-info">
+<strong>Beta: Single Step APM Instrumentation</strong> - Enable APM instrumentation when you install the Datadog Agent to get started quickly with application performance monitoring. This option automatically instruments your services without you needing to modify the code. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
+</div>
 
-{{< partial name="apm/apm-compatibility.html" >}}
+**Read [Sending Traces to Datadog][2] to get started.**
 
-<br>
+Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], using automatic or custom instrumentation, or instrumenting with [OpenTelemetry][5].
 
 ## Control and manage data flowing into and being kept by Datadog
 
@@ -111,10 +120,10 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/
-[2]: /tracing/trace_collection/dd_libraries/java
+[2]: /tracing/trace_collection/
 [3]: /tracing/trace_collection/proxy_setup/
 [4]: /serverless/distributed_tracing
-[5]: /opentelemetry/otel_tracing/
+[5]: /tracing/trace_collection/otel_instrumentation/
 [6]: /tracing/trace_pipeline/ingestion_controls/
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/

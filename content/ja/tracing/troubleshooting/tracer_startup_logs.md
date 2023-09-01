@@ -40,10 +40,12 @@ Java トレーサーは診断ログを出力しません。このチェックで
 
 ログファイルは、デフォルトで以下のディレクトリに保存されます。`DD_TRACE_LOG_DIRECTORY` 設定を使用してこれらのパスを変更できます。
 
-| プラットフォーム | パス                                      |
-|----------|-------------------------------------------|
-| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-| Linux    | `/var/log/datadog/dotnet/`                |
+| プラットフォーム                                             | パス                                             |
+|------------------------------------------------------|--------------------------------------------------|
+| Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
+| Linux                                                | `/var/log/datadog/dotnet/`                       |
+| Linux ([Kubernetes ライブラリの挿入][1]を使用する場合) | `/datadog-lib/logs`                              |
+| Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
@@ -81,6 +83,7 @@ DATADOG TRACER DIAGNOSTICS - Failed to attach profiler: unable to set event mask
 DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 ```
 
+[1]: /ja/tracing/trace_collection/library_injection/?tab=kubernetes
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -93,7 +96,7 @@ DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 
 診断情報は独立した表に表示され、一般的な問題の診断に役立ちます。
 
-{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP 情報"  >}}
+{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP 情報" >}}
 
 **CLI SAPI:**
 
@@ -185,7 +188,7 @@ DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Dar
 
 **診断:**
 
-NodeJS トレーサーは、Agent に到達できない場合に診断行を出力します。
+Node.js トレーサーは、Agent に到達できない場合に診断行を出力します。
 
 ```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126

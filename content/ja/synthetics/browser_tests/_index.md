@@ -140,11 +140,12 @@ title: ブラウザテスト
 利用可能な変数の一覧を表示するには
 
 - ブラウザテストの詳細で: 目的のフィールドに `{{` と入力します。
+
+  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="グローバル変数からローカル変数を定義する" video="true" width="90%" >}}
+
 - ブラウザテストのレコーダーで: テストに変数をインポートし、目的のフィールドに `{{` を入力するか、アプリケーションに変数を挿入して使用します。
 
-{{< img src="synthetics/browser_tests/recording_global_variable.mov" alt="グローバル変数からローカル変数を定義する" video="true" width="90%" >}}
-
-{{< img src="synthetics/browser_tests/recording_inject_variable.mov" alt="ブラウザレコーディング時にローカル変数をフィールドに挿入する" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="ブラウザレコーディング時にローカル変数をフィールドに挿入する" video="true" width="90%" >}}
 
 ブラウザテストの記録で変数を使用する方法については、[ブラウザテストの手順][4]を参照してください。
 
@@ -212,7 +213,7 @@ title: ブラウザテスト
 
 組織内の役割に基づいて、ブラウザテストへのアクセスを制限することができます。ブラウザテストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
 
 ## その他の参考資料
 

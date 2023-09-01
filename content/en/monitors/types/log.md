@@ -8,12 +8,15 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+  tag: "Blog"
+  text: "Use CIDR notation queries to filter your network traffic logs"
 ---
 
 ## Overview
@@ -78,7 +81,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Log samples and breaching values toplist
 
-When a logs monitor is triggered, samples or values can be added to the notification message.
+When a logs monitor is triggered, samples or values can be added to the notification message. Logs without a message are not included in samples. In order to add the content of a log attribute to the monitor's message, use Log monitor [template variables][9] directly in the monitor's message body.
 
 | Monitor Setup                    | Can be added to notification message |
 |----------------------------------|--------------------------------------|
@@ -87,7 +90,7 @@ When a logs monitor is triggered, samples or values can be added to the notifica
 | Grouped Multi Alert Log count    | Up to 10 log samples.                |
 | Ungrouped Simple-Alert measure   | Up to 10 log samples.                |
 | Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
-| Grouped Multi Alert Log count    | Up to 10 facet or measure values.    |
+| Grouped Multi Alert Log measure  | Up to 10 facet or measure values.    |
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
@@ -113,3 +116,4 @@ Include a sample of 10 logs in the alert notification:
 [6]: /logs/explorer/facets/#measures
 [7]: /monitors/configuration/#advanced-alert-conditions
 [8]: /monitors/notify/
+[9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables

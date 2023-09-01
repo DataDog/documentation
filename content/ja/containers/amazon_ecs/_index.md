@@ -4,7 +4,6 @@ algolia:
   - ecs
 aliases:
 - /ja/agent/amazon_ecs/
-- /ja/containers/amazon_ecs/data_collected
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: ドキュメント
@@ -12,9 +11,15 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: ドキュメント
   text: アプリケーショントレースの収集
+- link: /agent/amazon_ecs/data_collected/#metrics
+  tag: Documentation
+  text: ECS メトリクスの収集
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: ブログ
   text: Amazon ECS Anywhere のサポート開始
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: blog
+  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
 kind: documentation
 title: Amazon ECS
 ---
@@ -233,7 +238,7 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.0",
+            "image": "datadog/fips-proxy:0.5.4",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -320,6 +325,10 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
             (...)
             "environment": [
               (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
                 {
                     "name": "DD_FIPS_PORT_RANGE_START",
                     "value": "9803"

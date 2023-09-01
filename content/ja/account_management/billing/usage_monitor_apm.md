@@ -1,50 +1,56 @@
 ---
-title: APM 使用量の表示とアラート
 kind: documentation
+title: APM 使用量の表示とアラート
 ---
+
 Datadog では、お客様のニーズに合うさまざまな料金プランを用意しています。詳細については、[料金プランのページ][1]を参照してください。
 APM および分散型トレーシングの請求の仕組みについては、[APM 料金][2]の APM ドキュメントをお読みください。
 
-**注:** Analyzed Span は、2020 年 10 月 20 日の Tracing Without Limits のローンチに伴い、Indexed Span と改名しました。
-
 ## 使用量ページ
 
-アカウントの管理者である場合、72 時間ごとに更新される[使用量ページ][3]を使用して、アカウントの使用量を表示できます。
+アカウントの管理者である場合、24 時間ごとに更新される[使用量ページ][3]を使用して、アカウントの使用量を表示できます。
 
-| メトリクス         | 説明                                                                              |
-|----------------|------------------------------------------------------------------------------------------|
-| APM ホスト      | 当月全時間のすべての個別 APM ホストの 99 パーセンタイル値を表示します。 |
-| インデックス化されたスパン | 当月全時間のインデックス化されたすべての Indexed Spans の合計を表示します。         |
-| Fargate タスク  | 当月全時間のすべての Fargate タスク数の平均を表示します。              |
+| ディメンション          | 説明                                                                                    |
+|--------------------|------------------------------------------------------------------------------------------------|
+| APM ホスト          | 当月全時間のすべての個別 APM ホストの 99 パーセンタイル値を表示します。       |
+| APM Fargate Tasks  | 当月の 5 分間における個別 Fargate タスクの平均を表示します。   |
+| Ingested Span     | 当月に取り込まれたスパンからの取り込みバイトの合計を表示します。                      |
+| Indexed Span      | 当月にインデックス化されたスパンの合計を表示します。                                   |
 
-## APM ホストにアラートを設定する
+各 APM ホストと APM Fargate タスクは、取り込まれたボリュームとインデックス化されたボリュームの割り当てを付与します。
+- 取り込みスパン: APM ホストあたり 150 GB の取り込みスパン、APM Fargate タスクあたり 10 GB の取り込みスパン。
+- インデックス化スパン: APM ホストあたり 1M のインデックス化スパン、APM Fargate タスクあたり 65k スパンのインデックス化スパン。
 
-コードデプロイによってトレースを送信するホストの数が増大した場合にアラートを取得するには、APM ホストカウントにモニターを設定します。インフラストラクチャーの任意のスコープ（`prod`、`availability-zone` など）のホストボリュームが予期せず増大している場合、通知を受け取ります。
+## 取り込み/インデックス化されたボリュームに基づくアラートの設定
 
-{{< img src="tracing/faq/apm_host_monitor.mp4" alt="分析ビュー" video="true" style="width:90%;">}}
+### 取り込みバイトのアラート設定
 
-1. Monitors -> New Monitor に移動します
-2. `datadog.apm.host_instance` で[新しいメトリクスモニター][4]を設定します
-3. 警告またはエラーとするレートを定義します。
-4. わかりやすい通知を定義します。たとえば、「この環境のホストのボリュームが大きすぎて、割り当てられたしきい値を超えました。APM が有効なホストの数を減らしてください。」とします。
+取り込みスパンの使用量が APM ホストや APM Fargate タスクから付与される割り当ての範囲内に収まるように、月間の使用量が割り当てに近づいたときにアラートが出るようにモニターを設定します。
 
-## Indexed Span にアラートを設定する
+1. [メトリクスの監視][8]を作成します。
+2. メトリクスクエリに `datadog.estimated_usage.apm.ingested_bytes` を入力します。
+3. モニターの評価ウィンドウを `current month (MTD)` と定義します。これにより、モニターは月単位の使用量を見ることができるようになります。累積タイムウィンドウについては、[モニター][9]のドキュメントで詳しく説明しています。
+4. 取り込みボリュームが割り当ての 80% または 90% に達したときに警告するための **Alert threshold** とオプションの **Warning threshold** を定義します。
+5. モニターの名前を入力します。取り込みボリュームが多くなったときに、チームにアラートを送るための通知を定義します。
 
-コードデプロイによって Indexed Span のスパイクが発生した場合にアラートを取得するには、Indexed Span に [Analytics モニター][5]を設定します。インフラストラクチャーの任意のスコープ（例: `service`、`availability-zone`）の Indexed Span ボリュームが予期せず増大している場合は、いつでも通知を受け取ります。
+{{< img src="account_management/billing/monitor_usage_apm.png" alt="メトリクスクエリとして datadog.estimated_usage.apm.ingested_bytes を表示するメトリクスモニターの構成ページ" width="80%" >}}
 
-1. APM の [Analytics ビュー][6]に移動します
-2. `env` を選択します（`*` を選択できます）
-3. `count` を選択します（`*` を選択できます）
-4. Export -> Export to Monitor を選択します
-5. 警告またはエラーとする Indexed Span のボリュームレートを定義します。
-6. わかりやすい通知を定義します。たとえば、「このサービスの Indexed Span のボリュームが大きすぎます。追加の除外フィルターを定義するか、フィルターレートを上げて制御下に戻してください。」とします。
+取り込みボリュームを効果的に減らすには、この[ガイド][7]または[取り込みの仕組み][10]のドキュメントを参照してください。
 
-[保持フィルター][7]の詳細を参照してください。
+### インデックス化スパンのアラート設定
+
+同様に、インデックス化スパンの予算が一定の範囲内に収まるようにアラートを設定することもできます。`datadog.estimated_usage.apm.indexed_spans` メトリクスを使用してメトリクスモニターを作成し、月間のインデックス化スパンボリュームが定義されたしきい値を超えたときにアラートを受け取ることができます。
+
+インデックス化スパンの数を減らすには、保持フィルターの構成を確認してください。保持フィルターについては、[トレース保持][11]のドキュメントで詳しく説明しています。
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /ja/account_management/billing/apm_distributed_tracing/
 [3]: https://app.datadoghq.com/account/usage
 [4]: https://app.datadoghq.com/monitors#create/metric
-[5]: /ja/monitors/create/types/apm/?tab=traceanalytics#monitor-creation
-[6]: https://app.datadoghq.com/apm/analytics
-[7]: /ja/tracing/trace_retention_and_ingestion/
+[5]: /ja/monitors/types/apm/?tab=traceanalytics#monitor-creation
+[6]: https://app.datadoghq.com/apm/traces?viz=timeseries
+[7]: /ja/tracing/guide/trace_ingestion_volume_control/
+[8]: https://app.datadoghq.com/monitors/create/metric
+[9]: /ja/monitors/configuration/?tab=thresholdalert#cumulative-time-windows
+[10]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[11]: /ja/tracing/trace_pipeline/trace_retention/

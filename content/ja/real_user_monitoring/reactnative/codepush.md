@@ -3,7 +3,7 @@ description: クライアントサイドの React Native モジュールを使�
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: real_user_monitoring/reactnative/
   tag: ドキュメント
   text: React Native のモニタリングについて
@@ -17,6 +17,8 @@ React Native のクラッシュレポートとエラー追跡を有効にする�
 React Native アプリケーションの新しい [CodePush][1] バージョンをリリースするたびに、エラーを解除するために Datadog にソースマップをアップロードする必要があります。
 
 Datadog では、アプリ内で `@datadog/mobile-react-native-code-push` を使用し、ソースマップをアップロードするために [datadog-ci][3] `react-native codepush` コマンドを使うことを推奨しています。これにより、報告されたクラッシュとアップロードされたソースマップの両方で `version` が一貫していることが確認されます。
+
+Datadog SDK を codepush で設定する際に問題が発生した場合は、弊社の[サンプルアプリケーション][6]を参考にすることができます。
 
 ## セットアップ
 
@@ -155,3 +157,4 @@ config.versionSuffix = `codepush.${codepushVersion}`; // "1.0.0-codepush.v2" に
 [3]: https://github.com/DataDog/datadog-ci
 [4]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-api-ref#codepushgetupdatemetadata
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#upload
+[6]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-codepush

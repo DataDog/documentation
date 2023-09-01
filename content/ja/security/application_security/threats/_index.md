@@ -3,12 +3,12 @@ further_reading:
 - link: /security/application_security/threats/add-user-info/
   tag: ドキュメント
   text: ユーザーアクティビティの追跡
-- link: /security/application_security/threats/setup_and_configure/
+- link: /security/application_security/threats/library_configuration/
   tag: ドキュメント
   text: ASM のセットアップを構成する
 - link: /security/application_security/risk_management/
   tag: ドキュメント
-  text: リスク管理
+  text: Application Vulnerability Management
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: ASM の仕組み
@@ -16,7 +16,7 @@ kind: documentation
 title: Application Threat Monitoring and Protection
 ---
 
-ASM Threat Monitoring and Protection は、APM でインスツルメンテーションされたアプリケーションからのトレーステレメトリーを使用して、観測された挙動を既知の攻撃パターンと比較することにより、実行中のサービスに対する脅威や攻撃を特定します。
+ASM Threat Monitoring and Protection は、APM でインスツルメンテーションされたアプリケーションからのトレーステレメトリーを使用して、観測された挙動を既知の攻撃パターンと比較したり、ビジネスロジックの乱用を特定することにより、実行中のサービスに対する脅威や攻撃を特定します。
 
 Threat Monitoring によって提起されたセキュリティシグナルは、サービスの健全性とパフォーマンスを監視するために、すでによく訪れているビューに要約され、表示されます。APM の[サービスカタログ][1]と個々のサービスページでは、アプリケーションの脅威シグナルをすばやく把握でき、すばやくクリックしてシグナルを調査し、攻撃者をブロックすることができます。
 

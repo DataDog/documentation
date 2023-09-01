@@ -155,6 +155,6 @@ For more information on the weighted() modifier, see [How does weighted() work?]
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://futuredata.stanford.edu/asap
+[1]: https://github.com/stanford-futuredata/ASAP
 [2]: https://www.datadoghq.com/blog/auto-smoother-asap
 [3]: /dashboards/guide/how-weighted-works

@@ -1,4 +1,7 @@
 ---
+core_product:
+- network device monitoring
+- network performance monitoring
 synonyms:
 - データリンク層
 title: レイヤー 2

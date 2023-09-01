@@ -36,6 +36,14 @@ cascade:
     category: Documentation
     rank: 60
     subcategory: インテグレーション
+- _target:
+    path: /integrations/eks_fargate.md
+  algolia:
+    category: Documentation
+    rank: 60
+    subcategory: インテグレーション
+    tags:
+    - eks logging
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 disable_sidebar: true
 kind: documentation

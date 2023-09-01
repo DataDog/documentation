@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: circleci-circleci
 app_uuid: 3c51a71d-330c-4fd3-ae55-9146c20a3b65
 assets: {}

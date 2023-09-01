@@ -26,7 +26,20 @@ CPU
 : The time each method spent running on the CPU. It includes your code that runs in the JVM (for example, Java, Kotlin), but not JVM operations or native code called from within the JVM.
 
 Allocations
+: The number of heap allocations made by each method, including allocations which were subsequently freed.
+
+Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.
+
+Heap Live Objects
+: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Java 11_ <br />
+_Since: 1.17.0_
+
+Heap Live Size
+: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+_Requires: Java 11_ <br />
+_Since: 1.17.0_
 
 Wall Time in Native Code
 : The elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code.
@@ -167,19 +180,19 @@ Wall Time
 CPU (v2.15+)
 : The time each method spent running on the CPU.
 
-Thrown Exceptions (beta, v2.10+)
+Thrown Exceptions (v2.31+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type and message.
 
 Allocations (beta, v2.18+)
 : The number and size of allocated objects by each method, as well as their type.<br />
 _Requires: .NET 6+_
 
-Lock (beta, v2.18+)
+Lock (v2.31+)
 : The number of times threads are waiting for a lock and for how long.<br />
 _Requires: .NET 5+_
 
 Live Heap (beta, v2.22+)
-: A subset of the allocated objects (with their class name) that are still in memory and for how long.<br />
+: A subset of the allocated objects (with their class name) that are still in memory.<br />
 _Requires: .NET 7+_
 
 [1]: /profiler/enabling/dotnet/#requirements
@@ -194,11 +207,13 @@ Wall Time
 CPU
 : Shows the time each function spent running on the CPU.
 
-Allocations (beta, v0.84+)
-: The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.
+Allocations (v0.88+)
+: The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
+_Note: Not available when JIT is active_
 
-Allocated memory (beta, v0.84+)
-: The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.
+Allocated memory (v0.88+)
+: The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
+_Note: Not available when JIT is active_
 
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}
@@ -210,10 +225,10 @@ CPU
 : The time each function spent running on the CPU.
 
 Allocations
-: The number of allocations by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
+: The number of allocations by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked.
 
 Allocated memory
-: The amount of heap memory allocated by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked. 
+: The amount of heap memory allocated by each function during the profiling period (default: 59s), including allocations which were subsequently freed. Stack allocations are not tracked.
 
 [1]: /profiler/enabling/ddprof/
 {{< /programming-lang >}}

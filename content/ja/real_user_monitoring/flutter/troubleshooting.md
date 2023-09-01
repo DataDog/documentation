@@ -1,11 +1,9 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/troubleshooting.md
 description: Flutter Monitoring に関する問題のトラブルシューティング方法について説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/flutter/
   tag: ドキュメント
   text: Flutter Monitoring について
@@ -20,7 +18,7 @@ Datadog SDK を追加した後、Cocoapods から投げられるエラーのた�
 pod install --repo-update
 ```
 
-もう一つのよくあるエラーは、Apple Silicon Mac での FFI ライブラリの読み込みの問題です。 以下のようなエラーが表示された場合:
+もう一つのよくあるエラーは、Apple Silicon Mac での FFI ライブラリの読み込みの問題です。以下のようなエラーが表示された場合:
 
 ```bash
 LoadError - dlsym(0x7fbbeb6837d0, Init_ffi_c): symbol not found - /Library/Ruby/Gems/2.6.0/gems/ffi-1.13.1/lib/ffi_c.bundle

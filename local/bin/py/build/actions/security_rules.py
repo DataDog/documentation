@@ -4,7 +4,7 @@ import json
 import os
 import re
 from itertools import chain
-
+from datetime import date
 import yaml
 import logging
 from pathlib import Path
@@ -102,10 +102,18 @@ def security_rules(content, content_dir):
 
         is_beta = bool(data.get("isBeta", False))
 
-        # delete file or skip if staged
-        # any() will return True when at least one of the elements is Truthy
-        if (len(data.get('restrictedToOrgs', [])) > 0 and not is_beta) or data.get('isShadowDeployed', False) \
-            or data.get('isDeleted', False) or data.get('isDeprecated', False):
+        # Logic for when to remove a rule.
+        # 1. if rule is restricted to orgs as It's likely not public. The exception being if it's a rule in beta
+        is_restricted_and_not_beta = (len(data.get('restrictedToOrgs', [])) > 0 and not is_beta)
+        # 2. if we past the deprecation date we should remove
+        # we don’t set isDeleted to true for 15months either due to the retention period on signals when we deprecate a rule.
+        # If we did, the customer’s signals would disappear sooner than the retention time period.
+        deprecation_date = data.get('deprecationDate', None)
+        is_past_deprecation_date = date(*[int(x) for x in deprecation_date.split('-')]) < date.today() if deprecation_date else False
+        # 3. general flags we should respect for removal. At least one true to cause removal
+        is_removed = (data.get('isShadowDeployed', False) or data.get('isDeleted', False) or data.get('isDeprecated', False))
+
+        if is_restricted_and_not_beta or is_removed or is_past_deprecation_date:
             if p.exists():
                 logger.info(f"removing file {p.name}")
                 global_aliases.append(f"/security/default_rules/{p.stem}")
@@ -128,30 +136,19 @@ def security_rules(content, content_dir):
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
                     # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
-                    f"/security_monitoring/default_rules/{p.stem}"
+                    f"/security_monitoring/default_rules/{p.stem.lower()}"
                 ],
                 "rule_category": [],
                 "integration_id": "",
                 "is_beta": is_beta
             }
 
-            # we need to get the path relative to the repo root for comparisons
-            extract_dir, relative_path = str(p.parent).split(f"/{content['repo_name']}/")
+            # get path relative to the repo root for comparisons
+            relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
             # lets build up this categorization for filtering purposes
 
-            # previous categorization
-            if relative_path.startswith('configuration'):
-                page_data['rule_category'].append('Posture Management (Cloud)')
-                page_data['rule_category'].append('Cloud Security Management')
-            elif relative_path.startswith('runtime'):
-                if 'compliance' in relative_path:
-                    page_data['rule_category'].append('Posture Management (Infra)')
-                    page_data['rule_category'].append('Cloud Security Management')
-                else:
-                    page_data['rule_category'].append('Workload Security')
-                    page_data['rule_category'].append('Cloud Security Management')
-
-            # new categorization
+            tags = data.get('tags', [])
+            # add to 'rule_category' list
             if any(sub_path in relative_path for sub_path in ['security-monitoring', 'cloud-siem']):
                 if 'signal-correlation/production' in relative_path:
                     page_data['rule_category'].append('Cloud SIEM (Signal Correlation)')
@@ -160,21 +157,24 @@ def security_rules(content, content_dir):
 
             if 'posture-management' in relative_path:
                 if 'cloud-configuration' in relative_path:
-                    page_data['rule_category'].append('Posture Management (Cloud)')
-                    page_data['rule_category'].append('Cloud Security Management')
+                    page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
+
+                    if tags and 'dd_rule_type:combination' in tags:
+                        page_data['rule_category'].append('CSM Security Issues')
+                    if tags and 'dd_rule_type:ciem' in tags:
+                        page_data['rule_category'].append('CSM Identity Risks')
+
                 if 'infrastructure-configuration' in relative_path:
-                    page_data['rule_category'].append('Posture Management (Infra)')
-                    page_data['rule_category'].append('Cloud Security Management')
+                    page_data['rule_category'].append('CSM Misconfigurations (Infra)')
 
             if 'workload-security' in relative_path:
-                page_data['rule_category'].append('Workload Security')
-                page_data['rule_category'].append('Cloud Security Management')
+                page_data['rule_category'].append('CSM Threats')
 
             if 'application-security' in relative_path:
                 page_data['rule_category'].append('Application Security')
 
-            tags = data.get('tags', [])
             if tags:
+                # add 'tags' as frontmatter
                 for tag in tags:
                     if ':' in tag:
                         key, value = tag.split(':')

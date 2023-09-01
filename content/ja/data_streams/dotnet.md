@@ -13,7 +13,7 @@ Data Streams Monitoring を開始するには、Datadog Agent と .NET ライブ
 * [Datadog Agent v7.34.0 以降][1]
 * .NET Tracer v2.28.0 以降 ([.NET Core][2]、[.NET Framework][3])
 
-### APM に Datadog Agent を構成する
+### インストール
 
 .NET は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
 

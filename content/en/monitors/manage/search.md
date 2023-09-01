@@ -20,6 +20,8 @@ To limit the search, specify the field name:
 
 Additionally, you can search for a monitor using the ID, for example: `1234567`. The monitor's ID is available on the [monitor status page][1].
 
+<div class="alert alert-info">For information on how to filter monitor groups, see the <a href="/monitors/manage/status/">Monitor Status page</a>.</div>
+
 ### Query
 
 Enhance your search query with boolean operators (`AND`, `OR`, `NOT`) and parentheses. The search syntax is similar to [Elasticsearch][2] with the following exceptions:

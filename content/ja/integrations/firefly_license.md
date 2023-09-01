@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: firefly-license
 app_uuid: 58481132-c79e-4659-8064-7cdaabbbc777
 assets: {}

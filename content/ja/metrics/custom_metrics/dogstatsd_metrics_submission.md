@@ -21,7 +21,7 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 [COUNT](#count)、 [GAUGE](#gauge)、[SET](#set)は、StatsD ユーザーにお馴染みのメトリクスタイプです。StatsD の `TIMER` は DogStatsD の `HISTOGRAM` のサブセットです。また、DogStatsD を使い、[HISTOGRAM](#histogram) や [DISTRIBUTION](#distribution) メトリクスタイプを送信できます。
 
-**注**: 使用した送信方法により、Datadog 内に保存される実際のメトリクスタイプは送信メトリクスタイプと異なる場合があります。
+**注**: 使用する送信方法によっては、Datadog 内に保存される実際のメトリクスタイプが、送信されたメトリクスタイプと異なる場合があります。DogStatsD で RATE メトリクスタイプを送信する場合、メトリクスはアプリ内で GAUGE として表示され、異なる Agent 間で適切な比較ができるようにします。
 
 ## 関数
 

@@ -50,44 +50,12 @@ Each batch follows the intake specification. They are sent as soon as the networ
  
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
-## Migrating to 1.0.0
+## Migrating to 2.0.0
 
-If you've been using the former SDK (version `0.1.x` or `0.2.x`), there are some breaking changes introduced in version `1.0.0`, namely:
-
-### Logger.Builder
-
-Before
-
-```java
-logger = new LoggerBuilder()
-    .withName("my-application-name") // This would set the service name
-    .withNetworkInfoLogging(this)
-    .build("my-api-key");
-```
-
-After
-
-```java
-Datadog.initialize(context, "my-api-key");
-
-// …
-
-logger = new Logger.Builder()
-        .setNetworkInfoEnabled(true)
-        .setServiceName("android-sample-java") // Sets the service name
-        .setLoggerName("my_logger") // Sets the logger name (within the service)
-        .setLogcatLogsEnabled(true)
-        .build();
-```
-
-
-### Attributes
-
-In earlier versions, attributes were created or removed with the `Logger.addField()` or `Logger.removeField()`
-methods. These methods were renamed for consistency purposes, and are now `Logger.addAttribute()`
- and `Logger.removeAttribute()`. Their behavior remains the same.
-
+If you've been using the SDK v1, there are some breaking changes introduced in version `2.0.0`. See the [migration guide][1] for more information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/dd-sdk-android/blob/develop/MIGRATION.MD

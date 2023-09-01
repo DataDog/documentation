@@ -15,6 +15,10 @@ If services that you know are instrumented for APM are not appearing in the Serv
 
 {{< img src="tracing/service_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
 
+## SLOs not listed in Setup Guidance section
+
+The count in the Service Catalog Setup Guidance section reflects the number of SLOs with `service` tags. If your SLOs are not listed, verify that they have `service` tag values specified and that they match with the service names in other products such as APM and USM.
+
 ## Additional telemetry is available to a service but it's not listed
 
 Service Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastructure metrics, logs, network performance monitoring) to gather information about a given service. If you don't see a telemetry type that you expect in the Service Catalog, ensure that you have configured the `DD_SERVICE` tag according to the instructions in [Unified Service Tagging][2]. 
@@ -22,6 +26,8 @@ Service Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastru
 ## Can't add metadata for RUM services
 
 Adding metadata for RUM services is not supported. 
+
+
 
 ## Multiple services share the same metadata
  

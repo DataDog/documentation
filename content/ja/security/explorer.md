@@ -20,40 +20,51 @@ title: セキュリティシグナルエクスプローラー
 
 ## 概要
 
-[セキュリティシグナルエクスプローラー][1]から、セキュリティシグナルを相互に関連付けて優先順位を付けます。このページから [Cloud SIEM][2]、[Posture Management][3]、[Workload Security][4]、[Application Security Management][5] ダッシュボードにアクセスすることもできます。
+[セキュリティシグナルエクスプローラー][1]から、セキュリティシグナルを相互に関連付けて優先順位を付けます。このページから [Cloud SIEM][2]、[Cloud Security Management Misconfigurations (CSM Misconfigurations)][3]、[Cloud Security Management Threats (CSM Threats)][4]、[Application Security Management][5] ダッシュボードにアクセスすることもできます。
 
 ## セキュリティシグナルの探索
 
 セキュリティシグナルの検索結果が、セキュリティシグナルテーブルに表示されます。
 
-{{< img src="security/security_monitoring/explorer/security_signals_table.png" alt="2 つのアカウント乗っ取りシグナルを示す Security Signals テーブル" >}}
+{{< img src="security/security_monitoring/explorer/signal_panel_v2.png" alt="2 つのアカウント乗っ取りシグナルを示す Security Signals テーブル" >}}
 
-テーブルのコンテンツを、使用可能なファセットのリストで絞り込むことができます。右上に表示される **Options** ボタンを使用して、セキュリティシグナルテーブルのコンテンツを要件や好みに応じて構成できます。
+テーブルのコンテンツを、`Source` や `Status` などの使用可能なファセットのリストで絞り込むことができます。右上に表示される **Options** ボタンを使用して、セキュリティシグナルテーブルのコンテンツを要件や好みに応じて構成できます。
 
 ## セキュリティシグナルの検査
 
-セキュリティシグナルをクリックすると、セキュリティシグナルパネルが開いて詳細が表示されます。
+セキュリティシグナルをクリックすると、詳細が表示されます。シグナルの重大度や発生時期に関する情報を含むパネルが表示されます。
+アクション可能な情報には、以下のような機能があります。
 
-{{< img src="security/security_monitoring/explorer/signal_panel.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:80%;" >}}
+  - シグナルのステータスを変更します。
+  - シグナルのルール設定にアクセスします。
+  - シグナルを共有したり、チームメイトに割り当てたりします。
 
-問題を選別する際に最初に必要になる情報とアクションが、セキュリティシグナルパネルの最上部に表示されます。これらの情報から、シグナルの重要度や生成日時を判断したり、規則の設定にアクセスしたり、シグナルの状態を変更したり、シグナルをチームメイトとすばやく共有したり割り当てたりできます。
+{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:90%;" >}}
 
-過去の新しいデータが利用可能になった場合、または攻撃が継続している場合、最初に見た日付と最後に見た日付が更新されます。Cloud SIEM と Cloud Workload Security のシグナルの場合、Overview タブに "What Happened" セクションが表示され、検出ルールに関連する構成済みのグループ化やルールカスタマイズも表示されます。この検出ルールの例では、グループ化が `usr.name` で構成されています。最後に、検出ルールに設定されたタグは、CSPM の調査結果ではヘッダーのグループ化の下に、Cloud SIEM および Cloud Workload Security のシグナルでは Context セクションに表示されます。
+過去の新しいデータが利用可能になった場合、または攻撃が継続している場合、最初に見た日付と最後に見た日付が更新されます。Cloud SIEM と CSM Threats のシグナルの場合、Overview タブに "What Happened" セクションが表示され、検出ルールに関連する構成済みのグループ化やルールカスタマイズも表示されます。この検出ルールの例では、グループ化が `usr.name` で構成されています。最後に、検出ルールに設定されたタグは、CSM Misconfigurations の調査結果ではヘッダーのグループ化の下に、Cloud SIEM および CSM Threats のシグナルでは Context セクションに表示されます。
 
 アクティビティをよりよく理解するために、セキュリティシグナルパネルは、シグナルをトリガーするすべてのログのタグと属性を要約するため、ログエクスプローラーにピボットすることなくトラブルシューティングを行うことができます。たとえば、Context セクションで、ユーザーアカウントにログインしようとしている IP のリスト、または認証サービスを実行している AWS アカウントとアベイラビリティーゾーンを一目で判断できます。
 
-Cloud SIEM と Cloud Workload Security シグナルのヘッダーの下には、シグナルに関連する詳細情報を表示するタブがあります。
+Cloud SIEM と CSM Threats シグナルのヘッダーの下には、シグナルに関連する詳細情報を表示するタブがあります。
 
-- `Overview` では、タグによるグループ化、ルールタイプに基づくカスタマイズなど、What Happened セクションにルールがセキュリティシグナルを生成した理由が表示されます。さらに、シグナルに関連するコンテキスト情報と JSON が表示されます。
+- `Overview` では、タグによるグループ化、ルールタイプに基づくカスタマイズなど、What Happened セクションにルールがセキュリティシグナルを生成した理由が表示されます。さらに、シグナルに関連するコンテキスト情報と JSON が、シグナルに関連するセキュリティプロファイルと、利用可能な場合は抑制の提案とともに表示されます (CSM Threats のみ)。
 - `Rule Details` では、検出ルールに構成されたテキストなどのルール詳細が表示され、シグナルを確認する人がシグナルの目的や対応策を理解するのに役立ちます。また、ユーザーは、ルールの抑制クエリの修正など、ルールの修正に移ることもできます。
 - `Logs` には、シグナルがトリガーされた理由に関するコンテキストを提供するログサンプルの視覚化とリストが含まれています。完全なログを表示するには、表のサンプルのいずれかをクリックしてください。
 - `Related Signals` は、シグナルのトリアージを支援するために同じグループ化値を含む他のシグナルのタイムラインとして表示されます。
-- `Suggested Actions (beta)` は、セキュリティシグナルの特性に基づいて、調査クエリ、関連ダッシュボード、クラウドプロバイダーコンソールへのリンクを提供し、調査を誘導して解決への洞察を提供するものです。
+- `Suggested Actions` は、セキュリティシグナルの特性に基づいて、調査クエリ、関連ダッシュボード、クラウドプロバイダーコンソールへのリンクを提供し、調査を誘導して解決への洞察を提供するものです。
 
-Cloud Security Posture Management シグナルのヘッダーの下には、シグナルに関連する詳細情報を表示するタブがあります。
+CSM Misconfigurations シグナルのヘッダーの下には、シグナルに関連する詳細情報を表示するタブがあります。
 - `Message` は、シグナルをレビューする人がシグナルの目的と応答方法を理解するのに役立つように、検出ルールで構成されたテキストを表示します。
 - `Findings` には、ルールによって評価された各リソースのリストが含まれます。
 - `Related Issues` には、シグナルのトリアージを支援するために同じグループ化値を含む他のシグナルのリストが含まれています。
+
+### Case Management
+
+Cloud SIEM のセキュリティシグナルからケースを作成し、シグナルの追跡、トリアージ、および調査を行うことができます。**Escalate** をクリックすると、ドロップダウンメニューが表示されます。セキュリティ調査を開始するには、**Create a case** をクリックします。さらに調査した結果、重要であると判断した場合は、ケース内の **Declare Incident** をクリックし、インシデントにエスカレートさせます。詳しくは、[Case Management][6] を参照してください。
+
+### ワークフローの自動化
+
+任意のセキュリティシグナルに対して、自動的に[ワークフロー][7]をトリガーすることができます。また、Cloud SIEM のセキュリティシグナルから手動でワークフローをトリガーすることも可能です。詳しくは、[セキュリティシグナルからワークフローをトリガーする][8]を参照してください。
 
 ### 脅威インテリジェンス
 
@@ -83,9 +94,9 @@ Datadog Cloud SIEM がログから疑わしい活動を検出した場合、そ�
   {{< img src="security/security_monitoring/explorer/anomaly-detection.png" alt="異常検知のグラフ" >}}
 
 
-### CWS シグナルでアネストリーツリーを処理する
+### CSM Threats シグナルでアネストリーツリーを処理する
 
-Datadog クラウドワークロードセキュリティシグナルには、システム内の悪意のあるアクティビティを検出するためのプロセスアネストリーツリーが搭載されています。疑わしいプロセスを特定し、攻撃の程度を判断することで、より適切な調査や対処を行うことができます。
+CSM Threats シグナルには、システム内の悪意のあるアクティビティを検出するためのプロセスアネストリーツリーが搭載されています。疑わしいプロセスを特定し、攻撃の程度を判断することで、より適切な調査や対処を行うことができます。
 
   {{< img src="security/cws/ProcessTree.png" alt="プロセスツリーウォーターフォールグラフ" >}}
 
@@ -104,7 +115,7 @@ Datadog クラウドワークロードセキュリティシグナルには、シ
 
 セキュリティ規則エンジンによってセキュリティシグナルが生成されたら、セキュリティシグナルのクエリをグラフ化して、最大値、最小値、パーセンタイル、ユニーク数などを確認できます。
 
-すべてのグラフ作成オプションについては、[ログのグラフ作成ガイド][6]を参照してください。
+すべてのグラフ作成オプションについては、[ログのグラフ作成ガイド][9]を参照してください。
 
 ## その他の参考資料
 
@@ -116,4 +127,7 @@ Datadog クラウドワークロードセキュリティシグナルには、シ
 [3]: https://app.datadoghq.com/security/compliance
 [4]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22
-[6]: /ja/logs/explorer/analytics/?tab=timeseries
+[6]: /ja/monitors/case_management/
+[7]: /ja/service_management/workflows/
+[8]: /ja/service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[9]: /ja/logs/explorer/analytics/?tab=timeseries

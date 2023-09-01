@@ -4,7 +4,7 @@ kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80
-description: 'Instrument your .NET application with OTel API, to send traces to Datadog.'
+description: 'Instrument your .NET application with OpenTelemetry API, to send traces to Datadog.'
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -17,19 +17,19 @@ further_reading:
 
 - Datadog .NET tracing library `dd-trace-dotnet` version 2.21.0 or greater.
 
-The following OTel features implemented in the Datadog library as noted:
+The following OpenTelemetry features implemented in the Datadog library as noted:
 
-| Feature                               | Support notes                       |
-|---------------------------------------|--------------------------------------|
-| OTel Context propagation              | [Datadog distributed header format][9] is used instead. |
-| [Span processors][2]                  | Unsupported                                          |
-| [Span Exporters][3]                   | Unsupported                                            |
-| Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
+| Feature                               | Support notes                                           |
+|---------------------------------------|---------------------------------------------------------|
+| OpenTelemetry Context propagation     | [Datadog distributed header format][9] is used instead. |
+| [Span processors][2]                  | Unsupported                                             |
+| [Span Exporters][3]                   | Unsupported                                             |
+| Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.                |
 
 
-## Configuring OTel to use the Datadog trace provider
+## Configuring OpenTelemetry to use the Datadog trace provider
 
-1. Add your desired manual OTel instrumentation to your .NET code following the [OTel .NET Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][5].
 2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][10] or your [.NET Core (and .NET 5+) service][11].
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 4. Run your application.

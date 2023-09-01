@@ -18,6 +18,7 @@ title: グラフ作成ガイド
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Datadog でのパーセンタイルのグラフ化{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/query-to-the-graph" >}}グラフへのクエリ{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/widget_colors" >}}グラフに適した色を選択する{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/compatible_semantic_tags" >}}互換性のあるセマンティックタグ{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/custom_time_frames" >}}カスタムタイムフレーム{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}クイックグラフ{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/context-links" >}}コンテキストリンク{{< /nextlink >}}
@@ -27,6 +28,14 @@ title: グラフ作成ガイド
     {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}パワーパックのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/slo_data_source" >}}ダッシュボードで過去の SLO データをグラフ化する{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}メトリクスベースの SLO クエリをスコープする{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}APM 統計グラフを構成する{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/version_history" >}}バージョン履歴{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON を使ったグラフ化
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="関数:" >}}
+    {{< nextlink href="/dashboards/guide/how-weighted-works" >}}weighted() の仕組みは？{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="非推奨の API:" >}}

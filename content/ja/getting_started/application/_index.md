@@ -6,11 +6,14 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/dd-101-sre
   tag: ラーニングセンター
   text: 'Datadog の基本: サイト信頼性エンジニア'
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Datadog の基礎を固めるためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
-  tag: ブログ
+  tag: GitHub
   text: Datadog クイックナビメニューのご紹介
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
-  tag: GitHub
+  tag: ブログ
   text: Datadog を支えるデザインシステム、DRUIDS
 kind: documentation
 title: Datadog の開始
@@ -66,7 +69,7 @@ Datadog サイトのナビゲーションは、ブラウザの幅に応じて変
 
 ## イベント
 
-{{< img src="events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
+{{< img src="service_management/events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
 
 [イベントエクスプローラー][10]には、インフラストラクチャーやサービスによって生成された最新のイベントが表示されます。
 
@@ -155,8 +158,8 @@ Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを�
 [7]: /ja/infrastructure/
 [8]: /ja/getting_started/tagging/
 [9]: /ja/infrastructure/hostmap/
-[10]: /ja/events/
-[11]: /ja/events/explorer/#event-analytics
+[10]: /ja/service_management/events/
+[11]: /ja/service_management/events/explorer/#event-analytics
 [12]: /ja/dashboards/
 [13]: /ja/dashboards/#screenboards
 [14]: /ja/dashboards/functions/arithmetic/
@@ -168,6 +171,6 @@ Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを�
 [20]: /ja/serverless
 [21]: /ja/security/cloud_siem/
 [22]: /ja/synthetics/
-[23]: /ja/mobile/
+[23]: /ja/service_management/mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

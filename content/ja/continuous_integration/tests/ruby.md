@@ -38,11 +38,15 @@ Datadog にテスト結果を報告するには、Datadog Agent をインスト�
 
 ### オンプレミスの CI プロバイダーを使用する
 
-Jenkins や自己管理型の GitLab CI などのオンプレミスの CI プロバイダー上でテストを実行している場合は、[Agent のインストール手順][1]に従って各ワーカーノードに Datadog Agent をインストールします。
+Jenkins や自己管理型の GitLab CI などのオンプレミスの CI プロバイダー上でテストを実行している場合は、[Agent のインストール手順][1]に従って各ワーカーノードに Datadog Agent をインストールします。これは、テスト結果が基盤となるホストのメトリクスに自動的にリンクされるため、推奨されるオプションです。
 
-CI プロバイダーがコンテナベースのエグゼキューターを使用している場合は、ビルド内の `localhost` の使用で Datadog Agent が実行されている基底のワーカーノードではなく、コンテナ自体を参照するため、すべてのビルド (デフォルトは `http://localhost:8126`) の `DD_AGENT_HOST` 環境変数をビルドコンテナ内からアクセス可能なエンドポイントに設定します。
+Kubernetes エグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] を使用することをお勧めします。これにより、ビルドポッドの環境変数が自動的に設定されてローカルの Datadog Agent と通信します。
 
-Kubernetes エグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] を使用することをお勧めします。これにより、ビルドポッドの `DD_AGENT_HOST` 環境変数が自動的に設定されてローカルの Datadog Agent と通信します。
+Kubernetes を使用していない場合、または [Datadog Admission Controller][2] を使用できない場合で、CI プロバイダーがコンテナベースのエクゼキュータを使用している場合は、トレーサーを実行するビルドコンテナ内の環境変数 `DD_TRACE_AGENT_URL` (デフォルトは `http://localhost:8126`) を、そのコンテナ内からアクセス可能なエンドポイントに設定します。_ビルドコンテナ内で `localhost` を使用すると、コンテナ自体を参照し、基盤となるワーカーノードや Container Agent が動作しているコンテナを参照しないことに注意してください_。
+
+`DD_TRACE_AGENT_URL` は、プロトコルとポート (例えば、`http://localhost:8126`) を含み、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先され、CI Visibility のために Datadog Agent の URL を構成するために推奨される構成パラメーターです。
+
+それでも Datadog Agent への接続に問題がある場合は、[Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method) を使用してください。**注**: この方法を使用すると、テストとインフラストラクチャーメトリクスの相関がなくなります。
 
 ### クラウドの CI プロバイダーを使用する
 

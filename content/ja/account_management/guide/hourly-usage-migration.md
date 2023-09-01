@@ -114,6 +114,7 @@ v2 API では、製品ファミリーと使用量という概念が導入され�
     * `billable_ingested_bytes`
     * `indexed_events_count`
     * `ingested_events_bytes`
+    * `logs_forwarding_events_bytes`
     * `logs_live_indexed_count`
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`

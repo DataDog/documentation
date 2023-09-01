@@ -8,6 +8,9 @@ further_reading:
 - link: tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
+- link: /tracing/trace_collection/trace_context_propagation/java/
+  tag: Documentation
+  text: ヘッダーを使ったトレースコンテキストの伝搬
 kind: documentation
 title: Java トレーシングライブラリの構成
 type: multi-code-lang
@@ -46,7 +49,8 @@ type: multi-code-lang
 `dd.logs.injection`
 : **環境変数**: `DD_LOGS_INJECTION`<br>
 **デフォルト**: `true`<br>
-Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の有効化。詳しくは、[高度な使用方法][2]を参照してください。
+Datadog のトレース ID とスパン ID に対する MDC キーの自動挿入を有効にします。詳細については、[高度な使用方法][2]を参照してください。<br><br>
+**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_LOGS_INJECTION` を設定できます。
 
 `dd.trace.config`
 : **環境変数**: `DD_TRACE_CONFIG`<br>
@@ -56,7 +60,7 @@ Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の�
 `dd.service.mapping`
 : **環境変数**: `DD_SERVICE_MAPPING`<br>
 **デフォルト**: `null`<br>
-**例**: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+**例**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 コンフィギュレーション経由でサービス名を動的に変更します。サービス間でデータベースの名前を区別する場合に便利です。
 
 `dd.writer.type`
@@ -94,7 +98,8 @@ Datadog Agent とのネットワークインタラクションのタイムアウ
 **デフォルト**: `null`<br>
 **例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 大文字・小文字を区別しないヘッダーキーとタグ名のマップを受け取り、一致するヘッダー値を自動的にタグとしてトレースに適用します。また、タグ名を指定しないエントリーも受け入れ、それぞれ `http.request.headers.<header-name>` と `http.response.headers.<header-name>` という形式のタグに自動的にマップされます。<br><br>
-バージョン 0.96.0 以前は、この設定はリクエストヘッダータグにのみ適用されました。以前の動作に戻すには、`Ddd.trace.header.tags.legacy.parsing.enabled=true` を追加するか、環境変数 `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true` を設定することで可能です。
+バージョン 0.96.0 以前は、この設定はリクエストヘッダータグにのみ適用されました。以前の動作に戻すには、設定 `-Ddd.trace.header.tags.legacy.parsing.enabled=true` または環境変数 `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true` を追加することで可能です。<br><br>
+**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_TRACE_HEADER_TAGS` を設定できます。
 
 `dd.trace.request_header.tags`
 : **環境変数**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -228,6 +233,11 @@ JMX メトリクスの送信先の Statsd ホスト。Unix Domain Sockets を使
 **デフォルト**: `8125`<br>
 JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使用している場合、0 を入力します。
 
+`dd.trace.obfuscation.query.string.regexp`
+: **環境変数**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+**デフォルト**: `null`<br>
+`http.url` タグで報告されるリクエストのクエリ文字列から機密データを削除するための正規表現 (マッチした場合は <redacted> に置き換え)。
+
 `dd.integration.opentracing.enabled`
 : **環境変数**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **デフォルト**: `true`<br>
@@ -260,7 +270,7 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 
 **注**:
 
-- 両方に同じキータイプが設定された場合、システムプロパティコンフィギュレーションが優先されます。
+- 両方に同じキータイプが設定された場合、システムプロパティ構成が優先されます。
 - システムプロパティは JVM パラメーターとして使用できます。
 - デフォルトで、アプリケーションからの JMX メトリクスは、DogStatsD によりポート `8125` で Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっている][7]ことを確認してください。
 
@@ -281,7 +291,7 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング"  >}}
+{{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング" >}}
 
 #### `dd.tags`
 
@@ -291,7 +301,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.map
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース"  >}}
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース" >}}
 
 #### `dd.trace.span.tags`
 
@@ -301,7 +311,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -ja
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース"  >}}
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース" >}}
 
 #### `dd.trace.jmx.tags`
 
@@ -311,7 +321,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース"  >}}
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース" >}}
 
 #### `dd.trace.methods`
 
@@ -321,7 +331,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_methods.png" alt="メソッドのトレース"  >}}
+{{< img src="tracing/setup/java/trace_methods.png" alt="メソッドのトレース" >}}
 
 #### `dd.trace.db.client.split-by-instance`
 
@@ -333,11 +343,11 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Dd
 
 これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
 
-{{< img src="tracing/setup/java/split_by_instance_1.png" alt="インスタンス 1"  >}}
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="インスタンス 1" >}}
 
 これで、DB インスタンス 2 である `secondwebappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
 
-{{< img src="tracing/setup/java/split_by_instance_2.png" alt="インスタンス 2"  >}}
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="インスタンス 2" >}}
 
 同様に、サービスマップで、1 つの Web アプリが 2 つの異なる Postgres データベースに呼び出しを行っていることがわかります。
 
@@ -349,7 +359,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列"  >}}
+{{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列" >}}
 
 #### `dd.trace.enabled`
 
@@ -361,12 +371,12 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.sl
 
 デバッグアプリのログに、`Tracing is disabled, not installing instrumentations.` と表示されます。
 
-#### `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`
+#### `dd.jmxfetch.config.dir` と `dd.jmxfetch.config`
 
 構成サンプル
 
 - 以下のいずれかのコンビネーションを使用: `DD_JMXFETCH_CONFIG_DIR=<ディレクトリパス>` + `DD_JMXFETCH_CONFIG=conf.yaml`
-- または直接指定: `DD_JMXFETCH_CONFIG=<ディレクトリパス>/conf.yaml`
+- または直接指定: `DD_JMXFETCH_CONFIG=<DIRECTORY_PATH>/conf.yaml`
 
 `conf.yaml` で以下の内容を使用します。
 
@@ -387,22 +397,12 @@ instances:
 
 次の結果が生成されます。
 
-{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX のフェッチ例"  >}}
+{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX のフェッチ例" >}}
 
 JMX フェッチを使った Java メトリクス収集についての詳細は [Java インテグレーションドキュメント][12]を参照してください。
-
 ### ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][13] と [W3C (TraceParent)][14] のヘッダー抽出と挿入をサポートしています。
-
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
-
-Java トレーサーは、以下のスタイルをサポートしています。
-
-- Datadog: `datadog`
-- B3 マルチヘッダー: `b3multi` (`b3` エイリアスは非推奨)
-- W3C トレースコンテキスト: `tracecontext` (1.11.0 以降で利用可能)
-- B3 シングルヘッダー: `b3 single header`
+有効な値と以下のコンフィギュレーションオプションの使用に関する情報については、[Java トレースコンテキストの伝播][13]を参照してください。
 
 `dd.trace.propagation.style.inject`
 : **環境変数**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -424,9 +424,7 @@ Java トレーサーは、以下のスタイルをサポートしています。
 
 #### 非推奨の抽出と挿入の設定
 
-これらの抽出および挿入の設定は、バージョン 1.9.0 以降、非推奨となっています。
-
-- B3: `b3` (B3 マルチヘッダー、B3 シングルヘッダーとも)
+これらの抽出と挿入の設定は廃止され、バージョン 1.9.0 以降では `dd.trace.propagation.style.inject`、`dd.trace.propagation.style.extract`、`dd.trace.propagation.style` の設定に変更されました。[Java トレースコンテキストの伝播][13]を参照してください。B3 マルチヘッダーと B3 シングルヘッダーに対する以前の `b3` 設定は、新しい `b3multi` と `b3single` 設定に置き換えられました。
 
 `dd.propagation.style.inject`
 : **環境変数**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -456,5 +454,6 @@ Java トレーサーは、以下のスタイルをサポートしています。
 [10]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [11]: /ja/tracing/compatibility_requirements/java#disabling-integrations
 [12]: /ja/integrations/java/?tab=host#metric-collection
-[13]: https://github.com/openzipkin/b3-propagation
-[14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[16]: /ja/agent/remote_config/
+[17]: https://app.datadoghq.com/services

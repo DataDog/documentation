@@ -8,6 +8,9 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
+- link: /tracing/trace_collection/trace_context_propagation/cpp/
+  tag: Documentation
+  text: トレースコンテキストの伝搬
 kind: documentation
 title: C++ トレーシングライブラリの構成
 type: multi-code-lang
@@ -24,11 +27,11 @@ type: multi-code-lang
 `DD_TRACE_AGENT_PORT` 
 : **バージョン**: v0.3.6 <br>
 **デフォルト**: `8126` <br>
-トレースが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。
+トレースを送信するポート (Agent が接続を待機しているポート) を設定します。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。[Agent の構成][3]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` をそれに合わせる必要があります。
 
 `DD_TRACE_AGENT_URL` 
 : **バージョン**: v1.1.4 <br>
-トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。この URL は http、https、unix のアドレススキームをサポートしています。
+トレースが送信される URL のエンドポイントを設定します。設定されている場合は `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。この URL は HTTP、HTTPS、Unix のアドレススキームをサポートしています。[Agent の構成][3]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` をそれに合わせる必要があります。
 
 `DD_ENV` 
 : **バージョン**: v1.0.0 <br>
@@ -68,19 +71,20 @@ JSON のオブジェクト配列です。各オブジェクトの `sample_rate` 
 : **バージョン**: v1.1.4 <br>
 指定された場合、生成されたすべてのスパンにタグを追加します。`key:value` ペアのカンマ区切りリストとなります。
 
-`DD_PROPAGATION_STYLE_INJECT` 
+`DD_TRACE_PROPAGATION_STYLE_INJECT` 
 : **バージョン**: v0.4.1 <br>
 **デフォルト**: `Datadog` <br>
 トレーシングヘッダーの挿入時に使用する伝搬のスタイルです。`Datadog`、`B3`、または `Datadog B3` となります。
 
-`DD_PROPAGATION_STYLE_EXTRACT` 
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT` 
 : **バージョン**: v0.4.1 <br>
 **デフォルト**: `Datadog` <br>
 トレーシングヘッダーの抽出時に使用する伝搬のスタイルです。`Datadog`、`B3`、または `Datadog B3` となります。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/unified_service_tagging/
 [2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /ja/agent/guide/network/#configure-ports

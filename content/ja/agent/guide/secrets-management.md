@@ -54,7 +54,7 @@ instances:
 内部の `[` と `]` をエスケープする必要はありません。例:
 
 ```text
-“ENC[user_array[1234]]”
+"ENC[user_array[1234]]"
 ```
 
 上記の例では、シークレットのハンドルは文字列 `user_array[1234]` です。
@@ -307,7 +307,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: datadog-read-secrets
-  namespace: example
+  namespace: database
 subjects:
   - kind: ServiceAccount
     name: datadog-agent

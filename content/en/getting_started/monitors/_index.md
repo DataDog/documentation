@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
   tag: "Blog"
   text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session on creating effective monitors"
 ---
 
 ## Overview
@@ -102,13 +105,13 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 
 [1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
 [7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
-[10]: /mobile/
+[10]: /service_management/mobile/
 [11]: https://apps.apple.com/app/datadog/id1391380318
 [12]: https://play.google.com/store/apps/details?id=com.datadog.app

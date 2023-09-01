@@ -1,7 +1,7 @@
 ---
 title: Custom Instrumentation of Go Applications with the OpenTelemetry API
 kind: documentation
-description: 'Instrument your Go application with OTel API to send traces to Datadog'
+description: 'Instrument your Go application with OpenTelemetry API to send traces to Datadog'
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -17,21 +17,21 @@ further_reading:
 
 - Datadog Go tracing library `dd-trace-go` version 1.5.0 or greater.
 - Go version 1.18 or greater.
-- The Datadog OTel API implementation is dependent on upstream [OpenTelemetry Go][6].
+- The Datadog OpenTelemetry API implementation is dependent on upstream [OpenTelemetry Go][6].
 
-The following OTel features are implemented in the Datadog library as noted:
+The following OpenTelemetry features are implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
 |---------------------------------------|------------------------------------|
-| [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. |
+| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. |
 | [Span processors][2]                  | Unsupported                                          |
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog trace provider
+## Configuring OpenTelemetry to use the Datadog trace provider
 
-1. Add your desired manual OTel instrumentation to your Go code following the [OTel Go Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][5].
 
 2. Install the OpenTelemetry package `go.opentelemetry.io/otel` using the command:
 

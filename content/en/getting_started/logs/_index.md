@@ -14,6 +14,9 @@ further_reading:
     - link: /getting_started/tagging/unified_service_tagging
       tag: 'Documentation'
       text: 'Learn how to configure unified service tagging'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to optimize your Log Management'
 ---
 
 ## Overview

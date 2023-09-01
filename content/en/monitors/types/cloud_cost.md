@@ -1,7 +1,6 @@
 ---
 title: Cloud Cost Monitor
 kind: documentation
-private: true
 description: "Monitor costs associated with cloud platforms."
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
@@ -10,17 +9,16 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "https://www.datadoghq.com/blog/ccm-cost-monitors/"
+  tag: "Blog"
+  text: "React quickly to cost overruns with Cost Monitors for Datadog Cloud Cost Management"
 ---
-
-<div class="alert alert-warning">
-The feature discussed on this page is in private beta. Contact your Customer Success Manager to learn more about it.
-</div>
 
 ## Overview
 Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.
@@ -41,27 +39,30 @@ Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** m
 
 | Cost Type | Description | Usage Examples |
 | ---  | ----------- | ----------- |
-| Compare Costs Over Time  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
-| Set Daily Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
+| Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
+| Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
 
 ## Specify which costs to track
 
-Any cost type reporting to Datadog is available for monitors. For more information, see the [Cloud Cost Management][1] page. Use the editor to define the cost types or exports. 
+Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics. For more information, see the [Cloud Cost Management][1] page. Use the editor to define the cost types or exports. 
 
 | Step                              | Required | Default              | Example             |
 |-----------------------------------|----------|----------------------|---------------------|
 | Select the cost metric                 | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
 | Define the `filter by`            | No       | Everything           | `aws_product:s3`    |
 | Group by                          | No       | Everything           | `aws_availability_zone` |
+| Add observability metric | No      | `system.cpu.user` | `aws.s3.all_requests` |
+
+{{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
 
 ## Set alert conditions
 
-If the cost monitor type is **Set Daily Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
+If the cost monitor type is **Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
 
-If the cost monitor type is **Compare Costs Over Time**, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
+If the cost monitor type is **Cost Changes**, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
 
 **Note**: For the **Percentage Change**, you can also filter out changes that are below a certain dollar threshold.
-Example: alert when there is a cost change above 5% for any change that is above 500$
+Example: alert when there is a cost change above 5% for any change that is above $500
 
 ## Notify your team
 

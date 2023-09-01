@@ -1,16 +1,17 @@
 ---
-title: Service Scorecards (Beta)
+title: Service Scorecards
 kind: documentation
-is_beta: true
-private: true
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Service Catalog"
+- link: "https://www.datadoghq.com/blog/service-scorecards/"
+  tag: "Blog"
+  text: "Improve service health and performance with Service Scorecards"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-  Service Scorecards are in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
+{{< callout url="#" btn_hidden="true" header="false" >}}
+Service Scorecards are in beta.
 {{< /callout >}}
 
 ## Overview
@@ -82,7 +83,7 @@ Click **View Details** from the scorecard, or open the service details side pane
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services
-[2]: /monitors/service_level_objectives/
+[2]: /service_management/service_level_objectives/
 [3]: https://app.datadoghq.com/monitors/recommended
 [4]: /tracing/services/deployment_tracking/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/

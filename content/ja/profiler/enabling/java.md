@@ -7,10 +7,10 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
-- link: profiler/profiler_troubleshooting
+  text: 使用可能なプロファイルの視覚化の詳細
+- link: profiler/profiler_troubleshooting/java
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
 kind: ドキュメント
@@ -25,13 +25,13 @@ type: multi-code-lang
 dd-trace-java バージョン 1.0.0 では、Java アプリケーションの CPU プロファイルデータを生成するエンジンとして、2 つのオプションがあります。[Java Flight Recorder (JFR)][2] または Datadog Profiler です。バージョン 1.7.0 以降では、Datadog プロファイラーがデフォルトとなっています。それぞれのプロファイラーエンジンには、異なる副作用、要件、利用可能な構成、および制限があり、このページでは、それぞれについて説明します。どちらか一方、または両方のエンジンを有効にすることができます。両方を有効にすると、両方のプロファイルタイプが同時にキャプチャされます。
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
 
 JDK の最小バージョン:
 
-- OpenJDK 11.0.17+、17.0.5+
-- Oracle JDK 11.0.17+、17.0.5+
-- OpenJDK 8 バージョン 8u352+
+- OpenJDK 8u352+、11.0.17+、17.0.5+ (その上に構築された Amazon Corretto、Azul Zulu その他のビルドを含む)
+- Oracle JDK 8u352+、11.0.17+、17.0.5+
+- OpenJ9 JDK 8u372+、11.0.18+、17.0.6+
 
 Datadog Profiler は JVMTI の `AsyncGetCallTrace` 関数を使用しており、JDK リリース 17.0.5 以前ではこの関数に[既知の問題][1]が存在しました。この修正は 11.0.17 と 8u352 にバックポートされています。プロファイラーがデプロイされる JVM にこの修正がない限り、Datadog Profiler は有効ではありません。Datadog Profiler を使用するには、少なくとも 8u352、11.0.17、17.0.5、または最新の非 LTS JVM バージョンにアップグレードしてください。
 
@@ -66,7 +66,7 @@ Java、Scala、Groovy、Kotlin、Clojure など、すべての JVM ベースの�
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 アプリケーションのプロファイリングを開始するには
 
@@ -134,7 +134,7 @@ Datadog Profiler は、CPU、ウォールクロック、アロケーション、
 
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
 
 dd-trace-java バージョン 1.7.0+ では、Datadog Profiler がデフォルトで有効になっています。Datadog CPU プロファイリングは perf イベントを通してスケジュールされ、JFR CPU プロファイリングよりも正確です。CPU プロファイリングを有効にするには
 
@@ -206,23 +206,46 @@ JMC ユーザーの場合、ウォールクロックのサンプルに対して 
 
 ### Datadog Profiler アロケーションエンジン
 
-dd-java-agent v0.84.0 以降および Java 15 以前では、割り当てが多いアプリケーションで過剰な CPU を使用する可能性があるため、割り当てプロファイラーはデフォルトでオフになっています。これは一般的ではないため、ステージング環境で試して、アプリケーションに影響するかどうかを確認することをお勧めします。有効にするには、[割り当てプロファイラーの有効化][8]を参照してください。
-
-Datadog のアロケーションプロファイリングエンジンは、アロケーションプロファイルをコンテキスト化し、エンドポイントでフィルターされたアロケーションプロファイルをサポートします。デフォルトでは無効になっていますが、次のようにして有効にすることができます。
+Datadog のアロケーションプロファイリングエンジンは、アロケーションプロファイルをコンテキスト化し、エンドポイントでフィルターされたアロケーションプロファイルをサポートします。
+v1.17.0 よりも前の dd-java-agent ではデフォルトで無効になっていますが、次のようにして有効にすることができます。
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # これは v1.7.0+ のデフォルトです
-export DD_PROFILING_DDPROF_ALLOC_ENABLED=true
+export DD_PROFILING_DDPROF_ALLOC_ENABLED=true # これは v1.17.0+ のデフォルトです
 ```
 
 または
 
 ```
 -Ddd.profiling.ddprof.enabled=true # これは v1.7.0+ のデフォルトです
--Ddd.profiling.ddprof.alloc.enabled=true
+-Ddd.profiling.ddprof.alloc.enabled=true # これは v1.17.0+ のデフォルトです
 ```
 
-JMC ユーザーの場合、Datadog のアロケーションイベントは `datadog.ObjectAllocationInNewTLAB` と `datadog.ObjectAllocationOutsideTLAB` になります。JFR のアロケーションイベントは、`jdk.ObjectAllocationInNewTLAB` と `jdk.ObjectAllocationOutsideTLAB` です。
+JMC ユーザーの場合、Datadog アロケーションイベントは `datadog.ObjectAllocationInNewTLAB` と `datadog.ObjectAllocationOutsideTLAB` になります。
+
+アロケーションプロファイラーエンジンは `/proc/sys/kernel/perf_event_paranoid` の設定に依存しません。
+
+### ライブヒーププロファイラーエンジン
+
+_v1.17.0 以降_
+
+ライブヒーププロファイラーエンジンは、サービスの全体的なメモリ使用量を調査し、潜在的なメモリリークを特定する際に役立ちます。
+このエンジンはアロケーションのサンプリングを行い、それらのサンプルが直近のガベージコレクションサイクルで生存したかどうかを追跡します。生存したサンプルの数は、ヒープ内のライブオブジェクト数の推定に用いられます。
+追跡対象とするサンプル数は、プロファイラーのメモリ使用量が際限なく増えてしまわないように制限されます。
+
+このエンジンはデフォルトで無効になっていますが、次の方法で有効にできます。
+
+```
+export DD_PROFILING_DDPROF_LIVEHEAP_ENABLED=true
+```
+
+または
+
+```
+-Ddd.profiling.ddprof.liveheap.enabled=true
+```
+
+JMC ユーザーの場合、Datadog のライブヒープイベントは `datadog.HeapLiveObject` になります。
 
 アロケーションエンジンは `/proc/sys/kernel/perf_event_paranoid` の設定に依存しません。
 
@@ -248,18 +271,18 @@ export DD_PROFILING_DDPROF_CSTACK=dwarf
 
 
 
-## コンフィギュレーション
+## 構成
 
 次の環境変数を使用してプロファイラーを構成できます。
 
 | 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_ENABLED`                           | Boolean       | `-Ddd.profiling.enabled` 引数の代替。`true` に設定してプロファイラを有効にします。               |
+| `DD_PROFILING_ENABLED`                           | Boolean       | `-Ddd.profiling.enabled` 引数の代替。`true` に設定してプロファイラーを有効にします。               |
 | `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | `-Ddd.profiling.allocation.enabled` 引数の代わりになります。割り当てプロファイラーを有効にするには、`true` に設定します。プロファイラーがすでに有効になっている必要があります。 |
 | `DD_ENV`                                         | 文字列        | [環境][9]名 (例: `production`)。 |
 | `DD_SERVICE`                                     | 文字列        | [サービス][9]名 (例: `web-backend`)。 |
 | `DD_VERSION`                                     | 文字列        | サービスの[バージョン][9]。 |
-| `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api, team:intake`）。  |
+| `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、カンマ区切り形式のリストである必要があります（例、`layer:api, team:intake`）。  |
 
 ## 次のステップ
 
@@ -272,8 +295,8 @@ export DD_PROFILING_DDPROF_CSTACK=dwarf
 [1]: /ja/tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [3]: /ja/profiler/profiler_troubleshooting/#java-8-support
-[4]: https://app.datadoghq.com/account/settings#agent/overview
-[5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
 [8]: /ja/profiler/profiler_troubleshooting/#enabling-the-allocation-profiler

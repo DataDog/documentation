@@ -12,18 +12,10 @@ further_reading:
   tag: Blog
   text: Étude et analyse des logs historiques avec Online Archives
 is_beta: true
-private: true
 kind: documentation
+private: true
 title: Online Archives
 ---
-
-{{< site-region region="us3,us5,eu,gov" >}}
-
-La fonctionnalité Online Archives est uniquement disponible pour les clients Datadog utilisant le site Datadog hébergé sur AWS (US1).
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
 
 <div class="alert alert-warning">
 L'accès à la solution Online Archives est actuellement limité. Pour utiliser cette fonctionnalité, contactez l'<a href="/help/">assistance Datadog</a>.
@@ -33,7 +25,7 @@ L'accès à la solution Online Archives est actuellement limité. Pour utiliser
 
 Online Archives est une solution d'entrepôt de logs vous permettant de stocker pendant 15 mois ou plus vos logs, de les interroger en direct et de les analyser dans Datadog.
 
-Les équipes de sécurité, de conformité et d'ingénierie ont régulièrement besoin d'interroger des logs couvrant une large période de temps. Les failles de sécurité sont généralement détectées des semaines, voire des mois, après les incidents. De plus, la révision et l'audit de la conformité juridique impliquent parfois l'utilisation de logs enregistrés il y a plus d'un an. Les équipes de sécurité ne sont pas les seules à devoir analyser des données à long terme. En effet, il arrive que les équipes d'ingénierie effectuent des analyses d'une année à une autre à partir de données avec une forte cardinalité, par exemple des millions d'entités telles que des utilisateurs, des hosts, des adresses IP, etc. À cette fin, il est plus efficace de travailler à partir des logs plutôt qu'avec des métriques.
+Les équipes de sécurité, de conformité et d'ingénierie ont régulièrement besoin d'interroger des logs couvrant une large période de temps. Les failles de sécurité sont généralement détectées des semaines, voire des mois, après les incidents. De plus, la révision et l'audit de la conformité juridique impliquent parfois l'utilisation de logs enregistrés il y a plus d'un an. Les équipes de sécurité ne sont pas les seules à devoir analyser des données à long terme. En effet, il arrive que les équipes d'ingénierie effectuent des analyses d'une année à une autre à partir de données avec une forte cardinalité, par exemple des millions d'entités telles que des utilisateurs, des hosts, des adresses IP, etc. À cette fin, il est plus efficace de travailler à partir des logs plutôt qu'avec des métriques. 
 
 Online Archives vous permet de conserver et de rechercher toutes vos données de log pendant une durée de 15 mois ou plus. Ainsi, les équipes de sécurité, de conformité et d'ingénierie peuvent accomplir les tâches nécessitant l'étude et l'analyse de données historiques (comme les audits de sécurité). Elles ont également la possibilité d'étudier des tendances avec une très forte cardinalité sur de longues périodes, et de corréler les découvertes système obtenues à partir des métriques avec les données sur le comportement de l'application et des utilisateurs issues des logs.
 
@@ -60,7 +52,7 @@ Sélectionnez l'option Online Archives dans le menu déroulant en regard du sé
 
 Pour effectuer une [recherche][4], saisissez des requêtes dans la barre de recherche, ou sélectionnez la facette de votre choix dans le volet des facettes.
 
-**Remarques** :
+**Remarques** : 
 - Il n'est pas possible d'exporter des logs depuis une archive en ligne vers des dashboards, des notebooks ou des monitors.
 - La vue « Transactions and Patterns » n'est pas disponible pour Online Archives.
 
@@ -94,11 +86,12 @@ Vous trouverez ci-dessous quelques exemples de stratégies de rétention de logs
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="Comment exclure des logs de l'index" style="width:100%;">}}
 
+### Désactivation d'Online Archives
+Sélectionnez l'index pour lequel vous souhaitez désactiver Online Archives, puis désactivez l'option Online Archives.
+
 **Remarque** : l'ordre des index est important. En effet, si plusieurs index correspondent au filtre d'index, les logs `team:security` sont envoyés vers le premier index.
 
 [1]: /fr/logs/log_configuration/indexes/#indexes-filters
 [2]: /fr/logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
-
-{{< /site-region >}}

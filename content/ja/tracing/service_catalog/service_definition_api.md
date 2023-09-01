@@ -13,7 +13,10 @@ further_reading:
   text: サービス定義 API
 - link: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
   tag: GitHub
-  text: サービス定義スキーマ
+  text: サービス定義スキーマ (v2)
+- link: https://github.com/DataDog/schema/blob/main/service-catalog/v2.1/schema.json
+  tag: GitHub
+  text: Service Definition Schema (v2.1)
 kind: documentation
 title: サービスカタログ API
 ---

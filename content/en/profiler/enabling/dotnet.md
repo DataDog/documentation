@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/dotnet'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+: Azure App Services - public beta (webapps only, functions are not supported)
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
@@ -43,6 +43,10 @@ Supported .NET runtimes (64-bit applications)
 .NET 5<br/>
 .NET 6<br/>
 .NET 7
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
+</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
@@ -53,9 +57,9 @@ The following profiling features are available in the following minimum versions
 |----------------------|-----------------------------------------|---------------------------------------|
 | Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
 | CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
-| Exceptions profiling        | beta, 2.10.0+                       | All supported runtime versions.      |
+| Exceptions profiling        | 2.31.0+                       | All supported runtime versions.      |
 | Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
-| Lock Contention profiling        | beta, 2.18.0+                       | .NET 5+      |
+| Lock Contention profiling        | 2.31.0+                       | .NET 5+      |
 | Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
 | [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
 | [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
@@ -123,6 +127,18 @@ To install the .NET Profiler per-application:
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
+{{% tab "Azure App Service (public beta)" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+</div>
+
+To install the .NET Profiler per-webapp:
+1. Install the Azure App Service [Datadog APM Extension][1] to your webapp.
+
+[1]: /serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
+
 {{< /tabs >}}
 
 <br>
@@ -130,7 +146,7 @@ To install the .NET Profiler per-application:
 ## Enabling the Profiler
 
 <div class="alert alert-info">
-  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you have enabled it machine-wide, see the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead related to enabling the profiler for all system applications.
+  <strong>Note</strong>: Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you do have enabled it machine-wide, read the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead that is associated with enabling the profiler for all system applications.
 </div>
 
 {{< tabs >}}
@@ -175,7 +191,7 @@ To install the .NET Profiler per-application:
    DD_VERSION=1.2.3
    ```
 
-   {{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
 
    For .NET Framework:
    ```text
@@ -185,7 +201,7 @@ To install the .NET Profiler per-application:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
 
    <strong>Note</strong>: the environment variables are applied for <em>all</em> IIS applications. Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
 
@@ -343,6 +359,13 @@ To install the .NET Profiler per-application:
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
+{{% tab "Azure App Service (public beta)" %}}
+
+2. Follow these [installation guidelines][1] to set `DD_PROFILING_ENABLED:true` to enable the profiler
+
+[1]: /serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -383,8 +406,8 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
 [5]: /tracing/trace_collection/

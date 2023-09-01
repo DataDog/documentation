@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-snmp-profiles
 app_uuid: e82be05a-2fd2-44eb-9297-4fec152925a3
 assets:
@@ -177,17 +179,17 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 
 | メーカー | モデル                 | バージョン       |
 | ------------ | --------------------- | ------------- |
-| APC          | Smart UPS             | すべて           |
-| APC          | SmartCard             | すべて           |
+| APC          | Smart UPS             | All           |
+| APC          | SmartCard             | All           |
 | Arista       | Switch                | 7xxx          |
-| Aruba        | Switch                | すべて           |
-| AudioCodes   | Mediant SBC           | すべて           |
+| Aruba        | Switch                | All           |
+| AudioCodes   | Mediant SBC           | All           |
 | Barracuda    | CloudGen Firewall     | 6、7、8         |
-| Brocade      | VDX                   | すべて           |
+| Brocade      | VDX                   | All           |
 | チェックポイント   | Gaia/Cloud Firewall   | 77+           |
 | Cisco        | ASA                   | 5xxx          |
-| Cisco        | ASR                   | すべて           |
-| Cisco        | Catalyst              | すべて           |
+| Cisco        | ASR                   | All           |
+| Cisco        | Catalyst              | All           |
 | Cisco        | CUBE                  | IOS           |
 | Cisco        | Nexus                 | 2k            |
 | Cisco        | Nexus                 | 3k            |
@@ -195,29 +197,29 @@ RapDev SNMP プロファイルパッケージは 150 以上のデバイスプロ
 | Cisco        | Nexus                 | 5k            |
 | Cisco        | Nexus                 | 6k            |
 | Cisco        | Nexus                 | 7k            |
-| Cisco        | ISE                   | すべて           |
+| Cisco        | ISE                   | All           |
 | Cisco        | ISR                   | 38XX、44xx    |
-| Cisco        | Nexus                 | すべて           |
-| Cisco        | UCM                   | すべて           |
+| Cisco        | Nexus                 | All           |
+| Cisco        | UCM                   | All           |
 | Cisco        | UCS                   | M2、M3、M4    |
-| Cisco        | WLC                   | すべて           |
-| Citrix       | Netscaler             | すべて           |
+| Cisco        | WLC                   | All           |
+| Citrix       | Netscaler             | All           |
 | Dell         | iDRAC                 | 7、8、9         |
 | Dell         | Powerconnect          | OS10          |
 | Dell         | Powerconnect          | 3000          |
 | F5           | Big-IP                | 9.4.x - 15.x |
-| FortiNet     | FortiGate             | すべて           |
+| FortiNet     | FortiGate             | All           |
 | HPE          | ProLiant Gen8〜10      | iLO4、iLO5     |
 | HPE          | Switch                |               |
 | Ironport     | Mail                  | C3、C6、X1070   |
-| Juniper      | SSG                   | すべて           |
-| Kemp         | Loadmaster            | すべて           |
+| Juniper      | SSG                   | All           |
+| Kemp         | Loadmaster            | All           |
 | Meraki       | CloudController       | CC            |
 | Meraki       | Switch                | MR、MS、MX、Z |
-| Nasuni       | Filer                 | すべて           |
+| Nasuni       | Filer                 | All           |
 | Palo Alto    | NextGen Firewall      | 9.x           |
 | ServerTech   | PDU                   | Gen3、Gen4    |
-| Sharp        | プリンタ               | すべて           |
+| Sharp        | プリンタ               | All           |
 | Steelhead    | Riverbed              | CX、EX        |
 | VMware       | ESXi                  | 6.x           |
 

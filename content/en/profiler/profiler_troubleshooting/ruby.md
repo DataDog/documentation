@@ -59,7 +59,7 @@ Datadog.configure do |c|
 end
 ```
 
-## Unexpected run-time failures and errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
+## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
 
 Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
@@ -69,18 +69,22 @@ Rarely, native extensions or libraries called by them may have missing or incorr
 The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
+* [Using the `passenger` gem/Phusion Passenger web server][11] (Auto-detected starting from 1.13.0 or later).
 
 In these cases, the profiler automatically detects the incompatibility and applies a workaround.
 
-If you encounter run-time failures or errors from Ruby gems that use native extensions, you can revert back to the legacy profiler which does not use `SIGPROF` signals. To revert to the legacy profiler, set the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or in code:
+If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
 
 ```ruby
 Datadog.configure do |c|
-  c.profiling.advanced.force_enable_legacy_profiler = true
+  c.profiling.advanced.no_signals_workaround_enabled = true
 end
 ```
 
-Let our team know if you find or suspect any such incompatibilities [by opening a support ticket][2].
+**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
+
+Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
 
 ## Further Reading
@@ -98,3 +102,4 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 [8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
 [9]: https://bugs.mysql.com/bug.php?id=83109
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
+[11]: https://github.com/DataDog/dd-trace-rb/issues/2976

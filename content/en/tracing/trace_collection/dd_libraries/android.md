@@ -2,8 +2,6 @@
 aliases:
 - /tracing/setup_overview/setup/android
 - /tracing/setup/android
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Collect traces from your Android applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
@@ -15,7 +13,7 @@ further_reading:
 kind: documentation
 title: Android Trace Collection
 ---
-Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android` client-side tracing library][2] and leverage the following features:
+Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
 
 * Create custom [spans][3] for operations in your application.
 * Add `context` and extra custom attributes to each span sent.
@@ -27,78 +25,230 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
 
 ```groovy
 dependencies {
-    implementation "com.datadoghq:dd-sdk-android:x.x.x"
+    implementation "com.datadoghq:dd-sdk-android-trace:x.x.x"
 }
 ```
 
-2. Initialize the library with your application context, tracking consent, and the [Datadog client token][4] and Application ID generated when you create a new RUM application in the Datadog UI (see [Getting Started with Android RUM Collection][7] for more information). For security reasons, you must use a client token: you cannot use [Datadog API keys][5] to configure the `dd-sdk-android` library as they would be exposed client-side in the Android application APK byte code. For more information about setting up a client token, see the [client token documentation][4]:
+2. Initialize Datadog SDK with your application context, tracking consent, and the [Datadog client token][4]. For security reasons, you must use a client token: you cannot use [Datadog API keys][5] to configure Datadog SDK as they would be exposed client-side in the Android application APK byte code. For more information about setting up a client token, see the [client token documentation][4]:
 
-**US** 
+   {{< site-region region="us" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               ).build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-      super.onCreate()
-      val configuration = Configuration.Builder(
-              tracesEnabled = true
-      )
-              .build()
-      val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-      Datadog.initialize(this, credentials, configuration, trackingConsent) 
-    }
-}
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-public class SampleApplication extends Application { 
-    @Override 
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration = new Configuration.Builder(true, true, true, true).build();
-        Credentials credentials = new Credentials(<CLIENT_TOKEN>, <ENV_NAME >, <APP_VARIANT_NAME>, <APPLICATION_ID>);
-        Datadog.initialize(this, credentials, configuration, trackingConsent);
-    }
-}
-```
-{{% /tab %}} 
-{{< /tabs >}}
-
-**EU**
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-class SampleApplication : Application() { 
-    override fun onCreate() { 
-        super.onCreate()
-        val configuration = Configuration.Builder(tracesEnabled = true)
-                 .useSite(DatadogSite.EU1)
-                 .build() 
-        val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-        Datadog.initialize(this, credentials, configuration, trackingConsent) 
-    } 
-}
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-public class SampleApplication extends Application {
-    @Override 
-    public void onCreate() {
-        super.onCreate();
-        Configuration configuration = new Configuration.Builder(true, true, true, true)
+   {{< site-region region="eu" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.EU1)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
                                .useSite(DatadogSite.EU1)
                                .build();
-        Credentials credentials = new Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME >, <APPLICATION_ID>);
-        Datadog.initialize(this, credentials, configuration, trackingConsent);
-    }
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="us3" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.US3)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.US3)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="us5" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.US5)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.US5)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="gov" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.US1_FED)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.US1_FED)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="ap1" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.AP1)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.AP1)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
    To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values:
@@ -113,7 +263,7 @@ public class SampleApplication extends Application {
    * `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
    * `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
-**Note**: In  the credentials required for initialization, your application variant name is also required, and should use your `BuildConfig.FLAVOR` value (or an empty string if you don't have variants). This is important because it enables the right ProGuard `mapping.txt` file to be automatically uploaded at build time to be able to view de-obfuscated RUM error stack traces. For more information see the [guide to uploading Android source mapping files][8].
+**Note**: In the credentials required for initialization, your application variant name is also required, and should use your `BuildConfig.FLAVOR` value (or an empty string if you don't have variants). This is important because it enables the right ProGuard `mapping.txt` file to be automatically uploaded at build time to be able to view de-obfuscated RUM error stack traces. For more information see the [guide to uploading Android source mapping files][8].
 
    Use the utility method `isInitialized` to check if the SDK is properly initialized:
 
@@ -127,7 +277,25 @@ public class SampleApplication extends Application {
    Datadog.setVerbosity(Log.INFO)
    ```
 
-3. Configure and register the Android Tracer. You only need to do it once, usually in your application's `onCreate()` method:
+3. Configure and enable Trace feature:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+        val traceConfig = TraceConfiguration.Builder().build()
+        Trace.enable(traceConfig)
+   ```
+   {{% /tab %}}
+
+   {{% tab "Java" %}}
+   ```java
+        TraceConfiguration traceConfig = TraceConfiguration.Builder().build();
+        Trace.enable(traceConfig);
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
+4. Configure and register the Android Tracer. You only need to do it once, usually in your application's `onCreate()` method:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -138,7 +306,7 @@ GlobalTracer.registerIfAbsent(tracer)
 {{% /tab %}} 
 {{% tab "Java" %}}
 ```java
-final AndroidTracer tracer = new AndroidTracer.Builder().build();
+AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```
 {{% /tab %}}
@@ -159,7 +327,7 @@ val tracer = AndroidTracer.Builder()
 {{% tab "Java" %}}
 
 ```java
-final AndroidTracer tracer = new AndroidTracer.Builder()
+AndroidTracer tracer = new AndroidTracer.Builder()
         .setPartialFlushThreshold(10)
         .build();
 ```
@@ -181,8 +349,8 @@ span.finish()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final GlobalTracer tracer = GlobalTracer.get();
-final Span span = tracer.buildSpan("<SPAN_NAME>").start();
+GlobalTracer tracer = GlobalTracer.get();
+Span span = tracer.buildSpan("<SPAN_NAME>").start();
 // Do something ...
 // ...
 // Then when the span should be closed
@@ -214,7 +382,7 @@ try {
             childSpan.finish()
         }
     }
-} catch(e: Error) {
+} catch(e: Throwable) {
     AndroidTracer.logThrowable(span, e)
 } finally {
     span.finish()
@@ -223,22 +391,22 @@ try {
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Span = tracer.buildSpan("<SPAN_NAME1>").start();
+Span = tracer.buildSpan("<SPAN_NAME1>").start();
 try {
-    final Scope scope = tracer.activateSpan(span);
+    Scope scope = tracer.activateSpan(span);
     try {
         // Do something ...
         // ...
         // Start a new Scope
-        final Span childSpan = tracer.buildSpan("<SPAN_NAME2>").start();
+        Span childSpan = tracer.buildSpan("<SPAN_NAME2>").start();
         try {
-            final Scope innerScope = tracer.activateSpan(childSpan);
+            Scope innerScope = tracer.activateSpan(childSpan);
             try {
                 // Do something ...
             } finally {
                 innerScope.close();
             }   
-        } catch(Error e) {
+        } catch(Throwable e) {
             AndroidTracer.logThrowable(childSpan, e);
         } finally {
             childSpan.finish();
@@ -274,7 +442,7 @@ try{
             }
         }
     }
-} catch(e: Error) {
+} catch(e: Throwable) {
     AndroidTracer.logThrowable(span, e)
 } finally {
     span.finish()
@@ -283,14 +451,14 @@ try{
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Span span = tracer.buildSpan("<SPAN_NAME1>").start();
+Span span = tracer.buildSpan("<SPAN_NAME1>").start();
 try {
-    final Scope scope = tracer.activateSpan(span);
+    Scope scope = tracer.activateSpan(span);
     try {
         // Do something ...
         new Thread(() -> {
             // Step 2: reactivate the Span in the worker thread
-            final Scope scopeContinuation = tracer.scopeManager().activate(span);
+            Scope scopeContinuation = tracer.scopeManager().activate(span);
             try {
                 // Do something
             } finally {
@@ -300,7 +468,7 @@ try {
     } finally {
         scope.close();
     }
-} catch (Exception e){
+} catch (Throwable e){
     AndroidTracer.logThrowable(span, e);
 } finally {
     span.finish();
@@ -330,9 +498,9 @@ val request = tracedRequestBuilder.build()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Tracer tracer = GlobalTracer.get();
-final Span span = tracer.buildSpan("<SPAN_NAME>").start();
-final Request.Builder tracedRequestBuilder = new Request.Builder();
+Tracer tracer = GlobalTracer.get();
+Span span = tracer.buildSpan("<SPAN_NAME>").start();
+Request.Builder tracedRequestBuilder = new Request.Builder();
 tracer.inject(
         span.context(),
         Format.Builtin.TEXT_MAP_INJECT,
@@ -342,7 +510,7 @@ tracer.inject(
                 tracedRequestBuilder.addHeader(key, value);
             }
         });
-final Request request = tracedRequestBuilder.build();
+Request request = tracedRequestBuilder.build();
 // Dispatch the request and finish the span after
 ```
 {{% /tab %}}
@@ -369,8 +537,8 @@ val serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedConte
    {{% /tab %}}
    {{% tab "Java" %}}
 ```java
-final Tracer tracer = GlobalTracer.get();
-final SpanContext extractedContext = tracer.extract(
+Tracer tracer = GlobalTracer.get();
+SpanContext extractedContext = tracer.extract(
         Format.Builtin.TEXT_MAP_EXTRACT,
         new TextMapExtract() {
             @Override 
@@ -388,7 +556,7 @@ final SpanContext extractedContext = tracer.extract(
                   .iterator();
             }
         });
-final Span serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start();
+Span serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedContext).start();
 ```
    {{% /tab %}}
    {{< /tabs >}}
@@ -418,51 +586,109 @@ AndroidTracer.logThrowable(span, throwable)
 AndroidTracer.logErrorMessage(span, message)
 ```
 
-11. If you need to modify some attributes in your Span events before batching you can do so by providing an implementation of `SpanEventMapper` when initializing the SDK:
+11. If you need to modify some attributes in your Span events before batching you can do so by providing an implementation of `SpanEventMapper` when enabling Trace feature:
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
 ```kotlin
-val config = Configuration.Builder(tracesEnabled = true, ...) 
+val traceConfig = TraceConfiguration.Builder() 
         // ...  
-        .setSpanEventMapper(spanEventMapper)
+        .setEventMapper(spanEventMapper)
         .build()    
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Configuration config = new Configuration.Builder(true, true, true, true)
+TraceConfiguration config = new TraceConfiguration.Builder()
         // ...
-        .setSpanEventMapper(spanEventMapper)
+        .setEventMapper(spanEventMapper)
         .build();    
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
+## Kotlin Extensions
+
+### Running a lambda within a Span
+
+To monitor the performance of a given lambda, you can use the `withinSpan()` method. By default, a scope will be created for the span, but you can disable this behavior by setting the `activate` parameter to false.
+
+```kotlin
+    withinSpan("<SPAN_NAME>", parentSpan, activate) {
+        // Your code here
+    }
+```
+
+### Span extension methods
+
+You can mark a span as having an error using one of the following `error()` methods.
+
+```kotlin
+    val span = tracer.buildSpan("<SPAN_NAME>").start()
+    try {
+        // …
+    } catch (e: IOException) {
+        span.setError(e)
+    }
+    span.finish()
+```
+
+```kotlin
+    val span = tracer.buildSpan("<SPAN_NAME>").start()
+    if (invalidState) {
+        span.setError("Something unexpected happened")
+    }
+    span.finish()
+```
+
+### Tracing SQLite transaction
+
+If you are using `SQLiteDatabase` to persist data locally, you can trace the database transaction using the following method:
+
+```kotlin
+   sqliteDatabase.transactionTraced("<SPAN_NAME>", isExclusive) { database ->
+        // Your queries here
+        database.insert("<TABLE_NAME>", null, contentValues)
+
+        // Decorate the Span
+        setTag("<TAG_KEY>", "<TAG_VALUE>")
+   }
+```
+It behaves like the `SQLiteDatabase.transaction` method provided in the `core-ktx` AndroidX package and only requires a span operation name.
+
 ## Integrations
 
-In addition to manual tracing, the `dd-sdk-android` library provides the following integration.
+In addition to manual tracing, the Datadog SDK provides the following integrations.
 
 ### OkHttp
 
-If you want to trace your OkHttp requests, you can add the provided [Interceptor][6] as follows:
+If you want to trace your OkHttp requests, you can add the provided [Interceptor][6] (which can be found in the `dd-sdk-android-okhttp` library) as follows:
+
+1. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
+
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+2. Add `DatadogInterceptor` to your `OkHttpClient`:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
 val okHttpClient = OkHttpClient.Builder() 
         .addInterceptor(
-            DatadogInterceptor(listOf("example.com", "example.eu"), traceSamplingRate = 20f)
+            DatadogInterceptor(listOf("example.com", "example.eu"), traceSampler = RateBasedSampler(20f))
         )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-float traceSamplingRate = 20f;
-final OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
+OkHttpClient okHttpClient =  new OkHttpClient.Builder() 
         .addInterceptor(
-                new DatadogInterceptor(Arrays.asList("example.com", "example.eu"), traceSamplingRate)
+                new DatadogInterceptor(Arrays.asList("example.com", "example.eu"), RateBasedSampler(20f))
         )
         .build();
 ```
@@ -480,18 +706,17 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 ```kotlin
 val tracedHosts = listOf("example.com", "example.eu") 
 val okHttpClient =  OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts, traceSamplingRate = 20f))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSamplingRate = 20f))
+        .addInterceptor(DatadogInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
+        .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-float traceSamplingRate = 20f;
 final List<String> tracedHosts = Arrays.asList("example.com", "example.eu"); 
 final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor(tracedHosts, traceSamplingRate))
-        .addNetworkInterceptor(new TracingInterceptor(tracedHosts, traceSamplingRate))
+        .addInterceptor(new DatadogInterceptor(tracedHosts, RateBasedSampler(20f)))
+        .addNetworkInterceptor(new TracingInterceptor(tracedHosts, RateBasedSampler(20f)))
         .build();
 ```
 {{% /tab %}}
@@ -499,28 +724,7 @@ final OkHttpClient okHttpClient =  new OkHttpClient.Builder()
 
 In this case trace sampling decision made by the upstream interceptor for a particular request will be respected by the downstream interceptor.
 
-Because the way the OkHttp Request is executed (using a Thread pool), the request span won't be automatically linked with the span that triggered the request. You can manually provide a parent span in the `OkHttp Request.Builder` as follows:
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-val request = Request.Builder()
-        .url(requestUrl)
-        .tag(Span::class.java, parentSpan)
-        .build()
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-final Request request = new Request.Builder()
-        .url(requestUrl)
-        .tag(Span.class, parentSpan)
-        .build();
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-or if you are using the extensions provided in the `dd-sdk-android-ktx` library:
+Because the way the OkHttp Request is executed (using a Thread pool), the request span won't be automatically linked with the span that triggered the request. You can manually provide a parent span in the `OkHttp Request.Builder` as follows by using `Request.Builder.parentSpan` extension method:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -533,9 +737,10 @@ val request = Request.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final Request request = new Request.Builder()
+Request.Builder requestBuilder = new Request.Builder()
         .url(requestUrl)
-        .parentSpan(parentSpan)
+Request request = OkHttpRequestExtKt
+        .parentSpan(requestBuilder, parentSpan)
         .build();
 ```
 {{% /tab %}}
@@ -558,7 +763,7 @@ To provide a continuous trace inside a RxJava stream you need to follow the step
 {{% tab "Kotlin" %}}
 ```kotlin
 var spanScope: Scope? = null
-Single.fromSupplier{} 
+Single.fromSupplier { } 
         .subscribeOn(Schedulers.io())
         .map {  
             val span = GlobalTracer.get().buildSpan("<YOUR_OP_NAME>").start()
@@ -700,12 +905,25 @@ This means that even if users open your application while being offline, no data
 
 The data on disk will automatically be discarded if it gets too old to ensure the SDK doesn't use too much disk space.
 
+## Initialization
+The following methods in `AndroidTracer.Builder` can be used when initializing the `Tracer`:
+
+
+| Method                           | Description                                                                                                                                                                                                                         |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `setService(<SERVICE_NAME>)	`    | Set the value for the `service`. |
+| `setPartialFlushThreshold(<INT>)` |  When this threshold is reached (you have a specific `<INT>` amount of spans closed waiting), the flush mechanism is triggered and all pending closed spans are processed and sent to intake.|
+| `addTag(<KEY>, <VALUE>)`     | Set a `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
+| `setBundleWithRumEnabled(true)`    | Set to `true` to enable spans to be enriched with the current RUM View information. This enables you to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
+| `setSampleRate(<FLOAT>)`   | Set a value `0-100` to define the percentage of Traces to collect. |
+| `setTracingHeaderTypes(Set<TracingHeaderType>)`   | Sets the tracing header styles that may be injected by the Tracer. |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: https://github.com/DataDog/dd-sdk-android
+[2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace
 [3]: /tracing/visualization/#spans
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /account_management/api-app-keys/#api-keys

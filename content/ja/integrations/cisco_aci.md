@@ -30,7 +30,7 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.2.1
+integration_version: 2.2.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -69,7 +69,7 @@ Cisco ACI インテグレーションを使用すると、以下のことが可�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][1]するだけです。
 

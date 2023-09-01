@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: ブログ
   text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: 効果的なモニターの作成に関するインタラクティブなセッションに参加できます
 kind: documentation
 title: モニターの概要
 ---
@@ -109,6 +112,6 @@ Steps to free up disk space:
 [7]: /ja/monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /ja/monitors/notify/#conditional-variables
 [9]: /ja/account_management/rbac/
-[10]: /ja/mobile/
+[10]: /ja/service_management/mobile/
 [11]: https://apps.apple.com/app/datadog/id1391380318
 [12]: https://play.google.com/store/apps/details?id=com.datadog.app

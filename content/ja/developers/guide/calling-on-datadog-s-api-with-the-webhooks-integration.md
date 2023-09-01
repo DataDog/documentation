@@ -1,9 +1,10 @@
 ---
-title: Webhooks インテグレーションを使用した Datadog API の呼び出し
-kind: ガイド
 aliases:
-  - /ja/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
+- /ja/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
+kind: ガイド
+title: Webhooks インテグレーションを使用した Datadog API の呼び出し
 ---
+
 [Webhooks インテグレーション][1]を使用して、Datadog のモニターやイベントから Webhook をトリガーできます。これは、カスタムコミュニケーションツールを使用したり、[モニターアラートをテキストメッセージに転送して][2]、Datadog アカウントからチームに連絡する場合に便利です。
 
 さらに、[Datadog の API][3] を呼び出すように Webhook 通知をセットアップすることもできます。たとえば、モニターがトリガーされるたびにメトリクスやイベントを Datadog アカウントに送信できます。
@@ -57,9 +58,9 @@ Webhook をセットアップするには、名前 (モニターで参照され�
 
 以下に、そのようなウィジェットの例を挙げます。ただし、このチェックの名前は「composite.status」で、グループ内の 1 つのモニターが「alert」をトリガーし、その後再び「ok」になりました。
 
-{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
+{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" >}}
 
 [1]: /ja/integrations/webhooks/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [3]: /ja/api/
-[4]: /ja/dashboards/screenboard/
+[4]: /ja/dashboards/#screenboards

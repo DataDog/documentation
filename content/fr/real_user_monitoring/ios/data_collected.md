@@ -1,16 +1,15 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/data_collected.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: Code source dd-sdk-ios
+  text: Code source de dd-sdk-ios
 - link: /real_user_monitoring/
   tag: Documentation
   text: Service Real User Monitoring (RUM) de Datadog
 kind: documentation
 title: Données RUM recueillies (iOS)
 ---
+
 ## Présentation
 
 Le SDK RUM iOS génère des événements auxquels des métriques et attributs sont associés. Les métriques sont des valeurs quantifiables servant à effectuer des mesures associées à un événement. Les attributs sont des valeurs non quantifiables servant à filtrer les données de métriques dans les analyses.
@@ -23,8 +22,8 @@ Il existe d'autres [métriques et attributs propres à un type d'événement don
 |------------|-----------|-------------------------------------|
 | Session    | 30 jours   | Une session représente le parcours d'un utilisateur réel sur votre application mobile. Elle débute lorsque l'utilisateur lance l'application et se poursuit tant qu'il reste actif. Lors du parcours de l'utilisateur, tous les événements RUM générés au sein de la session partagent le même attribut `session.id`. **Remarque** : la session se réinitialise après 15 minutes d'inactivité. Si l'application est arrêtée par le système d'exploitation, vous pouvez réinitialiser la session pendant que l'application est exécutée en arrière-plan.|
 | Vue       | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Une vue est lancée et mise en pause lorsque les rappels `viewDidAppear(animated:)` et `viewDidDisappear(animated:)` sont effectués sur la classe `UIViewController`. Chaque `UIViewController` est considéré comme une vue distincte. Tant que l'utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources et Actions) sont joints à la vue, avec un `view.id` unique.                           |
-| Ressource   | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                       |
-| Error      | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                                                                        |
+| Ressource   | 30 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                       |
+| Erreur      | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                                                                        |
 | Action     | 30 jours   | Une action représente l'activité utilisateur dans votre application mobile (par exemple, le lancement de l'application ou une action de toucher, de balayage ou de retour). Chaque action possède un `action.id` unique joint à la vue à son origine.                                                                                                                                              |
 | Tâche longue | 30 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
 
@@ -32,6 +31,14 @@ Il existe d'autres [métriques et attributs propres à un type d'événement don
 Le schéma suivant présente la hiérarchie des événements RUM :
 
 {{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="Hiérarchie des événements RUM" style="width:50%;border:none" >}}
+
+## Lancement de l'application
+
+À son initialisation, le SDK RUM pour iOS crée une vue intitulée ApplicationLaunch. Cette vue commence au même moment que le processus iOS et peut être utilisée pour suivre le temps de lancement de votre application.
+
+La vue ApplicationLaunch inclut l'ensemble des logs, actions et ressources créés avant le premier appel de `startView`. Utilisez la durée de cette vue pour déterminer le temps écoulé avant la première vue. Cette vue possède une action, `application_start`, dont la durée correspond au temps écoulé entre le lancement du processus et l'appel de `applicationDidBecomeActive`.
+
+Si iOS décide de [préchauffer votre application][4], la vue ApplicationLaunch commence alors à l'initialisation du SDK RUM pour iOS, et l'événement `application_start` n'enregistre aucune durée.
 
 ## Attributs par défaut
 
@@ -46,6 +53,7 @@ Par défaut, la solution RUM recueille des attributs communs pour tous les évé
 | `type`           | chaîne  | Le type de l'événement (par exemple, `view` ou `resource`).                         |
 | `service`        | chaîne  | Le [nom de service unifié][2] de cette application utilisé pour corréler les sessions utilisateur. |
 | `application.id` | chaîne  | L'ID d'application Datadog.                                                        |
+| `application.name` | chaîne  | Le nom de l'application Datadog.                                                        |
 
 ### Appareil
 
@@ -57,6 +65,13 @@ Les attributs sur l'appareil suivants sont joints automatiquement à tous les é
 | `device.brand`                       | chaîne | La marque d'appareil indiquée par l'appareil (User-Agent système)                                           |
 | `device.model`                       | chaîne | Le modèle d'appareil indiqué par l'appareil (User-Agent système)                                           |
 | `device.name`                        | chaîne | Le nom d'appareil indiqué par l'appareil (User-Agent système)                                            |
+
+### Connectivité
+
+Les attributs réseau suivants sont joints automatiquement à tous les événements de ressource et d'erreur recueillis par Datadog :
+
+| Nom de l'attribut                           | Type   | Description                                     |
+|------------------------------------------|--------|-------------------------------------------------|
 | `connectivity.status`                | chaîne | Le statut de l'accessibilité au réseau de l'appareil (`connected`, `not connected`, `maybe`).                           |
 | `connectivity.interfaces`            | chaîne | La liste des interfaces réseau disponibles (par exemple, `bluetooth`, `cellular`, `ethernet` ou `wifi`). |
 | `connectivity.cellular.technology`   | chaîne | Le type de technologie radio utilisée pour la connexion cellulaire.                                              |
@@ -76,7 +91,9 @@ Les attributs sur le système d'exploitation suivants sont joints automatiquemen
 
 ### Géolocalisation
 
-Les attributs suivants sont liés à la géolocalisation des adresses IP :
+Les attributs ci-dessous sont liés à la géolocalisation des adresses IP :
+
+**Remarque :** si vous souhaitez arrêter de recueillir les attributs de géolocalisation, modifiez le paramètre correspondant dans les [détails de votre application][6].
 
 | Nom complet                           | Type   | Description                                                                                                                               |
 |------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -124,7 +141,7 @@ Vous pouvez activer la [surveillance des informations utilisateur][2] de façon 
 | `session.initial_view.name` | chaîne | Le nom de la vue initiale de la session.                                    |
 | `session.last_view.url`      | chaîne | L'URL de la dernière vue de la session.                                        |
 | `session.last_view.name`     | chaîne | Le nom de la dernière vue de la session.                                       |
-| `session.ip`                 | chaîne | L'adresse IP de la session extraite à partir de la connexion TCP de l'admission. |
+| `session.ip`                 | chaîne | L'adresse IP de la session extraite à partir de la connexion TCP de l'admission. Si vous souhaitez arrêter de recueillir cet attribut, modifiez le paramètre correspondant dans les [détails de votre application][5]. |
 | `session.useragent`          | chaîne | Les informations de l'Agent utilisateur système interprétant les informations de l'appareil.                            |
 
 
@@ -225,10 +242,13 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 
 Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache (`Library/Caches`) du [bac à sable de votre application][3]. Aucune autre application installée sur l'appareil ne peut lire ces données.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[2]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
+[1]: /fr/real_user_monitoring/ios/advanced_configuration/#enrich-user-sessions
+[2]: /fr/real_user_monitoring/ios/advanced_configuration/#track-user-sessions
 [3]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[4]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
+[5]: /fr/data_security/real_user_monitoring/#ip-address
+[6]: /fr/data_security/real_user_monitoring/#geolocation

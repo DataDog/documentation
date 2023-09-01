@@ -40,7 +40,7 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -84,7 +84,7 @@ Datadog-Azure IoT Edge インテグレーションを使用すると IoT Edge �
 
 以下の手順に従って、このチェックをデバイスホストで実行中の IoT Edge デバイスにインストール、構成します。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Azure IoT Edge チェックは [Datadog Agent][2] パッケージに含まれています。
 

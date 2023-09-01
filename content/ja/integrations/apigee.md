@@ -1,73 +1,78 @@
 ---
-title: Apigee
-name: apigee
-kind: インテグレーション
-description: Apigee プロキシログを収集して、エラー、リクエスト応答時間、期間、レイテンシーを追跡し、1 つの場所に集約されたプロキシのパフォーマンスと問題を監視します。
-short_description: Apigee ログを収集して、エラー、リクエスト応答時間などを追跡
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/apigee.md'
-categories:
-  - ログの収集
-doc_link: /integrations/apigee/
 aliases:
-  - /ja/logs/log_collection/apigee
+- /ja/logs/log_collection/apigee
+categories:
+- ログの収集
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/apigee.md
+description: Apigee プロキシログを収集して、エラー、リクエスト応答時間、期間、レイテンシーを追跡し、1 つの場所に集約されたプロキシのパフォーマンスと問題を監視します。
+doc_link: /integrations/apigee/
+further_reading:
+- link: logs/
+  tag: Documentation
+  text: ログ管理
 has_logo: true
+integration_id: apigee
 integration_title: Apigee
 is_public: true
+kind: インテグレーション
+name: apigee
 public_title: Datadog-Apigee
-further_reading:
-  - link: logs/
-    tag: Documentation
-    text: ログ管理
-integration_id: apigee
+short_description: Apigee ログを収集して、エラー、リクエスト応答時間などを追跡
+title: Apigee
 ---
+
 ## 概要
 
-Apigee プロキシログを収集して、エラー、応答時間、期間、レイテンシーを追跡し、1 つの場所に集約されたプロキシのパフォーマンスと問題を監視します。
+Apigee プロキシログを収集して、エラー、応答時間、期間、レイテンシー、モニターパフォーマンス、プロキシの問題を追跡します。
 
 ## セットアップ
 
-#### ログの収集
+### ログの収集
 
-Apigee ログは 2 通りの方法で収集できます:
+{{% site-region region="us,eu" %}}
+Apigee のログを収集する方法は 2 つあります。
 
 1. Apigee の [JavaScript ポリシー][1]を使用して Datadog にログを送信します。
 2. すでに syslog サーバーをお持ちの場合は、Apigee [MessageLogging ポリシー][2]タイプを使用して syslog アカウントにログを記録します。
 
-##### Syslog パラメーター
+#### Syslog パラメーター
 
-API で MessageLogging ポリシータイプと syslog パラメーターを使用して、カスタムメッセージのログを syslog に出力します。お使いのリージョンの Datadog ログインテークエンドポイント ({{< region-param key="web_integrations_endpoint" code="true" >}})、ポート ({{< region-param key="web_integrations_port" code="true" >}})、プロトコルを含めてください。例:
+API の syslog パラメーターで MessageLogging ポリシータイプを使用し、カスタムメッセージを syslog にログ出力します。以下の例では、`<site_intake_endpoint>` を {{< region-param key="web_integrations_endpoint" code="true" >}} に、`<site_port>` を {{< region-param key="web_integrations_port" code="true" >}} で置き換えてください。
 
 ```json
 <MessageLogging name="LogToSyslog">
     <DisplayName>datadog-logging</DisplayName>
     <Syslog>
         <Message><YOUR API KEY> test</Message>
-        <Host>intake.logs.datadoghq.com</Host>
-        <Port>10516</Port>
+        <Host><site_intake_endpoint></Host>
+        <Port><site_port></Port>
         <Protocol>TCP</Protocol>
     </Syslog>
 </MessageLogging>
 ```
 
-##### JavaScript ポリシー
+[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+
+{{% /site-region %}}
+#### JavaScript ポリシー
 
 Apigee の [JavaScript ポリシー][1]を使用して、Apigee プロキシログを Datadog に送信します。
 
-JavaScript は、必須のフロー変数を Datadog のログ属性としてキャプチャするように構成されています。属性は、[標準属性のリスト][3]に従って名前が付けられます。
+JavaScript は、必須のフロー変数を Datadog のログ属性としてキャプチャするように構成されています。属性は、[標準属性のリスト][2]に従って名前が付けられます。
 
 1. Datadog にログを送信する Apigee プロキシを選択します。
-2. 選択したプロキシの概要ページで、右上隅にある 'DEVELOP' タブをクリックします。
+2. 選択したプロキシの概要ページで、右上隅にある **DEVELOP** タブをクリックします。
 
-{{< img src="integrations/apigee/apigee_develop.png" alt="Develop"  style="width:75%;">}}
+{{< img src="integrations/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
 
-3. 'Navigator' で、新しい JavaScript ポリシーを追加します。次に、'Resources --> jsc' ドロップダウンで作成された JavaScript ファイルを編集します。
-4. 次の JavaScript コードスニペットを追加します。必ず `dd_api_url` 変数に Datadog **API KEY** を設定してください。
+3. **Navigator** の下で、新しい JavaScript ポリシーを追加し、**Resources --> jsc** ドロップダウンメニューの下に作成された JavaScript ファイルを編集します。
+4. その中に以下の JavaScript のコードスニペットを追加します。必ず変数 `dd_api_url` の `<DATADOG_API_KEY>` を [Datadog API KEY][3] に置き換えてください。
 
 ```
 // ここに Datadog API URL を設定します。
-// 注: Datadog EU サイト (app.datadoghq.eu) にいる場合、HTTP ログエンドポイントは http-intake.logs.datadoghq.eu です。
-var dd_api_url = "https://http-intake.logs.datadoghq.com/v1/input/<API_KEY>?ddsource=apigee";
+var dd_api_url = "https://http-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
 
 // デバッグ
 // print(dd_api_url);
@@ -140,7 +145,7 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**注**: 公式の [Apigee フロー変数のドキュメント][4]から JavaScript にさらにフロー変数を追加します。
+**注**: 公式の [Apigee フロー変数リファレンス][4]から JavaScript にさらにフロー変数を追加します。
 
 ## トラブルシューティング
 
@@ -151,7 +156,7 @@ httpClient.send(myLoggingRequest);
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
-[3]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[2]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
 [4]: https://docs.apigee.com/api-platform/reference/variables-reference
 [5]: /ja/help/
+[3]: https://app.datadoghq.com/organization-settings/api-keys

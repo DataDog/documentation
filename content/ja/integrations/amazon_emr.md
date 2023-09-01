@@ -6,26 +6,26 @@ categories:
 - cloud
 - log collection
 dependencies: []
-description: Amazon Elastic Map Reduce のキーメトリクスを追跡。
+description: Amazon EMR のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
 draft: false
 git_integration_title: amazon_emr
 has_logo: true
 integration_id: amazon-emr
-integration_title: Amazon Elastic Map Reduce
+integration_title: Amazon EMR
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_emr
-public_title: Datadog-Amazon Elastic Map Reduce インテグレーション
-short_description: Amazon Elastic Map Reduce のキーメトリクスを追跡。
+public_title: Datadog-Amazon EMR インテグレーション
+short_description: Amazon EMR のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Elastic MapReduce (Amazon EMR) は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
+Amazon EMR は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
 
 このインテグレーションを有効にすると、EMR メトリクスを Datadog に表示できます。
 
@@ -73,11 +73,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Elastic MapReduce インテグレーションには、イベントは含まれません。
+AWS EMR インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS Elastic MapReduce インテグレーションには、サービスのチェック機能は含まれません。
+AWS EMR インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

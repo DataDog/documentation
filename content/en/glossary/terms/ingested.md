@@ -1,4 +1,7 @@
 ---
 title: ingested
+core_product:
+  - log management
+  - apm
 ---
-Ingested logs are all logs collected throughout your environment.
+Ingested logs and spans are all logs and spans collected throughout your environment.

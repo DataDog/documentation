@@ -18,7 +18,7 @@ further_reading:
 - link: /real_user_monitoring/session_replay/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
-- link: /account_management/org_settings/sensitive_data_detection/
+- link: /sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
 kind: documentation
@@ -148,7 +148,7 @@ Continuous Integration のパイプラインとテスト
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /ja/integrations/azure/
 [9]: /ja/integrations/google_cloud_platform/
-[10]: /ja/account_management/org_settings/sensitive_data_detection/
+[10]: /ja/sensitive_data_scanner/
 [11]: /ja/data_security/logs/
 [12]: /ja/logs/guide/control-sensitive-logs-data/
 [13]: /ja/agent/logs/advanced_log_collection

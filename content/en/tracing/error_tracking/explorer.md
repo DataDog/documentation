@@ -15,7 +15,7 @@ further_reading:
 
 The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on the severity of the issue. 
 
-{{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Error Tracking Explorer" style="width:100%" >}}
+{{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="Error Tracking Explorer" style="width:100%" >}}
 
 ## Explore your issues
 
@@ -23,7 +23,7 @@ Each item listed in the [Error Tracking Explorer][3] surfaces high-level informa
 
 -   The error type and the error message.
 -   The path to the file in which underlying errors occurred.
--  Information about the issue’s lifetime:
+-  Information about the issue's lifetime:
     -   When it was first and last seen.
     -   The number of error occurrences in the selected time period.
     -   A graph of error occurrences over time in the selected time period.
@@ -40,7 +40,7 @@ You can specify a specific range or select a preset range from the dropdown menu
 
 Error Tracking automatically indexes a predefined list of attributes from underlying error occurrences and creates facets for them. Use facets to pivot or filter your issues. The facet list displays the members of an attribute for the selected time period and provides basic analytics such as the number of corresponding issues.
 
-{{< img src="tracing/error_tracking/facet.png" alt="Error Tracking Facets" style="width:100%;" >}}
+{{< img src="tracing/error_tracking/facets_panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
 The Error Tracking Explorer returns all issues with at least one error occurrence in the selected time period that match the set of selected facets.
 
@@ -48,11 +48,11 @@ The Error Tracking Explorer returns all issues with at least one error occurrenc
 
 Click on any issue in the issue list to open the issue panel and access additional error information about your backend service.
 
+{{< img src="tracing/error_tracking/issue_panel.png" alt="Error Tracking Time Range" style="width:100%;" >}}
+
 ### Get a high-level overview
 
 The issue panel contains high-level information you need when troubleshooting an issue. 
-
-{{< img src="tracing/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel" style="width:80%;" >}}
 
 You can learn about the issue's lifecycle such as its first and last occurrence dates, related code versions, and total error occurrences since its inception. The graph of error occurrences shows up to 14 days in the past to give you an overview of the trend of the issue.
 
@@ -63,7 +63,7 @@ Explore error samples that are grouped into the issue such as the following:
 -   All ingested error spans for the past [15 minutes of live search][1].
 -   Error spans from the past 15 days that are indexed by [custom retention filters][2].
 
-{{< img src="tracing/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel" style="width:80%;" >}}
+{{< img src="tracing/error_tracking/error_sample.png" alt="Lower Part of the Error Tracking Issue Panel" style="width:80%;" >}}
 
 Each error sample displays the information needed to understand why an error happened and how to resolve it, for example:
 
@@ -75,7 +75,7 @@ Each error sample displays the information needed to understand why an error hap
 
 Set up the [GitHub integration][4] to see code snippets in your stack traces.
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:70%;" >}}
 
 To get started with configuring your repository, see the [Source Code Integration documentation][5].
 

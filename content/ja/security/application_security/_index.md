@@ -70,8 +70,6 @@ Application Security Management がどのように構成され、トレースデ
 
 ## アップストリームのオープンソースライブラリや依存関係に潜むリスクの調査
 
-<div class="alert alert-info">Application Vulnerability Management はベータ版です。</a></div>
-
 [Application Vulnerability Management][8] は、既知の脆弱性を持つオープンソースライブラリを使用または依存することで、サービスがリスクにさらされる場合を示しています。発見された脆弱性を調査し、修正アドバイスに従うか、脆弱性の原因を調査することで、ソフトウェアの安全性を確保します。
 
 ## 次のステップ

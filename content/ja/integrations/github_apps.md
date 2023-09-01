@@ -95,7 +95,7 @@ GitHub アプリインテグレーションには、サービスのチェック�
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

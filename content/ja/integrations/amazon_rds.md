@@ -31,6 +31,10 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
+  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
+  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS に関連する大量のメトリクスを追跡する。
@@ -310,9 +314,16 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 - WARNING - 停止
 - UNKNOWN - その他
 
+## すぐに使える監視
+
+AWS RDS インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+
+- AWS RDS ダッシュボード: すぐに使える [AWS RDS ダッシュボード][9]を使用して、RDS インスタンスの包括的な概要を得ることができます。
+- 推奨モニター: [AWS RDS の推奨モニター][10]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
@@ -326,4 +337,6 @@ AWS RDS インテグレーションには、DB インスタンス、セキュリ
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_rds/amazon_rds_metadata.csv
 [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html#USER_ReadRepl.Monitoring
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://app.datadoghq.com/dash/integration/62/aws-rds
+[10]: https://app.datadoghq.com/monitors/recommended
+[11]: https://docs.datadoghq.com/ja/help/

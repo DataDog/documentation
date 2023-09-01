@@ -106,5 +106,5 @@ Le volet latéral fournit des données de télémétrie contextuelle pour vous a
 
 
 [1]: /fr/network_monitoring/performance/
-[2]: /fr/network_monitoring/devices/setup?tab=snmpv2
+[2]: /fr/network_monitoring/devices/snmp_metrics/?tab=snmpv2
 [3]: /fr/network_monitoring/performance/network_page#table

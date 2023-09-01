@@ -41,8 +41,6 @@ To configure an integration with Autodiscovery, use the following parameters:
 | `<INSTANCE_CONFIG>`  | Yes      | A part of the `<INIT_CONFIG>`, these are the configuration parameters listed under `instances:` in your `conf.yaml` and required for any integrations you're enabling.         |
 | `<LOG_CONFIG>`  | Yes      | A part of the `<INIT_CONFIG>`, these are the configuration parameters listed under `logs:` in your `conf.yaml` and define the logs you're sending to Datadog.        |
 
-[**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][4]
-
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
 * [Kubernetes pod annotations](?tab=kubernetes#configuration)
@@ -711,7 +709,6 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [1]: /agent/docker/integrations/
 [2]: /getting_started/integrations/#configuring-agent-integrations
 [3]: /agent/guide/secrets-management/
-[4]: /integrations/#cat-autodiscovery
 [5]: /integrations/ceph/
 [6]: /integrations/varnish/#autodiscovery
 [7]: /integrations/postfix/

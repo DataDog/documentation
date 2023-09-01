@@ -35,12 +35,16 @@ title: 도커, containerd, Podman을 위한 도커 에이전트
 
 Datadog 도커(Docker) 에이전트는 호스트 [에이전트][1]의 컨테이너화된 버전입니다. 도커(Docker) 에이전트는 도커(Docker), containerd, Podman 런타임을 지원합니다. 공식 [도커(Docker) 이미지][2]는 도커(Docker) Hub, GCR 및  ECR-Public에서 사용할 수 있습니다.
 
+<div class="alert alert-warning">도커(Docker) 허브는 2023년 7월 10일부터 데이터독의 도커(Docker) 허브 레지스트리에 대한 다운로드 속도 제한을 시행할 예정입니다. 레지스트리에서 이미지를 다운로드하면 제한 할당량에 따라 제한이 적용됩니다.<br/><br/>
+
+Datadog는 Datadog 에이전트와 클러스터 에이전트 구성을 업데이트하여 다운로드 속도 제한이 적용되지 않는 다른 레지스트리에서 가져오도록 권장하고 있습니다. 자세한 내용은<a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경"을 참조하세요</a>.</div>
+
 이미지는 64비트 x86 및 Arm v8 아키텍처에서 사용할 수 있습니다.
 
-| ECR-Public    | Docker Hub          | GCR        |
-|----------------|--------------|-----------|
-| [에이전트 v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          | [에이전트 v6+][2]<br>`docker pull datadog/agent`  | [에이전트 v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
- |[에이전트 v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [에이전트 v5][5]<br>`docker pull datadog/docker-dd-agent` | [에이전트 v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
+| [에이전트 v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [에이전트 v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [에이전트 v6+][2]<br>`docker pull datadog/agent`          | 
+| [에이전트 v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [에이전트 v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [에이전트 v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
 CLI 명령은 Docker 런타임에 대한 명령입니다. containerd 런타임인 경우 `docker`를 `nerdctl`로 대체하며, Podman 런타임의 경우 `podman`으로 대체합니다.
@@ -88,8 +92,7 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 ECR-Public인 경우:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=
-<DATADOG_API_KEY>public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 {{% /tab %}}
@@ -146,7 +149,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 | `DD_HOSTNAME_FILE`        | 일부 환경에서는 호스트 이름 자동 감지가 적절하지 않으며, 환경 변수로 값을 설정할 수 없습니다. 이러한 경우, 호스트의 파일을 사용하여 적절한 값을 제공할 수 있습니다. `DD_HOSTNAME`이 비어 있지 않은 값으로 설정된 경우, 이 옵션은 무시됩니다.                                              |
 | `DD_TAGS`            | 스페이스로 구분된 호스트 태그. 예를 들어: `key1:value1 key2:value2`.                                                                                                                                                                                                                                                                 |
 | `DD_SITE`            | 메트릭, 트레이스 및 로그에 대한 목적지 사이트입니다. Datadog 사이트를 `{{< region-param key="dd_site" >}}`으로 설정합니다. 기본값은 `datadoghq.com`입니다.                                                                                                                                                                                                 |
-| `DD_DD_URL`          | 제출 메트릭에 대한 URL을 덮어쓰기 위한 추가적인 설정입니다.                                                                                                                                                                                                                                                                                      |
+| `DD_DD_URL`          | 제출 메트릭에 대한 URL을 덮어쓰기 위한 부수적인 설정입니다.                                                                                                                                                                                                                                                                                      |
 | `DD_URL`(6.36+/7.36+)            | `DD_DD_URL`에 대한 별칭입니다. `DD_DD_URL`이(가) 이미 설정된 경우 무시합니다.                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | 에이전트는 기본적으로 동시에 모든 검사를 실행합니다(기본값 = `4` 러너). 순차적으로 검사를 실행하려면 값을 `1`로 설정합니다. 많은 검사(또는 느린 검사)를 실행하는 경우 `collector-queue` 구성 요소가 밀려서 상태 검사에 실패할 수 있습니다. 동시에 검사를 실행하려면 러너의 수를 늘립니다. |
 | `DD_APM_ENABLED`             | 트레이스 수집을 활성화합니다. 기본값은 `true`입니다. 추가적인 트레이스 수집 환경 변수에 대한 자세한 내용은 [도커(Docker) 애플리케이션 추적][14]을 참조하세요.   |
@@ -160,7 +163,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 |---------------------|-------------------------------------------------------------------|
 | `DD_PROXY_HTTP`     | `http` 요청에 대해 프록시로 사용할 수 있는 HTTP URL                |
 | `DD_PROXY_HTTPS`    | `https` 요청에 대해 프록시로 사용할 수 있는 HTTPS URL              |
-| `DD_PROXY_NO_PROXY` | 프록시를 사용하지 않으며 공백으로 구분된 URL 목록. |
+| `DD_PROXY_NO_PROXY` | 프록시를 사용하지 않아야 하며, 공백으로 구분된 URL 목록. |
 
 프록시 설정에 대한 자세한 정보는, [에이전트 v6 프록시 설명서][15]를 참조하세요.
 
@@ -181,7 +184,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 | 환경 변수                     | 설명                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | 다른 컨테이너에서 DogStatsD 패킷 수신(커스텀 메트릭 전송에 필요)                                                                       |
-| `DD_HISTOGRAM_PERCENTILES`       | 컴퓨팅을 위한 히스토그램 백분위수(공백으로 구분)입니다. 기본값은 `0.95`입니다.                                                                         |
+| `DD_HISTOGRAM_PERCENTILES`       | 계산을 위한 히스토그램 백분위수(공백으로 구분)입니다. 기본값은 `0.95`입니다.                                                                         |
 | `DD_HISTOGRAM_AGGREGATES`        | 히스토그램은 계산을 위해 집계됩니다(공백으로 구분). 기본값은 "max median avg count"입니다.                                                          |
 | `DD_DOGSTATSD_SOCKET`            | 수신할 Unix 소켓 경로입니다. `rw` 마운트된 볼륨에 있어야 합니다.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Unix 소켓 메트릭을 위한 컨테이너 감지 및 태깅을 활성화합니다.                                                                                            |
@@ -215,7 +218,7 @@ Datadog은 도커(Docker), 쿠버네티스(Kubernetes), ECS, Swarm, Mesos, Nomad
 |--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_CONTAINER_INCLUDE`         | 포함할 컨테이너의 허용 목록(스페이스로 구분)입니다. 모두 포함하려면 `.*` 을 사용하세요. 예: `"image:image_name_1 image:image_name_2"`, `image:.*` OpenShift 환경 내에서 ImageStream을 사용하는 경우, 이미지 대신 컨테이너 이름을 사용하세요. 예: "name:container_name_1 name:container_name_2", name:.* |
 | `DD_CONTAINER_EXCLUDE`         | 제외할 컨테이너의 차단 목록(스페이스로 구분)입니다. `.*` 을 사용해 모두 제외합니다. 예: `"image:image_name_3 image:image_name_4"` (**참고**: 이 변수는 자동 탐지에만 적용됨.), `image:.*`                                                                                                        |
-| `DD_CONTAINER_INCLUDE_METRICS` | 포함하려는 메트릭의 컨테이너 허용 목록                                                                                                                                                                                                                                                                |
+| `DD_CONTAINER_INCLUDE_METRICS` | 포함하려는 메트릭의 컨테이너 허용 목록입니다.                                                                                                                                                                                                                                                                |
 | `DD_CONTAINER_EXCLUDE_METRICS` | 제외하려는 메트릭의 컨테이너 차단 목록입니다.                                                                                                                                                                                                                                                                |
 | `DD_CONTAINER_INCLUDE_LOGS`    | 포함하려는 로그의 컨테이너 허용 목록입니다.                                                                                                                                                                                                                                                                   |
 | `DD_CONTAINER_EXCLUDE_LOGS`    | 제외하려는 로그의 컨테이너 차단 목록입니다.                                                                                                                                                                                                                                                                   |
@@ -261,11 +264,11 @@ Datadog은 도커(Docker), 쿠버네티스(Kubernetes), ECS, Swarm, Mesos, Nomad
 | NTP         | [NTP][32]     |
 | 업타임      | [시스템][28]  |
 
-### 이벤트
+### 이벤트 
 
 도커(Docker) 에이전트는 에이전트가 시작되거나 재시작될 때 Datadog에 이벤트를 보냅니다.
 
-### 서비스 점검
+### 서비스 검사
 
 **datadog.agent.up**: <br>
 에이전트가 Datadog에 연결할 수 없는 경우 `CRITICAL`을 반환하고, 그렇지 않은 경우 `OK`를 반환합니다.

@@ -32,7 +32,7 @@ Datadog APM for PHP は、ホスト OS や PHP ランタイム、特定の PHP �
 | <span id="support-eol">サポート終了 (EOL)</span>        |  サポートなし。このバージョンはまだ使用可能ですが、バグ修正は提供されません。                                                                                                  |
 
 
-PHP APM は以下のバージョンの PHP に対応しています。
+PHP APM は以下のバージョンの PHP (ZTS と NTS の両方) に対応しています。
 
 <div class="alert alert-info">
 <strong>注:</strong>
@@ -98,6 +98,7 @@ Datadog はデフォルトで、**すべての PHP Web フレームワークを�
 | CodeIgniter    | 3.x                  | PHP 7+                     | 一般的な Web トレース             |
 | Drupal         |                      | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
 | FuelPHP        | 1.1                  | PHP 7+                     | 一般的な Web トレース             |
+| Laminas        |                      | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |     
 | Laravel        | 4.2、5.x、6.x        | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
 | Laravel 8      | 8.x (トレーサー `0.52.0+`) | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
 | Lumen          |   5.2+                 | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
@@ -106,12 +107,10 @@ Datadog はデフォルトで、**すべての PHP Web フレームワークを�
 | Phalcon        | 1.3、3.4             | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
 | RoadRunner     | 2.x                  | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
 | Slim           | 2.x、3.x、4.x        | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Symfony 3      | 3.3、3.4             | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Symfony 4      | 4.x                  | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Symfony 5      | 5.x (トレーサー `0.50.0+`) | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
+| Symfony        | 2.x、3.3、3.4、4.x、5.x、6.x | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
 | WordPress      | 4.x、5.x             | PHP 7+                     | フレームワークレベルのインスツルメンテーション |
 | Yii            | 1.1、2.0             | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
-| Zend Framework | 1.12                 | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
+| Zend Framework | 1.12、1.21           | サポートされているすべての PHP バージョン | フレームワークレベルのインスツルメンテーション |
 | Zend Framework | 2.x                  | サポートされているすべての PHP バージョン | 一般的な Web トレース             |
 
 このリストにウェブフレームワークがない場合でも、トレーサーの最新リリースではそのまま使用できます。
@@ -125,7 +124,8 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 | モジュール          | バージョン | サポートの種類    |
 |:----------------|:---------|:----------------|
 | CakePHP Console | 2.x      | 完全対応 |
-| Laravel Artisan | 5.x      | 完全対応 |
+| Laravel Artisan | 5.x、8.x | 完全対応 |
+| Symfony CLI     | 4.x、5.x、6.x | 完全対応 |
 
 追加 CLI ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
@@ -136,12 +136,15 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 | Amazon RDS (PDO または MySQLi 使用)                                        | *(対応する PHP)*      | 完全対応 |
 | Elasticsearch                                                           | 1+                         | 完全対応 |
 | Eloquent                                                                | Laravel 対応バージョン | 完全対応 |
+| Laravel キュー                                                          | Laravel 対応バージョン | 完全対応 |
+| Memcache                                                                | *(対応する PHP)*      | 完全対応 |
 | Memcached                                                               | *(対応する PHP)*      | 完全対応 |
 | MongoDB - [mongo][4] 拡張機能を使用                                      | 1.4.x                      | 完全対応 |
 | MySQLi                                                                  | *(対応する PHP)*      | 完全対応 |
-| PDO (MySQL、PostgreSQL、MariaDB)                                        | *(対応する PHP)*      | 完全対応 |
+| PDO                                                                     | *(対応する PHP)*      | 完全対応 |
 | PhpRedis                                                                | 3、4、5                    | PHP 7、8        |
 | Predis                                                                  | 1.1                        | 完全対応 |
+| SQLSRV                                                                  | *(対応する PHP)*      | 完全対応 |
 
 追加データストアに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
@@ -149,9 +152,10 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 
 | モジュール     | バージョン              | サポートの種類    |
 |:-----------|:----------------------|:----------------|
+| Amqp       | 2.x、3.x              | PHP 7.1+        |
 | Curl       | *(対応する PHP)* | 完全対応 |
-| Guzzle     | 5.x                   | 完全対応 |
-| Guzzle     | 6.x                   | 完全対応 |
+| Guzzle     | 5.x、6.x、7.x         | 完全対応 |
+
 
 ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
@@ -165,11 +169,11 @@ Datadog では、PHP ウェブフレームワークのより詳細なトレー�
 
 ### PCNTL
 
-Datadog は、[pcntl][7] を使ってフォークされたプロセスのトレースをサポートしません。`pcntl_fork` のコールが検出されると、フォークされたプロセスのトレースは無効化されます。メインプロセスはまだトレースすることができます。
+Datadog は、[pcntl][7] を使ってフォークされたプロセスのトレースをサポートしています。`pcntl_fork` のコールが検出されると、専用のスパンが作成され、フォークされたプロセスがインスツルメントされます。これは `DD_TRACE_FORKED_PROCESS` で無効にすることができます。詳細については、[ライブラリの構成ページ][9]を参照してください。
 
 アプリケーションが `pcntl_unshare(CLONE_NEWUSER);` を実行し、トレーサーがインストールされている場合、アプリケーションは致命的にクラッシュします。これは、`CLONE_NEWUSER` を持つ `unshare` がプロセスを[スレッド化しない][8]ことを要求し、PHP トレーサーが別スレッドを使用してメインプロセスをブロックせずに Datadog Agent にトレースを送信するために起こります。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -181,3 +185,4 @@ Datadog は、[pcntl][7] を使ってフォークされたプロセスのトレ�
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
+[9]: /ja/tracing/trace_collection/library_config/php/#environment-variable-configuration

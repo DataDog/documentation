@@ -3,6 +3,9 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: ドキュメント
   text: 基本的な Agent の利用方法
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
@@ -57,7 +60,7 @@ Agent メトリクスの全リストは、[Agent メトリクス][3]のインテ
 | メモリ      | [System][4]  | すべて                |
 | ネットワーク     | [Network][6] | すべて                |
 | NTP         | [NTP][7]     | すべて                |
-| アップタイム      | [System][4]  | すべて                |
+| アップタイム      | [System][4]  | All                |
 | ファイル処理 | [System][4]  | Mac 以外のすべて     |
 | ロード        | [System][4]  | Windows 以外のすべて |
 | Docker      | [Docker][8]  | Docker             |
@@ -95,7 +98,7 @@ Agent は 15 秒ごとにホストデータを収集し、環境全体で何が�
 
 **注**: このチュートリアルでは、Ubuntu オペレーティングシステムを使用しています。サポートされているプラットフォームの全リストは、[基本的な Agent の利用方法][17]ページを参照してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog UI で、**Integrations &gt; Agent** に移動し、Ubuntu を選択して、Ubuntu 用の Agent インストールページに移動します。Datadog Agent をホストにインストールするには、そのページにある 1 行のインストールコマンド (以下に示す例) を使用し、[Datadog API キー][16]で更新します。
 

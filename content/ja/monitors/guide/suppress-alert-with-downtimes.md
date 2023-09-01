@@ -1,14 +1,18 @@
 ---
-title: ダウンタイム時のアラートを停止する
-kind: ガイド
+aliases:
+- /ja/monitors/guide/supress-alert-with-downtimes
 further_reading:
-  - link: api/v1/downtimes/
-    tag: Documentation
-    text: ダウンタイム API リファレンス
-  - link: /monitors/downtimes/
-    tag: Documentation
-    text: ダウンタイムに関するドキュメント
+- link: api/v1/downtimes/
+  tag: ドキュメント
+  text: ダウンタイム API リファレンス
+- link: /monitors/downtimes/
+  tag: ドキュメント
+  text: ダウンタイムに関するドキュメント
+kind: ガイド
+title: ダウンタイム時のアラートを停止する
 ---
+
+
 ## 概要
 
 ダウンタイムを使用して、スケジュールされたメンテナンス、テスト、オートスケーリングイベント中の不要なアラートを停止しましょう。
@@ -215,7 +219,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 [Manage Downtime ページ][1]を開いて新しいダウンタイムを追加し、`recurring` を選択します。
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule ダウンタイム"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.jpg" alt="rrule ダウンタイム" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -227,6 +231,6 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 [1]: https://docs.datadoghq.com/ja/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/ja/api/v1/authentication/
-[3]: https://docs.datadoghq.com/ja/monitors/downtimes/?tab=bymonitorname
+[3]: https://docs.datadoghq.com/ja/monitors/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html

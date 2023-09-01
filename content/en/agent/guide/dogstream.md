@@ -64,7 +64,7 @@ If your custom log parser is not working, the first thing to check are the Agent
 * If all goes well you should see `dogstream: parsing {filename} with {function name} (requested {config option text})`.
 
 <div class="alert alert-warning">
-To test that dogstreams are working, append a line-don't edit an existing one-to any log file you've configured the Agent to watch. The Agent only tails the end of each log file, so it doesn't notice any changes you make elsewhere in the file.
+To test that dogstreams are working, append a line-don't edit an existing one-to any log file you've configured the Agent to watch. The Agent only <a href="/glossary/#tail">tails</a> the end of each log file, so it doesn't notice any changes you make elsewhere in the file.
 </div>
 
 ### Writing parsing functions

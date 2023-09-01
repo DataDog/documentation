@@ -5,6 +5,9 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: ドキュメント
   text: アプリケーショントレースの収集
+- link: /agent/amazon_ecs/data_collected/#metrics
+  tag: Documentation
+  text: ECS メトリクスの収集
 kind: documentation
 title: Amazon ECS ログ収集
 ---
@@ -18,7 +21,7 @@ Datadog Agent 6+ は、コンテナからログを収集します。ECS コン�
 - コンテナが*その*コンテナ内に隔離されたログファイルを作成している場合、Agent コンテナがこれらのログファイルにアクセスできるように、いくつかの[追加手順](#log-file-within-a-container)を実行する必要があります。
 - コンテナが[ログを CloudWatch に送信するために `awslogs` ロギングドライバー][9]を使用している場合、これらのログは Agent から見えません。代わりに、これらのログを収集するために、[AWS ログ収集インテグレーション][10]のいずれかを使用します。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 ### ECS タスク定義
 

@@ -39,7 +39,6 @@ Datadog will sign a Business Associate Agreement (BAA) with customers that trans
 These features are not available to customers who have signed Datadog's BAA:
 
 * Users cannot request support through chat.
-* Notifications from Log Monitors cannot include log samples.
 * You cannot [share][5] logs, security signals, or traces from the explorer through web integrations.
 * Security rules cannot include triggering group-by values in notification title.
 * Security rules cannot include message template variables.
@@ -65,17 +64,19 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog organizations
     logs_config:
       logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
     ```
-    **Note**: The port must be included in the configuration.
+    **Note**: The port must be included in the configuration. PCI compliance uses HTTP log forwarding only. If you are using the Agent, you should [enforce HTTP transport][5].
+    
 
 If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
 
-To enable PCI compliance for APM, see [PCI DSS compliance for APM][5].
+To enable PCI compliance for APM, see [PCI DSS compliance for APM][6].
 
 [1]: /getting_started/site/
 [2]: /help/
 [3]: mailto:success@datadoghq.com
 [4]: /account_management/audit_trail/#setup
-[5]: /tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
+[5]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
+[6]: /tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
 
 {{< /site-region >}}
 

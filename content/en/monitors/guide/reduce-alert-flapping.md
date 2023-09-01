@@ -2,7 +2,7 @@
 title: Reduce alert flapping
 kind: guide
 further_reading:
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 aliases:

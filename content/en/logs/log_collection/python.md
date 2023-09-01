@@ -19,11 +19,14 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "Documentation"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'  
 ---
 
 ## Overview
 
-To send your Python logs to Datadog, configure a Python logger to log to a file on your host and then tail that file with the Datadog Agent.
+To send your Python logs to Datadog, configure a Python logger to log to a file on your host and then [tail][12] that file with the Datadog Agent.
 
 ## Configure your logger
 
@@ -56,7 +59,7 @@ Once [log collection][7] is enabled, set up [custom log collection][8] to tail y
 
       - type: file
         path: "<PATH_TO_PYTHON_LOG>.log"
-        service: "<YOUR_APPLICATION>"
+        service: "<SERVICE_NAME>"
         source: python
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -97,3 +100,4 @@ Once this is done, the log should have the following format:
 [9]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: /logs/log_configuration/parsing/
 [11]: /logs/explorer/#overview
+[12]: /glossary/#tail

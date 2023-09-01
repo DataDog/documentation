@@ -64,7 +64,7 @@ Agent バージョン < 6.11 の場合
 
 その後、[Agent を再起動][1]します。
 
-{{< img src="agent/windows_python_package.png" alt="Windows Python パッケージ"  >}}
+{{< img src="agent/windows_python_package.png" alt="Windows Python パッケージ" >}}
 
 [1]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}

@@ -14,7 +14,7 @@ algolia:
   tags: ['agent flare']
 ---
 
-If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
+You can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings. **Confirm the upload of the archive to immediately send it to Datadog support**.
 
@@ -131,7 +131,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 | Platform      | Command                                                                     |
 |---------------|-----------------------------------------------------------------------------|
-| Kubernetes    | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Kubernetes    | `kubectl exec -n <NAMESPACE> -it <CLUSTER_POD_NAME> -- datadog-cluster-agent flare <CASE_ID>` |
 | Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}
@@ -152,4 +152,4 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
