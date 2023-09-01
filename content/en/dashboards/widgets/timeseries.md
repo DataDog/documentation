@@ -81,7 +81,7 @@ With the event overlay, you can quickly see how actions within the organization 
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events.
 
 Use the same query format as for the [Event Explorer][8], for example:
 
@@ -96,15 +96,15 @@ Use the same query format as for the [Event Explorer][8], for example:
 To add markers for additional data sets, click **Add Marker** in the **Markers** section.
 
 1. Select a Line or Range and input a value or a range or values.
-2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line. 
-3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox. 
+2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
+3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox.
 
 ### Y-Axis controls
 
 Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis in order to:
 
 * Clip the y-axis to specific ranges.
-* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove the "outliers" series.
+* Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
 The following configuration options are available:

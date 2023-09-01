@@ -283,8 +283,8 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule

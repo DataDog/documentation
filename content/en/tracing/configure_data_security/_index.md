@@ -247,7 +247,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Http" %}}
 
-HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
+HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http` or `web`:
 
 ```yaml
 apm_config:
@@ -261,8 +261,8 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string`: If true, obfuscates query strings in URLs.
-* `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+* `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
+* `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
 
 
 [1]: /tracing/glossary/#spans

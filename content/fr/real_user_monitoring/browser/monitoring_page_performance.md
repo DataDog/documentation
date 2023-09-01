@@ -51,7 +51,7 @@ Les [signaux Web essentiels de Google][5] désignent trois métriques visant à 
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Performances de chargement | Moment où l'objet DOM le plus volumineux est affiché dans la fenêtre d'affichage (à savoir, visible à l'écran) lors du chargement de la page.         | < 2,5 s       |
 | [First Input Delay][8]        | Interactivité    | Délai entre le moment où l'utilisateur interagit pour la première fois avec la page et le moment où le navigateur répond à cette interaction.             | < 100 ms      |
-| [Cumulative Layout Shift][9]  | Stabilité visuelle | Nombre de mouvements de page inattendus causés par le chargement de contenu dynamique (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur `0`. | < 0,1        |
+| [Cumulative Layout Shift][9]  | Stabilité visuelle | Nombre de mouvements de page inattendus causés par le chargement de contenu dynamique (par exemple, des publicités tierces). Lorsqu'aucun décalage ne se produit, cette métrique a pour valeur 0. | < 0,1        |
 
 ## Toutes les métriques de performance
 
