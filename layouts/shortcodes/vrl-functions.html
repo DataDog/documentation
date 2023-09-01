@@ -27,15 +27,16 @@
               <p class="font-semibold"> {{ i18n "required" | default "required" }}</p>
             </div>
           </div>
-          {{ range . }}
           <div class="row">
-            <div class="col-12">
-              <div class="row">
+          {{ range . }}
+
+            <div class="col-12 first-column">
+              <div class="row first-row ">
                   <div class="col-2 column">
                       <p> {{ .name | default "" }}</p>
                   </div>
                   <div class="col-2 column">
-                      <p> {{ .type | default "" }}</p>
+                      <p> {{ delimit .type ", " | default "" }}</p>
                   </div>
                   <div class="col-3 column">
                       <p> {{ .description | default "" | markdownify }}</p>
@@ -48,8 +49,9 @@
                   </div>
               </div>
             </div>
-          </div>
+
           {{ end }}
+            </div>
         </div>
       </div>
     {{ end }}
