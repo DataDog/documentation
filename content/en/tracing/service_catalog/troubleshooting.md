@@ -33,7 +33,7 @@ Adding metadata for RUM services is not supported.
  
 If you have many services that share the same metadata, you do not need separate `service.datadog.yaml` files for each one. You can define multiple services in a single `service.datadog.yaml` file by separating each service with a `---` separator. Copy and paste the shared metadata for the relevant dd-service entities. 
 
-## Monitors associated are not displayed in the ‘Setup Guidance’ tab
+## Associated monitors not displayed in the Setup Guidance section
 
 Service Catalog associates monitors to services with `service` and [primary tags][3] in APM. 
 
