@@ -40,7 +40,7 @@ Customize the visualization of cell values for each column with Column Formattin
 * Text formatting: replace cells with alias text values to improve readability.
 * Visualize data: Choose between **Number**, **Trend**, and **Bar** to track progress of your metrics and events over multiple groups. Trends are based on the selected timeframe. 
 
-{{< img src="dashboards/widgets/table/column_viz_conditional_format.png" alt="Configuration to view visualizations in a column on Table widget with conditional formatting" style="width:100%;" >}}
+{{< img src="dashboards/widgets/table/column_formatting.png" alt="Configuration to view Number, Trend, and Bar visualizations in a column" style="width:90%;" >}}
 
 Add conditional formatting to visualizations. Click **+ Add Rule** or **+ Add Conditional Format**.
 * Threshold formatting: highlight cells with colors when specific value ranges are met. **Note**: for Trends, the graph is formatted based on whether the query meets the threshold, **not** the datapoint displayed.
@@ -50,7 +50,6 @@ Add conditional formatting to visualizations. Click **+ Add Rule** or **+ Add Co
 
 [Context links][10] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
 
-
 ## N/A values
 
 Columns in the table widget are queried independently from one another. Overlapping groups with matching names are joined realtime to form the rows of the table. As a result of that process, there might be situations with no total overlap, showing N/A cells. To mitigate this:
@@ -59,9 +58,7 @@ Columns in the table widget are queried independently from one another. Overlapp
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
-
-The dedicated [widget JSON schema definition][9] for the table widget is:
+This widget can be used with the **[Dashboards API][8]**. See the following table for the [widget JSON schema definition][9]:
 
 {{< dashboards-widgets-api >}}
 
