@@ -169,7 +169,7 @@ Each incoming status value is mapped as follows:
 
 Define the log status remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/severity_remapper_processor.png" alt="Log severity remapping" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
