@@ -1,15 +1,16 @@
 {{ $errors := $.Site.Data.reference.errors | default (dict) }}
+{{ $regexToFixMdLinks := `\[([^\[]+)\](\(.*\))` }}
 {{ range $code, $obj := $errors}}
   <div class="py-3" style="border-bottom:2px solid #DADADA">
     <h2>{{ $obj.code }} {{ $obj.title }}</h2>
-    <p>{{ (replaceRE `\[([^\[]+)\](\(.*\))` "$1" $obj.description) | markdownify }}</p>
+    <p>{{ (replaceRE $regexToFixMdLinks "$1" $obj.description) | markdownify }}</p>
     {{ with $obj.rationale }}
       <strong>Rationale</strong>
-      <p>{{ (replaceRE `\[([^\[]+)\](\(.*\))` "$1" .) | markdownify }}</p>
+      <p>{{ (replaceRE $regexToFixMdLinks "$1" .) | markdownify }}</p>
     {{ end }}
     {{ with $obj.resolution }}
       <strong>Resolution</strong>
-      <p>{{ (replaceRE `\[([^\[]+)\](\(.*\))` "$1" .) | markdownify }}</p>
+      <p>{{ (replaceRE $regexToFixMdLinks "$1" .) | markdownify }}</p>
     {{ end }}
     {{ with $obj.examples }}
       <p>
