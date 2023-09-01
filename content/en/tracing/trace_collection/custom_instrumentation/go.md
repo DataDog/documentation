@@ -204,7 +204,7 @@ You can configure the propagation of context for distributed traces by injecting
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page.
 
 ## Further Reading
 

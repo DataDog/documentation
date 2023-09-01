@@ -3,9 +3,12 @@ aliases:
 - /ja/continuous_integration/pipelines_setup/
 - /ja/continuous_integration/explore_pipelines/
 further_reading:
-- link: /continuous_integration/troubleshooting/
+- link: /monitors/types/ci/
   tag: ドキュメント
-  text: トラブルシューティング CI
+  text: CI Pipeline モニターの作成
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
+  text: CI の表示に関するトラブルシューティング
 kind: documentation
 title: Datadog におけるパイプラインの可視化
 ---
@@ -14,11 +17,14 @@ title: Datadog におけるパイプラインの可視化
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-パイプラインは、CI メニューの [Pipelines][1] ページに表示されます。
+## 概要
+
+[**Pipelines**][1] ページは、パイプラインからの重要なメトリクスと結果を表示することで、CI 状態のパイプラインファーストビューを提供します。パイプラインを保守しているのではなく、関連するコードを保守しているため、最も気になるパフォーマンス問題やテストの失敗を調査するのに役立ちます。
 
 ## セットアップ
 
-{{< whatsnext desc="Datadog でパイプラインの可視化を設定するための CI プロバイダーを選択します。" >}}
+{{< whatsnext desc="Datadog で Pipeline Visibility を設定するための CI プロバイダーを選択します。" >}}
+    {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
@@ -29,6 +35,13 @@ title: Datadog におけるパイプラインの可視化
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}カスタムコマンド{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}カスタムタグとメトリクス{{< /nextlink >}}
 {{< /whatsnext >}}
+
+CI プロバイダーが対応していない場合は、[公開 API エンドポイント][2]から Pipeline Visibility を設定してみてください。
+
+## パイプラインの確認
+
+パイプラインを確認するには、**CI** > **Pipelines** に移動します。
+
 ## パイプラインの健全性の概要
 
 Pipelines ページには、選択した時間枠での各パイプラインのデフォルトブランチの集計統計と、最新のパイプライン実行のステータスが表示されます。このページを使用して、すべてのパイプラインを確認し、その健全性をすばやく確認します。Pipelines ページには、通常は `main` や `prod` などの名前が付けられた_デフォルト_ブランチのメトリクスが表示されます。
@@ -41,7 +54,7 @@ Pipelines ページには、選択した時間枠での各パイプラインの�
 
 特定のパイプラインをクリックすると、_Pipeline Details_ ページが表示されます。このページには、指定した時間枠で選択したパイプラインのデータのビューが表示され、デフォルト以外のブランチを表示できます。
 
-{{< img src="ci/ci-single-pipeline.png" alt="単一パイプラインの詳細" style="width:100%;">}}
+{{< img src="ci/pipeline_branch_overview_updated.png" alt="単一パイプラインの詳細" style="width:100%;">}}
 
 時間の経過に伴う実行の合計と失敗、ビルド期間のパーセンタイル、ステージごとの内訳に費やされた合計時間など、選択したパイプラインに関する情報を取得します。ステージとジョブの要約テーブルもあるため、期間、全体的な実行時間の割合、または失敗率の観点からそれらをすばやく並べ替えることができます。
 
@@ -70,13 +83,13 @@ CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > doc
 CI プロバイダーでジョブログ収集がサポートされ、有効になっている場合、関連するログイベントはパイプライン実行ビューの _Logs_ タブで確認できます。
 
 **注**: ジョブログの収集は、限られたプロバイダーのみでサポートされています。
-- [GitHub Actions][2]
-- [GitLab][3] (ベータ版)
-- [Jenkins][4]
+- [GitHub Actions][3]
+- [GitLab][4] (ベータ版)
+- [Jenkins][5]
 
 ## パイプライン実行の詳細とトレース
 
-[Pipeline Executions][5] ページで、選択した時間枠でのパイプラインの実行に関する集計データを確認できます。検索フィールドとファセットを使用して、調査したい実行までリストをスコープします。上部のボタンを使用して、リストを変更してパイプライン、ステージ、またはジョブを表示します。
+[Pipeline Executions][6] ページで、選択した時間枠でのパイプラインの実行に関する集計データを確認できます。検索フィールドとファセットを使用して、調査したい実行までリストをスコープします。上部のボタンを使用して、リストを変更してパイプライン、ステージ、またはジョブを表示します。
 
 以下は、最もアクティブなパイプラインの継続時間、失敗したパイプラインの継続時間、パイプラインの実行時間を可視化する 3 つのグラフで、それぞれ継続時間の累積に切り替えるオプションがあります。これらのグラフは左上で選択したレベル (`Pipeline`、`Stage`、`Job` など) にスコープされます。
 
@@ -84,13 +97,17 @@ CI プロバイダーでジョブログ収集がサポートされ、有効に�
 
 各パイプラインの実行は、ステージとジョブの情報を含むトレースとして報告されます。リスト内の実行をクリックして、個々のパイプライン、ステージ、ジョブ実行トレースにアクセスします (Pipeline Details ページからパイプラインの実行をクリックするのと同様)。
 
-または、[**Analytics**][6] ボタンをクリックして、パイプライン実行データをインタラクティブにフィルタリング、グループ化すれば、質問への回答やダッシュボードでの共有に使用することができます。
+または、[**Analytics**][7] ボタンをクリックして、パイプライン実行データをインタラクティブにフィルタリング、グループ化すれば、質問への回答やダッシュボードでの共有に使用することができます。
 
 {{< img src="ci/ci-pipelines-execution.png" alt="パイプライン実行の分析" style="width:100%;">}}
 
-## CI パイプラインデータについて伝達する
+## CI パイプラインデータの使用
 
-[ダッシュボード][7]と[ノートブック][8]でウィジェットを作成すると、CI パイプラインデータを利用できます。
+[ダッシュボード][8]または[ノートブック][9]を作成する際、検索クエリで CI パイプラインデータを使用すると、視覚化ウィジェットのオプションが更新されます。詳細については、[ダッシュボード][10]と[ノートブックのドキュメント][11]を参照してください。
+
+## パイプラインデータのアラート
+
+**Export** ボタンをクリックすると、[**Pipelines Executions** ページ][6]または [**Test Runs** ページ][13]の [CI Pipeline モニター][12]に検索クエリをエクスポートできます。
 
 ## その他の参考資料
 
@@ -98,10 +115,15 @@ CI プロバイダーでジョブログ収集がサポートされ、有効に�
 
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /ja/continuous_integration/pipelines/github/#enable-log-collection
-[3]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
-[4]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: https://app.datadoghq.com/notebook/list
+[2]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
+[3]: /ja/continuous_integration/pipelines/github/#enable-log-collection
+[4]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
+[5]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
+[6]: https://app.datadoghq.com/ci/pipeline-executions
+[7]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: /ja/dashboards
+[11]: /ja/notebooks
+[12]: /ja/monitors/types/ci
+[13]: https://app.datadoghq.com/ci/test-runs

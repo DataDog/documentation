@@ -11,6 +11,8 @@ assets:
       check: pulsar.active_connections
       metadata_path: metadata.csv
       prefix: pulsar.
+    process_signatures:
+    - java org.apache.pulsar.PulsarStandaloneStarter
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: pulsar
@@ -31,7 +33,7 @@ draft: false
 git_integration_title: pulsar
 integration_id: pulsar
 integration_title: Pulsar
-integration_version: 1.2.0
+integration_version: 1.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -69,7 +71,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Pulsar チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

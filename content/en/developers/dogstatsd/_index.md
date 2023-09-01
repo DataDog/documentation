@@ -18,6 +18,9 @@ further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
+    - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+      tag: "Blog"
+      text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
@@ -36,6 +39,8 @@ DogStatsD is available on Docker Hub and GCR:
 | Docker Hub                                       | GCR                                                       |
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ## How it works
 
@@ -189,7 +194,7 @@ To set [tag cardinality][6] for the metrics collected using origin detection, se
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /getting_started/tagging/assigning_tags/#environment-variables
 [7]: /metrics/custom_metrics/
 {{% /tab %}}
@@ -302,8 +307,11 @@ Or manually clone the repository at [github.com/DataDog/php-datadogstatsd][1] an
 
 {{< programming-lang lang=".NET" >}}
 
-- Get [the package from NuGet][1] to install it.
+Install the package directly using the Nuget CLI or get [the PackageReference from NuGet][1]:
 
+```shell
+dotnet add package DogStatsD-CSharp-Client
+```
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
@@ -344,6 +352,10 @@ require 'datadog/statsd'
 # Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
+
+<div class="alert alert-info">
+  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
+</div>
 
 {{< /programming-lang >}}
 
@@ -441,10 +453,6 @@ using (var dogStatsdService = new DogStatsdService())
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-info">
-  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
-</div>
 
 ### Client instantiation parameters
 
@@ -553,18 +561,22 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /metrics/custom_metrics/
-[6]: /events/guides/dogstatsd/
+[6]: /service_management/events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /developers/dogstatsd/datagram_shell/

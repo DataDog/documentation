@@ -36,11 +36,11 @@ further_reading:
 
 - **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][14] for self-hosted GitLab runners
 
-- **Custom spans**: Configure custom spans
+- **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages, and job spans
 
-- **Custom pre-defined tags**: Configure [custom tags][10] and metrics at runtime
+- **Custom tags and metrics at runtime**: Configure [custom tags][13] and metrics at runtime
 
-- **Parameters**: Set custom `env` or `service` [parameters][13]
+- **Parameters**: Set custom `env` or `service` parameters
 
 - **Pipeline failure reasons**: Identify pipeline failure reasons from [error messages][15]
 
@@ -232,7 +232,7 @@ See the table below for the message and domain correlated with each error type. 
 <!-- | ---------- | ---------- | ---------- | -->
 <!-- | :---        |    :----:   |          ---: | -->
 
-## Enable job log collection (beta)
+## Enable job log collection
 
 The following GitLab versions support collecting job logs:
 * GitLab.com (SaaS)
@@ -264,7 +264,7 @@ Log files larger than 1GiB are truncated.
 [9]: /logs/
 [10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#enable-job-log-collection-beta
-[13]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#integrating-through-webhooks
+[12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[13]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures

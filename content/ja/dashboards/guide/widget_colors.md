@@ -32,13 +32,13 @@ Consistent パレットは、データ系列に一貫して同じ色を割り当
 
 {{< img src="dashboards/guide/colors/5_consistent_interface.png" alt="Consistent パレットの棒グラフ。" style="width:90%;" >}}
 
-互換性のあるタグの小さなサブセットについては、Datadog は自動的にデータの各系列の背後にある意味を認識します。この場合、Consistent カラーパレットは Semantic カラーパレットとして表示され、色で意味を表現します。例えば、赤色はエラーを表す場合があります。
+互換性のあるタグの小さなサブセットについては、Datadog は自動的にデータの各系列の背後にある意味を認識します。この場合、Consistent カラーパレットは Semantic カラーパレットとして表示され、色で意味を表現します。例えば、赤色はエラーを表す場合があります。サポートされているタグの一覧については、[互換性のあるセマンティックタグ][2]を参照してください。
 
 {{< img src="dashboards/guide/colors/6_semantic_interface.png" alt="Semantic パレットの棒グラフ。" style="width:90%;" >}}
 
 ### Diverging パレット
 
-データセット内の値の差を強調する必要がある場合は、Diverging パレットを使用します。Diverging パレットは、自然な順序と自然な中間点を持つデータに最も適しています。例: メモリ使用率の変化量、-100% から +100% まで、自然な中点は 0%
+データセット内の値の差を強調する必要がある場合は、Diverging パレットを使用します。Diverging パレットは、自然な順序と自然な中間値を持つデータに最も適しています。例: メモリ使用率の変化量、-100% から +100% まで、自然な中間値は 0%
 
 Diverging パレットには、Cool (緑と青)、Warm (黄色とオレンジの中間) の 2 種類があります。
 
@@ -73,3 +73,4 @@ Datadog では、色覚異常、視力低下、コントラスト感度などの
 {{< img src="dashboards/guide/colors/visual_accessibility.png" alt="利用可能な視覚的アクセシビリティオプション: デフォルト、プロタノピア (緑と赤の区別がつきにくい)、デュータノピア (赤、緑、黄の区別がつきにくい)、トリタノピア (青と緑の区別がつきにくい)、ハイコントラスト (低視力用に色の区切りを増やす)、低彩度 (視覚化するためにコントラストを下げる)。" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/personal-settings/preferences
+[2]: /ja/dashboards/guide/compatible_semantic_tags

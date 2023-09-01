@@ -26,7 +26,7 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 
 When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:100%;" >}}
 
 ## Configuring a graph
 
@@ -48,7 +48,7 @@ Select your visualization from the available [widgets][3].
 
 Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
 Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Summary][6] page.
 
@@ -56,11 +56,10 @@ Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or
 
 Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="Filter the graph with the 'from' field, using template variables and boolean logic" style="width:100%;" >}}
 
-You can also use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters" style="width:75%;" >}} 
+- Use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries.
+- Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][16].
 
 To learn more about tags, see the [Tagging documentation][8].
 
@@ -189,23 +188,6 @@ If you do not enter a title, one is automatically generated based on your select
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
 
-## Configuring an APM stats graph
-
-To configure your graph using APM stats data, follow these steps:
-
-1. [Select your visualization](#select-your-visualization) (same as for Metrics)
-2. [Choose your level of detail](#level-of-detail)
-3. [Choose your parameters](#apm-stats-parameters)
-4. [Title the graph](#create-a-title) (same as for Metrics)
-
-### Level of detail
-Choose what level of detail you want to see statistics for: one or more services, resources, or spans. (Not all of these are available for every widget type.)
-
-### APM stats parameters
-Select the following parameters from the graphing editor: Environment (`env`), Primary tag (`primary_tag`), Service (`service`), and Operation name (`name`).
-
-If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
-
 ## Additional options
 
 ### Event overlays
@@ -248,7 +230,8 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [9]: /metrics/#time-aggregation
 [10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /dashboards/functions/rollup/
-[12]: /dashboards/functions/#apply-functions-optional
+[12]: /dashboards/functions/#function-types
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /logs/explorer/search_syntax/
 [15]: /dashboards/widgets/timeseries/#event-overlay
+[16]: /dashboards/template_variables/

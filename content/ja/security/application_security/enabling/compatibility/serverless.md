@@ -22,13 +22,13 @@ type: multi-code-lang
 ### 対応言語とその要件
 
 Node.js
-: webpack や esbuild を使ってバンドルしている場合は、[Datadog ライブラリを external としてマーク][4]してください。
+: webpack や esbuild を使ってバンドルしている場合は、[特定のバンドラーの指示に従ってください][4]。
 
 Python
 : 
 
 Java
-: 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`) または Java 11 (`java11`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
+: 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
 : Datadog Lambda レイヤーの `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用する場合、[Java Lambda 関数のインスツルメンテーションのアップグレード][3]の手順に従ってください。
 
 Go
@@ -50,8 +50,8 @@ Go
 | ASM の機能                   | 拡張機能の最小バージョン |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> ビジネスロジック API  | Lambda Extension バージョン 39、Serverless プラグインバージョン 5.20.0 で、Node.js、Java、Python、Go、.NET に対応します。 <br/> --> ビジネスロジックの機能は、サービスが構築された言語固有のバージョンに従います。 |
-| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 非対応<br/><br/><br/>     |
-| Risk Management <br/> --> サードパーティの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/> |
+| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 非対応<br/><br/><br/> |
+| Vulnerability Management <br/> --> オープンソースの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/> |
 
 
 <div class="alert alert-info">サポートされていない機能のサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
@@ -69,4 +69,4 @@ ASM Threat Detection は、関数の入力としてのみ HTTP リクエスト�
 [1]: /ja/serverless/distributed_tracing/
 [2]: /ja/serverless/guide/datadog_forwarder_python
 [3]: /ja/serverless/guide/upgrade_java_instrumentation
-[4]: /ja/serverless/guide/serverless_tracing_and_webpack/
+[4]: /ja/serverless/guide/serverless_tracing_and_bundlers/

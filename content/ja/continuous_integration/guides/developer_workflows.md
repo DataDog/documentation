@@ -36,7 +36,7 @@ CI Test Visibility の中の 3 つのエリアから、あらかじめ入力さ�
 3. テスト詳細ビュー
 
 #### コミット概要
-{{< img src="ci/github_issues_light.png" alt="Datadog GitHub 課題プレビュー" style="width:100%;">}}
+{{< img src="ci/github_issues_commit_overview_updated.png" alt="Datadog GitHub 課題プレビュー" style="width:100%;">}}
 
 コミットの概要ページは、特定のブランチから、または特定のテスト内から発見することができます。
 
@@ -44,7 +44,7 @@ CI Test Visibility の中の 3 つのエリアから、あらかじめ入力さ�
 
 #### ブランチ概要
 このページから、`Flaky Tests` テーブルの任意の行をクリックし、`Open issue in GitHub` を選択します。
-{{< img src="ci/github_issues_flaky_light.png" alt="Datadog GitHub 課題の不安定なテストテーブルのプレビュー" style="width:100%;">}}
+{{< img src="ci/github_issues_flaky_test_updated.png" alt="Datadog GitHub 課題の不安定なテストテーブルのプレビュー" style="width:100%;">}}
 
 #### テスト詳細ビュー
 特定のテスト実行の中から、右上の `Actions` ボタンをクリックし、`Open issue in GitHub` を選択します。

@@ -15,7 +15,7 @@ further_reading:
 
 ---
 
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM and Synthetic Monitoring" video="true"  >}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM and Synthetic Monitoring" video="true" >}}
 
 ## Overview
 

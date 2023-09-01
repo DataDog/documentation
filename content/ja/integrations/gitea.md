@@ -31,7 +31,7 @@ draft: false
 git_integration_title: gitea
 integration_id: gitea
 integration_title: Gitea
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -80,7 +80,7 @@ ENABLED = true
 
 詳しくは、公式の[ドキュメント][1]をご覧ください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Gitea インテグレーションは、デフォルトでは [Datadog Agent][3] パッケージに含まれていないため、インストールが必要です。
 

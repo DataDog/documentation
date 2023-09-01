@@ -31,10 +31,10 @@ SQL Server の認証モードの設定方法がわからない場合は、Micros
 **注**: SQL Server に対して上記の変更を行った場合、その変更を有効にする前に SQL Server を再起動する必要があります。
 
 Datadog のあるテスト環境 (Windows 2012 R2、SQL Server 2014 Express) で動作した SQL Server の IP/TCP 設定の一例をご紹介します。
-{{< img src="integrations/faq/sql_server_test_1.png" alt="TCP/IP プロパティウィンドウで、IP アドレスタブを選択します。IP4 セクションは、active yes と enabled no が設定されています。IP アドレスは 127.0.0.1、TCP ダイナミックポートは 1433 に設定されています。TCP ポートは空白のままです。"  >}}
+{{< img src="integrations/faq/sql_server_test_1.png" alt="TCP/IP プロパティウィンドウで、IP アドレスタブを選択します。IP4 セクションは、active yes と enabled no が設定されています。IP アドレスは 127.0.0.1、TCP ダイナミックポートは 1433 に設定されています。TCP ポートは空白のままです。" >}}
 
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="TCP/IP プロパティウィンドウで、IP アドレスタブを選択します。IPAll セクションで、TCP ダイナミックポートを 1433 に設定し、TCP ポートは空白のままです。"  >}}
+{{< img src="integrations/faq/sql_server_test_2.png" alt="TCP/IP プロパティウィンドウで、IP アドレスタブを選択します。IPAll セクションで、TCP ダイナミックポートを 1433 に設定し、TCP ポートは空白のままです。" >}}
 
 ## 空白の接続文字列
 

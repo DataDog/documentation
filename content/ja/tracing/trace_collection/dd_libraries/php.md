@@ -46,7 +46,7 @@ APM で使用される用語の説明は、[公式ドキュメント][3]を参�
 
 PHP トレーサーのオープンソースに対する貢献に関しては、[コントリビューションガイド][4]を参照してください。
 
-### APM に Datadog Agent を構成する
+### APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
@@ -111,6 +111,12 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ```shell
 curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
+```
+
+Alpine Linux をお使いの場合は、インストーラーを実行する前に `libgcc_s` をインストールする必要があります。
+
+```shell
+apk add libgcc
 ```
 
 インストーラーを実行します。

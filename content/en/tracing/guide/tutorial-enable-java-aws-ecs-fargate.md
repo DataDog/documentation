@@ -57,7 +57,7 @@ The sample application is a simple multi-service Java application with two APIs,
 
 The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
 
-Open `terraform/Fargate/global_constants/variables.tf`.  Replace the variable values below with your correct AWS account information:
+Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
 ```
 output "aws_profile" {
@@ -154,7 +154,7 @@ terraform destroy{{< /code-block >}}
 
 Now that you have a working Java application, configure it to enable tracing.
 
-1. Add the Java tracing package to your project. Because the Agent runs on EC2 instances, ensure that the Dockerfiles are configured properly, and there is no need to install anything. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
+1. Edit the dockerfile to add the Java tracing package which is needed by the application to generate traces. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
    RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer

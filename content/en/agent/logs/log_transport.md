@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
   tag: "Documentation"
   text: "Multi-line log aggregation"
-- link: "agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards"
+- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
   tag: "Documentation"
   text: "Tail directories by using wildcards"
 - link: "agent/logs/advanced_log_collection/#global-processing-rules"
@@ -30,7 +30,7 @@ This connectivity test mechanism is only running at Agent startup and only test 
 
 To check which transport is used by the Agent, run the [Agent status command][1].
 
-{{< img src="agent/logs/agent-status.png" alt="Agent status"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Agent status" style="width:70%;">}}
 
 **Notes**:
 
@@ -63,7 +63,7 @@ By default, the Datadog Agent uses the port `443` to send its logs to Datadog ov
 
 **HTTPS log forwarding is the recommended configuration** for the best log collection reliability as the`200` status code is returned by the Datadog storage system:
 
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema" style="width:80%;">}}
 
 Using HTTP, the Agent sends log batches with the following limits:
 

@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don’t see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don't see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ## Language and framework compatibility
 
@@ -22,13 +22,13 @@ code_lang_weight: 90
 ### Supported languages and their requirements
 
 Node.js
-: If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
+: If you are bundling using webpack or esbuild, [follow the specific bundler instructions][4].
 
 Python
 : 
 
 Java
-: To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`) or Java 11 (`java11`) runtimes with at least 1024MB of memory.
+: To fully instrument your serverless application with distributed tracing, your Java Lambda functions must use the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtimes with at least 1024MB of memory.
 : If you use the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the instructions in [Upgrade Instrumentation for Java Lambda Functions][3].
 
 Go
@@ -50,8 +50,8 @@ The following ASM capabilities are supported for serverless, for the specified D
 | ASM capability                   | Minimum extension version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | Supported for Node.js, Java, Python, Go, and .NET with Lambda Extension version 39 and Serverless plugin version 5.20.0. <br/> --> Business logic capabilities follow the language-specific versions in which the service is built. |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/> |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
 
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -69,4 +69,4 @@ ASM Threat Detection supports HTTP requests as function input only. These typica
 [1]: /serverless/distributed_tracing/
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
-[4]: /serverless/guide/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_bundlers/

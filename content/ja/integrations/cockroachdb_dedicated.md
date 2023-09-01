@@ -66,7 +66,7 @@ Datadog の Cockroach Cloud インテグレーションは、Datadog プラッ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cockroach Cloud クラスターに対して Datadog のモニタリングを有効にするには
 

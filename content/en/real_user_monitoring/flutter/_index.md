@@ -8,7 +8,7 @@ further_reading:
   text: Monitor Flutter application performance with Datadog Mobile RUM
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
@@ -37,6 +37,8 @@ To initialize the Datadog Flutter SDK for RUM, see [Setup][3].
 
 ## Automatically track views
 
+### Flutter Navigator v1
+
 The [Datadog Flutter Plugin][4] can automatically track named routes using the `DatadogNavigationObserver` on your MaterialApp:
 
 ```dart
@@ -50,11 +52,56 @@ MaterialApp(
 
 This works if you are using named routes or if you have supplied a name to the `settings` parameter of your `PageRoute`.
 
-Alternatively, you can use the `DatadogRouteAwareMixin` property in conjunction with the `DatadogNavigationObserverProvider` property to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`. 
+If you are not using named routes, you can use `DatadogRouteAwareMixin` in conjunction with the `DatadogNavigationObserverProvider` widget to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`.
+
+### Flutter Navigator v2
+
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [go_router][11], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    // Your route information here
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+)
+```
+
+For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][12].
+
+
+### Renaming Views
+
+For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
+
+```dart
+RumViewInfo? infoExtractor(Route<dynamic> route) {
+  var name = route.settings.name;
+  if (name == 'my_named_route') {
+    return RumViewInfo(
+      name: 'MyDifferentName',
+      attributes: {'extra_attribute': 'attribute_value'},
+    );
+  }
+
+  return defaultViewInfoExtractor(route);
+}
+
+var observer = DatadogNavigationObserver(
+  datadogSdk: DatadogSdk.instance,
+  viewInfoExtractor: infoExtractor,
+);
+```
 
 ## Automatically track resources
 
-Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking of resources and HTTP calls from your RUM views. 
+Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking of resources and HTTP calls from your RUM views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
 
@@ -64,6 +111,8 @@ final configuration = DdSdkConfiguration(
   firstPartyHosts: ['example.com'],
 )..enableHttpTracking()
 ```
+
+**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
 In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `RumConfiguration`.
 
@@ -76,9 +125,14 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /account_management/api-app-keys/#client-tokens 
+[2]: /account_management/api-app-keys/#client-tokens
 [3]: /real_user_monitoring/flutter/#setup
 [4]: https://pub.dev/packages/datadog_flutter_plugin
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
 [7]: /real_user_monitoring/flutter/data_collected/
+[8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
+[10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
+[11]: https://pub.dev/packages/go_router
+[12]: /real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking

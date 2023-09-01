@@ -4,7 +4,6 @@ kind: documentation
 disable_sidebar: true
 aliases:
     - /integrations/verisign_openhybrid/
-    - /integrations/tcp_queue_length/
     - /integrations/snyk/
 description: Gather data from all of your systems, apps, & services
 cascade:
@@ -23,11 +22,25 @@ cascade:
     subcategory: Integrations
     tags: ['ksm']
 - _target:
+    path: /integrations/google_cloud_platform.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['gcp', 'google cloud platform']
+- _target:
     path: /integrations/*.md
   algolia:
     rank: 60
     category: Documentation
     subcategory: Integrations
+- _target:
+    path: /integrations/eks_fargate.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['eks logging']
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

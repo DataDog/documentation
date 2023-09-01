@@ -69,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれています。Squid サーバーに追加でインストールする必要はありません。
 

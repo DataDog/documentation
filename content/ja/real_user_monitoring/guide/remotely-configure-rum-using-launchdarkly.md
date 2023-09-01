@@ -122,7 +122,7 @@ LaunchDarkly の Datadog アプリインテグレーションは、機能フラ�
 
 構成に最初に設定した値を変更する必要がある場合は、いつでも LaunchDarkly 内でフラグを更新することができます。変更を保存すると、すべての新しいフラグ評価には更新された値が適用されます。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/browser#setup

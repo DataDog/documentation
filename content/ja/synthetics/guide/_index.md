@@ -53,6 +53,7 @@ title: Synthetic モニタリングガイド
 
 {{< whatsnext desc="データセキュリティ:" >}}
      {{< nextlink href="synthetics/guide/authentication-protocols/" >}}API やマルチステップ API テストでの認証の使用{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}認証が必要なアプリケーションを監視する{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}ブラウザテストで認証が必要なアプリケーションを監視する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}ブラウザテストにおける多要素認証 (MFA) のための TOTP{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-passkeys/" >}}ブラウザテストでパスキー (FIDO2) を使う{{< /nextlink >}}
 {{< /whatsnext >}}

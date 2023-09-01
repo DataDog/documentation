@@ -49,7 +49,8 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
 **Default**: `true`<br>
-Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.
+Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
+**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -59,7 +60,7 @@ Optional path to a file where configuration properties are provided one per each
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
 **Default**: `null`<br>
-**Example**: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+**Example**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 Dynamically rename services via configuration. Useful for making databases have distinct names across different services.
 
 `dd.writer.type`
@@ -97,7 +98,8 @@ Timeout in seconds for network interactions with the Datadog Agent.
 **Default**: `null`<br>
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
-Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.
+Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
+**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
 
 `dd.trace.request_header.tags`
 : **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
@@ -154,6 +156,16 @@ Used to rename the service name associated with spans to be identified with the 
 **Default**: `false`<br>
 When set to `true` db spans get assigned the instance name as the service name
 
+`dd.trace.elasticsearch.body.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
+**Default**: `false`<br>
+When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
+
+`dd.trace.elasticsearch.params.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**Default**: `true`<br>
+When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
+
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
 **Default**: `true`<br>
@@ -188,6 +200,11 @@ A range of errors can be accepted. By default 5xx status codes are reported as e
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
 When set to `true` query string parameters and fragment get added to web server spans
+
+`dd.http.server.route-based-naming`
+: **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
+**Default**: `true`<br>
+When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
@@ -230,6 +247,11 @@ Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an
 : **Environment Variable**: `DD_JMXFETCH_STATSD_PORT`<br>
 **Default**: `8125`<br>
 StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.
+
+`dd.trace.obfuscation.query.string.regexp`
+: **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+**Default**: `null`<br>
+A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
 
 `dd.integration.opentracing.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
@@ -284,7 +306,7 @@ See how to disable integrations in the [integrations][11] compatibility section.
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping"  >}}
+{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" >}}
 
 #### `dd.tags`
 
@@ -294,7 +316,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.map
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags"  >}}
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags" >}}
 
 #### `dd.trace.span.tags`
 
@@ -304,7 +326,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -ja
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags"  >}}
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags" >}}
 
 #### `dd.trace.jmx.tags`
 
@@ -314,7 +336,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags"  >}}
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags" >}}
 
 #### `dd.trace.methods`
 
@@ -324,7 +346,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods"  >}}
+{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods" >}}
 
 #### `dd.trace.db.client.split-by-instance`
 
@@ -336,11 +358,11 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Dd
 
 DB Instance 1, `webappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
 
-{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1"  >}}
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1" >}}
 
 DB Instance 2, `secondwebappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
 
-{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2"  >}}
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2" >}}
 
 Similarly on the service map, you would now see one web app making calls to two different Postgres databases.
 
@@ -352,7 +374,7 @@ Example with system property:
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/query_string.png" alt="query string"  >}}
+{{< img src="tracing/setup/java/query_string.png" alt="query string" >}}
 
 #### `dd.trace.enabled`
 
@@ -390,7 +412,7 @@ instances:
 
 Would produce the following result:
 
-{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
+{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example" >}}
 
 See the [Java integration documentation][12] to learn more about Java metrics collection with JMX fetch.
 ### Headers extraction and injection
@@ -417,7 +439,7 @@ Available since version 1.9.0
 
 #### Deprecated extraction and injection settings
 
-These extraction and and injection settings for `b3` (both B3 multi header and B3 single header) are deprecated since version 1.9.0.
+These extraction and injection settings have been deprecated in favor of the `dd.trace.propagation.style.inject`, `dd.trace.propagation.style.extract`, and `dd.trace.propagation.style` settings since version 1.9.0. See [Propagating Java Trace Context][13]. The previous `b3` setting for both B3 multi header and B3 single header has been replaced with the new settings `b3multi` and `b3single`.
 
 `dd.propagation.style.inject`
 : **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -448,3 +470,5 @@ Deprecated since version 1.9.0
 [11]: /tracing/compatibility_requirements/java#disabling-integrations
 [12]: /integrations/java/?tab=host#metric-collection
 [13]: /tracing/trace_collection/trace_context_propagation/java/
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services

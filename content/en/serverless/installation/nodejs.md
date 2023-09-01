@@ -5,9 +5,9 @@ further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
       text: 'Configure Serverless Monitoring'
-    - link: '/serverless/guide/serverless_tracing_and_webpack/'
+    - link: '/serverless/guide/serverless_tracing_and_bundlers/'
       tag: 'Documentation'
-      text: 'Node.js Lambda Tracing and Webpack Compatibility'
+      text: 'Node.js Lambda Tracing and Bundlers Compatibility'
     - link: '/serverless/guide/troubleshoot_serverless_monitoring'
       tag: 'Documentation'
       text: 'Troubleshoot Serverless Monitoring'
@@ -23,7 +23,7 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
-<div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
+<div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_bundlers/">mark the Datadog libraries as external</a>.</div>
 
 ## Installation
 
@@ -231,7 +231,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
     ```
 
-    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 3. Redirect the handler function
 
@@ -255,11 +255,143 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+Use this format for your [Terraform resource][1]:
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+
+  layers = [
+    <DATADOG_TRACER_ARN>,
+    <DATADOG_EXTENSION_ARN>
+  ]
+
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+
+  environment {
+    variables = {
+      DD_SITE                     = <DATADOG_SITE>
+      DD_API_KEY_SECRET_ARN       = <API_KEY>
+      DD_LAMBDA_HANDLER           = <LAMBDA_HANDLER>
+    }
+  }
+}
+```
+
+Fill in variables accordingly:
+
+1. Replace `<DATADOG_TRACER_ARN>` with the ARN of the appropriate Datadog tracer depending on your type of region:
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>LAYERS</th>
+        </tr>
+        <tr>
+            <td>Commercial</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-&lt;RUNTIME&gt;:{{< latest-lambda-layer-version layer="node" >}}
+                </code>
+            </td>
+        </tr>
+        <tr>
+            <td>GovCloud</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-&lt;RUNTIME&gt;:{{< latest-lambda-layer-version layer="node" >}}
+                </code>
+                </td>
+        </tr>
+    </table>
+
+   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Node12-x`, `Node14-x`, `Node16-x`, or `Node18-x`.
+
+2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>ARCHITECTURE</th>
+            <th>LAYERS</th>
+        </tr>
+        <tr>
+            <td rowspan=2>Commercial</td>
+            <td>x86_64</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+            </td>
+        <tr>
+            <td>arm64</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+                </td>
+        </tr>
+        <tr>
+            <td rowspan=2>GovCloud</td>
+            <td>x86_64</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+                </td>
+        <tr>
+            <td>arm64</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+            </td>
+        </tr>
+    </table>
+
+3. Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+
+4. Replace `<API_KEY>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, use `DD_API_KEY` instead of `DD_API_KEY_SECRET_ARN` and set the value to your Datadog API key in plaintext.
+
+5. Replace `<LAMBDA_HANDLER>` with your original handler. For example, `myfunc.handler`.
+
+#### Full example
+
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
+
+  layers = [
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:96",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+  ]
+
+  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+
+  environment {
+    variables = {
+      DD_SITE                     = datadoghq.com
+      DD_API_KEY_SECRET_ARN       = "arn:aws..."
+      DD_LAMBDA_HANDLER           = "myfunc.handler"
+    }
+  }
+}
+```
+
+- Set the environment variable DD_LAMBDA_HANDLER to your original handler, for example, `myfunc.handler`.
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+{{% /tab %}}
 {{% tab "Custom" %}}
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Lambda library
 
     The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a JavaScript package.
@@ -304,57 +436,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. Install the Datadog Lambda library
-
-    The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a JavaScript package.
-
-    The minor version of the `datadog-lambda-js` package always matches the layer version. For example, datadog-lambda-js v0.5.0 matches the content of layer version 5.
-
-    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
-
-      ```sh
-      # Use this format for AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
-
-      # Use this format for AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
-      ```
-
-      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Node12-x`, `Node14-x`, `Node16-x` and `Node18-x`.
-
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
-
-      ```
-      npm install datadog-lambda-js dd-trace
-      ```
-
-2. Install the Datadog Lambda Extension
-
-    [Configure the layers][1] for your Lambda function using the ARN in the following format:
-
-    ```sh
-    # Use this format for x86-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for arm64-based Lambda deployed in AWS commercial regions
-    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-    ```
-
-    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-{{< /site-region >}}
-
 3. Redirect the handler function
 
     - Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
@@ -367,6 +448,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
@@ -375,6 +457,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 ## What's next?
 
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
@@ -435,3 +518,5 @@ exports.handler = async (event) => {
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=nodejs
 [5]: /tracing/custom_instrumentation/nodejs/
+[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
+

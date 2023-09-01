@@ -52,18 +52,8 @@ To install and configure the Datadog Serverless Framework plugin:
 2. Enable ASM by updating your `serverless.yml` (or whichever way you set environment variables for your function):
    ```yaml
    environment:
-     DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   For **Go functions only** also add:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
-   ```
-   For **NodeJS or Python functions** also add:
-   ```yaml
-   environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_SERVERLESS_APPSEC_ENABLED: true
    ```
 3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
@@ -77,6 +67,32 @@ To install and configure the Datadog Serverless Framework plugin:
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog tracer:
+   - **Python** 
+       ```sh
+       # Use this format for x86-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+
+          # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          ```
+          Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
+
+   - **Node**   
+       ``` sh
+       # Use this format for AWS commercial regions
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+
+         # Use this format for AWS GovCloud regions
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         ```  
+         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
+        
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
      ```sh
      # In AWS commercial regions
@@ -115,6 +131,33 @@ To install and configure the Datadog Serverless Framework plugin:
 
 {{< site-region region="ap1" >}}
 1. Install the Datadog tracer:
+   - **Python** 
+       ```sh
+       # Use this format for x86-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+
+          # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          ```
+          Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38`, `Python39`, `Python310`, and `Python311`.
+
+   - **Node**   
+       ``` sh
+       # Use this format for AWS commercial regions
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+
+         # Use this format for AWS GovCloud regions
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         ```  
+         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
+  
+
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
      ```sh
      # In AWS commercial regions
@@ -155,20 +198,21 @@ To install and configure the Datadog Serverless Framework plugin:
 3. Enable ASM by adding the following environment variables on your function deployment:
    ```yaml
    environment:
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   For **Go functions only** also add:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
    ```
    For **NodeJS or Python functions** also add:
    ```yaml
    environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
-     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_TRACE_ENABLED: true
    ```
-4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly:
+    - **Node**: Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
+       - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+    - **Python**: Set your function's handler to `datadog_lambda.handler.handler`.
+       - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+
+5. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 

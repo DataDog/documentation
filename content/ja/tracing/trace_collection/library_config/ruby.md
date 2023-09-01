@@ -5,10 +5,14 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-rb/
   tag: GitHub
   text: ソースコード
+- link: /tracing/trace_collection/trace_context_propagation/ruby/
+  tag: Documentation
+  text: トレースコンテキストの伝搬
 kind: documentation
 title: Ruby トレーシングライブラリの構成
 type: multi-code-lang
 ---
+
 コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで[統合サービスタグ付け][1]のセットアップなど、必要に応じてトレーシングライブラリを構成してください。
 
 Ruby トレーシングライブラリの構成については、[Ruby の追加構成][2]を参照してください。

@@ -121,7 +121,7 @@ title: 機密ログデータの管理
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/guide/logs-rbac/
-[2]: /ja/account_management/org_settings/sensitive_data_detection/
+[2]: /ja/sensitive_data_scanner/
 [3]: /ja/account_management/org_settings/
 [4]: /ja/logs/search_syntax/
 [5]: /ja/logs/indexes

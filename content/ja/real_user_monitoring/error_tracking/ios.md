@@ -5,7 +5,7 @@ description: iOS プロジェクトにエラー追跡を設定します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: ブログ
   text: iOS のクラッシュレポートとエラー追跡のご紹介
@@ -100,6 +100,8 @@ Global.rum = RUMMonitor.initialize()
 Datadog に .dSYM ファイルをアップロードすることで、エラーの関連スタックトレースの各フレームのファイルパスと行番号にアクセスすることができるようになります。
 
 アプリケーションがクラッシュし、アプリケーションを再起動すると、iOS SDK は Datadog にクラッシュレポートをアップロードします。
+
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
 #### Datadog CI
 

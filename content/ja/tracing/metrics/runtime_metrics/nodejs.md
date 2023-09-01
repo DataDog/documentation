@@ -3,7 +3,7 @@ aliases:
 - /ja/tracing/runtime_metrics/nodejs
 code_lang: nodejs
 code_lang_weight: 40
-description: Nodejs アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
+description: Node.js アプリケーションのパフォーマンスに関する詳細情報を、トレースに紐づくランタイムメトリクスと共に取得します。
 further_reading:
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: ドキュメント
@@ -15,12 +15,12 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: NodeJS ランタイムメトリクス
+title: Node.js ランタイムメトリクス
 type: multi-code-lang
 ---
 
 <div class="alert alert-warning">
-この機能はクローズドベータ版です。ご使用のアカウントでこの機能を有効にするには、<a href="https://docs.datadoghq.com/help/">サポートチームまでお問い合わせください。</a>
+これは公開ベータ版の機能です。
 </div>
 
 ## 自動コンフィギュレーション
@@ -67,7 +67,7 @@ Kubernetes では、[DogstatsD ポートをホストポートにバインド][4]
 
 APM サービス詳細画面にこれらのメトリクスを表示するだけでなく、Datadog は[デフォルトの Node ランタイムダッシュボード][6]を提供します。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

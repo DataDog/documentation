@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: trek10-coverage-advisor
 app_uuid: 2faacd70-a192-4a28-8b36-e55298d7b3b4
 assets:

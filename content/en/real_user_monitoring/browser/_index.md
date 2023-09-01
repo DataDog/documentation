@@ -23,14 +23,15 @@ The RUM Browser SDK supports all modern desktop and mobile browsers including IE
 To set up RUM Browser Monitoring, create a RUM application:
 
 1. In Datadog, navigate to the [**RUM Applications** page][1] and click the **New Application** button.
-  - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
-  - Choose the installation type for the RUM Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
-  - Define the environment name and service name for your application to use unified service tagging for [RUM & Session Replay][19]. Set a version number for your deployed application in the initialization snippet. For more information, see [Tagging](#tagging).
-  - Set the sampling rate of total user sessions collected and use the slider to set the percentage of total [Browser RUM & Session Replay][11] sessions collected. Browser RUM & Session Replay sessions include resources, long tasks, and replay recordings. For more information about configuring the percentage of Browser RUM & Session Replay sessions collected from the total amount of user sessions, see [Configure Your Setup For Browser and Browser RUM & Session Replay Sampling][21].
-  - Click the **Session Replay Enabled** toggle to access replay recordings in [Session Replay][17].
-  - Select a [privacy setting][18] for Session Replay in the dropdown menu.
+   - Enter a name for your application and click **Generate Client Token**. This generates a `clientToken` and an `applicationId` for your application.
+   - Choose the installation type for the RUM Browser SDK: [npm](#npm), or a hosted version ([CDN async](#cdn-async) or [CDN sync](#cdn-sync)).
+   - Define the environment name and service name for your application to use unified service tagging for [RUM & Session Replay][19]. Set a version number for your deployed application in the initialization snippet. For more information, see [Tagging](#tagging).
+   - Set the sampling rate of total user sessions collected and use the slider to set the percentage of total [Browser RUM & Session Replay][11] sessions collected. Browser RUM & Session Replay sessions include resources, long tasks, and replay recordings. For more information about configuring the percentage of Browser RUM & Session Replay sessions collected from the total amount of user sessions, see [Configure Your Setup For Browser and Browser RUM & Session Replay Sampling][21].
+   - Click the **Session Replay Enabled** toggle to access replay recordings in [Session Replay][17].
+   - Select a [privacy setting][18] for Session Replay in the dropdown menu.
 2. Deploy the changes to your application. Once your deployment is live, Datadog collects events from your users' browsers.
 3. Visualize the [data collected][2] in [dashboards][3] or create a search query in the [RUM Explorer][16].
+4. (Optional) Initialize the RUM SDK with the `allowedTracingUrls` parameter to [Connect RUM and Traces][12] if you want to start linking requests from your web and mobile applications to their corresponding backend traces. See the full list of [initialization parameters](#initialization-parameters).
 
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
@@ -67,7 +68,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -90,7 +93,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -111,7 +116,9 @@ datadogRum.init({
   sampleRate: 100,
   premiumSampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -132,7 +139,9 @@ datadogRum.init({
   sampleRate: 100,
   replaySampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -167,8 +176,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
-  })
+     });
+    window.DD_RUM.startSessionReplayRecording();
+   })
 </script>
 ```
 {{</ site-region>}}
@@ -180,8 +190,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -193,7 +203,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -219,7 +230,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -245,7 +257,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -271,7 +284,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -297,7 +311,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -329,7 +344,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -342,8 +358,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -355,7 +371,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -381,7 +398,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -407,7 +425,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -433,7 +452,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -459,7 +479,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -489,7 +510,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -502,8 +524,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -513,7 +535,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -537,7 +560,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -561,7 +585,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -585,7 +610,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -609,7 +635,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -639,7 +666,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -652,8 +680,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -663,7 +691,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -687,7 +716,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -711,7 +741,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -735,7 +766,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -759,7 +791,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -795,7 +828,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -816,7 +851,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -837,7 +874,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -858,7 +897,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -879,7 +920,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -900,7 +943,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -927,7 +972,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -948,7 +995,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -969,7 +1018,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -990,7 +1041,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1011,7 +1064,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1032,7 +1087,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1057,7 +1114,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1076,7 +1135,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1095,7 +1156,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1114,7 +1177,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1133,7 +1198,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1152,7 +1219,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1177,7 +1246,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1196,7 +1267,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1215,7 +1288,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1234,7 +1309,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1253,7 +1330,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1272,7 +1351,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1456,8 +1537,13 @@ Telemetry data (such as errors and debug logs) about SDK execution is sent to Da
 
 `excludedActivityUrls`
 : Optional<br/>
-**Type:** List<br/>
+**Type**: List<br/>
 A list of request origins ignored when computing the page activity. See [How page activity is calculated][16].
+
+`workerUrl`
+: Optional<br/>
+**Type**: String<br/>
+URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
@@ -1569,10 +1655,11 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
 [14]: /getting_started/site/
-[15]: /getting_started/tagging/#defining-tags
+[15]: /getting_started/tagging/#define-tags
 [16]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [17]: /real_user_monitoring/session_replay/
 [18]: /real_user_monitoring/session_replay/privacy_options
 [19]: /getting_started/tagging/using_tags
 [20]: /real_user_monitoring/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
+[22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay

@@ -67,7 +67,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -90,7 +92,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -111,7 +115,9 @@ datadogRum.init({
   sampleRate: 100,
   premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -132,7 +138,9 @@ datadogRum.init({
   sampleRate: 100,
   replaySampleRate: 100, // 含まれない場合 - デフォルト 100
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -167,8 +175,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
-  })
+     });
+    window.DD_RUM.startSessionReplayRecording();
+   })
 </script>
 ```
 {{</ site-region>}}
@@ -180,8 +189,8 @@ datadogRum.init({
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -193,7 +202,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -219,7 +229,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -245,7 +256,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -271,7 +283,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -297,7 +310,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -329,7 +343,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -342,8 +357,8 @@ datadogRum.init({
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -355,7 +370,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -381,7 +397,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -407,7 +424,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -433,7 +451,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -459,7 +478,8 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -489,7 +509,8 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -502,8 +523,8 @@ datadogRum.init({
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -513,7 +534,8 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -537,7 +559,8 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -561,7 +584,8 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -585,7 +609,8 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -609,7 +634,8 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -639,7 +665,8 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -652,8 +679,8 @@ datadogRum.init({
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -663,7 +690,8 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -687,7 +715,8 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -711,7 +740,8 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -735,7 +765,8 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -759,7 +790,8 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -795,7 +827,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -816,7 +850,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -837,7 +873,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -858,7 +896,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -879,7 +919,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -900,7 +942,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -927,7 +971,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -948,7 +994,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -969,7 +1017,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -990,7 +1040,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1011,7 +1063,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1032,7 +1086,9 @@ datadogRum.init({
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1057,7 +1113,9 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1076,7 +1134,9 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1095,7 +1155,9 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1114,7 +1176,9 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1133,7 +1197,9 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1152,7 +1218,9 @@ datadogRum.init({
       sampleRate: 100,
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1177,7 +1245,9 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1196,7 +1266,9 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1215,7 +1287,9 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1234,7 +1308,9 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1253,7 +1329,9 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1272,7 +1350,9 @@ datadogRum.init({
       sampleRate: 100,
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}

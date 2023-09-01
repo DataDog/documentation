@@ -35,7 +35,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 2.5.0
+integration_version: 2.6.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -71,7 +71,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Envoy チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

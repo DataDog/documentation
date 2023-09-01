@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - metrics without limits
 aliases:
 - /ja/metrics/faq/metrics-without-limits/
 - /ja/metrics/guide/metrics-without-limits-getting-started/
@@ -9,6 +12,9 @@ further_reading:
 - link: /observability_pipelines/guide/custom-metrics-governance
   tag: ドキュメント
   text: 観測可能性パイプラインを使用したカスタムメトリクスの管理
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます
 kind: documentation
 title: Metrics without LimitsTM
 ---
@@ -23,7 +29,7 @@ Metrics without LimitsTM は、アプリ内ですべてのメトリクスタイ�
 
 ### タグの構成
 
-任意のメトリクス名をクリックすると、その詳細サイドパネルが表示されます。次に、**Manage Tags** -> **"Include Tags... “** をクリックして、ダッシュボードとモニターでクエリ可能にするタグを構成します。タグの構成モーダルには、過去 30 日間にダッシュボード、ノートブック、モニター、および API を介してアクティブにクエリされたタグの許可リストがデフォルトであらかじめ入力されています (アイコンが付いた青で表示されます)。また、独自の追加タグを含めることもできます。**Save** を選択する前に、この潜在的なタグの構成から生じる、インデックスされたカスタム メトリクスの新しい推定量が表示されます。
+任意のメトリクス名をクリックすると、その詳細サイドパネルが表示されます。次に、**Manage Tags** -> **"Include Tags..."** をクリックして、ダッシュボードとモニターでクエリ可能にするタグを構成します。タグの構成モーダルには、過去 30 日間にダッシュボード、ノートブック、モニター、および API を介してアクティブにクエリされたタグの許可リストがデフォルトであらかじめ入力されています (アイコンが付いた青で表示されます)。また、独自の追加タグを含めることもできます。**Save** を選択する前に、この潜在的なタグの構成から生じる、インデックスされたカスタム メトリクスの新しい推定量が表示されます。
 
 {{< img src="metrics/mwl_tag_config.mp4" alt="タグのコンフィギュレーション" video=true >}}
 
@@ -84,7 +90,7 @@ Agent やコードレベルの変更を必要とせず、いつでも集計の�
 
 - Metrics without LimitsTM 用の[ロールベースのアクセス制御][11]を使用して、課金に影響するこの機能を使用するアクセス許可を持つユーザーを制御することもできます。
 
-- 監査イベントを使用すると、カスタムメトリクスのスパイクと相関する可能性のある、作成されたタグコンフィギュレーションまたはパーセンタイル集計を追跡できます。[Events Stream][12] で "tags:audit" および “queryable tag configuration” または “percentile aggregations” を検索します。
+- 監査イベントを使用すると、カスタムメトリクスのスパイクと相関する可能性のある、作成されたタグコンフィギュレーションまたはパーセンタイル集計を追跡できます。[Events Stream][12] で "tags:audit" および "queryable tag configuration" または "percentile aggregations" を検索します。
 
 \*Metrics without Limits は Datadog, Inc. の商標です。
 

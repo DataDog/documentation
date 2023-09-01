@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: "/real_user_monitoring/error_tracking/"
     tag: Documentation
-    text: "Error Tracking"
+    text: "Error tracking"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"

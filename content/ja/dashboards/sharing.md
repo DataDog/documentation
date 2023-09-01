@@ -31,8 +31,9 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 
 ダッシュボード全体を公開して共有するには、次の URL を生成します。
 
-1. ダッシュボードのページで、右上の設定歯車をクリックします。
-2. **Generate public URL** を選択します。
+
+1. ダッシュボードのページで、右上にあるエクスポートアイコンをクリックします。
+2. **Configure public URL** を選択すると、*Sharing: On* ポップアップモーダルが表示されます。
 3. **Time & Variable Settings** で、タイムフレームの希望オプションと、ユーザーがそれを変更できるかどうか、および選択可能なテンプレート変数に表示されるタグを構成します。
 4. URL をコピーして、**Done** をクリックします。
 
@@ -42,8 +43,8 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 
 1 つ以上の特定のメールアドレスを承認してダッシュボードページを表示するには
 
-1. ダッシュボードのページで、右上の設定歯車をクリックします。
-2. **Generate public URL** を選択します。
+1. ダッシュボードのページで、右上にあるエクスポートアイコンをクリックします。
+2. **Configure public URL** を選択すると、*Sharing: On* ポップアップモーダルが表示されます。
 3. このダッシュボードにアクセスできるユーザーを指定するには、**Only specified people** を選択します。
 4. ダッシュボードを共有したい人のメールアドレスを入力します。
 5. **Time & Variable Settings** で、タイムフレームの希望オプションと、ユーザーがそれを変更できるかどうか、および選択可能なテンプレート変数に表示されるタグを構成します。
@@ -62,9 +63,9 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 
 1. [ダッシュボードリスト][1]に移動します。
 2. アクセスを無効にするダッシュボードを選択します。
-3. 右上の設定歯車をクリックします。
-4. **Configure sharing** をクリックします。
-5. **Revoke public URL** をクリックします。
+3. 右上のエクスポートアイコンをクリックします。
+4. **Configure public URL** をクリックします。
+5. **Revoke URL** をクリックします。
 
 ### リフレッシュ間隔
 
@@ -89,13 +90,13 @@ URL またはメールリンクでダッシュボードを共有すると、共�
 
 個々の（埋め込み）グラフの共有に使用されたキーを無効にするには
 
-1. [**Integrations -> Embeds**][4] に移動して、すべての共有グラフのリストを表示します。
+1. [**Organization Settings -> Public Sharing -> Shared Graphs**][4] に移動して、すべての共有グラフのリストを表示します。
 2. 共有を停止するグラフの横にある **Revoke** ボタンをクリックします。
 3. グラフは **Revoked** リストに移動します。
 
 ### 制限の適用
 
-ダッシュボードへのアクセスを IP アドレスごとに制限できます。[Datadog サポート][5]にメールを送信し、IP アドレスにリスト機能が含まれるよう依頼すると、管理者はこの機能を使用して、共有ダッシュボードにアクセスできる IP アドレスのリストを提供できます。これが有効にした後に、組織の[セキュリティ][6]ページに対する制限を管理します。
+ダッシュボードへのアクセスを IP アドレスごとに制限できます。[Datadog サポート][5]にメールを送信し、IP アドレスにリスト機能が含まれるよう依頼すると、管理者はこの機能を使用して、共有ダッシュボードにアクセスできる IP アドレスのリストを提供できます。これが有効にした後に、組織の [Public Sharing][6] ページに対する制限を管理します。
 
 ### ダークモード
 
@@ -117,16 +118,16 @@ Datadog には、共有グラフ（埋め込み）とやり取りするための
 | [Embed の有効化][11]       | 特定の埋め込みを有効にします。                                             |
 | [Embed の無効化][12]       | 特定の埋め込みを無効にします。                                             |
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: /ja/dashboards/#timeboards
-[3]: /ja/dashboards/#screenboard
-[4]: https://app.datadoghq.com/account/settings#embeds
+[3]: /ja/dashboards/#screenboards
+[4]: https://app.datadoghq.com/organization-settings/public-sharing/shared-graphs
 [5]: /ja/help/
-[6]: https://app.datadoghq.com/account/org_security
+[6]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [7]: /ja/api/v1/embeddable-graphs/
 [8]: /ja/api/v1/embeddable-graphs/#get-all-embeds
 [9]: /ja/api/v1/embeddable-graphs/#create-embed

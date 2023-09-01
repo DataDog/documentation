@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - udp
+  - udp テスト
+  - udp テスト
 description: ホストで UDP 接続をシミュレートする
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
@@ -140,7 +148,7 @@ UDP テストの URL およびアサーションで、[**Settings** ページで
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 

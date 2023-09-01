@@ -21,7 +21,7 @@ To collect more complex custom metrics with the SQL Server integration, use the 
 
 | Option        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| query         | Yes      | The SQL to execute. This can be a simple statement or a multi-line script. All rows of the results are evaluated. Use pipe (`|`) if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| query         | Yes      | The SQL to execute. This can be a simple statement or a multi-line script. All rows of the results are evaluated. Use the pipe character (`\|`) if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | columns       | Yes      | A list representing each column ordered sequentially from left to right.<br><br>There are two required pieces of data:<br>  - **`name`**: The suffix to append to the `metric_prefix` to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: The submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
 | tags          | No       | A list of static tags to apply to each metric.
 
@@ -75,16 +75,14 @@ custom_queries:
       - name: localisation
         type: tag
     tags:
-      - query:custom
+      - 'query:custom'
 ```
 
 After you update the SQL Server YAML file, [restart the Datadog Agent][7].
 
 #### Validation
 
-To verify your results, search for the metrics using the [Metrics Explorer][8]:
-
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="Screenshot of Datadog's Metrics Explorer. On the left, the two items under 'Graph' are 'postgresql.employee_age' and 'postgresql.employee_salary.' On the right are two graphs showing employee age and employee salary."  >}}
+To verify your results, search for the metrics using the [Metrics Explorer][8].
 
 #### Debugging
 

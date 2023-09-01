@@ -1,5 +1,5 @@
 ---
-title: Session Replay Privacy Options
+title: Session Replay Browser Privacy Options
 kind: documentation
 description: Describes privacy controls available in Session Replay and how to set privacy options
 aliases:
@@ -18,7 +18,7 @@ Session Replay provides privacy controls to ensure organizations of any scale do
 
 Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected.
 
-By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK.
+By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
 ## Configuration
 
@@ -47,7 +47,7 @@ datadogRum.init({
 datadogRum.startSessionReplayRecording();
 ```
 
-After updating your configuration, you can override elements of your HTML documents with the following privacy options:
+After updating your configuration, you can override elements of your HTML documents with the below privacy options.
 
 ### Mask user input mode
 
@@ -58,6 +58,7 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 **Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
 
 ### Mask mode
+
 Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
@@ -103,6 +104,7 @@ In order to protect end-user privacy, regardless of your privacy configuration, 
 
 ### Completely hide an element
 
+
 `hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
 If you are concerned about the number of visible elements in sensitive fields, enable `hidden` for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
@@ -110,6 +112,8 @@ If you are concerned about the number of visible elements in sensitive fields, e
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
 {{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
+
+
 
 ### Override the action name
 

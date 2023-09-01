@@ -159,9 +159,10 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
 
-            // カウンターとゲージは同じデータグラムで送信されます
+            // Counter と Gauge は同じデータグラムで送信されます
             dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });
             dogStatsdService.Gauge("example_metric.gauge", 100, tags: new[] { "environment:dev" });
         }

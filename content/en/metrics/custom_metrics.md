@@ -17,9 +17,15 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to unlock the full potential of metrics"
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
+- link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+  tag: "Blog"
+  text: "Monitor your Linux web apps on Azure App Service with Datadog"
 algolia:
   tags: ['custom metrics']
 ---

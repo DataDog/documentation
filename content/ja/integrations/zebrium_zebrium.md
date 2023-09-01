@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zebrium-zebrium
 app_uuid: 3e2a6d39-2057-4cb5-bc0e-5610a43afaf7
 assets: {}

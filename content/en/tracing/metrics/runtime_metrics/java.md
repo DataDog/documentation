@@ -25,7 +25,7 @@ JVM metrics collection is enabled by default for Java tracer v0.29.0+. It can be
 
 JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
 
-{{< img src="tracing/runtime_metrics/jvm-runtime.png" alt="JVM Runtime"  >}}
+{{< img src="tracing/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" >}}
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 

@@ -50,7 +50,7 @@ Salesforce Commerce Cloud は、マルチテナント型のクラウドベース
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 インストールは必要ありません。
 

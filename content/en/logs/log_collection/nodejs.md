@@ -19,12 +19,15 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'  
 ---
 
 
 ## Configure your logger
 
-To send your logs to Datadog, log to a file and tail that file with your Datadog Agent. Use the [Winston][1] logging library to log from your Node.js application.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use the [Winston][1] logging library to log from your Node.js application.
 
 Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
 
@@ -85,7 +88,7 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({
             name: '<LOGGER_NAME>',
             filename: '<FILE_NAME>.log',
-      json: true,
+            json: true,
             level: 'info'
         })
     ]
@@ -123,7 +126,7 @@ logs:
 
   - type: file
     path: "<FILE_NAME_PATH>.log"
-    service: nodejs
+    service: <SERVICE_NAME>
     source: nodejs
     sourcecategory: sourcecode
 ```
@@ -205,3 +208,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [11]: /logs/log_configuration/parsing/?tab=matchers
 [12]: /logs/explorer/#overview
 [13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+[14]: /glossary/#tail

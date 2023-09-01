@@ -24,8 +24,6 @@ algolia:
 
 If you deploy the Datadog Agent using Helm chart v2.7.0+ or Datadog Operator v0.7.0+, the Cluster Agent is enabled by default.
 
-If you are using other methods, like a DaemonSet, follow these steps:
-
 {{< tabs >}}
 {{% tab "Helm" %}}
 
@@ -73,7 +71,7 @@ When set manually, this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
 To set up the Datadog Cluster Agent using a DaemonSet:
 1. [Configure Cluster Agent RBAC permissions](#configure-cluster-agent-rbac-permissions).

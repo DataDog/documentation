@@ -1,31 +1,26 @@
 ---
-title: ホストマップウィジェット
-kind: documentation
-description: Datadog のホストマップをダッシュボードに表示する
 aliases:
-  - /ja/graphing/widgets/hostmap/
+- /ja/graphing/widgets/hostmap/
+description: Datadog のホストマップをダッシュボードに表示する
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: ホストマップウィジェット
 ---
+
 ホストマップウィジェットは、メインの[ホストマップ][1]ページから利用できる同じ視覚化機能を使用して、ホスト全体のあらゆるメトリクスをグラフ化します。
 
-{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="ホストマップ"  >}}
+{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="ホストマップ" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="ホストマップの設定"  >}}
+{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="ホストマップの設定" >}}
 
 ### コンフィギュレーション
 
-ホストマップウィジェットの構成は、メインの[ホストマップページ][1]に似ています。
+ホストマップウィジェットの構成は、メインの[ホストマップ][1]ページに似ています。
 
 1. **Type**: `hosts` と `containers` のどちらを表示するかを選択します。
 2. **Filter by**: 表示するホストまたはコンテナを選択します。
@@ -43,7 +38,7 @@ further_reading:
 
 `Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
 
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
+{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
 
 オプションで、サイズと配置を定義できます。
 

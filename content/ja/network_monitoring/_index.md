@@ -5,6 +5,9 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Network%20Monitoring
   tag: リリースノート
   text: Datadog Network Monitoring の最新リリースをチェック！ (アプリログインが必要です)。
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: ネットワークのパフォーマンスをよりよく監視するためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/network-performance-monitoring
   tag: ブログ
   text: Datadog ネットワークパフォーマンスモニタリングのご紹介

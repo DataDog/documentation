@@ -425,7 +425,7 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [2]: /tracing/trace_collection/dd_libraries/java/
 [3]: /account_management/api-app-keys/
 [4]: /tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer

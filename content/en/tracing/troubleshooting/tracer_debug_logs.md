@@ -167,23 +167,26 @@ GlobalSettings.SetDebugEnabled(true);
 
 Logs files are saved in the following directories by default. Use the `DD_TRACE_LOG_DIRECTORY` setting to change these paths.
 
-| Platform | Path                                      |
-|----------|-------------------------------------------|
-| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-| Linux    | `/var/log/datadog/dotnet/`                |
-| Azure App Service | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
+| Platform                                             | Path                                             |
+|------------------------------------------------------|--------------------------------------------------|
+| Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
+| Linux                                                | `/var/log/datadog/dotnet/`                       |
+| Linux (when using [Kubernetes library injection][1]) | `/datadog-lib/logs`                              |
+| Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
-For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
+
+For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 
 There are two types of logs that are created in these paths:
 1. **Logs from native code:** In 1.26.0 and higher, these logs are saved as `dotnet-tracer-native-<processname>-<processid>.log`. From version 1.21.0 to 1.25.x, these logs were saved as `dotnet-tracer-native.log`. In 1.20.x and older versions, this was stored as `dotnet-profiler.log`.
 2. **Logs from managed code:** In 1.21.0 and higher, these logs are saved `dotnet-tracer-managed-<processname>-<date>.log`. In 1.20.x and older versions, this was stored as `dotnet-tracer-<processname>-<date>.log`.
 
 
-
-[1]: /tracing/setup/dotnet/#configuration
+[1]: /tracing/trace_collection/library_injection/?tab=kubernetes
+[2]: /tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}

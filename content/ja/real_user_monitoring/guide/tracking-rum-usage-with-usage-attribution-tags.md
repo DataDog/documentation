@@ -38,13 +38,13 @@ datadogRum.setGlobalContextProperty('department', 'marketing');
 
 ```javascript
 //Android
-GlobalRum.addAttribute('department', 'marketing')
+GlobalRumMonitor.addAttribute('department', 'marketing')
 
 //iOS
 Global.rum.addAttribute(forKey: 'department', value: 'marketing')
 ```
 
-**注**: いくつかのタグはデフォルトで含まれています (`service`、`env`、`version`、`application.id`)。それ以外のタグについては、上記の方法でグローバルコンテキストを設定します。
+**注**: いくつかのタグはデフォルトで含まれています (`service`、`env`、`version`、`application.id`、`application.name`)。それ以外のタグについては、上記の方法でグローバルコンテキストを設定します。
 
 このステップをデプロイすると、新しい RUM セッションは、追加したタグに従って追跡されます。
 

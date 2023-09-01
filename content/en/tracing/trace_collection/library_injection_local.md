@@ -28,14 +28,15 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 ## Requirements
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][3]
+* Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
-* Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
-
-**Note:** Python uWSGI applications are not supported.
-
+* For Python, uWSGI applications are not supported at this time.
+* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails or Hanami applications at this time.
+* Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
+
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AWS ECR:
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
@@ -43,6 +44,8 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AW
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
+| .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][13] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][23] | [hub.docker.com/r/datadog/dd-lib-ruby-init][24] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][25] |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
@@ -50,7 +53,7 @@ You can pull the tracing library from a different registry by changing it to `do
 
 ## Configure instrumentation libraries injection
 
-For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, or Python instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
+For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, Python, .NET or Ruby instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
 
 1. Enable Datadog Admission Controller to mutate your pods.
 2. Annotate your pods to select which instrumentation library to inject.
@@ -74,14 +77,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 2 - Annotate your pods for library injection
@@ -93,11 +97,16 @@ To select your pods for library injection, annotate them with the following, cor
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
-- [Java][13]
-- [Javascript][14]
-- [Python][15]
+- [Java][16]
+- [Javascript][17]
+- [Python][18]
+- [.NET][19]
+  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
+- [Ruby][20]
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
@@ -110,31 +119,30 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
-    annotations:
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 3 - Tag your pods with Unified Service Tags
 
-With [Unified Service Tags][16], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
+With [Unified Service Tags][21], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
 Set Unified Service tags by using the following labels:
 
 ```yaml
-...
-    metadata:
-        labels:
-            tags.datadoghq.com/env: "<ENV>"
-            tags.datadoghq.com/service: "<SERVICE>"
-            tags.datadoghq.com/version: "<VERSION>"
-...
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
 ```
 
 **Note**: It is not necessary to set the _environment variables_ for universal service tagging (`DD_ENV`, `DD_SERVICE`, `DD_VERSION`) in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
@@ -149,18 +157,20 @@ metadata:
     tags.datadoghq.com/env: "prod" # Unified service tag - Deployment Env tag
     tags.datadoghq.com/service: "my-service" # Unified service tag - Deployment Service tag
     tags.datadoghq.com/version: "1.1" # Unified service tag - Deployment Version tag
-...
-template:
-  metadata:
-    labels:
+  # (...)
+spec:
+  template:
+    metadata:
+      labels:
         tags.datadoghq.com/env: "prod" # Unified service tag - Pod Env tag
         tags.datadoghq.com/service: "my-service" # Unified service tag - Pod Service tag
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
-    annotations:
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 4 - Apply the configuration
@@ -178,7 +188,22 @@ If the injection was successful you can see an `init` container called `datadog-
 
 Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
-The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][17]).
+The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][22]).
+
+### Troubleshooting installation issues
+
+If the application pod fails to start, run `kubectl logs <my-pod> --all-containers` to print out the logs and compare them to the known issues below.
+
+#### .NET installation issues
+##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
+
+- **Problem**: The pod annotation for the dotnet library version included a `-musl` suffix, but the application container runs on a Linux distribution that uses glibc.
+- **Solution**: Remove the `-musl` suffix from the dotnet library version.
+
+##### `Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /datadog-lib/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so)`
+
+- **Problem**: The application container runs on a Linux distribution that uses musl-libc (for example, Alpine), but the pod annotation does not include the `-musl` suffix.
+- **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
 [1]: /containers/cluster_agent/admission_controller/
@@ -193,29 +218,58 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 [10]: http://gcr.io/datadoghq/dd-lib-python-init
 [11]: http://hub.docker.com/r/datadog/dd-lib-python-init
 [12]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[13]: https://github.com/DataDog/dd-trace-java/releases
-[14]: https://github.com/DataDog/dd-trace-js/releases
-[15]: https://github.com/DataDog/dd-trace-py/releases
-[16]: /getting_started/tagging/unified_service_tagging/
-[17]: https://app.datadoghq.com/apm/traces
+[13]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[14]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[15]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[16]: https://github.com/DataDog/dd-trace-java/releases
+[17]: https://github.com/DataDog/dd-trace-js/releases
+[18]: https://github.com/DataDog/dd-trace-py/releases
+[19]: https://github.com/DataDog/dd-trace-dotnet/releases
+[20]: https://github.com/DataDog/dd-trace-rb/releases
+[21]: /getting_started/tagging/unified_service_tagging/
+[22]: https://app.datadoghq.com/apm/traces
+[23]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
 {{% /tab %}}
 
 {{% tab "Host" %}}
 
-<div class="alert alert-info">Tracing Library Injection on a host is in beta.</a></div>
+<div class="alert alert-info">Tracing Library Injection on a host is in beta.</div>
 
 When both the Agent and your services are running on a host, real or virtual, Datadog injects the tracing library by using a preload library that overrides calls to `execve`. Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-## Requirements
+**Note**: Injection on arm64 is not supported.
 
-- A recent [Datadog Agent v7][1] installation
+## Install both library injection and the Datadog Agent
 
-**Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
-## Install the preload library
+**Requirements**: A host running Linux.
+
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+
+```shell
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+Exit and open a new shell to use the injection library.
+
+## Install only library injection
+
+**Requirements**: 
+- A host running Linux.
+- A recent [Datadog Agent v7][1] installation.
+
+If the host already has a Datadog Agent installed, you can install just the injection libraries:
 
 1. Ensure your [Agent is running][2].
 
-2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`:
+2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, `ruby`, or `all`:
 
    **For Ubuntu, Debian or other Debian-based Linux distributions:**
    ```sh
@@ -232,57 +286,109 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 4. Exit and open a new shell to use the preload library.
 
+After enabling host injection, make sure that the `/etc/datadog-agent/datadog.yaml` configuration file has the following lines at the end:
 
-## Install the language and your app
+```yaml
+# BEGIN LD PRELOAD CONFIG
+apm_config:
+  receiver_socket: /opt/datadog/apm/inject/run/apm.socket
+use_dogstatsd: true
+dogstatsd_socket: /opt/datadog/apm/inject/run/dsd.socket
+remote_configuration:
+  enabled: true
+# END LD PRELOAD CONFIG
+```
 
-1. For Java applications, ensure you have a JDK or JRE installed, for example:
-   ```sh
-   sudo apt install openjdk-17-jdk -y
-   ```
-   For NodeJS applications, ensure you have NodeJS installed, for example:
-   ```sh
-   curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-   sudo apt install nodejs -y
-   ```
-   For .NET applications, ensure you have the [.NET runtime installed][3].
-   
-   For Python applications, ensure you have Python installed, for example:
-   ```sh
-   sudo apt install python -y
-   ```
+If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
 
-2. If you haven't already, install your app.
+## Next steps
+
+If you haven't already, install your app and any supporting languages or libraries it requires. 
+
+When an app that is written in a supported language is launched, it is automatically injected with tracing enabled.
 
 ## Configure the injection
 
-The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command:
+Configure host injection is configured in one the following ways:
+- Set environment variables on the process being launched.
+- Specify the configuration in the file `/etc/datadog-agent/inject/host_config.yaml`.
+
+Values in environment variables override settings in the configuration file on a per-process basis.
+
+### Configuration file
+
+| Property name | Purpose | Default value | Valid values | 
+| --------- | ----------- | ------------- | ----------- | 
+|`log_level`  | The logging level|`off`|`off`, `debug`, `info`, `warn`, `error`|
+|`output_paths`|The location where log output is written|`stderr`|`stderr` or a `file://` URL|
+|`env`|The default environment assigned to a process|none|n/a|
+|`config_sources`|The default configuration for a process|`BASIC`|See [Config Sources](#config-sources)|
 
 
-`DD_CONFIG_SOURCES`
-: Turn on or off library injection and specify a location to load configuration from. Optionally, separate multiple values with semicolons to indicate multiple possible locations. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
-  - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
-  - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Use exported or default values.
-  - `OFF` - Default. No injection performed.<br>
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
+#### Example
 
-`DD_LIBRARY_INJECT`
-: Set to `FALSE` to turn off library injection altogether.<br>
-**Default**: `TRUE`
+```yaml
+---
+log_level: debug
+output_paths:
+  - file:///tmp/host_injection.log
+env: dev
+config_sources: BASIC
+```
 
-`DD_INJECT_DEBUG`
-: Set to `TRUE` or `1` to log debug information.<br>
-**Default**: `FALSE`
+### Environment variables
 
-`DD_OUTPUT_PATHS`
-: A comma-separated list of places to write the debug logs.<br>
-**Default**: `stderr`
+The following environment variables configure library injection. You can pass these in by `export` through the command line (`export DD_CONFIG_SOURCES=BASIC`), shell configuration, or launch command.
+
+Each of the fields in the config file corresponds to an environment variable. This environment variable is read from the environment of the process that’s being launched and affects only the process currently being launched. 
+
+|Config file property|Environment Variable|
+| --------- | ----------- |  
+|`log_level`|`DD_APM_INSTRUMENTATION_DEBUG`|
+|`output_paths`|`DD_APM_INSTRUMENTATION_OUTPUT_PATHS`|
+|`env`|`DD_ENV`|
+|`config_sources`|`DD_CONFIG_SOURCES`|
+
+The `DD_APM_INSTRUMENTATION_DEBUG` environment variable is limited to the values `true` and `false` (default value `false`). Setting it to `true` sets `log_level` to `debug` and setting it to `false` (or not setting it at all) uses the `log_level` specified in the configuration file. The environment variable can only set the log level to `debug`, not any other log level values.
+
+The `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable controls whether or not injection is enabled. It defaults to `TRUE`. Set it to `FALSE` to turn off library injection altogether.
+
+### Config sources
+
+By default, the following settings are enabled in an instrumented process:
+- Tracing
+- Log injection, assuming the application uses structured logging (usually JSON). For traces to appear in non-structured logs, you must change your application’s log configuration to include placeholders for trace ID and span ID. See [Connect Logs and Traces][6] for more information.
+- Health metrics
+- Runtime metrics
+
+You can change these settings for all instrumented processes by setting the `config_sources` property in the configuration file or for a single process by setting the `DD_CONFIG_SOURCES` environment variable for the process. The valid settings for config sources are:
+
+|Configuration Source Name|Meaning|
+| --------- | ----------- |  
+|`BASIC`|Apply the configurations specified above. If no configuration source is specified, this is the default.|
+|`LOCAL:PATH`|Apply the configuration at the specified path on the local file system. The format of the configuration file is described below. Example: `LOCAL:/opt/config/my_process_config.yaml`|
+|`BLOB:URL`| Apply the configuration at the specified path in an S3-compatible object store. The connection URL and the format of the configuration file are described below. Example: `BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1` |
+
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+
+```yaml
+DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
+
+#### Blob storage support
+The supported blob storage solutions are:
+- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
 
 <a id="supplying-configuration-source-host"></a>
 
 ### Supplying configuration source
 
-If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML file at `etc/<APP_NAME>/config.json` or `.yaml`, and provide the configuration either as JSON:
+The config file for `LOCAL` and `BLOB` can be formatted as JSON:
 
 ```json
 {
@@ -307,10 +413,10 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 	"tracing_debug": true,
 	"tracing_log_level": "debug",
 }
-
 ```
 
-or as YAML:
+Or as YAML:
+
 ```yaml
 ---
 version: 1
@@ -338,13 +444,17 @@ tracing_debug: true
 tracing_log_level: debug
 ```
 
-Set `service_language` to one of the following values:
+The value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
+
+If the language is known, set `service_language` to one of the following values:
+
 - `java`
 - `node`
 - `dotnet`
 - `python`
+- `ruby`
 
-In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
+If multiple languages are used, leave `service_language` unset.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
@@ -368,7 +478,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -377,68 +487,89 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Launch your services
 
-Launch your services, indicating the preload library configuration in the launch command:
+Launch your services, indicating the preload library configuration in the launch command. If `DD_CONFIG_SOURCES` is not specified, the value specified for `config_sources` in the `/etc/datadog-agent/inject/host_config.yaml` config file is used. If that is not specified either, `DD_CONFIG_SOURCES` defaults to `BASIC`:
 
 **Java app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC java -jar <SERVICE_1>.jar &
+java -jar <SERVICE_1>.jar &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC java -jar <SERVICE_2>.jar &
 ```
 
 **Node app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC node index.js &
+node index.js &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC node index.js &
 ```
 
 **.NET app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC dotnet <SERVICE_1>.dll &
+dotnet <SERVICE_1>.dll &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
 ```
 **Python app example**:
 ```sh
-DD_CONFIG_SOURCES=BASIC python <SERVICE_1>.py &
+python <SERVICE_1>.py &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py &
 ```
 
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
+[6]: /tracing/other_telemetry/connect_logs_and_traces/
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
 {{% tab "Agent on host, app in containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</a></div>
+<div class="alert alert-info">Tracing Library Injection on hosts and containers is in beta.</div>
 
 
 When your Agent is running on a host, and your services are running in containers, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-## Requirements
+**Note**: Injection on arm64 is not supported.
 
-- A recent [Datadog Agent v7][1] installation
-- [Docker Engine][2]
+## Install both library injection and the Datadog Agent
 
-**Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
+**Requirements**:
+- A host running Linux.
+- [Docker Engine][2].
 
-## Install the preload library
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+
+```shell
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
+
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+## Install only library injection
+
+**Requirements**: 
+- A host running Linux.
+- A recent [Datadog Agent v7][1] installation.
+- [Docker Engine][2].
+
+If the host already has a Datadog Agent installed, you can install just the injection libraries:
 
 1. Ensure your [Agent is running][3].
 
-2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`:
+2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, `ruby`, or `all`:
 
    **For Ubuntu, Debian or other Debian-based Linux distributions:**
    ```sh
@@ -453,6 +584,21 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 3. Run the command `dd-host-container-install`.
 
+After enabling host injection, make sure that the `/etc/datadog-agent/datadog.yaml` configuration file has the following lines at the end:
+
+```yaml
+# BEGIN LD PRELOAD CONFIG
+apm_config:
+  receiver_socket: /opt/datadog/apm/inject/run/apm.socket
+use_dogstatsd: true
+dogstatsd_socket: /opt/datadog/apm/inject/run/dsd.socket
+remote_configuration:
+  enabled: true
+# END LD PRELOAD CONFIG
+```
+
+If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
+
 
 ## Configure Docker injection
 
@@ -460,27 +606,31 @@ Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML c
 
 ```yaml
 ---
-config_sources: BASIC
-library_inject: true
 log_level: debug
 output_paths:
 - stderr
+config_sources: BASIC
 ```
 
 `config_sources`
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.<br>
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
+
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration:
+
+```yaml
+config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
+
 For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
 
-`library_inject`
-: Set to `false` to disable library injection altogether.<br>
-**Default**: `true`
-
 `log_level`
-: Set to `debug` to log detailed information about what is happening, or `info` to log far less.
+: Set to `debug` to log detailed information about what is happening, or `info`, `warn`, or `error` to log far less.<br>
+**Default**: `info`
 
 `output_paths`
 : A list of one or more places to write logs.<br>
@@ -522,7 +672,7 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 
 ```
 
-or as YAML:
+Or as YAML:
 ```yaml
 ---
 version: 1
@@ -555,6 +705,7 @@ Set `service_language` to one of the following values:
 - `node`
 - `dotnet`
 - `python`
+- `ruby`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
@@ -578,9 +729,16 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+#### Blob storage support
+The supported blob storage solutions are:
+- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
+
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -589,15 +747,13 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
 
-If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` and `DD_VERSION` are derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service` and a `DD_VERSION` of `1.0`.
+If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` is derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service`.
 
 ## Launch your services
 
@@ -607,72 +763,42 @@ Exercise your application to start generating telemetry data, which you can see 
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
 [3]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
+
 {{% /tab %}}
 
 {{% tab "Agent and app in separate containers" %}}
 
-<div class="alert alert-info">Tracing Library Injection in containers is in beta.</a></div>
+<div class="alert alert-info">Tracing Library Injection in containers is in beta.</div>
 
 When your Agent and services are running in separate Docker containers on the same host, Datadog injects the tracing library by intercepting container creation and configuring the Docker container.
 
 Any newly started processes are intercepted and the specified instrumentation library is injected into the services.
 
-## Requirements
+**Requirements**:
+- [Docker Engine][1].
 
-- [Docker Engine][1]
-
-**Note**: Injection on arm64, and injection with `musl` on Alpine Linux container images are not supported.
+**Note**: Injection on arm64 is not supported.
 
 ## Install the preload library
 
-**For Ubuntu, Debian or other Debian-based Linux distributions:**
+Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
-1. Set up the Datadog deb repo on your system and create a Datadog archive keyring:
-   ```sh
-   sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
-   sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-   sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+```shell
+bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   ```
-2. Update your local apt repo and install the library:
-   ```sh
-   sudo apt-get update
-   sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`.
+This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
-3. Run the command `dd-container-install`.
-
-**For CentOS, RedHat, or another distribution that uses yum/RPM:**
-
-1. Set up Datadog's Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
-   ```
-   [datadog]
-   name = Datadog, Inc.
-   baseurl = https://yum.datadoghq.com/stable/7/x86_64/
-   enabled=1
-   gpgcheck=1
-   repo_gpgcheck=1
-   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-   ```
-   **Note**: Due to a [bug in dnf][2], on RedHat/CentOS 8.1 set `repo_gpgcheck=0` instead of `1`.
-
-2. Update the yum cache and install the library:
-   ```sh
-   sudo yum makecache
-   sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
-   ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`.
-
-3. Run the command `dd-container-install`.
+```shell
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
 ## Configure Docker injection
 
@@ -680,7 +806,6 @@ Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML c
 
 ```yaml
 ---
-library_inject: true
 log_level: debug
 output_paths:
 - stderr
@@ -691,13 +816,18 @@ config_sources: BASIC
 : Turn on or off library injection and specify a semicolon-separated ordered list of places where configuration is stored. The first value that returns without an error is used. Configuration is not merged across configuration sources. The valid values are:
   - `BLOB:<URL>` - Load configuration from a blob store (S3-compatible) located at `<URL>`.
   - `LOCAL:<PATH>` - Load from a file on the local file system at `<PATH>`.
-  - `BASIC` - Uses a default set of properties and stops looking for additional configurations.
-  - `OFF` - Default. No injection performed.<br>
-For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
+  - `BASIC` - Use default values. If `config_sources` is not specified, this configuration is used.<br/>
 
-`library_inject`
-: Set to `false` to disable library injection altogether.<br>
-**Default**: `true`
+The words `BASIC`, `LOCAL`, and `BLOB` must be uppercase.
+
+Config source values can be separated by semicolons to indicate multiple possible locations. The first configuration that returns without an error is used. Configuration is not merged from multiple configuration sources. The following example checks an S3 bucket for configuration, then checks the local file system, and finally uses the built-in default configuration: 
+
+```yaml
+config_sources: BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-1;LOCAL:/opt/config/my_process_config.yaml;BASIC
+```
+
+
+For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
 
 `log_level`
 : Set to `debug` to log detailed information about what is happening, or `info` to log far less.
@@ -742,7 +872,7 @@ If you specify `BLOB` or `LOCAL` configuration source, create a JSON or YAML fil
 
 ```
 
-or as YAML:
+Or as YAML:
 ```yaml
 ---
 version: 1
@@ -775,6 +905,7 @@ Set `service_language` to one of the following values:
 - `node`
 - `dotnet`
 - `python`
+- `ruby`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
@@ -798,9 +929,16 @@ The following table shows how the injection configuration values map to the corr
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
+#### Blob storage support
+The supported blob storage solutions are:
+- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
+- **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
+- **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
+
 ### Basic configuration settings
 
-If `BASIC` is specified as the configuration source, it is equivalent to the following YAML settings:
+`BASIC` configuration settings are equivalent to the following YAML settings:
 
 ```yaml
 ---
@@ -809,8 +947,6 @@ tracing_enabled: true
 log_injection_enabled: true
 health_metrics_enabled: true
 runtime_metrics_enabled: true
-tracing_sampling_rate: 1.0
-tracing_rate_limit: 1
 ```
 
 ## Configure the Agent
@@ -818,42 +954,26 @@ tracing_rate_limit: 1
 In the Docker compose file that launches your containers, use the following settings for the Agent, securely setting your own Datadog API key for `${DD_API_KEY}`:
 
 ```yaml
+  dd-agent:
     container_name: dd-agent
     image: datadog/agent:7
     environment:
       - DD_API_KEY=${DD_API_KEY}
       - DD_APM_ENABLED=true
       - DD_APM_NON_LOCAL_TRAFFIC=true
-      - DD_LOG_LEVEL=TRACE
       - DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true
-      - DD_AC_EXCLUDE=name:datadog-agent
-      - DD_SYSTEM_PROBE_ENABLED=true
-      - DD_PROCESS_AGENT_ENABLED=true
       - DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket
+      - DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket
     volumes:
       - /opt/datadog/apm:/opt/datadog/apm
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc/:ro
-      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-      - /sys/kernel/debug:/sys/kernel/debug
-    cap_add:
-      - SYS_ADMIN
-      - SYS_RESOURCE
-      - SYS_PTRACE
-      - NET_ADMIN
-      - NET_BROADCAST
-      - NET_RAW
-      - IPC_LOCK
-      - CHOWN
-    security_opt:
-      - apparmor:unconfined
 ```
 
 ## Specifying Unified Service Tags on containers
 
 If the environment variables `DD_ENV`, `DD_SERVICE`, or `DD_VERSION` are specified in a service container image, those values are used to tag telemetry from the container.
 
-If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` and `DD_VERSION` are derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service` and a `DD_VERSION` of `1.0`.
+If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datadog-agent/inject/docker_config.yaml` config file, if any. `DD_SERVICE` is derived from the name of the Docker image. An image with the name `my-service:1.0` is tagged with `DD_SERVICE` of `my-service`.
 
 ## Launch the Agent on Docker
 
@@ -875,6 +995,8 @@ Exercise your application to start generating telemetry data, which you can see 
 [2]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 [3]: /tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
+[7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/
+[8]: https://cloud.google.com/docs/authentication#service-accounts
 {{% /tab %}}
 
 
@@ -887,16 +1009,16 @@ The supported features and configuration options for the tracing library are the
 
 For example, you can turn on [Application Security Monitoring][3] or [Continuous Profiler][4], each of which may have billing impact:
 
-- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
+- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` environment variables to `true` in the underlying application pod's deployment file.
 
-- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example: 
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example:
 
   ```yaml
   additional_environment_variables:
   - key: DD_PROFILING_ENABLED
     value: true
   - key: DD_APPSEC_ENABLED
-    value: true 
+    value: true
   ```
 
   Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.

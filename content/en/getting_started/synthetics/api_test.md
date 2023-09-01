@@ -70,7 +70,7 @@ In this example, three default assertions populate after triggering the sample t
 
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true" >}}
 
 ### Select locations 
 

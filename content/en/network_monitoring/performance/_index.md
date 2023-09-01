@@ -25,6 +25,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
   tag: "Blog"
   text: "Datadog NPM now supports Consul networking"
+- link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
+  tag: "Blog"
+  text: "Quickstart network investigations with NPM's story-centric UX"
 algolia:
   tags: ['npm', 'network performance monitoring']
 ---
@@ -33,7 +36,7 @@ algolia:
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/670228207/rendition/1080p/file.mp4?loc=external&signature=42d4a7322017fffa6d5cc2e49ddbb7cfc4c6bbbbf207d13a5c9830630bda4ece" poster="/images/poster/npm.png" >}}
 
-Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. Connection data at the IP, port, and PID levels is aggregated into application-layer dependencies between meaningful _source_ and _destination_ endpoints, which can be analyzed and visualized through a customizable [network page][1] and [network map][2]. Use flow data along with key network traffic and DNS server metrics to:
+Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. Connection data at the IP, port, and PID levels is aggregated into application-layer dependencies between meaningful client and server endpoints, which can be analyzed and visualized through a customizable [network page][1] and [network map][2]. Use flow data along with key network traffic and DNS server metrics to:
 
 * Pinpoint unexpected or latent service dependencies
 * Optimize costly cross-regional or multi-cloud communication
@@ -44,7 +47,7 @@ NPM makes it simple to monitor complex networks with built in support for Linux 
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/performance/network_page" >}}<u>Network Page</u>: Graph your network data between each source and destination available.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
 {{< /whatsnext >}}
 

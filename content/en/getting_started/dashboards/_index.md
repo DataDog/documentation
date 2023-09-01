@@ -20,6 +20,9 @@ further_reading:
   - link: "/monitors/"
     tag: "Documentation"
     text: "Monitors, SLOs, notifications, downtimes, and incidents"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"  
 ---
 
 ## Overview
@@ -84,7 +87,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
 
  - **Alert values and Check statuses**: Show big red, yellow, and green numbers to bring attention to successes or problems.
  - **Heatmaps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
-   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example"  >}}
+   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example" >}}
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
@@ -108,19 +111,19 @@ There are two ways to create links from a dashboard to any target URL:
 
 ### Share your dashboards outside of the Datadog site
 
-Click **Generate Public URL** in a dashboard's Settings (gear) menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account.
+Click **Configure Public URL** in a dashboard's export menu to create a URL you can share with big screens or people who don't necessarily have a Datadog account. For more information, see [Sharing Dashboards][13].
 
-Integrate with your team communications by using the [Slack integration][13] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
+Integrate with your team communications by using the [Slack integration][14] to import dashboards and other Datadog features, such as monitors and incidents, into a Slack channel.
 
 ### Create multiple dashboards quickly
 
 Every dashboard has a JSON representation that you can copy or export from the Settings menu. Each widget on the dashboard also has a JSON definition, which you can see and edit by opening the widget editor (pencil icon) and clicking the JSON tab under **Graph your data**.
 
-Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][14], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
+Because all widgets and dashboards are represented as JSON, you can programmatically generate them by using the [Dashboards API][15], which is useful if you want to generate a Dashboard every time your team starts a new project or encounters an incident, or formalizes an SLO, for example.
 
 ### View Dashboards from the Datadog Mobile App
 
-View your dashboards on your mobile device with the [Datadog Mobile App][15], available on the [Apple App Store][16] and [Google Play Store][17]. 
+View your dashboards on your mobile device with the [Datadog Mobile App][16], available on the [Apple App Store][17] and [Google Play Store][18]. 
 
 The mobile app enables you to view and search all of the dashboards that you have access to in your Datadog organization, and filter them using the same template variables used in the Datadog web app.
 
@@ -142,8 +145,9 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [10]: /dashboards/
 [11]: /dashboards/widgets/timeseries/
 [12]: https://learn.datadoghq.com/courses/building-better-dashboards/
-[13]: /integrations/slack/
-[14]: /api/v1/dashboards/
-[15]: /mobile/
-[16]: https://apps.apple.com/app/datadog/id1391380318
-[17]: https://play.google.com/store/apps/details?id=com.datadog.app
+[13]: /dashboards/sharing/
+[14]: /integrations/slack/
+[15]: /api/v1/dashboards/
+[16]: /service_management/mobile/
+[17]: https://apps.apple.com/app/datadog/id1391380318
+[18]: https://play.google.com/store/apps/details?id=com.datadog.app

@@ -25,7 +25,8 @@
             "parser": {
               "type": "raw"
             },
-            "type": "http_header"
+            "type": "http_header",
+            "secure": true
           }
         ],
         "isCritical": true,

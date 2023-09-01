@@ -116,6 +116,6 @@ JMXFetch
  no checks
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: /agent/guide/agent-commands/#agent-status-and-information

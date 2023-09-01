@@ -23,11 +23,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/java-logging-guide/
   tag: ブログ
   text: Java ログの収集、カスタマイズ、標準化方法
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Java ログ収集
 ---
 
-ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で調整します。
+ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で[テール][14]します。
 
 一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。例:
 
@@ -335,7 +338,7 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Log4j 2" %}}
 
@@ -369,7 +372,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -519,7 +522,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -536,3 +539,4 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [11]: https://github.com/logstash/logstash-logback-encoder
 [12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [13]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /ja/glossary/#tail

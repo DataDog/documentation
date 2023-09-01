@@ -12,7 +12,7 @@ assets:
     metrics:
       check: datadog.cluster_agent.api_requests
       metadata_path: metadata.csv
-      prefix: datadog_cluster_agent.
+      prefix: datadog.cluster_agent.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Datadog Cluster Agent
@@ -30,7 +30,7 @@ draft: false
 git_integration_title: datadog_cluster_agent
 integration_id: datadog-cluster-agent
 integration_title: Datadog Cluster Agent
-integration_version: 2.4.0
+integration_version: 2.7.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0

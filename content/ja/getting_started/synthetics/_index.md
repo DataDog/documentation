@@ -21,6 +21,9 @@ further_reading:
 - link: /continuous_testing/cicd_integrations
   tag: ドキュメント
   text: CI パイプラインでの Synthetic テスト実行について学ぶ
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Synthetic テストの能力を高めるためのインタラクティブなセッションに参加できます
 kind: documentation
 title: Synthetic モニタリングの概要
 ---

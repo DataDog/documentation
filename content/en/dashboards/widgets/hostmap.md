@@ -12,11 +12,11 @@ further_reading:
 
 The host map widget graphs any metric across your hosts using the same visualization available from the main [Host Map][1] page:
 
-{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host Map"  >}}
+{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host Map" >}}
 
 ## Setup
 
-{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup"  >}}
+{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="Host Map Setup" >}}
 
 ### Configuration
 

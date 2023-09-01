@@ -25,7 +25,7 @@ Complete the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -113,7 +113,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [Run the Agent's status subcommand][10] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][11] page in Datadog to get started.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
@@ -163,7 +163,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
@@ -238,23 +238,23 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <HOSTNAME>
     port: 1433
     username: datadog
-    password: '<PASSWORD>'
-    connector: 'odbc'
-    driver: 'FreeTDS'
+    password: "<PASSWORD>"
+    connector: "odbc"
+    driver: "FreeTDS"
     tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
+      - "service:<CUSTOM_SERVICE>"
+      - "env:<CUSTOM_ENV>"
     gcp:
-      project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_ID>' \
-  datadog/datadog"
+      project_id: "<PROJECT_ID>"
+      instance_id: "<INSTANCE_ID>"' \
+  datadog/datadog
 ```
 
 ### Configure with mounted files

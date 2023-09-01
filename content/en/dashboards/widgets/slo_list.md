@@ -41,6 +41,6 @@ The dedicated [widget JSON schema definition][3] for the SLO List widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/service_level_objectives/
+[1]: /service_management/service_level_objectives/
 [2]: /api/v1/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

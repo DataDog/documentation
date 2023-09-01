@@ -4,6 +4,10 @@ aliases:
 - /ja/tracing/livesearch/
 - /ja/tracing/trace_search_and_analytics/
 description: トレースエクスプローラー
+further_reading:
+- link: tracing/trace_explorer/search
+  tag: Documentation
+  text: スパンを検索する
 kind: documentation
 title: トレースエクスプローラー
 ---
@@ -56,7 +60,7 @@ Live Search を使用すると、スパンは、Datadog Agent から送信され
 
 {{< img src="tracing/live_search/live-search.mp4" alt="Live Search リスト表示" video="true" >}}
 
-Live Search の **List view** では、以下のことが可能です。
+**List view** では、以下のことが可能です。
 
 - すべてのタグの `version_id` でフィルタリングすることで、新しいデプロイがスムーズに行われたかを監視。
 - 取り込まれたトレースの 100% を検索して、問題のある子スパンに関連付けられた特定の `org_id` または `customer_id` を見つけ、機能停止に関する情報をリアルタイムで確認。
@@ -123,13 +127,17 @@ Live Search と同じように、保持されたトレースを検索するこ�
 {{% /tab %}}
 {{% tab "時系列表示" %}}
 
-(インテリジェント保持フィルターではなく) カスタム保持フィルターによりインデックス化されたすべてのスパンは、トレース分析に使用する際に検索可能です。
+カスタム保持フィルターまたはインテリジェント保持フィルターによりインデックス化されたすべてのスパンは、トレース分析に使用する際に検索可能です。
 
 時系列表示から、クエリを[ダッシュボード][1]、[モニター][2]、[ノートブック][3]にエクスポートして、さらに詳しく調査したり、スパンの集計数が特定のしきい値を超えたときに自動的にアラートを出したりすることが可能です。
 
+**注**: インテリジェント保持フィルターによってインデックス化されたスパンは、ダッシュボード、ノートブックに表示される APM クエリ、およびトレース分析モニター評価から除外されます。詳細については、[トレース保持][4]を参照してください。
+
 [1]: /ja/dashboards/widgets/timeseries/
-[2]: /ja/monitors/create/types/apm/?tab=analytics
+[2]: /ja/monitors/types/apm/?tab=analytics
 [3]: /ja/notebooks
+[4]: /ja/tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -137,6 +145,9 @@ Live Search と同じように、保持されたトレースを検索するこ�
 
 保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog インテリジェント保持フィルター][4]が適用され、エラーおよびレイテンシーの多様性や、低スループットのリソースを含むトレースを自動的に保持します。デフォルトのインテリジェント保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルターのドキュメント][3]を参照してください。独自のフィルターを作成または変更するには、Datadog アプリの[保持フィルターのページ][12]にアクセスしてください。
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /ja/tracing/trace_pipeline/ingestion_controls

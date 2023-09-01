@@ -3,7 +3,7 @@ aliases:
 - /ja/security_platform/guide/how-appsec-works/
 - /ja/security_platform/application_security/how-appsec-works/
 further_reading:
-- link: /security/application_security/setup_and_configure/#compatibility
+- link: /security/application_security/enabling/compatibility
   tag: ドキュメント
   text: 言語およびフレームワークの互換性に関する詳細
 - link: https://www.datadoghq.com/blog/datadog-application-security/
@@ -18,11 +18,11 @@ title: Datadog における Application Security Management の仕組み
 
 ## 概要
 
-Datadog Application Security Management (ASM) は、コードレベルの脆弱性を悪用することを目的としたアプリケーションレベルの攻撃や、システムを狙う悪質な行為に対する観測可能性を提供します。
+Datadog Application Security Management (ASM) は、コードレベルの脆弱性の悪用やアプリケーションのビジネスロジックの不正使用を目的としたアプリケーションレベルの攻撃や、システムを狙う悪質な行為に対する観測可能性を提供します。
 
 さらに、ASM は、アプリケーションが実行時に使用する脆弱なライブラリや依存関係などを通じて、アプリケーションに組み込まれたリスクを検出します。
 
-Datadog APM は、トレースと呼ばれる各アプリケーションリクエストに関する情報を記録します。Datadog ASM は、APM と同じトレーシングライブラリを使用してトラフィックを監視し、既知の攻撃パターンに一致する疑わしいリクエストに基づいて攻撃の試みにフラグを立てます。Datadog がサービスに影響を与えるアプリケーション攻撃を検出すると、セキュリティシグナルが自動的に作成されます。このシグナルは、個々の攻撃の試みを評価する代わりに、レビューのために重要な脅威を特定します。セキュリティシグナルの設定に応じて、Slack、メール、または PagerDuty から通知を受け取ることができます。
+Datadog APM は、トレースと呼ばれる各アプリケーションリクエストに関する情報を記録します。Datadog ASM は、APM と同じトレーシングライブラリを使用してトラフィックを監視します。ASM は、既知の攻撃パターンに一致する疑わしいリクエストに基づいて攻撃の試みにフラグを立てるか、または[ビジネスロジック情報をタグ付け][25]します。Datadog がサービスに影響を与えるアプリケーション攻撃やビジネスロジックの不正使用を検出すると、セキュリティシグナルが自動的に作成されます。このシグナルは、個々の攻撃の試みを評価する代わりに、レビューのために重要な脅威を特定します。セキュリティシグナルの設定に応じて、Slack、メール、または PagerDuty から通知を受け取ることができます。
 
 従来の Web アプリケーションファイアウォール (WAF) は、通常、境界にデプロイされ、アプリケーションの動作に関するコンテキストを持ちません。ASM はアプリケーションに組み込まれているため、トレースデータにアクセスすることができ、脅威をピンポイントで分類するのに有効です。Datadog ASM は、Web アプリケーションファイアウォール (WAF) と同様に既知の攻撃パターンを活用しますが、アプリケーションのコンテキストを追加することで S/N 比を高め、誤検知を低減させます。
 
@@ -35,13 +35,11 @@ APM はアプリケーションのトラフィックのサンプルを収集す�
 Datadog Threat Monitoring and Detection は、すべてのリクエストでクライアントの IP アドレスと手動で追加したユーザータグを収集することで、悪質な行為者を特定します。
 
 <div class="alert alert-info"><strong>ベータ版: 1 クリック有効化</strong><br>
-サービスが<a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
+サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
 
 ### 脆弱なサービスの特定
 
-<div class="alert alert-info">Risk Management の脆弱性検出はベータ版です。</a></div>
-
-Datadog ASM [Risk Management][5] は、オープンソースのソフトウェアライブラリに関連する様々な既知の脆弱性データソースと、Datadog のセキュリティリサーチチームから提供される情報を利用して、アプリケーションがランタイムに依存するライブラリとその潜在的脆弱性を照合し、改善策を提言します。
+Datadog [Application Vulnerability Management][5] は、オープンソースのソフトウェアライブラリに関連する様々な既知の脆弱性データソースと、Datadog のセキュリティリサーチチームから提供される情報を利用して、アプリケーションがランタイムに依存するライブラリとその潜在的脆弱性を照合し、改善策を提言します。
 
 ## 互換性
 
@@ -59,7 +57,7 @@ Datadog の AWS Lambda 向け ASM は、関数を標的としている攻撃者�
 
 Datadog ASM は、Agent と APM にすでに含まれているプロセスを使用するため、使用する際のパフォーマンスへの影響はほとんどありません。APM が有効な場合、Datadog ライブラリは分散型トレースを生成します。Datadog ASM は、既知の攻撃パターンを使用して、トレース内のセキュリティアクティビティにフラグを立てます。攻撃パターンと分散型トレースで提供される実行コンテキストを相関させることで、検出ルールに基づいてセキュリティシグナルをトリガーします。
 
-{{< img src="security/application_security/How_Application_Security_Works_d1.png" alt="Datadog トレーサーライブラリは、アプリケーションサービスレベルで動作し、Datadog バックエンドにトレースを送信することを図解しています。Datadog バックエンドは、実用的なセキュリティシグナルにフラグを立て、PagerDuty、Jira、Slack などの関連アプリケーションに通知を送信します。" >}}
+{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="Datadog トレーサーライブラリは、アプリケーションサービスレベルで動作し、Datadog バックエンドにトレースを送信することを図解しています。Datadog バックエンドは、実用的なセキュリティシグナルにフラグを立て、PagerDuty、Jira、Slack などの関連アプリケーションに通知を送信します。" >}}
 
 ## データのサンプリングと保持
 
@@ -89,8 +87,7 @@ ASM で再集された情報の構成は、[データセキュリティ構成][1
 
 Datadog は、[OWASP ModSecurity Core Rule Set][12] を含む複数のパターンソースを使用して、HTTP リクエストにおける既知の脅威と脆弱性を検出します。HTTP リクエストが [OOTB 検出ルール][13]のいずれかにマッチすると、Datadog にセキュリティシグナルが生成されます。
 
-<div class="alert alert-info"><strong>ベータ版: 脅威パターンの自動更新</strong><br>
-サービスが<a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、サービスを監視するために使用されている脅威パターンは、Datadog がアップデートを公開するたびに自動的に更新されます。</div>
+**脅威パターンの自動更新:** サービスが[リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン][26]で実行されている場合、サービスを監視するために使用されている脅威パターンは、Datadog がアップデートを公開するたびに自動的に更新されます。
 
 セキュリティシグナルは、Datadog が本番サービスを標的とした意味のある攻撃を検出すると、自動的に作成されます。これにより、攻撃者と標的となったサービスに関する可視性を得ることができます。しきい値付きのカスタム検出ルールを設定して、通知を受けたい攻撃を決定することができます。
 
@@ -122,11 +119,9 @@ Datadog ASM には、以下のカテゴリーを含むがこれに限定され�
 
 ## 内蔵の脆弱性検出
 
-<div class="alert alert-info">脆弱性検出による Risk Management はベータ版です。</a></div>
-
 Datadog ASM には、オープンソース依存部分で検出された脆弱性について警告する検出機能が組み込まれています。その情報の詳細は、[Vulnerability Explorer][15] に表示され、重大度、影響を受けるサービス、潜在的に脆弱なインフラストラクチャー、および表面化したリスクを解決するための改善手順が特定されます。
 
-詳しくは、[Risk Management][5] をご覧ください。
+詳しくは、[Application Vulnerability Management][5] をお読みください。
 
 ## Datadog ASM による Log4Shell の保護方法
 
@@ -146,10 +141,12 @@ Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意の�
 [8]: /ja/security/application_security/enabling/serverless/
 [9]: /ja/tracing/trace_pipeline/trace_retention/
 [10]: /ja/tracing/configure_data_security/?tab=http
-[11]: /ja/security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[11]: /ja/security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /ja/security/default_rules/#cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /ja/security/cloud_siem/
-[17]: /ja/security/application_security/threats/setup_and_configure/#data-security-considerations
+[17]: /ja/security/application_security/threats/library_configuration/#data-security-considerations
+[25]: /ja/security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[26]: /ja/agent/remote_config/#enabling-remote-configuration

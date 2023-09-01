@@ -4,6 +4,7 @@ kind: guide
 aliases:
   - /security_monitoring/guide/monitor-authentication-logs-for-security-threats/
   - /security_platform/guide/monitor-authentication-logs-for-security-threats/
+  - /security/guide/monitor-authentication-logs-for-security-threats/
 further_reading:
 - link: "https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/"
   tag: "Blog"
@@ -105,13 +106,13 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /cloud_siem/
-[2]: /logs/log_collection/?tab=http#application-log-collection
+[2]: /logs/log_collection/?tab=application#application-log-collection
 [3]: /logs/log_configuration/processors/#grok-parser
 [4]: https://www.datadoghq.com/blog/logs-standard-attributes/
 [5]: /logs/log_configuration/attributes_naming_convention
 [6]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [7]: /logs/log_configuration/attributes_naming_convention/#events
-[8]: /logs/log_configuration/attributes_naming_convention/#network
+[8]: /logs/log_configuration/attributes_naming_convention/#web-access
 [9]: https://developers.google.com/recaptcha/docs/v3
 [10]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=brute%20force%20attack&sort=rule
 [11]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=credential%20stuffing%20attack&sort=rule
@@ -122,5 +123,5 @@ Datadog ingests and analyzes [all of your logs][18], ensuring that you can detec
 [16]: https://app.datadoghq.com/screen/integration/security-monitoring-ip-investigation
 [17]: https://app.datadoghq.com/screen/integration/security-monitoring-user-investigation
 [18]: https://www.datadoghq.com/blog/logging-without-limits/
-[19]: /logs/indexes/#exclusion-filters
+[19]: /logs/log_configuration/indexes/#exclusion-filters
 [20]: https://www.datadoghq.com/blog/efficient-log-rehydration-with-datadog/

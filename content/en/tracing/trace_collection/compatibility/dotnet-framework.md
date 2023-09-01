@@ -22,7 +22,7 @@ The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual B
 
 ## Supported .NET Framework runtimes
 
-The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core][2].
+The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core][2]. The .NET Tracer does not support code running in partial trust environments.
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             | Datadog End of Life |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
@@ -63,6 +63,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
+| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |

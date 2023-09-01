@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Trace Collection
+title: Kubernetes APM - Trace Collection
 kind: documentation
 aliases:
     - /agent/kubernetes/apm

@@ -25,6 +25,9 @@ aliases:
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
 algolia:
   tags: ['agent']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">
@@ -48,7 +51,7 @@ Datadog recommends you update Datadog Agent with every minor and patch release, 
 <p>
 Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization depends on your infrastructure and your configuration management practices, but aim for monthly.</p>
 <p>
-To update the Datadog Agent core between two minor versions on a given host, run <a href="https://app.datadoghq.com/account/settings#agent">the corresponding install command for your platform</a>.</p>
+To update the Datadog Agent core between two minor versions on a given host, run <a href="https://app.datadoghq.com/account/settings/agent/latest">the corresponding install command for your platform</a>.</p>
 <p>
 Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a> rules.</p>
 </div>
@@ -75,5 +78,5 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: https://app.datadoghq.com/account/settings#agent/aws
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [3]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/dogstatsd/alpine

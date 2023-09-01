@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -31,9 +31,9 @@ Search for a process to monitor using a space separated list of strings. The sea
 
 Matching processes and counts are displayed below the search:
 
-{{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes"  style="width:90%;">}}
+{{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" style="width:90%;">}}
 
-After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found.  For more granular data, visit your [Live Process Page][4].
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. For more granular data, visit your [Live Process Page][4].
 
 #### Alert grouping
 

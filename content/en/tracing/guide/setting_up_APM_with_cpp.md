@@ -15,10 +15,10 @@ This guide expands on the [C++ APM docs][1] to provide step-by-step instructions
 
 ### Basic environment
 
-First, spin up a fresh `ubuntu/xenial64` Vagrant box and `ssh` into it with:
+First, spin up a fresh `ubuntu/jammy64` Vagrant box and `ssh` into it with:
 
 ```bash
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -155,15 +155,15 @@ On the Trace Agent tab, you will see something similar to:
 
 The service then shows up in your APM services page in Datadog.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page"  >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" >}}
 
 Click on the service to view your traces.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI"  >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

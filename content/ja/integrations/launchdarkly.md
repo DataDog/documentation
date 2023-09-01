@@ -72,10 +72,6 @@ tile:
 
 
 
-{{< callout url="#" btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
-LaunchDarkly 機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
-
-{{< /callout >}}
 ## 概要
 
 LaunchDarkly は、Datadog と以下のインテグレーションを提供しています。

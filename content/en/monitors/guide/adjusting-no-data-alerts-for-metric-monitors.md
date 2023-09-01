@@ -8,7 +8,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---
@@ -16,12 +16,12 @@ further_reading:
 *No Data* Alerts are a great way to be notified when an Integration/application is no longer submitting metrics to Datadog.
 When utilizing a [Metric Monitor][1] for a metric that isn't always reported at the same frequency or is reported with a timestamp slightly in the past, such as a metric from the [AWS Integration][2], you may receive No Data alerts despite seeing these values in Datadog. There are a couple Monitor configuration options that can be edited to properly evaluate over these types of metrics:
 
-{{< img src="monitors/guide/AWS_Monitor_Config.png" alt="AWS monitor config"  >}}
+{{< img src="monitors/guide/AWS_Monitor_Config.png" alt="AWS monitor config" >}}
 
 1. The image above displays that this metric: `aws.ec2.cpuutilization` is coming in with a slight delay.
 This is due to the limitations on how soon this metric is available from Cloudwatch.
 
-{{< img src="monitors/guide/require_full_window.png" alt="Require a Full Window of Data"  >}}
+{{< img src="monitors/guide/require_full_window.png" alt="Require a Full Window of Data" >}}
 
 2. Delay Evaluation option.
 Since Monitors perform an evaluation every minute, it is looking back on the past X minutes of data. For backfilled metrics, like those coming from AWS, the monitor may be looking at a period of time when the data is not in Datadog. This causes false No Data alerts. Setting this field allows you to have the monitor wait, 900 seconds, so that the AWS metrics have 900 seconds to be available within Datadog before the monitor begins evaluation.

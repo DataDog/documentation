@@ -20,6 +20,9 @@ further_reading:
 - link: '/continuous_testing/cicd_integrations'
   tag: 'Documentation'
   text: 'Learn about running Synthetic tests in a CI pipeline'
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to enhance your synthetic testing capabilities"
 algolia:
   tags: ["synthetics"]
 ---

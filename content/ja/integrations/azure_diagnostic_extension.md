@@ -20,7 +20,7 @@ short_description: Azure Diagnostic Extension のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<div class="alert alert-warning">このインテグレーションは非推奨です。Azure VM に対する同様のゲストレベルおよびプロセスレベルの洞察については、Datadog Agent をインストールしてください。
+<div class="alert alert-warning">このインテグレーションは非推奨です。Datadog Agent をインストールすることで、Azure VM のゲストレベルおよびプロセスレベルのインサイトを、より詳細な粒度とレイテンシーで把握することができます。
 
 このページに記載されているメトリクスは、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、これらのメトリクスは 2023 年 6 月 1 日に無効化されます。
 
@@ -30,13 +30,16 @@ version: '1.0'
 
 Azure Diagnostic Extension は、Microsoft Azure 上で実行されている VM の健全性の監視を支援します。
 
-Datadog Azure インテグレーションは、Azure Diagnostic Extension からメトリクスを収集できますが、[ご使用の VM に Datadog Agent をインストール][2]することを[お勧めします][1]。
+Datadog Azure インテグレーションは、Azure Diagnostic Extension からメトリクスを収集できますが、ご使用の VM に Datadog Agent をインストールすることを[お勧めします][1]。
+
+- 組織が Datadog の US3 サイトにあり、Azure で Datadog リソースを構成している場合は、[Azure Native インテグレーション手動セットアップガイド][2]の手順を使用します。
+- **すべてのサイト**は、[Azure インテグレーション手動セットアップガイド][3]または [Azure プログラム管理ガイド][4]の手順を使用できます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
-[Microsoft Azure インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+[Microsoft Azure インテグレーション][5]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 
@@ -54,10 +57,12 @@ Azure Diagnostic Extension インテグレーションには、サービスの�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://www.datadoghq.com/blog/dont-fear-the-agent/
-[2]: https://docs.datadoghq.com/ja/integrations/azure/#agent-installation
-[3]: https://docs.datadoghq.com/ja/integrations/azure/
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_diagnostic_extension/azure_analysis_services_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/ja/integrations/guide/azure-native-manual-setup/#virtual-machine-agent
+[3]: https://docs.datadoghq.com/ja/integrations/guide/azure-manual-setup/#agent-installation
+[4]: https://docs.datadoghq.com/ja/integrations/guide/azure-programmatic-management/#datadog-azure-vm-extension
+[5]: https://docs.datadoghq.com/ja/integrations/azure/
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_diagnostic_extension/azure_analysis_services_metadata.csv
+[7]: https://docs.datadoghq.com/ja/help/

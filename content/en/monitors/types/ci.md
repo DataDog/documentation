@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -163,7 +163,7 @@ To disable samples, uncheck the box at the bottom of the **Say what's happening*
 #### Sample examples
 
 Include a table of CI Test 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples" style="width:60%;" >}}
 
 Include a table of CI Pipeline 10 samples in the alert notification:
 {{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples" style="width:60%;" >}}

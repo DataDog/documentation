@@ -34,7 +34,7 @@ Amazon S3 Storage Lens は、Amazon S3 ストレージ全体の使用状況と�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

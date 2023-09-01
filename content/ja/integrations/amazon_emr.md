@@ -2,31 +2,30 @@
 aliases:
 - /ja/integrations/awsemr/
 categories:
-- cloud
-- processing
 - aws
+- cloud
 - log collection
 dependencies: []
-description: Amazon Elastic Map Reduce のキーメトリクスを追跡。
+description: Amazon EMR のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
 draft: false
 git_integration_title: amazon_emr
 has_logo: true
 integration_id: amazon-emr
-integration_title: Amazon Elastic Map Reduce
+integration_title: Amazon EMR
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_emr
-public_title: Datadog-Amazon Elastic Map Reduce インテグレーション
-short_description: Amazon Elastic Map Reduce のキーメトリクスを追跡。
+public_title: Datadog-Amazon EMR インテグレーション
+short_description: Amazon EMR のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Elastic MapReduce (Amazon EMR) は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
+Amazon EMR は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
 
 このインテグレーションを有効にすると、EMR メトリクスを Datadog に表示できます。
 
@@ -58,7 +57,7 @@ Amazon EMR から S3 バケットまたは CloudWatch のいずれかにログ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログ コレクション AWS Lambda 関数][6]をまだ実行していない場合は、セットアップします。
+1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon EMR ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][7]
@@ -74,11 +73,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS Elastic MapReduce インテグレーションには、イベントは含まれません。
+AWS EMR インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS Elastic MapReduce インテグレーションには、サービスのチェック機能は含まれません。
+AWS EMR インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -89,7 +88,7 @@ AWS Elastic MapReduce インテグレーションには、サービスのチェ�
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-authentication-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-emr
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_emr/amazon_emr_metadata.csv

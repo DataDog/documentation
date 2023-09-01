@@ -13,6 +13,9 @@ further_reading:
 - link: /agent/guide/agent-configuration-files/
   tag: FAQ
   text: Emplacement de l'ensemble des fichiers de configuration de l'Agent
+- link: https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/
+  tag: Blog
+  text: Amélioration des performances dans le pipeline des métriques de l'Agent Datadog
 kind: documentation
 title: Utilisation de base de l'Agent
 ---
@@ -38,9 +41,9 @@ Sur Windows, les services sont énumérés comme suit :
 
 | Service               | Description             |
 |-----------------------|-------------------------|
-| DatadogAgent          | "Agent Datadog"         |
-| datadog-trace-agent   | "Agent de traces Datadog"   |
-| datadog-process-agent | "Agent de processus Datadog" |
+| DatadogAgent          | Agent Datadog         |
+| datadog-trace-agent   | Agent de trace Datadog   |
+| datadog-process-agent | Agent de processus Datadog |
 
 Par défaut, l'Agent ouvre 3 [ports][3] sur Linux et 4 sur Windows et OSX :
 
@@ -50,6 +53,8 @@ Par défaut, l'Agent ouvre 3 [ports][3] sur Linux et 4 sur Windows et OSX :
 | 5001 | Utilisé par l'interface de ligne de commande et l'interface graphique de l'Agent pour envoyer des commandes et récupérer des informations à partir de l'Agent actif. |
 | 5002 | Dessert le serveur graphique sur Windows et OSX.                                                   |
 | 8125 | Utilisé pour le serveur DogStatsD afin de recevoir des métriques externes.                                  |
+
+Pour en savoir plus sur la configuration des ports, consultez la section [Trafic réseau][4].
 
 ### Collector
 
@@ -63,12 +68,13 @@ Le Forwarder de l'Agent envoie les métriques à Datadog via HTTPS. Une mise en 
 
 Dans la version 6, DogStatsD est une implémentation Golang du daemon d'agrégation des métriques [StatsD d'Etsy][5]. Il est utilisé pour recueillir et rassembler des métriques arbitraires via le protocole UDP ou un socket Unix, ce qui permet d'instrumenter du code personnalisé sans augmenter la latence de votre application. En savoir plus sur [DogStatsD][6].
 
-[1]: /fr/metrics/dogstatsd_metrics_submission/#metrics
+[1]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /fr/tracing/guide/terminology/
 [3]: /fr/agent/guide/network/#open-ports
-[4]: /fr/developers/custom_checks/write_agent_check/
-[5]: https://github.com/etsy/statsd
-[6]: /fr/metrics/dogstatsd_metrics_submission/
+[4]: /fr/agent/guide/network#configure-ports
+[5]: /fr/developers/custom_checks/write_agent_check/
+[6]: https://github.com/etsy/statsd
+[7]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -133,11 +139,11 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme                                 | Versions prises en charge                                        |
+| Plateforme (64 bits, x86)                    | Versions prises en charge                                        |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] avec systemd                 | Debian 7 (wheezy) et versions ultérieures                                        |
-| [Debian][2] avec SysVinit                | Debian 7 (wheezy) et versions ultérieures avec l'Agent 6.6.0+                        |
+| [Debian][2] avec systemd                 | Debian 7 (wheezy) et versions ultérieures pour les versions de l'Agent antérieures à 6.36.0/7.36.0, Debian 8 (jessie) et versions ultérieures pour les versions 6.36.0+/7.36.0+ de l'Agent |
+| [Debian][2] avec SysVinit                | Debian 7 (wheezy) et versions ultérieures pour les versions 6.6.0 à 6.36.0 et 7.36.0 de l'Agent, Debian 8 (jessie) et versions ultérieures pour les versions 6.36.0+/7.36.0+ de l'Agent |
 | [Ubuntu][3]                              | Ubuntu 14.04 et versions ultérieures                                             |
 | [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6 et versions ultérieures, AlmaLinux/Rocky 8 et versions ultérieures avec les versions 6.33.0/7.33.0 et ultérieures de l'Agent |
 | [Docker][5]                              | 1.12 et versions ultérieures                                             |
@@ -146,15 +152,26 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 | [SUSE Enterprise Linux][7] avec SysVinit | SUSE 11 SP4 avec les versions 6.16.0/7.16.0 à 6.33.0/7.33.0 de l'Agent        |
 | [OpenSUSE][7] avec systemd               | OpenSUSE 15+ avec l'Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26 et versions ultérieures                                                |
-| [macOS][9]                               | macOS 10.12 et versions ultérieures                                              |
-| [Windows Server][10]                     | Windows Server 2008 R2 et versions ultérieures (y compris Server Core)           |
-| [Windows][10]                            | Windows 7 et versions ultérieures                                                |
-| [Système d'exploitation Windows Azure Stack HCI][10]         | Toutes les versions                                              |
+| [macOS][9]                               | macOS 10.12+ pour les versions de l'Agent antérieures à 6.35.0/7.35.0, macOS 10.13+ pour les versions de l'Agent antérieures à 7.39.0, macOS 10.14+ pour les versions 7.39.0+ de l'Agent |
+| [Windows Server][10]                     | Windows Server 2012 et versions ultérieures (y compris Server Core)              |
+| [Windows][10]                            | Windows 8.1 et versions ultérieures                                              |
+| [Système d'exploitation Azure Stack HCI][10]                 | Toutes les versions                                              |
 
-**Remarques** : 
-- Les packages en version 64 bits x86 sont disponibles pour toutes les plateformes de cette liste. Les packages Arm v8 sont disponibles pour toutes les plateformes, à l'exception de Windows et macOS.
+| Plateforme (64 bits, Arm v8)                 | Versions prises en charge                                        |
+|------------------------------------------|-----------------------------------------------------------|
+| [Amazon Linux][1]                        | Amazon Linux 2                                            |
+| [Debian][2] avec systemd                 | Debian 9 (stretch) et versions ultérieures                                       |
+| [Ubuntu][3]                              | Ubuntu 16.04+                                             |
+| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 8 et versions ultérieures, AlmaLinux/Rocky 8 et versions ultérieures avec les versions 6.33.0/7.33.0 et ultérieures de l'Agent |
+| [Docker][5]                              | 1.12 et versions ultérieures                                             |
+| [Kubernetes][6]                          | 1.3 et versions ultérieures                                              |
+| [Fedora][8]                              | Fedora 27 et versions ultérieures                                                |
+| [macOS][9]                               | macOS 11.0 et versions ultérieures                                               |
+
+
+**Remarques** :
 - L'installation depuis les [sources][11] peut fonctionner sur des systèmes d'exploitation non mentionnés et est prise en charge dans la mesure du possible.
-- Les versions 6 et ultérieures de l'Agent Datadog prennent en charge Windows Server 2008 R2, avec les dernières mises à jour Windows installées. Toutefois, Windows Server 2008 R2 fait état d'un [problème connu relatif à la dérive de l'horloge et à Go][12].
+- Les versions de l'Agent Datadog antérieures à 6.46.0 et 7.46.0 prennent en charge Windows Server 2008 R2, avec les dernières mises à jour Windows installées. Toutefois, Windows Server 2008 R2 fait état d'un [problème connu relatif à la dérive de l'horloge et à Go][12].
 
 [1]: /fr/agent/basic_agent_usage/amazonlinux/
 [2]: /fr/agent/basic_agent_usage/deb/
@@ -182,7 +199,7 @@ Lorsque l'Agent est en cours d'exécution, utilisez la commande `datadog-agent l
 | [SUSE Enterprise Linux][7] | SUSE 11 SP4 et versions ultérieures           |
 | [Fedora][8]                | Fedora 26 et versions ultérieures             |
 | [macOS][9]                 | macOS 10.10 et versions ultérieures           |
-| [Windows Server][10]       | Windows Server 2008r2 et versions ultérieures |
+| [Windows Server][10]       | Windows Server 2008 et versions ultérieures   |
 | [Windows][10]              | Windows 7 et versions ultérieures             |
 
 **Remarques** :
@@ -229,10 +246,7 @@ L'interface de ligne de commande pour l'Agent v6 est basée sur un système de 
 | `help`            | Affiche des informations d'aide pour n'importe quelle commande.                                                     |
 | `hostname`        | Affiche le hostname utilisé par l'Agent.                                       |
 | `import`          | Importe et convertit les fichiers de configuration d'une version précédente de l'Agent. |
-| `installservice`  | Installe l'Agent dans le gestionnaire de contrôle des services.                       |
 | `launch-gui`      | Démarre l'interface graphique de l'Agent Datadog.                                                |
-| `regimport`       | Importe les paramètres de registre dans `datadog.yaml`.                           |
-| `remove-service`  | Supprime l'Agent du gestionnaire de contrôle des services.                          |
 | `restart`         | [Redémarrez l'Agent][2].                                                     |
 | `restart-service` | Redémarre l'Agent dans le gestionnaire de contrôle des services.                       |
 | `start`           | [Démarre l'Agent][3].                                                       |
@@ -299,7 +313,7 @@ Les mesures ci-dessous reflètent la collecte de *110 Ko de logs par seconde* �
 
 Pour mettre à jour manuellement les composants principaux de l'Agent Datadog depuis et vers une version mineure sur un host donné, exécutez la [commande d'installation correspondant à votre plateforme][7].
 
-Remarque : si vous souhaitez mettre à jour manuellement une intégration spécifique, consultez le [guide de gestion des intégrations][8].
+**Remarque** : si vous souhaitez mettre à jour manuellement une intégration d'Agent spécifique, consultez le [guide de gestion des intégrations][8].
 
 ### Fichiers de configuration
 
@@ -313,9 +327,11 @@ Modifiez le [fichier de configuration principal de l'Agent][10] `datadog.yaml` p
 site: {{< region-param key="dd_site" >}}
 ```
 
+**Remarque** : consultez la section [Débuter avec les sites Datadog][11] pour en savoir plus sur le paramètre `site`.
+
 ### Emplacement des logs
 
-Consultez la [documentation relative aux fichiers de log de l'Agent][11].
+Consultez la section [Fichiers de log de l'Agent][12].
 
 ## Pour aller plus loin
 
@@ -327,8 +343,9 @@ Consultez la [documentation relative aux fichiers de log de l'Agent][11].
 [4]: /fr/agent/guide/agent-commands/#service-status
 [5]: /fr/agent/guide/agent-commands/#stop-the-agent
 [6]: /fr/agent/logs/log_transport/?tab=https#enforce-a-specific-transport
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /fr/agent/guide/integration-management/
 [9]: /fr/agent/guide/agent-configuration-files/
 [10]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /fr/agent/guide/agent-log-files/
+[11]: /fr/getting_started/site/
+[12]: /fr/agent/guide/agent-log-files/

@@ -181,7 +181,7 @@ For all the available `**options`, see the [reference guide][5].
 
 ### Manually creating a new span
 
-Programmatically create spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
+Programmatically create spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
 
 ```ruby
 # An example of a Sinatra endpoint,
@@ -291,7 +291,7 @@ You can configure the propagation of context for distributed traces by injecting
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][7] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][7] page.
 
 ## Further Reading
 

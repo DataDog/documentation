@@ -32,6 +32,7 @@ Custom tags and metrics work with the following CI providers:
 - GitLab (SaaS or self-hosted >= 14.1)
 - GitHub.com (SaaS) **Note:** For GitHub, tags and metrics can only be added to the pipeline span.
 - Jenkins **Note:** For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
+- Azure DevOps Pipelines
 
 ## Install the Datadog CI CLI
 

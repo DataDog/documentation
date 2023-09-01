@@ -26,7 +26,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 
 2. Click the Monitoring tab.
 
-    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab"  style="width:80%;" >}}
+    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring tab" style="width:80%;" >}}
 
 3. The monitoring tab displays a series of graphs indicating the following information about your Lambda function: 
     * invocations
@@ -81,7 +81,7 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 1. From the monitoring tab, click **View logs in Cloudwatch**.
 
-{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch"  style="width:80%;" >}}
+{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch" style="width:80%;" >}}
 
 2. Find the most recent log stream.
 

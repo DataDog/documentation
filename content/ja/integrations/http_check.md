@@ -29,7 +29,7 @@ draft: false
 git_integration_title: http_check
 integration_id: ネットワーク
 integration_title: HTTP チェック
-integration_version: 8.1.0
+integration_version: 8.2.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -108,6 +108,7 @@ HTTP チェックには一般的なチェックよりも多くの構成オプシ
 | `tls_ignore_warning`             | `tls_verify` を `true` に設定すると、SSL 接続からのすべてのセキュリティ警告が無効になります。                                                                                                                                                     |
 | `tls_ca_cert`                    | この設定を使用すると、`init_config` で指定されているデフォルトの証明書パスを上書きできます。                                                                                                                                                   |
 | `check_certificate_expiration`   | `check_certificate_expiration` が有効な場合、サービスチェックは、SSL 証明書の有効期限をチェックします。**注**: これにより、`tls_verify` 設定の値に関係なく SSL 証明書が検証されます。 |
+| `tls_retrieve_non_validated_cert`| `tls_verify` が `false` で `check_certificate_expiration` が `true` の場合、これを `true` に設定すると、証明書に有効期限があるかどうかを調べることができます。                                                                          |
 | `days_warning` と `days_critical` | `check_certificate_expiration` を有効にすると、指定された日数内に SSL 証明書の有効期限が存在する場合に、これらの設定によって警告または重要なアラートが発生します。                                                                |
 | `ssl_server_name`                | `check_certificate_expiration` を有効にすると、この設定により、接続するサービスのホスト名が指定され、check_hostname が有効になっていると一致するホストが上書きされます。                                                      |
 | `check_hostname`                 | `true` に設定すると、チェックした `url` ホスト名が SSL 証明書のホスト名と異なる場合に、警告をログに記録します。                                                                                                                           |

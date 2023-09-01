@@ -35,9 +35,9 @@ En las versiones 6 y 7 del Agent, el gestor de servicios proporcionado por el s
 {{< tabs >}}
 {{% tab "Agent v6 y v7" %}}
 
-### Amazon Linux 2, Amazon Linux 2022
+### Amazon Linux 2, Amazon Linux 2022/2023
 
-<div class="alert alert-info">Para instalar Amazon Linux 2022 en las versiones del Agent 6.39/7.39 (o anteriores), es necesario el paquete <code>libxcrypt-compat</code>. Para instalar este paquete, ejecuta:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre>.</div>
+<div class="alert alert-info">Para instalar Amazon Linux 2022/2023 en las versiones del Agent 6.39/7.39 (o anteriores), es necesario el paquete <code>libxcrypt-compat</code>. Para instalar este paquete, ejecuta:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
 
 | Descripción                        | Comando                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -125,7 +125,7 @@ El Agent tiene un entorno Python integrado en `/opt/datadog-agent/embedded/`. Lo
 
 Si deseas obtener más información, consulta las instrucciones sobre cómo [añadir paquetes al Agent integrado][3].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

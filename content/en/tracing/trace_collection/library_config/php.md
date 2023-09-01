@@ -105,7 +105,13 @@ Whether to enable distributed tracing.
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Default**: `null`<br>
-Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
+Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Starting version `0.90.0`, changes to `datadog.version` at run-time through `ini_set` are also applied to the current root span.
+
+`DD_LOGS_INJECTION`
+: **INI**: `datadog.logs_injection`<br>
+**Default**: `0`<br>
+Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+See [logs correlation documentation][17] for more information.
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
@@ -117,15 +123,21 @@ Enable the Datadog profiler. Added in version `0.69.0`. See [Enabling the PHP Pr
 **Default**: `1`<br>
 Whether to enable the endpoint data collection in profiles. Added in version `0.79.0`.
 
-`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
-: **INI**: `datadog.profiling.experimental_allocation_enabled`. INI available since `0.84.0`.<br>
-**Default**: `0`<br>
-Enable the experimental allocation size and allocation bytes profile type. Added in version `0.84.0`.
+`DD_PROFILING_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
+**Default**: `1`<br>
+Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off due to a limitation of the ZendEngine.<br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
+
+`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
+: **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
+**Default**: `0`<br>
+Enable the experimental timeline profile type. Added in version `0.89.0`.
 
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
@@ -140,12 +152,19 @@ Whether to enable priority sampling.
 `DD_SERVICE`
 : **INI**: `datadog.service`<br>
 **Default**: `null`<br>
-The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
+The default app name.
 
 `DD_SERVICE_MAPPING`
 : **INI**: `datadog.service_mapping`<br>
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
+
+`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
+: **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
+**Default**: `0`<br>
+Enable printing of the full 128-bit ID when formatting trace IDs for logs correlation.
+When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
+When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
@@ -180,7 +199,7 @@ The Agent request transfer timeout (in milliseconds).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Added in version `0.47.1`.
+The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_DOGSTATSD_URL`
 : **INI**: `datadog.dogstatsd_url`<br>
@@ -225,7 +244,7 @@ Automatically generate a top-level span; set to `0` in conjunction with `DD_TRAC
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
 **Default**: `null`<br>
-Tags to be set on all spans, for example: `key1:value1,key2:value2`. Added in version `0.47.0`.
+Tags to be set on all spans, for example: `key1:value1,key2:value2`.
 
 `DD_TRACE_HEADER_TAGS`
 : **INI**: `datadog.trace.header_tags`<br>
@@ -240,17 +259,33 @@ Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
 : **INI**: `datadog.trace.redis_client_split_by_host`<br>
 **Default**: `0`<br>
-Set the service name of Redis clients operations to `redis-<hostname>`. Added in version `0.51.0`.
+Set the service name of Redis clients operations to `redis-<hostname>`.
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
 **Default**: `1`<br>
-Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)). For versions < `0.47.1`, this parameter is `DD_INTEGRATIONS_DISABLED` which takes a CSV list of integrations to disable, for example: `curl,mysqli`.
+Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)).
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
 : **INI**: `datadog.trace.measure_compile_time`<br>
 **Default**: `1`<br>
 Record the compile time of the request (in milliseconds) onto the top-level span.
+
+`DD_TRACE_REMOVE_AUTOINSTRUMENTATION_ORPHANS`
+: **INI**: `datadog.trace.remove_autoinstrumentation_orphans`<br>
+**Default**: `false`<br>
+Automatically remove orphaned spans generated by auto-instrumentation. Currently, this only applies to some Redis and Laravel calls used in the context of Laravel Horizon. Added in version `0.88.0`.<br><br>
+**Note:** These orphaned spans are flushed but not recorded in the trace. Moreover, the specific single-span traces that are removed with this configuration option are:
+  - `laravel.event.handle`
+  - `laravel.provider.load`
+  - `Predis.Client.__construct`
+  - `Predis.Client.executeCommand`
+  - `Predis.Pipeline.executePipeline`
+
+`DD_TRACE_REMOVE_ROOT_SPAN_LARAVEL_QUEUE`
+: **INI**: `datadog.trace.remove_root_span_laravel_queue`<br>
+**Default**: `true`<br>
+Automatically disable root span generation (see `DD_TRACE_GENERATE_ROOT_SPAN`) and enable auto-flushing (see `DD_TRACE_AUTO_FLUSH_ENABLED`) for Laravel Queue/Horizon commands. Added in version `0.88.0`.
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 : **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
@@ -273,15 +308,20 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][5] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
+`DD_HTTP_SERVER_ROUTE_BASED_NAMING`
+: **INI**: `datadog.http_server_route_based_naming`<br>
+**Default**: `true`<br>
+Enable route-based naming for HTTP server requests. Set to `true` to use the integration-specific root span's resource name format. When `false`, the HTTP method and path are used instead. Added in version `0.89.0`.
+
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
 **Default**: `1.0`<br>
-The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions < `0.36.0`, this parameter is `DD_SAMPLING_RATE`.
+The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
 
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
 **Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.
+A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
 
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
@@ -309,12 +349,26 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **Default**: `null`<br>
-Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
+Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+
+`DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_post_data_param_allowed`<br>
+**Default**: ""<br>
+A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
+**Example**:
+  - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
+  - In this scenario, the collected metadata is:
+    - `http.request.foo.bar.password=Password12!`
+    - `http.request.foo.bar.username=<redacted>`
+    - `http.request.foo.baz.bar=qux`
+    - `http.request.foo.baz.key=value`
+    - `http.request.qux=<redacted>`
 
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
@@ -337,7 +391,7 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
-  Regular expression used to obfuscate the query string included as part of the URL. Added in version `0.76.0`.
+  Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
@@ -366,6 +420,10 @@ Enables linking between data sent from APM and the Database Monitoring product w
 The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
 The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
 
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: **INI**: `datadog.instrumentation_telemetry_enabled`<br>
+**Default**: `true`<br>
+Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
 
 #### Integration names
 
@@ -462,7 +520,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Headers extraction and injection
 
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context. 
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -481,3 +539,6 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/
+[16]: /tracing/configure_data_security#telemetry-collection
+[17]: /tracing/other_telemetry/connect_logs_and_traces/php
+

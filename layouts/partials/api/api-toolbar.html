@@ -2,14 +2,6 @@
 {{ $.Scratch.Add "path" .Site.BaseURL }}
 
 <div class="api-toolbar pt-2 mb-lg-1 d-lg-flex justify-content-between">
-    <div id="breadcrumbs">
-        {{ with .Page.Parent }}
-            <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ .Title }}</a>
-            &nbsp;>&nbsp;
-        {{ end }}
-
-        <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
-    </div>
-
+    {{ partial "breadcrumbs.html" . }}
     {{ partial "language-region-select.html" . }}
 </div>

@@ -25,7 +25,7 @@ To identify and control the volume of unparsed logs in your organization:
 ## Detect unparsed logs
 To determine if a specific log has been parsed by your pipelines, open the log and check the Event Attributes panel. If the log is unparsed, instead of showing attributes extracted from your log, the panel shows a message saying that no attributes were extracted:
 
-{{< img src="logs/guide/unparsed-logs/unparsed-log.jpg" alt="Unparsed log details"  style="width:90%;">}}
+{{< img src="logs/guide/unparsed-logs/unparsed-log.jpg" alt="Unparsed log details" style="width:90%;">}}
 
 
 You can start parsing and unparsed log by creating [custom pipelines][1] or using a [log integration][2] as the source of the log to take advantage of the automatic pipeline setup.
@@ -33,7 +33,7 @@ You can start parsing and unparsed log by creating [custom pipelines][1] or usin
 ## Query for unparsed logs
 If you have many logs, making one-by-one checking unviable, you can instead query for unparsed logs by using the filter `datadog.pipelines:false` in the [Log Explorer][3]:
 
-{{< img src="logs/guide/unparsed-logs/datadog-pipeline-false-log-explorer.jpg" alt="Query unparsed logs"  style="width:90%;">}}
+{{< img src="logs/guide/unparsed-logs/datadog-pipeline-false-log-explorer.jpg" alt="Query unparsed logs" style="width:90%;">}}
 
 This filter returns all indexed logs without custom attributes after the pipeline processing.
 [Pattern aggregation][4] shows an aggregated view of the common patterns in the unparsed logs, which can kickstart your creation of custom pipelines.
@@ -43,7 +43,7 @@ Querying for unparsed logs lets you select the unparsed _indexed_ logs. It's als
 
 To create a metric for unparsed logs, create a [custom metric][6] using the `datadog.pipelines:false` query:
 
-{{< img src="logs/guide/unparsed-logs/logs-unparsed-metric.jpg" alt="Generate logs.unparsed metric"  style="width:90%;">}}
+{{< img src="logs/guide/unparsed-logs/logs-unparsed-metric.jpg" alt="Generate logs.unparsed metric" style="width:90%;">}}
 
 As for any log-based metric, you can add dimensions in the `group by` field. The example above shows grouping by `service` and `team`. You should group by the dimensions that you are using to define the ownership of a log.
 ## Monitor the volume of unparsed logs
@@ -55,7 +55,7 @@ To monitor the volume of unparsed logs:
 3. Define the quota per `team`.
 4. Ensure that the [alert conditions][9] fit when you want to be alerted.
 
-{{< img src="logs/guide/unparsed-logs/monitor-unparsed-logs-team.jpg" alt="Query unparsed logs"  style="width:90%;">}}
+{{< img src="logs/guide/unparsed-logs/monitor-unparsed-logs-team.jpg" alt="Query unparsed logs" style="width:90%;">}}
 
 ## Further Reading
 

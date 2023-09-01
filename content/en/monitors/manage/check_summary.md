@@ -29,7 +29,7 @@ Datadog checks report a status on each run. The [check summary page][1] displays
 
 To find a specific check, use the `filter checks` search box on the check summary page. Click on a check name to see the statuses and tags associated with the check. Filter the list further by using the `filter checks` search box inside the check panel:
 
-{{< img src="monitors/check_summary/check_search.png" alt="Check details"  style="width:100%;">}}
+{{< img src="monitors/check_summary/check_search.png" alt="Check details" style="width:100%;">}}
 
 ## Dashboards
 

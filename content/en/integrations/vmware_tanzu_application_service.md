@@ -109,7 +109,7 @@ For Agent version 6.12 or greater, when using a [proxy configuration][8] with th
 
 If the connection fails to establish and log collection does not start, an event like this appears in the [Events Explorer][9]. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established"  >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established" >}}
 
 ### Tags
 

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rookout-license
 app_uuid: db9216cf-1ab9-43f4-8c16-ccc7dd0f4f72
 assets: {}

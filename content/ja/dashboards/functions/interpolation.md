@@ -101,7 +101,7 @@ default_zero(avg:custom_metric{*})
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/
 [2]: /ja/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [3]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 [4]: /ja/metrics/

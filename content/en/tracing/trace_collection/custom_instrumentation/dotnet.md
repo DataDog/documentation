@@ -59,7 +59,7 @@ If you want to customize the span's attributes and you have the ability to modif
 
 Add `[Trace]` to methods for Datadog to trace them when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
-`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. You can set **operation name** and **resource name** as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute. For example:
+`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. You can set **operation name** and **resource name** as named arguments of the `[Trace]` attribute to better reflect what is being instrumented. Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute. For example:
 
 ```csharp
 using Datadog.Trace.Annotations;
@@ -132,7 +132,7 @@ using (var scope = Tracer.Instance.StartActive("custom-operation"))
 }
 ```
 
-Add custom [span tags][5] to your [spans][6] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][5] to your [spans][6] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Manually creating a new span
 

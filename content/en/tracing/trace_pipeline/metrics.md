@@ -58,7 +58,7 @@ This metric is tagged by `env` and `service` so you can spot which environments 
 
 ## APM Traces Estimated Usage dashboard
 
-The [APM Traces Usage dashboard][8] contains several widget groups displaying high-level KPIs and additional  usage information.
+The [APM Traces Usage dashboard][8] contains several widget groups displaying high-level KPIs and additional usage information.
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
@@ -87,5 +87,5 @@ For each ingestion reason, you can find out which environments and services are 
 [4]: /account_management/billing/apm_tracing_profiler/
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[7]: /tracing/trace_pipeline/ingestion_mechanisms//#head-based-sampling
+[7]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [8]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

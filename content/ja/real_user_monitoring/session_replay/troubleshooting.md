@@ -7,8 +7,11 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイについて
+- link: /integrations/content_security_policy_logs
+  tag: Documentation
+  text: Datadog で CSP 違反の検出と集計を行う
 kind: documentation
-title: セッションリプレイのトラブルシューティング
+title: セッションリプレイブラウザのトラブルシューティング
 ---
 
 ## 概要
@@ -47,7 +50,7 @@ Datadog セッションリプレイで予期しない動作が発生した場合
 
 ```html
 <link rel="stylesheet" crossorigin="anonymous"
-      href="https://assets.example.com/style.css”>
+      href="https://assets.example.com/style.css">
 ```
 
 さらに、`assets.example.com` の `example.com` ドメインを承認します。これにより、[`Access-Control-Allow-Origin`][3] ヘッダーを設定することにより、アセットファイルがリソースをロードできるようになります。

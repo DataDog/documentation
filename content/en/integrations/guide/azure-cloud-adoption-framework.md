@@ -166,7 +166,7 @@ For more information about how to configure SLOs and exposing them to stakeholde
 [8]: /dashboards/#clone-dashboard
 [9]: /dashboards/template_variables/
 [10]: /monitors/notify/variables/?tab=is_alert#dynamic-handles
-[11]: https://app.datadoghq.com/account/settings#agent
+[11]: https://app.datadoghq.com/account/settings/agent/latest
 [12]: https://app.datadoghq.com/account/settings#integrations
 [13]: https://app.datadoghq.com/apm/getting-started
 [14]: https://app.datadoghq.com/logs/onboarding

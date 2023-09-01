@@ -67,11 +67,15 @@ nav_sections:
       - title: Security
         link: security/
         icon: security-platform
-        desc: Detect threats and misconfigurations in your applications and infrastructure
+        desc: Detect threats, vulnerabilities, and misconfigurations
       - title: Synthetic Monitoring
         link: synthetics/
         icon: synthetics
         desc: Ensure uptime, flag regional issues, and test application performance
+      - title: Mobile Application Testing
+        link: mobile_app_testing/
+        icon: mobile
+        desc: Monitor user journeys and business transactions in mobile applications
       - title: Continuous Testing
         link: continuous_testing/
         icon: continuous-testing
@@ -100,10 +104,18 @@ nav_sections:
         link: continuous_integration/
         icon: ci
         desc: See test metrics, build results, and pipeline executions for your CI pipeline
+      - title: Cloud Cost Management
+        link: cloud_cost_management/
+        icon: cloud-cost-management
+        desc: Take control of your cloud spend with unified observability and cost data
       - title: Database Monitoring
         link: database_monitoring/
         icon: database-2
         desc: Explore enriched dashboards, query metrics, and query samples
+      - title: Data Streams Monitoring
+        link: data_streams/
+        icon: datastreams-monitoring
+        desc: Track and improve performance of your data streaming pipelines
       - title: Observability Pipelines
         link: observability_pipelines/
         icon: pipelines
@@ -112,6 +124,10 @@ nav_sections:
         link: universal_service_monitoring/
         icon: usm
         desc: Discover, map, and monitor services without changing code
+      - title: Workflow Automation
+        link: workflows
+        icon: workflows
+        desc: Automate and orchestrate processes across your tech stack
   - nav_section:
     - name: 'Configuration'
     - navtiles:

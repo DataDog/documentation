@@ -40,7 +40,7 @@ title: Service Check
 
 **Monitors** > **Check Summary** をクリックし、[チェック内容のサマリー][1]ページを表示します。
 
-{{< img src="developers/service_checks/check_summary.png" alt="チェック内容のサマリー"  >}}
+{{< img src="developers/service_checks/check_summary.png" alt="チェック内容のサマリー" >}}
 
 これは、インフラストラクチャー全体の前日のチェックとステータス報告のリストです。チェックの 1 つを選択すると、関連付けられたタグごとに個別チェックの数が表示されます。
 
@@ -48,11 +48,11 @@ title: Service Check
 
 スクリーンボードの**チェックステータス**ウィジェットを使用して、サービスチェックを視覚化できます。
 
-{{< img src="developers/service_checks/check_status_widget.png" alt="チェックステータスウィジェット"  >}}
+{{< img src="developers/service_checks/check_status_widget.png" alt="チェックステータスウィジェット" >}}
 
 **チェックステータス**ウィジェットアイコンをクリックすると、次のポップアップが表示されます。
 
-{{< img src="developers/service_checks/check_widget_config.png" alt="チェックステータス構成"  >}}
+{{< img src="developers/service_checks/check_widget_config.png" alt="チェックステータス構成" >}}
 
 このフォームで、以下の設定を行うことができます。
 
@@ -66,7 +66,7 @@ title: Service Check
 サービスチェックは、メトリクスのように時間をかけてグラフ化できなくても、モニターすることは可能です。
 **Monitors** > **New Monitor** で、**Service Check** を選択します。
 
-{{< img src="developers/service_checks/service_check_monitor.png" alt="チェックモニター"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="チェックモニター" >}}
 
 このフォームで、以下の設定を行うことができます。
 
@@ -82,4 +82,4 @@ title: Service Check
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
 [4]: /ja/monitors/notify/
-[5]: /ja/monitors/create/types/custom_check/
+[5]: /ja/monitors/types/service_check/

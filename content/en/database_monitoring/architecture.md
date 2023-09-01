@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The steps required for setting up Database Monitoring in Datadog varies based on the type of database you're using (Postgres, MySQL, SQL Server), and the host provider (self-hosted, AWS, Google Cloud SQL, or Azure). No matter which database or host provider you use, to be able to use Database Monitoring for your databases, you need the following:
+The steps required for setting up Database Monitoring in Datadog vary based on the type of database you're using (Postgres, MySQL, SQL Server), and the host provider (self-hosted, AWS, Google Cloud SQL, or Azure). No matter which database or host provider you use, to be able to use Database Monitoring for your databases, you need the following:
 
 * [A Datadog Agent][1]
 * Host for your Datadog Agent
@@ -75,7 +75,7 @@ If you are running your apps on [Kubernetes][11], use the [Datadog Cluster Agent
 
 The [Cluster Agent][14] automatically distributes the database instances across a pool of Agents. This ensures that only one instance of each check runs, as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run.
 
-If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of database instances ---  the Cluster Agent spreads the cluster checks across the different nodes.
+If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of database instances --- the Cluster Agent spreads the cluster checks across the different nodes.
 
 
 

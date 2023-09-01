@@ -13,6 +13,9 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to boost your APM understanding'
 ---
 
 ## Overview
@@ -30,7 +33,7 @@ If you haven't already, create a [Datadog account][3].
 Before installing the Datadog Agent, set up a [Vagrant Ubuntu 22.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
 
 ```text
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -76,7 +79,7 @@ And in `trace-agent.log`:
 
 ```bash
 # /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
+2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
 2019-03-25 20:33:28 INFO (api.go:341) - no data received
 2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
@@ -163,7 +166,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure

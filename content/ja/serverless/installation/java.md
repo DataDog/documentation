@@ -15,13 +15,13 @@ kind: ドキュメント
 title: Java サーバーレスアプリケーションのインスツルメンテーション
 ---
 
-<div class="alert alert-warning">分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (<code>java8.al2</code>) または Java 11 (<code>java11</code>) ランタイム (1024 MB 以上のメモリ) を使用している必要があります。</div>
+分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用し、少なくとも 1024 MB のメモリが必要です。
 
-<div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
+Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][7]の場合は [AWS PrivateLink を使用][6]し、その他のサイトの場合は[プロキシを使用][8]してデータを送信することができます。
 
-<div class="alert alert-warning">以前に Datadog Forwarder を使用して Lambda 関数をセットアップした場合は、<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">Datadog Forwarder を使用したインスツルメント</a>を参照してください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
+以前に Datadog Forwarder を使用して Lambda 関数をセットアップした場合は、[Datadog Forwarder を使用したインスツルメント][9]を参照してください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。
 
-<div class="alert alert-warning">Datadog Lambda レイヤー `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用している場合、<a href="https://docs.datadoghq.com/serverless/guide/upgrade_java_instrumentation">専用の説明に従ってアップグレード</a>してください。</div>
+Datadog Lambda レイヤーの `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用している場合、[アップグレードに関する特別指示][10]に従ってください。
 
 ## インストール
 
@@ -308,6 +308,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ## 次のステップ
 
 - [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][11]を有効にします。
 - [カスタムメトリクス][2]または [APM スパン][3]を送信して、ビジネスロジックを監視します。
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][4]を参照してください
 - [高度な構成][5]を参照して以下のことを行ってください。
@@ -326,3 +327,9 @@ Datadog サーバーレスプラグインをインストールして構成する
 [3]: /ja/tracing/custom_instrumentation/java/
 [4]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /ja/serverless/configuration/
+[6]: /ja/agent/guide/private-link/
+[7]: /ja/getting_started/site/
+[8]: /ja/agent/proxy/
+[9]: /ja/serverless/guide/datadog_forwarder_java
+[10]: /ja/serverless/guide/upgrade_java_instrumentation
+[11]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

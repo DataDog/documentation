@@ -30,7 +30,7 @@ Ce mécanisme de test de la connectivité est uniquement exécuté au démarrage
 
 Pour vérifier le transport que l'Agent utilise, exécutez la [commande status de l'Agent][1].
 
-{{< img src="agent/logs/agent-status.png" alt="Commande status de l'Agent"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Commande status de l'Agent" style="width:70%;">}}
 
 **Remarques** :
 

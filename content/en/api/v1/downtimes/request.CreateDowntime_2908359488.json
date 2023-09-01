@@ -21,5 +21,11 @@
   "mute_first_recovery_notification": true,
   "monitor_tags": [
     "tag0"
+  ],
+  "notify_end_states": [
+    "alert"
+  ],
+  "notify_end_types": [
+    "canceled"
   ]
 }

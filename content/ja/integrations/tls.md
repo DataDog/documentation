@@ -31,7 +31,7 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 2.10.0
+integration_version: 2.12.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -72,7 +72,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 TLS チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -136,6 +136,6 @@ TLS には、イベントは含まれません。
 
 
 [1]: https://en.wikipedia.org/wiki/Transport_Layer_Security
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

@@ -4,6 +4,7 @@ kind: documentation
 description: "Overview of the mechanisms in the tracer and the Agent that control trace ingestion."
 aliases:
 - /tracing/trace_ingestion/mechanisms
+- /tracing/trace_pipeline/ingestion_mechanisms//
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
@@ -48,7 +49,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 <div class="alert alert-warning">Remote configuration for ingestion configuration in the Agent is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
 
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][23] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
 
 #### Local configuration
 
@@ -63,7 +64,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 - For PHP applications, use the tracing library's user-defined rules instead.
 - The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries other than PHP. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
-All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`.  The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
+All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
@@ -95,6 +96,8 @@ export DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 
 The service name value is case sensitive and must match the case of the actual service name.
 
+<div class="alert alert-info"><strong>Beta</strong>: Starting in version 1.18.3, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
+
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
 Read more about sampling controls in the [Java tracing library documentation][1].
@@ -118,13 +121,12 @@ Read more about sampling controls in the [Python tracing library documentation][
 [1]: /tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
 
-For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
+For example, to send 10% of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
@@ -214,6 +216,8 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
+<div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
+
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
 Read more about sampling controls in the [.NET tracing library documentation][1].
@@ -222,7 +226,7 @@ Read more about sampling controls in the [.NET tracing library documentation][1]
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: All the spans from a trace sampled using a tracing library configuration  are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
+**Note**: All the spans from a trace sampled using a tracing library configuration are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
 
 ## Error and rare traces
 
@@ -729,7 +733,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 
 A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][7] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
 
-Beginning with version `4.30.0` of the RUM browser SDK, you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter.  Set `traceSampleRate` to a number between `0` and `100`.
+Beginning with version `4.30.0` of the RUM browser SDK, you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter. Set `traceSampleRate` to a number between `0` and `100`.
 If no `traceSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
 
 Similarly, control the trace sampling rate in other SDKs by using similar parameters:
@@ -738,7 +742,7 @@ Similarly, control the trace sampling rate in other SDKs by using similar parame
 |-------------|-----------------------|--------------------|
 | Browser     | `traceSampleRate`     | [v4.30.0][8]       |
 | iOS         | `tracingSamplingRate` | [1.11.0][9] _Sampling rate is reported in the Ingestion Control Page since [1.13.0][16]_ |
-| Android     | `traceSamplingRate`   | [1.13.0][10] _Sampling rate is reported in the Ingestion Control Page since [1.15.0][17]_ |
+| Android     | `traceSampleRate`   | [1.13.0][10] _Sampling rate is reported in the Ingestion Control Page since [1.15.0][17]_ |
 | Flutter     | `tracingSamplingRate` | [1.0.0][11] |
 | React Native | `tracingSamplingRate` | [1.0.0][12] _Sampling rate is reported in the Ingestion Control Page since [1.2.0][18]_  |
 
@@ -758,6 +762,10 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 | Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][14] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
 | Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][15] as a threat. |
 
+## Ingestion mechanisms in OpenTelemetry 
+`ingestion_reason:otel`
+
+Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Collector or the Datadog Agent), you have multiple ways of controlling ingestion sampling. See [Ingestion Sampling with OpenTelemetry][22] for details about the options available for sampling at the OpenTelemetry SDK, OpenTelemetry Collector, and Datadog Agent level in various OpenTelemetry setups.
 
 ## Further Reading
 
@@ -783,4 +791,6 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[21]: /agent/remote_config/#enabling-remote-configuration
+[22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry
+[23]: /agent/remote_config/

@@ -29,7 +29,7 @@ further_reading:
   - link: "/dashboards/widgets/"
     tag: "Documentation"
     text: "Discover all available Widgets for your Dashboard"
-  - link: "/mobile/#dashboards"
+  - link: "/service_management/mobile/#dashboards"
     tag: "Documentation"
     text: "View your Dashboards on the Mobile App"
   - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
@@ -41,6 +41,14 @@ further_reading:
   - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
     tag: "Developer docs"
     text: "Create great integration dashboards"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"
+algolia:
+  tags: ['snapshot']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -54,6 +62,7 @@ A dashboard is Datadog's tool for visually tracking, analyzing, and displaying k
     {{< nextlink href="/dashboards/querying" >}}Querying: See the formatting options for graph queries{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions" >}}Functions: Modify metric queries and resulting graphs{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
+    {{< nextlink href="/dashboards/change_overlays" >}}Overlays: Automatically overlay change events on graphs{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -64,7 +73,7 @@ To create a dashboard, click **+New Dashboard** on the [Dashboard List][4] page 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
 ### Dashboards
-Dashboards are on a grid based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views, which update in real-time and can represent fixed points in the past. They also work well for debugging.
+Dashboards are on a grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in realtime, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
 
 ### Timeboards
 Timeboards have automatic layouts, and represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
@@ -94,7 +103,7 @@ Click on any dashboard graph to open an options menu:
 
 To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
 
-The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (`Past 1 Hour`, `Past 1 Day`, etc.) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][11]. If a moving window is chosen, the widgets are updated to move along with the time window.
+The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (for example, `Past 1 Hour` or `Past 1 Day`) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][11]. If a moving window is chosen, the widgets are updated to move along with the time window.
 
 Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
 
@@ -126,9 +135,13 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 ### Settings
 
+#### Version history
+
+From a dashboard, click on the settings icon and then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
+
 #### Generate public URL
 
-Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][12].
+Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][13].
 
 #### Display UTC time
 
@@ -136,7 +149,7 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event explorer][13]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [Events Explorer][14]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
@@ -150,22 +163,19 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-At the top of the dashboard, click on settings and select *Permissions*.
+At the top of the dashboard, click on configure and select *Permissions*.
 
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
-
-Use the pop-up to restrict access to you, everyone in your organization with your role, or to specific roles in your organization.
+Use the pop-up to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][14].
+Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][15].
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][15].
+If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
 
-**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][16] to enable this feature. 
-
+**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
 
 #### High-density mode
 
@@ -188,30 +198,33 @@ From an individual dashboard, copy, import, or export a dashboard's JSON using t
 
 #### Delete dashboard
 
+<div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
+
 Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
 
 ## Dashboard details
 
-From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A dropdown panel opens.
+From an individual dashboard, hover over the dashboard title to view and edit dashboard details. A popover panel opens.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
-Under the title, a byline tells you who created the dashboard.
+Under the title, the avatar tells you who created the dashboard.
 
-### Suggested dashboards and active users
+### Suggested dashboards
 
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details view displays a list of the most active users of this dashboard.
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. 
+
+To add a suggested dashboards list, add `[[suggested_dashboards]]` inside the dashboard description. 
 
 ### Edit details
 
-Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
+Update Markdown-supported dashboard descriptions or associate [teams][18] with a dashboard:
 
 1. Open the dashboard you wish to edit.
-1. Click the caret icon next to the dashboard title. A dropdown panel opens.
-1. Click **Edit**. The panel changes to edit mode.
+1. Hover the dashboard title. A dropdown panel opens.
+1. Click on the dashboard title or description to edit them. 
+1. Once done editing click the done button.
 1. Select up to 5 teams from the **Teams** dropdown.
-1. Enter a description in the text box. Format your text in Markdown.
-1. Click **Save**.
 
 
 ## Dashboard list
@@ -220,7 +233,7 @@ Search, view, or create dashboards and lists on the [Dashboard List][4] page.
 
 ### Teams
 
-Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][17].
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][18].
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -293,7 +306,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][18]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][19]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -311,7 +324,8 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile/
+
+[1]: /service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists
@@ -322,10 +336,11 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [9]: /tracing/
 [10]: /profiler/
 [11]: /dashboards/guide/custom_time_frames/
-[12]: /dashboards/sharing/#dashboards
-[13]: /events/
-[14]: /account_management/rbac/
-[15]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[16]: /help/
-[17]: /account_management/teams/
-[18]: /dashboards/template_variables/#saved-views
+[12]: /dashboards/guide/version_history/
+[13]: /dashboards/sharing/#dashboards
+[14]: /events/
+[15]: /account_management/rbac/
+[16]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[17]: /help/
+[18]: /account_management/teams/
+[19]: /dashboards/template_variables/#saved-views

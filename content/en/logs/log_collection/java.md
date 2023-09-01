@@ -25,9 +25,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/java-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and standardize Java logs"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
-To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent.
 
 Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event. For example:
 
@@ -276,8 +279,8 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/java/log.log"
-        service: java
+        path: "<path_to_your_java_log>.log"
+        service: <service_name>
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -308,7 +311,7 @@ If you are not already using Logback, most common logging libraries can be bridg
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes.  To use it:
+Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes. To use it:
 
 1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
@@ -536,3 +539,4 @@ To generate this JSON:
 [11]: https://github.com/logstash/logstash-logback-encoder
 [12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [13]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /glossary/#tail

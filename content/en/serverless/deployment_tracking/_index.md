@@ -10,7 +10,7 @@ further_reading:
       text: 'Serverless Tagging'
 ---
 
-{{< img src="serverless/deployment_tracking.jpeg" alt="Serverless Deployment Tracking"  style="width:100%;">}}
+{{< img src="serverless/deployment_tracking.jpeg" alt="Serverless Deployment Tracking" style="width:100%;">}}
 
 Deployment tracking helps you to understand when a new version of code or a configuration change causes a spike in errors, degraded performance, or when your cloud environment drifts from its expected state.
 
@@ -30,7 +30,7 @@ cloudtrail:LookupEvents
 
 If you have already added the permission, but you still don't see events for any of your AWS Lambda functions, enable Deployment Tracking using the AWS Lambda Integration Tile.
 
-{{< img src="serverless/lambda_integration_settings.png" alt="Lambda Integration Settings"  style="width:100%;">}}
+{{< img src="serverless/lambda_integration_settings.png" alt="Lambda Integration Settings" style="width:100%;">}}
 
 ## Further Reading
 

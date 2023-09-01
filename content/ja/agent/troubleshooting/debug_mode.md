@@ -1,18 +1,23 @@
 ---
-title: デバッグモード
-kind: documentation
 aliases:
-  - /ja/agent/faq/how-to-get-more-logging-from-the-agent
-  - /ja/agent/faq/agent-5-container-more-log
+- /ja/agent/faq/how-to-get-more-logging-from-the-agent
+- /ja/agent/faq/agent-5-container-more-log
 further_reading:
-  - link: /agent/troubleshooting/send_a_flare/
-    tag: Agent のトラブルシューティング
-    text: Agent フレアの送信
-  - link: /agent/troubleshooting/agent_check_status/
-    tag: Agent のトラブルシューティング
-    text: Agent チェックのステータスを確認
+- link: /agent/troubleshooting/send_a_flare/
+  tag: Agent のトラブルシューティング
+  text: Agent フレアの送信
+- link: /agent/troubleshooting/agent_check_status/
+  tag: Agent のトラブルシューティング
+  text: Agent チェックのステータスを確認
+kind: documentation
+title: デバッグモード
 ---
+
 ## Agent
+
+Agent は、デフォルトで `INFO` レベルでログを作成します。ログからさらに情報を取得するため、ログレベルを `DEBUG` に設定することができます。
+
+**注**: デバッグモードは、デバッグ目的のみにご使用ください。インデックス付きログの数が増加するため、Datadog では一定期間のみ `DEBUG` を有効にすることをおすすめしています。終了後は、ログレベルを `INFO` に戻します。
 
 Agent のフルデバッグモードを有効にするには
 
@@ -56,7 +61,7 @@ Agent のフルデバッグモードを有効にするには
 
 Agent v6.19 / v7.19 以降の場合は、以下を使用してランタイム時の Agent のログレベルを設定します。
 
-```
+```shell
 agent config set log_level debug
 ```
 

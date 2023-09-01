@@ -17,6 +17,12 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
   tag: "Learning Center"
   text: "Going Deeper with Logs Processing"
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: "Blog"
+  text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview
@@ -177,11 +183,11 @@ Integration processing pipelines are available for certain sources when they are
 
 To view an integration pipeline, navigate to the [Pipelines][5] page. To edit an integration pipeline, clone it and then edit the clone:
 
-{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline"  style="width:80%;">}}
+{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" style="width:80%;">}}
 
 See the ELB logs example below:
 
-{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing"  style="width:70%;">}}
+{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" style="width:70%;">}}
 
 ### Integration pipeline library
 
@@ -215,7 +221,7 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 
 It is possible to move a pipeline into another pipeline to transform it into a nested pipeline:
 
-{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true"  width="80%" >}}
+{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true" width="80%" >}}
 
 ## Manage your pipelines
 

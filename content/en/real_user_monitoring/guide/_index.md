@@ -19,8 +19,9 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting Started with RUM Deployment Tracking{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting Started with Feature Flag Tracking{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -33,10 +34,17 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Proxy your browser RUM data {{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Tips when using browser developers tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}Define services and track UI components in your browser application {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Support workflows{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrich your Session Replays with Shadow DOM components{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
+
 {{< /whatsnext >}}

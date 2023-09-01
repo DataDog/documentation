@@ -1,7 +1,4 @@
 ---
-beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/common_setup.md
 description: RUM とセッションリプレイまたはログ管理のために Flutter Monitoring をセットアップします。
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
@@ -9,7 +6,7 @@ further_reading:
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法
@@ -42,7 +39,7 @@ platform :ios, '11.0'
 
 ### Android
 
-Android の場合、`minSdkVersion` のバージョンは &gt;= 19 でなければならず、Kotlin を使用している場合はバージョン &gt;= 1.5.31 であるべきです。これらの制約は、通常 `app/build.gradle` ファイル内の先頭に記述されます。
+Android の場合、`minSdkVersion` のバージョンは >= 19 でなければならず、Kotlin を使用している場合は、バージョン >= 1.6.21 である必要があります。これらの制約は通常、`android/app/build.gradle` ファイルに保持されています。
 
 ### Web
 
@@ -61,7 +58,7 @@ Web の場合、`index.html` の `head` タグの下に以下を追加します�
 
    ```yaml
    dependencies:
-     datadog_flutter_plugin: ^1.0.0-rc.1
+     datadog_flutter_plugin: ^1.3.0
    ```
 2. 以下のスニペットで、Datadog の各機能 (Logs や RUM など) のコンフィグレーションオブジェクトを作成します。ある機能に対してコンフィギュレーションを渡さない場合、その機能は無効化されます。
 
@@ -129,6 +126,22 @@ RUM の初期化は、`main.dart` ファイル内の 2 つのメソッドのう�
    });
    ```
 
+### RUM セッションのサンプリング
+
+アプリケーションが Datadog RUM に送信するデータを制御するには、[Flutter RUM SDK を初期化][2]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。デフォルトでは、`sessionSamplingRate` は 100 に設定されています (すべてのセッションを保持)。
+
+たとえば、セッションの使用の 50% のみを維持するには、
+
+```dart
+final config = DdSdkConfiguration(
+    // 他の構成...
+    rumConfiguration: RumConfiguration(
+        applicationId: '<YOUR_APPLICATION_ID>',
+        sessionSamplingRate: 50.0,
+    ),
+);
+```
+
 ### 追跡の同意を設定する
 
 GDPR 規制を遵守するため、Datadog Flutter SDK は初期化時に `trackingConsent` の値を求めます。
@@ -152,6 +165,6 @@ SDK は新しい値に応じて動作を変更します。例えば、現在の�
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/flutter
+[3]: /ja/account_management/api-app-keys/#client-tokens
+[4]: /ja/real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html

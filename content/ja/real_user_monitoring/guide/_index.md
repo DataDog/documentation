@@ -1,13 +1,13 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: RUM & セッションリプレイガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 ---
 
 {{< whatsnext desc="RUM 全般:" >}}
@@ -21,6 +21,7 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly を使用した RUM のリモート構成{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM デプロイメント追跡の概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザ RUM:" >}}
@@ -32,11 +33,18 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}RUM ブラウザ SDK のアップグレード{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}ブラウザ RUM データをプロキシする {{< /nextlink >}}
 {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}ブラウザ開発ツール使用時の注意点{{< /nextlink >}}
-{{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}ブラウザアプリケーションでサービスを定義し、UI コンポーネントを追跡する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}ブラウザアプリケーションでサービスを定義し、UI コンポーネントを追跡する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Shopify ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Squarespace ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}WordPress + WooCommerce ストアで RUM を有効にする{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="セッションリプレイ" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}セッションリプレイのためのサードパーティサービスワーカーの許可{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}セッションリプレイをサポートワークフローに活用する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイを充実させる{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}セッションリプレイとサードパーティツールの連携{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}セッションリプレイをポストモーテムのキーツールとして活用する{{< /nextlink >}}
+
 {{< /whatsnext >}}

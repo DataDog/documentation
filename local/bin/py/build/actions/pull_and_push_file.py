@@ -6,6 +6,7 @@ import yaml
 
 from os.path import basename
 from process_agent_config import process_agent_config
+from actions.comment_conversion import replace_comments
 
 TEMPLATE = """\
 ---
@@ -35,6 +36,10 @@ def pull_and_push_file(content, content_dir):
             new_yml = yaml.safe_load(fm)
         elif len(split) == 1:
             txt = split[0]
+
+        # replace html comments with shortcodes
+        txt = replace_comments(txt)
+
         # If options include front params, then the H1 title of the source file is striped
         # and the options front params are inlined
         if "front_matters" in content["options"]:

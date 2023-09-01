@@ -13,12 +13,6 @@ kind: documentation
 title: カスタム宛先へのログの転送
 ---
 
-{{% site-region region="us,us3,us5,ap1,eu" %}}
-<div class="alert alert-warning">
-ログ転送のご利用には制限があります。この<a href="https://www.datadoghq.com/log-forwarding-limited-availability/">フォーム</a>にご記入の上、アクセスをリクエストしてください。
-</div>
-{{% /site-region %}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 ガバメントサイトでは、ログ転送はご利用いただけません。詳しくはアカウント担当者にお問い合わせください。
@@ -68,7 +62,7 @@ title: カスタム宛先へのログの転送
 {{% tab "Splunk" %}}
 
 6. 宛先の名前を入力します。
-7. **Configure Destination** セクションで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。例: `https://<your_account>.splunkcloud.com:8088`
+7. **Configure Destination** セクションで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。例えば、`https://<your_account>.splunkcloud.com:8088`と入力します。**注**: エンドポイントには `/services/collector/event` が自動的に付加されます。
 8. **Configure Authentication** セクションで、Splunk HEC トークンを入力します。Splunk HEC トークンの詳細については、[HTTP Event Collector のセットアップと使用][1]を参照してください。
 9. **保存**をクリックします。
 

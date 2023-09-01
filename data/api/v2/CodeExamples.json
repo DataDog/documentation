@@ -44,6 +44,18 @@
       "description": "Search pipelines events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCIAppPipelineEvent": [
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "",
+      "description": "Send pipeline event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_129899466",
+      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+    }
+  ],
   "AggregateCIAppTestEvents": [
     {
       "group": "ci_visibility_tests",
@@ -136,6 +148,20 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Schedule a downtime returns \"OK\" response"
+    }
+  ],
+  "UpdateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",
@@ -160,6 +186,27 @@
       "group": "fastly_integration",
       "suffix": "",
       "description": "Update Fastly account returns \"OK\" response"
+    }
+  ],
+  "MakeGCPSTSDelegate": [
+    {
+      "group": "gcp_integration",
+      "suffix": "_962598975",
+      "description": "Create a Datadog GCP principal with empty body returns \"OK\" response"
+    }
+  ],
+  "CreateGCPSTSAccount": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a new entry for your service account returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPSTSAccount": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update STS Service Account returns \"OK\" response"
     }
   ],
   "UpdateIPAllowlist": [
@@ -587,6 +634,13 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
+  "UpdateFinding": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Mute or unmute a finding returns \"OK\" response"
+    }
+  ],
   "UpdateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -693,6 +747,25 @@
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
     }
   ],
+  "AggregateSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Aggregate spans returns \"OK\" response"
+    }
+  ],
+  "ListSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Search spans returns \"OK\" response"
+    },
+    {
+      "group": "spans",
+      "suffix": "_3495563906",
+      "description": "Search spans returns \"OK\" response with pagination"
+    }
+  ],
   "CreateSpansMetric": [
     {
       "group": "spans_metrics",
@@ -726,6 +799,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Create a team returns \"CREATED\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_252121814",
+      "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
   "UpdateTeamLink": [

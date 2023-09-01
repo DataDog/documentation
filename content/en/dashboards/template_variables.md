@@ -26,11 +26,9 @@ further_reading:
   text: "Discover Widgets for your Dashboard"
 ---
 
-Template variables allow you to dynamically filter one or more widgets in a dashboard.
+## Overview
 
-## Create
-
-To create your first template variable in the dashboard, click **Add Template Variables**. If template variables are already defined, click on the *pencil* icon to open the template variable editor. Once in edit mode, click on **Add Variable +** to add a template variable.
+Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections which allows your to organize and navigate your visualizations through the dropdown selections. 
 
 A template variable is defined by:
 
@@ -41,26 +39,22 @@ A template variable is defined by:
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
 * **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
+## Add a template variable
 
+To add a template variable in a dashboard:
+1. Click **Add Template Variables**. 
+1. If template variables are already defined, click the *pencil* icon to open the template variable editor. 
+1. In edit mode, click **+ Add Template Variable** to create a new template variable.
+1. (Optional) After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
 {{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
+1. (Optional) To add this template variable for all widget filters, click the **Add to All** option. You can also [customize the template variables](#usage) in individual widgets.
+1. (Optional) To remove a template variable from all widgets, click the **Remove From All** option.
 
-[Use the template variables](#usage) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
-
-### Logs, APM, and RUM queries
-
-Template variables work with log, APM, and RUM widgets because metrics, logs, APM, and RUM share the same tags.
-Additionally, you can define log, APM, and RUM template variables based on [log][2], APM, or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
-
-On log, APM, and RUM widgets, you can use wildcards in the middle of a value (for example, `eng*@example.com`) or use multiple wildcards in a value (for example, `*prod*`).
-
-**Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM, and RUM widgets.
-
-### Saved views
+## Saved views
 
 {{< img src="dashboards/template_variables/saved_views.mp4" alt="Walk through of how to create, delete, and modify saved views" style="width:100%;" video="true">}}
 
-#### Create
+### Create
 
 Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
 
@@ -68,17 +62,25 @@ To save your current template variables' values in a view, select **Save selecti
 
 Your saved view appears in the dropdown menu. Click on the view to retrieve your previously saved template variable values.
 
-#### Delete
+### Delete
 
 To delete a view, click on the saved views dropdown menu and choose **Manage views...**. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
-#### Modify
+### Modify
 
 To modify the **Default view**, click on the pencil icon and update the template variable values. Then click **Done** to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
 
 ## Usage
 
 Template variables are used in widgets and event overlays. 
+
+### Logs, APM, and RUM queries
+
+Template variables work with log, APM, and RUM widgets because they share the same tags. You can define log, APM, and RUM template variables based on facets. These variables start with `@`, for example: `@http.status_code`.
+
+On log, APM, and RUM widgets, you can use wildcards in the middle of a value (for example, `eng*@example.com`) or use multiple wildcards in a value (for example, `*prod*`).
+
+**Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM, and RUM widgets.
 
 ### Widgets
 
@@ -90,7 +92,7 @@ Selecting **production** for the `environment` value dynamically scopes widgets 
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
-To include just the value in the query, append it with the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `service`, use `env:staging-$service.value`.
+To include the value in the query, append it with the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `service`, use `env:staging-$service.value`.
 
 Hover over the template variable fields to see at a quick glance, the widgets that use that variable highlighted on the dashboard.
 
@@ -100,12 +102,15 @@ When selecting a template variable value, associated values are displayed at the
 
 #### Text
 
-For text based widgets, you can display a template variable's tag/attribute and value with `$<TEMPLATE_VARIABLE_NAME>`, just its key with `$<TEMPLATE_VARIABLE_NAME>.key`, or just its value with `$<TEMPLATE_VARIABLE_NAME>.value`. This can come after any non-alphanumeric character, and can be followed by whitespace or any of the following characters: `#`, `$`, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, and `?`.
+For text-based widgets, you can display a template variable's tag/attribute and value with `$<TEMPLATE_VARIABLE_NAME>`, its key with `$<TEMPLATE_VARIABLE_NAME>.key`, or its value with `$<TEMPLATE_VARIABLE_NAME>.value`. This can come after any non-alphanumeric character, and can be followed by whitespace or any of the following characters: `#`, `$`, `%`, `=`, `;`, `"`, `(`, `)`, `[`, `]`, `{`, `}`, `^`, `*`, `+`, `|`, and `?`.
+
+**Note**: The wildcard syntax is not supported following a template variable.
 
 For example, with a template variable named `env`, with tag/attribute `environment`, and with a selected value of `dev`:
 * `$env` displays `environment:dev`
 * `$env.key` displays `environment`
 * `$env.value` displays `dev`
+* `$env*` looks for the exact value `dev*` NOT `dev{dynamic-wildcard-value}`
 
 ### Events overlay
 
@@ -143,6 +148,6 @@ For example, enter `$region` in the event overlays search box. This searches for
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#defining-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /logs/explorer/facets/
 [3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures

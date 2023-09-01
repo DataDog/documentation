@@ -61,6 +61,7 @@ Datadog supports associating the following resources with team handles:
 - [Resource Catalog][14]
 - [Service Catalog][5]
 - [Service Level Objectives][6]
+- Synthetic Tests, Global Variables, Private Locations
 
 ## Filter
 
@@ -85,6 +86,8 @@ The table below describes the products in which you can use the team filter:
 | [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
 | [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
 | [Service Level Objectives][13] | Team handle                                                                 |
+| [Data Streams Monitoring][15]  | Team handle                                                                 |
+| [Synthetic Tests][16]          | Team handle                                                                 |
 
 
 ## Permissions
@@ -115,10 +118,10 @@ To enforce a strict membership model, configure your default team settings so **
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /dashboards/#edit-details
-[3]: /monitors/incident_management/incident_details#overview-section
+[3]: /service_management/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [5]: /tracing/service_catalog/setup#add-service-definition-metadata
-[6]: /monitors/service_level_objectives/#slo-tags
+[6]: /service_management/service_level_objectives/#slo-tags
 [7]: https://app.datadoghq.com/dashboard/lists
 [8]: https://app.datadoghq.com/services
 [9]: https://app.datadoghq.com/incidents
@@ -126,4 +129,6 @@ To enforce a strict membership model, configure your default team settings so **
 [11]: https://app.datadoghq.com/apm/error-tracking
 [12]: https://app.datadoghq.com/logs/error-tracking
 [13]: https://app.datadoghq.com/slo/manage
-[14]: /security/cspm/resource_catalog
+[14]: /security/misconfigurations/resource_catalog
+[15]: https://app.datadoghq.com/data-streams
+[16]: https://app.datadoghq.com/synthetics

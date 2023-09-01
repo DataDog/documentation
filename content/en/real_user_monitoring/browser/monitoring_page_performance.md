@@ -26,7 +26,7 @@ further_reading:
 
 RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
 
-{{< img src="real_user_monitoring/browser/waterfall.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
 You can access performance metrics for your views in:
 
@@ -41,7 +41,7 @@ You can access performance metrics for your views in:
 
 [Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
 - Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
@@ -182,7 +182,7 @@ document.addEventListener("scroll", function handler() {
 
 [1]: /real_user_monitoring/dashboards/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/dashboards/performance_overview_dashboard
+[3]: /real_user_monitoring/dashboards/performance
 [4]: /real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/

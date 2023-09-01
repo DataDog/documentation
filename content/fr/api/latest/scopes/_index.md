@@ -1,6 +1,7 @@
 ---
-title: Contextes d'autorisation
 disable_sidebar: true
+title: Contextes d'autorisation
+type: documentation
 ---
 ## Contextes d'autorisation
 

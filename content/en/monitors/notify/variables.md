@@ -3,6 +3,9 @@ title: Variables
 kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
+- link: "/monitors/guide/template-variable-evaluation/"
+  tag: "Guide"
+  text: "Perform arithmetic operations and functions with template variable evaluations"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
@@ -227,13 +230,15 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle. 
 
-**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition. 
 
 ## Attribute and tag variables
 
-Use attribute and tag variables to render alert messages that are customized, informative, and specific to help people quickly understand the nature of the alert.
+Use attribute and tag variables to render alert messages that are customized, informative, and specific to help understand the nature of the alert.
+
+**Note**: If the monitor is configured to recover in no-data conditions (for example, when there are no events matching the query), the recovery message doesn't contain any data. To persist information in the recovery message, group by additional tags, which are accessible by `{{tag.name}}`.
 
 ### Multi alert variables
 
@@ -307,7 +312,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI monitors][5]_
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][8]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -315,9 +320,11 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 |-----------------|--------------------------------------------------|
 | Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
+| Error Tracking  | `{{span.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
+| Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
@@ -329,7 +336,7 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 ...
 ```
 
-{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax" style="width:90%;">}}
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
@@ -339,13 +346,16 @@ If a monitor uses Formulas & Functions in its queries, the values are resolved w
 
 #### Reserved attributes
 
-Logs, spans, and RUM events have generic reserved attributes, which you can use in variables with the following syntax:
+Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic reserved attributes, which you can use in variables with the following syntax:
 
 | Monitor type    | Variable syntax   | First level attributes |
 |-----------------|-------------------|------------------------|
-| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
-| Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
-| RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp` |
+| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id`, `link` |
+| Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link` |
+| RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp`, `link` |
+| Event             | `{{event.key}}`     | `id`, `title`, `text`, `host.name`, `tags` |
+| CI Pipeline             | `{{cipipeline.key}}`     | `service`, `env`, `resource_name`, `ci_level`, `trace_id`, `span_id`, `pipeline_fingerprint`, `operation_name`, `ci_partial_array`, `status`, `timestamp`, `link` |
+| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `error.message`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
 
 If the matching event does not contain the attribute in its definition, the variable is rendered empty.
 
@@ -563,6 +573,10 @@ If your alert message includes information that needs to be encoded in a URL (fo
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /monitors/configuration/#alert-grouping
 [2]: /monitors/types/log/
 [3]: /monitors/types/apm/?tab=analytics
@@ -570,3 +584,4 @@ https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 [5]: /monitors/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[8]: /monitors/types/database_monitoring/
