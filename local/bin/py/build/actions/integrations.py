@@ -747,7 +747,8 @@ class Integrations:
                 if not is_marketplace_integration_markdown_valid:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
-                    result = updated_markdown
+                    source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
+                    result = source_comment + updated_markdown
         else:
             print(f'Skipping markdown for: {file_name}')            
 
@@ -844,6 +845,7 @@ class Integrations:
                         new_file_name, result, dependencies, integration_id, integration_version, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
 
+                # write to content file
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
