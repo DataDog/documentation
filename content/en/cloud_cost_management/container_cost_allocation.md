@@ -144,4 +144,4 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 [3]: /containers/amazon_ecs/?tab=awscli
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
-[6]: https://docs.datadoghq.com/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
+[6]: /containers/orchestrator_explorer/?tab=datadogoperator
