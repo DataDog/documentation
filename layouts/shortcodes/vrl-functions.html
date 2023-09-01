@@ -1,0 +1,25 @@
+{{ $functions := $.Site.Data.reference.functions | default (dict) }}
+{{ $regexToFixMdLinks := `\[([^\[]+)\](\(.*\))` }}
+{{ range $category, $arrayOfFunctionObjs := $functions}}
+  <h2>{{ $category }} Functions</h2>
+  {{ range $obj := $arrayOfFunctionObjs }}
+  <div class="py-3" style="border-bottom:2px solid #DADADA">
+    <h2>{{ $obj.name }}</h2>
+    <p>{{ (replaceRE $regexToFixMdLinks "$1" $obj.description) | markdownify }}</p>
+    {{ with $obj.examples }}
+      <h3>Examples</h3>
+      <div>
+        <div class="card card-body">
+          {{ range $i, $ex := . }}
+            <p>{{ $ex.title | markdownify }}</p>
+            <strong>Source</strong>
+            {{ print "```bash\n" $ex.source "\n```" | markdownify }}
+            <strong>Return</strong>
+            {{ highlight $ex.return "bash" }}
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+  {{ end }}
+{{ end }}
