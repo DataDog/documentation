@@ -65,7 +65,7 @@ The purpose of Oracle DBM builds is to provide features and bug fixes before the
 
 ##### Linux
 
-The repository with RHEL and Ubuntu Oracle DBM builds are [here][6] and [here][7], respectively.
+Download the [RHEL][6] and [Ubuntu Oracle DBM][7] builds from their respective repositories.
 
 Set `DD_API_KEY` and run the following commands to install the Oracle DBM release, for example:
 
