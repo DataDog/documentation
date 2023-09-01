@@ -91,24 +91,24 @@ instances:
 ## Configure Azure managed identity authentication
 
 
-Azure allows users to configure managed identity authentication for any resource, which can access [Azure AD][15]. The Datadog Agent supports both [user and system assigned][10] managed identity authentication to your cloud databases.
+Azure allows users to configure managed identity authentication for any resource that can access [Azure AD][15]. The Datadog Agent supports both [user and system assigned][10] managed identity authentication to your cloud databases.
 
 
-### Connect to postgresql
+### Connect to PostgreSQL
 
 
-In order to configure authentication to your Postgresql Flexible or Single Server instance, do the following:
+In order to configure authentication to your PostgreSQL Flexible or Single Server instance, do the following:
 
 
 1. Create your [managed identity][11] in the Azure portal, and assign it to your Azure Virtual Machine where the agent is deployed.
-2. Configure an [Azure AD admin user][12] on your postgresql instance.
-3. Connect to your postgresql instance as the [Azure AD admin user][13], and run the following command:
+2. Configure an [Azure AD admin user][12] on your PostgreSQL instance.
+3. Connect to your PostgreSQL instance as the [Azure AD admin user][13], and run the following command:
 
 
 ```tsql
-select * from pgaadauth_create_principal('<identity_name>', false, false);
+select * from pgaadauth_create_principal('<IDENTITY_NAME>', false, false);
 ```
-4. Proceed with the normal [Agent setup steps][14], for Azure. For example:
+4. Proceed with the normal [Agent setup steps][14] for Azure. For example:
 
 
 Create the following schema **in every database**:
@@ -116,8 +116,8 @@ Create the following schema **in every database**:
 
 ```tsql
 CREATE SCHEMA datadog;
-GRANT USAGE ON SCHEMA datadog TO "<identity_name>";
-GRANT USAGE ON SCHEMA public TO "<identity_name>";
+GRANT USAGE ON SCHEMA datadog TO "<IDENTITY_NAME>";
+GRANT USAGE ON SCHEMA public TO "<IDENTITY_NAME>";
 GRANT pg_monitor TO datadog;
 ```
 
@@ -150,17 +150,17 @@ SECURITY DEFINER
 ```
 
 
-5. Configure your instance config with the `managed_identity` yaml block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
+5. Configure your instance config with the `managed_identity` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
 
 
 ```yaml
 instances:
  - host: example-flex-server.postgres.database.azure.com
    dbm: true
-   username: "IDENTITY_NAME"
+   username: "<IDENTITY_NAME>"
    ssl: "require"
    managed_identity:
-     client_id: "CLIENT_ID"
+     client_id: "<CLIENT_ID>"
      # Optionally set the scope from where to request the identity token
      identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
    azure:
@@ -177,32 +177,32 @@ In order to configure authentication to your Azure SQL DB or Azure Managed Insta
 
 1. Create your [managed identity][11] in the Azure portal, and assign it to your Azure Virtual Machine where the agent is deployed.
 2. Configure an [Azure AD admin user][16] on your SQL Server instance.
-3. Connect to your postgresql instance as the Azure AD admin user, and run the following command in the `master` database:
+3. Connect to your PostgreSQL instance as the Azure AD admin user, and run the following command in the `master` database:
 
 
 ```tsql
-CREATE LOGIN [managed-identity-name] FROM EXTERNAL PROVIDER;
+CREATE LOGIN <MANAGED_IDENTITY_NAME> FROM EXTERNAL PROVIDER;
 ```
 4. Proceed with the normal Agent setup steps, for Azure. For example, for [Azure Managed Instance][17]:
 
 
 ```tsql
-CREATE USER [managed-identity-name] FOR LOGIN [managed-identity-name];
-GRANT CONNECT ANY DATABASE to [managed-identity-name];
-GRANT VIEW SERVER STATE to [managed-identity-name];
-GRANT VIEW ANY DEFINITION to [managed-identity-name];
+CREATE USER <MANAGED_IDENTITY_NAME> FOR LOGIN <MANAGED_IDENTITY_NAME>;
+GRANT CONNECT ANY DATABASE to <MANAGED_IDENTITY_NAME>;
+GRANT VIEW SERVER STATE to <MANAGED_IDENTITY_NAME>;
+GRANT VIEW ANY DEFINITION to <MANAGED_IDENTITY_NAME>;
 GO
 ```
 
 
-If you are using [Azure SQL DB][19] then run the following from the `master` database:
+If you are using [Azure SQL DB][19], run the following from the `master` database:
 
 
 ```tsql
-CREATE LOGIN [managed-identity-name] FROM EXTERNAL PROVIDER;
-CREATE USER datadog FOR LOGIN [managed-identity-name];
-ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER [managed-identity-name];
-ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER [managed-identity-name];
+CREATE LOGIN <MANAGED_IDENTITY_NAME> FROM EXTERNAL PROVIDER;
+CREATE USER datadog FOR LOGIN <MANAGED_IDENTITY_NAME>;
+ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER <MANAGED_IDENTITY_NAME>;
+ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER <MANAGED_IDENTITY_NAME>;
 ```
 
 
@@ -210,14 +210,14 @@ And then create the user **in every database**:
 
 
 ```tsql
-CREATE USER [dbm-datadog-test-identity] FOR LOGIN [dbm-datadog-test-identity];
+CREATE USER <DBM_DATADOG_TEST_IDENTITY> FOR LOGIN <DBM_DATADOG_TEST_IDENTITY>;
 ```
 
 
-5. Update your instance config, with the `managed_identity` config block:
+5. Update your instance config with the `managed_identity` config block:
 
 
-**Note**: using the [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
+**Note**: [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
 
 
 ```yaml
