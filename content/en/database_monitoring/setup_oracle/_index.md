@@ -53,7 +53,7 @@ The Agent does not need to run on the same server nor the same platform as the m
 
 Datadog recommends you install the version listed in the [Latest Agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
 
-If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is a beta build, such as `7.46.0~dbm~oracle~0.34`, follow the instructions in [Oracle DBM build](#oracle-dbm-build).
+If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is an Oracle DBM build, such as `7.46.0~dbm~oracle~0.34`, follow the instructions in [Oracle DBM build](#oracle-dbm-build).
 
 #### Official release
 
