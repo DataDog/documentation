@@ -37,7 +37,7 @@ If you have many services that share the same metadata, you do not need separate
 
 The Service Catalog associates monitors to services when you tag the monitor with `service` and [APM primary tags][3]. 
 
-Muted monitors and groups will not be counted towards the total monitors displayed in ‘Setup Guidance’. 
+The total monitor count displayed on the **Setup Guidance** tab for a single service does not include muted monitors and groups. 
 
 
 ## Further reading
