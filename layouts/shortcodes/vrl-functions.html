@@ -1,10 +1,10 @@
 {{ $functions := $.Site.Data.reference.functions | default (dict) }}
 {{ $regexToFixMdLinks := `\[([^\[]+)\](\(.*\))` }}
 {{ range $category, $arrayOfFunctionObjs := $functions}}
-  <h2>{{ $category }} Functions</h2>
+  <h2 id="{{ $category | anchorize }}">{{ $category }} Functions</h2>
   {{ range $obj := $arrayOfFunctionObjs }}
   <div class="py-3" style="border-bottom:2px solid #DADADA">
-    <h2>{{ $obj.name }}</h2>
+    <h2 id="{{ $obj.name | anchorize }}">{{ $obj.name }}</h2>
     <p>{{ (replaceRE $regexToFixMdLinks "$1" $obj.description) | markdownify }}</p>
     {{ with $obj.arguments }}
       <h4 class="text-capitalize">Arguments</h4>

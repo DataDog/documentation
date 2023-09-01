@@ -23,10 +23,10 @@
                       <ul>
                         {{ range $category, $arrayOfFunctionObjs := $functions }}
                           <li>
-                            <a href="#">{{ $category }} Functions</a>
+                            <a href="#{{ $category | anchorize }}">{{ $category }} Functions</a>
                             <ul>
                             {{ range $obj := $arrayOfFunctionObjs }}
-                              <li><a href="#">{{ $obj.name }}</a></li>
+                              <li><a href="#{{ $obj.name | anchorize }}">{{ $obj.name }}</a></li>
                             {{ end }}
                             </ul>
                           </li>
