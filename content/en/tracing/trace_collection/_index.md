@@ -28,7 +28,7 @@ If you don't use the Single Step APM Instrumentation option, APM-specific config
 
 ### Install and configure the Agent
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is configured to receive traces in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -111,7 +111,11 @@ To instrument an application written in a language that does not have official l
 
 ### Option 3 - Auto-instrument your application from the Datadog UI
 
-For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. For more information and instructions, read [Injecting Libraries Remotely][3].
+<div class="alert alert-info">This feature is in private beta.</a></div>
+
+For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. 
+
+For more information and instructions, read [Injecting Libraries Remotely][3].
 
 ## APM setup tutorials
 
