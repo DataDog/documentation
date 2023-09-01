@@ -93,7 +93,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 **Web frameworks**:
 
 | Module         | Versions                          | Support Type               | Instrumentation level           |
-|:-------------- |:----------------------------------|:---------------------------|:--------------------------------|
+|:---------------|:----------------------------------|:---------------------------|:--------------------------------|
 | CakePHP        | 2.x                               | All supported PHP versions | Framework-level instrumentation |
 | CodeIgniter    | 2.x                               | PHP 7+                     | Framework-level instrumentation |
 | CodeIgniter    | 3.x                               | PHP 7+                     | Generic web tracing             |
@@ -101,7 +101,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | FuelPHP        | 1.1                               | PHP 7+                     | Generic web tracing             |
 | Laminas        |                                   | All supported PHP versions | Framework-level instrumentation |
 | Laravel        | 4.2, 5.x, 6.x                     | All supported PHP versions | Framework-level instrumentation |
-| Laravel 8      | 8.x, 9.x, 10.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
+| Laravel 8+     | 8.x, 9.x, 10.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
 | Lumen          | 5.2+                              | All supported PHP versions | Framework-level instrumentation |
 | Magento        | 1, 2                              | All supported PHP versions | Generic web tracing             |
 | Neos Flow      | 1.1                               | All supported PHP versions | Generic web tracing             |
