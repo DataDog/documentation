@@ -40,7 +40,7 @@ The alert conditions vary based on the [monitor type][1]. Configure monitors to 
 
 * Trigger when the `average`, `max`, `min`, or `sum` of the metric is
 * `above`, `above or equal to`, `below`, or `below or equal to` the threshold
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
+* during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
 
 ### Aggregation method
 
@@ -78,13 +78,13 @@ A cumulative time window has a fixed starting point and expands over time. Monit
 
 {{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
 
-A cumulative time window is reset once its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am, etc.
+A cumulative time window is reset after its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am.
 
 ### Evaluation frequency
 
 The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
 
-By default, evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
+By default, evaluation frequencies depend on the [evaluation window](#evaluation-window) that is used. A longer window results in lower evaluation frequencies. The following table illustrates how the evaluation frequency is controlled by larger time windows:
 
 | Evaluation Window Ranges        | Evaluation Frequency  |
 |---------------------------------|-----------------------|
@@ -92,7 +92,9 @@ By default, evaluation frequencies depend on the [evaluation window](#evaluation
 | 24 hours <= window < 48 hours   | 10 minutes            |
 | window >= 48 hours              | 30 minutes            |
 
-You can add a custom schedule so that a monitor query is performed once daily, weekly, or monthly. In this configuration, the evaluation frequency is not dependent on the evaluation window, but on a fixed schedule. For more information see the guide on how to [Customize monitor evaluation frequencies][4].
+The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule. 
+
+For more information see the guide on how to [Customize monitor evaluation frequencies][4].
 
 ### Thresholds
 
