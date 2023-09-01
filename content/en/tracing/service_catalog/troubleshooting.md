@@ -35,7 +35,7 @@ If you have many services that share the same metadata, you do not need separate
 
 ## Associated monitors not displayed in the Setup Guidance section
 
-Service Catalog associates monitors to services with `service` and [primary tags][3] in APM. 
+The Service Catalog associates monitors to services when you tag the monitor with `service` and [APM primary tags][3]. 
 
 Muted monitors and groups will not be counted towards the total monitors displayed in ‘Setup Guidance’. 
 
