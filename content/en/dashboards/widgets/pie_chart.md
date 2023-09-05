@@ -1,6 +1,7 @@
 ---
 title: Pie Chart Widget
 kind: documentation
+widget_type: "sunburst"
 description: "Graph proportions of one or more datasets."
 further_reading:
 - link: "/dashboards/graphing_json/"
@@ -60,6 +61,10 @@ Viewing the pie chart widget in full-screen reveals the standard set of [full-sc
 ## API
 
 This widget can be used with the [Dashboards API][6].
+
+<div class="alert alert-info">The widget type for Pie Chart is <strong>sunburst</strong>.</div>
+
+{{< dashboards-widgets-api >}}
 
 ## Treemap widget
 
