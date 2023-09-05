@@ -39,7 +39,7 @@ Select the time of the day you want the monitor to evaluate at.
 
 For example, the following monitor checks every day at 8:00PM that a success event has been generated for each database instance as a result of the daily backup job. 
 
-{{< img src="path/to/your/image-name-here.png" alt="Monitor configuration to check every day at 8pm that a success event has been generated for each database instance as a result of the daily backup job" style="width:100%;" >}}
+{{< img src="monitors/guide/custom_schedules/custom_day.png" alt="Monitor configuration to check every day at 8pm that a success event has been generated for each database instance as a result of the daily backup job" style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -48,7 +48,7 @@ Select the days of the week as well as the time of the day you want the monitor 
 
 For example, the following monitor checks every week on Tuesday and Saturday at 6:00AM that marketing emails have been sent for each individual campaign. 
 
-{{< img src="path/to/your/image-name-here.png" alt="Monitor configuration to check every week on Tuesday and Saturday at 6am that marketing emails have been sent for each individual campaign" style="width:100%;" >}}
+{{< img src="monitors/guide/custom_schedules/custom_week.png" alt="Monitor configuration to check every week on Tuesday and Saturday at 6am that marketing emails have been sent for each individual campaign" style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -57,7 +57,7 @@ Select the day of the month as well as the time of the day you want the monitor 
 
 For example, the following monitor checks on the first day of each month whether the cron-job generating customer invoices has successfully run.
 
-{{< img src="path/to/your/image-name-here.png" alt="Monitor configuration to check on the first day of each month whether the cron-job generating customer invoices has successfully run." style="width:100%;" >}}
+{{< img src="monitors/guide/custom_schedules/custom_month.png" alt="Monitor configuration to check on the first day of each month whether the cron-job generating customer invoices has successfully run." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
