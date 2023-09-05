@@ -19,6 +19,7 @@
     filterValue: '',
     searchValue: '',
     pushState (filtering=true) {
+      // Updates the url with the new query params for 'product' and 'search' without refreshing the page
       const url = new URL(window.location.href)
 
       if(filtering){
@@ -39,16 +40,18 @@
     },
     shouldShowAttribute (dataset) {
       // Determines table-row display
-      // Compares search values and filter values against attributes info / dataset
-
+      // Compares search values and filter values against attributes info (dataset)
       const datasetArr = dataset.split(';')
+      const productValues = datasetArr[0].replaceAll('icon-', '').replace('log', 'logs')
       const searchValues = this.searchValue.split(' ')
-      const containsFilteredValue = datasetArr[0].includes(this.filterValue) // checks product attrs in dataset 
+
+      const containsFilteredValue = productValues.includes(this.filterValue) // checks product attrs in dataset 
       const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
 
       return containsSearchValues && containsFilteredValue
     },
     updateWithURLParams () {
+      // Updates x-data properties with url param values
       const url = new URL(window.location.href)
       this.filterValue = url.searchParams.get('product') || ''
       this.searchValue = url.searchParams.get('search') || ''
@@ -61,16 +64,16 @@
         <thead class="table-header">
           <tr>
             <th>Source</th>
+            <th>Domain</th>
             <th>Attribute Name</th>
             <th>Type</th>
             <th>Description</th>
-            <th>Domain</th>
           </tr>
         </thead>
         <tbody class="table-body">
           {{ range .Params.attributes }}
 
-          {{/*  concatenating the attr info  */}}
+          {{/*  concatenating attribute info for a lookup dataset */}}
           {{ $pad := newScratch }}
           {{ $pad.Set "attribute_info" (slice (delimit .product_source ",") .name .domain .type (replaceRE "(`|')" "" .description )) }}
           {{ $attribute_info := (delimit ($pad.Get "attribute_info") ";") | lower }}
@@ -86,28 +89,16 @@
               {{ range $idx, $el := .product_source }}
                 {{ if in . "icon-"}}
                   <i class="{{ . }} {{ if $idx }}ms-1{{ end }}" title="{{ substr . 5 }}" style="font-size:18px;color:#7c3eb9;vertical-align:middle"></i> 
-                {{ else if or (eq . "android") (eq . "ios") (eq . "flutter") (eq . "roku")}}
-                  {{/*  Verify platorm sources (i.e. android, ios, roku etc. ) are accompanied by RUM source in  product_source list */}}
-                  {{ if not (in $ctx_product_source "icon-rum") }}
-                    {{ errorf "Sources 'android', 'flutter', 'roku', and 'ios' must be accompanied by 'icon-rum' source. fix source %q" . }}
-                    {{ errorf "in %q" $ctx.File.Path }}
-                  {{ end }}
-                  {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") }}
-                  {{ if $int_logo }}
-                  <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}"/>
-                  {{ end }}
-                {{ else if eq . "*"}}
-                  *
                 {{ end }}
               {{ end }}
             </td>
+            <td>{{ .domain }}</td>
             <td>{{ .name }}</td>
             <td>{{ .type }}</td>
             <td>{{ .description | markdownify }}</td>
-            <td>{{ .domain }}</td>
           </tr>
             <!-- Build $products slice for filtering section (.filters-standard-attributes) -->
-          {{ $products = $products | append .product_source }}
+          {{ $products = union $products .product_source }}
           {{ end }}
         </tbody>
       </table>
@@ -119,17 +110,17 @@
         {{ if  $products }}
             <button 
             @click="filterValue = ''; pushState()"
-            :class="(filterValue === 'all' || !filterValue) && 'active'"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+            :class="(filterValue === 'all' || !filterValue) && 'active'"
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
         {{ end }}
-        {{ range $products | uniq | sort }}
-            {{ $product := cond (in . "icon-") (substr . 5) . }}
+        {{ range $products |  sort }}
+            {{ $product := cond (in . "log") (printf "%ss" (substr . 5)) (substr . 5) }}
             <button 
             @click="filterValue = '{{ $product }}'; pushState()"
-            :class="($el.dataset.filter === filterValue) && 'active'"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
-            data-filter="{{ . }}">{{ if (eq . "*")}} * {{else if (in . "icon-") }}{{((substr . 5) | upper)}} {{ else }}RUM {{. | upper}}{{end}}</button>
+            :class="($el.dataset.filter === filterValue) && 'active'"
+            data-filter="{{ $product }}">{{ ($product | upper) }}</button>
         {{ end }}
       </div>
       {{/*  SEARCH  */}}
