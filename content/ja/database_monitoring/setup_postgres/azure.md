@@ -229,7 +229,7 @@ Azure Postgres データベースを監視するには、インフラストラ�
        # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
        azure:
         deployment_type: '<DEPLOYMENT_TYPE>'
-        name: '<AZURE_INSTANCE_ENDPOINT>'
+        fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
 2. [Agent を再起動します][2]。
 
@@ -337,7 +337,7 @@ instances:
     ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -365,7 +365,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     ## 必須。Postgres 9.6 の場合、セットアップで作成した関数を使用するため、以下の行をコメント解除します
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -399,7 +399,7 @@ metadata:
           "ssl": true,
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -456,7 +456,7 @@ Azure からより包括的なデータベースメトリクスを収集する�
 [4]: https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal
 [5]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [6]: https://www.postgresql.org/docs/current/app-psql.html
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /ja/integrations/azure_db_for_postgresql/
