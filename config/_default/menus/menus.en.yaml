@@ -3351,6 +3351,11 @@ main:
     parent: synthetics_explorer
     identifier: continuous_testing_explorer_search_syntax
     weight: 603
+  - name: Saved Views
+    url: continuous_testing/explorer/saved_views/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_saved_views
+    weight: 604
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
