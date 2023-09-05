@@ -148,13 +148,14 @@ To add retentions that are not in your current contract, contact Customer Succes
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (such as after exclusion filters are applied).
 After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
-Update or remove this quota at any time when editing the Index:
+You can configure or remove this quota at any time when editing the Index:
+- Set a daily quota in millions of logs
+- (Optional) Set a custom reset time; by default, index daily quotas reset automatically at [2:00pm UTC][19]
+- (Optional) Set a warning threshold as a percentage of the daily quota (minimum 50%)
 
 {{< img src="logs/indexes/index_quota.png" alt="index details" style="width:70%;">}}
 
-**Note**: Indexes daily quotas reset automatically at [2:00pm UTC][19].
-
-An event is generated when the daily quota is reached:
+An event is generated when either the daily quota or the warning threshold is reached:
 
 {{< img src="logs/indexes/index_quota_event.png" alt="index quota notification" style="width:70%;">}}
 
