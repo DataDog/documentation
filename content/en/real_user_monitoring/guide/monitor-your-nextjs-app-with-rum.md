@@ -9,7 +9,7 @@ further_reading:
 ---
 
 ## Overview
-[Next.js][1] is a JavaScript framework that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend applications for browser-related metrics that you give insight into performance and user behavior.
+[Next.js][1] is a JavaScript framework that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend applications for browser-related metrics that give insight into performance and user behavior.
 
 ## Setup
 
@@ -87,7 +87,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    {{% /tab %}}
    {{% tab "CDN async" %}}
 
-   If using CDN async, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+   When using CDN async, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
    - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
@@ -150,7 +150,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    {{% /tab %}}
    {{% tab "CDN sync" %}}
 
-   If using CDN sync, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
+   When using CDN sync, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
    - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
