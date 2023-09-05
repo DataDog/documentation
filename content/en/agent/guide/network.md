@@ -188,7 +188,7 @@ The information is structured as JSON following this schema:
             ...
         ]
     },
-    "api": {...},                          // <-- the IPs used by the Agent for non-critical Agent functionality (querying information from API)
+    "api": {...},                          // <-- the IPs used by the Agent for non-critical functionality (querying information from API)
     "apm": {...},                          // <-- the IPs used by the Agent to submit APM data to Datadog
     "logs": {...},                         // <-- the IPs used by the Agent to submit logs to Datadog
     "process": {...},                      // <-- the IPs used by the Agent to submit process data to Datadog
