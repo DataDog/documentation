@@ -25,23 +25,25 @@ further_reading:
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
 
 {{% appsec-getstarted %}}
-- One of the [supported APM tracing integrations][1].
+- Your service is [supported][2].
 
 ## Get started
 
-1. **Update your program's dependencies** with the latest version of the Datadog Go library (version 1.53.0 or later):
+1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
 
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 
-2. **Recompile your program** and enable ASM:
+2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.
+   A list of these packages can be found in the [compatibility requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [integration][1].
+
+3. **Recompile your program** with ASM enabled:
    ```console
    $ go build -v -tags appsec my-program
    ```
 
-3. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
@@ -110,4 +112,4 @@ Update your application's ECS task definition JSON file, by adding this in the e
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/enabling/compatibility/go#supported-frameworks
-[2]: /security/application_security/enabling/compatibility/go#compatibility
+[2]: /security/application_security/enabling/compatibility/go
