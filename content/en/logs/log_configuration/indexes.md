@@ -150,7 +150,7 @@ After the daily quota is reached, logs are no longer indexed but are still avail
 
 Update or remove this quota at any time when editing the Index:
 
-{{< img src="logs/indexes/index_quota.png" alt="index details" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_config.png" alt="index details" style="width:70%;">}}
 
 **Note**: Indexes daily quotas reset automatically at [2:00pm UTC][19].
 
