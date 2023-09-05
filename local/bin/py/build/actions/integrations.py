@@ -8,7 +8,6 @@ import re
 import shutil
 import sys
 from collections import defaultdict
-from pathlib import Path
 
 import yaml
 import markdown2
@@ -46,8 +45,6 @@ finally:
             for tag in get_non_deprecated_classifiers():
                 file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
             file.write(''.join(file_content) + '\n')
-
-CUSTOM_REDIRECTS = yaml.safe_load(Path('config/_default/integration_redirects.yaml').read_text())
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
@@ -386,6 +383,7 @@ class Integrations:
         set is_public to false to hide integrations we merge later
         :param file_name: path to a manifest json file
         """
+
         names = [
             d.get("name", "").lower()
             for d in self.datafile_json
@@ -718,14 +716,21 @@ class Integrations:
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace iterations
         result = ''
-        if not marketplace:
+        display_on_public = True
+        
+        # Don't try to build markdown if display_on_public_website is False
+        if manifest_json and "/dogweb/" not in file_name:
+            if not manifest_json["display_on_public_website"]:
+                display_on_public = False
+        
+        if not marketplace and display_on_public:
             try:
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
                 print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
-        else:
+        elif marketplace:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
@@ -743,6 +748,8 @@ class Integrations:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
                     result = updated_markdown
+        else:
+            print(f'Skipping markdown for: {file_name}')            
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
@@ -896,11 +903,6 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
-                # Add custom aliases
-                for redirect, aliases in CUSTOM_REDIRECTS.items():
-                    if redirect == item.get('name'):
-                        for alias in aliases:
-                            item.setdefault('aliases', []).append(alias)
                 # remove aliases that point to the page they're located on
                 # get the current slug from the doc_link
                 if item.get('name'):

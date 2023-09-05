@@ -328,6 +328,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2618036642",
+      "description": "Create a new dashboard with trace_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2800096921",
       "description": "Create a new timeseries widget with ci_pipelines data source"
     },

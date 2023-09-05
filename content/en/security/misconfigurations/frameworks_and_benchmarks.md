@@ -35,7 +35,7 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) comes with m
 - [HIPAA][9]
 - [GDPR][10]
 
-*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [Cloudtrail logs to Datadog][12].
+*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
 **Some [CIS Kubernetes Benchmark][5] compliance rules only apply to self-hosted Kubernetes clusters.
 
