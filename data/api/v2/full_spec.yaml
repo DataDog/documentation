@@ -17424,6 +17424,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
@@ -25994,7 +25995,7 @@ paths:
               {\n        \"policy\": \"package datadog\\n\\nimport data.datadog.output
               as dd_output\\n\\nimport future.keywords.contains\\nimport future.keywords.if\\nimport
               future.keywords.in\\n\\nmilliseconds_in_a_day := ((1000 * 60) * 60)
-              * 24\\n\\neval(iam_service_account_key) = \\\"skip\\\" if {\\n\\tiam_service_account_key.disabled\\n}
+              * 24\\n\\neval(iam_service_account_key)\n= \\\"skip\\\" if {\\n\\tiam_service_account_key.disabled\\n}
               else = \\\"pass\\\" if {\\n\\t(iam_service_account_key.resource_seen_at
               / milliseconds_in_a_day) - (iam_service_account_key.valid_after_time
               / milliseconds_in_a_day) <= 90\\n} else = \\\"fail\\\"\\n\\n# This part
