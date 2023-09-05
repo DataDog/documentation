@@ -4038,9 +4038,8 @@ components:
       properties:
         id:
           description: Monitor ID of the downtime.
-          example: 12345
-          format: int64
-          type: integer
+          example: '12345'
+          type: string
         type:
           $ref: '#/components/schemas/DowntimeIncludedMonitorType'
       type: object
