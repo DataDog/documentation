@@ -1,2 +1,4 @@
+github.com/DataDog/websites-integrations v0.0.0-20230905134336-65770a2279ea h1:lyMnNVJqin23IYq99UUBU3bQ0DfaWFpKX17h2AYP6Pk=
+github.com/DataDog/websites-integrations v0.0.0-20230905134336-65770a2279ea/go.mod h1:hjw5WyzacgXT1jYrSlrJ4Yl4E9djIesxnQ6qN6Odf08=
 github.com/DataDog/websites-modules v1.4.82 h1:YKZhdnR6smqByuklpyAnBsciTunFNs7TpphPmKyeoVw=
 github.com/DataDog/websites-modules v1.4.82/go.mod h1:CcQxAmCXoiFr3hNw6Q+1si65C3uOP1gB+7aX4S3h+CQ=
