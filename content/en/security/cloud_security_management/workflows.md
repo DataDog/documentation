@@ -114,7 +114,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 4. Click **Save**.
 
 [1]: /service_management/workflows/actions_catalog/datatransformation_func/
-[2]: service_management/workflows/build/#source-object-variables
+[2]: /service_management/workflows/build/#source-object-variables
 [3]: /api/latest/security-monitoring/#get-a-finding
 
 {{% /tab %}}
