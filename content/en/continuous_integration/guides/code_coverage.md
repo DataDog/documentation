@@ -77,6 +77,103 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
 
+### Advanced Options (Supported via .runsettings)
+
+The Datadog Tracer's built-in code coverage has support for both `Coverlet` and `VS Code Coverage` options via the `.runsettings` file.
+
+#### File structure
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <DataCollectionRunSettings>
+        <DataCollectors>
+            <DataCollector friendlyName="DatadogCoverage">
+                <Configuration>
+                    <!-- Datadog Code Coverage settings -->
+                    ...
+                </Configuration>
+            </DataCollector>
+        </DataCollectors>
+    </DataCollectionRunSettings>
+</RunSettings>
+```
+
+#### Coverlet options
+
+| Option                   | Summary                                                                                                                                                         |
+|:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ExcludeByAttribute       | Ignore methods, classes or assemblies decorated with attributes from code coverage.                                                                                                                |
+| ExcludeByFile            | Ignore specific source files from code coverage.                                                                                                                |
+| Exclude                  | Exclude from code coverage analysing using filter expressions.                                                                                                  |
+
+##### Attributes
+You can ignore a method, an entire class or assembly from code coverage by creating and applying the `ExcludeFromCodeCoverage` attribute present in the `System.Diagnostics.CodeAnalysis` namespace.
+
+You can also ignore additional attributes by using the `ExcludeByAttribute` property (short name, i.e. the type name without the namespace, supported only)
+
+##### Source Files
+You can also ignore specific source files from code coverage using the `ExcludeByFile` property
+
+* Use single or multiple paths (separate by comma)
+* Use file path or directory path with globbing (e.g `dir1/*.cs`)
+
+##### Filters
+Gives the ability to have fine grained control over what gets excluded using "filter expressions".
+
+Syntax: `[Assembly-Filter]Type-Filter`
+
+Wildcards
+
+* `*` => matches zero or more characters
+* `?` => the prefixed character is optional
+
+Examples
+
+* `[*]*` => Excludes all types in all assemblies (nothing is instrumented)
+* `[coverlet.*]Coverlet.Core.Coverage` => Excludes the Coverage class in the `Coverlet.Core` namespace belonging to any assembly that matches `coverlet.*` (e.g `coverlet.core`)
+* `[*]Coverlet.Core.Instrumentation.*` => Excludes all types belonging to `Coverlet.Core.Instrumentation` namespace in any assembly
+* `[coverlet.*.tests?]*` => Excludes all types in any assembly starting with `coverlet.` and ending with `.test` or `.tests` (the `?` makes the `s`  optional)
+* `[coverlet.*]*,[*]Coverlet.Core*\` => Excludes assemblies matching `coverlet.*` and excludes all types belonging to the `Coverlet.Core` namespace in any assembly
+
+#### [VS Code Coverage options](https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022)
+
+| Option                   | Summary                                                                                                                                                         |
+|:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Attributes\Exclude       | Ignore methods, classes or assemblies decorated with attributes from code coverage.                                                                                                                |
+| Sources\Exclude          | Ignore specific source files from code coverage.                                                                                                                |
+
+#### Runsettings example
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <DataCollectionRunSettings>
+        <DataCollectors>
+            <DataCollector friendlyName="DatadogCoverage">
+                <Configuration>
+                    <!-- Coverlet configuration -->
+                    <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
+                    <ExcludeByFile>**/Fibonorial.cs</ExcludeByFile>
+                    <Exclude>[myproject.*.tests?]*</Exclude>
+
+                    <!-- VS Code Coverage configuration -->
+                    <CodeCoverage>
+                        <Attributes>
+                            <Exclude>
+                                <Attribute>^System\.ObsoleteAttribute$</Attribute>
+                            </Exclude>
+                        </Attributes>
+                        <Sources>
+                            <Exclude>
+                                <Source>^MyFile\.cs$</Source>
+                            </Exclude>
+                        </Sources>
+                    </CodeCoverage>
+                </Configuration>
+            </DataCollector>
+        </DataCollectors>
+    </DataCollectionRunSettings>
+</RunSettings>
+```
 
 [101]: https://github.com/coverlet-coverage/coverlet
 {{% /tab %}}

@@ -180,7 +180,7 @@ If you are using [Coverlet][10] to compute your code coverage, indicate the path
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-Read more about code coverage in Datadog in the [Code Coverage guide][11].
+Read more about code coverage in Datadog and more advanced options (exclusions) in the [Code Coverage guide][11].
 
 ### Instrumenting BenchmarkDotNet tests
 
