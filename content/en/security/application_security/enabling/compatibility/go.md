@@ -46,11 +46,11 @@ Starting from tracer version 1.53.0, ASM does not require [CGO][15].
 
 The Go tracer includes support for the following frameworks, data stores and libraries.
 
-The Go packages listed in this page are those especially interesting for ASM. You can also find more tracing intergrations in [APM's tracing compatibility page][16].
+The Go packages listed in this page are relevant for ASM. You can also find more tracing integrations in [APM's tracing compatibility page][16].
 
 **Note**: The [Go integrations documentation][6] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
-<div class="alert alert-info">If you don't see your library of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+<div class="alert alert-info">If you don't see your library of choice listed, fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this form to send details</a>.</div>
 
 ### Web framework compatibility
 

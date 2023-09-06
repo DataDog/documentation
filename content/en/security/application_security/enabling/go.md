@@ -36,7 +36,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    ```
 
 2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.
-   A list of these packages can be found in the [compatibility requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each [integration][1].
+   A list of these packages can be found in the [compatibility requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each integration.
 
 3. **Recompile your program** with ASM enabled:
    ```console
