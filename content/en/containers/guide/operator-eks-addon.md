@@ -38,23 +38,23 @@ These restriction are necessary to make Operator compliant with the add-on polic
 
 To install the Operator add-on, run:
   ```bash
-  aws eks create-addon --addon-name datadog_operator --region <AWS_REGOIN> --cluster-name <CLUSTER_NAME> 
+  aws eks create-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME> 
   ```
 
-Add-on installation is asynchrnous, to check the status of add-on run:
+Add-on installation is asynchronous. To check installation status, run:
   ```bash
-  aws eks describe-addon --addon-name datadog_operator --region <AWS_REGOIN> --cluster-name <CLUSTER_NAME> 
+  aws eks describe-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME> 
   ```
 
-To delete add-on run:
+To delete the add-on, run:
   ```bash
-  aws eks delete-addon --addon-name datadog_operator --region <AWS_REGOIN> --cluster-name <CLUSTER_NAME>
+  aws eks delete-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-To verify wheather installation was successful, confirm that datadog-operator pod is running either via Console, `eksctl` or AWS CLI.
+To verify that the installation was successful, use the AWS Management Console, `eksctl`, or the AWS CLI to confirm that a `datadog-operator` pod is running.
 
 ## Configuring Agent
 
