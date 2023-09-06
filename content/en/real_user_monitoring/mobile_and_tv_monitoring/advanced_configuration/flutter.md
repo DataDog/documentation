@@ -7,6 +7,9 @@ type: multi-code-lang
 code_lang_weight: 30
 aliases:
     - /real_user_monitoring/flutter/advanced_configuration
+    - /real_user_monitoring/otel
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+    - /real_user_monitoring/flutter/otel_support/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
@@ -14,11 +17,14 @@ further_reading:
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
+- link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
+  tag: Blog
+  text: Monitor Flutter application performance with Datadog Mobile RUM
 
 ---
 ## Overview
 
-If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2].
+If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup).
 
 ## Automatic View Tracking
 
@@ -338,6 +344,35 @@ This means that even if users open your application while offline, no data is lo
 
 **Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter RUM SDK does not use too much disk space.
 
+## OpenTelemetry setup
+
+The [Datadog Tracking HTTP Client][12] package and [gRPC Interceptor][13] package both support distributed traces through both automatic header generation and header ingestion. This page describes how to use OpenTelemetry with RUM Flutter.
+
+### Datadog header generation
+
+When configuring your tracking client or gRPC Interceptor, you can specify the types of tracing headers you want Datadog to generate. For example, if you want to send `b3` headers to `example.com` and `tracecontext` headers for `myapi.names`, you can do so with the following code:
+
+```dart
+final hostHeaders = {
+    'example.com': { TracingHeaderType.b3 },
+    'myapi.names': { TracingHeaderType.tracecontext}
+};
+```
+
+You can use this object during initial configuration:
+
+```dart
+// For default Datadog HTTP tracing:
+final configuration = DdSdkConfiguration(
+    // configuration
+    firstPartyHostsWithTracingHeaders: hostHeaders,
+);
+```
+
+You can then enable tracing as usual.
+
+This information is merged with any hosts set on `DdSdkConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -353,3 +388,8 @@ This means that even if users open your application while offline, no data is lo
 [9]: https://pub.dev/packages/auto_route
 [10]: https://pub.dev/packages/beamer
 [11]: https://github.com/flutter/flutter/issues/112196
+[12]: https://pub.dev/packages/datadog_tracking_http_client
+[13]: https://pub.dev/packages/datadog_grpc_interceptor
+[14]: https://github.com/openzipkin/b3-propagation#single-headers
+[15]: https://github.com/openzipkin/b3-propagation#multiple-headers
+[16]: https://www.w3.org/TR/trace-context/#tracestate-header

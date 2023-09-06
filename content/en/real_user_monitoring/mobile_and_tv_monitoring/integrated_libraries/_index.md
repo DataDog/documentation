@@ -247,20 +247,6 @@ const viewNamePredicate: ViewNamePredicate = function customViewNamePredicate(ev
 DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
 ```
 
-### RUM Integrations
-
-#### Integrate with React Navigation
-Datadog provides automatic integration for [React Navigation][12] (minimum supported version is `react-navigation/native@5.6.0`). Add the following in your source code:
-
-```typescript
-    const navigationRef:React.RefObject<NavigationContainerRef> = React.createRef();
-    // ...
-    <NavigationContainer ref={navigationRef} onReady={
-        ()=>{DdRumReactNavigationTracking.startTrackingViews(navigationRef.current)}}>
-        // ...
-    </NavigationContainer>
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
