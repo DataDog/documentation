@@ -4038,9 +4038,8 @@ components:
       properties:
         id:
           description: Monitor ID of the downtime.
-          example: 12345
-          format: int64
-          type: integer
+          example: '12345'
+          type: string
         type:
           $ref: '#/components/schemas/DowntimeIncludedMonitorType'
       type: object
@@ -17425,6 +17424,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
@@ -19203,6 +19203,16 @@ paths:
         schema:
           example: created_by,monitor
           type: string
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of downtimes in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 30
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -19227,6 +19237,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in private beta.
@@ -25992,7 +26006,16 @@ paths:
               \ \"type\": \"cloud_configuration\",\n  \"isEnabled\": false,\n  \"message\":
               \"Cloud configuration rule\",\n  \"options\": {\n    \"complianceRuleOptions\":
               {\n      \"resourceType\": \"gcp_compute_disk\",\n      \"regoRule\":
-              {\n        \"policy\": \"package datadog\\n\",\n        \"resourceTypes\":
+              {\n        \"policy\": \"package datadog\\n\\nimport data.datadog.output
+              as dd_output\\n\\nimport future.keywords.contains\\nimport future.keywords.if\\nimport
+              future.keywords.in\\n\\nmilliseconds_in_a_day := ((1000 * 60) * 60)
+              * 24\\n\\neval(iam_service_account_key) = \\\"skip\\\" if {\\n\\tiam_service_account_key.disabled\\n}
+              else = \\\"pass\\\" if {\\n\\t(iam_service_account_key.resource_seen_at
+              / milliseconds_in_a_day) - (iam_service_account_key.valid_after_time
+              / milliseconds_in_a_day) <= 90\\n} else = \\\"fail\\\"\\n\\n# This part
+              remains unchanged for all rules\\nresults contains result if {\\n\\tsome
+              resource in input.resources[input.main_resource_type]\\n\\tresult :=
+              dd_output.format(resource, eval(resource))\\n}\\n\",\n        \"resourceTypes\":
               [\n          \"gcp_compute_disk\"\n        ]\n      },\n      \"complexRule\":
               false\n    }\n  },\n  \"complianceSignalOptions\": {\n    \"userActivationStatus\":
               true,\n    \"userGroupByFields\": [\"@account_id\"]\n  },\n  \"cases\":
@@ -27810,6 +27833,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29433,6 +29460,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
