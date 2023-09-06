@@ -22,7 +22,7 @@ To configure your application to send traces to Datadog:
 
 ## Step 1 - Configure the Datadog Agent for APM
 
-<div class="alert alert-info"><strong>Beta</strong>: You can now enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>! To send traces to Datadog, simply run a one-line install command to automatically enable APM and instrument all of your services on the Linux host, VM, or container. After that, you're ready to <a href="/tracing/services">start exploring</a>!</div>
+<div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>! Run a one-line install command to automatically enable APM and instrument all of your services on the Linux host, VM, or container. After that, you're ready to <a href="/tracing/services">start exploring</a>!</div>
 
 If you don't use Single Step APM Instrumentation, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be properly received from containerized, serverless, or certain other environments. Ensure you have followed instructions for both components. 
 
