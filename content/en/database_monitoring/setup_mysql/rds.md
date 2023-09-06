@@ -17,6 +17,7 @@ Database Monitoring provides deep visibility into your MySQL databases by exposi
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
+1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Configure database parameters](#configure-mysql-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
@@ -39,6 +40,10 @@ Proxies, load balancers, and connection poolers
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+## Configure the AWS integration
+
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][10].
 
 ## Configure MySQL settings
 
@@ -357,3 +362,4 @@ If you have installed and configured the integrations and Agent as described and
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
+[10]: https://app.datadoghq.com/integrations/amazon-web-services

@@ -85,19 +85,19 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 {{< callout url="#" btn_hidden="true" >}}
   The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
+
+  Starting with Agent version >= 7.47/6.47, this feature is enabled by default.
 {{< /callout >}}
 
 The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
 
 The Agent configuration is scrubbed of any sensitive information and only contains configuration you've set using the configuration file or environment variables. The configuration changes are updated every 10 minutes.
 
-This feature is disabled by default. To enable it, add the following settings to your [Agent configuration file][6]:
+This feature is enabled by default in Agent version >= 7.47.0/6.47.0.
 
-```yaml
-inventories_configuration_enabled: true
-```
+To modify this behavior, set the value of `inventories_configuration_enabled` in your [Agent configuration file][6] to `true` to send the configuration, or `false` to disable it.
 
-Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED=true` environment variable to enable this feature.
+Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable to enable or disable this feature.
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="The Agent configuration view" style="width:100%;">}}
 
@@ -114,7 +114,33 @@ At times it may also be prove useful to audit your Agent versions to ensure you 
 
 #### No Agent
 
-Another use case of the JSON export would be to get a list of AWS EC2 instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See this [example script][10].
+Another use case of the JSON export would be to get a list of AWS EC2 (excluding RDS) instances with no Agent installed. These instances appear in the infrastructure list by setting up your AWS account in the Datadog AWS integration tile. See the Python3 script below:
+
+```python
+# 3p
+import requests
+
+# stdlib
+import json
+import pprint
+import os
+
+api_key = os.environ['DD_API_KEY']
+app_key = os.environ['DD_APP_KEY']
+
+url = "https://app.datadoghq.com/reports/v2/overview?\
+window=3h&with_apps=true&with_sources=true&with_aliases=true\
+&with_meta=true&with_tags=true&api_key=%s&application_key=%s"
+
+infra = json.loads(requests.get(url %(api_key,app_key)).text)
+
+for host in infra['rows']:
+    if (('aws' in host['apps']) and ('rds' not in host['apps']) and ('agent' not in host['apps'])):
+        try:
+            print(f'HOST: {host["name"]} - TAGS: {host["tags_by_source"]}')
+        except:
+            pass
+```
 
 ## Further Reading
 
@@ -129,4 +155,4 @@ Another use case of the JSON export would be to get a list of AWS EC2 instances 
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-[10]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
+

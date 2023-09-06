@@ -108,14 +108,12 @@ pipelineConfig:
         - parse_syslog
       encoding:
         codec: json
-      buffer:
-          type: disk
-          max_size: 154618822656
     datadog_logs:
       type: datadog_logs
       inputs:
         - parse_syslog
       default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
       compression: gzip
       buffer:
           type: disk

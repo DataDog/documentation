@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/aws-threat-emulation-detection-validation-datadog/"
   tag: "Blog"
   text: "AWS threat emulation and detection validation with Stratus Red Team and Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 ## Overview
 

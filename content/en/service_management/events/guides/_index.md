@@ -6,6 +6,7 @@ disable_toc: true
 aliases:
 - /developers/events/
 - /event/guides/
+- /events/guides/
 further_reading:
 - link: "/service_management/events/explorer/"
   tag: "Documentation"

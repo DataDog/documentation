@@ -15,10 +15,6 @@ further_reading:
   text: "Learn about Source Code Integration."
 ---
 
-{{< callout url="#" btn_hidden="true">}}
-  The Datadog extension for VS Code is in public beta. It is intended for all developers that use Datadog products, and especially those using <a href="https://docs.datadoghq.com/synthetics/#pagetitle">Synthetic tests</a>. If the extension stops working unexpectedly, check for extension updates or <a href=#feedback>reach out to the team</a>.
-{{< /callout >}}
-
 ## Overview
 
 The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.

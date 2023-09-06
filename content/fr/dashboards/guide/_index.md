@@ -30,7 +30,7 @@ title: Guides graphiques
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Filtrer des requêtes SLO basées sur des métriques{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configurer un graphique pour représenter des statistiques APM{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}Historique des versions{{< /nextlink >}}
-{{< /whatsnext >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}Graphiques JSON{{< /nextlink >}}{{< /whatsnext >}}
 
 {{< whatsnext desc="Fonctions :" >}}
     {{< nextlink href="/dashboards/guide/how-weighted-works" >}}Fonctionnement de la fonction weighted(){{< /nextlink >}}

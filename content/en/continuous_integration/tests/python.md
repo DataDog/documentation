@@ -27,6 +27,8 @@ Supported Python interpreters:
 Supported test frameworks:
 * pytest >= 3.0.0
   * pytest < 5 when using Python 2
+* pytest-benchmark >= 3.1.0
+  * Python >= 3.7
 
 ## Configuring reporting method
 
@@ -59,6 +61,7 @@ For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
+### Using pytest
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="shell" >}}
@@ -70,6 +73,20 @@ If you also want to enable the rest of the APM integrations to get more informat
 {{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
+
+### Using pytest-benchmark
+
+To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest`, and Datadog detects metrics from `pytest-benchmark` automatically:
+
+```python
+def square_value(value):
+    return value * value
+
+
+def test_square_value(benchmark):
+    result = benchmark(square_value, 5)
+    assert result == 25
+```
 
 ### Adding custom tags to tests
 
@@ -87,6 +104,22 @@ def test_simple_case(ddspan):
 ```
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
+
+### Adding custom metrics to tests
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```python
+from ddtrace import tracer
+
+# Declare `ddspan` as an argument to your test
+def test_simple_case(ddspan):
+    # Set your tags
+    ddspan.set_tag("memory_allocations", 16)
+    # test continues normally
+    # ...
+```
+Read more about custom metrics in the [Add Custom Metrics Guide][7].
 
 ## Configuration settings
 
@@ -112,6 +145,8 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][6] options can also be used.
 
+## Collecting Git metadata
+
 {{% ci-git-metadata %}}
 
 {{% ci-information-collected %}}
@@ -126,3 +161,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [4]: /tracing/trace_collection/dd_libraries/python/
 [5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
+[7]: /continuous_integration/guides/add_custom_metrics/?tab=python

@@ -647,6 +647,14 @@ components:
     AzureAccount:
       description: Datadog-Azure integrations configured for your organization.
       properties:
+        app_service_plan_filters:
+          description: 'Limit the Azure app service plans that are pulled into Datadog
+            using tags.
+
+            Only app service plans that match one of the defined tags are imported
+            into Datadog.'
+          example: key:value,filter:example
+          type: string
         automute:
           description: Silence monitors for expected Azure VM shutdowns.
           example: true
@@ -659,6 +667,15 @@ components:
           description: Your Azure web application secret key.
           example: testingx./Sw*g/Y33t..R1cH+hScMDt
           type: string
+        cspm_enabled:
+          description: Enable Cloud Security Management Misconfigurations for your
+            organization.
+          example: true
+          type: boolean
+        custom_metrics_enabled:
+          description: Enable custom metrics for your organization.
+          example: true
+          type: boolean
         errors:
           description: Errors in your configuration.
           example:
@@ -1496,6 +1513,11 @@ components:
         across one or several tags, such as hosts.\nUnlike the heat map, a distribution
         graph\u2019s x-axis is quantity rather than time."
       properties:
+        custom_links:
+          description: A list of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
         legend_size:
           deprecated: true
           description: (Deprecated) The widget legend was replaced by a tooltip and
@@ -1561,7 +1583,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
-      type: object
     DistributionWidgetHistogramRequestType:
       description: Request type for the histogram request.
       enum:
@@ -2861,7 +2882,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition'
-      type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response
         formats are supported by Geomap widgets.
@@ -3964,10 +3984,12 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - apm_usm_usage
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
       - container_excl_agent_usage
+      - ci_visibility_itr_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -3994,15 +4016,18 @@ components:
       - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
+      - sds_scanned_bytes_usage
       type: string
       x-enum-varnames:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APM_USM_USAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
+      - CI_VISIBILITY_ITR_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -4029,6 +4054,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
+      - SDS_SCANNED_BYTES_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -4487,6 +4513,7 @@ components:
       - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - trace_stream
       - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
@@ -4500,6 +4527,7 @@ components:
       - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - TRACE_STREAM
       - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
@@ -5662,7 +5690,6 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
-      type: object
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6554,7 +6581,6 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
-      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -7503,10 +7529,14 @@ components:
       - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
+      - apm_usm_usage
+      - apm_usm_percentage
       - appsec_usage
       - appsec_percentage
       - browser_usage
       - browser_percentage
+      - ci_visibility_itr_usage
+      - ci_visibility_itr_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -7561,6 +7591,8 @@ components:
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
       - vuln_management_hosts_percentage
+      - sds_scanned_bytes_usage
+      - sds_scanned_bytes_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7572,10 +7604,14 @@ components:
       - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
+      - APM_USM_USAGE
+      - APM_USM_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
+      - CI_VISIBILITY_ITR_USAGE
+      - CI_VISIBILITY_ITR_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -7630,6 +7666,8 @@ components:
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SDS_SCANNED_BYTES_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7658,6 +7696,15 @@ components:
           description: The APM host usage by tag(s).
           format: double
           type: number
+        apm_usm_percentage:
+          description: The percentage of APM and Universal Service Monitoring host
+            usage by tag(s).
+          format: double
+          type: number
+        apm_usm_usage:
+          description: The APM and Universal Service Monitoring host usage by tag(s).
+          format: double
+          type: number
         appsec_fargate_percentage:
           description: The percentage of Application Security Monitoring ECS Fargate
             task usage by tag(s).
@@ -7683,6 +7730,15 @@ components:
           type: number
         browser_usage:
           description: The synthetic browser test usage by tag(s).
+          format: double
+          type: number
+        ci_visibility_itr_percentage:
+          description: The percentage of Git committers for Intelligent Test Runner
+            usage by tag(s).
+          format: double
+          type: number
+        ci_visibility_itr_usage:
+          description: The Git committers for Intelligent Test Runner usage by tag(s).
           format: double
           type: number
         container_excl_agent_percentage:
@@ -7879,6 +7935,14 @@ components:
           description: The profiled hosts usage by tag(s).
           format: double
           type: number
+        sds_scanned_bytes_percentage:
+          description: The percentage of Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_usage:
+          description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
         snmp_percentage:
           description: The percentage of network device usage by tag(s).
           format: double
@@ -8050,7 +8114,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellResourceType:
       default: notebook_cells
       description: Type of the Notebook Cell resource.
@@ -8106,7 +8169,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellTime:
       description: Timeframe for the notebook cell. When 'null', the notebook global
         time is used.
@@ -8161,7 +8223,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCreateData:
       description: The data for a notebook create request.
       properties:
@@ -8261,7 +8322,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
-      type: object
     NotebookGraphSize:
       description: The size of the graph.
       enum:
@@ -8561,7 +8621,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookCellCreateRequest'
       - $ref: '#/components/schemas/NotebookCellUpdateRequest'
-      type: object
     NotebookUpdateData:
       description: The data for a notebook update request.
       properties:
@@ -11499,6 +11558,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceLevelObjectiveQuery:
       description: 'A metric-based SLO. **Required if type is `metric`**. Note that
         Datadog only allows the sum by aggregator
@@ -11627,6 +11687,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceMapWidgetDefinition:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
@@ -12254,7 +12315,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SunburstWidgetLegendTable'
       - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
-      type: object
     SunburstWidgetLegendInlineAutomatic:
       description: Configuration of inline or automatic legends.
       properties:
@@ -12268,6 +12328,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
       required:
       - type
+      type: object
     SunburstWidgetLegendInlineAutomaticType:
       description: Whether to show the legend inline or let it be automatically generated.
       enum:
@@ -12285,6 +12346,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendTableType'
       required:
       - type
+      type: object
     SunburstWidgetLegendTableType:
       description: Whether or not to show a table legend.
       enum:
@@ -12331,6 +12393,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetic multistep API test.
@@ -12653,7 +12717,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
-      type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -12833,7 +12896,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
-      type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
       properties:
@@ -14873,6 +14935,9 @@ components:
           maximum: 10
           minimum: 0
           type: integer
+        persistCookies:
+          description: Persist cookies across redirects.
+          type: boolean
         port:
           description: Port to use when performing the test.
           format: int64
@@ -16570,6 +16635,13 @@ components:
           format: int64
           nullable: true
           type: integer
+        ci_visibility_itr_committers:
+          description: Shows the total count of all active Git committers for Intelligent
+            Test Runner in the current month. A committer is active if they commit
+            at least 3 times in a given month.
+          format: int64
+          nullable: true
+          type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
@@ -17379,6 +17451,12 @@ components:
     UsageProfilingHour:
       description: The number of profiled hosts for each hour for a given organization.
       properties:
+        aas_count:
+          description: Contains the total number of profiled Azure app services reporting
+            during a given hour.
+          format: int64
+          nullable: true
+          type: integer
         avg_container_agent_count:
           description: Get average number of container agents for that hour.
           format: int64
@@ -17781,6 +17859,11 @@ components:
             the current month for all organizations.
           format: int64
           type: integer
+        ci_visibility_itr_committers_hwm:
+          description: Shows the high-water mark of all CI visibility intelligent
+            test runner committers over all hours in the current month for all organizations.
+          format: int64
+          type: integer
         ci_visibility_pipeline_committers_hwm:
           description: Shows the high-water mark of all CI visibility pipeline committers
             over all hours in the current month for all organizations.
@@ -18017,6 +18100,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        profiling_aas_count_top99p:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current date for all organizations.
@@ -18106,6 +18194,11 @@ components:
         vuln_management_host_count_top99p:
           description: Shows the 99th percentile of all Application Vulnerability
             Management hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        workflow_executions_usage_sum:
+          description: Sum of all workflows executed over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
       type: object
@@ -18201,6 +18294,12 @@ components:
         ci_test_indexed_spans_sum:
           description: Shows the sum of all CI test indexed spans over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        ci_visibility_itr_committers_hwm:
+          description: Shows the high-water mark of all CI visibility intelligent
+            test runner committers over all hours in the current date for the given
+            org.
           format: int64
           type: integer
         ci_visibility_pipeline_committers_hwm:
@@ -18436,6 +18535,11 @@ components:
             date for the given org.
           format: int64
           type: integer
+        profiling_aas_count_top99p:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current date for the given org.
@@ -18531,6 +18635,11 @@ components:
         vuln_management_host_count_top99p:
           description: Shows the 99th percentile of all Application Vulnerability
             Management hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        workflow_executions_usage_sum:
+          description: Sum of all workflows executed over all hours in the current
+            date for the given org.
           format: int64
           type: integer
       type: object
@@ -18632,6 +18741,11 @@ components:
         ci_test_indexed_spans_agg_sum:
           description: Shows the sum of all CI test indexed spans over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        ci_visibility_itr_committers_hwm_sum:
+          description: Shows the high-water mark of all CI visibility intelligent
+            test runner committers over all hours in the current months for all organizations.
           format: int64
           type: integer
         ci_visibility_pipeline_committers_hwm_sum:
@@ -18888,6 +19002,11 @@ components:
             months for all organizations.
           format: int64
           type: integer
+        profiling_aas_count_top99p_sum:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         profiling_container_agent_count_avg:
           description: Shows the average number of profiled containers over all hours
             in the current months for all organizations.
@@ -19004,6 +19123,11 @@ components:
         vuln_management_host_count_top99p_sum:
           description: Shows the 99th percentile of all Application Vulnerability
             Management hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        workflow_executions_usage_agg_sum:
+          description: Sum of all workflows executed over all hours in the current
+            months for all organizations.
           format: int64
           type: integer
       type: object
@@ -19491,6 +19615,7 @@ components:
     WidgetComparator:
       description: Comparator to apply.
       enum:
+      - '='
       - '>'
       - '>='
       - <
@@ -19498,6 +19623,7 @@ components:
       example: '>'
       type: string
       x-enum-varnames:
+      - EQUAL_TO
       - GREATER_THAN
       - GREATER_THAN_OR_EQUAL_TO
       - LESS_THAN
@@ -19611,7 +19737,6 @@ components:
       - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
-      type: object
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
@@ -20192,17 +20317,34 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_service_catalog_read: View service catalog and service definitions.
+            apm_service_catalog_write: Add, modify, and delete service catalog definitions
+              when those definitions are maintained by Datadog.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
+            incident_notification_settings_write: Configure Incidents Notification
+              settings.
+            incident_read: View incidents in Datadog.
+            incident_settings_write: Configure Incident Settings.
+            incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
+            security_monitoring_filters_read: Read Security Filters.
+            security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_rules_read: Read Detection Rules.
+            security_monitoring_rules_write: Create and edit Detection Rules.
+            security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -20218,6 +20360,11 @@ components:
               in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
+            teams_manage: Manage Teams. Create, delete, rename, and edit metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. A User with this permission can view Team
+              names, metadata, and which Users are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -20972,6 +21119,21 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: The maximum number of dashboards returned in the list.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: start
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -20996,6 +21158,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 3
+      x-pagination:
+        limitParam: count
+        pageOffsetParam: start
+        resultsPath: dashboards
       x-undo:
         type: safe
     patch:
@@ -25789,6 +25955,7 @@ paths:
         name: page_size
         required: false
         schema:
+          default: 100
           example: 20
           format: int32
           maximum: 1000
@@ -25825,6 +25992,9 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-pagination:
+        limitParam: page_size
+        pageParam: page
       x-undo:
         type: safe
     post:
@@ -27161,6 +27331,7 @@ paths:
         name: count
         required: false
         schema:
+          default: 100
           example: 5
           format: int64
           type: integer
@@ -27246,6 +27417,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 2
+      x-pagination:
+        limitParam: count
+        pageOffsetParam: start
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -28297,6 +28472,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 1000
           format: int64
           type: integer
       - description: The specific offset to use as the beginning of the returned response.
@@ -28342,6 +28518,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -28525,6 +28705,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 25
           format: int64
           type: integer
       responses:
@@ -28551,6 +28732,10 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29353,11 +29538,6 @@ paths:
           description: OK
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_default_settings_read
       summary: Get the default locations
       tags:
       - Synthetics
@@ -29372,14 +29552,19 @@ paths:
       - description: Used for pagination. The number of tests returned in the page.
         in: query
         name: page_size
+        required: false
         schema:
-          type: string
+          default: 100
+          format: int64
+          type: integer
       - description: Used for pagination. Which page you want to retrieve. Starts
           at zero.
         in: query
         name: page_number
+        required: false
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -29410,6 +29595,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-pagination:
+        limitParam: page_size
+        pageParam: page_number
+        resultsPath: tests
       x-undo:
         type: safe
     post:

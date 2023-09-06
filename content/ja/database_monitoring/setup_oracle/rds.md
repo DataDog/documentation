@@ -4,18 +4,16 @@ further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle インテグレーション
-is_beta: true
 kind: documentation
-private: true
 title: RDS Oracle のデータベースモニタリングの設定
 ---
 
 {{< site-region region="gov" >}}
-データベースモニタリングはこのサイトでサポートされていません。</div>
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">
-このページで説明されている機能は非公開ベータ版です。
+このページで説明されている機能はベータ版です。フィードバックやリクエストについては、カスタマーサクセスマネージャーにお問い合わせください。
 </div>
 
 データベースモニタリングは、クエリサンプルを公開することで、Oracle データベースを深く可視化し、さまざまなワークロードをプロファイリングして問題を診断します。
@@ -60,6 +58,15 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLCOMMAND','DATADOG','SELECT',
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAFILE','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SGAINFO','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
 ```
 
 ## Agent の構成
@@ -73,29 +80,27 @@ init_config:
 instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
-    username: 'c##datadog'
+    username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
-    username: 'c##datadog'
+    username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
-
-`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog でどのように使用されるかについてさらに詳しくは、[統合サービスタグ付け][3]を参照してください。
 
 すべての Agent の構成が完了したら、[Datadog Agent を再起動][4]します。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `oracle-dbm` を探します。Datadog の[ダッシュボード][7]と[データベース][6]のページへ移動して開始します。
+[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `oracle-dbm` を探します。Datadog の[ダッシュボード][7]と[データベース][6]のページに移動して開始します。
 
 [1]: /ja/database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
@@ -105,6 +110,6 @@ instances:
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

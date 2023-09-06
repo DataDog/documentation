@@ -107,6 +107,27 @@ func main() {
 }
 ```
 
+#### Abandoned span logs
+
+The Datadog Go Tracer also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs appear at the Info level.
+
+You can also enable debugging abandoned spans during the `Start` config:
+
+```go
+package main
+
+import (
+  "time"
+
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithDebugSpansMode(10 * time.Minute))
+    defer tracer.Stop()
+}
+```
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
@@ -175,6 +196,8 @@ Logs files are saved in the following directories by default. Use the `DD_TRACE_
 | Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
+
+Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` setting to configure the tracer to delete log files from the current logging directory on startup. The tracer deletes log files the same age and older than the given number of days, with a default value of `31`.
 
 For more details on how to configure the .NET Tracer, see the [Configuration][2] section.
 
