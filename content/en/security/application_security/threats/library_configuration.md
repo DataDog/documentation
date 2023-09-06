@@ -33,7 +33,11 @@ ASM automatically attempts to resolve `http.client_ip` from several well-known h
 
 ## Track authenticated bad actors
 
-Many critical attacks are performed by authenticated users who can access your most sensitive endpoints. To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions. Read [Tracking User Activity][1] for more information.
+Many critical attacks are performed by authenticated users who can access your most sensitive endpoints. To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions.
+
+The Datadog Tracing Library will attempt to auto-detect user login and signup events when it detects compatible authentication frameworks in use.
+
+Read [Tracking User Activity][1] for more information on how to manually track user activity, or if you wish to opt out - [Disabling automatic user activity event tracking][7].
 
 ## Exclude specific parameters from triggering detections
 
@@ -114,3 +118,4 @@ If you need additional help, contact [Datadog support][6].
 [4]: https://app.datadoghq.com/security/appsec/signals
 [5]: https://app.datadoghq.com/security/configuration/asm/passlist
 [6]: /help/
+[7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
