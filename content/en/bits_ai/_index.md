@@ -24,7 +24,7 @@ Bits AI is a generative AI interface that helps you investigate and remediate is
 
 ### Query data in natural language
 
-Bits AI supports natural language querying for logs, APM traces, and infrastructure data.
+Bits AI supports natural language querying for logs, APM traces, and infrastructure data. It will also expand on issues with upstream and downstream dependencies.
 
 In Datadog or in Slack, you can ask Bits AI questions in natural language, such as
 - What is going on with example-service?
