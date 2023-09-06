@@ -107,10 +107,10 @@ These are supported on the following architectures:
 
 ### User Authentication Frameworks compatibility
 
-Integrations to **User Authentication Frameworks provides:**
+**Integrations to User Authentication Frameworks provide:**
 
-- User login events including the user IDs.
-- The Account Take Over detection monitoring the user login events.
+- User login events, including the user IDs.
+- The Account Takeover detection monitoring the user login events.
 
 | Framework         |
 |-------------------|
