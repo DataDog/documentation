@@ -451,6 +451,7 @@ You can update the following event properties:
 |-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
 |   `view.url`            |   String  |   The URL of the active web page.                            |
 |   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
+|   `view.name`           |   String  |   The name of the current view.                            |
 |   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
 |   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
