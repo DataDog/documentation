@@ -109,8 +109,8 @@ These are supported on the following architectures:
 
 Integrations to **User Authentication Frameworks provides:**
 
-- Account Take Over detection thanks to the monitoring of user login events sent by the following integrations.
-- User ID tracking.
+- User login events including the user IDs.
+- The Account Take Over detection monitoring the user login events.
 
 | Framework         |
 |-------------------|
