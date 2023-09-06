@@ -84,9 +84,9 @@ The Downtime scope query follows the same common [Search Syntax][19] that many o
 There are a few limitations that are **not supported** which include:
 
 * More than two levels of nesting, e.g. `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
-* Negation is only supported for key/value pairs and tags with `OR`, e.g. `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, `-service(A B)`, etc. are not supported.
-* Top level ORs are not supported, e.g. `service:A OR host:X`. This requires two separate Downtimes.
-* Keyless tags, e.g. `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
+* Negation is only supported for key/value pairs and tags with `OR`. For example, `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, or `-service(A B)` are not supported.
+* Top level ORs are not supported, for example, `service:A OR host:X`. This requires two separate Downtimes.
+* Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
 * Question mark wildcards: `service:auth?` are not supported. Use `*` instead if you need to use wildcards.
 * Invalid characters within the key: `en&v:prod` is not a valid Downtime scope and will be rejected.
 
