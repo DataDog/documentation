@@ -15,20 +15,20 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Monitor custom schedule is in private beta. To request access, contact Support at support@datadoghq.com.
+The monitor custom schedule feature is in private beta. To request access, contact Support at support@datadoghq.com.
 {{< /beta-callout >}}
 
 ## Overview 
 
-Set a specific evaluation time and control the evaluation frequency for monitors to track the execution of critical jobs running in your environment. Monitor Custom Schedules enables you to alert on systems and processes that do not need to be continuously monitored, such as cron jobs.
+Set a specific evaluation time and control the evaluation frequency for monitors to track the execution of critical jobs running in your environment. Monitor Custom Schedules enable you to alert on systems and processes that do not need to be continuously monitored, such as cron jobs.
 
-Monitor Custom Schedules is supported on events, logs, and metrics monitors with daily, weekly, and monthly scheduling intervals.
+Monitor Custom Schedules are supported on events, logs, and metrics monitors with daily, weekly, and monthly scheduling intervals.
 
 ## Configuration
 
 {{< img src="/monitors/guide/custom_schedules/add_custom_schedule.png" alt="Button to add custom schedule in the monitor configuration" style="width:100%;" >}}
 
-Click **+ Add Custom Schedule** to configure your evaluation frequency. 
+Click **Add Custom Schedule** to configure your evaluation frequency. 
 
 <div class="alert alert-warning">After a custom schedule has been enabled on a monitor, it cannot be disabled.
 </div>
@@ -37,7 +37,7 @@ Click **+ Add Custom Schedule** to configure your evaluation frequency.
 {{% tab "Day" %}}
 Select the time of the day you want the monitor to evaluate at.
 
-For example, the following monitor checks every day at 8:00PM that a success event has been generated for each database instance as a result of the daily backup job. 
+For example, the following monitor checks every day at 8:00PM that the daily backup job generated a success event for each database instance. 
 
 {{< img src="monitors/guide/custom_schedules/custom_day.png" alt="Monitor configuration to check every day at 8pm that a success event has been generated for each database instance as a result of the daily backup job" style="width:100%;" >}}
 
@@ -55,16 +55,16 @@ For example, the following monitor checks every week on Tuesday and Saturday at 
 {{% tab "Month" %}}
 Select the day of the month as well as the time of the day you want the monitor to evaluate at.
 
-For example, the following monitor checks on the first day of each month whether the cron-job generating customer invoices has successfully run.
+For example, the following monitor checks on the first day of each month whether the cron job generating customer invoices has successfully run.
 
-{{< img src="monitors/guide/custom_schedules/custom_month.png" alt="Monitor configuration to check on the first day of each month whether the cron-job generating customer invoices has successfully run." style="width:100%;" >}}
+{{< img src="monitors/guide/custom_schedules/custom_month.png" alt="Monitor configuration to check on the first day of each month whether the cron job generating customer invoices has successfully run." style="width:100%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## RRULES
 
-Recurrence rule (RRULE) is a property name from [iCalendar RFC][1], which is the standard for defining recurring events. Use the [official RRULE generator][2] as a tool to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use-cases. 
+Recurrence rule (RRULE) is a property name from the [iCalendar RFC][1], which is the standard for defining recurring events. Use the [official RRULE generator][2] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases. 
 
 To write a custom RRULE for your monitor, click **Use RRULE**.
 
@@ -86,14 +86,14 @@ FREQ=MONTHLY;INTERVAL=2;BYDAY=1SU,-1SU
 
 {{< img src="monitors/guide/custom_schedules/RRULE_month_last_sunday.png" alt="RRULE syntax used in the UI to evaluate every other month on the first and last Sunday of the month" style="width:90%;" >}}
 
-## Alerting behavior of monitors with custom schedule
+## Alerting behavior of monitors with custom schedules
 
 Monitors using default scheduling run the query with the default evaluation frequency and send alerts based on monitor status transitions (for example, when a monitor goes from WARN to OK or from OK to ALERT).
 
 {{< img src="monitors/guide/custom_schedules/alerting_behavior_regular.png" alt="Visual diagram showing a when a monitor sends an alert based on monitor state transitions for the default schedule with a thirty minute evaluation frequency" style="width:100%;" >}}
 
 Monitors with custom schedules, on the other hand, evaluate on a daily, weekly, or monthly basis and send alerts based on the results of individual evaluations. Each evaluation is independent from the previous one and sends a notification when the result is not OK.
-
+The timeline below illustrates the behavior of a monitor running on a custom schedule. Unlike the default scheduled monitor, the custom scheduled monitor sends an alert during its evaluation time based on the monitor state.
 {{< img src="monitors/guide/custom_schedules/alerting_behavior_custom.png" alt="Visual diagram showing a when a monitor sends an alert based on monitor state for the custom schedule with a daily evaluation frequency" style="width:100%;" >}}
 
 ## Further reading

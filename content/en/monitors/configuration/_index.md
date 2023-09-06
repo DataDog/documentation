@@ -94,7 +94,7 @@ By default, evaluation frequencies depend on the [evaluation window](#evaluation
 
 The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule. 
 
-For more information see the guide on how to [Customize monitor evaluation frequencies][4].
+For more information, see the guide on how to [Customize monitor evaluation frequencies][4].
 
 ### Thresholds
 
