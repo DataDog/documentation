@@ -37,7 +37,7 @@ Configuration of the host map widget is similar to the main [host map][1] page:
 
 #### Context links
 
-[Context links][2] are enabled by default, you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog, or third-party).
+[Context links][2] are enabled by default; you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog or third-party).
 
 ## API
 
