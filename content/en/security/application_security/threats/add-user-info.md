@@ -685,7 +685,7 @@ track_custom_event(tracer, event_name, metadata)
 
 ## Disabling automatic user activity event tracking
 
-When ASM is enabled, recent Datadog Tracing Libraries will attempt to detect user activity events automatically.
+When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
 
 The events that can be automatically detected are:
 
@@ -693,7 +693,7 @@ The events that can be automatically detected are:
 - `users.login.failure`
 - `users.signup`
 
-If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING=disabled</code> (on the application hosting the Datadog Tracing Library, not on the Datadog Agent).
+If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING=disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
 ## Further Reading
 

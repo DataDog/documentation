@@ -37,7 +37,7 @@ Many critical attacks are performed by authenticated users who can access your m
 
 The Datadog Tracing Library attempts to detect user login and signup events when compatible authentication frameworks are in use, and ASM is enabled.
 
-Read [Tracking User Activity][1] for more information on how to manually track user activity, or if you wish to opt out - [Disabling automatic user activity event tracking][7].
+Read [Tracking User Activity][1] for more information on how to manually track user activity, or [see how to opt-out][7] of the automatic tracking.
 
 ## Exclude specific parameters from triggering detections
 
