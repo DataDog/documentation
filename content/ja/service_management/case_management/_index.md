@@ -49,7 +49,7 @@ Datadog のいくつかの場所からケースを作成または更新するこ
 ### ログのエラー追跡
 個々のエラー追跡の問題をクリックして、サイドパネルを開きます。サイドパネルから **Create Case** または **Add to an existing case** をクリックします。
 
-### Workflows
+### ワークフローの自動化
 新規または既存のワークフローの[ワークフロービルダー][4]でステップを追加し、"case management" を検索して、**Create Case** または **Update the status from a Case** を選択します。
 
 ### Case Management
@@ -62,4 +62,4 @@ Datadog のいくつかの場所からケースを作成または更新するこ
 [1]: https://app.datadoghq.com/cases
 [2]: /ja/account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
-[4]: /ja/workflows/build/#build-a-workflow-with-the-workflow-builder
+[4]: /ja/service_management/workflows/build/#build-a-workflow-with-the-workflow-builder

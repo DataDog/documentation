@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/"
   tag: "Blog"
   text: "Proactively monitor service performance with SLO alerts"
+- link: "https://www.datadoghq.com/blog/slo-key-questions/"
+  tag: "Blog"
+  text: "Key questions to ask when setting SLOs"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors and SLOs"
@@ -102,7 +105,7 @@ Restrict access to individual SLOs by specifying a list of [roles][8] that are a
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles that may edit the SLO.
+1. Use the drop-down to select one or more roles, teams (beta), or users (beta) that may edit the SLO.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**

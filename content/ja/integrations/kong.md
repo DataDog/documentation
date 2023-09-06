@@ -42,7 +42,7 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 2.4.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -79,7 +79,7 @@ Agent の Kong チェックは、合計リクエスト数、応答コード数�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Kong チェックは [Datadog Agent][4] パッケージに含まれています。Kong サーバーに追加でインストールする必要はありません。
 

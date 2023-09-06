@@ -6,13 +6,17 @@ further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
+- link: "https://www.datadoghq.com/blog/monitor-netflow-with-datadog/"
+  tag: "Blog"
+  text: "Monitor NetFlow traffic data with Datadog"
+- link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+  tag: "Blog"
+  text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
-
-<div class="alert alert-warning">NetFlow Monitoring for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
 
-Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your Netflow-enabled devices.
+Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
 ## Installation
 
@@ -71,7 +75,7 @@ NetFlow data is retained for 30 days by default.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /network_monitoring/devices/snmp_metrics/
 [3]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [4]: /agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

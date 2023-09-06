@@ -7,6 +7,7 @@ aliases:
   - /guides/monitoring/
   - /guides/alerting/
   - /guides/monitors/the-conditions
+  - /monitoring
 description: "Create monitors, notify your teams when it matters, and manage your monitors using the alerting platform"
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Alerting"
@@ -24,6 +25,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on creating effective monitors"
+  - link: "https://www.datadoghq.com/blog/aws-recommended-monitors/"
+    tag: "Blog"
+    text: "Enable preconfigured alerts with recommended monitors for AWS"
 cascade:
     algolia:
         rank: 70

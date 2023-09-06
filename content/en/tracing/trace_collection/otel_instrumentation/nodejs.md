@@ -1,7 +1,7 @@
 ---
 title: Custom Instrumentation of Node.js Applications with the OpenTelemetry API
 kind: documentation
-description: 'Instrument your Node.js application with OTel API to send traces to Datadog.'
+description: 'Instrument your Node.js application with OpenTelemetry API to send traces to Datadog.'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
@@ -19,19 +19,19 @@ further_reading:
 <!-- TODO: version needs to corrected after release -->
 - Datadog Node.js tracing library `dd-trace` version 4.2.0+, 3.23.0+, or v2.36.0+.
 
-The following OTel features implemented in the Datadog library as noted:
+The following OpenTelemetry features implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
 |---------------------------------------|--------------------------------------|
-| [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog tracing library
+## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OTel instrumentation to your Node.js code following the [OTel Node.js Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Node.js code following the [OpenTelemetry Node.js Manual Instrumentation documentation][5].
 2. Add the `dd-trace` module to your package.json:
 
     ```sh

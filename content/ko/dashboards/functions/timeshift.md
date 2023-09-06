@@ -78,6 +78,6 @@ timeshift(avg:system.load.1{*}, -1209600)
     {{< nextlink href="/dashboards/functions/smoothing" >}}평활화: 메트릭 변동을 평활화합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}

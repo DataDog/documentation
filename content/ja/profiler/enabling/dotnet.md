@@ -7,9 +7,9 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/dotnet
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server バージョン 2012 以降
 
 サーバーレス
-: Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
+: Azure App Services - 公開ベータ版 (Web アプリのみ、関数はサポートされていません)
 
 対応する .NET ランタイム (64 ビットアプリケーション)
 : .NET Framework 4.6.1+<br/>
@@ -53,15 +53,15 @@ Windows Server バージョン 2012 以降
 |----------------------|-----------------------------------------|---------------------------------------|
 | Wall Time プロファイリング        | 2.7.0+                     |サポートされているすべてのランタイムバージョン。      |
 | CPU プロファイリング        | 2.15.0+                       | サポートされているすべてのランタイムバージョン。      |
-| 例外プロファイリング        | ベータ版、2.10.0+                       | サポートされているすべてのランタイムバージョン。      |
+| 例外プロファイリング        | 2.31.0+                       | サポートされているすべてのランタイムバージョン。      |
 | アロケーションプロファイリング        | ベータ版、2.18.0+                       | .NET 6+      |
-| ロックコンテンションプロファイリング        | ベータ版、2.18.0+                       | .NET 5+      |
+| ロックコンテンションプロファイリング        | 2.31.0+                       | .NET 5+      |
 | ライブヒーププロファイリング        | ベータ版、2.22.0+                       | .NET 7+      |
 | [Code Hotspots][12]        | 2.7.0+                       | サポートされているすべてのランタイムバージョン。      |
 | [Endpoint Profiling][13]            | 2.15.0+                       | サポートされているすべてのランタイムバージョン。      |
 | 沿革            | 2.30.0+                       | サポートされているすべてのランタイムバージョン (ガベージコレクションの詳細のために必要な .NET 5+ を除く) 。     |
 
-## APM に Datadog Agent を構成する
+## インストール
 
 すでに Datadog を使用している場合は、Agent をバージョン 7.20.2+ または 6.20.2+ にアップグレードしてください。プロファイラーにはトレーシングライブラリ (v2.8.0 以降) が付属していますので、既にアプリケーションで [APM を使用してトレースを収集][5]している場合は、ライブラリをインストールせずに直接[プロファイラーを有効にする](#enabling-the-profiler)に進んでください。
 
@@ -402,8 +402,8 @@ IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: /ja/getting_started/tagging/unified_service_tagging
 [4]: /ja/getting_started/profiler/
 [5]: /ja/tracing/trace_collection/

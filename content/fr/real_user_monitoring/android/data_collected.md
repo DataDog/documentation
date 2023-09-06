@@ -1,16 +1,15 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: Code source dd-sdk-android
+  text: Code source de dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
   text: Explorer le service RUM de Datadog
 kind: documentation
 title: Données RUM recueillies (Android)
 ---
+
 ## Présentation
 
 Le SDK RUM Android génère des événements auxquels des métriques et attributs sont associés. Les métriques sont des valeurs quantifiables servant à effectuer des mesures associées à un événement. Les attributs sont des valeurs non quantifiables servant à filtrer les données de métriques dans les analyses.
@@ -23,19 +22,18 @@ Il existe d'autres [métriques et attributs propres à un type d'événement don
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Session  | 30 jours   | Une session représente le parcours d'un utilisateur réel sur votre application mobile. Elle débute lorsque l'utilisateur lance l'application et se poursuit tant qu'il reste actif. Lors du parcours de l'utilisateur, tous les événements RUM générés au sein de la session partagent le même attribut `session.id`. **Remarque** : la session se réinitialise après 15 minutes d'inactivité. Si l'application est arrêtée par le système d'exploitation, vous pouvez réinitialiser la session pendant que l'application est exécutée en arrière-plan. |
 | Vue     | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Une vue est lancée et mise en pause lorsque les callbacks `onActivityResumed` et `onActivityPaused` sont effectués via l'interface `ActivityLifecycleCallbacks`. Chaque occurrence est considérée comme une vue distincte. Tant que l'utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources et Actions) sont joints à la vue, avec un `view.id` unique.                     |
-| Ressource  | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                                           |
-| Error     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
+| Ressource  | 30 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                                           |
+| Erreur     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
 | Action    | 30 jours   | Une action représente une activité utilisateur dans votre application mobile (par exemple, le lancement de l'application ou une action de toucher, de balayage ou de retour). Chaque action possède un `action.id` unique joint à la vue à son origine.                                                                                                                                              |
-| Tâche longue | 15 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
+| Tâche longue | 30 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
 
 Le schéma suivant présente la hiérarchie des événements RUM :
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="Hiérarchie des événements RUM" style="width:50%;border:none" >}}
+{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="Hiérarchie des événements RUM" style="width:50%;" >}}
 
 ## Attributs par défaut
 
 La solution RUM recueille [automatiquement][1] des attributs communs pour tous les événements, ainsi que des attributs propres à chaque événement, tel qu'indiqué ci-dessous. Vous pouvez également choisir d'enrichir les données de vos sessions utilisateur en surveillant d'[autres événements][2] ou en [ajoutant des attributs personnalisés][3] aux événements par défaut, selon vos besoins en analytique métier et en surveillance de votre application.
-
 
 ### Attributs communs de base
 
@@ -45,6 +43,7 @@ La solution RUM recueille [automatiquement][1] des attributs communs pour tous l
 | `type`     | chaîne | Le type de l'événement (par exemple, `view` ou `resource`).             |
 | `service` | chaîne | Le [nom de service unifié][4] de cette application utilisé pour corréler les sessions utilisateur. |
 | `application.id` | chaîne | L'ID d'application Datadog. |
+| `application.name` | chaîne | Le nom de l'application Datadog. |
 
 ### Appareil
 
@@ -56,6 +55,13 @@ Les attributs sur l'appareil suivants sont joints automatiquement à tous les é
 | `device.brand`  | chaîne | La marque d'appareil indiquée par l'appareil (User-Agent système)  |
 | `device.model`   | chaîne | Le modèle d'appareil indiqué par l'appareil (User-Agent système)    |
 | `device.name` | chaîne | Le nom d'appareil indiqué par l'appareil (User-Agent système)  |
+
+### Connectivité
+
+Les attributs réseau suivants sont joints automatiquement à tous les événements de ressource et d'erreur recueillis par Datadog :
+
+| Nom de l'attribut                           | Type   | Description                                     |
+|------------------------------------------|--------|-------------------------------------------------|
 | `connectivity.status` | chaîne | Le statut de l'accessibilité au réseau de l'appareil (`connected`, `not connected` ou `maybe`). |
 | `connectivity.interfaces` | chaîne | La liste des interfaces réseau disponibles (par exemple, `bluetooth`, `cellular`, `ethernet` ou `wifi`). |
 | `connectivity.cellular.technology` | chaîne | Le type de technologie radio utilisée pour la connexion cellulaire. |
@@ -234,12 +240,12 @@ Si votre application prend en charge le [mode Direct Boot][7], notez que les don
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[2]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
-[3]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
-[4]: https://docs.datadoghq.com/fr/getting_started/tagging/unified_service_tagging/
-[5]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions
+[1]: /fr/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[2]: /fr/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
+[3]: /fr/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[4]: /fr/getting_started/tagging/unified_service_tagging/
+[5]: /fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://developer.android.com/training/articles/direct-boot
-[8]: https://docs.datadoghq.com/fr/data_security/real_user_monitoring/#ip-address
-[9]: https://docs.datadoghq.com/fr/data_security/real_user_monitoring/#geolocation
+[8]: /fr/data_security/real_user_monitoring/#ip-address
+[9]: /fr/data_security/real_user_monitoring/#geolocation

@@ -1,10 +1,16 @@
 ---
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /integrations/kafka/
   tag: ドキュメント
   text: Kafka インテグレーション
-- link: /tracing/service_catalog/
+- link: /integrations/amazon_sqs/
   tag: ドキュメント
+  text: Amazon SQS インテグレーション
+- link: /tracing/service_catalog/
+  tag: Documentation
   text: サービスカタログ
 - link: https://www.datadoghq.com/blog/data-streams-monitoring/
   tag: ブログ
@@ -38,8 +44,9 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 | ランタイム | 対応テクノロジー |
 |---|----|
 | Java | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC |
-| Go | 全て ([手動インスツルメンテーション][1]で) |
 | .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ |
+| Python | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、Amazon SQS |
+| Go | 全て ([手動インスツルメンテーション][1]で) |
 
 
 ## Data Streams Monitoring の調査
@@ -65,11 +72,11 @@ Data Streams Monitoring を構成すると、非同期システム内の任意�
 
 ### 受信したメッセージを任意のキュー、サービス、クラスターに属性付けする
 
-消費型サービスでの遅延の増加、Kafka ブローカーでのリソース使用の増加、RabbitMQ キューサイズの増加は、隣接するサービスがこれらのエンティティに生成またはエンティティから消費する方法の変更によって、頻繁に説明されます。
+消費型サービスでの遅延の増加、Kafka ブローカーでのリソース使用の増加、RabbitMQ または Amazon SQS のキューサイズの増加は、隣接するサービスがこれらのエンティティに生成またはエンティティから消費する方法の変更によって、頻繁に説明されます。
 
 Data Streams Monitoring の任意のサービスやキューで **Throughput** タブをクリックすると、スループットの変化と、その変化がどの上流または下流のサービスに起因するものかを迅速に検出できます。[サービスカタログ][2]を構成すると、対応するチームの Slack チャンネルやオンコールエンジニアにすぐにピボットすることができます。
 
-単一の Kafka または RabbitMQ クラスターにフィルターをかけることで、そのクラスター上で動作するすべての検出されたトピックまたはキューについて、送受信トラフィックの変化を検出することができます。
+単一の Kafka、RabbitMQ または Amazon SQS のクラスターにフィルターをかけることで、そのクラスター上で動作するすべての検出されたトピックまたはキューについて、送受信トラフィックの変化を検出することができます。
 
 {{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 

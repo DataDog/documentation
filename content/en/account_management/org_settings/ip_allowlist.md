@@ -22,14 +22,14 @@ If a user's IP is not contained in the IP allowlist, they are effectively blocke
 - Datadog's web UI
 - Datadog's public [API][1], including both documented and unpublished endpoints
 - Datadog's mobile apps (iOS, Android)
-- Third-party applications that access Datadog through OAuth
+- Third-party integrations and applications that access Datadog through OAuth
 
 The IP allowlist feature does not block access to the following:
 - Data ingest endpoints to which the Agent sends data, such as metrics, traces, and logs
 - The [validate API key][2] endpoint, which the Agent uses before submitting data
 - [Public dashboards][3]
 
-Third-party integrations and applications that need access to Datadog's public web APIs may be impacted by the IP allowlist. Applications submitting telemetry such as metrics, traces, and logs from the Agent and integrations are unaffected. Datadog recommends utilizing the [Audit Trail][4] to monitor for IP addresses from third parties.
+Applications and integrations that submit telemetry such as metrics, traces, and logs from the Agent and those that use an API key provided by the user are unaffected by the IP allowlist. Datadog recommends utilizing the [Audit Trail][4] to monitor for IP addresses from third parties.
 
 ### Functionality
 

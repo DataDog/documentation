@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: performetriks-composer
 app_uuid: b1b4d663-f81a-4892-8aef-5dd67b40a37f
 assets: {}

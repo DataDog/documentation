@@ -66,7 +66,7 @@ Akamai DataStream 2 は、配信プロパティのパフォーマンスおよび
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Akamai DataStream 2 のログとメトリクスを表示するためのプリセットダッシュボードを有効にするには、**Install Integration** をクリックします。
 

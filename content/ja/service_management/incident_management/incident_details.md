@@ -104,7 +104,7 @@ Datadog のすべてのインシデントには、インシデントのプロパ
 本機能は公開ベータ版です。
 </div>
 
-{{< img src="monitors/incidents/incident_response_team.png" alt="特定のインシデントに関するインシデント詳細ページの対応チームセクション" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_response_team.png" alt="特定のインシデントに関するインシデント詳細ページの対応チームセクション" style="width:80%;">}}
 
 対応チームセクションでは、他のユーザーを追加し、インシデントの解決プロセスで実行するロールを割り当てることで、対応チームを編成することができます。Datadog が提供するデフォルトの対応者タイプは以下の 2 つです。
 
@@ -121,7 +121,7 @@ Datadog のすべてのインシデントには、インシデントのプロパ
 
 ## 通知セクション
 
-{{< img src="monitors/incidents/incident_notifications.jpeg" alt="インシデント通知" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_notifications.jpeg" alt="インシデント通知" style="width:80%;">}}
 
 インシデントに対するすべてのステークホルダーからの通知は、通知セクションに集約されます。
 このページから直接、通知を手動で作成、下書きとして保存、送信することができます。当該インシデントの[通知ルール][11]によって送信された自動通知も、このセクションにリストされます。

@@ -1,6 +1,10 @@
 ---
 code_lang: dotnet
 code_lang_weight: 80
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: .NET トレースコンテキストの伝搬
 type: multi-code-lang
@@ -94,6 +98,9 @@ public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAtt
 
 Kafka コンシューマースパンをトレースするために `SpanContextExtractor` API を使用する場合、`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定します。これにより、メッセージがトピックから消費された直後にコンシューマースパンが正しく閉じられ、メタデータ (`partition` や `offset` など) が正しく記録されることが保証されます。`SpanContextExtractor` API を使用して Kafka メッセージから作成されたスパンは、プロデューサーのスパンの子であり、コンシューマーのスパンの兄弟になります。
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [5]: https://github.com/openzipkin/b3-propagation

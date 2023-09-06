@@ -55,6 +55,13 @@ The following device-related attributes are attached automatically to all events
 | `device.brand`  | string | The device brand as reported by the device (System User-Agent).  |
 | `device.model`   | string | The device model as reported by the device (System User-Agent).    |
 | `device.name` | string | The device name as reported by the device (System User-Agent).  |
+
+### Connectivity
+
+The following network-related attributes are attached automatically to Resource and Error events collected by Datadog:
+
+| Attribute name                           | Type   | Description                                     |
+|------------------------------------------|--------|-------------------------------------------------|
 | `connectivity.status` | string | Status of device network reachability (`connected`, `not connected`, or `maybe`). |
 | `connectivity.interfaces` | string | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`). |
 | `connectivity.cellular.technology` | string | The type of a radio technology used for cellular connection. |
@@ -78,7 +85,7 @@ The below attributes are related to the geo-location of IP addresses.
 
 **Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][9].
 
-| Fullname                                    | Type   | Description                                                                                                                          |
+| Attribute name                              | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `geo.country`         | string | Name of the country.                                                                                                                 |
 | `geo.country_iso_code`     | string | ISO Code of the country (for example, `US` for the United States or `FR` for France).                                                  |

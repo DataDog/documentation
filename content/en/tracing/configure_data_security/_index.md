@@ -1,7 +1,7 @@
 ---
-title: Configure the Datadog Agent or Tracer for Data Security
+title: Data Security
 kind: documentation
-description: "Configure the Datadog Tracer or Agent to modify or discard spans for security or fine-tuning purposes."
+description: "Configure the Client library or Agent to control the collection of sensitive data in traces."
 aliases:
     - /tracing/security
     - /tracing/guide/security
@@ -13,31 +13,140 @@ aliases:
 ---
 ## Overview
 
-The performance data and traces that you're collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your error counts to be inaccurate or Datadog to not accurately indicate the health of your services.
+Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog.
 
-The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans, and various options are described below. These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
+If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
-If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
+### Personal information in trace data
 
-## Generalizing resource names and filtering baseline
+Datadog's APM tracing libraries collect relevant observability data about your applications. Because these libraries collect hundreds of unique attributes in trace data, this page describes categories of data, with a focus on attributes that may contain personal information about your employees and end-users. 
 
-Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource names to facilitate grouping during analysis. In particular:
+The table below describes the personal data categories collected by the automatic instrumentation provided by the tracing libraries, with some common examples listed. 
 
-* **Environment variables are not collected by the Agent**
-* **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
-* **SQL strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
-* **Numbers in Resource names (for example, request URLs) are obfuscated** For example, the following `elasticsearch` attribute:
+| Category            | Description                                                                                                            |
+|:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| Name                | The full name of an internal user (your employee) or end-user.                                                         |
+| Email               | The email address of an internal user (your employee) or end-user.                                                     |
+| Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request. |
+| Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                           |
+| Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                            |
+| URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
+| URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
 
-    ```text
-    Elasticsearch : {
-        method : GET,
-        url : /user.0123456789/friends/_count
-    }
-    ```
+The table below describes the default behavior of each language tracing library with regard to whether a data category is collected and whether it is obfuscated by default.
 
-    has its number in the URL obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
+{{% tabs %}}
 
-## Agent trace obfuscation
+{{% tab ".NET" %}}
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> |                                 |
+| URI userinfo        |                                 |                                 |
+
+{{% /tab %}}
+
+{{% tab "Java" %}}
+
+**Note:** Database statements are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Database statements | <i class="icon-check-bold"></i> |                                 |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+**Note:** URI parameters are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> |                                 |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+**Note:** Name and email are not collected by default and must be enabled.
+
+| Category            |            Collected            |           Obfuscated            |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+**Note:** Client IP, geographic location, and URI parameters are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Geographic location | <i class="icon-check-bold"></i> |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
+
+[1]: /tracing/trace_collection/compatibility/python/#datastore-compatibility
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+**Note:** Client IP are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> |                                 |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
+
+{{% /tab %}}
+
+{{% /tabs %}}
+
+If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
+
+## Agent
+
+### Resource names
+
+Datadog spans include a resource name attribute that may contain sensitive data. The Datadog Agent implements obfuscation for several known cases:
+
+* **SQL numeric literals and bind variables are obfuscated**: For example, the following query `SELECT data FROM table WHERE key=123 LIMIT 10` is obfuscated to `SELECT data FROM table WHERE key = ? LIMIT ?` before setting the resource name for the query span.
+* **SQL literal strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
+* **Redis queries are quantized by selecting only command tokens**: For example, the following query `MULTI\nSET k1 v1\nSET k2 v2` is quantized to `MULTI SET SET`.
+
+### Trace obfuscation
 
 Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
@@ -113,6 +222,8 @@ apm_config:
   obfuscation:
     redis:
       enabled: true
+      # If true, replaces all arguments with a single "?".
+      remove_all_args: true
 ```
 
 [1]: /tracing/glossary/#spans
@@ -136,7 +247,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Http" %}}
 
-HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
+HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http` or `web`:
 
 ```yaml
 apm_config:
@@ -150,8 +261,8 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string`: If true, obfuscates query strings in URLs.
-* `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+* `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
+* `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
 
 
 [1]: /tracing/glossary/#spans
@@ -173,25 +284,7 @@ apm_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## HTTP data collected
-
-Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, see [Span Tags Semantics][3].
-
-### Redacting the query in the URL
-
-The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
-
-If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
-
-### Applying header tags to root spans
-
-To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
-
-```
-DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
-```
-
-## Scrub sensitive data from your spans
+### Replace tags
 
 To scrub sensitive data from your [span][4]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][5] or the `DD_APM_REPLACE_TAGS` environment variable. The value of the setting or environment variable is a list of one or more groups of parameters that specify how to replace sensitive data in your tags. These parameters are:
 
@@ -307,7 +400,7 @@ Put this environment variable in the trace-agent container if you are using the 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Exclude resources from being collected
+### Ignore resources
 
 For an in depth overview of the options to avoid tracing specific resources, see [Ignoring Unwanted Resources][6].
 
@@ -318,19 +411,39 @@ The Agent can be configured to exclude a specific resource from traces sent by t
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][7] for details.
 
 ```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
+###### @param ignore_resources - list of strings - optional
+
+###### A list of regular expressions can be provided to exclude certain traces based on their resource name.
+
+###### All entries must be surrounded by double quotes and separated by commas.
+
+###### ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
+
 ```
 
-## Submit Traces directly to the Agent API
+## Library
 
-If you require tailored instrumentation for a specific application, consider using the Agent-side tracing API to select individual spans to include in traces. See the [API documentation][8] for additional information.
+### HTTP
 
-## Modifying spans with the Datadog tracer
+Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries have the following configuration options to control sensitive data collected in HTTP spans.
+    
+#### Redact query strings
 
-While this page deals with modifying data once it has reached the Datadog Agent, some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). View the Custom Instrumentation documentation for your language for more information.
+The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
+
+If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
+
+#### Collect headers
+
+To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
+
+```
+DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
+```
+
+### Processing 
+
+Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 
 * Java: [TraceInterceptor interface][9]
 * Ruby: [Processing Pipeline][10]
@@ -340,7 +453,26 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
-To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
+You can disable this telemetry collection using either of these settings:
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+```yaml
+apm_config:
+  telemetry:
+    enabled: false
+```
+
+{{% /tab %}}
+{{% tab "Environment variables" %}}
+
+```bash
+export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## PCI DSS compliance for compliance for APM
 
@@ -387,3 +519,5 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [9]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 [10]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
+[12]: /sensitive_data_scanner/
+[13]: /security/application_security/how-appsec-works/#data-privacy

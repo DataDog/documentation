@@ -39,11 +39,11 @@ Two optional processes are spawned by the Agent if enabled in the `datadog.yaml`
 
 On Windows the services are listed as:
 
-| Service               | Description             |
-|-----------------------|-------------------------|
-| DatadogAgent          | "Datadog Agent"         |
-| datadog-trace-agent   | "Datadog Trace Agent"   |
-| datadog-process-agent | "Datadog Process Agent" |
+| Service               | Description           |
+|-----------------------|-----------------------|
+| DatadogAgent          | Datadog Agent         |
+| datadog-trace-agent   | Datadog Trace Agent   |
+| datadog-process-agent | Datadog Process Agent |
 
 By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
@@ -153,8 +153,8 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
 | [Fedora][8]                              | Fedora 26+                                                |
 | [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
-| [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
-| [Windows][10]                            | Windows 7+                                                |
+| [Windows Server][10]                     | Windows Server 2012+ (including Server Core)              |
+| [Windows][10]                            | Windows 8.1+                                              |
 | [Azure Stack HCI OS][10]                 | All Versions                                              |
 
 | Platform (64-bit Arm v8)                 | Supported versions                                        |
@@ -171,7 +171,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 **Notes**:
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
-- Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
+- Datadog Agent versions previous to 6.46.0 and 7.46.0 support Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
@@ -343,7 +343,7 @@ See the [Agent log files documentation][12].
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
 [6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
   tag: "Documentation"
   text: "Multi-line log aggregation"
-- link: "agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards"
+- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
   tag: "Documentation"
   text: "Tail directories by using wildcards"
 - link: "agent/logs/advanced_log_collection/#global-processing-rules"
@@ -65,7 +65,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-On **Windows**, use the path `"<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log"`, and verify that the user `ddagentuser` has read and write access to the log file.
+On **Windows**, use the path `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
 [1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
@@ -162,7 +162,7 @@ List of all available parameters for log collection:
 | `exclude_paths`  | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file or files to exclude from log collection. This is available for Agent version >= 6.18.                                                                                                                                                                            |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | No       | The attribute used to define the category a source attribute belongs to, for example: `source:postgres, sourcecategory:database` or `source: apache, sourcecategory: http_web_access`.                                                                                                                                                                                                                              |
-| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_                                                                                                            |
+| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_ <br/><br/>If `type` is **journald**, set the position for the Agent to start reading the journal. Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`). With `force` options, the Agent ignores the cursor stored on disk and always reads from the beginning or the end of the journal when it starts. _Added in Agent v7.38_                                                                                                          |
 | `encoding`       | No       | If `type` is **file**, set the encoding for the Agent to read the file. Set it to `utf-16-le` for UTF-16 little-endian, `utf-16-be` for UTF-16 big-endian, or `shift-jis` for Shift JIS. If set to any other value, the Agent reads the file as UTF-8.  _Added `utf-16-le` and `utf-16be` in Agent v6.23/v7.23, `shift-jis` in Agent v6.34/v7.34_                                                                                      |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][11]).                                                                                                                                                                                                                                                                             |
 
@@ -170,7 +170,7 @@ List of all available parameters for log collection:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/kubernetes/log/
 [3]: /agent/docker/log/
 [4]: /agent/guide/agent-configuration-files/

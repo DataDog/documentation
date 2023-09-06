@@ -22,6 +22,9 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
+- link: "https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md"
+  tag: "Github"
+  text: "Contributing to the open source project"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -32,78 +35,9 @@ The latest PHP Tracer supports versions >= 5.4.x.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
-## Installation and getting started
+## Getting started
 
-### Follow the in-app documentation (recommended)
-
-Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
-
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable ingesting 100% of traces during setup.
-
-For descriptions of terminology used in APM, take a look at the [official documentation][3].
-
-For details about open-source contributions to the PHP tracer, refer to the [contributing guide][4].
-
-### Configure the Datadog Agent for APM
-
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
-
-{{< tabs >}}
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After having instrumented your application, the tracing client sends traces to Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`. If this is not the correct host and port change it by setting `DD_TRACE_AGENT_URL`, for example:
-
-   ```
-   DD_TRACE_AGENT_URL=unix:///path/to/custom.socket
-   DD_TRACE_AGENT_URL=http://localhost:9442
-   ```
-
-   Similarly, where `DD_TRACE_HEALTH_METRICS_ENABLED` is set true, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
-
-   If a different configuration is required, use the `DD_DOGSTATSD_URL` environment variable. Some examples:
-   ```
-   DD_DOGSTATSD_URL=http://custom-hostname:1234
-   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
-   ```
-
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
-
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
-
-For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-{{% /tab %}}
-{{< /tabs >}}
-
+Before you begin, make sure you've already [installed and configured the Agent][13].
 
 ### Install the extension
 
@@ -111,6 +45,12 @@ Download the official installer:
 
 ```shell
 curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
+```
+
+In case you are using Alpine Linux you need to install `libgcc_s` prior to running the installer:
+
+```shell
+apk add libgcc
 ```
 
 Run the installer:
@@ -509,7 +449,6 @@ For Apache, run:
 [1]: /tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [5]: https://app.datadoghq.com/apm/services
 [6]: /tracing/trace_collection/library_config/php/
 [7]: /tracing/guide/trace-php-cli-scripts/
@@ -519,3 +458,4 @@ For Apache, run:
 [11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[14]: /tracing/trace_collection#install-and-configure-the-agent

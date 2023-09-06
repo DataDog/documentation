@@ -69,7 +69,7 @@ Datadog サイトのナビゲーションは、ブラウザの幅に応じて変
 
 ## イベント
 
-{{< img src="events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
+{{< img src="service_management/events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
 
 [イベントエクスプローラー][10]には、インフラストラクチャーやサービスによって生成された最新のイベントが表示されます。
 

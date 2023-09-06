@@ -49,7 +49,7 @@ title: 복구 기준치
               }
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

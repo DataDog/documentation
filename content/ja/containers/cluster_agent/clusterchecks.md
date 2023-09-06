@@ -14,7 +14,7 @@ further_reading:
   tag: ドキュメント
   text: クラスターチェックランナー
 kind: documentation
-title: オートディスカバリーによるクラスターチェック
+title: クラスターチェック
 ---
 
 ## 概要

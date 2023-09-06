@@ -5,6 +5,10 @@ algolia:
   - リアルユーザーモニタリング
 aliases:
 - /ja/real_user_monitoring/installation
+- /ja/real_user_monitoring/faq/
+cascade:
+  algolia:
+    rank: 70
 description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化、観察、分析します。
 disable_sidebar: true
 further_reading:
@@ -48,7 +52,7 @@ kind: documentation
 title: RUM & セッションリプレイ
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM ダッシュボード" >}}
 
 ## リアルユーザーモニタリングとは？
 
@@ -75,6 +79,29 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 </br>
 
+### 機能とプラットフォームのサポート
+
+**注**: Datadog Flutter SDK は MacOS、Windows、Linux には対応していません。
+
+次の表に、各プラットフォームでサポートされている RUM 機能を示します。
+
+| 機能                               | ブラウザ | Android | iOS |   Flutter   | React Native | Roku | 注 |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
+| ログを Datadog に送信する方法  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| ネットワークリクエストの分散型トレーシング | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | **Datadog Roku SDK** は、一部の HTTP リクエストのみを追跡することができます。 |
+| ビューとアクションの追跡 (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - **Flutter Web** で追跡されるすべてのアクションは `custom` として記録されます <br> - **Roku** は手動アクション追跡のみをサポートしています。 |
+| 機能フラグの追跡とリリースの追跡 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| エラー追跡とソースマッピング | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | **React Native** は部分的にサポートされています |
+| クラッシュ追跡、シンボル化、難読化解除 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| セッションを停止 (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| WebView でイベントを追跡 |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| プラットフォーム固有のバイタルを監視 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| ログのグローバルコンテキスト/属性追跡  | {{< X >}} |  |  |  |  |  |  |
+| クライアント側のトレース |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
+| セッションリプレイ | {{< X >}} |  |  |  |  |  |  |
+| ヒートマップ | {{< X >}} |  |  |  |  |  |  |
+| フラストレーションシグナル | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | すべての**モバイル**および **Roku** デバイスは部分的にサポートされています |
+
 ## SDK ドメインの対応エンドポイント
 
 Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
@@ -90,9 +117,9 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
-### Browser
+### ブラウザ
 
-#### ログ管理
+#### ログ
 
 | サイト | サイト URL                                        |
 |------|-------------------------------------------------|
@@ -103,7 +130,7 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 | US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`      |
 
-#### セッション リプレイ
+#### セッションリプレイ
 
 | サイト | サイト URL                                                  |
 |------|-----------------------------------------------------------|
@@ -127,13 +154,13 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 
 ## Datadog RUM を探索する
 
-[**UX Monitoring > RUM Applications**][1] に移動して、RUM にアクセスします。
+[**UX Monitoring > Real User Monitoring**][1] に移動して、RUM にアクセスします。
 
 ### すぐに使えるダッシュボード
 
 [すぐに使える RUM ダッシュボード][2]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
 
-{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM ダッシュボード" >}}
 
 ### RUM エクスプローラーと視覚化
 
@@ -177,7 +204,7 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
+[1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /ja/real_user_monitoring/dashboards/
 [3]: /ja/real_user_monitoring/explorer/visualize/
 [4]: /ja/monitors/types/real_user_monitoring/

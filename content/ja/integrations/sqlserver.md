@@ -41,7 +41,7 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 11.2.2
+integration_version: 14.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -83,7 +83,7 @@ SQL Server インテグレーションを使用して、SQL Server インスタ�
 
 <div class="alert alert-info">このページでは、SQL Server Agent の標準インテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
 SQL Server チェックは [Datadog Agent][3] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
 
@@ -260,7 +260,7 @@ SQL Server チェックには、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/sqlserver/images/sqlserver_dashboard.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#sqlserver
 [5]: https://docs.microsoft.com/en-us/sql/t-sql/statements/grant-server-permissions-transact-sql?view=sql-server-ver15
 [6]: https://docs.microsoft.com/en-us/sql/tools/configuration-manager/tcp-ip-properties-ip-addresses-tab

@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.12.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -50,7 +50,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.12.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -73,7 +73,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.12.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -91,7 +91,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.12.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -112,7 +112,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run Datadog Synthetic tests
-        uses: DataDog/synthetics-ci-github-action@v0.12.0
+        uses: DataDog/synthetics-ci-github-action@v0.17.0
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
@@ -123,20 +123,23 @@ jobs:
 
 ## 入力
 
-| 名前                | タイプ    | 要件 | 説明                                                                                                                                                                                              |
-| ------------------- | ------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api_key`           | 文字列  | _必須_  | Datadog API キー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                                    |
-| `app_key`           | 文字列  | _必須_  | Datadog アプリケーションキー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                            |
-| `public_ids`        | 文字列  | _オプション_  | トリガーしたい Synthetic テストの公開 ID をカンマで区切ったリスト。値を指定しない場合は、`synthetics.json` という名前のファイルを検索します。**デフォルト:** なし。                         |
-| `test_search_query` | 文字列  | _オプション_  | [検索クエリ][5]に対応するトリガーテスト。**デフォルト:** なし。                                                                                                                                   |
-| `subdomain`         | 文字列  | _オプション_  | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、サブドメインの値は `myorg` に設定する必要があります。**デフォルト:** `app`。 |
-| `files`             | 文字列  | _オプション_  | Synthetic テストのコンフィギュレーションファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                       |
-| `datadog_site`      | 文字列  | _オプション_  | データ送信先の [Datadog サイト][11]。**デフォルト:** `datadoghq.com`。                                                                                                                                    |
-| `config_path`       | 文字列  | _オプション_  | テストを起動するときに使用される[グローバル JSON 構成][4]。詳細は[コンフィギュレーションファイル例][13]を参照してください。**デフォルト:** `datadog-ci.json`。                                           |
-| `variables`         | 文字列  | _オプション_  | Synthetic テストに使用するグローバル変数をカンマで区切ったリスト。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                               |
-| `junit_report`      | 文字列  | _オプション_  | JUnit レポートを生成したい場合のファイル名。**デフォルト:** なし。                                                                                                                          |
-| `tunnel`            | boolean | _オプション_  | [Continuous Testing Tunnel][9] を使用して、テストバッチを実行します。**デフォルト:** `false`。                                                                                                                 |
-| `polling_timeout`   | 数値  | _オプション_  | アクションがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。**デフォルト:** 30 分。        |
+| 名前                      | タイプ    | 要件 | 説明                                                                                                                                                                                                                                  |
+| ------------------------- | ------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api_key`                 | 文字列  | _必須_  | Datadog API キー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                                                                        |
+| `app_key`                 | 文字列  | _必須_  | Datadog アプリケーションキー。このキーは [Datadog 組織][2]によって作成され、[シークレット][3]として保存する必要があります。**デフォルト:** なし。                                                                                                |
+| `public_ids`              | 文字列  | _オプション_  | トリガーしたい Synthetic テストの公開 ID をカンマで区切ったリスト。値を指定しない場合は、`synthetics.json` という名前のファイルを検索します。**デフォルト:** なし。                                                             |
+| `test_search_query`       | 文字列  | _オプション_  | [検索クエリ][5]に対応するトリガーテスト。**デフォルト:** なし。                                                                                                                                                                       |
+| `subdomain`               | 文字列  | _オプション_  | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog にアクセスするための URL が `myorg.datadoghq.com` である場合、サブドメインの値は `myorg` に設定する必要があります。**デフォルト:** `app`。                                     |
+| `files`                   | 文字列  | _オプション_  | Synthetic テストのコンフィギュレーションファイルを検出するための Glob パターン。**デフォルト:** `{,!(node_modules)/**/}*.synthetics.json`。                                                                                                                           |
+| `datadog_site`            | 文字列  | _オプション_  | データ送信先の [Datadog サイト][11]。**デフォルト:** `datadoghq.com`。                                                                                                                                                                        |
+| `config_path`             | 文字列  | _オプション_  | テストを起動するときに使用される[グローバル JSON 構成][4]。詳細は[コンフィギュレーションファイル例][13]を参照してください。**デフォルト:** `datadog-ci.json`。                                                                               |
+| `variables`               | 文字列  | _オプション_  | Synthetic テストに使用するグローバル変数をカンマで区切ったリスト。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                                                                   |
+| `junit_report`            | 文字列  | _オプション_  | JUnit レポートを生成したい場合のファイル名。**デフォルト:** なし。                                                                                                                                                              |
+| `tunnel`                  | boolean | _オプション_  | [Continuous Testing Tunnel][9] を使用して、テストバッチを実行します。**デフォルト:** `false`。                                                                                                                                                     |
+| `polling_timeout`         | 数値  | _オプション_  | アクションがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。**デフォルト:** 30 分。                                            |
+| `fail_on_critical_errors` | boolean | _オプション_  | テストがトリガーされなかったり、Datadog から結果を取得できなかったりした場合に、CI ジョブを失敗させます。**デフォルト:** `false`                                                                                                                              |
+| `fail_on_missing_tests`   | boolean | _オプション_  | パブリック ID (`public_ids` を使用するか、[テストファイル][12]にリストされている) を持つ指定されたテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム上または Datadog サイトで削除された場合)、CI ジョブを失敗させます。**デフォルト:** `false` |
+| `fail_on_timeout`         | boolean | _オプション_  | 少なくとも 1 つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させます。**デフォルト:** `true`                                                                                                                                                  |
 
 ## 開発
 

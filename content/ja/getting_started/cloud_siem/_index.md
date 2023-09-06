@@ -23,6 +23,9 @@ further_reading:
 - link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
   tag: Documentation
   text: Cloud SIEM のための Google Cloud 構成ガイド
+- link: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
+  tag: Documentation
+  text: Cloud SIEM の Azure 構成ガイド
 - link: /security/notifications/variables/
   tag: Documentation
   text: 通知をカスタマイズするための通知変数について
@@ -51,7 +54,7 @@ title: Cloud SIEM の概要
     - [クラウド監査ログ][6]。
     - [ID プロバイダーログ][7]
     - SaaS と Workspace のログ
-    - サードパーティセキュリティインテグレーション (例: AWS GuardDuty)
+    - サードパーティセキュリティインテグレーション (例: Amazon GuardDuty)
 
 2. [Cloud SIEM][8] を有効にします。
 

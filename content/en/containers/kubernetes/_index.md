@@ -31,13 +31,15 @@ further_reading:
 
 Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.
 
-**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
+**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, see [Legacy Kubernetes versions][1].
 
 For Agent commands, see the [Agent Commands guides][2].
 
+For information pertaining to the Datadog Cluster Agent, which provides a streamlined approach to collecting cluster level monitoring data, see [Cluster Agent for Kubernetes][3].
+
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/agent/kubernetes/installation">}}<u>Installation</u>: Install the Datadog Agent in a Kubernetes environment.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distributions</u>: Review base configurations for major Kubernetes distributions, including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Set up trace collection: configure the Agent to accept traces, configure your Pods to communicate with the Agent, and configure your application tracers to emit traces.{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
@@ -54,3 +56,4 @@ For Agent commands, see the [Agent Commands guides][2].
 
 [1]: /agent/faq/kubernetes-legacy/
 [2]: /agent/guide/agent-commands/
+[3]: /containers/cluster_agent/

@@ -5,7 +5,7 @@ further_reading:
 - link: api/v1/downtimes/
   tag: 설명서
   text: 다운타임 API 레퍼런스
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임 문서화
 kind: 가이드
@@ -219,7 +219,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 [다운타임 페이지 관리][1]를 열어 새 다운타임을 추가하세요. `recurring`을 선택하세요.
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="다운타임 반복 규칙" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.jpg" alt="다운타임 반복 규칙" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -231,6 +231,6 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 
 [1]: https://docs.datadoghq.com/ko/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/ko/api/v1/authentication/
-[3]: https://docs.datadoghq.com/ko/monitors/notify/downtimes/
+[3]: https://docs.datadoghq.com/ko/monitors/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html

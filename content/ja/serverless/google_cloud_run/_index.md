@@ -281,7 +281,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更し�
 ### 3. アプリケーションを構成する
 
 コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
-- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Google Cloud シークレット][10]に設定する必要があります。
+- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Google Cloud シークレット][11]に設定する必要があります。
 - `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
 - `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします
 
@@ -295,7 +295,6 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
-  --allow-unauthenticated
 
 ```
 
@@ -328,9 +327,9 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ### OpenTelemetry
 
-以下の手順で、OpenTelemetry (OTel) データを Datadog に送信します。
+以下の手順で、OpenTelemetry データを Datadog に送信します。
 
-1. Datadog `serverless-init` にスパンをエクスポートするよう OTel に指示します。
+1. Datadog `serverless-init` にスパンをエクスポートするよう OpenTelemetry に指示します。
 
    ```js
    // instrument.js
@@ -357,7 +356,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
    provider.register();
    ```
 
-2. Express 用の OTel のインスツルメンテーションを追加します。これは `ddtrace` を追加するのと同じようなものです。
+2. Express 用の OpenTelemetry のインスツルメンテーションを追加します。これは `ddtrace` を追加するのと同じようなものです。
 
    ```js
    // instrument.js
@@ -397,7 +396,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
    COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
    ```
-5. Datadog の `serverless-init` で、`DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数で OTel を有効にします。
+5. Datadog の `serverless-init` で、`DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数で OpenTelemetry を有効にします。
 
    ```
    # Dockerfile

@@ -25,7 +25,7 @@ Read the OpenTelemetry instrumentation documentation to understand how to point 
 
 {{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDKs/Libraries, Datadog Trace Library, Datadog Integrations -> Datadog Agent -> Datadog" style="width:100%;">}}
 
-<div class="alert alert-warning"><strong>Note</strong>: The supported setup is an ingesting Agent deployed on every OTel-data generating host. You cannot send OTel telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
+<div class="alert alert-warning"><strong>Note</strong>: The supported setup is an ingesting Agent deployed on every OpenTelemetry-data generating host. You cannot send OpenTelemetry telemetry from collectors or instrumented apps running one host to an Agent on a different host. But, provided the Agent is local to the collector or SDK instrumented app, you can set up multiple pipelines.</div>
 
 ## Enabling OTLP Ingestion on the Datadog Agent
 

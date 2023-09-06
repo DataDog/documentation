@@ -1,7 +1,8 @@
 ---
-title: CERTIFICATE_VERIFY_FAILED エラー
 kind: faq
+title: CERTIFICATE_VERIFY_FAILED エラー
 ---
+
 ### 事象
 
 2020 年 5 月 30 日土曜日の 10:48 UTC に、Datadog 証明書の一部に相互署名するために使用される SSL ルート証明書が期限切れになり、一部の Agent が Datadog エンドポイントとの接続を失いました。このルート証明書は特定の Agent バージョンに埋め込まれているため、接続を回復するには対応が必要です。
@@ -12,20 +13,14 @@ kind: faq
 
 Agent バージョン 6.x と 7.x は問題なく、更新する必要はありません。
 
-### 影響を受ける Agent バージョンを実行しているホストのリストを見つける
-
-Datadog UI の [Agent バージョンリスト][1]を使用して、ホスト名、そのホストが実行している Agent のバージョン、およびそのホストのステータスを確認してください。
-
-**注**: 影響を受ける Agent バージョンを実行しているホストについて Datadog アカウントにクエリを実行する以前推奨されていた Python スクリプトは、アプリケーションで使用できるようになったリストを優先して非推奨になりました。
-
 ### Agent 5.32.7 へのアップグレードによる修正
 
 64 ビットホストで Agent v5.x を実行している場合、Datadog は Agent 5.32.7 以降へのアップグレードを推奨しています。これにより、最小限の変更で、Agent がさまざまな異なるシナリオで機能し続けることが保証されます。
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
-Windows (バージョン > 5.12.0): Datadog [Agent インストーラー][2]をダウンロードします。`start /wait msiexec /qn /i ddagent-cli-latest.msi`
-他のプラットフォームやコンフィギュレーション管理オプションの詳細については、[Agent のインストールページ][3]をご覧ください。
+Windows (バージョン > 5.12.0): Datadog [Agent インストーラー][1]をダウンロードします。`start /wait msiexec /qn /i ddagent-cli-latest.msi`
+他のプラットフォームやコンフィギュレーション管理オプションの詳細については、[Agent のインストールページ][2]をご覧ください。
 
 32 ビットシステム用にリリースされた最新の互換 Agent は 5.10.1 でした。32 ビットホストの場合は、`Agent をアップグレードせずに修正する` の手順に従ってください。
 
@@ -80,7 +75,7 @@ restart-service -Force datadogagent
 
 ### Agent 6 または 7 へのアップグレードによる修正
 
-[Agent 7][4] または [Agent 6][5] にアップグレードすることでこの問題を解決できますが、*Agent 6 および 7 の下位互換性のない変更については、Agent CHANGELOG を参照してください。*
+[Agent 7][3] または [Agent 6][4] にアップグレードすることでこの問題を解決できますが、*Agent 6 および 7 の下位互換性のない変更については、Agent CHANGELOG を参照してください。*
 
 ### 証明書を削除した後に Agent を更新する
 
@@ -115,8 +110,7 @@ restart-service -Force datadogagent
   `datadog.conf` が更新された後、Windows サービスマネージャーから Datadog サービスを再起動します。
 
 
-[1]: https://app.datadoghq.com/agent-versions
-[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[3]: https://app.datadoghq.com/account/settings?agent_version=5#agent
-[4]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
-[5]: /ja/agent/versions/upgrade_to_agent_v6/?tab=linux
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[2]: https://app.datadoghq.com/account/settings/agent/5?platform=overview
+[3]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
+[4]: /ja/agent/versions/upgrade_to_agent_v6/?tab=linux

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: bigpanda-bigpanda
 app_uuid: 98cf782f-3d6c-4ea8-8e7b-353da5623794
 assets:

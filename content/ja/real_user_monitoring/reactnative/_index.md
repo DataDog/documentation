@@ -66,7 +66,7 @@ import {
     DdSdkReactNativeConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -88,7 +88,15 @@ config.serviceName = 'com.example.reactnative';
 // オプション: SDK に指定されたレベル以上の内部ログを出力させる。デフォルトは undefined (ログを出力しない)
 config.verbosity = SdkVerbosity.WARN;
 
-await DdSdkReactNative.initialize(config);
+//App コンポーネントのコンテンツを DatadogProvider コンポーネントでラップし、 構成を渡します。
+
+export default function App() {
+    return (
+       <DatadogProvider configuration={config}>
+          <Navigation />
+       </DatadogProvider>
+    );
+}
 
 // Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
@@ -325,6 +333,19 @@ DdSdkReactNative.setAttributes({
     chat_enabled: true,
     campaign_origin: 'example_ad_network'
 });
+```
+
+## バックグラウンドイベントの追跡
+
+<div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
+</div>
+
+アプリケーションがバックグラウンドにあるとき (例えば、アクティブなビューがないとき)、クラッシュやネットワークリクエストなどのイベントを追跡することができます。
+
+Datadog の構成で、初期化時に以下のスニペットを追加します。
+
+```javascript
+configuration.trackBackgroundEvents = true;
 ```
 
 ## データストレージ

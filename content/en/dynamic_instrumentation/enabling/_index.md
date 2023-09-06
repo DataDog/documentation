@@ -5,7 +5,7 @@ type: multi-code-lang
 aliases:
     - /tracing/dynamic_instrumentation/enabling/
 is_beta: true
-private: true
+private: false
 further_reading:
     - link: '/agent/'
       tag: 'Documentation'

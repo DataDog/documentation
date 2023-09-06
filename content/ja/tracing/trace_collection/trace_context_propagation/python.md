@@ -1,12 +1,16 @@
 ---
 code_lang: php
 code_lang_weight: 10
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: Python トレースコンテキストの伝搬
 type: multi-code-lang
 ---
 
-Datadog APM トレーサーは、分散型トレーシングのために [B3][2] や [W3C][3] のヘッダーの抽出と挿入をサポートしています。
+Datadog APM トレーサーは、分散型トレーシングのために [B3][2] や [W3C Trace Context][3] のヘッダーの抽出と挿入をサポートしています。
 
 分散したヘッダーの挿入と抽出は、挿入および抽出スタイルを構成することで制御されます。`tracecontext`、`datadog`、`B3`、`B3 single header` のスタイルがサポートされています。
 
@@ -24,6 +28,10 @@ Datadog APM トレーサーは、分散型トレーシングのために [B3][2]
 複数の環境変数が設定されている場合、`DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` は `DD_TRACE_PROPAGATION_STYLE` で指定した値をオーバーライドします。
 
 複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://github.com/openzipkin/b3-propagation
 [3]: https://github.com/w3c/trace-context

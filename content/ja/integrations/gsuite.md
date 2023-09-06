@@ -41,7 +41,7 @@ Google Workspace のセキュリティログを Datadog へインポートしま
 | ユーザーアカウント    | ユーザーアカウントアプリケーションのアクティビティレポートは、さまざまな種類のユーザーアカウントアクティビティイベントのアカウント情報を返します。                                                 |
 
 ## セットアップ
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog と Google Workspace のインテグレーションを構成する前に、Google Workspace Admin SDK [Reports API: Prerequisites][1] のドキュメントに従ってください。
 

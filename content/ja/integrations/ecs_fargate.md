@@ -96,7 +96,7 @@ Datadog Agent は、ECS のタスクメタデータエンドポイントでタ�
 
 Datadog Agent を持たないタスクも Cloudwatch でメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent を通じて直接発送されるメトリクスより報告のレイテンシーが高くなります。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog で ECS Fargate タスクを監視するには、アプリケーションコンテナと**同じタスク定義**内のコンテナとして Agent を実行します。Datadog でメトリクスを収集するには、各タスク定義にアプリケーションコンテナのほかに Datadog Agent コンテナを含める必要があります。以下のセットアップ手順を実行します。
 
@@ -807,7 +807,23 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 {{< /site-region >}}
 
 
-2. [アプリケーションのインスツルメンテーション][31]に基づいて、セットアップを行います。Fargate APM のアプリケーションでは、`DD_AGENT_HOST` を**設定しない**でください。デフォルトの `localhost` で動作します。
+2. 現在のセットアップに基づいてアプリケーションをインスツルメントします。
+
+   **注**: Fargate APM アプリケーションでは、`DD_AGENT_HOST` を設定**しない**でください。デフォルトの `localhost` が動作します。
+
+   | 言語                           |
+   |------------------------------------|
+   | [Java][31] |
+   | [Python][32] |
+   | [Ruby][33] |
+   | [Go][34] |
+   | [Node.js][35] |
+   | [PHP][36] |
+   | [C++][37] |
+   | [.NET Core][38] |
+   | [.NET Framework][39] |
+
+   [Datadog へのトレース送信][40]の一般的な情報を参照してください。
 
 3. アプリケーションが Datadog Agent コンテナと同じタスク定義内で実行されていることを確認します。
 
@@ -852,14 +868,15 @@ ECS Fargate チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][33]
+- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][42]
 - よくあるご質問: [ECS Fargate のインテグレーションセットアップ][12]
-- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][34]
-- ブログ記事: [AWS Fargate 監視のための主要メトリクス][35]
-- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][36]
-- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][37]
-- ブログ記事: [Graviton2 による AWS Fargate のデプロイ][38]
-- ブログ記事: [Windows コンテナ型アプリ向けに AWS Fargate を監視する][39]
+- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][23]
+- ブログ記事: [AWS Fargate 監視のための主要メトリクス][24]
+- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][25]
+- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][26]
+- ブログ記事: [Graviton2 による AWS Fargate のデプロイ][47]
+- ブログ記事: [Windows コンテナ型アプリ向けに AWS Fargate を監視する][40]
+
 
 
 
@@ -894,12 +911,21 @@ ECS Fargate チェックには、イベントは含まれません。
 [28]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 [29]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
 [30]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[31]: https://docs.datadoghq.com/ja/tracing/setup/
-[32]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
-[33]: https://www.datadoghq.com/blog/monitor-aws-fargate
-[34]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
-[35]: https://www.datadoghq.com/blog/aws-fargate-metrics/
-[36]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
-[37]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
-[38]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
-[39]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/
+[31]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/java?tab=containers#automatic-instrumentation
+[32]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/python?tab=containers#instrument-your-application
+[33]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[34]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/go/?tab=containers#activate-go-integrations-to-create-spans
+[35]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/nodejs?tab=containers#instrument-your-application
+[36]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/php?tab=containers#automatic-instrumentation
+[37]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/cpp?tab=containers#instrument-your-application
+[38]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[39]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-framework?tab=containers#custom-instrumentation
+[40]: https://docs.datadoghq.com/ja/tracing/setup/
+[41]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
+[42]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[43]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[44]: https://www.datadoghq.com/blog/aws-fargate-metrics/
+[45]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+[46]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
+[47]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
+[48]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/

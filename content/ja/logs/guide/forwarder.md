@@ -22,7 +22,7 @@ Forwarder を使用して AWS Lambda のログから Datadog にメトリクス�
 
 Datadog Forwarder による AWS サービスのログ送信については、[Datadog Lambda 関数で AWS Services のログを送信するガイド][2]をお読みください。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を自動インストールすることを推奨しています。また、[Terraform](#terraform) を使用するか[手動で](#manual)設定プロセスを完了することもできます。インストールが完了したら、[トリガーの設定][4]により、S3 バケットや CloudWatch ロググループなどのログソースに Forwarder をサブスクライブすることができます。
 
@@ -42,7 +42,7 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 
 以前に Datadog の AWS インテグレーションページから[以下の CloudFormation テンプレート][102]を使用して AWS インテグレーションを有効にした場合、それを含めることにした場合、アカウントにはすでに Datadog Lambda Forwarder 関数がプロビジョニングされている場合があります。その場合、ログをエクスポートしたいアカウント内の追加の AWS リージョンに Datadog Lambda をインストールするだけで済みます。
 
-**注:** Datadog Lambda Forwarder 関数のコードブロックは、Lambda レイヤーを通してロジックが実装されているため、空になっています。
+**注:** Datadog Lambda Forwarder 関数コードブロックは、Lambda レイヤーを通してロジックが実装されているため、空であることが期待されます。
 
 [101]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#set-up-triggers
 [102]: https://github.com/DataDog/cloudformation-template/tree/master/aws
@@ -120,7 +120,7 @@ class SampleRegistry
 
 指定されている CloudFormation テンプレートを使用して Forwarder をインストールできない場合は、以下の手順に従って Forwarder を手動でインストールできます。テンプレートの機能について改善できる点がございましたら、お気軽に問題やプルリクエストを開いてお知らせください。
 
-1. 最新の[リリース][101]から、`aws-dd-forwarder-<VERSION>.zip` を使用して Python 3.8 Lambda 関数を作成します。
+1. 最新の[リリース][101]から、`aws-dd-forwarder-<VERSION>.zip` を使用して Python 3.9 Lambda 関数を作成します。
 2. [Datadog API キー][102]を AWS Secrets Manager に保存し、環境変数 `DD_API_KEY_SECRET_ARN` に Lambda 関数のシークレット ARN を設定し、Lambda 実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加します。
 3. S3 バケットからログを転送する必要がある場合は、`s3:GetObject` アクセス許可を Lambda 実行ロールに追加します。
 4. Forwarder で環境変数 `DD_ENHANCED_METRICS` を `false` に設定します。これにより、Forwarder は拡張メトリクス自体を生成しなくなりますが、他の Lambda からカスタムメトリクスを転送します。
@@ -141,6 +141,10 @@ class SampleRegistry
 1. [datadog-forwarder (名前を変更しなかった場合)][5] CloudFormation スタックを見つけます。[Datadog AWS インテグレーションスタック][6]の一部として Forwarder をインストールした場合は、ルートスタックではなく、ネストされた Forwarder スタックを更新してください。
 2. CloudFormation スタックの "Resources" タブから実際の Forwarder Lambda 関数を見つけ、そのコンフィギュレーションページに移動します。新しいバージョンで問題が発生し、ロールバックする必要がある場合に備えて、`dd_forwarder_version` タグの値をメモします (`3.3.0` など)。
 3. テンプレート `https://datadog-cloudformation-template.s3.amazonaws.com/aws/forwarder/latest.yaml` を使用してスタックを更新します。必要に応じて、`latest` を `3.0.2.yaml` などの特定のバージョンに置き換えることもできます。更新を適用する前に、変更セットを確認してください。
+
+### 古いバージョンを 3.74.0 以降にアップグレードする
+
+バージョン 3.74.0 以降、Lambda 関数は **Python 3.9** を必要とするように更新されました。古い Forwarder を 3.74.0 以上にアップグレードする場合、AWS Lambda 関数が Python 3.9 を使用するように構成されていることを確認してください。
 
 ### 古いバージョンを 3.49.0 以降にアップグレードする
 
@@ -419,7 +423,7 @@ Datadog は、最低でも 10 個の予約済み同時実行を使用するこ�
 `LayerARN`
 : フォワーダーコードを含むレイヤーの ARN。空の場合、スクリプトはフォワーダーが公開されたレイヤーのバージョンを使用します。デフォルトは空です。
 
-## アクセス許可
+## 権限
 
 CloudFormation Stack をデフォルトのオプションでデプロイするには、Datadog API キーをシークレットとして保存し、Forwarder のコード (ZIP ファイル) を格納する S3 バケットを作成し、Lambda 関数 (実行ロールとロググループを含む) を作成します。
 

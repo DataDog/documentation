@@ -5,6 +5,7 @@ type: actioncatalog
 disable_toc: true
 aliases:
 - /workflows/actions_catalog
+- /service_management/service_management/workflows/actions_catalog
 cascade:
   disable_sidebar: true
   type: actioncatalog
@@ -12,13 +13,18 @@ cascade:
       rank: 40
 ---
 
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
+Datadog Workflow Automation provides actions that can be performed against your infrastructure and integrations. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
 
-Datadog Workflows provide actions that can be performed against your infrastructure and integrations. You can orchestrate and automate your end-to-end processes by linking together actions for cloud providers, Datadog integrations, Datadog itself, custom HTTP requests, and more. Read [build workflows][1] for more information on creating a workflow.
+In addition to the workflow actions listed below, you can:
+- Use the [HTTP action][1] to make a request to any endpoint.
+- Implement [data transformation actions][2] to perform necessary operations on the information flowing through your workflow.
+- Leverage [logic actions][3] to control the execution path between steps in your workflow.
 
-See below a list of all available workflow actions. Click an action to see its description, inputs, outputs, and parameters.
+For information on creating workflows, see [build workflows][4].
 
+See below for a list of all available workflow actions. Click an action to see its description, inputs, outputs, and parameters.
 
-[1]: /service_management/workflows/build/
+[1]: /service_management/workflows/actions_catalog/generic_actions/#http
+[2]: /service_management/workflows/actions_catalog/generic_actions/#data-transformation
+[3]: /service_management/workflows/actions_catalog/logic_actions/
+[4]: /service_management/workflows/build/

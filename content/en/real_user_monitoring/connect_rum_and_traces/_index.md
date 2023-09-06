@@ -22,7 +22,7 @@ further_reading:
     text: "Troubleshoot with Session Replay browser dev tools"
   - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
     tag: "Blog"
-    text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
+    text: "Correlate Datadog RUM events with traces from OpenTelemetry-instrumented applications"
 algolia:
   tags: ['rum traces']
 ---
@@ -119,8 +119,16 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 {{% tab "Android RUM" %}}
 
 1. Set up [RUM Android Monitoring][1].
+2. Set up [Android Trace Collection][2].
+3. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
-2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+4. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -133,17 +141,18 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSamplingRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
+3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
 ```java
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(RumInterceptor(traceSamplingRate = 100f))
+       .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
        .build()
   ```
 
 **Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/android/
+[2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
@@ -269,6 +278,69 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 [1]: /real_user_monitoring/roku/
 {{< /site-region >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Verifying setup
+
+To verify you've configured the APM integration with RUM, follow the steps below based on the SDK you installed RUM with.
+
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+1. Visit a page in your application.
+2. In your browser's developer tools, go to the **Network** tab.
+3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
+
+[1]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+1. Run your application from Android Studio.
+2. Visit a screen in your application.
+3. Open Android Studio's [Network Inspector][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+
+[1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+1. Run your application from Xcode.
+2. Visit a screen in your application.
+3. Open Xcode's [Network Connections and HTTP Traffic instrument][1].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=iosrum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+1. Run your application from Xcode (iOS) or Android Studio (Android).
+2. Visit a screen in your application.
+3. Open Xcode's [Network Connections and HTTP Traffic instrument][1] or Android Studio's [Network Inspector][2].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][3].
+
+[1]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
+[2]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
+[3]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+1. Run your application using your preferred IDE or `flutter run`.
+2. Visit a screen in your application.
+3. Open Flutter's [Dev Tools][1] and navigate to [Network View][2].
+4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][3].
+
+[1]: https://docs.flutter.dev/tools/devtools/overview
+[2]: https://docs.flutter.dev/tools/devtools/network
+[3]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tab=reactnativerum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{< /tabs >}}

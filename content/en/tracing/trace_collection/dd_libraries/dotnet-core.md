@@ -56,80 +56,36 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 ## Installation and getting started
 
 <div class="alert alert-info">
-  <div class="alert-info">
-    <div><strong>Datadog recommends you follow the <a href="https://app.datadoghq.com/apm/service-setup">Quickstart instructions</a></strong> in the Datadog app for the best experience, including:</div>
-    <div>- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).</div>
-    <div>- Dynamically set <code>service</code>, <code>env</code>, and <code>version</code> tags.</div>
-    <div>- Enable ingesting 100% of traces and Trace ID injection into logs during setup.</div><br/>
-    <div>Also, to set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.</div>
-  </div>
+    To set up Datadog APM in AWS Lambda, see <strong><a href="/tracing/serverless_functions/">Tracing Serverless Functions</a></strong>, in Azure App Service, see <strong><a href="/serverless/azure_app_services/">Tracing Azure App Service</a></strong>.
 </div>
 
 <div class="alert alert-warning">
   <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
 </div>
 
+<div class="alert alert-info">
+  To instrument trimmed apps, reference the <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet package in your project. Support for trimmed apps is in beta.
+</div>
+
 ### Installation
 
-1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
+Before you begin, make sure you've already [installed and configured the Agent][12].
+
+1. [Choose your instrumentation method](#choose-your-instrumentation-method)
 2. [Install the tracer.](#install-the-tracer)
 3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [View your live data.](#view-your-live-data)
 
-### Configure the Datadog Agent for APM
+### Choose your instrumentation method
 
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data on `http://localhost:8126`.
+After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
 
-For containerized, serverless, and cloud environments:
+See the following pages for supported deployment scenarios and languages:
 
-{{< tabs >}}
-
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. The tracing client attempts to send traces to the following:
-
-    - The `/var/run/datadog/apm.socket` Unix domain socket by default.
-    - If the socket does not exist, then traces are sent to `localhost:8126`.
-    - If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
-    - Using Unix Domain Sockets for trace transport is only supported on .NET Core 3.1 and later.
-
-For more information on how to configure these settings, see [Configuration](#configuration).
-
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-
-{{% tab "Other Environments" %}}
-
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
-
-For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you encounter setup issues.
-
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /integrations/
-[5]: /help/
-{{% /tab %}}
-
-{{< /tabs >}}
+- [Inject the instrumentation library locally][11] (at the Agent); or
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
 ### Install the tracer
-
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
 You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
@@ -490,3 +446,5 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [4]: /tracing/trace_collection/library_config/dotnet-core/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection#install-and-configure-the-agent

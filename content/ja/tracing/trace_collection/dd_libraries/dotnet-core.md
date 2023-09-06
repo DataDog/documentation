@@ -69,14 +69,18 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 <strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみです（たとえば Datadog の .NET トレーサーでプロファイラーを有効にした状態）。可視性を最大限に向上するため、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
 
-### APM に Datadog Agent を構成する
+<div class="alert alert-info">
+  トリミングされたアプリをインスツルメンテーションするには、プロジェクトで <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet パッケージを参照してください。トリミングされたアプリのサポートはベータ版です。
+</div>
 
-1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
+### インストール
+
+1. [APM 用に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
 3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [ライブデータを表示します。](#view-your-live-data)
 
-### APM に Datadog Agent を構成する
+### APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。
 
@@ -268,7 +272,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 3. Datadog で [**APM** > **APM Traces**][3] の順に移動します。
 
-## コンフィギュレーション
+## 構成
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][4]を参照してください。
 

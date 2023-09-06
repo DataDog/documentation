@@ -17,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: ブログ
   text: Amazon ECS Anywhere のサポート開始
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: blog
+  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
 kind: documentation
 title: Amazon ECS
 ---
@@ -235,7 +238,7 @@ Datadog の GOVCLOUD データセンターにデータを送信するには、`f
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.2",
+            "image": "datadog/fips-proxy:0.5.4",
             "portMappings": [
                 {
                     "containerPort": 9803,

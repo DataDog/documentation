@@ -402,7 +402,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 {{% /tab %}}
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -54,7 +54,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
     - [Cloud Audit logs][6]
     - [Identity Provider logs][7]
     - SaaS and Workspace logs
-    - Third-party security integrations (for example, AWS GuardDuty)
+    - Third-party security integrations (for example, Amazon GuardDuty)
 
 2. Enable [Cloud SIEM][8].
 
@@ -87,7 +87,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 [5]: /logs/log_configuration/pipelines/
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
-[8]: https://app.datadoghq.com/security/getting-started
+[8]: https://app.datadoghq.com/security/landing
 [9]: /security/default_rules/#cat-cloud-siem-log-detection
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false

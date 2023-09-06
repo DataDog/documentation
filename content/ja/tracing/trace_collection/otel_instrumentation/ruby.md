@@ -1,7 +1,7 @@
 ---
 code_lang: ruby
 code_lang_weight: 20
-description: OTel API で Ruby アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
+description: OpenTelemetry API で Ruby アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
@@ -19,20 +19,20 @@ type: multi-code-lang
 - Datadog Ruby トレーシングライブラリ `dd-trace-rb` バージョン 1.9.0 以上。
 - Gem バージョンサポート 1.1.0 以上。
 
-特記されている通り、Datadog のライブラリに実装されている以下の OTel 機能:
+特記されている通り、Datadog のライブラリに実装されている以下の OpenTelemetry 機能:
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|--------------------------------------|
-| [OTel コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
 | [スパンプロセッサー][2]                  | 非サポート                                          | 
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` は `Datadog.logger` と同じオブジェクトに設定されています。[カスタムロギング][10]から構成します。 |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 
 
-## Datadog トレーシングライブラリを使用するための OTel の構成
+## Datadog トレーシングライブラリを使用するための OpenTelemetry の構成
 
-1. [OTel Ruby Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OTel インスツルメンテーションを Ruby コードに追加します。
+1. [OpenTelemetry Ruby Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OpenTelemetry インスツルメンテーションを Ruby コードに追加します。
 1. `ddtrace` gem を Gemfile に追加します。
 
     ```ruby
@@ -48,7 +48,7 @@ type: multi-code-lang
     require 'datadog/opentelemetry'
     ```
 
-1. インテグレーションを有効にし、トレーサー設定を変更できる構成ブロックをアプリケーションに追加します。ここで追加の構成を行わないと、OTel でインスツルメンテーションを行ったコードのみがトレースされます。
+1. インテグレーションを有効にし、トレーサー設定を変更できる構成ブロックをアプリケーションに追加します。ここで追加の構成を行わないと、OpenTelemetry でインスツルメンテーションを行ったコードのみがトレースされます。
 
     ```ruby
     Datadog.configure do |c|

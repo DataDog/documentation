@@ -88,7 +88,7 @@ Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 
 [Agent 트러블슈팅 가이드][2]를 참조하세요.
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

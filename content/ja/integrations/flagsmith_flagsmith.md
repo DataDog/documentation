@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: flagsmith-platform
 app_uuid: ad6a3059-12b6-4a11-a72c-336d732add15
 assets: {}

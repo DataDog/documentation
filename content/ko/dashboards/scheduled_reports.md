@@ -85,7 +85,7 @@ title: 리포트 스케줄링
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="리포트 관리 설정은 해당 설정이 활성화된 Datadog의 조직 설정 내 공개 공유의 설정 탭 아래에 있습니다" style="width:100%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

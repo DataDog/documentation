@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: prophetstor-federatorai-license
 app_uuid: 965e6142-3b99-4999-a7c6-09a00775e511
 assets:

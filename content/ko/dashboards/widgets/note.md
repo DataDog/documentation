@@ -38,7 +38,7 @@ title: 메모 및 링크 위젯
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

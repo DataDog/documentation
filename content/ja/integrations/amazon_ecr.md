@@ -28,7 +28,7 @@ Amazon Elastic Container Registry (Amazon ECR) は、開発者が Docker コン�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

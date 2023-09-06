@@ -54,6 +54,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` と `pg_stat_statements` の SQL テキストのサイズを拡大します。デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
 | `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
 | `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
 | `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 {{% /tab %}}
@@ -65,6 +66,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` および `pg_stat_statements` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
 | `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
 | `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
 | `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html
@@ -227,7 +229,7 @@ Azure Postgres データベースを監視するには、インフラストラ�
        # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
        azure:
         deployment_type: '<DEPLOYMENT_TYPE>'
-        name: '<AZURE_INSTANCE_ENDPOINT>'
+        fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
 2. [Agent を再起動します][2]。
 
@@ -335,7 +337,7 @@ instances:
     ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -363,7 +365,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     ## 必須。Postgres 9.6 の場合、セットアップで作成した関数を使用するため、以下の行をコメント解除します
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -397,7 +399,7 @@ metadata:
           "ssl": true,
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -454,7 +456,7 @@ Azure からより包括的なデータベースメトリクスを収集する�
 [4]: https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal
 [5]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [6]: https://www.postgresql.org/docs/current/app-psql.html
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /ja/integrations/azure_db_for_postgresql/

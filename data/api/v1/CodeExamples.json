@@ -38,6 +38,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3513586382",
+      "description": "Create a geomap widget using an event_list request"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },
@@ -65,6 +70,16 @@
       "group": "dashboards",
       "suffix": "_765140092",
       "description": "Create a new dashboard with a query value widget using timeseries background"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2261785072",
+      "description": "Create a new dashboard with a timeseries widget and an overlay request"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1284514532",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions cloud cost query"
     },
     {
       "group": "dashboards",
@@ -310,6 +325,11 @@
       "group": "dashboards",
       "suffix": "_2921337351",
       "description": "Create a new dashboard with trace_service widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2618036642",
+      "description": "Create a new dashboard with trace_stream widget"
     },
     {
       "group": "dashboards",
@@ -693,6 +713,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Trigger Synthetic tests returns \"OK\" response"
+    }
+  ],
+  "CreateUser": [
+    {
+      "group": "users",
+      "suffix": "_266604071",
+      "description": "Create a user returns null access role"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [
