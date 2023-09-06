@@ -413,6 +413,22 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
   - [B3 single header][8]
   - Datadog
 
+`DD_TRACE_WORDPRESS_ADDITIONAL_ACTIONS`
+: **INI**: `datadog.trace.wordpress_additional_actions`<br>
+**Default**: `null`<br>
+A comma-separated list of WordPress action hooks to be instrumented. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
+
+`DD_TRACE_WORDPRESS_CALLBACKS`
+: **INI**: `datadog.trace.wordpress_callbacks`<br>
+**Default**: `false`<br>
+Enables WordPress action hook callbacks instrumentation. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
+
+`DD_TRACE_WORDPRESS_ENHANCED_INTEGRAION`
+: **INI**: `datadog.trace.wordpress_enhanced_integration`<br>
+**Default**: `false`<br>
+Enables the enhanced WordPress integration. Added in version `0.91.0`.
+
+
 `DD_DBM_PROPAGATION_MODE`
 : **INI**: `datadog.dbm_propagation_mode`<br>
 **Default**: `'disabled'`<br>

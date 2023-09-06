@@ -188,15 +188,15 @@ The information is structured as JSON following this schema:
             ...
         ]
     },
-    "api": {...},                          // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                          // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                         // <-- same for the logs Agent data
-    "process": {...},                      // <-- same for the process Agent data
-    "orchestrator": {...},                 // <-- same for the process Agent data
-    "remote-configuration": {...},         // <-- used by the Agent to retrieve its dynamic configuration
-    "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
-    "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- the IPs used by the Agent for non-critical functionality (querying information from API)
+    "apm": {...},                          // <-- the IPs used by the Agent to submit APM data to Datadog
+    "logs": {...},                         // <-- the IPs used by the Agent to submit logs to Datadog
+    "process": {...},                      // <-- the IPs used by the Agent to submit process data to Datadog
+    "orchestrator": {...},                 // <-- the IPs used by the Agent to submit container data to Datadog
+    "remote-configuration": {...},         // <-- the IPs used by the Agent to retrieve its dynamic configuration
+    "synthetics": {...},                   // <-- the source IPs used by Synthetic workers (not used by the Agent)
+    "synthetics-private-locations": {...}, // <-- the IPs used by Synthetics Private Locations workers to submit data to Datadog (not used by the Agent)
+    "webhooks": {...}                      // <-- the source IPs used by Datadog to connect to 3rd party infrastructure over HTTP (not used by the Agent)
 }
 {{< /code-block >}}
 

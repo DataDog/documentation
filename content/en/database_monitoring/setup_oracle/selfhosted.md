@@ -70,6 +70,7 @@ grant select on V_$SQLSTATS to c##datadog ;
 grant select on V_$CONTAINERS to c##datadog ;
 grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
 grant select on V_$SQL to c##datadog ;
+grant select on V_$PGASTAT to c##datadog ;
 ```
 
 If you conifgured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:

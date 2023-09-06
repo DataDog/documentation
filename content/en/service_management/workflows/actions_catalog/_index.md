@@ -3,6 +3,7 @@ title: Actions Catalog
 kind: documentation
 type: actioncatalog
 disable_toc: true
+disable_sidebar: false
 aliases:
 - /workflows/actions_catalog
 - /service_management/service_management/workflows/actions_catalog

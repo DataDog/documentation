@@ -28,7 +28,7 @@ draft: false
 git_integration_title: linux_proc_extras
 integration_id: システム
 integration_title: Linux Proc Extras
-integration_version: 2.3.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -94,7 +94,7 @@ Linux Proc Extras チェックには、サービスチェック機能は含ま�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/datadog_checks/linux_proc_extras/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
