@@ -8,7 +8,7 @@ further_reading:
   text: "Getting Started with Private Locations"
 - link: "synthetics/private_locations/dimensioning"
   tag: "Documentation"
-  text: "Dimension your Private Locations"
+  text: "Dimension your private locations"
 ---
 
 ## Overview
@@ -114,120 +114,125 @@ Private Key used to decrypt test configurations.
 **Default**: `none`<br>
 Public Key used by Datadog to encrypt test results. Composed of `--publicKey.pem`.
 
-`site`
+`--site`
 : **Type**: String <br>
 **Default**: `datadoghq.com`<br>
 Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}.
 
-`concurrency`
+`--concurrency`
 : **Type**: Number <br>
 **Default**: `10`<br>
 Maximum number of tests executed in parallel.
 
-`maxNumberMessagesToFetch`
+`--maxNumberMessagesToFetch`
 : **Type**: Number <br>
 **Default**: `10`<br>
 Maximum number of tests fetched from Datadog.
 
-`proxyDatadog`
+`--proxyDatadog`
 : **Type**: String <br>
 **Default**: `none`<br>
 Proxy URL used by the private location to send requests to Datadog (for example, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
-`dumpConfig`
+`--dumpConfig`
 : **Type**: Boolean <br>
 **Default**: `none`<br>
 Display worker configuration parameters without secrets.
 
-`enableStatusProbes`
+`--enableStatusProbes`
 : **Type**: Boolean <br>
 Enables the readiness and liveness of private location probes. This enables two endpoints: `http://127.0.0.1:8080/liveness` and `http://127.0.0.1:8080/readiness`.
 
-`statusProbesPort`
+`--statusProbesPort`
 : **Type**: Number <br>
 **Default**: `8080`<br>
 Overrides the port for the private location status probes.
 
-`config`
+`--config`
 : **Type**: String <br>
 **Default**: `/etc/datadog/synthetics-check-runner.json`<br>
 Path to the JSON configuration file.
 
-`proxyTestRequests`
+`--proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
 Proxy URL used by the private location to send test requests to the endpoint.
 
-`proxyIgnoreSSLErrors`
+`--proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
 Discard SSL errors when private location is using a proxy to send requests to Datadog.
 
-`dnsUseHost`
+`--dnsUseHost`
 : **Type**: Boolean <br>
 **Default**: `true`<br>
 Use host local DNS configuration first (for example, the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter.
 
-`dnsServer`
+`--dnsServer`
 : **Type**: Array of Strings <br>
 **Default**: `["8.8.8.8","1.1.1.1"]`<br>
 DNS servers IPs to use in given order (for example, `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`).
 
-`variableOverride`
+`--variableOverride`
 : **Type**: String <br>
 Overrides the variables used in tests running on the Private Location. Format: `VARIABLE=value`.
 All variables imported this way are obfuscated.
 
-`environmentVariableOverride`
+`--environmentVariableOverride`
 : **Type**: String <br>
 Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
 With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
 All variables imported this way are obfuscated. 
 
-`allowedIPRanges`
+`--allowedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (for example, `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
+Grant access to specific IPs and/or CIDR among IP ranges blocked through `--enableDefaultBlockedIpRanges` or `blockedIPRanges` (for example, `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
 
-`blockedIPRanges`
+`--blockedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
+Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `--enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
 
-`enableDefaultBlockedIpRanges`
+`--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter.
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `--allowedIPRanges` parameter.
 
-`allowedDomainNames`
+`--allowedDomainNames`
 : **Type**: Array <br>
 **Default**: `none`<br>
 Grant access to domain names in test. Has precedence over --blockedDomainNames, for example: `--allowedDomainNames="*.example.com"`.
 
-`blockedDomainNames`
+`--blockedDomainNames`
 : **Type**: Array <br>
 **Default**: `none`<br>
 Deny access to domain names in tests, for example: `--blockedDomainNames="example.org" --blockedDomainNames="*.com"`.
 
-`enableIPv6`
+`--enableIPv6`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
 Use IPv6 to perform tests. **Note**: IPv6 in Docker is only supported with Linux host.
 
-`version`
+`--version`
 : **Type**: Boolean <br>
 **Default**: `none`<br>
 Show version number of the worker.
 
-`logFormat`
+`--logFormat`
 : **Type**: String <br>
 **Default**: `pretty`<br>
 Format log output between `"compact"`, `"pretty"`, `"pretty-compact"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.
 
-`verbosity`
+`--verbosity`
 : **Type**: Number <br>
 **Default**: `3`<br>
 Verbosity level (for example, `-v`, `-vv`, and `-vvv`).
+
+`--help`
+: **Type**: Boolean <br>
+**Default**: `none`<br>
+Show the output for the help command.
 
 ## Further Reading
 
