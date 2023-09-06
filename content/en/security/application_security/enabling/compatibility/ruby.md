@@ -105,6 +105,16 @@ These are supported on the following architectures:
 | Sequel        | {{< X >}} |   {{< X >}}    |
 | Elasticsearch     | {{< X >}} |   {{< X >}}    |
 
+### User Authentication Frameworks compatibility
+
+Integrations to **User Authentication Frameworks provides:**
+
+- Account Take Over detection thanks to the monitoring of user login events sent by the following integrations.
+- User ID tracking.
+
+| Framework         |
+|-------------------|
+| Devise            |
 
 [1]: /tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/
