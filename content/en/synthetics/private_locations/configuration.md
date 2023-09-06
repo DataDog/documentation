@@ -85,19 +85,19 @@ Maximum number of tests executed in parallel.
 **Default**: `10`<br>
 Maximum number of tests fetched from Datadog.
 
-**Note**: Private Location containers output logs to stdout/stderr without saving them within the container.
+**Note**: Private Location containers output logs to `stdout` and `stderr` without saving them within the container.
 
 ## All configuration options
 
 `--accessKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Access Key for Datadog API authentication.
+Access key for Datadog API authentication.
 
 `--secretAccessKey`
 : **Type**: String <br>
 **Default**: `none`<br>
-Secret Access Key for Datadog API authentication.  
+Secret access key for Datadog API authentication.  
 
 `--datadogApiKey`
 : **Type**: String <br>
@@ -107,17 +107,17 @@ Datadog API key to send browser tests artifacts (such as screenshots).
 `--privateKey`      
 : **Type**: Array <br>
 **Default**: `none`<br>
-Private Key used to decrypt test configurations.
+Private key used to decrypt test configurations.
 
 `--publicKey`
 : **Type**: Array <br>
 **Default**: `none`<br>
-Public Key used by Datadog to encrypt test results. Composed of `--publicKey.pem`.
+Public key used by Datadog to encrypt test results. Composed of `--publicKey.pem`.
 
 `--site`
 : **Type**: String <br>
 **Default**: `datadoghq.com`<br>
-Datadog site from which the private location pulls the test configuration and pushes the test results. Your `site` is {{< region-param key="dd_site" code="true" >}}.
+Datadog site from which the private location pulls the test configuration and pushes the test results. Your site is {{< region-param key="dd_site" code="true" >}}.
 
 `--concurrency`
 : **Type**: Number <br>
@@ -197,7 +197,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `--allowedIPRanges` parameter.
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` parameter.
 
 `--allowedDomainNames`
 : **Type**: Array <br>
@@ -212,7 +212,7 @@ Deny access to domain names in tests, for example: `--blockedDomainNames="exampl
 `--enableIPv6`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Use IPv6 to perform tests. **Note**: IPv6 in Docker is only supported with Linux host.
+Use IPv6 to perform tests. **Note**: IPv6 in Docker is only supported with a Linux host.
 
 `--version`
 : **Type**: Boolean <br>
