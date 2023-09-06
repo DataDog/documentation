@@ -77,9 +77,9 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
 
-### Advanced Options (Supported via .runsettings)
+### Advanced options (Supported through .runsettings)
 
-The Datadog Tracer's built-in code coverage has support for both `Coverlet` and `VS Code Coverage` options via the `.runsettings` file.
+The Datadog Tracer's built-in code coverage has support for both `Coverlet` and `VS Code Coverage` options through the `.runsettings` file.
 
 #### File structure
 ```xml
@@ -109,9 +109,9 @@ The Datadog Tracer's built-in code coverage has support for both `Coverlet` and 
 ##### Attributes
 You can ignore a method, an entire class or assembly from code coverage by creating and applying the `ExcludeFromCodeCoverage` attribute present in the `System.Diagnostics.CodeAnalysis` namespace.
 
-You can also ignore additional attributes by using the `ExcludeByAttribute` property (short name, i.e. the type name without the namespace, supported only)
+You can also ignore additional attributes by using the `ExcludeByAttribute` property (short name, that is the type name without the namespace)
 
-##### Source Files
+##### Source files
 You can also ignore specific source files from code coverage using the `ExcludeByFile` property
 
 * Use single or multiple paths (separate by comma)
@@ -135,7 +135,7 @@ Examples
 * `[coverlet.*.tests?]*` => Excludes all types in any assembly starting with `coverlet.` and ending with `.test` or `.tests` (the `?` makes the `s`  optional)
 * `[coverlet.*]*,[*]Coverlet.Core*\` => Excludes assemblies matching `coverlet.*` and excludes all types belonging to the `Coverlet.Core` namespace in any assembly
 
-#### [VS Code Coverage options](https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022)
+#### [VS code coverage options](https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022)
 
 | Option                   | Summary                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
