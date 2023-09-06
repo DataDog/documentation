@@ -22,7 +22,7 @@ Instrument your services and track user activity to detect and block bad actors.
 [Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
 <div class="alert alert-info">
-<strong>Note: Automated Detection of User Activity</strong> - when possible, Datadog Tracing Libraries will attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+<strong>Note: Automated Detection of User Activity</strong> - Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
 </div>
 
 The custom user activity for which out-of-the-box detection rules are available are as follow:
