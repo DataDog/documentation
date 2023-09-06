@@ -19,3 +19,4 @@
 - [ ] Review the URLs listed in the [Preview](#preview) section.
 - [ ] Check images for PII
 - [ ] Review any mentions of "Contact Datadog support" for internal support documentation.
+- [ ] Check that `cache_enabled` is set to `true` in the `pull_config_preview.yaml` file

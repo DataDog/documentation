@@ -29,13 +29,20 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) comes with m
 - [CIS GCP Foundations Benchmark v1.3.0][22]
 - [CIS Docker Benchmark v1.2.0][4]
 - [CIS Kubernetes Benchmark v1.5.1**][5]
+- [CIS Ubuntu 20.04 v1.0.0][23]
+- [CIS Ubuntu 22.04 v1.0.0][23]
+- [CIS Red Hat Linux 7 v3.1.1][24]
+- [CIS Red Hat Linux 8 v2.0.0][24]
+- [CIS Red Hat Linux 9 v1.0.0][24]
+- [CIS Amazon Linux 2 v1.0.0][25]
+- [CIS Amazon Linux 2023 v1.0.0][25]
 - [PCI DSS v3.2.1][6]
 - [AICPA SOC 2][7]
 - [ISO/IEC 27001 v2][8]
 - [HIPAA][9]
 - [GDPR][10]
 
-*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [Cloudtrail logs to Datadog][12].
+*To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
 **Some [CIS Kubernetes Benchmark][5] compliance rules only apply to self-hosted Kubernetes clusters.
 
@@ -95,3 +102,6 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [20]: https://app.datadoghq.com/security/compliance/homepage
 [21]: /security/misconfigurations/detection_rules
 [22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
+[23]: https://www.cisecurity.org/benchmark/ubuntu_linux
+[24]: https://www.cisecurity.org/benchmark/red_hat_linux
+[25]: https://www.cisecurity.org/benchmark/amazon_linux
