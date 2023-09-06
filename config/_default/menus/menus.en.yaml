@@ -1321,6 +1321,11 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_logic_actions
     weight: 102
+  - name: Store and Reuse Actions
+    url: service_management/workflows/actions_catalog/saved_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_saved_actions
+    weight: 103
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
