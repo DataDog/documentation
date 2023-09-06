@@ -155,9 +155,9 @@ You can configure or remove this quota at any time when editing the Index:
 
 {{< img src="logs/indexes/daily_quota_config.png" alt="index details" style="width:70%;">}}
 
-An event is generated when either the daily quota or the warning threshold is reached:
+An event is generated when either the daily quota or the warning threshold is reached. To view these events, go to the <a href="https://app.datadoghq.com/event/explorer">Events Explorer</a> and search for `tags:log-management  "Warning threshold" OR "Daily quota"`. See example below:
 
-{{< img src="logs/indexes/index_quota_event.png" alt="index quota notification" style="width:70%;">}}
+{{< img src="logs/indexes/index_quota_and_warning_threshold_events.png" alt="index quota notification" style="width:70%;">}} 
 
 See [Monitor log usage][20] on how to monitor and alert on your usage.
 
