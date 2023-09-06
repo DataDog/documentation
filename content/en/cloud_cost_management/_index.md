@@ -14,6 +14,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
     tag: "blog"
     text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+  - link: "/cloud_cost_management/tag_pipelines"
+    tag: "Documentation"
+    text: "Standardize tags across Cloud Cost with Tag Pipelines"
 ---
 ## Overview
 
@@ -129,6 +132,7 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
 ### Cost types
 
 You can visualize your ingested data using the following cost types:
@@ -172,6 +176,11 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
+## Billing conductor
+Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
+
+To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][8]. Ensure the CUR meets [Datadog's requirements][9].
+After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
@@ -180,15 +189,9 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 [7]: https://app.datadoghq.com/cost/setup
+[8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
+[9]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 
-## Billing conductor
-Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
-
-To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][1]. Ensure the CUR meets [Datadog's requirements][2].
-After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
-
-[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
-[2]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -271,39 +274,6 @@ You can visualize your ingested data using the following cost types:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tag pipelines
-
-You can use [tag pipelines][1] to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic.
-
-### Rule types
-
-<div class="alert alert-warning"> A maximum of 100 rules can be created, and API based Reference Tables are not supported. </div>
-
-There are three types of rules supported: **Add tag**, **Alias tag keys**, and **Map multiple tags**. You can keep your rules organized by leveraging rules sets, which act as folders for your rules. The rules are executed in deterministic order (from top to bottom). You can organize rules and rule sets to ensure the order of execution matches your business logic.
-
-#### Add tag
-
-Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data. 
-
-For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of. 
-{{< img src="cloud_cost/tags_addnew.png" alt="Add new business unit tag to resources with service:processing, service:creditcard, or service:payment-notification." >}}
-
-#### Alias tag keys
-
-  Map existing tag values to a more standardized tag. 
-
-For example, if your organization wants to use the standard `application` tag key, but several teams have a variation of that tag (like `app`, `webapp`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
-
-The rule stops executing for each resource after a first match is found. For example, if a resource already has a `app` tag, then the rule no longer attempts to identify a `webapp` or `apps` tag.
-{{< img src="cloud_cost/tags_alias.png" alt="Add application tag to resources with app, webapp, or apps tag." >}}
-
-#### Map multiple tags
-
-Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
-
-For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. Similar to Alias tag keys, the rule stops executing for each resource after a first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
-{{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" >}}
-
 ## Cloud costs in dashboards
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
@@ -313,6 +283,3 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/cost/tag-pipelines
-[2]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
