@@ -13,7 +13,6 @@ Datadog Operator can be installed on EKS cluster as an add-on. Add-ons provide i
 
 ## Prerequisites
 
-Installing Operator as an add-on requires following prerequisites:
 
 * Ability to subscribe to [Datadog Operator][1] product. 
 * [TODO] License manager SLR.
