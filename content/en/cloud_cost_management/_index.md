@@ -279,21 +279,27 @@ You can use [tag pipelines][1] to create tag rules to help fix missing or incorr
 
 <div class="alert alert-warning"> A maximum of 100 rules can be created, and API based Reference Tables are not supported. </div>
 
-There are three types of rules supported: **Add tag**, **Alias tag keys**, and **Map multiple tags**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic.
+There are three types of rules supported: **Add tag**, **Alias tag keys**, and **Map multiple tags**. You can keep your rules organized by leveraging rules sets, which act as folders for your rules. The rules are executed in deterministic order (from top to bottom). You can organize rules and rule sets to ensure the order of execution matches your business logic.
 
-**Add tag** - Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data. 
+#### Add tag
+
+Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data. 
 
 For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of. 
 {{< img src="cloud_cost/tags_addnew.png" alt="Add new business unit tag to resources with service:processing, service:creditcard, or service:payment-notification." >}}
 
-**Alias tag keys** - Map existing tag values to a more standardized tag. 
+#### Alias tag keys
+
+  Map existing tag values to a more standardized tag. 
 
 For example, if your organization wants to use the standard `application` tag key, but several teams have a variation of that tag (like `app`, `webapp`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
 
 The rule stops executing for each resource after a first match is found. For example, if a resource already has a `app` tag, then the rule no longer attempts to identify a `webapp` or `apps` tag.
 {{< img src="cloud_cost/tags_alias.png" alt="Add application tag to resources with app, webapp, or apps tag." >}}
 
-**Map multiple tags** - Use [Reference Tables][2] to add multiple tags to cost data without needing to create multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, it will add the selected Reference Table columns as tags to cost data.
+#### Map multiple tags
+
+Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
 
 For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. Similar to Alias tag keys, the rule stops executing for each resource after a first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
 {{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" >}}
