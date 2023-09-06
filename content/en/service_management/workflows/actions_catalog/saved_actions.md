@@ -1,7 +1,7 @@
 ---
-title: "Store and Reuse Actions"
+title: "Save and Reuse Actions"
 kind: documentation
-description: Store and reuse an action and its parameters
+description: Save and reuse an action and its parameters
 disable_toc: false
 disable_sidebar: false
 type: documentation
