@@ -20,7 +20,7 @@ docker run --rm datadog/synthetics-private-location-worker --help
 ```
 
 ## Customize your private location
-A subset of available parameters are listed below.
+Available parameters are listed below.
 These configuration options for private locations can be passed as **parameters to your JSON configuration file** or as **arguments in the launch command**, for example:
 
 ```shell
@@ -54,25 +54,6 @@ DNS servers IPs to use in given order (for example, `--dnsServer="8.8.4.4" --dns
 
 On browser tests, the DNS resolution is done directly by the browser, which usually reads DNS servers from the host. Alternatively, you can configure it at the container level (for example, using the `--dns` flag on [Docker][1], or `dnsConfig.nameservers` on [Kubernetes][2]).
 
-### Reserved IPs configuration
-
-`enableDefaultBlockedIpRanges`
-: **Type**: Boolean <br>
-**Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter.
-
-`allowedIPRanges`
-: **Type**: Array of Strings <br>
-**Default**: `none`<br>
-Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (for example, `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
-
-`blockedIPRanges`
-: **Type**: Array of Strings <br>
-**Default**: `none`<br>
-Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
-
-**Note:** The `whitelistedRange` and `blacklistedRange` parameters are deprecated and should be replaced by the listed ones above.
-
 ### Proxy configuration
 
 `proxyDatadog`
@@ -103,48 +84,6 @@ Maximum number of tests executed in parallel.
 : **Type**: Number <br>
 **Default**: `10`<br>
 Maximum number of tests fetched from Datadog.
-
-`enableStatusProbes`
-: **Type**: Boolean <br>
-Enables the readiness and liveness of private location probes. This enables two endpoints: `http://127.0.0.1:8080/liveness` and `http://127.0.0.1:8080/readiness`.
-
-`statusProbesPort`
-: **Type**: Number <br>
-**Default**: `8080`<br>
-Overrides the port for the private location status probes.
-
-`variableOverride`
-: **Type**: String <br>
-Overrides the variables used in tests running on the Private Location. Format: `VARIABLE=value`.
-All variables imported this way are obfuscated.
-
-`environmentVariableOverride`
-: **Type**: String <br>
-Overrides variables used in tests running on the Private Location with environment variables. It requires the environment variables to be imported in the containerized environment.
-With Docker, for example, `docker run --env VARIABLE gcr.io/datadoghq/synthetics-private-location-worker --environmentVariableOverride VARIABLE`.
-All variables imported this way are obfuscated. 
-
-### Private locations admin
-
-`config`
-: **Type**: String <br>
-**Default**: `/etc/datadog/synthetics-check-runner.json`<br>
-Path to the JSON configuration file.
-
-`logFormat`
-: **Type**: String <br>
-**Default**: `pretty`<br>
-Format log output between `"compact"`, `"pretty"`, `"pretty-compact"`, and `"json"`. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.
-
-`verbosity`
-: **Type**: Number <br>
-**Default**: `3`<br>
-Verbosity level (for example, `-v`, `-vv`, and `-vvv`).
-
-`dumpConfig`
-: **Type**: Boolean <br>
-**Default**: `none`<br>
-Display worker configuration parameters without secrets.
 
 **Note**: Private Location containers output logs to stdout/stderr without saving them within the container.
 
