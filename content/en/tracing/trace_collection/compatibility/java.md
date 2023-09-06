@@ -19,11 +19,11 @@ further_reading:
 
 The Java Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-### Supported JVM runtimes
+### Supported Java runtimes
 
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
+| Java versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
 | 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
 | 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
