@@ -36,7 +36,7 @@ These restriction are necessary to make Operator compliant with the add-on polic
 {{% /tab %}}
 {{% tab "CLI" %}}
 
-Run the following command to install Operator add-on:
+To install the Operator add-on, run:
   ```bash
   aws eks create-addon --addon-name datadog_operator --region <AWS_REGOIN> --cluster-name <CLUSTER_NAME> 
   ```
