@@ -36,7 +36,7 @@ In these situations, a custom detection rule can be created to exclude such even
 
 ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
 
-Recent Datadog Tracing Libraries will attempt to detect and send user login and signup events automatically needing to modify the code. If needed, you can [opt-out of the automatic user activity event tracking][8].
+Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt-out of the automatic user activity event tracking][8].
 
 You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
 
