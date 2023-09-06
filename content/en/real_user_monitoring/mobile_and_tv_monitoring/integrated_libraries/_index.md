@@ -17,12 +17,10 @@ further_reading:
 
 This page lists integrated libraries you can use for the following applications:
 
-- Android
-- Android TV Monitoring
-- React Navigation
+- Android & Android TV Monitoring
 - React Native
 
-## Android
+## Android & Android TV Monitoring
  
 ### Coil
  
@@ -164,10 +162,11 @@ If you use the Leanback API to add actions into your Android TV application, see
 
 If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions for RUM][9] and with [extensions for Trace][10].
 
-## React Navigation
+## React Native
 
+### React Navigation
 
-### Setup
+#### Setup
 
 **Note**: This package is an integration for `react-navigation` library, please make sure you first install and setup the core `mobile-react-native` SDK.
 
@@ -183,7 +182,7 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-navigation
 ```
 
-### Track view navigation
+#### Track view navigation
 To track changes in navigation as RUM Views, set the `onready` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
 
 Returning `null` in the `ViewNamePredicate` prevents the new RUM View from being created. The previous RUM View remains active.
@@ -213,11 +212,11 @@ function App() {
 
 **Note**: Only one `NavigationContainer` can be tracked at the time. If you need to track another container, stop tracking the previous one first, using `DdRumReactNavigationTracking.stopTrackingViews()`.
 
-## React Native Navigation
+### React Native Navigation
 
 **Note**: This package is an integration for `react-native-navigation` library, please make sure you first install and setup the core `mobile-react-native` SDK.
 
-### Setup
+#### Setup
 
 To install with NPM, run:
 
@@ -231,7 +230,7 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native-navigation
 ```
 
-### Track view navigation
+#### Track view navigation
 
 In order to start tracking your navigation events, simply call the add the following lines before setting up your navigation. You can use the optional `ViewNamePredicate` callback to replace the automatically detected View name with something more relevant to your use case, based on the [`ComponentDidAppearEvent`][11].
 
