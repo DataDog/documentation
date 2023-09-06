@@ -53,7 +53,7 @@ The downtime scope is matched with two possible targets: a monitor's query filte
 #### Scoping on monitor group names
 Group scopes can be applied to gain more control over which monitors to mute. For instance, a monitor is looking at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are anticipating slow requests and potential errors.
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Status graph showing downtime for group service:web-store" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="Status graph showing downtime for group service:web-store" style="width:90%;">}}
 
 You would like to make sure that `service:web-store` related notifications are muted and other critical alerts for the remaining services are delivered as usual. Enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
 
