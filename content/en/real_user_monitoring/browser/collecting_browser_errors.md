@@ -59,7 +59,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][4] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace. Errors sent with any other source (such as `console`) are not be processed by Error Tracking.
+**Note**: The [Error Tracking][4] feature processes errors sent with source set to `custom` or `source` and that contain a stack trace. Errors sent with any other source (such as `console`) are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -145,7 +145,7 @@ try {
 
 You can instrument the React [error boundaries][5] to monitor React rendering errors using the RUM Browser SDK `addError()` API.
 
-The collected rendering errors contain a component stack, which is unminified like any other error stack traces once you've [uploaded sourcemaps][6].
+The collected rendering errors contain a component stack, which is unminified like any other error stack traces after you [upload sourcemaps][6].
 
 To instrument React error boundaries for monitoring, use the following:
 
