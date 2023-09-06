@@ -166,7 +166,7 @@ env:
 
 Grâce à ce manifeste, un pod exécutant votre application peut transmettre des métriques DogStatsD avec le port `8125` sur `$DD_AGENT_HOST`.
 
-**Remarque** : Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des attributs. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la section [Tagging de service unifié][8].
+**Remarque** : Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des attributs. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la section [Tagging de service unifié][4].
 
 #### Détection de l'origine via UDP
 
@@ -187,9 +187,9 @@ env:
               fieldPath: metadata.uid
 ```
 
-Pour définir la [cardinalité des tags][5] pour les métriques recueillies avec la détection de l'origine, définissez la variable d'environnement `DD_DOGSTATSD_TAG_CARDINALITY` sur `low` (valeur par défaut) ou `orchestrator`.
+Pour définir la [cardinalité des tags][6] pour les métriques recueillies avec la détection de l'origine, définissez la variable d'environnement `DD_DOGSTATSD_TAG_CARDINALITY` sur `low` (valeur par défaut) ou `orchestrator`.
 
-**Remarque :** pour UDP, les tags `pod_name` ne sont pas ajoutés par défaut afin d'éviter la création d'un nombre excessif de [métriques custom][6].
+**Remarque** :; pour UDP, les tags `pod_name` ne sont pas ajoutés par défaut afin d'éviter la création d'un nombre excessif de [métriques custom][7].
 
 [1]: /fr/developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni

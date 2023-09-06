@@ -72,6 +72,32 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 // These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
 ```
 
+## RabbitMQ
+
+Although the PHP tracer supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding a `basic_get` call and the corresponding message processing.
+
+Here is an example:
+
+```php
+// Create a surrounding trace
+$newTrace = \DDTrace\start_trace_span();
+$newTrace->name = 'basic_get.process';
+$newTrace->service = 'amqp';
+
+
+// basic_get call(s) + message(s) processing
+$msg = $channel->basic_get($queue);
+if ($msg) {
+   $messageProcessing($msg);
+}
+
+
+// Once done, close the span
+\DDTrace\close_span();
+```
+
+Creating this surrounding trace to your consuming-processing logic ensures observability of your distributed queue.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

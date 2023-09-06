@@ -81,6 +81,11 @@ You can disable Extended Retention at any time. If the session replay is still w
 
 {{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
 
+Refer to the below diagram to understand what data is retained with extended retention.
+
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
+
+
 
 ## Mobile Session Replay
 

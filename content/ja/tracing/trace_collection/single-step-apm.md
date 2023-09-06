@@ -10,7 +10,7 @@ title: シングルステップ APM インスツルメンテーション
 <li>Linux ホストおよび VM 上</li>
 <li>Docker コンテナ上</li>
 </ul>
-<p>Java、Python、Node.js、.NET のサービスのトレーシングをサポートしています。ぜひお試しください！</p> 
+<p>x86_64 アーキテクチャのみで、Java、Python、Ruby、Node.js、.NET のサービスのトレーシングをサポートしています。ぜひお試しください！</p> 
 
 <p>Kubernetes デプロイの場合、Java、Python、Node.js、.NET、Ruby のサービスのトレーシングに非公開ベータ版をご利用いただけます。<a href="http://dtdg.co/apm-onboarding">このフォームにご記入の上、アクセスをリクエストしてください</a>。</p>
 </div>
@@ -29,7 +29,7 @@ title: シングルステップ APM インスツルメンテーション
 1. 1 行のインストールコマンドを実行します。
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)”
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)”
    ```
    これにより、APM および[リモート構成][1]を有効にした状態で Agent のインストール、構成、起動が行われ、ホストまたは VM 上のすべてのサービスの自動インスツルメンテーションのためにライブラリ挿入が設定されます。
 2. ホストまたは VM 上のサービスを再起動します。
@@ -46,7 +46,7 @@ title: シングルステップ APM インスツルメンテーション
 
 1. ライブラリインジェクターをインストールします。
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 2. Docker で Agent を構成します。
    ```shell
