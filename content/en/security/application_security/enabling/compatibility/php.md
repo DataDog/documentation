@@ -149,8 +149,8 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 
 **Integrations to User Authentication Frameworks provide:**
 
-- User login events, including the user IDs.
-- Account Takeover detection monitoring for user login events.
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
 
 | Framework | Minimum Framework Version |
 |-----------|---------------------------|

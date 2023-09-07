@@ -96,9 +96,9 @@ These are supported on the following architectures:
 
 Integrations to **User Authentication Frameworks provides:**
 
-- User login events including the user IDs.
+- User login events including the user IDs
 - User signup events (apps using built-in SignInManager)
-- Account Takeover detection monitoring for user login events.
+- Account Takeover detection monitoring for user login events
 
 | Framework         |
 |-------------------|

@@ -150,8 +150,8 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 **Integrations to User Authentication Frameworks provide:**
 
-- User login events, including the user IDs.
-- The Account Takeover detection monitoring the user login events.
+- User login events, including the user IDs
+- The Account Takeover detection monitoring the user login events
 
 | Framework         | Minimum Framework Version   |
 |-------------------| --------------------------- |
