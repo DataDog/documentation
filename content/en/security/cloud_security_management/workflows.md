@@ -57,7 +57,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
 2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and paste the following in the script editor:
-    ```
+   {{< code-block lang="javascript" >}}
     // Gets the region info from the finding tags
     // Use `$` to access Trigger or Steps data.
     // Use `_` to access Lodash.
@@ -71,7 +71,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
     } else {
         return '';
     }
-    ```
+    {{< /code-block >}}
 
 #### Add Slack action
 
@@ -96,12 +96,12 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
     - **Workspace**: The name of your Slack workspace.
     - **Channel**: The channel to send the Slack message to.
     - **Message text**: The text that appears in the Slack message. For example:
-    ```
+    {{< code-block lang="text" >}}
     S3 bucket `{{ Steps.Get_security_finding.resource }}` successfully blocked. AWS API response: 
     ```{{ Steps.Block_public_access }}```
 
     The issue will be marked as fixed the next time the resource is scanned, which can take up to one hour.
-    ```
+    {{< /code-block >}}
 
 ##### Reject workflow
 
@@ -122,7 +122,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 
 An example of a workflow to send an interactive Slack message:
 
-```json
+{{< code-block lang="json" collapsible="true" >}}
 {
     "steps": [
         {
@@ -269,7 +269,7 @@ An example of a workflow to send an interactive Slack message:
         }
     ]
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -304,7 +304,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
 2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and paste the following in the script editor:
-    ```
+   {{< code-block lang="javascript" >}}
     // Gets the team info from the finding tags 
     // Use `$` to access Trigger or Steps data.
     // Use `_` to access Lodash.
@@ -318,7 +318,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
     } else {
         return '';
     }
-    ```
+    {{< /code-block >}}
 
 #### Add Jira action
 
@@ -339,7 +339,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 
 An example of a workflow to automatically create and assign a Jira issue:
 
-```json
+{{< code-block lang="json" collapsible="true" >}}
 {
     "steps": [
         {
@@ -395,7 +395,7 @@ An example of a workflow to automatically create and assign a Jira issue:
     ],
     "startStepName": "Get_security_issue"
 }
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
