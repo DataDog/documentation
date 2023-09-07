@@ -145,6 +145,18 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | [sequelize][42]        | `>=4`    |         |          | {{< X >}}|
 
 
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs.
+- The Account Takeover detection monitoring the user login events.
+
+| Framework         |
+|-------------------|
+| passport-local    |
+| passport-http     |
+
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration
 [4]: https://github.com/nodejs/release#release-schedule
