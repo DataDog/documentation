@@ -259,7 +259,7 @@ Consumer Lambda 함수에서 위의 트레이스 컨텍스트를 추출하려면
 {{< tabs >}}
 {{% tab "Python" %}}
 ```py
-def extractor(payload):
+def extractor(payload, context):
     trace_headers = json.loads(payload["_datadog"]);
     trace_id = trace_headers["x-datadog-trace-id"];
     parent_id = trace_headers["x-datadog-parent-id"];

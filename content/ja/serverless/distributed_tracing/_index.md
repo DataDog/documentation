@@ -259,7 +259,7 @@ exports.handler = async event => {
 {{< tabs >}}
 {{% tab "Python" %}}
 ```py
-def extractor(payload):
+def extractor(payload, context):
     trace_headers = json.loads(payload["_datadog"]);
     trace_id = trace_headers["x-datadog-trace-id"];
     parent_id = trace_headers["x-datadog-parent-id"];
