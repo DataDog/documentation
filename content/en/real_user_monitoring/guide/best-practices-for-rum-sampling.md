@@ -43,7 +43,9 @@ Changing the sampling rate in the Datadog RUM UI is not supported. If this is a 
 
 ### Adjusting sampling during live outages
 
-If a bug or incident occurs, you can increase sampling to collect 100% of your user traffic to ensure no session is missed. You need to deploy a code change to achieve this.
+If a bug or incident occurs, you can increase sampling to collect 100% of your browser user traffic to ensure no session is missed. You need to deploy a code change to achieve this.
+
+**Note**: This capability does not apply to mobile or Roku applications due to the long release cycle.
 
 ### Accounting for mobile devices that go offline or crash
 
