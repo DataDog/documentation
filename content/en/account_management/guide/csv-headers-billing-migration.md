@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Plan and Usage Settings"
 ---
-The headers for a subset of the Plan & Usage CSV files will be updated the week of September 18, 2023. The updates will align the usage in the CSV file with the usage data shown in-app.The CSV will only include records with non-zero usage.
+The headers for a subset of the Plan & Usage CSV files will be updated the week of September 18, 2023. The updates align the usage in the CSV file with the usage data shown in-app. The CSV only includes records with non-zero usage.
 
 If you have automation that relies on the CSV headers in the file you download from Billing and Usage, these headers are changing and your automation needs to be updated. Below are the two sections where the changes are taking place and includes an example of the new CSV headers to support the migration.
 
