@@ -606,6 +606,54 @@ The Kubernetes State Metrics Core check does not include any events.
 
 ## Troubleshooting
 
+### Timeout errors
+
+By default, the Kubernetes State Metrics Core check waits 10 seconds for a response from the Kubernetes API server. For large clusters, the request may time out, resulting in missing metrics.
+
+You can avoid this by setting the environment variable `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` to a higher value than the default 10 seconds.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Update your `datadog-agent.yaml` with the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+          value: <value_greater_than_10>
+```
+
+Then apply the new configuration:
+
+```shell
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Update your `datadog-values.yaml` with the following configuration:
+
+```yaml
+clusterAgent:
+  env:
+    - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+      value: <value_greater_than_10>
+```
+
+Then upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 Need help? Contact [Datadog support][7].
 
 ## Further Reading
