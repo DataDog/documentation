@@ -1,9 +1,13 @@
+import { replace } from "lodash";
+import { replaceSpecialCharacters } from "../../helpers/string";
+
 export function getHitData(hit, searchQuery = '') {
     const title = hit.title ? hit.title : hit.type;
     const cleanRelPermalink =
         hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
 
-    const joinedMatchingWordsFromSearch = getFilteredMatchingWords(searchQuery).join('|');
+    const matchingWordsArray = getFilteredMatchingWords(searchQuery).map(word => replaceSpecialCharacters(word))
+    const joinedMatchingWordsFromSearch = matchingWordsArray.join('|');
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
     let highlightedTitle = (hit._highlightResult.title.value || title);
     let highlightedContent = (hit._highlightResult.content.value || '');
