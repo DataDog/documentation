@@ -89,6 +89,16 @@ const updateSynonyms = (index) => {
             objectID: 'npm',
             type: 'synonym',
             synonyms: ['npm', 'network performance monitoring']
+        },
+        {
+            objectID: 'ksm',
+            type: 'synonym',
+            synonyms: ['ksm', 'kubernetes state metrics']
+        },
+        {
+            objectID: 'ksm core',
+            type: 'synonym',
+            synonyms: ['ksm core', 'kubernetes state metrics core']
         }
     ];
 
