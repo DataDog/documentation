@@ -44,6 +44,7 @@ The default facets include the following:
 | `Type`         | The type of Synthetic test: `browser`, `api`, `api-multi`, `api-websocket`, `api-ssl`, `api-dns`, `api-tcp`, `api-udp`, `api-icmp`, or `api-grpc`. |
 | `Status`       | The Synthetic test status: `OK`, `Alert`, or `No Data`.                       |
 | `Creator`      | The creator of the Synthetic test.                                            |
+| `Team`         | The team responsible for responding to the Synthetic test.                    |
 | `Region`       | The managed and private locations the Synthetic test is running from.         |
 | `State`        | The state of the Synthetic test: `live` or `paused`.                          |
 | `Notification` | The handle used by the Synthetic test for notifications.                      |
@@ -56,7 +57,6 @@ The default tags include the following:
 
 | Tag          | Description                                                                     |
 |----------------|-------------------------------------------------------------------------------|
-| `Team`         | The team responsible for responding to the Synthetic test.                    |
 | `Tag`          | The tag assigned to the Synthetic test.                                       |
 | `Service`      | The service the Synthetic test is running on.                                 |
 | `Private Locations`| Whether or not private locations are enabled: `true` or `false`.          |
