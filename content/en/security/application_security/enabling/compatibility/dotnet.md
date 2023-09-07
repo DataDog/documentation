@@ -91,6 +91,18 @@ These are supported on the following architectures:
 | MySQL       | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | SQLite         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 
+### User Authentication Frameworks compatibility
+
+Integrations to **User Authentication Frameworks provides:**
+
+- User login events including the user IDs.
+- User signup events (apps using built-in asp.net core authentication extension, with underlying SignInManager and UserManager)
+- The Account Take Over detection monitoring the user login events.
+
+| Framework         |
+|-------------------|
+| > .Net Core Apps 2.1   |
+
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
 [3]: /agent/remote_config/#enabling-remote-configuration
