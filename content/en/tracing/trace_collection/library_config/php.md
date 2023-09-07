@@ -426,7 +426,7 @@ Enables WordPress action hook callbacks instrumentation. This feature is only av
 `DD_TRACE_WORDPRESS_ENHANCED_INTEGRAION`
 : **INI**: `datadog.trace.wordpress_enhanced_integration`<br>
 **Default**: `false`<br>
-Enables the enhanced WordPress integration. Added in version `0.91.0`.
+Enables the enhanced WordPress integration. **This integration is currently in public beta**. Added in version `0.91.0`.
 
 
 `DD_DBM_PROPAGATION_MODE`
