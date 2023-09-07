@@ -98,7 +98,7 @@ Integrations to **User Authentication Frameworks provides:**
 
 - User login events including the user IDs.
 - User signup events (apps using built-in SignInManager)
-- The Account Take Over detection monitoring the user login events.
+- Account Takeover detection monitoring for user login events.
 
 | Framework         |
 |-------------------|

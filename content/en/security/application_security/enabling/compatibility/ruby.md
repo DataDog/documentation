@@ -111,7 +111,7 @@ These are supported on the following architectures:
 **Integrations to User Authentication Frameworks provide:**
 
 - User login events, including the user IDs.
-- The Account Takeover detection monitoring the user login events.
+- Account Takeover detection monitoring for user login events.
 
 | Framework         | Minimum Framework Version   |
 |-------------------| --------------------------- |
