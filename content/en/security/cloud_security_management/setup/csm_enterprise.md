@@ -122,6 +122,8 @@ Alternatively, use the following examples to enable CSM Enterprise:
           enabled: true
         cws:
           enabled: true
+        cspm:
+          enabled: true
     ```
 
 1. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
