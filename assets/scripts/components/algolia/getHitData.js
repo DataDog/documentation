@@ -1,4 +1,3 @@
-import { replace } from "lodash";
 import { replaceSpecialCharacters } from "../../helpers/string";
 
 export function getHitData(hit, searchQuery = '') {
