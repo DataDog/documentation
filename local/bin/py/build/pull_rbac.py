@@ -65,7 +65,7 @@ def pull_rbac():
                     # Match permission id to a role. assign permission_role_name
                     # assign permission_role_name - relies on order of admin, standard, and read-only role objects in the `roles/templates` api.
                     if role_permission['id'] == permission['id']:
-                        permission_role_name = role_name.replace('Read Only', 'Read-Only')
+                        permission_role_name = role_name
                         if permission_role_name:
                             break
         
