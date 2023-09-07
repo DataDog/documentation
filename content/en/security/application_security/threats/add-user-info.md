@@ -699,7 +699,7 @@ Automatic user activity tracking offers two modes: <code>safe</code>, and <code>
 
 In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
 
-In extended mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
 
 To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
 
