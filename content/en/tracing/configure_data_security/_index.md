@@ -148,15 +148,15 @@ Datadog spans include a resource name attribute that may contain sensitive data.
 
 ### Trace obfuscation
 
-The Agent can obfuscate other sensitive data in [traces][2] that is not within the resource name. Configuration of obfuscation rules can be done with environment variables or the `datadog.yaml` configuration file.
+The Agent obfuscates sensitive [trace][2] data that is not within the resource name. Configuration of obfuscation rules can be done with environment variables or the `datadog.yaml` configuration file.
 
-The following metadata can be obfuscated or redacted:
+The following metadata can be obfuscated:
 
 * MongoDB queries
 * ElasticSearch request bodies
 * Redis commands
 * MemCached commands
-* HTTP or Web URLs
+* HTTP URLs
 * Stack traces
 
 **Note:** Obfuscation can have a performance impact on your system, or could redact important information that is not sensitive, so it's important to consider what obfuscation you need for your setup, and fine-tune your configuration appropriately.
@@ -166,9 +166,7 @@ The following metadata can be obfuscated or redacted:
 
 {{% tab "MongoDB" %}}
 
-Enabled by default.
-
-Applies to `mongodb.query` tags within a [span][1].
+MongoDB queries within a [span][1] of type `mongodb` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -178,7 +176,7 @@ apm_config:
 
   obfuscation:
     mongodb:
-      ## Enables obfuscation rules for spans of type "mongodb". Enabled by default.
+      ## Configures obfuscation rules for spans of type "mongodb". Enabled by default.
       enabled: true
       keep_values:
         - document_id
@@ -190,15 +188,13 @@ apm_config:
 This can also be disabled with the environment variable `DD_APM_OBFUSCATION_MONGODB_ENABLED=false`.
 
 * `keep_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_KEEP_VALUES` - defines a set of keys to exclude from Agent trace obfuscation. If not set, all keys will be obfuscated.
-* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_OBFUSCATE_SQL_VALUES` - defines a set of keys to include Agent trace obfuscation. If not set, all keys will be obfuscated.
+* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Agent trace obfuscation. If not set, all keys will be obfuscated.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "ElasticSearch" %}}
 
-Enabled by default.
-
-Applies to [spans][1] of type `elasticsearch`, more specifically, to the `elasticsearch.body` span tags:
+ElasticSearch request bodies within a [span][1] of type `elasticsearch` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -208,7 +204,7 @@ apm_config:
 
   obfuscation:
     elasticsearch:
-      ## Enables obfuscation rules for spans of type "elasticsearch". Enabled by default.
+      ## Configures obfuscation rules for spans of type "elasticsearch". Enabled by default.
       enabled: true
       keep_values:
         - client_id
@@ -220,15 +216,13 @@ apm_config:
 This can also be disabled with the environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_ENABLED=false`.
 
 * `keep_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES` - defines a set of keys to exclude from Agent trace obfuscation. If not set, all keys will be obfuscated.
-* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_OBFUSCATE_SQL_VALUES` - defines a set of keys to include Agent trace obfuscation. If not set, all keys will be obfuscated.
+* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Agent trace obfuscation. If not set, all keys will be obfuscated.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
 {{% tab "Redis" %}}
 
-Enabled by default.
-
-Applies to [spans][1] of type `redis`, more specifically, to the `redis.raw_command` span tags:
+Redis commands within a [span][1] of type `redis` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -237,7 +231,7 @@ apm_config:
   ## (...)
 
   obfuscation:
-    ## Enables obfuscation rules for spans of type "redis". Enabled by default.
+    ## Configures obfuscation rules for spans of type "redis". Enabled by default.
     redis:
       enabled: true
       remove_all_args: true
@@ -251,9 +245,7 @@ This can also be disabled with the environment variable `DD_APM_OBFUSCATION_REDI
 {{% /tab %}}
 {{% tab "MemCached" %}}
 
-Enabled by default.
-
-Applies to [spans][1] of type `memcached`, more specifically, to the `memcached.command` span tags:
+MemCached commands within a [span][1] of type `memcached` are obfuscated by default.
 
 ```yaml
 apm_config:
@@ -263,7 +255,7 @@ apm_config:
 
   obfuscation:
     memcached:
-      ## Enables obfuscation rules for spans of type "memcached". Enabled by default.
+      ## Configures obfuscation rules for spans of type "memcached". Enabled by default.
       enabled: true
 ```
 
@@ -273,9 +265,9 @@ This can also be disabled with the environment variable `DD_APM_OBFUSCATION_MEMC
 {{% /tab %}}
 {{% tab "Http" %}}
 
-Disabled by default.
+HTTP URLs within a [span][1] of type `http` or `web` are not obfuscated by default.
 
-HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http` or `web`:
+**Note:** Passwords within the Userinfo of a URL are not collected by Datadog.
 
 ```yaml
 apm_config:
@@ -289,8 +281,6 @@ apm_config:
       remove_query_string: true
       remove_paths_with_digits: true
 ```
-
-**Note:** Passwords within the Userinfo of a URL are not collected by Datadog.
 
 * `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
 * `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
