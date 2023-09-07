@@ -26,6 +26,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/"
       tag: "Blog"
       text: "Our Journey Taking Kubernetes State Metrics to the Next Level"
+algolia:
+  tags: ["ksm", "ksm core"]
 ---
 
 ## Overview
