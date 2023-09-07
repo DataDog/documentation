@@ -1569,7 +1569,7 @@ Use a secure cross-site session cookie. This allows the RUM Browser SDK to run w
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows to use Local Storage when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
+Allows the use of Local Storage when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
 
 ### Tagging
 
