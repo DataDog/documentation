@@ -42,7 +42,7 @@ You can preview, edit, or delete your Saved Actions from the [Action Catalog][1]
 
 To find a saved action:
 1. From the [Workflow Automation][2] page, click [**Action Catalog**][1].
-1. Click **Saved Actions** and browse through the list for the Saved Action you'd like to preview, edit, or edit.
+1. Click **Saved Actions** and browse through the list for the Saved Action you'd like to preview, edit, or delete.
 1. Hover over the action and click **Preview/Edit saved configurations** to be presented with a preview of the action.
 1. From the preview screen, select the action to edit or delete it.
 
