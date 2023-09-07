@@ -16,6 +16,7 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | Threat Protection  | 2.26.0|
 | Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
 | Vulnerability Management for Code-level (beta)| private beta  |
+| Automatic user activity event tracking | x |
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.26.0.
 
