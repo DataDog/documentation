@@ -7000,18 +7000,20 @@ components:
     MonitorSearchCount:
       description: Search facets.
       items:
-        description: A facet item.
-        properties:
-          count:
-            description: The number of found monitors with the listed value.
-            format: int64
-            readOnly: true
-            type: integer
-          name:
-            description: The facet value.
-            readOnly: true
-        type: object
+        $ref: '#/components/schemas/MonitorSearchCountItem'
       type: array
+    MonitorSearchCountItem:
+      description: A facet item.
+      properties:
+        count:
+          description: The number of found monitors with the listed value.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: The facet value.
+          readOnly: true
+      type: object
     MonitorSearchResponse:
       description: The response form a monitor search.
       example:
