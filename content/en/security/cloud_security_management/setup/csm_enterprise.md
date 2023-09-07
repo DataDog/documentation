@@ -212,6 +212,8 @@ Add the following settings to the `env` section of `security-agent` and `system-
                 value: "true"
               - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
                 value: "true"
+              - name: DD_COMPLIANCE_CONFIG_ENABLED
+                value: "true"
           [...]
 ```
 
@@ -356,7 +358,11 @@ The following deployment can be used to start the Runtime Security Agent and `sy
                 {
                     "name": "DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED",
                     "value": "true"
-                }
+                },
+                {
+                      "name": "DD_COMPLIANCE_CONFIG_ENABLED",
+                      "value": "true"
+                  }
             ],
             "memory": 256,
             "dockerSecurityOptions": ["apparmor:unconfined"],
