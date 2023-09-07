@@ -148,7 +148,7 @@ Datadog spans include a resource name attribute that may contain sensitive data.
 
 ### Trace obfuscation
 
-The Agent obfuscates sensitive [trace][2] data that is not within the resource name. Configuration of obfuscation rules can be done with environment variables or the `datadog.yaml` configuration file.
+The Datadog Agent also obfuscates sensitive [trace][2] data that is not within the resource name. Configuration of obfuscation rules can be done with environment variables or the `datadog.yaml` configuration file.
 
 The following metadata can be obfuscated:
 
@@ -187,8 +187,8 @@ apm_config:
 
 This can also be disabled with the environment variable `DD_APM_OBFUSCATION_MONGODB_ENABLED=false`.
 
-* `keep_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_KEEP_VALUES` - defines a set of keys to exclude from Agent trace obfuscation. If not set, all keys will be obfuscated.
-* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Agent trace obfuscation. If not set, all keys will be obfuscated.
+* `keep_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_KEEP_VALUES` - defines a set of keys to exclude from Datadog Agent trace obfuscation. If not set, all keys will be obfuscated.
+* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_MONGODB_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Datadog Agent trace obfuscation. If not set, all keys will be obfuscated.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
@@ -215,8 +215,8 @@ apm_config:
 
 This can also be disabled with the environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_ENABLED=false`.
 
-* `keep_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES` - defines a set of keys to exclude from Agent trace obfuscation. If not set, all keys will be obfuscated.
-* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Agent trace obfuscation. If not set, all keys will be obfuscated.
+* `keep_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_KEEP_VALUES` - defines a set of keys to exclude from Datadog Agent trace obfuscation. If not set, all keys will be obfuscated.
+* `obfuscate_sql_values` or environment variable `DD_APM_OBFUSCATION_ELASTICSEARCH_OBFUSCATE_SQL_VALUES` - defines a set of keys to include in Datadog Agent trace obfuscation. If not set, all keys will be obfuscated.
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
