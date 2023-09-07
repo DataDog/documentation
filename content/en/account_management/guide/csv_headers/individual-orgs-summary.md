@@ -3,7 +3,7 @@ title: New CSV headers for Individual Organizations Summary
 kind: guide
 ---
 
-CSV header changes will take effect the week of September 18, 2023. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on:
+CSV header changes take effect the week of September 18, 2023. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on:
 
 ## All Tab Summary
 
