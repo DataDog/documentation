@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Saved views allow you to save the state of the [Synthetic Monitoring & Continuous Testing Explorer][2] and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [Synthetic Monitoring & Continuous Testing Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
 
 Saved views can keep track of your:
 
@@ -17,8 +17,7 @@ Saved views can keep track of your:
 - Search queries (such as failed test runs with HTTP error status codes, failing test runs in the CI by their blocking status, test runs that required retries, and test IDs to add to your CI pipeline)
 - Column sort order
 - Live time range (such as the past hour or the past week)
-- Visualizations (such as a timeseries, toplist, table, or funnel graph)
-- Subset of facets
+- Visualizations (such as a timeseries, top list, table, or list)
 
 You can also use saved views to share common queries and configurations with your teammates.
 
