@@ -14,8 +14,8 @@ further_reading:
   text: "Cumulative time windows"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-The monitor custom schedule feature is in private beta. To request access, contact Support at support@datadoghq.com.
+{{< beta-callout url="https://docs.datadoghq.com/help/" btn_hidden="false" >}}
+The monitor custom schedule feature is in private beta. To request access, contact Datadog Support.
 {{< /beta-callout >}}
 
 ## Overview 
@@ -88,11 +88,14 @@ FREQ=MONTHLY;INTERVAL=2;BYDAY=1SU,-1SU
 
 ## Alerting behavior of monitors with custom schedules
 
-Monitors using default scheduling run the query with the default evaluation frequency and send alerts based on monitor status transitions (for example, when a monitor goes from WARN to OK or from OK to ALERT).
+Monitors using default scheduling run the query with the default evaluation frequency and send alerts based on monitor status transitions (for example, when a monitor goes from WARN to OK or from OK to ALERT). 
+
+The timeline below illustrates the behavior of a monitor with default scheduling. The monitor sends alerts corresponding to status changes.
 
 {{< img src="monitors/guide/custom_schedules/alerting_behavior_regular.png" alt="Visual diagram showing a when a monitor sends an alert based on monitor state transitions for the default schedule with a thirty minute evaluation frequency" style="width:100%;" >}}
 
-Monitors with custom schedules, on the other hand, evaluate on a daily, weekly, or monthly basis and send alerts based on the results of individual evaluations. Each evaluation is independent from the previous one and sends a notification when the result is not OK.
+Monitors with custom schedules, on the other hand, evaluate on a daily, weekly, or monthly basis and send alerts based on the results of individual evaluations. Each evaluation is independent from the previous one and sends a notification when the result is not OK. 
+
 The timeline below illustrates the behavior of a monitor running on a custom schedule. Unlike the default scheduled monitor, the custom scheduled monitor sends an alert during its evaluation time based on the monitor state.
 {{< img src="monitors/guide/custom_schedules/alerting_behavior_custom.png" alt="Visual diagram showing a when a monitor sends an alert based on monitor state for the custom schedule with a daily evaluation frequency" style="width:100%;" >}}
 
