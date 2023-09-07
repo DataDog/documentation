@@ -231,7 +231,7 @@ Datadog uses a default naming scheme for inferred services. If you prefer, you c
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
 
-Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+Each setting accepts a comma-separated list: `key1:value1,key2:value2`.
 
 For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
 
