@@ -152,10 +152,10 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - User login events, including the user IDs.
 - The Account Takeover detection monitoring the user login events.
 
-| Framework         |
-|-------------------|
-| passport-local    |
-| passport-http     |
+| Framework         | Minimum Framework Version   |
+|-------------------| --------------------------- |
+| passport-local    | 1.0.0                       |
+| passport-http     | 0.3.0                       |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration
