@@ -21,11 +21,21 @@ Playlists are collections of Session Replays you can aggregate in a folder-like 
 
 You can create a playlist directly from the [Playlist page][1] or from an individual Session Replay.
 
-To create it from the Playlist page, give it a name and description. You can then start exploring Session Replays in RUM to add to the playlist.
+To create it directly from the Playlist page:
 
-To create it from an individual Session Replay, tk...
+1. From the Datadog app, go to **UX Monitoring >  Real User Monitoring**, then click the **Playlists** page.
+2. Click **New Playlist**.
+3. Give your playlist a name and description. You can then start exploring Session Replays in RUM to add to the playlist.
 
 {{< img src="real_user_monitoring/session_replay/playlists/playlists-1.png" alt="Create a new Playlist" style="width:60%;">}}
+
+To create it from an individual Session Replay:
+
+1. Open the replay you want to save.
+2. Click the **Add to Playlist** button at the top.
+3. Add the recording to an existing playlist or create a new one like in the video below.
+
+   {{< img src="real_user_monitoring/session_replay/playlists/playlist-individual-session-replay.mp4" alt="Build a new playlist from the individual recording" video="true" width="90%" >}}
 
 If you spot any notable behaviors after viewing a Session Replay, you can also directly build a new playlist or add that particular Session Replay to an existing playlist.
 
