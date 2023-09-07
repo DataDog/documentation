@@ -25,10 +25,10 @@ The minimum tracer version to get all supported ASM capabilities for Ruby is 1.1
 |Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | | 
+| Kubernetes | {{< X >}}  | |
 | AWS ECS | {{< X >}}  | |
 | AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | | 
+| AWS Lambda |  | |
 
 ## Language and framework compatibility
 
@@ -93,7 +93,7 @@ These are supported on the following architectures:
 
 ##### ASM Capability Notes
 - **Vulnerability Management for Code-level** is not supported
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below. 
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -112,9 +112,9 @@ These are supported on the following architectures:
 - User login events, including the user IDs.
 - The Account Takeover detection monitoring the user login events.
 
-| Framework         |
-|-------------------|
-| Devise            |
+| Framework         | Minimum Framework Version   |
+|-------------------| --------------------------- |
+| Devise            | 3.2.1
 
 [1]: /tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/
