@@ -15,7 +15,6 @@ Saved views can keep track of your:
 
 - CI batches and test runs
 - Search queries (such as failed test runs with HTTP error status codes, failing test runs in the CI by their blocking status, test runs that required retries, and test IDs to add to your CI pipeline)
-- Column sort order
 - Live time range (such as the past hour or the past week)
 - Visualizations (such as a timeseries, top list, table, or list)
 
