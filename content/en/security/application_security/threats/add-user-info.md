@@ -683,7 +683,7 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
-## Disabling automatic user activity event tracking
+## Automatic user activity event tracking
 
 When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
 
@@ -692,6 +692,20 @@ The events that can be automatically detected are:
 - `users.login.success`
 - `users.login.failure`
 - `users.signup`
+
+### Automatic user activity event tracking mode
+
+Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+
+In `safe` mode. In safe mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+
+In extended mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+To configure automatic user event tracking mode, you can use the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default the tracer library uses the <code>safe</code> mode.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. In those cases, the event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+## Disabling automatic user activity event tracking
 
 If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
@@ -707,3 +721,4 @@ If you wish to disable the detection of these events, you should set the environ
 [8]: /security/default_rules/bl-account-deletion-ratelimit/
 [9]: /security/default_rules/bl-password-reset/
 [10]: /security/default_rules/bl-payment-failures/
+[11]: https://guid.one/guid
