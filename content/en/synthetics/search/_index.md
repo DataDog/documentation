@@ -90,9 +90,9 @@ Manage your Synthetic tests in bulk by selecting one or more tests on the [Synth
 
 ### Test actions
 
-Hovering over a test populates option icons on the right such as `Pause`, `Run Test Now`, `Edit`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
+Clicking on the kebab menu to the right of a test populates option icons such as `Pause`, `Run Test Now`, `Edit Test`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
 
-{{< img src="synthetics/search/manage_test_options.mp4" alt="Action tray options that appear when hovering on a Synthetic test" video="true" width="100%">}}
+{{< img src="synthetics/search/test_options.mp4" alt="Options appear when you click on the kebab menu to the right of a Synthetic test" video="true" width="100%">}}
 
 ### Track events
 
