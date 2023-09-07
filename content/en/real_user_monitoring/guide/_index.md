@@ -37,6 +37,7 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitor your Next.js application with RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 

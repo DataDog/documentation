@@ -4038,9 +4038,8 @@ components:
       properties:
         id:
           description: Monitor ID of the downtime.
-          example: 12345
-          format: int64
-          type: integer
+          example: '12345'
+          type: string
         type:
           $ref: '#/components/schemas/DowntimeIncludedMonitorType'
       type: object
@@ -17425,6 +17424,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
@@ -19203,6 +19203,16 @@ paths:
         schema:
           example: created_by,monitor
           type: string
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of downtimes in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 30
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -19227,6 +19237,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in private beta.
@@ -27819,6 +27833,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29442,6 +29460,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:

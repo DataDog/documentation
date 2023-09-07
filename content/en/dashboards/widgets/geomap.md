@@ -1,6 +1,7 @@
 ---
 title: Geomap Widget
 kind: documentation
+widget_type: geomap
 aliases:
 - /graphing/widgets/geomap/
 further_reading:
@@ -69,9 +70,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
-
-The dedicated [widget JSON schema definition][9] for the change widget is:
+This widget can be used with the **[Dashboards API][8]**. See the following table for the [widget JSON schema definition][9]:
 
 {{< dashboards-widgets-api >}}
 
