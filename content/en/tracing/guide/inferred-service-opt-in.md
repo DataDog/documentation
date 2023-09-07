@@ -223,6 +223,22 @@ Add the following environment variables to your tracer settings or system proper
 - `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+
+| Environment variable | TracerSettings |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
+
+Each setting accepts a comma separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
+
 As of tracer version `v1.16.0` all libraries are supported except for Boto2.
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.16.0
