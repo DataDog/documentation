@@ -16,6 +16,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | Threat Protection  | 0.86.0   |
 | Vulnerability Management for Open Source Software (OSS) | not supported |
 | Vulnerability Management for Code-level (beta) | not supported|
+| Automatic user activity event tracking | x |
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
