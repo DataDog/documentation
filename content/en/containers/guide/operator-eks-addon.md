@@ -9,7 +9,8 @@ further_reading:
     text: 'Datadog and Kubernetes'
 ---
 
-Datadog Operator can be installed on EKS cluster as an add-on. Add-ons provide installation and management of a curated set of add-ons for Amazon EKS clusters. 
+You can install the Datadog Agent on an Amazon EKS cluster by installing [Datadog Operator](/containers/datadog_operator)
+as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html).
 
 ## Prerequisites
 
