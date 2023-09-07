@@ -10,22 +10,23 @@ further_reading:
 ---
 
 You can install the Datadog Agent on an Amazon EKS cluster by installing [Datadog Operator](/containers/datadog_operator)
-as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html).
+as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and apply `DatadogAgent` manifest.
+
+There are certain differences when using add-on, compared to the regular [Helm installation][4]:
+* During Operator installation, images must be pulled only from EKS repository, this can't be changed by the user.
+* Operator Helm Chart values, which can be overriden is restricted by following [schema file][3].
+
+These restriction are necessary to make Operator compliant with the add-on policies, allow EKS ensure safety of the installation, and disable features not yet supported in add-on environment.
 
 ## Prerequisites
 
 
-* Ability to subscribe to [Datadog Operator][1] product. 
+* Subscription to the [Datadog Operator][1] product. 
 * [TODO] License manager SLR.
-* Kubectl, AWS CLI if using command line interface.
+* Kubectl
+* If you are using the command line interface for setting up add-on, [AWS CLI](https://aws.amazon.com/cli/)
 
 ## Installing Operator
-
-There are certain differences when using add-on, compared to the regular [Helm installation][4]:
-* During Operator installation images must be pulled only from EKS repository, this can't be change by user.
-* Operator Helm Chart values which can be overriden is restricted by following [schema file][3].
-
-These restriction are necessary to make Operator compliant with the add-on policies, allow EKS ensure safety of the installation, and disable features not yet supported in add-on environment.
 
 {{< tabs >}}
 {{% tab "Console" %}}
@@ -59,9 +60,19 @@ To verify that the installation was successful, use the AWS Management Console, 
 
 ## Configuring Agent
 
-Operator add-on 0.1.x installs Operator only. For Agent setup one can follow steps 2-4 from the Operator [installation guide][2].
-By default Operator will use default Agent and Cluster agent image settings and pull them from non-EKS registry.
-If user wants to pull images from EKS repository, one can add `global.registry` setting in the manifest:
+Operator add-on 0.1.x installs Operator only. For Agent setup you need to setup `DatadogAgent` custom resource.
+
+1. Switch to Operator installation namespace, `datadog-agent` by default.
+  ```bash
+  kubens datadog-agent
+  ```
+2. Create a Kubernetes secret with your API and application keys:
+  ```bash
+  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+  ```
+  Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
+3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. By default Operator will use default Agent and Cluster agent image settings and pull them from non-EKS registry.
+If user wants to pull images from EKS repository, one can add `global.registry`. The following sample configuration enables metrics, logs, and APM and sets EKS repository as a default:
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
@@ -83,10 +94,16 @@ If user wants to pull images from EKS repository, one can add `global.registry` 
       logCollection:
         enabled: true
   ```
+ For all configuration options, see the [Operator configuration spec][6].
+4. Deploy the Datadog Agent:
+  ```bash
+  kubectl apply -f /path/to/your/datadog-agent.yaml
+  ```
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/marketplace/pp/prodview-wedp6r37fkufe
 [2]: /getting_started/containers/datadog_operator
-[3]: https://github.com/DataDog/helm-charts/blob/operator-eks-addon/charts/operator-eks-addon/aws_mp_configuration_schema.json
+[3]: https://github.com/DataDog/helm-charts/blob/operator-eks-addon/charts/operator-eks-addon/aws_mp_configuration.schema.json
 [4]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+[5]: https://app.datadoghq.com/account/settings#api
