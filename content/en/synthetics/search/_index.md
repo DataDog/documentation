@@ -29,11 +29,7 @@ You can access, [search](#search-for-tests), and [manage](#manage-tests) all of 
 By using [facets](#facets-and-tags), you can accomplish the following actions:
 
 - Search for specific Synthetic tests
-- Investigate every CI/CD job execution to identify and troubleshoot failing test runs
-- Keep track of the progress of your tests in CI/CD pipelines
-- Identify flaky tests to fix
 - Manage your tests with bulk actions
-- Monitor events to track changes to your Synthetic Monitoring configuration
 
 ## Search for tests
 
