@@ -84,8 +84,19 @@ Support for query strings is not available for Flask.
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is supported on all frameworks.
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-- 
+-
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs.
+- The Account Takeover detection monitoring the user login events.
+
+| Framework         | Framework Versions   |
+|-------------------| --------------------------- |
+| Django            | 1.11, 2.2, 3.2, >= 4.0
 
 [1]: /tracing/trace_collection/compatibility/python/
 [2]: /agent/remote_config/#enabling-remote-configuration
