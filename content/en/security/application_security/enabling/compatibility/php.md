@@ -145,5 +145,18 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | PHPRedis        | 3, 4, 5 |   {{< X >}}    | {{< X >}} |
 | Predis        | 1.1 | {{< X >}} |   {{< X >}}    |
 
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs.
+- The Account Takeover detection monitoring the user login events.
+
+| Framework | Minimum Framework Version |
+|-----------|---------------------------|
+| Laravel   | 4.2                       |
+| Symfony   | 3.3                       |
+| Wordpress | 4.8                       |
+
 [1]: /tracing/trace_collection/compatibility/php/
 [2]: /agent/remote_config/#enabling-remote-configuration
