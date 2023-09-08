@@ -142,6 +142,7 @@ Then set the value of `DD_AGENT_HOST` to `datadog.monitoring.svc.cluster.local`.
         env:
           - name: DD_AGENT_HOST
             value: datadog.monitoring.svc.cluster.local
+```
 
 ## Further reading
 
