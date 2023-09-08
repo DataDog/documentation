@@ -1762,7 +1762,7 @@ Enables collection of long task events.
 `defaultPrivacyLevel`
 : Optional<br/>
 **Type**: String<br/>
-**Default**: `mask-user-input` <br/>
+**Default**: `mask` <br/>
 See [Session Replay Privacy Options][13].
 
 `actionNameAttribute`
