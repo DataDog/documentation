@@ -1,4 +1,4 @@
-{{- if ne hugo.Environment "development" -}}
+{{- if eq hugo.Environment "development" -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
@@ -40,7 +40,7 @@
             {{ end }}
 
             {{ if $product_type }}
-                {{ $record = merge $record $product_type }}
+                {{ $record = merge $record (dict "product_type" $product_type) }}
             {{ end }}
 
             {{- $.Scratch.Add "algoliaindex" $record }}
