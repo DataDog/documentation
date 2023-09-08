@@ -56,7 +56,7 @@ All sources
 1. Click **Settings**.
 1. Select one of the options under **Team Provisioning Sources**.
 
-To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][2].
+If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][2].
 
 ## Team handle
 
