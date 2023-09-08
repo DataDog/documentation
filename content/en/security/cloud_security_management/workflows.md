@@ -18,7 +18,7 @@ Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate yo
 
 Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the security issue, misconfiguration, or resource side panels.
 
-When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding and security issue. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][2].
+When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding and security issue. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][7].
 
 ## Build a workflow
 
@@ -76,7 +76,7 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 3. Click the step in the workflow canvas and enter the following information:
     - **Workspace**: The name of your Slack workspace.
     - **Channel**: The channel to send the Slack message to.
-    - **Prompt text**: The text that will appear immediately above the choice buttons in the Slack message. For example: Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region `{{ Steps.GetRegion.data }}`?
+    - **Prompt text**: The text that will appear immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region `{{ Steps.GetRegion.data }}`?"
 
 ##### Approve workflow
 
@@ -416,3 +416,4 @@ After running the workflow, additional information is shown on the side panel. Y
 [4]: https://app.datadoghq.com/workflow
 [5]: /integrations/slack/
 [6]: /integrations/jira/
+[7]: /service_management/workflows/build/#source-object-variables
