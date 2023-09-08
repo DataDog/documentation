@@ -35,7 +35,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 
 ## SDK domains
 
-See [Supported endpoints for SDK domains][2].
+See [Supported endpoints for SDK domains][3].
 
 ## Navigate the Datadog documentation by site
 
