@@ -472,7 +472,6 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | Predis        | `predis`        |
 | Psr18         | `psr18`         |
 | Roadrunner    | `roadrunner`    |
-| Roadrunner    | `roadrunner`    |
 | Sql Server    | `sqlsrv`        |
 | Symfony       | `symfony`       |
 | WordPress     | `wordpress`     |
