@@ -34,7 +34,7 @@ There are two main steps required to set up and use Quality Gates:
 To create Quality Gates rules for your organization, your user account must have the `quality_gate_rules_write` [permission][1].
 
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
-2. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. More information on [rule scopes](#rule-scope).
+2. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. See [rule scopes](#rule-scope) for more information.
 3. Select the rule type. You can choose between `Static Analysis` and `Test`.
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected.
 
