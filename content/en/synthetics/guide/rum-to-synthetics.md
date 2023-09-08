@@ -2,7 +2,7 @@
 title: Generate Synthetics Browser Tests from RUM Session Replays
 kind: guide
 further_reading:
-    - link: # TODO: blog post link
+    - link: 'https://www.datadoghq.com/blog/create-browser-tests-from-datadog-rum-session-replay/'
       tag: 'Blog'
       text: 'Create browser tests directly from Datadog RUM Session Replay'
     - link: 'synthetics/browser_tests'
