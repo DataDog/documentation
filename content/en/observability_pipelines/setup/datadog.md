@@ -52,15 +52,24 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
   ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
+See [Best Practices for OPW Aggregator Architecture][2] for production-level requirements.
+
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[2]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments. 
 
+See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
+
+[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
+See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
+
+[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 There are no provider-specific requirements for APT-based Linux.
