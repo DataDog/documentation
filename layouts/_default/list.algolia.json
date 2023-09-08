@@ -1,4 +1,4 @@
-{{- if eq hugo.Environment "development" -}}
+{{- if ne hugo.Environment "development" -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
