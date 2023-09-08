@@ -40,7 +40,7 @@ To create Quality Gates rules for your organization, your user account must have
 
 The following example shows how to create a static analysis rule that fails when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
 
-   {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
+   {{< img src="ci/qg_rule_condition_sa_errors_security_2.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
 5. Select whether the rule should block the pipeline or not when it fails.
    Non-blocking rules are helpful when rolling out a new rule and wanting to verify its behavior before making it blocking.
