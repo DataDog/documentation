@@ -25,8 +25,6 @@ With the [Admission Controller][1] approach, the Agent uses the Kubernetes Admis
 
 To learn more about Kubernetes Admission Controller, read [Kubernetes Admission Controllers Reference][2].
 
-In the example listed above.
-
 ## Requirements
 
 * Kubernetes v1.14+
