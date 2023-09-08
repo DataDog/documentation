@@ -51,6 +51,7 @@ algolia:
 cascade:
     algolia:
         rank: 70
+        product_type: rum
 ---
 
 {{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM Dashboard" >}}

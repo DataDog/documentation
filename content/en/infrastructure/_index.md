@@ -13,6 +13,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+        product_type: infrastructure
 ---
 
 {{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}

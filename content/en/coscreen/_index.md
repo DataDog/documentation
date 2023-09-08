@@ -8,6 +8,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+        product_type: coscreen
 ---
 
 {{< img src="coscreen/collab-v2.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}

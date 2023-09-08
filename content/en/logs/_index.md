@@ -38,6 +38,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
+        product_type: logs
 ---
 
 ## Overview

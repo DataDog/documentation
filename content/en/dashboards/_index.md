@@ -49,6 +49,7 @@ algolia:
 cascade:
     algolia:
         rank: 70
+        product_type: dashboards
 ---
 
 ## Overview

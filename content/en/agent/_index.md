@@ -28,6 +28,7 @@ algolia:
 cascade:
     algolia:
         rank: 70
+        product_type: agent
 ---
 
 <div class="alert alert-info">

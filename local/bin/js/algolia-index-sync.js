@@ -31,7 +31,7 @@ const updateSettings = (index) => {
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
         customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
-        attributesForFaceting: ['language', 'searchable(tags)'],
+        attributesForFaceting: ['language', 'searchable(tags)', 'searchable(product_type)'],
         attributesToSnippet: ['content:20'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],

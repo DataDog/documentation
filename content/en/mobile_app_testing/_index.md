@@ -21,6 +21,7 @@ further_reading:
 cascade:
   algolia:
     tags: ['mobile_testing']
+    product_type: mobile_app
 ---
 
 {{< site-region region="us3,us5,gov,eu,ap1" >}}

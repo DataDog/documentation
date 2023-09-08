@@ -9,6 +9,7 @@ aliases:
 cascade:
     algolia:
         rank: 70
+        product_type: metrics
 ---
 
 

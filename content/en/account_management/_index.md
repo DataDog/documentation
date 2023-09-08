@@ -8,6 +8,7 @@ aliases:
 cascade:
     algolia:
         rank: 70
+        product_type: account_management
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>

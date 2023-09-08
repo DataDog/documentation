@@ -12,6 +12,7 @@
             {{ $title := $page.Params.integration_title | default $page.Title }}
             {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
+            {{ $product_type := $page.Params.algolia.product_type }}
             {{ $category := $page.Params.algolia.category | default "Documentation" }}
             {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
             {{ $rank := $page.Params.algolia.rank | default 70 }}
@@ -36,6 +37,10 @@
             {{ if $tags }}
                 {{ $tags_dict := (dict "tags" $tags) }}
                 {{ $record = merge $record $tags_dict }}
+            {{ end }}
+
+            {{ if $product_type }}
+                {{ $record = merge $record $product_type }}
             {{ end }}
 
             {{- $.Scratch.Add "algoliaindex" $record }}
