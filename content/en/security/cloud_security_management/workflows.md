@@ -12,21 +12,13 @@ further_reading:
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools. 
 
-When combined with [Cloud Security Management (CSM)][2], it enables you to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public AWS S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
+Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public AWS S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## Understanding how triggers and sources work
 
-Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually.
+Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the security issue, misconfiguration, or resource side panels.
 
-## Trigger a workflow
-
-You can trigger an existing workflow from the security issue, misconfiguration, and resource side panels.
-
-In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
-
-{{< img src="/security/csm/run_workflow_side_panel.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
-
-After running the workflow, additional information is shown on the side panel. You can click the link to view the workflow.
+When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding and security issue. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][2].
 
 ## Build a workflow
 
@@ -47,7 +39,7 @@ This example creates a remediation workflow that sends an interactive Slack mess
 
 #### Get security finding
 
-To retrieve the security finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` [source object variable][2] to retrieve the finding's details from the [**Get a finding**][3] API endpoint.
+To retrieve the security finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][3] API endpoint.
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 2. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
@@ -294,7 +286,7 @@ This example creates an automated ticket routing workflow that creates and assig
 
 #### Get security issue
 
-To retrieve the security issue and pass it into the workflow, use the **Get security issue** action. The action uses the `{{ Source.securityIssue.id }}` [source object variable][2] to retrieve the security issue's details from the [**Get a finding**][3] API endpoint.
+To retrieve the security issue and pass it into the workflow, use the **Get security issue** action. The action uses the `{{ Source.securityIssue.id }}` source object variable to retrieve the security issue's details from the [**Get a finding**][3] API endpoint.
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 2. Search for the **Get security issue** action and select it to add it as a step on your workflow canvas.
@@ -403,6 +395,16 @@ An example of a workflow to automatically create and assign a Jira issue:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Trigger a workflow
+
+You can trigger an existing workflow from the security issue, misconfiguration, and resource side panels.
+
+In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
+
+{{< img src="/security/csm/run_workflow_side_panel.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
+
+After running the workflow, additional information is shown on the side panel. You can click the link to view the workflow.
 
 ## Further Reading
 
