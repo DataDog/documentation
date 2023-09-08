@@ -117,6 +117,12 @@ With v5, the default `sessionReplaySampleRate` is 0 instead of 100. This means t
 
 ### RUM
 
+### Session plan field
+
+Related to session replay changes, the `session.plan` field is now only available on session events.
+
+**Action to take**: Update monitor or dashboard queries to not use the `session.plan` field with events that are not sessions.
+
 #### Frustration signals are collected automatically
 We've simplified the collection of user interactions so that you only need to set `trackUserInteractions: true` to collect all interactions, including frustration signals. This means that you no longer need to set the `trackFrustrations` parameter separately.
 
