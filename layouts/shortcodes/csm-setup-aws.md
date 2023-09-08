@@ -8,14 +8,14 @@ Use one of the following methods to enable CSM for your AWS accounts:
 
 #### CSM Setup page
 
-1. On the **[Cloud Security Management Setup][3]** page, click **Cloud accounts**.
+1. On the [**Cloud Security Management Setup** page][3], click **Cloud accounts**.
 2. Expand the **AWS** section.
 3. To enable resource collection for an account, click the **Resource Scanning** toggle.
 4. Click **Done**.
 
 #### Amazon Web Services integration page
 
-1. On the **[Amazon Web Services][4]** integration page, select an AWS account.
+1. On the [**Amazon Web Services Integration** page][4], select an AWS account.
 2. On the **Resource Collection** tab, select the **Cloud Security Posture Management Collection** checkbox.
 3. Click **Save**.
 
@@ -39,7 +39,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 - `!env:staging, !testing` excludes resources that have both the `env:staging` and `testing` tags.
 - `datadog:monitored !region:us-east1` collects metrics for resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
 
-1. On the **[Cloud Security Management Setup][3]** page, click **Cloud accounts**.
+1. On the [**Cloud Security Management Setup** page][3], click **Cloud accounts**.
 2. Expand the **AWS** section.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
 4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.

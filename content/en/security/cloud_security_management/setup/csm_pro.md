@@ -13,8 +13,6 @@ further_reading:
     text: "Cloud Security Management Vulnerabilities"
 ---
 
-<div class="alert alert-info">Text <a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Changes to Datadog Cloud Security Management</a>.</div>
-
 The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations][1] (cloud accounts) and [CSM Vulnerabilities][2] (container images). To learn more about the available CSM packages, see [Setting up Cloud Security Management][3].
 
 ## Enable resource scanning for cloud accounts
@@ -30,7 +28,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{% tab "Azure" %}}
 
-{{% csm-setup-aws %}}
+{{% csm-setup-azure %}}
 
 {{% /tab %}}
 

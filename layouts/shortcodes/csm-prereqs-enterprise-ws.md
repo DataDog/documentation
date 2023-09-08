@@ -8,6 +8,6 @@
   * Oracle Linux 7, 8, and 9
   * CentOS 7
   * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][1].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][15].
 
-[1]: /security/cloud_security_management/troubleshooting
+[15]: /security/cloud_security_management/troubleshooting

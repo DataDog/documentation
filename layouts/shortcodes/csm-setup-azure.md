@@ -10,14 +10,14 @@ Use one of the following methods to enable CSM for your Azure subscriptions:
 
 #### CSM Setup page
 
-1. On the **[Cloud Security Management Setup page][2]**, click **Cloud accounts**.
+1. On the [**Cloud Security Management Setup** page][2], click **Cloud accounts**.
 2. Expand the **Azure** section.
 3. To enable resource collection for a subscription, click the **Resource Scanning** toggle.
 4. Click **Done**.
 
 #### Azure integration page
 
-1. On the **[Azure integration page][3]**, select an Azure app registration.
+1. On the [**Azure Integration** page][3], select an Azure app registration.
 2. Under **Resource Collection**, select the **Collect resources for Cloud Security Posture Management** checkbox.
 3. Click **Submit Changes**.
 
@@ -41,7 +41,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 - `!env:staging, !testing` excludes resources that have both the `env:staging` and `testing` tags.
 - `datadog:monitored !region:us-east1` collects metrics for resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
 
-1. On the **[Cloud Security Management Setup][2]** page, click **Cloud accounts**.
+1. On the [**Cloud Security Management Setup** page][2], click **Cloud accounts**.
 2. Expand the **Azure** section.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
 4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
