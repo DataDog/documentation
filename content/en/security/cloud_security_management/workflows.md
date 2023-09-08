@@ -225,7 +225,7 @@ An example of a workflow to send an interactive Slack message:
                 },
                 {
                     "name": "channel",
-                    "value": "#k9-csm-autoremediation"
+                    "value": "<SLACK CHANNEL NAME>"
                 },
                 {
                     "name": "promptText",
