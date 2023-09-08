@@ -14,6 +14,10 @@ further_reading:
 
 When combined with [Cloud Security Management (CSM)][2], it enables you to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public AWS S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
+## Understanding how triggers and sources work
+
+Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually.
+
 ## Trigger a workflow
 
 You can trigger an existing workflow from the security issue, misconfiguration, and resource side panels.
