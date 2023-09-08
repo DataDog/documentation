@@ -118,7 +118,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Ruby" %}}
 
-**Note:** Client IP are not collected by default and must be enabled.
+**Note:** Client IPs are not collected by default and must be enabled.
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
@@ -129,6 +129,28 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+**Note:** Client IPs are not collected by default and must be enabled. Database statements and
+Client URIs are obfuscated by the Datadog Agent.
+
+| Category                | Collected                       | Obfuscated                      |
+|:------------------------|:-------------------------------:|:-------------------------------:|
+| Name                    |                                 |                                 |
+| Email                   |                                 |                                 |
+| Client IP               | <i class="icon-check-bold"></i> |                                 |
+| Database statements     | <i class="icon-check-bold"></i> |                                 |
+| Geographic location     |                                 |                                 |
+| Client URI path         | <i class="icon-check-bold"></i> |                                 |
+| Client URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Server URI path         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Server URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| HTTP body               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| HTTP cookies            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| HTTP headers            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 
 {{% /tab %}}
 
