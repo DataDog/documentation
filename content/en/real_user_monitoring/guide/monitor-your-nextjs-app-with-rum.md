@@ -53,14 +53,11 @@ Follow the steps below to set up Datadog RUM browser monitoring.
       // Specify a version number to identify the deployed version of your application in Datadog
       // version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 20,
+      sessionReplaySampleRate: 100,
       trackUserInteractions: true,
       trackResources: true,
       trackLongTasks: true,
-      defaultPrivacyLevel: "mask-user-input",
     });
-
-    datadogRum.startSessionReplayRecording();
 
     export default function RootLayout({
       children,
@@ -113,7 +110,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
                h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
                d=o.createElement(u);d.async=1;d.src=n
                n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
+             })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
              window.DD_RUM.onReady(function() {
                window.DD_RUM.init({
                  clientToken: '<CLIENT_TOKEN>',
@@ -121,17 +118,14 @@ Follow the steps below to set up Datadog RUM browser monitoring.
                  site: 'datadoghq.com',
                  service: 'next-app-router-rum',
                  env: '<ENV_NAME>',
-                 // Specify a version number to identify the deployed version of your application in Datadog 
-                 // version: '1.0.0', 
+                 // Specify a version number to identify the deployed version of your application in Datadog
+                 // version: '1.0.0',
                  sessionSampleRate: 100,
-                 sessionReplaySampleRate: 20,
+                 sessionReplaySampleRate: 100,
                  trackUserInteractions: true,
                  trackResources: true,
                  trackLongTasks: true,
-                 defaultPrivacyLevel: 'mask-user-input',
                });
-
-               window.DD_RUM.startSessionReplayRecording();
              })
            `}
          </Script>
@@ -173,7 +167,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
          <body>
            <Script
              id="dd-rum-sync"
-             src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js"
+             src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js"
              type="text/javascript"
              strategy="beforeInteractive"
            />
@@ -185,18 +179,14 @@ Follow the steps below to set up Datadog RUM browser monitoring.
                  site: 'datadoghq.com',
                  service: 'rum-cdn-async',
                  env: '<ENV_NAME>',
-                 // Specify a version number to identify the deployed version of your application in Datadog 
-                 // version: '1.0.0', 
+                 // Specify a version number to identify the deployed version of your application in Datadog
+                 // version: '1.0.0',
                  sessionSampleRate: 100,
-                 sessionReplaySampleRate: 20,
+                 sessionReplaySampleRate: 100,
                  trackUserInteractions: true,
                  trackResources: true,
                  trackLongTasks: true,
-                 defaultPrivacyLevel: 'mask-user-input',
                });
-
-               window.DD_RUM &&
-               window.DD_RUM.startSessionReplayRecording();
              `}
            </Script>
            {children}
@@ -220,7 +210,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 3. Deploy the changes to your application. Once your deployment is live, Datadog collects events from user browsers.
 4. You can visualize the [data collected][3] in your Next.js application using [dashboards][4].
 
-## Backend monitoring 
+## Backend monitoring
 
 To start backend monitoring of your Next.js applications:
 

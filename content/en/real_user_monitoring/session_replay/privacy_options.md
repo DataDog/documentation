@@ -43,8 +43,6 @@ datadogRum.init({
     trackUserInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
-
-datadogRum.startSessionReplayRecording();
 ```
 
 After updating your configuration, you can override elements of your HTML documents with the below privacy options.
