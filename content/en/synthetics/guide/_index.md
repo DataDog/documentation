@@ -43,6 +43,8 @@ cascade:
 {{< whatsnext desc="Datadog Integrations:" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of the RUM Explorer in Synthetics{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/rum-to-synthetics" >}}Generate Synthetics browser tests out of RUM Session Replays{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics:" >}}
