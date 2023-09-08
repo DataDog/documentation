@@ -52,8 +52,7 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `intake.profile.`{{< region-param key="dd_site" code="true" >}}
 
 [Real User Monitoring (RUM)][6]
-: `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
-`session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
+: {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
 [Synthetic Monitoring Private Locations][8]
 : Synthetics Worker v1.5.0 or later: `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint you need to configure.<br>
