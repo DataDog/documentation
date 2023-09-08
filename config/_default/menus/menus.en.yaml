@@ -2302,7 +2302,7 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 506
-  - name: Connect Test Visibility
+  - name: Integrate Test Visibility
     url: continuous_integration/integrate_tests/
     parent: ci
     identifier: ci_integrate_tests
