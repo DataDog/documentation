@@ -5,6 +5,7 @@ disable_sidebar: true
 aliases:
     - /integrations/verisign_openhybrid/
     - /integrations/snyk/
+    - /integrations/apigee/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
