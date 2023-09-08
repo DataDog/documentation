@@ -12,15 +12,17 @@ further_reading:
 
 ## Overview
 
-There are 3 main ways the Datadog Tracers send their data to the Datadog Agent for the proper handling. Those are: Host IP, Unix Domain Socket (UDS), and the Kubernetes service. These options are all setup in a way to ensure the APM data the application pod sends arrive to the Datadog Agent pod on the same node. This strategy is meant to properly balance the traffic and ensure the correct tagging of your data.
+In Kubernetes Datadog tracers can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data it arrives to the Datadog Agent pod on the same node.
+
+This strategy is meant to properly balance traffic and ensure the correct tagging of your data.
 
 Datadog recommends to utilize the UDS strategy to send data. However, the Kubernetes service can be used as an alternative option when the `hostPath` volumes required for UDS and the `hostPort` ports required for the Host IP method are not available.
 
 ## Service setup
 
-In Kubernetes you can take advantage of [services][1] to help route traffic to downstream pods. One limitation of the default service configuration is that this routes the traffic to the downstream pods at random. In Kubernetes 1.22 the [Internal Traffic Policy feature][2] was added, giving the option to set the configuration `internalTrafficPolicy: Local` on the service. When set this directs the traffic from an application pod to the service's downstream pod *on the same node*. Maintaining that strategy of routing the APM data to the Datadog Agent on the same node.
+In Kubernetes 1.22 the [Internal Traffic Policy feature][1] was added, giving the option to set the configuration `internalTrafficPolicy: Local` on the service. When set this directs the traffic from an application pod to the service's downstream pod *on the same node*.
 
-This service is created for you automatically in our Datadog Helm Chart and Datadog Operator on Kubernetes clusters with version 1.22.0 or above. You additionally need to enable the APM port option for your Agent with the below configuration.
+A service for the Agent using this feature is created for you automatically in our Datadog Helm Chart and Datadog Operator on Kubernetes clusters with version 1.22.0 or above. You additionally need to enable the APM port option for your Agent with the below configuration.
 
 ### Agent Configuration
 {{< tabs >}}
@@ -53,7 +55,7 @@ spec:
 To take advantage of the service the Datadog Tracer needs the `DD_AGENT_HOST` environment variable set relative to the created service. 
 
 ### Admission controller
-The [Cluster Agent's Admission Controller][3] can simplify the configuration for APM by injecting the environment variables for connectivity. This has the configuration mode of `hostip`, `socket`, or `service` relative to the 3 options. When choosing the configuration mode of `service` the Admission Controller adds the `DD_AGENT_HOST` with the proper service name and namespace format.
+The [Cluster Agent's Admission Controller][2] can inject the configuration for APM connectivity into your containers. This has the configuration mode of `hostip`, `socket`, or `service` relative to the 3 options. Choose the `service` mode to have the Admission Controller add the `DD_AGENT_HOST` environment variable for the DNS name of the service.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -133,6 +135,5 @@ In this above example the `DD_AGENT_HOST` should be set to `datadog.monitoring.s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://kubernetes.io/docs/concepts/services-networking/service/
-[2]: https://kubernetes.io/docs/concepts/services-networking/service-traffic-policy/
-[3]: /containers/cluster_agent/admission_controller
+[1]: https://kubernetes.io/docs/concepts/services-networking/service-traffic-policy/
+[2]: /containers/cluster_agent/admission_controller
