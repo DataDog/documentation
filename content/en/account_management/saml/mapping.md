@@ -21,7 +21,7 @@ You can map attributes to the following principals:
 
 ## Prerequisites
 
-It's important to understand what is sent in an assertion before turning on mappings, as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][3]. Datadog recommends cross-referencing with [built-in browser tooling][4] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][5] **before** creating mappings.
+It's important to understand what is sent in an assertion before turning on mappings, as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][3]. Datadog recommends cross-referencing with [built-in browser tooling][4] such as Chrome DevTools or browser extensions and [validating your SAML assertions][5] **before** creating mappings.
 
 ## Map SAML attributes to Datadog roles
 
