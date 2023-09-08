@@ -18,12 +18,50 @@ The following features are part of the [Datadog Incident Management][2] product.
 
 ## Generate incident summaries and scheduled updates
 
-TODO
+To generate an incident summary,
+1. Join an incident channel on Slack that is linked to the Datadog Incidents app.
+1. View the incident summary when you join. Summaries are only displayed in channels with 15 or more messages. Only you will see the summary, and it will not persist across reloads, between desktop and mobile apps, or across sessions.
 
-## Ask questions and update incidents
+To schedule an update,
+1. Ask `@Datadog Give me an update in X minutes` in the desired incident Slack channel.
+1. Follow the instructions to connect your Datadog account and adjust the preferences.
 
-TODO
+[SCREENSHOT OF SUMMARY + UPDATE REQUEST]
+
+## Ask questions
+
+You can use the Bits AI chatbot in Slack to ask customized questions about your incident: `@Datadog I am a customer relations manager, and my customer is asking for an update on incident 2781. Can you give me a few bullet points that I can send to my customer?`
+
+[SCREENSHOT]
+
+## Update the severity level and status
+
+- Severity level: `@Datadog Update incident 2781 severity to SEV-3`
+- Status: `@Datadog Update incident 2781 status to resolved`
 
 ## Generate a first draft of a postmortem
 
-TODO
+To generate an AI-assisted postmortem draft,
+
+1. Ensure that the incident is resolved and that the timeline has 15 or more messages
+1. Click the "Generate Postmortem" button.
+1. Select the AI template.
+1. Allow up to one minute for the postmortem to be generated. Do not close the tab during this time.
+1. Review the generated postmortem. AI-generated postmortems serve as a first draft to help your incident responders get started, and they require human revisions.
+
+## Replace an existing postmortem
+
+If an incident already has a linked postmortem, you can unlink it before [generating a new postmortem](#generate-a-first-draft-of-a-postmortem). All postmortems are still accessible in the incident's Notebook.
+
+1. Navigate to [PAGE GOES HERE].
+1. Click **Postmortem**.
+1. Click the trash icon.
+
+## Customize the postmortem template
+
+1. Navigate to **Service Management > Settings > Postmortems**.
+[SCREENSHOT]
+1. Click **New Postmortem Template** and customize your template using the provided incident variables.  
+    - Variables prefixed by `ai`, such as `incident.ai_action_items`, yield AI-generated content instead of fixed values.
+    - You must use a heading before each variable.
+1. Save your template to make it available as a template option during [postmortem generation](#generate-a-first-draft-of-a-postmortem).

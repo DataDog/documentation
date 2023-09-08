@@ -18,19 +18,21 @@ further_reading:
 
 <div class="alert alert-info">Bits AI is in private beta.</div>
 
-Bits AI is a generative AI interface that helps you investigate and remediate issues with your applications and infrastructure. It surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more.
+Bits AI is a generative AI interface that helps you identify, remediate, and summarize issues in your applications and infrastructure. It surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more.
 
 ## Features
 
 ### Query data in natural language
 
-Bits AI supports natural language querying for logs, APM traces, and infrastructure data. It will also expand on issues with upstream and downstream dependencies.
+Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost.
 
 In Datadog or in Slack, you can ask Bits AI questions in natural language, such as
 - What is going on with example-service?
 - Are there any issues with example-service's dependencies?
 - Who is on call for example-service?
 - Find me the example-service dashboard.
+
+Bits AI also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
 For details, see [Getting Started](#getting-started) and [Query Examples][3].
 
@@ -47,9 +49,13 @@ For details, see [Managing Incidents][4].
 
 ### Run workflows in Slack
 
-If you have Datadog Workflows configured, you can trigger them from Slack. For example, sending `@Datadog Give me a workflow to block IPs in Cloudflare` initiates a conversation in which the chatbot will confirm the desired workflow and ask for any required parameters.
+If you have Datadog Workflows configured, you can trigger them from Slack. For example, sending `@Datadog Give me a workflow to block IPs in Cloudflare` starts a conversation in which the chatbot confirms the desired workflow and asks for any required parameters.
 
 [SCREENSHOT OF SLACK WORKFLOWS]
+
+## Privacy
+
+[FIND THE INFO IN THE SAFEBASE REPO TO SUMMARIZE]
 
 ## Getting started
 
@@ -61,9 +67,9 @@ Bits AI can be accessed from its dedicated chat panel and from the search bars o
 
 To open the chat panel, click on **Ask Bits AI** at the bottom of the navigation bar, or use **Cmd + /** to show or hide the chat panel.
 
-[SCREENSHOT OF NAV]
+[SCREENSHOT OF NAV, bits-ai-nav]
 
-[SCREENSHOT OF CHAT PANEL]
+[SCREENSHOT OF CHAT PANEL, chat-panel]
 
 Some responses from Bits AI include a suggestions button. Clicking it displays additional queries that apply to the conversation's context.
 
@@ -71,9 +77,9 @@ Some responses from Bits AI include a suggestions button. Clicking it displays a
 
 Some Datadog search bars support natural language querying. Where available, the feature can be accessed by typing a space into the search bar, then choosing from the suggested queries or typing a new query.
 
-[SEARCH BAR WITH PROMPT TO TYPE A SPACE]
+[SEARCH BAR WITH PROMPT TO TYPE A SPACE, ai-enabled-search-bar]
 
-[LOGS SEARCH BAR AFTER TYPING A SPACE]
+[LOGS SEARCH BAR AFTER TYPING A SPACE, search-bar-with-ai-suggestions]
 
 ### In Slack
 
@@ -81,14 +87,14 @@ Some Datadog search bars support natural language querying. Where available, the
 1. Use the `/dd connect` command to display a list of accounts to connect to.
    [SCREENSHOT OF MODAL]
 1. Choose **Traveloka Dev** in the dropdown.
-1. Authorize additional permissions needed by Bits AI. [LINK?]
+1. Authorize additional permissions needed by Bits AI.
 1. 
 
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
 ## Feedback
 
-Bits AI is in active development, and your feedback is valuable. To report issues, request features, or 
+Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
 
 [1]: /integrations/slack/?tab=applicationforslack
 [2]: https://www.datadoghq.com/product/incident-management/
