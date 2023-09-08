@@ -11,12 +11,6 @@ aliases:
   - /security/default_rules/cis-aws-1.3.0-1.14
 disable_sidebar: true
 cascade:
-- _target:
-    path: /security/default_rules/google-cloud-storage-bucket-enumerated.md
-  aliases:
-    - /security_monitoring/default_rules/gcp-gcs-bucket-enumerated
-- _target:
-    path: /security/default_rules/*.md
   algolia:
     rank: 11
     category: Documentation
