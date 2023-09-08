@@ -53,7 +53,7 @@ Alternatively, you can create and change mappings of SAML attributes to Datadog 
   Mapping SAML attributes to Teams is in beta. To request access, contact Support.
 {{< /callout >}}
 
-1. Ensure you selected either **SAML** or **All sources** when choosing your [provisioning source] for team memberships.
+1. Ensure you selected either **SAML** or **All sources** when choosing your [provisioning source][7] for team memberships.
 2. [Cross-reference][4] and [validate][5] your SAML assertion to understand your IdP's attributes.
 3. Go to **Organization Settings** and click the **SAML Group Mappings** tab.
 4. Ensure the **Team Mappings** tab is selected.
@@ -75,3 +75,4 @@ Make changes to a mapping by clicking the pencil (**Edit**) icon, or remove a ma
 [4]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
 [5]: https://www.samltool.com/validate_response.php
 [6]: /account_management/authn_mapping/
+[7]: /account_management/teams/#choose-provisioning-source
