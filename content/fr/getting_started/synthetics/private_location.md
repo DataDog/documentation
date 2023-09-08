@@ -22,7 +22,7 @@ Pour être ajouté à la version bêta des emplacements privés Windows, contact
 
 ## Présentation
 
-Les emplacements privés vous permettent de **surveiller des applications internes** ou des URL privées qui ne sont pas accessibles sur l'Internet public. 
+Les emplacements privés vous permettent de **surveiller des applications internes** ou des URL privées qui ne sont pas accessibles sur l'Internet public.
 
 {{< img src="getting_started/synthetics/pl-list.png" alt="Liste des emplacements privés dans votre page Settings" style="width:100%;">}}
 

@@ -14,8 +14,9 @@ title: データベースモニタリングガイド
 {{< /site-region >}}
 
 {{< whatsnext desc="全般ガイド:" >}}
-    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Heroku Postgres のデータベースモニタリングのためのセットアップ{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/heroku-postgres" >}}Heroku Postgres の Database Monitoring のためのセットアップ{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/tag_database_statements" >}}データベースステートメントのタグ付け{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/managed_authentication" >}}マネージド認証との接続{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL Server ガイド:" >}}

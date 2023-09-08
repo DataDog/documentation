@@ -236,7 +236,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 Podman の構成は Docker と非常に似ていますが、ICMP テストに対応するため、追加機能として `NET_RAW` を設定する必要があります。
 
-1. コンテナが動作するホストから、`sysctl -w net.ipv4.ping_group_range = 0 2147483647` を実行します。
+1. コンテナが動作するホストから、`sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` を実行します。
 2. このコマンドを実行すると、コンフィギュレーションファイルをコンテナにマウントしてプライベートロケーションのワーカーが起動します。コンテナにマウントするために、`<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルがアクセス可能であることを確認します。
 
    ```shell

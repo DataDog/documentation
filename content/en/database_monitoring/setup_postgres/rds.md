@@ -42,15 +42,15 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][13].
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
 
 ## Configure Postgres settings
 
-Configure the following [parameters][3] in the [DB parameter group][4] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
+Configure the following [parameters][4] in the [DB parameter group][5] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][6].
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][6] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
@@ -62,9 +62,9 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
+The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][7].
 
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][8] by running:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
@@ -76,7 +76,7 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** IAM authentication is also supported. Please see [the guide][14] on how to configure this for your RDS instance.
+**Note:** IAM authentication is also supported. Please see [the guide][9] on how to configure this for your RDS instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -192,7 +192,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][8].
+To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][10].
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -246,7 +246,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "port": 5432,
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>",
-    "tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+    "tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
@@ -267,7 +267,7 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>","tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>","tags": ["dbinstanceidentifier:<DB_INSTANCE_NAME>"]}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -311,7 +311,7 @@ instances:
     username: datadog
     password: <UNIQUEPASSWORD>
     tags:
-      - dbinstanceidentifier:"<DB_INSTANCE_NAME>"' \
+      - dbinstanceidentifier:<DB_INSTANCE_NAME>' \
   datadog/datadog
 ```
 
@@ -366,7 +366,9 @@ metadata:
           "port": 5432,
           "username": "datadog",
           "password": "<UNIQUEPASSWORD>",
-          "tags": "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+          "tags": [
+            "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+          ]
         }
       ]
 spec:
@@ -397,18 +399,18 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ### Validate
 
-[Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
+[Run the Agent's status subcommand][11] and look for `postgres` under the Checks section. Or visit the [Databases][12] page to get started!
 
 ## Example Agent Configurations
 {{% dbm-postgres-agent-config-examples %}}
 
 ## Install the RDS Integration
 
-To collect more comprehensive database metrics from AWS, install the [RDS integration][11] (optional).
+To collect more comprehensive database metrics from AWS, install the [RDS integration][13] (optional).
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][12]
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][14]
 
 ## Further reading
 
@@ -417,15 +419,15 @@ If you have installed and configured the integrations and Agent as described and
 
 [1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/data_collected/#sensitive-information
-[3]: https://www.postgresql.org/docs/current/config-setting.html
-[4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
-[5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /integrations/faq/postgres-custom-metric-collection-explained/
-[7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings/agent/latest
-[9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: https://app.datadoghq.com/databases
-[11]: /integrations/amazon_rds
-[12]: /database_monitoring/troubleshooting/?tab=postgres
-[13]: https://app.datadoghq.com/integrations/amazon-web-services
-[14]: /database_monitoring/guide/managed_authentication
+[3]: https://app.datadoghq.com/integrations/amazon-web-services
+[4]: https://www.postgresql.org/docs/current/config-setting.html
+[5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
+[6]: https://www.postgresql.org/docs/current/pgstatstatements.html
+[7]: /integrations/faq/postgres-custom-metric-collection-explained/
+[8]: https://www.postgresql.org/docs/current/app-psql.html
+[9]: /database_monitoring/guide/managed_authentication
+[10]: https://app.datadoghq.com/account/settings/agent/latest
+[11]: /agent/guide/agent-commands/#agent-status-and-information
+[12]: https://app.datadoghq.com/databases
+[13]: /integrations/amazon_rds
+[14]: /database_monitoring/troubleshooting/?tab=postgres

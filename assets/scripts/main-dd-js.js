@@ -1,4 +1,6 @@
 import Modal from 'bootstrap/js/dist/modal';
+import { getSignupFailover } from 'signup-failover';
+
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/tab';
 import 'bootstrap/js/dist/collapse';
@@ -22,8 +24,19 @@ import './components/mobile-nav'; // should move this to websites-modules
 document.querySelectorAll('.sign-up-trigger').forEach(item => {
     item.addEventListener('click', (event) => {
         event.preventDefault();
-        const signupModal = new Modal(document.getElementById('signupModal'))
-        signupModal.show(item)
+
+        getSignupFailover().then((failoverEnabled) => {
+            if (failoverEnabled) {
+                const demoModal = document.querySelector('#signupDemo');
+                const signupDemoModal = demoModal ? new Modal(demoModal) : null;
+                if(signupDemoModal) {
+                  signupDemoModal.show(item);
+                }
+            } else {
+                const signupModal = new Modal(document.getElementById('signupModal'))
+                signupModal.show(item)
+            }
+        });
     })
 })
 
