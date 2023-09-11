@@ -13,7 +13,7 @@ is_beta: true
 - The "Mirror all incident Slack channel messages to its incident timeline in real-time" option must be turned on in your Incident Settings. This enables Datadog to generate summaries and postmortems from Slack conversations.
 - The incident channel name must be prefixed with `#incident-`. This enables you to use the Bits AI chatbot in Slack (`@Datadog`) to ask questions about the incident or give updates on it.
 
-[INTEGRATION SETTINGS SCREENSHOT]
+<span style='background-color: yellow'>[INTEGRATION SETTINGS SCREENSHOT]</span>
 
 ## Generate incident summaries and scheduled updates
 
@@ -25,13 +25,13 @@ To schedule an update,
 1. Ask `@Datadog Give me an update in X minutes` in the desired incident Slack channel.
 1. Follow the instructions to connect your Datadog account and adjust the preferences.
 
-[SCREENSHOT OF SUMMARY + UPDATE REQUEST]
+<span style='background-color: yellow'>[SCREENSHOT OF SUMMARY + UPDATE REQUEST]</span>
 
 ## Ask questions
 
 You can use the Bits AI chatbot in Slack to ask customized questions about your incident: `@Datadog I am a customer relations manager, and my customer is asking for an update on incident 2781. Can you give me a few bullet points that I can send to my customer?`
 
-[SCREENSHOT]
+<span style='background-color: yellow'>[SCREENSHOT]</span>
 
 ## Update the severity level and status
 
@@ -42,8 +42,9 @@ You can use the Bits AI chatbot in Slack to ask customized questions about your 
 
 To generate an AI-assisted postmortem draft,
 
-1. Ensure that the incident is resolved and that the timeline has 15 or more messages
-1. Click the "Generate Postmortem" button.
+1. Navigate to the incident page in Datadog. For example, to view Incident 2679, you might search for `2679` on the [**Incidents**][2] page and click the relevant match.
+1. Ensure that the incident is resolved and that the timeline has 15 or more messages.
+1. Click the **Generate Postmortem** button.
 1. Select the AI template.
 1. Allow up to one minute for the postmortem to be generated. Do not close the tab during this time.
 1. Review the generated postmortem. AI-generated postmortems serve as a first draft to help your incident responders get started, and they require human revisions.
@@ -52,15 +53,17 @@ To generate an AI-assisted postmortem draft,
 
 If an incident already has a linked postmortem, you can unlink it before [generating a new postmortem](#generate-a-first-draft-of-a-postmortem). All postmortems are still accessible in the incident's Notebook.
 
-1. Navigate to [PAGE GOES HERE].
+1. Navigate to the incident page in Datadog. For example, to view Incident 2679, you might search for `2679` on the [**Incidents**][2] page and click the relevant match.
 1. Click **Postmortem**.
 1. Click the trash icon.
 
 ## Customize the postmortem template
 
-1. Navigate to **Service Management > Settings > Postmortems**.
-[SCREENSHOT]
+1. Navigate to [**Service Management > Settings > Postmortems**][1].
 1. Click **New Postmortem Template** and customize your template using the provided incident variables.  
     - Variables prefixed by `ai`, such as `incident.ai_action_items`, yield AI-generated content instead of fixed values.
     - You must use a heading before each variable.
 1. Save your template to make it available as a template option during [postmortem generation](#generate-a-first-draft-of-a-postmortem).
+
+[1]: https://app.datadoghq.com/incidents/settings#Postmortems
+[2]: https://app.datadoghq.com/incidents
