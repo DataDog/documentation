@@ -77,6 +77,18 @@ if (scope != null) {
 ```
 {{% /tab %}}
 
+{{% tab "Ruby" %}}
+
+```ruby
+require 'ddtrace'
+
+# inside your test
+Datadog::Tracing.active_span&.set_tag('test.memory.usage', 1e8)
+# test continues normally
+# ...
+```
+
+{{% /tab %}}
 
 {{% tab "JUnit Report Uploads" %}}
 

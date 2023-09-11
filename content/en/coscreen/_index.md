@@ -79,6 +79,28 @@ Screen sharing is deactivated by default when you join a CoScreen.
 
 You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. When viewing a remote window, two tabs appear: **Control**, which enables you to interact with the window, click on buttons, and type into text fields; and **Draw**, which enables you to draw on the window.
 
+### Collaborate in CoTerm, a shared terminal
+
+CoTerm is a collaborative terminal built into CoScreen that enables users to run commands and to write and debug code together.
+
+To start shared terminal, click on the **Share terminal** button in the meeting menu:
+
+{{< img src="coscreen/share_terminal.png" alt="A panel of buttons from the CoScreen desktop UI. The 'Share terminal' button is highlighted." style="width:70%;">}}
+
+Then, confirm the onboarding dialog:
+
+{{< img src="coscreen/coterm_dialog.png" alt="The CoTerm onboarding dialog, with an option to allow remote control selected." style="width:50%;">}}
+
+The shared terminal appears for you and all other participants in the CoScreen session. If you enable remote control in CoScreen, other users can type and click into your terminal.
+
+{{< img src="coscreen/coterm.png" alt="A CoTerm window." style="width:60%;">}}
+
+To stop sharing, click the **Unshare** tab on the terminal window, or on the button in the meeting menu. 
+
+For privacy, CoTerm uses [Sensitive Data Scanner][8] and entropy filters to detect and obfuscate sensitive data.
+
+**Note**: Unsharing closes the terminal.
+
 ### Integrations
 
 You can integrate CoScreen with Slack, Google Calendar, VS Code, and other apps. [See all CoScreen integrations.][3]
@@ -121,3 +143,4 @@ For all the details on how CoScreen enables secure collaboration, read the [CoSc
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
+[8]: /sensitive_data_scanner/

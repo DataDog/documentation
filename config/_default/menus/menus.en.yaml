@@ -222,75 +222,85 @@ main:
     url: agent/basic_agent_usage/amazonlinux/
     weight: 102
     parent: basic_agent_usage
+  - name: Alma Linux
+    identifier: basic_agent_usage_alma_linux
+    url: agent/basic_agent_usage/centos/
+    weight: 103
+    parent: basic_agent_usage
   - name: Ansible
     identifier: basic_agent_usage_ansible
     url: agent/basic_agent_usage/ansible/
     parent: basic_agent_usage
-    weight: 103
+    weight: 104
   - name: CentOS
     identifier: basic_agent_usage_centos
     url: agent/basic_agent_usage/centos/
-    weight: 104
+    weight: 105
     parent: basic_agent_usage
   - name: Chef
     identifier: basic_agent_usage_chef
     url: agent/basic_agent_usage/chef/
-    weight: 105
+    weight: 106
     parent: basic_agent_usage
   - name: Debian
     identifier: basic_agent_usage_deb
     url: agent/basic_agent_usage/deb/
-    weight: 106
+    weight: 107
     parent: basic_agent_usage
   - name: Fedora
     identifier: basic_agent_usage_fedora
     url: agent/basic_agent_usage/fedora/
-    weight: 107
+    weight: 108
     parent: basic_agent_usage
   - name: Heroku
     identifier: basic_agent_usage_heroku
     url: agent/basic_agent_usage/heroku/
-    weight: 108
+    weight: 109
     parent: basic_agent_usage
   - name: Mac OS X
     identifier: basic_agent_usage_osx
     url: agent/basic_agent_usage/osx/
-    weight: 109
+    weight: 110
     parent: basic_agent_usage
   - name: Puppet
     identifier: basic_agent_usage_puppet
     url: agent/basic_agent_usage/puppet/
-    weight: 110
+    weight: 111
     parent: basic_agent_usage
   - name: Red Hat
     identifier: basic_agent_usage_redhat
     url: agent/basic_agent_usage/redhat/
-    weight: 111
+    weight: 112
+    parent: basic_agent_usage
+  - name: Rocky Linux
+    identifier: basic_agent_usage_rockylinux
+    url: agent/basic_agent_usage/centos/
+    weight: 113
     parent: basic_agent_usage
   - name: SaltStack
     identifier: basic_agent_usage_saltstack
     url: agent/basic_agent_usage/saltstack/
-    weight: 112
+    weight: 114
     parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
-    weight: 113
+    weight: 115
     parent: basic_agent_usage
   - name: Ubuntu
     identifier: basic_agent_usage_ubuntu
     url: agent/basic_agent_usage/ubuntu/
-    weight: 114
+    weight: 116
     parent: basic_agent_usage
   - name: Windows
     identifier: basic_agent_usage_windows
     url: agent/basic_agent_usage/windows/
-    weight: 115
+    weight: 117
     parent: basic_agent_usage
   - name: From Source
     identifier: basic_agent_usage_source
     url: agent/basic_agent_usage/source/
-    weight: 116
+    weight: 118
     parent: basic_agent_usage
   - name: IoT
     url: agent/iot/
@@ -877,11 +887,16 @@ main:
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: Tag Pipelines
+    url: cloud_cost_management/tag_pipelines
+    parent: cloud_cost_top_level
+    identifier: tag_pipelines
+    weight: 1
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 1
+    weight: 2
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1311,6 +1326,11 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_logic_actions
     weight: 102
+  - name: Save and Reuse Actions
+    url: service_management/workflows/actions_catalog/saved_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_saved_actions
+    weight: 103
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
@@ -2297,6 +2317,11 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_javascript
     weight: 503
+  - name: Python
+    url: continuous_integration/intelligent_test_runner/python/
+    parent: intelligent_test_runner
+    identifier: ci_itr_python
+    weight: 504
   - name: Swift
     url: continuous_integration/intelligent_test_runner/swift/
     parent: intelligent_test_runner
@@ -2783,6 +2808,11 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
+  - name: Excluding Logs
+    url: logs/error_tracking/excluding_logs
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_excluding_logs
+    weight: 605
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -3356,6 +3386,11 @@ main:
     parent: synthetics_explorer
     identifier: continuous_testing_explorer_search_syntax
     weight: 603
+  - name: Saved Views
+    url: continuous_testing/explorer/saved_views/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_saved_views
+    weight: 604
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics

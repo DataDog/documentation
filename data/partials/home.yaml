@@ -67,7 +67,7 @@ nav_sections:
       - title: Security
         link: security/
         icon: security-platform
-        desc: Detect threats, vulnerabilities, and misconfigurations in your applications and infrastructure
+        desc: Detect threats, vulnerabilities, and misconfigurations
       - title: Synthetic Monitoring
         link: synthetics/
         icon: synthetics

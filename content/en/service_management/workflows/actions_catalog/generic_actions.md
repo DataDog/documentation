@@ -2,7 +2,8 @@
 title: Generic Actions
 kind: documentation
 disable_toc: false
-type: workflows
+disable_sidebar: false
+type: documentation
 is_beta: true
 aliases:
 - /workflows/generic_actions

@@ -35,10 +35,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Javascript and Typescript][2]. If you are reporting data through the Agent, use v6.40+/v7.40+.
 
-### UI activation
-You or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+{{% ci-itr-activation-instructions %}}
 
 ### Configuring the test runner environment
 
@@ -69,14 +66,18 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 
 {{< /tabs >}}
 
-
 ### Cypress setup
 
-For Intelligent Test Runner for Cypress to work, you must instrument your web application with code coverage. You can read more about enabling code coverage in the [Cypress documentation][4]. To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the global variable `window.__coverage__`. This is what `dd-trace` uses to collect code coverage for Intelligent Test Runner.
+For Intelligent Test Runner for Cypress to work, you must instrument your web application with code coverage. You can read more about enabling code coverage in the [Cypress documentation][3]. To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the global variable `window.__coverage__`. This is what `dd-trace` uses to collect code coverage for Intelligent Test Runner.
 
 
-#### Suite skipping
+## Suite skipping
 Intelligent Test Runner for Javascript skips entire _test suites_ (test files) rather than individual tests.
+
+
+## Inconsistent test durations
+
+In some frameworks, such as `jest`, there are cache mechanisms that make tests faster after other tests have run (see [jest cache][4] docs). If Intelligent Test Runner is skipping all but a few test files, these suites might run slower than they usually do. This is because they run with a colder cache. Regardless of this, total execution time for your test command should still be reduced.
 
 ## Further Reading
 
@@ -84,5 +85,5 @@ Intelligent Test Runner for Javascript skips entire _test suites_ (test files) r
 
 [1]: https://www.npmjs.com/package/nyc
 [2]: /continuous_integration/tests/javascript
-[3]: https://app.datadoghq.com/ci/settings/test-service
-[4]: https://docs.cypress.io/guides/tooling/code-coverage#Instrumenting-code
+[3]: https://docs.cypress.io/guides/tooling/code-coverage#Instrumenting-code
+[4]: https://jestjs.io/docs/cli#--cache

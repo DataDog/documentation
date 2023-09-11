@@ -64,7 +64,7 @@ To see your tests, navigate to [**CI** > **Tests**][8] and select between the [*
 
 ### Branches view
 
-The [Branches][2] view of the Tests page lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
+The [Branches][2] view of the Tests page lists all branches from all [test services][11] that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
 
 In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you), enable the **My branches** toggle and add the email addresses you use in your Git configuration.
 
@@ -78,20 +78,13 @@ Click on a branch to explore the test details page, which includes information a
 
 #### Test suite performance
 
-There is also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
+There is also information about the [wall time][10] of the most recent test suite run, and a comparison to the average wall time of the default branch. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance [regressions][12] to your test suite.
 
 Hovering over the commit author avatar shows detailed information about the latest commit.
 
 #### Test regressions
 
-A test run is marked as a regression when its duration is both five times the mean and greater than the max duration for the same test in the default branch.
-
-A benchmark test run is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch. A benchmark test has `@test.type:benchmark`.
-
-The mean and the max of the default branch is calculated over the last week of test runs.
-
 Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
-
 #### Investigate for more details
 
 Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
@@ -104,7 +97,7 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 
 ### Default Branches view
 
-A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
+The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
 The Default Branches view shows similar information to the Branches view, but applied to the default branch. It compares the current wall time with the average default branch wall time to give you an indication of how your test suite performance is trending over time.
 
@@ -223,3 +216,7 @@ Job log collection is supported for the following providers:
 [6]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/test-services
+[9]: /glossary/#flaky-test
+[10]: /glossary/#wall-time
+[11]: /glossary/#test-service
+[12]: /glossary/#test-regression

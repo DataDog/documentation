@@ -94,8 +94,8 @@ Once [log collection is enabled][3], set up [custom log collection][4] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/go/log.log"
-        service: go
+        path: "<path_to_your_go_log>.log"
+        service: <service_name>
         source: go
         sourcecategory: sourcecode
     ```
