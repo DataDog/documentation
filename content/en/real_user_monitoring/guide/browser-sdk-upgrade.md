@@ -12,11 +12,16 @@ further_reading:
 
 ## Overview
 
-Follow this guide to migrate between major versions of the RUM and Logs Browser SDKs.
+Follow this guide to migrate between major versions of the Browser RUM and Logs Browser SDKs.
 
 ## From v4 to v5
 
-Browser RUM and Browser Logs SDKs v5 are available as of tk. We've introduced new configurations and privacy defaults for Session Replay, added the automatic collection of frustration signals, updated our performance metrics, updated our SDK parameters and APIs, and more.
+V5 introduces the following changes, including, but not limited to:
+
+- New configurations and privacy defaults for Session Replay
+- Added the automatic collection of frustration signals
+- Updated our performance metrics
+- Updated our SDK parameters and APIs
 
 Take notice of the below breaking changes as you upgrade your SDK. Changes are grouped by area of impact.
 
@@ -119,9 +124,9 @@ With v5, the default `sessionReplaySampleRate` is 0 instead of 100. This means t
 
 ### Session plan field
 
-Related to session replay changes, the `session.plan` field is now only available on session events.
+In relation to Session Replay changes, the `session.plan` field is now only available for session events.
 
-**Action to take**: Update monitor or dashboard queries to not use the `session.plan` field with events that are not sessions.
+**Action to take**: Update any monitor or dashboard queries you have saved to exclude the `session.plan` field for non-session events.
 
 #### Frustration signals are collected automatically
 We've simplified the collection of user interactions so that you only need to set `trackUserInteractions: true` to collect all interactions, including frustration signals. This means that you no longer need to set the `trackFrustrations` parameter separately.
@@ -232,7 +237,6 @@ For example, for the following `container` element, where previously the compute
   <div data-dd-action-name="sensitive">sensitive data</div>
 </div>
 ```
-
 
 ### Removals
 
