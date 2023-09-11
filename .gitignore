@@ -32,6 +32,7 @@ content/en/developers/datadog_apps.md
 content/en/developers/integrations/api_integration.md
 content/en/developers/integrations/agent_integration.md
 content/en/developers/integrations/log_integration.md
+content/en/developers/integrations/create-an-integration-recommended-monitor.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
