@@ -229,7 +229,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
        azure:
         deployment_type: '<DEPLOYMENT_TYPE>'
-        name: '<AZURE_INSTANCE_ENDPOINT>'
+        fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
 2. [Restart the Agent][2].
 
@@ -337,7 +337,7 @@ instances:
     ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -365,7 +365,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -399,7 +399,7 @@ metadata:
           "ssl": true,
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]

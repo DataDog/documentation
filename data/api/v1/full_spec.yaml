@@ -7000,18 +7000,20 @@ components:
     MonitorSearchCount:
       description: Search facets.
       items:
-        description: A facet item.
-        properties:
-          count:
-            description: The number of found monitors with the listed value.
-            format: int64
-            readOnly: true
-            type: integer
-          name:
-            description: The facet value.
-            readOnly: true
-        type: object
+        $ref: '#/components/schemas/MonitorSearchCountItem'
       type: array
+    MonitorSearchCountItem:
+      description: A facet item.
+      properties:
+        count:
+          description: The number of found monitors with the listed value.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: The facet value.
+          readOnly: true
+      type: object
     MonitorSearchResponse:
       description: The response form a monitor search.
       example:
@@ -12393,6 +12395,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetic multistep API test.
@@ -17449,6 +17453,12 @@ components:
     UsageProfilingHour:
       description: The number of profiled hosts for each hour for a given organization.
       properties:
+        aas_count:
+          description: Contains the total number of profiled Azure app services reporting
+            during a given hour.
+          format: int64
+          nullable: true
+          type: integer
         avg_container_agent_count:
           description: Get average number of container agents for that hour.
           format: int64
@@ -18092,6 +18102,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        profiling_aas_count_top99p:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current date for all organizations.
@@ -18520,6 +18535,11 @@ components:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             date for the given org.
+          format: int64
+          type: integer
+        profiling_aas_count_top99p:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         profiling_host_top99p:
@@ -18982,6 +19002,11 @@ components:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             months for all organizations.
+          format: int64
+          type: integer
+        profiling_aas_count_top99p_sum:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         profiling_container_agent_count_avg:
@@ -20297,6 +20322,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
@@ -21095,6 +21121,21 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: The maximum number of dashboards returned in the list.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: start
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -21119,6 +21160,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 3
+      x-pagination:
+        limitParam: count
+        pageOffsetParam: start
+        resultsPath: dashboards
       x-undo:
         type: safe
     patch:
@@ -25912,6 +25957,7 @@ paths:
         name: page_size
         required: false
         schema:
+          default: 100
           example: 20
           format: int32
           maximum: 1000
@@ -25948,6 +25994,9 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-pagination:
+        limitParam: page_size
+        pageParam: page
       x-undo:
         type: safe
     post:
@@ -27284,6 +27333,7 @@ paths:
         name: count
         required: false
         schema:
+          default: 100
           example: 5
           format: int64
           type: integer
@@ -27369,6 +27419,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 2
+      x-pagination:
+        limitParam: count
+        pageOffsetParam: start
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -28420,6 +28474,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 1000
           format: int64
           type: integer
       - description: The specific offset to use as the beginning of the returned response.
@@ -28465,6 +28520,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29495,14 +29554,19 @@ paths:
       - description: Used for pagination. The number of tests returned in the page.
         in: query
         name: page_size
+        required: false
         schema:
-          type: string
+          default: 100
+          format: int64
+          type: integer
       - description: Used for pagination. Which page you want to retrieve. Starts
           at zero.
         in: query
         name: page_number
+        required: false
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -29533,6 +29597,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-pagination:
+        limitParam: page_size
+        pageParam: page_number
+        resultsPath: tests
       x-undo:
         type: safe
     post:

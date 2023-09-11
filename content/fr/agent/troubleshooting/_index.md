@@ -38,7 +38,7 @@ Si vous pensez que vous rencontrez un problème, commencez par consulter cette l
 * Le conteneur de votre Agent s'arrête juste après avoir été lancé ? Il s'agit peut-être d'un problème de détection du [hostname][3].
 * Votre host est-il connecté à Internet, ou peut-il y accéder par l'intermédiaire d'un proxy ?
 * Si vous utilisez un proxy : votre [Agent est-il configuré pour ce proxy][4] ?
-* La clé d'API Datadog indiquée dans votre fichier de configuration `datadog.yaml` correspond-elle à [la clé d'API de votre plate-forme Datadog][4] ?
+* La clé d'API Datadog indiquée dans votre fichier de configuration `datadog.yaml` correspond-elle à [la clé d'API sur la plateforme Datadog][5] ?
 * Le site configuré dans votre fichier de configuration  `datadog.yaml` [correspond-il à celui de votre organisation][5] ?
 * Exécutez-vous un seul Agent Datadog sur votre host ?
 * Avez-vous redémarré l'Agent Datadog après avoir modifié un fichier de configuration yaml ?
