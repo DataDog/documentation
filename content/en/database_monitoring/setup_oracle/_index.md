@@ -46,7 +46,7 @@ The Agent does not need to run on the same server nor the same platform as the m
 
 #### Recommended Agent version
 
-Datadog recommends you install the beta version listed below, as these contain all the implemented Oracle monitoring features and bug fixes:
+Datadog recommends you install the beta version listed below, as this contains all the implemented Oracle monitoring features and bug fixes:
 - Linux: `7.46.0~dbm~oracle~beta~0.33-1`
 - Windows: `7.46.0-dbm-oracle-beta-0.33-1`
 - Docker: `7.46.0-dbm-oracle-beta-0.33`
