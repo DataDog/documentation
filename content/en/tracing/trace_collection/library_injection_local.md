@@ -206,6 +206,19 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 - **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
+#### Python installation issues
+
+##### Incompatible Python version
+
+The library injection mechanism for Python only supports injecting the Python library in Python versions 3.7 and above.
+
+
+##### `user-installed ddtrace found, aborting`
+
+- **Problem**: The `ddtrace` library is already installed on the system so the injection logic aborts injecting the library to avoid introducing a breaking change in the application.
+- **Solution**: Remove the installation of `ddtrace` if library injection is desired. Else, use the installed library instead of library injection.
+
+
 [1]: /containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [3]: /containers/kubernetes/installation/?tab=helm
