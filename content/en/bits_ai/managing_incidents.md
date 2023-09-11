@@ -1,13 +1,12 @@
 ---
-title: Managing Incidents with Bits AI
+title: Managing Incidents
 kind: guide
 disable_toc: false
 private: true
 is_beta: true
 ---
 
-[WARNING]
-The following features are part of the [Datadog Incident Management][2] product.
+<div class="alert alert-warning">The following features are part of the <a href="https://www.datadoghq.com/product/incident-management/">Datadog Incident Management</a> product.</div>
 
 ## Prerequisites
 

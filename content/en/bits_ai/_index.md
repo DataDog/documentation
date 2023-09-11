@@ -26,7 +26,7 @@ Bits AI is a generative AI interface that helps you identify, remediate, and sum
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost.
 
-In Datadog or in Slack, you can ask Bits AI questions in natural language, such as
+In Datadog or in Slack, you can ask Bits AI questions such as
 - What is going on with example-service?
 - Are there any issues with example-service's dependencies?
 - Who is on call for example-service?
@@ -34,7 +34,7 @@ In Datadog or in Slack, you can ask Bits AI questions in natural language, such 
 
 Bits AI also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-For details, see [Getting Started](#getting-started) and [Query Examples][3].
+For details, see [Getting Started][5] and [Query Examples][3].
 
 ### Streamline incident management
 
@@ -55,51 +55,16 @@ If you have Datadog Workflows configured, you can trigger them from Slack. For e
 
 ## Privacy
 
-[FIND THE INFO IN THE SAFEBASE REPO TO SUMMARIZE]
-
-## Getting started
-
-### In the app
-
-Bits AI can be accessed from its dedicated chat panel and from the search bars of some products.
-
-#### Querying in the chat panel
-
-To open the chat panel, click on **Ask Bits AI** at the bottom of the navigation bar, or use **Cmd + /** to show or hide the chat panel.
-
-[SCREENSHOT OF NAV, bits-ai-nav]
-
-[SCREENSHOT OF CHAT PANEL, chat-panel]
-
-Some responses from Bits AI include a suggestions button. Clicking it displays additional queries that apply to the conversation's context.
-
-#### Querying in a search bar
-
-Some Datadog search bars support natural language querying. Where available, the feature can be accessed by typing a space into the search bar, then choosing from the suggested queries or typing a new query.
-
-[SEARCH BAR WITH PROMPT TO TYPE A SPACE, ai-enabled-search-bar]
-
-[LOGS SEARCH BAR AFTER TYPING A SPACE, search-bar-with-ai-suggestions]
-
-### In Slack
-
-1. [Connect your Datadog account to your Slack workspace][1].
-1. Use the `/dd connect` command to display a list of accounts to connect to.
-   [SCREENSHOT OF MODAL]
-1. Choose **Traveloka Dev** in the dropdown.
-1. Authorize additional permissions needed by Bits AI.
-1. 
-
-After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
+[NEEDS SAFEBASE INFO TO SUMMARIZE]
 
 ## Feedback
 
 Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
 
-[1]: /integrations/slack/?tab=applicationforslack
 [2]: https://www.datadoghq.com/product/incident-management/
 [3]: /bits_ai/query_examples/
 [4]: /bits_ai/managing_incidents/
+[5]: /bits_ai/getting_started/
 
 ## Further reading
 

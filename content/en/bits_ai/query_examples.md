@@ -1,4 +1,10 @@
-# Example natural language queries
+---
+title: Example Natural Language Queries
+kind: guide
+disable_toc: false
+private: true
+is_beta: true
+---
 
 For instructions on running natural language queries in Datadog, see [Querying in a search bar][1] and [Querying in the chat panel][2].
 
@@ -6,19 +12,19 @@ For instructions on running natural language queries in Datadog, see [Querying i
 You can query your logs in natural language from the Logs Explorer search bar.
 
 - "Find errors in AWS CloudTrail where a user is assuming a different user's role"
-[SCREENSHOT cloudtrail-user-role-errors]
+{{< img src="bits_ai/cloudtrail-user-role-errors.png" alt="Screenshot of query result" style="width:90%;">}}
 - "Create a pie chart of error logs by service"
-[SCREENSHOT logs-pie-chart]
+{{< img src="bits_ai/logs-pie-chart.png" alt="Screenshot of query result" style="width:90%;">}}
 - "Show me patterns of errors for users checking out"
-[SCREENSHOT checkout-error-patterns]
+{{< img src="bits_ai/checkout-error-patterns.png" alt="Screenshot of query result" style="width:90%;">}}
 
 ## APM traces
 
 To query APM traces, use the chat panel.
 
-Examples: [SCREENSHOTS FOR EACH BELOW]
+Examples:
 - "Show me traces for web-store that are slower than 1s"
-[SCREENSHOT slow-web-store-traces]
+{{< img src="bits_ai/slow-web-store-traces.png" alt="Screenshot of query result" style="width:90%;">}}
 
 ## Infrastructure data (Inventories SQL)
 
@@ -26,9 +32,9 @@ Infrastructure resource data can be queried in natural language from the search 
 
 Examples:
 - "How many hosts am I running by availability zone?"
-[SCREENSHOT hosts-by-az]
+{{< img src="bits_ai/hosts-by-az.png" alt="Screenshot of query result" style="width:90%;">}}
 - "Show me the security groups open to the Internet"
-[SCREENSHOT open-security-groups]
+{{< img src="bits_ai/open-security-groups.png" alt="Screenshot of query result" style="width:90%;">}}
 
 ## Cloud cost
 
@@ -36,12 +42,12 @@ Natural language querying of cloud cost is available through the in-product sear
 
 Examples:
 - "How much does the payments team spend?"
-[SCREENSHOT payments-team-spend]
+{{< img src="bits_ai/payments-team-spend.png" alt="Screenshot of query result" style="width:90%;">}}
 - "Show me the costs for the web-store service"
-[SCREENSHOT web-store-service-cost]
+{{< img src="bits_ai/web-store-service-cost.png" alt="Screenshot of query result" style="width:90%;">}}
 - "Break down cost by team"
-[SCREENSHOT cost-by-team]
+{{< img src="bits_ai/cost-by-team.png" alt="Screenshot of query result" style="width:90%;">}}
 
-[1]: /bits_ai/#querying-in-a-search-bar
-[2]: /bits_ai/#querying-in-the-chat-panel
+[1]: /bits_ai/getting_started/#in-a-search-bar
+[2]: /bits_ai/getting_started/#in-the-chat-panel
 [3]: https://app.datadoghq.com/inventories/sql
