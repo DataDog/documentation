@@ -15,6 +15,14 @@ cascade:
         rank: 70
 ---
 
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Video of host map filtered to Nginx hosts" video="true">}}
+
+## Overview
+
+Infrastructure monitoring includes core Datadog features that visualize, monitor, and measure the performance of your hosts, containers, and processes.
+
+## Components
+
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/infrastructure/list" >}}<u>Infrastructure List</u> - See a list of all your hosts monitored by Datadog.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/hostmap" >}}<u>Host and Container Maps</u> - Visualize your hosts together on one screen with customized groupings, filters, and metrics made comprehensible by color and shape.{{< /nextlink >}}

@@ -28,7 +28,7 @@ Do the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -68,7 +68,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
-      name: '<SERVER_NAME>.database.windows.net'
+      fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
@@ -77,7 +77,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
-      name: '<SERVER_NAME>.database.windows.net'
+      fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
@@ -150,7 +150,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
@@ -223,7 +223,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_ENDPOINT_ADDRESS>'
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -328,7 +328,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_ENDPOINT_ADDRESS>'" \
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'" \
   datadog/datadog
 ```
 
@@ -380,7 +380,7 @@ metadata:
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_ENDPOINT_ADDRESS>"
+            "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
           }
         }
       ]
