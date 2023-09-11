@@ -43,7 +43,7 @@ Once you're collecting Session Replay data, select **Session Replay available** 
 
 ### Facets
 
-You can filter Sessions using facets. Filtering by [facet][5] is particularly helpful if you are searching for a particular user, or product manager wanting to understand trends in the application. 
+You can filter Sessions using facets. Filtering by [facet][5] is helpful if you are searching for specific information, such as a particular user or device type. 
 
 ### Views
 
@@ -53,19 +53,35 @@ You are also able to filter by [view][6]. This can be helpful in the case that y
 
 ## User Journey
 
-The **User Journey** functions as an event timeline, and is tracked on the right side of the page. Starting from the beginning of a replay, you can watch everything that a particular user did. You can navigate to any moment in the User Journey by selecting the time/view (insert screenshot).
+The **User Journey** functions as an event timeline, and is tracked on the right side of the page. Starting from the beginning of a replay, you can watch everything that a particular user did. You can navigate to any moment in the User Journey by selecting it.
 
-You are able to filter the User Journey by **View**, **Action**, and **Error**. When hovering over a particular time or view in the User Journey, selecting **Details** opens a side panel where you can examine specific Core Web Vitals of the page, as well as other pertinent information, without leaving the replay (insert screenshot). 
+{{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey">}}
 
-From this page, you can also expand the **Performance Waterfall** for more detailed information (insert screenshot).
+You are able to filter the User Journey by **View**, **Action**, **Error**, and **Frustration Signal**. 
+
+{{< img src="/getting_started/session_replay/views-actions-errors.png" alt="Panel that allows for filtering by view, action, error, and frustration signal">}}
+
+While hovering over a particular time or view in the User Journey, selecting **Details** opens a side panel where you can examine specific Core Web Vitals of the page, as well as other pertinent information, without leaving the replay.
+
+{{< img src="/getting_started/session_replay/details-panel.png" alt="Panel with additional details">}}
+
+From this page, you can also expand the **Performance Waterfall** for more detailed information.
+
+{{< img src="/getting_started/session_replay/performance-waterfall.png" alt="Expanded performance waterfall">}}
 
 ## Developer Tools
 
-Selecting **Dev Tools** enables you to view various aspects of your application's performance, console logs and errors associated with the view, and any application or user attributes regarding the replay.
+Selecting **Dev Tools** enables you to view various aspects of your application's performance, console logs and errors associated with the view, and any application or user attributes regarding the replay. 
 
 {{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console">}}
 
-You can also view session metadata in the Attributes tab.
+You can view any **Resources** and **Traces** associated with a view through using the tabs.
+
+{{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view">}}
+
+{{< img src="/getting_started/session_replay/traces.png" alt="Traces associated with the view">}}
+
+You can also view session metadata in the **Attributes** tab.
 
 {{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console">}}
 
@@ -73,23 +89,23 @@ You can also view session metadata in the Attributes tab.
 
 Combining Session Replay with APM traces and metrics enables you to receive end-to-end visibility across frontend and backend issues, allowing you to see how code and infrastructure are impacting your user experience. Understanding how backend performance affects user experience can be key to troubleshooting and optimizing your application.
 
+Within the Traces tab, select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
+
+{{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information">}}
+
 ### Error Tracking integration
 
-The Error Tracking feature is helpful in debugging issues and getting to the root cause. You can receive alerts for an error, see the exact line of code that caused it, and pivot to view a user session that encountered the error—all without leaving the application.
+The Error Tracking feature is helpful in debugging issues and getting to the root cause. You can receive alerts for an error, see the exact line of code that caused it, and pivot to view a user session that encountered the error — all without leaving the application.
 
 Within the Errors tab, selecting a specific error expands the view to display the time the error occurred, as well as the error message. Clicking **Issue in error tracking** opens a panel with more detail surrounding the error, as well as any attributes associated with the session.
 
 {{< img src="/getting_started/session_replay/error-tracking.png" alt="Error tracking panel">}}
 
-## Resources and traces
+## What's next?
 
-You can view any **Resources** and **Traces** associated with a view through using the tabs.
+You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time as well, to direct your team's attention to a particular time and view of the Replay.
 
-You can see the browser request, as well as all of the backend dependencies and every service that was called upon to fulfill the request in the page.
-
-## What's Next?
-
-You are able to share the replay with your team by selecting the **Share** button at the top of the page. You can start the replay at a specific time as well, to direct your team's attention to a particular time and view of the Replay.
+{{< img src="/getting_started/session_replay/share.png" alt="Share your replay pop-up">}}
 
 ## Further Reading
 
