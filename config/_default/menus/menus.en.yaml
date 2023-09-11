@@ -4099,14 +4099,18 @@ main:
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 408
+  - name: Create a Recommended Monitor
+    url: developers/integrations/create-an-integration-recommended-monitor
+    parent: dev_tools_integrations
+    weight: 409
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 409
+    weight: 410
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 410
+    weight: 411
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
