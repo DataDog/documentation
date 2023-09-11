@@ -13,7 +13,7 @@ further_reading:
 **The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on this Datadog site.**
 {{% /site-region %}}
  
-Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog's default API polling approach, which provides updated metrics every 10 minutes. You can learn more about the API polling approach in our [Cloud Metric Delay documentation][1].
+Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog's default API polling approach, which provides updated metrics every 10 minutes. You can learn more about the API polling approach in the [Cloud Metric Delay documentation][1].
 
 ## Overview
 
