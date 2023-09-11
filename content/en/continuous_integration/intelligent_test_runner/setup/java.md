@@ -2,13 +2,18 @@
 title: Intelligent Test Runner for Java
 kind: documentation
 is_beta: true
+code_lang: java
+type: multi-code-lang
+code_lang_weight: 10
+aliases:
+  - continuous_integration/intelligent_test_runner/java/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java in beta.{{< /callout >}}
@@ -19,27 +24,11 @@ Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`.
 
 ## Setup
 
-### Test Visibility setup
+### Test Visibility
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
-{{% ci-itr-activation-instructions %}}
-
-### Configuring the test runner environment
-
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{% ci-itr-agent %}}
-{{% /tab %}}
-
-{{% tab "Cloud CI Provider (Agentless)" %}}
-{{% ci-itr-agentless %}}
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Additional environment variables
+### Enable Intelligent Test Runner
 
 To enable Intelligent Test Runner, set the following environment variables:
 
@@ -55,6 +44,24 @@ While this variable is optional, setting this helps reduce overhead by avoiding 
 Package names should terminate with a `*` and should be separated with colons: `com.myorg.package1.*:com.myorg.package2.*:com.myorg.package3.*`
 or `com.myorg.*` (if you have a common root package).<br/>
 **Default**: `(empty)`
+
+### Configure the test runner environment
+
+{{< tabs >}}
+
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% ci-itr-agent %}}
+{{% /tab %}}
+
+{{% tab "Cloud CI Provider (Agentless)" %}}
+{{% ci-itr-agentless %}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+{{% ci-itr-activation-instructions %}}
+
+## Run tests with the Intelligent Test Runner enabled
 
 After setting these environment variables, run your tests as you normally do:
 
