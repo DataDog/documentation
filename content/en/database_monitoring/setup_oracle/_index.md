@@ -23,7 +23,7 @@ The features described on this page are in beta. Contact your Customer Success M
 
 ### Prerequisites
 
-Before Database Monitoring can be configured for Oracle, the following prerequisites must be met:
+To configure Database Monitoring for Oracle, the following prerequisites must be met:
 
 1. An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be installed.
     - [Install the Agent](#install-the-agent)
