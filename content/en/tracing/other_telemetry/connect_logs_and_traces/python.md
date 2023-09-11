@@ -29,8 +29,15 @@ further_reading:
 
 ### Standard library logging
 
-To correlate your [traces][1] with your logs, update your log format to include
-the required attributes from the log record and call `ddtrace.patch(logging=True)`.
+To correlate your [traces][1] with your logs, there are two steps:
+
+Step 1) Activate automatic instrumentation through any of the options below:
+- Option 1) [Library Injection][5]
+- Option 2) Import **ddtrace** then run the application with `ddtrace-run` (ie: `ddtrace-run python appname.py`)
+- Option 3) Import **ddtrace** then call on `ddtrace.patch(logging=True)`
+
+Step 2) Update your log format to include the required attributes from the log record.
+
 
 Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
 ``dd.span_id`` attributes for your log record in the format string.
@@ -55,6 +62,8 @@ def hello():
 
 hello()
 ```
+
+More information can be found in https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection
 
 ### No standard library logging
 
@@ -118,3 +127,4 @@ Once the logger is configured, executing a traced function that logs an event yi
 [2]: /logs/log_collection/python/#configure-the-datadog-agent
 [3]: /logs/log_configuration/processors/#trace-remapper
 [4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[5]: /tracing/trace_collection/library_injection_local/
