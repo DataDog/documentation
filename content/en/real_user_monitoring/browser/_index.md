@@ -1565,6 +1565,12 @@ Use a secure session cookie. This disables RUM events sent on insecure (non-HTTP
 **Default**:`false`<br/>
 Use a secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
 
+`allowFallbackToLocalStorage`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Allows the use of Local Storage when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
+
 ### Tagging
 
 A service is an independent, deployable code repository that maps to a set of pages.
@@ -1663,3 +1669,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [20]: /real_user_monitoring/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
 [22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
