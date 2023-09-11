@@ -19,7 +19,7 @@ Intelligent Test Runner works by analyzing your test suite to determine the code
 
 By minimizing the number of tests run per commit, Intelligent Test Runner reduces the frequency of flaky tests disrupting your pipelines. Flaky tests are tests that may pass or fail at random given the same commit. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
 
-### Limitations during beta
+### Limitations
 
 There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run under certain conditions. Specifically, Intelligent Test Runner is not able to detect changes in library dependencies, compiler options, external services or changes to data files in data-driven tests.
 
@@ -34,6 +34,7 @@ Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1
     {{< nextlink href="continuous_integration/intelligent_test_runner/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/python" >}}Python{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
@@ -75,4 +76,4 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [1]: /continuous_integration/tests/
 [2]: https://app.datadoghq.com/ci/settings/test-service
 [3]: https://app.datadoghq.com/ci/test-runs
-[4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner-beta
+[4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner

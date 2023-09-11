@@ -11,7 +11,7 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java in beta.{{< /callout >}} 
+{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java in beta.{{< /callout >}}
 
 ## Compatibility
 
@@ -19,18 +19,32 @@ Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`.
 
 ## Setup
 
+### Test Visibility setup
+
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
+
+{{% ci-itr-activation-instructions %}}
+
+### Configuring the test runner environment
+
+{{< tabs >}}
+
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% ci-itr-agent %}}
+{{% /tab %}}
+
+{{% tab "Cloud CI Provider (Agentless)" %}}
+{{% ci-itr-agentless %}}
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Additional environment variables
 
 To enable Intelligent Test Runner, set the following environment variables:
 
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-If you are reporting data through the Agent, then the agent process requires the key.<br/>
-If you are using Agentless mode, then the tracer process uses the key.<br/>
-**Default**: `(empty)`<br/>
-
 `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` (Optional)
-: Intelligent Test Runner requires [Jacoco][4] for collecting code coverage.<br/>
+: Intelligent Test Runner requires [Jacoco][2] for collecting code coverage.<br/>
 Set this variable to a valid Jacoco version (such as `0.8.10`) if you want the tracer to run your build with Jacoco injected.<br/>
 Omit it if your project already has Jacoco configured.<br/>
 **Default**: `(empty)`
@@ -69,17 +83,9 @@ mvn clean verify
 {{% /tab %}}
 {{< /tabs >}}
 
-
-#### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/java
-[2]: https://app.datadoghq.com/organization-settings/application-keys
-[3]: https://app.datadoghq.com/ci/settings/test-service
-[4]: https://www.jacoco.org/jacoco/
+[2]: https://www.jacoco.org/jacoco/

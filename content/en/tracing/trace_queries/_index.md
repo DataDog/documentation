@@ -3,7 +3,6 @@ title: Trace Queries
 kind: documentation
 description: "Trace Queries"
 is_beta: true
-private: true
 further_reading:
 - link: 'tracing/trace_explorer'
   tag: 'Documentation'
@@ -14,7 +13,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-Trace Queries is in private beta. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
+To join the Trace Queries private beta <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
 {{< /beta-callout >}}
 
 ## Overview
@@ -49,7 +48,7 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 | Operator | Description | Example |
 |-----|-----|-----|
 | `&&` | **And**: Both spans are in the trace | Traces that contain spans from the service `web-store` and spans from the service `payments-go`: <br/>`service:web-store && service:payments-go` |
-| `\|\|` | **Or**: One or the other span are in the trace | Traces that contain spans from the service `web-store` or from the service `mobile-store`: <br/>`service:web-store && service:mobile-store` |
+| `\|\|` | **Or**: One or the other span are in the trace | Traces that contain spans from the service `web-store` or from the service `mobile-store`: <br/>`service:web-store \|\| service:mobile-store` |
 | `->` | **Indirect relationship**: Traces that contain a span matching the left query that is upstream of spans matching the right query | Traces where the service `checkoutservice` is upstream of the service `quoteservice`: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
 

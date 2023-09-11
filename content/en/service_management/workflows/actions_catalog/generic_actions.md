@@ -2,7 +2,8 @@
 title: Generic Actions
 kind: documentation
 disable_toc: false
-type: workflows
+disable_sidebar: false
+type: documentation
 is_beta: true
 aliases:
 - /workflows/generic_actions
@@ -12,7 +13,11 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Generic actions are workflow actions which are not associated with a Datadog integration or resource. These actions allow you to implement custom logic within your workflow such as branching the workflow based on a condition, making a custom HTTP request, or transforming data and objects with code. As with all workflow actions, you can use the [context variables][1] tab to access any values available in the workflow context.
+Generic actions are workflow actions that are not associated with a tool or integration. They allow you to overcome any action that may not be currently present in the Actions catalog.
+
+As with all workflow actions, you can use the [context variables][1] tab to access any values available in the workflow context.
+
+You can also [request a new action or entire integration][5].
 
 ## HTTP
 
@@ -67,25 +72,10 @@ Use expression actions for data transformations that can be accomplished in a si
 
 The function action allows for variable assignments and data transformations requiring multiple expressions.
 
-## Logic
-
-Logic actions enable you to implement custom logic in the execution of your workflows, such as branching to a different workflow based on a condition, or pausing the execution of the workflow.
-
-### Branch workflow from condition
-
-You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. For example, in the screenshot below a branch workflow action considers if the status code of a previous HTTP request action is `200`.
-
-{{< img src="service_management/workflows/branch-workflow-configuration2.png" alt="The workflow canvas with a branch workflow from condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200 and the returned value of a previous function must be true." >}}
-
-### Sleep
-
-Pause the execution of the workflow for a duration specified in seconds.
-
-## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/build/#context-variables
 [2]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
 [3]: /service_management/workflows/access/
 [4]: https://lodash.com/
+[5]: https://forms.gle/JzPazvxXox7fvA2R8

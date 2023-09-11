@@ -119,8 +119,16 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 {{% tab "Android RUM" %}}
 
 1. Set up [RUM Android Monitoring][1].
+2. Set up [Android Trace Collection][2].
+3. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
-2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
+    ```groovy
+    dependencies {
+        implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
+    }
+    ```
+
+4. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -133,17 +141,18 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSamplingRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
+3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
 ```java
     val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(RumInterceptor(traceSamplingRate = 100f))
+       .addInterceptor(DatadogInterceptor(traceSampler = RateBasedSampler(100f)))
        .build()
   ```
 
 **Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/android/
+[2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
@@ -355,7 +364,11 @@ The following Datadog tracing libraries are supported:
 
 RUM supports several propagator types to connect resources with backends that are instrumented with OpenTelemetry libraries.
 
-{{< tabs >}} {{% tab "Browser RUM" %}}
+{{< tabs >}}
+{{% tab "Browser RUM" %}}
+
+**Note**: If you are using a backend framework such as Next.js/Vercel that uses OpenTelemetry, follow these steps.
+
 1. Set up RUM to connect with APM as described above.
 
 2. Modify `allowedTracingUrls` as follows:
@@ -376,9 +389,10 @@ RUM supports several propagator types to connect resources with backends that ar
       - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-{{% /tab %}}
 
+{{% /tab %}}
 {{% tab "iOS RUM" %}}
+
 1. Set up RUM to connect with APM as described above.
 
 2. Use `trackURLSession(firstPartyHostsWithHeaderTypes:)` instead of `trackURLSession(firstPartyHosts:)` as follows:

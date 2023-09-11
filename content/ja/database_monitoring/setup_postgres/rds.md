@@ -12,10 +12,11 @@ title: Amazon RDS マネージド Postgres のデータベースモニタリン�
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に視覚化します。
 
-Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
+Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
+1. [AWS インテグレーションを構成する](#configure-the-aws-integration)
 1. [データベースのパラメーターを構成する](#configure-postgres-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 1. [Agent をインストールする](#install-the-agent)
@@ -24,13 +25,13 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポート対象の PostgreSQL バージョン
-: 9.6, 10, 11, 12, 13, 14
+: 9.6、10、11、12、13、14
 
 サポート対象の Agent バージョン
 : 7.36.1+
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
+: データベースモニタリングのデフォルトの Agent 構成は保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
@@ -38,6 +39,10 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 データセキュリティへの配慮
 : Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
+
+## AWS インテグレーションを構成する
+
+[Amazon Web Services インテグレーションタイル][13]の **Resource Collection** セクションで **Standard Collection** を有効にします。
 
 ## Postgres 設定を構成する
 
@@ -57,7 +62,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 Datadog Agent は、統計やクエリを収集するためにデータベース サーバーへの読み取り専用のアクセスを必要とします。
 
-Postgres がレプリケーションされている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agentで実行する必要がある場合のみ別のデータベースを選択してください[6]。
+Postgres がレプリケーションされている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ][6]を Agentで実行する必要がある場合のみ別のデータベースを選択してください。
 
 選択したデータベースに、スーパーユーザー (または十分な権限を持つ他のユーザー) として接続します。例えば、選択したデータベースが `postgres` である場合は、次のように実行して [psql][7] を使用する `postgres` ユーザーとして接続します。
 
@@ -70,6 +75,8 @@ Postgres がレプリケーションされている場合、以下の SQL コマ
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
+
+**注:** IAM 認証もサポートされています。RDS インスタンスでのこの構成方法については、[ガイド][14]を参照してください。
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -415,8 +422,10 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
 [6]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
-[8]: https://app.datadoghq.com/account/settings#agent
+[8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://app.datadoghq.com/databases
 [11]: /ja/integrations/amazon_rds
 [12]: /ja/database_monitoring/troubleshooting/?tab=postgres
+[13]: https://app.datadoghq.com/integrations/amazon-web-services
+[14]: /ja/database_monitoring/guide/managed_authentication

@@ -2,8 +2,6 @@
 title: Setting Up Database Monitoring for RDS Oracle
 kind: documentation
 description: Install and configure Database Monitoring for RDS Oracle
-private: true
-is_beta: true
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
@@ -16,7 +14,7 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta.
+The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
@@ -69,6 +67,7 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
 ```
 
 ## Configure the Agent
