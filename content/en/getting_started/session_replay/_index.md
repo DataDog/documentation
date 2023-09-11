@@ -112,8 +112,8 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/?_gl=1*2g30ya*_gcl_au*OTEwMTA2MjI5LjE2OTIxMDc1MzA.*_ga_KN80RDFSQK*MTY5NDAwODQ4OS40OC4xLjE2OTQwMDg2MzcuMC4wLjA.
-[2]: https://docs.datadoghq.com/real_user_monitoring/#get-started
-[3]: https://docs.datadoghq.com/real_user_monitoring/session_replay/mobile/
+[2]: /real_user_monitoring/#get-started
+[3]: /real_user_monitoring/session_replay/mobile/
 [4]: https://app.datadoghq.com/rum/sessions
-[5]: https://docs.datadoghq.com/real_user_monitoring/explorer/search/#facets
-[6]: https://docs.datadoghq.com/real_user_monitoring/explorer/saved_views/
+[5]: /real_user_monitoring/explorer/search/#facets
+[6]: /real_user_monitoring/explorer/saved_views/
