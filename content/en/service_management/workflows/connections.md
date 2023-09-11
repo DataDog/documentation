@@ -8,8 +8,6 @@ aliases:
 disable_toc: false
 ---
 
-## Overview
-
 Because workflow actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for a workflow to run.
 
 Workflow actions can be authenticated in two ways:

@@ -31,7 +31,7 @@ aliases:
   - /videos/two_minute_intro/
   - /videos/unshare_screenboards/
   - /videos/weekly_monitor_report/
-  - /video-categories/%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%82%B0%E3%83%A9%E3%83%95/
+  - /video-categories/フレームグラフ/
   - /videos/apm
   - /videos/aws
   - /videos/host-map

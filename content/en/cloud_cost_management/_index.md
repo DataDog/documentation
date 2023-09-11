@@ -14,6 +14,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
     tag: "blog"
     text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+  - link: "/cloud_cost_management/tag_pipelines"
+    tag: "Documentation"
+    text: "Standardize tags across Cloud Cost with Tag Pipelines"
 ---
 ## Overview
 
@@ -129,6 +132,7 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+
 ### Cost types
 
 You can visualize your ingested data using the following cost types:
@@ -172,6 +176,11 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
+## Billing conductor
+Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
+
+To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][8]. Ensure the CUR meets [Datadog's requirements][9].
+After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
@@ -180,15 +189,9 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 [7]: https://app.datadoghq.com/cost/setup
+[8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
+[9]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 
-## Billing conductor
-Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
-
-To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][1]. Ensure the CUR meets [Datadog's requirements][2].
-Once the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
-
-[1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
-[2]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 {{% /tab %}}
 
 {{% tab "Azure" %}}
@@ -209,7 +212,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 
 1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
-3. Once the scope is selected, click **Add**.
+3. After the scope is selected, click **Add**.
 
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
@@ -271,24 +274,6 @@ You can visualize your ingested data using the following cost types:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tag pipelines
-
-<div class="alert alert-info">Tag pipelines is a beta feature.</div>
-
-You can use [tag pipelines][1] to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic.
-
-### Rule types
-
-<div class="alert alert-warning"> A maximum of 100 rules can be created. </div>
-
-There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic.
-
-**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
-
-**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
-
-The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag.
-
 ## Cloud costs in dashboards
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
@@ -298,5 +283,3 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/cost/tag-pipelines

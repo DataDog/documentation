@@ -22,6 +22,7 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/content/en/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}Monitor UTM Campaigns in RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -37,6 +38,7 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitor your Next.js application with RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 

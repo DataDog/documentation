@@ -85,7 +85,7 @@ Lorsqu'un utilisateur accède à l'URL d'une cellule spécifique, le notebook s'
 
 {{< img src="notebooks/notebook_list.png" alt="Liste de notebooks avec un aperçu des types de cellules du notebook sélectionné" style="width:100%;">}}
 
-La [liste des notebooks][1] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, l'identité du créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en deux catégories :
+La [liste des notebooks][2] vous permet de consulter et de rechercher les notebooks précédemment créés. Le nom, l'identité du créateur et la date de dernière modification de chaque notebook sont indiqués. Les notebooks sont regroupés en plusieurs catégories :
 
 * **Your Notebooks** : les notebooks que vous avez créés.
 * **All Notebooks** : tous les notebooks de votre organisation.
