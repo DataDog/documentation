@@ -2980,16 +2980,31 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
+  - name: Setup
+    url: security/cloud_security_management/setup
+    parent: csm
+    identifier: csm_setup
+    weight: 1
+  - name: CSM Enterprise
+    url: security/cloud_security_management/setup/csm_enterprise
+    parent: csm_setup
+    identifier: csm_setup_enterprise
+    weight: 10000
+  - name: CSM Pro
+    url: security/cloud_security_management/setup/csm_pro
+    parent: csm_setup
+    identifier: csm_setup_pro
+    weight: 10005
+  - name: CSM Workload Security
+    url: security/cloud_security_management/setup/csm_workload_security
+    parent: csm_setup
+    identifier: csm_setup_workload_security
+    weight: 10010
   - name: Threats
     url: security/threats/
     parent: csm
     identifier: cloud_workload_security
-    weight: 1
-  - name: Setup
-    url: security/threats/setup
-    parent: cloud_workload_security
-    identifier: cws_setup
-    weight: 201
+    weight: 3
   - name: Managing Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
@@ -3020,11 +3035,6 @@ main:
     parent: csm
     identifier: cspm
     weight: 5
-  - name: Setup
-    url: security/misconfigurations/setup
-    parent: cspm
-    identifier: cspm_setup
-    weight: 101
   - name: Compliance Rules
     url: security/misconfigurations/compliance_rules
     parent: cspm
