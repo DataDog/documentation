@@ -23,8 +23,6 @@ further_reading:
 
 **Session Replay** is a visual tool that recreates user sessions from your applications, giving you an in-depth look at how users are interacting with your product. Session Replay can be helpful in understanding an application's pain points, as well as other nuances that may be harder to detect when looking at a session timeline, but easier to notice in a visual representation. 
 
-Session Replay is seamlessly integrated with your application's metrics, traces, and logs, giving you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
-
 This page demonstrates how to get started with Session Replay in Datadog. If you haven't already, [create a Datadog account][1].
 
 ## Configuring Session Replays
@@ -57,7 +55,7 @@ The **User Journey** functions as an event timeline, and is tracked on the right
 
 {{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey">}}
 
-You are able to filter the User Journey by **View**, **Action**, **Error**, and **Frustration Signal**. 
+You are able to filter the User Journey by **View**, **Action**, **Error**, and **Frustration Signal** by selecting **Events**. 
 
 {{< img src="/getting_started/session_replay/views-actions-errors.png" alt="Panel that allows for filtering by view, action, error, and frustration signal">}}
 
@@ -65,7 +63,7 @@ While hovering over a particular time or view in the User Journey, selecting **D
 
 {{< img src="/getting_started/session_replay/details-panel.png" alt="Panel with additional details">}}
 
-From this page, you can also expand the **Performance Waterfall** for more detailed information.
+From this page, you can also expand the Performance Waterfall by selecting **Expand Waterfall** for more detailed information.
 
 {{< img src="/getting_started/session_replay/performance-waterfall.png" alt="Expanded performance waterfall">}}
 
@@ -75,7 +73,7 @@ Selecting **Dev Tools** enables you to view various aspects of your application'
 
 {{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console">}}
 
-You can view any **Resources** and **Traces** associated with a view through using the tabs.
+You can view the **Resources** and **Traces** associated with a view through using the tabs.
 
 {{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view">}}
 
@@ -85,9 +83,13 @@ You can also view session metadata in the **Attributes** tab.
 
 {{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console">}}
 
+## Integrations
+
+Session Replay is seamlessly integrated with your application's metrics, traces, and logs, giving you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
+
 ### APM integration
 
-Combining Session Replay with APM traces and metrics enables you to receive end-to-end visibility across frontend and backend issues, allowing you to see how code and infrastructure are impacting your user experience. Understanding how backend performance affects user experience can be key to troubleshooting and optimizing your application.
+Combining Session Replay with APM traces and metrics enables you to receive end-to-end visibility across frontend and backend issues, allowing you to see how code and infrastructure are impacting your user experience.
 
 Within the Traces tab, select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
 
@@ -95,7 +97,7 @@ Within the Traces tab, select **View Trace in APM** to see more detailed informa
 
 ### Error Tracking integration
 
-The Error Tracking feature is helpful in debugging issues and getting to the root cause. You can receive alerts for an error, see the exact line of code that caused it, and pivot to view a user session that encountered the error — all without leaving the application.
+The Error Tracking feature is helpful in debugging issues and getting to the root cause. You can receive alerts for an error, see the exact line of code that caused it, and pivot to view a user session that encountered the error all from within the Datadog App.
 
 Within the Errors tab, selecting a specific error expands the view to display the time the error occurred, as well as the error message. Clicking **Issue in error tracking** opens a panel with more detail surrounding the error, as well as any attributes associated with the session.
 
@@ -103,7 +105,7 @@ Within the Errors tab, selecting a specific error expands the view to display th
 
 ## What's next?
 
-You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time as well, to direct your team's attention to a particular time and view of the Replay.
+You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time, to direct your team's attention to a particular time and view of the Replay.
 
 {{< img src="/getting_started/session_replay/share.png" alt="Share your replay pop-up">}}
 
