@@ -1,24 +1,16 @@
 ---
 title: Apigee
 name: apigee
-kind: integration
+kind: Guide
 description: 'Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance and issues of the proxies aggregated in one place.'
-short_description: 'Collect Apigee logs to track errors, request response time, etc.'
-dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/apigee.md']
-categories:
-    - log collection
-doc_link: /integrations/apigee/
+short_description: 'Collect Apigee logs'
 aliases:
-    - logs/log_collection/apigee
-has_logo: true
-integration_title: Apigee
-is_public: true
-public_title: Datadog-Apigee
+- /logs/log_collection/apigee
+- /integrations/apigee
 further_reading:
-    - link: 'logs/'
-      tag: 'Documentation'
-      text: 'Log Management'
+- link: 'logs/'
+  tag: 'Documentation'
+  text: 'Log Management'
 integration_id: "apigee"
 ---
 
