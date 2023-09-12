@@ -57,7 +57,7 @@ The **User Journey** functions as an event timeline, and is tracked on the right
 
 You are able to filter the User Journey by **View**, **Action**, **Error**, and **Frustration Signal** by selecting **Events**. 
 
-{{< img src="/getting_started/session_replay/views-actions-errors.png" alt="Panel that allows for filtering by view, action, error, and frustration signal">}}
+{{< img src="/getting_started/session_replay/views-actions-errors.png" alt="Panel that allows for filtering by view, action, error, and frustration signal" style="width:100%" >}}
 
 While hovering over a particular time or view in the User Journey, selecting **Details** opens a side panel where you can examine specific Core Web Vitals of the page, as well as other pertinent information, without leaving the replay.
 
