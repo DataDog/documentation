@@ -47,7 +47,7 @@ You can filter Sessions using facets. Filtering by [facet][5] is helpful if you 
 
 You are also able to filter by [view][6]. This can be helpful in the case that you know where the issue lies.
 
-{{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet and view">}}
+{{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet and view" style="width:100%" >}}
 
 ## User Journey
 
