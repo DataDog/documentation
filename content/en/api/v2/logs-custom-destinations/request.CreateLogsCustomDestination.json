@@ -1,0 +1,33 @@
+{
+  "data": {
+    "attributes": {
+      "bufferMaxBytes": 10000000,
+      "bufferTimeoutSeconds": 100,
+      "compression": "GZIP",
+      "enabled": true,
+      "fallbackDestination": {
+        "container": "container-name",
+        "integration": {
+          "clientId": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
+          "tenantId": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa"
+        },
+        "storageAccount": "account-name",
+        "type": "azure"
+      },
+      "forwarderDestination": {
+        "auth": {
+          "password": "password",
+          "type": "basic",
+          "username": "username"
+        },
+        "endpoint": "https://example.org/my-intake",
+        "type": "http"
+      },
+      "maxRetryDurationSeconds": 100,
+      "name": "my-destination",
+      "query": "source:dummy",
+      "version": 0
+    },
+    "type": "custom_destination"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "data": {
+    "id": "a8700823-acb7-4379-831d-9ae3d14bc855",
+    "attributes": {
+      "name": "my-destination--updated-name",
+      "version": 0,
+      "forwarderDestination": {
+        "type": "http",
+        "endpoint": "https://example.org/my-intake",
+        "auth": {
+          "type": "basic",
+          "username": "username",
+          "password": "password"
+        }
+      }
+    },
+    "type": "custom_destination"
+  }
+}

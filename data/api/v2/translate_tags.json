@@ -75,6 +75,10 @@
     "name": "Logs Archives",
     "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI."
   },
+  "logs-custom-destinations": {
+    "name": "Logs Custom Destinations",
+    "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nManage configuration of [log-based custom destinations](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations) for your organization."
+  },
   "logs-metrics": {
     "name": "Logs Metrics",
     "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization."

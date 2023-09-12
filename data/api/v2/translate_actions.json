@@ -549,6 +549,30 @@
     "request_description": "",
     "request_schema_description": "Relationship to role."
   },
+  "ListLogsCustomDestinations": {
+    "description": "Returns all custom destinations, including their attributes and IDs.",
+    "summary": "List custom destinations"
+  },
+  "CreateLogsCustomDestination": {
+    "description": "Create a new custom destination for your organization.",
+    "summary": "Create a custom destination",
+    "request_description": "",
+    "request_schema_description": "Payload containing information about a single custom destination to be created."
+  },
+  "DeleteLogsCustomDestination": {
+    "description": "Deletes a custom destination.",
+    "summary": "Delete a custom destination"
+  },
+  "GetLogsCustomDestination": {
+    "description": "Get a custom destination in the organization specified by the custom destination's `custom_destination_id`.",
+    "summary": "Get a custom destination"
+  },
+  "UpdateLogsCustomDestination": {
+    "description": "Edit a custom destination.",
+    "summary": "Update a custom destination",
+    "request_description": "",
+    "request_schema_description": "Payload containing information about a single custom destination to be updated."
+  },
   "ListLogsMetrics": {
     "description": "Get the list of configured log-based metrics with their definitions.",
     "summary": "Get all log-based metrics"

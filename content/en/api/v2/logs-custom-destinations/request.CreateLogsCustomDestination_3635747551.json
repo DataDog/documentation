@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "name": "my-destination",
+      "version": 0,
+      "forwarderDestination": {
+        "type": "splunk_hec",
+        "endpoint": "https://example.org/my-intake",
+        "accessToken": "secret"
+      }
+    },
+    "type": "custom_destination"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "name": "my-destination",
+      "version": 0,
+      "forwarderDestination": {
+        "type": "http",
+        "endpoint": "https://example.org/my-intake",
+        "auth": {
+          "type": "custom_header",
+          "headerName": "header",
+          "headerValue": "value"
+        }
+      }
+    },
+    "type": "custom_destination"
+  }
+}
