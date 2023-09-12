@@ -12803,6 +12803,8 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
+        timingsScope:
+          $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -12810,6 +12812,15 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTimingsScope:
+      description: Timings scope for response time assertions.
+      enum:
+      - all
+      - withoutDNS
+      type: string
+      x-enum-varnames:
+      - ALL
+      - WITHOUT_DNS
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
