@@ -37,7 +37,7 @@ For a full list of Datadog's PHP version and framework support (including legacy
 
 ## Getting started
 
-Before you begin, make sure you've already [installed and configured the Agent][13].
+Before you begin, make sure you've already [installed and configured the Agent][14].
 
 ### Install the extension
 
