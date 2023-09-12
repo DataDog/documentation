@@ -49,7 +49,7 @@ You are also able to filter by [view][6]. This can be helpful in the case that y
 
 {{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet and view" style="width:100%" >}}
 
-## User Journey
+## Examine a user journey
 
 The **User Journey** functions as an event timeline, and is tracked on the right side of the page. Starting from the beginning of a replay, you can watch everything that a particular user did. You can navigate to any moment in the User Journey by selecting it.
 
