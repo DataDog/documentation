@@ -1,54 +1,25 @@
 ---
-title: Setting up Cloud Security Management Threats
+title: Setting Up CSM Workload Security
 kind: documentation
-description: "Follow the setup and installation instructions to get started with CSM Threats."
-aliases:
-  - /security_platform/cloud_workload_security/getting_started
-  - /security/cloud_workload_security/getting_started
-  - security/cloud_workload_security/setup
 further_reading:
-- link: "/getting_started/cloud_security_management"
-  tag: "Documentation"
-  text: "Getting Started with Cloud Security Management"
-- link: "https://www.datadoghq.com/blog/datadog-runtime-security/"
-  tag: "Blog"
-  text: "Learn more about Datadog Cloud Runtime Security"
-- link: "https://www.datadoghq.com/blog/linux-security-threat-detection-datadog/"
-  tag: "Blog"
-  text: "How to detect security threats in your systems' Linux processes"
-- link: "https://www.datadoghq.com/blog/pwnkit-vulnerability-overview-and-remediation/"
-  tag: "Blog"
-  text: "The PwnKit vulnerability: Overview, detection, and remediation"
-- link: "https://www.datadoghq.com/blog/dirty-pipe-vulnerability-overview-and-remediation/"
-  tag: "Blog"
-  text: "The Dirty Pipe vulnerability: Overview, detection, and remediation"
-- link: "https://www.datadoghq.com/blog/engineering/dirty-pipe-container-escape-poc/"
-  tag: "Blog"
-  text: "Using the Dirty Pipe Vulnerability to Break Out from Containers"
-- link: "https://www.datadoghq.com/blog/dns-based-threat-detection/"
-  tag: "Blog"
-  text: "Catch attacks at the network layer with DNS-based threat detection"
+  - link: "/security/cloud_security_management/setup"
+    tag: "Documentation"
+    text: "Setting up Cloud Security Management"
+  - link: "/security/threats/"
+    tag: "Documentation"
+    text: "Cloud Security Management Threats"
+  - link: "/agent/remote_config"
+    tag: "Documentation"
+    text: "Remote Configuration"
 ---
 
-Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+The Cloud Security Management (CSM) Workload Security package includes [CSM Threats][1]. To learn more about the available CSM packages, see [Setting up Cloud Security Management][2].
 
 ## Prerequisites
 
-* Datadog Agent 7.44 or later.
-* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CSM Threats supports the following Linux distributions:
-  * Ubuntu LTS (18.04, 20.04, and 22.04)
-  * Debian 10 or later
-  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
-  * SUSE Linux Enterprise Server 12 and 15
-  * Red Hat Enterprise Linux 7, 8, and 9
-  * Oracle Linux 7, 8, and 9
-  * CentOS 7
-  * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
+{{% csm-prereqs-enterprise-ws %}}
 
 ## Installation
-
-In general, installing CSM Threats involves the following steps:
 
 ### Enable Remote Configuration
 
@@ -60,18 +31,22 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 **Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
-### Configure the CSM Threats Agent
+### Configure the Agent
 
-#### Follow the in-app documentation (recommended)
+#### Follow the in-app instructions (recommended)
 
-Follow the [in-app instructions][6] in the Datadog app for the best experience, including step-by-step instructions scoped to your deployment configuration.
+To enable CSM Workload Security on the Agent, navigate to the [**Cloud Security Management Setup** page][6] and click **Hosts and containers**.
+
+{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+
+For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions to enable CSM Workload Security.
+
+Alternatively, use the following examples to enable CSM Workload Security:
 
 {{< tabs >}}
-{{% tab "Kubernetes (helm)" %}}
+{{% tab "Kubernetes (Helm)" %}}
 
-1. If you have not already, install the [Datadog Agent][1].
-
-2. Add the following to the `datadog` section of the `values.yaml` file:
+1. Add the following to the `datadog` section of the `values.yaml` file:
 
     ```yaml
     # values.yaml file
@@ -82,7 +57,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
         runtime:
           enabled: true
     ```
-    **Optional**: To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
@@ -94,18 +69,14 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
     ```
 
 3. Restart the Agent.
-4. **Optional, if Cloud SIEM is checked** Follow [these instructions][2] to collect audit logs for Kubernetes.
 
+[1]: /security/threats/runtime_anomaly_detection
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: https://docs.datadoghq.com/integrations/kubernetes_audit_logs/
 {{% /tab %}}
 
-{{% tab "Kubernetes (operator)" %}}
+{{% tab "Kubernetes (Operator)" %}}
 
-1. If you have not already, install the [Datadog Agent][1].
-
-2. Add the following to the `datadog` section of the `values.yaml` file:
+1. Add the following to the `spec` section of the `values.yaml` file:
 
     ```yaml
     # values.yaml file
@@ -117,7 +88,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
           enabled: true
     ```
 
-    **Optional** To enable Runtime Anomaly Detection, add the following to the `values.yaml` file:
+2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
@@ -133,13 +104,14 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
 3. Restart the Agent.
 
 
-[1]: https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator
+[1]: /security/threats/runtime_anomaly_detection
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 
-The following command can be used to start the Runtime Security Agent and `system-probe` in a Docker environment:
+Use the following command to start the Runtime Security Agent and `system-probe` in a Docker environment:
 
 {{< code-block lang="shell" filename="docker-runtime-security.sh" >}}
 
@@ -208,9 +180,9 @@ Add the following settings to the `env` section of `security-agent` and `system-
 
 {{% tab "Host (Others)" %}}
 
-For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
+For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
-By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated.
+By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
 
 ```bash
 # /etc/datadog-agent/datadog.yaml file
@@ -240,7 +212,8 @@ runtime_security_config:
     enabled: true
 ```
 
-**Optional**: To enable Runtime Anomaly Detection, add the following to the `system-probe.yaml` file:
+**Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `system-probe.yaml` file:
+
 ```bash
 # /etc/datadog-agent/system-probe.yaml file
 runtime_security_config:
@@ -250,7 +223,8 @@ runtime_security_config:
     enabled: true
 ```
 
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
+[1]: /security/threats/runtime_anomaly_detection
+
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}
@@ -393,11 +367,12 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /security/cloud_security_management/troubleshooting
+[1]: /security/threats
+[2]: /security/cloud_security_management/setup
 [4]: /agent/remote_config
 [5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
-[6]: https://app.datadoghq.com/security/setup
+[6]: https://app.datadoghq.com/security/configuration/csm/setup
