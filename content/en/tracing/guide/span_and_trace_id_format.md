@@ -18,5 +18,5 @@ Generally, the libraries generate IDs that are 64-bit unsigned integers. Specifi
 | Python     | Unsigned [0, $2^64-1$]   | Unsigned                      |
 | Ruby       | Unsigned [1, $2^62-1$]   | Unsigned                      |
 | .NET       | Unsigned [0, $2^63-1$]   | Unsigned                      |
-| PHP        | [0, $2^64-1$]            | Unsigned                      |
+| PHP        | Unsigned [1, $2^64-1$]   | Unsigned                      |
 | C++        | Unsigned [0, $2^63-1$]   | Unsigned                      |
