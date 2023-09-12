@@ -156,6 +156,6 @@ To resolve any issues encountered while setting up Metric Streams or the associa
  
 [1]: /integrations/guide/cloud-metric-delay/
 [2]: https://aws.amazon.com/cloudwatch/pricing/
-[3]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
+[3]: /integrations/amazon_web_services/?tab=roledelegation#setup
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
