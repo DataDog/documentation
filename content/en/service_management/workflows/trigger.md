@@ -62,7 +62,7 @@ To trigger a workflow from a Monitor:
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
-<div class="alert alert-info">Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Pricing</a>.</div>
+<div class="alert alert-info">Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
 ## Trigger a workflow from a Security Signal
 
@@ -84,7 +84,7 @@ To trigger a workflow from a Notification Rule:
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
-<div class="alert alert-info">Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Pricing</a>.</div>
+<div class="alert alert-info">Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
 ### Trigger a workflow manually from Cloud SIEM Security Signals
 
@@ -105,7 +105,7 @@ To schedule a workflow run:
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
 
-<div class="alert alert-info">Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Pricing</a>.</div>
+<div class="alert alert-info">Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
 ## Debug a workflow
 
