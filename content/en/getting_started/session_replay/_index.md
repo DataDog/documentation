@@ -71,7 +71,7 @@ From this page, you can also expand the Performance Waterfall by selecting **Exp
 
 Session Replay's [Browser Developer Tools][8] enable you to view various aspects of your application's performance, console logs, and errors associated with the view, and any application or user attributes regarding the replay. 
 
-{{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console">}}
+{{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console" style="width:100%" >}}
 
 You can view the **Resources** and **Traces** associated with a view through using the tabs.
 
