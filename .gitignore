@@ -39,7 +39,6 @@ content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
-content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing
 content/en/tracing/trace_collection/dd_libraries/ruby.md
