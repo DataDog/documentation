@@ -70,7 +70,7 @@ Examples include:
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 
-Designating tests as unskippable ensures that the Intelligent Test Runner will run them regardless of coverage data.
+Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
 
 ### Compatibility
 
@@ -105,7 +105,7 @@ def test_function():
     assert True
 ```
 
-Note that `pytest` will honor any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`.
+**Note**: this does not override any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`
 
 ## Further reading
 
