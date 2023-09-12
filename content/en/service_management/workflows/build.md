@@ -101,7 +101,7 @@ When you're ready to publish your workflow, click **Publish**. Published workflo
 
 ## Publish a workflow
 
-Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
+Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
