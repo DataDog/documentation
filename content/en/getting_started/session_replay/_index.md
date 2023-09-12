@@ -27,7 +27,7 @@ This page demonstrates how to get started with Session Replay in Datadog. If you
 
 ## Configuring Session Replays
 
-Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up Datadog RUM Browser Monitoring by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. 
+Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][7] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. 
 
 For further instructions on collecting Session Replay data, follow the [RUM Getting Started guide][2] for your application. 
 
