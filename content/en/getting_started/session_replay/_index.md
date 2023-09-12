@@ -75,7 +75,7 @@ Session Replay's [Browser Developer Tools][8] enable you to view various aspects
 
 You can view the **Resources** and **Traces** associated with a view through using the tabs.
 
-{{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view">}}
+{{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view" style="width:100%" >}}
 
 {{< img src="/getting_started/session_replay/traces.png" alt="Traces associated with the view">}}
 
