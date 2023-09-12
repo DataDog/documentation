@@ -37,7 +37,7 @@ For setup in mobile environments, see [Mobile Session Replay][3].
 
 Once you're collecting Session Replay data, select **Session Replay available** in the [RUM Explorer][4] to see all sessions with a replay attached to it. You can visualize this data as a **List**, **Timeseries**, **Top List**, **Table**, **Distribution**, **Geomap**, **Funnel**, **Tree Map**, or **Pie Chart**. 
 
-{{< img src="/getting_started/session_replay/session-replay-available.png" alt="Session Replay available button, as well as visualization options">}}
+{{< img src="/getting_started/session_replay/session-replay-available.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
 
 ### Facets
 
