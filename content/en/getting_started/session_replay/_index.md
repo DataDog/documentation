@@ -83,7 +83,7 @@ You can also view session metadata in the **Attributes** tab.
 
 {{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console" style="width:100%" >}}
 
-## Integrations
+## Datadog integrations
 
 Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
 
