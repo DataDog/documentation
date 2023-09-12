@@ -39,7 +39,7 @@ After choosing to create an `UDP` Test, define your test's request.
 2. Enter the string you want to send in your test. 
 3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.
-5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+5. Add `env` **Tags** as well as any other tag to your UDP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
 {{< img src="synthetics/api_tests/udp_test_config.png" alt="Define UDP request" style="width:90%;" >}}
 

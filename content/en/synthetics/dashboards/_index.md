@@ -15,7 +15,7 @@ further_reading:
 
 When you create a Synthetic test, Datadog [collects data][1] and generates dashboards about your stack, browser applications, or overall tests' performance, private locations, and events. 
 
-Access your Synthetic dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3] on the [Synthetic Monitoring homepage][4].
+Access your Synthetic dashboards by filtering for `Synthetics` in the search query of the [**Dashboard List**][2] or by clicking on the dropdown menu under [**Dashboards**][3] on the [Synthetic Monitoring & Continuous Testing page][4].
 
 {{< img src="synthetics/dashboards/synthetic_tests_dashboards.png" alt="Synthetic Monitoring Dashboards" style="width:100%;">}}
 

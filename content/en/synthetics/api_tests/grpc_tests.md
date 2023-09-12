@@ -93,7 +93,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
 3. **Name** your gRPC test.
 
-4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
 
    {{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}}
 
