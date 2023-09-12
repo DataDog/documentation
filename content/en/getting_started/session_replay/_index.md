@@ -107,7 +107,7 @@ Within the Errors tab, selecting a specific error expands the view to display th
 
 You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time, to direct your team's attention to a particular time and view of the Replay.
 
-{{< img src="/getting_started/session_replay/share.png" alt="Share your replay pop-up">}}
+{{< img src="/getting_started/session_replay/share.png" alt="Share your replay pop-up" style="width:100%" >}}
 
 ## Further Reading
 
