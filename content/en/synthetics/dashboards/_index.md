@@ -6,9 +6,9 @@ further_reading:
 - link: '/synthetics/'
   tag: 'Documentation'
   text: 'Learn about Synthetic Monitoring'
-- link: '/synthetics/ci_results_explorer'
+- link: '/continuous_testing/explorer/'
   tag: 'Documentation'
-  text: 'Learn about the CI Results Explorer'
+  text: 'Learn about the Synthetic Monitoring & Continuous Testing Explorer'
 ---
 
 ## Overview
