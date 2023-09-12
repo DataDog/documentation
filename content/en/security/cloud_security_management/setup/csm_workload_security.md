@@ -88,7 +88,7 @@ Alternatively, use the following examples to enable CSM Workload Security:
           enabled: true
     ```
 
-1. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
+2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
    
     ```yaml
     # values.yaml file
