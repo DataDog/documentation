@@ -89,7 +89,7 @@ Session Replay integrates with your application's metrics, traces, and logs to g
 
 ### APM integration
 
-Combining Session Replay with APM traces and metrics enables you to receive end-to-end visibility across frontend and backend issues, allowing you to see how code and infrastructure are impacting your user experience.
+Combining Session Replay with [APM traces][9] enables you to receive end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience.
 
 Within the Traces tab, select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
 
