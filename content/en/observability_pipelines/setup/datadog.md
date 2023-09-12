@@ -206,7 +206,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
     name = Observability Pipelines Worker
-    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/x86_64/
+    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/\$basearch/
     enabled=1
     gpgcheck=1
     repo_gpgcheck=1
@@ -446,7 +446,7 @@ By default, a 288GB EBS drive is allocated to each instance, and the sample conf
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
-vector:
+observability_pipelines_worker:
   logs:
     enabled: true
     url: "http://<OPW_HOST>:8282"

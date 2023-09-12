@@ -144,11 +144,97 @@ Deactivating the legacy integration prevents sending the system metrics twice.
 
 Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
 
+<<<<<<< HEAD
 If the above prerequisites are met, follow the [setup instructions](#setup) for your hosting type.
+=======
+### Install the Agent
+
+To start collecting Oracle telemetry, first install the Datadog Agent.
+
+The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
+
+Datadog recommends you install the version listed in the [Latest Agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
+
+If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is an Oracle DBM build, such as `7.46.0~dbm~oracle~0.34`, follow the instructions in [Oracle DBM build](#oracle-dbm-build).
+
+#### Official release
+
+Follow the [instructions for your platform][3].
+
+#### Oracle DBM build
+
+The purpose of Oracle DBM builds is to provide features and bug fixes before they appear in the official Agent release. The basis of an Oracle DBM build is always a stable agent release.
+
+##### Linux
+
+Download the [RHEL][6] and [Ubuntu Oracle DBM][7] builds from their respective repositories.
+
+Set `DD_API_KEY` and run the following commands to install the Oracle DBM release, for example:
+
+```shell
+export DD_AGENT_DIST_CHANNEL=beta
+export DD_AGENT_MINOR_VERSION="46.0~dbm~oracle~0.34-1"
+
+DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+##### Windows
+
+The repository with Windows builds is [here][8].
+
+Download the MSI file for the [Oracle DBM build][4].
+
+Set `APIKEY` and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
+
+```shell
+start /wait msiexec /qn /i datadog-agent-7.46.0-dbm-oracle-0.34-1.x86_64.msi APIKEY="" SITE="datadoghq.com"
+```
+
+##### Docker
+
+The docker Oracle DBM images can be found [here][9].
+
+Set `DD_API_KEY` and run the following command to install the Oracle DBM release, for example:
+
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.46.0-dbm-oracle-0.34
+```
+
+##### Latest Agent version
+
+The following Oracle DBM builds contain implemented Oracle DBM features:
+- Linux: `7.46.0~dbm~oracle~0.34-1`
+- Windows: `7.46.0-dbm-oracle-0.34-1`
+- Docker: `7.46.0-dbm-oracle-0.34`
+
+### Oracle client
+
+The Agent doesn't require any external Oracle clients.
+
+### Upgrading from a previous Agent release
+
+Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
+
+## Custom queries
+
+Database Monitoring supports custom queries for Oracle databases. To learn more about the configuration options available, see the [conf.yaml.example][11].
+
+<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+
+## Setup
+
+For setup instructions, select your hosting type:
+
+{{< partial name="dbm/dbm-setup-oracle" >}}
+>>>>>>> master
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings/agent/latest
+<<<<<<< HEAD
+=======
+[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.46.0-dbm-oracle-0.34-1.x86_64.msi
+>>>>>>> master
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [10]: /database_monitoring/architecture/
 [15]: /agent/versions/upgrade_between_agent_minor_versions/?tab=linux

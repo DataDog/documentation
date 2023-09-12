@@ -69,56 +69,12 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 
 ### Installation
 
-1. [Configure the Datadog Agent for APM.](#configure-the-datadog-agent-for-apm)
-2. [Choose your instrumentation method](#choose-your-instrumentation-method)
-3. [Install the tracer.](#install-the-tracer)
-4. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-5. [View your live data.](#view-your-live-data)
+Before you begin, make sure you've already [installed and configured the Agent][12].
 
-### Configure the Datadog Agent for APM
-
-[Install and configure the Datadog Agent][2] to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic on `http://localhost:8126`.
-
-For containerized, serverless, and cloud environments:
-
-{{< tabs >}}
-
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to configure the Agent to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
-
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-
-{{% tab "Other Environments" %}}
-
-Tracing is available for other environments including, [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
-
-For all other environments, see the [Integrations documentation][4] for that environment and contact [Datadog support][5] if you are encountering setup issues.
-
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /integrations/
-[5]: /help/
-{{% /tab %}}
-
-{{< /tabs >}}
-
+1. [Choose your instrumentation method](#choose-your-instrumentation-method)
+2. [Install the tracer.](#install-the-tracer)
+3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
+4. [View your live data.](#view-your-live-data)
 
 ### Choose your instrumentation method
 
@@ -350,3 +306,4 @@ dotnet.exe example.dll
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection#install-and-configure-the-agent

@@ -126,7 +126,7 @@ logs:
 
   - type: file
     path: "<FILE_NAME_PATH>.log"
-    service: nodejs
+    service: <SERVICE_NAME>
     source: nodejs
     sourcecategory: sourcecode
 ```
