@@ -99,6 +99,12 @@ An example of a workflow with a single step that sends a message to a Slack chan
 
 When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
+## Publish a workflow
+
+Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
+
+Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
 ## Context variables
 
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
@@ -195,12 +201,6 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 
 1. From the main workflow canvas, click on the step with the fallback you wish to remove.
 1. In the **Error Handling & Retries** section, click **Clear**.
-
-## Publish a workflow
-
-Scheduled or triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
-
-Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Further reading
 
