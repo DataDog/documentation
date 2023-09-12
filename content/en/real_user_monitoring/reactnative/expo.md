@@ -96,7 +96,7 @@ or with Yarn:
 yarn add -D @datadog/datadog-ci
 ```
 
-Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site, for example: `datadoghq.com`.
+Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
 For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][6].
 
