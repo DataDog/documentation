@@ -232,7 +232,7 @@ A regex string to redact sensitive data by its value in attack reports.
 **Default**: 5<br>
 Remote configuration polling interval in seconds.
 
-<a id="headers-extraction-and-injection">
+<a id="headers-extraction-and-injection"></a>
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>

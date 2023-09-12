@@ -449,21 +449,30 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 
 | Integration   | Service Name    |
 | ------------- | --------------- |
+| AMQP          | `amqp`          |
 | CakePHP       | `cakephp`       |
 | CodeIgniter   | `codeigniter`   |
 | cURL          | `curl`          |
 | ElasticSearch | `elasticsearch` |
 | Eloquent      | `eloquent`      |
 | Guzzle        | `guzzle`        |
+| Laminas       | `laminas`       |
 | Laravel       | `laravel`       |
+| Laravel Queue | `laravelqueue`  |
 | Lumen         | `lumen`         |
+| Memcache      | `memcache`      |
 | Memcached     | `memcached`     |
 | Mongo         | `mongo`         |
+| MongoDB       | `mongodb`       |
 | Mysqli        | `mysqli`        |
+| Nette         | `nette`         |
+| PCNTL         | `pcntl`         |
 | PDO           | `pdo`           |
 | PhpRedis      | `phpredis`      |
 | Predis        | `predis`        |
-| Slim          | `slim`          |
+| Psr18         | `psr18`         |
+| Roadrunner    | `roadrunner`    |
+| Sql Server    | `sqlsrv`        |
 | Symfony       | `symfony`       |
 | WordPress     | `wordpress`     |
 | Yii           | `yii`           |
