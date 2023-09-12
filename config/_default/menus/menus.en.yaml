@@ -4962,8 +4962,7 @@ api:
         - v2
       operationids:
         - ListMonitorDowntimes
-      unstable:
-        - v2
+      unstable: []
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4976,8 +4975,7 @@ api:
         - v2
       operationids:
         - UpdateDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4990,8 +4988,7 @@ api:
         - v2
       operationids:
         - GetDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -5004,8 +5001,7 @@ api:
         - v2
       operationids:
         - CancelDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -5030,8 +5026,7 @@ api:
         - v2
       operationids:
         - CreateDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -5044,8 +5039,7 @@ api:
         - v2
       operationids:
         - ListDowntimes
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
