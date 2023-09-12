@@ -101,7 +101,7 @@ The [Error Tracking integration][10] is helpful in debugging issues and getting 
 
 In the **Errors** tab, selecting a specific error expands the view to display the time the error occurred, as well as the error message. Clicking **Issue in error tracking** opens a panel with more detail surrounding the error, as well as any attributes associated with the session.
 
-{{< img src="/getting_started/session_replay/error-tracking.png" alt="Error tracking panel">}}
+{{< img src="/getting_started/session_replay/error-tracking.png" alt="Error tracking panel" style="width:100%" >}}
 
 ## What's next?
 
