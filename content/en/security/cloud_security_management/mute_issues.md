@@ -7,15 +7,15 @@ further_reading:
   text: "Explore out-of-the-box security detection rules"
 ---
 
-There may be times when a misconfiguration, security issue, or identity risk doesn't match the use case for your business, or you choose to accept it as a known risk. To ignore these issues, you can mute the underlying misconfiguration, security issue, or identity risk for the impacted resources.
+There may be times when a misconfiguration, issue, or identity risk doesn't match the use case for your business, or you choose to accept it as a known risk. To ignore them, you can mute the underlying misconfiguration, issue, or identity risk for the impacted resources.
 
-For example, the ['Block Public Access' feature is enabled for S3 bucket][1] rule evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the issue for the S3 bucket.
+For example, the CSM Misconfigurations rule ['Block Public Access' feature is enabled for S3 bucket][1] evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the misconfiguration for the S3 bucket.
 
 **Note**: Muting a misconfiguration removes it from the calculation of your posture score.
 
 {{< img src="security/csm/mute_issue.png" alt="The Mute Issue dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
-1. On the misconfiguration, security issue, or identity risk side panel, select one or more resources.
+1. On the misconfiguration, issue, or identity risk side panel, select one or more resources.
 2. Select **Actions** > **Mute for...**.
 3. Select a reason for the mute, for example, a fix is pending, it's a false positive, or it's an accepted risk.
 4. Enter an optional **Description**.
@@ -26,7 +26,7 @@ For example, the ['Block Public Access' feature is enabled for S3 bucket][1] rul
 
 Muted issues automatically unmute after the specified mute duration expires. You can also manually unmute an issue.
 
-1. On the misconfiguration, security issue, or identity risk side panel, select the resources with the muted issue.
+1. On the misconfiguration, issue, or identity risk side panel, select the resources with the muted issue.
 2. Select **Actions** > **Unmute**.
 3. Select a reason for the unmute, for example, there's no pending fix, it was a human error, or it's no longer an accepted risk.
 4. Enter an optional **Description**.
