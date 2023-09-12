@@ -81,7 +81,7 @@ You can view the **Resources** and **Traces** associated with a view through usi
 
 You can also view session metadata in the **Attributes** tab.
 
-{{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console">}}
+{{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console" style="width:100%" >}}
 
 ## Integrations
 
