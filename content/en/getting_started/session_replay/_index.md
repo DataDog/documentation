@@ -19,6 +19,8 @@ further_reading:
       text: 'Troubleshooting'
 ---
 
+{{< img src="/getting_started/session_replay/preview.mp4" alt="Preview of Session Replay" style="width:100%" video=true >}}
+
 ## Overview
 
 **Session Replay** is a visual tool that recreates user sessions from your applications, giving you an in-depth, video-like view of how customers are actually interacting with your product. Session replay enriches traditional, quantitative data—such as click counts, bounce rates, and page view metrics—with the qualitative context you need to analyze your users' actions.
