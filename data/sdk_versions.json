@@ -17,6 +17,6 @@
   },
   {
     "client": "datadog-api-client-typescript",
-    "version": "v1.16.0"
+    "version": "v1.15.0"
   }
 ]
