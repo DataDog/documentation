@@ -30,6 +30,8 @@ There are several ways to get started with the Observability Pipelines Worker.
 - [Datadog setup guide][2]: Install the Worker and connect it to Datadog.
 - [Splunk setup guide][3]: Install the Worker and connect it to Splunk.
 
+This document walks you through the quickstart installation steps and then provides resources for next steps.
+
 ## Prerequisites
 
 To install the Observability Pipelines Worker, you need the following:
@@ -378,7 +380,7 @@ See [Working with Data][6] for more information on transforming your data.
 
 ## Next steps
 
-The Quickstart walked you through how to install the Worker and deploy a sample pipeline configuration. For deploying specific use cases, select your use case:
+The quickstart walked you through how to install the Worker and deploy a sample pipeline configuration. For deploying specific use cases, select your use case:
 
 {{< partial name="observability_pipelines/use_cases.html" >}}
 
