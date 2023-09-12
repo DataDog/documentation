@@ -67,7 +67,7 @@ From this page, you can also expand the Performance Waterfall by selecting **Exp
 
 {{< img src="/getting_started/session_replay/performance-waterfall.png" alt="Expanded performance waterfall">}}
 
-## Developer Tools
+## Troubleshoot using Developer Tools
 
 Selecting **Dev Tools** enables you to view various aspects of your application's performance, console logs and errors associated with the view, and any application or user attributes regarding the replay. 
 
