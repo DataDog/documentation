@@ -77,7 +77,7 @@ You can view the **Resources** and **Traces** associated with a view through usi
 
 {{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view" style="width:100%" >}}
 
-{{< img src="/getting_started/session_replay/traces.png" alt="Traces associated with the view">}}
+{{< img src="/getting_started/session_replay/traces.png" alt="Traces associated with the view" style="width:100%" >}}
 
 You can also view session metadata in the **Attributes** tab.
 
