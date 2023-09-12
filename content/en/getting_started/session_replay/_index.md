@@ -2,10 +2,10 @@
 title: Getting Started with Session Replay
 kind: documentation
 further_reading:
-    - link: 'https://docs.datadoghq.com/real_user_monitoring/session_replay/'
+    - link: '/real_user_monitoring/session_replay/'
       tag: 'Documentation'
       text: 'Session Replay'
-    - link: 'https://docs.datadoghq.com/real_user_monitoring/session_replay/mobile/'
+    - link: '/real_user_monitoring/session_replay/mobile/'
       tag: 'Documentation'
       text: 'Mobile Session Replay'
     - link: 'https://www.datadoghq.com/knowledge-center/session-replay/'
@@ -14,40 +14,42 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
       tag: 'Blog'
       text: 'Use Datadog Session Replay to view real-time user journeys'
-    - link: 'https://docs.datadoghq.com/real_user_monitoring/browser/troubleshooting/'
+    - link: '/real_user_monitoring/browser/troubleshooting/'
       tag: 'Documentation'
       text: 'Troubleshooting'
 ---
 
 ## Overview
 
-**Session Replay** is a visual tool that recreates user sessions from your applications, giving you an in-depth look at how users are interacting with your product. Session Replay can be helpful in understanding an application's pain points, as well as other nuances that may be harder to detect when looking at a session timeline, but easier to notice in a visual representation. 
+**Session Replay** is a visual tool that recreates user sessions from your applications, giving you an in-depth, video-like view of how customers are actually interacting with your product. Session replay enriches traditional, quantitative data—such as click counts, bounce rates, and page view metrics—with the qualitative context you need to analyze your users' actions.
 
 This page demonstrates how to get started with Session Replay in Datadog. If you haven't already, [create a Datadog account][1].
 
-## Configuring Session Replays
+## Configure Session Replays
 
-Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][7] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. 
+Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, ensure that you have done the following:
 
-For further instructions on collecting Session Replay data, follow the [RUM Getting Started guide][2] for your application. 
+1. Set up [Datadog RUM Browser Monitoring][7] by creating a RUM application (ensure you toggle **Session Replay Enabled** to access replay recordings).
+2. Generate a **Client Token**. 
+3. Initialize the RUM Browser SDK.
 
-For setup in mobile environments, see [Mobile Session Replay][3].
+Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
-## Finding particular Session Replays
+For more detailed instructions on collecting Session Replay data, follow the [RUM Getting Started guide][2] for your application. For setup in mobile environments, see [Mobile Session Replay][3].
 
-Once you're collecting Session Replay data, select **Session Replay available** in the [RUM Explorer][4] to see all sessions with a replay attached to it. You can visualize this data as a **List**, **Timeseries**, **Top List**, **Table**, **Distribution**, **Geomap**, **Funnel**, **Tree Map**, or **Pie Chart**. 
+## Find particular Session Replays
+
+Once you're collecting Session Replay data, navigate to the [RUM Explorer][4] and select **Session Replay available** to see all sessions with a replay attached to it. You can visualize this data as a **List**, **Timeseries**, **Top List**, **Table**, **Distribution**, **Geomap**, **Funnel**, **Tree Map**, or **Pie Chart**. 
 
 {{< img src="/getting_started/session_replay/session-replay-available.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
 
-### Facets
+You can filter Sessions using **facets**. Filtering by [facet][5] is helpful if you are searching for specific information, such as a particular user or device type. 
 
-You can filter Sessions using facets. Filtering by [facet][5] is helpful if you are searching for specific information, such as a particular user or device type. 
+{{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet" style="width:100%" >}}
 
-### Views
+You are also able to filter by [view][6], as well as customize and pin views. This can be helpful in the case that you know where the issue lies.
 
-You are also able to filter by [view][6]. This can be helpful in the case that you know where the issue lies.
-
-{{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet and view" style="width:100%" >}}
+{{< img src="/getting_started/session_replay/pinned-views.png" alt="Views dropdown" style="width:100%" >}}
 
 ## Examine a user journey
 
@@ -69,25 +71,27 @@ From this page, you can also expand the Performance Waterfall by selecting **Exp
 
 ## Troubleshoot using Developer Tools
 
-Session Replay's [Browser Developer Tools][8] enable you to view various aspects of your application's performance, console logs, and errors associated with the view, and any application or user attributes regarding the replay. 
+Session Replay's [Browser Developer Tools][8] enable you to view various aspects of your application's performance, console logs and errors associated with the view, and any application or user attributes regarding the replay. 
 
 {{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console" style="width:100%" >}}
 
-You can view the **Resources** and **Traces** associated with a view through using the tabs.
+You can view any **Resources** associated with a view by selecting the Resources tab.
 
 {{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view" style="width:100%" >}}
 
+**Traces** associated with a view can be found in the [Traces tab](#tracing-with-the-apm-integration).
+
 {{< img src="/getting_started/session_replay/traces.png" alt="Traces associated with the view" style="width:100%" >}}
 
-You can also view session metadata in the **Attributes** tab.
+Session metadata is populated in the **Attributes** tab.
 
 {{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console" style="width:100%" >}}
 
-## Datadog integrations
+## Pivot to correlated data
 
 Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
 
-### APM integration
+### Tracing with the APM integration
 
 Combining Session Replay with [APM traces][9] enables you to receive end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience.
 
@@ -95,7 +99,7 @@ Within the Traces tab, select **View Trace in APM** to see more detailed informa
 
 {{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information" style="width:100%" >}}
 
-### Error Tracking integration
+### Investigating errors with the Error Tracking integration
 
 The [Error Tracking integration][10] is helpful in debugging issues and getting to the root cause. You can receive alerts for an error, see the exact line of code that caused it, and pivot to view a user session that encountered the error on the Datadog site.
 
@@ -104,6 +108,14 @@ In the **Errors** tab, selecting a specific error expands the view to display th
 {{< img src="/getting_started/session_replay/error-tracking.png" alt="Error tracking panel" style="width:100%" >}}
 
 ## What's next?
+
+### Create Browser Tests from Session Replays
+
+You can [create a browser test][11] from the exact sequence of steps your users went through in a Session Replay. Navigate to the [RUM Explorer][4] and select a session with an available Session Replay that you want to create a browser test from. Click **Generate Synthetic Browser Test** above the event timeline.
+
+{{< img src="/getting_started/session_replay/browser-test.png" alt="Browser test creation popup window" style="width:100%" >}}
+
+### Share with your team
 
 You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time, to direct your team's attention to a particular time and view of the Replay.
 
@@ -123,3 +135,4 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 [8]: /real_user_monitoring/session_replay/developer_tools
 [9]: /real_user_monitoring/connect_rum_and_traces
 [10]: /real_user_monitoring/error_tracking/
+[11]: /synthetics/guide/rum-to-synthetics/
