@@ -28,7 +28,7 @@ Access your Synthetic dashboards by filtering for `Synthetics` in the search que
 
 ## Interact with Synthetic dashboards
 
-You can clone [dashboards][5] and customize them by team, environment, or region using template variables.
+You can clone [dashboards][5] and customize them by team, environment, or region using template variables. You can also customize your view and create a [saved view][6] of your cloned dashboard.
 
 ### Template variables
 
@@ -53,3 +53,4 @@ To clone your Synthetic dashboard, click the **Settings** icon and select **Clon
 [3]: https://app.datadoghq.com/synthetics/tests/
 [4]: https://app.datadoghq.com/synthetics/tests
 [5]: /dashboards/
+[6]: /continuous_testing/explorer/saved_views/
