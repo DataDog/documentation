@@ -93,7 +93,7 @@ Combining Session Replay with APM traces and metrics enables you to receive end-
 
 Within the Traces tab, select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
 
-{{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information">}}
+{{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information" style="width:100%" >}}
 
 ### Error Tracking integration
 
