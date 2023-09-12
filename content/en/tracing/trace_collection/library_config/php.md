@@ -426,7 +426,7 @@ Enables WordPress action hook callbacks instrumentation. This feature is only av
 `DD_TRACE_WORDPRESS_ENHANCED_INTEGRAION`
 : **INI**: `datadog.trace.wordpress_enhanced_integration`<br>
 **Default**: `false`<br>
-Enables the enhanced WordPress integration. Added in version `0.91.0`.
+Enables the enhanced WordPress integration. **This integration is in public beta**. Added in version `0.91.0`.
 
 
 `DD_DBM_PROPAGATION_MODE`
@@ -449,21 +449,30 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 
 | Integration   | Service Name    |
 | ------------- | --------------- |
+| AMQP          | `amqp`          |
 | CakePHP       | `cakephp`       |
 | CodeIgniter   | `codeigniter`   |
 | cURL          | `curl`          |
 | ElasticSearch | `elasticsearch` |
 | Eloquent      | `eloquent`      |
 | Guzzle        | `guzzle`        |
+| Laminas       | `laminas`       |
 | Laravel       | `laravel`       |
+| Laravel Queue | `laravelqueue`  |
 | Lumen         | `lumen`         |
+| Memcache      | `memcache`      |
 | Memcached     | `memcached`     |
 | Mongo         | `mongo`         |
+| MongoDB       | `mongodb`       |
 | Mysqli        | `mysqli`        |
+| Nette         | `nette`         |
+| PCNTL         | `pcntl`         |
 | PDO           | `pdo`           |
 | PhpRedis      | `phpredis`      |
 | Predis        | `predis`        |
-| Slim          | `slim`          |
+| Psr18         | `psr18`         |
+| Roadrunner    | `roadrunner`    |
+| Sql Server    | `sqlsrv`        |
 | Symfony       | `symfony`       |
 | WordPress     | `wordpress`     |
 | Yii           | `yii`           |
