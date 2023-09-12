@@ -85,7 +85,7 @@ You can also view session metadata in the **Attributes** tab.
 
 ## Integrations
 
-Session Replay is seamlessly integrated with your application's metrics, traces, and logs, giving you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
+Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
 
 ### APM integration
 
