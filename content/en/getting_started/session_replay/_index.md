@@ -53,7 +53,7 @@ You are also able to filter by [view][6]. This can be helpful in the case that y
 
 The **User Journey** functions as an event timeline, and is tracked on the right side of the page. Starting from the beginning of a replay, you can watch everything that a particular user did. You can navigate to any moment in the user journey by clicking on an event.
 
-{{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey">}}
+{{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey" style="width:100%" >}}
 
 You are able to filter the User Journey by **View**, **Action**, **Error**, and **Frustration Signal** by selecting **Events**. 
 
