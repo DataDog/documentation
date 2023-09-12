@@ -57,8 +57,61 @@ After completing setup, run your tests as you normally do:
 DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddtrace
 {{< /code-block >}}
 
+## Preventing the Intelligent Test Runner from skipping specific tests or modules
+
+You can override the Intelligent Test Runner's behavior and prevent specific tests or modules from being skipped. These tests are referred to as unskippable tests.
+
+### Why make tests unskippable?
+
+The Intelligent Test Runner uses coverage data to determine whether or not tests should be skipped. In some cases, coverage data may not be sufficient to make this determination.
+
+Examples include:
+
+* Tests that read data from text files
+* Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
+
+Designating tests as unskippable ensures that the Intelligent Test Runner will run them regardless of coverage data.
+
+### Compatibility
+
+Unskippable tests are supported in the following versions and testing frameworks:
+
+* `pytest`
+  * From `ddtrace>=1.19.0`
+
+### Marking tests as unskippable in `pytest`
+
+You can use [`pytest`][2]'s [`skipif` mark][3] to prevent the Intelligent Test Runner from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+
+#### Individual tests
+
+Individual tests can be marked as unskippable using the `@pytest.mark.skipif` decorator as follows:
+```
+import pytest
+
+@pytest.mark.skipif(False, reason="datadog_itr_unskippable")
+def test_function():
+    assert True
+```
+#### Modules
+
+Modules can be skipped using the [`pytestmark` global][4] as follows:
+```
+import pytest
+
+pytestmark = pytest.mark.skipif(False, reason="datadog_itr_unskippable")
+
+def test_function():
+    assert True
+```
+
+Note that `pytest` will honor any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/python
+[2]: https://pytest.org/
+[3]: https://docs.pytest.org/en/latest/reference/reference.html#pytest-mark-skipif-ref
+[4]: https://docs.pytest.org/en/latest/reference/reference.html#globalvar-pytestmark
