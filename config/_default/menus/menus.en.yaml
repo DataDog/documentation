@@ -887,11 +887,16 @@ main:
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: Tag Pipelines
+    url: cloud_cost_management/tag_pipelines
+    parent: cloud_cost_top_level
+    identifier: tag_pipelines
+    weight: 1
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 1
+    weight: 2
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1321,6 +1326,11 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_logic_actions
     weight: 102
+  - name: Save and Reuse Actions
+    url: service_management/workflows/actions_catalog/saved_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_saved_actions
+    weight: 103
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
@@ -3356,6 +3366,11 @@ main:
     parent: synthetics_explorer
     identifier: continuous_testing_explorer_search_syntax
     weight: 603
+  - name: Saved Views
+    url: continuous_testing/explorer/saved_views/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_saved_views
+    weight: 604
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
@@ -4952,8 +4967,7 @@ api:
         - v2
       operationids:
         - ListMonitorDowntimes
-      unstable:
-        - v2
+      unstable: []
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4966,8 +4980,7 @@ api:
         - v2
       operationids:
         - UpdateDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4980,8 +4993,7 @@ api:
         - v2
       operationids:
         - GetDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -4994,8 +5006,7 @@ api:
         - v2
       operationids:
         - CancelDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -5020,8 +5031,7 @@ api:
         - v2
       operationids:
         - CreateDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -5034,8 +5044,7 @@ api:
         - v2
       operationids:
         - ListDowntimes
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
