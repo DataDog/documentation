@@ -6,7 +6,10 @@ private: true
 is_beta: true
 ---
 
-For instructions on running natural language queries in Datadog, see [Querying in a search bar][1] and [Querying in the chat panel][2].
+{{< whatsnext desc="For instructions on running natural language queries in Datadog, see:">}}
+    {{< nextlink href="bits_ai/getting_started/#in-the-chat-panel" >}}Querying in the chat panel{{< /nextlink >}}
+    {{< nextlink href="bits_ai/getting_started/#in-a-search-bar" >}}Querying in a search bar{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Logs
 You can query your logs in natural language from the Logs Explorer search bar.
@@ -48,6 +51,4 @@ Examples:
 - "Break down cost by team"
 {{< img src="bits_ai/cost-by-team.png" alt="Screenshot of query result" style="width:90%;">}}
 
-[1]: /bits_ai/getting_started/#in-a-search-bar
-[2]: /bits_ai/getting_started/#in-the-chat-panel
 [3]: https://app.datadoghq.com/inventories/sql
