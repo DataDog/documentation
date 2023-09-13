@@ -113,7 +113,7 @@ In the **Errors** tab, selecting a specific error expands the view to display th
 
 ## What's next?
 
-### Create Browser Tests from Session Replays
+### Create Synthetic browser tests from Session Replays
 
 You can [create a synthetic browser test][11] from the exact sequence of steps your users went through in a Session Replay. Datadog runs synthetic tests on an automated schedule you define, to simulate user behavior, reporting failing tests to you without your users having to encounter the problem again.
 
