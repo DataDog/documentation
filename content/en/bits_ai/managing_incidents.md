@@ -10,28 +10,24 @@ is_beta: true
 
 ## Prerequisites
 
-- The "Mirror all incident Slack channel messages to its incident timeline in real-time" option must be turned on in your Incident Settings. This enables Datadog to generate summaries and postmortems from Slack conversations.
+- The "Mirror all incident Slack channel messages to its incident timeline in real-time" option must be turned on in **[Incident > Settings > Integrations][3] > Slack**. This enables Datadog to generate summaries and postmortems from Slack conversations.
 - The incident channel name must be prefixed with `#incident-`. This enables you to use the Bits AI chatbot in Slack (`@Datadog`) to ask questions about the incident or give updates on it.
 
-<span style='background-color: yellow'>[INTEGRATION SETTINGS SCREENSHOT]</span>
+{{< img src="bits_ai/integration-settings.png" alt="Screenshot of Slack integration settings in Datadog" style="width:90%;">}}
 
 ## Generate incident summaries and scheduled updates
 
 To generate an incident summary,
 1. Join an incident channel on Slack that is linked to the Datadog Incidents app.
-1. View the incident summary when you join. Summaries are only displayed in channels with 15 or more messages. Only you will see the summary, and it will not persist across reloads, between desktop and mobile apps, or across sessions.
+1. View the incident summary when you join. Summaries are only displayed in channels with 15 or more messages. Only you see the summary, and it does not persist across reloads, between desktop and mobile apps, or across sessions.
 
 To schedule an update,
 1. Ask `@Datadog Give me an update in X minutes` in the desired incident Slack channel.
 1. Follow the instructions to connect your Datadog account and adjust the preferences.
 
-<span style='background-color: yellow'>[SCREENSHOT OF SUMMARY + UPDATE REQUEST]</span>
-
 ## Ask questions
 
 You can use the Bits AI chatbot in Slack to ask customized questions about your incident: `@Datadog I am a customer relations manager, and my customer is asking for an update on incident 2781. Can you give me a few bullet points that I can send to my customer?`
-
-<span style='background-color: yellow'>[SCREENSHOT]</span>
 
 ## Update the severity level and status
 
@@ -67,3 +63,4 @@ If an incident already has a linked postmortem, you can unlink it before [genera
 
 [1]: https://app.datadoghq.com/incidents/settings#Postmortems
 [2]: https://app.datadoghq.com/incidents
+[3]: https://app.datadoghq.com/incidents/settings#Integrations

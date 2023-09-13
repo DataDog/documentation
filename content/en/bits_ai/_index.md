@@ -51,11 +51,7 @@ For details, see [Managing Incidents][4].
 
 If you have Datadog Workflows configured, you can trigger them from Slack. For example, sending `@Datadog Give me a workflow to block IPs in Cloudflare` starts a conversation in which the chatbot confirms the desired workflow and asks for any required parameters.
 
-<span style='background-color: yellow'>[SCREENSHOT OF SLACK WORKFLOWS]</span>
-
-## Privacy
-
-<span style='background-color: yellow'>[INFO NEEDED]</span>
+{{< img src="bits_ai/slack-workflow.png" alt="Workflow request to Bits AI in Slack" style="width:60%;">}}
 
 ## Feedback
 
