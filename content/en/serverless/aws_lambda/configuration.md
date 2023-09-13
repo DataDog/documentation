@@ -352,59 +352,59 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
-### Renaming upstream and downstream services
+## Renaming Upstream and Downstream Services
 
-This section explains how to rename both upstream and downstream services using specific environment variables. You can use these mappings for more clarity in your instrumentation or for easier identification in your data visualization.
+This guide explains how to rename both upstream and downstream services in Datadog using environment variables and system properties.
 
-#### Overview
+### Table of Contents
+1. [Rename Upstream Service Names](#rename-upstream-service-names)
+2. [Rename Downstream Service Names](#rename-downstream-service-names)
 
-- `DD_SERVICE_MAPPING` allows renaming of upstream non-Lambda services.
-- `DD_TRACE_PEER_SERVICE_MAPPING` enables the remapping of the `peer.service` tag across all instrumentation.
+### Rename Upstream Service Names
 
-Both mappings operate using the format: `old-name:new-name`. Multiple pairs can be defined using a comma to separate them.
+| Source Type | Service | Identifier | DD_SERVICE_MAPPING Value |
+|---|---|---|---|
+| General | API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| | SNS | `lambda_sns` | `"lambda_sns:newServiceName"` |
+| | SQS | `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| | S3 | `lambda_s3` | `"lambda_s3:newServiceName"` |
+| | EventBridge | `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| | Kinesis | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| | DynamoDB | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| | Lambda URLs | `lambda_url` | `"lambda_url:newServiceName"` |
+| Specific | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| | SNS | Topic name | `"ExampleTopic:newServiceName"` |
+| | SQS | Queue name | `"MyQueue:newServiceName"` |
+| | S3 | Bucket name | `"example-bucket:newServiceName"` |
+| | EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
+| | Kinesis | Stream name | `"MyStream:newServiceName"` |
+| | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
+| | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-#### Syntax
+### Rename Downstream Service Names (created by DD-Trace-X)
 
-- For upstream services: `DD_SERVICE_MAPPING=old-name1:new-name1,old-name2:new-name2,...`
-- For downstream services: `DD_TRACE_PEER_SERVICE_MAPPING=old-name1:new-name1,old-name2:new-name2,...`
+| Language | Configuration Key | Default | Example | Description |
+|----------|-------------------|---------|---------|-------------|
+| Python   | `DD_SERVICE_MAPPING` | N/A | `postgres:postgresql,defaultdb:postgresql` | Rename services in traces. |
+| JS       | `DD_SERVICE_MAPPING` | N/A | `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db` | Provide service names for plugins. |
+| Ruby     | Not Defined | N/A | N/A | `DD_SERVICE_MAPPING` is not available. |
+| Java     | `DD_SERVICE_MAPPING` | `null` | `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db` | Dynamically rename services. |
+| Go       | `DD_SERVICE_MAPPING` | `null` | `mysql:mysql-service-name,postgres:postgres-service-name` | Rename services. |
+| .NET     | `DD_TRACE_SERVICE_MAPPING` | N/A | `mysql:main-mysql-db, mongodb:offsite-mongodb-service` | Rename services using config. |
 
-#### Examples with description
+| Language | Minimum Version | Environment Variable Settings | System Property/Tracer Settings | Peer Service Mapping Example |
+|----------|-----------------|-------------------------------|--------------------------------|-----------------------------|
+| Java     | 1.16.0          | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `-Ddd.trace.peer.service.defaults.enabled=true`<br>`-Ddd.trace.remove.integration-service-names.enabled=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Go       | v1.52.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `WithPeerServiceDefaultsEnabled(true)`<br>`WithGlobalServiceName(true)` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| NodeJS   | 2.44.0<br>3.31.0<br>4.10.0 | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `spanComputePeerService=true`<br>`spanRemoveIntegrationFromService=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| .NET     | v2.35.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `PeerServiceNameMappings` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Python   | v1.16.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `PeerServiceNameMappings` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Ruby     | v1.13.0         | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | N/A | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service`<br>`DD_TRACE_DALLI_PEER_SERVICE=billing-api` |
 
-| Command | Description |
-|---|---|
-| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
-| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
-| `DD_TRACE_PEER_SERVICE_MAPPING="old-service1:new-service1"` | Remaps `old-service1` downstream to `new-service1` |
+> **Notes**:
+> - For Ruby: Set `peer.service` value for specific integrations using `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE`.
+> - Python does not support Boto2 as of version v1.16.0.
 
-#### Rename all services of a type (Upstream)
-
-To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
-
-| AWS Lambda Integration | DD_SERVICE_MAPPING Value |
-|---|---|
-| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
-| `lambda_sns` | `"lambda_sns:newServiceName"` |
-| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
-| `lambda_s3` | `"lambda_s3:newServiceName"` |
-| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
-| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
-| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
-| `lambda_url` | `"lambda_url:newServiceName"` |
-
-#### Rename specific services (Upstream)
-
-For a more granular approach, use these service-specific identifiers:
-
-| Service | Identifier | DD_SERVICE_MAPPING Value |
-|---|---|---|
-| API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
-| SNS | Topic name | `"ExampleTopic:newServiceName"` |
-| SQS | Queue name | `"MyQueue:newServiceName"` |
-| S3 | Bucket name | `"example-bucket:newServiceName"` |
-| EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
-| Kinesis | Stream name | `"MyStream:newServiceName"` |
-| DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
-| Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
 ## Filter or scrub information from logs
 
