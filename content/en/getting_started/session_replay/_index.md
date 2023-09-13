@@ -39,7 +39,7 @@ To start collecting data for Session Replay:
 
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
-For more detailed instructions on collecting Session Replay data, follow the [RUM Getting Started guide][2] for your application. For setup in mobile environments, see [Mobile Session Replay][3].
+For more detailed instructions on collecting Session Replay data, follow the [RUM setup documentation][2] for your application. For Session Replay setup on mobile apps, see [Mobile Session Replay][3].
 
 ## Find particular Session Replays
 
