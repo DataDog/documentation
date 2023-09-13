@@ -29,7 +29,7 @@ This page walks you through getting started with Session Replay in Datadog. If y
 
 ## Configure Session Replays
 
-Session Replay is available for browser applications and mobile apps. The examples in this guide show it for a browser app. 
+Session Replay is available for browser applications and mobile apps. The examples in this guide demonstrate using Session Replay with a browser app. 
 
 To start collecting data for Session Replay:
 
@@ -43,27 +43,30 @@ For more detailed instructions on collecting Session Replay data, follow the [RU
 
 ## Find particular Session Replays
 
-Once you're collecting Session Replay data, navigate to the [RUM Explorer][4] and select **Session Replay available** to see all sessions with a replay attached to it. You can visualize this data as a **List**, **Timeseries**, **Top List**, **Table**, **Distribution**, **Geomap**, **Funnel**, **Tree Map**, or **Pie Chart**. 
+Once you're collecting Session Replay data, navigate to the [RUM Explorer][4] and select **Session Replay available** to see all sessions with a replay attached to it. You can visualize this data as a **List**, **Timeseries**, or other format.
 
 {{< img src="/getting_started/session_replay/session-replay-available.png" alt="Session Replay available button, as well as visualization options" style="width:100%" >}}
 
-You can filter Sessions using **facets**. Filtering by [facet][5] is helpful if you are searching for specific information, such as a particular user or device type. 
+Suppose you've been told that a customer experienced issues with your application on a mobile device. You can filter Sessions using **facets**. In this case, filtering by [facet][5] is helpful in searching for specific information, such as a particular user or device type.
 
 {{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet" style="width:100%" >}}
 
-You are also able to filter by [view][6], as well as customize and pin views. This can be helpful in the case that you know where the issue lies.
+Maybe you've created a [Saved View][6] that shows you all Sessions that contain the specific error that your customer encountered. This can be helpful in the case that you know where the issue lies.
 
 {{< img src="/getting_started/session_replay/pinned-views.png" alt="Views dropdown" style="width:100%" >}}
 
 ## Examine a user journey
 
-The **User Journey** is an event timeline on the right side of the page. The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. You can navigate to any moment in the user journey by clicking on an event in the list.
+The **User Journey** is an event timeline on the right side of the page. The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. You can navigate to any moment in the user journey by clicking on an event in the list. You can also track all the actions and errors occurring for each view by clicking **Session Breakdown**.
 
 {{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey" style="width:100%" >}}
 
-You are able to filter the User Journey by **View**, **Action**, **Error**, and **Frustration Signal** by selecting **Events**. 
+Select **Events** to filter the user journey list by the following event types:
 
-{{< img src="/getting_started/session_replay/views-actions-errors.png" alt="Panel that allows for filtering by view, action, error, and frustration signal" style="width:100%" >}}
+- **View**
+- **Action**
+- **Error**
+- **Frustration Signal**
 
 While hovering over a particular time or view in the user journey, select **Details** to examine Core Web Vitals and other pertinent information, without leaving the replay.
 
@@ -79,27 +82,19 @@ Open Session Replay's [browser developer tools][8] to explore your application's
 
 {{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console" style="width:100%" >}}
 
-You can view any **Resources** associated with a view by selecting the Resources tab.
-
-{{< img src="/getting_started/session_replay/resources.png" alt="Resources associated with the view" style="width:100%" >}}
-
-**Traces** associated with a view can be found in the [Traces tab](#tracing-with-the-apm-integration).
-
-{{< img src="/getting_started/session_replay/traces.png" alt="Traces associated with the view" style="width:100%" >}}
-
-Session metadata is populated in the **Attributes** tab.
-
-{{< img src="/getting_started/session_replay/attributes.png" alt="Attributes tab of the Dev tools console" style="width:100%" >}}
-
 ## Pivot to correlated data
 
 Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Utilizing the APM and Error Tracking integrations alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
 
 ### Tracing with the APM integration
 
-Combining Session Replay with [APM traces][9] enables you to receive end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience.
+Combining Session Replay with [APM traces][9] enables you to receive end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience. Having full-stack traces can be helpful if you're unsure whether an error is occurring on the frontend or backend of your application. 
 
-Within the Traces tab, select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
+Select a replay with traces to view the browser request, as well as all the backend dependencies and services called upon to fulfill the request in a specific page.
+
+{{< img src="/getting_started/session_replay/traces-view.png" alt="Traces panel" style="width:100%" >}}
+
+Select **View Trace in APM** to see more detailed information, including errors and logs associated with the trace. 
 
 {{< img src="/getting_started/session_replay/APM.png" alt="APM page with more detailed information" style="width:100%" >}}
 
