@@ -19,9 +19,9 @@ further_reading:
 Datadog recommends forwarding your Google Cloud logs with a <strong>Pull</strong> subscription to leverage compression and batching of events. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
 </div>
 
-This guide describes how to forward your Google Cloud logs to Datadog through a **Push** subscription to a [Google Cloud Pub/Sub][10] topic.
+This guide describes how to forward logs from your Google Cloud services to Datadog through a **Push** subscription to a [Google Cloud Pub/Sub][10] topic.
 
-For applications running in GCE or GKE, you can also use the [Datadog Agent][13] to collect logs locally. 
+To collect logs from applications running in GCE or GKE, you can also use the [Datadog Agent][13].
 
 ## Setup
 
