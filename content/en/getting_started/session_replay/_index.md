@@ -57,7 +57,7 @@ You are also able to filter by [view][6], as well as customize and pin views. Th
 
 ## Examine a user journey
 
-The **User Journey** functions as an event timeline, and is tracked on the right side of the page. Starting from the beginning of a replay, you can watch everything that a particular user did. You can navigate to any moment in the user journey by clicking on an event.
+The **User Journey** is an event timeline on the right side of the page. The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. You can navigate to any moment in the user journey by clicking on an event in the list.
 
 {{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey" style="width:100%" >}}
 
