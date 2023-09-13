@@ -37,7 +37,7 @@ The [Google Cloud Platform integration][1] is successfully installed.
 
 2. Give that topic an explicit name such as `export-logs-to-datadog` and click _Create_.
 
-**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on how to set up a monitor to be automatically notified if you get close to those limits.
+**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on setting up monitor notifications if you approach those limits.
 
 ### Subscribe to your Google Cloud Pub/Sub topic
 
