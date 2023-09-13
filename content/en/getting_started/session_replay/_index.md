@@ -75,7 +75,7 @@ From the Details page, you can expand the waterfall view for more detailed infor
 
 ## Troubleshoot using Developer Tools
 
-Session Replay's [Browser Developer Tools][8] enable you to view various aspects of your application's performance, console logs and errors associated with the view, and any application or user attributes regarding the replay. 
+Open Session Replay's [browser developer tools][8] to explore your application's performance, console logs, errors, and application or user attributes associated with the current replay. 
 
 {{< img src="/getting_started/session_replay/dev-tools.png" alt="Dev tools console" style="width:100%" >}}
 
