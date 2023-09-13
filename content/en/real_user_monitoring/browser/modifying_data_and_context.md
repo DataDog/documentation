@@ -907,21 +907,21 @@ Once RUM is initialized, read the global context with the `getGlobalContext()` A
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-const context = datadogRum.getRumGlobalContext();
+const context = datadogRum.getGlobalContext();
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
-  const context = window.DD_RUM.getRumGlobalContext();
+  const context = window.DD_RUM.getGlobalContext();
 });
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```javascript
-const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
+const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 ```
 
 {{% /tab %}}

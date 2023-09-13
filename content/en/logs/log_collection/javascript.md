@@ -976,7 +976,7 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 After a logger is created, it is possible to:
 
 - Set the entire context for your logger with the `setContext (context: object)` API.
-- Add a context to your logger with `addContext (key: string, value: any)` API:
+- Set a context property to your logger with `setContextProperty (key: string, value: any)` API:
 
 ##### NPM
 
@@ -987,7 +987,7 @@ import { datadogLogs } from '@datadog/browser-logs'
 
 datadogLogs.setContext("{'env': 'staging'}")
 
-datadogLogs.addContext('referrer', document.referrer)
+datadogLogs.setContextProperty('referrer', document.referrer)
 ```
 
 #### CDN async
@@ -1000,7 +1000,7 @@ window.DD_LOGS.onReady(function () {
 })
 
 window.DD_LOGS.onReady(function () {
-  window.DD_LOGS.addContext('referrer', document.referrer)
+  window.DD_LOGS.setContextProperty('referrer', document.referrer)
 })
 ```
 
@@ -1013,7 +1013,7 @@ For CDN sync, use:
 ```javascript
 window.DD_LOGS && window.DD_LOGS.setContext("{'env': 'staging'}")
 
-window.DD_LOGS && window.DD_LOGS.addContext('referrer', document.referrer)
+window.DD_LOGS && window.DD_LOGS.setContextProperty('referrer', document.referrer)
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
