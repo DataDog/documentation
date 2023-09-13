@@ -58,13 +58,13 @@ Alternatively, use the following examples to enable CSM Workload Security:
           enabled: true
     ```
 2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
-   
+
     ```yaml
     # values.yaml file
     datadog:
       securityAgent:
         runtime:
-          security_profile:
+          securityProfile:
             enabled: true
     ```
 
@@ -88,20 +88,7 @@ Alternatively, use the following examples to enable CSM Workload Security:
           enabled: true
     ```
 
-2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
-   
-    ```yaml
-    # values.yaml file
-    spec:
-      features:
-        cws:
-          security_profile:
-            enabled: true
-    ```
-
-    See the [Datadog Operator documentation][2] for additional configuration options.
-
-3. Restart the Agent.
+2. Restart the Agent.
 
 
 [1]: /security/threats/runtime_anomaly_detection
