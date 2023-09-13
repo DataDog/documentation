@@ -3521,6 +3521,11 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
           $ref: '#/components/schemas/EventQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -3532,6 +3537,13 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
