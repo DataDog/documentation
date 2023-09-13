@@ -65,7 +65,7 @@ You are able to filter the User Journey by **View**, **Action**, **Error**, and 
 
 {{< img src="/getting_started/session_replay/views-actions-errors.png" alt="Panel that allows for filtering by view, action, error, and frustration signal" style="width:100%" >}}
 
-While hovering over a particular time or view in the user journey, selecting **Details** opens a side panel where you can examine specific Core Web Vitals of the page, as well as other pertinent information, without leaving the replay.
+While hovering over a particular time or view in the user journey, select **Details** to examine Core Web Vitals and other pertinent information, without leaving the replay.
 
 {{< img src="/getting_started/session_replay/details-panel.png" alt="Panel with additional details">}}
 
