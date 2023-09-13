@@ -4110,12 +4110,12 @@ main:
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
     weight: 407
-  - name: OAuth for Integrations
-    url: developers/integrations/oauth_for_integrations
-    parent: dev_tools_integrations
-    weight: 408
   - name: Create a Recommended Monitor
     url: developers/integrations/create-an-integration-recommended-monitor
+    parent: dev_tools_integrations
+    weight: 408
+  - name: OAuth for Integrations
+    url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
     weight: 409
   - name: Install Agent Integration Developer Tool
