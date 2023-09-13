@@ -36,7 +36,7 @@ Bits AI also expands on issues with upstream and downstream dependencies. This f
 
 {{< whatsnext desc="Additional documentation:">}}
     {{< nextlink href="bits_ai/getting_started/" >}}Getting Started{{< /nextlink >}}
-    {{< nextlink href="bits_ai/query_examples/" >}}Query Examples{{< /nextlink >}}
+    {{< nextlink href="bits_ai/query_examples/" >}}Example Natural Language Queries{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Streamline incident management
