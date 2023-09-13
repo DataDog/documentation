@@ -35,7 +35,7 @@ To start collecting data for Session Replay:
 
 1. Set up [Datadog RUM Browser Monitoring][7] by creating a RUM application (ensure you toggle **Session Replay Enabled** to access replay recordings).
 2. Generate a **Client Token**. 
-3. Initialize the RUM Browser SDK.
+3. Initialize the RUM Browser SDK by inserting the configuration code generated when you create the RUM application into your application source.
 
 Until Datadog starts receiving data, your application appears as `pending` on the **RUM Applications** page.
 
