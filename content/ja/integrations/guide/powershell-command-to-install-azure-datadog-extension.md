@@ -27,10 +27,10 @@ Azure インスタンスで Datadog Agent を拡張機能として実行する�
 {{% tab "Windows" %}}
 
 ```powershell
-Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
 
-Azure インスタンス拡張機能を設定するための構文の詳細は、[Azure Extension Set-AzureVMExtension ドキュメント][1]に記載されています。
+Azure インスタンス拡張機能を設定するための構文の詳細は、[Azure Extension Set-AzVMExtension ドキュメント][1]に記載されています。
 
 Azure 拡張機能は、通常の設定と保護された設定の両方を受け入れることができます。
 
@@ -49,7 +49,7 @@ Azure 拡張機能は、通常の設定と保護された設定の両方を受�
 |----------|------|--------------|
 | `api_key`| 文字列 | Datadog API キーを構成ファイルに追加します。 |
 
-**注**: `agentConfiguration` と `api_key` を同時に指定した場合、`agentConfiguration` に記述された API キーが優先されます。また、ターゲットマシンに API キーが設定されている場合、`Set-AzureVMExtension` で API キーを変更することはできないことに注意してください。
+**注**: `agentConfiguration` と `api_key` を同時に指定した場合、`agentConfiguration` に記述された API キーが優先されます。また、ターゲットマシンに API キーが設定されている場合、`Set-AzVMExtension` で API キーを変更することはできないことに注意してください。
 
 ### 構成 URI の指定
 この例では、Datadog Agent が使用する構成を指定する方法を示します。
@@ -69,7 +69,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 **注**: ダウングレードはサポートされていないため、ターゲットマシンに現在インストールされている Datadog Agent のバージョンよりも低いバージョンの Datadog Agent をインストールすることはできません。Datadog Agent の下位バージョンをインストールするには、ターゲットマシン上の Datadog Windows Agent Azure Extension を削除して、以前のバージョンを最初にアンインストールしてください。Datadog Windows Agent Azure Extension を削除しても、Datadog Agent の構成は削除されません。
 
 ```powershell
-Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "7.40.0"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
 
 [1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
@@ -77,7 +77,7 @@ Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Data
 {{% tab "Linux" %}}
 
 ```bash
-az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
+az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 ```
 Azure インスタンス拡張機能を設定するための構文の詳細は、[Azure Extension CLI リファレンス][1]に記載されています。
 
@@ -107,7 +107,7 @@ Azure 拡張機能は、通常の設定と保護された設定の両方を受�
 - Datataog Agent 構成は、`/etc/datadog-agent/` フォルダから作成する必要があります。
 
 ```bash
-az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 6.0 --settings '{"site":"datadoghq.com", "agentVersion":"7.40.0", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
+az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 ```
 
 
