@@ -36,8 +36,8 @@ Where available, the feature can be accessed by typing a space into the search b
 
 1. [Connect your Datadog account to your Slack workspace][1].
 1. Use the `/dd connect` command to display a list of accounts to connect to.
-1. Choose **Traveloka Dev** in the dropdown.
-1. Authorize additional permissions needed by Bits AI. <span style='background-color: yellow'>[LINK?]</span>
+1. Choose the name of your Datadog account in the dropdown.
+1. Authorize additional permissions needed by Bits AI. Your Customer Success Manager should have emailed you a link for this step; contact them if you're unable to locate it.
 
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
