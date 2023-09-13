@@ -44,6 +44,8 @@ If the above prerequisites are met, follow the setup instructions for your hosti
 
 The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
 
+The Agent doesn't require any external Oracle clients.
+
 #### Recommended Agent version
 
 The following Oracle DBM builds are recommended, as they contain all the implemented Oracle monitoring features and bug fixes. The basis of an Oracle DBM build is always a stable Agent release.
@@ -56,10 +58,6 @@ If you prefer an official Datadog Agent release, a minimum version of `7.47.0` i
 
 - To install an Oracle build, see [Oracle DBM build installation](#oracle-dbm-build-installation).
 - To install the latest official release, follow the [instructions for your platform][3]. 
-
-#### Oracle client
-
-The Agent doesn't require any external Oracle clients.
 
 #### Oracle DBM build installation
 
