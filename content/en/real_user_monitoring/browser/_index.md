@@ -1806,7 +1806,7 @@ The percentage of tracked sessions with [Browser RUM & Session Replay pricing][1
 **Default**: `false`<br/>
 Initialization fails silently if the RUM Browser SDK is already initialized on the page.
 
-`proxyUrl`
+`proxy`
 : Optional<br/>
 **Type**: String<br/>
 Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][7].
