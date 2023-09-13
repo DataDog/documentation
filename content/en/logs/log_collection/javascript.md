@@ -343,21 +343,22 @@ window.DD_LOGS.init({
 
 The following parameters are available to configure the Datadog browser logs SDK to send logs to Datadog:
 
-| Parameter             | Type                                                                      | Required | Default         | Description                                                                                                                                                                           |
-| --------------------- | ------------------------------------------------------------------------- | -------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientToken`         | String                                                                    | Yes      |                 | A [Datadog client token][2].                                                                                                                                                          |
-| `site`                | String                                                                    | Yes      | `datadoghq.com` | The [Datadog site parameter of your organization][9].                                                                                                                                 |
-| `service`             | String                                                                    | No       |                 | The service name for your application. It should follow the [tag syntax requirements][7].                                                                                             |
-| `env`                 | String                                                                    | No       |                 | The application's environment, for example: prod, pre-prod, staging, etc. It should follow the [tag syntax requirements][7].                                                          |
-| `version`             | String                                                                    | No       |                 | The application's version, for example: 1.2.3, 6c44da20, 2020.02.13, etc. It should follow the [tag syntax requirements][7].                                                          |
-| `forwardErrorsToLogs` | Boolean                                                                   | No       | `true`          | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog.                                                                              |
-| `forwardConsoleLogs`  | `"all"` or an Array of `"log"` `"debug"` `"info"` `"warn"` `"error"`      | No       | `[]`            | Forward logs from `console.*` to Datadog. Use `"all"` to forward everything or an array of console API names to forward only a subset.                                                |
-| `forwardReports`      | `"all"` or an Array of `"intervention"` `"deprecation"` `"csp_violation"` | No       | `[]`            | Forward reports from the [Reporting API][8] to Datadog. Use `"all"` to forward everything or an array of report types to forward only a subset.                                       |
-| `sampleRate`          | Number                                                                    | No       | `100`           | **Deprecated** - see `sessionSampleRate`.                                                                                                                                             |
-| `sessionSampleRate`   | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs.                                                                                    |
-| `silentMultipleInit`  | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
-| `proxyUrl`            | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
-| `telemetrySampleRate` | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
+| Parameter                  | Type                                                                      | Required | Default         | Description                                                                                                                                                                           |
+|----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `clientToken`              | String                                                                    | Yes      |                 | A [Datadog client token][2].                                                                                                                                                          |
+| `site`                     | String                                                                    | Yes      | `datadoghq.com` | The [Datadog site parameter of your organization][9].                                                                                                                                 |
+| `service`                  | String                                                                    | No       |                 | The service name for your application. It should follow the [tag syntax requirements][7].                                                                                             |
+| `env`                      | String                                                                    | No       |                 | The application's environment, for example: prod, pre-prod, staging, etc. It should follow the [tag syntax requirements][7].                                                          |
+| `version`                  | String                                                                    | No       |                 | The application's version, for example: 1.2.3, 6c44da20, 2020.02.13, etc. It should follow the [tag syntax requirements][7].                                                          |
+| `forwardErrorsToLogs`      | Boolean                                                                   | No       | `true`          | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog.                                                                              |
+| `forwardConsoleLogs`       | `"all"` or an Array of `"log"` `"debug"` `"info"` `"warn"` `"error"`      | No       | `[]`            | Forward logs from `console.*` to Datadog. Use `"all"` to forward everything or an array of console API names to forward only a subset.                                                |
+| `forwardReports`           | `"all"` or an Array of `"intervention"` `"deprecation"` `"csp_violation"` | No       | `[]`            | Forward reports from the [Reporting API][8] to Datadog. Use `"all"` to forward everything or an array of report types to forward only a subset.                                       |
+| `sampleRate`               | Number                                                                    | No       | `100`           | **Deprecated** - see `sessionSampleRate`.                                                                                                                                             |
+| `sessionSampleRate`        | Number                                                                    | No       | `100`           | The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send logs.                                                                                    |
+| `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
+| `proxyUrl`                 | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
+| `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
+| `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in local storage to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.           |
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
@@ -972,6 +973,27 @@ window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
 
+#### Contexts life cycle
+
+By default, global context and user context are stored in the current page memory so:
+
+- they are not kept after a full reload of the page
+- they are not shared across different tabs / windows of the same session
+
+So in order to be added to all events of the session, those contexts need to be attached on every page.
+
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in local memory, allowing the following behaviours:
+
+- Contexts are preserved after a full reload
+- Contexts are synchronized between tabs opened on the same origin
+
+However, this feature comes with some **limitations**:
+
+- Setting PII in those contexts is not recommended, data stored in local storage outlives the user navigation
+- Incompatibility with the `trackSessionAcrossSubdomains` options, the contexts are only shared among the same origin (login.site.com ≠ app.site.com)
+- Subject to the local storage 5 MiB limit for the whole application, so application specific data, datadog contexts and other third parties data stored in local storage need to stay under this limit to avoid any issue.
+
+
 #### Logger context
 
 After a logger is created, it is possible to:
@@ -1158,3 +1180,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [9]: https://docs.datadoghq.com/getting_started/site/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+[11]: https://docs.datadoghq.com/logs/log_collection/javascript/#contexts-life-cycle
