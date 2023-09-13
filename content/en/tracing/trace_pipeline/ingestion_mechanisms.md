@@ -611,7 +611,7 @@ For example, if you are building [metrics from spans][6] to monitor specific ser
 
 This feature is available for Datadog Agent v[7.40.0][19]+.
 
-**Note 2**: Single span sampling rules **cannot** be used to drop spans that are kept by [head-based sampling](#head-based-sampling), only to keep additional spans that are dropped by head-based sampling.
+**Note**: Single span sampling rules **cannot** be used to drop spans that are kept by [head-based sampling](#head-based-sampling), only to keep additional spans that are dropped by head-based sampling.
 
 {{< tabs >}}
 {{% tab "Java" %}}
