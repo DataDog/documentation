@@ -41,5 +41,7 @@ Where available, the feature can be accessed by typing a space into the search b
 
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
+{{< img src="bits_ai/example-slack-query.png" alt="Screenshot of query result" style="width:60%;">}}
+
 [1]: /integrations/slack/?tab=applicationforslack
 [2]: /bits_ai/query_examples/

@@ -34,7 +34,10 @@ In Datadog or in Slack, you can ask Bits AI questions such as
 
 Bits AI also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-For details, see [Getting Started][5] and [Query Examples][3].
+{{< whatsnext desc="Additional documentation:">}}
+    {{< nextlink href="bits_ai/getting_started/" >}}Getting Started{{< /nextlink >}}
+    {{< nextlink href="bits_ai/query_examples/" >}}Query Examples{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Streamline incident management
 
@@ -45,7 +48,9 @@ As part of the [Datadog Incident Management][2] product, generative AI can help 
 - **Triage incidents:** Update the severity level and status of an incident.
 - **Generate a postmortem:** Quickly create a first draft to review and revise.
 
-For details, see [Managing Incidents][4].
+{{< whatsnext desc="Additional documentation:">}}
+    {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Run workflows in Slack
 
@@ -53,14 +58,15 @@ If you have Datadog Workflows configured, you can trigger them from Slack. For e
 
 {{< img src="bits_ai/slack-workflow.png" alt="Workflow request to Bits AI in Slack" style="width:60%;">}}
 
+{{< whatsnext desc="Additional documentation:">}}
+    {{< nextlink href="bits_ai/getting_started/#querying-in-slack" >}}Querying in Slack{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Feedback
 
 Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
 
 [2]: https://www.datadoghq.com/product/incident-management/
-[3]: /bits_ai/query_examples/
-[4]: /bits_ai/managing_incidents/
-[5]: /bits_ai/getting_started/
 
 ## Further reading
 
