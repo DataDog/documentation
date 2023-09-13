@@ -69,7 +69,7 @@ While hovering over a particular time or view in the user journey, select **Deta
 
 {{< img src="/getting_started/session_replay/details-panel.png" alt="Panel with additional details">}}
 
-From this page, you can also expand the Performance Waterfall by selecting **Expand Waterfall** for more detailed information.
+From the Details page, you can expand the waterfall view for more detailed information.
 
 {{< img src="/getting_started/session_replay/performance-waterfall.png" alt="Expanded performance waterfall">}}
 
