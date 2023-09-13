@@ -926,6 +926,26 @@ const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
+## Contexts life cycle
+
+By default, global context and user context are stored in the current page memory so:
+
+- they are not kept after a full reload of the page
+- they are not shared across different tabs / windows of the same session
+
+So in order to be added to all events of the session, those contexts need to be attached on every page.
+
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in local memory, allowing the following behaviours:
+
+- Contexts are preserved after a full reload
+- Contexts are synchronized between tabs opened on the same origin
+
+However, this feature comes with some **limitations**:
+
+- Setting PII in those contexts is not recommended, data stored in local storage outlives the user navigation
+- Incompatibility with the `trackSessionAcrossSubdomains` options, the contexts are only shared among the same origin (login.site.com ≠ app.site.com)
+- Subject to the local storage 5 MiB limit for the whole application, so application specific data, datadog contexts and other third parties data stored in local storage need to stay under this limit to avoid any issue.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
