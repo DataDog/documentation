@@ -1735,12 +1735,6 @@ The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows
 **Default**: `false` <br/>
 Allows you to control RUM views creation. See [override default RUM view names][10].
 
-`trackInteractions`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-See `trackUserInteractions`.
-
 `trackUserInteractions`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -1770,29 +1764,11 @@ See [Session Replay Privacy Options][13].
 **Type**: String<br/>
 Specify your own attribute to be used to [name actions][9].
 
-`sampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See ``sessionSampleRate`.
-
 `sessionSampleRate`
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `100`<br/>
 The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more details about `sessionSampleRate`, see the [sampling configuration][21].
-
-`replaySampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See `sessionReplaySampleRate`.
-
-`premiumSampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See `sessionReplaySampleRate`.
 
 `sessionReplaySampleRate`
 : Optional<br/>
@@ -1811,21 +1787,10 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 **Type**: String<br/>
 Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][7].
 
-`allowedTracingOrigins`
-: Optional - **Deprecated**<br/>
-**Type**: List<br/>
-A list of request origins used to inject tracing headers. For more information, see [Connect RUM and Traces][12].
-
 `allowedTracingUrls`
 : Optional<br/>
 **Type**: List<br/>
 A list of request URLs used to inject tracing headers. For more information, see [Connect RUM and Traces][12].
-
-`tracingSampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See `traceSampleRate`.
 
 `traceSampleRate`
 : Optional<br/>
