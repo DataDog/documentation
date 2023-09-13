@@ -216,7 +216,7 @@ The library injection mechanism for Python only supports injecting the Python li
 ##### `user-installed ddtrace found, aborting`
 
 - **Problem**: The `ddtrace` library is already installed on the system so the injection logic aborts injecting the library to avoid introducing a breaking change in the application.
-- **Solution**: Remove the installation of `ddtrace` if library injection is desired. Else, use the installed library instead of library injection.
+- **Solution**: Remove the installation of `ddtrace` if library injection is desired. Else, use the installed library ([documentation here][26]) instead of library injection.
 
 
 [1]: /containers/cluster_agent/admission_controller/
@@ -244,6 +244,7 @@ The library injection mechanism for Python only supports injecting the Python li
 [23]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[26]: /tracing/trace_collection/dd_libraries/python/
 {{% /tab %}}
 
 {{% tab "Host" %}}
