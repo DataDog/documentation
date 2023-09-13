@@ -115,7 +115,9 @@ In the **Errors** tab, selecting a specific error expands the view to display th
 
 ### Create Browser Tests from Session Replays
 
-You can [create a browser test][11] from the exact sequence of steps your users went through in a Session Replay. Navigate to the [RUM Explorer][4] and select a session with an available Session Replay that you want to create a browser test from. Click **Generate Synthetic Browser Test** above the event timeline.
+You can [create a synthetic browser test][11] from the exact sequence of steps your users went through in a Session Replay. Datadog runs synthetic tests on an automated schedule you define, to simulate user behavior, reporting failing tests to you without your users having to encounter the problem again.
+
+To capture a session replay in a synthetic browser test, click **Generate Synthetic Browser Test** above the event timeline.
 
 {{< img src="/getting_started/session_replay/browser-test.png" alt="Browser test creation popup window" style="width:100%" >}}
 
