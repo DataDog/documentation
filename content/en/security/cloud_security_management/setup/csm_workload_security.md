@@ -190,6 +190,11 @@ remote_configuration:
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable remote configuration.
   enabled: true
+
+runtime_security_config:
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable full CSM Threats.
+  enabled: true
 ```
 
 ```bash

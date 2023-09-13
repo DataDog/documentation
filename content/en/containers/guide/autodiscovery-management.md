@@ -185,17 +185,15 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-In your Helm chart, set these environment variables under `agents.containers.agent.env`.
+In your Helm chart, supply a space-separated string to `datadog.containerExclude`, `datadog.containerInclude`, `datadog.containerExcludeLogs`, `datadog.containerIncludeLogs`, `datadog.containerExcludeMetrics`, or `datadog.containerIncludeMetrics`. You can also set `excludePauseContainer` to `true` or `false`.
 
 ##### Example
 
 ```yaml
-agents:
-  containers:
-    agent:
-      env:
-        - name: DD_CONTAINER_EXCLUDE
-          value: "image:<IMAGE_NAME>"
+datadog:
+  containerExclude: "image:<IMAGE_NAME_1> image:<IMAGE_NAME_2>"
+  containerInclude: "image:<IMAGE_NAME_3> image:<IMAGE_NAME_4>"
+  excludePauseContainer: true
 ```
 
 {{% /tab %}}

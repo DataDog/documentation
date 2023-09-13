@@ -3090,6 +3090,11 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 20
+  - name: Mute Issues
+    url: security/cloud_security_management/mute_issues
+    parent: csm
+    identifier: csm_mute
+    weight: 22
   - name: Workflow Automation
     url: security/cloud_security_management/workflows
     parent: csm
