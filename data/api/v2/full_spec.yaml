@@ -159,6 +159,13 @@ components:
       required: true
       schema:
         type: string
+    CustomDestinationID:
+      description: The ID of the custom destination.
+      in: path
+      name: custom_destination_id
+      required: true
+      schema:
+        type: string
     FastlyAccountID:
       description: Fastly Account id.
       in: path
@@ -1282,6 +1289,57 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    AzureFallbackDestination:
+      description: The Azure archive destination.
+      properties:
+        container:
+          description: The container where the archive will be stored.
+          example: container-name
+          type: string
+        integration:
+          $ref: '#/components/schemas/AzureFallbackDestinationIntegration'
+        path:
+          description: The archive path.
+          type: string
+        region:
+          description: The region where the archive will be stored.
+          type: string
+        storageAccount:
+          description: The associated storage account.
+          example: account-name
+          type: string
+        type:
+          $ref: '#/components/schemas/AzureFallbackDestinationType'
+      required:
+      - storageAccount
+      - container
+      - integration
+      - type
+      type: object
+    AzureFallbackDestinationIntegration:
+      description: The Azure archive's integration destination.
+      properties:
+        clientId:
+          description: A client ID.
+          example: aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa
+          type: string
+        tenantId:
+          description: A tenant ID.
+          example: aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa
+          type: string
+      required:
+      - tenantId
+      - clientId
+      type: object
+    AzureFallbackDestinationType:
+      default: azure
+      description: Type of the Azure archive destination.
+      enum:
+      - azure
+      example: azure
+      type: string
+      x-enum-varnames:
+      - AZURE
     CIAppAggregateBucketValue:
       description: A bucket value, can either be a timeseries or a single value.
       oneOf:
@@ -3539,6 +3597,168 @@ components:
           nullable: true
           type: string
       type: object
+    CustomDestination:
+      description: The custom destination object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomDestinationAttributes'
+        id:
+          description: The ID of the custom destination.
+          example: a8700823-acb7-4379-831d-9ae3d14bc855
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomDestinationType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomDestinationAttributes:
+      description: The custom destination attributes.
+      properties:
+        bufferMaxBytes:
+          description: The max amount of bytes to buffer for the custom destination.
+          example: 10000000
+          format: int64
+          type: integer
+        bufferTimeoutSeconds:
+          description: The timeout amount in seconds to buffer for the custom destination.
+          example: 100
+          format: int64
+          type: integer
+        compression:
+          $ref: '#/components/schemas/CustomDestinationCompressionType'
+        enabled:
+          description: The enabled status of the custom destination.
+          example: true
+          type: boolean
+        fallbackDestination:
+          $ref: '#/components/schemas/CustomDestinationFallbackDestination'
+        forwarderDestination:
+          $ref: '#/components/schemas/CustomDestinationForwarderDestination'
+        maxRetryDurationSeconds:
+          description: The retry duration in seconds for the custom destination.
+          example: 100
+          format: int64
+          type: integer
+        name:
+          description: The name of the custom destination.
+          example: my-destination
+          type: string
+        query:
+          description: The search query of the custom destination.
+          example: source:dummy
+          type: string
+        version:
+          description: The version of the custom destination to prevent concurrent
+            changes.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - name
+      - version
+      - forwarderDestination
+      type: object
+    CustomDestinationCompressionType:
+      description: The compression method used for the custom destination.
+      enum:
+      - GZIP
+      - NONE
+      example: GZIP
+      type: string
+      x-enum-varnames:
+      - GZIP_COMPRESSION
+      - NO_COMPRESSION
+    CustomDestinationCreateData:
+      description: The custom destination data object used for creation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomDestinationAttributes'
+        type:
+          $ref: '#/components/schemas/CustomDestinationType'
+      required:
+      - type
+      - attributes
+      type: object
+    CustomDestinationCreateRequest:
+      description: Request containing information about a single custom destination
+        to be created.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomDestinationCreateData'
+      required:
+      - data
+      type: object
+    CustomDestinationDeleteResponse:
+      description: Response containing metadata about a deleted custom destination.
+      properties:
+        meta:
+          $ref: '#/components/schemas/CustomDestinationMetadata'
+      type: object
+    CustomDestinationFallbackDestination:
+      description: The archiving destination to fall back to.
+      oneOf:
+      - $ref: '#/components/schemas/AzureFallbackDestination'
+      - $ref: '#/components/schemas/GCSFallbackDestination'
+      - $ref: '#/components/schemas/S3FallbackDestination'
+    CustomDestinationForwarderDestination:
+      description: The destination to forward events to.
+      oneOf:
+      - $ref: '#/components/schemas/HttpDestination'
+      - $ref: '#/components/schemas/ElasticsearchDestination'
+      - $ref: '#/components/schemas/SplunkHecDestination'
+    CustomDestinationListResponse:
+      description: Response containing information about multiple custom destinations.
+      properties:
+        data:
+          description: Array of returned custom destinations.
+          items:
+            $ref: '#/components/schemas/CustomDestination'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CustomDestinationMetadata'
+      required:
+      - data
+      type: object
+    CustomDestinationMetadata:
+      description: The metadata relevant to your configuration or recent request.
+      properties:
+        customDestinationsLimit:
+          description: The amount of custom destinations your organization is able
+            to create.
+          example: 3
+          format: int64
+          type: integer
+      type: object
+    CustomDestinationResponse:
+      description: Response containing information about a single custom destination.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomDestination'
+        meta:
+          $ref: '#/components/schemas/CustomDestinationMetadata'
+      required:
+      - data
+      type: object
+    CustomDestinationType:
+      default: custom_destination
+      description: The custom destination type.
+      enum:
+      - custom_destination
+      example: custom_destination
+      type: string
+      x-enum-varnames:
+      - CUSTOM_DESTINATION
+    CustomDestinationUpdateRequest:
+      description: Request containing information about a single custom destination
+        to be updated.
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomDestination'
+      required:
+      - data
+      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -4381,6 +4601,40 @@ components:
       - type
       - attributes
       type: object
+    ElasticsearchDestination:
+      description: The Elasticsearch destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/HttpDestinationBasicAuth'
+        endpoint:
+          description: The intake URL to forward events to.
+          example: https://example.org/my-intake
+          type: string
+        indexName:
+          description: The Elasticsearch index name.
+          example: index-name
+          type: string
+        indexRotation:
+          description: The pattern to append to the index name for rotation in Elasticsearch.
+          example: yyyy-MM-dd
+          type: string
+        type:
+          $ref: '#/components/schemas/ElasticsearchDestinationType'
+      required:
+      - type
+      - indexName
+      - indexRotation
+      - endpoint
+      type: object
+    ElasticsearchDestinationType:
+      default: elasticsearch
+      description: The Elasticsearch destination type.
+      enum:
+      - elasticsearch
+      example: elasticsearch
+      type: string
+      x-enum-varnames:
+      - ELASTICSEARCH
     Event:
       description: The metadata associated with a request.
       properties:
@@ -5497,6 +5751,49 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GCSFallbackDestination:
+      description: The GCS archive destination.
+      properties:
+        bucket:
+          description: The bucket where the archive will be stored.
+          example: bucket-name
+          type: string
+        integration:
+          $ref: '#/components/schemas/GCSFallbackDestinationIntegration'
+        path:
+          description: The archive path.
+          type: string
+        type:
+          $ref: '#/components/schemas/GCSFallbackDestinationType'
+      required:
+      - bucket
+      - integration
+      - type
+      type: object
+    GCSFallbackDestinationIntegration:
+      description: The GCS archive's integration destination.
+      properties:
+        clientEmail:
+          description: A client email.
+          example: youremail@example.com
+          type: string
+        projectId:
+          description: A project ID.
+          example: project-id
+          type: string
+      required:
+      - projectId
+      - clientEmail
+      type: object
+    GCSFallbackDestinationType:
+      default: gcs
+      description: Type of the GCS archive destination.
+      enum:
+      - gcs
+      example: gcs
+      type: string
+      x-enum-varnames:
+      - GCS
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -5751,6 +6048,90 @@ components:
       - APP_SEC_HOST_COUNT
       - OBSERVABILITY_PIPELINES_BYTES_PROCESSSED
       - LAMBDA_TRACED_INVOCATIONS_COUNT
+    HttpDestination:
+      description: The HTTP destination.
+      properties:
+        auth:
+          $ref: '#/components/schemas/HttpDestinationAuth'
+        endpoint:
+          description: The intake URL to forward events to.
+          example: https://example.org/my-intake
+          type: string
+        type:
+          $ref: '#/components/schemas/HttpDestinationType'
+      required:
+      - type
+      - endpoint
+      - auth
+      type: object
+    HttpDestinationAuth:
+      description: The authentication method used for HTTP destinations.
+      oneOf:
+      - $ref: '#/components/schemas/HttpDestinationBasicAuth'
+      - $ref: '#/components/schemas/HttpDestinationCustomHeaderAuth'
+    HttpDestinationBasicAuth:
+      description: The HTTP destination basic username and password auth.
+      properties:
+        password:
+          description: The password to use for the HTTP request.
+          example: password
+          type: string
+        type:
+          $ref: '#/components/schemas/HttpDestinationBasicAuthType'
+        username:
+          description: The username to use for the HTTP request.
+          example: username
+          type: string
+      required:
+      - type
+      - username
+      - password
+      type: object
+    HttpDestinationBasicAuthType:
+      default: basic
+      description: The HTTP destination basic auth type.
+      enum:
+      - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+      - BASIC
+    HttpDestinationCustomHeaderAuth:
+      description: The HTTP destination custom header auth.
+      properties:
+        headerName:
+          description: The name of the header to use for the HTTP request.
+          example: token
+          type: string
+        headerValue:
+          description: The value of the header to use for the HTTP request.
+          example: my-token
+          type: string
+        type:
+          $ref: '#/components/schemas/HttpDestinationCustomHeaderAuthType'
+      required:
+      - type
+      - headerName
+      - headerValue
+      type: object
+    HttpDestinationCustomHeaderAuthType:
+      default: custom_header
+      description: The HTTP destination custom header auth type.
+      enum:
+      - custom_header
+      example: custom_header
+      type: string
+      x-enum-varnames:
+      - CUSTOM_HEADER
+    HttpDestinationType:
+      default: http
+      description: The HTTP destination type.
+      enum:
+      - http
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
     IPAllowlistAttributes:
       description: Attributes of the IP allowlist.
       properties:
@@ -12274,6 +12655,49 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    S3FallbackDestination:
+      description: The S3 archive destination.
+      properties:
+        bucket:
+          description: The bucket where the archive will be stored.
+          example: bucket-name
+          type: string
+        integration:
+          $ref: '#/components/schemas/S3FallbackDestinationIntegration'
+        path:
+          description: The archive path.
+          type: string
+        type:
+          $ref: '#/components/schemas/S3FallbackDestinationType'
+      required:
+      - bucket
+      - integration
+      - type
+      type: object
+    S3FallbackDestinationIntegration:
+      description: The S3 Archive's integration destination.
+      properties:
+        accountId:
+          description: The account ID for the integration.
+          example: '123456789012'
+          type: string
+        roleName:
+          description: The path of the integration.
+          example: role-name
+          type: string
+      required:
+      - roleName
+      - accountId
+      type: object
+    S3FallbackDestinationType:
+      default: s3
+      description: Type of the S3 archive destination.
+      enum:
+      - s3
+      example: s3
+      type: string
+      x-enum-varnames:
+      - S3
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -16151,6 +16575,33 @@ components:
             from the other indexes
           type: string
       type: object
+    SplunkHecDestination:
+      description: The Splunk destination.
+      properties:
+        accessToken:
+          description: The access token of the Splunk destination.
+          example: secret
+          type: string
+        endpoint:
+          description: The intake URL to forward events to.
+          example: https://example.org/my-intake
+          type: string
+        type:
+          $ref: '#/components/schemas/SplunkHecDestinationType'
+      required:
+      - type
+      - endpoint
+      - accessToken
+      type: object
+    SplunkHecDestinationType:
+      default: splunk_hec
+      description: The Splunk destination type.
+      enum:
+      - splunk_hec
+      example: splunk_hec
+      type: string
+      x-enum-varnames:
+      - SPLUNK_HEC
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -22223,6 +22674,194 @@ paths:
       x-menu-order: 7
       x-undo:
         type: unsafe
+  /api/v2/logs/config/custom_destinations:
+    get:
+      description: Returns all custom destinations, including their attributes and
+        IDs.
+      operationId: ListLogsCustomDestinations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List custom destinations
+      tags:
+      - Logs Custom Destinations
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new custom destination for your organization.
+      operationId: CreateLogsCustomDestination
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomDestinationCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-codegen-request-body-name: body
+      x-given:
+        logs_custom_destination:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"custom_destination\",\n    \"attributes\":
+              {\n      \"name\": \"destination-{{ unique }}\",\n      \"version\":
+              0,\n      \"forwarderDestination\": {\n        \"type\": \"http\",\n
+              \       \"endpoint\": \"https://example.org/my-intake\",\n        \"auth\":
+              {\n          \"type\": \"basic\",\n          \"username\": \"username\",\n
+              \         \"password\": \"password\"\n        }\n      }\n    }\n  }\n}"
+          step: there is a valid "logs_custom_destination" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteLogsCustomDestination
+        parameters:
+        - name: custom_destination_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/custom_destinations/{custom_destination_id}:
+    delete:
+      description: Deletes a custom destination.
+      operationId: DeleteLogsCustomDestination
+      parameters:
+      - $ref: '#/components/parameters/CustomDestinationID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationDeleteResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a custom destination in the organization specified by the custom
+        destination's `custom_destination_id`.
+      operationId: GetLogsCustomDestination
+      parameters:
+      - $ref: '#/components/parameters/CustomDestinationID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Edit a custom destination.
+      operationId: UpdateLogsCustomDestination
+      parameters:
+      - $ref: '#/components/parameters/CustomDestinationID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomDestinationUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDestinationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update a custom destination
+      tags:
+      - Logs Custom Destinations
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/metrics:
     get:
       description: Get the list of configured log-based metrics with their definitions.
@@ -29891,6 +30530,13 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
+- description: '**Note: This endpoint is in public beta. If you have any feedback,
+    contact [Datadog support](https://docs.datadoghq.com/help/).**
+
+
+    Manage configuration of [log-based custom destinations](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
+    for your organization.'
+  name: Logs Custom Destinations
 - description: Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)
     for your organization.
   externalDocs:

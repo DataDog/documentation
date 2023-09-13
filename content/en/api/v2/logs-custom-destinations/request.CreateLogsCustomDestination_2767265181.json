@@ -1,0 +1,20 @@
+{
+  "data": {
+    "attributes": {
+      "name": "my-destination",
+      "version": 0,
+      "forwarderDestination": {
+        "type": "elasticsearch",
+        "endpoint": "https://example.org/my-intake",
+        "indexName": "name",
+        "indexRotation": "yyyy-MM-dd",
+        "auth": {
+          "type": "basic",
+          "username": "username",
+          "password": "password"
+        }
+      }
+    },
+    "type": "custom_destination"
+  }
+}
