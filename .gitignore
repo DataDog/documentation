@@ -39,6 +39,7 @@ content/en/agent/basic_agent_usage/saltstack.md
 
 # Tracing
 content/en/tracing/trace_collection/dd_libraries/ruby.md
+content/en/tracing/trace_collection/compatibility/ruby.md
 
 # Log collection
 content/en/logs/guide/forwarder.md
