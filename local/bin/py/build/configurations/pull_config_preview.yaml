@@ -646,7 +646,7 @@
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file
-            branch: master
+            branch: brett0000FF/DOCS-5255
             globs:
               - 'docs/Compatibility.md'
             options:
