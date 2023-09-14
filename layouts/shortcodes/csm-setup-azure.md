@@ -25,6 +25,8 @@ Use one of the following methods to enable CSM for your Azure subscriptions:
 
 You can use resource tags to create filters that include or exclude resources from being evaluated by CSM. The filters must be specified as a comma-separated list of `key:value` pairs.
 
+**Note**: Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
+
 | Format                       | Value        |
 |------------------------------|--------------|
 | Allowlist                    | `key:value`  |
