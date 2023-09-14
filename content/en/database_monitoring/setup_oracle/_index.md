@@ -64,7 +64,7 @@ If you prefer an official Datadog Agent release, a minimum version of `7.47.0` i
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The repository with Oracle DBM builds for RHEL and Ubuntu are [here][6] and [here][7], respectively.
+Oracle DBM builds can be downloaded for [RHEL][6] and [Ubuntu][7] from their respective repositories.
 
 Set `DD_API_KEY` and run the following commands to install the Oracle DBM release, for example:
 
@@ -80,7 +80,7 @@ DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-The repository with Windows builds is [here][8].
+Oracle DBM builds can be downloaded from the [Windows builds repository][8].
 
 Download the MSI file for the [Oracle DBM build][4].
 
@@ -94,7 +94,7 @@ start /wait msiexec /qn /i datadog-agent-7.47.0-dbm-oracle-0.40-1.x86_64.msi API
 
 {{% /tab %}}
 {{% tab "Docker" %}}
-The Oracle DBM images for Docker can be found [here][9].
+Oracle DBM images can be found in the [Docker builds repository][9].
 
 Set `DD_API_KEY` and run the following command to install the Oracle DBM release, for example:
 
