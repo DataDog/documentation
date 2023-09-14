@@ -982,17 +982,16 @@ By default, global context and user context are stored in the current page memor
 
 To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in local memory, allowing the following behaviors:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][12], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
 
 However, this feature comes with some **limitations**:
 
-- Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in local storage outlives the user session
-- The feature is incompatible with the `trackSessionAcrossSubdomains` options because contexts are only shared among the same origin (login.site.com ≠ app.site.com)
-- Local storage is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues.
-
+- Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in `localStorage` outlives the user session
+- The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
+- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
 
 #### Logger context
 
@@ -1181,3 +1180,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [9]: https://docs.datadoghq.com/getting_started/site/
 [10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [11]: https://docs.datadoghq.com/logs/log_collection/javascript/#contexts-life-cycle
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
