@@ -92,4 +92,5 @@ You can optionally sample logs while querying by using the [sample function][9].
 [8]: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
 [9]: https://cloud.google.com/logging/docs/view/logging-query-language#sample
 [10]: https://cloud.google.com/pubsub/docs/overview
+[11]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [13]: /agent/
