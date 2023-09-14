@@ -88,7 +88,7 @@ Open Session Replay's [browser developer tools][8] to explore your application's
 
 Session Replay integrates with your application's metrics, traces, and logs to give you helpful context for debugging issues. Using APM and Error Tracking alongside Session Replay enables you to investigate the root cause of user-facing issues, regardless of where they originate in your stack.
 
-### Tracing with the APM integration
+### Investigating request performance with APM traces
 
 Combining Session Replay with [APM traces][9] enables you to receive end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience. Having full-stack traces can be helpful if you're unsure whether an error is occurring on the frontend or backend of your application. 
 
