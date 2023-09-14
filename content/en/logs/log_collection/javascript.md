@@ -724,7 +724,7 @@ datadogLogs.createLogger('signupLogger', {
   level: 'info',
   handler: 'http',
   context: { env: 'staging' }
-)
+})
 ```
 
 It can now be used in a different part of the code with:
