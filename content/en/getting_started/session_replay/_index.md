@@ -102,7 +102,7 @@ Select **View Trace in APM** to see more detailed information, including errors 
 
 ### Investigating errors with Error Tracking
 
-The [Error Tracking integration][10] is helpful in debugging issues and getting to the root cause. You can receive alerts for an error, see the exact line of code that caused it, and pivot to view a user session that encountered the error on the Datadog site.
+[Error Tracking][10] is helpful in debugging issues and getting to the root cause. You can receive alerts for an error occurring, see the exact line of code that caused it, and pivot to view a user session that encountered the error.
 
 In the **Errors** tab, select an error to see the time the error occurred and the message. Click **Issue in error tracking** to see more detail and attributes associated with the session.
 
