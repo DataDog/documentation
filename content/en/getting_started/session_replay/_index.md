@@ -90,7 +90,7 @@ Session Replay integrates with your application's metrics, traces, and logs to g
 
 ### Investigating request performance with APM traces
 
-Combining Session Replay with [APM traces][9] enables you to receive end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience. Having full-stack traces can be helpful if you're unsure whether an error is occurring on the frontend or backend of your application. 
+The [APM traces][9] associated with a session replay give you end-to-end visibility across frontend and backend issues, and see how code and infrastructure are impacting your user experience. Having full-stack traces can be helpful if you're unsure whether an error is occurring on the frontend or backend of your application. 
 
 Select a replay with traces to view the browser request, as well as all the backend dependencies and services called upon to fulfill the request in a specific page.
 
