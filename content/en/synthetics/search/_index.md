@@ -44,6 +44,7 @@ The default facets include the following:
 | `Type`         | The type of Synthetic test: `browser`, `api`, `api-multi`, `api-websocket`, `api-ssl`, `api-dns`, `api-tcp`, `api-udp`, `api-icmp`, or `api-grpc`. |
 | `Status`       | The Synthetic test status: `OK`, `Alert`, or `No Data`.                       |
 | `Creator`      | The creator of the Synthetic test.                                            |
+| `Team`         | The team responsible for responding to the Synthetic test.                    |
 | `Region`       | The managed and private locations the Synthetic test is running from.         |
 | `State`        | The state of the Synthetic test: `live` or `paused`.                          |
 | `Notification` | The handle used by the Synthetic test for notifications.                      |
@@ -56,7 +57,6 @@ The default tags include the following:
 
 | Tag          | Description                                                                     |
 |----------------|-------------------------------------------------------------------------------|
-| `Team`         | The team responsible for responding to the Synthetic test.                    |
 | `Tag`          | The tag assigned to the Synthetic test.                                       |
 | `Service`      | The service the Synthetic test is running on.                                 |
 | `Private Locations`| Whether or not private locations are enabled: `true` or `false`.          |
@@ -90,9 +90,9 @@ Manage your Synthetic tests in bulk by selecting one or more tests on the [Synth
 
 ### Test actions
 
-Hovering over a test populates option icons on the right such as `Pause`, `Run Test Now`, `Edit`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
+Clicking on the kebab menu to the right of a test populates option icons such as `Pause`, `Run Test Now`, `Edit Test`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
 
-{{< img src="synthetics/search/manage_test_options.mp4" alt="Action tray options that appear when hovering on a Synthetic test" video="true" width="100%">}}
+{{< img src="synthetics/search/test_options.mp4" alt="Options appear when you click on the kebab menu to the right of a Synthetic test" video="true" width="100%">}}
 
 ### Track events
 

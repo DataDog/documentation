@@ -479,7 +479,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 [urlSessionTracking setFirstPartyHostsTracing:[DDRUMFirstPartyHostsTracing alloc] initWithHosts:@[@"example.com"] sampleRate:20];
 [configuration setURLSessionTracking:urlSessionTracking];
 
-[DDRUM enableWithConfiguration:configuration];
+[DDRUM enableWith:configuration];
 ```
 {{% /tab %}}
 {{< /tabs >}}

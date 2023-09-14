@@ -3521,6 +3521,11 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
           $ref: '#/components/schemas/EventQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -3532,6 +3537,13 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -4007,6 +4019,7 @@ components:
       - functions_usage
       - infra_host_usage
       - invocations_usage
+      - mobile_app_testing_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - profiled_container_usage
@@ -4045,6 +4058,7 @@ components:
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
+      - MOBILE_APP_TESTING_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
@@ -6348,7 +6362,7 @@ components:
           readOnly: true
           type: integer
         matching_downtimes:
-          description: A list of active downtimes that match this monitor.
+          description: A list of active v1 downtimes that match this monitor.
           items:
             $ref: '#/components/schemas/MatchingDowntime'
           type: array
@@ -6876,7 +6890,8 @@ components:
             nullable: true
             type: integer
           deprecated: true
-          description: Information about the downtime applied to the monitor.
+          description: Information about the downtime applied to the monitor. Only
+            shows v1 downtimes.
           type: object
         synthetics_check_id:
           deprecated: true
@@ -7000,18 +7015,20 @@ components:
     MonitorSearchCount:
       description: Search facets.
       items:
-        description: A facet item.
-        properties:
-          count:
-            description: The number of found monitors with the listed value.
-            format: int64
-            readOnly: true
-            type: integer
-          name:
-            description: The facet value.
-            readOnly: true
-        type: object
+        $ref: '#/components/schemas/MonitorSearchCountItem'
       type: array
+    MonitorSearchCountItem:
+      description: A facet item.
+      properties:
+        count:
+          description: The number of found monitors with the listed value.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: The facet value.
+          readOnly: true
+      type: object
     MonitorSearchResponse:
       description: The response form a monitor search.
       example:
@@ -7573,6 +7590,8 @@ components:
       - infra_host_percentage
       - invocations_usage
       - invocations_percentage
+      - mobile_app_testing_percentage
+      - mobile_app_testing_usage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -7648,6 +7667,8 @@ components:
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
       - INVOCATIONS_PERCENTAGE
+      - MOBILE_APP_TESTING_USAGE
+      - MOBILE_APP_TESTING_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -7893,6 +7914,15 @@ components:
           type: number
         invocations_usage:
           description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        mobile_app_testing_percentage:
+          description: The percentage of Synthetic mobile application test usage by
+            tag(s).
+          format: double
+          type: number
+        mobile_app_testing_usage:
+          description: The Synthetic mobile application test usage by tag(s).
           format: double
           type: number
         npm_host_percentage:
@@ -12800,6 +12830,8 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
+        timingsScope:
+          $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -12807,6 +12839,15 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTimingsScope:
+      description: Timings scope for response time assertions.
+      enum:
+      - all
+      - withoutDNS
+      type: string
+      x-enum-varnames:
+      - ALL
+      - WITHOUT_DNS
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
@@ -18166,6 +18207,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         synthetics_parallel_testing_max_slots_hwm:
           description: Shows the high-water mark of used synthetics parallel testing
             slots over all hours in the current date for all organizations.
@@ -18605,6 +18651,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm:
@@ -19088,6 +19139,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_agg_sum:
+          description: Shows the sum of Synthetic mobile application tests over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm_sum:

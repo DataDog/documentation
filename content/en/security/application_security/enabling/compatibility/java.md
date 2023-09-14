@@ -16,6 +16,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Threat Protection| 1.9.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.1.4 |
 | Vulnerability Management for Code-level (beta) | 1.15.0|
+| Automatic user activity event tracking | 1.20.0 |
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
@@ -142,6 +143,17 @@ Datadog does not officially support any early-access versions of Java.
 - ScalikeJDBC
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Minimum Framework Version |
+|-------------------|---------------------------|
+| Spring Security   | 5.5+                      |
 
 
 [1]: /tracing/trace_collection/compatibility/java/
