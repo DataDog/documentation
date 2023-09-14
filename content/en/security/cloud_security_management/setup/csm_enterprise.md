@@ -94,13 +94,13 @@ Alternatively, use the following examples to enable CSM Enterprise:
           enabled: true
     ```
 2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
-   
+
     ```yaml
     # values.yaml file
     datadog:
       securityAgent:
         runtime:
-          security_profile:
+          securityProfile:
             enabled: true
     ```
 
@@ -126,20 +126,7 @@ Alternatively, use the following examples to enable CSM Enterprise:
           enabled: true
     ```
 
-1. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
-   
-    ```yaml
-    # values.yaml file
-    spec:
-      features:
-        cws:
-          security_profile:
-            enabled: true
-    ```
-
-    See the [Datadog Operator documentation][2] for additional configuration options.
-
-3. Restart the Agent.
+2. Restart the Agent.
 
 
 [1]: /security/threats/runtime_anomaly_detection
@@ -230,6 +217,11 @@ By default, Runtime Security is disabled. To enable it, both the `security-agent
 remote_configuration:
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable remote configuration.
+  enabled: true
+
+runtime_security_config:
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable full CSM Threats.
   enabled: true
 
 compliance_config:

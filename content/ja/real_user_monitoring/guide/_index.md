@@ -12,16 +12,17 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
 
 {{< whatsnext desc="RUM 全般:" >}}
     {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}RUM イベントの階層を理解する{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM データによる Apdex とカスタムパフォーマンス指標の算出{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM データでアラートを作成{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}コンバージョン率に応じたアラートを作成{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}RUM データで Apdex とカスタムパフォーマンス指標を算出する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}RUM データでアラートを作成する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}コンバージョン率に応じたアラートを作成する{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM の使用量を監視する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}使用量属性タグを使って RUM の使用量を追跡する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}RUM とセッションリプレイを製品分析に活用する{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly を使用した RUM のリモート構成{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}LaunchDarkly を使用して RUM をリモート構成する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM デプロイメント追跡の概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}RUM で UTM キャンペーンを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ブラウザ RUM:" >}}

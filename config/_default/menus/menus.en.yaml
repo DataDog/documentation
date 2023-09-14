@@ -3090,6 +3090,11 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 20
+  - name: Mute Issues
+    url: security/cloud_security_management/mute_issues
+    parent: csm
+    identifier: csm_mute
+    weight: 22
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
@@ -4105,18 +4110,22 @@ main:
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
     weight: 407
+  - name: Create a Recommended Monitor
+    url: developers/integrations/create-an-integration-recommended-monitor
+    parent: dev_tools_integrations
+    weight: 408
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 408
+    weight: 409
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 409
+    weight: 410
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 410
+    weight: 411
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
