@@ -182,6 +182,9 @@ If you manage your dashboards with Terraform, you can use the latest version of 
 High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
 
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display" style="width:90%;">}}
+
+Select **Increase density on wide screens** to expand widgets to the width of the screen.
+
 #### Clone dashboard
 
 Use this option to copy the entire dashboard to a new dashboard. You are prompted to name the clone.

@@ -82,10 +82,6 @@ Number of payloads accepted by the Agent.
 : **Type**: Count<br>
 Number of payloads rejected by the receiver because of the sampling.
 
-`datadog.trace_agent.receiver.ratelimit`
-: **Type**: Gauge<br>
-If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).
-
 `datadog.trace_agent.receiver.spans_dropped`
 : **Type**: Count<br>
 Number of spans dropped by the Agent.
