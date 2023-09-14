@@ -661,8 +661,8 @@
                 code_lang: ruby
                 type: multi-code-lang
                 code_lang_weight: 20
+                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
                 further_reading:
                     - link: 'tracing/trace_collection/dd_libraries/ruby'
                       tag: 'Documentation'
                       text: 'Instrument Your Application'
-
