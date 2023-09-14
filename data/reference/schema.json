@@ -1167,7 +1167,7 @@
           "description": "[gelf]: https://docs.graylog.org/docs/gelf",
           "allOf": [
             {
-              "description": "On GELF decoding behavior:\n  Graylog has a relaxed decoding. They are much more lenient than the spec would\n  suggest. We've elected to take a more strict approach to maintain backwards compatability\n  in the event that we need to change the behavior to be more relaxed, so that prior versions\n  of vector will still work with the new relaxed decoding.\nConfig used to build a `GelfDeserializer`.",
+              "description": "On GELF decoding behavior:\n  Graylog has a relaxed decoding. They are much more lenient than the spec would\n  suggest. We've elected to take a more strict approach to maintain backwards compatibility\n  in the event that we need to change the behavior to be more relaxed, so that prior versions\n  of vector will still work with the new relaxed decoding.\nConfig used to build a `GelfDeserializer`.",
               "type": "object",
               "properties": {
                 "gelf": {
@@ -1474,6 +1474,49 @@
             "fields"
           ],
           "properties": {
+            "capacity": {
+              "description": "Set the capacity (in bytes) of the internal buffer used in the CSV writer.\nThis defaults to a reasonable setting.",
+              "default": 8192,
+              "type": "integer",
+              "maximum": 9007199254740991.0,
+              "minimum": 0.0,
+              "_metadata": {
+                "docs::numeric_type": "uint",
+                "docs::human_name": "Capacity"
+              }
+            },
+            "delimiter": {
+              "description": "The field delimiter to use when writing CSV.",
+              "default": 44,
+              "type": "integer",
+              "maximum": 255.0,
+              "minimum": 0.0,
+              "_metadata": {
+                "docs::numeric_type": "uint",
+                "docs::human_name": "Delimiter"
+              }
+            },
+            "double_quote": {
+              "title": "Enable double quote escapes.",
+              "description": "This is enabled by default, but it may be disabled. When disabled, quotes in\nfield data are escaped instead of doubled.",
+              "default": true,
+              "type": "boolean",
+              "_metadata": {
+                "docs::human_name": "Double Quote"
+              }
+            },
+            "escape": {
+              "title": "The escape character to use when writing CSV.",
+              "description": "In some variants of CSV, quotes are escaped using a special escape character\nlike \\ (instead of escaping quotes by doubling them).\n\nTo use this `double_quotes` needs to be disabled as well otherwise it is ignored",
+              "default": 34,
+              "type": "integer",
+              "maximum": 255.0,
+              "minimum": 0.0,
+              "_metadata": {
+                "docs::numeric_type": "uint",
+                "docs::human_name": "Escape"
+              }
+            },
             "fields": {
               "title": "Configures the fields that will be encoded, as well as the order in which they\nappear in the output.",
               "description": "If a field is not present in the event, the output will be an empty string.\n\nValues of type `Array`, `Object`, and `Regex` are not supported and the\noutput will be an empty string.",
@@ -1483,6 +1526,60 @@
               },
               "_metadata": {
                 "docs::human_name": "Fields"
+              }
+            },
+            "quote": {
+              "description": "The quote character to use when writing CSV.",
+              "default": 34,
+              "type": "integer",
+              "maximum": 255.0,
+              "minimum": 0.0,
+              "_metadata": {
+                "docs::numeric_type": "uint",
+                "docs::human_name": "Quote"
+              }
+            },
+            "quote_style": {
+              "description": "The quoting style to use when writing CSV data.",
+              "default": "necessary",
+              "oneOf": [
+                {
+                  "description": "This puts quotes around every field. Always.",
+                  "const": "always",
+                  "_metadata": {
+                    "logical_name": "Always",
+                    "docs::human_name": "Always"
+                  }
+                },
+                {
+                  "description": "This puts quotes around fields only when necessary.\nThey are necessary when fields contain a quote, delimiter or record terminator.\nQuotes are also necessary when writing an empty record\n(which is indistinguishable from a record with one empty field).",
+                  "const": "necessary",
+                  "_metadata": {
+                    "logical_name": "Necessary",
+                    "docs::human_name": "Necessary"
+                  }
+                },
+                {
+                  "description": "This puts quotes around all fields that are non-numeric.\nNamely, when writing a field that does not parse as a valid float or integer,\nthen quotes will be used even if they aren’t strictly necessary.",
+                  "const": "non_numeric",
+                  "_metadata": {
+                    "logical_name": "NonNumeric",
+                    "docs::human_name": "Non Numeric"
+                  }
+                },
+                {
+                  "description": "This never writes quotes, even if it would produce invalid CSV data.",
+                  "const": "never",
+                  "_metadata": {
+                    "logical_name": "Never",
+                    "docs::human_name": "Never"
+                  }
+                }
+              ],
+              "unevaluatedProperties": false,
+              "_metadata": {
+                "docs::enum_tagging": "external",
+                "docs::human_name": "Quote Style"
               }
             }
           },
@@ -9003,8 +9100,8 @@
                 "docs::optional": true,
                 "docs::additional_props_description": "A single tag.",
                 "docs::examples": {
-                  "Project": "Blue",
                   "PHI": "True",
+                  "Project": "Blue",
                   "Classification": "confidential"
                 },
                 "docs::human_name": "Tags"
@@ -12340,8 +12437,8 @@
                   "_metadata": {
                     "docs::additional_props_description": "A type-specific label.",
                     "docs::examples": {
-                      "zone": "{{ zone }}",
-                      "instanceId": "Twilight"
+                      "instanceId": "Twilight",
+                      "zone": "{{ zone }}"
                     }
                   }
                 }
@@ -12628,10 +12725,10 @@
                   "_metadata": {
                     "docs::additional_props_description": "Values for all of the labels listed in the associated monitored resource descriptor.\n\nFor example, Compute Engine VM instances use the labels `projectId`, `instanceId`, and `zone`.",
                     "docs::examples": {
+                      "zone": "us-central1-a",
                       "projectId": "vector-123456",
-                      "instanceId": "Twilight",
                       "type": "global",
-                      "zone": "us-central1-a"
+                      "instanceId": "Twilight"
                     }
                   }
                 }
@@ -14122,9 +14219,9 @@
               },
               "_metadata": {
                 "docs::examples": {
-                  "fetch.error.backoff.ms": "1000",
+                  "client.id": "${ENV_VAR}",
                   "socket.send.buffer.bytes": "100",
-                  "client.id": "${ENV_VAR}"
+                  "fetch.error.backoff.ms": "1000"
                 },
                 "docs::advanced": true,
                 "docs::additional_props_description": "A librdkafka configuration option.",
@@ -14472,10 +14569,10 @@
           },
           "_metadata": {
             "docs::examples": {
-              "{{ event_field }}": "{{ some_other_event_field }}",
-              "\"*\"": "{{ metadata }}",
               "\"pod_labels_*\"": "{{ kubernetes.pod_labels }}",
-              "source": "vector"
+              "source": "vector",
+              "{{ event_field }}": "{{ some_other_event_field }}",
+              "\"*\"": "{{ metadata }}"
             },
             "docs::additional_props_description": "A Loki label.",
             "docs::human_name": "Labels"
@@ -21801,8 +21898,8 @@
             "docs::optional": true,
             "docs::additional_props_description": "An environment variable.",
             "docs::examples": {
-              "TZ": "Etc/UTC",
               "LANG": "es_ES.UTF-8",
+              "TZ": "Etc/UTC",
               "PATH": "/bin:/usr/bin:/usr/local/bin"
             },
             "docs::human_name": "Environment"
@@ -22249,7 +22346,8 @@
           }
         },
         "max_read_bytes": {
-          "description": "An approximate limit on the amount of data read from a single file at a given time.",
+          "title": "Max amount of bytes to read from a single file before switching over to the next file.\n**Note:** This does not apply when `oldest_first` is `true.",
+          "description": "This allows distributing the reads more or less evenly across\nthe files.",
           "default": 2048,
           "type": "integer",
           "maximum": 9007199254740991.0,
@@ -23370,15 +23468,15 @@
           "_metadata": {
             "docs::additional_props_description": "An HTTP request header and it's value(s).",
             "docs::examples": {
+              "Accept": [
+                "text/plain",
+                "text/html"
+              ],
               "X-My-Custom-Header": [
                 "a",
                 "vector",
                 "of",
                 "values"
-              ],
-              "Accept": [
-                "text/plain",
-                "text/html"
               ]
             },
             "docs::human_name": "Headers"
@@ -23787,7 +23885,7 @@
                   "description": "[gelf]: https://docs.graylog.org/docs/gelf",
                   "allOf": [
                     {
-                      "description": "On GELF decoding behavior:\n  Graylog has a relaxed decoding. They are much more lenient than the spec would\n  suggest. We've elected to take a more strict approach to maintain backwards compatability\n  in the event that we need to change the behavior to be more relaxed, so that prior versions\n  of vector will still work with the new relaxed decoding.\nConfig used to build a `GelfDeserializer`.",
+                      "description": "On GELF decoding behavior:\n  Graylog has a relaxed decoding. They are much more lenient than the spec would\n  suggest. We've elected to take a more strict approach to maintain backwards compatibility\n  in the event that we need to change the behavior to be more relaxed, so that prior versions\n  of vector will still work with the new relaxed decoding.\nConfig used to build a `GelfDeserializer`.",
                       "type": "object",
                       "properties": {
                         "gelf": {
@@ -24465,9 +24563,9 @@
               "_metadata": {
                 "docs::optional": true,
                 "docs::examples": {
-                  "fetch.error.backoff.ms": "1000",
                   "socket.send.buffer.bytes": "100",
-                  "client.id": "${ENV_VAR}"
+                  "client.id": "${ENV_VAR}",
+                  "fetch.error.backoff.ms": "1000"
                 },
                 "docs::advanced": true,
                 "docs::additional_props_description": "A librdkafka configuration option.",
@@ -24631,6 +24729,7 @@
         "read_from": "beginning",
         "ignore_older_secs": null,
         "max_read_bytes": 2048,
+        "oldest_first": true,
         "max_line_bytes": 32768,
         "fingerprint_lines": 1,
         "glob_minimum_cooldown_ms": 60000,
@@ -24799,7 +24898,7 @@
           }
         },
         "max_read_bytes": {
-          "title": "Max amount of bytes to read from a single file before switching over\nto the next file.",
+          "title": "Max amount of bytes to read from a single file before switching over to the next file.\n**Note:** This does not apply when `oldest_first` is `true.",
           "description": "This allows distributing the reads more or less evenly across\nthe files.",
           "type": "integer",
           "maximum": 9007199254740991.0,
@@ -24860,6 +24959,14 @@
           "unevaluatedProperties": false,
           "_metadata": {
             "docs::human_name": "Node Annotation Fields"
+          }
+        },
+        "oldest_first": {
+          "description": "Instead of balancing read capacity fairly across all watched files, prioritize draining the oldest files before moving on to read data from younger files.",
+          "default": true,
+          "type": "boolean",
+          "_metadata": {
+            "docs::human_name": "Oldest First"
           }
         },
         "pod_annotation_fields": {
