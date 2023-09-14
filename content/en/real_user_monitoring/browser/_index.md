@@ -1814,6 +1814,12 @@ A list of request origins ignored when computing the page activity. See [How pag
 **Type**: String<br/>
 URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
 
+`allowUntrustedEvents`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Allow to capture [untrusted events][24], for example in automated UI tests.
+
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
 `trackSessionAcrossSubdomains`
@@ -1939,3 +1945,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
 [22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
+[24]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted

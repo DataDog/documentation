@@ -22,6 +22,11 @@ The CI Visibility - RUM integration is only available for these versions of `cyp
 
 **Note**: Only `cypress` is supported for this integration at the moment.
 
+<blockquote class="alert alert-info">
+From Browser SDK v5.0.0, you should enable `allowUntrustedEvents` initialization parameter during you cypress tests to correctly capture clicks.
+</blockquote>
+
+
 ### Browser tests and RUM
 
 <div class="alert alert-warning">
