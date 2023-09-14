@@ -57,9 +57,9 @@ The Datadog Agent configuration URI must be an Azure blob storage URI.
 The Datadog Windows Agent Azure Extension will check that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
 The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
 
-```powershell
+{{< code-block lang="powershell" >}}
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
-```
+{{< /code-block >}}
 
 **Note**: Once the Datadog Agent is installed, the configuration can only be changed when upgrading to a newer version.
 
@@ -68,17 +68,17 @@ This example shows how to specify a version of the Agent to install. By default 
 
 **Note**: Downgrades are *not* supported, so it's not possible to install a *lower* version of the Datadog Agent than the one currently installed on the target machine. To install a lower version of the Datadog Agent, uninstall the previous version first by removing the Datadog Windows Agent Azure Extension on the target machine. Removing the Datadog Windows Agent Azure Extension does not remove the Datadog Agent configuration.
 
-```powershell
+{{< code-block lang="powershell" >}}
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
-```
+{{< /code-block >}}
 
 [1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-```bash
+{{< code-block lang="bash" >}}
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
-```
+{{< /code-block >}}
 More information on the syntax to set Azure instance extensions can be found in the [Azure Extension CLI reference][1].
 
 The Azure Extension can accept both normal settings and protected settings.
@@ -106,9 +106,9 @@ This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datadog Linux Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
 - The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
 
-```bash
+{{< code-block lang="bash" >}}
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
-```
+{{< /code-block >}}
 
 
 [1]: https://learn.microsoft.com/en-us/cli/azure/vm/extension
@@ -122,16 +122,16 @@ To run the Datadog Agent in your [Azure Arc][5] instances as an extension, use t
 {{< tabs >}}
 {{% tab "Windows" %}}
 
-```powershell
+{{< code-block lang="powershell" >}}
 az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME> -g <RESOURCE_GROUP> --publisher Datadog.Agent --type DatadogWindowsAgent --location <LOCATION> --settings '{"site":"<SITE_PARAMETER>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}'
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-```bash
+{{< code-block lang="bash" >}}
 az connectedmachine extension create --name <NAME> --machine-name <MACHINE_NAME> -g <RESOURCE_GROUP> --publisher Datadog.Agent --type DatadogLinuxAgent --location <LOCATION> --settings '{"site":"<SITE_PARAMETER>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}'
-```
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
