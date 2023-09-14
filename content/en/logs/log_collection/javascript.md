@@ -358,7 +358,7 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `silentMultipleInit`       | Boolean                                                                   | No       |                 | Prevent logging errors while having multiple init.                                                                                                                                    |
 | `proxyUrl`                 | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
 | `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
-| `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in local storage to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.           |
+| `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.           |
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
@@ -991,7 +991,7 @@ However, this feature comes with some **limitations**:
 
 - Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in `localStorage` outlives the user session
 - The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
-- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
+- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in `localStorage` must be within this limit to avoid any issues
 
 #### Logger context
 

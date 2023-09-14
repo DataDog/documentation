@@ -1549,7 +1549,7 @@ URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be r
 : Optional<br/>
 **Type**: String<br/>
 **Default**: `false`<br/>
-Store global context and user context in local storage to preserve them along the user navigation. See [Contexts life cycle][24] for more details and specific limitations.
+Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][24] for more details and specific limitations.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
@@ -1575,7 +1575,7 @@ Use a secure cross-site session cookie. This allows the RUM Browser SDK to run w
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allows the use of Local Storage when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
+Allows the use of `localStorage` when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
 
 ### Tagging
 
