@@ -118,6 +118,8 @@ To capture a session replay in a synthetic browser test, click **Generate Synthe
 
 {{< img src="/getting_started/session_replay/browser-test.png" alt="Browser test creation popup window" style="width:100%" >}}
 
+For more information about managing, running, and interpreting test results, read [Synthetic Browser Tests][12].
+
 ### Share with your team
 
 You can share the replay with your team by selecting the **Share** dropdown at the top of the page. You can start the replay at a specific time, to direct your team's attention to a particular time and view of the Replay.
