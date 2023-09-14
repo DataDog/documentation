@@ -51,7 +51,7 @@ Suppose you've been told that a customer experienced issues with your applicatio
 
 {{< img src="/getting_started/session_replay/facets-views.png" alt="Filtering by facet" style="width:100%" >}}
 
-Maybe you've created a [Saved View][6] that shows you all Sessions that contain the specific error that your customer encountered. This can be helpful in the case that you know where the issue lies.
+Maybe you've created a [Saved View][6] that shows you all sessions that contain a specific error that your application generates. Bringing up this view is helpful when you know where the issue lies and want to see session replays of users encountering it.
 
 {{< img src="/getting_started/session_replay/pinned-views.png" alt="Views dropdown" style="width:100%" >}}
 
