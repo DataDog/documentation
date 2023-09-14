@@ -26,9 +26,9 @@ To run the Datadog Agent in your Azure instances as an extension, use the comman
 {{< tabs >}}
 {{% tab "Windows" %}}
 
-```powershell
+{{< code-block lang="powershell" >}}
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
-```
+{{< /code-block >}}
 
 More information on the syntax to set Azure instance extensions can be found in the [Azure Extension Set-AzVMExtension documentation][1].
 
