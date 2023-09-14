@@ -43,8 +43,10 @@ The [Google Cloud Platform integration][1] is successfully installed.
 
 1. In the [Cloud Pub/Sub console][2], select `Subscriptions` in the left hand navigation. Click `Create Subscription`.
 2. Create a subscription ID and select the topic you previously created.
-3. Select the `Push` method and enter the following command, replacing `<DATADOG_API_KEY>` with the value of a valid [Datadog API key][4]: `https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp`.
-
+3. Select the `Push` method and enter the following command, replacing `<DATADOG_API_KEY>` with the value of a valid [Datadog API key][4]: 
+```
+https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp
+```
 4. Configure any additional options, such as **Subscription expiration**, **Acknowledgment deadline**, **Message retention duration**, or **Dead lettering**.
 5. Under **Retry policy**, select `Retry after exponential backoff delay`.
 6. Click `Create` at the bottom.
