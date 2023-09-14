@@ -141,3 +141,4 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 [9]: /real_user_monitoring/connect_rum_and_traces
 [10]: /real_user_monitoring/error_tracking/
 [11]: /synthetics/guide/rum-to-synthetics/
+[12]: /synthetics/browser_tests/
