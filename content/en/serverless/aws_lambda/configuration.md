@@ -405,6 +405,15 @@ This guide explains how to rename both upstream and downstream services in Datad
 > - For Ruby: Set `peer.service` value for specific integrations using `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE`.
 > - Python does not support Boto2 as of version v1.16.0.
 
+### Examples
+
+#### NodeJS `DD_SERVICE_MAPPING: "lambda_api_gateway:api-gw-name,aws-sdk:aws-sdk-name"
+      DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED: "true"
+      DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+      DD_TRACE_PEER_SERVICE_MAPPING: "serviceMappingJs-dev-TestQueue-FvobIfTGlO1c:new-peer-service-name"`
+
+
+{{< img src="images/tracing/serverless_functions/ServiceMappingJS.png" alt="service mapping" >}}
 
 ## Filter or scrub information from logs
 
