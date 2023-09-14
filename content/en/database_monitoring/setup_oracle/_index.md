@@ -27,7 +27,7 @@ To configure Database Monitoring for Oracle, the following prerequisites must be
 
 1. An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be installed.
     - [Install the Agent](#install-the-agent)
-    - [Upgrade an existing Agent installation](#upgrade-from-a-previous-agent-release)
+    - [Upgrade an existing Agent installation](#upgrade-an-existing-agent-installation)
 2. The Oracle integration must be installed.
     - [Install the Oracle integration](#install-the-oracle-integration)
     - [Verify an existing Oracle integration installation](#verify-your-existing-oracle-integration)
@@ -108,14 +108,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 ### Upgrade an existing Agent installation
 
-<div class="alert alert-info">For the latest Oracle monitoring features and bug fixes, <a href="/database_monitoring/setup_oracle/?tab=linux#recommended-agent-version">install the recommended Oracle DBM version</a> instead of upgrading your existing Agent below.</div>
-
-If you have an existing Agent installation:
-
-1. Verify that your Agent version meets the recommended minimum of `7.46.0`, upgrading to a newer version if necessary.
-    - To upgrade from `>7.0.0`, see [Upgrade Between Minor Versions][15].
-    - To upgrade from v5 or v6, see [Upgrade to Datadog Agent v7][20].
-2. Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
+Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
 
 ### Install the Oracle integration
 
