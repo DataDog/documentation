@@ -57,7 +57,9 @@ Maybe you've created a [Saved View][6] that shows you all sessions that contain 
 
 ## Examine a user journey
 
-The **User Journey** is an event timeline on the right side of the page. The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. You can navigate to any moment in the user journey by clicking on an event in the list. You can also track all the actions and errors occurring for each view by clicking **Session Breakdown**.
+The session replay looks like a video on the left, with standard video navigation tools. Start the replay from the beginning by clicking play, and watch everything that a particular user did. 
+
+The **User Journey** is an event timeline on the right side of the page. You can navigate to any moment in the user journey by clicking on an event in the list. You can also track all the actions and errors occurring for each view by clicking **Session Breakdown**.
 
 {{< img src="/getting_started/session_replay/user-journey.png" alt="Panel with User Journey" style="width:100%" >}}
 
