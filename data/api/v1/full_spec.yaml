@@ -4019,6 +4019,7 @@ components:
       - functions_usage
       - infra_host_usage
       - invocations_usage
+      - mobile_app_testing_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - profiled_container_usage
@@ -4057,6 +4058,7 @@ components:
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
+      - MOBILE_APP_TESTING_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
@@ -7588,6 +7590,8 @@ components:
       - infra_host_percentage
       - invocations_usage
       - invocations_percentage
+      - mobile_app_testing_percentage
+      - mobile_app_testing_usage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -7663,6 +7667,8 @@ components:
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
       - INVOCATIONS_PERCENTAGE
+      - MOBILE_APP_TESTING_USAGE
+      - MOBILE_APP_TESTING_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -7908,6 +7914,15 @@ components:
           type: number
         invocations_usage:
           description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        mobile_app_testing_percentage:
+          description: The percentage of Synthetic mobile application test usage by
+            tag(s).
+          format: double
+          type: number
+        mobile_app_testing_usage:
+          description: The Synthetic mobile application test usage by tag(s).
           format: double
           type: number
         npm_host_percentage:
@@ -18192,6 +18207,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         synthetics_parallel_testing_max_slots_hwm:
           description: Shows the high-water mark of used synthetics parallel testing
             slots over all hours in the current date for all organizations.
@@ -18631,6 +18651,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm:
@@ -19114,6 +19139,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_agg_sum:
+          description: Shows the sum of Synthetic mobile application tests over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm_sum:
