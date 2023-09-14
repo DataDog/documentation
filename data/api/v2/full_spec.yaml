@@ -29053,8 +29053,8 @@ paths:
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.
+          `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
+          and `timeseries`.
 
           The following product family has been **deprecated**: `audit_logs`.'
         in: query
