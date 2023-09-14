@@ -929,23 +929,23 @@ const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 
 ## Contexts life cycle
 
-By default, global context and user context are stored in the current page memory, meaning:
+By default, global context and user context are stored in the current page memory, which means they are not:
 
-- they are not kept after a full reload of the page
-- they are not shared across different tabs / windows of the same session
+- kept after a full reload of the page
+- shared across different tabs or windows of the same session
 
-So in order to be added to all events of the session, those contexts need to be attached on every page.
+To add them to all events of the session, they must be attached to every page.
 
-With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in local memory, allowing the following behaviours:
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in local memory, allowing the following behaviors:
 
 - Contexts are preserved after a full reload
 - Contexts are synchronized between tabs opened on the same origin
 
 However, this feature comes with some **limitations**:
 
-- Setting PII in those contexts is not recommended, data stored in local storage outlives the user session
-- This feature is incompatible with the `trackSessionAcrossSubdomains` options, since contexts are only shared among the same origin (login.site.com ≠ app.site.com)
-- Local storage is limited to 5 MiB by origin, so application-specific data, Datadog contexts, and other third-party data stored in local storage needs to stay under this limit.
+- Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in local storage outlives the user session
+- The feature is incompatible with the `trackSessionAcrossSubdomains` options because contexts are only shared among the same origin (login.site.com ≠ app.site.com)
+- Local storage is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues.
 
 ## Further Reading
 
