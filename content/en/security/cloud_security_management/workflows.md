@@ -34,9 +34,6 @@ This example creates a remediation workflow that sends an interactive Slack mess
 3. Select **Manual** for the trigger and click **Create**.
 4. Click **Add a step to get started** to start adding steps to your workflow using the workflow builder. Alternatively, click **Edit JSON Spec** to build the workflow using the JSON editor.
 
-{{< tabs >}}
-{{% tab "Workflow builder" %}}
-
 #### Get security finding
 
 To retrieve the security finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][3] API endpoint.
@@ -113,163 +110,6 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 [2]: /service_management/workflows/build/#source-object-variables
 [3]: /api/latest/security-monitoring/#get-a-finding
 
-{{% /tab %}}
-{{% tab "JSON editor" %}}
-
-An example of a workflow to send an interactive Slack message:
-
-{{< code-block lang="json" collapsible="true" >}}
-{
-    "steps": [
-        {
-            "actionId": "com.datadoghq.slack.send_simple_message",
-            "name": "Send_message",
-            "parameters": [
-                {
-                    "name": "teamId",
-                    "value": "<TEAM ID>"
-                },
-                {
-                    "name": "channel",
-                    "value": "<SLACK CHANNEL NAME>"
-                },
-                {
-                    "name": "text",
-                    "value": "S3 bucket `{{ Steps.Get_security_finding.resource }}`  successfully blocked. AWS API response: \n```{{ Steps.Block_public_access }}```\n\nThe issue will be marked as fixed the next time the resource is scanned, which can take up to one hour."
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.dd.cloudsecurity.getSecurityFinding",
-            "name": "Get_security_finding",
-            "outboundEdges": [
-                {
-                    "branchName": "main",
-                    "nextStepName": "GetRegion"
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "id",
-                    "value": "{{ Source.securityFinding.id }}"
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.aws.s3.block_public_access",
-            "connectionLabel": "INTEGRATION_AWS_1",
-            "name": "Block_public_access",
-            "outboundEdges": [
-                {
-                    "branchName": "main",
-                    "nextStepName": "Send_message"
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "region",
-                    "value": "{{ Steps.GetRegion.data }}"
-                },
-                {
-                    "name": "bucket",
-                    "value": "{{ Steps.Get_security_finding.resource }}"
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.datatransformation.func",
-            "name": "GetRegion",
-            "outboundEdges": [
-                {
-                    "branchName": "main",
-                    "nextStepName": "Make_a_decision"
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "script",
-                    "value": "// Gets the region info from the finding tags\n// Use `$` to access Trigger or Steps data.\n// Use `_` to access Lodash.\n// See https://lodash.com/ for reference.\n\nlet tags = $.Steps.Get_security_finding.tags\n\nlet region = tags.filter(t => t.includes('region:'))\nif(region.length == 1){\n    return region[0].split(':')[1]\n} else {\n    return '';\n}"
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.slack.send_interactive_message",
-            "name": "Make_a_decision",
-            "outboundEdges": [
-                {
-                    "branchName": "approve",
-                    "nextStepName": "Block_public_access"
-                },
-                {
-                    "branchName": "reject",
-                    "nextStepName": "Decline"
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "actionChoices",
-                    "value": [
-                        {
-                            "displayName": ":white_check_mark:  Approve",
-                            "outboundBranch": "approve"
-                        },
-                        {
-                            "displayName": ":no_entry_sign:  Reject",
-                            "outboundBranch": "reject"
-                        }
-                    ]
-                },
-                {
-                    "name": "teamId",
-                    "value": "<TEAM ID>"
-                },
-                {
-                    "name": "channel",
-                    "value": "<SLACK CHANNEL NAME>"
-                },
-                {
-                    "name": "promptText",
-                    "value": "Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region {{ Steps.GetRegion.data }}?"
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.slack.send_simple_message",
-            "name": "Decline",
-            "parameters": [
-                {
-                    "name": "teamId",
-                    "value": "<TEAM ID>"
-                },
-                {
-                    "name": "channel",
-                    "value": "<SLACK CHANNEL NAME>"
-                },
-                {
-                    "name": "text",
-                    "value": "User declined the action"
-                }
-            ]
-        }
-    ],
-    "startStepName": "Get_security_finding",
-    "connectionEnvs": [
-        {
-            "connections": [
-                {
-                    "connectionId": "<CONNECTION ID>",
-                    "label": "INTEGRATION_AWS_1"
-                }
-            ],
-            "env": "default"
-        }
-    ]
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ### Automatically create and assign a Jira issue
 
 This example creates an automated ticket routing workflow that creates and assigns a Jira issue to the appropriate team when a security issue is detected.
@@ -280,9 +120,6 @@ This example creates an automated ticket routing workflow that creates and assig
 2. Enter a name for the workflow.
 3. Select **Manual** for the trigger and click **Create**.
 4. Click **Add a step to get started** to start adding steps to your workflow using the workflow builder. Alternatively, click **Edit JSON Spec** to build the workflow using the JSON editor.
-
-{{< tabs >}}
-{{% tab "Workflow builder" %}}
 
 #### Get security issue
 
@@ -329,72 +166,6 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
 [1]: /service_management/workflows/actions_catalog/datatransformation_func/
 [2]: /service_management/workflows/build/#source-object-variables
 [3]: /api/latest/security-monitoring/#get-a-finding
-
-{{% /tab %}}
-{{% tab "JSON editor" %}}
-
-An example of a workflow to automatically create and assign a Jira issue:
-
-{{< code-block lang="json" collapsible="true" >}}
-{
-    "steps": [
-        {
-            "actionId": "com.datadoghq.dd.cloudsecurity.getSecurityIssue",
-            "name": "Get_security_issue",
-            "outboundEdges": [
-                {
-                    "branchName": "main",
-                    "nextStepName": "GetTeamInfo"
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "id",
-                    "value": "{{ Source.securityIssue.id }}"
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.datatransformation.func",
-            "name": "GetTeamInfo",
-            "outboundEdges": [
-                {
-                    "branchName": "main",
-                    "nextStepName": "Create_issue"
-                }
-            ],
-            "parameters": [
-                {
-                    "name": "script",
-                    "value": "// Gets the team info from the finding tags\n// Use `$` to access Trigger or Steps data.\n// Use `_` to access Lodash.\n// See https://lodash.com/ for reference.\n\nlet tags = $.Steps.Get_security_finding.tags\n\nlet team = tags.filter(t => t.includes('team:'))\nif(region.length == 1){\n    return team[0].split(':')[1]\n} else {\n    return '';\n}"
-                }
-            ]
-        },
-        {
-            "actionId": "com.datadoghq.jira.create_issue",
-            "name": "Create_issue",
-            "parameters": [
-                {
-                    "name": "accountId",
-                    "value": "<JIRA ACCOUNT ID>"
-                },
-                {
-                    "name": "projectKey",
-                    "value": "{{ Steps.GetTeamInfo.data }}"
-                },
-                {
-                    "name": "summary",
-                    "value": "{{ Steps.Get_security_issue.rule.name }}"
-                }
-            ]
-        }
-    ],
-    "startStepName": "Get_security_issue"
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Trigger a workflow
 
