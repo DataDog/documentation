@@ -20,7 +20,7 @@ Les [clés d'application][2] sont utilisées conjointement avec la clé d'API de
 
 ### Portées
 
-Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des [portées d'autorisation][3] à vos clés d'application de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
+Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des [portées d'autorisation][3] à vos clés d'application, de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
 
 Lorsque vous appliquez des portées à des clés d'application, il est recommandé d'accorder uniquement les privilèges et les autorisations dont l'application a besoin pour fonctionner correctement. Seules les portées spécifiées par l'utilisateur sont appliquées à la clé d'application : aucune autre autorisation n'est accordée. Vous pouvez modifier la portée d'autorisation d'une clé d'application à tout moment, mais il est essentiel de réfléchir à l'impact que ces modifications auront sur le fonctionnement de votre application et les données auxquelles elle pourra accéder.
 
@@ -33,10 +33,10 @@ Lorsque vous appliquez des portées à des clés d'application, il est recommand
 
 ## Tokens client
 
-Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis un navigateur : celles-ci seraient exposées côté client dans le code JavaScript. Les navigateurs Web et certains clients utilisent donc des tokens client pour transmettre des données à Datadog.
+Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis une application pour navigateur, mobile ou téléviseur : celles-ci seraient exposées côté client. Les applications conçues pour les utilisateurs finaux reposent donc sur des tokens client pour transmettre des données à Datadog.
 
  Plusieurs types de clients doivent utiliser un token client pour envoyer des données. Par exemple :
-- Le [collecteur de logs à partir des navigateurs Web][6], qui envoie des logs
+- Les collecteurs de logs pour les [navigateurs Web][6], [Android][12], [iOS][13], [React Native][14], [Flutter][15], et [Roku][16], qui envoient des logs.
 - Les applications [Real User Monitoring][7], qui envoient des événements et des logs
 
 Les tokens client sont uniques à votre organisation. Pour les gérer, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
@@ -133,3 +133,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [9]: /fr/api/latest/service-accounts/
 [10]: /fr/help/
 [11]: /fr/account_management/org_settings/service_accounts/
+[12]: /fr/logs/log_collection/android/
+[13]: /fr/logs/log_collection/ios/
+[14]: /fr/logs/log_collection/reactnative/
+[15]: /fr/logs/log_collection/flutter/
+[16]: /fr/logs/log_collection/roku/

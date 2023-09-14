@@ -19243,9 +19243,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Schedule a downtime.
       operationId: CreateDowntime
@@ -19303,9 +19300,6 @@ paths:
         - name: downtime_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime/{downtime_id}:
     delete:
       description: Cancel a downtime.
@@ -19346,9 +19340,6 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get downtime detail by `downtime_id`.
       operationId: GetDowntime
@@ -19408,9 +19399,6 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
       description: Update a downtime by `downtime_id`.
       operationId: UpdateDowntime
@@ -19468,9 +19456,6 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -23982,9 +23967,6 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
