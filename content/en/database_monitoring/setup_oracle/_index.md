@@ -42,7 +42,7 @@ If the above prerequisites are met, follow the setup instructions for your hosti
 
 #### Host requirements
 
-The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
+To determine where the Agent should be installed, see the [DBM Setup Architecture][10] documentation.
 
 The Agent doesn't require any external Oracle clients.
 
