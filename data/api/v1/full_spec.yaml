@@ -3521,6 +3521,11 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
           $ref: '#/components/schemas/EventQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -3532,6 +3537,13 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -6348,7 +6360,7 @@ components:
           readOnly: true
           type: integer
         matching_downtimes:
-          description: A list of active downtimes that match this monitor.
+          description: A list of active v1 downtimes that match this monitor.
           items:
             $ref: '#/components/schemas/MatchingDowntime'
           type: array
@@ -6876,7 +6888,8 @@ components:
             nullable: true
             type: integer
           deprecated: true
-          description: Information about the downtime applied to the monitor.
+          description: Information about the downtime applied to the monitor. Only
+            shows v1 downtimes.
           type: object
         synthetics_check_id:
           deprecated: true
@@ -12802,6 +12815,8 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
+        timingsScope:
+          $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -12809,6 +12824,15 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTimingsScope:
+      description: Timings scope for response time assertions.
+      enum:
+      - all
+      - withoutDNS
+      type: string
+      x-enum-varnames:
+      - ALL
+      - WITHOUT_DNS
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
