@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -646,7 +646,7 @@
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file
-            branch: brett0000FF/DOCS-5255
+            branch: release
             globs:
               - 'docs/Compatibility.md'
             options:
@@ -661,7 +661,7 @@
                 code_lang: ruby
                 type: multi-code-lang
                 code_lang_weight: 20
-                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/aeaf76dad192d3676d5b0db270e07708bc82782e/docs/Compatibility.md"]
+                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
                 further_reading:
                     - link: 'tracing/trace_collection/dd_libraries/ruby'
                       tag: 'Documentation'
