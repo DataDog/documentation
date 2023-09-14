@@ -13,11 +13,11 @@ further_reading:
   text: "Learn how to process your logs"
 ---
 
-## Overview
-
 <div class="alert alert-danger">
 Datadog recommends forwarding your Google Cloud logs with a <strong>Pull</strong> subscription to leverage compression and batching of events. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
 </div>
+
+## Overview
 
 This guide describes how to forward logs from your Google Cloud services to Datadog through a **Push** subscription to a [Google Cloud Pub/Sub][10] topic.
 
