@@ -11,11 +11,11 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java in beta.{{< /callout >}}
+{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java is in beta.{{< /callout >}}
 
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`.
+Intelligent Test Runner is supported in `dd-java-agent >= 1.21.0`.
 
 ## Setup
 
@@ -39,30 +39,13 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1
 
 {{< /tabs >}}
 
-### Additional environment variables
-
-To enable Intelligent Test Runner, set the following environment variables:
-
-`DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` (Optional)
-: Intelligent Test Runner requires [Jacoco][2] for collecting code coverage.<br/>
-Set this variable to a valid Jacoco version (such as `0.8.10`) if you want the tracer to run your build with Jacoco injected.<br/>
-Omit it if your project already has Jacoco configured.<br/>
-**Default**: `(empty)`
-
-`DD_CIVISIBILITY_JACOCO_PLUGIN_INCLUDES` (Optional)
-: Use this variable to configure the list of packages for which code coverage should be collected.<br/>
-While this variable is optional, setting this helps reduce overhead by avoiding coverage collection for core JDK classes and third-party dependencies.<br/>
-Package names should terminate with a `*` and should be separated with colons: `com.myorg.package1.*:com.myorg.package2.*:com.myorg.package3.*`
-or `com.myorg.*` (if you have a common root package).<br/>
-**Default**: `(empty)`
-
-After setting these environment variables, run your tests as you normally do:
+After configuring the environment, run your tests as you normally do:
 
 {{< tabs >}}
 {{% tab "Gradle" %}}
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
+./gradlew cleanTest test -Dorg.gradle.jvmargs=\
 -javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
