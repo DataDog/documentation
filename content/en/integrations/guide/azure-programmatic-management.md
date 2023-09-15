@@ -148,4 +148,3 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [18]: /logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
 [20]: /monitors/notify/#notify-your-team
-[21]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret#creating-a-service-principal
