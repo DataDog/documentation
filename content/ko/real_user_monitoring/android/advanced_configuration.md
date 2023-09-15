@@ -140,7 +140,7 @@ public class CustomRumResourceAttributesProvider implements RumResourceAttribute
 
 ### 커스텀 리소스
 
-[리소스 자동 추적][6] 외에도 `RumMonitor#startResource`로 리소스를 로드하는 동안 메서드(`GET`및 `POST`)로 특정 커스텀 리소스(예: 네트워크 요청 및 타사 공급자 API)를 추적할 수도 있습니다. 리소스가 완전히 로드되면 `RumMonitor#stopResource`를 사용하여 추적을 중지하고, 리소스를 로드하는 동안 오류가 발생하면 `RumMonitor#stopResourceWithError`를 사용해 중지하세요.
+[리소스 자동 추적][6] 외에도 `RumMonitor#startResource`를 통해 리소스를 로드하는 동안 `GET` 및 `POST`와 같은 메서드를 사용해 특정 커스텀 리소스(예: 네트워크 요청 및 타사 공급자 API)를 추적할 수도 있습니다. 리소스가 완전히 로드되면 `RumMonitor#stopResource`로 추적을 중지하고, 리소스를 로드하는 동안 오류가 발생하면 `RumMonitor#stopResourceWithError`로 중지하세요.
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
