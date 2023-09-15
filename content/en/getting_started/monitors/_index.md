@@ -25,7 +25,9 @@ further_reading:
 
 With Datadog alerting, you have the ability to create monitors that actively check metrics, integration availability, network endpoints, and more. Use monitors to draw attention to the systems that require observation, inspection, and intervention.
 
-This page in an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, to alert on low disk space. This guide covers:
+This page is an introduction to monitors and outlines instructions for setting up a metric monitor. A [metric monitor][1] provides alerts and notifications if a specific metric is above or below a certain threshold. For example, a metric monitor can alert you when disk space is low. 
+
+This guide covers:
 - Monitor creation and configuration
 - Setting up monitor alerts
 - Customizing notification messages
@@ -35,7 +37,7 @@ This page in an introduction to monitors and outlines instructions for setting u
 
 Before getting started, you need a Datadog account linked to a host with the Datadog Agent installed. To learn more about the Agent, see the [Getting started with the Agent guide][2], or navigate to **[Integrations > Agent][3]** to view installation instructions.
 
-To verify, check your [Infrastructure List][4] in Datadog.
+To verify that the Datadog Agent is running, check that your [Infrastructure List][4] in Datadog is populated.
 
 ## Create a monitor
 
@@ -44,10 +46,10 @@ To create a monitor, navigate to **[Monitors > New Monitor > Metric][5]**.
 ## Configure
 
 The main components of monitor configuration are:
-- **Detection method**: how are you measuring what will be alerted on? If a metric value or the change in values crosses a theshold? If the value is anomalous compared to previous values?
-- **Define the metric**: what value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
-- **Alert conditions**: when does an engineer need to be woken up? 
-- **Notification**: what message and what information needs to be in the alert?
+- **Detection method**: How are you measuring what will be alerted on? Are you concerned about a metric value crossing a threshold, a change in a value crossing a threshold, an anomalous value, or something else?
+- **Define the metric**: What value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
+- **Alert conditions**: When does an engineer need to be woken up? 
+- **Notification**: What information needs to be in the alert?
 
 ### Choose the detection method
 
@@ -75,7 +77,7 @@ For this example, leave the other settings in this section on the defaults. For 
 
 ### Notification
 
-When this monitor is triggered to alert, the notification message is what is sent. You can include conditional values, instructions for resolution, or a summary of what the alert is. At the very minimum, a monitor must have a title and message.
+When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At the very minimum, a notification must have a title and message.
 
 #### Title
 
@@ -105,7 +107,7 @@ Send notifications to your team through Email, Slack, PagerDuty, and more. You c
 
 Removing the `@notification` from either section removes it from both sections.
 
-Leave the other sections as is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
+Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
 ### Permissions
 
