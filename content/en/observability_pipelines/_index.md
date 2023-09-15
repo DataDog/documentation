@@ -46,7 +46,7 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
-3. Deep dive into recommendations for deploying and scaling the Observability Pipelines Worker:
+3. Deep dive into recommendations for deploying and scaling multipe Observability Pipelines Workers:
     - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
     - See [Best Practices for OPW Aggregator Architecture][4] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
 
