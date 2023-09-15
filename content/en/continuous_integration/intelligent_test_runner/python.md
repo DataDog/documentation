@@ -57,13 +57,13 @@ After completing setup, run your tests as you normally do:
 DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddtrace
 {{< /code-block >}}
 
-## Preventing the Intelligent Test Runner from skipping specific tests or modules
+## Disabling skipping for specific tests
 
-You can override the Intelligent Test Runner's behavior and prevent specific tests or modules from being skipped. These tests are referred to as unskippable tests.
+You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
-The Intelligent Test Runner uses coverage data to determine whether or not tests should be skipped. In some cases, coverage data may not be sufficient to make this determination.
+The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
 
 Examples include:
 
