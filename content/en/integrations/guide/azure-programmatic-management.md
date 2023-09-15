@@ -14,7 +14,7 @@ further_reading:
 
 **All sites**: All [Datadog sites][3] can use the steps on this page to complete the App Registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
 
-**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][14] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Managing the Azure Native Integration][1] guide for more information.
+**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][14] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding. See the [Managing the Azure Native Integration guide][1] for more information.
 
 ## Datadog Azure integration
 
