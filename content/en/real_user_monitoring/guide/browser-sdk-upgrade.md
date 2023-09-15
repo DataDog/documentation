@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to migrate between major versions of the Browser RUM and Logs Browser SDKs.
+Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs.
 
 ## From v4 to v5
 
