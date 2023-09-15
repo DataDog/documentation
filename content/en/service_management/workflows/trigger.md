@@ -17,6 +17,9 @@ further_reading:
 - link: "monitors"
   tag: "Documentation"
   text: "Find out more about Monitors"
+- link: "/security/cloud_security_management/workflows"
+  tag: "Documentation"
+  text: "Automate Security Workflows with Workflow Automation"
 ---
 
 You can trigger a workflow manually or automatically.
@@ -92,6 +95,8 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 1. Click **Run**.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
+For additional examples of Security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
+
 ## Trigger a workflow on a schedule
 
 To schedule a workflow run:
@@ -118,3 +123,4 @@ The initial **Debug** view for a workflow provides a panel with the list of prev
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules
+[4]: /security/cloud_security_management/workflows
