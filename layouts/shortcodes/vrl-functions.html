@@ -1,13 +1,12 @@
 {{ $functions := $.Site.Data.reference.functions | default (dict) }}
-{{ $regexToFixMdLinks := `\[([^\[]+)\](\(.*\))` }}
+{{ $regexToFixMdLinks := `\[([^\[]+)\](\([^\)]+\))` }}
 {{ range $category, $arrayOfFunctionObjs := $functions}}
   <h2 id="{{ $category | anchorize }}">{{ $category }} Functions</h2>
   {{ range $obj := $arrayOfFunctionObjs }}
   <div class="py-3" style="border-bottom:2px solid #DADADA">
-    <h2 id="{{ $obj.name | anchorize }}">{{ $obj.name }}</h2>
+    <h3 id="{{ $obj.name | anchorize }}">{{ $obj.name }}</h3>
     <p>{{ (replaceRE $regexToFixMdLinks "$1" $obj.description) | markdownify }}</p>
     {{ with $obj.arguments }}
-      <h4 class="text-capitalize">Arguments</h4>
       <div class="schema-table row">
         <div class="col-12">
           <div class="row table-header">
@@ -56,22 +55,22 @@
       </div>
     {{ end }}
     {{ with $obj.internal_failure_reasons }}
-      <strong>Errors</strong>
+      <h4 id="{{ $obj.name | anchorize }}-errors">Errors</h4>
       <ul>
       {{ range $reason := . }}
-        <li>{{ . }}</li>
+        <li>{{ . | markdownify }}</li>
       {{ end }}
       </ul>
     {{ end }}
     {{ with $obj.examples }}
-      <h3>Examples</h3>
+      <h4 id="{{ $obj.name | anchorize }}-examples">Examples</h4>
       <div>
-        <div class="card card-body">
+        <div class="card-body">
           {{ range $i, $ex := . }}
-            <p>{{ $ex.title | markdownify }}</p>
-            <strong>Source</strong>
+            <h3 id="{{ $ex.title | anchorize }}">{{ $ex.title | markdownify }}</h3>
+            <p>Source:</p>
             {{ print "```bash\n" $ex.source "\n```" | markdownify }}
-            <strong>Return</strong>
+            <p>Return:</p>
             {{ highlight $ex.return "bash" }}
           {{ end }}
         </div>
