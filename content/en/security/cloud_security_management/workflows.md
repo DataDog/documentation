@@ -36,7 +36,7 @@ This example creates a remediation workflow that sends an interactive Slack mess
 
 #### Get security finding
 
-To retrieve the security finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][3] API endpoint.
+To retrieve the security finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][8] API endpoint.
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 2. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
@@ -45,7 +45,7 @@ To retrieve the security finding and pass it into the workflow, use the **Get se
 
 #### Add JS function
 
-Next, add the [JavaScript Data Transformation Function][1] action to the canvas and configure it to return the region name from the finding's tags.
+Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the region name from the finding's tags.
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
 2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
@@ -106,10 +106,6 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
     - **Message text**: The text that appears in the Slack message, for example, "User declined the action".
 4. Click **Save**.
 
-[1]: /service_management/workflows/actions_catalog/datatransformation_func/
-[2]: /service_management/workflows/build/#source-object-variables
-[3]: /api/latest/security-monitoring/#get-a-finding
-
 ### Automatically create and assign a Jira issue
 
 This example creates an automated ticket routing workflow that creates and assigns a Jira issue to the appropriate team when a security issue is detected.
@@ -123,7 +119,7 @@ This example creates an automated ticket routing workflow that creates and assig
 
 #### Get security issue
 
-To retrieve the security issue and pass it into the workflow, use the **Get security issue** action. The action uses the `{{ Source.securityIssue.id }}` source object variable to retrieve the security issue's details from the [**Get a finding**][3] API endpoint.
+To retrieve the security issue and pass it into the workflow, use the **Get security issue** action. The action uses the `{{ Source.securityIssue.id }}` source object variable to retrieve the security issue's details from the [**Get a finding**][8] API endpoint.
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 2. Search for the **Get security issue** action and select it to add it as a step on your workflow canvas.
@@ -132,7 +128,7 @@ To retrieve the security issue and pass it into the workflow, use the **Get secu
 
 #### Add JS function
 
-Next, add the [JavaScript Data Transformation Function][1] action to the canvas and configure it to return the team name from the finding's tags.
+Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the team name from the finding's tags.
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
 2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
@@ -163,10 +159,6 @@ Next, add the [JavaScript Data Transformation Function][1] action to the canvas 
     - **Summary**: `{{ Steps.Get_security_issue.rule.name }}`
 4. Click **Save**.
 
-[1]: /service_management/workflows/actions_catalog/datatransformation_func/
-[2]: /service_management/workflows/build/#source-object-variables
-[3]: /api/latest/security-monitoring/#get-a-finding
-
 ## Trigger a workflow
 
 You can trigger an existing workflow from the security issue, misconfiguration, and resource side panels.
@@ -188,3 +180,4 @@ After running the workflow, additional information is shown on the side panel. Y
 [5]: /integrations/slack/
 [6]: /integrations/jira/
 [7]: /service_management/workflows/build/#source-object-variables
+[8]: /api/latest/security-monitoring/#get-a-finding
