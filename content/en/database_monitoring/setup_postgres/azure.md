@@ -91,6 +91,8 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -461,3 +463,4 @@ If you have installed and configured the integrations and Agent as described, an
 [9]: https://app.datadoghq.com/databases
 [10]: /integrations/azure_db_for_postgresql/
 [11]: /database_monitoring/setup_postgres/troubleshooting/
+[12]: /database_monitoring/guide/managed_authentication

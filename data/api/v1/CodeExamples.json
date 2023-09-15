@@ -143,6 +143,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3777304439",
+      "description": "Create a new dashboard with formula and function heatmap widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2104498738",
       "description": "Create a new dashboard with formulas and functions scatterplot widget"
     },
