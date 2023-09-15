@@ -8,6 +8,9 @@ further_reading:
 - link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
+- link: "/security/cloud_security_management/workflows"
+  tag: "Documentation"
+  text: "Automate Security Workflows with Workflow Automation"
 ---
 
 You can create workflows or edit existing workflows from the [**Workflow Automation** page][1] in Datadog. The Workflow Automation page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.

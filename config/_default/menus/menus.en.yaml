@@ -135,47 +135,52 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 14
+  - name: Session Replay
+    identifier: getting_started_session_replay
+    url: getting_started/session_replay/
+    parent: getting_started
+    weight: 15
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1502
+    weight: 1602
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1501
+    weight: 1601
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1503
+    weight: 1603
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Database Monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: Cloud Security Management
     url: getting_started/cloud_security_management/
     parent: getting_started
-    weight: 18
+    weight: 20
   - name: Cloud SIEM
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 19
+    weight: 21
   - name: Application Security Management
     identifier: getting_started_application_security
     url: getting_started/application_security
     parent: getting_started
-    weight: 19
+    weight: 22
   - name: Application Vulnerability Management
     identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
@@ -184,11 +189,11 @@ main:
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 20
+    weight: 23
   - name: Support
     url: getting_started/support/
     parent: getting_started
-    weight: 21
+    weight: 24
   - name: Glossary
     url: glossary/
     pre: features
@@ -3090,6 +3095,16 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 20
+  - name: Mute Issues
+    url: security/cloud_security_management/mute_issues
+    parent: csm
+    identifier: csm_mute
+    weight: 22
+  - name: Automate Security Workflows
+    url: security/cloud_security_management/workflows
+    parent: csm
+    identifier: csm_workflow_automation
+    weight: 23
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
@@ -4105,18 +4120,22 @@ main:
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
     weight: 407
+  - name: Create a Recommended Monitor
+    url: developers/integrations/create-an-integration-recommended-monitor
+    parent: dev_tools_integrations
+    weight: 408
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 408
+    weight: 409
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 409
+    weight: 410
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 410
+    weight: 411
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools

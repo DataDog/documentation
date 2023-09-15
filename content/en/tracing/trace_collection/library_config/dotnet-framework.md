@@ -183,8 +183,10 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans.<br>
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,`<br>
+Also accepts entries without a specified tag name. <br>
+**Example**: `My-Header-And-Tag-Name`<br>
 Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
