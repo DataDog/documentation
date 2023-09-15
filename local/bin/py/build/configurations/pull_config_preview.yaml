@@ -32,24 +32,6 @@
                 - "configuration & deployment"
               doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
-    - org_name: ansible-collections
-      
-      repos:
-      - repo_name: datadog
-        contents:
-
-        - action: pull-and-push-file
-          branch: main
-          globs:
-          - README.md
-          options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'ansible.md'
-            front_matters:
-              title: Ansible
-              kind: documentation
-              dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
-    
     - org_name: aws
 
       repos:
@@ -175,10 +157,10 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/guide/'
-            file_name: 'ansible_standalone_role.md'
+            dest_path: '/agent/basic_agent_usage/'
+            file_name: 'ansible.md'
             front_matters:
-              title: Set up Ansible Using a Standalone Datadog Role
+              title: Ansible
               kind: documentation
               dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
