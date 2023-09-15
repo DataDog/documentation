@@ -380,7 +380,7 @@ See [Working with Data][6] for more information on transforming your data.
 
 ## Next steps
 
-The quickstart walked you through how to install the Worker and deploy a sample pipeline configuration. For deploying specific use cases, select your use case:
+The quickstart walked you through how to install the Worker and deploy a sample pipeline configuration. For instructions on how to install the Worker to receive and route data from your Datadog Agents to Datadog or to receive and route data from your Splunk HEC to Splunk and Datadog, select your specific use case:
 
 {{< partial name="observability_pipelines/use_cases.html" >}}
 
