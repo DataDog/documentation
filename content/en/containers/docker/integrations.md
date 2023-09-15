@@ -39,8 +39,6 @@ To configure an integration with Autodiscovery, use the following parameters:
 
 **Note**: `<INIT_CONFIG>` is not required for Autodiscovery v2, introduced in Datadog Agent 7.36.
 
-[**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][3]
-
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
 * [Docker labels](?tab=docker#configuration)

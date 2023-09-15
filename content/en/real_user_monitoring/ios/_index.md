@@ -323,7 +323,7 @@ configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
 configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
 [configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
 
-[DDRUM enableWithConfiguration:configuration];
+[DDRUM enableWith:configuration];
 ```
 {{% /tab %}}
 {{% /tabs %}}
