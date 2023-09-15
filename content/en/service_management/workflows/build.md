@@ -13,7 +13,7 @@ further_reading:
   text: "Automate Security Workflows with Workflow Automation"
 ---
 
-You can create workflows or edit existing workflows from the [**Workflow Automation** page][1] in Datadog. The Workflow Automation page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.
+You can create workflows or edit existing workflows from the Workflow Automation [Explore][1] tab. The **Explore** tab lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete or clone the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
 
@@ -21,17 +21,20 @@ You can create workflows or edit existing workflows from the [**Workflow Automat
 
 1. Click the **Blueprints** tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
-1. Find the blueprint you would like to use, and click on it. The workflow canvas appears.
-1. Click the pencil icon (**Edit**) to update the workflow name. If desired, type a new name in the text box and click **Save**.
-1. Workflow steps that require updates are marked with exclamation mark icons.
-1. Click on each workflow step you would like to modify and fill in any empty fields on the **Configure** tab.
-1. When you are finished modifying the workflow, click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
+1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
+1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
+1. Enter a new name and description for the workflow and click **Save**.
+1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
+1. When you are finished modifying the workflow, Click **Run** to test your workflow.
+1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Create a custom workflow
 
 To create a workflow:
 1. Click **New workflow**.
-1. Enter a name for the workflow, and click **Create**.
+1. Enter a name and description for the workflow
+1. Select a trigger for the workflow.
+1. Click **Create**.
 1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
 
 ### Build a workflow with the workflow builder
@@ -41,6 +44,7 @@ To create a workflow:
 {{< img src="service_management/workflows/workflow-builder2.mp4" alt="Drag a step onto the workflow canvas" video="true" >}}
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
 1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
+1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
@@ -95,6 +99,14 @@ An example of a workflow with a single step that sends a message to a Slack chan
     ]
 }
 {{< /code-block >}}
+
+When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+## Publish a workflow
+
+Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
+
+Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Context variables
 
@@ -200,3 +212,4 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [1]: https://app.datadoghq.com/workflow
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
 [3]: /service_management/workflows/trigger
+[4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
