@@ -16,23 +16,23 @@ title: 안드로이드 통합 라이브러리
 
 ### Coil
 
-Coil을 사용하여 애플리케이션에 이미지를 로드하는 경우 Datadog의 [전용 Coil  라이브러리][1]를 참조하세요.
+Coil을 사용하여 애플리케이션에 이미지를 로드하는 경우 Datadog의 [Coil 전용 라이브러리][1]를 참조하세요.
 
 ### Fresco
 
-Fresco를 사용하여 애플리케이션에 이미지를 로드하는 경우 Datadog의 [전용 Fresco 라이브러리][2]를 참조하세요.
+Fresco를 사용하여 애플리케이션에 이미지를 로드하는 경우 Datadog의 [Fresco 전용 라이브러리][2]를 참조하세요.
 
 ### Glide
 
-Glide를 사용하여  애플리케이션에 이미지를 로드하는 경우 Datadog의 [전용 Glide 라이브러리][3]를 참조하세요.
+Glide를 사용하여  애플리케이션에 이미지를 로드하는 경우 Datadog의 [Glide 전용 라이브러리][3]를 참조하세요.
 
 ### Jetpack Compose
 
-애플리케이션에서 Jetpack Compose를 사용하는 경우 Datadog의 [전용 Jetpack Compose 라이브러리][7]를 참조하세요.
+애플리케이션에서 Jetpack Compose를 사용하는 경우 Datadog의 [Jetpack Compose 전용 라이브러리][7]를 참조하세요.
 
 ### RxJava
 
-애플리케이션에서 RxJava를 사용하는 경우 Datadog의 [전용 RxJava 라이브러리][8]를 참조하세요.
+애플리케이션에서 RxJava를 사용하는 경우 Datadog의 [RxJava 전용 라이브러리][8]를 참조하세요.
 
 ### Picasso
 
@@ -84,7 +84,7 @@ Retrofit을 사용하는 경우, Retrofit에서 생성된 네트워크 요청에
 
 ### SQLDelight
 
-애플리케이션에서 SQLDelight를 사용하는 경우 Datadog의 [전용 SQLDelight 라이브러리][4]를 참조하세요.
+애플리케이션에서 SQLDelight를 사용하는 경우 Datadog의 [SQLDelight 전용 라이브러리][4]를 참조하세요.
 
 ### SQLite
 
