@@ -26,9 +26,9 @@ The [Observability Pipelines Worker][1] can collect, process, and route logs and
 
 There are several ways to get started with the Observability Pipelines Worker.
 
-- [Quickstart](#quickstart): Install the Worker and test out the functionality of Observability Pipelines with demo data.
-- [Datadog setup guide][2]: Install the Worker and connect it to Datadog.
-- [Splunk setup guide][3]: Install the Worker and connect it to Splunk.
+- [Quickstart](#quickstart): Install the Worker with a simple pipeline that emits demo data to get started quickly.
+- [Datadog setup guide][2]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from your Datadog Agents to Datadog.
+- [Splunk setup guide][3]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from Splunk HEC to both Splunk and Datadog.
 
 This document walks you through the quickstart installation steps and then provides resources for next steps.
 
@@ -58,7 +58,7 @@ Follow the below instructions to install the Worker and deploy a sample pipeline
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
-1. Download the [sample pipeline configuration file][2] that uses demo data for this quickstart. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
+1. Download the [sample pipeline configuration file][2]. This configuration emits demo data, parses and structures the data, and then sends them to the console and Datadog. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
     ```
@@ -70,7 +70,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       datadog/observability-pipelines-worker run
     ```
 
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. **Note**: `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in step 1.
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
