@@ -1,24 +1,16 @@
 ---
 title: Apigee
 name: apigee
-kind: integration
+kind: Guide
 description: 'Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance and issues of the proxies aggregated in one place.'
-short_description: 'Collect Apigee logs to track errors, request response time, etc.'
-dependencies:
-    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/apigee.md']
-categories:
-    - log collection
-doc_link: /integrations/apigee/
+short_description: 'Collect Apigee logs'
 aliases:
-    - logs/log_collection/apigee
-has_logo: true
-integration_title: Apigee
-is_public: true
-public_title: Datadog-Apigee
+- /logs/log_collection/apigee
+- /integrations/apigee
 further_reading:
-    - link: 'logs/'
-      tag: 'Documentation'
-      text: 'Log Management'
+- link: 'logs/'
+  tag: 'Documentation'
+  text: 'Log Management'
 integration_id: "apigee"
 ---
 
@@ -65,7 +57,7 @@ The JavaScript has been configured to capture the essential flow variables as lo
 1. Select the Apigee proxy from which you want to send logs to Datadog.
 2. In the selected proxy overview page, click the **DEVELOP** tab located in the top-right corner.
 
-{{< img src="integrations/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
+{{< img src="static/images/logs/guide/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
 
 3. Under **Navigator**, go to add a new JavaScript policy and edit the JavaScript file created under the **Resources --> jsc** dropdown menu.
 4. Add the following JavaScript code snippet in it. Make sure to replace `<DATADOG_API_KEY>` in the `dd_api_url` variable with your [Datadog API KEY][3].

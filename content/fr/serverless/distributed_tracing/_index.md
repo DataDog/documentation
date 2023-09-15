@@ -28,9 +28,9 @@ kind: documentation
 title: Tracing distribué avec des applications sans serveur AWS Lambda
 ---
 
-{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur"  style="width:100%;">}}
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur" style="width:100%;">}}
 
-Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi mieux dépanner les problèmes de performance.
+Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi résoudre plus efficacement les problèmes de performance.
 
 Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda.
 
