@@ -54,7 +54,7 @@ After choosing to create a `SSL` test, define your test's request.
 
 3. **Name** your SSL test.
 
-4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
+4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
    {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
 

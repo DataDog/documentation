@@ -34,11 +34,11 @@ You can clone [dashboards][5] and customize them by team, environment, or region
 
 ### Edit template variables
 
-The generated Synthetic dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow the data shown in the dashboard. For example, you can filter for a specific browser type with the `Browser` template variable. To clone your Synthetic dashboard, click the **Clone** button next to the **Configure** icon. 
+The generated Synthetic dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow the data shown in the dashboard. For example, you can filter for a specific browser type with the `Browser` template variable. For more information, see the [Template Variables][7] documentation. To clone your Synthetic dashboard, click the **Clone** button next to the **Configure** icon. 
 
 {{< img src="synthetics/dashboards/clone.png" alt="Clone a dashboard" style="width:100%;">}}
 
-The Synthetic dashboard has a default view. To adjust the dashboard view, click the **Edit** icon and customize your template variables. Click **+ Add Template Variable** to add template variables.
+The Synthetic dashboard has a default view which you can adjust. Click the **Edit** icon and customize your template variables.
 
 {{< img src="synthetics/dashboards/template_variables.png" alt="Edit template variables in a Synthetic dashboard" style="width:80%;">}}
 
@@ -60,3 +60,4 @@ Enter a name for your saved view and click **Save**.
 [4]: https://app.datadoghq.com/synthetics/tests
 [5]: /dashboards/
 [6]: /continuous_testing/explorer/saved_views/
+[7]: /dashboards/template_variables/

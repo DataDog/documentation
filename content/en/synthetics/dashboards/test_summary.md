@@ -23,7 +23,6 @@ The [test summary dashboard][1] provides insights about your Synthetic test runs
 
   {{< img src="synthetics/dashboards/private_locations.png" alt="Private locations section of the Synthetics test summary dashboard" style="width:100%" >}}
 
-Click the pink Watchdog icon to open the [**Watchdog Insights**][2] side panel and analyze outstanding anomalies in your application performance or triggered monitor alerts.
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][3].
 

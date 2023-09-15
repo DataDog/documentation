@@ -24,7 +24,6 @@ The [browser test performance dashboard][1] provides insights about your browser
 
   {{< img src="synthetics/dashboards/browser_test_events.png" alt="Events section of the Synthetics Browser test performance dashboard" style="width:100%" >}}
 
-Click the pink Watchdog icon to open the [**Watchdog Insights**][3] side panel and analyze outstanding anomalies in your application performance or triggered monitor alerts.
 
 {{< img src="synthetics/dashboards/browser_test_performance.png" alt="Out-of-the-box Synthetics Browser test performance dashboard" style="width:100%" >}}
 

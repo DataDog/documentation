@@ -19,7 +19,6 @@ The [API test performance dashboard][1] provides insights about your entire stac
   
   {{< img src="synthetics/dashboards/api_test_performance_events.png" alt="Events section of the Synthetics API test performance dashboard" style="width:100%" >}}
 
-Click the pink Watchdog icon to open the [**Watchdog Insights**][2] side panel and analyze outstanding anomalies in your application performance or triggered monitor alerts.
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][3].
 

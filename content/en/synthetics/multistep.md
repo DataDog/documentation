@@ -44,7 +44,7 @@ Multistep API tests can run from Datadog [managed](#select-locations) and [priva
 ### Name and tag your test
 
 1. Name your Multistep API test.
-2. Add `env` and other tags to your Multistep API test. You can use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][6].
+2. Add `env` and other tags to your Multistep API test. You can use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][6].
 
 ### Select locations
 
