@@ -4136,7 +4136,7 @@ main:
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
     weight: 411
-  - name: Datadog Apps
+  - name: Datadog Apps SDK
     url: developers/datadog_apps
     parent: dev_tools
     identifier: dev_tools_datadog_apps
