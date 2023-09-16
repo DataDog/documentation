@@ -4,7 +4,7 @@ further_reading:
   tag: 설명서
   text: 이벤트 검색
 kind: 설명서
-title: 시각화하기
+title: 시각화
 ---
 
 ## 개요
