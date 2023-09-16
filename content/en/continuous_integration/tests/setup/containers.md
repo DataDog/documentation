@@ -1,6 +1,9 @@
 ---
 title: Tests in Containers
 kind: documentation
+code_lang: containers
+type: multi-code-lang
+code_lang_weight: 70
 aliases:
   - /continuous_integration/setup_tests/containers
 ---

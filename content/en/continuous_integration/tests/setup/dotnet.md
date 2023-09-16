@@ -1,8 +1,12 @@
 ---
 title: .NET Tests
 kind: documentation
+code_lang: dotnet
+type: multi-code-lang
+code_lang_weight: 0
 aliases:
   - /continuous_integration/setup_tests/dotnet
+  - /continuous_integration/tests/dotnet
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -15,7 +19,7 @@ further_reading:
       text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}

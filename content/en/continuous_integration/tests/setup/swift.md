@@ -1,8 +1,12 @@
 ---
 title: Swift Tests
 kind: documentation
+code_lang: swift
+type: multi-code-lang
+code_lang_weight: 50
 aliases:
   - /continuous_integration/setup_tests/swift
+  - /continuous_integration/tests/swift
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -12,7 +16,7 @@ further_reading:
       text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}

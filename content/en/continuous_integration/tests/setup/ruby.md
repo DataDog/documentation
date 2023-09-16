@@ -1,8 +1,12 @@
 ---
 title: Ruby Tests
 kind: documentation
+code_lang: ruby
+type: multi-code-lang
+code_lang_weight: 40
 aliases:
   - /continuous_integration/setup_tests/ruby
+  - /continuous_integration/tests/ruby
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -12,7 +16,7 @@ further_reading:
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}

@@ -1,8 +1,12 @@
 ---
 title: JavaScript and TypeScript Tests
 kind: documentation
+code_lang: javascript
+type: multi-code-lang
+code_lang_weight: 20
 aliases:
   - /continuous_integration/setup_tests/javascript
+  - /continuous_integration/tests/javascript
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -15,7 +19,7 @@ further_reading:
       text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}

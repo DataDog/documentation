@@ -90,7 +90,10 @@ code_language_ids:
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     serverless: "Serverless"
-
+    javascript: "JavaScript"
+    swift: "Swift"
+    junit_upload: "JUnit"
+    containers: "Containers"
 branch: ""
 
 signupclass: sign-up-trigger
