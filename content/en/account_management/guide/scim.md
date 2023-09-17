@@ -48,7 +48,6 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
     - **Secret Token**: Use a valid Datadog application key. You can create an application key from [your organization settings page][4]. To maintain continuous access to your data, use a [service account][2] application key.
 5. Click **Test Connection** and wait for the message that confirms that the credentials are authorized to enable provisioning.
 6. Click **Save**. The mapping section will appear, follow instructions below.
-7.
 
 {{< img src="/account_management/guide/scim/admin-credentials.png" alt="Azure AD Admin Credentials configuration screen">}}
 
@@ -60,7 +59,7 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
 2. Click **Provision Azure Active Directory Users**
 3. Set **Enabled** to **Yes**
 4. Click the **Save** icon
-5. Datadog support CTarget Object actions should be selected for Create, Update and Delete
+5. Under **Target Object actions**, Create, Update and Delete actions should be selected
 6. Review the user attributes that are synchronized from Azure AD to Datadog in the Attribute-Mapping section. The following attributes should be mapped as follow:
 
 {{< img src="/account_management/guide/scim/ad-users.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
