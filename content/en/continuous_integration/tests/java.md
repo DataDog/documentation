@@ -21,16 +21,16 @@ further_reading:
 
 ## Compatibility
 
-##### Supported test frameworks:
+##### Supported test frameworks
 * JUnit >= 4.10 and >= 5.3
 * TestNG >= 6.4
 * Spock >= 2.0
 * Cucumber >= 5.4.0 (earlier versions have limited support)
 * Scala MUnit >= 0.7.28
 
-If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
+If your test framework is not supported, you can try instrumenting your tests using the [Manual Testing API][1].
 
-##### Supported build systems:
+##### Supported build systems
 * Gradle >= 2.0
 * Maven >= 3.2.1
 
@@ -153,11 +153,11 @@ Ensure that your build system supplies `-javaagent` argument to the JVMs that ar
 
 When specifying `javaagent` arguments, include the following:
 
-* Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env property` (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Enable CI Visibility by setting the `dd.civisibility.enabled` property to `true`.
+* Define the environment where the tests are being run using the `dd.env property` (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 * Define the name of the service or library being tested in the `dd.service property`.
 
-For example, in an Ant project the `build.xml` file would have to be modified the following way:
+For example, the `build.xml` file in an Ant project would have to be modified in the following way:
 {{< code-block lang="xml" >}}
 <project name="my-project" default="test" xmlns:if="ant:if">
   <!-- ... -->
@@ -172,7 +172,7 @@ For example, in an Ant project the `build.xml` file would have to be modified th
 </project>
 {{< /code-block >}}
 
-Then the tests can be executed with:
+Then, the tests can be executed with:
 {{< code-block lang="shell" >}}
 ant test -Dci-visibility=true
 {{< /code-block >}}
@@ -193,7 +193,7 @@ However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer 
 ## Extensions
 
 The [dd-trace-api][4] library exposes a set of APIs that can be used to extend the tracer's functionality programmatically.
-Add this library as a compile-time dependency to your project in order to be able to use the extensions described below.
+To use the extensions described below, add this library as a compile-time dependency to your project.
 
 ### Adding custom tags to tests
 
@@ -227,7 +227,7 @@ if (span != null) {
 // ...
 ```
 
-Read more about custom metrics in [Add Custom Metrics Guide][6].
+For more information about custom metrics, see the [Add Custom Metrics guide][6].
 
 ### Using manual testing API
 
