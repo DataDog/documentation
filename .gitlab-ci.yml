@@ -105,7 +105,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-19304216
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-stefon.simmons_highlight-missing-tm-message
   tags:
     - "arch:amd64"
   rules:
