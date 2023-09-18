@@ -4,7 +4,7 @@ kind: documentation
 description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
 widget_type: "manage_status"
 aliases:
-    - /graphing/widgets/monitor_summary/
+- /graphing/widgets/monitor_summary/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -81,9 +81,7 @@ You can optionally define the title's size and alignment.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
-
-The dedicated [widget JSON schema definition][4] for the monitor summary widget is:
+This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
 
 {{< dashboards-widgets-api >}}
 
@@ -93,5 +91,5 @@ The dedicated [widget JSON schema definition][4] for the monitor summary widget 
 
 [1]: /monitors/manage/
 [2]: /monitors/manage/#grouped-results
-[3]: /api/v1/dashboards/
+[3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/
