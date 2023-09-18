@@ -77,7 +77,7 @@ For this example, leave the other settings in this section on the defaults. For 
 
 ### Notification
 
-When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At the very minimum, a notification must have a title and message.
+When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At minimum, a notification must have a title and message.
 
 #### Title
 
