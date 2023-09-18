@@ -209,11 +209,11 @@ CPU
 
 Allocations (v0.88+)
 : The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
-_Note: Not available when JIT is active_
+_Note: Not available when JIT is active on PHP 8.0.0 - 8.1.20 and 8.2.0 - 8.2.7_
 
 Allocated memory (v0.88+)
 : The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
-_Note: Not available when JIT is active_
+_Note: Not available when JIT is active on PHP 8.0.0 - 8.1.20 and 8.2.0 - 8.2.7_
 
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}
