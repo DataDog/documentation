@@ -672,7 +672,6 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: https://golang.org/pkg/regexp/syntax/
 [2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
