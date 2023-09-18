@@ -1,7 +1,7 @@
 ---
 title: Notes and Links Widget
 kind: documentation
-widget_type: 
+widget_type: note
 description: "Display text in a dashboard widget."
 aliases:
 - /graphing/widgets/note/
