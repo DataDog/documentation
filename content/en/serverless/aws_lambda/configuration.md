@@ -354,7 +354,7 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 ## Renaming upstream and downstream services
 
-This guide explains how to rename both upstream and downstream services in Datadog using environment variables and system properties.
+This guide explains how to rename both upstream and downstream services in Datadog using environment variables.
 
 ### Rename upstream service names
 
@@ -388,13 +388,13 @@ This guide explains how to rename both upstream and downstream services in Datad
 | Go       | `DD_SERVICE_MAPPING` | `null` | `mysql:mysql-service-name,postgres:postgres-service-name` | Rename services. |
 | .NET     | `DD_TRACE_SERVICE_MAPPING` | N/A | `mysql:main-mysql-db, mongodb:offsite-mongodb-service` | Rename services using config. |
 
-| Language | Minimum Version | Environment Variable Settings | System Property/Tracer Settings | Peer Service Mapping Example |
+| Language | Minimum Version | Environment Variable Settings | Peer Service Mapping Example |
 |----------|-----------------|-------------------------------|--------------------------------|-----------------------------|
-| Java     | 1.16.0          | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `-Ddd.trace.peer.service.defaults.enabled=true`<br>`-Ddd.trace.remove.integration-service-names.enabled=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
-| Go       | v1.52.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `WithPeerServiceDefaultsEnabled(true)`<br>`WithGlobalServiceName(true)` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
-| NodeJS   | 2.44.0<br>3.31.0<br>4.10.0 | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `spanComputePeerService=true`<br>`spanRemoveIntegrationFromService=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
-| .NET     | v2.35.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `PeerServiceNameMappings` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
-| Python   | v1.16.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `PeerServiceNameMappings` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Java     | 1.16.0          | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` |  `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Go       | v1.52.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| NodeJS   | 2.44.0<br>3.31.0<br>4.10.0 | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| .NET     | v2.35.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` |  `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Python   | v1.16.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
 | Ruby     | v1.13.0         | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | N/A | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service`<br>`DD_TRACE_DALLI_PEER_SERVICE=billing-api` |
 
 > **Notes**:
