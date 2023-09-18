@@ -34,7 +34,7 @@ If your test framework is not supported, you can try instrumenting your tests us
 * Gradle >= 2.0
 * Maven >= 3.2.1
 
-If your build system is not supported, you can try to [configure tracer injection manually][2].
+If your build system is not supported, you can try [configuring tracer injection manually][2].
 
 ## Setup
 
