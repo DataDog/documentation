@@ -2218,15 +2218,15 @@ main:
     identifier: ci_tests_setup_swift
     weight: 106
   - name: JUnit Report Uploads
-    url: continuous_integration/tests/setup/junit_upload/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_junit
-    weight: 107
+    url: continuous_integration/tests/junit_upload/
+    parent: ci_tests
+    identifier: ci_tests_junit
+    weight: 102
   - name: Tests in Containers
-    url: continuous_integration/tests/setup/containers/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_containers
-    weight: 108
+    url: continuous_integration/tests/containers/
+    parent: ci_tests
+    identifier: ci_tests_containers
+    weight: 103
   - name: Pipeline Visibility
     url: continuous_integration/pipelines/
     parent: ci

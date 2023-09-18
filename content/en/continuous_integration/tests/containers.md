@@ -1,9 +1,6 @@
 ---
 title: Tests in Containers
 kind: documentation
-code_lang: containers
-type: multi-code-lang
-code_lang_weight: 70
 aliases:
   - /continuous_integration/setup_tests/containers
 ---
@@ -11,6 +8,8 @@ aliases:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
+
+## Overview
 
 If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog tracer to autodetect the build information.
 

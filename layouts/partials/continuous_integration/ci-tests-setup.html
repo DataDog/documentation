@@ -1,6 +1,6 @@
 {{ $dot := . }}
 <div class="ci-cd-tests">
-  <div class="container cards-dd col-num-8">
+  <div class="container cards-dd col-num-2">
     <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
       <div class="col">
         <a class="card h-100" href="/continuous_integration/tests/setup/dotnet/">
@@ -41,20 +41,6 @@
         <a class="card h-100" href="/continuous_integration/tests/setup/swift/">
           <div class="card-body text-center py-2 px-1">
             {{ partial "img.html" (dict "root" . "src" "integrations_logos/swift_avatar.svg" "class" "img-fluid" "alt" "swift" "width" "200") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/continuous_integration/tests/setup/junit_upload/">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/junit.png" "class" "img-fluid" "alt" "upload junit tests" "width" "200") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/continuous_integration/tests/setup/containers/">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/container_avatar.svg" "class" "img-fluid" "alt" "tests in containers" "width" "200") }}
           </div>
         </a>
       </div>

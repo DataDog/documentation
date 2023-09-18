@@ -92,8 +92,6 @@ code_language_ids:
     serverless: "Serverless"
     javascript: "JavaScript"
     swift: "Swift"
-    junit_upload: "JUnit"
-    containers: "Containers"
 branch: ""
 
 signupclass: sign-up-trigger
