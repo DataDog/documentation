@@ -603,12 +603,6 @@ forEach([
 
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
-{{% ci-information-collected %}}
-
-In addition to that, if [Intelligent Test Runner][21] is enabled, the following data is collected from your project:
-
-* Code coverage information, including file names and line numbers covered by each test.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

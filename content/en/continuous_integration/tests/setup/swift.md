@@ -747,12 +747,6 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
  <false/>
 {{< /code-block >}}
 
-{{% ci-information-collected %}}
-
-In addition to that, if [Intelligent Test Runner][7] is enabled, the following data is collected from your project:
-
-* Code coverage information, including file names and line numbers covered by each test.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

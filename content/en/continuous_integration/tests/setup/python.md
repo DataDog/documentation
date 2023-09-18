@@ -153,8 +153,6 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 {{% ci-git-metadata %}}
 
-{{% ci-information-collected %}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

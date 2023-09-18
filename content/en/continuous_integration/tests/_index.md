@@ -63,6 +63,10 @@ Not every language supported by CI Visibility has support for test suite level v
 
 ## Use CI tests data
 
+{{% ci-information-collected %}}
+
+If [Intelligent Test Runner][13] is enabled for .NET, JavaScript, or Swift, [code coverage information][12], including file names and line numbers covered by each test, are collected from your projects.
+
 When creating a [dashboard][8] or a [notebook][9], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Alert on test data
@@ -84,3 +88,5 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [9]: https://app.datadoghq.com/notebook/list
 [10]: https://app.datadoghq.com/ci/test-runs
 [11]: /monitors/types/ci/
+[12]: /continuous_integration/guides/code_coverage/
+[13]: /continuous_integration/intelligent_test_runner/

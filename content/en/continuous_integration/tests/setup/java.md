@@ -301,8 +301,6 @@ public class ManualTest {
 
 Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so that all the test info is flushed to Datadog.
 
-{{% ci-information-collected %}}
-
 ## Troubleshooting
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
