@@ -42,8 +42,8 @@ cascade:
     {{< nextlink href="continuous_integration/tests/setup/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/setup/ruby" >}}Ruby{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/containers" >}}Tests running in containers{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Test suite level visibility
