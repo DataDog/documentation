@@ -10,7 +10,7 @@ import requests
 from yaml.loader import SafeLoader
 
 EXIT_MESSAGE = '''
-"\nThe 'enable_cache' value in on of your pullconfig files is set incorrectly.
+"\nThe 'enable_cache' value in one of your pullconfig files is set incorrectly.
 Check the annotations in your PR and address the error."
 '''
 
