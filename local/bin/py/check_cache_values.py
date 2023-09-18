@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 import json
 import subprocess
 import argparse
@@ -13,6 +14,10 @@ class SafeLineLoader(SafeLoader):
         mapping = super(SafeLineLoader, self).construct_mapping(node, deep=deep)
         mapping['__line__'] = node.start_mark.line + 1
         return mapping
+
+def fail_check():
+    print("\nThe 'enable_cache' value in on of your pullconfig cache files is set incorrectly. Check the annotations in your PR and address the error.")
+    sys.exit(1)
 
 def build_dictionary(data, file_name):
     file_dict = {}
@@ -83,6 +88,8 @@ if __name__ == "__main__":
     
     if any(send_alert):
         send_slack_alert(cache_data)
+        fail_check()
 
     if any(make_annotation):
         annotate(cache_data)
+        fail_check()
