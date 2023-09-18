@@ -141,7 +141,9 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 {{ Steps.Get_pull_request_status.state }}
 ```
 
-If you're not sure what variable you're looking for, Datadog suggests existing steps as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
+If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
+
+{{< img src="service_management/workflows/step-outputs.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
 ### Input parameters
 
