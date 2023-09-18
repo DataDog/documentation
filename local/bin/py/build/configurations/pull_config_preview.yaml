@@ -688,5 +688,3 @@
                     - link: '/tracing/trace_collection/dd_libraries/go/'
                       tag: 'Documentation'
                       text: 'Tracing Go Applications'
-'
-'
