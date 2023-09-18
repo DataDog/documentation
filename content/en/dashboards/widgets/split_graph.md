@@ -12,8 +12,17 @@ further_reading:
 
 ## Setup
 
+### Create a split graph widget
+
+### Create a split graph from an existing widget
+
+### Create a split graph from elsewhere in Datadog
+
 ## Configuration
 
+### Edit graph
+
+### Edit split
 
 
 ## API
