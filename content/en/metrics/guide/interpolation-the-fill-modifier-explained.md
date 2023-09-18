@@ -49,7 +49,7 @@ Interpolation is not performed for multi-part queries, for example: `avg:system.
 
 ## How to control interpolation?
 
-The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1].
+The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1] except for Gauge type metrics. `as_count()` and `as_rate()` modifiers have no effect on Gauge type metrics. See our [Metric Type Modifiers documentation](https://docs.datadoghq.com/metrics/custom_metrics/type_modifiers/?tab=gauge#in-application-modifiers) for more info.
 
 The `.fill()` modifier controls interpolation parameters:
 
