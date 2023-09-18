@@ -3,7 +3,6 @@ title: Search and Manage CI Tests and Pipelines
 description: Learn how to search for your CI tests and pipelines.
 aliases:
 - /continuous_integration/guides/find_flaky_tests/
-- /continuous_integration/guides/flaky_test_management/
 algolia:
    rank: 70
    tags: ['flaky test', 'flaky tests', 'test regression', 'test regressions', 'test service', 'test services']
@@ -11,6 +10,9 @@ further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"
   text: "Search and filter test runs or pipeline executions"
+- link: "/continuous_integration/guides/flaky_test_management"
+  tag: "Documentation"
+  text: "Learn how to manage flaky tests"
 ---
 
 ## Overview
@@ -88,6 +90,7 @@ Hovering over the commit author avatar shows detailed information about the late
 #### Test regressions
 
 Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
+
 #### Investigate for more details
 
 Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
@@ -103,71 +106,6 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
 The Default Branches view shows similar information to the Branches view, but applied to the default branch. It compares the current wall time with the average default branch wall time to give you an indication of how your test suite performance is trending over time.
-
-### New flaky tests
-
-For each branch, the list shows the number of new flaky tests introduced by the commit, the number of flaky commits, a comparison of the current wall time with the average default branch wall time, and the branch's latest commit details. 
-
-A *flaky test* is a test that exhibit both a passing and failing status across multiple test runs for the same commit. If you commit some code and run it through CI, and a test fails, and you run it through CI again and the test passes, that test is unreliable as proof of quality code.
-
-Flaky tests introduce risk and unpredictability into your CI system and end product. When people have to remember which tests are flaky, they lose trust in their test results, and a tremendous amount of time and resources are wasted on pipeline retries.
-
-Use the following information to help prioritize flaky tests:
-
-* **Average duration**: The average time the test takes to run.
-* **First flaked** and **Last flaked**: The date and commit SHAs for when the test first and most recently exhibited flaky behavior.
-* **Commits flaked**: The number of commits in which the test exhibited flaky behavior.
-* **Failure rate**: The percentage of test runs that have failed for this test since it first flaked.
-* **Trend**: A visualization that indicates whether a flaky test was fixed or it is still actively flaking.
-
-Once you identify a flaky test you want to fix, click on the test to see links to view the most recent failed test run or the first flaky test run.
-
-{{< img src="continuous_integration/flaky_test_options.png" alt="Advanced options for flaky tests" style="width:100%;">}}
-
-If a flaky test has not failed in the past 30 days, it is automatically removed from the table. You can also manually remove a flaky test by clicking on the trash icon that appears when you hover over the test row. It is added again if it re-exhibits flaky behavior.
-
-New flaky tests are tests that exhibit flaky behavior and didn't previously exist in the Flaky Tests table for the current branch or default branch of the repository.
-
-<div class="alert alert-info">The table is limited to the 1000 flaky tests with the highest number of commits flaked for the selected time frame.</div>
-
-### Test Runs page
-
-1. Navigate to the [Test Runs][1] page.
-2. In the facets list on the left sidebar, expand the **New Flaky** facet in the **Test** section, and check `true`.
-All test runs that exhibited flakey behavior for the first time as per the definition above are displayed.
-
-### Branches page
-
-1. On the [Tests][2] page, select the **Branches** view.
-2. Filter the table to see branches, services, or commits of interest to you.
-3. Look at the **New Flaky** column to see the number of new flaky tests introduced by the latest commit as per the definition above.
-
-#### Ignore new flaky tests detected by mistake
-
-You can ignore new flaky tests for a particular commit if you determine that those flaky tests were detected by mistake. The tests reappear if the commit exhibits flakiness again.
-
-Click on the **New Flaky** number and then click **Ignore flaky tests**.
-
-{{< img src="ci/ignore-new-flaky-tests.png" alt="Ignore all new flaky tests for a commit" style="width:100%;">}}
-
-### Known flaky failed tests
-
-Known flaky failed tests are tests that have flaky behavior on the current or default branch of the repository.
-
-### Test Runs page
-
-1. Navigate to the [Test Runs][1] page.
-2. In the facets list on the left sidebar, expand the **Known Flaky** facet in the **Test** section, and check `true`.
-Failed test runs that were known to be flaky as per the definition above are displayed.
-
-### Branches page
-
-1. On the [Tests][2] page, select the **Branches** view.
-2. Filter the table to see any branches, services, or commits of interest.
-3. The **Failed** column contains the number of failed tests and known flaky failed tests in the latest commit.
-
-{{< img src="ci/known-flaky-failed-tests.png" alt="CI Tests Branches view with a branch selected and a text box in the Failed column displaying 1 tests failed and 1 known flaky" style="width:100%;">}}
-
 
 ## Search for pipelines
 

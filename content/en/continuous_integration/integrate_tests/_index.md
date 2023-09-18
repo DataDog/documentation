@@ -1,5 +1,5 @@
 ---
-title: Integrations with Test Visibility
+title: Utilize Test Visibility
 kind: documentation
 description: Configure your tests to enable developer workflows in GitHub and report code coverage using Test Visibility.
 further_reading:
