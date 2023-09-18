@@ -672,7 +672,7 @@
           - action: pull-and-push-file
             branch: main
             globs:
-              - '/README.md'
+              - 'README.md'
             options:
               dest_path: '/tracing/trace_collection/'
               file_name: 'go-auto-instrumentation.md'
