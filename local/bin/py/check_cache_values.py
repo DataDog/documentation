@@ -9,6 +9,11 @@ import yaml
 import requests
 from yaml.loader import SafeLoader
 
+EXIT_MESSAGE = '''
+"\nThe 'enable_cache' value in on of your pullconfig files is set incorrectly.
+Check the annotations in your PR and address the error."
+'''
+
 class SafeLineLoader(SafeLoader):
     def construct_mapping(self, node, deep=False):
         mapping = super(SafeLineLoader, self).construct_mapping(node, deep=deep)
@@ -16,7 +21,7 @@ class SafeLineLoader(SafeLoader):
         return mapping
 
 def fail_check():
-    print("\nThe 'enable_cache' value in on of your pullconfig cache files is set incorrectly. Check the annotations in your PR and address the error.")
+    print(EXIT_MESSAGE)
     sys.exit(1)
 
 def build_dictionary(data, file_name):
