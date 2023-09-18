@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, your can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
+The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
 
 
 ### Supported capabilities
@@ -18,6 +18,8 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 ### Prerequisites
 
 Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][1].
+
+When using SAML and SCIM, Datadog strongly recommended to disabled SAML Just-in-time (JIT) provisioning to avoid discrepancy in access. User provisioning should be managed through SCIM only.
 
 This documentation assumes your organization manages user identities using an identity provider.
 
