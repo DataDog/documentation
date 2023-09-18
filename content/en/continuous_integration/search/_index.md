@@ -4,6 +4,9 @@ description: Learn how to search for your CI tests and pipelines.
 aliases:
 - /continuous_integration/guides/find_flaky_tests/
 - /continuous_integration/guides/flaky_test_management/
+algolia:
+   rank: 70
+   tags: ['flaky test', 'flaky tests', 'test regression', 'test regressions', 'test service', 'test services']
 further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"
