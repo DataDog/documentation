@@ -31,8 +31,9 @@ def build_dictionary(data, file_name):
             try:
                 file_dict[file_name] = [v['cache_enabled']]
                 file_dict[file_name].append(v['__line__'])
-            except:
-                pass        
+            except TypeError:
+                pass
+                     
     return file_dict
 
 def find_error(dictionary):
@@ -48,7 +49,7 @@ def send_slack_alert(array):
     for dictionary in array:
         for file_name,array_data in dictionary.items():
             post_data[os.path.basename(file_name)] = str(array_data[0]).lower()
-    r = requests.post(url=slack_webhook, data=json.dumps(post_data))
+    # r = requests.post(url=slack_webhook, data=json.dumps(post_data))
 
 def annotate(array):
     title = "Incorrect cache value"
