@@ -352,15 +352,11 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
-## Renaming Upstream and Downstream Services
+## Renaming upstream and downstream services
 
 This guide explains how to rename both upstream and downstream services in Datadog using environment variables and system properties.
 
-### Table of Contents
-1. [Rename Upstream Service Names](#rename-upstream-service-names)
-2. [Rename Downstream Service Names](#rename-downstream-service-names)
-
-### Rename Upstream Service Names
+### Rename upstream service names
 
 | Source Type | Service | Identifier | DD_SERVICE_MAPPING Value |
 |---|---|---|---|
@@ -381,7 +377,7 @@ This guide explains how to rename both upstream and downstream services in Datad
 | | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-### Rename Downstream Service Names (created by DD-Trace-X)
+### Rename downstream service names (created by dd-trace-x)
 
 | Language | Configuration Key | Default | Example | Description |
 |----------|-------------------|---------|---------|-------------|
