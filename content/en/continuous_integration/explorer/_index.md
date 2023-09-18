@@ -90,18 +90,18 @@ Navigate to [**CI** > **Pipeline Executions**][101] to see your CI pipeline exec
 
 The **CI** panel on the left lists default facets you can use to search for your tests.
 
-| Facet           | Description                                                   |
-|-----------------|---------------------------------------------------------------|
-| CI Status       | The pipeline status: `Success` or `Failure`.                  |
-| Duration        | Length of time for the pipeline to execute.                   |
-| Pipeline ID     | The ID of the pipeline.                                       |
-| CI Provider     | The name of the CI provider.                                  |
-| Node Labels     | The labels of the node.                                       |
-| Node Name       | The name of the node.                                         |
-| Partial Retry   | Whether or not a partial retry is enabled: `true` or `false`. |
-| Pipeline Number | The number of the pipeline.                                   |
-| Pipeline URL    | The URL of the pipeline.                                      |
-| Queue time      | Length of time for the pipeline wait for the queue.           |
+| Facet           | Description                                                                                                                                                                                             |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CI Status       | The pipeline status: `Success` or `Failure`.                                                                                                                                                            |
+| Duration        | Length of time for the pipeline to execute.                                                                                                                                                             |
+| Pipeline ID     | The ID of the pipeline.                                                                                                                                                                                 |
+| CI Provider     | The name of the CI provider.                                                                                                                                                                            |
+| Node Labels     | The labels of the node.                                                                                                                                                                                 |
+| Node Name       | The name of the node.                                                                                                                                                                                   |
+| Partial Retry   | Whether or not a partial retry is enabled: `true` or `false`. Partially supported in CircleCI (no information to display about partial retries).                                                        |
+| Pipeline Number | The number of the pipeline.                                                                                                                                                                             |
+| Pipeline URL    | The URL of the pipeline.                                                                                                                                                                                |
+| Queue time      | Length of time for the pipeline wait for the queue. Partially supported in Azure Pipelines (only on the first retry). Supported in Jenkins, GitLab, Buildkite, GitHub Actions, Codefresh, and TeamCity. |
 
 ## Pipeline executions details and traces
 
