@@ -3,7 +3,7 @@ description: Watchdog Insights로 RUM 애플리케이션의 이슈를 자세히 
 further_reading:
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals
   tag: 블로그
-  text: RUM으로 Core Web Vital을 모니터링하세요
+  text: RUM으로 Core Web Vitals 모니터링
 - link: https://www.datadoghq.com/blog/datadog-mobile-rum/
   tag: 블로그
   text: Datadog Mobile RUM으로 모바일 사용자 경험을 개선하세요
@@ -14,12 +14,12 @@ further_reading:
   tag: 설명서
   text: RUM 탐색기에서 검색하는 방법 알아보기
 kind: 설명서
-title: Watchdog Insights for RUM
+title: RUM을 위한 Watchdog Insights
 ---
 
 ## 개요
 
-Datadog Real User Monitoring(RUM)은 RUM Explorer의 컨텍스트 인사이트와 관련하여 문제의 근본 원인을 파악하는 데 도움이 되는 Watchdog Insights를 제공합니다. Watchdog Insights는 서브셋에 영향을 주는 아웃라이어(outlier)와 성능의 병목 현상이 발생할 수 있는 부분을 파악하여 사용자의 전문 지식과 능력을 보완해줍니다.
+Datadog 실제 사용자 모니터링(RUM)은 RUM 탐색기에서 상황별 인사이트를 통해 문제의 근본 원인을 탐색하는 데 도움이 되는 Watchdog Insights를 제공합니다. Watchdog Insights는 사용자 하위 집합에 영향을 미치는 이상값과 잠재적인 성능 병목 현상을 추천하여 사용자의 전문 지식과 직관을 보완합니다.
 
 자세한 내용은 [Watchdog Insights][1]를 참조하세요.
 
