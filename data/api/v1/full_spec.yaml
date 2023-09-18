@@ -4019,6 +4019,7 @@ components:
       - functions_usage
       - infra_host_usage
       - invocations_usage
+      - mobile_app_testing_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - profiled_container_usage
@@ -4057,6 +4058,7 @@ components:
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
+      - MOBILE_APP_TESTING_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
@@ -7588,6 +7590,8 @@ components:
       - infra_host_percentage
       - invocations_usage
       - invocations_percentage
+      - mobile_app_testing_percentage
+      - mobile_app_testing_usage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -7663,6 +7667,8 @@ components:
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
       - INVOCATIONS_PERCENTAGE
+      - MOBILE_APP_TESTING_USAGE
+      - MOBILE_APP_TESTING_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -7908,6 +7914,15 @@ components:
           type: number
         invocations_usage:
           description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        mobile_app_testing_percentage:
+          description: The percentage of Synthetic mobile application test usage by
+            tag(s).
+          format: double
+          type: number
+        mobile_app_testing_usage:
+          description: The Synthetic mobile application test usage by tag(s).
           format: double
           type: number
         npm_host_percentage:
@@ -12270,6 +12285,170 @@ components:
       required:
       - account
       - url
+      type: object
+    SplitConfig:
+      description: Encapsulates all user choices about how to split a graph.
+      properties:
+        limit:
+          description: Maximum number of graphs to display in the widget.
+          example: 24
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        sort:
+          $ref: '#/components/schemas/SplitSort'
+        split_dimensions:
+          description: The dimension(s) on which to split the graph
+          items:
+            $ref: '#/components/schemas/SplitDimension'
+          maxItems: 1
+          minItems: 1
+          type: array
+        static_splits:
+          description: Manual selection of tags making split graph widget static
+          items:
+            $ref: '#/components/schemas/SplitVectorEntry'
+          maxItems: 100
+          type: array
+      required:
+      - split_dimensions
+      - limit
+      - sort
+      type: object
+    SplitConfigSortCompute:
+      description: Defines the metric and aggregation used as the sort value.
+      properties:
+        aggregation:
+          description: The metric to use for sorting graphs.
+          example: sum
+          type: string
+        metric:
+          description: How to aggregate the sort metric for the purposes of ordering.
+          example: system.cpu.user
+          type: string
+      required:
+      - aggregation
+      - metric
+      type: object
+    SplitDimension:
+      description: The property by which the graph splits
+      example:
+        one_graph_per: service
+      properties:
+        one_graph_per:
+          description: The system interprets this attribute differently depending
+            on the data source of the query being split. For metrics, it's a tag.
+            For the events platform, it's an attribute or tag.
+          example: service
+          type: string
+      required:
+      - one_graph_per
+      type: object
+    SplitGraphSourceWidgetDefinition:
+      description: The original widget we are splitting on.
+      oneOf:
+      - $ref: '#/components/schemas/ChangeWidgetDefinition'
+      - $ref: '#/components/schemas/GeomapWidgetDefinition'
+      - $ref: '#/components/schemas/QueryValueWidgetDefinition'
+      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
+      - $ref: '#/components/schemas/TableWidgetDefinition'
+      - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+      - $ref: '#/components/schemas/ToplistWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
+    SplitGraphVizSize:
+      description: Size of the individual graphs in the split.
+      enum:
+      - xs
+      - sm
+      - md
+      - lg
+      example: sm
+      type: string
+      x-enum-varnames:
+      - XS
+      - SM
+      - MD
+      - LG
+    SplitGraphWidgetDefinition:
+      description: 'The split graph widget allows you to create repeating units of
+        a graph - one for each value in a group (for example: one per service)
+
+        '
+      properties:
+        has_uniform_y_axes:
+          description: Normalize y axes across graphs
+          type: boolean
+        size:
+          $ref: '#/components/schemas/SplitGraphVizSize'
+        source_widget_definition:
+          $ref: '#/components/schemas/SplitGraphSourceWidgetDefinition'
+        split_config:
+          $ref: '#/components/schemas/SplitConfig'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/SplitGraphWidgetDefinitionType'
+      required:
+      - size
+      - type
+      - source_widget_definition
+      - split_config
+      type: object
+    SplitGraphWidgetDefinitionType:
+      default: split_group
+      description: Type of the split graph widget
+      enum:
+      - split_group
+      example: split_group
+      type: string
+      x-enum-varnames:
+      - SPLIT_GROUP
+    SplitSort:
+      description: Controls the order in which graphs appear in the split.
+      properties:
+        compute:
+          $ref: '#/components/schemas/SplitConfigSortCompute'
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - order
+      type: object
+    SplitVectorEntry:
+      description: The widget displays one graph for each entry in this parameter.
+      example:
+      - tag_key: demo
+        tag_values:
+        - env
+      items:
+        $ref: '#/components/schemas/SplitVectorEntryItem'
+      minItems: 1
+      type: array
+    SplitVectorEntryItem:
+      description: The split graph list contains a graph for each value of the split
+        dimension.
+      minLength: 1
+      properties:
+        tag_key:
+          description: The tag key.
+          example: demo
+          minLength: 1
+          type: string
+        tag_values:
+          description: The tag values.
+          example:
+          - env
+          items:
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - tag_key
+      - tag_values
       type: object
     SuccessfulSignalUpdateResponse:
       description: Updated signal data following a successfully performed update.
@@ -18192,6 +18371,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for all organizations.
+          format: int64
+          type: integer
         synthetics_parallel_testing_max_slots_hwm:
           description: Shows the high-water mark of used synthetics parallel testing
             slots over all hours in the current date for all organizations.
@@ -18631,6 +18815,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm:
@@ -19114,6 +19303,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_agg_sum:
+          description: Shows the sum of Synthetic mobile application tests over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm_sum:
@@ -19739,30 +19933,31 @@ components:
       - $ref: '#/components/schemas/EventStreamWidgetDefinition'
       - $ref: '#/components/schemas/EventTimelineWidgetDefinition'
       - $ref: '#/components/schemas/FreeTextWidgetDefinition'
+      - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/GeomapWidgetDefinition'
       - $ref: '#/components/schemas/GroupWidgetDefinition'
       - $ref: '#/components/schemas/HeatMapWidgetDefinition'
       - $ref: '#/components/schemas/HostMapWidgetDefinition'
       - $ref: '#/components/schemas/IFrameWidgetDefinition'
       - $ref: '#/components/schemas/ImageWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/LogStreamWidgetDefinition'
       - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
       - $ref: '#/components/schemas/NoteWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
       - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
-      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
-      - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/SLOListWidgetDefinition'
+      - $ref: '#/components/schemas/SLOWidgetDefinition'
+      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SplitGraphWidgetDefinition'
       - $ref: '#/components/schemas/SunburstWidgetDefinition'
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
-      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
-      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
-      - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
