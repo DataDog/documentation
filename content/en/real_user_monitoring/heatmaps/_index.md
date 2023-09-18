@@ -35,13 +35,13 @@ On the view list page, select your application and view. You can select the type
 
 This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
 
-{{< img src="real_user_monitoring/heatmaps/heatmaps-filters.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmaps-filters-v2.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
 ## Clickmaps
 
 A Clickmap shows you the most interacted with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
-{{< img src="real_user_monitoring/heatmaps/clickmap-updated.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmap_v3.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
 
 Each clickmap also offers analytics such as:
 
@@ -60,7 +60,7 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 Top elements allow for a more focused view of click actions on a given view by picking the top most interacted elements and ranking them. The ranking on the map itself corresponds to the action name on the side.
 
-{{< img src="real_user_monitoring/heatmaps/top-elements.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/top-elements-v2.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
 
 By clicking on any action name from the panel, the corresponding action will be highlighted in the map.
 
@@ -68,7 +68,7 @@ By clicking on any action name from the panel, the corresponding action will be 
 
 Scrollmaps show a visual of the aggregate scroll activity on a given page. By looking at a scrollmap you can see how far users scroll to each percentile, along with where the average fold of the page falls.
 
-{{< img src="real_user_monitoring/heatmaps/scrollmaps.png" alt="Scrollmap of the chairs page." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/scrollmaps-v2.png" alt="Scrollmap of the chairs page." style="width:100%;">}}
 
 You can interact with the floating blue bar on a scrollmap by dragging it to the point of the page you wish to see how many users arrived at.
 
