@@ -73,7 +73,7 @@ def pull_rbac():
             if permission_name in ('logs_live_tail', 'logs_read_index_data'):
                 continue
             else:
-                permission.setdefault('role_name', permission_role_name[0:-5]) # add role name without ' Role' to permission dictionary
+                permission.setdefault('role_name', permission_role_name) # add role name
                 formatted_permissions_dict.setdefault(group_name, []).append(permission) # {group_name: permissions[]}
                 print('permission!!: ', permission)
 
