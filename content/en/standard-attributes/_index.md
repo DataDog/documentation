@@ -723,33 +723,37 @@ attributes:
     type: string
     domain: Views (Android)
   - name: session.id
-    description: Randomly generated ID for each session.
+    description: Randomly generated unique ID for each session.
     product_source:
       - icon-rum
       - icon-browser
+      - icon-android
     type: string
-    domain: Session attributes (Browser events)
+    domain: Session attributes (Browser, Android events)
   - name: session.ip
-    description: Client IP address. If you want to stop collecting this attribute, change the   setting in your [application details](/data_security/real_user_monitoring/#ip-address).
+    description: Client IP address extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
     product_source:
       - icon-rum
       - icon-browser
+      - icon-android
     type: string
-    domain: Session attributes (Browser events)
+    domain: Session attributes (Browser, Android events)
   - name: session.is_active
-    description: Indicates if the session is currently active. The session ends after 4 hours   of activity or 15 minutes of inactivity.
+    description: Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity, or if the user navigates away from the application or closes the browser window.
     product_source:
       - icon-rum
       - icon-browser
+      - icon-android
     type: boolean
     domain: Session attributes (Browser events)
   - name: session.type
-    description: The type of session, either `user` or `synthetics`. Sessions from [Synthetic   Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
+    description: The type of session, either `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
     product_source:
       - icon-rum
       - icon-browser
+      - icon-android
     type: string
-    domain: Session attributes (Browser events)
+    domain: Session attributes (Browser, Android events)
   - name: session.referrer
     description: The URL of the previous web page from which a link to the currently requested   page was followed.
     product_source:
@@ -764,6 +768,34 @@ attributes:
       - icon-browser
     type: string
     domain: Session attributes (Browser events)
+  - name: session.initial_view.url
+    description: URL of the initial view of the session.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Session attributes (Android events)
+  - name: session.initial_view.name
+    description: Name of the initial view of the session.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Session attributes (Android events)
+  - name: session.last_view.url
+    description: URL of the last view of the session.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Session attributes (Android events)
+  - name: session.last_view.name
+    description: Name of the last view of the session.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Session attributes (Android events)
   - name: session.initial_view.url_host
     description: The host part of the URL.
     product_source:
@@ -841,6 +873,13 @@ attributes:
       - icon-browser
     type: object
     domain: Session attributes (Browser events)
+  - name: session.useragent
+    description: System user agent info to interpret device info.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Session attributes (Android events)
   - name: resource.type
     description: The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`).
     product_source:
@@ -1047,6 +1086,7 @@ attributes:
       - icon-browser
     type: string
     domain: UTM attributes (Browser events)
+
   - name: language
     description: The client SDK language used to generate the span. It can be one of cpp,   dotnet, go, jvm, javascript, php, python, ruby.
     product_source:
