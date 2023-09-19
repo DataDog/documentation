@@ -86,7 +86,7 @@ You can use [`pytest`][2]'s [`skipif` mark][3] to prevent the Intelligent Test R
 #### Individual tests
 
 Individual tests can be marked as unskippable using the `@pytest.mark.skipif` decorator as follows:
-```
+```python
 import pytest
 
 @pytest.mark.skipif(False, reason="datadog_itr_unskippable")
