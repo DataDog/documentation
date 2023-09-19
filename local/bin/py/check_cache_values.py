@@ -49,7 +49,7 @@ def send_slack_alert(array):
     for dictionary in array:
         for file_name,array_data in dictionary.items():
             post_data[os.path.basename(file_name)] = str(array_data[0]).lower()
-    # r = requests.post(url=slack_webhook, data=json.dumps(post_data))
+    requests.post(url=slack_webhook, data=json.dumps(post_data))
 
 def annotate(array):
     title = "Incorrect cache value"
