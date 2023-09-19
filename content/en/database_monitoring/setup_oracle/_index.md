@@ -48,7 +48,7 @@ The Agent doesn't require any external Oracle clients.
 
 #### Recommended Agent version
 
-The following Oracle DBM builds are recommended, as they contain all the implemented Oracle monitoring features and bug fixes. The basis of an Oracle DBM build is always a stable Agent release.
+Datadog recommends the following Oracle DBM builds, because they contain all of the implemented Oracle monitoring features and bug fixes. The basis of an Oracle DBM build is always a stable Agent release.
 
 - Linux: `7.47.0~dbm~oracle~0.40-1`
 - Windows: `7.47.0-dbm-oracle-0.40-1`
