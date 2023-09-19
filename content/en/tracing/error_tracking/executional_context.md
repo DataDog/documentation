@@ -3,7 +3,7 @@ title: Error Tracking Executional Context
 kind: documentation
 beta: true
 private: true
-description: Learn about the Error Tracking Explorer.
+description: Learn about the Executional Context in Error Tracking.
 further_reading:
 - link: '/monitors/types/error_tracking'
   tag: 'Documentation'
@@ -23,7 +23,7 @@ Executional Context in APM Error Tracking automatically captures production vari
 
 *Note: We currently only support Executional Context for Python.*
 
-{{< img src="tracing/error_tracking/error_tracking_executional_context.gif" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
+{{< img src="tracing/error_tracking/error_tracking_executional_context.mp4" video="true" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
 
 ## Setup & Requirements
 
@@ -60,9 +60,3 @@ We recommend using Sensitive Data Scanner to scrub the variable data for PII. To
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /tracing/trace_explorer/#live-search-for-15-minutes
-[2]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[3]: https://app.datadoghq.com/apm/error-tracking
-[4]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[5]: /integrations/guide/source-code-integration
