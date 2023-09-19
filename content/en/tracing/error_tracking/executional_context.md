@@ -3,7 +3,7 @@ title: Error Tracking Executional Context
 kind: documentation
 beta: true
 private: true
-description: Learn about the Error Tracking Explorer.
+description: Learn about the Executional Context in Error Tracking.
 further_reading:
 - link: '/monitors/types/error_tracking'
   tag: 'Documentation'
