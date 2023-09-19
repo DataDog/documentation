@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-Datadog recommends forwarding your Google Cloud logs with a <strong>Pull</strong> subscription to leverage compression and batching of events. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
+This method is deprecated, and Datadog recommends forwarding your Google Cloud logs with a <strong>Pull</strong> subscription using the Datadog Dataflow template to leverage compression and batching of events. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
 </div>
 
 ## Overview
@@ -22,6 +22,8 @@ Datadog recommends forwarding your Google Cloud logs with a <strong>Pull</strong
 This guide describes how to forward logs from your Google Cloud services to Datadog through a **Push** subscription to a [Google Cloud Pub/Sub][10] topic.
 
 To collect logs from applications running in GCE or GKE, you can also use the [Datadog Agent][13].
+
+**Note**: If you have a [Google Cloud VPC][14] in your Google Cloud environment, the **Push** subscription cannot access endpoints outside the VPC.
 
 ## Setup
 
@@ -96,3 +98,4 @@ You can optionally sample logs while querying by using the [sample function][9].
 [10]: https://cloud.google.com/pubsub/docs/overview
 [11]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [13]: /agent/
+[14]: https://cloud.google.com/vpc
