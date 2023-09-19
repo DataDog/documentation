@@ -787,7 +787,7 @@ attributes:
     type: string
     domain: Resource (Android events)
   - name: resource.provider.name
-  description: The resource provider name. Default is `unknown`.
+    description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
       - icon-android
@@ -966,7 +966,7 @@ attributes:
     domain: View (Browser)
     
   - name: view.loading_type
-    description: The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
+    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
     product_source:
       - icon-rum
       - icon-browser
@@ -1116,7 +1116,7 @@ attributes:
     domain: Session (Browser events)
   
   - name: session.type
-    description: The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
+    description: The type of session, `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
     product_source:
       - icon-rum
       - icon-browser
@@ -1315,7 +1315,7 @@ attributes:
     type: string
     domain: Resource (Browser events)
 
-- name: error.source
+  - name: error.source
     description: Where the error originates from (for example, `console` or `network`).
     product_source:
       - icon-rum
