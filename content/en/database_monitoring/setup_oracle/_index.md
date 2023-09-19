@@ -108,7 +108,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 ### Upgrade an existing Agent installation
 
-Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
+Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that you did not previously grant to the Datadog database user account.
 
 ### Install the Oracle integration
 
