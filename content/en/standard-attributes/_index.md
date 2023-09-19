@@ -13,8 +13,13 @@ attributes:
     description: The name of the originating host as defined in metrics. Datadog automatically retrieves corresponding host tags from the matching host in Datadog and applies them to your telemetry. The Agent sets this value automatically.
     product_source: 
       - icon-log
-      - icon-rum
       - icon-apm
+    type: string
+    domain: Reserved
+  - name: device
+    description: The type of originating device.
+    product_source:
+      - icon-rum
       - icon-android
       - icon-ios
       - icon-browser
@@ -61,24 +66,13 @@ attributes:
     description: The Trace ID used for traces. It is used to correlate your traces with other data, including logs.
     product_source: 
       - icon-log
-      - icon-rum
       - icon-apm
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
     type: number
     domain: Reserved
   - name: message
     description: The body of a log entry, highlighted and displayed in logs Live Tail, where it is indexed for full text search.
     product_source: 
       - icon-log
-      - icon-rum
-      - icon-apm
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
     type: string
     domain: Reserved
   - name: network.client.ip
@@ -456,667 +450,507 @@ attributes:
       - icon-log
     type: string
     domain: Events
-  - name: type
-    description: The type of RUM event (for example, `view` or `resource`).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Core RUM
-  - name: application.id
-    description: The Datadog application ID generated when you create a RUM application.
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Core RUM
-  - name: application.name
-    description: The name of your Datadog application.
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Core RUM
-  - name: view.id
-    description: Randomly generated ID for each page view.
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Views
-  - name: view.loading_type
-    description: "The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa)."
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.referrer
-    description: The URL of the previous web page from which a link to the currently requested page was followed.
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.url
-    description: The view URL.
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.url_hash
-    description: The hash part of the URL.
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.url_host
-    description: The host part of the URL.
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.url_path
-    description: The path part of the URL.
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.url_path_group
-    description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
-    product_source: 
-      - icon-rum
-    type: string
-    domain: Views
-  - name: view.url_query
-    description: The query string parts of the URL decomposed as query params key/value attributes.
-    product_source: 
-      - icon-rum
-    type: object
-    domain: Views
-  - name: view.url_scheme
-    description: The scheme part of the URL.
-    product_source: 
-      - icon-rum
-    type: object
-    domain: Views
-  - name: device.type
-    description: The device type as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Devices
-  - name: device.brand
-    description: The device brand as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Devices
-  - name: device.model
-    description: The device model as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Devices
-  - name: device.name
-    description: The device name as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Devices
-  - name: os.name
-    description: The OS name as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Operating system
-  - name: os.version
-    description: The OS version as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Operating system
-  - name: os.version_major
-    description: The OS version major as reported by the device (User-Agent HTTP header).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Operating system
-  - name: geo.country
-    description: Name of the country.
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Geolocation
-  - name: geo.country_iso_code
-    description: "[ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codesobject) of the country (for example, `US` for the United States or `FR` for France)."
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Geolocation
-  - name: geo.country_subdivision
-    description: Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Geolocation
-  - name: geo.continent_code
-    description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Geolocation
-  - name: geo.continent
-    description: Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Geolocation
-  - name: geo.city
-    description: The name of the city (for example, `Paris` or `New York`).
-    product_source: 
-      - icon-rum
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
-    type: string
-    domain: Geolocation
+
   - name: date
     description: Start of the event in milliseconds from epoch.
-    product_source: 
+    product_source:
       - icon-rum
       - icon-android
     type: integer
-    domain: Core (Android)
+    domain: Common core attributes
+
+  - name: type
+    description: The type of the event (for example, `view` or `resource`).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Common core attributes
+
+  - name: service
+    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for this application used to correlate user sessions.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Common core attributes
+
+  - name: application.id
+    description: The Datadog application ID.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Common core attributes
+
+  - name: application.name
+    description: The Datadog application name.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Common core attributes
+
+  - name: device.type
+    description: The device type as reported by the device (System User-Agent).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Device (Android)
+
+  - name: device.brand
+    description: The device brand as reported by the device (System User-Agent).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Device (Android)
+
+  - name: device.model
+    description: The device model as reported by the device (System User-Agent).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Device (Android)
+
+  - name: device.name
+    description: The device name as reported by the device (System User-Agent).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Device (Android)
+
   - name: connectivity.status
     description: Status of device network reachability (`connected`, `not connected`, or `maybe`).
-    product_source: 
+    product_source:
       - icon-rum
       - icon-android
     type: string
     domain: Connectivity (Android)
+  
   - name: connectivity.interfaces
     description: The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).
-    product_source: 
+    product_source:
       - icon-rum
       - icon-android
     type: string
     domain: Connectivity (Android)
+  
   - name: connectivity.cellular.technology
     description: The type of a radio technology used for cellular connection.
-    product_source: 
+    product_source:
       - icon-rum
       - icon-android
     type: string
     domain: Connectivity (Android)
+  
   - name: connectivity.cellular.carrier_name
     description: The name of the SIM carrier.
-    product_source: 
+    product_source:
       - icon-rum
       - icon-android
     type: string
     domain: Connectivity (Android)
-  - name: view.name
-    description: Customizable name of the view corresponding to the event.
-    product_source: 
+  
+  - name: os.name
+    description: The OS name as reported by the device (System User-Agent).
+    product_source:
       - icon-rum
       - icon-android
     type: string
-    domain: Views (Android)
+    domain: Operating system (Android)
+    
+  - name: os.version
+    description: The OS version as reported by the device (System User-Agent).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Operating system (Android)
+    
+  - name: os.version_major
+    description: The OS version major as reported by the device (System User-Agent).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Operating system (Android)
+  
+  - name: geo.country
+    description: Name of the country.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Geo-location (Android)
+    
+  - name: geo.country_iso_code
+    description: ISO Code of the country (for example, `US` for the United States or `FR` for France).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Geo-location (Android)
+    
+  - name: geo.country_subdivision
+    description: Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Geo-location (Android)
+    
+  - name: geo.continent_code
+    description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Geo-location (Android)
+    
+  - name: geo.continent
+    description: Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Geo-location (Android)
+    
+  - name: geo.city
+    description: The name of the city (for example, `San Francisco`, `Paris`, or `New York`).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Geo-location (Android)
+  
+  - name: user.id
+    description: Identifier of the user.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Global user attributes (Android)
+  - name: usr.name
+    description: Name of the user.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Global user attributes (Android)
+  - name: usr.email
+    description: Email of the user.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Global user attributes (Android)
+ 
   - name: session.id
-    description: Randomly generated unique ID for each session.
+    description: Unique ID of the session.
     product_source:
       - icon-rum
-      - icon-browser
       - icon-android
     type: string
-    domain: Session attributes (Browser, Android events)
-  - name: session.ip
-    description: Client IP address extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
+    domain: Session (Android events)
+  
+  - name: session.type
+    description: Type of the session (`user`).
     product_source:
       - icon-rum
-      - icon-browser
       - icon-android
     type: string
-    domain: Session attributes (Browser, Android events)
+    domain: Session (Android events)
+  
   - name: session.is_active
-    description: Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity, or if the user navigates away from the application or closes the browser window.
+    description: Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.
     product_source:
       - icon-rum
-      - icon-browser
       - icon-android
     type: boolean
-    domain: Session attributes (Browser events)
-  - name: session.type
-    description: The type of session, either `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
-    product_source:
-      - icon-rum
-      - icon-browser
-      - icon-android
-    type: string
-    domain: Session attributes (Browser, Android events)
-  - name: session.referrer
-    description: The URL of the previous web page from which a link to the currently requested   page was followed.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.initial_view.id
-    description: The ID of the first RUM view generated by the user.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
+    domain: Session (Android events)
+  
   - name: session.initial_view.url
     description: URL of the initial view of the session.
     product_source:
       - icon-rum
       - icon-android
     type: string
-    domain: Session attributes (Android events)
+    domain: Session (Android events)
+  
   - name: session.initial_view.name
     description: Name of the initial view of the session.
     product_source:
       - icon-rum
       - icon-android
     type: string
-    domain: Session attributes (Android events)
+    domain: Session (Android events)
+  
   - name: session.last_view.url
     description: URL of the last view of the session.
     product_source:
       - icon-rum
       - icon-android
     type: string
-    domain: Session attributes (Android events)
+    domain: Session (Android events)
+  
   - name: session.last_view.name
     description: Name of the last view of the session.
     product_source:
       - icon-rum
       - icon-android
     type: string
-    domain: Session attributes (Android events)
-  - name: session.initial_view.url_host
-    description: The host part of the URL.
+    domain: Session (Android events)
+  
+  - name: session.ip
+    description: IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting   this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Session attributes (Browser events)
-  - name: session.initial_view.url_path
-    description: The path part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.initial_view.url_path_group
-    description: The automatic URL group generated for similar URLs (for example, `/dashboard/?  ` for `/dashboard/123` and `/dashboard/456`).
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.initial_view.url_query
-    description: The query string parts of the URL decomposed as query params key/value   attributes.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: object
-    domain: Session attributes (Browser events)
-  - name: session.initial_view.url_scheme
-    description: The scheme part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: object
-    domain: Session attributes (Browser events)
-  - name: session.last_view.id
-    description: The ID of the last RUM view generated by the user.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.last_view.url_host
-    description: The host part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.last_view.url_path
-    description: The path part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.last_view.url_path_group
-    description: The automatic URL group generated for similar URLs (for example, `/dashboard/?  ` for `/dashboard/123` and `/dashboard/456`).
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Session attributes (Browser events)
-  - name: session.last_view.url_query
-    description: The query string parts of the URL decomposed as query params key/value   attributes.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: object
-    domain: Session attributes (Browser events)
-  - name: session.last_view.url_scheme
-    description: The scheme part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: object
-    domain: Session attributes (Browser events)
+    domain: Session (Android events)
+  
   - name: session.useragent
     description: System user agent info to interpret device info.
     product_source:
       - icon-rum
       - icon-android
     type: string
-    domain: Session attributes (Android events)
+    domain: Session (Android events)
+  
+  - name: view.id
+    description: Unique ID of the initial view corresponding to the event.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: View (Android events)
+  
+  - name: view.url
+    description: Canonical name of the class corresponding to the event.
+    product_source:
+      - icon-rum
+    type: string
+    domain: View (Android events)
+  
+  - name: view.name
+    description: Customizable name of the view corresponding to the event.
+    product_source:
+      - icon-rum
+    type: string
+    domain: View (Android events)
+  
+  - name: resource.id
+    description: Unique identifier of the resource.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Resource (Android events)
   - name: resource.type
-    description: The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`).
+    description: The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`).
     product_source:
-      - icon-browser
       - icon-rum
+      - icon-android
     type: string
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
   - name: resource.method
-    description: The HTTP method (for example `POST` or `GET`).
+    description: The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
   - name: resource.status_code
     description: The response status code.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: number
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
   - name: resource.url
     description: The resource URL.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Resource attributes (Browser events)
-  - name: resource.url_host
-    description: The host part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Resource attributes (Browser events)
-  - name: resource.url_path
-    description: The path part of the URL.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Resource attributes (Browser events)
-  - name: resource.url_query
-    description: The query string parts of the URL decomposed as query params key/value attributes.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: object
-    domain: Resource attributes (Browser events)
-  - name: resource.url_scheme
-    description: The protocol name of the URL (HTTP or HTTPS).
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
   - name: resource.provider.name
-    description: The resource provider name. Default is `unknown`.
+  description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
   - name: resource.provider.domain
     description: The resource provider domain.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
   - name: resource.provider.type
     description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Resource attributes (Browser events)
+    domain: Resource (Android events)
+  
   - name: error.source
-    description: Where the error originates from (for example, `console` or `network`).
+    description: Where the error originates from (for example, `webview`, `logger`, or `network`).
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Error attributes (Browser events)
-
+    domain: Error (Android events)
+  
   - name: error.type
     description: The error type (or error code in some cases).
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Error attributes (Browser events)
-
+    domain: Error (Android events)
+  
   - name: error.message
-    description: A concise, human-readable, one-line message explaining the event.
+    description: A concise, human-readable one-line message explaining the event.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Error attributes (Browser events)
-
+    domain: Error (Android events)
+  
   - name: error.stack
     description: The stack trace or complementary information about the error.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Error attributes (Browser events)
+    domain: Error (Android events)
+  
+  - name: error.issue_id
+    description: The stack trace or complementary information about the error.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Error (Android events)
+  
+  - name: error.resource.status_code
+    description: The response status code.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: number
+    domain: Network errors (Android events)
+  
+  - name: error.resource.method
+    description: The HTTP method (for example, `POST` or `GET`).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Network errors (Android events)
+  
+  - name: error.resource.url
+    description: The resource URL.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Network errors (Android events)
+  
+  - name: error.resource.provider.name
+    description: The resource provider name. Default is `unknown`.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Network errors (Android events)
+  
+  - name: error.resource.provider.domain
+    description: The resource provider domain.
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Network errors (Android events)
+  
+  - name: error.resource.provider.type
+    description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
+    product_source:
+      - icon-rum
+      - icon-android
+    type: string
+    domain: Network errors (Android events)
+  
   - name: action.id
     description: UUID of the user action.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Action attributes (Browser events)
+    domain: Action (Android events)
   - name: action.type
-    description: Type of the user action. For [Custom User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), it is set to `custom`.
+    description: Type of the user action (for example, `tap` or `application_start`).
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Action attributes (Browser events)
-  - name: action.target.name
-    description: Element that the user interacted with. Only for automatically collected   actions.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Action attributes (Browser events)
+    domain: Action (Android events)
   - name: action.name
-    description: User-friendly name created (for example, `Click on checkout`). For [Custom User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
+    description: Name of the user action.
     product_source:
       - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Action attributes (Browser events)
-  - name: session.frustration.count
-    description: Count of all frustration signals associated with one session.
+    domain: Action (Android events)
+  - name: action.target.name
+    description: Element that the user interacted with. Only for automatically collected actions.
     product_source:
       - icon-rum
-      - icon-browser
-    type: number
-    domain: Frustration signals fields (Browser events)
-  - name: view.frustration.count
-    description: Count of all frustration signals associated with one view.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: number
-    domain: Frustration signals fields (Browser events)
-  - name: action.frustration.type:dead_click
-    description: The dead clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - icon-browser
+      - icon-android
     type: string
-    domain: Frustration signals fields (Browser events)
-  - name: action.frustration.type:rage_click
-    description: The rage clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Frustration signals fields (Browser events)
-  - name: action.frustration.type:error_click
-    description: The error clicks detected by the RUM Browser SDK.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Frustration signals fields (Browser events)
-  - name: view.url_query.utm_source
-    description: The parameter in the URL tracking the source of traffic.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: UTM attributes (Browser events)
-  - name: view.url_query.utm_medium
-    description: The parameter in the URL tracking the channel where the traffic is coming from.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: UTM attributes (Browser events)
-  - name: view.url_query.utm_campaign
-    description: The parameter in the URL identifying the specific marketing campaign tied to that view.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: UTM attributes (Browser events)
-  - name: view.url_query.utm_content
-    description: The parameter in the URL identifying the specific element a user clicked   within a marketing campaign.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: UTM attributes (Browser events)
-  - name: view.url_query.utm_term
-    description: The parameter in the URL tracking the keyword a user searched to trigger a given campaign.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: UTM attributes (Browser events)
+    domain: Action (Android events)
+
+
+
+
 
   - name: language
-    description: The client SDK language used to generate the span. It can be one of cpp,   dotnet, go, jvm, javascript, php, python, ruby.
+    description: The client SDK language used to generate the span. It can be one of cpp, dotnet, go, jvm, javascript, php, python, ruby.
     product_source:
       - icon-apm
     type: string
-    domain: Core
+    domain: APM core
   - name: env
-    description: The value of `DD_ENV` environment variable or user defined `env` for the   running process.
+    description: The value of `DD_ENV` environment variable or user defined `env` for the running process.
     product_source:
       - icon-apm
     type: string
-    domain: Core
+    domain: APM core (Reserved)
   - name: version
     description: The value of `DD_VERSION` environment variable or user defined `version` for the running process.
     product_source:
       - icon-apm
     type: string
-    domain: Core
+    domain: APM core (Reserved)
   - name: span.kind
     description: The string representing the type of work unit handled by the span. It can be   one of server, client, producer, consumer or internal. More information in the   OpenTelemetry SpanKind documentation.
     product_source:
       - icon-apm
     type: string
-    domain: Core
+    domain: APM core
   - name: component
     description: The name of the library/integration that created the span.
     product_source:
     - icon-apm
     type: string
-    domain: Core 
+    domain: APM core 
   - name: network.client.ip
     description: The IP address of the client that initiated the inbound connection.
     product_source:
@@ -1178,7 +1012,7 @@ attributes:
     type: string
     domain: HTTP requests
   - name: http.url
-    description: The URL of the HTTP request, including the obfuscated query   string. For more information on obfuscation, see Configure Data Security.
+    description: The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see Configure Data Security.
     product_source:
       - icon-apm
     type: string
@@ -1339,7 +1173,7 @@ attributes:
     product_source:
       - icon-apm
     type: string
-    domain: Messagequeue spans
+    domain: Message queue spans
   
   - name: messaging.message_id
     description: A value used by the messaging system as an identifier for the message, represented as a string.
