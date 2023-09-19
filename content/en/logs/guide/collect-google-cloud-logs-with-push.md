@@ -14,7 +14,7 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-This method is deprecated, and Datadog recommends forwarding your Google Cloud logs with a <strong>Pull</strong> subscription using the Datadog Dataflow template to leverage compression and batching of events. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
+This method of forwarding Google Cloud logs is deprecated. Instead, forward your Google Cloud logs with a <strong>Pull</strong> subscription using the Datadog Dataflow template to leverage compression and batching of events. See <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Log collection</a> on the Google Cloud integration page for instructions.
 </div>
 
 ## Overview
