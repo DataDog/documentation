@@ -42,13 +42,13 @@ If the above prerequisites are met, follow the setup instructions for your hosti
 
 #### Host requirements
 
-To determine where the Agent should be installed, see the [DBM Setup Architecture][10] documentation.
+See the [DBM Setup Architecture][10] documentation to determine where to install the Agent.
 
 The Agent doesn't require any external Oracle clients.
 
 #### Recommended Agent version
 
-The following Oracle DBM builds are recommended, as they contain all the implemented Oracle monitoring features and bug fixes. The basis of an Oracle DBM build is always a stable Agent release.
+Datadog recommends the following Oracle DBM builds, because they contain all of the implemented Oracle monitoring features and bug fixes. The basis of an Oracle DBM build is always a stable Agent release.
 
 - Linux: `7.47.0~dbm~oracle~0.40-1`
 - Windows: `7.47.0-dbm-oracle-0.40-1`
@@ -108,7 +108,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 
 ### Upgrade an existing Agent installation
 
-Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that were not previously granted to the Datadog database user account.
+Execute all `grant` permission commands according to the documentation for your hosting type. New features need access to system views that you did not previously grant to the Datadog database user account.
 
 ### Install the Oracle integration
 
