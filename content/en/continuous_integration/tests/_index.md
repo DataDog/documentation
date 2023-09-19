@@ -38,8 +38,8 @@ cascade:
 |-----------------------------------------|:----:|:----:|:--------------:|:------:|:----:|:-----:|:--------------:|
 | Accurate time/durations results         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
 | Structured stack traces                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
-| Distributed traces on Integration tests |   ✓  |   ✓  |        ✓       |    ✗   |   ✓  |   ✓   |        ✗       |
-| Agent based reporting                   |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
+| Distributed traces on integration tests |   ✓  |   ✓  |        ✓       |    ✗   |   ✓  |   ✓   |        ✗       |
+| Agent-based reporting                   |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
 | Agentless reporting                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
 | Test suite level visibility             |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
 | Manual API                              |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
