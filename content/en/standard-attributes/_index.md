@@ -30,28 +30,18 @@ attributes:
     description: This corresponds to the integration name, the technology from which the data originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example, `nginx`, `postgresql`, and so on.
     product_source: 
       - icon-log
-      - icon-rum
       - icon-apm
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
     type: string
     domain: Reserved
   - name: status
     description: This corresponds to the level/severity of the data. For logs, it is used to define [log patterns](/logs/explorer/patterns/) and has a dedicated layout in the Datadog Log UI.
     product_source: 
       - icon-log
-      - icon-rum
       - icon-apm
-      - icon-android
-      - icon-ios
-      - icon-browser
-      - icon-roku
     type: string
     domain: Reserved
   - name: service
-    description: The name of the application or service generating the data. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In RUM, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
+    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In RUM browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
     product_source: 
       - icon-log
       - icon-rum
@@ -456,136 +446,159 @@ attributes:
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: integer
-    domain: Common core attributes
+    domain: RUM core attributes
 
   - name: type
     description: The type of the event (for example, `view` or `resource`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Common core attributes
-
-  - name: service
-    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for this application used to correlate user sessions.
-    product_source:
-      - icon-rum
-      - icon-android
-    type: string
-    domain: Common core attributes
+    domain: RUM core attributes
 
   - name: application.id
-    description: The Datadog application ID.
+    description: The Datadog application ID generated when you create a RUM application.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Common core attributes
+    domain: RUM core attributes
 
   - name: application.name
     description: The Datadog application name.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
     type: string
-    domain: Common core attributes
+    domain: RUM core attributes
 
   - name: device.type
     description: The device type as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Device (Android)
+    domain: Device (Android, iOS, Roku)
 
   - name: device.brand
     description: The device brand as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Device (Android)
+    domain: Device (Android, iOS, Roku)
 
   - name: device.model
     description: The device model as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Device (Android)
+    domain: Device (Android, iOS, Roku)
 
   - name: device.name
     description: The device name as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Device (Android)
+    domain: Device (Android, iOS, Roku)
 
   - name: connectivity.status
     description: Status of device network reachability (`connected`, `not connected`, or `maybe`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
     type: string
-    domain: Connectivity (Android)
+    domain: Connectivity (Android, iOS)
   
   - name: connectivity.interfaces
     description: The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
     type: string
-    domain: Connectivity (Android)
+    domain: Connectivity (Android, iOS)
   
   - name: connectivity.cellular.technology
     description: The type of a radio technology used for cellular connection.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
     type: string
-    domain: Connectivity (Android)
+    domain: Connectivity (Android, iOS)
   
   - name: connectivity.cellular.carrier_name
     description: The name of the SIM carrier.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
     type: string
-    domain: Connectivity (Android)
+    domain: Connectivity (Android, iOS)
   
   - name: os.name
     description: The OS name as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Operating system (Android)
+    domain: Operating System (Android, iOS, Roku)
     
   - name: os.version
     description: The OS version as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Operating system (Android)
+    domain: Operating System (Android, iOS, Roku)
     
   - name: os.version_major
     description: The OS version major as reported by the device (System User-Agent).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Operating system (Android)
+    domain: Operating System (Android, iOS, Roku)
   
   - name: geo.country
     description: Name of the country.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Geo-location (Android)
+    domain: Geo-location
     
   - name: geo.country_iso_code
     description: The [ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States or `FR` for France).
@@ -593,8 +606,10 @@ attributes:
       - icon-rum
       - icon-android
       - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Geo-location (Android, Browser)
+    domain: Geo-location
     
   - name: geo.country_subdivision
     description: Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
@@ -602,8 +617,10 @@ attributes:
       - icon-rum
       - icon-android
       - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Geo-location (Android, Browser)
+    domain: Geo-location
     
   - name: geo.continent_code
     description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).
@@ -611,8 +628,10 @@ attributes:
       - icon-rum
       - icon-android
       - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Geo-location (Android, Browser)
+    domain: Geo-location
     
   - name: geo.continent
     description: Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).
@@ -620,8 +639,10 @@ attributes:
       - icon-rum
       - icon-android
       - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Geo-location (Android, Browser)
+    domain: Geo-location
     
   - name: geo.city
     description: The name of the city (for example, `San Francisco`, `Paris`, or `New York`).
@@ -629,333 +650,392 @@ attributes:
       - icon-rum
       - icon-android
       - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Geo-location (Android, Browser)
+    domain: Geo-location
   
   - name: user.id
     description: Identifier of the user.
     product_source:
       - icon-rum
       - icon-android
-      - icon-browser
+      - icon-roku
     type: string
-    domain: Global user attributes (Android, Browser)
+    domain: RUM user attributes (Android, Roku)
+  - name: usr.id
+    description: Identifier of the user.
+    product_source:
+      - icon-rum
+      - icon-ios
+    type: string
+    domain: RUM user attributes (iOS)
   - name: usr.name
     description: Name of the user.
     product_source:
       - icon-rum
       - icon-android
-      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Global user attributes (Android, Browser)
+    domain: Global user attributes (Android, iOS, Roku)
   - name: usr.email
     description: Email of the user.
     product_source:
       - icon-rum
       - icon-android
-      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Global user attributes (Android, Browser)
+    domain: Global user attributes (Android, iOS, Roku)
  
   - name: session.id
     description: Unique ID of the session.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.type
     description: Type of the session (`user`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.is_active
     description: Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: boolean
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.initial_view.url
     description: URL of the initial view of the session.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.initial_view.name
     description: Name of the initial view of the session.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.last_view.url
     description: URL of the last view of the session.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.last_view.name
     description: Name of the last view of the session.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.ip
     description: IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting   this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: session.useragent
     description: System user agent info to interpret device info.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Session (Android events)
+    domain: Session (Android events, iOS events, Roku events)
   
   - name: view.id
     description: Unique ID of the initial view corresponding to the event.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: View (Android events)
+    domain: View (Android events, iOS events, Roku events)
   
   - name: view.url
-    description: Canonical name of the class corresponding to the event.
+    description: Canonical name of the class corresponding to the event. For iOS, the URL of the `UIViewController` class corresponding to the event.
     product_source:
       - icon-rum
+      - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: View (Android events)
-  
+    domain: View (Android events, iOS events, Roku events)
+
   - name: view.name
     description: Customizable name of the view corresponding to the event.
     product_source:
       - icon-rum
+      - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: View (Android events)
+    domain: View (Android events, iOS events, Roku events)
   
   - name: resource.id
     description: Unique identifier of the resource.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.type
     description: The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.method
     description: The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.status_code
     description: The response status code.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: number
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.url
     description: The resource URL.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.provider.name
     description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.provider.domain
     description: The resource provider domain.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   - name: resource.provider.type
     description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Resource (Android events)
+    domain: Resource (Android events, iOS events, Roku events)
   
   - name: error.source
     description: Where the error originates from (for example, `webview`, `logger`, or `network`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Error (Android events)
+    domain: Error (Browser events, Android events, iOS events, Roku events)
   
   - name: error.type
     description: The error type (or error code in some cases).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Error (Android events)
+    domain: Error (Browser events, Android events, iOS events, Roku events)
   
   - name: error.message
     description: A concise, human-readable one-line message explaining the event.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Error (Android events)
+    domain: Error (Browser events, Android events, iOS events, Roku events)
   
   - name: error.stack
     description: The stack trace or complementary information about the error.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Error (Android events)
+    domain: Error (Browser events, Android events, iOS events, Roku events)
   
   - name: error.issue_id
     description: The stack trace or complementary information about the error.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Error (Android events)
+    domain: Error (Android events, iOS events, Roku events)
   
   - name: error.resource.status_code
     description: The response status code.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: number
-    domain: Network errors (Android events)
+    domain: Network error (Android events, iOS events, Roku events)
   
   - name: error.resource.method
     description: The HTTP method (for example, `POST` or `GET`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Network errors (Android events)
+    domain: Network error (Android events, iOS events, Roku events)
   
   - name: error.resource.url
     description: The resource URL.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Network errors (Android events)
+    domain: Network error (Android events, iOS events, Roku events)
   
   - name: error.resource.provider.name
     description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Network errors (Android events)
+    domain: Network error (Android events, iOS events, Roku events)
   
   - name: error.resource.provider.domain
     description: The resource provider domain.
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Network errors (Android events)
+    domain: Network error (Android events, iOS events, Roku events)
   
   - name: error.resource.provider.type
     description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Network errors (Android events)
+    domain: Network error (Android events, iOS events, Roku events)
   
   - name: action.id
     description: UUID of the user action.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Action (Android events)
+    domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.type
-    description: Type of the user action (for example, `tap` or `application_start`).
+    description: Type of the user action (for example, `tap` or `application_start`). For [Custom Browser User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), it is set to `custom`. 
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Action (Android events)
+    domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.name
-    description: Name of the user action.
+    description: A user-friendly name (for example, `Click on checkout`). For [Custom Browser User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Action (Android events)
+    domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.target.name
     description: Element that the user interacted with. Only for automatically collected actions.
     product_source:
       - icon-rum
       - icon-android
-    type: string
-    domain: Action (Android events)
-
-  - name: type
-    description: The type of the event (for example, `view` or `resource`).
-    product_source:
-      - icon-rum
       - icon-browser
+      - icon-ios
+      - icon-roku
     type: string
-    domain: Core (Browser)
-  
-  - name: application.id
-    description: The Datadog application ID generated when you create a RUM application.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Core (Browser)
-  
-  - name: application.name
-    description: The name of your Datadog application.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Core (Browser)
-  
-  - name: service
-    description: A service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Core (Browser)
+    domain: Action (Browser events, Android events, iOS events, Roku events)
   
   - name: view.id
     description: Randomly generated ID for each page view.
@@ -1314,38 +1394,6 @@ attributes:
       - icon-browser
     type: string
     domain: Resource (Browser events)
-
-  - name: error.source
-    description: Where the error originates from (for example, `console` or `network`).
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Error (Browser events)
-  
-  - name: error.type
-    description: The error type (or error code in some cases).
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Error (Browser events)
-  
-  - name: error.message
-    description: A concise, human-readable, one-line message explaining the event.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Error (Browser events)
-  
-  - name: error.stack
-    description: The stack trace or complementary information about the error.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Error (Browser events)
     
   - name: error.type
     description: The error type (or error code in some cases).
@@ -1355,38 +1403,6 @@ attributes:
     type: string
     domain: Source errors (Browser events)
 
-  - name: action.id
-    description: UUID of the user action.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Action (Browser events)
-
-  - name: action.type
-    description: Type of the user action. For Custom User Actions, it is set to custom.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Action (Browser events)
-
-  - name: action.target.name
-    description: Element that the user interacted with. Only for automatically collected actions.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Action (Browser events)
-
-  - name: action.name
-    description: User-friendly name created. For Custom User Actions, the action name given in the API call.
-    product_source:
-      - icon-rum
-      - icon-browser
-    type: string
-    domain: Action (Browser events)
-  
   - name: action.frustration.type:dead_click
     description: The dead clicks detected by the RUM Browser SDK.
     product_source:
