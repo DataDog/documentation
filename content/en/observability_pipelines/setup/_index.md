@@ -61,6 +61,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 1. Download the [sample pipeline configuration file][2]. This configuration emits demo data, parses and structures the data, and then sends them to the console and Datadog. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
+    
     ```
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -150,6 +151,7 @@ Install the Worker with the one-line install script or manually.
 2. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 3. Start the worker:
+
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -193,7 +195,8 @@ Install the Worker with the one-line install script or manually.
 
 5. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
 
-6. Start the worker:
+6. Start the Worker:
+    
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -216,6 +219,7 @@ Install the Worker with the one-line install script or manually.
 2. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 3. Run the following command to start the Worker:
+    
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -380,7 +384,7 @@ See [Working with Data][6] for more information on transforming your data.
 
 ## Next steps
 
-The quickstart walked you through how to install the Worker and deploy a sample pipeline configuration. For instructions on how to install the Worker to receive and route data from your Datadog Agents to Datadog or to receive and route data from your Splunk HEC to Splunk and Datadog, select your specific use case:
+The quickstart walked you through installing the Worker and deploying a sample pipeline configuration. For instructions on how to install the Worker to receive and route data from your Datadog Agents to Datadog or to receive and route data from your Splunk HEC to Splunk and Datadog, select your specific use case:
 
 {{< partial name="observability_pipelines/use_cases.html" >}}
 
