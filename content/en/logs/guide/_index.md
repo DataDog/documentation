@@ -10,7 +10,7 @@ cascade:
         subcategory: Logs Guides
 ---
 
-{{< whatsnext desc="Logging Without Limits" >}}
+{{< whatsnext desc="Logging Without Limits™" >}}
     {{< nextlink href="logs/guide/access-your-log-data-programmatically" >}}Programmatically access log data using the Logs Search API{{< /nextlink >}}
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
