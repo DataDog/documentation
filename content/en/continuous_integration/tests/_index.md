@@ -38,17 +38,17 @@ cascade:
 |-----------------------------------------|:----:|:----:|:--------------:|:------:|:----:|:-----:|:---------:|
 | Accurate time/durations results         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |     ✗     |
 | Structured stack traces                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |     ✗     |
-| Distributed traces on Integration tests |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |     ✗     |
+| Distributed traces on Integration tests |   ✓  |   ✓  |        ✓       |    ✗   |   ✓  |   ✓   |     ✗     |
 | Agent based reporting                   |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |     ✗     |
 | Agentless reporting                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |     ✓     |
 | Test suite level visibility             |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |     ✓     |
 | Manual API                              |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |     ✗     |
-| Codeowner by test                       |   ✓  |   ✓  |        ✓       |        |   ✗  |   ✓   |     ✗     |
-| Source code start/end reporting         |   ✓  |   ✓  | ✓ (only start) |        |   ✗  |   ✓   |     ✗     |
+| Codeowner by test                       |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |     ✗     |
+| Source code start/end reporting         |   ✓  |   ✓  | ✓ (only start) |    ✗   |   ✗  |   ✓   |     ✗     |
 | CI and Git info                         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |     ✓     |
 | Git metadata upload                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |     ✓     |
 | Intelligent Test Runner                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |     ✗     |
-| Code coverage support                   |   ✓  |   ✓  |        ✓       |        |   ✗  |   ✓   |     ✗     |
+| Code coverage support                   |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |     ✗     |
 | Benchmark tests support                 |   ✓  |   ✗  |        ✗       |    ✓   |   ✗  |   ✓   |     ✗     |
 | Parameterized tests                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |     ✗     |
 
