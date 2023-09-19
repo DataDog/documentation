@@ -42,7 +42,7 @@ If the above prerequisites are met, follow the setup instructions for your hosti
 
 #### Host requirements
 
-To determine where the Agent should be installed, see the [DBM Setup Architecture][10] documentation.
+See the [DBM Setup Architecture][10] documentation to determine where to install the Agent.
 
 The Agent doesn't require any external Oracle clients.
 
