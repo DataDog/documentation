@@ -665,3 +665,25 @@
                 - link: 'tracing/trace_collection/dd_libraries/ruby'
                   tag: 'Documentation'
                   text: 'Instrument Your Application'
+
+      - repo_name: orchestrion
+        contents:
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'README.md'
+            options:
+              dest_path: '/tracing/trace_collection/'
+              file_name: 'go_auto_instrumentation.md'
+              front_matters:
+                title: Automatically Instrument Go Applications
+                kind: documentation
+                dependencies: ["https://github.com/DataDog/orchestrion/blob/main/README.md"]
+                further_reading:
+                    - link: '/tracing/trace_collection/compatibility/go'
+                      tag: 'Documentation'
+                      text: 'Go Compatibility Requirements'
+                further_reading:
+                    - link: '/tracing/trace_collection/dd_libraries/go'
+                      tag: 'Documentation'
+                      text: 'Tracing Go Applications'

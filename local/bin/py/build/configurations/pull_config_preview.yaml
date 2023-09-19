@@ -675,16 +675,16 @@
               - 'README.md'
             options:
               dest_path: '/tracing/trace_collection/'
-              file_name: 'go-auto-instrumentation.md'
+              file_name: 'go_auto_instrumentation.md'
               front_matters:
                 title: Automatically Instrument Go Applications
                 kind: documentation
                 dependencies: ["https://github.com/DataDog/orchestrion/blob/main/README.md"]
                 further_reading:
-                    - link: '/tracing/trace_collection/compatibility/go/'
+                    - link: '/tracing/trace_collection/compatibility/go'
                       tag: 'Documentation'
                       text: 'Go Compatibility Requirements'
                 further_reading:
-                    - link: '/tracing/trace_collection/dd_libraries/go/'
+                    - link: '/tracing/trace_collection/dd_libraries/go'
                       tag: 'Documentation'
                       text: 'Tracing Go Applications'
