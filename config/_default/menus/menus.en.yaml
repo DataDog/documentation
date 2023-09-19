@@ -1413,9 +1413,14 @@ main:
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
   - name: Injecting Libraries Locally
-    url: tracing/trace_collection/library_injection_local/
+    url: tracing/trace_collection/go_auto_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_library_injection_local
+    weight: 100
+  - name: Go Auto-Instrumentation
+    url: tracing/trace_collection/library_injection_local/
+    parent: tracing_library_injection_local
+    identifier: go_auto_instrumentation
     weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
