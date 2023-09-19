@@ -47,7 +47,7 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
 3. Open **Admin Credentials**
 4. Complete the **Admin Credentials** section as follows:
     - **Tenant URL**: `https://app.datadoghq.com/api/v2/scim`
-    - **Secret Token**: Use a valid Datadog application key. You can create an application key from [your organization settings page][4]. To maintain continuous access to your data, use a [service account][2] application key.
+    - **Secret Token**: Use a valid Datadog application key. You can create an application key from [your organization settings page][2]. To maintain continuous access to your data, use a [service account][3] application key.
 5. Click **Test Connection** and wait for the message that confirms that the credentials are authorized to enable provisioning.
 6. Click **Save**. The mapping section will appear, follow instructions below.
 
@@ -74,13 +74,13 @@ Group mapping is currently not supported.
 
 ## Using a service account with SCIM
 
-To enable SCIM, you must use an [application key][3] to secure the connection between your identity provider and your Datadog account. A specific user or service account controls each application key.
+To enable SCIM, you must use an [application key][4] to secure the connection between your identity provider and your Datadog account. A specific user or service account controls each application key.
 
 If you use an application key tied to a user to enable SCIM and that user leaves your organization, their Datadog account becomes deprovisioned. That user-specific application key gets revoked, and you permanently break your SCIM integration, preventing users in your organization from accessing Datadog.
 
-To avoid losing access to your data, Datadog strongly recommends that you create a [service account][2] dedicated to SCIM. Within that service account, create an application key to use in the SCIM integration.
+To avoid losing access to your data, Datadog strongly recommends that you create a [service account][3] dedicated to SCIM. Within that service account, create an application key to use in the SCIM integration.
 
 [1]: /account_management/guide/scim/#using-a-service-account-with-scim
-[2]: /account_management/org_settings/service_accounts
-[3]: /account_management/api-app-keys
-[4]: https://app.datadoghq.com/organization-settings/application-keys
+[2]: https://app.datadoghq.com/organization-settings/application-keys
+[3]: /account_management/org_settings/service_accounts
+[4]: /account_management/api-app-keys

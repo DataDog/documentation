@@ -17,5 +17,4 @@ cascade:
 
 {{< whatsnext desc="General Account Management:" >}}
     {{< nextlink href="account_management/guide/access-your-support-ticket" >}}Access your Support ticket{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/scim" >}}User provisioning with SCIM{{< /nextlink >}}
 {{< /whatsnext >}}
