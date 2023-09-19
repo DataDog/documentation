@@ -20,6 +20,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/remote-configuration-for-datadog/"
   tag: "Blog"
   text: "Apply real-time updates to Datadog components with Remote Configuration"
+algolia:
+  tags: ['remote config', 'remote configuration']
 ---
 
 {{% site-region region="gov" %}}
