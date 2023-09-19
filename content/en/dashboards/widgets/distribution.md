@@ -1,9 +1,10 @@
 ---
 title: Distribution Widget
 kind: documentation
+widget_type: distribution
 description: "Graph a metric distribution aggregated across one or several tags."
 aliases:
-    - /graphing/widgets/distribution/
+- /graphing/widgets/distribution/
 further_reading:
 - link: "/metrics/distributions/"
   tag: "Documentation"
@@ -20,7 +21,6 @@ further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
   text: "Querying"
-
 ---
 
 The Distribution visualization shows data aggregated across one or several tags, such as *hosts*. Unlike the [heatmap][1], a distribution graph's x-axis is quantity rather than time.
@@ -37,7 +37,7 @@ This visualization displays only a single query; additional queries are disregar
 
 1. Choose the data to graph.The Distribution visualization supports metrics, live processes, APM request latency, log events, and RUM events.
 **Note**: This visualization type is useful only when data is aggregated across tag keys, such as for each `host`.
-1. Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
+1. Make a selection in the "`avg`/`max`/`min`/`sum by`/" control to see your data across the associated tags.
 1. Customize your graph with the available options.
 
 ### Options
@@ -66,9 +66,7 @@ In addition to the [standard full screen options][2], you can use x-axis control
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
-
-The dedicated [widget JSON schema definition][4] for the distribution widget is:
+This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
 
 {{< dashboards-widgets-api >}}
 

@@ -19,11 +19,11 @@ further_reading:
 
 The Java Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-### Supported JVM runtimes
+### Supported Java runtimes
 
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
+| Java versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
 | 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
 | 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
@@ -69,7 +69,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Grizzly-HTTP            | 2.3.20+    | Fully Supported | `grizzly-filterchain`                          |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty                   | 7.0-9.x    | Fully Supported | `jetty`                                        |
+| Jetty                   | 7.0-12.x   | Fully Supported | `jetty`                                        |
 | Micronaut HTTP Server   | 2.x        | Fully Supported | `micronaut`                                    |
 | Mulesoft                | 4          | Fully Supported | `mule`                                         |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |

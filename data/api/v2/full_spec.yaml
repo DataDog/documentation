@@ -17424,6 +17424,7 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
@@ -19202,6 +19203,16 @@ paths:
         schema:
           example: created_by,monitor
           type: string
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of downtimes in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 30
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -19226,11 +19237,12 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Schedule a downtime.
       operationId: CreateDowntime
@@ -19288,9 +19300,6 @@ paths:
         - name: downtime_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime/{downtime_id}:
     delete:
       description: Cancel a downtime.
@@ -19331,9 +19340,6 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get downtime detail by `downtime_id`.
       operationId: GetDowntime
@@ -19393,9 +19399,6 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
       description: Update a downtime by `downtime_id`.
       operationId: UpdateDowntime
@@ -19453,9 +19456,6 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -23967,9 +23967,6 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -27818,6 +27815,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29052,8 +29053,8 @@ paths:
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.
+          `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
+          and `timeseries`.
 
           The following product family has been **deprecated**: `audit_logs`.'
         in: query
@@ -29441,6 +29442,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
