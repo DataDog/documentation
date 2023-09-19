@@ -23,7 +23,7 @@ Executional Context in APM Error Tracking automatically captures production vari
 
 *Note: We currently only support Executional Context for Python.*
 
-{{< img src="tracing/error_tracking/error_tracking_executional_context.gif" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
+{{< img src="tracing/error_tracking/error_tracking_executional_context.mp4" video="true" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
 
 ## Setup & Requirements
 
