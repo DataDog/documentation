@@ -12320,11 +12320,11 @@ components:
       description: Defines the metric and aggregation used as the sort value.
       properties:
         aggregation:
-          description: The metric to use for sorting graphs.
+          description: How to aggregate the sort metric for the purposes of ordering.
           example: sum
           type: string
         metric:
-          description: How to aggregate the sort metric for the purposes of ordering.
+          description: The metric to use for sorting graphs.
           example: system.cpu.user
           type: string
       required:
