@@ -47,8 +47,8 @@ Currently only Python is supported. We intend to release support for .NET and Ja
 ### Will I see this in all Error Tracking Issues?
 This feature is only available on Error Tracking for APM issues for Python. Error Tracking for Logs and RUM are not yet supported.
 
-### I don’t see variable values for a Python Error in a specific Trace. What’s wrong?
-To keep the performance overhead of the feature at a minimum, we use rate limiting such that not every error gets captured. If you don’t see variable values on a given trace, try clicking “View Similar Errors”, and expanding the time range selection to ensure you find another instance of the same exception where variable values were captured.
+### I don't see variable values for a Python Error in a specific Trace. What's wrong?
+To keep the performance overhead of the feature at a minimum, we use rate limiting such that not every error gets captured. If you don't see variable values on a given trace, try clicking "View Similar Errors", and expanding the time range selection to ensure you find another instance of the same exception where variable values were captured.
 
 ### What is the sampling rate on APM?
 Currently, we limit the capturing of variable data to 1 error per second.
