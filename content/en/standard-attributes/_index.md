@@ -588,66 +588,74 @@ attributes:
     domain: Geo-location (Android)
     
   - name: geo.country_iso_code
-    description: ISO Code of the country (for example, `US` for the United States or `FR` for France).
+    description: The [ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States or `FR` for France).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Geo-location (Android)
+    domain: Geo-location (Android, Browser)
     
   - name: geo.country_subdivision
     description: Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Geo-location (Android)
+    domain: Geo-location (Android, Browser)
     
   - name: geo.continent_code
     description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Geo-location (Android)
+    domain: Geo-location (Android, Browser)
     
   - name: geo.continent
     description: Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Geo-location (Android)
+    domain: Geo-location (Android, Browser)
     
   - name: geo.city
     description: The name of the city (for example, `San Francisco`, `Paris`, or `New York`).
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Geo-location (Android)
+    domain: Geo-location (Android, Browser)
   
   - name: user.id
     description: Identifier of the user.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Global user attributes (Android)
+    domain: Global user attributes (Android, Browser)
   - name: usr.name
     description: Name of the user.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Global user attributes (Android)
+    domain: Global user attributes (Android, Browser)
   - name: usr.email
     description: Email of the user.
     product_source:
       - icon-rum
       - icon-android
+      - icon-browser
     type: string
-    domain: Global user attributes (Android)
+    domain: Global user attributes (Android, Browser)
  
   - name: session.id
     description: Unique ID of the session.
@@ -917,8 +925,532 @@ attributes:
     type: string
     domain: Action (Android events)
 
+  - name: type
+    description: The type of the event (for example, `view` or `resource`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Core (Browser)
+  
+  - name: application.id
+    description: The Datadog application ID generated when you create a RUM application.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Core (Browser)
+  
+  - name: application.name
+    description: The name of your Datadog application.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Core (Browser)
+  
+  - name: service
+    description: A service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Core (Browser)
+  
+  - name: view.id
+    description: Randomly generated ID for each page view.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.loading_type
+    description: The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.referrer
+    description: The URL of the previous web page from which a link to the currently requested page was followed.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.url
+    description: The view URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.url_hash
+    description: The hash part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.url_host
+    description: The host part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.url_path
+    description: The path part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.url_path_group
+    description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: View (Browser)
+    
+  - name: view.url_query
+    description: The query string parts of the URL decomposed as query params key/value attributes.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: View (Browser)
+    
+  - name: view.url_scheme
+    description: The scheme part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: View (Browser)
+  
+  - name: device.type
+    description: The device type as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Device (Browser)
+  
+  - name: device.brand
+    description: The device brand as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Device (Browser)
+  
+  - name: device.model
+    description: The device model as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Device (Browser)
+  
+  - name: device.name
+    description: The device name as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Device (Browser)
+  
+  - name: os.name
+    description: The OS name as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Operating system (Browser)
+  - name: os.version
+    description: The OS version as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Operating system (Browser)
+  - name: os.version_major
+    description: The OS version major as reported by the device (User-Agent HTTP header).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Operating system (Browser)
 
+  - name: session.id
+    description: Randomly generated ID for each session.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.ip
+    description: Client IP address. If you want to stop collecting this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.is_active
+    description: Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: boolean
+    domain: Session (Browser events)
+  
+  - name: session.type
+    description: The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.referrer
+    description: The URL of the previous web page from which a link to the currently requested page was followed.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.initial_view.id
+    description: The ID of the first RUM view generated by the user.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.initial_view.url_host
+    description: The host part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.initial_view.url_path
+    description: The path part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.initial_view.url_path_group
+    description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.initial_view.url_query
+    description: The query string parts of the URL decomposed as query params key/value attributes.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: Session (Browser events)
+  
+  - name: session.initial_view.url_scheme
+    description: The scheme part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: Session (Browser events)
+  
+  - name: session.last_view.id
+    description: The ID of the last RUM view generated by the user.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.last_view.url_host
+    description: The host part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.last_view.url_path
+    description: The path part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.last_view.url_path_group
+    description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Session (Browser events)
+  
+  - name: session.last_view.url_query
+    description: The query string parts of the URL decomposed as query params key/value attributes.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: Session (Browser events)
+  
+  - name: session.last_view.url_scheme
+    description: The scheme part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: Session (Browser events)
+  
+  - name: resource.type
+    description: The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.method
+    description: The HTTP method (for example `POST` or `GET`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.status_code
+    description: The response status code.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: number
+    domain: Resource (Browser events)
+  
+  - name: resource.url
+    description: The resource URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.url_host
+    description: The host part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.url_path
+    description: The path part of the URL.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.url_query
+    description: The query string parts of the URL decomposed as query params key/value attributes.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: object
+    domain: Resource (Browser events)
+  
+  - name: resource.url_scheme
+    description: The protocol name of the URL (HTTP or HTTPS).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.provider.name
+    description: The resource provider name. Default is `unknown`.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.provider.domain
+    description: The resource provider domain.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
+  
+  - name: resource.provider.type
+    description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Resource (Browser events)
 
+- name: error.source
+    description: Where the error originates from (for example, `console` or `network`).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Error (Browser events)
+  
+  - name: error.type
+    description: The error type (or error code in some cases).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Error (Browser events)
+  
+  - name: error.message
+    description: A concise, human-readable, one-line message explaining the event.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Error (Browser events)
+  
+  - name: error.stack
+    description: The stack trace or complementary information about the error.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Error (Browser events)
+    
+  - name: error.type
+    description: The error type (or error code in some cases).
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Source errors (Browser events)
+
+  - name: action.id
+    description: UUID of the user action.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Action (Browser events)
+
+  - name: action.type
+    description: Type of the user action. For Custom User Actions, it is set to custom.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Action (Browser events)
+
+  - name: action.target.name
+    description: Element that the user interacted with. Only for automatically collected actions.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Action (Browser events)
+
+  - name: action.name
+    description: User-friendly name created. For Custom User Actions, the action name given in the API call.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Action (Browser events)
+  
+  - name: action.frustration.type:dead_click
+    description: The dead clicks detected by the RUM Browser SDK.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Frustration signals (Browser events)
+  
+  - name: action.frustration.type:rage_click
+    description: The rage clicks detected by the RUM Browser SDK.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Frustration signals (Browser events)
+  
+  - name: action.frustration.type:error_click
+    description: The error clicks detected by the RUM Browser SDK.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: Frustration signals (Browser events)
+  
+  - name: view.url_query.utm_source
+    description: The parameter in the URL tracking the source of traffic.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: UTM (Browser events)
+  
+  - name: view.url_query.utm_medium
+    description: The parameter in the URL tracking the channel where the traffic is coming from.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: UTM (Browser events)
+  
+  - name: view.url_query.utm_campaign
+    description: The parameter in the URL identifying the specific marketing campaign tied to that view.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: UTM (Browser events)
+  
+  - name: view.url_query.utm_content
+    description: The parameter in the URL identifying the specific element a user clicked within a marketing campaign.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: UTM (Browser events)
+  
+  - name: view.url_query.utm_term
+    description: The parameter in the URL tracking the keyword a user searched to trigger a given campaign.
+    product_source:
+      - icon-rum
+      - icon-browser
+    type: string
+    domain: UTM (Browser events)
+  
 
 
   - name: language
