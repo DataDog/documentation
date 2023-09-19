@@ -12,9 +12,9 @@
             {{ end }}
 
             {{ if ne $ContentBaseName "search" }}
-            {{ partial "search.html" . }}
+                {{ partial "search.html" . }}
             {{ else }}
-            <div id="async-searchbar-mount"></div>
+                <div id="async-searchbar-mount"></div>
             {{ end}}
 
             <div class="sidenav-nav">
