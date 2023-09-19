@@ -60,9 +60,3 @@ We recommend using Sensitive Data Scanner to scrub the variable data for PII. To
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /tracing/trace_explorer/#live-search-for-15-minutes
-[2]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[3]: https://app.datadoghq.com/apm/error-tracking
-[4]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[5]: /integrations/guide/source-code-integration
