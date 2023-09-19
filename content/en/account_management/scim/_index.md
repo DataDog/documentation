@@ -1,33 +1,32 @@
 ---
 title: User Provisioning with SCIM
-kind: guide
+kind: documentation
 ---
 
 ## Overview
 
 The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
 
-
 ### Supported capabilities
 
-- Create users in Datadog.
-- Remove users in Datadog when they do not require access anymore.
-- Keep user attributes synchronized between Azure AD and Datadog.
-- Single sign-on to Datadog (recommended).
-
-### Prerequisites
-
-Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][1].
-
-When using SAML and SCIM, Datadog strongly recommended to disabled SAML Just-in-time (JIT) provisioning to avoid discrepancy in access. User provisioning should be managed through SCIM only.
-
-This documentation assumes your organization manages user identities using an identity provider.
+- Create users in Datadog
+- Remove users in Datadog when they no longer require access
+- Keep user attributes synchronized between Azure AD and Datadog
+- Single sign-on to Datadog (recommended)
 
 Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
 
-## Configuring SCIM with Azure Active Directory
+### Prerequisites
 
-### Add Datadog from the Azure AD application gallery
+This documentation assumes your organization manages user identities using an identity provider.
+
+Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][1].
+
+When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
+
+## Configure SCIM with Azure Active Directory
+
+### Add Datadog to the Azure AD application gallery
 
 1. In your Azure portal, go to **Azure Active Directory** -> **Enterprise Applications**
 2. Click **New Application** -> **Create your own application**
@@ -47,9 +46,9 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
 3. Open **Admin Credentials**
 4. Complete the **Admin Credentials** section as follows:
     - **Tenant URL**: `https://app.datadoghq.com/api/v2/scim`
-    - **Secret Token**: Use a valid Datadog application key. You can create an application key from [your organization settings page][2]. To maintain continuous access to your data, use a [service account][3] application key.
-5. Click **Test Connection** and wait for the message that confirms that the credentials are authorized to enable provisioning.
-6. Click **Save**. The mapping section will appear, follow instructions below.
+    - **Secret Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][2]. To maintain continuous access to your data, use a [service account][3] application key.
+5. Click **Test Connection**, and wait for the message confirming that the credentials are authorized to enable provisioning.
+6. Click **Save**. The mapping section appears. See the following instructions to configure mapping.
 
 {{< img src="/account_management/guide/scim/admin-credentials.png" alt="Azure AD Admin Credentials configuration screen">}}
 
@@ -61,16 +60,16 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
 2. Click **Provision Azure Active Directory Users**
 3. Set **Enabled** to **Yes**
 4. Click the **Save** icon
-5. Under **Target Object actions**, Create, Update and Delete actions should be selected
-6. Review the user attributes that are synchronized from Azure AD to Datadog in the Attribute-Mapping section. The following attributes should be mapped as follow:
+5. Under **Target Object actions**, ensure Create, Update, and Delete actions are selected
+6. Review the user attributes that are synchronized from Azure AD to Datadog in the attribute mapping section. Ensure the mapping for **Provision Azure Active Directory Users** has **Enabled** set to **Yes**, as shown in the following screenshot:
 
 {{< img src="/account_management/guide/scim/ad-users.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
-7. Once your mappings are set, click **Save**.
+7. After you set your mappings, click **Save**.
 
 #### Group attributes
 
-Group mapping is currently not supported.
+Group mapping is not supported.
 
 ## Using a service account with SCIM
 
