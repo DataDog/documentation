@@ -7,6 +7,8 @@ further_reading:
 - link: "/agent/"
   tag: "Documentation"
   text: "Learn more about the Datadog Agent"
+algolia:
+  tags: ['uninstall']
 ---
 
 Choose your platform to see dedicated instructions to uninstall the Agent:
