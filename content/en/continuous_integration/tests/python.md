@@ -93,6 +93,7 @@ def test_square_value(benchmark):
 ### Using unittest
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
+
 Make sure to specify the name of the service or library under test in the `DD_SERVICE` environment variable.
 Additionally, you may declare the environment where tests are being run in the `DD_ENV` environment variable:
 
@@ -115,6 +116,7 @@ class MyTest(unittest.TestCase):
 #### Known limitations
 
 In some cases, if your `unittest` test execution is being ran in a parallel manner, this may break the instrumentation and affect test visibility.
+
 It is recommended to use up to one process at a time to prevent affecting test visibility.
 
 ### Adding custom tags to tests
