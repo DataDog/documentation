@@ -21640,6 +21640,14 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Test query.
+        in: query
+        name: test_query
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
       responses:
         '200':
           content:
