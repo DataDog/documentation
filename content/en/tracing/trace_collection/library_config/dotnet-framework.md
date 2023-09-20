@@ -183,13 +183,14 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys paired with tag names, and automatically applies matching header values as tags on root spans. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,User-Agent:userAgent `<br>
-Tags the header values for `CASE-insensitive-Header`, `User-ID`, and `User-Agent` to the root span using the tag names `my-tag-name`, `userId`, and `userAgent`, respectively.<br><br>
-Also accepts entries without a specified tag name:<br>
-**Example**: `My-Header-And-Tag-Name,User-ID,User-Agent`<br>
-Tags the header values for `My-Header-And-Tag-Name`, `User-ID`, and `User-Agent` to the root span using the headers' names.<br>
-Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>`<br><br>
+**Example** (with specified tag names): `CASE-insensitive-Header:my-tag-name,User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId`.<br><br>
+**Example** (without specified tag names): `My-Header-And-Tag-Name,User-ID`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
+If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
+Added in version 1.18.3.<br>
+Response header support and entries without tag names added in version 1.26.0.<br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
