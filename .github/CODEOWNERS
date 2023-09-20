@@ -38,9 +38,9 @@ content/en/developers/integrations/log_integration.md                           
 content/en/developers/integrations/marketplace_offering.md                      @Datadog/marketplace-product-management @DataDog/documentation
 content/en/developers/integrations/create_a_tile.md                             @Datadog/marketplace-product-management @DataDog/documentation
 content/en/developers/integrations/oauth_for_integrations.md                    @Datadog/marketplace-product-management @DataDog/documentation
-content/en/developers/integrations/create_an_integration_dashboard.md           @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/create_an_integration_dashboard.md           @Datadog/marketplace-product-management @DataDog/agent-integrations @DataDog/documentation
 content/en/developers/integrations/create-an-integration-recommended-monitor.md @Datadog/marketplace-product-management @DataDog/documentation
-content/en/developers/integrations/check_references.md                          @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/check_references.md                          @Datadog/marketplace-product-management @DataDog/agent-integrations @DataDog/documentation
 
 layouts/shortcodes/integration-assets.md                                    @Datadog/marketplace-product-management @DataDog/documentation
 layouts/shortcodes/integration-assets-reference.md                          @Datadog/marketplace-product-management @DataDog/documentation
