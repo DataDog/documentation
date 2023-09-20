@@ -103,26 +103,6 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - docs/dev/README.md
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: '_index.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-
-        - action: pull-and-push-folder
-          branch: master
-          globs:
-          - docs/dev/*.md
-          options:
-            dest_dir: '/developers/integrations/'
-            path_to_remove: 'docs/dev/'
-            front_matters:
-              dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
-
       - repo_name: integrations-extras
         contents:
 
