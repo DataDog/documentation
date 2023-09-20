@@ -514,6 +514,11 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_data_collected
     weight: 310
+  - name: Data security
+    url: data_security/kubernetes
+    parent: containers_kubernetes
+    identifier: container_kubernetes_data_security
+    weight: 311
   - name: Cluster Agent
     url: containers/cluster_agent/
     parent: containers
@@ -4369,18 +4374,22 @@ main:
     url: data_security/logs/
     parent: data_security
     weight: 3
+  - name: Kubernetes
+    url: data_security/kubernetes
+    parent: data_security
+    weight: 4
   - name: Synthetic Monitoring
     url: data_security/synthetics/
     parent: data_security
-    weight: 4
+    weight: 5
   - name: Real User Monitoring
     url: data_security/real_user_monitoring/
     parent: data_security
-    weight: 5
+    weight: 6
   - name: Guides
     url: data_security/guide/
     parent: data_security
-    weight: 6
+    weight: 7
   - name: Sensitive Data Scanner
     url: sensitive_data_scanner/
     pre: sensitive-data-scanner
