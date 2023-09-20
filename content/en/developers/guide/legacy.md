@@ -1,7 +1,7 @@
 ---
 kind: documentation
-title: Legacy Agent v5
-description: Learn how to create an Agent check for Datadog Agent v5.
+title: Create an Agent check for Datadog Agent 5
+description: Learn how to create an Agent check for Datadog Agent 5.
 aliases:
 - /developers/integrations/legacy
 ---
