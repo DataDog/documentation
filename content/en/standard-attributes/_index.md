@@ -20,10 +20,10 @@ attributes:
     description: The type of originating device.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum browser
-      - icon-rum roku
+      - android
+      - ios
+      - browser
+      - roku
     type: string
     domain: Reserved
   - name: source
@@ -46,10 +46,10 @@ attributes:
       - icon-log
       - icon-rum
       - icon-apm
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum browser
-      - icon-rum roku
+      - android
+      - ios
+      - browser
+      - roku
     type: string
     domain: Reserved
   - name: trace_id
@@ -300,7 +300,7 @@ attributes:
     type: string
     domain: Database
   - name: duration
-    description: "A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. [Remap](/logs/log_configuration/processors/#remapper)) any durations within logs to this attribute because Datadog displays and uses it as a default measure for trace search."
+    description: "A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, and so on. [Remap](/logs/log_configuration/processors/#remapper) any durations within logs to this attribute because Datadog displays and uses it as a default measure for trace search."
     product_source: 
       - icon-log
     type: number
@@ -310,10 +310,10 @@ attributes:
     product_source: 
       - icon-log 
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum browser
-      - icon-rum roku
+      - android
+      - ios
+      - browser
+      - roku
     type: string
     domain: User
   - name: usr.name
@@ -321,10 +321,10 @@ attributes:
     product_source: 
       - icon-log 
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum browser
-      - icon-rum roku
+      - android
+      - ios
+      - browser
+      - roku
     type: string
     domain: User
   - name: usr.email
@@ -332,10 +332,10 @@ attributes:
     product_source: 
       - icon-log 
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum browser
-      - icon-rum roku
+      - android
+      - ios
+      - browser
+      - roku
     type: string
     domain: User
   - name: syslog.hostname
@@ -445,9 +445,9 @@ attributes:
     description: Start of the event in milliseconds from epoch.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: integer
     domain: RUM core attributes
 
@@ -455,10 +455,10 @@ attributes:
     description: The type of the event (for example, `view` or `resource`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: RUM core attributes
 
@@ -466,10 +466,10 @@ attributes:
     description: The Datadog application ID generated when you create a RUM application.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: RUM core attributes
 
@@ -477,9 +477,9 @@ attributes:
     description: The Datadog application name.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
+      - android
+      - browser
+      - ios
     type: string
     domain: RUM core attributes
 
@@ -487,9 +487,9 @@ attributes:
     description: The device type as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Device (Android, iOS, Roku)
 
@@ -497,9 +497,9 @@ attributes:
     description: The device brand as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Device (Android, iOS, Roku)
 
@@ -507,9 +507,9 @@ attributes:
     description: The device model as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Device (Android, iOS, Roku)
 
@@ -517,9 +517,9 @@ attributes:
     description: The device name as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Device (Android, iOS, Roku)
 
@@ -527,8 +527,8 @@ attributes:
     description: Status of device network reachability (`connected`, `not connected`, or `maybe`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
+      - android
+      - ios
     type: string
     domain: Connectivity (Android, iOS)
   
@@ -536,8 +536,8 @@ attributes:
     description: The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
+      - android
+      - ios
     type: string
     domain: Connectivity (Android, iOS)
   
@@ -545,8 +545,8 @@ attributes:
     description: The type of a radio technology used for cellular connection.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
+      - android
+      - ios
     type: string
     domain: Connectivity (Android, iOS)
   
@@ -554,8 +554,8 @@ attributes:
     description: The name of the SIM carrier.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
+      - android
+      - ios
     type: string
     domain: Connectivity (Android, iOS)
   
@@ -563,9 +563,9 @@ attributes:
     description: The OS name as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Operating System (Android, iOS, Roku)
     
@@ -573,9 +573,9 @@ attributes:
     description: The OS version as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Operating System (Android, iOS, Roku)
     
@@ -583,9 +583,9 @@ attributes:
     description: The OS version major as reported by the device (System User-Agent).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Operating System (Android, iOS, Roku)
   
@@ -593,10 +593,10 @@ attributes:
     description: Name of the country.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Geo-location
     
@@ -604,10 +604,10 @@ attributes:
     description: The [ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States or `FR` for France).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Geo-location
     
@@ -615,10 +615,10 @@ attributes:
     description: Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Geo-location
     
@@ -626,10 +626,10 @@ attributes:
     description: ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Geo-location
     
@@ -637,10 +637,10 @@ attributes:
     description: Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Geo-location
     
@@ -648,10 +648,10 @@ attributes:
     description: The name of the city (for example, `San Francisco`, `Paris`, or `New York`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Geo-location
   
@@ -659,33 +659,33 @@ attributes:
     description: Identifier of the user.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum roku
+      - android
+      - roku
     type: string
     domain: RUM user attributes (Android, Roku)
   - name: usr.id
     description: Identifier of the user.
     product_source:
       - icon-rum
-      - icon-rum ios
+      - ios
     type: string
     domain: RUM user attributes (iOS)
   - name: usr.name
     description: Name of the user.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Global user attributes (Android, iOS, Roku)
   - name: usr.email
     description: Email of the user.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Global user attributes (Android, iOS, Roku)
  
@@ -693,9 +693,9 @@ attributes:
     description: Unique ID of the session.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -703,9 +703,9 @@ attributes:
     description: Type of the session (`user`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -713,9 +713,9 @@ attributes:
     description: Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: boolean
     domain: Session (Android events, iOS events, Roku events)
   
@@ -723,9 +723,9 @@ attributes:
     description: URL of the initial view of the session.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -733,9 +733,9 @@ attributes:
     description: Name of the initial view of the session.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -743,9 +743,9 @@ attributes:
     description: URL of the last view of the session.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -753,9 +753,9 @@ attributes:
     description: Name of the last view of the session.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -763,9 +763,9 @@ attributes:
     description: IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting   this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -773,9 +773,9 @@ attributes:
     description: System user agent info to interpret device info.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Session (Android events, iOS events, Roku events)
   
@@ -783,9 +783,9 @@ attributes:
     description: Unique ID of the initial view corresponding to the event.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: View (Android events, iOS events, Roku events)
   
@@ -793,9 +793,9 @@ attributes:
     description: Canonical name of the class corresponding to the event. For iOS, the URL of the `UIViewController` class corresponding to the event.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: View (Android events, iOS events, Roku events)
 
@@ -803,9 +803,9 @@ attributes:
     description: Customizable name of the view corresponding to the event.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: View (Android events, iOS events, Roku events)
   
@@ -813,72 +813,72 @@ attributes:
     description: Unique identifier of the resource.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.type
     description: The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.method
     description: The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.status_code
     description: The response status code.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: number
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.url
     description: The resource URL.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.provider.name
     description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.provider.domain
     description: The resource provider domain.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   - name: resource.provider.type
     description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Resource (Android events, iOS events, Roku events)
   
@@ -886,10 +886,10 @@ attributes:
     description: Where the error originates from (for example, `webview`, `logger`, or `network`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
@@ -897,10 +897,10 @@ attributes:
     description: The error type (or error code in some cases).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
@@ -908,10 +908,10 @@ attributes:
     description: A concise, human-readable one-line message explaining the event.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
@@ -919,10 +919,10 @@ attributes:
     description: The stack trace or complementary information about the error.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
@@ -930,9 +930,9 @@ attributes:
     description: The stack trace or complementary information about the error.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Error (Android events, iOS events, Roku events)
   
@@ -940,9 +940,9 @@ attributes:
     description: The response status code.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: number
     domain: Network error (Android events, iOS events, Roku events)
   
@@ -950,9 +950,9 @@ attributes:
     description: The HTTP method (for example, `POST` or `GET`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Network error (Android events, iOS events, Roku events)
   
@@ -960,9 +960,9 @@ attributes:
     description: The resource URL.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Network error (Android events, iOS events, Roku events)
   
@@ -970,9 +970,9 @@ attributes:
     description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Network error (Android events, iOS events, Roku events)
   
@@ -980,9 +980,9 @@ attributes:
     description: The resource provider domain.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Network error (Android events, iOS events, Roku events)
   
@@ -990,9 +990,9 @@ attributes:
     description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - ios
+      - roku
     type: string
     domain: Network error (Android events, iOS events, Roku events)
   
@@ -1000,40 +1000,40 @@ attributes:
     description: UUID of the user action.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.type
     description: Type of the user action (for example, `tap` or `application_start`). For [Custom Browser User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), it is set to `custom`. 
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.name
     description: A user-friendly name (for example, `Click on checkout`). For [Custom Browser User Actions](/real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions), the action name given in the API call.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   - name: action.target.name
     description: Element that the user interacted with. Only for automatically collected actions.
     product_source:
       - icon-rum
-      - icon-rum android
-      - icon-rum browser
-      - icon-rum ios
-      - icon-rum roku
+      - android
+      - browser
+      - ios
+      - roku
     type: string
     domain: Action (Browser events, Android events, iOS events, Roku events)
   
@@ -1041,7 +1041,7 @@ attributes:
     description: Randomly generated ID for each page view.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1049,7 +1049,7 @@ attributes:
     description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1057,7 +1057,7 @@ attributes:
     description: The URL of the previous web page from which a link to the currently requested page was followed.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1065,7 +1065,7 @@ attributes:
     description: The view URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1073,7 +1073,7 @@ attributes:
     description: The hash part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1081,7 +1081,7 @@ attributes:
     description: The host part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1089,7 +1089,7 @@ attributes:
     description: The path part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1097,7 +1097,7 @@ attributes:
     description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: View (Browser)
     
@@ -1105,7 +1105,7 @@ attributes:
     description: The query string parts of the URL decomposed as query params key/value attributes.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: View (Browser)
     
@@ -1113,7 +1113,7 @@ attributes:
     description: The scheme part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: View (Browser)
   
@@ -1121,7 +1121,7 @@ attributes:
     description: The device type as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Device (Browser)
   
@@ -1129,7 +1129,7 @@ attributes:
     description: The device brand as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Device (Browser)
   
@@ -1137,7 +1137,7 @@ attributes:
     description: The device model as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Device (Browser)
   
@@ -1145,7 +1145,7 @@ attributes:
     description: The device name as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Device (Browser)
   
@@ -1153,21 +1153,21 @@ attributes:
     description: The OS name as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Operating system (Browser)
   - name: os.version
     description: The OS version as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Operating system (Browser)
   - name: os.version_major
     description: The OS version major as reported by the device (User-Agent HTTP header).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Operating system (Browser)
 
@@ -1175,7 +1175,7 @@ attributes:
     description: Randomly generated ID for each session.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1183,7 +1183,7 @@ attributes:
     description: Client IP address. If you want to stop collecting this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1191,7 +1191,7 @@ attributes:
     description: Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: boolean
     domain: Session (Browser events)
   
@@ -1199,7 +1199,7 @@ attributes:
     description: The type of session, `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1207,7 +1207,7 @@ attributes:
     description: The URL of the previous web page from which a link to the currently requested page was followed.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1215,7 +1215,7 @@ attributes:
     description: The ID of the first RUM view generated by the user.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1223,7 +1223,7 @@ attributes:
     description: The host part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1231,7 +1231,7 @@ attributes:
     description: The path part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1239,7 +1239,7 @@ attributes:
     description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1247,7 +1247,7 @@ attributes:
     description: The query string parts of the URL decomposed as query params key/value attributes.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: Session (Browser events)
   
@@ -1255,7 +1255,7 @@ attributes:
     description: The scheme part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: Session (Browser events)
   
@@ -1263,7 +1263,7 @@ attributes:
     description: The ID of the last RUM view generated by the user.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1271,7 +1271,7 @@ attributes:
     description: The host part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1279,7 +1279,7 @@ attributes:
     description: The path part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1287,7 +1287,7 @@ attributes:
     description: The automatic URL group generated for similar URLs (for example, `/dashboard/?` for `/dashboard/123` and `/dashboard/456`).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Session (Browser events)
   
@@ -1295,7 +1295,7 @@ attributes:
     description: The query string parts of the URL decomposed as query params key/value attributes.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: Session (Browser events)
   
@@ -1303,7 +1303,7 @@ attributes:
     description: The scheme part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: Session (Browser events)
   
@@ -1311,7 +1311,7 @@ attributes:
     description: The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1319,7 +1319,7 @@ attributes:
     description: The HTTP method (for example `POST` or `GET`).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1327,7 +1327,7 @@ attributes:
     description: The response status code.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: number
     domain: Resource (Browser events)
   
@@ -1335,7 +1335,7 @@ attributes:
     description: The resource URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1343,7 +1343,7 @@ attributes:
     description: The host part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1351,7 +1351,7 @@ attributes:
     description: The path part of the URL.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1359,7 +1359,7 @@ attributes:
     description: The query string parts of the URL decomposed as query params key/value attributes.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: object
     domain: Resource (Browser events)
   
@@ -1367,7 +1367,7 @@ attributes:
     description: The protocol name of the URL (HTTP or HTTPS).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1375,7 +1375,7 @@ attributes:
     description: The resource provider name. Default is `unknown`.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1383,7 +1383,7 @@ attributes:
     description: The resource provider domain.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
   
@@ -1391,7 +1391,7 @@ attributes:
     description: The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Resource (Browser events)
     
@@ -1399,7 +1399,7 @@ attributes:
     description: The error type (or error code in some cases).
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Source errors (Browser events)
 
@@ -1407,7 +1407,7 @@ attributes:
     description: The dead clicks detected by the RUM Browser SDK.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Frustration signals (Browser events)
   
@@ -1415,7 +1415,7 @@ attributes:
     description: The rage clicks detected by the RUM Browser SDK.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Frustration signals (Browser events)
   
@@ -1423,7 +1423,7 @@ attributes:
     description: The error clicks detected by the RUM Browser SDK.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: Frustration signals (Browser events)
   
@@ -1431,7 +1431,7 @@ attributes:
     description: The parameter in the URL tracking the source of traffic.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: UTM (Browser events)
   
@@ -1439,7 +1439,7 @@ attributes:
     description: The parameter in the URL tracking the channel where the traffic is coming from.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: UTM (Browser events)
   
@@ -1447,7 +1447,7 @@ attributes:
     description: The parameter in the URL identifying the specific marketing campaign tied to that view.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: UTM (Browser events)
   
@@ -1455,7 +1455,7 @@ attributes:
     description: The parameter in the URL identifying the specific element a user clicked within a marketing campaign.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: UTM (Browser events)
   
@@ -1463,7 +1463,7 @@ attributes:
     description: The parameter in the URL tracking the keyword a user searched to trigger a given campaign.
     product_source:
       - icon-rum
-      - icon-rum browser
+      - browser
     type: string
     domain: UTM (Browser events)
   
