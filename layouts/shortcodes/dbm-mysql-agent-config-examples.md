@@ -13,7 +13,7 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
     host: example-service-replica-1.example-host.com
     port: 3306
@@ -24,7 +24,7 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
     host: example-service-replica-2.example-host.com
     port: 3306
@@ -35,7 +35,7 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
     [...]
 ```
 
