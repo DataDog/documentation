@@ -63,6 +63,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
+| AWS Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
 | AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
