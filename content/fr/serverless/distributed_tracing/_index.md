@@ -28,9 +28,9 @@ kind: documentation
 title: Tracing distribué avec des applications sans serveur AWS Lambda
 ---
 
-{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur"  style="width:100%;">}}
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur" style="width:100%;">}}
 
-Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi mieux dépanner les problèmes de performance.
+Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi résoudre plus efficacement les problèmes de performance.
 
 Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda.
 
@@ -158,7 +158,7 @@ Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vo
 
 Si vous avez installé `dd-trace` sur vos hosts avec l'Agent Datadog, et si le tracing de vos fonctions sans serveur Node.js ou Python passe par AWS X-Ray, voici à quoi ressemble la configuration finale :
 
-1. Vous avez installé l'[intégration AWS X-Ray][2] pour le tracing de vos fonctions Lambda. Par la même occasion, vous avez activé le tracing actif d'AWS X-Ray et installé les bibliothèques client X-Ray.
+1. Vous avez installé l'[intégration AWS X-Ray][18] pour le tracing de vos fonctions Lambda. Par la même occasion, vous avez activé le tracing actif d'AWS X-Ray et installé les bibliothèques client X-Ray.
 2. Vous avez installé la [bibliothèque Lambda Datadog pour votre runtime Lambda][4] et défini la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
 3. La solution [APM Datadog][20] est configurée sur vos hosts et votre infrastructure à base de conteneurs.
 

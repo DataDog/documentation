@@ -386,15 +386,15 @@ const config = new DdSdkReactNativeConfiguration(
 The 'Pods-MyApp' target has transitive dependencies that include statically linked binaries: (DatadogSDKBridge, DatadogSDKCrashReporting)
 ```
 
-このエラーを防ぐには、`use_frameworks!` を上書きして、フレームワークである必要があるものを除いて、すべてのポッドを静的にインストールすることができます。
+このエラーを防ぐには、`Podfile` を編集して、React Native SDK ポッドを静的ライブラリとしてインストールします。
 
 ```ruby
-dynamic_frameworks = ['DatadogSDKBridge','DatadogSDKCrashReporting']
+static_libraries = ['DatadogSDKReactNative']
 
-# static_framework? 関数をオーバーライドして、他のすべてのフレームワークを静的フレームワークにし、true を返すようにします
+# static_framework? 関数をオーバーライドして true を返すようにすることで、静的依存関係を持つポッドを静的ライブラリに変えます
 pre_install do |installer|
   installer.pod_targets.each do |pod|
-    if !dynamic_frameworks.include?(pod.name)
+    if static_libraries.include?(pod.name)
       def pod.static_framework?;
         true
       end

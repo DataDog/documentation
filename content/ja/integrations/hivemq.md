@@ -34,7 +34,7 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.6.2
+integration_version: 1.7.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -189,6 +189,6 @@ JMXFetch
 
 
 [1]: https://www.hivemq.com/hivemq/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/help
 [4]: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/

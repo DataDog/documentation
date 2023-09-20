@@ -48,9 +48,12 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 
 ## 制限
 
-<div class="alert alert-warning"><p>
-Datadog は、US1 または EU1 サイトでは 200 MB まで、それ以外のサイトでは 50 MB までのアップロードを受け付けます。
-</p></div>
+{{< site-region region="us,us3,us5,eu" >}}
+Datadog は最大 **300** MB までのアップロードを受け付けます。
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Datadog は最大 **50** MB までのアップロードを受け付けます。
+{{< /site-region >}}
 
 ソースマップとバンドルのサイズを計算するには、次のコマンドを実行します。
 

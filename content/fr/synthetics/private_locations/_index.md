@@ -236,7 +236,7 @@ Pour en savoir plus sur les paramètres des emplacements privés réservés aux 
 
 La configuration Podman est similaire à celle de Docker. Vous devez toutefois définir `NET_RAW` pour pouvoir prendre en charge les tests ICMP.
 
-1. Exécutez `sysctl -w net.ipv4.ping_group_range = 0 2147483647` depuis le host sur lequel le conteneur s'exécute.
+1. Exécutez `sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` depuis le host sur lequel le conteneur s'exécute.
 2. Exécutez la commande suivante pour démarrer votre worker d'emplacement privé en montant votre fichier de configuration sur le conteneur. Assurez-vous que votre fichier `<NOM_FICHIER_CONFIGURATION_WORKER>.json` peut être monté sur le conteneur :
 
    ```shell

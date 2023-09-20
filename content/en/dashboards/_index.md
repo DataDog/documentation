@@ -137,7 +137,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Version history
 
-From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
+From a dashboard, click on the settings icon and then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
 
 #### Generate public URL
 
@@ -163,9 +163,7 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-At the top of the dashboard, click on settings and select *Permissions*.
-
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
+At the top of the dashboard, click on configure and select *Permissions*.
 
 Use the pop-up to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
 
@@ -184,6 +182,9 @@ If you manage your dashboards with Terraform, you can use the latest version of 
 High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
 
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display" style="width:90%;">}}
+
+Select **Increase density on wide screens** to expand widgets to the width of the screen.
+
 #### Clone dashboard
 
 Use this option to copy the entire dashboard to a new dashboard. You are prompted to name the clone.
@@ -206,26 +207,27 @@ Use this option to permanently delete your dashboard. You are prompted to confir
 
 ## Dashboard details
 
-From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A dropdown panel opens.
+From an individual dashboard, hover over the dashboard title to view and edit dashboard details. A popover panel opens.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
-Under the title, a byline tells you who created the dashboard.
+Under the title, the avatar tells you who created the dashboard.
 
-### Suggested dashboards and active users
+### Suggested dashboards
 
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details view displays a list of the most active users of this dashboard.
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. 
+
+To add a suggested dashboards list, add `[[suggested_dashboards]]` inside the dashboard description. 
 
 ### Edit details
 
 Update Markdown-supported dashboard descriptions or associate [teams][18] with a dashboard:
 
 1. Open the dashboard you wish to edit.
-1. Click the caret icon next to the dashboard title. A dropdown panel opens.
-1. Click **Edit**. The panel changes to edit mode.
+1. Hover the dashboard title. A dropdown panel opens.
+1. Click on the dashboard title or description to edit them. 
+1. Once done editing click the done button.
 1. Select up to 5 teams from the **Teams** dropdown.
-1. Enter a description in the text box. Format your text in Markdown.
-1. Click **Save**.
 
 
 ## Dashboard list

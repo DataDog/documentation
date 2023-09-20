@@ -52,18 +52,8 @@ To install and configure the Datadog Serverless Framework plugin:
 2. Enable ASM by updating your `serverless.yml` (or whichever way you set environment variables for your function):
    ```yaml
    environment:
-     DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   For **Go functions only** also add:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
-   ```
-   For **NodeJS or Python functions** also add:
-   ```yaml
-   environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_SERVERLESS_APPSEC_ENABLED: true
    ```
 3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
@@ -208,27 +198,21 @@ To install and configure the Datadog Serverless Framework plugin:
 3. Enable ASM by adding the following environment variables on your function deployment:
    ```yaml
    environment:
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   For **Go functions only** also add:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
    ```
    For **NodeJS or Python functions** also add:
    ```yaml
    environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
-     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_TRACE_ENABLED: true
    ```
 4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly:
     - **Node**: Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
        - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-    - **Python**: Set your function's handler is to `datadog_lambda.handler.handler`.
+    - **Python**: Set your function's handler to `datadog_lambda.handler.handler`.
        - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
-   
-4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+
+5. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 

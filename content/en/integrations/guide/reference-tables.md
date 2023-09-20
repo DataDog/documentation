@@ -8,10 +8,16 @@ aliases:
 further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
-  text: "Discover how to process your logs"
-- link: "/logs/log_configuration/parsing"
+  text: "Use the lookup processor to enrich logs from a Reference Table"
+- link: "/logs/explorer/analytics/#filter-logs-based-on-reference-tables"
   tag: "Documentation"
-  text: "Learn more about parsing"
+  text: "Filter logs based on Reference Tables"
+- link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
+  tag: "Documentation"
+  text: "Use Reference Tables to add multiple tags to cost data"
+- link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
+  tag: 'Blog'
+  text: 'Add more context to your logs with Reference Tables'
 ---
 
 <div class="alert alert-warning">

@@ -22,7 +22,7 @@ further_reading:
 
 ---
 <div class="alert alert-warning">
-    Change Overlays is in private beta.
+    Change Overlays is in beta.
 </div>
 
 
