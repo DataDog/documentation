@@ -336,7 +336,7 @@ spec:
 
 ## Google Cloud SQL 통합 설치
 
-Google Cloud SQL에서 좀 더 포괄적인 데이터베이스를 수집하려면 [Cloud SQL 통합][2]을 설치하세요.
+Google Cloud SQL에서 좀 더 포괄적인 데이터베이스를 수집하려면 [Google Cloud SQL 통합][2]을 설치하세요.
 
 ## 참고 자료
 
