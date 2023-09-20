@@ -6,7 +6,7 @@ In these cases, Datadog recommends limiting the number of instances per Agent to
 init_config:
 instances:
   - dbm: true
-    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    host: example-service.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
@@ -15,7 +15,7 @@ instances:
       - 'team:team-discovery'
       - 'service:product-recommendation'
   - dbm: true
-    host: products–replica-1.us-east-1.rds.amazonaws.com
+    host: example-service-replica-1.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
@@ -26,7 +26,7 @@ instances:
       - 'team:team-discovery'
       - 'service:product-recommendation'
   - dbm: true
-    host: products–replica-2.us-east-1.rds.amazonaws.com
+    host: example-service-replica-2.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
