@@ -26,9 +26,9 @@ If you set this to `DEBUG`, you get more detailed information about the Worker's
 
 With OP Worker v1.4.0+, you can `tap` into the data that is going through your sources, transforms, and sinks so that you can see the raw data flowing through each individual component of your pipeline.
 
-### Set up to use `tap`
+### Enable the Observability Pipelines Worker API
 
-Enable the Observability Pipelines Worker API that allows you to interact with the Worker process and to use the `tap` command. If you are using the Helm charts provided in the [setup guides][2], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true`. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
+ The Observability Pipelines Worker API allows you to interact with the Worker's processes with the `tap` command. If you are using the Helm charts provided in the [setup guides][2], then the API has already been enabled. Otherwise, make sure the environment variable `DD_OP_API_ENABLED` is set to `true`. This sets up the API to listen on `localhost` and port `8686`, which is what the CLI for `tap` is expecting.
 
 ### Use `tap` to see your data
 
