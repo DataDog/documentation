@@ -3,6 +3,10 @@ title: Connect Database Monitoring and Traces
 kind: documentation
 aliases: 
 - /database_monitoring/guide/connect_dbm_and_apm/
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
+    tag: 'Blog'
+    text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
