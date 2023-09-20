@@ -77,7 +77,7 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
 
-### Advanced options (supported through .runsettings)
+### Advanced options
 
 The Datadog Tracer's built-in code coverage has support for both `Coverlet` and `VS Code Coverage` options through the `.runsettings` file.
 
@@ -107,6 +107,7 @@ The Datadog Tracer's built-in code coverage has support for both `Coverlet` and 
 | Exclude                  | Exclude from code coverage analysis using filter expressions.                                                                                                  |
 
 ##### Attributes
+
 You can exclude a method, an entire class, or assembly from code coverage by creating and applying the `ExcludeFromCodeCoverage` attribute present in the `System.Diagnostics.CodeAnalysis` namespace.
 
 Exclude additional attributes with the `ExcludeByAttribute` property and the short name of the attribute (the type name without the namespace).
@@ -116,7 +117,7 @@ Exclude additional attributes with the `ExcludeByAttribute` property and the sho
 Exclude specific source files from code coverage with the `ExcludeByFile` property.
 
 * Use a single or multiple paths, separated by comma
-* Use the file path or directory path with a wildcard (`*`), for example (`dir1/*.cs`)
+* Use the file path or directory path with a wildcard (`*`), for example `dir1/*.cs`
 
 ##### Filters
 
@@ -124,7 +125,7 @@ Filters provide fine-grained control over what gets excluded using **filter expr
 
 `[<ASSEMBLY_FILTER>]<TYPE_FILTER>`
 
-**Wildcards**:
+**Wildcards** are supported:
 
 * `*` => matches zero or more characters
 * `?` => the prefixed character is optional
