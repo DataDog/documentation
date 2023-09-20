@@ -4132,10 +4132,6 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Legacy
-    url: developers/integrations/legacy/
-    parent: dev_tools_integrations
-    weight: 411
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
