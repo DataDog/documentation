@@ -94,7 +94,7 @@ def test_square_value(benchmark):
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
 Make sure to specify the name of the service or library under test in the `DD_SERVICE` environment variable.
-Additionally, you may declare the environment where tests are being run (for example, `local` when running tests locally, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
+Additionally, you may declare the environment where tests are being run in the `DD_ENV` environment variable:
 
 {{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci ddtrace-run python -m unittest
