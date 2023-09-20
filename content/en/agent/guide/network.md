@@ -20,7 +20,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Collect your traces'
 algolia:
-  tags: ['network traffic']
+  tags: ['network traffic', 'destinations', 'ports', 'data buffering']
 ---
 
 ## Overview
@@ -76,92 +76,92 @@ API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key=
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : TCP: `agent-intake.logs.datadoghq.com`<br>
 HTTP: `agent-http-intake.logs.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][203]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `tcp-encrypted-intake.logs.datadoghq.com`<br>
 `lambda-tcp-encrypted-intake.logs.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.datadoghq.com`<br>
 `http-encrypted-intake.logs.datadoghq.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[203]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="eu" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : TCP: `agent-intake.logs.datadoghq.eu`<br>
 HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `tcp-encrypted-intake.logs.datadoghq.eu`<br>
 `lambda-tcp-encrypted-intake.logs.datadoghq.eu`<br>
 `gcp-encrypted-intake.logs.datadoghq.eu`<br>
 `http-encrypted-intake.logs.datadoghq.eu`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="us3" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `lambda-tcp-encrypted-intake.logs.us3.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.us3.datadoghq.com`<br>
 `http-encrypted-intake.logs.us3.datadoghq.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="us5" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `http-encrypted-intake.logs.us5.datadoghq.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="ap1" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-[Logs][1] & [HIPAA logs][2]
+[Logs][200] & [HIPAA logs][201]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
-Other: See [logs endpoints][3]
+Other: See [logs endpoints][202]
 
-[HIPAA logs legacy][2]
+[HIPAA logs legacy][201]
 : `lambda-tcp-encrypted-intake.logs.ddog-gov.com`<br>
 `gcp-encrypted-intake.logs.ddog-gov.com`<br>
 `http-encrypted-intake.logs.ddog-gov.com`
 
-[1]: /logs/
-[2]: /data_security/logs/#hipaa-enabled-customers
-[3]: /logs/log_collection/#logging-endpoints
+[200]: /logs/
+[201]: /data_security/logs/#hipaa-enabled-customers
+[202]: /logs/log_collection/#logging-endpoints
 {{% /site-region %}}
 
 All other Agent data
@@ -188,15 +188,15 @@ The information is structured as JSON following this schema:
             ...
         ]
     },
-    "api": {...},                          // <-- same for non-critical Agent functionality (querying information from API)
-    "apm": {...},                          // <-- same structure as "agents" but IPs used for the APM Agent data
-    "logs": {...},                         // <-- same for the logs Agent data
-    "process": {...},                      // <-- same for the process Agent data
-    "orchestrator": {...},                 // <-- same for the process Agent data
-    "remote-configuration": {...},         // <-- used by the Agent to retrieve its dynamic configuration
-    "synthetics": {...},                   // <-- not used for Agent traffic (Datadog source IPs of bots for synthetic tests)
-    "synthetics-private-locations": {...}, // <-- not used for Agent traffic (Datadog intake IPs for synthetics private locations)
-    "webhooks": {...}                      // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
+    "api": {...},                          // <-- the IPs used by the Agent for non-critical functionality (querying information from API)
+    "apm": {...},                          // <-- the IPs used by the Agent to submit APM data to Datadog
+    "logs": {...},                         // <-- the IPs used by the Agent to submit logs to Datadog
+    "process": {...},                      // <-- the IPs used by the Agent to submit process data to Datadog
+    "orchestrator": {...},                 // <-- the IPs used by the Agent to submit container data to Datadog
+    "remote-configuration": {...},         // <-- the IPs used by the Agent to retrieve its dynamic configuration
+    "synthetics": {...},                   // <-- the source IPs used by Synthetic workers (not used by the Agent)
+    "synthetics-private-locations": {...}, // <-- the IPs used by Synthetics Private Locations workers to submit data to Datadog (not used by the Agent)
+    "webhooks": {...}                      // <-- the source IPs used by Datadog to connect to 3rd party infrastructure over HTTP (not used by the Agent)
 }
 {{< /code-block >}}
 
@@ -441,7 +441,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [2]: /database_monitoring/
 [3]: /infrastructure/livecontainers/
 [4]: /infrastructure/process/
-[5]: /infrastructure/livecontainers/#kubernetes-resources-1
+[5]: /infrastructure/containers/#kubernetes-orchestrator-explorer
 [6]: /real_user_monitoring/
 [7]: /profiler/
 [8]: /synthetics/private_locations

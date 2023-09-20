@@ -29,10 +29,6 @@ algolia:
   tags: ['service catalog']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Service Catalog is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
 ## Overview

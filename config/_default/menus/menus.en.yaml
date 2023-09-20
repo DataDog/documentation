@@ -135,47 +135,52 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 14
+  - name: Session Replay
+    identifier: getting_started_session_replay
+    url: getting_started/session_replay/
+    parent: getting_started
+    weight: 15
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1502
+    weight: 1602
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1501
+    weight: 1601
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1503
+    weight: 1603
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Database Monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: Cloud Security Management
     url: getting_started/cloud_security_management/
     parent: getting_started
-    weight: 18
+    weight: 20
   - name: Cloud SIEM
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 19
+    weight: 21
   - name: Application Security Management
     identifier: getting_started_application_security
     url: getting_started/application_security
     parent: getting_started
-    weight: 19
+    weight: 22
   - name: Application Vulnerability Management
     identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
@@ -184,11 +189,11 @@ main:
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 20
+    weight: 23
   - name: Support
     url: getting_started/support/
     parent: getting_started
-    weight: 21
+    weight: 24
   - name: Glossary
     url: glossary/
     pre: features
@@ -222,75 +227,85 @@ main:
     url: agent/basic_agent_usage/amazonlinux/
     weight: 102
     parent: basic_agent_usage
+  - name: Alma Linux
+    identifier: basic_agent_usage_alma_linux
+    url: agent/basic_agent_usage/centos/
+    weight: 103
+    parent: basic_agent_usage
   - name: Ansible
     identifier: basic_agent_usage_ansible
     url: agent/basic_agent_usage/ansible/
     parent: basic_agent_usage
-    weight: 103
+    weight: 104
   - name: CentOS
     identifier: basic_agent_usage_centos
     url: agent/basic_agent_usage/centos/
-    weight: 104
+    weight: 105
     parent: basic_agent_usage
   - name: Chef
     identifier: basic_agent_usage_chef
     url: agent/basic_agent_usage/chef/
-    weight: 105
+    weight: 106
     parent: basic_agent_usage
   - name: Debian
     identifier: basic_agent_usage_deb
     url: agent/basic_agent_usage/deb/
-    weight: 106
+    weight: 107
     parent: basic_agent_usage
   - name: Fedora
     identifier: basic_agent_usage_fedora
     url: agent/basic_agent_usage/fedora/
-    weight: 107
+    weight: 108
     parent: basic_agent_usage
   - name: Heroku
     identifier: basic_agent_usage_heroku
     url: agent/basic_agent_usage/heroku/
-    weight: 108
+    weight: 109
     parent: basic_agent_usage
   - name: Mac OS X
     identifier: basic_agent_usage_osx
     url: agent/basic_agent_usage/osx/
-    weight: 109
+    weight: 110
     parent: basic_agent_usage
   - name: Puppet
     identifier: basic_agent_usage_puppet
     url: agent/basic_agent_usage/puppet/
-    weight: 110
+    weight: 111
     parent: basic_agent_usage
   - name: Red Hat
     identifier: basic_agent_usage_redhat
     url: agent/basic_agent_usage/redhat/
-    weight: 111
+    weight: 112
+    parent: basic_agent_usage
+  - name: Rocky Linux
+    identifier: basic_agent_usage_rockylinux
+    url: agent/basic_agent_usage/centos/
+    weight: 113
     parent: basic_agent_usage
   - name: SaltStack
     identifier: basic_agent_usage_saltstack
     url: agent/basic_agent_usage/saltstack/
-    weight: 112
+    weight: 114
     parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
-    weight: 113
+    weight: 115
     parent: basic_agent_usage
   - name: Ubuntu
     identifier: basic_agent_usage_ubuntu
     url: agent/basic_agent_usage/ubuntu/
-    weight: 114
+    weight: 116
     parent: basic_agent_usage
   - name: Windows
     identifier: basic_agent_usage_windows
     url: agent/basic_agent_usage/windows/
-    weight: 115
+    weight: 117
     parent: basic_agent_usage
   - name: From Source
     identifier: basic_agent_usage_source
     url: agent/basic_agent_usage/source/
-    weight: 116
+    weight: 118
     parent: basic_agent_usage
   - name: IoT
     url: agent/iot/
@@ -799,21 +814,26 @@ main:
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_deployment_tracking
     weight: 106
+  - name: Continous Profiler
+    url: serverless/aws_lambda/profiling
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
+    weight: 107
   - name: Securing Functions
     url: /serverless/securing_functions
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_securing_functions
-    weight: 107
+    weight: 108
   - name: Troubleshooting
     url: serverless/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
-    weight: 108
+    weight: 109
   - name: Libraries & Integrations
     url: serverless/libraries_integrations
     parent: serverless_aws_lambda
     identifier: libraries_integrations
-    weight: 109
+    weight: 110
   - name: AWS Step Functions
     url: serverless/step_functions
     parent: serverless
@@ -872,11 +892,16 @@ main:
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: Tag Pipelines
+    url: cloud_cost_management/tag_pipelines
+    parent: cloud_cost_top_level
+    identifier: tag_pipelines
+    weight: 1
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 1
+    weight: 2
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1306,6 +1331,11 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_logic_actions
     weight: 102
+  - name: Save and Reuse Actions
+    url: service_management/workflows/actions_catalog/saved_actions/
+    parent: workflows_actions_catalog
+    identifier: workflows_saved_actions
+    weight: 103
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
@@ -2267,6 +2297,11 @@ main:
     parent: ci_explorer
     identifier: ci_explorer_facets
     weight: 402
+  - name: Saved Views
+    url: continuous_integration/explorer/saved_views/
+    parent: ci_explorer
+    identifier: ci_explorer_saved_views
+    weight: 402
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
@@ -2287,6 +2322,11 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_javascript
     weight: 503
+  - name: Python
+    url: continuous_integration/intelligent_test_runner/python/
+    parent: intelligent_test_runner
+    identifier: ci_itr_python
+    weight: 504
   - name: Swift
     url: continuous_integration/intelligent_test_runner/swift/
     parent: intelligent_test_runner
@@ -2748,6 +2788,11 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
+  - name: Excluding Logs
+    url: logs/error_tracking/excluding_logs
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_excluding_logs
+    weight: 605
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -2940,16 +2985,31 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 181500
+  - name: Setup
+    url: security/cloud_security_management/setup
+    parent: csm
+    identifier: csm_setup
+    weight: 1
+  - name: CSM Enterprise
+    url: security/cloud_security_management/setup/csm_enterprise
+    parent: csm_setup
+    identifier: csm_setup_enterprise
+    weight: 10000
+  - name: CSM Pro
+    url: security/cloud_security_management/setup/csm_pro
+    parent: csm_setup
+    identifier: csm_setup_pro
+    weight: 10005
+  - name: CSM Workload Security
+    url: security/cloud_security_management/setup/csm_workload_security
+    parent: csm_setup
+    identifier: csm_setup_workload_security
+    weight: 10010
   - name: Threats
     url: security/threats/
     parent: csm
     identifier: cloud_workload_security
-    weight: 1
-  - name: Setup
-    url: security/threats/setup
-    parent: cloud_workload_security
-    identifier: cws_setup
-    weight: 201
+    weight: 3
   - name: Managing Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
@@ -2980,11 +3040,6 @@ main:
     parent: csm
     identifier: cspm
     weight: 5
-  - name: Setup
-    url: security/misconfigurations/setup
-    parent: cspm
-    identifier: cspm_setup
-    weight: 101
   - name: Compliance Rules
     url: security/misconfigurations/compliance_rules
     parent: cspm
@@ -3040,6 +3095,16 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 20
+  - name: Mute Issues
+    url: security/cloud_security_management/mute_issues
+    parent: csm
+    identifier: csm_mute
+    weight: 22
+  - name: Automate Security Workflows
+    url: security/cloud_security_management/workflows
+    parent: csm
+    identifier: csm_workflow_automation
+    weight: 23
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
@@ -3321,6 +3386,11 @@ main:
     parent: synthetics_explorer
     identifier: continuous_testing_explorer_search_syntax
     weight: 603
+  - name: Saved Views
+    url: continuous_testing/explorer/saved_views/
+    parent: synthetics_explorer
+    identifier: continuous_testing_explorer_saved_views
+    weight: 604
   - name: Test Coverage
     url: synthetics/test_coverage
     parent: synthetics
@@ -4050,16 +4120,16 @@ main:
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
     weight: 407
+  - name: Create a Recommended Monitor
+    url: developers/integrations/create-an-integration-recommended-monitor
+    parent: dev_tools_integrations
+    weight: 408
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 408
+    weight: 409
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
-    parent: dev_tools_integrations
-    weight: 409
-  - name: Legacy
-    url: developers/integrations/legacy/
     parent: dev_tools_integrations
     weight: 410
   - name: Datadog Apps
@@ -4097,11 +4167,16 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
-  - name: Visual Studio Code
+  - name: VS Code
     url: developers/ide_integrations/vscode/
     parent: ide_integrations
     identifier: ide_integrations_vscode
     weight: 802
+  - name: Visual Studio
+    url: developers/ide_integrations/visual_studio/
+    parent: ide_integrations
+    identifier: ide_integrations_visual_studio
+    weight: 803
   - name: Community
     url: developers/community/
     parent: dev_tools
@@ -4912,8 +4987,7 @@ api:
         - v2
       operationids:
         - ListMonitorDowntimes
-      unstable:
-        - v2
+      unstable: []
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4926,8 +5000,7 @@ api:
         - v2
       operationids:
         - UpdateDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4940,8 +5013,7 @@ api:
         - v2
       operationids:
         - GetDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -4954,8 +5026,7 @@ api:
         - v2
       operationids:
         - CancelDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -4980,8 +5051,7 @@ api:
         - v2
       operationids:
         - CreateDowntime
-      unstable:
-        - v2
+      unstable: []
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -4994,8 +5064,7 @@ api:
         - v2
       operationids:
         - ListDowntimes
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/

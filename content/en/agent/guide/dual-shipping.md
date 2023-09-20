@@ -129,18 +129,18 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\
 
 ## Orchestrator
 
-### YAML configuration
-In `datadog.yaml`:
+### HELM configuration
+In Datadog `values.yaml`:
 ```yaml
-orchestrator_explorer:
-  [...]
-  orchestrator_additional_endpoints:
-    "https://orchestrator.datadoghq.com":
-    - apikey2
-    - apikey3
-    "https://orchestrator.datadoghq.eu":
-    - apikey4
+clusterAgent:
+...
+  datadog_cluster_yaml:
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.ddog-gov.com":
+        - apikey2 
 ```
+
 
 ### Environment variable configuration
 
@@ -362,7 +362,7 @@ and add the relevant settings to `customAgentConfig`.
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.datadoghq.com"
+        Host: "{{< region-param key=agent_http_endpoint >}}"
         Port: 443
         is_reliable: true
 ```

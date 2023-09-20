@@ -31,7 +31,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * For Python, uWSGI applications are not supported at this time.
-* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails or Hanami applications at this time.
+* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
@@ -77,14 +77,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 2 - Annotate your pods for library injection
@@ -118,16 +119,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    ...
-...
-template:
-  metadata:
-    labels:
+    # (...)
+spec:
+  template:
+    metadata:
+      labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
-    annotations:
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 3 - Tag your pods with Unified Service Tags
@@ -136,13 +138,11 @@ With [Unified Service Tags][21], you can tie Datadog telemetry together and navi
 Set Unified Service tags by using the following labels:
 
 ```yaml
-...
-    metadata:
-        labels:
-            tags.datadoghq.com/env: "<ENV>"
-            tags.datadoghq.com/service: "<SERVICE>"
-            tags.datadoghq.com/version: "<VERSION>"
-...
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
 ```
 
 **Note**: It is not necessary to set the _environment variables_ for universal service tagging (`DD_ENV`, `DD_SERVICE`, `DD_VERSION`) in the pod template spec, because the Admission Controller propagates the tag values as environment variables when injecting the library.
@@ -157,18 +157,20 @@ metadata:
     tags.datadoghq.com/env: "prod" # Unified service tag - Deployment Env tag
     tags.datadoghq.com/service: "my-service" # Unified service tag - Deployment Service tag
     tags.datadoghq.com/version: "1.1" # Unified service tag - Deployment Version tag
-...
-template:
-  metadata:
-    labels:
+  # (...)
+spec:
+  template:
+    metadata:
+      labels:
         tags.datadoghq.com/env: "prod" # Unified service tag - Pod Env tag
         tags.datadoghq.com/service: "my-service" # Unified service tag - Pod Service tag
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
-    annotations:
+      annotations:
         admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
-  containers:
-  -  ...
+    spec:
+      containers:
+        - # (...)
 ```
 
 ### Step 4 - Apply the configuration
@@ -204,6 +206,18 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 - **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
+#### Python installation issues
+
+##### Incompatible Python version
+
+The library injection mechanism for Python only supports injecting the Python library in Python v3.7+.
+
+##### `user-installed ddtrace found, aborting`
+
+- **Problem**: The `ddtrace` library is already installed on the system so the injection logic aborts injecting the library to avoid introducing a breaking change in the application.
+- **Solution**: Remove the installation of `ddtrace` if library injection is desired. Otherwise, use the installed library ([see documentation][26]) instead of library injection.
+
+
 [1]: /containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [3]: /containers/kubernetes/installation/?tab=helm
@@ -229,6 +243,7 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 [23]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[26]: /tracing/trace_collection/dd_libraries/python/
 {{% /tab %}}
 
 {{% tab "Host" %}}
@@ -246,13 +261,13 @@ When both the Agent and your services are running on a host, real or virtual, Da
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 Exit and open a new shell to use the injection library.
@@ -547,13 +562,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
-DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 By default, running the script installs support for Java, Node.js, Python, Ruby, and .NET. If you want to specify which language support is installed, also set the `DD_APM_INSTRUMENTATION_LANGUAGES` environment variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`. Use a comma-separated list to specify more than one language: 
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 ## Install only library injection
@@ -789,13 +804,13 @@ Any newly started processes are intercepted and the specified instrumentation li
 Use the `install_script_docker_injection` shell script to automatically install Docker injection support. Docker must already be installed on the host machine.
 
 ```shell
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
 ```
 
 This installs language libraries for all supported languages. To install specific languages, set the `DD_APM_INSTRUMENTATION_LANGUAGES` variable. The valid values are `java`, `js`, `python`, `ruby`, and `dotnet`:
 
 ```shell
-DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java,js bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
 ```
 
 ## Configure Docker injection

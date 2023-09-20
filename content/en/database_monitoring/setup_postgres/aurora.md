@@ -71,6 +71,8 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
+**Note:** IAM authentication is also supported. Please see [the guide][13] on how to configure this for your Aurora instance.
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -203,6 +205,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: datadog
        password: '<PASSWORD>'
+       aws:
+         instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+         region: '<REGION>'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -419,3 +424,4 @@ If you have installed and configured the integrations and Agent as described and
 [10]: https://app.datadoghq.com/databases
 [11]: /integrations/amazon_rds
 [12]: /database_monitoring/troubleshooting/?tab=postgres
+[13]: /database_monitoring/guide/managed_authentication

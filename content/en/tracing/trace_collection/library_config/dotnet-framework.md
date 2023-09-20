@@ -183,8 +183,10 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans.<br>
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,`<br>
+Also accepts entries without a specified tag name. <br>
+**Example**: `My-Header-And-Tag-Name`<br>
 Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
@@ -208,6 +210,10 @@ Added in version 1.17.0. <br>
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+**Default**: `31`
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.

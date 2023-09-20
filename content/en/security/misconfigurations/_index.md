@@ -23,6 +23,8 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Misconfigurations Explorer][2].
 
+CSM Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new findings as soon as a scan is completed, and stores a complete history of all findings for the past 15 months so they are available in case of an investigation or audit.
+
 {{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
@@ -76,4 +78,4 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 [10]: /security/misconfigurations/findings
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[13]: /security/misconfigurations/findings#mute-findings
+[13]: /security/cloud_security_management/mute_issues

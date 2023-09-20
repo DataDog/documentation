@@ -27,6 +27,8 @@ Supported Python interpreters:
 Supported test frameworks:
 * pytest >= 3.0.0
   * pytest < 5 when using Python 2
+* pytest-benchmark >= 3.1.0
+  * Python >= 3.7
 
 ## Configuring reporting method
 
@@ -59,6 +61,7 @@ For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
+### Using pytest
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="shell" >}}
@@ -70,6 +73,20 @@ If you also want to enable the rest of the APM integrations to get more informat
 {{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
+
+### Using pytest-benchmark
+
+To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest`, and Datadog detects metrics from `pytest-benchmark` automatically:
+
+```python
+def square_value(value):
+    return value * value
+
+
+def test_square_value(benchmark):
+    result = benchmark(square_value, 5)
+    assert result == 25
+```
 
 ### Adding custom tags to tests
 
@@ -127,6 +144,8 @@ The following environment variable can be used to configure the location of the 
 **Default**: `http://localhost:8126`
 
 All other [Datadog Tracer configuration][6] options can also be used.
+
+## Collecting Git metadata
 
 {{% ci-git-metadata %}}
 

@@ -32,17 +32,9 @@ Pour obtenir la liste complète des frameworks et versions Python pris en charge
 
 ## Installation et démarrage
 
-### Suivre la documentation dans l'application (conseillé)
+### Configurer l'Agent Datadog pour APM
 
-Suivez les [instructions de démarrage rapide][2] fournies dans l'application Datadog pour profiter d'une expérience optimale, et notamment :
-
-- Obtenir des instructions détaillées en fonction de la configuration de votre déploiement (hosts, Docker, Kubernetes ou Amazon ECS) ;
-- Définir les tags `service`, `env` et `version` de façon dynamique ;
-- Activer le profileur en continu, l'ingestion de 100 % des traces et l'injection des ID de trace dans les logs durant la configuration.
-
-### Configurer l'Agent Datadog pour l'APM
-
-Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true`, et écoute les données de tracing sur `http://localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
+Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des traces à partir de votre application nouvellement instrumentée. Par défaut, l'Agent Datadog est activé dans votre fichier `datadog.yaml` sous `apm_config` avec `enabled: true`, et écoute les données de tracing sur `http://localhost:8126`. Pour les environnements conteneurisés, suivez les liens ci-dessous afin d'activer la collecte de traces au sein de l'Agent Datadog.
 
 {{< tabs >}}
 {{% tab "Conteneurs" %}}
@@ -88,7 +80,7 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
    DD_DOGSTATSD_URL=udp://custom-hostname:1234
    DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
    ```
-   Pour les statistiques, la connexion peut également être configurée dans le code :
+   La connexion pour les statistiques peut également être configurée dans le code :
 
    ```python
    from ddtrace import tracer
@@ -113,7 +105,7 @@ Installez et configurez l'Agent Datadog de façon à ce qu'il reçoive des trac
 {{% /tab %}}
 {{% tab "AWS Lambda" %}}
 
-Pour configurer l'APM Datadog dans AWS Lambda, consultez la documentation dédiée au [tracing de fonctions sans serveur][1].
+Pour configurer la solution APM Datadog dans AWS Lambda, consultez la documentation dédiée au [tracing de fonctions sans serveur][1].
 
 
 [1]: /fr/tracing/serverless_functions/
@@ -132,11 +124,21 @@ Pour les autres environnements, consultez la documentation relative aux [intégr
 {{% /tab %}}
 {{< /tabs >}}
 
+### Choisir votre méthode d'instrumentation
+
+Une fois votre Agent Datadog déployé ou installé et configuré, la prochaine étape consiste à instrumenter votre application. Il existe différentes méthodes en fonction de l'infrastructure sur laquelle votre application s'exécute, du langage dans lequel elle est écrite et du niveau de configuration requis.
+
+Consultez les pages suivantes pour découvrir les scénarios de déploiement et les langages pris en charge :
+
+- [Injecter la bibliothèque d'instrumentation localement][11] (au niveau de l'Agent) ;
+- [Injecter la bibliothèque d'instrumentation depuis l'interface Datadog][12] (version bêta) ; ou
+- Ajouter la bibliothèque de tracing directement dans l'application, tel que décrit dans la section [Installer le traceur](#installer-le-traceur). Pour en savoir plus, consultez les [informations de compatibilité][1].
+
 ### Instrumenter votre application
 
-<div class="alert alert-info">Si vous recueillez des traces à partir d'une application Kubernetes, plutôt que de suivre les instructions ci-dessous, vous pouvez injecter la bibliothèque de tracing dans votre application à l'aide du contrôleur d'admission de l'Agent de cluster. Consultez <a href="/tracing/trace_collection/library_injection_local">Injection de bibliothèques à l'aide du contrôleur d'admission</a> pour obtenir la marche à suivre.</div>
+<div class="alert alert-info">Si vous recueillez des traces à partir d'une application Kubernetes, plutôt que de suivre les instructions ci-dessous, vous pouvez injecter la bibliothèque de tracing dans votre application en utilisant le contrôleur d'admission de l'Agent de cluster. Consultez la section <a href="/tracing/trace_collection/library_injection_local">Injection de bibliothèques à l'aide du contrôleur d'admission</a> pour connaître la marche à suivre.</div>
 
-Une fois l'Agent installé, pour commencer le tracing d'applications écrites en Python, installez la bibliothèque de tracing Datadog `ddtrace` avec pip :
+Une fois l'Agent installé, pour commencer le tracing d'applications écrites en Python, installez la bibliothèque de tracing Datadog, `ddtrace`, avec pip :
 
 ```python
 pip install ddtrace
@@ -160,11 +162,11 @@ Une fois le traceur configuré et exécuté avec votre application, utilisez la 
 
 ## Configuration
 
-Au besoin, configurez la bibliothèque de tracing pour envoyer des données de télémétrie relatives aux performances de l'application, notamment en configurant le tagging de service unifié. Consultez la section [Configuration de la bibliothèque][9] pour en savoir plus.
+Au besoin, configurez la bibliothèque de tracing pour envoyer des données de télémétrie relatives aux performances de l'application, notamment en configurant le tagging de service unifié. Consultez la section [Configuration de la bibliothèque][3] pour en savoir plus.
 
-### Mise à niveau vers la v1
+### Passage à la v1
 
-Si vous souhaitez passer à la v1 de ddtrace, consultez le [guide de mise à niveau][4] et les [notes de version][5] dans la documentation de la bibliothèque pour obtenir des instructions détaillées.
+Si vous souhaitez passer à la v1 de ddtrace, consultez le [guide de mise à niveau][4] et les [notes de version][5] dans la documentation de la bibliothèque pour en savoir plus.
 
 ## Pour aller plus loin
 
@@ -175,3 +177,5 @@ Si vous souhaitez passer à la v1 de ddtrace, consultez le [guide de mise à niv
 [3]: /fr/tracing/trace_collection/library_config/python/
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[11]: /fr/tracing/trace_collection/library_injection_local/
+[12]: /fr/tracing/trace_collection/library_injection_remote/

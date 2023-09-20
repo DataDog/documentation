@@ -33,7 +33,7 @@ After searching, select one or more monitors to update using the checkboxes next
 | Mute       | [Mute][3] the selected monitors for `1h`, `4h`, `12h`, `1d`, `1w`, or `Forever`. |
 | Unmute     | If the selected monitors are muted, unmute them.                                 |
 | Resolve    | [Resolve][4] the alert for the selected monitors.                                |
-| Delete     | Permanently delete the selected monitors.                                        |
+| Delete     | Delete the selected monitors.                                                    |
 | Edit Tags  | Edit the monitor tags for the selected monitors.                                 |
 | Edit Teams | Edit the [teams][5] for the selected monitors.                                  |
 

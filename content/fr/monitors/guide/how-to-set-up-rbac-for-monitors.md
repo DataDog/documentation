@@ -32,7 +32,7 @@ Pour en savoir plus sur les rôles par défaut et les rôles personnalisés, et 
 1. Créez un monitor ou modifiez-en un pour accéder à la page de modification.
 2. Spécifiez en bas de la page les rôles qui pourront, en plus du créateur, modifier le monitor.
 
-{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="Monitor avec une restriction RBAC"  >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="Monitor avec une restriction RBAC" >}}
 
 Pour en savoir plus, consultez la documentation relative aux [autorisations des monitors][1].
 
