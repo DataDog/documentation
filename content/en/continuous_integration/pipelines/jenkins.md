@@ -674,7 +674,7 @@ If the Git information is not detected automatically, you can set the following 
 **Example**: `2021-08-16T15:41:45.000Z`
 
 If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
-If you don't have `.git` folder, populate commit message, author name, email and commit date as well for them to work properly.
+If you don't have `.git` folder, you have to populate commit message, author name and email as well for them to show up in Datadog.
 
 An example of usage:
 
