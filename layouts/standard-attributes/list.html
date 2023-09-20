@@ -1,8 +1,15 @@
+{{ define "partials/throw-error" }}
+  {{/*  Verify platorm sources (i.e. android, ios, roku, browser and flutter ) are accompanied by RUM source in product_source list */}}	
+  {{ if not (in .ctx_product_source "icon-rum") }}	
+  {{ errorf "Sources 'android', 'flutter', 'roku', 'browser' and 'ios' must be accompanied by 'icon-rum' source. Fix 'product_source' frontmatter in %q" .ctx_file_path }}	
+  {{ end }}	
+{{ end }}
+
 {{ define "main" }}
   {{ $ctx := . }}
   <div class="row">
     <div class="col-12 order-1">
-        <h1 id="pagetitle" class="newnew">{{ .Title }}</h1>
+        <h1 id="pagetitle">{{ .Title }}</h1>
         <p>{{ .Params.content | safeHTML }}</p>
 
     </div>
@@ -11,7 +18,7 @@
     </div>
   </div>
   {{ partial "translate_status_banner/translate_status_banner.html" . }} 
-
+  
   {{ $products := slice }}
   <div 
   class="standard-attributes-main row w-100"
@@ -84,7 +91,7 @@
           x-cloak x-show="shouldShowAttribute('{{ $attribute_info }}')" 
           x-transition.opacity.duration.250ms
           >
-            <td class="d-flex">
+            <td class="d-flex align-items-center">
               {{$ctx_product_source := .product_source}}
               {{ range $idx, $el := .product_source }}
                 {{ if in . "icon-"}}
@@ -92,13 +99,9 @@
                   <div class="{{ if $idx }}ms-1{{ end }}">
                     {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" $product)}}
                   </div>
-                {{ else if or (eq . "android") (eq . "ios") (eq . "flutter") (eq . "roku")}}	
-                  
-                  {{/*  Verify platorm sources (i.e. android, ios, roku, and flutter ) are accompanied by RUM source in product_source list */}}	
-                  {{ if not (in $ctx_product_source "icon-rum") }}	
-                    {{ errorf "Sources 'android', 'flutter', 'roku', and 'ios' must be accompanied by 'icon-rum' source. fix 'product_source' frontmatter %q" . }}	
-                    {{ errorf "in %q" $ctx.File.Path }}	
-                  {{ end }}	
+                {{ else if in (slice "android" "ios" "flutter" "roku") . }}	
+                  {{/*  Local partial */}}	
+                  {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
 
                   {{/*  Get integration logos for android, ios, roku, and flutter  */}}
                   {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") }}	
@@ -106,7 +109,10 @@
                     <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}"/>	
                   {{ end }}	
                 {{ else if eq . "browser" }}
-                  <div class="ms-1">
+                  {{/*  Local partial */}}	
+                  {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
+
+                  <div class="{{ if $idx }}ms-1{{ end }}">
                     {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" .)}}
                   </div>
                 {{ end }}
@@ -134,22 +140,14 @@
             :class="(filterValue === 'all' || !filterValue) && 'active'"
             data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
         {{ end }}
-        {{ range $products |  sort }}
-            {{ $product := ""}}
-
-            {{ if (in . "icon-log") }}
-              {{ $product = (printf "%ss" (substr . 5))}}
-            {{ else if (in . "icon-") }}
-              {{ $product = (substr . 5) }}
-            {{ else }}
-              {{ $product = . }}
-            {{ end }}
-
+        {{ $sortedProduct := (split (replaceRE `icon-` "" (delimit $products " ")) " ") | sort }}
+        {{ range $sortedProduct }}
+            {{ $product := cond (eq . "log") (printf "%ss" .) .}}
             <button 
             @click="filterValue = '{{ $product }}'; pushState()"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             :class="($el.dataset.filter === filterValue) && 'active'"
-            data-filter="{{ $product }}">{{ cond (in . "icon-") ($product | upper) (printf "RUM %s" (. | upper))}}</button>
+            data-filter="{{ $product }}">{{ cond (in (slice "android" "ios" "flutter" "roku" "browser") . ) (printf "RUM %s" (. | upper)) ($product | upper)}}</button>
         {{ end }}
       </div>
       {{/*  SEARCH  */}}
