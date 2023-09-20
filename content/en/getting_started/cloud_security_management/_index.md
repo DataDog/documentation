@@ -34,10 +34,12 @@ This guide walks you through best practices for getting your team up and running
 2. Enable CSM for for your cloud resources and infrastructure:
     - **CSM Threats**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
     - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
+    - **CSM Infrastructure Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
-6. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
+6. Review vulnerabilities on the [container images][25] page.
+7. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
 ## Phase 2: Customization
 
@@ -75,3 +77,7 @@ This guide walks you through best practices for getting your team up and running
 [20]: /security/threats/agent_expressions
 [21]: /security/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
+[23]: /security/infrastructure_vulnerabilities/setup?tab=kubernetes#setup-for-container-image-scanning
+[24]: /security/infrastructure_vulnerabilities/setup?tab=kubernetes#setup-for-host-vulnerability-scanning
+[25]: https://app.datadoghq.com/containers/images
+
