@@ -69,7 +69,7 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 | mail                             | emails[type eq "work"].value |
 | displayName                      | name.formatted               |
 
-{{< img src="/account_management/scim/ad-users.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
+   {{< img src="/account_management/scim/ad-users.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
 7. After you set your mappings, click **Save**.
 
