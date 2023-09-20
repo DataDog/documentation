@@ -90,7 +90,7 @@ If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI di
 
 Prerequisites:
 
-- UnZip
+- unzip
 - Node.js 14 or later
 
 Configure the following environment variables:
