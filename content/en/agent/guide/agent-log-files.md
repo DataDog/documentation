@@ -13,6 +13,8 @@ further_reading:
 - link: "/agent/guide/agent-commands/"
   tag: "FAQ"
   text: "Agent commands"
+algolia:
+  tags: ['agent log files']
 ---
 
 The Datadog Agent does a logs rollover every 10MB by default. When a rollover occurs, one backup (`agent.log.1`) is kept. If a previous backup exists, it is overwritten during the rollover. To set the maximum size of one log file and the maximum number of backup files to keep, use `log_file_max_size`(default: 10485760 bytes) and `log_file_max_rolls`(default: 1) in the [Agent main configuration file][1].

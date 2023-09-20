@@ -32,7 +32,7 @@ You can create workflows or edit existing workflows from the Workflow Automation
 
 To create a workflow:
 1. Click **New workflow**.
-1. Enter a name and description for the workflow
+1. Enter a name and description for the workflow.
 1. Select a trigger for the workflow.
 1. Click **Create**.
 1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
@@ -141,7 +141,9 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 {{ Steps.Get_pull_request_status.state }}
 ```
 
-If you're not sure what variable you're looking for, Datadog suggests existing steps as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
+If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
+
+{{< img src="service_management/workflows/step-outputs.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
 ### Input parameters
 
