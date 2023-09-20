@@ -23,7 +23,7 @@ Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-andr
 
 ## Setup
 
-1. Add the Gradle dependency by declaring the library as a dependency in the module-level `build.gradle` file. Replace `x.x.x` with the latest version of [dd-sdk-android][2].
+1. Add the Gradle dependency by declaring the library as a dependency in the module-level `build.gradle` file. Make sure to replace `x.x.x` in the following example with the latest version of [dd-sdk-android][2].
 
     ```groovy
     dependencies {
