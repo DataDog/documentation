@@ -88,12 +88,15 @@
               {{$ctx_product_source := .product_source}}
               {{ range $idx, $el := .product_source }}
                 {{ if in . "icon-"}}
-                  <i class="{{ . }} {{ if $idx }}ms-1{{ end }}" title="{{ substr . 5 }}" style="font-size:18px;color:#7c3eb9;vertical-align:middle"></i> 
+                  {{ $product := (substr . 5) }}
+                  <div class="{{ if $idx }}ms-1{{ end }}">
+                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" $product)}}
+                  </div>
                 {{ else if or (eq . "android") (eq . "ios") (eq . "flutter") (eq . "roku")}}	
                   
                   {{/*  Verify platorm sources (i.e. android, ios, roku, and flutter ) are accompanied by RUM source in product_source list */}}	
                   {{ if not (in $ctx_product_source "icon-rum") }}	
-                    {{ errorf "Sources 'android', 'flutter', 'roku', and 'ios' must be accompanied by 'icon-rum' source. fix source %q" . }}	
+                    {{ errorf "Sources 'android', 'flutter', 'roku', and 'ios' must be accompanied by 'icon-rum' source. fix 'product_source' frontmatter %q" . }}	
                     {{ errorf "in %q" $ctx.File.Path }}	
                   {{ end }}	
 
@@ -102,7 +105,10 @@
                   {{ if $int_logo }}	
                     <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}"/>	
                   {{ end }}	
-
+                {{ else if eq . "browser" }}
+                  <div class="ms-1">
+                    {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" .)}}
+                  </div>
                 {{ end }}
               {{ end }}
             </td>
