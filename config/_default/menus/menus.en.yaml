@@ -2867,6 +2867,11 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 6
+  - name: Troubleshooting
+    url: observability_pipelines/troubleshooting/
+    parent: observability_pipelines
+    identifier: observability_pipelines_troubleshooting
+    weight: 7
   - name: Architecture
     url: observability_pipelines/architecture/
     parent: observability_pipelines
