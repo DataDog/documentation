@@ -353,6 +353,25 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
 
+### Obtaining a core dump from within a docker container
+
+Obtaining a core dump in a docker container adds another layer of challenges to overcome. Here are a few tips to help you obtain a core dump:
+
+1. The docker container needs to run as a privileged container and the ulimit for core files needs to be maxed out.
+   - In case you use `docker run` add the `--privileged` and the `--ulimit core=99999999999` argument
+   - In case you use `docker compose` add the following to the container in the `docker-compose.yml`:
+```yaml
+privileged: true
+ulimits:
+  core: 99999999999
+```
+2. When running the container (and before starting the PHP application) you need to run the following commands:
+```
+ulimit -c unlimited
+echo '/tmp/core' > /proc/sys/kernel/core_pattern
+echo 1 > /proc/sys/fs/suid_dumpable
+```
+
 ### Obtaining a Valgrind trace
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
