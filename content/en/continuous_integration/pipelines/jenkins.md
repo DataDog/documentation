@@ -674,6 +674,7 @@ If the Git information is not detected automatically, you can set the following 
 **Example**: `2021-08-16T15:41:45.000Z`
 
 If you set only repository, branch and commit, the plugin will try to extract the rest of the Git information from the `.git` folder.
+If you don't have `.git` folder, populate commit message, author name, email and commit date as well for them to work properly.
 
 An example of usage:
 
@@ -684,6 +685,7 @@ pipeline {
     stage('Checkout') {
       steps {
         script {
+          // This creates the .git folder
           def gitVars = git url:'https://github.com/my-org/my-repo.git', branch:'some/feature-branch'
 
           // Setting Git information manually via environment variables.
