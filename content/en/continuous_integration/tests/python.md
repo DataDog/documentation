@@ -112,6 +112,11 @@ class MyTest(unittest.TestCase):
         assert True
 {{< /code-block >}}
 
+#### Known limitations
+
+In some cases, if your `unittest` test execution is being ran in a parallel manner, this may break the instrumentation and affect test visibility.
+It is recommended to use up to one process at a time to prevent affecting test visibility.
+
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
