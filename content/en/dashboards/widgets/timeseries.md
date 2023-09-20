@@ -1,6 +1,7 @@
 ---
 title: Timeseries Widget
 kind: documentation
+widget_type: timeseries
 description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
     - /graphing/widgets/timeseries/
@@ -51,15 +52,7 @@ For all graph types, Datadog offers various color options to differentiate multi
 | Palette     | Description                                                                                                 |
 |-------------|-------------------------------------------------------------------------------------------------------------|
 | Classic     | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat).    |
-| Categorical | Using a set of 16 colors, applies a consistent color for each series of data across all timeseries widgets. |
-| Purple      | A gradient color scheme made from purple.                                                                   |
-| Cool        | A gradient color scheme made from green and blue.                                                           |
-| Warm        | A gradient color scheme made from yellow and orange.                                                        |
-| Orange      | A gradient color scheme made from orange.                                                                   |
-| Gray        | A gradient color scheme made from gray.                                                                     |
-| Red         | A gradient color scheme made from red.                                                                      |
-| Green       | A gradient color scheme made from green.                                                                    |
-| Blue        | A gradient color scheme made from blue.                                                                     |
+| Consistent | Using a set of 16 colors, applies a consistent color for each series of data across all widgets for each tag group. |
 
 For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON. For more information, see the guide for [Selecting the right colors for your graphs][6].
 
@@ -73,7 +66,7 @@ Each query or formula, along with any [filtering tags][7], can be aliased. The a
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service.
 
-With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
+With the event overlay, you can see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
 - RUM error rates with deployment events overlaid
 - Correlating CPU usage with events related to provisioning extra servers
 - Correlating egress traffic with suspicious login activity
@@ -101,7 +94,7 @@ To add markers for additional data sets, click **Add Marker** in the **Markers**
 
 ### Y-Axis controls
 
-Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis in order to:
+Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis to:
 
 * Clip the y-axis to specific ranges.
 * Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
@@ -143,9 +136,7 @@ For more information, see [Explore your data in full-screen graph mode][12].
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][13] for additional reference.
-
-The dedicated [widget JSON schema definition][14] for the timeseries widget is:
+This widget can be used with the **[Dashboards API][13]**. See the following table for the [widget JSON schema definition][14]:
 
 {{< dashboards-widgets-api >}}
 
@@ -165,5 +156,5 @@ The dedicated [widget JSON schema definition][14] for the timeseries widget is:
 [10]: /dashboards/guide/context-links/
 [11]: /dashboards/widgets/#full-screen
 [12]: https://www.datadoghq.com/blog/full-screen-graphs
-[13]: /api/v1/dashboards/
+[13]: /api/latest/dashboards/
 [14]: /dashboards/graphing_json/widget_json/
