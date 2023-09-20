@@ -1,6 +1,8 @@
 ---
 title: User Provisioning with SCIM
 kind: documentation
+algolia:
+  tags: ["scim", "identity provider", "IdP"]
 ---
 
 ## Overview
@@ -61,13 +63,13 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 4. Click the **Save** icon
 5. Under **Target Object actions**, ensure Create, Update, and Delete actions are selected
 6. Review the user attributes that are synchronized from Azure AD to Datadog in the attribute mapping section. Set the following mappings:
-| Azure Active Directory Attribute | Datadog Attribute            |
-|----------------------------------|------------------------------|
-| userPrincipalName                | userName                     |
-| Not([IsSoftDeleted])             | active                       |
-| jobTitle                         | title                        |
-| mail                             | emails[type eq "work"].value |
-| displayName                      | name.formatted               |
+| Azure Active Directory Attribute | Datadog Attribute              |
+|----------------------------------|--------------------------------|
+| `userPrincipalName`              | `userName`                     |
+| `Not([IsSoftDeleted])`           | `active`                       |
+| `jobTitle`                       | `title`                        |
+| `mail`                           | `emails[type eq "work"].value` |
+| `displayName`                    | `name.formatted`               |
 
    {{< img src="/account_management/scim/ad-users.png" alt="Attribute mapping configuration, Provision Azure Active Directory Users">}}
 
