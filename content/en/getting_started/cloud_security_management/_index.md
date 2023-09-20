@@ -39,7 +39,7 @@ This guide walks you through best practices for getting your team up and running
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
-6. Review and remediate [identity risks][28] on the [Identity Risks][29] page
+6. Review and remediate [identity risks][28] on the [Identity Risks][29] page.
 7. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
 8. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
