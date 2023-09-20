@@ -6,7 +6,7 @@ In these cases, Datadog recommends limiting the number of instances per Agent to
 init_config:
 instances:
   - dbm: true
-    host: example-service.example-host.com
+    host: example-service-primary.example-host.com
     port: 3306
     username: datadog
     password: '<PASSWORD>'
@@ -85,11 +85,11 @@ instances:
     port: 5000
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: products-primary
+    reported_hostname: example-service-primary
   - dbm: true
     host: localhost
     port: 5001
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: products-replica-1
+    reported_hostname: example-service-replica-1
 ```
