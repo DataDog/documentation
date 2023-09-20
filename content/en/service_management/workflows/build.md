@@ -32,7 +32,7 @@ You can create workflows or edit existing workflows from the Workflow Automation
 
 To create a workflow:
 1. Click **New workflow**.
-1. Enter a name and description for the workflow
+1. Enter a name and description for the workflow.
 1. Select a trigger for the workflow.
 1. Click **Create**.
 1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
