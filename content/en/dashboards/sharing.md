@@ -43,7 +43,7 @@ To share an entire dashboard publicly, generate a URL:
 
  To authorize one or more specific email addresses to view a dashboard page:
 
-1. On the dashboard's page, click the export icon in the upper right.
+1. On the dashboard's page, click **Share** in the upper right.
 2. Select **Configure public URL**, which opens a *Sharing: On* pop-up modal.
 3. Select **Only specified people** for indicating who can access this dashboard.
 4. Input the email addresses for people you would like to share your dashboard with.
