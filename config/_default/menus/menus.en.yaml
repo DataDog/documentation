@@ -795,7 +795,7 @@ main:
     parent: serverless_aws_lambda
     weight: 102
   - name: Distributed Tracing
-    url: serverless/distributed_tracing
+    url: serverless/aws_lambda/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless_aws_lambda
     weight: 103
@@ -815,17 +815,17 @@ main:
     identifier: serverless_aws_lambda_continuous_profiler
     weight: 106
   - name: Securing Functions
-    url: /serverless/securing_functions
+    url: /serverless/aws_lambda/securing_functions
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_securing_functions
     weight: 107
   - name: Deployment Tracking
-    url: serverless/deployment_tracking
+    url: serverless/aws_lambda/deployment_tracking
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_deployment_tracking
     weight: 108
   - name: Troubleshooting
-    url: serverless/troubleshooting
+    url: serverless/aws_lambda/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
     weight: 109

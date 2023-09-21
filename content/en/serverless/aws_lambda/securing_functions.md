@@ -8,6 +8,8 @@ further_reading:
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Works"
+aliases:
+  - /serverless/securing_functions
 ---
 
 [Datadog Application Security Management (ASM)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.

@@ -7,6 +7,7 @@ aliases:
   - /serverless/troubleshooting/serverless_apm_metrics/
   - /serverless/distributed_tracing/serverless_trace_merging
   - /serverless/distributed_tracing/serverless_trace_propagation
+  - /serverless/distributed_tracing
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"
