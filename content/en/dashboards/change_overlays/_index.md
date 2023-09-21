@@ -32,32 +32,23 @@ As teams iterate, deploy code, and continually make changes to their application
 
 {{< img src="dashboards/change_overlays/change_overlays.mp4" alt="Change overlays on graphs in a Dashboard" video="true" style="width:75%;">}}
 
-View the moment a change occurrs in the context of your Datadog observability data to pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays supports [APM service deployments][1].
+View the moment a change occurs in the context of your Datadog observability data to pinpoint issues to specific releases, correlate changes with metrics, and troubleshoot faster. Change overlays supports [APM service deployments][1].
 
 ## Overlay changes on graphs
 
 To get started, click **Show Overlays** in the upper right corner of your dashboard. 
 
-{{< img src="dashboards/change_overlays/overlays_button_dashboard.png" alt="Overlays button on dashboards" style="width:75%;">}}
+{{< img src="dashboards/change_overlays/show_overlays_button.png" alt="Overlays button on dashboard header" style="width:100%;">}}
 
 Overlays automatically appear on timeseries graphs filtered with the `service` tag for services configured with `version` tags. To enable deployments in your APM services, [add version tags to your configuration][1]. 
 
 Click on any event overlay to open a side panel with more information and [analyze the impact of your change](#analyze-the-impact-of-your-change).
 
-
 ### Show faulty deploys
-
 Use the toggle in the overlays panel to only show [faulty deployments][2] that could be impacting your metrics.
-
-{{< img src="dashboards/change_overlays/faulty_deployments_toggle.png" alt="Faulty Deployments toggle" style="width:75%;">}}
-
 
 ### Override automatic detection
 Override the automatic service detection by using the search bar to find the service of interest. 
-
-{{< img src="dashboards/change_overlays/service_selector.png" alt="Service selector override" style="width:75%;">}}
-
-
 
 ## Analyze the impact of your change
 Click on any overlay on your graph to open a change analysis page, allowing you to understand the status and impact of you change.
