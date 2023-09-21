@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-[Next.js][1] is a JavaScript framework that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend and backend applications for browser-related metrics that you give insight into performance and user behavior.
+[Next.js][1] is a JavaScript framework created by [Vercel][8] that is used to create React.js web pages and Node.js APIs. You can integrate Next.js with RUM to monitor your frontend and backend applications for browser-related metrics that you give insight into performance and user behavior.
 
 ## Setup
 
@@ -238,3 +238,4 @@ To start backend monitoring of your Next.js applications:
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
 [6]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#setup-rum
 [7]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[8]: https://vercel.com

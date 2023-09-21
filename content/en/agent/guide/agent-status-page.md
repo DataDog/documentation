@@ -11,6 +11,8 @@ further_reading:
 - link: "/agent/guide/agent-commands/"
   tag: "Guide"
   text: "Agent Commands"
+algolia:
+  tags: ['status page']
 ---
 
 The Agent v6 status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.

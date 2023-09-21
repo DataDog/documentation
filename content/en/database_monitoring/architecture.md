@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The steps required for setting up Database Monitoring in Datadog vary based on the type of database you're using (Postgres, MySQL, SQL Server), and the host provider (self-hosted, AWS, Google Cloud SQL, or Azure). No matter which database or host provider you use, to be able to use Database Monitoring for your databases, you need the following:
+The steps required for setting up Database Monitoring in Datadog vary based on the type of database you're using (Postgres, MySQL, SQL Server, Oracle), and the host provider (self-hosted, AWS, Google Cloud SQL, Azure, or Oracle). To use Database Monitoring for any database on any host provider, you need the following:
 
 * [A Datadog Agent][1]
 * Host for your Datadog Agent
@@ -43,17 +43,16 @@ In a self-hosted setup, the Datadog Agent collects system metrics from the opera
 * [System metrics collected on MySQL][3]
 * [System metrics collected on SQL Server][4]
 
-
 For self-hosted setups, you install the Agent directly onto the database host so that you have full visibility into the health of your system running the database process.
 
 You grant the Agent read-only access to your database, and configure the integration. The Agent must log in as a user so it can run read-only queries on your database.
 
 Instructions for setting up Database Monitoring with a self-hosted provider:
 
-* [Postgres][5]
 * [MySQL][6]
+* [Oracle][16]
+* [Postgres][5]
 * [SQL Server][7]
-
 
 ### Cloud-managed databases
 
@@ -77,15 +76,11 @@ The [Cluster Agent][14] automatically distributes the database instances across 
 
 If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of database instances --- the Cluster Agent spreads the cluster checks across the different nodes.
 
-
-
 #### Aurora
 
 If you are using [Aurora][15], the Agent must be connected to the individual Aurora instance (not the cluster endpoint) because the Agent must connect directly to the host being monitored.
 
 For monitoring Aurora databases, the Agent should not connect to the database through a proxy, load balancer, connection pooler such as `pgbouncer`, or the Aurora cluster endpoint. Each Datadog Agent must have knowledge of the underlying hostname and should run on a single host for its lifetime, even in cases of failover. Otherwise, the values of metrics become incorrect.
-
-
 
 ## Further Reading
 
@@ -106,3 +101,4 @@ For monitoring Aurora databases, the Agent should not connect to the database th
 [13]: /agent/cluster_agent/clusterchecks/
 [14]: https://www.datadoghq.com/blog/datadog-cluster-agent/
 [15]: /database_monitoring/setup_postgres/aurora/
+[16]: /database_monitoring/setup_oracle/selfhosted/

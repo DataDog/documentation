@@ -184,8 +184,7 @@ instances:
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 
-
-     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
