@@ -372,6 +372,16 @@
         - action: pull-and-push-folder
           branch: main
           globs:
+          - rulesets/docker-best-practices/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/docker-best-practices/'
+            path_to_remove: 'rulesets/docker-best-practices/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
           - rulesets/python-best-practices/*.md
           options:
             dest_dir: '/continuous_integration/static_analysis/rules/python-best-practices/'

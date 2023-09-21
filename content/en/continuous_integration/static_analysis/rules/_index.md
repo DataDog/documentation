@@ -3,6 +3,70 @@ title: Static Analysis Rules
 kind: documentation
 description: View rules for multiple languages for Static Analysis.
 is_beta: true
+docker_best_practices_data:
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/absolute-workdir"
+    tag: "absolute-workdir"
+    text: "Use absolute workdir"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/alias-must-be-unique"
+    tag: "alias-must-be-unique"
+    text: "FROM aliases must be unique"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/apt-get-yes"
+    tag: "apt-get-yes"
+    text: "Always use -y with apt-get install"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/apt-pin-version"
+    tag: "apt-pin-version"
+    text: "Always pin versions in apt-get install"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/avoid-chmod-777"
+    tag: "avoid-chmod-777"
+    text: "Do not give wide permissions on files"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/avoid-commands-not-relevant"
+    tag: "avoid-commands-not-relevant"
+    text: "Avoid commands not made for containers"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/avoid-http"
+    tag: "avoid-http"
+    text: "Avoid fetching data from HTTP endpoint"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/dnf-use-y"
+    tag: "dnf-use-y"
+    text: "Always use -y with dnf install"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/expose-admin-ports"
+    tag: "expose-admin-ports"
+    text: "Do not expose sensitive ports"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/expose-valid-port"
+    tag: "expose-valid-port"
+    text: "Expose a valid UNIX port number"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/image-avoid-digest"
+    tag: "image-avoid-digest"
+    text: "Do not use the digest to pull an image"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/maintainer-deprecated"
+    tag: "maintainer-deprecated"
+    text: "The maintainer entry is deprecated"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/multiple-cmd"
+    tag: "multiple-cmd"
+    text: "Do not use multiple CMD"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/multiple-entrypoint"
+    tag: "multiple-entrypoint"
+    text: "Do not use multiple CMD"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/multiple-healthcheck"
+    tag: "multiple-healthcheck"
+    text: "Do not use multiple HEALTHCHECK"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/no-root-user"
+    tag: "no-root-user"
+    text: "Last user should not be root"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/pip-no-cache"
+    tag: "pip-no-cache"
+    text: "Do not use cache when installing packages"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/pip-pin-versions"
+    tag: "pip-pin-versions"
+    text: "Always pin versions with pip"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/tag-image-version"
+    tag: "tag-image-version"
+    text: "Always tag the version of an image"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/yum-use-y"
+    tag: "yum-use-y"
+    text: "Always use -y with yum install"
+  - link: "/continuous_integration/static_analysis/rules/docker-best-practices/zypper-use-y"
+    tag: "zypper-use-y"
+    text: "Always use -y with zypper install"
 python_best_practices_data:
   - link: "/continuous_integration/static_analysis/rules/python-best-practices/ambiguous-class-name"
     tag: "ambiguous-class-name"
@@ -415,6 +479,14 @@ further_reading:
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
 ## Rules
+
+### Follow best practices with using Docker
+
+**Ruleset ID:** `docker-best-practices`
+
+{{< sa-rule-list "docker_best_practices_data" >}}
+
+<br>
 
 ### Follow best practices for writing Python code
 
