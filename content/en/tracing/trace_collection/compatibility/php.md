@@ -153,7 +153,7 @@ To request support for additional datastores, contact our awesome [support team]
 
 | Module                                                    | Versions              | Support Type    |
 |:----------------------------------------------------------|:----------------------|:----------------|
-| [php-amqplib](https://github.com/php-amqplib/php-amqplib) | 2.x, 3.x              | PHP 7.1+        |
+| [php-amqplib][10] | 2.x, 3.x              | PHP 7.1+        |
 | Curl                                                      | *(Any Supported PHP)* | Fully Supported |
 | Guzzle                                                    | 5.x, 6.x, 7.x         | Fully Supported |
 
@@ -187,3 +187,4 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
 [9]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
+[10]: https://github.com/php-amqplib/php-amqplib
