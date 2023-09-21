@@ -141,7 +141,7 @@ RumUserActionDetector(
 
 For most Button types, the detector looks for a `Text` widget child, which it uses for the description of the action. In other cases it looks for a `Semantics` object child, or an `Icon` with its `Icon.semanticsLabel` property set.
 
-Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which will use the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
+Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which uses the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
 
 ```dart
 Container(
