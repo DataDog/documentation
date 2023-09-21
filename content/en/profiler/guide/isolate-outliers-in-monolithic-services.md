@@ -35,7 +35,7 @@ The yellow peaks show that the `GET /store_history` endpoint has some intermitte
 
 {{< img src="profiler/guide-monolithic-outliers/3-outliers-monolith-cpu-avg-time-per-call.png" alt="" style="width:100%;" >}}
 
-Now you can see that there is an intermittent spike in CPU utilization _for each call_ to `GET /store_history`, rather than the increase being because of more calls.
+Now you can see that there is an intermittent spike in CPU utilization where _each call_ to `GET /store_history` takes on average three seconds of CPU time, rather than the increase being because of more calls.
 
 So, the CPU utilization spikes are not due to an increase in traffic but rather an increase in CPU usage per request. 
 
@@ -61,7 +61,7 @@ The view shows two graphs, labeled `A` and `B`, each representing a time range f
 
 The comparison shows the different methods causing CPU utilization on the right side (timeframe `B` during the spike) that are not used at all in timeframe `A` (normal CPU). The culprit, `Product.loadAssets(int)`, is causing the spikes. 
 
-To fix the problem, optimize the method. Looking at the method code, the signature is `Product(int id, String name, boolean shouldLoadAssets)` and we do not need to load assets for the response to the `GET /store_history` endpoint. This implies that there is a bug further up the call stack that improperly instructs the `Product` constructor to load assets.
+To fix the problem, optimize the method. Looking at the method code, the signature is `Product(int id, String name, boolean shouldLoadAssets)` and you do not need to load assets for the response to the `GET /store_history` endpoint. This implies that there is a bug further up the call stack that improperly instructs the `Product` constructor to load assets.
 
 Fix that bug and verify that the spikes go away, using the timeseries graphs discussed earlier.
 
@@ -73,9 +73,9 @@ The APM `Trace operation` attribute lets you filter and group a flame graph with
 
 {{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation.png" alt="Your image description" style="width:100%;" >}}
 
-Now you can see that the `ModelTraining` operation is taking more CPU time than its primary use in the `GET /train` endpoint, so it must be used in other places. Select it to find out where else it is used. In this case, `ModelTraining` is also use by `POST /update_model`.
+Now you can see that the `ModelTraining` operation is taking more CPU time than its primary use in the `GET /train` endpoint, so it must be used in other places. Click on it to find out where else it is used. In this case, `ModelTraining` is also use by `POST /update_model`.
 
-## Isolate your own business logic
+## Isolate your own business logic (Java)
 
 Endpoint and operation isolation is available in your profiles by default, but you may want to isolate a different piece of logic. For example, if the monolith is sensitive to specific customers, you can add a custom filtering to the profiles:
 
