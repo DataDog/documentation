@@ -143,6 +143,8 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **JMS Note**: Datadog's JMS integration automatically adds and reads message object properties `x__dash__datadog__dash__trace__dash__id` and `x__dash__datadog__dash__parent__dash__id` to maintain context propagation between consumer and producer services.
 
+**Camel Note**: distributed trace propagation over Camel routes is not currently supported.
+
 Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
 ### Data store compatibility
