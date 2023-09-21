@@ -4,7 +4,10 @@ kind: documentation
 further_reading:
 - link: '/serverless/configuration/'
   tag: 'Documentation'
-  text: 'Configure Serverless monitoring'
+  text: 'Advanced configuration for AWS Lambda monitoring'
+- link: '/serverless/troubleshooting/'
+  tag: 'Documentation'
+  text: 'Troubleshoot AWS Lambda monitoring'
 - link: "/integrations/amazon_lambda/"
   tag: "Documentation"
   text: "AWS Lambda integration"
@@ -28,7 +31,27 @@ further_reading:
   text: "Understand serverless function performance with Cold Start Tracing"
 ---
 
+Datadog's Serverless Monitoring for AWS Lambda enables you to (tk).
+
 To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
+
+## How it works
+
+[DIAGRAM HERE]
+
+Serverless Monitoring for AWS Lambda makes use of the Datadog Lambda Library... (tk)
+
+## Usage
+
+Use this section to install and configure Serverless Monitoring for AWS Lambda.
+
+{{< whatsnext desc=" ">}}
+    {{< nextlink href="/serverless/installation" >}}<u>Installation</u>: Install Serverless Monitoring for AWS Lambda.{{< /nextlink >}}
+    {{< nextlink href="/serverless/enhanced_lambda_metrics" >}}<u>Lambda Metrics</u>: Submit custom metrics and learn about enhanced metrics..{{< /nextlink >}}
+    {{< nextlink href="/serverless/distributed_tracing" >}}<u>Distributed Tracing</u>: Enable APM and Distributed Tracing.{{< /nextlink >}}
+    {{< nextlink href="/serverless/aws_lambda/logs" >}}
+    <u>Log Collection</u>: Enable log collection.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Monitor your entire serverless stack in the Serverless view
 
@@ -57,6 +80,14 @@ Datadog's enhanced Lambda metrics, which appear in Datadog with the prefix `aws.
 Easily correlate serverless code, configuration, and deployment changes with metrics, traces, and logs from your functions for real-time insight into how these changes may affect the health and performance of your applications.
 
 {{< img src="serverless/serverless_deployment_tracking.jpeg" alt="Datadog Serverless Monitoring" style="width:100%;" >}}
+
+## Additional capabilities
+
+{{< whatsnext desc=" ">}}
+    {{< nextlink href="/serverless/aws_lambda/profiling" >}}<u>Continuous Profiler</u>: Enable Datadog's Continuous Profiler for your AWS Lambda functions.{{< /nextlink >}}
+    {{< nextlink href="/serverless/securing_functions" >}}<u>Secure Functions</u>: Use Application Security Management (ASM) to...{{< /nextlink >}}
+    {{< nextlink href="/serverless/deployment_tracking" >}}<u>Deployment Tracking</u>: Track deployments to see when a configuration change...{{< /nextlink >}}
+{{< /whatsnext >}}
 
 
 ## Further Reading
