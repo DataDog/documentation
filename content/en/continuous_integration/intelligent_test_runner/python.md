@@ -105,7 +105,7 @@ def test_function():
     assert True
 ```
 
-**Note**: this does not override any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`.
+**Note**: This does not override any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`.
 
 ## Further reading
 
