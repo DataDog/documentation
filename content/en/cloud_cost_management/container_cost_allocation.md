@@ -35,12 +35,15 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 | `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
 | `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
 | `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by CPU & memory requested by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU requested by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.net.amortized`, if available* |
+
 
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
 
 For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
 
-If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail. 
+If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail.
 
 ## Cost allocation
 
@@ -62,7 +65,7 @@ Based on the CPU or memory usage of each task (as reported in the CUR), Datadog 
 
 Once all tasks have been assigned a cost based on their resource reservations, some instance cost is left over. This is the cost of unreserved resources, which is called **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
 
-If you enabled AWS Split Cost Allocation, ECS tasks will have costs allocated based on their actual usage, with an additional `is_workload_idle` tag that will represent any usage that is requested but unused. For instance, a task that requests 2GB of memory but only uses 1GB will have the remaining 1GB worth of cost tagged as `is_workload_idle`. 
+If you enabled AWS Split Cost Allocation, ECS tasks will have costs allocated based on their actual usage, with an additional `is_workload_idle` tag that will represent any usage that is requested but unused. For instance, a task that requests 2GB of memory but only uses 1GB will have the remaining 1GB worth of cost tagged as `is_workload_idle`.
 
 ### ECS on Fargate
 
@@ -74,34 +77,28 @@ Any cost other than EC2, computed for instances hosting Kubernetes pods or ECS t
 
 ## Understanding the new metrics
 
-There is no specific cost associated with CPU and memory since EC2 instances are priced based on the full set of specs in a bundle. To address this, Datadog runs cost allocation twice:
+There is no specific cost associated with CPU and memory since EC2 instances are priced based on the full set of specs in a bundle. To address this, Datadog runs cost allocation several times:
   - Once based solely on CPU requests, generating `aws.cost.amortized.cpu.allocated`.
   - Once based solely on memory requests, generating `aws.cost.amortized.mem.allocated`.
+  - Once based solely on CPU and memory requests using a 60:40 split, generating `aws.cost.amortized.shared.resources.allocated`.
 
 ### Understand which metrics provide the best insight into your costs
 
 - If your workloads are CPU-constrained, only using `cpu.allocated` may work for you.
 - If your workloads are memory-constrained, exclusively using `mem.allocated` might meet your use case.
-- If you have a mix of CPU and memory-intensive workloads, or you simply want a consistent way to visualize the costs of considering all resources, you can use formulas and functions to create your own equation to combine CPU and memory costs. For example, for a 50/50 split, you can plot:
+- If you have a mix of CPU and memory-intensive workloads, or you simply want a consistent way to visualize the costs of considering all resources, using `.shared.resources.allocated` will meet your use case.
 
-$$\text"a " = \text" sum(aws.cost.amortized.cpu.allocated) by {team}"$$
-
-$$\text"b" = \text"sum(aws.cost.amortized.mem.allocated) by {team}"$$
-
-$$\text"mixed_cost" = (0.5 * \text"a") + (0.5 * \text"b")$$
-
-As long as the multipliers are positive and sum to 1, the formula will generate coherent costs.
-
-**Note**: For costs that are not related to containers on EC2, all three metrics are equal:
+**Note**: For costs that are not related to containers on EC2, all four metrics are equal:
   - `aws.cost.amortized`
   - `aws.cost.amortized.cpu.allocated`
   - `aws.cost.amortized.mem.allocated`
+  - `aws.cost.amortized.shared.resources.allocated`
 
 ## Understanding cluster idle cost
 
 Cluster idle cost is the cost of CPU or memory resources that are not reserved by any workloads.
 
-You can visualize this cost at the Kubernetes node, ECS host, or cluster level, using the `is_cluster_idle` tag. All costs allocated to scheduled pods or tasks have `is_cluster_idle: N/A`, while all compute costs not assigned to any pods or tasks have the tag `is_cluster_idle: true`.
+You can visualize this cost at the Kubernetes node, ECS host, or cluster level, using the `is_cluster_idle` tag. All costs allocated to scheduled pods or tasks have `is_cluster_idle: N/A`, while all compute costs not assigned to any pods or tasks have the tag `is_cluster_idle: true`. *Note if using `.shared.resources.allocated` metrics, use the `allocated_spend_type` tag.*
 
 Here is a sample query that displays all Kubernetes cluster cost, broken down by cluster name and cluster idle cost:
 
@@ -113,6 +110,14 @@ Here is a sample query that displays all Kubernetes cluster cost, broken down by
 
 Datadog consolidates and applies additional tags from various sources to cost metrics. Conflicts are resolved by favoring higher-specificity tags such as pod tags over lower-specificity tags such as host tags. For example, if a Kubernetes pod has the tag `service:datadog-agent` and the node it runs on has the tag `service:aws-node`, the resulting final tag shows up as `service:datadog-agent`.
 
+### Containers
+
+| Out-of-the-box tag  |  Description |
+| ---                 | ------------ |
+| `orchestrator`      | The orchestration platform associated with the item, e.g. kubernetes, ecs. |
+| `allocated_spend_type`     | The spend category category assocuated with the item, e.g. usage, cluster_idle, workload_idle. *Only available for `.shared.resources.allocated` metrics.* |
+| `allocated_resource`   | The resource category associated with the item, e.g. cpu, memory. *Only available for `.shared.resources.allocated` metrics.* |
+
 ### Kubernetes
 
 In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics:
@@ -120,8 +125,8 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | Out-of-the-box tag  |  Description |
 | ---                 | ------------ |
 | `kube_cluster_name` | The name of the Kubernetes cluster. |
-| `is_kubernetes`     | All EC2 compute costs associated with running Kubernetes nodes. |
-| `is_cluster_idle`   | The cost of unreserved CPU or memory on Kubernetes nodes. |
+| `is_kubernetes`     | All EC2 compute costs associated with running Kubernetes nodes. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.* |
+| `is_cluster_idle`   | The cost of unreserved CPU or memory on Kubernetes nodes. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
 
 ### ECS
 
@@ -132,8 +137,8 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `ecs_cluster_name`      | The name of the ECS cluster. |
 | `is_aws_ecs`            | All costs associated with running ECS. |
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
-| `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. |
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
+| `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
 
 ## Further reading
 
