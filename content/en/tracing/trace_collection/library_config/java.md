@@ -453,6 +453,16 @@ Deprecated since version 1.9.0
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Deprecated since version 1.9.0
 
+### Experimental features
+
+The following configuration variables are for features that are available for use but may change in future releases.
+
+`dd.integration.opentelemetry.experimental.enabled`
+: **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
+**Default**: `false`<br>
+Enables experimental Open Telemetry features. When you enable this setting, you can use the Open Telemetry tracing API backed by the Datadog Trace Agent.<br>
+Available since version 1.10.0
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
