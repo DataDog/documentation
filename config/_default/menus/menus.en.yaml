@@ -4132,7 +4132,7 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Datadog Apps
+  - name: Datadog Apps SDK
     url: developers/datadog_apps
     parent: dev_tools
     identifier: dev_tools_datadog_apps
