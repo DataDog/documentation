@@ -119,7 +119,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`, `apache-httpclient`, `apache-http-client` |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, `apache-httpasyncclient`    |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
-| Camel-OpenTelemetry      | 3.12.0+     | Beta            | [opentelemetry.experimental](../../otel_instrumentation/java/) |
+| Camel-OpenTelemetry      | 3.12.0+     | Beta            | [opentelemetry-1](../../otel_instrumentation/java/) |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
 | Grizzly HTTP Client      | 1.9+        | [Beta](#framework-integrations-disabled-by-default) | `grizzly-client`     |
