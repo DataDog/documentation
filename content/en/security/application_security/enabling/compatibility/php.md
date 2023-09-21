@@ -11,11 +11,12 @@ code_lang_weight: 40
 The following ASM capabilities are supported in the PHP library, for the specified tracer version:
 
 | ASM capability                   | Minimum PHP tracer version |
-| -------------------------------- | ----------------------------|
-| Threat Detection | 0.84.0     |
-| Threat Protection  | 0.86.0   |
-| Vulnerability Management for Open Source Software (OSS) | not supported |
-| Vulnerability Management for Code-level (beta) | not supported|
+| -------------------------------- |----------------------------|
+| Threat Detection | 0.84.0                     |
+| Threat Protection  | 0.86.0                     |
+| Vulnerability Management for Open Source Software (OSS) | 0.90.0              |
+| Vulnerability Management for Code-level (beta) | not supported              |
+| Automatic user activity event tracking | 0.89.0                     |
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
@@ -76,8 +77,6 @@ PHP ASM supports the following architectures:
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
-| Linux GNU arm64 (`aarch64-linux-gnu`)     | GA                    | > `0.78.0`                             |
-| Linux MUSL arm64 (`aarch64-linux-musl`)   | GA                    | > `0.78.0`                             |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
@@ -143,6 +142,19 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | PDO        | Any supported PHP| {{< X >}}| {{< X >}} |
 | PHPRedis        | 3, 4, 5 |   {{< X >}}    | {{< X >}} |
 | Predis        | 1.1 | {{< X >}} |   {{< X >}}    |
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework | Minimum Framework Version |
+|-----------|---------------------------|
+| Laravel   | 4.2                       |
+| Symfony   | 3.3                       |
+| Wordpress | 4.8                       |
 
 [1]: /tracing/trace_collection/compatibility/php/
 [2]: /agent/remote_config/#enabling-remote-configuration

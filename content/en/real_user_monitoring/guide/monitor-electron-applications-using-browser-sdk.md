@@ -17,7 +17,7 @@ further_reading:
 
 [Electron][1] is an open source framework that can be used to build cross-platform macOS and Windows desktop applications.
 
-You can install and configure the Datadog Browser SDK to start monitoring applications built using Electron JS.
+You can install and configure the Datadog Browser SDK to start monitoring applications built using Electron.
 
 **Note**: The Browser SDK only supports monitoring the *renderer processes* of an application. It does not initialize or monitor anything installed on the *main process*. For more information, see Electron's documentation on its [renderer process][3].
 

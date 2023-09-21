@@ -7,12 +7,14 @@ aliases:
   - /security_monitoring/default_rules/
   - /cloud_siem/default_rules/
   - /security_platform/default_rules/
+  - /security/default_rules/aws-rds-enabled-encryption
+  - /security/default_rules/cis-aws-1.3.0-1.14
 disable_sidebar: true
 cascade:
-    algolia:
-        rank: 11
-        category: Documentation
-        subcategory: Security Detection Rules
+  algolia:
+    rank: 11
+    category: Documentation
+    subcategory: Security Detection Rules
 ---
 
 Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration. For more information, see the Detection Rules documentation.

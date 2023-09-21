@@ -216,7 +216,7 @@ Having network-related specifics from your test, in addition to backend, infrast
 
 #### How?
 
-After enabling APM on your application's endpoint, you can access APM traces in the [Synthetic Monitoring homepage][18]. 
+After enabling APM on your application's endpoint, you can access APM traces in the [Synthetic Monitoring & Continuous Testing page][18]. 
 
 For more information, see [Connect Synthetic Tests and Traces][19].
 

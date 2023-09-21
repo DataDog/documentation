@@ -44,9 +44,11 @@ title: ウィジェット
 {{< /whatsnext >}}
 
 ### グループ
-{{< whatsnext desc="グループの下にウィジェットを表示します。 ">}}
+{{< whatsnext desc="グループの下にウィジェットを表示: ">}}
     {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/placeholder_light_large.png">}} グループ{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} グループ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} パワーパック{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アノテーションと埋め込み

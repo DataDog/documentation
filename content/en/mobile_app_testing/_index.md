@@ -47,7 +47,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Continuous Testing Explorer][6]. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="mobile_app_testing/explorer_mobile_test_runs.png" alt="Mobile App Test Runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 
 ## Further reading
 

@@ -1,9 +1,10 @@
 ---
 title: Iframe Widget
 kind: documentation
+widget_type: iframe
 description: "Include an Iframe in your Datadog dashboards."
 aliases:
-    - /graphing/widgets/iframe/
+- /graphing/widgets/iframe/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -20,9 +21,7 @@ Enter the URL of the page you want to display inside the iframe. If you do not u
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
-
-The dedicated [widget JSON schema definition][2] for the iframe widget is:
+This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
 
 {{< dashboards-widgets-api >}}
 
@@ -30,5 +29,5 @@ The dedicated [widget JSON schema definition][2] for the iframe widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/dashboards/
+[1]: /api/latest/dashboards/
 [2]: /dashboards/graphing_json/widget_json/
