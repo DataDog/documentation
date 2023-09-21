@@ -26,10 +26,10 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 | Java versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
 | 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
-| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
 | 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#levels-of-support)               | Latest         |
-| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
 | 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support)         | v0             |
+| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
+| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
 
 Datadog does not officially support any early-access versions of Java.
 
@@ -119,7 +119,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`, `apache-httpclient`, `apache-http-client` |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, `apache-httpasyncclient`    |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
-| Camel-OpenTelemetry      | 3.12.0+     | Beta            | [opentelemetry-1](../../otel_instrumentation/java/) |
+| Camel-OpenTelemetry      | 3.12.0+     | Beta            | [opentelemetry-1][5]                           |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
 | Grizzly HTTP Client      | 1.9+        | [Beta](#framework-integrations-disabled-by-default) | `grizzly-client`     |
@@ -255,3 +255,4 @@ Running the Java tracer in Bitbucket is not supported.
 [2]: https://www.datadoghq.com/support/
 [3]: /tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
+[5]: /tracing/trace_collection/otel_instrumentation/java/
