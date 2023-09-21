@@ -320,7 +320,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 |-----------------|--------------------------------------------------|
 | Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
-| Error Tracking  | `{{span.attributes.[error.message]}}`             |
+| Error Tracking  | Traces: `{{span.attributes.[error.message]}}`<br>RUM Events: `{{rum.attributes.[error.message]}}`<br>Logs: `{{log.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
