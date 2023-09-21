@@ -24,7 +24,7 @@ In many cases, such as logging, it may be useful to correlate trace IDs to other
 
 #### Automatic injection
 
-For Rails applications using the default logger (`ActiveSupport::TaggedLogging`), `lograge`, or `semantic_logger`, trace correlation injection is automatically configured. You need to add a [trace remapper][1] to connect the relevant logs with the traces.
+For Rails applications using the default logger (`ActiveSupport::TaggedLogging`), `lograge`, or `semantic_logger`, trace ID injection is automatically configured. You need to add a [trace remapper][1] to connect the relevant logs with the traces.
 
 #### Manual injection
 
