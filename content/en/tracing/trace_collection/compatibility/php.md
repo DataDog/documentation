@@ -109,7 +109,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | RoadRunner     | 2.x                               | All supported PHP versions | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x                     | All supported PHP versions | Framework-level instrumentation |
 | Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x      | All supported PHP versions | Framework-level instrumentation |
-| WordPress      | 4.x, 5.x                          | PHP 7+                     | Framework-level instrumentation |
+| WordPress      | 4.x, 5.x, 6.x                     | PHP 7+                     | Framework-level instrumentation |
 | Yii            | 1.1, 2.0                          | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 1.12, 1.21                        | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                               | All supported PHP versions | Generic web tracing             |
