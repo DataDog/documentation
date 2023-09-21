@@ -139,9 +139,9 @@ RumUserActionDetector(
 
 `RumUserActionDetector` automatically detects tap user actions that occur in its tree and sends them to RUM. It detects interactions with several common Flutter widgets.
 
-For most Button types, the detector will look for a `Text` widget child, which it will use for the description of the action. In other cases it will look for a child `Semantics` object, or an `Icon` with its `Icon.semanticsLabel` property set.
+For most Button types, the detector looks for a `Text` widget child, which it uses for the description of the action. In other cases it looks for a `Semantics` object child, or an `Icon` with its `Icon.semanticsLabel` property set.
 
-Alternately, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which will use the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
+Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which will use the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
 
 ```dart
 Container(
