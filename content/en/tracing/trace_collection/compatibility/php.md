@@ -151,11 +151,11 @@ To request support for additional datastores, contact our awesome [support team]
 
 #### Library compatibility
 
-| Module     | Versions              | Support Type    |
-|:-----------|:----------------------|:----------------|
-| Amqp       | 2.x, 3.x              | PHP 7.1+        |
-| Curl       | *(Any Supported PHP)* | Fully Supported |
-| Guzzle     | 5.x, 6.x, 7.x         | Fully Supported |
+| Module                                                    | Versions              | Support Type    |
+|:----------------------------------------------------------|:----------------------|:----------------|
+| [php-amqplib](https://github.com/php-amqplib/php-amqplib) | 2.x, 3.x              | PHP 7.1+        |
+| Curl                                                      | *(Any Supported PHP)* | Fully Supported |
+| Guzzle                                                    | 5.x, 6.x, 7.x         | Fully Supported |
 
 
 To request support for additional libraries, contact our awesome [support team][3].
