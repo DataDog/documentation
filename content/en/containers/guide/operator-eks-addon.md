@@ -71,8 +71,9 @@ Operator add-on 0.1.x installs Operator only. For Agent setup you need to setup 
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
   ```
   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
-3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. By default Operator will use default Agent and Cluster agent image settings and pull them from non-EKS registry.
-If user wants to pull images from EKS repository, one can add `global.registry`. The following sample configuration enables metrics, logs, and APM and sets EKS repository as a default:
+  
+3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. By default Operator will use default Agent and Cluster agent image settings and pull them from a public registry.
+If you want to pull images from a private EKS registry, you can add `global.registry`. The following sample configuration enables metrics, logs, and APM and sets EKS registry as the default:
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
