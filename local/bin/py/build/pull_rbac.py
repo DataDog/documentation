@@ -75,7 +75,6 @@ def pull_rbac():
             else:
                 permission.setdefault('role_name', permission_role_name) # add role name
                 formatted_permissions_dict.setdefault(group_name, []).append(permission) # {group_name: permissions[]}
-                print('permission!!: ', permission)
 
         formatted_permissions_json = json.dumps(formatted_permissions_dict)
 
