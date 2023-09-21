@@ -460,7 +460,7 @@ The following configuration variables are for features that are available for us
 `dd.integration.opentelemetry.experimental.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
 **Default**: `false`<br>
-Enables experimental Open Telemetry features. When you enable this setting, you can use the Open Telemetry tracing API backed by the Datadog Trace Agent.<br>
+Enables experimental OpenTelemetry features. When you enable this setting, you can use the OpenTelemetry tracing API backed by the Datadog Trace Agent.<br>
 Available since version 1.10.0
 
 ## Further Reading
