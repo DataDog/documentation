@@ -77,9 +77,9 @@ In practice, metrics are collected by the Agent every 15-20 seconds. So one day'
 
 To manually rollup the data, use the [rollup function][11]. Click the sigma icon to add a function and select `rollup` from the dropdown menu. Then choose how you want to aggregate the data and the interval in seconds. 
 
-This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one second buckets:
+This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="rollup example of system.disk.free metric highlighting sigma add function icon" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="rollup example of the system.disk.free metric across all machines" style="width:100%;">}}
 
 When switching to the JSON view, the query looks like this:
 
