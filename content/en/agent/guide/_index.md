@@ -12,7 +12,6 @@ cascade:
 
 {{< whatsnext desc="Configuration:" >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
-    {{< nextlink href="agent/guide/dual-shipping" >}}Dual Shipping{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Set up Ansible Using a Standalone Datadog Role{{< /nextlink >}}
@@ -46,14 +45,4 @@ cascade:
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Move:" >}}
-    {{< nextlink href="agent/guide/agent-commands" >}}Agent Commands{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent Configuration Files{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-fips-proxy" >}}Datadog FIPS Compliance{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-status-page" >}}Status Page{{< /nextlink >}}
-    {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
-    {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
 {{< /whatsnext >}}
