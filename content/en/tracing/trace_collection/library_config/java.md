@@ -455,7 +455,7 @@ Deprecated since version 1.9.0
 
 ### Experimental features
 
-The following configuration variables are for features that are available for use but may change in future releases.
+The following configuration options are for features that are available for use but may change in future releases.
 
 `dd.integration.opentelemetry.experimental.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
