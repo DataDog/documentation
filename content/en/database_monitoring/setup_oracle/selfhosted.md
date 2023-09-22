@@ -310,9 +310,9 @@ WHERE
   AND s.indx = w.kslwtsid
   AND w.kslwtevt = e.indx
   AND s.ksusesqi = sq.sql_id(+)
-  AND s.ksusesph = sq.plan_hash_value(+)
+  AND decode(s.ksusesch, 65535, TO_NUMBER(NULL), s.ksusesch) = sq.child_number(+)
   AND s.ksusepsi = sq_prev.sql_id(+)
-  AND s.ksusepha = sq_prev.plan_hash_value(+)
+  AND decode(s.ksusepch, 65535, TO_NUMBER(NULL), s.ksusepch) = sq_prev.child_number(+)
   AND s.con_id = c.con_id(+)
   AND s.ksuudoct = comm.command_type(+)
 ;
