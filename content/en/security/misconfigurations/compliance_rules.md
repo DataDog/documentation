@@ -98,7 +98,7 @@ The rule deprecation process is as follows:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/#cat-posture-management-cloud
+[1]: /security/default_rules/#cat-csm-misconfigurations-cloud
 [2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
 [4]: /security/misconfigurations/frameworks_and_benchmarks
