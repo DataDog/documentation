@@ -3733,9 +3733,7 @@ components:
           example: a
           type: string
         type:
-          description: The type of column present.
-          example: number
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeNumber'
         values:
           description: The array of numerical values for one formula or query.
           example:
@@ -3744,6 +3742,7 @@ components:
             description: An individual value for a given column and group-by.
             example: 0.5
             format: double
+            nullable: true
             type: number
           type: array
       type: object
@@ -5534,9 +5533,7 @@ components:
           example: env
           type: string
         type:
-          description: The type of column present.
-          example: group
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeGroup'
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
@@ -12317,6 +12314,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
+    ScalarColumnTypeGroup:
+      default: group
+      description: The type of column present for groups.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
+    ScalarColumnTypeNumber:
+      default: number
+      description: The type of column present for numbers.
+      enum:
+      - number
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12421,6 +12436,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     ScalarQuery:
@@ -17424,6 +17440,9 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
+              the API.
+            ci_visibility_read: View CI Visibility.
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
@@ -18483,6 +18502,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18561,6 +18585,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18601,6 +18630,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18637,6 +18671,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -18715,6 +18754,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -18755,6 +18799,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -29043,7 +29092,8 @@ paths:
 
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
-          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
+          `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
