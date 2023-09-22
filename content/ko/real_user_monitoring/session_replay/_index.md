@@ -8,7 +8,7 @@ further_reading:
   text: Datadog 세션 재생을 사용하여 실시간 사용자 여정 보기
 - link: https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/
   tag: 블로그
-  text: 퍼널 분석을 사용하여 주요 사용자 흐름을 이해하고 최적화
+  text: 퍼널 분석을 사용하여 주요 사용자 흐름을 파악하고 최적화하기
 - link: /real_user_monitoring/explorer
   tag: 설명서
   text: 탐색기에서 RUM 데이터 시각화
@@ -71,7 +71,7 @@ if (user.isAuthenticated) {
 
 ## 보존
 
-기본적으로 세션 재생 데이터는 30일 동안 유지됩니다.
+기본적으로 세션 재생 데이터는 30일 동안 보존됩니다.
 
 보존 기간을 15개월로 연장하려면 개별 세션 재생에서 _연장 보존_을 활성화하면 됩니다. 이러한 세션은 비활성 상태여야 합니다(사용자가 경험을 완료한 상태).
 
