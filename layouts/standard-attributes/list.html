@@ -1,9 +1,21 @@
+{{/*  Local Partials start  */}}
 {{ define "partials/throw-error" }}
   {{/*  Verify platorm sources (i.e. android, ios, roku, browser and flutter ) are accompanied by RUM source in product_source list */}}	
   {{ if not (in .ctx_product_source "icon-rum") }}	
   {{ errorf "Sources 'android', 'flutter', 'roku', 'browser' and 'ios' must be accompanied by 'icon-rum' source. Fix 'product_source' frontmatter in %q" .ctx_file_path }}	
   {{ end }}	
 {{ end }}
+
+
+{{ define "partials/get-icon" }}
+  {{ $int_logo := partial "integrations-logo.html" (dict "context" .ctx "basename" .name "variant" "avatar") }}	
+  {{ if $int_logo }}	
+    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>	
+  {{ else }}
+    {{ partial "icon" (dict "name" .name "size" "18px")}}	
+  {{ end }}
+{{ end }}
+{{/*  Local Partials end  */}}
 
 {{ define "main" }}
   {{ $ctx := . }}
@@ -147,7 +159,12 @@
             @click="filterValue = '{{ $product }}'; pushState()"
             class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
             :class="($el.dataset.filter === filterValue) && 'active'"
-            data-filter="{{ $product }}">{{ cond (in (slice "android" "ios" "flutter" "roku" "browser") . ) (printf "RUM %s" (. | upper)) ($product | upper)}}</button>
+            data-filter="{{ $product }}"
+            >
+              {{/*  Local partial  */}}
+              <span>{{partial "get-icon" (dict "name" . "ctx" $ctx)}}</span>
+              {{ cond (in (slice "android" "ios" "flutter" "roku" "browser") . ) (printf "RUM %s" (. | upper)) ($product | upper)}}
+            </button>
         {{ end }}
       </div>
       {{/*  SEARCH  */}}

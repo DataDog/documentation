@@ -9,6 +9,18 @@
         padding-top: 12px;
         padding-bottom: 12px;
 
+        .filters-standard-attributes button {
+            i{
+                color: $brand-primary;
+                position: relative;
+                top: 4px;
+            }
+            &:hover{
+                i{
+                    color: white;
+                }
+            }
+        }
         .search-standard-attributes input {
             padding: 9px 8px;
             border-radius: 4px;
