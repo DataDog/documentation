@@ -20,7 +20,7 @@ title: サービス一覧画面
 
 {{< img src="tracing/visualization/services_page_2.png" alt="サービスページ" >}}
 
-<div class="alert alert-warning">サービスリストは、<a href="https://app.datadoghq.com/services">サービスカタログ</a>に置き換えられます。詳しくは、<a href="/tracing/service_catalog/">サービスカタログのドキュメント</a>をご覧ください。</div>
+<div class="alert alert-warning">サービスリストは非推奨となり、Datadog から削除されます。代わりに<a href="https://app.datadoghq.com/services">サービスカタログ</a>を使用してください。詳しくは<a href="/tracing/service_catalog/">サービスカタログのドキュメント</a>をご覧ください。</div>
 
 ## 概要 
 
