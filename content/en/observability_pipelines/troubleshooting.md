@@ -5,7 +5,7 @@ disable_toc: false
 ---
 
 ## Overview
-If you experience unexpected behavior with Datadog Observability Pipelines (OP), there are a few common issues you can investigate, and this guide may help resolve issues quickly. If you continue to have trouble, reach out to Datadog support for further assistance.
+If you experience unexpected behavior with Datadog Observability Pipelines (OP), there are a few common issues you can investigate, and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][3] for further assistance.
 
 ## Investigate diagnostic logs
 
@@ -83,3 +83,4 @@ The expected output should be similar to the following, where the `log` attribut
 
 [1]: https://app.datadoghq.com/observability-pipelines/
 [2]: /observability_pipelines/setup/
+[3]: /help
