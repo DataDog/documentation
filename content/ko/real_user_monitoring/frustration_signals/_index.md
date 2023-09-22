@@ -86,7 +86,7 @@ Frustration Count
 
 {{< img src="real_user_monitoring/frustration_signals/actions_frustration_signal.png" alt="액션으로 감지된 좌절 신호" style="width:90%;" >}}
 
-#### 액션
+#### Actions
 
 **Actions** 탭은 선택한 액션에 좌절 신호가 포함되어 있는 경우 `frustration detected` 태그를 표시합니다.
 
@@ -132,7 +132,7 @@ Frustration Count
 
 ### 추적할 신호를 직접 선택할 수 있나요?
 
-좌절 신호를 활성화하면 Datadog은 기본적으로 세 가지 신호 유형을 모두 수집합니다. 자세한 내용은 [Customer Success Manager][10]에게 문의하세요.
+좌절 신호를 활성화하면 Datadog은 기본적으로 세 가지 신호 유형을 모두 수집합니다. 자세한 내용은 [Customer Success 매니저][10]에게 문의하세요.
 
 <div class="alert alert-warning">
 피드백을 제공하거나 기능 요청을 제출하려면 <a href="/help/">Datadog 지원팀</a>에 문의하세요.
