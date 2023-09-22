@@ -91,7 +91,7 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
     *  The **Total amount of requests and errors**
     *  The amount of **Requests and errors per second**
 * Latency - Choose to display:
-    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests
+    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests, along with the top five matching spans by latency
     *  The **Latency distribution**	
     *  The **Apdex score** for web services; [learn more about Apdex][9]
 * Error - Choose to display:

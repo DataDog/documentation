@@ -4137,11 +4137,7 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Legacy
-    url: developers/integrations/legacy/
-    parent: dev_tools_integrations
-    weight: 411
-  - name: Datadog Apps
+  - name: Datadog Apps SDK
     url: developers/datadog_apps
     parent: dev_tools
     identifier: dev_tools_datadog_apps
@@ -4313,49 +4309,53 @@ main:
     url: account_management/saml/troubleshooting/
     parent: account_management_saml
     weight: 409
+  - name: SCIM
+    url: account_management/scim/
+    parent: account_management
+    weight: 5
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
-    weight: 5
+    weight: 6
   - name: Teams
     url: account_management/teams/
     parent: account_management
-    weight: 6
+    weight: 7
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 7
+    weight: 8
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 701
+    weight: 801
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
     identifier: account_management_plan_and_usage
-    weight: 8
+    weight: 9
   - name: Usage Details
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
-    weight: 801
+    weight: 901
   - name: Cost Details
     url: account_management/plan_and_usage/cost_details/
     parent: account_management_plan_and_usage
-    weight: 802
+    weight: 902
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 9
+    weight: 10
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 10
+    weight: 11
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 11
+    weight: 12
   - name: Data Security
     url: data_security/
     pre: security-lock
