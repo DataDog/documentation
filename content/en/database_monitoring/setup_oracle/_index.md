@@ -70,7 +70,7 @@ Set `DD_API_KEY` and run the following commands to install the Oracle DBM releas
 
 ```shell
 export DD_AGENT_DIST_CHANNEL=beta
-export DD_AGENT_MINOR_VERSION="46.0~dbm~oracle~0.40-1"
+export DD_AGENT_MINOR_VERSION="47.1~dbm~oracle~0.2-1"
 
 DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
