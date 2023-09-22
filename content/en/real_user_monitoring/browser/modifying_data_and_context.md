@@ -187,7 +187,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -234,7 +234,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -279,7 +279,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
