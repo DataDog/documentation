@@ -74,7 +74,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
   ```
   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
   
-3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The Datadog Operator  uses default Agent and Cluster Agent image settings and pulls them from a public registry.
+3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The Datadog Operator uses default Agent and Cluster Agent image settings and pulls them from a public registry.
 If you want to pull images from a private EKS registry, you can add `global.registry`. The following sample configuration enables metrics, logs, and APM and sets EKS registry as the default:
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
@@ -83,6 +83,8 @@ If you want to pull images from a private EKS registry, you can add `global.regi
     name: datadog
   spec:
     global:
+      # required in case Agent can not resolve cluster name through IMDS, see the note below.
+      clusterName: <CLUSTER_NAME>
       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
       credentials:
         apiSecret:
@@ -98,6 +100,9 @@ If you want to pull images from a private EKS registry, you can add `global.regi
         enabled: true
   ```
  For all configuration options, see the [Operator configuration spec][6].
+
+ **Note:** If access to IMDS v1 is blocked on the node, Agent will not be able to resolve the cluster name and certain features e.g. [Orchestrator Explorer][6] will not work. Hence, we recommend adding `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure Agent to request metadata using IMDS v2.
+
 4. Deploy the Datadog Agent:
   ```bash
   kubectl apply -f /path/to/your/datadog-agent.yaml
@@ -110,3 +115,6 @@ If you want to pull images from a private EKS registry, you can add `global.regi
 [3]: https://github.com/DataDog/helm-charts/blob/operator-eks-addon/charts/operator-eks-addon/aws_mp_configuration.schema.json
 [4]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 [5]: https://app.datadoghq.com/account/settings#api
+[6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[7]: https://docs.datadoghq.com/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L407-L416
