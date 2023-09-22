@@ -7953,9 +7953,9 @@ api:
         - GetUsageCWS
       unstable: []
       order: 30
-  - name: Get hourly usage for CSPM
-    url: '#get-hourly-usage-for-cspm'
-    identifier: usage-metering-get-hourly-usage-for-cspm
+  - name: Get hourly usage for CSM Pro
+    url: '#get-hourly-usage-for-csm-pro'
+    identifier: usage-metering-get-hourly-usage-for-csm-pro
     parent: usage-metering
     generated: true
     params:
