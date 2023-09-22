@@ -106,7 +106,7 @@
                   {{/*  Get integration logos for android, ios, roku, and flutter  */}}
                   {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") }}	
                   {{ if $int_logo }}	
-                    <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}"/>	
+                    <img src="{{ $int_logo }}" class="{{ if $idx }}ms-1{{ end }}" height="18" alt="{{$int_logo}}" title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"/>	
                   {{ end }}	
                 {{ else if eq . "browser" }}
                   {{/*  Local partial */}}	

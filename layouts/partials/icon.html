@@ -12,7 +12,8 @@
 {{ end }}
 
 {{ if .title }}
-{{ $title = .title }}
+{{/*  enable bootstrap tooltip if title attr needed  */}}
+{{ $title = (printf "title=%s data-bs-toggle='tooltip' data-bs-placement='top'" .title) }}
 {{ end }}
 
 {{/* Combine contextual params into inline style */}}
@@ -20,4 +21,4 @@
 {{ $style = (printf "style='%s; %s'" $size $color) }}
 {{ end }}
 
-<i class="icon-{{ .name }}" {{ $style | safeHTMLAttr }} title="{{$title}}"></i>
+<i class="icon-{{ .name }}" {{ $style | safeHTMLAttr }} {{ $title | safeHTMLAttr }}></i>
