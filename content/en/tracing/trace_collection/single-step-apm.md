@@ -31,7 +31,8 @@ For example, on an Ubuntu host:
    ```shell
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)”
    ```
-   This installs, configures, and starts the Agent with APM and [Remote Configuration][1] enabled, and sets up library injection for automatic instrumentation of all services on the host or VM. 
+   This installs, configures, and starts the Agent with APM and [Remote Configuration][1] enabled, and sets up library injection for automatic instrumentation of all services on the host or VM.
+   <div class="alert alert-info">You can optionally set an environment for your services. Read <a href="#setting-an-environment-for-instrumented-services">setting an environment</a> to learn how. </div>
 2. Restart the services on the host or VM.
 3. [Explore the performance observability of your services in Datadog][2].
 
@@ -61,7 +62,7 @@ For example, for a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-  
+   <div class="alert alert-info">You can optionally set an environment for your services. Read <a href="#setting-an-environment-for-instrumented-services">setting an environment</a> to learn how. </div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][2].
 
@@ -72,6 +73,15 @@ For example, for a Docker Linux container:
 
 {{< /tabs >}}
 
+### Setting an environment for instrumented services
+
+You can set `DD_ENV` in your install command to automatically tag instrumented services with an environment. This environment tag allows you to separate services and traces within Datadog. For example, if the Agent is installed in your staging environment, use `staging` as your environment tag.
+
+For example:
+
+   ```shell
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)”
+   ```
 
 ## Removing Single Step APM instrumentation from your Agent
 
