@@ -37,9 +37,9 @@ title: 세션 재생 브라우저 개발 툴
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-console.png" alt="Log Explorer 버튼에서 콘솔 보기" style="width:50%;">}}
 
- Log Explorer가 미리 채워진 검색 쿼리와 함께 별도의 탭에서 열립니다.
+Log Explorer가 미리 채워진 검색 쿼리와 함께 별도의 탭에서 열립니다.
 
-### Errors
+### 오류
 
 **Errors** 탭에는 세션과 관련된 [RUM 오류][4] 및 [오류 추적][5] 문제가 표시됩니다.
 
