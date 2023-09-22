@@ -33,7 +33,10 @@ To correlate your [traces][1] with your logs, there are two steps:
 
 Step 1) Activate automatic instrumentation through any of the options below:
 - Option 1) [Library Injection][5]
-- Option 2) Import **ddtrace** then run the application with `ddtrace-run` (ie: `ddtrace-run python appname.py`)
+- Option 2) Through `ddtrace-run`:
+    - Apply the environment variable `DD_LOGS_INJECTION=TRUE`in the environment where the application is running
+    - Import **ddtrace** into the application
+    - Run the application with `ddtrace-run` (ie: `ddtrace-run python appname.py`)
 - Option 3) Import **ddtrace** then call on `ddtrace.patch(logging=True)`
 
 Step 2) Update your log format to include the required attributes from the log record.
