@@ -1,6 +1,7 @@
 ---
 title: SLO Summary Widget
 kind: documentation
+widget_type: slo
 description: "Track your SLOs"
 aliases:
  - /monitors/monitor_uptime_widget/
@@ -23,7 +24,6 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 {{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor " >}}
 
 ### Configuration
-
 
 1. Select an SLO from the dropdown menu.
 2. **For metric-based SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
@@ -61,9 +61,7 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
-
-The dedicated [widget JSON schema definition][4] for the SLO Summary widget is:
+This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
 
 {{< dashboards-widgets-api >}}
 

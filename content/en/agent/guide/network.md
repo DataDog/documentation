@@ -20,7 +20,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Collect your traces'
 algolia:
-  tags: ['network traffic']
+  tags: ['network traffic', 'destinations', 'ports', 'data buffering']
 ---
 
 ## Overview

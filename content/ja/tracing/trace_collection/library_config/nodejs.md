@@ -232,7 +232,7 @@ WAF の同期実行時間 (マイクロ秒) を制限します。
 **デフォルト**: 5<br>
 リモート構成のポーリング間隔 (秒)。
 
-<a id="headers-extraction-and-injection">
+<a id="headers-extraction-and-injection"></a>
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **構成**: `tracePropagationStyle.inject`<br>
