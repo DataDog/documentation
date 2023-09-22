@@ -34,14 +34,14 @@ attributes:
     type: string
     domain: Reserved
   - name: status
-    description: This corresponds to the level/severity of the data. For logs, it is used to define [log patterns](/logs/explorer/patterns/) and has a dedicated layout in the Datadog Log UI.
+    description: This corresponds to the level or severity of the data. For logs, it is used to define [log patterns](/logs/explorer/patterns/) and has a dedicated layout in the Log Management UI.
     product_source: 
       - icon-log
       - icon-apm
     type: string
     domain: Reserved
   - name: service
-    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In RUM browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
+    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
     product_source: 
       - icon-log
       - icon-rum
@@ -60,7 +60,7 @@ attributes:
     type: number
     domain: Reserved
   - name: message
-    description: The body of a log entry, highlighted and displayed in logs Live Tail, where it is indexed for full text search.
+    description: The body of a log entry, highlighted and displayed in Logs Live Tail, where it is indexed for full text search.
     product_source: 
       - icon-log
     type: string
@@ -317,7 +317,7 @@ attributes:
     type: string
     domain: User
   - name: usr.name
-    description: The user friendly name.
+    description: The user-friendly name.
     product_source: 
       - icon-log 
       - icon-rum
@@ -760,7 +760,7 @@ attributes:
     domain: Session (Android events, iOS events, Roku events)
   
   - name: session.ip
-    description: IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting   this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
+    description: IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details](/data_security/real_user_monitoring/#ip-address).
     product_source:
       - icon-rum
       - android
@@ -770,7 +770,7 @@ attributes:
     domain: Session (Android events, iOS events, Roku events)
   
   - name: session.useragent
-    description: System user agent info to interpret device info.
+    description: System `User-Agent` info to interpret device info.
     product_source:
       - icon-rum
       - android
@@ -905,7 +905,7 @@ attributes:
     domain: Error (Browser events, Android events, iOS events, Roku events)
   
   - name: error.message
-    description: A concise, human-readable one-line message explaining the event.
+    description: A concise, human-readable, one-line message explaining the event.
     product_source:
       - icon-rum
       - android
@@ -1196,7 +1196,7 @@ attributes:
     domain: Session (Browser events)
   
   - name: session.type
-    description: The type of session, `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests](/synthetics/browser_tests/) are excluded from billing.
+    description: The type of session, `user` or `synthetics`. Sessions from [Synthetic Browser Tests](/synthetics/browser_tests/) are excluded from billing.
     product_source:
       - icon-rum
       - browser
@@ -1470,31 +1470,31 @@ attributes:
 
 
   - name: language
-    description: The client SDK language used to generate the span. It can be one of cpp, dotnet, go, jvm, javascript, php, python, ruby.
+    description: The client SDK language used to generate the span. It can be one of `cpp`, `dotnet`, `go`, `jvm`, `javascript`, `php`, `python`, `ruby`.
     product_source:
       - icon-apm
     type: string
     domain: APM core
   - name: env
-    description: The value of `DD_ENV` environment variable or user defined `env` for the running process.
+    description: The value of the `DD_ENV` environment variable or user-defined `env` for the running process.
     product_source:
       - icon-apm
     type: string
     domain: APM core (Reserved)
   - name: version
-    description: The value of `DD_VERSION` environment variable or user defined `version` for the running process.
+    description: The value of the `DD_VERSION` environment variable or user-defined `version` for the running process.
     product_source:
       - icon-apm
     type: string
     domain: APM core (Reserved)
   - name: span.kind
-    description: The string representing the type of work unit handled by the span. It can be   one of server, client, producer, consumer or internal. More information in the   OpenTelemetry SpanKind documentation.
+    description: The string representing the type of work unit handled by the span. It can be one of server, client, producer, consumer, or internal. For more information, see the [OpenTelemetry SpanKind documentation](https://opentelemetry.io/docs/specs/otel/trace/api/#spankind).
     product_source:
       - icon-apm
     type: string
     domain: APM core
   - name: component
-    description: The name of the library/integration that created the span.
+    description: The name of the library or integration that created the span.
     product_source:
     - icon-apm
     type: string
@@ -1578,19 +1578,19 @@ attributes:
     type: string
     domain: HTTP requests
   - name: http.route
-    description: The matched route (path template). For example, `/users/:userID`
+    description: The matched route (path template). For example, `/users/:userID`.
     product_source:
       - icon-apm
     type: string
     domain: HTTP requests
   - name: http.client_ip
-    description: The IP address of the original client behind all proxies, if   known. Discovered from headers such as X-Forwarded-For.
+    description: The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.
     product_source:
       - icon-apm
     type: string
     domain: HTTP requests
   - name: http.useragent
-    description: The user agent header received with the request.
+    description: The `User-Agent` header received with the request.
     product_source:
       - icon-apm
     type: string
@@ -1608,25 +1608,25 @@ attributes:
     type: number
     domain: HTTP requests
   - name: http.request.content_length_uncompressed
-    description: The size of the uncompressed request payload body after   transport decoding.
+    description: The size of the uncompressed request payload body after transport decoding.
     product_source:
       - icon-apm
     type: number
     domain: HTTP requests
   - name: http.response.content_length_uncompressed
-    description: The size of the uncompressed response payload body after   transport decoding.
+    description: The size of the uncompressed response payload body after transport decoding.
     product_source:
       - icon-apm
     type: number
     domain: HTTP requests
   - name: http.request.headers.*
-    description: The request HTTP headers. None are collected by default, but can   be optionally configured with DD_TRACE_HEADER_TAGS.To learn more about how to collect   headers, see the corresponding Library configuration.
+    description: The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`. 
     product_source:
       - icon-apm
     type: string
     domain: HTTP requests
   - name: db.system
-    description: Identifier for the database management system (DBMS product being used).
+    description: Identifier for the database management system (DBMS) product being used.
     product_source:
       - icon-apm
     type: string
@@ -1661,7 +1661,7 @@ attributes:
     domain: Database spans
     
   - name: db.operation
-    description: The name of the operation being executed. For example, `SELECT`, `findAndModify`, `HMSET`
+    description: The name of the operation being executed. For example, `SELECT`, `findAndModify`, `HMSET`.
     product_source:
       - icon-apm
     type: string
