@@ -76,7 +76,7 @@ mvn clean verify
 
 ## Disabling skipping for specific tests
 
-You can override the Intelligent Test Runner’s behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
 ### Why make tests unskippable?
 
@@ -121,7 +121,7 @@ public class MyTestSuite {
 }
 ```
 
-#### Test Suite
+#### Test suite
 
 Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
@@ -166,7 +166,7 @@ public class MyTestSuite {
 }
 ```
 
-#### Test Suite
+#### Test suite
 
 Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 You do not have to create the `datadog_itr_unskippable` for every test case or test suite, one category is enough for the entire project.
@@ -208,7 +208,7 @@ public class MyTestSuite {
 }
 ```
 
-#### Test Suite
+#### Test suite
 
 Add a group with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
@@ -247,7 +247,7 @@ class MyTestSuite extends Specification {
 }
 ```
 
-#### Test Suite
+#### Test suite
 
 Add a `spock.lang.Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
 
