@@ -97,7 +97,7 @@
                 {{ if in . "icon-"}}
                   {{ $product := (substr . 5) }}
                   <div class="{{ if $idx }}ms-1{{ end }}">
-                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" $product)}}
+                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" (cond (eq $product "log") (printf "%ss" $product) $product) )}}
                   </div>
                 {{ else if in (slice "android" "ios" "flutter" "roku") . }}	
                   {{/*  Local partial */}}	
