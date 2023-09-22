@@ -29,7 +29,7 @@ further_reading:
 
 ### Standard library logging
 
-To correlate your [traces][1] with your logs, there are two steps:
+To correlate your [traces][1] with your logs, follow the steps below:
 
 Step 1) Activate automatic instrumentation through any of the options below:
 - Option 1) Through [Library Injection][5]:
@@ -52,7 +52,6 @@ Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
 Here is an example using `logging.basicConfig` to configure the log injection:
 
 ``` python
-from ddtrace import patch; patch(logging=True)
 import logging
 from ddtrace import tracer
 
