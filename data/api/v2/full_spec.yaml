@@ -3733,9 +3733,7 @@ components:
           example: a
           type: string
         type:
-          description: The type of column present.
-          example: number
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeNumber'
         values:
           description: The array of numerical values for one formula or query.
           example:
@@ -3744,6 +3742,7 @@ components:
             description: An individual value for a given column and group-by.
             example: 0.5
             format: double
+            nullable: true
             type: number
           type: array
       type: object
@@ -5534,9 +5533,7 @@ components:
           example: env
           type: string
         type:
-          description: The type of column present.
-          example: group
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeGroup'
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
@@ -12317,6 +12314,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
+    ScalarColumnTypeGroup:
+      default: group
+      description: The type of column present for groups.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
+    ScalarColumnTypeNumber:
+      default: number
+      description: The type of column present for numbers.
+      enum:
+      - number
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12421,6 +12436,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     ScalarQuery:
