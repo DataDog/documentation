@@ -78,7 +78,7 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17]. 
 
-{{< img src="synthetics/test_summary_dashboard.png" alt="Test Summary Dashboard" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Synthetic Monitoring & Continuous Testing Summary Dashboard" style="width:100%;">}}
 
 ## Use the Synthetic Monitoring & Continuous Testing Explorer
 

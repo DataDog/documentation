@@ -135,47 +135,52 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 14
+  - name: Session Replay
+    identifier: getting_started_session_replay
+    url: getting_started/session_replay/
+    parent: getting_started
+    weight: 15
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1502
+    weight: 1602
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1501
+    weight: 1601
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1503
+    weight: 1603
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Database Monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: Cloud Security Management
     url: getting_started/cloud_security_management/
     parent: getting_started
-    weight: 18
+    weight: 20
   - name: Cloud SIEM
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 19
+    weight: 21
   - name: Application Security Management
     identifier: getting_started_application_security
     url: getting_started/application_security
     parent: getting_started
-    weight: 19
+    weight: 22
   - name: Application Vulnerability Management
     identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
@@ -184,11 +189,11 @@ main:
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 20
+    weight: 23
   - name: Support
     url: getting_started/support/
     parent: getting_started
-    weight: 21
+    weight: 24
   - name: Glossary
     url: glossary/
     pre: features
@@ -3095,6 +3100,11 @@ main:
     parent: csm
     identifier: csm_mute
     weight: 22
+  - name: Automate Security Workflows
+    url: security/cloud_security_management/workflows
+    parent: csm
+    identifier: csm_workflow_automation
+    weight: 23
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
@@ -4122,11 +4132,7 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Legacy
-    url: developers/integrations/legacy/
-    parent: dev_tools_integrations
-    weight: 411
-  - name: Datadog Apps
+  - name: Datadog Apps SDK
     url: developers/datadog_apps
     parent: dev_tools
     identifier: dev_tools_datadog_apps
@@ -4298,49 +4304,53 @@ main:
     url: account_management/saml/troubleshooting/
     parent: account_management_saml
     weight: 409
+  - name: SCIM
+    url: account_management/scim/
+    parent: account_management
+    weight: 5
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
-    weight: 5
+    weight: 6
   - name: Teams
     url: account_management/teams/
     parent: account_management
-    weight: 6
+    weight: 7
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 7
+    weight: 8
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 701
+    weight: 801
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
     identifier: account_management_plan_and_usage
-    weight: 8
+    weight: 9
   - name: Usage Details
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
-    weight: 801
+    weight: 901
   - name: Cost Details
     url: account_management/plan_and_usage/cost_details/
     parent: account_management_plan_and_usage
-    weight: 802
+    weight: 902
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 9
+    weight: 10
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 10
+    weight: 11
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 11
+    weight: 12
   - name: Data Security
     url: data_security/
     pre: security-lock
