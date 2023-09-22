@@ -33,7 +33,7 @@ Hosts with a running Agent still display and are included in billing. Use the li
 
 ### CloudWatch Metric Streams with Kinesis Data Firehose
 
-You can optionally [forward CloudWatch Metric Streams to Datadog with the Kinesis Data Firehose][8]. If you use this method, you must manage all rules for including and excluding namespaces in the streams using the CloudWatch Metric Streams configuration in your AWS accounts. Namespace defaults and account-level settings in the Datadog AWS integration page only apply to the default API polling approach. 
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Kinesis Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration in your AWS accounts.
 
 ## Troubleshooting
 
