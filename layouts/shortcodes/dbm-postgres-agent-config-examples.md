@@ -74,43 +74,52 @@ instances:
 ```
 
 ### Monitoring relation metrics for multiple logical databases
-In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database).
+In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), `database_autodiscovery` must be enabled because these metrics must be gathered across logical databases on the Postgres instance.
 
-Specify a single "DBM" instance to collect DBM telemetry from all databases. Additionally, specify all logical databases the Agent must connect to. It is important to only have `dbm: true` on one configuration instance per host in order to prevent duplication of metrics.
+The configuration will depend on your Agent version. For Agent versions < 7.48.0, follow the [Advanced Configuration](/database_monitoring/setup_postgres/advanced_configuration#monitoring-relation-metrics-for-multiple-logical-databases). For Agent versions >= 7.48.0, follow the example below to enable database_autodiscovery.
+
 ```yaml
 init_config:
 instances:
-  # This instance is the "DBM" instance. It will connect to the
-  # `postgres` database and send DBM telemetry from all databases
   - dbm: true
     host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-  # This instance only collects data from the `on_sale` database
-  # and collects relation metrics from tables prefixed by "2022_"
-  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    relations: 
+      - relation_regex: .* # required
+    database_autodiscovery:
+      enabled: true # required
+       # All configuration options below here are optional
+      include:  # A list of regex patterns to match databases to include
+        - inventory$
+        - products$
+        - user*
+      exclude: # A list of regex patterns to match databases to exclude
+        - users_deprecated$
+```
+
+## Schema collection
+Starting with Agent version 7.48.0, schema collection can be enabled if `database_autodiscovery` is enabled. Once schema collection is enabled, you will be able to view the schemas of your databases on the `Schemas` tab of your database host. See [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for additional configuration options.
+
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-    dbname: on_sale
-    dbstrict: true
-    relations:
-      - relation_regex: 2022_.*
-        relkind:
-          - r
-          - i
-  # This instance only collects data from the `inventory` database
-  # and collects relation metrics only from the specified tables
-  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
-    port: 5432
-    username: datadog
-    password: '<PASSWORD>'
-    dbname: inventory
-    dbstrict: true
-    relations:
-      - relation_name: products
-      - relation_name: external_seller_products
+    collect_schemas: # Enable schema collection
+      enabled: true
+    relations: 
+      - relation_regex: .* # required
+    database_autodiscovery:
+      enabled: true # required
+      include:
+        - inventory$
+        - products$
+        - user*
 ```
 
 ### Working with hosts through a proxy
