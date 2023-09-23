@@ -116,8 +116,8 @@ Exclude additional attributes with the `ExcludeByAttribute` property and the sho
 
 Exclude specific source files from code coverage with the `ExcludeByFile` property.
 
-* Use a single or multiple paths, separated by comma
-* Use the file path or directory path with a wildcard (`*`), for example `dir1/*.cs`
+* Use a single or multiple paths, separated by comma.
+* Use the file path or directory path with a wildcard (`*`), for example: `dir1/*.cs`.
 
 ##### Filters
 
