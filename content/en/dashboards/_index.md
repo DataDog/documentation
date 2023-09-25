@@ -165,7 +165,7 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Use granular access controls to limit the [roles][18] that may edit a particular dashboard:
+Use granular access controls to limit the [roles][15] that may edit a particular dashboard:
 1. While viewing a dashboard, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
