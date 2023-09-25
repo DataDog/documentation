@@ -51,7 +51,7 @@ The next tab in the bottom section of the side panel displays all misconfigurati
 
 {{< img src="security/cspm/signals_explorer/Findings.png" style="width:100%;">}}
 
-**Note**: If using a grouping other than resource ID, the signal triggers the first time a misconfigurations meets the grouping criteria, and is not re-triggered each time a new resource in this same grouping (for example, the same service or account) fail this rule. This is done intentionally so as to avoid re-triggering signals each time a new cloud resource fails a rule. If you would like to receive an alert each time a cloud resource fails a rule, change the *group by* in the rule to `@resource_type`.
+**Note**: If using a grouping other than resource ID, the signal triggers the first time a misconfiguration meets the grouping criteria, and is not re-triggered each time a new resource in this same grouping (for example, the same service or account) fail this rule. This is done intentionally so as to avoid re-triggering signals each time a new cloud resource fails a rule. If you would like to receive an alert each time a cloud resource fails a rule, change the *group by* in the rule to `@resource_type`.
 
 The related issues tab shows other compliance rules that have triggered signals on the same logic grouping—the same resource, service, or cloud account—and resource type (for example, security group).
 
