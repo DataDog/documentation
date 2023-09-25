@@ -499,7 +499,7 @@ Datadog Static Analysis provides out-of-the-box rules to help detect violations 
 
 ## Rules
 
-## wewew
+## Test
 
 {{< sa-rule-list "test_data" >}}
 
