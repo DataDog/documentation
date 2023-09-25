@@ -476,7 +476,7 @@ python_security_data:
     tag: "yaml-load"
     text: "avoid deserializing untrusted YAML"
 further_reading:
-  - link: "/continuous_integration/static_analysis/'
+  - link: "/continuous_integration/static_analysis/"
     tag: "Documentation"
     text: "Learn about Datadog Static Analysis"
 ---
