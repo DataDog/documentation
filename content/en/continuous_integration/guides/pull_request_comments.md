@@ -19,7 +19,7 @@ further_reading:
 
 If you're using the Test Visibility product, Datadog can integrate with GitHub to show test results summaries directly
 in your pull requests. The summary contains an overview of the tests executions, flakiness information, test performance regressions, and
-error messages for failed tests. It also shows how much execution time you have saved thanks to the [Intelligent Test Runner][1].
+error messages for failed tests. When [Intelligent Test Runner][1] is enabled, it also shows the test execution time saved.
 With this report, developers get instant feedback about their tests results, including the ability to
 debug any failed or flaky tests without leaving the pull request view.
 
