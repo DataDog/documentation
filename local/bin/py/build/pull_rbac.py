@@ -54,10 +54,10 @@ def pull_rbac():
             permission_description = permission['attributes']['description']
             permission_role_name = ''
 
-            for x in range(dr_data_len):
+            for idx in range(dr_data_len):
                 if permission_role_name:
                     break
-                role = default_roles_data[(dr_data_len-1)-x] # get least permissive role starting from the 'Datadog Read Only Role' -> 'Datadog Admin Role'
+                role = default_roles_data[(dr_data_len-1)-idx] # get least permissive role starting from the 'Datadog Read Only Role' -> 'Datadog Admin Role'
                 role_name = role['attributes']['name']
                 role_permissions = role['relationships']['permissions']['data']
 
@@ -66,15 +66,12 @@ def pull_rbac():
                     # assign permission_role_name - relies on order of Admin, Standard, and Read Only role objects in the `roles/templates` api.
                     if role_permission['id'] == permission['id']:
                         permission_role_name = role_name
-                        if permission_role_name:
-                            break
+                        break # once permission role name is found, stop iterating through role permissions
         
             # Ignore legacy logs permissions from dictionary before converting to JSON.  
             # These legacy permissions are hard-coded in rbac-permissions-table partial until they can be deprecated.
             # Ignore Deprecated permissions
-            if (permission_name in ('logs_live_tail', 'logs_read_index_data')) or ("Deprecated" in permission_description):
-                continue
-            else:
+            if (permission_name not in ('logs_live_tail', 'logs_read_index_data')) or ("Deprecated" in permission_description):
                 permission.setdefault('role_name', permission_role_name) # add role name
                 formatted_permissions_dict.setdefault(group_name, []).append(permission) # {group_name: permissions[]}
 
