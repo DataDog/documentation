@@ -1,9 +1,10 @@
 ---
 title: Log Stream Widget
 kind: documentation
+widget_type: log_stream
 description: "Display a filtered log stream in your Datadog dashboards."
 aliases:
-    - /graphing/widgets/log_stream/
+- /graphing/widgets/log_stream/
 further_reading:
 - link: "/logs/explorer/analytics/"
   tag: "Documentation"
@@ -29,9 +30,7 @@ The Log Stream displays a log flow matching the defined query.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See [Dashboards API][5] for more details.
-
-The [widget JSON schema definition][6] for the log stream widget is:
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 

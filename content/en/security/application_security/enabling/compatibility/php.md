@@ -14,7 +14,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
-| Vulnerability Management for Open Source Software (OSS) | not supported              |
+| Vulnerability Management for Open Source Software (OSS) | 0.90.0              |
 | Vulnerability Management for Code-level (beta) | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
 
@@ -77,8 +77,6 @@ PHP ASM supports the following architectures:
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
-| Linux GNU arm64 (`aarch64-linux-gnu`)     | GA                    | > `0.78.0`                             |
-| Linux MUSL arm64 (`aarch64-linux-musl`)   | GA                    | > `0.78.0`                             |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
