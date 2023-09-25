@@ -33,6 +33,18 @@ CSM Misconfigurations uses the following rule types to validate the configuratio
 - [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an AWS Cloudfront distribution's configuration for encrypted status.
 - [**Infrastructure configuration**][5]: These compliance rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the CIS compliance benchmarks for Docker and Kubernetes. For example, the [/etc/default/docker file permissions are set to 644 or more restrictively][6] rule evaluates Docker file permissions running on a host.
 
+## Explore default compliance rules
+
+To filter the default compliance rules by cloud provider:
+
+1. Navigate to **Security** > **Cloud Security Management** > **Compliance** > **Compliance Rules**.
+2. Choose one of the following values from the **Tag** facet.
+    - **AWS**: cloud_provider:aws
+    - **Azure**: cloud_provider:azure
+    - **Google Cloud**: cloud_provider:gcp
+    - **Docker**: framework:cis-docker
+    - **Kubernetes**: framework:cis-kubernetes
+
 ## Customize how your environment is scanned by each rule
 
 Customization of a cloud configuration query directly is not supported at this time, but you can customize how your environment is scanned by each rule.
@@ -86,7 +98,7 @@ The rule deprecation process is as follows:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/#cat-posture-management-cloud
+[1]: /security/default_rules/#cat-csm-misconfigurations-cloud
 [2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
 [4]: /security/misconfigurations/frameworks_and_benchmarks

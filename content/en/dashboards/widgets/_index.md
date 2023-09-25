@@ -80,6 +80,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/check-status_light_large.png">}} Check Status{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" 
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Monitor Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/run_workflow" 
+        img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture

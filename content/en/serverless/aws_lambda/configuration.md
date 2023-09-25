@@ -96,20 +96,10 @@ Get alerted on attackers targeting your serverless applications and respond quic
 
 To get started, first ensure that you have [tracing enabled][43] for your functions.
 
-To enable threat monitoring, add the following environment variables depending on the language:
+To enable threat monitoring, add the following environment variables to your deployment:
    ```yaml
    environment:
      DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   For **Go functions only** also add:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
-   ```
-   For **NodeJS or Python functions** also add:
-   ```yaml
-   environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 

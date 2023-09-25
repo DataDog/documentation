@@ -164,7 +164,7 @@ Pour activer le tracing pour des conteneurs Docker uniques :
       apm_non_local_traffic: "true"
     ```
 
-2. Configurez les bibliothèques de tracing de manière à faire passer les traces par l'[IP de passerelle du pont][9], qui correspond par défaut à `172.17.0.1` à l'intérieur du conteneur d'application. Si vous n'êtes pas sûr qu'il s'agit de l'IP de passerelle, exécutez la commande `docker inspect <id conteneur>` pour le vérifier.
+2. Configurez les bibliothèques de tracing de manière à faire passer les traces par l'[IP de passerelle du pont][9], qui correspond par défaut à `172.17.0.1` à l'intérieur du conteneur d'application. Si vous n'êtes pas sûr de l'IP de passerelle, exécutez la commande `docker inspect <id conteneur>` pour la vérifier.
 
 Pour tous les langages, définissez la variable d'environnement `DD_AGENT_HOST` sur l'IP de passerelle. Pour les langages ci-dessous, vous pouvez également définir le nom du host par programmation comme suit :
 

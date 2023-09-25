@@ -29,6 +29,12 @@ Datadog provides you with preconfigured flows in the form of out of the box [blu
 
 Trigger your workflows from monitors, security signals, or dashboards, or trigger them manually. This flexibility allows you to respond with the appropriate workflow at the point you become aware of an issue affecting the health of your system. Automating critical tasks with Datadog Workflow Automation helps keep your systems up and running by improving the time to resolution and reducing the possibility of errors.
 
+## Workflows Overview dashboard
+
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to **Dashboards > Dashboards list** and search for `Workflows Overview`.
+
+{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
+
 ## Examples
 
 Below are a few examples of workflows you can build:

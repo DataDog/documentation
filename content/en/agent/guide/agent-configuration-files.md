@@ -7,7 +7,7 @@ algolia:
   rank: 80
   category: guide
   subcategory: Agent Configuration Files
-  tags: ["agent config", "agent configuration"]
+  tags: ["agent config", "agent configuration", "agent directory"]
 
 ---
 

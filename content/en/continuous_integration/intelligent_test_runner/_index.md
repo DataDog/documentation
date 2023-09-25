@@ -40,7 +40,7 @@ Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1
 
 ## Configuration
 
-Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page.
+Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page. Enabling Intelligent Test Runner requires the `Intelligent Test Runner Activation Write` permission.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
