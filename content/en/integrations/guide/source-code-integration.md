@@ -17,10 +17,14 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li><li>.NET</li><li>Ruby</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul>
+The source code integration supports:
+</br>
+Languages: **Go**, **Java**, **JavaScript** (except transpiled JavaScript), **Python**, **.NET**, **Ruby**.
+</br>
+Git providers:**GitHub**, **GitLab**, **BitBucket**, **Azure DevOps**.
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
+Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
@@ -35,7 +39,7 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 Your telemetry needs to be tagged with Git information tying the running version with a particular repository and commit.
 
-For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which will be extracted by the [Datadog Tracing Libraries][9] automatically.
+For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which is be extracted by the [Datadog Tracing Libraries][9] automatically.
 For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
 ### Embed git information in your build artifacts
