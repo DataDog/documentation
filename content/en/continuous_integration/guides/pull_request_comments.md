@@ -18,8 +18,8 @@ further_reading:
 {{< /site-region >}}
 
 If you're using the Test Visibility product, Datadog can integrate with GitHub to show test results summaries directly
-in your pull requests. The summary contains an overview of the tests executions, flakiness information, and
-error messages for failed tests.
+in your pull requests. The summary contains an overview of the tests executions, flakiness information, test performance regressions, and
+error messages for failed tests. When [Intelligent Test Runner][1] is enabled, it also shows the test execution time saved.
 With this report, developers get instant feedback about their tests results, including the ability to
 debug any failed or flaky tests without leaving the pull request view.
 
@@ -33,14 +33,14 @@ This integration is only available for test services hosted on `github.com`.
 
 You can enable test summaries in pull requests with the following steps:
 
-1. Install the [GitHub integration][1]:
-   1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.
+1. Install the [GitHub integration][2]:
+   1. Navigate to the **Configuration** tab on the [GitHub integration tile][3] and click **+ Create GitHub App**.
    2. Give the application read and write permissions for pull requests.
-2. Enable test summaries for one or more test services. It can be done from the [Test Service Settings page][3] or from the commit/branch page.
+2. Enable test summaries for one or more test services. It can be done from the [Test Service Settings page][4] or from the commit/branch page.
 
 ### Test service settings page
 
-1. Navigate to the [Test Service Settings page][3] and search for the repository or test service.
+1. Navigate to the [Test Service Settings page][4] and search for the repository or test service.
 2. Click on the toggle under the **GitHub Comments** column for the desired service.
 
 {{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
@@ -59,6 +59,7 @@ Comments only appear on pull requests that were opened before the test run and t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/github/
-[2]: https://app.datadoghq.com/integrations/github
-[3]: https://app.datadoghq.com/ci/settings/test-service
+[1]: /continuous_integration/intelligent_test_runner/
+[2]: /integrations/github/
+[3]: https://app.datadoghq.com/integrations/github
+[4]: https://app.datadoghq.com/ci/settings/test-service

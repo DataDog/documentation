@@ -78,4 +78,4 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 [10]: /security/misconfigurations/findings
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
-[13]: /security/misconfigurations/findings#mute-findings
+[13]: /security/cloud_security_management/mute_issues

@@ -1,9 +1,10 @@
 ---
 title: Query Value Widget
 kind: documentation
+widget_type: query_value
 description: "Display an aggregated value for a given metric query"
 aliases:
-    - /graphing/widgets/query_value/
+- /graphing/widgets/query_value/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -35,24 +36,17 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Bars: Shows discrete, periodic measurements.
 
 ### Options
+#### Context links
+
+[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
 
 #### Global time
 
-On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
-
-The dedicated [widget JSON schema definition][5] for the query value widget is:
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 
@@ -63,5 +57,6 @@ The dedicated [widget JSON schema definition][5] for the query value widget is:
 [1]: /dashboards/querying/#overview
 [2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
-[4]: /api/v1/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/guide/context-links/
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/
