@@ -1,5 +1,5 @@
 ---
-title: Static `Analysis` Rules
+title: Static Analysis Rules
 kind: documentation
 description: View rules for multiple languages for Static Analysis.
 is_beta: true
