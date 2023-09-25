@@ -18469,6 +18469,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPCIAppErrors'
           description: Service Unavailable
+      security:
+      - apiKeyAuth: []
       summary: Send pipeline event
       tags:
       - CI Visibility Pipelines
@@ -29092,7 +29094,8 @@ paths:
 
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
-          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
+          `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
