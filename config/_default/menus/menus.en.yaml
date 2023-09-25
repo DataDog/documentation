@@ -786,7 +786,7 @@ main:
     identifier: serverless_aws_lambda
     weight: 1
   - name: Installation
-    url: serverless/installation
+    url: serverless/aws_lambda/installation
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_installation
     weight: 101

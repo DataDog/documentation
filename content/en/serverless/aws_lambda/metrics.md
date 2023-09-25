@@ -8,76 +8,98 @@ aliases:
   - /serverless/real_time_enhanced_metrics
 ---
 
-## Overview
+This page discusses metrics for monitoring serverless applications on AWS Lambda. 
 
-This page covers collecting metrics for monitoring serverless applications on AWS Lambda.
+After you [install Serverless Monitoring for AWS Lambda][1], Datadog generates [enhanced metrics](#enhanced-lambda-metrics) from your Lambda runtime. You can also [submit custom metrics](#submit-custom-metrics) to Datadog from your Lambda functions.
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
 
 ### Collect metrics from non-Lambda resources
 
-In addition to collecting real-time [Datadog Lambda enhanced metrics][7], Datadog can also help you collect metrics for AWS managed resources—such as [API Gateway][8], [AppSync][9], and [SQS][10]—to help you monitor your entire serverless application. The metrics are also enriched with the corresponding AWS resource tags.
+Datadog can also help you collect metrics for AWS managed resources—such as [API Gateway][2], [AppSync][3], and [SQS][4]—to help you monitor your entire serverless application. These metrics are enriched with corresponding AWS resource tags.
 
-To collect these metrics, set up the [Datadog AWS integration][3].
+To collect these metrics, set up the [Datadog AWS integration][5].
 
-<!-- from configuration -->
+[1]: /serverless/aws_lambda/installation
+[2]: /integrations/amazon_api_gateway/#data-collected
+[3]: /integrations/amazon_appsync/#data-collected
+[4]: /integrations/amazon_sqs/#data-collected
+[5]: /integrations/amazon_web_services/
+
+## Enhanced Lambda metrics
+
+{{< img src="serverless/lambda-metrics-dashboard.jpeg" alt="Lambda Enhanced Metrics Default Dashboard" width="80%">}}
+
+Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
+
+Enhanced Lambda metrics are in addition to the default [Lambda metrics][6] enabled with the AWS Lambda integration. Enhanced metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace. You can view these metrics on the [Enhanced Lambda Metrics default dashboard][7].
+
+The following real-time enhanced Lambda metrics are available, and they are tagged with corresponding `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime` tags. 
+
+These metrics are [distributions][8]: you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
+
+`aws.lambda.enhanced.invocations`
+: Measures the number of times a function is invoked in response to an event or an invocation of an API call.
+
+`aws.lambda.enhanced.errors`
+: Measures the number of invocations that failed due to errors in the function.
+
+`aws.lambda.enhanced.max_memory_used`
+: Measures the maximum amount of memory (mb) used by the function.
+
+`aws.lambda.enhanced.duration`
+: Measures the elapsed seconds from when the function code starts executing as a result of an invocation to when it stops executing.
+
+`aws.lambda.enhanced.billed_duration`
+: Measures the billed amount of time the function ran for (100ms increments).
+
+`aws.lambda.enhanced.init_duration`
+: Measures the initialization time (second) of a function during a cold start.
+
+`aws.lambda.enhanced.runtime_duration`
+: Measures the elapsed milliseconds from when the function code starts executing to when it returns the response back to the client, excluding the post-runtime duration added by Lambda extension executions.
+
+`aws.lambda.enhanced.post_runtime_duration`
+: Measures the elapsed milliseconds from when the function code returns the response back to the client to when the function stops executing, representing the duration added by Lambda extension executions.
+
+`aws.lambda.enhanced.response_latency`
+: Measures the elapsed time in milliseconds from when the invocation request is received to when the first byte of response is sent to the client.
+
+`aws.lambda.enhanced.response_duration`
+: Measures the elapsed time in milliseconds from when the first byte of response to the last byte of response is sent to the client.
+
+`aws.lambda.enhanced.produced_bytes`
+: Measures the number of bytes returned by a function.
+
+`aws.lambda.enhanced.estimated_cost`
+: Measures the total estimated cost of the function invocation (US dollars).
+
+`aws.lambda.enhanced.timeouts`
+: Measures the number of times a function times out.
+
+`aws.lambda.enhanced.out_of_memory`
+: Measures the number of times a function runs out of memory.
+
+[6]: /integrations/amazon_lambda/#metric-collection
+[7]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
+[8]: /metrics/distributions/
 
 ## Submit custom metrics
 
-There are a few different ways to submit custom metrics to Datadog from a Lambda function.
+### Create custom metrics from logs or traces
+If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can generate custom metrics from logs and traces without re-deploying or making any changes to your application code.
 
-- **[Creating custom metrics from logs or traces](#creating-custom-metrics-from-logs-or-traces)**: If your Lambda functions are already sending trace or log data to Datadog, and the data you want to query is captured in an existing log or trace, you can generate custom metrics from logs and traces without re-deploying or making any changes to your application code.
-- **[Submitting custom metrics using the Datadog Lambda extension](#with-the-datadog-lambda-extension)**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda extension][1].
-- **[Submitting custom metrics using the Datadog Forwarder Lambda](#with-the-datadog-forwarder)**: If you are sending telemetry from your Lambda function over the Datadog Forwarder Lambda, you can submit custom metrics over logs using the Datadog-provided helper functions.
-- **[(Deprecated) Submitting custom metrics from CloudWatch logs](#deprecated-cloudwatch-logs)**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been deprecated. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
-- **(Deprecated) Submitting custom metrics using the Datadog Lambda library**: The Datadog Lambda library for Python, Node.js and Go support sending custom metrics synchronously from the runtime to Datadog by blocking the invocation when `DD_FLUSH_TO_LOG` is set to `false`. Besides the performance overhead, metric submissions may also encounter intermittent errors due to the lack of retries because of transient network issues. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
-- **(Not recommended) Using a third-party library**: Most third-party libraries do not submit metrics as distributions and can lead to under-counted results. You may also encounter intermittent errors due to the lack of retries because of transient network issues.
+With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as a request duration. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. Learn more about [creating log-based metrics][9].
 
-### Understanding distribution metrics
+You can also generate metrics from all ingested spans, regardless of whether they are indexed by a retention filter. Learn more about [creating span-based metrics][10].
 
-When Datadog receives multiple count or gauge metric points that share the same timestamp and set of tags, only the most recent one counts. This works for host-based applications because metric points get aggregated by the Datadog agent and tagged with a unique `host` tag.
+### Submit custom metrics directly from a Lambda function
 
-A Lambda function may launch many concurrent execution environments when traffic increases. The function may submit count or gauge metric points that overwrite each other and cause undercounted results. To avoid this problem, custom metrics generated by Lambda functions are submitted as [distributions][2] because distribution metric points are aggregated on the Datadog backend, and every metric point counts.
+All custom metrics are submitted as [distributions](#understanding-distribution-metrics).
 
-Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also [manage tags][3]. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][4]. To monitor a distribution for a count metric type, use `sum` for both the [time and space aggregations][4]. Refer to the guide [Query to the Graph][5] for how time and space aggregations work.
+1. [Install Serverless Monitoring for AWS Lambda][1] and ensure that you have installed the Datadog Lambda extension.
 
-### Submitting historical metrics
-
-To submit historical metrics (only timestamps that are within the last 20 minutes are allowed), you must use the [Datadog Forwarder](#with-the-datadog-forwarder). The [Datadog Lambda Extension](#with-the-datadog-lambda-extension) can only submit metrics with the current timestamp due to the limitation of the StatsD protocol.
-
-### Submitting many data points
-
-When using the Forwarder to submit many data points for the same metric and the same set of tags, for example, inside a big `for` loop, there may be noticeable performance impact to the Lambda and also CloudWatch cost impact. You can aggregate the data points in your application to avoid the overhead, see the following Python example:
-
-```python
-def lambda_handler(event, context):
-
-    # Inefficient when event['Records'] contains many records
-    for record in event['Records']:
-      lambda_metric("record_count", 1)
-
-    # Improved implementation
-    record_count = 0
-    for record in event['Records']:
-      record_count += 1
-    lambda_metric("record_count", record_count)
-```
-
-## Creating custom metrics from logs or traces
-
-With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as a request duration. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. Learn more about [creating log-based metrics][6].
-
-You can also generate metrics from all ingested spans, regardless of whether they are indexed by a retention filter. Learn more about [creating span-based metrics][7].
-## With the Datadog Lambda Extension
-
-{{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Custom Metrics from AWS Lambda" >}}
-
-Datadog recommends using the [Datadog Lambda Extension][1] to submit custom metrics as [**distribution**](#understanding-distribution-metrics) from the supported Lambda runtimes.
-
-1. Follow the general [serverless installation instructions][8] appropriate for your Lambda runtime.
-1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false`.
-1. If you are not interested in collecting logs from your Lambda function, set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false`.
-1. Follow the sample code or instructions below to submit your custom metric.
+2. Choose your runtime:
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,java,dotnet,other" >}}
 {{< programming-lang lang="python" >}}
@@ -133,7 +155,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
-Install the latest version of [java-dogstatsd-client][1] and then follow the sample code below to submit your custom metrics as [**distribution**](#understanding-distribution-metrics).
+Install the latest version of [`java-dogstatsd-client`][1].
 
 ```java
 package com.datadog.lambda.sample.java;
@@ -169,7 +191,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-Install the latest version of [dogstatsd-csharp-client][1] and then follow the sample code below to submit your custom metrics as [**distribution metrics**](#understanding-distribution-metrics).
+Install the latest version of [`dogstatsd-csharp-client`][1].
 
 ```csharp
 using System.IO;
@@ -208,22 +230,22 @@ namespace Example
 {{< programming-lang lang="other" >}}
 
 1. [Install][1] the DogStatsD client for your runtime
-2. Follow the [sample code][2] to submit your custom metrics as [**distribution**](#understanding-distribution-metrics)
-
+2. Follow the [sample code][2] to submit your custom metrics.
 
 [1]: /developers/dogstatsd/?tab=hostagent#install-the-dogstatsd-client
 [2]: /developers/dogstatsd/?tab=hostagent#instantiate-the-dogstatsd-client
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## With the Datadog Forwarder
+### Submit historical metrics with the Datadog Forwarder
 
-Datadog recommends using the [Datadog Forwarder Lambda][9] to submit custom metrics from Lambda runtimes that are not supported by the Datadog Lambda Extension.
+In most cases, Datadog recommends that you use the Datadog Lambda extension to submit custom metrics. However, the Lambda extension can only submit metrics with a current timestamp.
 
-1. Follow the general [serverless installation instructions][8] to instrument your Lambda function using the Datadog Forwarder Lambda function.
-1. If you are not interested in collecting traces from your Lambda function, set the environment variable `DD_TRACE_ENABLED` to `false` on your own Lambda function.
-1. If you are not interested in collecting logs from your Lambda function, set the Forwarder's CloudFormation stack parameter `DdForwardLog` to `false`.
-1. Import and use the helper function from the Datadog Lambda Library, such as `lambda_metric` or `sendDistributionMetric`, to submit your custom metrics following the sample code below.
+To submit historical metrics, use the Datadog Forwarder. These metrics can have timestamps within the last 20 minutes.
+
+Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the Datadog Lambda Forwarder.
+
+Then, choose your runtime:
 
 {{< programming-lang-wrapper langs="python,nodeJS,go,ruby,java,other" >}}
 {{< programming-lang lang="python" >}}
@@ -376,115 +398,40 @@ For example:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## [DEPRECATED] CloudWatch logs
+#### Submitting many data points
 
-**This method of submitting custom metrics is no longer supported, and is disabled for all new customers. Migrate to one of the recommended solutions.**
+Using the Forwarder to submit many data points for the same metric and the same set of tags (for example, inside a big `for`-loop) may impact Lambda performance and CloudWatch cost. 
 
-**Note**: If you are migrating to one of the recommended solutions, you'll need to start instrumenting your custom metrics under **new metric names** when submitting them to Datadog. The same metric name cannot simultaneously exist as both distribution and non-distribution metric types.
+You can aggregate the data points in your application to avoid the overhead. 
 
-This requires the following AWS permissions in your [Datadog IAM policy][10].
+For example, in Python:
 
-| AWS Permission            | Description                                                 |
-| ------------------------- | ----------------------------------------------------------- |
-| `logs:DescribeLogGroups`  | List available log groups.                                  |
-| `logs:DescribeLogStreams` | List available log streams for a group.                     |
-| `logs:FilterLogEvents`    | Fetch specific log events for a stream to generate metrics. |
+```python
+def lambda_handler(event, context):
 
-To send custom metrics to Datadog from your Lambda logs, print a log line using the following format:
+    # Inefficient when event['Records'] contains many records
+    for record in event['Records']:
+      lambda_metric("record_count", 1)
 
-```text
-MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>
+    # Improved implementation
+    record_count = 0
+    for record in event['Records']:
+      record_count += 1
+    lambda_metric("record_count", record_count)
 ```
 
-Where:
+### Understanding distribution metrics
 
-- `MONITORING` signals to the Datadog integration that it should collect this log entry.
-- `<UNIX_EPOCH_TIMESTAMP>` is in seconds, not milliseconds.
-- `<METRIC_VALUE>` MUST be a number (that is, integer or float).
-- `<METRIC_TYPE>` is `count`, `gauge`, `histogram`, or `check`.
-- `<METRIC_NAME>` uniquely identifies your metric and follows the [metric naming policy][11].
-- `<TAG_LIST>` is optional, comma separated, and must be preceded by `#`. The tag `function_name:<name_of_the_function>` is automatically applied to custom metrics.
+When Datadog receives multiple count or gauge metric points that share the same timestamp and set of tags, only the most recent one counts. This works for host-based applications because metric points get aggregated by the Datadog agent and tagged with a unique `host` tag.
 
-**Note**: The sum for each timestamp is used for counts and the last value for a given timestamp is used for gauges. It is not recommended to print a log statement every time you increment a metric, as this increases the time it takes to parse your logs. Continually update the value of the metric in your code, and print one log statement for that metric before the function finishes.
+A Lambda function may launch many concurrent execution environments when traffic increases. The function may submit count or gauge metric points that overwrite each other and cause undercounted results. To avoid this problem, custom metrics generated by Lambda functions are submitted as [distributions][11] because distribution metric points are aggregated on the Datadog backend, and every metric point counts.
 
-[1]: /serverless/libraries_integrations/extension/
-[2]: /metrics/distributions/
-[3]: /metrics/distributions/#customize-tagging
-[4]: /metrics/#time-and-space-aggregation
-[5]: /dashboards/guide/query-to-the-graph/
-[6]: /logs/logs_to_metrics/
-[7]: /tracing/trace_pipeline/generate_metrics/
-[8]: /serverless/installation/
-[9]: /serverless/forwarder/
-[10]: /integrations/amazon_web_services/?tab=roledelegation#datadog-aws-iam-policy
-[11]: /metrics/
+Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also [manage tags][12]. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][13]. To monitor a distribution for a count metric type, use `sum` for both the [time and space aggregations][13]. Refer to the guide [Query to the Graph][14] for how time and space aggregations work.
 
-## Collect enhanced metrics
+[9]: /logs/logs_to_metrics/
+[10]: /tracing/trace_pipeline/generate_metrics/
+[11]: /metrics/distributions/
+[12]: /metrics/distributions/#customize-tagging
+[13]: /metrics/#time-and-space-aggregation
+[14]: /dashboards/guide/query-to-the-graph/
 
-{{< img src="serverless/lambda-metrics-dashboard.jpeg" alt="Lambda Enhanced Metrics Default Dashboard" >}}
-
-Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
-
-Enhanced Lambda metrics give you a view above and beyond the default [Lambda metrics][1] enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog's best practice for setting real-time monitors on your serverless application health.
-
-### Real-time enhanced Lambda metrics
-
-The following real-time enhanced Lambda metrics are available, and they are tagged with the `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime`. These metrics are [distributions][2], and you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
-
-
-`aws.lambda.enhanced.invocations`
-: Measures the number of times a function is invoked in response to an event or an invocation of an API call.
-
-`aws.lambda.enhanced.errors`
-: Measures the number of invocations that failed due to errors in the function.
-
-`aws.lambda.enhanced.max_memory_used`
-: Measures the maximum amount of memory (mb) used by the function.
-
-`aws.lambda.enhanced.duration`
-: Measures the elapsed seconds from when the function code starts executing as a result of an invocation to when it stops executing.
-
-`aws.lambda.enhanced.billed_duration`
-: Measures the billed amount of time the function ran for (100ms increments).
-
-`aws.lambda.enhanced.init_duration`
-: Measures the initialization time (second) of a function during a cold start.
-
-`aws.lambda.enhanced.runtime_duration`
-: Measures the elapsed milliseconds from when the function code starts executing to when it returns the response back to the client, excluding the post-runtime duration added by Lambda extension executions.
-
-`aws.lambda.enhanced.post_runtime_duration`
-: Measures the elapsed milliseconds from when the function code returns the response back to the client to when the function stops executing, representing the duration added by Lambda extension executions.
-
-`aws.lambda.enhanced.response_latency`
-: Measures the elapsed time in milliseconds from when the invocation request is received to when the first byte of response is sent to the client.
-
-`aws.lambda.enhanced.response_duration`
-: Measures the elapsed time in milliseconds from when the first byte of response to the last byte of response is sent to the client.
-
-`aws.lambda.enhanced.produced_bytes`
-: Measures the number of bytes returned by a function.
-
-`aws.lambda.enhanced.estimated_cost`
-: Measures the total estimated cost of the function invocation (US dollars).
-
-`aws.lambda.enhanced.timeouts`
-: Measures the number of times a function times out.
-
-`aws.lambda.enhanced.out_of_memory`
-: Measures the number of times a function runs out of memory.
-
-## Enable enhanced Lambda metrics
-
-{{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
-
-Follow the [installation instructions][3] to set up instrumentation of your serverless applications. Enhanced Lambda metrics are enabled by default.
-
-## Viewing your dashboard
-
-Once you've enabled Enhanced Lambda Metrics, view your [default dashboard in the Datadog app][4].
-
-[1]: /integrations/amazon_lambda/#metric-collection
-[2]: /metrics/distributions/
-[3]: /serverless/installation/
-[4]: https://app.datadoghq.com/screen/integration/aws_lambda_enhanced_metrics
