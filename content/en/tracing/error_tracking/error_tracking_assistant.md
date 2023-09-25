@@ -26,6 +26,7 @@ The Error Tracking Assistant in APM Error Tracking provides a summary of your er
 ## Requirements and setup
 Supported languages
 : Python
+: Java
 
 The Error Tracking Assistant requires [Source Code Integration][3]. To enable Source Code Integration:
 
