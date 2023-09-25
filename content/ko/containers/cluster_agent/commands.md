@@ -38,7 +38,7 @@ Datadog 클러스터 에이전트에서 사용할 수 있는 명령은 다음과
 
 지원되는 환경 변수는 다음과 같습니다:
 
-`DD_API_KEY`                                  
+`DD_API_KEY`
 : 사용자의 [Datadog API key][1].
 
 `DD_HOSTNAME`
