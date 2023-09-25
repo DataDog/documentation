@@ -4,17 +4,22 @@ kind: documentation
 ---
 ## Restrict access to individual resources
 
-Some resources allow you to restrict access to individual resources by roles, [Teams][1] (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of payment methods to billing administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
+Some resources allow you to restrict access to individual resources by roles, [Teams][1] (beta), or users (beta).
+
+Use the different principals to control access patterns in your organization and encourage knowledge sharing and collaboration:
+- Use Teams to map access to functional groups in your organizations. For example, restrict editing of a dashboard to the application team that owns it.
+- Use roles to map access to personas. For example, restrict editing of payment methods to billing administrators.
+- Allocate access to individual users only when necessary.
 
 
-| Supported Resources with Granular Access Control | Team-Based Access | Role-Based Access | User / Service Account-Based Access |
+| Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
-| [Dashboards][2]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Monitors][3]                                   |                   | {{< X >}}         |                                     |
+| [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Monitors][3]                                    |                   | {{< X >}}         |                                     |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Security rules][5]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Service Level Objectives][6]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Synthetic tests][7]                            |                   | {{< X >}}         |                                     |
+| [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Synthetic tests][7]                             |                   | {{< X >}}         |                                     |
 
 [1]: /account_management/teams/
 [2]: /dashboards/#permissions
