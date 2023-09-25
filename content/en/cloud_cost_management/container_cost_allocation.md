@@ -65,7 +65,7 @@ Based on the CPU or memory usage of each task (as reported in the CUR), Datadog 
 
 Once all tasks have been assigned a cost based on their resource reservations, some instance cost is left over. This is the cost of unreserved resources, which is called **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
 
-If you enable AWS Split Cost Allocation, ECS tasks allocate costs based on their actual usage, with an additional `is_workload_idle` tag that represent any usage that is requested but unused. For example, a task that requests 2GB of memory but only uses 1GB has the remaining 1GB worth of cost tagged as `is_workload_idle`.
+If you enable AWS Split Cost Allocation, ECS tasks are assigned a cost based on their actual usage. For any task that has underutilized requested resources, an additional `is_workload_idle` tag is created. For example, a task that requests 2GB of memory but only uses 1GB has the remaining 1GB worth of cost tagged as `is_workload_idle`.
 
 ### ECS on Fargate
 
