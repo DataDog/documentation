@@ -353,7 +353,7 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
 
-### Obtaining a core dump from within a docker container
+### Obtaining a core dump from within a Docker container
 
 Obtaining a core dump in a docker container adds another layer of challenges to overcome. Here are a few tips to help you obtain a core dump:
 
