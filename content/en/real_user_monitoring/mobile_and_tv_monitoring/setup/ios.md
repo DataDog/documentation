@@ -335,7 +335,7 @@ configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
 {{% /tab %}}
 {{% /tabs %}}
 
-To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` on your delegate implementation and pass delegate instance to the `URLSession`:
+To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass delegate instance to the `URLSession`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
