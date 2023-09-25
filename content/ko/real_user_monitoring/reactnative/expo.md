@@ -12,7 +12,7 @@ title: Expo
 ---
 ## 개요
 
-RUM React Native SDK는 Expo와 Expo Go를 지원합니다. 이를 사용하려면, `expo-datadog`와과`@datadog/mobile-react-native`를 설치하세요.
+RUM React Native SDK는 Expo와 Expo Go를 지원합니다. 이를 사용하려면, `expo-datadog`과`@datadog/mobile-react-native`를 설치하세요.
 
 `expo-datadog`은 SDK 45부터 Expo를 지원하며 플러그인의 버전은 Expo 버전을 따릅니다. 예를 들어, Expo SDK 45를 사용하는 경우 `expo-datadog` 버전 `45.x.x`를 사용하세요. Datadog은 **Expo SDK 45**를 최소 버전으로 사용할 것을 권장하며, 이전 버전에서는 수동 단계가 필요할 수 있습니다.
 
@@ -45,7 +45,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // 버튼을 탭하는 등의 사용자 상호작용을 추적합니다.  'accessibilityLabel' 요소 속성을 사용하여 탭 동작에 이름을 지정할 수 있으며, 그렇지 않으면 요소 유형이 보고됩니다.
+    true, // 버튼을 누르는 등의 사용자 상호작용을 추적합니다.  'accessibilityLabel' 요소 속성을 사용하여 탭 동작에 이름을 지정할 수 있으며, 그렇지 않으면 요소 유형이 보고됩니다.
     true, // XHR 리소스 추적
     true // 오류 추적
 );
