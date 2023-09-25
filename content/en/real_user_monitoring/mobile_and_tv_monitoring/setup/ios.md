@@ -301,7 +301,7 @@ configuration.site = [DDSite ap1];
 
 The RUM iOS SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][9] to the SDK configuration, see the [Set tracking consent documentation][8].
 
-### Initialize the RUM Monitor and enable URLSessionInstrumentation
+### Initialize the RUM Monitor and enable `URLSessionInstrumentation`
 
 Configure and register the RUM Monitor. You only need to do it once, usually in your `AppDelegate` code:
 
