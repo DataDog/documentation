@@ -10,7 +10,7 @@ cascade:
         subcategory: Agent Guides
 ---
 
-{{< whatsnext desc="Configuration:" >}}
+{{< whatsnext desc="Configuration guides:" >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
@@ -18,12 +18,12 @@ cascade:
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Windows:" >}}
+{{< whatsnext desc="Windows guides:" >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
     {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Cloud infrastructure:" >}}
+{{< whatsnext desc="Cloud infrastructure guides:" >}}
     {{< nextlink href="agent/guide/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/" >}}Can I set up the dd-agent mysql check on my Google CloudSQL?{{< /nextlink >}}
     {{< nextlink href="/agent/guide/heroku-ruby" >}}Instrumenting a Ruby on Rails application on Heroku with Datadog{{< /nextlink >}}
     {{< nextlink href="agent/guide/heroku-troubleshooting/" >}}Datadog-Heroku Buildpack troubleshooting{{< /nextlink >}}
@@ -31,7 +31,7 @@ cascade:
     {{< nextlink href="agent/guide/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Integrations:" >}}
+{{< whatsnext desc="Integration guides:" >}}
     {{< nextlink href="agent/guide/use-community-integrations" >}}Use Community Integrations{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
 {{< /whatsnext >}}

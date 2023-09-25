@@ -9,7 +9,7 @@ TODO
 - Mention Remote configuration.
 - Mention integrations.
 
-{{< whatsnext desc="Configuration:" >}}
+{{< whatsnext desc="Agent configuration:" >}}
     {{< nextlink href="agent/configuration/agent-commands/" >}}Agent Commands{{< /nextlink >}}
     {{< nextlink href="agent/configuration/agent-configuration-files/" >}}Configuration Files{{< /nextlink >}}
     {{< nextlink href="agent/configuration/agent-log-files/" >}}Log Files{{< /nextlink >}}
