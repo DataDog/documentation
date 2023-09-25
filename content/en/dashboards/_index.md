@@ -177,7 +177,7 @@ Use granular access controls to limit the [roles][18] that may edit a particular
 
 **Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
 
-To restore general access to a notebook with restricted access, follow the steps below:
+To restore general access to a dashboard with restricted access, follow the steps below:
 1. While viewing the dashboard, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restore Full Access**.
