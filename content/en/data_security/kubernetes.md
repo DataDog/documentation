@@ -19,10 +19,10 @@ In the context of Kubernetes security, a balance is essential between the princi
 ### Restricted Security Level in Kubernetes Pod Security Admission
 The Restricted pod security standard is the most strict security standard level enforced by the built in admission controller. It's intended to enforce pod security best practices at the cost of compatibility and functionality. Intended use cases include applications that process sensitive financial information and PII. 
 
-Running the Datadog agent with the restricted pod standards would prevent the agent from accessing the data required to be useful and is not recommended.
+Running the Datadog Agent with the restricted pod standards would prevent the agent from accessing the data required to be useful and is not recommended.
 
 ### Pod running with hostPID
-A container running in the host's PID namespace can inspect processes running outside the container. If the container also has access to ptrace capabilities this can be used to escalate privileges outside of the container.
+A container running in the host's process ID (PID) namespace can inspect processes running outside the container. If the container also has access to `ptrace` capabilities, this can be used to escalate privileges outside of the container.
 
 DogStatsD can be configured to receive metrics over a UDP port or a Unix Domain Socket. Using the Unix Domain Socket offers some advantages including improved performance, error handling, and origin detection. When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. It is possible to disable origin detection, but [this causes DogStatsD collected metrics to no longer have container level tagging][1].
 
@@ -59,3 +59,4 @@ The Datadog Agent's default configuration is designed to be highly compatible wi
 
 [1]: /developers/dogstatsd/unix_socket/?tab=host 
 [2]: /containers/kubernetes/apm/ 
+[3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted
