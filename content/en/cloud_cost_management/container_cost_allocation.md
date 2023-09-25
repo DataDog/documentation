@@ -75,7 +75,7 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 
 - Usage: Cost of memory and cpu being used or requested by workloads.
 - Workload idle: Cost of memory and cpu that is being requested and allocated but not used by workloads.
-- Cluster Idle: Costs of memory and cpu not requested by workloads in a cluster.
+- Cluster idle: Costs of memory and cpu not requested by workloads in a cluster.
 
 ## Tags
 
