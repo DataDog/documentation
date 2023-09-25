@@ -1,7 +1,7 @@
 ---
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-roku
-  tag: 깃허브(Githun)
+  tag: Github
   text: dd-sdk-roku 소스 코드
 - link: /real_user_monitoring
   tag: 설명서
