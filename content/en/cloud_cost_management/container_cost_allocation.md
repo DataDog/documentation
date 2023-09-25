@@ -31,8 +31,8 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 
 | AWS Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by CPU & memory requested by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory requested by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.net.amortized`, if available* |
 
 
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
@@ -53,7 +53,7 @@ Once all pods have been assigned a cost based on their resource reservations, so
 
 ### ECS on EC2
 
-For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail.
+For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of reserved usage, providing more granular detail.
 
 Based on the CPU or memory usage of each task (as reported in the CUR), Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
 
@@ -71,9 +71,9 @@ Any cost other than EC2, computed for instances hosting Kubernetes pods or ECS t
 
 Using the `allocated_spend_type` tag, you can visualize the spend category associated with your cost at the Kubernetes node, ECS host, or cluster level. Costs are allocated into three spend types:
 
-- Usage: Cost of memory and cpu being used or requested by workloads.
-- Workload idle: Cost of memory and cpu that is being requested and allocated but not used by workloads.
-- Cluster idle: Costs of memory and cpu not requested by workloads in a cluster.
+- Usage: Cost of memory and cpu being used or reserved by workloads.
+- Workload idle: Cost of memory and cpu that is being reserved and allocated but not used by workloads.
+- Cluster idle: Cost of memory and cpu not reserved by workloads in a cluster.
 
 ## Tags
 
@@ -116,10 +116,10 @@ In addition to the `.shared.resources.allocated` metrics, Datadog also allows yo
 
 | AWS Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory requested by a pod or ECS task. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
-| `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory used by a pod or ECS task. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
 
 - If your workloads are CPU-constrained, use `cpu.allocated`.
 - If your workloads are memory-constrained, use `mem.allocated`.
