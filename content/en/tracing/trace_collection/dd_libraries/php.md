@@ -355,7 +355,7 @@ If no core dump was generated, check the following configurations and change the
 
 ### Obtaining a core dump from within a Docker container
 
-Obtaining a core dump in a docker container adds another layer of challenges to overcome. Here are a few tips to help you obtain a core dump:
+Use the information below to assist with obtaining a core dump in a Docker container:
 
 1. The docker container needs to run as a privileged container and the ulimit for core files needs to be maxed out.
    - In case you use `docker run` add the `--privileged` and the `--ulimit core=99999999999` argument
