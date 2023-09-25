@@ -99,7 +99,7 @@ yarn add -D @datadog/datadog-ci
 
  Expo 크래시 추적에 대한 자세한 내용은 [Expo 크래시 보고 및 오류 추적][6]을 참조하세요.
 
-##  Expo Router 화면 추적
+## Expo Router 화면 추적
 
 [Expo Router][7]를 사용하는 경우 `app/_layout.js` 파일에서 화면을 추적합니다:
 
