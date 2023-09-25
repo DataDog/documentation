@@ -30,7 +30,7 @@ further_reading:
 
 Supported .NET versions:
 * .NET Framework 4.6.1 and above
-* .NET Core 2.1, 3.1, .NET 5, and .NET 6
+* .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7
 
 Supported test frameworks:
 * xUnit 2.2 and above
@@ -184,7 +184,7 @@ If you are using [Coverlet][10] to compute your code coverage, indicate the path
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-Read more about code coverage in Datadog in the [Code Coverage guide][11].
+Read more about code coverage in Datadog and more advanced exclusion options in the [Code coverage guide][11].
 
 ### Instrumenting BenchmarkDotNet tests
 

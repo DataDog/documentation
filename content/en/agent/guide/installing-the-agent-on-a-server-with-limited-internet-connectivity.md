@@ -10,6 +10,8 @@ further_reading:
 - link: "/agent/proxy/"
   tag: "Documentation"
   text: "Learn more about Proxy"
+algolia:
+  tags: ['airgap', 'airgapped', 'air gap', 'air gapped', 'air-gap', 'air-gapped']
 ---
 
 The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a few different endpoints to function properly and might not work with servers that have limited internet access. Specifically, these are:
