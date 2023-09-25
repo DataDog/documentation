@@ -1,7 +1,7 @@
 ---
 title: Error Tracking Assistant
 kind: documentation
-beta: true
+is_beta: true
 private: true
 description: Learn about the Error Tracking Assistant.
 further_reading:

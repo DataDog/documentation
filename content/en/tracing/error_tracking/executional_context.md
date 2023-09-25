@@ -1,7 +1,7 @@
 ---
 title: Error Tracking Executional Context
 kind: documentation
-beta: true
+is_beta: true
 private: true
 description: Learn about the Executional Context in Error Tracking.
 further_reading:
@@ -19,43 +19,44 @@ Executional Context for APM Error Tracking is in private beta. To request access
 
 ## Overview
 
-Executional Context in APM Error Tracking automatically captures production variable values so you can easily reproduce exceptions from Error Tracking Issues.
-
-*Note: We currently only support Executional Context for Python.*
+Executional Context in APM Error Tracking automatically captures production variable values so you can reproduce exceptions from Error Tracking issues.
 
 {{< img src="tracing/error_tracking/error_tracking_executional_context.mp4" video="true" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
 
-## Setup & Requirements
+## Requirements
+Supported languages
+: Python
 
-This setup assumes that you have correctly configured the Datadog Agent for APM and are instrumented with `ddtrace`.
+- Your Datadog Agent must be configured for APM.
+- Your application must be instrumented with `ddtrace`.
 
-- Install or upgrade your Agent to version `7.44.0` or higher
-- Ensure that you are using `ddtrace` version `1.16.0` or higher
-- Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Executional Context enabled
+Executional Context is only available in APM Error Tracking. Error Tracking for Logs and RUM is not supported.
 
-## Getting Started
-1. Navigate to **APM** > **Error Tracking**
-2. Click into any Python Error Tracking Issue and scroll down to the stack trace component
-3. Expand stack frames to examine captured variable values
+## Setup
+
+1. Install or upgrade your Agent to version `7.44.0` or higher.
+2. Ensure that you are using `ddtrace` version `1.16.0` or higher.
+3. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Executional Context enabled.
+4. To scrub variable data for PII, create a [Sensitive Data Scanner][1] rule and apply it to Logs that match the query `dd_source:debugger`.
+
+## Getting started
+
+1. Navigate to [**APM** > **Error Tracking**][2].
+2. Click into any Python Error Tracking issue and scroll down to the stack trace component.
+3. Expand stack frames to examine captured variable values.
 
 {{< img src="tracing/error_tracking/error_tracking_executional_context.png" alt="Error Tracking Explorer Executional Context" style="width:80%" >}}
 
-## FAQ
-### What languages are supported? Which languages will be supported in the future?
-Currently only Python is supported. We intend to release support for .NET and Java by early 2024.
+## Troubleshooting
 
-### Will I see this in all Error Tracking Issues?
-This feature is only available on Error Tracking for APM issues for Python. Error Tracking for Logs and RUM are not yet supported.
+### A specific Python error trace does not have variable values
+To keep the performance overhead of the feature at a minimum, error capturing is rate limited: one error per second includes variable data. If you don't see variable values on a given trace:
 
-### I don't see variable values for a Python Error in a specific Trace. What's wrong?
-To keep the performance overhead of the feature at a minimum, we use rate limiting such that not every error gets captured. If you don't see variable values on a given trace, try clicking "View Similar Errors", and expanding the time range selection to ensure you find another instance of the same exception where variable values were captured.
+1. Click **View Similar Errors**.
+2. Expand the time range selection to find another instance of the exception where variable values were captured.
 
-### What is the sampling rate on APM?
-Currently, we limit the capturing of variable data to 1 error per second.
-
-### Are variable values scrubbed for PII or other sensitive data?
-We recommend using Sensitive Data Scanner to scrub the variable data for PII. To do that, create a Sensitive Data Scanner rule and apply it to Logs that match the query `dd_source:debugger`.
-
+[1]: /sensitive_data_scanner/
+[2]: https://app.datadoghq.com/apm/error-tracking
 
 ## Further Reading
 
