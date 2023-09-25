@@ -33,18 +33,19 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Tag your telemetry with Git information
 
-For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts.
-For other languages and configurations, you can [tag your telemetry](#tag-your-telemetry).
+Your telemetry needs to be tagged with Git information tying the running version with a particular repository and commit.
+
+For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which will be extracted by the [Datadog Tracing Libraries][9] automatically.
+For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
 ### Embed git information in your build artifacts
 
-You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically link the active commit to your APM service.
+You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service.
 
 Select one of the following languages that supports embedding git information:
 
 {{< tabs >}}
 {{% tab "Go" %}}
-
 [Go embeds version control information][1] in binaries starting in version 1.18.
 
 Ensure your service meets all the following requirements:
@@ -111,7 +112,7 @@ If your build process is executed in CI within a Docker container, perform the f
 COPY .git ./.git
 ```
 
-### Tag your telemetry
+### Configure telemetry tagging
 
 To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
 
@@ -188,7 +189,7 @@ Datadog doesn't store the actual content of files in your repository, only Git c
 
 Install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to let Datadog synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
 
-By setting up the GitHub integration, you can see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
+By setting up the GitHub integration, you can also see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
@@ -220,7 +221,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ### Links to Git providers
 
 <div class="alert alert-warning">
-Self-hosted instances or private URLs are not supported.
+Repositories on self-hosted instances or private URLs are not supported out-of-the-box. Please reach out to support.
 </div>
 
 {{< tabs >}}
@@ -231,7 +232,9 @@ You can see links from stack frames to their source repository in [Error Trackin
 2. Click on an issue. The **Issue Details** panel appears on the right.
 3. Under **Latest Event**, click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
 
-{{< img src="integrations/guide/source_code_integration/links-to-git-error-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt=A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
+
+If you're using the GitHub integration, or if you're hosting your repositories on gitlab.com, you will be able to click **Connect to preview** to see inline code snippets directly in the stack trace.
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
@@ -251,37 +254,6 @@ You can see links from profile frames to their source repository in the [Continu
 [2]: https://app.datadoghq.com/profiling/search
 {{% /tab %}}
 {{< /tabs >}}
-
-### Inline source code
-
-{{< tabs >}}
-{{% tab "GitHub" %}}
-
-Install Datadog's [GitHub integration][1] to directly inline code snippets from your GitHub repository in your stack traces in [Error Tracking][2].
-
-**Note:** When specifying permissions on the integration tile, enable Datadog read permissions to **Contents**.
-
-[1]: https://app.datadoghq.com/integrations/github/
-[2]: /tracing/error_tracking/
-{{% /tab %}}
-{{% tab "GitLab" %}}
-
-<div class="alert alert-warning">
-Self managed GitLab is not supported.
-</div>
-
-If you are a GitLab.com user, no setup is required to inline code snippets from your GitLab repository in your stack traces in [Error Tracking][1].
-
-[1]: /tracing/error_tracking/
-{{% /tab %}}
-{{< /tabs >}}
-
-1. Navigate to [**APM** > **Error Tracking**][1].
-2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Click **Connect to Preview** and **Authorize** to access the source code snippet containing the error.
-4. Under **Latest Event**, click the **View Code** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
-
-{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
 
 ## Further Reading
 
