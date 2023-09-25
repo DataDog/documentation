@@ -37,14 +37,14 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Tag your telemetry with Git information
 
-Your telemetry needs to be tagged with Git information tying the running version with a particular repository and commit.
+Your telemetry needs to be tagged with Git information tying the running application version with a particular repository and commit.
 
 For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which is be extracted by the [Datadog Tracing Libraries][9] automatically.
 For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
 ### Embed git information in your build artifacts
 
-You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service.
+You can embed the repository URL and commit hash in your build artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service telemetry.
 
 Select one of the following languages that supports embedding git information:
 
@@ -118,14 +118,14 @@ COPY .git ./.git
 
 ### Configure telemetry tagging
 
-To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
+To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
 
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}
 
 <div class="alert alert-warning">
 This approach requires Docker, or containerd >= 1.5.6. It doesn't support containers running on AWS Fargate.
-For additional container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> tab.
+For other container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> tab.
 </div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:
@@ -182,7 +182,7 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 ## Synchronize your repository metadata
 
-To link your runtime telemetry with source code, your repository metadata needs to be synchronized to Datadog.
+To link your telemetry with source code, your repository metadata needs to be synchronized to Datadog.
 
 <div class="alert alert-info">
 Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
@@ -193,7 +193,7 @@ Datadog doesn't store the actual content of files in your repository, only Git c
 
 Install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to let Datadog synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
 
-By setting up the GitHub integration, you can also see inline code snippets in **Error Tracking**. For more information, see [Inline Source Code](#inline-source-code).
+Setting up the GitHub integration also allows you to see inline code snippets in **Error Tracking**.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
