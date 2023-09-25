@@ -61,7 +61,7 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for CSM Misconfigurations{{< /nextlink >}}
-  {{< nextlink href="/security/misconfigurations/findings">}} Learn about CSM Misconfigurations findings{{< /nextlink >}}
+  {{< nextlink href="/security/misconfigurations/findings">}} Learn more about misconfigurations{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}
 {{< /whatsnext >}}
