@@ -180,11 +180,20 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )
     ```
 
-4. Initialize URLSession as stated in [Setup][1]:
+4. Enable URLSession instrumentation with your `URLSessionDataDelegate` implementation:
+    ```swift
+    URLSessionInstrumentation.enable(
+        with: .init(
+            delegateClass: SessionDelegate.self
+        )
+    )
+    ```
+
+5. Initialize URLSession as stated in [Setup][1]:
     ```swift
     let session =  URLSession(
         configuration: ...,
-        delegate: DDURLSessionDelegate(),
+        delegate: SessionDelegate(),
         delegateQueue: ...
     )
     ```
