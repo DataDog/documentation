@@ -36,6 +36,10 @@ The [Integrations page][101] includes integrations built by both Datadog and our
 {{% /tab %}}
 {{% tab "Marketplace" %}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog Marketplace is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 The [Marketplace page][101] is a commercial platform for Technology Partners to _sell_ a variety of offerings, including integrations, software licenses, and professional services to Datadog customers.
 
 {{< img src="developers/marketplace/marketplace_updated_overview.png" alt="The Datadog Marketplace page" style="width:100%" >}}

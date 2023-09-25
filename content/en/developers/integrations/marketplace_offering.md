@@ -20,6 +20,10 @@ description: Learn about the Datadog marketplace.
 ---
 ## Overview
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog Marketplace is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 The [Datadog Marketplace][2] is a digital marketplace where Technology Partners can list their paid offerings to Datadog users.  
 
 While the **Integrations** page includes integrations built by both Datadog and Technology Partners at no cost, the **Marketplace** page is a commercial platform for Datadog customers and Technology Partners to buy and sell a variety of offerings, including Agent-based or API-based integrations, software licenses, and professional services.
