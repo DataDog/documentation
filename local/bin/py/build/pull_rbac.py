@@ -44,9 +44,20 @@ def pull_rbac():
     if permissions_json and roles_json:
         permissions_data = permissions_json.get('data', [])
         # gets default roles (admin, standard, and read-only)
+        default_roles_data = roles_json.get('data', [])
+
         # ignores UI template roles ('Datadog Billing Admin Role' and 'Datadog Security Admin Role')
-        default_roles_data = roles_json.get('data', [])[0:3] 
-        dr_data_len = len(default_roles_data)
+        # reliable ordered structure of roles for lookup. from least permissive (read only) -> most permissive (admin)
+        role_hierarchy = ['Datadog Read Only Role', 'Datadog Standard Role', 'Datadog Admin Role']
+        default_roles_hierarchy = []
+        
+        # create hierarchical role list
+        for role_x in role_hierarchy:
+            for role_y in default_roles_data:
+                if role_y['attributes']['name'] == role_x:
+                    default_roles_hierarchy.append(role_y)
+                    break
+            
 
         for permission in permissions_data:
             group_name = permission['attributes']['group_name']
@@ -54,10 +65,10 @@ def pull_rbac():
             permission_description = permission['attributes']['description']
             permission_role_name = ''
 
-            for idx in range(dr_data_len):
+            # lookup. get least permissive role for a permission
+            for role in default_roles_hierarchy:
                 if permission_role_name:
-                    break
-                role = default_roles_data[(dr_data_len-1)-idx] # reverse lookup. get least permissive role starting from the 'Datadog Read Only Role' -> 'Datadog Admin Role'
+                    break # permission role name is found. stop iterating over default roles
                 role_name = role['attributes']['name']
                 role_permissions = role['relationships']['permissions']['data']
 
