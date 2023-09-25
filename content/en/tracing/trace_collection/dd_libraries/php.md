@@ -358,8 +358,8 @@ If no core dump was generated, check the following configurations and change the
 Use the information below to assist with obtaining a core dump in a Docker container:
 
 1. The Docker container needs to run as a privileged container, and the `ulimit` value for core files needs to be set to its maximum as shown in the examples below.
-   - In case you use `docker run` add the `--privileged` and the `--ulimit core=99999999999` argument
-   - In case you use `docker compose` add the following to the container in the `docker-compose.yml`:
+   - If you use the `docker run` command, add the `--privileged` and the `--ulimit core=99999999999` arguments
+   - If you use `docker compose`, add the following to the `docker-compose.yml` file:
 ```yaml
 privileged: true
 ulimits:
