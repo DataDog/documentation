@@ -23,31 +23,33 @@ The Error Tracking Assistant in APM Error Tracking provides a summary of your er
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.mp4" video="true" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
 
-## Setup & Requirements
-[Source Code Integration][3] is required to enable the Error Tracking Assistant. To get setup:
-1. Go to **Integrations** and choose **Link Source Code** in the top navbar
-2. Follow the steps to associate a commit with your telemetry, and configure your GitHub repository
+## Requirements and setup
+Supported languages
+: Python
+
+The Error Tracking Assistant requires [Source Code Integration][3]. To enable Source Code Integration:
+
+1. Go to **Integrations** and choose **Link Source Code** in the top navbar.
+2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
 
 {{< img src="tracing/error_tracking/apm_source_code_integration.png" alt="APM Source Code Integration Set Up" style="width:80%" >}}
 
-### Recommended additional setup:
-- To enhance Error Tracking Assistant suggestions for **Python** by providing the Assistant real production variable values, enroll in the [Python Executional Context Beta][1]
-- To send test cases and fixes to your IDE, click on **Apply in VS Code** on any generated suggestion and follow the guided setup to install the Datadog VS Code Extension
+### Recommended additional setup
+- To enhance suggestions for Python by providing real production variable values to the Assistant, enroll in the [Python Executional Context Beta][1].
+- To send test cases and fixes to your IDE, click on **Apply in VS Code** on any generated suggestion and follow the guided setup to install the Datadog VS Code Extension.
 
-
-## Getting Started
-1. Navigate to **APM** > **Error Tracking**
-2. Click into any Error Tracking Issue to view the new **Generate text & fix** section
+## Getting started
+1. Navigate to **APM** > **Error Tracking**.
+2. Click into any Error Tracking issue to view the new **Generate test & fix** section.
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.png" alt="Error Tracking Assistant" style="width:80%" >}}
 
-## FAQ
-### What languages does the Error Tracking Assistant support?
-Currently only Python is supported and we are working to release support for Java soon.
+## Troubleshooting
 
-### Why am I not seeing any suggestions generated? 
+If you aren't seeing generated suggestions:
+
 1. Ensure that [Source Code Integration][2] with the Github Integration is correctly configured.
-2. Enhance Error Tracking Assistant suggestions by enrolling in the [Python Executional Context Beta][1]
+2. Enhance Error Tracking Assistant suggestions by enrolling in the [Python Executional Context Beta][1].
 
 ## Further Reading
 
