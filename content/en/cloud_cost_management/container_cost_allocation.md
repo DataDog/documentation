@@ -39,8 +39,6 @@ These new cost metrics include all of your AWS cloud costs. This allows you to c
 
 For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
 
-If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail.
-
 ## Cost allocation
 
 Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR) into individual costs for each pod or task running on the instance. These divided costs are then enriched with tags from the nodes, pods, and tasks, which allows you to break down costs by any associated dimensions.
@@ -55,7 +53,7 @@ Once all pods have been assigned a cost based on their resource reservations, so
 
 ### ECS on EC2
 
-For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS.
+For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of requested usage, providing more granular detail.
 
 Based on the CPU or memory usage of each task (as reported in the CUR), Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
 
