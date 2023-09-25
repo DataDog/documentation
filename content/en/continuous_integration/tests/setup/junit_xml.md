@@ -1,8 +1,12 @@
 ---
 title: Uploading JUnit test report files to Datadog
 kind: documentation
+code_lang: junit_xml
+type: multi-code-lang
+code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
+  - /continuous_integration/tests/junit_upload
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"

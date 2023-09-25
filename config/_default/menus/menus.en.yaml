@@ -2218,9 +2218,9 @@ main:
     identifier: ci_tests_setup_swift
     weight: 106
   - name: JUnit Report Uploads
-    url: continuous_integration/tests/junit_upload/
-    parent: ci_tests
-    identifier: ci_tests_junit
+    url: continuous_integration/tests/setup/junit_xml/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_junit_xml
     weight: 102
   - name: Tests in Containers
     url: continuous_integration/tests/containers/
