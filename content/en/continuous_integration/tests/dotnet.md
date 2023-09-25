@@ -26,7 +26,7 @@ further_reading:
 
 Supported .NET versions:
 * .NET Framework 4.6.1 and above
-* .NET Core 2.1, 3.1, .NET 5, and .NET 6
+* .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7
 
 Supported test frameworks:
 * xUnit 2.2 and above
