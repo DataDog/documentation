@@ -57,7 +57,7 @@ def pull_rbac():
             for idx in range(dr_data_len):
                 if permission_role_name:
                     break
-                role = default_roles_data[(dr_data_len-1)-idx] # get least permissive role starting from the 'Datadog Read Only Role' -> 'Datadog Admin Role'
+                role = default_roles_data[(dr_data_len-1)-idx] # reverse lookup. get least permissive role starting from the 'Datadog Read Only Role' -> 'Datadog Admin Role'
                 role_name = role['attributes']['name']
                 role_permissions = role['relationships']['permissions']['data']
 
@@ -71,7 +71,7 @@ def pull_rbac():
             # Ignore legacy logs permissions from dictionary before converting to JSON.  
             # These legacy permissions are hard-coded in rbac-permissions-table partial until they can be deprecated.
             # Ignore Deprecated permissions
-            if (permission_name not in ('logs_live_tail', 'logs_read_index_data')) or ("Deprecated" in permission_description):
+            if (permission_name not in ('logs_live_tail', 'logs_read_index_data')) and ("Deprecated" not in permission_description):
                 permission.setdefault('role_name', permission_role_name) # add role name
                 formatted_permissions_dict.setdefault(group_name, []).append(permission) # {group_name: permissions[]}
 
