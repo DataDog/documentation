@@ -18469,6 +18469,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPCIAppErrors'
           description: Service Unavailable
+      security:
+      - apiKeyAuth: []
       summary: Send pipeline event
       tags:
       - CI Visibility Pipelines
