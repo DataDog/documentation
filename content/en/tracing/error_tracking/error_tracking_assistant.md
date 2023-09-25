@@ -39,7 +39,7 @@ The Error Tracking Assistant requires [Source Code Integration][3]. To enable So
 - To send test cases and fixes to your IDE, click on **Apply in VS Code** on any generated suggestion and follow the guided setup to install the Datadog VS Code Extension.
 
 ## Getting started
-1. Navigate to **APM** > **Error Tracking**.
+1. Navigate to [**APM** > **Error Tracking**][4].
 2. Click into any Error Tracking issue to view the new **Generate test & fix** section.
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.png" alt="Error Tracking Assistant" style="width:80%" >}}
@@ -58,3 +58,4 @@ If you aren't seeing generated suggestions:
 [1]: /tracing/error_tracking/executional_context
 [2]: https://app.datadoghq.com/source-code/setup/apm
 [3]: /integrations/guide/source-code-integration
+[4]: https://app.datadoghq.com/apm/error-tracking
