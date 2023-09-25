@@ -3733,9 +3733,7 @@ components:
           example: a
           type: string
         type:
-          description: The type of column present.
-          example: number
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeNumber'
         values:
           description: The array of numerical values for one formula or query.
           example:
@@ -3744,6 +3742,7 @@ components:
             description: An individual value for a given column and group-by.
             example: 0.5
             format: double
+            nullable: true
             type: number
           type: array
       type: object
@@ -4038,9 +4037,8 @@ components:
       properties:
         id:
           description: Monitor ID of the downtime.
-          example: 12345
-          format: int64
-          type: integer
+          example: '12345'
+          type: string
         type:
           $ref: '#/components/schemas/DowntimeIncludedMonitorType'
       type: object
@@ -5535,9 +5533,7 @@ components:
           example: env
           type: string
         type:
-          description: The type of column present.
-          example: group
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeGroup'
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
@@ -12318,6 +12314,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
+    ScalarColumnTypeGroup:
+      default: group
+      description: The type of column present for groups.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
+    ScalarColumnTypeNumber:
+      default: number
+      description: The type of column present for numbers.
+      enum:
+      - number
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12422,6 +12436,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     ScalarQuery:
@@ -17425,6 +17440,12 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
+              the API.
+            ci_visibility_read: View CI Visibility.
+            create_webhooks: Create webhooks integrations.
+            dashboards_public_share: Generate public and authenticated links to share
+              dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
@@ -17438,12 +17459,28 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
+            monitors_write: Edit, mute, and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
+            slos_corrections: Apply, edit, and delete SLO status corrections. A user
+              with this permission can make status corrections, even if they do not
+              have permission to edit those SLOs.
+            slos_read: View SLOs and status corrections.
+            slos_write: Create, edit, and delete SLOs.
+            synthetics_global_variable_read: View, search, and use Synthetics global
+              variables.
+            synthetics_global_variable_write: Create, edit, and delete global variables
+              for Synthetics.
+            synthetics_private_location_read: View, search, and use Synthetics private
+              locations.
+            synthetics_private_location_write: Create and delete private locations
+              in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
             teams_manage: Manage Teams. Create, delete, rename, and edit metadata
@@ -18432,6 +18469,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPCIAppErrors'
           description: Service Unavailable
+      security:
+      - apiKeyAuth: []
       summary: Send pipeline event
       tags:
       - CI Visibility Pipelines
@@ -18465,6 +18504,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18543,6 +18587,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18583,6 +18632,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18619,6 +18673,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -18697,6 +18756,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -18737,6 +18801,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -19185,6 +19254,16 @@ paths:
         schema:
           example: created_by,monitor
           type: string
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of downtimes in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 30
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -19209,11 +19288,12 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Schedule a downtime.
       operationId: CreateDowntime
@@ -19271,9 +19351,6 @@ paths:
         - name: downtime_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime/{downtime_id}:
     delete:
       description: Cancel a downtime.
@@ -19314,9 +19391,6 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get downtime detail by `downtime_id`.
       operationId: GetDowntime
@@ -19376,9 +19450,6 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
       description: Update a downtime by `downtime_id`.
       operationId: UpdateDowntime
@@ -19436,9 +19507,6 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -23950,9 +24018,6 @@ paths:
       x-menu-order: 7
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -25974,7 +26039,16 @@ paths:
               \ \"type\": \"cloud_configuration\",\n  \"isEnabled\": false,\n  \"message\":
               \"Cloud configuration rule\",\n  \"options\": {\n    \"complianceRuleOptions\":
               {\n      \"resourceType\": \"gcp_compute_disk\",\n      \"regoRule\":
-              {\n        \"policy\": \"package datadog\\n\",\n        \"resourceTypes\":
+              {\n        \"policy\": \"package datadog\\n\\nimport data.datadog.output
+              as dd_output\\n\\nimport future.keywords.contains\\nimport future.keywords.if\\nimport
+              future.keywords.in\\n\\nmilliseconds_in_a_day := ((1000 * 60) * 60)
+              * 24\\n\\neval(iam_service_account_key) = \\\"skip\\\" if {\\n\\tiam_service_account_key.disabled\\n}
+              else = \\\"pass\\\" if {\\n\\t(iam_service_account_key.resource_seen_at
+              / milliseconds_in_a_day) - (iam_service_account_key.valid_after_time
+              / milliseconds_in_a_day) <= 90\\n} else = \\\"fail\\\"\\n\\n# This part
+              remains unchanged for all rules\\nresults contains result if {\\n\\tsome
+              resource in input.resources[input.main_resource_type]\\n\\tresult :=
+              dd_output.format(resource, eval(resource))\\n}\\n\",\n        \"resourceTypes\":
               [\n          \"gcp_compute_disk\"\n        ]\n      },\n      \"complexRule\":
               false\n    }\n  },\n  \"complianceSignalOptions\": {\n    \"userActivationStatus\":
               true,\n    \"userGroupByFields\": [\"@account_id\"]\n  },\n  \"cases\":
@@ -27792,6 +27866,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29016,7 +29094,8 @@ paths:
 
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
-          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
+          `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
@@ -29026,8 +29105,8 @@ paths:
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.
+          `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
+          and `timeseries`.
 
           The following product family has been **deprecated**: `audit_logs`.'
         in: query
@@ -29415,6 +29494,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:

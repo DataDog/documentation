@@ -16,7 +16,7 @@ Service Scorecards are in beta.
 
 ## Overview
 
-Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All eligible services in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
+Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
 
 ## How services are evaluated
 
@@ -74,7 +74,7 @@ Each rule lists a score for the percentage of services that are passing. Each sc
 
 ## View service-level details and scores
 
-The scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Score** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
+The scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
 
