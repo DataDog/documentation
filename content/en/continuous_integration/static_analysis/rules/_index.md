@@ -1,8 +1,27 @@
 ---
-title: Static Analysis Rules
+title: Static `Analysis` Rules
 kind: documentation
 description: View rules for multiple languages for Static Analysis.
 is_beta: true
+test_data:
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/tsx-no-target-blank"
+    tag: "tsx-no-target-blank"
+    text: "Prevent target="_blank" attribute without rel="noreferrer""
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/for-direction"
+    tag: "for-direction"
+    text: "Check "for" loop is moving in the right direction"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/new-parens"
+    tag: "new-parens"
+    text: "Invoking a constructor must use parentheses"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-alert"
+    tag: "no-alert"
+    text: "Avoid the use of alert, confirm, and prompt"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-async-promise-executor"
+    tag: "no-async-promise-executor"
+    text: "Promise executor cannot be an async function"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-caller"
+    tag: "no-caller"
+    text: "Avoid the use of `arguments.caller` or `arguments.caller`"
 docker_best_practices_data:
   - link: "/continuous_integration/static_analysis/rules/docker-best-practices/absolute-workdir"
     tag: "absolute-workdir"
@@ -479,6 +498,10 @@ further_reading:
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
 ## Rules
+
+## 
+
+{{< sa-rule-list "test_data" >}}
 
 ### Follow best practices with using Docker
 
