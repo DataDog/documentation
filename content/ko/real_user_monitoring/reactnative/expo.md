@@ -45,7 +45,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // 버튼을 누르는 등의 사용자 상호작용을 추적합니다.  'accessibilityLabel' 요소 속성을 사용하여 탭 동작에 이름을 지정할 수 있으며, 그렇지 않으면 요소 유형이 보고됩니다.
+    true, // 버튼을 탭하는 등의 사용자 상호작용을 추적합니다.  'accessibilityLabel' 요소 속성을 사용하여 탭 동작에 이름을 지정할 수 있으며, 그렇지 않으면 요소 유형이 보고됩니다.
     true, // XHR 리소스 추적
     true // 오류 추적
 );
@@ -58,8 +58,8 @@ config.sessionSamplingRate = 80;
 // 선택 사항: 앱과 백엔드 간의 네트워크 호출에 대한 샘플 추적 통합(예: 계측된 백엔드로의 호출 중 80%가 RUM 보기에서 APM 보기로 연결됨). 기본값은 20%입니다.
 // 이러한 백엔드에서 추적을 사용하려면 백엔드의 호스트를 지정해야 합니다.
 config.resourceTracingSamplingRate = 80;
-config.firstPartyHosts = ['example.com']; // Matches 'example.com' and subdomains like 'api.example.com'.
-// 선택 사항: Datadog SDK가 제공된 수준 이상의 내부 로그를 출력하도록 합니다. 기본값은 정의되지 않습니다. 즉, 로그가 기록되지 않습니다.
+config.firstPartyHosts = ['example.com']; // 'example.com'과 'api.example.com'과 같은 하위 도메인을 일치시킵니다.
+// 선택 사항: Datadog SDK가 제공된 수준 이상의 내부 로그를 출력하도록 합니다. 기본값은 정의되지 않습니다. 즉, 로그가 없습니다.
 config.verbosity = SdkVerbosity.WARN;
 
 await DdSdkReactNative.initialize(config);
