@@ -6,10 +6,10 @@ is_beta: true
 test_data:
   - link: "/continuous_integration/static_analysis/rules/tsx-react/tsx-no-target-blank"
     tag: "tsx-no-target-blank"
-    text: "Prevent target=\"_blank\" attribute without rel=\"noreferrer\"
+    text: "Prevent target='_blank' attribute without rel='noreferrer'
   - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/for-direction"
     tag: "for-direction"
-    text: "Check \"for\" loop is moving in the right direction"
+    text: "Check 'for' loop is moving in the right direction"
   - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/new-parens"
     tag: "new-parens"
     text: "Invoking a constructor must use parentheses"
@@ -476,7 +476,7 @@ python_security_data:
     tag: "yaml-load"
     text: "avoid deserializing untrusted YAML"
 further_reading:
-  - link: "/continuous_integration/static_analysis/"
+  - link: "/continuous_integration/static_analysis/'
     tag: "Documentation"
     text: "Learn about Datadog Static Analysis"
 ---
