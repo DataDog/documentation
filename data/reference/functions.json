@@ -38,7 +38,8 @@
           "source": "abs(-42.2)",
           "return": "42.2"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ceil",
@@ -87,7 +88,8 @@
           "source": "ceil(4.345, precision: 2)",
           "return": "4.35"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "floor",
@@ -136,7 +138,8 @@
           "source": "floor(4.345, precision: 2)",
           "return": "4.34"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "format_int",
@@ -182,7 +185,8 @@
           "source": "format_int!(-42, 16)",
           "return": "\"-2a\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "format_number",
@@ -239,7 +243,8 @@
           "source": "format_number(1234567.89, 3, decimal_separator: \".\", grouping_separator: \",\")",
           "return": "\"1,234,567.890\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "mod",
@@ -283,7 +288,8 @@
           "source": "remainder = mod(5, 2)",
           "return": "1"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "round",
@@ -332,7 +338,8 @@
           "source": "round(4.345, precision: 2)",
           "return": "4.35"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Array": [
@@ -372,7 +379,8 @@
           "source": "append([1, 2], [3, 4])",
           "return": "[1,2,3,4]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "chunks",
@@ -422,7 +430,8 @@
           "source": "chunks(\"ab你好\", 4)",
           "return": "[\"ab�\",\"�好\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "push",
@@ -463,7 +472,8 @@
           "source": "push([1, 2], 3)",
           "return": "[1,2,3]"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Type": [
@@ -510,7 +520,8 @@
           "source": "array!(.value)",
           "return": "[1,2,3]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "bool",
@@ -551,7 +562,8 @@
           "source": "bool!(.value)",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "float",
@@ -592,7 +604,8 @@
           "source": "float!(.value)",
           "return": "42"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "int",
@@ -633,7 +646,8 @@
           "source": "int!(.value)",
           "return": "42"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_array",
@@ -672,7 +686,8 @@
           "source": "is_array(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_boolean",
@@ -711,7 +726,8 @@
           "source": "is_boolean(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_empty",
@@ -757,7 +773,8 @@
           "source": "is_empty({\"foo\": \"bar\"})",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_float",
@@ -796,7 +813,8 @@
           "source": "is_float(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_integer",
@@ -835,7 +853,8 @@
           "source": "is_integer(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_json",
@@ -900,7 +919,8 @@
           "source": "is_json(\"{}\", variant: \"array\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_null",
@@ -939,7 +959,8 @@
           "source": "is_null(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_nullish",
@@ -985,7 +1006,8 @@
           "source": "is_nullish(\"\n  \n\")",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_object",
@@ -1024,7 +1046,8 @@
           "source": "is_object(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_regex",
@@ -1063,7 +1086,8 @@
           "source": "is_regex(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_string",
@@ -1102,7 +1126,8 @@
           "source": "is_string([1, 2, 3])",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_timestamp",
@@ -1141,7 +1166,8 @@
           "source": "is_timestamp(\"a string\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "object",
@@ -1185,7 +1211,8 @@
           "source": "object!(.value)",
           "return": "{\"field1\":\"value1\",\"field2\":\"value2\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "string",
@@ -1226,7 +1253,8 @@
           "source": "string!(.message)",
           "return": "\"{\\\"field\\\": \\\"value\\\"}\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "tag_types_externally",
@@ -1273,7 +1301,8 @@
           "source": "tag_types_externally(null)",
           "return": "null"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "timestamp",
@@ -1314,7 +1343,8 @@
           "source": "ok, err = timestamp(.timestamp)",
           "return": "\"function call error for \\\"timestamp\\\" at (10:31): expected timestamp, got string\""
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Debug": [
@@ -1365,7 +1395,8 @@
             "runtime": "function call error for \"assert\" at (0:60): \"foo\" must be \"foo\"!"
           }
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "assert_eq",
@@ -1427,7 +1458,8 @@
             "runtime": "function call error for \"assert_eq\" at (1:46): Unequal integers"
           }
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "log",
@@ -1492,7 +1524,8 @@
           "source": "ts, err = to_int(.field)\nif err != null {\n\tlog(err, level: \"error\")\n}",
           "return": "null"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Enumerate": [
@@ -1588,7 +1621,8 @@
           "source": "compact({\"field1\": 1, \"field2\": \"\", \"field3\": [], \"field4\": null}, string: true, array: true, null: true)",
           "return": "{\"field1\":1}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "filter",
@@ -1630,7 +1664,8 @@
           "source": "filter(array!(.tags)) -> |_index, value| {\n    # keep any elements that aren't equal to \"foo\"\n    value != \"foo\"\n}",
           "return": "[\"bar\",\"baz\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "flatten",
@@ -1679,7 +1714,8 @@
           "source": "flatten({\n\t\"parent1\": {\n\t\t\"child1\": 1,\n\t\t\"child2\": 2\n\t},\n\t\"parent2\": {\n\t\t\"child3\": 3\n\t}\n})",
           "return": "{\"parent1.child1\":1,\"parent1.child2\":2,\"parent2.child3\":3}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "for_each",
@@ -1720,7 +1756,8 @@
           "source": "tally = {}\nfor_each(array!(.tags)) -> |_index, value| {\n    # Get the current tally for the `value`, or\n    # set to `0`.\n    count = int(get!(tally, [value])) ?? 0\n\n    # Increment the tally for the value by `1`.\n    tally = set!(tally, [value], count + 1)\n}\n\ntally",
           "return": "{\"foo\":2,\"bar\":1,\"baz\":1}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "includes",
@@ -1758,7 +1795,8 @@
           "source": "includes([\"apple\", \"orange\", \"banana\"], \"banana\")",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "keys",
@@ -1797,7 +1835,8 @@
           "source": "keys({\"key1\": \"val1\", \"key2\": \"val2\"})",
           "return": "[\"key1\",\"key2\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "length",
@@ -1849,7 +1888,8 @@
           "source": "length(\"The Planet of the Apes Musical\")",
           "return": "30"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "map_keys",
@@ -1906,7 +1946,8 @@
           "source": "map_keys(., recursive: true) -> |key| { replace(key, \".\", \"_\") }",
           "return": "{\"labels\":{\"app_kubernetes_io/name\":\"mysql\"}}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "map_values",
@@ -1953,7 +1994,8 @@
           "source": "map_values(.) -> |value| { upcase!(value) }",
           "return": "{\"foo\":\"FOO\",\"bar\":\"BAR\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "match_array",
@@ -2015,7 +2057,8 @@
           "source": "\tmatch_array([\"foo\", \"foobar\", \"baz\"], r'foo', all: true)",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "strlen",
@@ -2045,7 +2088,8 @@
           "source": "strlen(\"ñandú\")",
           "return": "5"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "unique",
@@ -2075,7 +2119,8 @@
           "source": "unique([\"foo\", \"bar\", \"foo\", \"baz\"])",
           "return": "[\"foo\",\"bar\",\"baz\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "values",
@@ -2114,7 +2159,8 @@
           "source": "values({\"key1\": \"val1\", \"key2\": \"val2\"})",
           "return": "[\"val1\",\"val2\"]"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "String": [
@@ -2168,7 +2214,8 @@
           "source": "contains(\"The Needle In The Haystack\", \"needle\", case_sensitive: false)",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "downcase",
@@ -2198,7 +2245,8 @@
           "source": "downcase(\"Hello, World!\")",
           "return": "\"hello, world!\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ends_with",
@@ -2250,7 +2298,8 @@
           "source": "ends_with(\"The Needle In The Haystack\", \"the haystack\", case_sensitive: false)",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "find",
@@ -2313,7 +2362,8 @@
           "source": "find(\"foobarfoobarfoo\", \"bar\", 4)",
           "return": "9"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "join",
@@ -2356,7 +2406,8 @@
           "source": "join!([\"sources\", \"transforms\", \"sinks\"], separator: \", \")",
           "return": "\"sources, transforms, sinks\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "match",
@@ -2393,8 +2444,14 @@
           "title": "Regex match on a string",
           "source": "match(\"I'm a little teapot\", r'teapot')",
           "return": "true"
+        },
+        {
+          "title": "String does not match the regular expression",
+          "source": "match(\"I'm a little teapot\", r'.*balloon')",
+          "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "match_any",
@@ -2432,7 +2489,8 @@
           "source": "match_any(\"I'm a little teapot\", [r'frying pan', r'teapot'])",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "redact",
@@ -2479,7 +2537,8 @@
           "source": "redact({ \"name\": \"John Doe\", \"ssn\": \"123-12-1234\"}, filters: [\"us_social_security_number\"])",
           "return": "{\"name\":\"John Doe\",\"ssn\":\"[REDACTED]\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "replace",
@@ -2550,7 +2609,8 @@
           "source": "replace(\"foo123bar\", r'foo(?P<num>\\d+)bar', \"$num\")",
           "return": "\"123\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "slice",
@@ -2603,7 +2663,8 @@
           "source": "slice!(\"Supercalifragilisticexpialidocious\", start: 5, end: -14)",
           "return": "\"califragilistic\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "split",
@@ -2658,7 +2719,8 @@
           "source": "split(\"apples and pears and bananas\", \" and \", limit: 2)",
           "return": "[\"apples\",\"pears and bananas\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "starts_with",
@@ -2710,7 +2772,8 @@
           "source": "starts_with(\"The Needle In The Haystack\", \"the needle\", case_sensitive: false)",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "strip_ansi_escape_codes",
@@ -2740,7 +2803,8 @@
           "source": "strip_ansi_escape_codes(\"\\e[46mfoo\\e[0m bar\")",
           "return": "\"foo bar\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "strip_whitespace",
@@ -2770,7 +2834,8 @@
           "source": "strip_whitespace(\"  A sentence.  \")",
           "return": "\"A sentence.\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "truncate",
@@ -2821,7 +2886,8 @@
           "source": "truncate(\"A rather long sentence.\", limit: 11, ellipsis: true)",
           "return": "\"A rather lo...\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "upcase",
@@ -2851,7 +2917,8 @@
           "source": "upcase(\"Hello, World!\")",
           "return": "\"HELLO, WORLD!\""
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Codec": [
@@ -2885,7 +2952,8 @@
           "source": "decode_base16!(\"796f752068617665207375636365737366756c6c79206465636f646564206d65\")",
           "return": "\"you have successfully decoded me\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "decode_base64",
@@ -2935,7 +3003,8 @@
           "source": "decode_base64!(\"eW91IGNhbid0IG1ha2UgeW91ciBoZWFydCBmZWVsIHNvbWV0aGluZyBpdCB3b24ndA==\", charset: \"url_safe\")",
           "return": "\"you can't make your heart feel something it won't\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "decode_gzip",
@@ -2967,7 +3036,8 @@
           "source": "encoded_text = decode_base64!(\"H4sIAHEAymMAA6vML1XISCxLVSguTU5OLS5OK83JqVRISU3OT0lNUchNBQD7BGDaIAAAAA==\")\ndecode_gzip!(encoded_text)",
           "return": "\"you have successfully decoded me\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "decode_mime_q",
@@ -3009,7 +3079,8 @@
           "source": "decode_mime_q!(\"?b?SGVsbG8sIFdvcmxkIQ==\")",
           "return": "\"Hello, World!\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "decode_percent",
@@ -3039,7 +3110,8 @@
           "source": "decode_percent(\"foo%20bar%3F\")",
           "return": "\"foo bar?\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "decode_zlib",
@@ -3071,7 +3143,8 @@
           "source": "encoded_text = decode_base64!(\"eJwNy4ENwCAIBMCNXIlQ/KqplUSgCdvXAS41qPMHshCB2R1zJlWIVlR6UURX2+wx2YcuK3kAb9C1wd6dn7Fa+QH9gRxr\")\ndecode_zlib!(encoded_text)",
           "return": "\"you_have_successfully_decoded_me.congratulations.you_are_breathtaking.\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "decode_zstd",
@@ -3103,7 +3176,8 @@
           "source": "encoded_text = decode_base64!(\"KLUv/QBY/QEAYsQOFKClbQBedqXsb96EWDax/f/F/z+gNU4ZTInaUeAj82KqPFjUzKqhcfDqAIsLvAsnY1bI/N2mHzDixRQA\")\ndecode_zstd!(encoded_text)",
           "return": "\"you_have_successfully_decoded_me.congratulations.you_are_breathtaking.\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_base16",
@@ -3133,7 +3207,8 @@
           "source": "encode_base16(\"please encode me\")",
           "return": "\"706c6561736520656e636f6465206d65\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_base64",
@@ -3195,7 +3270,8 @@
           "source": "encode_base64(\"please encode me, but safe for URLs\", charset: \"url_safe\")",
           "return": "\"cGxlYXNlIGVuY29kZSBtZSwgYnV0IHNhZmUgZm9yIFVSTHM=\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_gzip",
@@ -3234,7 +3310,8 @@
           "source": "encoded_text = encode_gzip(\"please encode me\")\nencode_base64(encoded_text)",
           "return": "\"H4sIAAAAAAAA/yvISU0sTlVIzUvOT0lVyE0FAI4R4vcQAAAA\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_json",
@@ -3264,7 +3341,8 @@
           "source": ".payload = encode_json({\"hello\": \"world\"})",
           "return": "\"{\\\"hello\\\":\\\"world\\\"}\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_key_value",
@@ -3358,7 +3436,8 @@
           "source": "encode_key_value(\n\t{\"ts\": \"2021-06-05T17:20:00Z\", \"msg\": \"This is a message\", \"lvl\": \"info\", \"beta\": true, \"dropped\": false},\n\tfield_delimiter: \",\",\n\tkey_value_delimiter: \":\",\n\tflatten_boolean: true\n)",
           "return": "\"beta,lvl:info,msg:\\\"This is a message\\\",ts:2021-06-05T17:20:00Z\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_logfmt",
@@ -3415,7 +3494,8 @@
           "source": "encode_logfmt!({\"agent\": {\"name\": \"vector\"}, \"log\": {\"file\": {\"path\": \"my.log\"}}, \"event\": \"log\"}, [\"event\", \"log.file.path\", \"agent.name\"])",
           "return": "\"event=log log.file.path=my.log agent.name=vector\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_percent",
@@ -3470,7 +3550,8 @@
           "source": "encode_percent(\"foo \tbar\", ascii_set: \"CONTROLS\")",
           "return": "\"foo %09bar\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_zlib",
@@ -3509,7 +3590,8 @@
           "source": "encoded_text = encode_zlib(\"please encode me\")\nencode_base64(encoded_text)",
           "return": "\"eJwryElNLE5VSM1Lzk9JVchNBQA0RQX7\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encode_zstd",
@@ -3548,7 +3630,8 @@
           "source": "encoded_text = encode_zstd(\"please encode me\")\nencode_base64(encoded_text)",
           "return": "\"KLUv/QBYgQAAcGxlYXNlIGVuY29kZSBtZQ==\""
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Cryptography": [
@@ -3608,13 +3691,14 @@
           "source": "ciphertext = decode_base64!(\"5fLGcu1VHdzsPcGNDio7asLqE1P43QrVfPfmP4i4zOU=\")\niv = decode_base64!(\"fVEIRkIiczCRWNxaarsyxA==\")\nkey = \"16_byte_keyxxxxx\"\ndecrypt!(ciphertext, \"AES-128-CBC-PKCS7\", key, iv: iv)",
           "return": "\"super_secret_message\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "encrypt",
       "name": "encrypt",
       "category": "Cryptography",
-      "description": "Encrypts a string with a symmetric encryption algorithm.\n\nSupported Algorithms:\n\n* AES-256-CFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-CFB (key = 24 bytes, iv = 16 bytes)\n* AES-128-CFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-OFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-OFB  (key = 24 bytes, iv = 16 bytes)\n* AES-128-OFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-PKCS7 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-PKCS7 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-PKCS7 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ANSIX923 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ANSIX923 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ANSIX923 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO7816 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO7816 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO7816 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO10126 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO10126 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO10126 (key = 16 bytes, iv = 16 bytes)",
+      "description": "Encrypts a string with a symmetric encryption algorithm.\n\nSupported Algorithms:\n\n* AES-256-CFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-CFB (key = 24 bytes, iv = 16 bytes)\n* AES-128-CFB (key = 16 bytes, iv = 16 bytes)\n* AES-256-OFB (key = 32 bytes, iv = 16 bytes)\n* AES-192-OFB  (key = 24 bytes, iv = 16 bytes)\n* AES-128-OFB (key = 16 bytes, iv = 16 bytes)\n* Deprecated - AES-256-CTR (key = 32 bytes, iv = 16 bytes)\n* Deprecated - AES-192-CTR (key = 24 bytes, iv = 16 bytes)\n* Deprecated - AES-128-CTR (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-LE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-LE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-LE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CTR-BE (key = 32 bytes, iv = 16 bytes)\n* AES-192-CTR-BE (key = 24 bytes, iv = 16 bytes)\n* AES-128-CTR-BE (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-PKCS7 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-PKCS7 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-PKCS7 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ANSIX923 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ANSIX923 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ANSIX923 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO7816 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO7816 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO7816 (key = 16 bytes, iv = 16 bytes)\n* AES-256-CBC-ISO10126 (key = 32 bytes, iv = 16 bytes)\n* AES-192-CBC-ISO10126 (key = 24 bytes, iv = 16 bytes)\n* AES-128-CBC-ISO10126 (key = 16 bytes, iv = 16 bytes)\n* CHACHA20-POLY1305 (key = 32 bytes, iv = 12 bytes)\n* XCHACHA20-POLY1305 (key = 32 bytes, iv = 24 bytes)\n* XSALSA20-POLY1305 (key = 32 bytes, iv = 24 bytes)",
       "notices": [],
       "arguments": [
         {
@@ -3666,7 +3750,8 @@
           "source": "plaintext = \"super secret message\"\niv = \"1234567890123456\" # typically you would call random_bytes(16)\nkey = \"16_byte_keyxxxxx\"\nencrypted_message = encrypt!(plaintext, \"AES-128-CBC-PKCS7\", key, iv: iv)\nencode_base64(encrypted_message)",
           "return": "\"GBw8Mu00v0Kc38+/PvsVtGgWuUJ+ZNLgF8Opy8ohIYE=\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "hmac",
@@ -3730,7 +3815,8 @@
           "source": ".hash_algo = \"SHA-256\"\nhmac_bytes, err = hmac(\"Hello there\", \"super-secret-key\", algorithm: .hash_algo)\nif err == null {\n\t.hmac = encode_base16(hmac_bytes)\n}",
           "return": "\"78b184f1832f8aff3934f5e0212454671b2d04d494e3b25075c5e45167029662\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "md5",
@@ -3760,7 +3846,8 @@
           "source": "md5(\"foo\")",
           "return": "\"acbd18db4cc2f85cedef654fccc4a4d8\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "seahash",
@@ -3795,7 +3882,8 @@
           "source": "seahash(\"bar\")",
           "return": "-2796170501982571500"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "sha1",
@@ -3825,7 +3913,8 @@
           "source": "sha1(\"foo\")",
           "return": "\"0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "sha2",
@@ -3872,7 +3961,8 @@
           "source": "sha2(\"foo\", variant: \"SHA-512/224\")",
           "return": "\"d68f258d37d670cfc1ec1001a0394784233f88f056994f9a7e5e99be\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "sha3",
@@ -3917,7 +4007,8 @@
           "source": "sha3(\"foo\", variant: \"SHA3-224\")",
           "return": "\"f4f6779e153c391bbd29c95e72b0708e39d9166c7cea51d1f10ef58a\""
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Path": [
@@ -3987,7 +4078,8 @@
             }
           }
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "exists",
@@ -4036,7 +4128,8 @@
           "source": "exists(.array[2])",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "get",
@@ -4087,7 +4180,8 @@
           "source": "get!(value: [\"foo\", \"bar\", \"baz\"], path: [-2])",
           "return": "\"bar\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "remove",
@@ -4153,7 +4247,8 @@
           "source": "remove!(value: { \"foo\": { \"bar\": [42], \"baz\": true } }, path: [\"foo\", \"bar\", 0], compact: true)",
           "return": "{\"foo\":{\"baz\":true}}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "set",
@@ -4213,7 +4308,8 @@
           "source": "set!(value: [\"foo\", \"bar\", \"baz\"], path: [-2], data: 42)",
           "return": "[\"foo\",42,\"baz\"]"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Enrichment": [
@@ -4275,7 +4371,8 @@
           "source": "find_enrichment_table_records!(\"test\",\n  {\n\t\"surname\": \"Smith\",\n\t\"date_of_birth\": {\n\t  \"from\": t'1985-01-01T00:00:00Z',\n\t  \"to\": t'1985-12-31T00:00:00Z'\n\t}\n  })",
           "return": "[{\"id\":1,\"firstname\":\"Bob\",\"surname\":\"Smith\"},{\"id\":2,\"firstname\":\"Fred\",\"surname\":\"Smith\"}]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "get_enrichment_table_record",
@@ -4338,7 +4435,8 @@
           "source": "get_enrichment_table_record!(\"test\",\n  {\n    \"surname\": \"Smith\",\n    \"date_of_birth\": {\n      \"from\": t'1985-01-01T00:00:00Z',\n      \"to\": t'1985-12-31T00:00:00Z'\n    }\n  })",
           "return": "{\"id\":1,\"firstname\":\"Bob\",\"surname\":\"Smith\"}"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Timestamp": [
@@ -4391,7 +4489,8 @@
           "source": "format_timestamp!(t'2020-10-21T16:00:00Z', format: \"%v %R\")",
           "return": "\"21-Oct-2020 16:00\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "now",
@@ -4412,7 +4511,8 @@
           "source": "now()",
           "return": "\"2021-03-04T10:51:15.928937Z\""
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Convert": [
@@ -4468,7 +4568,8 @@
           "source": "from_unix_timestamp!(5000, unit: \"nanoseconds\")",
           "return": "\"1970-01-01T00:00:00.000005Z\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_syslog_facility",
@@ -4500,7 +4601,8 @@
           "source": "to_syslog_facility!(4)",
           "return": "\"auth\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_syslog_level",
@@ -4532,7 +4634,8 @@
           "source": "to_syslog_level!(5)",
           "return": "\"notice\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_syslog_severity",
@@ -4567,7 +4670,8 @@
           "source": "to_syslog_severity!(\"alert\")",
           "return": "1"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_unix_timestamp",
@@ -4621,7 +4725,8 @@
           "source": "to_unix_timestamp(t'2021-01-01T00:00:00Z', unit: \"nanoseconds\")",
           "return": "1609459200000000000"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "System": [
@@ -4656,7 +4761,8 @@
           "source": "get_env_var!(\"HOME\")",
           "return": "\"/root\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "get_hostname",
@@ -4686,7 +4792,8 @@
             }
           }
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Event": [
@@ -4718,7 +4825,8 @@
           "source": "get_secret(\"datadog_api_key\")",
           "return": "\"secret value\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "remove_secret",
@@ -4748,7 +4856,8 @@
           "source": "remove_secret(\"datadog_api_key\")",
           "return": "null"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "set_secret",
@@ -4786,7 +4895,8 @@
           "source": "set_secret(\"datadog_api_key\", \"abc122\")",
           "return": "null"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "set_semantic_meaning",
@@ -4824,7 +4934,8 @@
           "source": "set_semantic_meaning(.foo, \"bar\")",
           "return": "null"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "IP": [
@@ -4858,7 +4969,8 @@
           "source": "ip_aton!(\"1.2.3.4\")",
           "return": "16909060"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ip_cidr_contains",
@@ -4904,7 +5016,8 @@
           "source": "ip_cidr_contains!(\"2001:4f8:4:ba::/64\", \"2001:4f8:4:ba:2e0:81ff:fe22:d1f1\")",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ip_ntoa",
@@ -4936,7 +5049,8 @@
           "source": "ip_ntoa!(16909060)",
           "return": "\"1.2.3.4\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ip_ntop",
@@ -4975,7 +5089,8 @@
           "source": "ip_ntop!(decode_base64!(\"IAENuIWjAAAAAIouA3BzNA==\"))",
           "return": "\"2001:db8:85a3::8a2e:370:7334\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ip_pton",
@@ -5014,7 +5129,8 @@
           "source": "encode_base64(ip_pton!(\"2001:db8:85a3::8a2e:370:7334\"))",
           "return": "\"IAENuIWjAAAAAIouA3BzNA==\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ip_subnet",
@@ -5062,7 +5178,8 @@
           "source": "ip_subnet!(\"2404:6800:4003:c02::64\", \"/32\")",
           "return": "\"2404:6800::\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ip_to_ipv6",
@@ -5098,7 +5215,8 @@
           "source": "ip_to_ipv6!(\"192.168.10.32\")",
           "return": "\"::ffff:192.168.10.32\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "ipv6_to_ipv4",
@@ -5134,7 +5252,8 @@
           "source": "ipv6_to_ipv4!(\"::ffff:192.168.0.1\")",
           "return": "\"192.168.0.1\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_ipv4",
@@ -5178,7 +5297,8 @@
           "source": "is_ipv4(\"foobar\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "is_ipv6",
@@ -5222,7 +5342,8 @@
           "source": "is_ipv6(\"foobar\")",
           "return": "false"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Object": [
@@ -5277,7 +5398,8 @@
           "source": "match_datadog_query({\"tags\": [\"a:x\", \"b:y\", \"c:z\"]}, s'b:[\"x\" TO \"z\"]')",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "merge",
@@ -5333,7 +5455,8 @@
           "source": "merge(\n\t{\n\t\t\"parent1\": {\n\t\t\t\"child1\": 1,\n\t\t\t\"child2\": 2\n\t\t},\n\t\t\"parent2\": {\n\t\t\t\"child3\": 3\n\t\t}\n\t},\n\t{\n\t\t\"parent1\": {\n\t\t\t\"child2\": 4,\n\t\t\t\"child5\": 5\n\t\t}\n\t},\n\tdeep: true\n)",
           "return": "{\"parent1\":{\"child1\":1,\"child2\":4,\"child5\":5},\"parent2\":{\"child3\":3}}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "unnest",
@@ -5423,7 +5546,8 @@
             }
           ]
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Parse": [
@@ -5493,7 +5617,8 @@
           "source": "parse_apache_log!(\n\ts'[01/Mar/2021:12:00:19 +0000] [ab:alert] [pid 4803:tid 3814] [client 147.159.108.175:24259] I will bypass the haptic COM bandwidth, that should matrix the CSS driver!',\n\t\"error\"\n)",
           "return": "{\"client\":\"147.159.108.175\",\"message\":\"I will bypass the haptic COM bandwidth, that should matrix the CSS driver!\",\"module\":\"ab\",\"pid\":4803,\"port\":24259,\"severity\":\"alert\",\"thread\":\"3814\",\"timestamp\":\"2021-03-01T12:00:19Z\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_aws_alb_log",
@@ -5525,7 +5650,8 @@
           "source": "parse_aws_alb_log!(\n\t\"http 2018-11-30T22:23:00.186641Z app/my-loadbalancer/50dc6c495c0c9188 192.168.131.39:2817 - 0.000 0.001 0.000 200 200 34 366 \\\"GET http://www.example.com:80/ HTTP/1.1\\\" \\\"curl/7.46.0\\\" - - arn:aws:elasticloadbalancing:us-east-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067 \\\"Root=1-58337364-23a8c76965a2ef7629b185e3\\\" \\\"-\\\" \\\"-\\\" 0 2018-11-30T22:22:48.364000Z \\\"forward\\\" \\\"-\\\" \\\"-\\\" \\\"-\\\" \\\"-\\\" \\\"-\\\" \\\"-\\\"\"\n)",
           "return": "{\"type\":\"http\",\"timestamp\":\"2018-11-30T22:23:00.186641Z\",\"elb\":\"app/my-loadbalancer/50dc6c495c0c9188\",\"client_host\":\"192.168.131.39:2817\",\"target_host\":null,\"request_processing_time\":0,\"target_processing_time\":0.001,\"response_processing_time\":0,\"elb_status_code\":\"200\",\"target_status_code\":\"200\",\"received_bytes\":34,\"sent_bytes\":366,\"request_method\":\"GET\",\"request_url\":\"http://www.example.com:80/\",\"request_protocol\":\"HTTP/1.1\",\"user_agent\":\"curl/7.46.0\",\"ssl_cipher\":null,\"ssl_protocol\":null,\"target_group_arn\":\"arn:aws:elasticloadbalancing:us-east-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067\",\"trace_id\":\"Root=1-58337364-23a8c76965a2ef7629b185e3\",\"domain_name\":null,\"chosen_cert_arn\":null,\"matched_rule_priority\":\"0\",\"request_creation_time\":\"2018-11-30T22:22:48.364000Z\",\"actions_executed\":\"forward\",\"redirect_url\":null,\"error_reason\":null,\"target_port_list\":[],\"target_status_code_list\":[],\"classification\":null,\"classification_reason\":null}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_aws_cloudwatch_log_subscription_message",
@@ -5562,7 +5688,8 @@
           "source": "parse_aws_cloudwatch_log_subscription_message!(.message)",
           "return": "{\"owner\":\"111111111111\",\"message_type\":\"DATA_MESSAGE\",\"log_group\":\"test\",\"log_stream\":\"test\",\"subscription_filters\":[\"Destination\"],\"log_events\":[{\"id\":\"35683658089614582423604394983260738922885519999578275840\",\"message\":\"{\\\"bytes\\\":26780,\\\"datetime\\\":\\\"14/Sep/2020:11:45:41 -0400\\\",\\\"host\\\":\\\"157.130.216.193\\\",\\\"method\\\":\\\"PUT\\\",\\\"protocol\\\":\\\"HTTP/1.0\\\",\\\"referer\\\":\\\"https://www.principalcross-platform.io/markets/ubiquitous\\\",\\\"request\\\":\\\"/expedite/convergence\\\",\\\"source_type\\\":\\\"stdin\\\",\\\"status\\\":301,\\\"user-identifier\\\":\\\"-\\\"}\",\"timestamp\":\"2020-09-14T19:09:29.039Z\"}]}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_aws_vpc_flow_log",
@@ -5607,7 +5734,8 @@
           "source": "parse_aws_vpc_flow_log!(\n\t\"- eni-1235b8ca123456789 10.0.1.5 10.0.0.220 10.0.1.5 203.0.113.5\",\n\t\"instance_id interface_id srcaddr dstaddr pkt_srcaddr pkt_dstaddr\"\n)",
           "return": "{\"instance_id\":null,\"interface_id\":\"eni-1235b8ca123456789\",\"srcaddr\":\"10.0.1.5\",\"dstaddr\":\"10.0.0.220\",\"pkt_srcaddr\":\"10.0.1.5\",\"pkt_dstaddr\":\"203.0.113.5\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_cef",
@@ -5659,7 +5787,8 @@
           "source": "parse_cef!(\n\t\"CEF:0|Dev|firewall|2.2|1|Connection denied|5|c6a1=2345:0425:2CA1:0000:0000:0567:5673:23b5 c6a1Label=Device IPv6 Address\",\n\ttranslate_custom_fields: true\n)",
           "return": "{\"cefVersion\":\"0\",\"deviceVendor\":\"Dev\",\"deviceProduct\":\"firewall\",\"deviceVersion\":\"2.2\",\"deviceEventClassId\":\"1\",\"name\":\"Connection denied\",\"severity\":\"5\",\"Device IPv6 Address\":\"2345:0425:2CA1:0000:0000:0567:5673:23b5\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_common_log",
@@ -5709,7 +5838,8 @@
           "source": "parse_common_log!(\n\t\"127.0.0.1 bob frank [2000-10-10T20:55:36Z] \\\"GET /apache_pb.gif HTTP/1.0\\\" 200 2326\",\n\t\"%+\"\n)",
           "return": "{\"host\":\"127.0.0.1\",\"identity\":\"bob\",\"user\":\"frank\",\"timestamp\":\"2000-10-10T20:55:36Z\",\"message\":\"GET /apache_pb.gif HTTP/1.0\",\"method\":\"GET\",\"path\":\"/apache_pb.gif\",\"protocol\":\"HTTP/1.0\",\"status\":200,\"size\":2326}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_csv",
@@ -5758,7 +5888,8 @@
           "source": "parse_csv!(\"foo bar\", delimiter: \" \")",
           "return": "[\"foo\",\"bar\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_duration",
@@ -5810,7 +5941,8 @@
           "source": "parse_duration!(\"1005ms\", unit: \"s\")",
           "return": "1.005"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_glog",
@@ -5842,7 +5974,8 @@
           "source": "parse_glog!(\"I20210131 14:48:54.411655 15520 main.c++:9] Hello world!\")",
           "return": "{\"level\":\"info\",\"timestamp\":\"2021-01-31T14:48:54.411655Z\",\"id\":15520,\"file\":\"main.c++\",\"line\":9,\"message\":\"Hello world!\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_grok",
@@ -5884,7 +6017,8 @@
           "source": "parse_grok!(\n\t\"2020-10-02T23:22:12.223222Z info Hello world\",\n\t\"%{TIMESTAMP_ISO8601:timestamp} %{LOGLEVEL:level} %{GREEDYDATA:message}\"\n)",
           "return": "{\"timestamp\":\"2020-10-02T23:22:12.223222Z\",\"level\":\"info\",\"message\":\"Hello world\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_groks",
@@ -5935,7 +6069,8 @@
           "source": "parse_groks!(\n\t\"2020-10-02T23:22:12.223222Z info Hello world\",\n\tpatterns: [\n\t\t\"%{common_prefix} %{_status} %{_message}\",\n\t\t\"%{common_prefix} %{_message}\",\n\t],\n\taliases: {\n\t\t\"common_prefix\": \"%{_timestamp} %{_loglevel}\",\n\t\t\"_timestamp\": \"%{TIMESTAMP_ISO8601:timestamp}\",\n\t\t\"_loglevel\": \"%{LOGLEVEL:level}\",\n\t\t\"_status\": \"%{POSINT:status}\",\n\t\t\"_message\": \"%{GREEDYDATA:message}\"\n\t}\n)",
           "return": "{\"timestamp\":\"2020-10-02T23:22:12.223222Z\",\"level\":\"info\",\"message\":\"Hello world\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_int",
@@ -5996,7 +6131,8 @@
           "source": "parse_int!(\"2a\", 17)",
           "return": "44"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_json",
@@ -6049,7 +6185,8 @@
           "source": "parse_json!(\"{\\\"top_level\\\":{\\\"key\\\": \\\"val\\\"}}\", max_depth: 1)",
           "return": "{\"top_level\":\"{\\\"key\\\": \\\"val\\\"}\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_key_value",
@@ -6138,7 +6275,8 @@
           "source": "parse_key_value!(\n\t\"at=info,method=GET,path=\\\"/index\\\",status=200,tags=dev,tags=dummy\",\n\tfield_delimiter: \",\",\n\tkey_value_delimiter: \"=\",\n)",
           "return": "{\"at\":\"info\",\"method\":\"GET\",\"path\":\"/index\",\"status\":\"200\",\"tags\":[\"dev\",\"dummy\"]}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_klog",
@@ -6170,7 +6308,8 @@
           "source": "parse_klog!(\"I0505 17:59:40.692994   28133 klog.go:70] hello from klog\")",
           "return": "{\"file\":\"klog.go\",\"id\":28133,\"level\":\"info\",\"line\":70,\"message\":\"hello from klog\",\"timestamp\":\"2023-05-05T17:59:40.692994Z\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_linux_authorization",
@@ -6204,7 +6343,8 @@
           "source": "parse_linux_authorization!(\n\ts'Mar 23 01:49:58 localhost sshd[1111]: Accepted publickey for eng from 10.1.1.1 port 8888 ssh2: RSA SHA256:foobar'\n)",
           "return": "{\"appname\":\"sshd\",\"hostname\":\"localhost\",\"message\":\"Accepted publickey for eng from 10.1.1.1 port 8888 ssh2: RSA SHA256:foobar\",\"procid\":1111,\"timestamp\":\"2023-03-23T01:49:58Z\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_logfmt",
@@ -6236,13 +6376,14 @@
           "source": "parse_logfmt!(\n\t\"@timestamp=\\\"Sun Jan 10 16:47:39 EST 2021\\\" level=info msg=\\\"Stopping all fetchers\\\" tag#production=stopping_fetchers id=ConsumerFetcherManager-1382721708341 module=kafka.consumer.ConsumerFetcherManager\"\n)",
           "return": "{\"@timestamp\":\"Sun Jan 10 16:47:39 EST 2021\",\"level\":\"info\",\"msg\":\"Stopping all fetchers\",\"tag#production\":\"stopping_fetchers\",\"id\":\"ConsumerFetcherManager-1382721708341\",\"module\":\"kafka.consumer.ConsumerFetcherManager\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_nginx_log",
       "name": "parse_nginx_log",
       "category": "Parse",
-      "description": "Parses Nginx access and error log lines. Lines can be in [`combined`](https://nginx.org/en/docs/http/ngx_http_log_module.html), or [`error`](https://github.com/nginx/nginx/blob/branches/stable-1.18/src/core/ngx_log.c#L102) format.",
+      "description": "Parses Nginx access and error log lines. Lines can be in [`combined`](https://nginx.org/en/docs/http/ngx_http_log_module.html),\n[`ingress_upstreaminfo`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/log-format/) or [`error`](https://github.com/nginx/nginx/blob/branches/stable-1.18/src/core/ngx_log.c#L102) format.",
       "notices": [
         "Missing information in the log message may be indicated by `-`. These fields are omitted in the result."
       ],
@@ -6292,14 +6433,15 @@
         {
           "title": "Parse via Nginx log format (combined)",
           "source": "parse_nginx_log!(\n    s'172.17.0.1 - alice [01/Apr/2021:12:02:31 +0000] \"POST /not-found HTTP/1.1\" 404 153 \"http://localhost/somewhere\" \"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36\" \"2.75\"',\n    \"combined\",\n)",
-          "return": "{\"client\":\"172.17.0.1\",\"user\":\"alice\",\"timestamp\":\"2021-04-01T12:02:31Z\",\"request\":\"POST /not-found HTTP/1.1\",\"method\":\"POST\",\"path\":\"/not-found\",\"protocol\":\"HTTP/1.1\",\"status\":404,\"size\":153,\"referer\":\"http://localhost/somewhere\",\"agent\":\"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36\",\"compression\":\"2.75\"}"
+          "return": "{\"agent\":\"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36\",\"client\":\"172.17.0.1\",\"compression\":\"2.75\",\"referer\":\"http://localhost/somewhere\",\"request\":\"POST /not-found HTTP/1.1\",\"size\":153,\"status\":404,\"timestamp\":\"2021-04-01T12:02:31Z\",\"user\":\"alice\"}"
         },
         {
           "title": "Parse via Nginx log format (error)",
           "source": "parse_nginx_log!(\n    s'2021/04/01 13:02:31 [error] 31#31: *1 open() \"/usr/share/nginx/html/not-found\" failed (2: No such file or directory), client: 172.17.0.1, server: localhost, request: \"POST /not-found HTTP/1.1\", host: \"localhost:8081\"',\n    \"error\"\n)",
           "return": "{\"timestamp\":\"2021-04-01T13:02:31Z\",\"severity\":\"error\",\"pid\":31,\"tid\":31,\"cid\":1,\"message\":\"open() \\\"/usr/share/nginx/html/not-found\\\" failed (2: No such file or directory)\",\"client\":\"172.17.0.1\",\"server\":\"localhost\",\"request\":\"POST /not-found HTTP/1.1\",\"host\":\"localhost:8081\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_query_string",
@@ -6336,7 +6478,8 @@
           "source": "parse_query_string(\"?foo%5b%5d=1&foo%5b%5d=2\")",
           "return": "{\"foo[]\":[\"1\",\"2\"]}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_regex",
@@ -6397,7 +6540,8 @@
           "source": "parse_regex!(\"first group and second group.\", r'(\\w+) group', numeric_groups: true)",
           "return": "{\"0\":\"first group\",\"1\":\"first\"}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_regex_all",
@@ -6453,7 +6597,8 @@
           "source": "parse_regex_all!(\"first group and second group.\", r'(?P<number>\\w+) group', numeric_groups: true)",
           "return": "[{\"0\":\"first group\",\"1\":\"first\",\"number\":\"first\"},{\"0\":\"second group\",\"1\":\"second\",\"number\":\"second\"}]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_ruby_hash",
@@ -6487,7 +6632,8 @@
           "source": "parse_ruby_hash!(s'{ \"test\" => \"value\", \"testNum\" => 0.2, \"testObj\" => { \"testBool\" => true, \"testNull\" => nil } }')",
           "return": "{\"test\":\"value\",\"testNum\":0.2,\"testObj\":{\"testBool\":true,\"testNull\":null}}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_syslog",
@@ -6522,7 +6668,8 @@
           "source": "parse_syslog!(\n\ts'<13>1 2020-03-13T20:45:38.119Z dynamicwireless.name non 2426 ID931 [exampleSDID@32473 iut=\"3\" eventSource= \"Application\" eventID=\"1011\"] Try to override the THX port, maybe it will reboot the neural interface!'\n)",
           "return": "{\"severity\":\"notice\",\"facility\":\"user\",\"timestamp\":\"2020-03-13T20:45:38.119Z\",\"hostname\":\"dynamicwireless.name\",\"appname\":\"non\",\"procid\":2426,\"msgid\":\"ID931\",\"message\":\"Try to override the THX port, maybe it will reboot the neural interface!\",\"exampleSDID@32473\":{\"eventID\":\"1011\",\"eventSource\":\"Application\",\"iut\":\"3\"},\"version\":1}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_timestamp",
@@ -6562,7 +6709,8 @@
           "source": "parse_timestamp!(\"10-Oct-2020 16:00+00:00\", format: \"%v %R %:z\")",
           "return": "\"2020-10-10T16:00:00Z\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_tokens",
@@ -6596,7 +6744,8 @@
           "source": "parse_tokens(\n\t\"A sentence \\\"with \\\\\\\"a\\\\\\\" sentence inside\\\" and [some brackets]\"\n)",
           "return": "[\"A\",\"sentence\",\"with \\\\\\\"a\\\\\\\" sentence inside\",\"and\",\"some brackets\"]"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_url",
@@ -6642,7 +6791,8 @@
           "source": "parse_url!(\"https://vector.dev\", default_known_ports: true)",
           "return": "{\"scheme\":\"https\",\"username\":\"\",\"password\":\"\",\"host\":\"vector.dev\",\"port\":443,\"path\":\"/\",\"query\":{},\"fragment\":null}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_user_agent",
@@ -6700,7 +6850,8 @@
           "source": "parse_user_agent(\n\t\"Opera/9.80 (J2ME/MIDP; Opera Mini/4.3.24214; iPhone; CPU iPhone OS 4_2_1 like Mac OS X; AppleWebKit/24.783; U; en) Presto/2.5.25 Version/10.54\",\n\tmode: \"enriched\"\n)",
           "return": "{\"browser\":{\"family\":\"Opera Mini\",\"major\":\"4\",\"minor\":\"3\",\"patch\":\"24214\",\"version\":\"10.54\"},\"device\":{\"brand\":\"Apple\",\"category\":\"smartphone\",\"family\":\"iPhone\",\"model\":\"iPhone\"},\"os\":{\"family\":\"iOS\",\"major\":\"4\",\"minor\":\"2\",\"patch\":\"1\",\"patch_minor\":null,\"version\":\"4.2.1\"}}"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "parse_xml",
@@ -6797,7 +6948,8 @@
           "source": "value = s'<book category=\"CHILDREN\"><title lang=\"en\">Harry Potter</title><author>J K. Rowling</author><year>2005</year></book>';\n\nparse_xml!(value, text_key: \"value\", parse_number: false)",
           "return": "{\"book\":{\"@category\":\"CHILDREN\",\"author\":\"J K. Rowling\",\"title\":{\"@lang\":\"en\",\"value\":\"Harry Potter\"},\"year\":\"2005\"}}"
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Random": [
@@ -6820,7 +6972,8 @@
           "source": "is_boolean(random_bool())",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "random_bytes",
@@ -6853,7 +7006,8 @@
           "source": "encode_base64(random_bytes(16))",
           "return": "\"LNu0BBgUbh7XAlXbjSOomQ==\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "random_float",
@@ -6893,7 +7047,8 @@
           "source": "f = random_float(0.0, 10.0)\nf >= 0 && f < 10",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "random_int",
@@ -6933,7 +7088,8 @@
           "source": "i = random_int(0, 10)\ni >= 0 && i < 10",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "uuid_v4",
@@ -6954,7 +7110,8 @@
           "source": "uuid_v4()",
           "return": "\"1d262f4f-199b-458d-879f-05fd0a5f0683\""
         }
-      ]
+      ],
+      "deprecated": false
     }
   ],
   "Coerce": [
@@ -7020,7 +7177,8 @@
           "source": "to_bool(true)",
           "return": "true"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_float",
@@ -7068,7 +7226,8 @@
           "source": "to_float(t'2020-12-30T22:20:53.824727Z')",
           "return": "1609366853.824727"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_int",
@@ -7117,7 +7276,8 @@
           "source": "to_int(t'2020-12-30T22:20:53.824727Z')",
           "return": "1609366853"
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_regex",
@@ -7154,7 +7314,8 @@
           "source": "to_regex(\"^foo$\") ?? r''",
           "return": "\"^foo$\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_string",
@@ -7207,16 +7368,18 @@
           "source": "to_string(52.2)",
           "return": "\"52.2\""
         }
-      ]
+      ],
+      "deprecated": false
     },
     {
       "anchor": "to_timestamp",
       "name": "to_timestamp",
       "category": "Coerce",
-      "description": "Coerces the `value` into a timestamp.",
+      "description": "This function is deprecated.\nFor integer values, use `from_unix_timestamp`, otherwise use `parse_timestamp`.\nCoerces the `value` into a timestamp.",
       "notices": [
         "There is the possibility of precision loss due to float arithmetic when coercing floats."
       ],
+      "deprecated": true,
       "arguments": [
         {
           "name": "value",
@@ -7263,27 +7426,32 @@
         {
           "title": "Coerce a string to a timestamp",
           "source": "to_timestamp!(\"2020-10-21T16:00:00Z\")",
-          "return": "\"2020-10-21T16:00:00Z\""
+          "return": "\"2020-10-21T16:00:00Z\"",
+          "skip_test": true
         },
         {
           "title": "Coerce a unix timestamp (integer) to a timestamp",
           "source": "to_timestamp!(1675968923)",
-          "return": "\"2023-02-09T18:55:23Z\""
+          "return": "\"2023-02-09T18:55:23Z\"",
+          "skip_test": true
         },
         {
           "title": "Coerce a unix timestamp (float) to a timestamp",
           "source": "to_timestamp!(1675968923.567)",
-          "return": "\"2023-02-09T18:55:23.566999912Z\""
+          "return": "\"2023-02-09T18:55:23.566999912Z\"",
+          "skip_test": true
         },
         {
           "title": "Coerce a unix timestamp, in milliseconds, to a timestamp",
           "source": "to_timestamp!(1676478566639, unit: \"milliseconds\")",
-          "return": "\"2023-02-15T16:29:26.639Z\""
+          "return": "\"2023-02-15T16:29:26.639Z\"",
+          "skip_test": true
         },
         {
           "title": "Coerce a unix timestamp, in nanoseconds, to a timestamp",
           "source": "to_timestamp!(1675968923012312311, unit: \"nanoseconds\")",
-          "return": "\"2023-02-09T18:55:23.012312311Z\""
+          "return": "\"2023-02-09T18:55:23.012312311Z\"",
+          "skip_test": true
         }
       ]
     }

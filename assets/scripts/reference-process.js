@@ -16,7 +16,7 @@ if(!input || !output) {
 }
 
 // reading cue.json export
-let s = fs.readFileSync('data/cue.json', 'utf8');
+let s = fs.readFileSync('integrations_data/extracted/vector/cue.json', 'utf8');
 let d = JSON.parse(s);
 
 // write out vrl errors from cue
@@ -51,6 +51,10 @@ fs.writeFileSync(
     'utf8'
 );
 
+if (!fs.existsSync(input)) {
+    // just exist silently for now
+    process.exit(0);
+}
 let fileString = fs.readFileSync(input, 'utf8');
 fileString = fileString.replace('  "$ref": "#/definitions/vector::config::builder::ConfigBuilder",', '');
 let fileData = JSON.parse(fileString);
