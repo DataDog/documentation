@@ -23,7 +23,7 @@ cascade:
     path: /security/default_rules/google-cloud-storage-bucket-enumerated.md
   aliases:
     - /security_monitoring/default_rules/gcp-gcs-bucket-enumerated/
-  - target:
+  - _target:
       path: security/default_rules/*.md
     algolia:
       rank: 11
