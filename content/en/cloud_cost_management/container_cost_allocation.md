@@ -33,7 +33,7 @@ Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR
 
 For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, Datadog looks at all of the pods running on that node for the day. Based on the resources the pod has used and the length of time it ran, the appropriate portion of the node's cost is assigned to that pod. This calculated cost is enriched with all of the pod's tags.
+Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
 
 ### ECS on EC2
 
