@@ -29,21 +29,31 @@ further_reading:
 
 ### Standard library logging
 
-To correlate your [traces][1] with your logs, follow the steps below:
+To correlate your [traces][1] with your logs, complete the following steps:
 
-Step 1) Activate automatic instrumentation through any of the options below:
-- Option 1) Through [Library Injection][5]:
-    1. Add the environment variable `DD_LOGS_INJECTION=true` to the application deployment/manifest file
-    2. Follow the instructions in [Library Injection][5] to set up tracing
-- Option 2) Through `ddtrace-run`:
-    1. Apply the environment variable `DD_LOGS_INJECTION=true`in the environment where the application is running
-    2. Import **ddtrace** into the application
-    3. Run the application with `ddtrace-run` (ie: `ddtrace-run python appname.py`)
-- Option 3) Through `patch`:
-    1. Import **ddtrace** into the application
-    2. Add `ddtrace.patch(logging=True)` to the start of the application code
+  1. [Activate automatic instrumentation](#step-1---activate-automatic-instrumentation).
+  2. [Include required attributes from the log record](#step-2---include-required-attributes).
 
-Step 2) Update your log format to include the required attributes from the log record.
+#### Step 1 - Activate automatic instrumentation
+
+Activate automatic instrumentation using one of the following options:
+ 
+Option 1: [Library Injection][5]:
+  1. Set the environment variable `DD_LOGS_INJECTION=true` in the application `deployment/manifest` file.
+  2. Follow the instructions in [Library Injection][5] to set up tracing.
+
+Option 2: `ddtrace-run`:
+  1. Set the environment variable `DD_LOGS_INJECTION=true` in the environment where the application is running.
+  2. Import **ddtrace** into the application.
+  3. Run the application with `ddtrace-run` (for example, `ddtrace-run python appname.py`).
+     
+Option 3: `patch`:
+  1. Import **ddtrace** into the application.
+  2. Add `ddtrace.patch(logging=True)` to the start of the application code.
+
+#### Step 2 - Include required attributes
+
+Update your log format to include the required attributes from the log record.
 
 
 Include the ``dd.env``, ``dd.service``, ``dd.version``, ``dd.trace_id`` and
