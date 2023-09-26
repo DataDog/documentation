@@ -79,7 +79,7 @@ def hello():
 hello()
 ```
 
-More information can be found in https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection
+To learn more about logs injection, read the [ddtrace documentation][6].
 
 ### No standard library logging
 
