@@ -10,11 +10,11 @@ further_reading:
 ---
 
 You can install the Datadog Agent on an Amazon EKS cluster by installing [Datadog Operator](/containers/datadog_operator)
-as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and apply `DatadogAgent` manifest.
+as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and applying the `DatadogAgent` manifest.
 
-There are certain differences when using add-on, compared to the regular [Helm installation][4]:
-* During Operator installation, images must be pulled only from EKS repository, this can't be changed by the user.
-* Operator Helm Chart values, which can be overriden is restricted by following [schema file][3].
+Compared to the regular [Helm installation][4], there are certain differences when installing as an add-on:
+* During Operator installation, images must be pulled only from the EKS repository. This can't be changed by the user.
+* Operator Helm Chart values, which can be overriden, are restricted to a [schema file][3].
 
 These restriction are necessary to make Operator compliant with the add-on policies, allow EKS ensure safety of the installation, and disable features not yet supported in add-on environment.
 
@@ -24,7 +24,7 @@ These restriction are necessary to make Operator compliant with the add-on polic
 * Subscription to the [Datadog Operator][1] product. 
 * [TODO] License manager SLR.
 * Kubectl
-* If you are using the command line interface for setting up add-on, [AWS CLI](https://aws.amazon.com/cli/)
+* If you are using the command line interface for setting up the add-on, [AWS CLI](https://aws.amazon.com/cli/)
 
 ## Installing Operator
 
@@ -32,8 +32,8 @@ These restriction are necessary to make Operator compliant with the add-on polic
 {{% tab "Console" %}}
 
 * Go to the EKS cluster in the AWS console.
-* Go to add-on tab, select *Get more add-ons*.
-* Find *Datadog Operator*, select and follow the prompts to complete the installation.
+* Go to the add-on tab and select *Get more add-ons*.
+* Find and select *Datadog Operator*. Then follow the prompts to complete the installation.
 
 {{% /tab %}}
 {{% tab "CLI" %}}
@@ -60,19 +60,21 @@ To verify that the installation was successful, use the AWS Management Console, 
 
 ## Configuring Agent
 
-Operator add-on 0.1.x installs Operator only. For Agent setup you need to setup `DatadogAgent` custom resource.
+After you have installed the Operator add-on, you can proceed to set up the Datadog Agent.
+
+Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` custom resource.
 
 1. Switch to Operator installation namespace, `datadog-agent` by default.
   ```bash
   kubens datadog-agent
   ```
-2. Create a Kubernetes secret with your API and application keys:
+2. Create a Kubernetes secret with your [Datadog API and application keys][5]:
   ```bash
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
   ```
   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
   
-3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. By default Operator will use default Agent and Cluster agent image settings and pull them from a public registry.
+3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The Datadog Operator  uses default Agent and Cluster Agent image settings and pulls them from a public registry.
 If you want to pull images from a private EKS registry, you can add `global.registry`. The following sample configuration enables metrics, logs, and APM and sets EKS registry as the default:
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
