@@ -18,6 +18,8 @@ Service Scorecards are in beta.
 
 Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
 
+You can customize the rules used to generate the Scorecards, and you can generate reports, sent directly to your team's Slack channel, to regularly report on scorecard results.
+
 ## How services are evaluated
 
 Navigate to the [**Scorecards** page][8] in the [Service Catalog][6]. Click the section titles to see the rules that services are evaluated for.
@@ -78,6 +80,31 @@ The scorecard summary is accessible on the [**Explore** page][1] in the Service 
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
 
+## Setting up scorecards
+
+You can also set up custom scorecards to track your progress on rules of your choosing. Open the [Scorecards page][8] in Service Catalog and enable or disable rules to customize how the scores are calculated. Click **View your scores** to track progress toward the selected rules across your defined services.
+
+## Generating Scorecard reports
+
+You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
+
+<div class="alert alert-warning">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
+
+To create a Report:
+
+1. Click **Create Report** on the Scorecards page. 
+2. Choose whether to include all defined services across your organization or a specific team's services. 
+3. Set the date, time, and frequency at which you want to receive these reports.
+4. Set the Slack workspace and channel where the reports should be sent. The selected channel must be public and have the Datadog Slack app installed. 
+5. Click **Enable this Workflow**.
+
+Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
+
+
+### Managing Scorecard reports
+To edit or delete a Workflow, click **Manage Reports** on the Scorecards page and select the Workflow. Make edits to the Workflow or delete it using the Settings menu. 
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -90,3 +117,4 @@ Click **View Details** from the scorecard, or open the service details side pane
 [6]: /tracing/service_catalog/
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://app.datadoghq.com/services/scorecard
+[9]: /service_management/workflows/
