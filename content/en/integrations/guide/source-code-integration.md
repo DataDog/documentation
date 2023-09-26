@@ -238,7 +238,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
 
-If you're using the GitHub integration, or if you're hosting your repositories on the GitLab SaaS instance (gitlab.com), you're able to click **Connect to preview** to see inline code snippets directly in the stack trace.
+If you're using the GitHub integration, or if you're hosting your repositories on the GitLab SaaS instance (gitlab.com), click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace.
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
