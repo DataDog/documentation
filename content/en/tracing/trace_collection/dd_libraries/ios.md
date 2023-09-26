@@ -442,7 +442,7 @@ for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
 
 This sets additional tracing headers on your request so your backend can extract the request and continue distributed tracing. Once the request is done, call `span.finish()` within a completion handler. If your backend is also instrumented with [Datadog APM & Distributed Tracing][10], the entire front-to-back trace appears in the Datadog dashboard.
 
-* In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization, enable `URLSessionInstrumentation` for your delegate type and pass delegate instance to the URLSession.
+* In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the URLSession:
 
 {{< tabs >}}
 {{% tab "Swift" %}}

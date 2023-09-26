@@ -180,7 +180,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )
     ```
 
-4. Enable URLSession instrumentation for your `SessionDelegate` type which conforms to `URLSessionDataDelegate` protocol.
+4. Enable URLSession instrumentation for your `SessionDelegate` type, which conforms to `URLSessionDataDelegate` protocol:
     ```swift
     URLSessionInstrumentation.enable(
         with: .init(

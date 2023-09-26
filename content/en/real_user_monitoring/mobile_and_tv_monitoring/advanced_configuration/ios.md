@@ -421,7 +421,7 @@ To automatically track user tap actions, set the `uiKitActionsPredicate` option 
 
 ### Automatically track network requests
 
-To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and enable `URLSessionInstrumentation`
+To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and enable `URLSessionInstrumentation`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -524,7 +524,7 @@ RUM.enable(
 )
 ```
 
-If you don't want to track requests, you can disable URLSessionInstrumentation for the delegate type
+If you don't want to track requests, you can disable URLSessionInstrumentation for the delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
