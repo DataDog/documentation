@@ -13,9 +13,7 @@ A typical metric monitor triggers an alert if a single metric goes above a speci
 
 Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) can help in such situations where you don't have an explicit definition of when your metric is off-track. However, a better alternative is deterministic alerting conditions. Watchdog monitors are useful when you don't know what to monitor, as they look at APM performance, infrastructure metrics, and logs. However, it requires two weeks of data for any new source of metrics, logs, or other data, to establish a baseline of expected behavior.
 
-If you know what you want to monitor, it's better to create your own monitor so it can alert you faster and more accurately.
-
-This guide covers a series of the most common deterministic use-cases:  
+If you know what you want to monitor, it's better to create your own monitor so it can alert you faster and more accurately. This guide covers a series of the most common deterministic use-cases:  
   - [Alert on a metric that goes off track on top of seasonal variations](#seasonal-threshold) 
   - [Alert on spikes when you don't know the baseline ahead of time](#spike-threshold)
   - [Alert based on how the metric compares with the value of another reference metric](#reference-threshold)
@@ -23,11 +21,11 @@ This guide covers a series of the most common deterministic use-cases:
 ## Seasonal threshold
 
 ### Context
+
 You are the team lead in charge of the website of an e-commerce website. The traffic on your website varies night and day, week day and weekend, so that there is no absolute number to quantify what "unexpectedly low: means. However, the traffic follows a predictable pattern, and you can consider "10% lower than the same time a week ago" as a robust indicator of what you want to capture. You want to: 
   - Receive alerts on unexpectedly low traffic on your home page 
   - Capture more localized incidents like the ones affecting public internet providers 
   - Cover for unknown failure scenarios
-
 
 ### Monitor
 
@@ -37,11 +35,11 @@ You are the team lead in charge of the website of an e-commerce website. The tra
 
 This formula calculates the variation between today and the same day the previous week (to compare mondays with mondays and so on).
 {{< tabs >}}
-{{% tab "UI" %}}
+{{% tab "UI Configuration" %}}
 {{< img src="monitors/guide/non_static_thresholds/seasonal_threshold.png" alt="Configuration to add week_before timeshift to metric query and set formula a/b" style="width:100%;" >}}
 {{% /tab %}}
 
-{{% tab "API" %}}
+{{% tab "JSON Example" %}}
 ```
 {
 	"name": "[Seasonal threshold] Amount of connection",
@@ -75,18 +73,27 @@ You want to be alerted when there is a sudden increase in the billing for a spec
 
 ### Monitor
 1. [Create a metric monitor][3] on estimated log usage metric.
-1. Take the sum of the last 5 minutes compared to the average of the last hour. For more information, see the [Log usage metrics][5] documentation.
-1. To capture Log spikes, use the following queries: 
-    - **Query A** represents the last 5 minutes of the metric we want to be aware of.
+
+2. Take the sum of the last 5 minutes compared to the average of the last hour. For more information, see the [Log usage metrics][5] documentation.
+
+3. To capture Log spikes, use the following queries: 
+    - **Query A** represents the last 5 minutes of the metric you want to be aware of.
     - **Query B** represents the average value of the same metric over the past hour thanks to the [moving rollup][6] which takes the data points of the last 4 hours (to have a large amount of data points) and calculates the average.
+		
+4. In the formula, divide **Query A** by **Query B** and multiply the quotient by the moving rollup to account for the difference in evaluation windows between the two queries. In this example, since the moving rollup of Query B is 4 hours (240 minutes), you multiply the formula with 48 (240 minutes / 5 minute evaluation window).	
 
-When the value of Query A is much bigger than the value of Query B, it's a sign of a substantial and sudden increase in usage which you can capture with a simple ratio between A and B.
+5. Set the alert threshold to 2. You want an alert when the difference in value is double or higher.
 
-{{< img src="monitors/guide/non_static_thresholds/seasonal_threshold.png" alt="Spike threshold config with two log usage metrics" style="width:100%;" >}}
+{{< tabs >}}
+{{% tab "UI Configuration" %}}
 
-Multiply the formula by 48 to make it even between a and b (b being the aggregation of 4 hours of data, we divided the rollup value in minutes, 240, by 5).
-The threshold here is 2, in order to get an alert when the difference in value is double or higher.
+When the value of Query A is much bigger than the value of Query B, it's a sign of a substantial and sudden increase in usage which you can capture with a ratio between A and B.
 
+{{< img src="monitors/guide/non_static_thresholds/spike_threshold.png" alt="Spike threshold config with two log usage metrics" style="width:100%;" >}}
+
+{{% /tab %}}
+
+{{% tab "JSON Example" %}}
 ```
 {
 	"name": "[Spike threshold] Log Spike",
@@ -106,27 +113,99 @@ The threshold here is 2, in order to get an alert when the difference in value i
 	}
 }
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Reference threshold
 
 ### Context
-You are the QA team lead in charge of the checkout process of your e-commerce website. The traffic is not the same throughout the day, so 50 errors/minutes on a friday evening is not as worrying as 50 errors/minute on a sunday morning.
+You are the QA team lead in charge of the checkout process of your e-commerce website. Traffic varies throughout the day, so 50 errors/minute on a Friday evening is not as worrying as 50 errors/minute on a Sunday morning.
 Monitoring on an error rate rather than the errors gives you an objective definition between healthy and unhealthy.You want to:
 - Make sure that your customer can have a good experience and purchase your product without any issues and one indicator of that is the error rate.
 - Get alerted when the error rate is high, but also when the number of hits is significant enough.
 
-
 ### Monitor
 
 Create 3 monitors in total:
-1. Metric monitor to alert on total number of hits.
-1. Metric monitor to calculate the error rate.
-1. [Composite monitor][7] that triggers an alert if the first two monitors are in an ALERT state.
+1. [Metric monitor to alert on total number of hits.](#metric-monitor-to-alert-on-total-number-of-hits)
+1. [Metric monitor to calculate the error rate.](#metric-monitor-to-calculate-the-error-rate)
+1. [Composite monitor that triggers an alert if the first two monitors are in an ALERT state.](#composite-monitor)
 
-The first monitor tracks the total number of hits. It lets you know whether the error rate should trigger an alert.
+#### Metric monitor to alert on total number of hits
 
-The second monitor calculates the error rate itself. Create a query on the number of errors divided by the total number of hits to get the error rate `a / a+b`, as follow:
-  {{< img src="monitors/guide/non_static_thresholds/metric_monitor_error_rate.png" alt="Metric monitor configuration with formula to calculate error rate" style="width:100%;" >}}
+The first monitor tracks the total number of hits, both successes and failures. 
+
+{{< tabs >}}
+{{% tab "UI Configuration" %}}
+  {{< img src="monitors/guide/non_static_thresholds/reference_total_hits.png" alt="Metric monitor configuration with formula to calculate total hits" style="width:100%;" >}}
+
+{{% /tab %}}
+
+{{% tab "JSON Example" %}}
+```
+{
+	"name": "Number of hits",
+	"type": "query alert",
+	"query": "sum(last_5m):sum:shopist.checkouts.failed{env:prod} by {region}.as_count() + sum:shopist.checkouts.success{env:prod} by {region}.as_count() > 4000",
+	"message": "There has been more than 4000 hits for this region !",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": 1000
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": true,
+		"new_group_delay": 60
+	}
+}
+
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+#### Metric monitor to calculate the error rate
+The second monitor calculates the error rate. Create a query on the number of errors divided by the total number of hits to get the error rate `a / a+b`, as follow:
+
+{{< tabs >}}
+{{% tab "UI Configuration" %}}
+  {{< img src="monitors/guide/non_static_thresholds/reference_error_rate.png" alt="Metric monitor configuration with formula to calculate error rate" style="width:100%;" >}}
+{{% /tab %}}
+
+{{% tab "JSON Example" %}}
+```
+{
+	"name": "Error Rate",
+	"type": "query alert",
+	"query": "sum(last_5m):sum:shopist.checkouts.failed{env:prod} by {region}.as_count() / (sum:shopist.checkouts.failed{env:prod} by {region}.as_count() + sum:shopist.checkouts.success{env:prod} by {region}.as_count()) > 0.5",
+	"message": "The error rate is currently {{value}} ! Be careful !",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": 0.5
+		},
+		"notify_audit": false,
+		"require_full_window": false,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"include_tags": true,
+		"new_group_delay": 60
+	}
+}
+
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+#### Composite monitor
+The last monitor is a Composite monitor, which sends and alert only if the first two omonitors are also in an **ALERT** state.
+
+{{< img src="monitors/guide/non_static_thresholds/reference_composite_monitor_config.png" alt="Example composite monitor configuration showing boolean logic to alert if both monitors are in ALERT state" style="width:100%;" >}}
 
 ## Further reading
 
