@@ -3095,6 +3095,11 @@ main:
     parent: infrastructure_vulnerabilities
     identifier: infra_vm_setup
     weight: 201
+  - name: Troubleshooting
+    url: security/infrastructure_vulnerabilities/troubleshooting
+    parent: infrastructure_vulnerabilities
+    identifier: infra_vm_troubleshooting
+    weight: 202
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
