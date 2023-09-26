@@ -19,9 +19,9 @@ further_reading:
 <div class="alert alert-info">
 The source code integration supports:
 </br>
-Languages: **Go**, **Java**, **JavaScript** (except transpiled JavaScript), **Python**, **.NET**, **Ruby**.
+Languages:<b>Go</b>,<b>Java</b>,<b>JavaScript</b> (except transpiled JavaScript),<b>Python</b>,<b>.NET</b>,<b>Ruby</b>.
 </br>
-Git providers:**GitHub**, **GitLab**, **BitBucket**, **Azure DevOps**.
+Git providers:**GitHub</b>,<b>GitLab</b>,<b>BitBucket</b>,<b>Azure DevOps</b>.
 </div>
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
