@@ -130,7 +130,7 @@ public class MyTestSuite
 
 #### Individual test case
 
-Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (an string.Empty will work) to your test case to mark it as unskippable.
+Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (a string.Empty will work) to your test case to mark it as unskippable.
 
 ```csharp
 using NUnit.Framework;
@@ -148,7 +148,7 @@ public class MyTestSuite
 
 #### Test suite
 
-Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (an string.Empty will work) to your test suite to mark it as unskippable.
+Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (a string.Empty will work) to your test suite to mark it as unskippable.
 
 If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
 
