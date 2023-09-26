@@ -43,7 +43,6 @@ def pull_rbac():
 
     if permissions_json and roles_json:
         permissions_data = permissions_json.get('data', [])
-        # gets default roles (admin, standard, and read-only)
         default_roles_data = roles_json.get('data', [])
 
         # ignores UI template roles ('Datadog Billing Admin Role' and 'Datadog Security Admin Role')
@@ -74,7 +73,7 @@ def pull_rbac():
 
                 for role_permission in role_permissions:
                     # Match permission id to a role. assign permission_role_name
-                    # assign permission_role_name - relies on order of Admin, Standard, and Read Only role objects in the `roles/templates` api.
+                    # assign permission_role_name - relies on order of Admin, Standard, and Read Only roles in default_role_hierarchy.
                     if role_permission['id'] == permission['id']:
                         permission_role_name = role_name
                         break # once permission role name is found, stop iterating through role permissions
