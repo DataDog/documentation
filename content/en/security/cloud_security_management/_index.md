@@ -69,13 +69,13 @@ Remediating security issues can meaningfully improve your organization's securit
 
 Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
-Improve your organization's score by remediating findings, either by resolving the underlying issue or by muting the finding.
+Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
 
 {{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
 
 ## Explore and remediate issues
 
-Use the [Issues page][7] to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+Use the [Issues page][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 

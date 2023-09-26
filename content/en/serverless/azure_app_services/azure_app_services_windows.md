@@ -56,6 +56,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - .NET Core 3.1
     - .NET 5
     - .NET 6
+    - .NET 7
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
