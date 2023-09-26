@@ -66,7 +66,7 @@ There are several inputs that allow you to configure how to split the graph as w
 | One graph per | This dropdown defines the dimension to split your original graph on. |
 | Limit to | Option to specify the number of graphs to display and which values should be selected. By default, the split graph widget dynamically selects values with highest average values. |
 | Sort by | Choose a metric or an attribute/facet to sort your graphs by. Selecting "custom" lets you manually select tags to display. |
-| Show Controls | Toggle to display a sidebar with all available tag values. Manually select tag values to change the split from dynamic to static and show only the values you have selected. To go back to a dynamic behavior, clear the selection or re-enable sorting by clicking the **Sort By** button. |
+| Show Controls | Toggle to display a sidebar with all available tag values. Manually select tag values to change the split from dynamic to static and show only the values you have selected. To go back to a dynamic behavior, clear the selection or click the **Custom** button and select "Top" or "Bottom" to re-enable sorting.|
 | Graph Setting | Display options that are specific to split graphs</br>`Graph Size`: Choose between 4 different sizes for the individual graphs within the split graph widget.</br>`Uniform Y-Axes`: Select whether the graphs in the widget show a consistent y-axis or if they independently adjust for maximum readability.|
 
 ## API
