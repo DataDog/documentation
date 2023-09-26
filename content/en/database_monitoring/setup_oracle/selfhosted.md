@@ -178,7 +178,7 @@ WHERE
 GRANT SELECT ON dd_session TO c##datadog ;
 ```
 
-## Configure the Agent
+### Configure the Agent
 
 To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
 
@@ -208,6 +208,10 @@ instances:
 The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
+
+[1]: /database_monitoring/setup_oracle/#install-agent
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 
 {{% /tab %}}
 
@@ -350,7 +354,7 @@ WHERE
 
 GRANT SELECT ON dd_session TO datadog ;
 ```
-## Configure the Agent
+### Configure the Agent
 
 To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
 
@@ -378,6 +382,10 @@ instances:
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
+
+[1]: /database_monitoring/setup_oracle/#install-agent
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 
 {{% /tab %}}
 
