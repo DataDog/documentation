@@ -87,7 +87,7 @@ Users can use the `CIDR()` function to query attributes in logs using CIDR notat
 - `CIDR(@network.client.ip,13.0.0.0/8)` matches and filters logs that have IP addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block.
 - `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` matches and filters logs that have any IP addresses in an array attribute `network.ip.list` that fall under the 13.0.0.0/8 or 15.0.0.0/8 CIDR blocks.
 - `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` would match and filter reject events from palo alto firewall that originate in the 13.0.0.0/8 subnet
-- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` will show all VPC logs that do not originate in 13.0.0.0/8 but are designated for destination subnet 15.0.0.0/8 subnet because because you want to analyze network traffic in your environments between subnets
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` will show all VPC logs that do not originate in subnet 13.0.0.0/8 but are designated for destination subnet 15.0.0.0/8 because you want to analyze network traffic in your environments between subnets
 
 The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Log Explorer, Live Tail, log widgets in Dashboards, log monitors, and log configurations.
 

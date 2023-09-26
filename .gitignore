@@ -46,6 +46,7 @@ package-lock.json
 # Ignoring all integrations file
 content/en/integrations/*.md
 data/integrations/
+layouts/shortcodes/integration_categories.md
 content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/_index.md
 !content/en/integrations/cloudcheckr.md

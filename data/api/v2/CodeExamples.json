@@ -1,4 +1,18 @@
 {
+  "ReorderApmRetentionFilters": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Re-order retention filters returns \"OK\" response"
+    }
+  ],
+  "UpdateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Update a retention filter returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",

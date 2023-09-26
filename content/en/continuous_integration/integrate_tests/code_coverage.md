@@ -1,21 +1,25 @@
 ---
-title: Code coverage in Datadog
-kind: guide
-description: Learn how to report and use code coverage in Datadog
+title: Code Coverage in Datadog
+kind: documentation
+description: Learn how to report and use code coverage in Datadog.
+aliases:
+- /continuous_integration/guides/code_coverage/
 further_reading:
-  - link: "/continuous_integration/tests"
-    tag: "Documentation"
-    text: "Exploring tests"
+- link: "/continuous_integration/tests"
+  tag: "Documentation"
+  text: "Learn about Test Visibility"
+- link: "/monitors/types/ci"
+  tag: "Documentation"
+  text: "Learn about CI Monitors"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
+## Overview
 
-
-## Report code coverage
+Code coverage is a measure of the total code coverage percentage that a module or session exercises.
 
 Ensure that [Test Visibility][1] is already set up for your language.
+
+## Report code coverage
 
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
@@ -77,7 +81,7 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
 
-### Advanced options (supported through .runsettings)
+### Advanced options
 
 The Datadog Tracer's built-in code coverage has support for both `Coverlet` and `VS Code Coverage` options through the `.runsettings` file.
 
@@ -107,6 +111,7 @@ The Datadog Tracer's built-in code coverage has support for both `Coverlet` and 
 | Exclude                  | Exclude from code coverage analysis using filter expressions.                                                                                                  |
 
 ##### Attributes
+
 You can exclude a method, an entire class, or assembly from code coverage by creating and applying the `ExcludeFromCodeCoverage` attribute present in the `System.Diagnostics.CodeAnalysis` namespace.
 
 Exclude additional attributes with the `ExcludeByAttribute` property and the short name of the attribute (the type name without the namespace).
@@ -115,8 +120,8 @@ Exclude additional attributes with the `ExcludeByAttribute` property and the sho
 
 Exclude specific source files from code coverage with the `ExcludeByFile` property.
 
-* Use a single or multiple paths, separated by comma
-* Use the file path or directory path with a wildcard (`*`), for example (`dir1/*.cs`)
+* Use a single or multiple paths, separated by comma.
+* Use the file path or directory path with a wildcard (`*`), for example: `dir1/*.cs`.
 
 ##### Filters
 
@@ -124,7 +129,7 @@ Filters provide fine-grained control over what gets excluded using **filter expr
 
 `[<ASSEMBLY_FILTER>]<TYPE_FILTER>`
 
-**Wildcards**:
+**Wildcards** are supported:
 
 * `*` => matches zero or more characters
 * `?` => the prefixed character is optional
@@ -203,29 +208,25 @@ The code coverage report needs to be generated in a different process, otherwise
 
 {{< /tabs >}}
 
-### Graph code coverage
+## Graph code coverage
 
 Reported code coverage appears on the **Coverage** tab in a test session's details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
 
-### Export your graph
+## Export your graph
 
-You can export your graph to a [dashboard][2] or a [notebook][3] and create a [monitor][4] based on it.
-
-Click **Export** on the right side:
+You can export your graph to a [dashboard][2] or a [notebook][3], and create a [monitor][4] based on it by clicking the **Export** button:
 
 {{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:60%" >}}
 
 
-### Add a monitor
+## Add a monitor
 
-Get alerted whenever code coverage for your service drops below a certain threshold using a CI Test Monitor:
+Get alerted whenever code coverage for your service drops below a certain threshold by creating a [CI Test Monitor][5]:
 
 {{< img src="/continuous_integration/code_coverage_monitor.png" text="Test sessions code coverage tab" style="width:100%" >}}
-
-For more information, see [CI Monitors][5].
 
 ## Further reading
 
@@ -236,4 +237,4 @@ For more information, see [CI Monitors][5].
 [2]: /dashboards
 [3]: /notebooks
 [4]: /monitors
-[5]: /monitors/types/ci
+[5]: /monitors/types/ci/#maintain-code-coverage-percentage
