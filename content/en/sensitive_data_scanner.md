@@ -67,7 +67,7 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
 
 ### Redact sensitive data in tags
 
-If you want to redact sensitive data contained in tags, you need to [remap][3] the tag to an attribute and then redact the attribute. Make sure to uncheck `Preserve source attribute` in the remapper processor so that the tag isn't preserved during the remapping.
+If you want to redact sensitive data contained in tags, you need to [remap][3] the tag to an attribute and then redact the attribute. Make sure to disable `Preserve source attribute` in the remapper processor so that the tag isn't preserved during the remapping.
 
 To remap the tag to an attribute:
 
