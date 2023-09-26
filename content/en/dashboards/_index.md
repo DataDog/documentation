@@ -163,13 +163,25 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-At the top of the dashboard, click on configure and select *Permissions*.
-
-Use the pop-up to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
-
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][15].
+Use granular access controls to limit the [roles][15] that may edit a particular dashboard:
+1. While viewing a dashboard, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
+
+**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
+
+To restore general access to a dashboard with restricted access, follow the steps below:
+1. While viewing the dashboard, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 

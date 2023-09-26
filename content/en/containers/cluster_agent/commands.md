@@ -132,7 +132,7 @@ The following environment variables are supported:
 : Configures the CPU request and limit for the init containers.
 
 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
-: Configures the memory request and limit for the init containers
+: Configures the memory request and limit for the init containers.
 
 ## Further Reading
 

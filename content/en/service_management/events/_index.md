@@ -17,6 +17,10 @@ further_reading:
   text: "Identify and redact sensitive data in Events with Sensitive Data Scanner"
 ---
 
+{{< site-region region="us3,us5,gov" >}}
+<div class="alert alert-warning">Event Management is not supported for this site.</div>
+{{< /site-region >}}
+
 {{< img src="service_management/events/events_explorer.png" alt="Events explorer display" >}}
 
 ## Getting started
