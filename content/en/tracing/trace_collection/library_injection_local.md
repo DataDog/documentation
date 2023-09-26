@@ -92,13 +92,15 @@ spec:
 
 To select your pods for library injection, annotate them with the following, corresponding to your application language, in your pod spec:
 
-| Language   | Pod annotation                                              |
-|------------|-------------------------------------------------------------|
-| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
-| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
-| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
-| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Language   | Pod annotation                                                        | Container annotation                                                             |
+|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   | `admission.datadoghq.com/<CONTAINER>.java-lib.version: "<CONTAINER IMAGE TAG>"`  |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     | `admission.datadoghq.com/<CONTAINER>.js-lib.version: "<CONTAINER IMAGE TAG>"`    |
+| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` | `admission.datadoghq.com/<CONTAINER>.python-lib.version: "<CONTAINER IMAGE TAG>"`|
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` | `admission.datadoghq.com/<CONTAINER>.dotnet-lib.version: "<CONTAINER IMAGE TAG>"`|
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   | `admission.datadoghq.com/<CONTAINER>.ruby-lib.version: "<CONTAINER IMAGE TAG>"`  |
+
+<div class="alert alert-warning">Container-specific annotations require Agent version >= 7.43.0.</div>
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][16]
@@ -112,7 +114,7 @@ The available library versions are listed in each container registry, as well as
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
-For example, to inject a Java library:
+For example, to inject a Java library into a pod:
 
 ```yaml
 apiVersion: apps/v1
