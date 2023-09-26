@@ -85,9 +85,10 @@ In general, use the following rules:
 
           ```yaml
              process_config:
-                 enabled: true
+                 process_collection:
+                     enabled: true
                  process_dd_url: https://process.datadoghq.com
-             # DD_PROCESS_AGENT_ENABLED=true
+             # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
 

@@ -5,7 +5,7 @@ aliases:
     - /agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
     - /agent/faq/agent-5-custom-agent-check/
 further_reading:
-- link: "/developers/integrations/new_check_howto/"
+- link: "/developers/integrations/agent_integration/"
   tag: "Documentation"
   text: "Create a new Integration"
 algolia:
@@ -162,7 +162,7 @@ class LSCheck(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/agent_integration/
 [2]: https://github.com/DataDog/integrations-extras
 [3]: http://app.datadoghq.com/account/settings/agent/latest
 [4]: /help/

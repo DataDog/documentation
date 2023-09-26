@@ -47,7 +47,9 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 ### Groups
 {{< whatsnext desc="Display your widgets under groups: ">}}
     {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/placeholder_light_large.png">}} Group{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} Group{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
@@ -78,6 +80,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/check-status_light_large.png">}} Check Status{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" 
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Monitor Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/run_workflow" 
+        img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture

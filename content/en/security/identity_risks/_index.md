@@ -26,7 +26,7 @@ Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth 
 
 To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4]. If you've already done this, no additional setup is required.
 
-**Note**: If you've enabled [Cloud Security Posture Management][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
+**Note**: If you've enabled [Cloud Security Management Misconfigurations][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
 
 ## Review and remediate identity risks
 

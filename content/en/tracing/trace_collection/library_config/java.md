@@ -156,10 +156,15 @@ Used to rename the service name associated with spans to be identified with the 
 **Default**: `false`<br>
 When set to `true` db spans get assigned the instance name as the service name
 
-`dd.trace.elasticsearch.body-and-params.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_AND_PARAMS_ENABLED` <br>
+`dd.trace.elasticsearch.body.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
 **Default**: `false`<br>
-When set to `true`, the body and query string parameters are added to Elasticsearch and OpenSearch spans.
+When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
+
+`dd.trace.elasticsearch.params.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**Default**: `true`<br>
+When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
@@ -195,6 +200,11 @@ A range of errors can be accepted. By default 5xx status codes are reported as e
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
 When set to `true` query string parameters and fragment get added to web server spans
+
+`dd.http.server.route-based-naming`
+: **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
+**Default**: `true`<br>
+When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
@@ -442,6 +452,16 @@ Deprecated since version 1.9.0
 **Default**: `datadog`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Deprecated since version 1.9.0
+
+### Experimental features
+
+The following configuration options are for features that are available for use but may change in future releases.
+
+`dd.integration.opentelemetry.experimental.enabled`
+: **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
+**Default**: `false`<br>
+Enables experimental OpenTelemetry features. When you enable this setting, you can use the OpenTelemetry tracing API backed by the Datadog Trace Agent.<br>
+Available since version 1.10.0
 
 ## Further Reading
 

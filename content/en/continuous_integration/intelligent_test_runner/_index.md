@@ -34,11 +34,12 @@ Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1
     {{< nextlink href="continuous_integration/intelligent_test_runner/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/python" >}}Python{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
 
-Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page.
+Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page. Enabling Intelligent Test Runner requires the `Intelligent Test Runner Activation Write` permission.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
