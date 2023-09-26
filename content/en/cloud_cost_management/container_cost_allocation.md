@@ -25,20 +25,6 @@ Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in 
     - [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances. Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
     - [**Datadog Container Monitoring**][3] in ECS tasks.
 
-## Cost metrics
-
-When the prerequisites are met, new AWS cost metrics automatically appear.
-
-| AWS Cost Metric                    | Description    |
-| ---                                | ----------- |
-| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.net.amortized`, if available* |
-
-
-These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
-
-For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
-
 ## Cost allocation
 
 Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR) into individual costs for each pod or task running on the instance. These divided costs are then enriched with tags from the nodes, pods, and tasks, which allows you to break down costs by any associated dimensions.
@@ -47,17 +33,13 @@ Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR
 
 For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, Datadog looks at all of the pods running on that node for the day. Based on the resources the pod has reserved and the length of time it ran, the appropriate portion of the node's cost is assigned to that pod. This calculated cost is enriched with all of the pod's tags.
-
-Once all pods have been assigned a cost based on their resource reservations, some node cost is left over. This is the cost of unreserved resources, which is called **Cluster Idle cost**. For more information, see the [Understanding spend](#understanding-spend) section.
+Next, Datadog looks at all of the pods running on that node for the day. Based on the resources the pod has used and the length of time it ran, the appropriate portion of the node's cost is assigned to that pod. This calculated cost is enriched with all of the pod's tags.
 
 ### ECS on EC2
 
-For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by actual usage instead of reserved usage, providing more granular detail.
+For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by usage instead of reservation, providing more granular detail.
 
 Based on the CPU or memory usage of each task (as reported in the CUR), Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
-
-Once all tasks have been assigned a cost based on their resource reservations, some instance cost is left over. This is the cost of unreserved resources, which is called **Cluster Idle** cost. For more information, see the [Understanding spend](#understanding-spend) section.
 
 ### ECS on Fargate
 
@@ -74,6 +56,24 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 - Usage: Cost of memory and cpu being used or reserved by workloads.
 - Workload idle: Cost of memory and cpu that is being reserved and allocated but not used by workloads.
 - Cluster idle: Cost of memory and cpu not reserved by workloads in a cluster.
+
+## Cost metrics
+
+When the prerequisites are met, new AWS cost metrics automatically appear.
+
+| AWS Cost Metric                    | Description    |
+| ---                                | ----------- |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory used by a pod or ECS task. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
+
+
+These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
+
+For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources used by the tagged pods.
 
 ## Tags
 
@@ -108,21 +108,6 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
 | `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
-
-## Other cost metrics
-
-In addition to the `.shared.resources.allocated` metrics, Datadog also allows you to visulaize your workload costs by CPU or memory only.
-
-
-| AWS Cost Metric                    | Description    |
-| ---                                | ----------- |
-| `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory used by a pod or ECS task. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
-| `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
-
-- If your workloads are CPU-constrained, use `cpu.allocated`.
-- If your workloads are memory-constrained, use `mem.allocated`.
 
 ## Further reading
 
