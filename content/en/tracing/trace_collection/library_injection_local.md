@@ -90,7 +90,9 @@ spec:
 
 ### Step 2 - Annotate your pods for library injection
 
-To select your pods for library injection, annotate them with the following, corresponding to your application language, in your pod spec:
+To select your pods for library injection, use the annotations provided in the following table within your pod spec.
+- Pod annotations inject the required volumeMounts and environment variables into each container.
+- Container annotations allow you to specify individual containers to mutate.
 
 | Language   | Pod annotation                                                        | Container annotation                                                             |
 |------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------|
