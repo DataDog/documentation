@@ -72,11 +72,11 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
 
-For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources used by the tagged pods.
+For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use these new metrics to group costs by `team`, which will include costs for S3, RDS and compute expenses from tagged pods.
 
 ## Tags
 
-Datadog consolidates and applies additional tags from various sources to cost metrics. Conflicts are resolved by favoring higher-specificity tags such as pod tags over lower-specificity tags such as host tags. For example, if a Kubernetes pod has the tag `service:datadog-agent` and the node it runs on has the tag `service:aws-node`, the resulting final tag shows up as `service:datadog-agent`.
+Datadog consolidates and applies additional tags from various sources to cost metrics. Conflicts are resolved by favoring higher-specificity tags such as pod tags over lower-specificity tags such as host tags. For example, a Kubernetes pod tagged `service:datadog-agent` running on a node tagged `service:aws-node` will result in a final tag `service:datadog-agent`.
 
 ### Containers
 
