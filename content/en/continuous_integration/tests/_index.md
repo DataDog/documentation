@@ -34,6 +34,25 @@ cascade:
 
 [Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
+### Supported features
+|                                         | .NET | Java |   Javascript   | Python | Ruby | Swift |    JUnit Xml   |
+|-----------------------------------------|:----:|:----:|:--------------:|:------:|:----:|:-----:|:--------------:|
+| Accurate time/durations results         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
+| Structured stack traces                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
+| Distributed traces on integration tests |   ✓  |   ✓  |        ✓       |    ✗   |   ✓  |   ✓   |        ✗       |
+| Agent-based reporting                   |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
+| Agentless reporting                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
+| Test suite level visibility             |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
+| Manual API                              |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
+| Codeowner by test                       |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
+| Source code start/end reporting         |   ✓  |   ✓  | ✓ (only start) |    ✗   |   ✗  |   ✓   | ✓ (only start) |
+| CI and Git info                         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✓       |
+| Git metadata upload                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
+| Intelligent Test Runner                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✗       |
+| Code coverage support                   |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
+| Benchmark tests support                 |   ✓  |   ✗  |        ✗       |    ✓   |   ✗  |   ✓   |        ✗       |
+| Parameterized tests                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✗       |
+
 ## Setup
 
 {{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}

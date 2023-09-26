@@ -43,7 +43,7 @@ CI/CD テスト実行のトリガーに API エンドポイントを使用して
 
 ### CI パイプラインでテストがタイムアウトする
 
-まず確認すべきは、[グローバルコンフィギュレーションファイル][10]でどの失敗モードフラグを渡しているかということです。複数のテストを含む CI の実行では、一部のテストは [Continuous Testing の設定ページ][9]で定義された並列化設定に基づいてキューに入れられます。組織のニーズに応じて、構成と並列化の両方を調整する必要があるかもしれません。
+まず確認すべきは、[グローバルコンフィギュレーションファイル][3]でどの失敗モードフラグを渡しているかということです。複数のテストを含む CI の実行では、一部のテストは [Continuous Testing の設定ページ][9]で定義された並列化設定に基づいてキューに入れられます。組織のニーズに応じて、構成と並列化の両方を調整する必要があるかもしれません。
 
 ## その他の参考資料
 
@@ -51,11 +51,10 @@ CI/CD テスト実行のトリガーに API エンドポイントを使用して
 
 [1]: /ja/help/
 [2]: /ja/api/latest/synthetics/#trigger-tests-from-cicd-pipelines
-[3]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#additional-configuration
-[4]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#execution-rule
+[3]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[4]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [5]: /ja/continuous_testing/cicd_integrations
 [6]: /ja/continuous_testing/cicd_integrations#use-the-cli
 [7]: /ja/synthetics/api_tests/
 [8]: /ja/synthetics/browser_tests/?tab=requestoptions
 [9]: /ja/continuous_testing/settings
-[10]: /ja/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
