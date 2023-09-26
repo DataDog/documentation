@@ -128,5 +128,5 @@ If your MIBs have dependencies, `ddev` fetches them online if they can be found.
 [1]: /monitors/
 [2]: /help/
 [3]: /network_monitoring/devices
-[4]: /developers/integrations/agent_integration/#developer-toolkit
+[4]: /developers/integrations/python
 [5]: https://pypi.org/project/pysmi/
