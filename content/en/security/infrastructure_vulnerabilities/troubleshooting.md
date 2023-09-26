@@ -28,14 +28,13 @@ If you experience issues using Infrastructure Vulnerabilities, use the following
 
 The Agent exposes internal telemetry through a Prometheus endpoint, including the Software Bill of Materials (SBOM) metrics collection. 
 
-1. Configure the following environment variable in your Datadog Agent manifest:
+1. Add the following environment variable in your Datadog Agent manifest to expose the Agent telemetry on `localhost:6000/telemetry` (default):
+ 
 ```yaml
  DD_TELEMETRY_ENABLED="true"
  ```
 
-   This exposes the Agent telemetry on `localhost:6000/telemetry` (default).
-
-2. Configure an [OpenMetrics][2] check to scrape the metrics using [Autodiscovery][3]:
+2. Configure an [OpenMetrics][2] check to scrape the metrics using [Autodiscovery][3].
    
    - Add the following to the pod annotations in your `values.yaml` file:
 
@@ -55,24 +54,23 @@ The Agent exposes internal telemetry through a Prometheus endpoint, including th
            ]
    ```
 
-3. Configure the SBOM check to use the cache implementation: 
+3. Configure the SBOM check to use the cache implementation.
 
-   - Configure the following environment variable in your Datadog Agent manifest:
+   - Add the following environment variable in your Datadog Agent manifest (this generates the metric `datadog.agent.sbom_cache_disk_size`):
    ```yaml
     DD_SBOM_CACHE_ENABLED="true"
    ```
-    Enabling this setting generates the metrics `datadog.agent.sbom_cache_disk_size` and `datadog.agent.sbom_export_size`.
 
-## Metrics to monitor resource consumption and usage
-
-- CPU utilization: `avg:container.cpu.usage{app:datadog-agent}`
-- Memory usage: `avg:container.memory.usage{app:datadog-agent}`
-- Containers using SBOM: `datadog.agent.sbom.container_images.running`
-- Hosts using SBOM: `datadog.agent.sbom.hosts.running`
-- Disk space used by cache: `datadog.agent.sbom_cache_disk_size` (10MB on average)
-- Disk space: `sum:datadog.agent.sbom_export_size{*}.as_count()`
+4. Monitor available metrics for performance and resource usage:
   
-  **Note**: Generating an SBOM requires copying an image. This metric monitors how much data was copied during the SBOM generation process.
+   | Description             | Metric                                          |
+   | --------------------------| ------------------------------------------------|     
+   | CPU utilization           | `avg:container.cpu.usage{app:datadog-agent}`    | 
+   | Memory usage              | `avg:container.memory.usage{app:datadog-agent}` | 
+   | Containers                | `datadog.agent.sbom.container_images.running`   | 
+   | Hosts                     | `datadog.agent.sbom.hosts.running`              |
+   | Disk space used by cache  | `datadog.agent.sbom_cache_disk_size`            |
+   | Disk space                | `sum:datadog.agent.sbom_export_size{*}.as_count()` </br></br> **Note**: Generating an SBOM requires copying an image. This metric monitors how much data was copied during the SBOM generation process.       |
 
 
 [1]: /help
