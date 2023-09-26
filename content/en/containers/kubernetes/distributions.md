@@ -64,7 +64,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-In an EKS cluster, you can install the Operator using [Helm][5] or as an [EKS add-on][6]
+In an EKS cluster, you can install the Operator using [Helm][5] or as an [EKS add-on][6].
 
 The configuration below is meant to work with either setup (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
 
