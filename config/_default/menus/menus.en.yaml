@@ -8302,6 +8302,70 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: APM Retention Filters
+    url: /api/latest/apm-retention-filters/
+    identifier: apm-retention-filters
+    generated: true
+  - name: Update a retention filter
+    url: '#update-a-retention-filter'
+    identifier: apm-retention-filters-update-a-retention-filter
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateApmRetentionFilter
+      unstable: []
+      order: 4
+  - name: Delete a retention filter
+    url: '#delete-a-retention-filter'
+    identifier: apm-retention-filters-delete-a-retention-filter
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteApmRetentionFilter
+      unstable: []
+      order: 5
+  - name: Re-order retention filters
+    url: '#re-order-retention-filters'
+    identifier: apm-retention-filters-re-order-retention-filters
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ReorderApmRetentionFilters
+      unstable: []
+      order: 3
+  - name: Create a retention filter
+    url: '#create-a-retention-filter'
+    identifier: apm-retention-filters-create-a-retention-filter
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateApmRetentionFilter
+      unstable: []
+      order: 2
+  - name: List all APM retention filters
+    url: '#list-all-apm-retention-filters'
+    identifier: apm-retention-filters-list-all-apm-retention-filters
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListApmRetentionFilters
+      unstable: []
+      order: 1
   - name: Audit
     url: /api/latest/audit/
     identifier: audit
