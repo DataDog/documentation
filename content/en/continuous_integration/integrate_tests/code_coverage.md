@@ -1,21 +1,25 @@
 ---
-title: Code coverage in Datadog
-kind: guide
-description: Learn how to report and use code coverage in Datadog
+title: Code Coverage in Datadog
+kind: documentation
+description: Learn how to report and use code coverage in Datadog.
+aliases:
+- /continuous_integration/guides/code_coverage/
 further_reading:
-  - link: "/continuous_integration/tests"
-    tag: "Documentation"
-    text: "Exploring tests"
+- link: "/continuous_integration/tests"
+  tag: "Documentation"
+  text: "Learn about Test Visibility"
+- link: "/monitors/types/ci"
+  tag: "Documentation"
+  text: "Learn about CI Monitors"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
+## Overview
 
-
-## Report code coverage
+Code coverage is a measure of the total code coverage percentage that a module or session exercises.
 
 Ensure that [Test Visibility][1] is already set up for your language.
+
+## Report code coverage
 
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
@@ -204,29 +208,25 @@ The code coverage report needs to be generated in a different process, otherwise
 
 {{< /tabs >}}
 
-### Graph code coverage
+## Graph code coverage
 
 Reported code coverage appears on the **Coverage** tab in a test session's details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
 
-### Export your graph
+## Export your graph
 
-You can export your graph to a [dashboard][2] or a [notebook][3] and create a [monitor][4] based on it.
-
-Click **Export** on the right side:
+You can export your graph to a [dashboard][2] or a [notebook][3], and create a [monitor][4] based on it by clicking the **Export** button:
 
 {{< img src="/continuous_integration/code_coverage_export_to.png" text="Export code coverage" style="width:60%" >}}
 
 
-### Add a monitor
+## Add a monitor
 
-Get alerted whenever code coverage for your service drops below a certain threshold using a CI Test Monitor:
+Get alerted whenever code coverage for your service drops below a certain threshold by creating a [CI Test Monitor][5]:
 
 {{< img src="/continuous_integration/code_coverage_monitor.png" text="Test sessions code coverage tab" style="width:100%" >}}
-
-For more information, see [CI Monitors][5].
 
 ## Further reading
 
@@ -237,4 +237,4 @@ For more information, see [CI Monitors][5].
 [2]: /dashboards
 [3]: /notebooks
 [4]: /monitors
-[5]: /monitors/types/ci
+[5]: /monitors/types/ci/#maintain-code-coverage-percentage
