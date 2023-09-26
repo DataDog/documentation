@@ -24,7 +24,7 @@ Languages:<b>Go</b>,<b>Java</b>,<b>JavaScript</b> (except transpiled JavaScript)
 Git providers:**GitHub</b>,<b>GitLab</b>,<b>BitBucket</b>,<b>Azure DevOps</b>.
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code.
+Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by accessing the relevant lines of your source code.
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
@@ -39,7 +39,7 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 Your telemetry needs to be tagged with Git information tying the running application version with a particular repository and commit.
 
-For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which is be extracted by the [Datadog Tracing Libraries][9] automatically.
+For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which is then extracted by the [Datadog Tracing Libraries][9] automatically.
 For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
 ### Embed git information in your build artifacts
@@ -200,6 +200,10 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
+<div class="alert alert-warning">
+Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the Source Code Integration. Please reach out to support.
+</div>
+
 To link telemetry to your source code, Datadog collects metadata for every commit SHA from your Git repository with the [`datadog-ci git-metadata upload`][1] command.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
@@ -224,10 +228,6 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 ### Links to Git providers
 
-<div class="alert alert-warning">
-Repositories on self-hosted instances or private URLs are not supported out-of-the-box. Please reach out to support.
-</div>
-
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
 You can see links from stack frames to their source repository in [Error Tracking][1].
@@ -238,7 +238,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
 
-If you're using the GitHub integration, or if you're hosting your repositories on gitlab.com, you will be able to click **Connect to preview** to see inline code snippets directly in the stack trace.
+If you're using the GitHub integration, or if you're hosting your repositories on the GitLab SaaS instance (gitlab.com), you will be able to click **Connect to preview** to see inline code snippets directly in the stack trace.
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
