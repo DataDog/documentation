@@ -66,7 +66,7 @@ In addition to setting the environment variables, you or a user in your organiza
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
-## Disabling skipping for specific tests
+## Disable skipping for specific tests
 
 You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
@@ -76,8 +76,8 @@ The Intelligent Test Runner uses code coverage data to determine whether or not 
 
 Examples include:
 
-- Tests that read data from text files
-- Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
+- Tests that read data from text files.
+- Tests that interact with APIs outside of the code being tested (such as remote REST APIs).
 - Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
 
 ### Marking tests as unskippable
@@ -130,7 +130,7 @@ public class MyTestSuite
 
 #### Individual test case
 
-Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (a string.Empty will work) to your test case to mark it as unskippable.
+Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (for example, string.Empty) to your test case to mark it as unskippable.
 
 ```csharp
 using NUnit.Framework;
@@ -148,7 +148,7 @@ public class MyTestSuite
 
 #### Test suite
 
-Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (a string.Empty will work) to your test suite to mark it as unskippable.
+Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (for example, string.Empty) to your test suite to mark it as unskippable.
 
 If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
 
