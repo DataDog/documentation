@@ -33,10 +33,6 @@ If the solution you require is truly unavailable, you can contact [Datadog Suppo
 
 ### Partners and the Datadog Marketplace
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Marketplace is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You may also be a partner who wants to build on Datadog and contribute to the [Datadog Marketplace][10] or to Datadog's community [integrations][6]. 
 
 {{< whatsnext desc="To develop an offering, see the appropriate documentation:" >}}
