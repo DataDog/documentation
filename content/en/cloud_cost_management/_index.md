@@ -201,7 +201,9 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 
 {{% tab "Azure" %}}
 
-To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
+To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
+
+Datadog currently provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) are **not** supported.
 
 {{% site-region region="us3" %}}
 **Notes**:
@@ -213,9 +215,15 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 [2]: /integrations/azure/?tab=azurecliv20#setup
 {{% /site-region %}}
 
+### Configure the Azure Integration
+Navigate to [Setup & Configuration][3] and select an Azure account from the menu to pull costs from. If you do not see your Azure account in the list, view your [Azure integration][4] to add your account.
+
 ### Generate cost exports
 
-1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
+You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
+{{< tabs >}}
+{{% tab "Actual" %}}
+1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. After the scope is selected, click **Add**.
 
@@ -230,11 +238,51 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 
 5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
 6. Select **Create**.
+{{% /tab %}}
 
-Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
+{{% tab "Amortized" %}}
+1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
+2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
+3. After the scope is selected, click **Add**.
+
+{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
+
+4. Select the following Export details:
+    - Metric: **Amortized Cost (usage and purchases)**
+    - Export type: **Daily export of month-to-date costs**
+    - File Partitioning: `On`
+
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
+
+5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
+6. Select **Create**.
+{{% /tab %}}
+{{< /tabs >}}
+
+For faster processing, generate the first exports manually by clicking **Run Now**.
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
 
 ### Provide Datadog access to your exports
+
+{{< tabs >}}
+{{% tab "Billing Accounts" %}}
+**Note**: Datadog does not support Azure Accounts of the type Microsoft Customer Agreement.
+
+1. In the Exports tab, click on the export's Storage Account to navigate to it.
+2. Click the Containers tab.
+3. Choose the storage container your bills are in.
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
+6. Choose **Storage Blob Data Reader**, then click Next.
+7. Assign these permissions to one of the App Registrations you have connected with Datadog.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**.
+    - Select *review + assign*.
+
+If your exports are in different storage containers, repeat steps one to seven for the other storage container.
+{{% /tab %}}
+
+{{< tabs >}}
+{{% tab "Subscriptions & Resource Groups" %}}
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
@@ -251,16 +299,17 @@ If your exports are in different storage containers, repeat steps one to seven f
 ### Configure Cost Management Reader access
 **Note:** You do not need to configure this access if your scope is **Billing Account**.
 
-1. Navigate to your [subscriptions][4] and click your subscription's name.
+1. Navigate to your [subscriptions][6] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
 3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
 5. Assign these permissions to the app registration.
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
-
+{{% /tab %}}
+{{< /tabs >}}
 ### Configure Cloud Costs in Datadog
-Navigate to [Setup & Configuration][5] and follow the steps.
+Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Cost types
 
@@ -273,9 +322,10 @@ You can visualize your ingested data using the following cost types:
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
-[3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
-[5]: https://app.datadoghq.com/cost/setup?cloud=azure
+[3]: https://app.datadoghq.com/cost/setup?cloud=azure
+[4]: https://app.datadoghq.com/integrations/azure
+[5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[6]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 {{% /tab %}}
 {{< /tabs >}}
 
