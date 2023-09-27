@@ -398,6 +398,13 @@ components:
       required: true
       schema:
         type: string
+    RetentionFilterIdParam:
+      description: The ID of the retention filter.
+      in: path
+      name: filter_id
+      required: true
+      schema:
+        type: string
     RoleID:
       description: The unique identifier of the role.
       in: path
@@ -722,6 +729,15 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    ApmRetentionFilterType:
+      default: apm_retention_filter
+      description: The type of the resource.
+      enum:
+      - apm_retention_filter
+      example: apm_retention_filter
+      type: string
+      x-enum-varnames:
+      - apm_retention_filter
     ApplicationKeyCreateAttributes:
       description: Attributes used to create an application Key.
       properties:
@@ -3733,9 +3749,7 @@ components:
           example: a
           type: string
         type:
-          description: The type of column present.
-          example: number
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeNumber'
         values:
           description: The array of numerical values for one formula or query.
           example:
@@ -3744,6 +3758,7 @@ components:
             description: An individual value for a given column and group-by.
             example: 0.5
             format: double
+            nullable: true
             type: number
           type: array
       type: object
@@ -5534,9 +5549,7 @@ components:
           example: env
           type: string
         type:
-          description: The type of column present.
-          example: group
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeGroup'
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
@@ -11758,6 +11771,17 @@ components:
       required:
       - data
       type: object
+    ReorderRetentionFiltersRequest:
+      description: A list of retention filters to reorder.
+      properties:
+        data:
+          description: A list of retention filters objects.
+          items:
+            $ref: '#/components/schemas/RetentionFilterWithoutAttributes'
+          type: array
+      required:
+      - data
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -12022,6 +12046,255 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
+      type: object
+    RetentionFilter:
+      description: The definition of the retention filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterAttributes'
+        id:
+          description: The ID of the retention filter.
+          example: 7RBOb7dLSYWI01yc3pIH8w
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RetentionFilterAll:
+      description: The definition of the retention filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterAllAttributes'
+        id:
+          description: The ID of the retention filter.
+          example: 7RBOb7dLSYWI01yc3pIH8w
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RetentionFilterAllAttributes:
+      description: The attributes of the retention filter.
+      properties:
+        created_at:
+          description: The creation timestamp of the retention filter.
+          format: int64
+          type: integer
+        created_by:
+          description: The creator of the retention filter.
+          type: string
+        editable:
+          description: Shows whether the filter can be edited.
+          example: true
+          type: boolean
+        enabled:
+          description: The status of the retention filter (Enabled/Disabled).
+          example: true
+          type: boolean
+        execution_order:
+          description: The execution order of the retention filter.
+          format: int64
+          type: integer
+        filter:
+          $ref: '#/components/schemas/SpansFilter'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterAllType'
+        modified_at:
+          description: The modification timestamp of the retention filter.
+          format: int64
+          type: integer
+        modified_by:
+          description: The modifier of the retention filter.
+          type: string
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      type: object
+    RetentionFilterAllType:
+      default: spans-sampling-processor
+      description: The type of retention filter.
+      enum:
+      - spans-sampling-processor
+      - spans-errors-sampling-processor
+      - spans-appsec-sampling-processor
+      type: string
+      x-enum-varnames:
+      - SPANS_SAMPLING_PROCESSOR
+      - SPANS_ERRORS_SAMPLING_PROCESSOR
+      - SPANS_APPSEC_SAMPLING_PROCESSOR
+    RetentionFilterAttributes:
+      description: The attributes of the retention filter.
+      properties:
+        created_at:
+          description: The creation timestamp of the retention filter.
+          format: int64
+          type: integer
+        created_by:
+          description: The creator of the retention filter.
+          type: string
+        editable:
+          description: Shows whether the filter can be edited.
+          example: true
+          type: boolean
+        enabled:
+          description: The status of the retention filter (Enabled/Disabled).
+          example: true
+          type: boolean
+        execution_order:
+          description: The execution order of the retention filter.
+          format: int64
+          type: integer
+        filter:
+          $ref: '#/components/schemas/SpansFilter'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterType'
+        modified_at:
+          description: The modification timestamp of the retention filter.
+          format: int64
+          type: integer
+        modified_by:
+          description: The modifier of the retention filter.
+          type: string
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      type: object
+    RetentionFilterCreateAttributes:
+      description: The object describing the configuration of the retention filter
+        to create/update.
+      properties:
+        enabled:
+          description: Enable/Disable the retention filter.
+          example: true
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/SpansFilterCreate'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterType'
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      required:
+      - name
+      - filter
+      - enabled
+      - filter_type
+      - rate
+      type: object
+    RetentionFilterCreateData:
+      description: The body of the retention filter to be created.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    RetentionFilterCreateRequest:
+      description: The body of the retention filter to be created.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterCreateData'
+      required:
+      - data
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterType:
+      default: spans-sampling-processor
+      description: The type of retention filter. The value should always be spans-sampling-processor.
+      enum:
+      - spans-sampling-processor
+      example: spans-sampling-processor
+      type: string
+      x-enum-varnames:
+      - SPANS_SAMPLING_PROCESSOR
+    RetentionFilterUpdateData:
+      description: The body of the retention filter to be updated.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterCreateAttributes'
+        id:
+          description: The ID of the retention filter.
+          example: retention-filter-id
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - attributes
+      - type
+      type: object
+    RetentionFilterUpdateRequest:
+      description: The body of the retention filter to be updated.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterUpdateData'
+      required:
+      - data
+      type: object
+    RetentionFilterWithoutAttributes:
+      description: The retention filter object .
+      properties:
+        id:
+          description: The ID of the retention filter.
+          example: 7RBOb7dLSYWI01yc3pIH8w
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - type
+      type: object
+    RetentionFiltersResponse:
+      description: An ordered list of retention filters.
+      properties:
+        data:
+          description: A list of retention filters objects.
+          items:
+            $ref: '#/components/schemas/RetentionFilterAll'
+          type: array
+      required:
+      - data
       type: object
     Role:
       description: Role object returned by the API.
@@ -12317,6 +12590,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
+    ScalarColumnTypeGroup:
+      default: group
+      description: The type of column present for groups.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
+    ScalarColumnTypeNumber:
+      default: number
+      description: The type of column present for numbers.
+      enum:
+      - number
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12421,6 +12712,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     ScalarQuery:
@@ -15652,6 +15944,25 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - TOTAL
+    SpansFilter:
+      description: The spans filter used to index spans.
+      properties:
+        query:
+          description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+          example: '@http.status_code:200 service:my-service'
+          type: string
+      type: object
+    SpansFilterCreate:
+      description: The spans filter. Spans matching this filter will be indexed and
+        stored.
+      properties:
+        query:
+          description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+          example: '@http.status_code:200 service:my-service'
+          type: string
+      required:
+      - query
+      type: object
     SpansGroupBy:
       description: A group by rule.
       properties:
@@ -17424,6 +17735,9 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
+              the API.
+            ci_visibility_read: View CI Visibility.
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
@@ -17845,6 +18159,178 @@ paths:
       summary: Update a span-based metric
       tags:
       - Spans Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/apm/config/retention-filters:
+    get:
+      description: Get the list of APM retention filters.
+      operationId: ListApmRetentionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List all APM retention filters
+      tags:
+      - APM Retention Filters
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a retention filter to index spans in your organization.
+
+        Returns the retention filter definition when the request is successful.'
+      operationId: CreateApmRetentionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionFilterCreateRequest'
+        description: The definition of the new retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create a retention filter
+      tags:
+      - APM Retention Filters
+      x-codegen-request-body-name: body
+      x-given:
+        retention_filter:
+          parameters:
+          - name: body
+            value: "{\n    \"data\": {\n        \"attributes\": {\n            \"name\":
+              \"demo retention filter\",\n            \"rate\": 0.90,\n            \"filter\":
+              {\n                \"query\": \"@_top_level:1 test:service-demo\"\n
+              \           },\n            \"enabled\": true,\n            \"filter_type\":
+              \"spans-sampling-processor\"\n        },\n        \"type\": \"apm_retention_filter\"\n
+              \   }\n}"
+          step: there is a valid "retention_filter" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteApmRetentionFilter
+        parameters:
+        - name: filter_id
+          source: data.id
+        type: unsafe
+  /api/v2/apm/config/retention-filters-execution-order:
+    put:
+      description: Re-order the execution order of retention filters.
+      operationId: ReorderApmRetentionFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderRetentionFiltersRequest'
+        description: The list of retention filters in the new order.
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Re-order retention filters
+      tags:
+      - APM Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+  /api/v2/apm/config/retention-filters/{filter_id}:
+    delete:
+      description: Delete a specific retention filter from your organization.
+      operationId: DeleteApmRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RetentionFilterIdParam'
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete a retention filter
+      tags:
+      - APM Retention Filters
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    put:
+      description: Update a retention filter from your organization.
+      operationId: UpdateApmRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RetentionFilterIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionFilterUpdateRequest'
+        description: The updated definition of the retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update a retention filter
+      tags:
+      - APM Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
@@ -18450,6 +18936,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPCIAppErrors'
           description: Service Unavailable
+      security:
+      - apiKeyAuth: []
       summary: Send pipeline event
       tags:
       - CI Visibility Pipelines
@@ -18483,6 +18971,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18561,6 +19054,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18601,6 +19099,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18637,6 +19140,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -18715,6 +19223,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -18755,6 +19268,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -29043,7 +29561,8 @@ paths:
 
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
-          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
+          `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
@@ -29789,6 +30308,13 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
+- description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
+    for your organization. You need an API and application key with Admin rights to
+    interact with this endpoint.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
+  name: APM Retention Filters
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
