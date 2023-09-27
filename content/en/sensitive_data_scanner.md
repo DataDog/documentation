@@ -123,7 +123,7 @@ To access this dashboard, go to **Dashboards > Dashboards List** and search for 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [2]: /logs/explorer/search_syntax/
 [3]: /logs/log_configuration/processors/?tab=ui#remapper
-[4]: /logs/pipelines
-[5]: /organization-settings/sensitive-data-scanner
+[4]: https://app.datadoghq.com/logs/pipelines
+[5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [6]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
 [7]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
