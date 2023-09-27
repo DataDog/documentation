@@ -29,7 +29,7 @@ If you can programmatically identify a set of traces that you know you don't wan
 
 The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
 
-You can specify span tags to require or reject by using a comma-separated list of keys and values in environment variables:
+You can specify span tags to require or reject by using a list of keys and values separated by spaces in environment variables:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
 : Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`.
@@ -37,7 +37,7 @@ You can specify span tags to require or reject by using a comma-separated list o
 `DD_APM_FILTER_TAGS_REJECT`
 : Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`.
 
-Or you can set them in the Agent configuration file:
+Or you can set them in the Agent configuration with a comma-separated list:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
