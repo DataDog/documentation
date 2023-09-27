@@ -24,7 +24,7 @@ The Cloud Security Management (CSM) Workload Security package includes [CSM Thre
 ### Enable Remote Configuration
 
 {{< site-region region="us3,us5,eu,gov,ap1" >}}
-<div class="alert alert-warning">Remote Configuration for Cloud Workload Security is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Remote Configuration for CSM Threats is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
