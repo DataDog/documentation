@@ -397,20 +397,21 @@ This guide explains how to rename both upstream and downstream services in Datad
 | Python   | v1.16.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
 | Ruby     | v1.13.0         | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | N/A | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service`<br>`DD_TRACE_DALLI_PEER_SERVICE=billing-api` |
 
-> **Notes**:
-> - For Ruby: Set `peer.service` value for specific integrations using `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE`.
-> - Python does not support Boto2 as of version v1.16.0.
+**Notes**:
+- For Ruby: Set `peer.service` value for specific integrations using `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE`.
+- Python does not support Boto2 as of version v1.16.0.
 
 ### Examples
 
 #### NodeJS 
-`DD_SERVICE_MAPPING: "lambda_api_gateway:api-gw-name,aws-sdk:aws-sdk-name"
+```
+DD_SERVICE_MAPPING: "lambda_api_gateway:api-gw-name,aws-sdk:aws-sdk-name"
       DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED: "true"
       DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
-      DD_TRACE_PEER_SERVICE_MAPPING: "serviceMappingJs-dev-TestQueue-FvobIfTGlO1c:new-peer-service-name"`
+      DD_TRACE_PEER_SERVICE_MAPPING: "serviceMappingJs-dev-TestQueue-FvobIfTGlO1c:new-peer-service-name"
+```
 
-
-{{< img src="images/tracing/serverless_functions/ServiceMappingJS.png" alt="service mapping" >}}
+{{< img src="tracing/serverless_functions/ServiceMappingJS.png" alt="service mapping" >}}
 
 ## Filter or scrub information from logs
 
