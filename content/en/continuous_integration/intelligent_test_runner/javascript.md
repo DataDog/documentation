@@ -37,15 +37,13 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Javascr
 
 {{% ci-itr-activation-instructions %}}
 
-### Configuring the test runner environment
+## Running tests with the Intelligent Test Runner enabled
 
 {{< tabs >}}
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-{{% ci-itr-agent %}}
-
-After configuring the Datadog Agent, run your tests as you normally do:
+After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
@@ -54,9 +52,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
-{{% ci-itr-agentless %}}
-
-After setting these environment variables, run your tests as you normally do:
+After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY DD_APPLICATION_KEY=$DD_APPLICATION_KEY yarn test

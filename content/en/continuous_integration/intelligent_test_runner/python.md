@@ -28,20 +28,6 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 {{% ci-itr-activation-instructions %}}
 
-### Configuring the test runner environment
-
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{% ci-itr-agent %}}
-{{% /tab %}}
-
-{{% tab "Cloud CI Provider (Agentless)" %}}
-{{% ci-itr-agentless %}}
-{{% /tab %}}
-
-{{< /tabs >}}
-
 ## Running tests with the Intelligent Test Runner enabled
 
 ### Environment variable

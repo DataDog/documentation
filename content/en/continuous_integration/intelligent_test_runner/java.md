@@ -11,11 +11,17 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java in beta.{{< /callout >}}
+{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java is in beta.{{< /callout >}}
 
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`.
+Intelligent Test Runner is supported in `dd-java-agent >= 1.22.0`.
+
+The following test frameworks are supported:
+- JUnit >= 4.10 and >= 5.3
+- TestNG >= 6.4
+- Spock >= 2.0
+- Cucumber >= 5.4.0
 
 ## Setup
 
@@ -26,18 +32,6 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1
 {{% ci-itr-activation-instructions %}}
 
 ### Configuring the test runner environment
-
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{% ci-itr-agent %}}
-{{% /tab %}}
-
-{{% tab "Cloud CI Provider (Agentless)" %}}
-{{% ci-itr-agentless %}}
-{{% /tab %}}
-
-{{< /tabs >}}
 
 ### Additional environment variables
 
@@ -56,7 +50,9 @@ Package names should terminate with a `*` and should be separated with colons: `
 or `com.myorg.*` (if you have a common root package).<br/>
 **Default**: `(empty)`
 
-After setting these environment variables, run your tests as you normally do:
+## Running tests with the Intelligent Test Runner enabled
+
+After completing setup, run your tests as you normally do:
 
 {{< tabs >}}
 {{% tab "Gradle" %}}
