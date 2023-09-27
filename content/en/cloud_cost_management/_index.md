@@ -203,7 +203,7 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog currently provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) are **not** supported.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) are **not** supported.
 
 {{% site-region region="us3" %}}
 **Notes**:
@@ -215,7 +215,7 @@ Datadog currently provides cost visibility on a Subscription, Resource Group, an
 [2]: /integrations/azure/?tab=azurecliv20#setup
 {{% /site-region %}}
 
-### Configure the Azure Integration
+### Configure the Azure integration
 Navigate to [Setup & Configuration][3] and select an Azure account from the menu to pull costs from. If you do not see your Azure account in the list, view your [Azure integration][4] to add your account.
 
 ### Generate cost exports
