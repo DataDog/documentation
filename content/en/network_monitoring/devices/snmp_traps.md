@@ -122,7 +122,8 @@ Put all your MIBs into a dedicated folder. Then, run:
 `ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
 
 If your MIBs have dependencies, `ddev` fetches them online if they can be found.
-In case of errors due to missing dependencies and you have access to the missing MIB files, put them in a separate folder and use the `--mib-sources <DIR>` parameter such that ddev will know where to find them. Make sure that each filename is the same as the MIB name (i.e `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
+
+If there are errors due to missing dependencies and you have access to the missing MIB files, put the files in a separate folder and use the `--mib-sources <DIR>` parameter so that ddev knows where to find them. Make sure that each filename is the same as the MIB name (for example, `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
 
 
 
