@@ -57,6 +57,10 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ### Enable Remote Configuration
 
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
+<div class="alert alert-warning">Remote Configuration for CSM Threats is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
 [Remote Configuration][6] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CSM Threats, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
