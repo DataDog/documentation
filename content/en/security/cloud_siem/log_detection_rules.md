@@ -77,7 +77,7 @@ Construct a search query using the same logic as a [log explorer search][1].
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
-Add additional queries with the Add Query button.
+Click **Add Query** to add additional queries.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
@@ -185,8 +185,11 @@ In the **This rule will not generate a signal if there is a match** field, you h
 
 ### Root query
 
+Construct a search query using the same logic as a [log explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
 
-TKTK
+Click **Add Query** to add additional queries.
+
+**Note**: The query applies to all ingested logs.
 
 ## Exclude benign activity with suppression queries
 
@@ -194,6 +197,7 @@ In the **Only generate a signal if there is a match** field, you have the option
 
 In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
+[1]: /logs/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
 
