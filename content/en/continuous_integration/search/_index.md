@@ -1,10 +1,18 @@
 ---
 title: Search and Manage CI Tests and Pipelines 
 description: Learn how to search for your CI tests and pipelines.
+aliases:
+- /continuous_integration/guides/find_flaky_tests/
+algolia:
+   rank: 70
+   tags: ['flaky test', 'flaky tests', 'test regression', 'test regressions', 'test service', 'test services']
 further_reading:
 - link: "/continuous_integration/explorer"
   tag: "Documentation"
   text: "Search and filter test runs or pipeline executions"
+- link: "/continuous_integration/guides/flaky_test_management"
+  tag: "Documentation"
+  text: "Learn how to manage flaky tests"
 ---
 
 ## Overview
@@ -63,11 +71,15 @@ To see your tests, navigate to [**CI** > **Tests**][8] and select between the [*
 
 The [Branches][2] view of the Tests page lists all branches from all [test services][11] that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
 
-In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you) by enabling the **My branches** toggle and adding the email addresses you use in your Git configuration.
+In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you), enable the **My branches** toggle and add the email addresses you use in your Git configuration.
 
 #### Test results
 
-For each branch, the list shows test results for its latest commit: a consolidated number of tests broken down by status (which takes into account retries) and the number of new [flaky tests][9] introduced by the commit.
+For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, wall time, the percentage of change compared to the default branch, when the commit was last updated, and the avatar of the author of the commit.
+
+Click on a branch to explore the test details page, which includes information about the branch's latest commits, flaky tests, test performance, common error types, and all test runs.
+
+{{< img src="continuous_integration/test_details.png" alt="Test Details page for a single branch" style="width:100%;">}}
 
 #### Test suite performance
 
@@ -78,6 +90,7 @@ Hovering over the commit author avatar shows detailed information about the late
 #### Test regressions
 
 Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
+
 #### Investigate for more details
 
 Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
@@ -92,11 +105,7 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 
 The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
-The Default Branches view shows similar information to the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
-
-Click on a row to see the analytics for tests run on the default branch, similar to examining for test run details from the Branches view.
-
-For more information about test configuration tags, see [Test Configurations][1].
+The Default Branches view shows similar information to the Branches view, but applied to the default branch. It compares the current wall time with the average default branch wall time to give you an indication of how your test suite performance is trending over time.
 
 ## Search for pipelines
 
@@ -140,7 +149,7 @@ Job log collection is supported for the following providers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/guides/test_configurations
+[1]: https://app.datadoghq.com/ci/test-runs
 [2]: https://app.datadoghq.com/ci/test-services?view=branches
 [3]: https://app.datadoghq.com/ci/test-services?view=default-branches
 [4]: /continuous_integration/pipelines/github/#enable-log-collection

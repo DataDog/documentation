@@ -14,6 +14,10 @@ algolia:
   tags: ['agent flare']
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
+{{< /site-region >}}
+
 You can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings. **Confirm the upload of the archive to immediately send it to Datadog support**.

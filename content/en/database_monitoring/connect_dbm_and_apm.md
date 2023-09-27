@@ -3,6 +3,10 @@ title: Connect Database Monitoring and Traces
 kind: documentation
 aliases: 
 - /database_monitoring/guide/connect_dbm_and_apm/
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
+    tag: 'Blog'
+    text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
@@ -392,6 +396,10 @@ On the APM Service Page, view the direct downstream database dependencies of the
 {{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
 View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database hosts.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/
