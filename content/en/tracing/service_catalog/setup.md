@@ -88,7 +88,7 @@ Upon import, the following occurs:
 - `spec.lifecycle` gets mapped to `lifecycle`
 - `spec.owner` gets mapped to `team`
 - `metadata.links` gets mapped to `links`
-  - the annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
+  - The annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
 - `metadata.description` gets mapped to `description`
 - `spec.system` gets mapped to `application`
 - Other `spec` values get mapped to custom tags
