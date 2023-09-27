@@ -37,7 +37,10 @@ Executional Context is only available in APM Error Tracking. Error Tracking for 
 1. Install or upgrade your Agent to version `7.44.0` or higher.
 2. Ensure that you are using `ddtrace` version `1.16.0` or higher.
 3. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Executional Context enabled.
-4. To scrub variable data for PII, create a [Sensitive Data Scanner][1] rule and apply it to Logs that match the query `dd_source:debugger`.
+
+### Hiding sensitive data
+
+To scrub variable data for PII, create a [Sensitive Data Scanner][1] rule and apply it to Logs that match the query `dd_source:debugger`.
 
 ## Getting started
 
