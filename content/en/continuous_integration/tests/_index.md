@@ -35,23 +35,23 @@ cascade:
 [Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
 ### Supported features
-|                                         | .NET | Java |   Javascript   | Python | Ruby | Swift |    JUnit Xml   |
-|-----------------------------------------|:----:|:----:|:--------------:|:------:|:----:|:-----:|:--------------:|
-| Accurate time/durations results         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
-| Structured stack traces                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
-| Distributed traces on integration tests |   ✓  |   ✓  |        ✓       |    ✗   |   ✓  |   ✓   |        ✗       |
-| Agent-based reporting                   |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✗       |
-| Agentless reporting                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
-| Test suite level visibility             |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
-| Manual API                              |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
-| Codeowner by test                       |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
-| Source code start/end reporting         |   ✓  |   ✓  | ✓ (only start) |    ✗   |   ✗  |   ✓   | ✓ (only start) |
-| CI and Git info                         |   ✓  |   ✓  |        ✓       |    ✓   |   ✓  |   ✓   |        ✓       |
-| Git metadata upload                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✓       |
-| Intelligent Test Runner                 |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✗       |
-| Code coverage support                   |   ✓  |   ✓  |        ✓       |    ✗   |   ✗  |   ✓   |        ✗       |
-| Benchmark tests support                 |   ✓  |   ✗  |        ✗       |    ✓   |   ✗  |   ✓   |        ✗       |
-| Parameterized tests                     |   ✓  |   ✓  |        ✓       |    ✓   |   ✗  |   ✓   |        ✗       |
+|                                                                                                                                                                                                              | .NET | Java |        Javascript        | Python | Ruby | Swift |      JUnit&nbsp;Xml      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:----:|:------------------------:|:------:|:----:|:-----:|:------------------------:|
+| <details style="margin-bottom: 0"><summary><h5>Accurate time/durations results</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>         |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Structured stack traces</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                 |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Distributed traces on integration tests</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details> |  ✓   |  ✓   |            ✓             |   ✗    |  ✓   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Agent-based reporting</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                   |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Agentless reporting</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
+| <details style="margin-bottom: 0"><summary><h5>Test suite level visibility</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>             |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
+| <details style="margin-bottom: 0"><summary><h5>Manual API</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                              |  ✓   |  ✓   |            ✓             |   ✗    |  ✗   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Codeowner by test</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                       |  ✓   |  ✓   |            ✓             |   ✗    |  ✗   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Source code start/end reporting</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>         |  ✓   |  ✓   | ✓&nbsp;(only&nbsp;start) |   ✗    |  ✗   |   ✓   | ✓&nbsp;(only&nbsp;start) |
+| <details style="margin-bottom: 0"><summary><h5>CI and Git info</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                         |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✓             |
+| <details style="margin-bottom: 0"><summary><h5>Git metadata upload</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
+| <details style="margin-bottom: 0"><summary><h5>Intelligent Test Runner</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                 |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Code coverage support</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                   |  ✓   |  ✓   |            ✓             |   ✗    |  ✗   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Benchmark tests support</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                 |  ✓   |  ✗   |            ✗             |   ✓    |  ✗   |   ✓   |            ✗             |
+| <details style="margin-bottom: 0"><summary><h5>Parameterized tests</h5></summary> <p>Here is a detailed feature description. We expect it to be one or two sentences long.</p></details>                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
 
 ## Setup
 
@@ -75,7 +75,7 @@ For example, suppose you're testing a single commit and you have a Python test t
 
 ### Test configuration attributes
 
-When you run your tests with CI Visibility, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others. 
+When you run your tests with CI Visibility, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
 
 The following tags are automatically collected to identify test configurations, and some may only apply to specific platforms:
 
@@ -99,7 +99,7 @@ The following tags are automatically collected to identify test configurations, 
 
 There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so CI Visibility can properly identify them.
 
-Define these tags as part of the `DD_TAGS` environment variable using the `test.configuration` prefix. 
+Define these tags as part of the `DD_TAGS` environment variable using the `test.configuration` prefix.
 
 For example, the following test configuration tags identify a test configuration where disk response time is slow and available memory is low:
 
