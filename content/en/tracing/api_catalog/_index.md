@@ -8,8 +8,8 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,ap1" >}}
+<div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/api-catalog-public-beta-request/" >}}

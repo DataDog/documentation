@@ -24,7 +24,7 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,ap1" >}}
 <div class="alert alert-warning">Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
