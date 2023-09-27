@@ -263,9 +263,9 @@ For faster processing, generate the first exports manually by clicking **Run Now
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
 
 ### Provide Datadog access to your exports
-
 {{< tabs >}}
 {{% tab "Billing Accounts" %}}
+
 **Note**: Datadog does not support Azure Accounts of the type Microsoft Customer Agreement.
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
