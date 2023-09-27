@@ -30,12 +30,8 @@ To enable Intelligent Test Runner, set the following environment variables:
 **Default**: `false`<br/>
 **Recommended**: `$(DD_TEST_RUNNER)`
 
-`DD_APPLICATION_KEY` (Required)
-: The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-**Default**: `(empty)`
-
 #### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
+In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][2] page.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
@@ -44,7 +40,4 @@ In addition to setting the environment variables, you or a user in your organiza
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/swift
-[2]: https://app.datadoghq.com/organization-settings/application-keys
-[3]: https://app.datadoghq.com/ci/settings/test-service
-[4]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[5]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[2]: https://app.datadoghq.com/ci/settings/test-service
