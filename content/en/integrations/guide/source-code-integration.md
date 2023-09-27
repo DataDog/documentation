@@ -19,9 +19,9 @@ further_reading:
 <div class="alert alert-info">
 The source code integration supports:
 </br>
-Languages: Go, Java, JavaScript (except transpiled JavaScript), Python, .NET, Ruby.
+<b>Languages</b>: Go, Java, JavaScript (except transpiled JavaScript), Python, .NET, Ruby
 </br>
-Git providers: GitHub, GitLab, BitBucket, Azure DevOps.
+<b>Git providers</b>: GitHub, GitLab, BitBucket, Azure DevOps
 </div>
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by accessing the relevant lines of your source code.
@@ -37,12 +37,12 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Tag your telemetry with Git information
 
-Your telemetry needs to be tagged with Git information tying the running application version with a particular repository and commit.
+Your telemetry must be tagged with Git information that ties the running application version with a particular repository and commit.
 
-For supported languages, it's recommended to [embed git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifacts, which is then extracted by the [Datadog Tracing Libraries][9] automatically.
+For supported languages, Datadog recommends [embedding Git information](#embed-git-information-in-your-build-artifacts) in the deployed artifacts, which is then extracted by the [Datadog Tracing Libraries][9] automatically.
 For other languages and configurations, you can [configure telemetry tagging](#configure-telemetry-tagging) yourself.
 
-### Embed git information in your build artifacts
+### Embed Git information in your build artifacts
 
 You can embed the repository URL and commit hash in your build artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service telemetry.
 
@@ -124,11 +124,10 @@ To link data to a specific commit, tag your telemetry with `git.commit.sha` and 
 {{% tab "Docker Runtime" %}}
 
 <div class="alert alert-warning">
-This approach requires Docker, or containerd >= 1.5.6. It doesn't support containers running on AWS Fargate.
-For other container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> tab.
+This approach requires Docker or containerd >= 1.5.6. Containers running on AWS Fargate are not suported. For other container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> tab.
 </div>
 
-If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:
+If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the Git commit SHA and repository URL as Docker labels:
 
 ```
 docker build . \
@@ -182,7 +181,7 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 ## Synchronize your repository metadata
 
-To link your telemetry with source code, your repository metadata needs to be synchronized to Datadog.
+To link your telemetry with source code, your repository metadata must be synchronized to Datadog.
 
 <div class="alert alert-info">
 Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
@@ -191,7 +190,7 @@ Datadog doesn't store the actual content of files in your repository, only Git c
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-Install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to let Datadog synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
+Install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
 
 Setting up the GitHub integration also allows you to see inline code snippets in **Error Tracking**.
 
