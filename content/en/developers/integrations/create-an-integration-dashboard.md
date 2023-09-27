@@ -134,7 +134,7 @@ An integration dashboard should contain the following information:
 
 
 [1]: /dashboards/
-[2]: /developers/integrations/new_check_howto/?tab=configurationtemplate
+[2]: /developers/integrations/agent_integration/
 [3]: /dashboards/#new-dashboard
 [4]: /dashboards/widgets/timeseries/
 [5]: /dashboards/widgets/query_value/

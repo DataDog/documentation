@@ -219,9 +219,9 @@ runtime_security_config:
 
 {{% /tab %}}
 
-{{% tab "Amazon Elastic Beanstalk" %}}
+{{% tab "AWS Elastic Beanstalk" %}}
 
-The following deployment can be used to start the Runtime Security Agent and `system-probe` in an Amazon Elastic Beanstalk environment with multiple Docker containers:
+The following deployment can be used to start the Runtime Security Agent and `system-probe` in an AWS Elastic Beanstalk environment with multiple Docker containers:
 
 ```json
 {

@@ -15948,7 +15948,7 @@ components:
       description: The spans filter used to index spans.
       properties:
         query:
-          description: The search query - following the span search syntax.
+          description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
           example: '@http.status_code:200 service:my-service'
           type: string
       type: object
@@ -15957,7 +15957,7 @@ components:
         stored.
       properties:
         query:
-          description: The search query - following the span search syntax.
+          description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
           example: '@http.status_code:200 service:my-service'
           type: string
       required:
