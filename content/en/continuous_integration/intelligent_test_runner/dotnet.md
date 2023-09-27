@@ -12,7 +12,7 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is only supported on `dd-trace>= 2.22.0` (execute `dd-trace --version` to get the version of the tool).
+Intelligent Test Runner is only supported on `dd-trace>= 2.39.0` (execute `dd-trace --version` to get the version of the tool).
 
 ## Setup
 
