@@ -5,6 +5,9 @@ further_reading:
 - link: "/security/infrastructure_vulnerabilities/"
   tag: "Documentation"
   text: "CSM Vulnerabilities"
+- link: "/security/infrastructure_vulnerabilities/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting Cloud Security Management Vulnerabilities"
 aliases:
   - /security/infrastructure_vulnerability/setup/
 ---
