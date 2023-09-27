@@ -22,14 +22,12 @@ further_reading:
 ## Compatibility
 
 Supported Python interpreters:
-* Python >= 2.7 and >= 3.5
+* Python >= 3.7
 
 Supported test frameworks:
 * pytest >= 3.0.0
-  * pytest < 5 when using Python 2
 * pytest-benchmark >= 3.1.0
-  * Python >= 3.7
-* unittest >= Python 2.7
+* unittest >= Python 3.7
 
 ## Configuring reporting method
 
