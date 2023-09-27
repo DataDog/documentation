@@ -83,10 +83,10 @@ If you use GitHub integration, directly save your Backstage YAMLs to a repo with
 
 Upon import, the following occurs:
 - Datadog only recognizes `kind:component` in Backstage YAMLs as services
-- `name` gets converted to `DD-SERVICE`
-- `namespace` values get mapped to custom tags
+- `metadata.name` gets converted to `DD-SERVICE`
+- `metadata.namespace` values get mapped to custom tags
 - `spec.lifecycle` gets mapped to `lifecycle`
-- `owner` gets mapped to `team`
+- `spec.owner` gets mapped to `team`
 - `metadata.links` gets mapped to `links`
   - the annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
 - `metadata.description` gets mapped to `description`
