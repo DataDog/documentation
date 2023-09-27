@@ -126,7 +126,7 @@ Whether to enable the endpoint data collection in profiles. Added in version `0.
 `DD_PROFILING_ALLOCATION_ENABLED`
 : **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
 **Default**: `1`<br>
-Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off due to a limitation of the ZendEngine.<br>
+Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
