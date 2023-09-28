@@ -127,7 +127,7 @@ javascript_best_practices_data:
     text: "Avoid reassigning exceptions in catch clauses"
   - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-implied-eval"
     tag: "no-implied-eval"
-    text: "Prevent the use of eval()-like methods"
+    text: "Prevent the use methods similar to eval()"
   - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-import-assign"
     tag: "no-import-assign"
     text: "Prevent assigning to imported bindings"
@@ -151,7 +151,7 @@ javascript_best_practices_data:
     text: "Avoid the use of the __proto__ property"
   - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-script-url"
     tag: "no-script-url"
-    text: "Avoid using javascript in URLs"
+    text: "Avoid using JavaScript in URLs"
   - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-unsafe-negation"
     tag: "no-unsafe-negation"
     text: "Avoid negating the left operand of relational operators"
@@ -228,7 +228,7 @@ javascript_code_style_data:
     text: "Avoid Array constructors"
   - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-div-regex"
     tag: "no-div-regex"
-    text: "Avoid equal signs explicitly at the beginning of regex"
+    text: "Avoid equal signs at the beginning of regular expressions"
   - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-duplicate-imports"
     tag: "no-duplicate-imports"
     text: "Avoid duplicate module imports"
@@ -355,7 +355,7 @@ javascript_node_security_data:
     text: "Avoid calls to 'buffer' with 'noAssert' flag set"
   - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-child-process"
     tag: "detect-child-process"
-    text: "Avoid instances of 'child_process' & non-literal 'exec()'"
+    text: "Avoid instances of 'child_process' and non-literal 'exec()'"
   - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-eval-with-expression"
     tag: "detect-eval-with-expression"
     text: "Avoid `eval` with expressions"
@@ -367,7 +367,7 @@ javascript_node_security_data:
     text: "Avoid variables in 'fs' calls filename argument"
   - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-non-literal-regexp"
     tag: "detect-non-literal-regexp"
-    text: "RegExp with non-literal values it might allow a DOS attack"
+    text: "Detects non-literal values in regular expressions"
   - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-non-literal-require"
     tag: "detect-non-literal-require"
     text: "Avoid require with non-literal values"
@@ -376,7 +376,7 @@ javascript_node_security_data:
     text: "Detects hardcoded JWT tokens within the codebase."
   - link: "/continuous_integration/static_analysis/rules/javascript-node-security/hardcoded-hmac-key"
     tag: "hardcoded-hmac-key"
-    text: "Avoid hardcoded hmac keys"
+    text: "Avoid hardcoded HMAC keys"
   - link: "/continuous_integration/static_analysis/rules/javascript-node-security/insecure-hash"
     tag: "insecure-hash"
     text: "Do not use weak hash functions"
@@ -924,7 +924,7 @@ typescript_best_practices_data:
     text: "Avoid extra non-null assertions"
   - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-implied-eval"
     tag: "no-implied-eval"
-    text: "Prevent the use of eval()-like methods"
+    text: "Prevent the use methods similar to eval()"
   - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-inner-declarations"
     tag: "no-inner-declarations"
     text: "Avoid variable or function declaration in nested blocks"
@@ -1013,7 +1013,7 @@ typescript_code_style_data:
     text: "Enforce the use of === and !=="
   - link: "/continuous_integration/static_analysis/rules/typescript-code-style/func-name-matching"
     tag: "func-name-matching"
-    text: "Function names must match the name of the assignation."
+    text: "Function names must match the name of the assignation"
   - link: "/continuous_integration/static_analysis/rules/typescript-code-style/func-names"
     tag: "func-names"
     text: "Enforce named function expressions"
@@ -1046,7 +1046,7 @@ typescript_code_style_data:
     text: "Avoid duplicate module imports"
   - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-empty-interface"
     tag: "no-empty-interface"
-    text: "Avoid the declaration of empty interfaces."
+    text: "Avoid the declaration of empty interfaces"
   - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-floating-decimal"
     tag: "no-floating-decimal"
     text: "Avoid leading or trailing decimal points in numbers"
@@ -1076,7 +1076,7 @@ typescript_code_style_data:
     text: "Avoid comparisons where both sides are exactly the same"
   - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-useless-empty-export"
     tag: "no-useless-empty-export"
-    text: "Avoid empty exports that don't change anything."
+    text: "Avoid empty exports that don't change anything"
   - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-var"
     tag: "no-var"
     text: "Require let or const instead of var"
@@ -1176,7 +1176,7 @@ typescript_node_security_data:
     text: "Avoid calls to 'buffer' with 'noAssert' flag set"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-child-process"
     tag: "detect-child-process"
-    text: "Avoid instances of 'child_process' & non-literal 'exec()'"
+    text: "Avoid instances of 'child_process' and non-literal 'exec()'"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-eval-with-expression"
     tag: "detect-eval-with-expression"
     text: "Avoid `eval` with expressions"
@@ -1188,16 +1188,16 @@ typescript_node_security_data:
     text: "Avoid variables in 'fs' calls filename argument"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-non-literal-regexp"
     tag: "detect-non-literal-regexp"
-    text: "RegExp with non-literal values it might allow a DOS attack"
+    text: "Detects non-literal values in regular expressions"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-non-literal-require"
     tag: "detect-non-literal-require"
     text: "Avoid require with non-literal values"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detected-jwt-token"
     tag: "detected-jwt-token"
-    text: "Detects hardcoded JWT tokens within the codebase."
+    text: "Detects hardcoded JWT tokens within the codebase"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/hardcoded-hmac-key"
     tag: "hardcoded-hmac-key"
-    text: "Detects hardcoded hmac keys"
+    text: "Detects hardcoded HMAC keys"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/insecure-hash"
     tag: "insecure-hash"
     text: "Do not use weah hash functions"
@@ -1244,7 +1244,7 @@ further_reading:
 
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
-## Docker Rules
+## Docker rules
 
 ### Follow best practices with using Docker
 
@@ -1256,7 +1256,7 @@ Best practices for using Docker.
 
 <br>
 
-## JavaScript Rules
+## JavaScript rules
 
 ### Follow best practices for writing JavaScript code
 
@@ -1338,7 +1338,7 @@ This plugin exports a `recommended` configuration that enforces React good pra
 
 <br>
 
-## Python Rules
+## Python rules
 
 ### Follow best practices for writing Python code
 
@@ -1432,7 +1432,7 @@ Rules focused on finding security and vulnerability issues in your Python code, 
 
 <br>
 
-## TypeScript Rules
+## TypeScript rules
 
 ### TypeScript React code quality
 
@@ -1513,7 +1513,6 @@ Rules to identify potential security hotspots in Node. This may include false po
 {{< sa-rule-list "typescript_node_security_data" >}}
 
 <br>
-
 
 ## Further Reading
 
