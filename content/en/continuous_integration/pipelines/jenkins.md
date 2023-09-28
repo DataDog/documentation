@@ -739,8 +739,8 @@ datadog(tags: ["team:backend", "release:canary"]){
 }
 {{< /code-block >}}
 
-#### Integrate with Datadog teams
-To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag.
+#### Integrate with Datadog Teams
+To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][15] team handle exactly.
 
 ### Set global custom tags
 
