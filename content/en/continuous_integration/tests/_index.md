@@ -49,7 +49,7 @@ cascade:
 | {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for <a href="/continuous_integration/intelligent_test_runner">Intelligent Test Runner</a>.{{< /ci-details >}}                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
 | {{< ci-details title="Intelligent Test Runner" >}}Capability to enable <a href="/continuous_integration/intelligent_test_runner">Intelligent Test Runner</a>, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                 |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
 | {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                   |  ✓   |  ✓   |            ✓             |   ✗    |  ✗   |   ✓   |            ✓ (manual)             |
-| {{< ci-details title="Benchmark tests support" >}}Automatic detection performance statistics for benchmark tests.{{< /ci-details >}}                 |  ✓   |  ✗   |            ✗             |   ✓    |  ✗   |   ✓   |            ✗             |
+| {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                 |  ✓   |  ✗   |            ✗             |   ✓    |  ✗   |   ✓   |            ✗             |
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
 
 ## Setup
