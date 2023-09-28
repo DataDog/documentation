@@ -37,9 +37,8 @@ cascade:
 ### Supported features
 |                                                                                                                                                                                                              | .NET | Java |        Javascript        | Python | Ruby | Swift |      JUnit&nbsp;Xml      |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:----:|:------------------------:|:------:|:----:|:-----:|:------------------------:|
-| {{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in time and duration results. This is usually not the case for JUnit XML reports.{{< /ci-details >}}         |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
-| {{< ci-details title="Structured stack traces" >}} {{< /ci-details >}}                 |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
-| {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog will show the full distributed trace in its test details.{{< /ci-details >}} |  ✓   |  ✓   |            ✓             |   ✗    |  ✓   |   ✓   |            ✗             |
+| {{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}         |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
+| {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog will show the full distributed trace in their test details.{{< /ci-details >}} |  ✓   |  ✓   |            ✓             |   ✗    |  ✓   |   ✓   |            ✗             |
 | {{< ci-details title="Agent-based reporting" >}}Ability to report test information via the Datadog Agent.{{< /ci-details >}}                   |  ✓   |  ✓   |            ✓             |   ✓    |  ✓   |   ✓   |            ✗             |
 | {{< ci-details title="Agentless reporting" >}}Ability to report test information without the need of the Datadog Agent.{{< /ci-details >}}                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
 | {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites and tests.{{< /ci-details >}}             |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
@@ -50,8 +49,8 @@ cascade:
 | {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✓             |
 | {{< ci-details title="Intelligent Test Runner" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                 |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
 | {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                   |  ✓   |  ✓   |            ✓             |   ✗    |  ✗   |   ✓   |            ✓ (manual)             |
-| {{< ci-details title="Benchmark tests support" >}}Support for benchmark tests, which do not only report a pass/fail/skip status but performance statistics.{{< /ci-details >}}                 |  ✓   |  ✗   |            ✗             |   ✓    |  ✗   |   ✓   |            ✗             |
-| {{< ci-details title="Parameterized tests" >}}Support for automatic detection of parameterized tests.{{< /ci-details >}}                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
+| {{< ci-details title="Benchmark tests support" >}}Automatic detection performance statistics for benchmark tests.{{< /ci-details >}}                 |  ✓   |  ✗   |            ✗             |   ✓    |  ✗   |   ✓   |            ✗             |
+| {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                     |  ✓   |  ✓   |            ✓             |   ✓    |  ✗   |   ✓   |            ✗             |
 
 ## Setup
 
