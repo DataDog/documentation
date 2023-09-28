@@ -145,11 +145,37 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.job.succeeded`
 : In `kubernetes_state`, the `kuberenetes.job.succeeded` was `count` type. In `kubernetes_state_core` it is `gauge` type. 
 
-### Host or Node level Tag Assignment
+### Node Level Tag Assignment
 
-Host or node level tags will no longer appear on cluster centric metrics. Metrics like `kubernetes_state.namespace.count` or `kubernetes_state.node.count` are aggregate counts of groups within a cluster and host or node level tags do not make sense. To add tags globally, use `DD_TAGS` environment variable or `datadog.tags` Helm configuration. Instance only level tags can be specified with mounting a custom kubernetes_state_core.yaml in the `clusterAgent.confd` section of the Helm configuration.
+Host or node level tags no longer appear on cluster centric metrics. Metrics like `kubernetes_state.namespace.count` or `kubernetes_state.node.count` are aggregate counts of groups within a cluster and host or node level tags do not make sense. To add tags globally, use `DD_TAGS` environment variable or `datadog.tags` Helm configuration. Instance only level tags can be specified with mounting a custom kubernetes_state_core.yaml in the `clusterAgent.confd` section of the Helm configuration.
 
-Metrics relative to an actual node in the cluster, like `kubernetes_state.node.by_condition` or `kubernetes_state.container.restarts`, will continue to inherit their respective host or node level tags.
+{{< tabs >}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  tags: 
+    - "<TagName>:<TagValue>"
+```
+
+{{% tab "Operator" %}}
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  features:
+    kubeStateMetricsCore:
+      enabled: true
+  global:
+    tags:
+      - "<TagName>:<TagValue>"
+```
+
+Metrics relative to an actual node in the cluster, like `kubernetes_state.node.by_condition` or `kubernetes_state.container.restarts`, continue to inherit their respective host or node level tags.
+
+### Legacy Check 
 
 {{< tabs >}}
 {{% tab "Helm" %}}
