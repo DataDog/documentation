@@ -26,7 +26,7 @@ See [Getting Started][1] for usage instructions.
 
 ### Query data in natural language
 
-Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost.
+Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 
 In Datadog or in Slack, you can ask Bits AI questions such as
 - Who is on call for example-service?
