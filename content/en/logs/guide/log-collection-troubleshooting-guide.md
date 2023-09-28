@@ -70,8 +70,8 @@ The Datadog Agent does not run as root (and running as root is not recommended, 
 The default Agent user per operating system:
 | Operating system | Default Agent user |
 | ---------------  | ------------------ |
-| Linux | `datadog-agent` |
-| MacOS | `datadog-agent` |
+| Linux | `dd-agent` |
+| MacOS | `real user` |
 | Windows | `ddagentuser` |
 
 If the Agent does not have the correct permissions, you might see one of the following error messages when checking the [Agent status][5]:
