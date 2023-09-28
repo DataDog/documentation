@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">Bits AI is in private beta.</div>
 
-Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. It surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more.
+Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure.
 
 See [Getting Started][1] for usage instructions.
 
@@ -29,12 +29,12 @@ See [Getting Started][1] for usage instructions.
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost.
 
 In Datadog or in Slack, you can ask Bits AI questions such as
-- What is going on with example-service?
-- Are there any issues with example-service's dependencies?
 - Who is on call for example-service?
 - Find me the example-service dashboard.
+- What is going on with example-service?
+- Are there any issues with example-service's dependencies?
 
-Bits AI also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
+When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
 {{< whatsnext desc="Additional documentation:">}}
     {{< nextlink href="bits_ai/getting_started/" >}}Getting Started{{< /nextlink >}}
