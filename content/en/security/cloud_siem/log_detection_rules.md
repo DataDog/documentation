@@ -79,7 +79,7 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 
 Click **Add Query** to add additional queries.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 ## Exclude benign activity with suppression queries
 
@@ -114,7 +114,7 @@ In this example, when greater than five failed logins and a successful login exi
 
 Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 #### Learned value
 
@@ -145,7 +145,7 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
-**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 {{% /tab %}}
 
