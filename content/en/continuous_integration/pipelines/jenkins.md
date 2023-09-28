@@ -739,6 +739,9 @@ datadog(tags: ["team:backend", "release:canary"]){
 }
 {{< /code-block >}}
 
+#### Integrate with Datadog teams
+To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag.
+
 ### Set global custom tags
 
 You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
