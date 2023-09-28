@@ -67,5 +67,6 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.datadoghq.com/continuous_integration/pipelines/circleci/#set-custom-tags
-[7]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: /continuous_integration/pipelines/circleci/#set-custom-tags
+[7]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[8]: /account_management/teams/
