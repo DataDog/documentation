@@ -68,7 +68,7 @@ If you have Datadog Workflows configured, you can trigger them from Slack. For e
 
 Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
 
-[1]: bits_ai/getting_started/
+[1]: /bits_ai/getting_started/
 [2]: https://www.datadoghq.com/product/incident-management/
 
 ## Further reading
