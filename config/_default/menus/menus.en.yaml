@@ -8352,6 +8352,18 @@ api:
         - UpdateApmRetentionFilter
       unstable: []
       order: 4
+  - name: Get a given APM retention filter
+    url: '#get-a-given-apm-retention-filter'
+    identifier: apm-retention-filters-get-a-given-apm-retention-filter
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetApmRetentionFilter
+      unstable: []
+      order: 3
   - name: Delete a retention filter
     url: '#delete-a-retention-filter'
     identifier: apm-retention-filters-delete-a-retention-filter
@@ -8375,7 +8387,7 @@ api:
       operationids:
         - ReorderApmRetentionFilters
       unstable: []
-      order: 3
+      order: 6
   - name: Create a retention filter
     url: '#create-a-retention-filter'
     identifier: apm-retention-filters-create-a-retention-filter
