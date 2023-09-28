@@ -266,8 +266,9 @@ Log files larger than 1GiB are truncated.
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /logs/
 [10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
-[11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
+[11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
 [12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [13]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
+[16]: /account_management/teams/
