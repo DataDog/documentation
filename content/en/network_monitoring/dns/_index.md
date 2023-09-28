@@ -81,7 +81,7 @@ The following DNS metrics are available:
 | **DNS requests**         | The number of DNS requests made from the client.                                                                         |
 | **DNS requests / second** | The rate of DNS requests made by the client.                                                                             |
 | **DNS response time**    | The average response time of the DNS server to a request from the client.                                                |
-| **Timeouts**             | The number of timed out DNS requests from the client (displayed as a percentage of all DNS responses).                    |
+| **Timeouts**             | The number of timed out DNS requests from the client (displayed as a percentage of all DNS responses). <br  /><br />**Note**: These timeouts are a metric computed by NPM internally, and may not align with DNS timeouts reported from outside of NPM. They are not the same as the DNS timeouts reported by DNS clients or servers.                |
 | **Errors**               | The number of requests from the client that generated DNS error codes (displayed as a percentage of all DNS responses).   |
 | **SERVFAIL**             | The number of requests from the client that generated SERVFAIL (DNS server failed to respond) codes (displayed as a percentage of all DNS responses).   |
 | **NXDOMAIN**             | The number of requests from the client that generated NXDOMAIN (domain name does not exist) codes (displayed as a percentage of all DNS responses).   |

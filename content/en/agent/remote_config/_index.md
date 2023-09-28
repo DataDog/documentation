@@ -24,11 +24,9 @@ algolia:
   tags: ['remote config', 'remote configuration']
 ---
 
-{{% site-region region="gov" %}}
-
-<div class="alert alert-warning">Remote configuration is not available on the US1-FED Datadog site.</div>
-
-{{% /site-region %}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Remote Configuration is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
@@ -63,7 +61,7 @@ The following products and features are supported with Remote Configuration:
 
 - **Configure tracing library settings in the UI** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
 - **Remotely instrument your Kubernetes services with APM** (Private Beta): Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote instrumentation][2] for more information.
-- **Remotely set Agent sampling rate** (Private Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+- **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 
 ### Dynamic Instrumentation

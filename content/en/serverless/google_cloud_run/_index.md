@@ -33,11 +33,6 @@ Images are tagged based on semantic versioning, with each new version receiving 
 
 * `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
-
-<div class="alert alert-info">
-The latest tag of /serverless-init will be applied to Beta9 through 9/1/2023 to provide additional time for Azure Container App Beta users to adjust to a breaking change in 1.0
-</div>
-
 * `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
 ## How `serverless-init` works
