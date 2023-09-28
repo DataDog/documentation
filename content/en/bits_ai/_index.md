@@ -43,7 +43,7 @@ When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anoma
 
 ### Streamline incident management
 
-As part of the [Datadog Incident Management][2] product, generative AI can help you 
+Within the [Datadog Incident Management][2] product, Bits AI can help you 
 
 - **Stay informed:** Ask Datadog to send you an update on the incident in 15 minutes.
 - **Explore incidents:** Query incident details, such as "Give me a few bullet points on incident 2781."
