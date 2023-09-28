@@ -18253,7 +18253,7 @@ paths:
       tags:
       - APM Retention Filters
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v2/apm/config/retention-filters/{filter_id}:
@@ -18277,6 +18277,34 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+    get:
+      description: Get an APM retention filter.
+      operationId: GetApmRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RetentionFilterIdParam'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a given APM retention filter
+      tags:
+      - APM Retention Filters
+      x-menu-order: 3
+      x-undo:
+        type: safe
     put:
       description: Update a retention filter from your organization.
       operationId: UpdateApmRetentionFilter

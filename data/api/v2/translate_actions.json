@@ -67,6 +67,10 @@
     "description": "Delete a specific retention filter from your organization.",
     "summary": "Delete a retention filter"
   },
+  "GetApmRetentionFilter": {
+    "description": "Get an APM retention filter.",
+    "summary": "Get a given APM retention filter"
+  },
   "UpdateApmRetentionFilter": {
     "description": "Update a retention filter from your organization.",
     "summary": "Update a retention filter",
