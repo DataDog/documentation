@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/
+  - /continuous_integration/setup_pipelines/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
