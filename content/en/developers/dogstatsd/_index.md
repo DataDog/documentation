@@ -9,6 +9,9 @@ aliases:
     - /integrations/faq/dogstatsd-and-docker
     - /agent/kubernetes/dogstatsd
 further_reading:
+    - link: 'integrations/node'
+      tag: 'Documentation'
+      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Introduction to DogStatsD'
