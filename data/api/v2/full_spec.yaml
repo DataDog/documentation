@@ -1797,7 +1797,6 @@ components:
       - end
       - status
       - url
-      - git
       type: object
     CIAppPipelineEventJobLevel:
       default: job
@@ -1950,7 +1949,6 @@ components:
       - end
       - status
       - partial_retry
-      - git
       type: object
     CIAppPipelineEventPipelineLevel:
       default: pipeline
@@ -2066,7 +2064,6 @@ components:
       - start
       - end
       - status
-      - git
       type: object
     CIAppPipelineEventStageLevel:
       default: stage
@@ -2166,7 +2163,6 @@ components:
       - start
       - end
       - status
-      - git
       type: object
     CIAppPipelineEventStepLevel:
       default: step
