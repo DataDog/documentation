@@ -160,4 +160,38 @@ export function initializeGroupedListings() {
         activateButton(activeFilterButton, filters);
         showResults(filtered);
     }
+
+    /**
+     * Copy href of an action on the 
+     * @param {object} event 
+     */
+    const copyActionHref = (event) => {
+        const clickableIconWrapper = event.currentTarget.parentElement
+        const copyConfirmedIconWrapper = clickableIconWrapper.nextElementSibling
+        const anchor = clickableIconWrapper.dataset.anchor
+        const {pathname, origin} = window.location
+        const path = new URL(`${origin}${pathname}${anchor}`)
+
+        const Clipboard = navigator.clipboard
+        // write href to clipboard
+        Clipboard.writeText(path.href).then(() => {
+            clickableIconWrapper.classList.add('d-none');
+            copyConfirmedIconWrapper.classList.remove('d-none')
+            setTimeout(function() {
+                clickableIconWrapper.classList.remove('d-none');
+                copyConfirmedIconWrapper.classList.add('d-none')
+            }, 1000)
+        })
+    }
+
+    // Copy anchor event listener
+    const copyIcons = document.querySelectorAll('.group-header-text .icon-click')
+
+    copyIcons.forEach(e => {
+        e.addEventListener('click', (e) => {
+            e.stopPropagation()
+            copyActionHref(e)
+        })
+    })
+
 }

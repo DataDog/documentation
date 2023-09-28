@@ -49,7 +49,9 @@
         {{ else }}
           {{ $groupHeaderText = $v.Key }}
         {{ end }}
-        {{$groupHeaderText}}
+        {{ $groupHeaderText }}
+        <span class="icon-wrapper" data-anchor="#{{$groupHeaderText | anchorize}}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $groupHeaderText) ) }}</span>
+        <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
       </div>
       <div class="js-group-header__arrow">></div>
     </div>
