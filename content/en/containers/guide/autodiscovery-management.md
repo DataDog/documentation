@@ -17,11 +17,11 @@ By default, the Datadog Agent automatically discovers all containers available. 
 
 The Datadog Agent should be deployed once per host within containerized environments. This is typically done with a DaemonSet in Kubernetes (managed by Helm or Operator) or by ECS Daemon Services. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host.
 
-You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any Autodiscovery based Agent Integrations. When the [log "Container Collect All" feature][1] is enabled all discovered containers have their logs collected, unless otherwise blocked by the rules described below.
+You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any Autodiscovery based Agent Integrations. When the [log "Container Collect All" feature][1] is enabled, all discovered containers have their logs collected, unless otherwise blocked by the rules described below.
 
 These restrictions can be set by either:
-- Providing environment variables to the Datadog Agent container as an allowlist/blocklist of containers
-- Adding annotations to your Kubernetes pods to allow/block individual containers
+- Providing environment variables to the Datadog Agent container as an allowlist/blocklist of containers.
+- Adding annotations to your Kubernetes pods to allow/block individual containers.
 
 The first option works well as a list of container names, images, or Kubernetes namespaces to exclude for the entire cluster. The second option works well for more fine tuned exclusions in Kubernetes.
 
@@ -131,7 +131,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-In environments where you are not using Helm or the Operator these environment variables can be passed to the Agent container at startup.
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
 
 ##### Example Docker
 ```shell
@@ -183,7 +183,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-In your Helm chart you can set `datadog.excludePauseContainer` to `true` or `false`.
+In your Helm chart, set `datadog.excludePauseContainer` to `true` or `false`.
 
 ##### Example
 
@@ -197,7 +197,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
-In environments where you are not using Helm or the Operator these environment variables can be passed to the Agent container at startup.
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
 
 Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 {{% /tab %}}
@@ -216,7 +216,7 @@ In **Agent v7.45+** you can set annotations on your Kubernetes pods to control A
 | `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude` | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod |
 | `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excludes metric collection from the container with `<CONTAINER_NAME>` in the pod |
 
-#### Example exclude the entire pod
+#### Exclude the entire pod:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -232,7 +232,7 @@ spec:
         #(...)
 ```
 
-#### Example exclude log collection from a container
+#### Exclude log collection from a container:
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
