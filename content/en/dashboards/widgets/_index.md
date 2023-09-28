@@ -123,7 +123,7 @@ Custom links connect data values to URLs such as a Datadog page or your AWS cons
 
 To customize interactions with data inline your generic widgets, see [Custom Links][2].
 
-## Unit overrides
+## Unit override
 
 Customize unit values displayed on widgets to add context to your data. 
 - **Unit override**: choose to display units in the family of 'memory', and have Datadog take care of displaying the appropriate scale depending on data (such as megabytes or gigabytes).
