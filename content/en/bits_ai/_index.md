@@ -56,7 +56,7 @@ Within the [Datadog Incident Management][2] product, Bits AI can help you
 
 ### Run workflows in Slack
 
-If you have Datadog Workflows configured, you can trigger them from Slack. For example, sending `@Datadog Give me a workflow to block IPs in Cloudflare` starts a conversation in which the chatbot confirms the desired workflow and asks for any required parameters.
+If you have Datadog Workflows configured, you can trigger them from Slack. For example, sending `@Datadog Give me a workflow to block IPs in Cloudflare` starts a conversation in which Bits AI confirms the desired workflow and asks for any required parameters.
 
 {{< img src="bits_ai/slack-workflow.png" alt="Workflow request to Bits AI in Slack" style="width:60%;">}}
 
