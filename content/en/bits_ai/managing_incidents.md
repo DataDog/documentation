@@ -15,11 +15,9 @@ is_beta: true
 
 {{< img src="bits_ai/integration-settings.png" alt="Screenshot of Slack integration settings in Datadog" style="width:90%;">}}
 
-## Generate incident summaries and scheduled updates
+## View incident summaries and schedule updates
 
-To generate an incident summary,
-1. Join an incident channel on Slack that is linked to the Datadog Incidents app.
-1. View the incident summary when you join. Summaries are only displayed in channels with 15 or more messages. Only you see the summary, and it does not persist across reloads, between desktop and mobile apps, or across sessions.
+When you join an incident channel in Slack that is connected to Datadog Incident Management, you automatically receive a summary of the incident. The summary is only generated if a channel has 15 or more messages. The summary is only visible to you, and it does not persist across reloads, between desktop and mobile apps, or across sessions.
 
 To schedule an update,
 1. Ask `@Datadog Give me an update in X minutes` in the desired incident Slack channel.
