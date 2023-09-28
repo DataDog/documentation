@@ -5,32 +5,32 @@ In these cases, Datadog recommends limiting the number of instances per Agent to
 init_config:
 instances:
   - dbm: true
-    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    host: example-service-primary.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
-    host: products–replica-1.us-east-1.rds.amazonaws.com
+    host: example-service–replica-1.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
-    host: products–replica-2.us-east-1.rds.amazonaws.com
+    host: example-service–replica-2.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
     [...]
 ```
 
@@ -83,17 +83,17 @@ instances:
   # This instance is the "DBM" instance. It will connect to the
   # `postgres` database and send DBM telemetry from all databases
   - dbm: true
-    host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+    host: example-service.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-  # This instance only collects data from the `on_sale` database
+  # This instance only collects data from the `users` database
   # and collects relation metrics from tables prefixed by "2022_"
-  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+  - host: example-service.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
-    dbname: on_sale
+    dbname: users
     dbstrict: true
     relations:
       - relation_regex: 2022_.*
@@ -102,7 +102,7 @@ instances:
           - i
   # This instance only collects data from the `inventory` database
   # and collects relation metrics only from the specified tables
-  - host: products-primary.123456789012.us-east-1.rds.amazonaws.com
+  - host: example-service.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
@@ -123,11 +123,11 @@ instances:
     port: 5000
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: products-primary
+    reported_hostname: example-service-primary
   - dbm: true
     host: localhost
     port: 5001
     username: datadog
     password: '<PASSWORD>'
-    reported_hostname: products-replica-1
+    reported_hostname: example-service-replica-1
 ```
