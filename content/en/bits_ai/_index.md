@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">Bits AI is in private beta.</div>
 
-Bits AI is a generative AI interface that helps you identify, remediate, and summarize issues in your applications and infrastructure. It surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more.
+Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. It surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more.
 
 ## Features
 
