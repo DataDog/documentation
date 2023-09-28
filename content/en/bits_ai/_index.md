@@ -20,6 +20,8 @@ further_reading:
 
 Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. It surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more.
 
+See [Getting Started][1] for usage instructions.
+
 ## Features
 
 ### Query data in natural language
@@ -66,6 +68,7 @@ If you have Datadog Workflows configured, you can trigger them from Slack. For e
 
 Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
 
+[1]: bits_ai/getting_started/
 [2]: https://www.datadoghq.com/product/incident-management/
 
 ## Further reading
