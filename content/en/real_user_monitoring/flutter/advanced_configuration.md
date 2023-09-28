@@ -325,9 +325,9 @@ For example, if the current tracking consent is `TrackingConsent.pending` and yo
 
 Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
 
-## Flutter specific performance metrics
+## Flutter-specific performance metrics
 
-In order to enable the collection of Flutter specific performance metrics you can set `reportFlutterPerformance: true` in `RumConfiguration`. Widget build and raster times are then displayed in [Mobile Vitals][12]. 
+To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `RumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][12]. 
 
 ## Sending data when device is offline
 
