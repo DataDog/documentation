@@ -41,7 +41,7 @@ The `cutoff_min()` and `cutoff_max()` functions take one parameter:
 
 The cutoff functions do not remove values that are equal to the threshold value.
 
-In addition, the functions do not delete datapoints from Datadog entirely; it only removes them from your visualization. Disabling the function brings your datapoints back.
+In addition, the functions do not delete datapoints from Datadog entirely; it only removes them from your visualization. Disabling the function brings your datapoints back. Since, both cutoff_min() and cutoff_max() are functions, they apply after the raw_query has returned the result. In the case of a grouped query, this means that they can and will change an entire timeseries to NaN (-) but are unable to remove a group as the raw_query has already returned it.
 
 **Tip**: For both the clamp and cutoff functions, it may be helpful to see the threshold value you have chosen. You can [set a horizontal marker][1] in Dashboards to indicate this value.
 
