@@ -11,7 +11,7 @@ is_beta: true
 ## Prerequisites
 
 - The "Mirror all incident Slack channel messages to its incident timeline in real-time" option must be turned on in **[Incident > Settings > Integrations][3] > Slack**. This enables Datadog to generate summaries and postmortems from Slack conversations.
-- The incident channel name must be prefixed with `#incident-`. This enables you to use the Bits AI chatbot in Slack (`@Datadog`) to ask questions about the incident or give updates on it.
+- The incident channel name must be prefixed with `#incident-`. This enables you to use Bits AI in Slack (`@Datadog`) to ask questions about the incident.
 
 {{< img src="bits_ai/integration-settings.png" alt="Screenshot of Slack integration settings in Datadog" style="width:90%;">}}
 
