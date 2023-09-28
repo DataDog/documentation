@@ -12,16 +12,15 @@ is_beta: true
 
 - The "Mirror all incident Slack channel messages to its incident timeline in real-time" option must be turned on in **[Incident > Settings > Integrations][3] > Slack**. This enables Datadog to generate summaries and postmortems from Slack conversations.
 - The incident channel name must be prefixed with `#incident-`. This enables you to use the Bits AI chatbot in Slack (`@Datadog`) to ask questions about the incident or give updates on it.
+- Your Datadog account must be connected to Slack. Running a query automatically initiates this process, which can be completed by following the prompts.
 
 {{< img src="bits_ai/integration-settings.png" alt="Screenshot of Slack integration settings in Datadog" style="width:90%;">}}
 
 ## View incident summaries and schedule updates
 
-When you join an incident channel in Slack that is connected to Datadog Incident Management, you automatically receive a summary of the incident. The summary is only generated if a channel has 15 or more messages. The summary is only visible to you, and it does not persist across reloads, between desktop and mobile apps, or across sessions.
+When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and have at least fifteen messages. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
 
-To schedule an update,
-1. Ask `@Datadog Give me an update in X minutes` in the desired incident Slack channel.
-1. Follow the instructions to connect your Datadog account and adjust the preferences.
+At any time, you can ask for a fresh summary by asking "`@DataDog` Give me a summary of this incident". Request updates on a schedule by asking "`@DataDog` Give me an update in X minutes".
 
 ## Ask questions
 
