@@ -32,7 +32,7 @@ You can use the Bits AI chatbot in Slack to ask customized questions about your 
 ## Update the severity level and status
 
 - Severity level: `@Datadog Update this incident to SEV-3`
-- Status: `@Datadog Update incident 2781 status to resolved`
+- Status: `@Datadog Mark this incident as stable`
 
 ## Generate a first draft of a postmortem
 
