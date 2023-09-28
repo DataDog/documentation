@@ -37,7 +37,11 @@ You can specify span tags to require or reject by using a list of keys and value
 `DD_APM_FILTER_TAGS_REJECT`
 : Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`.
 
-Or you can set them in the Agent configuration with a comma-separated list:
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+Alternatively, you can set them in the Agent configuration with a comma-separated list:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
@@ -53,6 +57,24 @@ apm_config:
   filter_tags:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Kubernetes Helm" %}}
+
+In the `traceAgent` section of the `values.yaml` file, add `DD_APM_FILTER_TAGS_REJECT` in the `env` section, then [spin up helm as usual][1]. For multiple tags, separate each key:value with a space.
+
+{{< code-block lang="yaml" filename="values.yaml" >}}
+  traceAgent:
+      # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
+
+{{< /code-block >}}
+
+[1]: /agent/kubernetes/?tab=helm#installation
+{{% /tab %}}
+{{< /tabs >}}
 
 Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
 
