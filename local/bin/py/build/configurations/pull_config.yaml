@@ -371,11 +371,11 @@
         - action: pull-and-push-folder
           branch: main
           globs:
-          - rulesets/docker-best-practices/*.md
+          - "rulesets/**/*.md"
           options:
-            dest_dir: '/continuous_integration/static_analysis/'
+            dest_dir: '/continuous_integration/static_analysis/rules/'
             front_matters:
-              disable_edit: true
+              disable_edit: true   
 
       - repo_name: datadog-cdk-constructs
         contents:
