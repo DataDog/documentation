@@ -4000,8 +4000,8 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
-      - container_excl_agent_usage
       - ci_visibility_itr_usage
+      - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -4012,9 +4012,10 @@ components:
       - dbm_hosts_usage
       - dbm_queries_usage
       - estimated_indexed_logs_usage
-      - estimated_ingested_logs_usage
       - estimated_indexed_spans_usage
+      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
+      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - infra_host_usage
@@ -4025,11 +4026,11 @@ components:
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - sds_scanned_bytes_usage
+      - serverless_apps_usage
       - snmp_usage
-      - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
-      - sds_scanned_bytes_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -4039,8 +4040,8 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
-      - CONTAINER_EXCL_AGENT_USAGE
       - CI_VISIBILITY_ITR_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -4051,9 +4052,10 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
@@ -4064,11 +4066,11 @@ components:
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SERVERLESS_APPS_USAGE
       - SNMP_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
-      - SDS_SCANNED_BYTES_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7602,6 +7604,8 @@ components:
       - profiled_fargate_percentage
       - profiled_host_usage
       - profiled_host_percentage
+      - serverless_apps_usage
+      - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
       - estimated_rum_sessions_usage
@@ -7679,6 +7683,8 @@ components:
       - PROFILED_FARGATE_PERCENTAGE
       - PROFILED_HOST_USAGE
       - PROFILED_HOST_PERCENTAGE
+      - SERVERLESS_APPS_USAGE
+      - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
@@ -7780,19 +7786,21 @@ components:
           format: double
           type: number
         cspm_containers_percentage:
-          description: The percentage of CSPM container usage by tag(s).
+          description: The percentage of Cloud Security Management Pro container usage
+            by tag(s).
           format: double
           type: number
         cspm_containers_usage:
-          description: The CSPM container usage by tag(s).
+          description: The Cloud Security Management Pro container usage by tag(s).
           format: double
           type: number
         cspm_hosts_percentage:
-          description: The percentage of CSPM host usage by by tag(s).
+          description: The percentage of Cloud Security Management Pro host usage
+            by tag(s).
           format: double
           type: number
         cspm_hosts_usage:
-          description: The CSPM host usage by tag(s).
+          description: The Cloud Security Management Pro host usage by tag(s).
           format: double
           type: number
         custom_ingested_timeseries_percentage:
@@ -7971,6 +7979,14 @@ components:
           type: number
         sds_scanned_bytes_usage:
           description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_percentage:
+          description: The percentage of Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_usage:
+          description: The total Serverless Apps usage by tag(s).
           format: double
           type: number
         snmp_percentage:
@@ -16387,21 +16403,21 @@ components:
           format: double
           type: number
         cspm_container_percentage:
-          description: The percentage of Cloud Security Posture Management container
-            usage by tag(s)
+          description: The percentage of Cloud Security Management Pro container usage
+            by tag(s)
           format: double
           type: number
         cspm_container_usage:
-          description: The Cloud Security Posture Management container usage by tag(s)
+          description: The Cloud Security Management Pro container usage by tag(s)
           format: double
           type: number
         cspm_host_percentage:
-          description: The percentage of Cloud Security Posture Management host usage
+          description: The percentage of Cloud Security Management Pro host usage
             by tag(s)
           format: double
           type: number
         cspm_host_usage:
-          description: The Cloud Security Posture Management host usage by tag(s)
+          description: The Cloud Security Management Pro host usage by tag(s)
           format: double
           type: number
         custom_timeseries_percentage:
@@ -16915,48 +16931,48 @@ components:
           type: array
       type: object
     UsageCloudSecurityPostureManagementHour:
-      description: Cloud Security Posture Management usage for a given organization
-        for a given hour.
+      description: Cloud Security Management Pro usage for a given organization for
+        a given hour.
       properties:
         aas_host_count:
-          description: The number of Cloud Security Posture Management Azure app services
+          description: The number of Cloud Security Management Pro Azure app services
             hosts during a given hour.
           format: double
           nullable: true
           type: number
         aws_host_count:
-          description: The number of Cloud Security Posture Management AWS hosts during
+          description: The number of Cloud Security Management Pro AWS hosts during
             a given hour.
           format: double
           nullable: true
           type: number
         azure_host_count:
-          description: The number of Cloud Security Posture Management Azure hosts
-            during a given hour.
-          format: double
-          nullable: true
-          type: number
-        compliance_host_count:
-          description: The number of Cloud Security Posture Management hosts during
+          description: The number of Cloud Security Management Pro Azure hosts during
             a given hour.
           format: double
           nullable: true
           type: number
+        compliance_host_count:
+          description: The number of Cloud Security Management Pro hosts during a
+            given hour.
+          format: double
+          nullable: true
+          type: number
         container_count:
-          description: The total number of Cloud Security Posture Management containers
+          description: The total number of Cloud Security Management Pro containers
             during a given hour.
           format: double
           nullable: true
           type: number
         gcp_host_count:
-          description: The number of Cloud Security Posture Management GCP hosts during
+          description: The number of Cloud Security Management Pro GCP hosts during
             a given hour.
           format: double
           nullable: true
           type: number
         host_count:
-          description: The total number of Cloud Security Posture Management hosts
-            during a given hour.
+          description: The total number of Cloud Security Management Pro hosts during
+            a given hour.
           format: double
           nullable: true
           type: number
@@ -16972,11 +16988,11 @@ components:
           type: string
       type: object
     UsageCloudSecurityPostureManagementResponse:
-      description: The response containing the Cloud Security Posture Management usage
+      description: The response containing the Cloud Security Management Pro usage
         for each hour for a given organization.
       properties:
         usage:
-          description: Get hourly usage for Cloud Security Posture Management.
+          description: Get hourly usage for Cloud Security Management Pro.
           items:
             $ref: '#/components/schemas/UsageCloudSecurityPostureManagementHour'
           type: array
@@ -18109,39 +18125,97 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        csm_container_enterprise_compliance_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise compliance
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_container_enterprise_cws_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise Cloud
+            Workload Security containers over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_container_enterprise_total_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aas_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure app services hosts over all hours in the current date
+            for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise AWS hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_azure_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_compliance_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise compliance hosts over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_cws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Cloud Workload Security hosts over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_gcp_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise GCP hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_total_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cspm_aas_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure app services hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure app services hosts over all hours in the current date for all
+            organizations.
           format: int64
           type: integer
         cspm_aws_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            AWS hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro AWS hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_container_avg:
-          description: Shows the average number of Cloud Security Posture Management
-            containers over all hours in the current date for all organizations.
+          description: Shows the average number of Cloud Security Management Pro containers
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_container_hwm:
-          description: Shows the high-water mark of Cloud Security Posture Management
+          description: Shows the high-water mark of Cloud Security Management Pro
             containers over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            GCP hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro GCP hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         custom_ts_avg:
@@ -18361,6 +18435,21 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg:
+          description: Shows the average of the number of Serverless Apps for Google
+            Cloud for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -18552,40 +18641,97 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
-        cspm_aas_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure app services hosts over all hours in the current date for the given
-            org.
-          format: int64
-          type: integer
-        cspm_aws_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            AWS hosts over all hours in the current date for the given org.
-          format: int64
-          type: integer
-        cspm_azure_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure hosts over all hours in the current date for the given org.
-          format: int64
-          type: integer
-        cspm_container_avg:
-          description: Shows the average number of Cloud Security Posture Management
+        csm_container_enterprise_compliance_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise compliance
             containers over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_container_enterprise_cws_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise Cloud
+            Workload Security containers over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_container_enterprise_total_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aas_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure app services hosts over all hours in the current date
+            for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise AWS hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_azure_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_compliance_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise compliance hosts over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_cws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Cloud Workload Security hosts over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_gcp_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise GCP hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_total_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure app services hosts over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro AWS hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Management Pro containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cspm_container_hwm:
-          description: Shows the high-water mark of Cloud Security Posture Management
+          description: Shows the high-water mark of Cloud Security Management Pro
             containers over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_gcp_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            GCP hosts over all hours in the current date for the given org.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro GCP hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            hosts over all hours in the current date for the given org.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         custom_ts_avg:
@@ -18807,6 +18953,21 @@ components:
             given org.
           format: int64
           type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg:
+          description: Shows the average of the number of Serverless Apps for Google
+            Cloud for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for the given org.
@@ -19003,41 +19164,95 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
-        cspm_aas_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure app services hosts over all hours in the current months for all
+        csm_container_enterprise_compliance_count_agg_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise compliance
+            containers over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_container_enterprise_cws_count_agg_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise Cloud
+            Workload Security containers over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
+        csm_container_enterprise_total_count_agg_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise containers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_aas_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure app services hosts over all hours in the current months
+            for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_aws_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise AWS hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_azure_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_compliance_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise compliance hosts over all hours in the current months for all
             organizations.
           format: int64
           type: integer
+        csm_host_enterprise_cws_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Cloud Workload Security hosts over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_gcp_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise GCP hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_total_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure app services hosts over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
         cspm_aws_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            AWS hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro AWS hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_container_avg_sum:
-          description: Shows the average number of Cloud Security Posture Management
-            containers over all hours in the current months for all organizations.
+          description: Shows the average number of Cloud Security Management Pro containers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_container_hwm_sum:
           description: Shows the sum of the the high-water marks of Cloud Security
-            Posture Management containers over all hours in the current months for
-            all organizations.
+            Management Pro containers over all hours in the current months for all
+            organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            GCP hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro GCP hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
@@ -19288,6 +19503,21 @@ components:
           description: Shows the sum of all bytes scanned across all usage types by
             the Sensitive Data Scanner over all hours in the current month for all
             organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure and
+            Google Cloud in the current months for all organizations.
           format: int64
           type: integer
         start_date:
@@ -31769,7 +31999,7 @@ paths:
         type: safe
   /api/v1/usage/cspm:
     get:
-      description: 'Get hourly usage for cloud security posture management (CSPM).
+      description: 'Get hourly usage for cloud security management (CSM) pro.
 
         **Note:** hourly usage data for all products is now available in the [Get
         hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
@@ -31825,7 +32055,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for CSPM
+      summary: Get hourly usage for CSM Pro
       tags:
       - Usage Metering
       x-menu-order: 28

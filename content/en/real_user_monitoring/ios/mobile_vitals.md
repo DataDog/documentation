@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_mobile_vitals.md
 description: Collect RUM data from your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios

@@ -187,7 +187,7 @@ React, Angular, Vue 또는 다른 프론트엔드 프레임워크를 사용하�
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -234,7 +234,7 @@ React, Angular, Vue 또는 다른 프론트엔드 프레임워크를 사용하�
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -279,7 +279,7 @@ React, Angular, Vue 또는 다른 프론트엔드 프레임워크를 사용하�
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
