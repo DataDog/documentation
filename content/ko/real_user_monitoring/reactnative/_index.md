@@ -70,7 +70,7 @@ const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // 사용자 상호 작용(버튼 탭 등)을 추적
+    true, // 사용자 상호 작용(예: 버튼 탭 등)을 추적
     true, // XHR 리소스 추적
     true // 오류 추적
 );
@@ -115,7 +115,7 @@ const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
-    true, // 사용자 상호 작용(버튼 탭 등)을 추적
+    true, // 사용자 상호 작용(예: 버튼 탭 등)을 추적
     true, // XHR 리소스 추적
     true // 오류 추적
 );
