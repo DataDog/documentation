@@ -18,11 +18,19 @@ Service Scorecards are in beta.
 
 Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
 
-You can customize the rules used to generate the Scorecards, and you can generate reports, sent directly to your team's Slack channel, to regularly report on scorecard results.
+You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
+
+## Setting up scorecards
+
+To select which of the out-of-the-box rules are evaluated for each of the default scorecards:
+
+1. Open the [Scorecards page][8] in Service Catalog.
+2. Enable or disable rules to customize how the scores are calculated. 
+3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
 ## How services are evaluated
 
-Navigate to the [**Scorecards** page][8] in the [Service Catalog][6]. Click the section titles to see the rules that services are evaluated for.
+After the default scorecards are set up, the Scorecards page in the Service Catalog shows the list of out-of-the-box rules and the percentage of services passing those rules. Click on a rule to see more details about passing and failing services and the teams that own them.
 
 ### Production readiness
 
@@ -68,21 +76,17 @@ Any docs defined
 
 ## How scores are calculated
 
-Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect simple pass-fail conditions. 
+Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect simple pass-fail conditions. To exclude a particular rule from a service's score calculation, set its outcome to `skip` in the scorecards API.
 
 Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][7]. 
 
-Each rule lists a score for the percentage of services that are passing. Each scorecard has an overall score percentage that totals how many services are passing, across all rules—**not** how many services are passing all rules.
+Each rule lists a score for the percentage of services that are passing. Each scorecard has an overall score percentage that totals how many services are passing, across all rules—**not** how many services are passing all rules. Skipped and disabled rules are not included in this calculation.
 
 ## View service-level details and scores
 
 The scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
-
-## Setting up scorecards
-
-You can also set up custom scorecards to track your progress on rules of your choosing. Open the [Scorecards page][8] in Service Catalog and enable or disable rules to customize how the scores are calculated. Click **View your scores** to track progress toward the selected rules across your defined services.
 
 ## Generating Scorecard reports
 
