@@ -42,7 +42,13 @@
                       <p> {{ .description | default "" | markdownify }}</p>
                   </div>
                   <div class="col-2 column text-center">
-                      <p> {{ .default | default "N/A" | markdownify }}</p>
+                      <p>
+                        {{ with .default }}
+                          {{ print "`" . "`" | markdownify }}
+                        {{ else }}
+                          N/A
+                        {{ end }}
+                      </p>
                   </div>
                   <div class="col-2 column text-center">
                       <p> {{ (replace (replace .required "true" "yes") "false" "no") | default "" }}</p>
@@ -68,7 +74,7 @@
       <div>
         <div class="card-body">
           {{ range $i, $ex := . }}
-            <h3 id="{{ $ex.title | anchorize }}">{{ $ex.title | markdownify }}</h3>
+            <h5 id="{{ $ex.title | anchorize }}">{{ $ex.title | markdownify }}</h5>
             <p>Source:</p>
             {{ print "```bash\n" $ex.source "\n```" | markdownify }}
             {{ with $ex.return }}
