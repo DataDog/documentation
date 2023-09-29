@@ -119,7 +119,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: deforest/fastly-integration-docs
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
