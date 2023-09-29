@@ -144,7 +144,7 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 `kubernetes_state.job.succeeded`
 : In `kubernetes_state`, the `kuberenetes.job.succeeded` was `count` type. In `kubernetes_state_core` it is `gauge` type. 
 
-### Node Level Tag Assignment
+### Node level tag assignment
 
 Host or node level tags no longer appear on cluster centric metrics. Only metrics relative to an actual node in the cluster, like `kubernetes_state.node.by_condition` or `kubernetes_state.container.restarts`, continue to inherit their respective host or node level tags. To add tags globally, use the `DD_TAGS` environment variable or respective Helm/Operator configurations. Instance only level tags can be specified by mounting a custom `kubernetes_state_core.yaml` into the Cluster Agent.
 
@@ -180,7 +180,7 @@ spec:
 
 Metrics like `kubernetes_state.container.memory_limit.total` or `kubernetes_state.node.count` are aggregate counts of groups within a cluster and host or node level tags are not added.
 
-### Legacy Check 
+### Legacy check
 
 {{< tabs >}}
 {{% tab "Helm" %}}
