@@ -635,6 +635,31 @@ Other examples:
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
+### Data matcher
+
+An example for parsing a percentage and using the `data` matcher to discard the `%`.
+
+**Log**:
+
+```
+Usage: 24.3%
+```
+
+**Rule**:
+
+```
+MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
+```
+
+**Result**:
+
+```
+{
+  "usage": 24.3,
+  "ignore": "%"
+}
+```
+
 ### ASCII control characters
 
 If your logs contain ASCII control characters, they are serialized upon ingestion. These can be handled by explicitly escaping the serialized value within your grok parser.
