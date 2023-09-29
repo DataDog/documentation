@@ -6,6 +6,7 @@ aliases:
   - /monitors/monitor_types/
   - /monitors/create/types/
   - /monitors/create/#monitor-types
+  - /monitors/create/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
