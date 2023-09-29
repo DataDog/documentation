@@ -43,15 +43,17 @@
               {{ $groupHeaderText = $word | upper }}
             {{ else }}
               <!-- concatenate -->
-              {{ $groupHeaderText = printf "%s %s" $groupHeaderText ($word | title )}}
+              {{ $groupHeaderText = (trim (printf "%s %s" $groupHeaderText ($word | title )) " ") }}
             {{ end }}
           {{ end }}
         {{ else }}
           {{ $groupHeaderText = $v.Key }}
         {{ end }}
-        {{ $groupHeaderText }}
-        <span class="icon-wrapper" data-anchor="#{{$groupHeaderText | anchorize}}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $groupHeaderText) ) }}</span>
-        <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+        <span>{{ $groupHeaderText }}</span>
+        {{ if $groupHeaderText }}
+          <span class="icon-wrapper" data-anchor="#{{$v.Key | anchorize}}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $groupHeaderText) ) }}</span>
+          <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+        {{ end }}
       </div>
       <div class="js-group-header__arrow">></div>
     </div>
