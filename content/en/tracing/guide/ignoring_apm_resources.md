@@ -64,11 +64,11 @@ apm_config:
 In the `traceAgent` section of the `values.yaml` file, add `DD_APM_FILTER_TAGS_REJECT` in the `env` section, then [spin up helm as usual][1]. For multiple tags, separate each key:value with a space.
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
-  traceAgent:
-      # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
-      env:
-        - name: DD_APM_FILTER_TAGS_REJECT
-          value: tag_key1:tag_val2 tag_key2:tag_val2
+traceAgent:
+  # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
+    env:
+      - name: DD_APM_FILTER_TAGS_REJECT
+        value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
 
