@@ -97,7 +97,6 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 [3]: /tracing/trace_explorer/?tab=listview#filtering
 [4]: /monitors/configuration/#alert-grouping/
 [5]: /logs/explorer/search/
-[6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 {{% /tab %}}
 {{< /tabs >}}
 
