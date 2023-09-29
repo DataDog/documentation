@@ -21,7 +21,7 @@ Health statuses are determined by specific metrics based on thresholds and defau
 You can also view health, resource utilization, and data delivery graphs to determine the state of your pipelines and components.
 
 Health graphs are available for the following metrics:
-- Data unintentionally dropped
+- Events unintentionally dropped
 - Errors
 - Lag time (only available for sources)
 - Utilization
@@ -56,10 +56,11 @@ Resource utilization graphs are available for the following metrics:
 
 | Metric        | Sources   | Transforms| Destinations | OK      | Warning  | Critical  | Description                       |
 | ------------  | :-------: | :-------: | :----------: | :-----: | :------: | :-------: | --------------------------------- |
-| Data dropped  | {{< X >}} | {{< X >}} |{{< X >}}     | ==0     | N/A      | > 0       |Expected to always be `0`. If you configured the Worker to intentionally drop data, for example using the `filter` transform, that data is not counted here. Therefore, a single error indicates that the Worker is not in a healthy state.|
-| Total Errors  |{{< X >}}  |{{< X >}}  |{{< X >}}     | ==0     | >0       | N/A       | The total number of errors encountered by the component. Diagnostic Logs provides more information about specific internal error logs. |
+| Events dropped  | {{< X >}} | {{< X >}} |{{< X >}}     | ==0     | N/A      | > 0       |Expected to always be `0`. If you configured the Worker to intentionally drop data, for example using the `filter` transform, that data is not counted here. Therefore, a single error indicates that the Worker is not in a healthy state.|
+| Total errors  |{{< X >}}  |{{< X >}}  |{{< X >}}     | ==0     | >0       | N/A       | The total number of errors encountered by the component. Diagnostic Logs provides more information about specific internal error logs. |
 | Utilization   |           |{{< X >}}  |{{< X >}}     | <=0.95 | >0.95   | N/A       | Tracks the component's activity.<br> A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle. A value greater than `0.95` indicates that the component is busy and likely a bottleneck in the processing topology. |
-| Lag Time      | {{< X >}} |           |              | <=0    | >0      | >1       | Indicates whether there is a substantial delay between when the event is generated and when the Worker receives the data. If there is a delay, then the Worker is falling behind in receiving data from the source.<br> A value of `0` indicates there is no additional lag from when the observability data is generated and when the Worker receives the data. A value equal to or greater than `1` indicates that there is backpressure and a bottleneck. |
+| Lag time      | {{< X >}} |           |              | <=0    | >0      | >1       | Indicates whether there is a substantial delay between when the event is generated and when the Worker receives the data. If there is a delay, then the Worker is falling behind in receiving data from the source.<br> A value of `0` indicates there is no additional lag from when the observability data is generated and when the Worker receives the data. A value equal to or greater than `1` indicates that there is backpressure and a bottleneck. |
+| Disk usage    |           |           |{{< X >}}     | >=0.20 | > 0.20  | N/A     | Measures how full a given disk is. <br> A value of `1` indicates that no data can be stored in the disk. A value of `0` indicates that the disk is empty. |
 
 [1]: /observability_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines/
