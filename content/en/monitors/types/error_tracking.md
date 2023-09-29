@@ -61,6 +61,8 @@ Select **Web and Mobile Apps** from the dropdown menu. If you select **Backend S
 2. Construct a search query using the same logic as a [RUM Explorer search][1], [APM Explorer search][3], or [Log Explorer search][4] for the issues' error occurrences.
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][2].
 
+<div class="alert alert-info"><strong>Note</strong>: **Count** monitors for APM can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).</div>
+
 ### Set alert conditions
 
 Triggers when the error count is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
@@ -95,6 +97,7 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 [3]: /tracing/trace_explorer/?tab=listview#filtering
 [4]: /monitors/configuration/#alert-grouping/
 [5]: /logs/explorer/search/
+[6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 {{% /tab %}}
 {{< /tabs >}}
 
