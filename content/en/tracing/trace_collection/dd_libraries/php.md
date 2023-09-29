@@ -88,9 +88,9 @@ If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS
 <div class="alert alert-warning">
 <strong>SELinux:</strong>
 If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
-```
-allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };
-```
+
+`allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
+
 </div>
 
 ## Automatic instrumentation
