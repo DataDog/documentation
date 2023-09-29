@@ -113,7 +113,7 @@ span.Finish(tracer.WithError(err))
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
 
 <div class="alert alert-info">
-Unlike other Datadog tracing libraries, when tracing Go applications, you need to explicitly manage and pass the context of your spans. For more information, see the [Go context library documentation][12] or documentation for any third-party libraries integrated with your application.
+Unlike other Datadog tracing libraries, when tracing Go applications, you need to explicitly manage and pass the context of your spans. For more information, see the <a href="https://pkg.go.dev/context">Go context library documentation</a> or documentation for any third-party libraries integrated with your application.
 </div>
 
 ### Manually creating a new span
@@ -223,4 +223,3 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [7]: /tracing/glossary/#trace
 [9]: /tracing/security
 [11]: /tracing/trace_collection/trace_context_propagation/go/
-[12]: https://pkg.go.dev/context
