@@ -1308,11 +1308,11 @@ Rules specifically for Express.js best practices and security.
 
 <br>
 
-### Check Python code for wording issues
+### Check JavaScript code for wording issues
 
 **Ruleset ID:** `javascript-inclusive`
 
-Rules for Python to avoid inappropriate wording in the code and comments.
+Rules for JavaScript to avoid inappropriate wording in the code and comments.
 
 {{< sa-rule-list "javascript_inclusive_data" >}}
 
