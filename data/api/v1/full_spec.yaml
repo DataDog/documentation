@@ -25459,6 +25459,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - create_webhooks
       summary: Create a webhooks integration
       tags:
       - Webhooks Integration
