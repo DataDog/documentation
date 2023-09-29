@@ -228,7 +228,7 @@ config.sessionSamplingRate = 80;
 config.resourceTracingSamplingRate = 80;
 config.firstPartyHosts = ['example.com']; // 'example.com' 및 'api.example.com'과 같은 하위 도메인과 일치합니다.
 
-대기중인 DdSdkReactNative.initialize(config);
+await DdSdkReactNative.initialize(config);
 
 // RUM용 Datadog React Native SDK가 초기화되면 보기 추적을 설정해야 RUM 대시보드에서 데이터를 볼 수 있습니다.
 ```
@@ -282,14 +282,14 @@ import {
     DdRum
 } from '@datadog/mobile-react-native';
 
-// 고유한 보기 식별자, 사용자 지정 보기 이름 및 보기에 추가 속성을 첨부할 개체를 사용하여 보기를 시작합니다.
+// 고유한 보기 식별자, 커스텀 보기 이름 및 보기에 추가 속성을 첨부할 개체를 사용하여 보기를 시작합니다.
 DdRum.startView(
     '<view-key>', // <view-key> 은 고유해야 하며 예를 들어, ViewName-unique-id일 수 있음
     'View Name',
     { 'custom.foo': 'something' },
     Date.now()
 );
-// 동일한 고유 보기 식별자를 가지고 이전에 시작된 보기와 보기에 추가 속성을 첨부할 개체를 중지합니다.
+// 동일한 고유 보기 식별자와 보기에 추가 속성을 연결하는 객체를 사용하여 이전에 시작한 보기를 중지합니다.
 DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 ```
 
