@@ -71,7 +71,7 @@ This is helpful to ensure no sensitive data gets featured in your test results. 
 
 ## Subtests
 
-The advanced options for [subtests][3] allow you to choose where you want your subtest to be played and set the behavior of your mobile app test if the subtest fails.
+The advanced options for [subtests][3] allow you to set the behavior of your mobile app test if the subtest fails.
 
 {{< img src="mobile_app_testing/example_subtest.png" alt="Select a mobile test to add as a subtest" style="width:50%" >}}
 
