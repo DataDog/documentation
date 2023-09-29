@@ -36,5 +36,5 @@ title: 시작하기
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>클라우드 보안 관리</u>: CSM을 팀 에서 올바르게 사용할 수 있도록 모범 사례에 대해 알아봅니다.{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>애플리케이션 보안 관리</u>: ASM을 팀에서 올바르게 사용할 수 있도록 모범 사례에 대해 알아봅니다.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>클라우드 보안 정보와 이벤트 관리(SIEM)</u>: 클라우드 보안 정보와 이벤트 관리(SIEM)를 팀에서 올바르게 사용할 수 있도록 모범 사례에 대해 알아봅니다.{{< /nextlink >}}
-{{< nextlink href="/getting_started/learning_center" >}}<u>학습 센터</u>: 학습 경로를 따라, 셀프 가이드 수업 또는 실습을 수강하고, Datadog 인증 프로그램을 살펴보세요.{{< /nextlink >}}
+{{< nextlink href="/getting_started/learning_center" >}}<u>학습 센터</u>: 러닝 패스에 따라, 셀프 가이드 수업 또는 실습을 수강하고, Datadog 인증 프로그램을 살펴보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
