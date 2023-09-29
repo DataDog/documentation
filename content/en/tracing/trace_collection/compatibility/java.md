@@ -127,7 +127,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
-| Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
+| Java RMI                 | all         | Distributed Tracing Not Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |

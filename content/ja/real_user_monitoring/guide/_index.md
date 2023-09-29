@@ -45,9 +45,9 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
 
 {{< whatsnext desc="セッションリプレイ" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}セッションリプレイのためのサードパーティサービスワーカーの許可{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}セッションリプレイをサポートワークフローに活用する{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイを充実させる{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}サポートのワークフローでセッションリプレイを使用する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイをリッチ化する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}セッションリプレイとサードパーティツールの連携{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}セッションリプレイをポストモーテムのキーツールとして活用する{{< /nextlink >}}
-
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}ポストモーテムでの主要ツールとしてセッションリプレイを使用する{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}セッションリプレイから Synthetic ブラウザテストを生成する{{< /nextlink >}}
 {{< /whatsnext >}}
