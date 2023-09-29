@@ -78,13 +78,12 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    kubeStateMetricsCore:
-      enabled: true
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+  features:
+    kubeStateMetricsCore:
+      enabled: true
 ```
 
 Note: Datadog Operator v0.7.0 or greater is required.
@@ -147,17 +146,19 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 
 ### Node Level Tag Assignment
 
-Host or node level tags no longer appear on cluster centric metrics. Metrics like `kubernetes_state.namespace.count` or `kubernetes_state.node.count` are aggregate counts of groups within a cluster and host or node level tags do not make sense. To add tags globally, use `DD_TAGS` environment variable or `datadog.tags` Helm configuration. Instance only level tags can be specified with mounting a custom kubernetes_state_core.yaml in the `clusterAgent.confd` section of the Helm configuration.
+Host or node level tags no longer appear on cluster centric metrics. Only metrics relative to an actual node in the cluster, like `kubernetes_state.node.by_condition` or `kubernetes_state.container.restarts`, continue to inherit their respective host or node level tags. To add tags globally, use the `DD_TAGS` environment variable or respective Helm/Operator configurations. Instance only level tags can be specified by mounting a custom `kubernetes_state_core.yaml` into the Cluster Agent.
 
 {{< tabs >}}
 
 {{% tab "Helm" %}}
 ```yaml
 datadog:
+  kubeStateMetricsCore:
+    enabled: true
   tags: 
-    - "<TagName>:<TagValue>"
+    - "<TAG_KEY>:<TAG_VALUE>"
 ```
-
+{{% /tab %}}
 {{% tab "Operator" %}}
 ```yaml
 kind: DatadogAgent
@@ -165,15 +166,19 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+    tags:
+      - "<TAG_KEY>:<TAG_VALUE>"
   features:
     kubeStateMetricsCore:
       enabled: true
-  global:
-    tags:
-      - "<TagName>:<TagValue>"
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-Metrics relative to an actual node in the cluster, like `kubernetes_state.node.by_condition` or `kubernetes_state.container.restarts`, continue to inherit their respective host or node level tags.
+Metrics like `kubernetes_state.container.memory_limit.total` or `kubernetes_state.node.count` are aggregate counts of groups within a cluster and host or node level tags are not added.
 
 ### Legacy Check 
 
