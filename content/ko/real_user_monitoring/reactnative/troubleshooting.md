@@ -1,7 +1,7 @@
 ---
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: 깃허브(Githun)
+  tag: Github
   text: dd-sdk-reactnative의 소스 코드
 - link: /real_user_monitoring
   tag: 설명서
