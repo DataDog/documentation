@@ -32,7 +32,7 @@ further_reading:
   tag: 기초 활성화
   text: 대화형 세션에 참여하여 synthetic 테스트 역량을 강화하세요.
 kind: 설명서
-title: 신서틱(Synthetic) 모니터링
+title: Synthetic Monitoring
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
