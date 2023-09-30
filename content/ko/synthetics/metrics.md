@@ -88,7 +88,7 @@ API 테스트 타이밍에 대한 자세한 내용은 [API 테스트 타이밍 �
 
 {{< get-metrics-from-git "synthetics" "synthetics.pl.worker" >}}
 
-### 지속적인 테스트
+### Continuous Testing
 
 {{< get-metrics-from-git "synthetics" "synthetics.on_demand.concurrency" >}}
 
