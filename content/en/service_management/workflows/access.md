@@ -111,7 +111,7 @@ Runner
 Editor
 : Can edit, run, and view the workflow
 
-You can restrict access on a specific workflow either form the workflow list page or from thw workflow canvas while editing the workflow.
+You can restrict access on a specific workflow either form the workflow list page or from the workflow canvas while editing the workflow.
 
 **Restricitng permissions from the workflow list page**
 1. Navigate to the [Workflow Automation page][9].
