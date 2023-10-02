@@ -60,10 +60,6 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-{{< site-region region="us3" >}}
-<div class="alert alert-warning"> Since Azure bypasses NAT traffic within the same region, firewall rules are not applied to storage accounts in West US 2. See Azure's <a href="https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security?tabs=azure-portal#restrictions-for-ip-network-rules">Restrictions for IP network rules</a>.</div>
-{{< /site-region >}}
-
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
 **Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
@@ -272,6 +268,18 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 {{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
+{{< site-region region="us3" >}}
+#### Firewall rules
+
+{{< tabs >}}
+{{% tab "Azure storage" %}}
+
+Firewall rules are not supported.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< /site-region >}}
 #### Storage class
 
 {{< tabs >}}
