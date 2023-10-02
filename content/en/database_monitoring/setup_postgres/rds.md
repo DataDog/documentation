@@ -239,7 +239,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # dbname: '<DB_NAME>'
    ```
 
-   For Agent versions <= 7.49, add the following setting to the instance config where host and port are specified:
+   For Agent versions `≤ 7.49`, add the following setting to the instance config where `host` and `port` are specified:
 
    ```yaml
    ssl: allow
