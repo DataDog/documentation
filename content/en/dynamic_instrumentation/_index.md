@@ -124,6 +124,10 @@ You must set a log message template on every log probe. The template supports em
 
 You can also set a condition on a log probe using the [expression language][15]. The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
 
+<div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To prevent this information from being sent to Datadog, do one of the following options:<ul><li>
+Configure <a href="/sensitive_data_scanner/">Sensitive Data Scanner</a> to detect and filter out the sensitive data based on regex patterns.</li><li>Turn off the <code>Capture method parameters and local variables</code> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify.</li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
+
+
 To create a log probe:
 
 1. Select **Log** as the probe type.
