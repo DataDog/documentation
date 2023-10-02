@@ -75,7 +75,7 @@ HTTP 요청 단계를 생성하려면 **Create Your First Step**을 클릭합니
    * **Request headers**: HTTP 요청에 추가할 헤더를 정의합니다. 기본 헤더(예: `user-agent` 헤더)를 재정의할 수도 있습니다.
    * **Cookies**: HTTP 요청에 추가할 쿠키를 정의합니다. `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>` 형식을 사용하여 여러 쿠키를 설정합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "인증" %}}
 
@@ -87,27 +87,27 @@ HTTP 요청 단계를 생성하려면 **Create Your First Step**을 클릭합니
    AWS S3 버킷에 대한 "Single Chunk" 전송 요청의 경우, 요청의 sha256 인코딩된 본문을 포함하는 `x-amz-content-sha256`을 헤더로 추가합니다(본문이 비어 있는 경우: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: 클라이언트 자격 증명 또는 리소스 소유자 비밀번호 부여 중에서 선택하고 액세스 토큰 URL을 입력합니다. 선택에 따라 클라이언트 ID와 비밀번호 또는 사용자 이름과 비밀번호를 입력합니다. 드롭다운 메뉴에서 API 토큰을 기본 인증 헤더로 보낼지, 아니면 본문에 클라이언트 자격 증명을 보낼지 옵션을 선택합니다. 선택 사항으로 대상, 리소스 및 범위와 같은 추가 정보를 제공할 수 있습니다(**Resource Owner Password**를 선택한 경우 클라이언트 ID 및 비밀번호도 함께).
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "쿼리 파라미터" %}}
 
    * **Encode parameters**: 인코딩이 필요한 쿼리 파라미터의 이름과 값을 추가합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "요청 본문" %}}
 
    * **Body type**: HTTP 요청에 추가하려는 요청 본문 유형(`text/plain`, `application/json`,`text/xml` ,`text/html` ,`application/x-www-form-urlencoded`, `GraphQL` 또는 `None`)을 선택합니다.
    * **Request body**: HTTP 요청 본문의 내용을 추가합니다. 요청 본문의 최대 크기는 50KB로 제한됩니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "Proxy" %}}
 
    * **Proxy URL**: HTTP 요청이 통과해야 하는 프록시의 URL을 지정합니다(`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
    * **Proxy Header**: 프록시에 대한 HTTP 요청에 포함할 헤더를 추가합니다.
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "Privacy" %}}
 
