@@ -31,7 +31,7 @@ It is critical for your system's health to consistently monitor the errors colle
 
 {{< img src="real_user_monitoring/error_tracking/rum_error_tracking.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile applications' crash reports" style="width:100%;" >}}
 
-Once you have set up [RUM][2] for **Web and Mobile Apps** error tracking, the issue list populates with cards. Navigate to [**UX Monitoring** > **Error Tracking**][3] to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your web and mobile applications.
+Once you have set up [RUM][2] for **Web and Mobile Apps** error tracking, the issue list populates with cards. Navigate to [**UX Monitoring** > **Error Tracking**][1] to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your web and mobile applications.
 
 Error Tracking enables you to:
 
@@ -65,4 +65,3 @@ Click on an issue to view debugging information, such as the stack trace, user s
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /real_user_monitoring/
-[3]: https://app.datadoghq.com/rum/error-tracking
