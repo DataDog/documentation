@@ -20,7 +20,7 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) IdP.
 
 ### Prerequisites
 
-Using SCIM with Datadog requires an entreprise account.
+Using SCIM with Datadog requires an enterprise account.
 
 This documentation assumes your organization manages user identities using an identity provider.
 
