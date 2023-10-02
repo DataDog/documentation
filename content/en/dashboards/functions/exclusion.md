@@ -31,17 +31,15 @@ The `clamp_min()` and `clamp_max()` functions take one parameter:
 
 | Function       | Description                                     | Example                                 |
 | -------------- | ----------------------------------------------- | --------------------------------------- |
-| `cutoff_min()` | Remove metric values _under_ a threshold value. | `cutoff_min(avg:system.load.1{*}, 100)` |
-| `cutoff_max()` | Remove metric values _over_ a threshold value.  | `cutoff_max(avg:system.load.1{*}, 100)` |
+| `cutoff_min()` | Remove metric values _under_ a threshold value and replace with NaN. | `cutoff_min(avg:system.load.1{*}, 100)` |
+| `cutoff_max()` | Remove metric values _over_ a threshold value and replace with NaN.  | `cutoff_max(avg:system.load.1{*}, 100)` |
 
 The `cutoff_min()` and `cutoff_max()` functions take one parameter:
 
 - `THRESHOLD`: the threshold value you've specified.
     - `cutoff_min()` removes all metric values lower than this threshold value from your graph, while `cutoff_max()` removes all metric values higher than this threshold value.
 
-The cutoff functions do not remove values that are equal to the threshold value.
-
-In addition, the functions do not delete datapoints from Datadog entirely; it only removes them from your visualization. Disabling the function brings your datapoints back. Since, both cutoff_min() and cutoff_max() are functions, they apply after the raw_query has returned the result. In the case of a grouped query, this means that they can and will change an entire timeseries to NaN (-) but are unable to remove a group as the raw_query has already returned it.
+The cutoff functions do not remove values that are equal to the threshold value. The functions do not delete data points from Datadog, but change how this data is viewed in your visualization. 
 
 **Tip**: For both the clamp and cutoff functions, it may be helpful to see the threshold value you have chosen. You can [set a horizontal marker][1] in Dashboards to indicate this value.
 
