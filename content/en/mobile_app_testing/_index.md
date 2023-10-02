@@ -24,7 +24,7 @@ cascade:
 ---
 
 {{< site-region region="us3,us5,gov,eu,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
+<div class="alert alert-warning">Mobile Application Testing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< site-region region="us" >}}

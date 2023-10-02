@@ -4000,8 +4000,8 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
-      - container_excl_agent_usage
       - ci_visibility_itr_usage
+      - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -4012,24 +4012,26 @@ components:
       - dbm_hosts_usage
       - dbm_queries_usage
       - estimated_indexed_logs_usage
-      - estimated_ingested_logs_usage
       - estimated_indexed_spans_usage
+      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
+      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - infra_host_usage
       - invocations_usage
       - mobile_app_testing_usage
+      - ndm_netflow_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - sds_scanned_bytes_usage
+      - serverless_apps_usage
       - snmp_usage
-      - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
-      - sds_scanned_bytes_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -4039,8 +4041,8 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
-      - CONTAINER_EXCL_AGENT_USAGE
       - CI_VISIBILITY_ITR_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -4051,24 +4053,26 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - MOBILE_APP_TESTING_USAGE
+      - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SERVERLESS_APPS_USAGE
       - SNMP_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
-      - SDS_SCANNED_BYTES_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7592,6 +7596,8 @@ components:
       - invocations_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
+      - ndm_netflow_usage
+      - ndm_netflow_percentage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -7602,6 +7608,8 @@ components:
       - profiled_fargate_percentage
       - profiled_host_usage
       - profiled_host_percentage
+      - serverless_apps_usage
+      - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
       - estimated_rum_sessions_usage
@@ -7669,6 +7677,8 @@ components:
       - INVOCATIONS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
+      - NDM_NETFLOW_USAGE
+      - NDM_NETFLOW_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -7679,6 +7689,8 @@ components:
       - PROFILED_FARGATE_PERCENTAGE
       - PROFILED_HOST_USAGE
       - PROFILED_HOST_PERCENTAGE
+      - SERVERLESS_APPS_USAGE
+      - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
@@ -7927,6 +7939,15 @@ components:
           description: The Synthetic mobile application test usage by tag(s).
           format: double
           type: number
+        ndm_netflow_percentage:
+          description: The percentage of Network Device Monitoring NetFlow usage by
+            tag(s).
+          format: double
+          type: number
+        ndm_netflow_usage:
+          description: The Network Device Monitoring NetFlow usage by tag(s).
+          format: double
+          type: number
         npm_host_percentage:
           description: The percentage of network host usage by tag(s).
           format: double
@@ -7973,6 +7994,14 @@ components:
           type: number
         sds_scanned_bytes_usage:
           description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_percentage:
+          description: The percentage of Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_usage:
+          description: The total Serverless Apps usage by tag(s).
           format: double
           type: number
         snmp_percentage:
@@ -18328,6 +18357,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        ndm_netflow_events_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for all organizations.
@@ -18419,6 +18453,21 @@ components:
           description: Shows the sum of all bytes scanned across all usage types by
             the Sensitive Data Scanner over all hours in the current month for all
             organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg:
+          description: Shows the average of the number of Serverless Apps for Google
+            Cloud for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            and Google Cloud for the given date and given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -18830,6 +18879,11 @@ components:
         name:
           description: The organization name.
           type: string
+        ndm_netflow_events_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for the given org.
@@ -18922,6 +18976,21 @@ components:
           description: Shows the sum of all bytes scanned across all usage types by
             the Sensitive Data Scanner over all hours in the current month for the
             given org.
+          format: int64
+          type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg:
+          description: Shows the average of the number of Serverless Apps for Google
+            Cloud for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            and Google Cloud for the given date and given org.
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
@@ -19356,6 +19425,11 @@ components:
             current months for all organizations.
           format: int64
           type: integer
+        ndm_netflow_events_agg_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current months for all organizations.
@@ -19459,6 +19533,21 @@ components:
           description: Shows the sum of all bytes scanned across all usage types by
             the Sensitive Data Scanner over all hours in the current month for all
             organizations.
+          format: int64
+          type: integer
+        serverless_apps_azure_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure and
+            Google Cloud in the current months for all organizations.
           format: int64
           type: integer
         start_date:
@@ -25400,6 +25489,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - create_webhooks
       summary: Create a webhooks integration
       tags:
       - Webhooks Integration

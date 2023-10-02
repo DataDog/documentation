@@ -10,6 +10,10 @@ further_reading:
     text: Workflow Automation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools. 
 
 Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public AWS S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
@@ -18,7 +22,7 @@ Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate yo
 
 Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the security issue, misconfiguration, or resource side panels.
 
-When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding and security issue. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][7].
+When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security misconfiguration and security issue. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][7].
 
 ## Build a workflow
 
@@ -34,9 +38,9 @@ This example creates a remediation workflow that sends an interactive Slack mess
 3. Select **Manual** for the trigger and click **Create**.
 4. Click **Add a step to get started** to start adding steps to your workflow using the workflow builder. Alternatively, click **Edit JSON Spec** to build the workflow using the JSON editor.
 
-#### Get security finding
+#### Get security misconfiguration
 
-To retrieve the security finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][8] API endpoint.
+To retrieve the security misconfiguration and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the misconfiguration's details from the [**Get a finding**][8] API endpoint.
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 2. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
@@ -45,13 +49,13 @@ To retrieve the security finding and pass it into the workflow, use the **Get se
 
 #### Add JS function
 
-Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the region name from the finding's tags.
+Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the region name from the misconfiguration's tags.
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
 2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and paste the following in the script editor:
    {{< code-block lang="javascript" >}}
-    // Gets the region info from the finding tags
+    // Gets the region info from the misconfiguration tags
     // Use `$` to access Trigger or Steps data.
     // Use `_` to access Lodash.
     // See https://lodash.com/ for reference.
@@ -128,13 +132,13 @@ To retrieve the security issue and pass it into the workflow, use the **Get secu
 
 #### Add JS function
 
-Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the team name from the finding's tags.
+Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the team name from the misconfiguration's tags.
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
 2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and paste the following in the script editor:
    {{< code-block lang="javascript" >}}
-    // Gets the team info from the finding tags 
+    // Gets the team info from the misconfiguration tags 
     // Use `$` to access Trigger or Steps data.
     // Use `_` to access Lodash.
     // See https://lodash.com/ for reference.
