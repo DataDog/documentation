@@ -27,19 +27,35 @@ further_reading:
 - [Security Notifications](#security-notification-events)
 
 #### Product-Specific Events
-- [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
-- [Audit Trail](#audit-trail-events)
-- [CI Visibility](#ci-visibility-events)
-- [Cloud Security Platform](#cloud-security-platform-events)
-- [Log Management](#log-management-events)
-- [Metrics](#metrics-events)
-- [Real User Monitoring](#real-user-monitoring-events)
-- [Sensitive Data Scanner](#sensitive-data-scanner-events)
-- [Service Level Objectives](#service-level-objectives-slo-events)
-- [Synthetic Monitoring](#synthetic-monitoring-events)
-- [Reference Tables](#reference-table-events)
-- [Workflows](#workflow-events)
+- [Overview](#overview)
+    - [Platform Events](#platform-events)
+    - [Product-Specific Events](#product-specific-events)
+- [Audit Events](#audit-events)
+  - [Access management events](#access-management-events)
+  - [Agent](#agent)
+  - [API request events](#api-request-events)
+  - [Application Performance Monitoring (APM) events](#application-performance-monitoring-apm-events)
+  - [Application Security Management](#application-security-management)
+  - [Audit Trail events](#audit-trail-events)
+  - [Authentication events](#authentication-events)
+  - [CI Visibility events](#ci-visibility-events)
+  - [Cloud Security Platform events](#cloud-security-platform-events)
+  - [Dashboard events](#dashboard-events)
+  - [Integration events](#integration-events)
+  - [Log Management events](#log-management-events)
+  - [Metrics events](#metrics-events)
+  - [Monitor events](#monitor-events)
+  - [Notebook events](#notebook-events)
+  - [OAuth events](#oauth-events)
+  - [Organization management events](#organization-management-events)
+  - [Real User Monitoring events](#real-user-monitoring-events)
+  - [Security Notification events](#security-notification-events)
+  - [Sensitive Data Scanner events](#sensitive-data-scanner-events)
+  - [Service Level Objectives (SLO) events](#service-level-objectives-slo-events)
+  - [Synthetic Monitoring events](#synthetic-monitoring-events)
+  - [Reference Table events](#reference-table-events)
+  - [Workflow events](#workflow-events)
+- [Further Reading](#further-reading)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -59,6 +75,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][86] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
+| [User invited (Support)][98] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @asset.type:user @action:created @usr.id:"Datadog Support"` |
 
 ### Agent
 
@@ -348,3 +365,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [95]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_exclusion_filters%20%40action%3Amodified
 [96]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_quality_gates%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
 [97]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40asset.type%3Alogs_query
+[98]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Auser%20%40action%3Acreated%20%40usr.id%3A%22Datadog%20Support%22%20
