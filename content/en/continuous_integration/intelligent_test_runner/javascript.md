@@ -15,17 +15,17 @@ further_reading:
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
 * `jest>=24.8.0`
-  * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`.
+  * From `dd-trace>=4.16.0` or `dd-trace>=3.37.0`.
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
 * `mocha>=5.2.0`
-  * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`.
+  * From `dd-trace>=4.16.0` or `dd-trace>=3.37.0`.
   * Run mocha with [`nyc`][1] to enable code coverage.
 * `cucumber-js>=7.0.0`
-  * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`.
+  * From `dd-trace>=4.16.0` or `dd-trace>=3.37.0`.
   * Run cucumber-js with [`nyc`][1] to enable code coverage.
 * `cypress>=6.7.0`
-  * From `dd-trace>=4.2.0`, `dd-trace>=3.23.0` or `dd-trace>=2.36.0`.
+  * From `dd-trace>=4.16.0` or `dd-trace>=3.37.0`.
   * Instrument your web application with code coverage: see more in [Cypress setup](#cypress-setup)
 * If you're reporting data through the Datadog Agent, use v6.40+/v7.40+.
 
