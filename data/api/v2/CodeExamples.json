@@ -214,6 +214,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Create a new entry for your service account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_109518525",
+      "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
