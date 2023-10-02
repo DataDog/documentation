@@ -69,8 +69,6 @@ The Pub/Sub is ready to receive logs from Google Cloud Logging and forward them 
 
 **Note**: It is possible to create several exports from Google Cloud Logging to the same Pub/Sub with different sinks.
 
-**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on setting up monitor notifications if you approach those limits.
-
 ## Monitor the log forwarding
 
 Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics, using different filters.
