@@ -3,6 +3,10 @@ title: Preventing Data Loss
 kind: Documentation
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## High durability
 
 High durability is the ability to retain data when there are system failures. The aggregator architecture is designed to take on the responsibility of high durability. This simplifies your durability strategy by shifting the burden away from your agents and localizing it to your aggregators. In addition, this concentrated approach allows for durability strategies that would be difficult to implement across all of your agent nodes.

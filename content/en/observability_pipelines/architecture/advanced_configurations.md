@@ -3,6 +3,10 @@ title: Advanced Configurations
 kind: Documentation
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ### Multiple aggregator deployments
 
 As covered in [Networking][1], Datadog recommends to start with one Observability Pipelines Worker aggregator per region. This is to prevent overcomplicating your initial deployment of Observability Pipelines Worker, but there are circumstances where starting with multiple deployments is ideal:
