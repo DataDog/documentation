@@ -74,6 +74,7 @@ Datadog のカスタムメトリクスには、以下のプロパティがあり
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}APM スパンベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/add_custom_metrics/" >}}CI Visibility テストベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}RUM イベントベースのメトリクスを生成する{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}ライブプロセスベースのメトリクスを生成する{{< /nextlink >}}
 {{< /whatsnext >}}

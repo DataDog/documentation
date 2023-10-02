@@ -34,7 +34,7 @@ S3 バケットまたは CloudWatch ロググループにログを生成する A
 | [API Gateway][3]                  | [AWS API Gateway ログを有効にする][4]                                                               | [手動][5]および[自動](#automatically-set-up-triggers)ログコレクション。                                                |
 | [Cloudfront][6]                   | [AWS Cloudfront ログを有効にする][7]                                                                | [手動][8]および[自動](#automatically-set-up-triggers)ログコレクション。  |
 | [CloudTrail][9]                   | [AWS CloudTrail ログを有効にする][9]                                                                | [手動][10]ログコレクション。AWS CloudTrail for Cloud SIEM を設定する場合は、AWS Configuration for Cloud SIEM[11] を参照してください。                                                  |
-| [DynamoDB][12]                     | [AWS DynamoDB ログを有効にする][13]                                                                  | [手動][14]ログコレクション。                                                 |
+| [DynamoDB][12]                     | [Amazon DynamoDB ログを有効にする][13]                                                                  | [手動][14]ログコレクション。                                                 |
 | [EC2][15]                          | `-`                                                                                             | [Datadog Agent][15] を使用してログを Datadog に送信します。                    |
 | [ECS][16]                          | `-`                                                                                             | [docker Agent を使用してログを収集します][17]。                              |
 | [Elastic Load Balancing (ELB)][18] | [AWS ELB ログを有効にする][19]                                                                       | [手動][20]および[自動](#automatically-set-up-triggers)ログコレクション。  |
