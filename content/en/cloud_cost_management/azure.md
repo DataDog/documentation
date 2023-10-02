@@ -39,8 +39,7 @@ Navigate to [Setup & Configuration][3] and select an Azure account from the menu
 ### Generate cost exports
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
-{{< tabs >}}
-{{% tab "Actual" %}}
+
 1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. After the scope is selected, click **Add**.
@@ -48,7 +47,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
-    - Metric: **Actual Cost (usage and purchases)**
+    - Metric: **Actual Cost (usage and purchases)** OR  **Amortized Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
 
@@ -56,26 +55,6 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
 6. Select **Create**.
-{{% /tab %}}
-
-{{% tab "Amortized" %}}
-1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
-2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
-3. After the scope is selected, click **Add**.
-
-{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
-
-4. Select the following Export details:
-    - Metric: **Amortized Cost (usage and purchases)**
-    - Export type: **Daily export of month-to-date costs**
-    - File Partitioning: `On`
-
-{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
-
-5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-6. Select **Create**.
-{{% /tab %}}
-{{< /tabs >}}
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
