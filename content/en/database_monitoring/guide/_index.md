@@ -22,3 +22,7 @@ cascade:
 {{< whatsnext desc="SQL Server guides:" >}}
     {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}Exploring SQL Server AlwaysOn Availability Groups{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="PostgreSQL guides:" >}}
+    {{< nextlink href="database_monitoring/guide/pg15_upgrade" >}}Upgrading to PostgreSQL 15{{< /nextlink >}}
+{{< /whatsnext >}}

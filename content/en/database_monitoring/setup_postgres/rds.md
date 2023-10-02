@@ -25,7 +25,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14
+: 9.6, 10, 11, 12, 13, 14, 15
 
 Supported Agent versions
 : 7.36.1+
@@ -79,6 +79,25 @@ CREATE USER datadog WITH password '<PASSWORD>';
 **Note:** IAM authentication is also supported. Please see [the guide][9] on how to configure this for your RDS instance.
 
 {{< tabs >}}
+{{% tab "Postgres ≥ 15" %}}
+
+Give the `datadog` user permission to relevant tables:
+
+```SQL
+ALTER ROLE datadog INHERIT;
+```
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
+```
+{{% /tab %}}
+
 {{% tab "Postgres ≥ 10" %}}
 
 Create the following schema **in every database**:
@@ -219,6 +238,13 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
+
+   For Agent versions `≤ 7.49`, add the following setting to the instance config where `host` and `port` are specified:
+
+   ```yaml
+   ssl: allow
+   ```
+
 2. [Restart the Agent][2].
 
 
