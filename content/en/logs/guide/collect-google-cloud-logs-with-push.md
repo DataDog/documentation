@@ -1,5 +1,5 @@
 ---
-title: Collect Google Cloud Logs with a Push Subscription
+title: Collect Google Cloud Logs with a Pub/Sub Push Subscription
 kind: documentation
 further_reading:
 - link: "/logs/explorer/"
