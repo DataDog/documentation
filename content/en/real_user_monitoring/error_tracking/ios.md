@@ -212,9 +212,9 @@ When browsing through your iOS crash reports in the [Error Tracking explorer][10
 
 {{< img src="real_user_monitoring/ios/ios_crash_download.jpg" alt="Download an Apple-specific .crash file from the RUM Error Tracking explorer" style="width:95%;" >}}
 
-You can then open the `.crash` files in Xcode, which links each line of the crash trace to the files and methods involved in the source code.
+You can open the `.crash` files in Xcode, which links each line of the crash trace to the files and methods in the source code.
 
-**Note:** For the `.crash` file to be generated, [symbolication][11] of your application must be enabled.
+**Note:** For the `.crash` file to be generated, [symbolication](#symbolicate-crash-reports) of your application must be enabled.
 
 ## Further Reading
 
@@ -228,6 +228,5 @@ You can then open the `.crash` files in Xcode, which links each line of the cras
 [6]: https://appstoreconnect.apple.com/
 [7]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
 [8]: https://app.datadoghq.com/rum/error-tracking
-[9]: https://docs.datadoghq.com/logs/log_collection/ios
-[10]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/explorer/
-[11]: http://localhost:1313/real_user_monitoring/error_tracking/ios/#symbolicate-crash-reports
+[9]: /logs/log_collection/ios
+[10]: /real_user_monitoring/error_tracking/explorer/
