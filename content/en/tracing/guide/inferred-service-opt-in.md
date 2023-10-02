@@ -29,7 +29,7 @@ To determine the names and types of the inferred services, Datadog uses span att
 
 If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred services. For more information, see the "Peer Service Mapping" section for your language below.
 
-If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes.
+**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes.
 
 ## Dependency map
 
