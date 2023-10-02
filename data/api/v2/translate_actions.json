@@ -759,6 +759,30 @@
     "request_description": "To mute or unmute a finding, the request body should include at least two attributes: `muted` and `reason`. The allowed reasons depend on whether the finding is being muted or unmuted:\n- To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n- To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n",
     "request_schema_description": "The new mute finding request."
   },
+  "GetAllPowerpacks": {
+    "description": "Get a list of all powerpacks.",
+    "summary": "Get all powerpacks"
+  },
+  "CreatePowerpack": {
+    "description": "Create a powerpack.",
+    "summary": "Create a new powerpack",
+    "request_description": "Create a powerpack request body.",
+    "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
+  },
+  "DeletePowerpack": {
+    "description": "Delete a powerpack.",
+    "summary": "Delete a powerpack"
+  },
+  "GetPowerpack": {
+    "description": "Get a powerpack.",
+    "summary": "Get a Powerpack"
+  },
+  "UpdatePowerpack": {
+    "description": "Update a powerpack.",
+    "summary": "Update a powerpack",
+    "request_description": "Update a powerpack request body.",
+    "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
+  },
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"

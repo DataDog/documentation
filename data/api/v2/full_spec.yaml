@@ -5508,6 +5508,24 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetAllPowerpacksResponse:
+      description: Response object which includes all powerpack configurations.
+      properties:
+        data:
+          description: List of powerpack definitions.
+          items:
+            $ref: '#/components/schemas/PowerpackData'
+          type: array
+        included:
+          description: Array of objects related to the users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        links:
+          $ref: '#/components/schemas/PowerpackResponseLinks'
+        meta:
+          $ref: '#/components/schemas/PowerpacksResponseMeta'
+      type: object
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -10600,6 +10618,175 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    Powerpack:
+      description: Powerpacks are templated groups of dashboard widgets you can save
+        from an existing dashboard and turn into reusable packs in the widget tray.
+      properties:
+        data:
+          $ref: '#/components/schemas/PowerpackData'
+      type: object
+    PowerpackAttributes:
+      description: Powerpack attribute object.
+      properties:
+        description:
+          description: Description of this powerpack.
+          example: Powerpack for ABC
+          type: string
+        group_widget:
+          additionalProperties: {}
+          description: Templated group of dashboard widgets for the powerpack.
+          example:
+            layout_type: ordered
+            tags:
+            - tag:foo1
+            type: group
+            widgets:
+            - definition:
+                content: example
+                type: note
+          type: object
+        name:
+          description: Name of the powerpack.
+          example: Sample Powerpack
+          type: string
+        tags:
+          description: List of tags to identify this powerpack.
+          example:
+          - tag:foo1
+          items:
+            maxLength: 80
+            type: string
+          maxItems: 8
+          type: array
+        template_variables:
+          description: List of template variables for this powerpack.
+          example:
+          - defaults:
+            - '*'
+            name: test
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariable'
+          type: array
+      required:
+      - group_widget
+      - name
+      type: object
+    PowerpackData:
+      description: Powerpack data object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PowerpackAttributes'
+        id:
+          description: ID of the powerpack.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/PowerpackRelationships'
+        type:
+          description: Type of widget, must be powerpack.
+          example: powerpack
+          type: string
+      type: object
+    PowerpackRelationships:
+      description: Powerpack relationship object.
+      properties:
+        author:
+          $ref: '#/components/schemas/Creator'
+      type: object
+    PowerpackResponse:
+      description: Response object which includes a single powerpack configuration.
+      properties:
+        data:
+          $ref: '#/components/schemas/PowerpackData'
+        included:
+          description: Array of objects related to the users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      readOnly: true
+      type: object
+    PowerpackResponseLinks:
+      description: Links attributes.
+      properties:
+        first:
+          description: Link to last page.
+          type: string
+        last:
+          description: Link to first page.
+          example: https://app.datadoghq.com/api/v2/powerpacks?page[offset]=0&page[limit]=25
+          nullable: true
+          type: string
+        next:
+          description: Link for the next set of results.
+          example: https://app.datadoghq.com/api/v2/powerpacks?page[offset]=25&page[limit]=25
+          type: string
+        prev:
+          description: Link for the previous set of results.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          example: https://app.datadoghq.com/api/v2/powerpacks
+          type: string
+      type: object
+    PowerpackTemplateVariable:
+      description: Powerpack template variables.
+      properties:
+        defaults:
+          description: One or many template variable default values within the saved
+            view, which are unioned together using `OR` if more than one is specified.
+          items:
+            description: One or many default values of the template variable.
+            minLength: 1
+            type: string
+          type: array
+        name:
+          description: The name of the variable.
+          example: datacenter
+          type: string
+      required:
+      - name
+      type: object
+    PowerpacksResponseMeta:
+      description: Powerpack response metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PowerpacksResponseMetaPagination'
+      type: object
+    PowerpacksResponseMetaPagination:
+      description: Powerpack response pagination metadata.
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
+      type: object
     ProcessSummariesMeta:
       description: Response metadata object.
       properties:
@@ -24793,6 +24980,196 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/powerpacks:
+    get:
+      description: Get a list of all powerpacks.
+      operationId: GetAllPowerpacks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllPowerpacksResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get all powerpacks
+      tags:
+      - Powerpack
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a powerpack.
+      operationId: CreatePowerpack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Powerpack'
+        description: Create a powerpack request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerpackResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Create a new powerpack
+      tags:
+      - Powerpack
+      x-codegen-request-body-name: body
+      x-given:
+        powerpack:
+          parameters:
+          - file: powerpack_payload.json
+            name: body
+          step: there is a valid "powerpack" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeletePowerpack
+        parameters:
+        - name: powerpack_id
+          source: data.id
+        type: unsafe
+  /api/v2/powerpacks/{powerpack_id}:
+    delete:
+      description: Delete a powerpack.
+      operationId: DeletePowerpack
+      parameters:
+      - description: Powerpack id
+        in: path
+        name: powerpack_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Powerpack Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Delete a powerpack
+      tags:
+      - Powerpack
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a powerpack.
+      operationId: GetPowerpack
+      parameters:
+      - description: ID of the powerpack.
+        in: path
+        name: powerpack_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerpackResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Powerpack Not Found.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get a Powerpack
+      tags:
+      - Powerpack
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: Update a powerpack.
+      operationId: UpdatePowerpack
+      parameters:
+      - description: ID of the powerpack.
+        in: path
+        name: powerpack_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Powerpack'
+        description: Update a powerpack request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerpackResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Powerpack Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Update a powerpack
+      tags:
+      - Powerpack
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -30512,6 +30889,22 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/multi_organization
   name: Organizations
+- description: 'The powerpack endpoints allow you to:
+
+
+    - Get a powerpack
+
+    - Create a powerpack
+
+    - Delete a powerpack
+
+    - Get a list of all powerpacks
+
+
+    The Patch and Delete API methods can only be performed on a powerpack by
+
+    a user who has the powerpack create permission for that specific powerpack.'
+  name: Powerpack
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: Search or aggregate your RUM events over HTTP.
