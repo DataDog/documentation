@@ -99,7 +99,6 @@ For faster processing, generate the first exports manually by clicking **Run Now
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /tab %}}
 
-{{< tabs >}}
 {{% tab "Subscriptions & Resource Groups" %}}
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
