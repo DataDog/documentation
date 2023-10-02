@@ -5424,6 +5424,13 @@ components:
     GCPSTSServiceAccountAttributes:
       description: Attributes associated with your service account.
       properties:
+        account_tags:
+          description: Tags to be associated with GCP metrics and service checks from
+            your account.
+          items:
+            description: Account Level Tag
+            type: string
+          type: array
         automute:
           description: Silence monitors for expected GCE instance shutdowns.
           type: boolean
