@@ -360,7 +360,7 @@ This guide explains how to rename both upstream and downstream services in Datad
 
 | Source Type | Service | Identifier | DD_SERVICE_MAPPING Value |
 |---|---|---|---|
-| General | API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| General Identifiers| API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
 | | SNS | `lambda_sns` | `"lambda_sns:newServiceName"` |
 | | SQS | `lambda_sqs` | `"lambda_sqs:newServiceName"` |
 | | S3 | `lambda_s3` | `"lambda_s3:newServiceName"` |
@@ -368,7 +368,7 @@ This guide explains how to rename both upstream and downstream services in Datad
 | | Kinesis | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
 | | DynamoDB | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | | Lambda URLs | `lambda_url` | `"lambda_url:newServiceName"` |
-| Specific | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| Specific Identifiers | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
 | | SNS | Topic name | `"ExampleTopic:newServiceName"` |
 | | SQS | Queue name | `"MyQueue:newServiceName"` |
 | | S3 | Bucket name | `"example-bucket:newServiceName"` |
