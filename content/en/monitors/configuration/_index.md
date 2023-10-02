@@ -225,7 +225,7 @@ In most cases this setting is not useful because you only want an alert to resol
 
 #### Group retention time
 
-You can drop the group from the monitor status after `N` hours of missing data. The maximum length of time is 72 hours.
+You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 

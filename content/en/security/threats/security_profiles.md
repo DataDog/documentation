@@ -12,6 +12,10 @@ further_reading:
     text: "Managing CSM Threats Detection Rules"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workload Security Profiles are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Workload Security Profiles provides a baseline of expected workload activity through a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
 
 ## Compatibility
