@@ -3,22 +3,22 @@ description: 체인 요청을 통해 주요 서비스에 대한 정교한 트랜
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
   tag: 블로그
-  text: Datadog 다단계 API 테스트로 워크플로 모니터링
+  text: Monitor your workflows with Datadog SSL, TCP, and multistep API tests
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: 학습 센터
   text: 신서틱(Synthetic) 테스트 소개
 - link: /getting_started/synthetics/api_test
   tag: 설명서
-  text: API 테스트 시작하기
+  text: Getting Started with API Tests
 - link: /synthetics/private_locations
   tag: 설명서
-  text: 내부 엔드포인트에서 다단계 API 테스트 실행
+  text: Run multistep API tests on internal endpoints
 - link: /synthetics/guide/synthetic-test-monitors
   tag: 설명서
   text: Synthetic 테스트 모니터에 대해 알아보기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 테라폼
-  text: Terraform으로 Synthetic 다단계 API 테스트 생성 및 관리
+  text: Create and manage Synthetic multistep API tests with Terraform
 kind: 설명서
 title: Multistep API Tests
 ---
