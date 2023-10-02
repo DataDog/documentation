@@ -21,12 +21,13 @@ Multi-Factor Authentication (MFA), or Two-Factor Authentication (2FA) requires a
 
 ## Prerequisites
 
-To configure MFA for your account, log in using your email and password. Users who log in using SSO do not see MFA configuration options.
+To configure MFA for your account, log in using your **email and password**. Users who log in using SSO do **not** see MFA configuration options.
 
 ## Configure MFA for your user account
 
 To find the [Password & Authentication page][1]:
 
+1. Ensure you are logged in with a username and password combination, not through SSO.
 1. Navigate to **Personal Settings** from your account menu.
 1. Under **Security**, select **Password & Authentication**.
 
@@ -39,18 +40,17 @@ The multi-factor authentication section lists any configured authenticator apps.
 
 ## MFA recovery
 
-If you don't have access to your authenticator app, during the login process, you can use a recovery code instead of a one-time password. Each of the recovery codes can only be used once.
+If you don't have access to your authenticator app, during the login process you can use a recovery code instead of a one-time password. Each of the recovery codes can only be used once.
 
 1. Navigate to the [login page][2].
 1. Enter your email address and password, then select **Log in**.
 1. Select **Don't have access to your authenticator?**
 1. Enter one of your unused recovery codes and click **Verify**.
 
-If you have lost access to your registered authenticator app, Datadog recommends that you remove the lost device and add a new one. Maintaining a valid authenticator app helps prevent issues logging into your account in the future.
 
 ## MFA rescue
 
-If you don't have access to your authenticator app or recovery codes, during the login process, you can request a one-time recovery link via email.
+If you don't have access to your authenticator app or recovery codes, during the login process you can request a one-time recovery link via email.
 
 1. Navigate to the [login page][2].
 1. Enter your email address and password, then select **Log in**.
