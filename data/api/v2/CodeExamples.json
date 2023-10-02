@@ -497,6 +497,20 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "CreatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Create a new powerpack returns \"OK\" response"
+    }
+  ],
+  "UpdatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Update a powerpack returns \"OK\" response"
+    }
+  ],
   "AggregateRUMEvents": [
     {
       "group": "rum",
