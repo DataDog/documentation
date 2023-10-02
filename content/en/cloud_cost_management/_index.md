@@ -31,8 +31,8 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
 ## Setup
 
 {{< whatsnext desc="Get started with Cloud Cost Management:">}}
-  {{< nextlink href="/cloud_cost_management/aws">}}<u>Docker</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/azure">}}<u>Kubernetes</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/aws">}}<u>AWS</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
  {{< /whatsnext >}}
 
 ## Cloud costs in dashboards
