@@ -18,7 +18,7 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) are **not** supported.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can only set up at the Subscription level.
 
 ## Setup
 
@@ -47,7 +47,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
-    - Metric: **Actual Cost (usage and purchases)** OR  **Amortized Cost (usage and purchases)**
+    - Metric: **Actual Cost (usage and purchases)** THEN  **Amortized Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
 
@@ -63,7 +63,7 @@ For faster processing, generate the first exports manually by clicking **Run Now
 
 {{< tabs >}}
 {{% tab "Billing Accounts" %}}
-**Note**: Datadog does not support Azure Accounts of the type Microsoft Customer Agreement.
+**Note**:  For Microsoft Customer Agreement, set up at the subscription level.
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
