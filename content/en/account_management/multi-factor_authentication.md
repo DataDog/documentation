@@ -3,6 +3,10 @@ title: Multi-Factor Authentication (MFA)
 kind: documentation
 ---
 
+{{< callout url="#" btn_hidden="true" >}}
+  Multi-Factor Authentication is in public beta.
+{{< /callout >}}
+
 ## Overview
 
 Multi-Factor Authentication (MFA), or Two-Factor Authentication (2FA) requires a user to present more than one type of verification to authenticate to a system. MFA defends against the majority of password-related attacks, including brute-force, credential stuffing, and password spraying.
