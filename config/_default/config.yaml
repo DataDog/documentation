@@ -34,6 +34,10 @@ markup:
 
 module:
   imports:
+   - path: github.com/DataDog/websites-integrations
+     disabled: false
+    #  - source: data/api-source-attributes.json
+    #    target: data/api-source-attributes.json
    - path: github.com/DataDog/websites-modules
      disabled: false
      mounts:
