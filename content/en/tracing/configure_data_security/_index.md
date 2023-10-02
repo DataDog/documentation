@@ -181,7 +181,7 @@ The following metadata can be obfuscated:
 * HTTP URLs
 * Stack traces
 
-**Note:** Obfuscation can have a performance impact on your system, or could redact important information that is not sensitive, so it's important to consider what obfuscation you need for your setup, and fine-tune your configuration appropriately.
+**Note:** Obfuscation can have a performance impact on your system, or could redact important information that is not sensitive. Consider what obfuscation you need for your setup, and customize your configuration appropriately.
 
 **Note:** You can use automatic scrubbing for multiple types of services at the same time. Configure each in the `obfuscation` section of your `datadog.yaml` file.
 {{< tabs >}}
