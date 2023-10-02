@@ -40,7 +40,7 @@ Error Tracking enables you to:
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
 - Collect all the necessary context in one place to facilitate troubleshooting.
 
-## Upload crash reports
+## Upload source maps
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation to upload source maps for your framework:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
