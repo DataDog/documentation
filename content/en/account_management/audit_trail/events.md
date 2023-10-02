@@ -59,7 +59,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][86] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
-| [User invited (Support)][98] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @asset.type:user @action:created @usr.id:"Datadog Support"` |
+| [User invite (Support)][98] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @asset.type:user @action:created @usr.id:"Datadog Support"` |
 
 ### Agent
 
