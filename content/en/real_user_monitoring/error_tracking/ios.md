@@ -212,7 +212,7 @@ When browsing through your iOS crash reports in the [Error Tracking explorer][10
 
 {{< img src="real_user_monitoring/ios/ios_crash_download.jpg" alt="Download an Apple-specific .crash file from the RUM Error Tracking explorer" style="width:95%;" >}}
 
-You can then open the `.crash` files in Xcode, which trace the crash trace back to the files and methods involved in the source code.
+You can then open the `.crash` files in Xcode, which links each line of the crash trace to the files and methods involved in the source code.
 
 **Note:** For the `.crash` file to be generated, [symbolication][11] of your application must be enabled.
 
