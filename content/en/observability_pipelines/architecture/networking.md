@@ -3,6 +3,10 @@ title: Networking
 kind: Documentation
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## Network topology
 
 ### Network boundaries

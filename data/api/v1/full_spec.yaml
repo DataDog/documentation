@@ -4021,6 +4021,7 @@ components:
       - infra_host_usage
       - invocations_usage
       - mobile_app_testing_usage
+      - ndm_netflow_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - profiled_container_usage
@@ -4061,6 +4062,7 @@ components:
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - MOBILE_APP_TESTING_USAGE
+      - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
@@ -7594,6 +7596,8 @@ components:
       - invocations_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
+      - ndm_netflow_usage
+      - ndm_netflow_percentage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -7673,6 +7677,8 @@ components:
       - INVOCATIONS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
+      - NDM_NETFLOW_USAGE
+      - NDM_NETFLOW_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -7931,6 +7937,15 @@ components:
           type: number
         mobile_app_testing_usage:
           description: The Synthetic mobile application test usage by tag(s).
+          format: double
+          type: number
+        ndm_netflow_percentage:
+          description: The percentage of Network Device Monitoring NetFlow usage by
+            tag(s).
+          format: double
+          type: number
+        ndm_netflow_usage:
+          description: The Network Device Monitoring NetFlow usage by tag(s).
           format: double
           type: number
         npm_host_percentage:
@@ -18342,6 +18357,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        ndm_netflow_events_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for all organizations.
@@ -18859,6 +18879,11 @@ components:
         name:
           description: The organization name.
           type: string
+        ndm_netflow_events_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for the given org.
@@ -19398,6 +19423,11 @@ components:
         mobile_rum_units_agg_sum:
           description: Shows the sum of all mobile RUM units over all hours in the
             current months for all organizations.
+          format: int64
+          type: integer
+        ndm_netflow_events_agg_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
@@ -25459,6 +25489,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - create_webhooks
       summary: Create a webhooks integration
       tags:
       - Webhooks Integration
