@@ -30,14 +30,12 @@ Data delivery graphs are available for the following metrics:
 - Events in/out per second
 - Bytes in/out per second
 
-<div class="alert alert-warning pull-left">
-Resources utilization graphs are only available for users enrolled in the remote configuration private beta.
-</div>
-
 Resource utilization graphs are available for the following metrics:
 - CPU usage
 - Memory usage
 - Disk usage (only available for destinations)
+
+**Note**: These graphs are only available for users enrolled in the remote configuration private beta.
 
 ## See the status of your pipelines and components
 
