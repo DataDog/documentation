@@ -75,7 +75,7 @@ Remove the following settings from your configuration:
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `dd.trace.peer.service.mapping` |
@@ -106,7 +106,7 @@ To opt in, add the following environment variables or system properties to your 
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `WithPeerServiceMapping` |
@@ -137,7 +137,7 @@ To opt in, add the following environment variables or system properties to your 
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `peerServiceMapping` |
@@ -169,7 +169,7 @@ To opt in, add the following environment variables or system properties to your 
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `datadog.trace.peer_service_mapping` |
@@ -196,7 +196,7 @@ To opt in, add the following environment variables to your tracer settings or sy
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | TracerSettings |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
@@ -223,6 +223,22 @@ Add the following environment variables to your tracer settings or system proper
 - `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+
+| Environment variable | TracerSettings |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
+
+Each setting accepts a comma-separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
+
 As of tracer version `v1.16.0` all libraries are supported except for Boto2.
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.16.0
@@ -236,7 +252,7 @@ To opt in, add the following environment variables to your tracer settings or sy
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 #### Peer service mapping
-
+**Note**: `key:value` pairs are case sensitive.
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the `DD_TRACE_PEER_SERVICE_MAPPING` environment variable. The environment variable accepts a comma-separated list of key-value pairs.
 
 For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:

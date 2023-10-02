@@ -31,8 +31,13 @@
     {{ $d := index $dot.Site.Data.api.v1 "full_spec_deref" }}
     {{ $d2 := index $dot.Site.Data.api.v2 "full_spec_deref" }}
 
+    {{ $baseDir := "" }}
+    {{ with .File }}
+      {{ $baseDir = path.Base .Dir }}
+    {{ end }}
+
     <!-- get lang specific data file -->
-    {{ $tagSlug := path.Base .File.Dir }}
+    {{ $tagSlug := $baseDir }}
     {{ $.Scratch.Set "translate_tags" (dict) }}
     {{ $.Scratch.Set "translate_actions" (dict) }}
     {{ if ne $.Page.Lang "en"}}
@@ -106,7 +111,7 @@
       <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
 
       <!-- for accessing v1/v2 resources from latest -->
-      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
+      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $baseDir "") }}
 
       {{ range $tag := (first 1 (where $adat.tags ".name" "==" $ParamTitleEn)) }}
         <!-- get action strings from params, why? because they are translated here -->

@@ -5,6 +5,8 @@ description: Save and reuse an action and its parameters
 disable_toc: false
 disable_sidebar: false
 type: documentation
+aliases:
+  - /workflows/actions_catalog/action_blueprints/
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
