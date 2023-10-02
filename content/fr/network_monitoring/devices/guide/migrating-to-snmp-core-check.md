@@ -64,7 +64,7 @@ snmp_listener:
       - "key2:val2"
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "SNMPv3" %}}
 
