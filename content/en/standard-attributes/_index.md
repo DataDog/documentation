@@ -108,7 +108,7 @@ attributes:
     type: string
     domain: Geolocation
   - name: network.client.geoip.country.iso_code
-    description: "[ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codesobject) of the country (for example, `US` for the United States, `FR` for France)."
+    description: "[ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the country (for example, `US` for the United States, `FR` for France)."
     product_source: 
       - icon-log
     type: string
@@ -132,7 +132,7 @@ attributes:
     type: string
     domain: Geolocation
   - name: network.client.geoip.subdivision.iso_code
-    description: "[ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codesobject) of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France)."
+    description: "[ISO Code](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of the first subdivision level of the country (for example, `CA` in the United States or the `SA` department in France)."
     product_source: 
       - icon-log
     type: string
