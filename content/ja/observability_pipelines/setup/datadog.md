@@ -9,7 +9,7 @@ further_reading:
 - link: /observability_pipelines/production_deployment_overview/
   tag: ドキュメント
   text: 観測可能性パイプラインワーカーの本番デプロイ設計と原則
-- link: https://dtdg.co/d22op
+- link: https://learn.datadoghq.com/courses/safe-and-secure-local-processing-with-observability-pipelines
   tag: ラーニングセンター
   text: 観測可能性パイプラインによる安心・安全なローカル処理
 kind: ドキュメント
@@ -431,7 +431,8 @@ Google GKE では、Datadog は SSD でバックアップされた `premium-rwo`
 {{% tab "RPM ベースの Linux" %}}
 デフォルトでは、観測可能性パイプラインワーカーのデータディレクトリは `/var/lib/observability-pipelines-worker` に設定されています。サンプルの構成を使用する場合は、バッファリングに使用できる容量が少なくとも 288GB あることを確認する必要があります。
 
-可能であれば、その場所に別の SSD をマウントすることをお勧めします。 {{% /tab %}}
+可能であれば、その場所に別の SSD をマウントすることをお勧めします。 
+{{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 デフォルトでは、各インスタンスに 288GB の EBS ドライブが割り当てられており、上記のサンプル構成では、これをバッファリングに使用するように設定されています。
 {{% /tab %}}
