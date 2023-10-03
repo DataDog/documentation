@@ -47,6 +47,10 @@ Due to the limitations described above, the default branch of your repository is
 
 If there are other branches you want to exclude, add them on the Test Service Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
 
+Additionally, you may specify a set of tracked files, and Intelligent Test Runner will make sure that all tests are run after any of these files changes. You may also use the `*` and `**` wildcard characters to match multiple files or directories.
+
+We recommend that you use tracked files for your dependency files (e.g., `package.json`, `requirements.txt`) and for data files from data-driven tests (e.g., `tests/data/**`).
+
 {{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
 ## Explore test sessions
