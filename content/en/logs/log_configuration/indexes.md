@@ -137,7 +137,8 @@ In the following example:
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
-To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. 
+
+To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. After the retentions have been added, you must manually update the retention period for your indexes.
 
 {{< img src="logs/indexes/log_retention.png" alt="index details" style="width:70%;">}}
 
