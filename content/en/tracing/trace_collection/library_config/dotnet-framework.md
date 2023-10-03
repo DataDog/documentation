@@ -183,10 +183,10 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>`<br><br>
-**Example** (with specified tag names): `CASE-insensitive-Header:my-tag-name,User-ID:userId`<br>
-If the **Request** has a header `User-ID`, its value is applied as tag `userId`.<br><br>
-**Example** (without specified tag names): `My-Header-And-Tag-Name,User-ID`<br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+**Example** (with specified tag names): `User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
+**Example** (without specified tag names): `User-ID`<br>
 If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
 If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
 Added in version 1.18.3.<br>
