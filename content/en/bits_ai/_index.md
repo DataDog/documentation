@@ -16,7 +16,7 @@ further_reading:
       text: "Bits AI announcement"
 ---
 
-<div class="alert alert-info">Bits AI is in private beta.</div>
+<div class="alert alert-info">Bits AI is in private beta. Fill out [the sign-up form][3] to join the wait list.</div>
 
 Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack. 
 
@@ -70,6 +70,7 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 
 [1]: /bits_ai/getting_started/
 [2]: https://www.datadoghq.com/product/incident-management/
+[3]: https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform
 
 ## Further reading
 
