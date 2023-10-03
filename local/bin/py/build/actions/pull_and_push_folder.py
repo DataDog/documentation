@@ -28,6 +28,9 @@ def pull_and_push_folder(content, content_dir):
     """
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
+            directory = ''
+            if 'rulesets' in file_name:
+                directory = "{}{}".format(file_name.split('/')[-2],'/')
             file_content = f.read()
             boundary = re.compile(r'^-{3,}$', re.MULTILINE)
             split = boundary.split(file_content, 2)
@@ -53,7 +56,7 @@ def pull_and_push_folder(content, content_dir):
             front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
             # Replacing links that point to the Github folder by link that point to the doc.
             new_link = (
-                content["options"]["dest_dir"] + "\\2"
+                content["options"]["dest_dir"] + directory + "\\2"
             )
             regex_github_link = re.compile(
                 r"(https:\/\/github\.com\/{}\/{}\/blob\/{}\/{})(\S+)\.md".format(
@@ -62,7 +65,7 @@ def pull_and_push_folder(content, content_dir):
                     content["branch"],
                     content["options"][
                         "path_to_remove"
-                    ],
+                    ]+directory,
                 )
             )
             txt = re.sub(
@@ -82,7 +85,7 @@ def pull_and_push_folder(content, content_dir):
         # Writing the new content to the documentation file
         dirp = "{}{}".format(
             content_dir,
-            content["options"]["dest_dir"][1:],
+            content["options"]["dest_dir"][1:] + directory,
         )
         makedirs(dirp, exist_ok=True)
         with open(
