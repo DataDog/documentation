@@ -107,7 +107,7 @@
         contents:
 
         - action: integrations
-          branch: daniel-yb:daniel.isen/yugabytedb_managed
+          branch: 5d2780b4f14a85e9303080b289a155b77fe1a654
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
