@@ -2,9 +2,9 @@
 title: Granular Access Control
 kind: documentation
 ---
-## Restrict access to individual resources
+## Manage access to individual resources
 
-Some resources allow you to restrict access to individual resources by roles, [Teams][1], or users (beta).
+Some resources allow you to restrict access to individual resources by roles, [Teams][1], or users.
 
 Use the different principals to control access patterns in your organization and encourage knowledge sharing and collaboration:
 - Use Teams to map access to functional groups in your organizations. For example, restrict editing of a dashboard to the application team that owns it.
@@ -20,6 +20,14 @@ Use the different principals to control access patterns in your organization and
 | [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][7]                             |                   | {{< X >}}         |                                     |
+
+### Gain access to individual resources (private beta)
+
+<div class="alert alert-warning">
+The feature to gain access to individual resources is in private beta. To request access, <a href="/help">contact Support</a>.
+</div>
+
+A user with the `user_access_manage` permission can gain edit access to any individual resource that has restricted access. To get access, click the **Gain Edit Access** button in the granular access control modal.
 
 [1]: /account_management/teams/
 [2]: /dashboards/#permissions
