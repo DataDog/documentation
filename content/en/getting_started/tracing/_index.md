@@ -87,7 +87,7 @@ And in `trace-agent.log`:
 
 ### Environment name
 
-For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
+For the best experience, it is recommended to use the environment variable `DD_ENV` to configure `env` through your service's tracer.
 
 Additionally, if your tracer has logs injection enabled then the `env` is consistent across traces and logs. Read more about how this works in [Unified Service Tagging][12].
 
