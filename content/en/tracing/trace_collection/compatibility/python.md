@@ -47,22 +47,22 @@ The `ddtrace` library includes support for a number of web frameworks, including
 
 | Framework                 | Supported Version | Automatic | Library Documentation                                              |
 | ------------------------- | ----------------- | --------- |------------------------------------------------------------------ |
-| [asgi][3]                 | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
-| [aiohttp][4] (client)     | >= 3.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
-| [aiohttp][4] (server)     | >= 3.7            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
-| [Bottle][5]               | >= 0.12           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
-| [CherryPy][6]             | >= 17.0           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
-| [Django][7]               | >= 3.2            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
-| [djangorestframework][7]  | >= 3.11           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
-| [Falcon][8]               | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
-| [Flask][9]                | >= 1.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
-| [FastAPI][10]             | >= 0.64           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
+| [asgi][3]                 | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#asgi    |
+| [aiohttp][4] (client)     | >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [aiohttp][4] (server)     | >= 2.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp |
+| [Bottle][5]               | >= 0.11           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#bottle  |
+| [CherryPy][6]             | >= 11.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#cherrypy|
+| [Django][7]               | >= 1.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [djangorestframework][7]  | >= 3.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#django  |
+| [Falcon][8]               | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
+| [Flask][9]                | >= 0.10           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
+| [FastAPI][10]             | >= 0.51           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
 | [Gunicorn][61]            | >= 20.0.04        | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gunicorn |
-| [Molten][11]              | >= 1.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
-| [Pyramid][13]             | >= 1.10           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
-| [Sanic][15]               | >= 20.12.0        | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
-| [Starlette][16]           | >= 0.14.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
-| [Tornado][17]             | >= 5.1            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
+| [Molten][11]              | >= 0.7.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
+| [Pyramid][13]             | >= 1.7            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
+| [Sanic][15]               | >= 19.6.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
+| [Starlette][16]           | >= 0.13.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
+| [Tornado][17]             | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
 | [wsgi][76]                | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#wsgi |
 
 
@@ -73,32 +73,33 @@ The `ddtrace` library includes support for the following data stores:
 
 | Datastore                         | Supported Version | Automatic |  Library Documentation                                                                         |
 | ----------------------------      | ----------------- | --------- | --------------------------------------------------------------------------------------------- |
-| [algoliasearch][18]               | >= 2.5.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
-| [asyncpg][19]                     | >= 0.22.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
-| [Cassandra][20]                   | >= 3.24           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]               | >= 1.10, < 8.0    | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
-| [Flask Cache][22]                 | >= 0.13           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
+| [algoliasearch][18]               | >= 1.20.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
+| [asyncpg][19]                     | >= 0.18.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
+| [Cassandra][20]                   | >= 3.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
+| [Elasticsearch][21]               | >= 1.6, < 8.0     | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Flask Cache][22]                 | >= 0.12           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Kafka][64] [confluent-kafka][65] | >= 1.9.2          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kafka|
 | [Mariadb][23]                     | >= 1.0.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
-| [Memcached][24] [pylibmc][25]     | >= 1.6.2          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
-| [Memcached][24] [pymemcache][26]  | >= 3.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymemcache                          |
-| [MongoDB][27] [Mongoengine][28]   | >= 0.23           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
-| [MongoDB][27] [Pymongo][29]       | >= 3.12.3         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymongo                             |
+| [Memcached][24] [pylibmc][25]     | >= 1.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
+| [Memcached][24] [pymemcache][26]  | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymemcache                          |
+| [MongoDB][27] [Mongoengine][28]   | >= 0.11           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
+| [MongoDB][27] [Pymongo][29]       | >= 3.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymongo                             |
 | [MySQL][30] [MySQL-python][31]    | >= 1.2.3          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][30] [mysqlclient][32]     | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb
 | [MySQL][30] [aiomysql][66]        | >= 0.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiomysql |
-| [MySQL][30] [mysql-connector][33] | >= 8.0.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
-| [Postgres][34] [aiopg][35]        | >= 0.16.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
-| [Postgres][34] [psycopg][36]      | >= 2.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
-| [PyMySQL][37]                     | >= 1.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
-| [PynamoDB][38]                    | >= 5.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb |
-| [PyODBC][39]                      | >= 4.0.31         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
-| [Redis][40]                       | >= 4.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
-| [Redis][40] [redis-py-cluster][41]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [MySQL][30] [mysql-connector][33] | >= 2.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Postgres][34] [aiopg][35]        | >= 0.12.0, <= 0.16| yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
+| [Postgres][34] [psycopg][36]      | >= 2.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
+| [PyMySQL][37]                     | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
+| [PynamoDB][38]                    | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pynamodb |
+| [PyODBC][39]                      | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
+| [Redis][40]                       | >= 2.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
+| [Redis][40] [redis-py-cluster][41]| >= 1.3.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
 | [Redis][40] [aioredis][67]        | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|aioredis
 | [Redis][40] [aredis][68]          | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|aredis
 | [Redis][40] [yaaredis][77]        | >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|yaaredis
-| [snowflake-connector-python][62]  | >= 2.3            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#snowflake
-| [SQLAlchemy][42]                  | >= 1.3            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
+| [snowflake-connector-python][62]  | >= 2.1            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#snowflake
+| [SQLAlchemy][42]                  | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][43]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][44]                     | >= 0.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
 
@@ -108,30 +109,31 @@ The `ddtrace` library includes support for the following libraries:
 
 | Library                           | Supported Version |  Automatic       | Library Documentation                                                    |
 | -----------------                 | ----------------- | ---------------- | ------------------------------------------------------------------------ |
-| [aiobotocore][45]                 | >= 1.4.2          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
+| [aiobotocore][45]                 | >= 0.2.3          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiobotocore |
 | [asyncio][46]                     | Fully Supported   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
-| [Botocore][47]                    | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
-| [Celery][49]                      | >= 4.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
-| [Consul][50]                      | >= 1.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
+| [Botocore][47]                    | >= 1.4.51         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
+| [Boto2][48]                       | >= 2.29.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
+| [Celery][49]                      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Consul][50]                      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [dogpile.cache][69]               | >= 0.9            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#dogpile-cache      |
 | [Futures][51]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][52]                      | >= 1.5            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [gevent][52]                      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [graphene][70]                    | >= 3.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphene        |
-| [graphql-core][60]                | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
-| [Grpc][53]                        | >= 1.34           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
+| [graphql-core][60]                | >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
+| [Grpc][53]                        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]                     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
 | [httpx][71]                       | >= 0.17           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httpx     |
-| [Jinja2][55]                      | >= 2.11           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
+| [Jinja2][55]                      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Jinja2][55] [aiohttp-jinja2][63] | >= 1.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp-jinja2      |
-| [Kombu][56]                       | >= 4.2            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [Kombu][56]                       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [langchain][72]                   | >= 0.0.192        | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain       |
-| [Mako][57]                        | >= 1.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [Mako][57]                        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [OpenAI][73]                      | >= 0.26.5         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#openai        |
 | [opensearch-py][74]               | >= 1.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#opensearch-py        |
-| [Requests][58]                    | >= 2.20           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [Requests][58]                    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
 | [rq][75]                          | >= 1.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
-| [urllib3][59]                     | >= 1.25.8         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
-| [pytest][14]                      | >= 6.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
+| [urllib3][59]                     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
+| [pytest][14]                      | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 
 ## Further Reading
 
@@ -169,6 +171,7 @@ The `ddtrace` library includes support for the following libraries:
 [29]: https://api.mongodb.com/python/current
 [30]: https://www.mysql.com
 [31]: https://pypi.org/project/MySQL-python
+[32]: https://pypi.org/project/mysqlclient
 [33]: https://dev.mysql.com/doc/connector-python/en/
 [34]: https://www.postgresql.org
 [35]: https://aiopg.readthedocs.io
