@@ -119,4 +119,4 @@ To stop the app, hit Ctrl-C or run `make stop-docker`
 [13]: https://gohugo.io/getting-started/installing/
 [14]: https://golang.org/doc/install
 [15]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
-[16]: https://github.com/DataDog/documentation/blob/master/README.md#docker-development
+[16]: https://github.com/DataDog/documentation#docker-development
