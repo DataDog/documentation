@@ -41,8 +41,11 @@ The library supports the following runtimes:
 
 To request support for additional libraries, contact our awesome [support team][2].
 
-### Web framework compatibility
+This document describes the minimum supported version of each library across all of the major-version release lines.
+For more specific information on the library version support of a particular ddtrace version, consult the
+[library documentation][78] and select the version you're interested in.
 
+### Web framework compatibility
 The `ddtrace` library includes support for a number of web frameworks, including:
 
 | Framework                 | Supported Version | Automatic | Library Documentation                                              |
@@ -217,3 +220,4 @@ The `ddtrace` library includes support for the following libraries:
 [75]: https://pypi.org/project/rq/
 [76]: https://wsgi.readthedocs.io/en/latest/what.html
 [77]: https://pypi.org/project/yaaredis/
+[78]: https://ddtrace.readthedocs.io/en/stable/#supported-libraries
