@@ -159,12 +159,14 @@ def security_rules(content, content_dir):
 
             if 'posture-management' in relative_path:
                 if 'cloud-configuration' in relative_path:
-                    page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
-
+                    
                     if tags and 'dd_rule_type:combination' in tags:
                         page_data['rule_category'].append('CSM Security Issues')
-                    if tags and 'dd_rule_type:ciem' in tags:
+                    elif tags and 'dd_rule_type:ciem' in tags:
                         page_data['rule_category'].append('CSM Identity Risks')
+                    else:
+                        page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
+
 
                 if 'infrastructure-configuration' in relative_path:
                     page_data['rule_category'].append('CSM Misconfigurations (Infra)')
