@@ -94,6 +94,7 @@ The `ddtrace` library includes support for the following data stores:
 | [Redis][40]                       | >= 4.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
 | [Redis][40] [redis-py-cluster][41]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
 | [Redis][40] [aioredis][67]        | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|aioredis
+| [Redis][40] [aredis][68]          | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|aredis
 | [snowflake-connector-python][62]  | >= 2.3            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#snowflake
 | [SQLAlchemy][42]                  | >= 1.3            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][43]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
@@ -195,3 +196,4 @@ The `ddtrace` library includes support for the following libraries:
 [65]: https://pypi.org/project/confluent-kafka/
 [66]: https://pypi.org/project/aiomysql/
 [67]: https://pypi.org/project/aioredis/
+[68]: https://pypi.org/project/aredis/
