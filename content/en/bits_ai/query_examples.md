@@ -44,11 +44,9 @@ Examples:
 Natural language querying of cloud cost is available through the in-product search bar or the chat panel.
 
 Examples:
-- "How much does the payments team spend?"
-{{< img src="bits_ai/payments-team-spend.png" alt="Screenshot of query result" style="width:90%;">}}
-- "Show me the costs for the web-store service"
-{{< img src="bits_ai/web-store-service-cost.png" alt="Screenshot of query result" style="width:90%;">}}
-- "Break down cost by team"
-{{< img src="bits_ai/cost-by-team.png" alt="Screenshot of query result" style="width:90%;">}}
+- "Show me how much each team spends on the web-store service"
+{{< img src="bits_ai/web-store-spend-by-team.png" alt="Screenshot of query result" style="width:90%;">}}
+- "AWS products with >5% increase in costs"
+{{< img src="bits_ai/aws-product-cost-increase.png" alt="Screenshot of query result" style="width:90%;">}}
 
 [3]: https://app.datadoghq.com/inventories/sql
