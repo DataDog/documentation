@@ -63,6 +63,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Sanic][15]               | >= 20.12.0        | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
 | [Starlette][16]           | >= 0.14.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][17]             | >= 5.1            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
+| [wsgi][76]                | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#wsgi |
 
 
 
@@ -95,6 +96,7 @@ The `ddtrace` library includes support for the following data stores:
 | [Redis][40] [redis-py-cluster][41]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
 | [Redis][40] [aioredis][67]        | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|aioredis
 | [Redis][40] [aredis][68]          | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|aredis
+| [Redis][40] [yaaredis][77]        | >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#|yaaredis
 | [snowflake-connector-python][62]  | >= 2.3            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#snowflake
 | [SQLAlchemy][42]                  | >= 1.3            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][43]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
@@ -115,15 +117,20 @@ The `ddtrace` library includes support for the following libraries:
 | [Futures][51]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
 | [gevent][52]                      | >= 1.5            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [graphene][70]                    | >= 3.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphene        |
+| [graphql-core][60]                | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [Grpc][53]                        | >= 1.34           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]                     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [httpx][71]                       | >= 0.17           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httpx     |
 | [Jinja2][55]                      | >= 2.11           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Jinja2][55] [aiohttp-jinja2][63] | >= 1.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiohttp-jinja2      |
 | [Kombu][56]                       | >= 4.2            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
+| [langchain][72]                   | >= 0.0.192        | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#langchain       |
 | [Mako][57]                        | >= 1.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
+| [OpenAI][73]                      | >= 0.26.5         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#openai        |
+| [opensearch-py][74]               | >= 1.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#opensearch-py        |
 | [Requests][58]                    | >= 2.20           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [rq][75]                          | >= 1.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
 | [urllib3][59]                     | >= 1.25.8         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
-| [graphql-core][60]                | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]                      | >= 6.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 
 ## Further Reading
@@ -162,7 +169,6 @@ The `ddtrace` library includes support for the following libraries:
 [29]: https://api.mongodb.com/python/current
 [30]: https://www.mysql.com
 [31]: https://pypi.org/project/MySQL-python
-[32]: https://pypi.org/project/mysqlclient
 [33]: https://dev.mysql.com/doc/connector-python/en/
 [34]: https://www.postgresql.org
 [35]: https://aiopg.readthedocs.io
@@ -201,3 +207,10 @@ The `ddtrace` library includes support for the following libraries:
 [68]: https://pypi.org/project/aredis/
 [69]: https://pypi.org/project/dogpile.cache/
 [70]: https://pypi.org/project/graphene/
+[71]: https://pypi.org/project/httpx/
+[72]: https://pypi.org/project/langchain/
+[73]: https://openai.com/
+[74]: https://pypi.org/project/opensearch-py/
+[75]: https://pypi.org/project/rq/
+[76]: https://wsgi.readthedocs.io/en/latest/what.html
+[77]: https://pypi.org/project/yaaredis/
