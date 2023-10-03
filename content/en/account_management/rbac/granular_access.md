@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Restrict access to individual resources
 
-Some resources allow you to restrict access to individual resources by roles, [Teams][1] (beta), or users (beta).
+Some resources allow you to restrict access to individual resources by roles, [Teams][1], or users (beta).
 
 Use the different principals to control access patterns in your organization and encourage knowledge sharing and collaboration:
 - Use Teams to map access to functional groups in your organizations. For example, restrict editing of a dashboard to the application team that owns it.
