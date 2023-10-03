@@ -114,6 +114,7 @@ The `ddtrace` library includes support for the following libraries:
 | [dogpile.cache][69]               | >= 0.9            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#dogpile-cache      |
 | [Futures][51]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
 | [gevent][52]                      | >= 1.5            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [graphene][70]                    | >= 3.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphene        |
 | [Grpc][53]                        | >= 1.34           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]                     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
 | [Jinja2][55]                      | >= 2.11           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
@@ -199,3 +200,4 @@ The `ddtrace` library includes support for the following libraries:
 [67]: https://pypi.org/project/aioredis/
 [68]: https://pypi.org/project/aredis/
 [69]: https://pypi.org/project/dogpile.cache/
+[70]: https://pypi.org/project/graphene/
