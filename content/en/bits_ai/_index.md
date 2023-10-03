@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">Bits AI is in private beta.</div>
 
-Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure.
+Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack. 
 
 See [Getting Started][1] for usage instructions.
 
@@ -28,7 +28,7 @@ See [Getting Started][1] for usage instructions.
 
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 
-In Datadog or in Slack, you can ask Bits AI questions such as
+You can ask Bits AI questions such as
 - Who is on call for example-service?
 - Find me the example-service dashboard.
 - What is going on with example-service?
