@@ -17,8 +17,7 @@ ssl: allow
 
 Restart the agent after applying this change.
 
-The `datadog` user needs an additional permission enabled. Execute this statement on each DB host:
-
+Run this command on each database host to enable the additional permission needed for the `datadog` user:
 
 ```SQL
 ALTER ROLE datadog INHERIT;
