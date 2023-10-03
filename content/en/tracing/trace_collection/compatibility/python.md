@@ -31,11 +31,11 @@ And the library supports the following runtimes:
 | OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
 |---------|-----------------------|---------|-----------------|--------------------------|
 | Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.12        | `<3`                     |
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7-3.6         | `<2`                     |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7-3.11        | `<2`                     |
 | MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.12        | `<3`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7-3.6         | `<2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7-3.11        | `<2`                     |
 | Windows | 64bit, 32bit          | CPython | 3.7-3.12        | `<3`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7-3.6         | `<2`                     |
+| Windows | 64bit, 32bit          | CPython | 2.7-3.11        | `<2`                     |
 
 ## Integrations
 
