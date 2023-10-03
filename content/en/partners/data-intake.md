@@ -194,8 +194,8 @@ Now that you have data flowing into Datadog, it's time to focus on [delivering v
 [23]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 [24]: /serverless/serverless_tagging/?tab=serverlessframework#overview
 [25]: /infrastructure/livecontainers
-[26]: /agent/guide/network/
-[27]: /agent/proxy/
+[26]: /agent/configuration/network/
+[27]: /agent/configuration/proxy/
 [28]: https://www.datadoghq.com/blog/deploying-datadog-with-chef-roles/
 [29]: https://www.datadoghq.com/blog/monitor-puppet-datadog/
 [30]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation/

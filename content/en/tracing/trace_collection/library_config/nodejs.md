@@ -262,4 +262,4 @@ For more examples of how to work with the library see [API documentation][2].
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/nodejs
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports

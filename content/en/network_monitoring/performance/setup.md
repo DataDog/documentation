@@ -171,7 +171,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -204,7 +204,7 @@ To enable Network Performance Monitoring for Windows hosts:
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

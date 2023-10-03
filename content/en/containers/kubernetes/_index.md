@@ -55,5 +55,5 @@ For information pertaining to the Datadog Cluster Agent, which provides a stream
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 [3]: /containers/cluster_agent/

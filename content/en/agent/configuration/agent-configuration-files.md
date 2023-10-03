@@ -3,6 +3,7 @@ title: Agent Configuration Files
 kind: guide
 aliases:
   - /agent/faq/agent-configuration-files
+  - /agent/guide/agent-configuration-files
 algolia:
   rank: 80
   category: guide

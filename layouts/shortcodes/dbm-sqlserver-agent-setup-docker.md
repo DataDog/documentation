@@ -38,5 +38,5 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [1]: /agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/guide/agent-commands/#agent-status-and-information
+[4]: /agent/configuration/agent-commands/#agent-status-and-information
 [5]: https://app.datadoghq.com/databases

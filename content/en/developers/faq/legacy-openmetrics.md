@@ -244,5 +244,5 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 [4]: /developers/integrations/
 [5]: https://github.com/DataDog/integrations-core/blob/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/base_check.py
 [6]: /integrations/guide/prometheus-metrics/
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [8]: https://datadoghq.dev/integrations-core/base/openmetrics/

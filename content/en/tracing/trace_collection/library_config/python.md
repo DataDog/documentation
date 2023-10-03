@@ -122,4 +122,4 @@ Enable [connecting logs and trace injection][6].
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports

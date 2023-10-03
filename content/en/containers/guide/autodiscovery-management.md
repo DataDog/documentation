@@ -200,7 +200,7 @@ datadog:
 {{% tab "Host Agent" %}}
 Set environment variables in the [Agent `datadog.yaml` configuration file][1].
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,4 +222,4 @@ Set `exclude_pause_container` to `false`.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: agent/configuration/agent-configuration-files/#agent-main-configuration-file

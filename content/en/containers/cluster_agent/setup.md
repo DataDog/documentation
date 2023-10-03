@@ -300,5 +300,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows
