@@ -17,12 +17,16 @@ Distributions are a metric type that aggregate values sent from multiple hosts d
 Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2]. 
 
 Distributions provide enhanced query functionality and configuration options that aren't offered with other metric types (count, rate, gauge, histogram):
-* **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
+* **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points, including stddev) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
 
   * **Single percentile value over any timeframe**:
   
      _"What has the 99.9th percentile load time for my application been over the past week?"_
 
+ * **Variance in metrics performance over time**:
+  
+     _"What is the standard deviation (stddev) of my application's CPU consumption over the past 3 months?"_
+   
   * **Percentile thresholds on metric monitors**:
   
     _"Alert me when the p95 of my application's request latency is greater than 200 ms for the last 5 min."_
@@ -42,7 +46,7 @@ See the [Developer Tools section][1] for more implementation details.
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
-However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Summary page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries.
+However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Summary page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99), including stddev. Enabling advanced queries also unlocks threshold queries.
 
 {{< img src="metrics/distributions/advancedquery.mp4" alt="A user enabling advanced query functionality by clicking on edit under the advanced section" video=true width=65% >}}
 
