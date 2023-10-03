@@ -149,10 +149,6 @@ docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
 ]
 ```
 
-<<<<<<< HEAD
-[1]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
-=======
->>>>>>> master
 {{% /tab %}}
 {{< /tabs >}}
 
