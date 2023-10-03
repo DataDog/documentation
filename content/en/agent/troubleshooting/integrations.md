@@ -35,7 +35,7 @@ If the integration is not listed under **Running Checks**:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: agent/configuration/agent-configuration-files/#agent-configuration-directory
+[1]:/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: agent/configuration/agent-log-files/

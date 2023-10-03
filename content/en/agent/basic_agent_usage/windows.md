@@ -442,5 +442,5 @@ After configuration is complete, [restart the Agent][11].
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
-[10]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/configuration/agent-commands/#restart-the-agent

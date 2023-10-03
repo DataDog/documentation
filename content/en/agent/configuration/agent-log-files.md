@@ -8,7 +8,7 @@ further_reading:
 - link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "agent/configuration/agent-configuration-files/"
+- link: "/agent/configuration/agent-configuration-files/"
   tag: "FAQ"
   text: "Agent configuration files"
 - link: "/agent/configuration/agent-commands/"
@@ -81,4 +81,4 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.comagent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: https://docs.datadoghq.com/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

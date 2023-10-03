@@ -266,4 +266,4 @@ datadog:
 [18]: /agent/configuration/proxy/
 [19]: /tracing/service_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
-[21]: agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[21]:/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

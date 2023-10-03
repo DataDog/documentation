@@ -7,7 +7,7 @@ further_reading:
 - link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "agent/configuration/agent-configuration-files/"
+- link: "/agent/configuration/agent-configuration-files/"
   tag: "Guide"
   text: "Agent Configuration Files"
 - link: "/agent/configuration/agent-commands/"

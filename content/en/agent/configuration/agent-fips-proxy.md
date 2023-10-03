@@ -167,9 +167,9 @@ If you use [Log Management][3] and want to send the Datadog Agent FIPS Proxy log
 1. [Restart the Agent][6].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /logs/
-[4]: agent/configuration/agent-configuration-files/#agent-configuration-directory
+[4]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [5]: /integrations/journald/#configuration
 [6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}

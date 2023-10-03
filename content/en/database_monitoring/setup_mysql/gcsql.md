@@ -210,7 +210,7 @@ See the [MySQL integration spec][3] for additional information on setting `proje
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
-[1]: agent/configuration/agent-configuration-files/#agent-configuration-directory
+[1]:/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}

@@ -425,4 +425,4 @@ If you're not receiving traces as expected, set up debug mode in the `ddtrace` P
 [12]: /tracing/trace_collection/custom_instrumentation/python/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: agent/configuration/agent-configuration-files/?tab=agentv6v7
+[15]:/agent/configuration/agent-configuration-files/?tab=agentv6v7

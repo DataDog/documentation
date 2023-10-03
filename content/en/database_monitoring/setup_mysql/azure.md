@@ -162,7 +162,7 @@ See the [MySQL integration spec][4] for additional information on setting `deplo
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
-[1]: agent/configuration/agent-configuration-files/#agent-configuration-directory
+[1]:/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552

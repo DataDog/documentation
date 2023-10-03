@@ -284,5 +284,5 @@ datadog_config:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/versions/upgrade_to_agent_v7/?tab=linux
-[2]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /agent/configuration/agent-commands/#restart-the-agent

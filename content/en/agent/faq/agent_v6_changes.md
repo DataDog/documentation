@@ -90,7 +90,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | `use_curl_http_client`       |                                                                                                                       |
 | `collect_security_groups`    | Obsolete, feature is available with the [AWS integration][6].                                                         |
 
-[1]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/upgrade-to-agent-v6/
 [3]: /agent/configuration/proxy/
 [4]: /integrations/disk/

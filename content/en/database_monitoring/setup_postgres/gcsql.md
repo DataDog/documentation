@@ -161,7 +161,7 @@ See the [Postgres integration spec][3] for additional information on setting `pr
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[4]: agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[4]:/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 {{% /tab %}}
 {{% tab "Docker" %}}
 

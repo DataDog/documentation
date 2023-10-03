@@ -435,6 +435,6 @@ If you're not receiving traces as expected, set up debug mode for the Java trace
 [12]: /tracing/trace_collection/custom_instrumentation/java/
 [13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [14]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
-[15]: agent/configuration/agent-configuration-files/?tab=agentv6v7
+[15]:/agent/configuration/agent-configuration-files/?tab=agentv6v7
 [16]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: /tracing/trace_collection/library_config/java/

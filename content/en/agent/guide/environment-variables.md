@@ -111,7 +111,7 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/configuration/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go

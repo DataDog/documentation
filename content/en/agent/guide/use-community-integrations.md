@@ -72,7 +72,7 @@ For Agent < v7.21 / v6.21:
 6. [Restart the Agent][4].
 
 [1]: https://github.com/DataDog/integrations-extras
-[2]: agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [3]: /getting_started/integrations/
 [4]: /agent/configuration/agent-commands/#restart-the-agent
 

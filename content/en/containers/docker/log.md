@@ -184,7 +184,7 @@ environment:
 
 [1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
-[3]: agent/configuration/agent-configuration-files/
+[3]:/agent/configuration/agent-configuration-files/
 [4]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}

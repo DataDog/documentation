@@ -12,7 +12,7 @@ further_reading:
 - link: "/agent/configuration/agent-commands/"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "agent/configuration/agent-configuration-files/"
+- link: "/agent/configuration/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
 - link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
@@ -345,7 +345,7 @@ See the [Agent log files documentation][12].
 [6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /agent/guide/integration-management/
-[9]: agent/configuration/agent-configuration-files/
-[10]: agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[9]: /agent/configuration/agent-configuration-files/
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/site/
 [12]: agent/configuration/agent-log-files/
