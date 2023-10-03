@@ -14,7 +14,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces and profiles"
-- link: "agent/configuration/agent-fips-proxy"
+- link: "/agent/configuration/agent-fips-proxy"
   tag: "Documentation"
   text: "Datadog FIPS Compliance"
 algolia:

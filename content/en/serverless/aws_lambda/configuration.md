@@ -980,7 +980,7 @@ If you have trouble configuring your installations, set the environment variable
 [29]: /getting_started/site/
 [30]: /agent/configuration/proxy/
 [31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[32]: agent/configuration/dual-shipping/
+[32]: /agent/configuration/dual-shipping/
 [33]: /serverless/distributed_tracing/#trace-propagation
 [34]: /integrations/amazon_xray/
 [35]: /serverless/distributed_tracing/#trace-merging

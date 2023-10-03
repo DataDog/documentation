@@ -348,4 +348,4 @@ See the [Agent log files documentation][12].
 [9]: /agent/configuration/agent-configuration-files/
 [10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/site/
-[12]: agent/configuration/agent-log-files/
+[12]: /agent/configuration/agent-log-files/

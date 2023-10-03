@@ -38,7 +38,7 @@ If the integration is not listed under **Running Checks**:
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: agent/configuration/agent-log-files/
+[4]: /agent/configuration/agent-log-files/
 [5]: /help/
 [6]: /integrations/
 [7]: https://codebeautify.org/yaml-parser-online

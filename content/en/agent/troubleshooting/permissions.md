@@ -145,7 +145,7 @@ See the following GitHub issues for more information and other potential methods
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/agent-commands/
-[2]: agent/configuration/agent-log-files/
+[2]: /agent/configuration/agent-log-files/
 [3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /agent/faq/network/
 [5]: /agent/configuration/agent-commands/#start-the-agent

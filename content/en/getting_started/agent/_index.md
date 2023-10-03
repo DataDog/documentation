@@ -312,5 +312,5 @@ For help troubleshooting the Agent:
 [32]: /agent/configuration/agent-commands/#start-the-agent
 [33]: /agent/configuration/agent-commands/#stop-the-agent
 [34]: /agent/troubleshooting/
-[35]: agent/configuration/agent-log-files/
+[35]: /agent/configuration/agent-log-files/
 [36]: /help/

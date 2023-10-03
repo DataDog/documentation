@@ -58,7 +58,7 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /agent/troubleshooting/site/
 [7]: /agent/configuration/agent-commands/#agent-status-and-information
-[8]: agent/configuration/agent-log-files/
+[8]: /agent/configuration/agent-log-files/
 [9]: /agent/troubleshooting/debug_mode/
 [10]: /help/
 [11]: /agent/troubleshooting/send_a_flare/

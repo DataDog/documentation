@@ -34,7 +34,7 @@ To enable the Agent full debug mode:
 
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/configuration/agent-commands/#restart-the-agent
-[3]: agent/configuration/agent-log-files/
+[3]: /agent/configuration/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -48,7 +48,7 @@ To enable the Agent full debug mode:
 
 [1]: /agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
 [2]: /agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
-[3]: agent/configuration/agent-log-files/?tab=agentv5
+[3]: /agent/configuration/agent-log-files/?tab=agentv5
 {{% /tab %}}
 {{< /tabs >}}
 
