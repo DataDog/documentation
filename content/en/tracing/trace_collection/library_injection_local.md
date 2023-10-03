@@ -91,18 +91,14 @@ spec:
 ### Step 2 - Annotate your pods for library injection
 
 To select your pods for library injection, use the annotations provided in the following table within your pod spec.
-- Pod annotations inject the required volumeMounts and environment variables into each container.
-- Container annotations allow you to specify individual containers to mutate.
 
-| Language   | Pod annotation                                                        | Container annotation                                                             |
-|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   | `admission.datadoghq.com/<CONTAINER>.java-lib.version: "<CONTAINER IMAGE TAG>"`  |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     | `admission.datadoghq.com/<CONTAINER>.js-lib.version: "<CONTAINER IMAGE TAG>"`    |
-| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` | `admission.datadoghq.com/<CONTAINER>.python-lib.version: "<CONTAINER IMAGE TAG>"`|
-| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` | `admission.datadoghq.com/<CONTAINER>.dotnet-lib.version: "<CONTAINER IMAGE TAG>"`|
-| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   | `admission.datadoghq.com/<CONTAINER>.ruby-lib.version: "<CONTAINER IMAGE TAG>"`  |
-
-<div class="alert alert-warning">Container-specific annotations require Agent version >= 7.43.0.</div>
+| Language   | Pod annotation                                                        |
+|------------|-----------------------------------------------------------------------|
+| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][16]
