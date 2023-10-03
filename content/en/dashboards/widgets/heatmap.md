@@ -7,6 +7,9 @@ aliases:
     - /graphing/widgets/heat_map/
     - /dashboards/widgets/heat_map/
 further_reading:
+- link: "/real_user_monitoring/heatmaps/"
+  tag: "Documentation"
+  text: "Learn more about heatmaps"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
@@ -53,9 +56,7 @@ The following configuration options are available:
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API][2] for details.
-
-See the table below for the [widget JSON schema definition][3] for the heatmap widget:
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
 {{< dashboards-widgets-api >}}
 

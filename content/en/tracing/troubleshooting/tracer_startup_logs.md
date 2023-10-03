@@ -53,7 +53,7 @@ Since version `2.19.0`, you can use the `DD_TRACE_LOGFILE_RETENTION_DAYS` settin
 
 - `dotnet-tracer-managed-{processName}-{timestamp}.log` contains the configuration logs.
 
-- `dotnet-tracer-native.log` contains the diagnostics logs, if any are generated.
+- `dotnet-tracer-native-{processName}-{processID}.log` contains the diagnostics logs, if any are generated.
 
 **Configuration:**
 

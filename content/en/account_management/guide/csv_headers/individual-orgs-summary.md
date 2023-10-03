@@ -3,46 +3,22 @@ title: New CSV headers for Individual Organizations Summary
 kind: guide
 ---
 
-CSV header changes are in effect as of December 12, 2022. Use this table to update CSV headers your automation depends on:
+CSV header changes take effect the week of September 18, 2023. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on:
 
-| Old | New (as of December 12, 2022) |
-|----| ----------------------|
-|Ingested Logs (Sum) | Ingested Logs (live & rehydrated) (Sum)|
-|Indexed Logs (Sum) | Indexed Logs (live & rehydrated) (Sum)|
-|Analyzed Logs (Number of analyzed ingested bytes) | Analyzed Logs (Security) (Sum)|
-|CWS Hosts (Top 99p) | Cloud Workload Security Hosts (Top 99p)|
-|CWS Host Hours (Sum) | Cloud Workload Security Host Hours (Sum)|
-|CWS Containers (Average) | Cloud Workload Security Containers (Average)|
-|CWS Container Hours (Sum) | Cloud Workload Security Container Hours (Sum)|
-|CSPM Host Hours (Sum) | Cloud Security Posture Management Host Hours (Sum)|
-|CSPM Host Hours (Sum) | Azure CSPM Host Hours (Sum)|
-|CSPM Host Hours (Sum) | Azure App Services CSPM Host Hours (Sum)|
-|CSPM Host Hours (Sum) | AWS CSPM Host Hours (Sum)|
-|CSPM Host Hours (Sum) | GCP CSPM Host Hours (Sum)|
-|CSPM Hosts (Top 99p) | Cloud Security Posture Management Hosts (Top 99p)|
-|CSPM Containers (Average) | Cloud Security Posture Management Containers (Average)|
-|CSPM Container Hours (Sum) | Cloud Security Posture Management Container Hours (Sum)|
-|Application Security Management Fargate Tasks (Avg) | Application Security Management Fargate Tasks (Average)|
-|Serverless Functions (Number of functions) | Serverless Functions (Average)|
-|Serverless Functions (Workload Monitoring) (Average) | Serverless Workload Functions (Average)|
-|Serverless Invocations (Number of invocations) | Serverless Invocations (Sum)|
-|Serverless Traced Invocations (Number of invocations) | Serverless Traced Invocations (Sum)|
-|Fargate Tasks (Average number of tasks) | Fargate Tasks (Average)|
-|Network Flows (Sum of network flows indexed) | Network Flows (Sum)|
-|SNMP Devices (Top 99p) | Network Devices (Top 99p)|
-|Synthetic API Test Runs (Number of test runs) | Synthetics API Test Runs (Sum)|
-|Synthetic Browser Test Runs (Number of test runs) | Synthetics Browser Test Runs (Sum)|
-|RUM Total Sessions (Number of sessions) | RUM Total Sessions (Sum)|
-|RUM Browser Sessions (Number of sessions) | RUM Browser Sessions (Sum)|
-|RUM iOS Sessions (Number of sessions) | RUM iOS Sessions (Sum)|
-|RUM Android Sessions (Number of sessions) | RUM Android Sessions (Sum)|
-|RUM React Native Sessions (Number of sessions) | RUM React Native Sessions (Sum)|
-|Incident Mgmt (Monthly Unique Active Users to Date) | Incident Management Unique Active Users (Max)|
-|DBM Normalized Queries (Avg) | DBM Normalized Queries (Average)|
-|SDS Total (Sum) | Sensitive Data Scanner (Total) (Sum)|
-|SDS Scanned Logs (Sum) | Sensitive Data Scanner (Scanned Logs) (Sum)|
-|Observability Pipelines Bytes Processed (Sum) | Observability Pipelines (Sum)|
-|CI Visibility Pipeline Committers (Monthly Unique Active Committers to Date) | CI Pipeline Committers (Max)|
-|CI Visibility Test Committers (Monthly Unique Active Committers to Date) | CI Test Committers (Max)|
-|CI Pipeline Indexed Spans (Sum) | CI Pipeline Spans (Sum)|
-|CI Test Indexed Spans (Sum) | CI Test Spans (Sum)|
+## All Tab Summary
+
+| Organization Name | Public ID | Month | Product Name | Aggregation | Usage |
+|----| ---| ---| ---| ---| ---|
+|Org 1 | public_id_1 | 2023-02-01 | Infra Hosts	| Top 99p	| 500|
+|Org 1 | public_id_1 | 2023-02-01 | Custom Metrics	| Average	| 1000|
+|Org 2 | public_id_2 | 2023-02-01 | Infra Hosts	| Top 99p	| 600|
+|Org 2 | public_id_2 | 2023-02-01 | Custom Metrics	| Average	| 1200|
+
+## Billable Tab Summary
+
+| Organization Name | Public ID | Start Date | End Date | Product Name | Aggregation | Usage |
+|----| ---| ---| ---| ---| ---| ---|
+|Org 1 | public_id_1 | 2023-02-01 | 2023-02-28 | Infra Hosts	| Top 99p	| 500|
+|Org 1 | public_id_1 | 2023-02-01 | 2023-02-28 | Custom Metrics	| Average	| 1000|
+|Org 2 | public_id_2 | 2023-02-01 | 2023-02-28 | Infra Hosts	| Top 99p	| 600|
+|Org 2 | public_id_2 | 2023-02-01 | 2023-02-28 | Custom Metrics	| Average	| 1200|

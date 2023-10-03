@@ -20,7 +20,7 @@ Visual Studio Code용 Datadog 확장 프로그램은 공개 베타 버전입니�
 
 Visual Studio Code를 위한 Datadog 확장 프로그램은 IDE의 [로컬 환경에서 신서틱 HTTP 테스트 및 브라우저 테스트를 실행][1]할 수 있어 코드 안정성을 향상시킬 수 있습니다. 확장 기능은 코드가 프로덕션에 배포되고 최종 사용자에게 영향을 미치기 전에 코드 변경으로 인한 잠재적인 문제를 식별하고 해결하도록 보장합니다.
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="Visual Studio Code의 Datadog 확장 프로그램 style="width:100%;" >}}
+{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="Visual Studio Code의 Datadog 확장 프로그램" style="width:100%;" >}}
 
 Datadog 확장을 사용하여 다음 작업을 수행할 수 있습니다:
 

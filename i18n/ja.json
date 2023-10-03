@@ -351,5 +351,8 @@
   },
   "learn_more": {
     "other": "詳細はこちら"
+  },
+  "personalized_demo" : {
+    "other": "個別デモのリクエスト"
   }
 }

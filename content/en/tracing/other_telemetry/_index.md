@@ -1,11 +1,14 @@
 ---
 title: Connect APM Data with Other Telemetry
 kind: documentation
-description: '.'
+description: Learn how to connect APM data with telemetry collected by additional Datadog products.
 further_reading:
-    - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
-      tag: "Documentation"
-      text: 'Ease troubleshooting with cross-product correlation'
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+    tag: 'Documentation'
+    text: 'Ease troubleshooting with cross-product correlation'
+  - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
+    tag: 'Blog'
+    text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
 
 Correlating data by various Datadog products gives context to help estimate the business impact and find the root cause of an issue in a few clicks. Set up connections between incoming data to facilitate quick pivots in your explorers and dashboards.

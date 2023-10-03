@@ -67,7 +67,8 @@ $(document).ready(function () {
     const newLinks = document.getElementsByTagName('a');
     for (let i = 0; i < newLinks.length; i++) {
         if (
-            !newLinks[i].href.includes('datadoghq.com') &&
+            !newLinks[i].href.includes('docs.datadoghq.com') &&
+            !newLinks[i].href.includes('docs-staging.datadoghq.com') &&
             !newLinks[i].href.includes('localhost:1313')
         ) {
             $(`a[href='${newLinks[i].href}']`).attr('target', '_blank');
