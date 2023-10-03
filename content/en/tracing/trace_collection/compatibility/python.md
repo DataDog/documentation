@@ -111,6 +111,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Botocore][47]                    | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
 | [Celery][49]                      | >= 4.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
 | [Consul][50]                      | >= 1.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
+| [dogpile.cache][69]               | >= 0.9            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#dogpile-cache      |
 | [Futures][51]                     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
 | [gevent][52]                      | >= 1.5            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]                        | >= 1.34           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
@@ -197,3 +198,4 @@ The `ddtrace` library includes support for the following libraries:
 [66]: https://pypi.org/project/aiomysql/
 [67]: https://pypi.org/project/aioredis/
 [68]: https://pypi.org/project/aredis/
+[69]: https://pypi.org/project/dogpile.cache/
