@@ -24,37 +24,12 @@ To **scope the data** shown in the table, specify an environment, another primar
 
 {{< img src="tracing/api_catalog/api-catalog-scope.mp4" alt="Showing how changing scope settings changes the metrics shown in the API Catalog" video="true" >}}
 
-You can [define tags](#group-apis-to-express-a-feature-or-business-logic) to use as facets so you can easily find groups of endpoints you're most interested in.
+For example, use filters and sorting to review faulty endpoints within the past week.
 
-## Investigating endpoint details
+<!-- image TKTK -->
+### Classify APIs to express a feature or business logic
 
-When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
-
-Click an endpoint in the list to open a details page that shows performance, ownership, and metadata information for the endpoint, collected from various areas of Datadog, into one place. Here you can add custom tags. You can also launch deeper investigations of the various types of telemetry using links into other areas of Datadog. 
-
-For example, you can:
-- Look up a specific endpoint by path (for example, `/checkout`) when it shows a high error rate and a high request count.
-- View the Error/Hits graph and correlated Response Code graph to identify issues.
-- Navigate to related telemetry like traces and logs.
-
-{{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph, and click through to related traces to investigate." video="true" >}}
-
-The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
-
-
-## Exploring endpoints during incidents
-
-When investigating an incident, getting a detailed resolution view of the API endpoint can lead to a faster understanding of the root cause.
-
-In addition, you can quickly identify the owning team of each endpoint, the on-call engineer, and how to reach them (email, Slack, PagerDuty) to help resolve incidents involving a specific API endpoint.
-
-The ownership information -- team, on-call information, communication details -- is derived from the service definition supplied from the Service Catalog.
-
-{{< img src="tracing/api_catalog/api-catalog-team-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint, as defined in Service Catalog" style="width:100%;" >}}
-
-## Group APIs to express a feature or business logic
-
-In addition to tagging an endpoint in its details page, you can **group endpoints by adding tags to multiple endpoints at once**. Select multiple endpoint check boxes, and click **Edit tags** to provide labels that describe business logic, importance, or other useful grouping information. Applying these labels can help you quickly view and access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards for endpoint groups with common ground and expectations.
+In addition to tagging an endpoint in its details page, you can **classify endpoints by adding tags to multiple endpoints at once**. Select multiple endpoint check boxes, and click **Edit tags** to provide labels that describe business logic, importance, or other useful grouping information. Applying these labels can help you quickly view and access groups of endpoints defined by your own criteria, and create assets such as monitors and dashboards for endpoint groups with common ground and expectations.
 
 For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. 
 
@@ -70,6 +45,35 @@ Or tag endpoints that handle sensitive data with a tag like `PII` and alert when
 When you add a tag, it appears in the list of facets on the left of the catalog. Click a facet to filter the list and add the tag to the Search query field.
 
 
+## Investigating endpoint details
+
+When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
+
+Click an endpoint in the list to open a details page that shows performance, errors and issues, deployments, monitors, ownership, dependency map, and metadata information for the endpoint, collected from various areas of Datadog, into one place. Here you can also add custom tags. You can investigate the various types of telemetry using links into other areas of Datadog. 
+
+For example, you can:
+- Look up a specific endpoint by path (for example, `/checkout`) when it shows a high error rate and a high request count.
+- View the Error/Hits graph and correlated Response Code graph to identify issues.
+- Navigate to related telemetry like traces and logs.
+
+{{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph, and click through to related traces to investigate." video="true" >}}
+
+The graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
+
+
+## Establishing ownership 
+
+The Team column of the Explorer page and each endpoint details page shows the name of the team that owns the service that the endpoint is associated with, if it has been assigned. If it hasn't been assigned, you can assign ownership by clicking the dropdown list and choosing one.
+
+You can quickly see the owning team of each endpoint, and click through to see Team details such as their team information and dashboards, the on-call engineer, and how to reach them (email, Slack, PagerDuty) to help resolve incidents involving a specific API endpoint.
+
+The ownership information -- team, on-call information, communication details -- is derived from the service definition supplied from the Service Catalog. The service owner owns all of the endpoints connected to the service.
+
+{{< img src="tracing/api_catalog/api-catalog-team-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint, as defined in Service Catalog" style="width:100%;" >}}
+
+## Assess monitoring gaps
+
+<!-- TKTK -->
 
 ## Further reading
 

@@ -49,6 +49,11 @@ Add meaningful tags and ownership information to the endpoint to make you catalo
 
 Read [Exploring and cataloging APIs][6] for more details.
 
+## Monitoring your APIs
+
+Use your full catalog to start managing your APIs and endpoints by finding and fixing under-performing endpoints, tracking their reliability against standards and objectives, watching for anomalies, investigating errors, ensuring test coverage, and closing security gaps.
+
+Read [Monitoring APIs][7] for more details.
 
 ## Further reading
 
@@ -59,3 +64,4 @@ Read [Exploring and cataloging APIs][6] for more details.
 [2]: /tracing/service_catalog/
 [3]: /tracing/api_catalog/get_started/
 [6]: /tracing/api_catalog/explore_and_catalog_apis/
+[7]: /tracing/api_catalog/monitor_apis/
