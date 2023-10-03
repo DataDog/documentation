@@ -144,7 +144,7 @@ Datadog は、特定のクラウドワークロードの手動シャットダウ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#/downtime
+[1]: https://app.datadoghq.com/monitors/downtimes
 [2]: /ja/monitors/manage/#monitor-tags
 [3]: /ja/monitors/configuration/?tab=thresholdalert#alert-grouping
 [4]: /ja/monitors/guide/scoping_downtimes

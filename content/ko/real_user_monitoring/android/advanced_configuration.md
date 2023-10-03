@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring
   tag: 설명서
   text: Datadog RUM 탐색
-kind: Documentation
+kind: documentation
 title: RUM 안드로이드 고급 설정
 ---
 ## 개요

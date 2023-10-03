@@ -34,9 +34,16 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
+    tag: "Blog"
+    text: "Build sufficient security coverage for your cloud environment"
 algolia:
   tags: ['inbox']
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
@@ -69,13 +76,13 @@ Remediating security issues can meaningfully improve your organization's securit
 
 Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
-Improve your organization's score by remediating findings, either by resolving the underlying issue or by muting the finding.
+Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
 
 {{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
 
 ## Explore and remediate issues
 
-Use the [Issues page][7] to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+Use the [Issues page][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 

@@ -4,14 +4,14 @@ further_reading:
   tag: Documentation
   text: Configure Monitors
 kind: documentation
-title: Create an Integration Recommended Monitor
+title: Create an Integration-Recommended Monitor
 description: Learn how to create a monitor for your integration.
 ---
 ## Overview
 
 [Datadog Monitors][1] track key metrics, so you can efficiently monitor your infrastructure and integrations. Datadog provides a set of out-of-the-box monitors for many features and integrations. View these monitors in your [Monitors Template list][2].
 
-Create an out-of-the-box monitor to help users find value in your Datadog integration. This guide provides steps for creating an integration recommended monitor and best practices to follow during the creation process.
+Create an out-of-the-box monitor to help users find value in your Datadog integration. This guide provides steps for creating an integration-recommended monitor and best practices to follow during the creation process.
 
 To create a Datadog integration, see [Create a New Integration][3].
 
@@ -39,7 +39,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder in the [`integrations-extras` GitHub repository][6]. 
 
-3. After it's approved, Datadog merges the PR and your integration recommended monitor is pushed to production.
+3. After it's approved, Datadog merges the PR and your integration-recommended monitor is pushed to production.
 
 ## Verify your monitor in production
 
@@ -67,7 +67,7 @@ Below is an example of a well-defined monitor:
 
 [1]: https://docs.datadoghq.com/monitors/
 [2]: https://app.datadoghq.com/monitors/recommended
-[3]: https://docs.datadoghq.com/developers/integrations/new_check_howto/?tab=configurationtemplate
+[3]: https://docs.datadoghq.com/developers/integrations/agent_integration/
 [4]: https://app.datadoghq.com/monitors/create
 [5]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
 [6]: https://github.com/DataDog/integrations-extras
