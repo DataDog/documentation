@@ -56,7 +56,7 @@ Additionally, some configuration options may be set as environment variables.
 After configuration is complete, [restart the Agent][2].
 
 
-[1]:/agent/configuration/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}

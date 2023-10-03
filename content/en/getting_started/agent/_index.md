@@ -300,7 +300,7 @@ For help troubleshooting the Agent:
 [20]: /developers/service_checks/#visualize-your-service-check-in-datadog
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [22]: /getting_started/tagging/
-[23]:/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[23]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [24]: /agent/configuration/agent-commands/#restart-the-agent
 [25]: /logs/
 [26]: /tracing/

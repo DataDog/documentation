@@ -349,7 +349,7 @@ and add the relevant settings to `customAgentConfig`.
   useConfigMap:  true
 
   # agents.customAgentConfig -- Specify custom contents for the datadog agent config (datadog.yaml)
-  ## ref: https://docs.datadoghq.com///agent/configuration/agent-configuration-files/?tab=agentv6
+  ## ref: https://docs.datadoghq.com/agent/configuration/agent-configuration-files/?tab=agentv6
   ## ref: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
