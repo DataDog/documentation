@@ -84,6 +84,7 @@ The `ddtrace` library includes support for the following data stores:
 | [MongoDB][27] [Mongoengine][28]   | >= 0.23           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mongoengine                         |
 | [MongoDB][27] [Pymongo][29]       | >= 3.12.3         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pymongo                             |
 | [MySQL][30] [MySQL-python][31]    | >= 1.2.3          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
+| [MySQL][30] [aiomysql][66]        | >= 0.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiomysql |
 | [MySQL][30] [mysql-connector][33] | >= 8.0.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
 | [Postgres][34] [aiopg][35]        | >= 0.16.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
 | [Postgres][34] [psycopg][36]      | >= 2.8            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
@@ -191,3 +192,4 @@ The `ddtrace` library includes support for the following libraries:
 [63]: https://pypi.org/project/aiohttp-jinja2/
 [64]: https://kafka.apache.org/
 [65]: https://pypi.org/project/confluent-kafka/
+[66]: https://pypi.org/project/aiomysql/
