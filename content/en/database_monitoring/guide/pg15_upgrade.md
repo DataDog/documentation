@@ -14,3 +14,12 @@ To allow the Agent to connect with SSL, add the following setting to each instan
 ```yaml
 ssl: allow
 ```
+
+Restart the agent after applying this change.
+
+The `datadog` user needs an additional permission enabled. Execute this statement on each DB host:
+
+
+```SQL
+ALTER ROLE datadog INHERIT;
+```
