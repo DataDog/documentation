@@ -22,7 +22,8 @@ Two release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
-| `<2`       | Maintenance           |
+| `<1`       | End of Life          |
+| `<2`       | Maintenance          |
 | `>=2.0,<3` | General Availability |
 
 And the library supports the following runtimes:
@@ -30,8 +31,11 @@ And the library supports the following runtimes:
 | OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
 |---------|-----------------------|---------|-----------------|--------------------------|
 | Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.12        | `<3`                     |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7-3.6         | `<2`                     |
 | MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.12        | `<3`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7-3.6         | `<2`                     |
 | Windows | 64bit, 32bit          | CPython | 3.7-3.12        | `<3`                     |
+| Windows | 64bit, 32bit          | CPython | 2.7-3.6         | `<2`                     |
 
 ## Integrations
 
