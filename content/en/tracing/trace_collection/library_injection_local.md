@@ -90,7 +90,7 @@ spec:
 
 ### Step 2 - Annotate your pods for library injection
 
-To select your pods for library injection, use the annotations provided in the following table within your pod spec.
+To select your pods for library injection, use the annotations provided in the following table within your pod spec:
 
 | Language   | Pod annotation                                                        |
 |------------|-----------------------------------------------------------------------|
@@ -112,7 +112,7 @@ The available library versions are listed in each container registry, as well as
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
-For example, to inject a Java library into a pod:
+For example, to inject a Java library:
 
 ```yaml
 apiVersion: apps/v1
