@@ -1,0 +1,18 @@
+<table>
+    <thead>
+        <tr>
+            <th>Integration name</th>
+            <th>source_type_name</th>
+            <th>Search term</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{ range $.Site.Data.api_source_attributes }}
+            <tr>
+                <td>{{ .integration_name }}</td>
+                <td>{{ .source_type_name }}</td>
+                <td>{{ .search_term }}</td>
+            </tr>
+        {{ end }}
+    </tbody>
+</table>
