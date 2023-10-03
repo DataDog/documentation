@@ -25,7 +25,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
   * **Variance in performace over time**:
   
-     _"What is the standard deviation (stddev) of my application's CPU consumption over the past 3 months?"_
+     _"What is the standard deviation (STDDEV) of my application's CPU consumption over the past 3 months?"_
 
     
   * **Percentile thresholds on metric monitors**:
