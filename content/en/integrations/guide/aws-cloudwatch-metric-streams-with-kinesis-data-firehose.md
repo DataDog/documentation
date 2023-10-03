@@ -9,11 +9,11 @@ further_reading:
   tag: "Blog"
   text: "Collect Amazon CloudWatch metrics using Metric Streams"
 ---
-{{% site-region region="us3,us5,gov" %}}
-**The AWS CloudWatch Metric Streams with Kinesis Data Firehose is not supported on this Datadog site.**
+{{% site-region region="us3,gov" %}}
+AWS CloudWatch Metric Streams with Kinesis Data Firehose is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 {{% /site-region %}}
  
-Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog's API polling approach, which provides updated metrics every 10 minutes.
+Using Amazon CloudWatch Metric Streams and Amazon Kinesis Data Firehose, you can get CloudWatch metrics into Datadog faster with a 2-3 minute latency. This is significantly faster than Datadog's default API polling approach, which provides updated metrics every 10 minutes. You can learn more about the API polling approach in the [Cloud Metric Delay documentation][1].
 
 ## Overview
 
@@ -45,7 +45,7 @@ If you later decide you don't want to stream metrics for a given AWS account and
  
 There is no additional charge from Datadog to stream metrics.
  
-AWS charges based on the number of metric updates on the CloudWatch Metric Stream and the data volume sent to the Kinesis Data Firehose. There is the potential to see an increased CloudWatch cost for the subset of metrics you are streaming, so Datadog recommends prioritizing using metric streams for the AWS services, regions, and accounts where you most need the lower latency. For more information, see [Amazon CloudWatch pricing][1].
+AWS charges based on the number of metric updates on the CloudWatch Metric Stream and the data volume sent to the Kinesis Data Firehose. There is the potential to see an increased CloudWatch cost for the subset of metrics you are streaming, so Datadog recommends prioritizing using metric streams for the AWS services, regions, and accounts where you most need the lower latency. For more information, see [Amazon CloudWatch pricing][2].
  
 EC2 or Lambda metrics in the stream could increase the number of billable hosts and Lambda invocations (if those hosts and functions aren't already monitored with the AWS integration or Datadog Agent in the case of EC2).
  
@@ -55,7 +55,7 @@ EC2 or Lambda metrics in the stream could increase the number of billable hosts 
 
 1. Read the [Metric Streaming versus API polling](#streaming-vs-polling) section carefully to understand the differences before enabling Metric Streaming. 
 
-2. If you haven't already, connect your AWS account to Datadog. For more information, see the [CloudFormation setup instructions][2].
+2. If you haven't already, connect your AWS account to Datadog. For more information, see the [CloudFormation setup instructions][3].
  
 ### Installation
  
@@ -146,15 +146,16 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 3. Delete the backup S3 bucket for failed messages linked to the Firehose.
 4. Delete the IAM roles associated with the stream and all other resources that were created while setting up the stream.
 
-Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][3] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
+Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
 ## Troubleshooting
-To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][4].
+To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
  
-[1]: https://aws.amazon.com/cloudwatch/pricing/
-[2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[1]: /integrations/guide/cloud-metric-delay/
+[2]: https://aws.amazon.com/cloudwatch/pricing/
+[3]: /integrations/amazon_web_services/?tab=roledelegation#setup
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
