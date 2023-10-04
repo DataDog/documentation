@@ -85,7 +85,7 @@ If an integration version is bumped, ensure that there is an addition to the `CH
 
 If editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is optional. 
 
-With or without a version bump, updates to assets such as dashboards and recommended monitors immediately become available to customers after the corresponding pull requests are merged and they are published. Updates to `README.md`, `manifest.json`, or any other non-code files also immediately becomes visible to customers after publishing. 
+With or without a version bump, updates to assets such as dashboards and recommended monitors automatically become available to customers after the corresponding pull requests are merged and they are published. Updates to `README.md`, `manifest.json`, or any other non-code files also immediately becomes visible to customers after publishing. 
 
 
 ## Further reading
