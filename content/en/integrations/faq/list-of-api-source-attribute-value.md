@@ -25,7 +25,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Akamai Mpulse                 | akamai mpulse                 | akamaimpulse               |
 | Alibaba Cloud                 | alibaba cloud                 | alibabacloud               |
 | Amazon Appstream              | amazon appstream              | appstream                  |
-| Amazon Appsync                | amazon appsync                | appsync                    |
+| AWS AppSync                   | amazon appsync                | appsync                    |
 | Amazon Api Gateway            | amazon api gateway            | apigateway                 |
 | Amazon Athena                 | amazon athena                 | athena                     |
 | Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
