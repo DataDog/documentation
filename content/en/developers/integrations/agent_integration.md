@@ -440,6 +440,33 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 Once you have created your Agent-based integration, see the [Create a tile][20] documentation for information on populating the remaining [required assets][31] that appear on your integration tile, and opening a pull request.
 
+## Update your integration
+You can update your integration at any time by editing the relevant files and opening a new pull request to your integration directory in the [integrations-extras][21] or [marketplace][22] repository. 
+
+If you are editing or adding new integration code, a version bump is required.
+
+If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is optional. 
+
+With or without a version bump, updates to assets such as dashboards and recommended monitors will immediately become available to customers after the corresponding pull requests are merged and they are published. Updates to `README.md`, `manifest.json`, or any other non-code files will also immediately become visible to customers after publishing. 
+
+### Bumping an integration version 
+In addition to any code changes, the following is required when bumping an integration version:
+1. Update `__about__.py` to reflect the new version number. This file can be found in your integration directory under `/datadog_checks/<your_check_name>/__about__.py`.
+2. Add an entry to the CHANGELOG.md file that adheres to the following format:
+   ```
+   ## Version Number / Date
+
+   ***Added***: 
+
+   * New feature
+   * New feature
+
+   ***Fixed***:
+
+   * Bug fix
+   * Bug fix
+   ```
+3. Update all references to the version number where mentioned in `README.md` and elsewhere. Oftentimes installation instructions in `README.md` include the version number, and this will need to be updated.
 
 ## Further reading
 
