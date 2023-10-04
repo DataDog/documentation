@@ -60,6 +60,14 @@ To refine your current view to match a Watchdog Insight, hover over the top righ
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
+### Share an outlier
+
+To share a given outlier, click on it in the insight panel to open the details page. A `Copy Link` button is then available at the top right of the side panel:
+
+{{< img src="watchdog/share_outlier.png" alt="Share an outlier" style="width:80%;">}}
+
+The link to the outlier expires with the retention of the underlying data. For instance, if the underlying logs that were used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
+
 ## Outlier types
 
 {{< tabs >}}
