@@ -8,7 +8,7 @@ kind: documentation
 title: ヒートマップ
 ---
 
-{{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="ヒートマップ機能の概要です。" style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="ヒートマップ機能の概要です。" style="width:100%;">}}
 
 ヒートマップとは、ユーザーのセッションリプレイデータを視覚化したもので、ユーザーのインタラクション (クリック) が画像内の色で表現されています。ユーザーがどこをクリックしたかを見ることで、ユーザーが期待通りにページに関与しているか、アクションへの呼び出し (CTA) や重要なボタンがすべて見つかっているかを理解することができます。これらのインタラクションをヒートマップで視覚化することで、複雑なデータを一目で理解することが可能になります。ヒートマップから得られる知見を活用することで、ユーザー体験を最適化し、リテンションを高めるための UI の意思決定を行うことができます。
 
@@ -16,18 +16,9 @@ title: ヒートマップ
 
 ヒートマップを始めるには
 
-- 最新バージョンの SDK (v4.20.0 以降) である必要があります
+- 最新バージョンの SDK (v4.40.0 以降) である必要があります
 - [セッションリプレイ][1]を有効にします。
 - SDK の初期化で `trackUserInteractions: true` を設定し、アクションの追跡を有効にします。
-- ヒートマップがベータ版の間は、SDK の [package.json][2] ファイルに以下のコードを追加して、機能フラグを有効にしてください。
-
-```json
-datadogRum.init({
-    ...
-    trackUserInteractions: true,
-    enableExperimentalFeatures: ['clickmap']
-})
-```
 
 ### はじめに
 
@@ -39,7 +30,7 @@ datadogRum.init({
 
 フィルターを調整する (特定の地域を見るなど) には、左側のパネルからフィルターを追加することができます。
 
-{{< img src="real_user_monitoring/heatmaps/application-and-view.jpeg" alt="セッションリプレイを有効にしているアプリケーションとビューを選択するためのセレクタを表示します。" style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmaps-filters.png" alt="セッションリプレイを有効にしているアプリケーションとビューを選択するためのセレクタを表示します。" style="width:100%;">}}
 
 ## インサイト
 

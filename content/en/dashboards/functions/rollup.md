@@ -5,8 +5,7 @@ aliases:
     - /graphing/functions/rollup/
 ---
 
-`.rollup()`
-The `.rollup()` function is used to aggregate your metrics data inherently in every metrics query. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
+Every metric query is inherently aggregated. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
@@ -78,7 +77,7 @@ Rollups should usually be avoided in [monitor][5] queries, because of the possib
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /dashboards/functions/#proceed-to-time-aggregation
+[1]: /dashboards/functions/#add-a-function
 [2]: /metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [4]: /metrics/custom_metrics/type_modifiers/

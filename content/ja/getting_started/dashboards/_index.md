@@ -6,9 +6,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/template-variable-associated-values/
   tag: ブログ
   text: 関連するテンプレート変数を使用してダッシュボードを調整
-- link: https://learn.datadoghq.com/enrol/index.php?id=8
-  tag: 学習
-  text: '自分のペースで学べるオンライン学習: ダッシュボードのより効果的な活用'
+- link: https://learn.datadoghq.com/courses/building-better-dashboards
+  tag: ラーニングセンター
+  text: ダッシュボードをより効果的に活用する
 - link: /dashboards/
   tag: Documentation
   text: ダッシュボードの基本
@@ -18,6 +18,9 @@ further_reading:
 - link: /monitors/
   tag: Documentation
   text: モニター、SLO、通知、ダウンタイム、インシデント
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: ダッシュボードでより良い視覚化を実現するインタラクティブなセッションに参加できます
 kind: ドキュメント
 title: ダッシュボードの概要
 ---
@@ -55,8 +58,8 @@ Datadog では、さまざまな機能やインテグレーションにすぐに
 
 ダッシュボードの最も一般的な開始方法は、既に使用されている類似ダッシュボードを見つけ、ご自分のニーズに合わせて調整する方法です。求めている情報が表示されているダッシュボードを見つけたら、次の方法で再利用しましょう。
 
-1. ダッシュボードを開き、設定メニュー（右側のギアアイコン）で **Clone dashboard** を選択してクローンを作成します。元のダッシュボードにリンクしていないコピーが作成されるため、変更を加えてもソースウィジェットには影響しません。
-    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="ダッシュボードのクローンを作成" video=true >}}
+1. ダッシュボードを開き、設定メニュー (右側のエクスポートアイコン) で **Clone dashboard** を選択してクローンを作成します。元のダッシュボードにリンクしていないコピーが作成されるため、変更を加えてもソースウィジェットには影響しません。
+  {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="ドロップダウンメニューのダッシュボード複製オプション" style="width:100%;" >}}
 2. クローンを開いて **Edit widgets** をクリックし、編集します。
 3. ウィジェットの設定メニューで **Delete** を選択し、必要のないウィジェットを削除します。
 4. ニーズに合わせて表示場所などを調整します。ウィジェットは、個別にまたはまとめてドラッグ&ドロップして、ダッシュボードの希望する位置に移動できます。
@@ -85,7 +88,7 @@ Y 軸の範囲、色、凡例を調整またはマーカーやイベントオー
 
  - **アラート値とチェックステータス**: 数字を大きな赤、黄色、緑で表示し成否を分かりやすくします。
  - **ヒートマップ**: 複数のタグにわたるメトリクスとインフラストラクチャーの複雑な関係を、直感的な濃淡グラフで表します。
-   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="ヒートマップ例"  >}}
+   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="ヒートマップ例" >}}
  - **iFrames、フォーマット済みテキスト、画像**: ダッシュボードの内容を説明したりリソースを加える際に、ウェブサイト並みの設定ができます。
  - **テーブル**: タグキーでグループ化されたメトリクスのリストを表示します。
  - **トップリスト**: たとえば、最も空き容量の少ないホスト、最も多くのエラーを発生させているサービス、最も多く 404 を返している URL などを表示します。
@@ -142,9 +145,9 @@ Y 軸の範囲、色、凡例を調整またはマーカーやイベントオー
 [9]: /ja/dashboards/template_variables/
 [10]: /ja/dashboards/
 [11]: /ja/dashboards/widgets/timeseries/
-[12]: https://learn.datadoghq.com/enrol/index.php?id=8
+[12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /ja/integrations/slack/
 [14]: /ja/api/v1/dashboards/
-[15]: /ja/mobile/
+[15]: /ja/service_management/mobile/
 [16]: https://apps.apple.com/app/datadog/id1391380318
 [17]: https://play.google.com/store/apps/details?id=com.datadog.app

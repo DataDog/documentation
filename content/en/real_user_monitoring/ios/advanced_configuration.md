@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-ios"
     tag: "Github"
-    text: "dd-sdk-ios Source Code"
+    text: "Source code for dd-sdk-ios"
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "RUM & Session Replay"
@@ -18,7 +18,7 @@ iOS RUM automatically tracks attributes such as user activity, screens, errors, 
 
 ### Custom Views
 
-In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `Global.rum`:
+In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
 
 - `.startView(viewController:)`
 - `.stopView(viewController:)`
@@ -28,40 +28,46 @@ For example:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogRUM
+
 // in your `UIViewController`:
+let rum = RUMMonitor.shared()
 
 override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    Global.rum.startView(viewController: self)
+    rum.startView(viewController: self)
 }
 
 override func viewDidDisappear(_ animated: Bool) {
   super.viewDidDisappear(animated)
-  Global.rum.stopView(viewController: self)
+  rum.stopView(viewController: self)
 }
 ```
 
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
+@import DatadogObjc;
 // in your `UIViewController`:
+
+DDRUMMonitor *rum = [DDRUMMonitor shared];
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 
-    [DDGlobal.rum startViewWithViewController:self name:nil attributes:nil];
+    [rum startViewWithViewController:self name:nil attributes:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 
-    [DDGlobal.rum stopViewWithViewController:self attributes:nil];
+    [rum stopViewWithViewController:self attributes:nil];
 }
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
 
 ### Add your own performance timing
 
@@ -73,14 +79,15 @@ For example, you can time how long it takes for your hero image to appear:
 {{% tab "Swift" %}}
 ```swift
 func onHeroImageLoaded() {
-    Global.rum.addTiming(name: "hero_image")
+    let rum = RUMMonitor.shared()
+    rum.addTiming(name: "hero_image")
 } 
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 - (void)onHeroImageLoad {
-    [DDGlobal.rum addTimingWithName:@"hero_image"];
+    [[DDRUMMonitor shared] addTimingWithName:@"hero_image"];
 }
 ```
 {{% /tab %}}
@@ -92,19 +99,23 @@ To create visualizations in your dashboards, [create a measure][4] first.
 
 ### Custom Actions
 
-In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addUserAction(type:name:)` API. 
+In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API. 
 
-To manually register instantaneous RUM actions such as `.tap` on `Global.rum`, use `.addUserAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startUserAction(type:name:)` or `.stopUserAction(type:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
 
 For example:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogRUM
+
 // in your `UIViewController`:
 
+let rum = RUMMonitor.shared()
+
 @IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
-    Global.rum.addUserAction(
+    rum.addAction(
         type: .tap,
         name: sender.currentTitle ?? "",
     )
@@ -115,7 +126,7 @@ For example:
 ```objective-c
 - (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
     NSString *name = sender.currentTitle ? sender.currentTitle : @"";
-    [DDGlobal.rum addUserActionWithType:DDRUMUserActionTypeTap name:name attributes:@{}];
+    [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
 }
 ```
 {{% /tab %}}
@@ -127,26 +138,30 @@ Find more details and available options in the [`DDRUMMonitor` class][9].
 
 ### Custom Resources
 
-In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. Use the following methods on `Global.rum` to manually collect RUM resources:
+In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
 
-- `.startResourceLoading(resourceKey:request:)`
-- `.stopResourceLoading(resourceKey:response:)`
-- `.stopResourceLoadingWithError(resourceKey:error:)`
-- `.stopResourceLoadingWithError(resourceKey:errorMessage:)`
+- `.startResource(resourceKey:request:)`
+- `.stopResource(resourceKey:response:)`
+- `.stopResourceWithError(resourceKey:error:)`
+- `.stopResourceWithError(resourceKey:message:)`
 
 For example:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogRUM
+
 // in your network client:
 
-Global.rum.startResourceLoading(
+let rum = RUMMonitor.shared()
+
+rum.startResource(
     resourceKey: "resource-key", 
     request: request
 )
 
-Global.rum.stopResourceLoading(
+rum.stopResource(
     resourceKey: "resource-key",
     response: response
 )
@@ -156,13 +171,13 @@ Global.rum.stopResourceLoading(
 ```objective-c
 // in your network client:
 
-[DDGlobal.rum startResourceLoadingWithResourceKey:@"resource-key"
-                                          request:request
-                                       attributes:@{}];
+[[DDRUMMonitor shared] startResourceWithResourceKey:@"resource-key"
+                                            request:request
+                                         attributes:@{}];
 
-[DDGlobal.rum stopResourceLoadingWithResourceKey:@"resource-key"
-                                        response:response
-                                      attributes:@{}];
+[[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
+                                          response:response
+                                        attributes:@{}];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -178,12 +193,13 @@ To track specific errors, notify `Global.rum` when an error occurs with the mess
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-Global.rum.addError(message: "error message.")
+let rum = RUMMonitor.shared()
+rum.addError(message: "error message.")
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[DDGlobal.rum addErrorWithMessage:@"error message." source:DDRUMErrorSourceCustom stack:nil attributes:@{}];
+[[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -198,11 +214,11 @@ Custom attributes allow you to filter and group information about observed user 
 
 ### Set a custom global attribute
 
-To set a custom global attribute, use `Global.rum.addAttribute(forKey:value:)`.
+To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:value:)`.
 
-* To add an attribute, use `Global.rum.addAttribute(forKey: "some key", value: "some value")`.
-* To update the value, use `Global.rum.addAttribute(forKey: "some key", value: "some other value")`.
-* To remove the key, use `Global.rum.removeAttribute(forKey: "some key")`.
+* To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some value")`.
+* To update the value, use `RUMMonitor.shared().addAttribute(forKey: "some key", value: "some other value")`.
+* To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "some key")`.
 
 ### Track user sessions
 
@@ -216,8 +232,8 @@ Adding user information to your RUM sessions makes it easy to:
 
 The following attributes are **optional**, you should provide **at least one** of them:
 
-| Attribute | Type   | Description                                                                                              |
-|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| Attribute   | Type   | Description                                                                                              |
+|-------------|--------|----------------------------------------------------------------------------------------------------------|
 | `usr.id`    | String | Unique user identifier.                                                                                  |
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
@@ -241,71 +257,54 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 
 ## Initialization Parameters
  
-You can use the following methods in `Datadog.Configuration.Builder` when creating the Datadog configuration to initialize the library:
+You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
-`set(endpoint: DatadogEndpoint)`
+`site`
 : Sets the Datadog server endpoint that data is sent to.
 
-`set(batchSize: BatchSize)`
+`batchSize`
 : Sets the preferred size of batched data uploaded to Datadog. This value impacts the size and number of requests performed by the RUM iOS SDK (small batches mean more requests, but each request becomes smaller in size). Available values include: `.small`, `.medium`, and `.large`.
 
-`set(uploadFrequency: UploadFrequency)`
+`uploadFrequency`
 : Sets the preferred frequency of uploading data to Datadog. Available values include: `.frequent`, `.average`, and `.rare`.
-
-`set(mobileVitalsFrequency: VitalsFrequency)`
-: Sets the preferred frequency of collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (disable vitals monitoring).
 
 ### RUM configuration
 
-`enableRUM(_ enabled: Bool)`
-: Enables or disables the RUM feature.
+You can use the following properties in `RUM.Configuration` when enabling RUM:
 
-`set(rumSessionsSamplingRate: Float)`
-: Sets the sampling rate for RUM sessions. The `rumSessionsSamplingRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, `100.0` means all sessions are sent to Datadog. If not configured, the default value of `100.0` is used.
+`sessionSampleRate`
+: Sets the sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, `100.0` means all sessions are sent to Datadog. If not configured, the default value of `100.0` is used.
 
-`trackUIKitRUMViews(using predicate: UIKitRUMViewsPredicate)`
-: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by calling this API with no parameter (`trackUIKitRUMViews()`) or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
+`uiKitViewsPredicate`
+: Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
 
-`trackUIKitRUMActions(using predicate: UIKitRUMUserActionsPredicate)`
-: Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by calling this API with no parameter (`trackUIKitRUMActions()`) or implement [your own `UIKitRUMUserActionsPredicate`](#automatically-track-user-actions) customized for your app.
+`uiKitActionsPredicate`
+: Enables tracking user interactions (taps) as RUM actions. You can use the default implementation of `predicate` by setting the `DefaultUIKitRUMActionsPredicate` or implement [your own `UIKitRUMActionsPredicate`](#automatically-track-user-actions) customized for your app.
 
-`trackURLSession(firstPartyHosts: Set<String>)`
-: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHosts` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled).
+`urlSessionTracking`
+: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
 
-`setRUMViewEventMapper(_ mapper: @escaping (RUMViewEvent) -> RUMViewEvent)`
+`viewEventMapper`
 : Sets the data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`setRUMResourceEventMapper(_ mapper: @escaping (RUMResourceEvent) -> RUMResourceEvent?)`
+`resourceEventMapper`
 : Sets the data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`setRUMActionEventMapper(_ mapper: @escaping (RUMActionEvent) -> RUMActionEvent?)`
+`actionEventMapper`
 : Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`setRUMErrorEventMapper(_ mapper: @escaping (RUMErrorEvent) -> RUMErrorEvent?)`
+`errorEventMapper`
 : Sets the data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`setRUMLongTaskEventMapper(_ mapper: @escaping (RUMLongTaskEvent) -> RUMLongTaskEvent?)`
+`longTaskEventMapper`
 : Sets the data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`setRUMResourceAttributesProvider(_ provider: @escaping (URLRequest, URLResponse?, Data?, Error?) -> [AttributeKey: AttributeValue]?)`
-: Sets a closure to provide custom attributes for intercepted resources. The `provider` closure is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
-
-### Logging configuration
-
-`enableLogging(_ enabled: Bool)`
-: Enables or disables the Logging feature.
-
-### Tracing configuration
-
-`enableTracing(_ enabled: Bool)`
-: Enables or disables the Tracing feature.
-
-`setSpanEventMapper(_ mapper: @escaping (SpanEvent) -> SpanEvent)`
-: Sets the data scrubbing callback for spans. This can be used to modify or drop span events before they are sent to Datadog.
+`vitalsUpdateFrequency`
+: Sets the preferred frequency of collecting mobile vitals. Available values include: `.frequent` (every 100ms), `.average` (every 500ms), `.rare` (every 1s), and `.never` (disable vitals monitoring).
 
 ### Automatically track views
 
-To automatically track views (`UIViewControllers`), use the `.trackUIKitRUMViews()` option when configuring the RUM iOS SDK. By default, views are named with the view controller's class name. To customize it, use `.trackUIKitRUMViews(using: predicate)` and provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
+To automatically track views (`UIViewControllers`), use the `uiKitViewsPredicate` option when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `predicate` which conforms to `UIKitRUMViewsPredicate` protocol:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -413,18 +412,18 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 
 ### Automatically track user actions
 
-To automatically track user tap actions, use the `.trackUIKitActions()` option when configuring the RUM iOS SDK.
+To automatically track user tap actions, set the `uiKitActionsPredicate` option when enabling RUM.
 
 ### Automatically track network requests
 
-To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `.trackURLSession()` option when configuring the RUM iOS SDK and set `DDURLSessionDelegate` for the `URLSession` that you want to monitor:
+To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and set `DatadogURLSessionDelegate` for the `URLSession` that you want to monitor:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
 let session = URLSession(
     configuration: .default,
-    delegate: DDURLSessionDelegate(),
+    delegate: DatadogURLSessionDelegate(),
     delegateQueue: nil
 )
 ```
@@ -438,25 +437,26 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
-Also, you can configure first party hosts using `.trackURLSession(firstPartyHosts:)`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
+Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-Datadog.initialize(
-    // ...
-    configuration: Datadog.Configuration
-        .builderUsing(/* ... */)
-        .trackUIKitRUMViews()
-        .trackURLSession(firstPartyHosts: ["example.com"])
-        .set(tracingSamplingRate: 20)
-        .build()
-)
 
-Global.rum = RUMMonitor.initialize()
-Global.sharedTracer = Tracer.initialize()
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
+    uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        firstPartyHostsTracing: .trace(hosts: ["example.com"], sampleRate: 20)
+    )
+  )
+)
 
 let session = URLSession(
     configuration: .default,
@@ -472,36 +472,36 @@ This tracks all requests sent with the instrumented `session`. Requests matching
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
-                                                                   clientToken:@"<client_token>"
-                                                                   environment:@"<environment_name>"];
+@import DatadogObjc;
 
-// ...
-[builder trackUIKitRUMViews];
-[builder trackURLSessionWithFirstPartyHosts:[NSSet setWithArray:@[@"example.com"]]];
-[builder setWithTracingSamplingRate:20];
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
+DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
+[urlSessionTracking setFirstPartyHostsTracing:[DDRUMFirstPartyHostsTracing alloc] initWithHosts:@[@"example.com"] sampleRate:20];
+[configuration setURLSessionTracking:urlSessionTracking];
 
-DDGlobal.rum = [[DDRUMMonitor alloc] init];
-DDGlobal.sharedTracer = [[DDTracer alloc] initWithConfiguration:[DDTracerConfiguration new]];
-
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+[DDRUM enableWith:configuration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-To add custom attributes to resources, use the `.setRUMResourceAttributesProvider(_ :)` option when configuring the RUM iOS SDK. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource. 
+To add custom attributes to resources, use the `URLSessionTracking.resourceAttributesProvider` option when enabling the RUM. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource. 
 
 For instance, you may want to add HTTP request and response headers to the RUM resource:
 
 ```swift
-.setRUMResourceAttributesProvider { request, response, data, error in
-    return [
-        "request.headers" : redactedHeaders(from: request),
-        "response.headers" : redactedHeaders(from: response)
-    ]
-}
+RUM.enable(
+  with: RUM.Configuration(
+    ...
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        resourceAttributesProvider: { request, response, data, error in
+            return [
+                "request.headers" : redactedHeaders(from: request),
+                "response.headers" : redactedHeaders(from: response)
+            ]
+        } 
+    )
+  )
+)
 ```
 
 ### Automatically track errors
@@ -511,7 +511,9 @@ All "error" and "critical" logs sent with `Logger` are automatically reported as
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-let logger = Logger.builder.build()
+import DatadogLogs
+
+let logger = Logger.create()
 
 logger.error("message")
 logger.critical("message")
@@ -519,7 +521,9 @@ logger.critical("message")
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDLogger *logger = [[DDLogger builder] build];
+@import DatadogObjc;
+
+DDLogger *logger = [DDLogger create];
 [logger error:@"message"];
 [logger critical:@"message"];
 ```
@@ -531,7 +535,9 @@ Similarly, all finished spans marked as error are reported as RUM errors:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-let span = Global.sharedTracer.startSpan(operationName: "operation")
+import DatadogTrace
+
+let span = Tracer.shared().startSpan(operationName: "operation")
 // ... capture the `error`
 span.setError(error)
 span.finish()
@@ -540,7 +546,7 @@ span.finish()
 {{% tab "Objective-C" %}}
 ```objective-c
 // ... capture the `error`
-id<OTSpan> span = [DDGlobal.sharedTracer startSpan:@"operation"];
+id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
 [span setError:error];
 [span finish];
 ```
@@ -554,75 +560,75 @@ To modify attributes of a RUM event before it is sent to Datadog or to drop an e
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-Datadog.Configuration
-    .builderUsing(...)
-    .setRUMViewEventMapper { viewEvent in 
+let configuration = RUM.Configuration(
+    applicationID: "<rum application id>",
+    viewEventMapper: { viewEvent in 
         return viewEvent
     }
-    .setRUMErrorEventMapper { errorEvent in
-        return errorEvent
-    }
-    .setRUMResourceEventMapper { resourceEvent in
+    resourceEventMapper: { resourceEvent in
         return resourceEvent
     }
-    .setRUMActionEventMapper { actionEvent in
+    actionEventMapper: { actionEvent in
         return actionEvent
     }
-    .setRUMLongTaskEventMapper { longTaskEvent in
+    errorEventMapper: { errorEvent in
+        return errorEvent
+    }
+    longTaskEventMapper: { longTaskEvent in
         return longTaskEvent
     }
-    .build()
+)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
-                                                                   clientToken:@"<client_token>"
-                                                                   environment:@"<environment_name>"];
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
 
-[builder setRUMViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull viewEvent) {
+[configuration setViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull viewEvent) {
     return viewEvent;
 }];
 
-[builder setRUMErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull errorEvent) {
+[configuration setErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull errorEvent) {
     return errorEvent;
 }];
 
-[builder setRUMResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
+[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
     return resourceEvent;
 }];
 
-[builder setRUMActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull actionEvent) {
+[configuration setActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull actionEvent) {
     return actionEvent;
 }];
 
-[builder setRUMLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull longTaskEvent) {
+[configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull longTaskEvent) {
     return longTaskEvent;
 }];
-
-[builder build];
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
 Each mapper is a Swift closure with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent. 
 
-For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted(_:) -> String` function and use it in `RUMResourceEventMapper`:
+For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted(_:) -> String` function and use it in `resourceEventMapper`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-.setRUMResourceEventMapper { resourceEvent in
-    var resourceEvent = resourceEvent
-    resourceEvent.resource.url = redacted(resourceEvent.resource.url)
-    return resourceEvent
-}
+let configuration = RUM.Configuration(
+    applicationID: "<rum application id>",
+    resourceEventMapper: { resourceEvent in
+        var resourceEvent = resourceEvent
+        resourceEvent.resource.url = redacted(resourceEvent.resource.url)
+        return resourceEvent
+    }
+)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[builder setRUMResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
-    resourceEvent.resource.url = redacted(resourceEvent.resource.url);
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
+
+[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull resourceEvent) {
     return resourceEvent;
 }];
 ```
@@ -672,28 +678,16 @@ For example, to only keep 50% of sessions use:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-Datadog.initialize(
-    // ...
-    configuration: Datadog.Configuration
-        .builderUsing(/* ... */)
-        .set(rumSessionsSamplingRate: 50.0)
-        // ...
-        .build()
+let configuration = RUM.Configuration(
+    applicationID: "<rum application id>",
+    sessionSampleRate: 50
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
-                                                                   clientToken:@"<client_token>"
-                                                                   environment:@"<environment_name>"];
-
-// ...
-[builder setWithRumSessionsSamplingRate:50];
-
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
+configuration.sessionSampleRate = 50;
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -710,36 +704,36 @@ This means that even if users open your application while offline, no data is lo
 
 If your app is running on devices behind a custom proxy, you can inform the RUM iOS SDK's data uploader to ensure that all tracked data is uploaded with the relevant configuration. 
 
-When initializing the RUM iOS SDK, specify this in your proxy configuration.
+When initializing the iOS SDK, specify this in your proxy configuration.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.initialize(
-    // ...
-    configuration: Datadog.Configuration
-        .builderUsing(/* ... */)
-        .set(proxyConfiguration: [
-            kCFNetworkProxiesHTTPEnable: true, 
-            kCFNetworkProxiesHTTPPort: 123, 
-            kCFNetworkProxiesHTTPProxy: "www.example.com", 
-            kCFProxyUsernameKey: "proxyuser", 
-            kCFProxyPasswordKey: "proxypass" 
-        ])
-        // ...
-        .build()
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    proxyConfiguration: [
+        kCFNetworkProxiesHTTPEnable: true, 
+        kCFNetworkProxiesHTTPPort: 123, 
+        kCFNetworkProxiesHTTPProxy: "www.example.com", 
+        kCFProxyUsernameKey: "proxyuser", 
+        kCFProxyPasswordKey: "proxypass" 
+    ]
+  ), 
+  trackingConsent: trackingConsent
 )
 ```
 
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<rum_application_id>"
-                                                                   clientToken:@"<client_token>"
-                                                                   environment:@"<environment_name>"];
+@import DatadogObjc;
 
-// ...
-[builder setWithProxyConfiguration:@{
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.proxyConfiguration = @{
     (NSString *)kCFNetworkProxiesHTTPEnable: @YES,
     (NSString *)kCFNetworkProxiesHTTPPort: @123,
     (NSString *)kCFNetworkProxiesHTTPProxy: @"www.example.com",
@@ -747,9 +741,8 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
     (NSString *)kCFProxyPasswordKey: @"proxypass"
 }];
 
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -768,4 +761,4 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 [6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift
+[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift

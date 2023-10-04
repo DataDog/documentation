@@ -1,10 +1,19 @@
 ---
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/python.md
+description: Datadog Agent Integration Developer Tool をインストールします。
 kind: documentation
 title: Datadog Agent Integration Developer Tool をインストールする
 ---
-このドキュメントでは、インタープリターのインストール、必要な依存関係がすべて存在することの確認など、Agent ベースのインテグレーションを開発するための Python 環境の設定方法について説明します。
+このドキュメントでは、インタープリターのインストール、必要な依存関係がすべて存在することの確認など、Agent ベースのインテグレーションを開発するための Python 環境の設定方法について説明します。または、各リリースで提供されているスタンドアロンバイナリやインストーラーを使用することもできます。
+
+## GitHub リリース
+
+各[リリース](https://github.com/DataDog/integrations-core/releases?q=ddev-&expanded=true)では、以下を提供しています。
+
+- Linux、Windows、macOS 用スタンドアロンバイナリ
+- Windows AMD64 (64-bit) MSI インストーラー
+- Windows x86 (32-bit) MSI インストーラー
+- Windows ユニバーサル (AMD64+x86) EXE インストーラー
+- macOS DMG インストーラー
 
 ## Python のインストール
 
@@ -13,7 +22,7 @@ title: Datadog Agent Integration Developer Tool をインストールする
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-[Homebrew][1] を使って Python 3.8 をインストールします。
+[Homebrew][1] を使って Python 3.9 をインストールします。
 
 1. Homebrew を更新します。
    ```
@@ -22,31 +31,31 @@ title: Datadog Agent Integration Developer Tool をインストールする
 
 1. Python をインストールします。
    ```
-   brew install python@3.8
+   brew install python@3.9
    ```
 
 1. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
 
 1. Python のバイナリが `PATH` にインストールされていることと、正しいバージョンがインストールされていることを確認します。
    ```
-   which python3.8
+   which python3.9
    ```
 
    お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
    - ARM (M1+) マシン:
      ```
-     /opt/homebrew/bin/python3.8
+     /opt/homebrew/bin/python3.9
      ```
    - Intel マシンの MacOS:
      ```
-     /usr/local/bin/python3.8
+     /usr/local/bin/python3.9
      ```
 
 [1]: https://brew.sh/
 {{< /tabs >}}
 
 {{% tab "Windows" %}}
-1. [Python 3.8 64-bit 実行形式インストーラー][1]をダウンロードし、実行します。
+1. [Python 3.9 64-bit 実行形式インストーラー][1]をダウンロードし、実行します。
 1. Python を PATH に追加するオプションを選択します。
 1. **Install Now** をクリックします。
 1. インストールが完了したら、マシンを再起動します。
@@ -54,18 +63,18 @@ title: Datadog Agent Integration Developer Tool をインストールする
    ```
    > where python
 
-   C:\Users\<USER>\AppData\Local\Programs\Python\Python38\python.exe
+   C:\Users\<USER>\AppData\Local\Programs\Python\Python39\python.exe
    ```
 
-[1]: https://www.python.org/downloads/release/python-3810/
-{{< /tabs >}}
+[1]: https://www.python.org/downloads/release/python-3917/
+{{% /tab %}}
 
 {{% tab "Linux" %}}
-Linux のインストールでは、システムの Python を変更することは避けてください。Datadog は、[pyenv][1] または [miniconda][2] を使用して Python 3.8 をインストールすることを推奨します。
+Linux のインストールでは、システムの Python を変更することは避けてください。Datadog は、[pyenv][1] または [miniconda][2] を使用して Python 3.9 をインストールすることを推奨します。
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -96,7 +105,7 @@ Linux のインストールでは、システムの Python を変更すること
      /usr/local/bin/pipx
      ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Windows" %}}
 1. pipx をインストールします。
@@ -107,10 +116,10 @@ Linux のインストールでは、システムの Python を変更すること
 1. pipx がインストールされていることを確認します。
    ```
    > where pipx
-   C:\Users\<USER>\AppData\Local\Programs\Python\Python38\Scripts\pipx.exe
+   C:\Users\<USER>\AppData\Local\Programs\Python\Python39\Scripts\pipx.exe
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Linux" %}}
 1. pipx をインストールします。
@@ -121,7 +130,7 @@ Linux のインストールでは、システムの Python を変更すること
    ```
    pipx --version
    ```
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Datadog Agent Integration Developer Tool をインストールする
@@ -147,12 +156,12 @@ Linux のインストールでは、システムの Python を変更すること
 
    - ARM (M1+) マシン:
      ```
-     pipx install ddev --python /opt/homebrew/bin/python3.8
+     pipx install --python /opt/homebrew/bin/python3.9 ddev
      ```
 
    - Intel マシンの MacOS:
      ```
-     pipx install ddev --python /usr/local/bin/python3.8
+     pipx install --python /usr/local/bin/python3.9 ddev
      ```
 
 1. インストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
@@ -165,7 +174,7 @@ Linux のインストールでは、システムの Python を変更すること
    pipx install ddev
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Linux" %}}
 1. `ddev` をインストールするには、以下を実行します。
@@ -174,5 +183,5 @@ Linux のインストールでは、システムの Python を変更すること
    ```
    pipx install ddev
    ```
-{{< /tabs >}}
+{{% /tab %}}
 {{< /tabs >}}

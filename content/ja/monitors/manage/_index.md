@@ -9,13 +9,16 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知
+- link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
+  tag: ブログ
+  text: モニターのタグ付けのベストプラクティス
 kind: documentation
 title: モニターの管理
 ---
 
 [モニターの管理][1]ページではモニターの一括検索、削除、ミュート、解決、およびモニタータグの編集が可能です。検索結果に含まれるモニターを個別に複製したり、編集することもできます。
 
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="モニターの管理ページ"  >}}
+{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="モニターの管理ページ" >}}
 
 ## 検索
 
@@ -30,7 +33,7 @@ title: モニターの管理
 | ミュート       | 選択したモニターを `1h`、`4h`、`12h`、`1d`、`1w`、または `Forever` の間[ミュート][3]にします。 |
 | ミュート解除     | 選択されたモニターがミュート状態の場合、ミュートを解除します。                                 |
 | 解決    | 選択されたモニターのアラートを[解決][4]します。                                |
-| 削除     | 選択したモニターを永久に削除します。                                        |
+| 削除     | 選択したモニターを削除します。                                                    |
 | タグを編集  | 選択したモニターのタグを編集します。                                 |
 | チームの編集 | 選択したモニターの[チーム][5]を編集します。                                  |
 
@@ -69,7 +72,7 @@ title: モニターの管理
 [3]: /ja/monitors/manage/status/#mute
 [4]: /ja/monitors/manage/status/#resolve
 [5]: /ja/account_management/teams/
-[6]: /ja/mobile/#monitors
+[6]: /ja/service_management/mobile/#monitors
 [7]: https://apps.apple.com/app/datadog/id1391380318
 [8]: https://play.google.com/store/apps/details?id=com.datadog.app
 [9]: https://app.datadoghq.com/monitors/triggered

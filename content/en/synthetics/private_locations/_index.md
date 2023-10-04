@@ -179,7 +179,7 @@ Launch your private location on:
 Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
 ```shell
-docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run --rm -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
@@ -236,7 +236,7 @@ For more information about private locations parameters for admins, see [Configu
 
 The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests.
 
-1. Run `sysctl -w net.ipv4.ping_group_range = 0 2147483647` from the host where the container runs.
+1. Run `sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` from the host where the container runs.
 2. Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is accessible to mount to the container:
 
    ```shell

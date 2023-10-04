@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         redirectToRegion()
     }
-    hideNonRegionSpecificTOC()
+    hideTOCItems()
 
     if (regionSelector) {
         const options = regionSelector.querySelectorAll('.dropdown-item');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             option.addEventListener('click', () => {
                 const region = option.dataset.value;
                 regionOnChangeHandler(region);
-                hideNonRegionSpecificTOC(true)
+                hideTOCItems(true)
             })
         })
     }
@@ -83,21 +83,30 @@ function regionOnChangeHandler(region) {
 }
 
 /**
- * Hides Hugo TOC items that are not {{% site-region %}} specific
- * @param {boolean} regionSelected - region selected via site select dropdown
+ * Hides TOC items that are not {{ site-region }} shortcode specific
+ * Hides all TOC items that are related to headers nested in {{ tabs }}
+ * @param {boolean} shouldResetTOC - region selected via site select dropdown or loading the page asynchronously
  */
-function hideNonRegionSpecificTOC(regionSelected=false) {
+function hideTOCItems(shouldResetTOC=false) {
     const allTOCItems = document.querySelectorAll('#TableOfContents li')
-    const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3')
+    const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3, .site-region-container.d-none > h2')
     const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
-
+    
+    const tabNestedHeaders = document.querySelectorAll('.code-tabs > .tab-content > .tab-pane > h3, .code-tabs > .tab-content > .tab-pane > h2')
+    const tabNestedHeaderIDs = [...tabNestedHeaders].map(el => `#${el.id}`)
+    
     allTOCItems.forEach(item => {
         const refID = item.querySelector('a')?.hash
-        if(regionSelected){
-            // display all items
+        if(shouldResetTOC){
+            // display all items if region selected or async loading
             item.classList.remove('d-none')
         }
         if(hiddenHeaderIDs.includes(refID)){
+            // since the headers are hidden, also hide the related toc item
+            item.classList.add('d-none')
+        }
+        if(tabNestedHeaderIDs.includes(refID)){
+            // hide all toc items related to headers that are nested in {{tabs}} 
             item.classList.add('d-none')
         }
     })
@@ -187,4 +196,4 @@ function redirectToRegion(region = '') {
     }
 }
 
-export { redirectToRegion, getDDSiteFromReferrer };
+export { redirectToRegion, getDDSiteFromReferrer, hideTOCItems };

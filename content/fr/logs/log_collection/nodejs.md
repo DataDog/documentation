@@ -83,7 +83,7 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({
             name: '<NOM_LOGGER>',
             filename: '<NOM_FICHIER>.log',
-      json: true,
+            json: true,
             level: 'info'
         })
     ]

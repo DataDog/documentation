@@ -207,7 +207,7 @@ Then the `merge` function collapses the data in `.Records` to the top level so t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/#observability-pipelines-worker
-[2]: /observability_pipelines/installation/
+[2]: /observability_pipelines/setup/
 [3]: /observability_pipelines/configurations/
 [4]: https://console.aws.amazon.com/sqs/home
 [5]: https://console.aws.amazon.com/s3/

@@ -13,6 +13,11 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces and profiles"
+- link: "/agent/guide/agent-fips-proxy"
+  tag: "Documentation"
+  text: "Datadog FIPS Compliance"
+algolia:
+  tags: ['agent proxy']
 ---
 
 ## Overview
@@ -24,6 +29,10 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 1. Using a web proxy, such as Squid or Microsoft Web Proxy, that is already deployed to your network
 2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
 3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
+
+## FIPS compliance
+
+For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][1]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
 
 ## Web proxy
 
@@ -134,17 +143,17 @@ proxy_user: my_user
 proxy_password: my_password
 ```
 
-Do not forget to [restart the Agent][1] for the new settings to take effect.
+Do not forget to [restart the Agent][2] for the new settings to take effect.
 
 ### Squid
 
-[Squid][2] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL license. Squid is a straightforward option if you do not already have a running web proxy in your network.
+[Squid][3] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL license. Squid is a straightforward option if you do not already have a running web proxy in your network.
 
 #### Proxy forwarding with Squid
 
 ##### Configure Squid to only send traffic to Datadog
 
-Install Squid on a host that has connectivity to both your internal Agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
+Install Squid on a host that has connectivity to both your internal Agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][3].
 
 To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows.
 
@@ -210,9 +219,9 @@ proxy:
   https: http://127.0.0.1:3128
 ```
 
-After saving these changes, [restart the Agent][1].
+After saving these changes, [restart the Agent][2].
 
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
+Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][4].
 
 **Agent v5**
 
@@ -223,22 +232,22 @@ proxy_host: 127.0.0.1
 proxy_port: 3128
 ```
 
-After saving these changes, [restart the Agent][1].
+After saving these changes, [restart the Agent][2].
 
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
+Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][4].
 
 ## HAProxy
 
-[HAProxy][4] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
+[HAProxy][5] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
 `agent ---> haproxy ---> Datadog`
 
 This is another good option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents.
 
-**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][4] for additional information.
+**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][5] for additional information.
 
 The communication between HAProxy and Datadog is always encrypted with TLS. The communication between the Agent host and the HAProxy host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if the HAproxy host and Agent host are not located on the same isolated local network.
-To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][5] for more information.
+To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][6] for more information.
 
 
 **Note**: Download the Datadog certificate with one of the following commands:
@@ -254,7 +263,7 @@ The path to the certificate is `/etc/ssl/certs/ca-certificates.crt` for Debian a
 
 #### HAProxy configuration
 
-HAProxy should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured.
+HAProxy should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured. The configuration is dependent on the Datadog service and site. To see configurations based on your [Datadog site][7], use the `DATADOG SITE` selector on the right.
 
 **Note**: It is recommended to use the `HTTPS` configuration file if the Agent and HAProxy are not part of the same isolated local network.
 
@@ -400,6 +409,14 @@ frontend network_devices_netflow_frontend
     option tcplog
     default_backend datadog-network-devices-netflow
 
+# This declares the endpoint where your Agents connects for
+# receiving Remote Configurations (for example, the value of "remote_configuration.rc_dd_url")
+frontend remote_configuration_frontend
+    bind *:3846
+    mode http
+    option tcplog
+    default_backend datadog-remote-configuration
+
 # This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -504,6 +521,14 @@ backend datadog-network-devices-netflow
     server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
+backend datadog-remote-configuration
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 ##### HTTPS
@@ -651,6 +676,14 @@ frontend network_devices_netflow_frontend
     option tcplog
     default_backend datadog-network-devices-netflow
 
+# This declares the endpoint where your Agents connects for
+# receiving Remote Configurations (for example, the value of "remote_configuration.rc_dd_url")
+frontend remote_configuration_frontend
+    bind *:3846 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+    mode http
+    option tcplog
+    default_backend datadog-remote-configuration
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -755,6 +788,15 @@ backend datadog-network-devices-netflow
     server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
+backend datadog-remote-configuration
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 config.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
 ```
 
 **Note**: You can use `verify none` instead of `verify required ca-file <PATH_TO_CERTIFICATES>` if you are unable to get the certificates on the proxy host, but be aware that HAProxy will not be able to verify Datadog's intake certificate in that case.
@@ -820,6 +862,11 @@ network_devices:
             logs_dd_url: haproxy.example.com:3845
             # Comment the line below to use encryption between the Agent and HAProxy
             logs_no_ssl: true
+
+remote_configuration:
+    rc_dd_url: haproxy.example.com:3846
+    # Comment the line below to use encryption between the Agent and HAProxy
+    no_tls: true
 ```
 
 When using encryption between the Agent and HAProxy, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
@@ -829,9 +876,9 @@ With this option set to `true`, the Agent skips the certificate validation step 
 skip_ssl_validation: true
 ```
 
-Finally [restart the Agent][1].
+Finally [restart the Agent][2].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][3].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][4].
 
 **Agent v5**
 
@@ -870,13 +917,13 @@ For the Windows Agent, edit your configuration file `datadog.conf` and add this 
 skip_ssl_validation: yes
 ```
 
-Finally [restart the Agent][1].
+Finally [restart the Agent][2].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][3].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][4].
 
 ## NGINX
 
-[NGINX][6] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
+[NGINX][8] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
@@ -896,7 +943,7 @@ The path to the certificate is `/etc/ssl/certs/ca-certificates.crt` for Debian a
 
 #### NGINX configuration
 
-NGINX should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured.
+NGINX should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured. The configuration is dependent on the Datadog service and site. To see configurations based on your [Datadog site][7], use the `DATADOG SITE` selector on the right.
 
 **Note**: It is recommended to use the `HTTPS` configuration file if the Agent and NGINX are not part of the same isolated local network.
 
@@ -998,6 +1045,12 @@ stream {
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
+    }
+    server {
+        listen 3846; #listen for Remote Configuration requests
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass config.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -1110,6 +1163,12 @@ stream {
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3846 ssl; #listen for Remote Configuration requests
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass config.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
@@ -1172,7 +1231,12 @@ network_devices:
             # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
 
+remote_configuration:
+    rc_dd_url: nginx.example.com:3846
+    # Comment the line below to use encryption between the Agent and NGINX
+    no_tls: true
 ```
+
 
 When using encryption between the Agent and NGINX, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
 With this option set to `true`, the Agent skips the certificate validation step and does not verify the identity of the proxy, but the communication is still encrypted with SSL/TLS.
@@ -1181,7 +1245,7 @@ With this option set to `true`, the Agent skips the certificate validation step 
 skip_ssl_validation: true
 ```
 
-When sending logs over TCP, see [TCP Proxy for Logs][7].
+When sending logs over TCP, see [TCP Proxy for Logs][9].
 
 ## Datadog Agent
 
@@ -1229,10 +1293,12 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/guide/agent-commands/
-[2]: http://www.squid-cache.org/
-[3]: https://app.datadoghq.com/infrastructure
-[4]: http://haproxy.1wt.eu
-[5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[6]: https://www.nginx.com
-[7]: /agent/logs/proxy
+[1]: /agent/guide/agent-fips-proxy
+[2]: /agent/guide/agent-commands/
+[3]: http://www.squid-cache.org/
+[4]: https://app.datadoghq.com/infrastructure
+[5]: http://haproxy.1wt.eu
+[6]: https://www.haproxy.com/blog/haproxy-ssl-termination/
+[7]: /getting_started/site/
+[8]: https://www.nginx.com
+[9]: /agent/logs/proxy

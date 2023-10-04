@@ -31,28 +31,24 @@ title: クラスターチェックランナー
 
 Operator を使用することで、単一のマニフェストでこれらのリソースすべてをローンチおよび管理することができます。例:
 
-```
-apiVersion: datadoghq.com/v1alpha1
+```yaml
+apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-    token: <DATADOG_CLUSTER_AGENT_TOKEN>
-  agent:
-    config:
-      tolerations:
-      - operator: Exists
-  clusterAgent:
-    config:
-      externalMetrics:
-        enabled: true
-      clusterChecksEnabled: true
-    replicas: 2
-  clusterChecksRunner:
-    enabled: true
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
+  features:
+    clusterChecks:
+      enabled: true
+      useClusterChecksRunners: true
+  override:
+    clusterAgent:
+      replicas: 2
 ```
 
 リソースをクラスターにデプロイします。
@@ -76,15 +72,17 @@ Datadog Operator についての詳細は [Datadog Operator リポジトリ][1]�
 
 チャートの関連するセクションを更新してクラスターチェック、Cluster Agent, クラスターチェックランナーを同時に有効化することができます。例:
 
-```
-[...]
+```yaml
+datadog:
   clusterChecks:
     enabled: true
-[...]
- clusterAgent:
+  #(...)
+
+clusterAgent:
   enabled: true
-[...]
- clusterChecksRunner:
+  #(...)
+
+clusterChecksRunner:
   enabled: true
   replicas: 2
 ```

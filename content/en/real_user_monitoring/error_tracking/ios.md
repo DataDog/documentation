@@ -7,7 +7,7 @@ description: Set up Error Tracking for your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios Source code
+  text: Source code for dd-sdk-ios
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
   text: Introducing iOS Crash Reporting and Error Tracking
@@ -34,51 +34,66 @@ If you have not set up the iOS SDK yet, follow the [in-app setup instructions][1
 
 ### Add Crash Reporting 
 
-Add the package according to your dependency manager and update your initialize snippet.  
+To enable Crash Reporting, make sure to also enable [RUM][2] and, or [Logs][9]. Then, add the package according to your dependency manager and update your initialize snippet.  
 
 {{< tabs >}}
 {{% tab "CocoaPods" %}}
-Add `DatadogSDKCrashReporting` to your `Podfile`:
-```ruby
-platform :ios, '11.0'
-use_frameworks!
 
-target 'App' do
-  pod 'DatadogSDKCrashReporting'
-end
+You can use [CocoaPods][4] to install `dd-sdk-ios`:
 ```
-{{% /tab %}}
-{{% tab "Swift Package Manager" %}}
-Add the package at `https://github.com/DataDog/dd-sdk-ios` and link `DatadogCrashReporting` to your application target.
+pod 'DatadogCrashReporting'
+```
 
-**Note:** If you link to `Datadog` or the `DatadogStatic` library, link instead to `DatadogCrashReporting`.
+[4]: https://cocoapods.org/
+
+{{% /tab %}}
+{{% tab "Swift Package Manager (SPM)" %}}
+
+To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
+```swift
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+```
+
+In your project, link the following libraries:
+```
+DatadogCrashReporting
+```
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
-Add `github "DataDog/dd-sdk-ios"` to your `Cartfile` and link `DatadogCrashReporting.xcframework` to your application target.
+
+You can use [Carthage][5] to install `dd-sdk-ios`:
+```
+github "DataDog/dd-sdk-ios"
+```
+
+In Xcode, link the following frameworks:
+```
+DatadogCrashReporting.xcframework
+CrashReporter.xcframework
+```
+
+[5]: https://github.com/Carthage/Carthage
+
 {{% /tab %}}
 {{< /tabs >}}
 
 Update your initialization snippet to include Crash Reporting:
 
-```
+```swift
+import DatadogCore
 import DatadogCrashReporting
 
 Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: .granted,
-    configuration: Datadog.Configuration
-    .builderUsing(
-        rumApplicationID: "<rum_application_id>",
-        clientToken: "<client_token>",
-        environment: "<environment_name>"
-    )
-    .trackUIKitActions()
-    .trackUIKitRUMViews()
-    .enableCrashReporting(using: DDCrashReportingPlugin())
-    .build()
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    service: "<service name>"
+  ), 
+  trackingConsent: trackingConsent
 )
-Global.rum = RUMMonitor.initialize()
+
+CrashReporting.enable()
 ```
 
 ## Symbolicate crash reports
@@ -89,18 +104,20 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 Every iOS application produces .dSYM files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of .dSYM files. 
 
-Depending on your setup, you may need to download .dSYM files from App Store Connect or find them on your local machine. 
+Depending on your setup, you may need to download `.dSYM` files from App Store Connect or find them on your local machine. 
 
-| Bitcode Enabled | Description                                                                                                                                                                                                                                                                                       |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Yes             | dSYM files are available once [App Store Connect][6] completes processing your application's build.                                                                                                                                                                                                    |
-| No              | Xcode exports .dSYM files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
+| Bitcode Enabled | Description |
+|---|---|
+| Yes | `.dSYM` files are available after [App Store Connect][6] completes processing your application's build. |
+| No | Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration. |
 
 ### Upload your dSYM file
 
 By uploading your .dSYM file to Datadog, you gain access to the file path and line number of each frame in an error's related stack trace.
 
-Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog. 
+Once your application crashes and you restart the application, the iOS SDK uploads a crash report to Datadog.
+
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
 #### Datadog CI
 
@@ -201,3 +218,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [6]: https://appstoreconnect.apple.com/
 [7]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/dsyms/README.md
 [8]: https://app.datadoghq.com/rum/error-tracking
+[9]: https://docs.datadoghq.com/logs/log_collection/ios

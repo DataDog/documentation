@@ -33,7 +33,7 @@ If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to you
 ```php
 <?php
 class Server {
-    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"]))]
+    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
     static function process($arg) {}
 
     #[DDTrace\Trace]
@@ -643,7 +643,9 @@ To manually remove an exception from a span, use `unset`, for example: `unset($s
 
 ### Tracing internal functions and methods
 
-An optimization was added starting in **0.46.0** to ignore all internal functions and methods for instrumentation. Internal functions and methods can still be instrumented by setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable. This takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively.
+As of version 0.76.0, all internal functions can unconditionally be traced.
+
+On older versions, tracing internal functions and methods requires setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable, which takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively. The `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable is obsolete as of version 0.76.0.
 
 ### Running the tracing closure before the instrumented call
 

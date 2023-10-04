@@ -1,7 +1,7 @@
 ---
 title: Test Coverage
 kind: documentation
-description: The Test Coverage page recommends views and actions that need new Synthetic browser tests for fuller test coverage, and compares Synthetic steps to real user behavior.
+description: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data.
 aliases:
   - /synthetics/dashboards/testing_coverage
 further_reading:
@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-The [**Test Coverage** page][1] uses browser data collected from [RUM][2] and [Synthetic browser test results][3] to provide insights about the overall testing coverage of your RUM applications. 
+The [**Test Coverage** page][1] provides actionable insight into the overall testing coverage of your [RUM applications][9]. It uses [data collected from the Browser RUM SDK][2] and [results from Synthetic browser tests][3].
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
-You can build a more comprehensive, accurate testing suite by considering the following information presented on the page:
+The Test Coverage page presents the following information:
 
 - The top visited web pages
 - The percentage of tested RUM actions
@@ -35,7 +35,9 @@ You can build a more comprehensive, accurate testing suite by considering the fo
 
 ## Investigate test coverage for an application or view
 
-To get started with understanding the completeness of your test coverage:
+Build a more comprehensive, accurate testing suite by identifying untested actions and linking them with real user interactions on the Test Coverage page. 
+
+To identify areas in your application or views where you should create browser tests:
 
 1. Select a RUM application from the **Application** dropdown menu or a view from the **View Name** dropdown menu. 
 2. Click **Custom** to filter the data on [custom actions][4], which are unique and offer more accurate coverage results compared to generated actions. If you want to include generated actions in the test coverage analysis, select **All Actions**.
@@ -87,3 +89,4 @@ Add the most popular sections of your application to a new or existing browser t
 [6]: /continuous_testing/
 [7]: /real_user_monitoring/session_replay/
 [8]: https://app.datadoghq.com/rum/explorer/
+[9]: https://app.datadoghq.com/rum/list

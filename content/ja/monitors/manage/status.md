@@ -20,7 +20,7 @@ title: モニターステータス
 
 [モニターの作成][1]後、モニターのステータスページを使用して、経時的なステータスを表示します。
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="モニターステータスページ"  >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="モニターステータスページ" >}}
 
 ## ヘッダー
 
@@ -86,11 +86,15 @@ title: モニターステータス
 * モニターのタイムフレームがメトリクスに対して短すぎるため、データの供給頻度が低くなっています。
 * 以前にクエリに含まれていたホストの名前が変更されました。ホスト名の変更は、2 時間以内に UI から期限切れになります。
 
+ステータスグラフには、モニタークエリのディメンションではなく、アラート用に構成したディメンションが表示されます。例: モニタークエリは `service` と `host` でグループ化されているが、`service` のアラートのみを受信したい。ステータスグラフは、モニターのステータスを `service` でグループ化して表示します。`host` サブグループは、**View all** をクリックすると、各サブグループのステータスグラフを表示するパネルが表示されます。アラートのグループ化の詳細については、[モニターの構成][13]を参照してください。
+
+{{< img src="monitors/monitor_status/monitor_status_group_subgroup.png" alt="モニターステータスをサービス別にグループ化し、サブグループを表示するオプションをハイライトしています" style="width:100%;" >}}
+
 #### ノートブックのモニターを調査する
 
 メトリクスの進化をさらに詳しく調べるには、ステータスグラフの横にある **Open in a notebook** をクリックします。これにより、モニタークエリのフォーマットされたグラフを含む調査用[ノートブック][8]が生成されます。
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Open in notebook ボタン" style="width:90%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Open in notebook ボタン" style="width:90%;">}}
 
 ノートブックはモニターの評価期間と一致し、関連する場合は関連するログを含んでいます。
 
@@ -147,3 +151,4 @@ Datadog は、作成したモニターへの変更に対する通知オプショ
 [10]: https://app.datadoghq.com/event/explorer
 [11]: /ja/events/
 [12]: https://app.datadoghq.com/monitors#create/import
+[13]: /ja/monitors/configuration/?tab=thresholdalert#notification-aggregation

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-box
 app_uuid: 3de78642-7136-41a8-9df9-48d65ed46251
 assets:
@@ -107,7 +109,7 @@ rapdev.box.users.count
 rapdev.box.users.storage.max
 rapdev.box.users.storage.used
 ```
-### ログ管理
+### ログ
 このインテグレーションは、`admin_logs_streaming` エンドポイントを使用して Box 管理者ログを収集します。
 以下のトリガーは、ログとして Datadog に送信されます。
  + [ユーザーソースオブジェクト](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)

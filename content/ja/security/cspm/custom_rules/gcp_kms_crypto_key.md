@@ -65,9 +65,9 @@ disable_edit: true
       - `RSA_DECRYPT_OAEP_2048_SHA1` - RSAES-OAEP 2048 ビットキーと SHA1 ダイジェスト。<br>
       - `RSA_DECRYPT_OAEP_3072_SHA1` - RSAES-OAEP 3072 ビットキーと SHA1 ダイジェスト。<br>
       - `RSA_DECRYPT_OAEP_4096_SHA1` - RSAES-OAEP 4096 ビットキーと SHA1 ダイジェスト。<br>
-      - `EC_SIGN_P256_SHA256` - NIST P-256 カーブ上の ECDSA と SHA256 ダイジェスト。<br>
-      - `EC_SIGN_P384_SHA384` - NIST P-384 カーブ上の ECDSA と SHA384 ダイジェスト。<br>
-      - `EC_SIGN_SECP256K1_SHA256` - NIST 以外の secp256k1 カーブ上の ECDSA。この曲線は、HSM 保護レベルでのみサポートされています。<br>
+      - `EC_SIGN_P256_SHA256` - NIST P-256 曲線上の ECDSA と SHA256 ダイジェスト。他のハッシュ関数も使用可能です: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms<br>
+      - `EC_SIGN_P384_SHA384` - NIST P-384 曲線上の ECDSA と SHA384 ダイジェスト。他のハッシュ関数も使用可能です: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms<br>
+      - `EC_SIGN_SECP256K1_SHA256` - 非 NIST の secp256k1 曲線上の ECDSA。この曲線は、HSM 保護レベルでのみサポートされています。他のハッシュ関数も使用可能です: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms<br>
       - `HMAC_SHA256` - 256 ビットキーによる HMAC-SHA256 署名。<br>
       - `HMAC_SHA1` - 160 ビットキーによる HMAC-SHA1 署名。<br>
       - `HMAC_SHA384` - 384 ビットキーによる HMAC-SHA384 署名。<br>
@@ -114,6 +114,10 @@ disable_edit: true
     **タイプ**: `TIMESTAMP`<br>
     **プロバイダー名**: `destroyTime`<br>
     **説明**: 出力のみ。この CryptoKeyVersion のキー素材が破棄される予定の時間。状態が DESTROY_SCHEDULED である場合のみ存在します。<br>
+   - `external_destruction_failure_reason`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `externalDestructionFailureReason`<br>
+    **説明**: 出力のみ。直近の外部破壊失敗の根本原因。状態が EXTERNAL_DESTRUCTION_FAILED である場合のみ表示されます。<br>
    - `external_protection_level_options`<br>
     **タイプ**: `STRUCT`<br>
     **プロバイダー名**: `externalProtectionLevelOptions`<br>
@@ -130,6 +134,10 @@ disable_edit: true
     **タイプ**: `TIMESTAMP`<br>
     **プロバイダー名**: `generateTime`<br>
     **説明**: 出力のみ。この CryptoKeyVersion のキー素材が生成された時間。<br>
+   - `generation_failure_reason`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `generationFailureReason`<br>
+    **説明**: 出力のみ。直近の生成失敗の根本原因。状態が GENERATION_FAILED である場合のみ表示されます。<br>
    - `import_failure_reason`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `importFailureReason`<br>
@@ -162,7 +170,7 @@ disable_edit: true
     **説明**: 出力のみ。ImportCryptoKeyVersionRequest.crypto_key_version でターゲットとして指定された、このキーバージョンが再インポート可能であるかどうか。<br>
    - `state`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `state`<br>
+    **プロバイダー名**: `state`<br>
     **説明**: The current state of the CryptoKeyVersion. <br>
     **可能な値**:<br>
       - `CRYPTO_KEY_VERSION_STATE_UNSPECIFIED` - 指定なし。<br>
@@ -173,6 +181,9 @@ disable_edit: true
       - `DESTROY_SCHEDULED` - このバージョンは破棄される予定で、まもなく破棄されます。RestoreCryptoKeyVersion をコールして、DISABLED 状態に戻してください。<br>
       - `PENDING_IMPORT` - このバージョンはまだインポート中です。まだ使用、有効化、無効化、破棄することはできません。Cloud KMS は、バージョンの準備ができ次第、このバージョンを自動的に ENABLED にします。<br>
       - `IMPORT_FAILED` - このバージョンは正常にインポートされませんでした。使用、有効化、無効化、または破棄することはできません。送信されたキー素材は破棄されました。その他の詳細は CryptoKeyVersion.import_failure_reason に記載されています。<br>
+      - `GENERATION_FAILED` - このバージョンは正常に生成されませんでした。使用、有効化、無効化、または破棄することはできません。その他の詳細は CryptoKeyVersion.generation_failure_reason に記載されています。<br>
+      - `PENDING_EXTERNAL_DESTRUCTION` - このバージョンは破壊されたので、再び使用したり有効にしたりすることはできません。Cloud KMS は、外部キーマネージャーに存在する対応するキー素材が破壊されるのを待ちます。<br>
+      - `EXTERNAL_DESTRUCTION_FAILED` - このバージョンは破壊されたので、再び使用したり有効にしたりすることはできません。しかし、Cloud KMS は、外部キーマネージャーに存在する対応するキー素材が破壊されたことを確認できませんでした。その他の詳細は、CryptoKeyVersion.external_destruction_failure_reason に記載されています。<br>
 ## `project_id`
 **タイプ**: `STRING`<br>
 ## `project_number`
@@ -224,9 +235,9 @@ disable_edit: true
       - `RSA_DECRYPT_OAEP_2048_SHA1` - RSAES-OAEP 2048 ビットキーと SHA1 ダイジェスト。<br>
       - `RSA_DECRYPT_OAEP_3072_SHA1` - RSAES-OAEP 3072 ビットキーと SHA1 ダイジェスト。<br>
       - `RSA_DECRYPT_OAEP_4096_SHA1` - RSAES-OAEP 4096 ビットキーと SHA1 ダイジェスト。<br>
-      - `EC_SIGN_P256_SHA256` - NIST P-256 カーブ上の ECDSA と SHA256 ダイジェスト。<br>
-      - `EC_SIGN_P384_SHA384` - NIST P-384 カーブ上の ECDSA と SHA384 ダイジェスト。<br>
-      - `EC_SIGN_SECP256K1_SHA256` - NIST 以外の secp256k1 カーブ上の ECDSA。この曲線は、HSM 保護レベルでのみサポートされています。<br>
+      - `EC_SIGN_P256_SHA256` - NIST P-256 カーブ上の ECDSA と SHA256 ダイジェスト。他のハッシュ関数も使用可能です: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms<br>
+      - `EC_SIGN_P384_SHA384` - NIST P-384 カーブ上の ECDSA と SHA384 ダイジェスト。他のハッシュ関数も使用可能です: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms<br>
+      - `EC_SIGN_SECP256K1_SHA256` - 非 NIST の secp256k1 曲線上の ECDSA。この曲線は、HSM 保護レベルでのみサポートされています。他のハッシュ関数も使用可能です: https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms<br>
       - `HMAC_SHA256` - 256 ビットキーによる HMAC-SHA256 署名。<br>
       - `HMAC_SHA1` - 160 ビットキーによる HMAC-SHA1 署名。<br>
       - `HMAC_SHA384` - 384 ビットキーによる HMAC-SHA384 署名。<br>

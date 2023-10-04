@@ -1,4 +1,8 @@
 {
+  "apm-retention-filters": {
+    "name": "APM 保持フィルター",
+    "description": "組織の [APM 保持フィルター](https://app.datadoghq.com/apm/traces/retention-filters)の構成を管理します。このエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。"
+  },
   "audit": {
     "name": "監査",
     "description": "HTTP 経由で監査ログイベントを検索します。"
@@ -9,7 +13,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility パイプライン",
-    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計します。"
+    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計し、Datadog サイトに送信します。"
   },
   "ci-visibility-tests": {
     "name": "CI Visibility テスト",
@@ -31,6 +35,10 @@
     "name": "ダッシュボードリスト",
     "description": "API を介してすべてのダッシュボードを整理、検索、およびチームや組織と共有できます。"
   },
+  "downtimes": {
+    "name": "ダウンタイム",
+    "description": "**注**: Downtime V2 は現在非公開ベータ版です。アクセスをリクエストするには、[Datadog サポート](https://docs.datadoghq.com/help/)までご連絡ください。\n\n[ダウンタイム設定](https://docs.datadoghq.com/monitors/notify/downtimes)を使用すると、アラートからいくつかのスコープをグローバルに除外することができ、モニター通知をより詳細に制御できます。ダウンタイム設定は、開始時間と終了時間を指定してスケジューリングされ、指定された Datadog タグに関連するすべてのアラートの発生を抑止します。"
+  },
   "events": {
     "name": "イベント",
     "description": "イベントサービスを使用すると、プログラムでイベントをイベントストリームにポストしたり、イベントストリームから取得することができます。イベントは 4000 文字に制限されています。4000 文字を超えるメッセージを含むイベントが送信された場合は、最初の 4000 文字だけが表示されます。"
@@ -38,6 +46,10 @@
   "fastly-integration": {
     "name": "Fastly インテグレーション",
     "description": "Datadog API を通じて、Datadog Fastly インテグレーションを直接構成します。"
+  },
+  "gcp-integration": {
+    "name": "GCP インテグレーション",
+    "description": "Datadog-Google Cloud Platform (GCP) インテグレーションの構成は、Datadog API から直接行います。[Datadog-Google Cloud Platform インテグレーションについては、こちらを参照してください](https://docs.datadoghq.com/integrations/google_cloud_platform)。"
   },
   "ip-allowlist": {
     "name": "IP 許可リスト",
@@ -49,7 +61,7 @@
   },
   "incident-teams": {
     "name": "インシデントサービス",
-    "description": "インシデントに関連付けられるチームを作成、更新、削除、取得します。"
+    "description": "Incident Teams エンドポイントは非推奨です。インシデントに関連付けることができるチームの作成、更新、削除、および取得を行うには、[Teams API エンドポイント](https://docs.datadoghq.com/api/latest/teams/)を参照してください。"
   },
   "incidents": {
     "name": "インシデント",
@@ -101,7 +113,7 @@
   },
   "restriction-policies": {
     "name": "制限ポリシー",
-    "description": "制限ポリシーは、リソースのアクセス制御ルールを定義し、一連の関係 (編集者と閲覧者など) を、許可されたプリンシパル (ロールなど) のセットにマッピングします。制限ポリシーは、リソースに対して誰がどのようなアクションを実行することが認可されるかを決定します。"
+    "description": "制限ポリシーは、リソースのアクセス制御ルールを定義し、一連の関係 (編集者と閲覧者など) を、許可されたプリンシパル (ロール、チーム (ベータ版)、ユーザー (ベータ版) など) のセットにマッピングします。制限ポリシーは、リソースに対して誰がどのようなアクションを実行することが認可されるかを決定します。"
   },
   "roles": {
     "name": "ロール",
@@ -123,9 +135,21 @@
     "name": "サービス定義",
     "description": "サービス定義の作成、更新、取得、削除を行うための API。"
   },
+  "spans": {
+    "name": "スパン",
+    "description": "Datadog プラットフォームから HTTP 経由でスパンを検索し、集計します。"
+  },
+  "spans-metrics": {
+    "name": "スパンメトリクス",
+    "description": "組織の[スパンベースメトリクス](https://app.datadoghq.com/apm/traces/generate-metrics)の構成を管理します。"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics は、シミュレートされたユーザーリクエストとブラウザレンダリングを使用して、アップタイムを確保し、地域の問題を特定し、アプリケーションのパフォーマンスを追跡します。Datadog Synthetics テストには、[API テスト](https://docs.datadoghq.com/synthetics/api_tests/)と[ブラウザテスト](https://docs.datadoghq.com/synthetics/browser_tests)の 2 つの異なる種類があります。Datadog の API を使用して、両方のテストタイプをプログラムで管理できます。\n\nSynthetics の詳細については、[Synthetics の概要](https://docs.datadoghq.com/synthetics/)を参照してください。"
+  },
+  "teams": {
+    "name": "チーム",
+    "description": "Datadog 内のチームを表示・管理します。"
   },
   "usage-metering": {
     "name": "使用料のメータリング",

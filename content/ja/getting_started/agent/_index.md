@@ -3,6 +3,9 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: ドキュメント
   text: 基本的な Agent の利用方法
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
@@ -57,7 +60,7 @@ Agent メトリクスの全リストは、[Agent メトリクス][3]のインテ
 | メモリ      | [System][4]  | すべて                |
 | ネットワーク     | [Network][6] | すべて                |
 | NTP         | [NTP][7]     | すべて                |
-| アップタイム      | [System][4]  | すべて                |
+| アップタイム      | [System][4]  | All                |
 | ファイル処理 | [System][4]  | Mac 以外のすべて     |
 | ロード        | [System][4]  | Windows 以外のすべて |
 | Docker      | [Docker][8]  | Docker             |
@@ -79,7 +82,7 @@ Agent メトリクスの全リストは、[Agent メトリクス][3]のインテ
 
 ## なぜ Agent をインストールする必要があるのですか？
 
-Agent ベースのインテグレーションからデータを送信するには、Agent をインストールする必要があります。例えば、Datadog API を通じてログやメトリクスを送信することができます。しかし、Agent は Datadog プラットフォームにデータを転送するために推奨される方法です。
+Agent ベースのインテグレーションからデータを送信するには、Agent をインストールする必要があります。Agent は必ずしも Datadog プラットフォームにデータを転送することを求められておらず、例えば、ログやメトリクスの送信は Datadog API を通じて行うことができます。しかし、Agent は Datadog プラットフォームにデータを転送する方法として推奨されています。
 
 Agent は 15 秒ごとにホストデータを収集し、環境全体で何が起こっているかを正確に把握することができます。[チェック][14]のセクションで述べたように、Agent は 50 以上のデフォルトメトリクスを収集するいくつかのチェックを有効にし、システムレベルのデータについてより深い洞察を提供します。
 
@@ -93,9 +96,9 @@ Agent は 15 秒ごとにホストデータを収集し、環境全体で何が�
 
 3. Datadog の UI を開いておきます。
 
-**注**: このチュートリアルでは、Ubuntu オペレーティングシステムを使用しています。サポートされているプラットフォームの全リストは、[基本的なエージェントの利用方法][17]ページを参照してください。
+**注**: このチュートリアルでは、Ubuntu オペレーティングシステムを使用しています。サポートされているプラットフォームの全リストは、[基本的な Agent の利用方法][17]ページを参照してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog UI で、**Integrations &gt; Agent** に移動し、Ubuntu を選択して、Ubuntu 用の Agent インストールページに移動します。Datadog Agent をホストにインストールするには、そのページにある 1 行のインストールコマンド (以下に示す例) を使用し、[Datadog API キー][16]で更新します。
 
@@ -118,7 +121,7 @@ sudo datadog-agent status
 ```
 インストールに成功すると、次のような Agent 情報で始まる Agent Status レポートが返されます。
 
-```shell
+```text
 ===============
 Agent (v7.36.1)
 ===============
@@ -183,7 +186,7 @@ Agent のコンフィギュレーションファイルを調整することで�
 2. `datadog.yaml` ファイルで、`tags` パラメーターを探します。ホストレベルのタグを `datadog.yaml` 構成で設定すると、このホストから転送される全てのメトリクス、トレース、ログにタグを適用することができます。
 
    ```yaml
-   ## @param tags  - list of key:value elements - optional  
+   ## @param tags  - list of key:value elements - optional
    ## @env DD_TAGS - space separated list of strings - optional
    ## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
    ##
@@ -198,9 +201,9 @@ Agent のコンフィギュレーションファイルを調整することで�
    #   - <TAG_KEY>:<TAG_VALUE>
    ```
 
-3. tags パラメーターのコメントを解除し、提供された例の `team:infra` タグを追加します。また、例えば `test:agent_walkthrough` のように、独自のタグを追加することもできます。
+3. tags パラメーターと、例として提供されている `team:infra` タグのコメントを解除します。また、例えば `test:agent_walkthrough` のように、独自のタグを追加することもできます。
    ```yaml
-   ## @param tags  - list of key:value elements - optional  
+   ## @param tags  - list of key:value elements - optional
    ## @env DD_TAGS - space separated list of strings - optional
    ## List of host tags. Attached in-app to every metric, event, log, trace, and service check emitted by this Agent.
    ##

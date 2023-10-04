@@ -171,8 +171,7 @@ String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
 String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+String spanIdHexString = Span.current().getSpanContext().getSpanId();
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 
@@ -258,7 +257,7 @@ func convertTraceID(id string) string {
 
 {{% tab ".NET" %}}
 
-To manually correlate traces with logs, convert the OpenTelemetry `TraceId` and `SpanId` into the format used by Datadog. Add those IDs to your logs under the `dd.trace_id` and `dd.span_id` attributes. The following example uses the [Serilog library][1], and shows how to convert the OTel (`System.DiagnosticSource.Activity`) trace and span IDs into Datadog's required format:
+To manually correlate traces with logs, convert the OpenTelemetry `TraceId` and `SpanId` into the format used by Datadog. Add those IDs to your logs under the `dd.trace_id` and `dd.span_id` attributes. The following example uses the [Serilog library][1], and shows how to convert the OpenTelemetry (`System.DiagnosticSource.Activity`) trace and span IDs into Datadog's required format:
 
 ```csharp
 var stringTraceId = Activity.Current.TraceId.ToString();

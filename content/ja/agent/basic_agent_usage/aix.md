@@ -1,7 +1,13 @@
 ---
 further_reading:
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: ドキュメント
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: ドキュメント
+  text: インバウンドポートの構成
 - link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
-  tag: ブログ
+  tag: GitHub
   text: Datadog Unix Agent を使用した AIX の監視
 kind: documentation
 title: AIX 用 Agent の基本的な使用方法
@@ -36,7 +42,7 @@ Datadog の [Agent ダウンロードページ][1]に、ワンステップの ks
 
 インストーラは次のように実行できます (ルートとして実行)。
 
-{{< code-block lang="bash" wrap="true" >}}
+{{< code-block lang="shell" wrap="true" >}}
 installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
@@ -57,7 +63,7 @@ Agent のインストールログは、`dd-aix-install.log` ファイルに記�
 | フレアの送信                      | `datadog-agent flare`       |
 | コマンドの使用方法の表示           | `datadog-agent --help`      |
 
-## 構成
+## コンフィギュレーション
 
 Agent のコンフィギュレーションファイルおよびフォルダーは `/etc/datadog-agent/datadog.yaml` にあります
 
@@ -119,7 +125,7 @@ dogstatsd:                        # DogStatsD 構成オプション
 
 インストールされている Agent を削除するには、次の `installp` コマンドを実行します。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 

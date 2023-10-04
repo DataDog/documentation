@@ -4,34 +4,34 @@ categories:
 - aws
 - ログの収集
 dependencies: []
-description: Amazon Step Functions のキーメトリクスを追跡
+description: AWS Step Functions のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_step_functions/
 draft: false
 git_integration_title: amazon_step_functions
 has_logo: true
 integration_id: amazon-step-functions
-integration_title: Amazon Step Functions
+integration_title: AWS Step Functions
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_step_functions
-public_title: Datadog-Amazon Step Functions インテグレーション
-short_description: Amazon Step Functions のキーメトリクスを追跡
+public_title: Datadog-AWS Step Functions インテグレーション
+short_description: AWS Step Functions のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Step Functions (States) では、ビジュアルなワークフローを使用して、分散アプリケーションおよびマイクロサービスのコンポーネントを調整できます。
+AWS Step Functions では、ビジュアルなワークフローを使用して、分散アプリケーションおよびマイクロサービスのコンポーネントを調整できます。
 
 このインテグレーションを有効にすると、Datadog にすべての Step Functions メトリクスを表示できます。
 
-<div class="alert alert-warning">Datadog のネイティブ AWS Step Function モニタリングは、非公開ベータ版で利用可能です。この機能を試してみたい方は、カスタマーサクセスマネージャーに連絡するか、<a href="https://docs.google.com/forms/d/e/1FAIpQLScoePnzEw9nLhFpCsJTbWlXcShKBgTLNegTcIA4dEm_IbGAjA/viewform">フォーム</a>からリクエストしてください。</div>
+<div class="alert alert-warning">Datadog のネイティブ AWS Step Function モニタリングは、公開ベータ版で利用可能です。強化されたメトリクスとトレースで Step Function をインスツルメンテーションするには、<a href="https://docs.datadoghq.com/serverless/step_functions">サーバーレスのドキュメント<a>をご覧ください。</div>
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。次に、AWS/Datadog ロールのポリシードキュメントに以下のアクセス許可を追加します。
 
@@ -43,7 +43,7 @@ states:DescribeStateMachine
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]の `Metric Collection` タブで、`States` を有効にします。ステートマシンが AWS Lambda を使用している場合は、`Lambda` がチェックされていることも確認してください。
-2. [Datadog - Amazon Step Functions インテグレーション][3]をインストールします。
+2. [Datadog - AWS Step Functions インテグレーション][3]をインストールします。
 
 #### AWS Lambda メトリクスの増強
 
@@ -51,7 +51,7 @@ Step Functions ステートが Lambda 関数である場合、このインテグ
 
 ### ログの収集
 
-1. Amazon Step Functions を [CloudWatch にログを送信する][6]ように構成します。**注**: Datadog がログのソースを識別し、自動的にパースするために、CloudWatch のロググループのデフォルトのプレフィックス `/aws/vendedlogs/states` を使用します。
+1. AWS Step Functions を [CloudWatch にログを送信する][6]ように構成します。**注**: Datadog がログのソースを識別し、自動的にパースするために、CloudWatch のロググループのデフォルトのプレフィックス `/aws/vendedlogs/states` を使用します。
 2. [Datadog にログを送信します][7]。
 
 ### トレースの収集
@@ -75,11 +75,11 @@ AWS Step Functions の分散型トレーシングを有効にするには
 
 ### イベント
 
-Amazon Step Functions インテグレーションには、イベントは含まれません。
+AWS Step Functions インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon Step Functions インテグレーションには、サービスのチェック機能は含まれません。
+AWS Step Functions インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

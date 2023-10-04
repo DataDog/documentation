@@ -1,19 +1,20 @@
 ---
-title: Métriques basées sur DDSketch dans l'APM
-kind: guide
 aliases:
-  - /fr/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+- /fr/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-  - link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-    tag: Blog
-    text: Calcul précis de centiles avec DDSketch
-  - link: https://docs.datadoghq.com/metrics/distributions/
-    tag: Documentation
-    text: En savoir plus sur les distributions
-  - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
-    tag: Documentation
-    text: En savoir plus sur les métriques de trace
+- link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+  tag: Blog
+  text: Calcul précis de centiles avec DDSketch
+- link: https://docs.datadoghq.com/metrics/distributions/
+  tag: Documentation
+  text: En savoir plus sur les distributions
+- link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
+  tag: Documentation
+  text: En savoir plus sur les métriques de trace
+kind: guide
+title: Métriques basées sur DDSketch dans APM
 ---
+
 Datadog recueille automatiquement des métriques de trace pour vos services et ressources. Elles sont conservées pendant une durée de 15 mois. Les centiles de latence sont disponibles sous la forme de séries temporelles individuelles, mais peuvent également être représentées à l'aide d'une [métrique de distribution Datadog][1]. Au lieu de créer une métrique par centile, ainsi que des métriques distinctes pour les services, ressources ou deuxièmes tags primaires, Datadog propose une seule métrique simple à utiliser :
 
 - `trace.<NOM_SPAN>` :

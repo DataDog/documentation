@@ -1,27 +1,31 @@
 ---
 title: Mobile Vitals
 kind: documentation
-description: Discover insights about your iOS application's health and performance.
+description: Discover insights about your Android application's health and performance.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android Source code
+  text:  Source code for dd-sdk-android
 - link: https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/
   tag: Blog
-  text: Monitor Mobile Vitals in Datadog
+  text: Monitor mobile vitals in Datadog
 ---
 
 ## Overview
 
 Real User Monitoring offers Mobile Vitals, a set of metrics inspired by [Android Vitals][1], that can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
 
-Mobile Vitals appear on your your application's **Performance Overview** page when you navigate to **UX Monitoring > Performance Monitoring** and click your application. From the mobile performance dashboard for your application, click on a graph in **Mobile Vitals** to apply a filter by version or examine filtered sessions.
+You can view Mobile Vitals for your application by navigating to  **UX Monitoring > Performance Summary** and selecting your application.
 
-{{< img src="real_user_monitoring/android/android-mobile-vitals-new.png" alt="Mobile Vitals in the RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/android/android_performance-summary.png" alt="Mobile Vitals from the Performance Summary tab" style="width:90%;">}}
 
-Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph. 
+To access the RUM mobile app performance dashboard, scroll down to the Monitor Performance Metrics section from the application summary page and click **Performance Overview**.
 
-{{< img src="real_user_monitoring/android/refresh_rate_and_mobile_vitals.png" alt="Event Timings and Mobile Vitals" style="width:70%;">}}
+{{< img src="real_user_monitoring/android/mobile-performance-dashboard-3.png" alt="Mobile Vitals details in Performance Overview" style="width:90%;">}}
+
+Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph.
+
+{{< img src="real_user_monitoring/android/android_mobile_vitals_3.png" alt="Event Timings and Mobile Vitals in the RUM Explorer" style="width:90%;">}}
 
 You can also select a view in the RUM Explorer and observe recommended benchmark ranges that directly correlate to your application's user experience in the session. Click on a metric such as **Refresh Rate Average** and click **Search Views With Poor Performance** to apply a filter in your search query and examine additional views.
 
@@ -31,6 +35,7 @@ The following metrics provide insight into your mobile application's performance
 
 | Measurement                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 |--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Refresh rate                  | To ensure a smooth, [jank-free][2] user experience, your application should render frames in under 60Hz. <br /><br /> RUM tracks the application's [main thread display refresh rate][10] using `@view.refresh_rate_average` and `@view.refresh_rate_min` view attributes.  <br /><br />  **Note:** Refresh rates are normalized on a range of zero to 60fps. For example, if your application runs at 100fps on a device capable of rendering 120fps, Datadog reports 50fps in **Mobile Vitals**.                                                                                                                                                                                                 |
 | Slow renders                   | To ensure a smooth, [jank-free][2] user experience, your application should render frames in under 60Hz. <br /><br />  RUM tracks the application's [display refresh rate][3] using `@view.refresh_rate_average` and `@view.refresh_rate_min` view attributes. <br /><br />  With slow rendering, you can monitor which views are taking longer than 16ms or 60Hz to render. <br /> **Note:** Refresh rates are normalized on a range of zero to 60fps. For example, if your application runs at 100fps on a device capable of rendering 120fps, Datadog reports 50fps in **Mobile Vitals**. |
 | Frozen frames                  | Frames that take longer than 700ms to render appear as stuck and unresponsive in your application. These are classified as [frozen frames][4]. <br /><br />  RUM tracks `long task` events with the duration for any task taking longer then 100ms to complete. <br /><br />  With frozen frames, you can monitor which views appear frozen (taking longer than 700ms to render) to your end users and eliminate jank in your application.                                                                                                                                                                                                 |
 | Application not responding     | When the UI thread of an application is blocked for more than 5 seconds, an `Application Not Responding` ([ANR][5]) error triggers. If the application is in the foreground, the system displays a dialog modal to the user, allowing them to force quit the application. <br /><br />   RUM tracks ANR occurrences and captures the entire stack trace that blocks the main thread when it encounters an ANR.                                                                                                                                                                                                                              |
@@ -51,3 +56,4 @@ The following metrics provide insight into your mobile application's performance
 [7]: /real_user_monitoring/error_tracking/android
 [8]: https://developer.android.com/topic/performance/power
 [9]: https://developer.android.com/reference/java/lang/OutOfMemoryError
+[10]: https://developer.android.com/media/optimize/performance/frame-rate

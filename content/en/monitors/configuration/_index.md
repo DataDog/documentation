@@ -40,7 +40,7 @@ The alert conditions vary based on the [monitor type][1]. Configure monitors to 
 
 * Trigger when the `average`, `max`, `min`, or `sum` of the metric is
 * `above`, `above or equal to`, `below`, or `below or equal to` the threshold
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
+* during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 48 hours (1 month for metric monitors)
 
 ### Aggregation method
 
@@ -78,19 +78,23 @@ A cumulative time window has a fixed starting point and expands over time. Monit
 
 {{< img src="/monitors/create/cumulative_window_example.png" alt="Screenshot of how a cumulative window is configured in the Datadog interface. The user has searched for aws.sqs.number_of_messages_received. The options are set to evaluate the SUM of the query over the CURRENT MONTH." style="width:100%;">}}
 
-A cumulative time window is reset once its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am, etc.
+A cumulative time window is reset after its maximum time span is reached. For example, a cumulative time window looking at the `current month` resets itself on the first of each month at midnight UTC. Alternatively, a cumulative time window of `current hour`, which starts at minute 30, resets itself every hour. For example, at 6:30am, 7:30am, 8:30am.
 
 ### Evaluation frequency
 
 The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
 
-Evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
+By default, evaluation frequencies depend on the [evaluation window](#evaluation-window) that is used. A longer window results in lower evaluation frequencies. The following table illustrates how the evaluation frequency is controlled by larger time windows:
 
 | Evaluation Window Ranges        | Evaluation Frequency  |
 |---------------------------------|-----------------------|
 | window < 24 hours               | 1 minute              |
 | 24 hours <= window < 48 hours   | 10 minutes            |
 | window >= 48 hours              | 30 minutes            |
+
+The evaluation frequency can also be configured so that the alerting condition of the monitor is checked on a daily, weekly, or monthly basis. In this configuration, the evaluation frequency is no longer dependent on the evaluation window, but on the configured schedule. 
+
+For more information, see the guide on how to [Customize monitor evaluation frequencies][4].
 
 ### Thresholds
 
@@ -115,6 +119,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
 [2]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
 [3]: /monitors/guide/recovery-thresholds/
+[4]: /monitors/guide/custom_schedules
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
@@ -220,7 +225,7 @@ In most cases this setting is not useful because you only want an alert to resol
 
 #### Group retention time
 
-You can drop the group from the monitor status after `N` hours of missing data. The maximum length of time is 72 hours.
+You can drop the group from the monitor status after `N` hours of missing data. The length of time can be at minimum 1 hour, and at maximum 72 hours.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
 
@@ -272,15 +277,26 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 #### Simple alert
 
-`Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
+`Simple Alert` mode triggers a notification by aggregating over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions. For example, you might set up a monitor to notify you if the average CPU usage of all servers exceeds a certain threshold. If that threshold is met, you'll receive a single notification, regardless of the number of individual servers that met the threshold. This can be useful for monitoring broad system trends or behaviors.
+
+
+{{< img src="/monitors/create/simple-alert.png" alt="Diagram showing how monitor notifications are sent in simple alert mode" style="width:90%;">}}
 
 #### Multi alert
 
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
+A `Multi Alert` monitor triggers individual notifications for each entity in a monitor that meets the alert threshold.
 
-Customize which dimensions trigger alerts to reduce the noise and focus on the queries that matter most to you. If you group your query by `host` and `device` but only want alerts to be sent when the `host` attribute meets the threshold, remove the `device` attribute from your multi alert options and reduce the number of notifications that are sent.
+{{< img src="/monitors/create/multi-alert.png" alt="Diagram of how monitor notifications are sent in multi alert mode" style="width:90%;">}}
 
-**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor.
+For example, when setting up a monitor to notify you if the P99 latency, aggregated by service, exceeds a certain threshold, you would receive a **separate** alert for each individual service whose P99 latency exceeded the alert threshold. This can be useful for identifying and addressing specific instances of system or application issues. It allows you to track problems on a more granular level.
+
+When monitoring a large group of entities, multi alerts can lead to noisy monitors. To mitigate this, customize which dimensions trigger alerts. This reduces the noise and allows you to focus on the alerts that matter most. For instance, you are monitoring the average CPU usage of all your hosts. If you group your query by `service` and `host` but only want alerts to be sent once for each `service` attribute meeting the threshold, remove the `host` attribute from your multi alert options and reduce the number of notifications that are sent.
+
+{{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagram of how notifications are sent when set to specific dimensions in multi alerts" style="width:90%;">}}
+
+When aggregating notifications in `Multi Alert` mode, the dimensions that are not aggregated on become `Sub Groups` in the UI.
+
+**Note**: If your metric is only reporting by `host` with no `service` tag, it is not detected by the monitor. Metrics with both `host` and `service` tags are detected by the monitor.
 
 If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][8] to learn how to reference tag values in the notification message.
 
@@ -290,6 +306,8 @@ If you configure tags or dimensions in your query, these values are available fo
 | 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
 
 ## Add metadata
+
+<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
 
 1. Use the **Tags** dropdown to associate [tags][9] with your monitor.
 1. Use the **Teams** dropdown to associate [teams][10] with your monitor.

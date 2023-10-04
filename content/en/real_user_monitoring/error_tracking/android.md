@@ -1,19 +1,16 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
-further_reading:
-- link: https://www.datadoghq.com/blog/debug-android-crashes/
-  tag: Blog
-  text: Debug Android crashes faster with Datadog
-- link: /real_user_monitoring/error_tracking/
-  tag: Documentation
-  text: Learn about Error Tracking
-- link: /real_user_monitoring/error_tracking/explorer
-  tag: Documentation
-  text: Visualize Error Tracking data in the RUM Explorer
-kind: documentation
 title: Android Crash Reporting and Error Tracking
+kind: documentation
+description: Set up Error Tracking for your Android applications.
+further_reading:
+- link: '/real_user_monitoring/error_tracking/'
+  tag: 'Error Tracking'
+  text: 'Get started with Error Tracking'
+- link: '/real_user_monitoring/error_tracking/explorer'
+  tag: 'Documentation'
+  text: 'Visualize Error Tracking data in the Explorer'
 ---
+
 ## Overview
 
 Error Tracking processes errors collected from the RUM Android SDK. 
@@ -38,6 +35,8 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Upload your mapping file
 
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
 {{< tabs >}}
 {{% tab "US" %}}
 
@@ -53,7 +52,7 @@ For any given error, you can access the file path, line number, and a code snipp
 2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY` or `DATADOG_API_KEY`. Alternatively, pass it as a task property, or if you have `datadog-ci.json` file in the root of your project, it can be taken from an `apiKey` property there.
 3. Optionally, configure the plugin to upload files to the EU region by configuring the plugin in your `build.gradle` script:
    
-   ```
+   ```groovy
    datadog {
        site = "EU1"
    }
@@ -136,7 +135,7 @@ This resolves the final value for the `versionName` property as `fooBar`.
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | The version name of the application (by default, the version declared in the `android` block of your `build.gradle` script).                                                                                                               |
 | `serviceName`              | The service name of the application (by default, the package name of your application as declared in the `android` block of your `build.gradle` script).                                                                                                                          |
-| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, or US1_FED).                                                                                                                                       |
+| `site`                     | The Datadog site to upload your data to (US1, US3, US5, EU1, US1_FED, or AP1).                                                                                                                                       |
 | `remoteRepositoryUrl`      | The URL of the remote repository where the source code was deployed. If this is not provided, this value is resolved from your Git configuration during the task execution time.                     |
 | `checkProjectDependencies` | This property controls if the plugin should check if the Datadog Android SDK is included in the dependencies. If not, "none" is ignored, "warn" logs a warning, and "fail" fails the build with an error (default). |
 
@@ -154,12 +153,17 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitations
 
-Mapping files are limited to 100 Mb when targeting our US1 site, and 50 Mb for other sites. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+{{< site-region region="us,us3,us5,eu" >}}
+Mapping files are limited to **300** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Mapping files are limited to **50** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+{{< /site-region >}}
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
 
-```
+```groovy
 datadog {
     mappingFileTrimIndents = true
     mappingFilePackageAliases = mapOf(
@@ -177,6 +181,6 @@ datadog {
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/android/#setup
-[4]: https://github.com/DataDog/dd-sdk-android
-[5]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[3]: /real_user_monitoring/android/#setup
+[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
+[5]: /real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters

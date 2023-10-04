@@ -43,7 +43,7 @@ draft: false
 git_integration_title: teamcity
 integration_id: teamcity
 integration_title: TeamCity
-integration_version: 3.0.1
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -80,7 +80,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 TeamCity チェックは [Datadog Agent][1] パッケージに含まれています。TeamCity サーバーに追加でインストールする必要はありません。
 

@@ -245,8 +245,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 {{< /tabs >}}
 
 ## 次のステップ
-
 - [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][6]を有効にします。
 - [カスタムメトリクス][2]または [APM スパン][3]を送信して、ビジネスロジックを監視します。
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][4]を参照してください
 - [高度な構成][5]を参照して以下のことを行ってください。
@@ -266,3 +266,4 @@ Datadog サーバーレスプラグインをインストールして構成する
 [3]: /ja/tracing/custom_instrumentation/dotnet/
 [4]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /ja/serverless/configuration/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

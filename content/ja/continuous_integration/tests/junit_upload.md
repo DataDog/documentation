@@ -32,6 +32,7 @@ JUnit テストレポートファイルは、テスト名とスイート名、�
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+
 ### スタンドアロンバイナリ  (ベータ版)
 
 <div class="alert alert-warning"><strong>注</strong>: スタンドアロンバイナリは<strong>ベータ版</strong>であり、その安定性は保証されていません。</div>
@@ -191,14 +192,33 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **例**: `team:backend`<br/>
 **注**: `--tags` と `DD_TAGS` 環境変数を使用して指定されたタグがマージされます。`--tags` と `DD_TAGS` の両方に同じキーが表示される場合、環境変数 `DD_TAGS` の値が優先されます。
 
-`--xpath-tag`
-:  キーと xpath 表現を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
-サポートされている表現の詳細については、[XPath 表現によるメタデータの提供][9]を参照してください。<br/>
+`--metrics`
+: すべてのテストにアタッチされる Key-value 形式のキーと値の数値のペア (`--metrics` パラメーターは複数回指定できます)。`DD_METRICS` を使用してメトリクスを指定する場合は、カンマを使用してメトリクスを区切ります (例: `memory_allocations:13,test_importance:2`)。<br/>
+**環境変数**: `DD_METRICS`<br/>
 **デフォルト**: (none)<br/>
+**例**: `memory_allocations:13`<br/>
+**注**: `--metrics` と `DD_METRICS` 環境変数を使用して指定されたメトリクスがマージされます。`--metrics` と `DD_METRICS` の両方に同じキーが表示される場合、環境変数 `DD_METRICS` の値が優先されます。
+
+`--report-tags`
+: `key:value` 形式のキーと値のペア。`--tags` パラメーターと同じような働きをしますが、これらのタグはセッションレベルでのみ適用され、環境変数 `DD_TAGS` とマージされません。<br/>
+**環境変数**: (なし)<br/>
+**デフォルト**: (なし)<br/>
+**例**: `coverage_enabled:true`<br/>
+
+`--report-metrics`
+: `key:123` 形式のキーと値のペア。`--metrics` パラメーターと同じような働きをしますが、これらのタグはセッションレベルでのみ適用され、環境変数 `DD_METRICS` とマージされません。<br/>
+**環境変数**: (なし)<br/>
+**デフォルト**: (なし)<br/>
+**例**: `coverage_percentage:35`<br/>
+
+`--xpath-tag`
+:  キーと xpath 式を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
+サポートされている式の詳細については、[XPath 式によるメタデータの提供](#providing-metadata-with-xpath-expressions)を参照してください。<br/>
+**デフォルト**: (なし)<br/>
 **例**: `test.suite=/testcase/@classname`<br/>
 **注**: `--xpath-tag` を使用し、`--tags` または `DD_TAGS` 環境変数とともに指定されたタグはマージされます。xpath-tag の値は通常テストごとに異なるため、最優先されます。
 
-`--logs` **(ベータ版)**
+`--logs`
 : XML レポートの内容を [Logs][6] として転送できるようにします。`<system-out>`、`<system-err>`、`<failure>` 内のコンテンツはログとして収集されます。`<testcase>` 内の要素からのログは自動的にテストに接続されます。<br/>
 **環境変数**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **デフォルト**: `false`<br/>
@@ -211,6 +231,19 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 `--dry-run`
 : 実際にファイルを Datadog にアップロードせずにコマンドを実行します。他のすべてのチェックが実行されます。<br/>
 **デフォルト**: `false`
+
+`--skip-git-metadata-upload`
+: git メタデータのアップロードをスキップするために使用するフラグ。git メタデータをアップロードしたい場合は、--skip-git-metadata-upload=0 または --skip-git-metadata-upload=false を渡すことができます。<br/>
+**デフォルト**: `true`<br/>
+
+`--git-repository-url`
+: git メタデータを取得するリポジトリの URL。この引数を渡さなかった場合、URL はローカルの git リポジトリから取得されます。<br/>
+**デフォルト**: ローカルの git リポジトリ<br/>
+**例**: `git@github.com:DataDog/documentation.git`<br/>
+
+`--verbose`
+: コマンドの出力の詳細度を高めるために使用するフラグ<br/>
+**デフォルト**: `false`<br/>
 
 位置引数
 : JUnit XML レポートが配置されているファイルパスまたはディレクトリ。ディレクトリを渡すと、CLI はその中のすべての `.xml` ファイルを検索します。
@@ -228,55 +261,17 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **デフォルト**: `datadoghq.com`<br/>
 **選択したサイト**: {{< region-param key="dd_site" code="true" >}}
 
+### テストスイートレベルの視覚化との互換性
+[テストスイートレベルの視覚化][9]は、`datadog-ci>=2.17.0` からサポートされています。
+
 ## リポジトリの収集とメタデータのコミット
 
-Datadog は、テスト結果を可視化し、リポジトリやコミットごとにグループ化するために Git 情報を使用します。Git のメタデータは、Datadog の CI CLI が CI プロバイダーの環境変数やプロジェクトパスのローカルな `.git` フォルダ (あれば) から収集します。このディレクトリを読み込むには、[`git`][8] バイナリが必要です。
+{{% ci-git-metadata %}}
 
-サポートされていない CI プロバイダーでテストを実行する場合や、`.git` フォルダがない場合は、環境変数を使って Git の情報を手動で設定することができます。これらの環境変数は、自動検出された情報よりも優先されます。Git の情報を提供するために、以下の環境変数を設定します。
+## Git メタデータのアップロード
 
-`DD_GIT_REPOSITORY_URL`
-: コードが格納されているリポジトリの URL。HTTP と SSH の両方の URL に対応しています。<br/>
-**例**: `git@github.com:MyCompany/MyApp.git`、`https://github.com/MyCompany/MyApp.git`
+`datadog-ci` バージョン `2.9.0` 以降では、CI Visibility は Git のメタデータ情報 (コミット履歴) を自動的にアップロードします。このメタデータには、ファイル名は含まれていますが、ファイルのコンテンツは含まれていません。この動作を無効にしたい場合は、フラグ `--skip-git-metadata-upload` を渡します。
 
-`DD_GIT_BRANCH`
-: テスト中の Git ブランチ。タグ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `develop`
-
-`DD_GIT_TAG`
-: テストされる Git タグ (該当する場合)。ブランチ情報を指定する場合は、空のままにしておきます。<br/>
-**例**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: フルコミットハッシュ。<br/>
-**例**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: コミットのメッセージ。<br/>
-**例**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: コミット作成者名。<br/>
-**例**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: コミット作成者メールアドレス。<br/>
-**例**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: ISO 8601 形式のコミット作成者の日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: コミットのコミッター名。<br/>
-**例**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: コミットのコミッターのメールアドレス。<br/>
-**例**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: ISO 8601 形式のコミットのコミッターの日付。<br/>
-**例**: `2021-03-12T16:00:28Z`
 
 ## 環境構成メタデータの収集
 
@@ -308,7 +303,7 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 
 `runtime.version`
 : ランタイムのバージョン。<br/>
-**例**: `5.0.0`, `3.1.7`
+**例**: `5.0.0`、`3.1.7`
 
 `runtime.vendor`
 : ランタイムベンダーの名前 (該当する場合)。例えば、Java ランタイムを使用する場合。<br/>
@@ -329,14 +324,13 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 **例**: `iPhone 12 Pro Simulator`、`iPhone 13 (QA team)`
 
 
-## XPath 表現によるメタデータの提供
+## XPath 式によるメタデータの提供
 
 アップロードされた XML レポートに含まれるすべてのテストにカスタムタグをグローバルに適用する `--tags` CLI パラメーターと `DD_TAGS` 環境変数に加え、`--xpath-tag` パラメーターは、XML 内の各種属性から各テストにタグを追加するカスタムルールを提供します。
 
-提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][10] 表現になります。
+提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][8] 式になります。
 
-XPath 構文が馴染みが深いため使用されますが、サポートされている表現は下記のみとなります。
-
+XPath 構文が馴染みが深いため使用されますが、サポートされている式は下記のみとなります。
 
 `/testcase/@attribute-name`
 :  `<testcase attribute-name="value">` の XML 属性。
@@ -376,10 +370,10 @@ datadog-ci junit upload --service service_name \
   --xpath-tag test.suite=/testcase/@classname ./junit.xml
 {{< /code-block >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "属性からタグを追加" %}}
-各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
+各テストに `value 1`、`value 2` の値とともに `custom_tag` を追加する方法:
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -396,10 +390,10 @@ datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/@attr ./junit.xml
 {{< /code-block >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "testsuite プロパティからタグを追加" %}}
-各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
+各テストに `value 1`、`value 2` の値とともに `custom_tag` を追加する方法:
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -433,9 +427,9 @@ datadog-ci junit upload --service service_name \
 
 特定のテストに追加のタグを指定するもう 1 つの方法は、`<testsuite>` または `<testcase>` 要素内に `<property name="dd_tags[key]" value="value">` 要素を含める方法です。これらのタグを `<testcase>` 要素に追加すると、そのテストスパンにタグが格納されます。タグを `<testsuite>` 要素に追加すると、そのスイートの全てのテストスパンにタグが格納されます。
 
-この処理を行うには、 `<property>` 要素の `name` 属性が `dd_tags[key]` という形式である必要があります。ここで `key` は追加されるカスタムタグの名前です。その他のプロパティは無視されます。
+この処理を行うには、`<property>` 要素の `name` 属性が `dd_tags[key]` という形式である必要があります。ここで `key` は追加されるカスタムタグの名前です。その他のプロパティは無視されます。
 
-**例**: `<testcase>` 要素にタグを追加する
+**例**: `<testcase>` 要素にタグを追加する。
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -451,7 +445,7 @@ datadog-ci junit upload --service service_name \
 </testsuites>
 {{< /code-block >}}
 
-**例**: `<testsuite>` 要素にタグを追加する
+**例**: `<testsuite>` 要素にタグを追加する。
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -466,7 +460,9 @@ datadog-ci junit upload --service service_name \
 </testsuites>
 {{< /code-block >}}
 
-## その他の参考資料
+Datadog に送信する値は文字列なので、ファセットは辞書順で表示されます。文字列の代わりに整数を送信するには、`--metrics` フラグと `DD_METRICS` 環境変数を使用します。
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -477,6 +473,5 @@ datadog-ci junit upload --service service_name \
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /ja/logs/
 [7]: /ja/getting_started/site/
-[8]: https://git-scm.com/downloads
-[9]: #providing-metadata-with-xpath-expressions
-[10]: https://www.w3schools.com/xml/xpath_syntax.asp
+[8]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: /ja/continuous_integration/tests/#test-suite-level-visibility

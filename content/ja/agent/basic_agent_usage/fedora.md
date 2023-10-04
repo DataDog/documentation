@@ -1,27 +1,34 @@
 ---
-title: Fedora 用 Agent の基本的な使用方法
+aliases:
+- /ja/guides/basic_agent_usage/fedora/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Fedora
-aliases:
-  - /ja/guides/basic_agent_usage/fedora/
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+title: Fedora 用 Agent の基本的な使用方法
 ---
+
 ## 概要
 
 このページでは、Fedora 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: Fedora 26 以降がサポートされます。
+**注**: Fedora 26 以降は、64 ビット x86 アーキテクチャでサポートされています。Fedora 27 以降は、64 ビット Arm v8 アーキテクチャでサポートされています。
 
 ## コマンド
 
@@ -95,7 +102,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 ## トラブルシューティング
 
-[Agent のトラブルシューティングドキュメントは、こちらを参照してください][2]。
+[Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
 ## 埋め込み Agent の使用
 

@@ -15,13 +15,13 @@ assets:
     source_type_name: AppKeeper
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: SIOS AppKeeper
   sales_email: rd-pd-1@sios.com
   support_email: rd-pd-1@sios.com
 categories:
 - AWS
 - cloud
-- 処理
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -43,11 +43,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
   - Category::AWS
   - Category::Cloud
-  - Category::Processing
+  - Category::Notification
+  - Supported OS::Linux
+  - Supported OS::Windows
   configuration: README.md#Setup
   description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
   media: []

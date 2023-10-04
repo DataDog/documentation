@@ -44,7 +44,7 @@ Multistep API tests can run from Datadog [managed](#select-locations) and [priva
 ### Name and tag your test
 
 1. Name your Multistep API test.
-2. Add `env` and other tags to your Multistep API test. You can use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][6].
+2. Add `env` and other tags to your Multistep API test. You can use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][6].
 
 ### Select locations
 
@@ -171,79 +171,17 @@ You can extract up to ten variables per test step. Once created, this variable c
 
 Multistep API tests can run:
 
-* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your Multistep API test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers experience.
+* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your multistep API test.
+* [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers' experience.
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
-### Define alert conditions
+{{% synthetics-alerting-monitoring %}}
 
-Set alert conditions to determine the circumstances under which you want a test to fail and trigger an alert.
-
-#### Alerting rule
-
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
-
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes;
-* At one moment during the last *X* minutes, at least *n* locations were in failure.
-
-#### Fast retry
-
-Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
-
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
-
-### Configure the test monitor
-
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
-
-1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the dropdown box.
-
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
-
-    | Conditional Variable       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | Show when the test alerts.                                          |
-    | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
-
-3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-4. Click **Create** to save your test configuration and monitor.
-
-For more information, see [Using Synthetic Test Monitors][13].
-
-## Variables
+{{% synthetics-variables %}}
 
 ### Extract variables
 
 In addition to creating local variables, you can [extract variables from any step](#extract-variables-from-the-response) of your multistep API test and [re-inject the values in subsequent steps](#use-variables).
-
-### Create local variables
-
-To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
-
-`{{ numeric(n) }}`
-: Generates a numeric string with `n` digits.
-
-`{{ alphabetic(n) }}`
-: Generates an alphabetic string with `n` letters.
-
-`{{ alphanumeric(n) }}`
-: Generates an alphanumeric string with `n` characters.
-
-`{{ uuid }}`
-: Generates a version 4 universally unique identifier (UUID).
-
-`{{ date(n unit, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
-
-`{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
-
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
 ### Use variables
 
@@ -293,7 +231,7 @@ Access restriction is available for customers using [custom roles][18] on their 
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 ## Further Reading
 
@@ -301,16 +239,16 @@ You can restrict access to a multistep API test based on the roles in your organ
 
 [1]: /synthetics/api_tests/http_tests
 [2]: /synthetics/api_tests/
-[3]: /synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
+[3]: /synthetics/api_tests/http_tests?tab=requestoptions#configure-the-test-monitor
 [4]: /synthetics/cicd_integrations
 [5]: /synthetics/private_locations
-[6]: /synthetics/search/#search
+[6]: /synthetics/search/#search-for-tests
 [7]: https://restfulapi.net/json-jsonpath/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
 [9]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[10]: /monitors/notify/?tab=is_alert#notification
+[10]: /monitors/notify/?tab=is_alert#notify-your-team
 [11]: http://daringfireball.net/projects/markdown/syntax
-[12]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[12]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [13]: /synthetics/guide/synthetic-test-monitors
 [14]: /synthetics/settings/#global-variables
 [15]: /synthetics/api_tests/errors/#ssl-errors

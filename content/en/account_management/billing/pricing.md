@@ -12,12 +12,11 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 ## Infrastructure monitoring
 
 * A **host** is a physical or virtual operating system instance. Each hour, Datadog records the number of unique hosts you are monitoring in the Infrastructure service.
-  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
+  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
 * A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-* A **serverless function** is application code setup to execute on a cloud platform's serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). Datadog charges based on the total number of Lambda function invocations in a month.
 * An AWS **Fargate task** is a collection of containers setup through AWS's ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
 ## APM

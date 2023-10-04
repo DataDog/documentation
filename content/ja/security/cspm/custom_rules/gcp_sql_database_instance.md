@@ -9,7 +9,7 @@ disable_edit: true
 ## `available_maintenance_versions`
 **タイプ**: `UNORDERED_LIST_STRING`<br>
 **プロバイダー名**: `availableMaintenanceVersions`<br>
-**説明**: インスタンスに適用されるすべてのメンテナンスバージョンをリストアップします<br>
+**説明**: 出力のみ。インスタンスに適用されるすべてのメンテナンスバージョンをリストアップします<br>
 ## `backend_type`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `backendType`<br>
@@ -423,6 +423,14 @@ disable_edit: true
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `kind`<br>
         **説明**: これは常に sql#activeDirectoryConfig です。<br>
+   - `advanced_machine_features`<br>
+    **タイプ**: `STRUCT`<br>
+    **プロバイダー名**: `advancedMachineFeatures`<br>
+    **説明**: SQL Server のみに関連するインスタンスの事前マシン構成を指定します。<br>
+       - `threads_per_core`<br>
+        **タイプ**: `INT32`<br>
+        **プロバイダー名**: `threadsPerCore`<br>
+        **説明**: 物理コアあたりのスレッド数。<br>
    - `authorized_gae_applications`<br>
     **タイプ**: `UNORDERED_LIST_STRING`<br>
     **プロバイダー名**: `authorizedGaeApplications`<br>

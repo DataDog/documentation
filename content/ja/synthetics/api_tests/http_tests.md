@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - http
+  - http テスト
+  - http テスト
 aliases:
 - /ja/synthetics/http_test
 - /ja/synthetics/http_check
@@ -30,7 +38,7 @@ title: HTTP テスト
 
 HTTP テストでは、アプリケーションの API エンドポイントに HTTP リクエストを送信し、応答時間、ステータスコード、ヘッダー、本文のコンテンツなど、定義された条件と応答を確認することができます。
 
-HTTP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行することができます。HTTP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][3]内で直接実行することができます。
+HTTP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。HTTP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
 
 ## コンフィギュレーション
 
@@ -69,27 +77,27 @@ HTTP テストは、ネットワークの外部または内部からのテスト
      AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
    * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。 
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "クエリパラメーター" %}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "リクエスト本文" %}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "プロキシ" %}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "Privacy" %}}
 
@@ -105,7 +113,7 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
 3. HTTP テストに**名前**を付けます。
 
-4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][4]で Synthetic テストをすばやくフィルタリングできます。
+4. HTTP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
 
    {{< img src="synthetics/api_tests/http_test_config.png" alt="HTTP リクエストを定義する" style="width:90%;" >}}
 
@@ -117,10 +125,10 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
 | タイプ          | 演算子                                                                                               | 値の型                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][5]、[`xpath`][6] | 文字列 <br> [Regex][7] |
-| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | 文字列 <br> [Regex][7]                                      |
+| 本文          | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][4]、[`xpath`][5] | _文字列_ <br> _[正規表現][6]_ |
+| ヘッダー        | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`                       | _文字列_ <br> _[正規表現][6]_                                      |
 | response time | `is less than`                                                                                         | 整数 (ms)                                                  |
-| ステータスコード   | `is`、`is not`、<br> `matches`、`does not match`                                                                                         | _文字列_ <br> _[正規表現][7]_                                                     |
+| ステータスコード   | `is`、`is not`、<br> `matches`、`does not match`                                                                                         | _整数_ <br> _[正規表現][6]_                                                     |
 
 HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encoding` ヘッダーを使用して本文を解凍することが可能です。
 
@@ -136,14 +144,16 @@ HTTP テストでは、`br`、`deflate`、`gzip`、`identity` の `content-encod
 
 ### ロケーションを選択する
 
-HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行できます。
+HTTP テストを実行する**ロケーション**を選択します。HTTP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
+
+{{% managed-locations %}} 
 
 ### テストの頻度を指定する
 
 HTTP テストは次の頻度で実行できます。
 
 * **On a schedule**: 最も重要なエンドポイントにユーザーが常にアクセスできるようにします。Datadog で HTTP テストを実行する頻度を選択します。
-* [**Within your CI/CD pipelines**][3]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
+* [**Within your CI/CD pipelines**][2]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
 ### アラート条件を定義する
@@ -167,9 +177,9 @@ HTTP テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターの構成方法と同様][8]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターの構成方法と同様][7]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][9]のほか、以下の[条件付き変数][10]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][8]のほか、以下の[条件付き変数][9]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -186,44 +196,23 @@ HTTP テストは次の頻度で実行できます。
 
 4. **Create** をクリックすると、テストの構成とモニターが保存されます。
 
-詳しくは、[Synthetic テストモニターの使用][11]をご覧ください。
+詳しくは、[Synthetic テストモニターの使用][10]をご覧ください。
 
-## 変数
-
-### ローカル変数を作成する
-
-ローカル変数を作成するには、右上の **Create Local Variable** をクリックします。以下の利用可能なビルトインのいずれかから選択することができます。
-
-`{{ numeric(n) }}`
-: `n` 桁の数字列を生成します。
-
-`{{ alphabetic(n) }}`
-: `n` 文字のアルファベット文字列を生成します。
-
-`{{ alphanumeric(n) }}`
-: `n` 文字の英数字文字列を生成します。
-
-`{{ date(n unit, format) }}` 
-: テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
-
-`{{ timestamp(n, unit) }}` 
-: テストが + または - `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
-
-テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
+{{% synthetics-variables %}}
 
 ### 変数を使用する
 
-HTTP テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][12]を使用することができます。
+HTTP テストの URL、高度なオプション、アサーションで、[**Settings** ページで定義されたグローバル変数][11]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
+{{< img src="synthetics/api_tests/http_use_variable.mp4" alt="HTTP テストで変数を使用する" video="true" width="100%" >}}
 
 ## テストの失敗
 
 テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
-これらの理由には以下が含まれます。
+よくあるエラーは以下の通りです。
 
 `CONNREFUSED`
 : ターゲットマシーンが積極的に拒否したため、接続できませんでした。
@@ -238,48 +227,47 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][13]。
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][12]。
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 
 `MALFORMED_RESPONSE` 
 : リモートサーバーが HTTP 仕様に準拠していないペイロードで応答しました。
 
-## アクセス許可
+## 権限
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][14]を持つユーザーのみが、Synthetic HTTP テストを作成、編集、削除できます。Synthetic HTTP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][14]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][13]を持つユーザーのみが、Synthetic HTTP テストを作成、編集、削除できます。Synthetic HTTP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][13]のいずれかにアップグレードします。
 
-[カスタムロール機能][15]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][14]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][16]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][15]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、HTTP テストへのアクセスを制限することができます。HTTP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access.png" alt="テストの権限の設定" style="width:70%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
-[2]: /ja/synthetics/private_locations
-[3]: /ja/synthetics/cicd_integrations
-[4]: /ja/synthetics/search/#search
-[5]: https://restfulapi.net/json-jsonpath/
-[6]: https://www.w3schools.com/xml/xpath_syntax.asp
-[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[8]: /ja/monitors/notify/#notify-your-team
-[9]: https://www.markdownguide.org/basic-syntax/
-[10]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
-[11]: /ja/synthetics/guide/synthetic-test-monitors
-[12]: /ja/synthetics/settings/#global-variables
-[13]: /ja/synthetics/api_tests/errors/#ssl-errors
-[14]: /ja/account_management/rbac/
-[15]: /ja/account_management/rbac#custom-roles
-[16]: /ja/account_management/rbac/#create-a-custom-role
+[1]: /ja/synthetics/private_locations
+[2]: /ja/synthetics/cicd_integrations
+[3]: /ja/synthetics/search/#search
+[4]: https://restfulapi.net/json-jsonpath/
+[5]: https://www.w3schools.com/xml/xpath_syntax.asp
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: /ja/monitors/notify/#notify-your-team
+[8]: https://www.markdownguide.org/basic-syntax/
+[9]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[10]: /ja/synthetics/guide/synthetic-test-monitors
+[11]: /ja/synthetics/settings/#global-variables
+[12]: /ja/synthetics/api_tests/errors/#ssl-errors
+[13]: /ja/account_management/rbac/
+[14]: /ja/account_management/rbac#custom-roles
+[15]: /ja/account_management/rbac/#create-a-custom-role

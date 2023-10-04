@@ -65,7 +65,7 @@ The Datadog Agent requires read-only access to the database in order to collect 
 Create the `datadog` user and grant basic permissions:
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -149,10 +149,10 @@ instances:
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 
-     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU and Memory.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -193,7 +193,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<YOUR_INSTANCE_NAME>"
+      "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -208,7 +208,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -248,7 +248,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<YOUR_INSTANCE_NAME>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -268,7 +268,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -297,7 +297,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<YOUR_INSTANCE_NAME>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -346,7 +346,7 @@ If you have installed and configured the integrations and Agent as described, an
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.microsoft.com/en-us/azure/mysql/howto-server-parameters
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql

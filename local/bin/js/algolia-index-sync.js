@@ -32,15 +32,17 @@ const updateSettings = (index) => {
         customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
-        indexLanguages: ['ja', 'en', 'fr'],
-        queryLanguages: ['ja', 'en', 'fr'],
+        attributesToSnippet: ['content:20'],
+        indexLanguages: ['ja', 'en', 'fr', 'ko'],
+        queryLanguages: ['ja', 'en', 'fr', 'ko'],
         attributeForDistinct: 'full_url',
         distinct: true,
         minWordSizefor1Typo: 3,
         minWordSizefor2Typos: 7,
         ignorePlurals: true,
         optionalWords: ['the', 'without'],
-        separatorsToIndex: '_@.#'
+        separatorsToIndex: '_@.#',
+        advancedSyntax: true
     };
 
     return index.setSettings(settings, { forwardToReplicas: true });
@@ -87,6 +89,11 @@ const updateSynonyms = (index) => {
             objectID: 'npm',
             type: 'synonym',
             synonyms: ['npm', 'network performance monitoring']
+        },
+        {
+            objectID: 'ksm',
+            type: 'synonym',
+            synonyms: ['ksm', 'ksm core', 'kubernetes state metrics']
         }
     ];
 
@@ -141,14 +148,16 @@ const sync = () => {
     const index = client.initIndex(indexName);
 
     updateSettings(index)
-        .then(() => console.log(`${indexName} settings update complete`))
+        .then(() => {
+            console.log(`${indexName} settings update complete`);
+            updateReplicas(client, indexName);
+        })
         .catch((err) => console.error(err));
 
     updateSynonyms(index)
         .then(() => console.log(`${indexName} synonyms update complete`))
         .catch((err) => console.error(err));
 
-    updateReplicas(client, indexName);
     updateIndex(indexName);
 };
 

@@ -1,11 +1,12 @@
 ---
-title: C++ による APM の設定
-kind: ガイド
 further_reading:
-  - link: /tracing/setup/cpp/
-    tag: ドキュメント
-    text: C++ によるトレースアプリケーションの詳細
+- link: /tracing/trace_collection/dd_libraries/cpp/
+  tag: ドキュメント
+  text: C++ によるトレースアプリケーションの詳細
+kind: ガイド
+title: C++ による APM の設定
 ---
+
 ## 概要
 
 このガイドは、[C++ APM ドキュメント][1]の内容を拡張したものです。C++ による簡単な APM アプリを、トラブルシューティングの目的で VM にセットアップする方法について、手順を追って説明します。
@@ -14,10 +15,10 @@ further_reading:
 
 ### 基本の環境
 
-最初に、新しい `ubuntu/xenial64` Vagrant ボックスをスピンアップし、それに対して `ssh` を実行します。
+最初に、新しい `ubuntu/jammy64` Vagrant ボックスをスピンアップし、それに対して `ssh` を実行します。
 
 ```bash
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
@@ -154,15 +155,15 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 
 すると、Datadog の APM サービスページにサービスが次のように表示されます。
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services ページ"  >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services ページ" >}}
 
 サービスをクリックすると、トレースが表示されます。
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM トレース UI"  >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM トレース UI" >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

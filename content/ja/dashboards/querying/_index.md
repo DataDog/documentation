@@ -26,7 +26,7 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 初めてグラフエディターを開くと、**Edit** タブが表示されます。UI からほとんどの設定を選択できます。以下に例を示します。
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="グラフエディターの Edit タブ" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="グラフエディターの Edit タブ" style="width:100%;" >}}
 
 ## グラフを構成する
 
@@ -48,7 +48,7 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 検索するか、**Metric** の隣にあるドロップダウンから選択して、グラフ化したいメトリクスを選択します。使用するメトリクスが分からない場合は、メトリクスのドロップダウンから `unit`、`type`、`interval`、`description`、`tags`、および `tag values` の数などの追加情報を得ることができます。
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="メトリクス選択ドロップダウン" responsive="true" style="width:100%;">}}
 
 [メトリクスエクスプローラー][4]や[ノートブック][5]でメトリクスをさらに詳しく調べたり、[メトリクスの概要][6]ページでメトリクスのリストを閲覧することができます。
 
@@ -56,11 +56,10 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 選択したメトリクスには、メトリクスの右側にある **from** ドロップダウンからホストまたはタグによるフィルターを設定することができます。デフォルトでは *(everywhere)* に設定されています。
 
-{{< img src="dashboards/querying/filter-2.png" alt="グラフの作成フィルター" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="テンプレート変数とブール値ロジックを使用し、'from' フィールドでグラフをフィルター" style="width:100%;" >}}
 
-`from` ドロップダウン内の[高度なフィルタリング][7]を使用して、以下のようなブール型またはワイルドカードでフィルタリングされたクエリを評価することも可能です。
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="ブール型フィルターでグラフを作成" style="width:75%;" >}} 
+- `from` ドロップダウン内の[高度なフィルタリング][7]を使用して、ブール型またはワイルドカードでフィルタリングされたクエリを評価します。
+- テンプレート変数を使用して、クエリを動的にフィルターします。タグキーと一緒に `$` を追加すると、グラフはテンプレート変数のドロップダウンで選択したタグを自動的に適用します。詳細は[テンプレート変数のドキュメント][16]を参照してください。
 
 タグの詳細は、[タグ付けに関するドキュメント][8]を参照してください。
 
@@ -78,9 +77,9 @@ Datadog では、メトリクス、ログ、トレース、モニター、ダッ
 
 手動でデータをロールアップするには、[rollup 関数][11]を使用します。シグマのアイコンをクリックして関数を追加し、ドロップダウンメニューから `rollup` を選択します。次に、データを集計する方法と間隔 (秒) を選択します。
 
-このクエリにより、1 分のバケットでマシン全体の合計空きディスク容量の平均値を平均でロールアップしたことを表す 1  本の線を作成します。
+このクエリは、全マシンにわたる利用可能なディスクスペースの平均値を 1 分間隔で集計し、それを表す単一のラインを作成します。
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-3.png" alt="シグマ追加関数アイコンをハイライトする system.disk.free メトリクスのロールアップ例" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="マシン全体の system.disk.free メトリクスのロールアップ例" style="width:100%;">}}
 
 JSON ビューに切り替えると、以下のようなクエリが表示されます。
 
@@ -189,28 +188,32 @@ status:error / status:info
 
 作業内容を保存してエディターを終了するには **Done** をクリックします。いつでもエディターに戻ってグラフを変更できます。変更を加えた一方で、その内容を保存しない場合は、**Cancel** をクリックします。
 
-## APM 統計グラフの構成
-
-APM 統計データを使用してグラフを構成するには、次の手順に従います。
-
-1. [視覚化の方法を選択](#select-your-visualization) (メトリクスと同様)
-2. [詳細レベルを選択](#level-of-detail)
-3. [パラメーターを選択](#apm-stats-parameters)
-4. [グラフのタイトルを作成](#create-a-title) (メトリクスと同様)
-
-### 詳細レベル
-1 つ以上のサービス、リソース、またはスパンの統計を表示する詳細レベルを選択します。(これらのすべてがすべてのウィジェットタイプで使用できるわけではありません。)
-
-### APM 統計パラメーター
-グラフエディタから次のパラメーターを選択します: 環境 (`env`)、プライマリタグ (`primary_tag`)、サービス (`service`)、オペレーション名 (`name`)。
-
-詳細レベルがリソースまたはスパンの場合、一部のウィジェットタイプでは、クエリの範囲を狭めるためにリソース名 (`resource`) を選択する必要もあります。
-
 ## その他のオプション
 
 ### イベントオーバーレイ
 
-グラフエディターの **Event Overlays** セクションを使用すると、イベントの相関性を表示できます。検索フィールドにテキストまたは構造化された検索クエリを入力します。検索の詳細については、Datadog [イベントクエリ言語][14]をご参照ください。
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="RUM のエラーレートをデプロイイベントと重ね合わせて表示する時系列ウィジェット" style="width:100%;" >}}
+
+[時系列][15]可視化のグラフエディタで **Event Overlays** セクションを使用して、イベントの相関関係を表示します。検索フィールドに、任意のテキストまたは構造化検索クエリを入力します。イベント検索では、[ログ検索構文][14]を使用します。
+
+イベントオーバーレイは、すべてのデータソースをサポートしています。これにより、ビジネスイベントと Datadog のあらゆるサービスからのデータとの相関を容易にすることができます。
+
+イベントオーバーレイを使えば、組織内のアクションがアプリケーションやインフラストラクチャーのパフォーマンスにどのような影響を与えるかを素早く確認することができます。以下に、使用例をいくつか紹介します。
+- デプロイメントイベントを重ね合わせた RUM のエラーレート
+- 余分なサーバーのプロビジョニングに関連するイベントと CPU 使用率を相関させる
+- egress トラフィックと疑わしいログインアクティビティを相関させる
+- Datadog が適切なアラートで構成されていることを確認するために、あらゆる時系列データとモニターアラートを相関させる
+
+
+### スプリットグラフ
+
+スプリットグラフを使えば、メトリクスをタグごとに分けて可視化することができます。
+
+{{< img src="dashboards/querying/split_graph_beta.png" alt="フルスクリーンウィジェットでメトリクス container.cpu.usage のスプリットグラフを表示する" style="width:100%;" >}}
+
+1. グラフ表示時に **Split Graph** タブでこの機能にアクセスします。
+1. また、*sort by* メトリクスを変更することで、グラフ化しているデータと他のメトリクスとの関連性を確認することができます。
+1. 表示するグラフの数を *limit to* の値で制限します。
 
 ## その他の参考資料
 
@@ -227,6 +230,8 @@ APM 統計データを使用してグラフを構成するには、次の手順�
 [9]: /ja/metrics/#time-aggregation
 [10]: /ja/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
 [11]: /ja/dashboards/functions/rollup/
-[12]: /ja/dashboards/functions/#apply-functions-optional
+[12]: /ja/dashboards/functions/#function-types
 [13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /ja/events/#event-query-language
+[14]: /ja/logs/explorer/search_syntax/
+[15]: /ja/dashboards/widgets/timeseries/#event-overlay
+[16]: /ja/dashboards/template_variables/

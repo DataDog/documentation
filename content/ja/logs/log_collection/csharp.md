@@ -23,6 +23,9 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: よくあるご質問
   text: ログ収集のトラブルシューティングガイド
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: C# ログ収集
 ---
@@ -37,7 +40,7 @@ C# のログを Datadog に送信するには、次のいずれかの方法を�
 
 ## Datadog Agent によるファイルテールロギング
 
-C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent でテールすることです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
+C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]することです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
 
 Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
 
@@ -639,7 +642,7 @@ using (var log = new LoggerConfiguration()
 [9]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /ja/agent/logs/advanced_log_collection
 [11]: /ja/serverless/azure_app_services
-[12]: /ja/account_management/org_settings/sensitive_data_detection/#overview
+[12]: /ja/sensitive_data_scanner/
 [13]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -647,3 +650,4 @@ using (var log = new LoggerConfiguration()
 [17]: /ja/logs/log_configuration/pipelines/?tab=source
 [18]: /ja/api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
+[20]: /ja/glossary/#tail

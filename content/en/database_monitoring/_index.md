@@ -15,7 +15,14 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
-
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to level up your Database Monitoring"
+algolia:
+  tags: ['database monitoring', 'dbm']
+cascade:
+    algolia:
+        rank: 70
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
@@ -37,6 +44,11 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 ### MySQL
 
 {{< partial name="dbm/dbm-setup-mysql" >}}
+<p></p>
+
+### Oracle
+
+{{< partial name="dbm/dbm-setup-oracle" >}}
 <p></p>
 
 ### SQL Server
@@ -76,7 +88,7 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 - Improve query efficiency and save on costly sequential scans on large tables.
 - See how a query's plan changes over time.
 
-{{< img src="database_monitoring/dbm-explain-plan.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### Visualize everything on enriched dashboards
 

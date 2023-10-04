@@ -30,6 +30,7 @@ title: パイプライントレースへのタグとメトリクスの追加
 - GitLab (SaaS またはセルフホスト >= 14.1)
 - GitHub.com (SaaS) **注:** GitHub の場合、タグとメトリクスはパイプラインスパンにのみ追加可能です。
 - Jenkins **注:** Jenkins の場合、[こちらの説明][5]に従って、パイプラインにカスタムタグを設定してください。
+- Azure DevOps パイプライン
 
 ## Datadog CI CLI のインストール
 
@@ -77,7 +78,7 @@ datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 
 環境変数 `DATADOG_API_KEY` を使用して、有効な [Datadog API キー][3]を指定する必要があります。
 
-{{< site-region region="us5,us3,eu" >}}
+{{< site-region region="us5,us3,eu,ap1" >}}
 環境変数 `DATADOG_SITE` を使って [Datadog サイト][1]を指定する必要があります。
 
 [1]: /ja/getting_started/site/
@@ -108,7 +109,7 @@ datadog-ci metric [--level <pipeline|job>] [--metrics <metrics>]
 {{< /code-block >}}
 
 環境変数 `DATADOG_API_KEY` を使用して、有効な [Datadog API キー][3]を指定する必要があります。
-{{< site-region region="us5,us3,eu" >}}
+{{< site-region region="us5,us3,eu,ap1" >}}
 環境変数 `DATADOG_SITE` を使用して [Datadog サイト][1]を指定する必要があります。
 
 [1]: /ja/getting_started/site/

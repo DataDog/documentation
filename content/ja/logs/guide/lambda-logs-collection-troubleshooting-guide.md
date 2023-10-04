@@ -1,4 +1,8 @@
 ---
+further_reading:
+- link: https://www.datadoghq.com/blog/aws-lambda-telemetry-api/
+  tag: GitHub
+  text: AWS Lambda テレメトリー API による Datadog Lambda 拡張機能の拡張
 kind: documentation
 title: Lambda 関数によるログ収集のトラブルシューティングガイド
 ---
@@ -22,12 +26,12 @@ title: Lambda 関数によるログ収集のトラブルシューティングガ
 
 2. Monitoring タブをクリックします。
 
-    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring タブ"  style="width:80%;" >}}
+    {{< img src="logs/guide/lambda-monitoring-tab.png" alt="Monitoring タブ" style="width:80%;" >}}
 
 3. Monitoring タブには、Lambda 関数に関する以下の情報を示す一連のグラフが表示されます。
     * 呼び出し
     * エラー
-    * ログ
+    * logs
 
 4. **Invocations** グラフにデータポイントが表示されない場合は、関数に対して設定したトリガーに問題が発生している可能性があります。[関数のトリガーを管理する](#関数のトリガーを管理する) を参照してください。Monitoring タブを使用せずに Lambda 関数の呼び出しについてのインサイトを取得する場合は、[Datadog で Lambda メトリクスを表示する](#Datadog で Lambda メトリクスを表示する) をご確認ください。
 5. 「Error count and success rate」グラフにデータポイントが表示されている場合は、[Lambda 関数のログを確認する](#Lambda 関数のログを確認する) で報告されたエラーメッセージの内容を確認してください。
@@ -44,7 +48,7 @@ AWS Lambda 関数を有効にすると、Datadog 内での Lambda 関数の呼�
 | `aws.lambda.duration.maximum` | Lambda 関数の実行完了までに要した最大時間 (ミリ秒)  |
 | `aws.lambda.throttles`        | 呼び出し率が既定の上限を超えたために抑制された呼び出し試行回数 |
 
-これらおよびその他の AWS Lambda メトリクスについては、[Amazon Lambda のメトリクス][6]を参照してください。
+これらおよびその他の AWS Lambda メトリクスについては、[AWS Lambda のメトリクス][6]を参照してください。
 
 ### 関数のトリガーを管理する
 
@@ -77,13 +81,18 @@ CloudWatch ロググループの場合は、Datadog のプラットフォーム�
 
 1. Monitoring タブで **View logs in Cloudwatch** をクリックします。
 
-{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Cloudwatch 内での Lambda ログ"  style="width:80%;" >}}
+{{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Cloudwatch 内での Lambda ログ" style="width:80%;" >}}
 
 2. 最新のログストリームを確認。
 
 3. エラーが発生した場合は、"?ERROR ?Error ?error" で検索してみてください。
 
 4. Forwarder の Lambda 関数で、環境変数 "DD_LOG_LEVEL" を "debug" に設定してデバッグログを有効にし、さらなるデバッグを実行します。デバッグログは非常に詳細になるため、デバッグが終了したら無効にしましょう。
+
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://docs.datadoghq.com/ja/help

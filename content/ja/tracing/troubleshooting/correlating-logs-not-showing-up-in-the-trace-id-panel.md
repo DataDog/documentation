@@ -89,7 +89,7 @@ ID が正しく挿入され、ログにリマップされると、トレース�
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ"  style="width:90%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

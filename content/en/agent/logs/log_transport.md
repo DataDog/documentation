@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
   tag: "Documentation"
   text: "Multi-line log aggregation"
-- link: "agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards"
+- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
   tag: "Documentation"
   text: "Tail directories by using wildcards"
 - link: "agent/logs/advanced_log_collection/#global-processing-rules"

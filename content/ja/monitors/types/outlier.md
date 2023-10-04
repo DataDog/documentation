@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
@@ -113,7 +113,7 @@ DBSCAN と MAD には、スケール調整バージョンがあります（scale
 
 {{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="外れ値の帯状" style="width:80%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

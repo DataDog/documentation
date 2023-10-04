@@ -155,7 +155,8 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][6].
+For more information, see [Ingestion Mechanisms][6]. <br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
@@ -176,21 +177,18 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
 **Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
-`DD_TRACE_GLOBAL_TAGS`
-: **TracerSettings property**: `GlobalTags`<br>
-If specified, adds all of the specified tags to all generated spans.
-**Example**: `layer:api, team:intake` <br>
-Note that the delimiter is a comma and a space: `, `.
-
 `DD_TRACE_DEBUG`
 : Enables or disables debug logging. Valid values are `true` or `false`.<br>
 **Default**: `false`
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.
+Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans.<br>
+**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,`<br>
+Also accepts entries without a specified tag name. <br>
+**Example**: `My-Header-And-Tag-Name`<br>
+Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -205,12 +203,17 @@ Added in version `2.19.0`.<br>
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake,key:value` <br>
+**Example**: `layer:api, team:intake, key:value` <br>
+**Note**: The delimiter is a comma and a space: `, `. <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+**Default**: `31`
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
@@ -230,6 +233,11 @@ The `from-key` value is specific to the integration type, and should exclude the
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
+**Default**: `true`
+
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -254,7 +262,8 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5]. <br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. 
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
@@ -318,7 +327,7 @@ The following configuration variables are for features that are available for us
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#head-based-sampling
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#head-based-sampling
 [7]: /tracing/trace_collection/compatibility/dotnet-framework/#integrations
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
@@ -326,3 +335,6 @@ The following configuration variables are for features that are available for us
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
+[15]: /tracing/configure_data_security#telemetry-collection
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services

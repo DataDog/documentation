@@ -1,18 +1,19 @@
 ---
-title: アクセス許可に関する問題
-kind: documentation
 aliases:
-  - /ja/agent/faq/how-to-solve-permission-denied-errors
-  - /ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
-  - /ja/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
+- /ja/agent/faq/how-to-solve-permission-denied-errors
+- /ja/agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
+- /ja/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Agent のトラブルシューティング
-    text: Agent デバッグモード
-  - link: /agent/troubleshooting/send_a_flare/
-    tag: Agent のトラブルシューティング
-    text: Agent フレアの送信
+- link: /agent/troubleshooting/debug_mode/
+  tag: Agent のトラブルシューティング
+  text: Agent デバッグモード
+- link: /agent/troubleshooting/send_a_flare/
+  tag: Agent のトラブルシューティング
+  text: Agent フレアの送信
+kind: documentation
+title: アクセス許可に関する問題
 ---
+
 Agent がホストでデータを収集するためには、特定のアクセス許可が必要です。このページでは最も一般的なアクセス許可に関する問題とその解決方法について説明します。
 
 * [Agent ロギングのアクセス許可の問題](#agent-logging-permission-issues)
@@ -94,7 +95,7 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 これにより、プロセスチェックで `sudo` を使用して `ls` コマンドを実行できるようになりますが、パスが `/proc/*/fd/` のコンテンツリストのみが対象です。
 
-この行が Datadog の `error.log` ファイル、`sudo: sorry, you must have a tty to run sudo` に含まれている場合は、`visudo` を実行し、`Default requiretty` の行をコメントアウトします。
+Datadog の `error.log` ファイルに `sudo: sorry, you must have a tty to run sudo` の行があった場合、`visudo` を使って sudoers ファイルの `Default requiretty` という行をコメントアウトする必要があります。
 
 {{% /tab %}}
 {{% tab "Agent v6 および v7" %}}

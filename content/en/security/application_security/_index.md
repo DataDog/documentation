@@ -35,7 +35,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/"
   tag: "Blog"
   text: "Block attackers in your apps and APIs with Datadog Application Security Management"
+- link: "https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/"
+  tag: "Blog"
+  text: "Threat modeling with Datadog Application Security Management"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
@@ -66,8 +73,6 @@ To start configuring your environment to detect and protect threats with ASM, fo
 In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
 ## Investigate risk introduced in upstream open source libraries and dependencies
-
-<div class="alert alert-info">Application Vulnerability Management is in beta.</a></div>
 
 [Application Vulnerability Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 

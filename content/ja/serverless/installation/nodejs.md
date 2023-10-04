@@ -6,9 +6,9 @@ further_reading:
 - link: /serverless/configuration
   tag: Documentation
   text: サーバーレスモニタリングの構成
-- link: /serverless/guide/serverless_tracing_and_webpack/
+- link: /serverless/guide/serverless_tracing_and_bundlers/
   tag: Documentation
-  text: Node.js Lambda トレースと Webpack の互換性
+  text: Node.js Lambda トレースとバンドラーの互換性
 - link: /serverless/guide/troubleshoot_serverless_monitoring
   tag: Documentation
   text: サーバーレスモニタリングのトラブルシューティング
@@ -23,7 +23,7 @@ title: Node.js サーバーレスアプリケーションのインスツルメ�
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
-<div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_webpack/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
+<div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_bundlers/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
 
 ## インストール
 
@@ -375,6 +375,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ## 次のステップ
 
 - おめでとうございます。[Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][6]を有効にします。
 - [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][2]を参照してください
 - [高度な構成][3]を参照して以下のことを行ってください。
@@ -435,3 +436,4 @@ exports.handler = async (event) => {
 [3]: /ja/serverless/configuration/
 [4]: /ja/serverless/custom_metrics?tab=nodejs
 [5]: /ja/tracing/custom_instrumentation/nodejs/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

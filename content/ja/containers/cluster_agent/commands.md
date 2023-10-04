@@ -54,13 +54,13 @@ Datadog Cluster Agent がサービスを提供するポート。デフォルト�
 クラスターレベルのメタデータマッピングを有効にします。デフォルトは `true` です。
 
 `DD_COLLECT_KUBERNETES_EVENTS`
-Kubernetes イベントを収集するように Agent を構成します。デフォルトは `false` です。詳細については、[Cluster Agent イベント収集のドキュメント][2]を参照してください。
+: Kubernetes イベントを収集するように Agent を構成します。デフォルトは `false` です。
 
 `DD_LEADER_ELECTION`
 「リーダー選出」を有効にします。この機能を有効にするには、 `DD_COLLECT_KUBERNETES_EVENTS` を `true` に設定します。デフォルトは `false` です。
 
-`DD_LEADER_LEASE_DURATION`                    
-: リーダー選出が有効な場合のみ使用されます。リーダー選出についての詳細は、[Cluster Agent イベント収集のドキュメント][2]を参照してください。値は秒数で、デフォルトでは 60 です。
+`DD_LEADER_LEASE_DURATION`
+: リーダー選出が有効になっている場合にのみ使用されます。値は秒単位で、デフォルトは 60 です。
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`
 ノード Agent と Datadog Cluster Agent の間で共有される 32 文字のトークン。
@@ -77,8 +77,8 @@ Cluster Agent が公開される Kubernetes サービスの名前。デフォル
 
 API サーバーと通信しているクライアントのタイムアウト (秒単位)。デフォルトは `60` 秒です。
 
-`DD_EXPVAR_PORT`
-Datadog Cluster Agent から [expvar][3] パブリック変数を取得するためのポート。デフォルトはポート `5000`。
+`DD_METRICS_PORT`                              
+: Datadog Cluster Agent のメトリクスを公開するポート。デフォルトはポート `5000` です。
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`
 複数のオートスケーラーからのメトリクスバッチを処理するための待機時間 (秒単位)。デフォルトは `10` 秒です。
@@ -119,10 +119,18 @@ Datadog からのメトリクスの問い合わせに使用するウィンドウ
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`
 クラスターチェックメトリクスにタグを追加します。
 
+`DD_PROXY_HTTPS`
+: HTTPS リクエスト用のプロキシサーバーを設定します。
+
+`DD_PROXY_HTTP`
+: HTTP リクエスト用のプロキシサーバーを設定します。
+
+`DD_PROXY_NO_PROXY`
+: プロキシをバイパスするホストのリストを設定します。リストはスペース区切りです。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/agent/cluster_agent/event_collection/
-[3]: https://golang.org/pkg/expvar
+[2]: https://golang.org/pkg/expvar

@@ -2,13 +2,11 @@
 aliases:
 - /ja/real_user_monitoring/ios/getting_started
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/_index.md
 description: iOS および tvOS アプリケーションから RUM データを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: RUM データの調査方法
@@ -21,6 +19,7 @@ further_reading:
 kind: documentation
 title: RUM iOS と tvOS のモニタリング
 ---
+
 ## 概要
 
 Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
@@ -50,8 +49,9 @@ Datadog Real User Monitoring (RUM) を使用すると、アプリケーション
 1. [**UX Monitoring** > **RUM Applications** > **New Application**][5] へ移動します。
 2. アプリケーションタイプとして `iOS` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
 3. Web ビューをインスツルメントするには、**Instrument your webviews** トグルをクリックします。詳しくは、[Web ビュー追跡][12]を参照してください。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。詳しくは、[RUM iOS データ収集][14]をご覧ください。
 
-{{< img src="real_user_monitoring/ios/screenshot_rum.png" alt="RUM イベント階層" style="width:100%;border:none" >}}
+   {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Datadog で iOS 用 RUM アプリケーションを作成する" style="width:100%;border:none" >}}
 
 データの安全性を確保するため、クライアントトークンを使用する必要があります。`dd-sdk-ios` ライブラリの構成に [Datadog API キー][6]のみを使用した場合、クライアント側で iOS アプリケーションのバイトコード内で公開されます。
 
@@ -347,4 +347,5 @@ Datadog の構成で、初期化時に以下のスニペットを追加します
 [10]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/
 [11]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
 [12]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/web_view_tracking/
-[13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/
+[13]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/ios/
+[14]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected/

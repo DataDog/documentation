@@ -1,8 +1,7 @@
 ---
 aliases:
 - /ja/synthetics/dashboards/testing_coverage
-description: Test Coverage ページでは、テストカバレッジを充実させるために新しい Synthetic ブラウザテストが必要なビューやアクションを推奨し、Synthetic
-  のステップと実際のユーザーの動作を比較します。
+description: ブラウザテストのアプリケーションカバレッジを評価し、アプリケーション内の人気のある要素を RUM と Synthetic のデータを使用して追跡する要素として特定します。
 further_reading:
 - link: https://www.datadoghq.com/blog/test-coverage-monitoring-datadog/
   tag: GitHub
@@ -22,11 +21,11 @@ title: テストカバレッジ
 
 ## 概要
 
-[**Test Coverage** ページ][1]は、[RUM][2] から収集したブラウザデータと [Synthetic ブラウザのテスト結果][3]を使用して、RUM アプリケーションのテストカバレッジ全体に関する洞察を提供します。
+[**Test Coverage** ページ][1]では、[RUM アプリケーション][9]の全体的なテストカバレッジについて、アクションにつながる洞察を提供します。これは、[Browser RUM SDK から収集したデータ][2]と [Synthetic ブラウザテストからの結果][3]を使用しています。
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Overview セクション、Unttested Actions セクション、Tested Actions セクションを持つ Test Coverage ページ" style="width:100%" >}}
 
-ページで紹介されている以下の情報を考慮することで、より包括的で正確なテストスイートを構築することができます。
+Test Coverage ページでは、以下の情報が表示されます。
 
 - アクセス数の多い Web ページ
 - テストされた RUM アクションの割合
@@ -36,7 +35,9 @@ title: テストカバレッジ
 
 ## アプリケーションやビューのテストカバレッジを調査する
 
-テストカバレッジの完全性を把握することを始めるには
+テストされていないアクションを特定し、Test Coverage ページで実際のユーザーインタラクションにリンクすることで、より包括的で正確なテストスイートを構築します。
+
+アプリケーションやビューの中で、ブラウザテストを作成すべき箇所を特定します。
 
 1. **Application** ドロップダウンメニューから RUM アプリケーションを選択するか、**View Name** ドロップダウンメニューからビューを選択します。
 2. [カスタムアクション][4]は、ユニークで、生成されたアクションと比較してより正確なカバレッジ結果を提供するものです。生成されたアクションをテストカバレッジ分析に含める場合は、**All Actions** を選択します。
@@ -88,3 +89,4 @@ title: テストカバレッジ
 [6]: /ja/continuous_testing/
 [7]: /ja/real_user_monitoring/session_replay/
 [8]: https://app.datadoghq.com/rum/explorer/
+[9]: https://app.datadoghq.com/rum/list

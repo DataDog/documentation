@@ -11,6 +11,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+algolia:
+  tags: ['unified service tags','unified','unified service','service tags']
 ---
 
 ## Overview

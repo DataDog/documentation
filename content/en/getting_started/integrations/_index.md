@@ -184,7 +184,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -197,12 +197,12 @@ tagging
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
 [22]: /developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example

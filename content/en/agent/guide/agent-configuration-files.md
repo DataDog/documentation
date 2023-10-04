@@ -3,6 +3,12 @@ title: Agent Configuration Files
 kind: guide
 aliases:
   - /agent/faq/agent-configuration-files
+algolia:
+  rank: 80
+  category: guide
+  subcategory: Agent Configuration Files
+  tags: ["agent config", "agent configuration", "agent directory"]
+
 ---
 
 ## Agent main configuration file
@@ -17,7 +23,7 @@ The Agent v6 configuration file uses **YAML** to better support complex configur
 | AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
 | Linux                                | `/etc/datadog-agent/datadog.yaml`    |
 | macOS                                | `~/.datadog-agent/datadog.yaml`      |
-| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.yaml` |
+| Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -53,8 +59,7 @@ Prior releases of Datadog Agent stored configuration files in `/dd-agent/conf.d/
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
 | Ubuntu                               | `/etc/datadog-agent/conf.d/`   |
-| Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\conf.d` |
-| Windows Server 2003, XP or older     | *unsupported platform*         |
+| Windows                              | `%ProgramData%\Datadog\conf.d` |
 
 ### Checks configuration files for Agent 6
 

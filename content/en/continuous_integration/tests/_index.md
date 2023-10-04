@@ -1,34 +1,60 @@
 ---
-title: Exploring Tests
+title: Test Visibility in Datadog
 kind: documentation
 aliases:
   - /continuous_integration/explore_tests/
+  - /continuous_integration/guides/test_configurations/
 further_reading:
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Creating CI Test Monitors"
     - link: "/continuous_integration/guides/find_flaky_tests/"
-      tag: "Guide"
+      tag: "Documentation"
       text: "Finding Flaky Tests"
     - link: "/continuous_integration/guides/rum_integration/"
-      tag: "Guide"
+      tag: "Documentation"
       text: "Linking CI Visibility and RUM"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['ci test', 'ci tests']
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
+## Overview
+
+[Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
+
+### Supported features
+|                                                                                                                                                                                                                  |   .NET  |   Java  |      Javascript      |  Python |   Ruby  |  Swift  |       JUnit Xml      |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------:|:-------:|:--------------------:|:-------:|:-------:|:-------:|:--------------------:|
+| {{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}                                                                            | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} | {{< X >}} | {{< X >}} |                      |
+| {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog show the full distributed trace in their test details.{{< /ci-details >}} | {{< X >}} | {{< X >}} |        {{< X >}}       |         | {{< X >}} | {{< X >}} |                      |
+| {{< ci-details title="Agent-based reporting" >}}Ability to report test information through the Datadog Agent.{{< /ci-details >}}                                                                                 | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} | {{< X >}} | {{< X >}} |                      |
+| {{< ci-details title="Agentless reporting" >}}Ability to report test information without the Datadog Agent.{{< /ci-details >}}                                                                                   | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites and tests. Read more in Test suite level visibility.{{< /ci-details >}}       | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}               | {{< X >}} | {{< X >}} |        {{< X >}}       |         |         | {{< X >}} |                      |
+| {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test based on the CODEOWNERS file.{{< /ci-details >}}                                                                          | {{< X >}} | {{< X >}} |        {{< X >}}       |         |         | {{< X >}} |                      |
+| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} | {{< X >}} | {{< X >}} (only start) |         |         | {{< X >}} | {{< X >}} (only start) |
+| {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                       | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} | {{< X >}} | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Intelligent Test Runner" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                      | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |                      |
+| {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} | {{< X >}} |        {{< X >}}       |         |         | {{< X >}} |   {{< X >}} (manual)   |
+| {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |         |                      | {{< X >}} |         | {{< X >}} |                      |
+| {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |                      |
 
 ## Setup
 
-
-
-{{< whatsnext desc="Choose a language to set up test visibility in Datadog:" >}}
+{{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
@@ -37,112 +63,89 @@ The [Tests][1] page, under the CI menu in Datadog, provides a test-first view in
     {{< nextlink href="continuous_integration/tests/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
-## Explore tests
 
-The Tests page shows the _Branches_ view and the _Default Branches_ view.
+## Default configurations
 
-### Branches view
+Tests evaluate the behavior of code for a set of given conditions. Some of those conditions are related to the environment where the tests are run, such as the operating system or the runtime used. The same code executed under different sets of conditions can behave differently, so developers usually configure their tests to run in different sets of conditions and validate that the behavior is the expected for all of them. This specific set of conditions is called a *configuration*.
 
-The [Branches][2] view of the Tests page lists all branches from all Test Services that have reported test results. This tab is useful for individual developers to quickly see the status of tests that run on their code branches and troubleshoot test failures.
+In CI Visibility, a test with multiple configurations is treated as multiple tests with a separate test for each configuration. In the case where one of the configurations fails but the others pass, only that specific test and configuration combination is marked as failed.
 
-In this page, you can filter the list by name, test service, or commit SHA, or to show only your branches (branches that contain at least one commit authored by you) by enabling the **My branches** toggle and adding the email addresses you use in your Git configuration.
+For example, suppose you're testing a single commit and you have a Python test that runs against three different Python versions. If the test fails for one of those versions, that specific test is marked as failed, while the other versions are marked as passed. If you retry the tests against the same commit and now the test for all three Python versions pass, the test with the version that previously failed is now marked as both passed and flaky, while the other two versions remain passed, with no flakiness detected.
 
-#### Test results
+### Test configuration attributes
 
-For each branch, the list shows test results for its latest commit: a consolidated number of tests broken down by status (which takes into account retries) and the number of new flaky tests introduced by the commit (a flaky test is defined as a test that both passes and fails on the same commit).
+When you run your tests with CI Visibility, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
 
-#### Test suite performance
+The following tags are automatically collected to identify test configurations, and some may only apply to specific platforms:
 
-There's also information about the wall time of the most recent test suite run, and a comparison to the average wall time of the default branch. _Wall time_ is the real time elapsed while the test suite runs, which is less than the sum of all test times when tests are run concurrently. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance regressions to your test suite.
+| Tag Name               | Description                                                     |
+|------------------------|-----------------------------------------------------------------|
+| `os.platform`          | Name of the operating system where the tests are run.           |
+| `os.family`            | Family of the operating system where the tests are run.         |
+| `os.version`           | Version of the operating system where the tests are run.        |
+| `os.architecture`      | Architecture of the operating system where the tests are run.   |
+| `runtime.name`         | Name of the runtime system for the tests.                       |
+| `runtime.version`      | Version of the runtime system.                                  |
+| `runtime.vendor`       | Vendor that built the runtime platform where the tests are run. |
+| `runtime.architecture` | Architecture of the runtime system for the tests.               |
+| `device.model`         | The device model running the tests.                             |
+| `device.name`          | Name of the device.                                             |
+| `ui.appearance`        | User Interface style.                                           |
+| `ui.orientation`       | Orientation the UI is run in.                                   |
+| `ui.localization`      | Language of the application.                                    |
 
-Hovering over the commit author avatar shows detailed information about the latest commit.
+## Custom configurations
 
-#### Investigate for more details
+There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so CI Visibility can properly identify them.
 
-Click on the row to see test suite run details such as test results for the last commit on this branch (or you can switch branches), failing tests and the most common errors, slow tests, flaky tests, and a complete list of test runs over the time frame selected. You can filter this list of test runs by facet to get to the information you want to see most.
+Define these tags as part of the `DD_TAGS` environment variable using the `test.configuration` prefix.
 
-Click into one of the test runs to see the test trace as a flame graph or a span list. The _Runs (n)_ list on the left lets you quickly access traces for each retry of the test for the same commit.
+For example, the following test configuration tags identify a test configuration where disk response time is slow and available memory is low:
 
-#### Explore connections to services, resources, logs, and network events
+{{< code-block lang="bash" >}}
+DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
+{{< /code-block >}}
 
-Click the CI provider link to examine the Resource, Service, or Analytics page for the test. You can also find complete tags information and links to related log events and network monitoring events.
+All tags with the `test.configuration` prefix are used as configuration tags, in addition to the automatically collected ones.
 
-### Default Branches view
+In order to filter using these configurations tags, [you must create facets for these tags][2].
 
-A _test service_ is a group of tests associated with, for example, a project or repo. It contains all the individual tests for your code, optionally organized into _test suites_ (which are like folders for your tests). The [Default Branches][3] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
+## Test suite level visibility
 
-The Default Branches view shows similar information to the Branches view, but applied to the default branch, and sorted by most recent. It compares the current wall time with the average default branch wall time, to give you an indication of how your test suite performance is trending over time.
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
 
-Click on a row to see the analytics for tests run on the default branch, similar to examining for test run details from the Branches view.
+### Compatibility
 
-## Explore test runs
-
-On the [Test Runs][4] page, you can see the list of all runs over the selected time frame, filter by facet, and examine individual test run details. Each test run is reported as a trace, which in the case of integration tests includes calls made to datastores or third party services using regular [APM instrumentation][5].
-
-Click into a particular test run to see the flame graph or span list for a test, for each time it's been run, similar to clicking into a test run from the Tests page.
-
-You can also interactively plot graphs and top lists using the [Analytics][6] tab.
-
-{{< img src="ci/ci-test-runs.png" alt="Test Runs analytics" style="width:100%;">}}
-
-### How third-party services data is shown
-
-Spans generated by third party services that are instrumented with APM and that are involved in integration tests appear in [APM][7]. You can filter spans that were generated as part of an integration test using the `Origin Service` facet and selecting the test service name used by the integration test.
-
-### Test suite level visibility
-
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project. On the [Test Runs][4] page, you can filter by test level: session, module, suite and test. Each test level represents a different level of aggregation of tests.
-
-{{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
-
-#### Sessions
-Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test` or `dotnet test`.
-
-#### Module
-The definition of module changes slightly per language:
-
-* In .NET a test module groups every test that is run under the same [unit test project][8].
-* In Swift a test module groups every test that is run for a given bundle.
-* In JavaScript there are no test modules.
-
-An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][9].
-
-#### Suite
-A test suite is a group of tests exercising the same unit of code.
-
-An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][10]
-
-#### Compatibility
 Not every language supported by CI Visibility has support for test suite level visibility:
 
-* [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`.
-* [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
-* [Javascript][13] has limited support since `dd-trace-js>=3.3.0`.
-* Java does not support test suite level visibility.
-* JUnit report uploads does not support test suite level visibility.
+* [Swift][3] has complete support since `dd-sdk-swift-testing>=2.1.0`.
+* [.NET][4] has complete support since `dd-trace-dotnet>2.16.0`.
+* [JavaScript][5] has limited support since `dd-trace-js>=3.3.0`.
+* [Java][6] has complete support since `dd-trace-java>=1.12.0`.
+* [JUnit report uploads][7] has complete support since `datadog-ci>=2.17.0`.
+* [Python][8] has complete support since `dd-trace-py>=1.14.0`
 
-Additionally, test suite level visibility is only supported in Agentless mode.
+## Use CI tests data
 
-## Communicate about CI tests data
+When creating a [dashboard][9] or a [notebook][10], you can use test execution data in your search query, which updates the visualization widget options.
 
-Test execution data is available when you create widgets in [Dashboards][14] and [Notebooks][15].
+## Alert on test data
+
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][11], click **Create Monitor** to create a [CI Test monitor][12].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: https://app.datadoghq.com/ci/test-services?view=branches
-[3]: https://app.datadoghq.com/ci/test-services?view=default-branches
-[4]: https://app.datadoghq.com/ci/test-runs
-[5]: https://www.datadoghq.com/auto-instrumentation/
-[6]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
-[7]: /tracing/
-[8]: https://learn.microsoft.com/en-us/visualstudio/test/create-a-unit-test-project?view=vs-2022#to-create-a-unit-test-project
-[9]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
-[10]: https://github.com/DataDog/datadog-ci/blob/6de6ea3bbffa57d8576422535061ca35c759feb6/src/commands/junit/__tests__/upload.test.ts
-[11]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[12]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[13]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[14]: https://app.datadoghq.com/dashboard/lists
-[15]: https://app.datadoghq.com/notebook/list
+[2]: /continuous_integration/explorer/facets/#creating-facets
+[3]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
+[4]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
+[5]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
+[6]: /continuous_integration/tests/java/#compatibility
+[7]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
+[8]: /continuous_integration/tests/python/#compatibility
+[9]: https://app.datadoghq.com/dashboard/lists
+[10]: https://app.datadoghq.com/notebook/list
+[11]: https://app.datadoghq.com/ci/test-runs
+[12]: /monitors/types/ci/

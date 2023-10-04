@@ -1,4 +1,8 @@
 {
+  "apm-retention-filters": {
+    "name": "APM Retention Filters",
+    "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint."
+  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."
@@ -9,7 +13,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
-    "description": "Search or aggregate your CI Visibility pipeline events over HTTP."
+    "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP."
   },
   "ci-visibility-tests": {
     "name": "CI Visibility Tests",
@@ -31,6 +35,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "downtimes": {
+    "name": "Downtimes",
+    "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
+  },
   "events": {
     "name": "Events",
     "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
@@ -38,6 +46,10 @@
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Configure your Datadog Fastly integration directly through the Datadog API."
+  },
+  "gcp-integration": {
+    "name": "GCP Integration",
+    "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
   "ip-allowlist": {
     "name": "IP Allowlist",
@@ -49,7 +61,7 @@
   },
   "incident-teams": {
     "name": "Incident Teams",
-    "description": "Create, update, delete and retrieve teams which can be associated with incidents."
+    "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."
   },
   "incidents": {
     "name": "Incidents",
@@ -91,6 +103,10 @@
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
   },
+  "powerpack": {
+    "name": "Powerpack",
+    "description": "The powerpack endpoints allow you to:\n\n- Get a powerpack\n- Create a powerpack\n- Delete a powerpack\n- Get a list of all powerpacks\n\nThe Patch and Delete API methods can only be performed on a powerpack by\na user who has the powerpack create permission for that specific powerpack."
+  },
   "processes": {
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization."
@@ -101,7 +117,7 @@
   },
   "restriction-policies": {
     "name": "Restriction Policies",
-    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles). The restriction policy\ndetermines who is authorized to perform what actions on the resource."
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams (beta), or users (beta)).\nThe restriction policy determines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",
@@ -122,6 +138,10 @@
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
+  },
+  "spans": {
+    "name": "Spans",
+    "description": "Search and aggregate your spans from your Datadog platform over HTTP."
   },
   "spans-metrics": {
     "name": "Spans Metrics",

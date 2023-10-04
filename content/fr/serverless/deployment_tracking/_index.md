@@ -1,15 +1,16 @@
 ---
-title: Suivi des déploiements pour les applications sans serveur
-kind: documentation
 further_reading:
-  - link: /serverless/distributed_tracing
-    tag: Documentation
-    text: Tracing distribué pour les applications sans serveur
-  - link: /serverless/serverless_tagging
-    tag: Documentation
-    text: Tagging de fonctions sans serveur
+- link: /serverless/distributed_tracing
+  tag: Documentation
+  text: Tracing distribué pour les applications sans serveur
+- link: /serverless/serverless_tagging
+  tag: Documentation
+  text: Tagging de fonctions sans serveur
+kind: documentation
+title: Suivi des déploiements pour les applications sans serveur AWS Lambda
 ---
-{{< img src="serverless/deployment_tracking.jpeg" alt="Suivi des déploiements sans serveur"  style="width:100%;">}}
+
+{{< img src="serverless/deployment_tracking.jpeg" alt="Suivi des déploiements sans serveur" style="width:100%;">}}
 
 Le suivi des déploiements vous aide à identifier lorsqu'une nouvelle version de code ou un changement de configuration entraîne une hausse soudaine d'erreurs, une dégradation des performances ou un changement d'état de votre environnement cloud.
 
@@ -19,7 +20,7 @@ Pour consulter plus facilement l'ancien code et les changements de configuration
 
 ## Configuration
 
-Datadog recueille des événements de changement de code et de configuration pour vos fonctions Lambda AWS à partir d'AWS CloudTrail.
+Datadog recueille des événements de changement de code et de configuration pour vos fonctions AWS Lambda à partir d'AWS CloudTrail.
 
 Si vous ne l'avez pas déjà fait, configurez d'abord l'intégration [Amazon Web Services][2]. Ajoutez ensuite les autorisations suivantes au document de stratégie pour votre rôle AWS/Datadog :
 
@@ -29,7 +30,7 @@ cloudtrail:LookupEvents
 
 Si vous avez ajouté l'autorisation, mais que les événements de vos fonctions AWS Lambda ne s'affichent pas, activez le suivi des déploiements depuis le carré de l'intégration AWS Lambda.
 
-{{< img src="serverless/lambda_integration_settings.png" alt="Paramètres de l'intégration Lambda"  style="width:100%;">}}
+{{< img src="serverless/lambda_integration_settings.png" alt="Paramètres de l'intégration Lambda" style="width:100%;">}}
 
 ## Pour aller plus loin
 

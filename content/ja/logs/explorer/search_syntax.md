@@ -1,14 +1,12 @@
 ---
 aliases:
-- /ja/logs/search
 - /ja/logs/search-syntax
-- /ja/logs/explorer/search/
 - /ja/logs/search_syntax/
 description: すべてのログを検索する
 further_reading:
 - link: /logs/explorer/#visualize
   tag: ドキュメント
-  text: ログ分析の実行
+  text: ログを視覚化する方法
 - link: /logs/explorer/#patterns
   tag: ドキュメント
   text: ログ内のパターン検出
@@ -17,7 +15,7 @@ further_reading:
   text: ログの処理方法
 - link: /logs/explorer/saved_views/
   tag: ドキュメント
-  text: ログエクスプローラーの自動構成
+  text: 保存ビューについて
 kind: documentation
 title: ログ検索構文
 ---
@@ -41,20 +39,13 @@ title: ログ検索構文
 | `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                             | authentication OR password   |
 | `-`          | **除外**: 以下の用語はイベントに含まれません (個々の生テキスト検索に適用されます)。                                                  | authentication AND -password |
 
-## オートコンプリート
+## 特殊文字とスペースのエスケープ
 
-検索バーのオートコンプリート機能を使用すると、以下を使用してクエリを完成させることができます。
-    - ログにある既存のキーと値
-    - ユーザーごとの最近の検索
-    - 保存ビュー
+特殊文字と見なされる `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`、ならびにスペースは、`\` 文字を使用してエスケープする必要があります。
 
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="クエリとして service: が、オートコンプリートオプションとして emailer、balancer-checker、ad-server、vpc が表示されているログ検索バー" style="width:80%;">}}
+ログメッセージ内の特殊文字を検索することはできません。特殊文字が属性の中にある場合は、検索することができます。
 
-明確なエラー状態は、クエリのどの部分に構文エラーがあり、それをどのように修正すればよいかを知らせます。例えば、クエリ `service:` に値がない状態で入力した場合、クエリにカーソルを合わせると "Missing value in key:value pair" というメッセージが表示されます。
-
-## 特殊文字のエスケープ
-
-次の文字は特殊文字とみなされます:  `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `/` は、`\` 文字でエスケープすることが必要です。ログメッセージから特殊文字を検索することはできません。しかし、特殊文字が属性の中にある場合は、検索することができます。特殊文字を検索するには、[grok parser][1] で特殊文字を属性にパースし、その属性を含むログを検索してください。
+特殊文字を検索するには、[Grok Parser][1] で特殊文字を属性にパースし、その属性を含むログを検索してください。
 
 
 ## 属性検索
@@ -85,6 +76,21 @@ title: ログ検索構文
 | `@http.url_details.path:"/api/v1/test"`                              | 属性 `http.url_details.path` に `/api/v1/test` と一致するすべてのログを検索します。                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | 属性 `http.url` に、`/api/v1/` で始まる値を含むすべてのログを検索します。                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | 200 から 299 の `http.status_code` 値を含み、`http.url_details.path` 属性に `/api/v1/` で始まる値を含むすべてのログを検索します。 |
+| `-@http.status_code:*`                                                | `http.status_code` 属性を含まないすべてのログを検索します |
+
+### CIDR 表記による検索
+CIDR (Classless Inter Domain Routing) は、IP アドレスの範囲 (CIDR ブロックとも呼ばれる) を簡潔に定義することができる表記法です。CIDR は、ネットワーク (VPC など) またはサブネットワーク (VPC 内のパブリック/プライベートサブネットなど) を定義するために最もよく使用されます。
+
+ユーザーは `CIDR()` 関数を使用して、CIDR 表記を使用してログの属性をクエリすることができます。`CIDR()` 関数は、フィルタリングのパラメーターとしてログ属性を渡し、その後に 1 つまたは複数の CIDR ブロックを渡す必要があります。
+
+#### 例
+- `CIDR(@network.client.ip,13.0.0.0/8)` は、フィールド `network.client.ip` の IP アドレスが 13.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` は、配列属性 `network.ip.list` の IP アドレスが 13.0.0.0/8 または 15.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` は、13.0.0.0/8 サブネットで発信されるパロアルトファイアウォールの拒否イベントにマッチしてフィルターにかけます。
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` は、サブネット間で環境内のネットワークトラフィックを分析するため、サブネット 13.0.0.0/8 から発生していないが、宛先サブネット 15.0.0.0/8 へ向けられている VPC ログをすべて表示します。
+
+`CIDR()` 関数は、IPv4 と IPv6 の CIDR 表記をサポートし、ログエクスプローラー、Live Tail、ダッシュボードのログウィジェット、ログモニター、およびログ構成で動作します。
+
 
 ## ワイルドカード
 
@@ -176,3 +182,4 @@ service:*mongo
 [4]: /ja/integrations/#cat-log-collection
 [5]: /ja/getting_started/tagging/#tags-best-practices
 [6]: /ja/logs/explorer/saved_views/
+[7]: /ja/logs/explorer/facets/#facet-panel

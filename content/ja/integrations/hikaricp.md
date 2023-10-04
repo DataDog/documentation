@@ -27,7 +27,7 @@ draft: false
 git_integration_title: hikaricp
 integration_id: hikaricp
 integration_title: HikariCP
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -61,7 +61,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 HikariCP チェックをホストにインストールするには
 

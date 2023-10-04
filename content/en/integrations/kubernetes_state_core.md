@@ -26,6 +26,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/"
       tag: "Blog"
       text: "Our Journey Taking Kubernetes State Metrics to the Next Level"
+algolia:
+  tags: ["ksm", "ksm core"]
 ---
 
 ## Overview
@@ -175,6 +177,9 @@ datadog:
 `kubernetes_state.apiservice.condition`
 : The condition of this API service. Tags:`apiservice` `condition` `status`.
 
+`kubernetes_state.configmap.count`
+: Number of ConfigMaps. Tags:`kube_namespace`.
+
 `kubernetes_state.daemonset.count`
 : Number of DaemonSets. Tags:`kube_namespace`.
 
@@ -236,10 +241,10 @@ datadog:
 : Number of endpoints. Tags:`kube_namespace`.
 
 `kubernetes_state.endpoint.address_available`
-: Number of addresses available in endpoint. Tags:`endpoint` `kube_namespace`.
+: Number of addresses available in endpoint. Tags:`kube_endpoint` `kube_namespace`.
 
 `kubernetes_state.endpoint.address_not_ready`
-: Number of addresses not ready in endpoint. Tags:`endpoint` `kube_namespace`.
+: Number of addresses not ready in endpoint. Tags:`kube_endpoint` `kube_namespace`.
 
 `kubernetes_state.namespace.count`
 : Number of namespaces. Tags:`phase`.
@@ -387,6 +392,9 @@ datadog:
 
 `kubernetes_state.pdb.pods_total`
 : Total number of pods counted by this disruption budget. Tags:`kube_namespace` `poddisruptionbudget`.
+
+`kubernetes_state.secret.count`
+: Number of Secrets. Tags:`kube_namespace`
 
 `kubernetes_state.secret.type`
 : Type about secret. Tags:`kube_namespace` `secret` `type`.
@@ -599,6 +607,54 @@ The Kubernetes State Metrics Core check does not include any events.
 [Run the Cluster Agent's `status` subcommand][6] inside your Cluster Agent container and look for `kubernetes_state_core` under the Checks section.
 
 ## Troubleshooting
+
+### Timeout errors
+
+By default, the Kubernetes State Metrics Core check waits 10 seconds for a response from the Kubernetes API server. For large clusters, the request may time out, resulting in missing metrics.
+
+You can avoid this by setting the environment variable `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` to a higher value than the default 10 seconds.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Update your `datadog-agent.yaml` with the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+          value: <value_greater_than_10>
+```
+
+Then apply the new configuration:
+
+```shell
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Update your `datadog-values.yaml` with the following configuration:
+
+```yaml
+clusterAgent:
+  env:
+    - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+      value: <value_greater_than_10>
+```
+
+Then upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 Need help? Contact [Datadog support][7].
 

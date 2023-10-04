@@ -20,7 +20,7 @@ CLEANUP_INSTRUCTIONS='del(.metadata.labels."helm.sh/chart") | del(.metadata.labe
 
 for values in *_values.yaml; do
     type=${values%%_values.yaml}
-    helm template --kube-version 1.21 --namespace default datadog "${HELM_DATADOG_CHART:-datadog/datadog}" --values "$values" \
+    helm template --kube-version 1.21 --namespace default datadog "${HELM_DATADOG_CHART:-datadog/datadog}" --set datadog.apiKey=DUMMY_API_KEY --values "$values" \
         | yq eval $CLEANUP_INSTRUCTIONS - \
         | ${SED:-sed} -E 's/(api-key: )".*"/\1PUT_YOUR_BASE64_ENCODED_API_KEY_HERE/;
                           s/(token: ).*/\1PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE/;

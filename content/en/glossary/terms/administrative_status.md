@@ -1,5 +1,5 @@
 ---
-title: administrative
+title: administrative status
 synonyms:
   - admin status
 ---

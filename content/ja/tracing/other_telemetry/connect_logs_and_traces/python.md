@@ -108,7 +108,7 @@ log = structlog.get_logger()
 
 [Python ロギングのドキュメントを参照][2]して Python ログインテグレーションを適切に構成し、Python ログが自動的にパースされるようにしてください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

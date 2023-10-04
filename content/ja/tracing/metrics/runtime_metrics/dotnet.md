@@ -63,7 +63,7 @@ IIS アプリケーションプールは、ユーザーのリストに表示さ�
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

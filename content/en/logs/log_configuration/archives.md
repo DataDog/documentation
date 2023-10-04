@@ -29,6 +29,10 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 Navigate to the [**Log Forwarding** page][14] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Log Forwarding is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
 2. Create a [storage bucket](#create-a-storage-bucket).
 3. Set [permissions](#set-permissions) to `read` and/or `write` on that archive.
@@ -58,7 +62,7 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**Note:** Archiving to Azure ChinaCloud is not supported.
+**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -83,8 +87,6 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 **Notes:**
 
 - Do not make your bucket publicly readable.
-- Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
-
 - For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
@@ -96,7 +98,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Azure Storage" %}}
 
-* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** or **cool** access tier.
+* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, select either standard performance or **Block blobs** premium account type, and select the **hot** or **cool** access tier.
 * Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
 
 **Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
@@ -182,16 +184,12 @@ Only Datadog users with the [`logs_write_archive` permission][3] can create, mod
 {{% tab "Google Cloud Storage" %}}
 
 1. Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
+2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**.
+3. Click **ADD ANOTHER ROLE**, select the **Storage Object Admin** role, and save.
 
-   * If you're creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
-   * If you're updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2].
+   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
-2. Add the role under **Storage** called **Storage Object Admin**.
-
-   {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
-
-[1]: https://console.cloud.google.com/apis/credentials
-[2]: https://console.cloud.google.com/iam-admin/iam
+[1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -452,5 +450,5 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [10]: /account_management/rbac/permissions#logs_read_index_data
 [11]: /account_management/rbac/permissions#logs_read_data
 [12]: /logs/explorer/live_tail/
-[13]: /events/explorer/
+[13]: /service_management/events/explorer/
 [14]: https://app.datadoghq.com/logs/pipelines/log-forwarding

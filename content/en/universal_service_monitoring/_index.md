@@ -19,7 +19,14 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+cascade:
+    algolia:
+        rank: 70
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Universal Service Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -34,7 +41,7 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 Required Agent version
 : Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40.
 
-Your containerized service must be running on one of the following supported platforms
+Your service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater
 
@@ -53,6 +60,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 - If on Linux:
     - Your service is running in a container.
+    - For non-containerized services see the [instructions here](#support-for-non-containerized-services).
 - If on Windows and using IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -731,7 +739,8 @@ SERVICE=<service>
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.
+   [DEPRECATED] _(version 7.44 or previous)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -769,6 +778,35 @@ After enabling Universal Service Monitoring, you can:
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
+### Support for non-containerized services
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in *beta* to monitor services running bare-metal on Linux virtual machines.
+</div>
+
+Requires agent of version 7.42+
+
+{{< tabs >}}
+{{% tab "Configuration File" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```conf
+DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Path exclusion and replacement
 
@@ -814,7 +852,20 @@ Add the following entry:
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
+{{% tab "Helm" %}}
 
+The following example drops the endpoint `/my-api` and replaces `/my-api-2` with `/new-version`.
+
+```
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES
+          value: '[{"pattern":"/my-api","repl":""},{"pattern":"/my-api-2","repl":"/new-version"}]'
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
@@ -826,4 +877,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [3]: /tracing/service_catalog/
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
-[6]: /monitors/service_level_objectives/metric/
+[6]: /service_management/service_level_objectives/metric/

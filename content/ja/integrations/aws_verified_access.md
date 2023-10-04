@@ -7,6 +7,10 @@ dependencies: []
 description: AWS Verified Access ログを収集します。
 doc_link: https://docs.datadoghq.com/integrations/aws_verified_access/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/verified-access-datadog/
+  tag: ブログ
+  text: AWS Verified Access と Datadog による企業アプリケーションのセキュリティ強化
 git_integration_title: aws_verified_access
 has_logo: true
 integration_id: amazon-verified-access
@@ -28,7 +32,7 @@ AWS Verified Access を使用すると、仮想プライベートネットワー
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -82,6 +86,10 @@ AWS Verified Access インテグレーションには、サービスのチェッ
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/verified-access/latest/ug/access-logs-enable.html

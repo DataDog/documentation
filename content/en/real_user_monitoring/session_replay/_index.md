@@ -14,6 +14,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: '/integrations/content_security_policy_logs'
+  tag: 'Documentation'
+  text: 'Detect and aggregate CSP violations with Datadog'
 ---
 
 ## Overview
@@ -34,7 +37,7 @@ To reduce Session Replay's network impact and ensure the Session Replay recorder
 
 ## Setup
 
-Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK.
+Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. For setup in mobile environments, see [Mobile Session Replay][5].
 
 <div class="alert alert-info">You must be on the latest version of the SDK (v3.6.0 or later)</div>
 
@@ -62,9 +65,31 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
-### Disable Session Replay
+## Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][5], which includes replays.
+To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6], which includes replays.
+
+## Retention
+
+By default, Session Replay data is retained for 30 days. 
+
+To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience.) 
+
+Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
+
+You can disable Extended Retention at any time. If the session replay is still within its default 30 days of retention, the replay expires at the end of the initial 30 day window. If you disable Extended Retention on a session replay that is older than 30 days, the replay immediately expires.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
+
+Refer to the below diagram to understand what data is retained with extended retention.
+
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
+
+
+
+## Mobile Session Replay
+
+Learn more about the [Session Replay for Mobile][5].
 
 ## Further Reading
 
@@ -73,5 +98,6 @@ To stop session recordings, remove `startSessionReplayRecording()` and set `sess
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /real_user_monitoring/browser/#setup
-[5]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[4]: /real_user_monitoring/session_replay/
+[5]: /real_user_monitoring/session_replay/mobile/
+[6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay

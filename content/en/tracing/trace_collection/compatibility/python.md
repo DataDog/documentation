@@ -57,7 +57,6 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [Molten][11]               | >= 0.7.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][12]              | >= 0.9.6          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][13]             | >= 1.7            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
-| [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 | [Sanic][15]               | >= 19.6.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
 | [Starlette][16]           | >= 0.13.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |
 | [Tornado][17]             | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#tornado |
@@ -73,7 +72,7 @@ The `ddtrace` library includes support for the following data stores:
 | [algoliasearch][18]                | >= 1.20.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
 | [Cassandra][20]                    | >= 3.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]                | >= 1.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Elasticsearch][21]                | >= 1.6, < 8.0     | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | >= 0.12           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Mariadb][23]                      | >= 1.0.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][24] [pylibmc][25]      | >= 1.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
@@ -90,6 +89,7 @@ The `ddtrace` library includes support for the following data stores:
 | [PyODBC][39]                       | >= 4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyodbc                               |
 | [Redis][40]                        | >= 2.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#redis                               |
 | [Redis][40] [redis-py-cluster][41] | >= 1.3.5          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.rediscluster |
+| [snowflake-connector-python][62]   | >= 2.1            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#snowflake
 | [SQLAlchemy][42]                   | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlalchemy                          |
 | [SQLite3][43]                      | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sqlite                              |
 | [Vertica][44]                      | >= 0.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#vertica                             |
@@ -116,6 +116,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Requests][58]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
+| [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
 
 ## Further Reading
 
@@ -183,3 +184,4 @@ The `ddtrace` library includes support for the following libraries:
 [59]: https://urllib3.readthedocs.io/en/stable/
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
 [61]: https://gunicorn.org/
+[62]: https://snowflake.com/

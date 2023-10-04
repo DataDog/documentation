@@ -51,7 +51,7 @@ CMD ["/path/to/your-go-binary"]
 
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: /ja/tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}

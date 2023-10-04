@@ -22,12 +22,14 @@ If a user's IP is not contained in the IP allowlist, they are effectively blocke
 - Datadog's web UI
 - Datadog's public [API][1], including both documented and unpublished endpoints
 - Datadog's mobile apps (iOS, Android)
-- Third-party applications that access Datadog through OAuth
+- Third-party integrations and applications that access Datadog through OAuth
 
 The IP allowlist feature does not block access to the following:
 - Data ingest endpoints to which the Agent sends data, such as metrics, traces, and logs
 - The [validate API key][2] endpoint, which the Agent uses before submitting data
 - [Public dashboards][3]
+
+Applications and integrations that submit telemetry such as metrics, traces, and logs from the Agent and those that use an API key provided by the user are unaffected by the IP allowlist. Datadog recommends utilizing the [Audit Trail][4] to monitor for IP addresses from third parties.
 
 ### Functionality
 
@@ -52,7 +54,7 @@ When you enable or modify the IP allowlist, the system enforces constraints to m
 
 **Note:** The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on.
 
-To find the [IP allowlist UI][4]:
+To find the [IP allowlist UI][5]:
 
 1. Navigate to **Organization Settings** from your account menu.
 1. Under **Access**, select **IP Allowlist**.
@@ -88,14 +90,15 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 ## Managing the IP allowlist programmatically
 
-To manage the IP allowlist through the API, see the [public API documentation][5].
+To manage the IP allowlist through the API, see the [IP Allowlist API documentation][6].
 
-See the [`ip_allowlist` resource][6] to manage the IP allowlist in Terraform.
+See the [`ip_allowlist` resource][7] to manage the IP allowlist in Terraform.
 
 
 [1]: /api/latest/
 [2]: /api/latest/authentication/#validate-api-key
 [3]: /dashboards/sharing/
-[4]: https://app.datadoghq.com/organization-settings/ip-allowlist
-[5]: /api/latest/ip-allowlist/
-[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
+[4]: /account_management/audit_trail/
+[5]: https://app.datadoghq.com/organization-settings/ip-allowlist
+[6]: /api/latest/ip-allowlist/
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist

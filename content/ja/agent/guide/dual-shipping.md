@@ -1,4 +1,8 @@
 ---
+further_reading:
+- link: /agent/guide/network/
+  tag: ガイド
+  text: ネットワークトラフィック
 kind: ガイド
 title: デュアルシッピング
 ---
@@ -9,20 +13,20 @@ title: デュアルシッピング
 
 ## 概要
 
-2 つ目の Datadog 組織や他の内部インフラストラクチャーなど、複数の宛先にデータを送信したい場合、追加のエンドポイントにデータを送信するように Agent を構成することができます。複数のエンドポイントまたは API キーに異なる種類のデータを送信するように Agent を設定するには、次の構成を使用します。
+2 つ目の Datadog 組織や他の内部インフラストラクチャーなど、複数の宛先にデータを送信したい場合、追加のエンドポイントにデータを送信するように Agent を構成することができます。複数のエンドポイントまたは API キーに異なる種類のデータを送信するように Agent を設定するには、以下の構成を使用します。
 
-## メトリクス、APM、ライブプロセス、オーケストレーター、CI Visibility
+ネットワークトラフィックの宛先は、[ネットワークトラフィック][1]を参照してください。
+
+## メトリクスとサービスチェック
 
 YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agent を起動します。
 
-{{< tabs >}}
-
-{{% tab "メトリクスとサービスチェック" %}}
-
-<div class="alert alert-info">Agent バージョン >= 6.17 または 7.17 が必要です。</div>
-
 ### YAML 構成
+
+Agent バージョン >= 6.17 または 7.17 が必要です。
+
 `datadog.yaml` で:
+
 ```yaml
 additional_endpoints:
   "https://app.datadoghq.com":
@@ -34,19 +38,18 @@ additional_endpoints:
 
 ### 環境変数コンフィギュレーション
 
-<div class="alert alert-info">Agent バージョン >= 6.18 または 7.18 が必要です。</div>
+Agent バージョン >= 6.18 または 7.18 が必要です。
 
 ```bash
 DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tabs >}}
-
-{{% tab "APM" %}}
-
-<div class="alert alert-info">Agent バージョン >= 6.7.0 が必要です。</div>
+## APM
 
 ### YAML 構成
+
+Agent バージョン >= 6.7.0 が必要です。
+
 `datadog.yaml` で:
 ```yaml
 apm_config:
@@ -57,110 +60,122 @@ apm_config:
     - apikey3
     "https://trace.agent.datadoghq.eu":
     - apikey4
+```
 
+### 環境変数コンフィギュレーション
+
+Agent バージョン >= 6.19 または 7.19 が必要です。
+
+```bash
+DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
+```
+
+## Continuous Profiler
+
+### YAML 構成
+
+Agent バージョン >= 6.7.0 が必要です。
+
+`datadog.yaml` で:
+
+```yaml
+apm_config:
+  [...]
   profiling_additional_endpoints:
-    "https://trace.agent.datadoghq.com":
+    "https://intake.profile.datadoghq.com/api/v2/profile":
     - apikey2
     - apikey3
-    "https://trace.agent.datadoghq.eu":
+    "https://intake.profile.datadoghq.eu/api/v2/profile":
     - apikey4
 ```
 
 ### 環境変数コンフィギュレーション
 
-<div class="alert alert-info">Agent バージョン >= 6.19 または 7.19 が必要です。</div>
+Agent バージョン >= 6.19 または 7.19 が必要です。
 
 ```bash
-DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
-
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
 ```
 
-{{< /tabs >}}
+**注:** Continuous Profiler 製品の追加エンドポイントへのアップロードは、ベストエフォート型配信で行われます。
+* メインエンドポイントが最も優先されます。追加のエンドポイントへのアップロードは、メインエンドポイントへのアップロードが正常に完了した後にのみ処理されます。
+* 追加エンドポイントからの応答は、プロファイラーに転送されません。追加エンドポイントへの配信中に発生したエラーは、Agent のエラーログに記録されます。
 
-{{% tab "ライブプロセス" %}}
-
-<div class="alert alert-info">Agent バージョン >= 6.4.0 が必要です。</div>
+## ライブプロセス
 
 ### YAML 構成
+
+Agent バージョン >= 6.4.0 が必要です。
+
 `datadog.yaml` で:
 ```yaml
 process_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://process.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://process.datadoghq.eu":
     - apikey4
 ```
 
 ### 環境変数コンフィギュレーション
 
-<div class="alert alert-info">Agent バージョン >= 6.20 または 7.20 が必要です。</div>
+Agent バージョン >= 6.20 または 7.20 が必要です。
 
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tabs >}}
+## オーケストレーター
 
-{{% tab "オーケストレーター" %}}
-
-### YAML 構成
-`datadog.yaml` で:
+### HELM 構成
+Datadog `values.yaml` で:
 ```yaml
-orchestrator_explorer:
-  [...]
-  orchestrator_additional_endpoints:
-    "https://mydomain.datadoghq.com":
-    - apikey2
-    - apikey3
-    "https://mydomain.datadoghq.eu":
-    - apikey4
+clusterAgent:
+...
+  datadog_cluster_yaml:
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.ddog-gov.com":
+        - apikey2 
 ```
+
 
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{< /tabs >}}
-
-{{% tab "CI Visibility" %}}
-
-<div class="alert alert-info">Agent >= 6.38 または 7.38 が必要です。</div>
+## CI Visibility （CI/CDの可視化）
 
 ### YAML 構成
+
+Agent >= 6.38 または 7.38 が必要です。
+
 `datadog.yaml` で:
 ```yaml
 evp_proxy_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://<VERSION>-app.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://<VERSION>-app.agent.datadoghq.eu":
     - apikey4
 ```
 
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://<VERSION>-app.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-{{% /tab %}}
-{{% /tabs %}}
+## ログ管理
 
-## ログ、データベースモニタリング、ネットワークデバイス、CSPM、ランタイムセキュリティ
-
-{{< tabs >}}
-
-{{% tab "ログ" %}}
-
-<div class="alert alert-info">TCP には Agent バージョン >= 6.6 が必要です。<br/>HTTPS には Agent バージョン >= 6.13 が必要です。</div>
+TCP には Agent バージョン >= 6.6 が必要です。<br/>
+HTTPS には Agent バージョン >= 6.13 が必要です。
 
 ### YAML 構成
 `datadog.yaml` で:
@@ -176,20 +191,21 @@ logs_config:
 
 ### 環境変数コンフィギュレーション
 
-<div class="alert alert-info">Agent >= 6.18 または 7.18 が必要です。</div>
+Agent >= 6.18 または 7.18 が必要です。
 
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tabs >}}
+{{% agent-dual-shipping %}}
 
-{{% tab "データベースモニタリング" %}}
-
-<div class="alert alert-info">Agent >= 6.29 または 7.29 が必要です。</div>
+## データベース モニタリング
 
 ### YAML 構成
+
+Agent >= 6.29 または 7.29 が必要です。
+
 `datadog.yaml` で:
 ```yaml
 database_monitoring:
@@ -197,21 +213,21 @@ database_monitoring:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   activity:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbquery-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   metrics:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
 ```
@@ -220,20 +236,20 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
-DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tabs >}}
+{{% agent-dual-shipping %}}
 
-{{% tab "ネットワークデバイス" %}}
-
-<div class="alert alert-info">Agent >= 6.29 または 7.29 が必要です。</div>
+## Network Devices
 
 ### YAML 構成
+
+Agent >= 6.29 または 7.29 が必要です。
 
 `datadog.yaml` で:
 ```yaml
@@ -242,7 +258,7 @@ network_devices:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "ndm-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   snmp_traps:
@@ -250,7 +266,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "ndm-intake.datadoghq.com"
         Port: 443
         is_reliable: true
   netflow:
@@ -258,7 +274,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "ndm-intake.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
@@ -267,22 +283,23 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tabs >}}
+{{% agent-dual-shipping %}}
 
-{{% tab "CSPM" %}}
+## Cloud Security Management Misconfigurations
 
 ### YAML 構成
+
 `datadog.yaml` で:
 ```yaml
-​​compliance_config:
+compliance_config:
   endpoints:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "https://<VERSION>-app.agent.datadoghq.eu"
       Port: 443
       is_reliable: true
 ```
@@ -290,13 +307,13 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_​​COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_​​COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
+DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{< /tabs >}}
+{{% agent-dual-shipping %}}
 
-{{% tab "CWS" %}}
+## Cloud Security Management Threats
 
 ### YAML 構成
 `datadog.yaml` で:
@@ -306,7 +323,7 @@ runtime_security_config:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "https://<VERSION>-app.agent.datadoghq.eu"
       Port: 443
       is_reliable: true
 ```
@@ -314,23 +331,11 @@ runtime_security_config:
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_​​RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
+DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{% /tab %}}
-{{% /tabs %}}
-
-これらの製品からのデータについては、追加のエンドポイントを設定する際に、Agent に使用するトランスポートを伝えるため、明示的に `use_http` を設定する必要があります。追加したすべてのエンドポイントにおいて、同じトランスポート構成が共有されます。
-
-`is_reliable` 設定 (Agent `7.34.0` で初めて利用可能になりました) は、このエンドポイントをプライマリーエンドポイントと同じ優先度で扱うように Agent に指示します。プライマリーエンドポイントは常に信頼性があります。これにより、宛先が利用できなくなった場合でも、データを見逃すことがなくなります。
-
-
-例えば、`is_reliable: true` でメインのエンドポイントと追加のエンドポイントにデータを送信している場合、一方のエンドポイントが使用不能になると、もう一方のエンドポイントにデータが流れ続けます。両方のエンドポイントが利用できなくなった場合、少なくとも一方のエンドポイントが回復するまで、Agent はデータの読み込みと送信を停止します。これにより、すべてのデータが少なくとも 1 つの信頼できるエンドポイントに到達することが保証されます。
-
-Agent `7.37.0+` では、`is_reliable` の設定のデフォルトは `true` です。信頼性のないエンドポイントは、少なくとも 1 つの信頼性のあるエンドポイントが利用可能な場合にのみデータを送信します。`is_reliable` 値の使用量が混在する複数の追加エンドポイントを定義することができます。Datadogでは、デフォルトの `is_reliable` 設定を使用することを推奨しています。
-
-YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agent を起動します。
+{{% agent-dual-shipping %}}
 
 ## Kubernetes のデュアルシッピング
 
@@ -356,9 +361,18 @@ YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agen
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.datadoghq.com"
+        Host: "{{< region-param key=agent_http_endpoint >}}"
         Port: 443
         is_reliable: true
 ```
 
-[Datadog Agent オペレーター](https://github.com/DataDog/datadog-operator)を使用している場合、同様に `agent.customConfig.configData` キーを設定することができます。すべての構成可能なキーは、[ここ](https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md)で文書化されています。
+[Datadog Agent オペレーター][1]を使用している場合は、同様に、`agent.customConfig.configData` キーを設定することができます。全ての構成可能キーは [v1][2] と [v2][3] で文書化されています。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/agent/guide/network/
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

@@ -25,85 +25,21 @@ The latest Java Tracer supports all JVMs version 8 and higher. For additional in
 
 For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
-## Installation and getting started
+## Getting started
 
-### Follow the in-app documentation (recommended)
+Before you begin, make sure you've already [installed and configured the Agent][18].
 
-Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+### Choose your instrumentation method
 
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
+After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
 
-### Configure the Datadog Agent for APM
+See the following pages for supported deployment scenarios and languages:
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+- [Inject the instrumentation library locally][11] (at the Agent);
+- [Inject the instrumentation library from the Datadog UI][12] (beta); or
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
-{{< tabs >}}
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
-
-   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples follow:
-
-   ```
-   DD_TRACE_AGENT_URL=http://custom-hostname:1234
-   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
-
-   ```
-
-   ```bash
-   java -javaagent:<DD-JAVA-AGENT-PATH>.jar -jar <YOUR_APPLICATION_PATH>.jar
-   ```
-
-   You can also use system properties:
-
-   ```bash
-   java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-       -Ddd.trace.agent.url=$DD_TRACE_AGENT_URL \
-       -jar <YOUR_APPLICATION_PATH>.jar
-   ```
-
-   Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist, then stats are sent to `http://localhost:8125`.
-
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
-
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
-
-For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
-[5]: /integrations/
-[6]: /help/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Instrument Your Application
+### Instrument your application
 
 <div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
@@ -115,9 +51,8 @@ After the agent is installed, to begin tracing your applications:
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-   **Note:** To download a specific major version, use the `https://dtdg.co/java-tracer-vX` link instead, where `vX` is the desired version.
-   For example, use `https://dtdg.co/java-tracer-v0` for the latest version 0.
-   Alternatively, see Datadog's [Maven repository][3] for any specific version.
+   **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
+   For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
 
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
@@ -133,8 +68,8 @@ After the agent is installed, to begin tracing your applications:
 | `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
 | `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, `1.3-alpha`, etc.) |
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services.     |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
 | `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
 
 Additional [configuration options](#configuration) are described below.
@@ -281,3 +216,8 @@ If needed, configure the tracing library to send application performance telemet
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services
+[18]: /tracing/trace_collection#install-and-configure-the-agent

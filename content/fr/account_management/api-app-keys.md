@@ -1,9 +1,12 @@
 ---
+algolia:
+  tags:
+  - api key
 aliases:
 - /fr/account_management/faq/how-do-i-reset-my-application-keys/
 - /fr/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /fr/account_management/faq/api-app-key-management/
-kind: faq
+kind: documentation
 title: Clés d'API et clés d'application
 ---
 
@@ -17,9 +20,7 @@ Les [clés d'application][2] sont utilisées conjointement avec la clé d'API de
 
 ### Portées
 
-<div class="alert alert-info">Les portées d'autorisation pour les clés d'application sont une fonctionnalité en version bêta privée. Contactez l'<a href="https://www.datadoghq.com/support/">assistance Datadog</a> pour demander l'activation des portées de clés d'application pour votre organisation.</div>
-
-Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des [portées d'autorisation][3] à vos clés d'application de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
+Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des [portées d'autorisation][3] à vos clés d'application, de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
 
 Lorsque vous appliquez des portées à des clés d'application, il est recommandé d'accorder uniquement les privilèges et les autorisations dont l'application a besoin pour fonctionner correctement. Seules les portées spécifiées par l'utilisateur sont appliquées à la clé d'application : aucune autre autorisation n'est accordée. Vous pouvez modifier la portée d'autorisation d'une clé d'application à tout moment, mais il est essentiel de réfléchir à l'impact que ces modifications auront sur le fonctionnement de votre application et les données auxquelles elle pourra accéder.
 
@@ -32,10 +33,10 @@ Lorsque vous appliquez des portées à des clés d'application, il est recommand
 
 ## Tokens client
 
-Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis un navigateur : celles-ci seraient exposées côté client dans le code JavaScript. Les navigateurs Web et certains clients utilisent donc des tokens client pour transmettre des données à Datadog.
+Pour des raisons de sécurité, vous ne pouvez pas utiliser de clés d'API pour envoyer des données depuis une application pour navigateur, mobile ou téléviseur : celles-ci seraient exposées côté client. Les applications conçues pour les utilisateurs finaux reposent donc sur des tokens client pour transmettre des données à Datadog.
 
  Plusieurs types de clients doivent utiliser un token client pour envoyer des données. Par exemple :
-- Le [collecteur de logs à partir des navigateurs Web][6], qui envoie des logs
+- Les collecteurs de logs pour les [navigateurs Web][6], [Android][12], [iOS][13], [React Native][14], [Flutter][15], et [Roku][16], qui envoient des logs.
 - Les applications [Real User Monitoring][7], qui envoient des événements et des logs
 
 Les tokens client sont uniques à votre organisation. Pour les gérer, accédez à **Organization Settings**, puis cliquez sur l'onglet **Client Tokens**.
@@ -74,7 +75,7 @@ Pour supprimer une clé d'application Datadog, accédez à **Organization Settin
 
 ## Appliquer une portée à des clés d'application
 
-Pour appliquer des [portées d'autorisation][3] à des clés d'application, créez ou modifiez une clé d'application en envoyant une requête sur l'[API Datadog][5]. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][8] ou à un [compte de service][9]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
+Pour appliquer des [portées d'autorisation][3] à des clés d'application, créez ou modifiez une clé d'application via l'[API Datadog][5] ou depuis l'interface. Il est possible d'appliquer une portée aux clés d'application appartenant à [l'utilisateur actuel][8] ou à un [compte de service][9]. Si ce champ n'est pas spécifié, par défaut, la portée de la clé d'application correspondra aux autorisations de l'utilisateur qui l'a créée.
 
 **Remarques :**
 
@@ -94,9 +95,7 @@ Si le compte d'un utilisateur est désactivé, les clés d'application créées 
 
 ## Transferts de clé
 
-Pour des raisons de sécurité, Datadog ne permet pas le transfert d'une clé d'API ou d'application d'un utilisateur à un autre. Nous vous conseillons de garder une trace de vos clés d'API/d'application et de les renouveler lorsqu'un utilisateur quitte la société. De cette façon, un utilisateur qui a quitté la société ne peut plus accéder à votre compte ni à l'API Datadog. Le transfert de clé d'API ou d'application permettrait à un utilisateur qui ne fait plus partie de la société de continuer à envoyer et à recevoir des données via l'API Datadog. Certains clients ont également demandé à ce qu'il soit possible de changer le handle auquel les clés d'API et d'application sont associées. Toutefois, cette méthode ne permet pas de résoudre le problème de fond : un utilisateur qui ne fait plus partie de la société pourra toujours envoyer et récupérer des données à partir de l'API Datadog.
-
-Par ailleurs, plusieurs organisations ont également demandé à créer un « compte de service » afin de gérer leurs clés d'API et d'application. Bien que cette méthode soit appropriée dans de nombreux cas, il ne doit pas s'agir d'un simple compte partagé accessible à tout le monde. Si vous prévoyez d'utiliser un « compte de service », assurez-vous de sécuriser le stockage de ses identifiants (par exemple, en utilisant un gestionnaire de mots de passe et en appliquant le principe du moindre privilège). Pour éviter toute fuite accidentelle des identifiants du compte de service, l'accès à ce compte doit être restreint à un petit nombre de personnes (idéalement, aux personnes en charge de la gestion du compte uniquement).
+Pour des raisons de sécurité, Datadog ne permet pas le transfert d'une clé d'application d'un utilisateur à un autre. Si vous avez besoin de partager une clé d'application, utilisez un [compte de service][11].
 
 ## Que faire en cas d'exposition d'une clé d'API ou d'application
 
@@ -133,3 +132,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [8]: /fr/api/latest/key-management/#create-an-application-key-for-current-user
 [9]: /fr/api/latest/service-accounts/
 [10]: /fr/help/
+[11]: /fr/account_management/org_settings/service_accounts/
+[12]: /fr/logs/log_collection/android/
+[13]: /fr/logs/log_collection/ios/
+[14]: /fr/logs/log_collection/reactnative/
+[15]: /fr/logs/log_collection/flutter/
+[16]: /fr/logs/log_collection/roku/

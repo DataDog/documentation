@@ -19,13 +19,15 @@ You can send data to the Datadog service by using a locally installed [Agent][1]
 The official repositories and binary packages of the Agent are signed. Verify the distribution channel by checking the signature against one of the following public keys:
 
 - Linux DEB packages and repo metadata:
-  - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
+  - [5F1E256061D813B125E156E8E6266D4AC0962C7D][19]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
+  - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
 - Linux RPM packages and repo metadata:
+  - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
 - Windows MSI:
-  - DigiCert certificate fingerprint `21fe8679bdfb16b879a87df228003758b62abf5e`
+  - DigiCert certificate fingerprint `720FE30A376658011C45FF1BE04BDAC071F0DEA2`
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
@@ -95,3 +97,5 @@ For more information, see the [Secrets Management][18] documentation.
 [16]: /agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
 [18]: /agent/guide/secrets-management/
+[19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
+[20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public

@@ -1,14 +1,24 @@
 ---
 title: Connect APM Data with Other Telemetry
 kind: documentation
-description: '.'
+description: Learn how to connect APM data with telemetry collected by additional Datadog products.
 further_reading:
-    - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
-      tag: "Documentation"
-      text: 'Ease troubleshooting with cross-product correlation'
+  - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
+    tag: 'Documentation'
+    text: 'Ease troubleshooting with cross-product correlation'
+  - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
+    tag: 'Blog'
+    text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
 
 Correlating data by various Datadog products gives context to help estimate the business impact and find the root cause of an issue in a few clicks. Set up connections between incoming data to facilitate quick pivots in your explorers and dashboards.
+
+## Connect Database Monitoring and Traces
+
+Inject trace IDs into DBM data collection to correlate the two data sources. View database information in APM and APM information in DBM to see a comprehensive, unified view of your system's performance. See [Connect DBM and Traces][4] to set it up.
+
+{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
+
 
 ## Connect Logs and Traces
 
@@ -35,3 +45,4 @@ Follow the data from failing synthetic tests directly through to the root causes
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /real_user_monitoring/connect_rum_and_traces/
 [3]: /synthetics/apm/
+[4]: /database_monitoring/connect_dbm_and_apm/

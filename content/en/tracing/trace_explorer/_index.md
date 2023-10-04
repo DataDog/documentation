@@ -127,13 +127,17 @@ All spans indexed by custom retention filters *and* the intelligent retention fi
 {{% /tab %}}
 {{% tab "Timeseries View" %}}
 
-All spans indexed by custom retention filters (*not* the intelligent retention filter) are available to be searched when using trace analytics.
+All spans indexed by custom retention filters or the intelligent retention filter are available to be searched when using trace analytics.
 
-From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold.
+From the timeseries view, export your query to a [dashboard][1], [monitor][2], or [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
+
+**Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards, notebooks, and from trace analytics monitor evaluations. For more information, see [Trace Retention][4].
 
 [1]: /dashboards/widgets/timeseries/
 [2]: /monitors/types/apm/?tab=analytics
 [3]: /notebooks
+[4]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
+
 {{% /tab %}}
 {{< /tabs >}}
 

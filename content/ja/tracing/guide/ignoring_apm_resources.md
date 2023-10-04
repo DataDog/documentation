@@ -32,10 +32,10 @@ Datadog に送信したくないトレースのセットをプログラムで特
 環境変数のキーと値をカンマで区切ったリストを使って、必要とするスパンタグや拒否するスパンタグを指定することができます。
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE=key1:value1,key2:value2` です。
+: 指定されたスパンのタグと値が完全に一致する root スパンを持つトレースのみを収集します。このルールに一致しない場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"` です。
 
 `DD_APM_FILTER_TAGS_REJECT`
-: 指定されたスパンのタグと値が完全に一致するルートスパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT=key1:value1,key2:value2` です。
+: 指定されたスパンのタグと値が完全に一致する root スパンを持つトレースを拒否します。このルールに一致した場合、トレースは無視されます。例えば、`DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"` です。
 
 または、Agent のコンフィギュレーションファイルでこれらを設定することもできます。
 
@@ -197,7 +197,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
-Datadog Agent コンテナの環境変数のリストに、以下の例のようなパターンで `DD_APM_IGNORE_RESOURCES` を追加します。Docker Compose には、独自の[変数の置換][1]機能があり、`{TX-PL-LABEL}#x60; などの特殊文字を使用する場合に考慮する必要があります。 
+Datadog Agent コンテナの環境変数のリストに、以下の例のようなパターンで `DD_APM_IGNORE_RESOURCES` を追加します。Docker Compose には、独自の[変数の置換][1]機能があり、`$` などの特殊文字を使用する場合に考慮する必要があります。 
 
 {{< code-block lang="yaml" >}}
     environment:

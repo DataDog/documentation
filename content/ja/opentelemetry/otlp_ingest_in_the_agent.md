@@ -25,7 +25,7 @@ OpenTelemetry のインスツルメンテーションのドキュメントを読
 
 {{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDK/ライブラリ、Datadog トレースライブラリ、Datadog インテグレーション -> Datadog Agent -> Datadog" style="width:100%;">}}
 
-<div class="alert alert-warning"><strong>注</strong>: サポートされているセットアップは、すべての OTel データ生成ホスト上に配置された取り込み Agent です。あるホストを実行しているコレクターまたはインスツルメンテーションアプリから、別のホストの Agent に OTel テレメトリーを送信することはできません。しかし、Agent がコレクターまたは SDK インストルメンテーションアプリにローカルであれば、複数のパイプラインをセットアップすることができます。</div>
+<div class="alert alert-warning"><strong>注</strong>: サポートされているセットアップは、すべての OpenTelemetry データ生成ホスト上に配置された取り込み Agent です。あるホストを実行しているコレクターまたはインスツルメンテーションアプリから、別のホストの Agent に OpenTelemetry テレメトリーを送信することはできません。しかし、Agent がコレクターまたは SDK インストルメンテーションアプリにローカルであれば、複数のパイプラインをセットアップすることができます。</div>
 
 ## Datadog Agent で OTLP の取り込みを有効にする
 
@@ -213,9 +213,12 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
 
 ## すぐに使えるダッシュボード
 
-Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
+Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには
 
-{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+1. [OpenTelemetry インテグレーション][9]をインストールします。
+2. **Dashboards** > **Dashboards list** にアクセスし、`opentelemetry` を検索します。
+
+   {{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
 
 **Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][7] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][8]に応じて収集された他の種類のメトリクス用です。
 
@@ -231,3 +234,4 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[9]: https://app.datadoghq.com/integrations/otel

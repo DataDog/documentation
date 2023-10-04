@@ -5,8 +5,7 @@ kind: documentation
 title: ロールアップ
 ---
 
-`.rollup()`
-`.rollup()` 関数は、すべてのメトリクスクエリでメトリクスのデータを本質的に集計するために用いられます。しかし、`.rollup()` 関数をクエリの末尾に追加することで、デフォルトをオーバーライドするカスタム[時間集計][1]を実行することができます。この関数では以下のことを定義できます。
+すべてのメトリクスクエリは本質的に集計されます。しかし、クエリの最後に `.rollup()` 関数を追加することで、デフォルトをオーバーライドしたカスタムの[時間集計][1]を行うことができます。この関数を使用すると、次のような定義を行うことができます。
 
 * rollup `<interval>`: データが集計される時間の間隔 ([クエリで強制されるロールアップの間隔より大きい場合](#rollup-interval-enforced-vs-custom))。
 * rollup `<aggregator>`: 指定されたロールアップの時間間隔の範囲におけるデータポイントの集計方法。
@@ -55,7 +54,7 @@ title: ロールアップ
 
 **注**: `COUNT` と `RATE` のタイプのメトリクスは、自動的に `.as_count()` のモディファイアー付きで画面に表示されます。これにより、`sum` を設定したロールアップ関数が実行され、補間が無効になります。この `.as_count()` はクエリの末尾に明示的に表示されます。
 
-  {{< img src="dashboards/functions/rollup/as_count.png" alt="as_count" style="width:50%;">}}
+  {{< img src="dashboards/functions/rollup/as_count_dropdown.png" alt="as_count" style="width:100%;">}}
 
 `.as_count()` と `.as_rate()` の使用方法について詳しくは、ブログ記事 [StatsD メトリクスの視覚化][3]を参照してください。また、これらの関数の影響について詳しくは、[アプリ内モディファイアーに関するドキュメント][4]を参照してください。
 
@@ -78,8 +77,8 @@ title: ロールアップ
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/dashboards/functions/#proceed-to-time-aggregation
+[1]: /ja/dashboards/functions/#add-a-function
 [2]: /ja/metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[4]: /ja/metrics/type_modifiers/
-[5]: /ja/monitors/create/types/metric/
+[4]: /ja/metrics/custom_metrics/type_modifiers/
+[5]: /ja/monitors/types/metric/

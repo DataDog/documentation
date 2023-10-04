@@ -28,7 +28,7 @@ Do the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -54,6 +54,8 @@ Grant the Agent access to each additional Azure SQL Database on this server:
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][3] on how to configure this for your Azure SQL DB instance.
+
 When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
 **Note:** Azure SQL Database deploys a database in an isolated network; each database is treated as a single host. This means that if you run Azure SQL Database in an elastic pool, each database in the pool is treated as a separate host.
@@ -68,7 +70,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
-      name: '<DATABASE_1>'
+      fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
@@ -77,13 +79,14 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
-      name: '<DATABASE_2>'
+      fully_qualified_domain_name: '<SERVER_NAME>.database.windows.net'
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}
@@ -113,6 +116,9 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
+
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "SQL Server on Windows Azure VM" %}}
@@ -150,7 +156,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `deployment_type` and `name` fields.
@@ -187,7 +193,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [Run the Agent's status subcommand][10] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][11] page in Datadog to get started.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
@@ -223,7 +229,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 See the [SQL Server integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -237,7 +243,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
@@ -274,7 +280,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     ],
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<YOUR_INSTANCE_NAME>"
+      "name": "<AZURE_ENDPOINT_ADDRESS>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -312,22 +318,23 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set 'clusterChecksRunner.enabled=true' \
+  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>,1433
+    host: <HOSTNAME>\,1433
     username: datadog
-    password: "<PASSWORD>"
-    connector: "odbc"
-    driver: "FreeTDS"
+    password: '<PASSWORD>'
+    connector: 'odbc'
+    driver: 'FreeTDS'
     include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
-      - "service:<CUSTOM_SERVICE>"
-      - "env:<CUSTOM_ENV>"
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     azure:
-      deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<YOUR_INSTANCE_NAME>"' \
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'" \
   datadog/datadog
 ```
 
@@ -351,7 +358,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -379,7 +386,7 @@ metadata:
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<YOUR_INSTANCE_NAME>"
+            "fully_qualified_domain_name": "<AZURE_ENDPOINT_ADDRESS>"
           }
         }
       ]

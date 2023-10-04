@@ -6,6 +6,9 @@ aliases:
   - /metrics/introduction/
   - /graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
   - /dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+cascade:
+    algolia:
+        rank: 70
 ---
 
 
@@ -59,11 +62,11 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 #### Additional visualizations
 
-Datadog offers a variety of visualization options to help users easily graph and display their metrics. Two visualization offerings that Metrics users often find useful are: 
+Datadog offers a variety of visualization options to help users easily graph and display their metrics. 
 
-Metric query consists of the same two evaluation steps to start: 1) time aggregation, 2) space aggregation. See the [anatomy of a metric query][6] for more information.
+A metric query consists of the same two evaluation steps to start: time aggregation and space aggregation. See the [anatomy of a metric query][6] for more information.
 
-{{< whatsnext desc="Visualization offerings that Metrics users often find useful:">}}
+{{< whatsnext desc="Two visualization offerings that Metrics users often find useful are:">}}
     {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Query Value Widget</u> - Reduces the results of those two steps into a single value.{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top List</u> - Returns a single value per group.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -174,6 +177,7 @@ Read the [metrics summary documentation][22] for more details.
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>Distribution metrics</u> - Compute global percentiles across your entire dataset.{{< /nextlink >}}
     {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without Limits™.{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - Join an interactive session to unlock the full potential of metrics.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /logs
@@ -196,5 +200,5 @@ Read the [metrics summary documentation][22] for more details.
 [18]: /dashboards/functions/
 [19]: /metrics/distributions/
 [20]: https://app.datadoghq.com/metric/summary
-[21]: /account_management/billing/usage_details/
+[21]: /account_management/plan_and_usage/usage_details/
 [22]: /metrics/summary/

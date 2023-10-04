@@ -1,11 +1,9 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md
 description: React Native プロジェクトから RUM データを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: ブログ
   text: React Native アプリケーションの監視
@@ -37,6 +35,12 @@ Yarn でインストールするには、以下を実行します。
 yarn add @datadog/mobile-react-native
 ```
 
+追加したポッドをインストールします。
+
+```sh
+(cd ios && pod install)
+```
+
 バージョン `1.0.0-rc5` 以降では、Android アプリケーションのセットアップで `compileSdkVersion = 31` が必要です。これは Build Tools バージョン 31、Android Gradle Plugin バージョン 7、および Gradle バージョン 7 以上が必要であることを意味します。バージョンを変更するには、アプリケーションのトップレベル `build.gradle` ファイルの `buildscript.ext` ブロックの値を変更します。Datadogは、React Native バージョン 0.67 以上の使用を推奨しています。
 
 ### UI でアプリケーションの詳細を指定
@@ -62,7 +66,7 @@ import {
     DdSdkReactNativeConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
@@ -84,7 +88,15 @@ config.serviceName = 'com.example.reactnative';
 // オプション: SDK に指定されたレベル以上の内部ログを出力させる。デフォルトは undefined (ログを出力しない)
 config.verbosity = SdkVerbosity.WARN;
 
-await DdSdkReactNative.initialize(config);
+//App コンポーネントのコンテンツを DatadogProvider コンポーネントでラップし、 構成を渡します。
+
+export default function App() {
+    return (
+       <DatadogProvider configuration={config}>
+          <Navigation />
+       </DatadogProvider>
+    );
+}
 
 // Datadog React Native SDK for RUM を初期化したら、RUM ダッシュボードでデータを見ることができるように、ビュー追跡を設定する必要があります。
 ```
@@ -286,6 +298,8 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 -   [`react-native-navigation`][5] ライブラリを使用する場合は、`@datadog/mobile-react-native-navigation` パッケージを追加し、[セットアップ手順][6]に従います。
 -   [`react-navigation`][7] ライブラリを使用する場合は、`@datadog/mobile-react-navigation` パッケージを追加し、[セットアップ手順][8]に従います。
 
+`@datadog/mobile-react-navigation` で View 追跡を設定する際に問題がある場合は、弊社の[サンプルアプリケーション][16]を参考にすることができます。
+
 ## カスタム属性の追跡
 
 すべての RUM イベントにユーザー情報をアタッチして、RUM セッションのより詳しい情報を入手することができます。
@@ -321,6 +335,19 @@ DdSdkReactNative.setAttributes({
 });
 ```
 
+## バックグラウンドイベントの追跡
+
+<div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
+</div>
+
+アプリケーションがバックグラウンドにあるとき (例えば、アクティブなビューがないとき)、クラッシュやネットワークリクエストなどのイベントを追跡することができます。
+
+Datadog の構成で、初期化時に以下のスニペットを追加します。
+
+```javascript
+configuration.trackBackgroundEvents = true;
+```
+
 ## データストレージ
 
 ### Android
@@ -337,7 +364,7 @@ DdSdkReactNative.setAttributes({
 
 これらのイベントがダッシュボードに表示されないようにするには、`__DEV__` フラグを使用して、開発モードでのエラーとリソースの追跡を無効にします。
 
-```
+```js
 const config = new DdSdkReactNativeConfiguration(
     CLIENT_TOKEN,
     ENVIRONMENT,
@@ -359,15 +386,15 @@ const config = new DdSdkReactNativeConfiguration(
 The 'Pods-MyApp' target has transitive dependencies that include statically linked binaries: (DatadogSDKBridge, DatadogSDKCrashReporting)
 ```
 
-このエラーを防ぐには、`use_frameworks!` を上書きして、フレームワークである必要があるものを除いて、すべてのポッドを静的にインストールすることができます。
+このエラーを防ぐには、`Podfile` を編集して、React Native SDK ポッドを静的ライブラリとしてインストールします。
 
 ```ruby
-dynamic_frameworks = ['DatadogSDKBridge','DatadogSDKCrashReporting']
+static_libraries = ['DatadogSDKReactNative']
 
-# static_framework? 関数をオーバーライドして、他のすべてのフレームワークを静的フレームワークにし、true を返すようにします
+# static_framework? 関数をオーバーライドして true を返すようにすることで、静的依存関係を持つポッドを静的ライブラリに変えます
 pre_install do |installer|
   installer.pod_targets.each do |pod|
-    if !dynamic_frameworks.include?(pod.name)
+    if static_libraries.include?(pod.name)
       def pod.static_framework?;
         true
       end
@@ -379,11 +406,7 @@ pre_install do |installer|
 end
 ```
 
-**注:** この解決策は、この [StackOverflow][14] の投稿に由来しています。
-
-## ライセンス
-
-詳細については、[Apache ライセンス、v2.0][9]を参照
+**注**: この解決策は、この [StackOverflow][14] の投稿に由来しています。
 
 ## その他の参考資料
 
@@ -391,16 +414,17 @@ end
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: https://raw.githubusercontent.com/DataDog/dd-sdk-reactnative/main/docs/image_reactnative.png
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#client-tokens
 [5]: https://github.com/wix/react-native-navigation
-[6]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
+[6]: /ja/real_user_monitoring/reactnative/integrated_libraries/
 [7]: https://github.com/react-navigation/react-navigation
-[8]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
+[8]: /ja/real_user_monitoring/reactnative/integrated_libraries/
 [9]: https://github.com/DataDog/dd-sdk-reactnative/blob/main/LICENSE
 [10]: https://source.android.com/security/app-sandbox
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [12]: https://docs.expo.dev/
-[13]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/
+[13]: /ja/real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
-[15]: https://docs.datadoghq.com/ja/getting_started/tagging/#define-tags
+[15]: /ja/getting_started/tagging/#define-tags
+[16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation

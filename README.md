@@ -49,6 +49,7 @@ To learn more about how the documentation is built, refer to the [Documentation 
 
 * Always branch off of master; never commit directly to master.
 * Name your branch `<SLACK_HANDLE>/<FEATURE_NAME>` if you would like to create a preview site and run tests.
+  * If you're collaborating on a branch with someone, you can have two names on the branch so you can both receive Slack notifications when a preview build finishes, e.g. `<SLACK_HANDLE_1>/<SLACK_HANDLE_2>/<FEATURE_NAME>`.
 * When you are ready to commit, create a new pull request to master from your branch.
 * Consult our [contributing guidelines][8], and the [Documentation Build Wiki][7].
 * Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
@@ -118,4 +119,4 @@ To stop the app, hit Ctrl-C or run `make stop-docker`
 [13]: https://gohugo.io/getting-started/installing/
 [14]: https://golang.org/doc/install
 [15]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
-[16]: https://github.com/DataDog/documentation/blob/master/README.md#docker-development
+[16]: https://github.com/DataDog/documentation#docker-development

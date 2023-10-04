@@ -27,7 +27,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 
 ### Logs
 - [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Disable logs collection](#disable-logs-collection)
+- [Enable/disable logs collection](#enabledisable-log-collection)
 - [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
 - [Parse and transform logs](#parse-and-transform-logs)
 - [Connect logs and traces](#connect-logs-and-traces)
@@ -39,15 +39,16 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
 - [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
 - [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Disable logs collection](#disable-logs-collection)
+- [Enable/disable logs collection](#enabledisable-log-collection)
 - [Parse and transform logs](#parse-and-transform-logs)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
 - [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
-- [Disable trace collection](#disable-trace-collection)
+- [Enable/disable trace collection](#enabledisable-trace-collection)
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
+- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -58,6 +59,9 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
+
+### Security
+- [Enable Threat Detection to observe attack attempts](#enable-threat-detection-to-observe-attack-attempts)
 
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
@@ -85,6 +89,29 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
+
+## Enable Threat Detection to observe attack attempts
+
+Get alerted on attackers targeting your serverless applications and respond quickly. 
+
+To get started, first ensure that you have [tracing enabled][43] for your functions.
+
+To enable threat monitoring, add the following environment variables to your deployment:
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+   ```
+
+Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+   ```sh
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   ```
+A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
 ## Connect telemetry using tags
 
@@ -182,7 +209,7 @@ Datadog can also enrich the collected telemetry with existing AWS resource tags 
 
 ## Collect the request and response payloads
 
-<div class="alert alert-info">This feature is supported for Python, Node.js, Go, and .NET.</div>
+<div class="alert alert-info">This feature is supported for Python, Node.js, Go, Java, and .NET.</div>
 
 Datadog can [collect and visualize the JSON request and response payloads of AWS Lambda functions][5], giving you deeper insight into your serverless applications and helping troubleshoot Lambda function failures.
 
@@ -325,6 +352,67 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
+## Renaming upstream and downstream services
+
+This guide explains how to rename both upstream and downstream services in Datadog using environment variables.
+
+### Rename upstream service names
+
+| Source Type | Service | Identifier | DD_SERVICE_MAPPING Value |
+|---|---|---|---|
+| General Identifiers| API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| | SNS | `lambda_sns` | `"lambda_sns:newServiceName"` |
+| | SQS | `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| | S3 | `lambda_s3` | `"lambda_s3:newServiceName"` |
+| | EventBridge | `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| | Kinesis | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| | DynamoDB | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| | Lambda URLs | `lambda_url` | `"lambda_url:newServiceName"` |
+| Specific Identifiers | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| | SNS | Topic name | `"ExampleTopic:newServiceName"` |
+| | SQS | Queue name | `"MyQueue:newServiceName"` |
+| | S3 | Bucket name | `"example-bucket:newServiceName"` |
+| | EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
+| | Kinesis | Stream name | `"MyStream:newServiceName"` |
+| | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
+| | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+
+### Rename downstream service names (created by dd-trace-x)
+
+| Language | Configuration Key | Default | Example | Description |
+|----------|-------------------|---------|---------|-------------|
+| Python   | `DD_SERVICE_MAPPING` | N/A | `postgres:postgresql,defaultdb:postgresql` | Rename services in traces. |
+| JS       | `DD_SERVICE_MAPPING` | N/A | `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db` | Provide service names for plugins. |
+| Ruby     | Not Defined | N/A | N/A | `DD_SERVICE_MAPPING` is not available. |
+| Java     | `DD_SERVICE_MAPPING` | `null` | `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db` | Dynamically rename services. |
+| Go       | `DD_SERVICE_MAPPING` | `null` | `mysql:mysql-service-name,postgres:postgres-service-name` | Rename services. |
+| .NET     | `DD_TRACE_SERVICE_MAPPING` | N/A | `mysql:main-mysql-db, mongodb:offsite-mongodb-service` | Rename services using config. |
+
+| Language | Minimum Version | Environment Variable Settings | Peer Service Mapping Example |
+|----------|-----------------|-------------------------------|--------------------------------|-----------------------------|
+| Java     | 1.16.0          | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` |  `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Go       | v1.52.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| NodeJS   | 2.44.0<br>3.31.0<br>4.10.0 | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| .NET     | v2.35.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` |  `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Python   | v1.16.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Ruby     | v1.13.0         | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | N/A | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service`<br>`DD_TRACE_DALLI_PEER_SERVICE=billing-api` |
+
+**Notes**:
+- For Ruby: Set `peer.service` value for specific integrations using `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE`.
+- Python does not support Boto2 as of version v1.16.0.
+
+### Examples
+
+#### NodeJS 
+```
+DD_SERVICE_MAPPING: "lambda_api_gateway:api-gw-name,aws-sdk:aws-sdk-name"
+      DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED: "true"
+      DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+      DD_TRACE_PEER_SERVICE_MAPPING: "serviceMappingJs-dev-TestQueue-FvobIfTGlO1c:new-peer-service-name"
+```
+
+{{< img src="tracing/serverless_functions/ServiceMappingJS.png" alt="service mapping" >}}
+
 ## Filter or scrub information from logs
 
 To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
@@ -341,9 +429,52 @@ Datadog recommends keeping the `REPORT` logs, as they are used to populate the i
 
 To scrub or filter other logs before sending them to Datadog, see [Advanced Log Collection][13].
 
-## Disable logs collection
+## Enable/disable log collection
 
-Logs collection through the Datadog Lambda extension is enabled by default.
+Log collection through the Datadog Lambda extension is enabled by default.
+
+{{< tabs >}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # ... other required parameters, such as the Datadog site and API key
+    enableDDLogs: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # ... other required parameters, such as the Datadog site and API key
+      enableDDLogs: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new Datadog(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
+    enableDatadogLogs: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "Others" %}}
+
+Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `true` on your Lambda functions.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Disable log collection
 
 If you want to stop collecting logs using the Datadog Forwarder Lambda function, remove the subscription filter from your own Lambda function's CloudWatch log group.
 
@@ -390,6 +521,8 @@ Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` on your Lam
 {{% /tab %}}
 {{< /tabs >}}
 
+For more information, see [Log Management][47].
+
 ## Parse and transform logs
 
 To parse and transform your logs in Datadog, see documentation for [Datadog log pipelines][14].
@@ -418,9 +551,64 @@ To filter traces before sending them to Datadog, see [Ignoring Unwanted Resource
 
 To scrub trace attributes for data security, see [Configure the Datadog Agent or Tracer for Data Security][23].
 
-## Disable trace collection
+## Enable/disable trace collection
 
-Trace collection through the Datadog Lambda extension is enabled by default. If you want to stop collecting traces from your Lambda functions, follow the instructions below:
+Trace collection through the Datadog Lambda extension is enabled by default. 
+
+If you want to start collecting traces from your Lambda functions, apply the configurations below:
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+```sh
+datadog-ci lambda instrument \
+    --tracing true
+    # ... other required arguments, such as function names
+```
+{{% /tab %}}
+{{% tab "Serverless Framework" %}}
+
+```yaml
+custom:
+  datadog:
+    # ... other required parameters, such as the Datadog site and API key
+    enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+```yaml
+Transform:
+  - AWS::Serverless-2016-10-31
+  - Name: DatadogServerless
+    Parameters:
+      # ... other required parameters, such as the Datadog site and API key
+      enableDDTracing: true
+```
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+```typescript
+const datadog = new Datadog(this, "Datadog", {
+    // ... other required parameters, such as the Datadog site and API key
+    enableDatadogTracing: true
+});
+datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
+```
+
+{{% /tab %}}
+{{% tab "Others" %}}
+
+Set the environment variable `DD_TRACE_ENABLED` to `true` on your Lambda functions.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Disable trace collection
+
+If you want to stop collecting traces from your Lambda functions, apply the configurations below:
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -582,6 +770,12 @@ export class ExampleStack extends cdk.Stack {
 
 You can monitor your custom business logic by [submitting custom metrics][27].
 
+## Collect Profiling data (public beta)
+
+Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+
+The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
+
 ## Send telemetry over PrivateLink or proxy
 
 The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy][30] for all other sites.
@@ -612,7 +806,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 {{% /tab %}}
 {{% tab "AWS Secrets Manager" %}}
 
-The Datadog Extension supports retrieving [AWS Secrets Manager][40] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
+The Datadog Extension supports retrieving [AWS Secrets Manager][1] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
 
 1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
 2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
@@ -624,6 +818,8 @@ The Datadog Extension supports retrieving [AWS Secrets Manager][40] values autom
 8. Set the environment variable `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
 9. Create a new secret on Secrets Manager to store the dual shipping logs environment variable. The contents should be **similar** to `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`.
 10. Set the environment variable `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+
+[1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
 {{% /tab %}}
 {{% tab "AWS KMS" %}}
@@ -637,6 +833,7 @@ The Datadog Extension supports decrypting [AWS KMS][41] values automatically for
 5. For dual shipping profiling, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 5. For dual shipping logs, encrypt `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` using KMS and set the `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 
+[41]: https://docs.aws.amazon.com/kms/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -752,7 +949,6 @@ If you have trouble configuring your installations, set the environment variable
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-
 [1]: /serverless/installation/
 [2]: /serverless/libraries_integrations/extension/
 [3]: /integrations/amazon_web_services/
@@ -792,3 +988,11 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /serverless/libraries_integrations/extension/
+[41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[42]: /profiler/
+[43]: /serverless/installation#installation-instructions
+[44]: /security/default_rules/security-scan-detected/
+[45]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
+[46]: https://docs.datadoghq.com/tracing/glossary/#services
+[47]: /logs/

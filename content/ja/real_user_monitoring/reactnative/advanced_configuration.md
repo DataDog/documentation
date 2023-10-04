@@ -1,17 +1,16 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/advanced_configuration.md
 description: React Native のセットアップのための高度な構成オプションについて説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: real_user_monitoring/reactnative/
   tag: ドキュメント
   text: React Native のモニタリングについて
 kind: documentation
 title: RUM React Native の高度な構成
 ---
+
 ## 概要
 
 まだ SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[React Native セットアップドキュメント][2]を参照してください。
@@ -44,6 +43,165 @@ describe('App', () => {
 ```
 
 Jest 以外のテストランナーを使用する場合、テストランナー用のモックを作成する必要があります。
+
+## 初期化パラメーター
+
+SDK 初期化時の構成で、以下のパラメーターを指定することができます。
+
+`clientToken`
+: 必須<br/>
+**タイプ**: 文字列<br/>
+[Datadog クライアントトークン][8]。
+
+`env`
+: 必須<br/>
+**タイプ**: 文字列<br/>
+アプリケーションの環境 (例: prod、pre-prod、staging)。[タグの構文要件][15]に従います。
+
+`applicationId`
+: 必須<br/>
+**種類**: 文字列<br/>
+RUM アプリケーションの ID。
+
+`trackInteractions`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+ユーザーアクションの自動収集を有効にします。
+
+`trackResources`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+リソースイベントの収集を可能にします。
+
+`trackErrors`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+React Native のクラッシュの収集を有効にします。
+
+`site`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+**デフォルト**: `US1`<br/>
+[組織の Datadog のサイトパラメーター][9]。
+
+`serviceName`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションのサービス名。[タグの構文要件][15]に従います。
+
+`version`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13。[タグの構文要件][15]に従います。
+
+`versionSuffix`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+報告されたアプリのバージョンにサフィックスを追加します。使用できる文字は、英数字と `_`、`-`、`:`、`.`、`/` です。その他の特殊文字はアンダースコアに変換されます。バージョンとサフィックスの間には、自動的にダッシュ (`-`) が追加されます。[タグの構文要件][15]に従います。
+
+`trackFrustrations`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `true` <br/>
+[ユーザーのフラストレーションの自動収集][11]を有効にします。エラータップにのみ対応しています。`trackInteractions: true` を意味します。
+
+`nativeCrashReportEnabled`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+ネイティブプラットフォーム (iOS、Android) のクラッシュレポートを有効にします。
+
+`sampleRate`
+: オプション - **非推奨**<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+`sessionSampleRate` を参照してください。
+
+`sessionSampleRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+追跡するセッションの割合: すべてなら `100`、なければ `0` です。追跡されたセッションのみが RUM イベントを送信します。
+
+`resourceTracingSamplingRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `20`<br/>
+トレースするリクエストの割合: すべてなら `100`、なければ `0` です。詳細は、[RUM とトレースの接続][12]を参照してください。
+
+`verbosity`
+: オプション<br/>
+**タイプ**: SdkVerbosity<br/>
+**デフォルト**: `undefined`<br/>
+内部 SDK のロギングに使用する Verbosity。SDK の実装をデバッグするには、`SdkVerbosity.DEBUG` に設定します。
+
+`nativeViewTracking`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false`<br/>
+ネイティブビューの追跡を有効にします。ネイティブビューに依存するカスタムナビゲーションシステムを使用する場合は、`true` に設定します。
+
+`nativeInteractionTracking`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false`<br/>
+ネイティブインタラクションの追跡を有効にします。ネイティブ画面でのインタラクションを追跡したい場合は、`true` に設定します。
+
+`firstPartyHosts`
+: オプション<br/>
+**タイプ**: リスト<br/>
+**デフォルト**: `[]`<br/>
+ネイティブビューの追跡を有効にします。ネイティブビューに依存するカスタムナビゲーションシステムを使用する場合は、`true` に設定します。詳しくは、[RUM とトレースの接続][12]を参照してください。
+
+`telemetrySampleRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `20`<br/>
+SDK の実行に関するテレメトリーデータ (エラーやデバッグログなど) は、潜在的な問題を検出して解決するために、Datadog に送信されます。このオプションを `0` に設定すると、テレメトリー収集がオプトアウトされます。
+
+`longTaskThresholdMs`
+: オプション<br/>
+**タイプ**: 数値 | false<br/>
+**デフォルト**: `0`<br/>
+javascript のロングタスク報告のしきい値 (ミリ秒単位)。`0` または `false` に設定すると、javascript のロングタスクの報告が無効になります。`100` 未満の値は `100` に引き上げられます。`5000` 以上の値は `5000` に下げられます。
+
+`nativeLongTaskThresholdMs`
+: オプション<br/>
+**タイプ**: 数値 | false<br/>
+**デフォルト**: `200`<br/>
+ネイティブロングタスク報告のしきい値 (ミリ秒単位)。`0` または `false` に設定すると、javascript のロングタスクの報告が無効になります。`100` 未満の値は `100` に引き上げられます。`5000` 以上の値は `5000` に下げられます。
+
+`vitalsUpdateFrequency`
+: オプション<br/>
+**タイプ**: VitalsUpdateFrequency<br/>
+**デフォルト**: `VitalsUpdateFrequency.AVERAGE`<br/>
+モバイルバイタルを収集する際の好ましい頻度を設定します。
+
+`uploadFrequency`
+: オプション<br/>
+**タイプ**: UploadFrequency<br/>
+**デフォルト**: `UploadFrequency.AVERAGE`<br/>
+データのバッチをアップロードする際の好ましい頻度を設定します。
+
+`batchSize`
+: オプション<br/>
+**タイプ**: BatchSize<br/>
+**デフォルト**: `BatchSize.MEDIUM`<br/>
+Datadog サーバーにアップロードする前にデータをまとめてバッチ処理する際の Datadog SDK のポリシーを定義します。小さなバッチは、より小さいがより多くのネットワークリクエストを意味し、大きなバッチは、より少ないがより大きなネットワークリクエストを意味します。
+
+`trackBackgroundEvents`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false`<br/>
+RUM View がアクティブでない場合に、RUM イベントの追跡を有効にします。デフォルトでは、バックグランドイベントは追跡されません。この機能を有効にすると、追跡されるセッション数が増加し、請求に影響を与える可能性があります。
+
+`proxyConfig`
+: オプション<br/>
+**タイプ**: ProxyConfiguration<br/>
+オプションのプロキシ構成。
 
 ## 手動インスツルメンテーション
 
@@ -94,12 +252,7 @@ DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 // RUM Resource を手動で追跡
 DdRum.startResource(
-    '<res-key>',
-    'GET',
-    'http://www.example.com/api/v1/test',
-    {},
-    Date.now()
-);
+    '<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
 //...
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 
@@ -122,10 +275,10 @@ const config = new DdSdkReactNativeConfiguration(
     true, // XHR リソースの追跡
     true // エラーの追跡
 );
-config.logEventMapper = event => event;
-config.errorEventMapper = event => event;
-config.resourceEventMapper = event => event;
-config.actionEventMapper = event => event;
+config.logEventMapper = (event) => event;
+config.errorEventMapper = (event) => event;
+config.resourceEventMapper = (event) => event;
+config.actionEventMapper = (event) => event;
 ```
 
 各マッパーは `(T) -> T?` というシグネチャを持つ関数で、 `T` は具象的な RUM イベントの型です。これは、送信される前にイベントの一部を変更したり、イベントを完全に削除したりすることができます。
@@ -133,7 +286,7 @@ config.actionEventMapper = event => event;
 例えば、RUM のエラー `message` から機密情報を削除するには、カスタム `redacted` 関数を実装して、それを `errorEventMapper` で使用します。
 
 ```javascript
-config.errorEventMapper = event => {
+config.errorEventMapper = (event) => {
     event.message = redacted(event.message);
     return event;
 };
@@ -167,7 +320,7 @@ config.errorEventMapper = event => {
 | ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | `DdSdkReactNative.setUser` で設定されたグローバルユーザー情報を格納します。        |
 |               | `errorEvent.additionalInformation.attributes`    | `DdSdkReactNative.setAttributes` で設定されたグローバル属性を格納します。 |
 | ResourceEvent | `resourceEvent.resourceContext`                  | リソースまたは `undefined` に対応する [XMLHttpRequest][6]。       |
-|               | `resourceEvent.additionalInformation.userInfo`   | `DdSdkReactNative.setUser` で設定されたグローバルユーザー情報をコンテナで格納します。        |
+|               | `resourceEvent.additionalInformation.userInfo`   | `DdSdkReactNative.setUser` で設定されたグローバルユーザー情報を格納します。        |
 |               | `resourceEvent.additionalInformation.attributes` | `DdSdkReactNative.setAttributes` で設定されたグローバル属性を格納します。 |
 
 ## リソースのタイミング
@@ -182,11 +335,7 @@ config.errorEventMapper = event => {
 アプリの起動時に多くのアニメーションが含まれている場合、これらのアニメーション中にコードを実行すると、一部のデバイスでアニメーションが遅延する可能性があります。Datadog React Native SDK for RUM の実行を、現在のアニメーションが全て開始された後に遅延させるには、構成で `initializationMode` を `InitializationMode.ASYNC` に設定します。
 
 ```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration,
-    InitializationMode
-} from '@datadog/mobile-react-native';
+import { DatadogProvider, DatadogProviderConfiguration, InitializationMode } from '@datadog/mobile-react-native';
 
 const datadogConfiguration = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
@@ -213,6 +362,8 @@ RUM SDK とのすべてのインタラクション (ビュー追跡、アクシ�
 
 ログは記録されないので、実際の初期化の前に `DdLogs` メソッドを呼び出すとロギングが中断される可能性があります。
 
+Datadog の非同期初期化の設定に問題がある場合は、弊社の[サンプルアプリケーション][7]をご確認ください。
+
 ## 初期化の遅延
 
 SDK を初期化する前に待ちたい状況があるかもしれません。例えば、ユーザーのロールに応じて異なる構成を使用したい場合や、サーバーの 1 つから構成を取得する場合などです。
@@ -220,10 +371,7 @@ SDK を初期化する前に待ちたい状況があるかもしれません。�
 その場合、アプリを最初から自動インスツルメンテーション (ユーザーインタラクション、XHR リソース、エラーを自動的に収集) し、SDK を初期化する前に最大 100 の RUM およびスパンイベントを記録することが可能です。
 
 ```js
-import {
-    DatadogProvider,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProvider, DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const datadogAutoInstrumentation = {
     trackErrors: true,
@@ -252,11 +400,7 @@ export default function App() {
 構成に次のキーがある場合:
 
 ```js
-import {
-    ProxyConfig,
-    SdkVerbosity,
-    TrackingConsent
-} from '@datadog/mobile-react-native';
+import { ProxyConfig, SdkVerbosity, TrackingConsent } from '@datadog/mobile-react-native';
 
 const configuration = {
     clientToken: '<CLIENT_TOKEN>',
@@ -281,8 +425,14 @@ const configuration = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative
+[2]: /ja/real_user_monitoring/reactnative
 [3]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [4]: https://jestjs.io/
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
+[8]: /ja/account_management/api-app-keys/#client-tokens
+[9]: /ja/getting_started/site/
+[11]: /ja/real_user_monitoring/frustration_signals/
+[12]: /ja/real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
+[15]: /ja/getting_started/tagging/#defining-tags

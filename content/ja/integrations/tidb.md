@@ -20,7 +20,7 @@ assets:
     source: tidb
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: PingCAP
   sales_email: xuyifan02@pingcap.com
   support_email: xuyifan02@pingcap.com
 categories:

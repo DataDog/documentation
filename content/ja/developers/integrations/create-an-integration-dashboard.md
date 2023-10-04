@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/docs/dev/create-an-integration-dashboard.md
+description: インテグレーションダッシュボードの作成方法をご紹介します。
 kind: documentation
 title: インテグレーションダッシュボードの作成
 ---
@@ -22,8 +21,8 @@ Datadog で、[新しいダッシュボードを作成します][12]。
 
 ### ダッシュボードのエクスポート
 
-ダッシュボードを JSON にエクスポートするには、設定歯車 (右上) を使用して、**Export dashboard JSON** を選択します。
-ファイル名はダッシュボードのタイトルに合わせ、例えば `you_integration_name_overview.json` のようにします。
+ダッシュボードを JSON にエクスポートするには、エクスポートボタン (右上) を使用して、**Export dashboard JSON** を選択します。
+ファイル名はダッシュボードのタイトルに合わせ、例えば `your_integration_name_overview.json` のようにします。
 
 このファイルを、統合の `assets/dashboards` フォルダに保存します。 アセットを `manifest.json` ファイルに追加します。インテグレーションのファイル構造とマニフェストファイルの詳細については、[インテグレーションアセットリファレンス][11]を参照してください。
 
@@ -135,7 +134,7 @@ Datadog で、[新しいダッシュボードを作成します][12]。
 
 
 [1]: /ja/dashboards/
-[2]: /ja/developers/integrations/new_check_howto/?tab=configurationtemplate
+[2]: /ja/developers/integrations/agent_integration/
 [3]: /ja/dashboards/#new-dashboard
 [4]: /ja/dashboards/widgets/timeseries/
 [5]: /ja/dashboards/widgets/query_value/

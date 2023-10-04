@@ -10,7 +10,7 @@ further_reading:
   text: "Real User Monitoring"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
-  text: "RUM Browser Data Collected"
+  text: "RUM browser data collected"
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
@@ -19,7 +19,7 @@ further_reading:
   text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
-  text: "Datadog Standard Attributes"
+  text: "Datadog standard attributes"
 ---
 
 ## Overview
@@ -39,40 +39,40 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
 1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
+   {{< tabs >}}
+   {{% tab "NPM" %}}
+   ```javascript
+   import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.init({
-    ...,
-    trackViewsManually: true,
-    ...
-});
-```
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-        ...,
-        trackViewsManually: true,
-        ...
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-```javascript
-window.DD_RUM &&
-    window.DD_RUM.init({
-        ...,
-        trackViewsManually: true,
-        ...
-    });
-```
-{{% /tab %}}
-{{< /tabs >}}
+   datadogRum.init({
+       ...,
+       trackViewsManually: true,
+       ...
+   });
+   ```
+   {{% /tab %}}
+   {{% tab "CDN async" %}}
+   ```javascript
+   window.DD_RUM.onReady(function() {
+       window.DD_RUM.init({
+           ...,
+           trackViewsManually: true,
+           ...
+       })
+   })
+   ```
+   {{% /tab %}}
+   {{% tab "CDN sync" %}}
+   ```javascript
+   window.DD_RUM &&
+       window.DD_RUM.init({
+           ...,
+           trackViewsManually: true,
+           ...
+       });
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][17], you can also optionally define the associated service name and version.
 
@@ -82,73 +82,222 @@ window.DD_RUM &&
 
    For more information, see [Setup Browser Monitoring][4].
 
-<details open>
-  <summary>Latest version</summary>
-The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
+   <details open>
+     <summary>Latest version</summary>
+   The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-```javascript
-datadogRum.startView({
-  name: 'checkout',
-  service: 'purchase',
-  version: '1.2.3'
-})
-```
+   {{< tabs >}}
+   {{% tab "NPM" %}}
+   ```javascript
+   datadogRum.startView({
+     name: 'checkout',
+     service: 'purchase',
+     version: '1.2.3'
+   })
+   ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.startView({
-      name: 'checkout',
-      service: 'purchase',
-      version: '1.2.3'
-    })
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-```javascript
-window.DD_RUM && window.DD_RUM.startView({
-  name: 'checkout',
-  service: 'purchase',
-  version: '1.2.3'
-})
-```
-{{% /tab %}}
-{{< /tabs >}}
-</details>
+   {{% /tab %}}
+   {{% tab "CDN async" %}}
+   ```javascript
+   window.DD_RUM.onReady(function() {
+       window.DD_RUM.startView({
+         name: 'checkout',
+         service: 'purchase',
+         version: '1.2.3'
+       })
+   })
+   ```
+   {{% /tab %}}
+   {{% tab "CDN sync" %}}
+   ```javascript
+   window.DD_RUM && window.DD_RUM.startView({
+     name: 'checkout',
+     service: 'purchase',
+     version: '1.2.3'
+   })
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   </details>
 
-<details>
-  <summary>before <code>v4.13.0</code></summary>
-The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service or version can be specified.
+   <details>
+     <summary>before <code>v4.13.0</code></summary>
+   The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service or version can be specified.
 
-{{< tabs >}}
-{{% tab "NPM" %}}
-```javascript
-datadogRum.startView('checkout')
-```
+   {{< tabs >}}
+   {{% tab "NPM" %}}
+   ```javascript
+   datadogRum.startView('checkout')
+   ```
 
-{{% /tab %}}
-{{% tab "CDN async" %}}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.startView('checkout')
-})
-```
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-```javascript
-window.DD_RUM && window.DD_RUM.startView('checkout')
-```
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{% tab "CDN async" %}}
+   ```javascript
+   window.DD_RUM.onReady(function() {
+       window.DD_RUM.startView('checkout')
+   })
+   ```
+   {{% /tab %}}
+   {{% tab "CDN sync" %}}
+   ```javascript
+   window.DD_RUM && window.DD_RUM.startView('checkout')
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
-</details>
-
+   </details>
 
 If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
+
+### React router instrumentation
+
+To override default RUM view names so that they are aligned with how you've defined them in your React application, you need to follow the below steps.
+
+**Note**: These instructions are specific to the **React Router v6** library.
+
+1. Set `trackViewsManually` to `true` when initializing the RUM browser SDK as described [above](#override-default-rum-view-names).
+
+2. Start views for each route change.
+
+   {{< tabs >}}
+   {{% tab "NPM" %}}
+   ```javascript
+      import { matchRoutes, useLocation } from 'react-router-dom';
+      import { routes } from 'path/to/routes';
+      import { datadogRum } from "@datadog/browser-rum";
+
+      export default function App() {
+        // Track every route change with useLocation API
+       let location = useLocation();
+
+       useEffect(() => {
+         const routeMatches = matchRoutes(routes, location.pathname);
+         const viewName = routeMatches && computeViewName(routeMatches);
+         if (viewName) {
+           datadogRum.startView({name: viewName});
+         }
+       }, [location.pathname]);
+
+       ...
+      }
+
+      // Compute view name out of routeMatches
+      function computeViewName(routeMatches) {
+       let viewName = "";
+       for (let index = 0; index < routeMatches.length; index++) {
+         const routeMatch = routeMatches[index];
+         const path = routeMatch.route.path;
+         // Skip pathless routes
+         if (!path) {
+           continue;
+         }
+
+         if (path.startsWith("/")) {
+          // Handle absolute child route paths
+           viewName = path;
+         } else {
+          // Handle route paths ending with "/"
+           viewName += viewName.endsWith("/") ? path : `/${path}`;
+         }
+       }
+
+       return viewName || '/';
+      }
+   ```
+
+   {{% /tab %}}
+   {{% tab "CDN async" %}}
+   ```javascript
+      import { matchRoutes, useLocation } from 'react-router-dom';
+      import { routes } from 'path/to/routes';
+
+      export default function App() {
+        // Track every route change with useLocation API
+       let location = useLocation();
+
+       useEffect(() => {
+         const routeMatches = matchRoutes(routes, location.pathname);
+         const viewName = routeMatches && computeViewName(routeMatches);
+         if (viewName) {
+           DD_RUM.onReady(function() {
+             DD_RUM.startView({name: viewName});
+           });
+         }
+       }, [location.pathname]);
+
+       ...
+      }
+
+      // Compute view name out of routeMatches
+      function computeViewName(routeMatches) {
+       let viewName = "";
+       for (let index = 0; index < routeMatches.length; index++) {
+         const routeMatch = routeMatches[index];
+         const path = routeMatch.route.path;
+         // Skip pathless routes
+         if (!path) {
+           continue;
+         }
+
+         if (path.startsWith("/")) {
+          // Handle absolute child route paths
+           viewName = path;
+         } else {
+          // Handle route paths ending with "/"
+           viewName += viewName.endsWith("/") ? path : `/${path}`;
+         }
+       }
+
+       return viewName || '/';
+      }
+   ```
+   {{% /tab %}}
+   {{% tab "CDN sync" %}}
+   ```javascript
+      import { matchRoutes, useLocation } from 'react-router-dom';
+      import { routes } from 'path/to/routes';
+
+      export default function App() {
+        // Track every route change with useLocation API
+       let location = useLocation();
+
+       useEffect(() => {
+         const routeMatches = matchRoutes(routes, location.pathname);
+         const viewName = routeMatches && computeViewName(routeMatches);
+         if (viewName) {
+           window.DD_RUM &&
+             window.DD_RUM.startView({name: viewName});
+         }
+       }, [location.pathname]);
+
+       ...
+      }
+
+      // Compute view name out of routeMatches
+      function computeViewName(routeMatches) {
+       let viewName = "";
+       for (let index = 0; index < routeMatches.length; index++) {
+         const routeMatch = routeMatches[index];
+         const path = routeMatch.route.path;
+         // Skip pathless routes
+         if (!path) {
+           continue;
+         }
+
+         if (path.startsWith("/")) {
+          // Handle absolute child route paths
+           viewName = path;
+         } else {
+          // Handle route paths ending with "/"
+           viewName += viewName.endsWith("/") ? path : `/${path}`;
+         }
+       }
+
+       return viewName || '/';
+      }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Enrich and control RUM data
 
@@ -302,6 +451,7 @@ You can update the following event properties:
 |-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
 |   `view.url`            |   String  |   The URL of the active web page.                            |
 |   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
+|   `view.name`           |   String  |   The name of the current view.                            |
 |   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
 |   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
 |   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
@@ -365,6 +515,8 @@ window.DD_RUM &&
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: View events cannot be discarded.
 
 ## User session
 
@@ -775,6 +927,26 @@ const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 {{% /tab %}}
 {{< /tabs >}}
 
+## Contexts life cycle
+
+By default, global context and user context are stored in the current page memory, which means they are not:
+
+- kept after a full reload of the page
+- shared across different tabs or windows of the same session
+
+To add them to all events of the session, they must be attached to every page.
+
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][18], allowing the following behaviors:
+
+- Contexts are preserved after a full reload
+- Contexts are synchronized between tabs opened on the same origin
+
+However, this feature comes with some **limitations**:
+
+- Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in `localStorage` outlives the user session
+- The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
+- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -796,3 +968,4 @@ const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
+[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage

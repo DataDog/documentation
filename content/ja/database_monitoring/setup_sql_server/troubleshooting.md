@@ -51,7 +51,7 @@ TCP 接続の問題は、Agent の設定に誤構成がある場合によく発�
 
 例えば、次のようなエラーは、TCP 接続に失敗したためです。
 
-```shell
+```bash
 TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could not open database requested by login
 ```
 
@@ -73,7 +73,7 @@ TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could n
 
 2. sqlcmd を使用して手動でログインし、構成されたデータベースに問題がないか確認してみてください。例: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-#### “Invalid connection string attribute” のため
+#### "Invalid connection string attribute" のため
 
 Windows では、以下の ADO プロバイダーがサポートされています: `SQLOLEDB`、`MSOLEDBSQL`、`MSOLEDBSQL19`、`SQLNCLI11`。
 

@@ -1,4 +1,11 @@
 ---
+algolia:
+  category: ガイド
+  rank: 80
+  subcategory: Agent 構成ファイル
+  tags:
+  - Agent 構成
+  - Agent 構成
 aliases:
 - /ja/agent/faq/agent-configuration-files
 kind: ガイド

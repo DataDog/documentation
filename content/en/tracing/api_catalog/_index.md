@@ -8,8 +8,12 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
-{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" >}}
-  Datadog API Catalog is in beta! Use this form request access. 
+{{< site-region region="gov,ap1" >}}
+<div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< callout url="https://www.datadoghq.com/api-catalog-public-beta-request/" >}}
+API Catalog is in limited availability. Use this form to get early access. 
 {{< /callout >}} 
 
 {{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API Catalog showing a list of API endpoints along with their Error Rate, P99 Latency, Requests Count, and Owning Team, with searching, filtering, and scoping features." style="width:100%;" >}}

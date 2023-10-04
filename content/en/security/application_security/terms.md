@@ -14,6 +14,10 @@ further_reading:
   text: "Application Vulnerability Management"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Datadog Application Security Management (ASM) monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General application security terms
@@ -112,7 +116,7 @@ Object-Graph Navigation Language Injection (OGNLi)
 [5]: https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
 [6]: https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/07-Input_Validation_Testing/11.1-Testing_for_Local_File_Inclusion
 [7]: https://owasp.org/www-project-top-ten/2017/A1_2017-Injection
-[8]: /agent/guide/how_remote_config_works/
+[8]: /agent/remote_config/
 [10]: /security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /security/application_security/threats/inapp_waf_rules

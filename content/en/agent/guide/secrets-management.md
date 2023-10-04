@@ -7,6 +7,8 @@ further_reading:
 - link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Autodiscovery"
+algolia:
+  tags: ['secrets', 'secrets executable', 'secrets provider', 'list secrets']
 ---
 
 If you wish to avoid storing secrets in plaintext in the Agent's configuration files, you can use the secrets management package.
@@ -307,7 +309,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: datadog-read-secrets
-  namespace: example
+  namespace: database
 subjects:
   - kind: ServiceAccount
     name: datadog-agent
@@ -563,3 +565,4 @@ This command returns whether the permissions are valid for the Agent to view thi
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [6]: /agent/guide/agent-commands/#restart-the-agent
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
