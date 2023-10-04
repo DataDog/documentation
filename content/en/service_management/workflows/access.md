@@ -113,7 +113,7 @@ Editor
 
 You can restrict access on a specific workflow either form the workflow list page or from the workflow canvas while editing the workflow.
 
-**Restricitng permissions from the workflow list page**
+**Restricting permissions from the workflow list page**
 1. Navigate to the [Workflow Automation page][9].
 1. Hover over the workflow on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
@@ -123,7 +123,7 @@ You can restrict access on a specific workflow either form the workflow list pag
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
 1. Click **Save**.
 
-**Restricitng permissions from the workflow editor**
+**Restricting permissions from the workflow editor**
 1. In the workflow editor click on the cog (**Settings**) icon.
 1. Select **Edit Permissions** from the dropdown.
 1. Select **Restrict Access**.
