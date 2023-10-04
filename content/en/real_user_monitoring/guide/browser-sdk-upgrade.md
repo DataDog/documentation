@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][25] for details on its features and capabilities.
+Follow this guide to migrate between major versions of the Browser RUM and Browser Logs SDKs. See [the SDK documentation][26] for details on its features and capabilities.
 
 ## From v4 to v5
 
@@ -335,8 +335,5 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [22]: /real_user_monitoring/session_replay/#usage
 [23]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
-<<<<<<< HEAD
-[25]: /real_user_monitoring/browser/
-=======
+[26]: /real_user_monitoring/browser/
 [25]: /real_user_monitoring/connect_rum_and_traces#opentelemetry-support
->>>>>>> refs/remotes/origin/rtrieu/docs-5768-browser-rum-sdk-v5-updates
