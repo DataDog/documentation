@@ -39,7 +39,7 @@ API Catalog combines data from across Datadog to provide opinionated workflows s
 
 If you're already monitoring the performance of your services using APM, API Catalog automatically detects API and endpoints in your instrumented services. 
 
-See [Setting up API Catalog][3] for more information, including how to add APIs and endpoints for services that aren't instrumented.
+See [Setting up API Catalog][3] for more information, including how to add APIs and endpoints for services that aren't auto-discoverable.
 
 ## Exploring and cataloging your endpoints
 
