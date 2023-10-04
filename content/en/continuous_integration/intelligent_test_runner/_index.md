@@ -49,7 +49,7 @@ If there are other branches you want to exclude, add them on the Test Service Se
 
 Additionally, you may specify a set of tracked files. Intelligent Test Runner runs all tests if any of these files change.
 
-You may also use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `mdx` file in the repository.
+You may also use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
 
 We recommend that you use tracked files for your dependency files (for example, `package.json`, `requirements.txt`) and for data files from data-driven tests, such as `tests/data/**`.
 
