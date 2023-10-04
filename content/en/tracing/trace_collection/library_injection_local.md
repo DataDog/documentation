@@ -210,7 +210,7 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 
 ##### Noisy library logs
 
-In Python versions less than `v1.20.3` Python injection logs are output to stderr. Upgrade to `v1.20.3` or above in which the logs are suppressed by default. The logs can be opted back in by setting the environment variable `DD_TRACE_DEBUG=1`.
+In Python `< 1.20.3`, Python injection logs output to `stderr`. Upgrade to `1.20.3` or above to suppress the logs by default. The logs can be enabled by setting the environment variable `DD_TRACE_DEBUG` to `1`.
 
 
 ##### Incompatible Python version
