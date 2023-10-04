@@ -158,7 +158,7 @@ Using the Datadog Operator requires the following prerequisites:
 - `<TARGET_SYSTEM>`: The name of your OS. For example, `linux` or `windows`.
 
 
-**Note**: If you are using Helm < v3, run the following:
+**Note**: If you are using Helm `2.x`, run the following:
    ```bash
    helm install --name <RELEASE_NAME> \
     -f datadog-values.yaml \
