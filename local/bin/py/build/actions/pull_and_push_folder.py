@@ -7,6 +7,7 @@ import yaml
 from itertools import chain
 from os import makedirs
 from os.path import basename
+from pathlib import Path
 
 from actions.comment_conversion import replace_comments
 
@@ -26,11 +27,15 @@ def pull_and_push_folder(content, content_dir):
     :param content: content to process
     :param content_dir: The directory where content should be put
     """
+
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
+            file_parent_path = Path(file_name).parent
             directory = ''
-            if 'rulesets' in file_name:
-                directory = "{}{}".format(file_name.split('/')[-2],'/')
+            if file_parent_path.parts[3] == 'rulesets':
+                # get the file's parent directories after 'rulesets/'
+                # accounts for nested directories
+                directory = f"{file_parent_path.relative_to(*file_parent_path.parts[:4])}/"
             file_content = f.read()
             boundary = re.compile(r'^-{3,}$', re.MULTILINE)
             split = boundary.split(file_content, 2)
