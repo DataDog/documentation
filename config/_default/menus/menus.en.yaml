@@ -4288,16 +4288,21 @@ main:
     url: account_management/org_settings/ip_allowlist
     parent: organization_settings
     weight: 206
-  - name: RBAC
+  - name: Access Control
     url: account_management/rbac/
     parent: account_management
     identifier: account_management_rbac
     weight: 3
+  - name: Granular Access
+    url: account_management/rbac/granular_access
+    parent: account_management_rbac
+    identifier: account_management_rbac_granular_access
+    weight: 301
   - name: Permissions
     url: account_management/rbac/permissions
     parent: account_management_rbac
     identifier: account_management_rbac_permissions
-    weight: 301
+    weight: 302
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
