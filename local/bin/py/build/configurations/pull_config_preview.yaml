@@ -107,7 +107,7 @@
         contents:
 
         - action: integrations
-          sha: 73db0bea7c45382283f97fc39c1b31c180191f17
+          branch: esther/yugabytedb_managed-editorial-review 
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
