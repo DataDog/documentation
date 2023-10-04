@@ -76,7 +76,7 @@ For example, for a Docker Linux container:
 
 ### Tagging observability data by environment
 
-Set `DD_ENV` in your one-line install command for linux and library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
+Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
 ## Removing Single Step APM instrumentation from your Agent
 
