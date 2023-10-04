@@ -111,7 +111,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -356,7 +356,7 @@ spec:
 
 See the [MySQL integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
 
-The Cluster Agent automatically registers this configuration and begin running the MySQL check.
+The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 

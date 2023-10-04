@@ -32,7 +32,7 @@ A useful way to inject [environment variables][8] or to configure a DogStatsD li
 
 Verify that the following are true:
 
-- The metrics endpoint is exposed and is open for the the Agent to reach.
+- The metrics endpoint is exposed and is open for the Agent to reach.
 
 - There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
 
