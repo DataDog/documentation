@@ -14,16 +14,15 @@ further_reading:
 
 ## Overview
 
-API Catalog uses APM instrumentation for distributed tracing to discover and list endpoints in all environments in your Datadog organization. Endpoints for instrumented services and supported libraries are automatically populated into API Explorer.
+API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in all environments in your Datadog organization. Endpoints for instrumented services and supported libraries are automatically populated into API Explorer.
 
 ## Setting up
 
-Because it is built on APM data, you can turn on API Catalog in a Datadog organization that is already consuming APM data, and no other setup required. APM instrumented services and supported libraries are automatically discoverable. 
+Because it is built on APM data, you can turn on API Catalog in a Datadog organization that is already consuming APM data, and no other setup required. APM-instrumented services and supported libraries are automatically discovered. 
 
-For APIs that are not yet instrumented, you can do one of the following to add it to the API Catalog:
+If you can't find one of your APIs or endpoints in the Catalog, check that it is instrumented, and if needed, **add APM instrumentation** by following the instructions on the [Setup page][1].
 
-- **Add APM instrumentation** to them by following the instructions on the [API Catalog Setup page][1].
-- **Import their OpenAPI definition** YAML or JSON file by clicking **Add API** on the [Catalog page][4]. 
+To add an API to the Catalog without instrumenting it, or if it's written in a framework that doesn't support instrumentation and auto-detection, **import its OpenAPI definition** YAML or JSON file by clicking **Add API** on the [Catalog page][4]. 
 
 Next, start exploring and adding catalog metadata to the detected or imported APIs and endpoints, in the [API Catalog Explorer page][5].
 

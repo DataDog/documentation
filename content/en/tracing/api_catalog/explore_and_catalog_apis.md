@@ -71,9 +71,7 @@ The ownership information -- team, on-call information, communication details --
 
 {{< img src="tracing/api_catalog/api-catalog-team-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint, as defined in Service Catalog" style="width:100%;" >}}
 
-## Assess monitoring gaps
-
-<!-- TKTK -->
+<!--## Assess monitoring gaps TKTK -->
 
 ## Further reading
 
