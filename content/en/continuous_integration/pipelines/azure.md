@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Azure DevOps Server is not supported.
+Azure DevOps Server is not officially supported.
 </div>
 
 {{< site-region region="gov" >}}
