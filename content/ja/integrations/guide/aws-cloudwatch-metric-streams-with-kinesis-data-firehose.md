@@ -9,11 +9,11 @@ further_reading:
 kind: ガイド
 title: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 ---
-{{% site-region region="us3,us5,gov" %}}
-**Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリームは、この Datadog サイトではサポートされていません。**
+{{% site-region region="us3,gov" %}}
+選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では AWS CloudWatch Metric Streams with Kinesis Data Firehose は利用できません。
 {{% /site-region %}}
 
-Amazon CloudWatch メトリクスストリームと Amazon Kinesis Data Firehose を使用すると、CloudWatch メトリクスを 2〜3 分のレイテンシーでより速く Datadog に取り込むことができます。これは、10 分ごとに更新されたメトリクスを提供する Datadog の API ポーリングアプローチよりも大幅に高速です。
+Amazon CloudWatch メトリクスストリームと Amazon Kinesis Data Firehose を使用すると、CloudWatch メトリクスを 2〜3 分のレイテンシーでより速く Datadog に取り込むことができます。これは、Datadog のデフォルトの API ポーリングアプローチよりも大幅に高速で、デフォルトのアプローチではメトリクスが 10 分ごとに更新されます。API ポーリングアプローチについて、詳しくは[クラウドメトリクスの遅延に関するドキュメント][1]でご確認ください。
 
 ## 概要
 
@@ -45,7 +45,7 @@ AWS アカウントやリージョン、あるいは特定のネームスペー�
 
 メトリクスをストリーミングするための Datadog からの追加料金はありません。
 
-AWS は、CloudWatch メトリクスストリームのメトリクスアップデートの数と Kinesis Data Firehose に送信されたデータボリュームに基づいて課金します。ストリーミングしているメトリクスのサブセットの CloudWatch コストが増加する可能性があるため、Datadog は、より低いレイテンシーが最も必要な AWS サービス、リージョン、アカウントにメトリクスストリームを使用することを優先することをお勧めします。詳細については、[Amazon CloudWatch の価格設定][1]を参照してください。
+AWS は、CloudWatch メトリクスストリームのメトリクス更新の数と Kinesis Data Firehose に送信されたデータボリュームに基づいて料金を請求します。ストリーミングしているメトリクスのサブセットについては、CloudWatch のコストが潜在的に増加する可能性があるため、Datadog は、より低いレイテンシーが最も必要な AWS サービス、リージョン、アカウントでメトリクスストリームを使用することを優先することを推奨します。詳細については、[Amazon CloudWatch の価格設定][2]を参照してください。
 
 ストリーム内の EC2 または Lambda メトリクスは、請求対象のホストと Lambda 呼び出しの数を増やす可能性があります (EC2 の場合、これらのホストと関数が AWS インテグレーションまたは Datadog Agent でまだ監視されていない場合)。
 
@@ -55,7 +55,7 @@ AWS は、CloudWatch メトリクスストリームのメトリクスアップ�
 
 1. [Metric Streaming と API ポーリングの比較](#streaming-vs-polling)のセクションをよく読んで、Metric Streaming を有効にする前に違いを理解してください。
 
-2. まだ接続していない場合は、AWS アカウントを Datadog に接続します。詳細については、[CloudFormation のセットアップ手順][2]を参照してください。
+2. まだ接続していない場合は、AWS アカウントを Datadog に接続します。詳細については、[CloudFormation のセットアップ手順][3]を参照してください。
 
 ### インストール
 
@@ -146,15 +146,16 @@ Metric Stream リソースが正常に作成されたことを確認したら、
 3. Firehose にリンクされた失敗メッセージのバックアップ S3 バケットを削除します。
 4. ストリームに関連付けられた IAM ロールと、ストリームのセットアップ中に作成された他のすべてのリソースを削除します。
 
-リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][3]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** で無効化したリージョンが表示されないことを確認します。
+リソースが削除されたら、Datadog が変更を認識するまで 5 分ほど待ちます。完了を確認するには、Datadog の [AWS インテグレーションページ][4]の **Metric Collection** タブを開き、指定した AWS アカウントの **CloudWatch Metric Streams** に無効にしたリージョンが表示されていないことを確認します。
 
 ## トラブルシューティング
-Metric Streams のセットアップまたは関連リソースに関する問題の解決には、[AWS のトラブルシューティング][4]をご覧ください。
+Metric Streams や関連リソースのセットアップで遭遇する問題を解決するには、[AWS のトラブルシューティング][5]をご覧ください。
 
 ## その他の参考資料
  {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://aws.amazon.com/cloudwatch/pricing/
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=roledelegation#setup
-[3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[1]: /ja/integrations/guide/cloud-metric-delay/
+[2]: https://aws.amazon.com/cloudwatch/pricing/
+[3]: /ja/integrations/amazon_web_services/?tab=roledelegation#setup
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
