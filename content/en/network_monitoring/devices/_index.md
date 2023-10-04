@@ -24,7 +24,13 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
+algolia:
+  tags: ['network device monitoring']
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 

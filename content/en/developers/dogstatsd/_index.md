@@ -9,15 +9,15 @@ aliases:
     - /integrations/faq/dogstatsd-and-docker
     - /agent/kubernetes/dogstatsd
 further_reading:
+    - link: 'integrations/node'
+      tag: 'Documentation'
+      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Introduction to DogStatsD'
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
     - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
       tag: "Blog"
       text: "Monitor your Linux web apps on Azure App Service with Datadog"
@@ -561,7 +561,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -576,7 +576,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /metrics/custom_metrics/
-[6]: /events/guides/dogstatsd/
+[6]: /service_management/events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /developers/dogstatsd/datagram_shell/

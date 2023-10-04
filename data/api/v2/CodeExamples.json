@@ -1,4 +1,18 @@
 {
+  "ReorderApmRetentionFilters": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Re-order retention filters returns \"OK\" response"
+    }
+  ],
+  "UpdateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Update a retention filter returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -200,6 +214,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Create a new entry for your service account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_109518525",
+      "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
@@ -481,6 +500,20 @@
       "group": "opsgenie_integration",
       "suffix": "",
       "description": "Update a single service object returns \"OK\" response"
+    }
+  ],
+  "CreatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Create a new powerpack returns \"OK\" response"
+    }
+  ],
+  "UpdatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Update a powerpack returns \"OK\" response"
     }
   ],
   "AggregateRUMEvents": [
@@ -799,6 +832,11 @@
       "group": "teams",
       "suffix": "",
       "description": "Create a team returns \"CREATED\" response"
+    },
+    {
+      "group": "teams",
+      "suffix": "_252121814",
+      "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
   "UpdateTeamLink": [

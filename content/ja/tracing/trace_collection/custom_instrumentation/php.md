@@ -33,7 +33,7 @@ PHP 8 を使用している場合、トレーサーの v0.84 以降では、コ�
 ```php
 <?php
 class Server {
-    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"]))]
+    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
     static function process($arg) {}
 
     #[DDTrace\Trace]

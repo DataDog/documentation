@@ -13,7 +13,11 @@ further_reading:
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
-{{< img src="service_management/workflows/hero2.png" alt="Graphic showing three purposes of Workflow Automation: Orchestrate, Automate, and Break down Silos" >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
 
 Datadog Workflow Automation allows you to orchestrate and automate your end-to-end processes. Build workflows made up of [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
 
@@ -29,6 +33,12 @@ Datadog provides you with preconfigured flows in the form of out of the box [blu
 
 Trigger your workflows from monitors, security signals, or dashboards, or trigger them manually. This flexibility allows you to respond with the appropriate workflow at the point you become aware of an issue affecting the health of your system. Automating critical tasks with Datadog Workflow Automation helps keep your systems up and running by improving the time to resolution and reducing the possibility of errors.
 
+## Workflows Overview dashboard
+
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to **Dashboards > Dashboards list** and search for `Workflows Overview`.
+
+{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
+
 ## Examples
 
 Below are a few examples of workflows you can build:
@@ -36,10 +46,6 @@ Below are a few examples of workflows you can build:
 - Automatically create investigative notebooks of malicious IPs to be detected by Security Signals, and then block these IPs in CloudFlare with the click of a button.
 - Execute workflows to roll back to stable versions of your application directly from the Dashboards you use to track the health of your systems.
 - Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process.
-
-Watch the video below to see a workflow configured to redeploy a Lambda function when it experiences a high error rate.
-
-{{< wistia 0klmggfhaf>}}
 
 ## Further reading
 

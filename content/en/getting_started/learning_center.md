@@ -31,6 +31,10 @@ aliases:
   - /videos/two_minute_intro/
   - /videos/unshare_screenboards/
   - /videos/weekly_monitor_report/
+  - /video-categories/フレームグラフ/
+  - /videos/apm
+  - /videos/aws
+  - /videos/host-map
 ---
 
 Datadog is an extensive platform for understanding your infrastructure. [The Datadog Learning Center][1] ensures you are able to leverage everything the platform has to offer.

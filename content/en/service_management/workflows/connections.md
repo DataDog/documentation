@@ -8,7 +8,9 @@ aliases:
 disable_toc: false
 ---
 
-## Overview
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Because workflow actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. A workflow can run successfully only if every workflow action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for a workflow to run.
 

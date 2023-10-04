@@ -14,11 +14,11 @@ The Datadog APM tracer supports extraction and injection of [B3][2] and [W3C Tra
 
 Distributed headers injection and extraction is controlled by
 configuring injection and extraction styles. Supported styles are:
-`tracecontext`, `datadog`, `B3` and `B3 single header`.
+`tracecontext`, `datadog`, `b3multi` and `b3 single header`.
 
-- Configure injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
-- Configure extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
-- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
+- Configure injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,b3mutli` environment variable.
+- Configure extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,b3multi` environment variable.
+- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,b3multi` environment variable.
 
 The values of these environment variables are comma-separated lists of
 header styles enabled for injection or extraction. By default,

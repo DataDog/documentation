@@ -10,12 +10,7 @@
         "id": "cf9456de-8b9e-4c27-aa79-27b1e78c1a33",
         "pipeline_unique_id": "3eacb6f3-ff04-4e10-8a9c-46e6d054024a",
         "pipeline_name": "Deploy to AWS",
-        "url": "https://my-ci-provider.example/jobs/my-jobs/run/1",
-        "git": {
-          "repository_url": "https://github.com/DataDog/datadog-agent",
-          "sha": "7f263865994b76066c4612fd1965215e7dcb4cd2",
-          "author_email": "john.doe@email.com"
-        }
+        "url": "https://my-ci-provider.example/jobs/my-jobs/run/1"
       }
     },
     "type": "cipipeline_resource_request"

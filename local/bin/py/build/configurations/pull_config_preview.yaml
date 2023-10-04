@@ -32,6 +32,24 @@
                 - "configuration & deployment"
               doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
+    - org_name: ansible-collections
+
+      repos:
+      - repo_name: datadog
+        contents:
+
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - README.md
+          options:
+            dest_path: '/agent/basic_agent_usage/'
+            file_name: 'ansible.md'
+            front_matters:
+              title: Ansible
+              kind: documentation
+              dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
+
     - org_name: aws
 
       repos:
@@ -85,26 +103,6 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - docs/dev/README.md
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: '_index.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-
-        - action: pull-and-push-folder
-          branch: master
-          globs:
-          - docs/dev/*.md
-          options:
-            dest_dir: '/developers/integrations/'
-            path_to_remove: 'docs/dev/'
-            front_matters:
-              dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
-
       - repo_name: integrations-extras
         contents:
 
@@ -157,10 +155,10 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'ansible.md'
+            dest_path: '/agent/guide/'
+            file_name: 'ansible_standalone_role.md'
             front_matters:
-              title: Ansible
+              title: Set up Ansible Using a Standalone Datadog Role
               kind: documentation
               dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
@@ -334,7 +332,7 @@
                 text: "Learn about Continuous Testing and CI/CD"
               - link: "/continuous_testing/explorer"
                 tag: "Documentation"
-                text: "Learn about the CI Results Explorer"
+                text: "Learn about the Synthetic Monitoring & Continuous Testing Explorer"
               - link: "/continuous_testing/testing_tunnel"
                 tag: "Documentation"
                 text: "Learn about the Testing Tunnel"
@@ -371,6 +369,96 @@
 
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/docker-best-practices/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/docker-best-practices/'
+            path_to_remove: 'rulesets/docker-best-practices/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-best-practices/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-best-practices/'
+            path_to_remove: 'rulesets/javascript-best-practices/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-browser-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-browser-security/'
+            path_to_remove: 'rulesets/javascript-browser-security/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-code-style/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-code-style/'
+            path_to_remove: 'rulesets/javascript-code-style/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-common-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-common-security/'
+            path_to_remove: 'rulesets/javascript-common-security/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-express/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-express/'
+            path_to_remove: 'rulesets/javascript-express/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-inclusive/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-inclusive/'
+            path_to_remove: 'rulesets/javascript-inclusive/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/javascript-node-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/javascript-node-security/'
+            path_to_remove: 'rulesets/javascript-node-security/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/jsx-react/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/jsx-react/'
+            path_to_remove: 'rulesets/jsx-react/'
+            front_matters:
+              disable_edit: true
+              
         - action: pull-and-push-folder
           branch: main
           globs:
@@ -441,6 +529,96 @@
             front_matters:
               disable_edit: true
 
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/python-security/'
+            path_to_remove: 'rulesets/python-security/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/tsx-react/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/tsx-react/'
+            path_to_remove: 'rulesets/tsx-react/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-best-practices/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-best-practices/'
+            path_to_remove: 'rulesets/typescript-best-practices/'
+            front_matters:
+              disable_edit: true
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-browser-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-browser-security/'
+            path_to_remove: 'rulesets/typescript-browser-security/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-code-style/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-code-style/'
+            path_to_remove: 'rulesets/typescript-code-style/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-common-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-common-security/'
+            path_to_remove: 'rulesets/typescript-common-security/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-express/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-express/'
+            path_to_remove: 'rulesets/typescript-express/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-inclusive/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-inclusive/'
+            path_to_remove: 'rulesets/typescript-inclusive/'
+            front_matters:
+              disable_edit: true
+              
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/typescript-node-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/rules/typescript-node-security/'
+            path_to_remove: 'rulesets/typescript-node-security/'
+            front_matters:
+              disable_edit: true
+              
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
@@ -620,6 +798,7 @@
             bundle_excludes:
               - "com.datadoghq.test"
               - "com.datadoghq.sample"
+              - "com.datadoghq.internal"
 
       - repo_name: web-ui
         contents:
@@ -631,3 +810,27 @@
               base_path: ""
               dest_path: "/layouts/shortcodes/"
               file_name: "semantic-color.md"
+
+      - repo_name: dd-trace-rb
+        contents:
+          - action: pull-and-push-file
+            branch: release
+            globs:
+              - 'docs/Compatibility.md'
+            options:
+              dest_path: '/tracing/trace_collection/compatibility/'
+              file_name: 'ruby.md'
+              front_matters:
+                title: Ruby Compatibility Requirements
+                kind: documentation
+                aliases:
+                  - /tracing/compatibility_requirements/ruby
+                  - /tracing/setup_overview/compatibility_requirements/ruby
+                code_lang: ruby
+                type: multi-code-lang
+                code_lang_weight: 20
+                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
+                further_reading:
+                    - link: 'tracing/trace_collection/dd_libraries/ruby'
+                      tag: 'Documentation'
+                      text: 'Instrument Your Application'

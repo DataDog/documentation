@@ -191,7 +191,7 @@ Use text formatting to clarify and enhance content.
 |-------------------|----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | `` `backquote` `` | Used for code related content within a sentence.                                                               | Use the `foo` parameter                               |
 | `**Bold**`        | Subjectively pointing the reader to something important.                                                       | **This is important**, not that.                      |
-| `_Italic_`        | Literally translated words, default values, functions, settings, and page names.                               | Go the the *setting* page in your Datadog application |
+| `_Italic_`        | Literally translated words, default values, functions, settings, and page names.                               | Go to the *setting* page in your Datadog application |
 | `[Link][3]`       | Links must be specified using the reference format (in the footnote) to aid with the [translation process][5]. | Text with `[a link][1]`                               |
 
 

@@ -84,7 +84,7 @@ After you create a custom Agent rule, the change is saved along with other pendi
 
 You can use Remote Configuration to automatically deploy the custom policy to your designated hosts (all hosts or a defined subset of hosts), or alternatively, manually upload it to the Agent on each host.
 
-<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/18hwf0-4AXYzKcQR0AIT1JxhaMFLw90YaDXBaUgdxKLM/prefill">form</a> to request access.</div>
+<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSe5Emr7y_Jg3ShcC44HlYtalxKgHUocFAz8dq87xSkjfeALTg/viewform">form</a> to request access.</div>
 
 #### Remote Configuration
 

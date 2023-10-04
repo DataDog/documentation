@@ -31,10 +31,10 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 
 | AWS service                        | Activate AWS service logging                                                                    | Send AWS logs to Datadog                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][3]                  | [Enable AWS API Gateway logs][4]                                                               | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                |
-| [Cloudfront][6]                   | [Enable AWS Cloudfront logs][7]                                                                | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.  |
-| [Cloudtrail][9]                   | [Enable AWS Cloudtrail logs][9]                                                                | [Manual][10] log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM.                                                  |
-| [DynamoDB][12]                     | [Enable AWS DynamoDB logs][13]                                                                  | [Manual][14] log collection.                                                 |
+| [API Gateway][3]                  | [Enable Amazon API Gateway logs][4]                                                               | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                |
+| [Cloudfront][6]                   | [Enable Amazon CloudFront logs][7]                                                                | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.  |
+| [CloudTrail][9]                   | [Enable AWS CloudTrail logs][9]                                                                | [Manual][10] log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM.                                                  |
+| [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                  | [Manual][14] log collection.                                                 |
 | [EC2][15]                          | `-`                                                                                             | Use the [Datadog Agent][15] to send your logs to Datadog.                    |
 | [ECS][16]                          | `-`                                                                                             | [Use the docker agent to gather your logs][17].                              |
 | [Elastic Load Balancing (ELB)][18] | [Enable AWS ELB logs][19]                                                                       | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.  |
@@ -69,7 +69,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Redshift Logs                   | S3             |
 | S3 Access Logs                  | S3             |
 
-**Note**: `SubscriptionFilter` is not created automatically.
+**Note**: [Subscription filters][48] are not created automatically by the DatadogForwarder. Create them directly on a Log Group.
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Ensure the policy of the IAM role used for [Datadog-AWS integration][43] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
@@ -292,3 +292,4 @@ You can also exclude or send only those logs that match a specific pattern by us
 [45]: https://app.datadoghq.com/logs
 [46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
 [47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[48]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters

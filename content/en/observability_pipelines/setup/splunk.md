@@ -16,7 +16,7 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
-<div class="alert alert-info">At this time, Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
+<div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
 ## Overview
 
@@ -81,6 +81,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 ## Setting up the Splunk index
 
 <div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
+
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
 
@@ -88,7 +89,7 @@ To receive logs from the Observability Pipelines Worker, you must provision a HE
 2. Add a new HTTP Event Collector input and assign it a name.
 3. Select the indexes where you want the logs to be sent.
 
-After you add the input, Splunk creates a token for you. The token is typically in a UUID format. In the sample configurations provided in later sections in this article, you will add this token to the configuration so that the Observability Pipelines Worker can authenticate itself.
+After you add the input, Splunk creates a token for you. The token is typically in a UUID format. In the sample configurations provided in later sections in this article, add this token to the configuration so that the Observability Pipelines Worker can authenticate itself.
 
 ## Installing the Observability Pipelines Worker
 
@@ -110,7 +111,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-   `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1. Be sure to update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index).
+   Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Be sure to also update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index). `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1. 
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
@@ -118,22 +119,22 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values as follows:
-  ```yaml
-  datadog:
-    apiKey: "<datadog_api_key>"
-    pipelineId: "<observability_pipelines_configuration_id>"
-    site: "datadoghq.com"
-  ```
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
 
 3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
-  ```yaml
-  env:
-    - name: SPLUNK_HEC_ENDPOINT
-      value: <https://your.splunk.index:8088/>
-    - name: SPLUNK_TOKEN
-      value: <a_random_token_usually_a_uuid>
-  ```
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
 
 4. Install the Helm chart in your cluster with the following commands:
 
@@ -154,22 +155,22 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "Azure AKS" %}}
 1. Download the [Helm chart][1] for Azure AKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values as follows:
-  ```yaml
-  datadog:
-    apiKey: "<datadog_api_key>"
-    pipelineId: "<observability_pipelines_configuration_id>"
-    site: "datadoghq.com"
-  ```
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
 
-3. replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
-  ```yaml
-  env:
-    - name: SPLUNK_HEC_ENDPOINT
-      value: <https://your.splunk.index:8088/>
-    - name: SPLUNK_TOKEN
-      value: <a_random_token_usually_a_uuid>
-  ```
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
 
 4. Install the Helm chart in your cluster with the following commands:
 
@@ -190,22 +191,22 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart][1] for Google GKE.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values as follows:
-  ```yaml
-  datadog:
-    apiKey: "<datadog_api_key>"
-    pipelineId: "<observability_pipelines_configuration_id>"
-    site: "datadoghq.com"
-  ```
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
 
-3. replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
-  ```yaml
-  env:
-    - name: SPLUNK_HEC_ENDPOINT
-      value: <https://your.splunk.index:8088/>
-    - name: SPLUNK_TOKEN
-      value: <a_random_token_usually_a_uuid>
-  ```
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
 
 4. Install the Helm chart in your cluster with the following commands:
 
@@ -249,7 +250,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Add your keys and Splunk information to the Worker's environment variables:
+4. Add your keys, site ({{< region-param key="dd_site" code="true" >}}), and Splunk information to the Worker's environment variables:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -277,7 +278,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
     name = Observability Pipelines Worker
-    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/x86_64/
+    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/\$basearch/
     enabled=1
     gpgcheck=1
     repo_gpgcheck=1
@@ -295,7 +296,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo yum install observability-pipelines-worker
     ```
 
-3. Add your keys and Splunk information to the Worker's environment variables:
+3. Add your keys, site ({{< region-param key="dd_site" code="true" >}}), and Splunk information to the Worker's environment variables:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -321,7 +322,7 @@ Setup the Worker module in your existing Terraform using this sample configurati
 
 ```
 module "opw" {
-    source     = "https://github.com/DataDog/opw-terraform//aws"
+    source     = "git::https://github.com/DataDog/opw-terraform//aws"
     vpc-id     = "{VPC ID}"
     subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
     region     = "{REGION}"
@@ -500,9 +501,9 @@ At this point, your logs should be going to the Worker and be available for proc
 
 ## Working with data
 The sample Observability Pipelines configuration does the following:
-- **Collects** logs being sent from the Splunk forwarder to the Observability Pipelines Worker. 
-- **Transforms** logs by adding tags to data that has come through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- **Routes** the logs by dual-shipping the data to both Splunk and Datadog. This demonstrates how easy it is to write to multiple destinations!
+- Collects logs being sent from the Splunk forwarder to the Observability Pipelines Worker. 
+- Transforms logs by adding tags to data that has come through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
+- Routes the logs by dual-shipping the data to both Splunk and Datadog.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

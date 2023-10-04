@@ -116,6 +116,16 @@ Dynamically rename services through configuration. Services can be separated by 
 : **Default**: `true` <br>
 Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
+`DD_TRACE_PARTIAL_FLUSH_ENABLED`
+: **Default**: `false` <br>
+Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false`.
+Added in version 1.54.0. Only compatible with the Datadog Agent 7.26.0+.
+
+`DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`
+: **Default**: `1000`<br>
+Number of spans within a trace that can be partially flushed to the Datadog Agent. `DD_TRACE_PARTIAL_FLUSH_ENABLED` must be `true` for partial flushing to occur.
+Added in version 1.54.0. Only compatible with the Datadog Agent 7.26.0+.
+
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **Default**: `false` <br>
 Enable client IP collection from relevant IP headers in HTTP request spans.
