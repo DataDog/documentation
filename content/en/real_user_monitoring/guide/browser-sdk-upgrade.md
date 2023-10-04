@@ -122,6 +122,12 @@ In v5, the default `sessionReplaySampleRate` is 0 instead of 100. If you don't i
 
 ### RUM
 
+### APM integration
+
+To promote the support and usage of OpenTelemetry, the default propagator types has been changed to include `tracecontext` in addition to `datadog`.
+
+**Action to take**: If you are not already specifying the desired propagator on the `allowedTracingUrls` initialization parameter, configure you server Access-Control-Allow-Headers to also accept `traceparent` header. For more information, see [connect RUM and Traces][25].
+
 ### Session plan field
 
 In relation to Session Replay changes, the `session.plan` field is only available for session events.
@@ -329,3 +335,4 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [22]: /real_user_monitoring/session_replay/#usage
 [23]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
+[25]: /real_user_monitoring/connect_rum_and_traces#opentelemetry-support
