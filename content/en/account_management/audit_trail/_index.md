@@ -176,10 +176,10 @@ To export an audit analytics query as a report, create a timeseries, top list, o
 
 ## Download Audit Events as CSV
 
-Datadog Audit Trail allows you to download upto 100k audit events as a CSV file locally. These events can then be analyzed locally, uploaded to a different tool for further analytics or shared with approporte team members as part of security/compliance exercise.
+Datadog Audit Trail allows you to download up to 100K audit events as a CSV file locally. These events can then be analyzed locally, uploaded to a different tool for further analytics, or shared with appropriate team members as part of a security and compliance exercise.
 
-To export audit events as CSV 
-1. Run the appropriate search query that captures the events you are interested in.
+To export audit events as CSV:
+1. Run the appropriate search query that captures the events you are interested in
 2. Add event fields as columns in the view that you want as part of CSV
 3. Click on Download as CSV
 4. Select the number of events to export and export as CSV
