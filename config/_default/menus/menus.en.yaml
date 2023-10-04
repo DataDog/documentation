@@ -4356,25 +4356,29 @@ main:
     url: account_management/teams/
     parent: account_management
     weight: 7
+  - name: Multi-Factor Authentication
+    url: account_management/multi-factor_authentication/
+    parent: account_management
+    weight: 8
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 8
+    weight: 9
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 801
+    weight: 901
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
     identifier: account_management_plan_and_usage
-    weight: 9
+    weight: 10
   - name: Usage Details
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
-    weight: 901
+    weight: 1001
   - name: Cost Details
     url: account_management/plan_and_usage/cost_details/
     parent: account_management_plan_and_usage
@@ -4382,15 +4386,15 @@ main:
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 10
+    weight: 11
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 11
+    weight: 12
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 12
+    weight: 13
   - name: Data Security
     url: data_security/
     pre: security-lock
