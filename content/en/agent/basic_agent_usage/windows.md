@@ -79,7 +79,9 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 ### Configuration
 
-Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows:
+Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows. 
+
+**Note**: If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
 
 | Variable                                    | Type    | Description                                                                                                                                                                                                                         |
 |----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -103,7 +105,7 @@ Each configuration item is added as a property to the command line. The followin
 | [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(version 7.44.0 and previous)_ |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
 
-**Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
+
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: /agent/proxy/
