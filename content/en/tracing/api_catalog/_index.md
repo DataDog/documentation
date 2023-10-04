@@ -12,7 +12,7 @@ further_reading:
 <div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-{{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API Catalog showing a list of API endpoints along with their Error Rate, P99 Latency, Requests Count, and Owning Team, with searching, filtering, and scoping features." style="width:100%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-api-details.png" alt="API Catalog showing a list of endpoints for an API called Checkout, along with information about ownership, service and environment, tags, and links to related monitors, tests, and performance data." style="width:100%;" >}}
 
 ## Overview
 
@@ -39,11 +39,11 @@ API Catalog combines data from across Datadog to provide opinionated workflows s
 
 If you're already monitoring the performance of your services using APM, API Catalog automatically detects API and endpoints in your instrumented services. 
 
-See [Setting up API Catalog][3] for more information, including how to add APIs and endpoints for services that aren't auto-discoverable.
+See [Setting up API Catalog][3] for more information, including how to add APIs and endpoints for services that aren't auto-discovered.
 
 ## Exploring and cataloging your endpoints
 
-Use the API Catalog Explorer page to navigate through all endpoints, filtering, searching and using facets and time frame to find particular endpoints of interest.
+Use the API Catalog Explorer page to navigate through all endpoints, filtering, searching, and using facets and time frame to find particular endpoints of interest.
 
 Add meaningful tags and ownership information to the endpoint to make you catalog most useful for investigations and team communication.
 

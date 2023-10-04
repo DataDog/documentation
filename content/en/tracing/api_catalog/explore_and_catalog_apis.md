@@ -8,6 +8,8 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
+{{< img src="tracing/api_catalog/api-catalog-explorer.png" alt="API Catalog Explorer view" style="width:100%;" >}}
+
 ## Exploring endpoints
 
 The [API Catalog Explorer][1] page shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics to get more precise results, using facets and tags for quick filtering.
@@ -22,7 +24,7 @@ Or select a combination of facets on the left, filtering by the owning **service
 
 To **scope the data** shown in the table, specify an environment, another primary tag (such as datacenter), and a time frame.
 
-{{< img src="tracing/api_catalog/api-catalog-scope.mp4" alt="Showing how changing scope settings changes the metrics shown in the API Catalog" video="true" >}}
+{{< img src="tracing/api_catalog/api-catalog-scope2.mp4" alt="Showing how changing scope settings changes the metrics shown in the API Catalog" video="true" >}}
 
 For example, use filters and sorting to review faulty endpoints within the past week.
 
@@ -56,7 +58,7 @@ For example, you can:
 - View the Error/Hits graph and correlated Response Code graph to identify issues.
 - Navigate to related telemetry like traces and logs.
 
-{{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph, and click through to related traces to investigate." video="true" >}}
+{{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
 
 The graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
 
@@ -69,7 +71,7 @@ You can quickly see the owning team of each endpoint, and click through to see T
 
 The ownership information -- team, on-call information, communication details -- is derived from the service definition supplied from the Service Catalog. The service owner owns all of the endpoints connected to the service.
 
-{{< img src="tracing/api_catalog/api-catalog-team-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint, as defined in Service Catalog" style="width:100%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-endpoint-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint" style="width:100%;" >}}
 
 <!--## Assess monitoring gaps TKTK -->
 
