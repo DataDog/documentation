@@ -44,7 +44,7 @@ Si vous avez activé les métriques Lambda AWS, vous pouvez visualiser les métr
 | `aws.lambda.duration.maximum` | Durée maximale d'exécution (en millisecondes) de la fonction Lambda  |
 | `aws.lambda.throttles`        | Nombre de tentatives d'invocations inachevées en raison d'un taux d'invocation dépassant les limites client |
 
-Pour en savoir plus sur ces métriques AWS Lambda et en découvrir d'autres, consultez la rubrique relative aux [métriques AWS Lambda][6].
+Pour en savoir plus sur ces métriques AWS Lambda et en découvrir d'autres, consultez la rubrique relative aux [métriques Amazon Lambda][6].
 
 ### Gérer vos déclencheurs de fonction
 

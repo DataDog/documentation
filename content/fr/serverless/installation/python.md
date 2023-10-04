@@ -475,7 +475,7 @@ resource "aws_lambda_function" "lambda" {
 - Consultez le [guide de dépannage][2] si vous ne parvenez pas à recueillir les données de télémétrie.
 - Examinez les [configurations avancées][3] pour :
     - Associer des données de télémétrie à l'aide de tags
-    - Recueillir des données de télémétrie pour Amazon API Gateway, SQS, etc.
+    - Recueillir des données de télémétrie pour AWS API Gateway, SQS, etc.
     - Capturer les charges utiles des requêtes et des réponses Lambda
     - Associer les erreurs de vos fonctions Lambda à votre code source
     - Filtrer ou nettoyer des informations sensibles des logs ou des traces

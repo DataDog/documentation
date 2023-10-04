@@ -42,14 +42,14 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 #### Activer le logging
 
-ConfigurezAWS AppSync de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
+Configurez Amazon AppSync de façon à ce que ses logs soient envoyés vers un compartiment S3 ou vers CloudWatch.
 
 **Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_appsync` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][4].
-2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logsAWS AppSync dans la console AWS :
+2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs CloudWatch qui contient vos logs Amazon AppSync dans la console AWS :
 
     - [Ajouter un déclencheur manuel sur le compartiment S3][5]
     - [Ajouter un déclencheur manuel sur le groupe de logs CloudWatch][6]

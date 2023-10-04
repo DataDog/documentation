@@ -25,7 +25,7 @@ further_reading:
 git_integration_title: amazon_lambda
 has_logo: true
 integration_id: amazon-lambda
-integration_title: AWS Lambda
+integration_title: Amazon Lambda
 integration_version: ''
 is_public: true
 kind: integration
@@ -46,7 +46,7 @@ version: '1.0'
 
 ## Présentation
 
-AWS Lambda est un service de calcul qui exécute du code en réponse à des événements et qui gère automatiquement les ressources de calcul requises par ce code.
+Amazon Lambda est un service de calcul qui exécute du code en réponse à des événements et qui gère automatiquement les ressources de calcul requises par ce code.
 
 Activez cette intégration pour commencer à recueillir des métriques CloudWatch. Cette page décrit également la marche à suivre pour configurer l'envoi de métriques custom, le logging et le tracing pour vos fonctions Lambda.
 
