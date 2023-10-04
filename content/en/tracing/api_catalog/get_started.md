@@ -22,7 +22,11 @@ Because it is built on APM data, you can turn on API Catalog in a Datadog organi
 
 If you can't find one of your APIs or endpoints in the Catalog, check that it is instrumented, and if needed, **add APM instrumentation** by following the instructions on the [Setup page][1].
 
+{{< img src="tracing/api_catalog/api-catalog-setup.png" alt="API Catalog Setup page showing instructions for instrumenting a Java service" style="width:80%;" >}}
+
 To add an API to the Catalog without instrumenting it, or if it's written in a framework that doesn't support instrumentation and auto-detection, **import its OpenAPI definition** YAML or JSON file by clicking **Add API** on the [Catalog page][4]. 
+
+{{< img src="tracing/api_catalog/api-catalog-setup-import.png" alt="API Catalog Setup page for importing an OpenAPI definition file." style="width:100%;" >}}
 
 Next, start exploring and adding catalog metadata to the detected or imported APIs and endpoints, in the [API Catalog Explorer page][5].
 

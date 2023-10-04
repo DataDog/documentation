@@ -47,22 +47,6 @@ Or tag endpoints that handle sensitive data with a tag like `PII` and alert when
 When you add a tag, it appears in the list of facets on the left of the catalog. Click a facet to filter the list and add the tag to the Search query field.
 
 
-## Investigating endpoint details
-
-When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
-
-Click an endpoint in the list to open a details page that shows performance, errors and issues, deployments, monitors, ownership, dependency map, and metadata information for the endpoint, collected from various areas of Datadog, into one place. Here you can also add custom tags. You can investigate the various types of telemetry using links into other areas of Datadog. 
-
-For example, you can:
-- Look up a specific endpoint by path (for example, `/checkout`) when it shows a high error rate and a high request count.
-- View the Error/Hits graph and correlated Response Code graph to identify issues.
-- Navigate to related telemetry like traces and logs.
-
-{{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
-
-The graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
-
-
 ## Establishing ownership 
 
 The Team column of the Explorer page and each endpoint details page shows the name of the team that owns the service that the endpoint is associated with, if it has been assigned. If it hasn't been assigned, you can assign ownership by clicking the dropdown list and choosing one.
