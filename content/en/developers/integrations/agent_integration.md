@@ -447,7 +447,7 @@ If you are editing or adding new integration code, a version bump is required.
 
 If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is optional. 
 
-With or without a version bump, updates to assets such as dashboards and recommended monitors immediately become available to customers after the corresponding pull requests are merged and they are published. Updates to `README.md`, `manifest.json`, or any other non-code files also immediately become visible to customers after publishing. 
+With or without a version bump, updates to assets such as dashboards and recommended monitors automatically become available to customers after the corresponding pull requests are merged and they are published. Updates to `README.md`, `manifest.json`, or any other non-code files also immediately become visible to customers after publishing. 
 
 ### Bumping an integration version 
 In addition to any code changes, the following is required when bumping an integration version:
