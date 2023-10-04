@@ -107,7 +107,7 @@
         contents:
 
         - action: integrations
-          sha: 5d2780b4f14a85e9303080b289a155b77fe1a654
+          sha: 73db0bea7c45382283f97fc39c1b31c180191f17
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
