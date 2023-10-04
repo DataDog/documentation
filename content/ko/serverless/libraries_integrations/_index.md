@@ -38,7 +38,7 @@ title: 서버리스 라이브러리 및 통합
 {{< nextlink href="/integrations/amazon_lambda/" >}}AWS Lambda Integration{{< /nextlink >}}
 {{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions Integration{{< /nextlink >}}
 {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync Integration{{< /nextlink >}}
-{{< nextlink href="/integrations/amazon_api_gateway/" >}}AWS API Gateway Integration{{< /nextlink >}}
+{{< nextlink href="/integrations/amazon_api_gateway/" >}}Amazon API Gateway Integration{{< /nextlink >}}
 {{< nextlink href="/integrations/amazon_sqs/" >}}AWS SQS Integration{{< /nextlink >}}
 {{< nextlink href="/integrations/amazon_sns/" >}}AWS SNS Integration{{< /nextlink >}}
 {{< /whatsnext >}}

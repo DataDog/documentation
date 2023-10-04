@@ -37,7 +37,7 @@ Amazon AppSync は、1 つ以上のデータソースのデータに安全にア
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AppSync` が有効になっていることを確認します。
-2. [Datadog - Amazon AppSync インテグレーション][3]をインストールします。
+2. [Datadog -AWS AppSync インテグレーション][3]をインストールします。
 
 ### ログの収集
 

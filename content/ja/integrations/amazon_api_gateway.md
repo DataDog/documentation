@@ -44,7 +44,7 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
     - `apigateway:GET`
     - `tag:GetResources`
 
-3. [Datadog - AWS API Gateway インテグレーション][4]をインストールします。
+3. [Datadog - Amazon API Gateway インテグレーション][4]をインストールします。
 
 **注**: CloudWatch の詳細メトリクスを有効にしている場合、ステージ内のすべてのリソースまたはルートで有効にする必要があります。無効の場合、Datadog の集計値が不正確になります。
 
@@ -92,11 +92,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS API Gateway インテグレーションには、イベントは含まれません。
+Amazon API Gateway インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS API Gateway インテグレーションには、サービスのチェック機能は含まれません。
+Amazon API Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

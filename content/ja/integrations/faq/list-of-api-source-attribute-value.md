@@ -25,7 +25,7 @@ title: API ソース属性
 | Akamai Mpulse                 | akamai mpulse                 | akamaimpulse               |
 | Alibaba Cloud                 | alibaba cloud                 | alibabacloud               |
 | Amazon Appstream              | amazon appstream              | appstream                  |
-| Amazon Appsync                | amazon appsync                | appsync                    |
+|AWS AppSync                |AWS AppSync                | appsync                    |
 | Amazon Api Gateway            | amazon api gateway            | apigateway                 |
 | Amazon Athena                 | amazon athena                 | athena                     |
 | Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
@@ -79,7 +79,7 @@ title: API ソース属性
 | Amazon Kinesis Data Analytics | amazon kinesis data analytics | kinesisanalytics           |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
 | Amazon Kms                    | amazon kms                    | kms                        |
-| AWS Lambda                    | amazon lambda                 | lambda                     |
+| AWS Lambda                    | AWS Lambda                 | lambda                     |
 | Amazon Lex                    | amazon lex                    | awslex                     |
 | Amazon App Mesh               | amazon app mesh               | amazonappmesh              |
 | Amazon Machine Learning       | amazon machine learning       | machinelearning            |
