@@ -7,6 +7,8 @@ further_reading:
 - link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Autodiscovery"
+algolia:
+  tags: ['secrets', 'secrets executable', 'secrets provider', 'list secrets']
 ---
 
 If you wish to avoid storing secrets in plaintext in the Agent's configuration files, you can use the secrets management package.

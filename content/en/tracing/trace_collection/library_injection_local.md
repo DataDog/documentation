@@ -31,7 +31,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * For Python, uWSGI applications are not supported at this time.
-* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails or Hanami applications at this time.
+* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails applications with Bundler version greater than 2.3 and without vendored gems (deployment mode or `BUNDLE_PATH`).
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
@@ -90,25 +90,25 @@ spec:
 
 ### Step 2 - Annotate your pods for library injection
 
-To select your pods for library injection, annotate them with the following, corresponding to your application language, in your pod spec:
+To select your pods for library injection, use the annotations provided in the following table within your pod spec:
 
-| Language   | Pod annotation                                              |
-|------------|-------------------------------------------------------------|
+| Language   | Pod annotation                                                        |
+|------------|-----------------------------------------------------------------------|
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
-| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][16]
-- [Javascript][17]
+- [JavaScript][17]
 - [Python][18]
 - [.NET][19]
-  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
+  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 - [Ruby][20]
 
-**Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
+**Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedence over manually configured libraries.
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
@@ -206,6 +206,18 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 - **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
+#### Python installation issues
+
+##### Incompatible Python version
+
+The library injection mechanism for Python only supports injecting the Python library in Python v3.7+.
+
+##### `user-installed ddtrace found, aborting`
+
+- **Problem**: The `ddtrace` library is already installed on the system so the injection logic aborts injecting the library to avoid introducing a breaking change in the application.
+- **Solution**: Remove the installation of `ddtrace` if library injection is desired. Otherwise, use the installed library ([see documentation][26]) instead of library injection.
+
+
 [1]: /containers/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 [3]: /containers/kubernetes/installation/?tab=helm
@@ -231,6 +243,7 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 [23]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[26]: /tracing/trace_collection/dd_libraries/python/
 {{% /tab %}}
 
 {{% tab "Host" %}}

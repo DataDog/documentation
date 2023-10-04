@@ -1,4 +1,8 @@
 {
+  "apm-retention-filters": {
+    "name": "APM Retention Filters",
+    "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint."
+  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."
@@ -98,6 +102,10 @@
   "organizations": {
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
+  },
+  "powerpack": {
+    "name": "Powerpack",
+    "description": "The powerpack endpoints allow you to:\n\n- Get a powerpack\n- Create a powerpack\n- Delete a powerpack\n- Get a list of all powerpacks\n\nThe Patch and Delete API methods can only be performed on a powerpack by\na user who has the powerpack create permission for that specific powerpack."
   },
   "processes": {
     "name": "Processes",
