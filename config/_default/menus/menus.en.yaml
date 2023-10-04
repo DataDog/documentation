@@ -8352,6 +8352,18 @@ api:
         - UpdateApmRetentionFilter
       unstable: []
       order: 4
+  - name: Get a given APM retention filter
+    url: '#get-a-given-apm-retention-filter'
+    identifier: apm-retention-filters-get-a-given-apm-retention-filter
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetApmRetentionFilter
+      unstable: []
+      order: 3
   - name: Delete a retention filter
     url: '#delete-a-retention-filter'
     identifier: apm-retention-filters-delete-a-retention-filter
@@ -8375,7 +8387,7 @@ api:
       operationids:
         - ReorderApmRetentionFilters
       unstable: []
-      order: 3
+      order: 6
   - name: Create a retention filter
     url: '#create-a-retention-filter'
     identifier: apm-retention-filters-create-a-retention-filter
@@ -9761,6 +9773,70 @@ api:
         - v2
       operationids:
         - ListOpsgenieServices
+      unstable: []
+      order: 1
+  - name: Powerpack
+    url: /api/latest/powerpack/
+    identifier: powerpack
+    generated: true
+  - name: Update a powerpack
+    url: '#update-a-powerpack'
+    identifier: powerpack-update-a-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdatePowerpack
+      unstable: []
+      order: 5
+  - name: Get a Powerpack
+    url: '#get-a-powerpack'
+    identifier: powerpack-get-a-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetPowerpack
+      unstable: []
+      order: 4
+  - name: Delete a powerpack
+    url: '#delete-a-powerpack'
+    identifier: powerpack-delete-a-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeletePowerpack
+      unstable: []
+      order: 3
+  - name: Create a new powerpack
+    url: '#create-a-new-powerpack'
+    identifier: powerpack-create-a-new-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreatePowerpack
+      unstable: []
+      order: 2
+  - name: Get all powerpacks
+    url: '#get-all-powerpacks'
+    identifier: powerpack-get-all-powerpacks
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetAllPowerpacks
       unstable: []
       order: 1
   - name: Processes

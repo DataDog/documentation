@@ -29,13 +29,17 @@ aliases:
 - /ko/videos/two_minute_intro/
 - /ko/videos/unshare_screenboards/
 - /ko/videos/weekly_monitor_report/
+- /ko/video-categories/フレームグラフ/
+- /ko/videos/apm
+- /ko/videos/aws
+- /ko/videos/host-map
 kind: 설명서
 title: Datadog 학습 센터
 ---
 
-Datadog는 인프라스트럭처를 상세히 파악할 수 있는 종합 플랫폼입니다. [Datadog 학습 센터][1]는 플랫폼이 제공하는 기능을 전부 활용하도록 도와드립니다.
+Datadog은 인프라스트럭처를 이해하기 위한 광범위한 플랫폼입니다. [Datadog 학습 센터][1]를 통해 플랫폼이 제공하는 모든 것을 활용할 수 있습니다.
 
-이용 가능한 코스 목록은 [코스][2] 페이지에서 확인하실 수 있습니다.
+이용 가능한 코스 목록은 [코스][2]에서 확인하세요.
 
 [1]: https://learn.datadoghq.com
 [2]: https://learn.datadoghq.com/collections
