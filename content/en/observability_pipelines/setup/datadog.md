@@ -72,6 +72,15 @@ In order to run the Worker in your AWS account, you need administrative access t
 * The subnet IDs your instances will run in.
 * The AWS region your VPC is located in.
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+<div class="alert alert-warning">CloudFormation installs only support Remote Configuration at this time.</div>
+<div class="alert alert-warning">Datadog does not recommend CloudFormation installs for production workloads.</div>
+
+In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
+* The VPC ID your instances will run in.
+* The subnet IDs your instances will run in.
+* The AWS region your VPC is located in.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Installing the Observability Pipelines Worker
@@ -347,6 +356,33 @@ EOT
 }
 ```
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+To install the Worker into your AWS Account, you can use the CloudFormation template to create a Stack:
+
+  1. Download [the CloudFormation template][1] for the OPW, which you'll upload to AWS momentarily.
+
+  2. In the **CloudFormation console**, click the **Create stack** button, and select the **With new resources (standard)** option.
+
+  3. Make sure that the **Template is ready** option is selected, and select **Upload a template file**. Select the CloudFormation template file you downloaded earlier.
+
+  4. On the next page (**Specify stack details**), enter a name for the stack, which can be anything you'd like.
+
+  5. Fill in the parameters for the CloudFormation template. A few require special attention:
+
+  * For **APIKey** and **PipelineID**, provide the key and ID that you gathered earlier in the Prerequisites section.
+    
+  * For the **VPCID** and **SubnetIDs**, provide the subnets and VPC you chose earlier.
+
+  * All other parameters are set to reasonable defaults for an OPW deployment but are adjustable if you need.
+  
+  6. On the next page (**Configure stack options**), no adjustments are required.
+
+  7. On the next page (**Review**), make sure the parameters are as you expect, click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.
+
+CloudFormation will handle installation from this point; OPW instances will spawn, download the necessary software, and start running automatically.
+
+[1]: /resources/yaml/observability_pipelines/cloudformation/datadog.yaml
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Load balancing
@@ -409,6 +445,9 @@ No built-in support for load-balancing is provided, given the single-machine nat
 {{% tab "Terraform (AWS)" %}}
 An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+An NLB is provisioned by the CloudFormation template, and is configured to point at the AutoScaling Group. Its DNS address is returned in the `LoadBalancerDNS` CloudFormation output.
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Buffering
@@ -440,6 +479,11 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 {{% tab "Terraform (AWS)" %}}
 By default, a 288GB EBS drive is allocated to each instance, and the sample configuration above is set to use that for buffering.
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+<div class="alert alert-warning">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This will lead to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, Datadog does not recommend CloudFormation installs for production workloads.</div>
+
+By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted and formatted upon instance boot.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
@@ -462,7 +506,7 @@ observability_pipelines_worker:
 kubectl get svc opw-observability-pipelines-worker
 ```
 
-For Terraform installs, the `lb-dns` output provides the necessary value.
+For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
 
 At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
 
