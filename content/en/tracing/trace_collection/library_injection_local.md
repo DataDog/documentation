@@ -208,6 +208,11 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 
 #### Python installation issues
 
+##### Noisy library logs
+
+In Python `< 1.20.3`, Python injection logs output to `stderr`. Upgrade to `1.20.3` or above to suppress the logs by default. The logs can be enabled by setting the environment variable `DD_TRACE_DEBUG` to `1`.
+
+
 ##### Incompatible Python version
 
 The library injection mechanism for Python only supports injecting the Python library in Python v3.7+.
