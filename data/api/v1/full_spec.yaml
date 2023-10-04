@@ -9184,6 +9184,86 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    PowerpackTemplateVariableContents:
+      description: Powerpack template variable contents.
+      properties:
+        name:
+          description: The name of the variable.
+          example: host1
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable.
+          type: string
+        values:
+          description: One or many template variable values within the saved view,
+            which will be unioned together using `OR` if more than one is specified.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: One or more possible values of the template variable.
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - name
+      - values
+      type: object
+    PowerpackTemplateVariables:
+      description: Powerpack template variables.
+      properties:
+        controlled_by_powerpack:
+          description: Template variables controlled at the powerpack level.
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariableContents'
+          type: array
+        controlled_externally:
+          description: Template variables controlled by the external resource, such
+            as the dashboard this powerpack is on.
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariableContents'
+          type: array
+      type: object
+    PowerpackWidgetDefinition:
+      description: The powerpack widget allows you to keep similar graphs together
+        on your timeboard. Each group has a custom header, can hold one to many graphs,
+        and is collapsible.
+      properties:
+        background_color:
+          description: Background color of the powerpack title.
+          type: string
+        banner_img:
+          description: URL of image to display as a banner for the powerpack.
+          type: string
+        powerpack_id:
+          description: UUID of the associated powerpack.
+          example: df43cf2a-6475-490d-b686-6fbc6cb9a49c
+          type: string
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
+        template_variables:
+          $ref: '#/components/schemas/PowerpackTemplateVariables'
+        title:
+          description: Title of the widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/PowerpackWidgetDefinitionType'
+      required:
+      - type
+      - powerpack_id
+      type: object
+    PowerpackWidgetDefinitionType:
+      default: powerpack
+      description: Type of the powerpack widget.
+      enum:
+      - powerpack
+      example: powerpack
+      type: string
+      x-enum-varnames:
+      - POWERPACK
     ProcessQueryDefinition:
       description: The process query to use in the widget.
       properties:
@@ -20204,6 +20284,7 @@ components:
       - $ref: '#/components/schemas/LogStreamWidgetDefinition'
       - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
       - $ref: '#/components/schemas/NoteWidgetDefinition'
+      - $ref: '#/components/schemas/PowerpackWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
       - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
       - $ref: '#/components/schemas/SLOListWidgetDefinition'

@@ -1,0 +1,35 @@
+{
+  "title": "Example-Dashboard with powerpack widget",
+  "layout_type": "ordered",
+  "widgets": [
+    {
+      "definition": {
+        "type": "powerpack",
+        "powerpack_id": "string",
+        "template_variables": {
+          "controlled_externally": [],
+          "controlled_by_powerpack": [
+            {
+              "name": "foo",
+              "prefix": "bar",
+              "values": [
+                "baz",
+                "qux",
+                "quuz"
+              ]
+            }
+          ]
+        }
+      },
+      "layout": {
+        "x": 1,
+        "y": 1,
+        "width": 2,
+        "height": 2,
+        "is_column_break": false
+      }
+    }
+  ],
+  "description": "description",
+  "is_read_only": false
+}
