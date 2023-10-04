@@ -63,7 +63,7 @@ The Observability Pipelines Worker can have problems, such as failing to parse a
 
 #### Which strategy is best?
 
-If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][1] and AWS Athena are examples of archive storage solutions.
+If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][1] and Amazon Athena are examples of archive storage solutions.
 
 ### Handling destination failures
 
