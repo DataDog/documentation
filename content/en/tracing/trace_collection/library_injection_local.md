@@ -208,6 +208,11 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 
 #### Python installation issues
 
+##### Noisy library logs
+
+In Python `< 1.20.3`, Python injection logs output to `stderr`. Upgrade to `1.20.3` or above to suppress the logs by default. The logs can be enabled by setting the environment variable `DD_TRACE_DEBUG` to `1`.
+
+
 ##### Incompatible Python version
 
 The library injection mechanism for Python only supports injecting the Python library in Python v3.7+.
@@ -258,7 +263,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 **Requirements**: A host running Linux.
 
-If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -559,7 +564,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 - A host running Linux.
 - [Docker Engine][2].
 
-If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"

@@ -12,7 +12,6 @@ cascade:
 
 {{< whatsnext desc="Configuration guides:" >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
-    {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Set up Ansible Using a Standalone Datadog Role{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}

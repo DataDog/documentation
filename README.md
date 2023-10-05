@@ -80,7 +80,7 @@ Within 10 minutes of merging to master, it deploys automatically.
 
 ## Docker development
 
-Prerequsites:
+Prerequisites:
 - Running Monterey OSX
 - [Docker Desktop][12] >= 4.7.1 is installed
 - At least 6GB of RAM is dedicated towards Docker for Mac
