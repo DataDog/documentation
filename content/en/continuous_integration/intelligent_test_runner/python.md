@@ -95,7 +95,7 @@ def test_function():
 ```
 #### Modules
 
-Modules can be skipped using the [`pytestmark` global][4] as follows:
+Modules can be skipped using the [`pytestmark` global variable][4] as follows:
 ```python
 import pytest
 

@@ -3,6 +3,10 @@ title: Preventing Data Loss
 kind: Documentation
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## High durability
 
 High durability is the ability to retain data when there are system failures. The aggregator architecture is designed to take on the responsibility of high durability. This simplifies your durability strategy by shifting the burden away from your agents and localizing it to your aggregators. In addition, this concentrated approach allows for durability strategies that would be difficult to implement across all of your agent nodes.
@@ -59,7 +63,7 @@ The Observability Pipelines Worker can have problems, such as failing to parse a
 
 #### Which strategy is best?
 
-If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][1] and AWS Athena are examples of archive storage solutions.
+If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][1] and Amazon Athena are examples of archive storage solutions.
 
 ### Handling destination failures
 
