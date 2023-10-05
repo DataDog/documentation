@@ -90,25 +90,25 @@ spec:
 
 ### Step 2 - Annotate your pods for library injection
 
-To select your pods for library injection, annotate them with the following, corresponding to your application language, in your pod spec:
+To select your pods for library injection, use the annotations provided in the following table within your pod spec:
 
-| Language   | Pod annotation                                              |
-|------------|-------------------------------------------------------------|
+| Language   | Pod annotation                                                        |
+|------------|-----------------------------------------------------------------------|
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
-| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][16]
-- [Javascript][17]
+- [JavaScript][17]
 - [Python][18]
 - [.NET][19]
-  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
+  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 - [Ruby][20]
 
-**Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
+**Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedence over manually configured libraries.
 
 <div class="alert alert-warning"><strong>Note</strong>: Using the <code>latest</code> tag is supported, but use it with caution because major library releases can introduce breaking changes.</div>
 
@@ -208,6 +208,11 @@ If the application pod fails to start, run `kubectl logs <my-pod> --all-containe
 
 #### Python installation issues
 
+##### Noisy library logs
+
+In Python `< 1.20.3`, Python injection logs output to `stderr`. Upgrade to `1.20.3` or above to suppress the logs by default. The logs can be enabled by setting the environment variable `DD_TRACE_DEBUG` to `1`.
+
+
 ##### Incompatible Python version
 
 The library injection mechanism for Python only supports injecting the Python library in Python v3.7+.
@@ -258,7 +263,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 **Requirements**: A host running Linux.
 
-If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=host DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -559,7 +564,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 - A host running Linux.
 - [Docker Engine][2].
 
-If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
+If the host does not yet have a Datadog Agent installed, or if you want to upgrade your Datadog Agent installation, use the Datadog Agent install script to install both the injection libraries and the Datadog Agent:
 
 ```shell
 DD_APM_INSTRUMENTATION_ENABLED=all DD_API_KEY=<YOUR KEY> DD_SITE="<YOUR SITE>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
