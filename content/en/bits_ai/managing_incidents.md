@@ -14,7 +14,7 @@ is_beta: true
 - The incident channel name must be prefixed with `#incident-`. This enables you to use Bits AI in Slack (`@Datadog`) to ask questions about the incident.
 - Your Datadog account must be connected to Slack. Running a query automatically initiates this process, which can be completed by following the prompts.
 
-{{< img src="bits_ai/integration-settings.png" alt="Screenshot of Slack integration settings in Datadog" style="width:90%;">}}
+{{< img src="bits_ai/integration-settings.png" alt="Slack integration settings in Datadog" style="width:90%;">}}
 
 ## View incident summaries and schedule updates
 
