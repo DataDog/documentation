@@ -24,6 +24,12 @@ deployment:
       include: "**.{jpg,jpeg,png,gif,mp4,svg,json}"
 
     matchers:
+      # set this xml file to download as attachment
+      - pattern: "^resources/xml/Datadog-SNow_Update_Set.xml$"
+        gzip: true
+        contentType: "text/xml; charset=utf-8"
+        contentDisposition: 'attachment; filename="Datadog-SNow_Update_Set.xml"'
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
       # temporarily lets nocache this sh file
       - pattern: "^resources/sh/rpm_check.sh$"
         cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
