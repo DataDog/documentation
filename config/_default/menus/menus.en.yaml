@@ -1955,6 +1955,21 @@ main:
     identifier: api_catalog
     parent: tracing
     weight: 10
+  - name: Setting Up API Catalog
+    url: /tracing/api_catalog/get_started/
+    identifier: api_catalog_getstart
+    parent: api_catalog
+    weight: 1001
+  - name: Exploring and Cataloging APIs
+    url: /tracing/api_catalog/explore_and_catalog_apis/
+    identifier: api_catalog_explore
+    parent: api_catalog
+    weight: 1002
+  - name: Monitoring APIs
+    url: /tracing/api_catalog/monitor_apis/
+    identifier: api_catalog_monitor
+    parent: api_catalog
+    weight: 1003
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst
@@ -1964,7 +1979,7 @@ main:
     url: dynamic_instrumentation/enabling
     identifier: dyninst_enable
     parent: dyninst
-    weight: 1001
+    weight: 1101
   - name: Java
     url: dynamic_instrumentation/enabling/java
     identifier: dyninst_enable_java
@@ -1984,7 +1999,7 @@ main:
     url: dynamic_instrumentation/expression-language
     identifier: dyninst_explang
     parent: dyninst
-    weight: 1002
+    weight: 1102
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
@@ -1994,12 +2009,12 @@ main:
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
-    weight: 1101
+    weight: 1201
   - name: Custom Grouping
     url: tracing/error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
-    weight: 1102
+    weight: 1202
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -2019,52 +2034,52 @@ main:
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1401
+    weight: 1501
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1402
+    weight: 1502
   - name: Connection Errors
     url: tracing/troubleshooting/connection_errors
     identifier: tracing_troubleshooting_connection_errors
     parent: tracing_troubleshooting
-    weight: 1403
+    weight: 1503
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1404
+    weight: 1504
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1405
+    weight: 1505
   - name: Agent Resource Usage
     url: tracing/troubleshooting/agent_apm_resource_usage
     identifier: tracing_troubleshooting_agent_usage
     parent: tracing_troubleshooting
-    weight: 1406
+    weight: 1506
   - name: Correlated Logs
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1407
+    weight: 1507
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1408
+    weight: 1508
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1409
+    weight: 1509
   - name: APM Quantization
     url: tracing/troubleshooting/quantization
     identifier: tracing_troubleshooting_quantization
     parent: tracing_troubleshooting
-    weight: 1410
+    weight: 1510
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
