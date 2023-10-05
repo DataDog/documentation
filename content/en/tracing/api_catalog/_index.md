@@ -52,11 +52,17 @@ Use the API Catalog Explorer page to navigate through all endpoints, filtering, 
 
 Add meaningful tags and ownership information to the endpoint to make you catalog most useful for investigations and team communication.
 
-Read [Exploring and cataloging APIs][6] for more details.
+Read [Exploring and cataloging endpoints][6] for more details.
 
 ## Monitoring your APIs
 
-Use your full catalog to start managing your APIs and endpoints by finding and fixing under-performing endpoints, tracking their reliability against standards and objectives, watching for anomalies, investigating errors, ensuring test coverage, and closing security gaps.
+Use your full catalog to start managing your APIs and endpoints:
+- Find and fix under-performing endpoints.
+- Track their reliability against standards and objectives.
+- Watch for anomalies.
+- Investigate errors.
+- Ensure test coverage.
+- Close security gaps.
 
 Read [Monitoring APIs][7] for more details.
 
