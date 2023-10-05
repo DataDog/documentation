@@ -53,8 +53,10 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-5. Choose a storage account, container, and directory for the exports. **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-6. Select **Create**.
+5. Choose a storage account, container, and directory for the exports.
+    - **Note:** Do not use special characters like `.` in these fields.
+    - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
+7. Select **Create**.
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 {{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
