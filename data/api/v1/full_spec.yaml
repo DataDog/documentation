@@ -6938,6 +6938,33 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsCustomSchedule:
+      description: Configuration options for the custom schedule. **This feature is
+        in private beta.**
+      properties:
+        recurrences:
+          description: Array of custom schedule recurrences.
+          items:
+            $ref: '#/components/schemas/MonitorOptionsCustomScheduleRecurrence'
+          type: array
+      type: object
+    MonitorOptionsCustomScheduleRecurrence:
+      description: Configuration for a recurrence set on the monitor options for custom
+        schedule.
+      properties:
+        rrule:
+          description: Defines the recurrence rule (RRULE) for a given schedule.
+          example: FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+          type: string
+        start:
+          description: Defines the start date and time of the recurring schedule.
+          example: '2023-08-31T16:30:00'
+          type: string
+        timezone:
+          description: Defines the timezone the schedule runs on.
+          example: Europe/Paris
+          type: string
+      type: object
     MonitorOptionsNotificationPresets:
       default: show_all
       description: Toggles the display of additional content sent in the monitor notification.
@@ -6955,6 +6982,8 @@ components:
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
+        custom_schedule:
+          $ref: '#/components/schemas/MonitorOptionsCustomSchedule'
         evaluation_window:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
       type: object
