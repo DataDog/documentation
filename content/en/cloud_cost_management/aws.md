@@ -25,7 +25,8 @@ To use AWS Cloud Cost Management, you must have an AWS account with access to Co
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
 
 * **Include resource IDs**
-* **Check the box for "Automatically refresh your Cost & Usage Report when charges are detected for previous months with closed bills."**
+* **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][9] in Cost Explorer preferences).
+* **"Refresh automatically"**
 
 Select the following Delivery options:
 
@@ -181,4 +182,5 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
 [7]: https://app.datadoghq.com/cost/setup
 [8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
+[9]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [9]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
