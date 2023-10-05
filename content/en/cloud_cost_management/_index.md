@@ -41,6 +41,10 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 
 {{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
 
+Customers can export timeseries costs data using the [Metrics API][1]
+
+[1]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
