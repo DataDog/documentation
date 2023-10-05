@@ -52,7 +52,7 @@ export function initializeGroupedListings() {
     const handleEmptyResultSet = () => {
         const searchQuery = inputSearch.value;
         const activeEl = document.querySelector('.controls .active');
-        const txt = (activeEl) ? activeEl.text : '';
+        const txt = (activeEl) ? activeEl.textContent : '';
         const activeCategoryFilter = stringToTitleCase(txt);
         const message = `No results found for query "${searchQuery}" in category ${activeCategoryFilter}`;
         if(jsEmptyResults) {
