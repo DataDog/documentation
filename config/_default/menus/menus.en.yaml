@@ -4293,16 +4293,21 @@ main:
     url: account_management/org_settings/ip_allowlist
     parent: organization_settings
     weight: 206
-  - name: RBAC
+  - name: Access Control
     url: account_management/rbac/
     parent: account_management
     identifier: account_management_rbac
     weight: 3
+  - name: Granular Access
+    url: account_management/rbac/granular_access
+    parent: account_management_rbac
+    identifier: account_management_rbac_granular_access
+    weight: 301
   - name: Permissions
     url: account_management/rbac/permissions
     parent: account_management_rbac
     identifier: account_management_rbac_permissions
-    weight: 301
+    weight: 302
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
@@ -4356,25 +4361,29 @@ main:
     url: account_management/teams/
     parent: account_management
     weight: 7
+  - name: Multi-Factor Authentication
+    url: account_management/multi-factor_authentication/
+    parent: account_management
+    weight: 8
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 8
+    weight: 9
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 801
+    weight: 901
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
     identifier: account_management_plan_and_usage
-    weight: 9
+    weight: 10
   - name: Usage Details
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
-    weight: 901
+    weight: 1001
   - name: Cost Details
     url: account_management/plan_and_usage/cost_details/
     parent: account_management_plan_and_usage
@@ -4382,15 +4391,15 @@ main:
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 10
+    weight: 11
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 11
+    weight: 12
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 12
+    weight: 13
   - name: Data Security
     url: data_security/
     pre: security-lock
@@ -8357,6 +8366,18 @@ api:
         - UpdateApmRetentionFilter
       unstable: []
       order: 4
+  - name: Get a given APM retention filter
+    url: '#get-a-given-apm-retention-filter'
+    identifier: apm-retention-filters-get-a-given-apm-retention-filter
+    parent: apm-retention-filters
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetApmRetentionFilter
+      unstable: []
+      order: 3
   - name: Delete a retention filter
     url: '#delete-a-retention-filter'
     identifier: apm-retention-filters-delete-a-retention-filter
@@ -8380,7 +8401,7 @@ api:
       operationids:
         - ReorderApmRetentionFilters
       unstable: []
-      order: 3
+      order: 6
   - name: Create a retention filter
     url: '#create-a-retention-filter'
     identifier: apm-retention-filters-create-a-retention-filter
@@ -9766,6 +9787,70 @@ api:
         - v2
       operationids:
         - ListOpsgenieServices
+      unstable: []
+      order: 1
+  - name: Powerpack
+    url: /api/latest/powerpack/
+    identifier: powerpack
+    generated: true
+  - name: Update a powerpack
+    url: '#update-a-powerpack'
+    identifier: powerpack-update-a-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdatePowerpack
+      unstable: []
+      order: 5
+  - name: Get a Powerpack
+    url: '#get-a-powerpack'
+    identifier: powerpack-get-a-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetPowerpack
+      unstable: []
+      order: 4
+  - name: Delete a powerpack
+    url: '#delete-a-powerpack'
+    identifier: powerpack-delete-a-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeletePowerpack
+      unstable: []
+      order: 3
+  - name: Create a new powerpack
+    url: '#create-a-new-powerpack'
+    identifier: powerpack-create-a-new-powerpack
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreatePowerpack
+      unstable: []
+      order: 2
+  - name: Get all powerpacks
+    url: '#get-all-powerpacks'
+    identifier: powerpack-get-all-powerpacks
+    parent: powerpack
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetAllPowerpacks
       unstable: []
       order: 1
   - name: Processes

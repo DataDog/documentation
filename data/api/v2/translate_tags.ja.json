@@ -1,4 +1,8 @@
 {
+  "apm-retention-filters": {
+    "name": "APM 保持フィルター",
+    "description": "組織の [APM 保持フィルター](https://app.datadoghq.com/apm/traces/retention-filters)の構成を管理します。このエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。"
+  },
   "audit": {
     "name": "監査",
     "description": "HTTP 経由で監査ログイベントを検索します。"

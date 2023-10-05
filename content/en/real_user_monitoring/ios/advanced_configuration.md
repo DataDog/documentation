@@ -67,7 +67,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
 
 ### Add your own performance timing
 
@@ -761,4 +761,4 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 [6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift
+[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
