@@ -35,13 +35,13 @@ The [Google Cloud Platform integration][1] is successfully installed.
 
 1. Go to the [Cloud Pub/Sub console][2] and create a new topic.
 
-    {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="Create a topic" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/create_topic_no_default_sub.png" alt="Create a topic without default subscription" style="width:80%;">}}
 
 2. Give that topic an explicit name such as `export-logs-to-datadog` and click _Create_.
 
 **Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on setting up monitor notifications if you approach those limits.
 
-### Subscribe to your Google Cloud Pub/Sub topic
+### Forward logs to Datadog with a Cloud Pub/Sub subscription
 
 1. In the [Cloud Pub/Sub console][2], select `Subscriptions` in the left hand navigation. Click `Create Subscription`.
 2. Create a subscription ID and select the topic you previously created.
