@@ -1,8 +1,9 @@
 ---
 title: 2022 Linux Agent Key Rotation
 kind: guide
+private: true
 aliases:
-  - /agent/faq/linux-agent-2022-key-rotation
+  - /agent/guide/linux-agent-2022-key-rotation
 ---
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The following GPG keys, used to sign the Agent RPM and DEB packages, reach their end-of-life in June 2022 and will be rotated in April 2022:
