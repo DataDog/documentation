@@ -6,6 +6,12 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
+- link: "/tracing/api_catalog/explore_and_catalog_apis/"
+  tag: "Documentation"
+  text: "Exploring and cataloging endpoints"
+- link: "/tracing/api_catalog/monitor_apis/"
+  tag: "Documentation"
+  text: "Monitoring APIs"
 ---
 
 {{< site-region region="gov,ap1" >}}
