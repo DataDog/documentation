@@ -104,11 +104,12 @@ resources:
         DD_HOSTNAME: "none"
 
 jobs:
-  - job: test
+
+* job: test
     services:
       dd_agent: dd_agent
     steps:
-      - script: make test
+  * script: make test
 {{< /code-block >}}
 {{< /site-region >}}
 {{< site-region region="us3,us5,eu,ap1" >}}
@@ -131,11 +132,12 @@ resources:
         DD_SITE: "<DD_SITE>"
 
 jobs:
-  - job: test
+
+* job: test
     services:
       dd_agent: dd_agent
     steps:
-      - script: make test
+  * script: make test
 {{< /code-block >}}
 {{< /site-region >}}
 
@@ -187,9 +189,6 @@ test:
 
 Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
 
-[1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
@@ -226,9 +225,6 @@ jobs:
 
 Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_KEY`.
 
-[1]: https://github.com/marketplace/actions/datadog-agent
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.github.com/en/actions/reference/encrypted-secrets
 {{% /tab %}}
 {{% tab "CircleCI" %}}
 
@@ -288,9 +284,6 @@ workflows:
 
 Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
 
-[1]: https://circleci.com/developer/orbs/orb/datadog/agent
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://circleci.com/docs/2.0/env-vars/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -301,7 +294,7 @@ To install the Ruby tracer:
 1. Add the `ddtrace` gem to your `Gemfile`:
 
     {{< code-block lang="ruby" filename="Gemfile" >}}
-source 'https://rubygems.org'
+source '<https://rubygems.org>'
 gem 'ddtrace', "~> 1.0"
 {{< /code-block >}}
 
@@ -461,7 +454,7 @@ Like tags, you can add custom metrics to your tests by using the current active 
 require 'ddtrace'
 
 # inside your test
-Datadog::Tracing.active_span&.set_tag('memory_allocations', 16)
+Datadog::Tracing.active_span&.set_metric('memory_allocations', 16)
 # test continues normally
 # ...
 ```
@@ -502,11 +495,6 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
