@@ -307,7 +307,7 @@ transforms:
     inputs:
       - LOGS_YOUR_STEPS
     source: |
-      .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+      .ddtags = encode_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
 
   metrics_add_dd_tags:
     type: remap
