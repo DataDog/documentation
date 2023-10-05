@@ -243,6 +243,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1754992756",
+      "description": "Create a new dashboard with powerpack widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2336428357",
       "description": "Create a new dashboard with query_table widget"
     },
@@ -285,6 +290,11 @@
       "group": "dashboards",
       "suffix": "_173805046",
       "description": "Create a new dashboard with slo widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2278756614",
+      "description": "Create a new dashboard with split graph widget"
     },
     {
       "group": "dashboards",

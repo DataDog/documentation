@@ -183,7 +183,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#/downtime
+[1]: https://app.datadoghq.com/monitors/downtimes
 [2]: /monitors/guide/scoping_downtimes
 [3]: /monitors/manage/#monitor-tags
 [4]: /monitors/manage/search/

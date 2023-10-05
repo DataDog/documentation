@@ -1,6 +1,5 @@
 ---
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/create-an-integration-dashboard.md
+description: インテグレーションダッシュボードの作成方法をご紹介します。
 kind: documentation
 title: インテグレーションダッシュボードの作成
 ---
@@ -135,7 +134,7 @@ Datadog で、[新しいダッシュボードを作成します][12]。
 
 
 [1]: /ja/dashboards/
-[2]: /ja/developers/integrations/new_check_howto/?tab=configurationtemplate
+[2]: /ja/developers/integrations/agent_integration/
 [3]: /ja/dashboards/#new-dashboard
 [4]: /ja/dashboards/widgets/timeseries/
 [5]: /ja/dashboards/widgets/query_value/

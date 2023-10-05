@@ -67,7 +67,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-[`DDRUMMonitor` クラス][9]で詳細およびその他のオプションをご確認ください。
+詳細や利用可能なオプションについては、`DDRUMMonitor` クラスで [GitHub 上の関連ファイル][9]をフィルタリングしてご確認ください。
 
 ### 独自のパフォーマンスタイミングを追加
 
@@ -199,7 +199,7 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[[DDRUMMonitor shared] addErrorWithMessage:@"error message." source:DDRUMErrorSourceCustom stack:nil attributes:@{}];
+[[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -761,4 +761,4 @@ configuration.proxyConfiguration = @{
 [6]: /ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [7]: /ja/real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift
+[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift

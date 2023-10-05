@@ -95,7 +95,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -149,7 +149,7 @@ instances:
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 
-     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU and Memory.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'

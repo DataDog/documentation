@@ -112,7 +112,7 @@ After choosing to create an `HTTP` test, define your test's request.
 
 3. **Name** your HTTP test.
 
-4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+4. Add `env` **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
    {{< img src="synthetics/api_tests/http_test_config.png" alt="Define HTTP request" style="width:90%;" >}}
 

@@ -184,7 +184,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/

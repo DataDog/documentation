@@ -398,6 +398,13 @@ components:
       required: true
       schema:
         type: string
+    RetentionFilterIdParam:
+      description: The ID of the retention filter.
+      in: path
+      name: filter_id
+      required: true
+      schema:
+        type: string
     RoleID:
       description: The unique identifier of the role.
       in: path
@@ -722,6 +729,15 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    ApmRetentionFilterType:
+      default: apm_retention_filter
+      description: The type of the resource.
+      enum:
+      - apm_retention_filter
+      example: apm_retention_filter
+      type: string
+      x-enum-varnames:
+      - apm_retention_filter
     ApplicationKeyCreateAttributes:
       description: Attributes used to create an application Key.
       properties:
@@ -1781,7 +1797,6 @@ components:
       - end
       - status
       - url
-      - git
       type: object
     CIAppPipelineEventJobLevel:
       default: job
@@ -1934,7 +1949,6 @@ components:
       - end
       - status
       - partial_retry
-      - git
       type: object
     CIAppPipelineEventPipelineLevel:
       default: pipeline
@@ -2050,7 +2064,6 @@ components:
       - start
       - end
       - status
-      - git
       type: object
     CIAppPipelineEventStageLevel:
       default: stage
@@ -2150,7 +2163,6 @@ components:
       - start
       - end
       - status
-      - git
       type: object
     CIAppPipelineEventStepLevel:
       default: step
@@ -3733,9 +3745,7 @@ components:
           example: a
           type: string
         type:
-          description: The type of column present.
-          example: number
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeNumber'
         values:
           description: The array of numerical values for one formula or query.
           example:
@@ -3744,6 +3754,7 @@ components:
             description: An individual value for a given column and group-by.
             example: 0.5
             format: double
+            nullable: true
             type: number
           type: array
       type: object
@@ -5413,6 +5424,13 @@ components:
     GCPSTSServiceAccountAttributes:
       description: Attributes associated with your service account.
       properties:
+        account_tags:
+          description: Tags to be associated with GCP metrics and service checks from
+            your account.
+          items:
+            description: Account Level Tag
+            type: string
+          type: array
         automute:
           description: Silence monitors for expected GCE instance shutdowns.
           type: boolean
@@ -5497,6 +5515,24 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
+    GetAllPowerpacksResponse:
+      description: Response object which includes all powerpack configurations.
+      properties:
+        data:
+          description: List of powerpack definitions.
+          items:
+            $ref: '#/components/schemas/PowerpackData'
+          type: array
+        included:
+          description: Array of objects related to the users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        links:
+          $ref: '#/components/schemas/PowerpackResponseLinks'
+        meta:
+          $ref: '#/components/schemas/PowerpacksResponseMeta'
+      type: object
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -5534,9 +5570,7 @@ components:
           example: env
           type: string
         type:
-          description: The type of column present.
-          example: group
-          type: string
+          $ref: '#/components/schemas/ScalarColumnTypeGroup'
         values:
           description: The array of tag values for each group found for the results
             of the formulas or queries.
@@ -10591,6 +10625,175 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    Powerpack:
+      description: Powerpacks are templated groups of dashboard widgets you can save
+        from an existing dashboard and turn into reusable packs in the widget tray.
+      properties:
+        data:
+          $ref: '#/components/schemas/PowerpackData'
+      type: object
+    PowerpackAttributes:
+      description: Powerpack attribute object.
+      properties:
+        description:
+          description: Description of this powerpack.
+          example: Powerpack for ABC
+          type: string
+        group_widget:
+          additionalProperties: {}
+          description: Templated group of dashboard widgets for the powerpack.
+          example:
+            layout_type: ordered
+            tags:
+            - tag:foo1
+            type: group
+            widgets:
+            - definition:
+                content: example
+                type: note
+          type: object
+        name:
+          description: Name of the powerpack.
+          example: Sample Powerpack
+          type: string
+        tags:
+          description: List of tags to identify this powerpack.
+          example:
+          - tag:foo1
+          items:
+            maxLength: 80
+            type: string
+          maxItems: 8
+          type: array
+        template_variables:
+          description: List of template variables for this powerpack.
+          example:
+          - defaults:
+            - '*'
+            name: test
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariable'
+          type: array
+      required:
+      - group_widget
+      - name
+      type: object
+    PowerpackData:
+      description: Powerpack data object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PowerpackAttributes'
+        id:
+          description: ID of the powerpack.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/PowerpackRelationships'
+        type:
+          description: Type of widget, must be powerpack.
+          example: powerpack
+          type: string
+      type: object
+    PowerpackRelationships:
+      description: Powerpack relationship object.
+      properties:
+        author:
+          $ref: '#/components/schemas/Creator'
+      type: object
+    PowerpackResponse:
+      description: Response object which includes a single powerpack configuration.
+      properties:
+        data:
+          $ref: '#/components/schemas/PowerpackData'
+        included:
+          description: Array of objects related to the users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      readOnly: true
+      type: object
+    PowerpackResponseLinks:
+      description: Links attributes.
+      properties:
+        first:
+          description: Link to last page.
+          type: string
+        last:
+          description: Link to first page.
+          example: https://app.datadoghq.com/api/v2/powerpacks?page[offset]=0&page[limit]=25
+          nullable: true
+          type: string
+        next:
+          description: Link for the next set of results.
+          example: https://app.datadoghq.com/api/v2/powerpacks?page[offset]=25&page[limit]=25
+          type: string
+        prev:
+          description: Link for the previous set of results.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          example: https://app.datadoghq.com/api/v2/powerpacks
+          type: string
+      type: object
+    PowerpackTemplateVariable:
+      description: Powerpack template variables.
+      properties:
+        defaults:
+          description: One or many template variable default values within the saved
+            view, which are unioned together using `OR` if more than one is specified.
+          items:
+            description: One or many default values of the template variable.
+            minLength: 1
+            type: string
+          type: array
+        name:
+          description: The name of the variable.
+          example: datacenter
+          type: string
+      required:
+      - name
+      type: object
+    PowerpacksResponseMeta:
+      description: Powerpack response metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/PowerpacksResponseMetaPagination'
+      type: object
+    PowerpacksResponseMetaPagination:
+      description: Powerpack response pagination metadata.
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
+      type: object
     ProcessSummariesMeta:
       description: Response metadata object.
       properties:
@@ -11758,6 +11961,17 @@ components:
       required:
       - data
       type: object
+    ReorderRetentionFiltersRequest:
+      description: A list of retention filters to reorder.
+      properties:
+        data:
+          description: A list of retention filters objects.
+          items:
+            $ref: '#/components/schemas/RetentionFilterWithoutAttributes'
+          type: array
+      required:
+      - data
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -12022,6 +12236,255 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
+      type: object
+    RetentionFilter:
+      description: The definition of the retention filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterAttributes'
+        id:
+          description: The ID of the retention filter.
+          example: 7RBOb7dLSYWI01yc3pIH8w
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RetentionFilterAll:
+      description: The definition of the retention filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterAllAttributes'
+        id:
+          description: The ID of the retention filter.
+          example: 7RBOb7dLSYWI01yc3pIH8w
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RetentionFilterAllAttributes:
+      description: The attributes of the retention filter.
+      properties:
+        created_at:
+          description: The creation timestamp of the retention filter.
+          format: int64
+          type: integer
+        created_by:
+          description: The creator of the retention filter.
+          type: string
+        editable:
+          description: Shows whether the filter can be edited.
+          example: true
+          type: boolean
+        enabled:
+          description: The status of the retention filter (Enabled/Disabled).
+          example: true
+          type: boolean
+        execution_order:
+          description: The execution order of the retention filter.
+          format: int64
+          type: integer
+        filter:
+          $ref: '#/components/schemas/SpansFilter'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterAllType'
+        modified_at:
+          description: The modification timestamp of the retention filter.
+          format: int64
+          type: integer
+        modified_by:
+          description: The modifier of the retention filter.
+          type: string
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      type: object
+    RetentionFilterAllType:
+      default: spans-sampling-processor
+      description: The type of retention filter.
+      enum:
+      - spans-sampling-processor
+      - spans-errors-sampling-processor
+      - spans-appsec-sampling-processor
+      type: string
+      x-enum-varnames:
+      - SPANS_SAMPLING_PROCESSOR
+      - SPANS_ERRORS_SAMPLING_PROCESSOR
+      - SPANS_APPSEC_SAMPLING_PROCESSOR
+    RetentionFilterAttributes:
+      description: The attributes of the retention filter.
+      properties:
+        created_at:
+          description: The creation timestamp of the retention filter.
+          format: int64
+          type: integer
+        created_by:
+          description: The creator of the retention filter.
+          type: string
+        editable:
+          description: Shows whether the filter can be edited.
+          example: true
+          type: boolean
+        enabled:
+          description: The status of the retention filter (Enabled/Disabled).
+          example: true
+          type: boolean
+        execution_order:
+          description: The execution order of the retention filter.
+          format: int64
+          type: integer
+        filter:
+          $ref: '#/components/schemas/SpansFilter'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterType'
+        modified_at:
+          description: The modification timestamp of the retention filter.
+          format: int64
+          type: integer
+        modified_by:
+          description: The modifier of the retention filter.
+          type: string
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      type: object
+    RetentionFilterCreateAttributes:
+      description: The object describing the configuration of the retention filter
+        to create/update.
+      properties:
+        enabled:
+          description: Enable/Disable the retention filter.
+          example: true
+          type: boolean
+        filter:
+          $ref: '#/components/schemas/SpansFilterCreate'
+        filter_type:
+          $ref: '#/components/schemas/RetentionFilterType'
+        name:
+          description: The name of the retention filter.
+          example: my retention filter
+          type: string
+        rate:
+          description: 'Sample rate to apply to spans going through this retention
+            filter,
+
+            a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+      required:
+      - name
+      - filter
+      - enabled
+      - filter_type
+      - rate
+      type: object
+    RetentionFilterCreateData:
+      description: The body of the retention filter to be created.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    RetentionFilterCreateRequest:
+      description: The body of the retention filter to be created.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterCreateData'
+      required:
+      - data
+      type: object
+    RetentionFilterResponse:
+      description: The retention filters definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilter'
+      type: object
+    RetentionFilterType:
+      default: spans-sampling-processor
+      description: The type of retention filter. The value should always be spans-sampling-processor.
+      enum:
+      - spans-sampling-processor
+      example: spans-sampling-processor
+      type: string
+      x-enum-varnames:
+      - SPANS_SAMPLING_PROCESSOR
+    RetentionFilterUpdateData:
+      description: The body of the retention filter to be updated.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RetentionFilterCreateAttributes'
+        id:
+          description: The ID of the retention filter.
+          example: retention-filter-id
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - attributes
+      - type
+      type: object
+    RetentionFilterUpdateRequest:
+      description: The body of the retention filter to be updated.
+      properties:
+        data:
+          $ref: '#/components/schemas/RetentionFilterUpdateData'
+      required:
+      - data
+      type: object
+    RetentionFilterWithoutAttributes:
+      description: The retention filter object .
+      properties:
+        id:
+          description: The ID of the retention filter.
+          example: 7RBOb7dLSYWI01yc3pIH8w
+          type: string
+        type:
+          $ref: '#/components/schemas/ApmRetentionFilterType'
+      required:
+      - id
+      - type
+      type: object
+    RetentionFiltersResponse:
+      description: An ordered list of retention filters.
+      properties:
+        data:
+          description: A list of retention filters objects.
+          items:
+            $ref: '#/components/schemas/RetentionFilterAll'
+          type: array
+      required:
+      - data
       type: object
     Role:
       description: Role object returned by the API.
@@ -12317,6 +12780,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/GroupScalarColumn'
       - $ref: '#/components/schemas/DataScalarColumn'
+    ScalarColumnTypeGroup:
+      default: group
+      description: The type of column present for groups.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
+    ScalarColumnTypeNumber:
+      default: number
+      description: The type of column present for numbers.
+      enum:
+      - number
+      example: number
+      type: string
+      x-enum-varnames:
+      - NUMBER
     ScalarFormulaQueryRequest:
       description: A wrapper request around one scalar query to be executed.
       properties:
@@ -12421,6 +12902,7 @@ components:
             If the second element is not present, the API returns null.'
           items:
             $ref: '#/components/schemas/Unit'
+          nullable: true
           type: array
       type: object
     ScalarQuery:
@@ -15652,6 +16134,25 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - TOTAL
+    SpansFilter:
+      description: The spans filter used to index spans.
+      properties:
+        query:
+          description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+          example: '@http.status_code:200 service:my-service'
+          type: string
+      type: object
+    SpansFilterCreate:
+      description: The spans filter. Spans matching this filter will be indexed and
+        stored.
+      properties:
+        query:
+          description: The search query - following the [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+          example: '@http.status_code:200 service:my-service'
+          type: string
+      required:
+      - query
+      type: object
     SpansGroupBy:
       description: A group by rule.
       properties:
@@ -17424,6 +17925,9 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
+              the API.
+            ci_visibility_read: View CI Visibility.
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
@@ -17845,6 +18349,182 @@ paths:
       summary: Update a span-based metric
       tags:
       - Spans Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/apm/config/retention-filters:
+    get:
+      description: Get the list of APM retention filters.
+      operationId: ListApmRetentionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all APM retention filters
+      tags:
+      - APM Retention Filters
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a retention filter to index spans in your organization.
+
+        Returns the retention filter definition when the request is successful.'
+      operationId: CreateApmRetentionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionFilterCreateRequest'
+        description: The definition of the new retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a retention filter
+      tags:
+      - APM Retention Filters
+      x-codegen-request-body-name: body
+      x-given:
+        retention_filter:
+          parameters:
+          - name: body
+            value: "{\n    \"data\": {\n        \"attributes\": {\n            \"name\":
+              \"demo retention filter\",\n            \"rate\": 0.90,\n            \"filter\":
+              {\n                \"query\": \"@_top_level:1 test:service-demo\"\n
+              \           },\n            \"enabled\": true,\n            \"filter_type\":
+              \"spans-sampling-processor\"\n        },\n        \"type\": \"apm_retention_filter\"\n
+              \   }\n}"
+          step: there is a valid "retention_filter" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteApmRetentionFilter
+        parameters:
+        - name: filter_id
+          source: data.id
+        type: unsafe
+  /api/v2/apm/config/retention-filters-execution-order:
+    put:
+      description: Re-order the execution order of retention filters.
+      operationId: ReorderApmRetentionFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReorderRetentionFiltersRequest'
+        description: The list of retention filters in the new order.
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Re-order retention filters
+      tags:
+      - APM Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/apm/config/retention-filters/{filter_id}:
+    delete:
+      description: Delete a specific retention filter from your organization.
+      operationId: DeleteApmRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RetentionFilterIdParam'
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a retention filter
+      tags:
+      - APM Retention Filters
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an APM retention filter.
+      operationId: GetApmRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RetentionFilterIdParam'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a given APM retention filter
+      tags:
+      - APM Retention Filters
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    put:
+      description: Update a retention filter from your organization.
+      operationId: UpdateApmRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RetentionFilterIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetentionFilterUpdateRequest'
+        description: The updated definition of the retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetentionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a retention filter
+      tags:
+      - APM Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
@@ -18450,6 +19130,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/HTTPCIAppErrors'
           description: Service Unavailable
+      security:
+      - apiKeyAuth: []
       summary: Send pipeline event
       tags:
       - CI Visibility Pipelines
@@ -18483,6 +19165,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18561,6 +19248,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18601,6 +19293,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search pipelines events
       tags:
       - CI Visibility Pipelines
@@ -18637,6 +19334,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Aggregate tests events
       tags:
       - CI Visibility Tests
@@ -18715,6 +19417,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Get a list of tests events
       tags:
       - CI Visibility Tests
@@ -18755,6 +19462,11 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - ci_visibility_read
       summary: Search tests events
       tags:
       - CI Visibility Tests
@@ -24275,6 +24987,196 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/powerpacks:
+    get:
+      description: Get a list of all powerpacks.
+      operationId: GetAllPowerpacks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAllPowerpacksResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get all powerpacks
+      tags:
+      - Powerpack
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a powerpack.
+      operationId: CreatePowerpack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Powerpack'
+        description: Create a powerpack request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerpackResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Create a new powerpack
+      tags:
+      - Powerpack
+      x-codegen-request-body-name: body
+      x-given:
+        powerpack:
+          parameters:
+          - file: powerpack_payload.json
+            name: body
+          step: there is a valid "powerpack" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeletePowerpack
+        parameters:
+        - name: powerpack_id
+          source: data.id
+        type: unsafe
+  /api/v2/powerpacks/{powerpack_id}:
+    delete:
+      description: Delete a powerpack.
+      operationId: DeletePowerpack
+      parameters:
+      - description: Powerpack id
+        in: path
+        name: powerpack_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Powerpack Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Delete a powerpack
+      tags:
+      - Powerpack
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a powerpack.
+      operationId: GetPowerpack
+      parameters:
+      - description: ID of the powerpack.
+        in: path
+        name: powerpack_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerpackResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Powerpack Not Found.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_read
+      summary: Get a Powerpack
+      tags:
+      - Powerpack
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    patch:
+      description: Update a powerpack.
+      operationId: UpdatePowerpack
+      parameters:
+      - description: ID of the powerpack.
+        in: path
+        name: powerpack_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Powerpack'
+        description: Update a powerpack request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PowerpackResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Powerpack Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - dashboards_write
+      summary: Update a powerpack
+      tags:
+      - Powerpack
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -27804,6 +28706,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamsResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -27839,6 +28743,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamResponse'
           description: CREATED
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '409':
           content:
             application/json:
@@ -27886,6 +28792,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -27923,6 +28831,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -27975,6 +28885,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: API error response.
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28019,6 +28931,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinksResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28061,6 +28975,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinkResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28123,6 +29039,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28165,6 +29083,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinkResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28213,6 +29133,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamLinkResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28263,6 +29185,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamsResponse'
           description: Represents a user's association to a team
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28305,6 +29229,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamResponse'
           description: Represents a user's association to a team
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28366,6 +29292,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28414,6 +29342,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserTeamResponse'
           description: Represents a user's association to a team
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28452,6 +29382,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamPermissionSettingsResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -28501,6 +29433,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/TeamPermissionSettingResponse'
           description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
         '404':
           content:
             application/json:
@@ -29043,18 +29977,20 @@ paths:
 
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
-          `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
+          `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
+          `cws`, `dbm`, `fargate`,
 
           `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
           `iot`,
 
-          `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `observability_pipelines`,
+          `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `netflow_monitoring`,
+          `observability_pipelines`,
 
           `online_archive`, `profiling`, `rum`, `rum_browser_sessions`, `rum_mobile_sessions`,
           `sds`, `snmp`,
 
-          `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.
+          `synthetics_api`, `synthetics_browser`, `synthetics_mobile`, `synthetics_parallel_testing`,
+          and `timeseries`.
 
           The following product family has been **deprecated**: `audit_logs`.'
         in: query
@@ -29789,6 +30725,13 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
+- description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
+    for your organization. You need an API and application key with Admin rights to
+    interact with this endpoint.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
+  name: APM Retention Filters
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
@@ -29953,6 +30896,22 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/multi_organization
   name: Organizations
+- description: 'The powerpack endpoints allow you to:
+
+
+    - Get a powerpack
+
+    - Create a powerpack
+
+    - Delete a powerpack
+
+    - Get a list of all powerpacks
+
+
+    The Patch and Delete API methods can only be performed on a powerpack by
+
+    a user who has the powerpack create permission for that specific powerpack.'
+  name: Powerpack
 - description: The processes API allows you to query processes data for your organization.
   name: Processes
 - description: Search or aggregate your RUM events over HTTP.

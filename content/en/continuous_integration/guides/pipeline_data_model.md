@@ -99,7 +99,7 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 ## Git information
 
-All payloads must contain Git information of the commit that triggered the pipeline execution. As specified in the [public API endpoint specification][3], you need to provide the repository URL, commit SHA and author email.
+Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear in the [My Recent Commits](https://app.datadoghq.com/ci/commits) page. At minimum, the repository URL, commit SHA, and author email are required. For more information see the [public API endpoint specification][3].
 
 ## Further reading
 
