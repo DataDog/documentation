@@ -264,6 +264,7 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[4]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
