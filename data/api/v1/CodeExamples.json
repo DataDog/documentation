@@ -538,6 +538,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1539578087",
+      "description": "Create a metric monitor with a custom schedule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
     },
