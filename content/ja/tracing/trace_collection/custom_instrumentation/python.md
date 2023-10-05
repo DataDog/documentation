@@ -4,7 +4,7 @@ aliases:
 - /ja/tracing/manual_instrumentation/python
 - /ja/tracing/custom_instrumentation/python
 - /ja/tracing/setup_overview/custom_instrumentation/python
-code_lang: php
+code_lang: python
 code_lang_weight: 10
 description: Python アプリケーションを手動でインスツルメントして、カスタムトレースを Datadog に送信します。
 further_reading:
