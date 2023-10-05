@@ -12,6 +12,10 @@ further_reading:
 <div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+{{< beta-callout url="" btn_hidden="true">}}
+Datadog API Catalog is in beta.
+{{< /beta-callout >}}
+
 {{< img src="tracing/api_catalog/api-catalog-catalog-api-details.png" alt="API Catalog showing a list of endpoints for an API called Checkout, along with information about ownership, service and environment, tags, and links to related monitors, tests, and performance data." style="width:100%;" >}}
 
 ## Overview
