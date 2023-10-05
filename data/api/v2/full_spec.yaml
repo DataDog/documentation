@@ -234,13 +234,21 @@ components:
       schema:
         $ref: '#/components/schemas/IncidentRelatedObject'
     IncidentSearchQueryQueryParameter:
-      description: 'Specifies which incidents should be returned. The query can contain
-        any number of incident facets
+      description: 'Specifies which incidents should be returned. After entering a
+        search query in your [Incidents page][1],
 
-        joined by `ANDs`, along with multiple values for each of those facets joined
-        by `OR`s. For
+        use the query parameter value in the URL of the page as the value for this
+        parameter.
 
-        example: `state:active AND severity:(SEV-2 OR SEV-1)`.'
+
+        The query can contain any number of incident facets joined by `ANDs`, along
+        with multiple values for each of
+
+        those facets joined by `OR`s, for instance: `query="state:active AND severity:(SEV-2
+        OR SEV-1)"`.
+
+
+        [1]: https://app.datadoghq.com/incidents'
       explode: false
       in: query
       name: query
@@ -15327,6 +15335,14 @@ components:
             feature, which the service is a part of.
           example: my-app
           type: string
+        ci-pipeline-fingerprints:
+          description: A set of CI pipeline fingerprints related to the service.
+          example:
+          - j88xdEy0J5lc
+          - eZ7LMljCk8vo
+          items:
+            type: string
+          type: array
         contacts:
           description: A list of contacts related to the services.
           items:
