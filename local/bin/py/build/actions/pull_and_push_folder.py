@@ -30,12 +30,12 @@ def pull_and_push_folder(content, content_dir):
 
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
-            file_parent_path = Path(file_name).parent
-            directory = ''
-            if file_parent_path.parts[3] == 'rulesets':
-                # get the file's parent directories after 'rulesets/'
-                # accounts for nested directories
-                directory = f"{file_parent_path.relative_to(*file_parent_path.parts[:4])}/"
+            file_name_path = Path(file_name)
+            # get the path without integrations_data/extracted/<repo_name>/
+            path_to_file_from_repo_dir = file_name_path.relative_to(*file_name_path.parts[:3])
+            # subtract path_to_remove, and get our final path without filename
+            path_to_remove = Path(content["options"].get("path_to_remove", ""))
+            directory = path_to_file_from_repo_dir.relative_to(path_to_remove).parent
             file_content = f.read()
             boundary = re.compile(r'^-{3,}$', re.MULTILINE)
             split = boundary.split(file_content, 2)
@@ -61,16 +61,14 @@ def pull_and_push_folder(content, content_dir):
             front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
             # Replacing links that point to the Github folder by link that point to the doc.
             new_link = (
-                content["options"]["dest_dir"] + directory + "\\2"
+                content["options"]["dest_dir"] + directory.as_posix() + "\\2"
             )
             regex_github_link = re.compile(
                 r"(https:\/\/github\.com\/{}\/{}\/blob\/{}\/{})(\S+)\.md".format(
                     content["org_name"],
                     content["repo_name"],
                     content["branch"],
-                    content["options"][
-                        "path_to_remove"
-                    ]+directory,
+                    path_to_remove / directory,
                 )
             )
             txt = re.sub(
@@ -88,13 +86,10 @@ def pull_and_push_folder(content, content_dir):
             if file_name.endswith("README.md"):
                 file_name = "_index.md"
         # Writing the new content to the documentation file
-        dirp = "{}{}".format(
-            content_dir,
-            content["options"]["dest_dir"][1:] + directory,
-        )
-        makedirs(dirp, exist_ok=True)
+        dirp = (Path(content_dir) / Path(content["options"]["dest_dir"].lstrip('/')) / directory).resolve()
+        dirp.mkdir(exist_ok=True)
         with open(
-            "{}{}".format(dirp, basename(file_name)),
+            dirp / file_name_path.name,
             mode="w+",
             encoding="utf-8",
         ) as f:
