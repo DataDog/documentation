@@ -21,7 +21,7 @@ algolia:
 
 Permissions define the type of access a user has to given resource. Typically, permissions give a user the right to read, edit, or delete an object. Permissions underlie the access rights of all roles, including the three out-of-the-box roles and custom roles.
 
-## Out-of-the-box roles
+### Out-of-the-box roles
 
 By default, existing users are associated with one of the three out-of-the-box roles:
 
@@ -31,7 +31,7 @@ By default, existing users are associated with one of the three out-of-the-box r
 
 All users with one of these roles can read all data types, except for [individually read-restricted][1] resources. Admin and Standard users have write permissions on assets. Admin users have additional read and write permissions for sensitive assets relating to user management, org management, billing, and usage. 
 
-## Custom roles
+### Custom roles
 
 Create a custom role to combine permissions into new roles. A custom role gives you the ability to define a persona, for example, a billing administrator, and then assign the appropriate permissions for that role. After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][2], or through the [Datadog Permission API][3].
 
