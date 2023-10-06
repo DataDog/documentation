@@ -23,7 +23,7 @@ aws lambda get-layer-version \
 ## Permissions
 Occasionally users accidentally explictly `DENY` permission for their functions to perform `lambda:GetLayerVersion`. Some [resource-based][2] policy configurations can cause an explicit `DENY`. Additionally IAM [Policy Boundaries][3] may also cause an explict `DENY` for `lambda:GetLayerVersion`.
 
-To test this, use an IAM user attached to the same IAM Policy your Lambda function uses, and test the `get-layer-version` command as listed above.
+To test this, use an IAM user attached to the same IAM Policy your Lambda function uses, and test the `get-layer-version` command as listed above. The command should succeed with no errors.
 
 ## Get help
 
@@ -33,10 +33,6 @@ If you need the Datadog support team to help investigate, include the following 
 2. The function's deployment package (or a screenshot showing the content and size of the uncompressed package) to be uploaded to AWS.
 3. The project configuration files, with **redacted hardcoded secrets**: `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json` and `webpack.config.json`.
 4. The project IAM policies and role information.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-layers
 [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
