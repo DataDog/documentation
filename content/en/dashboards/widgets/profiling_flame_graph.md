@@ -31,7 +31,7 @@ The [profiling flame graph visualization][1] represents a breakdown of top consu
 
 #### Global time
 
-On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
+Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
 
 ## API
 
