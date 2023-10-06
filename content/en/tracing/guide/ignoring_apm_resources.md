@@ -346,9 +346,9 @@ helm install dd-agent -f values.yaml \
 
 [1]: /agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
-{{% tab "AWS ECS Task Definition" %}}
+{{% tab "Amazon ECS Task Definition" %}}
 
-If you use AWS ECS (such as on EC2), in your Datadog Agent container definition, add the environment variable `DD_APM_IGNORE_RESOURCES` with the values such that the JSON evaluates to something like this:
+If you use Amazon ECS (such as on EC2), in your Datadog Agent container definition, add the environment variable `DD_APM_IGNORE_RESOURCES` with the values such that the JSON evaluates to something like this:
 
 {{< code-block lang="json" >}}
     "environment": [

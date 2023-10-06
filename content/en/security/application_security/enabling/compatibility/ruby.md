@@ -27,7 +27,7 @@ The minimum tracer version to get all supported ASM capabilities for Ruby is 1.1
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  |  |
 | Kubernetes | {{< X >}}  | |
-| AWS ECS | {{< X >}}  | |
+| Amazon ECS | {{< X >}}  | |
 | AWS Fargate | {{< X >}}  | |
 | AWS Lambda |  | |
 

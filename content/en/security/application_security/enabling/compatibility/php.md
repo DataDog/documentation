@@ -28,7 +28,7 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         |                           |
 | Kubernetes    | {{< X >}}         |                           | 
-| AWS ECS       | {{< X >}}         |                           |
+| Amazon ECS    | {{< X >}}         |                           |
 | AWS Fargate   |                   |                           |
 | AWS Lambda    |                   |                           |   
 

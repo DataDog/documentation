@@ -44,7 +44,7 @@ Connections support the following example use cases:
 
 Before you create a connection, think about the permissions needed to fulfill the required task and grant the connection only the necessary permissions to fulfill that task. In addition, the connection should be restricted to only the people who need to use it.
 
-Where possible, use granular connections for different workflows. For example, if you have a workflow that writes to an AWS S3 bucket, and a workflow that terminates AWS EC2 instances, do not use the same connection for both workflows. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
+Where possible, use granular connections for different workflows. For example, if you have a workflow that writes to an Amazon S3 bucket, and a workflow that terminates Amazon EC2 instances, do not use the same connection for both workflows. Instead, create two respective connections, each corresponding to an IAM role with limited scope.
 
 ## Work with connections
 

@@ -69,7 +69,7 @@ A common way to start a dashboard is by encountering a similar dashboard already
 
 Through integrations, Datadog collects [metrics][2] from your infrastructure and applications. The collected metrics are documented in the integration's README files. If you encounter a metric in the [Metrics Explorer][3] or as you're creating a dashboard, and you want to know what the metric is, look it up in the Integrations docs. 
 
-For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][4] section of the AWS S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
+For example, suppose you are looking at a time graph of the metric `aws.s3.first_byte_latency`. Go to the [Data collected][4] section of the Amazon S3 integration README to see its description: `The average per-request time from the complete request being received by a bucket to when the response starts to be returned. Shown as millisecond.`
 
 ## Add widgets and refine what they show
 

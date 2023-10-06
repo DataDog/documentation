@@ -29,7 +29,7 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
 | AWS Lambda    | {{< X >}}         | beta                      |   
 
