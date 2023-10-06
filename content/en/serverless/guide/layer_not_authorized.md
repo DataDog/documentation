@@ -5,7 +5,7 @@ kind: documentation
 This guide helps you troubleshoot the deployment error "not authorized to perform: lambda:GetLayerVersion on resource". This error is commonly seen with Library Layers or the Extension layer.
 
 ## Regionality
-Lambda functions can only utilize [Lambda Layers][1] in the same region as the function. Typically this error occurs when users copy instrumentation settings from other regions. Verify that the layer region and Lambda function version match. Then, verify that the version number is correct.
+Lambda functions can only use [Lambda Layers][1] in the same region as the function. Typically this error occurs when users copy instrumentation settings from other regions. Verify that the layer region and Lambda function version match. Then, verify that the version number is correct.
 
 You can verify that a Lambda Layer version exists using any valid AWS credentials and running the following command:
 ```
