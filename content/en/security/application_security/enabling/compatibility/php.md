@@ -36,7 +36,7 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0, 8.1 and 8.2.
 </div>
 
 | PHP Version    | Support level                         | Package version |
