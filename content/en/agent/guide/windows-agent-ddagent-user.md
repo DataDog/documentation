@@ -35,7 +35,7 @@ Additionally the following security policies are applied to the account during i
 
 If no user account is specified on the command line, the installer attempts to create a local user account named `ddagentuser` with a randomly generated password.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
 To specify the optional USERNAME and PASSWORD on the command line pass the following properties to the `msiexec` command (Remove the bracket `<>` characters from the username and password placeholders):
 

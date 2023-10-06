@@ -56,9 +56,6 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.2.x          | General Availability                  | All             |
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
-| 5.6.x          | Maintenance (until December 31, 2023) | All             |
-| 5.5.x          | Maintenance (until December 31, 2023) | All             |
-| 5.4.x          | Maintenance (until December 31, 2023) | All             |
 
 PHP ASM supports the following SAPI's:
 
@@ -109,7 +106,6 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
 | Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
 | Phalcon       | 3.1+        |  {{< X >}} | {{< X >}} |
-| Roadrunner    | 3.1+        |  {{< X >}} | {{< X >}} |
 | Slim          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 4     | 3.1+        |  {{< X >}} | {{< X >}} |
