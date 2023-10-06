@@ -1,8 +1,12 @@
 ---
 title: Swift Tests
 kind: documentation
+code_lang: swift
+type: multi-code-lang
+code_lang_weight: 50
 aliases:
   - /continuous_integration/setup_tests/swift
+  - /continuous_integration/tests/swift
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -12,7 +16,7 @@ further_reading:
       text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -742,12 +746,6 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 <key>com.apple.security.app-sandbox</key>
  <false/>
 {{< /code-block >}}
-
-{{% ci-information-collected %}}
-
-In addition to that, if [Intelligent Test Runner][7] is enabled, the following data is collected from your project:
-
-* Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 

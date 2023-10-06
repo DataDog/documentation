@@ -1,8 +1,12 @@
 ---
 title: Java Tests
 kind: documentation
+code_lang: java
+type: multi-code-lang
+code_lang_weight: 10
 aliases:
   - /continuous_integration/setup_tests/java
+  - /continuous_integration/tests/java
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -12,7 +16,7 @@ further_reading:
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -296,8 +300,6 @@ public class ManualTest {
 ```
 
 Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so that all the test info is flushed to Datadog.
-
-{{% ci-information-collected %}}
 
 ## Troubleshooting
 

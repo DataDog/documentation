@@ -55,13 +55,14 @@ cascade:
 ## Setup
 
 {{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
-    {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Default configurations
@@ -127,7 +128,11 @@ Not every language supported by CI Visibility has support for test suite level v
 
 ## Use CI tests data
 
-When creating a [dashboard][9] or a [notebook][10], you can use test execution data in your search query, which updates the visualization widget options.
+{{% ci-information-collected %}}
+
+If [Intelligent Test Runner][13] is enabled for .NET, JavaScript, or Swift, [code coverage information][12], including file names and line numbers covered by each test, are collected from your projects.
+
+When creating a [dashboard][8] or a [notebook][9], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Alert on test data
 
@@ -138,14 +143,15 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: /continuous_integration/explorer/facets/#creating-facets
-[3]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[4]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[5]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[6]: /continuous_integration/tests/java/#compatibility
-[7]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
-[8]: /continuous_integration/tests/python/#compatibility
-[9]: https://app.datadoghq.com/dashboard/lists
-[10]: https://app.datadoghq.com/notebook/list
-[11]: https://app.datadoghq.com/ci/test-runs
-[12]: /monitors/types/ci/
+[2]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
+[3]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
+[4]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
+[5]: /continuous_integration/tests/java/#compatibility
+[6]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
+[7]: /continuous_integration/tests/python/#compatibility
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: https://app.datadoghq.com/ci/test-runs
+[11]: /monitors/types/ci/
+[12]: /continuous_integration/guides/code_coverage/
+[13]: /continuous_integration/intelligent_test_runner/

@@ -24,7 +24,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
 | AWS Lambda    | {{< X >}}         |                           |   
 

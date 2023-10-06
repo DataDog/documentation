@@ -1,15 +1,19 @@
 ---
 title: Uploading JUnit test report files to Datadog
 kind: documentation
+code_lang: junit_xml
+type: multi-code-lang
+code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
+  - /continuous_integration/tests/junit_upload
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -17,6 +21,8 @@ further_reading:
 The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
 </div>
 {{< /site-region >}}
+
+## Overview
 
 <div class="alert alert-warning"><strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files, as the native instrumentation provides more accurate time results, supports distributed traces on integration tests, and supports structured stack traces.</div>
 
@@ -424,7 +430,7 @@ datadog-ci junit upload --service service_name \
 
 {{< /tabs >}}
 
-## Providing metadata through `<property>` elements
+## Providing metadata through property elements
 
 Another way to provide additional tags to specific tests is including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
 
@@ -472,7 +478,7 @@ It is possible to report code coverage for a given JUnit report via the `--repor
 datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
-Read more about code coverage in Datadog in [code coverage in Datadog guide][10].
+For more information, see the [Code Coverage guide][10].
 
 ## Further reading
 

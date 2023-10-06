@@ -92,7 +92,7 @@ code_language_ids:
     serverless: "Serverless"
     javascript: "JavaScript"
     swift: "Swift"
-
+    junit_xml: "JUnit XML"
 branch: ""
 
 signupclass: sign-up-trigger

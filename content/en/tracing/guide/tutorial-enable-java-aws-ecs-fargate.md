@@ -1,5 +1,5 @@
 ---
-title: Tutorial - Enabling Tracing for a Java Application on AWS ECS with Fargate
+title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with Fargate
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
@@ -35,8 +35,8 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 - Git
 - Docker
 - Terraform
-- AWS ECS
-- an AWS ECR repository for hosting images
+- Amazon ECS
+- an Amazon ECR repository for hosting images
 - An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Using the AWS credentials file and credential Profiles][20].
 
 ## Install the sample Java application
@@ -51,11 +51,11 @@ The repository contains a multi-service Java application pre-configured to run i
 
 In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT`, and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on AWS ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
+The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT`, and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on Amazon ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
 
 ### Initial ECS setup
 
-The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
+The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and Amazon ECR repository.
 
 Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
@@ -107,7 +107,7 @@ Your application (without tracing enabled) is containerized and available for EC
 
 Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
 
-To start, use a terraform script to deploy to AWS ECS:
+To start, use a terraform script to deploy to Amazon ECS:
 
 1. From the `terraform/Fargate/Uninstrumented` directory, run the following commands:
 
@@ -338,7 +338,7 @@ Your multi-service application with tracing enabled is containerized and availab
 
 Redeploy the application and exercise the API:
 
-1. Redeploy the application to AWS ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/Instrumented` directory, run the following commands:
+1. Redeploy the application to Amazon ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/Instrumented` directory, run the following commands:
 
    ```sh
    terraform init
