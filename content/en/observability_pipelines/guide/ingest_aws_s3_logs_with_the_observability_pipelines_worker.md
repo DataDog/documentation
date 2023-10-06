@@ -59,6 +59,7 @@ In the Amazon SQS console, provision a new queue specific to this configuration.
     ]
     }
     ```
+    
 6. Leave the other queue options as the defaults.
 7. Click **Create queue**.
 
