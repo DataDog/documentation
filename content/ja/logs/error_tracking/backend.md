@@ -37,7 +37,7 @@ C# のログ収集の設定をしていない場合は、[C# ログ収集ドキ�
 ```csharp
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    .Enrich.WithExceptionDetails() 
+    .Enrich.WithExceptionDetails()
     .CreateLogger();
 try {
   // ...
@@ -241,12 +241,12 @@ config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rail
 config.lograge.custom_options = lambda do |event|
     {
       error: {
-        type: event.payload[:exception][0],
+        kind: event.payload[:exception][0],
         message: event.payload[:exception][1],
-        stack: event.payload[:exception_object].backtrace
+        stack: event.payload[:exception_object].backtrace.join("\n")
       }
     }
-  end  
+  end
 end
 ```
 
