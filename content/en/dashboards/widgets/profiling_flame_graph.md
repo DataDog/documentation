@@ -11,7 +11,7 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-The [profiling flame graph visualization][1] represents a breakdown of top consuming lines of code (CPU, Memory, ...):
+The [profiling flame graph visualization][1] represents a breakdown of top consuming lines of code such as CPU and Memory. Add this widget to visualize stack traces of your profiled applications and accurately identify frequent resource requests. 
 
 {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph.png" alt="Profiling Flame Graph" >}}
 
