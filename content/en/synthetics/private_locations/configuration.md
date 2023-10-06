@@ -26,6 +26,9 @@ These configuration options for private locations can be passed as **parameters 
 ```shell
 docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
 ```
+```shell
+docker run -d --restart always -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest --logFormat=json
+```
 
 Arguments set in the launch command have precedence over the configuration file. However, these options are not stored and are consequently only relevant for a given launch.
 
