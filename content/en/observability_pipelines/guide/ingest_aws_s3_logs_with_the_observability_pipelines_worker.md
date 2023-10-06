@@ -36,7 +36,7 @@ In the Amazon SQS console, provision a new queue specific to this configuration.
 4. In the **Access policy** section, click the **Advanced** button.
 5. Copy and paste the below example JSON object into the advanced access policy section. It configures the queue and allows the S3 bucket to send event notifications. Replace `${REGION}`, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME}`, and `${BUCKET_NAME}` with the relevant AWS account information, the queue name, and the bucket name you just entered.
 
-    ```json
+  ```json
     {
     "Version": "2008-10-17",
     "Id": "__default_policy_ID",
