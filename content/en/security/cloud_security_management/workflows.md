@@ -16,7 +16,7 @@ further_reading:
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools. 
 
-Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public AWS S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
+Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## Understanding how triggers and sources work
 
@@ -27,9 +27,9 @@ When you trigger a workflow, the source ID of the trigger event must be passed o
 ## Build a workflow
 
 You can build a workflow using a preconfigured flow from an out-of-the-box blueprint, or by creating a custom workflow. For detailed instructions on how to create a workflow, see the [Workflow Automation docs][3].
-### Block access to AWS S3 bucket via Slack
+### Block access to Amazon S3 bucket via Slack
 
-This example creates a remediation workflow that sends an interactive Slack message when a public AWS S3 bucket is detected. By clicking **Approve** or **Reject**, you can automatically block access to the S3 bucket or decline to take action.
+This example creates a remediation workflow that sends an interactive Slack message when a public Amazon S3 bucket is detected. By clicking **Approve** or **Reject**, you can automatically block access to the S3 bucket or decline to take action.
 
 **Note**: To build this workflow, you must configure the [Slack integration][5].
 
@@ -82,7 +82,7 @@ Next, add the JavaScript Data Transformation Function action to the canvas and c
 ##### Approve workflow
 
 1. Under **Approve** on the workflow canvas, click the plus (`+`) icon to add another step.
-2. Search for the **Block Public Access** action for AWS S3 and select it to add it as a step on your workflow canvas.
+2. Search for the **Block Public Access** action for Amazon S3 and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
     - **Connection**: The name of the workflow connection for the AWS integration.
     - **Region**: `{{ Steps.GetRegion.data }}`

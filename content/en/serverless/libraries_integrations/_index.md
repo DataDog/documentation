@@ -39,6 +39,6 @@ aliases:
     {{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions Integration{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync Integration{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_api_gateway/" >}}Amazon API Gateway Integration{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_sqs/" >}}AWS SQS Integration{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_sns/" >}}AWS SNS Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sqs/" >}}Amazon SQS Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sns/" >}}Amazon SNS Integration{{< /nextlink >}}
 {{< /whatsnext >}}
