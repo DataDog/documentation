@@ -1,8 +1,12 @@
 ---
 title: JavaScript and TypeScript Tests
 kind: documentation
+code_lang: javascript
+type: multi-code-lang
+code_lang_weight: 20
 aliases:
   - /continuous_integration/setup_tests/javascript
+  - /continuous_integration/tests/javascript
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -15,7 +19,7 @@ further_reading:
       text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -598,12 +602,6 @@ forEach([
 {{< /code-block >}}
 
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
-
-{{% ci-information-collected %}}
-
-In addition to that, if [Intelligent Test Runner][21] is enabled, the following data is collected from your project:
-
-* Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 

@@ -2205,48 +2205,53 @@ main:
   - name: Test Visibility
     url: continuous_integration/tests/
     parent: ci
-    identifier: tests_visibility
+    identifier: ci_tests
     weight: 1
+  - name: Setup
+    url: continuous_integration/tests/setup/
+    parent: ci_tests
+    identifier: ci_tests_setup
+    weight: 101
   - name: .NET
-    url: continuous_integration/tests/dotnet/
-    parent: tests_visibility
-    identifier: ci_dotnet
+    url: continuous_integration/tests/setup/dotnet/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_dotnet
     weight: 101
   - name: Java
-    url: continuous_integration/tests/java/
-    parent: tests_visibility
-    identifier: ci_java
+    url: continuous_integration/tests/setup/java/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_java
     weight: 102
   - name: JavaScript and TypeScript
-    url: continuous_integration/tests/javascript/
-    parent: tests_visibility
-    identifier: ci_javascript
+    url: continuous_integration/tests/setup/javascript/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_javascript
     weight: 103
   - name: Python
-    url: continuous_integration/tests/python/
-    parent: tests_visibility
-    identifier: ci_python
+    url: continuous_integration/tests/setup/python/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_python
     weight: 104
   - name: Ruby
-    url: continuous_integration/tests/ruby/
-    parent: tests_visibility
-    identifier: ci_ruby
+    url: continuous_integration/tests/setup/ruby/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_ruby
     weight: 105
   - name: Swift
-    url: continuous_integration/tests/swift/
-    parent: tests_visibility
-    identifier: ci_swift
+    url: continuous_integration/tests/setup/swift/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_swift
     weight: 106
   - name: JUnit Report Uploads
-    url: continuous_integration/tests/junit_upload/
-    parent: tests_visibility
-    identifier: ci_junit
-    weight: 107
+    url: continuous_integration/tests/setup/junit_xml/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_junit_xml
+    weight: 102
   - name: Tests in Containers
     url: continuous_integration/tests/containers/
-    parent: tests_visibility
-    identifier: ci_containers
-    weight: 108
+    parent: ci_tests
+    identifier: ci_tests_containers
+    weight: 103
   - name: Pipeline Visibility
     url: continuous_integration/pipelines/
     parent: ci

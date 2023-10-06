@@ -1,8 +1,12 @@
 ---
 title: .NET Tests
 kind: documentation
+code_lang: dotnet
+type: multi-code-lang
+code_lang_weight: 0
 aliases:
   - /continuous_integration/setup_tests/dotnet
+  - /continuous_integration/tests/dotnet
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -15,7 +19,7 @@ further_reading:
       text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -811,12 +815,6 @@ await module.CloseAsync();
 {{< /code-block >}}
 
 Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
-
-{{% ci-information-collected %}}
-
-In addition to that, if [Intelligent Test Runner][16] is enabled, the following data is collected from your project:
-
-* Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 

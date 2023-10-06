@@ -1,8 +1,12 @@
 ---
 title: Python Tests
 kind: documentation
+code_lang: python
+type: multi-code-lang
+code_lang_weight: 30
 aliases:
   - /continuous_integration/setup_tests/python
+  - /continuous_integration/tests/python
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -12,7 +16,7 @@ further_reading:
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -148,8 +152,6 @@ All other [Datadog Tracer configuration][6] options can also be used.
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
-
-{{% ci-information-collected %}}
 
 ## Further reading
 
