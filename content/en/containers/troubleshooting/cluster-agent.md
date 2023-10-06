@@ -20,20 +20,12 @@ further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Custom Integrations"
-- link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
-  tag: "Github"
-  text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
 This document contains troubleshooting information for the following components:
 
 - [Datadog Cluster Agent](#datadog-cluster-agent)
 - [Node Agent](#node-agent)
-
-For further troubleshooting see the following:
-
-- [Troubleshooting Cluster Checks and Endpoint Checks][2]
-- [Troubleshooting the Metrics Server and HPA][3]
 
 ## Datadog Cluster Agent
 
@@ -164,5 +156,3 @@ DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/cluster_agent/external_metrics/#register-the-external-metrics-provider
-[2]: /containers/cluster_agent/troubleshooting/troubleshooting-cluster-and-endpoint-checks
-[3]: /containers/cluster_agent/troubleshooting/troubleshooting-hpa
