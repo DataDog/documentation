@@ -20,7 +20,7 @@ The [profiling flame graph visualization][1] represents a breakdown of top consu
 ### Configuration
 
 1. Scope your profiling data with tags. For example, `host`, `container_name`, `service`, `env`, or `version`.
-2. Select the resource, such as `CPU Time`, `Allocated Memory` or `Thrown Exceptions`.
+2. To select the resource click the dropdown menu next to **Show**. Options can include `CPU Time`, `Allocated Memory`, or `Thrown Exceptions`.
 3. Optional: chose the frame granularity and coloring (`Line`, `Method`, `Class`, `File`, `Package`, ...).
 4. Optional: chose the code provenance (`Only My Code` or `All Code`).
 5. Optional: filter on a specific endpoint, for total consumption (`per Minute by Endpoint`) or per request (`per Endpoint Call`).
