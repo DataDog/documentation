@@ -19,7 +19,7 @@ algolia:
 
 ## Overview
 
-Permissions define the type of access a user has to given resource. Typically, permissions give a user the right to read, edit, or delete an object. Permissions underlie the access rights of all roles, including the three out-of-the-box roles and custom roles.
+Permissions define the type of access a user has to a given resource. Typically, permissions give a user the right to read, edit, or delete an object. Permissions underlie the access rights of all roles, including the three out-of-the-box roles and custom roles.
 
 ### Out-of-the-box roles
 
