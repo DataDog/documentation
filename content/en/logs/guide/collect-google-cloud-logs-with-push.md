@@ -37,21 +37,21 @@ The [Google Cloud Platform integration][1] is successfully installed.
 
     {{< img src="integrations/google_cloud_platform/create_topic_no_default_sub.png" alt="Create a topic without default subscription" style="width:80%;">}}
 
-2. Give that topic an explicit name such as `export-logs-to-datadog` and click _Create_.
+2. Give that topic an explicit name such as `export-logs-to-datadog` and click **Create**.
 
 **Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][3]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [the Monitor the Log Forwarding section](#monitor-the-log-forwarding) for information on setting up monitor notifications if you approach those limits.
 
 ### Forward logs to Datadog with a Cloud Pub/Sub subscription
 
-1. In the [Cloud Pub/Sub console][2], select `Subscriptions` in the left hand navigation. Click `Create Subscription`.
+1. In the [Cloud Pub/Sub console][2], select **Subscriptions** in the left hand navigation. Click **Create Subscription**.
 2. Create a subscription ID and select the topic you previously created.
 3. Select the `Push` method and enter the following command, replacing `<DATADOG_API_KEY>` with the value of a valid [Datadog API key][4]: 
 ```
 https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp
 ```
 4. Configure any additional options, such as **Subscription expiration**, **Acknowledgment deadline**, **Message retention duration**, or **Dead lettering**.
-5. Under **Retry policy**, select `Retry after exponential backoff delay`.
-6. Click `Create` at the bottom.
+5. Under **Retry policy**, select **Retry after exponential backoff delay**.
+6. Click **Create** at the bottom.
 
 The Pub/Sub is ready to receive logs from Google Cloud Logging and forward them to Datadog.
 
@@ -60,7 +60,7 @@ The Pub/Sub is ready to receive logs from Google Cloud Logging and forward them 
 1. Go to [the Google Cloud Logs Explorer page][6] and filter the logs that need to be exported.
 2. From the **Log Router** tab, select **Create Sink**.
 3. Provide a name for the sink.
-4. Choose _Cloud Pub/Sub_ as the destination and select the pub/sub that was created for that purpose.
+4. Choose **Cloud Pub/Sub** as the destination and select the pub/sub that was created for that purpose.
    **Note**: The pub/sub can be located in a different project.
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
