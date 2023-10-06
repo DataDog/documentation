@@ -112,6 +112,10 @@ span.Finish(tracer.WithError(err))
 
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
 
+<div class="alert alert-info">
+Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the <a href="https://pkg.go.dev/context">Go context library documentation</a> or documentation for any third-party libraries integrated with your application.
+</div>
+
 ### Manually creating a new span
 
 To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4]:
