@@ -49,6 +49,8 @@ The [Google Cloud Platform integration][1] is successfully installed.
 ```
 https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp
 ```
+**Note**: Ensure that the `Datadog site` selector on the right of the page is set to your [Datadog site][15] before copying the URL above.
+
 4. Configure any additional options, such as **Subscription expiration**, **Acknowledgment deadline**, **Message retention duration**, or **Dead lettering**.
 5. Under **Retry policy**, select **Retry after exponential backoff delay**.
 6. Click **Create** at the bottom.
@@ -97,3 +99,4 @@ You can optionally sample logs while querying by using the [sample function][9].
 [11]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [13]: /agent/
 [14]: https://cloud.google.com/vpc
+[15]: /getting_started/site/
