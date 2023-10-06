@@ -52,7 +52,7 @@ spec:
 {{< /tabs >}}
 
 ## Application configuration
-You can configure your application to use the Kubernetes service manually, or by using the [Cluster Agent Admission Controller][3].
+You can configure your application to use the Kubernetes service manually, or by using the Cluster Agent Admission Controller.
 
 ### Admission controller
 The [Cluster Agent's Admission Controller][2] can inject the configuration for APM connectivity into your containers. This has the configuration mode of `hostip`, `socket`, or `service` relative to the 3 options. Choose the `service` mode to have the Admission Controller add the `DD_AGENT_HOST` environment variable for the DNS name of the service.
