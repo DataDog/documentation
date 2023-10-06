@@ -1,0 +1,41 @@
+---
+title: Troubleshooting Serverless Layer not Authorized Errors
+kind: documentation
+---
+This guide helps you troubleshoot the deployment error "not authorized to perform: lambda:GetLayerVersion on resource". This error is commonly seen with Library Layers or the Extension layer.
+
+## Regionality
+Lambda functions can only utilize [Lambda Layers][1] in the same region as the function. Typically this error occurs when users copy instrumentation settings from other regions. Verify that the layer region and Lambda function version match. Then, verify that the version number is correct.
+
+You can verify that a Lambda Layer version exists using any valid AWS credentials and running the following command:
+```
+aws lambda get-layer-version \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
+  --version-number {{< latest-lambda-layer-version layer="dd-trace-node" >}}
+
+aws lambda get-layer-version \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
+  --version-number {{< latest-lambda-layer-version layer="extension" >}}
+```
+
+## Permissions
+Occasionally users accidentally explictly `DENY` permission for their functions to perform `lambda:GetLayerVersion`. Some [resource-based][2] policy configurations can cause an explicit `DENY`. Additionally IAM [Policy Boundaries][3] may also cause an explict `DENY` for `lambda:GetLayerVersion`.
+
+To test this, use an IAM user attached to the same IAM Policy your Lambda function uses, and test the `get-layer-version` command as listed above.
+
+## Get help
+
+If you need the Datadog support team to help investigate, include the following information in your ticket:
+
+1. The function's configured Lambda layers (name and version, or ARNs).
+2. The function's deployment package (or a screenshot showing the content and size of the uncompressed package) to be uploaded to AWS.
+3. The project configuration files, with **redacted hardcoded secrets**: `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json` and `webpack.config.json`.
+4. The project IAM policies and role information.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-layers
+[2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
