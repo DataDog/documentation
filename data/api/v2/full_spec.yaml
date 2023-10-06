@@ -5507,24 +5507,6 @@ components:
       type: string
       x-enum-varnames:
       - GCP_SERVICE_ACCOUNT
-    GetAllPowerpacksResponse:
-      description: Response object which includes all powerpack configurations.
-      properties:
-        data:
-          description: List of powerpack definitions.
-          items:
-            $ref: '#/components/schemas/PowerpackData'
-          type: array
-        included:
-          description: Array of objects related to the users.
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-        links:
-          $ref: '#/components/schemas/PowerpackResponseLinks'
-        meta:
-          $ref: '#/components/schemas/PowerpacksResponseMeta'
-      type: object
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -7701,6 +7683,24 @@ components:
       required:
       - data
       - meta
+      type: object
+    ListPowerpacksResponse:
+      description: Response object which includes all powerpack configurations.
+      properties:
+        data:
+          description: List of powerpack definitions.
+          items:
+            $ref: '#/components/schemas/PowerpackData'
+          type: array
+        included:
+          description: Array of objects related to the users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        links:
+          $ref: '#/components/schemas/PowerpackResponseLinks'
+        meta:
+          $ref: '#/components/schemas/PowerpacksResponseMeta'
       type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
@@ -10632,18 +10632,7 @@ components:
           example: Powerpack for ABC
           type: string
         group_widget:
-          additionalProperties: {}
-          description: Templated group of dashboard widgets for the powerpack.
-          example:
-            layout_type: ordered
-            tags:
-            - tag:foo1
-            type: group
-            widgets:
-            - definition:
-                content: example
-                type: note
-          type: object
+          $ref: '#/components/schemas/PowerpackGroupWidget'
         name:
           description: Name of the powerpack.
           example: Sample Powerpack
@@ -10684,6 +10673,141 @@ components:
           description: Type of widget, must be powerpack.
           example: powerpack
           type: string
+      type: object
+    PowerpackGroupWidget:
+      description: Powerpack group widget definition object.
+      properties:
+        definition:
+          $ref: '#/components/schemas/PowerpackGroupWidgetDefinition'
+        layout:
+          $ref: '#/components/schemas/PowerpackGroupWidgetLayout'
+      required:
+      - definition
+      type: object
+    PowerpackGroupWidgetDefinition:
+      description: Powerpack group widget object.
+      properties:
+        layout_type:
+          description: Layout type of widgets.
+          example: ordered
+          type: string
+        show_title:
+          description: Boolean indicating whether powerpack group title should be
+            visible or not.
+          example: true
+          type: boolean
+        title:
+          description: Name for the group widget.
+          example: Sample Powerpack
+          type: string
+        type:
+          description: Type of widget, must be group.
+          example: group
+          type: string
+        widgets:
+          description: Widgets inside the powerpack.
+          example:
+          - definition:
+              content: example
+              type: note
+            layout:
+              height: 5
+              width: 10
+              x: 0
+              y: 0
+          items:
+            $ref: '#/components/schemas/PowerpackInnerWidgets'
+          type: array
+      required:
+      - widgets
+      - layout_type
+      - type
+      type: object
+    PowerpackGroupWidgetLayout:
+      description: Powerpack group widget layout.
+      properties:
+        height:
+          description: The height of the widget. Should be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        width:
+          description: The width of the widget. Should be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        x:
+          description: The position of the widget on the x (horizontal) axis. Should
+            be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        y:
+          description: The position of the widget on the y (vertical) axis. Should
+            be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - x
+      - y
+      - width
+      - height
+      type: object
+    PowerpackInnerWidgetLayout:
+      description: Powerpack inner widget layout.
+      properties:
+        height:
+          description: The height of the widget. Should be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        width:
+          description: The width of the widget. Should be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        x:
+          description: The position of the widget on the x (horizontal) axis. Should
+            be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        y:
+          description: The position of the widget on the y (vertical) axis. Should
+            be a non-negative integer.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - x
+      - y
+      - width
+      - height
+      type: object
+    PowerpackInnerWidgets:
+      description: Powerpack group widget definition of individual widgets.
+      properties:
+        definition:
+          additionalProperties: {}
+          description: Information about widget.
+          example:
+            definition:
+              content: example
+              type: note
+          type: object
+        layout:
+          $ref: '#/components/schemas/PowerpackInnerWidgetLayout'
+      required:
+      - definition
       type: object
     PowerpackRelationships:
       description: Powerpack relationship object.
@@ -24982,13 +25106,13 @@ paths:
   /api/v2/powerpacks:
     get:
       description: Get a list of all powerpacks.
-      operationId: GetAllPowerpacks
+      operationId: ListPowerpacks
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAllPowerpacksResponse'
+                $ref: '#/components/schemas/ListPowerpacksResponse'
           description: OK
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'

@@ -9860,7 +9860,7 @@ api:
       versions:
         - v2
       operationids:
-        - GetAllPowerpacks
+        - ListPowerpacks
       unstable: []
       order: 1
   - name: Processes
