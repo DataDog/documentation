@@ -28,6 +28,13 @@ The [profiling flame graph visualization][1] represents a breakdown of top consu
 7. Give your graph a title or leave the box blank for the suggested title.
 
 ### Options
+#### Scope to endpoints
+
+Filter on a specific endpoint, for total consumption (`per Minute by Endpoint`) or per request (`per Endpoint Call`).
+
+#### Scope to functions
+
+Filter on other criteria such as `Method`, `Package`, `Thread name` or `Trace Operation`.
 
 #### Global time
 
