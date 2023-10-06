@@ -49,7 +49,7 @@ The [Google Cloud Platform integration][4] is successfully installed.
 ```
 https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp
 ```
-**Note**: Ensure that the `Datadog site` selector on the right of the page is set to your [Datadog site][8] before copying the URL above.
+**Note**: Ensure that the `Datadog site` selector on the right of the page is set to your [Datadog site][8] before copying the command above.
 
 4. Configure any additional options, such as **Subscription expiration**, **Acknowledgment deadline**, **Message retention duration**, or **Dead lettering**.
 5. Under **Retry policy**, select **Retry after exponential backoff delay**.
