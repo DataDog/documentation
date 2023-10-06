@@ -32,7 +32,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for SQL Server applications.
 - `none` mode disables propagation and does not send any information from applications.
 
-SQL Server does not support `full` propagation mode due to the inability for the server to cache statements which contain full trace context.
+SQL Server does not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
 | DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
 |:-------------------------|:---------:|:---------:|:------------:|
