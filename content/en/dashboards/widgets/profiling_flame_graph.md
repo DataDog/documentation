@@ -24,7 +24,6 @@ The [profiling flame graph visualization][1] represents a breakdown of top consu
 3. Optional: chose the frame granularity and coloring (`Line`, `Method`, `Class`, `File`, `Package`, ...).
 4. Click the dropdown menu next to **from** to select the code provenance (`Only My Code` or `All Code`).
 5. Optional: filter on a specific endpoint, for total consumption (`per Minute by Endpoint`) or per request (`per Endpoint Call`).
-6. Optional: filter on other criteria such as `Method`, `Package`, `Thread name` or `Trace Operation`.
 7. Give your graph a title or leave the box blank for the suggested title.
 
 ### Options
