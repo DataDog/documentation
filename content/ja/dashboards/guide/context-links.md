@@ -155,7 +155,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 #### アプローチ
 
-典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` です。
+典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` であり、そこで以下を確認することができます。
 
 * `eu-west-3`: サブドメインと URL のパラメーターとして表示される、データセンターのリージョン。
 * `i-04b737b9f8bf94a94`: ハッシュパラメーターとして表示されるホスト ID。
