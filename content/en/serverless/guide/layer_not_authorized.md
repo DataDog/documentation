@@ -30,9 +30,8 @@ To test this, use an IAM user attached to the same IAM Policy your Lambda functi
 If you need the Datadog support team to help investigate, include the following information in your ticket:
 
 1. The function's configured Lambda layers (name and version, or ARNs).
-2. The function's deployment package (or a screenshot showing the content and size of the uncompressed package) to be uploaded to AWS.
-3. The project configuration files, with **redacted hardcoded secrets**: `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json` and `webpack.config.json`.
-4. The project IAM policies and role information.
+2. The project configuration files, with **redacted hardcoded secrets**: `serverless.yaml`, `package.json`, `package-lock.json`, `yarn.lock`, `tsconfig.json` and `webpack.config.json`.
+3. The project IAM policies and role information.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-layers
 [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
