@@ -87,7 +87,15 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-Don't see your desired libraries? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+Don't see your desired libraries? You can check whether the library emits Open Telemetry compatible tracing (using [Activity based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+
+## OTEL based integrations
+
+Some libraries provide built in [Activity based tracing][11]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that we have tested with this setup (more libraries provide tracing though, we aren't yet expliciitly testing them).
+
+| Framework or library            | NuGet package                                                                                        | Integration Name     |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
+| Azure Service Bus               | Azure.Messaging.ServiceBus                                                                           | `AzureServiceBus`    |
 
 ## Supported Datadog Agent versions
 
@@ -134,3 +142,4 @@ Version updates imply the following changes to runtime support:
 [8]: /agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
+[11]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
