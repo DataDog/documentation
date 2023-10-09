@@ -52,7 +52,7 @@ To begin profiling applications:
     gem 'ddtrace', '~> 1.15'
     ```
 
-    (If you're running a version of `ddtrace` older than 1.15.0, you'll also need to add the `google-protobuf` gem as a dependency.)
+    If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
 
 2. Install the gems with `bundle install`.
 
