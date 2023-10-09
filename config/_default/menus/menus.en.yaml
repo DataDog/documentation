@@ -2917,6 +2917,11 @@ main:
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
     weight: 403
+  - name: Global
+    url: observability_pipelines/reference/global/
+    parent: observability_pipelines_vector_configuration
+    identifier: observability_pipelines_reference_global
+    weight: 404
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
