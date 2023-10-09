@@ -20,7 +20,6 @@ cascade:
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 Status Page{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}Dual Shipping{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
-    {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}
     {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/use-community-integrations" >}}Use Community Integrations{{< /nextlink >}}
@@ -31,6 +30,8 @@ cascade:
     {{< nextlink href="agent/guide/windows-agent-ddagent-user" >}}Datadog Windows Agent user{{< /nextlink >}}
     {{< nextlink href="agent/guide/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/" >}}Can I set up the dd-agent mysql check on my Google CloudSQL?{{< /nextlink >}}
     {{< nextlink href="agent/guide/heroku-troubleshooting/" >}}Datadog-Heroku Buildpack troubleshooting{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Set up Ansible Using a Standalone Datadog Role{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent versioning guides:" >}}

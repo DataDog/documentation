@@ -3,6 +3,10 @@ title: Connect Database Monitoring and Traces
 kind: documentation
 aliases: 
 - /database_monitoring/guide/connect_dbm_and_apm/
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
+    tag: 'Blog'
+    text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
@@ -27,6 +31,8 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for SQL Server applications.
 - `none` mode disables propagation and does not send any information from applications.
+
+SQL Server does not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
 | DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
 |:-------------------------|:---------:|:---------:|:------------:|
@@ -283,8 +289,6 @@ Enable the database monitoring propagation feature by setting the following envi
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
    - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
 
-SQL Server does not support full propagation mode due to the inability for the server to cache statements which contain full trace context.
-
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
 
@@ -389,9 +393,13 @@ On the APM Service Page, view the direct downstream database dependencies of the
 
 ### Identify potential optimizations using explain plans for database queries in traces
 
-{{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
+{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
 View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database hosts.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/

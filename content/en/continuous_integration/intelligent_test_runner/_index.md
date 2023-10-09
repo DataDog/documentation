@@ -39,7 +39,7 @@ Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1
 
 ## Configuration
 
-Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page.
+Once you have set up your Datadog library for Intelligent Test Runner, configure it from the [Test Service Settings][2] page. Enabling Intelligent Test Runner requires the `Intelligent Test Runner Activation Write` permission.
 
 {{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog." style="width:80%;">}}
 
@@ -47,7 +47,13 @@ Due to the limitations described above, the default branch of your repository is
 
 If there are other branches you want to exclude, add them on the Test Service Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
 
-{{< img src="continuous_integration/itr_configuration.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
+Additionally, you may specify a set of tracked files. Intelligent Test Runner runs all tests if any of these files change.
+
+You may also use the `*` and `**` wildcard characters to match multiple files or directories. For instance, `**/*.mdx` matches any `.mdx` file in the repository.
+
+We recommend that you use tracked files for your dependency files (for example, `package.json`, `requirements.txt`) and for data files from data-driven tests, such as `tests/data/**`.
+
+{{< img src="continuous_integration/itr_configuration1.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
 ## Explore test sessions
 

@@ -1,6 +1,7 @@
 ---
 title: SLO List Widget
 kind: documentation
+widget_type: slo_list
 description: "Display a list of SLOs"
 aliases:
 further_reading:
@@ -31,9 +32,7 @@ When you are ready to create the widget, click **Save**.
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the SLO List widget is:
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
 {{< dashboards-widgets-api >}}
 
@@ -42,5 +41,5 @@ The dedicated [widget JSON schema definition][3] for the SLO List widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/service_level_objectives/
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

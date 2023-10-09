@@ -22,6 +22,8 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}Monitor UTM Campaigns in RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -47,5 +49,5 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrich your Session Replays with Shadow DOM components{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
-
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Browser Tests from Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

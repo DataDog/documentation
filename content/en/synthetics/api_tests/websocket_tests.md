@@ -58,7 +58,7 @@ After choosing to create an `WebSocket` test, define your test's request.
 <br/>
 
 4. **Name** your WebSocket test.
-5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+5. Add `env` **Tags** as well as any other tag to your WebSocket test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
 {{< img src="synthetics/api_tests/websocket_test_config.png" alt="Define WebSocket request" style="width:90%;" >}}
 

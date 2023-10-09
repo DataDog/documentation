@@ -44,6 +44,7 @@ title: モニターガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}
+    {{< nextlink href="/monitors/guide/custom_schedules" >}}カスタムスケジュールを追加して、モニター評価の頻度をカスタマイズ{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}算術演算とスパースメトリクスのモニター{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() モニター評価{{< /nextlink >}}
 {{< /whatsnext >}}

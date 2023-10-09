@@ -17,7 +17,14 @@ further_reading:
 - link: "monitors"
   tag: "Documentation"
   text: "Find out more about Monitors"
+- link: "/security/cloud_security_management/workflows"
+  tag: "Documentation"
+  text: "Automate Security Workflows with Workflow Automation"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 You can trigger a workflow manually or automatically.
 
@@ -62,6 +69,8 @@ To trigger a workflow from a Monitor:
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+
 ## Trigger a workflow from a Security Signal
 
 You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel.
@@ -82,6 +91,8 @@ To trigger a workflow from a Notification Rule:
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
+
 ### Trigger a workflow manually from Cloud SIEM Security Signals
 
 You can manually start a workflow from a Cloud SIEM Security Signal panel.
@@ -92,6 +103,8 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 1. Click **Run**.
 1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
+For additional examples of Security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
+
 ## Trigger a workflow on a schedule
 
 To schedule a workflow run:
@@ -100,6 +113,8 @@ To schedule a workflow run:
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
+
+<div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
 ## Debug a workflow
 
@@ -118,3 +133,4 @@ The initial **Debug** view for a workflow provides a panel with the list of prev
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules
+[4]: /security/cloud_security_management/workflows

@@ -87,7 +87,7 @@ You can change the default environment in **APM > Setup & Configuration > Settin
 
 {{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
 
-The performance metrics are tied to services' [primary operations][14]. If a service is only detected by APM, the performance view shows the APM [trace metrics][13]. If a service is only detected by USM, the performance view shows the [USM metrics][15]. If a service is detected by USM and APM, the performance view shows the the Trace Metrics instead of USM metrics.
+The performance metrics are tied to services' [primary operations][14]. If a service is only detected by APM, the performance view shows the APM [trace metrics][13]. If a service is only detected by USM, the performance view shows the [USM metrics][15]. If a service is detected by USM and APM, the performance view shows the Trace Metrics instead of USM metrics.
 
 Sort the table by clicking columns to reveal services that:
 - Deployed most recently, or have not deployed for a long time
