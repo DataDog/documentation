@@ -92,7 +92,7 @@ Don't see your desired libraries? You can check whether the library emits Open T
 
 ## OTEL based integrations
 
-Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that we have tested with this setup (more libraries provide tracing though, we aren't yet expliciitly testing them).
+Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
 
 | Framework or library            | NuGet package                                                                                        | Integration Name     |
 | ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
