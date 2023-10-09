@@ -501,6 +501,12 @@ set_redirect_metadata_preview:
     - build_preview
   script:
     - in-isolation run_update_redirect_metadata
+    # manually set specific file as download.
+    - aws s3api put-object \
+      --bucket "${BUCKET}" \
+      --key "/resources/xml/Datadog-SNow_Update_Set.xml" \
+      --content-disposition 'attachment;filename="Datadog-SNow_Update_Set.xml"' \
+      --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"
   interruptible: true
   allow_failure: true
 
