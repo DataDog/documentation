@@ -102,7 +102,7 @@ Compared to the flame graph, the timeline view can help you:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -119,6 +119,13 @@ For additional information about debugging slow p95 requests or timeouts using t
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 [2]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+See [prerequisites][1] to learn how to enable this feature for Ruby.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+
+[1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
