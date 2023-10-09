@@ -102,7 +102,7 @@ To [enable CSM Pro][1], you must first set up the Datadog cloud account integrat
 
 [1]: /security/cloud_security_management/setup/csm_enterprise
 [2]: /security/cloud_security_management/setup/csm_pro
-[3]: /security/cloud_security_management/setup/csm_workload_security
+[3]: /security/cloud_security_management/setup/csm_workload_security/
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/identity_risks/#setup
 [6]: /security/infrastructure_vulnerabilities/setup
