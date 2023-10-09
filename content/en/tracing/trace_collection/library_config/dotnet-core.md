@@ -225,6 +225,11 @@ The `from-key` value is specific to the integration type, and should exclude the
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
+`DD_TRACE_OTEL_ENABLED`
+Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -233,11 +238,6 @@ The following configuration variables are available **only** when using automati
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` or `false`.<br>
 **Default**: `true`
-
-`DD_TRACE_OTEL_ENABLED`
-Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
-Valid values are: `true` or `false`.<br>
-**Default**: `false`
 
 `DD_DBM_PROPAGATION_MODE`
 : Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
