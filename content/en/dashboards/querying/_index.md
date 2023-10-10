@@ -174,10 +174,10 @@ status:error / status:info
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
-Here is an example using the `max` operator to find the maximum value between `status:error' and `status:ok`.
+Here is an example using the `max` operator to find the maximum value between `status:error` and `status:ok`.
 
 ```text
-max(status:error, status:info)
+max(status:error, status:ok)
 ```
 
 {{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example - max apm" style="width:75%;" >}}
