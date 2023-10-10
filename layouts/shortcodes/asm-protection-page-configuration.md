@@ -39,11 +39,6 @@ Datadog.configure do |c|
   c.appsec.block.templates.html = '<path_to_file.html>'
   # To configure the application/json blocking page
   c.appsec.block.templates.json = '<path_to_file.json>'
-  # customize the status code that would be use on the blocking page
-  c.appsec.block.status = 401
-  # Only apply when the status code is [301, 302, 303, 307, 308]
-  # The value would be used to populate the Location HTTP header
-  c.appsec.block.location = "https://youhavebeenredirected.com"
 end
 ```
 
