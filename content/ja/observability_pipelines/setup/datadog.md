@@ -9,7 +9,7 @@ further_reading:
 - link: /observability_pipelines/production_deployment_overview/
   tag: ドキュメント
   text: 観測可能性パイプラインワーカーの本番デプロイ設計と原則
-- link: https://learn.datadoghq.com/courses/safe-and-secure-local-processing-with-observability-pipelines
+- link: https://dtdg.co/d22op
   tag: ラーニングセンター
   text: 観測可能性パイプラインによる安心・安全なローカル処理
 kind: ドキュメント
@@ -299,15 +299,15 @@ transforms:
       .ddtags.sender = "observability_pipelines_worker"
       .ddtags.opw_aggregator = get_hostname!()
 
-  ## ログインテークにデータを送信する前に、Agent が直接送信しているように
-  ## 見えるように、タグを期待される形式に再エンコードする必要が
+  ## ログ受信側にデータを送信する前に、Agent が直接送信しているかのように
+  ## 見せるために、タグを期待される形式に再エンコードする必要が
   ## あります。
   logs_finish_ddtags:
     type: remap
     inputs:
       - LOGS_YOUR_STEPS
     source: |
-      .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+      .ddtags = encode_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
 
   metrics_add_dd_tags:
     type: remap
@@ -322,8 +322,8 @@ transforms:
 ## - ログに 240GB のバッファ
 ## - メトリクスに 48GB のバッファ
 ##
-## これは OP ワーカーのデプロイの大部分で機能するはずで、
-## ほとんど調整する必要はないはずです。変更する場合は、必ず `ebs-drive-size-gb` パラメーターを
+## これは OP ワーカーのデプロイメントの大半に対して機能し、
+## ほとんど調整の必要はないはずです。もし変更する場合は、必ず `ebs-drive-size-gb` パラメーターを
 ## 更新してください。
 sinks:
   datadog_logs:
@@ -431,8 +431,7 @@ Google GKE では、Datadog は SSD でバックアップされた `premium-rwo`
 {{% tab "RPM ベースの Linux" %}}
 デフォルトでは、観測可能性パイプラインワーカーのデータディレクトリは `/var/lib/observability-pipelines-worker` に設定されています。サンプルの構成を使用する場合は、バッファリングに使用できる容量が少なくとも 288GB あることを確認する必要があります。
 
-可能であれば、その場所に別の SSD をマウントすることをお勧めします。 
-{{% /tab %}}
+可能であれば、その場所に別の SSD をマウントすることをお勧めします。 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 デフォルトでは、各インスタンスに 288GB の EBS ドライブが割り当てられており、上記のサンプル構成では、これをバッファリングに使用するように設定されています。
 {{% /tab %}}

@@ -1,5 +1,3 @@
-## Information collected
-
 When CI Visibility is enabled, the following data is collected from your project:
 
 * Test names and durations.
