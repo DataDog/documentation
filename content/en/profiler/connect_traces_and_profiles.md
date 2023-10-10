@@ -58,7 +58,9 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-Requires `dd-trace-rb` version 0.49.0+.
+To enable the new [timeline feature](#span-execution-timeline-view) (beta):
+- upgrade to `dd-trace-rb` 1.15+
+- set `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=true`
 
 [1]: /profiler/enabling/ruby
 {{< /programming-lang >}}
@@ -165,7 +167,7 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -183,6 +185,11 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Debug Go Request Latency with Datadog's Profiling Timeline][1].
 
 [1]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Ruby.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
