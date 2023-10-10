@@ -218,7 +218,7 @@ To monitor RDS hosts, install the Datadog Agent in your infrastructure and confi
 
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. Set the `region` parameter to configure the Agent to connect using IAM authentication. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
    ```yaml
    init_config:
    instances:
