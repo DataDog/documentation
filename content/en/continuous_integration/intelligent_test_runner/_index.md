@@ -10,14 +10,15 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
-Intelligent Test Runner is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
+## Overview
 
+Intelligent Test Runner is Datadog's test impact analysis solution. It automatically selects and runs only the relevant tests for a given commit based on the code being changed. Significantly reduce time spent testing and overall CI costs, while maintaining test coverage.
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings.">}}
 
 Intelligent Test Runner works by analyzing your test suite to determine the code each test covers, and then cross-referencing that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration.
 
-By minimizing the number of tests run per commit, Intelligent Test Runner reduces the frequency of flaky tests disrupting your pipelines. Flaky tests are tests that may pass or fail at random given the same commit. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
+By minimizing the number of tests run per commit, Intelligent Test Runner reduces the frequency of [flaky tests][5] disrupting your pipelines. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
 
 ### Limitations
 
@@ -25,16 +26,16 @@ There are known limitations in the current implementation of Intelligent Test Ru
 
 To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 
-## Set up Datadog library
+## Set up a Datadog library
 
 Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][1] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/intelligent_test_runner/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/setup/python" >}}Python{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Configuration
@@ -67,7 +68,7 @@ When Intelligent Test Runner is active and skipping tests, purple text displays 
 
 ## Explore adoption and global savings
 
-Track you organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][4]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
+Track your organization's savings and adoption of Intelligent Test Runner through the out-of-the-box [Intelligent Test Runner dashboard][4]. The dashboard includes widgets to track your overall savings as well as a per-repository, per-committer, and per-service view of the data. View the dashboard to understand which parts of your organization are using and getting the most out of Intelligent Test Runner.
 
 {{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner dashboard" style="width:80%;">}}
 
@@ -83,3 +84,4 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 [2]: https://app.datadoghq.com/ci/settings/test-service
 [3]: https://app.datadoghq.com/ci/test-runs
 [4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner
+[5]: /glossary/#flaky-test

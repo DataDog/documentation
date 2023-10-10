@@ -1,13 +1,18 @@
 ---
 title: Intelligent Test Runner for .NET
 kind: documentation
+code_lang: dotnet
+type: multi-code-lang
+code_lang_weight: 0
+aliases:
+  - continuous_integration/intelligent_test_runner/dotnet/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 ## Compatibility
@@ -16,15 +21,23 @@ Intelligent Test Runner is only supported on `dd-trace>= 2.22.0` (execute `dd-tr
 
 ## Setup
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for .NET][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
+### Test Visibility
 
-To enable Intelligent Test Runner, set the following environment variables:
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for .NET][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+
+### Enable Intelligent Test Runner
+
+To enable Intelligent Test Runner, set the following environment variable:
 
 `DD_APPLICATION_KEY` (Required)
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-After setting these environment variables, run your tests as you normally do by using [dotnet test][4] or [VSTest.Console.exe][5]:
+{{% ci-itr-activation-instructions %}}
+
+## Run tests with the Intelligent Test Runner enabled
+
+After setting the environment variable, run your tests as you normally do by using [dotnet test][4] or [VSTest.Console.exe][5]:
 
 {{< tabs >}}
 
@@ -47,12 +60,6 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 {{% /tab %}}
 
 {{< /tabs >}}
-
-
-#### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
 
 ## Further Reading
 
