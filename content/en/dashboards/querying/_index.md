@@ -180,7 +180,7 @@ Here is an example using the `max` operator to find the maximum value between `s
 max(status:error, status:info)
 ```
 
-{{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example - logs ratio" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example - max apm" style="width:75%;" >}}
 
 
 
