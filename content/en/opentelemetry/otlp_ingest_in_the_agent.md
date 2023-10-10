@@ -15,7 +15,7 @@ further_reading:
 ---
 
 
-OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP.
+OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP. 
 
 OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog library specific features aren't available for the ingested data including Application Security Management, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
 
@@ -62,7 +62,24 @@ These must be passed to both the core Agent and trace Agent processes. If runnin
 
 Configure either gRPC or HTTP for this feature. Here is [an example application that shows configuration for both][1].
 
+OTLP logs ingestion on the Datadog Agent is disabled by default so that you don't have unexpected logs product usage that may impact billing. To enable OTLP logs ingestion:
+
+1. Explicitly enable log collection as a whole by following [Host Agent Log collection setup][2]:
+
+   ```yaml
+   logs_enabled: true
+   ```
+
+2. Set `otlp_config.logs.enabled` to true:
+
+   ```yaml
+   otlp_config:
+     logs:
+       enabled: true
+   ```
+
 [1]: https://gist.github.com/gbbr/4a54dd02d34ad05e694952e0a02e1c67
+[2]: /agent/logs/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -71,6 +88,10 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
 2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port: 
    - For gPRC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
    - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
+
+3. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the Datadog Agent container:
+   - Set `DD_LOGS_ENABLED` to true.
+   - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
 [1]: /agent/docker/
 {{% /tab %}}
@@ -111,7 +132,22 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
        protocol: TCP
    ```
 
+4. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the core Agent container:
+
+   Enable [log collection with your DaemonSet][2]:
+   ```
+   name: DD_LOGS_ENABLED
+   value: "true"
+   ```
+
+   And enable OTLP logs ingestion:
+   ```
+   name: DD_OTLP_CONFIG_LOGS_ENABLED
+   value: "true"
+   ```
+
 [1]: /agent/kubernetes/?tab=daemonset
+[2]: /containers/guide/kubernetes_daemonset/#log-collection
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm) - values.yaml" %}}
@@ -167,7 +203,7 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
 
 There are many other environment variables and settings supported in the Datadog Agent. To get an overview of them all, see [the configuration template][6].
 
-## Sending OpenTelemetry traces and metrics to Datadog Agent
+## Sending OpenTelemetry traces, metrics, and logs to Datadog Agent
 
 {{< tabs >}}
 {{% tab "Docker" %}}
