@@ -174,12 +174,13 @@ status:error / status:info
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
-Here is an example using the `max` operator to find the maximum value between `error` logs and `info` logs.
+Here is an example using the `max` operator to find the maximum value between `status:error' and `status:ok`.
 
 ```text
 max(status:error, status:info)
 ```
 
+{{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 
 
