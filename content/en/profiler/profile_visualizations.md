@@ -92,7 +92,9 @@ The timeline view is the equivalent of the flame graph, with a distribution over
 
 {{< img src="profiler/profiling_viz-timeline.png" alt="A timeline" >}}
 
-It shows time-based patterns and work distribution over the period of a single profile.
+It shows time-based patterns and work distribution over:
+- [The period of a single profile](#single-profile)
+- [A trace][5]
 
 Compared to the flame graph, the timeline view can help you:
 
@@ -138,8 +140,8 @@ Lanes on top are runtime activities that may impact performance.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /tracing/send_traces/#configure-your-environment
 [2]: /tracing/glossary/#services
 [3]: https://app.datadoghq.com/profiling/search?viz=timeseries
 [4]: /profiler/profile_types/
+[5]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
