@@ -3841,6 +3841,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
     weight: 604
+  - name: Playlists
+    url: real_user_monitoring/session_replay/playlists
+    parent: rum_session_replay
+    identifier: rum_session_replay_playlists
+    weight: 605
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
