@@ -26,7 +26,7 @@ There are four types of qualification outcomes and you can use the facet menu to
 |------|-------------|
 | `Unknown` | ASM has qualification rules for this attack, but did not have enough information to make a qualification decision. |
 | *No value* | ASM does not have qualification rules for this type of attack. |
-| `None successful` | ASM determined that no attacks in this trace could be harmful. |
+| `None successful` | ASM determined that attacks in this trace were not harmful. |
 | `Harmful` | At least one attack in the trace was successful. |
 
 
