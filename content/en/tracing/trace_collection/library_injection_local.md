@@ -1069,7 +1069,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
    ```shell
    dd-container-install --uninstall
    ```
-2. Restart Docker with the following or the equivalent for your environment:
+2. Restart Docker:
    ```shell
    systemctl restart docker
    ```
