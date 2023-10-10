@@ -1,13 +1,18 @@
 ---
 title: Intelligent Test Runner for Python
 kind: documentation
+code_lang: python
+type: multi-code-lang
+code_lang_weight: 30
+aliases:
+  - continuous_integration/intelligent_test_runner/python/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< callout header="false" url="#" btn_hidden="true" >}}Intelligent Test Runner for Python (using pytest) in beta.{{< /callout >}}
@@ -23,12 +28,11 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 ## Setup
 
-### Test Visibility setup
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40+/v7.40+.
+### Test Visibility 
 
-{{% ci-itr-activation-instructions %}}
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
-### Configuring the test runner environment
+### Configure the test runner environment
 
 {{< tabs >}}
 
@@ -42,10 +46,13 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 {{< /tabs >}}
 
-## Running tests with the Intelligent Test Runner enabled
+{{% ci-itr-activation-instructions %}}
 
-### Environment variable
-<div class="alert alert-info">Setting DD_CIVISIBILITY_ITR_ENABLED to true is required while the Intelligent Test Runner support for pytest is in beta. </div>
+## Run tests with the Intelligent Test Runner enabled
+
+<div class="alert alert-info">Setting <code>DD_CIVISIBILITY_ITR_ENABLED</code> to true is required while the Intelligent Test Runner support for pytest is in beta. </div>
+
+To run tests on services with the Intelligent Test Runner enabled, set `DD_CIVISIBILITY_ITR_ENABLED` to true.
 
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
 : Enable the Intelligent Test Runner coverage and test skipping features<br />

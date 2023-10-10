@@ -2,13 +2,18 @@
 title: Intelligent Test Runner for Swift
 kind: documentation
 is_beta: true
+code_lang: swift
+type: multi-code-lang
+code_lang_weight: 40
+aliases:
+  - continuous_integration/intelligent_test_runner/swift/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Swift is in beta.{{< /callout >}}
@@ -19,9 +24,13 @@ Intelligent Test Runner is only supported on `dd-sdk-swift>= 2.2.0`.
 
 ## Setup
 
-Prior to setting up Intelligent Test Runner, set up [Test Visibility for Swift][1]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or --enable-code-coverage must be added to your Swift test command (if using a SPM target).
+### Test Visibility
 
-If you are reporting data through the Agent, use v6.40+/v7.40+.
+Prior to setting up Intelligent Test Runner, set up [Test Visibility for Swift][1]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
+
+If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
+
+### Enable Intelligent Test Runner
 
 To enable Intelligent Test Runner, set the following environment variables:
 
@@ -34,10 +43,7 @@ To enable Intelligent Test Runner, set the following environment variables:
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-#### UI activation
-In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
-
-{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+{{% ci-itr-activation-instructions %}}
 
 ## Further Reading
 
