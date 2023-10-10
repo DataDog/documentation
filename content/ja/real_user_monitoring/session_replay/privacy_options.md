@@ -9,7 +9,7 @@ further_reading:
   tag: ブログ
   text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
 kind: documentation
-title: セッションリプレイのプライバシーオプション
+title: セッションリプレイブラウザのプライバシーオプション
 ---
 
 ## 概要
@@ -58,7 +58,8 @@ datadogRum.startSessionReplayRecording();
 **注:** デフォルトでは、セッションリプレイを有効にすると、`mask-user-input` がプライバシー設定になり、すべての入力フィールドが自動的にマスクされます。
 
 ### マスクモード
-`defaultPrivacyLevel` を `mask` に設定すると、すべての HTML テキスト、ユーザー入力、画像、リンクがマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
+
+`defaultPrivacyLevel` を `mask` モードに設定すると、すべての HTML テキスト、ユーザー入力、画像、リンク、 [`data-*` 属性[1]がマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="マスクモード" style="width:70%;">}}
 
@@ -103,6 +104,7 @@ datadogRum.startSessionReplayRecording();
 
 ### 要素を完全に非表示にする
 
+
 `hidden` は高度なプライバシー設定で、テキストを見えなくする代わりに、特定の要素を完全に隠します。
 
 機密性の高いフィールドで可視要素の数が気になる場合は、特定の要素に対して `hidden` を有効にしてください。これらの HTML 要素は、記録時にグレーのブロックに置き換えられます。
@@ -110,6 +112,8 @@ datadogRum.startSessionReplayRecording();
 このリプレイセッションの例では、Datadog のナビゲーションにあるユーザー名が難読化されています。
 
 {{< img src="real_user_monitoring/session_replay/hidden.png" alt="ユーザー名を難読化する非表示モードの例" style="width:60%;">}}
+
+
 
 ### アクション名のオーバーライド
 
@@ -130,3 +134,5 @@ Datadog は、RUM とセッションリプレイにさらなるプライバシ�
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

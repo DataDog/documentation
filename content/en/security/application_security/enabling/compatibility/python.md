@@ -15,6 +15,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | Threat Protection | 1.10.0  |
 | Vulnerability Management for Open Source Software (OSS) | 1.5.0  |
 | Vulnerability Management for Code-level (beta)  |  private beta  |
+| Automatic user activity event tracking | 1.17.0 |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version. 
 
@@ -23,7 +24,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
 | AWS Lambda    | {{< X >}}         |                           |   
 
@@ -83,8 +84,19 @@ Support for query strings is not available for Flask.
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is supported on all frameworks.
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-- 
+-
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Framework Versions   |
+|-------------------| --------------------------- |
+| Django            | 1.11, 2.2, 3.2, >= 4.0
 
 [1]: /tracing/trace_collection/compatibility/python/
 [2]: /agent/remote_config/#enabling-remote-configuration

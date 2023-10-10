@@ -35,6 +35,7 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターの RBAC の設定方法{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Synthetic テストでモニターを作成する方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}異常モニター{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/change-alert" >}}アラートモニターの変更{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}エフェメラルサーバーの再起動を監視する{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}ローカルタイムゾーンを考慮した異常検出モニターの更新方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}モニター設定の変更が反映されない{{< /nextlink >}}
@@ -43,6 +44,7 @@ title: モニターガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}
+    {{< nextlink href="/monitors/guide/custom_schedules" >}}カスタムスケジュールを追加して、モニター評価の頻度をカスタマイズ{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}算術演算とスパースメトリクスのモニター{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() モニター評価{{< /nextlink >}}
 {{< /whatsnext >}}

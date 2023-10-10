@@ -5,12 +5,13 @@ further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
   text: "Learn more about Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
+  tag: "Blog"
+  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Identity Risks is not available in this site.
-</div>
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">CSM Identity Risks is in beta.</div>
@@ -23,7 +24,7 @@ Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth 
 
 To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4]. If you've already done this, no additional setup is required.
 
-**Note**: If you've enabled [Cloud Security Posture Management][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
+**Note**: If you've enabled [Cloud Security Management Misconfigurations][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
 
 ## Review and remediate identity risks
 

@@ -16,6 +16,7 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | Threat Protection  | 3.19.0  |
 | Vulnerability Management for Open Source Software (OSS) |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
 | Vulnerability Management for Code-level (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
+| Automatic user activity event tracking | 2.38.0 for NodeJS 12+, or 3.25.0 for NodeJS 14+, or 4.4.0 for NodeJS 16+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.
 
@@ -28,7 +29,7 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
 | AWS Lambda    | {{< X >}}         | beta                      |   
 
@@ -144,6 +145,18 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | [tedious][41]          | `>=1`    |{{< X >}}|{{< X >}} |          |
 | [sequelize][42]        | `>=4`    |         |          | {{< X >}}|
 
+
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- The Account Takeover detection monitoring the user login events
+
+| Framework         | Minimum Framework Version   |
+|-------------------| --------------------------- |
+| passport-local    | 1.0.0                       |
+| passport-http     | 0.3.0                       |
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration

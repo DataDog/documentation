@@ -143,7 +143,7 @@ Pour une configuration sur un conteneur Docker unique, installez l'Agent Datadog
 5. Imposez une version spécifique de l'Agent en définissant `DD_AGENT_VERSION` dans `option_settings`. Ainsi, tous les hosts exécuteront la même version de l'Agent.
 6. Déployez votre application avec la [console Elastic Beanstalk][6], [l'interface de ligne de commande EB][7] ou [l'interface de ligne de commande AWS][8].
 
-Vous pouvez ajouter des paramètres d'Agent supplémentaires dans `/etc/datadog-agent/datadog.yaml`. 
+Vous pouvez ajouter des paramètres d'Agent supplémentaires dans `/etc/datadog-agent/datadog.yaml`.
 
 Par exemple, pour activer la surveillance des live processes, définissez ce qui suit :
 
@@ -156,7 +156,7 @@ process_config:
 
 Pour activer le tracing pour des conteneurs Docker uniques :
 
-1. Modifiez la section `/etc/datadog-agent/datadog.yaml` dans le fichier `99datadog.config` en spécifiant `apm_non_local_traffic`, avec le format suivant :
+1. Modifiez la section `/etc/datadog-agent/datadog.yaml` du fichier `99datadog.config` en ajoutant `apm_non_local_traffic` avec le format suivant :
 
     ```
     apm_config:
@@ -164,7 +164,7 @@ Pour activer le tracing pour des conteneurs Docker uniques :
       apm_non_local_traffic: "true"
     ```
 
-2. Configurez les bibliothèques de tracing de manière à faire passer les traces par l'[IP de passerelle du pont][9], qui correspond par défaut à `172.17.0.1` à l'intérieur du conteneur d'application. Si vous n'êtes pas sûr qu'il s'agit de l'IP de passerelle, exécutez la commande `docker inspect <id conteneur>` pour le vérifier.
+2. Configurez les bibliothèques de tracing de manière à faire passer les traces par l'[IP de passerelle du pont][9], qui correspond par défaut à `172.17.0.1` à l'intérieur du conteneur d'application. Si vous n'êtes pas sûr de l'IP de passerelle, exécutez la commande `docker inspect <id conteneur>` pour la vérifier.
 
 Pour tous les langages, définissez la variable d'environnement `DD_AGENT_HOST` sur l'IP de passerelle. Pour les langages ci-dessous, vous pouvez également définir le nom du host par programmation comme suit :
 

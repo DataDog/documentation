@@ -2,7 +2,7 @@
 title: How Datadog Determines if Resources are Publicly Accessible
 kind: guide
 further_reading:
-- link: "/security/cspm"
+- link: "/security/misconfigurations"
   tag: "Documentation"
   text: "Start tracking misconfigurations with CSM Misconfigurations"
 - link: "/security/default_rules/#cat-cloud-security-management"
@@ -16,7 +16,7 @@ For more information on network reachability, see the [AWS documentation][34] an
 
 ## Resource dependency graph
 
-The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a Cloudtrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations Resource relationships graph.
+The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a CloudTrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations Resource relationships graph.
 
 Use this diagram as a reference for how resources are correlated to determine public accessibility. 
 
@@ -53,13 +53,13 @@ An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 
-### Amazon Cloudtrail Trail
+### AWS CloudTrail Trail
 
-A [Cloudtrail Trail][3] (`aws_cloudtrail_trail`) is considered publicly accessible if:
+A [CloudTrail Trail][3] (`aws_cloudtrail_trail`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The trail's `s3_bucket_name` is set to an S3 bucket that is considered publicly accessible. |Cloudtrail Trails are log files that are delivered to S3 buckets. If the trail is stored in a public S3 bucket, then that trail is publicly accessible. |
+|The trail's `s3_bucket_name` is set to an S3 bucket that is considered publicly accessible. |CloudTrail Trails are log files that are delivered to S3 buckets. If the trail is stored in a public S3 bucket, then that trail is publicly accessible. |
 
 ### Amazon VPC Subnet
 

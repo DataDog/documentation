@@ -11,7 +11,7 @@ Watchdog looks for specific types of root causes. Watchdog Root Cause Analysis (
 
 - Version changes, as captured by the `version` tag on your [APM services][1]
 - Traffic increases, as captured by hit rate metrics on your APM-instrumented services
-- AWS instance failures, as captured by [AWS EC2 integration metrics][2]
+- AWS instance failures, as captured by [Amazon EC2 integration metrics][2]
 - Running out of disk space, as captured by [system metrics][3] from the Datadog agent
 
 If you don't see a root cause, it's likely that the specific root cause is not one of the types described above or there isn't instrumentation configured to capture it.

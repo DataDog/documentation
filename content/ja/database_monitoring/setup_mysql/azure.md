@@ -146,12 +146,12 @@ instances:
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップから
+    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップより
 
-     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後に、CPU やメモリなどの追加のクラウドデータを取得するために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 `deployment_type` と `name` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
@@ -192,7 +192,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<AZURE_INSTANCE_ENDPOINT>"
+      "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -207,7 +207,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 `deployment_type` と `name` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
@@ -247,7 +247,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -267,7 +267,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 ### Kubernetes サービスアノテーションで構成する
@@ -296,7 +296,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -345,7 +345,7 @@ Azure からより包括的なデータベースメトリクスを収集する�
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.microsoft.com/en-us/azure/mysql/howto-server-parameters
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /ja/integrations/azure_db_for_mysql

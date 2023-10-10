@@ -118,7 +118,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Ruby" %}}
 
-**Note:** Client IP are not collected by default and must be enabled.
+**Note:** Client IPs are not collected by default and must be enabled.
 
 | Category            | Collected                       | Obfuscated                      |
 |:--------------------|:-------------------------------:|:-------------------------------:|
@@ -129,6 +129,85 @@ The table below describes the default behavior of each language tracing library 
 | Geographic location |                                 |                                 |
 | URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | URI userinfo        |                                 |                                 |
+
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+**Note:** Client IPs are not collected by default and must be enabled. Database statements and
+Client URIs are obfuscated by the Datadog Agent.
+
+| Category                | Collected                       | Obfuscated                      |
+|:------------------------|:-------------------------------:|:-------------------------------:|
+| Name                    |                                 |                                 |
+| Email                   |                                 |                                 |
+| Client IP               | <i class="icon-check-bold"></i> |                                 |
+| Database statements     | <i class="icon-check-bold"></i> |                                 |
+| Geographic location     |                                 |                                 |
+| Client URI path         | <i class="icon-check-bold"></i> |                                 |
+| Client URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Server URI path         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Server URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| HTTP body               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| HTTP cookies            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| HTTP headers            | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+
+{{% /tab %}}
+
+{{% tab "Nginx" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         | <i class="icon-check-bold"></i> |            |
+| Client URI query string | <i class="icon-check-bold"></i> |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
+{{% tab "Kong" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         | <i class="icon-check-bold"></i> |            |
+| Client URI query string |                                 |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
+{{% tab "Envoy" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         |                                 |            |
+| Client URI query string |                                 |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
 
 {{% /tab %}}
 
@@ -247,7 +326,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Http" %}}
 
-HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http`:
+HTTP obfuscation rules for `http.url` metadata in [spans][1] of type `http` or `web`:
 
 ```yaml
 apm_config:
@@ -261,8 +340,8 @@ apm_config:
       remove_paths_with_digits: true
 ```
 
-* `remove_query_string`: If true, obfuscates query strings in URLs.
-* `remove_paths_with_digits`: If true, path segments in URLs containing digits are replaced by "?".
+* `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
+* `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
 
 
 [1]: /tracing/glossary/#spans

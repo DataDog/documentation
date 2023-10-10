@@ -16,6 +16,7 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | Threat Protection  | 2.26.0|
 | Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
 | Vulnerability Management for Code-level (beta)| private beta  |
+| Automatic user activity event tracking | 2.32.0 |
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.26.0.
 
@@ -26,7 +27,7 @@ The minimum tracer version to get all supported ASM capabilities for .NET is 2.2
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  | {{< X >}} |
 | Kubernetes | {{< X >}}  | {{< X >}} | 
-| AWS ECS | {{< X >}}  | {{< X >}} |
+| Amazon ECS | {{< X >}}  | {{< X >}} |
 | AWS Fargate | {{< X >}}  | {{< X >}} |
 | AWS Lambda | {{< X >}} | | 
 | Azure App Service | {{< X >}}  | {{< X >}} |
@@ -90,6 +91,18 @@ These are supported on the following architectures:
 | SQL Server         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | MySQL       | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | SQLite         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
+
+### User Authentication Frameworks compatibility
+
+Integrations to **User Authentication Frameworks provides:**
+
+- User login events including the user IDs
+- User signup events (apps using built-in SignInManager)
+- Account Takeover detection monitoring for user login events
+
+| Framework         |
+|-------------------|
+| > .Net Core 2.1   |
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/

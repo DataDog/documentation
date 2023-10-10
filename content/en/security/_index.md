@@ -2,9 +2,10 @@
 title: Datadog Security
 kind: documentation
 aliases:
-  - compliance_monitoring
-  - cloud_siem
-  - security_platform
+  - /compliance_monitoring
+  - /cloud_siem
+  - /security_platform
+  - /security/security_monitoring
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
@@ -15,10 +16,10 @@ further_reading:
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
-  - link: "/security/cspm/setup"
+  - link: "/security/misconfigurations/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with CSM Misconfigurations"
-  - link: "/security/cloud_workload_security/setup"
+  - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
   - link: "https://securitylabs.datadoghq.com/"
@@ -82,12 +83,10 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [4]: /security/cloud_siem
 [5]: /logs/
 [6]: https://www.datadoghq.com/blog/automated-vulnerability-remediation-datadog/
-[7]: /security/cspm/
-[8]: /security/cloud_workload_security/
 [9]: https://app.datadoghq.com/security/configuration
 [10]: /security/cloud_security_management/
-[11]: /security/cspm/
-[12]: /security/cloud_workload_security/
+[11]: /security/misconfigurations/
+[12]: /security/threats/
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/identity_risks/

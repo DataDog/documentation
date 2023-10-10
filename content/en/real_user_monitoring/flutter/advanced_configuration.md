@@ -35,7 +35,46 @@ final _router = GoRouter(
 MaterialApp.router(
   routerConfig: _router,
   // Your remaining setup
-)
+);
+```
+
+If you are using ShellRoutes, you need to supply a separate observer to each `ShellRoute`, as shown below. See [this bug][11] for more information.
+
+```dart
+final _router = GoRouter(
+  routes: [
+    ShellRoute(build: shellBuilder),
+    routes: [
+      // Additional routes
+    ],
+    observers: [
+      DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+    ],
+  ],
+  observers: [
+    DatadogNavigationObserver(datadogSdk: DatadogSdk.instance),
+  ],
+);
+MaterialApp.router(
+  routerConfig: _router,
+  // Your remaining setup
+);
+```
+
+Additionally, if you are using `GoRoute`'s `pageBuilder` parameter over its `builder` parameter, ensure that you are passing on the `state.pageKey` value and the `name` value to your `MaterialPage`.
+
+```dart
+GoRoute(
+  name: 'My Home',
+  path: '/path',
+  pageBuilder: (context, state) {
+    return MaterialPage(
+      key: state.pageKey,       // Necessary for GoRouter to call Observers
+      name: name,               // Needed for Datadog to get the right route name
+      child: _buildContent(),
+    );
+  },
+),
 ```
 
 ### AutoRoute
@@ -286,6 +325,10 @@ For example, if the current tracking consent is `TrackingConsent.pending` and yo
 
 Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
 
+## Flutter-specific performance metrics
+
+To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `RumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][12]. 
+
 ## Sending data when device is offline
 
 RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
@@ -308,3 +351,5 @@ This means that even if users open your application while offline, no data is lo
 [8]: https://pub.dev/packages?q=go_router
 [9]: https://pub.dev/packages/auto_route
 [10]: https://pub.dev/packages/beamer
+[11]: https://github.com/flutter/flutter/issues/112196
+[12]: /real_user_monitoring/flutter/mobile_vitals

@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
+  - /security/guide/how-appsec-works/
 further_reading:
 - link: "/security/application_security/enabling/compatibility"
   tag: "Documentation"
@@ -15,6 +16,10 @@ further_reading:
   tag: "Documentation"
   text: "Enable Application Security Management"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 

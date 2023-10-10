@@ -64,7 +64,7 @@ This line graph plots latency (in milliseconds) experienced by users on the y-ax
 
 Datadog offers a variety of visualization options to help users easily graph and display their metrics. 
 
-Metric query consists of the same two evaluation steps to start: 1) time aggregation, 2) space aggregation. See the [anatomy of a metric query][6] for more information.
+A metric query consists of the same two evaluation steps to start: time aggregation and space aggregation. See the [anatomy of a metric query][6] for more information.
 
 {{< whatsnext desc="Two visualization offerings that Metrics users often find useful are:">}}
     {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Query Value Widget</u> - Reduces the results of those two steps into a single value.{{< /nextlink >}}

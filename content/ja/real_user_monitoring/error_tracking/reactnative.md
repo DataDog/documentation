@@ -48,9 +48,12 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 
 ## 制限
 
-<div class="alert alert-warning"><p>
-Datadog は、US1 または EU1 サイトでは 200 MB まで、それ以外のサイトでは 50 MB までのアップロードを受け付けます。
-</p></div>
+{{< site-region region="us,us3,us5,eu" >}}
+Datadog は最大 **300** MB までのアップロードを受け付けます。
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Datadog は最大 **50** MB までのアップロードを受け付けます。
+{{< /site-region >}}
 
 ソースマップとバンドルのサイズを計算するには、次のコマンドを実行します。
 
@@ -367,11 +370,11 @@ yarn datadog-ci react-native upload --platform android --service $SERVICE --bund
 
 #### 各ビルドで手動
 
-`android/app/build.gradle` ファイルで、プラグインを追加し、**ファイルの一番上で**これを構成します。
+`android/app/build.gradle` ファイルで、[プラグインの最新バージョン][15]を追加し、**ファイルの一番上で**これを構成します。
 
 ```groovy
 plugins {
-    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "1.5.1"
+    id("com.datadoghq.dd-sdk-android-gradle-plugin") version "x.y.z"
 }
 
 datadog {
@@ -417,7 +420,7 @@ datadog {
 [3]: /ja/real_user_monitoring/reactnative/
 [4]: /ja/real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
-[6]: https://github.com/datadog/dd-sdk-android-gradle-plugin
+[6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://github.com/cwhenderson20/react-native-crash-tester
 [9]: https://fastlane.tools/
 [10]: https://appcenter.ms/
@@ -425,3 +428,4 @@ datadog {
 [12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
+[15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin

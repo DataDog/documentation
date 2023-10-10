@@ -16,6 +16,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Threat Protection| 1.9.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.1.4 |
 | Vulnerability Management for Code-level (beta) | 1.15.0|
+| Automatic user activity event tracking | 1.20.0 |
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
@@ -26,7 +27,7 @@ The minimum tracer version to get all supported ASM capabilities for Java is 1.1
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
 | AWS Lambda    | {{< X >}}         |                           |   
 | Azure App Service | {{< X >}}     | {{< X >}}                 |
@@ -143,7 +144,18 @@ Datadog does not officially support any early-access versions of Java.
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Minimum Framework Version |
+|-------------------|---------------------------|
+| Spring Security   | 5.5+                      |
+
 
 [1]: /tracing/trace_collection/compatibility/java/
 [2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[3]: security/application_security/vulnerability_management/#detect-custom-code-vulnerabilities
+[3]: /security/application_security/vulnerability_management/#manage-code-level-vulnerabilities

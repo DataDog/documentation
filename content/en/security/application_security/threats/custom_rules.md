@@ -33,7 +33,10 @@ Another example is customizing a rule to exclude an internal security scanner. A
 In these situations, a custom detection rule can be created to exclude such events. This guide shows you how to create a custom detection rule for ASM.
 
 ## Business logic abuse detection rule
+
 ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
+
+Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt out of the automatic user activity event tracking][8].
 
 You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
 
@@ -114,3 +117,5 @@ Use the **Tag resulting signals** dropdown menu to add tags to your signals. For
 [5]: /security/notifications/variables/
 [6]: /security/notifications/variables/#template-variables
 [7]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[8]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+

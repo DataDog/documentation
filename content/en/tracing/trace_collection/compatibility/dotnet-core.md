@@ -33,8 +33,8 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | latest               |
+| .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
 | .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
 | .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
@@ -64,8 +64,9 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
-| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
+| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
+| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
@@ -85,7 +86,6 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
-| WCF (server)                    | built-in                                                                                             | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.

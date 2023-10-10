@@ -95,7 +95,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -149,10 +149,10 @@ instances:
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 
-     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU and Memory.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -193,7 +193,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<AZURE_INSTANCE_ENDPOINT>"
+      "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -208,7 +208,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -248,7 +248,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -268,7 +268,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -297,7 +297,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
