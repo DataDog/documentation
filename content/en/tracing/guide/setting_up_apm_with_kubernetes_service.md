@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-In Kubernetes Datadog tracers can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data it arrives to the Datadog Agent pod on the same node.
+In Kubernetes, Datadog tracers can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data, the data arrives at a Datadog Agent pod on the same node.
 
 This strategy is meant to properly balance traffic and ensure the correct tagging of your data.
 
@@ -20,9 +20,9 @@ Datadog recommends that you use UDS to send data. However, if the `hostPath` vol
 
 ## Service setup
 
-In Kubernetes 1.22 the [Internal Traffic Policy feature][1] was added, giving the option to set the configuration `internalTrafficPolicy: Local` on the service. When set this directs the traffic from an application pod to the service's downstream pod *on the same node*.
+In Kubernetes 1.22, the [Internal Traffic Policy feature][1] orovides the option to set the configuration `internalTrafficPolicy: Local` on a service. When set, traffic from an application pod is directed to the service's downstream pod *on the same node*.
 
-A service for the Agent using this feature is created for you automatically in our Datadog Helm Chart and Datadog Operator on Kubernetes clusters with version 1.22.0 or above. You additionally need to enable the APM port option for your Agent with the below configuration.
+A service for the Agent using this feature is created for you automatically by the Datadog Helm chart and Datadog Operator on clusters with Kubernetes v1.22.0+. You additionally need to enable the APM port option for your Agent with the below configuration.
 
 ### Agent configuration
 {{< tabs >}}
@@ -52,10 +52,10 @@ spec:
 {{< /tabs >}}
 
 ## Application configuration
-You can configure your application to use the Kubernetes service manually, or by using the Cluster Agent Admission Controller.
+You can configure your application to use the Kubernetes service by using the Cluster Agent Admission Controller, or with a manual configuration.
 
-### Admission controller
-The [Cluster Agent's Admission Controller][2] can inject the configuration for APM connectivity into your containers. This has the configuration mode of `hostip`, `socket`, or `service` relative to the 3 options. Choose the `service` mode to have the Admission Controller add the `DD_AGENT_HOST` environment variable for the DNS name of the service.
+### Cluster Agent Admission Controller
+The [Cluster Agent's Admission Controller][2] can inject the configuration for APM connectivity into your containers. The options are `hostip`, `socket`, or `service`. Choose the `service` mode to have the Admission Controller add the `DD_AGENT_HOST` environment variable for the DNS name of the service.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
