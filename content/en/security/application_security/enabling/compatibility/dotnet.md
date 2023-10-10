@@ -14,7 +14,7 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
-| Customize protection behavior | 2.27.0 |
+| Customize response to blocked requests | 2.27.0 |
 | Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
 | Vulnerability Management for Code-level (beta)| private beta  |
 | Automatic user activity event tracking | 2.32.0 |
