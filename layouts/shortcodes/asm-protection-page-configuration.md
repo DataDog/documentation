@@ -18,7 +18,8 @@ Alternatively, you can use the configuration entry.
 {{< programming-lang lang="java" >}}
 
 ```java
-
+dd.appsec.http.blocked.template.html = '<path_to_file.html>'
+dd.appsec.http.blocked.template.json = '<path_to_file.json>'
 ```
 {{< /programming-lang >}}
 
