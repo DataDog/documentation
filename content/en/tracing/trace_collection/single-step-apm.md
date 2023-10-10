@@ -127,11 +127,15 @@ Run the following commands and restart the infrastructure to remove library inje
 
 {{% tab "Docker" %}}
 
-1. Run:
+1. Uninstall local library injection:
    ```shell
    dd-container-install --uninstall
    ```
-2. Restart your container.
+2. Restart Docker:
+   ```shell
+   systemctl restart docker
+   ```
+   
 {{% /tab %}}
 
 {{< /tabs >}}
