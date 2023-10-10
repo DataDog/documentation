@@ -47,7 +47,7 @@ In these cases, Datadog recommends limiting the number of instances per Agent to
 init_config:
 instances:
   - dbm: true
-    host: 'products-primary.123456789012.us-east-1.rds.amazonaws.com,1433'
+    host: 'example-service-primary.example-host.com,1433'
     username: datadog
     connector: adodbapi
     adoprovider: MSOLEDBSQL
@@ -55,9 +55,9 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
-    host: 'products–replica-1.us-east-1.rds.amazonaws.com,1433'
+    host: 'example-service–replica-1.example-host.com,1433'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
@@ -65,9 +65,9 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
   - dbm: true
-    host: 'products–replica-2.us-east-1.rds.amazonaws.com,1433'
+    host: 'example-service–replica-2.example-host.com,1433'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     username: datadog
@@ -75,7 +75,7 @@ instances:
     tags:
       - 'env:prod'
       - 'team:team-discovery'
-      - 'service:product-recommendation'
+      - 'service:example-service'
     [...]
 ```
 

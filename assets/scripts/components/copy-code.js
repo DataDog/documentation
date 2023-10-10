@@ -18,7 +18,7 @@ function initCopyCode () {
 
 // Adds copy button to code examples that use the highlight hugo function or are fenced code blocks in markdown
 function addCopyButton () {
-    const fencedLang = ['shell'] // target specific fenced codeblocks by language
+    const fencedLang = ['shell', 'json', 'yaml'] // target specific fenced codeblocks by language
     const highlights = document.querySelectorAll("div.highlight")
 
     highlights.forEach(highlightEl => {

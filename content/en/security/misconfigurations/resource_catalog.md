@@ -16,7 +16,7 @@ Resource Catalog is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security findings have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
+Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security misconfigurations have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as databases, storage services, and hosts.
 
@@ -30,7 +30,7 @@ The Resource Catalog is useful for:
 
 - Training new site reliability and security engineers by providing a clear view of all resources, their relationships, and their security posture, along with information about teams responsible for them and services running on them.
 - Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream resources.
-- Ensuring proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security findings.
+- Ensuring proper security coverage by identifying resources that are most prone to misconfigurations or are not actively reporting security misconfigurations.
 - Facilitating the practice of good tagging to optimize cross-telemetry insights.
 - Providing engineering leadership with a high-level view of security practices across teams and cloud accounts.
 
@@ -42,41 +42,41 @@ On the [Resource Catalog page][2], explore the cloud resources in your Datadog o
 The ownership tab allows you to understand the resource ownership information such as team, service, on-call, and contact. This page allows users to proactively identify lack of ownership information and resolve it prior to an incident occurring. 
 
 **Security Tab**:
-The security tab allows you to gain a clear understanding of resources with security risk. By viewing findings and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
+The security tab allows you to gain a clear understanding of resources with security risk. By viewing misconfigurations and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
 
 ### List view
 
-You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, findings, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Findings** to identify cloud resources most prone to misconfigurations.
+You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, misconfigurations, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Misconfigurations** to identify cloud resources most prone to misconfigurations.
 
-To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the findings to particular environments and clusters.
+To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters.
 
 If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
 ### Map view
 
-The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Findings or Threats.
+The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Misconfigurations or Threats.
 
 If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
-#### Findings
+#### Misconfigurations
 
 Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Management Misconfigurations.
 
 #### Threats
 
-Threats reflect data from the past four hours and are only available for compute instances such as AWS EC2 and Azure VM. White indicates there are no active threats detected. Shades of blue to red reflect the highest-severity threat detected on the resource.
+Threats reflect data from the past four hours and are only available for compute instances such as Amazon EC2 and Azure VM. White indicates there are no active threats detected. Shades of blue to red reflect the highest-severity threat detected on the resource.
 
 ## Investigate a resource
 
 Clicking on a resource opens a side panel with details including:
 
 - **Resource information** such as the resource type, name, account, and tags associated with the resource.
-- **Security findings** including the security rules and latest status.
+- **Security misconfigurations** including the security rules and latest status.
 - **Real-time threat signals** detected on the asset by Cloud Security Management Threats.
 - **Resource definition** in JSON showing the full configuration of the asset.
 - An interactive asset relationship graph displaying the assets connected to the resource.
 
-Click the **Share** button and select **Share Findings** to share a link to the current resource with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][3] available for this feature.
+Click the **Share** button and select **Share event** to share a link to the current resource with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][3] available for this feature.
 
 ## Further reading
 

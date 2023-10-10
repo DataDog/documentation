@@ -176,7 +176,7 @@ With minor changes, the monitor can instead reflect hourly averages, measure the
 
 1. Click **Add Query** to create query **b**, a copy of query **a**.
 1. Change **a + b** to **a - b**. Because the two queries are temporarily identical, this value displays on the chart as 0.
-1. In the **b** query, click the the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
+1. In the **b** query, click the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
 
 #### Set the alert threshold
 

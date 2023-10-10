@@ -14,7 +14,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
-| Vulnerability Management for Open Source Software (OSS) | not supported              |
+| Vulnerability Management for Open Source Software (OSS) | 0.90.0              |
 | Vulnerability Management for Code-level (beta) | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
 
@@ -28,7 +28,7 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         |                           |
 | Kubernetes    | {{< X >}}         |                           | 
-| AWS ECS       | {{< X >}}         |                           |
+| Amazon ECS    | {{< X >}}         |                           |
 | AWS Fargate   |                   |                           |
 | AWS Lambda    |                   |                           |   
 
@@ -36,14 +36,7 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-PHP 5.x is fully supported until version 0.75.0. It is now in maintenance mode and supported with security and important bug fixes until December 31, 2023.
-
-<br>
-<br>
-
-If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
-
-It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 7.4, 8.0, and 8.1.
+It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0, 8.1 and 8.2.
 </div>
 
 | PHP Version    | Support level                         | Package version |
@@ -56,9 +49,6 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 | 7.2.x          | General Availability                  | All             |
 | 7.1.x          | General Availability                  | All             |
 | 7.0.x          | General Availability                  | All             |
-| 5.6.x          | Maintenance (until December 31, 2023) | All             |
-| 5.5.x          | Maintenance (until December 31, 2023) | All             |
-| 5.4.x          | Maintenance (until December 31, 2023) | All             |
 
 PHP ASM supports the following SAPI's:
 
@@ -77,8 +67,6 @@ PHP ASM supports the following architectures:
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
-| Linux GNU arm64 (`aarch64-linux-gnu`)     | GA                    | > `0.78.0`                             |
-| Linux MUSL arm64 (`aarch64-linux-musl`)   | GA                    | > `0.78.0`                             |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
@@ -111,7 +99,6 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | Magento       |  3.8+       |  {{< X >}} | {{< X >}} |
 | Neos Flow     |  3.0.x      |  {{< X >}} | {{< X >}} |
 | Phalcon       | 3.1+        |  {{< X >}} | {{< X >}} |
-| Roadrunner    | 3.1+        |  {{< X >}} | {{< X >}} |
 | Slim          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 4     | 3.1+        |  {{< X >}} | {{< X >}} |

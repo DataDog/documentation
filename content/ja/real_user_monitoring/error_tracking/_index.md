@@ -32,7 +32,7 @@ Datadog によって収集されたエラーを一貫して監視することは
 
 {{< img src="real_user_monitoring/error_tracking/rum_error_tracking.png" alt="RUM のエラー追跡エクスプローラーは、Web およびモバイルアプリケーションのクラッシュレポートから問題を表示します" style="width:100%;" >}}
 
-**Web and Mobile Apps** のエラー追跡のために [RUM][2] をセットアップすると、問題リストにカードが入力されます。[**UX Monitoring** > **Error Tracking**][3] に移動すれば、未解決の問題、無視されている問題、すべての問題を表示したり、量や年齢で問題をソートしたり、Web およびモバイルアプリケーションにあるすべてのカスタムおよびデフォルトのファセットで問題をフィルターしたりすることができます。
+**Web and Mobile Apps** のエラー追跡のために [RUM][2] をセットアップすると、問題リストにカードが表示されます。[**UX Monitoring** > **Error Tracking**][1] に移動すれば、未解決の問題、無視されている問題、すべての問題を表示したり、件数や新旧で問題をソートしたり、Web およびモバイルアプリケーションにあるすべてのカスタムおよびデフォルトのファセットで問題をフィルターしたりすることができます。
 
 エラー追跡は、以下のことを可能にします。
 
@@ -41,7 +41,7 @@ Datadog によって収集されたエラーを一貫して監視することは
 - 経時的に問題を監視するため、開始のタイミングや継続した場合の頻度を把握できます。
 - 必要なすべてのコンテキストを 1 か所で収集することで、トラブルシューティングが容易になります。
 
-## クラッシュレポートのアップロード
+## ソースマップのアップロード
 
 {{< whatsnext desc="RUM 用の Datadog エラー追跡を始めるには、対応するドキュメントを参照して、フレームワーク用のソースマップをアップロードしてください。" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}ブラウザ{{< /nextlink >}}
@@ -66,4 +66,3 @@ Datadog によって収集されたエラーを一貫して監視することは
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /ja/real_user_monitoring/
-[3]: https://app.datadoghq.com/rum/error-tracking

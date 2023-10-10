@@ -77,9 +77,9 @@ Construct a search query using the same logic as a [log explorer search][1].
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP). The group-by is also used to [join the queries together](#joining-queries).
 
-Add additional queries with the Add Query button.
+Click **Add Query** to add additional queries.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 ## Exclude benign activity with suppression queries
 
@@ -114,7 +114,7 @@ In this example, when greater than five failed logins and a successful login exi
 
 Construct a search query using the same logic as a [log explorer search][1]. Each query has a label, which is a lowercase ASCII letter. The query name can be changed from an ASCII letter by clicking the pencil icon.
 
-**Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 #### Learned value
 
@@ -137,13 +137,15 @@ In the **This rule will not generate a signal if there is a match** field, you h
 
 {{% tab "Anomaly" %}}
 
+### Search query
+
 Construct a search query using the same logic as a log explorer search.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group by value. Typically, the group by is an entity (like user, or IP).
 
 Anomaly detection inspects how the `group by` attribute has behaved in the past. If a group by attribute is seen for the first time (for example, the first time an IP is communicating with your system) and is anomalous, it will not generate a security signal because the anomaly detection algorithm has no historical data to base its decision on.
 
-**Note**: The query applies to all Datadog events and ingested logs that do not require indexing.
+**Note**: The query applies to all ingested logs.
 
 {{% /tab %}}
 
@@ -177,6 +179,25 @@ In the **This rule will not generate a signal if there is a match** field, you h
 
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
+{{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Root query
+
+Construct a search query using the same logic as a [log explorer search][1]. The trigger defined for each new attribute generates a signal for each new value of that attribute over a 24-hour roll-up period.
+
+Click **Add Query** to add additional queries.
+
+**Note**: The query applies to all ingested logs.
+
+## Exclude benign activity with suppression queries
+
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
+
+[1]: /logs/search_syntax/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -260,6 +281,24 @@ The impossible travel detection method does not require setting a rule case.
 ### Time windows
 
 {{% security-rule-time-windows %}}
+
+{{% /tab %}}
+
+{{% tab "Third Party" %}}
+
+### Trigger
+
+All rule cases are evaluated as case statements. Thus, the order of the cases affects which notifications are sent because the first case to match generates the signal. Click and drag your rule cases to change their ordering. 
+
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section. An example rule case for query `a` is `a > 3`.
+
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+
+### Severity and notification
+
+{{% security-rule-severity-notification %}}
+
+Click **Add Case** to add additional cases.
 
 {{% /tab %}}
 {{< /tabs >}}

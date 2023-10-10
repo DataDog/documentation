@@ -89,6 +89,9 @@ module:
     - source: content/ja
       target: content
       lang: ja
+    - source: content/ko
+      target: content
+      lang: ko
     - source: static
       target: static
     - source: layouts

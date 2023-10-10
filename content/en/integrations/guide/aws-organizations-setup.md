@@ -60,7 +60,7 @@ Copy the Template URL from the Datadog AWS integration configuration page to use
     - Select your Datadog APP key on Datadog AWS integration configuration page and use it in the `DatadogAppKey` parameter in the StackSet.
 
     - *Optionally:*  
-        a. Enable [Cloud Security Posture Management][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
+        a. Enable [Cloud Security Management Misconfigurations][5] (CSM Misconfigurations) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.  
         b. Disable metric collection if you do not want to monitor your AWS infrastructure. This is recommended only for [Cloud Cost Management][6] (CCM) or [CSM Misconfigurations][5] specific use cases.
 
 3. **Configure StackSet options**  

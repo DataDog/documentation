@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/integrations/observability_pipelines/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /observability_pipelines/setup/
   tag: ドキュメント
@@ -16,7 +19,7 @@ title: Observability Pipelines（観測データの制御）
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では観測可能性パイプラインは利用できません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では観測可能性パイプラインはサポートされていません。</div>
 {{< /site-region >}}
 
 
