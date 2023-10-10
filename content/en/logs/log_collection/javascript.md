@@ -359,7 +359,7 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `proxyUrl`                 | String                                                                    | No       |                 | Optional proxy URL (ex: https://www.proxy.com/path), see the full [proxy setup guide][6] for more information.                                                                        |
 | `telemetrySampleRate`      | Number                                                                    | No       | `20`            | Telemetry data (error, debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection. |
 | `storeContextsAcrossPages` | Boolean                                                                   | No       |                 | Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][11] for more details and specific limitations.          |
-| `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow to capture [untrusted events][13], for example in automated UI tests.                                                                                                           |
+| `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
 
 
 Options that must have a matching configuration when using the `RUM` SDK:
@@ -1000,7 +1000,7 @@ However, this feature comes with some **limitations**:
 After a logger is created, it is possible to:
 
 - Set the entire context for your logger with the `setContext (context: object)` API.
-- Set a context property to your logger with `setContextProperty (key: string, value: any)` API:
+- Set a context property on your logger with `setContextProperty (key: string, value: any)` API:
 
 ##### NPM
 

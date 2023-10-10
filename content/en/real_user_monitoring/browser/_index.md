@@ -1824,7 +1824,7 @@ Store global context and user context in `localStorage` to preserve them along t
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Allow to capture [untrusted events][25], for example in automated UI tests.
+Allow capture of [untrusted events][25], for example in automated UI tests.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
