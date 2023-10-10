@@ -120,7 +120,7 @@ Click the Settings icon on the right hand corner to hide metric columns from the
 The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][19], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
 
 - Have the highest amortized AWS costs in the last month
-- Show a significant change in rate of cloud spending over time 
+- Show a significant change in the rate of cloud spending over time 
 
 For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button. 
 
