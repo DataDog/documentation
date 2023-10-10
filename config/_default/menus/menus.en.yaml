@@ -3316,6 +3316,11 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 506
+  - name: Threat Intelligence
+    url: security/application_security/threats/threat-intelligence/
+    parent: appsec_threats
+    identifier: threats_threat_intelligence
+    weight: 508
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
