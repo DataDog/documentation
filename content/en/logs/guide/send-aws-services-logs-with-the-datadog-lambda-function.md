@@ -37,15 +37,15 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                  | [Manual][14] log collection.                                                 |
 | [EC2][15]                          | `-`                                                                                             | Use the [Datadog Agent][15] to send your logs to Datadog.                    |
 | [ECS][16]                          | `-`                                                                                             | [Use the docker agent to gather your logs][17].                              |
-| [Elastic Load Balancing (ELB)][18] | [Enable AWS ELB logs][19]                                                                       | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.  |
+| [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                       | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.  |
 | [Lambda][21]                       | `-`                                                                                             | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection. |
-| [RDS][23]                         | [Enable AWS RDS logs][24]                                                                      | [Manual][25] log. collection.                                                |
-| [Route 53][26]                    | [Enable AWS Route 53 logs][27]                                                                 | [Manual][28] log collection.                                                |
-| [S3][29]                          | [Enable AWS S3 logs][30]                                                                       | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection. |
+| [RDS][23]                         | [Enable Amazon RDS logs][24]                                                                      | [Manual][25] log. collection.                                                |
+| [Route 53][26]                    | [Enable Amazon Route 53 logs][27]                                                                 | [Manual][28] log collection.                                                |
+| [S3][29]                          | [Enable Amazon S3 logs][30]                                                                       | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection. |
 | [SNS][32]                         | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                |
-| [RedShift][34]                    | [Enable AWS Redshift logs][35]                                                                 | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection. |
+| [RedShift][34]                    | [Enable Amazon Redshift logs][35]                                                                 | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection. |
 | [Verified Access][37]             | [Enable Verified Access logs][38]                                                              | [Manual][39] log collection.                                                |
-| [VPC][40]                         | [Enable AWS VPC logs][41]                                                                      | [Manual][42] log collection.                                                |
+| [VPC][40]                         | [Enable Amazon VPC logs][41]                                                                      | [Manual][42] log collection.                                                |
 
 ## Set up triggers
 

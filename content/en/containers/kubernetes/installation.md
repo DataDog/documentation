@@ -263,7 +263,7 @@ To modify the container image registry, see the [Changing Container Registry][9]
 
 If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 
-- For the public AWS ECR registry ([public.ecr.aws/datadog][9]), use the following:
+- For the public Amazon ECR registry ([public.ecr.aws/datadog][9]), use the following:
 
   ```yaml
   registry: public.ecr.aws/datadog
@@ -277,7 +277,7 @@ If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your d
 
 **Note**:
 
-- It is recommended to use the public AWS ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
+- It is recommended to use the public Amazon ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
 
 [8]: https://gcr.io/datadoghq
 [9]: https://gallery.ecr.aws/datadog/
