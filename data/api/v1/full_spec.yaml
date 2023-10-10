@@ -31,7 +31,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/APIErrorResponse'
+            type: object
       description: Too many requests
   schemas:
     APIErrorResponse:
