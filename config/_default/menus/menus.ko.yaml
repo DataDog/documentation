@@ -132,7 +132,7 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 14
-  - name: 신서틱(Synthetic) 모니터링
+  - name: Synthetic 모니터링
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
