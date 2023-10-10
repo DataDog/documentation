@@ -117,7 +117,7 @@ To access additional details describing security vulnerabilities and signals, cl
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
 ### Costs view
-The **Costs tab** provides several ways to understand the costs associated with your services with [Cloud Cost Management][19]. This includes identifying potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
+The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][19], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
 
 - Have the highest amortized AWS costs in the last month
 - Show a significant change in rate of cloud spending over time 
