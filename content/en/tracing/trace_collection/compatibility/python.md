@@ -72,7 +72,7 @@ The `ddtrace` library includes support for the following data stores:
 | [algoliasearch][18]                | >= 1.20.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
 | [Cassandra][20]                    | >= 3.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]                | >= 1.6, < 8.0     | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Elasticsearch][21]                | >= 1.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | >= 0.12           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Mariadb][23]                      | >= 1.0.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][24] [pylibmc][25]      | >= 1.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |
@@ -82,6 +82,7 @@ The `ddtrace` library includes support for the following data stores:
 | [MySQL][30] [MySQL-python][31]     | >= 1.2.3          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
 | [MySQL][30] [mysqlclient][32]      | >= 1.3            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.mysqldb      |
 | [MySQL][30] [mysql-connector][33]  | >= 2.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mysql-connector                     |
+| [Opensearch][63]                   | >= 1.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Postgres][34] [aiopg][35]         | >= 0.12.0, <=&nbsp;0.16        | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#aiopg                               |
 | [Postgres][34] [psycopg][36]       | >= 2.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg      |
 | [PyMySQL][37]                      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html?highlight=pymysql#pymysql |
@@ -185,3 +186,4 @@ The `ddtrace` library includes support for the following libraries:
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
 [61]: https://gunicorn.org/
 [62]: https://snowflake.com/
+[63]: https://opensearch.org/
