@@ -62,7 +62,12 @@ datadog.appsec.http_blocked_template_json = <path_to_file.json>
 
 
 ```javascript
-
+require('dd-trace').init({
+  appsec: {
+    blockedTemplateHtml: '<path_to_file.html>',
+    blockedTemplateJson: '<path_to_file.json>'
+  }
+})
 ```
 
 {{< /programming-lang >}}
