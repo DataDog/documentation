@@ -138,7 +138,7 @@ Additionally, you can click the tags in the metric dropdown used for [defining t
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
 
-Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, and `*` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
+Datadog also supports the ability to graph your metrics, logs, traces, and other data sources with various arithmetic operations. Use: `+`, `-`, `/`, `*`, `min`, and `max` to modify the values displayed on your graphs. This syntax allows for both integer values and arithmetic using multiple metrics.
 
 To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
@@ -173,6 +173,15 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
+
+Here is an example using the `max` operator to find the maximum value between `error` logs and `info` logs.
+
+```text
+max(status:error, status:info)
+```
+
+
+
 
 ### Create an alias
 
