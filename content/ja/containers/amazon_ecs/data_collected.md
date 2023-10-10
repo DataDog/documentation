@@ -33,7 +33,7 @@ AWS インテグレーションの  Metric Collection タブで **collect custo
 
 ノイズを減らすため、Amazon ECS インテグレーションは `drain`、`error`、`fail`、`insufficient memory`、`pending`、`reboot`、`terminate` の単語を含むイベントのみを収集するように自動的に設定されます。以下にイベントの例を示します。
 
-{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
+{{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Amazon ECS イベント" >}}
 
 このリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][2]までお問い合わせください。
 

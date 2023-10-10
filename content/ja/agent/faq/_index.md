@@ -8,7 +8,7 @@ kind: faq
 title: Agent のよくあるご質問
 ---
 
-{{< whatsnext desc="よくあるご質問の一覧:">}}
+{{< whatsnext desc="よくある質問一覧:">}}
     {{< nextlink href="agent/faq/host-metrics-with-the-container-agent" >}}Container Agent によるホストメトリクス{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-downgrade-major" >}}Agent を以前のメジャーバージョンにダウングレードする{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-downgrade-minor" >}}Agent を以前のマイナーバージョンにダウングレードする{{< /nextlink >}}
@@ -18,6 +18,7 @@ title: Agent のよくあるご質問
     {{< nextlink href="agent/faq/kubernetes-secrets" >}}Kubernetes シークレットを使用して、API キーを設定するにはどうすればよいですか？{{< /nextlink >}}
     {{< nextlink href="agent/faq/kubernetes-state-cluster-check" >}}kubernetes_state のチェックをクラスターのチェックとして実行するにはどうすればよいですか？{{< /nextlink >}}
     {{< nextlink href="agent/faq/rpm-gpg-key-rotation-agent-6" >}}RPM GPG キーローテーション{{< /nextlink >}}
+    {{< nextlink href="agent/faq/linux-agent-2022-key-rotation" >}}Linux Agent 2022 年キーローテーション{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-v6-changes" >}}Datadog Agent v6 の変更点{{< /nextlink >}}
     {{< nextlink href="agent/faq/ec2-use-win-prefix-detection" >}}EC2AMAZ- で始まる Windows EC2 ホスト名{{< /nextlink >}}
     {{< nextlink href="agent/guide/auto_conf" >}}オートディスカバリーのための自動構成{{< /nextlink >}}
