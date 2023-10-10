@@ -44,7 +44,7 @@ A Clickmap shows you the most interacted-with actions on a given view by aggrega
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v3.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
 
-Each clickmap also offers analytics such as:
+Each Clickmap also offers analytics such as:
 
 - Where that page ranks out of all other visited pages
 - Unique user counts to that page
