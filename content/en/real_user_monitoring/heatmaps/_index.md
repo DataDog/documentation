@@ -34,7 +34,7 @@ On the [view list page][9], select your application and view. You can select the
 
 {{< img src="real_user_monitoring/heatmaps/view-list-updated.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
 
-This will take you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
+This takes you to the [heatmap page][3] for a particular view. You can switch the view being shown with the **View Name** and **Application** selectors at the top. To add more granular filters, like a specific geography for example, you can add a filter from the panel on the left side.
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-filters-v2.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
