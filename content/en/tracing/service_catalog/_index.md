@@ -122,7 +122,7 @@ The **Costs tab** provides several ways to understand the costs associated with 
 - Have the highest amortized AWS costs in the last month
 - Show a significant change in rate of cloud spending over time 
 
-To access additional information about a service’s cost changes, click on the service row to open a detailed side panel. Further, click on the **View in Analytics** button to see this information on the Cloud Costs page. 
+For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button. 
 
 This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][20] and [Tag Pipelines][21]. 
 
