@@ -23,7 +23,7 @@ With each heatmap, you can understand complex data at a glance and take the insi
 
 To get started with heatmaps:
 
-- For Clickmaps, You must be on the latest version of the SDK (v4.40.0 or later) and for Scrollmaps, you must be on (v4.47.0 or later)
+- For Clickmaps, You must be on the latest version of the SDK (v4.40.0 or later) and for Scrollmaps, you must be on (v4.50.0 or later)
 - Enable [Session Replay][1].
 - Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (requirement for clickmaps).
 
