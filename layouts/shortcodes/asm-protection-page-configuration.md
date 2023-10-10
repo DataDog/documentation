@@ -13,18 +13,11 @@ DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML=<path_to_file.html>
 
 Alternatively, you can use the configuration entry.
 
-{{< programming-lang-wrapper langs="java,dotnet,ruby,php,nodejs" >}}
+{{< programming-lang-wrapper langs="java,ruby,php,nodejs" >}}
 
 {{< programming-lang lang="java" >}}
 
 ```java
-
-```
-{{< /programming-lang >}}
-
-{{< programming-lang lang="dotnet" >}}
-
-```csharp
 
 ```
 {{< /programming-lang >}}
