@@ -59,6 +59,7 @@ def pull_and_push_folder(content, content_dir):
                             basename(file_name)
                         ))
                 new_yml['dependencies'] = new_deps
+                new_yml['group_id'] = directory.as_posix()
             front_matter = yaml.dump(new_yml, default_flow_style=False).strip()
             # Replacing links that point to the Github folder by link that point to the doc.
             new_link = (

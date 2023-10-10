@@ -1,0 +1,99 @@
+{{ define "main" }}
+    {{ $dot := . }}
+    {{ $scratch := .Scratch }}
+
+    <!-- From imported files -->
+    {{ $list := sort .Pages }}
+
+
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+     
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
+    {{ .Content }}
+
+    {{ $products := slice }}
+    <div 
+    class="d-flex"
+    x-data="{
+        toggleRuleSet (selectedEl) {
+            selectedEl.nextElementSibling.classList.toggle('d-none')
+        }
+    }">
+        <div class="col-10 col-md-12 order-md-1 mt-5">
+            <div class="list-unstyled ps-0">
+                {{ range $list.GroupByParam "group_id" }}
+                <div class="mt-1">
+                    <div
+                    data-header-id="{{.Key}}" 
+                    class="group-header border border-dark border-2 bg-light p-1 mb-1 d-flex align-items-center justify-content-between"
+                    @click="toggleRuleSet($el)"
+                    >
+                        <span>{Title of Ruleset}</span>
+                        <div class="">></div>
+                    </div>
+                    <div
+                    data-id="{{.Key}}" 
+                    class="group-header-description" 
+                    >
+                        <p class="m-0 fw-semibold">{{printf "Ruleset ID: %s" .Key}}</p>
+                        <p class="m-0">{Description of Ruleset}</p>
+                        <div class="list-unstyled ps-0 mt-1">
+                            {{ range .Pages }}
+                            <div class="border p-1">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{.Permalink}}">{{.Title}}</a>
+                                    <div class="d-flex">
+                                        <span>{{index (split .Params.meta.id "/") 1}}</span>
+                                        <div class="ms-1">></div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+
+        <nav id="standard-attributes-nav" class="mb-3">
+            {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
+            {{/*  <div class="filters-standard-attributes">
+              {{ if  $products | len }}
+                  <button 
+                  @click="filterValue = ''; pushState()"
+                  class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                  :class="(filterValue === 'all' || !filterValue) && 'active'"
+                  data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
+              {{ end }}
+              {{ $sortedProduct := (split (replaceRE `icon-` "" (delimit $products " ")) " ") | sort }}
+              {{ range $sortedProduct }}
+                  {{ $product := cond (eq . "log") (printf "%ss" .) .}}
+                  <button 
+                  @click="filterValue = '{{ $product }}'; pushState()"
+                  class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                  :class="($el.dataset.filter === filterValue) && 'active'"
+                  data-filter="{{ $product }}"
+                  >
+
+                  </button>
+              {{ end }}
+            </div>  */}}
+            {{/*  SEARCH  */}}
+            {{/*  <form 
+            class="search-standard-attributes mt-2">
+              <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
+            </form>  */}}
+          </nav>
+    </div>
+
+    <h2>Further Reading</h2>
+    {{ partial "whats-next/whats-next.html" .}}
+{{ end }}
