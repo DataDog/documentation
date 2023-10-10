@@ -200,7 +200,7 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 {{% tab "Other Git Providers" %}}
 
 <div class="alert alert-warning">
-Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the Source Code Integration. Please reach out to support.
+Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the Source Code Integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
 To link telemetry to your source code, Datadog collects metadata for every commit SHA from your Git repository with the [`datadog-ci git-metadata upload`][1] command.
