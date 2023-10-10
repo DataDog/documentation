@@ -10,26 +10,27 @@ further_reading:
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
-A heatmap (or heat map) is a visualization of your users engagement and interaction overlaid on Session Replay data. RUM has three different types of heatmaps:
+A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. RUM has three different types of heatmaps:
 
-- Clickmaps: View user interactions (clicks) to understand if users engage with your page the way you expect 
-- Top Elements: View a ranking of up to the top 10 most interacted with elements on a given page.
-- Scrollmaps: View how far users scroll down a page, including where the average fold of a page falls. The average fold is the farthest point down a page that a user can see on their device when they open up the page and don’t do any scrolling.
+- **Clickmaps:** View user interactions (clicks) to understand how users engage with your page
+- **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
+- **Scrollmaps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
 
-With each heatmap, you can understand complex data at a glance and take the insights to optimize your user experience.
-
+Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
 
 ## Prerequisites
 
 To get started with heatmaps:
 
-- For Clickmaps, You must be on the latest version of the SDK (v4.40.0 or later) and for Scrollmaps, you must be on (v4.50.0 or later)
-- Enable [Session Replay][1].
-- Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (requirement for clickmaps).
+1. Verify your SDK version:
+  - For Clickmaps, you must be on the latest version of the SDK (v4.40.0 or later).
+  - For Scrollmaps, you must be on (v4.50.0 or later)
+2. Enable [Session Replay][1].
+3. Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (required for Clickmaps).
 
 ## Getting started
 
-On the view list page, select your application and view. You can select the type of heatmap you would like to view as well.
+On the [view list page][9], select your application and view. You can select the type of heatmap you would like to view as well.
 
 {{< img src="real_user_monitoring/heatmaps/view-list-updated.png" alt="Select a view from the Heatmap view list" style="width:100%;" >}}
 
@@ -39,7 +40,7 @@ This will take you to the [heatmap page][3] for a particular view. You can switc
 
 ## Clickmaps
 
-A Clickmap shows you the most interacted with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
+A Clickmap shows you the most interacted-with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v3.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
 
@@ -58,23 +59,21 @@ Below the panel are all actions that occurred on the page, listed by frequency. 
 
 ## Top Elements
 
-Top elements allow for a more focused view of click actions on a given view by picking the top most interacted elements and ranking them. The ranking on the map itself corresponds to the action name on the side.
+Top Elements heatmaps aggregate click actions on a given view by displaying the most interacted-with elements and their rank. The ranking on the map itself corresponds to the action name on the side.
 
-{{< img src="real_user_monitoring/heatmaps/top-elements-v2.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/top-elements-v3.png" alt="A ranking of the top elements clicked on a page." style="width:100%;">}}
 
-By clicking on any action name from the panel, the corresponding action will be highlighted in the map.
+Click any action name in the panel to highlight the corresponding action on the map.
 
 ## Scrollmaps
 
-Scrollmaps show a visual of the aggregate scroll activity on a given page. By looking at a scrollmap you can see how far users scroll to each percentile, along with where the average fold of the page falls.
+Scrollmaps show a visual of the aggregate scroll activity on a given page. Use Scrollmaps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scrollmap to the depth you wish to assess.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-v2.png" alt="Scrollmap of the chairs page." style="width:100%;">}}
 
-You can interact with the floating blue bar on a scrollmap by dragging it to the point of the page you wish to see how many users arrived at.
-
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-floating-bar.png" alt="A screenshot of the scrollable bar within Scrollmaps." style="width:100%;">}}
 
-To the right of the scrollmap, is an insight panel. The panel provides queries based on data in the map like direct links to a list of all views where the user scrolled past a given percentile. Below the insights is a Minimap and a Distribution graph, allowing you to granularly analyze scroll data at each percentile to identify where the biggest dropoff occurs.
+The panel to the right of the Scrollmap provides high-level insights with direct links to query results, such as a link to a list of views where the user scrolled past a given percentile. Below the insight panel is a minimap and a distribution graph displaying granular scroll data, useful for identifying where the biggest drop-off occurs.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-insights-panel.png" alt="A screenshot of the queries for scroll data insights" style="width:100%;">}}
 
@@ -125,3 +124,4 @@ User information is not collected by default. Heatmaps use the user information 
 [6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
 [7]: /real_user_monitoring/browser/tracking_user_actions/#manage-information-being-collected
 [8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[9]: https://app.datadoghq.com/rum/heatmap
