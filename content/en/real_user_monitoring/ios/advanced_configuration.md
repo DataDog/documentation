@@ -101,7 +101,7 @@ To create visualizations in your dashboards, [create a measure][4] first.
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API. 
 
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:name:)`.
 
 For example:
 
@@ -132,7 +132,7 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startUserAction(type:name:)` and `.stopUserAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion. 
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion. 
 
 Find more details and available options in the [`DDRUMMonitor` class][9].
 
