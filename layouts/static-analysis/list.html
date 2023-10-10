@@ -20,13 +20,14 @@
 
     {{ $products := slice }}
     <div 
-    class="d-flex"
+    class="d-flex flex-column"
     x-data="{
         toggleRuleSet (selectedEl) {
             selectedEl.nextElementSibling.classList.toggle('d-none')
         }
     }">
-        <div class="col-10 col-md-12 order-md-1 mt-5">
+        {{ $pad := newScratch }}
+        <div class="col-10 col-md-12 order-md-1">
             <div class="list-unstyled ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 <div class="mt-1">
@@ -55,6 +56,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <p>{{.Params.meta.severity}}</p>
+                            <p>{{.Params.meta.language}}</p>
+                            <p>{{.Params.meta.category}}</p>
+                            {{/*  
+                                build an object with the following keys:
+                                    - Severity
+                                    - Language
+                                    - Categories  
+                                    each key is an array of unique items   
+                            */}}
+                            {{ $pad.SetInMap "filters" "Severity" (union (index ($pad.Get "filters") "Severity") (slice .Params.meta.severity)) }}
+                            {{ $pad.SetInMap "filters" "Language" (union (index ($pad.Get "filters") "Language") (slice .Params.meta.language)) }}
+                            {{ $pad.SetInMap "filters" "Category" (union (index ($pad.Get "filters") "Category") (slice .Params.meta.category)) }}
+                            
                             {{ end }}
                         </div>
                     </div>
@@ -63,8 +78,23 @@
             </div>
         </div>
 
-        <nav id="standard-attributes-nav" class="mb-3">
+        <nav id="d-flex" class="mb-3">
             {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
+            {{/*  <p>{{ ($pad.Get "filters") }}</p>  */}}
+            {{ $filters := slice "Language" "Category" "Severity" }}
+            <div class="d-flex flex-column">
+            {{ range $filters }}
+            <div class="d-flex flex-column">
+                <span class="fw-semibold">{{.}}:</span>
+                <div>
+                <button class="btn btn-sm-tag btn-outline-secondary">All</button>
+                {{ range index ($pad.Get "filters") .  }}
+                    <button class="btn btn-sm-tag btn-outline-secondary">{{.}}</button>
+                {{ end }}
+                </div>
+            </div>
+            {{ end }}
+            </div>
             {{/*  <div class="filters-standard-attributes">
               {{ if  $products | len }}
                   <button 
