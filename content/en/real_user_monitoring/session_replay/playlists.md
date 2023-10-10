@@ -23,7 +23,7 @@ You can create a playlist directly from the [Playlist page][1] or from an indivi
 
 To create it directly from the **Playlist page**:
 
-1. From the Datadog app, go to **UX Monitoring > Real User Monitoring**, then click the **Playlists** page.
+1. In Datadog, go to **UX Monitoring > Real User Monitoring**, then click the **Playlists** page.
 2. Click **New Playlist**.
 3. Give your playlist a name and description. You can then start exploring Session Replays in RUM to add to the playlist.
 
