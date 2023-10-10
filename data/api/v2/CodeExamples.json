@@ -778,6 +778,11 @@
       "group": "service_definition",
       "suffix": "_2619874414",
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
+    },
+    {
+      "group": "service_definition",
+      "suffix": "_2621709423",
+      "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
     }
   ],
   "AggregateSpans": [
