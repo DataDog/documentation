@@ -15200,6 +15200,7 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV1'
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
       type: object
     ServiceDefinitionSchemaVersions:
       description: Schema versions
@@ -15207,11 +15208,13 @@ components:
       - v1
       - v2
       - v2.1
+      - v2.2
       type: string
       x-enum-varnames:
       - V1
       - V2
       - V2_1
+      - V2_2
     ServiceDefinitionV1:
       deprecated: true
       description: Deprecated - Service definition V1 for providing additional service
@@ -15638,6 +15641,7 @@ components:
           example: https://my-org.pagerduty.com/service-directory/PMyService
           type: string
       type: object
+      x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot1Slack:
       description: Service owner's Slack channel.
       properties:
@@ -15672,6 +15676,182 @@ components:
       type: string
       x-enum-varnames:
       - V2_1
+    ServiceDefinitionV2Dot2:
+      description: Service definition v2.2 for providing service metadata and integrations.
+      properties:
+        application:
+          description: Identifier for a group of related services serving a product
+            feature, which the service is a part of.
+          example: my-app
+          type: string
+        contacts:
+          description: A list of contacts related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Dot2Contact'
+          type: array
+        dd-service:
+          description: Unique identifier of the service. Must be unique across all
+            services and is used to match with a service in Datadog.
+          example: my-service
+          type: string
+        description:
+          description: A short description of the service.
+          example: My service description
+          type: string
+        extensions:
+          additionalProperties: {}
+          description: Extensions to v2.2 schema.
+          example:
+            myorg/extension: extensionValue
+          type: object
+        integrations:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot2Integrations'
+        langauges:
+          description: 'The service''s programming language. Datadog recognizes the
+            following languages: `dotnet`, `go`, `java`, `js`, `php`, `python`, `ruby`,
+            and `c++`.'
+          example:
+          - dotnet
+          - go
+          - java
+          - js
+          - php
+          - python
+          - ruby
+          - c++
+          items:
+            type: string
+          type: array
+        lifecycle:
+          description: The current life cycle phase of the service.
+          example: sandbox
+          type: string
+        links:
+          description: A list of links related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Dot2Link'
+          type: array
+        schema-version:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot2Version'
+        service-type:
+          description: 'The type of service. Datadog recognizes the following service
+            types: `database`, `cache`, `function`, `web`, `browser`, and `mobile`.'
+          example: web
+          type: string
+        tags:
+          description: A set of custom tags.
+          example:
+          - my:tag
+          - service:tag
+          items:
+            type: string
+          type: array
+        team:
+          description: Team that owns the service. It is used to locate a team defined
+            in Datadog Teams if it exists.
+          example: my-team
+          type: string
+        tier:
+          description: Importance of the service.
+          example: High
+          type: string
+      required:
+      - schema-version
+      - dd-service
+      type: object
+    ServiceDefinitionV2Dot2Contact:
+      description: Service owner's contacts information.
+      properties:
+        contact:
+          description: Contact value.
+          example: https://teams.microsoft.com/myteam
+          type: string
+        name:
+          description: Contact Name.
+          example: My team channel
+          type: string
+        type:
+          description: 'Contact type. Datadog recognizes the following types: `email`,
+            `slack`, and `microsoft-teams`.'
+          example: slack
+          type: string
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2Dot2Integrations:
+      description: Third party integrations that Datadog supports.
+      properties:
+        opsgenie:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot2Opsgenie'
+        pagerduty:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot2Pagerduty'
+      type: object
+    ServiceDefinitionV2Dot2Link:
+      description: Service's external links.
+      properties:
+        name:
+          description: Link name.
+          example: Runbook
+          type: string
+        provider:
+          description: Link provider.
+          example: Github
+          type: string
+        type:
+          description: 'Link type. Datadog recognizes the following types: `runbook`,
+            `doc`, `repo`, `dashboard`, and `other`.'
+          example: runbook
+          type: string
+        url:
+          description: Link URL.
+          example: https://my-runbook
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    ServiceDefinitionV2Dot2Opsgenie:
+      description: Opsgenie integration for the service.
+      properties:
+        region:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot2OpsgenieRegion'
+        service-url:
+          description: Opsgenie service url.
+          example: https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000
+          type: string
+      required:
+      - service-url
+      type: object
+    ServiceDefinitionV2Dot2OpsgenieRegion:
+      description: Opsgenie instance region.
+      enum:
+      - US
+      - EU
+      example: US
+      type: string
+      x-enum-varnames:
+      - US
+      - EU
+    ServiceDefinitionV2Dot2Pagerduty:
+      description: PagerDuty integration for the service.
+      properties:
+        service-url:
+          description: PagerDuty service url.
+          example: https://my-org.pagerduty.com/service-directory/PMyService
+          type: string
+      type: object
+      x-ignore-duplicate-object: true
+    ServiceDefinitionV2Dot2Version:
+      default: v2.2
+      description: Schema version being used.
+      enum:
+      - v2.2
+      example: v2.2
+      type: string
+      x-enum-varnames:
+      - V2_2
     ServiceDefinitionV2Email:
       description: Service owner's email.
       properties:
@@ -15855,6 +16035,7 @@ components:
     ServiceDefinitionsCreateRequest:
       description: Create service definitions request.
       oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionRaw'
