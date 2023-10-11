@@ -28,13 +28,19 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
-To add custom rules to your Scorecards dashboard using Datadog's Scorecards API: 
+### Creating custom rules
 
-1. Specify the name of the rule, scorecard it belongs to, rule description, and owner to pass to `/scorecard/rules`.
-2. Send an outcome of pass, fail, or skip for each {rule, service} tuple that you are evaluating to `/scorecard/outcomes/batch`.
+{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
+Custom Scorecard rules are in private beta. Join the beta and get detailed API instructions by requesting access.
+{{< /callout >}}
+
+To add custom rules to your Scorecards dashboard using the Scorecards API: 
+
+1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
+2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
 3. View an overview of outcomes in the Scorecards dashboard.
 
-After initial setup, any rules can also be enabled or disabled through the API. 
+After initial setup, rules can also be enabled or disabled through the API. 
 
 ## How services are evaluated
 
@@ -97,6 +103,10 @@ The scorecard summary is accessible on the [**Explore** page][1] in the Service 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
 
 ## Generating Scorecard reports
+
+{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
+Scorecard reports are in private beta. Join the beta by requesting access.
+{{< /callout >}}
 
 You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
 
