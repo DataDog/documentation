@@ -446,7 +446,7 @@ No built-in support for load-balancing is provided, given the single-machine nat
 An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
-An NLB is provisioned by the CloudFormation template, and is configured to point at the AutoScaling Group. Its DNS address is returned in the `LoadBalancerDNS` CloudFormation output.
+An NLB is provisioned by the CloudFormation template, and is configured to point at the Auto Scaling group. Its DNS address is returned in the `LoadBalancerDNS` CloudFormation output.
 {{% /tab %}}
 {{< /tabs >}}
 
