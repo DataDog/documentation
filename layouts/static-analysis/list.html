@@ -70,21 +70,21 @@
             
             return containsSearchValues && containsFilteredValue
         },
-        pushState (filtering=true) {
+        pushState (filtering=true, filter=undefined) {
             // Updates the url with the new query params for 'product' and 'search' without refreshing the page
             const url = new URL(window.location.href)
       
             if(filtering){
-              url.searchParams.set('product', this.filterValue)
+                url.searchParams.set(filter, this.filterValue[filter])
             }else if(!filtering){
-              url.searchParams.set('search', this.searchValue)
+                url.searchParams.set('search', this.searchValue)
             }
       
             if(!this.searchValue) {
-              url.searchParams.delete('search')
+                url.searchParams.delete('search')
             }
-            if(!this.filterValue) {
-              url.searchParams.delete('product')
+            if(!this.filterValue[filter]) {
+                url.searchParams.delete(filter)
             }
       
             window.history.pushState(null,'', url.toString())
@@ -168,14 +168,14 @@
                     <span class="fw-semibold">{{.}}:</span>
                     <div>
                         <button 
-                        @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', '')"
+                        @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', ''); pushState(true, '{{ $filter }}')"
                         class="btn btn-sm-tag btn-outline-secondary"
                         :class="(!filterValue['{{ $filter }}']) && 'active'"
                         data-filter="all"
                         >All</button>
                         {{ range index ($pad.Get "filters") .  }}
                         <button 
-                        @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', '{{ . | lower }}')"
+                        @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', '{{ . | lower }}'); pushState(true, '{{ $filter }}')"
                         class="btn btn-sm-tag btn-outline-secondary"
                         :class="($el.dataset.filter === filterValue['{{ $filter }}']) && 'active'"
                         data-filter="{{ . | lower }}"
@@ -187,7 +187,7 @@
             </div>
             {{/*  SEARCH  */}}
             <form class="mt-2">
-                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input.debounce="resetFilteredRulesets">
+                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState(false)">
             {{/*  <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">  */}}
             </form>
           </nav>
