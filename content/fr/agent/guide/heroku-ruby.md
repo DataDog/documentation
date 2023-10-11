@@ -182,7 +182,7 @@ instances:
 
 Au lieu de mettre à jour manuellement votre configuration, vous pouvez faire appel aux variables d'environnement Heroku pour configurer votre intégration Postgres et utiliser le [script de pré-exécution][14] pour remplacer ces valeurs avant le lancement de l'Agent Datadog :
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Mettre à jour la configuration Postgres ci-dessus à l'aide des variables d'environnement de l'application Heroku
@@ -208,7 +208,7 @@ git push heroku main
 
 Une fois l'opération de build terminée, l'Agent Datadog lance le check Postgres. Exécutez la commande de statut de l'Agent Datadog, tel qu'expliqué dans l'[annexe](#annexe-obtenir-le-statut-de-l-agent-datadog), pour vérifier que le check Postgres fonctionne correctement. Passez en revue la section suivante :
 
-```shell
+```bash
 
 [...]
 
@@ -318,7 +318,7 @@ Une fois l'opération de build terminée, l'Agent Datadog lance le check Redis. 
 
 Le texte suivant s'affiche :
 
-```
+```bash
 
 [...]
 
@@ -389,7 +389,7 @@ Si vous utilisez Sidekiq Enterprise et que vous souhaitez recueillir des métriq
 
 Ajoutez le bloc suivant à votre script [`datadog/prerun.sh`][14] :
 
-```
+```bash
 cat << 'EOF' >> "$DATADOG_CONF"
 
 dogstatsd_mapper_profiles:
@@ -453,15 +453,15 @@ Créez un fichier de configuration intitulé `/datadog/conf.d/mcache.yaml` à la
 
 ```yaml
 instances:
-  - url: <VOTRE_HOST_MCACHE> 
+  - url: <VOTRE_HOST_MCACHE>
     port: <VOTRE_PORT_MCACHE>
-    username: <VOTRE_NOMDUTILISATEUR_MCACHE>
-    password: <VOTRE_MOTDEPASSE_MCACHE>
+    username: <VOTRE_NOM_UTILISATEUR_MCACHE>
+    password: <VOTRE_MOT_DE_PASSE_MCACHE>
 ```
 
 Au lieu de mettre à jour manuellement votre configuration, vous pouvez faire appel aux variables d'environnement Heroku pour configurer votre intégration Memcached et utiliser le [script de pré-exécution][14] pour remplacer ces valeurs avant le lancement de l'Agent Datadog :
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Mettre à jour la configuration Memcached ci-dessus à l'aide des variables d'environnement de l'application Heroku
@@ -471,8 +471,8 @@ if [ -n "$MEMCACHEDCLOUD_SERVERS" ]; then
     sed -i "s/<VOTRE_HOST_MCACHE>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
     sed -i "s/<VOTRE_PORT_MCACHE>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
   fi
-  sed -i "s/<VOTRE_NOMDUTILISATEUR_MCACHE>/${MEMCACHEDCLOUD_USERNAME}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
-  sed -i "s/<VOTRE_MOTDEPASSE_MCACHE>/${MEMCACHEDCLOUD_PASSWORD}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+  sed -i "s/<VOTRE_NOM_UTILISATEUR_MCACHE>/${MEMCACHEDCLOUD_USERNAME}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
+  sed -i "s/<VOTRE_MOT_DE_PASSE_MCACHE>/${MEMCACHEDCLOUD_PASSWORD}/" "$DD_CONF_DIR/conf.d/mcache.d/conf.yaml"
 fi
 ```
 
@@ -488,7 +488,7 @@ Une fois l'opération de build terminée, l'Agent Datadog lance le check Memcach
 
 Le texte suivant s'affiche :
 
-```
+```bash
 
 [...]
 
@@ -568,7 +568,7 @@ git push heroku main
 
 Lors du build, des messages d'erreur s'affichent à propos du traceur, car celui-ci ne parvient pas à atteindre l'endpoint de l'Agent APM Datadog. Il s'agit du comportement attendu. En effet, l'Agent Datadog ne se lance qu'après le processus de build. Vous pouvez ignorer ces messages :
 
-```
+```bash
 remote:        Download Yarn at https://yarnpkg.com/en/docs/install
 remote:        E, [2021-05-14T10:21:27.664244 #478] ERROR -- ddtrace: [ddtrace] (/tmp/build_d5cedb1c/vendor/bundle/ruby/2.6.0/gems/ddtrace-0.48.0/lib/ddtrace/transport/http/client.rb:35:in `rescue in send_request') Internal error during HTTP transport request. Cause: Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126) Location: /tmp/build_d5cedb1c/vendor/ruby-2.6.6/lib/ruby/2.6.0/net/http.rb:949:in `rescue in block in connect'
 ```
@@ -577,7 +577,7 @@ Une fois l'opération de build terminée, votre application envoie des traces à
 
 Exécutez la commande de statut de l'Agent Datadog, tel qu'expliqué dans l'[annexe](#annexe-obtenir-le-statut-de-l-agent-datadog), pour vérifier que l'Agent APM s'exécute correctement et qu'il envoie des traces à Datadog. Passez en revue la section suivante :
 
-```shell
+```bash
 [...]
 
 =========

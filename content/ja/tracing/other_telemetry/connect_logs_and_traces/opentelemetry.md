@@ -171,8 +171,7 @@ String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
 String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+String spanIdHexString = Span.current().getSpanContext().getSpanId();
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 

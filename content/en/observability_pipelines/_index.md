@@ -19,7 +19,7 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Observability Pipelines are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 
@@ -62,7 +62,7 @@ Collect logs, metrics, and traces from any source and route them to any destinat
 
 Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs and metrics. Govern your telemetry by enforcing data standards and controlling tags for metrics.
 
-{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, AWS EC2 Metadata, dedupe and more." style="width:100%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, Amazon EC2 Metadata, dedupe and more." style="width:100%;" >}}
 
 ### Redact sensitive data from your telemetry data
 

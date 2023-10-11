@@ -40,6 +40,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
+  - link: "https://www.datadoghq.com/blog/chaos-engineering-for-security/"
+    tag: "Blog"
+    text: "Security-focused chaos engineering experiments for the cloud"
 cascade:
     algolia:
         rank: 70
