@@ -13,17 +13,14 @@ DD_APPSEC_HTTP_BLOCKED_TEMPLATE_HTML=<path_to_file.html>
 
 Alternatively, you can use the configuration entry.
 
-{{< programming-lang-wrapper langs="java,ruby,php,nodejs" >}}
-
-{{< programming-lang lang="java" >}}
+For Java, add the following:
 
 ```java
 dd.appsec.http.blocked.template.html = '<path_to_file.html>'
 dd.appsec.http.blocked.template.json = '<path_to_file.json>'
 ```
-{{< /programming-lang >}}
 
-{{< programming-lang lang="ruby" >}}
+For Ruby, add the following:
 
 ```ruby
 # config/initializers/datadog.rb
@@ -36,9 +33,7 @@ Datadog.configure do |c|
 end
 ```
 
-{{< /programming-lang >}}
-
-{{< programming-lang lang="php" >}}
+For PHP, add the following:
 
 ```dosini
 ; 98-ddtrace.ini
@@ -50,9 +45,7 @@ datadog.appsec.http_blocked_template_html = <path_to_file.html>
 datadog.appsec.http_blocked_template_json = <path_to_file.json>
 ```
 
-{{< /programming-lang >}}
-
-{{< programming-lang lang="nodejs" >}}
+For Node.js, add the following:
 
 
 ```javascript
@@ -63,11 +56,6 @@ require('dd-trace').init({
   }
 })
 ```
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
-
 
 By default, the page shown in response to a blocked action looks like this:
 
