@@ -117,6 +117,9 @@ You can visualize your ingested data using the following cost types:
 | `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
 | `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate charge types.|
 
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://app.datadoghq.com/cost/setup?cloud=azure
