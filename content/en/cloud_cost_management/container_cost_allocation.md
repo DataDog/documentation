@@ -35,7 +35,7 @@ For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 i
 
 Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
 
-Note: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [Nodes][7] and [Pods][8].
+**Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][7] and [pods][8].
 
 ### ECS on EC2
 
