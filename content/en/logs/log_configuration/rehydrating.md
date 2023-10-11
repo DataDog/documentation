@@ -114,7 +114,7 @@ An external archive must be configured in order to rehydrate data from it. [Foll
 Datadog requires the permission to read from your archives in order to rehydrate content from them. This permission can be changed at any time.
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
+{{% tab "Amazon S3" %}}
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
 {{< /site-region >}}

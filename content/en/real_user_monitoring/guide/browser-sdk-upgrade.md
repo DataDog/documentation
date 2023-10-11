@@ -155,7 +155,7 @@ In order to avoid having different values for the same method name depending on 
 **Action to take**: Update monitor or dashboard queries to use the `resource.method` field with uppercase values.
 
 #### `beforeSend` action event
-The `beforeSend`` API allows access to contextual information of the collected events (see [Enrich and control RUM data][23]).
+The `beforeSend` API allows access to contextual information of the collected events (see [Enrich and control RUM data][23]).
 
 With the introduction of frustration signals, an action event can be associated with several DOM events.
 

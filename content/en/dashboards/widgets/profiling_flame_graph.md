@@ -20,7 +20,8 @@ The [profiling flame graph visualization][1] represents a breakdown of top consu
 
 ## Setup
  
- {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="Graph your data section in the profiling flame graph widget configuation" style="width:100%;" >}}
+ {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="Graph your data section in the profiling flame graph widget configuration" style="width:100%;" >}}
+
 ### Configuration
 
 1. Scope your profiling data with tags. For example, `host`, `container_name`, `service`, `env`, or `version`.
