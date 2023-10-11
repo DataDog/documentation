@@ -591,17 +591,17 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
     weight: 801
-  - name: Cluster Agent Troubleshooting
+  - name: Cluster Agent
     url: containers/troubleshooting/cluster-agent
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_cluster_agent
     weight: 802
-  - name: Cluster Checks Troubleshooting
+  - name: Cluster Checks
     url: containers/troubleshooting/cluster-and-endpoint-checks
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_cluster_and_endpoint_checks
     weight: 802
-  - name: HPA Troubleshooting
+  - name: HPA and Metrics Provider
     url: containers/troubleshooting/hpa
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_hpa
