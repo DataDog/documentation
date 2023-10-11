@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -83,17 +83,8 @@
         contents:
 
         - action: integrations
-          branch: prod
-          globs:
-          - integration/*/*_metadata.csv
-          - integration/*/manifest.json
-          - integration/*/service_checks.json
-          - integration/*/README.md
-          - integration/*/__init__.py
-
-        - action: integrations
           branch: eric/documentation
-          globs: 
+          globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
           - integration/*/service_checks.json
