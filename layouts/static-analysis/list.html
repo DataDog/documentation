@@ -71,7 +71,7 @@
             return containsSearchValues && containsFilteredValue
         },
         pushState (filtering=true, filter=undefined) {
-            // Updates the url with the new query params for 'product' and 'search' without refreshing the page
+            // Updates the url with the new query params for filter btns and search without refreshing the page
             const url = new URL(window.location.href)
       
             if(filtering){
@@ -89,8 +89,21 @@
       
             window.history.pushState(null,'', url.toString())
             window.scroll(0, 0)
+        },
+        updateWithURLParams () {
+            // Updates x-data properties with url param values
+            
+            const url = new URL(window.location.href)
+            Array.from(url.searchParams.entries()).forEach(([key, value]) => {
+                if(key === 'search'){
+                    this.searchValue = value
+                }else{
+                    this.filterValue[key] = value
+                }
+            })
         }
-    }">
+    }"
+    x-init="updateWithURLParams()">
         {{ $pad := newScratch }}
         <div class="col-10 col-md-12 order-md-1">
             <div class="list-unstyled ps-0">
