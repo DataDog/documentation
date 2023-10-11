@@ -43,7 +43,7 @@ Session Replay is available in the RUM Browser SDK. To start collecting data for
 
 ## Usage
 
-The Session Replay start recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. For example, to only record authenticated user sessions:
+The Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. For example, to only record authenticated user sessions:
 
 ```javascript
 window.DD_RUM.init({
@@ -74,7 +74,7 @@ To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops col
 
 By default, Session Replay data is retained for 30 days.
 
-To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience.)
+To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
 
 Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
 
