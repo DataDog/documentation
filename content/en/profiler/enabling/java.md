@@ -199,6 +199,8 @@ The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoi
 
 ### Datadog profiler allocation engine
 
+_Requires JDK 11+._
+
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
 In dd-java-agent earlier than v1.17.0 it is disabled by default, but you can enable it with:
 
@@ -220,7 +222,7 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 
 ### Live-heap profiler engine
 
-_Since: v1.17.0_
+_Since: v1.17.0. Requires JDK 11+._
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
