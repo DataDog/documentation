@@ -2,7 +2,7 @@
 title: AWS
 kind: documentation
 disable_toc: false
-private: true
+private: false
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
