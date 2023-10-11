@@ -55,7 +55,7 @@ Setting daily quotas on your indexes can help prevent billing overages when new 
 
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
 
 #### Set up max scan size to manage expensive rehydrations 
 

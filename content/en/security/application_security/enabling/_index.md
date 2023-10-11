@@ -33,7 +33,7 @@ further_reading:
 <div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Enable your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
 
 {{% appsec-getstarted %}}
 

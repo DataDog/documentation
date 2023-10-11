@@ -154,6 +154,63 @@ Client URIs are obfuscated by the Datadog Agent.
 
 {{% /tab %}}
 
+{{% tab "Nginx" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         | <i class="icon-check-bold"></i> |            |
+| Client URI query string | <i class="icon-check-bold"></i> |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
+{{% tab "Kong" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         | <i class="icon-check-bold"></i> |            |
+| Client URI query string |                                 |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
+{{% tab "Envoy" %}}
+
+| Category                | Collected                       | Obfuscated |
+|:------------------------|:-------------------------------:|:----------:|
+| Name                    |                                 |            |
+| Email                   |                                 |            |
+| Client IP               | <i class="icon-check-bold"></i> |            |
+| Database statements     |                                 |            |
+| Geographic location     |                                 |            |
+| Client URI path         |                                 |            |
+| Client URI query string |                                 |            |
+| Server URI path         |                                 |            |
+| Server URI query string |                                 |            |
+| HTTP body               |                                 |            |
+| HTTP cookies            |                                 |            |
+| HTTP headers            |                                 |            |
+
+{{% /tab %}}
+
 {{% /tabs %}}
 
 If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
