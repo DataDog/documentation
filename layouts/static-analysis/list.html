@@ -28,41 +28,46 @@
             severity: ''
         },
         searchValue: '',
-        filteredRulesets: [],
+        filteredRulesets: new Set(),
         updateFilterValue (filter, value) {
+            // Setter 
+
             this.filterValue[filter] = value
         },
+        resetFilteredRulesets () {
+            // Setter 
+            
+            this.filteredRulesets = new Set()
+        },
         toggleRuleSet (selectedEl) {
+            // open and close the ruleset accordian
+
             selectedEl.nextElementSibling.classList.toggle('d-none')
         },
-        resetFilteredRuleSets (selectedFilter) {
-            if (selectedFilter !== this.filterValue) {
-                this.filteredRuleSets = []
+        shouldShowRuleSet (ruleset, shouldShowRule) {
+            // Manage visibility of ruleset group
+
+            const rulesetID = ruleset.dataset.groupId
+            if(shouldShowRule){
+                this.filteredRulesets.add(rulesetID)
+                ruleset.classList.remove('d-none')
+            }else if (!this.filteredRulesets.has(rulesetID)){
+                ruleset.classList.add('d-none')
             }
         },
-        appendToFilteredRuleSets (ruleEl) {
-            // Append rule's ruleset id to an array if a rule is visible and if a filterValue has been updated.
-            ruleEl.classList.contains('show') && this.filteredRulesets.push(ruleEl.dataset.groupId)
-        },
-        shouldShowRuleSet (rulesetID) {
-            // Determine if ruleset should be visible
-            return this.filteredRulesets.length ? this.filteredRulesets.includes(rulesetID) : true
-        },
-        shouldShowRule (ruleEl, dataset) {
+        shouldShowRule (ruleEl, dataSet) {
             // Determines ruleset display
-            // Compares search values and filter values against ruleset info (dataset)
-            const datasetArr = dataset.split(';')
+            // Compares search values and filter values against ruleset info (dataSet)
+
+            const datasetArr = dataSet.split(';')
             const filterValues = Object.values(this.filterValue)
             const searchValues = this.searchValue.split(' ')
-            // each item in this.filterValue must be included in the datasetArr
-            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().includes(value)) // checks filter attrs in dataset 
-            const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
 
-            ruleEl.classList.remove('show')
-            if(containsSearchValues && containsFilteredValue){
-                ruleEl.classList.add('show')
-            }
-            
+            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().includes(value)) // checks filter attrs in dataSet 
+            const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataSet
+
+            this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
+
             return containsSearchValues && containsFilteredValue
         },
         pushState (filtering=true) {
@@ -91,13 +96,10 @@
             <div class="list-unstyled ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
-                <div 
+                <div
+                data-group-id="{{$group_id}}" 
                 class="mt-1 ruleset"
                 >
-                {{/*  <div 
-                class="mt-1 ruleset"
-                x-cloak x-show="shouldShowRuleSet('{{ $group_id }}')"
-                >  */}}
                     <div
                     data-header-id="{{ $group_id }}" 
                     class="group-header border border-dark border-2 bg-light p-1 mb-1 d-flex align-items-center justify-content-between"
@@ -106,38 +108,29 @@
                         <span>{Title of Ruleset} for {{.Key}}</span>
                         <div class="">></div>
                     </div>
-                    <div
-                    data-id="{{ $group_id }}" 
-                    class="group-header-description" 
-                    >
+                    <div class="group-header-description">
                         <p class="m-0 fw-semibold">{{printf "Ruleset ID: %s" .Key}}</p>
                         <p class="m-0">{Description of Ruleset}</p>
                         <div class="list-unstyled ps-0 mt-1">
                             {{ range .Pages }}
                                 {{/*  
-                                    build a string of the ruleset lookup info:
+                                    build a string with rule's lookup info:
+                                    - search
                                         - group_id: docker-best-practices
                                         - meta.id: docker-best-practices/absolute-workdir
                                         - title: Use absolute workdir
                                         - ruleset description (tbd)
                                         - ruleset title (tbd)
-                                        - filter metadata
-                                            - language, severity, category
+                                    - filter metadata
+                                        - language, severity, category
                                 */}}
                                 {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
                                 {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
                                 {{ $ruleset_info := delimit (slice $filter_info $ruleset_id .Params.group_id (replaceRE "(`|')" "" .Title )) ";" }}
                                 <div 
-                                data-group-id="{{ $group_id }}"
                                 class="rule d-flex justify-content-between border p-1"
                                 x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                                 >
-                                {{/*  <div 
-                                data-group-id="{{ $group_id }}"
-                                class="rule d-flex justify-content-between border p-1"
-                                x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
-                                x-init="$watch('filterValue', _ => appendToFilteredRuleSets($el))"
-                                >  */}}
                                     <a href="{{.Permalink}}">{{.Title}}</a>
                                     <span>{{$filter_info}}</span>
                                     <div class="d-flex">
@@ -148,10 +141,10 @@
                             
                             {{/*  
                                 build an object with the following keys:
-                                    - Severity
-                                    - Language
-                                    - Categories  
-                                    each key is an array of unique items   
+                                - Severity
+                                - Language
+                                - Categories  
+                                each key is an array of unique items   
                             */}}
                             {{ $pad.SetInMap "filters" "Language" (union (index ($pad.Get "filters") "Language") (slice .Params.meta.language)) }}
                             {{ $pad.SetInMap "filters" "Category" (union (index ($pad.Get "filters") "Category") (slice .Params.meta.category)) }}
@@ -175,14 +168,17 @@
                     <span class="fw-semibold">{{.}}:</span>
                     <div>
                         <button 
-                        @click="filteredRulesets = []; updateFilterValue('{{ $filter }}', '')"
+                        @click="resetFilteredRulesets(); updateFilterValue('{{ $filter }}', '')"
                         class="btn btn-sm-tag btn-outline-secondary"
+                        :class="(!filterValue['{{ $filter }}']) && 'active'"
+                        data-filter="all"
                         >All</button>
                         {{ range index ($pad.Get "filters") .  }}
                         <button 
-                        @click="filteredRulesets = []; updateFilterValue('{{ $filter }}', '{{ . | lower }}')"
+                        @click="resetFilteredRulesets(); updateFilterValue('{{ $filter }}', '{{ . | lower }}')"
                         class="btn btn-sm-tag btn-outline-secondary"
-
+                        :class="($el.dataset.filter === filterValue['{{ $filter }}']) && 'active'"
+                        data-filter="{{ . | lower }}"
                         >{{.}}</button>
                         {{ end }}
                     </div>
@@ -194,32 +190,6 @@
                 <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue">
             {{/*  <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">  */}}
             </form>
-            {{/*  <div class="filters-standard-attributes">
-              {{ if  $products | len }}
-                  <button 
-                  @click="filterValue = ''; pushState()"
-                  class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
-                  :class="(filterValue === 'all' || !filterValue) && 'active'"
-                  data-filter="{{ .Params.filter_all | lower }}">{{ .Params.filter_all }}</button> 
-              {{ end }}
-              {{ $sortedProduct := (split (replaceRE `icon-` "" (delimit $products " ")) " ") | sort }}
-              {{ range $sortedProduct }}
-                  {{ $product := cond (eq . "log") (printf "%ss" .) .}}
-                  <button 
-                  @click="filterValue = '{{ $product }}'; pushState()"
-                  class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
-                  :class="($el.dataset.filter === filterValue) && 'active'"
-                  data-filter="{{ $product }}"
-                  >
-
-                  </button>
-              {{ end }}
-            </div>  */}}
-            {{/*  SEARCH  */}}
-            {{/*  <form 
-            class="search-standard-attributes mt-2">
-              <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">
-            </form>  */}}
           </nav>
     </div>
 
