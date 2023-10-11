@@ -8,16 +8,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
   text: "Introducing the Datadog Cluster Agent"
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
-  tag: "Blog"
-  text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/cluster_agent/clusterchecks/"
+- link: "/containers/kubernetes/installation/"
   tag: "Documentation"
-  text: "Running Cluster Checks with Autodiscovery"
-- link: "/agent/kubernetes/daemonset_setup/"
-  tag: "Documentation"
-  text: "Kubernetes DaemonSet Setup"
-- link: "/agent/kubernetes/integrations/"
+  text: "Kubernetes Installation"
+- link: "/containers/kubernetes/integrations/"
   tag: "Documentation"
   text: "Custom Integrations"
 ---
@@ -154,5 +148,3 @@ DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /agent/cluster_agent/external_metrics/#register-the-external-metrics-provider

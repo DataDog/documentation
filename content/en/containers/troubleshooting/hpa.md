@@ -5,12 +5,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
   text: "Introducing the Datadog Cluster Agent"
-- link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
-  tag: "Blog"
+- link: "/containers/guide/cluster_agent_autoscaling_metrics"
+  tag: "Documentation"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
 ---
 
-### Cluster Agent status and flare
+## Cluster Agent status and flare
 
 If you are having issues with the Custom Metrics Server:
 
@@ -67,7 +67,7 @@ The flare command generates a zip file containing the `custom-metrics-provider.l
 
 If the metric's flag `Valid` is set to `false`, the metric is not considered in the HPA pipeline.
 
-### Describing the HPA manifest
+## Describing the HPA manifest
 
 If you see the following message when describing the HPA manifest:
 
@@ -98,7 +98,7 @@ Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscal
 
 Make sure the Datadog Cluster Agent is running, and the service exposing the port `8443`, whose name is registered in the APIService, is up.
 
-### Differences of value between Datadog and Kubernetes
+## Differences of value between Datadog and Kubernetes
 
 As Kubernetes autoscales your resources, the current target is weighted by the number of replicas of the scaled deployment.
 The value returned by the Datadog Cluster Agent is fetched from Datadog and should be proportionally equal to the current target times the number of replicas.
@@ -128,3 +128,9 @@ default     nginxext   Deployment/nginx   824/9 (avg)   1         3         3   
 And indeed `824 * 3 replicas = 2472`.
 
 *Disclaimer*: The Datadog Cluster Agent processes the metrics set in different HPA manifests and queries Datadog to get values every 30 seconds, by default. Kubernetes queries the Datadog Cluster Agent every 30 seconds, by default. As this process is done asynchronously, you should not expect to see the above rule verified at all times, especially if the metric varies, but both frequencies are configurable in order to mitigate any issues.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /containers/guide/cluster_agent_autoscaling_metrics
