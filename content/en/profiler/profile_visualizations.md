@@ -59,6 +59,8 @@ For example, starting from the first row in the previous image, `Thread.run()` c
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
+Flame graphs can be be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+
 ### Single profile
 
 By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
@@ -94,7 +96,7 @@ The timeline view is the equivalent of the flame graph, with a distribution over
 
 It shows time-based patterns and work distribution over:
 - [The period of a single profile](#single-profile)
-- [A trace][5]
+- [A trace][6]
 
 Compared to the flame graph, the timeline view can help you:
 
@@ -148,4 +150,5 @@ Lanes on top are runtime activities that may impact performance.
 [2]: /tracing/glossary/#services
 [3]: https://app.datadoghq.com/profiling/search?viz=timeseries
 [4]: /profiler/profile_types/
-[5]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[5]: /dashboards/widgets/profiling_flame_graph
+[6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
