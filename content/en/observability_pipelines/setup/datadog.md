@@ -480,7 +480,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 By default, a 288GB EBS drive is allocated to each instance, and the sample configuration above is set to use that for buffering.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
-<div class="alert alert-danger">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This leads to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, only use CloudFormation installs for non-production-level workloads.</div>
+<div class="alert alert-danger">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This leads to data loss if an instance is terminated, for example by the Auto Scaling group.</strong> For this reason, only use CloudFormation installs for non-production-level workloads.</div>
 
 By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted and formatted upon instance boot.
 {{% /tab %}}
