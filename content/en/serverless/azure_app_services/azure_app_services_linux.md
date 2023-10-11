@@ -29,6 +29,7 @@ To instrument your application, begin by adding the following key-value pairs un
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
+- .NET specific: `DD_PROFILING_ENABLED` (optional) enables the [Continuous Profiler][15] (public beta).
 
 ### Identifying your startup command
 
@@ -47,6 +48,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
 [13]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux#customize-start-up
+[15]: /profiler/enabling/dotnet/?tab=azureappservicepublicbeta
 
 
 **Note**: The application restarts when new settings are saved.
