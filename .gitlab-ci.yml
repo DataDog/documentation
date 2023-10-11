@@ -105,7 +105,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-20763517
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-david.jones_attachmeta
   tags:
     - "arch:amd64"
   rules:
@@ -494,19 +494,15 @@ set_redirect_metadata_preview:
   variables:
     BUCKET: "datadog-docs-preview"
     SET_REDIRECTS_PREVIEW: "true"
+    ATTACHMENT_FILES: "/resources/xml/Datadog-SNow_Update_Set.xml"
   stage: post-deploy
   cache: []
   environment: "preview"
   dependencies:
     - build_preview
   script:
-    - |
-      in-isolation run_update_redirect_metadata && \
-      aws s3api put-object \
-        --bucket "${BUCKET}" \
-        --key "/${CI_COMMIT_BRANCH}/resources/xml/Datadog-SNow_Update_Set.xml" \
-        --content-disposition 'attachment;filename="Datadog-SNow_Update_Set.xml"' \
-        --cache-control "public, must-revalidate, proxy-revalidate, max-age=0"
+    - in-isolation run_update_redirect_metadata
+    - in-isolation update_attachment_metadata
   interruptible: true
   allow_failure: true
 
@@ -515,6 +511,7 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
+    ATTACHMENT_FILES: "/resources/xml/Datadog-SNow_Update_Set.xml"
   stage: post-deploy
   cache: []
   environment: "live"
@@ -522,6 +519,7 @@ set_redirect_metadata_live:
     - build_live
   script:
     - in-isolation run_update_redirect_metadata
+    - in-isolation update_attachment_metadata
   interruptible: true
 
 ####################################
