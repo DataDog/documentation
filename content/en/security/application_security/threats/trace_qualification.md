@@ -6,41 +6,42 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against threats with Datadog Application Security Management"
+- link: "/security/application_security/how-appsec-works//"
+  tag: "Documentation"
+  text: "How Application Security Management Works"
 ---
 
 ## Overview
 
-Application Security Management (ASM) continuously processes every trace your application generates, which contains an attack attempt. It can be hard to manually assess every individual trace for impact.
+Application Security Management (ASM) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. ASM trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.
 
-This is where trace qualification comes in - ASM will evaluate the conditions in which each trace was generated, and - when possible - label it as harmful or safe.
+Filter by the **Qualification** facet in the ASM [Traces Explorer][1] to view the possible qualification results:
 
-For example, a service that doesn't use SQL databases can not be harmed with a SQL injection. For this service, ASM will qualify SQL injection attacks as unsuccessful (*None successful* in the user interface).
+{{< img src="security/application_security/threats/trace_qualification/trace-qualification-traces_2.png" alt="ASM trace list with the qualification facet showing the possible qualification results">}}
 
-## Possible qualification outcomes
+## Qualification outcomes
 
-{{< img src="security/application_security/threats/trace_qualification/trace-qualification-traces.png" alt="ASM trace list with the qualification facet showing the possible qualification results">}}
-
-There are four types of qualification outcomes and you can use the facet menu to find the corresponding traces:
+There are four types of qualification outcomes listed in the facet menu:
 
 | Qualification result | Description |
 |------|-------------|
-| `Unknown` | ASM has qualification rules for this attack, but did not have enough information to make a qualification decision. |
-| *No value* | ASM does not have qualification rules for this type of attack. |
-| `None successful` | ASM determined that attacks in this trace were not harmful. |
-| `Harmful` | At least one attack in the trace was successful. |
-
+| Unknown | ASM has qualification rules for this attack, but did not have enough information to make a qualification decision. |
+| None successful | ASM determined that attacks in this trace were not harmful. |
+| Harmful | At least one attack in the trace was successful. |
+| No value | ASM does not have qualification rules for this type of attack. |
 
 ### Trace sidepanel
 
-The qualification result can also be seen when opening an individual trace. For example, this is what a safe trace looks like:
+The qualification result can also be seen when viewing the details of an individual trace. </br>
+Example of a trace that ASM has qualified as safe:
 
-{{< img src="security/application_security/threats/trace_qualification/trace-none-successful.png" alt="ASM trace qualified as safe">}}
+{{< img src="security/application_security/threats/trace_qualification/trace-none-successful_3.png" alt="ASM trace qualified as safe">}}
 
-This is what a harmful trace looks like:
+Example of a trace that ASM has qualified as harmful:
 
-{{< img src="security/application_security/threats/trace_qualification/trace-harmful.png" alt="ASM trace qualified as harmful">}}
+{{< img src="security/application_security/threats/trace_qualification/trace-harmful_2.png" alt="ASM trace qualified as harmful">}}
 
-
+[1]: https://app.datadoghq.com/security/appsec/traces
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

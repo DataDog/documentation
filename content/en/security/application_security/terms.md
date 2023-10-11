@@ -72,8 +72,8 @@ vulnerability
 : Passive risk within an application. From [OWASP][1]: "A vulnerability is a hole or a weakness in the application, which can be a design flaw or an implementation bug, that allows an attacker to cause harm to the stakeholders of an application. Stakeholders include the application owner, application users, and other entities that rely on the application."
 
 trace qualification
-: The process by which Datadog helps understand the impact of traces, labelling
-them as Harmful, Safe, or Unknown.
+: The process by which Datadog helps understand the impact of traces, labeling
+them as `Harmful Safe or Unknown`.
 : See [Trace Qualification][15].
 
 ## Attacks and known vulnerabilities terms
