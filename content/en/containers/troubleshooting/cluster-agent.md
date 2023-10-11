@@ -38,13 +38,13 @@ kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
 To see what cluster level metadata is served by the Datadog Cluster Agent, run:
 
 ```text
-datadog-cluster-agent metamap
+agent metamap
 ```
 
 You should see the following result:
 
 ```text
-root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent metamap
+root@datadog-cluster-agent-8568545574-x9tc9:/# agent metamap
 
 ===============
 Metadata Mapper
@@ -90,13 +90,13 @@ If you are not collecting events properly, ensure that `DD_LEADER_ELECTION` and 
 If you have enabled those, check the leader election status and the `kube_apiserver` check with the following command:
 
 ```text
-datadog-cluster-agent status
+agent status
 ```
 
 This should produce the following result:
 
 ```text
-root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent status
+root@datadog-cluster-agent-8568545574-x9tc9:/# agent status
 [...]
   Leader Election
   ===============
@@ -120,7 +120,7 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent status
 ## Node Agent
 
 You can check the status of the Datadog Cluster Agent by running the Agent status command:
-`datadog-agent status`
+`agent status`
 
 If the Datadog Cluster Agent is enabled and correctly configured, you should see:
 

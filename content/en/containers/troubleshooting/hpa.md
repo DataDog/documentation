@@ -21,7 +21,7 @@ If you are having issues with the Custom Metrics Server:
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
-Run the `datadog-cluster-agent status` command to see the status of the External Metrics Provider process:
+Run the `agent status` command to see the status of the External Metrics Provider process:
 
 ```text
   Custom Metrics Provider
@@ -32,7 +32,7 @@ Run the `datadog-cluster-agent status` command to see the status of the External
     Number of external metrics detected: 2
 ```
 
-Errors with the External Metrics Provider process are displayed with this command. If you want more verbose output, run the flare command: `datadog-cluster-agent flare`.
+Errors with the External Metrics Provider process are displayed with this command. If you want more verbose output, run the flare command: `agent flare`.
 
 The flare command generates a zip file containing the `custom-metrics-provider.log` where you can see output as follows:
 
