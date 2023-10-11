@@ -238,19 +238,20 @@ See the table below for the message and domain correlated with each error type. 
 ## Enable job log collection
 
 The following GitLab versions support collecting job logs:
+
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (self-hosted) only if using [object storage to store job logs][7]
+* GitLab >= 14.8 (self-hosted) only if you are using [object storage to store job logs][7]
 
 To enable collection of job logs:
 
-1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This reveals the `Enable logs collection` option in the Datadog integration.
-2. Enable the `Enable logs collection` option and save the changes.
+1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This allows you to see the **Enable job logs collection** button on the [Pipeline Setup page][17].
+2. Click **Enable job logs collection** and click **Save changes**.
 
-Job logs are collected in the [Logs][9] product and automatically correlated with the GitLab pipeline within CI Visibility.
+Job logs are collected in [Log Management][9] and are automatically correlated with the [GitLab pipeline][18] in CI Visibility. Log files larger than 1GiB are truncated.
 
-<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility</div>
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
-Log files larger than 1GiB are truncated.
+For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][19].
 
 ## Further reading
 
@@ -272,3 +273,6 @@ Log files larger than 1GiB are truncated.
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
 [16]: /account_management/teams/
+[17]: https://app.datadoghq.com/ci/setup/pipeline?provider=gitlab
+[18]: https://app.datadoghq.com/ci/pipeline-executions?query=ci_level%3Apipeline%20%40ci.provider.name%3Agitlab&index=cipipeline
+[19]: /logs/log_configuration/processors/
