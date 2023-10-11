@@ -4,13 +4,13 @@ Welcome to the Datadog documentation repository. The markdown stored in this rep
 
 ## Contribute to the docs
 
-We encourage contributions! If you notice something on one of our pages that needs an edit, open a pull request in this repo and we'll review it as soon as we can! 
+Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request in this repo for the documentation team to review.
 
-Most pages on our docs site feature an **Edit** button that sends you to the source file in this repo. You can make an edit straight from the GitHub website!
+Most pages on the documentation site feature an **Edit** button that sends you to the source file in this repo. You can make an edit straight from the GitHub website!
 
 ![The edit button on a docs page](static/images/edit_link.png)
 
-For more information on contributing, see [our contribution guidelines][18].
+For more information on contributing, see the [contribution guidelines][18].
 
 ## Setup
 
