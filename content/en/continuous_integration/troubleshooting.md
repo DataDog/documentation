@@ -183,7 +183,7 @@ A "Pipeline not found" message is shown when you click on incomplete data coming
 
 - Your repository needs to have a commit history of at least two commits in the past month.
 - You need to have collected test code coverage in past commits, which happens on test runs where Intelligent Test Runner was enabled.
-- Your git clone must contain commit and tree history. Intelligent Test Runner tries to unshallow git clones that do not contain history (`git clone --depth=1`), but that might not work on older versions of git. Apart from that, automatic unshallowing might require additional set up in some CI providers (in Harness CI, for example, you have to do [extra configuration][13] to make sure your pipeline can execute git commands). If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
+- Your git clone must contain commit and tree history. Intelligent Test Runner tries to unshallow git clones that do not contain history (`git clone --depth=1`), but that might not work on older versions of git. Automatic unshallowing might require additional set up in some CI providers (Harness CI, for example, requires [extra configuration][13] to make sure your pipeline can execute git commands). If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
 
 Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
 
