@@ -69,9 +69,7 @@ Click any action name in the panel to highlight the corresponding action on the 
 
 Scrollmaps show a visual of the aggregate scroll activity on a given page. Use Scrollmaps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scrollmap to the depth you wish to assess.
 
-{{< img src="real_user_monitoring/heatmaps/scrollmaps-v2.png" alt="Scrollmap of the chairs page." style="width:100%;">}}
-
-{{< img src="real_user_monitoring/heatmaps/scrollmaps-floating-bar.png" alt="A screenshot of the scrollable bar within Scrollmaps." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/scrollmaps-v3.png" alt="Scrollmap of the bedding page in a sample ecommerce application" style="width:100%;">}}
 
 The panel to the right of the Scrollmap provides high-level insights with direct links to query results, such as a link to a list of views where the user scrolled past a given percentile. Below the insight panel is a minimap of the page and a distribution graph displaying granular scroll data, useful for identifying where the biggest drop-off occurs.
 
