@@ -620,7 +620,7 @@ If these properties are set to different values, change them to match. If they a
 
 ## Configure Docker injection
 
-Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
+If the default configuration doesn't meet your needs, you can edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
 
 ```yaml
 ---
