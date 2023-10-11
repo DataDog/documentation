@@ -37,7 +37,9 @@ Datadog ingests your cloud cost data and transforms it into queryable metrics. I
 
 ## Cloud costs in dashboards
 
-Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
+Visualize infrastructure spend alongside related utilization metrics to spot potential inefficiencies and savings opportunities:
+- Add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
+- Export timeseries costs data using the [Metrics API][1].
 
 {{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
 
@@ -48,3 +50,5 @@ Customers can export timeseries costs data using the [Metrics API][1]
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products

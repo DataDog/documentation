@@ -4,15 +4,13 @@ kind: documentation
 disable_toc: false
 private: false
 further_reading:
-- link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
+- link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/azure"
   tag: "Documentation"
   text: "Gain insights in your Azure bill"
 ---
-
-{{< jqmath-vanilla >}}
 
 ## Overview
 
@@ -175,6 +173,9 @@ Billing conductor enables you to simplify your bill by customizing the billing r
 
 To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][8]. Ensure the CUR meets [Datadog's requirements][9].
 After the billing conductor CUR is created, follow the Cloud Cost Management instructions above to set it up in Datadog.
+
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html

@@ -4,15 +4,13 @@ kind: documentation
 disable_toc: false
 private: false
 further_reading:
-- link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
+- link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/aws"
   tag: "Documentation"
   text: "Gain insights in your AWS bill"
 ---
-
-{{< jqmath-vanilla >}}
 
 ## Overview
 
