@@ -66,6 +66,7 @@ The left side of the Watchdog alerts feed contains the search facets below. Chec
 |---------------------|-----------------------------------------------------------------------|
 | Alert Category      | Display all `apm`, `infrastructure`, or `logs` alerts.                |
 | Alert Type          | Select alerts using metrics from APM or infrastructure integrations.  |
+| Alert Status        | Select alerts based on their status (ongoing or resolved).
 | APM Primary Tag     | The [defined APM primary tag][6] to display alerts from.              |
 | Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.                                                                                          |
 | Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.                                                                                          |
