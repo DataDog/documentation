@@ -244,14 +244,14 @@ The following GitLab versions support collecting job logs:
 
 To enable collection of job logs:
 
-1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This allows you to see the **Enable job logs collection** check box on the [Pipeline Setup page][17].
+1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This allows you to see the **Enable job logs collection** checkbox on the [Pipeline Setup page][17].
 2. Click **Enable job logs collection** and click **Save changes**.
 
-Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than 1GiB are truncated.
+Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
-For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][19].
+For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][18].
 
 ## Further reading
 
@@ -274,4 +274,4 @@ For more information about processing job logs collected from the GitLab integra
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
 [16]: /account_management/teams/
 [17]: https://app.datadoghq.com/ci/setup/pipeline?provider=gitlab
-[19]: /logs/log_configuration/processors/
+[18]: /logs/log_configuration/processors/
