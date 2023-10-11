@@ -35,6 +35,8 @@ For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 i
 
 Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
 
+**Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][7] and [pods][8].
+
 ### ECS on EC2
 
 For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by usage instead of reservation, providing more granular detail.
@@ -118,3 +120,5 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [6]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[7]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
+[8]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
