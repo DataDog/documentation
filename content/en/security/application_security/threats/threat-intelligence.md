@@ -30,7 +30,6 @@ Threat intelligence matches from any of the following sources will be surfaced i
 - minerstat
 - abuse.ch
 - FireHOL
-- IPInfo.io (only subcategory `proxy`)
 - spur (only subcategory `malware`)
 - Tor Exit Nodes
 
@@ -73,7 +72,7 @@ When viewing the traces in the UI, you can see threat intelligence data under th
 
 Under `@threat_intel.results` you can always see the full details of what was matched from which source:
 
-{{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
+ {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
 
 ## Further Reading
 

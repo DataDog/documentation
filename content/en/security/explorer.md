@@ -85,7 +85,6 @@ The query to see all threat intelligence matches in the Security Signals Explore
 * `@threat_intel.results.category "anonymizer", "scanner"`
 * `@threat_intel.results.intention "malicious", "unknown"`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
-    **Note**: Proxy, Tor, and VPN subcategory attributes are provided only by threat intelligence partner IPinfo.
 
 ### Search by network IP attributes
 
