@@ -22,43 +22,130 @@
     <div 
     class="d-flex flex-column"
     x-data="{
+        filterValue: {
+            language: '',
+            category: '',
+            severity: ''
+        },
+        searchValue: '',
+        filteredRulesets: [],
+        updateFilterValue (filter, value) {
+            this.filterValue[filter] = value
+        },
         toggleRuleSet (selectedEl) {
             selectedEl.nextElementSibling.classList.toggle('d-none')
+        },
+        resetFilteredRuleSets (selectedFilter) {
+            if (selectedFilter !== this.filterValue) {
+                this.filteredRuleSets = []
+            }
+        },
+        appendToFilteredRuleSets (ruleEl) {
+            // Append rule's ruleset id to an array if a rule is visible and if a filterValue has been updated.
+            ruleEl.classList.contains('show') && this.filteredRulesets.push(ruleEl.dataset.groupId)
+        },
+        shouldShowRuleSet (rulesetID) {
+            // Determine if ruleset should be visible
+            return this.filteredRulesets.length ? this.filteredRulesets.includes(rulesetID) : true
+        },
+        shouldShowRule (ruleEl, dataset) {
+            // Determines ruleset display
+            // Compares search values and filter values against ruleset info (dataset)
+            const datasetArr = dataset.split(';')
+            const filterValues = Object.values(this.filterValue)
+            const searchValues = this.searchValue.split(' ')
+            // each item in this.filterValue must be included in the datasetArr
+            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().includes(value)) // checks filter attrs in dataset 
+            const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks other attrs in dataset
+
+            ruleEl.classList.remove('show')
+            if(containsSearchValues && containsFilteredValue){
+                ruleEl.classList.add('show')
+            }
+            
+            return containsSearchValues && containsFilteredValue
+        },
+        pushState (filtering=true) {
+            // Updates the url with the new query params for 'product' and 'search' without refreshing the page
+            const url = new URL(window.location.href)
+      
+            if(filtering){
+              url.searchParams.set('product', this.filterValue)
+            }else if(!filtering){
+              url.searchParams.set('search', this.searchValue)
+            }
+      
+            if(!this.searchValue) {
+              url.searchParams.delete('search')
+            }
+            if(!this.filterValue) {
+              url.searchParams.delete('product')
+            }
+      
+            window.history.pushState(null,'', url.toString())
+            window.scroll(0, 0)
         }
     }">
         {{ $pad := newScratch }}
         <div class="col-10 col-md-12 order-md-1">
             <div class="list-unstyled ps-0">
                 {{ range $list.GroupByParam "group_id" }}
-                <div class="mt-1">
+                {{ $group_id := .Key }}
+                <div 
+                class="mt-1 ruleset"
+                >
+                {{/*  <div 
+                class="mt-1 ruleset"
+                x-cloak x-show="shouldShowRuleSet('{{ $group_id }}')"
+                >  */}}
                     <div
-                    data-header-id="{{.Key}}" 
+                    data-header-id="{{ $group_id }}" 
                     class="group-header border border-dark border-2 bg-light p-1 mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
-                        <span>{Title of Ruleset}</span>
+                        <span>{Title of Ruleset} for {{.Key}}</span>
                         <div class="">></div>
                     </div>
                     <div
-                    data-id="{{.Key}}" 
+                    data-id="{{ $group_id }}" 
                     class="group-header-description" 
                     >
                         <p class="m-0 fw-semibold">{{printf "Ruleset ID: %s" .Key}}</p>
                         <p class="m-0">{Description of Ruleset}</p>
                         <div class="list-unstyled ps-0 mt-1">
                             {{ range .Pages }}
-                            <div class="border p-1">
-                                <div class="d-flex justify-content-between">
+                                {{/*  
+                                    build a string of the ruleset lookup info:
+                                        - group_id: docker-best-practices
+                                        - meta.id: docker-best-practices/absolute-workdir
+                                        - title: Use absolute workdir
+                                        - ruleset description (tbd)
+                                        - ruleset title (tbd)
+                                        - filter metadata
+                                            - language, severity, category
+                                */}}
+                                {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
+                                {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
+                                {{ $ruleset_info := delimit (slice $filter_info $ruleset_id .Params.group_id (replaceRE "(`|')" "" .Title )) ";" }}
+                                <div 
+                                data-group-id="{{ $group_id }}"
+                                class="rule d-flex justify-content-between border p-1"
+                                x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
+                                >
+                                {{/*  <div 
+                                data-group-id="{{ $group_id }}"
+                                class="rule d-flex justify-content-between border p-1"
+                                x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
+                                x-init="$watch('filterValue', _ => appendToFilteredRuleSets($el))"
+                                >  */}}
                                     <a href="{{.Permalink}}">{{.Title}}</a>
+                                    <span>{{$filter_info}}</span>
                                     <div class="d-flex">
-                                        <span>{{index (split .Params.meta.id "/") 1}}</span>
+                                        <span>{{ $ruleset_id }}</span>
                                         <div class="ms-1">></div>
                                     </div>
                                 </div>
-                            </div>
-                            <p>{{.Params.meta.severity}}</p>
-                            <p>{{.Params.meta.language}}</p>
-                            <p>{{.Params.meta.category}}</p>
+                            
                             {{/*  
                                 build an object with the following keys:
                                     - Severity
@@ -66,9 +153,9 @@
                                     - Categories  
                                     each key is an array of unique items   
                             */}}
-                            {{ $pad.SetInMap "filters" "Severity" (union (index ($pad.Get "filters") "Severity") (slice .Params.meta.severity)) }}
                             {{ $pad.SetInMap "filters" "Language" (union (index ($pad.Get "filters") "Language") (slice .Params.meta.language)) }}
                             {{ $pad.SetInMap "filters" "Category" (union (index ($pad.Get "filters") "Category") (slice .Params.meta.category)) }}
+                            {{ $pad.SetInMap "filters" "Severity" (union (index ($pad.Get "filters") "Severity") (slice .Params.meta.severity)) }}
                             
                             {{ end }}
                         </div>
@@ -79,22 +166,34 @@
         </div>
 
         <nav id="d-flex" class="mb-3">
-            {{/*  FILTER BTNS - Keep here. $products slice needs to form */}}
-            {{/*  <p>{{ ($pad.Get "filters") }}</p>  */}}
+            {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
             {{ $filters := slice "Language" "Category" "Severity" }}
             <div class="d-flex flex-column">
-            {{ range $filters }}
-            <div class="d-flex flex-column">
-                <span class="fw-semibold">{{.}}:</span>
-                <div>
-                <button class="btn btn-sm-tag btn-outline-secondary">All</button>
-                {{ range index ($pad.Get "filters") .  }}
-                    <button class="btn btn-sm-tag btn-outline-secondary">{{.}}</button>
-                {{ end }}
+                {{ range $filters }}
+                {{ $filter := . | lower }}
+                <div class="d-flex flex-column">
+                    <span class="fw-semibold">{{.}}:</span>
+                    <div>
+                        <button 
+                        @click="filteredRulesets = []; updateFilterValue('{{ $filter }}', '')"
+                        class="btn btn-sm-tag btn-outline-secondary"
+                        >All</button>
+                        {{ range index ($pad.Get "filters") .  }}
+                        <button 
+                        @click="filteredRulesets = []; updateFilterValue('{{ $filter }}', '{{ . | lower }}')"
+                        class="btn btn-sm-tag btn-outline-secondary"
+
+                        >{{.}}</button>
+                        {{ end }}
+                    </div>
                 </div>
+                {{ end }}
             </div>
-            {{ end }}
-            </div>
+            {{/*  SEARCH  */}}
+            <form class="mt-2">
+                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue">
+            {{/*  <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">  */}}
+            </form>
             {{/*  <div class="filters-standard-attributes">
               {{ if  $products | len }}
                   <button 
