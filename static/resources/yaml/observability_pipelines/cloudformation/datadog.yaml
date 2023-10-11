@@ -1,16 +1,15 @@
-# Unless explicitly stated otherwise all files in this repository are
+# Unless explicitly stated otherwise, all files in this repository are
 # licensed under the Apache 2 License.
 #
 # This product includes software developed at Datadog
 # (https://www.datadoghq.com/). Copyright 2023 Datadog, Inc.
 #
-# This CloudFormation template creates a simple AutoScaling Group of OP
-# Workers, and is suitable for non-production workloads to trial the
-# software. We recommend using another installation method for
-# production deploys.
+# This CloudFormation template creates a simple Auto Scaling group of Observability Pipelines
+# Workers (OPWs), and is suitable for non-production workloads to trial the
+# software. Use another installation method for production deploys.
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::LanguageExtensions
-Description: Spawns an Observability Pipelines Worker cluster to handle Datadog Agent workloads.
+Description: Launches an Observability Pipelines Worker cluster to handle Datadog Agent workloads.
 Parameters:
   APIKey:
     Description: Datadog API Key
@@ -19,7 +18,7 @@ Parameters:
     Description: OPW Pipeline ID
     Type: String
   DatadogSite:
-    Description: Datadog site to use. Defaults to us1, which suffices for most customers.
+    Description: Datadog site to use. Defaults to US1.
     Type: String
     Default: "datadoghq.com"
     AllowedValues:
@@ -27,16 +26,15 @@ Parameters:
       - us3.datadoghq.com
       - us5.datadoghq.com
       - datadoghq.eu
-      - ddog-gov.com
       - ap1.datadoghq.com
   VPCID:
-    Description: VPC to spawn instances into.
+    Description: VPC to launch instances into.
     Type: "AWS::EC2::VPC::Id"
   SubnetIDs:
-    Description: Subnets to spawn instances into.
+    Description: Subnets to launch instances into.
     Type: "List<AWS::EC2::Subnet::Id>"
   InstanceType:
-    Description: EC2 instance type to spawn. Allowed values include the AWS Graviton ARM-based types.
+    Description: EC2 instance type to launch. Allowed values include the AWS Graviton ARM-based types.
     Type: String
     Default: c6g.large
     AllowedValues:
@@ -62,15 +60,15 @@ Parameters:
     Type: Number
     Default: 288
   ASGMinSize:
-    Description: Minimum instances to launch from the AutoScaling Group.
+    Description: Minimum instances to launch from the Auto Scaling group.
     Type: Number
     Default: 2
   ASGMaxSize:
-    Description: Maximum instances to launch from the AutoScaling Group.
+    Description: Maximum instances to launch from the Auto Scaling group.
     Type: Number
     Default: 10
   ASGCapacity:
-    Description: Desired instances to launch from the AutoScaling Group.
+    Description: Desired instances to launch from the Auto Scaling group.
     Type: Number
     Default: 2
 
@@ -133,8 +131,8 @@ Resources:
           - InstanceSecurityGroup
           - GroupId
 
-  # IAM Role allows SSH access over SSM, which can be very useful for
-  # running `observability-pipelines-worker tap`, or other diagnostic purposes.
+  # IAM Role allows SSH access over SSM, which can be useful for
+  # running `observability-pipelines-worker tap`, or for other diagnostic purposes.
   IAMRole:
     Type: AWS::IAM::Role
     Properties:
@@ -150,7 +148,7 @@ Resources:
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   
-  # This instance profile will contain the SSM role above, and is useful
+  # This instance profile contains the SSM role above, and is useful
   # in case you need to add additional roles for other AWS services.
   IAMInstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -158,7 +156,7 @@ Resources:
       Roles:
         - !Ref IAMRole
 
-  # AutoScaling Group handles scaling to meet application demand.
+  # Auto Scaling group handles scaling to meet application demand.
   LaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
     Properties:
@@ -174,8 +172,8 @@ Resources:
             Groups:
               - !Ref InstanceSecurityGroup
             DeviceIndex: 0
-        # NOTE: This does create an EBS drive for each instance spawned as part
-        # of the AutoScaling Group. However, it will be deleted when the
+        # NOTE: This does create an EBS drive for each instance launched as part
+        # of the Auto Scaling group. However, it is deleted when the
         # instance is taken out of service. This makes this installation method
         # unsuitable for longer-term deployments, and may lead to data loss if
         # an instance is terminated.
@@ -185,19 +183,18 @@ Resources:
               VolumeSize: !Ref EBSSizeGB
               VolumeType: gp3
               DeleteOnTermination: true
-        # This user data script will download and install OPW, and set it up
+        # This user data script downloads and installs OPW, and sets it up
         # for Remote Configuration on the pipeline specified in the inputs.
         #
-        # It will also auto-mount the EBS drive associated with this instance.
+        # It also auto-mounts the EBS drive associated with this instance.
         UserData:
           Fn::Base64:
             !Sub |
               #!/bin/bash
-              # Unless explicitly stated otherwise all files in this repository are licensed under the Apache 2 License.
+              # Unless explicitly stated otherwise, all files in this repository are licensed under the Apache 2 License.
               #
               # This product includes software developed at Datadog (https://www.datadoghq.com/). Copyright 2023 Datadog, Inc.
               get_opw_ebs_drive() {
-                  # nvme0/sda1 will always be the root drive, to my knowledge.
                   echo "/dev/nvme1n1"
               }
 
@@ -242,8 +239,8 @@ Resources:
       TargetGroupARNs:
         - !Ref NLBTarget8282
   
-  # This load balancer should be used in order to communicate with the OPW
-  # instances. It is set as internal-only, so it will not be accessible
+  # This load balancer should be used to communicate with the OPW
+  # instances. It is set as internal-only, so it is not accessible
   # from the outside world.
   NLB:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -279,8 +276,8 @@ Resources:
       VpcId: !Ref VPCID
   
   # Though this is set as 0.0.0.0/0, since the load balancer is internal
-  # it will not be accessible from the outside world. This is merely a
-  # shorthand here for "any part of your private network".
+  # it is not accessible from the outside world. This is just a
+  # shorthand for "any part of your private network".
   NLBSecurityGroupTCPIngress8282:
     Type: AWS::EC2::SecurityGroupIngress
     Properties:
@@ -309,13 +306,13 @@ Resources:
           - GroupId
 
 Outputs:
-  # This output should be filled into the `observability_pipelines_worker`
+  # Put this output into the `observability_pipelines_worker`
   # section of the Datadog Agent config.
   LoadBalancerDNS:
     Description: DNS to point Datadog Agents at.
     Value: !GetAtt NLB.DNSName
   # If you need to attach additional roles to the instance, for example
-  # to access S3, this is the profile to attach them to.
+  # to access S3, attach them to this profile.
   InstanceProfile:
     Description: Instance profile to attach additional roles to.
     Value: !Ref IAMInstanceProfile

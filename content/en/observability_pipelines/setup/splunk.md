@@ -78,7 +78,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 <div class="alert alert-warning">CloudFormation installs only support Remote Configuration at this time.</div>
-<div class="alert alert-warning">Datadog does not recommend CloudFormation installs for production workloads.</div>
+<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
 
 In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
 * The VPC ID your instances will run in.
@@ -392,15 +392,15 @@ EOT
 ```
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
-To install the Worker into your AWS Account, you can use the CloudFormation template to create a Stack:
+To install the Worker in your AWS Account, use the CloudFormation template to create a Stack:
 
-  1. Download [the CloudFormation template][1] for the OPW, which you'll upload to AWS momentarily.
+  1. Download the [CloudFormation template][1] for the Worker.
 
-  2. In the **CloudFormation console**, click the **Create stack** button, and select the **With new resources (standard)** option.
+  2. In the **CloudFormation console**, click **Create stack**, and select the **With new resources (standard)** option.
 
-  3. Make sure that the **Template is ready** option is selected, and select **Upload a template file**. Select the CloudFormation template file you downloaded earlier.
+  3. Make sure that the **Template is ready** option is selected. Click **Choose file** and add the CloudFormation template file you downloaded earlier. Click **Next**.
 
-  4. On the next page (**Specify stack details**), enter a name for the stack, which can be anything you'd like.
+  4. Enter a name for the stack in **Specify stack details**.
 
   5. Fill in the parameters for the CloudFormation template. A few require special attention:
 
@@ -410,15 +410,15 @@ To install the Worker into your AWS Account, you can use the CloudFormation temp
     
   * For the **VPCID** and **SubnetIDs**, provide the subnets and VPC you chose earlier.
 
-  * All other parameters are set to reasonable defaults for an OPW deployment but are adjustable if you need.
+  * All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed.
   
-  6. On the next page (**Configure stack options**), no adjustments are required.
+  6. Click **Next**.
 
-  7. On the next page (**Review**), make sure the parameters are as you expect, click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.
+  7. Review and make sure the parameters are as expected. Click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.
 
-CloudFormation will handle installation from this point; OPW instances will spawn, download the necessary software, and start running automatically.
+CloudFormation handles the installation at this point; the Worker instances are launched and they automatically download the necessary software and start running.
 
-[1]: /resources/yaml/observability_pipelines/cloudformation/datadog.yaml
+[1]: /resources/yaml/observability_pipelines/cloudformation/splunk.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -517,7 +517,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 By default, a 288GB EBS drive is allocated to each instance, and the sample configuration above is set to use that for buffering.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
-<div class="alert alert-warning">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This will lead to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, Datadog does not recommend CloudFormation installs for production workloads.</div>
+<div class="alert alert-danger">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This leads to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, only use CloudFormation installs for non-production-level workloads.</div>
 
 By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted and formatted upon instance boot.
 {{% /tab %}}
