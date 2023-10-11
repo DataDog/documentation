@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [analyze](#analyze), [visualize](#visualize), and [export](#export) pipeline executions at multiple levels using any tag.
+The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [analyze](#analyze) [visualize](#visualize) and [export](#export) pipeline executions at multiple levels using any tag.
 
 ## Search and filter
 
@@ -21,7 +21,7 @@ You can narrow down, broaden, or shift your focus on a subset of pipeline execut
 
 ## Analyze
 
-Group your queried pipeline executions into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. By using [facets][3], which you do not need to create to search for attributes, you can accomplish the following actions:
+Group your queried pipeline executions into higher-level entities such as fields, patterns and transactions, in order to derive or consolidate information. By using [facets][3], which you do not need to create to search for attributes, you can accomplish the following actions:
 
 - Search and keep track of the progress of tests running in a CI/CD pipeline.
 - Investigate every CI/CD job execution to identify and troubleshoot failing pipelines.
