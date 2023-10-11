@@ -28,6 +28,14 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
+To add custom rules to your Scorecards dashboard using Datadog's Scorecards API: 
+
+1. Specify the name of the rule, scorecard it belongs to, rule description, and owner to pass to `/scorecard/rules`.
+2. Send an outcome of pass, fail, or skip for each {rule, service} tuple that you are evaluating to `/scorecard/outcomes/batch`.
+3. View an overview of outcomes in the Scorecards dashboard.
+
+After initial setup, any rules can also be enabled or disabled through the API. 
+
 ## How services are evaluated
 
 After the default scorecards are set up, the Scorecards page in the Service Catalog shows the list of out-of-the-box rules and the percentage of services passing those rules. Click on a rule to see more details about passing and failing services and the teams that own them.
