@@ -40,11 +40,6 @@
 
             this.filteredRulesets = new Set()
         },
-        toggleRuleSet (selectedEl) {
-            // open and close the ruleset accordian
-
-            selectedEl.nextElementSibling.classList.toggle('d-none')
-        },
         shouldShowRuleSet (ruleset, shouldShowRule) {
             // Manage visibility of ruleset group
 
@@ -102,6 +97,12 @@
                     this.filterValue[key] = value
                 }
             })
+        },
+        toggleRuleSet (selectedRulesetEl) {
+            // manage the ruleset accordian
+
+            selectedRulesetEl.classList.toggle('active')
+            selectedRulesetEl.nextElementSibling.classList.toggle('d-none')
         }
     }"
     x-init="updateWithURLParams()">
@@ -119,10 +120,11 @@
                     <button
                     data-header-id="{{ $group_id }}" 
                     class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
+                    :class="isActiveHeader === '{{ $group_id }}' && 'active'"
                     @click="toggleRuleSet($el)"
                     >
                         <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
-                        <div class="group-header__arrow">></div>
+                        <div class="group-header__arrow fw-semibold">></div>
                     </button>
                     <div class="group-header-description mb-3">
                         <div class="d-flex flex-column">
@@ -150,10 +152,9 @@
                                 x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                                 >
                                     <a href="{{.Permalink}}">{{.Title}}</a>
-                                    <span>{{$filter_info}}</span>
                                     <div class="d-flex">
                                         <span>{{ $ruleset_id }}</span>
-                                        <div class="ms-1">></div>
+                                        <div class="group-header__arrow fw-semibold ms-1">></div>
                                     </div>
                                 </div>
                             

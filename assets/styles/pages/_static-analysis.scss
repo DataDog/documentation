@@ -37,14 +37,16 @@
             position: relative;
             top: -1px;
         }
+        .group-header__arrow {
+            font-size: 18px;
+            transform: rotate(-90deg) !important;
+        }
         &:hover {
           box-shadow: 0 2px 3px rgba(0,0,0,0.3);
         }
         &.active {
           .group-header__arrow {
-            position: relative;
-            right: 12px !important;
-            transform: rotate(-90deg) !important;
+            transform: rotate(-180deg) !important;
           }
         }
       }
