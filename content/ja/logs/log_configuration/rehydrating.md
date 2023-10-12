@@ -114,7 +114,7 @@ Rehydrate from Archives ページで進行中のリハイドレートを直接�
 Datadog は、アーカイブからコンテンツをリハイドレートするために、アーカイブに対して読み取りのアクセス許可を必要とします。このアクセス許可は、いつでも変更できます。
 
 {{< tabs >}}
-{{% tab "AWS S3" %}}
+{{% tab "Amazon S3" %}}
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">AWS Role Delegation は、Datadog for Government site でサポートされていません。アクセスキーを使用する必要があります。</div>
 {{< /site-region >}}
