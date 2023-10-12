@@ -16,7 +16,7 @@ To modify security signals, you must have the `Security Signals Write` permissio
 
 {{< img src="security/cws/csm_threats_signals.png" alt="CSM Threats security signals page" width="100%">}}
 
-## View signals by status in the Threats Explorer
+## Investigate a signal
 
 The Threats Explorer displays all signals that your role permits you to view. To filter the security signals in the Threats Explorer:
 
@@ -25,9 +25,7 @@ The Threats Explorer displays all signals that your role permits you to view. To
 2. To search through signals by state, use the following search syntax `@workflow.triage.state:` and include the state (`open`, `under_review`, or `archived`) to filter on in the query.
 3. Alternatively, select the **Signal State** facet on the facet panel to filter on signals using facets.
 
-## Investigate a signal
-
-To change a signal's state:
+### Change a signal's state
 
 1. Navigate to [**Cloud Security Management** > **Issues** > **Threats**][4].
 2. Select a security signal from the table.
@@ -36,8 +34,6 @@ To change a signal's state:
     - **Open**: The signal has not yet been resolved.
     - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
     - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an **Open** state within 30 days of being created.
-
-### Update a signal's status
 
 ### Declare an incident
 
