@@ -105,7 +105,7 @@ Restrict access to individual SLOs by specifying a list of [roles][8] that are a
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles, teams (beta), or users (beta) that may edit the SLO.
+1. Use the drop-down to select one or more roles, teams, or users that may edit the SLO.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
