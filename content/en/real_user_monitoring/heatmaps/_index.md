@@ -6,6 +6,9 @@ further_reading:
 - link: '/real_user_monitoring/session_replay/'
   tag: 'Documentation'
   text: 'Session Replay'
+- link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
+  tag: 'Blog'
+  text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
