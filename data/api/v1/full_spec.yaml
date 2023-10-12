@@ -6710,7 +6710,6 @@ components:
             This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
-          default: none
           description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
