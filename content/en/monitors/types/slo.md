@@ -6,14 +6,14 @@ aliases :
 further_reading:
 - link: "/service_management/service_level_objectives/monitor"
   tag: "Documentation"
-  text: "Monitor Based SLOs"
+  text: "Monitor-Based SLOs"
 - link: "/service_management/service_level_objectives/metric"
   tag: "Documentation"
-  text: "Metric Based SLOs"
+  text: "Metric-Based SLOs"
 ---
 
 <div class="alert alert-info">
-This monitor is only available for metric based SLOs and metric monitor based SLOs.
+This monitor is only available for metric-based SLOs and metric monitor-based SLOs.
 </div>
 
 ## Overview
