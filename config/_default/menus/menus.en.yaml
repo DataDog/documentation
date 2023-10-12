@@ -2770,19 +2770,24 @@ main:
     parent: log_configuration
     identifier: log_indexes
     weight: 207
+  - name: Flex Logs
+    url: logs/log_configuration/flex_logs/
+    parent: log_configuration
+    identifier: flex_logs
+    weight: 208
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 208
+    weight: 209
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 209
+    weight: 210
   - name: Forwarding
     url: logs/log_configuration/forwarding_custom_destinations/
     parent: log_configuration
-    weight: 210
+    weight: 211
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
