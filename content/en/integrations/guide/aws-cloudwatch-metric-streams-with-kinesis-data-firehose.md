@@ -95,7 +95,7 @@ If you want to set up metric streams using the AWS Console, follow these steps f
 2. Choose the "Quick AWS Partner Setup" and select "Datadog" as the AWS Partner destination from the dropdown.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch metric stream quick partner setup" responsive="true" style="width:60%;">}}
 3. Choose the Datadog site to which you want to stream metrics and enter your [Datadog API key][1].
-4. Choose whether you want to stream all CloudWatch metrics, or only specific namespaces. You can optionally also exclude specific metrics.
+4. Choose whether you want to stream all CloudWatch metrics, or only specific namespaces. You can optionally also exclude specific metrics. If you are in a Monitoring Account, you can also choose to enable [Cross-account streaming][5].
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-namespace-filter.png" alt="Cloudwatch metric stream" responsive="true" style="width:60%;">}}
 5. Under **Add additional statistics**, include the AWS percentile metrics to send to Datadog. See the [CloudFormation template][3] for a list of the percentile metrics Datadog supports through polling.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
@@ -113,8 +113,14 @@ Once you see the Metric Stream resource has been successfully created, wait five
 [2]: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#metric-streams:streams/create
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws_streams/streams_single_region.yaml#L168-L249
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/#cross-account-metric-streaming
 {{% /tab %}}
 {{< /tabs >}}
+
+### Cross account metric streaming
+Cross-account metric streaming is an option you can use to include metrics that span across multiple AWS accounts within an AWS region in a single Metric Stream. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, you will need to [connect your source accounts][5] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
+
+**Note:** To collect custom tags and other metadata for all your streamed metrics, integrate your source accounts with Datadog.
 
 ### Disable metric streaming
 
@@ -139,3 +145,4 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=roledelegation#setup
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[5]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
