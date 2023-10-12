@@ -1,4 +1,7 @@
 import Modal from 'bootstrap/js/dist/modal';
+import Tooltip from 'bootstrap/js/dist/tooltip';
+import { getSignupFailover } from 'signup-failover';
+
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/tab';
 import 'bootstrap/js/dist/collapse';
@@ -22,10 +25,25 @@ import './components/mobile-nav'; // should move this to websites-modules
 document.querySelectorAll('.sign-up-trigger').forEach(item => {
     item.addEventListener('click', (event) => {
         event.preventDefault();
-        const signupModal = new Modal(document.getElementById('signupModal'))
-        signupModal.show(item)
+
+        getSignupFailover().then((failoverEnabled) => {
+            if (failoverEnabled) {
+                const demoModal = document.querySelector('#signupDemo');
+                const signupDemoModal = demoModal ? new Modal(demoModal) : null;
+                if(signupDemoModal) {
+                  signupDemoModal.show(item);
+                }
+            } else {
+                const signupModal = new Modal(document.getElementById('signupModal'))
+                signupModal.show(item)
+            }
+        });
     })
 })
 
 // TODO: split up code from datadog-docs.js into modules after webpack migration
 // import './components/sidenav';
+
+// Add Bootstrap Tooltip across docs
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+Array.from(tooltipTriggerList).map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))

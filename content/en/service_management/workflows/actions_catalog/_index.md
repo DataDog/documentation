@@ -3,14 +3,20 @@ title: Actions Catalog
 kind: documentation
 type: actioncatalog
 disable_toc: true
+disable_sidebar: false
 aliases:
 - /workflows/actions_catalog
+- /service_management/service_management/workflows/actions_catalog
 cascade:
   disable_sidebar: true
   type: actioncatalog
   algolia:
       rank: 40
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Datadog Workflow Automation provides actions that can be performed against your infrastructure and integrations. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
 

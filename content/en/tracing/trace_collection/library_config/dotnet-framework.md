@@ -183,9 +183,14 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+**Example** (with specified tag names): `User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
+**Example** (without specified tag names): `User-ID`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
+If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
+Added in version 1.18.3.<br>
+Response header support and entries without tag names added in version 1.26.0.<br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
@@ -208,6 +213,10 @@ Added in version 1.17.0. <br>
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+**Default**: `31`
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.

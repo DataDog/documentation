@@ -57,6 +57,10 @@ module:
        target: layouts/partials/footer_link.html
      - source: layouts/partials/language-selector-docs.html
        target: layouts/partials/language-selector-docs.html
+     - source: layouts/partials/modals/modal-header-demo-signup.html
+       target: layouts/partials/modals/modal-header-demo-signup.html
+     - source: assets/styles/components/_demo-request-modal.scss
+       target: assets/styles/components/_demo-request-modal.scss
      - source: assets/styles/components/_announcement-banner.scss
        target: assets/styles/components/_announcement-banner.scss
      - source: assets/styles/components/_footer.scss
@@ -85,6 +89,9 @@ module:
     - source: content/ja
       target: content
       lang: ja
+    - source: content/ko
+      target: content
+      lang: ko
     - source: static
       target: static
     - source: layouts

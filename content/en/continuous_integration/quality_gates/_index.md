@@ -34,13 +34,13 @@ There are two main steps required to set up and use Quality Gates:
 To create Quality Gates rules for your organization, your user account must have the `quality_gate_rules_write` [permission][1].
 
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
-2. Select the rule type. You can choose between `Static Analysis` and `Test`.
-3. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. More information on [rule scopes](#rule-scope).
+2. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. See [rule scopes](#rule-scope) for more information.
+3. Select the rule type. You can choose between `Static Analysis` and `Test`.
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected.
 
 The following example shows how to create a static analysis rule that fails when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
 
-   {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
+   {{< img src="ci/qg_rule_condition_sa_errors_security_2.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
 5. Select whether the rule should block the pipeline or not when it fails.
    Non-blocking rules are helpful when rolling out a new rule and wanting to verify its behavior before making it blocking.
@@ -51,7 +51,7 @@ The following example shows how to create a static analysis rule that fails when
 
 ## Invoking quality gates
 
-To use quality gates, your [`datadog-ci`][7] version should be higher or equal than `2.16.0`.
+To use quality gates, your [`datadog-ci`][7] version should be `2.19.0` or later.
 
 You can invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
@@ -66,13 +66,13 @@ are sent to Datadog <strong>before</strong> the <code>datadog-ci gate evaluate</
 Otherwise, the rules might have an incorrect behavior due to the absence of the events.
 </div>
 
-The command requires the `DATADOG_API_KEY` and `DATADOG_APP_KEY` environment variables to point to your [Datadog API Key][5]
+The command requires the `DD_API_KEY` and `DD_APP_KEY` environment variables to point to your [Datadog API Key][5]
 and [Datadog Application Key][6]. Also, you need to set the `DD_BETA_COMMANDS_ENABLED` environment
-variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
+variable as `true`. Optionally, you can specify the `DD_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
 
 <pre>
 <code>
-DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DATADOG_API_KEY=&lt;API_KEY&gt; DATADOG_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
+DD_BETA_COMMANDS_ENABLED=true DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=&lt;API_KEY&gt; DD_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
 </code>
 </pre>
 
@@ -81,6 +81,8 @@ The behavior of the command can be modified using the following flags:
 based on the current pipeline context. By default, the command succeeds.
 - `--fail-if-unavailable`: when this flag is specified, the command fails if one or more rules could not be evaluated because of an internal issue.
 By default, the command succeeds.
+- `--timeout`: the command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes.
+The command typically completes within a few minutes, but it could take longer due to processing delays in Datadog.
 - `--no-wait`: by default, the command waits a certain amount of time for the events (tests, static analysis violations) to arrive to Datadog.
 This step is important as it makes sure that the events are queryable in Datadog before the rules are executed,
 avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is
@@ -150,6 +152,19 @@ To delete a Quality Gates rule, click the **Delete** icon next to the **Edit** b
 
 {{< img src="ci/delete_quality_gate_rule.png" alt="Delete a Quality Gates rule" style="width:90%;">}}
 
+## Enable GitHub check creation
+
+You can automatically create a [GitHub check][9] for each rule evaluated. When this feature is enabled, the evaluation results appear directly in GitHub.
+The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
+
+To enable GitHub Checks:
+1. Go to the [GitHub integration tile][10]. If you do not have this integration set up, or you don't have a GitHub app within the integration, follow [the GitHub integration documentation][11] to set one up.
+2. Grant `Checks: Write` access to the GitHub application.
+
+After the permission is granted, you should be able to see the checks in GitHub.
+
+**Note**: a current limitation is that you cannot re-run a check to re-run the related Quality Gates rule.
+
 ## Permissions
 
 Only users with the `quality_gate_rules_write` permission can create and edit Quality Gate rules. Users with the `quality_gate_rules_read` permission can view Quality Gate rules.
@@ -171,3 +186,6 @@ You can view information about who created, modified, and deleted Quality Gates 
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://github.com/DataDog/datadog-ci/blob/master/README.md
 [8]: /continuous_integration/guides/flaky_test_management/
+[9]: https://docs.github.com/en/rest/checks
+[10]: https://app.datadoghq.com/integrations/github
+[11]: https://docs.datadoghq.com/integrations/github/

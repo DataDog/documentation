@@ -1,6 +1,6 @@
 # make
 SHELL = /bin/bash
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -93,8 +93,11 @@ find-int: hugpython ## Find the source for an integration (downloads/updates int
 node_modules: package.json yarn.lock
 	@yarn install --immutable
 
+source-dd-source:
+	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
+
 # All the requirements for a full build
-dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
+dependencies: clean hugpython all-examples data/permissions.json source-dd-source update_pre_build node_modules
 	@make placeholders
 	@make derefs
 
@@ -122,7 +125,7 @@ placeholders:
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.14246916-py2.py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.20386518-py3-none-any.whl; \
 	fi
 
 update_pre_build:
@@ -192,3 +195,34 @@ all-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst
 # dynamic prerequisites equivalent to examples/clean-go-examples examples/clean-java-examples examples/clean-python-examples etc.
 clean-examples: $(foreach repo,$(EXAMPLES_REPOS),$(addprefix examples/, $(patsubst datadog-api-client-%,clean-%-examples,$(repo))))
 	@rm -rf examples
+
+
+# Function that will clone a repo or sparse clone a repo
+# If the dir already exists it will attempt to update it instead
+#
+# Arguments
+# 1 = dir name to clone to
+# 2 = https repo url
+# 3 = Branch name
+# 4 = whether this is a sparse checkout or not
+# 5 = sparse files/dirs to include other than cone root files
+define source_repo
+	@if $(4) ; then \
+		if [ -d ./integrations_data/extracted/$(1) ]; then \
+			git -C ./integrations_data/extracted/$(1) checkout $(3); \
+		else \
+			rm -rf ./integrations_data/extracted/$(1); \
+			git clone --branch $(3) --depth 1 --filter=blob:none --no-checkout $(2) ./integrations_data/extracted/$(1); \
+			cd ./integrations_data/extracted/$(1); \
+			git sparse-checkout init --cone; \
+			git sparse-checkout set $(5); \
+			git checkout $(3); \
+		fi \
+	else \
+		if [ -d ./integrations_data/extracted/$(1) ]; then \
+			git -C ./integrations_data/extracted/$(1) pull --ff-only; \
+		else \
+			git clone --branch $(3) --depth 1 --filter=blob:none $(2) ./integrations_data/extracted/$(1); \
+		fi \
+	fi
+endef

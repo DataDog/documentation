@@ -26,6 +26,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/engineering/our-journey-taking-kubernetes-state-metrics-to-the-next-level/"
       tag: "Blog"
       text: "Our Journey Taking Kubernetes State Metrics to the Next Level"
+algolia:
+  tags: ["ksm", "ksm core"]
 ---
 
 ## Overview
@@ -76,13 +78,12 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    kubeStateMetricsCore:
-      enabled: true
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+  features:
+    kubeStateMetricsCore:
+      enabled: true
 ```
 
 Note: Datadog Operator v0.7.0 or greater is required.
@@ -142,6 +143,46 @@ The Kubernetes State Metrics Core check is not backward compatible, be sure to r
 
 `kubernetes_state.job.succeeded`
 : In `kubernetes_state`, the `kuberenetes.job.succeeded` was `count` type. In `kubernetes_state_core` it is `gauge` type. 
+
+### Node-level tag assignment
+
+Host or node-level tags no longer appear on cluster-centric metrics. Only metrics relative to an actual node in the cluster, like `kubernetes_state.node.by_condition` or `kubernetes_state.container.restarts`, continue to inherit their respective host or node level tags. 
+
+To add tags globally, use the `DD_TAGS` environment variable, or use the respective Helm or Operator configurations. Instance-only level tags can be specified by mounting a custom `kubernetes_state_core.yaml` into the Cluster Agent.
+
+{{< tabs >}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  kubeStateMetricsCore:
+    enabled: true
+  tags: 
+    - "<TAG_KEY>:<TAG_VALUE>"
+```
+{{% /tab %}}
+{{% tab "Operator" %}}
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+    tags:
+      - "<TAG_KEY>:<TAG_VALUE>"
+  features:
+    kubeStateMetricsCore:
+      enabled: true
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Metrics like `kubernetes_state.container.memory_limit.total` or `kubernetes_state.node.count` are aggregate counts of groups within a cluster, and host or node-level tags are not added.
+
+### Legacy check
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -605,6 +646,54 @@ The Kubernetes State Metrics Core check does not include any events.
 [Run the Cluster Agent's `status` subcommand][6] inside your Cluster Agent container and look for `kubernetes_state_core` under the Checks section.
 
 ## Troubleshooting
+
+### Timeout errors
+
+By default, the Kubernetes State Metrics Core check waits 10 seconds for a response from the Kubernetes API server. For large clusters, the request may time out, resulting in missing metrics.
+
+You can avoid this by setting the environment variable `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` to a higher value than the default 10 seconds.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Update your `datadog-agent.yaml` with the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+          value: <value_greater_than_10>
+```
+
+Then apply the new configuration:
+
+```shell
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Update your `datadog-values.yaml` with the following configuration:
+
+```yaml
+clusterAgent:
+  env:
+    - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+      value: <value_greater_than_10>
+```
+
+Then upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 Need help? Contact [Datadog support][7].
 

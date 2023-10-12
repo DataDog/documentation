@@ -34,7 +34,7 @@ Supported platforms (64-bit x86 only):
 |||
 | ---  | ----------- |
 | Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
-| Cloud and container| AWS ECS<br>AWS EKS (Helm)|
+| Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
 
 Supported products (Agent 7.45+):
 
@@ -73,7 +73,7 @@ DD_API_KEY=<DD_API_KEY> \
 DD_SITE="ddog-gov.com" \
 DD_FIPS_MODE=1 \
 bash -c "$(curl -L \
-   https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 Setting the `DD_FIPS_MODE` environment variable installs the FIPS package along with the Agent, and configures the Agent to use the proxy. There are no additional configuration steps if you're using this method, but you should [verify the installation](#verify-your-installation).

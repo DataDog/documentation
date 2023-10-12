@@ -105,7 +105,7 @@ In the Datadog UI, go to the Agent Installation page for Ubuntu by navigating to
 Example Ubuntu one-line install command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 Go to the in-app [Agent Installation page][18] for your operating system for the most up-to-date installation instructions.
@@ -139,7 +139,7 @@ Agent (v7.36.1)
 
 #### Events
 
-In the Datadog UI, go to the Events Explorer Page **Events > Explorer**. The Agent sends events to Datadog when an Agent is started or restarted. The following message displays if your Agent successfully installs:
+In the Datadog UI, go to the Events Managment Page **Service Mgmt > Event Management**. The Agent sends events to Datadog when an Agent is started or restarted. The following message displays if your Agent successfully installs:
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
@@ -226,7 +226,7 @@ For example, let's say you have data that is collected from different teams and 
 
 5. After a few minutes, go to **Metrics > Summary** again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and whatever personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
 
-6. Go to **Events > Explorer** and find the custom tags displayed with the latest Agent Event.
+6. Go to **Service Mgmt > Event Management** and find the custom tags displayed with the latest Agent Event.
 
 #### Other configuration options
 

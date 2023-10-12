@@ -153,7 +153,7 @@ Once [log collection is enabled][3], do the following to set up [custom log coll
       logs:
         - type: file
           path: "<RUBY_LOG_FILE_PATH>.log"
-          service: ruby
+          service: <SERVICE_NAME>
           source: ruby
           sourcecategory: sourcecode
           ## Uncomment the following processing rule for multiline logs if they

@@ -647,6 +647,14 @@ components:
     AzureAccount:
       description: Datadog-Azure integrations configured for your organization.
       properties:
+        app_service_plan_filters:
+          description: 'Limit the Azure app service plans that are pulled into Datadog
+            using tags.
+
+            Only app service plans that match one of the defined tags are imported
+            into Datadog.'
+          example: key:value,filter:example
+          type: string
         automute:
           description: Silence monitors for expected Azure VM shutdowns.
           example: true
@@ -659,6 +667,15 @@ components:
           description: Your Azure web application secret key.
           example: testingx./Sw*g/Y33t..R1cH+hScMDt
           type: string
+        cspm_enabled:
+          description: Enable Cloud Security Management Misconfigurations for your
+            organization.
+          example: true
+          type: boolean
+        custom_metrics_enabled:
+          description: Enable custom metrics for your organization.
+          example: true
+          type: boolean
         errors:
           description: Errors in your configuration.
           example:
@@ -1566,7 +1583,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
-      type: object
     DistributionWidgetHistogramRequestType:
       description: Request type for the histogram request.
       enum:
@@ -2866,7 +2882,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionCloudCostQueryDefinition'
-      type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries, scalar, or event list response. Event list response
         formats are supported by Geomap widgets.
@@ -3506,6 +3521,11 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         event_query:
           $ref: '#/components/schemas/EventQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -3517,6 +3537,13 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -3969,11 +3996,12 @@ components:
       - api_usage
       - apm_fargate_usage
       - apm_host_usage
+      - apm_usm_usage
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
-      - container_excl_agent_usage
       - ci_visibility_itr_usage
+      - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
@@ -3984,20 +4012,24 @@ components:
       - dbm_hosts_usage
       - dbm_queries_usage
       - estimated_indexed_logs_usage
-      - estimated_ingested_logs_usage
       - estimated_indexed_spans_usage
+      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
+      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - infra_host_usage
       - invocations_usage
+      - mobile_app_testing_usage
+      - ndm_netflow_usage
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - sds_scanned_bytes_usage
+      - serverless_apps_usage
       - snmp_usage
-      - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
       type: string
@@ -4005,11 +4037,12 @@ components:
       - API_USAGE
       - APM_FARGATE_USAGE
       - APM_HOST_USAGE
+      - APM_USM_USAGE
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
-      - CONTAINER_EXCL_AGENT_USAGE
       - CI_VISIBILITY_ITR_USAGE
+      - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
@@ -4020,20 +4053,24 @@ components:
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
+      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
+      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
+      - MOBILE_APP_TESTING_USAGE
+      - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SERVERLESS_APPS_USAGE
       - SNMP_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
     IFrameWidgetDefinition:
@@ -4494,6 +4531,7 @@ components:
       - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - trace_stream
       - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
@@ -4507,6 +4545,7 @@ components:
       - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - TRACE_STREAM
       - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
@@ -5669,7 +5708,6 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
-      type: object
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6328,7 +6366,7 @@ components:
           readOnly: true
           type: integer
         matching_downtimes:
-          description: A list of active downtimes that match this monitor.
+          description: A list of active v1 downtimes that match this monitor.
           items:
             $ref: '#/components/schemas/MatchingDowntime'
           type: array
@@ -6561,7 +6599,6 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
-      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -6673,7 +6710,6 @@ components:
             This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
-          default: none
           description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
@@ -6857,7 +6893,8 @@ components:
             nullable: true
             type: integer
           deprecated: true
-          description: Information about the downtime applied to the monitor.
+          description: Information about the downtime applied to the monitor. Only
+            shows v1 downtimes.
           type: object
         synthetics_check_id:
           deprecated: true
@@ -6900,6 +6937,33 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsCustomSchedule:
+      description: Configuration options for the custom schedule. **This feature is
+        in private beta.**
+      properties:
+        recurrences:
+          description: Array of custom schedule recurrences.
+          items:
+            $ref: '#/components/schemas/MonitorOptionsCustomScheduleRecurrence'
+          type: array
+      type: object
+    MonitorOptionsCustomScheduleRecurrence:
+      description: Configuration for a recurrence set on the monitor options for custom
+        schedule.
+      properties:
+        rrule:
+          description: Defines the recurrence rule (RRULE) for a given schedule.
+          example: FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+          type: string
+        start:
+          description: Defines the start date and time of the recurring schedule.
+          example: '2023-08-31T16:30:00'
+          type: string
+        timezone:
+          description: Defines the timezone the schedule runs on.
+          example: Europe/Paris
+          type: string
+      type: object
     MonitorOptionsNotificationPresets:
       default: show_all
       description: Toggles the display of additional content sent in the monitor notification.
@@ -6917,6 +6981,8 @@ components:
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
+        custom_schedule:
+          $ref: '#/components/schemas/MonitorOptionsCustomSchedule'
         evaluation_window:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
       type: object
@@ -6981,18 +7047,20 @@ components:
     MonitorSearchCount:
       description: Search facets.
       items:
-        description: A facet item.
-        properties:
-          count:
-            description: The number of found monitors with the listed value.
-            format: int64
-            readOnly: true
-            type: integer
-          name:
-            description: The facet value.
-            readOnly: true
-        type: object
+        $ref: '#/components/schemas/MonitorSearchCountItem'
       type: array
+    MonitorSearchCountItem:
+      description: A facet item.
+      properties:
+        count:
+          description: The number of found monitors with the listed value.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: The facet value.
+          readOnly: true
+      type: object
     MonitorSearchResponse:
       description: The response form a monitor search.
       example:
@@ -7510,6 +7578,8 @@ components:
       - appsec_fargate_percentage
       - apm_host_usage
       - apm_host_percentage
+      - apm_usm_usage
+      - apm_usm_percentage
       - appsec_usage
       - appsec_percentage
       - browser_usage
@@ -7552,6 +7622,10 @@ components:
       - infra_host_percentage
       - invocations_usage
       - invocations_percentage
+      - mobile_app_testing_percentage
+      - mobile_app_testing_usage
+      - ndm_netflow_usage
+      - ndm_netflow_percentage
       - npm_host_usage
       - npm_host_percentage
       - obs_pipeline_bytes_usage
@@ -7562,6 +7636,8 @@ components:
       - profiled_fargate_percentage
       - profiled_host_usage
       - profiled_host_percentage
+      - serverless_apps_usage
+      - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
       - estimated_rum_sessions_usage
@@ -7570,6 +7646,8 @@ components:
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
       - vuln_management_hosts_percentage
+      - sds_scanned_bytes_usage
+      - sds_scanned_bytes_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7581,6 +7659,8 @@ components:
       - APPSEC_FARGATE_PERCENTAGE
       - APM_HOST_USAGE
       - APM_HOST_PERCENTAGE
+      - APM_USM_USAGE
+      - APM_USM_PERCENTAGE
       - APPSEC_USAGE
       - APPSEC_PERCENTAGE
       - BROWSER_USAGE
@@ -7623,6 +7703,10 @@ components:
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
       - INVOCATIONS_PERCENTAGE
+      - MOBILE_APP_TESTING_USAGE
+      - MOBILE_APP_TESTING_PERCENTAGE
+      - NDM_NETFLOW_USAGE
+      - NDM_NETFLOW_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
       - OBS_PIPELINE_BYTES_USAGE
@@ -7633,6 +7717,8 @@ components:
       - PROFILED_FARGATE_PERCENTAGE
       - PROFILED_HOST_USAGE
       - PROFILED_HOST_PERCENTAGE
+      - SERVERLESS_APPS_USAGE
+      - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
@@ -7641,6 +7727,8 @@ components:
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
+      - SDS_SCANNED_BYTES_USAGE
+      - SDS_SCANNED_BYTES_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7667,6 +7755,15 @@ components:
           type: number
         apm_host_usage:
           description: The APM host usage by tag(s).
+          format: double
+          type: number
+        apm_usm_percentage:
+          description: The percentage of APM and Universal Service Monitoring host
+            usage by tag(s).
+          format: double
+          type: number
+        apm_usm_usage:
+          description: The APM and Universal Service Monitoring host usage by tag(s).
           format: double
           type: number
         appsec_fargate_percentage:
@@ -7723,19 +7820,21 @@ components:
           format: double
           type: number
         cspm_containers_percentage:
-          description: The percentage of CSPM container usage by tag(s).
+          description: The percentage of Cloud Security Management Pro container usage
+            by tag(s).
           format: double
           type: number
         cspm_containers_usage:
-          description: The CSPM container usage by tag(s).
+          description: The Cloud Security Management Pro container usage by tag(s).
           format: double
           type: number
         cspm_hosts_percentage:
-          description: The percentage of CSPM host usage by by tag(s).
+          description: The percentage of Cloud Security Management Pro host usage
+            by tag(s).
           format: double
           type: number
         cspm_hosts_usage:
-          description: The CSPM host usage by tag(s).
+          description: The Cloud Security Management Pro host usage by tag(s).
           format: double
           type: number
         custom_ingested_timeseries_percentage:
@@ -7859,6 +7958,24 @@ components:
           description: The Lambda invocation usage by tag(s).
           format: double
           type: number
+        mobile_app_testing_percentage:
+          description: The percentage of Synthetic mobile application test usage by
+            tag(s).
+          format: double
+          type: number
+        mobile_app_testing_usage:
+          description: The Synthetic mobile application test usage by tag(s).
+          format: double
+          type: number
+        ndm_netflow_percentage:
+          description: The percentage of Network Device Monitoring NetFlow usage by
+            tag(s).
+          format: double
+          type: number
+        ndm_netflow_usage:
+          description: The Network Device Monitoring NetFlow usage by tag(s).
+          format: double
+          type: number
         npm_host_percentage:
           description: The percentage of network host usage by tag(s).
           format: double
@@ -7897,6 +8014,22 @@ components:
           type: number
         profiled_host_usage:
           description: The profiled hosts usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_percentage:
+          description: The percentage of Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        sds_scanned_bytes_usage:
+          description: The total Sensitive Data Scanner usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_percentage:
+          description: The percentage of Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        serverless_apps_usage:
+          description: The total Serverless Apps usage by tag(s).
           format: double
           type: number
         snmp_percentage:
@@ -8070,7 +8203,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellResourceType:
       default: notebook_cells
       description: Type of the Notebook Cell resource.
@@ -8126,7 +8258,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCellTime:
       description: Timeframe for the notebook cell. When 'null', the notebook global
         time is used.
@@ -8181,7 +8312,6 @@ components:
       - $ref: '#/components/schemas/NotebookHeatMapCellAttributes'
       - $ref: '#/components/schemas/NotebookDistributionCellAttributes'
       - $ref: '#/components/schemas/NotebookLogStreamCellAttributes'
-      type: object
     NotebookCreateData:
       description: The data for a notebook create request.
       properties:
@@ -8281,7 +8411,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookRelativeTime'
       - $ref: '#/components/schemas/NotebookAbsoluteTime'
-      type: object
     NotebookGraphSize:
       description: The size of the graph.
       enum:
@@ -8581,7 +8710,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/NotebookCellCreateRequest'
       - $ref: '#/components/schemas/NotebookCellUpdateRequest'
-      type: object
     NotebookUpdateData:
       description: The data for a notebook update request.
       properties:
@@ -9084,6 +9212,86 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    PowerpackTemplateVariableContents:
+      description: Powerpack template variable contents.
+      properties:
+        name:
+          description: The name of the variable.
+          example: host1
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable.
+          type: string
+        values:
+          description: One or many template variable values within the saved view,
+            which will be unioned together using `OR` if more than one is specified.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: One or more possible values of the template variable.
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - name
+      - values
+      type: object
+    PowerpackTemplateVariables:
+      description: Powerpack template variables.
+      properties:
+        controlled_by_powerpack:
+          description: Template variables controlled at the powerpack level.
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariableContents'
+          type: array
+        controlled_externally:
+          description: Template variables controlled by the external resource, such
+            as the dashboard this powerpack is on.
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariableContents'
+          type: array
+      type: object
+    PowerpackWidgetDefinition:
+      description: The powerpack widget allows you to keep similar graphs together
+        on your timeboard. Each group has a custom header, can hold one to many graphs,
+        and is collapsible.
+      properties:
+        background_color:
+          description: Background color of the powerpack title.
+          type: string
+        banner_img:
+          description: URL of image to display as a banner for the powerpack.
+          type: string
+        powerpack_id:
+          description: UUID of the associated powerpack.
+          example: df43cf2a-6475-490d-b686-6fbc6cb9a49c
+          type: string
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
+        template_variables:
+          $ref: '#/components/schemas/PowerpackTemplateVariables'
+        title:
+          description: Title of the widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/PowerpackWidgetDefinitionType'
+      required:
+      - type
+      - powerpack_id
+      type: object
+    PowerpackWidgetDefinitionType:
+      default: powerpack
+      description: Type of the powerpack widget.
+      enum:
+      - powerpack
+      example: powerpack
+      type: string
+      x-enum-varnames:
+      - POWERPACK
     ProcessQueryDefinition:
       description: The process query to use in the widget.
       properties:
@@ -11519,6 +11727,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceLevelObjectiveQuery:
       description: 'A metric-based SLO. **Required if type is `metric`**. Note that
         Datadog only allows the sum by aggregator
@@ -11647,6 +11856,7 @@ components:
       - name
       - thresholds
       - type
+      type: object
     ServiceMapWidgetDefinition:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
@@ -12215,6 +12425,170 @@ components:
       - account
       - url
       type: object
+    SplitConfig:
+      description: Encapsulates all user choices about how to split a graph.
+      properties:
+        limit:
+          description: Maximum number of graphs to display in the widget.
+          example: 24
+          format: int64
+          maximum: 100
+          minimum: 1
+          type: integer
+        sort:
+          $ref: '#/components/schemas/SplitSort'
+        split_dimensions:
+          description: The dimension(s) on which to split the graph
+          items:
+            $ref: '#/components/schemas/SplitDimension'
+          maxItems: 1
+          minItems: 1
+          type: array
+        static_splits:
+          description: Manual selection of tags making split graph widget static
+          items:
+            $ref: '#/components/schemas/SplitVectorEntry'
+          maxItems: 100
+          type: array
+      required:
+      - split_dimensions
+      - limit
+      - sort
+      type: object
+    SplitConfigSortCompute:
+      description: Defines the metric and aggregation used as the sort value.
+      properties:
+        aggregation:
+          description: How to aggregate the sort metric for the purposes of ordering.
+          example: sum
+          type: string
+        metric:
+          description: The metric to use for sorting graphs.
+          example: system.cpu.user
+          type: string
+      required:
+      - aggregation
+      - metric
+      type: object
+    SplitDimension:
+      description: The property by which the graph splits
+      example:
+        one_graph_per: service
+      properties:
+        one_graph_per:
+          description: The system interprets this attribute differently depending
+            on the data source of the query being split. For metrics, it's a tag.
+            For the events platform, it's an attribute or tag.
+          example: service
+          type: string
+      required:
+      - one_graph_per
+      type: object
+    SplitGraphSourceWidgetDefinition:
+      description: The original widget we are splitting on.
+      oneOf:
+      - $ref: '#/components/schemas/ChangeWidgetDefinition'
+      - $ref: '#/components/schemas/GeomapWidgetDefinition'
+      - $ref: '#/components/schemas/QueryValueWidgetDefinition'
+      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
+      - $ref: '#/components/schemas/TableWidgetDefinition'
+      - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+      - $ref: '#/components/schemas/ToplistWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
+    SplitGraphVizSize:
+      description: Size of the individual graphs in the split.
+      enum:
+      - xs
+      - sm
+      - md
+      - lg
+      example: sm
+      type: string
+      x-enum-varnames:
+      - XS
+      - SM
+      - MD
+      - LG
+    SplitGraphWidgetDefinition:
+      description: 'The split graph widget allows you to create repeating units of
+        a graph - one for each value in a group (for example: one per service)
+
+        '
+      properties:
+        has_uniform_y_axes:
+          description: Normalize y axes across graphs
+          type: boolean
+        size:
+          $ref: '#/components/schemas/SplitGraphVizSize'
+        source_widget_definition:
+          $ref: '#/components/schemas/SplitGraphSourceWidgetDefinition'
+        split_config:
+          $ref: '#/components/schemas/SplitConfig'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/SplitGraphWidgetDefinitionType'
+      required:
+      - size
+      - type
+      - source_widget_definition
+      - split_config
+      type: object
+    SplitGraphWidgetDefinitionType:
+      default: split_group
+      description: Type of the split graph widget
+      enum:
+      - split_group
+      example: split_group
+      type: string
+      x-enum-varnames:
+      - SPLIT_GROUP
+    SplitSort:
+      description: Controls the order in which graphs appear in the split.
+      properties:
+        compute:
+          $ref: '#/components/schemas/SplitConfigSortCompute'
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - order
+      type: object
+    SplitVectorEntry:
+      description: The widget displays one graph for each entry in this parameter.
+      example:
+      - tag_key: demo
+        tag_values:
+        - env
+      items:
+        $ref: '#/components/schemas/SplitVectorEntryItem'
+      minItems: 1
+      type: array
+    SplitVectorEntryItem:
+      description: The split graph list contains a graph for each value of the split
+        dimension.
+      minLength: 1
+      properties:
+        tag_key:
+          description: The tag key.
+          example: demo
+          minLength: 1
+          type: string
+        tag_values:
+          description: The tag values.
+          example:
+          - env
+          items:
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - tag_key
+      - tag_values
+      type: object
     SuccessfulSignalUpdateResponse:
       description: Updated signal data following a successfully performed update.
       properties:
@@ -12274,7 +12648,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SunburstWidgetLegendTable'
       - $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomatic'
-      type: object
     SunburstWidgetLegendInlineAutomatic:
       description: Configuration of inline or automatic legends.
       properties:
@@ -12288,6 +12661,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendInlineAutomaticType'
       required:
       - type
+      type: object
     SunburstWidgetLegendInlineAutomaticType:
       description: Whether to show the legend inline or let it be automatically generated.
       enum:
@@ -12305,6 +12679,7 @@ components:
           $ref: '#/components/schemas/SunburstWidgetLegendTableType'
       required:
       - type
+      type: object
     SunburstWidgetLegendTableType:
       description: Whether or not to show a table legend.
       enum:
@@ -12351,6 +12726,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        style:
+          $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
       description: The steps used in a Synthetic multistep API test.
@@ -12673,7 +13050,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
-      type: object
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -12757,6 +13133,8 @@ components:
         target:
           description: Value used by the operator.
           example: 123456
+        timingsScope:
+          $ref: '#/components/schemas/SyntheticsAssertionTimingsScope'
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
       required:
@@ -12764,6 +13142,15 @@ components:
       - operator
       - target
       type: object
+    SyntheticsAssertionTimingsScope:
+      description: Timings scope for response time assertions.
+      enum:
+      - all
+      - withoutDNS
+      type: string
+      x-enum-varnames:
+      - ALL
+      - WITHOUT_DNS
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
@@ -12853,7 +13240,6 @@ components:
       - $ref: '#/components/schemas/SyntheticsBasicAuthDigest'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthClient'
       - $ref: '#/components/schemas/SyntheticsBasicAuthOauthROP'
-      type: object
     SyntheticsBasicAuthDigest:
       description: Object to handle digest authentication when performing the test.
       properties:
@@ -16140,21 +16526,21 @@ components:
           format: double
           type: number
         cspm_container_percentage:
-          description: The percentage of Cloud Security Posture Management container
-            usage by tag(s)
+          description: The percentage of Cloud Security Management Pro container usage
+            by tag(s)
           format: double
           type: number
         cspm_container_usage:
-          description: The Cloud Security Posture Management container usage by tag(s)
+          description: The Cloud Security Management Pro container usage by tag(s)
           format: double
           type: number
         cspm_host_percentage:
-          description: The percentage of Cloud Security Posture Management host usage
+          description: The percentage of Cloud Security Management Pro host usage
             by tag(s)
           format: double
           type: number
         cspm_host_usage:
-          description: The Cloud Security Posture Management host usage by tag(s)
+          description: The Cloud Security Management Pro host usage by tag(s)
           format: double
           type: number
         custom_timeseries_percentage:
@@ -16668,48 +17054,48 @@ components:
           type: array
       type: object
     UsageCloudSecurityPostureManagementHour:
-      description: Cloud Security Posture Management usage for a given organization
-        for a given hour.
+      description: Cloud Security Management Pro usage for a given organization for
+        a given hour.
       properties:
         aas_host_count:
-          description: The number of Cloud Security Posture Management Azure app services
+          description: The number of Cloud Security Management Pro Azure app services
             hosts during a given hour.
           format: double
           nullable: true
           type: number
         aws_host_count:
-          description: The number of Cloud Security Posture Management AWS hosts during
+          description: The number of Cloud Security Management Pro AWS hosts during
             a given hour.
           format: double
           nullable: true
           type: number
         azure_host_count:
-          description: The number of Cloud Security Posture Management Azure hosts
-            during a given hour.
-          format: double
-          nullable: true
-          type: number
-        compliance_host_count:
-          description: The number of Cloud Security Posture Management hosts during
+          description: The number of Cloud Security Management Pro Azure hosts during
             a given hour.
           format: double
           nullable: true
           type: number
+        compliance_host_count:
+          description: The number of Cloud Security Management Pro hosts during a
+            given hour.
+          format: double
+          nullable: true
+          type: number
         container_count:
-          description: The total number of Cloud Security Posture Management containers
+          description: The total number of Cloud Security Management Pro containers
             during a given hour.
           format: double
           nullable: true
           type: number
         gcp_host_count:
-          description: The number of Cloud Security Posture Management GCP hosts during
+          description: The number of Cloud Security Management Pro GCP hosts during
             a given hour.
           format: double
           nullable: true
           type: number
         host_count:
-          description: The total number of Cloud Security Posture Management hosts
-            during a given hour.
+          description: The total number of Cloud Security Management Pro hosts during
+            a given hour.
           format: double
           nullable: true
           type: number
@@ -16725,11 +17111,11 @@ components:
           type: string
       type: object
     UsageCloudSecurityPostureManagementResponse:
-      description: The response containing the Cloud Security Posture Management usage
+      description: The response containing the Cloud Security Management Pro usage
         for each hour for a given organization.
       properties:
         usage:
-          description: Get hourly usage for Cloud Security Posture Management.
+          description: Get hourly usage for Cloud Security Management Pro.
           items:
             $ref: '#/components/schemas/UsageCloudSecurityPostureManagementHour'
           type: array
@@ -17409,6 +17795,12 @@ components:
     UsageProfilingHour:
       description: The number of profiled hosts for each hour for a given organization.
       properties:
+        aas_count:
+          description: Contains the total number of profiled Azure app services reporting
+            during a given hour.
+          format: int64
+          nullable: true
+          type: integer
         avg_container_agent_count:
           description: Get average number of container agents for that hour.
           format: int64
@@ -17856,39 +18248,97 @@ components:
             hours in the current date for all organizations.
           format: int64
           type: integer
+        csm_container_enterprise_compliance_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise compliance
+            containers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_container_enterprise_cws_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise Cloud
+            Workload Security containers over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_container_enterprise_total_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aas_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure app services hosts over all hours in the current date
+            for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise AWS hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_azure_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_compliance_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise compliance hosts over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_cws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Cloud Workload Security hosts over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_gcp_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise GCP hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_total_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cspm_aas_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure app services hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure app services hosts over all hours in the current date for all
+            organizations.
           format: int64
           type: integer
         cspm_aws_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            AWS hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro AWS hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_container_avg:
-          description: Shows the average number of Cloud Security Posture Management
-            containers over all hours in the current date for all organizations.
+          description: Shows the average number of Cloud Security Management Pro containers
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_container_hwm:
-          description: Shows the high-water mark of Cloud Security Posture Management
+          description: Shows the high-water mark of Cloud Security Management Pro
             containers over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            GCP hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro GCP hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         cspm_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            hosts over all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro hosts over all hours in the current date for all organizations.
           format: int64
           type: integer
         custom_ts_avg:
@@ -18015,6 +18465,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        ndm_netflow_events_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for all organizations.
@@ -18052,6 +18507,11 @@ components:
           items:
             $ref: '#/components/schemas/UsageSummaryDateOrg'
           type: array
+        profiling_aas_count_top99p:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             in the current date for all organizations.
@@ -18103,6 +18563,21 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg:
+          description: Shows the average of the number of Serverless Apps for Google
+            Cloud for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for all organizations.
@@ -18111,6 +18586,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for all organizations.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm:
@@ -18289,40 +18769,97 @@ components:
             hours in the current date for the given org.
           format: int64
           type: integer
-        cspm_aas_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure app services hosts over all hours in the current date for the given
-            org.
-          format: int64
-          type: integer
-        cspm_aws_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            AWS hosts over all hours in the current date for the given org.
-          format: int64
-          type: integer
-        cspm_azure_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure hosts over all hours in the current date for the given org.
-          format: int64
-          type: integer
-        cspm_container_avg:
-          description: Shows the average number of Cloud Security Posture Management
+        csm_container_enterprise_compliance_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise compliance
             containers over all hours in the current date for the given org.
           format: int64
           type: integer
+        csm_container_enterprise_cws_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise Cloud
+            Workload Security containers over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_container_enterprise_total_count_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aas_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure app services hosts over all hours in the current date
+            for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_aws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise AWS hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_azure_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_compliance_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise compliance hosts over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_cws_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Cloud Workload Security hosts over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        csm_host_enterprise_gcp_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise GCP hosts over all hours in the current date for the given
+            org.
+          format: int64
+          type: integer
+        csm_host_enterprise_total_host_count_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure app services hosts over all hours in the current date for the
+            given org.
+          format: int64
+          type: integer
+        cspm_aws_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro AWS hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_azure_host_top99p:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        cspm_container_avg:
+          description: Shows the average number of Cloud Security Management Pro containers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cspm_container_hwm:
-          description: Shows the high-water mark of Cloud Security Posture Management
+          description: Shows the high-water mark of Cloud Security Management Pro
             containers over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_gcp_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            GCP hosts over all hours in the current date for the given org.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro GCP hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         cspm_host_top99p:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            hosts over all hours in the current date for the given org.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         custom_ts_avg:
@@ -18450,6 +18987,11 @@ components:
         name:
           description: The organization name.
           type: string
+        ndm_netflow_events_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current date for the given org.
@@ -18480,6 +19022,11 @@ components:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             date for the given org.
+          format: int64
+          type: integer
+        profiling_aas_count_top99p:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         profiling_host_top99p:
@@ -18539,6 +19086,21 @@ components:
             given org.
           format: int64
           type: integer
+        serverless_apps_azure_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg:
+          description: Shows the average of the number of Serverless Apps for Google
+            Cloud for the given date and given org.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg:
+          description: Shows the average of the number of Serverless Apps for Azure
+            and Google Cloud for the given date and given org.
+          format: int64
+          type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
             in the current date for the given org.
@@ -18547,6 +19109,11 @@ components:
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_sum:
+          description: Shows the sum of all Synthetic mobile application tests over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm:
@@ -18730,41 +19297,95 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
-        cspm_aas_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure app services hosts over all hours in the current months for all
+        csm_container_enterprise_compliance_count_agg_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise compliance
+            containers over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_container_enterprise_cws_count_agg_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise Cloud
+            Workload Security containers over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
+        csm_container_enterprise_total_count_agg_sum:
+          description: Shows the sum of all Cloud Security Management Enterprise containers
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_aas_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure app services hosts over all hours in the current months
+            for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_aws_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise AWS hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_azure_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Azure hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_compliance_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise compliance hosts over all hours in the current months for all
             organizations.
           format: int64
           type: integer
+        csm_host_enterprise_cws_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise Cloud Workload Security hosts over all hours in the current
+            months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_gcp_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise GCP hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        csm_host_enterprise_total_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Enterprise hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        cspm_aas_host_top99p_sum:
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure app services hosts over all hours in the current months for
+            all organizations.
+          format: int64
+          type: integer
         cspm_aws_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            AWS hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro AWS hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_azure_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            Azure hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro Azure hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_container_avg_sum:
-          description: Shows the average number of Cloud Security Posture Management
-            containers over all hours in the current months for all organizations.
+          description: Shows the average number of Cloud Security Management Pro containers
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_container_hwm_sum:
           description: Shows the sum of the the high-water marks of Cloud Security
-            Posture Management containers over all hours in the current months for
-            all organizations.
+            Management Pro containers over all hours in the current months for all
+            organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            GCP hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro GCP hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         cspm_host_top99p_sum:
-          description: Shows the 99th percentile of all Cloud Security Posture Management
-            hosts over all hours in the current months for all organizations.
+          description: Shows the 99th percentile of all Cloud Security Management
+            Pro hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
@@ -18912,6 +19533,11 @@ components:
             current months for all organizations.
           format: int64
           type: integer
+        ndm_netflow_events_agg_sum:
+          description: Shows the sum of all Network Device Monitoring NetFlow events
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
             the current months for all organizations.
@@ -18942,6 +19568,11 @@ components:
           description: Shows the 99th percentile of all hosts reported by the Datadog
             exporter for the OpenTelemetry Collector over all hours in the current
             months for all organizations.
+          format: int64
+          type: integer
+        profiling_aas_count_top99p_sum:
+          description: Shows the 99th percentile of all profiled Azure app services
+            over all hours in the current months for all organizations.
           format: int64
           type: integer
         profiling_container_agent_count_avg:
@@ -19012,6 +19643,21 @@ components:
             organizations.
           format: int64
           type: integer
+        serverless_apps_azure_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure in the
+            current months for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_google_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Google Cloud
+            in the current months for all organizations.
+          format: int64
+          type: integer
+        serverless_apps_total_count_avg_sum:
+          description: Sum of the average number of Serverless Apps for Azure and
+            Google Cloud in the current months for all organizations.
+          format: int64
+          type: integer
         start_date:
           description: Shows the first date of usage in the current months for all
             organizations.
@@ -19025,6 +19671,11 @@ components:
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        synthetics_mobile_test_runs_agg_sum:
+          description: Shows the sum of Synthetic mobile application tests over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         synthetics_parallel_testing_max_slots_hwm_sum:
@@ -19650,31 +20301,32 @@ components:
       - $ref: '#/components/schemas/EventStreamWidgetDefinition'
       - $ref: '#/components/schemas/EventTimelineWidgetDefinition'
       - $ref: '#/components/schemas/FreeTextWidgetDefinition'
+      - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/GeomapWidgetDefinition'
       - $ref: '#/components/schemas/GroupWidgetDefinition'
       - $ref: '#/components/schemas/HeatMapWidgetDefinition'
       - $ref: '#/components/schemas/HostMapWidgetDefinition'
       - $ref: '#/components/schemas/IFrameWidgetDefinition'
       - $ref: '#/components/schemas/ImageWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
       - $ref: '#/components/schemas/LogStreamWidgetDefinition'
       - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
       - $ref: '#/components/schemas/NoteWidgetDefinition'
+      - $ref: '#/components/schemas/PowerpackWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
       - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
-      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
-      - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/SLOListWidgetDefinition'
+      - $ref: '#/components/schemas/SLOWidgetDefinition'
+      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SplitGraphWidgetDefinition'
       - $ref: '#/components/schemas/SunburstWidgetDefinition'
       - $ref: '#/components/schemas/TableWidgetDefinition'
       - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
-      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
-      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
-      - $ref: '#/components/schemas/FunnelWidgetDefinition'
       - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
-      type: object
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
     WidgetDisplayType:
       description: Type of display to use for the request.
       enum:
@@ -20255,17 +20907,37 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_service_catalog_read: View service catalog and service definitions.
+            apm_service_catalog_write: Add, modify, and delete service catalog definitions
+              when those definitions are maintained by Datadog.
+            ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
+              the API.
+            ci_visibility_read: View CI Visibility.
+            create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
+            incident_notification_settings_write: Configure Incidents Notification
+              settings.
+            incident_read: View incidents in Datadog.
+            incident_settings_write: Configure Incident Settings.
+            incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, mute, and delete individual monitors.
+            security_monitoring_filters_read: Read Security Filters.
+            security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_rules_read: Read Detection Rules.
+            security_monitoring_rules_write: Create and edit Detection Rules.
+            security_monitoring_signals_read: View Security Signals.
+            security_monitoring_suppressions_read: Read Rule Suppressions.
+            security_monitoring_suppressions_write: Write Rule Suppressions.
             slos_corrections: Apply, edit, and delete SLO status corrections. A user
               with this permission can make status corrections, even if they do not
               have permission to edit those SLOs.
@@ -20281,6 +20953,11 @@ components:
               in addition to having access to the associated installation guidelines.
             synthetics_read: List and view configured Synthetic tests and test results.
             synthetics_write: Create, edit, and delete Synthetic tests.
+            teams_manage: Manage Teams. Create, delete, rename, and edit metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. A User with this permission can view Team
+              names, metadata, and which Users are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -21035,6 +21712,21 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: The maximum number of dashboards returned in the list.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 100
+          format: int64
+          type: integer
+      - description: The specific offset to use as the beginning of the returned response.
+        in: query
+        name: start
+        required: false
+        schema:
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -21059,6 +21751,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 3
+      x-pagination:
+        limitParam: count
+        pageOffsetParam: start
+        resultsPath: dashboards
       x-undo:
         type: safe
     patch:
@@ -24902,6 +25598,11 @@ paths:
           description: Authentication error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - create_webhooks
       summary: Create a webhooks integration
       tags:
       - Webhooks Integration
@@ -25852,6 +26553,7 @@ paths:
         name: page_size
         required: false
         schema:
+          default: 100
           example: 20
           format: int32
           maximum: 1000
@@ -25888,6 +26590,9 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-pagination:
+        limitParam: page_size
+        pageParam: page
       x-undo:
         type: safe
     post:
@@ -26028,37 +26733,8 @@ paths:
         ##### Event Alert Query
 
 
-        Example: `events(''sources:nagios status:error,warning priority:normal tags:
-        "string query"'').rollup("count").last("1h")"`
-
-
-        - `event`, the event query string:
-
-        - `string_query` free text query to match against event title and text.
-
-        - `sources` event sources (comma-separated).
-
-        - `status` event statuses (comma-separated). Valid options: error, warn, and
-        info.
-
-        - `priority` event priorities (comma-separated). Valid options: low, normal,
-        all.
-
-        - `host` event reporting host (comma-separated).
-
-        - `tags` event tags (comma-separated).
-
-        - `excluded_tags` excluded event tags (comma-separated).
-
-        - `rollup` the stats roll-up method. `count` is the only supported method
-        now.
-
-        - `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported
-        timeframes: m, h and d. This value should not exceed 48 hours.
-
-
-        **NOTE** The Event Alert Query is being deprecated and replaced by the Event
-        V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
+        **Note:** The Event Alert Query has been replaced by the Event V2 Alert Query.
+        For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).
 
 
         ##### Event V2 Alert Query
@@ -26190,10 +26866,6 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3,
-        and US5.
-
-
         ##### CI Pipelines Alert Query
 
 
@@ -26216,9 +26888,6 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
-
-
         ##### CI Tests Alert Query
 
 
@@ -26239,10 +26908,6 @@ paths:
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
         - `#` an integer or decimal number used to set the threshold.
-
-
-        **NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1,
-        US3, and US5.
 
 
         ##### Error Tracking Alert Query
@@ -27224,6 +27889,7 @@ paths:
         name: count
         required: false
         schema:
+          default: 100
           example: 5
           format: int64
           type: integer
@@ -27309,6 +27975,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 2
+      x-pagination:
+        limitParam: count
+        pageOffsetParam: start
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -28360,6 +29030,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 1000
           format: int64
           type: integer
       - description: The specific offset to use as the beginning of the returned response.
@@ -28405,6 +29076,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -28588,6 +29263,7 @@ paths:
         name: limit
         required: false
         schema:
+          default: 25
           format: int64
           type: integer
       responses:
@@ -28614,6 +29290,10 @@ paths:
       tags:
       - Service Level Objective Corrections
       x-menu-order: 2
+      x-pagination:
+        limitParam: limit
+        pageOffsetParam: offset
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -29416,11 +30096,6 @@ paths:
           description: OK
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_default_settings_read
       summary: Get the default locations
       tags:
       - Synthetics
@@ -29435,14 +30110,19 @@ paths:
       - description: Used for pagination. The number of tests returned in the page.
         in: query
         name: page_size
+        required: false
         schema:
-          type: string
+          default: 100
+          format: int64
+          type: integer
       - description: Used for pagination. Which page you want to retrieve. Starts
           at zero.
         in: query
         name: page_number
+        required: false
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -29473,6 +30153,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-pagination:
+        limitParam: page_size
+        pageParam: page_number
+        resultsPath: tests
       x-undo:
         type: safe
     post:
@@ -31419,7 +32103,7 @@ paths:
         type: safe
   /api/v1/usage/cspm:
     get:
-      description: 'Get hourly usage for cloud security posture management (CSPM).
+      description: 'Get hourly usage for cloud security management (CSM) pro.
 
         **Note:** hourly usage data for all products is now available in the [Get
         hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
@@ -31475,7 +32159,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for CSPM
+      summary: Get hourly usage for CSM Pro
       tags:
       - Usage Metering
       x-menu-order: 28

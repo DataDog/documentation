@@ -42,7 +42,7 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 6.1.0
+integration_version: 7.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -286,7 +286,7 @@ GitLab Runner チェックは、Runner が GitLab マスターと通信できる
 
 [1]: https://docs.gitlab.com/ee/administration/monitoring/prometheus
 [2]: https://app.datadoghq.com/ci/getting-started
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.gitlab.com/ee/user/admin_area/monitoring/health_check.html#readiness
 [6]: https://docs.datadoghq.com/ja/help/

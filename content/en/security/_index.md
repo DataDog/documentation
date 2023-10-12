@@ -2,9 +2,10 @@
 title: Datadog Security
 kind: documentation
 aliases:
-  - compliance_monitoring
-  - cloud_siem
-  - security_platform
+  - /compliance_monitoring
+  - /cloud_siem
+  - /security_platform
+  - /security/security_monitoring
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
@@ -39,6 +40,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
+  - link: "https://www.datadoghq.com/blog/chaos-engineering-for-security/"
+    tag: "Blog"
+    text: "Security-focused chaos engineering experiments for the cloud"
 cascade:
     algolia:
         rank: 70

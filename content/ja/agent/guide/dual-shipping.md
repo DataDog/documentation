@@ -129,18 +129,18 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\
 
 ## オーケストレーター
 
-### YAML 構成
-`datadog.yaml` で:
+### HELM 構成
+Datadog `values.yaml` で:
 ```yaml
-orchestrator_explorer:
-  [...]
-  orchestrator_additional_endpoints:
-    "https://orchestrator.datadoghq.com":
-    - apikey2
-    - apikey3
-    "https://orchestrator.datadoghq.eu":
-    - apikey4
+clusterAgent:
+...
+  datadog_cluster_yaml:
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.ddog-gov.com":
+        - apikey2 
 ```
+
 
 ### 環境変数コンフィギュレーション
 
@@ -288,7 +288,7 @@ DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Posture Management (CSPM)
+## Cloud Security Management Misconfigurations
 
 ### YAML 構成
 
@@ -313,7 +313,7 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% agent-dual-shipping %}}
 
-## クラウドワークロードセキュリティ (CWS)
+## Cloud Security Management Threats
 
 ### YAML 構成
 `datadog.yaml` で:
@@ -361,7 +361,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.datadoghq.com"
+        Host: "{{< region-param key=agent_http_endpoint >}}"
         Port: 443
         is_reliable: true
 ```

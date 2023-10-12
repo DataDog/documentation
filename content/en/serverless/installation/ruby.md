@@ -191,7 +191,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
     ```
 
-    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 3. Configure your Lambda functions
 
@@ -328,7 +328,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 - See the [troubleshooting guide][5] if you have trouble collecting the telemetry
 - See the [advanced configurations][6] to
     - connect your telemetry using tags
-    - collect telemetry for AWS API Gateway, SQS, etc.
+    - collect telemetry for Amazon API Gateway, SQS, etc.
     - capture the Lambda request and response payloads
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces

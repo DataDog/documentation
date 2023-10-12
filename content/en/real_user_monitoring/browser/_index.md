@@ -1537,8 +1537,19 @@ Telemetry data (such as errors and debug logs) about SDK execution is sent to Da
 
 `excludedActivityUrls`
 : Optional<br/>
-**Type:** List<br/>
+**Type**: List<br/>
 A list of request origins ignored when computing the page activity. See [How page activity is calculated][16].
+
+`workerUrl`
+: Optional<br/>
+**Type**: String<br/>
+URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
+
+`storeContextsAcrossPages`
+: Optional<br/>
+**Type**: String<br/>
+**Default**: `false`<br/>
+Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][24] for more details and specific limitations.
 
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
@@ -1559,6 +1570,12 @@ Use a secure session cookie. This disables RUM events sent on insecure (non-HTTP
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
 Use a secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
+
+`allowFallbackToLocalStorage`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Allows the use of `localStorage` when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
 
 ### Tagging
 
@@ -1657,3 +1674,6 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [19]: /getting_started/tagging/using_tags
 [20]: /real_user_monitoring/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
+[22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
+[24]: https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context#contexts-life-cycle

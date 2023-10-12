@@ -63,14 +63,14 @@ Datadog Event Stream の SNS メッセージは、`HTTPS` と `Email` の両方�
 Datadog Event Explorer で SNS メッセージを `HTTPS` で受信するには
 
 1. SNS マネジメントコンソールの **Topics** セクションで、目的のトピックを選択し、**Create Subscription** をクリックします。
-2. プロトコルとして `HTTPS` を選択し、以下の Webhook URL を入力します。
+2. プロトコルとして `HTTPS` を選択し、`<API_KEY>` を有効な Datadog API キーの値に置き換えて、以下の Webhook URL を入力します。
 
     ```text
     ## Datadog US site
-    https://app.datadoghq.com/intake/webhook/sns?api_key=<API KEY>
+    https://app.datadoghq.com/intake/webhook/sns?api_key=<API_KEY>
 
     ## Datadog EU site
-    https://app.datadoghq.eu/intake/webhook/sns?api_key=<API KEY>
+    https://app.datadoghq.eu/intake/webhook/sns?api_key=<API_KEY>
     ```
 
 3. **Enable raw message delivery** のチェックは外したままにします。

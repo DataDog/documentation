@@ -43,7 +43,7 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | 並列テストスロット        | `datadog.estimated_usage.synthetics.parallel_testing_slots` | 並列テストスロットの推定使用量。 |
 | Network Hosts                 | `datadog.estimated_usage.network.hosts` | 過去 1 時間に確認された一意の NPM ホスト。 |
 | Network Devices               | `datadog.estimated_usage.network.devices` | 過去 1 時間に確認された一意の NDM デバイス。 |
-| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | 過去 1 時間に確認された一意のプロファイリングコンテナ。 |
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | 過去 1 時間に確認された一意のプロファイリングホスト。 |
 | Profiled Containers           | `datadog.estimated_usage.profiling.containers` | 過去 5 分間に確認された一意のプロファイリングコンテナ。 |
 | Profiler Fargate タスク        | `datadog.estimated_usage.profiling.fargate_tasks` | 過去 5 分間に確認された一意のプロファイリング Fargate タスク。 |
 | CSPM ホスト                    | `datadog.estimated_usage.cspm.hosts` | 過去 1 時間に確認された一意の CSPM ホスト。 |

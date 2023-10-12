@@ -62,7 +62,7 @@ For more information and additional settings, see the [plugin documentation][1].
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
-    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 2. Set the required environment variables
 
@@ -157,7 +157,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
     - connect your telemetry using tags
-    - collect telemetry for AWS API Gateway, SQS, etc.
+    - collect telemetry for Amazon API Gateway, SQS, etc.
     - capture the Lambda request and response payloads
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces

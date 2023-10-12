@@ -5,7 +5,7 @@ aliases:
 cascade:
   algolia:
     category: はじめに
-    rank: 90
+    rank: 50
 disable_sidebar: true
 further_reading:
 - link: https://learn.datadoghq.com/
@@ -29,6 +29,7 @@ title: はじめに
 {{< nextlink href="/getting_started/profiler" >}}<u>プロファイラー</u>: Continuous Profiler を使用して、コードのパフォーマンスの問題を見つけて修正します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>タグ</u>: メトリクス、ログ、トレースのタグ付けを開始します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Datadog HTTP API を使用します。{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>セッションリプレイ</u>: セッションリプレイで、ユーザーが製品とどのようにやり取りしているかを詳しく確認します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic モニタリング</u>: Synthetic テストを使用して、API エンドポイントと主要なビジネス処理をテストおよび監視する方法を学びます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: システムの問題を伝達および追跡します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: データベースの状態とパフォーマンスを表示し、発生した問題をすばやくトラブルシューティングします。{{< /nextlink >}}

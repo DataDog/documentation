@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/integrations/observability_pipelines/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /observability_pipelines/setup/
   tag: ドキュメント
@@ -16,7 +19,7 @@ title: Observability Pipelines（観測データの制御）
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では観測可能性パイプラインは利用できません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では観測可能性パイプラインはサポートされていません。</div>
 {{< /site-region >}}
 
 
@@ -59,7 +62,7 @@ Datadog UI は、観測可能性パイプラインワーカーを管理するた
 
 ログとメトリクスのサンプリング、フィルター、重複排除、集計により、観測可能性データの量を最適化し、サイズを小さくします。データ標準を実施し、メトリクスのタグを制御することで、テレメトリーを管理します。
 
-{{< img src="observability_pipelines/transforms.png" alt="集計、AWS EC2 Metadata、dedupe など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="集計、Amazon EC2 Metadata、重複除去 (dedupe) など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
 
 ### テレメトリーデータから機密データを編集する
 
