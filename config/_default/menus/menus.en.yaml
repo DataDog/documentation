@@ -1850,8 +1850,13 @@ main:
   - name: Connect Synthetics and Traces
     url: /synthetics/apm/
     parent: tracing_other_telemetry
-    identifier: tracing_connect_sythetics
+    identifier: tracing_connect_synthetics
     weight: 403
+  - name: Connect Profiles and Traces
+    url: /profiler/connect_traces_and_profiles/
+    parent: tracing_other_telemetry
+    identifier: tracing_connect_profiles
+    weight: 404
   - name: Trace Explorer
     url: tracing/trace_explorer/
     parent: tracing
