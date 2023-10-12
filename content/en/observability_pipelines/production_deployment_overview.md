@@ -3,6 +3,10 @@ title: Deployment Design and Principles
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 When you start deploying Observability Pipelines Worker into your infrastructure, you may run into questions such as: 
