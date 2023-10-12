@@ -8915,6 +8915,23 @@ api:
         - ListConfluentAccount
       unstable: []
       order: 10
+  - name: Container Images
+    url: /api/latest/container-images/
+    identifier: container-images
+    generated: true
+  - name: Get all Container Images
+    url: '#get-all-container-images'
+    identifier: container-images-get-all-container-images
+    parent: container-images
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListContainerImages
+      unstable:
+        - v2
+      order: 1
   - name: Fastly Integration
     url: /api/latest/fastly-integration/
     identifier: fastly-integration
