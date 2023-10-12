@@ -107,7 +107,7 @@
     }"
     x-init="updateWithURLParams()">
         {{ $pad := newScratch }}
-        <div class="col-10 col-md-12 order-md-1">
+        <div class="col-10 col-md-12 order-1 w-100">
             <div class="list-unstyled ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
