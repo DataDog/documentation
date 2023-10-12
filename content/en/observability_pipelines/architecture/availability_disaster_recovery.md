@@ -3,6 +3,10 @@ title: High Availability and Disaster Recovery
 kind: Documentation
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 In the context of Observability Pipelines, high availability refers to the Observability Pipelines Worker remaining available if there are any system issues.
 
 {{< img src="observability_pipelines/production_deployment_overview/high_availability.png" alt="A diagram showing availability zone one with load balancer one offline, and both agents sending data to load balancer two and then to Worker one and Worker two. In availability zone two, Worker three is down, so both load balancers are sending data to Worker N" style="width:65%;" >}}

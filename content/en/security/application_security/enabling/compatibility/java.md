@@ -1,5 +1,5 @@
 ---
-title: Java Compatibility Requirements 
+title: Java Compatibility Requirements
 kind: documentation
 code_lang: java
 type: multi-code-lang
@@ -14,22 +14,23 @@ The following ASM capabilities are supported in the Java library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
 | Threat Protection| 1.9.0 |
+| Customize response to blocked requests | 1.11.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.1.4 |
 | Vulnerability Management for Code-level (beta) | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
-**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.      
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
 |Type           | Threat Detection support |  Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |   
+| AWS Lambda    | {{< X >}}         |                           |
 | Azure App Service | {{< X >}}     | {{< X >}}                 |
 
 **Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
@@ -49,7 +50,7 @@ Datadog does not officially support any early-access versions of Java.
 
 
 
-                                                                                                                                 
+
 
 ### Web framework compatibility
 
@@ -108,7 +109,7 @@ Datadog does not officially support any early-access versions of Java.
 
 ### Data store compatibility
 
-`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers. 
+`dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
 **Datastore tracing provides:**
 

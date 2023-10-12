@@ -635,9 +635,9 @@ Other examples:
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
-### Data matcher
+### Use data matcher to discard unneeded text
 
-An example for parsing a percentage and using the `data` matcher to discard the `%`.
+If you have a log where after you have parsed what is needed and know that the text after that point is safe to discard, you can use the data matcher to do so. For the following log example, you can use the `data` matcher to discard the `%` at the end.
 
 **Log**:
 

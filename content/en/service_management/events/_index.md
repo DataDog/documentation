@@ -31,7 +31,7 @@ Datadog Events gives you a consolidated interface to search, analyze, and filter
 
 Without any additional setup, Datadog Events automatically gathers events that are collected by the Agent and installed integrations.
 
-More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [AWS ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
+More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
 
 ## Sending custom events to Datadog
 

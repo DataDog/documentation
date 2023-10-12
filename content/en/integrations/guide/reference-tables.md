@@ -57,9 +57,9 @@ Click **New Reference Table +**, then upload a CSV file, name the appropriate co
 
 {{% /tab %}}
 
-{{% tab "AWS S3" %}}
+{{% tab "Amazon S3" %}}
 
-Reference Tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
+Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
 To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
@@ -86,9 +86,9 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 ```
 ### Define the table
 
-Click **New Reference Table +**, then add a name, select AWS S3, fill out all fields, click import, and define the primary key for lookups.
+Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the AWS S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 

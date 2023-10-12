@@ -18,7 +18,7 @@ aliases:
 
 ## Datadog Lambda Extension and Forwarder
 
-{{< whatsnext desc="You need either the Lambda extension or the Forwarder to send telemetry from your Lambda functions. You may also need the Forwarder to collect logs for non-Lambda serverless resources, such as AWS API Gateway." >}}
+{{< whatsnext desc="You need either the Lambda extension or the Forwarder to send telemetry from your Lambda functions. You may also need the Forwarder to collect logs for non-Lambda serverless resources, such as Amazon API Gateway." >}}
     {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda Extension{{< /nextlink >}}
     {{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Datadog Forwarder Lambda Function{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -38,7 +38,7 @@ aliases:
     {{< nextlink href="/integrations/amazon_lambda/" >}}AWS Lambda Integration{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_step_functions/" >}}AWS Step Functions Integration{{< /nextlink >}}
     {{< nextlink href="/integrations/amazon_appsync/" >}}AWS AppSync Integration{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_api_gateway/" >}}AWS API Gateway Integration{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_sqs/" >}}AWS SQS Integration{{< /nextlink >}}
-    {{< nextlink href="/integrations/amazon_sns/" >}}AWS SNS Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_api_gateway/" >}}Amazon API Gateway Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sqs/" >}}Amazon SQS Integration{{< /nextlink >}}
+    {{< nextlink href="/integrations/amazon_sns/" >}}Amazon SNS Integration{{< /nextlink >}}
 {{< /whatsnext >}}

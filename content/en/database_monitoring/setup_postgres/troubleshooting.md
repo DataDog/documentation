@@ -117,7 +117,7 @@ ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statemen
 
 ### Certain queries are missing
 
-If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see , follow this guide.
+If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see, follow this guide.
 | Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
 | For Postgres 9.6, if you only see queries executed by the datadog user, then the instance configuration is likely missing some settings. | For monitoring instances on Postgres 9.6, the Datadog Agent instance config must use the settings `pg_stat_statements_view: datadog.pg_stat_statements()` and `pg_stat_activity_view: datadog.pg_stat_activity()` based on the functions created in the initial setup guide. These functions must be created in all databases. |
@@ -209,7 +209,7 @@ For versions prior to Postgres 12, this feature is not supported. However, if yo
 | Node     | [node-postgres][17]       | Uses the extended query protocol and cannot be disabled. To enable the Datadog Agent to collect execution plans, use [pg-format][18] to format SQL Queries before passing them to [node-postgres][17].|
 
 #### Query is in a database ignored by the Agent instance config
-The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the the value of this setting in your instance config and the default values in the [example config file][19].
+The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the value of this setting in your instance config and the default values in the [example config file][19].
 
 **Note:** The `postgres` database is also ignored by default in Agent versions <7.41.0.
 
