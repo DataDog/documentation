@@ -19,6 +19,7 @@
     {{ .Content }}
 
     {{ $products := slice }}
+    {{ $rulset_params := .Params }}
     <div 
     class="d-flex flex-column"
     x-data="{
@@ -109,6 +110,8 @@
             <div class="list-unstyled ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
+                {{ $ruleset_title := index (index $rulset_params.rulesets .Key) "title"}}
+                {{ $ruleset_description := index (index $rulset_params.rulesets .Key) "description"}}
                 <div
                 data-group-id="{{$group_id}}" 
                 class="mt-1 ruleset"
@@ -118,12 +121,12 @@
                     class="group-header border border-dark border-2 bg-light p-1 mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
-                        <span>{Title of Ruleset} for {{.Key}}</span>
+                        <span>{{$ruleset_title}}</span>
                         <div class="">></div>
                     </div>
                     <div class="group-header-description">
                         <p class="m-0 fw-semibold">{{printf "Ruleset ID: %s" .Key}}</p>
-                        <p class="m-0">{Description of Ruleset}</p>
+                        <p class="m-0">{{$ruleset_description}}</p>
                         <div class="list-unstyled ps-0 mt-1">
                             {{ range .Pages }}
                                 {{/*  
@@ -132,14 +135,14 @@
                                         - group_id: docker-best-practices
                                         - meta.id: docker-best-practices/absolute-workdir
                                         - title: Use absolute workdir
-                                        - ruleset description (tbd)
-                                        - ruleset title (tbd)
+                                        - ruleset description
+                                        - ruleset title
                                     - filter metadata
                                         - language, severity, category
                                 */}}
                                 {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
                                 {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
-                                {{ $ruleset_info := delimit (slice $filter_info $ruleset_id .Params.group_id (replaceRE "(`|')" "" .Title )) ";" }}
+                                {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info $ruleset_id $ruleset_description $ruleset_title .Params.group_id .Title ) ";")) }}
                                 <div 
                                 class="rule d-flex justify-content-between border p-1"
                                 x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
