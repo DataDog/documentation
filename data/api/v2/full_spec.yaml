@@ -3462,6 +3462,316 @@ components:
             $ref: '#/components/schemas/ConfluentResourceResponseData'
           type: array
       type: object
+    ContainerImage:
+      description: Container Image object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ContainerImageAttributes'
+        id:
+          description: Container Image ID.
+          type: string
+        type:
+          $ref: '#/components/schemas/ContainerImageType'
+      type: object
+    ContainerImageAttributes:
+      description: Attributes for a Container Image.
+      properties:
+        container_count:
+          description: Number of containers running the image.
+          format: int64
+          type: integer
+        image_flavors:
+          description: 'List of platform-specific images associated with the image
+            record.
+
+            The list contains more than 1 entry for multi-architecture images.'
+          items:
+            $ref: '#/components/schemas/ContainerImageFlavor'
+          type: array
+        image_tags:
+          description: List of image tags associated with the Container Image.
+          items:
+            description: An image tag associated with the Container Image.
+            type: string
+          type: array
+        images_built_at:
+          description: 'List of build times associated with the Container Image.
+
+            The list contains more than 1 entry for multi-architecture images.'
+          items:
+            description: Time the platform-specific Container Image was built.
+            type: string
+          type: array
+        name:
+          description: Name of the Container Image.
+          type: string
+        os_architectures:
+          description: List of Operating System architectures supported by the Container
+            Image.
+          items:
+            description: Operating System architecture supported by the Container
+              Image.
+            example: amd64
+            type: string
+          type: array
+        os_names:
+          description: List of Operating System names supported by the Container Image.
+          items:
+            description: Operating System supported by the Container Image.
+            example: linux
+            type: string
+          type: array
+        os_versions:
+          description: List of Operating System versions supported by the Container
+            Image.
+          items:
+            description: Operating System version supported by the Container Image.
+            type: string
+          type: array
+        published_at:
+          description: Time the image was pushed to the container registry.
+          type: string
+        registry:
+          description: Registry the Container Image was pushed to.
+          type: string
+        repo_digest:
+          description: Digest of the compressed image manifest.
+          type: string
+        repository:
+          description: Repository where the Container Image is stored in.
+          type: string
+        short_image:
+          description: Short version of the Container Image name.
+          type: string
+        sizes:
+          description: 'List of size for each platform-specific image associated with
+            the image record.
+
+            The list contains more than 1 entry for multi-architecture images.'
+          items:
+            description: Size of the platform-specific Container Image.
+            format: int64
+            type: integer
+          type: array
+        sources:
+          description: List of sources where the Container Image was collected from.
+          items:
+            description: Source where the Container Image was collected from.
+            type: string
+          type: array
+        tags:
+          description: List of tags associated with the Container Image.
+          items:
+            description: A tag associated with the Container Image.
+            type: string
+          type: array
+        vulnerability_count:
+          $ref: '#/components/schemas/ContainerImageVulnerabilities'
+      type: object
+    ContainerImageFlavor:
+      description: Container Image breakdown by supported platform.
+      properties:
+        built_at:
+          description: Time the platform-specific Container Image was built.
+          type: string
+        os_architecture:
+          description: Operating System architecture supported by the Container Image.
+          type: string
+        os_name:
+          description: Operating System name supported by the Container Image.
+          type: string
+        os_version:
+          description: Operating System version supported by the Container Image.
+          type: string
+        size:
+          description: Size of the platform-specific Container Image.
+          format: int64
+          type: integer
+      type: object
+    ContainerImageGroup:
+      description: Container Image Group object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ContainerImageGroupAttributes'
+        id:
+          description: Container Image Group ID.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ContainerImageGroupRelationships'
+        type:
+          $ref: '#/components/schemas/ContainerImageGroupType'
+      type: object
+    ContainerImageGroupAttributes:
+      description: Attributes for a Container Image Group.
+      properties:
+        count:
+          description: Number of Container Images in the group.
+          format: int64
+          type: integer
+        name:
+          description: Name of the Container Image group.
+          type: string
+        tags:
+          description: Tags from the group name parsed in key/value format.
+          type: object
+      type: object
+    ContainerImageGroupImagesRelationshipsLink:
+      description: Relationships to Container Images inside a Container Image Group.
+      properties:
+        data:
+          $ref: '#/components/schemas/ContainerImageGroupRelationshipsData'
+        links:
+          $ref: '#/components/schemas/ContainerImageGroupRelationshipsLinks'
+      type: object
+    ContainerImageGroupRelationships:
+      description: Relationships inside a Container Image Group.
+      properties:
+        container_images:
+          $ref: '#/components/schemas/ContainerImageGroupImagesRelationshipsLink'
+      type: object
+    ContainerImageGroupRelationshipsData:
+      description: Links data.
+      items:
+        description: A link data.
+        type: string
+      type: array
+    ContainerImageGroupRelationshipsLinks:
+      description: Links attributes.
+      properties:
+        related:
+          description: Link to related Container Images.
+          type: string
+      type: object
+    ContainerImageGroupType:
+      default: container_image_group
+      description: Type of Container Image Group.
+      enum:
+      - container_image_group
+      example: container_image_group
+      type: string
+      x-enum-varnames:
+      - CONTAINER_IMAGE_GROUP
+    ContainerImageItem:
+      description: Possible Container Image models.
+      oneOf:
+      - $ref: '#/components/schemas/ContainerImage'
+      - $ref: '#/components/schemas/ContainerImageGroup'
+    ContainerImageMeta:
+      description: Response metadata object.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ContainerImageMetaPage'
+      type: object
+    ContainerImageMetaPage:
+      description: Paging attributes.
+      properties:
+        cursor:
+          description: The cursor used to get the current results, if any.
+          type: string
+        limit:
+          description: Number of results returned
+          format: int32
+          maximum: 10000
+          minimum: 0
+          type: integer
+        next_cursor:
+          description: The cursor used to get the next results, if any.
+          type: string
+        prev_cursor:
+          description: The cursor used to get the previous results, if any.
+          nullable: true
+          type: string
+        total:
+          description: Total number of records that match the query.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ContainerImageMetaPageType'
+      type: object
+    ContainerImageMetaPageType:
+      default: cursor_limit
+      description: Type of Container Image pagination.
+      enum:
+      - cursor_limit
+      example: cursor_limit
+      type: string
+      x-enum-varnames:
+      - CURSOR_LIMIT
+    ContainerImageType:
+      default: container_image
+      description: Type of Container Image.
+      enum:
+      - container_image
+      example: container_image
+      type: string
+      x-enum-varnames:
+      - CONTAINER_IMAGE
+    ContainerImageVulnerabilities:
+      description: Vulnerability counts associated with the Container Image.
+      properties:
+        asset_id:
+          description: ID of the Container Image.
+          type: string
+        critical:
+          description: Number of vulnerabilities with CVSS Critical severity.
+          format: int64
+          type: integer
+        high:
+          description: Number of vulnerabilities with CVSS High severity.
+          format: int64
+          type: integer
+        low:
+          description: Number of vulnerabilities with CVSS Low severity.
+          format: int64
+          type: integer
+        medium:
+          description: Number of vulnerabilities with CVSS Medium severity.
+          format: int64
+          type: integer
+        none:
+          description: Number of vulnerabilities with CVSS None severity.
+          format: int64
+          type: integer
+        unknown:
+          description: Number of vulnerabilities with an unknown CVSS severity.
+          format: int64
+          type: integer
+      type: object
+    ContainerImagesResponse:
+      description: List of Container Images.
+      properties:
+        data:
+          description: Array of Container Image objects.
+          items:
+            $ref: '#/components/schemas/ContainerImageItem'
+          type: array
+        links:
+          $ref: '#/components/schemas/ContainerImagesResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ContainerImageMeta'
+      type: object
+    ContainerImagesResponseLinks:
+      description: Pagination links.
+      properties:
+        first:
+          description: Link to the first page.
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          type: string
+      type: object
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -19776,6 +20086,89 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/container_images:
+    get:
+      description: Get all Container Images for your organization.
+      operationId: ListContainerImages
+      parameters:
+      - description: Comma-separated list of tags to filter Container Images by.
+        example: short_image:redis,status:running
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: Comma-separated list of tags to group Container Images by.
+        example: registry,image_tags
+        in: query
+        name: group_by
+        required: false
+        schema:
+          type: string
+      - description: Attribute to sort Container Images by.
+        example: container_count
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of results returned.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 1000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerImagesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all Container Images
+      tags:
+      - Container Images
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -31067,6 +31460,9 @@ tags:
 - description: Configure your Datadog Confluent Cloud integration directly through
     the Datadog API.
   name: Confluent Cloud
+- description: The Container Images API allows you to query Container Image data for
+    your organization.
+  name: Container Images
 - description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
