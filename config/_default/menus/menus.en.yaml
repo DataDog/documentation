@@ -900,12 +900,12 @@ main:
   - name: AWS
     url: cloud_cost_management/aws
     parent: cloud_cost_top_level
-    identifier: aws-ccm
+    identifier: ccm_aws
     weight: 1
   - name: Azure
     url: cloud_cost_management/azure
     parent: cloud_cost_top_level
-    identifier: azure-ccm
+    identifier: ccm_azure
     weight: 2
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
