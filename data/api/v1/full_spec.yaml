@@ -4144,6 +4144,22 @@ components:
             type: string
           type: array
       type: object
+    IPPrefixesGlobal:
+      description: Available prefix information for all Datadog endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
     IPPrefixesLogs:
       description: Available prefix information for the Logs endpoints.
       properties:
@@ -4284,6 +4300,8 @@ components:
           $ref: '#/components/schemas/IPPrefixesAPI'
         apm:
           $ref: '#/components/schemas/IPPrefixesAPM'
+        global:
+          $ref: '#/components/schemas/IPPrefixesGlobal'
         logs:
           $ref: '#/components/schemas/IPPrefixesLogs'
         modified:
