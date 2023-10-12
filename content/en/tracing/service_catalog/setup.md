@@ -87,7 +87,6 @@ Upon import, the following occurs:
 - `metadata.namespace` gets mapped to a custom tag with the format `namespace:${metadata.namespace}`
 - `spec.lifecycle` gets mapped to `lifecycle`
 - `spec.owner` gets mapped to `team`
-
 - `metadata.links` gets mapped to `links`
   - The annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
 - `metadata.description` gets mapped to `description`
