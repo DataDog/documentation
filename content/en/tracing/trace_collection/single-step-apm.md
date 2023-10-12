@@ -136,6 +136,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
    ```shell
    systemctl restart docker
    ```
+   Or use the equivalent for your environment.
 
 {{% /tab %}}
 
