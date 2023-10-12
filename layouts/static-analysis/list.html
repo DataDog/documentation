@@ -21,7 +21,7 @@
     {{ $products := slice }}
     {{ $rulset_params := .Params }}
     <div 
-    class="d-flex flex-column"
+    class="static-analysis-main w-100 d-flex flex-column"
     x-data="{
         filterValue: {
             language: '',
@@ -116,35 +116,36 @@
                 data-group-id="{{$group_id}}" 
                 class="mt-1 ruleset"
                 >
-                    <div
+                    <button
                     data-header-id="{{ $group_id }}" 
-                    class="group-header border border-dark border-2 bg-light p-1 mb-1 d-flex align-items-center justify-content-between"
+                    class="group-header w-100 border border-dark border-2 bg-light mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
-                        <span class="fw-semibold">{{$ruleset_title}}</span>
-                        <div class="">></div>
-                    </div>
+                        <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
+                        <div class="group-header__arrow">></div>
+                    </button>
                     <div class="group-header-description">
-                        <p class="m-0 fw-semibold">{{printf "Ruleset ID: %s" .Key}}</p>
-                        <p class="m-0">{{$ruleset_description}}</p>
+                        <div class="d-flex flex-column">
+                            <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
+                            <span class="m-0">{{$ruleset_description}}</span>
+                        </div>
                         <div class="list-unstyled ps-0 mt-1">
                             {{ range .Pages }}
                                 {{/*  
                                     build a string with rule's lookup info:
+                                    - filter metadata
+                                        - language, severity, category
                                     - search
                                         - group_id: docker-best-practices
                                         - meta.id: docker-best-practices/absolute-workdir
                                         - title: Use absolute workdir
                                         - ruleset description
                                         - ruleset title
-                                    - filter metadata
-                                        - language, severity, category
                                 */}}
                                 {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
                                 {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
                                 {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($ruleset_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                                 <div 
-                                data-rule-title="{{.Title}}"
                                 class="rule d-flex justify-content-between border p-1"
                                 x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                                 >
@@ -175,15 +176,15 @@
             </div>
         </div>
 
-        <nav id="d-flex" class="mb-3">
+        <nav id="static-analysis-nav" class="w-100">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
             {{ $filters := slice "Language" "Category" "Severity" }}
-            <div class="d-flex flex-column">
+            <div class="filters-static-analysis d-flex flex-column">
                 {{ range $filters }}
                 {{ $filter := . | lower }}
-                <div class="d-flex flex-column">
-                    <span class="fw-semibold">{{.}}:</span>
-                    <div>
+                <div class="d-flex flex-column mb-2">
+                    <p class="mb-1 fw-semibold">{{.}}</p>
+                    <div class="d-flex gap-1 flex-wrap">
                         <button 
                         @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', ''); pushState(true, '{{ $filter }}')"
                         class="btn btn-sm-tag btn-outline-secondary"
@@ -203,7 +204,7 @@
                 {{ end }}
             </div>
             {{/*  SEARCH  */}}
-            <form class="mt-2">
+            <form class="search-static-analysis">
                 <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState(false)">
             {{/*  <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">  */}}
             </form>
