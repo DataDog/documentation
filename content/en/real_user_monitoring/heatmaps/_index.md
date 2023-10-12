@@ -116,6 +116,8 @@ This means that Datadog was not able to match any user actions with the current 
 
 User information is not collected by default. Heatmaps use the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following the steps in [Modifying Data and Context][8].
 
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
