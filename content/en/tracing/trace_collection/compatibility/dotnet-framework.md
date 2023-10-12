@@ -63,6 +63,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
 | Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
 | Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
 | Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
