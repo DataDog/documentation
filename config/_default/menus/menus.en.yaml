@@ -897,16 +897,26 @@ main:
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: AWS
+    url: cloud_cost_management/aws
+    parent: cloud_cost_top_level
+    identifier: ccm_aws
+    weight: 1
+  - name: Azure
+    url: cloud_cost_management/azure
+    parent: cloud_cost_top_level
+    identifier: ccm_azure
+    weight: 2
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 1
+    weight: 3
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 2
+    weight: 4
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
