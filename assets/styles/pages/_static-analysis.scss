@@ -49,5 +49,10 @@
             transform: rotate(-180deg) !important;
           }
         }
-      }
+        @media (max-width: 768px) {
+            height: auto;
+            min-height: 38px;
+            padding: 5px 10px
+        }
+    }
 }

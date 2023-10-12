@@ -114,7 +114,7 @@
                 {{ $ruleset_title := index (index $rulset_params.rulesets .Key) "title"}}
                 {{ $ruleset_description := index (index $rulset_params.rulesets .Key) "description"}}
                 <div
-                data-group-id="{{$group_id}}" 
+                data-group-id="{{ $group_id }}" 
                 class="ruleset mt-1"
                 >
                     <button
@@ -152,8 +152,8 @@
                                 x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                                 >
                                     <a href="{{.Permalink}}">{{.Title}}</a>
-                                    <div class="d-flex">
-                                        <span>{{ $ruleset_id }}</span>
+                                    <div class="d-flex justify-content-end">
+                                        <span class="d-none d-md-block">{{ $ruleset_id }}</span>
                                         <div class="group-header__arrow fw-semibold ms-1">></div>
                                     </div>
                                 </div>
