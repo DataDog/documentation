@@ -23,14 +23,16 @@ Use one of the following methods to enable CSM for your AWS accounts:
 
 You can use resource tags to create filters that include or exclude resources from being evaluated by CSM. The filters must be specified as a comma-separated list of `key:value` pairs.
 
-**Note**: Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
+**Notes**:
+- Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
+- Tags must be applied directly to the resource. User tags added in Datadog are not taken into account by the filters. The only exception is for tags added on the integration tiles for AWS and Google Cloud Platform.
 
 | Format                       | Value        |
 |------------------------------|--------------|
 | Allowlist                    | `key:value`  |
 | Blocklist                    | `!key:value` |
-| Single character wildcard    | `?`          |
 | Multiple characters wildcard | `*`          |
+| Single character wildcard    | `?`          |
 
 The allowlist enables you to specify tags that must be applied to a resource in order for CSM to evaluate it. Allowlist tags are evaluated as OR statements. In other words, at least one of the allowlist tags must be present in order for a resource to be evaluated. In contrast, blocklisted tags are evaluated as AND statements and take precedence over allowlist tags.
 
