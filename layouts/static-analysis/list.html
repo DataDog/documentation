@@ -114,17 +114,17 @@
                 {{ $ruleset_description := index (index $rulset_params.rulesets .Key) "description"}}
                 <div
                 data-group-id="{{$group_id}}" 
-                class="mt-1 ruleset"
+                class="ruleset mt-1"
                 >
                     <button
                     data-header-id="{{ $group_id }}" 
-                    class="group-header w-100 border border-dark border-2 bg-light mb-1 d-flex align-items-center justify-content-between"
+                    class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
                         <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
                         <div class="group-header__arrow">></div>
                     </button>
-                    <div class="group-header-description">
+                    <div class="group-header-description mb-3">
                         <div class="d-flex flex-column">
                             <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
                             <span class="m-0">{{$ruleset_description}}</span>
