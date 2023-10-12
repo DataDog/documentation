@@ -39,7 +39,7 @@ Datadog Agent FIPS Proxy のコンプライアンスは、FIPS 140-2 で検証�
 |||
 | ---  | ----------- |
 | ベアメタルと VM | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
-| クラウドとコンテナ| AWS ECS<br>AWS EKS (Helm)|
+| クラウドとコンテナ| Amazon ECS<br>AWS EKS (Helm)|
 
 対応製品 (Agent 7.45 以上):
 
@@ -132,7 +132,7 @@ Agent はプロキシとの通信に HTTP を使用するため、`https` オプ
 
 **ホストのセキュリティとハードニングはお客様の責任です。**
 
-<div class="alert alert-warning">fips.enabled <code>fips.enabled</code> の設定は、Agent のデフォルトで <code>false</code> に設定されています。すべての通信が Datadog Agent FIPS Proxy を介して転送されるようにするには、<code>true</code> に設定する必要があります。<br><br><strong><code>fips.enabled</code> が <code>true</code> に設定されていない場合、Agent は FIPS Compliant ではありません</strong>。</div>
+<div class="alert alert-warning"><code>fips.enabled</code> の設定は、Agent のデフォルトで <code>false</code> に設定されています。すべての通信が Datadog Agent FIPS Proxy を介して転送されるようにするには、<code>true</code> に設定する必要があります。<br><br><strong><code>fips.enabled</code> が <code>true</code> に設定されていない場合、Agent は FIPS Compliant ではありません</strong>。</div>
 
 ### インストールの検証
 

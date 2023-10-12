@@ -14,6 +14,7 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
+| Customize response to blocked requests | 1.15.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.11.0 |
 | Vulnerability Management for Code-level (beta) | not supported |
 | Automatic user activity event tracking | 1.14.0 |
@@ -27,7 +28,7 @@ The minimum tracer version to get all supported ASM capabilities for Ruby is 1.1
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  |  |
 | Kubernetes | {{< X >}}  | |
-| AWS ECS | {{< X >}}  | |
+| Amazon ECS | {{< X >}}  | |
 | AWS Fargate | {{< X >}}  | |
 | AWS Lambda |  | |
 
