@@ -393,12 +393,14 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 - See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
 - See [Best Practices for OPW Aggregator Architecture][8] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
 
-## Switching Deployment Modes
+## Deployment Modes
 If you are enrolled in the private beta of [Remote Configuration][7] to remotely roll out changes to your OP Workers, you can switch deployment methods in the settings cog (i.e. going from manually managed pipeline to remote configuration enabled pipeline). When switching deployment methods, ensure that you restart the Worker with the new deployment mode flag, `DD_OP_REMOTE_CONFIGURATION_ENABLED`, set to match the UI.
 
 When going from remote configuration to manual deployment mode, even if you switch the deployment mode in the UI, if you do not switch the deployment mode of each Workers by turning the `DD_OP_REMOTE_CONFIGURATION_ENABLED` flag off, the Workers themselves will be remote configuration enabled so therefore will continue pulling a version configuration.
 
 When going from manual to remote configuration deployment mode, after restarting the Worker with  flag, you will need to deploy a version in your version history, so that the Workers receive the new version configuration. 
+
+If you are interested in getting early access to remote configuration, please reach out to support or your customer success manager.
 
 ## Further reading
 
