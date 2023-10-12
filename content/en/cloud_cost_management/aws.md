@@ -2,7 +2,6 @@
 title: AWS
 kind: documentation
 disable_toc: false
-private: false
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

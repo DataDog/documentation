@@ -17,6 +17,10 @@ further_reading:
   - link: "/cloud_cost_management/tag_pipelines"
     tag: "Documentation"
     text: "Standardize tags across Cloud Cost with Tag Pipelines"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['cloud cost', 'cloud cost management', 'cloud cost aws', 'cloud cost azure']
 ---
 
 {{< site-region region="gov" >}}
