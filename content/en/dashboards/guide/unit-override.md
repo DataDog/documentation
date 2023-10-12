@@ -12,6 +12,8 @@ further_reading:
 - link: "dashboard/widgets/"
   tag: "Documentation"
   text: "List of Widgets"
+algolia:
+  tags: ["unit override", "custom units"]  
 ---
 
 ## Overview
@@ -29,6 +31,8 @@ The unit override feature in visualizations allows you to customize how your dat
 
 In your Notebooks and Dashboard widgets, find the graph editor of the cell or the widget. For Notebooks, click **More Options** and for Dashboards, find the **Graph your data** section.
 
+{{< img src="dashboards/guide/unit_override/unit_override_config.png" alt="Unit override option in the graph your data section for a Change widget" style="width:100%;" >}}
+
 ## How unit and scale attribution works
 
 When a unit is detected, Datadog automatically chooses the most readable unit scale depending on the magnitude of your data. For example, if the source data is nanoseconds, the widget could display readable values in minutes and seconds instead of millions of nanoseconds.
@@ -41,7 +45,7 @@ With unit override, you can choose a single fixed scale to compare values. In th
 
 ## Assign custom units
 
-Assign custom units to a widget to add context to unit-less metrics (like counts) and to counteract the use of query formulas which result in unit-less values. 
+Assign custom units to a widget to add context to unit-less metrics (like counts). 
 
 {{< img src="dashboards/guide/unit_override/custom_unit_tests.png" alt="Unit override configuration highlighting the Unit dropdown menu to assign custom units" style="width:100%;" >}}
 
