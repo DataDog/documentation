@@ -25,7 +25,7 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 - Summarizes usage at the end of each month.
 - Surfaces the data both in the UI and as a TSV download.
 
-This feature does not support product usage that cannot be tagged during instrumentation (e.g., Incident Management Users, Parallel Testing Slots). 
+This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users and Parallel Testing Slots. 
 
 ## Getting started
 
