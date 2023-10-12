@@ -31,13 +31,11 @@
         searchValue: '',
         filteredRulesets: new Set(),
         updateFilterValue (filter, value) {
-            // Setter 
-
+            // Setter on filter
             this.filterValue[filter] = value
         },
         resetFilteredRulesets () {
-            // Setter 
-
+            // Setter on filter
             this.filteredRulesets = new Set()
         },
         shouldShowRuleSet (ruleset, shouldShowRule) {
@@ -67,7 +65,8 @@
             return containsSearchValues && containsFilteredValue
         },
         pushState (filtering=true, filter=undefined) {
-            // Updates the url with the new query params for filter btns and search without refreshing the page
+            // Updates url with new query params for filter and search without refreshing the page
+
             const url = new URL(window.location.href)
       
             if(filtering){
@@ -99,7 +98,7 @@
             })
         },
         toggleRuleSet (selectedRulesetEl) {
-            // manage the ruleset accordian
+            // Manage ruleset accordians
 
             selectedRulesetEl.classList.toggle('active')
             selectedRulesetEl.nextElementSibling.classList.toggle('d-none')
@@ -133,37 +132,33 @@
                         </div>
                         <div class="list-unstyled ps-0 mt-1">
                             {{ range .Pages }}
-                                {{/*  
-                                    build a string with rule's lookup info:
-                                    - filter metadata
-                                        - language, severity, category
-                                    - search
-                                        - group_id: docker-best-practices
-                                        - meta.id: docker-best-practices/absolute-workdir
-                                        - title: Use absolute workdir
-                                        - ruleset description
-                                        - ruleset title
-                                */}}
-                                {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
-                                {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
-                                {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($ruleset_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
-                                <div 
-                                class="rule d-flex justify-content-between border p-1"
-                                x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
-                                >
-                                    <a href="{{.Permalink}}">{{.Title}}</a>
-                                    <div class="d-flex justify-content-end">
-                                        <span class="d-none d-md-block">{{ $ruleset_id }}</span>
-                                        <div class="group-header__arrow fw-semibold ms-1">></div>
-                                    </div>
+                            {{/*  
+                                build a string with rule's lookup info for filtering and searching against:
+                                - filter metadata
+                                    - language, severity, category
+                                - search
+                                    - group_id: docker-best-practices
+                                    - meta.id: docker-best-practices/absolute-workdir
+                                    - title: Use absolute workdir
+                                    - ruleset description
+                                    - ruleset title
+                            */}}
+                            {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
+                            {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
+                            {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($ruleset_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
+                            <div 
+                            class="rule d-flex justify-content-between border p-1"
+                            x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
+                            >
+                                <a href="{{.Permalink}}">{{.Title}}</a>
+                                <div class="d-flex justify-content-end">
+                                    <span class="d-none d-md-block">{{ $ruleset_id }}</span>
+                                    <div class="group-header__arrow fw-semibold ms-1">></div>
                                 </div>
+                            </div>
                             
                             {{/*  
-                                build an object with the following keys:
-                                - Severity
-                                - Language
-                                - Categories  
-                                each key is an array of unique items   
+                                build an object of arrays with unique values for filter btns
                             */}}
                             {{ $pad.SetInMap "filters" "Language" (union (index ($pad.Get "filters") "Language") (slice .Params.meta.language)) }}
                             {{ $pad.SetInMap "filters" "Category" (union (index ($pad.Get "filters") "Category") (slice .Params.meta.category)) }}
@@ -179,9 +174,9 @@
 
         <nav id="static-analysis-nav" class="w-100">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
-            {{ $filters := slice "Language" "Category" "Severity" }}
+            {{ $filterKeys := slice "Language" "Category" "Severity" }}
             <div class="filters-static-analysis d-flex flex-column">
-                {{ range $filters }}
+                {{ range $filterKeys }}
                 {{ $filter := . | lower }}
                 <div class="d-flex flex-column mb-2">
                     <p class="mb-1 fw-semibold">{{.}}</p>
@@ -207,7 +202,6 @@
             {{/*  SEARCH  */}}
             <form class="search-static-analysis">
                 <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState(false)">
-            {{/*  <input type="text" placeholder="Search here" class="w-100" x-model="searchValue" @input.debounce="pushState(false)">  */}}
             </form>
           </nav>
     </div>
