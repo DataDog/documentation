@@ -25,8 +25,7 @@ The following table shows a summary of the features available for each language 
 | {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | JDK 11+ | Python 3.6+<br> tracer&nbsp;0.50.0 | {{< X >}} |      | {{< X >}} | beta, .NET 6+<br>tracer&nbsp;2.22.0 |       | beta<br>tracer&nbsp;0.15.0 |
 | {{< ci-details title="Locks" >}}The time each function spent waiting for and holding locks, and the number of times each function acquired a lock.{{< /ci-details >}}   | {{< X >}} | tracer&nbsp;0.45.0 | tracer&nbsp;1.47.0 |      |       | .NET 6+<br>tracer&nbsp;2.31.0 |       |      |
 | {{< ci-details title="Wall time" >}}The elapsed time spent in each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.{{< /ci-details >}}   | {{< X >}} | {{< X >}} |       | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |       |
-| {{< ci-details title="Disk I/O" >}}Description tktk.{{< /ci-details >}}   | {{< X >}} |       |       |       |       |       |       |       |
-| {{< ci-details title="Socket I/O" >}}Description tktk.{{< /ci-details >}}   | {{< X >}} |       |       |       |       |       |       |       |
+| {{< ci-details title="I/O" >}}Description tktk - disk, file, socket input/output.{{< /ci-details >}}   | {{< X >}} |       |       |       |       |       |       |       |
 | {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   | {{< X >}} | Python 3.7+ |       |       |       | .NET 5+<br>tracer&nbsp;2.31.0 |  beta<br>tracer&nbsp;0.92.0  |       |
 | **Other features:** |
 | {{< ci-details title="Code Hotspots" >}}Description tktk.{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | private&nbsp;beta | {{< X >}} | tracer&nbsp;0.71.0 |      |
