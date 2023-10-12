@@ -25288,6 +25288,18 @@ paths:
     get:
       description: Get a list of all powerpacks.
       operationId: ListPowerpacks
+      parameters:
+      - description: Maximum number of powerpacks in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 25
+          format: int64
+          maximum: 1000
+          type: integer
+      - $ref: '#/components/parameters/PageOffset'
       responses:
         '200':
           content:
@@ -25306,6 +25318,10 @@ paths:
       tags:
       - Powerpack
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
     post:
