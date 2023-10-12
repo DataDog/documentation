@@ -121,7 +121,7 @@
   },
   "restriction-policies": {
     "name": "Restriction Policies",
-    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams (beta), or users (beta)).\nThe restriction policy determines who is authorized to perform what actions on the resource."
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",

@@ -12441,8 +12441,8 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role`, `team`
-            (beta), `user` (beta), and `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`,
+            `user`, and `org`.
 
             The org ID can be obtained through the api/v2/current_user API.
 
@@ -12453,7 +12453,7 @@ components:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
+              Supported types: `role`, `team`, `user`, and `org`.
 
               The org ID can be obtained through the api/v2/current_user API.
 
@@ -31628,8 +31628,8 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles, teams
-    (beta), or users (beta)).
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams,
+    or users).
 
     The restriction policy determines who is authorized to perform what actions on
     the resource.'
