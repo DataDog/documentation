@@ -1025,7 +1025,7 @@ Exercise your application to start generating telemetry data, which you can see 
 To stop producing traces for a specific service, run the following commands and restart the service:
 
 {{< tabs >}}
-{{% tab "Linux host or VM" %}}
+{{% tab "Host" %}}
 
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
 
@@ -1036,7 +1036,7 @@ To stop producing traces for a specific service, run the following commands and 
 
 {{% /tab %}}
 
-{{% tab "Docker" %}}
+{{% tab "Agent and app in separate containers" %}}
 
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
    ```shell
@@ -1053,7 +1053,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 
 {{< tabs >}}
-{{% tab "Linux host or VM" %}}
+{{% tab "Host" %}}
 
 1. Run:
    ```shell
@@ -1063,7 +1063,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% /tab %}}
 
-{{% tab "Docker" %}}
+{{% tab "Agent and app in separate containers" %}}
 
 1. Uninstall local library injection:
    ```shell
