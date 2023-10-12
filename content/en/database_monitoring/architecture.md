@@ -30,7 +30,7 @@ The steps required for setting up Database Monitoring in Datadog vary based on t
 
 The Datadog Agent is lightweight software that monitors system metrics such as CPU, memory, and network activity. It also connects to the database as a SQL user to collect data about database performance.
 
-For self-hosted databases, you install the agent directly onto the host that is hosting your database. For cloud-managed databases such as AWS RDS and Azure SQL, you configure the Agent to connect to your databases remotely.
+For self-hosted databases, you install the agent directly onto the host that is hosting your database. For cloud-managed databases such as Amazon RDS and Azure SQL, you configure the Agent to connect to your databases remotely.
 
 
 ### Self-hosted databases
@@ -56,7 +56,7 @@ Instructions for setting up Database Monitoring with a self-hosted provider:
 
 ### Cloud-managed databases
 
-If your setup is cloud-managed (with providers such as [AWS RDS][8] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
+If your setup is cloud-managed (with providers such as [Amazon RDS][8] or Aurora, Google Cloud SQL, or Azure), you install the Agent on a separate host and configure it to connect to each managed instance.
 
 Database Monitoring collects system metrics such as CPU, memory, disk usage, logs, and related telemetry directly from the cloud provider using the Datadog integration with that provider.
 
@@ -64,7 +64,7 @@ Database Monitoring collects system metrics such as CPU, memory, disk usage, log
 
 You can install the Agent on any cloud VM (for example, EC2) provided the Agent can connect to your database instances.
 
-If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider's orchestration tools. For example, you can use [AWS ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
+If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider's orchestration tools. For example, you can use [Amazon ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
 
 ### Kubernetes
 
