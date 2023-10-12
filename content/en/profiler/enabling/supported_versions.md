@@ -8,12 +8,15 @@ further_reading:
   text: "Enabling Profiler"
 ---
 
+The following table shows a summary of the features available for each language runtime. **Required versions** are the minimum you need to get access to a particular feature. **Recommended versions** are the version that will give you access to all the supported features. It's best if you update to the latest version of all tracing libraries.
+
 |                                   |   Java  | Python  |      Go      |  Ruby |   Node.js  |  .NET   |   PHP  | Rust/C/C++ |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
-| Unless otherwise indicated, the minimum language version | JDK 8+ [Details][1] | Python&nbsp;2.7+ | Go 1.12+ | Ruby 2.3+ on Linux | Node 14+ | .NET Core 2.1+, .NET 5+, .NET Framework 4.6.1+ [Details][2] | PHP 7.1+ on Linux [Details][3] | Linux v4.17+ |
-| Unless otherwise indicated, the minimum tracer version   | | 0.35.0 | 1.23.0 | 0.48.0 | | | | |
-| Minimum language version to get all supported features | JDK 11+ | Python 3.6+ | Go 1.12+ | Ruby 2.3+ on Linux | | .NET 6+ | | |
-| Minimum tracer version to get all supported features |    | 0.50.0  | 1.51.0 | 1.15.0 | |   | | |
+| Operating systems                 | | | | | | | |
+| Required runtime version | JDK 8+ [Details][1] | Python&nbsp;2.7+ | Go 1.12+ | Ruby 2.3+ on Linux | Node 14+ | .NET Core 2.1+, .NET 5+, .NET Framework 4.6.1+ [Details][2] | PHP 7.1+ on Linux [Details][3] | Linux v4.17+ |
+| Recommended runtime version | JDK 11+ | Python 3.6+ | Go 1.12+ | Ruby 2.3+ on Linux | | .NET 6+ | | |
+| Required tracer version   | | 0.35.0 | 1.23.0 | 0.48.0 | | | | |
+| Recommended tracer version |    | 0.50.0  | 1.51.0 | 1.15.0 | |   | | |
 | **Profile types:** |
 | {{< ci-details title="CPU" >}}The time each function spent running on the CPU.{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | private&nbsp;beta | {{< X >}} | {{< X >}} | beta |
 | {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function, including allocations which were subsequently freed.{{< /ci-details >}}   | JDK 11+ | Python 3.6+<br>tracer&nbsp;0.50.0 | tracer&nbsp;1.47.0 |      |       | beta, .NET 6+ | {{< X >}} | beta |
