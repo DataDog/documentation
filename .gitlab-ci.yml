@@ -494,7 +494,7 @@ set_redirect_metadata_preview:
   variables:
     BUCKET: "datadog-docs-preview"
     SET_REDIRECTS_PREVIEW: "true"
-    ATTACHMENT_FILES: "/resources/xml/Datadog-SNow_Update_Set.xml"
+    ATTACHMENT_FILES: "/resources/xml/Datadog-SNow_Update_Set.xml /resources/xml/Datadog-SNow_Update_Set_v2.4.0.xml"
   stage: post-deploy
   cache: []
   environment: "preview"
@@ -511,7 +511,7 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
-    ATTACHMENT_FILES: "/resources/xml/Datadog-SNow_Update_Set.xml"
+    ATTACHMENT_FILES: "/resources/xml/Datadog-SNow_Update_Set.xml /resources/xml/Datadog-SNow_Update_Set_v2.4.0.xml"
   stage: post-deploy
   cache: []
   environment: "live"
