@@ -16,12 +16,12 @@ further_reading:
 
 ## Overview
 
-The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs or pipeline executions at multiple levels using any tag.
+The CI Visibility Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize) and [export](#export) test runs or pipeline executions at multiple levels using any tag.
 
 {{< tabs >}}
 {{% tab "Test Runs" %}}
 
-Navigate to [**CI** > **Test Runs**][101] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. 
+Navigate to [**CI** > **Test Runs**][101] to see your CI test run results across the following levels: **Session**, **Module**, **Suite** and **Test**. 
   
 {{< img src="/continuous_integration/test_runs.png" text="Test Runs page" style="width:100%" >}}
 
@@ -47,12 +47,12 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Test Traits | The traits of the test such as `category:flaky`. |
 | Test Type | The type of the test such as `test`. |
 
-You can filter by test level: session, module, suite, and test run. Each test level represents a different level of aggregation of tests.
+You can filter by test level: session, module, suite and test run. Each test level represents a different level of aggregation of tests.
 
 {{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
 
 ### Sessions
-Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
+Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test` or `dotnet test`.
 
 For JUnit report uploads there is 1 session per report file uploaded.
 
