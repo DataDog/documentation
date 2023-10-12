@@ -12,12 +12,15 @@ further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
   text: "OTLP Metrics Types"
+- link: "/opentelemetry/runtime_metrics/"
+  tag: "Documentation"
+  text: "OpenTelemetry Runtime Metrics"
 ---
 
 
 OTLP Ingest in the Agent is a way to send telemetry data directly from applications instrumented with [OpenTelemetry SDKs][1] to Datadog Agent. Since versions 6.32.0 and 7.32.0, the Datadog Agent can ingest OTLP traces and [OTLP metrics][2] through gRPC or HTTP. Since versions 6.48.0 and 7.48.0, the Datadog Agent can ingest OTLP logs through gRPC or HTTP. 
 
-OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog library specific features aren't available for the ingested data including Application Security Management, Continuous Profiler, Runtime Metrics, and Ingestion Rules.
+OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Because the application is instrumented with OpenTelemetry SDK, some Datadog library specific features aren't available for the ingested data including Application Security Management, Continuous Profiler, and Ingestion Rules. [Runtime Metrics are supported for some languages][10].
 
 To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the OTLP Ingest in the Agent is not compatible with all OTLP versions. Verify OTLP version compatibility through the [Agent changelog][4]. 
 
@@ -271,3 +274,4 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [9]: https://app.datadoghq.com/integrations/otel
+[10]: /opentelemetry/runtime_metrics/
