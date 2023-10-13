@@ -58,7 +58,7 @@ See [Best Practices for OPW Aggregator Architecture][2] for production-level req
 [2]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments. 
+To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512 MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments. 
 
 See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
 
