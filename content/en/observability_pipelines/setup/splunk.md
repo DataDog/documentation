@@ -49,14 +49,30 @@ Ensure that your machine is configured to run Docker.
 {{% tab "AWS EKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
-* The [AWS Load Balancer controller][1] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
+* The [EBS CSI driver][1] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
+
+  ```shell
+  kubectl get pods -n kube-system
+  ```
+
+* A `StorageClass` is required for the Workers to provision the correct EBS drives. To see if it is installed already, run the following command and look for `io2` in the list:
+
+  ```shell
+  kubectl get storageclass
+  ```
+
+  If `io2` is not present, download [the StorageClass YAML][2] and `kubectl apply` it.
+
+* The [AWS Load Balancer controller][3] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
 
   ```shell
   helm list -A
   ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
+[3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
