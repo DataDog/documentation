@@ -1,6 +1,5 @@
 ---
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/python.md
+description: Datadog Agent Integration Developer Tool をインストールします。
 kind: documentation
 title: Datadog Agent Integration Developer Tool をインストールする
 ---
@@ -157,12 +156,12 @@ Linux のインストールでは、システムの Python を変更すること
 
    - ARM (M1+) マシン:
      ```
-     pipx install ddev --python /opt/homebrew/bin/python3.9
+     pipx install --python /opt/homebrew/bin/python3.9 ddev
      ```
 
    - Intel マシンの MacOS:
      ```
-     pipx install ddev --python /usr/local/bin/python3.9
+     pipx install --python /usr/local/bin/python3.9 ddev
      ```
 
 1. インストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。

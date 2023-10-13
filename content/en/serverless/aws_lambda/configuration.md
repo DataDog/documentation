@@ -360,7 +360,7 @@ This guide explains how to rename both upstream and downstream services in Datad
 
 | Source Type | Service | Identifier | DD_SERVICE_MAPPING Value |
 |---|---|---|---|
-| General | API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| General Identifiers| API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
 | | SNS | `lambda_sns` | `"lambda_sns:newServiceName"` |
 | | SQS | `lambda_sqs` | `"lambda_sqs:newServiceName"` |
 | | S3 | `lambda_s3` | `"lambda_s3:newServiceName"` |
@@ -368,7 +368,7 @@ This guide explains how to rename both upstream and downstream services in Datad
 | | Kinesis | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
 | | DynamoDB | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | | Lambda URLs | `lambda_url` | `"lambda_url:newServiceName"` |
-| Specific | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| Specific Identifiers | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
 | | SNS | Topic name | `"ExampleTopic:newServiceName"` |
 | | SQS | Queue name | `"MyQueue:newServiceName"` |
 | | S3 | Bucket name | `"example-bucket:newServiceName"` |
@@ -534,6 +534,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 ## Select sampling rates for ingesting APM spans
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+
+Use `DD_TRACE_SAMPLE_RULES` for *upstream* service remapping, for example an API Gateway that triggers a Lambda Function. The service name *must* be the head or root of the trace, for example:
+`DD_TRACE_SAMPLING_RULES='[{"service": "123.execute-api.sa-east-1.amazonaws.com", "sample_rate": 0.5}]'`
 
 Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 

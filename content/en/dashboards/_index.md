@@ -170,7 +170,7 @@ Use granular access controls to limit the [roles][15] that may edit a particular
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -186,6 +186,8 @@ To restore general access to a dashboard with restricted access, follow the step
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
 If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
+
+The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
 **Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
 

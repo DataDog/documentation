@@ -71,6 +71,11 @@ user attribution
 vulnerability
 : Passive risk within an application. From [OWASP][1]: "A vulnerability is a hole or a weakness in the application, which can be a design flaw or an implementation bug, that allows an attacker to cause harm to the stakeholders of an application. Stakeholders include the application owner, application users, and other entities that rely on the application."
 
+trace qualification
+: The process by which Datadog helps understand the impact of traces, labeling
+them as `Harmful Safe or Unknown`.
+: See [Trace Qualification][15].
+
 ## Attacks and known vulnerabilities terms
 
 Open Web Application Security Project (OWASP)
@@ -122,3 +127,4 @@ Object-Graph Navigation Language Injection (OGNLi)
 [12]: /security/application_security/threats/inapp_waf_rules
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
 [14]: /security/application_security/threats/add-user-info/
+[15]: /security/application_security/threats/trace_qualification/
