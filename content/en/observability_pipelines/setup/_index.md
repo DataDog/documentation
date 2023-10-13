@@ -400,7 +400,7 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 </div>
 If you are enrolled in the private beta of [Remote Configuration][7] to remotely roll out changes to your OP Workers, you remotely roll out changes to your Workers from the Datadog UI, rather than making updates to your pipeline configuration in a text editor and rolling out your changes manually. You can choose your deployment method when you create a pipeline and install your Workers.
 
-After deploying a pipeline, you can also switch deployment methods, such as going from manually managed pipeline to remote configuration enabled pipeline or vice versa. 
+After deploying a pipeline, you can also switch deployment methods, such as going from a manually managed pipeline to a remote configuration enabled pipeline or vice versa. 
 
 If you want to switch from a remote configuration deployment to a manually managed deployment:
 1. Navigate to Observability Pipelines.
