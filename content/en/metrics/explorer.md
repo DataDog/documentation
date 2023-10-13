@@ -62,5 +62,5 @@ Export your graph to a dashboard or notebook with the buttons at the top right. 
 [3]: /dashboards/#screenboards
 [4]: /dashboards/#timeboards
 [5]: /metrics/introduction/#space-aggregation
-[6]: https://docs.datadoghq.com/dashboards/querying/
+[6]: https://docs.datadoghq.com/dashboards/querying/#minimum-or-maximum-between-two-queries
 
