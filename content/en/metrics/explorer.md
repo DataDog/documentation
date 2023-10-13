@@ -45,7 +45,7 @@ The possible options are:
 
 **Note**: The options may differ based on the metric type selected.
 
-### Functions/Formulas
+### Functions and formulas
 
 You can optionally add functions to your query using the function button. Not all functions are available for all metric types. See the [querying][6] documentation to learn more about functions and formulas in queries. 
 
