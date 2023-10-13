@@ -20,15 +20,13 @@ You can modify security signals generated within the previous 30 days, such as c
 
 To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security Management.
 
+Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the detection rules. If the pattern matches a detection rule, a security signal is generated. 
+
 {{< img src="security/cws/csm_threats_signals.png" alt="CSM Threats security signals page" width="100%">}}
 
 ## Investigate a signal
 
-Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the detection rules. If the pattern matches a detection rule, a security signal is generated. 
-
-The [Threats Explorer][4] displays all signals that your role permits you to view. 
-
-To filter the security signals in the Threats Explorer:
+The [Threats Explorer][4] displays all signals that your role permits you to view. To filter the security signals in the Threats Explorer:
 
 1. Click the **Options** button and add the column **Signal State**.
 2. Add the facet `@workflow.triage.state`. This displays signal status and enables you to sort by status in the table header.
