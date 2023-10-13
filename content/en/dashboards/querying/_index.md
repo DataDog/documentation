@@ -174,6 +174,7 @@ status:error / status:info
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
+#### Minimum or Maximum between two queries
 Here is an example using the `max` operator to find the maximum count between `status:error` and `status:ok`.
 
 ```text
