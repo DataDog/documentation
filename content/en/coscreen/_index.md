@@ -23,7 +23,7 @@ The CoScreen desktop app is available for Windows 10 and macOS v10.15 Catalina a
 
 [Download CoScreen][1].
 
-After installing CoScreen, launch the desktop app and sign up.
+After installing CoScreen, launch the desktop app. You can sign in with your Datadog account.
 
 [1]: https://www.coscreen.co/download
 {{% /tab %}}
@@ -37,11 +37,15 @@ The CoScreen web app has limited functionality. To make full use of CoScreen's f
 {{< /tabs >}}
 
 ## Usage
-### Join your first CoScreen
+### Join a CoScreen
 
 If you were invited to a CoScreen, click on the link. You can click on **Join from browser** to join the CoScreen through the web app, or you can launch the desktop app. You can also join manually by entering your meeting link or ID.
 
 When you join a CoScreen, it is added to your list of _Recent CoScreens_ in the main menu. You can rejoin these at any time.
+
+To enable noise reduction in the desktop app, go to **Settings** > **Audio** and select _Apply noise reduction to my microphone_.
+
+On macOS, you can enable background blurring under **Settings** > **Camera** > **Video Effects**.
 
 ### Invite your collaborators
 
