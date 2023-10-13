@@ -413,7 +413,7 @@ If you want to switch from manually managed deployment to a remote configuration
 2. Click the settings cog.
 3. In **Deployment Mode**, select **Remote Configuration** to enable it.
 4. Set the `DD_OP_REMOTE_CONFIGURATION_ENABLED` flag to `true` and restart the Worker. Workers that are not restarted with this flag are not polled for configurations deployed in the UI. 
-6. Deploy a version in your version history, so that the Workers receive the new version configuration. Click on a version, click _Edit as Draft_, then click _Deploy_. 
+6. Deploy a version in your version history, so that the Workers receive the new version configuration. Click on a version. Click **Edit as Draft** and then click **Deploy**. 
 
 
 ## Further reading
