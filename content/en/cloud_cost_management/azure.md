@@ -94,13 +94,16 @@ If your exports are in different storage containers, repeat steps one to seven f
 ### Configure Cost Management Reader access
 **Note:** You do not need to configure this access if your scope is **Billing Account**.
 
-1. Navigate to your [subscriptions][6] and click your subscription's name.
+1. Navigate to your [subscriptions][1] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
 3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
 5. Assign these permissions to the app registration.
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
+
+[1]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -124,4 +127,3 @@ You can visualize your ingested data using the following cost types:
 [3]: https://app.datadoghq.com/cost/setup?cloud=azure
 [4]: https://app.datadoghq.com/integrations/azure
 [5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[6]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade

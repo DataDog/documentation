@@ -752,8 +752,8 @@
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_1761876297",
-      "description": "Create an app key for this service account returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for this service account returns \"Created\" response"
     },
     {
       "group": "service_accounts",
@@ -764,8 +764,8 @@
   "UpdateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_768415790",
-      "description": "Edit an app key owned by this service account returns \"OK\" response"
+      "suffix": "",
+      "description": "Edit an application key for this service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
