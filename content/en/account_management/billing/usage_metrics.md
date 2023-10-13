@@ -43,7 +43,7 @@ Estimated usage metrics are generally available for the following usage types:
 | Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` | Estimated usage for parallel testing slots. |
 | Network Hosts                 | `datadog.estimated_usage.network.hosts` | Unique NPM hosts seen in the last hour. |
 | Network Devices               | `datadog.estimated_usage.network.devices` | Unique NDM devices seen in the last hour. |
-| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | Unique profiling containers seen in the last hour. |
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | Unique profiling hosts seen in the last hour. |
 | Profiled Containers           | `datadog.estimated_usage.profiling.containers` | Unique profiling containers seen in last 5 minutes. |
 | Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks` | Unique profiling Fargate Tasks seen in the last 5 minutes. |
 | CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` | Unique CSPM hosts seen in the last hour. |
