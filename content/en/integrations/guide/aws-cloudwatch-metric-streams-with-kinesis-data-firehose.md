@@ -89,18 +89,17 @@ Once the stack is successfully created, wait five minutes for Datadog to recogni
 {{% /tab %}}
 {{% tab "AWS Console" %}}
  
-If you want to set up metric streams using the AWS Console, follow these steps for each AWS region.
+To set up metric streams using the AWS Console, create a [CloudWatch Metric Stream][2] for each AWS region.
  
-1. Create your [CloudWatch Metric Stream][2] with the following steps:
-2. Choose the "Quick AWS Partner Setup" and select "Datadog" as the AWS Partner destination from the dropdown.
+1. Choose the **Quick AWS Partner Setup** and select **Datadog** as the AWS Partner destination from the dropdown menu.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch metric stream quick partner setup" responsive="true" style="width:60%;">}}
-3. Choose the Datadog site to which you want to stream metrics and enter your [Datadog API key][1].
-4. Choose whether you want to stream all CloudWatch metrics, or only specific namespaces. You can optionally also exclude specific metrics. If you are in a Monitoring Account, you can also choose to enable [Cross-account streaming][5].
+2. Choose the Datadog site to which you want to stream metrics and enter your [Datadog API key][1].
+3. Choose whether you want to stream all CloudWatch metrics, or only specific namespaces. You also have the option to exclude specific metrics. If you are in a Monitoring Account, you can also choose to enable [Cross-account streaming][5].
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-namespace-filter.png" alt="Cloudwatch metric stream" responsive="true" style="width:60%;">}}
-5. Under **Add additional statistics**, include the AWS percentile metrics to send to Datadog. See the [CloudFormation template][3] for a list of the percentile metrics Datadog supports through polling.
+4. Under **Add additional statistics**, include the AWS percentile metrics to send to Datadog. See the [CloudFormation template][3] for a list of the percentile metrics Datadog supports through polling.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
-8. Name your metric stream.
-9. Click **Create metric stream**.
+5. Assign a name to your metric stream.
+6. Click **Create metric stream**.
  
 ### Results
  
@@ -117,10 +116,10 @@ Once you see the Metric Stream resource has been successfully created, wait five
 {{% /tab %}}
 {{< /tabs >}}
 
-### Cross account metric streaming
-Cross-account metric streaming is an option you can use to include metrics that span across multiple AWS accounts within an AWS region in a single Metric Stream. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, you will need to [connect your source accounts][5] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
+### Cross-account metric streaming
+Use cross-account metric streaming to include metrics in a single Metric Stream that spans across multiple AWS accounts within an AWS region. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, [connect your source accounts][5] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
 
-**Note:** To collect custom tags and other metadata for all your streamed metrics, integrate your source accounts with Datadog.
+**Note:** To collect custom tags and other metadata for your streamed metrics, integrate your source accounts with Datadog.
 
 ### Disable metric streaming
 
