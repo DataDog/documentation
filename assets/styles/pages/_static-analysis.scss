@@ -27,7 +27,6 @@
     .group-header {
         transition: box-shadow 0.125s;
         box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-        margin-bottom: 9px;
         border-radius: 4px;
         overflow: hidden;
         height: 34px;
@@ -53,6 +52,12 @@
             height: auto;
             min-height: 38px;
             padding: 5px 10px
+        }
+    }
+    .rule:hover {
+        color: $brand-primary;
+        a {
+            color: $brand-primary;
         }
     }
 }

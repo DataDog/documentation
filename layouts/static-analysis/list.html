@@ -106,8 +106,8 @@
     }"
     x-init="updateWithURLParams()">
         {{ $pad := newScratch }}
-        <div class="col-10 col-md-12 order-1 w-100">
-            <div class="list-unstyled ps-0">
+        <div class="col-12 order-1">
+            <div class="ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
                 {{ $ruleset_title := index (index $rulset_params.rulesets .Key) "title"}}
@@ -119,18 +119,17 @@
                     <button
                     data-header-id="{{ $group_id }}" 
                     class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
-                    :class="isActiveHeader === '{{ $group_id }}' && 'active'"
                     @click="toggleRuleSet($el)"
                     >
                         <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
                         <div class="group-header__arrow fw-semibold">></div>
                     </button>
-                    <div class="group-header-description mb-3">
+                    <div class="mb-3">
                         <div class="d-flex flex-column">
                             <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
                             <span class="m-0">{{$ruleset_description}}</span>
                         </div>
-                        <div class="list-unstyled ps-0 mt-1">
+                        <div class="ps-0 mt-1">
                             {{ range .Pages }}
                             {{/*  
                                 build a string with rule's lookup info for filtering and searching against:
@@ -147,10 +146,10 @@
                             {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
                             {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($ruleset_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                             <div 
-                            class="rule d-flex justify-content-between border p-1"
+                            class="rule d-flex justify-content-between border p-1 position-relative"
                             x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                             >
-                                <a href="{{.Permalink}}">{{.Title}}</a>
+                                <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
                                 <div class="d-flex justify-content-end">
                                     <span class="d-none d-md-block">{{ $ruleset_id }}</span>
                                     <div class="group-header__arrow fw-semibold ms-1">></div>
@@ -172,7 +171,7 @@
             </div>
         </div>
 
-        <nav id="static-analysis-nav" class="w-100">
+        <nav id="static-analysis-nav" class="d-none d-md-block w-100">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
             {{ $filterKeys := slice "Language" "Category" "Severity" }}
             <div class="filters-static-analysis d-flex flex-column">
