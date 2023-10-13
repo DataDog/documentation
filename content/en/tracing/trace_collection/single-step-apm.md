@@ -112,7 +112,8 @@ Run the following commands and restart the service to stop injecting the library
 
 ### Removing APM for all services on the infrastructure
 
-Run the following commands and restart the infrastructure to remove library injectors and stop producing traces.
+To stop producing traces, remove library injectors and restart the infrastructure:
+
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -127,11 +128,16 @@ Run the following commands and restart the infrastructure to remove library inje
 
 {{% tab "Docker" %}}
 
-1. Run:
+1. Uninstall local library injection:
    ```shell
    dd-container-install --uninstall
    ```
-2. Restart your container.
+2. Restart Docker:
+   ```shell
+   systemctl restart docker
+   ```
+   Or use the equivalent for your environment.
+
 {{% /tab %}}
 
 {{< /tabs >}}
