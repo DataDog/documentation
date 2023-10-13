@@ -175,13 +175,13 @@ status:error / status:info
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
 #### Minimum or Maximum between two queries
-Here is an example using the `max` operator to find the maximum count between `status:error` and `status:ok`.
+Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
 
 ```text
-max(status:error, status:ok)
+max(system.cpu.user: eastus-1, system.cpu.user: eastus-2)
 ```
 
-{{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example for 'max' showing max count value between two APM queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
 
 
 
