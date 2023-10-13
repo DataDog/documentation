@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Generic actions are workflow actions that are not associated with a tool or integration. They allow you to overcome any action that may not be currently present in the Actions catalog.
+Generic actions are workflow actions that are not associated with a tool or integration. If an action you need is missing from the Actions catalog, you might be able to solve your use case with a generic action.
 
 As with all workflow actions, you can use the [context variables][1] tab to access any values available in the workflow context.
 
@@ -21,9 +21,80 @@ You can also [request a new action or entire integration][5].
 
 ## HTTP
 
-Use the HTTP action to make a request to any custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges page][2] for details. 
+Use the HTTP action to make a request to a custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges page][2] for details.
 
 Begin by specifying the request method and any necessary [authentication][3]. Read the sections below for further information about the available configuration tabs. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry itself at a given interval if the condition is not satisfied.
+
+### Authentication
+
+Use the action's **Connection** to configure the authentication method your action uses. You can either select a preconfigured connection from the dropdown, or create a connection.
+
+#### Create an AWS connection
+
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **AWS**.
+1. Enter a **Connection Name**, **Account ID**, and **AWS Role Name**.
+1. Click **Create**.
+
+#### Create an Azure connection
+
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **Azure**.
+1. Enter a **Connection Name**, **Tenant ID**, **Client ID**, and **Client Secret**.
+1. Optionally, enter the **Custom Scope** to be requested from Microsoft when acquiring an OAuth 2 access token. A resource's scope is constructed using the identifier URI for the resource and `.default`, separated by a forward slash (`/`). For example, `{identifierURI}/.default`. For more information, see [the Microsoft documentation on .default scope][6].
+1. Click **Create**.
+
+#### Create an HTTP: Basic Auth connection
+
+The Basic Auth connection uses an authorization header with a username and password to authenticate your HTTP request.
+
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **HTTP**.
+1. Enter a **Connection Name**.
+1. From the **Authentication Type** dropdown, select **Basic Auth**.
+1. Enter a **Username** and **Password**.
+1. Enter the **Base URL** for authentication. The required authorization request header is automatically populated using your username and password, but you can add additional **Request Headers** if necessary.
+1. Optionally, add **URL parameters** and a **Body** to your request.
+1. Click **Create**.
+
+#### Create an HTTP: Token Auth connection
+
+The Token Auth connection uses a bearer token to authenticate your HTTP request.
+
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **HTTP**.
+1. Enter a **Connection Name**.
+1. From the **Authentication Type** dropdown, select **Token Auth**.
+1. Enter a **Token Name** and **Token Value**. You can enter multiple tokens. To reference your token in a header, parameter, or the request body, use the syntax `{{ secretTokenName }}`.
+1. Enter the **Base URL** for authentication.
+1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to your request.
+1. Click **Create**.
+
+#### Create an HTTP: HTTP Request Auth connection
+
+The HTTP Request Auth connection allows you to make a preliminary request to retrieve an access token with which to authenticate your request.
+
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **HTTP**.
+1. Enter a **Connection Name**.
+1. From the **Authentication Type** dropdown, select **HTTP Request Auth**.
+
+Configure the preliminary access token request:
+1. In the **Access token request** section, under **Secret Type**, enter a **Token Name** and **Token Value**. You can enter multiple tokens.
+1. Under **Request Setup**, enter a **Variable Reference Path**. This is the path through which your access token is returned after making the authentication call. For example, if the access token is returned as the body of the access request, use `body`. If the access token is returned in a property called `token` of the response `body`, use `body.token`. Paths are case sensitive.
+1. Optionally, enter a **Refresh Interval**. This is the duration until the access token expires, specified in seconds. When the token expires, the connection automatically requests a new access token. Setting an interval of `0` disables token refresh.
+1. Enter the **Request URL** and specify the type of request as either **GET** or **POST**.
+1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to the request.
+
+Configure the authentication request:
+1. In the **Request details** section, enter the **Base URL** for the authentication request. To reference your token in a header, parameter, or the request body, use `{{ accessToken }}`. For example: `Authentication: Bearer {{ accessToken }}`.
+1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to your request.
+1. Click **Create**.
+
+
+#### Create an HTTP: mTLS connection
+
+Available connection methods:
 
 ### Request Options
 
@@ -79,3 +150,4 @@ The function action allows for variable assignments and data transformations req
 [3]: /service_management/workflows/access/
 [4]: https://lodash.com/
 [5]: https://forms.gle/JzPazvxXox7fvA2R8
+[6]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
