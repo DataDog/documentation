@@ -98,6 +98,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Performance and reliability
 {{< whatsnext desc="Site reliability visualizations: ">}}
+    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
+        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Profiling Flame Graph{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo" 
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Service Level Objective (SLO) Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 

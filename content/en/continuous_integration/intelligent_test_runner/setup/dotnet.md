@@ -61,6 +61,136 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 {{< /tabs >}}
 
+#### UI activation
+In addition to setting the environment variables, you or a user in your organization with "Intelligent Test Runner Activation" permissions must activate the Intelligent Test Runner on the [Test Service Settings][3] page.
+
+{{< img src="continuous_integration/itr_overview.png" alt="Intelligent test runner enabled in test service settings in the CI section of Datadog.">}}
+
+## Disable skipping for specific tests
+
+You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+
+### Why make tests unskippable?
+
+The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+
+Examples include:
+
+- Tests that read data from text files.
+- Tests that interact with APIs outside of the code being tested (such as remote REST APIs).
+- Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
+
+### Marking tests as unskippable
+
+{{< tabs >}}
+{{% tab "XUnit" %}}
+
+#### Individual test case
+
+Add a XUnit `TraitAttribute` with the key `datadog_itr_unskippable` to your test case to mark it as unskippable.
+
+```csharp
+using Xunit;
+using Xunit.Abstractions;
+
+public class MyTestSuite
+{
+  [Fact]
+  [Trait("datadog_itr_unskippable", null)]
+  public void MyTest()
+  {
+    // ...
+  }
+}
+```
+
+#### Test suite
+
+Add a XUnit `TraitAttribute` with the key `datadog_itr_unskippable` to your test suite to mark it as unskippable.
+
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+
+```csharp
+using Xunit;
+using Xunit.Abstractions;
+
+[Trait("datadog_itr_unskippable", null)]
+public class MyTestSuite
+{
+  [Fact]
+  public void MyTest()
+  {
+    // ...
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "NUnit" %}}
+
+#### Individual test case
+
+Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (for example, string.Empty) to your test case to mark it as unskippable.
+
+```csharp
+using NUnit.Framework;
+
+public class MyTestSuite
+{
+  [Test]
+  [Property("datadog_itr_unskippable", "")]
+  public void MyTest()
+  {
+    // ...
+  }
+}
+```
+
+#### Test suite
+
+Add a NUnit `PropertyAttribute` with the key `datadog_itr_unskippable` and a non-null value (for example, string.Empty) to your test suite to mark it as unskippable.
+
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+
+```csharp
+using NUnit.Framework;
+
+[Property("datadog_itr_unskippable", "")]
+public class MyTestSuite
+{
+  [Test]
+  public void MyTest()
+  {
+    // ...
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "MsTestV2" %}}
+
+#### Individual test case
+
+Add a MsTestV2 `TestPropertyAttribute` with the key `datadog_itr_unskippable` to your test case to mark it as unskippable.
+
+```csharp
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[TestClass]
+public class MyTestSuite
+{
+  [TestMethod]
+  [TestProperty("datadog_itr_unskippable", null)]
+  public void MyTest()
+  {
+    // ...
+  }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

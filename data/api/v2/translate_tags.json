@@ -31,6 +31,10 @@
     "name": "Confluent Cloud",
     "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
   },
+  "container-images": {
+    "name": "Container Images",
+    "description": "The Container Images API allows you to query Container Image data for your organization."
+  },
   "dashboard-lists": {
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
@@ -117,7 +121,7 @@
   },
   "restriction-policies": {
     "name": "Restriction Policies",
-    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams (beta), or users (beta)).\nThe restriction policy determines who is authorized to perform what actions on the resource."
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",
