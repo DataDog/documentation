@@ -54,7 +54,7 @@ You may also use the `*` and `**` wildcard characters to match multiple files or
 
 We recommend that you use tracked files for your dependency files (for example, `package.json`, `requirements.txt`) and for data files from data-driven tests, such as `tests/data/**`.
 
-{{< img src="continuous_integration/itr_configuration1.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
+{{< img src="continuous_integration/itr_configuration2.png" alt="Select branches to exclude from intelligent test runner" style="width:80%;">}}
 
 ## Explore test sessions
 
