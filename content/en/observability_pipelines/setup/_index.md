@@ -394,6 +394,10 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 - See [Best Practices for OPW Aggregator Architecture][8] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
 
 ## Deployment Modes
+
+<div class="alert alert-warning">
+  Remote configuration for Observability Pipelines is in private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> or your Customer Success Manager for access.
+</div>
 If you are enrolled in the private beta of [Remote Configuration][7] to remotely roll out changes to your OP Workers, you can switch deployment methods in the settings cog (i.e. going from manually managed pipeline to remote configuration enabled pipeline). When switching deployment methods, ensure that you restart the Worker with the new deployment mode flag, `DD_OP_REMOTE_CONFIGURATION_ENABLED`, set to match the UI.
 
 When going from remote configuration to manual deployment mode, even if you switch the deployment mode in the UI, if you do not switch the deployment mode of each Workers by turning the `DD_OP_REMOTE_CONFIGURATION_ENABLED` flag off, the Workers themselves will be remote configuration enabled so therefore will continue pulling a version configuration.
