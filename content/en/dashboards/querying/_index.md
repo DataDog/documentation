@@ -174,7 +174,7 @@ status:error / status:info
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 
-Here is an example using the `max` operator to find the maximum value between `status:error` and `status:ok`.
+Here is an example using the `max` operator to find the maximum count between `status:error` and `status:ok`.
 
 ```text
 max(status:error, status:ok)
