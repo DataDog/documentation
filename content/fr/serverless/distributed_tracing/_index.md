@@ -28,9 +28,9 @@ kind: documentation
 title: Tracing distribué avec des applications sans serveur AWS Lambda
 ---
 
-{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur"  style="width:100%;">}}
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Tracer des fonctions sans serveur" style="width:100%;">}}
 
-Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi mieux dépanner les problèmes de performance.
+Associez vos traces sans serveur à vos métriques pour permettre à Datadog de vous offrir une vue d'ensemble détaillée et contextualisée des performances de votre application. Compte tenu de la nature distribuée des applications sans serveur, vous pouvez ainsi résoudre plus efficacement les problèmes de performance.
 
 Les bibliothèques de tracing Python, Node.js, Ruby, Go, Java et .NET Datadog prennent en charge le tracing distribué pour AWS Lambda.
 
@@ -128,13 +128,13 @@ Le profileur en continu fonctionne en générant un thread qui s'active réguli�
 
 ### Cas d'utilisation
 
-Datadog vous recommande d'utiliser uniquement la bibliothèque de tracing APM Datadog (`dd-trace`). Cependant, dans certaines situations délicates, les utilisateurs peuvent combiner le tracing Datadog et AWS X-Ray à l'aide de la fusion de traces. La fusion de traces est disponible pour les fonctions Node.js et AWS Lambda Python. Si vous ne savez pas quelle bibliothèque de tracing utiliser, consultez la section [choisir votre bibliothèque de tracing][1].
+Datadog vous recommande d'utiliser uniquement la bibliothèque de tracing APM Datadog (`dd-trace`). Cependant, dans certaines situations particulières, les utilisateurs peuvent combiner le tracing Datadog et AWS X-Ray à l'aide de la fusion de traces. La fusion de traces est disponible pour les fonctions et AWS Lambda Node.js et Python. Si vous ne savez pas quelle bibliothèque de tracing utiliser, découvrez comment [choisir votre bibliothèque de tracing][17].
 
 Il existe deux scénarios justifiant l'instrumentation des bibliothèques de tracing `dd-trace` et AWS X-Ray :
 - Dans un environnement AWS sans serveur, vous effectuez déjà le tracing de vos fonctions Lambda avec `dd-trace`. De plus, un tracing actif d'AWS X-Ray est requis pour les services AWS gérés, comme AppSync et Step Functions. Or, vous devez visualiser les spans `dd-trace` et AWS X-Ray au sein d'une unique trace.
 - Dans un environnement hybride comprenant des fonctions Lambda et des hosts, `dd-trace` instrumente vos hosts, tandis qu'AWS X-Ray instrumente vos fonctions Lambda. Or, vous devez visualiser les traces connectées pour les transactions de l'ensemble de vos fonctions Lambda et de vos hosts.
 
-**Remarque :** la fusion des traces peut entraîner une augmentation de vos coûts. Les spans X-Ray sont toujours disponibles dans vos traces fusionnées pendant une durée de deux à cinq minutes. Dans la plupart des cas, Datadog vous conseille d'utiliser une seule bibliothèque de tracing. Pour en savoir plus sur la sélection d'une bibliothèque de tracing, consultez la section [choisir votre bibliothèque de tracing][1].
+**Remarque** : la fusion des traces peut entraîner une augmentation de vos coûts. Les spans X-Ray restent disponibles dans vos traces fusionnées pendant une durée de deux à cinq minutes. Dans la plupart des cas, Datadog vous conseille d'utiliser une seule bibliothèque de tracing. Découvrez comment [choisir votre bibliothèque de tracing][17].
 
 Voici des instructions de configuration pour les deux scénarios évoqués ci-dessus :
 

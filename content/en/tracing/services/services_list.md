@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="tracing/visualization/services_page_2.png" alt="Services page" >}}
 
-<div class="alert alert-warning">The Services List is being replaced by the <a href="https://app.datadoghq.com/services">Service Catalog</a>. Read more in the <a href="/tracing/service_catalog/">Service Catalog documentation</a>.</div>
+<div class="alert alert-warning">The Services List is deprecated and being removed from Datadog. Use <a href="https://app.datadoghq.com/services">Service Catalog</a> instead. Read more in the <a href="/tracing/service_catalog/">Service Catalog documentation</a>.</div>
 
 ## Overview 
 

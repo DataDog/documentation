@@ -7,6 +7,8 @@ further_reading:
 - link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Autodiscovery"
+algolia:
+  tags: ['secrets', 'secrets executable', 'secrets provider', 'list secrets']
 ---
 
 If you wish to avoid storing secrets in plaintext in the Agent's configuration files, you can use the secrets management package.
@@ -467,7 +469,7 @@ The `dd-agent` user is created when you install the Datadog Agent.
 
 ##### Rights related errors
 
-If you encounter one of the following errors, then something is missing in your setup. See the [Windows intructions](#windows).
+If you encounter one of the following errors, then something is missing in your setup. See the [Windows instructions](#windows).
 
 1. If any other group or user than needed has rights on the executable, a similar error to the following is logged:
    ```

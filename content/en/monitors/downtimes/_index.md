@@ -175,7 +175,7 @@ All alerted states are included on the [weekly monitor report][15] even if the m
 
 Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. The following scenarios of auto-muting for shutdown are supported:
 
-- **[AWS EC2 instances][16]** and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
+- **[Amazon EC2 instances][16]** and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
 - **[Google Compute Engine (GCE)][17]** instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API.
 - **[Azure VMs][18]**, whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API.
 
@@ -183,7 +183,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#/downtime
+[1]: https://app.datadoghq.com/monitors/downtimes
 [2]: /monitors/guide/scoping_downtimes
 [3]: /monitors/manage/#monitor-tags
 [4]: /monitors/manage/search/

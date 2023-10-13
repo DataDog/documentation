@@ -477,7 +477,7 @@ Share the content of the **Log stream** with [Datadog Support][14].
 
 
 [1]: /integrations/azure/#log-collection
-[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
+[2]: /tracing/trace_collection/library_config
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [4]: /getting_started/site/
 [5]: /getting_started/tagging/unified_service_tagging/

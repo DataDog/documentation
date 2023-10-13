@@ -59,7 +59,7 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 
 ### Mask mode
 
-Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
+Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][1]. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
@@ -134,3 +134,5 @@ Datadog is working to add more privacy features to RUM & Session Replay. Have so
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

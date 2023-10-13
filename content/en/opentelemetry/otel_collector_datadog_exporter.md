@@ -580,7 +580,7 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
 
 2. Enable [OTLP ingestion in the Datadog Agent][3].
 
-3. Now that the Datadog Agent is ready to receive OTLP traces and metrics, change your [OpenTelemetry Collector DaemonSet][1] to use the [OTLP exporter][4] instead of the Datadog Exporter by adding the following configuration to [your config map][5]:
+3. Now that the Datadog Agent is ready to receive OTLP traces, logs, and metrics, change your [OpenTelemetry Collector DaemonSet][1] to use the [OTLP exporter][4] instead of the Datadog Exporter by adding the following configuration to [your config map][5]:
 
    ```yaml
    # ...
