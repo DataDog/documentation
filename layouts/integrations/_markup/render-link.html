@@ -1,1 +1,1 @@
-<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }} {{ if hasSuffix .Destination ".xml" }}download{{ end }}>{{ .Text | safeHTML }}</a>
+<a href="{{ .Destination | safeURL }}" {{ if hasSuffix .Destination ".xml" }}download{{ end }}>{{ .Text | safeHTML }}</a>
