@@ -11,15 +11,16 @@ In [Observability Pipelines][1], your pipelines are comprised of components that
 Health statuses are determined by specific metrics based on thresholds and default time windows. The available statuses are as follows:
 
 - `Healthy`: Indicates the Worker is not falling behind.
-- `Warning`: Indicates the Worker is not performing optimally and is at risk of falling behind.
-- `Critical`: Indicates that the Worker is falling behind.
+- `Warning`: Indicates the Worker is not performing optimally and is at risk of falling behind. The Worker may fall behind due to issues such as a downstream destination or service causing back pressure to build up and there are not enough resources being provisioned for the Workers.
+- `Critical`: Indicates that the Worker is falling behind. If the Worker is falling behind, it may be at the risk of dropping data; however, so long as your pipelines are [architected][2] and configured correctly, the Worker does not drop data unintentionally.
 
-You can also view health, resource utilization, and data delivery graphs to determine the state of your pipelines and components.
+Internal metrics, which are grouped by health, data delivery, and resource utilization, drives the overall health status of your pipeline and its components.
 
 Health graphs are available for the following metrics:
 - Events unintentionally dropped
 - Errors
 - Lag time (only available for sources)
+- Lag time rate of change (only available for sources)
 - Utilization
 
 Data delivery graphs are available for the following metrics:
@@ -31,15 +32,13 @@ Resource utilization graphs are available for the following metrics:
 - Memory usage
 - Disk usage (only available for destinations)
 
-**Note**: These graphs are only available for users enrolled in the remote configuration private beta.
-
 ## See the status of your pipelines and components
 
-1. Navigate to [Observability Pipelines][2].
+1. Navigate to [Observability Pipelines][3].
 1. Click on a pipeline.
 1. Hover over the graphs to see specific data points.
 
-## Pipeline health metrics
+## Pipeline resource utilization health metrics
 
 | Metric        | OK       | Warning    | Critical  | Description                       |
 | ------------  | :------: | :--------: | :-------: | --------------------------------- |
@@ -48,14 +47,15 @@ Resource utilization graphs are available for the following metrics:
 
 ## Component health metrics
 
-| Metric        | Sources   | Transforms| Destinations | OK      | Warning  | Critical  | Description                       |
-| ------------  | :-------: | :-------: | :----------: | :-----: | :------: | :-------: | --------------------------------- |
-| Events dropped  | {{< X >}} | {{< X >}} |{{< X >}}     | ==0     | N/A      | > 0       |Expected to always be `0`. If you configured the Worker to intentionally drop data, for example using the `filter` transform, that data is not counted here. Therefore, a single error indicates that the Worker is not in a healthy state.|
-| Total errors  |{{< X >}}  |{{< X >}}  |{{< X >}}     | ==0     | >0       | N/A       | The total number of errors encountered by the component. Diagnostic Logs provides more information about specific internal error logs. |
-| Utilization   |           |{{< X >}}  |{{< X >}}     | <=0.95 | >0.95   | N/A       | Tracks the component's activity.<br> A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle. A value greater than `0.95` indicates that the component is busy and likely a bottleneck in the processing topology. |
-| Lag time      | {{< X >}} |           |              | <=0    | >0      | >1       | Indicates whether there is a substantial delay between when the event is generated and when the Worker receives the data. If there is a delay, then the Worker is falling behind in receiving data from the source.<br> A value of `0` indicates there is no additional lag from when the observability data is generated and when the Worker receives the data. A value equal to or greater than `1` indicates that there is backpressure and a bottleneck. |
-| Disk usage    |           |           |{{< X >}}     | >=0.20 | > 0.20  | N/A     | Measures how full a given disk is. <br> A value of `1` indicates that no data can be stored in the disk. A value of `0` indicates that the disk is empty. |
+| Metric                    | Sources   | Transforms| Destinations | OK      | Warning  | Critical  | Description                       |
+| ------------------------  | :-------: | :-------: | :----------: | :-----: | :------: | :--------:| --------------------------------- |
+| Events dropped            | {{< X >}} | {{< X >}} |{{< X >}}     | ==0     | N/A      | > 0       |Expected to always be `0`. If you configured the Worker to intentionally drop data, for example using the `filter` transform, that data is not counted here. Therefore, a single error indicates that the Worker is not in a healthy state.|
+| Total errors              |{{< X >}}  |{{< X >}}  |{{< X >}}     | ==0     | >0       | N/A       | The total number of errors encountered by the component. These errors are also emitted as Diagnostic Logs, which provides more information about specific internal error logs. |
+| Utilization               |           |{{< X >}}  |{{< X >}}     | <=0.95 | >0.95   | N/A       | Tracks the component's activity.<br> A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle. A value greater than `0.95` indicates that the component is busy and likely a bottleneck in the processing topology. |
+| Lag time                  |{{< X >}}  |           |              | N/A    | N/A     | N/A      | This is the raw time difference (in milliseconds) between the timestamp on the event and the timestamp of when the event was ingested by the Worker. High lag time or a change in the lag time (see below) is an indicator of whether the Worker is falling behind due to back pressure from a downstream service, lack of resources provisioned to the Worker, or a bottleneck in the pipeline. |
+| Lag time rate of change   | {{< X >}} |           |              | <=0    | >0      | >1       | Indicates whether there is a substantial delay between when the event is generated and when the Worker receives the data. If there is a delay, then the Worker is falling behind in receiving data from the source.<br> A value of `0` indicates there is no additional lag from when the observability data is generated and when the Worker receives the data. A value equal to or greater than `1` indicates that there is backpressure and a bottleneck. |
+| Disk usage                |           |           |{{< X >}}     | >=0.20 | > 0.20  | N/A     | Measures how full a given disk is. <br> A value of `1` indicates that no data can be stored in the disk. A value of `0` indicates that the disk is empty. |
 
 [1]: /observability_pipelines/
-[2]: https://app.datadoghq.com/observability-pipelines/
-
+[2]: /observability_pipelines/architecture/
+[3]: https://app.datadoghq.com/observability-pipelines/
