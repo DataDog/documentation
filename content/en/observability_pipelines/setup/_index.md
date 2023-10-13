@@ -398,11 +398,22 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 <div class="alert alert-warning">
   Remote configuration for Observability Pipelines is in private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> or your Customer Success Manager for access.
 </div>
-If you are enrolled in the private beta of [Remote Configuration][7] to remotely roll out changes to your OP Workers, you can switch deployment methods in the settings cog (i.e. going from manually managed pipeline to remote configuration enabled pipeline). When switching deployment methods, ensure that you restart the Worker with the new deployment mode flag, `DD_OP_REMOTE_CONFIGURATION_ENABLED`, set to match the UI.
+If you are enrolled in the private beta of [Remote Configuration][7] to remotely roll out changes to your OP Workers, you remotely roll out changes to your Workers from the Datadog UI, rather than making updates to your pipeline configuration in a text editor and rolling out your changes manually. You can choose your deployment method when you create a pipeline and install your Workers.
 
-When going from remote configuration to manual deployment mode, even if you switch the deployment mode in the UI, if you do not switch the deployment mode of each Workers by turning the `DD_OP_REMOTE_CONFIGURATION_ENABLED` flag off, the Workers themselves will be remote configuration enabled so therefore will continue pulling a version configuration.
+After deploying a pipeline, you can also switch deployment methods, such as going from manually managed pipeline to remote configuration enabled pipeline or vice versa. 
 
-When going from manual to remote configuration deployment mode, after restarting the Worker with  flag, you will need to deploy a version in your version history, so that the Workers receive the new version configuration. 
+If you want to switch from a remote configuration deployment to a manually managed deployment:
+1. Navigate to Observability Pipelines.
+2. Click the settings cog.
+3. In **Deployment Mode**, select **manual** to enable it.
+4. Set the flag, `DD_OP_REMOTE_CONFIGURATION_ENABLED` to `false` and restart the Worker. Workers that aren't restarted with this flag will continue to be remote configuration enabled, which means that the Worker will not be updated manually through a local configuration file
+
+If you want to switch from manually managed deployment to a remote configuration deployment:
+1. Navigate to Observability Pipelines.
+2. Click the settings cog.
+3. In **Deployment Mode**, select **Remote Configuration** to enable it.
+4. Set the flag, `DD_OP_REMOTE_CONFIGURATION_ENABLED` to `true` and restart the Worker. Workers that aren't restarted with this flag will not poll for configurations deployed in the UI. 
+6. Deploy a version in your version history, so that the Workers receive the new version configuration. Click on a version, click _Edit as Draft_, then click _Deploy_. 
 
 
 ## Further reading
