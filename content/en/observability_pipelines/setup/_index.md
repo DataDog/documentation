@@ -400,7 +400,6 @@ When going from remote configuration to manual deployment mode, even if you swit
 
 When going from manual to remote configuration deployment mode, after restarting the Worker with  flag, you will need to deploy a version in your version history, so that the Workers receive the new version configuration. 
 
-If you are interested in getting early access to remote configuration, please reach out to support or your customer success manager.
 
 ## Further reading
 
