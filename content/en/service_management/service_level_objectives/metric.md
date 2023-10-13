@@ -32,7 +32,7 @@ On the [SLO status page][5], select **New SLO +**. Then select [**Metric**][6].
 1. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
 1. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
-**Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
+**Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx OR code:3xx OR code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
 Why is `HTTP 3xx` excluded? - These are typically redirects and should not count for or against the SLI, but other non-3xx based error codes should. In the `total` case, you want all types minus `HTTP 3xx`, in the `numerator`, you only want `OK` type status codes.
 
