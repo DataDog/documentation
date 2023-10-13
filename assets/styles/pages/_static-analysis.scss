@@ -45,6 +45,8 @@
         }
         &.active {
           .group-header__arrow {
+            position: relative;
+            top: 2px;
             transform: rotate(-180deg) !important;
           }
         }
