@@ -4144,6 +4144,22 @@ components:
             type: string
           type: array
       type: object
+    IPPrefixesGlobal:
+      description: Available prefix information for all Datadog endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
     IPPrefixesLogs:
       description: Available prefix information for the Logs endpoints.
       properties:
@@ -4284,6 +4300,8 @@ components:
           $ref: '#/components/schemas/IPPrefixesAPI'
         apm:
           $ref: '#/components/schemas/IPPrefixesAPM'
+        global:
+          $ref: '#/components/schemas/IPPrefixesGlobal'
         logs:
           $ref: '#/components/schemas/IPPrefixesLogs'
         modified:
@@ -6710,7 +6728,6 @@ components:
             This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
-          default: none
           description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
@@ -6938,6 +6955,33 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsCustomSchedule:
+      description: Configuration options for the custom schedule. **This feature is
+        in private beta.**
+      properties:
+        recurrences:
+          description: Array of custom schedule recurrences.
+          items:
+            $ref: '#/components/schemas/MonitorOptionsCustomScheduleRecurrence'
+          type: array
+      type: object
+    MonitorOptionsCustomScheduleRecurrence:
+      description: Configuration for a recurrence set on the monitor options for custom
+        schedule.
+      properties:
+        rrule:
+          description: Defines the recurrence rule (RRULE) for a given schedule.
+          example: FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+          type: string
+        start:
+          description: Defines the start date and time of the recurring schedule.
+          example: '2023-08-31T16:30:00'
+          type: string
+        timezone:
+          description: Defines the timezone the schedule runs on.
+          example: Europe/Paris
+          type: string
+      type: object
     MonitorOptionsNotificationPresets:
       default: show_all
       description: Toggles the display of additional content sent in the monitor notification.
@@ -6955,6 +6999,8 @@ components:
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
+        custom_schedule:
+          $ref: '#/components/schemas/MonitorOptionsCustomSchedule'
         evaluation_window:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
       type: object
@@ -9184,6 +9230,86 @@ components:
       maxItems: 2
       minItems: 2
       type: array
+    PowerpackTemplateVariableContents:
+      description: Powerpack template variable contents.
+      properties:
+        name:
+          description: The name of the variable.
+          example: host1
+          type: string
+        prefix:
+          description: The tag prefix associated with the variable.
+          type: string
+        values:
+          description: One or many template variable values within the saved view,
+            which will be unioned together using `OR` if more than one is specified.
+          example:
+          - my-host
+          - host1
+          - host2
+          items:
+            description: One or more possible values of the template variable.
+            minLength: 1
+            type: string
+          type: array
+      required:
+      - name
+      - values
+      type: object
+    PowerpackTemplateVariables:
+      description: Powerpack template variables.
+      properties:
+        controlled_by_powerpack:
+          description: Template variables controlled at the powerpack level.
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariableContents'
+          type: array
+        controlled_externally:
+          description: Template variables controlled by the external resource, such
+            as the dashboard this powerpack is on.
+          items:
+            $ref: '#/components/schemas/PowerpackTemplateVariableContents'
+          type: array
+      type: object
+    PowerpackWidgetDefinition:
+      description: The powerpack widget allows you to keep similar graphs together
+        on your timeboard. Each group has a custom header, can hold one to many graphs,
+        and is collapsible.
+      properties:
+        background_color:
+          description: Background color of the powerpack title.
+          type: string
+        banner_img:
+          description: URL of image to display as a banner for the powerpack.
+          type: string
+        powerpack_id:
+          description: UUID of the associated powerpack.
+          example: df43cf2a-6475-490d-b686-6fbc6cb9a49c
+          type: string
+        show_title:
+          default: true
+          description: Whether to show the title or not.
+          type: boolean
+        template_variables:
+          $ref: '#/components/schemas/PowerpackTemplateVariables'
+        title:
+          description: Title of the widget.
+          type: string
+        type:
+          $ref: '#/components/schemas/PowerpackWidgetDefinitionType'
+      required:
+      - type
+      - powerpack_id
+      type: object
+    PowerpackWidgetDefinitionType:
+      default: powerpack
+      description: Type of the powerpack widget.
+      enum:
+      - powerpack
+      example: powerpack
+      type: string
+      x-enum-varnames:
+      - POWERPACK
     ProcessQueryDefinition:
       description: The process query to use in the widget.
       properties:
@@ -20204,6 +20330,7 @@ components:
       - $ref: '#/components/schemas/LogStreamWidgetDefinition'
       - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
       - $ref: '#/components/schemas/NoteWidgetDefinition'
+      - $ref: '#/components/schemas/PowerpackWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
       - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
       - $ref: '#/components/schemas/SLOListWidgetDefinition'
@@ -26624,37 +26751,8 @@ paths:
         ##### Event Alert Query
 
 
-        Example: `events(''sources:nagios status:error,warning priority:normal tags:
-        "string query"'').rollup("count").last("1h")"`
-
-
-        - `event`, the event query string:
-
-        - `string_query` free text query to match against event title and text.
-
-        - `sources` event sources (comma-separated).
-
-        - `status` event statuses (comma-separated). Valid options: error, warn, and
-        info.
-
-        - `priority` event priorities (comma-separated). Valid options: low, normal,
-        all.
-
-        - `host` event reporting host (comma-separated).
-
-        - `tags` event tags (comma-separated).
-
-        - `excluded_tags` excluded event tags (comma-separated).
-
-        - `rollup` the stats roll-up method. `count` is the only supported method
-        now.
-
-        - `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported
-        timeframes: m, h and d. This value should not exceed 48 hours.
-
-
-        **NOTE** The Event Alert Query is being deprecated and replaced by the Event
-        V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
+        **Note:** The Event Alert Query has been replaced by the Event V2 Alert Query.
+        For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).
 
 
         ##### Event V2 Alert Query
@@ -26786,10 +26884,6 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3,
-        and US5.
-
-
         ##### CI Pipelines Alert Query
 
 
@@ -26812,9 +26906,6 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
-
-
         ##### CI Tests Alert Query
 
 
@@ -26835,10 +26926,6 @@ paths:
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
         - `#` an integer or decimal number used to set the threshold.
-
-
-        **NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1,
-        US3, and US5.
 
 
         ##### Error Tracking Alert Query

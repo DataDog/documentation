@@ -1,5 +1,5 @@
 ---
-title: Ingest AWS S3 Logs with the Observability Pipelines Worker
+title: Ingest Amazon S3 Logs with the Observability Pipelines Worker
 kind: guide
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can ingest logs from many different sources. If you have an AWS S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or CloudWatch, you can configure the Worker to ingest those logs. The setup uses Observability Pipelines Worker's AWS S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket. 
+The [Observability Pipelines Worker][1] can ingest logs from many different sources. If you have an Amazon S3 bucket that is receiving logs from an external system, such as AWS CloudTrail or CloudWatch, you can configure the Worker to ingest those logs. The setup uses Observability Pipelines Worker's Amazon S3 source, which requires configuring an Amazon SQS queue to receive event notifications from the S3 bucket. The event notification then informs the Worker to collect the new log events in the S3 bucket. 
 
 This guide walks you through the following steps:
 
@@ -28,7 +28,7 @@ This guide walks you through the following steps:
 
 ## Create an Amazon SQS topic to receive S3 notifications
 
-In the AWS SQS console, provision a new queue specific to this configuration. This keeps any changes you make to it separate from any other log analysis tools that you are using.
+In the Amazon SQS console, provision a new queue specific to this configuration. This keeps any changes you make to it separate from any other log analysis tools that you are using.
 
 1. Go to the [Amazon SQS console][4].
 2. Click **Create queue** to provision a new queue specific to this configuration.
@@ -64,7 +64,7 @@ In the AWS SQS console, provision a new queue specific to this configuration. Th
 
 ## Enable event notifications on the S3 bucket
 
-1. In the [AWS S3 console][5], go to the S3 bucket that is collecting the logs that you want the Worker to ingest.
+1. In the [Amazon S3 console][5], go to the S3 bucket that is collecting the logs that you want the Worker to ingest.
 2. Click the **Properties** tab.
 3. Go to the **Event notifications** section, and click **Create event notification**.
 4. Enter a name for the event.
@@ -132,11 +132,11 @@ Apply the role to the running Observability Pipelines process. You can do this b
       ```
 2. Replace `${REGION}` with the AWS account region. Replace `${SQS_URL}` with the HTTP URL provided in the SQS queue's **Details** section in the console.
 
-See [AWS S3 source documentation][7] for more options.
+See [Amazon S3 source documentation][7] for more options.
 
-With the AWS S3 source set up, you can now add [transforms][8] to manipulate the data and [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks. 
+With the Amazon S3 source set up, you can now add [transforms][8] to manipulate the data and [sinks][9] to output the logs to destinations based on your use case. See [Configurations][3] for more information on sources, transforms, and sinks. 
 
-## Configure the Worker to separate batched AWS S3 log events
+## Configure the Worker to separate batched Amazon S3 log events
 
 
 Most services (for example, CloudTrail) send logs to S3 in batches, which means that each event that the Worker receives is composed of multiple logs. In the below example, `Records` is an array of three log events that are batched together.

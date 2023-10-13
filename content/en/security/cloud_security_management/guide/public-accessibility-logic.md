@@ -53,7 +53,7 @@ An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 
-### Amazon CloudTrail Trail
+### AWS CloudTrail Trail
 
 A [CloudTrail Trail][3] (`aws_cloudtrail_trail`) is considered publicly accessible if:
 

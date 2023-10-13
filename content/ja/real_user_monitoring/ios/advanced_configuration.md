@@ -67,7 +67,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-[`DDRUMMonitor` クラス][9]で詳細およびその他のオプションをご確認ください。
+詳細や利用可能なオプションについては、`DDRUMMonitor` クラスで [GitHub 上の関連ファイル][9]をフィルタリングしてご確認ください。
 
 ### 独自のパフォーマンスタイミングを追加
 
@@ -101,7 +101,7 @@ func onHeroImageLoaded() {
 
 [アクションを自動的に追跡する](#automatically-track-user-actions)ことに加えて、`addAction(type:name:)` API を使って、特定のカスタムユーザーアクション (タップ、クリック、スクロール) を追跡することができます。
 
-`RUMMonitor.shared()` に `.tap` のような瞬間的な RUM アクションを手動で登録するには、`.addAction(type:name:)` を使用します。`.scroll` のような連続した RUM アクションを登録するには、`.startAction(type:name:)` または `.stopAction(type:)` を使用します。
+`RUMMonitor.shared()` に `.tap` のような瞬間的な RUM アクションを手動で登録するには、`.addAction(type:name:)` を使用します。`.scroll` のような連続した RUM アクションを登録するには、`.startAction(type:name:)` または `.stopAction(type:name:)` を使用します。
 
 例:
 
@@ -132,7 +132,7 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: `.startUserAction(type:name:)` と `.stopUserAction(type:)` を使用する場合、アクション `type` は同じである必要があります。これは、RUM iOS SDK がアクションの開始と完了を一致させるために必要です。
+**注**: `.startAction(type:name:)` と `.stopAction(type:name:)` を使用する場合、アクション `type` は同じである必要があります。これは、RUM iOS SDK がアクションの開始と完了を一致させるために必要です。
 
 [`DDRUMMonitor` クラス][9]で詳細およびその他のオプションをご確認ください。
 
@@ -761,4 +761,4 @@ configuration.proxyConfiguration = @{
 [6]: /ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [7]: /ja/real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift
+[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift

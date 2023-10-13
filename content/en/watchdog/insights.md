@@ -60,6 +60,14 @@ To refine your current view to match a Watchdog Insight, hover over the top righ
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
+### Share an outlier
+
+To share a given outlier, click on it in the insight panel to open the details side panel. Click the **Copy Link** button at the top of the details panel:
+
+{{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
+
+The link to the outlier expires with the retention of the underlying data. For instance, if the logs used to build the outlier are retained for 15 days, the link to the outlier expires with the logs after 15 days.
+
 ## Outlier types
 
 {{< tabs >}}
@@ -138,7 +146,7 @@ In the full side panel, you can see a latency distribution graph for the tag and
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
-### Lock pressure outlier
+### Lock contention outlier
 
 In the banner card view, you can see:
 
@@ -146,11 +154,11 @@ In the banner card view, you can see:
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
     
-{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:50%;">}}
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
 
-In the full side panel, you can see instructions on how to resolve the lock pressure:
+In the full side panel, you can see instructions on how to resolve the lock contention:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Contention outlier" style="width:100%;">}}
 
 ### Garbage collection outlier
 

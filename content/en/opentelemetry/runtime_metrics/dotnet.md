@@ -10,12 +10,16 @@ code_lang_weight: 20
 
 - You are successfully [sending OpenTelemetry metrics to Datadog][1].
 - You have installed the language integration for [.NET][2].
+- Minimum .NET OTel SDK version of [1.5.0][6].
 
 ## OpenTelemetry SDK configuration
 
 If you have instrumented your .NET applications with [OpenTelemetry automatic instrumentation][3], runtime metrics are automatically enabled. 
 
 If you have instrumented your .NET application with [OpenTelemetry manual instrumentation][4], see the documentation for the [OpenTelemetry.Instrumentation.Runtime library][5].
+
+The default metric export interval for the .NET OTel SDK is different from the default for the Datadog .NET SDK. Datadog recommends setting the [OTEL_METRIC_EXPORT_INTERVAL][7] environment variable on your .NET service to match the default Datadog metric export interval for viewing integration metric graphs:
+- `OTEL_METRIC_EXPORT_INTERVAL=10000`
 
 ## Runtime metric mappings
 
@@ -55,3 +59,5 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
+[6]: https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0
+[7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
