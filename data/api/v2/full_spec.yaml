@@ -19763,8 +19763,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This API endpoint is in private beta. Request access
-        [here](https://docs.google.com/forms/d/e/1FAIpQLSdNejCvhMbdBW5nnGly1yvmYMn2Wpj4JOI0zKIiEx6O6I2dbQ/viewform).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
       description: Use this API endpoint to aggregate CI Visibility pipeline events
