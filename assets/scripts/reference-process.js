@@ -31,17 +31,46 @@ $RefParser.dereference(fileData)
         );
 
       // init our global data
-      const allData = {"sources":[], "transforms":[], "sinks": []};
+      const allData = {"sources":[], "transforms":[], "sinks": [], "global": []};
 
       // add to global data our processed components
       buildSection("vector::sources::Sources", deref, allData, ["file", "socket", "exec"]);
       buildSection("vector::transforms::Transforms", deref, allData, ["lua"]);
       buildSection("vector::sinks::Sinks", deref, allData, ["file", "websocket"]);
+      buildGlobalSection(deref, allData);
 
       // write it out to the file
       fs.writeFileSync("./data/reference/schema.tables.json", safeJsonStringify(allData, null, 2), 'utf8');
     });
 
+
+function buildGlobalSection(deref, allData, componentsToSkip = []) {
+  const name = "global";
+  const dataEntries = Object.entries(deref['allOf'][1].properties);
+  dataEntries.forEach(([key, value]) => {
+    let entryData = {
+      "description1": value.description || "",
+      "description2": "",
+      "title": value.title || "",
+      "metadata": value._metadata || {},
+      "simple": yaml.dump(simpleExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
+      "advanced": yaml.dump(advancedExampleYaml(value.allOf), {lineWidth: -1, sortKeys:false}),
+      "html": {}
+    };
+    let lastChar = entryData.description1.slice(-1);
+    if (lastChar === '.') {
+      entryData.description1 = entryData.description1.slice(0, -1);
+    }
+    table = null;
+    try {
+      table = schemaTable("request", value, true);
+    } catch (e) {
+      console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
+    }
+    entryData["html"] = table;
+    allData[name].push(entryData);
+  });
+}
 
 function buildSection(specStr, deref, allData, componentsToSkip) {
   const skiplabels = ["Unit Test", "Unit Test Stream"];
