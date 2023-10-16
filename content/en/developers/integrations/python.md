@@ -126,9 +126,9 @@ You have 2 options to install the `ddev` CLI.
    - `x64`:
       ```shell
       msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi
-      ```shell
-   - `x86`:
       ```
+   - `x86`:
+      ```shell
       msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi
       ```
 2. Restart your terminal.
