@@ -127,11 +127,34 @@ Requires Agent version >= 6.20 or 7.20.
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
+## Datadog Cluster Agent Metrics (e.g. Kubernetes State Metrics Core)
+
+### HELM configuration
+
+In Datadog `values.yaml`:
+```yaml
+clusterAgent:
+  env:
+    - name: DD_ADDITIONAL_ENDPOINTS
+      value: '{"https://app.datadoghq.com": ["apikey2"]}'
+```
+
 ## Orchestrator
 
 ### HELM configuration
 In Datadog `values.yaml`:
 ```yaml
+agents:
+  process_config:
+    additional_endpoints:
+      "https://process.datadoghq.com":
+      - apikey2}
+
+  customAgentConfig:
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.datadoghq.com":
+        - apikey2      
 clusterAgent:
 ...
   datadog_cluster_yaml:
