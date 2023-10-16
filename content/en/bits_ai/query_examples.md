@@ -46,7 +46,6 @@ Infrastructure resource data can be queried in natural language from the search 
 
 Natural language querying of cloud cost is available through the in-product search bar or the chat panel.
 
-Examples:
 - "Show me how much each team spends on the web-store service"
 {{< img src="bits_ai/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:90%;">}}
 - "AWS products with >5% increase in costs"
