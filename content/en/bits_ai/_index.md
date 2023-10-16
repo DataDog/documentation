@@ -34,10 +34,10 @@ For detailed setup and usage instructions, see the additional Bits AI documentat
 Bits AI supports natural language querying for logs, APM traces, infrastructure data, and cloud cost. You can also ask Bits AI about the health and ownership of your services, and retrieve Datadog resources related to those services.
 
 You can ask Bits AI questions such as
-- Who is on call for example-service?
-- Find me the example-service dashboard.
-- What is going on with example-service?
-- Are there any issues with example-service's dependencies?
+- `Who is on call for example-service?`
+- `Find me the example-service dashboard.`
+- `What is going on with example-service?`
+- `Are there any issues with example-service's dependencies?`
 
 When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 

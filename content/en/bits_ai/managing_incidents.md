@@ -24,7 +24,7 @@ Bits AI is in private beta. Fill out this form to join the wait list.
 
 When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and have at least fifteen messages. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
 
-At any time, you can ask for a fresh summary by asking "`@DataDog` Give me a summary of this incident". Schedule an update by asking "`@DataDog` Give me an update in X minutes".
+At any time, you can ask for a fresh summary by asking `@DataDog Give me a summary of this incident`. Schedule an update by asking `@DataDog Give me an update in X minutes`.
 
 ## Ask questions
 
