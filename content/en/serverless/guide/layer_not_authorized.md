@@ -7,7 +7,7 @@ This guide helps you troubleshoot the deployment error `not authorized to perfor
 ## Regionality
 Lambda functions can only include [Lambda layers][1] that are located in the same region as the function. Typically, this error occurs when users copy instrumentation settings from other applications deployed in different regions.
 
-Verify that the Lambda Layer region and Lambda function version match. Then verify that the version number is correct.
+Verify that the Lambda layer region and Lambda function version match. Then verify that the version number is correct.
 
 You can verify that a Lambda Layer version exists using any valid AWS credentials and running the following command:
 ```
