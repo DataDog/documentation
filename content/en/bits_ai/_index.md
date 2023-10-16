@@ -36,7 +36,7 @@ You can ask Bits AI questions such as
 
 When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-{{< whatsnext desc="Additional documentation:">}}
+{{< whatsnext desc="Additional Bits AI documentation:">}}
     {{< nextlink href="bits_ai/getting_started/" >}}Getting Started{{< /nextlink >}}
     {{< nextlink href="bits_ai/query_examples/" >}}Example Natural Language Queries{{< /nextlink >}}
 {{< /whatsnext >}}
