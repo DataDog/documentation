@@ -38,7 +38,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
-Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AWS ECR:
+Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
@@ -397,7 +397,7 @@ DD_CONFIG_SOURCES=BLOB:s3://config_bucket/my_process_config.yaml?region=us-east-
 
 #### Blob storage support
 The supported blob storage solutions are:
-- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
 See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
 - **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
 - **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-host).
@@ -620,7 +620,7 @@ If these properties are set to different values, change them to match. If they a
 
 ## Configure Docker injection
 
-Edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
+If the default configuration doesn't meet your needs, you can edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
 
 ```yaml
 ---
@@ -749,7 +749,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 #### Blob storage support
 The supported blob storage solutions are:
-- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
 See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
 - **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
 - **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-hc).
@@ -778,8 +778,6 @@ If they are not specified, `DD_ENV` uses the `env` value set in the `/etc/datado
 Start your Agent and launch your containerized services as usual.
 
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
-
-
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
@@ -949,7 +947,7 @@ Tracer library configuration options that aren't mentioned in the injection conf
 
 #### Blob storage support
 The supported blob storage solutions are:
-- **AWS S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
+- **Amazon S3** - Set the URL with the `s3://` prefix. If you have authenticated with the AWS CLI, it uses those credentials.
 See [the AWS SDK documentation][7] for information about configuring credentials using environment variables.
 - **GCP GCS** - Set the URL with the `gs://` prefix. It uses Application Default Credentials. Authenticate with GCloud auth application-default login. See [the Google Cloud authentication documentation][8] for more information about configuring credentials using environment variables.
 - **Azure Blob** - Set the URL with the `azblob://` prefix, and point to a storage container name. It uses the credentials found in `AZURE_STORAGE_ACCOUNT` (that is, the bucket name) plus at least one of `AZURE_STORAGE_KEY` and `AZURE_STORAGE_SAS_TOKEN`. For more information about configuring `BLOB` or `LOCAL` settings, see [Supplying configuration source](#supplying-configuration-source-c).
@@ -1020,6 +1018,66 @@ Exercise your application to start generating telemetry data, which you can see 
 
 {{< /tabs >}}
 
+## Uninstall library injection
+
+### Remove instrumentation for specific services
+
+To stop producing traces for a specific service, run the following commands and restart the service:
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+
+   ```shell
+   DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
+   ```
+2. Restart the service.
+
+{{% /tab %}}
+
+{{% tab "Agent and app in separate containers" %}}
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+   ```shell
+   docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
+   ```
+2. Restart the service.
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Remove APM for all services on the infrastructure
+
+To stop producing traces, remove library injectors and restart the infrastructure:
+
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+1. Run:
+   ```shell
+   dd-host-install --uninstall
+   ```
+2. Restart your host.
+
+{{% /tab %}}
+
+{{% tab "Agent and app in separate containers" %}}
+
+1. Uninstall local library injection:
+   ```shell
+   dd-container-install --uninstall
+   ```
+2. Restart Docker:
+   ```shell
+   systemctl restart docker
+   ```
+   Or use the equivalent for your environment.
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Configuring the library
 

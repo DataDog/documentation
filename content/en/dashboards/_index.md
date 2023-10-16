@@ -187,6 +187,8 @@ If the dashboard was created with the deprecated "read only" setting, the access
 
 If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
 
+The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
+
 **Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
 
 #### High-density mode

@@ -12,7 +12,7 @@ disable_sidebar: true
 ### Postgres versions supported
 
 
-|  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL | Azure |
+|  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
 |--|------------|---------|------------|------------------|---------|
 | Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |

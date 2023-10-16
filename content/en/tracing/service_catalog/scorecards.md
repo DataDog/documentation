@@ -18,9 +18,33 @@ Service Scorecards are in beta.
 
 Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
 
+You can select the rules used to populate the Scorecards, and you can generate reports, which are sent directly to your team's Slack channel, to regularly report on scorecard results.
+
+## Setting up scorecards
+
+To select which of the out-of-the-box rules are evaluated for each of the default scorecards:
+
+1. Open the [Scorecards page][8] in Service Catalog.
+2. Enable or disable rules to customize how the scores are calculated. 
+3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
+
+### Creating custom rules
+
+{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
+Custom Scorecard rules are in private beta. Join the beta and get detailed API instructions by requesting access.
+{{< /callout >}}
+
+To add custom rules to your Scorecards dashboard using the Scorecards API: 
+
+1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
+2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
+3. View an overview of outcomes in the Scorecards dashboard.
+
+After initial setup, rules can also be enabled or disabled through the API. 
+
 ## How services are evaluated
 
-Navigate to the [**Scorecards** page][8] in the [Service Catalog][6]. Click the section titles to see the rules that services are evaluated for.
+After the default scorecards are set up, the Scorecards page in the Service Catalog shows the list of out-of-the-box rules and the percentage of services passing those rules. Click on a rule to see more details about passing and failing services and the teams that own them.
 
 ### Production readiness
 
@@ -43,7 +67,7 @@ Last deployment occurred within the last 3 months
 The Observability best practices score is based on the following rules:
 
 Deployment tracking is active
-: For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience. 
+: For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag with Unified Service Tagging][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience. 
 
 Logs correlation is active
 : For APM services. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages. 
@@ -66,17 +90,42 @@ Any docs defined
 
 ## How scores are calculated
 
-Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect simple pass-fail conditions. 
+Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect simple pass-fail conditions. To exclude a particular rule from a service's score calculation, set its outcome to `skip` in the scorecards API.
 
 Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][7]. 
 
-Each rule lists a score for the percentage of services that are passing. Each scorecard has an overall score percentage that totals how many services are passing, across all rules—**not** how many services are passing all rules.
+Each rule lists a score for the percentage of services that are passing. Each scorecard has an overall score percentage that totals how many services are passing, across all rules—**not** how many services are passing all rules. Skipped and disabled rules are not included in this calculation.
 
 ## View service-level details and scores
 
 The scorecard summary is accessible on the [**Explore** page][1] in the Service Catalog under the **Scorecards** column in the **Ownership** tab. You can see how your specific service or subset of services is doing for each scorecard, and the rules within each. 
 
 Click **View Details** from the scorecard, or open the service details side panel to see the **Scorecards** tab, which lists all the scorecards, the rules, and that service's pass-fail score for each rule.
+
+## Generating Scorecard reports
+
+{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
+Scorecard reports are in private beta. Join the beta by requesting access.
+{{< /callout >}}
+
+You can generate Scorecard reports, which send scheduled overviews of Scorecard information to your team's Slack channel to help everyone understand how services and teams are meeting the expected standards. Creating a report generates a Workflow using [Datadog Workflow Automation][9], which runs at a scheduled time. 
+
+<div class="alert alert-warning">Running this Workflow may impact your billing. Read the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">pricing page</a> for more information</div>
+
+To create a Report:
+
+1. Click **Create Report** on the Scorecards page. 
+2. Choose whether to include all defined services across your organization or a specific team's services. 
+3. Set the date, time, and frequency at which you want to receive these reports.
+4. Set the Slack workspace and channel where the reports should be sent. The selected channel must be public and have the Datadog Slack app installed. 
+5. Click **Enable this Workflow**.
+
+Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
+
+
+### Managing Scorecard reports
+To edit or delete a Workflow, click **Manage Reports** on the Scorecards page and select the Workflow. Make edits to the Workflow or delete it using the Settings menu. 
+
 
 ## Further reading
 
@@ -90,3 +139,4 @@ Click **View Details** from the scorecard, or open the service details side pane
 [6]: /tracing/service_catalog/
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://app.datadoghq.com/services/scorecard
+[9]: /service_management/workflows/

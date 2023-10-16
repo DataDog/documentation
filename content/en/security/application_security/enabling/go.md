@@ -22,7 +22,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
+You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted %}}
 - Your service is [supported][2].
@@ -85,7 +85,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your application's ECS task definition JSON file, by adding this in the environment section:
 

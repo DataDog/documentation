@@ -45,7 +45,7 @@ Actionable information includes the ability to:
   - Access the rule settings of the signal.
   - Share or assign the signal to a teammate.
 
-{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="The Security Signal panel showing a critical signal for AWS S3 Public access block removed" style="width:90%;" >}}
+{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="The Security Signal panel showing a critical signal for Amazon S3 Public access block removed" style="width:90%;" >}}
 
 The first seen and last seen date are updated, if new data is made available from the past or the attack continues. For Cloud SIEM and CSM Threats signals, a "What Happened" section is displayed in the Overview tab and any configured group bys or rule customizations related to the detection rule is displayed. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys in the header for CSM Misconfigurations misconfigurations and in the Context section for Cloud SIEM and CSM Threats signals.
 
