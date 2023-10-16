@@ -27,7 +27,7 @@ Occasionally, users accidentally explicitly `DENY` permission for their function
 
 To test this, use an IAM user attached to the same IAM policy your Lambda function uses, and test the `get-layer-version` command as listed above. The command should succeed with no errors.
 
-## Get help
+## Contact Datadog support
 
 If you need the Datadog support team to help investigate, include the following information in your ticket:
 
