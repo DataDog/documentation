@@ -447,7 +447,7 @@ To update your integration, edit the relevant files and open a new pull request 
 
 * If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
 
-Updates to assets such as dashboards and recommended monitors are available to customers after the corresponding pull requests are merged and the assets are published. Updates to `README.md`, `manifest.json`, or any other non-code files are also immediately available to customers after publishing. 
+After making updates to assets such as dashboards and recommended monitors, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end. 
 
 ### Bumping an integration version 
 In addition to any code changes, the following is required when bumping an integration version:
