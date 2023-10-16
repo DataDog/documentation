@@ -2917,11 +2917,16 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
     weight: 3
+  - name: Troubleshooting
+    url: observability_pipelines/troubleshooting/
+    parent: observability_pipelines
+    identifier: observability_pipelines_troubleshooting
+    weight: 4
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 4
+    weight: 5
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
@@ -2931,17 +2936,17 @@ main:
     url: observability_pipelines/reference/sources/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sources
-    weight: 401
+    weight: 501
   - name: Transforms
     url: observability_pipelines/reference/transforms/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_transforms
-    weight: 402
+    weight: 502
   - name: Sinks
     url: observability_pipelines/reference/sinks/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
-    weight: 403
+    weight: 503
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
