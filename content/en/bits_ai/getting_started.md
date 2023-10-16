@@ -18,7 +18,7 @@ To open the chat panel, click on **Ask Bits AI** at the bottom of the navigation
 
 {{< img src="bits_ai/bits-ai-nav.png" alt="Bits AI link in the side nav of the Datadog app" style="width:30%;">}}
 
-Some responses from Bits AI include a suggestions button. Clicking it displays additional queries that apply to the conversation's context.
+Some responses from Bits AI include a **suggestions** button. Clicking it displays additional queries that apply to the conversation's context.
 
 {{< img src="bits_ai/chat-panel.png" alt="Bits AI chat panel" style="width:90%;">}}
 
