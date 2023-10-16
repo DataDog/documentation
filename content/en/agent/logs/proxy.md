@@ -1,5 +1,5 @@
 ---
-title: TCP Agent proxy for logs
+title: TCP Agent Proxy for Logs
 kind: documentation
 further_reading:
 - link: "/logs/"
@@ -13,6 +13,13 @@ further_reading:
   text: "Collect your traces"
 ---
 
+{{% site-region region="us3,eu,us5,gov,ap1" %}}
+<div class="alert alert-warning">
+    TCP is not available for the {{< region-param key="dd_site_name" >}} site. Contact <a href="/help/">support</a> for more information.
+</div>
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
 ## Overview
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
@@ -293,3 +300,5 @@ stream {
 
 [1]: /agent/logs/log_transport?tab=https
 [2]: /agent/proxy/
+
+{{% /site-region %}}
