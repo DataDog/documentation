@@ -586,7 +586,7 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 PCI compliance for APM is only available for Datadog organizations created in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI compliance for APM is available when you create a new org or existing orgs in the Datadog organization. To set up a PCI-compliant Datadog org, follow these steps:
+To set up a PCI-compliant Datadog org, follow these steps:
 
 1. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the org be configured as a PCI-compliant org.
 2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
