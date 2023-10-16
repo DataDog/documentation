@@ -51,21 +51,18 @@ If you have any questions about how the Log Management Service satisfies the app
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI DSS compliance for Log Management is only available for new Datadog organizations created in the <a href="/getting_started/site/">US1 site</a>.
+PCI DSS compliance for Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
 Datadog allows customers to send logs to PCI DSS compliant Datadog organizations upon request. To set up a PCI-compliant Datadog org, follow these steps:
 
-1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
-2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
-3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
-4. After Datadog support or Customer Success confirms that the new org is PCI DSS compliant, configure the Agent configuration file to send logs to the dedicated PCI-compliant endpoint (`agent-http-intake-pci.logs.datadoghq.com`):
+1. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the org be configured as a PCI-compliant org.
+2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send logs to the dedicated PCI-compliant endpoint (`agent-http-intake-pci.logs.datadoghq.com`):
     ```
     logs_config:
       logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
     ```
     **Note**: The port must be included in the configuration. PCI compliance uses HTTP log forwarding only. If you are using the Agent, you should [enforce HTTP transport][5].
-    
 
 If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
 
