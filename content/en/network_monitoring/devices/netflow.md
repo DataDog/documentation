@@ -30,7 +30,7 @@ To use NetFlow Monitoring with Network Device Monitoring, ensure you are using t
 
 ## Configuration
 
-To configure your devices to send NetFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
+To configure your devices to send NetFlow, jFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
 
 Edit your [`datadog.yaml`][3] Agent configuration file to enable NetFlow:
 
