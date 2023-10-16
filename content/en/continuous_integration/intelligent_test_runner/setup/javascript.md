@@ -116,7 +116,7 @@ Designating tests as unskippable ensures that the Intelligent Test Runner runs t
 
 {{< tabs >}}
 {{% tab "Jest/Mocha/Cypress" %}}
-You can use the following docblock at the top of your test file to mark a suite as unskippable. This will prevent any of the tests defined in the test file to be skipped by Intelligent Test Runner. This is similar to jest's [`testEnvironmentOptions`][1].
+You can use the following docblock at the top of your test file to mark a suite as unskippable. This prevents any of the tests defined in the test file from being skipped by Intelligent Test Runner. This is similar to jest's [`testEnvironmentOptions`][1].
 
 ```javascript
 /**
@@ -134,7 +134,7 @@ describe('context', () => {
 [1]: https://jestjs.io/docs/configuration#testenvironmentoptions-object
 {{% /tab %}}
 {{% tab "Cucumber" %}}
-You can use the `@datadog:unskippable` [tag][1] in your feature file to mark it as unskippable. This will prevent any of the scenarios defined in the feature file to be skipped by Intelligent Test Runner.
+You can use the `@datadog:unskippable` [tag][1] in your feature file to mark it as unskippable. This prevents any of the scenarios defined in the feature file from being skipped by Intelligent Test Runner.
 
 ```
 @datadog:unskippable
@@ -146,6 +146,63 @@ Feature: Greetings
 [1]: https://cucumber.io/docs/cucumber/api/?lang=javascript#tags
 {{% /tab %}}
 {{< /tabs >}}
+
+### Examples of tests that should be unskippable
+
+This section shows some examples of tests that should be marked as unskippable.
+
+#### Tests that depend on fixtures
+```javascript
+/**
+ * We have a `payload.json` fixture file in `./fixtures/payload`
+ * that is processed by `processPayload` and put into a snapshot.
+ * Changes in `payload.json` do not affect the test code coverage but can
+ * make the test fail.
+ */
+
+/**
+ * @datadog {"unskippable": true}
+ */
+import processPayload from './process-payload';
+import payload from './fixtures/payload';
+
+it('can process payload', () => {
+    expect(processPayload(payload)).toMatchSnapshot();
+});
+```
+
+#### Tests that communicate with external services
+```javascript
+/**
+ * We query an external service running outside the context of
+ * the test.
+ * Changes in this external service do not affect the test code coverage
+ * but can make the test fail.
+ */
+
+/**
+ * @datadog {"unskippable": true}
+ */
+it('can query data', (done) => {
+    fetch('https://www.external-service.com/path')
+        .then((res) => res.json())
+        .then((json) => {
+            expect(json.data[0]).toEqual('value');
+            done();
+        });
+});
+```
+
+```
+# Same way as above we're requesting an external service
+
+@datadog:unskippable
+Feature: Process the payload
+  Scenario: Server responds correctly
+    When the server responds correctly
+    Then I should have received "value"
+```
+
 
 ## Further Reading
 
