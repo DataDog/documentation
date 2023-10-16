@@ -70,15 +70,27 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
   ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
+See [Best Practices for OPW Aggregator Architecture][4] for production-level requirements.
+
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 [2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[4]: /observability_pipelines/architecture/
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
+
+See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
+
+[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
+
+See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
+
+[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 There are no provider-specific requirements for APT-based Linux.
@@ -415,6 +427,9 @@ Use the load balancer URL given to you by Helm when you configure your existing 
 
 NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
 
+
+See [Capacity Planning and Scaling][2] for load balancer recommendations when scaling the Worker.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
@@ -424,10 +439,11 @@ The sample configurations do not enable the cross-zone load balancing feature av
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 ```
 
-See [AWS Load Balancer Controller][2] for more details.
+See [AWS Load Balancer Controller][3] for more details.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
-[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
+[2]: /observability_pipelines/architecture/capacity_planning_scaling/
+[3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 Use the load balancers provided by your cloud provider.
@@ -436,8 +452,12 @@ so they are only accessible inside your network.
 
 Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
+See [Capacity Planning and Scaling][1] for load balancer recommendations when scaling the Worker.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
+
+[1]: /observability_pipelines/architecture/capacity_planning_scaling/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 Use the load balancers provided by your cloud provider.
@@ -446,10 +466,14 @@ so they are only accessible inside your network.
 
 Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
+See [Capacity Planning and Scaling][1] for load balancer recommendations when scaling the Worker.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
+
+[1]: /observability_pipelines/architecture/capacity_planning_scaling/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
