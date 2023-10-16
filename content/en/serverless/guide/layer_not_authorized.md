@@ -23,7 +23,7 @@ aws lambda get-layer-version \
 ```
 
 ## Permissions
-Occasionally users accidentally explictly `DENY` permission for their functions to perform `lambda:GetLayerVersion`. Some [resource-based][2] policy configurations can cause an explicit `DENY`. Additionally IAM [Policy Boundaries][3] may also cause an explict `DENY` for `lambda:GetLayerVersion`.
+Occasionally, users accidentally explicitly `DENY` permission for their functions to perform `lambda:GetLayerVersion`. Some [resource-based][2] policy configurations can cause an explicit `DENY`. Additionally, IAM [permissions boundaries][3] may also cause an explicit `DENY` for `lambda:GetLayerVersion`.
 
 To test this, use an IAM user attached to the same IAM Policy your Lambda function uses, and test the `get-layer-version` command as listed above. The command should succeed with no errors.
 
