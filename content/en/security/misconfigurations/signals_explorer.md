@@ -37,29 +37,29 @@ In order to consume misconfigurations in logical groupings and mitigate the pote
 
 Click on any security posture signal to open a side panel for more details:
 
-{{< img src="security/cspm/signals_explorer/Sidepanel.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Sidepanel.png" style="width:75%;">}}
 
 The top portion of the misconfigurations side panel displays key information about where the misconfiguration(s) are occurring: on an individual resource, a service, or an entire cloud account.
 
-{{< img src="security/cspm/signals_explorer/Top.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Top.png" style="width:75%;">}}
 
 Below is the message for the rule, including a description of misconfiguration and instructions for how to remediate the issue.
 
-{{< img src="security/cspm/signals_explorer/Message.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Message.png" style="width:75%;">}}
 
 The next tab in the bottom section of the side panel displays all misconfigurations that are triggering this signal. This list always shows the current state of your infrastructure, meaning if you fixed 3 of 10 misconfigured security groups since the signal first triggered, Datadog will display 7 failed security groups rather than display misconfigurations that no longer are in violation.
 
-{{< img src="security/cspm/signals_explorer/Findings.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Findings.png" style="width:75%;">}}
 
 **Note**: If using a grouping other than resource ID, the signal triggers the first time a misconfiguration meets the grouping criteria, and is not re-triggered each time a new resource in this same grouping (for example, the same service or account) fail this rule. This is done intentionally so as to avoid re-triggering signals each time a new cloud resource fails a rule. If you would like to receive an alert each time a cloud resource fails a rule, change the *group by* in the rule to `@resource_type`.
 
 The related issues tab shows other compliance rules that have triggered signals on the same logic grouping—the same resource, service, or cloud account—and resource type (for example, security group).
 
-{{< img src="security/cspm/signals_explorer/Related.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Related.png" style="width:75%;">}}
 
 At the top of the side panel, you can configure the rule or send a notification to your colleagues by email, Slack, Microsoft Teams, PagerDuty, ServiceNow, Jira, webhooks, and more.
 
-{{< img src="security/cspm/signals_explorer/Final.png" style="width:100%;">}}
+{{< img src="security/cspm/signals_explorer/Final.png" style="width:75%;">}}
 
 ## Further reading
 
