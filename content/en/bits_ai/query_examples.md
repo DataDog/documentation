@@ -36,6 +36,8 @@ To query APM traces, use the chat panel.
 
 ## Infrastructure data (Inventories SQL)
 
+<div class="alert alert-info">Bits AI includes access to Inventories SQL, which is in private beta.</div>
+
 Infrastructure resource data can be queried in natural language from the search bar of [Inventories SQL][3], a centralized interface for infrastructure resource data. You can also use the chat panel to query infrastructure data from anywhere in Datadog.
 
 `How many hosts am I running by availability zone?`:
