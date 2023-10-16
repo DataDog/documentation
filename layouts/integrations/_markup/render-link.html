@@ -1,0 +1,1 @@
+<a href="{{ .Destination | safeURL }}" {{ if hasSuffix .Destination ".xml" }}download{{ end }}>{{ .Text | safeHTML }}</a>

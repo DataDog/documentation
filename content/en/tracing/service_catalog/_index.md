@@ -48,6 +48,8 @@ The Service Catalog is useful for:
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 - Proactively identifying services exposed to application attacks.
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
+- Visualizing how changes to infrastructure can affect costs over time. 
+- Understanding trends and identifying inefficiencies in the costs related to your services.
 
 ## Browse the Service Catalog
 
@@ -114,6 +116,18 @@ To access additional details describing security vulnerabilities and signals, cl
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
+### Costs view
+The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][19], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
+
+- Have the highest amortized AWS costs in the last month
+- Show a significant change in the rate of cloud spending over time 
+
+For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button. 
+
+This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][20] and [Tag Pipelines][21]. 
+
+Click the Settings icon on the right hand corner to hide metric columns from the service list.
+
 ## Investigate a service
 
 Clicking on a service opens a side panel with details including:
@@ -176,3 +190,6 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [16]: /agent/remote_config/
 [17]: /tracing/other_telemetry/connect_logs_and_traces/
 [18]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[19]: /cloud_cost_management/
+[20]: /cloud_cost_management/?tab=aws
+[21]: /cloud_cost_management/tag_pipelines
