@@ -393,6 +393,30 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 - See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
 - See [Best Practices for OPW Aggregator Architecture][8] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
 
+## Deployment Modes
+
+<div class="alert alert-warning">
+  Remote configuration for Observability Pipelines is in private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> or your Customer Success Manager for access.
+</div>
+
+If you are enrolled in the private beta of [Remote Configuration][9], you can remotely roll out changes to your Workers from the Datadog UI, rather than make updates to your pipeline configuration in a text editor and then manually rolling out your changes. Choose your deployment method when you create a pipeline and install your Workers.
+
+After deploying a pipeline, you can also switch deployment methods, such as going from a manually managed pipeline to a remote configuration enabled pipeline or vice versa. 
+
+If you want to switch from a remote configuration deployment to a manually managed deployment:
+1. Navigate to Observability Pipelines.
+2. Click the settings cog.
+3. In **Deployment Mode**, select **manual** to enable it.
+4. Set the `DD_OP_REMOTE_CONFIGURATION_ENABLED` flag to `false` and restart the Worker. Workers that are not restarted with this flag continue to be remote configuration enabled, which means that the Workers are not updated manually through a local configuration file.
+
+If you want to switch from manually managed deployment to a remote configuration deployment:
+1. Navigate to Observability Pipelines.
+2. Click the settings cog.
+3. In **Deployment Mode**, select **Remote Configuration** to enable it.
+4. Set the `DD_OP_REMOTE_CONFIGURATION_ENABLED` flag to `true` and restart the Worker. Workers that are not restarted with this flag are not polled for configurations deployed in the UI. 
+6. Deploy a version in your version history, so that the Workers receive the new version configuration. Click on a version. Click **Edit as Draft** and then click **Deploy**. 
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -405,3 +429,4 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 [6]: /observability_pipelines/working_with_data/
 [7]: /observability_pipelines/production_deployment_overview/
 [8]: /observability_pipelines/architecture/
+[9]: /agent/remote_config
