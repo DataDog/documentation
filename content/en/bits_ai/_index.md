@@ -65,7 +65,7 @@ See [Querying in Slack][5] for details.
 Bits AI is in active development, and your feedback is valuable. To report issues or request features, contact your Customer Success Manager.
 
 [1]: /bits_ai/getting_started/
-[2]: https://www.datadoghq.com/product/incident-management/
+[2]: /service_management/incident_management
 [3]: /bits_ai/managing_incidents/
 [4]: /bits_ai/query_examples
 [5]: /bits_ai/getting_started/#querying-in-slack
