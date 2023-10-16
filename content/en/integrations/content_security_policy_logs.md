@@ -171,7 +171,7 @@ If you're using CSP on your websites, add the following URLs to your existing di
 Depending on the `site` option used to initialize [Real User Monitoring][4] or [browser log collection][5], add the appropriate `connect-src` entry:
 
 ```txt
-connect-src https://*.{{< region-param key="browser_sdk_endpoint_domain" >}}
+connect-src https://{{< region-param key="browser_sdk_endpoint_domain" >}}
 ```
 
 ### Session Replay worker

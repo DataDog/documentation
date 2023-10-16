@@ -64,7 +64,7 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again. 
+A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
 
 ## What is Session Replay?
 
@@ -107,8 +107,6 @@ The following table shows which RUM capabilities are supported on each platform:
 
 All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
 
-### Mobile
-
 | Site | Site URL                                      |
 |------|-----------------------------------------------|
 | US1  | `https://browser-intake-datadoghq.com`        |
@@ -117,41 +115,6 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
-
-### Browser
-
-#### Logs
-
-| Site | Site URL                                        |
-|------|-------------------------------------------------|
-| US1  | `https://logs.browser-intake-datadoghq.com`     |
-| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
-| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
-
-#### Session Replay
-
-| Site | Site URL                                                  |
-|------|-----------------------------------------------------------|
-| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
-| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
-| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
-
-#### RUM
-
-| Site | Site URL                                       |
-|------|------------------------------------------------|
-| US1  | `https://rum.browser-intake-datadoghq.com`     |
-| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
-| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
 
 ## Explore Datadog RUM
 
@@ -177,7 +140,7 @@ View your [backend traces, logs, and infrastructure metrics][5] down to the exac
 
 ### Error tracking and crash reporting
 
-Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6]. 
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
