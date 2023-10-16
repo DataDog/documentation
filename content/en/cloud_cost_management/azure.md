@@ -8,7 +8,10 @@ further_reading:
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/aws"
   tag: "Documentation"
-  text: "Gain insights in your AWS bill"
+  text: "Gain insights into your AWS bill"
+- link: "/cloud_cost_management/gcp"
+  tag: "Documentation"
+  text: "Gain insights into your GCP bill"
 ---
 
 ## Overview

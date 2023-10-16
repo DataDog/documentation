@@ -8,7 +8,10 @@ further_reading:
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/azure"
   tag: "Documentation"
-  text: "Gain insights in your Azure bill"
+  text: "Gain insights into your Azure bill"
+- link: "/cloud_cost_management/gcp"
+  tag: "Documentation"
+  text: "Gain insights into your GCP bill"
 ---
 
 ## Overview
