@@ -46,7 +46,7 @@ When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anoma
 Within the [Datadog Incident Management][2] product, Bits AI can help you 
 
 - **Stay informed:** Ask Datadog to send you an update on the incident in 15 minutes.
-- **Engage responders:** Page on-call teams with PagerDuty with Slack queries like "`@DataDog` Page the team that owns example-service".
+- **Engage responders:** Page on-call teams with PagerDuty with Slack queries like "`@DataDog` Page the team that owns example-service."
 - **Update incidents:** Update the severity level and status of an incident.
 - **Generate a postmortem:** Quickly create a first draft to review and revise.
 
