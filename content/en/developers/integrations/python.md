@@ -74,7 +74,7 @@ You have 2 options to install the `ddev` CLI.
 
 ### Installers
 
-#### GUI installer
+#### Install - GUI
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
@@ -102,7 +102,7 @@ You have 2 options to install the `ddev` CLI.
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Command line installer
+#### Install - command line
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
