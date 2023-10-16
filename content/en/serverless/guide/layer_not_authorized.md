@@ -9,7 +9,9 @@ Lambda functions can only include [Lambda layers][1] that are located in the sam
 
 Verify that the Lambda layer region and Lambda function version match. Then verify that the version number is correct.
 
-You can verify that a Lambda Layer version exists using any valid AWS credentials and running the following command:
+You can verify that a Lambda layer version exists by running `aws lambda get-layer-version` with valid AWS credentials.
+
+For example, to verify the Datadog Extension layer, run:
 ```
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
