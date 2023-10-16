@@ -224,6 +224,12 @@ GKE can be configured in two different mode of operation:
 
 Depending on the operation mode of your cluster, the Datadog Agent needs to be configured differently.
 
+Private clusters need specific networking rules because Datadog’s Admission Controller webhook receives requests on port 443 and directs to a service on port 8000:
+In a GKE private cluster, you need to add a firewall rule for the control plane. By default, the network for the cluster should have a firewall rule named gke-<CLUSTER_NAME>-master. This rule’s source filters match the cluster’s control plane address range. Edit this firewall rule to allow ingress to the TCP port 8000.
+
+https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=operator#notes
+
+
 ### Standard
 
 Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
