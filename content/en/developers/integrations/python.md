@@ -3,11 +3,11 @@ kind: documentation
 title: Install the Datadog Agent Integration Developer Tool
 description: Install the Datadog Agent Integration Developer Tool.
 ---
-This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and ensuring all of the required dependencies are present. Alternatively, you can use the standalone binaries and installers provided with each release.
+This document covers how to set up a Python environment to work on Agent-based Integrations, including installing the interpreter and ensuring all of the required dependencies are present. Alternatively, you can use the standalone binaries and installers provided with each release.
 
 ## Install Python
 
-Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may be older than the version used in the Agent, and may lack some required tools and dependencies. To ensure that you've everything you need to get an integration running, install a dedicated Python interpreter.
+Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may be older than the version used in the Agent, and may lack some required tools and dependencies. To ensure that you have everything you need to get an integration running, install a dedicated Python interpreter.
 
 {{< tabs >}}
 
@@ -72,52 +72,51 @@ For Linux installations, avoid modifying your system Python. Datadog recommends 
 
 You have 2 options to install the `ddev` CLI.
 
-### Installers
 
-#### Install - GUI
+### Install using a GUI
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
 1. In your browser, download the `.pkg` file: [ddev-5.2.1.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg)
 2. Run your downloaded file and follow the on-screen instructions.
 3. Restart your terminal.
-4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
-   ```
-   $ ddev --version
+4. To verify that the `ddev` command has been added to your `PATH`, run the following command to retrieve the `ddev` version:
+   ```shell
+   ddev --version
    5.2.1
    ```
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. In your browser, download one the `.msi` files:
-     - [ddev-5.2.1-x64.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi)
-     - [ddev-5.2.1-x86.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi)
+1. In your browser, download one of the following `.msi` files:
+     - [ddev-5.2.1-x64.msi (64-bit)](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi)
+     - [ddev-5.2.1-x86.msi (32-bit) ](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi)
 2. Run your downloaded file and follow the on-screen instructions.
 3. Restart your terminal.
-4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
-   ```
-   $ ddev --version
+4. To verify that the `ddev` command has been added to your `PATH`, run the following command to retrieve the `ddev` version:
+   ```shell
+   ddev --version
    5.2.1
    ```
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Install - command line
+### Install from the command line
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
 1. Download the file using the `curl` command. The `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-5.2.1.pkg` in the current directory.
-   ```
+   ```shell
    curl -o ddev-5.2.1.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg
    ```
-2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include sudo on the command to grant write permissions to those folders.
-   ```
+2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include `sudo` on the command to grant write permissions to those folders.
+   ```shell
    sudo installer -pkg ./ddev-5.2.1.pkg -target /
    ```
 3. Restart your terminal.
 4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
-   ```
-   $ ddev --version
+   ```shell
+   ddev --version
    5.2.1
    ```
 {{% /tab %}}
@@ -125,25 +124,25 @@ You have 2 options to install the `ddev` CLI.
 {{% tab "Windows" %}}
 1. Download and run the installer using the standard Windows [`msiexec`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec) program, specifying one of the `.msi` files as the source. Use the `/passive` and `/i` parameters to request an unattended, normal installation.
    - `x64`:
-      ```
+      ```shell
       msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi
-      ```
+      ```shell
    - `x86`:
       ```
       msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi
       ```
 2. Restart your terminal.
 3. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
-   ```
-   $ ddev --version
+   ```shell
+   ddev --version
    5.2.1
    ```
 {{% /tab %}}
 {{< /tabs >}}
 
-### Standalone binaries
+### Install from a standalone binary
 
-After downloading the archive corresponding to your platform and architecture, extract the binary to a directory that is on your PATH and rename to `ddev`.
+After downloading the archive corresponding to your platform and architecture, extract the binary to a directory that is on your `PATH` and rename the binary to `ddev`.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
