@@ -121,7 +121,7 @@ You can visualize your ingested data using the following cost types:
 
 ### Getting historical data
 
-You can create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7] to have them backfill cost data. Cloud Cost Management will automatically pull in previous months' data as long as the file structure and partitioning follows the format of scheduled exports.
+You can create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7] to have them backfill cost data. Cloud Cost Management will automatically pull in up to 15 months of historical data as long as the file structure and partitioning follows the format of scheduled exports.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
