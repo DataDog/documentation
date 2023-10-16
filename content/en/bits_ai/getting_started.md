@@ -6,7 +6,7 @@ private: true
 is_beta: true
 ---
 
-The page describes how to run any natural language query in Datadog and in Slack. For example query verbiage, see [Example Natural Language Queries][2].
+The page describes how to run a natural language query in Datadog and in Slack. For example query verbiage, see [Example Natural Language Queries][2].
 
 ## Querying in Datadog
 
