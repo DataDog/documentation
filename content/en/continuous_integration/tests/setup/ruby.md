@@ -39,262 +39,24 @@ Supported test frameworks:
 * Minitest >= 5.0.0
 * Cucumber >= 3.0
 
-## Installing the Datadog Agent
+## Configuring reporting method
 
-To report test results to Datadog, you need to install the Datadog Agent.
-
-### Using an on-premises CI provider
-
-If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
-
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the environment variables in the build pods to communicate with the local Datadog Agent.
-
-If you are not using Kubernetes or can't use [Datadog Admission Controller][2] and the CI provider is using a container-based executor, set the `DD_TRACE_AGENT_URL` environment variable (which defaults to `http://localhost:8126`) in the build container running the tracer to an endpoint that is accessible from within that container. _Note that using `localhost` inside the build references the container itself and not the underlying worker node or any container where the Agent might be running_.
-
-`DD_TRACE_AGENT_URL` includes the protocol and port (for example, `http://localhost:8126`) and takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`, and is the recommended configuration parameter to configure the Datadog Agent's URL for CI Visibility.
-
-### Using a cloud CI provider
-
-If you are using a cloud CI provider with no access to the underlying worker nodes, such as GitHub Actions or CircleCI, run the Datadog Agent in a container as a build service. This method is also available for an on-premises CI provider that uses a container-based executor if installing the Datadog Agent on each worker node is not an option.
-
-To run the Datadog Agent as a container acting as a simple results forwarder, use the Docker image `gcr.io/datadoghq/agent:latest` and the following environment variables:
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][3] used to upload the test results.<br/>
-**Default**: (none)
-
-`DD_INSIDE_CI` (Required)
-: Disables the monitoring of the Datadog Agent container, as the underlying host is not accessible.<br/>
-**Default**: `false`<br/>
-**Required value**: `true`
-
-`DD_HOSTNAME` (Required)
-: Disables the reporting of hostnames associated with tests, as the underlying host cannot be monitored.<br/>
-**Default**: (autodetected)<br/>
-**Required value**: `none`
-
-{{< site-region region="us3,us5,eu,ap1" >}}
-Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
-
-`DD_SITE`
-: The Datadog site to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-{{< /site-region >}}
-
-#### CI provider configuration examples
-
-The following sections provide CI provider-specific instructions to run and configure the Agent to report test information.
+To report test results to Datadog, you need to configure the `ddtrace` gem:
 
 {{< tabs >}}
-{{% tab "Azure Pipelines" %}}
 
-To run the Datadog Agent in Azure Pipelines, define a new container in the [resources section][1] and link it with the job declaring it as a [service container][2].
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
-variables:
-  ddApiKey: $(DD_API_KEY)
+{{% ci-agent %}}
 
-resources:
-  containers:
-    - container: dd_agent
-      image: gcr.io/datadoghq/agent:latest
-      ports:
-        - 8126:8126
-      env:
-        DD_API_KEY: $(ddApiKey)
-        DD_INSIDE_CI: "true"
-        DD_HOSTNAME: "none"
-
-jobs:
-  - job: test
-    services:
-      dd_agent: dd_agent
-    steps:
-      - script: make test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
-
-{{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
-variables:
-  ddApiKey: $(DD_API_KEY)
-
-resources:
-  containers:
-    - container: dd_agent
-      image: gcr.io/datadoghq/agent:latest
-      ports:
-        - 8126:8126
-      env:
-        DD_API_KEY: $(ddApiKey)
-        DD_INSIDE_CI: "true"
-        DD_HOSTNAME: "none"
-        DD_SITE: "<DD_SITE>"
-
-jobs:
-  - job: test
-    services:
-      dd_agent: dd_agent
-    steps:
-      - script: make test
-{{< /code-block >}}
-{{< /site-region >}}
-
-Add your [Datadog API key][3] to your [project environment variables][4] with the key `DD_API_KEY`.
-
-[1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops&tabs=schema
-[2]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/service-containers?view=azure-devops&tabs=yaml
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch
 {{% /tab %}}
-{{% tab "GitLab CI" %}}
 
-To run the Agent in GitLab, define the Agent container under [services][1].
+{{% tab "Cloud CI provider (Agentless)" %}}
 
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
-variables:
-  DD_API_KEY: $DD_API_KEY
-  DD_INSIDE_CI: "true"
-  DD_HOSTNAME: "none"
-  DD_AGENT_HOST: "datadog-agent"
+<div class="alert alert-info">Agentless mode is available in `ddtrace` gem versions >= 1.15.0</div>
 
-test:
-  services:
-    - name: gcr.io/datadoghq/agent:latest
-  script:
-    - make test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
+{{% ci-agentless %}}
 
-Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
-
-{{< code-block lang="yaml" filename=".gitlab-ci.yml" >}}
-variables:
-  DD_API_KEY: $DD_API_KEY
-  DD_INSIDE_CI: "true"
-  DD_HOSTNAME: "none"
-  DD_AGENT_HOST: "datadog-agent"
-  DD_SITE: "<DD_SITE>"
-
-test:
-  services:
-    - name: gcr.io/datadoghq/agent:latest
-  script:
-    - make test
-{{< /code-block >}}
-{{< /site-region >}}
-
-Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
-
-[1]: https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#what-is-a-service
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.gitlab.com/ee/ci/variables/README.html#custom-environment-variables
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
-
-To run the Agent in GitHub Actions, use the [Datadog Agent GitHub Action][1] `datadog/agent-github-action`.
-
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" >}}
-jobs:
-  test:
-    steps:
-      - name: Start the Datadog Agent locally
-        uses: datadog/agent-github-action@v1
-        with:
-          api_key: ${{ secrets.DD_API_KEY }}
-      - run: make test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-
-Replace `<datadog_site>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
-
-{{< code-block lang="yaml" >}}
-jobs:
-  test:
-    steps:
-      - name: Start the Datadog Agent locally
-        uses: datadog/agent-github-action@v1
-        with:
-          api_key: ${{ secrets.DD_API_KEY }}
-          datadog_site: <datadog_site>
-      - run: make test
-{{< /code-block >}}
-{{< /site-region >}}
-
-Add your [Datadog API key][2] to your [project secrets][3] with the key `DD_API_KEY`.
-
-[1]: https://github.com/marketplace/actions/datadog-agent
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.github.com/en/actions/reference/encrypted-secrets
-{{% /tab %}}
-{{% tab "CircleCI" %}}
-
-To run the Agent in CircleCI, launch the Agent container before running tests by using the [datadog/agent CircleCI orb][1], and stop it after to ensure results are sent to Datadog.
-
-{{< site-region region="us" >}}
-{{< code-block lang="yaml" filename=".circleci/config.yml" >}}
-version: 2.1
-
-orbs:
-  datadog-agent: datadog/agent@0
-
-jobs:
-  test:
-    docker:
-      - image: circleci/<language>:<version_tag>
-    steps:
-      - checkout
-      - datadog-agent/setup
-      - run: make test
-      - datadog-agent/stop
-
-workflows:
-  test:
-    jobs:
-      - test
-{{< /code-block >}}
-{{< /site-region >}}
-{{< site-region region="us3,us5,eu,ap1" >}}
-
-Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
-
-{{< code-block lang="yaml" filename=".circleci/config.yml" >}}
-version: 2.1
-
-orbs:
-  datadog-agent: datadog/agent@0
-
-jobs:
-  test:
-    docker:
-      - image: circleci/<language>:<version_tag>
-    environment:
-      DD_SITE: "<DD_SITE>"
-    steps:
-      - checkout
-      - datadog-agent/setup
-      - run: make test
-      - datadog-agent/stop
-
-workflows:
-  test:
-    jobs:
-      - test
-{{< /code-block >}}
-{{< /site-region >}}
-
-Add your [Datadog API key][2] to your [project environment variables][3] with the key `DD_API_KEY`.
-
-[1]: https://circleci.com/developer/orbs/orb/datadog/agent
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://circleci.com/docs/2.0/env-vars/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -305,7 +67,7 @@ To install the Ruby tracer:
 1. Add the `ddtrace` gem to your `Gemfile`:
 
     {{< code-block lang="ruby" filename="Gemfile" >}}
-source 'https://rubygems.org'
+source '<https://rubygems.org>'
 gem 'ddtrace', "~> 1.0"
 {{< /code-block >}}
 
@@ -465,7 +227,7 @@ Like tags, you can add custom metrics to your tests by using the current active 
 require 'ddtrace'
 
 # inside your test
-Datadog::Tracing.active_span&.set_tag('memory_allocations', 16)
+Datadog::Tracing.active_span&.set_metric('memory_allocations', 16)
 # test continues normally
 # ...
 ```
@@ -504,10 +266,6 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /tracing/trace_collection/dd_libraries/ruby/#installation
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration

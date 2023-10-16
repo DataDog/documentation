@@ -56,6 +56,7 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 * `trace-agent.log`
 * `system-probe.log`
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
+* `dogstatsd.log` for Agent >= 7.46.0
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

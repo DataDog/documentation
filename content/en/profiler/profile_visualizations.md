@@ -59,6 +59,8 @@ For example, starting from the first row in the previous image, `Thread.run()` c
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a **CPU time by Method** top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
+Flame graphs can be be included in Dashboards and Notebooks with the [Profiling Flame Graph Widget][5].
+
 ### Single profile
 
 By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
@@ -94,7 +96,7 @@ The timeline view is the equivalent of the flame graph, with a distribution over
 
 It shows time-based patterns and work distribution over:
 - [The period of a single profile](#single-profile)
-- [A trace][5]
+- [A trace][6]
 
 Compared to the flame graph, the timeline view can help you:
 
@@ -109,6 +111,10 @@ Depending on the runtime and language, the timeline lanes vary:
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may impact performance.
+
+For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
+
+[1]: https://richardstartin.github.io/posts/wallclock-profiler
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 See [prerequisites][1] to learn how to enable this feature for Go.
@@ -144,4 +150,5 @@ Lanes on top are runtime activities that may impact performance.
 [2]: /tracing/glossary/#services
 [3]: https://app.datadoghq.com/profiling/search?viz=timeseries
 [4]: /profiler/profile_types/
-[5]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[5]: /dashboards/widgets/profiling_flame_graph
+[6]: /profiler/connect_traces_and_profiles/#span-execution-timeline-view

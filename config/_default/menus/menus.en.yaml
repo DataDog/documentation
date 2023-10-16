@@ -897,16 +897,26 @@ main:
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: AWS
+    url: cloud_cost_management/aws
+    parent: cloud_cost_top_level
+    identifier: ccm_aws
+    weight: 1
+  - name: Azure
+    url: cloud_cost_management/azure
+    parent: cloud_cost_top_level
+    identifier: ccm_azure
+    weight: 2
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 1
+    weight: 3
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 2
+    weight: 4
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1840,8 +1850,13 @@ main:
   - name: Connect Synthetics and Traces
     url: /synthetics/apm/
     parent: tracing_other_telemetry
-    identifier: tracing_connect_sythetics
+    identifier: tracing_connect_synthetics
     weight: 403
+  - name: Connect Profiles and Traces
+    url: /profiler/connect_traces_and_profiles/
+    parent: tracing_other_telemetry
+    identifier: tracing_connect_profiles
+    weight: 404
   - name: Trace Explorer
     url: tracing/trace_explorer/
     parent: tracing
@@ -2335,33 +2350,38 @@ main:
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
-    identifier: intelligent_test_runner
+    identifier: ci_intelligent_test_runner
     weight: 5
+  - name: Setup
+    url: continuous_integration/intelligent_test_runner/setup/
+    parent: ci_intelligent_test_runner
+    identifier: ci_intelligent_test_runner_setup
+    weight: 501
   - name: .NET
-    url: continuous_integration/intelligent_test_runner/dotnet/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/dotnet/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_dotnet
     weight: 501
   - name: Java
-    url: continuous_integration/intelligent_test_runner/java/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/java/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_java
     weight: 502
   - name: JavaScript and TypeScript
-    url: continuous_integration/intelligent_test_runner/javascript/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/javascript/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_javascript
     weight: 503
   - name: Python
-    url: continuous_integration/intelligent_test_runner/python/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/python/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_python
     weight: 504
   - name: Swift
-    url: continuous_integration/intelligent_test_runner/swift/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/swift/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_swift
-    weight: 506
+    weight: 505
   - name: Integrate Test Visibility
     url: continuous_integration/integrate_tests/
     parent: ci
@@ -2750,19 +2770,24 @@ main:
     parent: log_configuration
     identifier: log_indexes
     weight: 207
+  - name: Flex Logs
+    url: logs/log_configuration/flex_logs/
+    parent: log_configuration
+    identifier: flex_logs
+    weight: 208
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 208
+    weight: 209
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 209
+    weight: 210
   - name: Forwarding
     url: logs/log_configuration/forwarding_custom_destinations/
     parent: log_configuration
-    weight: 210
+    weight: 211
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
@@ -2892,11 +2917,16 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
     weight: 3
+  - name: Troubleshooting
+    url: observability_pipelines/troubleshooting/
+    parent: observability_pipelines
+    identifier: observability_pipelines_troubleshooting
+    weight: 4
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 4
+    weight: 5
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
@@ -2906,17 +2936,17 @@ main:
     url: observability_pipelines/reference/sources/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sources
-    weight: 401
+    weight: 501
   - name: Transforms
     url: observability_pipelines/reference/transforms/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_transforms
-    weight: 402
+    weight: 502
   - name: Sinks
     url: observability_pipelines/reference/sinks/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
-    weight: 403
+    weight: 503
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
@@ -3321,6 +3351,11 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 506
+  - name: Trace Qualification
+    url: security/application_security/threats/trace_qualification/
+    parent: appsec_threats
+    identifier: threats_trace_qualification
+    weight: 507
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
@@ -3841,6 +3876,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
     weight: 604
+  - name: Playlists
+    url: real_user_monitoring/session_replay/playlists
+    parent: rum_session_replay
+    identifier: rum_session_replay_playlists
+    weight: 605
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
@@ -8588,8 +8628,7 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
@@ -8895,6 +8934,23 @@ api:
         - ListConfluentAccount
       unstable: []
       order: 10
+  - name: Container Images
+    url: /api/latest/container-images/
+    identifier: container-images
+    generated: true
+  - name: Get all Container Images
+    url: '#get-all-container-images'
+    identifier: container-images-get-all-container-images
+    parent: container-images
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListContainerImages
+      unstable:
+        - v2
+      order: 1
   - name: Fastly Integration
     url: /api/latest/fastly-integration/
     identifier: fastly-integration

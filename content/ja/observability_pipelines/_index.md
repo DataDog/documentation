@@ -62,7 +62,7 @@ Datadog UI は、観測可能性パイプラインワーカーを管理するた
 
 ログとメトリクスのサンプリング、フィルター、重複排除、集計により、観測可能性データの量を最適化し、サイズを小さくします。データ標準を実施し、メトリクスのタグを制御することで、テレメトリーを管理します。
 
-{{< img src="observability_pipelines/transforms.png" alt="集計、AWS EC2 Metadata、dedupe など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="集計、Amazon EC2 Metadata、重複除去 (dedupe) など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
 
 ### テレメトリーデータから機密データを編集する
 

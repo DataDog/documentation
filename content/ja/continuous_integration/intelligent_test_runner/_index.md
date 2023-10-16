@@ -49,7 +49,7 @@ Intelligent Test Runner に Datadog ライブラリを設定したら、[Test Se
 
 他に除外したいブランチがある場合、Intelligent Test Runner の設定ページから追加します。クエリバーは、ワイルドカード文字 `*` の使用をサポートしており、`release_*` など、一致するブランチを除外することができます。
 
-{{< img src="continuous_integration/itr_configuration1.png" alt="Intelligent Test Runner から除外するブランチを選択" style="width:80%;">}}
+{{< img src="continuous_integration/itr_configuration2.png" alt="Intelligent Test Runner から除外するブランチを選択" style="width:80%;">}}
 
 ## テストセッションを確認する
 
