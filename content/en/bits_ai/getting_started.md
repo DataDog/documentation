@@ -10,7 +10,7 @@ The page describes how to run a natural language query in Datadog and in Slack. 
 
 ## Querying in Datadog
 
-Bits AI can be accessed from its dedicated chat panel and from the search bars of some products.
+You can access Bits AI from its dedicated chat panel and from the search bars of some products.
 
 ### In the chat panel
 
