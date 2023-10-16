@@ -74,10 +74,10 @@ You have 2 options to install the `ddev` CLI.
 
 ### Installers
 
+#### GUI installer
+
 {{< tabs >}}
 {{% tab "MacOS" %}}
-{{< tabs >}}
-{{% tab "GUI installer" %}}
 1. In your browser, download the `.pkg` file: [ddev-5.2.1.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg)
 2. Run your downloaded file and follow the on-screen instructions.
 3. Restart your terminal.
@@ -88,7 +88,24 @@ You have 2 options to install the `ddev` CLI.
    ```
 {{% /tab %}}
 
-{{% tab "Command line installer" %}}
+{{% tab "Windows" %}}
+1. In your browser, download one the `.msi` files:
+     - [ddev-5.2.1-x64.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi)
+     - [ddev-5.2.1-x86.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi)
+2. Run your downloaded file and follow the on-screen instructions.
+3. Restart your terminal.
+4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
+   ```
+   $ ddev --version
+   5.2.1
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Command line installer
+
+{{< tabs >}}
+{{% tab "MacOS" %}}
 1. Download the file using the `curl` command. The `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-5.2.1.pkg` in the current directory.
    ```
    curl -o ddev-5.2.1.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg
@@ -104,47 +121,23 @@ You have 2 options to install the `ddev` CLI.
    5.2.1
    ```
 {{% /tab %}}
-{{< /tabs >}}
-{{% /tab %}}
 
 {{% tab "Windows" %}}
-{{< tabs >}}
-{{% tab "GUI installer" %}}
-1. In your browser, download one the `.msi` files:
-     - [ddev-5.2.1-x64.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi)
-     - [ddev-5.2.1-x86.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi)
-2. Run your downloaded file and follow the on-screen instructions.
-3. Restart your terminal.
-4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
-   ```
-   $ ddev --version
-   5.2.1
-   ```
-{{% /tab %}}
-
-{{% tab "Command line installer" %}}
 1. Download and run the installer using the standard Windows [`msiexec`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec) program, specifying one of the `.msi` files as the source. Use the `/passive` and `/i` parameters to request an unattended, normal installation.
-   {{< tabs >}}
-   {{% tab "x64" %}}
-   ```
-   msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi
-   ```
-   {{% /tab %}}
-
-   {{% tab "x86" %}}
-   ```
-   msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
+   - `x64`:
+      ```
+      msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi
+      ```
+   - `x86`:
+      ```
+      msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi
+      ```
 2. Restart your terminal.
 3. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```
    $ ddev --version
    5.2.1
    ```
-{{% /tab %}}
-{{< /tabs >}}
 {{% /tab %}}
 {{< /tabs >}}
 
