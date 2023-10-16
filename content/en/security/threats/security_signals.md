@@ -1,81 +1,69 @@
 ---
-title: Security Signals
+title: Investigate Security Signals
 kind: documentation
 disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
-    text: "Explore default detection rules"
+    text: "Explore CSM Threats detection rules"
   - link: "/security/threats/workload_security_rules"
     tag: "Documentation"
-    text: "Learn how to manage detection rules"
+    text: "Learn how to manage CSM Threats detection rules"
   - link: "/security/notifications/"
     tag: "Documentation"
-    text: "Learn more about Security notifications"
+    text: "Learn more about security notifications"
 ---
 
-A Cloud Security Management Threats (CSM Threats) security signal is created when Datadog detects a threat based on a security rule. View, search, filter, and correlate security signals in the [Threats Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools. 
-
-You can modify security signals generated within the previous 30 days, such as change state and view signal action history in [Audit Trail][2]. Signals can also be assigned to yourself or another user for further review.
+[Cloud Security Management Threats][9] (CSM Threats) security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Threats Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
 
 To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security Management.
 
-Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the detection rules. If the pattern matches a detection rule, a security signal is generated. 
-
 {{< img src="security/cws/csm_threats_signals.png" alt="CSM Threats security signals page" width="100%">}}
 
-## Investigate a signal
+## Filter security signals
 
-The [Threats Explorer][4] displays all signals that your role permits you to view. To filter the security signals in the Threats Explorer:
+To filter the security signals in the [Threats Explorer][4]:
 
 1. Click the **Options** button and add the column **Signal State**.
 2. Add the facet `@workflow.triage.state`. This displays signal status and enables you to sort by status in the table header.
 2. To search through signals by state, use the following search syntax `@workflow.triage.state:` and include the state (`open`, `under_review`, or `archived`) to filter on in the query.
 3. Alternatively, select the **Signal State** facet on the facet panel to filter on signals using facets.
 
-### Triage a signal
+## Triage a signal
 
-1. Navigate to [**Cloud Security Management** > **Issues** > **Threats**][4].
-2. Select a security signal from the table.
-3. To assign a signal to yourself or another user, click the user profile icon with the plus sign.
-4. To update the status of the security signal, navigate to the top left corner of the signal side panel and select the status you want from the dropdown menu. The default status is **Open**.
+You can triage a signal by assigning it to a user for further investigation. The assigned user can then track their review by updating the signal's status.
+
+1. On the [Threats Explorer][1], select a security signal.
+4. Click the user profile icon and select a user.
+5. To update the status of the security signal, click the triage status dropdown menu and select a status. The default status is **Open**.
     - **Open**: The signal has not yet been resolved.
-    - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
-    - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an **Open** state within 30 days of being created.
+    - **Under Review**: The signal is actively being investigated. From the **Under Review** state, you can move the signal to **Archived** or **Open** as needed.
+    - **Archived**: The detection that caused the signal has been resolved. From the **Archived** state, you can move the signal back to **Open** if it's within 30 days of when the signal was originally detected.
 
-### Declare an incident
+## Create a case
 
-Any security signal warning of a possible disruption to your organization's services can be considered an incident. It is often necessary to have a set framework for handling these threats. [Incident Management][5] provides a system to effectively identify and mitigate incidents.
+Use [Case Management][6] to track, triage, and investigate security signals.
 
-To declare an incident:
+1. On the security signal side panel, click the **Escalate Investigation** dropdown menu and select **Create a case**. Alternatively, select **Add to an existing case** to add the signal to an existing case. 
+2. Enter a title and optional description.
+3. Click **Create Case**.
 
-1. Click the **Escalate Investigation** dropdown menu.
-2. Select **Declare incident**.
+## Declare an incident 
 
-### Case Management
+Use [Incident Management][5] to create an incident for a security signal.
 
-You can create a case from a CSM Threats security signal to track, triage, and investigate your signals.
+1. On the security signal side panel, click the **Escalate Investigation** dropdown menu and select **Declare incident**. Alternatively, select **Add to incident** to add the signal to an existing incident.
+2. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
+3. Click **Declare Incident**.
 
-1. Click the **Escalate Investigation** dropdown menu.
-2. Select **Create a case** to start a security investigation.
-3. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
+## Run a workflow
 
-### Workflow Automation
+Use [Workflow Automation][8] to manually trigger a workflow for a security signal. See [Trigger a Workflow from a Security Signal][7] for more information.
 
-You can trigger a Workflow automatically for any Security Signal. You can also manually trigger a Workflow from a CSM Threats Signal. See [Trigger a Workflow from a Security Signal][7] for more information.
-
-## Audit security signal actions
-
-As an administrator or security team member, you can use [Audit Trail][2] to see what actions your team is taking in Cloud Security Management. As an individual, you can see a stream of your own actions.
-
-To view audit logs generated by actions taken in Cloud Security Management, navigate to **Organization Settings** > **Compliance** > **Audit Trail** and do one of the following:
-
-- Create the following query: `@evt.name:"Cloud Security Platform"`
-- In the **Event Name** facet, select **Cloud Security Platform**.
-
-To view audit logs generated by actions taken on security signals:
-- Create the following query: `@asset.type:security_signal`
-- In the **Asset Type** facet, select **security_signal**.
+1. On the security signal side panel, click the **Workflows** tab
+2. Click **Run Workflow**.
+3. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
+4. Click **Run**.
 
 ## Further Reading
 
@@ -87,4 +75,6 @@ To view audit logs generated by actions taken on security signals:
 [4]: https://app.datadoghq.com/security?product=cws
 [5]: /service_management/incident_management/
 [6]: /service_management/case_management/
-[7]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[7]: /security/cloud_security_management/workflows
+[8]: /service_management/workflows
+[9]: /security/threats/
