@@ -146,14 +146,6 @@ You have 2 options to install the `ddev` CLI.
 After downloading the archive corresponding to your platform and architecture, extract the binary to a directory that is on your PATH and rename to `ddev`.
 
 {{< tabs >}}
-{{% tab "Linux" %}}
-- [ddev-5.2.1-aarch64-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-aarch64-unknown-linux-gnu.tar.gz)
-- [ddev-5.2.1-x86_64-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-unknown-linux-gnu.tar.gz)
-- [ddev-5.2.1-x86_64-unknown-linux-musl.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-unknown-linux-musl.tar.gz)
-- [ddev-5.2.1-i686-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-i686-unknown-linux-gnu.tar.gz)
-- [ddev-5.2.1-powerpc64le-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-powerpc64le-unknown-linux-gnu.tar.gz)
-{{% /tab %}}
-
 {{% tab "MacOS" %}}
 - [ddev-5.2.1-aarch64-apple-darwin.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-aarch64-apple-darwin.tar.gz)
 - [ddev-5.2.1-x86_64-apple-darwin.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-apple-darwin.tar.gz)
@@ -162,5 +154,13 @@ After downloading the archive corresponding to your platform and architecture, e
 {{% tab "Windows" %}}
 - [ddev-5.2.1-x86_64-pc-windows-msvc.zip](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-pc-windows-msvc.zip)
 - [ddev-5.2.1-i686-pc-windows-msvc.zip](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-i686-pc-windows-msvc.zip)
+{{% /tab %}}
+
+{{% tab "Linux" %}}
+- [ddev-5.2.1-aarch64-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-aarch64-unknown-linux-gnu.tar.gz)
+- [ddev-5.2.1-x86_64-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-unknown-linux-gnu.tar.gz)
+- [ddev-5.2.1-x86_64-unknown-linux-musl.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-unknown-linux-musl.tar.gz)
+- [ddev-5.2.1-i686-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-i686-unknown-linux-gnu.tar.gz)
+- [ddev-5.2.1-powerpc64le-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-powerpc64le-unknown-linux-gnu.tar.gz)
 {{% /tab %}}
 {{< /tabs >}}
