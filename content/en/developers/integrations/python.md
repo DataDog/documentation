@@ -5,16 +5,6 @@ description: Install the Datadog Agent Integration Developer Tool.
 ---
 This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and ensuring all of the required dependencies are present. Alternatively, you can use the standalone binaries and installers provided with each release.
 
-## GitHub releases
-
-Each [release](https://github.com/DataDog/integrations-core/releases?q=ddev-&expanded=true) provides the following:
-
-- Standalone binaries for Linux, Windows, and macOS
-- Windows AMD64 (64-bit) MSI installer
-- Windows x86 (32-bit) MSI installer
-- Windows universal (AMD64+x86) EXE installer
-- macOS DMG installer
-
 ## Install Python
 
 Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may be older than the version used in the Agent, and may lack some required tools and dependencies. To ensure that you've everything you need to get an integration running, install a dedicated Python interpreter.
@@ -78,110 +68,106 @@ For Linux installations, avoid modifying your system Python. Datadog recommends 
 
 {{< /tabs >}}
 
-## Install pipx
+## Install developer tooling
 
-The `pipx` python package is required for the `ddev` command line tools.
+You have 2 options to install the `ddev` CLI.
+
+### Installers
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. Install pipx:
+{{< tabs >}}
+{{% tab "GUI installer" %}}
+1. In your browser, download the `.pkg` file: [ddev-5.2.1.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg)
+2. Run your downloaded file and follow the on-screen instructions.
+3. Restart your terminal.
+4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```
-   brew install pipx
+   $ ddev --version
+   5.2.1
    ```
-1. Check the Homebrew installation output and run any additional commands recommended by the installation script.
-
-1. Verify that pipx is installed:
-   ```
-   which pipx
-   ```
-
-   You should see the following output depending on your Mac architecture:
-   - ARM (M1+) machines:
-     ```
-     /opt/homebrew/bin/pipx
-     ```
-   - MacOS on Intel machines:
-     ```
-     /usr/local/bin/pipx
-     ```
-
 {{% /tab %}}
 
-{{% tab "Windows" %}}
-1. Install pipx:
+{{% tab "Command line installer" %}}
+1. Download the file using the `curl` command. The `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-5.2.1.pkg` in the current directory.
    ```
-   python -m pip install pipx
+   curl -o ddev-5.2.1.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg
    ```
-
-1. Verify that pipx is installed:
+2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include sudo on the command to grant write permissions to those folders.
    ```
-   > where pipx
-   C:\Users\<USER>\AppData\Local\Programs\Python\Python39\Scripts\pipx.exe
+   sudo installer -pkg ./ddev-5.2.1.pkg -target /
    ```
-
-{{% /tab %}}
-
-{{% tab "Linux" %}}
-1. Install pipx:
+3. Restart your terminal.
+4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```
-   python -m pip install pipx
-   ```
-1. Verify that pipx is installed:
-   ```
-   pipx --version
+   $ ddev --version
+   5.2.1
    ```
 {{% /tab %}}
 {{< /tabs >}}
-
-## Install the Datadog Agent Integration Developer Tool
-
-{{< tabs >}}
-{{% tab "MacOS" %}}
-
-1. Run the following command and remove any executables shown in the output:
-   ```
-   which -a ddev
-   ```
-
-1. Make sure there are no virtual environments running:
-   1. Run the following command:
-      ```
-      echo $VIRTUAL_ENV
-      ```
-
-   1. If the command returns output, a virtual environment is running. Run `deactivate` to exit the virtual environment.
-
-1. Install `ddev`:
-   <div class="alert alert-warning">Do not run this command with <code>sudo</code>.</a></div>
-
-   - ARM (M1+) machines:
-     ```
-     pipx install --python /opt/homebrew/bin/python3.9 ddev
-     ```
-
-   - MacOS on Intel machines:
-     ```
-     pipx install --python /usr/local/bin/python3.9 ddev
-     ```
-
-1. Check the installation output and run any additional commands recommended by the installation script.
-
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. To install `ddev`, run:
+{{< tabs >}}
+{{% tab "GUI installer" %}}
+1. In your browser, download one the `.msi` files:
+     - [ddev-5.2.1-x64.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi)
+     - [ddev-5.2.1-x86.msi](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi)
+2. Run your downloaded file and follow the on-screen instructions.
+3. Restart your terminal.
+4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```
-   pipx install ddev
+   $ ddev --version
+   5.2.1
    ```
-
 {{% /tab %}}
 
+{{% tab "Command line installer" %}}
+1. Download and run the installer using the standard Windows [`msiexec`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec) program, specifying one of the `.msi` files as the source. Use the `/passive` and `/i` parameters to request an unattended, normal installation.
+   {{< tabs >}}
+   {{% tab "x64" %}}
+   ```
+   msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x64.msi
+   ```
+   {{% /tab %}}
+
+   {{% tab "x86" %}}
+   ```
+   msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86.msi
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+2. Restart your terminal.
+3. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
+   ```
+   $ ddev --version
+   5.2.1
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+### Standalone binaries
+
+After downloading the archive corresponding to your platform and architecture, extract the binary to a directory that is on your PATH and rename to `ddev`.
+
+{{< tabs >}}
 {{% tab "Linux" %}}
-1. To install `ddev`, run:
-   <div class="alert alert-warning">Do not run this command with `sudo`.</a></div>
-   
-   ```
-   pipx install ddev
-   ```
+- [ddev-5.2.1-aarch64-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-aarch64-unknown-linux-gnu.tar.gz)
+- [ddev-5.2.1-x86_64-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-unknown-linux-gnu.tar.gz)
+- [ddev-5.2.1-x86_64-unknown-linux-musl.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-unknown-linux-musl.tar.gz)
+- [ddev-5.2.1-i686-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-i686-unknown-linux-gnu.tar.gz)
+- [ddev-5.2.1-powerpc64le-unknown-linux-gnu.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-powerpc64le-unknown-linux-gnu.tar.gz)
+{{% /tab %}}
+
+{{% tab "MacOS" %}}
+- [ddev-5.2.1-aarch64-apple-darwin.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-aarch64-apple-darwin.tar.gz)
+- [ddev-5.2.1-x86_64-apple-darwin.tar.gz](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-apple-darwin.tar.gz)
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+- [ddev-5.2.1-x86_64-pc-windows-msvc.zip](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-x86_64-pc-windows-msvc.zip)
+- [ddev-5.2.1-i686-pc-windows-msvc.zip](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1-i686-pc-windows-msvc.zip)
 {{% /tab %}}
 {{< /tabs >}}
