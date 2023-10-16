@@ -6,6 +6,10 @@ private: true
 is_beta: true
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform" >}}
+Bits AI is in private beta. Fill out this form to join the wait list.
+{{< /callout >}} 
+
 {{< whatsnext desc="For instructions on running natural language queries in Datadog, see:">}}
     {{< nextlink href="bits_ai/getting_started/#in-the-chat-panel" >}}Querying in the chat panel{{< /nextlink >}}
     {{< nextlink href="bits_ai/getting_started/#in-a-search-bar" >}}Querying in a search bar{{< /nextlink >}}
@@ -48,5 +52,12 @@ Examples:
 {{< img src="bits_ai/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:90%;">}}
 - "AWS products with >5% increase in costs"
 {{< img src="bits_ai/aws-product-cost-increase.png" alt="Query result for AWS products with an increase in costs" style="width:90%;">}}
+
+{{< whatsnext desc="Additional Bits AI documentation:">}}
+    {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
+    {{< nextlink href="bits_ai/getting_started" >}}Getting Started{{< /nextlink >}}
+    {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
+{{< /whatsnext >}}
+
 
 [3]: https://app.datadoghq.com/inventories/sql

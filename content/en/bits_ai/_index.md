@@ -16,11 +16,16 @@ further_reading:
       text: "Bits AI announcement"
 ---
 
-<div class="alert alert-info">Bits AI is in private beta. Fill out <a href='https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform'>the sign-up form</a> to join the wait list.</div>
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform" >}}
+Bits AI is in private beta. Fill out this form to join the wait list.
+{{< /callout >}} 
 
-Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack. 
+Bits AI is a generative AI interface that helps you identify and remediate issues in your applications and infrastructure. You can query Bits AI in the Datadog web app, the Datadog mobile app, and in Slack.
 
-See [Getting Started][1] for usage instructions.
+For detailed setup and usage instructions, see the additional Bits AI documentation:
+- [Getting Started][1]
+- [Query Examples][4]
+- [Managing Incidents][3]
 
 ## Features
 
@@ -36,11 +41,6 @@ You can ask Bits AI questions such as
 
 When relevant to your query, Bits AI surfaces faulty deployments, Watchdog anomalies, incidents, alerts, and more. It also expands on issues with upstream and downstream dependencies. This feature works best if your APM services are tagged by **team** and **service**.
 
-{{< whatsnext desc="Additional Bits AI documentation:">}}
-    {{< nextlink href="bits_ai/getting_started/" >}}Getting Started{{< /nextlink >}}
-    {{< nextlink href="bits_ai/query_examples/" >}}Example Natural Language Queries{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ### Streamline incident management
 
 Within the [Datadog Incident Management][2] product, Bits AI can help you 
@@ -50,9 +50,7 @@ Within the [Datadog Incident Management][2] product, Bits AI can help you
 - **Update incidents:** Update the severity level and status of an incident.
 - **Generate a postmortem:** Quickly create a first draft to review and revise.
 
-{{< whatsnext desc="Additional documentation:">}}
-    {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
-{{< /whatsnext >}}
+See [Managing Incidents][3] for details.
 
 ### Run workflows in Slack
 
@@ -60,9 +58,7 @@ If you have Datadog Workflows configured, you can trigger them from Slack. For e
 
 {{< img src="bits_ai/slack-cloudflare-workflow.png" alt="Workflow request to Bits AI in Slack" style="width:60%;">}}
 
-{{< whatsnext desc="Additional documentation:">}}
-    {{< nextlink href="bits_ai/getting_started/#querying-in-slack" >}}Querying in Slack{{< /nextlink >}}
-{{< /whatsnext >}}
+See [Querying in Slack][5] for details.
 
 ## Feedback
 
@@ -70,6 +66,9 @@ Bits AI is in active development, and your feedback is valuable. To report issue
 
 [1]: /bits_ai/getting_started/
 [2]: https://www.datadoghq.com/product/incident-management/
+[3]: /bits_ai/managing_incidents/
+[4]: /bits_ai/query_examples
+[5]: /bits_ai/getting_started/#querying-in-slack
 
 ## Further reading
 

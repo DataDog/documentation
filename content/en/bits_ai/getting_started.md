@@ -6,6 +6,10 @@ private: true
 is_beta: true
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform" >}}
+Bits AI is in private beta. Fill out this form to join the wait list.
+{{< /callout >}} 
+
 The page describes how to run a natural language query in Datadog and in Slack. For example query verbiage, see [Example Natural Language Queries][2].
 
 ## Querying in Datadog
@@ -42,6 +46,12 @@ Where available, the feature can be accessed by typing a space into the search b
 After setup is completed, you can send queries to `@Datadog` in natural language: `@Datadog Are there any issues with example-service's dependencies?`
 
 {{< img src="bits_ai/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
+
+{{< whatsnext desc="Additional Bits AI documentation:">}}
+    {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
+    {{< nextlink href="bits_ai/query_examples" >}}Query Examples{{< /nextlink >}}
+    {{< nextlink href="bits_ai/managing_incidents/" >}}Managing Incidents{{< /nextlink >}}
+{{< /whatsnext >}}
 
 [1]: /integrations/slack/?tab=applicationforslack
 [2]: /bits_ai/query_examples/

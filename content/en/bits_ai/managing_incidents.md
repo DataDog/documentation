@@ -6,6 +6,10 @@ private: true
 is_beta: true
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform" >}}
+Bits AI is in private beta. Fill out this form to join the wait list.
+{{< /callout >}}
+
 <div class="alert alert-warning">The following features are part of the <a href="https://www.datadoghq.com/product/incident-management/">Datadog Incident Management</a> product.</div>
 
 ## Prerequisites
@@ -20,7 +24,7 @@ is_beta: true
 
 When you join an incident channel in Slack, you automatically receive a summary of the incident. The channel must be connected to Incident Management and have at least fifteen messages. The summary, which is only visible to you, does not persist across reloads, between desktop and mobile apps, or across sessions.
 
-At any time, you can ask for a fresh summary by asking "`@DataDog` Give me a summary of this incident". Request updates on a schedule by asking "`@DataDog` Give me an update in X minutes".
+At any time, you can ask for a fresh summary by asking "`@DataDog` Give me a summary of this incident". Schedule an update by asking "`@DataDog` Give me an update in X minutes".
 
 ## Ask questions
 
@@ -57,6 +61,12 @@ If an incident already has a linked postmortem, you can unlink it before [genera
     - Variables prefixed by `ai`, such as `incident.ai_action_items`, yield AI-generated content instead of fixed values.
     - You must use a heading before each variable.
 1. Save your template to make it available as a template option during [postmortem generation](#generate-a-first-draft-of-a-postmortem).
+
+{{< whatsnext desc="Additional Bits AI documentation:">}}
+    {{< nextlink href="bits_ai/" >}}Feature Overview{{< /nextlink >}}
+    {{< nextlink href="bits_ai/getting_started" >}}Getting Started{{< /nextlink >}}
+    {{< nextlink href="bits_ai/query_examples" >}}Query Examples{{< /nextlink >}}
+{{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings#Postmortems
 [2]: https://app.datadoghq.com/incidents
