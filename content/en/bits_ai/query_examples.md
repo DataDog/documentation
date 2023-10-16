@@ -37,7 +37,6 @@ Examples:
 
 Infrastructure resource data can be queried in natural language from the search bar of [Inventories SQL][3], a centralized interface for infrastructure resource data. You can also use the chat panel to query infrastructure data from anywhere in Datadog.
 
-Examples:
 - "How many hosts am I running by availability zone?"
 {{< img src="bits_ai/hosts-by-az.png" alt="Query result for host count by availability zone" style="width:90%;">}}
 - "Show me the security groups open to the Internet"
@@ -47,7 +46,6 @@ Examples:
 
 Natural language querying of cloud cost is available through the in-product search bar or the chat panel.
 
-Examples:
 - "Show me how much each team spends on the web-store service"
 {{< img src="bits_ai/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:90%;">}}
 - "AWS products with >5% increase in costs"
