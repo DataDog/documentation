@@ -10,7 +10,7 @@ If you're using a Bluetooth headset, the playback quality may degrade when your 
 
 When only playing audio, Bluetooth headsets typically use the [A2DP profile][2], which is optimized for high audio quality but does not support using the microphone. If you choose your headset microphone as audio input (for example, during a CoScreen session or Zoom meeting) the headset switches to a different profile, usually [HFP][3] or [HSP][4], which supports microphone usage but has lower sound quality. Most Bluetooth headsets can use only one profile at a time.
 
-To avoid this issue, you can use a different audio input—such as a laptop's built-in microphone. You may need to restart your application to regain high audio quality.
+To avoid this issue, you can use a different audio input—such as a laptop's built-in microphone. You may need to restart your application to regain high  quality audio.
 
 ### How can I optimize my screen sharing quality and remote control latency?
 
