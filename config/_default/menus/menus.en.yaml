@@ -1008,11 +1008,6 @@ main:
     parent: metrics_top_level
     identifier: metrics_explorer
     weight: 1
-  - name: Distributions
-    url: metrics/distributions/
-    parent: metrics_explorer
-    identifier: metrics_distributions
-    weight: 101
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
@@ -1020,65 +1015,71 @@ main:
   - name: Metrics Types
     url: metrics/types/
     parent: metrics_top_level
+    identifier: metrics_types
     weight: 3
+  - name: Distributions
+    url: metrics/distributions/
+    parent: metrics_top_level
+    identifier: metrics_distributions
+    weight: 4
   - name: Metrics Units
     url: metrics/units/
     parent: metrics_top_level
-    weight: 4
+    weight: 5
   - name: Metrics Without Limits™
     url: metrics/metrics-without-limits/
     parent: metrics_top_level
-    weight: 5
+    weight: 6
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 6
+    weight: 7
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics_top_level
     identifier: metrics_custom_metrics
-    weight: 7
+    weight: 8
   - name: Metric Type Modifiers
     url: metrics/custom_metrics/type_modifiers/
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
-    weight: 701
+    weight: 801
   - name: 'Submission - Agent Check '
     url: metrics/custom_metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
-    weight: 702
+    weight: 802
   - name: Submission - DogStatsD
     url: metrics/custom_metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 703
+    weight: 803
   - name: Submission - Powershell
     url: metrics/custom_metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 704
+    weight: 804
   - name: 'Submission - API '
     url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
-    weight: 705
+    weight: 805
   - name: Send OpenTelemetry Metrics to Datadog
     url: opentelemetry/otel_metrics/
     parent: metrics_top_level
     identifier: metrics_otel
-    weight: 8
+    weight: 9
   - name: OTLP Metric Types
     url: metrics/open_telemetry/otlp_metric_types
     parent: metrics_otel
     identifier: metrics_otlp_types
-    weight: 801
+    weight: 901
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
     identifier: metrics_guide
-    weight: 9
+    weight: 10
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
