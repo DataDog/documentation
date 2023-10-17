@@ -47,8 +47,14 @@ Requirements:
 - Datadog Agent version >= [7.45.0][4].
 
 Set the following in your `datadog.yaml` [configuration file][5]:
-- `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
-- `DD_APM_PEER_SERVICE_AGGREGATION=true`
+
+
+### OpenTelemetry Collector Datadog Exporter configuration
+
+Set the following in your `collector.yaml` [configuration file][6]:
+- `compute_stats_by_span_kind=true`
+- `peer_service_aggregation=true`
+
 
 ### APM tracer configuration
 
@@ -298,4 +304,5 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
-[5]: /agent/configuration/agent-configuration-files/?tab=agentv6v7
+[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341
