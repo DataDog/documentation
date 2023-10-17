@@ -288,6 +288,7 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
 
 ## Red Hat OpenShift {#Openshift}
 
