@@ -356,10 +356,6 @@ Set the `enableASM` configuration parameter to `true` in your `serverless.yml` f
 {{% /tab %}}
 {{< /tabs >}}
 
-## Azure App Services
-
-<div class="alert alert-info">ASM support for Azure App Services is in beta.</a></div>
-
 ## Google Cloud Run
 
 <div class="alert alert-info">ASM support for Google Cloud Run is in beta.</a></div>
@@ -978,6 +974,9 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 {{% /tab %}}
 {{< /tabs >}}
 
+## Azure App Services
+
+<div class="alert alert-info">ASM support for Azure App Services is in beta.</a></div>
 
 ## Testing threat detection
 

@@ -11,6 +11,8 @@ code_lang_weight: 90
 ### Supported cloud environments
 
 - AWS Lambda
+- Google Cloud Run (beta)
+- Microsoft Azure App Service (beta)
 
 ### Version dependencies
 
