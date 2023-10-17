@@ -280,7 +280,7 @@
       - repo_name: datadog-cloudformation-macro
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'serverless/README.md'
           options:
