@@ -1,7 +1,7 @@
 [
   {
     "client": "datadog-api-client-go",
-    "version": "v2.17.0"
+    "version": "v2.18.0"
   },
   {
     "client": "datadog-api-client-java",
@@ -9,14 +9,14 @@
   },
   {
     "client": "datadog-api-client-python",
-    "version": "2.17.0"
+    "version": "2.18.0"
   },
   {
     "client": "datadog-api-client-ruby",
-    "version": "v2.15.0"
+    "version": "v2.16.0"
   },
   {
     "client": "datadog-api-client-typescript",
-    "version": "v1.17.0"
+    "version": "v1.18.0"
   }
 ]
