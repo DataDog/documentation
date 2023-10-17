@@ -571,7 +571,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
 [11]: /tracing/trace_collection/trace_context_propagation/php/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/
 [16]: /tracing/configure_data_security#telemetry-collection

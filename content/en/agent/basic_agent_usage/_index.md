@@ -9,10 +9,10 @@ further_reading:
 - link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "FAQ"
   text: "How does Datadog determine the Agent hostname?"
-- link: "/agent/guide/agent-commands/"
+- link: "/agent/configuration/agent-commands/"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "/agent/guide/agent-configuration-files/"
+- link: "/agent/configuration/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
 - link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
@@ -70,8 +70,8 @@ In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggrega
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
-[3]: /agent/guide/network/#open-ports
-[4]: /agent/guide/network#configure-ports
+[3]: /agent/configuration/network/#open-ports
+[4]: /agent/configuration/network#configure-ports
 [5]: /developers/custom_checks/write_agent_check/
 [6]: https://github.com/etsy/statsd
 [7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
@@ -112,8 +112,8 @@ minfds = 100  # Your hard limit
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
-[3]: /agent/guide/network/?tab=agentv5v4#open-ports
-[4]: /agent/proxy/?tab=agentv5
+[3]: /agent/configuration/network/?tab=agentv5v4#open-ports
+[4]: /agent/configuration/proxy/?tab=agentv5
 [5]: /agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
@@ -338,14 +338,14 @@ See the [Agent log files documentation][12].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/send_a_flare/
-[2]: /agent/guide/agent-commands/#restart-the-agent
-[3]: /agent/guide/agent-commands/#start-the-agent
-[4]: /agent/guide/agent-commands/#service-status
-[5]: /agent/guide/agent-commands/#stop-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-the-agent
+[4]: /agent/configuration/agent-commands/#service-status
+[5]: /agent/configuration/agent-commands/#stop-the-agent
 [6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /agent/guide/integration-management/
-[9]: /agent/guide/agent-configuration-files/
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[9]: /agent/configuration/agent-configuration-files/
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/site/
-[12]: /agent/guide/agent-log-files/
+[12]: /agent/configuration/agent-log-files/

@@ -2,8 +2,10 @@
 title: Datadog FIPS Compliance
 kind: Guide
 disable_toc: false
+alias:
+- /agent/guide/agent-fips-proxy
 further_reading:
-- link: "agent/proxy"
+- link: "agent/configuration/proxy"
   tag: "Documentation"
   text: "Agent Proxy Configuration"
 algolia:
@@ -165,11 +167,11 @@ If you use [Log Management][3] and want to send the Datadog Agent FIPS Proxy log
 1. [Restart the Agent][6].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /logs/
-[4]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [5]: /integrations/journald/#configuration
-[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 
 {{% tab "Helm on Amazon EKS" %}}
@@ -353,5 +355,5 @@ to have all the available products supported by the Datadog Agent and the Datado
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
 [3]: /agent/troubleshooting/
 [4]: https://ip-ranges.ddog-gov.com/
-[5]: /agent/guide/network/#destinations
+[5]: /agent/configuration/network/#destinations
 [6]: /help/
