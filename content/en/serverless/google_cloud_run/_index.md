@@ -646,10 +646,11 @@ Once the container is built and pushed to your registry, the last step is to set
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][11] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
+- `DD_TRACE_PROPAGATION_STYLE`: Set this to `datadog` to use context propagation and log trace correlation.
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
+The following command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
 
 ```
 shell
@@ -658,6 +659,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
+  --update-env-vars=DD_TRACE_PROPAGATION_STYLE='datadog' \
 ```
 
 ## Results
