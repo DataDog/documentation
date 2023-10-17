@@ -92,7 +92,6 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Datadog | Buildkite |
 |---|---|
 | Pipeline | Pipeline |
-| Pipeline Execution | Build |
 | Stage |  |
 | Job | Job |
 | Step |  |
