@@ -141,8 +141,8 @@ Add the following to your Helm chart, specifying the API key that has Remote Con
 ```yaml
 datadog:
   apiKey: xxx
-  remoteConfiguration:
-    enabled: true
+remoteConfiguration:
+  enabled: true
 ```
 
 {{% /tab %}}

@@ -1200,7 +1200,7 @@ typescript_node_security_data:
     text: "Detects hardcoded HMAC keys"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/insecure-hash"
     tag: "insecure-hash"
-    text: "Do not use weah hash functions"
+    text: "Do not use weak hash functions"
   - link: "/continuous_integration/static_analysis/rules/typescript-node-security/insecure-jwt-secret-usage"
     tag: "insecure-jwt-secret-usage"
     text: "Insecure Usage of a Static Secret in JWT Signing"

@@ -64,7 +64,7 @@ Each color corresponds to the highest severity misconfiguration detected on the 
 
 #### Threats
 
-Threats reflect data from the past four hours and are only available for compute instances such as AWS EC2 and Azure VM. White indicates there are no active threats detected. Shades of blue to red reflect the highest-severity threat detected on the resource.
+Threats reflect data from the past four hours and are only available for compute instances such as Amazon EC2 and Azure VM. White indicates there are no active threats detected. Shades of blue to red reflect the highest-severity threat detected on the resource.
 
 ## Investigate a resource
 

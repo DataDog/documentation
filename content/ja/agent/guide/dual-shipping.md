@@ -361,7 +361,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.datadoghq.com"
+        Host: "{{< region-param key=agent_http_endpoint >}}"
         Port: 443
         is_reliable: true
 ```

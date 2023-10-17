@@ -4,16 +4,17 @@ kind: documentation
 is_beta: true
 ---
 
-<div class="alert alert-info">
-<strong>Single Step APM Instrumentation is in beta!</strong> <p> This feature is available in the latest Datadog Agent version.</p>
+{{< callout url="http://dtdg.co/apm-onboarding" >}}
+This feature is available in the latest Datadog Agent version.
 <ul>
-<li>On Linux hosts and VMs</li>
-<li>On Docker containers</li>
+<li> On Linux hosts and VMs
+<li> On Docker containers
 </ul>
-<p>It supports tracing Java, Python, Ruby, Node.js, and .NET services on x86_64 architectures only. Try it out!</p> 
 
-<p>For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services. <a href="http://dtdg.co/apm-onboarding">Fill out this form to request access</a>.</p>
-</div>
+It supports tracing Java, Python, Ruby, Node.js, and .NET services on x86_64 architectures only. Try it out!<br><br>
+
+For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services.
+{{< /callout >}}
 
 ## Enable APM on your services in one step
 
@@ -31,7 +32,8 @@ For example, on an Ubuntu host:
    ```shell
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)”
    ```
-   This installs, configures, and starts the Agent with APM and [Remote Configuration][1] enabled, and sets up library injection for automatic instrumentation of all services on the host or VM. 
+   This installs, configures, and starts the Agent with APM and [Remote Configuration][1] enabled, and sets up library injection for automatic instrumentation of all services on the host or VM.
+   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
 2. Restart the services on the host or VM.
 3. [Explore the performance observability of your services in Datadog][2].
 
@@ -61,7 +63,7 @@ For example, for a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-  
+   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][2].
 
@@ -72,6 +74,9 @@ For example, for a Docker Linux container:
 
 {{< /tabs >}}
 
+### Tagging observability data by environment
+
+Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
 ## Removing Single Step APM instrumentation from your Agent
 

@@ -22,7 +22,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor the security of your Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor the security of your Python apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
@@ -78,7 +78,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    ```
 
    {{% /tab %}}
-   {{% tab "AWS ECS" %}}
+   {{% tab "Amazon ECS" %}}
 
    Update your ECS task definition JSON file by adding the following in the environment section:
 

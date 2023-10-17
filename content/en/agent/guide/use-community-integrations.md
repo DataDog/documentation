@@ -80,7 +80,7 @@ For Agent < v7.21 / v6.21:
 {{% /tab %}}
 {{< /tabs >}}
 
-If your site restricts network access, ensure your have added all of the [`ip-ranges`][5] to your inclusion list, or download the integration manually.
+If your site restricts network access, ensure you have added all of the [`ip-ranges`][5] to your inclusion list, or download the integration manually.
 
 [5]: /agent/guide/network
 

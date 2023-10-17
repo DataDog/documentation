@@ -127,7 +127,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | HttpURLConnection        | すべて         | 完全対応 | `httpurlconnection`、`urlconnection`           |
 | Kafka-Clients            | 0.11+       | 完全対応 | `kafka`                                        |
 | Kafka-Streams            | 0.11+       | 完全対応 | `kafka`、`kafka-streams`                       |
-| Java RMI                 | すべて         | 完全対応 | `rmi`、`rmi-client`、`rmi-server`              |
+| Java RMI                 | すべて         | 分散型トレーシング非対応 | `rmi`、`rmi-client`、`rmi-server`              |
 | Jax RS クライアント           | 2.0+        | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
 | Jersey クライアント            | 1.9-2.29    | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
 | JMS                      | 1 と 2     | 完全対応 | `jms`、`jms-1`、`jms-2`                        |

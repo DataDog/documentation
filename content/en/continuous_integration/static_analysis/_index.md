@@ -55,8 +55,8 @@ rulesets:
   - python-code-style
   - python-inclusive
 ignore-paths:
-  - path/to/ignore
-  - **.js
+  - "path/to/ignore"
+  - "**.js"
 ```
 
 A `static-analysis.datadog.yml` file supports the following:

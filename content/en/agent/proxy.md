@@ -32,7 +32,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 ## FIPS compliance
 
-For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][8]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
+For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][1]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
 
 ## Web proxy
 
@@ -143,17 +143,17 @@ proxy_user: my_user
 proxy_password: my_password
 ```
 
-Do not forget to [restart the Agent][1] for the new settings to take effect.
+Do not forget to [restart the Agent][2] for the new settings to take effect.
 
 ### Squid
 
-[Squid][2] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL license. Squid is a straightforward option if you do not already have a running web proxy in your network.
+[Squid][3] is a forward proxy for the web supporting HTTP, HTTPS, FTP, and more. It runs on most available operating systems, including Windows, and is licensed under the GNU GPL license. Squid is a straightforward option if you do not already have a running web proxy in your network.
 
 #### Proxy forwarding with Squid
 
 ##### Configure Squid to only send traffic to Datadog
 
-Install Squid on a host that has connectivity to both your internal Agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][2].
+Install Squid on a host that has connectivity to both your internal Agents and Datadog. Use your operating system's package manager, or install the software directly from [Squid's project page][3].
 
 To configure Squid, edit the configuration file. This file is usually located at `/etc/squid/squid.conf` on Linux or `C:\squid\etc\squid.conf` in Windows.
 
@@ -219,9 +219,9 @@ proxy:
   https: http://127.0.0.1:3128
 ```
 
-After saving these changes, [restart the Agent][1].
+After saving these changes, [restart the Agent][2].
 
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
+Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][4].
 
 **Agent v5**
 
@@ -232,22 +232,22 @@ proxy_host: 127.0.0.1
 proxy_port: 3128
 ```
 
-After saving these changes, [restart the Agent][1].
+After saving these changes, [restart the Agent][2].
 
-Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][3].
+Verify that Datadog is able to receive the data from your Agent(s) by checking your [Infrastructure Overview][4].
 
 ## HAProxy
 
-[HAProxy][4] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
+[HAProxy][5] is a free, fast, and reliable solution offering proxying for TCP and HTTP applications. While HAProxy is usually used as a load balancer to distribute incoming requests to pool servers, you can also use it to proxy Agent traffic to Datadog from hosts that have no outside connectivity:
 
 `agent ---> haproxy ---> Datadog`
 
 This is another good option if you do not have a web proxy readily available in your network and you wish to proxy a large number of Agents. In some cases, a single HAProxy instance is sufficient to handle local Agent traffic in your network, because each proxy can accommodate upwards of 1000 Agents.
 
-**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][4] for additional information.
+**Note**: This figure is a conservative estimate based on the performance of `m3.xl` instances specifically. Numerous network-related and host-related variables can influence throughput of HAProxy, so you should keep an eye on your proxy deployment both before and after putting it into service. See the [HAProxy documentation][5] for additional information.
 
 The communication between HAProxy and Datadog is always encrypted with TLS. The communication between the Agent host and the HAProxy host is not encrypted by default, because the proxy and the Agent are assumed to be on the same host. However, it is recommended that you secure this communication with TLS encryption if the HAproxy host and Agent host are not located on the same isolated local network.
-To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][5] for more information.
+To encrypt data between the Agent and HAProxy, you need to create an x509 certificate with the Subject Alternative Name (SAN) extension for the HAProxy host. This certificate bundle (*.pem) should contain both the public certificate and private key. See this [HAProxy blog post][6] for more information.
 
 
 **Note**: Download the Datadog certificate with one of the following commands:
@@ -263,7 +263,7 @@ The path to the certificate is `/etc/ssl/certs/ca-certificates.crt` for Debian a
 
 #### HAProxy configuration
 
-HAProxy should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured.
+HAProxy should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured. The configuration is dependent on the Datadog service and site. To see configurations based on your [Datadog site][7], use the `DATADOG SITE` selector on the right.
 
 **Note**: It is recommended to use the `HTTPS` configuration file if the Agent and HAProxy are not part of the same isolated local network.
 
@@ -876,9 +876,9 @@ With this option set to `true`, the Agent skips the certificate validation step 
 skip_ssl_validation: true
 ```
 
-Finally [restart the Agent][1].
+Finally [restart the Agent][2].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][3].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][4].
 
 **Agent v5**
 
@@ -917,13 +917,13 @@ For the Windows Agent, edit your configuration file `datadog.conf` and add this 
 skip_ssl_validation: yes
 ```
 
-Finally [restart the Agent][1].
+Finally [restart the Agent][2].
 
-To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][3].
+To verify that everything is working properly, review the HAProxy statistics at `http://haproxy.example.com:3833` as well as the [Infrastructure Overview][4].
 
 ## NGINX
 
-[NGINX][6] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
+[NGINX][8] is a web server which can also be used as a reverse proxy, load balancer, mail proxy, and HTTP cache. You can also use NGINX as a proxy for your Datadog Agents:
 
 `agent ---> nginx ---> Datadog`
 
@@ -943,7 +943,7 @@ The path to the certificate is `/etc/ssl/certs/ca-certificates.crt` for Debian a
 
 #### NGINX configuration
 
-NGINX should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured.
+NGINX should be installed on a host that has connectivity to Datadog. You can use one of the following configuration files if you do not already have it configured. The configuration is dependent on the Datadog service and site. To see configurations based on your [Datadog site][7], use the `DATADOG SITE` selector on the right.
 
 **Note**: It is recommended to use the `HTTPS` configuration file if the Agent and NGINX are not part of the same isolated local network.
 
@@ -1245,7 +1245,7 @@ With this option set to `true`, the Agent skips the certificate validation step 
 skip_ssl_validation: true
 ```
 
-When sending logs over TCP, see [TCP Proxy for Logs][7].
+When sending logs over TCP, see [TCP Proxy for Logs][9].
 
 ## Datadog Agent
 
@@ -1293,11 +1293,12 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/guide/agent-commands/
-[2]: http://www.squid-cache.org/
-[3]: https://app.datadoghq.com/infrastructure
-[4]: http://haproxy.1wt.eu
-[5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[6]: https://www.nginx.com
-[7]: /agent/logs/proxy
-[8]: /agent/guide/agent-fips-proxy
+[1]: /agent/guide/agent-fips-proxy
+[2]: /agent/guide/agent-commands/
+[3]: http://www.squid-cache.org/
+[4]: https://app.datadoghq.com/infrastructure
+[5]: http://haproxy.1wt.eu
+[6]: https://www.haproxy.com/blog/haproxy-ssl-termination/
+[7]: /getting_started/site/
+[8]: https://www.nginx.com
+[9]: /agent/logs/proxy

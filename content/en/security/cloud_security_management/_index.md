@@ -34,6 +34,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
+    tag: "Blog"
+    text: "Build sufficient security coverage for your cloud environment"
 algolia:
   tags: ['inbox']
 ---

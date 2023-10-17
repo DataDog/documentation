@@ -322,7 +322,7 @@ resource "aws_lambda_function" "lambda" {
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
 - See the [advanced configurations][5] to
     - connect your telemetry using tags
-    - collect telemetry for AWS API Gateway, SQS, and so on.
+    - collect telemetry for Amazon API Gateway, SQS, and so on.
     - capture the Lambda request and response payloads
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces

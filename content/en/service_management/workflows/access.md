@@ -71,18 +71,18 @@ For more information on configuring credentials, see [Connections][7].
 
 Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][10].
 
-### Restrict connection use
+### Restrict access on a specific connection
 
 Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**.
 
 Viewer
-: Can view
+: Can view the connection
 
 Resolver
-: Can resolve and view
+: Can resolve and view the connection
 
 Editor
-: Can edit, resolve, and view
+: Can edit, resolve, and view the connection
 
 Resolving a connection includes getting the connection object assigned to a step and retrieving the secret associated with it.
 
@@ -92,6 +92,40 @@ Follow the steps below to modify the permissions on a specific connection:
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
+
+### Restrict access on a specific workflow
+
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**.
+
+Viewer
+: Can view the workflow
+
+Runner
+: Can run and view the workflow
+
+Editor
+: Can edit, run, and view the workflow
+
+You can restrict access on a specific workflow either form the workflow list page or from the workflow canvas while editing the workflow.
+
+**Restricting permissions from the workflow list page**
+1. Navigate to the [Workflow Automation page][9].
+1. Hover over the workflow on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
+
+**Restricting permissions from the workflow editor**
+1. In the workflow editor click on the cog (**Settings**) icon.
+1. Select **Edit Permissions** from the dropdown.
 1. Select **Restrict Access**.
 1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown menu.

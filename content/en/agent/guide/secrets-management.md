@@ -469,7 +469,7 @@ The `dd-agent` user is created when you install the Datadog Agent.
 
 ##### Rights related errors
 
-If you encounter one of the following errors, then something is missing in your setup. See the [Windows intructions](#windows).
+If you encounter one of the following errors, then something is missing in your setup. See the [Windows instructions](#windows).
 
 1. If any other group or user than needed has rights on the executable, a similar error to the following is logged:
    ```

@@ -897,16 +897,26 @@ main:
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: AWS
+    url: cloud_cost_management/aws
+    parent: cloud_cost_top_level
+    identifier: ccm_aws
+    weight: 1
+  - name: Azure
+    url: cloud_cost_management/azure
+    parent: cloud_cost_top_level
+    identifier: ccm_azure
+    weight: 2
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 1
+    weight: 3
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 2
+    weight: 4
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1840,8 +1850,13 @@ main:
   - name: Connect Synthetics and Traces
     url: /synthetics/apm/
     parent: tracing_other_telemetry
-    identifier: tracing_connect_sythetics
+    identifier: tracing_connect_synthetics
     weight: 403
+  - name: Connect Profiles and Traces
+    url: /profiler/connect_traces_and_profiles/
+    parent: tracing_other_telemetry
+    identifier: tracing_connect_profiles
+    weight: 404
   - name: Trace Explorer
     url: tracing/trace_explorer/
     parent: tracing
@@ -1955,6 +1970,21 @@ main:
     identifier: api_catalog
     parent: tracing
     weight: 10
+  - name: Setting Up API Catalog
+    url: /tracing/api_catalog/get_started/
+    identifier: api_catalog_getstart
+    parent: api_catalog
+    weight: 1001
+  - name: Exploring and Cataloging APIs
+    url: /tracing/api_catalog/explore_and_catalog_apis/
+    identifier: api_catalog_explore
+    parent: api_catalog
+    weight: 1002
+  - name: Monitoring APIs
+    url: /tracing/api_catalog/monitor_apis/
+    identifier: api_catalog_monitor
+    parent: api_catalog
+    weight: 1003
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst
@@ -1964,7 +1994,7 @@ main:
     url: dynamic_instrumentation/enabling
     identifier: dyninst_enable
     parent: dyninst
-    weight: 1001
+    weight: 1101
   - name: Java
     url: dynamic_instrumentation/enabling/java
     identifier: dyninst_enable_java
@@ -1984,7 +2014,7 @@ main:
     url: dynamic_instrumentation/expression-language
     identifier: dyninst_explang
     parent: dyninst
-    weight: 1002
+    weight: 1102
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
@@ -1994,12 +2024,12 @@ main:
     url: tracing/error_tracking/explorer/
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
-    weight: 1101
+    weight: 1201
   - name: Custom Grouping
     url: tracing/error_tracking/custom_grouping
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
-    weight: 1102
+    weight: 1202
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -2019,52 +2049,52 @@ main:
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1401
+    weight: 1501
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1402
+    weight: 1502
   - name: Connection Errors
     url: tracing/troubleshooting/connection_errors
     identifier: tracing_troubleshooting_connection_errors
     parent: tracing_troubleshooting
-    weight: 1403
+    weight: 1503
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1404
+    weight: 1504
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1405
+    weight: 1505
   - name: Agent Resource Usage
     url: tracing/troubleshooting/agent_apm_resource_usage
     identifier: tracing_troubleshooting_agent_usage
     parent: tracing_troubleshooting
-    weight: 1406
+    weight: 1506
   - name: Correlated Logs
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1407
+    weight: 1507
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1408
+    weight: 1508
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1409
+    weight: 1509
   - name: APM Quantization
     url: tracing/troubleshooting/quantization
     identifier: tracing_troubleshooting_quantization
     parent: tracing_troubleshooting
-    weight: 1410
+    weight: 1510
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
@@ -2190,48 +2220,53 @@ main:
   - name: Test Visibility
     url: continuous_integration/tests/
     parent: ci
-    identifier: tests_visibility
+    identifier: ci_tests
     weight: 1
+  - name: Setup
+    url: continuous_integration/tests/setup/
+    parent: ci_tests
+    identifier: ci_tests_setup
+    weight: 101
   - name: .NET
-    url: continuous_integration/tests/dotnet/
-    parent: tests_visibility
-    identifier: ci_dotnet
+    url: continuous_integration/tests/setup/dotnet/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_dotnet
     weight: 101
   - name: Java
-    url: continuous_integration/tests/java/
-    parent: tests_visibility
-    identifier: ci_java
+    url: continuous_integration/tests/setup/java/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_java
     weight: 102
   - name: JavaScript and TypeScript
-    url: continuous_integration/tests/javascript/
-    parent: tests_visibility
-    identifier: ci_javascript
+    url: continuous_integration/tests/setup/javascript/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_javascript
     weight: 103
   - name: Python
-    url: continuous_integration/tests/python/
-    parent: tests_visibility
-    identifier: ci_python
+    url: continuous_integration/tests/setup/python/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_python
     weight: 104
   - name: Ruby
-    url: continuous_integration/tests/ruby/
-    parent: tests_visibility
-    identifier: ci_ruby
+    url: continuous_integration/tests/setup/ruby/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_ruby
     weight: 105
   - name: Swift
-    url: continuous_integration/tests/swift/
-    parent: tests_visibility
-    identifier: ci_swift
+    url: continuous_integration/tests/setup/swift/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_swift
     weight: 106
   - name: JUnit Report Uploads
-    url: continuous_integration/tests/junit_upload/
-    parent: tests_visibility
-    identifier: ci_junit
-    weight: 107
+    url: continuous_integration/tests/setup/junit_xml/
+    parent: ci_tests_setup
+    identifier: ci_tests_setup_junit_xml
+    weight: 102
   - name: Tests in Containers
     url: continuous_integration/tests/containers/
-    parent: tests_visibility
-    identifier: ci_containers
-    weight: 108
+    parent: ci_tests
+    identifier: ci_tests_containers
+    weight: 103
   - name: Pipeline Visibility
     url: continuous_integration/pipelines/
     parent: ci
@@ -2315,33 +2350,38 @@ main:
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
-    identifier: intelligent_test_runner
+    identifier: ci_intelligent_test_runner
     weight: 5
+  - name: Setup
+    url: continuous_integration/intelligent_test_runner/setup/
+    parent: ci_intelligent_test_runner
+    identifier: ci_intelligent_test_runner_setup
+    weight: 501
   - name: .NET
-    url: continuous_integration/intelligent_test_runner/dotnet/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/dotnet/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_dotnet
     weight: 501
   - name: Java
-    url: continuous_integration/intelligent_test_runner/java/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/java/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_java
     weight: 502
   - name: JavaScript and TypeScript
-    url: continuous_integration/intelligent_test_runner/javascript/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/javascript/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_javascript
     weight: 503
   - name: Python
-    url: continuous_integration/intelligent_test_runner/python/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/python/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_python
     weight: 504
   - name: Swift
-    url: continuous_integration/intelligent_test_runner/swift/
-    parent: intelligent_test_runner
+    url: continuous_integration/intelligent_test_runner/setup/swift/
+    parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_swift
-    weight: 506
+    weight: 505
   - name: Integrate Test Visibility
     url: continuous_integration/integrate_tests/
     parent: ci
@@ -2730,19 +2770,24 @@ main:
     parent: log_configuration
     identifier: log_indexes
     weight: 207
+  - name: Flex Logs
+    url: logs/log_configuration/flex_logs/
+    parent: log_configuration
+    identifier: flex_logs
+    weight: 208
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 208
+    weight: 209
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 209
+    weight: 210
   - name: Forwarding
     url: logs/log_configuration/forwarding_custom_destinations/
     parent: log_configuration
-    weight: 210
+    weight: 211
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
@@ -3296,6 +3341,11 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 506
+  - name: Trace Qualification
+    url: security/application_security/threats/trace_qualification/
+    parent: appsec_threats
+    identifier: threats_trace_qualification
+    weight: 507
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
@@ -3816,6 +3866,11 @@ main:
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
     weight: 604
+  - name: Playlists
+    url: real_user_monitoring/session_replay/playlists
+    parent: rum_session_replay
+    identifier: rum_session_replay_playlists
+    weight: 605
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
@@ -4288,16 +4343,21 @@ main:
     url: account_management/org_settings/ip_allowlist
     parent: organization_settings
     weight: 206
-  - name: RBAC
+  - name: Access Control
     url: account_management/rbac/
     parent: account_management
     identifier: account_management_rbac
     weight: 3
+  - name: Granular Access
+    url: account_management/rbac/granular_access
+    parent: account_management_rbac
+    identifier: account_management_rbac_granular_access
+    weight: 301
   - name: Permissions
     url: account_management/rbac/permissions
     parent: account_management_rbac
     identifier: account_management_rbac_permissions
-    weight: 301
+    weight: 302
   - name: SSO with SAML
     url: account_management/saml/
     identifier: account_management_saml
@@ -4351,25 +4411,29 @@ main:
     url: account_management/teams/
     parent: account_management
     weight: 7
+  - name: Multi-Factor Authentication
+    url: account_management/multi-factor_authentication/
+    parent: account_management
+    weight: 8
   - name: Audit Trail
     url: account_management/audit_trail/
     parent: account_management
     identifier: account_management_audit_trail
-    weight: 8
+    weight: 9
   - name: Events
     url: account_management/audit_trail/events/
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
-    weight: 801
+    weight: 901
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
     identifier: account_management_plan_and_usage
-    weight: 9
+    weight: 10
   - name: Usage Details
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
-    weight: 901
+    weight: 1001
   - name: Cost Details
     url: account_management/plan_and_usage/cost_details/
     parent: account_management_plan_and_usage
@@ -4377,15 +4441,15 @@ main:
   - name: Billing
     url: account_management/billing/
     parent: account_management
-    weight: 10
+    weight: 11
   - name: Multi-org Accounts
     url: account_management/multi_organization/
     parent: account_management
-    weight: 11
+    weight: 12
   - name: Guides
     url: account_management/guide/
     parent: account_management
-    weight: 12
+    weight: 13
   - name: Data Security
     url: data_security/
     pre: security-lock
@@ -8554,8 +8618,7 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
@@ -8861,6 +8924,23 @@ api:
         - ListConfluentAccount
       unstable: []
       order: 10
+  - name: Container Images
+    url: /api/latest/container-images/
+    identifier: container-images
+    generated: true
+  - name: Get all Container Images
+    url: '#get-all-container-images'
+    identifier: container-images-get-all-container-images
+    parent: container-images
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListContainerImages
+      unstable:
+        - v2
+      order: 1
   - name: Fastly Integration
     url: /api/latest/fastly-integration/
     identifier: fastly-integration
@@ -9836,7 +9916,7 @@ api:
       versions:
         - v2
       operationids:
-        - GetAllPowerpacks
+        - ListPowerpacks
       unstable: []
       order: 1
   - name: Processes

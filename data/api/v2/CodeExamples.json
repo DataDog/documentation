@@ -752,8 +752,8 @@
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_1761876297",
-      "description": "Create an app key for this service account returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for this service account returns \"Created\" response"
     },
     {
       "group": "service_accounts",
@@ -764,8 +764,8 @@
   "UpdateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_768415790",
-      "description": "Edit an app key owned by this service account returns \"OK\" response"
+      "suffix": "",
+      "description": "Edit an application key for this service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
@@ -778,6 +778,11 @@
       "group": "service_definition",
       "suffix": "_2619874414",
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
+    },
+    {
+      "group": "service_definition",
+      "suffix": "_2621709423",
+      "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
     }
   ],
   "AggregateSpans": [
