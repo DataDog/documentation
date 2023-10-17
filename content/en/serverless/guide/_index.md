@@ -37,4 +37,5 @@ cascade:
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js Lambda Tracing and Webpack Compatibility{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}Troubleshooting Serverless Package Too Large Errors{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/handler_wrapper" >}}Wrap Your Lambda Handler in Code{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}Troubleshooting Layer Not Authorized Errors{{< /nextlink >}}
 {{< /whatsnext >}}
