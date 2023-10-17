@@ -332,13 +332,13 @@
   "CreateCurrentUserApplicationKey": [
     {
       "group": "key_management",
-      "suffix": "_1999509896",
-      "description": "Create an Application key for current user returns \"Created\" response"
+      "suffix": "_3383369233",
+      "description": "Create an Application key with scopes for current user returns \"Created\" response"
     },
     {
       "group": "key_management",
-      "suffix": "_3383369233",
-      "description": "Create an Application key with scopes for current user returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for current user returns \"Created\" response"
     }
   ],
   "UpdateAPIKey": [
@@ -821,8 +821,8 @@
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",
-      "suffix": "_2850884405",
-      "description": "Save on demand concurrency cap"
+      "suffix": "",
+      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
   "CreateTeamLink": [
