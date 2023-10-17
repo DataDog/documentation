@@ -26,7 +26,8 @@ You can monitor application security for PHP apps running in host-based or conta
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Install the latest Datadog PHP library** by downloading and running the installer:
    ```shell
