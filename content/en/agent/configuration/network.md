@@ -6,6 +6,7 @@ aliases:
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
     - /agent/network
     - /agent/faq/network
+    - /agent/guide/network
 further_reading:
     - link: '/getting_started/site'
       tag: 'Documentation'
@@ -444,6 +445,6 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [6]: /real_user_monitoring/
 [7]: /profiler/
 [8]: /synthetics/private_locations
-[9]: /agent/proxy/
+[9]: /agent/configuration/proxy/
 [10]: /network_monitoring/devices
 [11]: /getting_started/site/
