@@ -24,11 +24,11 @@ By minimizing the number of tests run per commit, Intelligent Test Runner reduce
 
 There are known limitations in the current implementation of Intelligent Test Runner that can cause it to skip tests that should be run under certain conditions. Specifically, Intelligent Test Runner is not able to detect changes in library dependencies, compiler options, external services or changes to data files in data-driven tests.
 
-To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message. It is also possible to add a list of [excluded branches](#excluded-branches) and [tracked files](#tracked-files).
+To override Intelligent Test Runner and run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message. You can also add a list of [excluded branches](#excluded-branches) and [tracked files](#tracked-files).
 
 ## Set up a Datadog library
 
-Prior to setting up Intelligent Test Runner, you must set up [Test Visibility][2] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
+Before setting up Intelligent Test Runner, you must configure [Test Visibility][2] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
 
 {{< whatsnext desc="Choose a language to set up Intelligent Test Runner in Datadog:" >}}
     {{< nextlink href="continuous_integration/intelligent_test_runner/setup/dotnet" >}}.NET{{< /nextlink >}}
