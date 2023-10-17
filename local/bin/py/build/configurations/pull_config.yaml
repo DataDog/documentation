@@ -286,7 +286,7 @@
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'macro.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
               title: Datadog Serverless Macro
               kind: documentation
               aliases:
