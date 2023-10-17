@@ -4,52 +4,149 @@ kind: Documentation
 disable_toc: false
 ---
 
+{{< tabs >}}
+{{% tab "Linux" %}}
 
-## Linux
+## 64-BIT X86
 
-### 64-BIT X86
+Datadog Agent version 6 and 7 support the following Linux operating systems on 64-BIT X86:
 
 <table>
   <thead>
-    <th>Operating system (OS)</th>
-    <th>OS version</th>
-    <th>Agent 6 version</th>
-    <th>Agent 7 version</th>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
   </thead>
   <tr>
-    <th rowspan='2'>Debian (systemd)</th>
-    <td>Debian 7 (wheezy)</td>
+    <th><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
+    <td>Amazon Linux 2</td>
+    <td>>= 6.0.0</td>
+    <td>>= 7.0.0</td>
+  </tr>
+  <tr>
+    <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian (systemd)</a></th>
+    <td>>= 7.0 (wheezy)</td>
     <td>< 6.36.0</td>
     <td>< 7.36.0</td>
   </tr>
   <tr>
-    <td>Debian 8 (jessie)</td>
+    <td>>= 8.0 (jessie)</td>
     <td>>= 6.36.0</td>
     <td>>= 7.36.0</td>
   </tr>
   <tr>
     <th rowspan='2'>Debian (SysVinit)</th>
-    <td>Debian 7 (wheezy)</td>
+    <td>>= 7.0 (wheezy)</td>
     <td>6.6.0 - 6.36.0</td>
     <td>< 7.36.0</td>
   </tr>
   <tr>
-    <td>Debian 8 (jessie)</td>
+    <td>>= 8.0 (jessie)</td>
     <td>>= 6.36.0</td>
-    <td>>= 7.36.0</td>
+    <td>>= href='' 7.36.0</t</a>d><a>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
+    <td>>= 14.05</td>
+    <td>>= 6.0.0</td>
+    <td>>= 7.0.0</td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <td>>= 6.0</td>
+    <td>>= 6.33.0</td>
+    <td>>= 7.33.0</td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/redhat/'>AlmaLinux /<br>Rocky</a></th>
+    <td>>= 8.0</td>
+    <td>>= 6.33.0</td>
+    <td>>= 7.33.0</td>
+  </tr>
+  <tr>
+    <th rowspan='2'><a href='/agent/basic_agent_usage/suse/'>SUSE Enterprise Linux (systemd)</a></th>
+    <td>SUSE 11 SP4</td>
+    <td>< 6.33.0</td>
+    <td>< 7.33.0</td>
+  </tr>
+  <tr>
+    <td>>= 12.0</td>
+    <td>>= 6.33.0</td>
+    <td>>= 7.33.0</td>
+  </tr>
+  <tr>
+    <th>SUSE Enterprise Linux (SysVinit)</th>
+    <td>SUSE 11 SP4</td>
+    <td>6.16.0 - 6.33.0</td>
+    <td>7.16.0 - 7.33.0</td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/suse/'>OpenSUSE (systemd)</a></th>
+    <td>>= 15.0</td>
+    <td>>= 6.33.0</td>
+    <td>>= 7.33.0</td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/fedora/'>Fedora</a></th>
+    <td>>= 26.0</td>
+    <td>>= 6.0.0</td>
+    <td>>= 7.0.0</td>
   </tr>
 </table>
 
+## 64-BIT ARM V8
 
-### 64-BIT ARM V8
+Datadog Agent version 6 and 7 support the following Linux operating systems on 64-BIT ARM V8:
 
-| Platform (64-bit Arm v8)                 | Supported versions                                        |
+| Operating system | Supported versions |
 |------------------------------------------|-----------------------------------------------------------|
 | [Amazon Linux][1]                        | Amazon Linux 2                                            |
 | [Debian][2] with systemd                 | Debian 9 (stretch)+                                       |
 | [Ubuntu][3]                              | Ubuntu 16.04+                                             |
-| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 8+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
+| [RedHat/CentOS][4] | >= 8.0<br>**Note**: Supported in Agent >= 6.33.0 and >= 7.33.0   |
+| [AlmaLinux/Rocky][4] | >= 8.0<br>**Note**: Supported in Agent >= 6.33.0 and >= 7.33.0  |
 | [Docker][5]                              | Version 1.12+                                             |
 | [Kubernetes][6]                          | Version 1.3+                                              |
 | [Fedora][8]                              | Fedora 27+                                                |
 | [macOS][9]                               | macOS 11.0+                                               |
+
+[1]: /agent/basic_agent_usage/amazonlinux/
+[2]: /agent/basic_agent_usage/deb/
+[3]: /agent/basic_agent_usage/ubuntu/
+[4]: /agent/basic_agent_usage/redhat/
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/suse/
+[8]: /agent/basic_agent_usage/fedora/
+[9]: /agent/basic_agent_usage/osx/
+[10]: /agent/basic_agent_usage/windows/
+[11]: /agent/basic_agent_usage/source/
+[12]: https://github.com/golang/go/issues/24489
+
+{{% /tab %}}
+
+{{% tab "Windows" %}}
+
+{{% /tab %}}
+
+{{% tab "Cloud and containers" %}}
+
+Agents >= 6.0 and >= 7.0 support the following platforms:
+
+| Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
+|-------------|--------------------|-----------------------|--------------------|
+| [Docker][5] | >= 1.12            | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Kubernetes][6] | >= 1.3 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Azure Stack HCI OS][7] | All versions | | <i class='icon-check-bold'> |
+
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/windows/
+
+{{% /tab %}}
+
+{{% tab "Unix" %}}
+
+{{% /tab %}}
+{{< /tabs >}}
