@@ -27,7 +27,7 @@ Begin by specifying the request method and any necessary [authentication][3]. Re
 
 ### Authentication
 
-Use the action's **Connection** to configure the authentication method your action uses. You can either select a preconfigured connection from the dropdown, or create a connection.
+If you need to authenticate your request, use the action's **Connection** to configure the authentication method. You can either select a preconfigured connection from the dropdown, or create a connection.
 
 #### Create an AWS connection
 
@@ -44,9 +44,9 @@ Use the action's **Connection** to configure the authentication method your acti
 1. Optionally, enter the **Custom Scope** to be requested from Microsoft when acquiring an OAuth 2 access token. A resource's scope is constructed using the identifier URI for the resource and `.default`, separated by a forward slash (`/`). For example, `{identifierURI}/.default`. For more information, see [the Microsoft documentation on .default scope][6].
 1. Click **Create**.
 
-#### Create an HTTP: Basic Auth connection
+#### Create an HTTP Basic Auth connection
 
-The Basic Auth connection uses an authorization header with a username and password to authenticate your HTTP request.
+The Basic Auth connection uses an authorization header with a username and password to authenticate the HTTP request.
 
 1. In the **Connection** section, click the plus icon (**+**).
 1. Select **HTTP**.
@@ -57,9 +57,9 @@ The Basic Auth connection uses an authorization header with a username and passw
 1. Optionally, add **URL parameters** and a **Body** to your request.
 1. Click **Create**.
 
-#### Create an HTTP: Token Auth connection
+#### Create an HTTP Token Auth connection
 
-The Token Auth connection uses a bearer token to authenticate your HTTP request.
+The Token Auth connection uses a bearer token to authenticate the HTTP request.
 
 1. In the **Connection** section, click the plus icon (**+**).
 1. Select **HTTP**.
@@ -70,9 +70,9 @@ The Token Auth connection uses a bearer token to authenticate your HTTP request.
 1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to your request.
 1. Click **Create**.
 
-#### Create an HTTP: HTTP Request Auth connection
+#### Create an HTTP Request Auth connection
 
-The HTTP Request Auth connection allows you to make a preliminary request to retrieve an access token with which to authenticate your request.
+The HTTP Request Auth connection allows you to make a preliminary request to retrieve an access token with which to authenticate the HTTP request.
 
 1. In the **Connection** section, click the plus icon (**+**).
 1. Select **HTTP**.
@@ -91,31 +91,34 @@ Configure the authentication request:
 1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to your request.
 1. Click **Create**.
 
+#### Create an HTTP mTLS connection
 
-#### Create an HTTP: mTLS connection
+The Mutual TLS (mTLS) Auth connection allows you to use a private key and TLS certificate to authenticate the HTTP request.
 
-Available connection methods:
+<div class="alert alert-info">The client certificate (<code>.crt</code>, <code>.pem</code>) and private key (<code>.key</code>, <code>.pem</code>) must use the PEM format.</div>
 
-### Request Options
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **HTTP**.
+1. Enter a **Connection Name**.
+1. From the **Authentication Type** dropdown, select **mTLS Auth**.
+1. Click **Upload File** to upload your **Private Key**.
+1. Click **Upload File** to upload your **Certificate**.
+1. Click **Create**.
 
-Enter any desired headers, cookies, and a comma-delineated list of any status codes on which to return an error. Use the `Response Parsing` dropdown to override the default response parsing method inferred from the headers, and `Response Encoding` if the target server specifies the wrong encoding in its response headers. You can also decide if the request should allow for expired certificates or follow redirects.
+### Inputs
 
-{{< img src="service_management/workflows/http-request-options-tab2.png" alt="The workflow canvas open with an HTTP request action selected and the configuration tab open. The Request Options tab is selected and the action is configured with a header with the name Connection and the value keep-alive, and the Error on Status field has been filled in with the values 202, 300-305" >}}
+A URL and request method are required for your request. Optionally, you can enter:
+- URL parameters
+- headers
+- the content type
+- a request body
+- cookies
 
-### Request Body
+You can also select whether you want to allow expired certificates, or follow redirects.
 
-If the request has a body, use the `Request Body` tab to configure its content and format. Add inputs to the request body from the workflow context with [context variables][1] in the `Request Body` field, or interpolate them into `Name` and `Value` pairs for the `multipart/form-data` body type. The `Body Type` dropdown allows the following options:
+#### Response options
 
-  - `application/json`
-  - `text/plain`
-  - `text/html`
-  - `text/xml`
-  - `multipart/form-data`
-  - `None`
-
-### URL Params
-
-Specify any desired URL parameter names and values.
+Under **Error on Status**, enter a comma-delineated list of any status codes on which to return an error. Use the **Response Parsing** dropdown to override the default response parsing method inferred from the headers, and **Response Encoding** if the target server specifies the wrong encoding in its response headers.
 
 ## Data Transformation
 
