@@ -388,10 +388,10 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 {{< partial name="observability_pipelines/use_cases.html" >}}
 
-For a deeper dive into recommendations for deploying and scaling multiple Workers:
+For recommendations on deploying and scaling multiple Workers:
 
 - See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
-- See [Best Practices for OPW Aggregator Architecture][8] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
+- See [Best Practices for OP Worker Aggregator Architecture][8].
 
 ## Deployment Modes
 
