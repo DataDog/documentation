@@ -395,7 +395,7 @@ instances:
 
 **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/configuration/agent-configuration-files
 [2]: /integrations/process
     {{% /tab %}}
     {{< /tabs >}}

@@ -583,15 +583,13 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI compliance for APM is only available for new Datadog organizations created in the <a href="/getting_started/site/">US1 site</a>.
+PCI compliance for APM is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI compliance for APM is available when you create a new Datadog organization. To set up a PCI-compliant Datadog org, follow these steps:
+To set up a PCI-compliant Datadog org, follow these steps:
 
-1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
-2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
-3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
-4. After Datadog support or Customer Success confirms that the new org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
+1. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the org be configured as a PCI-compliant org.
+2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
     ```
     apm_config:
       apm_dd_url: <https://trace-pci.agent.datadoghq.com>
@@ -616,7 +614,7 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [2]: /tracing/glossary/#trace
 [3]: /tracing/trace_collection/tracing_naming_convention/#http-requests
 [4]: /tracing/glossary/#spans
-[5]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /tracing/guide/ignoring_apm_resources/
 [7]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [8]: /tracing/guide/send_traces_to_agent_by_api/

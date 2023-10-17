@@ -4001,6 +4001,7 @@ components:
       - appsec_usage
       - browser_usage
       - ci_visibility_itr_usage
+      - cloud_siem_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
@@ -4042,6 +4043,7 @@ components:
       - APPSEC_USAGE
       - BROWSER_USAGE
       - CI_VISIBILITY_ITR_USAGE
+      - CLOUD_SIEM_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
@@ -7604,6 +7606,8 @@ components:
       - browser_percentage
       - ci_visibility_itr_usage
       - ci_visibility_itr_percentage
+      - cloud_siem_usage
+      - cloud_siem_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -7685,6 +7689,8 @@ components:
       - BROWSER_PERCENTAGE
       - CI_VISIBILITY_ITR_USAGE
       - CI_VISIBILITY_ITR_PERCENTAGE
+      - CLOUD_SIEM_USAGE
+      - CLOUD_SIEM_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -7818,6 +7824,16 @@ components:
           type: number
         ci_visibility_itr_usage:
           description: The Git committers for Intelligent Test Runner usage by tag(s).
+          format: double
+          type: number
+        cloud_siem_percentage:
+          description: The percentage of Cloud Security Information and Event Management
+            usage by tag(s).
+          format: double
+          type: number
+        cloud_siem_usage:
+          description: The Cloud Security Information and Event Management usage by
+            tag(s).
           format: double
           type: number
         container_excl_agent_percentage:
@@ -18251,6 +18267,11 @@ components:
             for the given date and given organization.
           format: int64
           type: integer
+        cloud_siem_events_sum:
+          description: Shows the sum of all Cloud Security Information and Event Management
+            events over all hours in the current date for the given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -18770,6 +18791,11 @@ components:
         cloud_cost_management_host_count_avg:
           description: Host count average of Cloud Cost Management for all cloud providers
             for the given date and given org.
+          format: int64
+          type: integer
+        cloud_siem_events_sum:
+          description: Shows the sum of all Cloud Security Information and Event Management
+            events over all hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -19298,6 +19324,11 @@ components:
         cloud_cost_management_host_count_avg_sum:
           description: Sum of the host count average for Cloud Cost Management for
             all cloud providers.
+          format: int64
+          type: integer
+        cloud_siem_events_agg_sum:
+          description: Shows the sum of all Cloud Security Information and Event Management
+            events over all hours in the current months for all organizations.
           format: int64
           type: integer
         container_avg_sum:
