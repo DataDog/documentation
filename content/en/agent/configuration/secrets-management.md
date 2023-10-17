@@ -3,6 +3,7 @@ title: Secrets Management
 kind: documentation
 aliases:
   - /agent/faq/kubernetes-secrets
+  - /agent/guide/secrets-management
 further_reading:
 - link: "/agent/autodiscovery/"
   tag: "Documentation"
@@ -564,5 +565,5 @@ This command returns whether the permissions are valid for the Agent to view thi
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [4]: https://docs.docker.com/engine/swarm/secrets/
 [5]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
-[6]: /agent/guide/agent-commands/#restart-the-agent
+[6]: /agent/configuration/agent-commands/#restart-the-agent
 [7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

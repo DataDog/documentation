@@ -119,6 +119,10 @@ You can visualize your ingested data using the following cost types:
 | `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
 | `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate charge types.|
 
+### Getting historical data
+
+You can create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7] to have them backfill cost data. Cloud Cost Management automatically pulls in up to 15 months of historical data as long as the file structure and partitioning follows the format of scheduled exports.
+
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -127,3 +131,5 @@ You can visualize your ingested data using the following cost types:
 [3]: https://app.datadoghq.com/cost/setup?cloud=azure
 [4]: https://app.datadoghq.com/integrations/azure
 [5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
+[7]: https://support.microsoft.com
