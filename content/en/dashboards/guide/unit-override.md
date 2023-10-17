@@ -9,7 +9,7 @@ further_reading:
 - link: "logs/explorer/facets/#units"
   tag: "Documentation"
   text: "Event units"
-- link: "dashboard/widgets/"
+- link: "dashboards/widgets/"
   tag: "Documentation"
   text: "List of Widgets"
 algolia:
