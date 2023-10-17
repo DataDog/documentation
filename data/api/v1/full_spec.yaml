@@ -3373,7 +3373,7 @@ components:
                   q: avg:system.cpu.user{*}
               type: hostmap
           items:
-            $ref: '#/components/schemas/Widget'
+            $ref: '#/components/schemas/GroupWidgetItem'
           type: array
       required:
       - type
@@ -3389,6 +3389,54 @@ components:
       type: string
       x-enum-varnames:
       - GROUP
+    GroupWidgetItem:
+      description: A widget defined inside a group.
+      properties:
+        definition:
+          $ref: '#/components/schemas/GroupWidgetItemDefinition'
+        id:
+          description: ID of the widget.
+          format: int64
+          type: integer
+        layout:
+          $ref: '#/components/schemas/WidgetLayout'
+      required:
+      - definition
+      type: object
+    GroupWidgetItemDefinition:
+      description: Same as the regular widget definition but without group.
+      oneOf:
+      - $ref: '#/components/schemas/AlertGraphWidgetDefinition'
+      - $ref: '#/components/schemas/AlertValueWidgetDefinition'
+      - $ref: '#/components/schemas/ChangeWidgetDefinition'
+      - $ref: '#/components/schemas/CheckStatusWidgetDefinition'
+      - $ref: '#/components/schemas/DistributionWidgetDefinition'
+      - $ref: '#/components/schemas/EventStreamWidgetDefinition'
+      - $ref: '#/components/schemas/EventTimelineWidgetDefinition'
+      - $ref: '#/components/schemas/FreeTextWidgetDefinition'
+      - $ref: '#/components/schemas/FunnelWidgetDefinition'
+      - $ref: '#/components/schemas/GeomapWidgetDefinition'
+      - $ref: '#/components/schemas/HeatMapWidgetDefinition'
+      - $ref: '#/components/schemas/HostMapWidgetDefinition'
+      - $ref: '#/components/schemas/IFrameWidgetDefinition'
+      - $ref: '#/components/schemas/ImageWidgetDefinition'
+      - $ref: '#/components/schemas/ListStreamWidgetDefinition'
+      - $ref: '#/components/schemas/LogStreamWidgetDefinition'
+      - $ref: '#/components/schemas/MonitorSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/NoteWidgetDefinition'
+      - $ref: '#/components/schemas/QueryValueWidgetDefinition'
+      - $ref: '#/components/schemas/RunWorkflowWidgetDefinition'
+      - $ref: '#/components/schemas/SLOListWidgetDefinition'
+      - $ref: '#/components/schemas/SLOWidgetDefinition'
+      - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
+      - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
+      - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
+      - $ref: '#/components/schemas/SunburstWidgetDefinition'
+      - $ref: '#/components/schemas/TableWidgetDefinition'
+      - $ref: '#/components/schemas/TimeseriesWidgetDefinition'
+      - $ref: '#/components/schemas/ToplistWidgetDefinition'
+      - $ref: '#/components/schemas/TopologyMapWidgetDefinition'
+      - $ref: '#/components/schemas/TreeMapWidgetDefinition'
     HTTPLog:
       description: Structured log message.
       items:
