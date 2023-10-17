@@ -127,7 +127,9 @@ Requires Agent version >= 6.20 or 7.20.
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-## Cluster Agent metrics (e.g. Kubernetes State Metrics Core)
+## Cluster Agent metrics
+
+Configure the Agent to send Cluster Agent metrics, such as Kubernetes State Metrics Core, to additional endpoints.
 
 ### HELM configuration
 In Datadog `values.yaml`:
