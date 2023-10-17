@@ -3575,50 +3575,65 @@ main:
     identifier: continuous_testing
     parent: ux_monitoring_heading
     weight: 200000
+  - name: Local and Ephemeral Environments
+    url: /continuous_testing/environments
+    parent: continuous_testing
+    identifier: continuous_testing_environments
+    weight: 1
+  - name: Setup
+    url: /continuous_testing/environments/setup
+    parent: continuous_testing_environments
+    identifier: continuous_testing_environments_setup
+    weight: 101
+  - name: Substituting Resource URL
+    url: /continuous_testing/environments/start_url
+    parent: continuous_testing_environments
+    identifier: continuous_testing_environments_
+    weight: 102
+  - name: Testing With Proxy, Firewall, or VPN
+    url: /continuous_testing/environments/proxy_firewall_vpn
+    parent: continuous_testing_environments
+    identifier: continuous_testing_environments_proxy_firewall_vpn
+    weight: 103
   - name: CI/CD Integrations
     url: continuous_testing/cicd_integrations
     parent: continuous_testing
     identifier: continuous_testing_cicd_integrations
-    weight: 1
+    weight: 2
   - name: Configuration
     url: /continuous_testing/cicd_integrations/configuration
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_configuration
-    weight: 101
+    weight: 201
   - name: Azure DevOps Extension
     url: /continuous_testing/cicd_integrations/azure_devops_extension
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_azure_devops_extension
-    weight: 102
+    weight: 202
   - name: CircleCI Orb
     url: /continuous_testing/cicd_integrations/circleci_orb
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_circleci_orb
-    weight: 103
+    weight: 203
   - name: GitHub Actions
     url: /continuous_testing/cicd_integrations/github_actions
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_github_actions
-    weight: 104
+    weight: 204
   - name: GitLab
     url: /continuous_testing/cicd_integrations/gitlab
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_gitlab
-    weight: 105
+    weight: 205
   - name: Jenkins
     url: /continuous_testing/cicd_integrations/jenkins
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_jenkins
-    weight: 106
+    weight: 206
   - name: Settings
     url: /continuous_testing/settings
     parent: continuous_testing
     identifier: continuous_testing_settings
-    weight: 2
-  - name: Testing Tunnel
-    url: /continuous_testing/testing_tunnel
-    parent: continuous_testing
-    identifier: continuous_testing_testing_tunnel
     weight: 3
   - name: Explorer
     url: continuous_testing/explorer/

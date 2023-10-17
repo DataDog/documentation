@@ -1,9 +1,10 @@
 ---
-title: Continuous Testing Tunnel
+title: Testing Local and Staging Environments
 kind: documentation
-description: Learn about local and remote CI/CD testing using Datadog's Continuous Testing testing tunnel.
+description: Learn about using Continuous Testing in local and remote environments.
 aliases:
   - /synthetics/testing_tunnel
+  - /continuous_testing/testing_tunnel
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
