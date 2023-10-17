@@ -3,11 +3,11 @@ kind: documentation
 title: Install the Datadog Agent Integration Developer Tool
 description: Install the Datadog Agent Integration Developer Tool.
 ---
-This document covers how to set up a Python environment to work on Agent-based Integrations, including installing the interpreter and ensuring all of the required dependencies are present. Alternatively, you can use the standalone binaries and installers provided with each release.
+This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and developer tool.
 
 ## Install Python
 
-Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may be older than the version used in the Agent, and may lack some required tools and dependencies. To ensure that you have everything you need to get an integration running, install a dedicated Python interpreter.
+Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may not be the same as the one used by the latest Agent. To ensure that you have everything you need to get an integration running, install a dedicated Python interpreter.
 
 {{< tabs >}}
 
@@ -19,14 +19,14 @@ Install Python 3.9 using [Homebrew][1]:
    brew update
    ```
 
-1. Install Python:
+2. Install Python:
    ```
    brew install python@3.9
    ```
 
-1. Check the Homebrew installation output and run any additional commands recommended by the installation script.
+3. Check the Homebrew installation output and run any additional commands recommended by the installation script.
 
-1. Verify that the Python binary is installed in your `PATH` and that you've installed the correct version:
+4. Verify that the Python binary is installed in your `PATH` and that have installed the correct version:
    ```
    which python3.9
    ```
