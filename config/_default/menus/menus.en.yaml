@@ -907,10 +907,10 @@ main:
     parent: cloud_cost_top_level
     identifier: ccm_azure
     weight: 2
-  - name: GCP
-    url: cloud_cost_management/gcp
+  - name: Google Cloud
+    url: cloud_cost_management/google_cloud
     parent: cloud_cost_top_level
-    identifier: ccm_gcp
+    identifier: ccm_google_cloud
     weight: 3
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines

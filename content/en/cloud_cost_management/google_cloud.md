@@ -1,5 +1,5 @@
 ---
-title: GCP
+title: Google Cloud
 kind: documentation
 is_beta: true
 further_reading:
@@ -15,14 +15,14 @@ further_reading:
 ---
 
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLScNSzkTAmmpmxEY5Xoo-xPOyKXG0n_6IgdlU66mWXp445pNdA/viewform" btn_hidden="false" >}}
-Cloud Cost GCP support is currently in private beta
+Cloud Cost Google Cloud support is currently in private beta
 {{< /beta-callout >}}
 
 ## Overview
 
-To use GCP Cloud Cost Management, you must set up a Datadog GCP Integration in Datadog and enable a Detailed Usage Cost billing export for your desired billing account in GCP.
+To use Cloud Cost Management with Google Cloud, you must set up a Datadog Google Cloud Platform Integration in Datadog and enable a Detailed Usage Cost billing export for your desired billing account in Google Cloud.
 
-The GCP Datadog Integration Service Account must have necessary permissions configured to interact with Google Cloud Storage and BigQuery.
+The Google Cloud Platform Datadog Integration Service Account must have necessary permissions configured to interact with Google Cloud Storage and BigQuery.
 
 ## Setup
 
@@ -38,17 +38,17 @@ You can utilize an existing GCS bucket or create a new one. Data will be extract
 
 **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
-### Configure the GCP integration
-Navigate to [Setup & Configuration][3] and select an integrated GCP service account from the menu. If you do not see your desired Service Account in the list, go to [Google Cloud Platform integration][4] to add it. Follow the instructions on the integration page to properly configure your Service Account being integrated.
+### Configure the Google Cloud Platform integration
+Navigate to [Setup & Configuration][3] and select an integrated Google Cloud Platform service account from the menu. If you do not see your desired Service Account in the list, go to [Google Cloud Platform integration][4] to add it. Follow the instructions on the integration page to properly configure your Service Account being integrated.
 
 <div class="alert alert-warning"> LEGACY project integrations are deprecated and not supported </div>
 
-Datadog GCP Integrations monitor the entire project when a related service account is integrated - using a previously integrated project will prevent monitoring resources in a new project. If your billing is associated with a non-integrated project those resources will start to be monitored.
+Datadog Google Cloud Platform Integrations monitor the entire project when a related service account is integrated - using a previously integrated project will prevent monitoring resources in a new project. If your billing is associated with a non-integrated project those resources will start to be monitored.
 
 **Note:** You can limit Metrics Collection per integration - this will limit automatically monitoring resources in the project - but does not exclude data from Cloud Cost processing. </div>
 
 ### Provide Datadog Integration Service Account necessary permissions
-The APIs and permissions below enable Datadog to automate extraction of your Detailed Usage billing export data from BigQuery - where GCP exports it - to your specified GCS bucket via a scheduled BigQuery query. This extracts data in a useful manner in your cloud storage bucket where it can then be processed by Datadog.
+The APIs and permissions below enable Datadog to automate extraction of your Detailed Usage billing export data from BigQuery - where Google Cloud exports it - to your specified GCS bucket via a scheduled BigQuery query. This extracts data in a useful manner in your cloud storage bucket where it can then be processed by Datadog.
 
 #### Enable necessary Google Service APIs
 [Enable BigQuery and BigQuery Data Transfer Service APIs][5] if not already enabled
@@ -61,7 +61,7 @@ The APIs and permissions below enable Datadog to automate extraction of your Det
 * `storage.objects.get`
 * `storage.objects.list`
 
-**Note:** This can be a custom role, or you can utilize existing GCP roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`
+**Note:** This can be a custom role, or you can utilize existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`
 
 #### Configure required export project access
 [Add the service account as a principal on the export dataset project resource][7] and assign a role with the following permissions:
@@ -69,7 +69,7 @@ The APIs and permissions below enable Datadog to automate extraction of your Det
 * `bigquery.transfers.get`
 * `bigquery.transfers.update`
 
-**Note:** This can be a custom role, or you can utilize existing GCP role `roles/bigquery.admin`
+**Note:** This can be a custom role, or you can utilize existing Google Cloud role `roles/bigquery.admin`
 
 #### Configure required export BigQuery dataset access
 [Add the service account as a principal on the export BigQuery dataset resource][8] and assign a role with the following permissions:
@@ -83,7 +83,7 @@ The APIs and permissions below enable Datadog to automate extraction of your Det
 * `bigquery.tables.update`
 * `bigquery.tables.updateData`
 
-**Note:** This can be a custom role, or you can utilize existing GCP role `roles/bigquery.dataEditor`
+**Note:** This can be a custom role, or you can utilize existing Google Cloud role `roles/bigquery.dataEditor`
 
 #### If necessary - configure required cross-project service authorization
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset you will need to [grant cross-project service account authorization][10]:
