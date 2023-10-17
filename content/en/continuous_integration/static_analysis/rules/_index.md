@@ -1328,7 +1328,7 @@ Rules to identify potential security hotspots in Node. This may include false po
 
 <br>
 
-### React specific linting rules for stella
+### React specific linting rules
 
 **Ruleset ID:** `jsx-react`
 
