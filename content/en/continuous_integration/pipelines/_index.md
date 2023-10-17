@@ -30,7 +30,6 @@ cascade:
 
 |  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| {{< ci-details title="Integration status" >}}The status of the CI provider integration.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Collect traces" >}}The ability to capture APM traces.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}The ability to identify partial retries (for example, when only a subset of jobs were retried) in CI providers.{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Manual steps" >}}The ability to identify when there is a job with a manual approval phase in the overall pipeline, which is split into two pipelines: <br>- From the beginning of the pipeline to when the manual approval action starts and the pipeline becomes <code>Blocked</code>.<br>- From the end of the manual approval action to the end of the pipeline.<br>{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} |  |
@@ -42,7 +41,6 @@ cascade:
 | {{< ci-details title="Custom tags and metrics at runtime" >}}The ability to add <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/">user-defined text and numerical tags</a> to pipelines and jobs in CI Visibility.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
 | {{< ci-details title="Parameters" >}}The ability to add the custom pipeline parameters that users set (for example, <code>DYNAMICS_IS_CHILD:true</code>). Users can search using these parameters in the Datadog UI to find all the events with a specific parameter.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} |  |
 | {{< ci-details title="Pipeline failure reason" >}}The ability to add the reason for a failure of a pipeline or a job.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Job dependency information" >}}The ability to report the dependencies of a specific job in the pipeline chain.{{< /ci-details >}} |  |  |  |  |  |  |  | {{< X >}} |
 
 ## Setup
 
