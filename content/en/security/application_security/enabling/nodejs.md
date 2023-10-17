@@ -28,7 +28,8 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Datadog Node.js library package** to at least version 2.23.0 (for NodeJS 12+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
    ```shell
