@@ -108,7 +108,7 @@ Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-se
 
 To apply the changes, restart the [Datadog Agent][1].
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
 {{% /tab %}}
 
@@ -141,7 +141,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
 4. Restart the [Datadog Agent][1].
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 
 {{% /tab %}}
 {{< /tabs >}}

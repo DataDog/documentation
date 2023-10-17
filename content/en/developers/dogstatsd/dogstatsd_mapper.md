@@ -126,4 +126,4 @@ It would send the metric `custom_metric.process.prod.value_1.live` to Datadog wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file

@@ -614,7 +614,7 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [2]: /tracing/glossary/#trace
 [3]: /tracing/trace_collection/tracing_naming_convention/#http-requests
 [4]: /tracing/glossary/#spans
-[5]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /tracing/guide/ignoring_apm_resources/
 [7]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
 [8]: /tracing/guide/send_traces_to_agent_by_api/

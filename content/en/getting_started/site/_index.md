@@ -5,7 +5,7 @@ further_reading:
 - link: 'https://learn.datadoghq.com/courses/dd-201'
   tag: 'Learning Center'
   text: 'Datadog 201: Becoming a Power User'
-- link: '/agent/guide/dual-shipping/'
+- link: '/agent/configuration/dual-shipping/'
   tag: 'Guide'
   text: 'Dual Shipping'
 algolia:
@@ -58,5 +58,5 @@ The Datadog for Government site (US1-FED) is meant to allow US government agenci
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /agent/guide/dual-shipping/
+[2]: /agent/configuration/dual-shipping/
 [3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

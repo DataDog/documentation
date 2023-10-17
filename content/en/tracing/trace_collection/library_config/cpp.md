@@ -87,4 +87,4 @@ Propagation style(s) to use when extracting tracing headers. `Datadog`, `B3`, or
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
-[3]: /agent/guide/network/#configure-ports
+[3]: /agent/configuration/network/#configure-ports

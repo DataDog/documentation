@@ -298,4 +298,4 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
-[5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[5]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

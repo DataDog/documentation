@@ -292,4 +292,4 @@ stream {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/log_transport?tab=https
-[2]: /agent/proxy/
+[2]: /agent/configuration/proxy/

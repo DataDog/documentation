@@ -68,7 +68,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 3. [Restart the Agent][1] for the changes to take effect.
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -86,7 +86,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 3. [Restart the Agent][1] for the changes to take effect.
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "macOS" %}}
@@ -104,7 +104,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 3. [Restart the Agent][1] for the changes to take effect.
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{< /tabs >}}

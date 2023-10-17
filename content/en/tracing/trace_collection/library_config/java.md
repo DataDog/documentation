@@ -470,7 +470,7 @@ Available since version 1.10.0
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
 [3]: /tracing/setup/docker/
-[4]: /agent/guide/network/#configure-ports
+[4]: /agent/configuration/network/#configure-ports
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [6]: /tracing/configure_data_security/#telemetry-collection
 [7]: /developers/dogstatsd/#setup

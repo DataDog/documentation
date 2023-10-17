@@ -336,7 +336,7 @@ The following configuration variables are for features that are available for us
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /tracing/configure_data_security#telemetry-collection
 [16]: /agent/remote_config/

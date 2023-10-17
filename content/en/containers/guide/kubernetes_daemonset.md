@@ -300,7 +300,7 @@ Additional examples are available on the [Container Discover Management][27] pag
 [20]: /getting_started/site/
 [21]: /agent/docker/?tab=standard#ignore-containers
 [22]: /containers/kubernetes/log
-[23]: /agent/proxy/#agent-v6
+[23]: /agent/configuration/proxy/#agent-v6
 [24]: /developers/dogstatsd/
 [25]: /developers/dogstatsd/unix_socket/
 [26]: /containers/kubernetes/tag/

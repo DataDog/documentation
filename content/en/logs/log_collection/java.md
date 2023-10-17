@@ -531,9 +531,9 @@ To generate this JSON:
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /logs/log_configuration/parsing/?tab=matchers
 [10]: /logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder

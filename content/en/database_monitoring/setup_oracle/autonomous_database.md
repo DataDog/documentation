@@ -118,8 +118,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [1]: /database_monitoring/setup_oracle
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example

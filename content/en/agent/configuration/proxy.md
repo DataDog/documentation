@@ -3,6 +3,7 @@ title: Agent Proxy Configuration
 kind: documentation
 aliases:
 - /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
+- /agent/proxy
 further_reading:
 - link: "/logs/"
   tag: "Documentation"
@@ -13,7 +14,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces and profiles"
-- link: "/agent/guide/agent-fips-proxy"
+- link: "/agent/configuration/agent-fips-proxy"
   tag: "Documentation"
   text: "Datadog FIPS Compliance"
 algolia:
@@ -1293,8 +1294,8 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /agent/guide/agent-fips-proxy
-[2]: /agent/guide/agent-commands/
+[1]: /agent/configuration/agent-fips-proxy
+[2]: /agent/configuration/agent-commands/
 [3]: http://www.squid-cache.org/
 [4]: https://app.datadoghq.com/infrastructure
 [5]: http://haproxy.1wt.eu

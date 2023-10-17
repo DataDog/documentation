@@ -1,8 +1,10 @@
 ---
 title: Dual Shipping
 kind: guide
+aliases:
+- /agent/guide/dual-shipping
 further_reading:
-- link: "/agent/guide/network/"
+- link: "/agent/configuration/network/"
   tag: "Guide"
   text: "Network Traffic"
 ---
@@ -347,7 +349,7 @@ and add the relevant settings to `customAgentConfig`.
   useConfigMap:  true
 
   # agents.customAgentConfig -- Specify custom contents for the datadog agent config (datadog.yaml)
-  ## ref: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6
+  ## ref: https://docs.datadoghq.com/agent/configuration/agent-configuration-files/?tab=agentv6
   ## ref: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
@@ -373,7 +375,7 @@ If you're using the [Datadog Agent operator][1], similarly, you can set the `age
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/network/
+[1]: /agent/configuration/network/
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
 [3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

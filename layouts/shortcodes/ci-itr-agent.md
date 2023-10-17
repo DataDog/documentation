@@ -8,4 +8,4 @@ In addition to the [Datadog API Key][101], a [Datadog application key][102] must
 
 [101]: https://app.datadoghq.com/organization-settings/api-keys
 [102]: https://app.datadoghq.com/organization-settings/application-keys
-[103]: /agent/guide/agent-configuration-files
+[103]: /agent/configuration/agent-configuration-files

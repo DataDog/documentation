@@ -262,8 +262,8 @@ datadog:
 [14]: /monitors/
 [15]: /help/
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
-[17]: /agent/guide/network
-[18]: /agent/proxy/
+[17]: /agent/configuration/network
+[18]: /agent/configuration/proxy/
 [19]: /tracing/service_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
-[21]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

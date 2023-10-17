@@ -171,8 +171,8 @@ class HelloCheck(AgentCheck):
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/account/settings/agent/latest
-[2]: /agent/guide/agent-configuration-files#agent-configuration-directory
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[2]: /agent/configuration/agent-configuration-files#agent-configuration-directory
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary
 [5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
 [6]: /dashboards/
