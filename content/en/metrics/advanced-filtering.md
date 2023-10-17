@@ -81,12 +81,19 @@ Tag value prefix, suffix, and infix wildcard matching is supported:
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_suffix.png" alt="Wildcard used as suffix" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_suffix_example.png" alt="Wildcard used as suffix" style="width:100%;" >}}
+
 ```
 sum:kubernetes.pods.running{service:*-canary} by {service}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_prefix.png" alt="Wildcard used as prefix" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_prefix_example.png" alt="Wildcard used as prefix" style="width:100%;" >}}
+
+```
+avg:system.disk.utilized{region:*east*} by {region}
+```
+
+{{< img src="metrics/advanced-filtering/wildcard_infix_example.png" alt="Wildcard used as infix" style="width:100%;" >}}
 
 ## Exclusion functions
 
