@@ -21,7 +21,7 @@ You can view Mobile Vitals for your application by navigating to **UX Monitoring
 
 To access the RUM mobile app performance dashboard, switch to the **Performance** tab, then click the **View Dashboard** link.
 
-{{< img src="real_user_monitoring/android/android-perf-dash-link.png" alt="Mobile Vitals details in Performance Overview" style="width:90%;">}}
+{{< img src="real_user_monitoring/android/android-perf-dash-link.png" alt="Access the mobile performance dashboard for Android from the Performance tab" style="width:90%;">}}
 
 Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph.
 
