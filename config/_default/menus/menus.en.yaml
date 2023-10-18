@@ -2953,16 +2953,21 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
     weight: 3
+  - name: Monitoring
+    url: observability_pipelines/monitoring/
+    parent: observability_pipelines
+    identifier: observability_pipelines_monitoring
+    weight: 4
   - name: Troubleshooting
     url: observability_pipelines/troubleshooting/
     parent: observability_pipelines
     identifier: observability_pipelines_troubleshooting
-    weight: 4
+    weight: 5
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 5
+    weight: 6
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
@@ -2987,7 +2992,7 @@ main:
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 6
+    weight: 7
   - name: Architecture
     url: observability_pipelines/architecture/
     parent: observability_pipelines
