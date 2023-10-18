@@ -6,15 +6,12 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
+ASM provides serverless capability for the following platforms and libraries:
 
-## Language and ASM compatibility
-- AWS Lambda
-- Google Cloud Run
-- Azure App Service
+{{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
 ### AWS Lambda
-Notes
-- Threat Protection via Remote Config is not supported. However you can use Workflows to block IPs in your WAF instead.
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
   
 |Type           	| Threat Detection	|  Vulnerability Management for OSS	| Vulnerability Management for Code-Level 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
@@ -35,7 +32,6 @@ ASM Threat Detection supports HTTP requests as function input only, as it is the
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
-Get started with ASM monitored on your services →
 
 #### Additional language specific compatibility information
 
@@ -57,9 +53,10 @@ Go
 
 
 ### Google Cloud Run
-Notes
-- Google Cloud Run support is in public beta for ASM 
-- Threat Protection via Remote Config is not supported. However you can use Workflows to block IPs in your WAF instead
+
+<div class="alert alert-info">Google Cloud Run support for ASM serverless is in beta</a>.</div>
+
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
 |Type           	| Threat Detection	|  Vulnerability Management for OSS	| Vulnerability Management for Code-Level 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
@@ -71,31 +68,28 @@ Notes
 | PHP   	| 		        	|	            			|						|
 | Go   		| beta         	| 	               			|						|
 
-Get started with ASM monitored on your services →
-
 
 ### Azure App Service
-Notes
-- Only *web applications* are supported, Azure Functions are not supported with ASM
-- Threat Protection via Remote Config is not supported. However you can use Workflows to block IPs in your WAF instead
+
+<div class="alert alert-info">Azure App Service support for ASM serverless is in beta</a>.</div>
+
+- Only *web applications* are supported, Azure Functions are not supported with ASM.
+**Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type       | OS			        |Threat Detection	|  Vulnerability Management for OSS	 | Vulnerability Management for Code-Level 	|
-| ---  		  |   —			        | ---             |           ----                     |           ----         	                |
-| Java  		| Windows, Linux	| {{< X >}}    	 	| {{< X >}}	                         | beta			                                |
-| .NET    	| Windows, Linux	| {{< X >}}       | {{< X >}}      	                   |			                                    |
-| Node 		  | Linux			      | {{< X >}}     	| {{< X >}}        	                 | beta			                                |
-| Python   	| Linux			      | {{< X >}}       | {{< X >}}                          |			                                    |
-| Ruby   	  | Linux			      | {{< X >}}       | {{< X >}}      	                   |			                                    |
-| PHP   	  | Linux			      |		        	    | {{< X >}} 	                       |			                                    |
-| Go   		  | 			          |	      		      | {{< X >}} 	                       |			                                    |
-
-Get started with ASM monitored on your services →
-
-
-
+|Type       | OS			     |Threat Detection	|  Vulnerability Management for OSS	 | Vulnerability Management for Code-Level 	|
+|-----------|--------------------|------------------|------------------------------------|------------------------------------------|
+| Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | beta			                            |
+| .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                 |			                                |
+| Node 		| Linux			     | {{< X >}}        | {{< X >}}        	                 | beta			                            |
+| Python   	| Linux			     | {{< X >}}        | {{< X >}}                          |			                                |
+| Ruby   	| Linux			     | {{< X >}}        | {{< X >}}      	                 |			                                |
+| PHP   	| Linux			     |		        	| {{< X >}} 	                     |			                                |
+| Go   		| 			         |	      		    | {{< X >}} 	                     |			                                |
 
 
 [1]: /serverless/distributed_tracing/
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
 [4]: /serverless/guide/serverless_tracing_and_bundlers/
+[5]: /service_management/workflows/
+[6]: /security/application_security/threats/inapp_waf_rules/
