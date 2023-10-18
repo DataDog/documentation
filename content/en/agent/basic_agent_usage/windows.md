@@ -18,7 +18,7 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 ---
@@ -106,7 +106,7 @@ Each configuration item is added as a property to the command line. The followin
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/proxy/
+[2]: /agent/configuration/proxy/
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /network_monitoring/performance
 {{% /tab %}}
@@ -442,5 +442,5 @@ After configuration is complete, [restart the Agent][11].
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-commands/#restart-the-agent
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/configuration/agent-commands/#restart-the-agent

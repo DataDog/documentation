@@ -329,95 +329,131 @@ main:
     url: agent/logs/log_transport
     parent: agent_logs
     weight: 603
+  - name: Configuration
+    url: agent/configuration
+    parent: agent
+    identifier: agent_configuration
+    weight: 7
+  - name: Commands
+    url: agent/configuration/agent-commands/
+    parent: agent_configuration
+    weight: 701
+  - name: Configuration Files
+    url: agent/configuration/agent-configuration-files/
+    parent: agent_configuration
+    weight: 702
+  - name: Log Files
+    url: agent/configuration/agent-log-files/
+    parent: agent_configuration
+    weight: 703
+  - name: Status Page
+    url: agent/configuration/agent-status-page/
+    parent: agent_configuration
+    weight: 704
+  - name: Network Traffic
+    url: agent/configuration/network/
+    parent: agent_configuration
+    weight: 705
+  - name: Proxy Configuration
+    url: agent/configuration/proxy/
+    parent: agent_configuration
+    weight: 706
+  - name: FIPS Compliance
+    url: agent/configuration/agent-fips-proxy/
+    parent: agent_configuration
+    weight: 707
+  - name: Dual Shipping
+    url: agent/configuration/dual-shipping/
+    parent: agent_configuration
+    weight: 708
+  - name: Secrets Management
+    url: agent/configuration/secrets-management/
+    parent: agent_configuration
+    weight: 709
   - name: Remote Configuration
     url: agent/remote_config
     parent: agent
-    weight: 7
-  - name: Proxy
-    url: agent/proxy/
-    parent: agent
-    identifier: agent_proxy
-    weight: 9
+    weight: 8
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 10
+    weight: 9
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 1001
+    weight: 901
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 1002
+    weight: 902
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 1003
+    weight: 903  
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 11
+    weight: 10
     identifier: agent_troubleshooting
   - name: Container Hostname Detection
     url: agent/troubleshooting/hostname_containers/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1001
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1002
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1003
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1004
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1005
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1006
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1007
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1008
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1109
+    weight: 1009
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1110
+    weight: 1010
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1111
+    weight: 1011
     parent: agent_troubleshooting
   - name: High CPU or Memory Consumption
     url: agent/troubleshooting/high_memory_usage/
-    weight: 1112
+    weight: 1012
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 12
+    weight: 11
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 13
+    weight: 12
   - name: Containers
     url: containers/
     identifier: containers
@@ -2770,19 +2806,24 @@ main:
     parent: log_configuration
     identifier: log_indexes
     weight: 207
+  - name: Flex Logs
+    url: logs/log_configuration/flex_logs/
+    parent: log_configuration
+    identifier: flex_logs
+    weight: 208
   - name: Archives
     url: logs/log_configuration/archives/
     parent: log_configuration
     identifier: log_archives
-    weight: 208
+    weight: 209
   - name: Rehydrate from Archives
     url: logs/log_configuration/rehydrating
     parent: log_configuration
-    weight: 209
+    weight: 210
   - name: Forwarding
     url: logs/log_configuration/forwarding_custom_destinations/
     parent: log_configuration
-    weight: 210
+    weight: 211
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
@@ -2912,11 +2953,21 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
     weight: 3
+  - name: Monitoring
+    url: observability_pipelines/monitoring/
+    parent: observability_pipelines
+    identifier: observability_pipelines_monitoring
+    weight: 4
+  - name: Troubleshooting
+    url: observability_pipelines/troubleshooting/
+    parent: observability_pipelines
+    identifier: observability_pipelines_troubleshooting
+    weight: 5
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 4
+    weight: 6
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
@@ -2926,22 +2977,22 @@ main:
     url: observability_pipelines/reference/sources/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sources
-    weight: 401
+    weight: 501
   - name: Transforms
     url: observability_pipelines/reference/transforms/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_transforms
-    weight: 402
+    weight: 502
   - name: Sinks
     url: observability_pipelines/reference/sinks/
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
-    weight: 403
+    weight: 503
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 6
+    weight: 7
   - name: Architecture
     url: observability_pipelines/architecture/
     parent: observability_pipelines
@@ -3336,6 +3387,11 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 506
+  - name: Trace Qualification
+    url: security/application_security/threats/trace_qualification/
+    parent: appsec_threats
+    identifier: threats_trace_qualification
+    weight: 507
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
@@ -8608,8 +8664,7 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/

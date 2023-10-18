@@ -6,6 +6,9 @@ further_reading:
 - link: '/real_user_monitoring/session_replay/'
   tag: 'Documentation'
   text: 'Session Replay'
+- link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
+  tag: 'Blog'
+  text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
@@ -113,6 +116,8 @@ This means that Datadog was not able to match any user actions with the current 
 
 User information is not collected by default. Heatmaps use the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following the steps in [Modifying Data and Context][8].
 
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json

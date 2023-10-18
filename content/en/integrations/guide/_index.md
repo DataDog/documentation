@@ -17,7 +17,7 @@ cascade:
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag=" cloud" >}}Cloud metric delay{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Add event log files to the `Win32_NTLogEvent` WMI class{{< /nextlink >}}
     {{< nextlink href="integrations/guide/retrieving-wmi-metrics" tag=" Windows" >}}Retrieving WMI metrics{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag=" Mongo" >}}Collect Mongo custom metrics{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag=" MongoDB" >}}Collect MongoDB custom metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-metrics" tag=" Prometheus" >}}Mapping Prometheus metrics to Datadog metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag=" Prometheus" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag=" Webhooks" >}}Freshservice tickets using Webhooks{{< /nextlink >}}

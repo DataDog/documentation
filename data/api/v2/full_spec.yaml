@@ -12441,8 +12441,8 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role`, `team`
-            (beta), `user` (beta), and `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`,
+            `user`, and `org`.
 
             The org ID can be obtained through the api/v2/current_user API.
 
@@ -12453,7 +12453,7 @@ components:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
+              Supported types: `role`, `team`, `user`, and `org`.
 
               The org ID can be obtained through the api/v2/current_user API.
 
@@ -16043,11 +16043,6 @@ components:
           type: array
         schema-version:
           $ref: '#/components/schemas/ServiceDefinitionV2Dot2Version'
-        service-type:
-          description: 'The type of service. Datadog recognizes the following service
-            types: `database`, `cache`, `function`, `web`, `browser`, and `mobile`.'
-          example: web
-          type: string
         tags:
           description: A set of custom tags.
           example:
@@ -16065,6 +16060,8 @@ components:
           description: Importance of the service.
           example: High
           type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot2Type'
       required:
       - schema-version
       - dd-service
@@ -16153,6 +16150,26 @@ components:
           type: string
       type: object
       x-ignore-duplicate-object: true
+    ServiceDefinitionV2Dot2Type:
+      description: The type of service.
+      enum:
+      - web
+      - db
+      - cache
+      - function
+      - browser
+      - mobile
+      - custom
+      example: web
+      type: string
+      x-enum-varnames:
+      - WEB
+      - DB
+      - CACHE
+      - FUNCTION
+      - BROSWER
+      - MOBILE
+      - CUSTOM
     ServiceDefinitionV2Dot2Version:
       default: v2.2
       description: Schema version being used.
@@ -19746,8 +19763,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This API endpoint is in private beta. Request access
-        [here](https://docs.google.com/forms/d/e/1FAIpQLSdNejCvhMbdBW5nnGly1yvmYMn2Wpj4JOI0zKIiEx6O6I2dbQ/viewform).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
       description: Use this API endpoint to aggregate CI Visibility pipeline events
@@ -31192,7 +31207,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
-          description: OK for get user
+          description: OK
         '403':
           content:
             application/json:
@@ -31628,8 +31643,8 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles, teams
-    (beta), or users (beta)).
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams,
+    or users).
 
     The restriction policy determines who is authorized to perform what actions on
     the resource.'

@@ -31,9 +31,13 @@ The CI Visibility - RUM integration is only available for these versions of `cyp
 
 Only `cypress` is supported for this integration at the moment.
 
+<blockquote class="alert alert-info">
+From Browser SDK v5.0.0, enable the `allowUntrustedEvents` initialization parameter during Cypress tests to correctly capture clicks.
+</blockquote>
+
 ## Connect browser tests and RUM
 
-If you use Cypress to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked. 
+If you use Cypress to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
 A **Browser Sessions** tab appears in the Test Visibility test details side panel.
 
