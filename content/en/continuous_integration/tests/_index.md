@@ -116,16 +116,14 @@ In order to filter using these configurations tags, [you must create facets for 
 
 In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
 
-### Compatibility
-
-Not every language supported by CI Visibility has support for test suite level visibility:
-
-* [Swift][3] has complete support since `dd-sdk-swift-testing>=2.1.0`.
-* [.NET][4] has complete support since `dd-trace-dotnet>2.16.0`.
-* [JavaScript][5] has limited support since `dd-trace-js>=3.3.0`.
-* [Java][6] has complete support since `dd-trace-java>=1.12.0`.
-* [JUnit report uploads][7] has complete support since `datadog-ci>=2.17.0`.
-* [Python][8] has complete support since `dd-trace-py>=1.14.0`
+{{< whatsnext desc="See the documentation for languages that support test suite level visibility:" >}}
+    {{< nextlink href="continuous_integration/tests/setup/dotnet/#test-suite-level-visibility-compatibility" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/java/" >}}Java?{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/javascript/#test-suite-level-visibility-compatibility" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python?{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/swift/#test-suite-level-visibility-compatibility" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/junit_upload/#test-suite-level-visibility-compatibility" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Use CI tests data
 
@@ -144,12 +142,7 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[3]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[4]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[5]: /continuous_integration/tests/java/#compatibility
-[6]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
-[7]: /continuous_integration/tests/python/#compatibility
+[2]: /continuous_integration/explorer/facets/
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list
 [10]: https://app.datadoghq.com/ci/test-runs
