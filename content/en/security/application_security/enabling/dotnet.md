@@ -22,13 +22,14 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for .NET apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Application Vulnerability Management vulnerability detection features) for your target operating system architecture.
 
@@ -159,7 +160,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 

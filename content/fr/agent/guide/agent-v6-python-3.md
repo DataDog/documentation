@@ -132,8 +132,8 @@ metadata:
 spec:
   global:
     credentials:
-      apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
   override:
     # ...
     nodeAgent:

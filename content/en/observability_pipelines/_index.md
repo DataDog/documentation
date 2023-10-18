@@ -19,7 +19,7 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 
@@ -46,6 +46,9 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
+3. Discover how to deploy Observability Pipelines at production scale:
+    - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
+    - See [Best Practices for OP Worker Aggregator Architecture][4].
 
 ## Explore Observability Pipelines
 
@@ -62,7 +65,7 @@ Collect logs, metrics, and traces from any source and route them to any destinat
 
 Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs and metrics. Govern your telemetry by enforcing data standards and controlling tags for metrics.
 
-{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, AWS EC2 Metadata, dedupe and more." style="width:100%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, Amazon EC2 Metadata, dedupe and more." style="width:100%;" >}}
 
 ### Redact sensitive data from your telemetry data
 
@@ -82,3 +85,5 @@ Get a holistic view of all of your pipelines' topologies and monitor key perform
 
 [1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/production_deployment_overview/
+[4]: /observability_pipelines/architecture/

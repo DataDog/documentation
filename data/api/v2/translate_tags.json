@@ -1,4 +1,8 @@
 {
+  "apm-retention-filters": {
+    "name": "APM Retention Filters",
+    "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint."
+  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."
@@ -26,6 +30,10 @@
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
+  },
+  "container-images": {
+    "name": "Container Images",
+    "description": "The Container Images API allows you to query Container Image data for your organization."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -99,6 +107,10 @@
     "name": "Organizations",
     "description": "Create, edit, and manage your organizations. Read more about [multi-org accounts](https://docs.datadoghq.com/account_management/multi_organization)."
   },
+  "powerpack": {
+    "name": "Powerpack",
+    "description": "The powerpack endpoints allow you to:\n\n- Get a powerpack\n- Create a powerpack\n- Delete a powerpack\n- Get a list of all powerpacks\n\nThe Patch and Delete API methods can only be performed on a powerpack by\na user who has the powerpack create permission for that specific powerpack."
+  },
   "processes": {
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization."
@@ -109,7 +121,7 @@
   },
   "restriction-policies": {
     "name": "Restriction Policies",
-    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams (beta), or users (beta)).\nThe restriction policy determines who is authorized to perform what actions on the resource."
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",

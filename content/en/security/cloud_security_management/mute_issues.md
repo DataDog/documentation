@@ -49,7 +49,7 @@ To audit the mute history for a misconfiguration:
 
 4. Click the **Timeline** tab to view a chronological history of the misconfiguration. Hover over a mute or unmute action to view additional details, such as the reason for the mute, how long the mute is intended to last, and who muted it.
 
-{{< img src="security/csm/muted_finding_timeline.png" alt="The Timeline tab shows a chronological history of the finding, including details on when a misconfiguration was muted" style="width:90%;">}}
+{{< img src="security/csm/muted_finding_timeline.png" alt="The Timeline tab shows a chronological history of the misconfiguration, including details on when a misconfiguration was muted" style="width:90%;">}}
 
 ## Further reading
 

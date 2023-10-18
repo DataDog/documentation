@@ -9,15 +9,15 @@ aliases:
     - /integrations/faq/dogstatsd-and-docker
     - /agent/kubernetes/dogstatsd
 further_reading:
+    - link: 'integrations/node'
+      tag: 'Documentation'
+      text: 'Enable DogStatsD for NodeJS through the NodeJS integration'
     - link: 'developers/dogstatsd'
       tag: 'Documentation'
       text: 'Introduction to DogStatsD'
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
     - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
       tag: "Blog"
       text: "Monitor your Linux web apps on Azure App Service with Datadog"
@@ -81,9 +81,9 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 2. [Restart your Agent][3].
 
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /developers/dogstatsd/unix_socket/
-[3]: /agent/guide/agent-commands/
+[3]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 

@@ -119,7 +119,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -187,6 +187,10 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+        
+    # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the cluster endpoint.</div>
@@ -196,9 +200,9 @@ instances:
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -246,7 +250,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
+[2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -327,14 +331,14 @@ spec:
 ```
 <div class="alert alert-warning"><strong>Important</strong>: Use the Aurora instance endpoint here, not the Aurora cluster endpoint.</div>
 
-The Cluster Agent automatically registers this configuration and begin running the MySQL check.
+The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,7 +367,7 @@ If you have installed and configured the integrations and Agent as described and
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest
-[6]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql

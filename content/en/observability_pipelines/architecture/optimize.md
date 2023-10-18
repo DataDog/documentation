@@ -3,6 +3,14 @@ title: Optimizing the Instance
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## Instance sizing
 
 Compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These are ideal units for horizontally scaling the Observability Pipelines Worker aggregator. Observability Pipelines Worker can vertically scale and automatically take advantage of additional resources if you choose larger instances. Choose a size that allows for at least two Observability Pipelines Worker instances for your data volume to improve availability.
@@ -49,6 +57,8 @@ If you're using Observability Pipelines Worker's disk buffers for high durabilit
 ### Disk types
 
 Choose a disk type that optimizes for durability and recovery. For example, standard block storage is ideal because it is decoupled from the instance and replicates data across multiple disks for high durability. High-performance local drives are not recommended because their throughput exceeds Observability Pipelines Worker's needs, and their durability is reduced relative to block storage.
+
+In addition, network file systems like Amazon's EFS are usable, but only if sufficient throughput is provisioned; burst throughput modes do not suffice. Datadog recommends configuring at least twice the maximum expected throughput to give headroom for spikes in demand. The recommended disks above all have sufficient throughput that this is not a concern.
 
 See [Preventing Data Loss][1] for more information on why disks are used in this architecture.
 

@@ -3,7 +3,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: 설명서
   text: 이벤트 검색
-kind: 설명서
+kind: documentation
 title: 그룹 RUM 이벤트
 ---
 
@@ -21,7 +21,7 @@ title: 그룹 RUM 이벤트
 
 - 그룹별 이벤트 수
 
-  {{< img src="real_user_monitoring/explorer/group-count-of-events.png" alt=이벤트 수에 따른 그룹화" style="width:90%;" >}}
+  {{< img src="real_user_monitoring/explorer/group-count-of-events.png" alt="이벤트 수에 따른 그룹화" style="width:90%;" >}}
 
 - 그룹당 패싯에 대한 코딩된 값의 고유 개수
 

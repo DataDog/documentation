@@ -70,6 +70,8 @@ def security_rules(content, content_dir):
     """
     logger.info("Starting security rules action...")
     global_aliases = []
+    source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n\n"
+
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         data = None
 
@@ -124,7 +126,7 @@ def security_rules(content, content_dir):
 
         # The message of a detection rule is located in a Markdown file next to the rule definition
         with open(str(message_file_name), mode="r+") as message_file:
-            message = message_file.read()
+            message = source_comment + message_file.read()
 
             # strip out [text] e.g "[CIS Docker] Ensure that.." becomes "Ensure that..."
             parsed_title = re.sub(r"\[.+\]\s?(.*)", "\\1", data.get('name', ''), 0, re.MULTILINE)
@@ -157,12 +159,14 @@ def security_rules(content, content_dir):
 
             if 'posture-management' in relative_path:
                 if 'cloud-configuration' in relative_path:
-                    page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
-
+                    
                     if tags and 'dd_rule_type:combination' in tags:
                         page_data['rule_category'].append('CSM Security Issues')
-                    if tags and 'dd_rule_type:ciem' in tags:
+                    elif tags and 'dd_rule_type:ciem' in tags:
                         page_data['rule_category'].append('CSM Identity Risks')
+                    else:
+                        page_data['rule_category'].append('CSM Misconfigurations (Cloud)')
+
 
                 if 'infrastructure-configuration' in relative_path:
                     page_data['rule_category'].append('CSM Misconfigurations (Infra)')
