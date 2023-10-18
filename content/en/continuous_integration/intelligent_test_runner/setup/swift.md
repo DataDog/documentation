@@ -46,4 +46,3 @@ To enable Intelligent Test Runner, set the following environment variables:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/swift
-[2]: https://app.datadoghq.com/ci/settings/test-service
