@@ -19,7 +19,7 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 
