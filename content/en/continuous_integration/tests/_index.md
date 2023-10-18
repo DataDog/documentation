@@ -112,17 +112,17 @@ All tags with the `test.configuration` prefix are used as configuration tags, in
 
 In order to filter using these configurations tags, [you must create facets for these tags][2].
 
-## Test suite level visibility
+## Test suite-level visibility
 
 In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
 
-{{< whatsnext desc="See the documentation for languages that support test suite level visibility:" >}}
-    {{< nextlink href="continuous_integration/tests/setup/dotnet/#test-suite-level-visibility-compatibility" >}}.NET{{< /nextlink >}}
+{{< whatsnext desc="See the compatibility information for languages that support test suite-level visibility:" >}}
+    {{< nextlink href="continuous_integration/tests/setup/dotnet/?tab=testsuitelevelvisibility" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/javascript/?tab=testsuitelevelvisibility" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/swift/?tab=testsuitelevelvisibility" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/junit_upload/?tab=testsuitelevelvisibility" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/setup/java/" >}}Java?{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/javascript/#test-suite-level-visibility-compatibility" >}}JavaScript{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/setup/python" >}}Python?{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/swift/#test-suite-level-visibility-compatibility" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/junit_upload/#test-suite-level-visibility-compatibility" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Use CI tests data

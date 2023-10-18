@@ -27,19 +27,35 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 
 ## Compatibility
 
+{{< tabs >}}
+{{% tab "Test Visibility" %}}
+
 Supported languages:
-* Swift >= 5.2
-* Objective-C >= 2.0
+
+| Language | Version | Notes |
+|---|---|---|
+| Swift | >= 5.2 | If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks. |
+| Objective-C | >= 2.0 | |
 
 Supported platforms:
-* iOS >= 11.0
-* macOS >= 10.13
-* tvOS >= 11.0
 
-**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
+| Platform | Version |
+|---|---|
+| iOS | >= 11.0 |
+| macOS | >= 10.13 |
+| tvOS | >= 11.0 |
 
-### Test suite level visibility compatibility
-[Test suite level visibility][1] is only supported from `dd-sdk-swift-testing>=2.1.0`.
+{{% /tab %}}
+{{% tab "Test Suite-Level Visibility" %}}
+
+Supported Datadog tracing library:
+
+| Datadog Library | Version |
+|---|---|
+| `dd-sdk-swift-testing` | >= 2.1.0 |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Installing the Swift testing SDK
 
