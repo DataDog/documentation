@@ -123,7 +123,6 @@ You can use the following docblock at the top of your test file to mark a suite 
  * @datadog {"unskippable": true}
  */
 
-// your tests continue normally
 describe('context', () => {
   it('can sum', () => {
     expect(1 + 2).to.equal(3)
