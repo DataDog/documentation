@@ -65,8 +65,6 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
-{{% ci-itr-agentless %}}
-
 After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
