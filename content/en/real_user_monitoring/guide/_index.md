@@ -43,6 +43,11 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Mobile RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Update the RUM Mobile SDKs{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Session Replay:" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Allow third-party service workers for Session Replay{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Use Session Replay in your Support workflows{{< /nextlink >}}
