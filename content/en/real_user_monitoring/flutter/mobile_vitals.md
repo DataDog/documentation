@@ -22,9 +22,9 @@ You can view Mobile Vitals for your application by navigating to  **UX Monitorin
 
 {{< img src="real_user_monitoring/flutter/flutter-mobile-vitals-1.png" alt="Mobile Vitals in the Performance Summary tab" style="width:90%;">}}
 
-To access the RUM mobile app performance dashboard, switch to the **Performance** tab.
+To access the RUM mobile app performance dashboard, switch to the **Performance** tab, then click the **View Dashboard** link.
 
-{{< img src="real_user_monitoring/flutter/flutter-performance-overview.png" alt="Mobile performance overview dashboard" style="width:90%;">}}
+{{< img src="real_user_monitoring/flutter/flutter-mobile-vitals.png" alt="Mobile performance overview dashboard" style="width:90%;">}}
 
 Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph.
 

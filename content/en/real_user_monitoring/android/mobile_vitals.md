@@ -15,7 +15,7 @@ further_reading:
 
 Real User Monitoring offers Mobile Vitals, a set of metrics inspired by [Android Vitals][1], that can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
 
-You can view Mobile Vitals for your application by navigating to  **UX Monitoring > Performance Monitoring** and selecting your application.
+You can view Mobile Vitals for your application by navigating to **UX Monitoring > Performance Monitoring** and selecting your application.
 
 {{< img src="real_user_monitoring/android/android-mobile-vitals.png" alt="Mobile Vitals on the Performance Summary tab" style="width:90%;">}}
 
