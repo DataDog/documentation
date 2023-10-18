@@ -13,7 +13,7 @@ Follow this guide to migrate between major versions of the Mobile RUM, Logs, and
 
 ## From v1 to v2
 
-The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to to integrate only what is needed into your application.
+The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
 
 SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
