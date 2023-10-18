@@ -23,7 +23,7 @@ Distributions provide enhanced query functionality and configuration options tha
   
      _"What has the 99.9th percentile load time for my application been over the past week?"_
 
-  * **Standard deviation over any timeframe
+  * **Standard deviation over any timeframe**:
   
      _"What is the standard deviation (stddev) of my application's CPU consumption over the past month?"_
 
