@@ -40,7 +40,7 @@ We have contributed the service definition schema to the open source [JSON Schem
 This enables your IDE to validate your data as you edit the file, as long as the file is named service.datadog.yaml. 
 Validation messages will allow you to correct any issues before sending any data to the Service Catalog.  
 
-{{< img src="service-definition-data-validation.mp4" alt="IDE showing real-time validation messages for service definition files." >}}
+{{< img src="tracing/service_catalog/service-definition-data-validation.mp4" alt="IDE showing real-time validation messages for service definition files." video="true" >}}
 
 ## Further reading
 
