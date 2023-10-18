@@ -169,7 +169,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]:/metrics/metrics-without-limits
+[10]: /metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/

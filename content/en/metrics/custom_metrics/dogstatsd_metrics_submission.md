@@ -1137,6 +1137,6 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /metrics/types/?tab=gauge#definition
 [6]: /metrics/types/?tab=histogram#definition
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
 [9]: /metrics/types/?tab=distribution#definition
