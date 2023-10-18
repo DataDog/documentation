@@ -204,18 +204,6 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["./mvnw", "spring-boot:run"]
 ```
 
-If you require your entrypoint to be instrumented as well, you can swap your entrypoint and CMD arguments instead. To understand why this may be required, please refer to [how serverless-init works](#how-it-works)
-
-{{< highlight dockerfile "hl_lines=7" >}}
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
-ENV DD_SERVICE=datadog-demo-run-nodejs
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENTRYPOINT ["/app/datadog-init"]
-CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
-{{< /highlight >}}
-
 #### Explanation
 
 1. Copy the Datadog `serverless-init` into your Docker image.
