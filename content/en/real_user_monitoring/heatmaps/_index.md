@@ -6,6 +6,9 @@ further_reading:
 - link: '/real_user_monitoring/session_replay/'
   tag: 'Documentation'
   text: 'Session Replay'
+- link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
+  tag: 'Blog'
+  text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
 ---
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
@@ -71,7 +74,7 @@ Scrollmaps show a visual of the aggregate scroll activity on a given page. Use S
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-v3.png" alt="Scrollmap of the bedding page in a sample ecommerce application" style="width:100%;">}}
 
-The panel to the right of the Scrollmap provides high-level insights with direct links to query results, such as a link to a list of views where the user scrolled past a given percentile. Below the insight panel is a minimap of the page and a distribution graph displaying granular scroll data, useful for identifying where the biggest drop-off occurs.
+The panel to the left of the Scrollmap provides high-level insights with direct links to query results, such as a link to a list of views where the user scrolled past a given percentile. Below the insight panel is a minimap of the page and a distribution graph displaying granular scroll data, useful for identifying where the biggest drop-off occurs.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-insights-panel.png" alt="A screenshot of the queries for scroll data insights" style="width:50%;">}}
 
@@ -113,6 +116,8 @@ This means that Datadog was not able to match any user actions with the current 
 
 User information is not collected by default. Heatmaps use the user information available in your session data to display relevant insights on behavior. You can set up user information in RUM by following the steps in [Modifying Data and Context][8].
 
+## Further reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
