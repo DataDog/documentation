@@ -261,9 +261,9 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 
 [1]: /logs/
 [2]: /help/
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 [4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide/
