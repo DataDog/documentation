@@ -10,12 +10,11 @@ further_reading:
 ## Overview
 
 
-<div class="alert alert-info">In order to use multiple instances of the SDK, you will need to adopt version 2.0.0 or higher. For that please see our [Upgrade RUM Mobile SDKs][1] guide.</div>
+<div class="alert alert-info">In order to use multiple instances of the SDK, you will need to adopt version <code>2.0.0</code> or higher. See the <a href="https://docs.datadoghq.com/real_user_monitoring/mobile-sdk-upgrade">Upgrade RUM Mobile SDKs</a> guide.</div>
 
-Follow this guide to be able to use multiple named instances of the SDK.
-Many methods of the SDK can optionally take a SDK instance as an argument. If not provided, the call is associated with the default (nameless) SDK instance.
+Follow this guide to use multiple named instances of the SDK. Many methods of the SDK optionally take an SDK instance as an argument. If none is provided, the call is associated with the default (nameless) SDK instance.
 
-**Note**: The SDK instance name should be consistent between application runs. Storage paths for SDK events are dependent on with it.
+**Note**: The SDK instance name should be consistent between application runs. Storage paths for SDK events depend on this.
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -71,7 +70,7 @@ Logs.enable(in: core)
 Trace.enable(in: core)
 ```
 
-Once initialized, you can retrieve the named SDK instance by calling `Datadog.sdkInstance(named: "<name>")` and use it for accessing the products.
+Once the named SDK instance is initialized, you can retrieve it by calling `Datadog.sdkInstance(named: "<name>")` and use it as shown below.
 
 ```swift
 import DatadogCore
@@ -109,4 +108,3 @@ let monitor = RUMMonitor.shared(in: core)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile-sdk-upgrade

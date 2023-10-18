@@ -9,22 +9,21 @@ further_reading:
 
 ## Overview
 
-Follow this guide to migrate between major versions of the Mobile RUM, Logs and Trace SDKs. See each SDKs documentation for details on its features and capabilities.
+Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
 ## From v1 to v2
 
-The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. 
-Different products (RUM, Trace, Logs, Session Replay, etc.) are now extracted into individual modules. This facilitates integrations by allowing you to integrate only what is needed into your application.
+The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to to integrate only what is needed into your application.
 
-Alongside this we offer an unification of API layout, and naming aligment between iOS and Android SDKs with other Datadog products.
+SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
-As a new product offering, SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
 ### Modules
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Whereas all products in version 1.x were contained in the single artifact `com.datadoghq:dd-sdk-android:x.x.x`, you now need to adopt the following artifacts:
+Artifacts are modularized in v2. Adopt the following artifacts:
 
 * RUM: `com.datadoghq:dd-sdk-android-rum:x.x.x`
 * Logs: `com.datadoghq:dd-sdk-android-logs:x.x.x`
@@ -33,14 +32,13 @@ Whereas all products in version 1.x were contained in the single artifact `com.d
 * WebView Tracking: `com.datadoghq:dd-sdk-android-webview:x.x.x`
 * OkHttp instrumentation: `com.datadoghq:dd-sdk-android-okhttp:x.x.x`
 
-**Note**: If you utilize NDK Crash Reporting and WebView Tracking, you also need to add RUM and/or Logs artifacts to be able to report events to RUM and/or Logs respectively.
+**Note**: If you use NDK Crash Reporting and WebView Tracking, you must add RUM and Logs artifacts to report events to RUM and Logs respectively.
 
-Reference to the `com.datadoghq:dd-sdk-android` artifact should be removed from your Gradle buildscript, this artifact doesn't exist anymore.
+Reference to the `com.datadoghq:dd-sdk-android` artifact should be removed from your Gradle build script, as this artifact doesn't exist anymore.
 
 **Note**: The Maven coordinates of all the other artifacts stay the same.
 
-<div class="alert alert-warning">Support of Android API 19 (KitKat) was dropped. The minimum SDK supported is now API 21 (Lollipop).
-Kotlin 1.7 is required in order to integrate the SDK. SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
+<div class="alert alert-warning">v2 does not support Android API 19 (KitKat). The minimum SDK supported is now API 21 (Lollipop). Kotlin 1.7 is required. The SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
 
 Should you encounter an error such as the following:
 
@@ -49,7 +47,7 @@ A failure occurred while executing com.android.build.gradle.internal.tasks.Check
 Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
 ```
 
-You'll need to add the following rules to your buildscript (more details [here][2]):
+Add the following rules to your build script (more details in the relevant [Stack Overflow issue][2]):
 
 ```kotlin
 dependencies {
@@ -64,12 +62,12 @@ dependencies {
 }
 ```
 
-As alway, refer to our [Android sample application][3] for an example on how to setup the SDK.
+See the [Android sample application][3] for an example of how to set up the SDK.
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Whereas all products in version 1.x were contained in the single module, `Datadog`, you now need to adopt the following libraries:
+Libraries are modularized in v2. Adopt the following libraries:
 
 - `DatadogCore`
 - `DatadogLogs`
@@ -149,7 +147,7 @@ let package = Package(
   ```
 </details>
 
-**Note**: In case of Crash Reporting and WebView Tracking usage it's also needed to add RUM and/or Logs modules to be able to report events to RUM and/or Logs respectively.
+**Note**: When using Crash Reporting and WebView Tracking, you must add the RUM and Logs modules to report events to RUM and Logs respectively.
 
 {{% /tab %}}
 
@@ -160,23 +158,23 @@ let package = Package(
 ### SDK initialization
 {{< tabs >}}
 {{% tab "Android" %}}
-With the extraction of different products into independent modules the way the SDK is configured is altered and moved to dedicated modules.
+With the extraction of different products into independent modules, the SDK configuration is organized by module.
 
 `com.datadog.android.core.configuration.Configuration.Builder` class has the following changes:
 
-* Client token, env name, variant name (default value is empty string), service name (default value is application ID taken from the manifest) should be provided in the constructor.
-* The `com.datadog.android.core.configuration.Credentials` class which was containing the parameters mentioned above is removed.
-* `logsEnabled`, `tracesEnabled`, `rumEnabled` are removed from the constructor in favour of the individual products configuration (see below).
-* `crashReportsEnabled` constructor argument is removed. You can enable/disable JVM crash reporting by using `Configuration.Builder.setCrashReportsEnabled` method, by default JVM crash reporting is enabled.
-* RUM, Logs, Trace products configuration methods are removed from `Configuration.Builder` in favour of the individual products configuration (see below).
+* Client token, env name, variant name (default value is empty string), and service name (default value is application ID taken from the manifest) should be provided in the constructor.
+* The `com.datadog.android.core.configuration.Credentials` class is removed.
+* `logsEnabled`, `tracesEnabled`, and `rumEnabled` are removed from the constructor in favour of individual product configuration (see below).
+* `crashReportsEnabled` constructor argument is removed. You can enable or disable JVM crash reporting with the `Configuration.Builder.setCrashReportsEnabled` method. By default, JVM crash reporting is enabled.
+* RUM, Logs, and Trace product configuration methods are removed from `Configuration.Builder` in favor of the individual product configuration (see below).
 
-`Datadog.initialize` method has `Credentials` class removed from the list of the arguments.
+The `Datadog.initialize` method has the `Credentials` class removed from the list of the arguments.
 
-`com.datadog.android.plugin` package and all related classes/methods are removed.
+The `com.datadog.android.plugin` package and all related classes/methods are removed.
 
 ### Logs
 
-All the classes related to the Logs product are now strictly contained in the `com.datadog.android.log` package.
+All the classes related to the Logs product are strictly contained in the `com.datadog.android.log` package.
 
 To use Logs product, import the following artifact:
 
@@ -212,7 +210,7 @@ API changes:
 
 ### Trace 
 
-All the classes related to the Trace product are now strictly contained in the `com.datadog.android.trace` package (this means that all classes residing in `com.datadog.android.tracing` before have moved).
+All the classes related to the Trace product are strictly contained in the `com.datadog.android.trace` package (this means that all classes residing in `com.datadog.android.tracing` before have moved).
 
 To use the Trace product, import the following artifact:
 
@@ -220,7 +218,7 @@ To use the Trace product, import the following artifact:
 implementation("com.datadoghq:dd-sdk-android-trace:x.x.x")
 ```
 
-Enable the Trace product with the following snippet:
+You can enable the Trace product with the following snippet:
 
 ```kotlin
 val traceConfig = TraceConfiguration.Builder()
@@ -247,7 +245,7 @@ API changes:
 
 ### RUM
 
-All classes related to the RUM product are now strictly contained in the `com.datadog.android.rum` package.
+All classes related to the RUM product are strictly contained in the `com.datadog.android.rum` package.
 
 To use the RUM product, import the following artifact:
 
@@ -255,7 +253,7 @@ To use the RUM product, import the following artifact:
 implementation("com.datadoghq:dd-sdk-android-rum:x.x.x")
 ```
 
-The RUM product can be enabled with the following snippet:
+You can enable the RUM product with the following snippet:
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(rumApplicationId)
@@ -294,17 +292,17 @@ API changes:
 
 ### NDK Crash Reporting 
 
-The artifact name stays the same as before: `com.datadoghq:dd-sdk-android-ndk:x.x.x`
+The artifact name stays the same as before: `com.datadoghq:dd-sdk-android-ndk:x.x.x`.
 
-NDK Crash Reporting can be enabled using the following snippet:
+You can enable NDK Crash Reporting with the following snippet:
 
 ```kotlin
 NdkCrashReports.enable()
 ```
 
-This configuration replaces the `com.datadog.android.core.configuration.Configuration.Builder.addPlugin` call used before.
+This configuration replaces the `com.datadog.android.core.configuration.Configuration.Builder.addPlugin` call.
 
-**Note**: You should have RUM and/or Logs products enabled in order to receive NDK crash reports in RUM and/or Logs.
+**Note**: You should have RUM and Logs products enabled to receive NDK crash reports in RUM and Logs respectively.
 
 ### WebView Tracking
 
@@ -316,7 +314,7 @@ You can enable WebView Tracking with the following snippet:
 WebViewTracking.enable(webView, allowedHosts)
 ```
 
-**Note**: You should have RUM and/or Logs products enabled in order to receive events coming from WebView in RUM and/or Logs.
+**Note**: You should have RUM and Logs products enabled to receive events coming from WebView in RUM and Logs respectively.
 
 API changes:
 
@@ -326,22 +324,23 @@ API changes:
 |`com.datadog.android.rum.webview.RumWebChromeClient`|This class was removed. Use `WebViewTracking` instead.|
 |`com.datadog.android.rum.webview.RumWebViewClient`|This class was removed. Use `WebViewTracking` instead.|
 
-### OkHttp Tracking changes
+### OkHttp Tracking
 
-In order to be able to use OkHttp Tracking you need to import the following artifact:
+To use OkHttp Tracking, import the following artifact:
 
 ```kotlin
 implementation("com.datadoghq:dd-sdk-android-okhttp:x.x.x")
 ```
 
-OkHttp instrumentation now supports the case when Datadog SDK is initialized after the OkHttp client, allowing you to create `com.datadog.android.okhttp.DatadogEventListener`, `com.datadog.android.okhttp.DatadogInterceptor`, and `com.datadog.android.okhttp.trace.TracingInterceptor` before Datadog SDK. OkHttp instrumentation starts reporting events to Datadog once Datadog SDK is initialized.
+OkHttp instrumentation supports the initialization of the Datadog SDK after the OkHttp client, allowing you to create `com.datadog.android.okhttp.DatadogEventListener`, `com.datadog.android.okhttp.DatadogInterceptor`, and `com.datadog.android.okhttp.trace.TracingInterceptor` before the Datadog SDK. OkHttp instrumentation starts reporting events to Datadog once the Datadog SDK is initialized.
 
-Also, both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` improve the integration with a remote configuration system, allowing you to control sampling dynamically.
-In order to do that, you need to provide your own implementation of the `com.datadog.android.core.sampling.Sampler` interface in the `com.datadog.android.okhttp.DatadogInterceptor`/`com.datadog.android.okhttp.trace.TracingInterceptor` constructor. It is queried for each request to make the sampling decision.
+Both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` allow you to control sampling dynamically through integration with a remote configuration system. 
+
+To dynamically adjust sampling, provide your own implementation of the `com.datadog.android.core.sampling.Sampler` interface in the `com.datadog.android.okhttp.DatadogInterceptor`/`com.datadog.android.okhttp.trace.TracingInterceptor` constructor. It is queried for each request to make the sampling decision.
 
 ### `dd-sdk-android-ktx` module removal
 
-In order to provide the better granularity for the Datadog SDK libraries used, `dd-sdk-android-ktx` module which was containing extension methods for both RUM and Trace features is removed and the code was re-arranged between the other modules:
+To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-ktx` module is removed. The code is distributed between the other modules to provide extension methods for both RUM and Trace features.
 
 | `1.x`                                                                                     | '2.0'                                                                                       | Module name                       |
 |-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-----------------------------------|
@@ -363,12 +362,12 @@ In order to provide the better granularity for the Datadog SDK libraries used, `
 
 ### Session Replay
 
-On instructions how to setup Mobile Session Replay reference to [Mobile Session Replay Setup and Configuration][4]
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-With the extraction of different products into independent modules the way the SDK is configured is altered and moved to dedicated modules.
+With the extraction of different products into independent modules, the SDK configuration is organized by module.
 
 > The SDK must be initialized before enabling any product.
 
@@ -417,7 +416,7 @@ API changes:
 
 ### Logs
 
-All the classes related to Logs are now strictly in the `DatadogLogs` module. You first need to enable the product:
+All the classes related to Logs are strictly in the `DatadogLogs` module. You first need to enable the product:
 
 ```swift
 import DatadogLogs
@@ -452,7 +451,7 @@ API changes:
 
 ### Trace
 
-All the classes related to Trace are now strictly in the `DatadogTrace` module. You first need to enable the product:
+All the classes related to Trace are strictly in the `DatadogTrace` module. You first need to enable the product:
 
 ```swift
 import DatadogTrace
@@ -485,7 +484,7 @@ API changes:
 
 ### RUM
 
-All the classes related to RUM are now strictly in the `DatadogRUM` module. You will first need to enable the product:
+All the classes related to RUM are strictly in the `DatadogRUM` module. You first need to enable the product:
 
 ```swift
 import DatadogRUM
@@ -526,7 +525,7 @@ API changes:
 
 ### Crash Reporting
 
-To enable Crash Reporting, make sure to also enable RUM and/or Logs.
+To enable Crash Reporting, make sure to enable RUM and Logs to report to those products respectively.
 
 ```swift
 import DatadogCrashReporting
@@ -540,7 +539,7 @@ CrashReporting.enable()
 
 ### WebView Tracking 
 
-To enable WebViewTracking, make sure to also enable RUM and/or Logs.
+To enable WebViewTracking, make sure to also enable RUM and Logs to report to those products respectively.
 
 ```swift
 import WebKit
@@ -556,7 +555,7 @@ WebViewTracking.enable(webView: webView)
 
 ### Session Replay
 
-On instructions how to setup Mobile Session Replay reference to [Mobile Session Replay Setup and Configuration][5]
+For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
 
 {{% /tab %}}
 {{< /tabs >}}
