@@ -30,14 +30,13 @@ See [Compatibility][4] requirements for information about what ASM features are 
 Configuring ASM for AWS Lambda generally involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
-2. Setting up ASM instrumentation by using the [Datadog Serverless Framework plugin][6] or manually setting the different layers.
+2. Setting up ASM instrumentation by using the Datadog CI, AWS CDK, [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ### Prerequisites
 
 - [Serverless APM][2] is configured on the Lambda function to send traces directly to Datadog. 
-
-  **Note**: The X-Ray integration for sending trace data to APM does not support the data ASM needs to monitor functions.
+- X-Ray tracing _only_ isn't supported by ASM. Add the tracing library by following the steps below.
 
 ### Get started
 
@@ -224,11 +223,7 @@ To install and configure the Datadog Serverless Framework plugin:
 
 The Datadog CLI modifies existing Lambda function configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-If you already have tracing enabled on your functions, run the following command with the `--appsec` flag to enable threat detection.
-
-**Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
-
-To instrument your Lambda functions, run the following command:
+**If you already have tracing enabled on your functions**, run the following command with the `--appsec` flag to enable threat detection, and skip steps 1-6 below.
 
  ```sh
   datadog-ci lambda instrument --appsec -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
@@ -237,9 +232,11 @@ To instrument your Lambda functions, run the following command:
   - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
   - Replace `<aws_region>` with the AWS region name.
 
+  **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+
 Additional parameters can be found in the [CLI documentation][2].
 
-If you are configuring initial tracing for your functions, follow these steps:
+**If you are configuring initial tracing for your functions**, perform the following steps:
 
 1. Install the Datadog CLI client:
 
@@ -281,8 +278,6 @@ If you are configuring initial tracing for your functions, follow these steps:
 
 6. Instrument your Lambda functions:
 
-    **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
-
     To instrument your Lambda functions, run the following command.
 
     ```sh
@@ -293,6 +288,8 @@ If you are configuring initial tracing for your functions, follow these steps:
     - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. 
     - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
     - Replace `<aws_region>` with the AWS region name.
+
+   **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
 
     Additional parameters can be found in the [CLI documentation][2].
 
@@ -344,9 +341,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 
-
 {{% /tab %}}
-
 {{% tab "Serverless Plugin" %}}
 
 Set the `enableASM` configuration parameter to `true` in your `serverless.yml` file. See the [Serverless integration][6] docs for more information.
@@ -378,7 +373,7 @@ COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 ```
@@ -405,7 +400,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ENV DD_SERVICE=datadog-demo-run-nodejs
    ENV DD_ENV=datadog-demo
    ENV DD_VERSION=1
-   ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+   ENV DD_APPSEC_ENABLED=1
    ```
 
 4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
@@ -428,7 +423,7 @@ COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/nodejs/bin/node", "/path/to/your/app.js"]
 {{< /highlight >}}
 
@@ -440,7 +435,7 @@ COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
 {{< /highlight >}}
@@ -459,7 +454,7 @@ RUN pip install --target /dd_tracer/python/ ddtrace
 ENV DD_SERVICE=datadog-demo-run-python
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 ```
@@ -482,7 +477,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ENV DD_SERVICE=datadog-demo-run-python
    ENV DD_ENV=datadog-demo
    ENV DD_VERSION=1
-   ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+   ENV DD_APPSEC_ENABLED=1
    ```
 
 4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
@@ -504,7 +499,7 @@ RUN pip install --target /dd_tracer/python/ ddtrace
 ENV DD_SERVICE=datadog-demo-run-python
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 {{< /highlight >}}
 
@@ -516,7 +511,7 @@ RUN pip install --target /dd_tracer/python/ ddtrace
 ENV DD_SERVICE=datadog-demo-run-python
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 {{< /highlight >}}
@@ -536,7 +531,7 @@ ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["./mvnw", "spring-boot:run"]
 ```
@@ -549,7 +544,7 @@ COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
 {{< /highlight >}}
@@ -572,7 +567,7 @@ CMD ["/your_entrypoint.sh", "/nodejs/bin/node", "/path/to/your/app.js"]
    ENV DD_SERVICE=datadog-demo-run-java
    ENV DD_ENV=datadog-demo
    ENV DD_VERSION=1
-   ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+   ENV DD_APPSEC_ENABLED=1
    ```
 
 4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
@@ -595,7 +590,7 @@ ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "./mvnw", "spring-boot:run"]
 {{< /highlight >}}
 
@@ -607,7 +602,7 @@ ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "./mvnw", "spring-boot:run"]
 {{< /highlight >}}
@@ -619,7 +614,7 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 {{% /tab %}}
 {{% tab "Go" %}}
 
-[Manually install][1] the Go tracer before you deploy your application. If you want to enable ASM, compile your go binary with the “appsec” tag enabled (via go build --tags “appsec” …). Add the following instructions and arguments to your Dockerfile:
+[Manually install][1] the Go tracer before you deploy your application. Compile your go binary with the "appsec" tag enabled (`go build --tags "appsec" ...`). Add the following instructions and arguments to your Dockerfile:
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -627,8 +622,7 @@ ENTRYPOINT ["/app/datadog-init"]
 ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
-CMD ["/path/to/your-go-binary"]
+ENV DD_APPSEC_ENABLED=1
 ```
 
 #### Explanation
@@ -649,7 +643,7 @@ CMD ["/path/to/your-go-binary"]
    ENV DD_SERVICE=datadog-demo-run-go
    ENV DD_ENV=datadog-demo
    ENV DD_VERSION=1
-   ENV DD_APPSEC_ENABLED=1 # if you want to enable ASM
+   ENV DD_APPSEC_ENABLED=1
    ```
 
 4. Execute your binary application wrapped in the entrypoint. Adapt this line to your needs.
@@ -665,7 +659,7 @@ COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "/path/to/your-go-binary"]
 {{< /highlight >}}
 
@@ -676,7 +670,7 @@ COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 {{< /highlight >}}
@@ -698,7 +692,7 @@ ENTRYPOINT ["/app/datadog-init"]
 ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 CMD ["/path/to/your-go-binary"]
 ```
 
@@ -716,7 +710,7 @@ COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["dotnet", "helloworld.dll"]
 ```
@@ -739,7 +733,7 @@ CMD ["dotnet", "helloworld.dll"]
    ENV DD_SERVICE=datadog-demo-run-dotnet
    ENV DD_ENV=datadog-demo
    ENV DD_VERSION=1
-   ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+   ENV DD_APPSEC_ENABLED=1
    ```
 
 4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
@@ -761,7 +755,7 @@ COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 CMD ["/app/datadog-init", "dotnet", "helloworld.dll"]
 {{< /highlight >}}
 
@@ -773,7 +767,7 @@ COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "dotnet", "helloworld.dll"]
 {{< /highlight >}}
@@ -794,7 +788,7 @@ COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["rails", "server", "-b", "0.0.0.0"]
@@ -811,7 +805,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
    ```dockerfile
    ENV DD_SERVICE=datadog-demo-run-ruby
    ENV DD_ENV=datadog-demo
-   ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+   ENV DD_APPSEC_ENABLED=1
    ENV DD_VERSION=1
    ```
 
@@ -838,7 +832,7 @@ COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 CMD ["/app/datadog-init", "rails", "server", "-b", "0.0.0.0"]
 {{< /highlight >}}
@@ -850,7 +844,7 @@ COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1 # Optional: if you want to enable ASM
+ENV DD_APPSEC_ENABLED=1
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 ENTRYPOINT ["/app/datadog-init"]
 CMD ["your_entrypoint.sh", "rails", "server", "-b", "0.0.0.0"]
@@ -974,9 +968,7 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 {{% /tab %}}
 {{< /tabs >}}
 
-## Azure App Services
-
-<div class="alert alert-info">ASM support for Azure App Services is in beta.</a></div>
+## Azure App Service
 
 ### Setup
 #### Set application settings
@@ -1050,7 +1042,7 @@ A few minutes after you enable your application and exercise it, **threat inform
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
+[1]: https://app.datadoghq.com/services?query=type%3Afunction%20&env=prod&groupBy=&hostGroup=%2A&lens=Security&sort=-attackExposure&view=list
 [2]: /serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
 [4]: /security/application_security/enabling/compatibility/serverless
