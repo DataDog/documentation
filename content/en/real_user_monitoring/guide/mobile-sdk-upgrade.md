@@ -364,6 +364,8 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][4].
 
+[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -557,6 +559,8 @@ WebViewTracking.enable(webView: webView)
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
 
+[5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -568,5 +572,3 @@ For instructions on setting up Mobile Session Replay, see [Mobile Session Replay
 [1]: /real_user_monitoring/session_replay/mobile/
 [2]: https://stackoverflow.com/a/75298544
 [3]: https://github.com/DataDog/dd-sdk-android/sample
-[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
-[4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios

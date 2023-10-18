@@ -10,7 +10,7 @@ further_reading:
 ## Overview
 
 
-<div class="alert alert-info">In order to use multiple instances of the SDK, you will need to adopt version <code>2.0.0</code> or higher. See the <a href="https://docs.datadoghq.com/real_user_monitoring/mobile-sdk-upgrade">Upgrade RUM Mobile SDKs</a> guide.</div>
+<div class="alert alert-info">In order to use multiple instances of the SDK, you will need to adopt version <code>2.0.0</code> or higher. See the <a href="https://docs.datadoghq.com/real_user_monitoring/guide/mobile-sdk-upgrade">Upgrade RUM Mobile SDKs</a> guide.</div>
 
 Follow this guide to use multiple named instances of the SDK. Many methods of the SDK optionally take an SDK instance as an argument. If none is provided, the call is associated with the default (nameless) SDK instance.
 
