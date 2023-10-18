@@ -32,7 +32,7 @@ To validate your service definition file in-app:
 
 There are built-in validation mechanisms here that will prevent you from sending any incorrect metadata into Service Catalog. 
 
-IMAGE 
+{{< img src="tracing/service_catalog/service_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
 ### Using a YAML Validator Extension in Your IDE of Choice
 
@@ -40,7 +40,7 @@ We have contributed the service definition schema to the open source [JSON Schem
 This enables your IDE to validate your data as you edit the file, as long as the file is named service.datadog.yaml. 
 Validation messages will allow you to correct any issues before sending any data to the Service Catalog.  
 
-IMAGE
+{{< img src="service-definition-data-validation.mp4" alt="IDE showing real-time validation messages for service definition files." >}}
 
 ## Further reading
 
