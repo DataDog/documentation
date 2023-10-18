@@ -26,7 +26,7 @@ ssl: allow
 Restart the agent after applying this change.
 {{% /tab %}}
 {{% tab "Google Cloud SQL" %}}
-Agent versions prior to `7.50` may attempt to connect to the `cloudsqladmin` database which can generate error logs on the database as well as warning logs in the agent. In order to silence warnings, it is recommended to add `cloudsqladmin` to the [ignore_databases][1] list:
+Agent versions prior to `7.50` may attempt to connect to the `cloudsqladmin` database. This can cause error logs on the database as well as warning logs in the agent. In order to silence those logs, it is recommended to add `cloudsqladmin` to the [ignore_databases][1] list:
 
 ```yaml
 ignore_databases:
