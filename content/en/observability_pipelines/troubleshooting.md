@@ -4,6 +4,10 @@ kind: documentation
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 ## Overview
 If you experience unexpected behavior with Datadog Observability Pipelines (OP), there are a few common issues you can investigate, and this guide may help resolve issues quickly. If you continue to have trouble, reach out to [Datadog support][3] for further assistance.
 
