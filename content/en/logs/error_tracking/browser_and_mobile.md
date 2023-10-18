@@ -78,7 +78,7 @@ If you have not set up the Datadog Android SDK yet, follow the [in-app setup ins
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]:/logs/log_collection/android/#setup
+[2]: /logs/log_collection/android/#setup
 [3]: https://github.com/Datadog/dd-sdk-android
 [4]: /logs/log_collection/android/?tab=kotlin#setup
 

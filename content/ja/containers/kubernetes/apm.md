@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/agent/kubernetes/host_setup
+- /ja/agent/kubernetes/apm
 further_reading:
 - link: /agent/kubernetes/log/
   tag: ドキュメント

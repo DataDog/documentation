@@ -1418,7 +1418,7 @@ api:
     - v2
     versions:
     - v2
-  parent: metrics
+  parent: メトリクス
   url: '#query-timeseries-data-across-multiple-products'
 - generated: true
   identifier: metrics-query-scalar-data-across-multiple-products
@@ -1431,7 +1431,7 @@ api:
     - v2
     versions:
     - v2
-  parent: metrics
+  parent: メトリクス
   url: '#query-scalar-data-across-multiple-products'
 - generated: true
   identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -1443,7 +1443,7 @@ api:
     unstable: []
     versions:
     - v2
-  parent: metrics
+  parent: メトリクス
   url: '#list-distinct-metric-volumes-by-metric-name'
 - generated: true
   identifier: metrics-create-a-tag-configuration

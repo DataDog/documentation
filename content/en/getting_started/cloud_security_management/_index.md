@@ -52,6 +52,7 @@ This guide walks you through best practices for getting your team up and running
 
 1. Assess your organization's posture by reviewing [compliance reports][21].
 2. Use out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
+3. Subscribe to the weekly [security digest][31] reports to begin investigation and remediation of the most important new security issues discovered in the last seven days. 
 
 ## Further reading
 
@@ -87,3 +88,4 @@ This guide walks you through best practices for getting your team up and running
 [28]: /security/identity_risks/
 [29]: https://app.datadoghq.com/security/identities
 [30]: https://app.datadoghq.com/security/infra-vulnerability
+[31]: https://app.datadoghq.com/security/configuration/reports

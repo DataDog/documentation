@@ -16,7 +16,7 @@ kind: ドキュメント
 title: Splunk 環境で観測可能性パイプラインを設定する
 ---
 
-<div class="alert alert-info">現時点では、観測可能性パイプラインは Splunk の HTTP Event Collector (HEC) プロトコルのみをサポートしています。</div>
+<div class="alert alert-info">観測可能性パイプラインは Splunk の HTTP Event Collector (HEC) プロトコルのみをサポートしています。</div>
 
 ## 概要
 
@@ -81,6 +81,7 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
 ## Splunk インデックスの設定
 
 <div class="alert alert-info">入力の <strong>Enable Indexer Acknowledgements</strong> 設定を有効にすると、観測可能性パイプラインは確認応答をサポートします。</div>
+
 観測可能性パイプラインワーカーからログを受信するには、インデックスに HEC 入力と HEC トークンをプロビジョニングする必要があります。
 
 
@@ -110,7 +111,7 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-   `./pipeline.yaml` はステップ 1 でダウンロードした構成への相対パスまたは絶対パスでなければなりません。`SPLUNK_HEC_ENDPOINT` と `SPLUNK_TOKEN` は、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成した Splunk デプロイと一致する値に更新してください。
+   `<API_KEY>` は Datadog API キー、`<PIPELINES_ID>` は観測可能性パイプライン構成 ID、`<SITE>` は {{< region-param key="dd_site" code="true" >}} に置き換えてください。`SPLUNK_HEC_ENDPOINT` と `SPLUNK_TOKEN` も、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成した Splunk デプロイと一致する値に更新してください。`./pipeline.yaml` には、ステップ 1 でダウンロードした構成の相対パスまたは絶対パスを指定します。
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
@@ -118,22 +119,22 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
 {{% tab "AWS EKS" %}}
 1. AWS EKS 用の [Helm チャート][1]をダウンロードします。
 
-2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` の値を以下のように置き換えます。
-  ```yaml
-  datadog:
-    apiKey: "<datadog_api_key>"
-    pipelineId: "<observability_pipelines_configuration_id>"
-    site: "datadoghq.com"
-  ```
+2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` をそれぞれの値に置き換え、`<site>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
 
-3. `SPLUNK_HEC_ENDPOINT` と `SPLUNK_HEC_TOKEN` の値を、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成したトークンを含め、Splunk のデプロイに合わせて置き換えます。
-  ```yaml
-  env:
-    - name: SPLUNK_HEC_ENDPOINT
-      value: <https://your.splunk.index:8088/>
-    - name: SPLUNK_TOKEN
-      value: <a_random_token_usually_a_uuid>
-  ```
+3. `SPLUNK_HEC_ENDPOINT` と `SPLUNK_HEC_TOKEN` の値を、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成したトークンを含め、Splunk のデプロイメントに合わせて置き換えます。
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
 
 4. 以下のコマンドでクラスターに Helm チャートをインストールします。
 
@@ -154,22 +155,22 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
 {{% tab "Azure AKS" %}}
 1. Azure AKS 用の [Helm チャート][1]をダウンロードします。
 
-2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` の値を以下のように置き換えます。
-  ```yaml
-  datadog:
-    apiKey: "<datadog_api_key>"
-    pipelineId: "<observability_pipelines_configuration_id>"
-    site: "datadoghq.com"
-  ```
+2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` をそれぞれの値に置き換え、`<site>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
 
-3. `SPLUNK_HEC_ENDPOINT` と `SPLUNK_HEC_TOKEN` の値を、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成したトークンを含め、Splunk のデプロイに合わせて置き換えます。
-  ```yaml
-  env:
-    - name: SPLUNK_HEC_ENDPOINT
-      value: <https://your.splunk.index:8088/>
-    - name: SPLUNK_TOKEN
-      value: <a_random_token_usually_a_uuid>
-  ```
+3. `SPLUNK_HEC_ENDPOINT` と `SPLUNK_HEC_TOKEN` の値を、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成したトークンを含め、Splunk のデプロイメントに合わせて置き換えます。
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
 
 4. 以下のコマンドでクラスターに Helm チャートをインストールします。
 
@@ -190,22 +191,22 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
 {{% tab "Google GKE" %}}
 1. Google GKE 用の [Helm チャート][1]をダウンロードします。
 
-2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` の値を以下のように置き換えます。
-  ```yaml
-  datadog:
-    apiKey: "<datadog_api_key>"
-    pipelineId: "<observability_pipelines_configuration_id>"
-    site: "datadoghq.com"
-  ```
+2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` をそれぞれの値に置き換え、`<site>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
 
-3. `SPLUNK_HEC_ENDPOINT` と `SPLUNK_HEC_TOKEN` の値を、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成したトークンを含め、Splunk のデプロイに合わせて置き換えます。
-  ```yaml
-  env:
-    - name: SPLUNK_HEC_ENDPOINT
-      value: <https://your.splunk.index:8088/>
-    - name: SPLUNK_TOKEN
-      value: <a_random_token_usually_a_uuid>
-  ```
+3. `SPLUNK_HEC_ENDPOINT` と `SPLUNK_HEC_TOKEN` の値を、[Splunk インデックスの設定](#setting-up-the-splunk-index)で作成したトークンを含め、Splunk のデプロイメントに合わせて置き換えます。
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
 
 4. 以下のコマンドでクラスターに Helm チャートをインストールします。
 
@@ -224,14 +225,14 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
 [1]: /resources/yaml/observability_pipelines/splunk/google_gke.yaml
 {{% /tab %}}
 {{% tab "APT ベースの Linux" %}}
-1. 以下のコマンドを実行し、APT が HTTPS でダウンロードするように設定します。
+1. 以下のコマンドを実行し、APT が HTTPS 経由でダウンロードするようにセットアップします。
 
     ```
     sudo apt-get update
     sudo apt-get install apt-transport-https curl gnupg
     ```
 
-2. 以下のコマンドを実行して、システム上に Datadog の `deb` リポジトリをセットアップし、Datadog のアーカイブキーホルダーを作成します。
+2. 以下のコマンドを実行して、システム上に Datadog の `deb` リポジトリをセットアップし、Datadog のアーカイブキーリングを作成します。
 
     ```
     sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog-observability-pipelines-worker.list"
@@ -249,7 +250,7 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. ワーカーの環境変数にキーと Splunk の情報を追加します。
+4. キー、サイト ({{< region-param key="dd_site" code="true" >}})、Splunk 情報をワーカーの環境変数に追加します。
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -277,7 +278,7 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
     cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
     [observability-pipelines-worker]
     name = Observability Pipelines Worker
-    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/x86_64/
+    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/\$basearch/
     enabled=1
     gpgcheck=1
     repo_gpgcheck=1
@@ -295,7 +296,7 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
     sudo yum install observability-pipelines-worker
     ```
 
-3. ワーカーの環境変数にキーと Splunk の情報を追加します。
+3. キー、サイト ({{< region-param key="dd_site" code="true" >}})、Splunk 情報をワーカーの環境変数に追加します。
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -317,11 +318,11 @@ AWS アカウントでワーカーを実行するには、そのアカウント�
 [1]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-このサンプル構成を使って、既存の Terraform にワーカーモジュールをセットアップします。`vpc-id`、`subnet-ids`、`region` の値を AWS のデプロイに合わせて更新します。パイプラインに合わせて `datadog-api-key` と `pipeline-id` の値を更新します。
+このサンプル構成を使って、既存の Terraform にワーカーモジュールをセットアップします。`vpc-id`、`subnet-ids`、`region` の値を AWS のデプロイメントに合わせて更新します。パイプラインに合わせて `datadog-api-key` と `pipeline-id` の値を更新します。
 
 ```
 module "opw" {
-    source     = "https://github.com/DataDog/opw-terraform//aws"
+    source     = "git::https://github.com/DataDog/opw-terraform//aws"
     vpc-id     = "{VPC ID}"
     subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
     region     = "{REGION}"
@@ -354,7 +355,7 @@ transforms:
 
 ## このバッファ構成は、Datadog と Splunk の両方のシンクに対して 144GB のバッファに分割されています。
 ##
-## これは OP ワーカーのデプロイの大部分で機能するはずで、ほとんど調整する必要は
+## これは OP ワーカーのデプロイメントの大部分で機能するはずで、ほとんど調整する必要は
 ## ないはずです。変更する場合は、必ず `ebs-drive-size-gb` パラメーターのサイズを更新してください。
 sinks:
   datadog_logs:
@@ -398,9 +399,9 @@ EOT
 [AWS ロードバランサーコントローラー][1]でプロビジョニングされた NLB を使用します。
 
 #### クロスアベイラビリティゾーンロードバランシング
-提供されている Helm の構成は、ロードバランシングを簡素化しようとしていますが、クロス AZ トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を作らないようにしています。
+提供されている Helm の構成は、ロードバランシングの簡素化を目指していますが、クロス AZ (アヴェイラビリティーゾーン) トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を避けるよう努めています。
 
-サンプルの構成では、このコントローラーで利用可能なクロスゾーンのロードバランシング機能は有効になっていません。これを有効にするには、`service` ブロックに以下のアノテーションを追加します。
+サンプルの構成では、このコントローラーで利用可能なクロスゾーンのロードバランシング機能は有効化されていません。これを有効にするには、`service` ブロックに以下のアノテーションを追加します。
 
 ```
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
@@ -413,36 +414,36 @@ service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zo
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 クラウドプロバイダーが提供するロードバランサーを使用します。
-これらは、デフォルトの Helm セットアップで構成されているオートスケーリングイベントに基づいて調整されます。ロードバランサーは内部向けなので、ネットワーク内にしかアクセスできません。
+これらは、デフォルトの Helm セットアップで構成されているオートスケーリングイベントに基づいて調整されます。ロードバランサーは内部向けなので、あなたのネットワーク内からのみアクセス可能です。
 
 既存のコレクターを構成するときに、Helm から与えられたロードバランサーの URL を使用します。
 
 #### クロスアベイラビリティゾーンロードバランシング
-提供されている Helm の構成は、ロードバランシングを簡素化しようとしていますが、クロス AZ トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を作らないようにしています。
+提供されている Helm の構成は、ロードバランシングの簡素化を目指していますが、クロス AZ (アヴェイラビリティーゾーン) トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を避けるよう努めています。
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-クラウドプロバイダーが提供するロードバランサーを使用します。 これらは、デフォルトの Helm セットアップで構成されているオートスケーリングイベントに基づいて調整されます。ロードバランサーは内部向けなので、ネットワーク内にしかアクセスできません。
+クラウドプロバイダーが提供するロードバランサーを使用します。 これらは、デフォルトの Helm セットアップで構成されているオートスケーリングイベントに基づいて調整されます。ロードバランサーは内部向けなので、あなたのネットワーク内からのみアクセス可能です。
 
 既存のコレクターを構成するときに、Helm から与えられたロードバランサーの URL を使用します。
 
 #### クロスアベイラビリティゾーンロードバランシング
-提供されている Helm の構成は、ロードバランシングを簡素化しようとしていますが、クロス AZ トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を作らないようにしています。
+提供されている Helm の構成は、ロードバランシングの簡素化を目指していますが、クロス AZ (アヴェイラビリティーゾーン) トラフィックの潜在的な価格的影響を考慮する必要があります。可能な限り、サンプルは複数のクロス AZ ホップが起こりうる状況を避けるよう努めています。
 
-グローバルアクセスは、共有ツールクラスターで使用するために必要であると考えられるため、デフォルトで有効になっています。
-{{% /tab %}}
+グローバルアクセスは、共有ツールクラスターで使用するためにおそらく必要であるため、デフォルトで有効になっています。
+ {{% /tab %}}
 {{% tab "APT ベースの Linux" %}}
-シングルマシンでのインストールのため、ロードバランシングのビルトインサポートは提供されません。ロードバランサーのプロビジョニングは、お客様の会社の標準に従って行ってください。
+シングルマシンでのインストールのため、ロードバランシングのビルトインサポートは提供されません。ロードバランサーの準備は、あなたの会社の標準に従って行ってください。
 {{% /tab %}}
 {{% tab "RPM ベースの Linux" %}}
-シングルマシンでのインストールのため、ロードバランシングのビルトインサポートは提供されません。ロードバランサーのプロビジョニングは、お客様の会社の標準に従って行ってください。
+シングルマシンでのインストールのため、ロードバランシングのビルトインサポートは提供されません。ロードバランサーの準備は、あなたの会社の標準に従って行ってください。
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-NLB は Terraform モジュールによってプロビジョニングされ、インスタンスを指すようにプロビジョニングされます。DNS アドレスは Terraform の `lb-dns` 出力で返されます。 {{% /tab %}}
+NLB は Terraform モジュールによって準備され、インスタンスを指すように設定されます。DNS アドレスは Terraform の `lb-dns` 出力で返されます。
+{{% /tab %}}
 {{< /tabs >}}
 
-
 ### バッファリング
-観測可能性パイプラインには複数のバッファリング戦略があり、ダウンストリーム障害に対するクラスターの耐性を高めることができます。提供されているサンプル構成では、ディスクバッファを使用していますが、その容量は、観測可能性パイプラインのデプロイにおいて、10Mbps/コアで約 10 分のデータ容量に対応するように評価されています。これは、一過性の問題が解決するまでの時間や、インシデント対応担当者が観測可能性データに対して何をすべきかを判断するのに十分な時間であることが多いでしょう。
+観測可能性パイプラインには複数のバッファリング戦略があり、ダウンストリーム障害に対するクラスターの耐性を高めることができます。提供されているサンプル構成では、ディスクバッファを使用していますが、その容量は、観測可能性パイプラインのデプロイメントにおいて、10Mbps/コアのデータレートで約 10 分間のデータを保持できるように評価されています。これは、一過性の問題が解決するまでの時間や、インシデント対応担当者が観測可能性データに対して何をすべきかを判断するのに十分な時間であることが多いでしょう。
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -471,15 +472,14 @@ Google GKE では、Datadog は SSD でバックアップされた `premium-rwo`
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Splunk フォワーダーを観測可能性パイプラインワーカーに接続する
 観測可能性パイプラインワーカーをインストールして構成し、Splunk インデックスにログを送信したら、既存のコレクターを更新してワーカーを指すようにする必要があります。
 
-ほとんどの Splunk コレクターは、観測可能性パイプラインワーカーに関連付けられているホスト (またはロードバランサー) の IP/URL で更新できます。
+ほとんどの Splunk コレクターは、観測可能性パイプラインワーカーに関連付けられているホスト (またはロードバランサー) の IP/URL を使用して更新できます。
 
 Terraform のインストールでは、`lb-dns` 出力が必要な値を提供します。
 
-さらに、認証に使用する HEC トークンを Splunk コレクターで更新し、`pipeline.yaml` の観測可能性パイプラインワーカーの `valid_tokens` リストで指定されたものと一致させる必要があります。
+さらに、`pipeline.yaml` の観測可能性パイプラインワーカーの `valid_tokens` リストに指定されたトークンと一致するように、認証に使用する HEC トークンで Splunk コレクターを更新する必要があります。
 
 ```
 # サンプル pipeline.yaml splunk_receiver source
@@ -496,9 +496,9 @@ sources:
 
 ## データを活用する
 観測可能性パイプラインのサンプル構成は以下を実行します。
-- Splunk フォワーダーから観測可能性パイプラインワーカーに送信されるログを**収集**する。
-- 観測可能性パイプラインワーカーを経由してくるデータにタグを追加することでログを**変換**する。**これは、クラスターを更新する際に、どのトラフィックがまだワーカーに移行する必要があるかを判断するのに役立ちます。これらのタグはまた、不均衡がある場合に備えて、ログがロードバランサーを介してルーティングされている方法を示しています。
-- データを Splunk と Datadog の両方に送信することで、ログを**ルーティング**する。これは、複数の宛先に書き込むことがいかに簡単かを示しています。
+- Splunk フォワーダーから観測可能性パイプラインワーカーに送信されるログを収集する。
+- 観測可能性パイプラインワーカーを経由してくるデータにタグを追加することでログを変換する。これは、クラスターを更新する際に、どのトラフィックがまだワーカーに移行する必要があるかを判断するのに役立ちます。これらのタグはまた、不均衡がある場合に備えて、ログがロードバランサーを介してルーティングされている方法を示しています。
+- Splunk と Datadog の両方にデータをデュアルシッピングすることで、ログをルーティングする。
 
 ## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}

@@ -263,14 +263,14 @@
       - repo_name: serverless-plugin-datadog
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'plugin.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
+              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md"]
               title: Datadog Serverless Framework Plugin
               kind: documentation
               aliases:
@@ -279,14 +279,14 @@
       - repo_name: datadog-cloudformation-macro
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'serverless/README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'macro.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
               title: Datadog Serverless Macro
               kind: documentation
               aliases:
@@ -371,90 +371,10 @@
         - action: pull-and-push-folder
           branch: main
           globs:
-          - rulesets/docker-best-practices/*.md
+          - rulesets/**/*.md
           options:
-            dest_dir: '/continuous_integration/static_analysis/rules/docker-best-practices/'
-            path_to_remove: 'rulesets/docker-best-practices/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-best-practices/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-best-practices/'
-            path_to_remove: 'rulesets/python-best-practices/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-code-style/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-code-style/'
-            path_to_remove: 'rulesets/python-code-style/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-design/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-design/'
-            path_to_remove: 'rulesets/python-design/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-django/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-django/'
-            path_to_remove: 'rulesets/python-django/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-flask/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-flask/'
-            path_to_remove: 'rulesets/python-flask/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-inclusive/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-inclusive/'
-            path_to_remove: 'rulesets/python-inclusive/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-pandas/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-pandas/'
-            path_to_remove: 'rulesets/python-pandas/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-security/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-security/'
-            path_to_remove: 'rulesets/python-security/'
+            dest_dir: '/continuous_integration/static_analysis/rules/'
+            path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
 

@@ -352,54 +352,66 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
-### DD_SERVICE_MAPPING
+## Renaming upstream and downstream services
 
-`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda [services names][46]. It operates with `old-service:new-service` pairs.
+This guide explains how to rename both upstream and downstream services in Datadog using environment variables.
 
-#### Syntax
+### Rename upstream service names
 
-`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
+| Source Type | Service | Identifier | DD_SERVICE_MAPPING Value |
+|---|---|---|---|
+| General Identifiers| API Gateway | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| | SNS | `lambda_sns` | `"lambda_sns:newServiceName"` |
+| | SQS | `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| | S3 | `lambda_s3` | `"lambda_s3:newServiceName"` |
+| | EventBridge | `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| | Kinesis | `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| | DynamoDB | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| | Lambda URLs | `lambda_url` | `"lambda_url:newServiceName"` |
+| Specific Identifiers | API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| | SNS | Topic name | `"ExampleTopic:newServiceName"` |
+| | SQS | Queue name | `"MyQueue:newServiceName"` |
+| | S3 | Bucket name | `"example-bucket:newServiceName"` |
+| | EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
+| | Kinesis | Stream name | `"MyStream:newServiceName"` |
+| | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
+| | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-There are two ways to interact with this variable:
+### Rename downstream service names (created by dd-trace-x)
 
-#### Rename all services of a type
+| Language | Configuration Key | Default | Example | Description |
+|----------|-------------------|---------|---------|-------------|
+| Python   | `DD_SERVICE_MAPPING` | N/A | `postgres:postgresql,defaultdb:postgresql` | Rename services in traces. |
+| JS       | `DD_SERVICE_MAPPING` | N/A | `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db` | Provide service names for plugins. |
+| Ruby     | Not Defined | N/A | N/A | `DD_SERVICE_MAPPING` is not available. |
+| Java     | `DD_SERVICE_MAPPING` | `null` | `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db` | Dynamically rename services. |
+| Go       | `DD_SERVICE_MAPPING` | `null` | `mysql:mysql-service-name,postgres:postgres-service-name` | Rename services. |
+| .NET     | `DD_TRACE_SERVICE_MAPPING` | N/A | `mysql:main-mysql-db, mongodb:offsite-mongodb-service` | Rename services using config. |
 
-To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
+| Language | Minimum Version | Environment Variable Settings | Peer Service Mapping Example |
+|----------|-----------------|-------------------------------|--------------------------------|-----------------------------|
+| Java     | 1.16.0          | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` |  `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Go       | v1.52.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| NodeJS   | 2.44.0<br>3.31.0<br>4.10.0 | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| .NET     | v2.35.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` |  `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Python   | v1.16.0         | `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`<br>`DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service` |
+| Ruby     | v1.13.0         | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | N/A | `DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service`<br>`DD_TRACE_DALLI_PEER_SERVICE=billing-api` |
 
-| AWS Lambda Integration | DD_SERVICE_MAPPING Value |
-|---|---|
-| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
-| `lambda_sns` | `"lambda_sns:newServiceName"` |
-| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
-| `lambda_s3` | `"lambda_s3:newServiceName"` |
-| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
-| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
-| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
-| `lambda_url` | `"lambda_url:newServiceName"` |
+**Notes**:
+- For Ruby: Set `peer.service` value for specific integrations using `DD_TRACE_<INTEGRATION_NAME>_PEER_SERVICE`.
+- Python does not support Boto2 as of version v1.16.0.
 
-#### Rename specific services
+### Examples
 
-For a more granular approach, use these service-specific identifiers:
+#### NodeJS 
+```
+DD_SERVICE_MAPPING: "lambda_api_gateway:api-gw-name,aws-sdk:aws-sdk-name"
+      DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED: "true"
+      DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+      DD_TRACE_PEER_SERVICE_MAPPING: "serviceMappingJs-dev-TestQueue-FvobIfTGlO1c:new-peer-service-name"
+```
 
-| Service | Identifier | DD_SERVICE_MAPPING Value |
-|---|---|---|
-| API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
-| SNS | Topic name | `"ExampleTopic:newServiceName"` |
-| SQS | Queue name | `"MyQueue:newServiceName"` |
-| S3 | Bucket name | `"example-bucket:newServiceName"` |
-| EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
-| Kinesis | Stream name | `"MyStream:newServiceName"` |
-| DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
-| Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
-
-#### Examples with description
-
-| Command | Description |
-|---|---|
-| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
-| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
-
-For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][45].
+{{< img src="tracing/serverless_functions/ServiceMappingJS.png" alt="service mapping" >}}
 
 ## Filter or scrub information from logs
 
@@ -522,6 +534,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 ## Select sampling rates for ingesting APM spans
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+
+Use `DD_TRACE_SAMPLE_RULES` for *upstream* service remapping, for example an API Gateway that triggers a Lambda Function. The service name *must* be the head or root of the trace, for example:
+`DD_TRACE_SAMPLING_RULES='[{"service": "123.execute-api.sa-east-1.amazonaws.com", "sample_rate": 0.5}]'`
 
 Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 
@@ -966,9 +981,9 @@ If you have trouble configuring your installations, set the environment variable
 [27]: /serverless/custom_metrics
 [28]: /agent/guide/private-link/
 [29]: /getting_started/site/
-[30]: /agent/proxy/
+[30]: /agent/configuration/proxy/
 [31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
-[32]: /agent/guide/dual-shipping/
+[32]: /agent/configuration/dual-shipping/
 [33]: /serverless/distributed_tracing/#trace-propagation
 [34]: /integrations/amazon_xray/
 [35]: /serverless/distributed_tracing/#trace-merging

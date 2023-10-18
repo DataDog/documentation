@@ -6,6 +6,10 @@ aliases:
   - /observability_pipelines/aggregator_architecture/
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## Overview
 
 The Observability Pipelines Worker's (OPW) aggregator architecture deploys the Observability Pipelines Worker as a standalone service for centralized data processing and routing:

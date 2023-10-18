@@ -3,6 +3,10 @@ title: Capacity Planning and Scaling
 kind: Documentation
 ---
 
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## Units for estimations
 
 The following units are starting points for estimating your resource capacity, but can vary depending on your workload.

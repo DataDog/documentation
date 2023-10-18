@@ -25,6 +25,9 @@ This feature requires the Datadog Browser SDK v3.0.0+.
 <blockquote class="alert alert-info">
 The Datadog Browser SDK v4.20.0 introduces the <code>sessionReplaySampleRate</code> initialization parameter, deprecating the <code>premiumSampleRate</code> and <code>replaySampleRate</code> initialization parameter.
 </blockquote>
+<blockquote class="alert alert-info">
+The <code>sessionReplaySampleRate</code> initialization parameter default value is `0` in Datadog Browser SDK v5.0.0. Previous versions of the SDK use `100`.
+</blockquote>
 
 When a session is created, RUM tracks it as either:
 
@@ -34,7 +37,7 @@ When a session is created, RUM tracks it as either:
 Two initialization parameters are available to control how the session is tracked:
 
 - `sessionSampleRate` controls the percentage of overall sessions being tracked. It defaults to `100%`, so every session is tracked by default.
-- `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. It defaults to `100%`, so every session is tracked as Browser RUM & Session Replay by default.
+- `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. It defaults to `0`, so no session is tracked as Browser RUM & Session Replay by default.
 
 To track 100% of your sessions as Browser RUM:
 

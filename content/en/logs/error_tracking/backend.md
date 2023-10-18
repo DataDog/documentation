@@ -18,7 +18,7 @@ If you aren't already collecting logs with Datadog, see the [Logs documentation]
 
 ## Setup
 
-For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog. 
+For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog.
 
 For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the code examples in each section demonstrate how to properly configure an error log and attach the required stack trace in the log's `error.stack`.
 
@@ -52,7 +52,7 @@ To log a caught exception yourself, you may optionally use:
 ```csharp
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    .Enrich.WithExceptionDetails() 
+    .Enrich.WithExceptionDetails()
     .CreateLogger();
 try {
   // …
@@ -235,7 +235,7 @@ except:
 
 #### Lograge (JSON)
 
-If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7].
 
 To log a caught exception yourself, you may optionally use:
 
@@ -256,12 +256,12 @@ config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rail
 config.lograge.custom_options = lambda do |event|
     {
       error: {
-        type: event.payload[:exception][0],
+        kind: event.payload[:exception][0],
         message: event.payload[:exception][1],
-        stack: event.payload[:exception_object].backtrace
+        stack: event.payload[:exception_object].backtrace.join("\n")
       }
     }
-  end  
+  end
 end
 ```
 

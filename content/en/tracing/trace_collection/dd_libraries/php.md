@@ -85,6 +85,13 @@ It may take a few minutes before traces appear in the UI. If traces still do not
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
+<div class="alert alert-warning">
+<strong>SELinux:</strong>
+If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
+
+`allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
+
+</div>
 
 ## Automatic instrumentation
 
