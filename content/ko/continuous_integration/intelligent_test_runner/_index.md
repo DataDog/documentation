@@ -50,7 +50,7 @@ Intelligent Test Runner를 위한 Datadog 라이브러리를 설정한 후 [Test
 
 제외할 다른 브랜치가 있는 경우 Intelligent Test Runner 설정 페이지에서 브랜치를 추가합니다. 쿼리 표시줄에서 `*` 와일드카드 문자를 사용하여 `release_*`와 같이 일치하는 브랜치를 제외할 수 있습니다.
 
-{{< img src="continuous_integration/itr_configuration1.png" alt="Intelligent test runner에서 제외할 브랜치 선택" style="width:80%;">}}
+{{< img src="continuous_integration/itr_configuration2.png" alt="Intelligent test runner에서 제외할 브랜치 선택" style="width:80%;">}}
 
 ## 테스트 세션 탐색하기
 
