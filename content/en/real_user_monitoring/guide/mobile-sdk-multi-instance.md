@@ -1,5 +1,5 @@
 ---
-title: Use multiple instances of the Mobile SDK
+title: Use Multiple Instances of the Mobile SDK
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/explorer'
