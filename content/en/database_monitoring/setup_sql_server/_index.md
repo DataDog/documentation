@@ -11,7 +11,7 @@ disable_sidebar: true
 
 ### SQL Server versions supported
 
-|                 | Self-hosted | Azure | AWS RDS | Google Cloud SQL |
+|                 | Self-hosted | Azure | Amazon RDS | Google Cloud SQL |
 |-----------------|-----------|------|-----------|------------------|
 | SQL Server 2012 | {{< X >}} | {{< X >}} | {{< X >}} |               |
 | SQL Server 2014 | {{< X >}} | {{< X >}} | {{< X >}} |               |

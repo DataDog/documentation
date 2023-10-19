@@ -59,7 +59,7 @@ datadogRum.startSessionReplayRecording();
 
 ### マスクモード
 
-`defaultPrivacyLevel` を `mask` に設定すると、すべての HTML テキスト、ユーザー入力、画像、リンクがマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
+`defaultPrivacyLevel` を `mask` モードに設定すると、すべての HTML テキスト、ユーザー入力、画像、リンク、 [`data-*` 属性[1]がマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="マスクモード" style="width:70%;">}}
 
@@ -134,3 +134,5 @@ Datadog は、RUM とセッションリプレイにさらなるプライバシ�
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

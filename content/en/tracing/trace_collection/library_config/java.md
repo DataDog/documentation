@@ -453,6 +453,16 @@ Deprecated since version 1.9.0
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Deprecated since version 1.9.0
 
+### Experimental features
+
+The following configuration options are for features that are available for use but may change in future releases.
+
+`dd.integration.opentelemetry.experimental.enabled`
+: **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
+**Default**: `false`<br>
+Enables experimental OpenTelemetry features. When you enable this setting, you can use the OpenTelemetry tracing API backed by the Datadog Trace Agent.<br>
+Available since version 1.10.0
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -460,7 +470,7 @@ Deprecated since version 1.9.0
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
 [3]: /tracing/setup/docker/
-[4]: /agent/guide/network/#configure-ports
+[4]: /agent/configuration/network/#configure-ports
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [6]: /tracing/configure_data_security/#telemetry-collection
 [7]: /developers/dogstatsd/#setup

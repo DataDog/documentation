@@ -169,6 +169,8 @@ The families and usage types:
     * `check_calls_count`
 - **synthetics_browser**
     * `browser_check_calls_count`
+- **synthetics_mobile**
+    * `test_runs`
 - **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`

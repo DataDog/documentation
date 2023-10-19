@@ -40,7 +40,10 @@ Configure the optional Display Mode features to add context to your top list vis
 * Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.</br>
    **Note**: Relative display is only available for count data, such as count metrics or log events.
 * Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
-* Add [context links][6] to connect data visualizations across Datadog.
+
+#### Context links
+
+[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
 
 #### Global time
 
@@ -48,9 +51,7 @@ On screenboards and notebooks, choose whether your widget has a custom timeframe
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][4] for additional reference.
-
-The dedicated [widget JSON schema definition][5] for the top list widget is:
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 
@@ -61,6 +62,6 @@ The dedicated [widget JSON schema definition][5] for the top list widget is:
 [1]: /dashboards/querying/
 [2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
-[4]: /api/v1/dashboards/
-[5]: /dashboards/graphing_json/widget_json/
-[6]: /dashboards/guide/context-links
+[4]: /dashboards/guide/context-links
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/

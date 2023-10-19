@@ -17,8 +17,6 @@ The monitor summary widget displays a summary view of all your Datadog monitors,
 
 ## Setup
 
-{{< img src="dashboards/widgets/monitor_summary/monitor-summary-setup.png" alt="monitor summary setup" style="width:80%;">}}
-
 ### Configuration
 
 1. Select one of the three summary types: `Monitor`, `Group` or `Combined`
@@ -70,14 +68,6 @@ Choose to show only the `Count` of monitors per monitor status type, a `List` of
 Selecting the `Show triggered column` option filters the results to monitors or monitor groups that are in a triggered state (`Alert`, `Warn`, or `No Data`) and sorts them from most recently triggered to least recently triggered. An additional column is added indicating the amount of time that has elapsed since the monitor/group last triggered.
 
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary.png" alt="display preferences" style="width:80%;">}}
-
-#### Title
-
-Display a custom title for your widget by checking the `Show a title` check box:
-
-{{< img src="dashboards/widgets/monitor_summary/widget_title.png" alt="widget title" style="width:80%;">}}
-
-You can optionally define the title's size and alignment.
 
 ## API
 

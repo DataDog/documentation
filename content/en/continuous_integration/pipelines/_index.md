@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/
+  - /continuous_integration/setup_pipelines/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
@@ -39,6 +40,84 @@ cascade:
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
+
+### Terminology
+
+While the concept of a CI pipeline may vary depending on your provider, see how those concepts correspond to the definition of a CI pipeline in Datadog Pipeline Visibility:
+
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
+
+| Datadog | GitHub Actions |
+|---|---|
+| Pipeline | Workflow |
+| Stage | Job |
+| Job | Step |
+| Step | Action |
+
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+| Datadog | GitLab |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Job |
+| Step |  |
+
+{{% /tab %}}
+{{% tab "Jenkins" %}}
+
+| Datadog | Jenkins |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Job |
+| Step | Step |
+
+{{% /tab %}}
+{{% tab "CircleCI" %}}
+
+| Datadog | CircleCI |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Workflow |
+| Job | Job |
+| Step | Step |
+
+{{% /tab %}}
+{{% tab "Buildkite" %}}
+
+
+| Datadog | Buildkite |
+|---|---|
+| Pipeline | Pipeline |
+| Stage |  |
+| Job | Job |
+| Step |  |
+
+{{% /tab %}}
+{{% tab "TeamCity" %}}
+
+| Datadog | TeamCity |
+|---|---|
+| Pipeline | Build Chain |
+| Stage |  |
+| Job | Build |
+| Step |  |
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+| Datadog | Azure Pipelines |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Job |
+| Step | Step |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
 

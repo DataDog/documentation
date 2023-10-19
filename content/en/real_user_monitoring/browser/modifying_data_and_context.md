@@ -187,7 +187,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -234,7 +234,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -279,7 +279,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -907,21 +907,21 @@ Once RUM is initialized, read the global context with the `getGlobalContext()` A
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-const context = datadogRum.getRumGlobalContext();
+const context = datadogRum.getGlobalContext();
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
-  const context = window.DD_RUM.getRumGlobalContext();
+  const context = window.DD_RUM.getGlobalContext();
 });
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```javascript
-const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
+const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 ```
 
 {{% /tab %}}

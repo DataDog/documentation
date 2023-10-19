@@ -85,6 +85,13 @@ It may take a few minutes before traces appear in the UI. If traces still do not
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
+<div class="alert alert-warning">
+<strong>SELinux:</strong>
+If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
+
+`allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
+
+</div>
 
 ## Automatic instrumentation
 
@@ -352,6 +359,25 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `rlimit_core` in the PHP-FPM pool configuration section. You can set it to unlimited: `rlimit_core = unlimited`.
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
+
+### Obtaining a core dump from within a Docker container
+
+Use the information below to assist with obtaining a core dump in a Docker container:
+
+1. The Docker container needs to run as a privileged container, and the `ulimit` value for core files needs to be set to its maximum as shown in the examples below.
+   - If you use the `docker run` command, add the `--privileged` and the `--ulimit core=99999999999` arguments
+   - If you use `docker compose`, add the following to the `docker-compose.yml` file:
+```yaml
+privileged: true
+ulimits:
+  core: 99999999999
+```
+2. When running the container (and before starting the PHP application) you need to run the following commands:
+```
+ulimit -c unlimited
+echo '/tmp/core' > /proc/sys/kernel/core_pattern
+echo 1 > /proc/sys/fs/suid_dumpable
+```
 
 ### Obtaining a Valgrind trace
 

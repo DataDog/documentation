@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring
   tag: 설명서
   text: Datadog RUM 탐색
-kind: 설명서
+kind: documentation
 title: RUM 안드로이드 고급 설정
 ---
 ## 개요
@@ -190,7 +190,7 @@ RUM 세션에 사용자 정보를 추가하면 다음 작업을 쉽게 수행할
 * 오류의 영향을 가장 많이 받는 사용자를 파악합니다.
 * 가장 중요한 사용자의 성능을 모니터링합니다.
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI의 사용자 API"" >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI의 사용자 API" >}}
 
 다음 속성은 **선택 사항**이며, 이 중에서 **적어도 하나**를 제공해야 합니다:
 

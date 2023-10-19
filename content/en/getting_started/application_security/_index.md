@@ -89,6 +89,12 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 
 3. Go to [Security Signals Explorer][6] to see the signal that is generated after a few seconds.
 
+## Reports and notifications
+
+1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
+3. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
+
+
 Interested in best practices to go further? View the [in-product Quickstart Guide.][19]
 
 ## Further reading
@@ -116,4 +122,6 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [19]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [20]: /getting_started/application_security/#setup-asm
 [21]: /agent/remote_config?tab=configurationyamlfile#setup
+[22]: https://app.datadoghq.com/security/configuration/reports
+[23]: https://app.datadoghq.com/security/configuration/notification-rules
 

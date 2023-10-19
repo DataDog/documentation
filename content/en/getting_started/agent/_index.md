@@ -139,7 +139,7 @@ Agent (v7.36.1)
 
 #### Events
 
-In the Datadog UI, go to the Events Explorer Page **Events > Explorer**. The Agent sends events to Datadog when an Agent is started or restarted. The following message displays if your Agent successfully installs:
+In the Datadog UI, go to the Events Managment Page **Service Mgmt > Event Management**. The Agent sends events to Datadog when an Agent is started or restarted. The following message displays if your Agent successfully installs:
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
@@ -226,7 +226,7 @@ For example, let's say you have data that is collected from different teams and 
 
 5. After a few minutes, go to **Metrics > Summary** again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and whatever personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
 
-6. Go to **Events > Explorer** and find the custom tags displayed with the latest Agent Event.
+6. Go to **Service Mgmt > Event Management** and find the custom tags displayed with the latest Agent Event.
 
 #### Other configuration options
 
@@ -296,21 +296,21 @@ For help troubleshooting the Agent:
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /agent/basic_agent_usage/?tab=agentv6v7
 [18]: https://app.datadoghq.com/account/settings/agent/latest
-[19]: /agent/guide/agent-commands/#agent-status-and-information
+[19]: /agent/configuration/agent-commands/#agent-status-and-information
 [20]: /developers/service_checks/#visualize-your-service-check-in-datadog
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [22]: /getting_started/tagging/
-[23]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[24]: /agent/guide/agent-commands/#restart-the-agent
+[23]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[24]: /agent/configuration/agent-commands/#restart-the-agent
 [25]: /logs/
 [26]: /tracing/
 [27]: /infrastructure/process/?tab=linuxwindows#introduction
 [28]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host
 [29]: /agent/logs/advanced_log_collection/
 [30]: /developers/dogstatsd/?tab=hostagent
-[31]: /agent/guide/agent-commands/
-[32]: /agent/guide/agent-commands/#start-the-agent
-[33]: /agent/guide/agent-commands/#stop-the-agent
+[31]: /agent/configuration/agent-commands/
+[32]: /agent/configuration/agent-commands/#start-the-agent
+[33]: /agent/configuration/agent-commands/#stop-the-agent
 [34]: /agent/troubleshooting/
-[35]: /agent/guide/agent-log-files/
+[35]: /agent/configuration/agent-log-files/
 [36]: /help/

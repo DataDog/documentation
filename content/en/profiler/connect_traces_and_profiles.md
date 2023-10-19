@@ -25,7 +25,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -58,9 +58,23 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-Requires `dd-trace-rb` version 0.49.0+.
+To enable the new [timeline feature](#span-execution-timeline-view) (beta):
+- upgrade to `dd-trace-rb` 1.15+
+- set `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=true`
 
 [1]: /profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Code Hotspots (beta) identification is NOT enabled by default when you [turn on profiling for your Node.js service][1]. Enable it by setting this additional environment variable:
+
+```shell
+export DD_PROFILING_CODEHOTSPOTS_ENABLED=true
+```
+
+Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
+
+[1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -165,11 +179,15 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
+
+For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
+
+[1]: https://richardstartin.github.io/posts/wallclock-profiler
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
@@ -179,6 +197,11 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Debug Go Request Latency with Datadog's Profiling Timeline][1].
 
 [1]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Ruby.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
@@ -203,7 +226,7 @@ Click the **Focus On** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Endpoint profiling is enabled by default when you [turn on profiling for your Java service][1].
 
@@ -234,6 +257,21 @@ Endpoint profiling is enabled by default when you [turn on profiling for your Ru
 Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Endpoint profiling (beta) is NOT enabled by default when you [turn on profiling for your Node.js service][1]. Enable it by setting this additional environment variables:
+
+```shell
+export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
+```
+
+Setting this environment variable also turns on [Code Hotspots (beta)][2] which is needed for endpoint profiling.
+
+Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
+
+[1]: /profiler/enabling/nodejs
+[2]: /profiler/connect_traces_and_profiles/?code-lang=nodejs#identify-code-hotspots-in-slow-traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
