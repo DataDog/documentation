@@ -209,6 +209,7 @@ algolia_sync_preview:manual:
   environment: "preview"
   allow_failure: true
   interruptible: true
+  timeout: 1h 30m
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
@@ -225,6 +226,7 @@ algolia_sync_live:
   environment: "live"
   allow_failure: true
   interruptible: true
+  timeout: 1h 30m
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
     - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:sync

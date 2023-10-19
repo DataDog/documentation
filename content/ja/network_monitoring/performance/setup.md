@@ -433,7 +433,7 @@ services:
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-AWS ECS での設定については、[AWS ECS][1] ドキュメントページを参照してください。
+Amazon ECS での設定については、[Amazon ECS][1] ドキュメントページを参照してください。
 
 
 [1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
