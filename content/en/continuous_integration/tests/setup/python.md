@@ -119,7 +119,7 @@ class MyTest(unittest.TestCase):
 
 In some cases, if your `unittest` test execution is being ran in a parallel manner, this may break the instrumentation and affect test visibility.
 
-It is recommended to use up to one process at a time to prevent affecting test visibility.
+Datadog recommends you use up to one process at a time to prevent affecting test visibility.
 
 ### Adding custom tags to tests
 
