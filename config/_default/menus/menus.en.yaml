@@ -1008,10 +1008,9 @@ main:
     parent: metrics_top_level
     identifier: metrics_explorer
     weight: 1
-  - name: Distributions
-    url: metrics/distributions/
+  - name: Metrics Units
+    url: metrics/units/
     parent: metrics_explorer
-    identifier: metrics_distributions
     weight: 101
   - name: Summary
     url: metrics/summary/
@@ -1020,10 +1019,12 @@ main:
   - name: Metrics Types
     url: metrics/types/
     parent: metrics_top_level
+    identifier: metrics_types
     weight: 3
-  - name: Metrics Units
-    url: metrics/units/
+  - name: Distributions
+    url: metrics/distributions/
     parent: metrics_top_level
+    identifier: metrics_distributions
     weight: 4
   - name: Metrics Without Limits™
     url: metrics/metrics-without-limits/
@@ -1078,7 +1079,7 @@ main:
     url: metrics/guide
     parent: metrics_top_level
     identifier: metrics_guide
-    weight: 9
+    weight: 10
   - name: Notebooks
     url: notebooks/
     identifier: notebooks
