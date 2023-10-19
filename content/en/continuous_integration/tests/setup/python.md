@@ -26,13 +26,12 @@ further_reading:
 ## Compatibility
 
 Supported Python interpreters:
-* Python >= 2.7 and >= 3.5
+* Python >= 3.7
 
 Supported test frameworks:
 * pytest >= 3.0.0
-  * pytest < 5 when using Python 2
 * pytest-benchmark >= 3.1.0
-  * Python >= 3.7
+* unittest >= Python 3.7
 
 ## Configuring reporting method
 
@@ -66,6 +65,7 @@ For more information, see the [Python tracer installation documentation][4].
 ## Instrumenting your tests
 
 ### Using pytest
+
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
 {{< code-block lang="shell" >}}
@@ -91,6 +91,35 @@ def test_square_value(benchmark):
     result = benchmark(square_value, 5)
     assert result == 25
 ```
+
+### Using unittest
+
+To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
+
+Make sure to specify the name of the service or library under test in the `DD_SERVICE` environment variable.
+Additionally, you may declare the environment where tests are being run in the `DD_ENV` environment variable:
+
+{{< code-block lang="shell" >}}
+DD_SERVICE=my-python-app DD_ENV=ci ddtrace-run python -m unittest
+{{< /code-block >}}
+
+Alternatively, if you wish to enable `unittest` instrumentation manually, use `patch()` to enable the integration:
+
+{{< code-block lang="python" >}}
+from ddtrace import patch
+import unittest
+patch(unittest=True)
+
+class MyTest(unittest.TestCase):
+    def test_will_pass(self):
+        assert True
+{{< /code-block >}}
+
+#### Known limitations
+
+In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
+
+Datadog recommends you use up to one process at a time to prevent affecting test visibility.
 
 ### Adding custom tags to tests
 
