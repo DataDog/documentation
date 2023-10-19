@@ -10,9 +10,7 @@ algolia:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.

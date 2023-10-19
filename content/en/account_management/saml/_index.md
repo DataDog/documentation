@@ -147,7 +147,7 @@ If you do not use the updated SP metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][23] to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][23] to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP metadata
 

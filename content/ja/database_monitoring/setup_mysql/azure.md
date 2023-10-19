@@ -146,9 +146,9 @@ instances:
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップから
+    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップより
 
-     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    # プロジェクトとインスタンスを追加した後に、CPU やメモリなどの追加のクラウドデータを取得するために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'

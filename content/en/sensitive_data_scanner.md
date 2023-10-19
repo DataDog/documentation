@@ -65,6 +65,33 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
 
 {{< img src="sensitive_data_scanner/sds_rules_28_03_23.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
+### Redact sensitive data in tags
+
+To redact sensitive data contained in tags, you must [remap][3] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
+
+To remap the tag to an attribute:
+
+1. Navigate to your [log pipeline][4].
+2. Click **Add Processor**.
+3. Select **Remapper** in the processor type dropdown menu.
+4. Name the processor.
+5. Select **Tag key(s)**.
+6. Enter the tag key.
+7. Enter a name for the attribute the tag key is remapped to.
+8. Disable **Preserve source attribute**.
+9. Click **Create**.
+
+To redact the attribute:
+
+1. Navigate to your [scanning group][5].
+2. Click **Add Scanning Rule**.
+3. Check the library rules you want to use.
+4. Select **Specific Attributes** for **Scan entire event or portion of it**.
+5. Enter the name of the attribute you created earlier to specify that you want it scanned.
+6. Select the action you want when there's a match.
+7. Optionally, add tags.
+8. Click **Add Rules**.
+
 ### Out-of-the-box Scanning Rules
 
 The Scanning Rule Library contains an evergrowing collection of predefined rules maintained by Datadog for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
@@ -72,7 +99,7 @@ The Scanning Rule Library contains an evergrowing collection of predefined rules
 
 ### Permissions
 
-By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
+By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][6] for details on Roles and Permissions.
 
 {{< img src="sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 
@@ -82,7 +109,7 @@ Control who can access events containing sensitive data. Use tags added by Sensi
 
 ### Out-of-the-box dashboard
 
-When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summarizing sensitive data findings is automatically installed in your account.
+When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][7] summarizing sensitive data findings is automatically installed in your account.
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
@@ -95,5 +122,8 @@ To access this dashboard, go to **Dashboards > Dashboards List** and search for 
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [2]: /logs/explorer/search_syntax/
-[3]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
-[4]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[3]: /logs/log_configuration/processors/?tab=ui#remapper
+[4]: https://app.datadoghq.com/logs/pipelines
+[5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
+[6]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
+[7]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner

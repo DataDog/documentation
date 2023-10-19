@@ -13,6 +13,10 @@ further_reading:
   text: "Automate Security Workflows with Workflow Automation"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can create workflows or edit existing workflows from the Workflow Automation [Explore][1] tab. The **Explore** tab lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete or clone the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.

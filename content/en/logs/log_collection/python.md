@@ -93,11 +93,11 @@ Once this is done, the log should have the following format:
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
-[5]: /agent/guide/agent-commands/
+[5]: /agent/configuration/agent-commands/
 [6]: https://docs.python.org/3/library/logging.html#logging
 [7]: /agent/logs/?tab=tailfiles#activate-log-collection
 [8]: /agent/logs/?tab=tailfiles#custom-log-collection
-[9]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: /logs/log_configuration/parsing/
 [11]: /logs/explorer/#overview
 [12]: /glossary/#tail

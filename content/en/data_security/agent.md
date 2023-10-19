@@ -86,7 +86,7 @@ For more information, see the [Secrets Management][18] documentation.
 [5]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [7]: /agent/faq/network/
-[8]: /agent/proxy/
+[8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/
 [10]: https://coreos.com/clair
 [11]: https://snyk.io
@@ -96,6 +96,6 @@ For more information, see the [Secrets Management][18] documentation.
 [15]: https://www.datadoghq.com/8869756E.asc.txt
 [16]: /agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /agent/guide/secrets-management/
+[18]: /agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public

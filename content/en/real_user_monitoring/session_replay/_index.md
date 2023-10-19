@@ -43,7 +43,7 @@ Session Replay is available in the RUM Browser SDK. To start collecting data for
 
 ## Usage
 
-The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
+The Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. For example, to only record authenticated user sessions:
 
 ```javascript
 window.DD_RUM.init({
@@ -54,7 +54,8 @@ window.DD_RUM.init({
   //  env: 'production',
   //  version: '1.0.0',
   sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // if not included, the default is 100
+  sessionReplaySampleRate: 100,
+  startSessionReplayRecordingManually: true,
   ...
 });
 
@@ -67,13 +68,13 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ## Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6], which includes replays.
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
 
 ## Retention
 
-By default, Session Replay data is retained for 30 days. 
+By default, Session Replay data is retained for 30 days.
 
-To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience.) 
+To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
 
 Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
 

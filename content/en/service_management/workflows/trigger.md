@@ -22,6 +22,10 @@ further_reading:
   text: "Automate Security Workflows with Workflow Automation"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can trigger a workflow manually or automatically.
 
 A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
