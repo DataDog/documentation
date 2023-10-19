@@ -7,6 +7,9 @@ further_reading:
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
+    - link: 'https://www.datadoghq.com/blog/datadog-rum-session-replay-playlists/'
+      tag: Blog
+      text: Organize and analyze related session replays with Playlists in Datadog RUM
 ---
 
 ## Overview
