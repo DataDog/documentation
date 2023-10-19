@@ -618,7 +618,7 @@ remote_configuration:
 If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
 
 
-## Configure Docker injection
+## Configure Docker injection {#configure-docker-injection-2}
 
 If the default configuration doesn't meet your needs, you can edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
 
