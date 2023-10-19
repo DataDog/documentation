@@ -41,11 +41,85 @@ You can generate both of these in [Observability Pipelines][3].
 {{< tabs >}}
 {{% tab "Docker" %}}
 Ensure that your machine is configured to run Docker.
+
+The sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Create an IAM user and attach the policy above to it, and create access credentials for it. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
+The sample EKS configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* [Create a service account][2] to use the policy you created above, and fill that service account name into the Helm config under `${DD_ARCHIVES_SERVICE_ACCOUNT}`.
+
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
-* The [EBS CSI driver][1] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
+* The [EBS CSI driver][3] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
 
   ```shell
   kubectl get pods -n kube-system
@@ -57,21 +131,23 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
   kubectl get storageclass
   ```
 
-  If `io2` is not present, download [the StorageClass YAML][2] and `kubectl apply` it.
+  If `io2` is not present, download [the StorageClass YAML][4] and `kubectl apply` it.
 
-* The [AWS Load Balancer controller][3] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
+* The [AWS Load Balancer controller][5] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
 
   ```shell
   helm list -A
   ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
-See [Best Practices for OPW Aggregator Architecture][4] for production-level requirements.
+See [Best Practices for OPW Aggregator Architecture][6] for production-level requirements.
 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
-[2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
-[3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
-[4]: /observability_pipelines/architecture/
+[1]: https://aws.amazon.com/s3/pricing/
+[2]: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
+[3]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[4]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
+[5]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[6]: /observability_pipelines/architecture/
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
@@ -89,16 +165,125 @@ See [Best Practices for OPW Aggregator Architecture][1] for production-level req
 [1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
-There are no provider-specific requirements for APT-based Linux.
+The sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Create an IAM user and attach the policy above to it, and create access credentials for it. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
-There are no provider-specific requirements for RPM-based Linux.
+The sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Create an IAM user and attach the policy above to it, and create access credentials for it. Save these credentials as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
+The sample Terraform configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Attach the policy to the IAM Instance Profile that is created via Terraform, which you can find under the `iam-role-name` output.
+
 In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
 * The VPC ID your instances will run in.
 * The subnet IDs your instances will run in.
 * The AWS region your VPC is located in.
+
+[1]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
@@ -126,11 +311,13 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
+      -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
+      -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
       -p 8282:8282 \
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
@@ -225,6 +412,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
+    AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+    AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
     EOF
     ```
 
@@ -271,6 +460,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
+    AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+    AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
     EOF
     ```
 
@@ -381,6 +572,18 @@ sinks:
     buffer:
       type: disk
       max_size: 51539607552
+  ## This sink writes logs to an S3 bucket of your choice, in a format that Datadog
+  ## can rehydrate from. You need to fill in the ${DD_ARCHIVES_BUCKET}
+  ## and ${DD_ARCHIVES_REGION} parameters to fit your S3 configuration.
+  datadog_archives:
+    type: datadog_archives
+    inputs:
+      - logs_finish_ddtags
+    service: aws_s3
+    bucket: ${DD_ARCHIVES_BUCKET}
+    aws_s3:
+      storage_class: "STANDARD"
+      region: "${DD_ARCHIVES_REGION}"
 EOT
 }
 ```
