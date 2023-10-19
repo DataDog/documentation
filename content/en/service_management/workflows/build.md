@@ -23,7 +23,7 @@ You can create workflows or edit existing workflows from the Workflow Automation
 
 ## Build a workflow from a blueprint
 
-1. Click the **Blueprints** tab.
+1. Click the [**Blueprints**][5] tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
 1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
@@ -219,3 +219,4 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[5]: https://app.datadoghq.com/workflow/blueprints
