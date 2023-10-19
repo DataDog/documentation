@@ -14,7 +14,7 @@ further_reading:
 ---
 
 
-{{< img src="service_management/events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}
+<!-- {{< img src="service_management/events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}
 
 ## Navigate the Explorer
 
@@ -49,9 +49,9 @@ The time frame selector controls the time range of events that are shown in the 
 
 Change the time range by selecting a preset range from the time frame dropdown, or by entering a custom time range.
 
-Because all search parameters are contained within the URL, you can share your view by sharing the URL.
+Because all search parameters are contained within the URL, you can share your view by sharing the URL. -->
 
-## Search syntax
+<!-- ## Search syntax
 
 Events search uses the [logs search syntax][1].
 
@@ -86,9 +86,9 @@ Example queries:
 `@evt.name:foo`
 : Show the events with attribute `evt.name` equal to `foo`.
 
-See [Logs Search Syntax][1] for more details.
+See [Logs Search Syntax][1] for more details. -->
 
-### Facets
+<!-- ### Facets
 
 Datadog indexes event attributes as facets that are accessible from the Event Explorer facet side-panel, analytics, and monitors.
 
@@ -100,9 +100,9 @@ A facet displays the distinct members of an attribute or a tag and provides basi
 
 To create a facet, use the "Add a facet" button in the left side panel.
 
-Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side-panels. You can also use it to group by in event monitors and graph widgets.
+Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side-panels. You can also use it to group by in event monitors and graph widgets. -->
 
-### Reserved attributes
+<!-- ### Reserved attributes
 
 This list describes automatically ingested reserved attributes with events.
 
@@ -137,7 +137,7 @@ Datadog supports `@notifications` in the messages of events when posted by the A
 `@webhook`
 : Alerts or triggers the webhook. See the [blog post on webhooks][4].
 
-See [Notifications][5] to learn more.
+See [Notifications][5] to learn more. -->
 
 ## Event Analytics
 
