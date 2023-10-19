@@ -88,7 +88,7 @@ Use the [Issues page][7] to review and remediate your organization's security de
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed information on how to set up and configure CSM.
+To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
 ## Further reading
 
@@ -103,3 +103,4 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [7]: https://app.datadoghq.com/security?product=cws
 [8]: /security/identity_risks/
 [9]: /security/infrastructure_vulnerabilities/
+[10]: /security/cloud_security_management/setup/

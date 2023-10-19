@@ -16,7 +16,7 @@ further_reading:
       text: "Bits AI announcement"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSd2kcOeLhEX0GSwUIMQyFjRCRirU-vpsJTOx7SykDkxy-MW9w/viewform" >}}
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
 Bits AI is in private beta. Fill out this form to join the wait list.
 {{< /callout >}} 
 
