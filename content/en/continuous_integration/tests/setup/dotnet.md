@@ -36,8 +36,10 @@ Supported languages:
 | Language | Version |
 |---|---|
 | .NET Framework | >= 4.6.1 |
-| .NET Core | >= 2.1, 3.1 |
-| .NET | >= 6, 7 |
+| .NET Core | >= 2.1 |
+| .NET Core | >= 3.1 |
+| .NET | >= 6 |
+| .NET | >= 7 |
 
 Supported test frameworks:
 

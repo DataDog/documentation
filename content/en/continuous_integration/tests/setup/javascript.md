@@ -55,7 +55,7 @@ Supported test frameworks:
 
 | Test Framework | Version | Notes |
 |---|---|---|
-| Jest | >= 24.8.0 | From `dd-trace>=3.10.0`. <br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2]. |
+| Jest | >= 24.8.0 | From `dd-trace>=3.10.0`. <br><br>Only [`jest-circus`][101] is supported as [`testRunner`][102]. |
 | Mocha | >= 5.2.0 | From `dd-trace>=3.10.0` and `dd-trace>=2.12.0` for 2.x release line. |
 | Cucumber | >= 7.0.0 | From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line. |
 | Cypress | >= 6.7.0 | From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line. |

@@ -29,10 +29,12 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| JUnit | >= 4.10, 5.3 |
+| JUnit 4 | >= 4.10 |
+| JUnit 5 | >= 5.3 |
 | TestNG | >= 6.4 |
 | Spock | >= 2.0 |
 | Cucumber | >= 5.4.0 |
+| Karate | >= 1.0.0 |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
