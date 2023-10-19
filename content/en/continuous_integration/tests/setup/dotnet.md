@@ -28,9 +28,6 @@ further_reading:
 
 ## Compatibility
 
-{{< tabs >}}
-{{% tab "Test Visibility" %}}
-
 Supported languages:
 
 | Language | Version |
@@ -48,21 +45,7 @@ Supported test frameworks:
 | xUnit | >= 2.2 |
 | NUnit | >= 3.0 |
 | MsTestV2 | >= 14 |
-| [BenchmarkDotNet][101] | >= 0.13.2 |
-
-[101]: /continuous_integration/tests/setup/dotnet/?tab=onpremisesciproviderdatadogagent#instrumenting-benchmarkdotnet-tests
-
-{{% /tab %}}
-{{% tab "Test Suite-Level Visibility" %}}
-
-Supported Datadog tracing library:
-
-| Datadog Library | Version |
-|---|---|
-| `dd-trace-dotnet` | >= 2.16.0 |
-
-{{% /tab %}}
-{{< /tabs >}}
+| [BenchmarkDotNet][2] | >= 0.13.2 |
 
 ## Configuring reporting method
 
@@ -845,6 +828,7 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 
 
 [1]: /continuous_integration/tests/dotnet/#instrumenting-benchmarkdotnet-tests
+[2]: /continuous_integration/tests/setup/dotnet/?tab=onpremisesciproviderdatadogagent#instrumenting-benchmarkdotnet-tests
 [3]: https://dtdg.co/dd-trace-dotnet-win-x64
 [4]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [5]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64

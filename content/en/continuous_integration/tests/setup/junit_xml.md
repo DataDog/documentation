@@ -32,26 +32,11 @@ If your testing framework can generate JUnit XML test reports, you can use these
 
 ## Compatibility
 
-{{< tabs >}}
-{{% tab "Test Visibility" %}}
-
 Supported Datadog tracing library:
 
 | Datadog Library | Version |
 |---|---|
 | `datadog-ci` | >= 2.17.0 |
-
-{{% /tab %}}
-{{% tab "Test Suite-Level Visibility" %}}
-
-Supported Datadog tracing library:
-
-| Datadog Library | Version |
-|---|---|
-| `datadog-ci` | >= 2.17.0 |
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Installing the Datadog CI CLI
 

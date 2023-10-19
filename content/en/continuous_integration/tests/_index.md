@@ -66,6 +66,8 @@ cascade:
     {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project (except for Ruby).
+
 ## Default configurations
 
 Tests evaluate the behavior of code for a set of given conditions. Some of those conditions are related to the environment where the tests are run, such as the operating system or the runtime used. The same code executed under different sets of conditions can behave differently, so developers usually configure their tests to run in different sets of conditions and validate that the behavior is the expected for all of them. This specific set of conditions is called a *configuration*.
@@ -111,19 +113,6 @@ DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
 All tags with the `test.configuration` prefix are used as configuration tags, in addition to the automatically collected ones.
 
 In order to filter using these configurations tags, [you must create facets for these tags][2].
-
-## Test suite-level visibility
-
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
-
-{{< whatsnext desc="See the compatibility information for languages that support test suite-level visibility:" >}}
-    {{< nextlink href="continuous_integration/tests/setup/dotnet/?tab=testsuitelevelvisibility" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/javascript/?tab=testsuitelevelvisibility" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/swift/?tab=testsuitelevelvisibility" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/junit_upload/?tab=testsuitelevelvisibility" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/java/" >}}Java?{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python?{{< /nextlink >}}
-{{< /whatsnext >}}
 
 ## Use CI tests data
 

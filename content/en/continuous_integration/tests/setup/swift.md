@@ -27,9 +27,6 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 
 ## Compatibility
 
-{{< tabs >}}
-{{% tab "Test Visibility" %}}
-
 Supported languages:
 
 | Language | Version | Notes |
@@ -44,18 +41,6 @@ Supported platforms:
 | iOS | >= 11.0 |
 | macOS | >= 10.13 |
 | tvOS | >= 11.0 |
-
-{{% /tab %}}
-{{% tab "Test Suite-Level Visibility" %}}
-
-Supported Datadog tracing library:
-
-| Datadog Library | Version |
-|---|---|
-| `dd-sdk-swift-testing` | >= 2.1.0 |
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Installing the Swift testing SDK
 
