@@ -390,7 +390,7 @@ main:
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 903  
+    weight: 903
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
@@ -2954,16 +2954,21 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_working_with_data
     weight: 3
+  - name: Monitoring
+    url: observability_pipelines/monitoring/
+    parent: observability_pipelines
+    identifier: observability_pipelines_monitoring
+    weight: 4
   - name: Troubleshooting
     url: observability_pipelines/troubleshooting/
     parent: observability_pipelines
     identifier: observability_pipelines_troubleshooting
-    weight: 4
+    weight: 5
   - name: Reference
     url: observability_pipelines/reference/
     parent: observability_pipelines
     identifier: observability_pipelines_reference
-    weight: 5
+    weight: 6
   - name: Configurations
     url: observability_pipelines/configurations/
     parent: observability_pipelines_reference
@@ -2988,7 +2993,7 @@ main:
     url: observability_pipelines/guide/
     parent: observability_pipelines
     identifier: observability_pipelines_guides
-    weight: 6
+    weight: 7
   - name: Architecture
     url: observability_pipelines/architecture/
     parent: observability_pipelines
@@ -8980,6 +8985,23 @@ api:
         - v2
       operationids:
         - ListContainerImages
+      unstable:
+        - v2
+      order: 1
+  - name: Containers
+    url: /api/latest/containers/
+    identifier: containers
+    generated: true
+  - name: Get All Containers
+    url: '#get-all-containers'
+    identifier: containers-get-all-containers
+    parent: containers
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListContainers
       unstable:
         - v2
       order: 1
