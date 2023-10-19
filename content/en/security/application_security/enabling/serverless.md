@@ -663,28 +663,6 @@ CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
-#### Orchestrion
-
-<div class="alert alert-warning">Orchestrion is in Private Beta. If you are interested in participating in the Beta or providing feedback on Orchestrion, <a href="https://github.com/DataDog/orchestrion/issues">open a GitHub issue</a> or <a href="/help">contact Datadog Support</a>.</div>
-
-[Orchestrion][2] is a tool for automatically instrumenting Go code. With Orchestrion, it is possible to instrument your Go applications through Dockerfile.
-
-```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN go install github.com/datadog/orchestrion@latest
-RUN orchestrion -w ./
-RUN go mod tidy
-ENTRYPOINT ["/app/datadog-init"]
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-ENV DD_APPSEC_ENABLED=1
-CMD ["/path/to/your-go-binary"]
-```
-
-[1]: /tracing/trace_collection/library_config/go/ 
-[2]: https://github.com/DataDog/orchestrion
-
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -967,7 +945,7 @@ To enable ASM on your application, begin by adding the following key-value pairs
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- `DD_APPSEC_ENABLED` is the argument to enable Application Security on your application
+- `DD_APPSEC_ENABLED` value should be 1 in order to enable Application Security
 
 ### Identifying your startup command
 
