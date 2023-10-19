@@ -42,9 +42,9 @@ To see your pipelines, navigate to [**CI** > **Pipelines**][101].
 
 The [Pipelines page][101] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
 
-Metrics shown include build frequency, failure rate, average duration, and 95th percentile duration. This information reveals which pipelines are high-usage and potentially high resource consumers. The last build result, duration, and last runtime show you the effect of the last commit.
+Metrics shown include build frequency, failure rate, median duration, and change in median duration. This information reveals which pipelines are high-usage and potentially high resource consumers or experiencing regressions. The last build result, duration, and last runtime show you the effect of the last commit.
 
-You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error.
+You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error. If you are using [Datadog Teams][108], you can filter for specific pipelines associated to your team via [custom tags][109] that match team handles.
 
 ## Pipeline details and executions
 
@@ -150,6 +150,8 @@ The Default Branches view shows similar information to the Branches view, but ap
 [105]: /glossary/#flaky-test
 [106]: /glossary/#test-regression
 [107]: https://app.datadoghq.com/ci/test-services?view=default-branches
+[108]: https://docs.datadoghq.com/account_management/teams/ 
+[109]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 
 {{% /tab %}}
 {{< /tabs >}}
