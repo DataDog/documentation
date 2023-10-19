@@ -1008,6 +1008,10 @@ main:
     parent: metrics_top_level
     identifier: metrics_explorer
     weight: 1
+ - name: Metrics Units
+    url: metrics/units/
+    parent: metrics_explorer
+    weight: 101
   - name: Summary
     url: metrics/summary/
     parent: metrics_top_level
@@ -1022,10 +1026,6 @@ main:
     parent: metrics_top_level
     identifier: metrics_distributions
     weight: 4
-  - name: Metrics Units
-    url: metrics/units/
-    parent: metrics_top_level
-    weight: 5
   - name: Metrics Without Limits™
     url: metrics/metrics-without-limits/
     parent: metrics_top_level
