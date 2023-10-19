@@ -3462,6 +3462,117 @@ components:
             $ref: '#/components/schemas/ConfluentResourceResponseData'
           type: array
       type: object
+    Container:
+      description: Container object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ContainerAttributes'
+        id:
+          description: Container ID.
+          type: string
+        type:
+          $ref: '#/components/schemas/ContainerType'
+      type: object
+    ContainerAttributes:
+      description: Attributes for a container.
+      properties:
+        container_id:
+          description: The ID of the container.
+          type: string
+        created_at:
+          description: Time the container was created.
+          type: string
+        host:
+          description: Hostname of the host running the container.
+          type: string
+        image_digest:
+          description: Digest of the compressed image manifest.
+          nullable: true
+          type: string
+        image_name:
+          description: Name of the associated container image.
+          type: string
+        image_tags:
+          description: List of image tags associated with the container image.
+          items:
+            type: string
+          nullable: true
+          type: array
+        name:
+          description: Name of the container.
+          type: string
+        started_at:
+          description: Time the container was started.
+          type: string
+        state:
+          description: State of the container. This depends on the container runtime.
+          type: string
+        tags:
+          description: List of tags associated with the container.
+          items:
+            type: string
+          type: array
+      type: object
+    ContainerGroup:
+      description: Container group object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ContainerGroupAttributes'
+        id:
+          description: Container Group ID.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ContainerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/ContainerGroupType'
+      type: object
+    ContainerGroupAttributes:
+      description: Attributes for a container group.
+      properties:
+        count:
+          description: Number of containers in the group.
+          format: int64
+          type: integer
+        tags:
+          description: Tags from the group name parsed in key/value format.
+          type: object
+      type: object
+    ContainerGroupRelationships:
+      description: Relationships to containers inside a container group.
+      properties:
+        containers:
+          $ref: '#/components/schemas/ContainerGroupRelationshipsLink'
+      type: object
+    ContainerGroupRelationshipsData:
+      description: Links data.
+      items:
+        description: A link data.
+        type: string
+      type: array
+    ContainerGroupRelationshipsLink:
+      description: Relationships to Containers inside a Container Group.
+      properties:
+        data:
+          $ref: '#/components/schemas/ContainerGroupRelationshipsData'
+        links:
+          $ref: '#/components/schemas/ContainerGroupRelationshipsLinks'
+      type: object
+    ContainerGroupRelationshipsLinks:
+      description: Links attributes.
+      properties:
+        related:
+          description: Link to related containers.
+          type: string
+      type: object
+    ContainerGroupType:
+      default: container_group
+      description: Type of container group.
+      enum:
+      - container_group
+      example: container_group
+      type: string
+      x-enum-varnames:
+      - CONTAINER_GROUP
     ContainerImage:
       description: Container Image object.
       properties:
@@ -3751,6 +3862,96 @@ components:
           $ref: '#/components/schemas/ContainerImageMeta'
       type: object
     ContainerImagesResponseLinks:
+      description: Pagination links.
+      properties:
+        first:
+          description: Link to the first page.
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          type: string
+      type: object
+    ContainerItem:
+      description: Possible Container models.
+      oneOf:
+      - $ref: '#/components/schemas/Container'
+      - $ref: '#/components/schemas/ContainerGroup'
+    ContainerMeta:
+      description: Response metadata object.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ContainerMetaPage'
+      type: object
+    ContainerMetaPage:
+      description: Paging attributes.
+      properties:
+        cursor:
+          description: The cursor used to get the current results, if any.
+          type: string
+        limit:
+          description: Number of results returned
+          format: int32
+          maximum: 10000
+          minimum: 0
+          type: integer
+        next_cursor:
+          description: The cursor used to get the next results, if any.
+          type: string
+        prev_cursor:
+          description: The cursor used to get the previous results, if any.
+          nullable: true
+          type: string
+        total:
+          description: Total number of records that match the query.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ContainerMetaPageType'
+      type: object
+    ContainerMetaPageType:
+      default: cursor_limit
+      description: Type of Container pagination.
+      enum:
+      - cursor_limit
+      example: cursor_limit
+      type: string
+      x-enum-varnames:
+      - CURSOR_LIMIT
+    ContainerType:
+      default: container
+      description: Type of container.
+      enum:
+      - container
+      example: container
+      type: string
+      x-enum-varnames:
+      - CONTAINER
+    ContainersResponse:
+      description: List of containers.
+      properties:
+        data:
+          description: Array of Container objects.
+          items:
+            $ref: '#/components/schemas/ContainerItem'
+          type: array
+        links:
+          $ref: '#/components/schemas/ContainersResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ContainerMeta'
+      type: object
+    ContainersResponseLinks:
       description: Pagination links.
       properties:
         first:
@@ -20184,6 +20385,89 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/containers:
+    get:
+      description: Get all containers for your organization.
+      operationId: ListContainers
+      parameters:
+      - description: Comma-separated list of tags to filter containers by.
+        example: env:prod,short_image:cassandra
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: Comma-separated list of tags to group containers by.
+        example: datacenter,cluster
+        in: query
+        name: group_by
+        required: false
+        schema:
+          type: string
+      - description: Attribute to sort containers by.
+        example: started_at
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of results returned.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 1000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get All Containers
+      tags:
+      - Containers
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -31478,6 +31762,8 @@ tags:
 - description: The Container Images API allows you to query Container Image data for
     your organization.
   name: Container Images
+- description: The Containers API allows you to query container data for your organization.
+  name: Containers
 - description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
