@@ -112,7 +112,7 @@ To ensure a step functions as desired without having to run the entire workflow,
 
 To test a workflow step:
 1. Click **Test** in the step **Inputs** section.
-1. (Optional) Adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
+1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
 1. Click **Test** to test the action.
 1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
 
