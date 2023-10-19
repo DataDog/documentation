@@ -1966,25 +1966,25 @@ main:
     parent: tracing
     identifier: service_catalog
     weight: 9
-  - name: Setup
+  - name: Adding Entries to Service Catalog
     url: tracing/service_catalog/setup
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
-  - name: Service Scorecards
-    url: tracing/service_catalog/scorecards
+  - name: Adding Metadata
+    url: tracing/service_catalog/adding_metadata
     parent: service_catalog
-    identifier: service_catalog_scorecards
+    identifier: service_metadata
     weight: 902
   - name: Service Catalog API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
     weight: 903
-  - name: Service Metadata Structure
-    url: tracing/service_catalog/service_metadata_structure
+  - name: Service Scorecards
+    url: tracing/service_catalog/scorecards
     parent: service_catalog
-    identifier: service_metadata_structure
+    identifier: service_catalog_scorecards
     weight: 904
   - name: Integrations
     url: tracing/service_catalog/integrations
