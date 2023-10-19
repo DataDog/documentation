@@ -34,6 +34,11 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
+The **Static Analysis** feature improves code quality and security by:
+- Highlighting issues in code, color-coded by severity
+- Suggesting fixes
+- Automatically applying fixes
+
 ## Requirements
 
 - **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
@@ -156,6 +161,13 @@ You can navigate to the [Log Explorer][5] on the Datadog platform directly from 
 
 Clicking the link opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
+## Static Analysis
+<div class="alert alert-warning">
+  Static Analysis is only supported in Python.
+</div>
+
+[**Static Analysis**][12] improves the quality and security of code by enforcing [rules][13] such as "do not use insecure encryption protocols". If Static Analysis is [set up in the repository][14], the Datadog extension will highlight rule violations and suggest fixes.
+
 ## View in IDE
 
 The **View in IntelliJ IDEA** feature provides a link from the Datadog platform directly to your Java source files (not yet available for Go). Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
@@ -189,3 +201,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
+[12]: /continuous_integration/static_analysis/?tab=circleciorbs
+[13]: /continuous_integration/static_analysis/rules
+[14]: /continuous_integration/static_analysis/?tab=circleciorbs#setup
