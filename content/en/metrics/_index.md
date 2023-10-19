@@ -11,16 +11,20 @@ cascade:
         rank: 70
 ---
 
-
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
-    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
     {{< nextlink href="metrics/distributions/" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>Metrics Units</u> - Learn about the units that can be associated with metrics.{{< /nextlink >}}
     {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without Limits™.{{< /nextlink >}}
+    {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
+    {{< nextlink href="/metrics/custom_metrics" >}}<u>Custom Metrics</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Send OpenTelemetry Metrics</u> - Configure the Datadog Agent or OpenTelemetry Collector.{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
+## Overview
 ### What are metrics?
 
 Metrics are numerical values that can track anything about your environment over time, from latency to error rates to user signups.
