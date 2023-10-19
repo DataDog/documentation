@@ -14,13 +14,13 @@ title: Mobile Vitals
 
 Real User Monitoring offers Mobile Vitals, a set of metrics inspired by [MetricKit][1], that can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good. 
 
-You can view Mobile Vitals for your application by navigating to  **UX Monitoring > Performance Summary** and selecting your application.
+You can view Mobile Vitals for your application by navigating to **UX Monitoring > Performance Monitoring** and selecting your application.
 
-{{< img src="real_user_monitoring/ios/ios_mobile_vitals-3.png" alt="Mobile Vitals in the Performance Tab" style="width:90%;">}}
+{{< img src="real_user_monitoring/ios/ios-mobile-vitals.png" alt="Mobile Vitals in the Performance Tab" style="width:90%;">}}
 
-To access the RUM mobile app performance dashboard, scroll down to the Monitor Performance Metrics section from the application summary page and click **Performance Overview**.
+To access the RUM mobile app performance dashboard, switch to the **Performance** tab, then click the **View Dashboard** link.
 
-{{< img src="real_user_monitoring/ios/ios-performance-dashboard.png" alt="Access the mobile performance dashboard for iOS from the Performance Summary tab" style="width:90%;">}}
+{{< img src="real_user_monitoring/ios/ios-perf-dash-link.png" alt="Access the mobile performance dashboard for iOS from the Performance tab" style="width:90%;">}}
 
 Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph. 
 
