@@ -171,6 +171,10 @@
     "description": "Get all Container Images for your organization.",
     "summary": "Get all Container Images"
   },
+  "ListContainers": {
+    "description": "Get all containers for your organization.",
+    "summary": "Get All Containers"
+  },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
     "summary": "Get all application keys owned by current user"

@@ -390,7 +390,7 @@ main:
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 903  
+    weight: 903
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
@@ -8984,6 +8984,23 @@ api:
         - v2
       operationids:
         - ListContainerImages
+      unstable:
+        - v2
+      order: 1
+  - name: Containers
+    url: /api/latest/containers/
+    identifier: containers
+    generated: true
+  - name: Get All Containers
+    url: '#get-all-containers'
+    identifier: containers-get-all-containers
+    parent: containers
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListContainers
       unstable:
         - v2
       order: 1
