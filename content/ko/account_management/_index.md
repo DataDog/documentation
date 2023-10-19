@@ -59,9 +59,9 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 컴퓨터 디스플레이 설정에 맞추려면 *System* 옵션을 선택하세요. 자동으로 Datadog 디스플레이가 OS 수준에서 설정한 테마에 맞게 조정됩니다.
 
-## 깃허브로 연결
+## GitHub로 연결
 
-Datadog에서 이벤트를 생성하기 위해 [GitHub 통합][9]을 설치했다면 개인 깃허브 계정을 Datadog 사용자 계정에 연결하세요. 계정을 연결하면 Datadog 내 깃허브 이벤트에 게시한 댓글이 자동으로 해당하는 깃허브의 문제 또는 풀(pull) 요청에도 게시됩니다.
+Datadog에서 이벤트를 생성하기 위해 [GitHub 통합][9]을 설치한 경우 개인 GitHub 계정을 Datadog 사용자 계정에 연결하세요. 계정을 연결하면 Datadog 내 GitHub 이벤트에 게시한 댓글이 자동으로 해당하는 GitHub  문제나 풀 요청에 게시됩니다.
 
 ## 조직 계정 비활성화
 
