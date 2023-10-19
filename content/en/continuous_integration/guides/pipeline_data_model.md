@@ -33,7 +33,7 @@ When a pipeline, stage, job, or step finishes, execution data is sent to Datadog
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
-Stages, jobs, and steps are expected to have the same pipeline name as their parent pipeline. In case this is not true, there might be missing information on the user interface. For example, missing jobs in the job summary tables.
+Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
 
 ### Pipeline unique IDs
 

@@ -175,13 +175,13 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
-### Missing pipelines on the pipeline list
+### Missing pipelines on the Pipelines page
 
-The pipeline list only displays pipelines with no Git information, or pipelines with Git information which belong to the default branch of the Git repository.
+The pipeline page only displays pipelines with no Git information, or pipelines with Git information which belong to the default branch of the Git repository.
 
-### Missing jobs in the job summary table
+### Missing stages or jobs in summary tables
 
-Missing jobs on the _Pipeline Details_ page might be due to a wrong configuration of the jobs. Make sure that the pipeline name stored in the job executions matches the name of their parent pipeline.
+Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the exact same name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
 ## Intelligent Test Runner
 
@@ -228,3 +228,4 @@ If you are authoring a commit that includes any of those cases, you can force-di
 [12]: /continuous_integration/intelligent_test_runner/
 [13]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [14]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
+[15]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
