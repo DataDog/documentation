@@ -31,7 +31,6 @@ The **Static Analysis** feature improves code quality and security by:
 - Highlighting issues in code, color-coded by severity
 - Suggesting fixes
 - Automatically applying fixes through [Code Actions][17]
-- Displaying a list of all rule violations in the workspace
 
 The **Synthetic Tests** feature allows you to:
 - Run Synthetic tests on your local environments
