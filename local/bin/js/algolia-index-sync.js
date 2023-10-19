@@ -158,6 +158,7 @@ const sync = () => {
         .then(() => console.log(`${indexName} synonyms update complete`))
         .catch((err) => console.error(err));
 
+    console.info('Syncing index...')
     updateIndex(indexName);
 };
 
