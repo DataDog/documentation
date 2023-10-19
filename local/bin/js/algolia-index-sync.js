@@ -120,7 +120,11 @@ const updateReplicas = (client, indexName) => {
 };
 
 const updateIndex = (indexName) => {
+    console.info('Syncing index...')
     const localAlogliaSearchIndex = require('../../../public/algolia.json');
+    const localEnglishOnlyIndex = localAlogliaSearchIndex.filter(record => record.language === "en")
+    console.log(localAlogliaSearchIndex.length)
+    console.log(localEnglishOnlyIndex.length)
 
     const cb = (error, result) => {
         if (error) {
@@ -131,7 +135,7 @@ const updateIndex = (indexName) => {
         console.log(result);
     };
 
-    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, localEnglishOnlyIndex, { verbose: true }, cb);
 };
 
 const sync = () => {
@@ -158,7 +162,6 @@ const sync = () => {
         .then(() => console.log(`${indexName} synonyms update complete`))
         .catch((err) => console.error(err));
 
-    console.info('Syncing index...')
     updateIndex(indexName);
 };
 
