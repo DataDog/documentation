@@ -1008,7 +1008,7 @@ main:
     parent: metrics_top_level
     identifier: metrics_explorer
     weight: 1
- - name: Metrics Units
+  - name: Metrics Units
     url: metrics/units/
     parent: metrics_explorer
     weight: 101
