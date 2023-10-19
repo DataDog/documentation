@@ -117,7 +117,7 @@ class MyTest(unittest.TestCase):
 
 #### Known limitations
 
-In some cases, if your `unittest` test execution is being ran in a parallel manner, this may break the instrumentation and affect test visibility.
+In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
 
 Datadog recommends you use up to one process at a time to prevent affecting test visibility.
 
