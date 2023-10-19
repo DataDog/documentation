@@ -175,6 +175,14 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
+### Missing pipelines on the pipeline list
+
+The pipeline list only displays pipelines with no Git information, or pipelines with Git information which belong to the default branch of the Git repository.
+
+### Missing jobs in the job summary table
+
+Missing jobs on the _Pipeline Details_ page might be due to a wrong configuration of the jobs. Make sure that the pipeline name stored in the job executions matches the name of their parent pipeline.
+
 ## Intelligent Test Runner
 
 ### Intelligent Test Runner is not working
