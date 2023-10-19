@@ -24,6 +24,10 @@ integration_id: "rsyslog"
 
 Configure Rsyslog to gather logs from your host, containers, and services.
 
+There are two options:
+1. Configure the syslog server to forward messages to the datadog http endpoint (no Datadog Agent required)
+2. Have the syslog server write to a file and configure an Datadog Agent to monitor the file (Datadog Agent required)
+
 ## Setup
 
 ### Log collection
