@@ -69,7 +69,7 @@ The APIs and permissions below enable Datadog to access your Detailed Usage bill
 * `bigquery.transfers.get`
 * `bigquery.transfers.update`
 
-**Note:** This can be a custom role, or you can use existing Google Cloud role `roles/bigquery.admin`
+**Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.admin`.
 
 #### Configure required export BigQuery dataset access
 [Add the service account as a principal on the export BigQuery dataset resource][8] and assign a role with the following permissions:
