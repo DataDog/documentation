@@ -40,7 +40,7 @@ You can access high-level accumulation and trends, including:
 
 To see your pipelines, navigate to [**CI** > **Pipelines**][101].
 
-The [Pipelines page][101] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named something like `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
+The [Pipelines page][101] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
 
 Metrics shown include build frequency, failure rate, average duration, and 95th percentile duration. This information reveals which pipelines are high-usage and potentially high resource consumers. The last build result, duration, and last runtime show you the effect of the last commit.
 
