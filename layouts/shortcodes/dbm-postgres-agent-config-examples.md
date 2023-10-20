@@ -114,7 +114,7 @@ instances:
 ```
 
 ### Collecting schemas
-To collect schemas, use the `collect_schemas` option. Additionally, follow the steps specified in 'Monitoring relation metrics for multiple logical databases'.
+To collect schemas, use the `collect_schemas` option. Additionally, follow the steps specified in [Monitoring relation metrics for multiple logical databases](#monitoring-relation-metrics-for-multiple-logical-databases).
 
 ```yaml
 init_config:
