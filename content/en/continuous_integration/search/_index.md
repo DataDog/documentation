@@ -74,12 +74,26 @@ Job log collection is supported for the following providers:
 - [GitLab][104]
 - [Jenkins][105]
 
+#### AI-generated log summaries
+
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+
+This feature is in private beta. To request access, fill out [this form][108].
+{{% /site-region %}}
+{{% site-region region="gov" %}}
+
+AI-generated log summaries are not available for the {{< region-param key="dd_site_name" >}} site.
+{{% /site-region %}}
+
+Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
+
 [101]: https://app.datadoghq.com/ci/pipelines
 [103]: /continuous_integration/pipelines/github/#enable-log-collection
 [104]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [105]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [106]: /account_management/teams/ 
 [107]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[108]: https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform
 
 {{% /tab %}}
 {{% tab "Tests" %}}
