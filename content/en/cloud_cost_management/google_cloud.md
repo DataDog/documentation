@@ -31,7 +31,7 @@ The Google Cloud Platform Datadog Integration Service Account must have necessar
 
 1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
 2. Enable [Detailed Usage cost][2] export, (select or create a project and a BigQuery dataset).
-3. Document the billing account id for the billing account where the export was configured as well as export project id and dataset name
+3. Document the `billing account id` for the billing account where the export was configured, as well as the export `project id` and `dataset name`.
 
 ### Create or select a Google Cloud Storage bucket
 You can use an existing GCS bucket or create a new one. Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to a `datadog_cloud_cost_detailed_usage_export` prefix in the selected bucket.
