@@ -8,6 +8,10 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 To monitor cloud costs effectively, you need a complete and detailed view of how different services, teams, and products contribute to your overall spend. Tag Pipelines ensure your cloud resources use standard tags that you can leverage across the product so that no resource's cost data slips through the cracks.
@@ -22,15 +26,15 @@ There are three types of rules supported: **Add tag**, **Alias tag keys**, and *
 
 ### Add tag
 
-Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data. 
+Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data.
 
-For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of. 
+For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of.
 
 {{< img src="cloud_cost/tags_addnew.png" alt="Add new business unit tag to resources with service:processing, service:creditcard, or service:payment-notification." >}}
 
 ### Alias tag keys
 
-  Map existing tag values to a more standardized tag. 
+  Map existing tag values to a more standardized tag.
 
 For example, if your organization wants to use the standard `application` tag key, but several teams have a variation of that tag (like `app`, `webapp`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
 

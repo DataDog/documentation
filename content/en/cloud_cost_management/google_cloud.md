@@ -14,6 +14,10 @@ further_reading:
   text: "Gain insights into your Azure bill"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
+
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLScNSzkTAmmpmxEY5Xoo-xPOyKXG0n_6IgdlU66mWXp445pNdA/viewform" btn_hidden="false" >}}
 Cloud Cost Google Cloud support is in private beta
 {{< /beta-callout >}}
