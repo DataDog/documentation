@@ -25,13 +25,20 @@ further_reading:
 
 ## Compatibility
 
-Supported Python interpreters:
-* Python >= 3.7
+Supported languages:
+
+| Language | Version |
+|---|---|
+| Python 2 | >= 2.7 |
+| Python 3 | >= 3.6 |
 
 Supported test frameworks:
-* pytest >= 3.0.0
-* pytest-benchmark >= 3.1.0
-* unittest >= Python 3.7
+
+| Test Framework | Version |
+|---|---|
+| `pytest` | >= 3.0.0 | 
+| `pytest-benchmark` | >= 3.1.0 |
+| `unittest` | >= 3.7 |
 
 ## Configuring reporting method
 

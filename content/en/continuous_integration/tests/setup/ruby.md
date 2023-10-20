@@ -28,16 +28,20 @@ further_reading:
 
 ## Compatibility
 
-Supported Ruby interpreters:
+Supported languages:
 
-* Ruby >= 2.1
-* JRuby >= 9.2
+| Language | Version |
+|---|---|
+| Ruby | >= 2.1 |
+| JRuby | >= 9.2 |
 
 Supported test frameworks:
 
-* RSpec >= 3.0.0
-* Minitest >= 5.0.0
-* Cucumber >= 3.0
+| Test Framework | Version |
+|---|---|
+| RSpec | >= 3.0.0 |
+| Minitest | >= 5.0.0 |
+| Cucumber | >= 3.0 |
 
 ## Configuring reporting method
 
