@@ -4472,6 +4472,11 @@ main:
     parent: account_management_audit_trail
     identifier: account_management_audit_trail_events
     weight: 901
+  - name: Forwarding
+    url: account_management/audit_trail/forwarding_audit_events/
+    parent: account_management_audit_trail
+    identifier: account_management_audit_trail_forwarding
+    weight: 902
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
