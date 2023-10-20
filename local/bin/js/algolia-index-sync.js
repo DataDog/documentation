@@ -120,7 +120,18 @@ const updateReplicas = (client, indexName) => {
 };
 
 const updateIndex = (indexName) => {
-    const localAlogliaSearchIndex = require('../../../public/algolia.json');
+    console.info('Syncing local index with Algolia...')
+    const fullLocalAlogliaSearchIndex = require('../../../public/algolia.json');
+    let localAlgoliaSearchIndex
+
+    // Only the full nightly build re-indexes all language pages in Algolia.
+    // Master/preview pipelines will re-index only English pages automatically.
+    // This is done to improve performance as Docs continues scaling.
+    if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
+        localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
+    } else {
+        localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
+    }
 
     const cb = (error, result) => {
         if (error) {
@@ -131,7 +142,7 @@ const updateIndex = (indexName) => {
         console.log(result);
     };
 
-    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, localAlgoliaSearchIndex, { verbose: true }, cb);
 };
 
 const sync = () => {
