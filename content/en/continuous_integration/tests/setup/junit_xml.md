@@ -430,6 +430,11 @@ datadog-ci junit upload --service service_name \
 
 {{< /tabs >}}
 
+<div class="alert alert-warning">
+  When using bash from Git for Windows, define the <strong>MSYS_NO_PATHCONV=1</strong> environment variable.
+  Otherwise, any argument starting with <strong>/</strong> will be expanded to a Windows path.
+</div>
+
 ## Providing metadata through property elements
 
 Another way to provide additional tags to specific tests is including `<property name="dd_tags[key]" value="value">` elements within the `<testsuite>` or `<testcase>` elements. If you add these tags to a `<testcase>` element, they are stored in its test span. If you add the tags to a `<testsuite>` element, they are stored in all of that suite's test spans.
