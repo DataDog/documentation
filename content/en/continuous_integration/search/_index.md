@@ -44,7 +44,7 @@ The [Pipelines page][101] shows aggregate stats for the default branch of each p
 
 The metrics shown include build frequency, failure rate, median duration, and change in median duration on both an absolute and relative basis. This information reveals which pipelines are high-usage and potentially high-resource consumers, or are experiencing regressions. The last build result, duration, and last runtime shows you the effect of the last commit.
 
-You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error. If you are using [Datadog Teams][108], you can filter for specific pipelines associated to your team using [custom tags][109] that match team handles.
+You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error. If you are using [Datadog Teams][106], you can filter for specific pipelines associated to your team using [custom tags][107] that match team handles.
 
 ## Pipeline details and executions
 
@@ -78,6 +78,8 @@ Job log collection is supported for the following providers:
 [103]: /continuous_integration/pipelines/github/#enable-log-collection
 [104]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [105]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
+[106]: /account_management/teams/ 
+[107]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 
 {{% /tab %}}
 {{% tab "Tests" %}}
@@ -150,8 +152,6 @@ The Default Branches view shows similar information to the Branches view, but ap
 [105]: /glossary/#flaky-test
 [106]: /glossary/#test-regression
 [107]: https://app.datadoghq.com/ci/test-services?view=default-branches
-[108]: /account_management/teams/ 
-[109]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 
 {{% /tab %}}
 {{< /tabs >}}
