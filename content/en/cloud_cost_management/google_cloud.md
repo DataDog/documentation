@@ -99,7 +99,7 @@ Add the BigQuery Data Transfer Service Account role created by the trigger as a 
 
 
 ### Configure Cloud Costs for Google Cloud in Datadog
-Navigate to [Setup & Configuration][3] and follow the steps.
+Navigate to [Setup & Configuration][3] and follow the steps provided in-app.
 
 ### Cost types
 You can visualize your ingested data using the following cost types:
