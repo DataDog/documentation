@@ -20,7 +20,7 @@ Cloud Cost Google Cloud support is in private beta
 
 ## Overview
 
-To use Cloud Cost Management with Google Cloud, you must set up a Datadog Google Cloud Platform Integration in Datadog. You must also enable a Detailed Usage Cost billing export for your desired billing account in Google Cloud.
+To use Cloud Cost Management with Google Cloud, you must set up a Datadog [Google Cloud Platform Integration][12] in Datadog. You must also enable a Detailed Usage Cost billing export for your desired billing account in Google Cloud.
 
 The Google Cloud Platform Datadog Integration Service Account must have necessary permissions configured to interact with Google Cloud Storage and BigQuery.
 
