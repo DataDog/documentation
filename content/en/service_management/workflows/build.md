@@ -232,5 +232,5 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
-[6]: /service_management/workflows/action_catalog/generic_actions/#testing-expressions-and-functions
+[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
 
