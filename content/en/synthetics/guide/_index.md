@@ -54,8 +54,9 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Data Security:" >}}
+    {{< nextlink href="synthetics/guide/http-tests-with-hmac/" >}}Creating HTTP tests with hash-based message authentication code (HMAC) authentication{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Using authentication in API and multistep API tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication in browser tests{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}Time-based one-time passwords (TOTP) for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-passkeys/" >}}Using passkeys (FIDO2) in browser tests{{< /nextlink >}}
 {{< /whatsnext >}}
