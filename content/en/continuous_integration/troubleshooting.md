@@ -181,7 +181,7 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 
 ### Missing stages or jobs in summary tables
 
-Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the exact same name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
+Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
 ## Intelligent Test Runner
 
