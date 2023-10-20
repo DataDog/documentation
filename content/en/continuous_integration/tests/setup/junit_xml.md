@@ -22,13 +22,21 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 </div>
 {{< /site-region >}}
 
-## Overview
-
 <div class="alert alert-warning"><strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files, as the native instrumentation provides more accurate time results, supports distributed traces on integration tests, and supports structured stack traces.</div>
+
+## Overview
 
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
 If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
+
+## Compatibility
+
+Supported Datadog tracing library:
+
+| Datadog Library | Version |
+|---|---|
+| `datadog-ci` | >= 2.17.0 |
 
 ## Installing the Datadog CI CLI
 
@@ -69,8 +77,6 @@ datadog-ci version
 {{< /code-block >}}
 
 {{% /tab %}}
-
-
 
 {{% tab "Windows" %}}
 {{< code-block lang="powershell" >}}
@@ -175,7 +181,7 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 
 {{< /tabs >}}
 
-**Note:** Reports larger than 250 MiB may not be processed completely, resulting in missing tests or logs. For the best experience ensure that the reports are under 250 MiB.
+Reports larger than 250 MiB may not be processed completely, resulting in missing tests or logs. For the best experience, ensure that the reports are under 250 MiB.
 
 ## Configuration settings
 
@@ -266,19 +272,13 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-### Test suite level visibility compatibility
-[Test suite level visibility][9] is supported from `datadog-ci>=2.17.0`.
-
-## Collecting repository and commit metadata
-
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
 
-## Git metadata upload
+## Uploading Git metadata
 
 From `datadog-ci` version `2.9.0` or later, CI Visibility automatically uploads Git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, pass the flag `--skip-git-metadata-upload`.
-
 
 ## Collecting environment configuration metadata
 
@@ -478,19 +478,18 @@ It is possible to report code coverage for a given JUnit report via the `--repor
 datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
-For more information, see the [Code Coverage guide][10].
+For more information, see [Code Coverage][10].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://junit.org/junit5/
-[2]: https://docs.datadoghq.com/continuous_integration/tests/
+[2]: https://docs.datadoghq.com/continuous_integration/tests/#setup
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
 [4]: https://github.com/DataDog/datadog-ci/releases
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
-[9]: /continuous_integration/tests/#test-suite-level-visibility
-[10]: /continuous_integration/guides/code_coverage/?tab=junitreportuploads
+[10]: /continuous_integration/integrate_tests/code_coverage/?tab=junitreportuploads
