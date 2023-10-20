@@ -14,6 +14,7 @@ cascade:
     {{< nextlink href="integrations/guide/requests" tag=" documentation" >}}Request Datadog integrations{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/reference-tables/" tag=" Documentation" >}}Add Custom Metadata with Reference Tables{{< /nextlink >}}   
     {{< nextlink href="integrations/guide/source-code-integration" tag=" Documentation" >}}Datadog Source Code Integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/data-center-migration" tag=" Documentation" >}}Datadog Data Center Migration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag=" cloud" >}}Cloud metric delay{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag=" Windows" >}}Add event log files to the `Win32_NTLogEvent` WMI class{{< /nextlink >}}
     {{< nextlink href="integrations/guide/retrieving-wmi-metrics" tag=" Windows" >}}Retrieving WMI metrics{{< /nextlink >}}
@@ -63,7 +64,7 @@ cascade:
     {{< nextlink href="integrations/guide/running-jmx-commands-in-windows" tag=" jmx" >}}Running JMX commands in Windows{{< /nextlink >}}
     {{< nextlink href="integrations/guide/collecting-composite-type-jmx-attributes" tag=" jmx" >}}Collecting composite-type JMX attributes{{< /nextlink >}}
     {{< nextlink href="integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags" tag=" jmx" >}}Use Bean regexes to filter your JMX metrics and supply additional tags{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Which integrations use Jmxfetch?{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/jmx_integrations/" tag=" jmx" >}}Which integrations use JMXFetch?{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL guides:" >}}

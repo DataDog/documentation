@@ -1,5 +1,5 @@
 ---
-title: Which Integrations use Jmxfetch?
+title: Which Integrations use JMXFetch?
 kind: guide
 further_reading:
 - link: "/agent/faq/log4j_mitigation/"
@@ -27,11 +27,11 @@ The following integrations use [JMXFetch][1] and are included by default in the 
 * [SonarQube][15]
 * [Tomcat][16]
 
-**Note**: These integrations do **not** run by default. Each integration must be confugured to run on a host.
+**Note**: These integrations do **not** run by default. Each integration must be configured to run on a host.
 
 ## Community integrations
 
-The following [Community Integrations][17] use jmxfetch and are **not** included by default in the Datadog Agent:
+The following [Community Integrations][17] use JMXFetch and are **not** included by default in the Datadog Agent:
 
 * [nextcloud][18]
 * [flume][19]
@@ -46,7 +46,7 @@ The following [Community Integrations][17] use jmxfetch and are **not** included
 * [hbase_master][28]
 * [neutrona][29]
 
-**Note**: These integrations do **not** run by default. Each integration must be installed and confugured to run on a host.
+**Note**: These integrations do **not** run by default. Each integration must be installed and configured to run on a host.
 
 ## Custom checks
 
