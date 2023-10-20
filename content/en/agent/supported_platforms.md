@@ -120,13 +120,42 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
 [7]: /agent/basic_agent_usage/suse/
 [8]: /agent/basic_agent_usage/fedora/
 [9]: /agent/basic_agent_usage/osx/
-[10]: /agent/basic_agent_usage/windows/
 [11]: /agent/basic_agent_usage/source/
 [12]: https://github.com/golang/go/issues/24489
 
 {{% /tab %}}
 
 {{% tab "Windows" %}}
+
+<table>
+  <thead>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
+    <th>Notes</th>
+  </thead>
+  <tr>
+    <th rowspan=2><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <td>2012</td>
+    <td>>= 6.0.0</td>
+    <td>>= 7.0.0</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>2008 R2</td>
+    <td>< 6.46.0 </td>
+    <td>< 7.46.0</td>
+    <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
+  </tr>
+  <tr>
+    <td>Windows</td>
+    <td>>= 8.1</td>
+    <td>>= 6.0.0</td>
+    <td>>= 7.0.0</td>
+    <td></td>
+  </tr>
+</table>
 
 {{% /tab %}}
 
