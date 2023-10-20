@@ -86,7 +86,7 @@ The APIs and permissions below enable Datadog to access your Detailed Usage bill
 **Note:** This can be a custom role, or you can use existing Google Cloud role `roles/bigquery.dataEditor`
 
 #### If necessary - configure required cross-project service authorization
-If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset you need to [grant cross-project service account authorization][10]:
+If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
 
 [Trigger service agent creation][11] using the following values:
 * ENDPOINT: `bigquerydatatransfer.googleapis.com`
