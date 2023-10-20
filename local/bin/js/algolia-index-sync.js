@@ -142,7 +142,7 @@ const updateIndex = (indexName) => {
         console.log(result);
     };
 
-    atomicalgolia(indexName, localEnglishOnlyIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, localAlgoliaSearchIndex, { verbose: true }, cb);
 };
 
 const sync = () => {
