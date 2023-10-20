@@ -29,7 +29,8 @@ Supported languages:
 
 | Language | Version |
 |---|---|
-| Python 3 | >= 3.7 |
+| Python 2 | >= 2.7 |
+| Python 3 | >= 3.6 |
 
 Supported test frameworks:
 
