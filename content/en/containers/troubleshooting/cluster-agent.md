@@ -23,7 +23,7 @@ This document contains troubleshooting information for the following components:
 
 ## Datadog Cluster Agent
 
-To execute the troubleshooting commands for the Cluster Agent, you first need to be inside the Pod of the Cluster Agent or the node-based Agent. For this, use:
+To execute the troubleshooting commands for the Cluster Agent, you first need to be inside the Cluster Agent or the node-based Agent pod. For this, use:
 
 ```text
 kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash

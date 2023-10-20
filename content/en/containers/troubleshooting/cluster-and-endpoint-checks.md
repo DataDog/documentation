@@ -13,7 +13,7 @@ further_reading:
   text: "Running Endpoint Checks with Autodiscovery"  
 ---
 
-## Cluster Checks
+## Cluster checks
 
 ### Kubernetes: find the leader Cluster Agent
 
@@ -137,7 +137,7 @@ The Agent `status` command should show the check instance running and reporting 
       Average Execution Time : 90ms
 ```
 
-## Endpoint Checks
+## Endpoint checks
 
 Troubleshooting endpoint checks is similar to [troubleshooting cluster checks](#cluster-checks). Differences occur on Node Agents, where scheduled endpoint checks appear alongside cluster checks.
 
