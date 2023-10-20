@@ -130,9 +130,6 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Select a regional endpoint.
 1. In the **Dataflow template** dropdown menu, select **Pub/Sub to Datadog**.
 1. In **Required Parameters** section:  
-      a. Click **Add Scanning Rule**.  
-      b. Enter `.` in the **De
-1. In **Required Parameters** section:  
       a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a [new Pub/Sub system](#create-a-new-google-cloud-publishsubscription-pubsub-system).  
       b. Enter the following in the **Datadog Logs API URL** field:
       ```shell
