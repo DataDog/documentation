@@ -45,7 +45,7 @@ Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Pl
 
 Datadog Google Cloud Platform Integrations monitor the entire project when a related service account is integrated. Using a previously integrated project prevents monitoring resources in a new project. If your billing is associated with a non-integrated project, those resources will start to be monitored.
 
-**Note:** You can limit Metrics Collection per integration - this limits automatically monitoring resources in the project - but does not exclude data from Cloud Cost processing. </div>
+**Note:** You can limit Metrics Collection per integration - this limits automatically monitoring resources in the project, but does not exclude data from Cloud Cost processing. </div>
 
 ### Provide Datadog integration service account necessary permissions
 The APIs and permissions below enable Datadog to access your Detailed Usage billing export data and extract it in a useful format. This dumps data from BigQuery, where Google Cloud exports it, to your specified GCS bucket through a scheduled BigQuery query. The data is exported in a useful manner in your cloud storage bucket where it can then be processed by Datadog.
