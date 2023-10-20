@@ -78,14 +78,14 @@ Job log collection is supported for the following providers:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 
-This feature is in private beta. To request access, fill out [this form][108].
+This feature is in private beta. To request access, please fill out [this form][108].
 {{% /site-region %}}
 {{% site-region region="gov" %}}
 
 AI-generated log summaries are not available for the {{< region-param key="dd_site_name" >}} site.
 {{% /site-region %}}
 
-Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. You can use these summaries to quickly determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures more quickly.
+Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found under the _Failed Jobs_ tab of each pipeline execution. You can use these summaries to quickly determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures more quickly.
 
 [101]: https://app.datadoghq.com/ci/pipelines
 [103]: /continuous_integration/pipelines/github/#enable-log-collection
