@@ -122,3 +122,4 @@ You can visualize your ingested data using the following cost types:
 [9]: https://cloud.google.com/bigquery/docs/exporting-data#data-locations
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
+[12]: /integrations/google_cloud_platform/
