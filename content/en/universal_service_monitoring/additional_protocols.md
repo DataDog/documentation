@@ -22,13 +22,7 @@ After beta access has been granted in your Datadog organization, Universal Servi
 
 {{< img src="universal_service_monitoring/usm-beta-cloud-service-discovery.png" alt="Service summary, metrics, and service map for a cloud service detected by USM" style="width:100%;" >}}
 
-Universal Service Monitoring can discover the following third-party API endpoints:
-
-| Jira | Slack | Auth0 | Splunk |
-| Hubspot | Intercom | Stripe | Sendgrid |
-| Braintree | Mapbox | Twitter | Palo Alto Networks |
-| Towerdata | Soundcloud | Amplitude | Render.com |
-| Mixpanel | Github | OpenAI | |
+Universal Service Monitoring can discover the following third-party API endpoints: Jira, Slack, Auth0, Splunk, HubSpot, Intercom, Stripe, SendGrid, Braintree, Mapbox, Twitter (X), Palo Alto Networks, TowerData, SoundCloud, Amplitude, Render, Mixpanel, GitHub, and OpenAI.
 
 
 ## Support for additional protocols and methods of traffic encryption
@@ -49,7 +43,7 @@ Enable by setting the following environment variable:
 DD_SERVICE_MONITORING_CONFIG_ENABLE_ISTIO_MONITORING=true
 ```
 
-## gRPC and HTTP2 
+### gRPC and HTTP2 
 
 Universal Service Monitoring decodes gRPC and HTTP2 protocols.
 

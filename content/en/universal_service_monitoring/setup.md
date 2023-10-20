@@ -16,7 +16,7 @@ further_reading:
 Required Agent version
 : Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40, higher as noted below for some beta features.
 
-Your service must be running on one of the following supported platforms
+Supported Linux platforms
 : Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater
 
@@ -35,7 +35,7 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 
 - If on Linux:
     - Your service is running in a container.
-    - **Beta:** For non-containerized services see the [instructions here](#support-for-non-containerized-services).
+    - **Beta:** For non-containerized services see the [instructions here](#non-containerized-services-on-linux).
 - If on Windows and using IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -821,9 +821,11 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM has beta support for discovering cloud services and for decoding additional protocols and traffic encryption methods. For more information and to request access to the private beta, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p>
+<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM has beta support for discovering cloud services and for decoding additional protocols and traffic encryption methods. For more information and to request access to the private beta, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/tagging/unified_service_tagging
