@@ -113,6 +113,25 @@ instances:
       - relation_name: external_seller_products
 ```
 
+### Collecting schemas
+To collect schemas, use the `collect_schemas` option. Additionally, follow the steps specified in 'Monitoring relation metrics for multiple logical databases'.
+
+```yaml
+init_config:
+instances:
+  - host: example-service-primary.example-host.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    dbname: users
+    dbstrict: true
+    collect_schemas:
+      enabled: true
+    relations:
+      - products
+      - external_seller_products
+```
+
 ### Working with hosts through a proxy
 If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Use the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
