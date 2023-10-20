@@ -1,4 +1,11 @@
 {
+  "CreateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Create a retention filter returns \"OK\" response"
+    }
+  ],
   "ReorderApmRetentionFilters": [
     {
       "group": "apm_retention_filters",
