@@ -47,6 +47,8 @@ Requirements:
 - Datadog Agent version >= [7.45.0][4].
 
 Set the following in your `datadog.yaml` [configuration file][5]:
+- `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
+- `DD_APM_PEER_SERVICE_AGGREGATION=true`
 
 
 ### OpenTelemetry Collector Datadog Exporter configuration
