@@ -127,11 +127,11 @@ const updateIndex = (indexName) => {
     // Only the full nightly build re-indexes all language pages in Algolia.
     // Master/preview pipelines will re-index only English pages automatically.
     // This is done to improve performance as Docs continues scaling.
-    if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
-        localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
-    } else {
-        localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
-    }
+    // if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
+    //     localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
+    // } else {
+    //     localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
+    // }
 
     const cb = (error, result) => {
         if (error) {
@@ -142,7 +142,7 @@ const updateIndex = (indexName) => {
         console.log(result);
     };
 
-    atomicalgolia(indexName, localAlgoliaSearchIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, fullLocalAlogliaSearchIndex, { verbose: true }, cb);
 };
 
 const sync = () => {
