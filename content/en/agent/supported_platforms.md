@@ -2,7 +2,13 @@
 title: Supported platforms
 kind: Documentation
 disable_toc: false
+further_reading:
+- link: "agent/basic_agent_usage/"
+  tag: "Documentation"
+  text: "Basic Agent Usage"
 ---
+
+The Datadog Agent is supported on most popular operating systems and platforms. If your operating system is not listed below, [a source installation][1] might work for you. Source installations are supported on a best effort basis.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -25,7 +31,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <td>>= 7.0.0</td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian (systemd)</a></th>
+    <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian</a>(systemd)</th>
     <td>>= 7.0 (wheezy)</td>
     <td>< 6.36.0</td>
     <td>< 7.36.0</td>
@@ -95,33 +101,28 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
 </table>
 
+A check mark (&check;) indicates support in all minor and patch versions in a series.
+
 ## 64-BIT ARM V8
 
 Datadog Agent version 6 and 7 support the following Linux operating systems on 64-BIT ARM V8:
 
-| Operating system | Supported versions |
-|------------------------------------------|-----------------------------------------------------------|
-| [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] with systemd                 | Debian 9 (stretch)+                                       |
-| [Ubuntu][3]                              | Ubuntu 16.04+                                             |
-| [RedHat/CentOS][4] | >= 8.0<br>**Note**: Supported in Agent >= 6.33.0 and >= 7.33.0   |
-| [AlmaLinux/Rocky][4] | >= 8.0<br>**Note**: Supported in Agent >= 6.33.0 and >= 7.33.0  |
-| [Docker][5]                              | Version 1.12+                                             |
-| [Kubernetes][6]                          | Version 1.3+                                              |
-| [Fedora][8]                              | Fedora 27+                                                |
-| [macOS][9]                               | macOS 11.0+                                               |
+| Operating system | Supported versions | Agent 6 | Agent 7 |
+|------------------|--------------------|---------|---------|
+| [Amazon Linux][1] | Amazon Linux 2 | &check; | &check; |
+| [Debian][2] (systemd) | >= 9.0 (stretch) | &check; | &check; |
+| [Ubuntu][3] | >= 16.04 | &check; | &check; |
+| [RedHat/CentOS][4] | >= 8.0 | >= 6.33.0 | >= 7.33.0 |
+| [AlmaLinux/Rocky][4] | >= 8.0 | >= 6.33.0 | >= 7.33.0 |
+| [Fedora][7] | >= 27 | &check; | &check; |
+
+A check mark (&check;) indicates support in all minor and patch versions in a series.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
 [3]: /agent/basic_agent_usage/ubuntu/
 [4]: /agent/basic_agent_usage/redhat/
-[5]: /agent/docker/
-[6]: /agent/basic_agent_usage/kubernetes/
-[7]: /agent/basic_agent_usage/suse/
-[8]: /agent/basic_agent_usage/fedora/
-[9]: /agent/basic_agent_usage/osx/
-[11]: /agent/basic_agent_usage/source/
-[12]: https://github.com/golang/go/issues/24489
+[7]: /agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
 
@@ -177,5 +178,24 @@ Agents >= 6.0 and >= 7.0 support the following platforms:
 
 {{% tab "Unix" %}}
 
+Agent 6 and 7 support the following [AIX][1] versions:
+
+- 6.1 TL9 SP6
+- 7.1 TL5 SP3
+- 7.2 TL3 SP0
+
+
+[1]: /agent/basic_agent_usage/aix/
+
+{{% /tab %}}
+{{% tab "MacOS" %}}
+
 {{% /tab %}}
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /agent/basic_agent_usage/source/
