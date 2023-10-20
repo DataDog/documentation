@@ -149,7 +149,7 @@ kubernetes_node_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -207,7 +207,7 @@ kubernetes_pod_labels_as_tags:
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -256,7 +256,7 @@ kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -305,7 +305,7 @@ kubernetes_namespace_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -348,7 +348,7 @@ container_env_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -392,7 +392,7 @@ container_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 

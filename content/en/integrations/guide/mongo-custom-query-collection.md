@@ -1,13 +1,15 @@
 ---
-title: Collect Mongo Custom Metrics
+title: Collect MongoDB Custom Metrics
 kind: guide
 further_reading:
 - link: "/integrations/mongo/"
   tag: "Documentation"
-  text: "Datadog-Mongo integration"
+  text: "Learn about the MongoDB integration"
 ---
 
-To collect custom metrics with the Datadog-Mongo integration, use the `custom_queries` option in the `conf.d/mongo.d/conf.yaml` file at the root of your [Agent's configuration directory][1]. See the sample [mongo.d/conf.yaml][2] for more details.
+## Overview
+
+To collect custom metrics with the [MongoDB integration][8], use the `custom_queries` option in the `conf.d/mongo.d/conf.yaml` file at the root of your [Agent's configuration directory][1]. See the sample [mongo.d/conf.yaml][2] for more details.
 
 ## Configuration
 
@@ -15,16 +17,17 @@ To collect custom metrics with the Datadog-Mongo integration, use the `custom_qu
 
 * **`metric_prefix`**: Each metric starts with the chosen prefix.
 * **`query`**: This is the [Mongo runCommand][3] query to execute as a JSON object. **Note**: The Agent only supports `count`, `find`, and `aggregates` queries.
+* **`database`**: This is the MongoDB database to collect metrics from.
 * **`fields`**: Ignored for `count` queries. This is a list representing each field with no specific order. Ignores unspecified and missing fields. There are three required pieces of data for each `fields`:
   * `field_name`: This is the name of the field from which to fetch the data.
   * `name`: This is the suffix to append to the metric_prefix to form the full metric name. If `type` is `tag`, this column is treated as a tag and applied to every metric collected by this particular query.
-  * `type`: This is the submission method (`gauge`, `count`, `rate`, etc..). This can also be set to `tag` to tag each metric in the row with the name and value of the item in this column. You can use the `count` type to perform aggregation for queries that return multiple rows with the same or no tags.
+  * `type`: This is the submission method (`gauge`, `count`, `rate`, and more). This can also be set to `tag` to tag each metric in the row with the name and value of the item in this column. You can use the `count` type to perform aggregation for queries that return multiple rows with the same or no tags.
 * **`tags`**: A list of tags to apply to each metric (as specified above).
-* **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, etc...) of the count result. Ignored for non-count queries.
+* **`count_type`**: For `count` queries only, this is the submission method (`gauge`, `count`, `rate`, and more) of the count result. Ignored for non-count queries.
 
 ## Examples
 
-For the examples below, the following mongo collection `user_collection` is used:
+For the examples below, the following Mongo collection `user_collection` is used:
 
 ```text
 { name: "foo", id: 12345, active: true, age:45, is_admin: true}
@@ -136,7 +139,7 @@ This would emit one `gauge` metric `mongo.example3.user.age` with two tags: `is_
 
 ### Validation
 
-To verify the result, search for the metrics using the [Metrics Explorer][5]:
+To verify the result, search for the metrics using the [Metrics Explorer][5].
 
 ### Debugging
 
@@ -153,3 +156,4 @@ To verify the result, search for the metrics using the [Metrics Explorer][5]:
 [5]: /metrics/explorer/
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: /agent/guide/agent-log-files/
+[8]: /integrations/mongodb

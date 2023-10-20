@@ -299,7 +299,7 @@ Datadog offers GTM support for Marketplace listings only. To learn more about th
 
 [1]: https://app.datadoghq.com/marketplace/
 [2]: https://docs.datadoghq.com/developers/custom_checks/prometheus/
-[3]: https://docs.datadoghq.com/developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
+[3]: https://docs.datadoghq.com/developers/integrations/agent_integration/#write-the-check
 [4]: https://docs.datadoghq.com/developers/dogstatsd/
 [5]: https://docs.datadoghq.com/api/latest/metrics/
 [6]: https://docs.datadoghq.com/logs/faq/partner_log_integration/

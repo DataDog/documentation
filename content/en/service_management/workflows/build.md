@@ -13,13 +13,17 @@ further_reading:
   text: "Automate Security Workflows with Workflow Automation"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can create workflows or edit existing workflows from the Workflow Automation [Explore][1] tab. The **Explore** tab lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
 - Hover over a workflow for the options to delete or clone the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
 
 ## Build a workflow from a blueprint
 
-1. Click the **Blueprints** tab.
+1. Click the [**Blueprints**][5] tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
 1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
@@ -215,3 +219,4 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[5]: https://app.datadoghq.com/workflow/blueprints

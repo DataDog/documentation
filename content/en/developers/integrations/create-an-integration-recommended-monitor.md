@@ -37,7 +37,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 1. Save the monitor JSON file to your integration's `assets/monitors` folder.  Add the asset to your `manifest.json` file. See [Integrations Assets Reference][5] for more information about your integration's file structure and manifest file.
 
-2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder in the [`integrations-extras` GitHub repository][6]. 
+2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder either in the [`integrations-extras` GitHub repository][6] or [`Marketplace` GitHub repository][9]. 
 
 3. After it's approved, Datadog merges the PR and your integration-recommended monitor is pushed to production.
 
@@ -67,9 +67,10 @@ Below is an example of a well-defined monitor:
 
 [1]: https://docs.datadoghq.com/monitors/
 [2]: https://app.datadoghq.com/monitors/recommended
-[3]: https://docs.datadoghq.com/developers/integrations/new_check_howto/?tab=configurationtemplate
+[3]: https://docs.datadoghq.com/developers/integrations/agent_integration/
 [4]: https://app.datadoghq.com/monitors/create
 [5]: https://docs.datadoghq.com/developers/integrations/check_references/#manifest-file
 [6]: https://github.com/DataDog/integrations-extras
 [7]: https://docs.datadoghq.com/monitors/configuration/
 [8]: https://docs.datadoghq.com/monitors/manage/#monitor-tags
+[9]: https://github.com/DataDog/marketplace

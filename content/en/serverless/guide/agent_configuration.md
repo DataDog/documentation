@@ -110,7 +110,7 @@ Send custom metrics with [the StatsD protocol][5]:
 
 [5]: /developers/dogstatsd/
 
-[6]: /agent/proxy/#agent-v6
+[6]: /agent/configuration/proxy/#agent-v6
 
 [7]: /serverless/libraries_integrations/cli/#environment-variables
 

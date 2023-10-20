@@ -178,6 +178,41 @@ WHERE
 GRANT SELECT ON dd_session TO c##datadog ;
 ```
 
+### Configure the Agent
+
+To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
+
+Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
+
+```yaml
+init_config:
+instances:
+  - server: '<HOSTNAME_1>:<PORT>'
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    username: 'c##datadog'
+    password: '<PASSWORD>'
+    dbm: true
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+  - server: '<HOSTNAME_2>:<PORT>'
+    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    username: 'c##datadog'
+    password: '<PASSWORD>'
+    dbm: true
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+```
+
+The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
+
+Once all Agent configuration is complete, [restart the Datadog Agent][4].
+
+[1]: /database_monitoring/setup_oracle/#install-agent
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+
 {{% /tab %}}
 
 {{% tab "Non-CDB" %}}
@@ -319,12 +354,7 @@ WHERE
 
 GRANT SELECT ON dd_session TO datadog ;
 ```
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## Configure the Agent
+### Configure the Agent
 
 To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
 
@@ -334,16 +364,16 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.y
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
-    username: 'c##datadog'
+    service_name: "<SERVICE_NAME>" # The Oracle DB service name
+    username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
-    username: 'c##datadog'
+    service_name: "<SERVICE_NAME>" # The Oracle DB service name
+    username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
     tags:  # Optional
@@ -351,9 +381,15 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
-
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
+
+[1]: /database_monitoring/setup_oracle/#install-agent
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Validate
 
@@ -368,8 +404,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [1]: /database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example

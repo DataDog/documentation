@@ -41,6 +41,8 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) comes with m
 - [ISO/IEC 27001 v2][8]
 - [HIPAA][9]
 - [GDPR][10]
+- [NIST 800-53][30]
+- [NIST 800-171][31]
 
 *To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
@@ -122,3 +124,5 @@ Create your own compliance framework by adding a custom tag to the compliance ru
 [27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule
+[30]: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+[31]: https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final
