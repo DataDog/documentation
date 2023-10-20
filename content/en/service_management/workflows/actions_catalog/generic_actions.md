@@ -146,6 +146,10 @@ Use expression actions for data transformations that can be accomplished in a si
 
 The function action allows for variable assignments and data transformations requiring multiple expressions.
 
+### Testing expressions and functions
+
+To test an expression of function action, click **Test** in the **Inputs** section.
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/build/#context-variables

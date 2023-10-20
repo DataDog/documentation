@@ -23,7 +23,7 @@ You can create workflows or edit existing workflows from the Workflow Automation
 
 ## Build a workflow from a blueprint
 
-1. Click the **Blueprints** tab.
+1. Click the [**Blueprints**][5] tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
 1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
@@ -116,7 +116,7 @@ To test a workflow step:
 1. Click **Test** to test the action.
 1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
 
-Testing is not available for branching and logic actions. To test a JavaScript Function action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expessions and functions][5].
+Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
 
 ## Publish a workflow
 
@@ -231,4 +231,6 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
-[5]: /service_management/workflows/action_catalog/generic_actions/testing-expressions-and-functions
+[5]: https://app.datadoghq.com/workflow/blueprints
+[6]: /service_management/workflows/action_catalog/generic_actions/testing-expressions-and-functions
+
