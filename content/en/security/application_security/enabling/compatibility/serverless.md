@@ -72,6 +72,7 @@ Go
 ## Azure App Service
 
 Only *web applications* are supported, Azure Functions are not supported with ASM.
+
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
 |Type       | OS			     |Threat Detection	|  Vulnerability Management for OSS	 | Vulnerability Management for Code-Level 	|
@@ -82,7 +83,6 @@ Only *web applications* are supported, Azure Functions are not supported with AS
 | Python   	| Linux			     | {{< X >}}        | {{< X >}}                          |			                                |
 | Ruby   	| Linux			     | {{< X >}}        | {{< X >}}      	                 |			                                |
 | PHP   	| Linux			     |		        	| {{< X >}} 	                     |			                                |
-| Go   		| 			         |	      		    | {{< X >}} 	                     |			                                |
 
 
 [1]: /serverless/distributed_tracing/
