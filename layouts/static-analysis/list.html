@@ -101,7 +101,27 @@
             // Manage ruleset accordians
 
             selectedRulesetEl.classList.toggle('active')
-            selectedRulesetEl.nextElementSibling.classList.toggle('d-none')
+            selectedRulesetEl.previousElementSibling.classList.toggle('d-none')
+        },
+        copyHref (selectedRuleEl) {
+            // Copy href
+
+            const clickableIconWrapper = selectedRuleEl
+            const copyConfirmedIconWrapper = clickableIconWrapper.nextElementSibling
+            const anchor = clickableIconWrapper.dataset.anchor
+            const {pathname, origin} = window.location
+            const path = new URL(`${origin}${pathname}${anchor}`)
+
+            const Clipboard = navigator.clipboard
+            // write href to clipboard
+            Clipboard.writeText(path.href).then(() => {
+                clickableIconWrapper.classList.add('d-none');
+                copyConfirmedIconWrapper.classList.remove('d-none')
+                setTimeout(function() {
+                    clickableIconWrapper.classList.remove('d-none');
+                    copyConfirmedIconWrapper.classList.add('d-none')
+                }, 1000)
+            })
         }
     }"
     x-init="updateWithURLParams()">
@@ -114,17 +134,10 @@
                 {{ $ruleset_description := index (index $rulset_params.rulesets .Key) "description"}}
                 <div
                 data-group-id="{{ $group_id }}" 
-                class="ruleset mt-1"
+                class="ruleset d-flex flex-column mt-1"
+                id="{{ $group_id }}"
                 >
-                    <button
-                    data-header-id="{{ $group_id }}" 
-                    class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
-                    @click="toggleRuleSet($el)"
-                    >
-                        <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
-                        <div class="group-header__arrow fw-semibold">></div>
-                    </button>
-                    <div class="mb-3">
+                    <div class="mb-3 order-1">
                         <div class="d-flex flex-column">
                             <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
                             <span class="m-0">{{$ruleset_description}}</span>
@@ -132,15 +145,7 @@
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
                             {{/*  
-                                build a string with rule's lookup info for filtering and searching against:
-                                - filter metadata
-                                    - language, severity, category
-                                - search
-                                    - group_id: docker-best-practices
-                                    - meta.id: docker-best-practices/absolute-workdir
-                                    - title: Use absolute workdir
-                                    - ruleset description
-                                    - ruleset title
+                                build a string with rule's lookup info for filtering and searching against
                             */}}
                             {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
                             {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
@@ -149,7 +154,13 @@
                             class="rule d-flex justify-content-between border p-1 position-relative"
                             x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                             >
-                                <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
+                                <div>
+                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" .Params.meta.language "variant" "avatar") }}
+                                    {{ if $int_logo }}
+                                    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                    {{ end }}
+                                    <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
+                                </div>
                                 <div class="d-flex justify-content-end">
                                     <span class="d-none d-md-block">{{ $ruleset_id }}</span>
                                     <div class="group-header__arrow fw-semibold ms-1">></div>
@@ -158,14 +169,51 @@
                             
                             {{/*  
                                 build an object of arrays with unique values for filter btns
+                                e.g:
+                                filters: {
+                                    Language: [],
+                                    Category: [],
+                                    Severity: []
+                                }
                             */}}
                             {{ $pad.SetInMap "filters" "Language" (union (index ($pad.Get "filters") "Language") (slice .Params.meta.language)) }}
                             {{ $pad.SetInMap "filters" "Category" (union (index ($pad.Get "filters") "Category") (slice .Params.meta.category)) }}
                             {{ $pad.SetInMap "filters" "Severity" (union (index ($pad.Get "filters") "Severity") (slice .Params.meta.severity)) }}
-                            
+                            {{/*  
+                                build object of arrays with unique languages for each group-header (ruleset header)
+                                languagesByRuleset: {
+                                    rulesetID: [<languages>],
+                                    ...
+                                }    
+                            */}}
+                            {{ $pad.SetInMap "languageByRuleSet" $group_id (union (index ($pad.Get "languageByRuleSet") $group_id) (slice .Params.meta.language)) }}
                             {{ end }}
                         </div>
                     </div>
+
+                    {{/* group header - Keep here. need to build header language logo   */}}
+                    <button
+                    data-header-id="{{ $group_id }}" 
+                    class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
+                    @click="toggleRuleSet($el)"
+                    >
+                        <div>
+                            {{$ruleset_languages := index ($pad.Get "languageByRuleSet") $group_id}}
+                            <div class="d-inline">
+                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") }}
+                                {{ if $int_logo }}
+                                <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                {{ if gt (len $ruleset_languages) 0 }}
+                                <span>{{len $ruleset_languages}}+</span>
+                                {{ end }}
+                                {{ end }}
+                            </div>
+                            <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
+                            <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
+                            <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
+                        </div>
+                        <div class="group-header__arrow fw-semibold">></div>
+                    </button>
                 </div>
                 {{ end }}
             </div>
@@ -174,12 +222,12 @@
         <nav id="static-analysis-nav" class="d-none d-md-block w-100">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
             {{ $filterKeys := slice "Language" "Category" "Severity" }}
-            <div class="filters-static-analysis d-flex flex-column">
+            <div class="filters-static-analysis d-flex flex-column border border-primary">
                 {{ range $filterKeys }}
                 {{ $filter := . | lower }}
                 <div class="d-flex flex-column mb-2">
-                    <p class="mb-1 fw-semibold">{{.}}</p>
-                    <div class="d-flex gap-1 flex-wrap">
+                    <label class="mb-1 fw-semibold">{{.}}</label>
+                    {{/*  <div class="d-flex gap-1 flex-wrap">
                         <button 
                         @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', ''); pushState(true, '{{ $filter }}')"
                         class="btn btn-sm-tag btn-outline-secondary"
@@ -194,7 +242,17 @@
                         data-filter="{{ . | lower }}"
                         >{{.}}</button>
                         {{ end }}
-                    </div>
+                    </div>  */}}
+                    <div>
+                        <div>Select</div>
+                        <div class="d-none">
+                            <div>all</div>
+                            {{ range index ($pad.Get "filters") . }}
+                            <div>{{.}}</div>
+                            {{ end }}
+                        </div>
+                    </div>                      
+                   
                 </div>
                 {{ end }}
             </div>

@@ -32,6 +32,12 @@
         height: 34px;
         padding: 0 10px;
         cursor: pointer;
+        i {
+            cursor: copy;
+            position: relative;
+            top: 2px;
+            margin-left: 4px;
+        }
         .group-header__text {
             position: relative;
             top: -1px;
