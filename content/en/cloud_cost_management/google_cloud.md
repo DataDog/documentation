@@ -39,7 +39,7 @@ You can use an existing GCS bucket or create a new one. Data is extracted regula
 **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
 ### Configure the Google Cloud Platform integration
-Navigate to [Setup & Configuration][3] and select an integrated Google Cloud Platform service account from the menu. If you do not see your desired Service Account in the list, go to [Google Cloud Platform integration][4] to add it. Follow the instructions on the integration page to properly configure your Service Account being integrated.
+Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Platform service account from the menu. If you do not see your desired Service Account in the list, go to [Google Cloud Platform integration][4] to add it. Follow the instructions on the integration page to properly configure your Service Account being integrated.
 
 <div class="alert alert-warning"> LEGACY project integrations are deprecated and not supported </div>
 
