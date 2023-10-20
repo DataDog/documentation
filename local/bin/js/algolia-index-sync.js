@@ -123,8 +123,8 @@ const updateIndex = (indexName) => {
     console.info('Syncing index...')
     const localAlogliaSearchIndex = require('../../../public/algolia.json');
     const localEnglishOnlyIndex = localAlogliaSearchIndex.filter(record => record.language === "en")
-    console.log(localAlogliaSearchIndex.length)
-    console.log(localEnglishOnlyIndex.length)
+    console.info(process.env.CI_ENVIRONMENT_NAME)
+    console.info(process.env.CI_PIPELINE_SOURCE)
 
     const cb = (error, result) => {
         if (error) {

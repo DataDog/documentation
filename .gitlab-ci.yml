@@ -209,10 +209,14 @@ algolia_sync_preview:manual:
   environment: "preview"
   allow_failure: true
   interruptible: true
-  timeout: 1h 30m
+  timeout: 2h
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') \
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') \
+      CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE \
+      CI_ENVIRONMENT_NAME=$CI_ENVIRONMENT_NAME \
+      yarn run algolia:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
