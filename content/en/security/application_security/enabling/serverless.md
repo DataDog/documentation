@@ -663,6 +663,8 @@ CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
+[1]: /tracing/trace_collection/dd_libraries/go
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
