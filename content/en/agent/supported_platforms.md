@@ -101,7 +101,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
 </table>
 
-A check mark (&check;) indicates support in all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support in all minor and patch versions in a series.
 
 ## 64-BIT ARM V8
 
@@ -109,14 +109,14 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
 
 | Operating system | Supported versions | Agent 6 | Agent 7 |
 |------------------|--------------------|---------|---------|
-| [Amazon Linux][1] | Amazon Linux 2 | &check; | &check; |
-| [Debian][2] (systemd) | >= 9.0 (stretch) | &check; | &check; |
-| [Ubuntu][3] | >= 16.04 | &check; | &check; |
+| [Amazon Linux][1] | Amazon Linux 2 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Debian][2] (systemd) | >= 9.0 (stretch) | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Ubuntu][3] | >= 16.04 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [RedHat/CentOS][4] | >= 8.0 | >= 6.33.0 | >= 7.33.0 |
 | [AlmaLinux/Rocky][4] | >= 8.0 | >= 6.33.0 | >= 7.33.0 |
-| [Fedora][7] | >= 27 | &check; | &check; |
+| [Fedora][7] | >= 27 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
-A check mark (&check;) indicates support in all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support in all minor and patch versions in a series.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
