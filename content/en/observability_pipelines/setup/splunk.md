@@ -16,6 +16,10 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
 ## Overview

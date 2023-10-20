@@ -28,18 +28,24 @@ further_reading:
 
 ## Compatibility
 
-Supported .NET versions:
-* .NET Framework 4.6.1 and above
-* .NET Core 2.1, 3.1, .NET 5, .NET 6, and .NET 7
+Supported languages:
+
+| Language | Version |
+|---|---|
+| .NET Framework | >= 4.6.1 |
+| .NET Core | >= 2.1 |
+| .NET Core | >= 3.1 |
+| .NET | >= 6 |
+| .NET | >= 7 |
 
 Supported test frameworks:
-* xUnit 2.2 and above
-* NUnit 3.0 and above
-* MsTestV2 14 and above
-* [BenchmarkDotNet 0.13.2][1] and above
 
-### Test suite level visibility compatibility
-[Test suite level visibility][2] is supported from `dd-trace-dotnet>=2.16.0`.
+| Test Framework | Version |
+|---|---|
+| xUnit | >= 2.2 |
+| NUnit | >= 3.0 |
+| MsTestV2 | >= 14 |
+| [BenchmarkDotNet][2] | >= 0.13.2 |
 
 ## Configuring reporting method
 
@@ -85,7 +91,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 
 {{% tab "dotnet test" %}}
 
-By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>
+By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
 
 {{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
@@ -95,7 +101,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 {{% tab "VSTest.Console" %}}
 
-By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>
+By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
 
 {{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
@@ -176,7 +182,7 @@ Read more about custom metrics in the [Add Custom Metrics Guide][9].
 
 ### Reporting code coverage
 
-When code coverage is available, the Datadog Tracer (v2.31.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
 If you are using [Coverlet][10] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
@@ -184,11 +190,11 @@ If you are using [Coverlet][10] to compute your code coverage, indicate the path
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-Read more about code coverage in Datadog and more advanced exclusion options in the [Code coverage guide][11].
+For more information about exclusion options, see [Code Coverage][11].
 
 ### Instrumenting BenchmarkDotNet tests
 
-To instrument your benchmark tests you need to:
+To instrument your benchmark tests, you need to:
 
 1. Add the [`Datadog.Trace.BenchmarkDotNet` NuGet package][12] to your project (for example, using `dotnet add package Datadog.Trace.BenchmarkDotNet`).
 2. Configure your project to use the `Datadog.Trace.BenchmarkDotNet` exporter using the `DatadogDiagnoser` attribute or the `WithDatadog()` extension method. For example:
@@ -822,7 +828,7 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 
 
 [1]: /continuous_integration/tests/dotnet/#instrumenting-benchmarkdotnet-tests
-[2]: /continuous_integration/tests/#test-suite-level-visibility
+[2]: /continuous_integration/tests/setup/dotnet/?tab=onpremisesciproviderdatadogagent#instrumenting-benchmarkdotnet-tests
 [3]: https://dtdg.co/dd-trace-dotnet-win-x64
 [4]: https://dtdg.co/dd-trace-dotnet-linux-x64
 [5]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
@@ -831,7 +837,7 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
 [9]: /continuous_integration/guides/add_custom_metrics/?tab=net
 [10]: https://github.com/coverlet-coverage/coverlet
-[11]: /continuous_integration/guides/code_coverage/?tab=net
+[11]: /continuous_integration/integrate_tests/code_coverage/?tab=net
 [12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://www.nuget.org/packages/Datadog.Trace

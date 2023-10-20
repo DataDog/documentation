@@ -145,7 +145,7 @@ To enforce a strict membership model, configure your default team settings so **
 [4]: /service_management/incident_management/incident_details#overview-section
 [5]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [6]: /security/misconfigurations/resource_catalog
-[7]: /tracing/service_catalog/setup#add-service-definition-metadata
+[7]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
 [8]: /service_management/service_level_objectives/#slo-tags
 [9]: https://app.datadoghq.com/dashboard/lists
 [10]: https://app.datadoghq.com/services
