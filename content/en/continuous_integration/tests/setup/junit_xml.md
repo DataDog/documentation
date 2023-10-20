@@ -431,7 +431,7 @@ datadog-ci junit upload --service service_name \
 {{< /tabs >}}
 
 <div class="alert alert-warning">
-  When using bash from Git for Windows you will need to define the <strong>MSYS_NO_PATHCONV=1</strong> environment variable.
+  When using bash from Git for Windows, define the <strong>MSYS_NO_PATHCONV=1</strong> environment variable.
   Otherwise, any argument starting with <strong>/</strong> will be expanded to a Windows path.
 </div>
 
