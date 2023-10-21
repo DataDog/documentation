@@ -26,8 +26,7 @@ title: Browser RUM および Browser RUM & セッションリプレイのサン�
 Datadog Browser SDK v4.20.0 では、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターを非推奨とし、<code>sessionReplaySampleRate</code> 初期化パラメーターを導入しました。
 </blockquote>
 <blockquote class="alert alert-info">
-Datadog Browser SDK v5.0.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターのデフォルト値は `0` です。SDK の以前のバージョンは `100` を使用します。
-</blockquote>
+Datadog Browser SDK v5.0.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターのデフォルト値は `0` です。SDK の以前のバージョンは `100` を使用します。</blockquote>
 
 セッションが作成されると、RUM はそのセッションを次のいずれかとして追跡します。
 
