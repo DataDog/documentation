@@ -42,7 +42,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `50051`.
+1. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
 
 {{< tabs >}}
 {{% tab "Unary Call" %}}
