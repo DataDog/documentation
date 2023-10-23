@@ -22,7 +22,6 @@ These restriction are necessary to make Operator compliant with the add-on polic
 
 
 * Subscription to the [Datadog Operator][1] product. 
-* [TODO] License manager SLR.
 * Kubectl
 * If you are using the command line interface for setting up the add-on, [AWS CLI](https://aws.amazon.com/cli/)
 
@@ -47,12 +46,6 @@ Add-on installation is asynchronous. To check installation status, run:
   ```bash
   aws eks describe-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME> 
   ```
-
-To delete the add-on, run:
-  ```bash
-  aws eks delete-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
-  ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -101,12 +94,44 @@ If you want to pull images from a private EKS registry, you can add `global.regi
   ```
  For all configuration options, see the [Operator configuration spec][6].
 
- **Note:** If access to IMDS v1 is blocked on the node, Agent will not be able to resolve the cluster name and certain features e.g. [Orchestrator Explorer][6] will not work. Hence, we recommend adding `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure Agent to request metadata using IMDS v2.
+ **Note:** If access to IMDS v1 is blocked on the node, Agent will not be able to resolve the cluster name and certain features for example [Orchestrator Explorer][6] will not work. Hence, it is recommended to add `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure Agent to request metadata using IMDS v2.
 
 4. Deploy the Datadog Agent:
   ```bash
   kubectl apply -f /path/to/your/datadog-agent.yaml
   ```
+
+
+## Uninstalling Operator
+
+If you want to uninstall the Agent and Operator, first delete the `DatadogAgent` custom resource:
+
+  ```bash
+  kubectl delete datadogagents.datadoghq.com datadog
+  ```
+
+Confirm all Agent resources are deleted and proceed with add-on uninstallation:
+
+{{< tabs >}}
+{{% tab "Console" %}}
+
+* Go to the EKS cluster in the AWS console.
+* Go to the add-on tab and select *Datadog Operator* addon.
+* Click Remove and the confirmation prompt.
+
+{{% /tab %}}
+{{% tab "CLI" %}}
+
+To delete the add-on, run:
+  ```bash
+  aws eks delete-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
+  ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+ **Note:** If Operator add-on is uninstalled before deleting the `DatadogAgent` custom resource, agents will continue running on the cluster. Deleting namespace will get stuck since the `DatadogAgent` can not be finalized without a running Operator. See this Github [issue][9] for a workaround. 
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -118,3 +143,4 @@ If you want to pull images from a private EKS registry, you can add `global.regi
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [7]: https://docs.datadoghq.com/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
 [8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L407-L416
+[9]: https://github.com/DataDog/datadog-operator/issues/654
