@@ -1,5 +1,5 @@
 ---
-code_lang: php
+code_lang: python
 code_lang_weight: 10
 description: OpenTelemetry API で Python アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
 further_reading:
@@ -22,8 +22,8 @@ type: multi-code-lang
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|---------------------------------------|
-| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
-| [スパンプロセッサー][2]                  | 非サポート                                          | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
+| [スパンプロセッサー][2]                  | 非サポート                                          |
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 

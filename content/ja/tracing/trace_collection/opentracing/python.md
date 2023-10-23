@@ -2,7 +2,7 @@
 aliases:
 - /ja/tracing/setup_overview/open_standards/python
 - /ja/tracing/trace_collection/open_standards/python
-code_lang: php
+code_lang: python
 code_lang_weight: 10
 description: Python のための OpenTracing インスツルメンテーション
 kind: documentation
