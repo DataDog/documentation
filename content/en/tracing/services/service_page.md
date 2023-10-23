@@ -188,7 +188,7 @@ The next section of the panel lists all the vulnerabilities and signals concerni
 {{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
 
 ### Databases
-View the list of downstream database dependencies identified by Database Monitoring and quickly identify latency or load outliers.
+View the list of downstream database dependencies identified by Database Monitoring and identify latency or load outliers.
 [Learn more about connecting DBM and APM][21].
 
 {{< img src="tracing/visualization/service/databases_tab.png" alt="Databases" style="width:90%;">}}
@@ -219,8 +219,8 @@ View the list of traces associated with the service in the traces tab, which is 
 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces" style="width:90%;">}}
 
-### Log Patterns
-View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
+### Log patterns
+View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log patterns][17].
 
 {{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns" style="width:90%;">}}
 
