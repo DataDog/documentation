@@ -122,7 +122,7 @@ You can visualize your ingested data using the following cost types:
 ### Cost and observability correlation
 Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog adds the `name` tag on cost data for top Azure products to simplify correlating observability and cost metrics. 
 
-For example, to view cost and utilization for each Azure VM, you can make a table with azure.cost.amortized and azure.vm.network_in_total (or any other VM metric) and group by `name`. Or, to see Storage usage and costs side by side, you can filter into `metercategory:Storage` and graph azure.storage.transactions and azure.cost.amortized grouped by `name`.
+For example, to view cost and utilization for each Azure VM, you can make a table with `azure.cost.amortized` and `azure.vm.network_in_total` (or any other VM metric) and group by `name`. Or, to see Storage usage and costs side by side, you can filter into `metercategory:Storage` and graph `azure.storage.transactions` and `azure.cost.amortized` grouped by `name`.
 
 
 ### Getting historical data
