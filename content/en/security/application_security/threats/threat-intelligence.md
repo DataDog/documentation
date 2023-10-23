@@ -50,7 +50,7 @@ Note that the query <code>@appsec.threat_intel:true</code> is not equivalent to 
 
 Use the table below to understand how to find threat intelligence information for the Datadog services in use:
 
-|Product|Other products in use|Description|
+|Service|Other services in use|Description|
 |---|---|---|
 |APM| *None* or Cloud SIEM |Threat intelligence will not be present.|
 |APM| ASM |Threat intelligence will be present the same way as in ASM.|
