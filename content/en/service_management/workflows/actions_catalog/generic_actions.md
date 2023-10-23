@@ -146,6 +146,29 @@ Use expression actions for data transformations that can be accomplished in a si
 
 The function action allows for variable assignments and data transformations requiring multiple expressions.
 
+### Testing expressions and functions
+
+To test an expression or function action, click **Test** in the **Inputs** section. If the action uses an output variable from a previous step, comment out the variable in your code and replace it with test data. For example, consider the following action that assigns variables to the workflow name and to the `Steps.List_monitors` output from a previous step:
+
+```js
+let name = $.WorkflowName;
+let object = $.Steps.List_monitors;
+
+...
+```
+
+To test the action, comment out the existing variable assignments and replace them with hardcoded test data:
+
+```js
+\\ let name = $.WorkflowName;
+let name = 'Test workflow'
+\\ let object = $.Steps.List_monitors;
+let object = {0:{
+  'name': 'Test monitor'
+}}
+...
+```
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/build/#context-variables
