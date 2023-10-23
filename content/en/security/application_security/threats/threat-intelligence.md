@@ -61,7 +61,7 @@ As seen in the table above, APM requires ASM to display threat intelligence. Als
 
 ## Threat intelligence in the user interface
 
-When viewing the traces in the UI, you can see threat intelligence data under the `@appsec` attribute. The `category`, and `security_activity` will be set.
+When viewing the traces in the UI, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` are both set.
 
 {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}}
 
