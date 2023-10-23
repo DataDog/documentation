@@ -55,7 +55,7 @@ Use the table below to understand how to find threat intelligence information fo
 |APM| *None* or Cloud SIEM |Threat intelligence is not present.|
 |APM| ASM |Threat intelligence will be present the same way as in ASM.|
 |Cloud SIEM| *Any* |Threat intelligence will be present in every log.|
-|ASM| *Any* |Only traces with attacks or `@appsec.threat_intel:true` will be present. Every trace that matche any threat intelligence source will contain the `@threat_intel` attribute.|
+|ASM| *Any* |Only traces with attacks or `@appsec.threat_intel:true` are present. Every trace that matches a threat intelligence source contains the `@threat_intel` attribute.|
 
 In other words, this table means that:
 
