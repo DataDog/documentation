@@ -25,15 +25,15 @@ Cloud Cost for Google Cloud is in private beta
 
 ## Overview
 
-To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost billing][14] export for your desired billing account. Additionally, the Google Cloud Platform Datadog Integration Service Account must have the [necessary permissions][13] configured to interact with Google Cloud Storage and BigQuery.
+To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][14] billing export for your desired billing account. Additionally, the Google Cloud Platform Datadog Integration Service Account must have the [necessary permissions][13] configured to interact with Google Cloud Storage and BigQuery.
 
 ## Setup
 
-### Enable cost billing and usage export
+### Enable detailed usage cost export
 <div class="alert alert-info"> <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage">Detailed Usage Cost</a> data includes resource-level cost data. </div>
 
  1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
- 2. Enable the[Detailed Usage cost][2] export, (select or create a project and a BigQuery dataset).
+ 2. Enable the [Detailed Usage cost][2] export, (select or create a project and a BigQuery dataset).
  3. Document the `billing account id` for the billing account where the export was configured, as well as the export `project id` and `dataset name`.
 
 ### Create or select a Google Cloud Storage bucket
