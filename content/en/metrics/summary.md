@@ -145,7 +145,7 @@ You can configure tags using the bulk metric tag configuration button or the **M
 2. Click the **Manage Tags** button to open the tag configuration modal.
 3. There are two ways in which you can configure your tags:
   - Click the **Include tags...** tab to customize the tags you'd like to keep available in an _allowlist_ of the tags you'd like to keep.
-  - Click the **Exclude tags...** tab to customize the tags you don't want to query for in an _excludelist_ of tags you want to drop.
+  - Click the **Exclude tags...** tab to customize the tags you don't want to query for in an _blocklist_ of tags you want to drop.
 4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
