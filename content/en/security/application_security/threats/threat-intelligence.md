@@ -12,20 +12,20 @@ further_reading:
 
 ## Overview
 
-Datadog provides built-in [threat intelligence][1] datasets for some products such as Application Security Management (ASM), or Cloud SIEM.
+Datadog provides built-in [threat intelligence][1] datasets for some services such as Application Security Management (ASM), or Cloud SIEM.
 
-The Threat Intelligence data typically contains a source and a category. Different sources categorize IP addresses as known attackers, or as originating from a residential proxy or a VPN, etc.
+The Threat Intelligence data typically contains a source and a category. Different sources categorize IP addresses as known attackers, or as originating from a residential proxy, VPN, or so on.
 
 In ASM the Threat Intelligence data is used in two ways:
 
-- if a high fidelity threat intelligence source categorizes a request as being made by a known attacker, this request will be surface din ASM *even if no actual attacks are present*. This can serve as an early warning sign that a known attacker is looking at your services.
-- if a request contains any attack, it will be surfaced in ASM. Threat intelligence here can provide additional context when investigating traces.
+- If a high fidelity threat intelligence source categorizes a request as being made by a known attacker, this request is surfaced in ASM *even in the absence of an actual attack*. This can serve as an early warning sign that a known attacker is looking at your services.
+- If a request contains any attack, it is surfaced in ASM. Threat intelligence here can provide additional context when investigating traces.
 
-For ASM customers threat intelligence data will be available also in APM traces. 
+If you use ASM, threat intelligence data is also available in APM traces. 
 
-## Which feeds will be surfaced in ASM
+## Which sources are surfaced in ASM
 
-Threat intelligence matches from any of the following sources will be surfaced in ASM even without any attacks present:
+Threat intelligence matches from any of the following sources are surfaced in ASM even in the absence of attacks:
 
 - minerstat
 - abuse.ch
