@@ -37,7 +37,7 @@ def workflows(content, content_dir):
                         data = json.loads(f.read())
                     except:
                         logger.warn(f"Error parsing {file_name}")
-            if data and data.get('stability', '') == 'stable':
+            if data and data.get('stability', '') == 'stable' and not data.get('internal') and not data.get('hidden'):
                 p = Path(file_name)
                 for action_name, action_data in data.get('actions', {}).items():
                     action_stability = action_data.get('stability')
