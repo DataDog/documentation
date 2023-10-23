@@ -80,7 +80,7 @@ them as `Harmful Safe or Unknown`.
 : See [Trace Qualification][15].
 
 threat intelligence
-: A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
+: A set of rules executed in the Datadog libraries to detect threats. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
 : See [Threat Intelligence][16] 
 
 ## Attacks and known vulnerabilities terms
