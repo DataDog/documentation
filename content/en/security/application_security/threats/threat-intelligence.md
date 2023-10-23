@@ -23,7 +23,7 @@ In ASM the Threat Intelligence data is used in two ways:
 
 If you use ASM, threat intelligence data is also available in APM traces. 
 
-## Which feeds will be surfaced in ASM
+## Which sources are surfaced in ASM
 
 Threat intelligence matches from any of the following sources will be surfaced in ASM even without any attacks present:
 
