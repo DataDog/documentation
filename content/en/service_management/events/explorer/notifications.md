@@ -1,13 +1,11 @@
 ---
-title: Doc Title
-kind: <UPDATE>
+title: Notifications
+kind: Documentation
 disable_toc: false
-aliases:
-- /path-to-old-doc/
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/monitors/notify/"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Learn more about notification options"
 ---
 
 
@@ -29,6 +27,9 @@ Datadog supports `@notifications` in the messages of events when posted by the A
 
 See [Notifications][4] to learn more.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [3]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio

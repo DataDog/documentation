@@ -139,7 +139,7 @@ Datadog supports `@notifications` in the messages of events when posted by the A
 
 See [Notifications][5] to learn more. -->
 
-## Event Analytics
+<!-- ## Event Analytics
 
 Event Analytics extends the Events Explorer page with views, data aggregation, and grouping capabilities for troubleshooting and monitoring. You can control:
 
@@ -160,7 +160,7 @@ Use the query to control what's displayed in your Events Analytics:
 3. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values. You can display the results as a timeseries, table, or top list.
     {{< img src="service_management/events/explorer/time-interval.png" alt="Shows the list of possible time intervals, including the default, 5 seconds." style="width:100%;" >}}
 4. Choose to display either the top or bottom values according to the selected measure.
-    {{< img src="service_management/events/explorer/display-values.png" alt="Choose to display the values from the top or from the bottom." style="width:100%;" >}}
+    {{< img src="service_management/events/explorer/display-values.png" alt="Choose to display the values from the top or from the bottom." style="width:100%;" >}} -->
 
 ## Further reading
 
