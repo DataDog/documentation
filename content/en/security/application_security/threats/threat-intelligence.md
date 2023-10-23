@@ -35,7 +35,7 @@ Threat intelligence matches from any of the following sources are surfaced in AS
 
 To search for all traces flagged by a specific source, use the following query with the source name:
 
-    @threat_intel.results.source.name:FireHOL 
+    @threat_intel.results.source.name:<SOURCE_NAME> 
 
 Replace FireHOL by the source name you are interested in.
 If you wish to know which traces contain significant threat intelligence, but don't care about the source
