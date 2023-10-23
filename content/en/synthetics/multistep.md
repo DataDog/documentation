@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Multistep API tests allow you to chain several [HTTP requests][1] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, leverage [API tests][2].
+Multistep API tests allow you to chain several [HTTP requests][1] or [gRPC requests][19] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, use [API tests][2].
 
 You can accomplish the following:
 
@@ -70,8 +70,8 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    {{% tab "Request Options" %}}
 
-   * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Follow redirects**: Tick to have your API test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Tick to have your API test go on with connection even if there are errors when validating the SSL certificate.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
@@ -133,7 +133,7 @@ Assertions define what an expected test result is. After you click **Test URL**,
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
 
-HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+API tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
 - If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -185,7 +185,7 @@ In addition to creating local variables, you can [extract variables from any ste
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined in the `Settings`][14] and the [locally defined variables](#create-local-variables) in the URL, advanced options, and assertions of your API tests.
 
 To display your list of variables, type `{{` in your desired field.
 
@@ -255,3 +255,4 @@ You can restrict access to a multistep API test based on the roles in your organ
 [16]: /account_management/rbac/
 [17]: /account_management/rbac#custom-roles
 [18]: /account_management/rbac/#create-a-custom-role
+[19]: /synthetics/api_tests/grpc_tests
