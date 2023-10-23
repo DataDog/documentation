@@ -1,12 +1,15 @@
 ---
 title: Tag pipelines
 kind: Documentation
-disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -22,15 +25,15 @@ There are three types of rules supported: **Add tag**, **Alias tag keys**, and *
 
 ### Add tag
 
-Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data. 
+Add a new tag (key + value) based on the presence of existing tags on Cloud Costs data.
 
-For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of. 
+For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of.
 
 {{< img src="cloud_cost/tags_addnew.png" alt="Add new business unit tag to resources with service:processing, service:creditcard, or service:payment-notification." >}}
 
 ### Alias tag keys
 
-  Map existing tag values to a more standardized tag. 
+  Map existing tag values to a more standardized tag.
 
 For example, if your organization wants to use the standard `application` tag key, but several teams have a variation of that tag (like `app`, `webapp`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
 
