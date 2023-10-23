@@ -1,5 +1,5 @@
 ---
-title: Using Shadow DOM In Your Browser Tests
+title: Use Shadow DOM In Your Browser Tests
 kind: guide
 further_reading:
     - link: '/synthetics/browser_tests'

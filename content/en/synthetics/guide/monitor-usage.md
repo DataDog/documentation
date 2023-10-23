@@ -1,5 +1,5 @@
 ---
-title: Using Estimated Usage Metrics
+title: Use Estimated Usage Metrics
 kind: guide
 description: Learn about estimated usage metrics generated from your Synthetic tests.
 further_reading:
