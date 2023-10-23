@@ -79,7 +79,8 @@ Datadog は、関連する属性を持つすべての取り込みログを分析
 * `@threat_intel.results.category "anonymizer", "scanner"`
 * `@threat_intel.results.intention "malicious", "unknown"`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
-    
+    **注**: プロキシ、Tor、VPN のサブカテゴリの属性は、脅威インテリジェンスパートナーの IPinfo のみが提供しています。
+
 ### ネットワーク IP 属性で検索
 
 Datadog Cloud SIEM がログから疑わしい活動を検出した場合、そのネットワーク IP を検索することで、疑わしいアクターがシステムと相互作用したかどうかを判断します。ログエクスプローラーで IP 属性で検索するには、クエリ `@network.ip.list:<IP address>` を使用します。このクエリは、タグ、属性、エラー、およびメッセージフィールドを含むログ内の任意の場所で IP を検索します。
