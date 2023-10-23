@@ -22,7 +22,7 @@ algolia:
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing. You only pay for custom metric tags that are valuable to your organization.
 
-Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. You can also customize aggregations on counts, rates, and gauges without having to re-deploy or change any code. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform. This automatically excludes nonessential tags attached to application-level or business metrics (for example, `host`). Additionally, you an configure a blocklist of tags to quickly drop and exclude tags that provide less business value to you. This functionality is located in the [Metrics Summary][1] page.
+Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. You can also customize aggregations on counts, rates, and gauges without having to re-deploy or change any code. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform. This automatically excludes nonessential tags attached to application-level or business metrics (for example, `host`). Additionally, you can configure a blocklist of tags to quickly drop and exclude tags that provide less business value to you. This functionality is located in the [Metrics Summary][1] page.
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
