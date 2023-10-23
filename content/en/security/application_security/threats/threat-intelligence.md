@@ -33,7 +33,7 @@ Threat intelligence matches from any of the following sources are surfaced in AS
 - spur (only the `malware` category)
 - Tor Exit Nodes
 
-To search for all traces flagged by a specific source you can use the following query:
+To search for all traces flagged by a specific source, use the following query with the source name:
 
     @threat_intel.results.source.name:FireHOL 
 
