@@ -9,9 +9,9 @@ further_reading:
 
 ## Overview
 
-A typical metric monitor triggers an alert if a single metric goes above a specific threshold number. For example, setting off an alert if your disk usage goes above 80%. This approach is efficient for many use cases. What happens, however, when the threshold is a variable rather than an absolute number?
+A typical metric monitor triggers an alert if a single metric goes above a specific threshold number. For example, you could set an alert to trigger if your disk usage goes above 80%. This approach is efficient for many use cases, but what happens when the threshold is a variable rather than an absolute number?
 
-Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularly useful when there isn't an explicit definition of your metric being off-track. However, when possible you should use regular monitors with tailored alert conditions to maximize precision and minimize time-to-alert for your specific use case.
+Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularly useful when there isn't an explicit definition of your metric being off-track. However, when possible, you should use regular monitors with tailored alert conditions to maximize precision and minimize time-to-alert for your specific use case.
 
 This guide covers common situations where you would be tempted to use a Watchdog Monitor, but could use an explicit alerting condition instead:  
   - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold) 
@@ -27,22 +27,22 @@ You are the team lead in charge of an e-commerce website. You want to:
 - capture more localized incidents like the ones affecting public internet providers 
 - cover for unknown failure scenarios
 
-The traffic on your website varies from night and day, from weekday and weekend. There is no absolute number to quantify what "unexpectedly low" means. However, the traffic follows a predictable pattern where you can consider a 10% difference as a reliable indicator of an issue happening, such as a localized incident affecting public internet providers.
+Your website's traffic varies from night to day, and from weekday to weekend. There is no absolute number to quantify what "unexpectedly low" means. However, the traffic follows a predictable pattern where you can consider a 10% difference as a reliable indicator of an issue, such as a localized incident affecting public internet providers.
 
 {{< img src="monitors/guide/non_static_thresholds/seasonal_line_graph.png" alt="Line graph of a periodic or seasonal metric" style="width:100%;" >}}
 
 ### Monitor
 
-The telemetry you use to proxy the number of connections on your website are integration `count` metrics captured from nginx web server:[`nginx.requests.total_count`][3].
+The telemetry you use to proxy the number of connections on your website are integration `count` metrics captured from an NGINX web server:[`nginx.requests.total_count`][3].
 
 The **request** consists of 3 parts: 
 1. A query to get the current number of requests.
 2. A query to get the number of requests at the same time a week before.
 3. "Formula" queries that calculate the ratio between the first two queries.
 
-Then you decide on the time aggregation:
-- You choose the timeframe. The bigger the timeframe, the more data it evaluates to detect an anomaly. Larger timeframes can also result in more monitor alerts, so start with 1 hour then adjust to your needs. 
-- You choose the aggregation. Since it's a count metric that's performing a ratio, `average` (or `sum`) is a natural choice.
+Then, decide on the time aggregation:
+- You choose the timeframe. The bigger the timeframe, the more data it evaluates to detect an anomaly. Larger timeframes can also result in more monitor alerts, so start with 1 hour, then adjust to your needs. 
+- You choose the aggregation. Since it's a count metric performing a ratio, `average` (or `sum`) is a natural choice.
 
 The threshold displayed in the screenshot below has been configured to 0.9 to allow for a 10% difference between the value of the first query (current) and the second query (week before).
 
@@ -52,7 +52,7 @@ The threshold displayed in the screenshot below has been configured to 0.9 to al
 {{% /tab %}}
 
 {{% tab "JSON Example" %}}
-```
+``` json
 {
 	"name": "[Seasonal threshold] Amount of connection",
 	"type": "query alert",
@@ -88,21 +88,21 @@ You are in charge of the cost of log management in your company. You want to be 
 
 ### Monitor
 
-To count the number of indexed logs in Datadog use the following metric: [`datadog.estimated_usage.logs.ingested_events`][4].
+To count the number of indexed logs in Datadog, use the following metric: [`datadog.estimated_usage.logs.ingested_events`][4].
 It is an out-of-the-box metric that can be found in your account after logs are sent to Datadog. For more information on log usage metrics, see the [Log Configuration][5] documentation.
 
 The monitor evaluates the sum over the last 5 minutes compared to the average of the last hour. It is composed of 2 queries:
 - Query A represents the last 5 minutes of the metric you want to be aware of, because of the parameter "Evaluate the … of the query over the last 5 minutes".
 - Query B represents the average value of the same metric over the past hour thanks to the moving rollup, which takes the datapoints of the last 4 hours (to have a large amount of datapoints) and calculates the average.
 
-When the value of Query A is much higher than the value of Query B, it's a sign of a substantial and sudden increase in usage which you can capture with a ratio between A and B.
+When the value of Query A is much higher than the value of Query B, it's a sign of a substantial and sudden increase in usage, which you can capture with a ratio between A and B.
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
 
 {{< img src="monitors/guide/non_static_thresholds/spike_threshold.png" alt="Spike threshold config with two log usage metrics" style="width:100%;" >}}
 
-In the formula, divide **Query A** by **Query B** and multiply the quotient by the moving rollup to account for the difference in evaluation windows between the two queries. In this example, since the moving rollup of Query B is 4 hours (240 minutes), you multiply the formula with 48 (240 minutes / 5 minute evaluation window).	
+In the formula, divide **Query A** by **Query B** and multiply the quotient by the moving rollup to account for the difference in evaluation windows between the two queries. In this example, since the moving rollup of Query B is 4 hours (240 minutes), you multiply the formula by 48 (240 minutes / 5 minute evaluation window).	
 
 The threshold here is 2, to get an alert when the difference in value is double or higher.
 
@@ -134,9 +134,9 @@ The threshold here is 2, to get an alert when the difference in value is double 
 ## Reference threshold
 
 ### Context
-You are the QA team lead, in charge of the checkout process of your e-commerce website. You want to make sure that your customers can have a good experience and can purchase your products without any issues. One indicator of that is the error rate.
+You are the QA team lead, in charge of the checkout process of your e-commerce website. You want to ensure that your customers have a good experience and can purchase your products without any issues. One indicator of that is the error rate.
 
-The traffic is not the same throughout the day, so 50 errors/minutes on a Friday evening is not as worrying as 50 errors/minute on a Sunday morning. Monitoring an error rate rather than the errors themselves gives you a reliable view of what healthy and unhealthy metrics look like.
+The traffic is not the same throughout the day, so 50 errors/minute on a Friday evening is less worrying than 50 errors/minute on a Sunday morning. Monitoring an error rate rather than the errors themselves gives you a reliable view of what healthy and unhealthy metrics look like.
 
 Get alerted when the error rate is high, but also when the volume of hits is significant enough.
 
@@ -147,9 +147,9 @@ Create 3 monitors in total:
 1. [Metric monitor to calculate the error rate.](#metric-monitor-to-calculate-the-error-rate)
 1. [Composite monitor that triggers an alert if the first two monitors are in an ALERT state.](#composite-monitor)
 
-#### Metric monitor to alert on total number of hits
+#### Metric monitor to alert on the total number of hits
 
-The first monitor tracks the total number of hits, both successes and failures. This monitor is used to know whether the error rate should trigger an alert.
+The first monitor tracks the total number of hits, both successes and failures. This monitor determines whether the error rate should trigger an alert.
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
@@ -185,7 +185,7 @@ The first monitor tracks the total number of hits, both successes and failures. 
 
 #### Metric monitor to calculate the error rate
 
-The second monitor calculates the error rate. Create a query on the number of errors divided by the total number of hits to get the error rate `a / a+b`, as follow:
+The second monitor calculates the error rate. Create a query on the number of errors divided by the total number of hits to get the error rate `a / a+b`:
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
@@ -221,7 +221,7 @@ The second monitor calculates the error rate. Create a query on the number of er
 
 #### Composite monitor
 
-The last monitor is a Composite monitor, which sends and alert only if the two preceding monitors are also in an **ALERT** state. The monitor sends out an alert only if both monitors are in an ALERT state.
+The last monitor is a Composite monitor, which sends an alert only if the two preceding monitors are also both in an **ALERT** state. 
 
 {{< img src="monitors/guide/non_static_thresholds/reference_composite_monitor_config.png" alt="Example composite monitor configuration showing boolean logic to alert if both monitors are in ALERT state" style="width:100%;" >}} -->
 
