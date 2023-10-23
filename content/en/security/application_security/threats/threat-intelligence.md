@@ -57,10 +57,7 @@ Use the table below to understand how to find threat intelligence information fo
 |Cloud SIEM| *Any* |Threat intelligence will be present in every log.|
 |ASM| *Any* |Only traces with attacks or `@appsec.threat_intel:true` are present. Every trace that matches a threat intelligence source contains the `@threat_intel` attribute.|
 
-In other words, this table means that:
-
-- APM requires ASM to display threat intelligence
-- Cloud SIEM may display logs with threat intelligence data, which is not surfaced in ASM for the same IP addresses
+As seen in the table above, APM requires ASM to display threat intelligence. Also, Cloud SIEM may display logs with threat intelligence data, which are not surfaced in ASM for the same IP addresses
 
 ## Threat intelligence in the user interface
 
