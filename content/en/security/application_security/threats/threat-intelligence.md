@@ -21,7 +21,7 @@ In ASM the Threat Intelligence data is used in two ways:
 - If a high fidelity threat intelligence source categorizes a request as being made by a known attacker, this request is surfaced in ASM *even in the absence of an actual attack*. This can serve as an early warning sign that a known attacker is looking at your services.
 - If a request contains any attack, it is surfaced in ASM. Threat intelligence here can provide additional context when investigating traces.
 
-For ASM customers threat intelligence data will be available also in APM traces. 
+If you use ASM, threat intelligence data is also available in APM traces. 
 
 ## Which feeds will be surfaced in ASM
 
