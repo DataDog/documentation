@@ -14,7 +14,7 @@ further_reading:
 ## Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40, higher as noted below for some beta features.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some beta features require higher versions.
 
 Supported Linux platforms
 : Linux Kernel 4.14 and greater<br/>
@@ -36,7 +36,7 @@ Additional protocols and traffic encryption methods are supported in <a href="/u
 - If on Linux:
     - Your service is running in a container.
     - **Beta:** For non-containerized services see the [instructions here](#non-containerized-services-on-linux).
-- If on Windows and using IIS:
+- If on Windows IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
@@ -397,9 +397,9 @@ services:
 As `Docker Swarm` does not yet support the changing of `security_opt`, the operating system
 must not have a running `apparmor` instance.
 
-If the operating system does not have a running `apparmor` instance, then use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
+If the operating system does not have a running `apparmor` instance, use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
 
-[1]: /universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
+[1]: /universal_service_monitoring/setup/?tab=dockercompose#enabling-universal-service-monitoring
 
 {{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}
@@ -736,7 +736,7 @@ If you use load balancers with your services, enable additional cloud integratio
 Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
 </div>
 
-Requires agent of version 7.42+.
+Requires Agent version 7.42 or greater.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
