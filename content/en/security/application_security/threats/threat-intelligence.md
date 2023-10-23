@@ -33,14 +33,12 @@ Threat intelligence matches from any of the following sources are surfaced in AS
 - spur (only the `malware` category)
 - Tor Exit Nodes
 
-To search for all traces flagged by a specific source you can use the following query:
+To search for all traces flagged by a specific source, use the following query with the source name:
 
-    @threat_intel.results.source.name:FireHOL 
+    @threat_intel.results.source.name:<SOURCE_NAME> 
 
 Replace FireHOL by the source name you are interested in.
-Replace `FireHOL` by the source name you are interested in.
-If you wish to know which traces contain significant threat intelligence, but don't care about the source
-specifically, you can use the following query:
+To query for all traces containing threat intelligence regardless of the source, use the following query:
 
     @appsec.threat_intel:true 
 
@@ -48,25 +46,22 @@ specifically, you can use the following query:
 Note that the query <code>@appsec.threat_intel:true</code> is not equivalent to looking at the <code>@threat_intel.indicators_matched:*</code> attribute. The latter contains values for every threat intelligence match. This attribute can contain values, but the overall trace might not be resurfaced in ASM if there is no attack present, and the source does not match one of the sources mentioned previously.
 </div>
 
-## Behaviour across Cloud SIEM, APM, and ASM
+## Behavior across Cloud SIEM, APM, and ASM
 
-These Datadog products each may contain threat intelligence information. The behaviour can vary depending on which products you are using.
+Use the table below to understand how to find threat intelligence information for the Datadog services in use:
 
-|Product|Other products in use|Description|
+|Service|Other services in use|Description|
 |---|---|---|
-|APM| *None* or Cloud SIEM |Threat intelligence will not be present.|
+|APM| *None* or Cloud SIEM |Threat intelligence is not present.|
 |APM| ASM |Threat intelligence will be present the same way as in ASM.|
 |Cloud SIEM| *Any* |Threat intelligence is present in matching logs.|
-|ASM| *Any* |Only traces with attacks or `@appsec.threat_intel:true` will be present. Every trace that matche any threat intelligence source will contain the `@threat_intel` attribute.|
+|ASM| *Any* |Only traces with attacks or `@appsec.threat_intel:true` are present. Every trace that matches a threat intelligence source contains the `@threat_intel` attribute.|
 
-In other words, this table means that:
-
-- APM requires ASM to display threat intelligence
-- Cloud SIEM may display logs with threat intelligence data, which is not surfaced in ASM for the same IP addresses
+As seen in the table above, APM requires ASM to display threat intelligence. Also, Cloud SIEM may display logs with threat intelligence data, which are not surfaced in ASM for the same IP addresses
 
 ## Threat intelligence in the user interface
 
-When viewing the traces in the UI, you can see threat intelligence data under the `@appsec` attribute. The `category`, and `security_activity` will be set.
+When viewing the traces in the UI, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` are both set.
 
 {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}}
 
