@@ -26,7 +26,7 @@ This feature requires the Datadog Browser SDK v3.0.0+.
 The Datadog Browser SDK v4.20.0 introduces the <code>sessionReplaySampleRate</code> initialization parameter, deprecating the <code>premiumSampleRate</code> and <code>replaySampleRate</code> initialization parameter.
 </blockquote>
 <blockquote class="alert alert-info">
-The Datadog Browser SDK v5.0.0 introduces two major behaviour changes:
+The Datadog Browser SDK v5.0.0 introduces two major behavior changes:
 
 - Only sessions that have recorded a replay are considered as Browser RUM & Session Replay
 - The <code>sessionReplaySampleRate</code> initialization parameter default value is `0` . Previous versions of the SDK use `100`.
