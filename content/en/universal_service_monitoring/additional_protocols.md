@@ -25,43 +25,22 @@ After beta access has been granted in your Datadog organization, Universal Servi
 Universal Service Monitoring can discover the following third-party API endpoints: Jira, Slack, Auth0, Splunk, HubSpot, Intercom, Stripe, SendGrid, Braintree, Mapbox, Twitter (X), Palo Alto Networks, TowerData, SoundCloud, Amplitude, Render, Mixpanel, GitHub, and OpenAI.
 
 
-## Support for additional protocols and methods of traffic encryption
+## Additional protocols and methods of traffic encryption
 
-After beta access has been granted in your Datadog organization, ensure your Datadog Agent is upgraded to at least version 7.48.0 to gain access to the following features.
+Request access and ensure your Datadog Agent is upgraded to at least version 7.48.0 to gain access to the following features.
 
 <div class="alert alert-info"><p>The following support does <strong>not</strong> include:
 <ul><li>Monitoring services that use TLS with gRPC/HTTP2</li> 
 <li>Monitoring Go-TLS applications where the Golang server upgrades the HTTP connection to HTTP2.</li></ul></p></div>
 
-### Istio and mTLS
+Istio and mTLS
+: Universal Service Monitoring discovers, maps, and monitors services running in an Istio service mesh and using mTLS encryption. 
 
-Universal Service Monitoring discovers, maps, and monitors services running in an Istio service mesh and using mTLS encryption. 
+gRPC and HTTP2 
+: Universal Service Monitoring decodes gRPC and HTTP2 protocols.
 
-Enable by setting the following environment variable:
-
-```
-DD_SERVICE_MONITORING_CONFIG_ENABLE_ISTIO_MONITORING=true
-```
-
-### gRPC and HTTP2 
-
-Universal Service Monitoring decodes gRPC and HTTP2 protocols.
-
-Enable by setting the following environment variable:
-
-```
-DD_SERVICE_MONITORING_CONFIG_ENABLE_HTTP2_MONITORING=true
-```
-
-### Go and TLS
-
-Universal Service Monitoring supports applications written in Golang and using TLS encryption.
-
-Enable by setting the following environment variable:
-
-```
-DD_SERVICE_MONITORING_CONFIG_ENABLE_GO_TLS_SUPPORT=true
-```
+Go and TLS
+: Universal Service Monitoring supports applications written in Golang and using TLS encryption.
 
 
 ## Further reading
