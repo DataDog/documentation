@@ -93,7 +93,7 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
     *  The amount of **Requests and errors per second**
 * Latency - Choose to display:
     * The **Latency** by Version
-    * The **Latency** by Percentile (Avg/p75/p90/p95/p99/Max latency of your traced requests) as a timeseries
+    * The **Latency** by Percentile (Avg/p75/p90/p95/p99/p99.9/Max latency of your traced requests) as a timeseries
     * The **Historical Latency** to compare the Latency distribution with the day and week before
     * The **Latency Distribution** over the selected timeframe
     * The **Latency** by Status to evaluate the latency impact of an error on traced requests
