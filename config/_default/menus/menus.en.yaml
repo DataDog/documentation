@@ -943,16 +943,21 @@ main:
     parent: cloud_cost_top_level
     identifier: ccm_azure
     weight: 2
+  - name: Google Cloud
+    url: cloud_cost_management/google_cloud
+    parent: cloud_cost_top_level
+    identifier: ccm_google_cloud
+    weight: 3
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 3
+    weight: 4
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 4
+    weight: 5
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
