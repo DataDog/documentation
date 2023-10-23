@@ -56,7 +56,7 @@ These Datadog products each may contain threat intelligence information. The beh
 |---|---|---|
 |APM| *None* or Cloud SIEM |Threat intelligence will not be present.|
 |APM| ASM |Threat intelligence will be present the same way as in ASM.|
-|Cloud SIEM| *Any* |Threat intelligence will be present in every log.|
+|Cloud SIEM| *Any* |Threat intelligence is present in matching logs.|
 |ASM| *Any* |Only traces with attacks or `@appsec.threat_intel:true` will be present. Every trace that matche any threat intelligence source will contain the `@threat_intel` attribute.|
 
 In other words, this table means that:
