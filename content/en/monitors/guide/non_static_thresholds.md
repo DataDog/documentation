@@ -5,6 +5,9 @@ further_reading:
 - link: "/monitors/types/composite/"
   tag: "Documentation"
   text: "Composite Monitor"
+- link: "/monitors/types/anomaly/"
+	tag: "Documentation"
+	text: "Anomaly Monitor"
 ---
 
 ## Overview
@@ -13,7 +16,7 @@ A typical metric monitor triggers an alert if a single metric goes above a speci
 
 Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularly useful when there isn't an explicit definition of your metric being off-track. However, when possible, you should use regular monitors with tailored alert conditions to maximize precision and minimize time-to-alert for your specific use case.
 
-This guide covers common situations where you would be tempted to use a Watchdog Monitor, but could use an explicit alerting condition instead:  
+This guide covers common use cases for alerting on non-static thresholds:
   - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold) 
   - [Alert on **spikes** when the baseline is unknown ahead of time](#spike-threshold)
   - [Alert based on the value of another **reference** metric](#reference-threshold)
@@ -24,7 +27,7 @@ This guide covers common situations where you would be tempted to use a Watchdog
 
 You are the team lead in charge of an e-commerce website. You want to: 
 - receive alerts on unexpectedly low traffic on your home page 
-- capture more localized incidents like the ones affecting public internet providers 
+- capture more localized incidents like the ones affecting public internet providers
 - cover for unknown failure scenarios
 
 Your website's traffic varies from night to day, and from weekday to weekend. There is no absolute number to quantify what "unexpectedly low" means. However, the traffic follows a predictable pattern where you can consider a 10% difference as a reliable indicator of an issue, such as a localized incident affecting public internet providers.
@@ -48,7 +51,7 @@ The threshold displayed in the screenshot below has been configured to 0.9 to al
 
 {{< tabs >}}
 {{% tab "UI Configuration" %}}
-{{< img src="monitors/guide/non_static_thresholds/seasonal_threshold.png" alt="Configuration to add week_before timeshift to metric query and set formula a/b" style="width:100%;" >}}
+{{< img src="monitors/guide/non_static_thresholds/seasonal_threshold_config.png" alt="Configuration to add week_before timeshift to metric query and set formula a/b" style="width:100%;" >}}
 {{% /tab %}}
 
 {{% tab "JSON Example" %}}
@@ -143,7 +146,7 @@ Get alerted when the error rate is high, but also when the volume of hits is sig
 ### Monitor
 
 Create 3 monitors in total:
-1. [Metric monitor to alert on total number of hits.](#metric-monitor-to-alert-on-total-number-of-hits)
+1. [Metric monitor to alert on total number of hits.](#metric-monitor-to-alert-on-the-total-number-of-hits)
 1. [Metric monitor to calculate the error rate.](#metric-monitor-to-calculate-the-error-rate)
 1. [Composite monitor that triggers an alert if the first two monitors are in an ALERT state.](#composite-monitor)
 
