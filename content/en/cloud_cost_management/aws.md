@@ -170,7 +170,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 ### Cost and observability correlation
 Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top AWS products to simplify correlating observability and cost metrics. 
 
-For example, to view cost and utilization for each RDS database, you can make a table with aws.cost.amortized, aws.rds.cpuutilization, and aws.rds.freeable_memory (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph aws.lambda.concurrent_executions and aws.cost.amortized grouped by `functionname`.
+For example, to view cost and utilization for each RDS database, you can make a table with `aws.cost.amortized`, `aws.rds.cpuutilization`, and `aws.rds.freeable_memory` (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph `aws.lambda.concurrent_executions` and `aws.cost.amortized` grouped by `functionname`.
 
 The following out-of-the-box tags are available:
 | AWS Product                  | Tag       |
