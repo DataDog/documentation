@@ -35,7 +35,7 @@ Click on any metric name to open its details sidepanel. Then click **Manage Tags
 
 
 #### Configure an exclusion list of tags 
-Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Exclude Tags…”** to drop and exclude tags to optimize metric volumes. These tags will **not** remain queryable on dashboards and monitors. The tag configuration modal will let you know if you are selecting a tag that has been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (represented by an icon). Before selecting Save, an estimated new volume of indexed custom metrics that results from the potential tag configuration is displayed. 
+Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Exclude Tags…”** to drop tags you don't want to query for to optimize metric volumes. These tags will **not** remain queryable on dashboards and monitors. The tag configuration modal will let you know if you are selecting a tag that has been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (represented by an icon). Before selecting Save, an estimated new volume of indexed custom metrics that results from the potential tag configuration is displayed. 
 
 {{< img src="metrics/mwl_example_exclude_tags.mp4" alt="Configuration of Tags with Tag Exclusion" video=true >}}
 
