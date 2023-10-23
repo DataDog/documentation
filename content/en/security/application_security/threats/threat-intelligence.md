@@ -46,7 +46,7 @@ To query for all traces containing threat intelligence regardless of the source,
 Note that the query <code>@appsec.threat_intel:true</code> is not equivalent to looking at the <code>@threat_intel.indicators_matched:*</code> attribute. The latter contains values for every threat intelligence match. This attribute can contain values, but the overall trace might not be resurfaced in ASM if there is no attack present, and the source does not match one of the sources mentioned previously.
 </div>
 
-## Behaviour across Cloud SIEM, APM, and ASM
+## Behavior across Cloud SIEM, APM, and ASM
 
 These Datadog products each may contain threat intelligence information. The behaviour can vary depending on which products you are using.
 
