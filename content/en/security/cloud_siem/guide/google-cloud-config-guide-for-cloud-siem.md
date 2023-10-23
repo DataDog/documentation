@@ -76,18 +76,18 @@ Create an additional topic and default subscription to handle any log messages r
 1. Leave **Add a default subscription** selected.
 1. Click **Create**.
 
+**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][6]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][7] for information on how to set up a monitor to notify when you are close to those limits.
+
 ### Create a secret in Secret Manager
 
-Datadog recommends creating a secret in [Secret Manager][6] with your valid Datadog API key value. This secret is used when you set up the [Dataflow job](#create-and-run-the-dataflow-job) later.
+Datadog recommends creating a secret in [Secret Manager][8] with your valid Datadog API key value. This secret is used when you set up the [Dataflow job](#create-and-run-the-dataflow-job) later.
 
-1. Navigate to Security > [Secret Manager][6].
+1. Navigate to Security > [Secret Manager][8].
 1. Click **Create Secret**.
 1. Enter a name for the secret.
-1. Copy your [Datadog API key][7] and paste it into the **Secret value** section.
+1. Copy your [Datadog API key][9] and paste it into the **Secret value** section.
 1. Optionally, set the other configurations based on your use case.
 1. Click **Create Secret**.
-
-**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][8]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][9] for information on how to set up a monitor to notify when you are close to those limits.
 
 ## Create a custom Dataflow worker service account
 
@@ -148,7 +148,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:  
     a. Click **Optional Parameters** to see the additional fields.  
     b. Enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.  
-        To get the resource name, go to your secret in [Secret Manager][6]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.  
+        To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.  
     c. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.  
 1. If you are not using a secret for your Datadog API key value:
     - **Recommended**:
@@ -180,10 +180,10 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 [3]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
-[6]: https://console.cloud.google.com/security/secret-manager
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: https://cloud.google.com/pubsub/quotas#quotas
-[9]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[6]: https://cloud.google.com/pubsub/quotas#quotas
+[7]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[8]: https://console.cloud.google.com/security/secret-manager
+[9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
 [11]: https://console.cloud.google.com/iam-admin/serviceaccounts
 [12]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.admin
