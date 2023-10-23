@@ -63,7 +63,7 @@ To ensure that Data Access audit logs are captured for new Google Cloud services
 
 1. Navigate to Pub/Sub > [Topics][5].
 1. Click **Create Topic**.
-1. Enter a topic name. For example, `export-audit-logs-to-datadog`.
+1. Enter a descriptive topic name. For example, `export-audit-logs-to-datadog`.
 1. Leave **Add a default subscription** selected, which creates a subscription with default configuration values. The name of the subscription is automatically generated as your topic name with "-sub" appended to it. This subscription name is used when you create your [Dataflow job](#create-and-run-the-dataflow-job) later.
 1. Click **Create**.
 
@@ -72,7 +72,7 @@ Create an additional topic and default subscription to handle any log messages r
 
 1. Navigate back to Pub/Sub > [Topics][5]
 1. Click **Create Topic**.
-1. Enter a topic name.
+1. Enter a descriptive topic name.
 1. Leave **Add a default subscription** selected.
 1. Click **Create**.
 
@@ -80,37 +80,44 @@ Create an additional topic and default subscription to handle any log messages r
 
 Datadog recommends creating a secret in [Secret Manager][6] with your valid Datadog API key value. This secret is used when you set up the [Dataflow job](#create-and-run-the-dataflow-job) later.
 
-**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][7]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][8] for information on how to set up a monitor to notify when you are close to those limits.
+1. Navigate to Security > [Secret Manager][6].
+1. Click **Create Secret**.
+1. Enter a name for the secret.
+1. Copy your [Datadog API key][7] and paste it into the **Secret value** section.
+1. Optionally, set the other configurations based on your use case.
+1. Click **Create Secret**.
+
+**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][8]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][9] for information on how to set up a monitor to notify when you are close to those limits.
 
 ## Create a custom Dataflow worker service account
 
-The default behavior for Dataflow pipeline workers is to use your project's [Compute Engine default service account][9], which grants permissions to all resources in the project. If you are forwarding logs from a production environment, create a custom worker service account with only the necessary roles and permissions, and assign this service account to your Dataflow pipeline workers.
+The default behavior for Dataflow pipeline workers is to use your project's [Compute Engine default service account][10], which grants permissions to all resources in the project. If you are forwarding logs from a production environment, create a custom worker service account with only the necessary roles and permissions, and assign this service account to your Dataflow pipeline workers.
 
-1. Navigate to Google Cloud's [Service Account][10] page.
+1. Navigate to Google Cloud's [Service Account][11] page.
 1. Select your project.
 1. Click **Create Service Account**.
-1. Enter a name for the service account.
 1. Enter a descriptive name for the service account.
 1. Click **Create and Continue**.
 1. If you are not creating a custom service account for the Dataflow pipeline workers, ensure that the default Compute Engine service account has the following required permissions.
     ##### Required permissions
     | Role | Path | Description |
     | -------------  | ----------- | ----------- |
-    | [Dataflow Admin][11] | `roles/dataflow.admin` |  Allow this service account to perform Dataflow administrative tasks
-    | [Dataflow Worker][12] | `roles/dataflow.worker` |  Allow this service account to perform Dataflow job operations 
-    | [Pub/Sub Viewer][13] | `roles/pubsub.viewer` | Allow this service account to view messages from the Pub/Sub subscription with your Google Cloud logs
-    | [Pub/Sub Subscriber][14] | `roles/pubsub.subscriber` | Allow this service account to consume messages from the Pub/Sub subscription with your Google Cloud logs
-    | [Pub/Sub Publisher][15] | `roles/pubsub.publisher` | Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs
-    | [Secret Manager Secret Accessor][16] | `roles/secretmanager.secretAccessor` | Allow this service account to access the Datadog API key in Secret Manager
-    | [Storage Object Admin][17] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files
+    | [Dataflow Admin][12] | `roles/dataflow.admin` |  Allow this service account to perform Dataflow administrative tasks
+    | [Dataflow Worker][13] | `roles/dataflow.worker` |  Allow this service account to perform Dataflow job operations 
+    | [Pub/Sub Viewer][14] | `roles/pubsub.viewer` | Allow this service account to view messages from the Pub/Sub subscription with your Google Cloud logs
+    | [Pub/Sub Subscriber][15] | `roles/pubsub.subscriber` | Allow this service account to consume messages from the Pub/Sub subscription with your Google Cloud logs
+    | [Pub/Sub Publisher][16] | `roles/pubsub.publisher` | Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs
+    | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Allow this service account to access the Datadog API key in Secret Manager
+    | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files
+7. Continue **Continue**.
 8. Click **Done**.
 
 ##  Create a log sink to publish logs to the pub/sub
 
-1. Navigate to Google Cloud's [Logs Explorer][18].
+1. Navigate to Google Cloud's [Logs Explorer][19].
 1. Select **Log Router** in the left side menu.
 1. Click **Create Sink**.
-1. Enter a name for the sink.
+1. Enter a descriptive name for the sink.
 1. Click **Next**.
 1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.
 1. In the **Select a Cloud Pub/Sub topic**, select the Pub/Sub created earlier.
@@ -124,7 +131,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 
 ## Create and run the Dataflow job
 
-1. Navigate to Google Cloud's [Dataflow][19].
+1. Navigate to Google Cloud's [Dataflow][20].
 1. Click **Create job from template**.
 1. Enter a name for the job.
 1. Select a regional endpoint.
@@ -141,26 +148,28 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:  
     a. Click **Optional Parameters** to see the additional fields.  
     b. Enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.  
+        To get the resource name, go to your secret in [Secret Manager][6]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.  
     c. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.  
-1. See [Template parameters][20] in the Dataflow template for details on other available options.
+1. If you are not using a secret for your Datadog API key value:
     - **Recommended**:
         - Set `Source of API key passed` to `KMS`.
         - Set `Google Cloud KMS  key for the API key` to your Cloud KMS key ID.
         - Set `Logs API Key` to the encrypted API key.
     - **Not recommended**: `Source of API key passed` set to `PLAINTEXT` with `Logs API Key` set to the plaintext API key.
+1. See [Template parameters][21] in the Dataflow template for details on other available options.
 1. If you created a custom worker service account, select it in the **Service account email** dropdown menu.
 1. Click **Run Job**.
 
-See new logging events delivered to the Cloud Pub/Sub topic in the [Datadog Log Explorer][21].
+See new logging events delivered to the Cloud Pub/Sub topic in the [Datadog Log Explorer][22].
 
 ## Use Cloud SIEM to triage Security Signals
 
 Cloud SIEM applies out-of-the-box detection rules to all processed logs, including the Google Cloud audit logs you have just set up. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
 
-- Go to the [Cloud SIEM Signals Explorer][22] to view and triage threats. See Security Signals Explorer for further details.
-- You can also use the [Google Cloud Audit Log dashboard][23] to investigate anomalous activity.
-- See [out-of-the-box detection rules][24] that are applied to your logs.
-- Create [new rules][25] to detect threats that match your specific use case.
+- Go to the [Cloud SIEM Signals Explorer][23] to view and triage threats. See Security Signals Explorer for further details.
+- You can also use the [Google Cloud Audit Log dashboard][24] to investigate anomalous activity.
+- See [out-of-the-box detection rules][25] that are applied to your logs.
+- Create [new rules][26] to detect threats that match your specific use case.
 
 ## Further reading
 
@@ -172,22 +181,23 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
 [6]: https://console.cloud.google.com/security/secret-manager
-[7]: https://cloud.google.com/pubsub/quotas#quotas
-[8]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
-[9]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
-[10]: https://console.cloud.google.com/iam-admin/serviceaccounts
-[11]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.admin
-[12]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.worker
-[13]: https://cloud.google.com/pubsub/docs/access-control#pubsub.viewer
-[14]: https://cloud.google.com/pubsub/docs/access-control#pubsub.subscriber
-[15]: https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher
-[16]: https://cloud.google.com/secret-manager/docs/access-control#secretmanager.secretAccessor
-[17]: https://cloud.google.com/storage/docs/access-control/iam-roles/
-[18]: https://console.cloud.google.com/logs/
-[19]: https://console.cloud.google.com/dataflow/
-[20]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
-[21]: https://app.datadoghq.com/logs/
-[22]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
-[23]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
-[24]: /security/default_rules/#cat-cloud-siem
-[25]: /security/detection_rules/
+[7]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: https://cloud.google.com/pubsub/quotas#quotas
+[9]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
+[11]: https://console.cloud.google.com/iam-admin/serviceaccounts
+[12]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.admin
+[13]: https://cloud.google.com/dataflow/docs/concepts/access-control#dataflow.worker
+[14]: https://cloud.google.com/pubsub/docs/access-control#pubsub.viewer
+[15]: https://cloud.google.com/pubsub/docs/access-control#pubsub.subscriber
+[16]: https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher
+[17]: https://cloud.google.com/secret-manager/docs/access-control#secretmanager.secretAccessor
+[18]: https://cloud.google.com/storage/docs/access-control/iam-roles/
+[19]: https://console.cloud.google.com/logs/
+[20]: https://console.cloud.google.com/dataflow/
+[21]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
+[22]: https://app.datadoghq.com/logs/
+[23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
+[25]: /security/default_rules/#cat-cloud-siem
+[26]: /security/detection_rules/
