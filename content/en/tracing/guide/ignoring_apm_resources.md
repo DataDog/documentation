@@ -310,7 +310,7 @@ For multiple values:
 
 {{< code-block lang="yaml" >}}
         - name: DD_APM_IGNORE_RESOURCES
-          value: ["value1","Api::HealthchecksController#index$"]
+          value: '"value1","Api::HealthchecksController#index$"'
 {{< /code-block >}}
 
 {{% /tab %}}

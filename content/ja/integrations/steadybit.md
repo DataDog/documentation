@@ -132,8 +132,8 @@ Steadybit は、カオスエンジニアリングのアクティビティを示�
 ご不明な点は、[Steadybit のサポートチーム][6]までお問い合わせください。
 
 [1]: https://steadybit.com/?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
-[2]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
+[2]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
 [3]: https://signup.steadybit.io/?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme
-[4]: https://hub.steadybit.com/extension/com.github.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme#content-installation
+[4]: https://hub.steadybit.com/extension/com.steadybit.extension_datadog?utm_campaign=datadogintegration&utm_source=datadog&utm_medium=integration-readme#content-installation
 [5]: https://docs.datadoghq.com/ja/getting_started/site/#access-the-datadog-site
 [6]: mailto:support@steadybit.com
