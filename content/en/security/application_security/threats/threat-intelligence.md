@@ -37,7 +37,6 @@ To search for all traces flagged by a specific source, use the following query w
 
     @threat_intel.results.source.name:<SOURCE_NAME> 
 
-Replace FireHOL by the source name you are interested in.
 To query for all traces containing threat intelligence from any source, use the following query:
 
     @appsec.threat_intel:true 
