@@ -28,13 +28,13 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 ### Configuration of tags
 
-#### Creating an allowlist of tags 
+#### Configure an allowlist of tags 
 Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (represented by an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
 
 {{< img src="metrics/mwl_example_include_tags.mp4" alt="Configuration of Tags with Allowlist" video=true >}}
 
 
-#### Excluding tags 
+#### Configure an exclusion list of tags 
 Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Exclude Tags…”** to drop and exclude tags to optimize metric volumes. These tags will **not** remain queryable on dashboards and monitors. The tag configuration modal will let you know if you are selecting a tag that has been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (represented by an icon). Before selecting Save, an estimated new volume of indexed custom metrics that results from the potential tag configuration is displayed. 
 
 {{< img src="metrics/mwl_example_exclude_tags.mp4" alt="Configuration of Tags with Tag Exclusion" video=true >}}
