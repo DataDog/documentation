@@ -43,7 +43,7 @@ To query for all traces containing threat intelligence regardless of the source,
     @appsec.threat_intel:true 
 
 <div class="alert alert-info">
-Note that the query <code>@appsec.threat_intel:true</code> is not equivalent to looking at the <code>@threat_intel.indicators_matched:*</code> attribute. The latter contains values for every threat intelligence match. This attribute can contain values, but the overall trace might not be resurfaced in ASM if there is no attack present, and the source does not match one of the sources mentioned previously.
+The query <code>@appsec.threat_intel:true</code> in the ASM traces tab is not equivalent to <code>@threat_intel.indicators_matched:*</code>. The <code>@threat_intel.indicators_matched:*</code> query contains values for every threat intelligence match, but the overall trace may not be resurfaced in ASM if there is no attack present and the source does not match one of the sources mentioned in the <strong>Which sources are surfaced in ASM</strong> section.
 </div>
 
 ## Behavior across Cloud SIEM, APM, and ASM
