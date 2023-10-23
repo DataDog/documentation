@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog provides built-in [threat intelligence][1] datasets for some services such as Application Security Management (ASM), or Cloud SIEM.
+Datadog provides built-in [threat intelligence][1] datasets for some services such as Application Security Management (ASM) and Cloud SIEM (Security Information and Event Management).
 
 The Threat Intelligence data typically contains a source and a category. Different sources categorize IP addresses as known attackers, or as originating from a residential proxy, VPN, or so on.
 
