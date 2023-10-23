@@ -14,7 +14,7 @@ further_reading:
 
 Datadog provides built-in [threat intelligence][1] datasets for some services such as Application Security Management (ASM), or Cloud SIEM.
 
-The Threat Intelligence data typically contains a source and a category. Different sources categorize IP addresses as known attackers, or as originating from a residential proxy or a VPN, etc.
+The Threat Intelligence data typically contains a source and a category. Different sources categorize IP addresses as known attackers, or as originating from a residential proxy, VPN, or so on.
 
 In ASM the Threat Intelligence data is used in two ways:
 
