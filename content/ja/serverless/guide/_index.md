@@ -37,4 +37,5 @@ title: サーバーレスモニタリングガイド
     {{< nextlink href="/serverless/guide/serverless_tracing_and_webpack" >}}Node.js の Lambda トレースと Webpack の互換性{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_package_too_large" >}}サーバーレスパッケージが大きすぎるエラーのトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/handler_wrapper" >}}Lambda ハンドラーをコードでラップする{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/layer_not_authorized" >}}レイヤーが認可されていないエラーのトラブルシューティング{{< /nextlink >}}
 {{< /whatsnext >}}

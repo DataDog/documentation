@@ -72,8 +72,9 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/span_and_trace_id_format" >}}スパン ID、トレース ID の有効なフォーマット{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace-agent-from-source" >}}トレース Agent をソースからインストールする{{< /nextlink >}}
     {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}トレーシングクライアントライブラリ{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープにプライマリタグを設定する{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray の使用タイミングを決定する{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Datadog トレース保持ポリシーの理解{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Kubernetes Service を使用して APM をセットアップする{{< /nextlink >}}
 {{< /whatsnext >}}
