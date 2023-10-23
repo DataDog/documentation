@@ -69,7 +69,7 @@ The following APIs and permissions enable Datadog to access your Detailed Usage 
   **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
 
 #### **Configure required export project access**:
-Add the service account as a principal on the export dataset project resource][7] and assign a role with the following permissions:
+[Add the service account as a principal on the export dataset project resource][7] and assign a role with the following permissions:
   * `bigquery.jobs.create`
   * `bigquery.transfers.get`
   * `bigquery.transfers.update`
