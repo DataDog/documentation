@@ -30,7 +30,7 @@ Threat intelligence matches from any of the following sources will be surfaced i
 - minerstat
 - abuse.ch
 - FireHOL
-- spur (only subcategory `malware`)
+- spur (only the `malware` category)
 - Tor Exit Nodes
 
 To search for all traces flagged by a specific source you can use the following query:
