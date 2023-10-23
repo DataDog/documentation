@@ -1,7 +1,6 @@
 ---
 title: Container Cost Allocation
 kind: documentation
-disable_toc: false
 private: true
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"

@@ -1,7 +1,6 @@
 ---
 title: Tag pipelines
 kind: Documentation
-disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"

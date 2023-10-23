@@ -1,7 +1,6 @@
 ---
 title: Azure
 kind: documentation
-disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
