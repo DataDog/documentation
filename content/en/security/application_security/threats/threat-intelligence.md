@@ -48,7 +48,7 @@ The query <code>@appsec.threat_intel:true</code> in the ASM traces tab is not eq
 
 ## Behavior across Cloud SIEM, APM, and ASM
 
-Use the table below to understand how to find threat intelligence information for the Datadog services in use:
+The table below shows the availability of threat intelligence information for Datadog services:
 
 |Service|Other services in use|Description|
 |---|---|---|
