@@ -106,6 +106,18 @@ An example of a workflow with a single step that sends a message to a Slack chan
 
 When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
+## Test a step
+
+To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
+
+To test a workflow step:
+1. Click **Test** in the step **Inputs** section.
+1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
+1. Click **Test** to test the action.
+1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
+
+Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
+
 ## Publish a workflow
 
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
@@ -220,3 +232,5 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
+[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+
