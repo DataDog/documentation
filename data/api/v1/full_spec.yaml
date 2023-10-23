@@ -4021,6 +4021,7 @@ components:
       - functions_usage
       - infra_host_usage
       - invocations_usage
+      - lambda_traced_invocations_usage
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - npm_host_usage
@@ -4063,6 +4064,7 @@ components:
       - FUNCTIONS_USAGE
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
+      - LAMBDA_TRACED_INVOCATIONS_USAGE
       - MOBILE_APP_TESTING_USAGE
       - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
@@ -7644,6 +7646,8 @@ components:
       - infra_host_percentage
       - invocations_usage
       - invocations_percentage
+      - lambda_traced_invocations_usage
+      - lambda_traced_invocations_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
@@ -7727,6 +7731,8 @@ components:
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
       - INVOCATIONS_PERCENTAGE
+      - LAMBDA_TRACED_INVOCATIONS_USAGE
+      - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
@@ -7990,6 +7996,14 @@ components:
           type: number
         invocations_usage:
           description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        lambda_traced_invocations_percentage:
+          description: The percentage of Serverless APM usage by tag(s).
+          format: double
+          type: number
+        lambda_traced_invocations_usage:
+          description: The Serverless APM usage by tag(s).
           format: double
           type: number
         mobile_app_testing_percentage:
