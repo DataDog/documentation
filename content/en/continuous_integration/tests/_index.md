@@ -66,6 +66,8 @@ cascade:
     {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project (except for Ruby).
+
 ## Default configurations
 
 Tests evaluate the behavior of code for a set of given conditions. Some of those conditions are related to the environment where the tests are run, such as the operating system or the runtime used. The same code executed under different sets of conditions can behave differently, so developers usually configure their tests to run in different sets of conditions and validate that the behavior is the expected for all of them. This specific set of conditions is called a *configuration*.
@@ -112,21 +114,6 @@ All tags with the `test.configuration` prefix are used as configuration tags, in
 
 In order to filter using these configurations tags, [you must create facets for these tags][2].
 
-## Test suite level visibility
-
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
-
-### Compatibility
-
-Not every language supported by CI Visibility has support for test suite level visibility:
-
-* [Swift][3] has complete support since `dd-sdk-swift-testing>=2.1.0`.
-* [.NET][4] has complete support since `dd-trace-dotnet>2.16.0`.
-* [JavaScript][5] has limited support since `dd-trace-js>=3.3.0`.
-* [Java][6] has complete support since `dd-trace-java>=1.12.0`.
-* [JUnit report uploads][7] has complete support since `datadog-ci>=2.17.0`.
-* [Python][8] has complete support since `dd-trace-py>=1.14.0`
-
 ## Use CI tests data
 
 {{% ci-information-collected %}}
@@ -144,12 +131,7 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[3]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[4]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[5]: /continuous_integration/tests/java/#compatibility
-[6]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
-[7]: /continuous_integration/tests/python/#compatibility
+[2]: /continuous_integration/explorer/facets/
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list
 [10]: https://app.datadoghq.com/ci/test-runs

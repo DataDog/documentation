@@ -22,29 +22,15 @@ further_reading:
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
 * `pytest>=6.8.0`
-  * From `ddtrace>=1.18.0`.
+  * From `ddtrace>=2.1.0`.
   * From `Python>=3.7`.
   * Requires `coverage>=5.5`.
 
 ## Setup
 
-### Test Visibility 
+### Test Visibility
 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python][1]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
-
-### Configure the test runner environment
-
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{% ci-itr-agent %}}
-{{% /tab %}}
-
-{{% tab "Cloud CI Provider (Agentless)" %}}
-{{% ci-itr-agentless %}}
-{{% /tab %}}
-
-{{< /tabs >}}
 
 {{% ci-itr-activation-instructions %}}
 

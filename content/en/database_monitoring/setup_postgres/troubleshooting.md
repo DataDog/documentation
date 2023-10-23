@@ -254,8 +254,8 @@ may cause the collection query to take longer to run which can lead to query tim
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /agent/guide/agent-log-files
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-log-files
 [5]: /database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [7]: /database_monitoring/setup_postgres/advanced_configuration

@@ -20,6 +20,10 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
@@ -388,10 +392,10 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 {{< partial name="observability_pipelines/use_cases.html" >}}
 
-For a deeper dive into recommendations for deploying and scaling multiple Workers:
+For recommendations on deploying and scaling multiple Workers:
 
 - See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
-- See [Best Practices for OPW Aggregator Architecture][8] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
+- See [Best Practices for OP Worker Aggregator Architecture][8].
 
 ## Deployment Modes
 

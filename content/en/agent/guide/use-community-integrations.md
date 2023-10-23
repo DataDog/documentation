@@ -41,7 +41,7 @@ For Agent v7.21+ / v6.21+:
 **Note**: If necessary, prepend `sudo -u dd-agent` to the install command.
 
 [1]: /getting_started/integrations/
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -72,9 +72,9 @@ For Agent < v7.21 / v6.21:
 6. [Restart the Agent][4].
 
 [1]: https://github.com/DataDog/integrations-extras
-[2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [3]: /getting_started/integrations/
-[4]: /agent/guide/agent-commands/#restart-the-agent
+[4]: /agent/configuration/agent-commands/#restart-the-agent
 
 
 {{% /tab %}}
@@ -82,7 +82,7 @@ For Agent < v7.21 / v6.21:
 
 If your site restricts network access, ensure you have added all of the [`ip-ranges`][5] to your inclusion list, or download the integration manually.
 
-[5]: /agent/guide/network
+[5]: /agent/configuration/network
 
 
 <br>

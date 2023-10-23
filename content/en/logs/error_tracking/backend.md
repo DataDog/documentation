@@ -131,9 +131,9 @@ type stackTracer interface {
 }
 
 type errorField struct {
-  kind    string `json:"kind"`
-  stack   string `json:"stack"`
-  message string `json:"message"`
+  Kind    string `json:"kind"`
+  Stack   string `json:"stack"`
+  Message string `json:"message"`
 }
 
 func ErrorField(err error) errorField {
@@ -146,9 +146,9 @@ func ErrorField(err error) errorField {
 		}
     }
     return errorField{
-        kind: reflect.TypeOf(err).String(),
-        stack: stack,
-        message: err.Error(),
+        Kind: reflect.TypeOf(err).String(),
+        Stack: stack,
+        Message: err.Error(),
     }
 }
 
