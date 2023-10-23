@@ -6,8 +6,8 @@ further_reading:
   tag: "Documentation"
   text: "Composite Monitor"
 - link: "/monitors/types/anomaly/"
-	tag: "Documentation"
-	text: "Anomaly Monitor"
+  tag: "Documentation"
+  text: "Anomaly Monitor"
 ---
 
 ## Overview
