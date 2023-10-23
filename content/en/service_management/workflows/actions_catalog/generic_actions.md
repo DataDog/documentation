@@ -148,7 +148,7 @@ The function action allows for variable assignments and data transformations req
 
 ### Testing expressions and functions
 
-To test an expression of function action, click **Test** in the **Inputs** section. If the action uses an output variable from a previous step, comment out the variable in your code and replace it with test data. For example, the following action assigns variables to the workflow name and to the `Steps.List_monitors` output from a previous step:
+To test an expression or function action, click **Test** in the **Inputs** section. If the action uses an output variable from a previous step, comment out the variable in your code and replace it with test data. For example, consider the following action that assigns variables to the workflow name and to the `Steps.List_monitors` output from a previous step:
 
 ```js
 let name = $.WorkflowName;
