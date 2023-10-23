@@ -128,4 +128,6 @@ You can visualize your ingested data using the following cost types:
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
 [13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
-[14]: /cloud_cost_management/google_cloud#enable-cost-billing-and-usage-export
+[14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+
+
