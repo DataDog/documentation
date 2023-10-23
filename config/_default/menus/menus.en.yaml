@@ -3137,6 +3137,11 @@ main:
     parent: csm_setup
     identifier: csm_setup_workload_security
     weight: 10010
+  - name: CSM Vulnerabilities
+    url: security/cloud_security_management/setup/csm_vulnerabilities
+    parent: csm_setup
+    identifier: csm_setup_vulnerabilities
+    weight: 10020
   - name: Threats
     url: security/threats/
     parent: csm
@@ -3217,11 +3222,6 @@ main:
     parent: csm
     identifier: infrastructure_vulnerabilities
     weight: 18
-  - name: Setup
-    url: security/infrastructure_vulnerabilities/setup
-    parent: infrastructure_vulnerabilities
-    identifier: infra_vm_setup
-    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
