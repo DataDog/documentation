@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections which allows your to organize and navigate your visualizations through the dropdown selections. 
+Template variables allow you to dynamically filter one or more widgets in a dashboard. You can build saved views from your template variable selections which allows you to organize and navigate your visualizations through the dropdown selections. 
 
 A template variable is defined by:
 
