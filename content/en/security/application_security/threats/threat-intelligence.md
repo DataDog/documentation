@@ -48,7 +48,7 @@ Note that the query <code>@appsec.threat_intel:true</code> is not equivalent to 
 
 ## Behavior across Cloud SIEM, APM, and ASM
 
-These Datadog products each may contain threat intelligence information. The behaviour can vary depending on which products you are using.
+Use the table below to understand how to find threat intelligence information for the Datadog services in use:
 
 |Product|Other products in use|Description|
 |---|---|---|
