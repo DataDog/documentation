@@ -19,15 +19,15 @@ further_reading:
 If you are interested in migrating Datadog data centers, follow these instructions to plan your migration:
 
 1. Create a Datadog account.
-1. Migrate Datadog [resources or assets-pick one and go with it] using the `datadog-sync-cli` package or [Dual Shipping][4].
+1. Migrate Datadog [resources or assets-pick one and go with it] using the `datadog-sync-cli` package and/or [Dual Shipping][4].
 1. Migrate Datadog integrations.
 1. Migrate real-time data.
 
-In a data center migration, no data is removed from your old Datadog organization—resources are being duplicated into your new Datadog organization. You have access to the old data and resources in your old Datadog organization, which expires once the retention period passes. 
+In a data center migration, no data is removed from your old Datadog organization—resources are being duplicated into your new Datadog organization. You have access to the old data and resources in your old Datadog organization, which expires after the retention period passes. 
 
 This guide walks you through migrating from one Datadog data center to another Datadog data center by using `datadog-sync-cli` to sync resources across your Datadog organizations and [Dual Shipping][4] to prevent data loss. 
 
-## Create a new account
+## Create another account
 
 [Sign up for a Datadog account][8] and specify the region of your choice or navigate to `https://app.{{< region-param key="dd_site" code="true" >}}/signup`.
 
@@ -45,7 +45,7 @@ You need to specify the API and application keys for a source organization and a
 
 ### Prerequisites
 
-The `datadog-sync-cli` package requires Python 3 >= 3.9.
+For information about Python requirements, see the [Installation section][11] of the `datadog-sync-cli` package.
 
 ### Resource attributes
 
@@ -57,7 +57,7 @@ You can use `datadog-sync-cli` to migrate the following resources:
 
 ### Dependent resources
 
-Many Datadog resources are interdependent, meaning that a resource can reference many resources such as `roles` and `dashboard`, which may include widgets that use Datadog monitor or Synthetic test data. 
+Many Datadog resources are interdependent, meaning that a resource can reference many resources. For example, a `users` resource could reference `roles` and `dashboards` resources, which may include widgets that use Datadog monitor or Synthetic test data. 
 
 While the `datadog-sync-cli` package synchronizes these resources to ensure dependencies are not broken, you must ensure that dependent resources are also imported and synced if you are importing and syncing a _subset_ of resources.
 
@@ -77,7 +77,7 @@ Log Management
 ### Migrate integrations and real-time data
 
 Integrations
-: Migrating to another data center requires you to re-add your integration. Use a CI mechanism to mass update agents (by using the `logs_pipelines` resource).
+: Migrating to another data center requires you to re-add your integration.
 
 APM
 : Setting a second primary tag in APM requires you to update existing dashboards and monitor queries.
@@ -119,7 +119,7 @@ The following products cannot use Dual Shipping:
 
 ### Turn off Dual Shipping
 
-To avoid additional charges in the month associated with products that are billed for [Dual Shipping][4], Datadog recommends disabling hosts or integrations such as AWS and GCP once there is enough data in the destination organization before the next billing cycle starts on the first day of the calendar month at 12:00 am UTC.
+To avoid additional charges in the month associated with products that are billed for [Dual Shipping][4], Datadog recommends disabling hosts or integrations such as AWS and GCP after there is enough data in the destination organization before the next billing cycle starts on the first day of the calendar month at 12:00 am UTC.
 
 ## Troubleshooting
 
@@ -140,7 +140,7 @@ Run `datadog-sync-cli` to migrate all monitors with `migration:true` from the so
 
 Set up [Dual Shipping](#use-dual-shipping) and remove the global downtime in the destination organization. Iterate through all your monitors in the destination organization and remove the `migration:true` tag.
 
-Don't forget to turn off [Dual Shipping](#turn-off-dual-shipping) once you have enough data in the destination organization.
+Don't forget to turn off [Dual Shipping](#turn-off-dual-shipping) after you have enough data in the destination organization.
 
 ## Further Reading
 
@@ -156,3 +156,4 @@ Don't forget to turn off [Dual Shipping](#turn-off-dual-shipping) once you have 
 [8]: https://app.datadoghq.com/signup
 [9]: https://portal.azure.com/#create/datadog1591740804488.dd_liftr_v2
 [10]: https://github.com/DataDog/datadog-sync-cli#usage
+[11]: https://github.com/DataDog/datadog-sync-cli#installation
