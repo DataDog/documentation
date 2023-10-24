@@ -36,7 +36,7 @@ cascade:
 - _target:
     path: /integrations/aws.md
   algolia:
-    rank: 60
+    rank: 10
     category: Documentation
     subcategory: Integrations
     tags: ['aws', 'amazon web services']
