@@ -69,18 +69,12 @@ At this point, you have a destination organization in a new data center which po
 
 The `datadog-sync-cli` tool does not migrate intake data such as ingested logs or metrics, and does not migrate API keys or integrations.
 
-The following Datadog resources are not covered by the `datadog-sync-cli` tool:
-
-Log Management
-: Saved views, log facets, log JSON pre-processing attributes, and any increased log monitor quota (the default number of log monitors allowed is 1000). </br></br> To migrate existing logs to a new Datadog account, use [Log Archiving][2] and [Log Rehydration™][3].
 
 ### Migrate integrations and real-time data
 
 Integrations
 : Migrating to another data center requires you to re-add your integration.
 
-APM
-: Setting a second primary tag in APM requires you to update existing dashboards and monitor queries.
 
 Next, configure the sources that send data to Datadog (the Datadog Agent, API, and more) to point to the new data center. To maintain historical metrics and prevent data loss, you have two options:
 
