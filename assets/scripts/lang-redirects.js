@@ -10,19 +10,19 @@ const ignoredPaths = [];
 const allowedLanguages = ['en', 'ja', 'fr', 'ko'];
 const redirectLanguages = ['ja', 'fr', 'ko'];
 const enabledSubdomains = [
-	'www',
-	'docs',
-	'docs-staging',
-	'corpsite-preview',
-	'corpsite-staging',
-	'localhost'
+    'www',
+    'docs',
+    'docs-staging',
+    'corpsite-preview',
+    'corpsite-staging',
+    'localhost'
 ];
 const cookiePath = '/';
 
 export const getUrlVars = () => {
-	const vars = {};
-	const href = window.location.href.replace(window.location.hash, '');
-    href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    const vars = {};
+    const href = window.location.href.replace(window.location.hash, '');
+    href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
         vars[key] = value;
     });
     return vars;
@@ -30,56 +30,56 @@ export const getUrlVars = () => {
 
 // All query parameters should be retained with the exception of 'lang_pref', which we don't want being indexed/crawled.
 export const getQueryString = (params) => {
-	if (Object.prototype.hasOwnProperty.call(params, 'lang_pref')) {
-		delete params.lang_pref;
-	}
+    if (Object.prototype.hasOwnProperty.call(params, 'lang_pref')) {
+        delete params.lang_pref;
+    }
 
-	const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
+    const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
 
-	return queryString.length > 0 ? `?${queryString}` : '';
+    return queryString.length > 0 ? `?${queryString}` : '';
 }
 
 export function handleLanguageBasedRedirects() {
-	const params = getUrlVars();
-	const thisUrl = new URL(window.location.href);
-	const supportedLanguage = navigator.language.split('-')[0] || navigator.browserLanguage.split('-')[0];
-	const baseURL = thisUrl.hostname;
-	const subdomain = baseURL.split('.')[0];
-	const subMatch = enabledSubdomains.filter((i) => subdomain === i);
+    const params = getUrlVars();
+    const thisUrl = new URL(window.location.href);
+    const supportedLanguage = navigator.language.split('-')[0] || navigator.browserLanguage.split('-')[0];
+    const baseURL = thisUrl.hostname;
+    const subdomain = baseURL.split('.')[0];
+    const subMatch = enabledSubdomains.filter((i) => subdomain === i);
     const cookieDomain = subdomain === 'localhost' ? 'localhost' : '.datadoghq.com';
-	let uri = thisUrl.pathname;
-	let previewPath = '';
-	let acceptLanguage = 'en';
-	let logMsg = '';
-   
-	const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1);
-    
-	/* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
-		instead of being appended to the end
-		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
-	*/
+    let uri = thisUrl.pathname;
+    let previewPath = '';
+    let acceptLanguage = 'en';
+    let logMsg = '';
+
+    const curLang = uri.split('/').filter((i) => allowedLanguages.indexOf(i) !== -1);
+
+    /* Update URI based on preview links. Branch/feature needs to be moved in front of language redirect
+        instead of being appended to the end
+        ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
+    */
 
 
     // Remove legacy site-specific domain cookie
-    if(Cookies.get('lang_pref', { domain: 'docs.datadoghq.com' })) {
+    if (Cookies.get('lang_pref', { domain: 'docs.datadoghq.com' })) {
         console.log('removing legacy cookie: live');
         Cookies.remove('lang_pref', { domain: 'docs.datadoghq.com' });
     }
 
-    if(Cookies.get('lang_pref', { domain: 'docs-staging.datadoghq.com' })) {
+    if (Cookies.get('lang_pref', { domain: 'docs-staging.datadoghq.com' })) {
         console.log('removing legacy cookie: staging');
         Cookies.remove('lang_pref', { domain: 'docs-staging.datadoghq.com' });
     }
 
-	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
-		const commitRef = `/${document.documentElement.dataset.commitRef}`;
+    if (subdomain.includes('preview') || subdomain.includes('docs-staging')) {
+        const commitRef = `/${document.documentElement.dataset.commitRef}`;
 
-		previewPath = commitRef || uri.split('/').slice(0,3).join('/');
-		uri = uri.replace(previewPath, '');
-		logMsg += `Preview path is ${ previewPath }, URI set to: ${ uri } `;
-	}
+        previewPath = commitRef || uri.split('/').slice(0, 3).join('/');
+        uri = uri.replace(previewPath, '');
+        logMsg += `Preview path is ${previewPath}, URI set to: ${uri} `;
+    }
 
-	if ( subMatch.length ) {
+    if (subMatch.length) {
 
         // By default, set the lang_pref cookie based on the url path. This can be overriden by the subsequent logic below
         const langCookie = Cookies.get('lang_pref');
@@ -87,58 +87,58 @@ export function handleLanguageBasedRedirects() {
         let firstTimeFlag = false;
         if (!langCookie || langCookie != tmpCurLang[0]) {
             firstTimeFlag = true;
-            Cookies.set("lang_pref", tmpCurLang[0], {path: cookiePath, domain: cookieDomain});
+            Cookies.set("lang_pref", tmpCurLang[0], { path: cookiePath, domain: cookieDomain });
         }
 
         // order of precedence: url > cookie > header
-		if ( params['lang_pref'] ) {
-			if (allowedLanguages.indexOf(params['lang_pref']) !== -1) {
-				acceptLanguage = params['lang_pref'];
+        if (params['lang_pref']) {
+            if (allowedLanguages.indexOf(params['lang_pref']) !== -1) {
+                acceptLanguage = params['lang_pref'];
 
-				logMsg += `Change acceptLanguage based on URL Param: ${ acceptLanguage }`;
-	
-				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: cookieDomain});
+                logMsg += `Change acceptLanguage based on URL Param: ${acceptLanguage}`;
 
-				window.location.replace( window.location.origin + `${ previewPath }/${ uri }${getQueryString(params)}`.replace(/\/+/g,'/') );
-			} else {
-				// If lang_pref query parameter is present but not an accepted language, remove it from query string without redirecting.
-				const updatedUrl = window.location.origin + `${ previewPath }/${ uri }${getQueryString(params)}`.replace(/\/+/g,'/');
-				window.history.pushState({}, document.title, updatedUrl);
-			}
-		}
+                Cookies.set("lang_pref", acceptLanguage, { path: cookiePath, domain: cookieDomain });
 
-		else if ( Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 && !firstTimeFlag) {
-			acceptLanguage = Cookies.get('lang_pref');
+                window.location.replace(window.location.origin + `${previewPath}/${uri}${getQueryString(params)}`.replace(/\/+/g, '/'));
+            } else {
+                // If lang_pref query parameter is present but not an accepted language, remove it from query string without redirecting.
+                const updatedUrl = window.location.origin + `${previewPath}/${uri}${getQueryString(params)}`.replace(/\/+/g, '/');
+                window.history.pushState({}, document.title, updatedUrl);
+            }
+        }
 
-			logMsg += `Change acceptLanguage based on lang_pref Cookie: ${ acceptLanguage }`;
-		}
+        else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 && !firstTimeFlag) {
+            acceptLanguage = Cookies.get('lang_pref');
 
-		else if ( redirectLanguages.indexOf(supportedLanguage) !== -1 ) {
-			logMsg += `Set acceptLanguage based on navigator.language header value: ${  supportedLanguage  } ; DEBUG: ${ supportedLanguage.startsWith('ja') }`;
+            logMsg += `Change acceptLanguage based on lang_pref Cookie: ${acceptLanguage}`;
+        }
 
-			acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
-		}
+        else if (redirectLanguages.indexOf(supportedLanguage) !== -1) {
+            logMsg += `Set acceptLanguage based on navigator.language header value: ${supportedLanguage} ; DEBUG: ${supportedLanguage.startsWith('ja')}`;
 
-		if ( !uri.includes(`/${ acceptLanguage }/`) ) {
-			if (acceptLanguage === 'en') {
-				logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
-			}
-			else {
-				const dest = `${ previewPath }/${ acceptLanguage }/${ uri.replace(curLang, '') }${getQueryString(params)}`.replace(/\/+/g,'/');
+            acceptLanguage = redirectLanguages.filter(lang => supportedLanguage.match(lang)).toString();
+        }
 
-				logMsg += `; acceptLanguage ${ acceptLanguage } not in URL, triggering redirect to ${ dest }`;
+        if (!uri.includes(`/${acceptLanguage}/`)) {
+            if (acceptLanguage === 'en') {
+                logMsg += '; desired language not in URL, but dest is `EN` so this is OK';
+            }
+            else {
+                const dest = `${previewPath}/${acceptLanguage}/${uri.replace(curLang, '')}${getQueryString(params)}`.replace(/\/+/g, '/');
 
-				Cookies.set("lang_pref", acceptLanguage, {path: cookiePath, domain: cookieDomain});
+                logMsg += `; acceptLanguage ${acceptLanguage} not in URL, triggering redirect to ${dest}`;
 
-				window.location.replace( dest );
-			}
-		}
+                Cookies.set("lang_pref", acceptLanguage, { path: cookiePath, domain: cookieDomain });
+
+                window.location.replace(dest);
+            }
+        }
 
 
-	}
-	if ( window.DD_LOGS ) {
-		window.DD_LOGS.logger.info("Lang-Redirects", { log: logMsg, requested_url: baseURL, subdomain, uri, acceptLanguage, previewPath });
-	}
+    }
+    if (window.DD_LOGS) {
+        window.DD_LOGS.logger.info("Lang-Redirects", { log: logMsg, requested_url: baseURL, subdomain, uri, acceptLanguage, previewPath });
+    }
 }
 
 handleLanguageBasedRedirects();
