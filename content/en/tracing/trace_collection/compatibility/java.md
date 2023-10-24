@@ -81,7 +81,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
-| Vert.x                  | 3.4+       | Fully Supported | `vertx`, `vertx-3.4`, `vertx-3.9` `vertx-4.0`  |
+| Vert.x                  | 3.4+       | Fully Supported | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`  |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
