@@ -187,7 +187,7 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
 
-[1]: https://richardstartin.github.io/posts/wallclock-profiler
+[1]: https://www.datadoghq.com/blog/request-latency-profiling/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
