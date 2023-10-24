@@ -103,7 +103,7 @@ Prior to version 0.96.0 this setting only applied to request header tags. To cha
 
 `dd.trace.rate.limit`
 : **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
-**Default**: `200` when `dd.trace.rate.limit` is set. Otherwise, delegates rate limiting to the Datadog Agent.<br>
+**Default**: `100` when `dd.trace.rate.limit` is set. Otherwise, delegates rate limiting to the Datadog Agent.<br>
 Maximum number of spans to sample per second, for each Java process.
 
 `dd.trace.request_header.tags`
