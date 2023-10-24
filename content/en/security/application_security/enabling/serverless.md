@@ -258,7 +258,7 @@ Additional parameters can be found in the [CLI documentation][2].
     export DATADOG_SITE="<DATADOG_SITE>"
     ```
 
-    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct **Datadog site** is selected on the right-hand side of this page).
 
 5. Configure the Datadog API key:
 
