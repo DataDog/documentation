@@ -29,7 +29,7 @@ To instrument your application, begin by adding the following key-value pairs un
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
-- .NET specific: `DD_PROFILING_ENABLED` (optional) enables the [Continuous Profiler][15] (public beta).
+- `DD_PROFILING_ENABLED` (optional) Enables the [Continuous Profiler][15] (public beta), specific to .NET.
 
 ### Identifying your startup command
 

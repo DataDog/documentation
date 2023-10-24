@@ -135,7 +135,7 @@ To install the .NET Profiler per-application:
 </div>
 
 To install the .NET Profiler per-webapp:
-1. Install Azure App Service [Windows Datadog APM Extension][1] or follow [the Linux setup][2] for your webapp.
+1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
 
 [1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
 [2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
@@ -363,7 +363,7 @@ To install the .NET Profiler per-webapp:
 
 {{% tab "Azure App Service (public beta)" %}}
 
-2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler
+2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
 
 [1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
 [2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
