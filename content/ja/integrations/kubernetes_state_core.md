@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - ksm
+  - ksm core
 categories:
 - cloud
 - 構成 & デプロイ
@@ -42,7 +46,7 @@ Kubernetes State Metrics Core は、より詳細なメトリクスとタグを�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメージに含まれているため、Kubernetes サーバーに他に何もインストールする必要はありません。
 
@@ -50,7 +54,7 @@ Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメ�
 
 - Datadog Cluster Agent v1.12+
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -75,13 +79,12 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    kubeStateMetricsCore:
-      enabled: true
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+  features:
+    kubeStateMetricsCore:
+      enabled: true
 ```
 
 注: Datadog Operator v0.7.0 以降が必要です。
@@ -122,7 +125,7 @@ spec:
 Kubernetes State Metrics Core チェックには後方互換性がありません。レガシーの `kubernetes_state` チェックから移行する前に、変更点を注意深くお読みください。
 
 `kubernetes_state.node.by_condition`
-: ノード名の粒度を持つ新しいメトリクス。レガシーメトリクスの `kubernetes_state.nodes.by_condition` は非推奨となり、このメトリクスが採用されます。**注:** このメトリクスはレガシーチェックにバックポートされ、両方のメトリクス (このメトリクスおよびこのメトリクスと置き換えられるレガシーメトリクス) が利用できます。
+: ノード名の粒度を持つ新しいメトリクス。レガシーメトリクスの `kubernetes_state.nodes.by_condition` はこのメトリクスに置き換えるため非推奨とされています。**注:** このメトリクスはレガシーチェックにバックポートされ、両方のメトリクス (このメトリクスおよびこのメトリクスと置き換えられるレガシーメトリクス) が利用できます。
 
 `kubernetes_state.persistentvolume.by_phase`
 : 永続ボリューム名の粒度を備えた新しいメトリクス。`kubernetes_state.persistentvolumes.by_phase` を置き換えます。
@@ -134,7 +137,7 @@ Kubernetes State Metrics Core チェックには後方互換性がありませ�
 : このメトリクスには、もう `host` というタグは付いていません。このメトリクスは、ノード数を `kernel_version` `os_image` `container_runtime_version` `kubelet_version` によって集計します。
 
 `kubernetes_state.container.waiting` と `kubernetes_state.container.status_report.count.waiting`
-: これらのメトリクスは、ポッドが待機していない場合、0 値を出力しなくなりました。0 以外の値のみを報告します。
+: これらのメトリクスは、ポッドが待機していない場合、0 の値を出力しなくなりました。0 以外の値のみを報告します。
 
 `kube_job`
 : `kubernetes_state` では、`Job` が `CronJob` をオーナーとしていた場合は `kube_job` タグの値が `CronJob` 名となり、それ以外の場合は `Job` 名となります。`kubernetes_state_core` では、`kube_job` タグの値は常に `Job` 名となり、新たに `kube_cronjob` タグキーが追加されて `CronJob` 名をタグ値として持つようになります。`kubernetes_state_core` に移行する場合、クエリフィルターには新しいタグか `kube_job:foo*` (`foo` は `CronJob` 名) を使用することが推奨されます。
@@ -142,14 +145,54 @@ Kubernetes State Metrics Core チェックには後方互換性がありませ�
 `kubernetes_state.job.succeeded`
 : `kubernetes_state` では `kuberenetes.job.succeeded` は `count` 型でした。`kubernetes_state_core` では `gauge` 型です。
 
+### ノードレベルのタグの割り当て
+
+ホストレベルまたはノードレベルのタグは、クラスター中心のメトリクスに表示されなくなりました。クラスター内の実際のノードに関連する `kubernetes_state.node.by_condition` や `kubernetes_state.container.restarts` などのメトリクスのみが、それぞれのホストレベルまたはノードレベルのタグを引き続き継承します。
+
+タグをグローバルに追加する場合は、環境変数 `DD_TAGS` を使用するか、それぞれの Helm または Operator 構成を使用します。インスタンス専用レベルのタグは、カスタムの `kubernetes_state_core.yaml` を Cluster Agent にマウントすることで指定することができます。
+
+{{< tabs >}}
+
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  kubeStateMetricsCore:
+    enabled: true
+  tags: 
+    - "<TAG_KEY>:<TAG_VALUE>"
+```
+{{% /tab %}}
+{{% tab "Operator" %}}
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+    tags:
+      - "<TAG_KEY>:<TAG_VALUE>"
+  features:
+    kubeStateMetricsCore:
+      enabled: true
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+ `kubernetes_state.container.memory_limit.total` や `kubernetes_state.node.count` のようなメトリクスは、クラスター内のグループの集計カウントで、ホストレベルやノードレベルのタグは追加されません。
+
+### レガシーチェック
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Helm の `values.yaml` で `kubeStateMetricsCore` を有効にすると、レガシーの `kubernetes_state` チェックの自動コンフィギュレーションファイルを無視するように Agent が構成されます。目標は、両方のチェックを同時に実行しないようにすることです。
+Helm の `values.yaml` で `kubeStateMetricsCore` を有効にすると、レガシーの `kubernetes_state` チェックの自動コンフィギュレーションファイルを無視するように Agent が構成されます。目的は、両方のチェックを同時に実行しないようにすることです。
 
 それでも移行フェーズで両方のチェックを同時に有効にする場合は、`values.yaml` の `ignoreLegacyKSMCheck` フィールドを無効にします。
 
-**注**: `ignoreLegacyKSMCheck` は、Agent がレガシーの `kubernetes_state` チェックの自動コンフィギュレーションのみを無視するようにします。カスタムの `kubernetes_state` コンフィギュレーションは手動で削除する必要があります。
+**注**: `ignoreLegacyKSMCheck` は、Agent がレガシーの `kubernetes_state` チェックの自動構成のみを無視するようにします。カスタムの `kubernetes_state` 構成は手動で削除する必要があります。
 
 Kubernetes State Metrics Core チェックでは、クラスターに `kube-state-metrics` をデプロイする必要がなくなりました。Datadog Helm Chart の一部として `kube-state-metrics` のデプロイを無効にできます。これを行うには、Helm の `values.yaml` に以下を追加します。
 
@@ -164,7 +207,7 @@ datadog:
 
 **重要な注意:** Kubernetes State Metrics Core チェックは、レガシーの `kubernetes_state` チェックに代わるものです。Datadog は、一貫したメトリクスを保証するために、両方のチェックを同時に有効にしないことをお勧めします。
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 
@@ -173,6 +216,9 @@ datadog:
 
 `kubernetes_state.apiservice.condition`
 : この API サービスの状態。タグ:`apiservice` `condition` `status`。
+
+`kubernetes_state.configmap.count`
+: ConfigMaps の数。タグ:`kube_namespace`.
 
 `kubernetes_state.daemonset.count`
 : DaemonSets の数。タグ: `kube_namespace`。
@@ -199,10 +245,10 @@ datadog:
 : デーモンポッドを実行する必要があり、実行して使用可能になっているデーモンポッドが 1 つ以上あるノードの数。タグ: `kube_daemon_set` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.deployment.count`
-: デプロイの数。タグ: `kube_namespace`。
+: デプロイメントの数。タグ: `kube_namespace`。
 
 `kubernetes_state.deployment.paused`
-: デプロイが一時停止され、デプロイコントローラーによって処理されないかどうか。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: デプロイメントが一時停止され、デプロイメントコントローラーによって処理されないかどうか。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.deployment.replicas_desired`
 : デプロイに必要なポッドの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
@@ -214,7 +260,7 @@ datadog:
 : デプロイのローリング更新中に、必要なレプリカ数を超えてスケジュールできるレプリカの最大数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.deployment.replicas`
-: デプロイごとのレプリカの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: デプロイメントごとのレプリカの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.deployment.replicas_available`
 : デプロイごとに使用可能なレプリカの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
@@ -283,7 +329,7 @@ datadog:
 : ノードが新しいポッドをスケジュールできるかどうか。タグ: `node` `status`。
 
 `kubernetes_state.node.age`
-: ノードが新しいポッドをスケジュールできるかどうか。タグ: `node`。
+: ノード作成からの経過時間 (秒)。"タグ: `node`。
 
 `kubernetes_state.container.terminated`
 : コンテナが現在終了状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
@@ -322,19 +368,19 @@ datadog:
 : コンテナが現在待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.terminated`
-: コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在終了状態にある理由を示します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.waiting`
 : コンテナが現在待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.terminated`
-: コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在終了状態にある理由を示します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.crd.count`
 : カスタムリソース定義の数。
 
 `kubernetes_state.crd.condition`
-: このカスタムリソース定義の状態。タグ:`customresourcedefinition` `condition` `status`。
+: このカスタムリソース定義の条件。タグ:`customresourcedefinition` `condition` `status`。
 
 `kubernetes_state.pod.ready`
 : ポッドがリクエストを処理する準備ができているかどうかを説明します。 タグ: `node` `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
@@ -361,7 +407,7 @@ datadog:
 : ポッドの数。タグ: `node` `kube_namespace` `kube_<owner kind>`。
 
 `kubernetes_state.persistentvolumeclaim.status`
-: 永続ボリュームクレームが現在進行中のフェーズ。タグ: `kube_namespace` `persistentvolumeclaim` `phase` `storageclass`。
+: 永続ボリュームクレームの現在のフェーズ。タグ: `kube_namespace` `persistentvolumeclaim` `phase` `storageclass`。
 
 `kubernetes_state.persistentvolumeclaim.access_mode`
 : 永続ボリュームクレームで指定されたアクセスモード。タグ: `kube_namespace` `persistentvolumeclaim` `access_mode` `storageclass`。
@@ -386,6 +432,9 @@ datadog:
 
 `kubernetes_state.pdb.pods_total`
 : この停止状態の予算によってカウントされたポッドの総数。タグ: `kube_namespace` `poddisruptionbudget`。
+
+`kubernetes_state.secret.count`
+: シークレットの数。タグ:`kube_namespace`
 
 `kubernetes_state.secret.type`
 : シークレットに関するタイプ。タグ:`kube_namespace` `secret` `type`。
@@ -511,7 +560,7 @@ datadog:
 : ジョブの実行に失敗しました。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.duration`
-: ジョブの開始時刻から完了時刻までの経過時間、またはジョブが実行中の場合は現在時刻。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+: ジョブの開始時刻から完了時刻までの経過時間、またはジョブがまだ実行中の場合は現在時刻。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.resourcequota.<resource>.limit`
 : リソースごとのリソース割り当て制限に関する情報。タグ: `kube_namespace` `resourcequota`。
@@ -567,7 +616,7 @@ datadog:
 
 Kubernetes State Metrics Core チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
 `kubernetes_state.cronjob.complete`
 : cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
@@ -582,7 +631,7 @@ Kubernetes State Metrics Core チェックには、イベントは含まれま�
 : ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
 
 `kubernetes_state.node.out_of_disk`
-: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
+: ノードがディスク容量不足であるかどうか。タグ: `node` `condition` `status`。
 
 `kubernetes_state.node.disk_pressure`
 : ノードにディスクプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
@@ -598,6 +647,54 @@ Kubernetes State Metrics Core チェックには、イベントは含まれま�
 Cluster Agent コンテナ内で [Cluster Agent の `status` サブコマンドを実行][6]し、Checks セクションで `kubernetes_state_core` を探します。
 
 ## トラブルシューティング
+
+### タイムアウトエラー
+
+デフォルトでは、Kubernetes State Metrics Core チェックは、Kubernetes API サーバーからの応答を 10 秒間待ちます。大規模なクラスターでは、リクエストがタイムアウトし、メトリクスが欠落する可能性があります。
+
+環境変数 `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` をデフォルトの 10 秒よりも大きな値に設定することで、これを避けることができます。
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+以下の構成で `datadog-agent.yaml` を更新します。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+          value: <value_greater_than_10>
+```
+
+次に、新しい構成を適用します。
+
+```shell
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+以下の構成で `datadog-values.yaml` を更新します。
+
+```yaml
+clusterAgent:
+  env:
+    - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+      value: <value_greater_than_10>
+```
+
+次に、Helm チャートをアップグレードします。
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
