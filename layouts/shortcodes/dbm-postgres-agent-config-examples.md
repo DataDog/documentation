@@ -116,7 +116,7 @@ instances:
 ### Collecting schemas
 To enable this feature, use the `collect_schemas` option. Additionally, follow the steps in [Monitoring relation metrics for multiple logical databases](#monitoring-relation-metrics-for-multiple-logical-databases).
 
-You can use the `database_autodiscovery` option to avoid specifying each `dbname`. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
+Use the `database_autodiscovery` option to avoid specifying each `dbname`. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
 
 ```yaml
 init_config:
