@@ -66,7 +66,7 @@ The tag configuration modal pre-populates with an allowlist of aggregations that
 
 ### Configure multiple metrics at a time
 
-Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. Click **Configure Tags*** on Metrics Summary, to specify a namespace for your metrics. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
+Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on the Metrics Summary page. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
 
 ## Metrics without Limits™ billing
 
