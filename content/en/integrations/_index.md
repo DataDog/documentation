@@ -34,7 +34,7 @@ cascade:
     subcategory: Integrations
     tags: ['gcp', 'google cloud platform']
 - _target:
-    path: /integrations/aws.md
+    path: /integrations/amazon_web_services.md
   algolia:
     rank: 90
     category: Documentation
