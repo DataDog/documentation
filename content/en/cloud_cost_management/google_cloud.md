@@ -2,6 +2,7 @@
 title: Google Cloud
 kind: documentation
 is_beta: true
+private: true
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -26,6 +27,8 @@ Cloud Cost for Google Cloud is in private beta
 ## Overview
 
 To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][14] billing export for your desired billing account. Additionally, the Google Cloud Platform Datadog Integration Service Account must have the [necessary permissions][13] configured to interact with Google Cloud Storage and BigQuery.
+
+Contact Support to sign up for private beta or for additional assistance
 
 ## Setup
 
