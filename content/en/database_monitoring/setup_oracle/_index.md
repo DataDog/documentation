@@ -15,7 +15,7 @@ The features described on this page are in beta. Contact your Customer Success M
 
 ## Supported Oracle versions, features, and architectures
 
-- **Versions**: 19c and 21c
+- **Versions**: 11.2, 12c, 18c, 19c and 21c
 - **Deployment configurations**: Self-managed, RDS, RAC, Exadata, Autonomous Database
 - **Architecture**: Multi-tenant, non-CDB, RDS single-tenant
 
