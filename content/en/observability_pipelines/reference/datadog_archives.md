@@ -38,24 +38,23 @@ The Observability Pipelines Datadog Archives destination formats logs into a Dat
 1. Click **JSON** in the **Specify permissions** section.
 1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME>` and `<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
 {{< code-block lang="json">}}
-
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "VisualEditor0",
-                "Effect": "Allow",
-                "Action": "s3:PutObject",
-                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
-            },
-            {
-                "Sid": "VisualEditor1",
-                "Effect": "Allow",
-                "Action": "s3:ListBucket",
-                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
-            }
-        ]
-    }
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": "s3:ListBucket",
+            "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
+        }
+    ]
+}
 {{< /code-block >}}
 1. Click **Next**.
 1. Enter a descriptive policy name.
