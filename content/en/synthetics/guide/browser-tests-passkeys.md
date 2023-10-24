@@ -1,5 +1,5 @@
 ---
-title: Using Passkeys (FIDO2) In Browser Tests
+title: Use Passkeys (FIDO2) In Browser Tests
 kind: guide
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:

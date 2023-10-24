@@ -538,7 +538,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[2]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+[2]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
@@ -618,7 +618,7 @@ remote_configuration:
 If these properties are set to different values, change them to match. If they are not present, add them. Restart the Datadog Agent. 
 
 
-## Configure Docker injection
+## Configure Docker injection {#configure-docker-injection-2}
 
 If the default configuration doesn't meet your needs, you can edit `/etc/datadog-agent/inject/docker_config.yaml` and add the following YAML configuration for the injection:
 
@@ -781,7 +781,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#start-the-agent
 [4]: /tracing/trace_collection/library_config/
 [5]: https://app.datadoghq.com/apm/traces
 [7]: https://docs.aws.amazon.com/sdk-for-go/api/aws/session/

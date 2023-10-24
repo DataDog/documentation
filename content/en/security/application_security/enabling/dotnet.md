@@ -28,7 +28,8 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Application Vulnerability Management vulnerability detection features) for your target operating system architecture.
 
