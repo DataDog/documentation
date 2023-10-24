@@ -26,7 +26,7 @@ Metrics without Limits™ provides you with the ability to configure tags on all
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
-### Configuration of tags
+## Configuration of tags
 
 #### Configure an allowlist of tags 
 Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (represented by an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
