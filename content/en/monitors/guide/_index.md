@@ -44,6 +44,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}
+    {{< nextlink href="/monitors/guide/custom_schedules" >}}Add custom schedules to customize monitor evaluation frequencies{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor arithmetic and sparse metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
 {{< /whatsnext >}}

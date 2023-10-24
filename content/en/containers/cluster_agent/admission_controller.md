@@ -179,7 +179,7 @@ Possible options:
 |--------------------|-------------------------------------------------------------------------------------------------------------------|
 | `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                                                        |
 | `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable (available with Kubernetes v1.22+)|
-| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path |
+| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path. Inject URL to use to connect the Datadog Agent for DogStatsD metrics in `DD_DOGSTATSD_URL`.  |
 
 **Note**: Pod-specific mode takes precedence over the global mode defined at the Admission Controller level.
 

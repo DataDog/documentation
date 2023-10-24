@@ -26,9 +26,9 @@ further_reading:
 integration_id: "adobe"
 ---
 
-{{% site-region region="us3" %}}
-<div class="alert alert-warning">The Adobe Experience Manager integration is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">The Adobe Experience Manager integration is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 ## Overview
 

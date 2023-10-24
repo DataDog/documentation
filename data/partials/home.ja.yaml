@@ -60,7 +60,7 @@ nav_sections:
       icon: log
       link: logs/
       title: ログ管理
-    - desc: アプリケーションとインフラストラクチャーの脅威、脆弱性、構成ミスを検出する
+    - desc: 脅威、脆弱性、誤構成の検出
       icon: security-platform
       link: security/
       title: セキュリティ

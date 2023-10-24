@@ -2,53 +2,94 @@
 aliases:
 - /fr/real_user_monitoring/ios/getting_started
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/_index.md
 description: Recueillez des données RUM depuis vos applications iOS et tvOS.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: Code source dd-sdk-ios
+  text: Code source de dd-sdk-ios
 - link: /real_user_monitoring
   tag: Documentation
   text: Apprendre à explorer vos données RUM
-- link: /real_user_monitoring/ios/crash_reporting/
+- link: /real_user_monitoring/error_tracking/ios/
   tag: Documentation
-  text: Consulter vos rapports de crash et des tendances sur les erreurs dans RUM
+  text: Apprendre à suivre les erreurs iOS
+- link: /real_user_monitoring/ios/swiftui/
+  tag: Documentation
+  text: En savoir plus sur l'instrumentation des applications SwiftUI
 kind: documentation
 title: Surveillance iOS et tvOS avec RUM
 ---
+
 ## Présentation
 
 La solution Real User Monitoring (RUM) de Datadog vous permet de visualiser et d'analyser les performances en temps réel et les parcours des utilisateurs de votre application.
 
-## Configuration
+## Implémentation
 
 1. Déclarez le SDK en tant que dépendance.
 2. Ajoutez les détails de l'application dans l'interface utilisateur.
 3. Initialisez la bibliothèque.
-4. Initialisez le monitor RUM et `DDURLSessionDelegate` pour commencer à envoyer des données.
+4. Initialisez le monitor RUM, `DatadogURLSessionDelegate`, pour commencer à envoyer des données.
 
 **Remarque** : la version 11 et les versions ultérieures du SDK iOS Datadog sont prises en charge. Le SDK iOS Datadog prend également en charge tvOS.
 
 ### Déclarer le SDK en tant que dépendance
 
-1. Déclarez [dd-sdk-ios][1] en tant que dépendance, en fonction de votre gestionnaire de packages.
+Déclarez la bibliothèque en tant que dépendance en fonction de votre gestionnaire de packages :
 
+{{< tabs >}}
+{{% tab "CocoaPods" %}}
 
-| Gestionnaire de packages            | Méthode d'installation                                                                         |
-|----------------------------|---------------------------------------------------------------------------------------------|
-| [CocoaPods][2]             | `pod 'DatadogSDK'`                                                                          |
-| [Swift Package Manager][3] | `.package(url: "https://github.com/DataDog/dd-sdk-ios.git", .upToNextMajor(from: "1.0.0"))` |
-| [Carthage][4]              | `github "DataDog/dd-sdk-ios"`                                                               |
+Vous pouvez utiliser [CocoaPods][4] pour installer `dd-sdk-ios` :
+```
+pod 'DatadogCore'
+pod 'DatadogRUM'
+```
+
+[4]: https://cocoapods.org/
+
+{{% /tab %}}
+{{% tab "Swift Package Manager (SPM)" %}}
+
+Pour réaliser l'intégration grâce au Swift Package Manager d'Apple, ajoutez ce qui suit en tant que dépendance à votre `Package.swift` :
+```swift
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+```
+
+Dans votre projet, associez les bibliothèques suivantes :
+```
+DatadogCore
+DatadogRUM
+```
+
+{{% /tab %}}
+{{% tab "Carthage" %}}
+
+Vous pouvez utiliser [Carthage][5] pour installer `dd-sdk-ios` :
+```
+github "DataDog/dd-sdk-ios"
+```
+
+Dans Xcode, associez les frameworks suivants :
+```
+DatadogInternal.xcframework
+DatadogCore.xcframework
+DatadogRUM.xcframework
+```
+
+[5]: https://github.com/Carthage/Carthage
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Ajouter les détails de l'application dans l'interface utilisateur
 
 1. Accédez à [**UX Monitoring** > **RUM Applications** > **New Application**][5].
 2. Sélectionnez le type d'application `iOS` et attribuez un nom à l'application, afin de générer un ID d'application Datadog unique ainsi qu'un token client.
 3. Pour instrumenter vos vues Web, cliquez sur le bouton **Instrument your webviews**. Pour en savoir plus, consultez la section [Suivi des vues Web iOS][12].
+4. Pour désactiver la collecte automatique des IP client ou des données de géolocalisation, décochez les cases correspondant à ces paramètres. Pour en savoir plus, consultez la section [Données RUM recueillies (iOS)][14].
 
-{{< img src="real_user_monitoring/ios/screenshot_rum.png" alt="Hiérarchie des événements RUM" style="width:100%;border:none" >}}
+   {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Créer une application RUM application pour iOS dans Datadog" style="width:100%;border:none" >}}
 
 Pour assurer la sécurité de vos données, vous devez utiliser un token client. Si vous vous contentez d'utiliser des [clés d'API Datadog][6] pour configurer la bibliothèque `dd-sdk-ios`, ces clés seront exposées côté client dans le bytecode de l'application iOS.
 
@@ -65,38 +106,27 @@ Pour en savoir plus, consultez la section [Utiliser les tags][11].
 {{% tab "Swift" %}}
 
 ```swift
+import DatadogCore
+
 Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: trackingConsent,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<ID_APPLICATION_RUM>",
-            clientToken: "<TOKEN_CLIENT>",
-            environment: "<NOM_ENVIRONNEMENT>"
-        )
-        .set(serviceName: "app-name")
-        .set(endpoint: .us1)
-        .trackUIKitRUMViews()
-        .trackUIKitRUMActions()
-        .trackURLSession()
-        .build()
+  with: Datadog.Configuration(
+    clientToken: "<token client>",
+    env: "<environnement>",
+    service: "<nom du service>"
+  ), 
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
-                                                                   clientToken:@"<token_client>"
-                                                                   environment:@"<nom_environnement>"];
-[builder setWithServiceName:@"app-name"];
-[builder setWithEndpoint:[DDEndpoint us1]];
-[builder trackUIKitRUMViews];
-[builder trackUIKitRUMActions];
-[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+@import DatadogObjc;
 
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<token client>" env:@"<environnement>"];
+configuration.service = @"<nom du service>";
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -106,38 +136,29 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: trackingConsent,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<ID_APPLICATION_RUM>",
-            clientToken: "<TOKEN_CLIENT>",
-            environment: "<NOM_ENVIRONNEMENT>"
-        )
-        .set(serviceName: "app-name")
-        .set(endpoint: .eu1)
-        .trackUIKitRUMViews()
-        .trackUIKitRUMActions()
-        .trackURLSession()
-        .build()
+  with: Datadog.Configuration(
+    clientToken: "<token client>",
+    env: "<environnement>",
+    site: .eu1,
+    service: "<nom du service>"
+  ), 
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
-                                                                   clientToken:@"<token_client>"
-                                                                   environment:@"<nom_environnement>"];
-[builder setWithServiceName:@"app-name"];
-[builder setWithEndpoint:[DDEndpoint eu1]];
-[builder trackUIKitRUMViews];
-[builder trackUIKitRUMActions];
-[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+@import DatadogObjc;
 
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<token client>" env:@"<environnement>"];
+configuration.service = @"<nom du service>";
+configuration.site = [DDSite eu1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -147,38 +168,29 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: trackingConsent,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<ID_APPLICATION_RUM>",
-            clientToken: "<TOKEN_CLIENT>",
-            environment: "<NOM_ENVIRONNEMENT>"
-        )
-        .set(serviceName: "app-name")
-        .set(endpoint: .us3)
-        .trackUIKitRUMViews()
-        .trackUIKitRUMActions()
-        .trackURLSession()
-        .build()
+  with: Datadog.Configuration(
+    clientToken: "<token client>",
+    env: "<environnement>",
+    site: .us3,
+    service: "<nom du service>"
+  ), 
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
-                                                                   clientToken:@"<token_client>"
-                                                                   environment:@"<nom_environnement>"];
-[builder setWithServiceName:@"app-name"];
-[builder setWithEndpoint:[DDEndpoint us3]];
-[builder trackUIKitRUMViews];
-[builder trackUIKitRUMActions];
-[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+@import DatadogObjc;
 
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<token client>" env:@"<environnement>"];
+configuration.service = @"<nom du service>";
+configuration.site = [DDSite us3];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -188,38 +200,29 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: trackingConsent,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<ID_APPLICATION_RUM>",
-            clientToken: "<TOKEN_CLIENT>",
-            environment: "<NOM_ENVIRONNEMENT>"
-        )
-        .set(serviceName: "app-name")
-        .set(endpoint: .us5)
-        .trackUIKitRUMViews()
-        .trackUIKitRUMActions()
-        .trackURLSession()
-        .build()
+  with: Datadog.Configuration(
+    clientToken: "<token client>",
+    env: "<environnement>",
+    site: .us5,
+    service: "<nom du service>"    
+  ), 
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
-                                                                   clientToken:@"<token_client>"
-                                                                   environment:@"<nom_environnement>"];
-[builder setWithServiceName:@"app-name"];
-[builder setWithEndpoint:[DDEndpoint us5]];
-[builder trackUIKitRUMViews];
-[builder trackUIKitRUMActions];
-[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+@import DatadogObjc;
 
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<token client>" env:@"<environnement>"];
+configuration.service = @"<nom du service>";
+configuration.site = [DDSite us5];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -229,38 +232,61 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.initialize(
-    appContext: .init(),
-    trackingConsent: trackingConsent,
-    configuration: Datadog.Configuration
-        .builderUsing(
-            rumApplicationID: "<ID_APPLICATION_RUM>",
-            clientToken: "<TOKEN_CLIENT>",
-            environment: "<NOM_ENVIRONNEMENT>"
-        )
-        .set(serviceName: "app-name")
-        .set(endpoint: .us1_fed)
-        .trackUIKitRUMViews()
-        .trackUIKitRUMActions()
-        .trackURLSession()
-        .build()
+  with: Datadog.Configuration(
+    clientToken: "<token client>",
+    env: "<environnement>",
+    site: .us1_fed,
+    service: "<nom du service>"
+  ), 
+  trackingConsent: trackingConsent
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@"<id_application_rum>"
-                                                                   clientToken:@"<token_client>"
-                                                                   environment:@"<nom_environnement>"];
-[builder setWithServiceName:@"app-name"];
-[builder setWithEndpoint:[DDEndpoint us1_fed]];
-[builder trackUIKitRUMViews];
-[builder trackUIKitRUMActions];
-[builder trackURLSessionWithFirstPartyHosts:[NSSet new]];
+@import DatadogObjc;
 
-[DDDatadog initializeWithAppContext:[DDAppContext new]
-                    trackingConsent:trackingConsent
-                      configuration:[builder build]];
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<token client>" env:@"<environnement>"];
+configuration.service = @"<nom du service>";
+configuration.site = [DDSite us1_fed];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<token client>",
+    env: "<environnement>",
+    site: .ap1,
+    service: "<nom du service>"
+  ), 
+  trackingConsent: trackingConsent
+)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<token client>" env:@"<environnement>"];
+configuration.service = @"<nom du service>";
+configuration.site = [DDSite ap1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -274,20 +300,33 @@ Configurez et enregistrez le monitor RUM. Cette opération, qui doit être effec
 
 {{< tabs >}}
 {{% tab "Swift" %}}
-```swift
-import Datadog
 
-Global.rum = RUMMonitor.initialize()
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<ID d'application RUM>",
+    uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
+    uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
+    urlSessionTracking: RUM.Configuration.URLSessionTracking()
+  )
+)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 @import DatadogObjc;
 
-DDGlobal.rum = [[DDRUMMonitor alloc] init];
+DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<ID d'application RUM>"];
+configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
+configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
+[configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
+
+[DDRUM enableWith:configuration];
 ```
 {{% /tab %}}
-{{< /tabs >}}
+{{% /tabs %}}
 
 Pour surveiller les requêtes envoyées par l'instance `URLSession` en tant que ressources, assignez `DDURLSessionDelegate()` en tant que `delegate` de la `URLSession` en question :
 
@@ -296,7 +335,7 @@ Pour surveiller les requêtes envoyées par l'instance `URLSession` en tant que 
 ```swift
 let session = URLSession(
     configuration: .default,
-    delegate: DDURLSessionDelegate(),
+    delegate: DatadogURLSessionDelegate(),
     delegateQueue: nil
 )
 ```
@@ -309,27 +348,29 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 ```
 {{% /tab %}}
 {{< /tabs >}}
+## Effectuer le suivi d'événements en arrière-plan
 
-### Effectuer le suivi d'événements en arrière-plan
-
-Vous pouvez effectuer le suivi d'événements, tels que des crashs et des requêtes réseau, pendant que votre application s'exécute en arrière-plan (par exemple, lorsqu'aucune vue active n'est disponible).
-
-Ajoutez l'extrait suivant lors de l'initialisation dans votre configuration Datadog :
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-.trackBackgroundEvents()
-
-```
-{{% /tab %}}
-{{< /tabs >}}
 <div class="alert alert-info"><p>Le suivi d'événements en arrière-plan peut générer des sessions supplémentaires et augmenter vos coûts. Si vous avez la moindre question, <a href="https://docs.datadoghq.com/help/">contactez l'assistance Datadog.</a></p>
 </div>
 
-## Consulter les erreurs non résolues
+Vous pouvez effectuer le suivi d'événements, tels que les crashs et les requêtes réseau, pendant que votre application s'exécute en arrière-plan (par exemple, lorsqu'aucune vue active n'est disponible).
 
-Les rapports de crash et le suivi des erreurs pour iOS mettent en évidence les problèmes et les dernières erreurs disponibles. Vous pouvez visualiser les détails des erreurs ainsi que les attributs, y compris le JSON, dans le [RUM Explorer][10].
+Ajoutez l'extrait suivant lors de l'initialisation dans votre configuration Datadog :
+
+```swift
+import DatadogRUM
+
+RUM.enable(
+  with: RUM.Configuration(
+    ...
+    trackBackgroundEvents: true
+  )
+)
+```
+
+## Suivi des erreurs iOS
+
+[Les rapports de crash et le suivi des erreurs pour iOS][13] mettent en évidence les problèmes au sein de votre application et les dernières erreurs disponibles. Vous pouvez visualiser les détails des erreurs ainsi que les attributs, y compris le JSON, dans le [RUM Explorer][10]. 
 
 ## Pour aller plus loin
 
@@ -348,3 +389,5 @@ Les rapports de crash et le suivi des erreurs pour iOS mettent en évidence les 
 [10]: https://docs.datadoghq.com/fr/real_user_monitoring/explorer/
 [11]: https://docs.datadoghq.com/fr/getting_started/tagging/using_tags/#rum--session-replay
 [12]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/web_view_tracking/
+[13]: https://docs.datadoghq.com/fr/real_user_monitoring/error_tracking/ios/
+[14]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/data_collected/

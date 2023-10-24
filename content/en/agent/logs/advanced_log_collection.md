@@ -489,6 +489,16 @@ logs:
     auto_multi_line_detection: true
 ```
 
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
+```
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -536,16 +546,6 @@ spec:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-```
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
@@ -677,5 +677,5 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [1]: https://golang.org/pkg/regexp/syntax/
 [2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 [3]: /agent/faq/commonly-used-log-processing-rules
-[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/guide/agent-commands/#agent-information
+[4]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/configuration/agent-commands/#agent-information

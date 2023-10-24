@@ -19,6 +19,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
     tag: "Blog"
     text: "Monitor 1Password with Datadog Cloud SIEM"
+  - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
+    tag: "Blog"
+    text: "Build sufficient security coverage for your cloud environment"
 ---
 
 ## Overview
@@ -42,9 +45,9 @@ Actionable information includes the ability to:
   - Access the rule settings of the signal.
   - Share or assign the signal to a teammate.
 
-{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="The Security Signal panel showing a critical signal for AWS S3 Public access block removed" style="width:90%;" >}}
+{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="The Security Signal panel showing a critical signal for Amazon S3 Public access block removed" style="width:90%;" >}}
 
-The first seen and last seen date are updated, if new data is made available from the past or the attack continues. For Cloud SIEM and CSM Threats signals, a "What Happened" section is displayed in the Overview tab and any configured group bys or rule customizations related to the detection rule is displayed. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys in the header for CSM Misconfigurations findings and in the Context section for Cloud SIEM and CSM Threats signals.
+The first seen and last seen date are updated, if new data is made available from the past or the attack continues. For Cloud SIEM and CSM Threats signals, a "What Happened" section is displayed in the Overview tab and any configured group bys or rule customizations related to the detection rule is displayed. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys in the header for CSM Misconfigurations misconfigurations and in the Context section for Cloud SIEM and CSM Threats signals.
 
 To better understand activity, the Security Signal Panel summarizes tags and attributes from all logs that trigger a signal so you can troubleshoot without having to pivot to Log Explorer. For example, in the Context section, you can determine at a glance the list of IPs attempting to log into a user account, or the AWS accounts and availability zones running the authentication service.
 
@@ -63,7 +66,7 @@ Below the header of CSM Misconfigurations signals are tabs with detailed informa
 
 ### Case Management
 
-You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Escalate** to see the dropdown menu. Select **Create a case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
+You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Escalate Investigation** to see the dropdown menu. Select **Create a case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
 
 ### Workflow Automation
 
@@ -82,7 +85,6 @@ The query to see all threat intelligence matches in the Security Signals Explore
 * `@threat_intel.results.category "anonymizer", "scanner"`
 * `@threat_intel.results.intention "malicious", "unknown"`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
-    **Note**: Proxy, Tor, and VPN subcategory attributes are provided only by threat intelligence partner IPinfo.
 
 ### Search by network IP attributes
 

@@ -232,7 +232,9 @@ A regex string to redact sensitive data by its value in attack reports.
 **Default**: 5<br>
 Remote configuration polling interval in seconds.
 
-<a id="headers-extraction-and-injection">
+### Headers extraction and injection
+
+For information about valid values and using the following configuration options, see [Propagating Node.js Trace Context][5].
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **Configuration**: `tracePropagationStyle.inject`<br>
@@ -259,4 +261,5 @@ For more examples of how to work with the library see [API documentation][2].
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
-[13]: /agent/guide/network/#configure-ports
+[5]: /tracing/trace_collection/trace_context_propagation/nodejs
+[13]: /agent/configuration/network/#configure-ports

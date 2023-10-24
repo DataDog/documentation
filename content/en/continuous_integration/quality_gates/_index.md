@@ -34,13 +34,13 @@ There are two main steps required to set up and use Quality Gates:
 To create Quality Gates rules for your organization, your user account must have the `quality_gate_rules_write` [permission][1].
 
 1. In Datadog, navigate to [**CI** > **Quality Gate Rules**][2] and click **+ New Rule**.
-2. Select the rule type. You can choose between `Static Analysis` and `Test`.
-3. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. More information on [rule scopes](#rule-scope).
+2. Define the rule scope. The rule scope defines when the rule should be evaluated. For example, you can create a rule that it is evaluated only on specific repositories and branches. To define the scope for a rule, switch to `select when to evaluate` and add included or excluded values for the scope. See [rule scopes](#rule-scope) for more information.
+3. Select the rule type. You can choose between `Static Analysis` and `Test`.
 4. Define the rule condition. The rule condition states in which scenario the rule fails, failing the related pipeline (if the rule is blocking). You can select one of the existing rule conditions for the rule type you have selected.
 
 The following example shows how to create a static analysis rule that fails when there are one or more static analysis violations with "error" status and "security" category being introduced in a specific commit:
 
-   {{< img src="ci/qg_rule_condition_sa_errors_security.png" alt="Rule for static analysis security errors" style="width:80%;">}}
+   {{< img src="ci/qg_rule_condition_sa_errors_security_2.png" alt="Rule for static analysis security errors" style="width:80%;">}}
 
 5. Select whether the rule should block the pipeline or not when it fails.
    Non-blocking rules are helpful when rolling out a new rule and wanting to verify its behavior before making it blocking.
@@ -68,11 +68,11 @@ Otherwise, the rules might have an incorrect behavior due to the absence of the 
 
 The command requires the `DD_API_KEY` and `DD_APP_KEY` environment variables to point to your [Datadog API Key][5]
 and [Datadog Application Key][6]. Also, you need to set the `DD_BETA_COMMANDS_ENABLED` environment
-variable as `true`. Optionally, you can specify the `DATADOG_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
+variable as `true`. Optionally, you can specify the `DD_SITE` environment variable to point to a specific datadog site (default value is `datadoghq.com`).
 
 <pre>
 <code>
-DD_BETA_COMMANDS_ENABLED=true DATADOG_SITE={{< region-param key="dd_site" >}} DD_API_KEY=&lt;API_KEY&gt; DD_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
+DD_BETA_COMMANDS_ENABLED=true DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=&lt;API_KEY&gt; DD_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
 </code>
 </pre>
 

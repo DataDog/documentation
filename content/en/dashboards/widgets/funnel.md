@@ -1,15 +1,13 @@
 ---
 title: Funnel Widget
 kind: documentation
+widget_type: funnel
 aliases:
-    - /graphing/widgets/funnel/
+- /graphing/widgets/funnel/
 further_reading:
-- link: "/dashboards/graphing_json/"
+- link: "https://docs.datadoghq.com/real_user_monitoring/funnel_analysis/"
   tag: "Documentation"
-  text: "Building Dashboards using JSON"
-- link: "/notebooks/"
-  tag: "Documentation"
-  text: "Notebooks"
+  text: "Learn more about Funnel Analysis"
 - link: "https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/"
   tag: "Blog"
   text: "Use funnel analysis to understand and optimize key user flows"
@@ -36,9 +34,11 @@ The funnel widget visualizes conversion rates across user workflows and end-to-e
 
 On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
-#### Title
+## API
 
-Display a custom title for your widget by activating the `Show a Title` check box.
+This widget can be used with the [Dashboards API][3]. See the following table for the [widget JSON schema definition][4]:
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
@@ -46,3 +46,5 @@ Display a custom title for your widget by activating the `Show a Title` check bo
 
 [1]: /real_user_monitoring/explorer/search/
 [2]: /real_user_monitoring/funnel_analysis
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

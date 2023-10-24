@@ -364,7 +364,11 @@ The following Datadog tracing libraries are supported:
 
 RUM supports several propagator types to connect resources with backends that are instrumented with OpenTelemetry libraries.
 
-{{< tabs >}} {{% tab "Browser RUM" %}}
+{{< tabs >}}
+{{% tab "Browser RUM" %}}
+
+**Note**: If you are using a backend framework such as Next.js/Vercel that uses OpenTelemetry, follow these steps.
+
 1. Set up RUM to connect with APM as described above.
 
 2. Modify `allowedTracingUrls` as follows:
@@ -385,9 +389,10 @@ RUM supports several propagator types to connect resources with backends that ar
       - `tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-{{% /tab %}}
 
+{{% /tab %}}
 {{% tab "iOS RUM" %}}
+
 1. Set up RUM to connect with APM as described above.
 
 2. Use `trackURLSession(firstPartyHostsWithHeaderTypes:)` instead of `trackURLSession(firstPartyHosts:)` as follows:

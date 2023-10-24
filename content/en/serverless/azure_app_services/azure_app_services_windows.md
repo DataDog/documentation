@@ -56,6 +56,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - .NET Core 3.1
     - .NET 5
     - .NET 6
+    - .NET 7
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
@@ -149,7 +150,7 @@ Learn more about [custom metrics][12].
 [2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /profiler/
+[5]: /profiler/enabling/dotnet/?tab=azureappservicepublicbeta
 [6]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [7]: /logs/log_collection/csharp/#agentless-logging-with-apm
 [8]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink

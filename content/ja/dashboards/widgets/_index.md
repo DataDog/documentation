@@ -44,9 +44,11 @@ title: ウィジェット
 {{< /whatsnext >}}
 
 ### グループ
-{{< whatsnext desc="グループの下にウィジェットを表示します。 ">}}
+{{< whatsnext desc="グループの下にウィジェットを表示: ">}}
     {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/placeholder_light_large.png">}} グループ{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} グループ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} パワーパック{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アノテーションと埋め込み
@@ -77,6 +79,8 @@ title: ウィジェット
         img="dashboards/widgets/icons/check-status_light_large.png">}} チェックステータス{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" 
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} モニターサマリー{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/run_workflow" 
+img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アーキテクチャ

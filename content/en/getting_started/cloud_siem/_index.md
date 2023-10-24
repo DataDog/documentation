@@ -37,6 +37,9 @@ further_reading:
     - link: "https://securitylabs.datadoghq.com/"
       tag: "Security Labs"
       text: "Read about security-related topics on Datadog's Security Labs"
+    - link: "https://www.datadoghq.com/blog/content-packs/"
+      tag: "Blog"
+      text: "Easily ingest and monitor security logs with Cloud SIEM Content Packs"
 ---
 
 ## Overview

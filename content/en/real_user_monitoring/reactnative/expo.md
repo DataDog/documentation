@@ -35,18 +35,6 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 ## Usage
 
-Add `expo-datadog` to your plugins in the `app.json` file:
-
-```json
-{
-    "expo": {
-        "plugins": ["expo-datadog"]
-    }
-}
-```
-
-Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site, for example: `datadoghq.com`.
-
 ### Initialize the library with application context
 
 Add the following code snippet to your initialization file:
@@ -80,7 +68,7 @@ await DdSdkReactNative.initialize(config);
 // Once the Datadog SDK is initialized, you need to setup view tracking in order to see data in the RUM dashboard.
 ```
 
-### Add the config plugin
+### Upload source maps on EAS builds
 
 <div class="alert alert-info"><p>If you have not enabled Crash Reporting, you can skip this step.<p></div>
 
@@ -108,7 +96,7 @@ or with Yarn:
 yarn add -D @datadog/datadog-ci
 ```
 
-Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key.
+Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
 For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][6].
 

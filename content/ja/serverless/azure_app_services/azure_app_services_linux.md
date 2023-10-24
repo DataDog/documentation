@@ -38,7 +38,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 
 | ランタイム   | `DD_START_APP` 値の例                                                               | 説明                                                                                                                                                                                                                        |
 |-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Node.js   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します                                                                                                                                                                   |
+| Node.js   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します。                                                                                                                                                                   |
 | .NET コア | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br />**注**: コマンドの `.dll` ファイル名は、`.dll` ファイルのファイル名と一致する必要があります。場合によっては、Web アプリと一致しないことがあります。         |
 | PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します                                                                                                                                                                           |
 | Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。                                                                                                                                      |
@@ -58,7 +58,7 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 **General settings** で、**Startup Command** のフィールドに以下を追加します。
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.3.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service の構成: Azure UI の Settings の Configuration セクションにある、Stack の設定です。スタック、メジャーバージョン、マイナーバージョンのフィールドの下には、上記の curl コマンドで入力される Startup Command フィールドがあります。" style="width:100%;" >}}

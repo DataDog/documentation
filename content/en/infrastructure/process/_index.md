@@ -41,12 +41,12 @@ If you are using Agent 5, follow this [specific installation process][1]. If you
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `"true"`:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
 
 ```yaml
 process_config:
   process_collection:
-    enabled: "true"
+    enabled: true
 ```
 
 Additionally, some configuration options may be set as environment variables.
@@ -56,8 +56,8 @@ Additionally, some configuration options may be set as environment variables.
 After configuration is complete, [restart the Agent][2].
 
 
-[1]: /agent/guide/agent-configuration-files/
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[1]: /agent/configuration/agent-configuration-files/
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -394,5 +394,5 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
 [11]: /network_monitoring/performance/network_analytics
-[12]: /agent/guide/agent-commands/#restart-the-agent
+[12]: /agent/configuration/agent-commands/#restart-the-agent
 

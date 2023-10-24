@@ -288,6 +288,7 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
 
 ## Red Hat OpenShift {#Openshift}
 
@@ -381,6 +382,10 @@ spec:
     clusterAgent:
       image:
         name: gcr.io/datadoghq/cluster-agent:latest
+      containers:
+        cluster-agent:
+          securityContext:
+            readOnlyRootFilesystem: false
     nodeAgent:
       serviceAccountName: datadog-agent-scc
       securityContext:

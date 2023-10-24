@@ -37,7 +37,7 @@ After choosing to create a `SSL` test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
 2. Add **Advanced Options** (optional) to your test:
    * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
@@ -54,7 +54,7 @@ After choosing to create a `SSL` test, define your test's request.
 
 3. **Name** your SSL test.
 
-4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+4. Add `env` **Tags** as well as any other tag to your SSL test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
    {{< img src="synthetics/api_tests/ssl_test_config.png" alt="Define SSL request" style="width:90%;" >}}
 

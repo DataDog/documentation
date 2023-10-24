@@ -13,7 +13,7 @@ further_reading:
   text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
-  text: "Search and explore CSM Misconfigurations findings"
+  text: "Search and explore misconfigurations"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,11 +29,20 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) comes with m
 - [CIS GCP Foundations Benchmark v1.3.0][22]
 - [CIS Docker Benchmark v1.2.0][4]
 - [CIS Kubernetes Benchmark v1.5.1**][5]
+- [CIS Ubuntu 20.04 v1.0.0][23]
+- [CIS Ubuntu 22.04 v1.0.0][23]
+- [CIS Red Hat Linux 7 v3.1.1][24]
+- [CIS Red Hat Linux 8 v2.0.0][24]
+- [CIS Red Hat Linux 9 v1.0.0][24]
+- [CIS Amazon Linux 2 v1.0.0][25]
+- [CIS Amazon Linux 2023 v1.0.0][25]
 - [PCI DSS v3.2.1][6]
 - [AICPA SOC 2][7]
 - [ISO/IEC 27001 v2][8]
 - [HIPAA][9]
 - [GDPR][10]
+- [NIST 800-53][30]
+- [NIST 800-171][31]
 
 *To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
@@ -50,7 +59,7 @@ Datadog also provides Essential Cloud Security Controls, a set of recommendation
 View a high-level overview of your compliance posture for each framework on the CSM Misconfigurations [Compliance][20] page.
 
 - **Framework Overview**: A [detailed report](#explore-compliance-framework-reports) that gives you insight into how you score against a framework's requirements and rules.
-- **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
+- **Explore Resources**: A filtered view of the **Misconfigurations** page that shows resources with misconfigurations for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the compliance rules for each framework.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports.png" alt="The compliance reports section of the CSM Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
@@ -59,7 +68,7 @@ View a high-level overview of your compliance posture for each framework on the 
 
 Compliance framework reports show which rules are failing in your environment, along with details about the misconfigured resources.
 
-The summary at the top of the report shows the number of rules with pass/fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, download a PDF copy of the report, and filter the page by account, team, service, and environment tags.
+The summary at the top of the report shows the number of rules with pass/fail misconfigurations, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, download a PDF copy of the report, and filter the page by account, team, service, and environment tags.
 
 Below the summary is a complete listing of all rules associated with the framework, organized by requirements and controls, along with the number of resources checked by the rule, and the percentage of failures.
 
@@ -67,7 +76,20 @@ Below the summary is a complete listing of all rules associated with the framewo
 
 Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding2.png" alt="The compliance rule side panel includes information about the rule and resources with failed findings" style="width:75%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding2.png" alt="The compliance rule side panel includes information about the rule and resources with failed misconfigurations" style="width:75%;">}}
+
+## Create custom compliance frameworks
+
+Create your own compliance framework by adding a custom tag to the compliance rules you wish to track. This enables you to filter the misconfigurations on the [Misconfigurations issue explorer][27] by the custom tag. You can also clone the **Cloud Security Management - Misconfigurations Overview** dashboard and [configure a template variable][28] for the custom tag to dynamically filter the widgets on the dashboard.
+
+1. On the **Compliance Rules** page, select the rule you wish to add the custom tag to.
+2. Under **Say what's happening**, navigate to the **Tag resulting misconfigurations with** section and add the `key:value` for the custom tag.
+3. Click **Update Rule**.
+
+**Notes**:
+
+- `framework`, `requirement`, and `control` are reserved keys and cannot be used in custom tags. See [Custom Rules][26] for more information.
+- You can also add custom tags to rules using the [Update an existing rule API endpoint][29].
 
 ## Further reading
 
@@ -95,3 +117,12 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [20]: https://app.datadoghq.com/security/compliance/homepage
 [21]: /security/misconfigurations/detection_rules
 [22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
+[23]: https://www.cisecurity.org/benchmark/ubuntu_linux
+[24]: https://www.cisecurity.org/benchmark/red_hat_linux
+[25]: https://www.cisecurity.org/benchmark/amazon_linux
+[26]: /security/misconfigurations/custom_rules/#tagging-findings
+[27]: https://app.datadoghq.com/security/compliance
+[28]: /dashboards/template_variables/
+[29]: /api/latest/security-monitoring/#update-an-existing-rule
+[30]: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
+[31]: https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final
