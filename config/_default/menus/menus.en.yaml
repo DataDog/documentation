@@ -600,12 +600,12 @@ main:
     url: containers/troubleshooting/cluster-and-endpoint-checks
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_cluster_and_endpoint_checks
-    weight: 802
+    weight: 803
   - name: HPA and Metrics Provider
     url: containers/troubleshooting/hpa
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_hpa
-    weight: 802
+    weight: 804
   - name: Guides
     url: containers/guide
     parent: containers
