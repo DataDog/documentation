@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/
+  - /continuous_integration/integrate_tests/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
@@ -117,6 +118,15 @@ In order to filter using these configurations tags, [you must create facets for 
 ## Use CI tests data
 
 {{% ci-information-collected %}}
+
+### Integrations
+
+{{< whatsnext desc="Learn about the following integrations with Test Visibility:" >}}
+{{< nextlink href="/continuous_integration/tests/developer_workflows" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/tests/code_coverage" >}}Code Coverage{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
+{{< /whatsnext >}}
 
 If [Intelligent Test Runner][13] is enabled for .NET, JavaScript, or Swift, [code coverage information][12], including file names and line numbers covered by each test, are collected from your projects.
 

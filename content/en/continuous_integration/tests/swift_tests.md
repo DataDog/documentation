@@ -4,6 +4,7 @@ kind: documentation
 description: Learn how to use CI Visibility and RUM to connect your Swift test results with browser sessions and session replays.
 aliases:
 - /continuous_integration/guides/rum_swift_integration
+- /continuous_integration/integrate_tests/swift_tests
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
