@@ -37,7 +37,7 @@ After choosing to create a `SSL` test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and the **Port** to run your test on. The default SSL port is `443`.
 2. Add **Advanced Options** (optional) to your test:
    * **Accept self-signed certificates**: Bypasses any server error related to a self-signed certificate.
    * **Fail on revoked certificate in stapled OCSP**: Fail the test if the certificate is labeled as revoked by the OCSP stapling.
