@@ -78,9 +78,9 @@ To learn more about how the documentation is built, refer to the [Documentation 
 
 This site uses [Goldmark][9] for markdown, which is compliant with [CommonMark 0.29][10].
 
-If you include ANY Markdown in a file, give it an `.md` extension.
+If you include ANY Markdown in a file, give it a `.md` extension.
 
-Make sure all files are lowercase. Macs are case insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
+Make sure all files are lowercase. Macs are case-insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
 
 ## Releasing
 
@@ -108,9 +108,9 @@ Prerequisites:
   5. Click Apply & Restart
 
 ### How to run documentation inside a Docker container
-1. Go to project root
+1. Go to the project root
 2. Make a copy of `Makefile.config.example` called `Makefile.config`
-3. Enter value for `GITHUB_TOKEN`
+3. Enter a value for `GITHUB_TOKEN`
 4. Set `FULL_BUILD` to true to build the full documentation with all extra content
 5. Run `make start-docker`
 
