@@ -19,7 +19,7 @@ further_reading:
 <div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLScNSzkTAmmpmxEY5Xoo-xPOyKXG0n_6IgdlU66mWXp445pNdA/viewform" btn_hidden="false" >}}
+{{< beta-callout url="#" btn_hidden="true" >}}
 Cloud Cost for Google Cloud is in private beta
 {{< /beta-callout >}}
 
@@ -42,7 +42,7 @@ To use Google Cloud Cost Management in Datadog, you must configure the [Google C
   **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
 ### Configure the Google Cloud Platform integration
- 1. Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Platform service account from the menu. 
+ 1. Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Platform service account from the menu.
  2. If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to add it.
  3. Follow the instructions on the integration page to properly configure your Service Account being integrated.
 
@@ -50,7 +50,7 @@ To use Google Cloud Cost Management in Datadog, you must configure the [Google C
 
 Datadog Google Cloud Platform Integrations monitor the entire project when a related service account is integrated. Using a previously integrated project prevents monitoring resources in a new project. If your billing is associated with a non-integrated project, those resources are monitored.
 
-**Note:** You can limit Metrics Collection per integration - this limits automatically monitoring resources in the project, but does not exclude data from Cloud Cost processing. 
+**Note:** You can limit Metrics Collection per integration - this limits automatically monitoring resources in the project, but does not exclude data from Cloud Cost processing.
 
 ### Provide service account necessary permissions
 The following APIs and permissions enable Datadog to access your Detailed Usage billing export data and extract it in a useful format. This dumps data from BigQuery, where Google Cloud exports it, to your specified GCS bucket through a scheduled BigQuery query. The data is exported in a useful manner in your cloud storage bucket where it can then be processed by Datadog.
@@ -108,8 +108,8 @@ Navigate to [Setup & Configuration][3] and follow the steps provided in-app.
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
-| Cost Type | Description |  
-| ----------| ----------------------------------|                                                                                                          
+| Cost Type | Description |
+| ----------| ----------------------------------|
 | `gcp.cost.usage_date` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
 
 ## Further reading
