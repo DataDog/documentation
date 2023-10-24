@@ -1,9 +1,21 @@
 # Documentation site for Datadog
 
-Built with [hugo][1], a static website generation tool.
+Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
+
+## Contribute to the docs
+
+Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request in this repo for the documentation team to review.
+
+Most pages on the documentation site feature an **Edit** button that sends you to the source file in this repo. You can make an edit straight from the GitHub website!
+
+![The edit button on a docs page](static/images/edit_link.png)
+
+For more information on contributing, see the [contribution guidelines][18].
 
 ## Setup
 
+> [!NOTE]
+> The documentation build is only available to Datadog employees.
 ### Installation
 
 1. [Install Node / npm][2] (node `>=14.16.0`)
@@ -66,9 +78,9 @@ To learn more about how the documentation is built, refer to the [Documentation 
 
 This site uses [Goldmark][9] for markdown, which is compliant with [CommonMark 0.29][10].
 
-If you include ANY Markdown in a file, give it an `.md` extension.
+If you include ANY Markdown in a file, give it a `.md` extension.
 
-Make sure all files are lowercase. Macs are case insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
+Make sure all files are lowercase. Macs are case-insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
 
 ## Releasing
 
@@ -96,18 +108,18 @@ Prerequisites:
   5. Click Apply & Restart
 
 ### How to run documentation inside a Docker container
-1. Go to project root
+1. Go to the project root
 2. Make a copy of `Makefile.config.example` called `Makefile.config`
-3. Enter value for `GITHUB_TOKEN`
+3. Enter a value for `GITHUB_TOKEN`
 4. Set `FULL_BUILD` to true to build the full documentation with all extra content
 5. Run `make start-docker`
 
 To stop the app, hit Ctrl-C or run `make stop-docker`
 
 [1]: https://gohugo.io
-[2]: https://nodejs.org/en/download/package-manager
+[2]: https://nodejs.org/en/download/package-manager#macos
 [3]: https://www.python.org/downloads
-[4]: https://github.com/pyenv/pyenv
+[4]: https://github.com/pyenv/pyenv#unixmacos
 [5]: https://github.com/DataDog/documentation/blob/master/Makefile.config.example
 [6]: https://github.com/DataDog/documentation/wiki/Github-personal-token
 [7]: https://github.com/DataDog/documentation/wiki/Documentation-Build
@@ -120,3 +132,5 @@ To stop the app, hit Ctrl-C or run `make stop-docker`
 [14]: https://golang.org/doc/install
 [15]: https://github.blog/2019-02-14-introducing-draft-pull-requests/
 [16]: https://github.com/DataDog/documentation#docker-development
+[17]: https://docs.datadoghq.com
+[18]: /CONTRIBUTING.md

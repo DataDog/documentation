@@ -45,13 +45,14 @@ Consult on this page:
 
 ## Service monitor
 
-Datadog proposes a list of monitors depending on your service type:
+The Service monitor panel surfaces active Monitors and Synthetics tests linked to your service.
+Datadog also proposes a list of monitors depending on your service type: 
 
 {{< img src="tracing/visualization/service/service_monitors.png" alt="Service Monitors" style="width:90%;">}}
 
 Enable them directly or create your own [APM monitors][3].
 
-**Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.
+**Note**: Tag any monitor or Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Watchdog Insights
 
@@ -91,9 +92,12 @@ Datadog provides [out-of-the-box graphs][8] for any given Service:
     *  The **Total amount of requests and errors**
     *  The amount of **Requests and errors per second**
 * Latency - Choose to display:
-    *  The Avg/p75/p90/p95/p99/Max latency of your traced requests, along with the top five matching spans by latency
-    *  The **Latency distribution**	
-    *  The **Apdex score** for web services; [learn more about Apdex][9]
+    * The **Latency** by Version
+    * The **Latency** by Percentile (Avg/p75/p90/p95/p99/p99.9/Max latency of your traced requests) as a timeseries
+    * The **Historical Latency** to compare the Latency distribution with the day and week before
+    * The **Latency Distribution** over the selected timeframe
+    * The **Latency** by Status to evaluate the latency impact of an error on traced requests
+    * The **Apdex score** for web services; [learn more about Apdex][9]
 * Error - Choose to display:
     * The **Total amount of errors**
     * The amount of **Errors per second**
@@ -183,6 +187,12 @@ The next section of the panel lists all the vulnerabilities and signals concerni
 
 {{< img src="tracing/visualization/service/security_tab.jpg" alt="Security" style="width:90%;">}}
 
+### Databases
+View the list of downstream database dependencies identified by Database Monitoring and identify latency or load outliers.
+[Learn more about connecting DBM and APM][21].
+
+{{< img src="tracing/visualization/service/databases_tab.png" alt="Databases" style="width:90%;">}}
+
 ### Infrastructure
 If your service is running on Kubernetes, you can see an Infrastructure tab on the Service Page. The live Kubernetes Pods table displays detailed information on your pods, such as if memory usage is close to its limit, and allows you to improve resource allocation by seeing if provisioned compute resources exceed what is required for optimal application performance. 
 
@@ -209,10 +219,16 @@ View the list of traces associated with the service in the traces tab, which is 
 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces" style="width:90%;">}}
 
-### Logs
-View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
+### Log patterns
+View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log patterns][17].
 
 {{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns" style="width:90%;">}}
+
+### Costs
+Visualize the cost associate with your service's infrastructure used in the Costs tab.
+[Learn More about Cloud Cost Management][22].
+
+{{< img src="tracing/visualization/service/costs_tab.png" alt="Costs" style="width:90%;">}}
 
 ## Further Reading
 
@@ -238,3 +254,5 @@ View common patterns in your service's logs, and use facets like status in the s
 [18]: /security/application_security/how-appsec-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [20]: /tracing/guide/inferred-service-opt-in/
+[21]: /database_monitoring/connect_dbm_and_apm/
+[22]: /cloud_cost_management/

@@ -161,7 +161,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Restart the Agent][2] to apply the configuration change.
 
 [1]: /agent/cluster_agent/clusterchecks/
-[2]: /agent/guide/agent-commands/
+[2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
