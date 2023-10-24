@@ -131,11 +131,12 @@ Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22
 Fill out your private location details:
 
 1. Specify your private location's **Name** and **Description**.
-2. Add any **Tags** you would like to associate with your private location. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
+2. Add any **Tags** you would like to associate with your private location.
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}} 
+
 ### Configure your private location
 
 Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**.
