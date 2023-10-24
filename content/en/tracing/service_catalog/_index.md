@@ -3,6 +3,8 @@ title: Datadog Service Catalog
 kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
+  - /tracing/services/services_list/
+  - /tracing/visualization/services_list/
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
