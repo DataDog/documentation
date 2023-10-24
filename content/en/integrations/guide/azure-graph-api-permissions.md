@@ -26,5 +26,9 @@ To fetch Azure app registration details, the [Datadog-Azure integration][1] requ
     Click the checkbox on the left, and click the **Add permissions** button at the bottom to add each permission.
     {{< img src="integrations/guide/azure-graph-api-permissions/permission-select-1.png" alt="Panel for adding Microsoft Graph API permissions. 'Application permissions' is selected. Under the 'Select permissions' section, a user has typed in 'Application.Read.All'. In the section below, under 'Application (1)', the Application.Read.All permission appears next to a selected checkbox.">}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /integrations/azure
 [2]: https://learn.microsoft.com/en-us/graph/permissions-reference
