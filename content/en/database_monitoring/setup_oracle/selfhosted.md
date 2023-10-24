@@ -549,7 +549,7 @@ instances:
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
-[1]: /database_monitoring/setup_oracle/#install-agent
+[1]: /database_monitoring/setup_oracle/#install-the-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 
