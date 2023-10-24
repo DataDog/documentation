@@ -134,6 +134,11 @@ Maximum number of tests fetched from Datadog.
 **Default**: `none`<br>
 Proxy URL used by the private location to send requests to Datadog (for example, `--proxyDatadog=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
 
+`--disableFipsCompliance`
+: **Type:** Boolean <br>
+**Default**: `false`<br>
+Disables the FIPS compliance for a private location using `ddgov-gov.com`.
+
 `--dumpConfig`
 : **Type**: Boolean <br>
 **Default**: `none`<br>
