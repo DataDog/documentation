@@ -497,4 +497,4 @@ For more information, see [Code Coverage][10].
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
-[10]: /continuous_integration/integrate_tests/code_coverage/?tab=junitreportuploads
+[10]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads
