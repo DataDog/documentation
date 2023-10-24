@@ -221,19 +221,6 @@ To install and configure the Datadog Serverless Framework plugin:
 
 The Datadog CLI modifies existing Lambda function configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
 
-**If you already have tracing enabled on your functions**, run the following command with the `--appsec` flag to enable threat detection, and skip steps 1-6 below.
-
- ```sh
-  datadog-ci lambda instrument --appsec -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
-```
-  - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. </br>
-  - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
-  - Replace `<aws_region>` with the AWS region name.
-
-  **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
-
-Additional parameters can be found in the [CLI documentation][2].
-
 **If you are configuring initial tracing for your functions**, perform the following steps:
 
 1. Install the Datadog CLI client:
@@ -242,7 +229,7 @@ Additional parameters can be found in the [CLI documentation][2].
     npm install -g @datadog/datadog-ci
     ```
 
-2. If you are new to Datadog serverless tracing, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining steps to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines after your normal deployment.
 
     ```sh
     datadog-ci lambda instrument -i --appsec
