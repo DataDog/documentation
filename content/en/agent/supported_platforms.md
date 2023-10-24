@@ -121,22 +121,73 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
 </table>
 
-A check mark ({{< X >}}) indicates support in all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
 
 ## 64-BIT ARM V8
 
 Datadog Agent version 6 and 7 support the following Linux operating systems on 64-BIT ARM V8:
 
-| Operating system | Supported versions | Agent 6 | Agent 7 |
-|------------------|--------------------|---------|---------|
-| [Amazon Linux][1] | Amazon Linux 2 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [Debian][2] (systemd) | >= 9.0 (stretch) | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [Ubuntu][3] | >= 16.04 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [RedHat/CentOS][4] | >= 8.0 | >= 6.33.0 | >= 7.33.0 |
-| [AlmaLinux/Rocky][4] | >= 8.0 | >= 6.33.0 | >= 7.33.0 |
-| [Fedora][7] | >= 27 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+<table>
+  <thead>
+    <th>Operating system</th>
+    <th>OS versions</th>
+    <th>Agent 6 versions</th>
+    <th>Agent 7 versions</th>
+  </thead>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
+    <td>2</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
+    <td>>= 9.0 (stretch)</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+  <tr>
+    <th rowspan='4'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
+    <td>>= 16.04</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+  <tr>
+    <td>>= 18.04</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+  <tr>
+    <td>>= 20.04</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+  <tr>
+    <td>>= 22.04</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <td>>= 8.0</td>
+    <td>>= 6.33.0</td>
+    <td>>= 7.33.0</td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/redhat/'>AlmaLinux /<br>Rocky</a></th>
+    <td>>= 8.0</td>
+    <td>>= 6.33.0</td>
+    <td>>= 7.33.0</td>
+  </tr>
+  <tr>
+    <th><a href='/agent/basic_agent_usage/fedora/'>Fedora</a></th>
+    <td>>= 27</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+  </tr>
+</table>
 
-A check mark ({{< X >}}) indicates support in all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
@@ -178,6 +229,8 @@ A check mark ({{< X >}}) indicates support in all minor and patch versions in a 
   </tr>
 </table>
 
+A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
+
 {{% /tab %}}
 
 {{% tab "Cloud and containers" %}}
@@ -189,6 +242,7 @@ Agents >= 6.0 and >= 7.0 support the following platforms:
 | [Docker][5] | >= 1.12            | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [Kubernetes][6] | >= 1.3 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [Azure Stack HCI OS][7] | All versions | | <i class='icon-check-bold'> |
+
 
 [5]: /agent/docker/
 [6]: /agent/basic_agent_usage/kubernetes/
@@ -208,7 +262,23 @@ Agent 6 and 7 support the following [AIX][1] versions:
 [1]: /agent/basic_agent_usage/aix/
 
 {{% /tab %}}
-{{% tab "MacOS" %}}
+{{% tab "macOS" %}}
+
+## 64-BIT X86
+
+| macOS version | Agent 6 | Agent 7 |
+|---------------|---------|---------|
+| >= 10.12 | <= 6.34.0 | <= 7.34.0 |
+| >= 10.13 | 6.35.0 - 6.3.2 | <= 7.38.0 |
+| >= 10.14 |           | >= 7.39.0 |
+
+## Apple ARM64
+
+| macOS version | Agent 6 | Agent 7 |
+|---------------|---------|---------|
+| >= 11.0 |  | >= 7.39.0 |
+| >= 12.0 |  | >= 7.39.0 |
+| >= 13.0 |  | >= 7.39.0 |
 
 {{% /tab %}}
 {{< /tabs >}}
