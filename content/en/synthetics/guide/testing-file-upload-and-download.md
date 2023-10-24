@@ -1,5 +1,5 @@
 ---
-title: Test File Upload and Download
+title: Upload and Download A Test File
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'

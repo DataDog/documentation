@@ -31,7 +31,7 @@ In this section, choose between an APM, Infrastructure, or Logs alert:
 
 An APM alert is created when Watchdog detects anomalous behavior on your system's services or their child resources.
 
-{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-apm.png" alt="Configuring a Watchdog Monitor on APM" style="width:80%;">}}
+{{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-apm2.png" alt="Configuring a Watchdog Monitor on APM" style="width:80%;">}}
 
 ### Select sources {#select-sources-1}
 
