@@ -57,7 +57,7 @@ The Observability Pipelines Datadog Archives destination formats logs into a Dat
         ]
     }
     ```
-
+    
 1. Click **Next**.
 1. Enter a descriptive policy name.
 1. Optionally, add tags.
