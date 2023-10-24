@@ -218,7 +218,7 @@ RDS ホストを監視するには、インフラストラクチャーに Datado
 
 ホスト上で実行されている Agent のデータベースモニタリングメトリクスの収集を構成するには、次の手順に従ってください。(Agent で RDS データベースからメトリクスを収集するために小規模な EC2 インスタンスをプロビジョニングする場合など)
 
-1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。
+1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。`region` パラメーターを設定して、IAM 認証を使用して接続するように Agent を構成します。使用可能なすべての構成オプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。
    ```yaml
    init_config:
    instances:
@@ -249,7 +249,7 @@ RDS ホストを監視するには、インフラストラクチャーに Datado
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -310,7 +310,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 
 [1]: /ja/agent/docker/integrations/?tab=docker
-[2]: /ja/agent/guide/secrets-management
+[2]: /ja/agent/configuration/secrets-management
 [3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -422,7 +422,7 @@ Cluster Agent は自動的にこの構成を登録し、Postgres チェックを
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ja/agent/guide/secrets-management
+[4]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -456,7 +456,7 @@ AWS からより包括的なデータベースメトリクスを収集するに�
 [8]: https://www.postgresql.org/docs/current/app-psql.html
 [9]: /ja/database_monitoring/guide/managed_authentication
 [10]: https://app.datadoghq.com/account/settings/agent/latest
-[11]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[11]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://app.datadoghq.com/databases
 [13]: /ja/integrations/amazon_rds
 [14]: /ja/database_monitoring/troubleshooting/?tab=postgres
