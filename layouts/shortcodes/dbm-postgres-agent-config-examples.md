@@ -116,8 +116,12 @@ instances:
 ### Collecting schemas
 To enable this feature, use the `collect_schemas` option. Additionally, follow the steps in [Monitoring relation metrics for multiple logical databases](#monitoring-relation-metrics-for-multiple-logical-databases).
 
+You can use the `database_autodiscovery` option to avoid specifying each `dbname`. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
+
 ```yaml
 init_config:
+# This instance only collects data from the `users` database
+# and collects relation metrics only from the specified tables
 instances:
   - host: example-service-primary.example-host.com
     port: 5432
@@ -130,6 +134,21 @@ instances:
     relations:
       - products
       - external_seller_products
+  # This instance detects every database automatically
+  # and collects relation metrics from every table
+  - host: example-service-primary.example-host.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    database_autodiscovery:
+      enabled: true
+    dbstrict: true
+    collect_schemas:
+      enabled: true
+    relations:
+      - relation_regex: .*
+
+
 ```
 
 ### Working with hosts through a proxy
