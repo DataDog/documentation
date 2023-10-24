@@ -2303,7 +2303,7 @@ main:
     url: continuous_integration/tests/setup/junit_xml/
     parent: ci_tests_setup
     identifier: ci_tests_setup_junit_xml
-    weight: 102
+    weight: 107
   - name: Tests in Containers
     url: continuous_integration/tests/containers/
     parent: ci_tests
@@ -2443,6 +2443,7 @@ main:
     url: continuous_integration/intelligent_test_runner/setup/swift/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_swift
+    weight: 505
   - name: Static Analysis
     url: continuous_integration/static_analysis/
     parent: ci
