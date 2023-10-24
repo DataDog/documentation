@@ -1,12 +1,6 @@
 ---
-title: Set Up Observability Pipelines in Datadog
+title: Set Up Datadog Archiving with Observability Pipelines
 kind: Documentation
-aliases:
-  - /agent/vector_aggregation/
-  - /integrations/observability_pipelines/integrate_vector_with_datadog/
-  - /observability_pipelines/integrate_vector_with_datadog/
-  - /observability_pipelines/integrations/integrate_vector_with_datadog/
-  - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
 further_reading:
   - link: "/observability_pipelines/production_deployment_overview/"
     tag: "Documentation"
@@ -16,17 +10,11 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
-This guide walks you through deploying the Worker in your common tools cluster and configuring the Datadog Agent to send logs and metrics to the Worker.
-
-{{< img src="observability_pipelines/setup/opw-dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
+This guide walks you through deploying the Worker in your common tools cluster and configuring it to send logs to cloud storage for archiving.
 
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
@@ -45,11 +33,87 @@ You can generate both of these in [Observability Pipelines][3].
 {{< tabs >}}
 {{% tab "Docker" %}}
 Ensure that your machine is configured to run Docker.
+
+The sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Create an IAM user and attach the policy above to it, and create access credentials for it. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+[1]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
+The sample EKS configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* [Create a service account][2] to use the policy you created above, and fill that service account name into the Helm config under `${DD_ARCHIVES_SERVICE_ACCOUNT}`.
+
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
-* The [EBS CSI driver][1] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
+* The [EBS CSI driver][3] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
 
   ```shell
   kubectl get pods -n kube-system
@@ -61,48 +125,149 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
   kubectl get storageclass
   ```
 
-  If `io2` is not present, download [the StorageClass YAML][2] and `kubectl apply` it.
+  If `io2` is not present, download [the StorageClass YAML][4] and `kubectl apply` it.
 
-* The [AWS Load Balancer controller][3] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
+* The [AWS Load Balancer controller][5] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
 
   ```shell
   helm list -A
   ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
-See [Best Practices for OPW Aggregator Architecture][4] for production-level requirements.
+See [Best Practices for OPW Aggregator Architecture][6] for production-level requirements.
 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
-[2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
-[3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
-[4]: /observability_pipelines/architecture/
+[1]: https://aws.amazon.com/s3/pricing/
+[2]: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
+[3]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[4]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
+[5]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[6]: /observability_pipelines/architecture/
 
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512 MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments. 
-
-See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
-
-[1]: /observability_pipelines/architecture/
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
-
-See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
-
-[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
-There are no provider-specific requirements for APT-based Linux.
+The sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Create an IAM user and attach the policy above to it, and create access credentials for it. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+[1]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
-There are no provider-specific requirements for RPM-based Linux.
+The sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Create an IAM user and attach the policy above to it, and create access credentials for it. Save these credentials as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+[1]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
+The sample Terraform configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. In order to use this configuration, you need to setup an IAM policy that allows the Workers to write to S3.
+
+* Go into your AWS console and create an S3 bucket to send your archives to.
+
+  * Do not make your bucket publicly readable.
+  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+
+* Create a policy with the following permissions:
+
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "DatadogUploadLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:PutObject"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        ]
+      },
+      {
+        "Sid": "DatadogListLogArchives",
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": [
+          "arn:aws:s3:::<MY_BUCKET_NAME>"
+        ]
+      }
+    ]
+  }
+  ```
+
+* Edit the bucket name in the policy above to match your configuration.
+
+* Attach the policy to the IAM Instance Profile that is created via Terraform, which you can find under the `iam-role-name` output.
+
 In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
 * The VPC ID your instances will run in.
 * The subnet IDs your instances will run in.
 * The AWS region your VPC is located in.
+
+[1]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
@@ -130,11 +295,13 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
+      -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> \
+      -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> \
       -p 8282:8282 \
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
@@ -158,44 +325,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
 {{% /tab %}}
-{{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
-
-    ```shell
-    helm repo add datadog https://helm.datadoghq.com
-    ```
-    ```shell
-    helm repo update
-    ```
-    ```shell
-    helm upgrade --install \
-      opw datadog/observability-pipelines-worker \
-      -f azure_aks.yaml
-    ```
-
-[1]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
-
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
-
-    ```shell
-    helm repo add datadog https://helm.datadoghq.com
-    ```
-    ```shell
-    helm repo update
-    ```
-    ```shell
-    helm upgrade --install \
-      opw datadog/observability-pipelines-worker \
-      -f google_gke.yaml
-    ```
-
-[1]: /resources/yaml/observability_pipelines/datadog/google_gke.yaml
-{{% /tab %}}
 {{% tab "APT-based Linux" %}}
 1. Run the following commands to set up APT to download through HTTPS:
 
@@ -229,6 +359,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
+    AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+    AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
     EOF
     ```
 
@@ -275,6 +407,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     DD_API_KEY=<API_KEY>
     DD_OP_PIPELINE_ID=<PIPELINE_ID>
     DD_SITE=<SITE>
+    AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
+    AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
     EOF
     ```
 
@@ -385,6 +519,18 @@ sinks:
     buffer:
       type: disk
       max_size: 51539607552
+  ## This sink writes logs to an S3 bucket of your choice, in a format that Datadog
+  ## can rehydrate from. You need to fill in the ${DD_ARCHIVES_BUCKET}
+  ## and ${DD_ARCHIVES_REGION} parameters to fit your S3 configuration.
+  datadog_archives:
+    type: datadog_archives
+    inputs:
+      - logs_finish_ddtags
+    service: aws_s3
+    bucket: ${DD_ARCHIVES_BUCKET}
+    aws_s3:
+      storage_class: "STANDARD"
+      region: "${DD_ARCHIVES_REGION}"
 EOT
 }
 ```
@@ -452,36 +598,7 @@ See [AWS Load Balancer Controller][3] for more details.
 [2]: /observability_pipelines/architecture/capacity_planning_scaling/
 [3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
-{{% tab "Azure AKS" %}}
-Use the load balancers provided by your cloud provider.
-They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
-so they are only accessible inside your network.
 
-Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
-
-See [Capacity Planning and Scaling][1] for load balancer recommendations when scaling the Worker.
-
-#### Cross-availability-zone load balancing
-The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
-
-[1]: /observability_pipelines/architecture/capacity_planning_scaling/
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-Use the load balancers provided by your cloud provider.
-They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
-so they are only accessible inside your network.
-
-Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
-
-See [Capacity Planning and Scaling][1] for load balancer recommendations when scaling the Worker.
-
-#### Cross-availability-zone load balancing
-The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
-
-Global Access is enabled by default since that is likely required for use in a shared tools cluster.
-
-[1]: /observability_pipelines/architecture/capacity_planning_scaling/
-{{% /tab %}}
 {{% tab "APT-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
 {{% /tab %}}
@@ -508,12 +625,6 @@ By default, the Observability Pipelines Worker's data directory is set to `/var/
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 For AWS, Datadog recommends using the `io2` EBS drive family. Alternatively, the `gp3` drives could also be used.
-{{% /tab %}}
-{{% tab "Azure AKS" %}}
-For Azure AKS, Datadog recommends using the `default` (also known as `managed-csi`) disks.
-{{% /tab %}}
-{{% tab "Google GKE" %}}
-For Google GKE, Datadog recommends using the `premium-rwo` drive class because it is backed by SSDs. The HDD-backed class, `standard-rwo`, might not provide enough write performance for the buffers to be useful.
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker` - if you are using the sample configuration, you should ensure that this has at least 288GB of space available for buffering.
@@ -558,28 +669,7 @@ kubectl get svc opw-observability-pipelines-worker
 
 For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
 
-At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
-
-## Working with data
-The sample configuration provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format.
-
-### Processing logs
-The sample Observability Pipelines configuration does the following:
-- Collects logs sent from the Datadog agent to the Observability Pipelines Worker.
-- Tags logs coming through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
-- Corrects the status of logs coming through the Worker. Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
-- Routes the logs by dual-shipping the data to both Datadog Metrics and Logs.
-
-The following are two important components in the example configuration:
-- `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data.
-- `logs_finish_ddtags`: Re-encodes the tags so that it is in the format as how the Datadog Agent would send it.
-
-Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified, and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
-
-### Processing metrics
-The provided metrics pipeline does not require additional parsing and re-encoding steps. Similar to the logs pipeline, it tags incoming metrics for traffic accounting purposes. Due to the additional cardinality, this may have cost implications for custom metrics.
-
-At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use cases, but the tools provided gives you a starting point.
+At this point, your observability data should be going to the Worker and then sent along to your S3 archive.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
