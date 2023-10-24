@@ -233,6 +233,27 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions in a
 
 {{% /tab %}}
 
+{{% /tab %}}
+{{% tab "macOS" %}}
+
+## 64-BIT X86
+
+| macOS version | Agent 6 | Agent 7 |
+|---------------|---------|---------|
+| >= 10.12 | <= 6.34.0 | <= 7.34.0 |
+| >= 10.13 | 6.35.0 - 6.3.2 | <= 7.38.0 |
+| >= 10.14 |           | >= 7.39.0 |
+
+## Apple ARM64
+
+| macOS version | Agent 6 | Agent 7 |
+|---------------|---------|---------|
+| >= 11.0 |  | >= 7.39.0 |
+| >= 12.0 |  | >= 7.39.0 |
+| >= 13.0 |  | >= 7.39.0 |
+
+{{% /tab %}}
+
 {{% tab "Cloud and containers" %}}
 
 Agents >= 6.0 and >= 7.0 support the following platforms:
@@ -260,27 +281,6 @@ Agent 6 and 7 support the following [AIX][1] versions:
 
 
 [1]: /agent/basic_agent_usage/aix/
-
-{{% /tab %}}
-{{% tab "macOS" %}}
-
-## 64-BIT X86
-
-| macOS version | Agent 6 | Agent 7 |
-|---------------|---------|---------|
-| >= 10.12 | <= 6.34.0 | <= 7.34.0 |
-| >= 10.13 | 6.35.0 - 6.3.2 | <= 7.38.0 |
-| >= 10.14 |           | >= 7.39.0 |
-
-## Apple ARM64
-
-| macOS version | Agent 6 | Agent 7 |
-|---------------|---------|---------|
-| >= 11.0 |  | >= 7.39.0 |
-| >= 12.0 |  | >= 7.39.0 |
-| >= 13.0 |  | >= 7.39.0 |
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading
