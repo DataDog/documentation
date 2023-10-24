@@ -56,7 +56,7 @@ Example result:
 }
 ```
 
-The `logs` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. If the amount of logs that matched your query is greater than the `limit`, then the `nextLogId` parameter is not equal to `null`.
+The `logs` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `10` by default, but can be set up to `1000`. If the amount of logs that matched your query is greater than the `limit`, then the `nextLogId` parameter is not equal to `null`.
 
 **When the `nextLogId` parameters returns something other than `null`, it indicates that the query you entered matched more logs than just the one returned**.
 
@@ -113,7 +113,7 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
                },
       "page":  
               {
-                  "limit":50   
+                  "limit":10   
         }
 }'
 ```
@@ -138,7 +138,7 @@ Example result:
   }
 }
 ```
-The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `50` by default, but can be set up to `1000`. 
+The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter equals `10` by default, but can be set up to `1000`. 
 
 To see next page of your logs, continue to resend your query but include the `cursor` parameter where it takes the `after` value from the previous call. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
@@ -157,7 +157,7 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
       "page":  
               {
                   "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
-                  "limit": 50   
+                  "limit": 10   
         }
 }'
 ```
