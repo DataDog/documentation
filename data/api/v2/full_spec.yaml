@@ -4,6 +4,13 @@ components:
   headers: {}
   links: {}
   parameters:
+    APIKeyCategoryParameter:
+      description: Filter API keys by category.
+      in: query
+      name: filter[category]
+      required: false
+      schema:
+        type: string
     APIKeyFilterCreatedAtEndParameter:
       description: Only include API keys created on or before the specified date.
       in: query
@@ -59,6 +66,13 @@ components:
       schema:
         example: created_by,modified_by
         type: string
+    APIKeyReadConfigReadEnabledParameter:
+      description: Filter API keys by remote config read enabled status.
+      in: query
+      name: filter[remote_config_read_enabled]
+      required: false
+      schema:
+        type: boolean
     APIKeysSortParameter:
       description: 'API key attribute used to sort results. Sort order is ascending
 
@@ -17952,6 +17966,41 @@ components:
       required:
       - data
       type: object
+    TeamsField:
+      description: Supported teams field.
+      enum:
+      - id
+      - name
+      - handle
+      - summary
+      - description
+      - avatar
+      - banner
+      - visible_modules
+      - hidden_modules
+      - created_at
+      - modified_at
+      - user_count
+      - link_count
+      - team_links
+      - user_team_permissions
+      type: string
+      x-enum-varnames:
+      - ID
+      - NAME
+      - HANDLE
+      - SUMMARY
+      - DESCRIPTION
+      - AVATAR
+      - BANNER
+      - VISIBLE_MODULES
+      - HIDDEN_MODULES
+      - CREATED_AT
+      - MODIFIED_AT
+      - USER_COUNT
+      - LINK_COUNT
+      - TEAM_LINKS
+      - USER_TEAM_PERMISSIONS
     TeamsResponse:
       description: Response with multiple teams
       properties:
@@ -18586,8 +18635,8 @@ components:
       description: User team permission attributes
       properties:
         permissions:
-          description: Object of team permission actions and boolean values indicating
-            of the currently logged in user can perform them on this team
+          description: Object of team permission actions and boolean values that a
+            logged in user can perform on this team.
           readOnly: true
           type: object
       type: object
@@ -18842,6 +18891,8 @@ paths:
       - $ref: '#/components/parameters/APIKeyFilterModifiedAtStartParameter'
       - $ref: '#/components/parameters/APIKeyFilterModifiedAtEndParameter'
       - $ref: '#/components/parameters/APIKeyIncludeParameter'
+      - $ref: '#/components/parameters/APIKeyReadConfigReadEnabledParameter'
+      - $ref: '#/components/parameters/APIKeyCategoryParameter'
       responses:
         '200':
           content:
@@ -19365,6 +19416,7 @@ paths:
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
       responses:
         '200':
           content:
@@ -20479,6 +20531,7 @@ paths:
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
       responses:
         '200':
           content:
@@ -26518,6 +26571,12 @@ paths:
         required: false
         schema:
           type: string
+      - description: Filter all roles by the given list of role IDs.
+        in: query
+        name: filter[id]
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -29683,12 +29742,14 @@ paths:
       - description: Specifies the order of the returned teams
         in: query
         name: sort
+        required: false
         schema:
           $ref: '#/components/schemas/ListTeamsSort'
       - description: 'Included related resources optionally requested. Allowed enum
           values: `team_links, user_team_permissions`'
         in: query
         name: include
+        required: false
         schema:
           items:
             $ref: '#/components/schemas/ListTeamsInclude'
@@ -29697,13 +29758,24 @@ paths:
           member
         in: query
         name: filter[keyword]
+        required: false
         schema:
           type: string
       - description: When true, only returns teams the current user belongs to
         in: query
         name: filter[me]
+        required: false
         schema:
           type: boolean
+      - description: List of fields that need to be fetched.
+        explode: false
+        in: query
+        name: fields[team]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/TeamsField'
+          type: array
       responses:
         '200':
           content:
@@ -30176,11 +30248,13 @@ paths:
       - description: Specifies the order of returned team memberships
         in: query
         name: sort
+        required: false
         schema:
           $ref: '#/components/schemas/GetTeamMembershipsSort'
       - description: Search query, can be user email or name
         in: query
         name: filter[keyword]
+        required: false
         schema:
           type: string
       responses:
