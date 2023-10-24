@@ -1,0 +1,263 @@
+---
+title: Datadog Archives Destination
+kind: documentation
+disable_toc: false
+further_reading:
+  - link: "/observability_pipelines/working_with_data/"
+    tag: "Documentation"
+    text: "Working with data in Observability Pipelines"
+  - link: "/logs/log_configuration/archives/"
+    tag: "Documentation"
+    text: "Learn more about Log Archives"
+  - link: "/logs/log_configuration/rehydrating/"
+    tag: "Documentation"
+    text: "Learn more about rehydrating log archives"
+---
+
+## Overview
+
+The Observability Pipelines Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for OP Worker version 1.5 and later.
+
+## Configure a Log Archive
+
+### Create an Amazon S3 bucket.
+
+1. Navigate to [Amazon S3 buckets][2]. 
+1. Click **Create bucket**.
+1. Enter a descriptive name for your bucket.
+1. For US1, US3, and US5 sites, see [AWS Pricing][3] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
+1. Do not make your bucket publicly readable.
+1. Optionally, add tags.
+1. Click **Create bucket**.
+
+### Set up an IAM policy that allows OP Workers to write to the S3 bucket
+
+1. Navigate to the [IAM console][4].
+1. Select **Policies** in the left side menu.
+1. Click **Create policy**.
+1. Click **JSON** in the **Specify permissions** section.
+1. Copy the below policy and paste it into the **Policy editor**. Replace `<MY_BUCKET_NAME>` and `<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>` with the information for the S3 bucket you created earlier.
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": "s3:PutObject",
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": "s3:ListBucket",
+                "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
+            }
+        ]
+    }
+    ```
+1. Click **Next**.
+1. Enter a descriptive policy name.
+1. Optionally, add tags.
+1. Click **Create policy**.
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+### Create an IAM user
+
+Create an IAM user and attach the IAM policy you created earlier to it.
+
+1. Navigate to the IAM console.
+1. Select **Users** in the left side menu.
+1. Click **Create user**.
+1. Enter a user name.
+1. Click **Next**.
+1. Select **Attach policies directly**.
+1. Choose the IAM policy you created earlier to attach to the new IAM user.
+1. Click **Next**.
+1. Optionally, add tags.
+1. Click **Create user**.
+
+Create access credentials for the new IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+{{% /tab %}}
+{{% tab "AWS EKS" %}}
+
+### Create a service account
+
+[Create a service account][1] to use the policy you created above. In the Helm configuration, replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` with the name of the service account.
+
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
+{{% /tab %}}
+{{% tab "APT-based Linux" %}}
+
+### Create an IAM user
+
+Create an IAM user and attach the IAM policy you created earlier to it.
+
+1. Navigate to the IAM console.
+1. Select **Users** in the left side menu.
+1. Click **Create user**.
+1. Enter a user name.
+1. Click **Next**.
+1. Select **Attach policies directly**.
+1. Choose the IAM policy you created earlier to attach to the new IAM user.
+1. Click **Next**.
+1. Optionally, add tags.
+1. Click **Create user**.
+
+Create access credentials for the new IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+
+### Create an IAM user
+
+Create an IAM user and attach the IAM policy you created earlier to it.
+
+1. Navigate to the IAM console.
+1. Select **Users** in the left side menu.
+1. Click **Create user**.
+1. Enter a user name.
+1. Click **Next**.
+1. Select **Attach policies directly**.
+1. Choose the IAM policy you created earlier to attach to the new IAM user.
+1. Click **Next**.
+1. Optionally, add tags.
+1. Click **Create user**.
+
+Create access credentials for the new IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+{{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+
+### Attach the policy to the IAM instance profile
+
+Attach the policy to the IAM Instance Profile that is created with Terraform, which you can find under the `iam-role-name` output.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Route your logs to a bucket
+
+To route your logs to the archive bucket:
+
+1. Navigate to Datadog [Log Forwarding][5].
+1. Click **Add a new archive**.
+1. Enter a descriptive archive name.
+1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. Select **AWS S3**.
+1. Select the AWS Account that your bucket is in.
+1. Enter the name of the S3 bucket.
+1. Optionally, enter a path.
+1. Check the confirmation statement.
+1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][6] for more information.
+1. Click **Save**.
+
+See the [Log Archives documentation][7] for additional information.
+
+## Configure datadog_archives
+
+You can configure the `datadog_archives` destination using the configuration file or the pipeline builder UI.
+
+### Configuration file
+
+#### Datadog Agent as the source
+
+If you used the [sample pipelines configuration file][8] for Datadog to set up Observability Pipelines, the sample configuration includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. 
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+In the sample pipelines configuration file, replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier.
+
+{{% /tab %}}
+{{% tab "AWS EKS" %}}
+
+In the sample pipelines configuration file, replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier.
+
+{{% /tab %}}
+{{% tab "APT-based Linux" %}}
+
+In the sample pipelines configuration file, replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier.
+
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+
+In the sample pipelines configuration file, replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier.
+
+{{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+
+Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on your S3 configuration.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Other log sources
+
+TKTK
+
+**Note**: If you are routing logs ingested into the OP Worker, that are not coming from the Datadog Agent, to an archive with the `datadog_archives` destination, those logs are not tagged with [reserved attributes][9]. This means that you lose Datadog telemetry and the benefits of [unified service tagging][10]. For example, say your syslogs are sent to `datadog_archives` and those logs have the status tagged as `severity` instead of the reserved attribute of `status` and the host tagged as `hostname` instead of the reserved attribute `hostname`. When these logs are rehydrated in Datadog, the `status` for the logs are all set to `info` and none of the logs will have a hostname tag.
+
+### Pipeline builder UI
+
+1. Navigate to your [Pipeline][11].
+1. Click **Edit**.
+1. Click **Add More** in the **Add Destination** tile.
+1. Click the **Datadog Archives** tile.
+1. Enter a name for the component.
+1. Select the sources or transforms to connect this destination to.
+
+{{< tabs >}}
+{{% tab "AWS S3" %}}
+
+7. Toggle **AWS S3** to enable those specific configuration options.
+8. Select the storage class in the dropdown menu.
+9. In the **Bucket** option, enter the name of the S3 bucket you created earlier.
+10. In **Service**, enter the name of the object storage service to use.
+11. Set the other configuration options based on your use case.
+
+{{% /tab %}}
+{{% tab "Azure Blob" %}}
+
+7. Toggle **Azure Blob** to enable those specific configuration options.
+8. Enter the Azure Blob Storage Account connection string.
+9. In the **Bucket** option, select the archives to store the bucket in.
+10. In **Service**, end the name of the object storage service to use.
+11. Set the other configuration options based on your use case.
+
+{{% /tab %}}
+{{% tab "GCP Cloud Storage" %}}
+
+7. Toggle **GCP Cloud Storage** to enable those specific configuration options.
+8. Set the configuration options based on your use case.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+See [Datadog Archives reference][12] for details on all configuration options.
+
+## Rehydrate your archive
+
+See [Rehydrating from Archives][13] for instructions on how to rehydrate your archive in Datadog so that you can start analyzing and investigating those logs.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/log_configuration/archives/
+[2]: https://s3.console.aws.amazon.com/s3/home
+[3]: https://aws.amazon.com/s3/pricing/
+[4]: https://console.aws.amazon.com/iam/
+[5]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[6]: /logs/log_configuration/archives/#advanced-settings
+[7]: /logs/log_configuration/archives
+[8]: /observability_pipelines/setup/datadog#installing-the-observability-pipelines-worker
+[9]: /log_configuration/attributes_naming_convention/#reserved-attributes
+[10]: /getting_started/tagging/unified_service_tagging/
+[11]: https://app.datadoghq.com/observability-pipelines/
+[12]: /observability_pipelines/reference/sinks/#datadogarchivessink
+[13]: /logs/log_configuration/rehydrating/?tab=amazons3
