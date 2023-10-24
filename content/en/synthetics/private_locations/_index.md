@@ -135,25 +135,7 @@ Fill out your private location details:
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
-
-{{% site-region region="gov" %}}
-
-By default, the `disableFipsCompliance` parameter is set to `true` in the private location configuration file for FIPS compliance. If you have an operating system where FIPS is enabled by default, you need to disable FIPS on an operating system-level.
-
-For example:
-
-```
-  },
-  "concurrency": 8,
-  "disableFipsCompliance": false,
-  "dnsServer": [
-    "0.0.0.0",
-    "1.1.1.1"
-  ],
-```
-
-{{% /site-region %}} 
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}} 
 
 ### Configure your private location
 

@@ -42,24 +42,6 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-{{% site-region region="gov" %}}
-
-By default, the `disableFipsCompliance` parameter is set to `true` in the private location configuration file for FIPS compliance. If you have an operating system where FIPS is enabled by default, you need to disable FIPS on an operating system-level.
-
-For example:
-
-```
-  },
-  "concurrency": 8,
-  "disableFipsCompliance": false,
-  "dnsServer": [
-    "0.0.0.0",
-    "1.1.1.1"
-  ],
-```
-
-{{% /site-region %}} 
-
 1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][10].
 
    To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11].

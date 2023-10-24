@@ -136,7 +136,7 @@ Proxy URL used by the private location to send requests to Datadog (for example,
 
 `--disableFipsCompliance`
 : **Type:** Boolean <br>
-**Default**: `true`<br>
+**Default**: `false`<br>
 Disables the FIPS compliance for a private location using `ddgov-gov.com`.
 
 `--dumpConfig`
