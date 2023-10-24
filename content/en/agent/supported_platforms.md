@@ -31,7 +31,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian</a>(systemd)</th>
+    <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
     <td>>= 7.0 (wheezy)</td>
     <td><= 6.35.0</td>
     <td><= 7.35.0</td>
@@ -221,8 +221,20 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions in a
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
-    <td>Windows</td>
+    <td rowspan=3>Windows</td>
     <td>>= 8.1</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>11</td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -230,8 +242,6 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions in a
 </table>
 
 A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
-
-{{% /tab %}}
 
 {{% /tab %}}
 {{% tab "macOS" %}}
@@ -281,6 +291,7 @@ Agent 6 and 7 support the following [AIX][1] versions:
 
 
 [1]: /agent/basic_agent_usage/aix/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading
