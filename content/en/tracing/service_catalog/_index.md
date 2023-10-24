@@ -37,7 +37,7 @@ algolia:
 
 Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as GitHub, Datadog dashboards, and Datadog views that receive and monitor telemetry data for each service.
 
-Compared to the APM Service List, the Service Catalog includes services that do not actively emit trace metrics, which means you do not need to instrument your service for it to appear. Service Catalog also automatically includes services detected by USM and RUM. Service Catalog supports a one hour look back window. If you do not see your APM services in Service Catalog, they most likely were not sending active trace metrics during the last hour. You may still find these services in APM Service List.
+The Service Catalog includes services that do not actively emit trace metrics, and you do not need to instrument your service for it to appear. Service Catalog also automatically includes services detected by USM and RUM. Service Catalog supports a one hour look-back window. If you do not see your APM services in Service Catalog, they most likely were not sending active trace metrics during the last hour. 
 
 The Service Catalog is useful for:
 - Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
@@ -171,6 +171,26 @@ The Service Catalog write permission allows a user to modify service catalog dat
 - Updating service metadata in the UI
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
+
+## Services types
+
+Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
+
+For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
+
+The type of the service can be one of:
+
+*  Cache
+*  Custom
+*  DB
+*  Serverless function
+*  Web
+
+Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
+
+## Changing service color
+
+Service color is used in trace visualizations. Click the service type icon to change it.
 
 ## Further reading
 

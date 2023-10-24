@@ -35,7 +35,7 @@ The Service Map can be grouped by team or application to create a clear picture 
 
 ## Filtering versus changing scopes
 
-The Service Map can be filtered using [facets][2] or a fuzzy string match on service names. Facets are tags that Datadog automatically applies to service data, and include service type (for example, web server, database, cache), last deploy time, or monitor status. Filtering is particularly useful in a microservices environment with hundreds or thousands of nodes. Services can also be filtered by incident status to identify those involved in an ongoing or resolved incident and extract key information from the associated Service Page including incident data, resources, and Datadog Teams information. In addition, you can scope the Service Map to a specific time range, which helps keep track of your evolving architecture.
+The Service Map can be filtered using facets or a fuzzy string match on service names. Facets are tags that Datadog automatically applies to service data, and include service type (for example, web server, database, cache), last deploy time, or monitor status. Filtering is particularly useful in a microservices environment with hundreds or thousands of nodes. Services can also be filtered by incident status to identify those involved in an ongoing or resolved incident and extract key information from the associated Service Page including incident data, resources, and Datadog Teams information. In addition, you can scope the Service Map to a specific time range, which helps keep track of your evolving architecture.
 
 Services are also scoped by `env`, and optionally a [Second Primary Tag][3]. Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
@@ -100,7 +100,6 @@ The Service Map is rendered based on complete traces that include the root spans
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/#services
-[2]: /tracing/services/services_list/#facets
 [3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://app.datadoghq.com/apm/services
 [5]: /tracing/glossary/#trace
