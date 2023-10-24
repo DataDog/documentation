@@ -15,7 +15,7 @@ cascade:
 - _target:
     path: /integrations/azure.md
   algolia:
-    rank: 60
+    rank: 10
     category: Documentation
     subcategory: Integrations
     tags: ['azure', 'microsoft azure']
@@ -29,7 +29,7 @@ cascade:
 - _target:
     path: /integrations/google_cloud_platform.md
   algolia:
-    rank: 60
+    rank: 10
     category: Documentation
     subcategory: Integrations
     tags: ['gcp', 'google cloud platform']
