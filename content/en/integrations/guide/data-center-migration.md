@@ -19,15 +19,15 @@ further_reading:
 If you are interested in migrating Datadog data centers, follow these instructions to plan your migration:
 
 1. Create a Datadog account.
-1. Migrate Datadog [resources or assets-pick one and go with it] using the `datadog-sync-cli` package and/or [Dual Shipping][4].
+1. Migrate Datadog resources using the `datadog-sync-cli` package. Optionally, use [Dual Shipping][4] to prevent data loss.
 1. Migrate Datadog integrations.
 1. Migrate real-time data.
 
-In a data center migration, no data is removed from your old Datadog organization—resources are being duplicated into your new Datadog organization. You have access to the old data and resources in your old Datadog organization, which expires after the retention period passes. 
+In a data center migration, resources are duplicated into your new Datadog organization from the old organization. No data is removed from your old Datadog organization. You have access to the old data and resources until the retention period passes and the data in the old organization expires.
 
-This guide walks you through migrating from one Datadog data center to another Datadog data center by using `datadog-sync-cli` to sync resources across your Datadog organizations and [Dual Shipping][4] to prevent data loss. 
+This guide walks you through migrating from one Datadog data center to another using the Datadog sync CLI tool (`datadog-sync-cli`) to sync resources across your Datadog organizations and [Dual Shipping][4] to prevent data loss. 
 
-## Create another account
+## Create a target account for the migration
 
 [Sign up for a Datadog account][8] and specify the region of your choice or navigate to `https://app.{{< region-param key="dd_site" code="true" >}}/signup`.
 
