@@ -10,6 +10,7 @@ aliases:
 
 {{< whatsnext desc="Cloud Security Management (CSM) Guides" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security Management{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/jira" >}}Jira {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats Guides" >}}
