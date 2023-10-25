@@ -1,22 +1,16 @@
 ---
-title: Single Step APM Instrumentation Beta
+title: Single Step APM Instrumentation (Beta)
 kind: documentation
 is_beta: true
 ---
 
-{{< callout url="http://dtdg.co/apm-onboarding" >}}
-For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services.
-{{< /callout >}}
-
 ## Requirements
 
-Single step APM instrumentation beta only supports tracing the following services on `x86_64` architectures:
+The single step APM instrumentation beta only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` architectures.
 
-- Java
-- Python
-- Ruby
-- Node.js
-- .NET
+{{<  callout header="false" url="http://dtdg.co/apm-onboarding" >}}
+For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET Core, and Ruby services.
+{{< /callout >}}
 
 ## Enable APM on your services in one step
 
