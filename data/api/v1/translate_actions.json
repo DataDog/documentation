@@ -281,6 +281,22 @@
     "description": "List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
     "summary": "List namespace rules"
   },
+  "DeleteAWSEventBridgeSource": {
+    "description": "Delete an Amazon EventBridge source.",
+    "summary": "Delete an Amazon EventBridge source",
+    "request_description": "Delete the Amazon EventBridge source with the given name, region, and associated AWS account.",
+    "request_schema_description": "An object used to delete an EventBridge source."
+  },
+  "ListAWSEventBridgeSources": {
+    "description": "Get all Amazon EventBridge sources.",
+    "summary": "Get all Amazon EventBridge sources"
+  },
+  "CreateAWSEventBridgeSource": {
+    "description": "Create an Amazon EventBridge source.",
+    "summary": "Create an Amazon EventBridge source",
+    "request_description": "Create an Amazon EventBridge source for an AWS account with a given name and region.",
+    "request_schema_description": "An object used to create an EventBridge source."
+  },
   "DeleteAWSTagFilter": {
     "description": "Delete a tag filtering entry.",
     "summary": "Delete a tag filtering entry",
