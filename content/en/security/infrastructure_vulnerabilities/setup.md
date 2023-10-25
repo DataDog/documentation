@@ -34,16 +34,12 @@ The following instructions enables the container image metadata collection and [
 Add the following to your `values.yaml` helm configuration file:
 
 ```yaml
-agents:
-  containers:
-    agent:
-      env:
-        - name: DD_CONTAINER_IMAGE_ENABLED
-          value: "true"
-        - name: DD_SBOM_ENABLED
-          value: "true"
-        - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
-          value: "true"
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
 ```
 
 {{% /tab %}}
@@ -123,14 +119,10 @@ container_image:
 {{% tab "Kubernetes" %}}
 
 ```yaml
-agents:
-  containers:
-    agent:
-      env:
-        - name: DD_SBOM_ENABLED
-          value: "true"
-        - name: DD_SBOM_HOST_ENABLED
-          value: "true"
+datadog:
+  sbom:
+    host:
+      enabled: true
 ```
 
 {{% /tab %}}
