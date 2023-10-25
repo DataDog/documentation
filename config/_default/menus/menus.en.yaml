@@ -4629,6 +4629,42 @@ api:
         - DeleteAWSTagFilter
       unstable: []
       order: 3
+  - name: Create an Amazon EventBridge source
+    url: '#create-an-amazon-eventbridge-source'
+    identifier: aws-integration-create-an-amazon-eventbridge-source
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSEventBridgeSource
+      unstable: []
+      order: 11
+  - name: Get all Amazon EventBridge sources
+    url: '#get-all-amazon-eventbridge-sources'
+    identifier: aws-integration-get-all-amazon-eventbridge-sources
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSEventBridgeSources
+      unstable: []
+      order: 10
+  - name: Delete an Amazon EventBridge source
+    url: '#delete-an-amazon-eventbridge-source'
+    identifier: aws-integration-delete-an-amazon-eventbridge-source
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSEventBridgeSource
+      unstable: []
+      order: 12
   - name: List namespace rules
     url: '#list-namespace-rules'
     identifier: aws-integration-list-namespace-rules

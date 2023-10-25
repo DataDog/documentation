@@ -56,7 +56,7 @@ components:
           type: string
         account_id:
           description: Your AWS Account ID without dashes.
-          example: '1234567'
+          example: '123456789012'
           type: string
         account_specific_namespace_rules:
           additionalProperties:
@@ -80,7 +80,9 @@ components:
           example: true
           type: boolean
         excluded_regions:
-          description: An array of AWS regions to exclude from metrics collection.
+          description: 'An array of [AWS regions](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints)
+
+            to exclude from metrics collection.'
           example:
           - us-east-1
           - us-west-2
@@ -116,7 +118,7 @@ components:
           example:
           - $KEY:$VALUE
           items:
-            description: The list of the the host_tags.
+            description: The list of the host_tags.
             type: string
           type: array
         metrics_collection_enabled:
@@ -171,7 +173,7 @@ components:
           type: string
         account_id:
           description: Your AWS Account ID without dashes.
-          example: '1234567'
+          example: '123456789012'
           type: string
         role_name:
           description: Your Datadog role delegation name.
@@ -186,6 +188,136 @@ components:
           items:
             $ref: '#/components/schemas/AWSAccount'
           type: array
+      type: object
+    AWSEventBridgeAccountConfiguration:
+      description: The EventBridge configuration for one AWS account.
+      properties:
+        accountId:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        eventHubs:
+          description: Array of AWS event sources associated with this account.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeSource'
+          type: array
+        tags:
+          description: 'Array of tags (in the form `key:value`) which are added to
+            all hosts
+
+            and metrics reporting through the main AWS integration.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: The list of the host_tags.
+            type: string
+          type: array
+      type: object
+    AWSEventBridgeCreateRequest:
+      description: An object used to create an EventBridge source.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        create_event_bus:
+          description: 'True if Datadog should create the event bus in addition to
+            the event
+
+            source. Requires the `events:CreateEventBus` permission.'
+          example: true
+          type: boolean
+        event_generator_name:
+          description: 'The given part of the event source name, which is then combined
+            with an
+
+            assigned suffix to form the full name.'
+          example: app-alerts
+          type: string
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          example: us-east-1
+          type: string
+      type: object
+    AWSEventBridgeCreateResponse:
+      description: A created EventBridge source.
+      properties:
+        event_source_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        has_bus:
+          description: True if the event bus was created in addition to the source.
+          example: true
+          type: boolean
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          example: us-east-1
+          type: string
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeCreateStatus'
+      type: object
+    AWSEventBridgeCreateStatus:
+      description: The event source status "created".
+      enum:
+      - created
+      example: created
+      type: string
+      x-enum-varnames:
+      - CREATED
+    AWSEventBridgeDeleteRequest:
+      description: An object used to delete an EventBridge source.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        event_generator_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          example: us-east-1
+          type: string
+      type: object
+    AWSEventBridgeDeleteResponse:
+      description: An indicator of the successful deletion of an EventBridge source.
+      properties:
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteStatus'
+      type: object
+    AWSEventBridgeDeleteStatus:
+      description: The event source status "empty".
+      enum:
+      - empty
+      example: empty
+      type: string
+      x-enum-varnames:
+      - EMPTY
+    AWSEventBridgeListResponse:
+      description: An object describing the EventBridge configuration for multiple
+        accounts.
+      properties:
+        accounts:
+          description: List of accounts with their event sources.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeAccountConfiguration'
+          type: array
+        isInstalled:
+          description: True if the EventBridge sub-integration is enabled for your
+            organization.
+          type: boolean
+      type: object
+    AWSEventBridgeSource:
+      description: An EventBridge source.
+      properties:
+        name:
+          description: The event source name.
+          type: string
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          type: string
       type: object
     AWSLogsAsyncError:
       description: Description of errors.
@@ -323,7 +455,7 @@ components:
       properties:
         account_id:
           description: Your AWS Account ID without dashes.
-          example: '1234567'
+          example: '123456789012'
           type: string
         namespace:
           $ref: '#/components/schemas/AWSNamespace'
@@ -24083,6 +24215,118 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
+  /api/v1/integration/aws/event_bridge:
+    delete:
+      description: Delete an Amazon EventBridge source.
+      operationId: DeleteAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeDeleteRequest'
+        description: Delete the Amazon EventBridge source with the given name, region,
+          and associated AWS account.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
+    get:
+      description: Get all Amazon EventBridge sources.
+      operationId: ListAWSEventBridgeSources
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all Amazon EventBridge sources
+      tags:
+      - AWS Integration
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Create an Amazon EventBridge source.
+      operationId: CreateAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeCreateRequest'
+        description: Create an Amazon EventBridge source for an AWS account with a
+          given name and region.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteAWSEventBridgeSource
+        parameters: []
+        type: unsafe
   /api/v1/integration/aws/filtering:
     delete:
       description: Delete a tag filtering entry.
