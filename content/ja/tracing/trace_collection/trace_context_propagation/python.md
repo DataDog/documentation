@@ -1,5 +1,5 @@
 ---
-code_lang: php
+code_lang: python
 code_lang_weight: 10
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/

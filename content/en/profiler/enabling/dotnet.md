@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Azure App Services - public beta (webapps only, functions are not supported)
+: Azure App Services Windows and Linux - public beta (webapps only, functions are not supported)
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
@@ -64,6 +64,7 @@ The following profiling features are available in the following minimum versions
 | [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
 | [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
 | Timeline            | 2.30.0+                       | All supported runtime versions (except .NET 5+ required for garbage collection details).     |
+| Azure App Services (public beta) | 2.39.0+                       | All supported runtime versions.   |
 
 ## Installation
 
@@ -134,9 +135,10 @@ To install the .NET Profiler per-application:
 </div>
 
 To install the .NET Profiler per-webapp:
-1. Install the Azure App Service [Datadog APM Extension][1] to your webapp.
+1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
 
-[1]: /serverless/azure_app_services/?tab=net#installation
+[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -361,9 +363,10 @@ To install the .NET Profiler per-webapp:
 
 {{% tab "Azure App Service (public beta)" %}}
 
-2. Follow these [installation guidelines][1] to set `DD_PROFILING_ENABLED:true` to enable the profiler
+2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
 
-[1]: /serverless/azure_app_services/?tab=net#installation
+[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
 {{% /tab %}}
 
 {{< /tabs >}}
