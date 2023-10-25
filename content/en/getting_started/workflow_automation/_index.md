@@ -16,7 +16,7 @@ further_reading:
 
 With Workflow Automation you can automate end-to-end processes in response to Datadog alerts and security signals. It is powered by real-time observability data, enabling you to resolve issues faster and proactively maintain the availability and security of your systems.
 
-Follow this guide to create a custom workflow that is triggered from a monitor alert. When it is triggered, the workflow creates a task in Jira and sends a notification to Slack with a link to the Jira ticket. This guide covers passing data from one step in your workflow to another step, saving and publishing your workflow and viewing the workflow’s run history. 
+Follow this guide to create a custom workflow that is triggered from a monitor alert. When it is triggered, the workflow creates a task in Jira and sends a notification to Slack with a link to the Jira ticket. This guide covers passing data from one step in your workflow to another step, saving and publishing your workflow and viewing the workflow's run history. 
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ To create a workflow with a monitor trigger:
 4. Select **Monitor or Security Signal**.
 5. Click **Create**.
 6. On the workflow canvas, click the **Monitor or Security Signal** trigger. 
-7. In the **Configure** tab, next to `@workflow-` enter the unique ID, `@workflow-Create-Jira-Ticket` for your workflow. Workflow handles always begin with `@workflow-`. Later, you’ll use this handle to connect the workflow to a monitor notification. 
+7. In the **Configure** tab, next to `@workflow-` enter the unique ID, `@workflow-Create-Jira-Ticket` for your workflow. Workflow handles always begin with `@workflow-`. Later, you'll use this handle to connect the workflow to a monitor notification. 
 8. Save your workflow.
 
 {{< img src="/getting_started/workflow_automation/trigger.png" alt="Trigger for Workflows">}}
@@ -66,7 +66,7 @@ For more information on context variables, see **[Context variables][6]**.
 5. You can test this Jira action by clicking the green **Test** icon in the **Configure** tab of the action.
 6. Save your workflow.
 
-You’ve set up a step to create a Jira ticket. Next, add the Slack step:
+You've set up a step to create a Jira ticket. Next, add the Slack step:
 1. Click the plus icon on the workflow canvas to add another step.
 2. Search for the Slack action and select **Send message**.  
 3. Enter the **Slack Workspace name**. 
@@ -81,7 +81,7 @@ The workflow that created this Jira issue was {{ WorkflowName }}
 ```
 
 6. You can test this Slack action by clicking the green **Test** icon in the **Configure** tab of the action.
-7. To view your workflow’s name in the monitor's notification dropdown, save and publish your workflow. To publish the workflow, click **Publish** from the workflow’s page.
+7. To view your workflow's name in the monitor's notification dropdown, save and publish your workflow. To publish the workflow, click **Publish** from the workflow's page.
 
 ## Test and publish the workflow
 
@@ -91,17 +91,17 @@ To apply your changes, ensure that you save your workflow by clicking **Save**. 
 
 To trigger a workflow manually, click **Run** from the workflow page and enter the values for existing trigger variables. Confirm that running the workflow creates a Jira ticket and sends a Slack message as you specified. 
 
-Scheduled and triggered workflows don’t trigger automatically until you’ve published them. To publish the workflow, click **Publish** from the workflow’s page.
+Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
 <div class="alert alert-info">If you are testing a workflow with an active Slack and Jira account, then actual Slack posts and Jira tickets are created.</div>
 
 ## Update the monitor that triggers your workflow
 
 1. Navigate to the [Monitors page][7] in Datadog.
-2. Find the monitor you’d like to use to trigger the workflow and edit it, or create a new monitor.
+2. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
 3. In the message section, add the full workflow mention name to an alert notification. The mention name should start with `@workflow-`. For example, `@workflow-Create-Jira-Ticket`
     - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname=host.name)`
-4. Click **Test Notifications** to test the workflow and all of this monitor’s notifications. 
+4. Click **Test Notifications** to test the workflow and all of this monitor's notifications. 
 5. Save the monitor. 
 
 {{< img src="/getting_started/workflow_automation/monitor_trigger.png" alt="Trigger a workflow from a Monitor">}}
@@ -120,7 +120,7 @@ To view a list of previous workflow executions and whether each execution succee
 
 ## Conclusion
 
-You’re done! When the monitor triggers the workflow, it creates a Jira issue for your engineering team to review. Here is an example Jira issue:
+You're done! When the monitor triggers the workflow, it creates a Jira issue for your engineering team to review. Here is an example Jira issue:
 
 {{< img src="/getting_started/workflow_automation/jira_ticket.png" alt="Jira ticket that is generated from the workflow">}}
 
@@ -128,7 +128,7 @@ The workflow also creates a Slack message to notify your team of the Jira issue 
 
 {{< img src="/getting_started/workflow_automation/slack-message.png" alt="Slack message that is generated from the workflow">}}
 
-## What’s next? 
+## What's next? 
 
 * Explore the list of all available workflow actions by leveraging the [Actions Catalog][8]. 
 * Build a workflow from an out of the box [blueprint][9].
