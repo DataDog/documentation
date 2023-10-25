@@ -197,9 +197,9 @@
                     class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
                     @click="toggleRuleSet($el)"
                     >
-                        <div>
+                        <div class="d-flex align-items-center h-100">
                             {{$ruleset_languages := index ($pad.Get "languageByRuleSet") $group_id}}
-                            <div class="d-inline">
+                            <div class="d-flex align-items-center h-100 px-1">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") }}
                                 {{ if $int_logo }}
                                 <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
@@ -208,7 +208,7 @@
                                 {{ end }}
                                 {{ end }}
                             </div>
-                            <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
+                            <span class="group-header__text fw-semibold mx-1">{{$ruleset_title}}</span>
                             <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
@@ -226,7 +226,7 @@
                 {{ range $filterKeys }}
                 {{ $filter := . | lower }}
                 <div class="d-flex flex-column mb-2">
-                    <label class="mb-1 fw-semibold">{{.}}</label>
+                    <span class="mb-1 fw-semibold">{{.}}</span>
                     {{/*  <div class="d-flex gap-1 flex-wrap">
                         <button 
                         @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', ''); pushState(true, '{{ $filter }}')"
@@ -243,14 +243,20 @@
                         >{{.}}</button>
                         {{ end }}
                     </div>  */}}
-                    <div>
-                        <div>Select</div>
-                        <div class="d-none">
-                            <div>all</div>
+                    <div class="dropdown">
+                        <div>{Selection here. default: "All"}</div>
+                        <form class="d-flex flex-column">
+                            <div>
+                                <input id="all" type="checkbox">
+                                <label for="all">All</label>
+                            </div>
                             {{ range index ($pad.Get "filters") . }}
-                            <div>{{.}}</div>
+                            <div>
+                                <input id="{{ . }}" type="checkbox">
+                                <label for="{{ . }}">{{.}}</label>
+                            </div>
                             {{ end }}
-                        </div>
+                        </form>
                     </div>                      
                    
                 </div>

@@ -1,8 +1,8 @@
 .static-analysis-main {
 
     #static-analysis-nav {
-        position: sticky;
-        top: 95px;
+        // position: sticky;
+        // top: 95px;
         align-self: flex-start;
         z-index: 2;
         background-color: white;
@@ -35,12 +35,12 @@
         i {
             cursor: copy;
             position: relative;
-            top: 2px;
+            top: 4px;
             margin-left: 4px;
         }
         .group-header__text {
-            position: relative;
-            top: -1px;
+            // position: relative;
+            // top: -1px;
         }
         .group-header__arrow {
             font-size: 18px;
