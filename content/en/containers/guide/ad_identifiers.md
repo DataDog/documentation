@@ -17,7 +17,7 @@ Autodiscovery container identifiers, or `ad_identifiers`, allow you to apply an 
 
 Even if Autodiscovery configuration is defined within a custom configuration file, you can use the standard labels for tagging `env`, `service`, and `version`. See [Unified Service Tagging][1] for more information on how to configure these labels on your containers.
 
-**Note**: For other configuration types—key-value stores, Docker labels, or Kubernetes pod annotations—the matching between an integration configuration template and the corresponding container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations.
+**Note**: Other configuration types, including key-value stores, Docker labels, or Kubernetes pod annotations, use a different method to match integration configuration templates to their corresponding containers. For those configuration types, the matching between an integration configuration template and the container is based on the `<CONTAINER_IDENTIFIER>` included in the key-value stores, labels, or annotations.
 
 ## Container image name
 
