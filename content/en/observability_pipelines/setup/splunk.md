@@ -20,18 +20,16 @@ further_reading:
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
-
 ## Overview
 
 The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
-This guide walks you through deploying the Worker in your common tools cluster and configuring Splunk to send logs through the Worker, to dual-write to Datadog.
+This guide walks you through deploying the Worker in your common tools cluster and configuring your Splunk Heavy/Universal Forwarders to send logs through the Worker, to dual-write to Datadog.
 
 {{< img src="observability_pipelines/guide/splunk/setup2.png" alt="A diagram of a couple of Splunk Heavy Forwarders sending their data through the Observability Pipelines aggregator." >}}
 
 ## Assumptions
-* You are using a log collector that is compatible with the Splunk HTTP Event Collector (HEC) protocol.
+* You are using a Splunk Heavy/Universal Forwarder, or a log collector compatible with the Splunk HTTP Event Collector (HEC) protocol.
 * You have administrative access to the collectors and the Splunk index where logs will be sent to.
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
@@ -376,21 +374,40 @@ module "opw" {
     }
     pipeline-config = <<EOT
 sources:
-  splunk_receiver:
+  splunk_hec_receiver:
     type: splunk_hec
     address: 0.0.0.0:8088
     valid_tokens:
-        - $${SPLUNK_TOKEN}
+        - ${SPLUNK_TOKEN}
+
+  ## This source receives log data directly from Splunk Universal and
+  ## Heavy Forwarders (with attendant tcpout configuration).
+  splunk_forwarders:
+    type: socket
+    address: 0.0.0.0:8099
+    mode: tcp
+    host_key: ""
+    port_key: ""
 
 transforms:
+  ## This step removes an unnecessary attribute from logs received from
+  ## Splunk Forwarders.
+  splunk_forwarder_cleanup:
+    type: remap
+    inputs:
+      - splunk_forwarders
+    source: |-
+      del(.source_type)
+
   ## This is a placeholder for your own remap (or other transform)
   ## steps with tags set up. Datadog recommends these tag assignments.
   ## They show which data has been moved over to OP and what still needs
   ## to be moved.
-  LOGS_YOUR_STEPS:
+  logs_enrich:
     type: remap
     inputs:
-      - splunk_receiver
+      - splunk_hec_receiver
+      - splunk_forwarder_cleanup
     source: |
       .sender = "observability_pipelines_worker"
       .opw_aggregator = get_hostname!()
@@ -403,7 +420,7 @@ sinks:
   datadog_logs:
     type: datadog_logs
     inputs:
-      - LOGS_YOUR_STEPS
+      - logs_enrich
     default_api_key: "$${DD_API_KEY}"
     compression: gzip
     buffer:
@@ -412,7 +429,7 @@ sinks:
   splunk_logs:
     type: splunk_hec_logs
     inputs:
-      - LOGS_YOUR_STEPS
+      - logs_enrich
     endpoint: <SPLUNK HEC ENDPOINT>
     default_token: $${SPLUNK_TOKEN}
     encoding:
@@ -575,10 +592,27 @@ By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect Splunk forwarders to the Observability Pipelines Worker
-After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing collectors to point to the Worker.
+After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing forwarders and collectors to point to the Worker.
 
-You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
+## Connect Splunk Forwarders to the Observability Pipelines Worker
+You can update your Splunk Heavy/Universal Forwarders to point to the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
+
+For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
+
+To point your forwarders at the Worker, add the following configuration to the forwarder's `etc/system/local/outputs.conf`:
+
+```
+[tcpout]
+compressed=false
+sendCookedData=false
+defaultGroup=opw
+
+[tcpout:opw]
+server=<URL>:8099
+```
+
+## Connect collectors to the Observability Pipelines Worker
+You can update most HEC-compatible collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
 
 For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
 

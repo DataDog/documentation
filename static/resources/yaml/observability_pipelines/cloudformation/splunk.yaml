@@ -121,6 +121,19 @@ Resources:
           - InstanceSecurityGroup
           - GroupId
   
+  # Allow ingress to the Splunk tcpout port.
+  InstanceSecurityGroupTCPIngress8099:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      IpProtocol: tcp
+      FromPort: 8099
+      ToPort: 8099
+      SourceSecurityGroupId: !Ref NLBSecurityGroup
+      GroupId:
+        Fn::GetAtt:
+          - InstanceSecurityGroup
+          - GroupId
+  
   # Allow egress to anywhere.
   InstanceSecurityGroupTCPEgress:
     Type: AWS::EC2::SecurityGroupEgress
@@ -242,6 +255,7 @@ Resources:
       VPCZoneIdentifier: !Ref SubnetIDs
       TargetGroupARNs:
         - !Ref NLBTarget8088
+        - !Ref NLBTarget8099
   
   # This load balancer should be to communicate with the OPW
   # instances. It is set as internal-only, so it is not accessible
@@ -273,6 +287,24 @@ Resources:
       Port: 8088
       VpcId: !Ref VPCID
 
+  NLBListener8099:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Protocol: TCP
+      Port: 8099
+      LoadBalancerArn: !Ref NLB
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: 
+            Ref: NLBTarget8099
+
+  NLBTarget8099:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Protocol: TCP
+      Port: 8099
+      VpcId: !Ref VPCID
+
   NLBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -288,6 +320,18 @@ Resources:
       IpProtocol: tcp
       FromPort: 8088
       ToPort: 8088
+      CidrIp: 0.0.0.0/0
+      GroupId:
+        Fn::GetAtt:
+          - NLBSecurityGroup
+          - GroupId
+
+  NLBSecurityGroupTCPIngress8099:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      IpProtocol: tcp
+      FromPort: 8099
+      ToPort: 8099
       CidrIp: 0.0.0.0/0
       GroupId:
         Fn::GetAtt:

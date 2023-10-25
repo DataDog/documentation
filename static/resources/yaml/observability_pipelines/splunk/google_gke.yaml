@@ -74,13 +74,31 @@ persistence:
 ## for your own processing steps.
 pipelineConfig:
   sources:
-    splunk_receiver:
+    splunk_hec_receiver:
       type: splunk_hec
       address: 0.0.0.0:8088
       valid_tokens:
           - ${SPLUNK_TOKEN}
 
+    ## This source receives log data directly from Splunk Universal and
+    ## Heavy Forwarders (with attendant tcpout configuration).
+    splunk_forwarders:
+      type: socket
+      address: 0.0.0.0:8099
+      mode: tcp
+      host_key: ""
+      port_key: ""
+
   transforms:
+    ## This step removes an unnecessary attribute from logs received from
+    ## Splunk Forwarders.
+    splunk_forwarder_cleanup:
+      type: remap
+      inputs:
+        - splunk_forwarders
+      source: |-
+        del(.source_type)
+
     ## This is a placeholder for your own remap (or other transform)
     ## steps with tags set up. Datadog recommends these tag assignments.
     ## They show which data has been moved over to OP and what still needs
@@ -88,7 +106,8 @@ pipelineConfig:
     logs_enrich:
       type: remap
       inputs:
-        - splunk_receiver
+        - splunk_hec_receiver
+        - splunk_forwarder_cleanup
       source: |
         .sender = "observability_pipelines_worker"
         .opw_aggregator = get_hostname!()
