@@ -47,7 +47,7 @@ For additional definitions and descriptions of important APM terms such as _span
 
 After [instrumenting your application][3], the [Service Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/service_list.png" alt="service list" >}}
+{{< img src="tracing/visualization/service_catalog.png" alt="Service Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
