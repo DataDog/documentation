@@ -36,4 +36,4 @@ To create a facet on a tag that has the same key as a reserved attribute:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[2]: /service_management/events/explorer/#create-a-facet
+[2]: /service_management/events/explorer/facets

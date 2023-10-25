@@ -169,6 +169,6 @@ Use the query to control what's displayed in your Events Analytics:
 
 [1]: /logs/explorer/search_syntax/
 [2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[3]: /service_management/events/explorer/#create-a-facet
+[3]: /service_management/events/explorer/facets
 [4]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [5]: /monitors/notify/
