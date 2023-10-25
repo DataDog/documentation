@@ -29,37 +29,16 @@ further_reading:
 ## Compatibility
 
 Supported test frameworks:
-* Jest >= 24.8.0
-  * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
-  * Only [`jest-circus`][1] is supported as [`testRunner`][2].
-  * Jest >= 28 is only supported from `dd-trace>=2.7.0`.
-  * [`test.concurrent`](#jests-testconcurrent) is not supported.
-* Mocha >= 5.2.0
-  * Mocha >= 9.0.0 has [partial support](#known-limitations).
-  * Mocha [parallel mode](#mocha-parallel-tests) is not supported.
-* Cucumber-js >= 7.0.0
-  * Cucumber-js [parallel mode](#cucumber-parallel-tests) is not supported.
-* Cypress >= 6.7.0
-  * From `dd-trace>=1.4.0`.
-* Playwright >= 1.18.0
-  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
+
+| Test Framework | Version | Notes |
+|---|---|---|
+| Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>Jest >= 28 is only supported from `dd-trace>=2.7.0`.<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
+| Mocha | >= 5.2.0 | Mocha >= 9.0.0 has [partial support](#known-limitations).<br><br>Mocha [parallel mode](#mocha-parallel-tests) is not supported. |
+| Cucumber | >= 7.0.0 | Cucumber-js [parallel mode](#cucumber-parallel-tests) is not supported. |
+| Cypress | >= 6.7.0 | From `dd-trace>=1.4.0`. |
+| Playwright | >= 1.18.0 | From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line. |
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
-
-### Test suite level visibility compatibility
-[Test suite level visibility][3] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
-
-* Jest >= 24.8.0
-  * From `dd-trace>=3.10.0`.
-  * Only [`jest-circus`][1] is supported as [`testRunner`][2].
-* Mocha >= 5.2.0
-  * From `dd-trace>=3.10.0` and `dd-trace>=2.12.0` for 2.x release line.
-* Playwright >= 1.18.0
-  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
-* Cypress >= 6.7.0
-  * From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line.
-* Cucumber >= 7.0.0
-  * From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line.
 
 ## Configuring reporting method
 
@@ -607,10 +586,8 @@ When you use this approach, both the testing framework and CI Visibility can tel
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
 [2]: https://jestjs.io/docs/configuration#testrunner-string
-[3]: /continuous_integration/tests/#test-suite-level-visibility
 [4]: /tracing/trace_collection/dd_libraries/nodejs
 [5]: https://github.com/DataDog/dd-trace-js#version-release-lines-and-maintenance
 [6]: https://istanbul.js.org/

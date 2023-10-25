@@ -26,7 +26,7 @@ The [Pipelines page][101] is useful for developers who want to keep an eye on th
 
 This page answers the following questions:
 
-- Is the pipeline for your service succeeding, especially on the default branch?
+- Is the pipeline for your service performant and reliable, especially on the default branch?
 - If not, what's the root cause?
 
 You can access high-level accumulation and trends, including:
@@ -40,11 +40,11 @@ You can access high-level accumulation and trends, including:
 
 To see your pipelines, navigate to [**CI** > **Pipelines**][101].
 
-The [Pipelines page][101] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
+The [Pipelines page][101] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
 
-Metrics shown include build frequency, failure rate, average duration, and 95th percentile duration. This information reveals which pipelines are high-usage and potentially high resource consumers. The last build result, duration, and last runtime show you the effect of the last commit.
+The metrics shown include build frequency, failure rate, median duration, and change in median duration on both an absolute and relative basis. This information reveals which pipelines are high-usage and potentially high-resource consumers, or are experiencing regressions. The last build result, duration, and last runtime shows you the effect of the last commit.
 
-You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error.
+You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error. If you are using [Datadog Teams][106], you can filter for specific pipelines associated to your team using [custom tags][107] that match team handles.
 
 ## Pipeline details and executions
 
@@ -74,10 +74,26 @@ Job log collection is supported for the following providers:
 - [GitLab][104]
 - [Jenkins][105]
 
+#### AI-generated log summaries
+
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+
+This feature is in private beta. To request access, fill out [this form][108].
+{{% /site-region %}}
+{{% site-region region="gov" %}}
+
+AI-generated log summaries are not available for the {{< region-param key="dd_site_name" >}} site.
+{{% /site-region %}}
+
+Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
+
 [101]: https://app.datadoghq.com/ci/pipelines
 [103]: /continuous_integration/pipelines/github/#enable-log-collection
 [104]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [105]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
+[106]: /account_management/teams/ 
+[107]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[108]: https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform
 
 {{% /tab %}}
 {{% tab "Tests" %}}

@@ -64,6 +64,8 @@ dependencies {
 
 See the [Android sample application][3] for an example of how to set up the SDK.
 
+[3]: https://github.com/DataDog/dd-sdk-android/tree/develop/sample
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -571,4 +573,3 @@ For instructions on setting up Mobile Session Replay, see [Mobile Session Replay
 
 [1]: /real_user_monitoring/session_replay/mobile/
 [2]: https://stackoverflow.com/a/75298544
-[3]: https://github.com/DataDog/dd-sdk-android/sample

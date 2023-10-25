@@ -86,6 +86,10 @@ Use the [Issues page][7] to review and remediate your organization's security de
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 
+## Subscribe to weekly digest reports
+
+Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
+
 ## Next steps
 
 To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
@@ -104,3 +108,4 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [8]: /security/identity_risks/
 [9]: /security/infrastructure_vulnerabilities/
 [10]: /security/cloud_security_management/setup/
+[11]: https://app.datadoghq.com/security/configuration/reports
