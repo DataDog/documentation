@@ -21,6 +21,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   <thead>
     <th>Operating system</th>
     <th>OS versions</th>
+    <th>Agent 5 versions</th>
     <th>Agent 6 versions</th>
     <th>Agent 7 versions</th>
   </thead>
@@ -29,93 +30,122 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <td>2</td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
     <td>>= 7.0 (wheezy)</td>
+    <td><i class='icon-check-bold'></td>
     <td><= 6.35.0</td>
     <td><= 7.35.0</td>
   </tr>
   <tr>
     <td>>= 8.0 (jessie)</td>
+    <td></td>
     <td>>= 6.36.0</td>
     <td>>= 7.36.0</td>
   </tr>
   <tr>
     <th rowspan='2'>Debian (SysVinit)</th>
     <td>>= 7.0 (wheezy)</td>
+    <td></td>
     <td>6.6.0 - 6.36.0</td>
     <td><= 7.35.0</td>
   </tr>
   <tr>
     <td>>= 8.0 (jessie)</td>
+    <td></td>
     <td>>= 6.36.0</td>
     <td>>= 7.36.0</td>
   </tr>
   <tr>
-    <th rowspan='5'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
+    <th rowspan='6'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
+    <td>>= 12.04</td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>>= 14.05</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 16.04</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 18.04</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 20.04</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 22.04</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
-    <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
+    <td>>= 5.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>>= 6.0</td>
+    <td></td>
     <td>>= 6.33.0</td>
     <td>>= 7.33.0</td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/redhat/'>AlmaLinux /<br>Rocky</a></th>
     <td>>= 8.0</td>
+    <td></td>
     <td>>= 6.33.0</td>
     <td>>= 7.33.0</td>
   </tr>
   <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/suse/'>SUSE Enterprise Linux (systemd)</a></th>
     <td>11 SP4</td>
+    <td><i class='icon-check-bold'></td>
     <td><= 6.32.4</td>
     <td><= 7.32.4</td>
   </tr>
   <tr>
     <td>>= 12.0</td>
+    <td></td>
     <td>>= 6.33.0</td>
     <td>>= 7.33.0</td>
   </tr>
   <tr>
     <th>SUSE Enterprise Linux (SysVinit)</th>
     <td>11 SP4</td>
+    <td></td>
     <td>6.16.0 - 6.33.0</td>
     <td>7.16.0 - 7.33.0</td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/suse/'>OpenSUSE (systemd)</a></th>
     <td>>= 15.0</td>
+    <td></td>
     <td>>= 6.33.0</td>
     <td>>= 7.33.0</td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/fedora/'>Fedora</a></th>
-    <td>>= 26.0</td>
+    <td>>= 26</td>
+    <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
@@ -203,6 +233,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   <thead>
     <th>Operating system</th>
     <th>OS versions</th>
+    <th>Agent 5 versions</th>
     <th>Agent 6 versions</th>
     <th>Agent 7 versions</th>
     <th>Notes</th>
@@ -210,31 +241,43 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   <tr>
     <th rowspan=2><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2012</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td></td>
   </tr>
   <tr>
     <td>2008 R2</td>
+    <td><i class='icon-check-bold'></td>
     <td><= 6.45.1 </td>
     <td><= 7.45.1</td>
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
-    <td rowspan=3>Windows</td>
+    <td rowspan=4>Windows</td>
+    <td>>= 7</td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
     <td>>= 8.1</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td></td>
   </tr>
   <tr>
     <td>10</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td></td>
   </tr>
   <tr>
     <td>11</td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -248,31 +291,42 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 ## 64-BIT X86
 
-| macOS version | Agent 6 | Agent 7 |
-|---------------|---------|---------|
-| >= 10.12 | <= 6.34.0 | <= 7.34.0 |
-| >= 10.13 | 6.35.0 - 6.3.2 | <= 7.38.0 |
-| >= 10.14 |           | >= 7.39.0 |
+| macOS version | Agent 5 | Agent 6 | Agent 7 |
+|---------------|---------|---------|---------|
+| >= 10.10 | <= 5.11.3 |||
+| >= 10.12 || <= 6.34.0 | <= 7.34.0 |
+| >= 10.13 || 6.35.0 - 6.3.2 | <= 7.38.0 |
+| >= 10.14 ||           | >= 7.39.0 |
 
 ## Apple ARM64
 
-| macOS version | Agent 6 | Agent 7 |
-|---------------|---------|---------|
-| >= 11.0 |  | >= 7.39.0 |
-| >= 12.0 |  | >= 7.39.0 |
-| >= 13.0 |  | >= 7.39.0 |
+| macOS version  | Agent 7 |
+|----------------|---------|
+| >= 11.0 | >= 7.39.0 |
+| >= 12.0 | >= 7.39.0 |
+| >= 13.0 | >= 7.39.0 |
 
 {{% /tab %}}
 
 {{% tab "Cloud and containers" %}}
 
-Agents 6 and 7 support the following platforms:
+## 64-BIT X86 support
+
+| Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
+|-------|-------------|-----------------|--------------------------|
+| 5 | >= 1.12 | 1.3 - 1.8 ||
+| 6 | >= 1.12 | >= 1.3| All versions |
+| 7 | >= 1.12 | >= 1.3| All versions |
+
+
+## 64-BIT ARM V8 support
+
+Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
 | Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
 |-------------|--------------------|-----------------------|--------------------|
-| [Docker][5] | >= 1.12            | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [Kubernetes][6] | >= 1.3 | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [Azure Stack HCI OS][7] | All versions | | <i class='icon-check-bold'> |
+| [Docker][5] | >= 1.12      | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Kubernetes][6] | >= 1.3   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
 
 [5]: /agent/docker/
