@@ -85,7 +85,17 @@ export function handleLanguageBasedRedirects() {
         const langCookie = Cookies.get('lang_pref');
         let tmpCurLang = curLang.length == 0 ? ['en'] : curLang;
         let firstTimeFlag = false;
+
+        if (!langCookie) {
+            console.log('lang cookie not found');
+        }
+        
+        // If the lang cookie is not found
+        //// OR
+        // the lang cookie value is not equal to the lang found in the URL
+        // Then set the lang cookie to equal whatever is in the URL (or set it to default EN)
         if (!langCookie || langCookie != tmpCurLang[0]) {
+            console.log('first time flag true');
             firstTimeFlag = true;
             Cookies.set("lang_pref", tmpCurLang[0], { path: cookiePath, domain: cookieDomain });
         }
