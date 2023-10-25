@@ -325,6 +325,6 @@ Refer to the [language-specific APM instrumentation docs][1] for tracer setting.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/setup/
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /tracing/guide/security/#replace-rules
+[3]: /tracing/setup/
