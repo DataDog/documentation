@@ -14,7 +14,7 @@ further_reading:
 
 [Micrometer][1] is a vendor neutral interface that allows access to a metric with the ability to analyze across its dimensions. Often used with a Java Springboot application, it is used as an abstraction layer to submit metrics.
 
-Micrometer is flexible and offers multiple ways to integrate with Datadog. This guide outlines Datadog's recommended options you can use with the Agent to send metrics with Micrometer to Datadog.
+Micrometer offers multiple ways to integrate with Datadog. This guide outlines Datadog's recommended options to use with the Agent to send metrics to Datadog.
 
 ## OpenTelemetry
 
