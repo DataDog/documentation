@@ -111,6 +111,7 @@ The `ddtrace` library includes support for the following libraries:
 | [gevent][52]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [loguru][65]      | >= 0.4.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#loguru     |
 | [Jinja2][55]      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
@@ -189,3 +190,4 @@ The `ddtrace` library includes support for the following libraries:
 [62]: https://snowflake.com/
 [63]: https://opensearch.org/
 [64]: https://www.structlog.org/en/stable/
+[65]: https://loguru.readthedocs.io/en/stable/
