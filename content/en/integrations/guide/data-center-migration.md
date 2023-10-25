@@ -72,8 +72,7 @@ The `datadog-sync-cli` tool does not migrate intake data such as ingested logs o
 
 ### Migrate integrations and real-time data
 
-Integrations
-: Migrating to another data center requires you to re-add your integration.
+Migrating to another data center requires you to re-add your integrations.
 
 
 Next, configure the sources that send data to Datadog (the Datadog Agent, API, and more) to point to the new data center. To maintain historical metrics and prevent data loss, you have two options:
