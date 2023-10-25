@@ -1,5 +1,5 @@
 ---
-title: Supported platforms
+title: Supported Platforms
 kind: Documentation
 disable_toc: false
 further_reading:
