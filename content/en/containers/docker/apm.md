@@ -318,7 +318,7 @@ docker run -d --name app \
               company/app:latest
 ```
 
-Refer to the [language-specific APM instrumentation docs][1] for tracer setting.
+Refer to the [language-specific APM instrumentation docs][3] for tracer settings.
 
 ## Further Reading
 
