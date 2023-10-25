@@ -1,15 +1,21 @@
 ---
 title: Azure
 kind: documentation
-disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/aws"
   tag: "Documentation"
-  text: "Gain insights in your AWS bill"
+  text: "Gain insights into your AWS bill"
+- link: "/cloud_cost_management/google_cloud"
+  tag: "Documentation"
+  text: "Gain insights into your Google Cloud bill"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 

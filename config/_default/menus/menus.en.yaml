@@ -943,16 +943,21 @@ main:
     parent: cloud_cost_top_level
     identifier: ccm_azure
     weight: 2
+  - name: Google Cloud
+    url: cloud_cost_management/google_cloud
+    parent: cloud_cost_top_level
+    identifier: ccm_google_cloud
+    weight: 3
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 3
+    weight: 4
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 4
+    weight: 5
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -2298,12 +2303,32 @@ main:
     url: continuous_integration/tests/setup/junit_xml/
     parent: ci_tests_setup
     identifier: ci_tests_setup_junit_xml
-    weight: 102
+    weight: 107
   - name: Tests in Containers
     url: continuous_integration/tests/containers/
     parent: ci_tests
     identifier: ci_tests_containers
     weight: 103
+  - name: Developer Workflows
+    url: continuous_integration/tests/developer_workflows
+    parent: ci_tests
+    identifier: ci_tests_developer_workflows
+    weight: 104
+  - name: Code Coverage
+    url: continuous_integration/tests/code_coverage
+    parent: ci_tests
+    identifier: ci_tests_code_coverage
+    weight: 105
+  - name: Instrument Browser Tests with RUM
+    url: continuous_integration/tests/browser_tests
+    parent: ci_tests
+    identifier: ci_tests_browser_tests
+    weight: 106
+  - name: Instrument Swift Tests with RUM
+    url: continuous_integration/tests/swift_tests
+    parent: ci_tests
+    identifier: ci_tests_swift_tests
+    weight: 107
   - name: Pipeline Visibility
     url: continuous_integration/pipelines/
     parent: ci
@@ -2419,66 +2444,41 @@ main:
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_swift
     weight: 505
-  - name: Integrate Test Visibility
-    url: continuous_integration/integrate_tests/
-    parent: ci
-    identifier: ci_integrate_tests
-    weight: 6
-  - name: Developer Workflows
-    url: continuous_integration/integrate_tests/developer_workflows
-    parent: ci_integrate_tests
-    identifier: ci_integrate_tests_developer_workflows
-    weight: 601
-  - name: Code Coverage
-    url: continuous_integration/integrate_tests/code_coverage
-    parent: ci_integrate_tests
-    identifier: ci_integrate_tests_code_coverage
-    weight: 602
-  - name: Instrument Browser Tests with RUM
-    url: continuous_integration/integrate_tests/browser_tests
-    parent: ci_integrate_tests
-    identifier: ci_integrate_tests_browser_tests
-    weight: 603
-  - name: Instrument Swift Tests with RUM
-    url: continuous_integration/integrate_tests/swift_tests
-    parent: ci_integrate_tests
-    identifier: ci_integrate_tests_swift_tests
-    weight: 604
   - name: Static Analysis
     url: continuous_integration/static_analysis/
     parent: ci
     identifier: ci_static_analysis
-    weight: 7
+    weight: 6
   - name: Rules
     url: continuous_integration/static_analysis/rules
     parent: ci_static_analysis
     identifier: ci_static_analysis_rules
-    weight: 701
+    weight: 601
   - name: CircleCI Orbs
     url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
     identifier: ci_static_analysis_circleci_orbs
-    weight: 702
+    weight: 602
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
-    weight: 703
+    weight: 603
   - name: Quality Gates
     url: continuous_integration/quality_gates/
     parent: ci
     identifier: ci_quality_gates
-    weight: 8
+    weight: 7
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 9
+    weight: 8
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 10
+    weight: 9
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -3398,6 +3398,11 @@ main:
     parent: appsec_threats
     identifier: threats_trace_qualification
     weight: 507
+  - name: Threat Intelligence
+    url: security/application_security/threats/threat-intelligence/
+    parent: appsec_threats
+    identifier: threats_threat_intelligence
+    weight: 508
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
@@ -4624,6 +4629,42 @@ api:
         - DeleteAWSTagFilter
       unstable: []
       order: 3
+  - name: Create an Amazon EventBridge source
+    url: '#create-an-amazon-eventbridge-source'
+    identifier: aws-integration-create-an-amazon-eventbridge-source
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - CreateAWSEventBridgeSource
+      unstable: []
+      order: 11
+  - name: Get all Amazon EventBridge sources
+    url: '#get-all-amazon-eventbridge-sources'
+    identifier: aws-integration-get-all-amazon-eventbridge-sources
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - ListAWSEventBridgeSources
+      unstable: []
+      order: 10
+  - name: Delete an Amazon EventBridge source
+    url: '#delete-an-amazon-eventbridge-source'
+    identifier: aws-integration-delete-an-amazon-eventbridge-source
+    parent: aws-integration
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - DeleteAWSEventBridgeSource
+      unstable: []
+      order: 12
   - name: List namespace rules
     url: '#list-namespace-rules'
     identifier: aws-integration-list-namespace-rules
