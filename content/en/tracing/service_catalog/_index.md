@@ -78,7 +78,7 @@ The **Reliability** tab contains information about the stability of your service
 - Which services have ongoing incidents.
 - Which services have monitors that are triggered.
 
-Click the Settings icon on the right hand corner to hide columns from the service list.
+Click the Settings icon on the right hand corner to hide columns from the list.
 
 ### Performance view
 
@@ -116,7 +116,7 @@ The **Security tab** provides several ways to assess and improve the security po
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
-Click the Settings icon on the right hand corner to hide metric columns from the service list.
+Click the Settings icon on the right hand corner to hide metric columns from the list.
 
 ### Costs view
 The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][19], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
@@ -128,7 +128,7 @@ For more information on a service's cost changes, click on the service row to op
 
 This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][20] and [Tag Pipelines][21]. 
 
-Click the Settings icon on the right hand corner to hide metric columns from the service list.
+Click the Settings icon on the right hand corner to hide metric columns from the list.
 
 ## Investigate a service
 
@@ -192,6 +192,10 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 
 Service color is used in trace visualizations. Click the service type icon to change it.
 
+## Data retention
+The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][22].
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -215,3 +219,4 @@ Service color is used in trace visualizations. Click the service type icon to ch
 [19]: /cloud_cost_management/
 [20]: /cloud_cost_management/?tab=aws
 [21]: /cloud_cost_management/tag_pipelines
+[22]: /developers/guide/data-collection-resolution-retention/

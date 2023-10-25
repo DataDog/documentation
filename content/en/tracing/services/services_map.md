@@ -79,7 +79,7 @@ Additionally, monitors can be tagged by service in the **Say what's happening** 
 
 ### Nodes and edges
 
-Nodes represent services exactly as instrumented in APM and match those in your [Services][4] page. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
+Nodes represent services exactly as instrumented in APM and match those in your [Service Catalog][4]. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
 
 New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days. This takes into account services that do work infrequently, but are an important part of a functioning system.
 
@@ -101,6 +101,6 @@ The Service Map is rendered based on complete traces that include the root spans
 
 [1]: /tracing/glossary/#services
 [3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
-[4]: https://app.datadoghq.com/apm/services
+[4]: https://app.datadoghq.com/services
 [5]: /tracing/glossary/#trace
 [6]: /tracing/troubleshooting/connection_errors
