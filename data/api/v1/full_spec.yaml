@@ -6872,9 +6872,8 @@ components:
             type: string
           type: array
         notify_no_data:
-          default: false
           description: A Boolean indicating whether this monitor notifies when data
-            stops reporting.
+            stops reporting. Defaults to `false`.
           type: boolean
         on_missing_data:
           $ref: '#/components/schemas/OnMissingDataOption'
