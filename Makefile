@@ -94,7 +94,7 @@ node_modules: package.json yarn.lock
 	@yarn install --immutable
 
 source-dd-source:
-	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
+	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,heston/heston/test,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
 
 # All the requirements for a full build
 dependencies: clean hugpython all-examples data/permissions.json source-dd-source update_pre_build node_modules
