@@ -192,6 +192,8 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 
 Service color is used in trace visualizations. Click the service type icon to change it.
 
+{{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
+
 ## Data retention
 The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][22].
 

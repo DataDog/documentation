@@ -61,7 +61,7 @@ For any new source of metrics, logs, or other data, Watchdog requires two weeks 
 
 When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][12].
 
-{{< img src="watchdog/service_list.png" alt="Screenshot of the APM services list page, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
 You can see greater detail about a metric anomaly by navigating to the [Service page][13]. On the top of the page is the Watchdog Insights box. Watchdog Insights helps you discover tag values that are associated with anomalous behaviors, such as higher error rate or latency. 
 

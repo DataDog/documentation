@@ -618,8 +618,8 @@ Navigate to the [APM traces section][19] to see your traces:
 
 Navigate to the [Service Catalog][20] to see all your application services and your application service view:
 
-{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service catalog view in Datadog" >}}
-{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service view in Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/ruby_service.png" alt="Service Catalog in Datadog" >}}
+{{< img src="agent/guide/heroku_ruby/service_page.png" alt="Ruby application service details page in Datadog" >}}
 
 ## Logs
 

@@ -13,7 +13,7 @@ further_reading:
 
 Viewing span and trace data through the lens of your services can ease troubleshooting, prioritize attention, alert to problems, and help you achieve business objectives.
 
-{{< img src="tracing/visualization/service_list.png" alt="service list" >}}
+{{< img src="tracing/visualization/service_obs_catalog.png" alt="Service Catalog" >}}
 
 {{< whatsnext desc="Use the following visualizations and tools to monitor, report, and solve problems in your distributed services" >}}
     {{< nextlink href="tracing/service_catalog/" >}}Services Catalog{{< /nextlink >}}
