@@ -1,7 +1,7 @@
 ---
-title: Datadog Data Center Migration
+title: Plan Your Datadog Data Center Migration
 kind: guide
-description: Learn how to migrate from one Datadog instance to another instance.
+description: Prepare to migrate from one Datadog instance to another instance.
 further_reading:
 - link: "https://github.com/DataDog/datadog-sync-cli"
   tag: "GitHub"
@@ -25,7 +25,7 @@ If you are interested in migrating Datadog data centers, follow these instructio
 
 In a data center migration, resources are duplicated into your new Datadog organization from the old organization. No data is removed from your old Datadog organization. You have access to the old data and resources until the retention period passes and the data in the old organization expires.
 
-This guide walks you through migrating from one Datadog data center to another using the Datadog sync CLI tool (`datadog-sync-cli`) to sync resources across your Datadog organizations and [Dual Shipping][4] to prevent data loss. 
+This guide walks you through planning a migration from one Datadog data center to another using the Datadog sync CLI tool (`datadog-sync-cli`) to sync resources across your Datadog organizations and [Dual Shipping][4] to prevent data loss. 
 
 ## Create a target account for the migration
 
