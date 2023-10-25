@@ -82,6 +82,8 @@ Next, configure the sources that send data to Datadog (the Datadog Agent, API, a
 
 ### Use Dual Shipping
 
+<div class="alert alert-warning">By sending twice the amount of data during the migration, you are billed as if you are maintaining two live Datadog instances.</div>
+
 The following products can use Dual Shipping:
 
 | Product |
@@ -98,7 +100,6 @@ The following products can use Dual Shipping:
 | Cloud Workload Security |
 | Cloud SIEM |
 
-<div class="alert alert-warning">By sending twice the amount of data during the migration, you are billed as if you are maintaining two live Datadog instances.</div>
 
 The following products cannot use Dual Shipping:
 
