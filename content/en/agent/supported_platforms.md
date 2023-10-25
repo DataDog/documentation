@@ -93,7 +93,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/suse/'>SUSE Enterprise Linux (systemd)</a></th>
     <td>11 SP4</td>
-    <td>< 6.33.0</td>
+    <td><= 6.32.4</td>
     <td><= 7.32.4</td>
   </tr>
   <tr>
@@ -121,7 +121,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
 </table>
 
-A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 ## 64-BIT ARM V8
 
@@ -187,7 +187,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
 </table>
 
-A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
@@ -216,8 +216,8 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions in a
   </tr>
   <tr>
     <td>2008 R2</td>
-    <td>< 6.46.0 </td>
-    <td>< 7.46.0</td>
+    <td><= 6.45.1 </td>
+    <td><= 7.45.1</td>
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
   </tr>
   <tr>
@@ -241,7 +241,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions in a
   </tr>
 </table>
 
-A check mark ({{< X >}}) indicates support for all minor and patch versions in a series.
+A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 {{% /tab %}}
 {{% tab "macOS" %}}
