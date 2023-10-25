@@ -266,7 +266,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 {{% tab "Cloud and containers" %}}
 
-Agents >= 6.0 and >= 7.0 support the following platforms:
+Agents 6 and 7 support the following platforms:
 
 | Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
 |-------------|--------------------|-----------------------|--------------------|
