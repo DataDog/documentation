@@ -21,4 +21,5 @@ cascade:
 
 {{< whatsnext desc="Custom metrics guides:" >}}
     {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
+    {{< nextlink href="/metrics/guide/micrometer" >}}Send metrics with Micrometer{{< /nextlink >}}
 {{< /whatsnext >}}
