@@ -57,6 +57,7 @@ cascade:
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}Azure VMs appear in the app without metrics{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}Powered-down Azure VMs on the Infrastructure list{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Commands to install the Azure Datadog extension{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Microsoft Graph API Permissions for Monitoring Azure{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX guides:" >}}
