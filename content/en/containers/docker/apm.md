@@ -292,7 +292,7 @@ tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
 ### Unix Domain Socket (UDS)
-To submit traces via socket, it should be mounted to the Agent container and your application container.
+To submit traces via socket, the socket should be mounted to the Agent container and your application container.
 
 ```bash
 # Datadog Agent
