@@ -20,8 +20,11 @@ aliases:
 
 {{< whatsnext desc="You need either the Lambda extension or the Forwarder to send telemetry from your Lambda functions. You may also need the Forwarder to collect logs for non-Lambda serverless resources, such as Amazon API Gateway." >}}
     {{< nextlink href="/serverless/libraries_integrations/extension/" >}}Datadog Lambda Extension{{< /nextlink >}}
+<!-- vale Datadog.inclusive = NO -->
     {{< nextlink href="https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring" >}}Datadog Forwarder Lambda Function{{< /nextlink >}}
 {{< /whatsnext >}}
+
+<!-- vale Datadog.inclusive = YES -->
 
 ## Datadog Lambda Libraries
 

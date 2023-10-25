@@ -9,6 +9,7 @@ aliases:
     - /graphing/faq/
     - /dashboards/faq/why-is-a-counter-metric-being-displayed-as-a-decimal-value/
 ---
+<!-- vale Datadog.inclusive = NO -->
 
 {{< whatsnext desc="List of Frequently Asked Questions:" >}}
     {{< nextlink href="dashboards/faq/why-isn-t-my-aws-trusted-advisor-dashboard-showing-any-data" >}}Why isn't my AWS Trusted Advisor Dashboard showing any data?{{< /nextlink >}}
@@ -21,3 +22,5 @@ aliases:
     {{< nextlink href="dashboards/faq/the-same-color-is-used-twice-in-my-graph" >}}The same color is used twice in my graph!{{< /nextlink >}}
     {{< nextlink href="dashboards/faq/historical-data" >}}Historical Data{{< /nextlink >}}
 {{< /whatsnext >}}
+
+<!-- vale Datadog.inclusive = YES -->

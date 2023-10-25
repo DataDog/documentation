@@ -9,6 +9,8 @@ further_reading:
   text: "Datadog-MySQL integration"
 ---
 
+<!-- vale Datadog.inclusive = NO -->
+
 This guide explains how to collect custom metrics from SQL Server.
 
 ## Custom queries
@@ -193,6 +195,7 @@ You must set up a temporary table to collect the custom metrics for reporting to
 | `value`  | The value of the metric (must be convertible to a float). |
 | `tags`   | The tags that appear in Datadog separated by a comma.     |
 
+
 The following stored procedure is created within the master database:
 
 ```text
@@ -276,8 +279,6 @@ If your custom metrics do not appear in Datadog, check the Agent log file. If yo
 * The `<PROCEDURE_NAME>` is typed incorrectly.
 * The database username specified in the configuration may not have permission to run the stored procedure.
 
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -292,3 +293,5 @@ If your custom metrics do not appear in Datadog, check the Agent log file. If yo
 [8]: /metrics/explorer/
 [9]: /agent/guide/agent-commands/#agent-status-and-information
 [10]: /agent/guide/agent-log-files
+
+<!-- vale Datadog.inclusive = YES -->
