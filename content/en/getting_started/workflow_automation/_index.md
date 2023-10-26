@@ -46,7 +46,7 @@ To create a workflow with a monitor trigger:
 ### Add the Jira and Slack actions
 To add the Jira step:
 1. On the workflow canvas, click **Add a step to get started**. 
-2. Search for the Jira action and select **Create issue**. Click the **Create issue** step and select your **Jira account**. The account should correspond with the Jira URL found in the **Accounts** section of the Jira integration tile. 
+2. Search for the Jira action and select **Create issue**. Click the **Create issue** step and select your **Jira account**. The account should correspond to the Jira URL found in the **Accounts** section of the Jira integration tile. 
 3. Enter the **Project** and **Issue type** for the Jira issue that the workflow creates. 
 4. Enter a **Summary** and **Description** for the Jira issue, using context variables to pass in data from the monitor that triggers the workflow. You can access a context variable in a step by enclosing it in double braces (`{{`). This following example description uses the source, trigger, and workflow variables to pass along the source that triggered the monitor alert, a link to the affected monitor, the workflow name, and the workflow ID:
 
@@ -96,7 +96,7 @@ Confirm that running the workflow creates a Jira ticket and sends a Slack messag
 
 Scheduled and triggered workflows don't trigger automatically until you publish them. To publish the workflow, click **Publish** from the workflow's page.
 
-<div class="alert alert-info">Testing a workflow connected to active Slack and Jira accounts creates actual Slack posts and Jira tickets.</div>
+<div class="alert alert-info">Testing a workflow connected to active Slack and Jira accounts creates actual Slack messages and Jira tickets.</div>
 
 ## Update the monitor that triggers your workflow
 
