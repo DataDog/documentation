@@ -1,13 +1,13 @@
 ---
 title: Customization
 kind: Documentation
-further_reading:
 ---
 
-<!-- INSERT IMAGE OF OPTIONS -->
+Customize your Events Explorer to fit your visualization and analyzing needs.
+
 ## Options
 
-Click **Options** to customize your Events Explorer:
+Click **Options** to:
 
 - Adjust the columns displayed.
 - Select list density from compact to expanded.

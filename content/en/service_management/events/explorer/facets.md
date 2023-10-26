@@ -1,7 +1,6 @@
 ---
 title: Facets
 kind: Documentation
-disable_toc: false
 further_reading:
 - link: "service_management/events/explorer/attributes"
   tag: "Documentation"
@@ -18,9 +17,9 @@ A facet displays the distinct members of an attribute or a tag and provides basi
 
 ### Create a facet
 
-To create a facet, use the "Add a facet" button in the left side panel.
+To add a facet, use the **+ Add** in the left side panel.
 
-Once you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side-panels. You can also use it to group by in event monitors and graph widgets.
+After you add the facet, the value of this attribute is stored for all new views, and you can use it in the search bar and facet side panels. You can also use it to group by in event monitors and graph widgets.
 
 ## Further reading
 

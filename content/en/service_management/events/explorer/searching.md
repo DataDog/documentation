@@ -1,8 +1,6 @@
 ---
 title: Search Syntax
 kind: Documentation
-aliases:
-- "service_management/events/explorer/#search-syntax"
 further_reading:
 - link: "logs/explorer/search_syntax"
   tag: "Documentation"

@@ -1,10 +1,6 @@
 ---
 title: Analytics
 kind: Documentation
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 ## Overview
@@ -29,7 +25,4 @@ Use the query to control what's displayed in your Events Analytics:
     {{< img src="service_management/events/explorer/time-interval.png" alt="Shows the list of possible time intervals, including the default, 5 seconds." style="width:100%;" >}}
 4. Choose to display either the top or bottom values according to the selected measure.
     {{< img src="service_management/events/explorer/display-values.png" alt="Choose to display the values from the top or from the bottom." style="width:100%;" >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+    

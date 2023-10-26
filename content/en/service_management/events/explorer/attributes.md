@@ -3,15 +3,19 @@ title: Reserved Attributes
 kind: Documentation
 disable_toc: false
 further_reading:
+- link: "/service_management/events/explorer/facets"
+  tag: "Documentation"
+  text: "Learn about Event facets"
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
 ---
 
 ## Overview
-<!-- TODO Add more information on what reserved attributes are -->
 
-### Reserved attributes
+Attributes are used for facets and tags, which are then used to filter and search in the Events Explorer. 
+
+## List of reserved attributes
 
 This list describes automatically ingested reserved attributes with events.
 
@@ -30,10 +34,9 @@ To create a facet on a tag that has the same key as a reserved attribute:
 1. Use the [Remapper processor][1] to remap the tag to another tag or attribute.
 2. Create a [facet][2] on the new tag/attribute.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
+[1]: /logs/log_configuration/processors/?tab=ui#remapper
 [2]: /service_management/events/explorer/facets

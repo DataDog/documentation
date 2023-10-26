@@ -13,20 +13,20 @@ further_reading:
   text: "Troubleshoot faster with improved Datadog Events"
 ---
 
-
 {{< img src="service_management/events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}
 
+Use the Events Explorer to aggregate and view events coming into Datadog. Group or filter events by attribute and graphically represent them with event analytics. Use the query syntax to filter events using Boolean and wildcard operators.
 
-
-
+{{< whatsnext desc="Features of the Events Explorer:" >}}
+    {{< nextlink href="/service_management/events/explorer/searching" >}}Searching{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/navigate" >}}Navigate the Explorer{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/customization" >}}Customization{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/facets" >}}Facets{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/attributes" >}}Attributes{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/notification" >}}Send notifications{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/analytics" >}}Analytics{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /logs/explorer/search_syntax/
-[2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[3]: /service_management/events/explorer/facets
-[4]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[5]: /monitors/notify/

@@ -1,9 +1,6 @@
 ---
 title: Navigate the Explorer
 kind: Documentation
-disable_toc: false
-aliases:
-- /path-to-old-doc/
 further_reading:
 - link: "service_management/events/explorer/saved_views"
   tag: "Documentation"
