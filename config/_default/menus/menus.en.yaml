@@ -2940,7 +2940,7 @@ main:
     parent: observability_pipelines_setup
     weight: 101
   - name: Datadog with Archiving
-    url: observability_pipelines/setup/archives
+    url: observability_pipelines/setup/datadog_with_archiving
     parent: observability_pipelines_setup
     weight: 101
   - name: Splunk

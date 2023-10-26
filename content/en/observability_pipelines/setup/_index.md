@@ -424,7 +424,7 @@ If you want to switch from manually managed deployment to a remote configuration
 
 [1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
 [2]: /observability_pipelines/setup/datadog/
-[3]: /observability_pipelines/setup/archives/
+[3]: /observability_pipelines/setup/datadog_with_archiving/
 [4]: /observability_pipelines/setup/splunk/
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /account_management/api-app-keys/#api-keys
