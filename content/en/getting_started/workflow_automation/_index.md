@@ -55,7 +55,7 @@ The CPU usage is above the 95% threshold for {{ Trigger.hostname }}
 Please investigate - see this Datadog Dashboard to view all workflow executions: 
 https://app.datadoghq.com/dash/integration/workflow_automation?refresh_mode=sliding&from_ts=1698164453793&to_ts=1698168053793&live=true. 
 
-The workflow that created this Jira issue was 
+The workflow that created this Jira issue is 
 {{ WorkflowName }} : {{ WorkflowId }}
 
 The monitor that triggered the workflow can be found here: {{ Source.url }}
@@ -63,10 +63,10 @@ The monitor that triggered the workflow can be found here: {{ Source.url }}
 
 For more information on context variables, see **[Context variables][6]**. 
 
-5. You can test this Jira action by clicking the green **Test** icon in the **Configure** tab of the action.
+5. Test the Jira action by clicking the green **Test** icon in the **Configure** tab of the action.
 6. Save your workflow.
 
-You've set up a step to create a Jira ticket. Next, add the Slack step:
+The previous instructions set up a step to create a Jira ticket. Next, add the Slack step:
 1. Click the plus icon on the workflow canvas to add another step.
 2. Search for the Slack action and select **Send message**.  
 3. Enter the **Slack Workspace name**. 
