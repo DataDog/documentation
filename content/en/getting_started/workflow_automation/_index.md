@@ -89,7 +89,9 @@ To apply your changes, ensure that you save your workflow by clicking **Save**. 
 
 {{< img src="/getting_started/workflow_automation/run_workflow.png" alt="Trigger a workflow manually" style="width:90%;" >}}
 
-To trigger a workflow manually, click **Run** from the workflow page and enter the values for existing trigger variables. Confirm that running the workflow creates a Jira ticket and sends a Slack message as you specified. 
+To trigger the workflow manually, click **Run** from the workflow page, and enter the values for the trigger variables.
+
+Confirm that running the workflow creates a Jira ticket and sends a Slack message as you specified. 
 
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
 
