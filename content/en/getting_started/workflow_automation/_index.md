@@ -37,7 +37,7 @@ To create a workflow with a monitor trigger:
 4. Select **Monitor or Security Signal**.
 5. Click **Create**.
 6. On the workflow canvas, click the **Monitor or Security Signal** trigger. 
-7. In the **Configure** tab, next to `@workflow-` enter the unique ID, `@workflow-Create-Jira-Ticket` for your workflow. Workflow handles always begin with `@workflow-`. Later, you'll use this handle to connect the workflow to a monitor notification. 
+7. In the **Configure** tab, next to `@workflow-`, enter the unique ID `@workflow-Create-Jira-Ticket` for your workflow. Workflow handles always begin with `@workflow-`. Later, you use this handle to connect the workflow to a monitor notification. 
 8. Save your workflow.
 
 {{< img src="/getting_started/workflow_automation/trigger.png" alt="Trigger for Workflows">}}
