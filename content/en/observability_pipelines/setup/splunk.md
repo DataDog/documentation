@@ -16,6 +16,10 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
 ## Overview
@@ -118,7 +122,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 
 ## Setting up the Splunk index
 
-<div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
+<div class="alert alert-info">Observability Pipelines supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input.</div>
 
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
