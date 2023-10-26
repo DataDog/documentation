@@ -169,7 +169,7 @@ You can configure the `datadog_archives` destination using the [configuration fi
 
 ### Configuration file
 
-For manual deployments, the [sample pipelines configuration file][7] for Datadog includes a sink for sending logs to AWS S3 under a Datadog-rehydratable format. 
+For manual deployments, the [sample pipelines configuration file][7] for Datadog includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. 
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -213,16 +213,16 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-7. In the **Bucket** option, enter the name of the S3 bucket you created earlier.
+7. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
 8. Enter `aws_s3` in the **Service** field.
-9. Set the other configuration options based on your use case.
-10. Toggle **AWS S3** to enable those specific configuration options.
-11. Select the storage class in the dropdown menu.
+9. Toggle **AWS S3** to enable those specific configuration options.
+10. In the **Storage Class** field, select the storage class in the dropdown menu.
+11. Set the other configuration options based on your use case.
 
 {{% /tab %}}
 {{% tab "Azure Blob" %}}
 
-7. In the **Bucket** option, select the archives to store the bucket in.
+7. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
 8. Enter `azure_blob` in the **Service** field.
 9. Toggle **Azure Blob** to enable those specific configuration options.
 10. Enter the Azure Blob Storage Account connection string.
@@ -231,7 +231,7 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 {{% /tab %}}
 {{% tab "GCP Cloud Storage" %}}
 
-7. In the **Bucket** option, select the archives to store the bucket in.
+7. In the **Bucket** field, enter the name of the S3 bucket you created earlier.
 8. Enter `gcp_cloud_storage` in the **Service** field.
 9. Toggle **GCP Cloud Storage** to enable those specific configuration options.
 10. Set the configuration options based on your use case.
