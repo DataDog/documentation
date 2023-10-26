@@ -34,7 +34,7 @@ dd-service: my-unmonitored-cron-job
 team: shopist
 contacts:
  - type: slack
-   contact: https://datadogincidents.slack.com/archives/C01EWN6319S
+   contact: https://datadogincidents.slack.com/archives/XXXXX
 application: shopist
 description: important cron job for shopist backend
 tier: tier1
