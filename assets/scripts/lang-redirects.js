@@ -62,12 +62,10 @@ export function handleLanguageBasedRedirects() {
 
     // Remove legacy site-specific domain cookie
     if (Cookies.get('lang_pref', { domain: 'docs.datadoghq.com' })) {
-        console.log('removing legacy cookie: live');
         Cookies.remove('lang_pref', { domain: 'docs.datadoghq.com' });
     }
 
     if (Cookies.get('lang_pref', { domain: 'docs-staging.datadoghq.com' })) {
-        console.log('removing legacy cookie: staging');
         Cookies.remove('lang_pref', { domain: 'docs-staging.datadoghq.com' });
     }
 
@@ -83,25 +81,20 @@ export function handleLanguageBasedRedirects() {
 
         // By default, set the lang_pref cookie based on the url path. This can be overriden by the subsequent logic below
         const langCookie = Cookies.get('lang_pref');
-        let tmpCurLang = curLang.length == 0 ? ['en'] : curLang;
-        let firstTimeFlag = false;
-
-        if (!langCookie) {
-            console.log('lang cookie not found');
-        }
+        const tmpCurLang = curLang.length == 0 ? ['en'] : curLang;
+        let defaultLangFlag = false;
         
-        // If the lang cookie is not found
-        //// OR
-        // the lang cookie value is not equal to the lang found in the URL
-        // Then set the lang cookie to equal whatever is in the URL (or set it to default EN)
-        if (!langCookie) {
-            console.log('first time flag true');
-            firstTimeFlag = true;
+        // If the lang cookie is not found OR the lang cookie value is not equal to the lang found in the URL
+        // then set the lang cookie to equal whatever is in the URL (or set it to default 'en')
+        if (!langCookie || langCookie != tmpCurLang[0]) {
+            defaultLangFlag = true;
             Cookies.set("lang_pref", tmpCurLang[0], { path: cookiePath, domain: cookieDomain });
         }
 
-        // order of precedence: url > cookie > header
+        /** order of precedence: url > cookie > header **/ 
+        // If lang found in the URL
         if (params['lang_pref']) {
+            // If the lang found in the URL is valid
             if (allowedLanguages.indexOf(params['lang_pref']) !== -1) {
                 acceptLanguage = params['lang_pref'];
 
@@ -117,7 +110,8 @@ export function handleLanguageBasedRedirects() {
             }
         }
 
-        else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 && !firstTimeFlag) {
+        // If the lang cookie is found AND it's a valid lang AND the cookie has not already been set by default
+        else if (Cookies.get('lang_pref') && allowedLanguages.indexOf(Cookies.get('lang_pref')) !== -1 && !defaultLangFlag) {
             acceptLanguage = Cookies.get('lang_pref');
 
             logMsg += `Change acceptLanguage based on lang_pref Cookie: ${acceptLanguage}`;
