@@ -93,7 +93,7 @@ To trigger the workflow manually, click **Run** from the workflow page, and ente
 
 Confirm that running the workflow creates a Jira ticket and sends a Slack message as you specified. 
 
-Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click **Publish** from the workflow's page.
+Scheduled and triggered workflows don't trigger automatically until you publish them. To publish the workflow, click **Publish** from the workflow's page.
 
 <div class="alert alert-info">If you are testing a workflow with an active Slack and Jira account, then actual Slack posts and Jira tickets are created.</div>
 
