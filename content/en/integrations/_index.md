@@ -88,12 +88,12 @@ cascade:
     path: /integrations/stormforge_license.md
   aliases:
     - /integrations/stormforge_stormforge_license/
-- _target:
-    path: /integrations/*.md
-  algolia:
-    rank: 60
-    category: Documentation
-    subcategory: Integrations
+# - _target:
+#     path: /integrations/*.md
+#   algolia:
+#     rank: 60
+#     category: Documentation
+#     subcategory: Integrations
 
 ---
 
