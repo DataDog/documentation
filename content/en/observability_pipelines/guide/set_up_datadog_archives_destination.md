@@ -1,5 +1,5 @@
 ---
-title: Datadog Archives Destination
+title: Set Up the Datadog Archives Destination
 kind: documentation
 disable_toc: false
 further_reading:
