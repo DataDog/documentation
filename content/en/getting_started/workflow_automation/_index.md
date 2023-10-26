@@ -74,10 +74,10 @@ You've set up a step to create a Jira ticket. Next, add the Slack step:
 5. For a more useful Slack notification, use step output variables. Step output variables allow you to pass data from the Jira step to the Slack step in your workflow. Use the following message text to include the Jira issue key and Jira issue in the Slack message:
 
 ```
-The monitor named, {{ Source.monitor.name }}, was triggered and created a new Jira issue 
+The monitor named {{ Source.monitor.name }} triggered and created a new Jira issue 
 {{ Steps.Create_issue.issueKey }}: {{ Steps.Create_issue.issueUrl }}
 
-The workflow that created this Jira issue was {{ WorkflowName }}
+The workflow that created this Jira issue is {{ WorkflowName }}
 ```
 
 6. You can test this Slack action by clicking the green **Test** icon in the **Configure** tab of the action.
