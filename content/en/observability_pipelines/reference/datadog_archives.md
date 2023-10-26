@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for OP Worker version 1.5 and later.
+The Observability Pipelines Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for Observability Pipelines (OP) Worker version 1.5 and later.
 
 ## Configure a Log Archive
 
@@ -37,7 +37,7 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
 1. Optionally, add tags.
 1. Click **Create bucket**.
 
-### Set up an IAM policy that allows OP Workers to write to the S3 bucket
+### Set up an IAM policy that allows Workers to write to the S3 bucket
 
 1. Navigate to the [IAM console][3].
 1. Select **Policies** in the left side menu.
@@ -75,7 +75,7 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
 
 Create an IAM user and attach the IAM policy you created earlier to it.
 
-1. Navigate to the IAM console.
+1. Navigate to the [IAM console][1].
 1. Select **Users** in the left side menu.
 1. Click **Create user**.
 1. Enter a user name.
@@ -87,6 +87,8 @@ Create an IAM user and attach the IAM policy you created earlier to it.
 1. Click **Create user**.
 
 Create access credentials for the new IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+[1]: https://console.aws.amazon.com/iam/
 
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
@@ -104,7 +106,7 @@ Create access credentials for the new IAM user. Save these credentials as `AWS_A
 
 Create an IAM user and attach the IAM policy you created earlier to it.
 
-1. Navigate to the IAM console.
+1. Navigate to the [IAM console][1].
 1. Select **Users** in the left side menu.
 1. Click **Create user**.
 1. Enter a user name.
@@ -116,6 +118,8 @@ Create an IAM user and attach the IAM policy you created earlier to it.
 1. Click **Create user**.
 
 Create access credentials for the new IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+[1]: https://console.aws.amazon.com/iam/
 
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
@@ -124,7 +128,7 @@ Create access credentials for the new IAM user. Save these credentials as `AWS_A
 
 Create an IAM user and attach the IAM policy you created earlier to it.
 
-1. Navigate to the IAM console.
+1. Navigate to the [IAM console][1].
 1. Select **Users** in the left side menu.
 1. Click **Create user**.
 1. Enter a user name.
@@ -136,6 +140,8 @@ Create an IAM user and attach the IAM policy you created earlier to it.
 1. Click **Create user**.
 
 Create access credentials for the new IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+[1]: https://console.aws.amazon.com/iam/
 
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
