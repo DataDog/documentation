@@ -27,6 +27,9 @@ As of dd-trace-java 1.0.0, you have two options for the engine that generates pr
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
 
+Supported operating systems:
+- Linux
+
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
 - Oracle JDK 8u352+, 11.0.17+, 17.0.5+
@@ -39,6 +42,10 @@ The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there
 {{% /tab %}}
 
 {{% tab "JFR" %}}
+
+Supported operating systems:
+- Linux
+- Windows
 
 Minimum JDK versions:
 - OpenJDK [1.8.0.262/8u262+][3], 11+ (including builds on top of it: Amazon Corretto, and others)

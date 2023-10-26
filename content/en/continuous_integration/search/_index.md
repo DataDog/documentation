@@ -15,6 +15,10 @@ further_reading:
   text: "Learn how to manage flaky tests"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+  
 ## Overview
 
 {{< tabs >}}
@@ -73,6 +77,12 @@ Job log collection is supported for the following providers:
 - [GitHub Actions][103]
 - [GitLab][104]
 - [Jenkins][105]
+
+#### AI-generated log summaries
+
+<div class="alert alert-info">AI-generated log summaries are in private beta. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+
+Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
 
 [101]: https://app.datadoghq.com/ci/pipelines
 [103]: /continuous_integration/pipelines/github/#enable-log-collection
