@@ -17,7 +17,7 @@ If services that you know are instrumented for APM are not appearing in the Serv
 
 ## Extra services are discovered as an artifact of APM instrumentation 
 
-Certain services like my-service-mysql or my-service-mongodb, my-service-http-client are auto-discovered by APM. If you want to remove them from your Service Catalog, you can opt into the [inferred services beta][4]. 
+Certain services like my-service-mysql, my-service-mongodb, or my-service-http-client are auto-discovered by APM. If you want to remove them from your Service Catalog, you can opt into the [inferred services beta][4]. 
 
 ## SLOs not listed in Setup Guidance section
 
