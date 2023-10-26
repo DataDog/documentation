@@ -23,4 +23,4 @@ After you add the facet, the value of this attribute is stored for all new views
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}ƒ
+{{< partial name="whats-next/whats-next.html" >}}
