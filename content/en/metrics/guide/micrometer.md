@@ -4,10 +4,10 @@ kind: Guide
 further_reading:
 - link: "https://micrometer.io/docs/registry/otlp"
   tag: "Micrometer"
-  text: "Micrometer Prometheus"
+  text: "Micrometer OTLP"
 - link: "https://micrometer.io/docs/registry/prometheus"
   tag: "Micrometer"
-  text: "Micrometer OTLP"
+  text: "Micrometer Prometheus"
 ---
 
 ## Overview
