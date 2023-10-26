@@ -12,13 +12,13 @@ further_reading:
 
 ## Overview
 
-[Micrometer][1] is a vendor neutral interface that allows access to a metric with the ability to analyze across its dimensions. Often used with a Java Springboot application, it is used as an abstraction layer to submit metrics.
+[Micrometer][1] is a vendor-neutral interface that allows access to metrics with the ability to analyze them across their dimensions. Often used with a Java Spring Boot application as an abstraction layer to submit metrics.
 
 Micrometer offers multiple ways to integrate with Datadog. This guide outlines Datadog's recommended options to use with the Agent to send metrics to Datadog.
 
 ## OpenTelemetry
 
-OTLP Ingestion by the Datadog Agent allows you to take advantage of observability feature in the Datadog Agent.
+OpenTelemetry Protocol (OTLP) Ingestion by the Datadog Agent allows you to take advantage of observability feature in the Datadog Agent.
 
 {{< whatsnext desc="See the configuration outlined in the following documentation:" >}}
     {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}OTLP Ingestion by the Datadog Agent{{< /nextlink >}}
