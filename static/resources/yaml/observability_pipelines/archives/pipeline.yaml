@@ -87,7 +87,7 @@ sinks:
     buffer:
       type: disk
       max_size: 51539607552
-  ## This sink writes logs to an S3 bucket of your choice, in a format that Datadog
+  ## This sink writes logs to an Amazon S3 bucket of your choice, in a format that Datadog
   ## can rehydrate from. You need to fill in the ${DD_ARCHIVES_BUCKET}
   ## and ${DD_ARCHIVES_REGION} parameters to fit your S3 configuration.
   datadog_archives:

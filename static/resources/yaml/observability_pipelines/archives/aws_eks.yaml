@@ -55,10 +55,10 @@ service:
     ## to keep things within the availability zone, which kube-proxy might change.
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 
-## This service account allows the Worker to write to S3 for the `datadog_archives` sink.
+## This service account allows the Worker to write to Amazon S3 for the `datadog_archives` sink.
 ## You need to create the service account yourself, see the instructions for more details:
 ##
-## https://docs.datadoghq.com/observability_pipelines/setup/datadog/?tab=awseks
+## https://docs.datadoghq.com/observability_pipelines/setup/archives/
 serviceAccount:
   create: false
   name: ${DD_ARCHIVES_SERVICE_ACCOUNT}
