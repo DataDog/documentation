@@ -51,7 +51,7 @@ With this feature enabled, Observability Pipelines Worker does not respond to ag
 
 ### Handling node failures
 
-Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgements. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
+Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgments. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
 
 ### Handling disk failures
 

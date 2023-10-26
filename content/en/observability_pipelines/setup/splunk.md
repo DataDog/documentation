@@ -122,7 +122,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 
 ## Setting up the Splunk index
 
-<div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
+<div class="alert alert-info">Observability Pipelines supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input.</div>
 
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
