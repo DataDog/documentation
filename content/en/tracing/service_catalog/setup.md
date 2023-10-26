@@ -23,7 +23,7 @@ further_reading:
 
 Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. If you are not, there are many other ways to add services to your Service Catalog.
 
-## Create User-defined Services
+## Create user-defined services
 
 You can create additional services that are not associated with any Datadog telemetry in Service Catalog. To create such an entry, name your service in the `dd-service` service field in any supported metadata schema versions. For example: 
 
