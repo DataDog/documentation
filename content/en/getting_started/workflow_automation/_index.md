@@ -95,14 +95,14 @@ Confirm that running the workflow creates a Jira ticket and sends a Slack messag
 
 Scheduled and triggered workflows don't trigger automatically until you publish them. To publish the workflow, click **Publish** from the workflow's page.
 
-<div class="alert alert-info">If you are testing a workflow with an active Slack and Jira account, then actual Slack posts and Jira tickets are created.</div>
+<div class="alert alert-info">Testing a workflow connected to active Slack and Jira accounts creates actual Slack posts and Jira tickets.</div>
 
 ## Update the monitor that triggers your workflow
 
 1. Navigate to the [Monitors page][7] in Datadog.
 2. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-3. In the message section, add the full workflow mention name to an alert notification. The mention name should start with `@workflow-`. For example, `@workflow-Create-Jira-Ticket`
-    - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname=host.name)`
+3. In the message section, add the full workflow mention name to an alert notification. The mention name starts with `@workflow-`. For example, `@workflow-Create-Jira-Ticket`.
+    - You can pass trigger variables into the workflow by using a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-Create-Jira-Ticket(hostname=host.name)`.
 4. Click **Test Notifications** to test the workflow and all of this monitor's notifications. 
 5. Save the monitor. 
 
@@ -112,17 +112,17 @@ Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
 ## Run history
 
-Once you trigger the workflow you can watch its progress and debug failed steps in the **Run History** view. Select an executed step to see the inputs, outputs, execution context, and error messages. The example below shows a step that failed due to an invalid Jira configuration. 
+Once you trigger the workflow, you can watch its progress and debug failed steps in the **Run History** view. Select an executed step to see the inputs, outputs, execution context, and error messages. The example below shows a step that failed due to an invalid Jira configuration. 
 
 {{< img src="/getting_started/workflow_automation/testing_the_workflow.mp4" alt="Preview of Workflow Testing" style="width:100%" video=true >}}
 
 To make edits to your workflow, click **Configuration**. To get back to the run history view, click **Run History**. 
 
-To view a list of previous workflow executions and whether each execution succeeded or failed, you can use the initial run history view. You can return to the initial execution history at any time by clicking on the workflow canvas. 
+To view a list of previous workflow executions and whether each execution succeeded or failed, use the initial run history view. Return to the initial execution history at any time by clicking on the workflow canvas. 
 
 ## Conclusion
 
-You're done! When the monitor triggers the workflow, it creates a Jira issue for your engineering team to review. Here is an example Jira issue:
+When the monitor triggers the workflow, it creates a Jira issue for your engineering team to review. Here is an example Jira issue:
 
 {{< img src="/getting_started/workflow_automation/jira_ticket.png" alt="Jira ticket that is generated from the workflow">}}
 
@@ -132,7 +132,7 @@ The workflow also creates a Slack message to notify your team of the Jira issue 
 
 ## What's next? 
 
-* Explore the list of all available workflow actions by leveraging the [Actions Catalog][8]. 
+* Explore the list of all available workflow actions in the [Actions Catalog][8]. 
 * Build a workflow from an out of the box [blueprint][9].
 * Use the [HTTP action][10] to make a request to any endpoint.
 * Implement [data transformation][11] actions to perform necessary operations on the information flowing through your workflow.
