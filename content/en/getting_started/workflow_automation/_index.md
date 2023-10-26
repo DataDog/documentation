@@ -2,16 +2,17 @@
 title: Getting Started with Workflow Automation
 kind: documentation
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/'
-      tag: 'Blog'
-      text: 'Automate End-to-End Processes with Workflow Automation'
-    - link: '/service_management/workflows/access/'
-      tag: 'Documentation'
-      text: 'Access and Authentication'
-    - link: '/security/cloud_security_management/workflows/'
-      tag: 'Documentation'
-      text: 'Automate Security Workflows'
+    - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+      tag: "Blog"
+      text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
+    - link: "/service_management/workflows/access/"
+      tag: "Documentation"
+      text: "Access and authentication"
+    - link: "/security/cloud_security_management/workflows/"
+      tag: "Documentation"
+      text: "Automate security workflows"
 ---
+
 ## Overview
 
 With Workflow Automation, you can automate end-to-end processes in response to Datadog alerts and security signals. Workflow Automation is powered by real-time observability data, enabling you to resolve issues faster and proactively maintain the availability and security of your systems.
@@ -38,7 +39,7 @@ To create a workflow with a monitor trigger:
 5. Click **Create**.
 6. On the workflow canvas, click the **Monitor or Security Signal** trigger. 
 7. In the **Configure** tab, next to `@workflow-`, enter the unique ID `@workflow-Create-Jira-Ticket` for your workflow. Workflow handles always begin with `@workflow-`. Later, you use this handle to connect the workflow to a monitor notification. 
-8. Save your workflow.
+8. Click **Save** to save your workflow.
 
 {{< img src="/getting_started/workflow_automation/trigger.png" alt="Trigger for Workflows">}}
 
@@ -64,7 +65,7 @@ The monitor that triggered the workflow can be found here: {{ Source.url }}
 For more information on context variables, see **[Context variables][6]**. 
 
 5. Test the Jira action by clicking the green **Test** icon in the **Configure** tab of the action.
-6. Save your workflow.
+6. Click **Save** to save your workflow.
 
 The previous instructions set up a step to create a Jira ticket. Next, add the Slack step:
 1. Click the plus icon on the workflow canvas to add another step.
