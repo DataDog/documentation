@@ -41,7 +41,7 @@ def workflows(content, content_dir):
                 p = Path(file_name)
                 for action_name, action_data in data.get('actions', {}).items():
                     action_stability = action_data.get('stability')
-                    if not action_stability or action_stability == 'stable':
+                    if not action_stability or action_stability == 'stable' and not data.get('internal') and not data.get('hidden') and not data.get('deprecated'):
                         output_file_name = data.get('name')\
                             .replace('com.datadoghq.dd.','')\
                             .replace('com.datadoghq.','')\
