@@ -15,7 +15,7 @@ cascade:
 - _target:
     path: /integrations/azure.md
   algolia:
-    rank: 90
+    rank: 60
     category: Documentation
     subcategory: Integrations
     tags: ['azure', 'microsoft azure']
@@ -29,17 +29,10 @@ cascade:
 - _target:
     path: /integrations/google_cloud_platform.md
   algolia:
-    rank: 90
+    rank: 60
     category: Documentation
     subcategory: Integrations
     tags: ['gcp', 'google cloud platform']
-- _target:
-    path: /integrations/amazon_web_services.md
-  algolia:
-    rank: 80
-    category: Documentation
-    subcategory: Integrations
-    tags: ['aws', 'amazon web services']
 - _target:
     path: /integrations/eks_fargate.md
   algolia:
@@ -88,12 +81,12 @@ cascade:
     path: /integrations/stormforge_license.md
   aliases:
     - /integrations/stormforge_stormforge_license/
-# - _target:
-#     path: /integrations/*.md
-#   algolia:
-#     rank: 60
-#     category: Documentation
-#     subcategory: Integrations
+- _target:
+    path: /integrations/*.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
 
 ---
 
