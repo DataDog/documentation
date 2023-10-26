@@ -14,7 +14,7 @@ further_reading:
     text: "Learn more about rehydrating log archives"
 ---
 
-<div class="alert alert-warning">The Observability Pipelines' Datadog Archives destination is in beta.</div>
+<div class="alert alert-warning">The Observability Pipelines's Datadog Archives destination is in beta.</div>
 
 ## Overview
 
