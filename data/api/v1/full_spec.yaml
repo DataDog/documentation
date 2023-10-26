@@ -799,6 +799,14 @@ components:
           description: Your Azure web application secret key.
           example: testingx./Sw*g/Y33t..R1cH+hScMDt
           type: string
+        container_app_filters:
+          description: 'Limit the Azure container apps that are pulled into Datadog
+            using tags.
+
+            Only container apps that match one of the defined tags are imported into
+            Datadog.'
+          example: key:value,filter:example
+          type: string
         cspm_enabled:
           description: Enable Cloud Security Management Misconfigurations for your
             organization.
