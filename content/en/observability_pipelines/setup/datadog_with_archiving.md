@@ -10,6 +10,10 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
@@ -34,7 +38,7 @@ You can generate both of these in [Observability Pipelines][3].
 {{% tab "Docker" %}}
 Ensure that your machine is configured to run Docker.
 
-The sample configuration you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration,  set up an IAM policy that allows the Workers to write to S3.
+The sample configuration you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, set up an IAM policy that allows the Workers to write to S3.
 
 * Go into your AWS console and create an S3 bucket to send your archives to.
 
@@ -281,7 +285,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 1. Download the [sample pipeline configuration file][2].
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
-    ```
+
+    ```shell
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
       -e DD_SITE=<SITE> \
