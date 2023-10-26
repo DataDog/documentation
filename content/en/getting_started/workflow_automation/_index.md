@@ -81,7 +81,7 @@ The workflow that created this Jira issue is {{ WorkflowName }}
 ```
 
 6. Test this Slack action by clicking the green **Test** icon in the **Configure** tab of the action.
-7. To view your workflow's name in the monitor's notification dropdown, save and publish your workflow. To publish the workflow, click **Publish** from the workflow's page.
+7. To view your workflow's name in the monitor's notification dropdown, save and publish your workflow. Click **Publish** from the workflow's page.
 
 ## Test and publish the workflow
 
