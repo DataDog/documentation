@@ -18,7 +18,6 @@ Watchdog powered monitors (namely [anomaly][1] and [outlier][2]) are particularl
 
 This guide covers common use cases for alerting on non-static thresholds:
   - [Alert on a metric that goes off track outside of **seasonal variations**](#seasonal-threshold) 
-  - [Alert on **spikes** when the baseline is unknown ahead of time](#spike-threshold)
   - [Alert based on the value of another **reference** metric](#reference-threshold)
 
 ## Seasonal threshold
@@ -81,59 +80,6 @@ The threshold displayed in the screenshot below has been configured to 0.9 to al
 {{% /tab %}}
 {{< /tabs >}}
 
-## Spike threshold
-
-### Context
-
-You are in charge of the cost of log management in your company. You want to be alerted when there is a sudden increase in billing for a specific team; you want to capture a spike in log usage.
-
-{{< img src="monitors/guide/non_static_thresholds/graph_log_usage_spike.png" alt="Log usage graph showing a significant increase or spike in log usage" style="width:100%;" >}}
-
-### Monitor
-
-To count the number of indexed logs in Datadog, use the following metric: [`datadog.estimated_usage.logs.ingested_events`][4].
-It is an out-of-the-box metric that can be found in your account after logs are sent to Datadog. For more information on log usage metrics, see the [Log Configuration][5] documentation.
-
-The monitor evaluates the sum over the last 5 minutes compared to the average of the last hour. It is composed of 2 queries:
-- Query A represents the last 5 minutes of the metric you want to be aware of, because of the parameter "Evaluate the … of the query over the last 5 minutes".
-- Query B represents the average value of the same metric over the past hour thanks to the moving rollup, which takes the datapoints of the last 4 hours (to have a large amount of datapoints) and calculates the average.
-
-When the value of Query A is much higher than the value of Query B, it's a sign of a substantial and sudden increase in usage, which you can capture with a ratio between A and B.
-
-{{< tabs >}}
-{{% tab "UI Configuration" %}}
-
-{{< img src="monitors/guide/non_static_thresholds/spike_threshold.png" alt="Spike threshold config with two log usage metrics" style="width:100%;" >}}
-
-In the formula, divide **Query A** by **Query B** and multiply the quotient by the moving rollup to account for the difference in evaluation windows between the two queries. In this example, since the moving rollup of Query B is 4 hours (240 minutes), you multiply the formula by 48 (240 minutes / 5 minute evaluation window).	
-
-The threshold here is 2, to get an alert when the difference in value is double or higher.
-
-{{% /tab %}}
-
-{{% tab "JSON Example" %}}
-```
-{
-	"name": "[Spike threshold] Log Spike",
-	"type": "query alert",
-	"query": "sum(last_5m):(sum:datadog.estimated_usage.logs.ingested_events{env:prod}.as_count() / moving_rollup(sum:datadog.estimated_usage.logs.ingested_events{env:prod}.as_count(), 14400, 'sum')) * 48 > 2",
-	"message": "Be careful! There has been a difference of {{value}} in Log ingestion between now and the past 4 hours!",
-	"tags": [],
-	"options": {
-		"thresholds": {
-			"critical": 2
-		},
-		"notify_audit": false,
-		"require_full_window": false,
-		"notify_no_data": false,
-		"renotify_interval": 0,
-		"include_tags": false
-	}
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Reference threshold
 
 ### Context
@@ -185,7 +131,6 @@ The first monitor tracks the total number of hits, both successes and failures. 
 {{% /tab %}}
 {{< /tabs >}}
 
-
 #### Metric monitor to calculate the error rate
 
 The second monitor calculates the error rate. Create a query on the number of errors divided by the total number of hits to get the error rate `a / a+b`:
@@ -226,7 +171,7 @@ The second monitor calculates the error rate. Create a query on the number of er
 
 The last monitor is a Composite monitor, which sends an alert only if the two preceding monitors are also both in an **ALERT** state. 
 
-{{< img src="monitors/guide/non_static_thresholds/reference_composite_monitor_config.png" alt="Example composite monitor configuration showing boolean logic to alert if both monitors are in ALERT state" style="width:100%;" >}} -->
+{{< img src="monitors/guide/non_static_thresholds/reference_composite_monitor_config.png" alt="Example composite monitor configuration showing boolean logic to alert if both monitors are in ALERT state" style="width:100%;" >}}
 
 ## Further reading
 
