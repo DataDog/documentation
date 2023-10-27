@@ -109,4 +109,3 @@ Providing Git information of the commit that triggered the pipeline execution is
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
-[4]: https://docs.datadoghq.com/continuous_integration/search/?tab=pipelines#overview
