@@ -146,7 +146,7 @@ Continuous Integration pipelines and tests
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /developers/dogstatsd/
 [4]: /data_security/agent/
-[5]: /agent/guide/secrets-management/
+[5]: /agent/configuration/secrets-management/
 [6]: /integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /integrations/azure/

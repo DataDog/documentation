@@ -45,11 +45,11 @@ To audit the mute history for a misconfiguration:
 2. Select the resource with the muted misconfiguration.
 3. On the **Overview** tab, use the **Resource evaluation over time** timeline to view when the misconfiguration was muted or unmuted over a specified period of time (up to six months).
 
-{{< img src="security/csm/muted_finding_evaluation_over_time.png" alt="The resource evaluation over time timeline shows the history of the finding including periods when it was muted" style="width:90%;">}}
+{{< img src="security/csm/muted_finding_evaluation_over_time.png" alt="The resource evaluation over time timeline shows the history of the misconfiguration including periods when it was muted" style="width:90%;">}}
 
 4. Click the **Timeline** tab to view a chronological history of the misconfiguration. Hover over a mute or unmute action to view additional details, such as the reason for the mute, how long the mute is intended to last, and who muted it.
 
-{{< img src="security/csm/muted_finding_timeline.png" alt="The Timeline tab shows a chronological history of the finding, including details on when a finding was muted" style="width:90%;">}}
+{{< img src="security/csm/muted_finding_timeline.png" alt="The Timeline tab shows a chronological history of the misconfiguration, including details on when a misconfiguration was muted" style="width:90%;">}}
 
 ## Further reading
 

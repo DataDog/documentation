@@ -15,7 +15,7 @@ Si una métrica no se envía desde una de las [más de {{< translate key="integr
 
 El count facturable mensual de métricas personalizadas (indicado en la página Usage) se calcula en función del total de métricas personalizadas diferentes para cada hora de un mes concreto y se divide entre el número de horas de ese mes para sacar la media.
 
-Los usuarios de Metrics without LimitsTM ven los volúmenes facturables mensuales de las métricas personalizadas _ingeridas_ e _indexadas_ en su página Usage. Obtén más información sobre las métricas personalizadas ingeridas e indexadas y [Metrics without LimitsTM][5]. 
+Los usuarios de Metrics without Limits ven los volúmenes facturables mensuales de las métricas personalizadas _ingeridas_ e _indexadas_ en su página Usage. Obtén más información sobre las métricas personalizadas ingeridas e indexadas y [Metrics without Limits™][5]. 
 
 ## Contar las métricas personalizadas
 
@@ -75,31 +75,31 @@ Para obtener la temperatura de Florida, puedes volver a combinar estas métricas
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-### Configurar etiquetas y agregaciones con Metrics without LimitsTM
+### Configurar etiquetas y agregaciones con Metrics without Limits™
 
-Configurar etiquetas y agregaciones con [Metrics without LimitsTM][3] puede influir en el número de métricas personalizadas, ya que desvincula los costes de indexación y los de ingestión. Esto te permite seguir enviando a Datadog todos tus datos (que se ingieren) y especificar una lista de autorización de etiquetas que quieras conservar para que Datadog las pueda usar como consultables. Como la cantidad de datos ingeridos por Datadog para las métricas que has configurado es diferente a la cantidad restante inferior que has indexado, verás dos números independientes en la página Usage (Uso) y en la página Metrics Summary (Resumen de las métricas). 
+Configurar etiquetas y agregaciones con [Metrics without Limits™][3] puede influir en el número de métricas personalizadas, ya que desvincula los costes de indexación y los de ingestión. Esto te permite seguir enviando a Datadog todos tus datos (que se ingieren) y especificar una lista de autorización de etiquetas que quieras conservar para que Datadog las pueda usar como consultables. Como la cantidad de datos ingeridos por Datadog para las métricas que has configurado es diferente a la cantidad restante inferior que has indexado, verás dos números independientes en la página Usage (Uso) y en la página Metrics Summary (Resumen de las métricas). 
 
 - **Métricas personalizadas ingeridas**: el volumen original de métricas personalizadas según las etiquetas ingeridas (enviadas por el código).
-- **Métricas personalizadas indexadas**: el volumen de métricas personalizadas de tipo consultable que queda en la plataforma de Datadog (en función de la configuración de Metrics without LimitsTM).
+- **Métricas personalizadas indexadas**: el volumen de métricas personalizadas de tipo consultable que queda en la plataforma de Datadog (en función de la configuración de Metrics without Limits™).
 
-**Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no está configurada con Metrics without LimitsTM, solo se te factura por su volumen de métrica personalizada indexada.
+**Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no está configurada con Metrics without Limits™, solo se te factura por su volumen de métrica personalizada indexada.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas y cuándo por las métricas personalizadas indexadas?
-Si no utilizas Metrics without LimitsTM para configurar las métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without Limits™ para configurar las métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función del número medio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Asignación de la cuenta                    | - Pro: 100 métricas personalizadas indexadas por host <br>- Enterprise: 200 métricas personalizadas por host                             |
 | Uso superior a la asignación de la cuenta | Por cada 100 métricas personalizadas indexadas por encima de la asignación de la cuenta, pagas la cantidad que se especifica en tu contrato actual. |
 
-Si usas Metrics without LimitsTM para configurar tus métricas (etiquetas/agregaciones), pagas por las métricas personalizadas ingeridas y por las indexadas.
+Si usas Metrics without Limits™ para configurar tus métricas (etiquetas/agregaciones), pagas por las métricas personalizadas ingeridas y por las indexadas.
 
 |                                      | Métricas personalizadas ingeridas                                                                           | Métricas personalizadas indexadas                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Asignación de la cuenta                    | - Pro: 100 métricas personalizadas ingeridas por host<br>- Enterprise: 200 métricas personalizadas ingeridas por host | - Pro: 100 métricas personalizadas indexadas por host<br>- Enterprise: 200 métricas personalizadas indexadas por host                               |
 | Uso superior a la asignación de la cuenta | Por cada 100 métricas personalizadas ingeridas por encima de la asignación de la cuenta, pagas 0,10 $.                   | Por cada 100 métricas personalizadas indexadas por encima de la asignación de la cuenta, pagas la cantidad que se especifica en tu contrato actual. |
 
-Pongamos que quisieras utilizar Metrics without LimitsTM para reducir el tamaño de tu métrica `request.Latency` manteniendo únicamente las etiquetas `endpoint` y `status`. Obtendrías estas tres combinaciones únicas de etiquetas:
+Pongamos que quisieras utilizar Metrics without Limits™ para reducir el tamaño de tu métrica `request.Latency` manteniendo únicamente las etiquetas `endpoint` y `status`. Obtendrías estas tres combinaciones únicas de etiquetas:
 
 - `endpoint:X`, `status:200`
 - `endpoint:X`, `status:400`
@@ -113,7 +113,7 @@ Por defecto, Datadog almacena la combinación de agregaciones que más se consul
 
 Si lo necesitas, puedes añadir otras agregaciones para tus consultas, pero debes tener en cuenta que el número de métricas personalizadas indexadas aumenta en función de las agregaciones que actives.
 
-Más información sobre [Metrics without LimitsTM][3].
+Más información sobre [Metrics without Limits™][3].
 
 [1]: /es/metrics/types/?tab=count#metric-types
 [2]: /es/metrics/types/?tab=rate#metric-types
@@ -160,24 +160,24 @@ Para obtener la temperatura de Florida, puedes volver a combinar estas métricas
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-### Configurar etiquetas y agregaciones con Metrics without LimitsTM
+### Configurar etiquetas y agregaciones con Metrics without Limits™
 
-Configurar etiquetas y agregaciones con [Metrics without LimitsTM][4] puede influir en el número de métricas personalizadas, ya que desvincula los costes de indexación y los de ingestión. Esto te permite seguir enviando a Datadog todos tus datos (que se ingieren) y especificar una lista de autorización de etiquetas que quieras conservar para que Datadog las pueda usar como consultables. Como la cantidad de datos ingeridos por Datadog para las métricas que has configurado es diferente a la cantidad restante inferior que has indexado, verás dos números independientes en la página Usage (Uso) y en la página Metrics Summary (Resumen de las métricas). 
+Configurar etiquetas y agregaciones con [Metrics without Limits™][4] puede influir en el número de métricas personalizadas, ya que desvincula los costes de indexación y los de ingestión. Esto te permite seguir enviando a Datadog todos tus datos (que se ingieren) y especificar una lista de autorización de etiquetas que quieras conservar para que Datadog las pueda usar como consultables. Como la cantidad de datos ingeridos por Datadog para las métricas que has configurado es diferente a la cantidad restante inferior que has indexado, verás dos números independientes en la página Usage (Uso) y en la página Metrics Summary (Resumen de las métricas). 
 
 - **Métricas personalizadas ingeridas**: el volumen original de métricas personalizadas según las etiquetas ingeridas (enviadas por el código).
-- **Métricas personalizadas indexadas**: el volumen de métricas personalizadas de tipo consultable que queda en la plataforma de Datadog (en función de la configuración de Metrics without LimitsTM).
+- **Métricas personalizadas indexadas**: el volumen de métricas personalizadas de tipo consultable que queda en la plataforma de Datadog (en función de la configuración de Metrics without Limits™).
 
-**Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no está configurada con Metrics without LimitsTM, solo se te factura por su volumen de métrica personalizada indexada.
+**Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no está configurada con Metrics without Limits™, solo se te factura por su volumen de métrica personalizada indexada.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas y cuándo por las métricas personalizadas indexadas?
-Si no utilizas Metrics without LimitsTM para configurar tus métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without Limits™ para configurar tus métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función del número medio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Asignación de la cuenta                    | - Pro: 100 métricas personalizadas indexadas por host <br>- Enterprise: 200 métricas personalizadas por host                             |
 | Uso superior a la asignación de la cuenta | Por cada 100 métricas personalizadas indexadas por encima de la asignación de la cuenta, pagas la cantidad que se especifica en tu contrato actual. |
 
-Si usas Metrics without LimitsTM para configurar tus métricas (etiquetas/agregaciones), pagas por las métricas personalizadas ingeridas y por las indexadas.
+Si usas Metrics without Limits™ para configurar tus métricas (etiquetas/agregaciones), pagas por las métricas personalizadas ingeridas y por las indexadas.
 
 |                                      | Métricas personalizadas ingeridas                                                                           | Métricas personalizadas indexadas                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -190,7 +190,7 @@ Por defecto, Datadog almacena la combinación de agregaciones que más se consul
 
 Si lo necesitas, puedes añadir otras agregaciones para tus consultas, pero debes tener en cuenta que el número de métricas personalizadas indexadas aumenta en función de las agregaciones que actives.
 
-Más información sobre [Metrics without LimitsTM][1].
+Más información sobre [Metrics without Limits™][1].
 
 [1]: /es/metrics/metrics-without-limits
 {{% /tab %}}
@@ -242,24 +242,24 @@ Esta tabla resume el impacto producido al añadir agregaciones de percentil a un
 | Número de métricas personalizadas enviadas después de incluir agregaciones de percentil (p50, p75, p90, p95, p99) | `5*(tag value combinations)`      |
 | Total                                                                                     | `2*5(tag value combinations)`     |
 
-### Configurar etiquetas con Metrics without LimitsTM
+### Configurar etiquetas con Metrics without Limits™
 
-Configurar etiquetas y agregaciones con [Metrics without LimitsTM][2] puede influir en el número de métricas personalizadas, ya que desvincula los costes de indexación y los de ingestión. Esto te permite seguir enviando a Datadog todos tus datos (que se ingieren) y especificar una lista de autorización de etiquetas que quieras conservar para que Datadog las pueda usar como consultables. Como la cantidad de datos ingeridos por Datadog para las métricas que has configurado es diferente a la cantidad restante inferior que has indexado, verás dos números independientes en la página Usage (Uso) y en la página Metrics Summary (Resumen de las métricas). 
+Configurar etiquetas y agregaciones con [Metrics without Limits™][2] puede influir en el número de métricas personalizadas, ya que desvincula los costes de indexación y los de ingestión. Esto te permite seguir enviando a Datadog todos tus datos (que se ingieren) y especificar una lista de autorización de etiquetas que quieras conservar para que Datadog las pueda usar como consultables. Como la cantidad de datos ingeridos por Datadog para las métricas que has configurado es diferente a la cantidad restante inferior que has indexado, verás dos números independientes en la página Usage (Uso) y en la página Metrics Summary (Resumen de las métricas). 
 
 - **Métricas personalizadas ingeridas**: el volumen original de métricas personalizadas según las etiquetas ingeridas (enviadas por el código).
-- **Métricas personalizadas indexadas**: el volumen de métricas personalizadas de tipo consultable que queda en la plataforma de Datadog (en función de la configuración de Metrics without LimitsTM).
+- **Métricas personalizadas indexadas**: el volumen de métricas personalizadas de tipo consultable que queda en la plataforma de Datadog (en función de la configuración de Metrics without Limits™).
 
-**Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no está configurada con Metrics without LimitsTM, solo se te factura por su volumen de métrica personalizada indexada.
+**Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no está configurada con Metrics without Limits™, solo se te factura por su volumen de métrica personalizada indexada.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas y cuándo por las métricas personalizadas indexadas?
-Si no utilizas Metrics without LimitsTM para configurar tus métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without Limits™ para configurar tus métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función del número medio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Asignación de la cuenta                    | - Pro: 100 métricas personalizadas indexadas por host <br>- Enterprise: 200 métricas personalizadas por host                             |
 | Uso superior a la asignación de la cuenta | Por cada 100 métricas personalizadas indexadas por encima de la asignación de la cuenta, pagas la cantidad que se especifica en tu contrato actual. |
 
-Si usas Metrics without LimitsTM para configurar tus métricas (etiquetas/agregaciones), pagas por las métricas personalizadas ingeridas y por las indexadas.
+Si usas Metrics without Limits™ para configurar tus métricas (etiquetas/agregaciones), pagas por las métricas personalizadas ingeridas y por las indexadas.
 
 |                                      | Métricas personalizadas ingeridas                                                                           | Métricas personalizadas indexadas                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -274,7 +274,7 @@ Supongamos que solo quieres mantener las etiquetas `endpoint` y `status` asociad
 
 El número de métricas personalizadas que envía una [métrica de DISTRIBUCIÓN][1} es cinco veces el número de combinaciones únicas de nombres de métrica y valores de etiqueta. Como resultado de la configuración de etiquetas, `request.Latency` envía un total de **5 × 3 = 15 métricas personalizadas indexadas**. Basándonos en las etiquetas enviadas inicialmente en esta métrica, el volumen de métricas personalizadas **ingeridas** en un principio para la métrica `request.Latency` es de **20 métricas personalizadas ingeridas**.
 
-Más información sobre [Metrics without LimitsTM][2].
+Más información sobre [Metrics without Limits™][2].
 
 [1]: /es/metrics/types/?tab=distribution#definition
 [2]: /es/metrics/metrics-without-limits
@@ -300,7 +300,7 @@ Estas asignaciones se contabilizan en toda tu infraestructura. Por ejemplo, si t
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Asignaciones para métricas personalizadas" >}}
 
-La cantidad facturable de métricas personalizadas indexadas se basa en la cantidad media de métricas personalizadas (de todos los hosts de pago) por hora durante un mes determinado. La cantidad facturable de métricas personalizadas ingeridas solo aumenta si has utilizado Metrics without LimitsTM para configurar tu métrica. Ponte en contacto con [Ventas][11] o con tu [asesor de clientes][12] para hablar sobre las métricas personalizadas de tu cuenta o comprar un paquete adicional de métricas.
+La cantidad facturable de métricas personalizadas indexadas se basa en la cantidad media de métricas personalizadas (de todos los hosts de pago) por hora durante un mes determinado. La cantidad facturable de métricas personalizadas ingeridas solo aumenta si has utilizado Metrics without Limits™ para configurar tu métrica. Ponte en contacto con [Ventas][11] o con tu [asesor de clientes][12] para hablar sobre las métricas personalizadas de tu cuenta o comprar un paquete adicional de métricas.
 
 ## Integraciones estándar
 

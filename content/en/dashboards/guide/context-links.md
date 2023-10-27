@@ -143,11 +143,11 @@ Clicking the **Zendesk User Page** link directs you to this user's page in Zende
 
 ### Dashboard links to the AWS Console
 
-The following example explains how to create a link from a host in a dashboard widget to its corresponding AWS EC2 instance page in the AWS Console.
+The following example explains how to create a link from a host in a dashboard widget to its corresponding Amazon EC2 instance page in the AWS Console.
 
 #### Context
 
-Your platform is hosted on [AWS EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
+Your platform is hosted on [Amazon EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
 
 You have a dashboard where you've consolidated key health metrics for your infrastructure in Datadog. 
 
@@ -155,7 +155,7 @@ To accelerate this operations workflow, you would like a direct connection betwe
 
 #### Approach
 
-A typical AWS EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, where you can read:
+A typical Amazon EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, where you can read:
 
 * `eu-west-3`: The data center region displayed as a subdomain and a URL parameter.
 * `i-04b737b9f8bf94a94`: The host ID displayed as a hash parameter.
@@ -166,21 +166,21 @@ If your platforms runs on multiple regions, your widget configuration depends on
 
 * If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **query** variable.
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 Query" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
 * If the region is part of the query aggregation (for example, in the screenshot below), the templated link is `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, where `{{region.value}}` is a **template** variable. 
 
-{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="AWS EC2 Query" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
 #### Result
 
 Your dashboard widget contains a link that takes you to the appropriate host in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 Query context link" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 Query context link" style="width:90%;" >}}
 
-Clicking the **AWS EC2 Instance Summary** link directs you to the AWS EC2 instance page in the AWS Console.
+Clicking the **Amazon EC2 Instance Summary** link directs you to the Amazon EC2 instance page in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 Query Result" style="width:70%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 Query Result" style="width:70%;" >}}
 
 ### Dashboard links to saved views and remapped attributes in Datadog
 

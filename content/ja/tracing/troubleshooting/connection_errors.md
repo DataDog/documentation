@@ -190,7 +190,7 @@ Datadog Agent が APM をリッスンしていない旨が表示された場合�
 
 #### ネットワークコンフィギュレーションを確認する
 
-コンテナ化された設定では、トレースを `localhost` または `127.0.0.1` に送信しても、Datadog Agent もコンテナ化されていて別の場所にあるため正しく動作しない場合があります。**注意**: AWS ECS on Fargate および AWS EKS on Fargate にはこのルールは適用されません。
+コンテナ化された設定では、トレースを `localhost` または `127.0.0.1` に送信しても、Datadog Agent もコンテナ化されていて別の場所にあるため正しく動作しない場合があります。**注意**: Amazon ECS on Fargate および AWS EKS on Fargate にはこのルールは適用されません。
 
 アプリケーションと Datadog Agent 間のネットワークが、その構成に必要なものと一致しているかどうかを判断します。
 
@@ -213,8 +213,8 @@ curl -X GET http://{agent_ip}:{agent_port}/info
 
 | セットアップ   | `DD_AGENT_HOST`  |
 |---------|------------------|
-| [AWS ECS on EC2][7] | Amazon の EC2 メタデータエンドポイントを評価する  |
-| [AWS ECS on Fargate][8] | `DD_AGENT_HOST` は設定しないこと |
+| [Amazon ECS on EC2][7] | Amazon の EC2 メタデータエンドポイントを評価する  |
+| [Amazon ECS on Fargate][8] | `DD_AGENT_HOST` は設定しないこと |
 | [AWS EKS on Fargate][9] | `DD_AGENT_HOST` は設定しないこと |
 | [AWS Elastic Beanstalk - 単一コンテナ][10] | ゲートウェイの IP (通常は `172.17.0.1`) |
 | [AWS Elastic Beanstalk - 複数コンテナ][11] | Datadog Agent のコンテナ名を示すリンク |
@@ -264,7 +264,7 @@ APM Agent
 
 [1]: /ja/tracing/troubleshooting/tracer_startup_logs/
 [2]: /ja/tracing/troubleshooting/tracer_debug_logs/
-[3]: /ja/agent/guide/agent-commands/#agent-information
+[3]: /ja/agent/configuration/agent-commands/#agent-information
 [4]: /ja/help/
 [5]: /ja/agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup

@@ -199,7 +199,7 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[[DDRUMMonitor shared] addErrorWithMessage:@"error message." source:DDRUMErrorSourceCustom stack:nil attributes:@{}];
+[[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
 ```
 {{% /tab %}}
 {{< /tabs >}}

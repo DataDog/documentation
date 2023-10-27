@@ -67,7 +67,7 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
 
 ### Add your own performance timing
 
@@ -101,7 +101,7 @@ To create visualizations in your dashboards, [create a measure][4] first.
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API. 
 
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:name:)`.
 
 For example:
 
@@ -132,7 +132,7 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startUserAction(type:name:)` and `.stopUserAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion. 
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion. 
 
 Find more details and available options in the [`DDRUMMonitor` class][9].
 
@@ -199,7 +199,7 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-[[DDRUMMonitor shared] addErrorWithMessage:@"error message." source:DDRUMErrorSourceCustom stack:nil attributes:@{}];
+[[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -761,4 +761,4 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 [6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift
+[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift

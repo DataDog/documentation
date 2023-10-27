@@ -187,7 +187,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -234,7 +234,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -279,7 +279,7 @@ To override default RUM view names so that they are aligned with how you've defi
        for (let index = 0; index < routeMatches.length; index++) {
          const routeMatch = routeMatches[index];
          const path = routeMatch.route.path;
-         // Skeep pathless routes
+         // Skip pathless routes
          if (!path) {
            continue;
          }
@@ -907,25 +907,45 @@ Once RUM is initialized, read the global context with the `getGlobalContext()` A
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-const context = datadogRum.getRumGlobalContext();
+const context = datadogRum.getGlobalContext();
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
 window.DD_RUM.onReady(function() {
-  const context = window.DD_RUM.getRumGlobalContext();
+  const context = window.DD_RUM.getGlobalContext();
 });
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```javascript
-const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
+const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Contexts life cycle
+
+By default, global context and user context are stored in the current page memory, which means they are not:
+
+- kept after a full reload of the page
+- shared across different tabs or windows of the same session
+
+To add them to all events of the session, they must be attached to every page.
+
+With the introduction of the `storeContextsAcrossPages` configuration option in the v4.49.0 of the browser SDK, those contexts can be stored in [`localStorage`][18], allowing the following behaviors:
+
+- Contexts are preserved after a full reload
+- Contexts are synchronized between tabs opened on the same origin
+
+However, this feature comes with some **limitations**:
+
+- Setting Personable Identifiable Information (PII) in those contexts is not recommended, as data stored in `localStorage` outlives the user session
+- The feature is incompatible with the `trackSessionAcrossSubdomains` options because `localStorage` data is only shared among the same origin (login.site.com ≠ app.site.com)
+- `localStorage` is limited to 5 MiB by origin, so the application-specific data, Datadog contexts, and other third-party data stored in local storage must be within this limit to avoid any issues
 
 ## Further Reading
 
@@ -948,3 +968,4 @@ const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
+[18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage

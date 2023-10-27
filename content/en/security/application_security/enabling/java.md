@@ -23,13 +23,14 @@ further_reading:
 
 ---
 
-You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your [Datadog Java library][1]** to at least version 0.94.0 (at least version 1.1.4 for Application Vulnerability Management vulnerability detection features):
    ```shell
@@ -84,7 +85,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -176,7 +177,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 

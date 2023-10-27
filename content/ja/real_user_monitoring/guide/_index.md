@@ -22,6 +22,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM デプロイメント追跡の概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}RUM の機能フラグデータの概要{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}RUM を使ってキオスクセッションを監視する{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}RUM サンプリングのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}RUM で UTM キャンペーンを監視する{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -44,9 +45,9 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
 
 {{< whatsnext desc="セッションリプレイ" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}セッションリプレイのためのサードパーティサービスワーカーの許可{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}セッションリプレイをサポートワークフローに活用する{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイを充実させる{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}サポートのワークフローでセッションリプレイを使用する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイをリッチ化する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}セッションリプレイとサードパーティツールの連携{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}セッションリプレイをポストモーテムのキーツールとして活用する{{< /nextlink >}}
-
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}ポストモーテムでの主要ツールとしてセッションリプレイを使用する{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}セッションリプレイから Synthetic ブラウザテストを生成する{{< /nextlink >}}
 {{< /whatsnext >}}

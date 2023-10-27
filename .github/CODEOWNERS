@@ -8,8 +8,8 @@
 /config/                  @DataDog/corpweb @DataDog/documentation
 /config/_default/menus/   @DataDog/documentation
 package.json              @DataDog/corpweb @DataDog/documentation
-go.mod                    @DataDog/corpweb @DataDog/documentation  
-go.sum                    @DataDog/corpweb @DataDog/documentation  
+go.mod                    @DataDog/corpweb @DataDog/documentation
+go.sum                    @DataDog/corpweb @DataDog/documentation
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries @DataDog/documentation
@@ -27,19 +27,24 @@ go.sum                    @DataDog/corpweb @DataDog/documentation
 # Agent Shared Component
 /content/en/agent/proxy.md                              @DataDog/agent-shared-components @DataDog/documentation
 
-# Partners
-/content/en/partners/                                   @DataDog/partner-tech-solutions @DataDog/documentation
+# Agent-integration-tools
+content/en/developers/integrations/agent_integration.md                         @DataDog/agent-integrations @DataDog/documentation
+content/en/developers/integrations/python.md                                    @DataDog/agent-integrations @DataDog/documentation
+content/en/developers/integrations/guide/legacy.md                              @DataDog/agent-integrations @DataDog/documentation
 
 # Marketplace
+content/en/developers/integrations/api_integration.md                           @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/log_integration.md                           @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/marketplace_offering.md                      @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/create_a_tile.md                             @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/oauth_for_integrations.md                    @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/create_an_integration_dashboard.md           @Datadog/marketplace-product-management @DataDog/agent-integrations @DataDog/documentation
+content/en/developers/integrations/create-an-integration-recommended-monitor.md @Datadog/marketplace-product-management @DataDog/documentation
+content/en/developers/integrations/check_references.md                          @Datadog/marketplace-product-management @DataDog/agent-integrations @DataDog/documentation
 
-/content/en/developers/integrations/agent_integration/                     @Datadog/marketplace-product-management @DataDog/documentation
-/content/en/developers/integrations/api_integration/                       @Datadog/marketplace-product-management @DataDog/documentation
-/content/en/developers/integrations/marketplace_offering/                  @Datadog/marketplace-product-management @DataDog/documentation
-/content/en/developers/integrations/check_references/                      @Datadog/marketplace-product-management @DataDog/documentation
-/content/en/developers/integrations/create_a_tile/                         @Datadog/marketplace-product-management @DataDog/documentation
-/layouts/shortcodes/integration-assets.md                                  @Datadog/marketplace-product-management @DataDog/documentation
-/layouts/shortcodes/integration-assets-reference.md                        @Datadog/marketplace-product-management @DataDog/documentation
-/layouts/shortcodes/integration_categories.md                              @Datadog/marketplace-product-management @DataDog/documentation
+layouts/shortcodes/integration-assets.md                                    @Datadog/marketplace-product-management @DataDog/documentation
+layouts/shortcodes/integration-assets-reference.md                          @Datadog/marketplace-product-management @DataDog/documentation
+layouts/shortcodes/integration_categories.md                                @Datadog/marketplace-product-management @DataDog/documentation
 
 # Websites Platform (Devops)
 .github/workflows                                       @DataDog/WebOps-Platform
@@ -53,7 +58,7 @@ datadog-ci.preview.json                                 @DataDog/WebOps-Platform
 general.preview.synthetics.json                         @DataDog/WebOps-Platform
 
 # Cloud Cost Management
-documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility @DataDog/documentation
+documentation/content/en/cloud_cost_management/*.md              @DataDog/cloud-cost-management-visibility @DataDog/documentation
 
 # Log collection
 content/en/logs/log_collection/android.md                        @Datadog/rum-mobile @DataDog/documentation
@@ -86,4 +91,16 @@ content/en/logs/error_tracking/browser_and_mobile.md            @Datadog/rum-bro
 content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-browser @DataDog/documentation
 
 # Observability Pipelines
-static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines @DataDog/vector @DataDog/vector-admin @DataDog/documentation
+static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
+
+# Synthetic Monitoring, Continuous Testing, Mobile Application Testing
+
+content/en/synthetics/*.md                                      @Datadog/synthetics-app @Datadog/documentation
+content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
+content/en/mobile_app_testing/*.md                              @Datadog/synthetics-mobile @Datadog/documentation
+
+# CI Visibility
+
+content/en/continuous_integration/tests/*.md          @Datadog/ci-app-libraries @Datadog/documentation
+content/en/continuous_integration/pipelines/*.md      @Datadog/ci-app-backend @Datadog/documentation
+content/en/continuous_integration/static_analysis/rules/_index.md @Datadog/static-analysis @Datadog/documentation

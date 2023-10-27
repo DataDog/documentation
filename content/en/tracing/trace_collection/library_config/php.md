@@ -126,13 +126,23 @@ Whether to enable the endpoint data collection in profiles. Added in version `0.
 `DD_PROFILING_ALLOCATION_ENABLED`
 : **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
 **Default**: `1`<br>
-Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off due to a limitation of the ZendEngine.<br>
+Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
+
+`DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED`
+: **INI**: `datadog.profiling.experimental_exception_enabled`. INI available since `0.92.0`.<br>
+**Default**: `0`<br>
+Enable the experimental exception profile type. Added in version `0.92.0`.
+
+`DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE`
+: **INI**: `datadog.profiling.experimental_exception_sampling_distance`. INI available since `0.92.0`.<br>
+**Default**: `100`<br>
+Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.
 
 `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
 : **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
@@ -561,7 +571,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
 [11]: /tracing/trace_collection/trace_context_propagation/php/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/
 [16]: /tracing/configure_data_security#telemetry-collection
