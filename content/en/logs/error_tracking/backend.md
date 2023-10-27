@@ -265,7 +265,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-To manually log an error you should create a formatter using JSON and map the exception values to the correct fields:
+To manually log an error, create a formatter using JSON and map the exception values to the correct fields:
 
 ```ruby
 require 'json'
