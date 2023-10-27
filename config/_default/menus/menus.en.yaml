@@ -1326,7 +1326,7 @@ main:
     weight: 202
   - name: Customization
     url: service_management/events/explorer/customization
-    identifier: events_explorer_navigate
+    identifier: events_explorer_customization
     parent: events_explorer
     weight: 203
   - name: Facets

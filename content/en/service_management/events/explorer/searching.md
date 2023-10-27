@@ -11,10 +11,10 @@ further_reading:
 
 Events search uses the [logs search syntax][1]. Like logs search, events search permits:
 
-- `AND`, `OR` and `-` operators
+- `AND`, `OR`, and `-` operators
 - Wildcards
 - Escape characters
-- Searching tags and facet with `key:value`
+- Searching tags and facets with `key:value`
 - Searching within attributes with the `@` prefix
 
 ## Example queries
@@ -46,4 +46,4 @@ See [Logs Search Syntax][1] for more details.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: logs/explorer/search_syntax/
+[1]: /logs/explorer/search_syntax/
