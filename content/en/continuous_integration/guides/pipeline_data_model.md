@@ -1,7 +1,7 @@
 ---
-title: Pipeline Data Model And Execution Types 
+title: Pipeline Data Model and Execution Types 
 kind: guide
-description: Learn how Pipelines are modeled and what execution types are supported by CI Visibility.
+description: Learn how pipelines are modeled and what execution types are supported by CI Visibility.
 further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
@@ -13,10 +13,9 @@ further_reading:
 {{< /site-region >}}
 
 ## Overview
+If your CI provider or workflow is not natively [supported][2] by Pipeline Visibility, you can use the [public CI Visibility Pipelines API][3] to send your pipeline execution data to CI Visibility.
 
-This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports. 
-
-This guide applies to pipelines created using the [public CI Visibility Pipelines API][3]. Integrations with other CI providers may vary.
+This guide describes how to programmatically set up pipeline executions in CI Visibility with the [public API endpoint][3] and defines the types of pipeline executions that are supported.
 
 ## Data model
 
@@ -25,15 +24,15 @@ Pipeline executions are modeled as traces, similar to an [APM distributed trace]
 | Level Name | Description |
 | ---------- | ----------- |
 | Pipeline (required)  | The top-level root span that contains all other levels as children. It represents the overall execution of a pipeline from start to finish. This level is sometimes called `build` or `workflow` in some CI providers. |
-| Stage      | Serves as a grouping of jobs under a user-defined name. Some CI providers do not have this level. |
+| Stage      | In some CI providers, this serves as a grouping of jobs under a user-defined name. |
 | Job        | The smallest unit of work where commands are executed. All tasks at this level should be performed on a single node. |
-| Step       | In some CI providers, this level represents a shell script or an action executed within a job. |
+| Step       | In some CI providers, this represents a shell script or an action executed within a job. |
 
-When a pipeline, stage, job, or step finishes, execution data is sent to Datadog. To set up Pipeline Visibility, see the list of [supported CI providers][2]. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
+When a pipeline, stage, job, or step finishes, execution data can be sent to Datadog. 
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
-Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
+Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information (for example, missing jobs in the Job Summary table of a pipeline overview page).
 
 ### Pipeline unique IDs
 
@@ -51,7 +50,7 @@ The normal run of a pipeline execution follows the flow depicted below:
 
 Depending on the provider, some levels may be missing. For example, stages may not exist, and jobs may run in parallel or sequence, or a combination of both.
 
-After the completion of each component, a payload must be sent to Datadog with all the necessary data to represent the execution. Datadog processes this data, stores it as a pipeline event, and displays it in [CI Visibility][2]. Pipeline executions must end before sending them to Datadog.
+After the completion of each component, a payload must be sent to Datadog with all the necessary data to represent the execution. Datadog processes this data, stores it as a pipeline event, and displays it in [CI Visibility][2]. Pipeline executions must be complete before sending to Datadog.
 
 ### Full retries
 
@@ -101,7 +100,7 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 ## Git information
 
-Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear in the [My Recent Commits](https://app.datadoghq.com/ci/commits) page. At minimum, the repository URL, commit SHA, and author email are required. For more information see the [public API endpoint specification][3].
+Providing Git information of the commit that triggered the pipeline execution is required for an expected user experience. At minimum, the repository URL, commit SHA, and git author email are required. Pipeline executions without Git information don't appear in the [My Recent Commits](https://app.datadoghq.com/ci/commits) page. For more information, see the [public API endpoint specification][3].
 
 ## Further reading
 
@@ -110,3 +109,4 @@ Providing Git information of the commit that triggered the pipeline execution is
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[4]: https://docs.datadoghq.com/continuous_integration/search/?tab=pipelines#overview
