@@ -70,7 +70,7 @@ When multiple workers are associated with a private location, each worker reques
 
 For example, ten tests are scheduled to run simultaneously on a private location that has two workers running. If Worker 1 is running two tests, Worker 1 can request three additional tests to run. If Worker 2 is not running any tests, Worker 2 can request the five following tests. 
 
-The remaining three tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
+The remaining two tests can be requested by whichever worker has finished running its test first (any worker that has available slots).
 
 ## Further Reading
 
