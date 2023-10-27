@@ -265,6 +265,43 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
+To manually log an error you should create a formatter using JSON and map the exception values to the correct fields:
+
+```ruby
+require 'json'
+require 'logger'
+
+class JsonWithErrorFieldFormatter < ::Logger::Formatter
+    def call(severity, datetime, progname, message)
+        log = {
+            timestamp: "#{datetime.to_s}",
+            level: severity,
+        }
+
+        if message.is_a?(Hash)
+            log = log.merge(message)
+        elsif message.is_a?(Exception)
+            log['message'] = message.inspect
+            log['error'] = {
+                kind: message.class,
+                message: message.message,
+                stack: message.backtrace.join("\n"),
+            }
+        else
+            log['message'] = message.is_a?(String) ? message : message.inspect
+        end
+
+        JSON.dump(log) + "\n"
+    end
+end
+```
+
+And use it in your logger:
+```ruby
+logger = Logger.new(STDOUT)
+logger.formatter = JsonWithErrorFieldFormatter.new
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
