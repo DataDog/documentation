@@ -26,7 +26,7 @@ Metrics without Limits™ provides you with the ability to configure tags on all
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
-### Configuration of tags
+## Configuration of tags
 
 #### Allowlist of tags 
 1. Click any metric name to open its details side panel. 
