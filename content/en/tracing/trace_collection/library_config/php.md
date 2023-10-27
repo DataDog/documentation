@@ -261,6 +261,11 @@ Tags to be set on all spans, for example: `key1:value1,key2:value2`.
 **Default**: `null`<br>
 CSV of header names that are reported on the root span as tags.
 
+`DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
+: **INI**: `datadog.trace.db_client_split_by_instance`<br>
+**Default**: `0`<br>
+Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
+
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
 : **INI**: `datadog.trace.http_client_split_by_domain`<br>
 **Default**: `0`<br>
