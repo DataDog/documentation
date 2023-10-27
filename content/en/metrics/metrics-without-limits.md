@@ -47,7 +47,7 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
-{{< img src="metrics/mwl_example_exclude_tags.mp4" alt="Configuration of Tags with Tag Exclusion" video=true >}}
+{{< img src="metrics/mwl_example_tag_exclusion.mp4" alt="Configuration of Tags with Tag Exclusion" video=true >}}
 
 There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
 
