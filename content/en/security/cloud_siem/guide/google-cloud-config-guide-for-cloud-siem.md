@@ -26,7 +26,7 @@ further_reading:
 Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs from your Google Cloud services to Datadog. This guide walks you through the following steps so that you can start detecting threats with your Google Cloud audit logs:
 
 1. [Enable Data Access audit logs](#enable-data-access-audit-logs)
-1. [Create a new Google Cloud publish/subscription (pub/sub) topic and pull subscription](#create-a-new-google-cloud-publishsubscription-pubsub-system) to receive logs from a configured log sink
+1. [Create a Google Cloud publish/subscription (pub/sub) topic and pull subscription](#create-a-google-cloud-publishsubscription-pubsub-system) to receive logs from a configured log sink
 1. [Create a custom Dataflow worker service account](#create-a-custom-dataflow-worker-service-account)
 1. [Create a log sink to publish logs to the pub/sub](#create-a-log-sink-to-publish-logs-to-the-pubsub)
 1. [Create and run the Dataflow job](#create-and-run-the-dataflow-job)
@@ -36,8 +36,8 @@ Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs fro
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Collecting Google Cloud logs with a Pub/Sub Push subscription</a> is in the process of being deprecated for the following reasons:
 
-- If you have a Google Cloud VPC, the Push subscription cannot access endpoints outside the VPC
-- The Push subscription does not provide compression or batching of events, and as such is only suitable for a very low volume of logs
+- If you have a Google Cloud VPC, the Push subscription cannot access endpoints outside the VPC.
+- The Push subscription does not provide compression or batching of events, and so is only suitable for a low volume of logs.
 
 Documentation for the <strong>Push</strong> subscription is only maintained for troubleshooting or modifying legacy setups. Use a <strong>Pull</strong> subscription with the Datadog Dataflow template to forward your Google Cloud logs to Datadog instead.
 </div>
@@ -59,7 +59,7 @@ To ensure that Data Access audit logs are captured for new Google Cloud services
 1. Enable **Admin Read**, **Data Read**, and **Data Write**.
 1. Click **Save**.
 
-## Create a new Google Cloud publish/subscription (pub/sub) system
+## Create a Google Cloud publish/subscription (pub/sub) system
 
 1. Navigate to Pub/Sub > [Topics][5].
 1. Click **Create Topic**.
@@ -131,7 +131,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 
 ## Create and run the Dataflow job
 
-1. Navigate to Google Cloud's [Dataflow][20].
+1. Navigate to Google Cloud [Dataflow][20].
 1. Click **Create job from template**.
 1. Enter a name for the job.
 1. Select a regional endpoint.
@@ -139,15 +139,15 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. In **Required Parameters** section:  
       a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a [new Pub/Sub system](#create-a-new-google-cloud-publishsubscription-pubsub-system).  
       b. Enter the following in the **Datadog Logs API URL** field:
-      ```shell
+      ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
-      **Note**: Ensure that the Datadog site selector on the right of the page is set to your Datadog site before copying the URL above.  
+      **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.  
       c. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.  
       d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
 1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:  
     a. Click **Optional Parameters** to see the additional fields.  
-    b. Enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.  
+    b. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.  
         To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.  
     c. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.  
 1. If you are not using a secret for your Datadog API key value:
