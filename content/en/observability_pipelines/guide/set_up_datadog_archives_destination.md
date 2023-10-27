@@ -14,11 +14,11 @@ further_reading:
     text: "Learn more about rehydrating log archives"
 ---
 
-<div class="alert alert-warning">The Observability Pipelines's Datadog Archives destination is in beta.</div>
+<div class="alert alert-warning">The Observability Pipelines Datadog Archives destination is in beta.</div>
 
 ## Overview
 
-The Observability Pipelines Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for Observability Pipelines (OP) Worker version 1.5 and later.
+The Observability Pipelines (OP) Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for OP Worker version 1.5 and later.
 
 ## Configure a Log Archive
 
@@ -169,7 +169,7 @@ Attach the policy to the IAM Instance Profile that is created with Terraform, wh
 
 See the [Log Archives documentation][6] for additional information.
 
-## Configure datadog_archives
+## Configure the Datadog Archives destination
 
 You can configure the `datadog_archives` destination using the [configuration file](#configuration-file) or the [pipeline builder UI](#configuration-file).
 
