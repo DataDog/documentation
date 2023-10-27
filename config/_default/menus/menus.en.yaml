@@ -8721,7 +8721,8 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
