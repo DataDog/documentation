@@ -1303,22 +1303,67 @@ main:
     parent: slos
     identifier: slos_guides
     weight: 99
-  - name: Events
+  - name: Event Management
     url: service_management/events/
     pre: events
     identifier: events
     parent: service_management_heading
     weight: 30000
+  # - name: Ingest Events
+  #   url: service_management/events/ingest/
+  #   identifier: event_ingest
+  #   parent: events
+  #   weight: 1
   - name: Explorer
     url: service_management/events/explorer/
-    identifier: event_explorer
+    identifier: events_explorer
     parent: events
-    weight: 1
+    weight: 2
+  - name: Searching
+    url: service_management/events/explorer/searching
+    identifier: events_explorer_searching
+    parent: events_explorer
+    weight: 201
+  - name: Navigate the Explorer
+    url: service_management/events/explorer/navigate
+    identifier: events_explorer_navigate
+    parent: events_explorer
+    weight: 202
+  - name: Customization
+    url: service_management/events/explorer/customization
+    identifier: events_explorer_customization
+    parent: events_explorer
+    weight: 203
+  - name: Facets
+    url: service_management/events/explorer/facets
+    identifier: events_explorer_facets
+    parent: events_explorer
+    weight: 204
+  - name: Attributes
+    url: service_management/events/explorer/attributes
+    identifier: events_explorer_attributes
+    parent: events_explorer
+    weight: 205
+  - name: Notifications
+    url: service_management/events/explorer/notifications
+    identifier: event_explorer_notifications
+    parent: events_explorer
+    weight: 206
+  - name: Analytics
+    url: service_management/events/explorer/analytics
+    identifier: event_explorer_analytics
+    parent: events_explorer
+    weight: 207
+  # - name: Using Events
+  #   url: service_management/events/usage/
+  #   identifier: event_usage
+  #   parent: events
+  #   weight: 3
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
     parent: events
-    weight: 2
+    weight: 5
   - name: Case Management
     url: service_management/case_management/
     pre: case-management

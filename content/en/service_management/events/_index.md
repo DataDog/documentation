@@ -1,12 +1,13 @@
 ---
-title: Events
+title: Event Management
 kind: documentation
+is_beta: true
 aliases:
 - /guides/eventcorrelation/
 - /guides/markdown/
 - /events
 further_reading:
-- link: "/api/v1/events/"
+- link: "/api/latest/events/"
   tag: "Documentation"
   text: "Datadog Events API"
 - link: "/service_management/events/guides/recommended_event_tags/"
@@ -89,8 +90,8 @@ To add and configure event processing pipelines, see the [Enrich & Normalize][21
 [12]: /service_management/events/guides/dogstatsd/
 [13]: /service_management/events/guides/email/
 [14]: /service_management/events/explorer/
-[15]: /service_management/events/explorer/#event-analytics
-[16]: /logs/explorer/search_syntax/
+[15]: /service_management/events/explorer/analytics
+[16]: /service_management/events/explorer/searching
 [17]: /dashboards/widgets/alert_graph/
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /getting_started/tagging/unified_service_tagging/
