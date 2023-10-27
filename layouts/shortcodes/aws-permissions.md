@@ -34,6 +34,8 @@ The following permissions included in the policy document use wild cards such as
                 "dynamodb:List*",
                 "dynamodb:Describe*",
                 "ec2:Describe*",
+                "ec2:GetTransitGatewayPrefixListReferences",
+                "ec2:SearchTransitGatewayRoutes",
                 "ecs:Describe*",
                 "ecs:List*",
                 "elasticache:Describe*",
