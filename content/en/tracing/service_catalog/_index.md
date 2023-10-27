@@ -114,6 +114,16 @@ To access additional details describing security vulnerabilities and signals, cl
 
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
+### Software Delivery view
+The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI and viewing your static analysis violations. Search for the service you are interested in to:
+
+- Find security vulnerabilities before they reach production thanks to static analysis.
+- Identify maintainability issues early in the development cycle.
+- View how frequently a service CI is failing and analyze its pipelines to see a trend over time.
+
+To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
+
+
 ## Investigate a service
 
 Clicking on a service opens a side panel with details including:
