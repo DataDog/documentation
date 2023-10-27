@@ -186,14 +186,19 @@ main:
     url: getting_started/application_security/vulnerability_management
     parent: getting_started_application_security
     weight: 101
+  - name: Workflow Automation
+    identifier: getting_started_workflow_automation
+    url: getting_started/workflow_automation/
+    parent: getting_started
+    weight: 23
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 23
+    weight: 24
   - name: Support
     url: getting_started/support/
     parent: getting_started
-    weight: 24
+    weight: 25
   - name: Glossary
     url: glossary/
     pre: features
@@ -8716,7 +8721,8 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
