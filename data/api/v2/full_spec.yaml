@@ -14278,7 +14278,7 @@ components:
 
         associated values.'
       properties:
-        attributes:
+        custom:
           additionalProperties: {}
           description: A JSON object of attributes in the security signal.
           example:
