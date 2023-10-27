@@ -39,7 +39,7 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 {{< img src="metrics/mwl_example_include_tags.mp4" alt="Configuration of Tags with Allowlist" video=true >}}
 
 
-### Blocklist of tags 
+#### Blocklist of tags 
 1. Click on any metric name to open its details side panel.
 2. Click **Manage Tags** -> **"Exclude Tags…"** to drop tags you don't want to query. 
 3. Define your blocklist of tags. These tags will **not** be queryable on dashboards and monitors.
