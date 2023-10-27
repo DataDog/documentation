@@ -1679,7 +1679,7 @@ datadogRum.startSessionReplayRecording();
 
 ### TypeScript
 
-タイプは TypeScript >= 3.8.2 と互換性があります。以前のバージョンの場合は、JavaScript ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
+型は TypeScript >= 3.8.2 と互換性があります。以前のバージョンの場合は、JavaScript ソースをインポートし、グローバル変数を使用してコンパイルの問題を回避します。
 
 ```javascript
 import '@datadog/browser-rum/bundle/datadog-rum'
