@@ -34,6 +34,7 @@ In general, setting up ASM for AWS Lambda involves:
 
 ## Prerequisites
 
+
 - [Serverless APM][2] is configured on the Lambda function to send traces directly to Datadog. The X-Ray integration for sending trace data to APM does not support the data ASM needs to monitor functions.
 
 ## Get started
