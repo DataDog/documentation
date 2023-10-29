@@ -117,7 +117,7 @@ let rum = RUMMonitor.shared()
 @IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
     rum.addAction(
         type: .tap,
-        name: sender.currentTitle ?? "",
+        name: sender.currentTitle ?? ""
     )
 }
 ```
