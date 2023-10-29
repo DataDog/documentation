@@ -1169,7 +1169,7 @@ CDN 同期の場合は以下を使用します。
 window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 ```
 
-<!-- 注: URL はすべて絶対値でなければなりません -->
+<!-- 注: URL はすべて絶対でなければなりません -->
 
 [1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
 [2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
