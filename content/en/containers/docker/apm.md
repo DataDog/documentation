@@ -291,9 +291,40 @@ from ddtrace import tracer
 tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
+### Unix Domain Socket (UDS)
+To submit traces via socket, the socket should be mounted to the Agent container and your application container.
+
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network <NETWORK_NAME> \
+              --cgroupns host \
+              --pid host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -v /var/run/datadog/:/var/run/datadog/ \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+              gcr.io/datadoghq/agent:latest
+# Application
+docker run -d --name app \
+              --network <NETWORK_NAME> \
+              -v /var/run/datadog/:/var/run/datadog/ \
+              -e DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket \
+              company/app:latest
+```
+
+Refer to the [language-specific APM instrumentation docs][3] for tracer settings.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /tracing/guide/security/#replace-rules
+[3]: /tracing/setup/
