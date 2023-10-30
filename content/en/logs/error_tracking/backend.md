@@ -233,37 +233,9 @@ except:
 
 ### Ruby on Rails
 
-#### Lograge (JSON)
+#### Custom logger formatter
 
 If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7].
-
-To log a caught exception yourself, you may optionally use:
-
-```ruby
-# Lograge config
-config.lograge.enabled = true
-
-# This specifies to log in JSON format
-config.lograge.formatter = Lograge::Formatters::Json.new
-
-# Disables log coloration
-config.colorize_logging = false
-
-# Log to a dedicated file
-config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rails.env}.log"))
-
-# Configure logging of exceptions to the correct fields
-config.lograge.custom_options = lambda do |event|
-    {
-      error: {
-        kind: event.payload[:exception][0],
-        message: event.payload[:exception][1],
-        stack: event.payload[:exception_object].backtrace.join("\n")
-      }
-    }
-  end
-end
-```
 
 To manually log an error, create a formatter using JSON and map the exception values to the correct fields:
 
@@ -302,6 +274,39 @@ logger = Logger.new(STDOUT)
 logger.formatter = JsonWithErrorFieldFormatter.new
 ```
 
+If you use **Lograge**, you can also set it up to send formatted error logs:
+``` ruby
+Rails.application.configure do
+    jsonLogger = Logger.new(STDOUT) # STDOUT or file depending on your agent configuration
+    jsonLogger.formatter = JsonWithErrorFieldFormatter.new
+
+    # Replacing Rails default TaggedLogging logger with a new one with the json formatter.
+    # TaggedLogging is incompatible with more complex json format messages
+    config.logger = jsonLogger
+
+    # Lograge config
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Raw.new
+
+    # Disables log coloration
+    config.colorize_logging = false
+
+    # Configure logging of exceptions to the correct fields
+    config.lograge.custom_options = lambda do |event|
+        if event.payload[:exception_object]
+            return {
+                level: 'ERROR',
+                message: event.payload[:exception_object].inspect,
+                error: {
+                    kind: event.payload[:exception_object].class,
+                    message: event.payload[:exception_object].message,
+                    stack: event.payload[:exception_object].backtrace.join("\n")
+                }
+            }
+        end
+    end
+end
+```
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
