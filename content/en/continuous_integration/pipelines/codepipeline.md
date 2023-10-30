@@ -26,14 +26,11 @@ To set up the integration between [AWS CodePipeline][1] and Datadog CI Visibilit
 1. [API Destination][2]: an HTTP endpoint pointing to Datadog's intake.
 2. [AWS EventBridge Rule][3]: a rule that forwards CodePipeline event to the API Destination.
 
+The following guide separates the creation steps for clarity, but note that it's not required to create the resources
+in two different steps. They can also be created at the same time during the EventBridge Rule creation process.
 More information about monitoring pipeline events are present in the [official AWS guide][4].
 
 ### Create the API Destination
-
-<div class="alert alert-info">
-It's not required to create the API destination before the EventBridge Rule is created. They can also be
-created at the same time during the EventBridge Rule creation process.
-</div>
 
 1. In the AWS Console, go to **EventBridge > API destinations** and click on **Create API destination**.
 2. Choose a name for the API Destination (for example, **datadog-ci-visibility-api**) and optionally add a description.
@@ -44,6 +41,7 @@ created at the same time during the EventBridge Rule creation process.
    2. Under **Destination type**, select **Other**
    3. Under **Authorization type**, select **API key**.
    Input **DD-API-KEY** as the **API key name** and input your [Datadog API Key][5] in the **Value** field.
+6. Click on **Create**.
 
 ### Create the EventBridge Rule
 
@@ -52,21 +50,21 @@ created at the same time during the EventBridge Rule creation process.
 3. Leave the event bus as **default**, and, under **Rule Type**, select **Rule with an event pattern**. Click on **Next**.
 4. Under **Event Source**, select **AWS events or EventBridge partner events**.
 5. Under **Creation Method**, select **Custom pattern (JSON editor)**. Then, under **Event Pattern**, input the following JSON:
+
    ```
    {
      "source": ["aws.codepipeline"],
      "detail-type": ["CodePipeline Pipeline Execution State Change", "CodePipeline Action Execution State Change", "CodePipeline Stage Execution State Change"]
    }
    ```
-   <div class="alert alert-info">
+
    The JSON above will set up the integration for all of your pipelines. To restrict the set of pipelines, please
    refer to the [Only monitor specific pipelines][6] section below.
-   </div>
 6. Click on **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
 and select the API destination that you have created before. Alternatively, you can also create the API destination
 at this moment by following the steps outlined in the [Create the API Destination][7] section.
-8. Under **Headers Parameters**, Click on **Add header parameter**. Input **DD-CI-PROVIDER-AWSCODEPIPELINE** as the **Key** and **true** as the value.
+8. Under **Headers Parameters**, Click on **Add header parameter**. Input **DD-CI-PROVIDER-AWSCODEPIPELINE** as the key and **true** as the value.
 9. Choose **Create a new role for this specific resource** (or use an existing one if you prefer).
 10. Review that the information is correct and create the rule.
 
@@ -116,8 +114,8 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [3]: https://aws.amazon.com/eventbridge/
 [4]: https://docs.aws.amazon.com/codepipeline/latest/userguide/detect-state-changes-cloudwatch-events.html
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: Add_link_to_section
-[7]: Add_link_to_section
+[6]: /continuous_integration/pipelines/codepipeline/#create-the-api-destination
+[7]: /continuous_integration/pipelines/codepipeline/#only-monitor-specific-pipelines
 [8]: https://docs.datadoghq.com/continuous_integration/tests/
 [9]: https://aws.amazon.com/codebuild/
 [10]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
