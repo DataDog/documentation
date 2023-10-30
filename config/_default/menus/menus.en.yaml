@@ -3978,7 +3978,7 @@ main:
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 604
-  - name: Explorer
+  - name: Exploring RUM Data
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
