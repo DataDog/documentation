@@ -8,6 +8,7 @@ code_lang_weight: 30
 aliases:
     - /real_user_monitoring/flutter/advanced_configuration
     - /real_user_monitoring/otel
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/otel
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
     - /real_user_monitoring/flutter/otel_support/
 further_reading:
@@ -346,7 +347,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## OpenTelemetry setup
 
-The [Datadog Tracking HTTP Client][12] package and [gRPC Interceptor][13] package both support distributed traces through both automatic header generation and header ingestion. This page describes how to use OpenTelemetry with RUM Flutter.
+The [Datadog Tracking HTTP Client][12] package and [gRPC Interceptor][13] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
 
 ### Datadog header generation
 
