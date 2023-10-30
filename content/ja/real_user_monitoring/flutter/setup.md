@@ -19,7 +19,7 @@ title: セットアップ
 
 ## 前提条件
 
-まず、各プラットフォームに対応した環境を適切に構築します。
+まず、各プラットフォームに対して環境が適切にセットアップされていることを確認します。
 
 <div class="alert alert-info">
 Datadog は、Flutter 2.8+ の iOS と Android の Flutter Monitoring をサポートしています。Flutter Web のサポートはアルファ版です。
@@ -43,14 +43,45 @@ Android の場合、`minSdkVersion` のバージョンは >= 19 でなければ�
 
 ### Web
 
-Web の場合、`index.html` の `head` タグの下に以下を追加します。
-
+Web の場合、`index.html` の `head` タグ内に以下のコードを追加します (**{{<region-param key="dd_site_name">}}** サイトの場合): 
+{{< site-region region="us" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
 ```
+{{</ site-region>}}
 
-これは、Logs と RUM の CDN 配信された Datadog Browser SDK をロードします。Browser SDK の同期 CDN 配信バージョンは、Datadog Flutter プラグインでサポートされている唯一のバージョンです。
+これにより、ログと RUM 用の CDN 経由で配信される Datadog Browser SDK がロードされます。Datadog Flutter プラグインがサポートしているのは、Browser SDK の同期 CDN 配信バージョンのみです。
 
 ## セットアップ
 
@@ -60,7 +91,7 @@ Web の場合、`index.html` の `head` タグの下に以下を追加します�
    dependencies:
      datadog_flutter_plugin: ^1.3.0
    ```
-2. 以下のスニペットで、Datadog の各機能 (Logs や RUM など) のコンフィグレーションオブジェクトを作成します。ある機能に対してコンフィギュレーションを渡さない場合、その機能は無効化されます。
+2. 以下のスニペットで、Datadog の各機能 (ログや RUM など) の構成オブジェクトを作成します。ある機能に対して構成を渡さない場合、その機能は無効化されます。
 
    ```dart
    // Determine the user's consent to be tracked
@@ -86,13 +117,13 @@ Web の場合、`index.html` の `head` タグの下に以下を追加します�
 データの安全性を確保するために、クライアントトークンを使用する必要があります。Datadog API キーは、Datadog Flutter プラグインを構成するために使用することはできません。
 
 - RUM を使用する場合、**Client Token** と **Application ID** を設定します。
-- Logs のみを使用する場合は、クライアントトークンでライブラリを初期化します。
+- ログのみを使用する場合は、クライアントトークンでライブラリを初期化します。
 
 クライアントトークンのセットアップについて、詳しくは[クライアントトークンに関するドキュメント][3]を参照してください。
 
 ### ライブラリの初期化
 
-RUM の初期化は、`main.dart` ファイル内の 2 つのメソッドのうちの 1 つを使用して行うことができます。
+RUM の初期化は、`main.dart` ファイル内の 2 つの方法のうちの 1 つを使用して行うことができます。
 
 1. [エラー追跡][4]を自動的に設定する `DatadogSdk.runApp` を使用します。
 
@@ -128,7 +159,7 @@ RUM の初期化は、`main.dart` ファイル内の 2 つのメソッドのう�
 
 ### RUM セッションのサンプリング
 
-アプリケーションが Datadog RUM に送信するデータを制御するには、[Flutter RUM SDK を初期化][2]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。デフォルトでは、`sessionSamplingRate` は 100 に設定されています (すべてのセッションを保持)。
+アプリケーションが Datadog RUM に送信するデータを制御するには、[Flutter RUM SDK を初期化][2]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。デフォルトでは、`sessionSamplingRate` は 100 (すべてのセッションを維持) に設定されます。
 
 たとえば、セッションの使用の 50% のみを維持するには、
 
@@ -144,7 +175,7 @@ final config = DdSdkConfiguration(
 
 ### 追跡の同意を設定する
 
-GDPR 規制を遵守するため、Datadog Flutter SDK は初期化時に `trackingConsent` の値を求めます。
+GDPR 規制を遵守するため、Datadog Flutter SDK は初期化時に `trackingConsent` の値を要求します。
 
 `trackingConsent` に以下のいずれかの値を設定します。
 

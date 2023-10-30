@@ -7,7 +7,7 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/dd-201
   tag: 학습 센터
   text: 'Datadog 201: 파워 유저 되기'
-- link: /agent/guide/dual-shipping/
+- link: /agent/configuration/dual-shipping/
   tag: 가이드
   text: 이중 배송
 kind: 설명서
@@ -60,5 +60,5 @@ Datadog는 전 세계에서 다양한 사이트를 제공합니다. 각 사이�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /ko/agent/guide/dual-shipping/
+[2]: /ko/agent/configuration/dual-shipping/
 [3]: /ko/real_user_monitoring/#supported-endpoints-for-sdk-domains
