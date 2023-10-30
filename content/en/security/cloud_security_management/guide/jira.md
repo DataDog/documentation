@@ -1,5 +1,5 @@
 ---
-title: Create Jira Issues for Security Issues
+title: Create Jira Issues for Cloud Security Management Issues
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management"
@@ -10,37 +10,76 @@ further_reading:
     text: Workflow Automation
 ---
 
-security issues or impacted resources
+Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security Management (CSM) security issue. Jira for Cloud Security Management is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
 
-**Notes**:
+**Note**: To create Jira issues, you must have the `security_monitoring_findings_write` permission. See [Role Based Access Control][2] for more information about Datadog's default roles and granular role-based access control permissions available for CSM.
 
-- To use this functionality, you must configure the [Jira integration][1].
-- Jira for Cloud Security Management is available for CSM Misconfigurations and CSM Identity Risks.
+## Configure the Jira integration
 
-you can either create one ticket per selected issue or multiple tickets with one single click
-You have to specify the jira project key that corresponds to your jira project, and the jira issue type (task, story, bug, Epic ...)
-Once the request is sent, an animation will indicate that the jira is being created and a link to the jira ticket is then added to findings panels
+To create Jira issues for CSM security issues, you must configure the [Jira integration][5]. For detailed instructions, see the [Jira][1] integration docs.
 
-### Create a Jira issue for one or more impacted resources
+## Create a Jira issue for impacted resources
 
-on the side panel for Misconfigurations or Identity Risks
+{{< tabs >}}
 
-1. On the side panel, under **Resources Impacted**, select one or more resources.
-2. On the **Actions** dropdown menu, select **Create Jira Issue**.
-3. Choose whether to create a single issue or multiple issues (one issue for each resource).
-4. Select the Jira project you want to assign the issue to.
-5. Select the issue type from the available options.
-6. Click **Create Issue**.
+{{% tab "CSM Misconfigurations" %}}
 
-### Create a Jira issue for a security issue
+To create a Jira issue for one or more resources impacted by a misconfiguration:
 
-standalone issue side panel.
+1. On the [Misconfigurations explorer][1], select a misconfiguration.
+2. Under **Resources Impacted**, select one or more resources.
+3. On the **Actions** dropdown menu, select **Create Jira Issue**.
+4. Choose whether to create a single issue or multiple issues (one issue for each resource).
+5. Select the Jira project you want to assign the issue to.
+6. Select the issue type from the available options.
+7. Click **Create Issue**.
 
-1. On the side panel, click **Create Jira Issue**.
-2. On the **Create a Jira Issue** modal, select the Jira project you want to assign the issue to.
-3. Select the issue type from the available options.
-4. Click **Create Issue**.
+You can also create a Jira issue from the standalone issue side panel.
+
+1. On the [Misconfigurations explorer][1], set the Group By filter to **Resources**.
+2. Select a resource.
+3. On the **Misconfiguration** tab, select a misconfiguration.
+4. Click **Create Jira Issue**.
+5. Select the Jira project you want to assign the issue to.
+6. Select the issue type from the available options.
+7. Click **Create Issue**.
 
 After you create the issue, a link to the Jira issue is displayed on the side panel. You can add additional Jira issues for the same security issue.
 
+[1]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+
+{{% tab "CSM Identity Risks" %}}
+
+1. On the [Identity Risks explorer][1], select a misconfiguration.
+2. Under **Resources Impacted**, select one or more resources.
+3. On the **Actions** dropdown menu, select **Create Jira Issue**.
+4. Choose whether to create a single issue or multiple issues (one issue for each resource).
+5. Select the Jira project you want to assign the issue to.
+6. Select the issue type from the available options.
+7. Click **Create Issue**.
+
+You can also create a Jira issue from the standalone issue side panel.
+
+1. On the [Identity Risks explorer][1], set the Group By filter to **Resources**.
+2. Select a resource.
+3. On the **Misconfiguration** tab, select a misconfiguration.
+4. Click **Create Jira Issue**.
+5. Select the Jira project you want to assign the issue to.
+6. Select the issue type from the available options.
+7. Click **Create Issue**.
+
+After you create the issue, a link to the Jira issue is displayed on the side panel. You can add additional Jira issues for the same security issue.
+
+[1]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 [1]: /integrations/jira/
+[2]: /account_management/rbac/permissions/#cloud-security-platform
+[3]: /security/misconfigurations/
+[4]: /security/identity_risks/
+[5]: https://app.datadoghq.com/integrations/jira?search=jira
