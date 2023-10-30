@@ -23,7 +23,7 @@ further_reading:
 
 JVM metrics collection is enabled by default for Java tracer v0.29.0+. It can be disabled with one configuration parameter in the tracing client, either through a system property, `-Ddd.jmxfetch.enabled=false`, or through an environment variable, `DD_JMXFETCH_ENABLED=false`. As of v0.64.0+, you can also use the `DD_RUNTIME_METRICS_ENABLED=false` environment variable to disable it.
 
-JVM metrics can be viewed in correlation with your Java services. See the [Service page][1] in Datadog.
+JVM metrics can be viewed in correlation with your Java services. See the [Service Catalog][1] in Datadog.
 
 {{< img src="tracing/runtime_metrics/jvm-runtime.png" alt="JVM Runtime" >}}
 
@@ -54,7 +54,7 @@ Additional JMX metrics can be added using configuration files that are passed on
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent

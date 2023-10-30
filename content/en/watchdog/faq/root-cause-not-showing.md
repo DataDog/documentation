@@ -25,7 +25,7 @@ Do you think Watchdog should have found something that it missed? Or, do you hav
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: https://docs.datadoghq.com/integrations/amazon_ec2/#metrics
 [3]: https://docs.datadoghq.com/integrations/system/#metrics
 [4]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes#overview

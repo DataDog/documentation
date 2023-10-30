@@ -3,6 +3,8 @@ title: Datadog Service Catalog
 kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
+  - /tracing/services/services_list/
+  - /tracing/visualization/services_list/
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
@@ -35,7 +37,7 @@ algolia:
 
 Datadog Service Catalog is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as GitHub, Datadog dashboards, and Datadog views that receive and monitor telemetry data for each service.
 
-Compared to the APM Service List, the Service Catalog includes services that do not actively emit trace metrics, which means you do not need to instrument your service for it to appear. Service Catalog also automatically includes services detected by USM and RUM. Service Catalog supports a one hour look back window. If you do not see your APM services in Service Catalog, they most likely were not sending active trace metrics during the last hour. You may still find these services in APM Service List.
+The Service Catalog includes services that do not actively emit trace metrics, and you do not need to instrument your service for it to appear. Service Catalog also automatically includes services detected by USM and RUM. Service Catalog supports a one hour look-back window. If you do not see your APM services in Service Catalog, they most likely were not sending active trace metrics during the last hour. 
 
 The Service Catalog is useful for:
 - Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
@@ -76,7 +78,7 @@ The **Reliability** tab contains information about the stability of your service
 - Which services have ongoing incidents.
 - Which services have monitors that are triggered.
 
-Click the Settings icon on the right hand corner to hide columns from the service list.
+Click the Settings icon on the right hand corner to hide columns from the list.
 
 ### Performance view
 
@@ -114,7 +116,7 @@ The **Security tab** provides several ways to assess and improve the security po
 
 To access additional details describing security vulnerabilities and signals, click on the service row to open a detailed side panel. Alternatively, click on the pop-over **View Service Details** button, which opens the service page, and in turn, its security tab.
 
-Click the Settings icon on the right hand corner to hide metric columns from the service list.
+Click the Settings icon on the right hand corner to hide metric columns from the list.
 
 ### Costs view
 The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][19], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
@@ -126,7 +128,7 @@ For more information on a service's cost changes, click on the service row to op
 
 This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][20] and [Tag Pipelines][21]. 
 
-Click the Settings icon on the right hand corner to hide metric columns from the service list.
+Click the Settings icon on the right hand corner to hide metric columns from the list.
 
 ## Investigate a service
 
@@ -170,6 +172,32 @@ The Service Catalog write permission allows a user to modify service catalog dat
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
+## Services types
+
+Every monitored service is associated with a type. Datadog automatically determines this type based on the `span.type` attribute attached to incoming spans data. The type specifies the name of the application or framework that the Datadog Agent is integrating with.
+
+For example, if you use the official Flask Integration, the `Type` is set to "Web". If you are monitoring a custom application, the `Type` appears as "Custom".
+
+The type of the service can be one of:
+
+*  Cache
+*  Custom
+*  DB
+*  Serverless function
+*  Web
+
+Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
+
+## Changing service color
+
+Service color is used in trace visualizations. Click the service type icon to change it.
+
+{{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
+
+## Data retention
+The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][22].
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -193,3 +221,4 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [19]: /cloud_cost_management/
 [20]: /cloud_cost_management/?tab=aws
 [21]: /cloud_cost_management/tag_pipelines
+[22]: /developers/guide/data-collection-resolution-retention/
