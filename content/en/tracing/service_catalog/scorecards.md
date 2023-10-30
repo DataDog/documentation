@@ -14,6 +14,8 @@ further_reading:
 Service Scorecards are in beta.
 {{< /callout >}}
 
+{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Service Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+
 ## Overview
 
 Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
@@ -27,6 +29,8 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 1. Open the [Scorecards page][8] in Service Catalog.
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
+
+{{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Service Scorecards setup page" style="width:90%;" >}}
 
 ### Creating custom rules
 
@@ -121,6 +125,8 @@ To create a Report:
 5. Click **Enable this Workflow**.
 
 Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
+
+{{< img src="/tracing/service_catalog/scorecard-reports.png" alt="Scorecard reports creation modal showing how to create report for all services" style="width:90%;" >}}
 
 
 ### Managing Scorecard reports

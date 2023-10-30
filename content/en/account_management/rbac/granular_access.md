@@ -27,7 +27,7 @@ Use the different principals to control access patterns in your organization and
 The feature to gain access to individual resources is in private beta. To request access, <a href="/help">contact Support</a>.
 </div>
 
-A user with the `user_access_manage` permission can gain edit access to any individual resource that has restricted access. To get access, click the **Gain Edit Access** button in the granular access control modal.
+A user with the `user_access_manage` permission can gain edit access to any individual resource that supports restrictions based on team, role, and user or service account. Resources with only role-based access restrictions are not supported. To get access, click the **Gain Edit Access** button in the granular access control modal.
 
 [1]: /account_management/teams/
 [2]: /dashboards/#permissions

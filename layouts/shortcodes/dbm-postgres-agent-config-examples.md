@@ -113,6 +113,45 @@ instances:
       - relation_name: external_seller_products
 ```
 
+### Collecting schemas
+To enable this feature, use the `collect_schemas` option. You must also [configure the Agent to connect to each logical database](#monitoring-relation-metrics-for-multiple-logical-databases).
+
+Use the `database_autodiscovery` option to avoid specifying each logical database. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
+
+```yaml
+init_config:
+# This instance only collects data from the `users` database
+# and collects relation metrics only from the specified tables
+instances:
+  - dbm: true
+    host: example-service-primary.example-host.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    dbname: users
+    dbstrict: true
+    collect_schemas:
+      enabled: true
+    relations:
+      - products
+      - external_seller_products
+  # This instance detects every logical database automatically
+  # and collects relation metrics from every table
+  - dbm: true
+    host: example-service–replica-1.example-host.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    database_autodiscovery:
+      enabled: true
+    collect_schemas:
+      enabled: true
+    relations:
+      - relation_regex: .*
+
+
+```
+
 ### Working with hosts through a proxy
 If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Use the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
 ```yaml
