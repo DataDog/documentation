@@ -58,8 +58,8 @@ More information about monitoring pipeline events are present in the [official A
    }
    ```
 
-   The JSON above will set up the integration for all of your pipelines. To restrict the set of pipelines, please
-   refer to the [Only monitor specific pipelines][6] section below.
+   The JSON above will set up the integration for all of your pipelines. To restrict the set of pipelines,
+   follow the [Only monitor specific pipelines][6] section below.
 6. Click on **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
 and select the API destination that you have created before. Alternatively, you can also create the API destination
