@@ -28,7 +28,3 @@ The time frame selector controls the time range of events that are shown in the 
 Change the time range by selecting a preset range from the time frame dropdown, or by entering a custom time range.
 
 Because all search parameters are contained within the URL, you can share your view by sharing the URL.
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
