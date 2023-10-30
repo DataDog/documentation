@@ -1,5 +1,5 @@
 ---
-title: Send Eßvents to Datadog
+title: Send Events to Datadog
 kind: Documentation
 ---
 

@@ -1,9 +1,14 @@
 ---
 title: Using Events
 kind: Documentation
+further_reading:
+- link: "/logs/log_configuration/processors/"
+  tag: "Documentation"
+  text: "Learn more about processing pipelines"
+- link: "/service_management/events/explorer/"
+  tag: "Documentation"
+  text: "Triage events with the Events Explorer"
 ---
-
-## Overview
 
 ## Enrichment and normalization
 
@@ -12,44 +17,49 @@ A _processor_ runs data-structuring actions on events attributes when they are i
 - Normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][1] everywhere.
 - Enrich events with external data saved in a [Reference Table][2] (beta). For example, map a service name with your service directory to enrich events with team ownership information, links to dashboards, or links to documentation.
 
-To add and configure event processing pipelines, see the [Enrich & Normalize][3] tab of Event Management. If you need further help, contact Datadog [support][4].
-
-[Learn more about processing pipelines][5].
+To add and configure event processing pipelines, see the **[Enrich & Normalize][3]** tab of Event Management. If you need further help, contact Datadog [support][4].
 
 ## Custom metrics
 
-[Generate metrics][6] with 15-month retention from any event search query to create and monitor historical events and alerts.
+[Generate metrics][5] with 15-month retention from any event search query to create and monitor historical events and alerts. For more information, see [Event Analytics][6].
 
-{{< img src="service_management/events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+{{< img src="service_management/events/usage/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
-## Example use cases
+## Examples of what do to with events
 
 ### Triage features
 
-Use the [Events Explorer][7] to aggregate and view events coming into Datadog. Group or filter events by attribute and graphically represent them with [event analytics][6]. Use the [query syntax][16] to filter events using Boolean and wildcard operators.
+Use the [Events Explorer][7] to aggregate and view events coming into Datadog. Group or filter events by attribute and graphically represent them with event analytics. Use the query search syntax to filter events using Boolean and wildcard operators.
 
-{{< img src="service_management/events/events-explorer.mp4" alt="Sorting events by attributes and exploring analytics" video=true >}}
+### Dashboards
 
-### Dashboard overlays
+{{< img src="service_management/events/usage/events-dashboard.mp4" alt="A graph widget that uses events as the source" video=true >}}
 
-You can use events as a data source in [graph widgets][17]. You can build timeseries, tables, and top list widgets of your event search queries.
+You can use events as a data source in [graph widgets][8] to build timeseries, tables, and top list widgets of your event search queries. For example, the [Monitor Notifications Overview][9] dashboard analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
 
-{{< img src="service_management/events/events-dashboard.mp4" alt="A graph widget that uses events as the source" video=true >}}
+#### Overlays 
 
-For example, check out the [Monitor Notifications Overview][18] dashboard, which analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
+{{< img src="service_management/events/usage/event_overlays.png" alt="Option to view event overlays on an example dashboard" style="width:100%;" >}}
+
+Overlays visualize corresponding events on top of your graphs. Use the Dashboard [Event Overlays][10] feature to identify when a recent change is causing performance issues within your application or services and find the source of the problem. 
 
 ### Create a monitor
 
-Send monitor alerts and notifications based on significant event queries. To configure an alert, see the [Event Monitor][8] documentation.
+Send monitor alerts and notifications based on significant event queries. To configure an alert, see the [Event Monitor][11] documentation.
 
+## Further reading
 
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /integrations/guide/reference-tables/
 [3]: https://app.datadoghq.com/event/pipelines
 [4]: /help/
-[5]: /logs/log_configuration/processors/
+[5]: https://app.datadoghq.com/event/configuration/generate-metrics
 [6]: /service_management/events/explorer/analytics
 [7]: /service_management/events/explorer/
-[8]: /monitors/types/event/
+[8]: /dashboards/widgets/alert_graph/
+[9]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
+[10]: /dashboards/change_overlays/
+[11]: /monitors/types/event/
