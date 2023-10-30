@@ -93,12 +93,14 @@ Datadog recommends creating a secret in [Secret Manager][8] with your valid Data
 
 The default behavior for Dataflow pipeline workers is to use your project's [Compute Engine default service account][10], which grants permissions to all resources in the project. If you are forwarding logs from a production environment, create a custom worker service account with only the necessary roles and permissions, and assign this service account to your Dataflow pipeline workers.
 
+**Note**: If you are not creating a custom service account for the Dataflow pipeline workers, ensure that the default Compute Engine service account has the [required permissions](#required-permissions) below.
+
 1. Navigate to Google Cloud's [Service Account][11] page.
 1. Select your project.
 1. Click **Create Service Account**.
 1. Enter a descriptive name for the service account.
 1. Click **Create and Continue**.
-1. If you are not creating a custom service account for the Dataflow pipeline workers, ensure that the default Compute Engine service account has the following required permissions.
+1. Add the following roles:
     ##### Required permissions
     | Role | Path | Description |
     | -------------  | ----------- | ----------- |
@@ -108,7 +110,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     | [Pub/Sub Subscriber][15] | `roles/pubsub.subscriber` | Allow this service account to consume messages from the Pub/Sub subscription with your Google Cloud logs
     | [Pub/Sub Publisher][16] | `roles/pubsub.publisher` | Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Allow this service account to access the Datadog API key in Secret Manager
-    | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files
+    | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files |
 7. Continue **Continue**.
 8. Click **Done**.
 
@@ -119,7 +121,8 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Click **Create Sink**.
 1. Enter a descriptive name for the sink.
 1. Click **Next**.
-1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.
+1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.   
+    **Note**: The Cloud Pub/Sub topic can be located in a different project.
 1. In the **Select a Cloud Pub/Sub topic**, select the Pub/Sub created earlier.
 1. Click **Next**.
 1. Enter an inclusion filter for the logs you want to send to Datadog.
@@ -137,7 +140,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Select a regional endpoint.
 1. In the **Dataflow template** dropdown menu, select **Pub/Sub to Datadog**.
 1. In **Required Parameters** section:  
-      a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a [new Pub/Sub system](#create-a-new-google-cloud-publishsubscription-pubsub-system).  
+      a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).  
       b. Enter the following in the **Datadog Logs API URL** field:
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
