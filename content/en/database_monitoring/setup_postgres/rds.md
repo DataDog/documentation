@@ -249,7 +249,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -310,7 +310,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
+[2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -422,7 +422,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -456,7 +456,7 @@ If you have installed and configured the integrations and Agent as described and
 [8]: https://www.postgresql.org/docs/current/app-psql.html
 [9]: /database_monitoring/guide/managed_authentication
 [10]: https://app.datadoghq.com/account/settings/agent/latest
-[11]: /agent/guide/agent-commands/#agent-status-and-information
+[11]: /agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://app.datadoghq.com/databases
 [13]: /integrations/amazon_rds
 [14]: /database_monitoring/troubleshooting/?tab=postgres

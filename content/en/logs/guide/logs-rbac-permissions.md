@@ -101,9 +101,7 @@ This permission can be assigned either globally or restricted to a subset of pip
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Assign the role(s) in the modal of a specific pipeline.
-
-{{< img src="account_management/rbac/logs_write_processors.png" alt="Logs Write Processors" style="width:75%;" >}}
+Assign the role(s) in the `Edit` modal of a specific pipeline.
 
 {{% /tab %}}
 {{% tab "API" %}}

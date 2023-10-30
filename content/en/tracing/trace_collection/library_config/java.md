@@ -101,6 +101,11 @@ Accepts a map of case-insensitive header keys to tag names and automatically app
 Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
 **Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
 
+`dd.trace.rate.limit`
+: **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
+**Default**: `100`<br>
+Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
+
 `dd.trace.request_header.tags`
 : **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
 **Default**: `null`<br>
@@ -470,7 +475,7 @@ Available since version 1.10.0
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
 [3]: /tracing/setup/docker/
-[4]: /agent/guide/network/#configure-ports
+[4]: /agent/configuration/network/#configure-ports
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [6]: /tracing/configure_data_security/#telemetry-collection
 [7]: /developers/dogstatsd/#setup

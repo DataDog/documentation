@@ -57,6 +57,7 @@ Estimated usage metrics are generally available for the following usage types:
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices` | Unique IoT devices seen in the last hour. |
+| Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}

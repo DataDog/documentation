@@ -21,7 +21,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 **Note**: The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
 ## Build a funnel
 
-To build a funnel, navigate to **UX Monitoring > Funnel Analysis**. You can also find the Funnel Analysis tab by going to the **Performance Summary** page within RUM.
+To build a funnel, navigate to **UX Monitoring > Funnel Analysis**.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab-updated.png" alt="Navigate to the Funnel Analysis tab within RUM" style="width:100%;" >}}
 
