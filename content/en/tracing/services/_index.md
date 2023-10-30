@@ -16,10 +16,10 @@ Viewing span and trace data through the lens of your services can ease troublesh
 {{< img src="tracing/visualization/service_obs_catalog.png" alt="Service Catalog" >}}
 
 {{< whatsnext desc="Use the following visualizations and tools to monitor, report, and solve problems in your distributed services" >}}
-    {{< nextlink href="tracing/service_catalog/" >}}Services Catalog{{< /nextlink >}}
+    {{< nextlink href="tracing/service_catalog/" >}}Service Catalog{{< /nextlink >}}
     {{< nextlink href="tracing/services/service_page/" >}}Service Pages{{< /nextlink >}}
     {{< nextlink href="tracing/services/resource_page/" >}}Resource Pages{{< /nextlink >}}
     {{< nextlink href="tracing/services/deployment_tracking/" >}}Deployment Tracking{{< /nextlink >}}
-    {{< nextlink href="tracing/services/services_map/" >}}Services Map{{< /nextlink >}}
+    {{< nextlink href="tracing/services/services_map/" >}}Service Map{{< /nextlink >}}
     {{< nextlink href="monitors/create/types/apm/" >}}APM Monitors{{< /nextlink >}}
 {{< /whatsnext >}}
