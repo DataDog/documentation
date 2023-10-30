@@ -261,6 +261,11 @@ Tags to be set on all spans, for example: `key1:value1,key2:value2`.
 **Default**: `null`<br>
 CSV of header names that are reported on the root span as tags.
 
+`DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
+: **INI**: `datadog.trace.db_client_split_by_instance`<br>
+**Default**: `0`<br>
+Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->query()` call to a database host `datadoghq.com` has the service name `pdo-datadoghq.com` instead of the default service name of `pdo`.
+
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
 : **INI**: `datadog.trace.http_client_split_by_domain`<br>
 **Default**: `0`<br>
@@ -571,7 +576,7 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
 [11]: /tracing/trace_collection/trace_context_propagation/php/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/
 [16]: /tracing/configure_data_security#telemetry-collection

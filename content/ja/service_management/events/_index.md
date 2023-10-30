@@ -17,6 +17,10 @@ kind: documentation
 title: イベント
 ---
 
+{{< site-region region="us3,us5,gov" >}}
+<div class="alert alert-warning">Event Management はこのサイトではサポートされていません。</div>
+{{< /site-region >}}
+
 {{< img src="service_management/events/events_explorer.png" alt="イベントエクスプローラー表示" >}}
 
 ## はじめに
@@ -25,9 +29,9 @@ _イベント_とは、コードのデプロイメント、サービスの健全
 
 Datadog Events は、あらゆるソースからのイベントを一箇所で検索、分析、フィルタリングするための統合インターフェイスを提供します。
 
-追加設定なしで、Datadog Events は、Agent とインストールされたインテグレーションによって収集されるイベントを自動的に収集します。
+追加設定なしで、Datadog Events は Agent およびインストール済みインテグレーションによって収集されるイベントを自動的に集めます。
 
-[Kubernetes][1]、[Docker][2]、[Jenkins][3]、[Chef][4]、[Puppet][5]、[AWS ECS][6] または [Autoscaling][7]、[Sentry][8]、[Nagios][9] など 100 以上の Datadog インテグレーションがイベント収集をサポートしています。
+[Kubernetes][1]、[Docker][2]、[Jenkins][3]、[Chef][4]、[Puppet][5]、[Amazon ECS][6] または [Autoscaling][7]、[Sentry][8]、[Nagios][9] など 100 以上の Datadog インテグレーションがイベント収集をサポートしています。
 
 ## Datadog にカスタムイベントを送信する
 
@@ -49,9 +53,9 @@ Datadog Events は、あらゆるソースからのイベントを一箇所で�
 
 例えば、[Monitor Notifications Overview][18] ダッシュボードは、モニターアラートイベントの傾向を分析し、構成の改善とアラートの疲労を軽減するのに役立ちます。
 
-### イベントからカスタムメトリクスを生成 
+### イベントからカスタムメトリクスを生成 する
 
-イベント検索クエリから 15 ヶ月間保持される[メトリクスを生成][15]し、過去のイベントやアラートを作成、監視します。
+任意のイベント検索クエリから 15 か月間保持される[メトリクスを生成][15]し、過去のイベントやアラートを作成、監視します。
 
 {{< img src="service_management/events/generate-metrics.png" alt="イベント検索クエリによるメトリクスのイメージ。" >}}
 

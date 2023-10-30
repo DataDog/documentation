@@ -28,18 +28,19 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 ## Compatibility
 
 Supported languages:
-* Swift >= 5.2
-* Objective-C >= 2.0
+
+| Language | Version | Notes |
+|---|---|---|
+| Swift | >= 5.2 | If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks. |
+| Objective-C | >= 2.0 | |
 
 Supported platforms:
-* iOS >= 11.0
-* macOS >= 10.13
-* tvOS >= 11.0
 
-**Note**: If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks.
-
-### Test suite level visibility compatibility
-[Test suite level visibility][1] is only supported from `dd-sdk-swift-testing>=2.1.0`.
+| Platform | Version |
+|---|---|
+| iOS | >= 11.0 |
+| macOS | >= 10.13 |
+| tvOS | >= 11.0 |
 
 ## Installing the Swift testing SDK
 
@@ -646,7 +647,7 @@ class DDTestModule {
     // - Parameters:
     //   - name: Name of the suite.
     //   - startTime: Optional. The time the suite started.
-    func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
+    func suiteStart(name: String, startTime: Date? = nil) -> DDTestSuite
 }
     //
 public class DDTestSuite : NSObject {
@@ -665,7 +666,7 @@ public class DDTestSuite : NSObject {
     // - Parameters:
     //   - name: Name of the test.
     //   - startTime: Optional. The time the test started.
-    func testStart(name: String, startTime: Date: Date? = nil) -> DDTest
+    func testStart(name: String, startTime: Date? = nil) -> DDTest
 }
     //
 public class DDTest : NSObject {
@@ -687,7 +688,7 @@ public class DDTest : NSObject {
     // - Parameters:
     //   - status: The status reported for this test.
     //   - endTime: Optional. The time the test ended.
-    func end(status: DDTestStatus, endTime: Date: Date? = nil)
+    func end(status: DDTestStatus, endTime: Date? = nil)
 }
     //
 // Possible statuses reported by a test:
