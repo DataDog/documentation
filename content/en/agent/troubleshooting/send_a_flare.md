@@ -38,7 +38,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Kubernetes | `kubectl exec <POD_NAME> -it agent flare <CASE_ID>`     |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- agent flare <CASE_ID>`  |
 | Fedora     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
