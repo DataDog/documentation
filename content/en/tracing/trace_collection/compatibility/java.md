@@ -81,7 +81,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
-| Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
+| Vert.x                  | 3.4+       | Fully Supported | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`  |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -173,9 +173,9 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | RediScala | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
 | Redisson | 2.x-3.x      | Fully Supported | `redisson`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
-| Vert.x Cassandra Client | 3.9		 | Fully Supported | `cassandra`																			  |
+| Vert.x Cassandra Client | 3.9+		 | Fully Supported | `cassandra`																			  |
 | Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                     |
-| Vert.x MySQL Client     | 3.9      | Fully Supported | `vertx-sql-client`																		  |
+| Vert.x MySQL Client     | 3.9+      | Fully Supported | `vertx-sql-client`																		  |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 

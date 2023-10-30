@@ -12,6 +12,9 @@ further_reading:
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
   text: "Application Vulnerability Management"
+- link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"
+  tag: "Blog"
+  text: "Accelerate security investigations with Datadog Threat Intelligence"
 ---
 
 {{< site-region region="gov" >}}
@@ -76,6 +79,10 @@ trace qualification
 them as `Harmful Safe or Unknown`.
 : See [Trace Qualification][15].
 
+threat intelligence
+: A set of rules executed in the Datadog libraries to detect threats. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
+: See [Threat Intelligence][16] 
+
 ## Attacks and known vulnerabilities terms
 
 Open Web Application Security Project (OWASP)
@@ -128,3 +135,4 @@ Object-Graph Navigation Language Injection (OGNLi)
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
 [14]: /security/application_security/threats/add-user-info/
 [15]: /security/application_security/threats/trace_qualification/
+[16]: /security/application_security/threats/threat-intelligence/

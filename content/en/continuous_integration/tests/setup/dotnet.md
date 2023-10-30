@@ -837,7 +837,7 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
 [9]: /continuous_integration/guides/add_custom_metrics/?tab=net
 [10]: https://github.com/coverlet-coverage/coverlet
-[11]: /continuous_integration/integrate_tests/code_coverage/?tab=net
+[11]: /continuous_integration/tests/code_coverage/?tab=net
 [12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://www.nuget.org/packages/Datadog.Trace
