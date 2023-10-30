@@ -1309,11 +1309,6 @@ main:
     identifier: events
     parent: service_management_heading
     weight: 30000
-  # - name: Ingest Events
-  #   url: service_management/events/ingest/
-  #   identifier: event_ingest
-  #   parent: events
-  #   weight: 1
   - name: Explorer
     url: service_management/events/explorer/
     identifier: events_explorer
@@ -1354,11 +1349,6 @@ main:
     identifier: event_explorer_analytics
     parent: events_explorer
     weight: 207
-  # - name: Using Events
-  #   url: service_management/events/usage/
-  #   identifier: event_usage
-  #   parent: events
-  #   weight: 3
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
@@ -6887,19 +6877,6 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
-  - name: Mute or unmute a finding
-    url: '#mute-or-unmute-a-finding'
-    identifier: security-monitoring-mute-or-unmute-a-finding
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateFinding
-      unstable:
-        - v2
-      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6910,6 +6887,19 @@ api:
         - v2
       operationids:
         - GetFinding
+      unstable:
+        - v2
+      order: 2
+  - name: Mute or unmute a batch of findings
+    url: '#mute-or-unmute-a-batch-of-findings'
+    identifier: security-monitoring-mute-or-unmute-a-batch-of-findings
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - MuteFindings
       unstable:
         - v2
       order: 2
