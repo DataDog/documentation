@@ -54,11 +54,11 @@ You can use events as a data source in [graph widgets][17]. You can build timese
 
 For example, check out the [Monitor Notifications Overview][18] dashboard, which analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
 
-### Generate custom metrics from events 
+<!-- ### Generate custom metrics from events 
 
 [Generate metrics][15] with 15-month retention from any event search query to create and monitor historical events and alerts.
 
-{{< img src="service_management/events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+{{< img src="service_management/events/generate-metrics.png" alt="Image of metrics with the events search query." >}} -->
 
 ### Normalize and enrich events with processing pipelines
 
