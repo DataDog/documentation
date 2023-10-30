@@ -28,7 +28,7 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 ## Configuration of tags
 
-#### Allowlist of tags 
+### Allowlist of tags 
 1. Click any metric name to open its details side panel. 
 2. Click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
 3. Define your allowlist of tags. 
@@ -39,11 +39,10 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 {{< img src="metrics/mwl_example_include_tags.mp4" alt="Configuration of Tags with Allowlist" video=true >}}
 
 
-#### Blocklist of tags 
+### Blocklist of tags 
 1. Click on any metric name to open its details side panel.
 2. Click **Manage Tags** -> **"Exclude Tags…"** to drop tags you don't want to query. 
-3. Define your blocklist of tags. These tags will **not** be queryable on dashboards and monitors.
-4. Hover over a tag to see if it has been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days. 
+3. Define your blocklist of tags. These tags will **not** be queryable on dashboards and monitors. Hover over a tag to see if it has been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days. 
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
