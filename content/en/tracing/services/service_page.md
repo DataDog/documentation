@@ -7,9 +7,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/resource_page/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
@@ -18,7 +18,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
   tag: "Blog"
-  text: "Add an APM service page url to your clipboard"
+  text: "Add an APM service page URL to your clipboard"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
@@ -30,7 +30,7 @@ algolia:
 
 ## Overview
 
-Selecting a service on the services page leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
+Selecting a service on the Service Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
@@ -82,7 +82,7 @@ Use the Dependency Map to visualize service-to-service communication and gain in
 
 For more information, see [New Service page and inferred services][20].
 
-{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section of the APM Services page" style="width:100%;">}}
+{{< img src="tracing/services/service_page/dependencies.png" alt="The dependency section of the APM Service page" style="width:100%;">}}
 
 ## Out-of-the-box graphs
 
