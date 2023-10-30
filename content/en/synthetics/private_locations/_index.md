@@ -126,7 +126,7 @@ Only users with the **Admin** role can create private locations. For more inform
 
 Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Create a private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="Create a private location" style="width:90%;">}}
 
 Fill out your private location details:
 
@@ -696,15 +696,24 @@ livenessProbe:
 
 {{< /tabs >}}
 
+### Upgrade a private location image
+
+To upgrade an existing private location, click the **Gear** icon on the private location side panel and click **Installation instructions**.
+
+{{< img src="synthetics/private_locations/pl_edit_config.png" alt="Access the setup workflow for a private location" style="width:90%;" >}}
+
+Then, run the [configuration command based on your environment](#install-your-private-location
+) to get the latest version of the private location image. 
+
 ### Test your internal endpoint
 
-Once at least one private location container starts reporting to Datadog, the private location status displays green:
+Once at least one private location container starts reporting to Datadog, the private location status displays green.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting" style="width:90%;">}}
 
-You can also see a `REPORTING` health status displayed on the Private Locations list in the **Settings** page:
+You can see a `REPORTING` health status and an associated monitor status displayed on the Private Locations list in the **Settings** page.
 
-{{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="Private location health" style="width:95%;">}}
+{{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location health and monitor status" style="width:100%;">}}
 
 Start testing your first internal endpoint by launching a fast test on one of your internal endpoints to see if you get the expected response:
 
@@ -728,7 +737,7 @@ You can also **vertically scale** your private locations by increasing the load 
 
 For more information, see [Dimensioning Private Locations][18].
 
-In order to use private locations for continuous testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
+In order to use private locations for Continuous Testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 
