@@ -283,8 +283,8 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -635,9 +635,9 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [1]: /logs/log_configuration/parsing
 [2]: /agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /logs/log_configuration/parsing/?tab=matchers
 [8]: /logs/explorer/#overview
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/

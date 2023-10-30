@@ -43,7 +43,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 5.0.1
+integration_version: 6.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -590,7 +590,7 @@ Agent コンテナで必要な環境変数
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.mongodb.org/manual/reference/command/dbStats
 [5]: https://docs.datadoghq.com/ja/help/

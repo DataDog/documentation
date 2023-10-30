@@ -120,6 +120,55 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 
 - `RumConfiguration.tracingSamplingRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
+
+## Automatically track actions
+
+Use [`RumUserActionDetector`][13] to track user taps that happen in a given Widget tree:
+
+```dart
+RumUserActionDetector(
+  rum: DatadogSdk.instance.rum,
+  child: Scaffold(
+    appBar: AppBar(
+      title: const Text('RUM'),
+    ),
+    body: // Rest of your application
+  ),
+);
+```
+
+`RumUserActionDetector` automatically detects tap user actions that occur in its tree and sends them to RUM. It detects interactions with several common Flutter widgets.
+
+For most Button types, the detector looks for a `Text` widget child, which it uses for the description of the action. In other cases it looks for a `Semantics` object child, or an `Icon` with its `Icon.semanticsLabel` property set.
+
+Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which uses the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
+
+```dart
+Container(
+  margin: const EdgeInsets.all(8),
+  child: RumUserActionAnnotation(
+    description: 'My Image Button',
+    child: InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage,
+            image: image,
+          ),
+          Center(
+            child: Text(
+              text,
+              style: theme.textTheme.headlineSmall,
+            ),
+          )
+        ],
+      ),
+    ),
+  ),
+);
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -136,3 +185,5 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
 [12]: /real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking
+[13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
+[14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html

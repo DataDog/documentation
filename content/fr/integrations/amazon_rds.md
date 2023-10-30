@@ -213,9 +213,9 @@ init_config:
 
 instances:
     # L'URL d'endpoint de la console AWS
-    - server: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
-      user: '<NOMUTILISATEUR>'
-      pass: '<MOTDEPASSE>'
+    - server: 'mysqlrds.blah.us-east-1.rds.amazonaws.com'
+      user: '<NOM_UTILISATEUR>'
+      pass: '<MOT_DE_PASSE>'
       port: 3306
       tags:
           - 'dbinstanceidentifier:<NOM_INSTANCE>'

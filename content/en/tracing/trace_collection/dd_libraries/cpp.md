@@ -24,51 +24,9 @@ further_reading:
 ---
 **Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
 
-## Configure the Datadog Agent for APM
-
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
-
-{{< tabs >}}
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables.
-
-To connect to the Agent using Unix Domain Sockets, use `DD_TRACE_AGENT_URL` instead. Set it to the same value as the Agent's value for `DD_APM_RECEIVER_SOCKET`.
-
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
-
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
-
-For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Instrument your application
 
-After the Agent is installed, follow these steps to add the Datadog tracing library to your C++ applications in one of two ways:
+After [the Agent is installed][6], follow these steps to add the Datadog tracing library to your C++ applications in one of two ways:
 
 * Compile against dd-opentracing-cpp, where the Datadog lib is compiled in and configured in code
 * Dynamic loading, where the Datadog OpenTracing library is loaded at runtime and configured via JSON
@@ -225,3 +183,4 @@ If needed, configure the tracing library to send application performance telemet
 [3]: /tracing/compatibility_requirements/cpp
 [4]: https://app.datadoghq.com/apm/service-setup
 [5]: /tracing/trace_collection/library_config/cpp/
+[6]: /tracing/trace_collection#install-and-configure-the-agent

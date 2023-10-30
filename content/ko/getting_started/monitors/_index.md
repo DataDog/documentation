@@ -33,7 +33,7 @@ Datadog에서 [메트릭 모니터링][5]을 설정하려면 메인 내비게이
 
 ### 메트릭 정의
 
-디스크 용량 부족 시 경고를 받으려면 [디스크 통합][6]에서 `system.disk.in_use` 메트릭을 활용하고, `host` 및 `device`에 대하여 메트릭 평균치를 계산합니다. 
+디스크 용량 부족 시 경고를 받으려면 [디스크 통합][6]에서 `system.disk.in_use` 메트릭을 활용하고, `host` 및 `device`에 대하여 메트릭 평균치를 계산합니다.
 
 {{< img src="getting_started/application/metric_query.png" alt="경고 설정"  >}}
 

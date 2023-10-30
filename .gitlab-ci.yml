@@ -105,7 +105,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-18726195
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-20763517
   tags:
     - "arch:amd64"
   rules:
@@ -209,9 +209,14 @@ algolia_sync_preview:manual:
   environment: "preview"
   allow_failure: true
   interruptible: true
+  timeout: 2h
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
+    - >
+      ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') 
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') 
+      CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
+      yarn run algolia:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
@@ -225,9 +230,14 @@ algolia_sync_live:
   environment: "live"
   allow_failure: true
   interruptible: true
+  timeout: 2h
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:sync
+    - >
+      ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id')
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') 
+      CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
+      yarn run algolia:sync
 
 sourcemaps_preview:
   <<: *base_template
@@ -404,16 +414,17 @@ link_checks:on-schedule:
   interruptible: true
   allow_failure: true
 
-test_missing_tms_live:
-  <<: *base_template
-  <<: *live_rules
-  stage: post-deploy
-  cache: {}
-  environment: "live"
-  dependencies:
-    - build_live
-  script:
-    - check_missing_tms
+# We are relying on the preview version of this job due to the length of time it takes
+# test_missing_tms_live:
+#   <<: *base_template
+#   <<: *live_rules
+#   stage: post-deploy
+#   cache: {}
+#   environment: "live"
+#   dependencies:
+#     - build_live
+#   script:
+#     - check_missing_tms
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
@@ -440,6 +451,7 @@ run_pa11y:schedule:
       when: always
     - if: $CI_COMMIT_TAG != null || $CI_COMMIT_BRANCH =~ "/pull/\/.*/"
       when: never
+  timeout: 2h
 
 run_pa11y:manual:
   <<: *pa11y_live_template
@@ -519,7 +531,7 @@ set_redirect_metadata_live:
 ####################################
 #                                  #
 #      Failure Notifications       #
-#                                  # 
+#                                  #
 ####################################
 failure_notification_preview:
   <<: *base_template

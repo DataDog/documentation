@@ -15,17 +15,17 @@ kind: documentation
 title: Instrumenter des applications Java sans serveur
 ---
 
-<div class="alert alert-warning">Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (<code>java8.al2</code>), Java 11 (<code>java11</code>) ou Java 17 (<code>java17</code>) avec au moins 1 024 Mo de mémoire.</div>
+Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (`java8.al2`), Java 11 (`java11`) ou Java 17 (`java17`) avec au moins 1 024 Mo de mémoire.
 
-<div class="alert alert-warning">Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez transmettre des données avec <a href="/agent/guide/private-link/">AWS PrivateLink</a> pour le site <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog</a> ou avec <a href="/agent/proxy/">un proxy</a> pour tous les autres sites.</div>
+Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez envoyer vos données [via AWS PrivateLink][6] pour le [site Datadog][7] `datadoghq.com` ou [via un proxy][8] pour tous les autres sites.
 
-<div class="alert alert-warning">Si vous avez déjà configuré vos fonctions Lambda à l'aide du Datadog Forwarder, consultez la documentation relative à l'<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">Instrumentation avec le Forwarder Datadog</a>.</div>
+Si vous avez déjà configuré vos fonctions Lambda à l'aide du Datadog Forwarder, consultez la documentation relative à l'[instrumentation avec le Forwarder Datadog][9]. Vous pouvez également suivre les instructions fournies dans ce guide pour instrumenter vos applications avec l'extension Lambda Datadog.
 
-<div class="alert alert-warning">Si vous utilisez les couches Lambda Datadog `dd-trace-java:4` et `Datadog-Extension:24` (ou des versions antérieures), suivez les <a href="https://docs.datadoghq.com/serverless/guide/upgrade_java_instrumentation">instructions de mise à niveau spéciales</a>.</div>
+Si vous utilisez les couches Lambda Datadog `dd-trace-java:4` (ou des versions antérieures) et `Datadog-Extension:24` (ou des versions antérieures), suivez les [instructions de mise à niveau spéciales][10].
 
 ## Installation
 
-Datadog propose de nombreuses méthodes différentes pour instrumenter vos applications sans serveur. Choisissez ci-dessous l'approche qui répond le mieux à vos besoins. Datadog recommande généralement d'utiliser l'interface de ligne de commande Datadog.
+Datadog propose de nombreuses méthodes différentes pour instrumenter vos applications sans serveur. Choisissez celle qui répond le mieux à vos besoins ci-dessous. Nous vous conseillons d'utiliser l'interface de ligne de commande Datadog. Vous *devez* suivre les instructions fournies pour "Image de conteneur" si votre application est déployée en tant qu'image de conteneur.
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande Datadog" %}}
@@ -120,6 +120,77 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [2]: https://docs.datadoghq.com/fr/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+<div class="alert alert-info">L'instrumentation de fonctions Java via le CDK Construct Datadog est disponible uniquement pour les applications AWS CDK écrites en Node.js et Python.</div>
+
+La [bibliothèque CDK Construct Datadog][1] installe automatiquement Datadog sur vos fonctions à l'aide des couches Lambda. Elle configure vos fonctions afin qu'elles envoient des métriques, traces et logs à Datadog via l'extension Lambda Datadog.
+
+1. Installer la bibliothèque CDK Construct Datadog
+
+    **Node.js** :
+    ```sh
+    # For AWS CDK v1
+    npm install datadog-cdk-constructs --save-dev
+
+    # For AWS CDK v2
+    npm install datadog-cdk-constructs-v2 --save-dev
+    ```
+
+    **Python** :
+    ```sh
+    # For AWS CDK v1
+    pip install datadog-cdk-constructs
+
+    # For AWS CDK v2
+    pip install datadog-cdk-constructs-v2
+    ```
+
+2. Instrumenter vos fonctions Lambda
+
+    **Node.js** :
+    ```javascript
+    // For AWS CDK v1
+    import { Datadog } from "datadog-cdk-constructs";
+
+    // For AWS CDK v2
+    import { Datadog } from "datadog-cdk-constructs-v2";
+
+    const datadog = new Datadog(this, "Datadog", {
+        javaLayerVersion: {{< latest-lambda-layer-version layer="dd-trace-java" >}},
+        extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
+        site: "<DATADOG_SITE>",
+        apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
+    });
+    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
+    ```
+
+    **Python** :
+    ```python
+    # For AWS CDK v1
+    from datadog_cdk_constructs import Datadog
+
+    # For AWS CDK v2
+    from datadog_cdk_constructs_v2 import Datadog
+
+    datadog = Datadog(self, "Datadog",
+        java_layer_version={{< latest-lambda-layer-version layer="dd-trace-java" >}},
+        extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
+        site="<DATADOG_SITE>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
+      )
+    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
+    ```
+
+    Renseignez les paramètres fictifs comme suit :
+    - Remplacez `<DATADOG_SITE>` par {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
+    - Remplacez `<DATADOG_API_KEY_SECRET_ARN>` par l'ARN du secret AWS où votre [clé d'API Datadog][2] est stockée de façon sécurisée. La clé doit être stockée sous forme de chaîne de texte brut (et non en tant que blob JSON). Assurez-vous que le rôle d'exécution de votre fonction Lambda dispose de l'autorisation IAM `secretsmanager:GetSecretValue` pour lire la valeur du secret. Pour effectuer un test rapide, vous pouvez utiliser `apiKey` et définir la clé d'API Datadog sous forme de texte brut.
+
+    Pour obtenir plus de détails ainsi que des paramètres supplémentaires, consultez la [documentation relative à la bibliothèque CDK Datadog][1].
+
+[1]: https://github.com/DataDog/datadog-cdk-constructs
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
 {{% tab "Image de conteneur" %}}
 
 1. Installer l'extension Lambda Datadog
@@ -146,9 +217,134 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [1]: https://gallery.ecr.aws/datadog/lambda-extension
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Terraform" %}}
+Utilisez ce format pour votre [ressource Terraform][1] :
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Assurez-vous de choisir les couches adéquates en fonction de votre architecture Lambda et de vos régions AWS
+
+  layers = [
+    <ARN_TRACEUR_DATADOG>,
+    <ARN_EXTENSION_DATADOG>
+  ]
+
+  environment {
+    variables = {
+      DD_SITE                     = <SITE_DATADOG>
+      DD_API_KEY_SECRET_ARN       = <CLÉ_API>
+      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
+    }
+  }
+}
+```
+
+Renseignez les variables adéquates :
+
+1. Remplacez `<ARN_TRACEUR_DATADOG>` par l'ARN du traceur Datadog adéquat en fonction de votre type de région :
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>LAYERS</th>
+        </tr>
+        <tr>
+            <td>Commercial</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+                </code>
+            </td>
+        </tr>
+        <tr>
+            <td>GovCloud</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
+                </code>
+                </td>
+        </tr>
+    </table>
+
+   Dans chaque ARN, remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+
+2. Remplacez `<ARN_EXTENSION_DATADOG>` par l'ARN de l'extension Lambda Datadog adéquate en fonction de votre région et de votre architecture.
+
+    <table>
+        <tr>
+            <th>AWS REGIONS</th>
+            <th>ARCHITECTURE</th>
+            <th>LAYERS</th>
+        </tr>
+        <tr>
+            <td rowspan=2>Commercial</td>
+            <td>x86_64</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+            </td>
+        <tr>
+            <td>arm64</td>
+            <td>
+                <code>
+                arn:aws:lambda:&lt;AWS_REGION&gt;:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+                </td>
+        </tr>
+        <tr>
+            <td rowspan=2>GovCloud</td>
+            <td>x86_64</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+                </td>
+        <tr>
+            <td>arm64</td>
+            <td>
+                <code>
+                arn:aws-us-gov:lambda:&lt;AWS_REGION&gt;:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+                </code>
+            </td>
+        </tr>
+    </table>
+
+3. Remplacez `<SITE_DATADOG>` par {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
+
+4. Remplacez `CLÉ_API` par l'ARN du secret AWS où votre clé d'API Datadog est stockée de façon sécurisée. La clé doit être stockée sous forme de chaîne de texte brut (et non en tant que blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour effectuer un test rapide, vous pouvez également utiliser `DD_API_KEY` au lieu de `DD_API_KEY_SECRET_ARN` et définir la valeur sur votre clé d'API Datadog sous forme de texte brut.
+
+#### Exemple complet
+
+```sh
+resource "aws_lambda_function" "lambda" {
+  "function_name" = ...
+  ...
+
+  # Assurez-vous de choisir les couches adéquates en fonction de votre architecture Lambda et de vos régions AWS
+
+  layers = [
+    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-java:11",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+  ]
+
+  environment {
+    variables = {
+      DD_SITE                     = datadoghq.com
+      DD_API_KEY_SECRET_ARN       = "arn:aws..."
+      AWS_LAMBDA_EXEC_WRAPPER     = "/opt/datadog_wrapper"
+    }
+  }
+}
+```
+
+[1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+{{% /tab %}}
 {{% tab "Configuration personnalisée" %}}
 
-1. Installer le Tracer Datadog
+1. Installer le traceur Datadog
 
     [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
 
@@ -164,7 +360,7 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
 2. Installer l'extension Lambda Datadog
 
-   [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
+    [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format suivant :
 
     ```sh
     # Use this format for x86-based Lambda deployed in AWS commercial regions
@@ -180,13 +376,13 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
     ```
 
-   Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
+    Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
 
 3. Définir les variables d'environnement requises
 
-    - Définir `AWS_LAMBDA_EXEC_WRAPPER` sur`/opt/datadog_wrapper`.
+    - Définissez `AWS_LAMBDA_EXEC_WRAPPER` sur `/opt/datadog_wrapper`.
     - Définissez `DD_SITE` sur {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
-    - Définissez `DD_API_KEY_SECRET_ARN` sur l'ARN du secret AWS où votre [clé d'API Datadog][2] est stockée en toute sécurité. La clé doit être stockée sous forme de chaîne de texte brut (et non un blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour un test rapide, vous pouvez également utiliser `DD_API_KEY` et définir la clé d'API Datadog sous forme de texte brut.
+    - Définissez `DD_API_KEY_SECRET_ARN` sur l'ARN du secret AWS où votre [clé d'API Datadog][2] est stockée de façon sécurisée. La clé doit être stockée sous forme de chaîne de texte brut (et non en tant que blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour effectuer un test rapide, vous pouvez également utiliser `DD_API_KEY` et définir la clé d'API Datadog sous forme de texte brut.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -195,7 +391,8 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
 ## Et ensuite ?
 
-- Vous pouvez désormais visualiser des métriques, logs et traces sur la [page d'accueil Serverless][1].
+- Vous pouvez désormais visualiser vos métriques, logs et traces sur la [page d'accueil Serverless][1].
+- Activez la [surveillance des menaces][11] pour recevoir des alertes en cas d'attaques ciblant votre service.
 - Envoyez une [métrique custom][2] ou une [span APM][3] pour surveiller votre logique opérationnelle.
 - Consultez le [guide de dépannage][4] si vous ne parvenez pas à recueillir les données de télémétrie.
 - Examinez les [configurations avancées][5] pour :
@@ -214,3 +411,9 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [3]: /fr/tracing/custom_instrumentation/java/
 [4]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /fr/serverless/configuration/
+[6]: /fr/agent/guide/private-link/
+[7]: /fr/getting_started/site/
+[8]: /fr/agent/proxy/
+[9]: /fr/serverless/guide/datadog_forwarder_java
+[10]: /fr/serverless/guide/upgrade_java_instrumentation
+[11]: /fr/security/application_security/enabling/serverless/?tab=serverlessframework

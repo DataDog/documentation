@@ -31,6 +31,7 @@ aliases:
   - /ja/videos/two_minute_intro/
   - /ja/videos/unshare_screenboards/
   - /ja/videos/weekly_monitor_report/
+  - /ja/video-categories/フレームグラフ/
 ---
 Datadog は、インフラストラクチャーの状態を把握するための総合プラットフォームです。[Datadog ラーニングセンター][1]では、ユーザーの皆さまが Datadog のすべての機能を最大限に活用できるよう支援しています。
 

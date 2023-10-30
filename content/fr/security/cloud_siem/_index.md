@@ -17,6 +17,13 @@ further_reading:
   tag: Blog
   text: Concevoir une stratégie de conformité, gouvernance et transparence pour toutes
     vos équipes avec le journal d'audit Datadog
+- link: https://www.datadoghq.com/blog/aws-threat-emulation-detection-validation-datadog/
+  tag: Blog
+  text: Émulation des menaces AWS et validation des détections avec Stratus Red Team
+    et Datadog Cloud SIEM
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
+  tag: Blog
+  text: Surveiller 1Password avec la solution Cloud SIEM de Datadog
 kind: documentation
 title: Cloud SIEM
 ---

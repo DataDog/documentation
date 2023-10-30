@@ -77,6 +77,10 @@ The Explorer displays batches of tests run by [Continuous Testing and your CI/CD
 
 For more information about test batches, see [Search Test Batches][4].
 
+## Export
+
+Export your view as a [saved view][9] in the Synthetic Monitoring & Continuous Testing Explorer.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -89,3 +93,4 @@ For more information about test batches, see [Search Test Batches][4].
 [6]: /continuous_testing/explorer/search_runs/
 [7]: /synthetics/
 [8]: /continuous_testing/
+[9]: /continuous_testing/explorer/saved_views/

@@ -11,6 +11,10 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-warning">The Network Topology Map for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
@@ -25,8 +29,9 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 ### Prerequisites
 
-1. LLDP (Link Layer Discovery Protocol) and CDP (Cisco Discovery Protocol) are enabled on the device with this data exposed through SNMP.
+1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
 2. Datadog Agent version 7.46 or later is installed.
+3. If you're using [device autodiscovery][3], enable `snmp_listeners.collect_topology: true` in the `datadog.yaml` file.
 
 ## Investigating devices
 
@@ -73,3 +78,4 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 
 [1]: /network_monitoring/devices/netflow/
 [2]: https://app.datadoghq.com/infrastructure/devices?viewTab=topology
+[3]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2#autodiscovery

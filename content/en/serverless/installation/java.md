@@ -199,7 +199,7 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
     COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
-    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
 2. Install the Datadog Java APM client
 
@@ -397,7 +397,7 @@ resource "aws_lambda_function" "lambda" {
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
 - See the [advanced configurations][5] to
     - connect your telemetry using tags
-    - collect telemetry for AWS API Gateway, SQS, etc.
+    - collect telemetry for Amazon API Gateway, SQS, etc.
     - capture the Lambda request and response payloads
     - link errors of your Lambda functions to your source code
     - filter or scrub sensitive information from logs or traces
@@ -413,7 +413,7 @@ resource "aws_lambda_function" "lambda" {
 [5]: /serverless/configuration/
 [6]: /agent/guide/private-link/
 [7]: /getting_started/site/
-[8]: /agent/proxy/
+[8]: /agent/configuration/proxy/
 [9]: /serverless/guide/datadog_forwarder_java
 [10]: /serverless/guide/upgrade_java_instrumentation
 [11]: /security/application_security/enabling/serverless/?tab=serverlessframework

@@ -47,6 +47,36 @@
     "request_description": "New definition of the span-based metric.",
     "request_schema_description": "The new span-based metric body."
   },
+  "ListApmRetentionFilters": {
+    "description": "Get the list of APM retention filters.",
+    "summary": "List all APM retention filters"
+  },
+  "CreateApmRetentionFilter": {
+    "description": "Create a retention filter to index spans in your organization.\nReturns the retention filter definition when the request is successful.",
+    "summary": "Create a retention filter",
+    "request_description": "The definition of the new retention filter.",
+    "request_schema_description": "The body of the retention filter to be created."
+  },
+  "ReorderApmRetentionFilters": {
+    "description": "Re-order the execution order of retention filters.",
+    "summary": "Re-order retention filters",
+    "request_description": "The list of retention filters in the new order.",
+    "request_schema_description": "A list of retention filters to reorder."
+  },
+  "DeleteApmRetentionFilter": {
+    "description": "Delete a specific retention filter from your organization.",
+    "summary": "Delete a retention filter"
+  },
+  "GetApmRetentionFilter": {
+    "description": "Get an APM retention filter.",
+    "summary": "Get a given APM retention filter"
+  },
+  "UpdateApmRetentionFilter": {
+    "description": "Update a retention filter from your organization.",
+    "summary": "Update a retention filter",
+    "request_description": "The updated definition of the retention filter.",
+    "request_schema_description": "The body of the retention filter to be updated."
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
@@ -136,6 +166,14 @@
     "summary": "Search tests events",
     "request_description": "",
     "request_schema_description": "The request for a tests search."
+  },
+  "ListContainerImages": {
+    "description": "Get all Container Images for your organization.",
+    "summary": "Get all Container Images"
+  },
+  "ListContainers": {
+    "description": "Get all containers for your organization.",
+    "summary": "Get All Containers"
   },
   "ListCurrentUserApplicationKeys": {
     "description": "List all application keys available for current user",
@@ -719,15 +757,39 @@
     "description": "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
     "summary": "List findings"
   },
+  "MuteFindings": {
+    "description": "Mute or unmute findings.",
+    "summary": "Mute or unmute a batch of findings",
+    "request_description": "### Attributes\n\nAll findings are updated with the same attributes. The request body must include at least two attributes: `muted` and `reason`.\nThe allowed reasons depend on whether the finding is being muted or unmuted:\n  - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n  - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n\n### Meta\n\nThe request body must include a list of the finding IDs to be updated.\n",
+    "request_schema_description": "The new bulk mute finding request."
+  },
   "GetFinding": {
     "description": "Returns a single finding with message and resource configuration.",
     "summary": "Get a finding"
   },
-  "UpdateFinding": {
-    "description": "Mute or unmute a specific finding.\nThe API returns the updated finding object when the request is successful.",
-    "summary": "Mute or unmute a finding",
-    "request_description": "To mute or unmute a finding, the request body should include at least two attributes: `muted` and `reason`. The allowed reasons depend on whether the finding is being muted or unmuted:\n- To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n- To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n",
-    "request_schema_description": "The new mute finding request."
+  "ListPowerpacks": {
+    "description": "Get a list of all powerpacks.",
+    "summary": "Get all powerpacks"
+  },
+  "CreatePowerpack": {
+    "description": "Create a powerpack.",
+    "summary": "Create a new powerpack",
+    "request_description": "Create a powerpack request body.",
+    "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
+  },
+  "DeletePowerpack": {
+    "description": "Delete a powerpack.",
+    "summary": "Delete a powerpack"
+  },
+  "GetPowerpack": {
+    "description": "Get a powerpack.",
+    "summary": "Get a Powerpack"
+  },
+  "UpdatePowerpack": {
+    "description": "Update a powerpack.",
+    "summary": "Update a powerpack",
+    "request_description": "Update a powerpack request body.",
+    "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
   },
   "ListProcesses": {
     "description": "Get all processes for your organization.",

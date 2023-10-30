@@ -101,6 +101,11 @@ Accepts a map of case-insensitive header keys to tag names and automatically app
 Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
 **Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
 
+`dd.trace.rate.limit`
+: **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
+**Default**: `100`<br>
+Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
+
 `dd.trace.request_header.tags`
 : **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
 **Default**: `null`<br>
@@ -156,10 +161,15 @@ Used to rename the service name associated with spans to be identified with the 
 **Default**: `false`<br>
 When set to `true` db spans get assigned the instance name as the service name
 
-`dd.trace.elasticsearch.body-and-params.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_AND_PARAMS_ENABLED` <br>
+`dd.trace.elasticsearch.body.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
 **Default**: `false`<br>
-When set to `true`, the body and query string parameters are added to Elasticsearch and OpenSearch spans.
+When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
+
+`dd.trace.elasticsearch.params.enabled`
+: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**Default**: `true`<br>
+When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
 
 `dd.trace.health.metrics.enabled`
 : **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
@@ -195,6 +205,11 @@ A range of errors can be accepted. By default 5xx status codes are reported as e
 : **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
 **Default**: `true`<br>
 When set to `true` query string parameters and fragment get added to web server spans
+
+`dd.http.server.route-based-naming`
+: **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
+**Default**: `true`<br>
+When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
 
 `dd.trace.enabled`
 : **Environment Variable**: `DD_TRACE_ENABLED`<br>
@@ -443,6 +458,16 @@ Deprecated since version 1.9.0
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Deprecated since version 1.9.0
 
+### Experimental features
+
+The following configuration options are for features that are available for use but may change in future releases.
+
+`dd.integration.opentelemetry.experimental.enabled`
+: **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
+**Default**: `false`<br>
+Enables experimental OpenTelemetry features. When you enable this setting, you can use the OpenTelemetry tracing API backed by the Datadog Trace Agent.<br>
+Available since version 1.10.0
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -450,7 +475,7 @@ Deprecated since version 1.9.0
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
 [3]: /tracing/setup/docker/
-[4]: /agent/guide/network/#configure-ports
+[4]: /agent/configuration/network/#configure-ports
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [6]: /tracing/configure_data_security/#telemetry-collection
 [7]: /developers/dogstatsd/#setup

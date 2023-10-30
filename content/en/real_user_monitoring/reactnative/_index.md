@@ -387,15 +387,15 @@ If you have `use_frameworks!` enabled in your `Podfile`, running `pod install` a
 The 'Pods-MyApp' target has transitive dependencies that include statically linked binaries: (DatadogSDKBridge, DatadogSDKCrashReporting)
 ```
 
-To prevent that error, you can overwrite `use_frameworks!` and install all pods as static except for the ones that needs to be a framework:
+To prevent that error, edit your `Podfile` to install the React Native SDK pod as a static library:
 
 ```ruby
-dynamic_frameworks = ['DatadogSDKBridge','DatadogSDKCrashReporting']
+static_libraries = ['DatadogSDKReactNative']
 
-# Make all the other frameworks into static frameworks by overriding the static_framework? function to return true
+# Turn pods with static dependencies into static libraries by overriding the static_framework? function to return true
 pre_install do |installer|
   installer.pod_targets.each do |pod|
-    if !dynamic_frameworks.include?(pod.name)
+    if static_libraries.include?(pod.name)
       def pod.static_framework?;
         true
       end

@@ -16,7 +16,7 @@ further_reading:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Static Analysis is in private beta. Python is the only supported language. To request access, <a href="/help">contact Support</a>.
+  Static Analysis is in private beta. Python, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 
@@ -31,7 +31,7 @@ Static Analysis is a clear-box software testing technique that analyzes a progra
 Using Static Analysis provides organizations with the following benefits:
 
 * Static Analysis takes the guesswork out of adhering to an organization's code standards, enabling your development team to ship compliant code without significant impacts to developer velocity.
-* An organization's applications are less likely to be vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
+* An organization's applications are less vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
@@ -54,6 +54,9 @@ rulesets:
   - python-security
   - python-code-style
   - python-inclusive
+ignore-paths:
+  - "path/to/ignore"
+  - "**.js"
 ```
 
 A `static-analysis.datadog.yml` file supports the following:
@@ -62,7 +65,7 @@ A `static-analysis.datadog.yml` file supports the following:
 |--------------------|-------------------------------------------------------------------------------------------|----------|---------|
 | `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
 | `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
-| `ignore-gitignore` | Determines whether Datadog Static Analysis will analyze the content in a `.gitignore` file.  | `false`  | `true`  |
+| `ignore-gitignore` | Determines whether Datadog Static Analysis analyzes the content in a `.gitignore` file.   | `false`  | `false` |
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
@@ -87,7 +90,7 @@ If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI di
 
 Prerequisites:
 
-- UnZip
+- unzip
 - Node.js 14 or later
 
 Configure the following environment variables:
@@ -100,11 +103,12 @@ Configure the following environment variables:
 
 Provide the following inputs:
 
-| Name        | Description                                                                                                                | Required | Default         |
-|-------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`   | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`       | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
-| `cpu_count` | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+| Name           | Description                                                                                                                | Required | Default         |
+|----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+| `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
 <div class="alert alert-info">
   Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
@@ -186,13 +190,39 @@ After you configure your CI pipelines to run the Datadog Static Analyzer, violat
 
 Each violation is associated with a specific commit and branch from your repository on which the CI pipeline ran. The rows represent every violation per commit. 
 
-Click on a violation to open a side panel that contains information about the scope of the violation and where it originated. 
+Click on a violation to open a side panel that contains information about the scope of the violation and where it originated.
+{{< img src="ci/static-analysis-violation.png" alt="Side panel for a static analysis violation" style="width:80%;">}} 
 
 The content of the violation is shown in tabs:
 
 * Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][3].
-* Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
-* Event: JSON metadata regarding the the Static Analysis violation event.
+* Fixes: One or more code fixes that can resolve the violation, which you can copy and paste.
+* Event: JSON metadata regarding the Static Analysis violation event.
+
+### Using suggested fixes
+{{< img src="ci/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
+
+In Datadog Static Analysis, there are two types of suggested fixes:
+
+1. **Default Suggested Fix:** For simple violations like linting issues, the rule analyzer automatically provides templated fixes.
+2. **AI Suggested Fix:** For complex violations, fixes are typically not available beforehand. Instead, you can use AI Suggested Fixes, which use OpenAI's GPT-4 to generate a suggested fix. You can choose between "Text" and "Unified Diff" fixes, which outputs plain text instructions or a code change for resolving the violation, respectively.
+
+The two types of fixes are distinguished visually in the UI with different labels.
+
+*Default Suggested Fixes:*
+{{< img src="ci/static-analysis-default-fix.png" alt="Visual indicator of a default static analysis suggested fix" style="width:60%;">}}
+
+*AI Suggested Fixes:*
+{{< img src="ci/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}}
+
+### Ignoring violations
+You can ignore a specific instance of a violation by commenting `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Analysis scans.
+
+```python
+#no-dd-sa
+foo = 1
+bar = 2
+```
 
 ## Further Reading
 

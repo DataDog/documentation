@@ -31,7 +31,7 @@ Pour activer la solution Database Monitoring pour votre base de données, suive
 
 ## Avant de commencer
 
-Versions de SQL Server prises en charge : 2012, 2014, 2016, 2017, 2019
+Versions de SQL Server prises en charge : 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 

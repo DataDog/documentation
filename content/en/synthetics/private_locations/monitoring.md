@@ -18,7 +18,7 @@ further_reading:
 
 With private locations, you have a set of out-of-the-box [metrics][1] to keep track of your private location health at a high level. You can visualize these metrics in the side panel of each private location on the [Settings][2] page or graph these metrics in a [dashboard][3].
 
-{{<img src="synthetics/private_locations/pl_monitoring_table.png" alt="Private location monitoring table" style="width:100%;">}}
+{{<img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location monitor list" style="width:100%;">}}
 
 In [**Synthetics Settings**][2], the **Private Locations** tab displays your private locations along with their reporting status and monitor status. 
 
@@ -28,7 +28,7 @@ In **Monitors**, you can see status warnings such as `ALERT` when something is g
 
 {{<img src="synthetics/private_locations/pl_monitoring_side_panel.png" alt="Private location monitoring side panel" style="width:100%;">}}
 
-### Default monitors
+## Default monitors
 
 When you create a private location, three monitors are added to your account:
 
@@ -42,7 +42,7 @@ By default, no handle is set in these monitors. To be alerted in case one of you
 
 Monitors in the **Monitors** tab either have a group that corresponds to your private location ID or are tagged with `location_id:<ID_OF_THE_PL>`.
 
-### Monitor your private locations with the Datadog Agent
+## Monitor your private locations with the Datadog Agent
 
 In addition to the out-of-the-box private location metrics, Datadog recommends installing the [Datadog Agent][7] alongside your private location. 
 
