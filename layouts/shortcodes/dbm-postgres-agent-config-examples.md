@@ -144,7 +144,6 @@ instances:
     password: '<PASSWORD>'
     database_autodiscovery:
       enabled: true
-    dbstrict: true
     collect_schemas:
       enabled: true
     relations:
