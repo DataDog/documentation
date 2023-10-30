@@ -4140,12 +4140,15 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
+      - ci_pipeline_indexed_spans_usage
+      - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
       - cloud_siem_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
+      - custom_event_usage
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
@@ -4159,9 +4162,22 @@ components:
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
+      - indexed_spans_usage
       - infra_host_usage
+      - ingested_logs_bytes_usage
+      - ingested_spans_bytes_usage
       - invocations_usage
       - lambda_traced_invocations_usage
+      - logs_indexed_15day_usage
+      - logs_indexed_180day_usage
+      - logs_indexed_30day_usage
+      - logs_indexed_360day_usage
+      - logs_indexed_3day_usage
+      - logs_indexed_45day_usage
+      - logs_indexed_60day_usage
+      - logs_indexed_7day_usage
+      - logs_indexed_90day_usage
+      - logs_indexed_custom_retention_usage
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - npm_host_usage
@@ -4169,8 +4185,11 @@ components:
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - rum_browser_mobile_sessions_usage
+      - rum_replay_sessions_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
+      - siem_ingested_bytes_usage
       - snmp_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
@@ -4183,12 +4202,15 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
+      - CI_PIPELINE_INDEXED_SPANS_USAGE
+      - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
       - CLOUD_SIEM_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
+      - CUSTOM_EVENT_USAGE
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
@@ -4202,9 +4224,22 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
+      - INDEXED_SPANS_USAGE
       - INFRA_HOST_USAGE
+      - INGESTED_LOGS_BYTES_USAGE
+      - INGESTED_SPANS_BYTES_USAGE
       - INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
+      - LOGS_INDEXED_15DAY_USAGE
+      - LOGS_INDEXED_180DAY_USAGE
+      - LOGS_INDEXED_30DAY_USAGE
+      - LOGS_INDEXED_360DAY_USAGE
+      - LOGS_INDEXED_3DAY_USAGE
+      - LOGS_INDEXED_45DAY_USAGE
+      - LOGS_INDEXED_60DAY_USAGE
+      - LOGS_INDEXED_7DAY_USAGE
+      - LOGS_INDEXED_90DAY_USAGE
+      - LOGS_INDEXED_CUSTOM_RETENTION_USAGE
       - MOBILE_APP_TESTING_USAGE
       - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
@@ -4212,8 +4247,11 @@ components:
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - RUM_BROWSER_MOBILE_SESSIONS_USAGE
+      - RUM_REPLAY_SESSIONS_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
+      - SIEM_INGESTED_BYTES_USAGE
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
@@ -7813,6 +7851,44 @@ components:
       - vuln_management_hosts_percentage
       - sds_scanned_bytes_usage
       - sds_scanned_bytes_percentage
+      - ci_test_indexed_spans_usage
+      - ci_test_indexed_spans_percentage
+      - ingested_logs_bytes_usage
+      - ingested_logs_bytes_percentage
+      - ci_pipeline_indexed_spans_usage
+      - ci_pipeline_indexed_spans_percentage
+      - indexed_spans_usage
+      - indexed_spans_percentage
+      - custom_event_usage
+      - custom_event_percentage
+      - logs_indexed_custom_retention_usage
+      - logs_indexed_custom_retention_percentage
+      - logs_indexed_360day_usage
+      - logs_indexed_360day_percentage
+      - logs_indexed_180day_usage
+      - logs_indexed_180day_percentage
+      - logs_indexed_90day_usage
+      - logs_indexed_90day_percentage
+      - logs_indexed_60day_usage
+      - logs_indexed_60day_percentage
+      - logs_indexed_45day_usage
+      - logs_indexed_45day_percentage
+      - logs_indexed_30day_usage
+      - logs_indexed_30day_percentage
+      - logs_indexed_15day_usage
+      - logs_indexed_15day_percentage
+      - logs_indexed_7day_usage
+      - logs_indexed_7day_percentage
+      - logs_indexed_3day_usage
+      - logs_indexed_3day_percentage
+      - rum_replay_sessions_usage
+      - rum_replay_sessions_percentage
+      - rum_browser_mobile_sessions_usage
+      - rum_browser_mobile_sessions_percentage
+      - ingested_spans_bytes_usage
+      - ingested_spans_bytes_percentage
+      - siem_ingested_bytes_usage
+      - siem_ingested_bytes_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7898,6 +7974,44 @@ components:
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
       - SDS_SCANNED_BYTES_USAGE
       - SDS_SCANNED_BYTES_PERCENTAGE
+      - CI_TEST_INDEXED_SPANS_USAGE
+      - CI_TEST_INDEXED_SPANS_PERCENTAGE
+      - INGESTED_LOGS_BYTES_USAGE
+      - INGESTED_LOGS_BYTES_PERCENTAGE
+      - CI_PIPELINE_INDEXED_SPANS_USAGE
+      - CI_PIPELINE_INDEXED_SPANS_PERCENTAGE
+      - INDEXED_SPANS_USAGE
+      - INDEXED_SPANS_PERCENTAGE
+      - CUSTOM_EVENT_USAGE
+      - CUSTOM_EVENT_PERCENTAGE
+      - LOGS_INDEXED_CUSTOM_RETENTION_USAGE
+      - LOGS_INDEXED_CUSTOM_RETENTION_PERCENTAGE
+      - LOGS_INDEXED_360DAY_USAGE
+      - LOGS_INDEXED_360DAY_PERCENTAGE
+      - LOGS_INDEXED_180DAY_USAGE
+      - LOGS_INDEXED_180DAY_PERCENTAGE
+      - LOGS_INDEXED_90DAY_USAGE
+      - LOGS_INDEXED_90DAY_PERCENTAGE
+      - LOGS_INDEXED_60DAY_USAGE
+      - LOGS_INDEXED_60DAY_PERCENTAGE
+      - LOGS_INDEXED_45DAY_USAGE
+      - LOGS_INDEXED_45DAY_PERCENTAGE
+      - LOGS_INDEXED_30DAY_USAGE
+      - LOGS_INDEXED_30DAY_PERCENTAGE
+      - LOGS_INDEXED_15DAY_USAGE
+      - LOGS_INDEXED_15DAY_PERCENTAGE
+      - LOGS_INDEXED_7DAY_USAGE
+      - LOGS_INDEXED_7DAY_PERCENTAGE
+      - LOGS_INDEXED_3DAY_USAGE
+      - LOGS_INDEXED_3DAY_PERCENTAGE
+      - RUM_REPLAY_SESSIONS_USAGE
+      - RUM_REPLAY_SESSIONS_PERCENTAGE
+      - RUM_BROWSER_MOBILE_SESSIONS_USAGE
+      - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
+      - INGESTED_SPANS_BYTES_USAGE
+      - INGESTED_SPANS_BYTES_PERCENTAGE
+      - SIEM_INGESTED_BYTES_USAGE
+      - SIEM_INGESTED_BYTES_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7962,6 +8076,22 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
+        ci_pipeline_indexed_spans_percentage:
+          description: The percentage of CI Pipeline Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        ci_pipeline_indexed_spans_usage:
+          description: The total CI Pipeline Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        ci_test_indexed_spans_percentage:
+          description: The percentage of CI Test Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        ci_test_indexed_spans_usage:
+          description: The total CI Test Indexed Spans usage by tag(s).
+          format: double
+          type: number
         ci_visibility_itr_percentage:
           description: The percentage of Git committers for Intelligent Test Runner
             usage by tag(s).
@@ -8014,6 +8144,14 @@ components:
           type: number
         cspm_hosts_usage:
           description: The Cloud Security Management Pro host usage by tag(s).
+          format: double
+          type: number
+        custom_event_percentage:
+          description: The percentage of Custom Events usage by tag(s).
+          format: double
+          type: number
+        custom_event_usage:
+          description: The total Custom Events usage by tag(s).
           format: double
           type: number
         custom_ingested_timeseries_percentage:
@@ -8121,12 +8259,36 @@ components:
           description: The Lambda function usage by tag(s).
           format: double
           type: number
+        indexed_spans_percentage:
+          description: The percentage of APM Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        indexed_spans_usage:
+          description: The total APM Indexed Spans usage by tag(s).
+          format: double
+          type: number
         infra_host_percentage:
           description: The percentage of infrastructure host usage by tag(s).
           format: double
           type: number
         infra_host_usage:
           description: The infrastructure host usage by tag(s).
+          format: double
+          type: number
+        ingested_logs_bytes_percentage:
+          description: The percentage of Ingested Logs usage by tag(s).
+          format: double
+          type: number
+        ingested_logs_bytes_usage:
+          description: The total Ingested Logs usage by tag(s).
+          format: double
+          type: number
+        ingested_spans_bytes_percentage:
+          description: The percentage of APM Ingested Spans usage by tag(s).
+          format: double
+          type: number
+        ingested_spans_bytes_usage:
+          description: The total APM Ingested Spans usage by tag(s).
           format: double
           type: number
         invocations_percentage:
@@ -8143,6 +8305,94 @@ components:
           type: number
         lambda_traced_invocations_usage:
           description: The Serverless APM usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_15day_percentage:
+          description: The percentage of Indexed Logs (15-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_15day_usage:
+          description: The total Indexed Logs (15-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_180day_percentage:
+          description: The percentage of Indexed Logs (180-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_180day_usage:
+          description: The total Indexed Logs (180-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_30day_percentage:
+          description: The percentage of Indexed Logs (30-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_30day_usage:
+          description: The total Indexed Logs (30-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_360day_percentage:
+          description: The percentage of Indexed Logs (360-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_360day_usage:
+          description: The total Indexed Logs (360-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_3day_percentage:
+          description: The percentage of Indexed Logs (3-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_3day_usage:
+          description: The total Indexed Logs (3-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_45day_percentage:
+          description: The percentage of Indexed Logs (45-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_45day_usage:
+          description: The total Indexed Logs (45-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_60day_percentage:
+          description: The percentage of Indexed Logs (60-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_60day_usage:
+          description: The total Indexed Logs (60-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_7day_percentage:
+          description: The percentage of Indexed Logs (7-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_7day_usage:
+          description: The total Indexed Logs (7-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_90day_percentage:
+          description: The percentage of Indexed Logs (90-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_90day_usage:
+          description: The total Indexed Logs (90-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_custom_retention_percentage:
+          description: The percentage of Indexed Logs (Custom Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_custom_retention_usage:
+          description: The total Indexed Logs (Custom Retention) usage by tag(s).
           format: double
           type: number
         mobile_app_testing_percentage:
@@ -8203,6 +8453,22 @@ components:
           description: The profiled hosts usage by tag(s).
           format: double
           type: number
+        rum_browser_mobile_sessions_percentage:
+          description: The percentage of RUM Browser and Mobile usage by tag(s).
+          format: double
+          type: number
+        rum_browser_mobile_sessions_usage:
+          description: The total RUM Browser and Mobile usage by tag(s).
+          format: double
+          type: number
+        rum_replay_sessions_percentage:
+          description: The percentage of RUM Replay Sessions usage by tag(s).
+          format: double
+          type: number
+        rum_replay_sessions_usage:
+          description: The total RUM Replay Sessions usage by tag(s).
+          format: double
+          type: number
         sds_scanned_bytes_percentage:
           description: The percentage of Sensitive Data Scanner usage by tag(s).
           format: double
@@ -8217,6 +8483,14 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_ingested_bytes_percentage:
+          description: The percentage of SIEM usage by tag(s).
+          format: double
+          type: number
+        siem_ingested_bytes_usage:
+          description: The total SIEM usage by tag(s).
           format: double
           type: number
         snmp_percentage:
