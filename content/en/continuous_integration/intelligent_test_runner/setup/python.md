@@ -132,12 +132,12 @@ Individual tests can be marked as unskippable using the `@unittest.skipif` decor
 import unittest
 
 class MyTestCase(unittest.TestCase):
-  @unittest.skipif(False, reason="datadog_itr_unskippable")
+  @unittest.skipIf(False, reason="datadog_itr_unskippable")
   def test_function(self):
       assert True
 ```
 
-**Note**: This does not override any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`.
+**Note**: This does not override any other `skip` marks, or `skipIf` marks that have a `condition` evaluating to `True`.
 
 
 ## Further reading
