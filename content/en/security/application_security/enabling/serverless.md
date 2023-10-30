@@ -27,6 +27,8 @@ See [Compatibility][4] requirements for information about what ASM features are 
 
 ## AWS Lambda
 
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
+
 Configuring ASM for AWS Lambda generally involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
