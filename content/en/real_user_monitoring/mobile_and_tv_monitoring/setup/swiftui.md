@@ -6,7 +6,7 @@ description: "Use RUM to instrument your SwiftUI applications."
 aliases:
   - /real_user_monitoring/ios/swiftui/
   - /real_user_monitoring/swiftui/
-  - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+  - /real_user_monitoring/mobile_and_tv_monitoring/setup/swiftui
 code_lang: swiftui
 type: multi-code-lang
 code_lang_weight: 20

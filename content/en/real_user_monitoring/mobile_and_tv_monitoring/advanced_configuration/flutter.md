@@ -8,7 +8,7 @@ code_lang_weight: 30
 aliases:
     - /real_user_monitoring/flutter/advanced_configuration
     - /real_user_monitoring/otel
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+    - /real_user_monitoring/mobile_and_tv_monitoring/setup/otel
     - /real_user_monitoring/flutter/otel_support/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter

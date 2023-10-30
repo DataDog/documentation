@@ -6,7 +6,7 @@ description: "Collect RUM data from your iOS and tvOS applications."
 aliases:
   - /real_user_monitoring/ios
   - /real_user_monitoring/ios/getting_started
-  - /real_user_monitoring/mobile_and_tv_monitoring/setup/
+  - /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20
