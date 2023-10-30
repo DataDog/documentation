@@ -37,6 +37,10 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Cloud Security Management offerings are now available in three separate packages: CSM Enterprise, CSM Pro, and CSM Workload Security. For more information, see <a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Changes to Datadog Cloud Security Management</a>.</div>
 
 Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
@@ -49,15 +53,15 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
         <th>Features</th>
     </tr>
     <tr>
-        <td>CSM Enterprise</td>
+        <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
         <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
     </tr>
     <tr>
-        <td>CSM Pro</td>
+        <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
         <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
-        <td>CSM Workload Security</td>
+        <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
         <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
     </tr>
 </table>
@@ -91,6 +95,10 @@ To [enable CSM Pro][1], you must first set up the Datadog cloud account integrat
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Next steps
+
+To get started setting up CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For detailed instructions, see the [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3] setup docs.
 
 ## Further Reading
 

@@ -26,10 +26,12 @@ CPU
 : The time each method spent running on the CPU. It includes your code that runs in the JVM (for example, Java, Kotlin), but not JVM operations or native code called from within the JVM.
 
 Allocations
-: The number of heap allocations made by each method, including allocations which were subsequently freed.
+: The number of heap allocations made by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
 
 Allocated Memory
-: The amount of heap memory allocated by each method, including allocations which were subsequently freed.
+: The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
 
 Heap Live Objects
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
@@ -209,11 +211,14 @@ CPU
 
 Allocations (v0.88+)
 : The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
-_Note: Not available when JIT is active_
+_Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7`_
 
 Allocated memory (v0.88+)
 : The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
-_Note: Not available when JIT is active_
+_Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7`_
+
+Thrown Exceptions (v0.92+)
+: The number of caught or uncaught exceptions raised by each method, as well as their type.
 
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}

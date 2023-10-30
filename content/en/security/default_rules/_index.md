@@ -9,6 +9,18 @@ aliases:
   - /security_platform/default_rules/
   - /security/default_rules/aws-rds-enabled-encryption
   - /security/default_rules/cis-aws-1.3.0-1.14
+  - /security_monitoring/default_rules/gcp-gcs-bucket-enumerated/
+  - /security_monitoring/default_rules/gcp-logging-sink-modified/
+  - /security_monitoring/default_rules/gcp-pubsub-subscriber-modified/
+  - /security_monitoring/default_rules/gcp-pubsub-topic-deleted/
+  - /security_monitoring/default_rules/gcp-service-account-create/
+  - /security_monitoring/default_rules/gcp-service-account-key-create/
+  - /security_monitoring/default_rules/gcp-unauthorized-sa-activity/
+  - /security_monitoring/default_rules/gcp-unauthorized-user-activity/
+  - /security_monitoring/default_rules/kubernetes-pod-created-with-hostnetwork/
+  - /security/default_rules/azure-app-service-remote-debugging-enabled/
+  - /security/default_rules/cloudtrail-aws-iam-policy-changed/
+  - /security/default_rules/cloudtrail-aws-new-aws-account-assumerole/
 disable_sidebar: true
 cascade:
   algolia:

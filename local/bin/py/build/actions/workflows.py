@@ -23,6 +23,8 @@ def workflows(content, content_dir):
     logger.info("Starting Workflow action...")
     options = content.get("options", {})
     dest_path = options['dest_path']
+    source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n\n"
+
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         bundle_excludes = options.get('bundle_excludes', [])
         if any(substring in file_name for substring in bundle_excludes) or file_name.endswith('manifest.schema.json'):
@@ -39,7 +41,7 @@ def workflows(content, content_dir):
                 p = Path(file_name)
                 for action_name, action_data in data.get('actions', {}).items():
                     action_stability = action_data.get('stability')
-                    if not action_stability or action_stability == 'stable':
+                    if not action_stability or action_stability == 'stable' and not data.get('internal') and not data.get('hidden') and not data.get('deprecated'):
                         output_file_name = data.get('name')\
                             .replace('com.datadoghq.dd.','')\
                             .replace('com.datadoghq.','')\
@@ -51,7 +53,7 @@ def workflows(content, content_dir):
                         # if this is a dd. bundle then lets use the datadog integration id
                         if not action_data['source'] and 'datadog' in action_data['bundle_title'].lower():
                             action_data['source'] = '_datadog'
-                        content = action_data.get('description', '') + "\n\n{{< workflows >}}"
+                        content = source_comment + action_data.get('description', '') + "\n\n{{< workflows >}}"
                         output_content = TEMPLATE.format(front_matter=yaml.dump(action_data, default_flow_style=False).strip(), content=content)
                         dest_dir = Path(f"{content_dir}{dest_path}")
                         dest_dir.mkdir(exist_ok=True)
