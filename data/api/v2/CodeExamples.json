@@ -674,11 +674,11 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "UpdateFinding": [
+  "MuteFindings": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Mute or unmute a finding returns \"OK\" response"
+      "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
