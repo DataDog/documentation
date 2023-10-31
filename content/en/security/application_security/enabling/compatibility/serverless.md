@@ -24,13 +24,13 @@ ASM provides serverless capability for the following platforms and libraries:
 | Go   		| {{< X >}}         	| 	               			|						|
 
 ### Supported trigger types
-ASM Threat Detection supports HTTP requests as function input only, as it is the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
+ASM Threat Detection supports HTTP requests as function input only, as that channel has the highest likelihood of attackers exploiting a serverless application. HTTP requests typically come from AWS services such as:
 - Application Load Balancer (ALB)
 - API Gateway v1 (Rest API)
 - API Gateway v2 (HTTP API)
 - Function URL
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, fill out this <a href="https://forms.gle/gHrxGQMEnAobukfn7">form</a> to send feedback.</div>
 
 
 ### Additional language specific compatibility information
@@ -71,7 +71,7 @@ Go
 
 ## Azure App Service
 
-Only *web applications* are supported, Azure Functions are not supported with ASM.
+Only *web applications* are supported. Azure Functions are not supported with ASM.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
