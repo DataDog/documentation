@@ -67,7 +67,7 @@ Windows 개인 위치 베타에 추가하려면 <a href="https://docs.datadoghq.
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
-    이 명령어는 도커 컨테이너를 부팅하고 테스트를 수행하기 위한 프라이빗 위치를 준비해줍니다. Datadog는 적절한 재시작 정책으로서 컨테이너를 분리(detached) 모드로 실행하시길 권장합니다.
+    이 명령어는 Docker 컨테이너를 부팅하고 테스트를 수행하기 위한 프라이빗 위치를 준비해줍니다. Datadog는 적절한 재시작 정책으로서 컨테이너를 분리(detached) 모드로 실행하시길 권장합니다.
 
     <div class="alert alert-info">Podman과 같은 다른 컨테이너 런타임을 사용할 수 있습니다. 자세한 내용은 <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">개인 위치 설명서</a>를 참고하세요.</div>
 
