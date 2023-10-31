@@ -3,24 +3,6 @@ title: Getting Started with the DevSecOps Bundles
 kind: documentation
 ---
 
-Getting started
-
-Options:
-
-Direct users to the Agent setup page in the UI
-Guide users on how to set up the various products that make up each bundle (w/links to docs)
-Links to docs to help users get started
-Combo of the above
-
-*Infra DevSecOps bundles not available for US1-FED???
-*Included with all three bundles
-    - Error Tracking
-    - Service Catalog
-*Deployment Tracking is part of Serverless?
-*APM DevSecOps isn't available for Fargate
-
-install and configure the Agent on X. You can enable all of the products by doing X.
-
 ## APM DevSecOps
 
 APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][5] capabilities of [Application Security Management (ASM)][6].
