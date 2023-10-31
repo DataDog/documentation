@@ -55,7 +55,7 @@ By default, the Datadog RUM Flutter SDK samples distributed traces at only 20% o
 ```dart
 final configuration = DdSdkConfiguration(
    //
-   rumConfiguration: RumConfiguration(
+   rumConfiguration: DatadogRumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
     tracingSamplingRate: 100.0
    ),
