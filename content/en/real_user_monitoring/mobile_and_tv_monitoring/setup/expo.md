@@ -5,7 +5,6 @@ description: Monitor your React Native projects using Expo and Expo Go with Data
 aliases:
     - /real_user_monitoring/reactnative/expo/
     - /real_user_monitoring/reactnative-expo/
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/expo
 code_lang: expo
 type: multi-code-lang
 code_lang_weight: 50

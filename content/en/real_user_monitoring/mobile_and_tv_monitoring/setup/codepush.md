@@ -5,7 +5,6 @@ description: Learn how to use a client-side React Native module to interact with
 aliases:
     - /real_user_monitoring/reactnative/codepush
     - /real_user_monitoring/reactnative-codepush/
-    - /real_user_monitoring/mobile_and_tv_monitoring/setup/codepush
 code_lang: codepush
 type: multi-code-lang
 code_lang_weight: 50
