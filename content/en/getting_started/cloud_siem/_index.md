@@ -50,7 +50,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 ## Phase 1: Setup
 
-1. Configure [log ingestion][4] to collect logs from your sources. Review [Best Practices for Log Management][3].
+1. Configure [log ingestion][2] to collect logs from your sources. Review [Best Practices for Log Management][3].
 
     You can use [out-of-the-box integration pipelines][4] to collect logs for more than {{< translate key="integration_count" >}} integrations, or [create custom log pipelines][5] to send:
 
@@ -84,7 +84,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/
-[2]: 
+[2]: /security/configuration/siem/log-sources
 [3]: /logs/guide/best-practices-for-log-management/
 [4]: /integrations/
 [5]: /logs/log_configuration/pipelines/
