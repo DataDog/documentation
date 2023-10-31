@@ -187,7 +187,7 @@ docker run [...] -e DD_IAST_ENABLED=true [...]
 Add the following environment variable value to your container Dockerfile:
 
 ```Dockerfile
-ENV DD_IAST_ENABLED=true=true
+ENV DD_IAST_ENABLED=true
 ```
 
 {{% /tab %}}
