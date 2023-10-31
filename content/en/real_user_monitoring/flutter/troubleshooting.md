@@ -36,7 +36,7 @@ Follow the instructions in the [Flutter documentation][1] for working with Flutt
 If you're able to run your app, but you are not seeing the data you expect on the Datadog site, try adding the following to your code before calling `DatadogSdk.initialize`:
 
 ```dart
-DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
+DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 ```
 
 This causes the SDK to output additional information about what it's doing and what errors it's encountering, which may help you and Datadog Support narrow down your issue.
@@ -63,7 +63,7 @@ final configuration = DdSdkConfiguration(
 ```
 
 If you are still having issues, check that your `firstPartyHosts` property is set correctly. These should be hosts only, without schemas or paths, and they do not support regular expressions or wildcards. For example:
-    
+
     ✅ Good - 'example.com', 'api.example.com', 'us1.api.sample.com'
     ❌ Bad - 'https://example.com', '*.example.com', 'us1.sample.com/api/*', 'api.sample.com/api'
 

@@ -155,38 +155,38 @@ To create visualizations in your dashboards, [create a measure][4] first.
 
 ### Track user actions
 
-You can track specific user actions such as taps, clicks, and scrolls using `DdRum.addUserAction`.
+You can track specific user actions such as taps, clicks, and scrolls using `DdRum.addAction`.
 
-To manually register instantaneous RUM actions such as `RumUserActionType.tap`, use `DdRum.addUserAction()`. For continuous RUM actions such as `RumUserActionType.scroll`, use `DdRum.startUserAction()` or `DdRum.stopUserAction()`.
+To manually register instantaneous RUM actions such as `RumActionType.tap`, use `DdRum.addAction()`. For continuous RUM actions such as `RumActionType.scroll`, use `DdRum.startAction()` or `DdRum.stopAction()`.
 
 For example:
 
 ```dart
 void _downloadResourceTapped(String resourceName) {
-    DatadogSdk.instance.rum?.addUserAction(
-        RumUserActionType.tap,
+    DatadogSdk.instance.rum?.addAction(
+        RumActionType.tap,
         resourceName,
     );
 }
 ```
 
-When using `DdRum.startUserAction` and `DdRum.stopUserAction`, the `type` action must be the same in order for the Datadog Flutter SDK to match an action's start with its completion.
+When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same in order for the Datadog Flutter SDK to match an action's start with its completion.
 
 ### Track custom resources
 
 In addition to tracking resources automatically using the [Datadog Tracking HTTP Client][5], you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][6]:
 
-- `DdRum.startResourceLoading`
-- `DdRum.stopResourceLoading`
-- `DdRum.stopResourceLoadingWithError`
-- `DdRum.stopResourceLoadingWithErrorInfo`
+- `DdRum.startResource`
+- `DdRum.stopResource`
+- `DdRum.stopResourceWithError`
+- `DdRum.stopResourceWithErrorInfo`
 
 For example:
 
 ```dart
 // in your network client:
 
-DatadogSdk.instance.rum?.startResourceLoading(
+DatadogSdk.instance.rum?.startResource(
     "resource-key",
     RumHttpMethod.get,
     url,
@@ -194,7 +194,7 @@ DatadogSdk.instance.rum?.startResourceLoading(
 
 // Later
 
-DatadogSdk.instance.rum?.stopResourceLoading(
+DatadogSdk.instance.rum?.stopResource(
     "resource-key",
     200,
     RumResourceType.image
@@ -242,7 +242,7 @@ The following attributes are **optional**, provide **at least** one of them:
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
-To identify user sessions, use `DdRum.setUserInfo`.
+To identify user sessions, use `DatadogSdk.setUserInfo`.
 
 For example:
 
@@ -257,9 +257,9 @@ DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
 To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the Flutter RUM SDK:
 
 ```dart
-final config = DdSdkConfiguration(
+final config = DatadogConfiguration(
     // other configuration...
-    rumConfiguration: RumConfiguration(
+    rumConfiguration: DatadogRumConfiguration(
         applicationId: '<YOUR_APPLICATION_ID>',
         rumViewEventMapper = (event) => event,
         rumActionEventMapper = (event) => event,
@@ -280,7 +280,6 @@ For example, to redact sensitive information in a RUM Resource's `url`, implemen
         resourceEvent.resource.url = redacted(resourceEvent.resource.url)
         return resourceEvent
     }
-}
 ```
 
 Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `null`.
@@ -289,25 +288,19 @@ Depending on the event's type, only some specific properties can be modified:
 
 | Event Type       | Attribute key                     | Description                                   |
 |------------------|-----------------------------------|-----------------------------------------------|
-| RumViewEvent     | `viewEvent.view.name`             | Name of the view.¹                            |
-|                  | `viewEvent.view.url`              | URL of the view.                              |
+| RumViewEvent     | `viewEvent.view.url`              | URL of the view.                              |
 |                  | `viewEvent.view.referrer`         | Referrer of the view.                         |
 | RumActionEvent   | `actionEvent.action.target?.name` | Name of the action.                           |
-|                  | `actionEvent.view.name`           | Name the view linked to this action.¹         |
 |                  | `actionEvent.view.referrer`       | Referrer of the view linked to this action.   |
 |                  | `actionEvent.view.url`            | URL of the view linked to this action.        |
 | RumErrorEvent    | `errorEvent.error.message`        | Error message.                                |
 |                  | `errorEvent.error.stack`          | Stacktrace of the error.                      |
 |                  | `errorEvent.error.resource?.url`  | URL of the resource the error refers to.      |
-|                  | `errorEvent.view.name`            | Name the view linked to this action.¹         |
 |                  | `errorEvent.view.referrer`        | Referrer of the view linked to this action.   |
 |                  | `errorEvent.view.url`             | URL of the view linked to this error.         |
 | RumResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                          |
-|                  | `resourceEvent.view.name`         | Name the view linked to this action.¹         |
 |                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action.   |
 |                  | `resourceEvent.view.url`          | URL of the view linked to this resource.      |
-
-¹ While event mappers allow you to modify the names of views, they are not the recommended way to rename a view. Use the `viewInfoExtractor` parameter on [`DatadogNavigationObserver`][7] instead
 
 ## Set tracking consent (GDPR & CCPA compliance)
 
@@ -327,7 +320,7 @@ Likewise, if you change the value from `TrackingConsent.pending` to `TrackingCon
 
 ## Flutter-specific performance metrics
 
-To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `RumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][12]. 
+To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `RumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][12].
 
 ## Sending data when device is offline
 

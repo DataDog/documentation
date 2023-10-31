@@ -56,7 +56,7 @@ If you are not using named routes, you can use `DatadogRouteAwareMixin` in conju
 
 ### Flutter Navigator v2
 
-If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [go_router][11], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [go_router][11] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -106,7 +106,7 @@ Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking o
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
 
 ```dart
-final configuration = DdSdkConfiguration(
+final configuration = DatadogConfiguration(
   // configuration
   firstPartyHosts: ['example.com'],
 )..enableHttpTracking()
@@ -114,11 +114,11 @@ final configuration = DdSdkConfiguration(
 
 **Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
-In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `RumConfiguration`.
+In order to enable Datadog [Distributed Tracing][6], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `RumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
-- `RumConfiguration.tracingSamplingRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
+- `DatadogRumConfiguration.tracingSamplingRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
 
 ## Automatically track actions
@@ -141,7 +141,7 @@ RumUserActionDetector(
 
 For most Button types, the detector looks for a `Text` widget child, which it uses for the description of the action. In other cases it looks for a `Semantics` object child, or an `Icon` with its `Icon.semanticsLabel` property set.
 
-Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which uses the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
+Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation`][14], which uses the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
 
 ```dart
 Container(

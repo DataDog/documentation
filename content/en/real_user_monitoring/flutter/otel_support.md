@@ -31,7 +31,7 @@ You can use this object during initial configuration:
 
 ```dart
 // For default Datadog HTTP tracing:
-final configuration = DdSdkConfiguration(
+final configuration = DatadogConfiguration(
     // configuration
     firstPartyHostsWithTracingHeaders: hostHeaders,
 );
