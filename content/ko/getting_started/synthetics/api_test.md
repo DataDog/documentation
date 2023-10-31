@@ -200,7 +200,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 {{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API 테스트 실패" style="width:100%;">}}
 
-Datadog의 [APM 통합과 신세틱 모니터링][14]을 이용하면 실행된 테스트에서 생성된 트레이스를 **Traces** 탭에서 살펴보고, 실패한 테스트의 근본 원인에 접근할 수 있습니다.
+Datadog의 [APM 통합과 신서틱 모니터링][14]을 이용하면 실행된 테스트에서 생성된 트레이스를 **Traces** 탭에서 살펴보고, 실패한 테스트의 근본 원인에 접근할 수 있습니다.
 
 ## 참고 자료
 
