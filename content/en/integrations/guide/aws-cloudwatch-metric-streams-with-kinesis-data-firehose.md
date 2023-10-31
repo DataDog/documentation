@@ -123,7 +123,7 @@ Use cross-account metric streaming to include metrics in a single Metric Stream 
 
 ### Disable metric streaming
 
-To disable metric streaming completely for a given AWS account and region, you must delete the AWS Metric Steam and its related resources. To prevent loss of metrics in Datadog, it's important to follow these deletion steps carefully:
+To disable metric streaming completely for a given AWS account and region, you must delete the AWS Metric Stream and its related resources. To prevent loss of metrics in Datadog, it's important to follow these deletion steps carefully:
 
 If you set streaming up with [CloudFormation](?tab=cloudformation#installation):
 1. Delete the stack that was created during the setup.
