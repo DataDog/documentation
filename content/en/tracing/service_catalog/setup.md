@@ -21,7 +21,38 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. 
+Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. If you are not, there are many other ways to add services to your Service Catalog.
+
+## Create user-defined services
+
+You can create additional services that are not associated with any Datadog telemetry in Service Catalog. To create such an entry, name your service in the `dd-service` service field in any supported metadata schema versions. For example: 
+
+#### Example
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.1
+dd-service: my-unmonitored-cron-job
+team: shopist
+contacts:
+ - type: slack
+   contact: https://datadogincidents.slack.com/archives/XXXXX
+application: shopist
+description: important cron job for shopist backend
+tier: tier1
+lifecycle: production
+links:
+ - name: Common Operations
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+ - name: Disabling Deployments
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+tags: []
+integrations:
+ pagerduty:
+   service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
+External Resources (Optional)
+{{< /code-block >}}
+
 
 ## Discover additional services
 
