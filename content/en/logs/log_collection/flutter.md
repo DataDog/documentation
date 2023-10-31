@@ -121,7 +121,7 @@ This can be customized by setting a `DatadogLoggerConfiguration.customConsoleLog
 
 ```dart
 final config = DatadogLoggerConfiguration(
-  // Other configuraiton options...
+  // Other configuration options...
   customConsoleLogFunction: simpleConsolePrintForLevel(LogLevel.warn),
 );
 ```

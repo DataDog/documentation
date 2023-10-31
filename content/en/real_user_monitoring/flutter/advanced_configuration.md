@@ -320,7 +320,7 @@ Likewise, if you change the value from `TrackingConsent.pending` to `TrackingCon
 
 ## Flutter-specific performance metrics
 
-To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `RumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][12].
+To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][12].
 
 ## Sending data when device is offline
 
