@@ -9,14 +9,14 @@ further_reading:
     text: 'Datadog and Kubernetes'
 ---
 
-You can install the Datadog Agent on an Amazon EKS cluster by installing [Datadog Operator](/containers/datadog_operator)
+You can install the Datadog Agent on an Amazon EKS cluster by installing the [Datadog Operator](/containers/datadog_operator)
 as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and applying the `DatadogAgent` manifest.
 
 Compared to the regular [Helm installation][4], there are certain differences when installing as an add-on:
 * During Operator installation, images must be pulled only from the EKS repository. This can't be changed by the user.
 * Operator Helm Chart values, which can be overriden, are restricted to a [schema file][3].
 
-These restriction are necessary to make Operator compliant with the add-on policies, allow EKS ensure safety of the installation, and disable features not yet supported in add-on environment.
+These restriction are necessary to make Operator compliant with the EKS add-on policies, allow EKS to ensure the safety of the installation, and disable features not yet supported in add-on environment.
 
 ## Prerequisites
 
@@ -58,48 +58,52 @@ After you have installed the Operator add-on, you can proceed to set up the Data
 Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` custom resource.
 
 1. Switch to Operator installation namespace, `datadog-agent` by default.
-  ```bash
-  kubens datadog-agent
-  ```
+   ```bash
+   kubens datadog-agent
+   ```
 2. Create a Kubernetes secret with your [Datadog API and application keys][5]:
-  ```bash
-  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
-  ```
-  Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
+   ```bash
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+   ```
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
   
-3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The Datadog Operator uses default Agent and Cluster Agent image settings and pulls them from a public registry.
-If you want to pull images from a private EKS registry, you can add `global.registry`. The following sample configuration enables metrics, logs, and APM and sets EKS registry as the default:
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      # required in case Agent can not resolve cluster name through IMDS, see the note below.
-      clusterName: <CLUSTER_NAME>
-      registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
-      credentials:
-        apiSecret:
-          secretName: datadog-secret
-          keyName: api-key
-        appSecret:
-          secretName: datadog-secret
-          keyName: app-key
-    features:
-      apm:
-        enabled: true
-      logCollection:
-        enabled: true
-  ```
- For all configuration options, see the [Operator configuration spec][6].
 
- **Note:** If access to IMDS v1 is blocked on the node, Agent will not be able to resolve the cluster name and certain features for example [Orchestrator Explorer][6] will not work. Hence, it is recommended to add `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure Agent to request metadata using IMDS v2.
+3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The Datadog Operator uses default Agent and Cluster Agent image settings and pulls them from a public registry.
+
+   If you want to pull images from a private EKS registry, you can add `global.registry`. The following configuration enables metrics, logs, and APM:
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       # required in case Agent can not resolve cluster name through IMDS, see the note below.
+       clusterName: <CLUSTER_NAME>
+       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+         appSecret:
+           secretName: datadog-secret
+           keyName: app-key
+     features:
+       apm:
+         enabled: true
+       logCollection:
+         enabled: true
+   ```
+   This agent instance configuration pulls the Datadog agent image from an AWS Marketplace hosted ECR repository which also contains the image for the Datadog Operator Amazon EKS add-on. Should you require alternatives, kindly edit the 'global.registry' entry in the manifest above.
+
+   For all configuration options, see the [Operator configuration spec][6].
+
+   **Note:** If access to IMDS v1 is blocked on the node, Agent will not be able to resolve the cluster name and certain features for example [Orchestrator Explorer][6] will not work. Hence, it is recommended to add `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure Agent to request metadata using IMDS v2.
 
 4. Deploy the Datadog Agent:
-  ```bash
-  kubectl apply -f /path/to/your/datadog-agent.yaml
-  ```
+   ```bash
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
 
 
 ## Uninstalling Operator
@@ -130,7 +134,7 @@ To delete the add-on, run:
 {{% /tab %}}
 {{< /tabs >}}
 
- **Note:** If Operator add-on is uninstalled before deleting the `DatadogAgent` custom resource, agents will continue running on the cluster. Deleting namespace will get stuck since the `DatadogAgent` can not be finalized without a running Operator. See this Github [issue][9] for a workaround. 
+ **Note:** If Operator add-on is uninstalled before deleting the `DatadogAgent` custom resource, agents will continue to run on the cluster. Deleting namespace will get stuck since the `DatadogAgent` can not be finalized without a running Operator. See this Github [issue][9] for a workaround. 
 
 
 {{< partial name="whats-next/whats-next.html" >}}
