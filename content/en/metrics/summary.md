@@ -48,7 +48,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 * **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
 
-{{< img src="metrics/summary/bulkconfig_new.mp4" alt="Bulk Metric Tag Configuration" video=true>}} 
+{{< img src="metrics/summary/bulkconfig_new.mp4" alt="Bulk Metric Tag Configuration" video=true style="width:100%;"}} 
 
 ## Metric details sidepanel
 
