@@ -1932,7 +1932,7 @@ main:
   - name: Connect Synthetics and Traces
     url: /synthetics/apm/
     parent: tracing_other_telemetry
-    identifier: tracing_connect_synthetics
+    identifier: tracing_connect_sythetics
     weight: 403
   - name: Connect Profiles and Traces
     url: /profiler/connect_traces_and_profiles/
@@ -3733,10 +3733,10 @@ main:
     parent: rum_browser
     identifier: rum_data_collected
     weight: 101
-  - name: Modifying Data and Context
-    url: real_user_monitoring/browser/modifying_data_and_context/
+  - name: Advanced Configuration
+    url: real_user_monitoring/browser/advanced_configuration/
     parent: rum_browser
-    identifier: rum_modify
+    identifier: rum_advanced
     weight: 102
   - name: Monitoring Page Performance
     url: real_user_monitoring/browser/monitoring_page_performance/
@@ -3763,201 +3763,166 @@ main:
     parent: rum_browser
     identifier: troubleshooting
     weight: 107
-  - name: Android and AndroidTV Monitoring
-    url: real_user_monitoring/android/
+  - name: Mobile and TV Monitoring
+    url: real_user_monitoring/mobile_and_tv_monitoring/
     parent: rum
-    identifier: rum_android
+    identifier: mobile_and_tv_monitoring
     weight: 2
-  - name: Data Collected
-    url: real_user_monitoring/android/data_collected/
-    parent: rum_android
-    identifier: rum_android_data_collected
-    weight: 201
-  - name: Advanced Configuration
-    url: real_user_monitoring/android/advanced_configuration/
-    parent: rum_android
-    identifier: rum_android_advanced
-    weight: 202
-  - name: Mobile Vitals
-    url: real_user_monitoring/android/mobile_vitals/
-    parent: rum_android
-    identifier: rum_android_mobile_vitals
-    weight: 203
-  - name: Web View Tracking
-    url: real_user_monitoring/android/web_view_tracking/
-    parent: rum_android
-    identifier: rum_android_web_view_tracking
-    weight: 204
-  - name: Integrated Libraries
-    url: real_user_monitoring/android/integrated_libraries/
-    parent: rum_android
-    identifier: rum_android_libraries
-    weight: 205
-  - name: Troubleshooting
-    url: real_user_monitoring/android/troubleshooting/
-    parent: rum_android
-    identifier: rum_troubleshooting_android
-    weight: 206
-  - name: iOS and tvOS Monitoring
-    url: real_user_monitoring/ios/
-    parent: rum
-    identifier: rum_ios
-    weight: 3
-  - name: Data Collected
-    url: real_user_monitoring/ios/data_collected/
-    parent: rum_ios
-    identifier: rum_ios_data_collected
-    weight: 301
-  - name: Advanced Configuration
-    url: real_user_monitoring/ios/advanced_configuration/
-    parent: rum_ios
-    identifier: rum_ios_advanced
-    weight: 302
-  - name: Mobile Vitals
-    url: real_user_monitoring/ios/mobile_vitals/
-    parent: rum_ios
-    identifier: rum_ios_mobile_vitals
-    weight: 303
-  - name: Web View Tracking
-    url: real_user_monitoring/ios/web_view_tracking/
-    parent: rum_ios
-    identifier: rum_ios_web_view_tracking
-    weight: 304
-  - name: SwiftUI
-    url: real_user_monitoring/ios/swiftui/
-    parent: rum_ios
-    identifier: rum_ios_swiftui
-    weight: 305
-  - name: Troubleshooting
-    url: real_user_monitoring/ios/troubleshooting/
-    parent: rum_ios
-    identifier: rum_troubleshooting_ios
-    weight: 306
-  - name: React Native Monitoring
-    url: real_user_monitoring/reactnative/
-    parent: rum
-    identifier: rum_reactnative
-    weight: 4
-  - name: Data Collected
-    url: real_user_monitoring/reactnative/data_collected/
-    parent: rum_reactnative
-    identifier: rum_reactnative_data_collected
-    weight: 401
-  - name: Advanced Configuration
-    url: real_user_monitoring/reactnative/advanced_configuration/
-    parent: rum_reactnative
-    identifier: rum_reactnative_advanced_configuration
-    weight: 402
-  - name: Mobile Vitals
-    url: real_user_monitoring/reactnative/mobile_vitals/
-    parent: rum_reactnative
-    identifier: rum_reactnative_mobile_vitals
-    weight: 403
-  - name: Web View Tracking
-    url: real_user_monitoring/reactnative/web_view_tracking/
-    parent: rum_reactnative
-    identifier: rum_reactnative_web_view_tracking
-    weight: 404
-  - name: Expo
-    url: real_user_monitoring/reactnative/expo/
-    parent: rum_reactnative
-    identifier: rum_reactnative_expo
-    weight: 405
-  - name: CodePush
-    url: real_user_monitoring/reactnative/codepush/
-    parent: rum_reactnative
-    identifier: rum_reactnative_codepush
-    weight: 406
-  - name: Integrated Libraries
-    url: real_user_monitoring/reactnative/integrated_libraries/
-    parent: rum_reactnative
-    identifier: rum_reactnative_integrated_libraries
-    weight: 407
-  - name: Troubleshooting
-    url: real_user_monitoring/reactnative/troubleshooting/
-    parent: rum_reactnative
-    identifier: rum_reactnative_troubleshooting
-    weight: 408
-  - name: Flutter Monitoring
-    url: real_user_monitoring/flutter/
-    parent: rum
-    identifier: rum_flutter
-    weight: 5
   - name: Setup
-    url: real_user_monitoring/flutter/setup/
-    parent: rum_flutter
-    identifier: rum_flutter_setup
-    weight: 501
-  - name: Data Collected
-    url: real_user_monitoring/flutter/data_collected/
-    parent: rum_flutter
-    identifier: rum_flutter_data_collected
-    weight: 502
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_setup
+    weight: 201
+  - name: Android
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/android
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_android
+    weight: 201
+  - name: Flutter
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_flutter
+    weight: 202
+  - name: iOS
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/ios
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_ios
+    weight: 203
+  - name: SwiftUI
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/swiftui
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_swiftui
+    weight: 204
+  - name: OTel
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/otel
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_otel
+    weight: 205
+  - name: React Native
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_reactnative
+    weight: 206
+  - name: CodePush
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/codepush
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_codepush
+    weight: 207
+  - name: Expo
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/expo
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_expo
+    weight: 208
+  - name: Roku
+    url: real_user_monitoring/mobile_and_tv_monitoring/setup/roku
+    parent: rum_mobile_setup
+    identifier: rum_mobile_setup_roku
+    weight: 209
   - name: Advanced Configuration
-    url: real_user_monitoring/flutter/advanced_configuration/
-    parent: rum_flutter
-    identifier: rum_flutter_advanced_configuration
-    weight: 503
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_advanced
+    weight: 206
+  - name: Android
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_android
+    weight: 206
+  - name: iOS
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_ios
+    weight: 207
+  - name: Flutter
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_flutter
+    weight: 208
+  - name: React Native
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/reactnative
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_reactnative
+    weight: 209
+  - name: Roku
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku
+    parent: rum_mobile_advanced
+    identifier: rum_mobile_advanced_roku
+    weight: 210
+  - name: Data Collected
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_data_collected
+    weight: 207
+  - name: Android
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/android
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_android
+    weight: 207
+  - name: iOS
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/ios
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_ios
+    weight: 208
+  - name: Flutter
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_flutter
+    weight: 209
+  - name: React Native
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/reactnative
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_reactnative
+    weight: 210
+  - name: Roku
+    url: real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
+    parent: rum_mobile_data_collected
+    identifier: rum_mobile_data_collected_roku
+    weight: 211
   - name: Mobile Vitals
-    url: real_user_monitoring/flutter/mobile_vitals/
-    parent: rum_flutter
-    identifier: rum_flutter_mobile_vitals
-    weight: 504
-  - name: OpenTelemetry Support
-    url: real_user_monitoring/flutter/otel_support/
-    parent: rum_flutter
-    identifier: rum_flutter_otel_support
-    weight: 505
+    url: real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_vitals
+    weight: 208
   - name: Web View Tracking
-    url: real_user_monitoring/flutter/web_view_tracking/
-    parent: rum_flutter
-    identifier: rum_flutter_web_view_tracking
-    weight: 506
+    url: real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_web_view_tracking
+    weight: 209
+  - name: Integrated Libraries
+    url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_integrated_libraries
+    weight: 210
   - name: Troubleshooting
-    url: real_user_monitoring/flutter/troubleshooting/
-    parent: rum_flutter
-    identifier: rum_flutter_troubleshooting
-    weight: 507
-  - name: Roku Monitoring
-    url: real_user_monitoring/roku/
-    parent: rum
-    identifier: rum_roku
-    weight: 6
-  - name: Data Collected
-    url: real_user_monitoring/roku/data_collected/
-    parent: rum_roku
-    identifier: rum_roku_data_collected
-    weight: 601
-  - name: Advanced Configuration
-    url: real_user_monitoring/roku/advanced_configuration/
-    parent: rum_roku
-    identifier: rum_roku_advanced
-    weight: 602
+    url: real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_troubleshooting
+    weight: 211
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
     identifier: rum_session_replay
-    weight: 6
+    weight: 3
   - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 601
+    weight: 301
   - name: Browser Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 602
+    weight: 302
   - name: Browser Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 603
+    weight: 303
   - name: Browser Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 604
+    weight: 304
   - name: Playlists
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
@@ -3967,117 +3932,117 @@ main:
     url: real_user_monitoring/heatmaps
     parent: rum
     identifier: rum_heatmaps
-    weight: 7
+    weight: 4
   - name: Frustration Signals
     url: real_user_monitoring/frustration_signals/
     parent: rum
     identifier: rum_frustration_signals
-    weight: 8
+    weight: 5
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 9
+    weight: 6
   - name: Performance
     url: real_user_monitoring/dashboards/performance
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 901
+    weight: 601
   - name: Testing and Deployment
     url: real_user_monitoring/dashboards/testing_and_deployment
     parent: rum_dashboards
     identifier: rum_dashboards_testing_and_deployment
-    weight: 902
+    weight: 602
   - name: Usage
     url: real_user_monitoring/dashboards/usage
     parent: rum_dashboards
     identifier: rum_dashboards_usage
-    weight: 903
+    weight: 603
   - name: Errors
     url: real_user_monitoring/dashboards/errors
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 904
-  - name: Explorer
+    weight: 604
+  - name: Exploring RUM Data
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 10
+    weight: 7
   - name: Search RUM Events
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 1001
+    weight: 701
   - name: Search Syntax
     url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
     identifier: rum_explorer_search_syntax
-    weight: 1002
+    weight: 702
   - name: Group
     url: real_user_monitoring/explorer/group/
     parent: rum_explorer
     identifier: rum_explorer_group
-    weight: 1003
+    weight: 703
   - name: Visualize
     url: real_user_monitoring/explorer/visualize/
     parent: rum_explorer
     identifier: rum_explorer_visualize
-    weight: 1004
+    weight: 704
   - name: Events
     url: real_user_monitoring/explorer/events/
     parent: rum_explorer
     identifier: rum_explorer_events
-    weight: 1005
+    weight: 705
   - name: Export
     url: real_user_monitoring/explorer/export/
     parent: rum_explorer
     identifier: rum_explorer_export
-    weight: 1006
+    weight: 706
   - name: Saved Views
     url: real_user_monitoring/explorer/saved_views/
     parent: rum_explorer
     identifier: rum_explorer_saved_views
-    weight: 1007
+    weight: 707
   - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 1008
+    weight: 708
   - name: Funnel Analysis
     url: real_user_monitoring/funnel_analysis
     parent: rum
     identifier: rum_funnel_analysis
-    weight: 11
+    weight: 8
   - name: Feature Flag Tracking
     url: real_user_monitoring/feature_flag_tracking
     parent: rum
     identifier: rum_feature_flag_tracking
-    weight: 12
+    weight: 9
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 12
+    weight: 10
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 13
+    weight: 11
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 14
+    weight: 12
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1401
+    weight: 1201
   - name: Track Browser Errors
     url: real_user_monitoring/error_tracking/browser/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1402
+    weight: 1202
   - name: Track Android Errors
     url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
@@ -4087,37 +4052,37 @@ main:
     url: real_user_monitoring/error_tracking/ios/
     parent: rum_error_tracking
     identifier: rum_error_tracking_ios
-    weight: 1404
+    weight: 1204
   - name: Track Expo Errors
     url: real_user_monitoring/error_tracking/expo/
     parent: rum_error_tracking
     identifier: rum_error_tracking_expo
-    weight: 1405
+    weight: 1205
   - name: Track React Native Errors
     url: real_user_monitoring/error_tracking/reactnative/
     parent: rum_error_tracking
     identifier: rum_error_tracking_reactnative
-    weight: 1406
+    weight: 1206
   - name: Track Flutter Errors
     url: real_user_monitoring/error_tracking/flutter/
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
-    weight: 1407
+    weight: 1207
   - name: Track Roku Errors
     url: real_user_monitoring/error_tracking/roku/
     parent: rum_error_tracking
     identifier: rum_error_tracking_roku
-    weight: 1408
+    weight: 1208
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1409
+    weight: 1209
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 15
+    weight: 13
   - name: Data Security
     url: data_security/real_user_monitoring/
     parent: rum
