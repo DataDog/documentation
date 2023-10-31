@@ -1003,6 +1003,11 @@ main:
     parent: infrastructure
     identifier: infrastructure_process
     weight: 4
+  - name: Resource Catalog
+    url: infrastructure/resource_catalog/
+    parent: infrastructure
+    identifier: infrastructure_resource_catalog
+    weight: 4
   - name: Increase Process Retention
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
