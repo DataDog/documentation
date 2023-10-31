@@ -172,7 +172,7 @@ filelog:
 
 #### Remap OTel service.name attribute to service in logs
 
-In certain Datadog Exporter versions, the `service` field of OTel logs is populated as [OTel semantic convention][25] `service.name`, and `service.name` is not in the default [service attributes][26] in Datadog log preprocessing.
+In certain Datadog Exporter versions, the `service` field of OTel logs is populated as [OTel semantic convention][25] `service.name`. However, `service.name` is not one of the default [service attributes][26] in Datadog's log preprocessing.
 
 To get the `service` field properly populated in logs, you can specify `service.name` to be the source of a log’s service by setting a [log service remapper processor][27].
 
