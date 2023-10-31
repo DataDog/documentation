@@ -58,7 +58,7 @@ More information about monitoring pipeline events are present in the [official A
    }
    ```
 
-   The JSON above will set up the integration for all of your pipelines. To restrict the set of pipelines,
+   The JSON above sets up the integration for all of your pipelines. To restrict the set of pipelines,
    follow the [Only monitor specific pipelines][6] section below.
 6. Click on **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
@@ -71,7 +71,7 @@ at this moment by following the steps outlined in the [Create the API Destinatio
 
 ### Only monitor specific pipelines
 
-You can optionally restrict the pipelines that will be monitored by the CI Visibility product.
+You can optionally restrict the pipelines that are monitored by the CI Visibility product.
 To do this, add the `detail.pipeline` filter in the rule event pattern defined when setting up the integration. For example:
 
 ```
