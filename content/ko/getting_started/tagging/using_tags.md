@@ -132,7 +132,7 @@ title: 태그 사용
 
 ## 모니터링
 
-[할당된 태그][32]를 기준으로 모니터 및 [모니터 다운타임][31]을 필터링하려면 검색 바 또는 패싯 체크박스를 사용합니다. 검색 바 형식이 `tag:<KEY>:<VALUE>`이면 `tag:service:coffee-house`입니다. 특정 태그가 있는 모니터를 검색에서 제외하려면 `-`, for example: `태그:-service:coffee-house`를 사용합니다.
+[할당된 태그][32]를 기준으로 모니터 및 [모니터 다운타임][31]을 필터링하려면 검색 바 또는 패싯 체크박스를 사용합니다. 예를 들어, 검색 바 형식이 `tag:<KEY>:<VALUE>`이면 `tag:service:coffee-house`입니다. 특정 태그가 있는 모니터를 검색에서 제외하려면 `-`, for example: `태그:-service:coffee-house`를 사용합니다.
 
 {{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="태그로 검색 바에서 모니터 필터링" style="width:80%;">}}
 
@@ -250,7 +250,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ## 로그
 
-로그 [검색][10], [애널리틱스][11], [패턴][12], [라이브 테일][13]은 검색창이나 파셋 체크박스를 사용하여 태그로 로그를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [로그 검색][10] 페이지를 참조해주세요.
+로그 [검색][10], [애널리틱스][11], [패턴][12], [라이브 테일][13]은 검색창이나 패싯 체크박스를 사용하여 태그로 로그를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [로그 검색][10] 페이지를 참조해주세요.
 
 {{< tabs >}}
 {{% tab "검색" %}}
