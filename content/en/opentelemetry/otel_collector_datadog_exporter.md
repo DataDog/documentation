@@ -170,7 +170,7 @@ filelog:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
     - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog. 
 
-#### Remap OTel service.name attribute to service in logs
+#### Remap OTel's `service.name` attribute to `service` for logs
 
 In certain Datadog Exporter versions, the `service` field of OTel logs is populated as [OTel semantic convention][25] `service.name`. However, `service.name` is not one of the default [service attributes][26] in Datadog's log preprocessing.
 
