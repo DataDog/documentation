@@ -148,7 +148,7 @@ AWS X-Ray propose à la fois un service AWS backend (le tracing actif d'AWS X-R
 Le SDK AWS X-Ray et les bibliothèques client de l'APM Datadog (`dd-trace`) accèdent directement à la fonction pour ajouter des métadonnées et des spans aux appels en aval. Si vous utilisez `dd-trace` pour effectuer le tracing au niveau du gestionnaire, voici à quoi ressemble la configuration finale :
 
 1. Vous avez activé le [tracing actif d'AWS X-Ray][18] sur vos fonctions Lambda depuis la console AWS Lambda, ainsi que l'[intégration Datadog/AWS X-Ray][19].
-2. Vous avez instrumenté vos fonctions Lambda avec l'APM Datadog (`dd-trace`) en suivant les [instructions d'installation pour votre runtime Lambda][4].
+2. Vous avez instrumenté vos fonctions Lambda avec la solution APM Datadog (`dd-trace`) en suivant les [instructions d'installation pour votre runtime Lambda][5].
 3. Les bibliothèques tierces sont automatiquement patchées par `dd-trace` ; les bibliothèques client AWS X-Ray n'ont donc pas besoin d'être installées.
 4. Vous avez défini la variable d'environnement `DD_MERGE_XRAY_TRACES` sur `true` (ou la variable d'environnement `DD_MERGE_DATADOG_XRAY_TRACES` pour Ruby) sur vos fonctions Lambda afin de fusionner les traces X-Ray et `dd-trace`.
 
@@ -159,7 +159,7 @@ Si vous avez installé les bibliothèques de tracing Datadog (`dd-trace`) sur vo
 Si vous avez installé `dd-trace` sur vos hosts avec l'Agent Datadog, et si le tracing de vos fonctions sans serveur Node.js ou Python passe par AWS X-Ray, voici à quoi ressemble la configuration finale :
 
 1. Vous avez installé l'[intégration AWS X-Ray][18] pour le tracing de vos fonctions Lambda. Par la même occasion, vous avez activé le tracing actif d'AWS X-Ray et installé les bibliothèques client X-Ray.
-2. Vous avez installé la [bibliothèque Lambda Datadog pour votre runtime Lambda][4] et défini la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
+2. Vous avez installé la [bibliothèque Lambda Datadog pour votre runtime Lambda][5] et défini la variable d'environnement `DD_TRACE_ENABLED` sur `false`.
 3. La solution [APM Datadog][20] est configurée sur vos hosts et votre infrastructure à base de conteneurs.
 
 Pour que les traces d'AWS X-Ray et de l'APM Datadog s'affichent dans le même flamegraph, tous les services doivent avoir le même tag `env`.
