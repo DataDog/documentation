@@ -53,7 +53,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
-## Configure CSM on the Agent for hosts and containers
+## Configure CSM for threats
 
 ### Enable Remote Configuration
 
@@ -426,6 +426,159 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
+## Configure CSM host and container vulnerability scanning
+
+### Prerequisites
+
+- [Cloud Security Management][12] (using [Threats][1] or [Misconfigurations][2]).
+- [Datadog Agent][6] 7.46.0 or later.
+- [containerd][10] v1.5.6 or later (Kubernetes and hosts only).
+- [Helm Chart][9] v3.33.6 or later (Kubernetes only).
+
+The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. 
+
+**Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
+
+### Containers
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
+Add the following to your `values.yaml` helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "ECS EC2" %}}
+
+To enable container image vulnerability scanning on your [ECS EC2 instances][7], add the following environment variables to your `datadog-agent` container definition:
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+             ...
+            "environment": [
+              ...
+              {
+                "name": "DD_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_CONTAINER_IMAGE_ENABLED",
+                "value": "true"
+              }
+            ]
+        }
+    ]
+  ...
+}
+```
+
+If the Agent fails to extract the SBOM from the container image, increase the Agent memory in the container definition:
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "memory": 256,
+            ...
+        }
+     ]
+    ...
+}
+```
+
+[7]: /containers/amazon_ecs/?tab=awscli#setup
+
+{{% /tab %}}
+
+{{% tab "Hosts" %}}
+
+Add the following to your `datadog.yaml` configuration file:
+
+```yaml
+sbom:
+  enabled: true
+  container_image:
+    enabled: true
+container_image:
+  enabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Hosts
+
+**Note**: CSM Enterprise customers can enable both container and host SBOM collection at the same time by combining the [containers](#containers) setup with the following setup for hosts configuration:
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
+```yaml
+datadog:
+  sbom:
+    host:
+      enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "ECS EC2" %}}
+
+```yaml
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+             ...
+            "environment": [
+              ...
+              {
+                "name": "DD_SBOM_ENABLED",
+                "value": "true"
+              },
+              {
+                "name": "DD_SBOM_HOST_ENABLED",
+                "value": "true"
+              }
+            ]
+        }
+    ]
+  ...
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Hosts" %}}
+
+```yaml
+sbom:
+  enabled: true
+  host:
+    enabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -438,3 +591,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 [6]: /agent/remote_config
 [7]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [8]: /security/cloud_security_management/setup
+[9]: /containers/kubernetes/installation/?tab=helm
+[10]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[11]: https://www.cisa.gov/sbom
+[12]: /security/cloud_security_management

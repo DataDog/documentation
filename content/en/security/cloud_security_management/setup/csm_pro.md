@@ -41,7 +41,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{< /tabs >}}
 
 
-## Setup for container image scanning
+## Configure CSM container image scanning
 
 The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities.
 

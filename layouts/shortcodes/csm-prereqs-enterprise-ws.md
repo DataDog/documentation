@@ -1,4 +1,4 @@
-* Datadog Agent 7.44 or later.
+* Datadog Agent 7.46 or later.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CSM Threats supports the following Linux distributions:
   * Ubuntu LTS (18.04, 20.04, and 22.04)
   * Debian 10 or later
