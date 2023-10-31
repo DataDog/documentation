@@ -21,40 +21,35 @@ Combo of the above
 
 ## APM DevSecOps
 
-{{< whatsnext desc="Configure your application to send traces to Datadog:" >}}
-    {{< nextlink href="/tracing/trace_collection/" >}}Sending Traces to Datadog{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/setup/" >}}Setting Up Universal Service Monitoring{{< /nextlink >}}
+{{< whatsnext desc="" >}}
+    {{< nextlink href="/tracing/trace_collection/" >}}APM{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/setup/" >}}Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## APM DevSecOps Pro
 
-{{< whatsnext desc="Configure your application to send traces to Datadog:" >}}
-    {{< nextlink href="/tracing/trace_collection/" >}}Sending Traces to Datadog{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/setup/" >}}Setting Up Universal Service Monitoring{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Setup Data Streams Monitoring" >}}
+{{< whatsnext desc="" >}}
+    {{< nextlink href="/tracing/trace_collection/" >}}APM{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/setup/" >}}Universal Service Monitoring{{< /nextlink >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}Data Streams Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## APM DevSecOps Enterprise
 
+{{< whatsnext desc="" >}}
+    {{< nextlink href="/tracing/trace_collection/" >}}APM{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/setup/" >}}Universal Service Monitoring{{< /nextlink >}}
+    {{< nextlink href="/getting_started/cloud_security_management" >}}Data Streams Monitoring{{< /nextlink >}}
+    {{< nextlink href="/profiler/enabling" >}}Continuous Profiler{{< /nextlink >}}
+{{< /whatsnext >}}
+
+APM
+Universal Service Monitoring
+Data Streams Monitoring
+Continuous Profiler
+
 Includes Profiler + DSM.
-Includes Workflow Automation (both bundles)?
-
-{{< whatsnext desc="Configure your application to send traces to Datadog:" >}}
-    {{< nextlink href="/tracing/trace_collection/" >}}Sending Traces to Datadog{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/setup/" >}}Setting Up Universal Service Monitoring{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Set Up Data Streams Monitoring" >}}
-    {{< nextlink href="/data_streams/" >}}Data Streams Monitoring{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Set Up Continuous Profiler" >}}
-    {{< nextlink href="/profiler/enabling" >}}Enabling the Profiler{{< /nextlink >}}
-{{< /whatsnext >}}
-
+Includes Workflow Automation (both bundles)
 
 ## DevSecOps Pro
 
@@ -66,7 +61,7 @@ Included with Infrastructure Pro/Enterprise bundles:
 - Containers
 - Serverless
 - *Metrics
-- [Processes][1] (Enterprise only)
+- [Live Processes][1] (Enterprise only)
 - Watchdog (Enterprise only)
 - [Metrics Correlations (Enterprise only)][2]
 
@@ -74,3 +69,5 @@ Included with Infrastructure Pro/Enterprise bundles:
 
 [1]: /infrastructure/process/?tab=linuxwindows
 [2]: /dashboards/correlations/
+
+
