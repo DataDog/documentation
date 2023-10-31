@@ -50,14 +50,12 @@ More information about monitoring pipeline events are present in the [official A
 3. Leave the event bus as **default**, and, under **Rule Type**, select **Rule with an event pattern**. Click on **Next**.
 4. Under **Event Source**, select **AWS events or EventBridge partner events**.
 5. Under **Creation Method**, select **Custom pattern (JSON editor)**. Then, under **Event Pattern**, input the following JSON:
-
    ```
    {
      "source": ["aws.codepipeline"],
      "detail-type": ["CodePipeline Pipeline Execution State Change", "CodePipeline Action Execution State Change", "CodePipeline Stage Execution State Change"]
    }
    ```
-
    The JSON above sets up the integration for all of your pipelines. To restrict the set of pipelines,
    follow the [Only monitor specific pipelines][6] section below.
 6. Click on **Next**.
