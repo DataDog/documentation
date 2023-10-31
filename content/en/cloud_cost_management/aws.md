@@ -191,7 +191,7 @@ The following out-of-the-box tags are available:
 | cloudfront (function)  | `functionname`|
 | ec2 natgateway | `natgatewayid`|
 | redshift         | `clusteridentifier`|
-| kenesis         | `streamname`|
+| kinesis         | `streamname`|
 | queue         | `queuename`|
 | sns         | `topicname`|
 | elb (application, gateway, network) | `loadbalancer`|
