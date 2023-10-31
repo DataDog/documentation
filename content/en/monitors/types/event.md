@@ -82,7 +82,7 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /service_management/events/explorer/#search-syntax
+[2]: /service_management/events/explorer/searching
 [3]: /help/
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/

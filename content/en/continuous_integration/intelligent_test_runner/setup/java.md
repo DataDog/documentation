@@ -37,23 +37,6 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Java][1
 
 {{% ci-itr-activation-instructions %}}
 
-### Configure Test Runner Environment
-
-To enable Intelligent Test Runner, set the following environment variables:
-
-`DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` (Optional)
-: Intelligent Test Runner requires [Jacoco][2] for collecting code coverage.<br/>
-Set this variable to a valid Jacoco version (such as `0.8.10`) if you want the tracer to run your build with Jacoco injected.<br/>
-Omit it if your project already has Jacoco configured.<br/>
-**Default**: `(empty)`
-
-`DD_CIVISIBILITY_JACOCO_PLUGIN_INCLUDES` (Optional)
-: Use this variable to configure the list of packages for which code coverage should be collected.<br/>
-While this variable is optional, setting this helps reduce overhead by avoiding coverage collection for core JDK classes and third-party dependencies.<br/>
-Package names should terminate with a `*` and should be separated with colons: `com.myorg.package1.*:com.myorg.package2.*:com.myorg.package3.*`
-or `com.myorg.*` (if you have a common root package).<br/>
-**Default**: `(empty)`
-
 ## Run tests with the Intelligent Test Runner enabled
 
 After completing setup, run your tests as you normally do:
@@ -62,7 +45,7 @@ After completing setup, run your tests as you normally do:
 {{% tab "Gradle" %}}
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
+./gradlew cleanTest test -Dorg.gradle.jvmargs=\
 -javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
@@ -82,6 +65,231 @@ mvn clean verify
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Disabling skipping for specific tests
+
+You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
+
+### Why make tests unskippable?
+
+The Intelligent Test Runner uses code coverage data to determine whether or not tests should be skipped. In some cases, this data may not be sufficient to make this determination.
+
+Examples include:
+
+- Tests that read data from text files
+- Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
+- Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
+
+### Compatibility
+
+Unskippable tests are supported in the following versions and testing frameworks:
+
+- JUnit >= 4.10 and >= 5.3
+- TestNG >= 6.4
+- Spock >= 2.2
+- Cucumber >= 5.4.0
+
+### Marking tests as unskippable
+
+{{< tabs >}}
+{{% tab "JUnit 5" %}}
+
+#### Individual test case
+
+Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test case to mark it as unskippable.
+
+```java
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
+
+public class MyTestSuite {
+
+  @Test
+  @Tags({@Tag("datadog_itr_unskippable")})
+  public void myTest() {
+    // ...
+  }
+}
+```
+
+#### Test suite
+
+Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
+
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+
+```java
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
+
+@Tags({@Tag("datadog_itr_unskippable")})
+public class MyTestSuite {
+
+  @Test
+  public void myTest() {
+    // ...
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "JUnit 4" %}}
+
+#### Individual test case
+
+Add a JUnit `Category` with the value `datadog_itr_unskippable` to your test case to mark it as unskippable.
+You do not have to create the `datadog_itr_unskippable` for every test case or test suite, one category is enough for the entire project.
+
+```java
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
+public class MyTestSuite {
+
+  @Category(datadog_itr_unskippable.class)
+  @Test
+  public void myTest() {
+    // ...
+  }
+
+  public interface datadog_itr_unskippable {}
+}
+```
+
+#### Test suite
+
+Add a JUnit `Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
+You do not have to create the `datadog_itr_unskippable` for every test case or test suite, one category is enough for the entire project.
+
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+
+```java
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
+@Category(MyTestSuite.datadog_itr_unskippable.class)
+public class MyTestSuite {
+
+  @Test
+  public void myTest() {
+    // ...
+  }
+
+  public interface datadog_itr_unskippable {}
+}
+```
+
+{{% /tab %}}
+{{% tab "TestNG" %}}
+
+#### Individual test case
+
+Add a group with the value `datadog_itr_unskippable` to your test case to mark it as unskippable.
+
+```java
+import org.testng.annotations.Test;
+
+public class MyTestSuite {
+
+  @Test(groups = "datadog_itr_unskippable")
+  public void myTest() {
+    // ...
+  }
+}
+```
+
+#### Test suite
+
+Add a group with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
+
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+
+```java
+import org.testng.annotations.Test;
+
+@Test(groups = "datadog_itr_unskippable")
+public class MyTestSuite {
+
+  @Test
+  public void myTest() {
+    // ...
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Spock" %}}
+
+#### Individual test case
+
+Add a `spock.lang.Tag` with the value `datadog_itr_unskippable` to your test case to mark it as unskippable.
+
+```java
+import spock.lang.Specification
+import spock.lang.Tag
+
+class MyTestSuite extends Specification {
+
+  @Tag("datadog_itr_unskippable")
+  def myTest() {
+    // ...
+  }
+}
+```
+
+#### Test suite
+
+Add a `spock.lang.Tag` with the value `datadog_itr_unskippable` to your test suite to mark it as unskippable.
+
+If a suite is marked as unskippable, none of the test cases from that suite can be skipped by ITR.
+
+```java
+import spock.lang.Specification
+import spock.lang.Tag
+
+@Tag("datadog_itr_unskippable")
+class MyTestSuite extends Specification {
+
+  def myTest() {
+    // ...
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Cucumber" %}}
+
+#### Individual scenario
+
+Add `datadog_itr_unskippable` tag to your gherkin scenario to mark it as unskippable.
+
+```gherkin
+Feature: My Feature
+
+  @datadog_itr_unskippable
+  Scenario: My Scenario
+    # ...
+```
+
+#### Feature
+
+Add `datadog_itr_unskippable` tag to your gherkin feature to mark it as unskippable.
+
+If a feature is marked as unskippable, none of the scenarios from that feature can be skipped by ITR.
+
+```gherkin
+@datadog_itr_unskippable
+Feature: My Feature
+
+  Scenario: My Scenario
+    # ...
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Further Reading
 

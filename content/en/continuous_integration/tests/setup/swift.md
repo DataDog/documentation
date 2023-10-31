@@ -647,7 +647,7 @@ class DDTestModule {
     // - Parameters:
     //   - name: Name of the suite.
     //   - startTime: Optional. The time the suite started.
-    func suiteStart(name: String, startTime: Date: Date? = nil) -> DDTestSuite
+    func suiteStart(name: String, startTime: Date? = nil) -> DDTestSuite
 }
     //
 public class DDTestSuite : NSObject {
@@ -666,7 +666,7 @@ public class DDTestSuite : NSObject {
     // - Parameters:
     //   - name: Name of the test.
     //   - startTime: Optional. The time the test started.
-    func testStart(name: String, startTime: Date: Date? = nil) -> DDTest
+    func testStart(name: String, startTime: Date? = nil) -> DDTest
 }
     //
 public class DDTest : NSObject {
@@ -688,7 +688,7 @@ public class DDTest : NSObject {
     // - Parameters:
     //   - status: The status reported for this test.
     //   - endTime: Optional. The time the test ended.
-    func end(status: DDTestStatus, endTime: Date: Date? = nil)
+    func end(status: DDTestStatus, endTime: Date? = nil)
 }
     //
 // Possible statuses reported by a test:

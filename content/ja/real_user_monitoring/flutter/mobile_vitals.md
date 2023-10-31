@@ -17,13 +17,13 @@ title: モバイル バイタル
 
 リアルユーザーモニタリングは、一連のメトリクスを提供するモバイルバイタルを提供し、モバイルアプリケーションの応答性、安定性、リソース消費に関するインサイトの取得に役立てることができます。モバイルバイタルは、不良、中程度、良好の 3 種類です。
 
-アプリケーションのモバイルバイタルの概要は、**UX Monitoring > Performance Summary** に移動してアプリケーションを選択することで表示できます。
+アプリケーションの Mobile Vitals は、**UX Monitoring > Performance Monitoring** に移動してアプリケーションを選択することで表示できます。
 
-{{< img src="real_user_monitoring/flutter/flutter-mobile-vitals-1.png" alt="Performance Summary  タブのモバイルバイタル" style="width:90%;">}}
+{{< img src="real_user_monitoring/flutter/flutter-mobile-vitals.png" alt="Performance Summary  タブの Mobile Vitals" style="width:90%;">}}
 
-RUM モバイルアプリのパフォーマンスダッシュボードにアクセスするには、アプリケーションサマリーページから Monitor Performance Metrics セクションまでスクロールダウンし、**Performance Overview** をクリックします。
+RUM モバイルアプリのパフォーマンスダッシュボードにアクセスするには、**Performance** タブに切り替え、**View Dashboard** リンクをクリックします。
 
-{{< img src="real_user_monitoring/flutter/flutter-performance-overview.png" alt="モバイルパフォーマンス概要ダッシュボード" style="width:90%;">}}
+{{< img src="real_user_monitoring/flutter/flutter-perf-dash-link.png" alt="Performance タブから Flutter のモバイルパフォーマンスダッシュボードにアクセス" style="width:90%;">}}
 
 様々なアプリケーションのバージョンに渡るメトリクスを表示する折れ線グラフで、アプリケーションの全体的な健全性とパフォーマンスを理解することができます。アプリケーションのバージョンでフィルターをかけたり、特定のセッションやビューを表示するには、グラフをクリックしてください。
 
