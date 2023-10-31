@@ -588,7 +588,7 @@ namespace Datadog.Trace.Ci
     }
 
     /// <summary>
-    /// ベンチマーク測定離散統計
+    /// ベンチマーク測定の離散統計
     /// </summary>
     public readonly struct BenchmarkDiscreteStats
     {
