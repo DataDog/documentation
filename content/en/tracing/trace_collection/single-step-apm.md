@@ -1,19 +1,15 @@
 ---
-title: Single Step APM Instrumentation
+title: Single Step APM Instrumentation (Beta)
 kind: documentation
 is_beta: true
 ---
 
-{{< callout url="http://dtdg.co/apm-onboarding" >}}
-This feature is available in the latest Datadog Agent version.
-<ul>
-<li> On Linux hosts and VMs
-<li> On Docker containers
-</ul>
+## Requirements
 
-It supports tracing Java, Python, Ruby, Node.js, and .NET services on x86_64 architectures only. Try it out!<br><br>
+Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` architectures.
 
-For Kubernetes deployments, a private beta is available for tracing Java, Python, Node.js, .NET and Ruby services.
+{{<  callout header="false" url="http://dtdg.co/apm-onboarding" >}}
+For Kubernetes deployments, a private beta is available for tracing Java, Python, Ruby, Node.js, and .NET Core.
 {{< /callout >}}
 
 ## Enable APM on your services in one step
@@ -48,7 +44,7 @@ For example, for a Docker Linux container:
 
 1. Install the library injector:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -112,7 +108,8 @@ Run the following commands and restart the service to stop injecting the library
 
 ### Removing APM for all services on the infrastructure
 
-Run the following commands and restart the infrastructure to remove library injectors and stop producing traces.
+To stop producing traces, remove library injectors and restart the infrastructure:
+
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -127,11 +124,16 @@ Run the following commands and restart the infrastructure to remove library inje
 
 {{% tab "Docker" %}}
 
-1. Run:
+1. Uninstall local library injection:
    ```shell
    dd-container-install --uninstall
    ```
-2. Restart your container.
+2. Restart Docker:
+   ```shell
+   systemctl restart docker
+   ```
+   Or use the equivalent for your environment.
+
 {{% /tab %}}
 
 {{< /tabs >}}

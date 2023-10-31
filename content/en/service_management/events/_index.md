@@ -1,12 +1,13 @@
 ---
-title: Events
+title: Event Management
 kind: documentation
+is_beta: true
 aliases:
 - /guides/eventcorrelation/
 - /guides/markdown/
 - /events
 further_reading:
-- link: "/api/v1/events/"
+- link: "/api/latest/events/"
   tag: "Documentation"
   text: "Datadog Events API"
 - link: "/service_management/events/guides/recommended_event_tags/"
@@ -31,7 +32,7 @@ Datadog Events gives you a consolidated interface to search, analyze, and filter
 
 Without any additional setup, Datadog Events automatically gathers events that are collected by the Agent and installed integrations.
 
-More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [AWS ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
+More than 100 Datadog integrations support events collection, including [Kubernetes][1], [Docker][2], [Jenkins][3], [Chef][4], [Puppet][5], [Amazon ECS][6] or [Autoscaling][7], [Sentry][8], and [Nagios][9]. 
 
 ## Sending custom events to Datadog
 
@@ -89,8 +90,8 @@ To add and configure event processing pipelines, see the [Enrich & Normalize][21
 [12]: /service_management/events/guides/dogstatsd/
 [13]: /service_management/events/guides/email/
 [14]: /service_management/events/explorer/
-[15]: /service_management/events/explorer/#event-analytics
-[16]: /logs/explorer/search_syntax/
+[15]: /service_management/events/explorer/analytics
+[16]: /service_management/events/explorer/searching
 [17]: /dashboards/widgets/alert_graph/
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /getting_started/tagging/unified_service_tagging/

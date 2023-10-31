@@ -1,13 +1,16 @@
 ---
 title: Container Cost Allocation
 kind: documentation
-disable_toc: false
 private: true
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
   text: "Cloud Cost Management"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
 
 {{< jqmath-vanilla >}}
 
@@ -34,6 +37,8 @@ Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR
 For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
 Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
+
+**Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][7] and [pods][8].
 
 ### ECS on EC2
 
@@ -118,3 +123,5 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
 [5]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [6]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
+[7]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
+[8]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags

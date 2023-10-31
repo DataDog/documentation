@@ -20,7 +20,7 @@ Use the [Datadog Flutter Plugin][1] to set up Log Management or Real User Monito
 
 ## Prerequisites
 
-First, ensure that you have your environment set up properly for each platform. 
+First, ensure that you have your environment set up properly for each platform.
 
 <div class="alert alert-info">
 Datadog supports Flutter Monitoring for iOS and Android for Flutter 2.8+. Support for Flutter Web is in alpha.
@@ -28,7 +28,7 @@ Datadog supports Flutter Monitoring for iOS and Android for Flutter 2.8+. Suppor
 
 ### iOS
 
-Your iOS Podfile, located in `ios/Podfile`, must have `use_frameworks!` set to true (which is the default in Flutter) and must set its target iOS version >= 11.0. 
+Your iOS Podfile, located in `ios/Podfile`, must have `use_frameworks!` set to true (which is the default in Flutter) and must set its target iOS version >= 11.0.
 
 This constraint is usually commented out on the top line of the Podfile, and should read:
 
@@ -44,12 +44,43 @@ For Android, your `minSdkVersion` version must be >= 19, and if you are using Ko
 
 ### Web
 
-For Web, add the following to your `index.html` under the `head` tag:
-
+For Web, add the following to your `index.html` under the `head` tag, for **{{<region-param key="dd_site_name">}}** site:
+{{< site-region region="us" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum-slim.js"></script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
 ```html
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
 <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
 ```
+{{</ site-region>}}
 
 This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchronous CDN-delivered version of the Browser SDK is the only version supported by the Datadog Flutter Plugin.
 
@@ -81,13 +112,13 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
      )
    );
    ```
-   
+
 For more information on available configuration options, see the [DdSdkConfiguration object documentation][5].
 
-To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog Flutter Plugin. 
+To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog Flutter Plugin.
 
-- If you are using RUM, set up a **Client Token** and **Application ID**. 
-- If you are only using Logs, initialize the library with a client token. 
+- If you are using RUM, set up a **Client Token** and **Application ID**.
+- If you are only using Logs, initialize the library with a client token.
 
 For more information about setting up a client token, see the [Client Token documentation][3].
 
@@ -95,7 +126,7 @@ For more information about setting up a client token, see the [Client Token docu
 
 You can initialize RUM using one of two methods in your `main.dart` file.
 
-1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][4]. 
+1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][4].
 
    ```dart
    await DatadogSdk.runApp(configuration, () async {
@@ -153,7 +184,7 @@ Set `trackingConsent` to one of the following values:
 - `TrackingConsent.granted`: The Datadog Flutter SDK starts collecting the data and sends it to Datadog.
 - `TrackingConsent.notGranted`: The Datadog Flutter SDK does not collect any data, which means no logs, traces, or RUM events are sent to Datadog.
 
-To change the tracking consent value after the SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call. 
+To change the tracking consent value after the SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call.
 
 The SDK changes its behavior according to the new value. For example, if the current tracking consent is `TrackingConsent.pending`:
 
