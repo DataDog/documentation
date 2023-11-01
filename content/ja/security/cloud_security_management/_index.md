@@ -20,6 +20,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/kubernetes-security-best-practices/
   tag: GitHub
   text: Kubernetes アプリケーションを保護するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/workload-security-evaluator/
+  tag: GitHub
+  text: Datadog の Workload Security Evaluator を使用したコンテナ環境での Atomic Red Team 検出テストの実行
 - link: https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/
   tag: GitHub
   text: Datadog Cloud Security Management による観測可能性データへのセキュリティコンテキストの追加
@@ -27,16 +30,23 @@ further_reading:
   tag: GitHub
   text: Datadog Security Labs Ruleset で一般的なクラウドセキュリティリスクを修正する
 - link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
-  tag: GitHub
-  text: クラウドネイティブ環境におけるアプリケーションのセキュリティ対策のベストプラクティス
+  tag: ブログ
+  text: クラウドネイティブ環境におけるアプリケーションセキュリティのベストプラクティス
 - link: https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/
   tag: ブログ
   text: Datadog Cloud Security Management でクラウドの誤構成を検出するルールをカスタマイズする
+- link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
+  tag: ブログ
+  text: クラウド環境に対する十分なセキュリティカバレッジの構築
 kind: documentation
 title: Cloud Security Management
 ---
 
-Datadog Cloud Security Management (CSM) は、クラウドインフラクチャー全体でリアルタイムの脅威検出と継続的な構成監査を実現し、統一ビューでシームレスなコラボレーションと迅速な修復を可能にします。観測可能性データにより、セキュリティチームは、攻撃フローを完全にトレースすることで脅威の影響を判断し、脆弱性がトリガーされたリソース所有者を特定することができます。
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management はサポートされていません。</div>
+{{< /site-region >}}
+
+Datadog Cloud Security Management (CSM) は、クラウドインフラストラクチャー全体にわたるリアルタイムの脅威検出と継続的な構成監査を提供し、これらすべてを統一されたビューで表示することでシームレスなコラボレーションと迅速な対応を実現します。観測可能性データにより、セキュリティチームは、攻撃フローを完全にトレースすることで脅威の影響を判断し、脆弱性がトリガーされたリソース所有者を特定することができます。
 
 CSM は、Datadog Agent とプラットフォーム全体のクラウドインテグレーションを活用し、以下を備えています。
 
@@ -67,21 +77,25 @@ CSM は、Datadog Agent とプラットフォーム全体のクラウドイン�
 
 [CSM Misconfigurations][2] で利用可能な[セキュリティポスチャスコア][5]は、組織全体の健全性を追跡するのに役立ちます。このスコアは、すぐに使えるアクティブなクラウドとインフラストラクチャーのコンプライアンスルールをすべて満たしている環境の割合を示します。
 
-所見を修正し、根本的な問題を解決するか、または所見を無効にすることで、組織のスコアを向上させます。
+誤構成の修正によって、根本的な問題を解決するか、または誤構成をミュートすることで、組織のスコアを向上させます。
 
 {{< img src="security/csm/health_scores.png" alt="CSM 概要ページに表示されるポスチャスコアは、組織の全体的な健全性を追跡します" width="100%">}}
 
 ## 問題の確認と修正
 
-[Issues ページ][7]を使用して、組織の検出および所見を確認し、修正します。ガイドラインや修正ステップなど、検出に関する詳細情報を表示します。環境で脅威が検出されると、[リアルタイム通知を送信][6]し、タグを使用して影響を受けるリソースの所有者を特定します。
+[Issues ページ][7]を使用して、組織のセキュリティ検出を確認し、修正します。ガイドラインや修正ステップなど、検出に関する詳細情報を表示します。環境で脅威が検出されると、[リアルタイムで通知を送信][6]し、タグを使用して影響を受けるリソースの所有者を特定します。
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats ページ" width="100%">}}
 
+## ウィークリーダイジェストレポートのサブスクライブ
+
+過去 1 週間の Cloud Security Management アクティビティについて、直近 7 日間で発見された重要な新規セキュリティ問題を含むウィークリーサマリーを受け取ります。ウィークリーダイジェストレポートのサブスクリプションは、ユーザー単位で管理されます。[ウィークリーダイジェストレポートにサブスクライブする][11]には、`security_monitoring_signals_read` 権限が必要です。
+
 ## 次のステップ
 
-CSM を開始するには、Datadog の [**Security** > **Setup**][3] セクションに移動し、CSM のセットアップと構成方法に関する詳細情報を参照してください。
+CSM を開始するには、Datadog の [**Security** > **Setup**][3] セクションに移動し、CSM のセットアップと構成方法に関する詳細な手順を参照してください。詳しくは、[Cloud Security Management の設定][10]を参照してください。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -94,3 +108,5 @@ CSM を開始するには、Datadog の [**Security** > **Setup**][3] セクシ�
 [7]: https://app.datadoghq.com/security?product=cws
 [8]: /ja/security/identity_risks/
 [9]: /ja/security/infrastructure_vulnerabilities/
+[10]: /ja/security/cloud_security_management/setup/
+[11]: https://app.datadoghq.com/security/configuration/reports
