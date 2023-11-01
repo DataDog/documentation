@@ -84,7 +84,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/
-[2]: https://app.datadoghq.com/security/configuration
+[2]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [3]: /logs/guide/best-practices-for-log-management/
 [4]: /integrations/
 [5]: /logs/log_configuration/pipelines/
