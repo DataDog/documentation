@@ -3,7 +3,9 @@ title: Getting Started with the DevSecOps Bundles
 kind: documentation
 ---
 
-Getting started
+Intro the bundle (if you’ve bought x bundle), sections for APM/Infra followed by section for Security
+
+*Different from APM bundles as these are for monitoring your infrastructure - there's not a direct linkage to a specific (primary) product like there is for the APM bundles.
 
 Options:
 
@@ -96,16 +98,20 @@ Collection of links to other articles to help users get started after they've in
 
 ## Infrastructure DevSecOps Pro
 
-Infrastructure DevSecOps Pro includes... and [Cloud Security Management Pro][11].
-
-*Different from APM bundles as these are for monitoring your infrastructure - there's not a direct linkage to a specific (primary) product like there is for the APM bundles.
-
-650+ integrations
-CSM
+Infrastructure DevSecOps Pro includes [Containers][8], [Serverless][9], and [Cloud Security Management Pro][11]. It also includes more than [650+ out-of-the-box integrations][13].
 
 ### Setup
 
-To get started with Infrastructure DevSecOps Pro, [install and configure the Datadog Agent][7] for Containers, Serverless, and X.
+To get started with Infrastructure DevSecOps Pro, [install and configure the Datadog Agent][7] for Containers and Serverless.
+
+{{< whatsnext desc="For detailed instructions, see the following docs:" >}}
+    {{< nextlink href="/containers/" >}}Containers{{< /nextlink >}}
+    {{< nextlink href="/serverless/" >}}Serverless{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="After you configure the Agent, enable CSM Pro for your environment." >}}
+    {{< nextlink href="/security/cloud_security_management/setup/csm_pro" >}}Cloud Security Management Pro{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Next steps
 
@@ -117,21 +123,38 @@ Included with Infrastructure Pro/Enterprise bundles:
 - Containers
 - Serverless
 - *Metrics
-- [Live Processes][8] (Enterprise only)
+- Live Processes (Enterprise only)
 - Watchdog (Enterprise only)
-- [Metrics Correlations (Enterprise only)][9]
+- [Metrics Correlations (Enterprise only)][12]
 
 ## Infrastructure DevSecOps Enterprise
 
-Infrastructure DevSecOps Enterprise includes... and [Cloud Security Management Enterprise][11].
-
-*Different from APM bundles as these are for monitoring your infrastructure - there's not a direct linkage to a specific (primary) product like there is for the APM bundles.
+Infrastructure DevSecOps Enterprise includes [Containers][8], [Serverless][9], [Live Processes][10], and [Cloud Security Management Enterprise][11]. It also includes more than [650+ out-of-the-box integrations][13].
 
 ### Setup
 
-To get started with Infrastructure DevSecOps Enterprise, [install and configure the Datadog Agent][7] for Containers, Serverless, Live Processes, and X.
+To get started with Infrastructure DevSecOps Enterprise, [install and configure the Datadog Agent][7] for Containers, Serverless, and Live Processes.
+
+{{< whatsnext desc="For detailed instructions, see the following docs:" >}}
+    {{< nextlink href="/containers/" >}}Containers{{< /nextlink >}}
+    {{< nextlink href="/serverless/" >}}Serverless{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/?tab=linuxwindows#installation" >}}Live Processes{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="After you configure the Agent, enable CSM Enterprise for your environment." >}}
+    {{< nextlink href="/security/cloud_security_management/setup/csm_enterprise" >}}Cloud Security Management Enterprise{{< /nextlink >}}
+{{< /whatsnext >}}
+
+CIEM
 
 ### Next steps
+
+- Infrastructure List
+- Host Map
+- Container Map
+- Live Processes
+- Live Containers
+- Serverless
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -140,7 +163,9 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 [5]: /security/application_security/vulnerability_management/
 [6]: /security/application_security
 [7]: /agent/
-[8]: /infrastructure/process/?tab=linuxwindows
-[9]: /dashboards/correlations/
-[10]: /tracing/trace_collection
-[11]: /cloud_security_management/setup/
+[8]: /containers/
+[9]: /serverless/
+[10]: /infrastructure/process/
+[11]: /security/cloud_security_management/setup/
+[12]: /dashboards/correlations/
+[13]: /integrations/
