@@ -3187,26 +3187,31 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
+  - name: Security Signals
+    url: security/threats/security_signals
+    parent: cloud_workload_security
+    identifier: cws_security_signals
+    weight: 204
   - name: Security Profiles
     url: security/threats/security_profiles
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
-    weight: 203
+    weight: 206
   - name: Runtime Anomaly Detection
     url: security/threats/runtime_anomaly_detection
     parent: cloud_workload_security
     identifier: cws_workload_anomaly_detection
-    weight: 204
+    weight: 208
   - name: Creating Custom Agent Rules
     url: security/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 205
+    weight: 210
   - name: CWS Events Formats
     url: security/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 206
+    weight: 212
   - name: Misconfigurations
     url: security/misconfigurations/
     parent: csm
