@@ -351,7 +351,7 @@ resource "aws_lambda_function" "lambda" {
     "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
   ]
 
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
+  handler = "datadog_lambda.handler.handler"
 
   environment {
     variables = {
