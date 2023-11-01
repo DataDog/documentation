@@ -8,7 +8,7 @@ further_reading:
   - link: "/security/misconfigurations/"
     tag: "Documentation"
     text: "Cloud Security Management Misconfigurations"
-  - link: "/security/infrastructure_vulnerabilities/"
+  - link: "/security/vulnerabilities/"
     tag: "Documentation"
     text: "Cloud Security Management Vulnerabilities"
 ---
@@ -41,18 +41,11 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 {{< /tabs >}}
 
 
-## Configure CSM container image scanning
+## Configure CSM for container vulnerabilities
 
 The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities.
 
 **Note**: Vulnerabilities are evaluated and and scanned against your containers every hour.
-
-### Prerequisites
-
-- [Cloud Security Management][4] (using [Threats][5] or [Misconfigurations][1]).
-- [Datadog Agent][6] 7.46.0 or later.
-- [containerd][7] v1.5.6 or later (Kubernetes and hosts only).
-- [Helm Chart][8] v3.33.6 or later (Kubernetes only).
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -142,11 +135,8 @@ container_image:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/misconfigurations
-[2]: /security/infrastructure_vulnerabilities
+[2]: /security/vulnerabilities
 [3]: /security/cloud_security_management/setup
 [4]: /security/cloud_security_management
 [5]: /security/threats/
-[6]: /agent/
-[7]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
-[8]: /containers/kubernetes/installation/?tab=helm
 [10]: https://www.cisa.gov/sbom

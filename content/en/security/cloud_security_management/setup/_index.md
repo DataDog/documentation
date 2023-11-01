@@ -54,11 +54,11 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_enterprise">CSM Enterprise</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts and Agent)</a></li><li style="font-size:16px"><a href="/security/identity_risks">Identity Risks</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images and hosts)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_pro">CSM Pro</a></td>
-        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/infrastructure_vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
+        <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
         <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
@@ -84,7 +84,16 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 To [enable CSM Pro][1], you must first set up the Datadog cloud account integrations for AWS, Azure, and Google Cloud Platform.
 
+CSM Vulnerabilities:
+
+* [Datadog Agent][7] 7.46 or later.
+* [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
+* [Helm Chart][9] v3.33.6 or later (Kubernetes only).
+
 [1]: /security/cloud_security_management/setup/csm_pro
+[7]: /agent
+[8]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[9]: /containers/kubernetes/installation/?tab=helm
 
 {{% /tab %}}
 
@@ -109,4 +118,4 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][3] sec
 [3]: /security/cloud_security_management/setup/csm_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/identity_risks/#setup
-[6]: /security/infrastructure_vulnerabilities/setup
+[6]: /security/cloud_security_management/setup

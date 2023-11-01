@@ -3253,15 +3253,10 @@ main:
     identifier: csm_identity_risks
     weight: 15
   - name: Vulnerabilities
-    url: security/infrastructure_vulnerabilities
+    url: security/vulnerabilities
     parent: csm
-    identifier: infrastructure_vulnerabilities
+    identifier: vulnerabilities
     weight: 18
-  - name: Setup
-    url: security/infrastructure_vulnerabilities/setup
-    parent: infrastructure_vulnerabilities
-    identifier: infrastructure_vulnerabilities_setup
-    weight: 101
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm

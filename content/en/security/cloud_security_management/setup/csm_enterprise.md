@@ -14,7 +14,7 @@ further_reading:
   - link: "/security/identity_risks/"
     tag: "Documentation"
     text: "Cloud Security Management Identity Risks"
-  - link: "/security/infrastructure_vulnerabilities/"
+  - link: "/security/vulnerabilities/"
     tag: "Documentation"
     text: "Cloud Security Management Vulnerabilities"
   - link: "/agent/remote_config"
@@ -426,14 +426,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configure CSM host and container vulnerability scanning
-
-### Prerequisites
-
-- [Cloud Security Management][12] (using [Threats][1] or [Misconfigurations][2]).
-- [Datadog Agent][6] 7.46.0 or later.
-- [containerd][10] v1.5.6 or later (Kubernetes and hosts only).
-- [Helm Chart][9] v3.33.6 or later (Kubernetes only).
+## Configure CSM for vulnerabilities
 
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. 
 
@@ -586,12 +579,10 @@ sbom:
 [1]: /security/threats
 [2]: /security/misconfigurations
 [3]: /security/identity_risks
-[4]: /security/infrastructure_vulnerabilities
+[4]: /security/vulnerabilities
 [5]: https://app.datadoghq.com/security/configuration/csm/setup
 [6]: /agent/remote_config
 [7]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [8]: /security/cloud_security_management/setup
-[9]: /containers/kubernetes/installation/?tab=helm
-[10]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [11]: https://www.cisa.gov/sbom
 [12]: /security/cloud_security_management
