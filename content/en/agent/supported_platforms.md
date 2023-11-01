@@ -240,7 +240,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   </thead>
   <tr>
     <th rowspan=2><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
-    <td>2012</td>
+    <td>>= 2012</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
