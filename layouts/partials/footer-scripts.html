@@ -14,6 +14,13 @@ hugo defaults to environment development with hugo server
   <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
 {{- end -}}
 
+{{- if .HasShortcode "mermaid" -}}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+{{- end -}}
+
 {{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "inject" $inject "sourceMap" $sourcemap "minify" $isProd }}
 {{ $js := resources.Get "scripts/main-dd-js.js" | js.Build $opts }}
 {{ if $isProd }}
