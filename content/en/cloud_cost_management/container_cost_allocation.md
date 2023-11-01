@@ -88,8 +88,8 @@ Datadog consolidates and applies additional tags from various sources to cost me
 | Out-of-the-box tag  |  Description |
 | ---                 | ------------ |
 | `orchestrator`      | The orchestration platform associated with the item (kubernetes, ecs). |
-| `allocated_spend_type`     | The spend category associated with the cost. Cluster costs are allocated into three spend types: resources used by a workload (`usage`); resources reserved by a workload, but not used (`workload_idle`); and resources that are not reserved or used by any workload (`cluster_idle`). *Only available for `.shared.resources.allocated` metrics.* |
-| `allocated_resource`   | The resource category associated with the item (cpu, memory). *Only available for `.shared.resources.allocated` metrics.* |
+| `allocated_spend_type`     | The spend category associated with the cost. Cluster costs are allocated into multiple spend types: resources used by a workload (`usage`); resources reserved by a workload, but not used (`workload_idle`); resources that are not reserved or used by any workload (`cluster_idle`); and cloud provider managed service fees (`managed_service_fee`). *Only available for `.shared.resources.allocated` metrics.* |
+| `allocated_resource`   | The resource category associated with the item (cpu, memory, managed_service_fee). *Only available for `.shared.resources.allocated` metrics.* |
 
 ### Kubernetes
 
