@@ -118,12 +118,12 @@ For further investigation into your metrics evolution, click **Open in a noteboo
 
 The notebook matches the monitor evaluation period time range and includes related logs where relevant.
 
-#### Follow Monitor Group Retention
+#### Follow monitor group retention
 
-Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that notify on on No Data are available for 48 hours. A dotted line will appear for two reasons:
+Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that notify on on No Data are available for 48 hours. A dotted line appears for two reasons:
 
 - The new group is evaluated some time after the monitor is created. The dotted line is shown from the start of the time period to when the group was first evaluated.
-- The group stops reporting, drops out, and then starts reporting again. The dotted line appears from when it dropped out to when it starts evaluating again.
+- The group stops reporting, drops out, and then starts reporting again. The dotted line appears from when the group dropped out to when it starts evaluating again.
 
 {{< img src="monitors/monitor_status/dotted-line.png" alt="Follow group retention" style="width:90%;">}}
 
