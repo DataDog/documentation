@@ -44,6 +44,7 @@ before_script:
   - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
   - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
   - export BRANCH=${CI_COMMIT_REF_NAME}
+  - export HUGO_MODULE_DOWNLOAD_TIMEOUT=300
   - export SLACK_URL=$(get_secret 'slack_url')
   - export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog

@@ -8,6 +8,8 @@ pygmentsCodeFences: true
 
 publishDir: "./public"
 
+timeout: 90000
+
 # taxonomies
 taxonomies:
   #tag: "tags"
@@ -135,3 +137,4 @@ outputFormats:
     notAlternative: true
 
 timeout: "45s"
+
