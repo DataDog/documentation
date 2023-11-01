@@ -22,6 +22,9 @@ further_reading:
 - link: "/metrics"
   tag: "Documentation"
   text: "Learn more about Metrics"
+- link: "https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/"
+  tag: "Blog"
+  text: "Use Datadog Dynamic Instrumentation to add application logs without redeploying"
 ---
 
 {{< site-region region="gov,ap1" >}}
