@@ -587,11 +587,6 @@ main:
     url: containers/cluster_agent/admission_controller/
     parent: containers_cluster
     weight: 405
-  - name: Troubleshooting
-    url: containers/cluster_agent/troubleshooting/
-    identifier: cluster_agent_troubleshooting
-    parent: containers_cluster
-    weight: 406
   - name: Amazon ECS
     url: containers/amazon_ecs/
     parent: containers
@@ -637,6 +632,21 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
     weight: 801
+  - name: Cluster Agent
+    url: containers/troubleshooting/cluster-agent
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_agent
+    weight: 802
+  - name: Cluster Checks
+    url: containers/troubleshooting/cluster-and-endpoint-checks
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_and_endpoint_checks
+    weight: 803
+  - name: HPA and Metrics Provider
+    url: containers/troubleshooting/hpa
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_hpa
+    weight: 804
   - name: Guides
     url: containers/guide
     parent: containers
