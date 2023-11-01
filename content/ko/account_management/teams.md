@@ -133,11 +133,11 @@ SAML 속성을 사용해 팀과 팀 구성원 자격을 관리하려면 [Map SAM
 
 ### 팀 관리 권한 위임
 
-열린 구성원 모델의 경우 **Anyone in the organization**을 추가하거나 삭제할 수 있도록 기본 팀 설정을 설정하고, 사용자가 팀을 만들거나 팀 세부 사항을 편집할 수 있도록 해당 역할에 `teams_manage` 권한을 부여합니다.
+열린 구성원 모델의 경우 **Anyone in the organization**을 추가하거나 삭제할 수 있도록 기본 팀 설정을 설정하고, 사용자가 팀을 만들거나 팀 세부 사항을 편집할 수 있도록 해당 역할에 `teams_manage` 권한을 할당합니다.
 
-팀 중심의 구성원 모델을 선호하는 경우, **Team Managers** 또는 **Team Managers and Members**가 구성원을 추가 또는 삭제할 수 있도록 기본 팀 설정을 설정합니다. 모든 팀 매니저가 포함된 역할에 `teams_manage` 권한을 위임합니다.
+팀 중심의 구성원 모델을 선호하는 경우, **Team Managers** 또는 **Team Managers and Members**가 구성원을 추가 또는 삭제할 수 있도록 기본 팀 설정을 설정합니다. 모든 팀 매니저가 포함된 역할에 `teams_manage` 권한을 할당합니다.
 
-엄격한 구성원 자격 모델을 적용하려면 **user_access_manage** 권한이 있는 사용자만 구성원을 추가하거나 제거할 수 있도록 기본 팀 설정을 설정합니다. 조직 관리자에게만 `teams_manage` 권한을 위임합니다.
+엄격한 구성원 자격 모델을 적용하려면 **user_access_manage** 권한이 있는 사용자만 구성원을 추가하거나 제거할 수 있도록 기본 팀 설정을 설정합니다. 조직 관리자에게만 `teams_manage` 권한을 할당합니다.
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /ko/account_management/saml/mapping/#map-saml-attributes-to-teams
