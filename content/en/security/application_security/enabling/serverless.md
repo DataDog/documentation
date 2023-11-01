@@ -23,13 +23,13 @@ further_reading:
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
 
-See [Compatibility][4] requirements for information about what ASM features are available for serverless functions.
+See [compatibility requirements][4] for information about what ASM features are available for serverless functions.
 
 ## AWS Lambda
 
 <div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
 
-Configuring ASM for AWS Lambda generally involves:
+Configuring ASM for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
 2. Setting up ASM instrumentation by using the Datadog CI, AWS CDK, [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
@@ -38,7 +38,7 @@ Configuring ASM for AWS Lambda generally involves:
 ### Prerequisites
 
 - [Serverless APM][2] is configured on the Lambda function to send traces directly to Datadog. 
-- X-Ray tracing _only_ isn't supported by ASM. Add the tracing library by following the steps below.
+- A tracing library is installed. X-Ray tracing, by itself, is not sufficient for ASM. Add the tracing library by following the steps below.
 
 ### Get started
 
