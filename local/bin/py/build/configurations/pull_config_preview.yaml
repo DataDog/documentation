@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -378,7 +378,7 @@
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
-              
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
