@@ -13,8 +13,8 @@ variables:
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
   KUBERNETES_CPU_REQUEST: 8
-  KUBERNETES_MEMORY_REQUEST: 24Gi
-  KUBERNETES_MEMORY_LIMIT: 24Gi
+  KUBERNETES_MEMORY_REQUEST: 32Gi
+  KUBERNETES_MEMORY_LIMIT: 32Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
@@ -213,8 +213,8 @@ algolia_sync_preview:manual:
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
     - >
-      ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') 
-      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') 
+      ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id')
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key')
       CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
       yarn run algolia:sync
   rules:
@@ -235,7 +235,7 @@ algolia_sync_live:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
     - >
       ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id')
-      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') 
+      ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key')
       CI_PIPELINE_SOURCE=$CI_PIPELINE_SOURCE
       yarn run algolia:sync
 
