@@ -16,12 +16,15 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/metrics"
   tag: "Documentation"
   text: "Learn more about Metrics"
+- link: "https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/"
+  tag: "Blog"
+  text: "Use Datadog Dynamic Instrumentation to add application logs without redeploying"
 ---
 
 {{< site-region region="gov,ap1" >}}

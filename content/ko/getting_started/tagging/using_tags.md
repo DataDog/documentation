@@ -5,7 +5,7 @@ description: Datadog 제품에서 태그 사용하는 방법 알아보기
 further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/
   tag: 블로그
-  text: 인프라스트럭처와 애플리케이션 태깅의 모범 사례
+  text: 인프라스트럭처와 애플리케이션 태깅 모범 사례
 - link: /getting_started/tagging/
   tag: 설명서
   text: 태그 시작하기
@@ -60,7 +60,7 @@ title: 태그 사용
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="대시보드 avg by 텍스트 상자의 태그" style="width:80%;">}}
 
-태그를 사용하여 대시보드에서 이벤트를 오버레이할 수도 있습니다. 이는 [이벤트 익스플로러][2]와 동일하게 작동합니다.
+태그를 사용하여 대시보드에서 이벤트를 오버레이할 수도 있습니다. 이는 [Events Explorer][2]와 동일하게 작동합니다.
 `tags:` 뒤에 태그를 입력하세요. 일치하는 이벤트는 세로봉으로 그래프에 오버레이됩니다. 아래 예시는 `tags:service:coffee-house`를 사용했습니다.
 
 {{< img src="tagging/using_tags/dashboardeventtags.png" alt="대시보드의 이벤트 오버레이" style="width:80%;">}}
@@ -132,45 +132,22 @@ title: 태그 사용
 
 ## 모니터링
 
-{{< tabs >}}
-{{% tab "모니터링 관리" %}}
+[할당된 태그][32]를 기준으로 모니터 및 [모니터 다운타임][31]을 필터링하려면 검색 바 또는 패싯 확인란을 사용합니다. 예를 들어, 검색 바 형식이 `tag:<KEY>:<VALUE>`이면 `tag:service:coffee-house`입니다. 특정 태그가 있는 모니터를 검색에서 제외하려면 `-`, for example: `태그:-service:coffee-house`를 사용합니다.
 
-[할당된 태그][1]로 모니터링을 필터링하려면 검색창이나 파셋 체크박스를 사용하세요. 검색창 형식은 `tag:<KEY>:<VALUE>`입니다(예: `tag:service:coffee-house`). 특정 태그가 지정된 모니터링을 검색에서 제외하려면 `-`, for example: ``tag:-service:coffee-house`를 사용하세요.
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="태그로 검색 바에서 모니터 필터링" style="width:80%;">}}
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="모니터링 관리 태그" style="width:80%;">}}
+**참고**: 모니터 태그는 메트릭 태그와 다르게 구분되어 있습니다. 자세한 내용은 [모니터 태그][30]의 설명서를 참고하세요.
 
-모니터링 태그는 메트릭 태그와 다르며, 별도로 작용합니다.
-
-[1]: /ko/getting_started/tagging/assigning_tags/
-{{% /tab %}}
-
-{{% tab "새 모니터링" %}}
-
-[모니터링][1]을 새로 생성할 때 다음에 메트릭 태그를 사용하세요.
-
+새 모니터를 생성할 때는 다음에서 *메트릭 태그*를 사용합니다:
 * **from** 텍스트 상자: 모니터링 범위를 태그가 지정된 범위로만 제한합니다.
-
 * **excluding** 텍스트 상자: 해당 메트릭을 모니터링 범위에서 제외합니다.
-
 * **avg by** 텍스트 상자: 각 태그값마다 모니터링을 복수 경고(multi-alert) 모니터링으로 바꿉니다.
-
-[1]: /ko/monitors/create/#monitor-types
-{{% /tab %}}
-{{% tab "다운타임 관리" %}}
-
-모니터링 태그로 [다운타임][1]을 필터링하려면 태그 이름을(예: `service:coffee-house`) 검색창에 입력하세요.
-
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="모니터링 태그 관리" style="width:80%;">}}
-
-[1]: /ko/monitors/notify/downtimes/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## 메트릭
 
-[메트릭 익스플로러(Metrics Explorer)][8]에서 태그를 사용하여 여러 태그로 메트릭을 필터링하거나, 태그 키별로 여러 그래프를 표시할 수 있습니다. 아래 예시는 `service:coffee-house` 메트릭의 그래프를 생성하고 `host`마다 하나의 그래프를 표시합니다.
+[메트릭 탐색기][8]의 태그를 사용하여 태그 위에 메트릭을 필터링하거나 태그 키별로 여러 그래프를 표시합니다. 아래 예에서는 메트릭을 `service:web-store` 위 그래프로 표시합니다.
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="모니터링 태그 관리" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="개별 태그로 범위를 지정한 메트릭 그래프" style="width:80%;">}}
 
 ## 통합
 
@@ -237,14 +214,14 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ## APM
 
 {{< tabs >}}
-{{% tab "애널리틱스" %}}
+{{% tab "트레이스 검색기" %}}
 
-[트레이스 검색][1]에서는 검색창이나 파셋 체크박스를 사용하여 태그로 트레이스를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [트레이스 검색][2] 페이지를 참조해주세요.
+[트레이스 검색기][1]에서 검색 바 또는 패싯 확인란을 사용하여 태그로 추적을 필터링할 수 있습니다. 예를 들어, 검색 바 형식이 `<KEY>:<VALUE>`이면 `service:coffee-house`입니다. 고급 검색은 [쿼리 구문][2]을 참고하세요.
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="트레이스 검색 태그" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="트레이스 검색기 태그" style="width:80%;">}}
 
-[1]: /ko/tracing/app_analytics/search/
-[2]: /ko/tracing/app_analytics/search/#search-bar
+[1]: /ko/tracing/trace_explorer/search/
+[2]: /ko/tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "서비스 맵" %}}
 
@@ -257,7 +234,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 [3]: /ko/monitors/manage/
 [4]: /ko/logs/explorer/search/
 [5]: /ko/infrastructure/hostmap/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{< /tabs >}}
 
@@ -273,7 +250,7 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 
 ## 로그
 
-로그 [검색][10], [애널리틱스][11], [패턴][12], [라이브 테일][13]은 검색창이나 파셋 체크박스를 사용하여 태그로 로그를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [로그 검색][10] 페이지를 참조해주세요.
+로그 [검색][10], [애널리틱스][11], [패턴][12], [라이브 테일][13]은 검색창이나 패싯 체크박스를 사용하여 태그로 로그를 필터링합니다. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `service:coffee-house`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [로그 검색][10] 페이지를 참조해주세요.
 
 {{< tabs >}}
 {{% tab "검색" %}}
@@ -317,7 +294,7 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 
 [신서틱 테스트][1] 페이지는 신서틱 테스트의 목록을 보여줍니다.
 
-테스트를 태그로 필터링하려면 검색창이나 파셋 체크박스를 사용하세요. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `tag:mini-website`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [신서틱 테스트 검색 및 관리][16] 페이지를 참조해주세요.
+테스트를 태그로 필터링하려면 검색창이나 패싯 체크박스를 사용하세요. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `tag:mini-website`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [신서틱 테스트 검색 및 관리][16] 페이지를 참조해주세요.
 
 {{< img src="tagging/using_tags/syntheticstags.png" alt="신서틱 태그" style="width:80%;">}}
 
@@ -325,18 +302,18 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /ko/synthetics/search/
 {{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{% tab "Explorer" %}}
 
-[CI Results Explorer][1]는 [CI 파이프라인][2]에서 실행된 브라우저 테스트 결과를 표시합니다.
+[Synthetic Monitoring & Continuous Testing Explorer][1]에는 [CI 파이프라인][2]에서 실행한 테스트와 테스트 배치가 표시됩니다.
 
-테스트 실행 결과를 태그로 필터링하려면 검색창이나 파셋 체크박스를 사용하세요. 검색창 형식은 `<KEY>:<VALUE>`로, 예를 들면 `@ci.provider.name:github`라고 쓸 수 있습니다. 고급 검색을 자세히 알아보려면 [신서틱 테스트 검색 및 관리][16] 페이지를 참조해주세요.
+태그별 테스트 실행을 필터링하려면 검색 바 또는 패싯 확인란을 사용합니다. 예를 들어, 검색 바 형식이 `<KEY>:<VALUE>`이면 `@ci.provider.name:github`입니다. 고급 검색은 [테스트 배치 검색][3]을 참고하세요.
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="신서틱 및 CI 태그" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /ko/synthetics/cicd_integrations
-[3]: /ko/synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /ko/continuous_testing/cicd_integrations
+[3]: /ko/continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -345,14 +322,14 @@ RUM 이벤트 데이터를 태그로 필터링하려면 검색창이나 파셋 �
 {{< tabs >}}
 {{% tab "SLO 관리" %}}
 
-[할당된 태그][1]로 SLO를 필터링하려면 검색창이나 파셋 체크박스를 사용하세요. 검색창 형식은 `tag:<KEY>:<VALUE>`입니다(예: `journey:add_item`). 특정 태그가 지정된 SLO를 검색에서 제외하려면 `-`, for example: `-journey:add_item`를 사용하세요.
+[할당된 태그][1]로 SLO를 필터링하려면 검색창이나 패싯 체크박스를 사용하세요. 검색창 형식은 `tag:<KEY>:<VALUE>`입니다(예: `journey:add_item`). 특정 태그가 지정된 SLO를 검색에서 제외하려면 `-`, for example: `-journey:add_item`를 사용하세요.
 
 {{< img src="tagging/using_tags/manage_slo_tags.png" alt="SLO 태그" style="width:80%;">}}
 
 SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 또는 모니터링 태그와 다르며, 별도로 작용합니다.
 
 [1]: /ko/getting_started/tagging/assigning_tags/?tab=servicelevelobjectives#ui
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "메트릭 기반의 SLO" %}}
 
@@ -363,7 +340,7 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="메트릭 기반 SLO 태그" style="width:80%;">}}
 
-[1]: /ko/monitors/service_level_objectives/metric/
+[1]: /ko/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "모니터링 기반 SLO" %}}
 
@@ -371,7 +348,7 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="모니터링 기반 SLO 태그" style="width:80%;">}}
 
-[1]: /ko/monitors/service_level_objectives/monitor/
+[1]: /ko/service_management/service_level_objectives/monitor/
 [2]: /ko/getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
@@ -402,7 +379,7 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/getting_started/tagging/assigning_tags/
-[2]: /ko/events/explorer
+[2]: /ko/service_management/events/explorer
 [3]: /ko/integrations/
 [4]: /ko/infrastructure/hostmap/
 [5]: /ko/infrastructure/
@@ -430,3 +407,6 @@ SLO 태그는 SLO의 기초 메트릭이나 모니터링에 사용된 메트릭 
 [27]: /ko/api/v1/service-level-objectives/#create-a-slo-object
 [28]: /ko/api/v1/service-level-objectives/#get-a-slos-details
 [29]: /ko/api/v1/service-level-objectives/#update-a-slo
+[30]: /ko/monitors/manage/#monitor-tags
+[31]: /ko/monitors/downtimes/
+[32]: /ko/getting_started/tagging/assigning_tags?tab=monitors
