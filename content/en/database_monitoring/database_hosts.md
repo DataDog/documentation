@@ -11,42 +11,71 @@ description: Explore and dig into your database host health and configuration
 
 On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria.
 
--- SCREENSHOT OF DATABASES PAGE --
+{{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
-Click on any host in the list to open a details pane that includes
-- top queries
-- metrics such as throughput, index performance, and CPU utilization
-- active connections
-- blocking queries
-- calling services
-- configuration details
+Click on any host in the list to open a details panel. In addition to a filterable graph of active connections for that host, the panel displays
 
--- SCREENSHOT OF INDIVIDUAL DATABASE HOST PAGE --
+- [top queries](#top-queries)
+- [metrics](#metrics) such as throughput, index performance, and CPU utilization
+- [active connections](#active-connections)
+- [blocking queries](#blocking-queries)
+- [calling services](#calling-services)
+- [configuration details](#configuration-details)
+
+{{< img src="database_monitoring/db-list-details-panel.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Top queries
 
-TODO
+On the *Top Queries* tab of the details panel for a database host, you can sort the most common queries by maximum duration, average latency, and more.
 
--- SCREENSHOT --
+{{< img src="database_monitoring/db-list-top-queries.png" alt="The Top Queries tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+
+Click on any query to open a details panel that includes
+- query insights
+- graphs for average latency and other key metrics
+- explain plans
+- blocking activity
+- hosts that have run the query
+- calling services
+
+{{< img src="database_monitoring/db-list-query-details.png" alt="The details panel for an individual top query" style="width:90%;" >}}
+
+## Metrics
+
+On the *Metrics* tab of the details panel for a database host, you can view and filter metrics for system health, query activity, blocking operations, function performance, and more.
+
+{{< img src="database_monitoring/db-list-metrics.png" alt="The Metrics tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Active connections
 
-TODO
+On the *Active Connections* tab of the details panel for a database host, you can view, sort, and filter the live queries being executed on the host.
+
+{{< img src="database_monitoring/db-list-active-connections.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+
+Click on an individual query to open a details panel that includes event attributes, related traces, and more. 
+
+{{< img src="database_monitoring/db-list-active-connection-details.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
 
 ## Blocking queries
 
-TODO
+On the *Blocking Queries* tab of the details panel for a database host, you can view visualizations for blocking query durations, blocking query executions, and the number of waiting queries. Search and filter the lists of blocking queries, waiting queries, and blocking samples, clicking any individual query row to view details.
+
+{{< img src="database_monitoring/db-list-blocking-queries.png" alt="The Blocking Queries tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Calling services
 
-TODO
+On the *Calling Services* tab of the details panel for a database host, you can view the list of services that have called the host. The displayed service information includes when the service was last deployed, how many requests it makes to the host per second, how many database queries were executed, and more.
+
+{{< img src="database_monitoring/db-list-calling-services.png" alt="The Calling Services tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+
+Click any service row to view its APM dashboard.
 
 ## Configuration details
 
--- AVAILABILITY NOTICE --
+<div class="alert alert-warning">This feature is supported for Postgres, MySQL, and SQL Server only.</a></div>
 
-TODO
+TODO: DESCRIPTION
 
-
+{{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/databases
