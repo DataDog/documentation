@@ -89,13 +89,13 @@ Datadog consolidates and applies additional tags from various sources to cost me
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
 | `orchestrator:ecs`                         | The orchestration platform associated with the item is ECS.                                                                                                   |
-| `allocated_spend_type:usage`               | The spend category associated with resources costs used by a workload. *Only available for `.shared.resources.allocated` metrics.*                            |
-| `allocated_spend_type:workload_idle`       | The spend category associated with resources costs reserved by a workload, but not used. *Only available for `.shared.resources.allocated` metrics.*          |
-| `allocated_spend_type:cluster_idle`        | The spend category associated with resources costs that are not reserved or used by any workload. *Only available for `.shared.resources.allocated` metrics.* |
-| `allocated_spend_type:managed_service_fee` | The spend category associated with cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*                           |
-| `allocated_resource:cpu`                   | The resource category associated with cpu resources costs. *Only available for `.shared.resources.allocated` metrics.*                                            |
-| `allocated_resource:memory`                | The resource category associated with memory resources costs. *Only available for `.shared.resources.allocated` metrics.*                                         |
-| `allocated_resource:managed_service_fee`   | The resource category associated with cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*           |
+| `allocated_spend_type:usage`               | Cost of resources used by a workload. *Only available for `.shared.resources.allocated` metrics.*                            |
+| `allocated_spend_type:workload_idle`       | Cost of resources reserved and allocated by a workload, but not used. *Only available for `.shared.resources.allocated` metrics.*          |
+| `allocated_spend_type:cluster_idle`        | Cost of resources that are not reserved or used by any workload. *Only available for `.shared.resources.allocated` metrics.* |
+| `allocated_spend_type:managed_service_fee` | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*                           |
+| `allocated_resource:cpu`                   | Cost of CPU resources. *Only available for `.shared.resources.allocated` metrics.*                                            |
+| `allocated_resource:memory`                | Cost of Memory resources. *Only available for `.shared.resources.allocated` metrics.*                                         |
+| `allocated_resource:managed_service_fee`   | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*           |
 
 ### Kubernetes
 
