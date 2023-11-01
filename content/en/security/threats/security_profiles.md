@@ -75,7 +75,7 @@ In general, the higher the commonality score, the more likely that a given proce
 
 ### Security signals side panel
 
-Security profile details also appear in the signal panel in the [Security Signals Explorer][3]. You can use this information to better understand the workload activity and potentially help distinguish between potential threats and normal workload behavior. You can also navigate directly to the relevant security profile using the **View Security Profile** link. 
+Security profile details also appear in the signal panel in the [Threats Explorer][3]. You can use this information to better understand the workload activity and potentially help distinguish between potential threats and normal workload behavior. You can also navigate directly to the relevant security profile using the **View Security Profile** link. 
 
 {{< img src="security/cws/security_profiles/signal-security-profile.png" alt="CSM Threats security profile page" width="80%">}}
 
@@ -93,4 +93,4 @@ To accept the suggestion, click **Suppress Signals**, then click **Add Suppressi
 
 [1]: /security/threats/setup
 [2]: https://app.datadoghq.com/security/workload/profiles
-[3]: /security/explorer
+[3]: /security/threats/security_signals
