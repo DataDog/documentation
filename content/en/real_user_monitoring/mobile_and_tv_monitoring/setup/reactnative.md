@@ -386,6 +386,12 @@ const config = new DdSdkReactNativeConfiguration(
 )
 ```
 
+## New architecture support
+
+The [React Native new architecture][17] is supported by the RUM React Native SDK in version `>=1.8.0`.
+
+The minimum supported React Native version for the new architecture is `0.71`.
+
 ## Troubleshooting
 
 ### Usage with `use_frameworks!`
@@ -438,3 +444,4 @@ end
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [15]: /getting_started/tagging/#define-tags
 [16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
+[17]: https://reactnative.dev/docs/the-new-architecture/landing-page
