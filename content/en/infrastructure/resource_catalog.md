@@ -94,8 +94,6 @@ Click the **Share** button and select **Share event** to share a link to the cur
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
 
-## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
 
 
