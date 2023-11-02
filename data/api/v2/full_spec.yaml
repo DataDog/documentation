@@ -9564,6 +9564,15 @@ components:
       properties:
         emails:
           $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false.'
+          type: boolean
         tags:
           $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
       type: object
@@ -9644,6 +9653,13 @@ components:
       properties:
         emails:
           $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.'
+          type: boolean
         status:
           description: The status of the request.
           example: Accepted
@@ -10108,6 +10124,15 @@ components:
           example: '2020-03-25T09:48:37.463835Z'
           format: date-time
           type: string
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include or exclude percentile aggregations for distribution
             metrics.
@@ -10138,6 +10163,15 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
@@ -24948,7 +24982,11 @@ paths:
         If multiple calls include the same metric, the last configuration applied
         (not by submit order) is used, do not
 
-        expect deterministic ordering of concurrent calls.
+        expect deterministic ordering of concurrent calls. The `exclude_tags_mode`
+        value will set all metrics that match the prefix to
+
+        the same exclusion state, metric tag configurations do not support mixed inclusion
+        and exclusion for tags on the same metric.
 
         Can only be used with application keys of users with the `Manage Tags for
         Metrics` permission.'
@@ -25354,7 +25392,11 @@ paths:
         Optionally, include percentile aggregations on any distribution metric or
         configure custom aggregations
 
-        on any count, rate, or gauge metric.
+        on any count, rate, or gauge metric. By setting `exclude_tags_mode` to true
+        the behavior is changed
+
+        from an allow-list to a deny-list, and tags in the defined list will not be
+        queryable.
 
         Can only be used with application keys of users with the `Manage Tags for
         Metrics` permission.'
