@@ -69,14 +69,37 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 **Notes**: 
 
 - You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
-- CSM Identity Risks and CSM Vulnerabilities are in beta. For setup instructions, see [Cloud Security Management Identity Risks][5] and [Setting up Cloud Security Management Vulnerabilities][6].
+For setup instructions, see [Cloud Security Management Identity Risks][5] and [Setting up Cloud Security Management Vulnerabilities][6].
 
 ## Prerequisites
 
 {{< tabs >}}
 {{% tab "CSM Enterprise" %}}
 
-{{% csm-prereqs-enterprise-ws %}}
+* [Datadog Agent][14] 7.46 or later.
+* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
+
+**CSM Threats** supports the following Linux distributions:
+  * Ubuntu LTS (18.04, 20.04, and 22.04)
+  * Debian 10 or later
+  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
+  * SUSE Linux Enterprise Server 12 and 15
+  * Red Hat Enterprise Linux 7, 8, and 9
+  * Oracle Linux 7, 8, and 9
+  * CentOS 7
+  * Custom kernel builds are not supported.
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][15].
+
+**CSM Vulnerabilities**:
+
+* [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
+* [Helm Chart][9] v3.33.6 or later (Kubernetes only).
+
+[15]: /security/cloud_security_management/troubleshooting
+[14]: /agent
+[8]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[9]: /containers/kubernetes/installation/?tab=helm
+
 
 {{% /tab %}}
 
@@ -84,9 +107,8 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 To [enable CSM Pro][1], you must first set up the Datadog cloud account integrations for AWS, Azure, and Google Cloud Platform.
 
-CSM Vulnerabilities:
+**CSM Vulnerabilities**:
 
-* [Datadog Agent][7] 7.46 or later.
 * [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
 * [Helm Chart][9] v3.33.6 or later (Kubernetes only).
 
@@ -99,7 +121,22 @@ CSM Vulnerabilities:
 
 {{% tab "CSM Workload Security" %}}
 
-{{% csm-prereqs-enterprise-ws %}}
+* [Datadog Agent][14] 7.46 or later.
+* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
+
+**CSM Threats** supports the following Linux distributions:
+  * Ubuntu LTS (18.04, 20.04, and 22.04)
+  * Debian 10 or later
+  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
+  * SUSE Linux Enterprise Server 12 and 15
+  * Red Hat Enterprise Linux 7, 8, and 9
+  * Oracle Linux 7, 8, and 9
+  * CentOS 7
+  * Custom kernel builds are not supported.
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][15].
+
+[15]: /security/cloud_security_management/troubleshooting
+[14]: /agent
 
 {{% /tab %}}
 

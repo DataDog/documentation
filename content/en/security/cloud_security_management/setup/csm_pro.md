@@ -15,6 +15,13 @@ further_reading:
 
 The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations][1] (cloud accounts) and [CSM Vulnerabilities][2] (container images). To learn more about the available CSM packages, see [Setting up Cloud Security Management][3].
 
+## Prerequisites
+
+**CSM Vulnerabilities**:
+
+* [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
+* [Helm Chart][9] v3.33.6 or later (Kubernetes only).
+
 ## Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
@@ -140,3 +147,5 @@ container_image:
 [4]: /security/cloud_security_management
 [5]: /security/threats/
 [10]: https://www.cisa.gov/sbom
+[8]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[9]: /containers/kubernetes/installation/?tab=helm
