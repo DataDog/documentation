@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Azure App Service Windows and Linux - webapps only, functions are not supported
+: Azure App Service Windows and Linux - Web Apps only, Function Apps are not supported
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
