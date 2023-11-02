@@ -34,6 +34,8 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
+The **CI Test Runs** feature opens the Continuous Integration Visibility Explorer to show recent runs for a selected test.
+
 ## Requirements
 
 - **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
@@ -156,6 +158,13 @@ You can navigate to the [Log Explorer][5] on the Datadog platform directly from 
 
 Clicking the link opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
+## CI Test Runs
+You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files.  Look for the **View Test Runs** links following test method declarations in your source code:
+
+{{< img src="/developers/ide_integrations/idea/ci-navigation.png" alt="A source file showing a View Test Runs link." style="width:100%;" >}}
+
+Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
+
 ## View in IDE
 
 The **View in IntelliJ IDEA** feature provides a link from the Datadog platform directly to your Java source files (not yet available for Go). Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
@@ -189,3 +198,4 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
+[12]: /continuous_integration/explorer/?tab=testruns
