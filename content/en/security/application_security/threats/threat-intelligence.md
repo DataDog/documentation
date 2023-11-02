@@ -20,7 +20,7 @@ Datadog recommends the following methods for consuming threat intelligence:
 1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing](https://app.datadoghq.com/security/configuration/asm/rules/view/wnp-zlu-woa) rule and modify it to meet their needs.
 2. Using threat intelligence as a indicator of reputation with security activity.
 
-Datadog recommends against the following:
+Datadog recommends _against_ the following:
 1. Blocking threat intelligence traces without corresponding security activity. IP addresses may have many hosts behind them. Detection of malware or a residential proxy means that the associated activity has been observed by a host behind that IP. It does not guarantee that the host running the malware or proxy is the same host communicating with your services.
 2. Blocking on all threat intelligence categories, as this is inclusive of benign traffic from corporate VPNs and will block non-malicious traffic.
 
