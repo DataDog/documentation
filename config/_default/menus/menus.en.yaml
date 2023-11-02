@@ -4299,10 +4299,10 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Datadog Apps SDK
-    url: developers/datadog_apps
+  - name: UI Extensions
+    url: developers/ui_extensions
     parent: dev_tools
-    identifier: dev_tools_datadog_apps
+    identifier: dev_tools_ui_extensions
     weight: 5
   - name: Service Checks
     url: developers/service_checks/
