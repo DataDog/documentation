@@ -85,11 +85,17 @@ Datadog consolidates and applies additional tags from various sources to cost me
 
 ### Containers
 
-| Out-of-the-box tag  |  Description |
-| ---                 | ------------ |
-| `orchestrator`      | The orchestration platform associated with the item (kubernetes, ecs). |
-| `allocated_spend_type`     | The spend category associated with the cost. Cluster costs are allocated into three spend types: resources used by a workload (`usage`); resources reserved by a workload, but not used (`workload_idle`); and resources that are not reserved or used by any workload (`cluster_idle`). *Only available for `.shared.resources.allocated` metrics.* |
-| `allocated_resource`   | The resource category associated with the item (cpu, memory). *Only available for `.shared.resources.allocated` metrics.* |
+| Out-of-the-box tag                         | Description                                                                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
+| `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
+| `orchestrator:ecs`                         | The orchestration platform associated with the item is ECS.                                                                                                   |
+| `allocated_spend_type:usage`               | Cost of resources used by a workload. *Only available for `.shared.resources.allocated` metrics.*                            |
+| `allocated_spend_type:workload_idle`       | Cost of resources reserved and allocated by a workload, but not used. *Only available for `.shared.resources.allocated` metrics.*          |
+| `allocated_spend_type:cluster_idle`        | Cost of resources that are not reserved or used by any workload. *Only available for `.shared.resources.allocated` metrics.* |
+| `allocated_spend_type:managed_service_fee` | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*                           |
+| `allocated_resource:cpu`                   | Cost of CPU resources. *Only available for `.shared.resources.allocated` metrics.*                                            |
+| `allocated_resource:memory`                | Cost of Memory resources. *Only available for `.shared.resources.allocated` metrics.*                                         |
+| `allocated_resource:managed_service_fee`   | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*           |
 
 ### Kubernetes
 
