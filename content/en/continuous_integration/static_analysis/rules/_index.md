@@ -1231,33 +1231,21 @@ further_reading:
 ## Overview
 
 
-```goat
-      .               .                .               .--- 1          .-- 1     / 1
-     / \              |                |           .---+            .-+         +
-    /   \         .---+---.         .--+--.        |   '--- 2      |   '-- 2   / \ 2
-   +     +        |       |        |       |    ---+            ---+          +
-  / \   / \     .-+-.   .-+-.     .+.     .+.      |   .--- 3      |   .-- 3   \ / 3
- /   \ /   \    |   |   |   |    |   |   |   |     '---+            '-+         +
- 1   2 3   4    1   2   3   4    1   2   3   4         '--- 4          '-- 4     \ 4
-```
-
-{{% mermaid %}}
-```mermaid
+{{< mermaid >}}
 sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts <br/>prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-```
-{{%/ mermaid %}}
+  participant Alice
+  participant Bob
+  Alice->>John: Hello John, how are you?
+  loop Healthcheck
+    John->>John: Fight against hypochondria
+  end
+  Note right of John: Rational thoughts <br/>prevail!
+  John-->>Alice: Great!
+  John->>Bob: How about you?
+  Bob-->>John: Jolly good!
+{{< /mermaid >}}
 
-<!-- ```mermaid
+{{< mermaid >}}
 erDiagram
     CUSTOMER }|..|{ DELIVERY-ADDRESS : has
     CUSTOMER ||--o{ ORDER : places
@@ -1267,7 +1255,7 @@ erDiagram
     ORDER ||--|{ ORDER-ITEM : includes
     PRODUCT-CATEGORY ||--|{ PRODUCT : contains
     PRODUCT ||--o{ ORDER-ITEM : "ordered in"
-``` -->
+{{< /mermaid >}}
 
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
