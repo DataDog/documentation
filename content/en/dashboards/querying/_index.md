@@ -178,12 +178,10 @@ status:error / status:info
 Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
 
 ```text
-max(system.cpu.user: eastus-1, system.cpu.user: eastus-2)
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
 ```
 
 {{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
-
-
 
 ### Create an alias
 
