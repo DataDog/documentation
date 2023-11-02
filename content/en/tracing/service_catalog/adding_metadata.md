@@ -27,7 +27,7 @@ There are three supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
-- V2.2 supports user anotation and overwrite of auto-detected service type and languages using the fields `type` and `languages`. It also adds support to associate CI pipelines to a service using the field `ci-pipeline-fingerprints`. Furthermore, this version also includes less restrictive validation logic for `contact.type` and `link.type` so users should expect fewer warnings while subitting the YAMLs. 
+- V2.2 supports user annotation and overwriting auto-detected service type and languages using the fields `type` and `languages`. It also adds support for associating CI pipelines with a service using the field `ci-pipeline-fingerprints`. This version also includes less restrictive validation logic for `contact.type` and `link.type`, so users should expect fewer warnings while submitting YAML. 
 
 For more information about the latest updates, see the schemas on GitHub.
 
@@ -52,7 +52,7 @@ contacts:
   - type: email
     contact: ecommerce@example.com
   - type: microsoft-teams
-    contact: https://teams.microsoft.com/something
+    contact: https://teams.microsoft.com/example
 links:
   - name: Runbook
     type: runbook
