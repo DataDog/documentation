@@ -28,8 +28,8 @@ Datadog recommends against the following:
 
 - [abuse.ch](https://threatfox-api.abuse.ch)
 - [FireHOL](https://iplists.firehol.org/)
-- spur (only the `malware` category)
-- Tor Exit Nodes
+- [spur](https://spur.us/) (only the `malware` category)
+- [Tor Exit Nodes](https://www.dan.me.uk/torlist/?exit)
 
 To search for all traces flagged by a specific source, use the following query with the source name:
 
