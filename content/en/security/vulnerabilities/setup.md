@@ -7,6 +7,7 @@ further_reading:
   text: "CSM Vulnerabilities"
 aliases:
   - /security/infrastructure_vulnerability/setup/
+  - /security/infrastructure_vulnerabilities/setup/
 ---
 
 {{< site-region region="gov" >}}

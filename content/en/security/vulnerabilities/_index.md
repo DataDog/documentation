@@ -1,6 +1,8 @@
 ---
 title: Cloud Security Management Vulnerabilities
 kind: documentation
+aliases:
+    - /security/infrastructure_vulnerabilities
 further_reading:
 - link: "/security/infrastructure_vulnerabilities/setup"
   tag: "Documentation"
