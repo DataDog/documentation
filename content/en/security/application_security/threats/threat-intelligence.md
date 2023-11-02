@@ -27,7 +27,7 @@ Datadog recommends against the following:
 ## Which sources are surfaced in ASM
 
 - [abuse.ch](https://threatfox-api.abuse.ch)
-- FireHOL
+- [FireHOL](https://iplists.firehol.org/)
 - spur (only the `malware` category)
 - Tor Exit Nodes
 
