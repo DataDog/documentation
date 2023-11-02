@@ -115,11 +115,11 @@ To access additional details describing security vulnerabilities and signals, cl
 Click the Settings icon on the right hand corner to hide metric columns from the service list.
 
 ### Software Delivery view
-The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI and viewing your static analysis violations. Search for the service you are interested in to:
+The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI pipelines and viewing your static analysis violations. You can:
 
-- Find security vulnerabilities before they reach production thanks to static analysis.
-- Identify maintainability issues early in the development cycle.
-- View how frequently a service CI is failing and analyze its pipelines to see a trend over time.
+- View performance of the [CI pipeline(s)][19] related to your services
+- Find security and code quality issues from [Static Analysis][20]
+- Easily pivot from Service Catalog to troubleshoot pre-production slowdowns and failures
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
@@ -186,3 +186,5 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [16]: /agent/remote_config/
 [17]: /tracing/other_telemetry/connect_logs_and_traces/
 [18]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[19]: https://app.datadoghq.com/ci/pipeline
+[20]: https://app.datadoghq.com/ci/static-analysis
