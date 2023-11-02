@@ -64,7 +64,6 @@ The following profiling features are available in the following minimum versions
 | [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
 | Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
-| Azure App Service         | 2.39.0+                            | All supported runtime versions.                                                          |
 
 ## Installation
 
