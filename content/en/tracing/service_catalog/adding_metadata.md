@@ -23,13 +23,82 @@ You can add metadata to existing Service Catalog entries through the Datadog UI,
 
 Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
 
-There are two supported versions of the schema:
+There are three supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
-- V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience. 
-
+- V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
+- V2.2 supports user annotation and overwriting auto-detected service type and languages using the fields `type` and `languages`. It also adds support for associating CI pipelines with a service using the field `ci-pipeline-fingerprints`. This version also includes less restrictive validation logic for `contact.type` and `link.type`, so users should expect fewer warnings while submitting YAML. 
 
 For more information about the latest updates, see the schemas on GitHub.
+
+### Service Definition Schema (v2.2)
+
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][15].
+
+#### Example
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.2
+dd-service: shopping-cart
+team: e-commerce
+application: shopping-app
+tier: "1"
+type: web
+languages:
+  - go
+  - python
+contacts:
+  - type: slack
+    contact: https://yourorg.slack.com/archives/e-commerce
+  - type: email
+    contact: ecommerce@example.com
+  - type: microsoft-teams
+    contact: https://teams.microsoft.com/example
+links:
+  - name: Runbook
+    type: runbook
+    url: http://runbook/shopping-cart
+  - name: Source
+    type: repo
+    provider: github
+    url: https://github.com/shopping-cart
+  - name: Deployment
+    type: repo
+    provider: github
+    url: https://github.com/shopping-cart
+  - name: Config
+    type: repo
+    provider: github
+    url: https://github.com/consul-config/shopping-cart
+  - name: E-Commerce Team
+    type: doc
+    provider: wiki
+    url: https://wiki/ecommerce
+  - name: Shopping Cart Architecture
+    type: doc
+    provider: wiki
+    url: https://wiki/ecommerce/shopping-cart
+  - name: Shopping Cart RFC
+    type: doc
+    provider: google doc
+    url: https://doc.google.com/shopping-cart
+tags:
+  - business-unit:retail
+  - cost-center:engineering
+integrations:
+  pagerduty:
+    service-url: https://www.pagerduty.com/service-directory/PSHOPPINGCART
+  opsgenie:
+    service-url: "https://www.opsgenie.com/service/uuid"
+    region: "US"
+ci-pipeline-fingerprints:
+  - id1
+  - id2
+extensions:
+  datadoghq.com/sdp:
+    customField1: customValue1
+    customField2: customValue2
+{{< /code-block >}}
+
 
 ### Service Definition Schema (v2.1)
 
@@ -197,4 +266,5 @@ This GitHub Action allows you to register your services with the Service Catalog
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
+[15]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json
 
