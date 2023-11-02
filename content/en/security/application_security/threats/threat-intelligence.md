@@ -14,7 +14,7 @@ further_reading:
 
 Datadog provides built-in [threat intelligence][1] datasets for Application Security Management (ASM) and Cloud SIEM (Security Information and Event Management). This provides additional evidence to take action when security activity is observed.
 
-Datadog curates threat intelligence into a standardized list of categories and intents.  Intents include _benign_, _suspicious_, and _malicious_. Categories of threat intelligence include benign detections such as _corp\_vpn_ and malicious categories like _malware_. Upstream threat intelligence information is passed through for all threat intelligence sources, with limits based on threat intelligence payload size.
+Datadog curates threat intelligence into a standardized list of categories and intents. Intents include _benign_, _suspicious_, and _malicious_. Categories of threat intelligence include benign detections such as _corp\_vpn_ and malicious categories like _malware_. Upstream threat intelligence information is passed through for all threat intelligence sources, with limits based on threat intelligence payload size.
 
 Datadog recommends the following methods for consuming threat intelligence:
 1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing](https://app.datadoghq.com/security/configuration/asm/rules/view/wnp-zlu-woa) rule and modify it to meet their needs.
