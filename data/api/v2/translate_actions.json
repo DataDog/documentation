@@ -680,7 +680,7 @@
     "request_schema_description": "Wrapper object for a single bulk tag deletion request."
   },
   "CreateBulkTagsMetricsConfiguration": {
-    "description": "Create and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nIf multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not\nexpect deterministic ordering of concurrent calls.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "description": "Create and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nIf multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not\nexpect deterministic ordering of concurrent calls. The `exclude_tags_mode` value will set all metrics that match the prefix to\nthe same exclusion state, metric tag configurations do not support mixed inclusion and exclusion for tags on the same metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
     "summary": "Configure tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
@@ -712,7 +712,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
   },
   "CreateTagConfiguration": {
-    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
+    "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
     "summary": "Create a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
