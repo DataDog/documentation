@@ -159,7 +159,7 @@ You can navigate to the [Log Explorer][5] on the Datadog platform directly from 
 Clicking the link opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
 ## CI Test Runs
-You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files.  Look for the **View Test Runs** links following test method declarations in your source code:
+You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **View Test Runs** links following test method declarations in your source code:
 
 {{< img src="/developers/ide_integrations/idea/ci-navigation.png" alt="A source file showing a View Test Runs link." style="width:100%;" >}}
 
