@@ -17,7 +17,7 @@ Datadog provides built-in [threat intelligence][1] datasets for Application Secu
 Datadog curates threat intelligence into a standardized list of categories and intents.  Intents include _benign_, _suspicious_, and _malicious_. Categories of threat intelligence include benign detections such as _corp\_vpn_ and malicious categories like _malware_. Upstream threat intelligence information is passed through for all threat intelligence sources, with limits based on threat intelligence payload size.
 
 Datadog recommends the following methods for consuming threat intelligence:
-1. Reducing detection rule thresholds for business logic threats such as credential stuffing. For example Users can clone [credential stuffing default rule](https://app.datadoghq.com/security/configuration/asm/rules/view/wnp-zlu-woa) and modify it to meet their needs.
+1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing](https://app.datadoghq.com/security/configuration/asm/rules/view/wnp-zlu-woa) rule and modify it to meet their needs.
 2. Using threat intelligence as a indicator of reputation with security activity.
 
 Datadog recommends against the following:
