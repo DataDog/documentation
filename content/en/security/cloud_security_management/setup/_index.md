@@ -98,7 +98,7 @@ To [enable CSM Pro][1], you must first set up the Datadog cloud account integrat
 
 ## Next steps
 
-To get started setting up CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For detailed instructions, see the [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3] setup docs.
+To get started setting up CSM, navigate to the [**Security** > **Setup**][4] section in Datadog, which has detailed steps on how to set up and configure CSM. For detailed instructions, see the [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3] setup docs.
 
 ## Further Reading
 
