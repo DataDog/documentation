@@ -12,7 +12,7 @@ In the Delivery lens, you can see CI pipeline and static analysis results associ
 By default, your service is associated to [CI pipeline(s)][4] via repository URL. 
 You can edit the pipelines associated with each service by modifying the ci-pipeline-fingerprints field in your [service metadata][5].
 
-To add or remove a pipeline associated to your service, first click on Edit Metadata in your service page and go to Software Delivery.
+To add or remove a pipeline associated to your service, first click on Edit Metadata in your service page and go to Software Delivery. Please note that this is only available for [Service Catalog schema v2.2][7]
 
 {{< img src="tracing/service_catalog/service_catalog_delivery_lens.png" alt="Edit add pipeline in the UI" >}}
 
@@ -35,3 +35,4 @@ You can add the pipeline fingerprint directly to the service metadata. You can f
 [4]: /continuous_integration/
 [5]: /tracing/service_catalog/service_metadata_structure
 [6]: https://app.datadoghq.com/ci/pipeline
+[7]: /tracing/service_catalog/service_definition_api/#further-reading
