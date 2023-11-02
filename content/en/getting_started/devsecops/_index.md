@@ -7,26 +7,6 @@ The APM DevSecOps and Infrastructure DevSecOps bundles combine application perfo
 
 This guide provides an introduction to the bundles with links to setup instructions to help guide you as you get setup with the various products that make up each bundle.
 
-*Infra DevSecOps bundles not available for US1-FED???
-*Included with all three bundles
-    - Error Tracking
-    - Service Catalog
-*Deployment Tracking is part of Serverless?
-*APM DevSecOps isn't available for Fargate
-
-Deploy Agent to hosts.
-
-Included with Infrastructure Pro/Enterprise bundles:
-
-- CoScreen
-- Containers
-- Serverless
-- *Metrics
-- Live Processes (Enterprise only)
-- Watchdog (Enterprise only)
-- [Metrics Correlations (Enterprise only)][12]
- Includes Workflow Automation (both bundles?) <- APM or Infra or both?
-
 ## APM DevSecOps
 
 APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][5] capabilities of [Application Security Management (ASM)][6].
