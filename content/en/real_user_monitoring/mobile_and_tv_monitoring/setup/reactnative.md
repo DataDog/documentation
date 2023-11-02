@@ -388,7 +388,7 @@ const config = new DdSdkReactNativeConfiguration(
 
 ## New architecture support
 
-The [React Native new architecture][17] is supported by the RUM React Native SDK since its version `1.8.0`.
+The [React Native new architecture][17] is supported by the RUM React Native SDK in version `>=1.8.0`.
 
 The minimum supported React Native version for the new architecture is `0.71`.
 
