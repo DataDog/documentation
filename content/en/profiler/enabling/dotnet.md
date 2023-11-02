@@ -130,7 +130,7 @@ To install the .NET Profiler per-application:
 {{% tab "Azure App Service" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+  <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
 To install the .NET Profiler per-webapp:
