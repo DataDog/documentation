@@ -3247,11 +3247,6 @@ main:
     parent: cspm
     identifier: signals
     weight: 108
-  - name: Resource Catalog
-    url: /security/misconfigurations/resource_catalog
-    parent: cspm
-    identifier: resource_catalog
-    weight: 109
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm

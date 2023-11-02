@@ -86,6 +86,12 @@ Use the [Issues page][7] to review and remediate your organization's security de
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 
+## Investigate resources
+
+Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
+
+{{< img src="infrastructure/resource_catalog/Resource_Catalog_Infra.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
+
 ## Subscribe to weekly digest reports
 
 Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
@@ -109,3 +115,5 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [9]: /security/infrastructure_vulnerabilities/
 [10]: /security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
+[12]: https://app.datadoghq.com/infrastructure/catalog
+[13]: /infrastructure/resource_catalog
