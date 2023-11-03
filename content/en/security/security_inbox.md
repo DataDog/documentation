@@ -3,9 +3,7 @@ title: Security Inbox
 kind: documentation
 ---
 
-## Prioritize and remediate important security issues
-
-The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as being publicly accessible, attached to privileged roles, and residing in production environments.
+The **Security Inbox** shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as being publicly accessible, attached to privileged roles, and residing in production environments.
 
 The order in which security issues are prioritized is based on the following criteria:
 

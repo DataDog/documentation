@@ -3125,7 +3125,7 @@ main:
     parent: security_platform
     identifier: security_inbox
     weight: 9
-  - name: Audit Security Events
+  - name: Audit Trail
     url: security/audit_trail
     parent: security_platform
     identifier: security_audit_trail
