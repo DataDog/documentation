@@ -67,6 +67,8 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 [8]: https://www.iso.org/isoiec-27001-information-security.html
 [9]: https://www.hhs.gov/hipaa/index.html
 [10]: https://gdpr.eu/
+[11]: /security/cloud_siem/
+[12]: /integrations/amazon_cloudtrail/
 [22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
 [23]: https://www.cisecurity.org/benchmark/ubuntu_linux
 [24]: https://www.cisecurity.org/benchmark/red_hat_linux
