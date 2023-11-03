@@ -140,6 +140,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
+ 
 1. Download the [Helm chart][1] for AWS EKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:

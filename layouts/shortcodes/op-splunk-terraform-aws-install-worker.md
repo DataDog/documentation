@@ -1,0 +1,63 @@
+Setup the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+```
+module "opw" {
+    source     = "git::https://github.com/DataDog/opw-terraform//aws"
+    vpc-id     = "{VPC ID}"
+    subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
+    region     = "{REGION}"
+
+    datadog-api-key = "{DATADOG API KEY}"
+    pipeline-id = "{OP PIPELINE ID}"
+    environment = {
+      "SPLUNK_TOKEN": "<SPLUNK TOKEN>",
+    }
+    pipeline-config = <<EOT
+sources:
+  splunk_receiver:
+    type: splunk_hec
+    address: 0.0.0.0:8088
+    valid_tokens:
+        - $${SPLUNK_TOKEN}
+
+transforms:
+  ## This is a placeholder for your own remap (or other transform)
+  ## steps with tags set up. Datadog recommends these tag assignments.
+  ## They show which data has been moved over to OP and what still needs
+  ## to be moved.
+  LOGS_YOUR_STEPS:
+    type: remap
+    inputs:
+      - splunk_receiver
+    source: |
+      .sender = "observability_pipelines_worker"
+      .opw_aggregator = get_hostname!()
+
+## This buffer configuration is split into 144GB buffers for both of the Datadog and Splunk sinks.
+##
+## This should work for the vast majority of OP Worker deployments and should rarely
+## need to be adjusted. If you do change it, be sure to update the size the `ebs-drive-size-gb` parameter.
+sinks:
+  datadog_logs:
+    type: datadog_logs
+    inputs:
+      - LOGS_YOUR_STEPS
+    default_api_key: "$${DD_API_KEY}"
+    compression: gzip
+    buffer:
+        type: disk
+        max_size: 154618822656
+  splunk_logs:
+    type: splunk_hec_logs
+    inputs:
+      - LOGS_YOUR_STEPS
+    endpoint: <SPLUNK HEC ENDPOINT>
+    default_token: $${SPLUNK_TOKEN}
+    encoding:
+      codec: json
+    buffer:
+        type: disk
+        max_size: 154618822656
+EOT
+}
+```
