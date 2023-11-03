@@ -1,0 +1,318 @@
+# Unless explicitly stated otherwise, all files in this repository are
+# licensed under the Apache 2 License.
+#
+# This product includes software developed at Datadog
+# (https://www.datadoghq.com/). Copyright 2023 Datadog, Inc.
+#
+# This CloudFormation template creates a simple Auto Scaling group of Observability Pipelines
+# Workers (OPWs), and is suitable for non-production workloads to trial the
+# software. Use another installation method for production deploys.
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::LanguageExtensions
+Description: Launches an Observability Pipelines Worker cluster to handle Datadog Agent workloads.
+Parameters:
+  APIKey:
+    Description: Datadog API Key
+    Type: String
+  PipelineID:
+    Description: OPW Pipeline ID
+    Type: String
+  DatadogSite:
+    Description: Datadog site to use. Defaults to US1.
+    Type: String
+    Default: "datadoghq.com"
+    AllowedValues:
+      - datadoghq.com
+      - us3.datadoghq.com
+      - us5.datadoghq.com
+      - datadoghq.eu
+      - ap1.datadoghq.com
+  VPCID:
+    Description: VPC to launch instances into.
+    Type: "AWS::EC2::VPC::Id"
+  SubnetIDs:
+    Description: Subnets to launch instances into.
+    Type: "List<AWS::EC2::Subnet::Id>"
+  InstanceType:
+    Description: EC2 instance type to launch. Allowed values include the AWS Graviton ARM-based types.
+    Type: String
+    Default: c6g.large
+    AllowedValues:
+      - t4g.nano
+      - t4g.micro
+      - t4g.small
+      - t4g.medium
+      - t4g.large
+      - t4g.xlarge
+      - t4g.2xlarge
+      - c6g.medium
+      - c6g.large
+      - c6g.xlarge
+      - c6g.2xlarge
+      - c6g.4xlarge
+      - c7g.medium
+      - c7g.large
+      - c7g.xlarge
+      - c7g.2xlarge
+      - c7g.4xlarge
+  EBSSizeGB:
+    Description: Storage to allocate to each instance for buffers, in GB.
+    Type: Number
+    Default: 288
+  ASGMinSize:
+    Description: Minimum instances to launch from the Auto Scaling group.
+    Type: Number
+    Default: 2
+  ASGMaxSize:
+    Description: Maximum instances to launch from the Auto Scaling group.
+    Type: Number
+    Default: 10
+  ASGCapacity:
+    Description: Desired instances to launch from the Auto Scaling group.
+    Type: Number
+    Default: 2
+
+Mappings:
+  # These are the supported regions. AMIs listed here are Ubuntu 22.04 LTS,
+  # for ARM processors. If you need to add to this, you can find supported
+  # images here: https://cloud-images.ubuntu.com/locator/ec2/
+  AWSRegionToAMI:
+    us-east-1: 
+      "HVMG2": "ami-016485166ec7fa705"
+    us-east-2: 
+      "HVMG2": "ami-05983a09f7dc1c18f"
+    us-west-1: 
+      "HVMG2": "ami-0728ec0041b1d38ac"
+    us-west-2: 
+      "HVMG2": "ami-03fd0aa14bd102718"
+    eu-west-1: 
+      "HVMG2": "ami-0d3407241b2b6ec62"
+    eu-west-2: 
+      "HVMG2": "ami-025db40ba9581d621"
+    eu-west-3: 
+      "HVMG2": "ami-07461eab9cc80a86e"
+    ap-southeast-1: 
+      "HVMG2": "ami-0977667a17a0fa88c"
+    ap-northeast-1: 
+      "HVMG2": "ami-09b23e84684bb7149"
+
+Resources:
+  # Embedded security group allows access only to the load balancers, and only
+  # on the Datadog Agent port.
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allows access to OPW ports"
+      VpcId: !Ref VPCID
+  
+  # Allow ingress only to the Datadog Agent port.
+  InstanceSecurityGroupTCPIngress8282:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      IpProtocol: tcp
+      FromPort: 8282
+      ToPort: 8282
+      SourceSecurityGroupId: !Ref NLBSecurityGroup
+      GroupId:
+        Fn::GetAtt:
+          - InstanceSecurityGroup
+          - GroupId
+  
+  # Allow egress to anywhere.
+  InstanceSecurityGroupTCPEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      IpProtocol: tcp
+      FromPort: 0
+      ToPort: 65535
+      CidrIp: 0.0.0.0/0
+      GroupId:
+        Fn::GetAtt:
+          - InstanceSecurityGroup
+          - GroupId
+
+  # IAM Role allows SSH access over SSM, which can be useful for
+  # running `observability-pipelines-worker tap`, or for other diagnostic purposes.
+  IAMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  
+  # This instance profile contains the SSM role above, and is useful
+  # in case you need to add additional roles for other AWS services.
+  IAMInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref IAMRole
+
+  # Auto Scaling group handles scaling to meet application demand.
+  LaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties:
+      LaunchTemplateData:
+        IamInstanceProfile:
+          Name: !Ref IAMInstanceProfile
+        InstanceType: !Ref InstanceType
+        ImageId: !FindInMap [AWSRegionToAMI, !Ref "AWS::Region", HVMG2]
+        NetworkInterfaces:
+          # OPW instances should not be directly accessible; the load balancer
+          # should take care of that.
+          - AssociatePublicIpAddress: false
+            Groups:
+              - !Ref InstanceSecurityGroup
+            DeviceIndex: 0
+        # NOTE: This does create an EBS drive for each instance launched as part
+        # of the Auto Scaling group. However, it is deleted when the
+        # instance is taken out of service. This makes this installation method
+        # unsuitable for longer-term deployments, and may lead to data loss if
+        # an instance is terminated.
+        BlockDeviceMappings:
+          - DeviceName: /dev/sdf
+            Ebs:
+              VolumeSize: !Ref EBSSizeGB
+              VolumeType: gp3
+              DeleteOnTermination: true
+        # This user data script downloads and installs OPW, and sets it up
+        # for Remote Configuration on the pipeline specified in the inputs.
+        #
+        # It also auto-mounts the EBS drive associated with this instance.
+        UserData:
+          Fn::Base64:
+            !Sub |
+              #!/bin/bash
+              # Unless explicitly stated otherwise, all files in this repository are licensed under the Apache 2 License.
+              #
+              # This product includes software developed at Datadog (https://www.datadoghq.com/). Copyright 2023 Datadog, Inc.
+              get_opw_ebs_drive() {
+                  echo "/dev/nvme1n1"
+              }
+
+              sudo apt -y update
+              sudo apt -y install apt-transport-https curl gnupg
+
+              sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+              sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+              sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+              curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+              curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+              curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+
+              sudo apt -y update
+              sudo apt -y install observability-pipelines-worker datadog-signing-keys
+
+              sudo cat <<"EOF" > /etc/default/observability-pipelines-worker
+              DD_API_KEY=${APIKey}
+              DD_OP_PIPELINE_ID=${PipelineID}
+              DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+              DD_OP_API_ENABLED=true
+              DD_SITE=${DatadogSite}
+              EOF
+
+              # Mount the associated EBS drive at the data directory.
+              device=$(get_opw_ebs_drive)
+              sudo mkfs.xfs $device
+              sudo mount -o rw $device /var/lib/observability-pipelines-worker
+              sudo chown observability-pipelines-worker:observability-pipelines-worker /var/lib/observability-pipelines-worker
+
+              sudo systemctl restart observability-pipelines-worker
+  ASG:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      MaxSize: !Ref ASGMaxSize
+      MinSize: !Ref ASGMinSize
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchTemplate
+        Version: !GetAtt LaunchTemplate.LatestVersionNumber
+      DesiredCapacity: !Ref ASGCapacity
+      VPCZoneIdentifier: !Ref SubnetIDs
+      TargetGroupARNs:
+        - !Ref NLBTarget8282
+  
+  # This load balancer should be used to communicate with the OPW
+  # instances. It is set as internal-only, so it is not accessible
+  # from the outside world.
+  NLB:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: network
+      Scheme: internal
+      Subnets: !Ref SubnetIDs
+      SecurityGroups:
+        - !Ref NLBSecurityGroup
+
+  NLBListener8282:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      Protocol: TCP
+      Port: 8282
+      LoadBalancerArn: !Ref NLB
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: 
+            Ref: NLBTarget8282
+
+  NLBTarget8282:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      Protocol: TCP
+      Port: 8282
+      VpcId: !Ref VPCID
+
+  NLBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allows access to OPW ports from internal network"
+      VpcId: !Ref VPCID
+  
+  # Though this is set as 0.0.0.0/0, since the load balancer is internal
+  # it is not accessible from the outside world. This is just a
+  # shorthand for "any part of your private network".
+  NLBSecurityGroupTCPIngress8282:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      IpProtocol: tcp
+      FromPort: 8282
+      ToPort: 8282
+      CidrIp: 0.0.0.0/0
+      GroupId:
+        Fn::GetAtt:
+          - NLBSecurityGroup
+          - GroupId
+  
+  # Allow egress from the load balancer to anywhere. Again, since the load
+  # balancer is set internal-only, this is just a shorthand for "anywhere
+  # in your private network".
+  NLBSecurityGroupTCPEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      IpProtocol: tcp
+      FromPort: 0
+      ToPort: 65535
+      CidrIp: 0.0.0.0/0
+      GroupId:
+        Fn::GetAtt:
+          - NLBSecurityGroup
+          - GroupId
+
+Outputs:
+  # Put this output into the `observability_pipelines_worker`
+  # section of the Datadog Agent config.
+  LoadBalancerDNS:
+    Description: DNS to point Datadog Agents at.
+    Value: !GetAtt NLB.DNSName
+  # If you need to attach additional roles to the instance, for example
+  # to access S3, attach them to this profile.
+  InstanceProfile:
+    Description: Instance profile to attach additional roles to.
+    Value: !Ref IAMInstanceProfile

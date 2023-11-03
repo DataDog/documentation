@@ -150,7 +150,7 @@ Learn more about [custom metrics][12].
 [2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /profiler/
+[5]: /profiler/enabling/dotnet/?tab=azureappservicepublicbeta
 [6]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [7]: /logs/log_collection/csharp/#agentless-logging-with-apm
 [8]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink

@@ -71,7 +71,7 @@ php datadog-setup.php --php-bin=all --enable-profiling
 
 This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 
-Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
+Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. To see the generated traces, go to the [APM Traces page][4].
 
 When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
 
@@ -85,6 +85,13 @@ It may take a few minutes before traces appear in the UI. If traces still do not
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
+<div class="alert alert-warning">
+<strong>SELinux:</strong>
+If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
+
+`allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
+
+</div>
 
 ## Automatic instrumentation
 
@@ -468,6 +475,7 @@ For Apache, run:
 [1]: /tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/glossary/
+[4]: https://app.datadoghq.com/apm/traces
 [5]: https://github.com/DataDog/dd-trace-php/releases
 [6]: /tracing/trace_collection/library_config/php/
 [7]: /tracing/guide/trace-php-cli-scripts/

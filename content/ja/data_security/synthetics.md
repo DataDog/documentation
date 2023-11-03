@@ -33,7 +33,7 @@ title: Synthetic モニタリングのデータセキュリティ
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Storage**: [AWS S3 バケット][1]の暗号化
+* **Storage**: [Amazon S3 バケット][1]の暗号化。
 * **Transport**: [S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html

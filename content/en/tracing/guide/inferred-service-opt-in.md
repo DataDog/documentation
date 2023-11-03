@@ -29,6 +29,8 @@ To determine the names and types of the inferred services, Datadog uses span att
 
 If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred services. For more information, see the "Peer Service Mapping" section for your language below.
 
+**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes.
+
 ## Dependency map
 
 Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
@@ -47,6 +49,14 @@ Requirements:
 Set the following in your `datadog.yaml` [configuration file][5]:
 - `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
 - `DD_APM_PEER_SERVICE_AGGREGATION=true`
+
+
+### OpenTelemetry Collector Datadog Exporter configuration
+
+Set the following in your `collector.yaml` [configuration file][6]:
+- `compute_stats_by_span_kind=true`
+- `peer_service_aggregation=true`
+
 
 ### APM tracer configuration
 
@@ -297,3 +307,4 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341

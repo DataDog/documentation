@@ -1,8 +1,6 @@
 ---
 aliases:
 - /ja/developers/marketplace/offering
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/create_a_tile.md
 description: インテグレーションタイルの開発・公開方法について説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-marketplace/
@@ -16,15 +14,15 @@ type: documentation
 ---
 ## 概要
 
-このページでは、**Integrations** または **Marketplace** ページに表示される製品を表すタイルの作成について、テクノロジーパートナーに説明します。
+このページでは、**Integrations** または **Marketplace** ページに表示される製品を代表するタイルの作成について、テクノロジーパートナーに説明します。
 
 ## インテグレーションタイル
 
-このタイルは、顧客があなたの製品について学び、設定方法を確認し、すぐに使えるダッシュボードや追加アセットのロックを解除するために製品をインストールまたは購入するための入口として機能します。
+このタイルは、顧客があなたの製品について学び、設定方法を確認し、すぐに使えるダッシュボードや追加アセットを利用可能にするために製品をインストールまたは購入するための入口として機能します。
 
-{{< img src="developers/integrations/marketplace_or_integrations_tile.png" alt="Integrations や Marketplace ページで、サンプル製品の拡張タイルモーダルが表示されます" style="width:100%" >}}
+{{< img src="developers/integrations/marketplace_or_integrations_tile.png" alt="Integrations や Marketplace ページで、サンプル製品の拡張タイルモーダル" style="width:100%" >}}
 
-* API ベースのインテグレーション、プロフェッショナルサービスの出品、ソフトウェアライセンスなど、Datadog Agent を**使用しない**製品については、タイルを作成してタイル関連ファイルを送信するだけで、製品を公開することができます。これは_タイルのみの出品_と呼ばれます。タイルのみの出品は、API ベースのインテグレーションに関連するコードを Datadog がホストしていない場合に適用され、その他のサポートされている製品タイプでは、コードは必要ありません。
+* API ベースのインテグレーション、プロフェッショナルサービスのリスト、ソフトウェアライセンスなど、Datadog Agent を**使用しない**製品については、タイルを作成してタイル関連ファイルを送信するだけで、製品を公開することができます。これは_タイルのみのリスト_と呼ばれます。タイルのみのリストは、API ベースのインテグレーションに関連するコードを Datadog がホストしていない場合や、その他のサポートされている製品タイプでコードが必要ない場合に適用されます。
 
 * **Agent ベースのインテグレーション**の場合、タイルを作成し、さらに、インテグレーションに関連するすべてのコード (およびタイル関連ファイル) を 1 つのプルリクエストで送信する必要があります。詳しくは、[Agent ベースのインテグレーションを作成する][27]をご覧ください。
 
@@ -38,7 +36,7 @@ type: documentation
 
 [**Integrations** ページ][103]にタイルを構築するには
 
-<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築している場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルの完成</a>に直接スキップすることができます。
+<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築済みである場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルを完成させる</a>に直接スキップすることができます。 
 </div>
 
 1. `dd` ディレクトリを作成します。
@@ -49,7 +47,8 @@ type: documentation
 
    Datadog Development Toolkit は、`$HOME/dd/` ディレクトリで作業していることを想定しています。これは必須ではありませんが、異なるディレクトリで作業する場合は、追加の構成手順が必要です。
 
-2. `integrations-extras` リポジトリを複製します。
+2. [`integrations-extras` リポジトリ][102]をフォークします。
+3. `integrations-extras` リポジトリを複製します。
 
    ```shell
    git clone git@github.com:DataDog/integrations-extras.git
@@ -300,7 +299,7 @@ Datadog では、Marketplace の出品にのみ GTM サポートを提供して�
 
 [1]: https://app.datadoghq.com/marketplace/
 [2]: https://docs.datadoghq.com/ja/developers/custom_checks/prometheus/
-[3]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/?tab=configurationtemplate#write-the-check
+[3]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/#write-the-check
 [4]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [5]: https://docs.datadoghq.com/ja/api/latest/metrics/
 [6]: https://docs.datadoghq.com/ja/logs/faq/partner_log_integration/

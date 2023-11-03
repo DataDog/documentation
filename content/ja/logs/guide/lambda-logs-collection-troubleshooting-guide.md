@@ -48,7 +48,7 @@ AWS Lambda 関数を有効にすると、Datadog 内での Lambda 関数の呼�
 | `aws.lambda.duration.maximum` | Lambda 関数の実行完了までに要した最大時間 (ミリ秒)  |
 | `aws.lambda.throttles`        | 呼び出し率が既定の上限を超えたために抑制された呼び出し試行回数 |
 
-これらおよびその他の AWS Lambda メトリクスについては、[Amazon Lambda のメトリクス][6]を参照してください。
+これらおよびその他の AWS Lambda メトリクスについては、[AWS Lambda のメトリクス][6]を参照してください。
 
 ### 関数のトリガーを管理する
 
