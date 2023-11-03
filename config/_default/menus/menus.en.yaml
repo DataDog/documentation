@@ -587,11 +587,6 @@ main:
     url: containers/cluster_agent/admission_controller/
     parent: containers_cluster
     weight: 405
-  - name: Troubleshooting
-    url: containers/cluster_agent/troubleshooting/
-    identifier: cluster_agent_troubleshooting
-    parent: containers_cluster
-    weight: 406
   - name: Amazon ECS
     url: containers/amazon_ecs/
     parent: containers
@@ -637,6 +632,21 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
     weight: 801
+  - name: Cluster Agent
+    url: containers/troubleshooting/cluster-agent
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_agent
+    weight: 802
+  - name: Cluster Checks
+    url: containers/troubleshooting/cluster-and-endpoint-checks
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_and_endpoint_checks
+    weight: 803
+  - name: HPA and Metrics Provider
+    url: containers/troubleshooting/hpa
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_hpa
+    weight: 804
   - name: Guides
     url: containers/guide
     parent: containers
@@ -3187,26 +3197,31 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
+  - name: Security Signals
+    url: security/threats/security_signals
+    parent: cloud_workload_security
+    identifier: cws_security_signals
+    weight: 204
   - name: Security Profiles
     url: security/threats/security_profiles
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
-    weight: 203
+    weight: 206
   - name: Runtime Anomaly Detection
     url: security/threats/runtime_anomaly_detection
     parent: cloud_workload_security
     identifier: cws_workload_anomaly_detection
-    weight: 204
+    weight: 208
   - name: Creating Custom Agent Rules
     url: security/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 205
+    weight: 210
   - name: CWS Events Formats
     url: security/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 206
+    weight: 212
   - name: Misconfigurations
     url: security/misconfigurations/
     parent: csm
@@ -3252,15 +3267,15 @@ main:
     parent: csm
     identifier: csm_identity_risks
     weight: 15
-  - name: Infrastructure Vulnerabilities
-    url: security/infrastructure_vulnerabilities
+  - name: Vulnerabilities
+    url: security/vulnerabilities
     parent: csm
-    identifier: infrastructure_vulnerabilities
+    identifier: vulnerabilities
     weight: 18
   - name: Setup
-    url: security/infrastructure_vulnerabilities/setup
-    parent: infrastructure_vulnerabilities
-    identifier: infra_vm_setup
+    url: security/vulnerabilities/setup
+    parent: vulnerabilities
+    identifier: vulnerabilities_setup
     weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
@@ -4284,10 +4299,10 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Datadog Apps SDK
-    url: developers/datadog_apps
+  - name: UI Extensions
+    url: developers/ui_extensions
     parent: dev_tools
-    identifier: dev_tools_datadog_apps
+    identifier: dev_tools_ui_extensions
     weight: 5
   - name: Service Checks
     url: developers/service_checks/
@@ -10596,6 +10611,75 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Service Scorecards
+    url: /api/latest/service-scorecards/
+    identifier: service-scorecards
+    generated: true
+  - name: Delete a rule
+    url: '#delete-a-rule'
+    identifier: service-scorecards-delete-a-rule
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScorecardRule
+      unstable:
+        - v2
+      order: 3
+  - name: Create a new rule
+    url: '#create-a-new-rule'
+    identifier: service-scorecards-create-a-new-rule
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScorecardRule
+      unstable:
+        - v2
+      order: 1
+  - name: List all rules
+    url: '#list-all-rules'
+    identifier: service-scorecards-list-all-rules
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScorecardRules
+      unstable:
+        - v2
+      order: 2
+  - name: Create outcomes batch
+    url: '#create-outcomes-batch'
+    identifier: service-scorecards-create-outcomes-batch
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScorecardOutcomesBatch
+      unstable:
+        - v2
+      order: 1
+  - name: List all rule outcomes
+    url: '#list-all-rule-outcomes'
+    identifier: service-scorecards-list-all-rule-outcomes
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScorecardOutcomes
+      unstable:
+        - v2
+      order: 2
   - name: Spans
     url: /api/latest/spans/
     identifier: spans
