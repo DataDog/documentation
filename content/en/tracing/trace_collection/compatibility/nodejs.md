@@ -133,6 +133,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
 | [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [openai][64]       | `3.x`      | Fully supported |                                                        |
 
 ### Promise library compatibility
 
@@ -228,3 +229,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
+[64]: https://github.com/openai/openai-node
