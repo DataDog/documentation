@@ -35,6 +35,7 @@ Supported test frameworks:
 | Spock | >= 2.0 |
 | Cucumber | >= 5.4.0 |
 | Karate | >= 1.0.0 |
+| Scala MUnit | >= 0.7.28 |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
 
@@ -44,6 +45,8 @@ Supported build systems:
 |---|---|
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
+
+If your build system is not supported, you can try [configuring tracer injection manually][2].
 
 ## Setup
 
@@ -140,7 +143,7 @@ When specifying tracer arguments, include the following:
 For example:
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
+./gradlew cleanTest test -Dorg.gradle.jvmargs=\
 -javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
@@ -152,6 +155,39 @@ Specifying `org.gradle.jvmargs` in the command line overrides the value specifie
 **Note:** CI Visibility is not compatible with [Gradle Configuration Cache][1], so do not enable the cache when running your tests with the tracer.
 
 [1]: https://docs.gradle.org/current/userguide/configuration_cache.html
+
+{{% /tab %}}
+{{% tab "Other" %}}
+
+Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+
+Ensure that your build system supplies `-javaagent` argument to the JVMs that are forked to execute the tests.
+
+When specifying `javaagent` arguments, include the following:
+
+* Enable CI Visibility by setting the `dd.civisibility.enabled` property to `true`.
+* Define the environment where the tests are being run using the `dd.env property` (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the name of the service or library being tested in the `dd.service property`.
+
+For example, the `build.xml` file in an Ant project would have to be modified in the following way:
+{{< code-block lang="xml" >}}
+<project name="my-project" default="test" xmlns:if="ant:if">
+  <!-- ... -->
+  <property environment="env"/>
+
+  <target name="test" depends="compile-tests">
+    <junit printsummary="on" fork="true">
+      <jvmarg if:set="ci-visibility" value="-javaagent:${env.DD_TRACER_FOLDER}/dd-java-agent.jar=dd.civisibility.enabled=true,dd.env=ci,dd.service=my-java-app"/>
+      <!-- ... -->
+    </junit>
+  </target>
+</project>
+{{< /code-block >}}
+
+Then, the tests can be executed with:
+{{< code-block lang="shell" >}}
+ant test -Dci-visibility=true
+{{< /code-block >}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -169,6 +205,7 @@ However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer 
 ## Extensions
 
 The [dd-trace-api][4] library exposes a set of APIs that can be used to extend the tracer's functionality programmatically.
+To use the extensions described below, add this library as a compile-time dependency to your project.
 
 ### Adding custom tags to tests
 
@@ -186,7 +223,23 @@ if (span != null) {
 
 To create filters or `group by` fields for these tags, you must first create facets.
 
-For more information about adding tags, see the [Adding Tags][2] section of the Java custom instrumentation documentation.
+For more information about adding tags, see the [Adding Tags][5] section of the Java custom instrumentation documentation.
+
+### Adding custom metrics to tests
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```java
+// inside your test
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null) {
+  span.setTag("test.memory.usage", 1e8);
+}
+// test continues normally
+// ...
+```
+
+For more information about custom metrics, see the [Add Custom Metrics guide][6].
 
 ### Using manual testing API
 
@@ -340,7 +393,7 @@ While the best approach is such cases is to update the tests, there is also a qu
 The integrations provide additional insights into what happens in the tested code and are especially useful in integration tests, to monitor things like HTTP requests or database calls.
 They are enabled by default.
 
-To disable a specific integration, refer to the [Datadog Tracer Compatibility][5] table for the relevant configuration property names.
+To disable a specific integration, refer to the [Datadog Tracer Compatibility][7] table for the relevant configuration property names.
 For example, to disable `OkHttp3` client request integration, add `dd.integration.okhttp-3.enabled=false` to the list of `-javaagent` arguments.
 
 To disable all integrations, augment the list of `-javaagent` arguments with `dd.trace.enabled=false`.
@@ -350,7 +403,9 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: #using-manual-testing-api
-[2]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+[2]: ?tab=other#running-your-tests
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
 [4]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
-[5]: /tracing/trace_collection/compatibility/java#integrations
+[5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
+[6]: /continuous_integration/guides/add_custom_metrics/?tab=java
+[7]: /tracing/trace_collection/compatibility/java#integrations
