@@ -418,6 +418,13 @@ components:
       required: true
       schema:
         type: string
+    RuleId:
+      description: The ID of the rule/scorecard.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
     SchemaVersion:
       description: The schema version desired in the response.
       in: query
@@ -4152,6 +4159,38 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateRuleRequest:
+      description: Scorecard create rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateRuleRequestData'
+      type: object
+    CreateRuleRequestData:
+      description: Scorecard create rule request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    CreateRuleResponse:
+      description: Created rule in response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateRuleResponseData'
+      type: object
+    CreateRuleResponseData:
+      description: Create rule response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        relationships:
+          $ref: '#/components/schemas/RelationshipToRule'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
     Creator:
       description: Creator of the object.
       properties:
@@ -8325,6 +8364,39 @@ components:
         meta:
           $ref: '#/components/schemas/PowerpacksResponseMeta'
       type: object
+    ListRulesResponse:
+      description: Scorecard rules response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListRulesResponseData'
+        links:
+          $ref: '#/components/schemas/ListRulesResponseLinks'
+      type: object
+    ListRulesResponseData:
+      description: Array of rule details.
+      items:
+        $ref: '#/components/schemas/ListRulesResponseDataItem'
+      type: array
+    ListRulesResponseDataItem:
+      description: Rule details.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        relationships:
+          $ref: '#/components/schemas/RelationshipToRule'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    ListRulesResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: Link for the next set of rules.
+          example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
+          type: string
+      type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
       enum:
@@ -10977,6 +11049,185 @@ components:
       type: string
       x-enum-varnames:
       - ORGS
+    OutcomeType:
+      default: outcome
+      description: The JSON:API type for an outcome.
+      enum:
+      - outcome
+      example: outcome
+      type: string
+      x-enum-varnames:
+      - OUTCOME
+    OutcomesBatchAttributes:
+      description: The JSON:API attributes for a batched set of scorecard outcomes.
+      properties:
+        results:
+          description: Set of scorecard outcomes to update.
+          items:
+            $ref: '#/components/schemas/OutcomesBatchRequestItem'
+          type: array
+      type: object
+    OutcomesBatchRequest:
+      description: Scorecard outcomes batch request.
+      properties:
+        data:
+          $ref: '#/components/schemas/OutcomesBatchRequestData'
+      type: object
+    OutcomesBatchRequestData:
+      description: Scorecard outcomes batch request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OutcomesBatchAttributes'
+        type:
+          $ref: '#/components/schemas/OutcomesBatchType'
+      type: object
+    OutcomesBatchRequestItem:
+      description: Scorecard outcome for a specific rule, for a given service within
+        a batched update.
+      properties:
+        remarks:
+          description: Any remarks regarding the scorecard rule's evaluation, and
+            supports HTML hyperlinks.
+          example: 'See: <a href="https://app.datadoghq.com/services">Services</a>'
+          type: string
+        rule_id:
+          $ref: '#/components/schemas/RuleId'
+        service_name:
+          description: The unique name for a service in the catalog.
+          example: my-service
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+      required:
+      - rule_id
+      - service_name
+      - state
+      type: object
+    OutcomesBatchResponse:
+      description: Scorecard outcomes batch response.
+      properties:
+        data:
+          $ref: '#/components/schemas/OutcomesBatchResponseData'
+        meta:
+          $ref: '#/components/schemas/OutcomesBatchResponseMeta'
+      required:
+      - data
+      - meta
+      type: object
+    OutcomesBatchResponseAttributes:
+      description: The JSON:API attributes for an outcome.
+      properties:
+        created_at:
+          description: Creation time of the rule outcome.
+          format: date-time
+          type: string
+        modified_at:
+          description: Time of last rule outcome modification.
+          format: date-time
+          type: string
+        remarks:
+          description: Any remarks regarding the scorecard rule's evaluation, and
+            supports HTML hyperlinks.
+          example: 'See: <a href="https://app.datadoghq.com/services">Services</a>'
+          type: string
+        service_name:
+          description: The unique name for a service in the catalog.
+          example: my-service
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+      type: object
+    OutcomesBatchResponseData:
+      description: List of rule outcomes which were affected during the bulk operation.
+      items:
+        $ref: '#/components/schemas/OutcomesResponseDataItem'
+      type: array
+    OutcomesBatchResponseMeta:
+      description: Metadata pertaining to the bulk operation.
+      properties:
+        total_received:
+          description: Total number of scorecard results received during the bulk
+            operation.
+          format: int64
+          type: integer
+        total_updated:
+          description: Total number of scorecard results modified during the bulk
+            operation.
+          format: int64
+          type: integer
+      type: object
+    OutcomesBatchType:
+      default: batched-outcome
+      description: The JSON:API type for scorecard outcomes.
+      enum:
+      - batched-outcome
+      example: batched-outcome
+      type: string
+      x-enum-varnames:
+      - BATCHED_OUTCOME
+    OutcomesResponse:
+      description: Scorecard outcomes - the result of a rule for a service.
+      properties:
+        data:
+          $ref: '#/components/schemas/OutcomesResponseData'
+        included:
+          $ref: '#/components/schemas/OutcomesResponseIncluded'
+        links:
+          $ref: '#/components/schemas/OutcomesResponseLinks'
+      type: object
+    OutcomesResponseData:
+      description: List of rule outcomes.
+      items:
+        $ref: '#/components/schemas/OutcomesResponseDataItem'
+      type: array
+    OutcomesResponseDataItem:
+      description: A single rule outcome.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OutcomesBatchResponseAttributes'
+        id:
+          description: The unique ID for a rule outcome.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RuleOutcomeRelationships'
+        type:
+          $ref: '#/components/schemas/OutcomeType'
+      type: object
+    OutcomesResponseIncluded:
+      description: Array of rule details.
+      items:
+        $ref: '#/components/schemas/OutcomesResponseIncludedItem'
+      type: array
+    OutcomesResponseIncludedItem:
+      description: Attributes of the included rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OutcomesResponseIncludedRuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    OutcomesResponseIncludedRuleAttributes:
+      description: Details of a rule.
+      properties:
+        name:
+          description: Name of the rule.
+          example: Team Defined
+          type: string
+        scorecard_name:
+          description: The scorecard name to which this rule must belong.
+          example: Observability Best Practices
+          type: string
+      type: object
+    OutcomesResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: Link for the next set of results.
+          example: /api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100
+          type: string
+      type: object
     Pagination:
       description: Pagination object.
       properties:
@@ -12434,6 +12685,21 @@ components:
       required:
       - data
       type: object
+    RelationshipToOutcome:
+      description: The JSON:API relationship to a scorecard outcome.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToOutcomeData'
+      type: object
+    RelationshipToOutcomeData:
+      description: The JSON:API relationship to an outcome, which returns the related
+        rule id.
+      properties:
+        id:
+          $ref: '#/components/schemas/RuleId'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
     RelationshipToPermission:
       description: Relationship to a permissions object.
       properties:
@@ -12482,6 +12748,28 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
+      type: object
+    RelationshipToRule:
+      description: Scorecard create rule response relationship.
+      properties:
+        scorecard:
+          $ref: '#/components/schemas/RelationshipToRuleData'
+      type: object
+    RelationshipToRuleData:
+      description: Relationship data for a rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToRuleDataObject'
+      type: object
+    RelationshipToRuleDataObject:
+      description: Rule relationship data.
+      properties:
+        id:
+          description: The unique ID for a scorecard.
+          example: 00000000-0000-beef-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ScorecardType'
       type: object
     RelationshipToSAMLAssertionAttribute:
       description: AuthN Mapping relationship to SAML Assertion Attribute.
@@ -13379,6 +13667,62 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    RuleAttributes:
+      description: Details of a rule.
+      properties:
+        category:
+          deprecated: true
+          description: The scorecard name to which this rule must belong.
+          type: string
+        created_at:
+          description: Creation time of the rule outcome.
+          format: date-time
+          type: string
+        custom:
+          description: Defines if the rule is a custom rule.
+          type: boolean
+        description:
+          description: Explanation of the rule.
+          type: string
+        enabled:
+          description: If enabled, the rule is calculated as part of the score.
+          example: true
+          type: boolean
+        modified_at:
+          description: Time of the last rule outcome modification.
+          format: date-time
+          type: string
+        name:
+          description: Name of the rule.
+          example: Team Defined
+          type: string
+        owner:
+          description: Owner of the rule.
+          type: string
+        scorecard_name:
+          description: The scorecard name to which this rule must belong.
+          example: Deployments automated via Deployment Trains
+          type: string
+      type: object
+    RuleId:
+      description: The unique ID for a scorecard rule.
+      example: 00000000-0000-beef-0000-000000000000
+      type: string
+    RuleOutcomeRelationships:
+      description: The JSON:API relationship to a scorecard rule.
+      properties:
+        rule:
+          $ref: '#/components/schemas/RelationshipToOutcome'
+      type: object
+    RuleType:
+      default: rule
+      description: The JSON:API type for scorecard rules.
+      enum:
+      - rule
+      example: rule
+      type: string
+      x-enum-varnames:
+      - RULE
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -13564,6 +13908,15 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
+    ScorecardType:
+      default: scorecard
+      description: The JSON:API type for scorecard.
+      enum:
+      - scorecard
+      example: scorecard
+      type: string
+      x-enum-varnames:
+      - SCORECARD
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -17492,6 +17845,18 @@ components:
             from the other indexes
           type: string
       type: object
+    State:
+      description: The state of the rule evaluation.
+      enum:
+      - pass
+      - fail
+      - skip
+      example: pass
+      type: string
+      x-enum-varnames:
+      - PASS
+      - FAIL
+      - SKIP
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -27552,6 +27917,319 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+  /api/v2/scorecard/outcomes:
+    get:
+      description: Fetches all rule outcomes.
+      operationId: ListScorecardOutcomes
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Include related rule details in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          example: rule
+          type: string
+      - description: Return only specified values in the outcome attributes.
+        in: query
+        name: fields[outcome]
+        required: false
+        schema:
+          example: state, service_name
+          type: string
+      - description: Return only specified values in the included rule details.
+        in: query
+        name: fields[rule]
+        required: false
+        schema:
+          example: name
+          type: string
+      - description: Filter the outcomes on a specific service name.
+        in: query
+        name: filter[outcome][service_name]
+        required: false
+        schema:
+          example: web-store
+          type: string
+      - description: Filter the outcomes by a specific state.
+        in: query
+        name: filter[outcome][state]
+        required: false
+        schema:
+          example: fail
+          type: string
+      - description: Filter outcomes on whether a rule is enabled/disabled.
+        in: query
+        name: filter[rule][enabled]
+        required: false
+        schema:
+          example: true
+          type: boolean
+      - description: Filter outcomes based on rule ID.
+        in: query
+        name: filter[rule][id]
+        required: false
+        schema:
+          example: f4485c79-0762-449c-96cf-c31e54a659f6
+          type: string
+      - description: Filter outcomes based on rule name.
+        in: query
+        name: filter[rule][name]
+        required: false
+        schema:
+          example: SLOs Defined
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: List all rule outcomes
+      tags:
+      - Service Scorecards
+      x-menu-order: 2
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/scorecard/outcomes/batch:
+    post:
+      description: Sets multiple service-rule outcomes in a single batched request.
+      operationId: CreateScorecardOutcomesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutcomesBatchRequest'
+        description: Set of scorecard outcomes.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomesBatchResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create outcomes batch
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta. To request access,
+        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+
+        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/scorecard/rules:
+    get:
+      description: Fetch all rules.
+      operationId: ListScorecardRules
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Include related scorecard details in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          example: scorecard
+          type: string
+      - description: Filter the rules on a rule ID.
+        in: query
+        name: filter[rule][id]
+        required: false
+        schema:
+          example: 37d2f990-c885-4972-949b-8b798213a166
+          type: string
+      - description: Filter for enabled rules only.
+        in: query
+        name: filter[rule][enabled]
+        required: false
+        schema:
+          example: true
+          type: boolean
+      - description: Filter for custom rules only.
+        in: query
+        name: filter[rule][custom]
+        required: false
+        schema:
+          example: true
+          type: boolean
+      - description: Filter rules on the rule name.
+        in: query
+        name: filter[rule][name]
+        required: false
+        schema:
+          example: Code Repos Defined
+          type: string
+      - description: Filter rules on the rule description.
+        in: query
+        name: filter[rule][description]
+        required: false
+        schema:
+          example: Identifying
+          type: string
+      - description: Return only specific fields in the response for rule attributes.
+        in: query
+        name: fields[rule]
+        required: false
+        schema:
+          example: name, description
+          type: string
+      - description: Return only specific fields in the included response for scorecard
+          attributes.
+        in: query
+        name: fields[scorecard]
+        required: false
+        schema:
+          example: name
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: List all rules
+      tags:
+      - Service Scorecards
+      x-menu-order: 2
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new rule.
+      operationId: CreateScorecardRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+        description: Rule attributes.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRuleResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create a new rule
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-given:
+        create_scorecard_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"rule\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique }}\",\n      \"enabled\": true,\n      \"owner\":
+              \"Datadog\",\n      \"scorecard_name\": \"OpenAPI Spec Test Best Practices\"\n
+              \   }\n  }\n}"
+          step: there is a valid "create_scorecard_rule" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteScorecardRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in private beta. To request access,
+        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+
+        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/scorecard/rules/{rule_id}:
+    delete:
+      description: Deletes a single rule.
+      operationId: DeleteScorecardRule
+      parameters:
+      - $ref: '#/components/parameters/RuleId'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Delete a rule
+      tags:
+      - Service Scorecards
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta. To request access,
+        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+
+        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -32066,6 +32744,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: 'API to create, update scorecard rules and outcomes.
+
+
+    This feature is currently in BETA. If you have any feedback, contact [Datadog
+    support](https://docs.datadoghq.com/help/).'
+  name: Service Scorecards
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)

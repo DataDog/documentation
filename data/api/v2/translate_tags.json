@@ -147,6 +147,10 @@
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
   },
+  "service-scorecards": {
+    "name": "Service Scorecards",
+    "description": "API to create, update scorecard rules and outcomes.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+  },
   "spans": {
     "name": "Spans",
     "description": "Search and aggregate your spans from your Datadog platform over HTTP."
