@@ -21,7 +21,7 @@ CSM Misconfigurations is not available in the selected site.
 
 CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
-| Framework                                   | Tag               | Rule type      |
+| Framework                                   | Framework Tag     | Rule Type      |
 |---------------------------------------------|-------------------|----------------|
 | [CIS AWS Foundations Benchmark v1.5.0*][2]  | `cis-aws`         | Cloud          |
 | [CIS Azure Foundations Benchmark v1.3.0][3] | `cis-azure`       | Cloud          |
