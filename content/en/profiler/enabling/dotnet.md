@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Azure App Services Windows and Linux - public beta (webapps only, functions are not supported)
+: Azure App Service Windows and Linux - Web Apps only, Function Apps are not supported
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
@@ -53,18 +53,17 @@ Supported languages
 
 The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
 
-|      Feature         | Required `dd-trace-dotnet` version      | Required .NET Runtime versions        |
-|----------------------|-----------------------------------------|---------------------------------------|
-| Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
-| CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
-| Exceptions profiling        | 2.31.0+                       | All supported runtime versions.      |
-| Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
-| Lock Contention profiling        | 2.31.0+                       | .NET 5+      |
-| Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
-| [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
-| [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
-| Timeline            | 2.30.0+                       | All supported runtime versions (except .NET 5+ required for garbage collection details).     |
-| Azure App Services (public beta) | 2.39.0+                       | All supported runtime versions.   |
+| Feature                   | Required `dd-trace-dotnet` version | Required .NET Runtime versions                                                           |
+|---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
+| Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
+| CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
+| Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
+| Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
+| Lock Contention profiling | 2.31.0+                            | .NET 5+                                                                                  |
+| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
+| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
+| [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
+| Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
 ## Installation
 
@@ -128,10 +127,10 @@ To install the .NET Profiler per-application:
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
-{{% tab "Azure App Service (public beta)" %}}
+{{% tab "Azure App Service" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+  <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
 To install the .NET Profiler per-webapp:
@@ -361,7 +360,7 @@ To install the .NET Profiler per-webapp:
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
-{{% tab "Azure App Service (public beta)" %}}
+{{% tab "Azure App Service" %}}
 
 2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
 
