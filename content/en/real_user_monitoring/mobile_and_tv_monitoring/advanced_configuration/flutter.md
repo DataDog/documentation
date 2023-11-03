@@ -361,7 +361,7 @@ You can use this object during initial configuration:
 
 ```dart
 // For default Datadog HTTP tracing:
-final configuration = DdSdkConfiguration(
+final configuration = DatadogConfiguration(
     // configuration
     firstPartyHostsWithTracingHeaders: hostHeaders,
 );
@@ -369,7 +369,7 @@ final configuration = DdSdkConfiguration(
 
 You can then enable tracing as usual.
 
-This information is merged with any hosts set on `DdSdkConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
+This information is merged with any hosts set on `DatadogConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
 
 ## Further reading
 
