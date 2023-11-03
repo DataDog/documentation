@@ -1,5 +1,5 @@
 ---
-title: Set Up the Datadog Archives Destination
+title: Route Amazon S3 Logs in Datadog-rehydratable format
 kind: documentation
 disable_toc: false
 further_reading:
@@ -49,13 +49,13 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
+            "Sid": "DatadogUploadLogArchives",
             "Effect": "Allow",
             "Action": "s3:PutObject",
             "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
         },
         {
-            "Sid": "VisualEditor1",
+            "Sid": "DatadogUploadLogArchives",
             "Effect": "Allow",
             "Action": "s3:ListBucket",
             "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
@@ -175,7 +175,7 @@ You can configure the `datadog_archives` destination using the [configuration fi
 
 ### Configuration file
 
-For manual deployments, the [sample pipelines configuration file][7] for Datadog includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. 
+For manual deployments, the [sample pipelines configuration file][7] for Datadog includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -210,10 +210,18 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 ### Pipeline builder UI
 
 1. Navigate to your [Pipeline][8].
+1. (Optional) Add a remap transform to tag all logs going to `datadog_archives`.   
+  a. Click **Edit** and then **Add More** in the **Add Transforms.  
+  b. Click the **Remap** tile.  
+  c. Enter a descriptive name for the component.  
+  d. In the **Inputs** field, select the source to connect this destination to.  
+  e. Add `.sender = "observability_pipelines_worker"` in the **Source** section.  
+  f. Click **Save**.  
+  g. Navigate back to your pipeline. 
 1. Click **Edit**.
 1. Click **Add More** in the **Add Destination** tile.
 1. Click the **Datadog Archives** tile.
-1. Enter a name for the component.
+1. Enter a descriptive name for the component.
 1. Select the sources or transforms to connect this destination to.
 
 {{< tabs >}}
@@ -224,6 +232,7 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 9. Toggle **AWS S3** to enable those specific configuration options.
 10. In the **Storage Class** field, select the storage class in the dropdown menu.
 11. Set the other configuration options based on your use case.
+12. Click **Save**.
 
 {{% /tab %}}
 {{% tab "Azure Blob" %}}
@@ -233,6 +242,7 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 9. Toggle **Azure Blob** to enable those specific configuration options.
 10. Enter the Azure Blob Storage Account connection string.
 11. Set the other configuration options based on your use case.
+12. Click **Save**.
 
 {{% /tab %}}
 {{% tab "GCP Cloud Storage" %}}
@@ -241,6 +251,7 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 8. Enter `gcp_cloud_storage` in the **Service** field.
 9. Toggle **GCP Cloud Storage** to enable those specific configuration options.
 10. Set the configuration options based on your use case.
+11. Click **Save**.
 
 {{% /tab %}}
 {{< /tabs >}}
