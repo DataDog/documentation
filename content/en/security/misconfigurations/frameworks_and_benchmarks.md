@@ -97,15 +97,6 @@ Create your own compliance framework by adding a custom tag to the compliance ru
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security_monitoring/default_rules/
-[2]: https://www.cisecurity.org/benchmark/amazon_web_services/
-[3]: https://www.cisecurity.org/benchmark/azure
-[4]: https://www.cisecurity.org/benchmark/docker
-[5]: https://www.cisecurity.org/benchmark/kubernetes/
-[6]: https://www.pcisecuritystandards.org/document_library
-[7]: https://www.aicpa.org/interestareas/frc/assuranceadvisoryservices/aicpasoc2report.html
-[8]: https://www.iso.org/isoiec-27001-information-security.html
-[9]: https://www.hhs.gov/hipaa/index.html
-[10]: https://gdpr.eu/
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
 [13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
@@ -117,14 +108,7 @@ Create your own compliance framework by adding a custom tag to the compliance ru
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance/homepage
 [21]: /security/misconfigurations/detection_rules
-[22]: https://www.cisecurity.org/benchmark/google_cloud_computing_platform
-[23]: https://www.cisecurity.org/benchmark/ubuntu_linux
-[24]: https://www.cisecurity.org/benchmark/red_hat_linux
-[25]: https://www.cisecurity.org/benchmark/amazon_linux
 [26]: /security/misconfigurations/custom_rules/#tagging-findings
 [27]: https://app.datadoghq.com/security/compliance
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule
-[30]: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
-[31]: https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final
-[32]: https://www.nist.gov/cyberframework/framework
