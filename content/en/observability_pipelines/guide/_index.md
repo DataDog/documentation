@@ -17,8 +17,5 @@ cascade:
     {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
     {{< nextlink href="/observability_pipelines/guide/control_log_volume_and_size" >}}Control Log Volume and Size{{< /nextlink >}}
     {{< nextlink href="/observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker" >}}Ingest Amazon S3 Logs with the Observability Pipelines Worker{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Configuration component guides:" >}}
-    {{< nextlink href="/observability_pipelines/guide/set_up_datadog_archives_destination" >}}Set Up the Datadog Archives Destination{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/route_logs_to_amazon_s3_in_datadog_rehydratable_format/" >}}Route Logs to Amazon S3 in Datadog-Rehydratable Format{{< /nextlink >}}
 {{< /whatsnext >}}
