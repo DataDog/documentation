@@ -5,7 +5,7 @@ algolia:
   - ID 공급자
   - IdP
 kind: 설명서
-title: SCM을 이용한 사용자 프로비저닝
+title: SCIM을 이용한 사용자 프로비저닝
 ---
 
 ## 개요
