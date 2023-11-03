@@ -10611,6 +10611,75 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Service Scorecards
+    url: /api/latest/service-scorecards/
+    identifier: service-scorecards
+    generated: true
+  - name: Delete a rule
+    url: '#delete-a-rule'
+    identifier: service-scorecards-delete-a-rule
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScorecardRule
+      unstable:
+        - v2
+      order: 3
+  - name: Create a new rule
+    url: '#create-a-new-rule'
+    identifier: service-scorecards-create-a-new-rule
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScorecardRule
+      unstable:
+        - v2
+      order: 1
+  - name: List all rules
+    url: '#list-all-rules'
+    identifier: service-scorecards-list-all-rules
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScorecardRules
+      unstable:
+        - v2
+      order: 2
+  - name: Create outcomes batch
+    url: '#create-outcomes-batch'
+    identifier: service-scorecards-create-outcomes-batch
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScorecardOutcomesBatch
+      unstable:
+        - v2
+      order: 1
+  - name: List all rule outcomes
+    url: '#list-all-rule-outcomes'
+    identifier: service-scorecards-list-all-rule-outcomes
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScorecardOutcomes
+      unstable:
+        - v2
+      order: 2
   - name: Spans
     url: /api/latest/spans/
     identifier: spans

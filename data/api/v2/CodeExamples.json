@@ -792,6 +792,20 @@
       "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
     }
   ],
+  "CreateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
+    }
+  ],
   "AggregateSpans": [
     {
       "group": "spans",
