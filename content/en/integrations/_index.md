@@ -8,10 +8,7 @@ aliases:
     - /integrations/lightstep_incident_response/
 description: Gather data from all of your systems, apps, & services
 cascade:
-- _target:
-    kind: page
-    path: /integrations/**
-  algolia:
+- algolia:
     rank: 60
     category: Documentation
     subcategory: Integrations
