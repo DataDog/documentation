@@ -195,7 +195,8 @@
               - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
               algolia:
                 tags: ["heroku", "heroku buildpack"]
-                rank: 10
+                rank: 1
+                
       - repo_name: puppet-datadog-agent
         contents:
 
