@@ -3,15 +3,17 @@ title: Getting Started with the DevSecOps Bundles
 kind: documentation
 ---
 
-The APM DevSecOps and Infrastructure DevSecOps bundles combine application performance monitoring and infrastructure monitoring with the security capabilities of Application Security Management (ASM) and Cloud Security Management (CSM).
+This guide provides an introduction to the DevSecOps bundles with links to setup instructions to help you install and configure them.
 
-This guide provides an introduction to the bundles with links to setup instructions to help you get started as you install and setup the bundles.
+## APM DevSecOps
 
-## APM DevSecOps Enterprise
+The APM DevSecOps bundles combine application performance monitoring with the [Application Vulnerability Management][5]  capabilities of [Application Security Management (ASM)][6].
+
+### APM DevSecOps Enterprise
 
 APM DevSecOps Enterprise includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], [Continuous Profiler][4], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
 
-### Setup
+#### Setup
 
 To get started with APM DevSecOps Enterprise, [install and configure the Datadog Agent][7] for APM, Universal Service Monitoring, Continuous Profiler, and Data Streams Monitoring.
 
@@ -26,7 +28,7 @@ To get started with APM DevSecOps Enterprise, [install and configure the Datadog
     {{< nextlink href="/tracing/trace_collection/" >}}Application Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Next steps
+#### Next steps
 
 {{< whatsnext desc="Learn more about the features included with APM DevSecOps Enterprise:" >}}
     {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
@@ -36,11 +38,11 @@ To get started with APM DevSecOps Enterprise, [install and configure the Datadog
     {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## APM DevSecOps Pro
+### APM DevSecOps Pro
 
 APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
 
-### Setup
+#### Setup
 
 To get started with APM DevSecOps Pro, [install and configure the Datadog Agent][7] for APM, Universal Service Monitoring, and Data Streams Monitoring.
 
@@ -54,7 +56,7 @@ To get started with APM DevSecOps Pro, [install and configure the Datadog Agent]
     {{< nextlink href="/tracing/trace_collection/" >}}Application Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Next steps
+#### Next steps
 
 {{< whatsnext desc="Learn more about the features included with APM DevSecOps Pro:" >}}
     {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
@@ -63,13 +65,43 @@ To get started with APM DevSecOps Pro, [install and configure the Datadog Agent]
     {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Infrastructure DevSecOps Enterprise
+### APM DevSecOps
+
+APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
+
+#### Setup
+
+To get started with APM DevSecOps Enterprise, [install and configure the Datadog Agent][7] for APM and Universal Service Monitoring.
+
+{{< whatsnext desc="For detailed instructions, see the following docs:" >}}
+    {{< nextlink href="/tracing/trace_collection/" >}}APM{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/setup/" >}}Universal Service Monitoring{{< /nextlink >}}
+    {{< nextlink href="/integrations/" >}}Integrations{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="After you install the Agent, enable ASM for your environment." >}}
+    {{< nextlink href="/tracing/trace_collection/" >}}Application Security Management{{< /nextlink >}}
+{{< /whatsnext >}}
+
+#### Next steps
+
+{{< whatsnext desc="Learn more about the features included with APM DevSecOps:" >}}
+    {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring{{< /nextlink >}}
+    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Infrastructure DevSecOps
+
+The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security Management (CSM)][14].
+
+### Infrastructure DevSecOps Enterprise
 
 Infrastructure DevSecOps Enterprise includes [Containers][8], [Serverless][9], [Live Processes][10], and [CSM Enterprise][11]. It also includes more than [650+ out-of-the-box integrations][13].
 
-### Setup
+#### Setup
 
-To get started with Infrastructure DevSecOps Enterprise, [install and configure the Datadog Agent][7] for Containers, Serverless, and Live Processes.
+To get started with Infrastructure DevSecOps Enterprise, [install and configure the Datadog Agent][7] for Containers, Serverless, and Live Processes. You should also set up the integrations for your services.
 
 {{< whatsnext desc="For detailed instructions, see the following docs:" >}}
     {{< nextlink href="/containers/" >}}Containers{{< /nextlink >}}
@@ -83,7 +115,7 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 
 <div class="alert alert-info"><strong>Note</strong>: The CSM Identity Risks and CSM Vulnerabilities capabilities of CSM Enterprise are in beta. For setup instructions, see <a href="/security/identity_risks/#setup">Cloud Security Management Identity Risks</a> and <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
 
-### Next steps
+#### Next steps
 
 {{< whatsnext desc="Learn more about the features included with Infrastructure DevSecOps Enterprise:" >}}
     {{< nextlink href="/infrastructure/list/" >}}Infrastructure List{{< /nextlink >}}
@@ -97,42 +129,18 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
     {{< nextlink href="/security/cloud_security_management" >}}Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## APM DevSecOps
-
-APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
-
-### Setup
-
-To get started with APM DevSecOps Enterprise, [install and configure the Datadog Agent][7] for APM and Universal Service Monitoring.
-
-{{< whatsnext desc="For detailed instructions, see the following docs:" >}}
-    {{< nextlink href="/tracing/trace_collection/" >}}APM{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/setup/" >}}Universal Service Monitoring{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="After you install the Agent, enable ASM for your environment." >}}
-    {{< nextlink href="/tracing/trace_collection/" >}}Application Security Management{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Next steps
-
-{{< whatsnext desc="Learn more about the features included with APM DevSecOps:" >}}
-    {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring{{< /nextlink >}}
-    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
-{{< /whatsnext >}}
-
-## Infrastructure DevSecOps Pro
+### Infrastructure DevSecOps Pro
 
 Infrastructure DevSecOps Pro includes [Containers][8], [Serverless][9], and [CSM Pro][11]. It also includes more than [650+ out-of-the-box integrations][13].
 
-### Setup
+#### Setup
 
-To get started with Infrastructure DevSecOps Pro, [install and configure the Datadog Agent][7] for Containers and Serverless.
+To get started with Infrastructure DevSecOps Pro, [install and configure the Datadog Agent][7] for Containers and Serverless. You should also set up the integrations for your services.
 
 {{< whatsnext desc="For detailed instructions, see the following docs:" >}}
     {{< nextlink href="/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="/serverless/" >}}Serverless{{< /nextlink >}}
+    {{< nextlink href="/integrations/" >}}Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="After you install the Agent, configure CSM Pro for your environment." >}}
@@ -141,7 +149,7 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 
 <div class="alert alert-info"><strong>Note</strong>: The CSM Vulnerabilities capabilities of CSM Pro are in beta. For setup instructions, see <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
 
-### Next steps
+#### Next steps
 
 {{< whatsnext desc="Learn more about the features included with Infrastructure DevSecOps Pro:" >}}
     {{< nextlink href="/infrastructure/list/" >}}Infrastructure List{{< /nextlink >}}
@@ -164,3 +172,4 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 [10]: /infrastructure/process/
 [11]: /security/cloud_security_management/setup/
 [13]: /integrations/
+[14]: /security/cloud_security_management/
