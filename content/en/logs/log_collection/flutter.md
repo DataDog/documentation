@@ -112,12 +112,12 @@ logger.removeAttribute("user-status")
 
 ## Customizing log output
 
-By default, for debug builds `DatadogLogger`s print all logs to the Flutter console in the format:
+By default, for debug builds, `DatadogLogger`s print all logs to the Flutter console in the format:
 ```
 [{level}] message
 ```
 
-This can be customized by setting a `DatadogLoggerConfiguration.customConsoleLogFunction`. If only want to filter logs below a certain level, you can set this to `simpleConsolePrintForLevel`:
+This can be customized by setting a `DatadogLoggerConfiguration.customConsoleLogFunction`. To filter logs below a certain level, set this to `simpleConsolePrintForLevel`:
 
 ```dart
 final config = DatadogLoggerConfiguration(
@@ -126,7 +126,7 @@ final config = DatadogLoggerConfiguration(
 );
 ```
 
-You can also forward Datadog logs to other log packages, such as [logger][6] by supplying a custom function:
+You can also forward Datadog logs to other log packages, such as [logger][6], by supplying a custom function:
 
 ```dart
 var Logger logger;

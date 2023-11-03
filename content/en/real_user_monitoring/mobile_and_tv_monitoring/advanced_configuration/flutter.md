@@ -182,7 +182,7 @@ void _downloadResourceTapped(String resourceName) {
 }
 ```
 
-When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same in order for the Datadog Flutter SDK to match an action's start with its completion.
+When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same for the Datadog Flutter SDK to match an action's start with its completion.
 
 ### Track custom resources
 
@@ -391,4 +391,4 @@ This information is merged with any hosts set on `DdSdkConfiguration.firstPartyH
 [14]: https://github.com/openzipkin/b3-propagation#single-headers
 [15]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [16]: https://www.w3.org/TR/trace-context/#tracestate-header
-[17]: /real_user_monitoring/flutter/mobile_vitals
+[17]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter
