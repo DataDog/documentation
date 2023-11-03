@@ -1319,6 +1319,11 @@ main:
     identifier: events
     parent: service_management_heading
     weight: 30000
+  - name: Ingest Events
+    url: service_management/events/ingest/
+    identifier: event_ingest
+    parent: events
+    weight: 1
   - name: Explorer
     url: service_management/events/explorer/
     identifier: events_explorer
@@ -1359,6 +1364,11 @@ main:
     identifier: event_explorer_analytics
     parent: events_explorer
     weight: 207
+  - name: Using Events
+    url: service_management/events/usage/
+    identifier: event_usage
+    parent: events
+    weight: 3
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
