@@ -13,7 +13,7 @@ further_reading:
   text: "Troubleshoot faster with improved Datadog Events"
 ---
 
-{{< img src="service_management/events/explorer/navigate.png" alt="How to navigate the Events Explorer" style="width:100%;" >}}
+{{< img src="service_management/events/events-explorer.mp4" alt="Sorting events by attributes and exploring analytics" video=true >}}
 
 Use the Events Explorer to aggregate and view events coming into Datadog. Group or filter events by attribute and graphically represent them with event analytics. Use the query syntax to filter events using Boolean and wildcard operators.
 
