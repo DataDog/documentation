@@ -28,7 +28,7 @@ The Serverless view shows key metrics for your Step Functions in one place to ea
 
 
 ###  Visualize AWS Step Function Traces on a State Machine Map
-When [Step Function tracing is enabled][1], you can use a visual representation of an AWS Step Function execution through a state machine map. Get an at-a-glance-view of whether a successful or failed execution took the expected path through the state machine without having to follow a full flame graph. Drill into any anomalous executions to identify what states were problematic or had a high latency with ease.
+When [Step Function tracing is enabled][1], you can use a visual representation of an AWS Step Function execution through a state machine map. Get an at-a-glance-view of whether a successful or failed execution took the expected path through the state machine. Drill into any anomalous executions to identify what states are problematic or have a high latency.
 
 {{< img src="serverless/step_functions/overview3.png" alt="An AWS Step Function span displayed in a flame graph visualization." style="width:100%;" >}}
 
