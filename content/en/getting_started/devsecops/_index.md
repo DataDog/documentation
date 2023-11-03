@@ -31,11 +31,11 @@ To get started with APM DevSecOps Enterprise, [install and configure the Datadog
 #### Next steps
 
 {{< whatsnext desc="Learn more about the features included with APM DevSecOps Enterprise:" >}}
-    {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring{{< /nextlink >}}
-    {{< nextlink href="/data_streams/" >}}Data Streams Monitoring{{< /nextlink >}}
-    {{< nextlink href="/profiler/" >}}Continuous Profiler{{< /nextlink >}}
-    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
+    {{< nextlink href="/tracing/metrics/" >}}APM Metrics: Learn more about trace application metrics{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring: Gain visibility into your service health metrics{{< /nextlink >}}
+    {{< nextlink href="/data_streams/" >}}Data Streams Monitoring: Understand and manage your pipelines at scale{{< /nextlink >}}
+    {{< nextlink href="/profiler/" >}}Continuous Profiler: Optimize code performance in production{{< /nextlink >}}
+    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management: Detect vulnerabilities in your service's open source dependencies{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### APM DevSecOps Pro
@@ -59,10 +59,10 @@ To get started with APM DevSecOps Pro, [install and configure the Datadog Agent]
 #### Next steps
 
 {{< whatsnext desc="Learn more about the features included with APM DevSecOps Pro:" >}}
-    {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring{{< /nextlink >}}
-    {{< nextlink href="/data_streams/" >}}Data Streams Monitoring{{< /nextlink >}}
-    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
+    {{< nextlink href="/tracing/metrics/" >}}APM Metrics: Learn more about trace application metrics{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring: Gain visibility into your service health metrics{{< /nextlink >}}
+    {{< nextlink href="/data_streams/" >}}Data Streams Monitoring: Understand and manage your pipelines at scale{{< /nextlink >}}
+    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management: Detect vulnerabilities in your service's open source dependencies{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### APM DevSecOps
@@ -86,9 +86,9 @@ To get started with APM DevSecOps Enterprise, [install and configure the Datadog
 #### Next steps
 
 {{< whatsnext desc="Learn more about the features included with APM DevSecOps:" >}}
-    {{< nextlink href="/tracing/metrics/" >}}APM Metrics{{< /nextlink >}}
-    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring{{< /nextlink >}}
-    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management{{< /nextlink >}}
+    {{< nextlink href="/tracing/metrics/" >}}APM Metrics: Learn more about trace application metrics{{< /nextlink >}}
+    {{< nextlink href="/universal_service_monitoring/" >}}Universal Service Monitoring: Gain visibility into your service health metrics{{< /nextlink >}}
+    {{< nextlink href="/security/application_security/vulnerability_management/" >}}Application Vulnerability Management: Detect vulnerabilities in your service's open source dependencies{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Infrastructure DevSecOps
@@ -107,6 +107,7 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
     {{< nextlink href="/containers/" >}}Containers{{< /nextlink >}}
     {{< nextlink href="/serverless/" >}}Serverless{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/?tab=linuxwindows#installation" >}}Live Processes{{< /nextlink >}}
+    {{< nextlink href="/integrations/" >}}Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="After you install the Agent, configure CSM Enterprise for your environment." >}}
@@ -118,15 +119,15 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 #### Next steps
 
 {{< whatsnext desc="Learn more about the features included with Infrastructure DevSecOps Enterprise:" >}}
-    {{< nextlink href="/infrastructure/list/" >}}Infrastructure List{{< /nextlink >}}
-    {{< nextlink href="/metrics/" >}}Metrics{{< /nextlink >}}
-    {{< nextlink href="/dashboards/correlations/" >}}Metric Correlations{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/hostmap/" >}}Host and Container Maps{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/containers/" >}}Live Containers{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process/" >}}Live Processes{{< /nextlink >}}
-    {{< nextlink href="/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="/watchdog/" >}}Watchdog{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management" >}}Cloud Security Management{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/list/" >}}Infrastructure List: View activity on your hosts{{< /nextlink >}}
+    {{< nextlink href="/metrics/" >}}Metrics: Explore and understand your metrics{{< /nextlink >}}
+    {{< nextlink href="/dashboards/correlations/" >}}Metric Correlations: Find potential root causes for an issue by searching for other metrics that exhibit irregular behavior{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/hostmap/" >}}Host and Container Maps: Visualize your hosts and containers{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/containers/" >}}Live Containers: Gain real-time visibility into all containers across your environment{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/" >}}Live Processes: Gain real-time visibility into the process running on your infrastructure{{< /nextlink >}}
+    {{< nextlink href="/serverless/" >}}Serverless: Gain full visibility into all of the managed services that power your serverless applications{{< /nextlink >}}
+    {{< nextlink href="/watchdog/" >}}Watchdog: Automatically detect potential application and infrastructure issues.{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management" >}}Cloud Security Management: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Infrastructure DevSecOps Pro
@@ -152,12 +153,12 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 #### Next steps
 
 {{< whatsnext desc="Learn more about the features included with Infrastructure DevSecOps Pro:" >}}
-    {{< nextlink href="/infrastructure/list/" >}}Infrastructure List{{< /nextlink >}}
-    {{< nextlink href="/metrics/" >}}Metrics{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/hostmap/" >}}Host and Container Maps{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/containers/" >}}Live Containers{{< /nextlink >}}
-    {{< nextlink href="/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management" >}}Cloud Security Management{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/list/" >}}Infrastructure List: View activity on your hosts{{< /nextlink >}}
+    {{< nextlink href="/metrics/" >}}Metrics: Explore and understand your metrics{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/hostmap/" >}}Host and Container Maps: Visualize your hosts and containers{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/containers/" >}}Live Containers: Gain real-time visibility into all containers across your environment{{< /nextlink >}}
+    {{< nextlink href="/serverless/" >}}Serverless: Gain full visibility into all of the managed services that power your serverless applications{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management" >}}Cloud Security Management: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /tracing/
