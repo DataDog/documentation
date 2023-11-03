@@ -1,7 +1,7 @@
 ---
 title: Connect Database Monitoring and Traces
 kind: documentation
-aliases:
+aliases: 
 - /database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
   - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
@@ -53,9 +53,6 @@ SQL Server does not support `full` propagation mode due to statement caching beh
 |                                          | [mysql2][7]          |           | {{< X >}} |                                        |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
 |                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
-|                                          | [mysql-connector][26]|           | {{< X >}} |                                        |
-|                                          | [pymysql][27]        |           | {{< X >}} |                                        |
-|                                          | [aiomysql][28]       |           | {{< X >}} |                                        |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                      |           |           |                                        |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                                        |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                                        |
@@ -429,6 +426,3 @@ View historical performance of similar queries to those executed in your trace, 
 [23]: https://github.com/DataDog/dd-trace-java
 [24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
-[26]: https://pypi.org/project/mysql-connector-python/
-[27]: https://pypi.org/project/pymysql/
-[28]: https://pypi.org/project/aiomysql/
