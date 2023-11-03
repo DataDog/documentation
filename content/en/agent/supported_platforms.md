@@ -15,8 +15,6 @@ The Datadog Agent is supported on most popular operating systems and platforms. 
 
 ## 64-BIT X86
 
-Datadog Agent version 6 and 7 support the following Linux operating systems on 64-BIT X86:
-
 <table>
   <thead>
     <th>Operating system</th>
@@ -143,8 +141,6 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 ## 64-BIT ARM V8
 
-Datadog Agent version 6 and 7 support the following Linux operating systems on 64-BIT ARM V8:
-
 <table>
   <thead>
     <th>Operating system</th>
@@ -153,43 +149,38 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <th>Agent 7 versions</th>
   </thead>
   <tr>
-    <th><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
+    <th rowspan=3><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
     <td>2</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
+    <td>>= 6.16.0</td>
+    <td>>= 7.16.0</td>
+  </tr>
+  <tr>
+    <td>2022</td>
+    <td>>= 6.40.0</td>
+    <td>>= 7.40.0</td>
+  </tr>
+  <tr>
+    <td>2023</td>
+    <td>>= 6.40.0</td>
+    <td>>= 7.40.0</td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
     <td>>= 9.0 (stretch)</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
+    <td>>= 6.16.0</td>
+    <td>>= 7.16.0</td>
   </tr>
   <tr>
-    <th rowspan='4'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
+    <th><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
     <td>>= 16.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 18.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 20.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 22.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
+    <td>>= 6.16.0</td>
+    <td>>= 7.16.0</td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
     <td>>= 8.0</td>
-    <td>>= 6.33.0</td>
-    <td>>= 7.33.0</td>
+    <td>>= 6.16.0</td>
+    <td>>= 7.16.0</td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/redhat/'>AlmaLinux /<br>Rocky</a></th>
@@ -200,12 +191,10 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   <tr>
     <th><a href='/agent/basic_agent_usage/fedora/'>Fedora</a></th>
     <td>>= 27</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
+    <td>>= 6.16.0</td>
+    <td>>= 7.16.0</td>
   </tr>
 </table>
-
-A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
 [2]: /agent/basic_agent_usage/deb/
@@ -228,18 +217,18 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
   </thead>
   <tr>
     <th rowspan=2><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
-    <td>>= 2012</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-    <td></td>
-  </tr>
-  <tr>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1 </td>
     <td><= 7.45.1</td>
     <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
+  </tr>
+  <tr>
+    <td>>= 2012</td>
+    <td></td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td></td>
   </tr>
   <tr>
     <td rowspan=4>Windows</td>
@@ -281,9 +270,9 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 | macOS version | Agent 5 | Agent 6 | Agent 7 |
 |---------------|---------|---------|---------|
-| >= 10.10 | <= 5.11.3 |||
-| >= 10.12 || <= 6.34.0 | <= 7.34.0 |
-| >= 10.13 || 6.35.0 - 6.3.2 | <= 7.38.0 |
+| 10.10 - 10.11 | <= 5.11.3 |||
+| 10.12 || <= 6.34.0 | <= 7.34.0 |
+| 10.13 || <= 6.38.2 | <= 7.38.2 |
 | >= 10.14 ||           | >= 7.39.0 |
 
 ## Apple ARM64
@@ -291,8 +280,6 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 | macOS version  | Agent 7 |
 |----------------|---------|
 | >= 11.0 | >= 7.39.0 |
-| >= 12.0 | >= 7.39.0 |
-| >= 13.0 | >= 7.39.0 |
 
 {{% /tab %}}
 
@@ -302,9 +289,9 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
-| 5 | >= 1.12 | 1.3 - 1.8 ||
-| 6 | >= 1.12 | >= 1.3| All versions |
-| 7 | >= 1.12 | >= 1.3| All versions |
+| 5 | >= 1.14 | 1.3 - 1.8 ||
+| 6 | >= 1.14 | >= 1.3| All versions |
+| 7 | >= 1.14 | >= 1.3| All versions |
 
 
 ## 64-BIT ARM V8 support
@@ -313,7 +300,7 @@ Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
 | Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
 |-------------|--------------------|-----------------------|--------------------|
-| [Docker][5] | >= 1.12      | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Docker][5] | >= 1.14      | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [Kubernetes][6] | >= 1.3   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
 
