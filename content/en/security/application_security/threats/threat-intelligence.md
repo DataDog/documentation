@@ -12,26 +12,24 @@ further_reading:
 
 ## Overview
 
-Datadog provides built-in [threat intelligence][1] datasets for some services such as Application Security Management (ASM) and Cloud SIEM (Security Information and Event Management).
+Datadog provides built-in [threat intelligence][1] datasets for Application Security Management (ASM) and Cloud SIEM (Security Information and Event Management). This provides additional evidence to take action when security activity is observed.
 
-The Threat Intelligence data typically contains a source and a category. Different sources categorize IP addresses as known attackers, or as originating from a residential proxy, VPN, or so on.
+Datadog curates threat intelligence into a standardized list of categories and intents. Intents include _benign_, _suspicious_, and _malicious_. Categories of threat intelligence include benign detections such as _corp\_vpn_ and malicious categories like _malware_. Upstream threat intelligence information is passed through for all threat intelligence sources, with limits based on threat intelligence payload size.
 
-In ASM, the Threat Intelligence data is used in two ways:
+Datadog recommends the following methods for consuming threat intelligence:
+1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing](https://app.datadoghq.com/security/configuration/asm/rules/view/wnp-zlu-woa) rule and modify it to meet their needs.
+2. Using threat intelligence as a indicator of reputation with security activity.
 
-- If a high fidelity threat intelligence source categorizes a request as being made by a known attacker, this request is surfaced in ASM *even in the absence of an actual attack*. This can serve as an early warning sign that a known attacker is looking at your services.
-- If a request contains any attack, it is surfaced in ASM. Threat intelligence here can provide additional context when investigating traces.
-
-If you use ASM, threat intelligence data is also available in APM traces. 
+Datadog recommends _against_ the following:
+1. Blocking threat intelligence traces without corresponding security activity. IP addresses may have many hosts behind them. Detection of malware or a residential proxy means that the associated activity has been observed by a host behind that IP. It does not guarantee that the host running the malware or proxy is the same host communicating with your services.
+2. Blocking on all threat intelligence categories, as this is inclusive of benign traffic from corporate VPNs and will block non-malicious traffic.
 
 ## Which sources are surfaced in ASM
 
-Threat intelligence matches from any of the following sources are surfaced in ASM even in the absence of attacks:
-
-- minerstat
-- abuse.ch
-- FireHOL
-- spur (only the `malware` category)
-- Tor Exit Nodes
+- [abuse.ch](https://threatfox-api.abuse.ch)
+- [FireHOL](https://iplists.firehol.org/)
+- [spur](https://spur.us/) (only the `malware` category)
+- [Tor Exit Nodes](https://www.dan.me.uk/torlist/?exit)
 
 To search for all traces flagged by a specific source, use the following query with the source name:
 
