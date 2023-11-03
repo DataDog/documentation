@@ -186,7 +186,7 @@ Update your iOS pods:
 (cd ios && bundle exec pod update)
 ```
 
-If you use a React Native version strictly over 0.67, make sure to use Java version 17. If you use React Native version equal or below ot 0.67, make sure to use Java version 11. To know which version of Java you are using, run in a terminal:
+If you use a React Native version strictly over `0.67`, use Java version 17. If you use React Native version equal or below ot `0.67`, use Java version 11. To check your Java version, run the following in a terminal:
 
 ```bash
 java --version
@@ -194,7 +194,7 @@ java --version
 
 ### For React Native < 0.73
 
-In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
 
 ```groovy
 buildscript {
@@ -207,7 +207,7 @@ buildscript {
 
 ### For React Native < 0.68
 
-In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
 
 ```groovy
 buildscript {
@@ -228,7 +228,7 @@ android.jetifier.ignorelist=dd-sdk-android-core
 
 #### Android build fails with `Unable to make field private final java.lang.String java.io.File.path accessible`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 FAILURE: Build failed with an exception.
@@ -238,11 +238,11 @@ Execution failed for task ':app:processReleaseMainManifest'.
 > Unable to make field private final java.lang.String java.io.File.path accessible: module java.base does not "opens java.io" to unnamed module @1bbf7f0e
 ```
 
-You are using Java 17 while it's not compatible for your React Native version. Switch to Java 11 to solve the issue.
+You are using Java 17, which is not compatible with your React Native version. Switch to Java 11 to solve the issue.
 
 #### Android build fails with `Unsupported class file major version 61`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 FAILURE: Build failed with an exception.
@@ -263,7 +263,7 @@ android.jetifier.ignorelist=dd-sdk-android-core
 
 #### Android build fails with `Duplicate class kotlin.collections.jdk8.*`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 FAILURE: Build failed with an exception.
@@ -275,7 +275,7 @@ Execution failed for task ':app:checkReleaseDuplicateClasses'.
      Duplicate class kotlin.internal.jdk7.JDK7PlatformImplementations found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk7-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20)
 ```
 
-You need to set a kotlin version for your project to avoid clashes among kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
+You need to set a Kotlin version for your project to avoid clashes among Kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
 
 ```groovy
 buildscript {
@@ -714,7 +714,7 @@ For instructions on setting up Mobile Session Replay, see [Mobile Session Replay
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-No change in the SDK initialization.
+No change in the SDK initialization is needed.
 
 {{% /tab %}}
 {{< /tabs >}}

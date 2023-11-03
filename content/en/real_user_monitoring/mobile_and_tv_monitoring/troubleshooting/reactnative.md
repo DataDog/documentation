@@ -172,11 +172,11 @@ You can make the following change to fix it:
 
 If you run into an [issue where your React Native project displays a stream of error messages and significantly raises your CPU usage][5], try creating a new React Native project.
 
-## Android build failures with SDK version 2.*
+## Android build failures with SDK version `2.*`
 
 ### `Unable to make field private final java.lang.String java.io.File.path accessible`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 FAILURE: Build failed with an exception.
@@ -186,11 +186,11 @@ Execution failed for task ':app:processReleaseMainManifest'.
 > Unable to make field private final java.lang.String java.io.File.path accessible: module java.base does not "opens java.io" to unnamed module @1bbf7f0e
 ```
 
-You are using Java 17 while it's not compatible for your React Native version. Switch to Java 11 to solve the issue.
+You are using Java 17, which is not compatible for your React Native version. Switch to Java 11 to solve the issue.
 
 ### `java.lang.UnsupportedClassVersionError`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 java.lang.UnsupportedClassVersionError: com/datadog/android/lint/DatadogIssueRegistry has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 55.0
@@ -200,7 +200,7 @@ You are using a version of Java that is too old. Switch to Java 17 to solve the 
 
 ### `Unsupported class file major version 61`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 FAILURE: Build failed with an exception.
@@ -221,7 +221,7 @@ android.jetifier.ignorelist=dd-sdk-android-core
 
 ### `Duplicate class kotlin.collections.jdk8.*`
 
-If your android build fails with an error like:
+If your Android build fails with an error like:
 
 ```
 FAILURE: Build failed with an exception.
@@ -233,7 +233,7 @@ Execution failed for task ':app:checkReleaseDuplicateClasses'.
      Duplicate class kotlin.internal.jdk7.JDK7PlatformImplementations found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk7-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20)
 ```
 
-You need to set a kotlin version for your project to avoid clashes among kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
+You need to set a Kotlin version for your project to avoid clashes among Kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
 
 ```groovy
 buildscript {
