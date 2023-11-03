@@ -9,7 +9,8 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
-    path: /integrations/*.md
+    kind: page
+    path: /integrations/**
   algolia:
     rank: 60
     category: Documentation
