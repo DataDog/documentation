@@ -35,4 +35,4 @@ You can add the pipeline fingerprint directly to the service metadata. You can f
 [4]: /continuous_integration/
 [5]: /tracing/service_catalog/service_metadata_structure
 [6]: https://app.datadoghq.com/ci/pipeline
-[7]: /tracing/service_catalog/service_definition_api/#further-reading
+[7]: /tracing/service_catalog/adding_metadata/#metadata-structure-and-supported-versions
