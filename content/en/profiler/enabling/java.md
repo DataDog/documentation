@@ -210,7 +210,7 @@ The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoi
 {{% tab "JFR" %}}
 The JFR based allocation profiling engine is enabled by default since JDK 16.
 The reason fora not enabling it by default for JDK 8 and 11 is that an allocation intensive
-application can create a very large number of the related JFR events.
+application can lead to high overhead and large recording sizes.
 If you still want to enable it, you can do it with:
 
 ```
