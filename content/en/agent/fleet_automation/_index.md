@@ -58,11 +58,11 @@ To send a remote flare:
 1. Ensure **Debug mode** is enabled. This option allows Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous setting after the flare is sent.
 1. Click **Send Ticket**.
 
-## Controlling access to Fleet Automation
+## Control access to Fleet Automation
 
 Fleet Automation is available to all users in a Datadog organization. You can control access to specific functionality:
 
-| :Permission: | :Description: |
+| Permission | Description |
 |--------------|---------------|
 | `API keys read`| Restricts which users can view and search agents by API key. |
 | `Agent flare collection` | Restricts which users can remotely send flares. `Agent flare collection` is derived from the `Write Dashboards` permission. Existing users that are able to write dashboards are able to send flares by default. |
