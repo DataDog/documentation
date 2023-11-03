@@ -26,15 +26,27 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <th>Agent 7 versions</th>
   </thead>
   <tr>
-    <th><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
+    <th rowspan='3'><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
     <td>2</td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
+    <td>2022</td>
+    <td></td>
+    <td>>= 6.40.0</td>
+    <td>>= 7.40.0</td>
+  </tr>
+  <tr>
+    <td>2023</td>
+    <td></td>
+    <td>>= 6.40.0</td>
+    <td>>= 7.40.0</td>
+  </tr>
+  <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
-    <td>>= 7.0 (wheezy)</td>
+    <td>7.0 (wheezy)</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.35.0</td>
     <td><= 7.35.0</td>
@@ -47,7 +59,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
   <tr>
     <th rowspan='2'>Debian (SysVinit)</th>
-    <td>>= 7.0 (wheezy)</td>
+    <td>7.0 (wheezy)</td>
     <td></td>
     <td>6.6.0 - 6.36.0</td>
     <td><= 7.35.0</td>
@@ -59,7 +71,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <td>>= 7.36.0</td>
   </tr>
   <tr>
-    <th rowspan='6'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
+    <th rowspan='2'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
     <td>>= 12.04</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
@@ -67,30 +79,6 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   </tr>
   <tr>
     <td>>= 14.05</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 16.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 18.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 20.04</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-  </tr>
-  <tr>
-    <td>>= 22.04</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -125,8 +113,8 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   <tr>
     <td>>= 12.0</td>
     <td></td>
-    <td>>= 6.33.0</td>
-    <td>>= 7.33.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th>SUSE Enterprise Linux (SysVinit)</th>
@@ -139,8 +127,8 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
     <th><a href='/agent/basic_agent_usage/suse/'>OpenSUSE (systemd)</a></th>
     <td>>= 15.0</td>
     <td></td>
-    <td>>= 6.33.0</td>
-    <td>>= 7.33.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/fedora/'>Fedora</a></th>
@@ -167,34 +155,34 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   <tr>
     <th><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
     <td>2</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
     <td>>= 9.0 (stretch)</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th rowspan='4'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
     <td>>= 16.04</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 18.04</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 20.04</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <td>>= 22.04</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
@@ -212,7 +200,7 @@ Datadog Agent version 6 and 7 support the following Linux operating systems on 6
   <tr>
     <th><a href='/agent/basic_agent_usage/fedora/'>Fedora</a></th>
     <td>>= 27</td>
-    <td><i class='icon-check-bold'></td>
+    <td></td>
     <td><i class='icon-check-bold'></td>
   </tr>
 </table>
