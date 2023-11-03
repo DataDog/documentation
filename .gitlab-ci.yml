@@ -37,25 +37,6 @@ variables:
 
 
 # ================== copy scripts =============== #
-before_script:
-  - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
-  - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
-  - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
-  - chmod +x /usr/local/bin/*.py # make python scripts executable by the runner
-  - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
-  - mkdir -p logs
-  # set common env variables for this shell
-  - export GITHUB_TOKEN=$(get_secret 'github_token')
-  - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
-  - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
-  - export BRANCH=${CI_COMMIT_REF_NAME}
-  - export SLACK_URL=$(get_secret 'slack_url')
-  - export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
-  - export IA_SUBDOMAIN=$(in-isolation get_ia_subdomain)
-  - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
-  - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
-  - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
-
 
 # set policy for the common case
 # hugo cache is used only in the build job so lets pull-push
@@ -117,9 +98,55 @@ before_script:
   rules:
     - if: $CI_COMMIT_REF_NAME == "master" && $CI_PIPELINE_SOURCE == "schedule"
       when: on_success
+
+.sparse_before_script: &sparse_before_script |
+  [ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;  # load scripts
+  [ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh
+  export GITHUB_TOKEN=$(get_secret 'github_token')
+  export SLACK_URL=$(get_secret 'slack_url')
+  export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
+  export IA_SUBDOMAIN=$(in-isolation get_ia_subdomain)
+  git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
+  export job_start=$(date +%s)
+
+.sparse_clone: &sparse_clone |
+  rm -rf ./sparse-documentation
+  git clone --branch $CI_COMMIT_REF_NAME --depth 200 --filter=blob:none --no-checkout https://github.com/DataDog/documentation.git sparse-documentation
+  cd sparse-documentation
+  git sparse-checkout init --cone && git sparse-checkout set assets config content data i18n layouts local snippets static .yarn .github
+  echo '!/static/img/' >> .git/info/sparse-checkout
+  git checkout $CI_COMMIT_REF_NAME
+  git fetch origin master:refs/remotes/origin/master --no-tags
+  git diff origin/master...$CI_COMMIT_REF_NAME --minimal --name-status | { grep "^M\|A\|R\|C" || true; } | rev | cut -f1 - | rev | { grep "static/" || true; } >> .git/info/sparse-checkout
+  cat .git/info/sparse-checkout
+  git checkout $CI_COMMIT_REF_NAME
+
+# Common script is our version of gitlabs before_script
+# We do this ourselves because we are cloning manually with sparse clone
+.common_script: &common_script
+  - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
+  - "[ -d local/etc ] && find local/etc/ -type f -exec cp {} /etc \\;"  # load configs
+  - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers so they are available in the container
+  - chmod +x /usr/local/bin/*.py # make python scripts executable by the runner
+  - "[ -f /etc/profile ] && source /etc/profile" # for golang on path
+  - mkdir -p logs
+  # set common env variables for this shell
+  - export GITHUB_TOKEN=$(get_secret 'github_token')
+  - export DATADOG_API_KEY=$(get_secret 'dd-api-key')
+  - export DATADOG_APP_KEY=$(get_secret 'dd-app-key')
+  - export BRANCH=${CI_COMMIT_REF_NAME}
+  - export SLACK_URL=$(get_secret 'slack_url')
+  - export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
+  - export IA_SUBDOMAIN=$(in-isolation get_ia_subdomain)
+  - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
+  - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
+  - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
+
 # ================== templates ================== #
 .base_template: &base_template
   image: registry.ddbuild.io/ci/websites/webops-site-build:latest
+  before_script:
+    - *common_script
   tags:
     - "arch:amd64"
   rules:
@@ -127,7 +154,6 @@ before_script:
       when: never
     - if: $CI_COMMIT_BRANCH != null # Variable doesnt exists on merge request pipelines or tag pipelines.
       when: on_success
-
 
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
@@ -140,13 +166,18 @@ build_preview:
     - *yarn_cache_pull_push
     - *pip_cache
   environment: "preview"
+  before_script:
+    - *sparse_before_script
   variables:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
     MESSAGE: ":gift_heart: Your preview site is available! Now running tests..."
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
+    GIT_STRATEGY: none
   script:
+    - *sparse_clone
+    - *common_script
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
     - touch preview_error.log # Create log file for errors
@@ -163,6 +194,8 @@ build_preview:
     # remove static images so we can skip from artifact passed in gitlab
     - remove_static_from_repo
     - notify_slack.py  "Your branch ${CI_COMMIT_REF_NAME} is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." --status="#31b834" --previewSite="true"
+    # copy artifacts back to root to make it easier to pass to subsequent jobs using existing logic
+    - cp -r {$ARTIFACT_RESOURCE,integrations_data,.github,.vale.ini,.htmltest.yml,logs,$PREVIEW_ERROR_LOG} $CI_PROJECT_DIR
     - ci_pass_step "${CI_PROJECT_NAME}-${CI_JOB_NAME}" # run at completion of job, if job fails at any point prior this won't run
   artifacts:
     when: always
