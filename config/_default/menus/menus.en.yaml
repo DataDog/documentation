@@ -317,148 +317,153 @@ main:
     parent: agent
     identifier: agent_iot
     weight: 5
+  - name: Supported Platforms
+    url: agent/supported_platforms/
+    parent: agent
+    identifier: agent_supported_platforms
+    weight: 6
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 6
+    weight: 7
   - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 601
+    weight: 701
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 602
+    weight: 702
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 603
+    weight: 703
   - name: Configuration
     url: agent/configuration
     parent: agent
     identifier: agent_configuration
-    weight: 7
+    weight: 8
   - name: Commands
     url: agent/configuration/agent-commands/
     parent: agent_configuration
-    weight: 701
+    weight: 801
   - name: Configuration Files
     url: agent/configuration/agent-configuration-files/
     parent: agent_configuration
-    weight: 702
+    weight: 802
   - name: Log Files
     url: agent/configuration/agent-log-files/
     parent: agent_configuration
-    weight: 703
+    weight: 803
   - name: Status Page
     url: agent/configuration/agent-status-page/
     parent: agent_configuration
-    weight: 704
+    weight: 804
   - name: Network Traffic
     url: agent/configuration/network/
     parent: agent_configuration
-    weight: 705
+    weight: 805
   - name: Proxy Configuration
     url: agent/configuration/proxy/
     parent: agent_configuration
-    weight: 706
+    weight: 806
   - name: FIPS Compliance
     url: agent/configuration/agent-fips-proxy/
     parent: agent_configuration
-    weight: 707
+    weight: 807
   - name: Dual Shipping
     url: agent/configuration/dual-shipping/
     parent: agent_configuration
-    weight: 708
+    weight: 808
   - name: Secrets Management
     url: agent/configuration/secrets-management/
     parent: agent_configuration
-    weight: 709
+    weight: 809
   - name: Remote Configuration
     url: agent/remote_config
     parent: agent
-    weight: 8
+    weight: 9
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 9
+    weight: 10
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 901
+    weight: 1001
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 902
+    weight: 1002
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 903
+    weight: 1003
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 10
+    weight: 11
     identifier: agent_troubleshooting
   - name: Container Hostname Detection
     url: agent/troubleshooting/hostname_containers/
     parent: agent_troubleshooting
-    weight: 1001
+    weight: 1101
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1002
+    weight: 1102
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1003
+    weight: 1103
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1004
+    weight: 1104
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1005
+    weight: 1105
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1006
+    weight: 1106
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1007
+    weight: 1107
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1008
+    weight: 1108
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1009
+    weight: 1109
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1010
+    weight: 1110
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1011
+    weight: 1111
     parent: agent_troubleshooting
   - name: High CPU or Memory Consumption
     url: agent/troubleshooting/high_memory_usage/
-    weight: 1012
+    weight: 1112
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 11
+    weight: 12
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 12
+    weight: 13
   - name: Containers
     url: containers/
     identifier: containers
