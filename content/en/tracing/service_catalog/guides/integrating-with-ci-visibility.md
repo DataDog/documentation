@@ -10,9 +10,9 @@ further_reading:
 In the Delivery lens, you can see CI pipeline and static analysis results associated to your services.
 
 By default, your service is associated to [CI pipeline(s)][4] via repository URL. 
-You can edit the pipelines associated with each service by modifying the ci-pipeline-fingerprints field in your [service metadata][5].
+You can edit the pipelines associated with each service by modifying the `ci-pipeline-fingerprints` field in your [service metadata][5].
 
-To add or remove a pipeline associated to your service, first click on Edit Metadata in your service page and go to Software Delivery. Please note that this is only available for [Service Catalog schema v2.2][7]
+To add or remove a pipeline associated to your service, first click on `Edit Metadata` in your service page and go to Software Delivery. Please note that this is only available for [Service Catalog schema v2.2][7].
 
 {{< img src="tracing/service_catalog/service_catalog_delivery_lens.png" alt="Edit add pipeline in the UI" >}}
 
