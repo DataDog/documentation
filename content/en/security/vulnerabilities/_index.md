@@ -36,12 +36,6 @@ View additional details about any vulnerability by clicking the container image 
 
 {{< img src="security/vulnerabilities/container_vulnerability.png" alt="Container Images overview page highlighting the vulnerabilities tab" width="100%">}}
 
-{{< img src="security/infrastructure_vulnerabilities/container_images_tab.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
-
-View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab:
-
-{{< img src="security/infrastructure_vulnerabilities/container_vulnerability.png" alt="Container Images overview page highlighting the vulnerabilities tab" width="100%">}}
-
 ## Identify impacted infrastructure
 
 - Click any vulnerability to see more information. 
@@ -56,9 +50,6 @@ This opens the CSM [Vulnerabilities][1] page which includes information about:
 
 
 {{< img src="security/vulnerabilities/vulnerabilities_side_panel.png" alt="CSM Vulnerabilities side panel showing details of a vulnerability" width="100%">}}
-=======
-{{< img src="security/infrastructure_vulnerabilities/vulnerabilities_side_panel.png" alt="CSM Vulnerabilities side panel showing details of a vulnerability" width="100%">}}
-
 
 ## Review and remediate
 
@@ -66,8 +57,6 @@ View a consolidated list of vulnerabilities on the [Vulnerabilities][1] page in 
 
 
 {{< img src="security/vulnerabilities/vulnerabilities_page.png" alt="A list of high severity vulnerabilities on the CSM Vulnerabilities page" width="100%">}}
-
-{{< img src="security/infrastructure_vulnerabilities/vulnerabilities_page.png" alt="A list of high severity vulnerabilities on the CSM Vulnerabilities page" width="100%">}}
 
 
 [1]: https://app.datadoghq.com/security/infra-vulnerability
