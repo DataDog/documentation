@@ -35,16 +35,26 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 ### Creating custom rules
 
 {{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Custom Scorecard rules are in private beta. Join the beta and get detailed API instructions by requesting access.
+Custom Scorecard rules are in private beta. Join the beta by requesting access.
 {{< /callout >}}
 
-To add custom rules to your Scorecards dashboard using the Scorecards API: 
+To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
 2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
 3. View an overview of outcomes in the Scorecards dashboard.
 
 After initial setup, rules can also be enabled or disabled through the API. 
+
+
+To add custom rules to your Scorecards dashboard using the Scorecards UI: 
+
+1. Click **Create Rule** on the Scorecards page.
+2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
+3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the Scorecards API `/scorecard/outcomes/batch` endpoint.
+4. View an overview of outcomes in the Scorecards dashboard.
+
+{{< img src="/tracing/service_catalog/scorecard-create-rule-ui.png" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
 
 ## How services are evaluated
 
@@ -146,3 +156,4 @@ To edit or delete a Workflow, click **Manage Reports** on the Scorecards page an
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://app.datadoghq.com/services/scorecard
 [9]: /service_management/workflows/
+[10]: /api/latest/service-scorecards/
