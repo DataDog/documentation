@@ -119,23 +119,19 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
    ```dart
    // Determine the user's consent to be tracked
    final trackingConsent = ...
-   final configuration = DdSdkConfiguration(
+   final configuration = DatadogConfiguration(
      clientToken: '<CLIENT_TOKEN>',
      env: '<ENV_NAME>',
      site: DatadogSite.us1,
-     trackingConsent: trackingConsent,
      nativeCrashReportEnabled: true,
-     loggingConfiguration: LoggingConfiguration(
-       sendNetworkInfo: true,
-       printLogsToConsole: true,
-     ),
-     rumConfiguration: RumConfiguration(
+     loggingConfiguration: DatadogLoggingConfiguration(),
+     rumConfiguration: DatadogRumConfiguration(
        applicationId: '<RUM_APPLICATION_ID>',
      )
    );
    ```
 
-For more information on available configuration options, see the [DdSdkConfiguration object documentation][3].
+For more information on available configuration options, see the [DatadogConfiguration object documentation][3].
 
 To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog Flutter Plugin.
 
@@ -151,7 +147,7 @@ You can initialize RUM using one of two methods in your `main.dart` file.
 1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][4].
 
    ```dart
-   await DatadogSdk.runApp(configuration, () async {
+   await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
      runApp(const MyApp());
    })
    ```
@@ -159,23 +155,23 @@ You can initialize RUM using one of two methods in your `main.dart` file.
 2. Alternatively, manually set up [Error Tracking][4] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
-   runZonedGuarded(() async {
-     WidgetsFlutterBinding.ensureInitialized();
-     final originalOnError = FlutterError.onError;
-     FlutterError.onError = (details) {
-       FlutterError.presentError(details);
-       DatadogSdk.instance.rum?.handleFlutterError(details);
-       originalOnError?.call(details);
-     };
-     await DatadogSdk.instance.initialize(configuration);
-     runApp(const MyApp());
-   }, (e, s) {
+   WidgetsFlutterBinding.ensureInitialized();
+   final originalOnError = FlutterError.onError;
+   FlutterError.onError = (details) {
+     DatadogSdk.instance.rum?.handleFlutterError(details);
+     originalOnError?.call(details);
+   };
+   final platformOriginalOnError = PlatformDispatcher.instance.onError;
+   PlatformDispatcher.instance.onError = (e, st) {
      DatadogSdk.instance.rum?.addErrorInfo(
        e.toString(),
        RumErrorSource.source,
-       stackTrace: s,
+       stackTrace: st,
      );
-   });
+     return platformOriginalOnError?.call(e, st) ?? false;
+   };
+   await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
+   runApp(const MyApp());
    ```
 
 ### Sample RUM sessions
@@ -185,9 +181,9 @@ To control the data your application sends to Datadog RUM, you can specify a sam
 For example, to keep only 50% of sessions, use:
 
 ```dart
-final config = DdSdkConfiguration(
+final config = DatadogConfiguration(
     // other configuration...
-    rumConfiguration: RumConfiguration(
+    rumConfiguration: DatadogRumConfiguration(
         applicationId: '<YOUR_APPLICATION_ID>',
         sessionSamplingRate: 50.0,
     ),
@@ -351,7 +347,7 @@ Container(
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /account_management/api-app-keys/#client-tokens
-[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [4]: /real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
