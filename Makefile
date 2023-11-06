@@ -100,7 +100,7 @@ source-dd-source:
 # All the requirements for a full build
 dependencies:
 	@make clean hugpython
-	@make placeholders derefs
+	@make all-examples data/permissions.json source-dd-source update_pre_build node_modules placeholders derefs
 
 # make directories
 data/workflows/:
