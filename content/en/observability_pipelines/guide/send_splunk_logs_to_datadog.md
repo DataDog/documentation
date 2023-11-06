@@ -69,7 +69,27 @@ This guide walks you through how you can dual ship Splunk Universal/Heavy Forwar
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect Splunk forwarders to the Worker
+## Connect Splunk to the Worker
+
+OP Worker v1.6 and later can receive Splunk logs using Splunk's Heavy/Universal forwarder and Splunk HEC collectors. OP Worker v1.6 and older only supports Splunk HEC collectors.
+
+### Connect Splunk Heavy/Universal Forwarders to the Worker
+
+Update your Splunk Heavy/Universal Forwarders to point to the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker. To point your forwarders at the Worker, add the following configuration to the forwarder's `etc/system/local/outputs.conf`:
+
+```
+[tcpout]
+compressed=false
+sendCookedData=false
+defaultGroup=opw
+
+[tcpout:opw]
+server=<URL>:8099
+```
+
+For Terraform installs, the `lb-dns` output provides the necessary value. 
+
+### Connect Splunk HEC collectors to the Worker
 
 Configure your existing Splunk collectors to send logs to the Worker.
 
