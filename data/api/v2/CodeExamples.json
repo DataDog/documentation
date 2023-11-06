@@ -1,4 +1,11 @@
 {
+  "CreateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Create a retention filter returns \"OK\" response"
+    }
+  ],
   "ReorderApmRetentionFilters": [
     {
       "group": "apm_retention_filters",
@@ -667,11 +674,11 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "UpdateFinding": [
+  "MuteFindings": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Mute or unmute a finding returns \"OK\" response"
+      "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -783,6 +790,20 @@
       "group": "service_definition",
       "suffix": "_2621709423",
       "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
   "AggregateSpans": [

@@ -44,22 +44,6 @@ Intelligent Test Runner is only supported in the following versions and testing 
 
 Prior to setting up Intelligent Test Runner, set up [Test Visibility for JavaScript and TypeScript][3]. If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 
-### Configure the test runner environment
-
-{{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-{{% ci-itr-agent %}}
-
-{{% /tab %}}
-{{% tab "Cloud CI provider (Agentless)" %}}
-
-{{% ci-itr-agentless %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 {{% ci-itr-activation-instructions %}}
 
 ## Run tests with the Intelligent Test Runner enabled
@@ -68,7 +52,7 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for JavaScr
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-After configuring the Datadog Agent, run your tests as you normally do:
+After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
@@ -78,10 +62,10 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
-After setting these environment variables, run your tests as you normally do:
+After completing setup, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY DD_APPLICATION_KEY=$DD_APPLICATION_KEY yarn test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$DD_API_KEY yarn test
 {{< /code-block >}}
 
 {{% /tab %}}

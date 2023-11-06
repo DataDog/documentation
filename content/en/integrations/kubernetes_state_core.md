@@ -369,12 +369,6 @@ datadog:
 `kubernetes_state.container.status_report.count.terminated`
 : Describes the reason the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
-`kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
-`kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
-
 `kubernetes_state.crd.count`
 : Number of custom resource definition.
 

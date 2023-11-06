@@ -53,7 +53,7 @@ Datadog は、クラウドリソース間の関係をマッピングするグラ
 
 詳細については、[Amazon S3 ストレージへのパブリックアクセスをブロックする][2]を参照してください。
 
-### Amazon CloudTrail トレイル
+### AWS CloudTrail トレイル
 
 次の場合、[Cloudtrail トレイル][3] (`aws_cloudtrail_trail`) は公開されていると判断されます。
 

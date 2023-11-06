@@ -8,8 +8,8 @@ kind: documentation
 Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
 
 * Graph your estimated usage
-* Create monitors around your estimated usage based on thresholds of your choosing
-* Get instant alerts of spikes or drops in your usage
+* Create [monitors][3] around your estimated usage based on thresholds of your choosing
+* Get [monitor alerts][4] of spikes or drops in your usage
 * Assess the potential impact of code changes on your usage in near real-time
 
 **Note**: These usage metrics are estimates that are not always matched to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average. Due to the nature of the estimations, the margin of error is larger for small usage.
@@ -57,6 +57,7 @@ Estimated usage metrics are generally available for the following usage types:
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices` | Unique IoT devices seen in the last hour. |
+| Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
@@ -75,3 +76,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 
 [1]: /help/
 [2]: mailto:success@datadoghq.com
+[3]: /monitors/types/metric/?tab=threshold
+[4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
