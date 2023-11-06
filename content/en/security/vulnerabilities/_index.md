@@ -3,7 +3,6 @@ title: Cloud Security Management Vulnerabilities
 kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/setup"
-=======
 aliases:
     - /security/infrastructure_vulnerabilities
 further_reading:
