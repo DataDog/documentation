@@ -19,14 +19,14 @@ Click on any host in the list to open a details panel:
 
 In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
 
-|                                                 | MySQL     | Oracle    | Postgres  | SQL Server |
-|-------------------------------------------------|-----------|-----------|-----------|------------|
-| [Top queries](#top-queries)                     | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  |
-| [Metrics](#metrics)                             |           |           | {{< X >}} | {{< X >}}  |
-| [Active connections](#active-connections)       | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  |
-| [Blocking queries](#blocking-queries)           |           |           | {{< X >}} | {{< X >}}  |
-| [Calling services](#calling-services)           | {{< X >}} |           | {{< X >}} | {{< X >}}  |
-| [Configuration details](#configuration-details) | {{< X >}} |           | {{< X >}} | {{< X >}}  |
+|                                                 | Postgres  | SQL Server | MySQL     | Oracle    |
+|-------------------------------------------------|-----------|------------|-----------|-----------|
+| [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
+| [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
+| [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
+| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           |           |
+| [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
+| [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 
 ## Top queries
 
@@ -75,8 +75,6 @@ On the **Calling Services** tab of the host details panel, you can view the list
 Click any service row to view its APM dashboard.
 
 ## Configuration details
-
-<div class="alert alert-warning">This feature is supported for Postgres, MySQL, and SQL Server only.</a></div>
 
 The **Configuration** tab of the host details panel provides a direct view into the host's configuration parameters without compromising database security. Use it to identify misconfigured database parameters and fine-tune settings to optimize database performance.
 
