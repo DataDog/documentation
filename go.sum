@@ -1,4 +1,6 @@
 github.com/DataDog/dd-release-notes v0.0.0-20231101135237-ae03b7e31ccc h1:NbEyovudacNpg+Z7KkYUn+vHzqt0KTOQYH0zllIdT3s=
 github.com/DataDog/dd-release-notes v0.0.0-20231101135237-ae03b7e31ccc/go.mod h1:sulnMoPFPlmZesWzaKpG2nrG7/Ym1SOOojI/ErQN7A8=
+github.com/DataDog/dd-release-notes v0.0.0-20231106211034-d094ef2f8b71 h1:YeNoefnfq86TjSMtXMY1lf/1J/tzpauf1agwv3u4pGU=
+github.com/DataDog/dd-release-notes v0.0.0-20231106211034-d094ef2f8b71/go.mod h1:RniPwxpe+pgYgTT06J/Yi5UwfukV5MZWlOQYWudvqSg=
 github.com/DataDog/websites-modules v1.4.98 h1:9ZIn49uElVkXgQ19p7XyxXzaEIwQSEowauxtB41E3qw=
 github.com/DataDog/websites-modules v1.4.98/go.mod h1:CcQxAmCXoiFr3hNw6Q+1si65C3uOP1gB+7aX4S3h+CQ=
