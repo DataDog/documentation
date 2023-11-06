@@ -256,7 +256,7 @@ StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 
 `dd.jmxfetch.<integration-name>.enabled`
 : **Environment Variable**: `DD_JMXFETCH_<INTEGRATION_NAME>_ENABLED`<br>
 **Default**: `false`<br>
-JMX integration to enable (e.g. kafka, activemq).
+JMX integration to enable (for example, Kafka or ActiveMQ).
 
 `dd.trace.obfuscation.query.string.regexp`
 : **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
