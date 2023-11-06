@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The [Network Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts. 
+The [Network Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search.mp4" alt="The network topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
 
@@ -31,7 +31,7 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
 2. Datadog Agent version 7.46 or later is installed.
-3. If you're using [device autodiscovery][3], enable `snmp_listeners.collect_topology: true` in the `datadog.yaml` file.
+3. If you're using [device autodiscovery][3], enable `snmp_listener.collect_topology: true` in the `datadog.yaml` file.
 
 ## Investigating devices
 
@@ -47,7 +47,7 @@ Choose **Inspect** to see the device's interface connections. Click on any of th
 
 ### View device details
 
-Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory. 
+Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
 
