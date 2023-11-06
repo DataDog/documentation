@@ -1,5 +1,6 @@
 # make
 SHELL = /bin/bash
+MAKEFLAGS = -j
 .PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
@@ -97,13 +98,9 @@ source-dd-source:
 	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
 
 # All the requirements for a full build
-dependencies: clean hugpython all-examples data/permissions.json source-dd-source update_pre_build node_modules
-	@make placeholders
-	@make derefs
-
-dependencies_parallel:
-	@make -j clean hugpython
-	@make -j all-examples data/permissions.json source-dd-source update_pre_build node_modules placeholders derefs
+dependencies:
+	@make clean hugpython
+	@make placeholders derefs
 
 # make directories
 data/workflows/:
