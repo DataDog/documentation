@@ -173,6 +173,13 @@ components:
       required: true
       schema:
         type: string
+    GCPSTSServiceAccountID:
+      description: Your GCP STS enabled service account's unique ID.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     IncidentAttachmentFilterQueryParameter:
       description: Specifies which types of attachments are included in the response.
       explode: false
@@ -352,7 +359,7 @@ components:
         format: int64
         type: integer
     PageSize:
-      description: Size for a given page. The maximum allowed value is 5000.
+      description: Size for a given page. The maximum allowed value is 100.
       in: query
       name: page[size]
       required: false
@@ -398,6 +405,13 @@ components:
       required: true
       schema:
         type: string
+    SchemaVersion:
+      description: The schema version desired in the response.
+      in: query
+      name: schema_version
+      required: false
+      schema:
+        $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -484,6 +498,31 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Conflict
+    FindingsBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Bad Request: The server cannot process the request due to invalid
+        syntax in the request.'
+    FindingsForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Forbidden: Access denied'
+    FindingsNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Not Found: The requested finding cannot be found.'
+    FindingsTooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Too many requests: The rate limit set by the API has been exceeded.'
     ForbiddenResponse:
       content:
         application/json:
@@ -502,6 +541,30 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Not Found
+    SpansBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Bad Request.
+    SpansForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Forbidden: Access denied.'
+    SpansTooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Too many requests: The rate limit set by the API has been exceeded.'
+    SpansUnprocessableEntityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Unprocessable Entity.
     TooManyRequestsResponse:
       content:
         application/json:
@@ -668,9 +731,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -733,9 +794,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -1322,6 +1381,39 @@ components:
       - EARLIEST
       - MOST_FREQUENT
       - DELTA
+    CIAppCIError:
+      description: Contains information of the CI error.
+      nullable: true
+      properties:
+        domain:
+          $ref: '#/components/schemas/CIAppCIErrorDomain'
+        message:
+          description: Error message.
+          maxLength: 5000
+          nullable: true
+          type: string
+        stack:
+          description: The stack trace of the reported errors.
+          nullable: true
+          type: string
+        type:
+          description: Short description of the error type.
+          maxLength: 100
+          nullable: true
+          type: string
+      type: object
+    CIAppCIErrorDomain:
+      description: Error category used to differentiate between issues related to
+        the developer or provider environments.
+      enum:
+      - provider
+      - user
+      - unknown
+      type: string
+      x-enum-varnames:
+      - PROVIDER
+      - USER
+      - UNKNOWN
     CIAppCompute:
       description: A compute rule to compute metrics or timeseries.
       properties:
@@ -1358,6 +1450,52 @@ components:
       description: A map of the metric name to value for regular compute, or a list
         of values for a timeseries.
       type: object
+    CIAppCreatePipelineEventRequest:
+      description: Request object.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+      type: object
+    CIAppCreatePipelineEventRequestAttributes:
+      description: Attributes of the pipeline event to create.
+      properties:
+        env:
+          description: The Datadog environment.
+          type: string
+        resource:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributesResource'
+        service:
+          description: If the CI provider is SaaS, use this to differentiate between
+            instances.
+          type: string
+      required:
+      - resource
+      type: object
+    CIAppCreatePipelineEventRequestAttributesResource:
+      description: Details of the CI pipeline event.
+      example: Details TBD
+      oneOf:
+      - $ref: '#/components/schemas/CIAppPipelineEventPipeline'
+      - $ref: '#/components/schemas/CIAppPipelineEventStage'
+      - $ref: '#/components/schemas/CIAppPipelineEventJob'
+      - $ref: '#/components/schemas/CIAppPipelineEventStep'
+    CIAppCreatePipelineEventRequestData:
+      description: Data of the pipeline event to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataType'
+      type: object
+    CIAppCreatePipelineEventRequestDataType:
+      default: cipipeline_resource_request
+      description: Type of the event.
+      enum:
+      - cipipeline_resource_request
+      example: cipipeline_resource_request
+      type: string
+      x-enum-varnames:
+      - CIPIPELINE_RESOURCE_REQUEST
     CIAppEventAttributes:
       description: JSON object containing all event attributes and their associated
         values.
@@ -1383,6 +1521,77 @@ components:
           $ref: '#/components/schemas/TagsEventAttribute'
         timestamp:
           $ref: '#/components/schemas/TimestampEventAttribute'
+      type: object
+    CIAppGitInfo:
+      description: 'If pipelines are triggered due to actions to a Git repository,
+        then all payloads must contain this.
+
+        Note that either `tag` or `branch` has to be provided, but not both.'
+      nullable: true
+      properties:
+        author_email:
+          description: The commit author email.
+          example: author@example.com
+          format: email
+          type: string
+        author_name:
+          description: The commit author name.
+          example: John Doe
+          nullable: true
+          type: string
+        author_time:
+          description: The commit author timestamp in RFC3339 format.
+          example: '2023-05-31T15:30:00Z'
+          nullable: true
+          type: string
+        branch:
+          description: The branch name (if a tag use the tag parameter).
+          example: feature-1
+          nullable: true
+          type: string
+        commit_time:
+          description: The commit timestamp in RFC3339 format.
+          example: '2023-05-31T15:30:00Z'
+          nullable: true
+          type: string
+        committer_email:
+          description: The committer email.
+          example: committer@example.com
+          format: email
+          nullable: true
+          type: string
+        committer_name:
+          description: The committer name.
+          nullable: true
+          type: string
+        default_branch:
+          description: The Git repository's default branch.
+          example: main
+          nullable: true
+          type: string
+        message:
+          description: The commit message.
+          example: Instrumenting tests with CI Visibility.
+          nullable: true
+          type: string
+        repository_url:
+          description: The URL of the repository.
+          example: https://github.com/username/repository
+          type: string
+        sha:
+          description: The git commit SHA.
+          example: da39a3ee5e6b4b0d3255bfef95601890afd80709
+          pattern: ^[a-fA-F0-9]{40}$
+          type: string
+        tag:
+          description: The tag name (if a branch use the branch parameter).
+          example: v1.0.0
+          nullable: true
+          type: string
+      required:
+      - repository_url
+      - sha
+      - author_email
       type: object
     CIAppGroupByHistogram:
       description: 'Used to perform a histogram computation (only for measure facets).
@@ -1443,6 +1652,31 @@ components:
     CIAppGroupByTotalString:
       description: A string to use as the key value for the total bucket.
       type: string
+    CIAppHostInfo:
+      description: Contains information of the host running the pipeline, stage, job,
+        or step.
+      nullable: true
+      properties:
+        hostname:
+          description: FQDN of the host.
+          example: www.example.com
+          type: string
+        labels:
+          description: A list of labels used to select or identify the node.
+          example:
+          - ubuntu-18.04
+          - n2.large
+          items:
+            type: string
+          type: array
+        name:
+          description: Name for the host.
+          type: string
+        workspace:
+          description: The path where the code is checked out.
+          example: /home/workspace/code/my-repo
+          type: string
+      type: object
     CIAppPipelineEvent:
       description: Object description of a pipeline event after being processed and
         stored by Datadog.
@@ -1456,6 +1690,493 @@ components:
         type:
           $ref: '#/components/schemas/CIAppPipelineEventTypeName'
       type: object
+    CIAppPipelineEventJob:
+      description: Details of a CI job.
+      properties:
+        dependencies:
+          description: A list of job IDs that this job depends on.
+          example:
+          - f7e6a006-a029-46c3-b0cc-742c9d7d363b
+          - c8a69849-3c3b-4721-8b33-3e8ec2df1ebe
+          items:
+            description: A list of job IDs.
+            type: string
+          nullable: true
+          type: array
+        end:
+          description: Time when the job run finished. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        id:
+          description: The UUID for the job. It has to be unique within each pipeline
+            execution.
+          example: c865bad4-de82-44b8-ade7-2c987528eb54
+          type: string
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventJobLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: The name for the job.
+          example: test
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: 76b572af-a078-42b2-a08a-cc28f98b944f
+          type: string
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        stage_id:
+          description: The parent stage UUID (if applicable).
+          nullable: true
+          type: string
+        stage_name:
+          description: The parent stage name (if applicable).
+          nullable: true
+          type: string
+        start:
+          description: Time when the job run instance started (it should not include
+            any queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventJobStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        url:
+          description: The URL to look at the job in the CI provider UI.
+          example: https://ci-platform.com/job/your-job-name/build/123
+          type: string
+      required:
+      - level
+      - id
+      - name
+      - pipeline_unique_id
+      - pipeline_name
+      - start
+      - end
+      - status
+      - url
+      - git
+      type: object
+    CIAppPipelineEventJobLevel:
+      default: job
+      description: Used to distinguish between pipelines, stages, jobs, and steps.
+      enum:
+      - job
+      example: job
+      type: string
+      x-enum-varnames:
+      - JOB
+    CIAppPipelineEventJobStatus:
+      description: The final status of the job.
+      enum:
+      - success
+      - error
+      - canceled
+      - skipped
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+      - CANCELED
+      - SKIPPED
+    CIAppPipelineEventMetrics:
+      description: A list of user-defined metrics. The metrics must follow the `key:value`
+        pattern and the value must be numeric.
+      example:
+      - bundle_size:370
+      - build_time:50021
+      items:
+        description: Metrics in the form of `key:value`. The value needs to be numeric.
+        type: string
+      nullable: true
+      type: array
+    CIAppPipelineEventParameters:
+      additionalProperties:
+        type: string
+      description: A map of key-value parameters or environment variables that were
+        defined for the pipeline.
+      example:
+        LOG_LEVEL: debug
+      nullable: true
+      type: object
+    CIAppPipelineEventParentPipeline:
+      description: If the pipeline is triggered as child of another pipeline, this
+        should contain the details of the parent pipeline.
+      nullable: true
+      properties:
+        id:
+          description: UUID of a pipeline.
+          example: 93bfeb70-af47-424d-908a-948d3f08e37f
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://ci-platform.com/pipelines/123456789
+          type: string
+      required:
+      - id
+      type: object
+    CIAppPipelineEventPipeline:
+      description: Details of the top level pipeline, build, or workflow of your CI.
+      properties:
+        end:
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: 'UUID of the pipeline run. The ID has to be unique across retries
+            and pipelines,
+
+            including partial retries.'
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - end
+      - status
+      - partial_retry
+      - git
+      type: object
+    CIAppPipelineEventPipelineLevel:
+      default: pipeline
+      description: Used to distinguish between pipelines, stages, jobs, and steps.
+      enum:
+      - pipeline
+      example: pipeline
+      type: string
+      x-enum-varnames:
+      - PIPELINE
+    CIAppPipelineEventPipelineStatus:
+      description: The final status of the pipeline.
+      enum:
+      - success
+      - error
+      - canceled
+      - skipped
+      - blocked
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+      - CANCELED
+      - SKIPPED
+      - BLOCKED
+    CIAppPipelineEventPreviousPipeline:
+      description: If the pipeline is a retry, this should contain the details of
+        the previous attempt.
+      nullable: true
+      properties:
+        id:
+          description: UUID of a pipeline.
+          example: 93bfeb70-af47-424d-908a-948d3f08e37f
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://ci-platform.com/pipelines/123456789
+          type: string
+      required:
+      - id
+      type: object
+    CIAppPipelineEventStage:
+      description: Details of a CI stage.
+      properties:
+        dependencies:
+          description: A list of stage IDs that this stage depends on.
+          example:
+          - f7e6a006-a029-46c3-b0cc-742c9d7d363b
+          - c8a69849-3c3b-4721-8b33-3e8ec2df1ebe
+          items:
+            description: A list of stage IDs.
+            type: string
+          nullable: true
+          type: array
+        end:
+          description: Time when the stage run finished. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        id:
+          description: UUID for the stage. It has to be unique at least in the pipeline
+            scope.
+          example: 562bdbbb-7cab-48c8-851c-b24ca14628bf
+          type: string
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventStageLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: The name for the stage.
+          example: build
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: 76b572af-a078-42b2-a08a-cc28f98b944f
+          type: string
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the stage run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventStageStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+      required:
+      - level
+      - id
+      - name
+      - pipeline_unique_id
+      - pipeline_name
+      - start
+      - end
+      - status
+      - git
+      type: object
+    CIAppPipelineEventStageLevel:
+      default: stage
+      description: Used to distinguish between pipelines, stages, jobs and steps.
+      enum:
+      - stage
+      example: stage
+      type: string
+      x-enum-varnames:
+      - STAGE
+    CIAppPipelineEventStageStatus:
+      description: The final status of the stage.
+      enum:
+      - success
+      - error
+      - canceled
+      - skipped
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+      - CANCELED
+      - SKIPPED
+    CIAppPipelineEventStep:
+      description: Details of a CI step.
+      properties:
+        end:
+          description: Time when the step run finished. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        id:
+          description: UUID for the step. It has to be unique within each pipeline
+            execution.
+          example: c2d517a8-4f3a-4b41-b4ae-69df0c864c79
+          type: string
+        job_id:
+          description: The parent job UUID (if applicable).
+          nullable: true
+          type: string
+        job_name:
+          description: The parent job name (if applicable).
+          nullable: true
+          type: string
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventStepLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: The name for the step.
+          example: test-server
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: 76b572af-a078-42b2-a08a-cc28f98b944f
+          type: string
+        stage_id:
+          description: The parent stage UUID (if applicable).
+          nullable: true
+          type: string
+        stage_name:
+          description: The parent stage name (if applicable).
+          nullable: true
+          type: string
+        start:
+          description: Time when the step run started. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventStepStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        url:
+          description: The URL to look at the step in the CI provider UI.
+          nullable: true
+          type: string
+      required:
+      - level
+      - id
+      - name
+      - pipeline_unique_id
+      - pipeline_name
+      - start
+      - end
+      - status
+      - git
+      type: object
+    CIAppPipelineEventStepLevel:
+      default: step
+      description: Used to distinguish between pipelines, stages, jobs and steps.
+      enum:
+      - step
+      example: step
+      type: string
+      x-enum-varnames:
+      - STEP
+    CIAppPipelineEventStepStatus:
+      description: The final status of the step.
+      enum:
+      - success
+      - error
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+    CIAppPipelineEventTags:
+      description: A list of user-defined tags. The tags must follow the `key:value`
+        pattern.
+      example:
+      - team:backend
+      - type:deployment
+      items:
+        description: Tags in the form of `key:value`.
+        type: string
+      nullable: true
+      type: array
     CIAppPipelineEventTypeName:
       description: Type of the event.
       enum:
@@ -1463,7 +2184,7 @@ components:
       example: cipipeline
       type: string
       x-enum-varnames:
-      - cipipeline
+      - CIPIPELINE
     CIAppPipelineEventsRequest:
       description: The request for a pipelines search.
       properties:
@@ -1736,7 +2457,7 @@ components:
       example: citest
       type: string
       x-enum-varnames:
-      - citest
+      - CITEST
     CIAppTestEventsRequest:
       description: The request for a tests search.
       properties:
@@ -1992,6 +2713,12 @@ components:
           type: array
         complianceSignalOptions:
           $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
         isEnabled:
           description: Whether the rule is enabled.
           example: true
@@ -2052,9 +2779,16 @@ components:
     CloudWorkloadSecurityAgentRuleAttributes:
       description: A Cloud Workload Security Agent rule returned by the API.
       properties:
+        agentConstraint:
+          description: The version of the agent.
+          type: string
         category:
           description: The category of the Agent rule.
           example: Process Activity
+          type: string
+        creationAuthorUuId:
+          description: The ID of the user who created the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
         creationDate:
           description: When the Agent rule was created, timestamp in milliseconds.
@@ -2083,6 +2817,15 @@ components:
           description: The name of the Agent rule.
           example: my_agent_rule
           type: string
+        updateAuthorUuId:
+          description: The ID of the user who updated the rule.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
+          type: string
+        updateDate:
+          description: Timestamp in milliseconds when the Agent rule was last updated.
+          example: 1624366480320
+          format: int64
+          type: integer
         updatedAt:
           description: When the Agent rule was last updated, timestamp in milliseconds.
           example: 1624366480320
@@ -2412,6 +3155,12 @@ components:
     ConfluentAccountResourceAttributes:
       description: Attributes object for updating a Confluent resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
         id:
           description: The ID associated with a Confluent resource.
           example: resource-id-123
@@ -2552,6 +3301,12 @@ components:
     ConfluentResourceRequestAttributes:
       description: Attributes object for updating a Confluent resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -2594,6 +3349,16 @@ components:
     ConfluentResourceResponseAttributes:
       description: Model representation of a Confluent Cloud resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
+        id:
+          description: The ID associated with the Confluent resource.
+          example: resource_id_abc123
+          type: string
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -2780,6 +3545,11 @@ components:
         id:
           description: ID of the dashboard.
           example: q5j-nti-fv6
+          type: string
+        integration_id:
+          description: The short name of the integration.
+          nullable: true
+          readOnly: true
           type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
@@ -2980,6 +3750,584 @@ components:
       type: string
       x-enum-varnames:
       - DETAILED_FINDING
+    DowntimeCreateRequest:
+      description: Request for creating a downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeCreateRequestData'
+      required:
+      - data
+      type: object
+    DowntimeCreateRequestAttributes:
+      description: Downtime details.
+      properties:
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleCreateRequest'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+      required:
+      - scope
+      - monitor_identifier
+      type: object
+    DowntimeCreateRequestData:
+      description: Object to create a downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    DowntimeDisplayTimezone:
+      default: UTC
+      description: 'The timezone in which to display the downtime''s start and end
+        times in Datadog applications. This is not used
+
+        as an offset for scheduling.'
+      example: America/New_York
+      nullable: true
+      type: string
+    DowntimeIncludedMonitorType:
+      default: monitors
+      description: Monitor resource type.
+      enum:
+      - monitors
+      example: monitors
+      type: string
+      x-enum-varnames:
+      - MONITORS
+    DowntimeMessage:
+      description: 'A message to include with notifications for this downtime. Email
+        notifications can be sent to specific users
+
+        by using the same `@username` notation as events.'
+      example: Message about the downtime
+      nullable: true
+      type: string
+    DowntimeMeta:
+      description: Pagination metadata returned by the API.
+      properties:
+        page:
+          $ref: '#/components/schemas/DowntimeMetaPage'
+      type: object
+    DowntimeMetaPage:
+      description: Object containing the total filtered count.
+      properties:
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
+    DowntimeMonitorIdentifier:
+      description: Monitor identifier for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeMonitorIdentifierId'
+      - $ref: '#/components/schemas/DowntimeMonitorIdentifierTags'
+      type: object
+    DowntimeMonitorIdentifierId:
+      additionalProperties: {}
+      description: Object of the monitor identifier.
+      properties:
+        monitor_id:
+          description: ID of the monitor to prevent notifications.
+          example: 123
+          format: int64
+          type: integer
+      required:
+      - monitor_id
+      type: object
+    DowntimeMonitorIdentifierTags:
+      additionalProperties: {}
+      description: Object of the monitor tags.
+      properties:
+        monitor_tags:
+          description: 'A list of monitor tags. For example, tags that are applied
+            directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match **all** provided
+            monitor tags. Setting `monitor_tags`
+
+            to `[*]` configures the downtime to mute all monitors for the given scope.'
+          example:
+          - service:postgres
+          - team:frontend
+          items:
+            description: A list of monitor tags.
+            example: service:postgres
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - monitor_tags
+      type: object
+    DowntimeMonitorIncludedAttributes:
+      description: Attributes of the monitor identified by the downtime.
+      properties:
+        name:
+          description: The name of the monitor identified by the downtime.
+          example: A monitor name
+          type: string
+      type: object
+    DowntimeMonitorIncludedItem:
+      description: Information about the monitor identified by the downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeMonitorIncludedAttributes'
+        id:
+          description: ID of the monitor identified by the downtime.
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DowntimeIncludedMonitorType'
+      type: object
+    DowntimeMuteFirstRecoveryNotification:
+      description: If the first recovery notification during a downtime should be
+        muted.
+      example: false
+      type: boolean
+    DowntimeNotifyEndStateActions:
+      description: Action that will trigger a monitor notification if the downtime
+        is in the `notify_end_types` state.
+      enum:
+      - canceled
+      - expired
+      example: canceled
+      type: string
+      x-enum-varnames:
+      - CANCELED
+      - EXPIRED
+    DowntimeNotifyEndStateTypes:
+      description: State that will trigger a monitor notification when the `notify_end_types`
+        action occurs.
+      enum:
+      - alert
+      - no data
+      - warn
+      example: alert
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - NO_DATA
+      - WARN
+    DowntimeNotifyEndStates:
+      description: States that will trigger a monitor notification when the `notify_end_types`
+        action occurs.
+      example:
+      - alert
+      - warn
+      items:
+        $ref: '#/components/schemas/DowntimeNotifyEndStateTypes'
+      type: array
+    DowntimeNotifyEndTypes:
+      description: Actions that will trigger a monitor notification if the downtime
+        is in the `notify_end_types` state.
+      example:
+      - canceled
+      - expired
+      items:
+        $ref: '#/components/schemas/DowntimeNotifyEndStateActions'
+      type: array
+    DowntimeRelationships:
+      description: All relationships associated with downtime.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/DowntimeRelationshipsCreatedBy'
+        monitor:
+          $ref: '#/components/schemas/DowntimeRelationshipsMonitor'
+      type: object
+    DowntimeRelationshipsCreatedBy:
+      description: The user who created the downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeRelationshipsCreatedByData'
+      type: object
+    DowntimeRelationshipsCreatedByData:
+      description: Data for the user who created the downtime.
+      nullable: true
+      properties:
+        id:
+          description: User ID of the downtime creator.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      type: object
+    DowntimeRelationshipsMonitor:
+      description: The monitor identified by the downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeRelationshipsMonitorData'
+      type: object
+    DowntimeRelationshipsMonitorData:
+      description: Data for the monitor.
+      nullable: true
+      properties:
+        id:
+          description: Monitor ID of the downtime.
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DowntimeIncludedMonitorType'
+      type: object
+    DowntimeResourceType:
+      default: downtime
+      description: Downtime resource type.
+      enum:
+      - downtime
+      example: downtime
+      type: string
+      x-enum-varnames:
+      - DOWNTIME
+    DowntimeResponse:
+      description: 'Downtiming gives you greater control over monitor notifications
+        by
+
+        allowing you to globally exclude scopes from alerting.
+
+        Downtime settings, which can be scheduled with start and end times,
+
+        prevent all alerting related to specified Datadog tags.'
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeResponseData'
+        included:
+          description: Array of objects related to the downtime that the user requested.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseIncludedItem'
+          type: array
+      type: object
+    DowntimeResponseAttributes:
+      description: Downtime details.
+      properties:
+        canceled:
+          description: Time that the downtime was canceled.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          nullable: true
+          type: string
+        created:
+          description: Creation time of the downtime.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          type: string
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        modified:
+          description: Time that the downtime was last modified.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          type: string
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleResponse'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+        status:
+          $ref: '#/components/schemas/DowntimeStatus'
+      type: object
+    DowntimeResponseData:
+      description: Downtime data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeResponseAttributes'
+        id:
+          description: The downtime ID.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DowntimeRelationships'
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      type: object
+    DowntimeResponseIncludedItem:
+      description: An object related to a downtime.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/DowntimeMonitorIncludedItem'
+      type: object
+    DowntimeScheduleCreateRequest:
+      description: Schedule for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesCreateRequest'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
+      type: object
+    DowntimeScheduleCurrentDowntimeResponse:
+      description: 'The most recent actual start and end dates for a recurring downtime.
+        For a canceled downtime,
+
+        this is the previously occurring downtime. For active downtimes, this is the
+        ongoing downtime, and for scheduled
+
+        downtimes it is the upcoming downtime.'
+      properties:
+        end:
+          description: The end of the current downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: The start of the current downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    DowntimeScheduleOneTimeCreateUpdateRequest:
+      additionalProperties: {}
+      description: A one-time downtime definition.
+      properties:
+        end:
+          description: 'ISO-8601 Datetime to end the downtime. Must include a UTC
+            offset of zero. If not provided, the
+
+            downtime continues forever.'
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must include a UTC
+            offset of zero. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    DowntimeScheduleOneTimeResponse:
+      description: A one-time downtime definition.
+      properties:
+        end:
+          description: ISO-8601 Datetime to end the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: ISO-8601 Datetime to start the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    DowntimeScheduleRecurrenceCreateUpdateRequest:
+      additionalProperties: {}
+      description: An object defining the recurrence of the downtime.
+      properties:
+        duration:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceDuration'
+        rrule:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceRrule'
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must not include
+            a UTC offset. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02T03:04
+          nullable: true
+          type: string
+      required:
+      - duration
+      - rrule
+      type: object
+    DowntimeScheduleRecurrenceDuration:
+      description: The length of the downtime. Must begin with an integer and end
+        with one of 'm', 'h', d', or 'w'.
+      example: 123d
+      type: string
+    DowntimeScheduleRecurrenceResponse:
+      description: An RRULE-based recurring downtime.
+      properties:
+        duration:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceDuration'
+        rrule:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceRrule'
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must not include
+            a UTC offset. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02T03:04
+          type: string
+      type: object
+    DowntimeScheduleRecurrenceRrule:
+      description: 'The `RRULE` standard for defining recurring events.
+
+        For example, to have a recurring event on the first day of each month, set
+        the type to `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY` to `1`.
+
+        Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+        are supported.
+
+
+        **Note**: Attributes specifying the duration in `RRULE` are not supported
+        (for example, `DTSTART`, `DTEND`, `DURATION`).
+
+        More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api).'
+      example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+      type: string
+    DowntimeScheduleRecurrencesCreateRequest:
+      description: A recurring downtime schedule definition.
+      properties:
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceCreateUpdateRequest'
+          type: array
+        timezone:
+          default: UTC
+          description: The timezone in which to schedule the downtime.
+          example: America/New_York
+          type: string
+      required:
+      - recurrences
+      type: object
+    DowntimeScheduleRecurrencesResponse:
+      description: A recurring downtime schedule definition.
+      properties:
+        current_downtime:
+          $ref: '#/components/schemas/DowntimeScheduleCurrentDowntimeResponse'
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceResponse'
+          maxItems: 5
+          minItems: 1
+          type: array
+        timezone:
+          default: UTC
+          description: 'The timezone in which to schedule the downtime. This affects
+            recurring start and end dates.
+
+            Must match `display_timezone`.'
+          example: America/New_York
+          type: string
+      required:
+      - recurrences
+      type: object
+    DowntimeScheduleRecurrencesUpdateRequest:
+      description: A recurring downtime schedule definition.
+      properties:
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceCreateUpdateRequest'
+          type: array
+        timezone:
+          default: UTC
+          description: The timezone in which to schedule the downtime.
+          example: America/New_York
+          type: string
+      type: object
+    DowntimeScheduleResponse:
+      description: 'The schedule that defines when the monitor starts, stops, and
+        recurs. There are two types of schedules:
+
+        one-time and recurring. Recurring schedules may have up to five RRULE-based
+        recurrences. If no schedules are
+
+        provided, the downtime will begin immediately and never end.'
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesResponse'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeResponse'
+      type: object
+    DowntimeScheduleUpdateRequest:
+      description: Schedule for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesUpdateRequest'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
+      type: object
+    DowntimeScope:
+      description: The scope to which the downtime applies. Must follow the [common
+        search syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      example: env:(staging OR prod) AND datacenter:us-east-1
+      type: string
+    DowntimeStatus:
+      description: The current status of the downtime.
+      enum:
+      - active
+      - canceled
+      - ended
+      - scheduled
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - CANCELED
+      - ENDED
+      - SCHEDULED
+    DowntimeUpdateRequest:
+      description: Request for editing a downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeUpdateRequestData'
+      required:
+      - data
+      type: object
+    DowntimeUpdateRequestAttributes:
+      description: Attributes of the downtime to update.
+      properties:
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleUpdateRequest'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+      type: object
+    DowntimeUpdateRequestData:
+      description: Object to update a downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeUpdateRequestAttributes'
+        id:
+          description: ID of this downtime.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -3118,6 +4466,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/EventAttributes'
+        message:
+          description: The message of the event.
+          type: string
         tags:
           description: An array of tags associated with the event.
           example:
@@ -3247,8 +4598,8 @@ components:
         aggregation:
           $ref: '#/components/schemas/EventsAggregation'
         metric:
-          description: Metric whose calculated value should be used to define the
-            sort order of a query's results.
+          description: The metric's calculated value which should be used to define
+            the sort order of a query's results.
           example: '@duration'
           type: string
         order:
@@ -3367,6 +4718,10 @@ components:
         request_id:
           description: The identifier of the request.
           example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          description: The request status.
+          example: done
           type: string
         warnings:
           description: 'A list of warnings (non-fatal errors) encountered. Partial
@@ -3681,7 +5036,7 @@ components:
           type: array
       type: object
     Finding:
-      description: A single finding without message and resource configuration.
+      description: A single finding without the message and resource configuration.
       properties:
         attributes:
           $ref: '#/components/schemas/FindingAttributes'
@@ -3739,16 +5094,16 @@ components:
       properties:
         description:
           description: Additional information about the reason why this finding is
-            muted.
+            muted or unmuted.
           example: To be resolved later
           type: string
         expiration_date:
-          description: The end of the mute period.
+          description: The expiration date of the mute or unmute action (Unix ms).
           example: 1778721573794
           format: int64
           type: integer
         muted:
-          description: Whether this finding is muted.
+          description: Whether this finding is muted or unmuted.
           example: true
           type: boolean
         reason:
@@ -3759,23 +5114,29 @@ components:
           format: int64
           type: integer
         uuid:
-          description: The ID of the user who muted this finding.
+          description: The ID of the user who muted or unmuted this finding.
           example: e51c9744-d158-11ec-ad23-da7ad0900002
           type: string
       type: object
     FindingMuteReason:
-      description: The reason why this finding is muted.
+      description: The reason why this finding is muted or unmuted.
       enum:
-      - ACCEPTED_RISK
       - PENDING_FIX
       - FALSE_POSITIVE
+      - ACCEPTED_RISK
+      - NO_PENDING_FIX
+      - HUMAN_ERROR
+      - NO_LONGER_ACCEPTED_RISK
       - OTHER
       example: ACCEPTED_RISK
       type: string
       x-enum-varnames:
-      - ACCEPTED_RISK
       - PENDING_FIX
       - FALSE_POSITIVE
+      - ACCEPTED_RISK
+      - NO_PENDING_FIX
+      - HUMAN_ERROR
+      - NO_LONGER_ACCEPTED_RISK
       - OTHER
     FindingResource:
       description: The resource name of this finding.
@@ -3934,9 +5295,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -3947,6 +5306,142 @@ components:
           nullable: true
           type: array
       type: object
+    GCPSTSDelegateAccount:
+      description: Datadog principal service account info.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPSTSDelegateAccountAttributes'
+        id:
+          description: The ID of the delegate service account.
+          example: ddgci-1a19n28hb1a812221893@datadog-gci-sts-us5-prod.iam.gserviceaccount.com
+          type: string
+        type:
+          $ref: '#/components/schemas/GCPSTSDelegateAccountType'
+      type: object
+    GCPSTSDelegateAccountAttributes:
+      description: Your delegate account attributes.
+      properties:
+        delegate_account_email:
+          description: Your organization's Datadog principal email address.
+          example: ddgci-1a19n28hb1a812221893@datadog-gci-sts-us5-prod.iam.gserviceaccount.com
+          type: string
+      type: object
+    GCPSTSDelegateAccountResponse:
+      description: Your delegate service account response data.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPSTSDelegateAccount'
+      type: object
+    GCPSTSDelegateAccountType:
+      default: gcp_sts_delegate
+      description: The type of account.
+      enum:
+      - gcp_sts_delegate
+      example: gcp_sts_delegate
+      type: string
+      x-enum-varnames:
+      - GCP_STS_DELEGATE
+    GCPSTSServiceAccount:
+      description: Info on your service account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPSTSServiceAccountAttributes'
+        id:
+          description: Your service account's unique ID.
+          example: d291291f-12c2-22g4-j290-123456678897
+          type: string
+        meta:
+          $ref: '#/components/schemas/GCPServiceAccountMeta'
+        type:
+          $ref: '#/components/schemas/GCPServiceAccountType'
+      type: object
+    GCPSTSServiceAccountAttributes:
+      description: Attributes associated with your service account.
+      properties:
+        automute:
+          description: Silence monitors for expected GCE instance shutdowns.
+          type: boolean
+        client_email:
+          description: Your service account email address.
+          example: datadog-service-account@test-project.iam.gserviceaccount.com
+          type: string
+        host_filters:
+          description: Your Host Filters.
+          items:
+            description: Host Filters
+            type: string
+          type: array
+        is_cspm_enabled:
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          type: boolean
+      type: object
+    GCPSTSServiceAccountCreateRequest:
+      description: Data on your newly generated service account.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPSTSServiceAccountData'
+      type: object
+    GCPSTSServiceAccountData:
+      description: Additional metadata on your generated service account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPSTSServiceAccountAttributes'
+        type:
+          $ref: '#/components/schemas/GCPServiceAccountType'
+      type: object
+    GCPSTSServiceAccountResponse:
+      description: The account creation response.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPSTSServiceAccount'
+      type: object
+    GCPSTSServiceAccountUpdateRequest:
+      description: Service account info.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPSTSServiceAccountUpdateRequestData'
+      type: object
+    GCPSTSServiceAccountUpdateRequestData:
+      description: Data on your service account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GCPSTSServiceAccountAttributes'
+        id:
+          description: Your service account's unique ID.
+          example: d291291f-12c2-22g4-j290-123456678897
+          type: string
+        type:
+          $ref: '#/components/schemas/GCPServiceAccountType'
+      type: object
+    GCPSTSServiceAccountsResponse:
+      description: Object containing all your STS enabled accounts.
+      properties:
+        data:
+          description: Array of GCP STS enabled service accounts.
+          items:
+            $ref: '#/components/schemas/GCPSTSServiceAccount'
+          type: array
+      type: object
+    GCPServiceAccountMeta:
+      description: Additional information related to your service account.
+      properties:
+        accessible_projects:
+          description: The current list of projects accessible from your service account.
+          items:
+            description: List of GCP projects.
+            type: string
+          type: array
+      type: object
+    GCPServiceAccountType:
+      default: gcp_service_account
+      description: The type of account.
+      enum:
+      - gcp_service_account
+      example: gcp_service_account
+      type: string
+      x-enum-varnames:
+      - GCP_SERVICE_ACCOUNT
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -4009,6 +5504,31 @@ components:
         example: env:production
         type: string
       type: array
+    HTTPCIAppError:
+      description: List of errors.
+      properties:
+        detail:
+          description: Error message.
+          example: Malformed payload
+          type: string
+        status:
+          description: Error code.
+          example: '400'
+          type: string
+        title:
+          description: Error title.
+          example: Bad Request
+          type: string
+      type: object
+    HTTPCIAppErrors:
+      description: Errors occurred.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
     HTTPLog:
       description: Structured log message.
       items:
@@ -5972,6 +7492,34 @@ components:
             type: string
           type: array
       type: object
+    JSONAPIErrorItem:
+      description: API error response body
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the error.
+          example: Missing required attribute in body
+          type: string
+        status:
+          description: Status code of the response.
+          example: '400'
+          type: string
+        title:
+          description: Short human-readable summary of the error.
+          example: Bad Request
+          type: string
+      type: object
+    JSONAPIErrorResponse:
+      description: API error response.
+      properties:
+        errors:
+          description: A list of errors.
+          items:
+            $ref: '#/components/schemas/JSONAPIErrorItem'
+          type: array
+      required:
+      - errors
+      type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
       properties:
@@ -6024,6 +7572,22 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    ListDowntimesResponse:
+      description: Response for retrieving all downtimes.
+      properties:
+        data:
+          description: An array of downtimes.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseData'
+          type: array
+        included:
+          description: Array of objects related to the downtimes.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseIncludedItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DowntimeMeta'
       type: object
     ListFindingsData:
       description: Array of findings.
@@ -8041,7 +9605,8 @@ components:
       type: object
     MetricsAggregator:
       default: avg
-      description: The type of aggregation that can be performed on metrics queries.
+      description: The type of aggregation that can be performed on metrics-based
+        queries.
       enum:
       - avg
       - min
@@ -8302,6 +9867,66 @@ components:
       type: string
       x-enum-varnames:
       - TAG
+    MonitorDowntimeMatchResourceType:
+      default: downtime_match
+      description: Monitor Downtime Match resource type.
+      enum:
+      - downtime_match
+      example: downtime_match
+      type: string
+      x-enum-varnames:
+      - DOWNTIME_MATCH
+    MonitorDowntimeMatchResponse:
+      description: Response for retrieving all downtime matches for a monitor.
+      properties:
+        data:
+          description: An array of downtime matches.
+          items:
+            $ref: '#/components/schemas/MonitorDowntimeMatchResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DowntimeMeta'
+      type: object
+    MonitorDowntimeMatchResponseAttributes:
+      description: Downtime match details.
+      properties:
+        end:
+          description: The end of the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        groups:
+          description: An array of groups associated with the downtime.
+          example:
+          - service:postgres
+          - team:frontend
+          items:
+            description: An array of groups.
+            example: service:postgres
+            type: string
+          type: array
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+        start:
+          description: The start of the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    MonitorDowntimeMatchResponseData:
+      description: A downtime match.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorDowntimeMatchResponseAttributes'
+        id:
+          description: The downtime ID.
+          example: 00000000-0000-1234-0000-000000000000
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
+      type: object
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -8354,6 +9979,139 @@ components:
         type:
           description: The monitor type.
           type: string
+      type: object
+    MuteFindingRequest:
+      description: The new mute finding request.
+      properties:
+        data:
+          $ref: '#/components/schemas/MuteFindingRequestData'
+      required:
+      - data
+      type: object
+    MuteFindingRequestAttributes:
+      additionalProperties: false
+      description: The mute properties to be updated.
+      properties:
+        mute:
+          $ref: '#/components/schemas/MuteFindingRequestProperties'
+      required:
+      - mute
+      type: object
+    MuteFindingRequestData:
+      description: Data object containing the new mute properties of the finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MuteFindingRequestAttributes'
+        id:
+          $ref: '#/components/schemas/FindingID'
+        type:
+          $ref: '#/components/schemas/FindingType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    MuteFindingRequestProperties:
+      additionalProperties: false
+      description: Object containing the new mute properties of the finding.
+      properties:
+        description:
+          description: Additional information about the reason why this finding is
+            muted or unmuted. This field has a maximum limit of 280 characters.
+          example: To be resolved later
+          type: string
+        expiration_date:
+          description: 'The expiration date of the mute or unmute action (Unix ms).
+            It must be set to a value greater than the current timestamp.
+
+            If this field is not provided, the finding will be muted or unmuted indefinitely,
+            which is equivalent to setting the expiration date to 9999999999999.
+
+            '
+          example: 1778721573794
+          format: int64
+          type: integer
+        muted:
+          description: Whether this finding is muted or unmuted.
+          example: true
+          type: boolean
+        reason:
+          $ref: '#/components/schemas/FindingMuteReason'
+      required:
+      - muted
+      - reason
+      type: object
+    MuteFindingResponse:
+      description: The expected response schema.
+      properties:
+        data:
+          $ref: '#/components/schemas/MuteFindingResponseData'
+      required:
+      - data
+      type: object
+    MuteFindingResponseAttributes:
+      description: The JSON:API attributes of the finding.
+      properties:
+        evaluation:
+          $ref: '#/components/schemas/FindingEvaluation'
+        evaluation_changed_at:
+          $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        mute:
+          $ref: '#/components/schemas/MuteFindingResponseProperties'
+        resource:
+          $ref: '#/components/schemas/FindingResource'
+        resource_discovery_date:
+          $ref: '#/components/schemas/FindingResourceDiscoveryDate'
+        resource_type:
+          $ref: '#/components/schemas/FindingResourceType'
+        rule:
+          $ref: '#/components/schemas/FindingRule'
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+        tags:
+          $ref: '#/components/schemas/FindingTags'
+      type: object
+    MuteFindingResponseData:
+      description: Data object containing the updated finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MuteFindingResponseAttributes'
+        id:
+          $ref: '#/components/schemas/FindingID'
+        type:
+          $ref: '#/components/schemas/FindingType'
+      type: object
+    MuteFindingResponseProperties:
+      additionalProperties: false
+      description: Information about the mute status of this finding.
+      properties:
+        description:
+          description: 'Additional information about the reason why this finding is
+            muted or unmuted.
+
+            This attribute will not be included in the response if the description
+            is not provided in the request body.
+
+            '
+          example: To be resolved later
+          type: string
+        expiration_date:
+          description: 'The expiration date of the mute or unmute action.
+
+            If the expiration date is not provided in the request body, this attribute
+            will not be included in the response and the finding will be muted or
+            unmuted indefinitely.
+
+            '
+          example: 1778721573794
+          format: int64
+          type: integer
+        muted:
+          description: Whether this finding is muted or unmuted.
+          example: true
+          type: boolean
+        reason:
+          $ref: '#/components/schemas/FindingMuteReason'
       type: object
     NullableRelationshipToUser:
       description: Relationship to user.
@@ -8702,9 +10460,7 @@ components:
           example: Application Key for managing dashboards
           type: string
         scopes:
-          description: Array of scopes to grant the application key. This feature
-            is in private beta, please contact Datadog support to enable scopes for
-            your application keys.
+          description: Array of scopes to grant the application key.
           example:
           - dashboards_read
           - dashboards_write
@@ -9150,6 +10906,10 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/RUMApplicationListAttributes'
+        id:
+          description: RUM application ID.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
+          type: string
         type:
           $ref: '#/components/schemas/RUMApplicationListType'
       required:
@@ -9985,19 +11745,23 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role` and
-            `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`
+            (beta), `user` (beta), and `org`.
 
-            The org ID can be obtained through the api/v2/current_user API.'
+            The org ID can be obtained through the api/v2/current_user API.
+
+            The user principal type accepts service account IDs.'
           example:
           - role:00000000-0000-1111-0000-000000000000
           items:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role` and `org`.
+              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
 
-              The org ID can be obtained through the api/v2/current_user API.'
+              The org ID can be obtained through the api/v2/current_user API.
+
+              The user principal type accepts service account IDs.'
             type: string
           type: array
         relation:
@@ -12657,6 +14421,9 @@ components:
       properties:
         attributes:
           $ref: '#/components/schemas/ServiceDefinitionDataAttributes'
+        id:
+          description: Service definition id.
+          type: string
         type:
           description: Service definition type.
           type: string
@@ -12690,6 +14457,30 @@ components:
         last-modified-time:
           description: Last modified time of the service definition.
           type: string
+        origin:
+          description: User defined origin of the service definition.
+          type: string
+        origin-detail:
+          description: User defined origin's detail of the service definition.
+          type: string
+        warnings:
+          description: A list of schema validation warnings.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionMetaWarnings'
+          type: array
+      type: object
+    ServiceDefinitionMetaWarnings:
+      description: Schema validation warnings.
+      properties:
+        instance-location:
+          description: The warning instance location.
+          type: string
+        keyword-location:
+          description: The warning keyword location.
+          type: string
+        message:
+          description: The warning message.
+          type: string
       type: object
     ServiceDefinitionRaw:
       description: Service Definition in raw JSON/YAML representation.
@@ -12708,6 +14499,17 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       type: object
+    ServiceDefinitionSchemaVersions:
+      description: Schema versions
+      enum:
+      - v1
+      - v2
+      - v2.1
+      type: string
+      x-enum-varnames:
+      - V1
+      - V2
+      - V2_1
     ServiceDefinitionV1:
       deprecated: true
       description: Deprecated - Service definition V1 for providing additional service
@@ -13398,6 +15200,537 @@ components:
       - channel_name
       - redirect_url
       type: object
+    Span:
+      description: Object description of a spans after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAttributes'
+        id:
+          description: Unique ID of the Span.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansType'
+      type: object
+    SpansAggregateBucket:
+      description: Spans aggregate.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAggregateBucketAttributes'
+        id:
+          description: ID of the spans aggregate.
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansAggregateBucketType'
+      type: object
+    SpansAggregateBucketAttributes:
+      description: A bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group by.
+          description: The key, value pairs for each group by.
+          example:
+            '@state': success
+            '@version': abc
+          type: object
+        compute:
+          description: The compute data.
+          type: object
+        computes:
+          additionalProperties:
+            $ref: '#/components/schemas/SpansAggregateBucketValue'
+          description: A map of the metric name -> value for regular compute or list
+            of values for a timeseries.
+          type: object
+      type: object
+    SpansAggregateBucketType:
+      description: The spans aggregate bucket type.
+      enum:
+      - bucket
+      example: bucket
+      type: string
+      x-enum-varnames:
+      - BUCKET
+    SpansAggregateBucketValue:
+      description: A bucket value, can be either a timeseries or a single value.
+      oneOf:
+      - $ref: '#/components/schemas/SpansAggregateBucketValueSingleString'
+      - $ref: '#/components/schemas/SpansAggregateBucketValueSingleNumber'
+      - $ref: '#/components/schemas/SpansAggregateBucketValueTimeseries'
+    SpansAggregateBucketValueSingleNumber:
+      description: A single number value.
+      format: double
+      type: number
+    SpansAggregateBucketValueSingleString:
+      description: A single string value.
+      type: string
+    SpansAggregateBucketValueTimeseries:
+      description: A timeseries array.
+      items:
+        $ref: '#/components/schemas/SpansAggregateBucketValueTimeseriesPoint'
+      type: array
+      x-generate-alias-as-model: true
+    SpansAggregateBucketValueTimeseriesPoint:
+      description: A timeseries point.
+      properties:
+        time:
+          description: The time value for this point.
+          example: '2023-06-08T11:55:00Z'
+          type: string
+        value:
+          description: The value for this point.
+          example: 19
+          format: double
+          type: number
+      type: object
+    SpansAggregateData:
+      description: The object containing the query content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAggregateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SpansAggregateRequestType'
+      type: object
+    SpansAggregateRequest:
+      description: The object sent with the request to retrieve a list of aggregated
+        spans from your organization.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansAggregateData'
+      type: object
+    SpansAggregateRequestAttributes:
+      description: The object containing all the query parameters.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/SpansCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/SpansQueryFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/SpansGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/SpansQueryOptions'
+      type: object
+    SpansAggregateRequestType:
+      default: aggregate_request
+      description: The type of resource. The value should always be aggregate_request.
+      enum:
+      - aggregate_request
+      example: aggregate_request
+      type: string
+      x-enum-varnames:
+      - AGGREGATE_REQUEST
+    SpansAggregateResponse:
+      description: The response object for the spans aggregate API endpoint.
+      properties:
+        data:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/SpansAggregateBucket'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SpansAggregateResponseMetadata'
+      type: object
+    SpansAggregateResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/SpansAggregateResponseStatus'
+        warnings:
+          description: 'A list of warnings (non fatal errors) encountered, partial
+            results might be returned if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/SpansWarning'
+          type: array
+      type: object
+    SpansAggregateResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    SpansAggregateSort:
+      description: A sort rule.
+      example:
+        aggregation: count
+        order: asc
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SpansAggregationFunction'
+        metric:
+          description: The metric to sort by (only used for `type=measure`).
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/SpansSortOrder'
+        type:
+          $ref: '#/components/schemas/SpansAggregateSortType'
+      type: object
+    SpansAggregateSortType:
+      default: alphabetical
+      description: The type of sorting algorithm.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    SpansAggregationFunction:
+      description: An aggregation function.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - median
+      example: pc90
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PERCENTILE_75
+      - PERCENTILE_90
+      - PERCENTILE_95
+      - PERCENTILE_98
+      - PERCENTILE_99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - MEDIAN
+    SpansAttributes:
+      description: JSON object containing all span attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from your span.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        custom:
+          additionalProperties: {}
+          description: JSON object of custom spans data.
+          type: object
+        end_timestamp:
+          description: End timestamp of your span.
+          example: '2023-01-02T09:42:36.420Z'
+          format: date-time
+          type: string
+        env:
+          description: Name of the environment from where the spans are being sent.
+          example: prod
+          type: string
+        host:
+          description: Name of the machine from where the spans are being sent.
+          example: i-0123
+          type: string
+        ingestion_reason:
+          description: The reason why the span was ingested.
+          example: rule
+          type: string
+        parent_id:
+          description: Id of the span that's parent of this span.
+          example: '0'
+          type: string
+        resource_hash:
+          description: Unique identifier of the resource.
+          example: a12345678b91c23d
+          type: string
+        resource_name:
+          description: The name of the resource.
+          example: agent
+          type: string
+        retained_by:
+          description: The reason why the span was indexed.
+          example: retention_filter
+          type: string
+        service:
+          description: 'The name of the application or service generating the span
+            events.
+
+            It is used to switch from APM to Logs, so make sure you define the same
+
+            value when you use both products.'
+          example: agent
+          type: string
+        single_span:
+          description: Whether or not the span was collected as a stand-alone span.
+            Always associated to "single_span" ingestion_reason if true.
+          example: true
+          type: boolean
+        span_id:
+          description: Id of the span.
+          example: '1234567890987654321'
+          type: string
+        start_timestamp:
+          description: Start timestamp of your span.
+          example: '2023-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+        tags:
+          description: Array of tags associated with your span.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your span.
+            type: string
+          type: array
+        trace_id:
+          description: Id of the trace to which the span belongs.
+          example: '1234567890987654321'
+          type: string
+        type:
+          description: The type of the span.
+          example: web
+          type: string
+      type: object
+    SpansCompute:
+      description: A compute rule to compute metrics or timeseries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SpansAggregationFunction'
+        interval:
+          description: 'The time buckets'' size (only used for type=timeseries)
+
+            Defaults to a resolution of 150 points.'
+          example: 5m
+          type: string
+        metric:
+          description: The metric to use.
+          example: '@duration'
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansComputeType'
+      required:
+      - aggregation
+      type: object
+    SpansComputeType:
+      default: total
+      description: The type of compute.
+      enum:
+      - timeseries
+      - total
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOTAL
+    SpansGroupBy:
+      description: A group by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: host
+          type: string
+        histogram:
+          $ref: '#/components/schemas/SpansGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/SpansGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/SpansAggregateSort'
+        total:
+          $ref: '#/components/schemas/SpansGroupByTotal'
+      required:
+      - facet
+      type: object
+    SpansGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets.
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out).'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out).'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
+      type: object
+    SpansGroupByMissing:
+      description: The value to use for spans that don't have the facet used to group
+        by.
+      oneOf:
+      - $ref: '#/components/schemas/SpansGroupByMissingString'
+      - $ref: '#/components/schemas/SpansGroupByMissingNumber'
+    SpansGroupByMissingNumber:
+      description: The missing value to use if there is a number valued facet.
+      format: double
+      type: number
+    SpansGroupByMissingString:
+      description: The missing value to use if there is string valued facet.
+      type: string
+    SpansGroupByTotal:
+      default: false
+      description: A resulting object to put the given computes in over all the matching
+        records.
+      oneOf:
+      - $ref: '#/components/schemas/SpansGroupByTotalBoolean'
+      - $ref: '#/components/schemas/SpansGroupByTotalString'
+      - $ref: '#/components/schemas/SpansGroupByTotalNumber'
+    SpansGroupByTotalBoolean:
+      description: If set to true, creates an additional bucket labeled "$facet_total".
+      type: boolean
+    SpansGroupByTotalNumber:
+      description: A number to use as the key value for the total bucket.
+      format: double
+      type: number
+    SpansGroupByTotalString:
+      description: A string to use as the key value for the total bucket.
+      type: string
+    SpansListRequest:
+      description: The request for a spans list.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansListRequestData'
+      type: object
+    SpansListRequestAttributes:
+      description: The object containing all the query parameters.
+      properties:
+        filter:
+          $ref: '#/components/schemas/SpansQueryFilter'
+        options:
+          $ref: '#/components/schemas/SpansQueryOptions'
+        page:
+          $ref: '#/components/schemas/SpansListRequestPage'
+        sort:
+          $ref: '#/components/schemas/SpansSort'
+      type: object
+    SpansListRequestData:
+      description: The object containing the query content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansListRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SpansListRequestType'
+      type: object
+    SpansListRequestPage:
+      description: Paging attributes for listing spans.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of spans in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    SpansListRequestType:
+      default: search_request
+      description: The type of resource. The value should always be search_request.
+      enum:
+      - search_request
+      example: search_request
+      type: string
+      x-enum-varnames:
+      - SEARCH_REQUEST
+    SpansListResponse:
+      description: Response object with all spans matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of spans matching the request.
+          items:
+            $ref: '#/components/schemas/Span'
+          type: array
+        links:
+          $ref: '#/components/schemas/SpansListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/SpansListResponseMetadata'
+      type: object
+    SpansListResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/spans/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    SpansListResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/SpansResponseMetadataPage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/SpansAggregateResponseStatus'
+        warnings:
+          description: 'A list of warnings (non fatal errors) encountered, partial
+            results might be returned if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/SpansWarning'
+          type: array
+      type: object
     SpansMetricCompute:
       description: The compute rule to compute the span-based metric.
       properties:
@@ -13618,6 +15951,101 @@ components:
             $ref: '#/components/schemas/SpansMetricResponseData'
           type: array
       type: object
+    SpansQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested spans, supports date-time
+            ISO8601, date math, and regular timestamps (milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query - following the span search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested spans, supports date-time
+            ISO8601, date math, and regular timestamps (milliseconds).
+          example: now
+          type: string
+      type: object
+    SpansQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Note: You should only supply timezone or time offset but not both otherwise
+        the query will fail.'
+      properties:
+        timeOffset:
+          description: The time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
+          example: GMT
+          type: string
+      type: object
+    SpansResponseMetadataPage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: 'The cursor to use to get the next results, if any. To make
+            the next request, use the same
+
+            parameters with the addition of the `page[cursor]`.'
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    SpansSort:
+      description: Sort parameters when querying spans.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    SpansSortOrder:
+      description: The order to use, ascending or descending.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
+    SpansType:
+      default: spans
+      description: Type of the span.
+      enum:
+      - spans
+      example: spans
+      type: string
+      x-enum-varnames:
+      - SPANS
+    SpansWarning:
+      description: A warning message indicating something that went wrong with the
+        query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -13658,7 +16086,7 @@ components:
         handle:
           description: The team's identifier
           example: example-team
-          maxLength: 64
+          maxLength: 195
           type: string
         link_count:
           description: The number of links belonging to the team
@@ -13673,7 +16101,7 @@ components:
         name:
           description: The name of the team
           example: Example Team
-          maxLength: 64
+          maxLength: 200
           type: string
         summary:
           description: A brief summary of the team, derived from the `description`
@@ -13712,12 +16140,12 @@ components:
         handle:
           description: The team's identifier
           example: example-team
-          maxLength: 64
+          maxLength: 195
           type: string
         name:
           description: The name of the team
           example: Example Team
-          maxLength: 64
+          maxLength: 200
           type: string
       required:
       - handle
@@ -14009,12 +16437,12 @@ components:
         handle:
           description: The team's identifier
           example: example-team
-          maxLength: 64
+          maxLength: 195
           type: string
         name:
           description: The name of the team
           example: Example Team
-          maxLength: 64
+          maxLength: 200
           type: string
       required:
       - handle
@@ -14477,6 +16905,8 @@ components:
         id:
           description: ID of the user invitation.
           type: string
+        relationships:
+          $ref: '#/components/schemas/UserInvitationRelationships'
         type:
           $ref: '#/components/schemas/UserInvitationsType'
       type: object
@@ -14757,22 +17187,34 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_service_catalog_read: View service catalog and service definitions.
+            apm_service_catalog_write: Add, modify, and delete service catalog definitions
+              when those definitions are maintained by Datadog.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             events_read: Read Events data.
+            incident_notification_settings_write: Configure Incidents Notification
+              settings.
             incident_read: View incidents in Datadog.
-            incident_settings_write: Configure Incidents settings.
+            incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. The ability to write monitors is not required to set
-              downtimes.
+              an organization. Mute and unmute hosts. The ability to write monitors
+              is not required to set downtimes.
             monitors_read: View monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            synthetics_read: List and view configured Synthetic tests and test results.
+            synthetics_write: Create, edit, and delete Synthetic tests.
+            teams_manage: Manage Teams. Create, delete, rename, and edit metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. A User with this permission can view Team
+              names, metadata, and which Users are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -15014,10 +17456,6 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all span-based metrics
       tags:
       - Spans Metrics
@@ -15114,10 +17552,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a span-based metric
       tags:
       - Spans Metrics
@@ -15691,6 +18125,87 @@ paths:
       x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
+  /api/v2/ci/pipeline:
+    post:
+      description: 'Send your pipeline event to your Datadog platform over HTTP. For
+        details about how pipeline executions are modeled and what execution types
+        we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
+
+
+        Pipeline events can be submitted with a timestamp that is up to 18 hours in
+        the past.
+
+
+        This API endpoint is in private beta.'
+      operationId: CreateCIAppPipelineEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CIAppCreatePipelineEventRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Request accepted for processing
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Forbidden
+        '408':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Request Timeout
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Payload Too Large
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Too Many Requests
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Service Unavailable
+      summary: Send pipeline event
+      tags:
+      - CI Visibility Pipelines
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
       description: The API endpoint to aggregate CI Visibility pipeline events into
@@ -15719,13 +18234,13 @@ paths:
       tags:
       - CI Visibility Pipelines
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v2/ci/pipelines/events:
     get:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a log search query.
+        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -15796,7 +18311,7 @@ paths:
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
-      x-menu-order: 1
+      x-menu-order: 2
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -15807,7 +18322,7 @@ paths:
   /api/v2/ci/pipelines/events/search:
     post:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a log search query.
+        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -15837,7 +18352,7 @@ paths:
       tags:
       - CI Visibility Pipelines
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -15878,8 +18393,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events:
     get:
-      description: 'List endpoint returns CI Visibility test events that match a log
-        search query.
+      description: 'List endpoint returns CI Visibility test events that match a [log
+        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -15960,8 +18475,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events/search:
     post:
-      description: 'List endpoint returns CI Visibility test events that match a log
-        search query.
+      description: 'List endpoint returns CI Visibility test events that match a [log
+        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -16414,6 +18929,281 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/downtime:
+    get:
+      description: Get all scheduled downtimes.
+      operationId: ListDowntimes
+      parameters:
+      - description: Only return downtimes that are active when the request is made.
+        in: query
+        name: current_only
+        required: false
+        schema:
+          type: boolean
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          paths are `created_by` and `monitor`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,monitor
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDowntimesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Get all downtimes
+      tags:
+      - Downtimes
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Schedule a downtime.
+      operationId: CreateDowntime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowntimeCreateRequest'
+        description: Schedule a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Schedule a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-given:
+        downtime_v2:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"message\": \"test
+              message\",\n      \"monitor_identifier\": {\n        \"monitor_tags\":
+              [\"cat:hat\"]\n      },\n      \"scope\": \"test:{{ unique_lower_alnum
+              }}\",\n      \"schedule\": {\n        \"start\": null\n      }\n    },\n
+              \   \"type\": \"downtime\"\n  }\n}"
+          step: there is a valid "downtime_v2" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: CancelDowntime
+        parameters:
+        - name: downtime_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/downtime/{downtime_id}:
+    delete:
+      description: Cancel a downtime.
+      operationId: CancelDowntime
+      parameters:
+      - description: ID of the downtime to cancel.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Cancel a downtime
+      tags:
+      - Downtimes
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get downtime detail by `downtime_id`.
+      operationId: GetDowntime
+      parameters:
+      - description: ID of the downtime to fetch.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          paths are `created_by` and `monitor`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,monitor
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a downtime
+      tags:
+      - Downtimes
+      x-menu-order: 5
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a downtime by `downtime_id`.
+      operationId: UpdateDowntime
+      parameters:
+      - description: ID of the downtime to update.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00e000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowntimeUpdateRequest'
+        description: Update a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Update a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -16495,7 +19285,7 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in beta.
 
         For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events/search:
@@ -16543,7 +19333,7 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in beta.
 
         For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
@@ -17330,6 +20120,184 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/gcp/accounts:
+    get:
+      description: List all GCP STS-enabled service accounts configured in your Datadog
+        account.
+      operationId: ListGCPSTSAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPSTSServiceAccountsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all GCP STS-enabled service accounts
+      tags:
+      - GCP Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a new entry within Datadog for your STS enabled service
+        account.
+      operationId: CreateGCPSTSAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GCPSTSServiceAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPSTSServiceAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new entry for your service account
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-given:
+        gcp_sts_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"client_email\":
+              \"{{ unique_hash }}@example.com\",\n      \"host_filters\": []\n    },\n
+              \   \"type\": \"gcp_service_account\"\n  }\n}"
+          step: there is a valid "gcp_sts_account" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteGCPSTSAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integration/gcp/accounts/{account_id}:
+    delete:
+      description: Delete an STS enabled GCP account from within Datadog.
+      operationId: DeleteGCPSTSAccount
+      parameters:
+      - $ref: '#/components/parameters/GCPSTSServiceAccountID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an STS enabled GCP Account
+      tags:
+      - GCP Integration
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update an STS enabled service account.
+      operationId: UpdateGCPSTSAccount
+      parameters:
+      - $ref: '#/components/parameters/GCPSTSServiceAccountID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GCPSTSServiceAccountUpdateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPSTSServiceAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update STS Service Account
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/integration/gcp/sts_delegate:
+    get:
+      description: List your Datadog-GCP STS delegate account configured in your Datadog
+        account.
+      operationId: GetGCPSTSDelegate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPSTSDelegateAccountResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List delegate account
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: safe
+    post:
+      description: Create a Datadog GCP principal.
+      operationId: MakeGCPSTSDelegate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example: {}
+              type: object
+        description: Create a delegate service account within Datadog.
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GCPSTSDelegateAccountResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a Datadog GCP principal
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
@@ -18276,11 +21244,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - org_management
       summary: Get IP Allowlist
       tags:
       - IP Allowlist
@@ -18311,11 +21274,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - org_management
       summary: Update IP Allowlist
       tags:
       - IP Allowlist
@@ -19665,15 +22623,21 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'For customers with multiple indexes, the indexes to search
+      - description: 'For customers with multiple indexes, the indexes to search.
 
           Defaults to ''*'' which means all indexes'
-        example: main
+        example:
+        - main
+        - web
+        explode: false
         in: query
-        name: filter[index]
+        name: filter[indexes]
         required: false
         schema:
-          type: string
+          items:
+            description: The name of a log index.
+            type: string
+          type: array
       - description: Minimum timestamp for requested logs.
         example: '2019-01-02T09:42:36.320Z'
         in: query
@@ -19858,7 +22822,7 @@ paths:
       - description: 'The number of seconds of look back (from now) to apply to a
           filter[tag] or filter[queried] query.
 
-          Defaults value is 3600 (1 hour), maximum value is 1,209,600 (2 weeks).'
+          Default value is 3600 (1 hour), maximum value is 2,592,000 (30 days).'
         example: 3600
         in: query
         name: window[seconds]
@@ -19952,7 +22916,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      summary: Configure tags for multiple metrics
+      summary: Delete tags for multiple metrics
       tags:
       - Metrics
       x-codegen-request-body-name: body
@@ -20125,7 +23089,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - metrics_read
       summary: List tags by metric name
       tags:
       - Metrics
@@ -20711,6 +23676,48 @@ paths:
       x-menu-order: 12
       x-undo:
         type: idempotent
+  /api/v2/monitor/{monitor_id}/downtime_matches:
+    get:
+      description: Get all active downtimes for the specified monitor.
+      operationId: ListMonitorDowntimes
+      parameters:
+      - description: The id of the monitor.
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorDowntimeMatchResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Get active downtimes for a monitor
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -20740,7 +23747,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List permissions
       tags:
       - Roles
@@ -20764,13 +23772,16 @@ paths:
         can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*`
         to filter for any non-AWS resources.\n\nThe operator must come after the equal
         sign. For example, to filter with the `>=` operator, add the operator after
-        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe
-        response includes an array of finding objects, pagination metadata, and a
-        count of items that match the query.\n\nEach finding object contains the following:\n\n-
-        The finding ID that can be used in a `GetFinding` request to retrieve the
-        full finding details.\n- Core attributes, including status, evaluation, high-level
-        resource details, muted state, and rule details.\n- `evaluation_changed_at`
-        and `resource_discovery_date` time stamps.\n- An array of associated tags.\n"
+        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery
+        parameters must be only among the documented ones and with values of correct
+        types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`)
+        are not allowed.\n\n### Response\n\nThe response includes an array of finding
+        objects, pagination metadata, and a count of items that match the query.\n\nEach
+        finding object contains the following:\n\n- The finding ID that can be used
+        in a `GetFinding` request to retrieve the full finding details.\n- Core attributes,
+        including status, evaluation, high-level resource details, muted state, and
+        rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time
+        stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -20870,17 +23881,13 @@ paths:
                 $ref: '#/components/schemas/ListFindingsResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          $ref: '#/components/responses/FindingsBadRequestResponse'
         '403':
-          $ref: '#/components/responses/ForbiddenResponse'
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          $ref: '#/components/responses/NotFoundResponse'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20911,6 +23918,15 @@ paths:
         required: true
         schema:
           type: string
+      - description: Return the finding for a given snapshot of time (Unix ms).
+        example: 1678721573794
+        in: query
+        name: snapshot_timestamp
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -20919,17 +23935,13 @@ paths:
                 $ref: '#/components/schemas/GetFindingResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          $ref: '#/components/responses/FindingsBadRequestResponse'
         '403':
-          $ref: '#/components/responses/ForbiddenResponse'
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          $ref: '#/components/responses/NotFoundResponse'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -20939,6 +23951,78 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Mute or unmute a specific finding.
+
+        The API returns the updated finding object when the request is successful.'
+      operationId: UpdateFinding
+      parameters:
+      - description: The ID of the finding.
+        in: path
+        name: finding_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MuteFindingRequest'
+        description: 'To mute or unmute a finding, the request body should include
+          at least two attributes: `muted` and `reason`. The allowed reasons depend
+          on whether the finding is being muted or unmuted:
+
+          - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.
+
+          - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`,
+          `OTHER`.
+
+          '
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MuteFindingResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/FindingsBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/FindingsForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/FindingsNotFoundResponse'
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Resource Conflict: The finding has already been muted or unmuted
+            within the last 60 seconds.'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Invalid Request: The server understands the request syntax
+            but cannot process it due to invalid data.'
+        '429':
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_write
+      summary: Mute or unmute a finding
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 3
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -21044,7 +24128,7 @@ paths:
         type: safe
   /api/v2/query/scalar:
     post:
-      description: 'Query scalar values (as seen on Query Value, Table and Toplist
+      description: 'Query scalar values (as seen on Query Value, Table, and Toplist
         widgets).
 
         Multiple data sources are supported with the ability to
@@ -21084,13 +24168,13 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
-        (RUM) and cloud cost data sources.
+      x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
+        (RUM), and Cloud Cost Management data sources.
 
         Support for logs is in beta. We are gradually onboarding support for more
         sources. If you have any
 
-        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
       description: 'Query timeseries data across various data sources and
@@ -21130,13 +24214,13 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
-        (RUM) and cloud cost data sources.
+      x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
+        (RUM), and Cloud Cost Management data sources.
 
         Support for logs is in beta. We are gradually onboarding support for more
         sources. If you have any
 
-        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -21298,7 +24382,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List roles
       tags:
       - Roles
@@ -21422,7 +24507,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get a role
       tags:
       - Roles
@@ -21629,7 +24715,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: List permissions for a role
       tags:
       - Roles
@@ -21796,7 +24883,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - user_access_read
       summary: Get all users of a role
       tags:
       - Roles
@@ -22611,7 +25699,7 @@ paths:
       summary: List rules
       tags:
       - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: safe
     post:
@@ -23257,6 +26345,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete Scanning Group
@@ -23304,6 +26394,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update Scanning Group
@@ -23411,6 +26503,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Delete Scanning Rule
@@ -23457,6 +26551,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Update Scanning Rule
@@ -23933,6 +27029,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/SchemaVersion'
       responses:
         '200':
           content:
@@ -23944,6 +27041,11 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
       summary: Get all service definitions
       tags:
       - Service Definition
@@ -23979,6 +27081,11 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
       summary: Create or update service definition
       tags:
       - Service Definition
@@ -24024,6 +27131,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
       summary: Delete a single service definition
       tags:
       - Service Definition
@@ -24035,6 +27147,7 @@ paths:
       operationId: GetServiceDefinition
       parameters:
       - $ref: '#/components/parameters/ServiceName'
+      - $ref: '#/components/parameters/SchemaVersion'
       responses:
         '200':
           content:
@@ -24052,6 +27165,11 @@ paths:
           $ref: '#/components/responses/ConflictResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
       summary: Get a single service definition
       tags:
       - Service Definition
@@ -24176,6 +27294,174 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/spans/analytics/aggregate:
+    post:
+      description: 'The API endpoint to aggregate spans into buckets and compute metrics
+        and timeseries.
+
+        This endpoint is rate limited to `300` requests per hour.'
+      operationId: AggregateSpans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpansAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Aggregate spans
+      tags:
+      - Spans
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/spans/events:
+    get:
+      description: 'List endpoint returns spans that match a span search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to see your latest spans.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
+      operationId: ListSpansGet
+      parameters:
+      - description: Search query following spans syntax.
+        example: '@datacenter:us @role:db'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested spans. Supports date-time ISO8601,
+          date math, and regular timestamps (milliseconds).
+        example: '2023-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          type: string
+      - description: Maximum timestamp for requested spans. Supports date-time ISO8601,
+          date math, and regular timestamps (milliseconds).
+        example: '2023-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          type: string
+      - description: Order of spans in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SpansSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of spans in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/SpansBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/SpansForbiddenResponse'
+        '422':
+          $ref: '#/components/responses/SpansUnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      summary: Get a list of spans
+      tags:
+      - Spans
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/spans/events/search:
+    post:
+      description: 'List endpoint returns spans that match a span search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to build complex spans filtering and search.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
+      operationId: ListSpans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpansListRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/SpansBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/SpansForbiddenResponse'
+        '422':
+          $ref: '#/components/responses/SpansUnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      summary: Search spans
+      tags:
+      - Spans
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -24315,9 +27601,9 @@ paths:
         dd_team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"{{timestamp('now')}}\",\n
-              \     \"name\": \"{{timestamp('now')}}\"\n    },\n    \"type\": \"team\"\n
-              \ }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"handle-{{
+              unique_hash }}\",\n      \"name\": \"name-{{ unique_hash }}\"\n    },\n
+              \   \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
@@ -26210,7 +29496,8 @@ tags:
 
     sent from Identity Providers.'
   name: AuthN Mappings
-- description: Search or aggregate your CI Visibility pipeline events over HTTP.
+- description: Search or aggregate your CI Visibility pipeline events and send them
+    to your Datadog site over HTTP.
   name: CI Visibility Pipelines
 - description: Search or aggregate your CI Visibility test events over HTTP.
   name: CI Visibility Tests
@@ -26229,6 +29516,18 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: '**Note**: Downtime V2 is currently in private beta. To request access,
+    contact [Datadog support](https://docs.datadoghq.com/help/).
+
+
+    [Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives
+
+    you greater control over monitor notifications by allowing you to globally exclude
+
+    scopes from alerting. Downtime settings, which can be scheduled with start and
+
+    end times, prevent all alerting related to specified Datadog tags.'
+  name: Downtimes
 - description: 'The events service allows you to programmatically post events to the
     event stream
 
@@ -26242,6 +29541,12 @@ tags:
 - description: Configure your Datadog Fastly integration directly through the Datadog
     API.
   name: Fastly Integration
+- description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
+
+    through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/google_cloud_platform
+  name: GCP Integration
 - description: 'The IP allowlist API is used to manage the IP addresses that
 
     can access the Datadog API and web UI. It does not block
@@ -26354,10 +29659,11 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles). The
-    restriction policy
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams
+    (beta), or users (beta)).
 
-    determines who is authorized to perform what actions on the resource.'
+    The restriction policy determines who is authorized to perform what actions on
+    the resource.'
   name: Restriction Policies
 - description: 'The Roles API is used to create and manage Datadog roles, what
 
@@ -26387,6 +29693,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: Search and aggregate your spans from your Datadog platform over HTTP.
+  name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
     for your organization.
   externalDocs:

@@ -4588,17 +4588,19 @@ api:
     url: /api/latest/downtimes/
     identifier: downtimes
     generated: true
-  - name: Get all downtimes for a monitor
-    url: '#get-all-downtimes-for-a-monitor'
-    identifier: downtimes-get-all-downtimes-for-a-monitor
+  - name: Get active downtimes for a monitor
+    url: '#get-active-downtimes-for-a-monitor'
+    identifier: downtimes-get-active-downtimes-for-a-monitor
     parent: downtimes
     generated: true
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListMonitorDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4608,9 +4610,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4620,9 +4624,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -4632,9 +4638,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CancelDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -4656,9 +4664,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -4668,9 +4678,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
@@ -4795,6 +4807,78 @@ api:
     url: /api/latest/gcp-integration/
     identifier: gcp-integration
     generated: true
+  - name: Create a Datadog GCP principal
+    url: '#create-a-datadog-gcp-principal'
+    identifier: gcp-integration-create-a-datadog-gcp-principal
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - MakeGCPSTSDelegate
+      unstable: []
+      order: 5
+  - name: List delegate account
+    url: '#list-delegate-account'
+    identifier: gcp-integration-list-delegate-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetGCPSTSDelegate
+      unstable: []
+      order: 6
+  - name: Update STS Service Account
+    url: '#update-sts-service-account'
+    identifier: gcp-integration-update-sts-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateGCPSTSAccount
+      unstable: []
+      order: 4
+  - name: Delete an STS enabled GCP Account
+    url: '#delete-an-sts-enabled-gcp-account'
+    identifier: gcp-integration-delete-an-sts-enabled-gcp-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteGCPSTSAccount
+      unstable: []
+      order: 3
+  - name: Create a new entry for your service account
+    url: '#create-a-new-entry-for-your-service-account'
+    identifier: gcp-integration-create-a-new-entry-for-your-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateGCPSTSAccount
+      unstable: []
+      order: 2
+  - name: List all GCP STS-enabled service accounts
+    url: '#list-all-gcp-sts-enabled-service-accounts'
+    identifier: gcp-integration-list-all-gcp-sts-enabled-service-accounts
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListGCPSTSAccounts
+      unstable: []
+      order: 1
   - name: Update a GCP integration
     url: '#update-a-gcp-integration'
     identifier: gcp-integration-update-a-gcp-integration
@@ -5457,8 +5541,19 @@ api:
       versions:
         - v2
       operationids:
-        - DeleteBulkTagsMetricsConfiguration
         - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
+  - name: Delete tags for multiple metrics
+    url: '#delete-tags-for-multiple-metrics'
+    identifier: metrics-delete-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
       unstable: []
       order: 10
   - name: Get a list of metrics
@@ -6099,7 +6194,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 3
+      order: 4
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -6160,6 +6255,19 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
+  - name: Mute or unmute a finding
+    url: '#mute-or-unmute-a-finding'
+    identifier: security-monitoring-mute-or-unmute-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateFinding
+      unstable:
+        - v2
+      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6223,7 +6331,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 3
+      order: 4
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -6746,9 +6854,9 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
-  - name: Trigger Synthetics tests
-    url: '#trigger-synthetics-tests'
-    identifier: synthetics-trigger-synthetics-tests
+  - name: Trigger Synthetic tests
+    url: '#trigger-synthetic-tests'
+    identifier: synthetics-trigger-synthetic-tests
     parent: synthetics
     generated: true
     params:
@@ -6890,6 +6998,18 @@ api:
         - ListTests
       unstable: []
       order: 10
+  - name: Get the default locations
+    url: '#get-the-default-locations'
+    identifier: synthetics-get-the-default-locations
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsDefaultLocations
+      unstable: []
+      order: 28
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: synthetics-edit-a-private-location
@@ -7898,7 +8018,7 @@ api:
       operationids:
         - SearchCIAppPipelineEvents
       unstable: []
-      order: 2
+      order: 3
   - name: Get a list of pipelines events
     url: '#get-a-list-of-pipelines-events'
     identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
@@ -7910,7 +8030,7 @@ api:
       operationids:
         - ListCIAppPipelineEvents
       unstable: []
-      order: 1
+      order: 2
   - name: Aggregate pipelines events
     url: '#aggregate-pipelines-events'
     identifier: ci-visibility-pipelines-aggregate-pipelines-events
@@ -7922,7 +8042,19 @@ api:
       operationids:
         - AggregateCIAppPipelineEvents
       unstable: []
-      order: 3
+      order: 4
+  - name: Send pipeline event
+    url: '#send-pipeline-event'
+    identifier: ci-visibility-pipelines-send-pipeline-event
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCIAppPipelineEvent
+      unstable: []
+      order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
     identifier: ci-visibility-tests
@@ -9697,6 +9829,46 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Spans
+    url: /api/latest/spans/
+    identifier: spans
+    generated: true
+  - name: Search spans
+    url: '#search-spans'
+    identifier: spans-search-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpans
+      unstable: []
+      order: 2
+  - name: Get a list of spans
+    url: '#get-a-list-of-spans'
+    identifier: spans-get-a-list-of-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpansGet
+      unstable: []
+      order: 1
+  - name: Aggregate spans
+    url: '#aggregate-spans'
+    identifier: spans-aggregate-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateSpans
+      unstable: []
+      order: 3
   - name: Spans Metrics
     url: /api/latest/spans-metrics/
     identifier: spans-metrics

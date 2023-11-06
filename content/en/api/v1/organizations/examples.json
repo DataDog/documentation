@@ -17,7 +17,7 @@
                 "saml": {
                   "enabled": false
                 },
-                "saml_autocreate_access_role": "st",
+                "saml_autocreate_access_role": "ro",
                 "saml_autocreate_users_domains": {
                   "domains": [
                     "example.com"
@@ -95,7 +95,7 @@
               "saml": {
                 "enabled": false
               },
-              "saml_autocreate_access_role": "st",
+              "saml_autocreate_access_role": "ro",
               "saml_autocreate_users_domains": {
                 "domains": [
                   "example.com"
@@ -119,7 +119,7 @@
             "trial": false
           },
           "user": {
-            "access_role": "st",
+            "access_role": "ro",
             "disabled": false,
             "email": "test@datadoghq.com",
             "handle": "test@datadoghq.com",
@@ -188,7 +188,7 @@
               "saml": {
                 "enabled": false
               },
-              "saml_autocreate_access_role": "st",
+              "saml_autocreate_access_role": "ro",
               "saml_autocreate_users_domains": {
                 "domains": [
                   "example.com"
@@ -262,7 +262,7 @@
               "saml": {
                 "enabled": false
               },
-              "saml_autocreate_access_role": "st",
+              "saml_autocreate_access_role": "ro",
               "saml_autocreate_users_domains": {
                 "domains": [
                   "example.com"
@@ -327,7 +327,7 @@
           "saml": {
             "enabled": false
           },
-          "saml_autocreate_access_role": "st",
+          "saml_autocreate_access_role": "ro",
           "saml_autocreate_users_domains": {
             "domains": [
               "example.com"
