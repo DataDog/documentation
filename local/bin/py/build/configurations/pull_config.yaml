@@ -523,9 +523,10 @@
             - "docs/en/getting-started.md"
           options:
             dest_path: "/developers/"
-            file_name: "datadog_apps.md"
+            file_name: "ui_extensions.md"
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
+              aliases: ["/developers/datadog_apps/"]
 
       - repo_name: datadog-agent
         contents:

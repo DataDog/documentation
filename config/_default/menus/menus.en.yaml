@@ -317,148 +317,153 @@ main:
     parent: agent
     identifier: agent_iot
     weight: 5
+  - name: Supported Platforms
+    url: agent/supported_platforms/
+    parent: agent
+    identifier: agent_supported_platforms
+    weight: 6
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 6
+    weight: 7
   - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 601
+    weight: 701
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 602
+    weight: 702
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 603
+    weight: 703
   - name: Configuration
     url: agent/configuration
     parent: agent
     identifier: agent_configuration
-    weight: 7
+    weight: 8
   - name: Commands
     url: agent/configuration/agent-commands/
     parent: agent_configuration
-    weight: 701
+    weight: 801
   - name: Configuration Files
     url: agent/configuration/agent-configuration-files/
     parent: agent_configuration
-    weight: 702
+    weight: 802
   - name: Log Files
     url: agent/configuration/agent-log-files/
     parent: agent_configuration
-    weight: 703
+    weight: 803
   - name: Status Page
     url: agent/configuration/agent-status-page/
     parent: agent_configuration
-    weight: 704
+    weight: 804
   - name: Network Traffic
     url: agent/configuration/network/
     parent: agent_configuration
-    weight: 705
+    weight: 805
   - name: Proxy Configuration
     url: agent/configuration/proxy/
     parent: agent_configuration
-    weight: 706
+    weight: 806
   - name: FIPS Compliance
     url: agent/configuration/agent-fips-proxy/
     parent: agent_configuration
-    weight: 707
+    weight: 807
   - name: Dual Shipping
     url: agent/configuration/dual-shipping/
     parent: agent_configuration
-    weight: 708
+    weight: 808
   - name: Secrets Management
     url: agent/configuration/secrets-management/
     parent: agent_configuration
-    weight: 709
+    weight: 809
   - name: Remote Configuration
     url: agent/remote_config
     parent: agent
-    weight: 8
+    weight: 9
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 9
+    weight: 10
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 901
+    weight: 1001
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 902
+    weight: 1002
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 903
+    weight: 1003
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 10
+    weight: 11
     identifier: agent_troubleshooting
   - name: Container Hostname Detection
     url: agent/troubleshooting/hostname_containers/
     parent: agent_troubleshooting
-    weight: 1001
+    weight: 1101
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1002
+    weight: 1102
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1003
+    weight: 1103
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1004
+    weight: 1104
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1005
+    weight: 1105
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1006
+    weight: 1106
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1007
+    weight: 1107
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1008
+    weight: 1108
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1009
+    weight: 1109
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1010
+    weight: 1110
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1011
+    weight: 1111
     parent: agent_troubleshooting
   - name: High CPU or Memory Consumption
     url: agent/troubleshooting/high_memory_usage/
-    weight: 1012
+    weight: 1112
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 11
+    weight: 12
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 12
+    weight: 13
   - name: Containers
     url: containers/
     identifier: containers
@@ -587,11 +592,6 @@ main:
     url: containers/cluster_agent/admission_controller/
     parent: containers_cluster
     weight: 405
-  - name: Troubleshooting
-    url: containers/cluster_agent/troubleshooting/
-    identifier: cluster_agent_troubleshooting
-    parent: containers_cluster
-    weight: 406
   - name: Amazon ECS
     url: containers/amazon_ecs/
     parent: containers
@@ -637,6 +637,21 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_duplicate_hosts
     weight: 801
+  - name: Cluster Agent
+    url: containers/troubleshooting/cluster-agent
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_agent
+    weight: 802
+  - name: Cluster Checks
+    url: containers/troubleshooting/cluster-and-endpoint-checks
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_and_endpoint_checks
+    weight: 803
+  - name: HPA and Metrics Provider
+    url: containers/troubleshooting/hpa
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_hpa
+    weight: 804
   - name: Guides
     url: containers/guide
     parent: containers
@@ -832,46 +847,47 @@ main:
     identifier: serverless_aws_lambda
     weight: 1
   - name: Installation
-    url: serverless/installation
+    url: serverless/aws_lambda/installation
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_installation
     weight: 101
-  - name: Advanced Configuration
-    url: serverless/configuration
+  - name: Lambda Metrics
+    url: serverless/aws_lambda/metrics
     parent: serverless_aws_lambda
-    identifier: serverless_configuration
+    identifier: serverless_aws_lambda_metrics
     weight: 102
-  - name: Enhanced Lambda Metrics
-    url: serverless/enhanced_lambda_metrics
-    parent: serverless_aws_lambda
-    weight: 103
   - name: Distributed Tracing
-    url: serverless/distributed_tracing
+    url: serverless/aws_lambda/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless_aws_lambda
+    weight: 103
+  - name: Log Collection
+    url: serverless/aws_lambda/logs
+    identifier: serverless_aws_lambda_logs
+    parent: serverless_aws_lambda
     weight: 104
-  - name: Custom Metrics
-    url: serverless/custom_metrics
+  - name: Advanced Configuration
+    url: serverless/aws_lambda/configuration
     parent: serverless_aws_lambda
-    identifier: serverless_aws_lambdacustom_metrics
+    identifier: serverless_configuration
     weight: 105
-  - name: Deployment Tracking
-    url: serverless/deployment_tracking
-    parent: serverless_aws_lambda
-    identifier: serverless_aws_lambda_deployment_tracking
-    weight: 106
   - name: Continuous Profiler
     url: serverless/aws_lambda/profiling
     parent: serverless_aws_lambda
-    identifier: serverless_aws_lambda_deployment_tracking
-    weight: 107
+    identifier: serverless_aws_lambda_continuous_profiler
+    weight: 106
   - name: Securing Functions
-    url: /serverless/securing_functions
+    url: /serverless/aws_lambda/securing_functions
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_securing_functions
+    weight: 107
+  - name: Deployment Tracking
+    url: serverless/aws_lambda/deployment_tracking
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
     weight: 108
   - name: Troubleshooting
-    url: serverless/troubleshooting
+    url: serverless/aws_lambda/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
     weight: 109
@@ -1309,6 +1325,11 @@ main:
     identifier: events
     parent: service_management_heading
     weight: 30000
+  - name: Ingest Events
+    url: service_management/events/ingest/
+    identifier: event_ingest
+    parent: events
+    weight: 1
   - name: Explorer
     url: service_management/events/explorer/
     identifier: events_explorer
@@ -1349,6 +1370,11 @@ main:
     identifier: event_explorer_analytics
     parent: events_explorer
     weight: 207
+  - name: Using Events
+    url: service_management/events/usage/
+    identifier: event_usage
+    parent: events
+    weight: 3
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
@@ -3187,26 +3213,31 @@ main:
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 202
+  - name: Security Signals
+    url: security/threats/security_signals
+    parent: cloud_workload_security
+    identifier: cws_security_signals
+    weight: 204
   - name: Security Profiles
     url: security/threats/security_profiles
     parent: cloud_workload_security
     identifier: cws_workload_security_profiles
-    weight: 203
+    weight: 206
   - name: Runtime Anomaly Detection
     url: security/threats/runtime_anomaly_detection
     parent: cloud_workload_security
     identifier: cws_workload_anomaly_detection
-    weight: 204
+    weight: 208
   - name: Creating Custom Agent Rules
     url: security/threats/agent_expressions
     parent: cloud_workload_security
     identifier: cws_agent_expressions
-    weight: 205
+    weight: 210
   - name: CWS Events Formats
     url: security/threats/backend
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
-    weight: 206
+    weight: 212
   - name: Misconfigurations
     url: security/misconfigurations/
     parent: csm
@@ -3257,6 +3288,11 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 18
+  - name: Setup
+    url: security/vulnerabilities/setup
+    parent: vulnerabilities
+    identifier: vulnerabilities_setup
+    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
@@ -4279,10 +4315,10 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 410
-  - name: Datadog Apps SDK
-    url: developers/datadog_apps
+  - name: UI Extensions
+    url: developers/ui_extensions
     parent: dev_tools
-    identifier: dev_tools_datadog_apps
+    identifier: dev_tools_ui_extensions
     weight: 5
   - name: Service Checks
     url: developers/service_checks/
@@ -10591,6 +10627,75 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Service Scorecards
+    url: /api/latest/service-scorecards/
+    identifier: service-scorecards
+    generated: true
+  - name: Delete a rule
+    url: '#delete-a-rule'
+    identifier: service-scorecards-delete-a-rule
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteScorecardRule
+      unstable:
+        - v2
+      order: 3
+  - name: Create a new rule
+    url: '#create-a-new-rule'
+    identifier: service-scorecards-create-a-new-rule
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScorecardRule
+      unstable:
+        - v2
+      order: 1
+  - name: List all rules
+    url: '#list-all-rules'
+    identifier: service-scorecards-list-all-rules
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScorecardRules
+      unstable:
+        - v2
+      order: 2
+  - name: Create outcomes batch
+    url: '#create-outcomes-batch'
+    identifier: service-scorecards-create-outcomes-batch
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateScorecardOutcomesBatch
+      unstable:
+        - v2
+      order: 1
+  - name: List all rule outcomes
+    url: '#list-all-rule-outcomes'
+    identifier: service-scorecards-list-all-rule-outcomes
+    parent: service-scorecards
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListScorecardOutcomes
+      unstable:
+        - v2
+      order: 2
   - name: Spans
     url: /api/latest/spans/
     identifier: spans
