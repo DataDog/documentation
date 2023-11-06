@@ -40,9 +40,9 @@ If a service consumes data from one point and produces to another point, propaga
     ```
 
 2. Inject it into the header before producing downstream:
-```go
-datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
-```
+    ```go
+    datastreams.InjectToBase64Carrier(ctx, ddsarama.NewProducerMessageCarrier(message))
+    ```
 
 ### Sarama Kafka client
 
