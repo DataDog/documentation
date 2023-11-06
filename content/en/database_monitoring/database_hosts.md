@@ -13,16 +13,20 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
-Click on any host in the list to open a details panel. In addition to a filterable graph of active connections for that host, the panel displays:
-
-- [top queries](#top-queries)
-- [metrics](#metrics)
-- [active connections](#active-connections)
-- [blocking queries](#blocking-queries)
-- [calling services](#calling-services)
-- [configuration details](#configuration-details)
+Click on any host in the list to open a details panel:
 
 {{< img src="database_monitoring/db-list-details-panel.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
+
+In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
+
+|                                                 | MySQL     | Oracle    | Postgres  | SQL Server |
+|-------------------------------------------------|-----------|-----------|-----------|------------|
+| [Top queries](#top-queries)                     | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  |
+| [Metrics](#metrics)                             |           |           | {{< X >}} | {{< X >}}  |
+| [Active connections](#active-connections)       | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}  |
+| [Blocking queries](#blocking-queries)           |           |           | {{< X >}} | {{< X >}}  |
+| [Calling services](#calling-services)           | {{< X >}} |           | {{< X >}} | {{< X >}}  |
+| [Configuration details](#configuration-details) | {{< X >}} |           | {{< X >}} | {{< X >}}  |
 
 ## Top queries
 
