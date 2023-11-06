@@ -1,5 +1,5 @@
 ---
-title: Integrating with CI Visibility
+title: Streamlining the Development Lifecycle with CI Visibility
 kind: guide
 further_reading:
 - link: "/tracing/service_catalog/"
@@ -21,7 +21,7 @@ There are two ways to add or remove an associated pipeline:
 You can search for and select the pipelines you want to associate.
 {{< img src="tracing/service_catalog/add_pipelines_to_service.png" alt="Edit add pipeline in the UI" >}}
 
-You can add the pipeline fingerprint directly to the service metadata. You can find a pipeline's fingerprint by clicking on a pipeline in the [Pipelines][6] page:
+You can add the pipeline fingerprint directly to the service metadata. You can find a pipeline's fingerprint by clicking on a pipeline in the [Pipelines][6] page and clicking on the gear icon:
 {{< img src="tracing/service_catalog/pipeline-fingerprint-location.png" alt="Pipeline fingerprint location." >}}
 
 
