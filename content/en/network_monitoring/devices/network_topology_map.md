@@ -61,7 +61,7 @@ Choose **View flow details** to open the NetFlow tab filtered by the device's `@
 
 ### Troubleshooting
 
-If you don't see your device, verify that it's exposing LLDP and CDP data with the following commands:
+If you don't see links or connections to your devices, verify that they are exposing LLDP and CDP data with the following commands:
 
 ```yaml
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.0.8802
