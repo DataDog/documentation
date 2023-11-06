@@ -21,6 +21,11 @@ defaultContentLanguageInSubdir: false
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 # contentDir: "content/en"
 
+caches:
+    getjson:
+        dir: :cacheDir/:project
+        maxAge: '1h'
+
 # gitinfo vars
 enableGitInfo: true
 
