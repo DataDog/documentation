@@ -49,9 +49,10 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 **Some [CIS Kubernetes Benchmark][5] compliance rules only apply to self-hosted Kubernetes clusters.
 
 **Notes**:
+
 - CSM Misconfigurations provides visibility into whether your resources are configured in accordance with certain compliance rules. These rules address various regulatory frameworks, benchmarks, and standards (Security Posture Frameworks). CSM Misconfigurations does not provide an assessment of your actual compliance with any Security Posture Framework, and the compliance rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSM Misconfigurations in consultation with your legal counsel or compliance experts.
 - The compliance rules for the CIS benchmarks follow the CIS automated recommendations. If you're obtaining CIS certification, Datadog recommends also reviewing the manual recommendations as part of your overall security assessment.
-- Datadog also provides Essential Cloud Security Controls, a set of recommendations developed by Datadog internal security experts. Based on common cloud security risks observed by Datadog, this ruleset aims to help users new to cloud security easily remediate high-impact misconfigurations across their cloud environments.
+- Datadog also provides Essential Cloud Security Controls, a set of recommendations developed by Datadog internal security experts. Based on common cloud security risks observed by Datadog, this ruleset aims to help users that are new to cloud security remediate high-impact misconfigurations across their cloud environments.
 
 ## Further reading
 
