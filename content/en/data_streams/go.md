@@ -12,7 +12,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 ### Installation
 
 - Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.
-- [Start the tracer][3]
+- [Start the tracer][3].
 
 Two types of instrumentation are available:
 - Instrumentation for Kafka-based workloads
