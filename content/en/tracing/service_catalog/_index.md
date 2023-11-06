@@ -130,7 +130,7 @@ This information is only available for Cloud Cost Management customers who have 
 
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
-### Software Delivery view
+### Software Delivery View
 The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI pipelines and viewing your static analysis violations. You can:
 
 - View performance of the [CI pipeline(s)][23] related to your services.
