@@ -53,7 +53,7 @@ In addition to the monitor definition, the Title, Description, and Tags fields a
 
 |      | Description    | Examples |
 | ---  | ----------- | ----------- |
-|Title | Allows users to quickly understand the underlying failure mode the alert is covering.| - New flaky tests<br> - High CPU usage on hosts<br> - New Error Tracking issues</br> - Too many opened connections on databases|
+|Title | Allows users to quickly understand the underlying failure mode the alert is covering. Do not use template variables.| - New flaky tests<br> - High CPU usage on hosts<br> - New Error Tracking issues</br> - Too many opened connections on databases|
 |Description | Provides extra context around the failure mode and also about the impact this mode can have on the system. It should be concise and allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.| **Title**: Too many opened connections on databases<br> **Description**: Get notified whenever the number of connections to the database is too high. When too many connections are opened, new clients might not be able to open new connections and thus to execute the queries serving end-users.|
 |Tags | Set to "integration:<app_id>".| See other available monitor tags [here][8].|
 
