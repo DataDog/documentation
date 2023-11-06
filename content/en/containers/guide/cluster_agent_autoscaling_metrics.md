@@ -157,6 +157,22 @@ Once the Datadog Cluster Agent is up and running, apply some additional RBAC pol
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Enable high availability for HPA
+<div class="alert alert-warning">Fetching data from multiple Datadog organizations impacts billing.</div>
+
+To ensure autoscaling is resilient to failure, configure the Cluster Agent to selectively fetch any metrics you use for HPA (both Kubernetes and standard/custom application metrics) from multiple Datadog regions. Configure the Datadog Cluster Agent manifest with several endpoints:
+
+{{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" collapsible="true" >}}
+external_metrics_provider:
+  endpoints:
+  - api_key: <DATADOG_API_KEY>
+    app_key: <DATADOG_APP_KEY>
+    url: https://app.datadoghq.eu
+  - api_key: <DATADOG_API_KEY>
+    app_key: <DATADOG_APP_KEY>
+    url: https://app.datadoghq.com
+{{< /code-block >}}
+
 Once enabled, the Cluster Agent is ready to fetch metrics for the HPA. There are two options:
 - [Autoscaling with DatadogMetric Queries](#autoscaling-with-datadogmetric-queries)
 - [Autoscaling without DatadogMetric Queries](#autoscaling-without-datadogmetric-queries)
