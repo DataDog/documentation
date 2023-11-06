@@ -133,9 +133,9 @@ Click the Settings icon on the right hand corner to hide metric columns from the
 ### Software Delivery view
 The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI pipelines and viewing your static analysis violations. You can:
 
-- View performance of the [CI pipeline(s)][23] related to your services
-- Find security and code quality issues from [Static Analysis][24]
-- Easily pivot from Service Catalog to troubleshoot pre-production slowdowns and failures
+- View performance of the [CI pipeline(s)][23] related to your services.
+- Find security and code quality issues from [Static Analysis][24].
+- Easily pivot from Service Catalog to troubleshoot pre-production slowdowns and failures.
 
 To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
 
@@ -233,5 +233,5 @@ The services and resources statistics, and span summaries on the **Service List*
 [20]: /cloud_cost_management/?tab=aws
 [21]: /cloud_cost_management/tag_pipelines
 [22]: /developers/guide/data-collection-resolution-retention/
-[23]: https://app.datadoghq.com/ci/pipeline
+[23]: https://app.datadoghq.com/ci/pipelines
 [24]: https://app.datadoghq.com/ci/static-analysis
