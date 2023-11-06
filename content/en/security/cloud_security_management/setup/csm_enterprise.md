@@ -73,7 +73,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 #### Follow the in-app instructions (recommended)
 
-To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][8] and click **Hosts and containers**.
+To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
 {{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
@@ -214,6 +214,13 @@ Add the following settings to the `env` section of `security-agent` and `system-
 For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
 By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
+
+```shell
+sudo cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+sudo cp /etc/datadog-agent/security-agent.yaml.example /etc/datadog-agent/security-agent.yaml
+sudo chmod 640 /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
+sudo chgrp dd-agent /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
+```
 
 ```bash
 # /etc/datadog-agent/datadog.yaml file

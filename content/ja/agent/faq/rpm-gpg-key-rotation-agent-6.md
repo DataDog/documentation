@@ -4,7 +4,7 @@ title: RPM GPG キーローテーション
 ---
 
 <div class="alert alert-warning">
-このページは、2019 年のキーローテーションに関するものです。2022 年のキーローテーションについては、<a href="/agent/guide/linux-agent-2022-key-rotation">2022 年 Linux Agent キーローテーション</a>のドキュメントを参照してください。
+このページは、2019 年のキーローテーションに関するものです。2022 年のキーローテーションについては、<a href="/agent/faq/linux-agent-2022-key-rotation">2022 年 Linux Agent キーローテーション</a>のドキュメントを参照してください。
 </div>
 
 

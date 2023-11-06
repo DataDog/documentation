@@ -1,2 +1,2 @@
-<div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
+<div class="alert alert-info"><strong>1-Click Enablement</strong><br>
 If your service is running with <a href="/agent/guide/how_rc_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, hover over the <strong>Not Enabled</strong> indicator in the ASM Status column and click <strong>Enable ASM</strong>. There's no need to re-launch the service with the <code>DD_APPSEC_ENABLED=true</code> or <code>--enable-appsec</code> flags.</div><br>

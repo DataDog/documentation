@@ -1,5 +1,5 @@
 ---
-title: Go Compatibility Requirements 
+title: Go Compatibility Requirements
 kind: documentation
 code_lang: go
 type: multi-code-lang
@@ -14,22 +14,23 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | -------------------------------- | ----------------------------|
 | Threat Detection| 1.47.0  |
 | Threat Protection |  1.50.0   |
+| Customize response to blocked requests | 1.53.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.49.0 |
 | Vulnerability Management for Code-level (beta) | not supported |
 | Automatic user activity event tracking | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
 
-**Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.  
+**Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
 |Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |  
+| AWS Lambda    | {{< X >}}         |                           |
 
 ## Language and framework compatibility
 
@@ -37,7 +38,7 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.50.
 
 The Datadog Go Tracing library is open source. View the [GitHub repository][2] for more information.
 
-The Datadog Go Tracing Library has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5]. 
+The Datadog Go Tracing Library has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5].
 
 You must be running Datadog Agent v5.21.1+
 

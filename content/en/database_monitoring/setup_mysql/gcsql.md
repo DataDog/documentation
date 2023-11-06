@@ -210,9 +210,9 @@ See the [MySQL integration spec][3] for additional information on setting `proje
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -265,7 +265,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/faq/template_variables/
-[3]: /agent/guide/secrets-management
+[3]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -363,7 +363,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -393,7 +393,7 @@ If you have installed and configured the integrations and Agent as described and
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: /integrations/google_cloudsql
 [8]: /database_monitoring/troubleshooting/?tab=mysql

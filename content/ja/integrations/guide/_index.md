@@ -17,7 +17,7 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/cloud-metric-delay" tag="cloud" >}}クラウドメトリクスの遅延{{< /nextlink >}}
     {{< nextlink href="integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class" tag="Windows" >}}WMI クラス `Win32_NTLogEvent` にイベントログファイルを追加する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/retrieving-wmi-metrics" tag="Windows" >}}WMI メトリクスの取得{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag="Mongo" >}}Mongo カスタムメトリクスを収集する{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/mongo-custom-query-collection" tag="MongoDB" >}}MongoDB カスタムメトリクスを収集する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-metrics" tag="Prometheus" >}}Prometheus メトリクスを Datadog メトリクスにマッピングする{{< /nextlink >}}
     {{< nextlink href="integrations/guide/prometheus-host-collection" tag="Prometheus" >}}ホストからの Prometheus および OpenMetrics メトリクス収集{{< /nextlink >}}
     {{< nextlink href="integrations/guide/freshservice-tickets-using-webhooks" tag="Webhooks" >}}Webhooks を利用した Freshservice のチケット{{< /nextlink >}}

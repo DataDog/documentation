@@ -41,7 +41,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
 
-2. [Ingest data with the Datadog Agent, which collects it for Datadog][4] (metrics and traces only).
+2. [Ingest data with the Datadog Agent, which collects it for Datadog][4].
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
 
