@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -95,7 +95,7 @@
         contents:
 
         - action: integrations
-          branch: heston/DOCS-6529
+          branch: master
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
