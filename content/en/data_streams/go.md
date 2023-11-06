@@ -65,8 +65,8 @@ You can also use manual instrumentation. For example, you can propagate context 
 
 #### Instrumenting the produce call
 
-The first step is to ensure your message supports the [TextMapWriter interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37)
-Then, you can inject the context into your message and instrument the produce call by calling:
+1. Ensure your message supports the [TextMapWriter interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L37).
+2. Inject the context into your message and instrument the produce call by calling:
 
 ```go
 ctx, ok := tracer.SetDataStreamsCheckpointWithParams(ctx, options.CheckpointParams{PayloadSize: getProducerMsgSize(msg)}, "direction:out", "type:kinesis", "topic:kinesis_arn")
@@ -78,8 +78,8 @@ if ok {
 
 #### Instrumentating the consume call
 
-The first step is to ensure your message supports the [TextMapReader interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44)
-Then, you can extract the context from your message and instrument the consume call by calling:
+1. Insure your message supports the [TextMapReader interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44).
+2. Extract the context from your message and instrument the consume call by calling:
 
 ```go
 	ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
