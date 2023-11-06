@@ -62,13 +62,19 @@ Click on an individual query to open a panel that includes event attributes, rel
 
 ## Blocking queries
 
-On the **Blocking Queries** tab of host details panel, you can view visualizations for blocking query durations, blocking query executions, and the number of waiting queries. Search and filter the blocking queries, waiting queries, or blocking samples, then click any individual query row to view details.
+On the **Blocking Queries** tab of host details panel, you can view visualizations for:
+
+- blocking query durations
+- blocking query executions
+- the number of waiting queries
+
+You can search and filter the queries or samples. Click any individual query row to view details.
 
 {{< img src="database_monitoring/db-list-blocking-queries.png" alt="The Blocking Queries tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Calling services
 
-On the **Calling Services** tab of the host details panel, you can view the list of services that have called the host. The displayed service information includes when the service was deployed, how many requests made to the host per second, how many database queries were executed, and more.
+On the **Calling Services** tab of the host details panel, you can view the list of services that have called the host. The displayed service information includes when the service was deployed, the number of requests made to the host per second, how many database queries were executed, and more.
 
 {{< img src="database_monitoring/db-list-calling-services.png" alt="The Calling Services tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
