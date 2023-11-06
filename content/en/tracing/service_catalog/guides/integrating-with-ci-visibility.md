@@ -5,6 +5,9 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
+- link: "/continuous_integration/search/?tab=pipelines"
+  tag: "Documentation"
+  text: "Datadog CI Pipeline Visibility"
 ---
 
 In the Delivery lens, you can see CI pipeline and static analysis results associated to your services.
