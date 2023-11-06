@@ -19,7 +19,6 @@
         value: <a_random_token_usually_a_uuid>
     ```
 4. Install the Helm chart in your cluster with the following commands:
-
     ```shell
     helm repo add datadog https://helm.datadoghq.com
     ```

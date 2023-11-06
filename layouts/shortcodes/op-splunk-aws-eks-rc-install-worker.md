@@ -1,17 +1,23 @@
 ### Remote configuration
 
-1. Download the [Remote Configuration Helm chart][101] for AWS EKS.
-2. In the Helm chart:
+1. Navigate to [Observability Pipelines][101].
+1. Click **Add New Pipeline**.
+1. Enter a name for the pipeline.
+1. Click **Next**.
+1. Select the **Splunk** tile.
+1. Select the **Kubernetes** tile.
+1. Select the **AWS EKS** tab.
+1. Download the [Remote Configuration Helm chart][102] for AWS EKS.
+1. In the Helm chart:
     - Replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline.
-    - Replace `site` with the [Datadog site parameter][102].
-
+    - Replace `site` with the [Datadog site parameter][103].
     ```yaml
     datadog:
       apiKey: "<datadog_api_key>"
       pipelineId: "<observability_pipelines_configuration_id>"
       site: "<site>"
     ```
-3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Set up the Splunk Index](#set-up-the-splunk-index):
+1. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Set up the Splunk Index](#set-up-the-splunk-index):
     ```yaml
     env:
       - name: SPLUNK_HEC_ENDPOINT
@@ -19,8 +25,8 @@
       - name: SPLUNK_TOKEN
         value: <a_random_token_usually_a_uuid>
     ```
-4. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the default Splunk HEC port, `8088`.
-5. Install the Helm chart in your cluster with the following commands:
+1. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the default Splunk HEC port, `8088`.
+1. Install the Helm chart in your cluster with the following commands:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
     ```
@@ -32,9 +38,8 @@
         opw datadog/observability-pipelines-worker \
         -f aws_eks_rc.yaml
     ```
-6. Click **Deploy and View Pipelines**.
-7. In the **Installation and Deployment Overview**, review the pipeline configuration.
-8. Click **Deploy**.
+1. Click **Deploy**.
 
-[101]: /resources/yaml/observability_pipelines/splunk/aws_eks_rc.yaml
-[102]: /getting_started/site/#access-the-datadog-site
+[101]: https://app.datadoghq.com/observability-pipelines
+[102]: /resources/yaml/observability_pipelines/splunk/aws_eks_rc.yaml
+[103]: /getting_started/site/#access-the-datadog-site
