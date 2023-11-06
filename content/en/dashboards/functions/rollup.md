@@ -10,6 +10,10 @@ Every metric query is inherently aggregated. However, appending the `.rollup()` 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
 
+To apply a rollup, you can navigate to the "Add function" (Σ) button while editing your query: 
+
+![rollup_nav](https://github.com/DataDog/documentation/assets/5199201/b3d04f2e-07c4-42d7-ac19-db6744a46f3d) 
+
 **Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space. See the documentation on [rollup for distributions with percentiles][2] to learn more.
 
 The function takes two parameters, `<AGGREGATOR>` and optionally `<INTERVAL>`: `.rollup(<AGGREGATOR>,<INTERVAL>)` or `.rollup(<AGGREGATOR>)`.
