@@ -13,6 +13,7 @@ further_reading:
       text: 'Submitting Custom Metrics from Serverless Applications'
 aliases:
     - /serverless/datadog_lambda_library/java/
+    - /serverless/installation/java
 ---
 
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtimes with at least 1024 MB of memory.
