@@ -35,9 +35,9 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 
 If a service consumes data from one point and produces to another point, propagate context between the two places using the Go context structure:
 1. Extract the context from headers:
-```go
-ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
-```
+    ```go
+    ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
+    ```
 
 2. Inject it into the header before producing downstream:
 ```go
