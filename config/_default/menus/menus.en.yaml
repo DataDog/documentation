@@ -847,46 +847,47 @@ main:
     identifier: serverless_aws_lambda
     weight: 1
   - name: Installation
-    url: serverless/installation
+    url: serverless/aws_lambda/installation
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_installation
     weight: 101
-  - name: Advanced Configuration
-    url: serverless/configuration
+  - name: Lambda Metrics
+    url: serverless/aws_lambda/metrics
     parent: serverless_aws_lambda
-    identifier: serverless_configuration
+    identifier: serverless_aws_lambda_metrics
     weight: 102
-  - name: Enhanced Lambda Metrics
-    url: serverless/enhanced_lambda_metrics
-    parent: serverless_aws_lambda
-    weight: 103
   - name: Distributed Tracing
-    url: serverless/distributed_tracing
+    url: serverless/aws_lambda/distributed_tracing
     identifier: serverless_distributed_tracing
     parent: serverless_aws_lambda
+    weight: 103
+  - name: Log Collection
+    url: serverless/aws_lambda/logs
+    identifier: serverless_aws_lambda_logs
+    parent: serverless_aws_lambda
     weight: 104
-  - name: Custom Metrics
-    url: serverless/custom_metrics
+  - name: Advanced Configuration
+    url: serverless/aws_lambda/configuration
     parent: serverless_aws_lambda
-    identifier: serverless_aws_lambdacustom_metrics
+    identifier: serverless_configuration
     weight: 105
-  - name: Deployment Tracking
-    url: serverless/deployment_tracking
-    parent: serverless_aws_lambda
-    identifier: serverless_aws_lambda_deployment_tracking
-    weight: 106
   - name: Continuous Profiler
     url: serverless/aws_lambda/profiling
     parent: serverless_aws_lambda
-    identifier: serverless_aws_lambda_deployment_tracking
-    weight: 107
+    identifier: serverless_aws_lambda_continuous_profiler
+    weight: 106
   - name: Securing Functions
-    url: /serverless/securing_functions
+    url: /serverless/aws_lambda/securing_functions
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_securing_functions
+    weight: 107
+  - name: Deployment Tracking
+    url: serverless/aws_lambda/deployment_tracking
+    parent: serverless_aws_lambda
+    identifier: serverless_aws_lambda_deployment_tracking
     weight: 108
   - name: Troubleshooting
-    url: serverless/troubleshooting
+    url: serverless/aws_lambda/troubleshooting
     parent: serverless_aws_lambda
     identifier: serverless_aws_lambda_troubleshooting
     weight: 109

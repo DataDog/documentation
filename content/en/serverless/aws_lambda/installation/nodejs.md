@@ -17,6 +17,7 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/nodejs/
     - /serverless/guide/nodejs/
+    - /serverless/installation/nodejs
 ---
 
 <div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>

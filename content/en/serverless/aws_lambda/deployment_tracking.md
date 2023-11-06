@@ -8,6 +8,8 @@ further_reading:
     - link: '/serverless/serverless_tagging'
       tag: 'Documentation'
       text: 'Serverless Tagging'
+aliases:
+  - /serverless/deployment_tracking
 ---
 
 {{< img src="serverless/deployment_tracking.jpeg" alt="Serverless Deployment Tracking" style="width:100%;">}}

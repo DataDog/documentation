@@ -14,6 +14,7 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
+    - /serverless/installation/python
 algolia:
   tags: ['python lambda traces']
 ---
