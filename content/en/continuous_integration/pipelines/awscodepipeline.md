@@ -62,16 +62,16 @@ More information about monitoring pipeline events can be found in the [official 
 6. Click on **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
 and select the API destination that you have created in the previous step. Alternatively, you can also create the API destination
-at this moment by following the steps outlined in the [Create the API Destination][7] section.
-8. Under **Headers Parameters**, Click on **Add header parameter**. Input **DD-CI-PROVIDER-AWSCODEPIPELINE** as the key and **true** as the value.
-9. Choose **Create a new role for this specific resource** (or use an existing one if you prefer).
+by following the steps outlined in the [Create the API Destination][7] section.
+8. Under **Headers Parameters**, Click on **Add header parameter**. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
+9. Choose **Create a new role for this specific resource** (or use an existing one).
 10. Review that the information is correct and create the rule.
 
 Once the rule is created, the integration is complete, and you can monitor your pipelines in Datadog.
 
 ### Only monitor specific pipelines
 
-You can optionally restrict the pipelines that are monitored by the CI Visibility product.
+You can optionally restrict the pipelines that are monitored by Pipeline Visibility.
 To do this, add the `detail.pipeline` filter in the rule event pattern defined when creating the EventBridge Rule. For example:
 
 ```
@@ -88,12 +88,12 @@ The event pattern above sets up the integration only for the `first-pipeline` an
 
 ### Correlate pipelines with tests
 
-If you are using the [Test Visibility][8] product and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests
-with the related pipeline inside Datadog's CI Visibility product. To do that:
+If you are using [Test Visibility][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests
+with the related pipeline inside Datadog Pipeline Visibility. To do that:
 1. In the AWS Console, go to your pipeline configuration and click on **Edit**
 2. Go to the stage containing the AWS CodeBuild action, click on **Edit Stage**, and then edit the relevant action.
-3. Under **Environment variables**, add a new environment variable. The name of the variable should be `DD_PIPELINE_EXECUTION_ID`
-   and the Value should be `#{codepipeline.PipelineExecutionId}`. Leave the type as **Plaintext**.
+3. Under **Environment variables**, add a new environment variable.
+Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.PipelineExecutionId}`. Leave the type as _Plaintext_.
 4. Click on **Done** to save your changes.
 
 The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. More information
