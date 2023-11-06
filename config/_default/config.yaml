@@ -80,7 +80,7 @@ module:
    - path: github.com/DataDog/dd-release-notes
      disabled: false
      mounts:
-     - source: /
+     - source: /release-notes
        target: content/en/release-notes
 
   mounts:

@@ -103,5 +103,8 @@
     "hugo-bin": {
         "buildTags": "extended"
     },
-    "packageManager": "yarn@3.6.1"
+    "packageManager": "yarn@3.6.1",
+    "volta": {
+        "node": "18.17.1"
+    }
 }
