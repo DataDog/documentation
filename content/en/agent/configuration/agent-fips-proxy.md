@@ -139,7 +139,7 @@ For metrics, run the connectivity diagnostic command and verify that all checks 
 
 ```shell
 sudo -u dd-agent datadog-agent diagnose --include connectivity-datadog-core-endpoints
-# For Agent version < 7.48 run the following command
+# For Agent version < 7.48, run the following command:
 # sudo -u dd-agent datadog-agent diagnose datadog-connectivity
 ```
 
@@ -258,7 +258,7 @@ To check for network issues, check the logs at `/var/log/datadog/agent.log`, or 
 
 ```shell
 datadog-agent diagnose --include connectivity-datadog-core-endpoints
-# For Agent version < 7.48 run the following command
+# For Agent version < 7.48, run the following command:
 # datadog-agent diagnose datadog-connectivity
 ```
 
