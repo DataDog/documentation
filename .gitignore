@@ -51,7 +51,6 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/_index.md
 !content/en/integrations/cloudcheckr.md
 !content/en/integrations/kubernetes.md
-!content/en/integrations/kubernetes_state_core.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
 !content/en/integrations/tcp_rtt.md
