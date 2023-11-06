@@ -34,7 +34,7 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 | [CIS Red Hat Linux 8 v2.0.0][24]            | `cis-rhel8`       | Infrastructure |
 | [CIS Red Hat Linux 9 v1.0.0][24]            | `cis-rhel9`       | Infrastructure |
 | [CIS Amazon Linux 2 v1.0.0][25]             | `cis-amzn2`       | Infrastructure |
-| [CIS Amazon Linux 2023 v1.0.0][25]          |                   | Infrastructure |
+| [CIS Amazon Linux 2023 v1.0.0][25]          | `cis-al2023`      | Infrastructure |
 | [PCI DSS v3.2.1][6]                         | `pci`             | Cloud          |
 | [AICPA SOC 2][7]                            | `soc-2`           | Cloud          |
 | [ISO/IEC 27001 v2][8]                       | `iso-27001`       | Cloud          |
