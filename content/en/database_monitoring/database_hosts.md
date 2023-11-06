@@ -82,6 +82,8 @@ Click any service row to view its APM dashboard.
 
 ## Configuration details
 
+<div class="alert alert-info">The host must have <code>collect_settings</code> enabled in its <a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L397">instance configuration</a> for this feature to work properly.</div>
+
 The **Configuration** tab of the host details panel provides a direct view into the host's configuration parameters without compromising database security. Use it to identify misconfigured database parameters and fine-tune settings to optimize database performance.
 
 {{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
