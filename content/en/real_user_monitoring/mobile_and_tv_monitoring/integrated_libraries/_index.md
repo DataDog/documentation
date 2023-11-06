@@ -232,7 +232,7 @@ yarn add @datadog/mobile-react-native-navigation
 
 #### Track view navigation
 
-In order to start tracking your navigation events, simply call the add the following lines before setting up your navigation. You can use the optional `ViewNamePredicate` callback to replace the automatically detected View name with something more relevant to your use case, based on the [`ComponentDidAppearEvent`][11].
+To start tracking your navigation events, add the following lines before setting up your navigation. You can use the optional `ViewNamePredicate` callback to replace the automatically detected View name with something more relevant to your use case, based on the [`ComponentDidAppearEvent`][11].
 
 Returning null in the `ViewNamePredicate` prevents the new RUM View from being created. The previous RUM View remains active.
 

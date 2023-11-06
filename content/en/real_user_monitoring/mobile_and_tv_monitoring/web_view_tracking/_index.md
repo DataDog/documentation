@@ -147,7 +147,7 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-1. Be sure to 1dd `react-native-webview` to your application following the [official installation documentation][1].
+1. Add `react-native-webview` to your application following the [official installation documentation][1].
 
 2. Import `WebView` from `@datadog/mobile-react-native-webview` instead of `react-native-webview`:
 
