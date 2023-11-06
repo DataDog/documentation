@@ -76,7 +76,7 @@ if ok {
 
 ```
 
-#### Instrumentating the consume call
+#### Instrumenting the consume call
 
 1. Insure your message supports the [TextMapReader interface](https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44).
 2. Extract the context from your message and instrument the consume call by calling:
