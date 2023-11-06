@@ -77,6 +77,11 @@ module:
        target: static/fonts/iconfont.woff2
      - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
+   - path: github.com/DataDog/dd-release-notes
+     disabled: false
+     mounts:
+     - source: /
+       target: content/en/release-notes
 
   mounts:
     # default mounts
