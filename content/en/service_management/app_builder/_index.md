@@ -14,7 +14,7 @@ Datadog App Builder is a low-code application building platform that streamlines
 
 ## Configure App Builder actions
 
-Datadog App Builder provides over 400+ actions across several integrations, along with generic actions such as an HTTP request action and JavaScript data operator. These actions allow you to perform any task required in your flow.
+Datadog App Builder provides over 400+ actions across several integrations, along with generic actions such as an HTTP request action and JavaScript function action. Together, these actions allow you to perform any task required in your flow.
 
 ## Start with blueprints
 
