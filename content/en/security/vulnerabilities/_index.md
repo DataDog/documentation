@@ -52,10 +52,6 @@ The Datadog Adjusted Vulnerability Score includes the full context of each impac
 - Environment the infrastructure is running in
 - Known public exploit
 
-In addition to the Datadog Adjusted Severity score, the [Security Inbox][6] adds additional intelligence to surface the vulnerabilities along with any other cloud security risk needing your attention in the form of correlated security issues. 
-
-This further enables you to identify if the underlying infrastructure is publicly exposed, and if there are other issues such as [misconfiguration][7] or [identity risks][8] with your underlying infrastructure.
-
 ## Review and remediate
 
 View a consolidated list of vulnerabilities on the [Vulnerabilities][1] page in [Cloud Security Management][3]. Prioritize them for remediation using available facets, such as context-based **severity**, **resource type**, and **library**.</br>
