@@ -25,7 +25,7 @@ Datadog Service Catalog includes all discovered services from APM, USM, and RUM 
 
 ## Create user-defined services
 
-You can create additional services that are not associated with any Datadog telemetry in Service Catalog. To create such an entry, name your service in the `dd-service` service field in any supported metadata schema versions. For example: 
+You can add services to Service Catalog that are not associated with any Datadog telemetry. To create such an entry, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -53,6 +53,7 @@ integrations:
 External Resources (Optional)
 {{< /code-block >}}
 
+You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
 
 ## Discover additional services
 
