@@ -76,7 +76,7 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 
 For information on setting up roles and permissions, see [Access Control][5].
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
