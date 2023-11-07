@@ -40,7 +40,7 @@ def workflows(content, content_dir):
             if data and data.get('stability', '') == 'stable':
                 
                 for action_name, action_data in filter_actions(data.get('actions', {})).items():
-                    action_name = re.split(r':[vV]\d+', action_name)[0] # clean action_name
+                    action_name = re.split(r':V\d+', action_name)[0] # clean action_name. no version identifier
                     # for each action of a bundle
                     if should_show_action(action_data.get('stability'), data):
                         output_file_name = data.get('name')\
@@ -103,7 +103,7 @@ def filter_actions(actions):
     highest_versioned_actions = {}
 
     for action_name in actions:
-        action_with_version = re.match(r"(\w+):[vV](\d+)", action_name)
+        action_with_version = re.match(r"(\w+):V(\d+)", action_name)
         
         action_name = action_with_version.group(1) if action_with_version else action_name
         action_version = int(action_with_version.group(2)) if action_with_version else 0
@@ -112,6 +112,6 @@ def filter_actions(actions):
             highest_versioned_actions[action_name] = action_version
             
 
-    filtered_actions = dict((f'{key}:V{v}' if v else key, actions.get(f'{key}:V{v}')) for key, v in highest_versioned_actions.items())
+    filtered_actions = dict((f'{key}:V{v}' if v else key, actions.get(f'{key}:V{v}' if v else key)) for key, v in highest_versioned_actions.items())
 
     return filtered_actions
