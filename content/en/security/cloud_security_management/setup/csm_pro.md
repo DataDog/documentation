@@ -22,7 +22,7 @@ The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations]
 * [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
 * [Helm Chart][9] v3.33.6 or later (Kubernetes only).
 
-## Enable resource scanning for cloud accounts
+## Enable resource scanning for CSM misconfigurations
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
 
@@ -53,6 +53,19 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities.
 
 **Note**: Vulnerabilities are evaluated and and scanned against your containers every hour.
+
+### Configure the Agent
+
+#### Follow the in-app instructions (recommended)
+
+To enable CSM Vulnerabilities on the Agent for your containers, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
+
+{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+
+For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
+
+Alternatively, use the following examples to enable CSM Vulnerabilities on your containers:
+
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}

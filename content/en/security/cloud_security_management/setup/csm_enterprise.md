@@ -45,7 +45,7 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 * [containerd][16] v1.5.6 or later (Kubernetes and hosts only).
 * [Helm Chart][17] v3.33.6 or later (Kubernetes only).
 
-## Enable resource scanning for cloud accounts
+## Enable resource scanning for CSM misconfigurations
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
 
@@ -92,11 +92,11 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
-{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
-For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions to enable CSM Workload Security.
+For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
 
-Alternatively, use the following examples to enable CSM Enterprise:
+Alternatively, use the following examples to enable CSM Enterprise for threats:
 
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
@@ -448,6 +448,18 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. 
 
 **Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
+
+### Configure the Agent
+
+#### Follow the in-app instructions (recommended)
+
+To enable CSM Vulnerabilities on the Agent for your hosts and containers, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
+
+{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+
+For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
+
+Alternatively, use the following examples to enable CSM Vulnerabilities:
 
 ### Containers
 
