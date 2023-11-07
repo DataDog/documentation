@@ -221,7 +221,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
        password: '<PASSWORD>'
-       ssl: 'required'
+       ssl: 'require'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -265,7 +265,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "port": 5432,
     "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
     "password": "<UNIQUEPASSWORD>",
-    "ssl": 'required,
+    "ssl": 'require',
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
       "name": "<AZURE_INSTANCE_ENDPOINT>"
