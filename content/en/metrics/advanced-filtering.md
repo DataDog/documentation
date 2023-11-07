@@ -93,7 +93,7 @@ sum:kubernetes.pods.running{service:*-canary} by {service}
 avg:system.disk.utilized{region:*east*} by {region}
 ```
 
-{{< img src="metrics/advanced-filtering/wildcard_infix_example.png" alt="Wildcard used as infix" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="Wildcard used as infix" style="width:100%;" >}}
 
 ## Exclusion functions
 
