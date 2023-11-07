@@ -16326,6 +16326,8 @@ components:
           items:
             $ref: '#/components/schemas/ToplistWidgetRequest'
           type: array
+        style:
+          $ref: '#/components/schemas/ToplistWidgetStyle'
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
@@ -16351,6 +16353,40 @@ components:
       type: string
       x-enum-varnames:
       - TOPLIST
+    ToplistWidgetDisplay:
+      description: Top list widget display options.
+      oneOf:
+      - $ref: '#/components/schemas/ToplistWidgetStacked'
+      - $ref: '#/components/schemas/ToplistWidgetFlat'
+    ToplistWidgetFlat:
+      description: Top list widget flat display.
+      properties:
+        type:
+          $ref: '#/components/schemas/ToplistWidgetFlatType'
+      required:
+      - type
+      type: object
+    ToplistWidgetFlatType:
+      default: flat
+      description: Top list widget flat display type.
+      enum:
+      - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+      - FLAT
+    ToplistWidgetLegend:
+      description: Top list widget stacked legend behavior.
+      enum:
+      - automatic
+      - inline
+      - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - AUTOMATIC
+      - INLINE
+      - NONE
     ToplistWidgetRequest:
       description: Updated top list widget.
       properties:
@@ -16399,6 +16435,43 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
+      type: object
+    ToplistWidgetScaling:
+      description: Top list widget scaling definition.
+      enum:
+      - absolute
+      - relative
+      type: string
+      x-enum-varnames:
+      - ABSOLUTE
+      - RELATIVE
+    ToplistWidgetStacked:
+      description: Top list widget stacked display options.
+      properties:
+        legend:
+          $ref: '#/components/schemas/ToplistWidgetLegend'
+        type:
+          $ref: '#/components/schemas/ToplistWidgetStackedType'
+      required:
+      - type
+      - legend
+      type: object
+    ToplistWidgetStackedType:
+      default: stacked
+      description: Top list widget stacked display type.
+      enum:
+      - stacked
+      example: stacked
+      type: string
+      x-enum-varnames:
+      - STACKED
+    ToplistWidgetStyle:
+      description: Style customization for a top list widget.
+      properties:
+        display:
+          $ref: '#/components/schemas/ToplistWidgetDisplay'
+        scaling:
+          $ref: '#/components/schemas/ToplistWidgetScaling'
       type: object
     TopologyMapWidgetDefinition:
       description: This widget displays a topology of nodes and edges for different
