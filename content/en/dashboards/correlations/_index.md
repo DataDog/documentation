@@ -41,7 +41,7 @@ Correlations *tries* to automatically detect the area of interest (anomalous beh
 
 ### Edit
 
-You can customize the default search parameters of correlations. From a full-screen graph, on the *Correlations* tab, click the **Edit Search** button, or by click directly on the graph.
+You can customize the default search parameters of correlations. From a full-screen graph, on the *Correlations* tab, click the **Edit Search** button, or click directly on the graph.
 
 * Click and drag on the graph to set the timeframe for your correlations search. If an area is already selected (pink box), you can move or resize the selection.
 * Define the sources you want correlations to search from (APM services, integrations, dashboards, or custom metrics).
