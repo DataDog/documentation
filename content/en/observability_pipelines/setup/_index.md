@@ -63,18 +63,18 @@ Follow the below instructions to install the Worker and deploy a sample pipeline
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
 ### Remote Configuration
-2. Run the following command to start the Observability Pipelines Worker with Docker:
+Run the following command to start the Observability Pipelines Worker with Docker:
     
-    ```shell
-    docker run -i -e DD_API_KEY=<API_KEY> \
-      -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
-      -e DD_SITE=<SITE> \
-      -e DD_OP_REMOTE_CONFIGURATION_ENABLED=true \
-      -p 8282:8282 \
-      datadog/observability-pipelines-worker run
+```shell
+docker run -i -e DD_API_KEY=<API_KEY> \
+  -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+  -e DD_SITE=<SITE> \
+  -e DD_OP_REMOTE_CONFIGURATION_ENABLED=true \
+  -p 8282:8282 \
+  datadog/observability-pipelines-worker run
     ```
 
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINE_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
+Replace `<API_KEY>` with your Datadog API key, `<PIPELINE_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
 
 ### Manual Configuration
 

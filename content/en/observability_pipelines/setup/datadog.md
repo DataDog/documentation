@@ -125,7 +125,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 ### Remote Configuration
 
-1. Run the following command to start the Observability Pipelines Worker with Docker:
+Run the following command to start the Observability Pipelines Worker with Docker:
     ```
     docker run -i -e DD_API_KEY=<API_KEY> \
       -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -134,7 +134,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -p 8282:8282 \
       datadog/observability-pipelines-worker run
     ```
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
+Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
 
 ### Manual Configuration
 
@@ -409,7 +409,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-Set up the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. Make sure to specify the ports that your configuration needs, in the `tcp-ports` input. The sample configuration given opens up the Datadog Agent port, `8282`, by default.
+Set up the Worker module in your existing Terraform using the below sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. Make sure to specify the ports that your configuration needs, in the `tcp-ports` input. The sample configuration given opens up the Datadog Agent port, `8282`, by default.
 
 ### Remote Configuration
 
