@@ -164,9 +164,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         appContext: .init(),
         configuration: Datadog.Configuration
             .builderUsing(
-                rumApplicationID: "<rum_app_id>",
-                clientToken: "<client_token>",
-                environment: "<env_name>"
+                rumApplicationID: "<RUM_APP_ID>",
+                clientToken: "<CLIENT_TOKEN>",
+                environment: "<ENV_NAME>"
             )
             .trackURLSession(firstPartyHosts: ["example.com", "api.yourdomain.com"])
             .build()
@@ -401,9 +401,9 @@ RUM supports several propagator types to connect resources with backends that ar
         appContext: .init(),
         configuration: Datadog.Configuration
             .builderUsing(
-                rumApplicationID: "<rum_app_id>",
-                clientToken: "<client_token>",
-                environment: "<env_name>"
+                rumApplicationID: "<RUM_APP_ID>",
+                clientToken: "<CLIENT_TOKEN>",
+                environment: "<ENV_NAME>"
             )
             .trackURLSession(
                 firstPartyHostsWithHeaderTypes: [

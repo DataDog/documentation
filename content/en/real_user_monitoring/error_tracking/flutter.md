@@ -30,19 +30,19 @@ For example:
 
 ```dart
 final configuration = DatadogConfiguration(
-  clientToken: 'DD_CLIENT_TOKEN'
-  env: 'DD_ENV'
+  clientToken: '<DD_CLIENT_TOKEN>'
+  env: '<DD_ENV>'
   site: DatadogSite.us1,
   nativeCrashReportEnabled: true, // Set this flag
   loggingConfiguration: DatadogLoggingConfiguration(),
   rumConfiguration: DatadogRumConfiguration(
-    applicationId: 'DD_APP_ID',
-  )m
+    applicationId: '<DD_APP_ID>',
+  )
 );
 DatadogSdk.instance.initialize(configuration);
 ```
 
-If your application suffers a fatal crash, once your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
+If your application suffers a fatal crash, after your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
 
 
 ## Upload symbol files to Datadog
