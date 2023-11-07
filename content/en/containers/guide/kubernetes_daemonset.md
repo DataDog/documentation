@@ -260,6 +260,15 @@ Additional examples are available on the [Container Discover Management][27] pag
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted.
 
+### Autodiscovery
+
+| Env Variable                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_LISTENERS`               | Autodiscovery listeners to run.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `DD_EXTRA_LISTENERS`         | Additional Autodiscovery listeners to run. They are added in addition to the variables defined in the `listeners` section of the `datadog.yaml` configuration file.                                                                                                                                                                                                                                                                                                                                    |
+| `DD_CONFIG_PROVIDERS`        | The providers the Agent should call to collect checks configurations. Available providers are: <br>`kubelet` - Handles templates embedded in pod annotations. <br>`docker` - Handles templates embedded in container labels. <br> `clusterchecks` - Retrieves cluster-level check configurations from the Cluster Agent. <br>`kube_services` - Watches Kubernetes services for cluster checks. |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | Additional Autodiscovery configuration providers to use. They are added in addition to the variables defined in the `config_providers` section of the `datadog.yaml` configuration file. |
+
 ### Misc
 
 | Env Variable                        | Description                                                                                                                                                                                                                                                         |
@@ -267,8 +276,6 @@ Additional examples are available on the [Container Discover Management][27] pag
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. Example: `"docker"`, `"ecs_fargate"`, `"kubelet"`. This is no longer needed since Agent v7.35.0.                                                                                                     |
 | `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                                                                                                                                                                                 |
 | `DD_CLUSTER_NAME`                   | Set a custom Kubernetes cluster identifier to avoid host alias collisions. The cluster name can be up to 40 characters with the following restrictions: Lowercase letters, numbers, and hyphens only. Must start with a letter. Must end with a number or a letter. |
-
-You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
@@ -293,7 +300,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 [20]: /getting_started/site/
 [21]: /agent/docker/?tab=standard#ignore-containers
 [22]: /containers/kubernetes/log
-[23]: /agent/proxy/#agent-v6
+[23]: /agent/configuration/proxy/#agent-v6
 [24]: /developers/dogstatsd/
 [25]: /developers/dogstatsd/unix_socket/
 [26]: /containers/kubernetes/tag/

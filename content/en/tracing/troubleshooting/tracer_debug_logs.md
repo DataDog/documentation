@@ -94,7 +94,8 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
-To enable debug mode for the Datadog Go Tracer, enable the debug mode during the `Start` config:
+To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
+or enable the debug mode during the `Start` config:
 
 ```go
 package main
@@ -103,6 +104,27 @@ import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
 func main() {
     tracer.Start(tracer.WithDebugMode(true))
+    defer tracer.Stop()
+}
+```
+
+#### Abandoned span logs
+
+The Datadog Go Tracer also supports logging for potentially abandoned spans. To enable this debug mode in Go, set the environment variable `DD_TRACE_DEBUG_ABANDONED_SPANS=true`. To change the duration after which spans are considered abandoned (default=`10m`), set the environment variable `DD_TRACE_ABANDONED_SPAN_TIMEOUT` to the desired time duration. Abandoned span logs appear at the Info level.
+
+You can also enable debugging abandoned spans during the `Start` config:
+
+```go
+package main
+
+import (
+  "time"
+
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithDebugSpansMode(10 * time.Minute))
     defer tracer.Stop()
 }
 ```

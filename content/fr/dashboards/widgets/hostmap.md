@@ -12,11 +12,11 @@ title: Widget Hostmap
 
 Le widget Hostmap représente graphiquement n'importe quelle métrique pour l'ensemble de vos hosts, en proposant le même type de visualisation que la principale page [Host Map][1] :
 
-{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host Map"  >}}
+{{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Hostmap"  >}}
 
 ## Configuration
 
-{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="Configuration Hostmap" >}}
+{{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="Configuration de la hostmap" >}}
 
 ### Configuration
 

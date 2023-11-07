@@ -55,7 +55,7 @@ Attribuez un accès en lecture aux certificats Etcd situés sur le host pour que
 
 `values.yaml` personnalisé :
 
-```
+```yaml
 datadog:
   apiKey: <CLÉ_API_DATADOG>
   appKey: <CLÉ_APPLICATION_DATADOG>
@@ -169,7 +169,7 @@ Les ports sécurisés activent des processus d'authentification et d'autorisatio
 
 `values.yaml` personnalisé :
 
-```
+```yaml
 datadog:
   apiKey: <CLÉ_API_DATADOG>
   appKey: <CLÉ_APPLICATION_DATADOG>
@@ -715,7 +715,7 @@ Déployez l'Agent Datadog avec des manifestes basés sur les configurations suiv
 
 `values.yaml` personnalisé :
 
-```
+```yaml
 datadog:
   apiKey: <CLÉ_API_DATADOG>
   appKey: <CLÉ_APPLICATION_DATADOG>
@@ -835,7 +835,7 @@ Vous trouverez ci-dessous des exemples de configuration de l'Agent Datadog avec 
 
 `values.yaml` personnalisé :
 
-```
+```yaml
 datadog:
   apiKey: <CLÉ_API_DATADOG>
   appKey: <CLÉ_APPLICATION_DATADOG>

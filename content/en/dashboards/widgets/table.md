@@ -35,17 +35,20 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
 #### Column formatting
-Customize the visualization of cell values for each column with Column Formatting Rules. Create color codes for your data to visualize trends and changes.
-* Threshold formatting: highlight cells with colors when specific value ranges are met.
-* Range formatting: color code cells with a range of values.
-* Text formatting: replace cells with alias text values to improve readability.
 
-{{< img src="/dashboards/widgets/table/range_conditional_formatting.png" alt="Widget configuration showing the column formatting options" style="width:90%;" >}}
+Customize the visualization of cell values for each column with Column Formatting Rules. Create color codes for your data to visualize trends and changes.
+* Text formatting: replace cells with alias text values to improve readability.
+* Visualize data: Choose between **Number**, **Trend**, and **Bar** to track progress of your metrics and events over multiple groups. Trends are based on the selected timeframe. 
+
+{{< img src="dashboards/widgets/table/column_formatting.png" alt="Configuration to view Number, Trend, and Bar visualizations in a column" style="width:90%;" >}}
+
+Add conditional formatting to visualizations. Click **+ Add Rule** or **+ Add Conditional Format**.
+* Threshold formatting: highlight cells with colors when specific value ranges are met. **Note**: for Trends, the graph is formatted based on whether the query meets the threshold, **not** the datapoint displayed.
+* Range formatting: color code cells with a range of values.
 
 #### Context links
 
 [Context links][10] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
-
 
 ## N/A values
 
@@ -55,9 +58,7 @@ Columns in the table widget are queried independently from one another. Overlapp
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
-
-The dedicated [widget JSON schema definition][9] for the table widget is:
+This widget can be used with the **[Dashboards API][8]**. See the following table for the [widget JSON schema definition][9]:
 
 {{< dashboards-widgets-api >}}
 
@@ -72,7 +73,7 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [5]: /profiler/profile_visualizations
 [6]: /security_monitoring/explorer/
 [7]: /dashboards/guide/apm-stats-graph
-[8]: /api/v1/dashboards/
+[8]: /api/latest/dashboards/
 [9]: /dashboards/graphing_json/widget_json/
 [10]: /dashboards/guide/context-links/
 [11]: /dashboards/querying/#advanced-graphing

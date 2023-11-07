@@ -2,9 +2,12 @@
 title: Getting Started with Datadog Sites
 kind: documentation
 further_reading:
- - link: 'https://learn.datadoghq.com/courses/dd-201'
-   tag: 'Learning Center'
-   text: 'Datadog 201: Becoming a Power User'
+- link: 'https://learn.datadoghq.com/courses/dd-201'
+  tag: 'Learning Center'
+  text: 'Datadog 201: Becoming a Power User'
+- link: '/agent/configuration/dual-shipping/'
+  tag: 'Guide'
+  text: 'Dual Shipping'
 algolia:
   tags: ['site','datadog site']
 ---
@@ -28,9 +31,11 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 
+**Note**: To send data to more than one destination through multiple endpoints, see the [Dual Shipping][2] guide.
+
 ## SDK domains
 
-See [Supported endpoints for SDK domains][2].
+See [Supported endpoints for SDK domains][3].
 
 ## Navigate the Datadog documentation by site
 
@@ -53,4 +58,5 @@ The Datadog for Government site (US1-FED) is meant to allow US government agenci
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[2]: /agent/configuration/dual-shipping/
+[3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

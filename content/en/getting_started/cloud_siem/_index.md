@@ -37,6 +37,9 @@ further_reading:
     - link: "https://securitylabs.datadoghq.com/"
       tag: "Security Labs"
       text: "Read about security-related topics on Datadog's Security Labs"
+    - link: "https://www.datadoghq.com/blog/content-packs/"
+      tag: "Blog"
+      text: "Easily ingest and monitor security logs with Cloud SIEM Content Packs"
 ---
 
 ## Overview
@@ -81,7 +84,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/
-[2]: https://app.datadoghq.com/security/configuration
+[2]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [3]: /logs/guide/best-practices-for-log-management/
 [4]: /integrations/
 [5]: /logs/log_configuration/pipelines/

@@ -33,8 +33,8 @@ const updateSettings = (index) => {
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         attributesToSnippet: ['content:20'],
-        indexLanguages: ['ja', 'en', 'fr'],
-        queryLanguages: ['ja', 'en', 'fr'],
+        indexLanguages: ['ja', 'en', 'fr', 'ko'],
+        queryLanguages: ['ja', 'en', 'fr', 'ko'],
         attributeForDistinct: 'full_url',
         distinct: true,
         minWordSizefor1Typo: 3,
@@ -89,6 +89,11 @@ const updateSynonyms = (index) => {
             objectID: 'npm',
             type: 'synonym',
             synonyms: ['npm', 'network performance monitoring']
+        },
+        {
+            objectID: 'ksm',
+            type: 'synonym',
+            synonyms: ['ksm', 'ksm core', 'kubernetes state metrics']
         }
     ];
 
@@ -115,7 +120,18 @@ const updateReplicas = (client, indexName) => {
 };
 
 const updateIndex = (indexName) => {
-    const localAlogliaSearchIndex = require('../../../public/algolia.json');
+    console.info('Syncing local index with Algolia...')
+    const fullLocalAlogliaSearchIndex = require('../../../public/algolia.json');
+    let localAlgoliaSearchIndex
+
+    // Only the full nightly build re-indexes all language pages in Algolia.
+    // Master/preview pipelines will re-index only English pages automatically.
+    // This is done to improve performance as Docs continues scaling.
+    // if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
+    //     localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
+    // } else {
+    //     localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
+    // }
 
     const cb = (error, result) => {
         if (error) {
@@ -126,7 +142,7 @@ const updateIndex = (indexName) => {
         console.log(result);
     };
 
-    atomicalgolia(indexName, localAlogliaSearchIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, fullLocalAlogliaSearchIndex, { verbose: true }, cb);
 };
 
 const sync = () => {

@@ -8,11 +8,15 @@ aliases:
   - /security/cloud_workload_security/backend/
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Detect threats to your production workloads in real-time
 
-Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as AWS EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
+Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
 
 CSM Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
 
@@ -43,7 +47,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 ## Investigate and remediate security signals
 
-Investigate and triage security signals in the [Security Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+Investigate and triage security signals in the [Threats Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 
@@ -64,6 +68,6 @@ Investigate and triage security signals in the [Security Signals Explorer][8]. V
 [5]: /security/notifications/#detection-rule-notifications
 [6]: /security/threats/agent_expressions
 [7]: /security/threats/setup
-[8]: /security/explorer
+[8]: /security/threats/security_signals
 [9]: /network_monitoring/performance/
 [10]: /security/threats/security_profiles

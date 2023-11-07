@@ -23,6 +23,8 @@ further_reading:
 
 - **Partial pipelines**: View [partially retried][5] and downstream pipeline executions
 
+- **Infrastructure metric correlation**: Correlate jobs to [infrastructure host metrics][8] for Buildkite agents
+
 - **Manual steps**: View manually triggered pipelines
 
 - **Queue time**: View amount of time pipeline jobs sit in the queue before processing
@@ -93,6 +95,11 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Correlate infrastructure metrics to jobs
+
+If you are using Buildkite agents, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, install the [Datadog Agent][7] in the hosts running the Buildkite agents.
+
 ### View partial and downstream pipelines
 
 In the **Pipeline Executions** page, you can use the filters below in the search bar:
@@ -121,3 +128,5 @@ These filters can also be applied through the facet panel on the left hand side 
 [4]: https://app.datadoghq.com/ci/pipeline-executions
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
 [6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[7]: /agent/
+[8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs

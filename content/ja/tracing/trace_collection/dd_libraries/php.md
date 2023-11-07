@@ -19,6 +19,9 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-php
   tag: GitHub
   text: ソースコード
+- link: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
+  tag: Github
+  text: オープンソースプロジェクトへの貢献
 - link: /tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
@@ -28,82 +31,13 @@ type: multi-code-lang
 ---
 ## 互換性要件
 
-最新の PHP トレーサーは、バージョン >= 5.4.x をサポートしています。
+最新の PHP トレーサーは、バージョン 5.4.x 以降をサポートしています。
 
 Datadog の PHP バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
 
-## インストールと利用開始
+## はじめに
 
-### アプリ内のドキュメントに従ってください (推奨)
-
-Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
-
-- デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
-- `service`、`env`、`version` タグを動的に設定します。
-- セットアップ中のすべてのトレースの取り込みを有効にします。
-
-APM で使用される用語の説明は、[公式ドキュメント][3]を参照してください。
-
-PHP トレーサーのオープンソースに対する貢献に関しては、[コントリビューションガイド][4]を参照してください。
-
-### APM 用に Datadog Agent を構成する
-
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
-
-{{< tabs >}}
-{{% tab "コンテナ" %}}
-
-1. メイン [`datadog.yaml` コンフィギュレーションファイル][1]の `apm_config` セクションで `apm_non_local_traffic: true` を設定します。
-
-2. コンテナ化された環境でトレースを受信するように Agent を構成する方法については、それぞれの説明を参照してください。
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. アプリケーションをインスツルメンテーションした後、トレースクライアントはデフォルトで Unix ドメインソケット `/var/run/datadog/apm.socket` にトレースを送信します。ソケットが存在しない場合、トレースは `http://localhost:8126` に送信されます。もしこれが正しいホストとポートでない場合は、`DD_TRACE_AGENT_URL` を設定することで変更してください。例:
-
-   ```
-   DD_TRACE_AGENT_URL=unix:///path/to/custom.socket
-   DD_TRACE_AGENT_URL=http://localhost:9442
-   ```
-
-   同様に、`DD_TRACE_HEALTH_METRICS_ENABLED` が true に設定されている場合、トレースクライアントは Unix ドメインソケット `/var/run/datadog/dsd.socket` に統計情報を送信しようと試みます。ソケットが存在しない場合、統計情報は `http://localhost:8125` に送信されます。
-
-   別の構成が必要な場合は、環境変数 `DD_DOGSTATSD_URL` を使用します。以下にいくつかの例を示します。
-   ```
-   DD_DOGSTATSD_URL=http://custom-hostname:1234
-   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
-   ```
-
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
-
-{{< /site-region >}}
-
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-AWS Lambda で Datadog APM を設定するには、[サーバーレス関数のトレース][1]ドキュメントを参照してください。
-
-
-[1]: /ja/tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "その他の環境" %}}
-
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、さまざまな環境で利用できます。
-
-その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
-
-[1]: /ja/agent/basic_agent_usage/heroku/#installation
-[2]: /ja/integrations/cloud_foundry/#trace-collection
-[3]: /ja/integrations/amazon_elasticbeanstalk/
-[5]: /ja/integrations/
-[6]: /ja/help/
-{{% /tab %}}
-{{< /tabs >}}
-
+作業を始める前に、[Agent のインストールと構成][14]が済んでいることを確認してください。
 
 ### 拡張機能をインストール
 
@@ -135,11 +69,11 @@ php datadog-setup.php --php-bin=all --enable-appsec
 php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
-このコマンドは、ホストまたはコンテナで見つかったすべての PHP バイナリに拡張機能をインストールします。もし `--php-bin` が省略された場合、インストーラーはインタラクティブモードで実行され、インストールするバイナリを選択するようユーザーに要求します。このとき、`--php-bin` の値には、特定のバイナリへのパスを指定することができます。
+このコマンドは、ホストまたはコンテナ内に存在する全ての PHP バイナリに拡張機能をインストールします。もし `--php-bin` が省略された場合、インストーラーはインタラクティブモードで実行され、インストールするバイナリを選択するようユーザーに要求します。このとき、`--php-bin` の値には、特定のバイナリへのパスを指定することができます。
 
 PHP (PHP-FPM または Apache SAPI) を再起動し、アプリケーションのトレース可能なエンドポイントにアクセスします。トレースについては、[APM サービス一覧][5]を参照してください。
 
-`--enable-appsec` を指定しない場合、AppSec 拡張機能は起動時にすぐにロードされ、デフォルトでは有効になっていません。これはすぐに短絡し、パフォーマンスのオーバーヘッドを無視できる程度にします。
+`--enable-appsec` を指定しない場合、AppSec 拡張機能は起動時にすぐにロードされ、デフォルトでは有効になっていません。これはすぐにショートサーキットを起こし、ほとんど無視できる程度のパフォーマンスオーバーヘッドを引き起こします。
 
 <div class="alert alert-info">
 <strong>注:</strong>
@@ -151,12 +85,19 @@ UI にトレースが表示されるまでに数分かかることがありま�
 PHP CLI のバイナリが NTS (non thread-safe) でビルドされ、Apache が ZTS (Zend thread-safe) バージョンの PHP を使用している場合、 ZTS バイナリの拡張機能のロードを手動で変更する必要があります。<code>/path/to/php-zts --ini</code> を実行して Datadog の <code>.ini</code> ファイルがある場所を探し、ファイル名から <code>-zts</code> サフィックスを追加してください。例えば、<code>extension=ddtrace-20210902.so</code> から <code>extension=ddtrace-20210902-zts.so</code> になります。
 </div>
 
+<div class="alert alert-warning">
+<strong>SELinux:</strong>
+ホスト上で httpd SELinux ポリシーが構成されている場合、SELinux の構成で一時ファイルの書き込みと実行が明示的に許可されていない限り、トレーサーの機能が制限される可能性があります。
+
+`allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
+
+</div>
 
 ## 自動インスツルメンテーション
 
-トレースはデフォルトで自動的に有効になります。拡張機能がインストールされると、**ddtrace** はアプリケーションをトレースし、Agent へトレースを送ります。
+トレースはデフォルトで自動的に有効になります。拡張機能がインストールされると、**ddtrace** はアプリケーションをトレースし、トレースを Agent に送信します。
 
-Datadog はそのままの状態ですべてのウェブフレームワークをサポートします。自動インスツルメンテーションは、特定の関数やメソッドをトレースするためにラップするよう PHP のランタイムを変更しことで実行されます。PHP トレーサーは、複数のライブラリの自動インスツルメンテーションをサポートします。
+Datadog はそのままの状態ですべてのウェブフレームワークをサポートします。自動インスツルメンテーションは、特定の関数やメソッドをトレースするために、PHPのランタイムを変更してこれらをラップすることで動作します。PHP トレーサーは、複数のライブラリの自動インスツルメンテーションをサポートします。
 
 自動インスツルメンテーションは以下を取得します。
 
@@ -165,7 +106,7 @@ Datadog はそのままの状態ですべてのウェブフレームワークを
 * 未処理の例外（該当する場合スタックトレースを含む）
 * Web リクエストなど、システムを通過するトレースの合計数
 
-## コンフィギュレーション
+## 構成
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][6]を参照してください。
 
@@ -260,7 +201,7 @@ debuginfo-install --enablerepo=remi-php74 -y php-fpm
 
 ##### Sury Debian DPA から PHP をインストールした場合
 
-PHP を [Sury Debian DPA][8] からインストールした場合は、DPA でデバッグデバッグシンボルを入手することができます。たとえば、PHP-FPM 7.2 の場合は次のようになります。
+PHP を [Sury Debian DPA][8] からインストールした場合は、DPA からすでにデバッグシンボルを利用できます。例えば、PHP-FPM 7.2 の場合は次のようになります。
 
 ```
 apt update
@@ -309,7 +250,7 @@ apt install -y debian-goodies
 find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
-見つかった場合は、結果のパッケージ名をインストールします。
+見つかった場合は、見つかった場合は、結果として得られたパッケージ名をインストールします。
 
 ```
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
@@ -321,11 +262,11 @@ apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 
 PHP を [`ppa:ondrej/php`][10] からインストールした場合は、`main/debug` コンポーネントを追加して apt ソースファイル `/etc/apt/sources.list.d/ondrej-*.list` を編集します。
 
-以前:
+修正前:
 
 ```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main```
 
-以降:
+修正後:
 
 ```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
 
@@ -373,7 +314,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-デバッグシンボルの正規のパッケージ名を追加してください。たとえば、パッケージ名が `php7.2-fpm` の場合は次のようになります。
+デバッグシンボルの正規のパッケージ名を追加してください。例えば、パッケージ名が `php7.2-fpm` の場合は次のように試してください。
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -383,7 +324,7 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-デバッグシンボルが見つからない場合は、ユーティリティツール `find-dbgsym-packages` を使用してバイナリをインストールします。
+デバッグシンボルが見つからない場合は、ユーティリティツール `find-dbgsym-packages` を使用してください。そして、バイナリをインストールします。
 
 ```
 apt install -y debian-goodies
@@ -395,7 +336,7 @@ apt install -y debian-goodies
 find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
-見つかった場合は、結果のパッケージ名をインストールします。
+見つかった場合は、見つかった場合は、結果として得られたパッケージ名をインストールします。
 
 ```
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
@@ -418,6 +359,25 @@ PHP アプリケーションのコアダンプを取得することは、特に 
 1. PHP-FPM プールコンフィギュレーションセクションに適切な `rlimit_core` があることを確認します。これは unlimited に設定できます: `rlimit_core = unlimited`
 1. システムに適切な `ulimit` が設定されていることを確認します。これは unlimited に設定できます: `ulimit -c unlimited`
 1. アプリケーションが Docker コンテナで実行されている場合は、ホストマシンに対して `/proc/sys/*` への変更を行う必要があります。使用可能なオプションについては、システム管理者に問い合わせてください。可能であれば、テスト環境またはステージング環境で問題を再現してみてください。
+
+### Docker コンテナ内からのコアダンプの取得
+
+Docker コンテナでコアダンプを取得する際には、以下の情報を参考にしてください。
+
+1. Docker コンテナは特権コンテナとして実行する必要があり、コアファイルの `ulimit` 値は以下の例に示すように最大値に設定する必要があります。
+   - `docker run` コマンドを使用する場合は、`--privileged` と `--ulimit core=99999999999` の引数を追加します
+   - `docker compose` を使用する場合は、`docker-compose.yml` ファイルに以下を追加します。
+```yaml
+privileged: true
+ulimits:
+  core: 99999999999
+```
+2. コンテナを実行する際に (PHP アプリケーションを起動する前に) 以下のコマンドを実行する必要があります。
+```
+ulimit -c unlimited
+echo '/tmp/core' > /proc/sys/kernel/core_pattern
+echo 1 > /proc/sys/fs/suid_dumpable
+```
 
 ### Valgrind トレースの取得
 
@@ -515,8 +475,7 @@ Apache の場合は、次を実行します。
 [1]: /ja/tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /ja/tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[5]: https://app.datadoghq.com/apm/services
+[5]: https://github.com/DataDog/dd-trace-php/releases
 [6]: /ja/tracing/trace_collection/library_config/php/
 [7]: /ja/tracing/guide/trace-php-cli-scripts/
 [8]: https://packages.sury.org/php/
@@ -525,3 +484,4 @@ Apache の場合は、次を実行します。
 [11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[14]: /ja/tracing/trace_collection#install-and-configure-the-agent

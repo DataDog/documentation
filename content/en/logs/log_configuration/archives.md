@@ -264,6 +264,18 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 {{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
+{{< site-region region="us3" >}}
+#### Firewall rules
+
+{{< tabs >}}
+{{% tab "Azure storage" %}}
+
+Firewall rules are not supported.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< /site-region >}}
 #### Storage class
 
 {{< tabs >}}

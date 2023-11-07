@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-If you use the soon-to-be deprecated [Datadog Processor][1] in your OpenTelemetry Collector pipeline for APM metrics, switch to use [Datadog Connector][2] instead. The Datadog Connector allows APM metrics to be calculated on 100% of the trace data, even when sampling is applied. The Connector is most relevant when you use sampling components like [tailsamplingprocessor][3] or [probabilisticsamplerprocesso][4] in one of your pipelines. 
+If you use the soon-to-be deprecated [Datadog Processor][1] in your OpenTelemetry Collector pipeline for APM metrics, switch to use [Datadog Connector][2] instead. The Datadog Connector allows APM metrics to be calculated on 100% of the trace data, even when sampling is applied. The Connector is most relevant when you use sampling components like [tailsamplingprocessor][3] or [probabilisticsamplerprocessor][4] in one of your pipelines. 
 
 The Datadog Connector also complies better with the OpenTelemetry standard than the Datadog Processor.
 
@@ -41,7 +41,7 @@ To switch to using the Datadog Connector, change the following configuration in 
            processors: [batch]
            exporters: [datadog/connector]
          traces/2: # This pipeline uses sampling
-           receivers: [otlp]
+           receivers: [datadog/connector]
            processors: [batch, probabilistic_sampler]
            exporters: [datadog]
      {{< /highlight >}}
@@ -83,7 +83,7 @@ service:
         exporters: [datadog/connector]
 
      traces/2: # This pipeline uses sampling
-        receivers: [otlp]
+        receivers: [datadog/connector]
         processors: [batch, probabilistic_sampler]
         exporters: [datadog]
 

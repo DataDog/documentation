@@ -18,7 +18,7 @@ kind: documentation
 title: Instrumenter des applications Ruby sans serveur
 ---
 
-<div class="alert alert-warning">Si vous avez déjà configuré vos fonctions Lambda à l'aide du Datadog Forwarder, consultez la documentation relative à l'<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumentation avec le Forwarder Datadog</a>. Sinon, suivez les instructions fournies dans ce guide pour instrumenter vos applications avec l'extension Lambda Datadog.</div>
+<div class="alert alert-warning">Si vous avez déjà configuré vos fonctions Lambda à l'aide du Forwarder Datadog, consultez la documentation relative à l'<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_ruby">instrumentation avec le Forwarder Datadog</a>. Sinon, suivez les instructions fournies dans ce guide pour instrumenter vos applications avec l'extension Lambda Datadog.</div>
 
 <div class="alert alert-warning">Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez transmettre des données avec <a href="/agent/guide/private-link/">AWS PrivateLink</a> pour le site <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog</a> ou avec <a href="/agent/proxy/">un proxy</a> pour tous les autres sites.</div>
 
@@ -171,7 +171,7 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
     `ddtrace` contient les extensions natives qui doivent être compilées pour que Amazon Linux fonctionne avec AWS Lambda.
 
-   Installez `gcc`, `gmp-devel` et `make` avant d'exécuter `bundle install` dans le Dockerfile de votre fonction, afin de vous assurer que les extensions natives peuvent être compilées. 
+    Installez `gcc`, `gmp-devel` et `make` avant d'exécuter `bundle install` dans le Dockerfile de votre fonction, afin de vous assurer que les extensions natives peuvent être compilées. 
 
     ```dockerfile
     FROM <base image>
@@ -224,7 +224,6 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
 <div class="alert alert-info">Si vous n'utilisez pas l'un des outils de développement sans serveur pris en charge par Datadog, tels que Serverless Framework, Datadog vous recommande vivement d'instrumenter vos applications sans serveur avec l'<a href="./?tab=datadogcli">interface de ligne de commande Datadog</a>.</div>
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Installer la bibliothèque Lambda Datadog
 
     La bibliothèque Lambda Datadog peut être installée en tant que couche ou en tant que gem. Pour la plupart des fonctions, Datadog vous conseille d'installer la bibliothèque en tant que couche. Si votre fonction Lambda est déployée sous la forme d'une image de conteneur, vous devez installer la bibliothèque en tant que gem.
@@ -241,9 +240,9 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
       ```
 
-      Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Ruby2-7` et `Ruby3-2`.
+      Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` disponibles sont `Ruby2-7` et `Ruby3-2`.
 
-    - Option B : si vous ne pouvez pas utiliser la couche Lambda Datadog prédéfinie, vous avez également la possibilité d'installer les gems `datadog-lambda` et `ddtrace` en les ajoutant à votre Gemfile :
+    - Option B : si vous ne pouvez pas utiliser la couche Lambda Datadog prédéfinie, vous avez également la possibilité d'installer les gems `datadog-lambda` et `ddtrace` en les ajoutant à votre Gemfile :
 
       ```Gemfile
       gem 'datadog-lambda'
@@ -284,91 +283,13 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
       Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
 
-    - Option B : Ajoutez l'extension Lambda Datadog à votre image de conteneur en ajoutant ce qui suit à votre Dockerfile :
+    - Option B : ajoutez l'extension Lambda Datadog à votre image de conteneur en ajoutant ce qui suit à votre Dockerfile :
 
       ```dockerfile
       COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
       ```
 
-       Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `{{< latest-lambda-layer-version layer="extension" >}}`) ou par `latest`. Accédez au [référentiel Amazon ECR][1] pour consulter la liste complète des tags disponibles.
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://gallery.ecr.aws/datadog/lambda-extension
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-1. Installer la bibliothèque Lambda Datadog
-
-    La bibliothèque Lambda Datadog peut être installée en tant que couche ou en tant que gem. Pour la plupart des fonctions, Datadog vous conseille d'installer la bibliothèque en tant que couche. Si votre fonction Lambda est déployée sous la forme d'une image de conteneur, vous devez installer la bibliothèque en tant que gem.
-
-    La version mineure du gem `datadog-lambda` correspond toujours à la version de la couche. Par exemple, datadog-lambda v0.5.0 correspond au contenu de la version 5 de la couche.
-
-    - Option A : [configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format ci-dessous :
-
-      ```sh
-      # Use this format for AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
-
-      # Use this format for AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="ruby" >}}
-      ```
-
-      Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Ruby2-7` et `Ruby3-2`.
-
-    - Option B : si vous ne pouvez pas utiliser la couche Lambda Datadog prédéfinie, vous avez également la possibilité d'installer les gems `datadog-lambda` et `ddtrace` en les ajoutant à votre Gemfile :
-
-      ```Gemfile
-      gem 'datadog-lambda'
-      gem 'ddtrace'
-      ```
-
-      `ddtrace` contient des extensions natives qui doivent être compilées pour Amazon Linux afin de fonctionner avec AWS Lambda. Datadog vous recommande donc de créer et déployer votre Lambda en tant qu'image de conteneur. Si votre fonction ne peut pas être déployée en tant qu'image de conteneur et que vous souhaitez utiliser la solution APM Datadog, il est conseillé d'installer la bibliothèque Lambda en tant que couche, et non en tant que gem.
-
-      Installez `gcc`, `gmp-devel` et `make` avant d'exécuter `bundle install` dans le Dockerfile de votre fonction, afin de vous assurer que les extensions natives peuvent être compilées. 
-
-      ```dockerfile
-      FROM <base image>
-
-      # assemble your container image
-
-      RUN yum -y install gcc gmp-devel make
-      RUN bundle config set path 'vendor/bundle'
-      RUN bundle install
-      ```
-
-2. Installer l'extension Lambda Datadog
-
-    - Option A : [configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN, en respectant le format ci-dessous :
-
-      ```sh
-      # Use this format for x86-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-      # Use this format for arm64-based Lambda deployed in AWS commercial regions
-      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
-      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
-      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-      ```
-
-      Remplacez `<AWS_REGION>` par une région AWS valide, telle que `us-east-1`.
-
-    - Option B : Ajoutez l'extension Lambda Datadog à votre image de conteneur en ajoutant ce qui suit à votre Dockerfile :
-
-      ```dockerfile
-      COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
-      ```
-
-       Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `{{< latest-lambda-layer-version layer="extension" >}}`) ou par `latest`. Accédez au [référentiel Amazon ECR][1] pour consulter la liste complète des tags disponibles.
-
-
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://gallery.ecr.aws/datadog/lambda-extension
-{{< /site-region >}}
+      Remplacez `<TAG>` par un numéro de version spécifique (par exemple, `{{< latest-lambda-layer-version layer="extension" >}}`) ou par `latest`. Accédez au [référentiel Amazon ECR][2] pour consulter la liste complète des tags disponibles.
 
 3. Configurer vos fonctions Lambda
 
@@ -393,16 +314,19 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
     - Définissez la variable d'environnement `DD_SITE` sur {{< region-param key="dd_site" code="true" >}} (assurez-vous que le SITE sélectionné à droite est correct).
     - Définissez la variable d'environnement `DD_API_KEY_SECRET_ARN` sur l'ARN du secret AWS où votre [clé d'API Datadog][3] est stockée en toute sécurité. La clé doit être stockée sous forme de chaîne de texte brut (et non en tant que blob JSON). L'autorisation `secretsmanager:GetSecretValue` est requise. Pour effectuer un test rapide, vous pouvez également utiliser `DD_API_KEY` et définir la clé d'API Datadog sous forme de texte brut.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://gallery.ecr.aws/datadog/lambda-extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Et ensuite ?
 
-- Vous pouvez visualiser vos métriques, logs et traces sur la [page d'accueil Serverless][1].
+- Vous pouvez désormais visualiser des métriques, logs et traces sur la [page d'accueil Serverless][4].
+- Activez la [surveillance des menaces][9] pour recevoir des alertes en cas d'attaques ciblant votre service.
 - Consultez l'exemple de code pour [surveiller une logique opérationnelle personnalisée](#surveiller-une-logique operationnelle-personnalisee).
-- Consultez le [guide de dépannage][2] si vous ne parvenez pas à recueillir les données de télémétrie.
-- Examinez les [configurations avancées][3] pour :
+- Consultez le [guide de dépannage][5] si vous ne parvenez pas à recueillir les données de télémétrie.
+- Examinez les [configurations avancées][6] pour :
     - Associer des données de télémétrie à l'aide de tags
     - Recueillir des données de télémétrie pour AWS API Gateway, SQS, etc.
     - Capturer les charges utiles des requêtes et des réponses Lambda
@@ -411,7 +335,7 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 
 ### Surveiller une logique opérationnelle personnalisée
 
-Pour surveiller votre logique opérationnelle personnalisée, envoyez une métrique custom ou une span via l'exemple de code ci-dessous. Pour découvrir plus d'options, consultez la documentation relative à l'[envoi de métriques custom pour des applications sans serveur][4] ainsi que le [guide APM pour l'instrumentation personnalisée][5].
+Pour surveiller votre logique opérationnelle personnalisée, envoyez une métrique custom ou une span via l'exemple de code ci-dessous. Pour découvrir plus d'options, consultez la documentation relative à l'[envoi de métriques custom pour des applications sans serveur][7] ainsi que le [guide APM pour l'instrumentation personnalisée][8].
 
 ```ruby
 require 'ddtrace'
@@ -454,15 +378,19 @@ def some_operation()
 end
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez la section [Métriques custom à partir d'applications sans serveur][4]. Pour en savoir plus sur l'instrumentation personnalisée, consultez la documentation de l'APM Datadog relative à l'[instrumentation personnalisée][5].
+Pour en savoir plus sur l'envoi de métriques custom, consultez la section [Métriques custom à partir d'applications sans serveur][7]. Pour en savoir plus sur l'instrumentation personnalisée, consultez la documentation sur la solution APM Datadog relative à l'[instrumentation personnalisée][8].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/functions
-[2]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
-[3]: /fr/serverless/configuration/
-[4]: /fr/serverless/custom_metrics?tab=ruby
-[5]: /fr/tracing/custom_instrumentation/ruby/
+[1]: /fr/serverless/forwarder/
+[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[3]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[4]: https://app.datadoghq.com/functions
+[5]: /fr/serverless/guide/troubleshoot_serverless_monitoring/
+[6]: /fr/serverless/configuration
+[7]: /fr/serverless/custom_metrics?tab=ruby
+[8]: /fr/tracing/custom_instrumentation/ruby/
+[9]: /fr/security/application_security/enabling/serverless/?tab=serverlessframework
