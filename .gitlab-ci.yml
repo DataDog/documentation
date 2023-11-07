@@ -149,7 +149,7 @@ build_preview:
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
     - touch preview_error.log # Create log file for errors
-    - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
+    #- exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
@@ -173,11 +173,11 @@ build_preview:
       - ./logs
       - ./public/redirects.txt
       - $PREVIEW_ERROR_LOG
-  after_script:
-    - |
-      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
-        echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
-      fi # Output the error to the console
+#  after_script:
+#    - |
+#      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+#        echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
+#      fi # Output the error to the console
   interruptible: true
 
 link_checks_preview:
