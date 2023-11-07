@@ -9,6 +9,7 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING)
+stability = 'dev'
 
 TEMPLATE = """\
 ---
@@ -37,7 +38,7 @@ def workflows(content, content_dir):
                         data = json.loads(f.read())
                     except:
                         logger.warn(f"Error parsing {file_name}")
-            if data and data.get('stability', '') == 'stable':
+            if data and data.get('stability', '') == stability:
                 
                 for action_name, action_data in get_filtered_actions(data.get('actions', {})).items():
                     action_name = re.split(r':V\d+', action_name)[0] # clean action_name. no version identifier
@@ -73,7 +74,7 @@ def should_show_action(action_stability, data):
     @param data {dict}
     @return {boolean}
     """
-    return (not action_stability or action_stability == 'stable') and not data.get('internal') and not data.get('hidden') and not data.get('deprecated')
+    return (not action_stability or action_stability == stability) and not data.get('internal') and not data.get('hidden') and not data.get('deprecated')
 
 
 
