@@ -21,7 +21,7 @@ These restriction are necessary to make Operator compliant with the EKS add-on p
 ## Prerequisites
 
 
-* Subscription to the [Datadog Operator][1] product. 
+* Subscription to the [Datadog Operator][1] product.
 * Kubectl
 * If you are using the command line interface for setting up the add-on, [AWS CLI](https://aws.amazon.com/cli/)
 
@@ -39,12 +39,12 @@ These restriction are necessary to make Operator compliant with the EKS add-on p
 
 To install the Operator add-on, run:
   ```bash
-  aws eks create-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME> 
+  aws eks create-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 
 Add-on installation is asynchronous. To check installation status, run:
   ```bash
-  aws eks describe-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME> 
+  aws eks describe-addon --addon-name datadog_operator --region <AWS_REGION> --cluster-name <CLUSTER_NAME>
   ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -66,7 +66,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
    ```
    Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][5].
-  
+
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The Datadog Operator uses default Agent and Cluster Agent image settings and pulls them from a public registry.
 
@@ -80,7 +80,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
      global:
        # required in case Agent can not resolve cluster name through IMDS, see the note below.
        clusterName: <CLUSTER_NAME>
-       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com
+       registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com/datadog
        credentials:
          apiSecret:
            secretName: datadog-secret
@@ -134,7 +134,7 @@ To delete the add-on, run:
 {{% /tab %}}
 {{< /tabs >}}
 
- **Note:** If Operator add-on is uninstalled before deleting the `DatadogAgent` custom resource, agents will continue to run on the cluster. Deleting namespace will get stuck since the `DatadogAgent` can not be finalized without a running Operator. See this Github [issue][9] for a workaround. 
+ **Note:** If Operator add-on is uninstalled before deleting the `DatadogAgent` custom resource, agents will continue to run on the cluster. Deleting namespace will get stuck since the `DatadogAgent` can not be finalized without a running Operator. See this Github [issue][9] for a workaround.
 
 
 {{< partial name="whats-next/whats-next.html" >}}
