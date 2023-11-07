@@ -8,7 +8,7 @@ further_reading:
   text: "Basic Agent Usage"
 ---
 
-The Datadog Agent is supported on most popular operating systems and platforms. If your operating system is not listed below, [a source installation][1] might work for you. Source installations are supported on a best effort basis.
+The Datadog Agent is supported on a range of widely used operating systems and platforms. If your operating system is not listed below, [a source installation][1] might work for you.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -290,8 +290,8 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
 | 5 | >= 1.14 | 1.3 - 1.8 ||
-| 6 | >= 1.14 | >= 1.3| All versions |
-| 7 | >= 1.14 | >= 1.3| All versions |
+| 6 | >= 1.14 | >= 1.3 | All versions |
+| 7 | >= 1.14 | >= 1.3 | All versions |
 
 
 ## 64-BIT ARM V8 support
@@ -300,7 +300,7 @@ Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
 | Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
 |-------------|--------------------|-----------------------|--------------------|
-| [Docker][5] | >= 1.14      | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Docker][5] | >= 1.14     | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | [Kubernetes][6] | >= 1.3   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
 
