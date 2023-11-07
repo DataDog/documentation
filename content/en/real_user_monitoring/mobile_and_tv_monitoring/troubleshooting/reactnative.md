@@ -19,7 +19,7 @@ Follow these instructions in order when the SDK has been installed and the app c
 
 ### Check the configuration
 
-Sometimes, no data is sent due to a small misstep in the configuration. 
+Sometimes, no data is sent due to a small misstep in the configuration.
 
 Here are some common things to check for:
 
@@ -171,6 +171,93 @@ You can make the following change to fix it:
 ## Infinite loop-like error messages
 
 If you run into an [issue where your React Native project displays a stream of error messages and significantly raises your CPU usage][5], try creating a new React Native project.
+
+## Android build failures with SDK version `2.*`
+
+### `Unable to make field private final java.lang.String java.io.File.path accessible`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:processReleaseMainManifest'.
+> Unable to make field private final java.lang.String java.io.File.path accessible: module java.base does not "opens java.io" to unnamed module @1bbf7f0e
+```
+
+You are using Java 17, which is not compatible for your React Native version. Switch to Java 11 to solve the issue.
+
+### `java.lang.UnsupportedClassVersionError`
+
+If your Android build fails with an error like:
+
+```
+java.lang.UnsupportedClassVersionError: com/datadog/android/lint/DatadogIssueRegistry has been compiled by a more recent version of the Java Runtime (class file version 61.0), this version of the Java Runtime only recognizes class file versions up to 55.0
+```
+
+You are using a version of Java that is too old. Switch to Java 17 to solve the issue.
+
+### `Unsupported class file major version 61`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not determine the dependencies of task ':app:lintVitalRelease'.
+> Could not resolve all artifacts for configuration ':app:debugRuntimeClasspath'.
+   > Failed to transform dd-sdk-android-core-2.0.0.aar (com.datadoghq:dd-sdk-android-core:2.0.0) to match attributes {artifactType=android-manifest, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
+      > Execution failed for JetifyTransform: /Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar.
+         > Failed to transform '/Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar' using Jetifier. Reason: IllegalArgumentException, message: Unsupported class file major version 61. (Run with --stacktrace for more details.)
+```
+
+You use a version of Android Gradle Plugin below `5.0`. To fix the issue, add in your `android/gradle.properties` file:
+
+```properties
+android.jetifier.ignorelist=dd-sdk-android-core
+```
+
+### `Duplicate class kotlin.collections.jdk8.*`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:checkReleaseDuplicateClasses'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
+   > Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
+     Duplicate class kotlin.internal.jdk7.JDK7PlatformImplementations found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk7-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20)
+```
+
+You need to set a Kotlin version for your project to avoid clashes among Kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+Alternatively, you can add the following rules to your build script in your `android/app/build.gradle` file:
+
+```groovy
+dependencies {
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+}
+```
 
 ## Further Reading
 
