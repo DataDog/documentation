@@ -594,7 +594,7 @@ By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted
 
 After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing forwarders and collectors to point to the Worker.
 
-## Connect Splunk Forwarders to the Observability Pipelines Worker
+## Connect Splunk forwarders to the Observability Pipelines Worker
 You can update your Splunk Heavy/Universal Forwarders to point to the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
 
 For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
