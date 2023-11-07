@@ -70,7 +70,7 @@ The Datadog Agent is supported on most popular operating systems and platforms. 
   </tr>
   <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
-    <td>>= 12.04</td>
+    <td>12.04</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
     <td></td>
