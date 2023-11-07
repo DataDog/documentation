@@ -82,7 +82,7 @@ Pour obtenir des instructions détaillées concernant les options d'alerte avanc
 
 ### Notifications
 
-Pour obtenir des instructions sur l'utilisation de template variables issues des monitors qui composent un monitor composite dans vos notifications, consultez la section [Variables des monitors composite][5]. Pour obtenir des instructions détaillées concernant sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][3].
+Pour obtenir des instructions sur l'utilisation de template variables issues des monitors qui composent un monitor composite dans vos notifications, consultez la documentation relative aux [variables des monitors composite][4]. Pour obtenir des instructions détaillées concernant les sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][3].
 
 ### API
 

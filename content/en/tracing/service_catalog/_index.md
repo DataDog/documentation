@@ -130,6 +130,16 @@ This information is only available for Cloud Cost Management customers who have 
 
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
+### Software Delivery View
+The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI pipelines and viewing your static analysis violations. You can:
+
+- View performance of the [CI pipeline(s)][23] related to your services.
+- Find security and code quality issues from [Static Analysis][24].
+- Easily pivot from Service Catalog to troubleshoot pre-production slowdowns and failures.
+
+To access additional details describing your CI status and static analysis violations, click on a service and see the status of each pipeline and rule violation.
+
+
 ## Investigate a service
 
 Clicking on a service opens a side panel with details including:
@@ -138,6 +148,7 @@ Clicking on a service opens a side panel with details including:
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
 - **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, security threats impacting your services, and the ability to download the Software Bill of Materials (SBOM) from the libraries tab. 
+- **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
 
   {{< img src="tracing/service_catalog/libraries_sbom.png" alt="Showing an individual service from Service Catalog, highlighting the libraries tab and ability to download the SBOM" style="width:100%;" >}}
 
@@ -222,3 +233,5 @@ The services and resources statistics, and span summaries on the **Service List*
 [20]: /cloud_cost_management/?tab=aws
 [21]: /cloud_cost_management/tag_pipelines
 [22]: /developers/guide/data-collection-resolution-retention/
+[23]: https://app.datadoghq.com/ci/pipelines
+[24]: https://app.datadoghq.com/ci/static-analysis
