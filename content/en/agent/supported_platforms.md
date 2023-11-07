@@ -46,53 +46,53 @@ The Datadog Agent is supported on a range of widely used operating systems and p
     <th rowspan='2'><a href='/agent/basic_agent_usage/deb/'>Debian</a> (systemd)</th>
     <td>7.0 (wheezy)</td>
     <td><i class='icon-check-bold'></td>
-    <td><= 6.35.0</td>
-    <td><= 7.35.0</td>
+    <td><= 6.35.2</td>
+    <td><= 7.35.2</td>
   </tr>
   <tr>
     <td>>= 8.0 (jessie)</td>
-    <td></td>
-    <td>>= 6.36.0</td>
-    <td>>= 7.36.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th rowspan='2'>Debian (SysVinit)</th>
     <td>7.0 (wheezy)</td>
     <td></td>
-    <td>6.6.0 - 6.36.0</td>
-    <td><= 7.35.0</td>
+    <td>6.6.0 - 6.35.2</td>
+    <td><= 7.35.2</td>
   </tr>
   <tr>
     <td>>= 8.0 (jessie)</td>
     <td></td>
-    <td>>= 6.36.0</td>
-    <td>>= 7.36.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/ubuntu/'>Ubuntu</a></th>
-    <td>>= 12.04</td>
+    <td>12.04</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>>= 14.05</td>
-    <td></td>
+    <td>>= 14.04</td>
+    <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th rowspan='2'><a href='/agent/basic_agent_usage/redhat/'>RedHat /<br>CentOS<br></a></th>
-    <td>>= 5.0</td>
+    <td>5.0</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td>>= 6.0</td>
-    <td></td>
-    <td>>= 6.33.0</td>
-    <td>>= 7.33.0</td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
+    <td><i class='icon-check-bold'></td>
   </tr>
   <tr>
     <th><a href='/agent/basic_agent_usage/redhat/'>AlmaLinux /<br>Rocky</a></th>
@@ -110,7 +110,7 @@ The Datadog Agent is supported on a range of widely used operating systems and p
   </tr>
   <tr>
     <td>>= 12.0</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
@@ -124,7 +124,7 @@ The Datadog Agent is supported on a range of widely used operating systems and p
   <tr>
     <th><a href='/agent/basic_agent_usage/suse/'>OpenSUSE (systemd)</a></th>
     <td>>= 15.0</td>
-    <td></td>
+    <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
   </tr>
