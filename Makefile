@@ -1,6 +1,6 @@
 # make
 SHELL = /bin/bash
-MAKEFLAGS += -j
+#MAKEFLAGS += -j
 .PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
@@ -100,6 +100,10 @@ source-dd-source:
 # All the requirements for a full build
 dependencies: clean hugpython all-examples data/permissions.json source-dd-source update_pre_build node_modules
 	@make placeholders derefs
+
+dependencies_parallel:
+	@make -j clean hugpython
+	@make -j all-examples data/permissions.json source-dd-source update_pre_build node_modules placeholders derefs
 
 # make directories
 data/workflows/:
