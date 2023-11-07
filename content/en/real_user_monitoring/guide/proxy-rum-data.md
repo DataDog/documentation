@@ -73,12 +73,13 @@ To successfully proxy request to Datadog:
 The site parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
 | Site    | Site Parameter            | Datadog intake origin                      |
-| ------- | ------------------------- | ------------------------------------------ |
+|---------|---------------------------|--------------------------------------------|
 | US1     | `datadoghq.com` (default) | `https://browser-intake-datadoghq.com`     |
 | US3     | `us3.datadoghq.com`       | `https://browser-intake-us3-datadoghq.com` |
 | US5     | `us5.datadoghq.com`       | `https://browser-intake-us5-datadoghq.com` |
 | EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
 | US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
+| AP1     | `ap1.datadoghq.com`       | `https://browser-intake-ap1-datadoghq.com` |
 
 The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation.
 
