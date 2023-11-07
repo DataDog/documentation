@@ -1,6 +1,6 @@
 # make
 SHELL = /bin/bash
-MAKEFLAGS = -j
+MAKEFLAGS += -j
 .PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
@@ -98,13 +98,8 @@ source-dd-source:
 	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
 
 # All the requirements for a full build
-dependencies: clean
-	# items with no dependencies
-	make hugpython node_modules source-dd-source all-examples
-	# items dependant on above
-	make data/permissions.json update_pre_build derefs
-	# items dependant on generated files being completely built
-	make placeholders
+dependencies: clean hugpython all-examples data/permissions.json source-dd-source update_pre_build node_modules
+	@make placeholders derefs
 
 # make directories
 data/workflows/:
@@ -114,16 +109,16 @@ data/workflows/:
 derefs: $(DEREFS)
 
 .SECONDEXPANSION:
-$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json node_modules | data/workflows/
 	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
-data/permissions.json:
+data/permissions.json: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
 
 # only build placeholders in ci
-placeholders:
+placeholders: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
 
 # create the virtual environment
@@ -133,7 +128,7 @@ hugpython: local/etc/requirements3.txt
 		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.20386518-py3-none-any.whl; \
 	fi
 
-update_pre_build:
+update_pre_build: hugpython
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
 
 # Only to be run during deployment
