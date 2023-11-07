@@ -39,7 +39,7 @@ def workflows(content, content_dir):
                         logger.warn(f"Error parsing {file_name}")
             if data and data.get('stability', '') == 'stable':
                 
-                for action_name, action_data in filter_actions(data.get('actions', {})).items():
+                for action_name, action_data in get_filtered_actions(data.get('actions', {})).items():
                     action_name = re.split(r':V\d+', action_name)[0] # clean action_name. no version identifier
                     # for each action of a bundle
                     if should_show_action(action_data.get('stability'), data):
@@ -77,7 +77,7 @@ def should_show_action(action_stability, data):
 
 
 
-def filter_actions(actions):
+def get_filtered_actions(actions):
     """
     Filter a bundle's actions to only include the highest versioned action for a particular action
     e.g.
