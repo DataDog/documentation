@@ -3,7 +3,6 @@
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][101].
 
 1. Download the [sample pipeline configuration file][102].
-
 2. Run the following command to start the Observability Pipelines Worker with Docker:
     ```
     docker run -i -e DD_API_KEY=<API_KEY> \

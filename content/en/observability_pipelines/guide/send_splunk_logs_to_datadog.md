@@ -21,6 +21,8 @@ further_reading:
 
 [Flex Logs][1] decouples log storage and log query compute to provide a solution for long-term retention of logs without impacting query performance. This lets you centralize all of your logs in one platform regardless of the use case.
 
+OP Worker v1.6 and later can receive Splunk logs using Splunk's Heavy/Universal forwarder and Splunk HEC collectors. OP Worker v1.6 and older only supports Splunk HEC collectors.
+
 This guide walks you through how you can dual ship Splunk Universal/Heavy Forwarders and HEC logs to Datadog using the Observability Pipelines Worker.
 
 {{% op-set-up-splunk-index %}}
@@ -30,6 +32,7 @@ This guide walks you through how you can dual ship Splunk Universal/Heavy Forwar
 
 ## Install the Observability Pipelines Worker
 
+You can install the Worker using [Remote Configuration](#remote-configuration) or [manual configuration](#manual-configuration).
 {{% op-splunk-docker-rc-install-worker %}}
 {{% op-splunk-docker-install-worker %}}
 
@@ -38,26 +41,39 @@ This guide walks you through how you can dual ship Splunk Universal/Heavy Forwar
 
 ## Install the Observability Pipelines Worker
 
+You can install the Worker using [Remote Configuration](#remote-configuration) or [manual configuration](#manual-configuration).
 {{% op-splunk-aws-eks-rc-install-worker %}}
 {{% op-splunk-aws-eks-install-worker %}}
 
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
+## Install the Observability Pipelines Worker
+
+You can install the Worker using [Remote Configuration](#remote-configuration) or [manual configuration](#manual-configuration).
+{{% op-splunk-azure-aks-rc-install-worker %}}
 {{% op-splunk-azure-aks-install-worker %}}
 
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
+## Install the Observability Pipelines Worker
+
+You can install the Worker using [Remote Configuration](#remote-configuration) or [manual configuration](#manual-configuration).
+{{% op-splunk-google-gke-rc-install-worker %}}
 {{% op-splunk-google-gke-install-worker %}}
 
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 
+## Install the Observability Pipelines Worker
+
 {{% op-splunk-apt-linux-install-worker %}}
 
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
+
+## Install the Observability Pipelines Worker
 
 {{% op-splunk-rpm-linux-install-worker %}}
 
@@ -71,7 +87,7 @@ This guide walks you through how you can dual ship Splunk Universal/Heavy Forwar
 
 ## Connect Splunk to the Worker
 
-OP Worker v1.6 and later can receive Splunk logs using Splunk's Heavy/Universal forwarder and Splunk HEC collectors. OP Worker v1.6 and older only supports Splunk HEC collectors.
+You can connect the Worker to Splunk's Heavy/Universal Forwarders or to Splunk HEC collectors.
 
 ### Connect Splunk Heavy/Universal Forwarders to the Worker
 

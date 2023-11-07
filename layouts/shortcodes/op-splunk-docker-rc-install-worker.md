@@ -1,4 +1,4 @@
-### Remote configuration
+### Remote Configuration
 
 1. Navigate to [Observability Pipelines][101].
 1. Click **Add New Pipeline**.

@@ -1,4 +1,4 @@
-## Install the Observability Pipelines Worker
+### Manual configuration
 
 1. Download the [Helm chart][101] for Google GKE.
 

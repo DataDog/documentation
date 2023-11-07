@@ -1,4 +1,3 @@
-## Install the Observability Pipelines Worker
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
 
     ```
@@ -23,7 +22,9 @@
     sudo yum install observability-pipelines-worker
     ```
 
-3. Add your Datadog API key, pipeline ID, [Datadog site parameter][101], and Splunk URL and token to the Worker's environment variables. The Splunk URL and token are from the Splunk deployment you created in [Set up the Splunk Index](#set-up-the-splunk-index.
+3. Add your Datadog API key, pipeline ID, [Datadog site parameter][101], and Splunk URL and token to the Worker's environment variables. The Splunk URL and token are from the Splunk deployment you created in [Set up the Splunk Index](#set-up-the-splunk-index).
+
+    For manual configuration:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -34,10 +35,21 @@
     SPLUNK_TOKEN=<SPLUNK_TOKEN>
     EOF
     ```
+    Also, download the [sample configuration file][102] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
 
-4. Download the [sample configuration file][102] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
+    For remote configuration:
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_TOKEN=<SPLUNK_TOKEN>
+    EOF
+    ```
 
-5. Start the worker:
+4. Start the worker:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```

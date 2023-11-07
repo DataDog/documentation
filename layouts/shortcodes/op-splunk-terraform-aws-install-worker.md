@@ -1,4 +1,24 @@
-Setup the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+Set up the Worker module in your existing Terraform using the below sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+For Remote Configuration, use the following example:
+
+```
+module "opw" {
+    source     = "git::https://github.com/DataDog/opw-terraform//aws"
+    vpc-id     = "{VPC ID}"
+    subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
+    region     = "{REGION}"
+
+    datadog-api-key = "{DATADOG API KEY}"
+    pipeline-id = "{OP PIPELINE ID}"
+    environment = {
+      "SPLUNK_TOKEN": "<SPLUNK TOKEN>",
+    }
+    remote-configuration = true
+}
+```
+
+For manual configuration, use the following example:
 
 ```
 module "opw" {
