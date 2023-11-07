@@ -98,9 +98,13 @@ source-dd-source:
 	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
 
 # All the requirements for a full build
-dependencies:
-	make clean hugpython node_modules source-dd-source
-	make all-examples data/permissions.json update_pre_build placeholders derefs
+dependencies: clean
+	# items with no dependencies
+	make hugpython node_modules source-dd-source all-examples
+	# items dependant on above
+	make data/permissions.json update_pre_build derefs
+	# items dependant on generated files being completely built
+	make placeholders
 
 # make directories
 data/workflows/:
