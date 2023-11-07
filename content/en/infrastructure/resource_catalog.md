@@ -6,9 +6,12 @@ aliases:
   - /security/cspm/resource_catalog
   - /security/misconfigurations/resource_catalog
 further_reading:
-- link: "/security/misconfigurations/custom_rules/schema/"
+- link: "security/misconfigurations/"
   tag: "Documentation"
-  text: "Cloud Resource Schema"
+  text: "Cloud Security Management Misconfigurations"
+- link: "security/threats/"
+  tag: "Documentation"
+  text: "Cloud Security Management Threats"
 ---
 
 {{< site-region region="gov" >}}
@@ -25,10 +28,9 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 (Will need new screen shot showing new inventory tab)
 
-## Adding resources to Resource Catalog
+## Setup
 
-Resource Catalog enabled for all customers by default.
-By default, you can view all hosts monitored by the Datadog Agent. For cloud resources to appear in the Resource Catalog, enable resource collection from the [Resource Catalog][2] ? setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account. 
+By default, all hosts are automatically monitored by the Datadog Agent. For cloud resources to appear in the Resource Catalog, enable resource collection from the [Resource Catalog][2] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account. 
 
 **Note**: Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab.
 Enabling resource collection for the resource catalog does not enable the CSM product.
@@ -89,7 +91,7 @@ Click the **Share** button and select **Share event** to share a link to the cur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management
+[1]: /security/cloud_security_management/setup
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
