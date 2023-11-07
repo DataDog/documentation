@@ -200,7 +200,7 @@ The type of the service can be one of:
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 
 ### Updating service type and language
-With [Service Catalog Metadata Schema 2.2][25], you can specify type and language for user-defined services or overwrite auto-detected type and language for instrumented services to help other teams further understand what your services do and how to interact with it. 
+With [Service Catalog metadata schema 2.2][25], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
 
 ## Changing service color
 
