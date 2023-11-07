@@ -33,6 +33,7 @@ variables:
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
   PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
 
 
 # ================== copy scripts =============== #
@@ -87,6 +88,14 @@ before_script:
       - ${YARN_CACHE_FOLDER}
     policy: pull-push
 
+.pip_cache: &pip_cache
+  - key:
+      files:
+        - local/etc/requirements3.txt
+    paths:
+      - ${PIP_CACHE_DIR}
+    policy: pull-push
+
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
@@ -128,6 +137,7 @@ build_preview:
   cache:
     - *hugo_cache
     - *yarn_cache_pull_push
+    - *pip_cache
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
@@ -235,6 +245,8 @@ algolia_sync_live:
   allow_failure: true
   interruptible: true
   timeout: 2h
+  dependencies:
+    - build_live
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
     - >
@@ -296,6 +308,7 @@ build_live:
   cache:
     - *hugo_cache
     - *yarn_cache_pull_push
+    - *pip_cache
   environment: "live"
   retry: 1
   variables:
