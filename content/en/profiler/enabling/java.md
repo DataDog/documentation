@@ -228,7 +228,7 @@ or:
 _Requires JDK 11+._
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
-In dd-java-agent earlier than v1.17.0 it is **disabled** by default, but you can enable it with:
+In dd-java-agent earlier than v1.17.0 it is **disabled** by default, enable it with:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
