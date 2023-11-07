@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about the Agent configuration view"
 ---
 
-{{< callout btn_hidden="true">}}Fleet Automation is in beta.{{< /callout >}}
+{{< callout btn_hidden="true">}}Fleet Automation is in private beta.{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -21,7 +21,7 @@ further_reading:
 
 Datadog Fleet Automation allows you to gain visibility into your fleet of Agents to ensure they are set up correctly and optimized to meet your evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet_automation.png" alt="The fleet automation page." style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation1.png" alt="The fleet automation page." style="width:100%;" >}}
 
 With Fleet Automation, you can:
 - Reduce the time it takes to debug an issue by sending a remote flare straight from the [Fleet Automation][1] page.
@@ -31,31 +31,38 @@ With Fleet Automation, you can:
 
 To access Fleet Automation, click **Integrations** > [**Fleet Automation**][1].
 
-From the Fleet Automation page, you can gain insight into unmonitored Agents, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see the version running on each host, whether the host has any unconfigured or misconfigured integrations, the services running on the host, and the Remote Configuration status of each host.
+From the Fleet Automation page, you can gain insight into unmonitored Agents, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
+- The Agent version
+- Whether the Agent has any unconfigured or misconfigured integrations
+- The services that the Agent is monitoring
+- The Remote Configuration status of each Agent
+- The products that are enabled on the Agent
 
-Selecting a host gives you more information about the host, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
+Selecting an Agent gives you more information about it, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
 
-{{< img src="agent/fleet_automation/selected_host.png" alt="A host's integration information," style="width:100%;" >}}
+{{< img src="agent/fleet_automation/selected_agent.png" alt="An Agent's integration information," style="width:100%;" >}}
 
 ## Configuring Fleet Automation
 
 Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agents version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agent to version 7.49/6.49 or later.
 
 If you're using an older Agent, you might still be able to enable the following Datadog features individually:
-- **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3]
-- **Agent configuration**: For information on supported Agent versions and configuration steps, see [Agent configuration][4]
-- **Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49/6.49 or later. To disable it, set the value of `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `false`. You can also use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+- **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3].
+- **Agent configuration**: Agent version 7.39/6.39 or later is required to enable the Agent configuration tab. It is enabled by default in Agent versions 7.47.0/6.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
+- **Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49/6.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features and security updates.
 
 ## Send a remote flare
 
+Before you send a flare, make sure that [Remote Configuration is enabled on the selected Agent](#configuring-fleet-automation).
+
 To send a remote flare:
 1. From the [Fleet Automation][1] page, select an Agent that requires support.
 1. Click **Support**.
 1. Click **Send Support Ticket**.
-1. If you have an existing support ticket, enter the ticket number. To create a new ticket, leave the ticket number blank.
-1. Ensure **Debug mode** is enabled. This option allows Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous setting after the flare is sent.
+1. Provide an existing Zendesk support ticket number. If you don't provide a ticket number, one is created on your behalf.
+1. Enable **Debug mode** to allow Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous configuration after the flare is sent.
 1. Click **Send Ticket**.
 
 ## Control access to Fleet Automation
@@ -65,7 +72,7 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 | Permission | Description |
 |--------------|---------------|
 | `API keys read`| Restricts which users can view and search agents by API key. |
-| `Agent flare collection` | Restricts which users can remotely send flares. `Agent flare collection` is derived from the `Write Dashboards` permission. Existing users that are able to write dashboards are able to send flares by default. |
+| `Agent flare collection` | Restricts which users can remotely send flares. |
 
 For information on setting up roles and permissions, see [Access Control][5].
 
