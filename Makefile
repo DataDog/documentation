@@ -102,8 +102,8 @@ dependencies: clean hugpython all-examples data/permissions.json source-dd-sourc
 	@make placeholders derefs
 
 dependencies_parallel:
-	@make -j clean hugpython
-	@make -j all-examples data/permissions.json source-dd-source update_pre_build node_modules placeholders derefs
+	make -j clean hugpython
+	make -j all-examples data/permissions.json source-dd-source update_pre_build node_modules placeholders derefs
 
 # make directories
 data/workflows/:
