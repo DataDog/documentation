@@ -9,11 +9,9 @@ description: Explore and dig into your database host health and configuration
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria.
-
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
-Click on any host in the list to open a details panel:
+On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
 
 {{< img src="database_monitoring/db-list-details-panel.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
 
