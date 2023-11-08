@@ -19,8 +19,10 @@ The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations]
 
 **CSM Vulnerabilities**:
 
-* [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
+* [containerd][8] v1.5.6 or later (Kubernetes and hosts only). 
 * [Helm Chart][9] v3.33.6 or later (Kubernetes only).
+
+**Note**: CSM Vulnerabilities is not available for CRI-O or Podman.
 
 ## Enable resource scanning for CSM misconfigurations
 
@@ -50,9 +52,9 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ## Configure CSM for container vulnerabilities
 
-The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities.
+The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
 
-**Note**: Vulnerabilities are evaluated and and scanned against your containers every hour.
+**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
 ### Configure the Agent
 

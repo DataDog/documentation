@@ -45,6 +45,8 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 * [containerd][16] v1.5.6 or later (Kubernetes and hosts only).
 * [Helm Chart][17] v3.33.6 or later (Kubernetes only).
 
+**Note**: CSM Vulnerabilities is not available for CRI-O or Podman.
+
 ## Enable resource scanning for CSM misconfigurations
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
@@ -445,9 +447,9 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 ## Configure CSM for vulnerabilities
 
-The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. 
+The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
 
-**Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
+**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
 ### Configure the Agent
 
