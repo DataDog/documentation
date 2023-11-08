@@ -62,6 +62,18 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
 
+## Calendar alignment 
+
+You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries:
+
+Image to be added to this line, provided separately
+
+This feature allows you the flexibility to define:
+
+* Calendar aligned monthly queries with adjustable start date / timezones
+* Weekly rollups with adjustable start date / timezones
+* Daily rollups with adjustable start time / timezones
+
 ## Rollups in monitors
 
 Rollups should usually be avoided in [monitor][5] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
