@@ -9,8 +9,46 @@
         padding-top: 12px;
         padding-bottom: 12px;
 
-        .filters-static-analysis button {
-            height: 40px;
+        .filters-static-analysis {
+            margin-bottom: 12px;
+            .filter-type {
+                margin-bottom: 24px;
+                .filter-type-name {
+                    margin-bottom: 8px;
+                }
+                button.toggler {
+                    height: 40px;
+                    padding: 0 8px;
+                    border: 1px solid #C7C7C7;
+                    .selections {
+                        column-gap: 4px;
+                        .selection-container {
+                            column-gap: 7px;
+                            background-color: #E6D6F9;
+                            padding: 0 4px;
+                            i {
+                                display: flex;
+                            }
+                        }
+                    }
+                }
+                form {
+                    row-gap: 12px;
+                    padding: 8px;
+                    margin-top: 8px;
+                    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.10), 0px 4px 16px 0px rgba(0, 0, 0, 0.32);
+                    z-index: 1;
+
+                    .filter-category-container {
+                        display: flex;
+                        align-items: center;
+                        column-gap: 4px;
+                    }
+                }
+            }
+            .filter-type:last-of-type {
+                margin-bottom: 0;
+            }
         }
         .search-static-analysis input {
             padding: 9px 8px;

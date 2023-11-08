@@ -29,6 +29,7 @@
             severity: ''
         },
         searchValue: '',
+        openedFilterForm: null,
         filteredRulesets: new Set(),
         updateFilterValue (filter, value) {
             // Setter on filter
@@ -83,7 +84,6 @@
             }
       
             window.history.pushState(null,'', url.toString())
-            window.scroll(0, 0)
         },
         updateWithURLParams () {
             // Updates x-data properties with url param values
@@ -122,6 +122,10 @@
                     copyConfirmedIconWrapper.classList.add('d-none')
                 }, 1000)
             })
+        },
+        toggleFilterForm (selectedFilterFormEl) {
+            const filterTypeID = selectedFilterFormEl.closest('.filter-type').dataset.id
+            this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
         }
     }"
     x-init="updateWithURLParams()">
@@ -219,40 +223,48 @@
             </div>
         </div>
 
-        <nav id="static-analysis-nav" class="d-none d-md-block w-100">
+        <nav id="static-analysis-nav" class="container w-100">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
             {{ $filterKeys := slice "Language" "Category" "Severity" }}
-            <div class="filters-static-analysis d-flex flex-column border border-primary">
+            <div class="filters-static-analysis row">
                 {{ range $filterKeys }}
                 {{ $filter := . | lower }}
-                <div class="d-flex flex-column mb-2">
-                    <span class="mb-1 fw-semibold">{{.}}</span>
-                    {{/*  <div class="d-flex gap-1 flex-wrap">
+                <div class='filter-type flex-column col col-md-{{cond (eq $filter "language") "12" "6" }}' data-id="{{$filter}}" >
+                    <p class="filter-type-name fw-semibold">{{.}}</p>
+                    <div class="filter-component position-relative">
                         <button 
-                        @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', ''); pushState(true, '{{ $filter }}')"
-                        class="btn btn-sm-tag btn-outline-secondary"
-                        :class="(!filterValue['{{ $filter }}']) && 'active'"
-                        data-filter="all"
-                        >All</button>
-                        {{ range index ($pad.Get "filters") .  }}
-                        <button 
-                        @click="resetFilteredRulesets; updateFilterValue('{{ $filter }}', '{{ . | lower }}'); pushState(true, '{{ $filter }}')"
-                        class="btn btn-sm-tag btn-outline-secondary"
-                        :class="($el.dataset.filter === filterValue['{{ $filter }}']) && 'active'"
-                        data-filter="{{ . | lower }}"
-                        >{{.}}</button>
-                        {{ end }}
-                    </div>  */}}
-                    <div class="dropdown">
-                        <div>{Selection here. default: "All"}</div>
-                        <form class="d-flex flex-column">
-                            <div>
-                                <input id="all" type="checkbox">
+                        class="toggler w-100 rounded"
+                        @click="toggleFilterForm($el)"
+                        >
+                            <div class="selections d-flex">
+                                {{/*  All  */}}
+                                {{ range seq 3 }}
+                                <div class="selection-container rounded d-flex align-items-center">
+                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "Docker" "variant" "avatar") }}
+                                    {{ if $int_logo }}
+                                    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                    {{ end }}
+                                    <span class="selection-name">Docker</span>
+                                    {{ partial "icon" (dict "name" "close-light_x" "title" "close" ) }}
+                                </div>
+                                {{ end }}
+                            </div>
+                        </button>
+                        <form 
+                        class="d-flex flex-column bg-white rounded position-absolute w-100"
+                        x-cloak x-show.important="openedFilterForm === '{{$filter}}'"
+                        >
+                            <div class="filter-category-container">
+                                {{/*  <input id="all" type="checkbox">  */}}
                                 <label for="all">All</label>
                             </div>
                             {{ range index ($pad.Get "filters") . }}
-                            <div>
+                            <div class="filter-category-container">
                                 <input id="{{ . }}" type="checkbox">
+                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
+                                {{ if $int_logo }}
+                                <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                {{ end }}
                                 <label for="{{ . }}">{{.}}</label>
                             </div>
                             {{ end }}
