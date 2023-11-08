@@ -225,7 +225,7 @@ algolia_sync_preview:manual:
   interruptible: true
   timeout: 2h
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia-refactor/atomic-algolia-v1.0.3.tgz
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/atomic-algolia-refactor/atomic-algolia-v1.0.4.tgz
     - >
       ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id')
       ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key')
