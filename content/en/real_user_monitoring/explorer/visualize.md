@@ -38,7 +38,7 @@ In addition to dashboards, the list widget can be used in Notebooks as well, all
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
 
-{{< img src="real_user_monitoring/explorer/visualize/timeseries-1.png" alt="Timeseries graph in the RUM Explorer" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/timeseries-2.png" alt="Timeseries graph in the RUM Explorer" style="width:90%;" >}}
 
 The timeseries graph depicts the evolution of the number of page views on the Shopist application over the past day for every view path.
 
@@ -51,9 +51,9 @@ You can choose additional display options such as:
 
 Visualize the top values from a facet based on your chosen measure.
 
-{{< img src="real_user_monitoring/explorer/visualize/top_list-1.png" alt="Top list bar graph in the RUM Explorer" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/top-list-2.png" alt="Top list bar graph in the RUM Explorer" style="width:90%;" >}}
 
-The top list includes the top ten browsers used to visit the Shopist website over the last day.
+The top list includes the top browsers used to visit the Shopist website over the last day.
 
 ## Nested tables
 
@@ -64,15 +64,15 @@ Visualize the top values from up to three [facets][5] according to your chosen [
 
  **Note**: A table visualization used for one single measure and one single dimension is the same as a [top list](#top-list), just with a different display.
 
- The following RUM Analytics table shows the **top 5 URL paths** for **two countries**: US and Japan consulted according to their amount of **Unique Session ID**, along with the 90th percentile of **Duration**, and over the last day:
+ The following RUM Analytics table shows the **top 5 URL paths** for **two countries**, US and Japan, grouped by browser, over the last day:
 
-{{< img src="real_user_monitoring/explorer/visualize/nested_table-3.png" alt="Nested table in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/nested-table-4.png" alt="Nested table in the RUM Explorer" style="width:90%;">}}
 
 ## Distributions
 
 You can display the distribution of measure attributes over the selected time frame to see the values fluctuate. 
 
-{{< img src="real_user_monitoring/explorer/visualize/distribution-1.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/distribution-2.png" alt="Distribution graph in the RUM Explorer" style="width:90%;">}}
 
 The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
 
