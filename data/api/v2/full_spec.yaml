@@ -16585,7 +16585,7 @@ components:
           type: object
         integrations:
           $ref: '#/components/schemas/ServiceDefinitionV2Dot2Integrations'
-        langauges:
+        languages:
           description: 'The service''s programming language. Datadog recognizes the
             following languages: `dotnet`, `go`, `java`, `js`, `php`, `python`, `ruby`,
             and `c++`.'
