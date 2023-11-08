@@ -3136,7 +3136,7 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
-  - name: Audit Security Events
+  - name: Audit Trail
     url: security/audit_trail
     parent: security_platform
     identifier: security_audit_trail
