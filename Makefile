@@ -1,7 +1,7 @@
 # make
 SHELL = /bin/bash
 MAKEFLAGS := --jobs=$(shell nproc)
-MAKEFLAGS += --output-sync
+MAKEFLAGS += --output-sync --no-print-directory
 .PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
@@ -25,9 +25,6 @@ include $(CONFIG_FILE)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
-
-#DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/\(.*\)\/manifest.json/\1\/manifest.deref.json/')
-DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/.*\/\(.*\)\/manifest.json/data\/workflows\/\1.json/')
 
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
@@ -99,8 +96,8 @@ source-dd-source:
 	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/apps/tools/manifest_generator domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/)
 
 # All the requirements for a full build
-dependencies: clean hugpython all-examples data/permissions.json source-dd-source update_pre_build node_modules
-	@make placeholders derefs
+dependencies: clean source-dd-source
+	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders derefs
 
 dependencies_parallel:
 	make -j clean hugpython
@@ -111,10 +108,9 @@ data/workflows/:
 	mkdir -p $@
 
 # dereference any source jsonschema files
-derefs: $(DEREFS)
+derefs: $(patsubst integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json, data/workflows/%.json, $(wildcard integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/*/manifest.json))
 
-.SECONDEXPANSION:
-$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json node_modules | data/workflows/
+data/workflows/%.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/%/manifest.json node_modules | data/workflows/
 	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
@@ -123,7 +119,7 @@ data/permissions.json: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
 
 # only build placeholders in ci
-placeholders: hugpython
+placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
 
 # create the virtual environment
