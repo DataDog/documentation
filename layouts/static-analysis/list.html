@@ -134,7 +134,7 @@
                 {{ $ruleset_description := index (index $rulset_params.rulesets .Key) "description"}}
                 <div
                 data-group-id="{{ $group_id }}" 
-                class="ruleset d-flex flex-column mt-1"
+                class="ruleset d-flex flex-column"
                 id="{{ $group_id }}"
                 >
                     <div class="mb-3 order-1">
@@ -154,7 +154,7 @@
                             class="rule d-flex justify-content-between border p-1 position-relative"
                             x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
                             >
-                                <div>
+                                <div class="rule-name-container d-flex align-items-center">
                                     {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" .Params.meta.language "variant" "avatar") }}
                                     {{ if $int_logo }}
                                     <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
@@ -199,16 +199,16 @@
                     >
                         <div class="d-flex align-items-center h-100">
                             {{$ruleset_languages := index ($pad.Get "languageByRuleSet") $group_id}}
-                            <div class="d-flex align-items-center h-100 px-1">
+                            <div class="d-flex align-items-center h-100">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_languages 0) "variant" "avatar") }}
                                 {{ if $int_logo }}
-                                <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
-                                {{ if gt (len $ruleset_languages) 0 }}
-                                <span>{{len $ruleset_languages}}+</span>
+                                <img class="group-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                {{ if gt (len $ruleset_languages) 1 }}
+                                <span class="group-header__plus fw-semibold">+{{len $ruleset_languages}}</span>
                                 {{ end }}
                                 {{ end }}
                             </div>
-                            <span class="group-header__text fw-semibold mx-1">{{$ruleset_title}}</span>
+                            <span class="group-header__text fw-semibold">{{$ruleset_title}}</span>
                             <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
