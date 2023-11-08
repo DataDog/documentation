@@ -37,7 +37,7 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
-The **Static Analysis** integration locally analyzes your code against predefined rules to detect and fix problems before you commit changes.
+The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
 
 ## Requirements
 
@@ -172,11 +172,11 @@ The **View in IntelliJ IDEA** feature provides a link from the Datadog platform 
 ## Static Analysis
 The Datadog plugin will analyze your code by running a set of [Static Analysis][12] rules against your source files as you edit them. The goal is to detect and fix problems in your code before you even commit your changes. 
 
-The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. FOr these file types, issues are shown directly in the source code editor via the JetBrains inspection system:
+The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. For these file types, issues are shown directly in the source code editor via the JetBrains inspection system, and suggested fixes can be applied easily:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
-…and suggested fixes can be applied easily.  Additionally, all issues detected by this feature are listed in the standard `Problems` view.
+Additionally, all issues detected by this feature are listed in the standard `Problems` view.
 
 ### Getting started
 When you start editing a source file (Python and Docker files are supported), the plugin will check if the `static-analysis.datadog.yml` configuration file is present at the root of your source repository and prompt you to create it if necessary:
