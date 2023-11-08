@@ -101,7 +101,7 @@ If after updating the tracer version you still don't see the total time, contact
 ### The total test time is different than expected
 
 #### How total time is calculated
-The total time is defined as the total sum of the maximum test session durations.
+The total time is defined as the sum of the maximum test session durations.
 
 This is done using the following algorithm:
 
