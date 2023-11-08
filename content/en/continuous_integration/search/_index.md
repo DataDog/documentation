@@ -123,7 +123,7 @@ In this page, you can filter the list by name, test service, or commit SHA, or t
 
 #### Test results
 
-For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, total time of tests, when the commit was last updated, and the avatar of the author of the commit.
+For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, total test time, when the commit was last updated, and the avatar of the author of the commit.
 
 Hovering over the commit author avatar shows detailed information about the latest commit.
 
