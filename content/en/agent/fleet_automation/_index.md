@@ -26,12 +26,12 @@ Datadog Fleet Automation allows you to gain visibility into your fleet of Agents
 With Fleet Automation, you can:
 - Reduce the time it takes to debug an issue by sending a remote flare straight from the [Fleet Automation][1] page.
 - Ensure you're running up-to-date Agents with the latest security fixes and feature enhancements by identifying outdated Agent versions.
-- Identify which Agents are using a particular API Key so you can safely rotate keys and disable old keys without impact.
+- Identify which Agents are using a particular API key so you can safely rotate keys and disable old keys without impact.
 - View Agent and Agent integration configurations to help confirm deployment changes and troubleshoot any configuration related issues.
 
 To access Fleet Automation, click **Integrations** > [**Fleet Automation**][1].
 
-From the Fleet Automation page, you can gain insight into unmonitored Agents, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
+Use the Fleet Automation page to gain insight into unmonitored Agents, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
 - The Agent version
 - Whether the Agent has any unconfigured or misconfigured integrations
 - The services that the Agent is monitoring
@@ -55,14 +55,14 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 ## Send a remote flare
 
-Before you send a flare, make sure that [Remote Configuration is enabled on the selected Agent](#configuring-fleet-automation).
+Before you send a flare, make sure that Remote Configuration is [enabled](#configuring-fleet-automation) on the selected Agent.
 
 To send a remote flare:
 1. From the [Fleet Automation][1] page, select an Agent that requires support.
 1. Click **Support**.
 1. Click **Send Support Ticket**.
 1. Provide an existing Zendesk support ticket number. If you don't provide a ticket number, one is created on your behalf.
-1. Enable **Debug mode** to allow Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous configuration after the flare is sent.
+1. Enable **Debug mode** to allow Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous configuration after you send the flare.
 1. Click **Send Ticket**.
 
 ## Control access to Fleet Automation
