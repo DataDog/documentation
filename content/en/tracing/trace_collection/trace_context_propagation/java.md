@@ -36,7 +36,7 @@ Extraction styles can be configured using:
 
 The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default the `datadog,tracecontext` extraction styles is enabled.
 
-If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used. If later valid trace contexts are found, they will be terminated, and appended as span links. Moreover, if `tracecontext` style is enabled, W3C Tracestate will be propagated if W3C Traceparent matches the extracted context.
+If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used. If later valid trace contexts are found, they are terminated and appended as span links. Moreover, if `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches the extracted context.
 
 For reference details about the context propagation settings and other configuration, read [Java Tracing Library Configuration][1].
 
