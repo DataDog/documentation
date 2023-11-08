@@ -65,6 +65,188 @@ For example, for a Docker Linux container:
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+
+You can enable APM when installing the Agent with the [Datadog Operator](#operator) or a [Helm chart](#helm-chart). You can set an environment for your services, enabled or disabled namespaces, and tracing library versions for each language.
+
+#### Operator
+
+The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+
+With the Datadog Operator:
+
+1. Follow the [Agent installation instructions for Kubernetes][3].
+2. Configure `datadog-agent.yaml` per the following examples for your Kubernetes distribution:
+   
+##### AKS
+
+**TODO: UPDATE EXAMPLE**
+
+{{< highlight yaml "hl_lines=11-14" >}}
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true
+    kubelet:
+      tlsVerify: false
+    override:
+      clusterAgent:
+        containers:
+          cluster-agent:
+            env:
+              - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+                value: 'true'
+    
+{{< /highlight >}}
+
+##### OpenShift
+
+**TODO: UPDATE EXAMPLE**
+
+{{< highlight yaml "hl_lines=11-19" >}}
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true
+            disabledNamespaces:
+              - test
+            libVersions:
+              dotnet: v2.39.0
+              java: v1.21.0
+    admissionController:
+      enabled: false
+    containers:
+      cluster-agent:
+        securityContext:
+          readOnlyRootFilesystem: false
+      nodeAgent:
+        serviceAccountName: datadog-agent-scc
+        securityContext:
+          runAsUser: 0
+          seLinuxOptions:
+            level: sO
+            role: system_r
+            type: spc_t
+            user: system_u
+    tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
+{{< /highlight >}}
+
+##### TKG
+
+**TODO: UPDATE EXAMPLE**
+
+{{< highlight yaml "hl_lines=11-19" >}}
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        tags:
+          - env:staging
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true
+            enabledNamespaces:
+              - namespace1
+              - namespace2
+            libVersions:
+              java: v1.22.0
+              dotnet: v2.40.0
+    kubelet:
+      tlsVerify: false
+    override:
+      nodeAgent:
+        tolerations:
+          - key: node-role.kubernetes.io/master
+            effect: NoSchedule
+{{< /highlight >}}
+
+##### Other
+
+**TODO: UPDATE EXAMPLE**
+
+{{< highlight yaml "hl_lines=11-19" >}}
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        tags:
+          - env:staging
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true
+            enabledNamespaces:
+              - namespace1
+              - namespace2
+            libVersions:
+              java: v1.22.0
+              dotnet: v2.40.0
+{{< /highlight >}}
+
+#### Helm Chart
+
+You can use the Datadog Helm chart to install the Datadog Agent to all nodes in your cluster via a DaemonSet.
+
+With the Datadog Helm chart:
+
+1. Follow the [Agent installation instructions for Kubernetes][3].
+2. Configure `datadog-values.yaml` per the following example:
+
+**TODO: UPDATE EXAMPLE**
+{{< highlight yaml "hl_lines=11-19" >}}
+    datadog:
+      apiKeyExistingSecret: datadog-secret
+      tags:
+        - env:staging
+      apm:
+        instrumentation:
+          enabled: true
+          enabledNamespaces:
+            - namespace1
+            - namespace2
+          libVersions:
+            java: v1.22.0
+            dotnet: v2.40.0
+{{< /highlight >}}
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -104,6 +286,7 @@ Run the following commands and restart the service to stop injecting the library
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+**TODO: ADD INSTRUCTIONS**
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -139,6 +322,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+**TODO: ADD INSTRUCTIONS**
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -147,4 +331,5 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/services/
+[3]: /containers/kubernetes/installation/
 
