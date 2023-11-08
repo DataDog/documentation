@@ -98,11 +98,9 @@ Quickly pinpoint problem areas by viewing database and system metrics together o
 
 ### Optimize host health and performance
 
-On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on an individual host to view details such as its configuration, common blocking queries, and calling services.
+On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on an individual host to view details such as its configuration, common blocking queries, and calling services. See [Exploring Database Hosts][5] for details.
 
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
-
-See [Exploring Database Hosts][5] for details.
 
 ## Further Reading
 
