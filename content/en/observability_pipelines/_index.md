@@ -19,7 +19,7 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 
@@ -27,7 +27,7 @@ cascade:
 
 ## Overview
 
-Observability Pipelines allow you to collect, process, and route observability data (logs, metrics, and traces) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
+Observability Pipelines allow you to collect, process, and route observability data (logs and metrics (beta)) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
@@ -46,6 +46,9 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
+3. Discover how to deploy Observability Pipelines at production scale:
+    - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
+    - See [Best Practices for OP Worker Aggregator Architecture][4].
 
 ## Explore Observability Pipelines
 
@@ -53,7 +56,7 @@ Start getting insights into your Observability Pipelines:
 
 ###  Collect data from any source and route data to any destination
 
-Collect logs, metrics, and traces from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
+Collect logs and metrics (beta) from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
 
 
 {{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
@@ -82,3 +85,5 @@ Get a holistic view of all of your pipelines' topologies and monitor key perform
 
 [1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/production_deployment_overview/
+[4]: /observability_pipelines/architecture/
