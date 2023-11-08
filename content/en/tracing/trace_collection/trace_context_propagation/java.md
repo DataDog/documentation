@@ -34,7 +34,7 @@ Extraction styles can be configured using:
 - System Property: `-Ddd.trace.propagation.style.extract=datadog,b3multi`
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,b3multi`
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default the `datadog,tracecontext` extraction styles is enabled.
+The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default, the `datadog` and `tracecontext` extraction styles are enabled.
 
 If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used. If later valid trace contexts are found, they are terminated and appended as span links. Moreover, if `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches the extracted context.
 
