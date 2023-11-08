@@ -68,6 +68,9 @@ For example, for a Docker Linux container:
 
 {{% /tab %}}
 
+{{% tab "Kubernetes" %}}
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Tagging observability data by environment
@@ -104,6 +107,9 @@ Run the following commands and restart the service to stop injecting the library
 2. Restart the service.
 {{% /tab %}}
 
+{{% tab "Kubernetes" %}}
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Removing APM for all services on the infrastructure
@@ -134,6 +140,9 @@ To stop producing traces, remove library injectors and restart the infrastructur
    ```
    Or use the equivalent for your environment.
 
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
 {{% /tab %}}
 
 {{< /tabs >}}
