@@ -238,29 +238,22 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td></td>
   </tr>
   <tr>
-    <td rowspan=4>Windows</td>
-    <td>>= 7</td>
+    <td rowspan=3>Windows</td>
+    <td>7</td>
     <td><i class='icon-check-bold'></td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <td>>= 8.1</td>
+    <td>8.1</td>
     <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
+    <td><= 6.49.0</td>
+    <td><= 7.49.0</td>
     <td></td>
   </tr>
   <tr>
-    <td>11</td>
+    <td>>=10</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
