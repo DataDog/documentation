@@ -20,8 +20,10 @@
                     height: 40px;
                     padding: 0 8px;
                     border: 1px solid #C7C7C7;
+                    background: $gray-lightest;
                     .selections {
                         column-gap: 4px;
+                        overflow-x: scroll;
                         .selection-container {
                             column-gap: 7px;
                             background-color: #E6D6F9;
@@ -29,6 +31,39 @@
                             i {
                                 display: flex;
                             }
+                        }
+                    }
+
+                    /* Hide scrollbar for Chrome, Safari and Opera */
+                    .selections::-webkit-scrollbar {
+                        display: none;
+                    }
+                    
+                    /* Hide scrollbar for IE, Edge and Firefox */
+                    .selections {
+                        -ms-overflow-style: none;  /* IE and Edge */
+                        scrollbar-width: none;  /* Firefox */
+                    }
+
+                    .overflow-gradient {
+                        column-gap: 10px;
+                        width: 70px;
+                        height: 100%;
+                        background: linear-gradient(90deg, rgba(246, 246, 246, 0.00) 6.25%, #F6F6F6 31.25%);
+                        padding: 0 8px;
+                        .cancel {
+                            width: 16px;
+                            height: 16px;
+                            color: $gray-lightest;
+                            background-color: $ddpurple;
+                            span {
+                                position: relative;
+                                top: -2px;
+                            }
+                        }
+                        .chevron {
+                            position: relative;
+                            top: -1px
                         }
                     }
                 }

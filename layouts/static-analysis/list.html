@@ -233,12 +233,12 @@
                     <p class="filter-type-name fw-semibold">{{.}}</p>
                     <div class="filter-component position-relative">
                         <button 
-                        class="toggler w-100 rounded"
+                        class="toggler w-100 rounded position-relative"
                         @click="toggleFilterForm($el)"
                         >
                             <div class="selections d-flex">
                                 {{/*  All  */}}
-                                {{ range seq 3 }}
+                                {{ range seq 6 }}
                                 <div class="selection-container rounded d-flex align-items-center">
                                     {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "Docker" "variant" "avatar") }}
                                     {{ if $int_logo }}
@@ -248,6 +248,12 @@
                                     {{ partial "icon" (dict "name" "close-light_x" "title" "close" ) }}
                                 </div>
                                 {{ end }}
+                            </div>
+                            <div class="overflow-gradient d-flex align-items-center justify-content-end position-absolute top-0 end-0 rounded-end">
+                                <div class="cancel rounded-circle border border-primary d-flex align-items-center justify-content-center fw-semibold">
+                                    <span>x</span>
+                                </div>
+                                <div class="chevron chevron-down"></div>
                             </div>
                         </button>
                         <form 
