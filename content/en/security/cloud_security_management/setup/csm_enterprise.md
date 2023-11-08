@@ -92,7 +92,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
-{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
 For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
 
@@ -455,7 +455,7 @@ The following instructions enables the image metadata collection and [Software B
 
 To enable CSM Vulnerabilities on the Agent for your hosts and containers, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
-{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
 For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
 

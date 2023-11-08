@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) offers real-time threat detection, continuous configuration audits, and identity risk assessments to help you gain insights and manage vulnerabilities in your cloud infrastructure. Details are shown on the CSM [Vulnerability Explorer][1] identifying the severity, affected containers and hosts, and remediation instructions to solve the most impacted infrastructure.
+Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep observability context and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. Details are shown on the CSM [Vulnerability Explorer][1] identifying the context-based severity, affected containers and hosts, and remediation instructions to solve the most impacted infrastructure.
 
 **Note**: If you're looking for vulnerability management for your application libraries and custom application code, see [Application Vulnerability Management][5].
 
