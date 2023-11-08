@@ -34,7 +34,7 @@ On the **Top Queries** tab of the host details panel, you can sort the most comm
 
 {{< img src="database_monitoring/db-list-top-queries.png" alt="The Top Queries tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
-Click on any query to open a details panel that includes
+Click on any query statement to open a details panel that includes:
 - query insights
 - graphs for average latency and other key metrics
 - explain plans
