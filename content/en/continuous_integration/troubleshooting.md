@@ -98,7 +98,7 @@ If you cannot see the total test time, it is likely that test suite level visibi
 
 If after updating the tracer version you still don't see the total time, contact [Datadog support][2] for help.
 
-### The tests tests total time is not what is expected
+### The total test time is different than expected
 
 #### How total time is calculated
 The total time is defined as the total sum of the maximum test session durations.
