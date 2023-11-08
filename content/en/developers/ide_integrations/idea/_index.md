@@ -174,7 +174,7 @@ The Datadog plugin will analyze your code by running a set of [Static Analysis][
 
 Issues are shown directly in the source code editor via the JetBrains inspection system:
 
-{{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
 
 …and suggested fixes can be applied easily.  Additionally, all issues detected by this feature are listed in the standard `Problems` view.
 
