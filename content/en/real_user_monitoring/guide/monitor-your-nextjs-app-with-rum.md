@@ -36,13 +36,13 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
   **Note**: Because the RUM SDK needs to run on the client to collect telemetry data, the file where it is initialized through the NPM package must be a [client component][5].
 
-   {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
+  **Note**: When using `.env.local`, only variable prefixed with `NEXT_PUBLIC_` are included in the client bundle. See [environemt variables][6].
+
+   {{< code-block lang="javascript" filename="DatadogRumInit.tsx" disable_copy="false" collapsible="true" >}}
 
     "use client";
 
-    import Link from "next/link";
     import { datadogRum } from "@datadog/browser-rum";
-    import { useEffect } from "react";
 
     datadogRum.init({
       applicationId: "<YOUR_APPLICATION_ID>",
@@ -59,6 +59,17 @@ Follow the steps below to set up Datadog RUM browser monitoring.
       trackLongTasks: true,
     });
 
+    export const DatadogRumInit = () {
+      return null;
+    }
+
+   {{< /code-block >}}
+
+   {{< code-block lang="javascript" filename="layout.tsx or _app.tsx" disable_copy="false" collapsible="true" >}}
+
+    import Link from "next/link";
+    import { DatadogRumInit } from "DatadogRumInit";
+
     export default function RootLayout({
       children,
     }: {
@@ -67,6 +78,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
       useEffect(() => {}, []);
       return (
         <html lang="en">
+          <DatadogRumInit />
           <body>
             {children}
           </body>
@@ -81,6 +93,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    [3]: https://nextjs.org/docs/pages
    [4]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
    [5]: https://nextjs.org/docs/app/building-your-application/rendering/client-components#using-client-components-in-nextjs
+   [6]: https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser
 
    {{% /tab %}}
    {{% tab "CDN async" %}}
