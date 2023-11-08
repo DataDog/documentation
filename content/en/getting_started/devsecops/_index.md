@@ -10,6 +10,78 @@ This guide provides an introduction to the DevSecOps bundles with links to setup
 The APM DevSecOps bundles combine application performance monitoring with the [Application Vulnerability Management][1] capabilities of [Application Security Management (ASM)][2].
 
 {{< tabs >}}
+{{% tab "APM DevSecOps" %}}
+
+APM DevSecOps includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][3] capabilities of [ASM][4].
+
+### Setup
+
+To get started with APM DevSecOps, [install and configure the Datadog Agent][5] for APM and Universal Service Monitoring. For detailed instructions, see the following docs:
+
+- [APM][6]
+- [Universal Service Monitoring][7]
+
+After you install the Agent, enable ASM for your environment.
+
+- [Application Security Management][8]
+
+### Next steps
+
+Learn more about the features included with APM DevSecOps:
+
+- [APM Metrics][9]: Learn more about trace application metrics
+- [Universal Service Monitoring][2]: Gain visibility into your service health metrics
+- [Application Vulnerability Management][3]: Detect vulnerabilities in your service's open source dependencies
+
+[1]: /tracing/
+[2]: /universal_service_monitoring/
+[3]: /security/application_security/vulnerability_management/
+[4]: /security/application_security
+[5]: /agent/
+[6]: /tracing/trace_collection/
+[7]: /universal_service_monitoring/setup/
+[8]: /security/application_security/enabling/
+[9]: /tracing/metrics/
+
+{{% /tab %}}
+{{% tab "APM DevSecOps Pro" %}}
+
+APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Application Vulnerability Management][4] capabilities of [ASM][5].
+
+### Setup
+
+To get started with APM DevSecOps Pro, [install and configure the Datadog Agent][6] for APM, Universal Service Monitoring, and Data Streams Monitoring. For detailed instructions, see the following docs:
+
+- [APM][7]
+- [Universal Service Monitoring][8]
+- [Data Streams Monitoring][9]
+
+After you install the Agent, configure ASM for your environment.
+
+- [Application Security Management][10]
+
+#### Next steps
+
+Learn more about the features included with APM DevSecOps Pro:
+
+- [APM Metrics][11]: Learn more about trace application metrics
+- [Universal Service Monitoring][2]: Gain visibility into your service health metrics
+- [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
+- [Application Vulnerability Management][4]: Detect vulnerabilities in your service's open source dependencies
+
+[1]: /tracing/
+[2]: /universal_service_monitoring/
+[3]: /data_streams/
+[4]: /security/application_security/vulnerability_management/
+[5]: /security/application_security
+[6]: /agent/
+[7]: /tracing/trace_collection/
+[8]: /universal_service_monitoring/setup/
+[9]: /data_streams/#setup
+[10]: /security/application_security/enabling/
+[11]: /tracing/metrics/
+
+{{% /tab %}}
 {{% tab "APM DevSecOps Enterprise" %}}
 
 APM DevSecOps Enterprise includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], [Continuous Profiler][4], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
@@ -52,78 +124,6 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [13]: /tracing/metrics/
 
 {{% /tab %}}
-{{% tab "APM DevSecOps Pro" %}}
-
-APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Application Vulnerability Management][4] capabilities of [ASM][5].
-
-### Setup
-
-To get started with APM DevSecOps Pro, [install and configure the Datadog Agent][6] for APM, Universal Service Monitoring, and Data Streams Monitoring. For detailed instructions, see the following docs:
-
-- [APM][7]
-- [Universal Service Monitoring][8]
-- [Data Streams Monitoring][9]
-
-After you install the Agent, configure ASM for your environment.
-
-- [Application Security Management][10]
-
-#### Next steps
-
-Learn more about the features included with APM DevSecOps Pro:
-
-- [APM Metrics][11]: Learn more about trace application metrics
-- [Universal Service Monitoring][2]: Gain visibility into your service health metrics
-- [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
-- [Application Vulnerability Management][4]: Detect vulnerabilities in your service's open source dependencies
-
-[1]: /tracing/
-[2]: /universal_service_monitoring/
-[3]: /data_streams/
-[4]: /security/application_security/vulnerability_management/
-[5]: /security/application_security
-[6]: /agent/
-[7]: /tracing/trace_collection/
-[8]: /universal_service_monitoring/setup/
-[9]: /data_streams/#setup
-[10]: /security/application_security/enabling/
-[11]: /tracing/metrics/
-
-{{% /tab %}}
-{{% tab "APM DevSecOps" %}}
-
-APM DevSecOps includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][3] capabilities of [ASM][4].
-
-### Setup
-
-To get started with APM DevSecOps, [install and configure the Datadog Agent][5] for APM and Universal Service Monitoring. For detailed instructions, see the following docs:
-
-- [APM][6]
-- [Universal Service Monitoring][7]
-
-After you install the Agent, enable ASM for your environment.
-
-- [Application Security Management][8]
-
-### Next steps
-
-Learn more about the features included with APM DevSecOps:
-
-- [APM Metrics][9]: Learn more about trace application metrics
-- [Universal Service Monitoring][2]: Gain visibility into your service health metrics
-- [Application Vulnerability Management][3]: Detect vulnerabilities in your service's open source dependencies
-
-[1]: /tracing/
-[2]: /universal_service_monitoring/
-[3]: /security/application_security/vulnerability_management/
-[4]: /security/application_security
-[5]: /agent/
-[6]: /tracing/trace_collection/
-[7]: /universal_service_monitoring/setup/
-[8]: /security/application_security/enabling/
-[9]: /tracing/metrics/
-
-{{% /tab %}}
 {{< /tabs >}}
 
 <br>
@@ -133,6 +133,48 @@ Learn more about the features included with APM DevSecOps:
 The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security Management (CSM)][3].
 
 {{< tabs >}}
+{{% tab "Infrastructure DevSecOps Pro" %}}
+
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [650+ out-of-the-box integrations][4].
+
+### Setup
+
+To get started with Infrastructure DevSecOps Pro, [install and configure the Datadog Agent][5] for Containers and Serverless. You should also set up the integrations for your services. For detailed instructions, see the following docs:
+
+- [Containers][1]
+- [Serverless][2]
+- [Integrations][4]
+
+After you install the Agent, configure CSM Pro for your environment.
+
+- [Cloud Security Management Pro][6]
+
+<div class="alert alert-info"><strong>Note</strong>: The CSM Vulnerabilities capabilities of CSM Pro are in beta. For setup instructions, see <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
+
+### Next steps
+
+Learn more about the features included with Infrastructure DevSecOps Pro:
+
+- [Infrastructure List][7]: View activity on your hosts
+- [Metrics][8]: Explore and understand your metrics
+- [Host and Container Maps][9]: Visualize your hosts and containers
+- [Live Containers][10]: Gain real-time visibility into all containers across your environment
+- [Serverless][2]: Gain full visibility into all of the managed services that power your serverless applications
+- [Cloud Security Management][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+
+[1]: /containers/
+[2]: /serverless/
+[3]: /security/cloud_security_management/setup/
+[4]: /integrations/
+[5]: /agent/
+[6]: /security/cloud_security_management/setup/csm_pro
+[7]: /infrastructure/list/
+[8]: /metrics/
+[9]: /infrastructure/hostmap/
+[10]: /infrastructure/containers/
+[11]: /security/cloud_security_management/
+
+{{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
 Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [650+ out-of-the-box integrations][5].
@@ -182,48 +224,6 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 [14]: /infrastructure/process/
 [15]: /watchdog/
 [16]: /security/cloud_security_management/
-
-{{% /tab %}}
-{{% tab "Infrastructure DevSecOps Pro" %}}
-
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [650+ out-of-the-box integrations][4].
-
-### Setup
-
-To get started with Infrastructure DevSecOps Pro, [install and configure the Datadog Agent][5] for Containers and Serverless. You should also set up the integrations for your services. For detailed instructions, see the following docs:
-
-- [Containers][1]
-- [Serverless][2]
-- [Integrations][4]
-
-After you install the Agent, configure CSM Pro for your environment.
-
-- [Cloud Security Management Pro][6]
-
-<div class="alert alert-info"><strong>Note</strong>: The CSM Vulnerabilities capabilities of CSM Pro are in beta. For setup instructions, see <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
-
-### Next steps
-
-Learn more about the features included with Infrastructure DevSecOps Pro:
-
-- [Infrastructure List][7]: View activity on your hosts
-- [Metrics][8]: Explore and understand your metrics
-- [Host and Container Maps][9]: Visualize your hosts and containers
-- [Live Containers][10]: Gain real-time visibility into all containers across your environment
-- [Serverless][2]: Gain full visibility into all of the managed services that power your serverless applications
-- [Cloud Security Management][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
-
-[1]: /containers/
-[2]: /serverless/
-[3]: /security/cloud_security_management/setup/
-[4]: /integrations/
-[5]: /agent/
-[6]: /security/cloud_security_management/setup/csm_pro
-[7]: /infrastructure/list/
-[8]: /metrics/
-[9]: /infrastructure/hostmap/
-[10]: /infrastructure/containers/
-[11]: /security/cloud_security_management/
 
 {{% /tab %}}
 {{< /tabs >}}
