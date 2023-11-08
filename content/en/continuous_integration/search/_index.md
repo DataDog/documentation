@@ -102,7 +102,7 @@ You can access low-level and immediate insights:
 
 - See what tests are failing and why.
 - See your last commit's test results.
-- View the total time duration of your tests in your feature branch.
+- View the total duration of your tests in your feature branch.
 - Find out if your commit introduces a new [flaky test][105] that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
 
 You can also access high-level accumulation and trends:
