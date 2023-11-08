@@ -445,7 +445,7 @@ Available since version 1.9.0
 `trace.propagation.extract.first`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
 **Default**: `false`<br>
-When set to `true` stop extracting trace context when a valid one is found.
+When set to `true`, stop extracting trace context when a valid one is found.
 
 #### Deprecated extraction and injection settings
 
