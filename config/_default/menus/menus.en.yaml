@@ -2706,6 +2706,11 @@ main:
     parent: dbm
     identifier: dbm_data_collected
     weight: 30
+  - name: Exploring Database Hosts
+    url: database_monitoring/database_hosts/
+    parent: dbm
+    identifier: dbm_database_hosts
+    weight: 31
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
