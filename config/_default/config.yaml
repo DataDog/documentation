@@ -116,6 +116,19 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    #------------------------------------------------------------------------------
+    # Fill in the missing translations
+    # (Replace placehold translations script by having hugo overlay english on top)
+    #------------------------------------------------------------------------------
+    - source: content/en
+      target: content
+      lang: ja
+    - source: content/en
+      target: content
+      lang: fr
+    - source: content/en
+      target: content
+      lang: ko
 
 security:
   funcs:
