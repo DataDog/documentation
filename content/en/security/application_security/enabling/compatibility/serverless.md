@@ -60,13 +60,13 @@ Go
    
 |Type           	| Threat Detection	|  Vulnerability Management for OSS	| Vulnerability Management for Code-Level 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
-| Java  		| beta         	| 	                			|						|
-| .NET    	| beta         	|  	                          		|						|
+| Java  		| beta         	| beta	                			|						|
+| .NET    	| beta         	| beta 	                          		|						|
 | Node 		| beta     		| beta	              			|						|
 | Python   	| beta         	| beta                 			|						|
-| Ruby   	| beta         	|  	                 			|						|
-| PHP   	| 		        	|	            			|						|
-| Go   		| beta         	| 	               			|						|
+| Ruby   	| beta         	|  beta	                 			|						|
+| PHP   	| 		      |	            			|						|
+| Go   		| beta         	| beta	               			|						|
 
 
 ## Azure App Service
