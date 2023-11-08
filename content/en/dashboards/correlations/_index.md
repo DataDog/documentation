@@ -35,7 +35,7 @@ You can start your metric correlations exploration from any of your dashboards, 
 
 {{< img src="dashboards/correlations/correlations_tab.png" alt="Dashboard search" style="width:80%;">}}
 
-Correlations *tries* to automatically detect the area of interest (anomalous behavior) for your metric. If the area of interest is not selected automatically or needs adjustment, you can manually draw the area of interest from the [edit search](#edit) option. Datadog searches for other metrics that exhibited anomalous behavior in a time aligned with the area of interest.
+Correlations *tries* to automatically detect the area of interest (anomalous behavior) for your metric. If the area of interest is not selected automatically or needs adjustment, you can manually draw the area of interest from the [edit search](#edit) option. Datadog searches for other metrics that exhibit anomalous behavior at times matching the area of interest.
 
 **Note**: Correlation searches are available for a single metric. For graphs with multiple metrics, select the series of interest. From a full-screen graph, select one series on the graph legend, then click the **Correlations** tab.
 
