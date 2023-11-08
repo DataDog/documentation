@@ -3263,21 +3263,26 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
+  - name: Supported Frameworks
+    url: security/misconfigurations/supported_frameworks
+    parent: cspm
+    identifier: cspm_supported_frameworks
+    weight: 108
   - name: Misconfigurations Explorer
     url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 107
+    weight: 110
   - name: Signals Explorer
     url: /security/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 108
+    weight: 112
   - name: Resource Catalog
     url: /security/misconfigurations/resource_catalog
     parent: cspm
     identifier: resource_catalog
-    weight: 109
+    weight: 114
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm
