@@ -104,6 +104,7 @@ def get_filtered_actions(actions):
     highest_versioned_actions = {}
 
     for action_name in actions:
+        # 'V' in the action name with a version is expected to be capitalized
         action_with_version = re.match(r"(\w+):V(\d+)", action_name)
         
         action_name = action_with_version.group(1) if action_with_version else action_name
