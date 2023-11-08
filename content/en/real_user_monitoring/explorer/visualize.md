@@ -80,7 +80,7 @@ The distribution graph displays the distribution of the Largest Contentful Paint
 
 Visualize a single [measure][5] (or a [facet][5] unique count of values) on the world map.
 
-{{< img src="real_user_monitoring/explorer/visualize/geomap-1.png" alt="Geographical map in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/geomap-2.png" alt="Geographical map in the RUM Explorer" style="width:90%;">}}
 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
@@ -103,7 +103,7 @@ The following pie chart shows the percentage breakdown by **View Path**.
 
 For all visualizations besides the [funnel](#funnels), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
-{{< img src="real_user_monitoring/explorer/visualize/related_events-1.png" alt="Related events link available when you click on the graph" width="90%" >}}
+{{< img src="real_user_monitoring/explorer/visualize/related-events-2.png" alt="Related events link available when you click on the graph" width="90%" >}}
 
 For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
 
