@@ -17,7 +17,7 @@ If you see this error while building iOS after upgrading to `datadog_flutter_plu
 
 ```
 Semantic Issue (Xcode): Duplicate interface definition for class 'DatadogSdkPlugin'
-/Users/jeff.ward/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
+/Users/exampleuser/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
 ```
 
 Try performing `flutter clean` && `flutter pub get` and rebuilding. This usually resolves the issue.

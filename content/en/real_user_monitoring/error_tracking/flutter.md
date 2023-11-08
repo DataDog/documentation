@@ -37,7 +37,7 @@ final configuration = DatadogConfiguration(
   loggingConfiguration: DatadogLoggingConfiguration(),
   rumConfiguration: DatadogRumConfiguration(
     applicationId: '<DD_APP_ID>',
-  )
+  ),
 );
 DatadogSdk.instance.initialize(configuration);
 ```
