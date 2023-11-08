@@ -93,7 +93,7 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
-### The tests total time is empty
+### The total test time is empty
 If you cannot see the tests total time it is likely that test suite level visibility is not enabled. To confirm this is the case, check if your language supports test suite level visibility in [Supported features][15]. If it is supported, update your tracer to the latest version.
 
 If after updating the tracer version you still don't see the total time, contact [Datadog support][2] for help.
