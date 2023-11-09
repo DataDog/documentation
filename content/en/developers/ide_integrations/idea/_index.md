@@ -158,7 +158,7 @@ Clicking the link opens the **Log Explorer** with a query that matches the logge
 
 ## View in IDE
 
-The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
