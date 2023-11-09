@@ -58,9 +58,9 @@
 		</div>
 	</div>
 
-	{{ if isset .Params "source" }}
-		{{ with .Site.GetPage (print "/integrations/" .Params.source ) }}
-			<p>Set up the <a href="{{ (strings.TrimLeft "/" .RelPermalink) | absLangURL }}">{{ $dot.Params.source }}</a> integration.</p>
+	{{ with $dot.Params.source }}
+    {{ if (fileExists (print "content/en/integrations/" . ".md")) }}
+			<p>Set up the <a href="{{ (print "integrations/" .) | absLangURL }}">{{ . }}</a> integration.</p>
 		{{ end }}
 	{{ end }}
 
