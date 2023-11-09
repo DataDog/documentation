@@ -32,7 +32,7 @@ This page identifies key components of Metrics without Limits™ that can help y
 1. Click any metric name to open its details side panel. 
 2. Click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
 3. Define your allowlist of tags. 
-By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or via the API in the past 30 days. Our recommendations are distinguished with an icon. 
+By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or through the API in the past 30 days. Recommended tags are distinguished with a graph line icon. 
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
