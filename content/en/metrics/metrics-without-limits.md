@@ -53,6 +53,12 @@ There are also APIs available so you [create][2], and [edit][3] a blocklist of t
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
+### Configure multiple metrics at a time
+
+Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
+
+This is also available via API so you can [configure][13] and [delete][14] tags for multiple metrics. To configure a blocklist of tags for multiple metrics, set the parameter `exclude_tags_mode: true` using the [configure][13].
+
 ### Refine and optimize your aggregations
 
 You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
@@ -63,13 +69,6 @@ You can further adjust your custom metrics filters by opting in to more [metrics
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
 The tag configuration modal pre-populates with an allowlist of aggregations that have been actively queried on dashboards, notebooks, monitors and through API in the past 30 days (colored in blue with an icon). You can also include your own additional aggregations.
-
-
-### Configure multiple metrics at a time
-
-Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
-
-This is also available via API so you can [configure][13] and [delete][14] tags for multiple metrics. To configure a blocklist of tags for multiple metrics, set the parameter `exclude_tags_mode: true` using the [configure][13].
 
 ## Metrics without Limits™ billing
 
