@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
   text: "Improve service health and performance with Service Scorecards"
+- link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
+  tag: "Blog"
+  text: "Formalize best practices with custom Scorecards"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
