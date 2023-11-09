@@ -38,18 +38,18 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 
 {{< img src="metrics/mwl_example_include_tags-compressed.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
-There are APIs available to [create][2], [edit][3], and [delete][4] a tag configuration along with an [API][5] for estimating the potential impact of your configuration.
+You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
 
 #### Blocklist of tags 
 1. Click on any metric name to open its details side panel.
 2. Click **Manage Tags** -> **"Exclude Tags…"** to drop tags you don't want to query. 
-3. Define your blocklist of tags. These tags will **not** be queryable on dashboards and monitors. Tags that have been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days will be distinguished with an icon.
+3. Define your blocklist of tags. Tags defined in the blocklist are **not** queryable on dashboards and monitors. Tags that have been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days are distinguished with a graph line icon.
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
 {{< img src="metrics/mwl_example_tag_exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
-Similar to the allowlist of tags, you can [create][2] and [edit][3] a blocklist of tags by setting the parameter `exclude_tags_mode: true`.
+Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
@@ -57,7 +57,7 @@ When configuring tags for counts, rates, and gauges, the most frequently queried
 
 Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
 
-This is also available via API so you can [configure][13] and [delete][14] tags for multiple metrics. To configure a blocklist of tags for multiple metrics, set the parameter `exclude_tags_mode: true` using the [configuration][13] API.
+You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API.
 
 ### Refine and optimize your aggregations
 
