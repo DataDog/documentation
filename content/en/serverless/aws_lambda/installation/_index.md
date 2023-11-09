@@ -17,7 +17,7 @@ further_reading:
 
 If you are new to Datadog, [sign up for a Datadog account][1], then follow the Datadog Agent installation instructions for [AWS Lambda][2] to instrument your Lambda function for a quick start with Datadog. Completing the steps configures your Lambda functions to send real-time metrics, logs, and traces to Datadog.
 
-<div class="alert alert-info">Interested in bulk-instrumenting AWS Lambdas directly from from the Datadog UI? <a href="https://docs.google.com/forms/d/e/1FAIpQLScw8XBxCyN_wjBVU2tWm-zX5oPIGF7BwUKcLSHY6MJsem259g/viewform?usp=sf_link">Express your interest </a>in our upcoming remote configuration private beta here</div>
+<div class="alert alert-info">Interested in bulk-instrumenting AWS Lambdas directly from from the Datadog UI? <a href="https://docs.google.com/forms/d/e/1FAIpQLScw8XBxCyN_wjBVU2tWm-zX5oPIGF7BwUKcLSHY6MJsem259g/viewform?usp=sf_link">Express your interest </a>in our upcoming remote Lambda instrumentation private beta</div>
 
 
 
