@@ -2,7 +2,7 @@
 aliases:
 - /ja/security_platform/application_security/getting_started/python
 - /ja/security/application_security/getting_started/python
-code_lang: php
+code_lang: python
 code_lang_weight: 50
 further_reading:
 - link: /security/application_security/add-user-info/

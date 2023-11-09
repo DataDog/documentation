@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Visualize your data to gain insight"
+- link: "/dashboards/guide/unit-override/"
+  tag: "Documentation"
+  text: "Customize your visualizations with unit override"
 ---
 
 ## Overview

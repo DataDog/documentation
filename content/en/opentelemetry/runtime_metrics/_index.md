@@ -32,10 +32,9 @@ Select your language to see instructions for setting up and configuring the Open
 
 ## View runtime metric dashboards
 
-After setup is complete, see your runtime metrics on the [APM Service Page][6] (see Java example below), the flame graph metrics tab, and in [default runtime dashboards][7].
+After setup is complete, see your runtime metrics in the a service's details page (see Java example below), the flame graph metrics tab, and in [default runtime dashboards][7].
 
 {{< img src="opentelemetry/otel_runtime_metrics_service_page.png" alt="Service page showing OpenTelemetry runtime metrics on the JVM Metrics tab" style="width:100%;" >}}
 
 [5]: /tracing/metrics/runtime_metrics/
-[6]: https://app.datadoghq.com/apm/services
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-metrics

@@ -12,6 +12,12 @@ further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
   text: "MySQL integration"
+- link: "/integrations/sqlserver/"
+  tag: "Documentation"
+  text: "SQL Server integration"
+- link: "/integrations/oracle/"
+  tag: "Documentation"
+  text: "Oracle integration"  
 - link: "/database_monitoring/data_collected/"
   tag: "Documentation"
   text: "Data Collected"
@@ -74,7 +80,8 @@ To see a complete list of metrics collected, see the integration Data Collected 
 The metrics used for Database Monitoring views are, primarily:
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
-
+- **SQL Server**: `sqlserver.queries.*`
+- **Oracle**: `oracle.queries.*`
 
 ## Query details page
 
