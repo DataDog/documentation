@@ -42,10 +42,9 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 
 **CSM Vulnerabilities**:
 
-* [containerd][16] v1.5.6 or later (Kubernetes and hosts only).
 * [Helm Chart][17] v3.33.6 or later (Kubernetes only).
-
-**Note**: CSM Vulnerabilities is not available for CRI-O or Podman.
+* [containerd][16] v1.5.6 or later (Kubernetes and hosts only).</br>
+**Note**: CSM Vulnerabilities is not available for CRI-O runtime.
 
 ## Enable resource scanning for CSM misconfigurations
 

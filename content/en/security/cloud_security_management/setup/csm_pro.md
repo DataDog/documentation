@@ -19,10 +19,9 @@ The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations]
 
 **CSM Vulnerabilities**:
 
-* [containerd][8] v1.5.6 or later (Kubernetes and hosts only). 
 * [Helm Chart][9] v3.33.6 or later (Kubernetes only).
-
-**Note**: CSM Vulnerabilities is not available for CRI-O or Podman.
+* [containerd][8] v1.5.6 or later (Kubernetes and hosts only). </br>
+**Note**: CSM Vulnerabilities is not available for CRI-O runtime.
 
 ## Enable resource scanning for CSM misconfigurations
 
