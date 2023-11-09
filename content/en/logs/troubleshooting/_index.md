@@ -15,7 +15,7 @@ See [Set daily quota][3] for more information on setting up, updating or removin
 
 ## Missing logs - timestamp outside of the ingestion window
 
-Logs with a timestamp it outside the 18 hours ingestion window will be dropped at intake.
+Logs with a timestamp further than 18 hours in the past are dropped at intake.
 Fix the issue at the source by checking which `service` and `source` are impacted with the `datadog.estimated_usage.logs.drop_count` metric.
 
 ## Unable to parse timestamp key from JSON logs
