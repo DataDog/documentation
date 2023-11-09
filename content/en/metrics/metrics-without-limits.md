@@ -49,7 +49,7 @@ There are also APIs available so you can [create][2], [edit][3], and [delete][4]
 
 {{< img src="metrics/mwl_example_tag_exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
-Setting a blocklist of tags is availble via [API][2] with the parameter `filter[queried]=false`.
+There are also APIs available so you [create][2], and [edit][3] a blocklist of tags by setting the parameter `exclude_tags_mode: true`. There is also an [API][4] to delete a tag configuration and an [API][5] for estimating the potential impact of your configuration.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
@@ -68,6 +68,8 @@ The tag configuration modal pre-populates with an allowlist of aggregations that
 ### Configure multiple metrics at a time
 
 Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
+
+This is also available via API so you can [configure][13] and [delete][14] tags for multiple metrics. To configure a blocklist of tags for multiple metrics, set the parameter `exclude_tags_mode: true` using the [configure][13].
 
 ## Metrics without Limits™ billing
 
@@ -125,3 +127,5 @@ Learn more about [Custom Metrics Billing][8].
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics
 [12]: https://app.datadoghq.com/event/stream
+[13]: /api/latest/metrics/#configure-tags-for-multiple-metrics
+[14]: /api/latest/metrics/#delete-tags-for-multiple-metrics
