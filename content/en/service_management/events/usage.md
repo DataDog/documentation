@@ -25,7 +25,7 @@ To add and configure event processing pipelines, see the **[Enrich & Normalize][
 
 {{< img src="service_management/events/usage/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
-## Examples of what do to with events
+## Examples of what to do with events
 
 ### Triage features
 
