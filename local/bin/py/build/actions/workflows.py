@@ -110,7 +110,7 @@ def get_filtered_actions(actions):
         action_name = action_with_version.group(1) if action_with_version else action_name
         action_version = int(action_with_version.group(2)) if action_with_version else 0
 
-        if (not highest_versioned_actions.get(action_name)) or (action_version > highest_versioned_actions[action_name]):
+        if (not highest_versioned_actions.get(action_name)) or (action_version > highest_versioned_actions.get(action_name)):
             highest_versioned_actions[action_name] = action_version
             
 
