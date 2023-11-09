@@ -24,7 +24,7 @@ further_reading:
 Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. If you are not, there are many other ways to add services to your Service Catalog.
 
 {{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
-By default, Datadog can automatically discover the dependencies for an instrumented service, such as a database or a third-party API even if that dependency hasn’t been instrumented yet and show them as separate entries in Service Catalog. To differentiate these auto-detected components from insturmneted services, you can request access to the private beta for inferred services.
+Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
 {{< /callout >}}
 
 ## Create user-defined services
