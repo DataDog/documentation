@@ -14,6 +14,8 @@ further_reading:
 Service Scorecards are in beta.
 {{< /callout >}}
 
+{{< img src="/tracing/service_catalog/scorecard-overview.png" alt="Service Scorecards dashboard highlighting Production Readiness out-of-the-box rules" style="width:90%;" >}}
+
 ## Overview
 
 Service scorecards help you monitor, prioritize, plan, and communicate effectively to take informed actions that improve your service's health and performance. Each scorecard shows the status for Production Readiness, Observability Best Practices, and Documentation & Ownership. All services with defined metadata in the Service Catalog are automatically evaluated against a set of pass-fail criteria.
@@ -28,19 +30,31 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 2. Enable or disable rules to customize how the scores are calculated. 
 3. Click **View your scores** to start tracking your progress toward the selected rules across your defined services.
 
+{{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Service Scorecards setup page" style="width:90%;" >}}
+
 ### Creating custom rules
 
 {{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Custom Scorecard rules are in private beta. Join the beta and get detailed API instructions by requesting access.
+Custom Scorecard rules are in private beta. Join the beta by requesting access.
 {{< /callout >}}
 
-To add custom rules to your Scorecards dashboard using the Scorecards API: 
+To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
 2. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to `/scorecard/outcomes/batch`.
 3. View an overview of outcomes in the Scorecards dashboard.
 
 After initial setup, rules can also be enabled or disabled through the API. 
+
+
+To add custom rules to your Scorecards dashboard using the Scorecards UI: 
+
+1. Click **Create Rule** on the Scorecards page.
+2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team.
+3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the Scorecards API `/scorecard/outcomes/batch` endpoint.
+4. View an overview of outcomes in the Scorecards dashboard.
+
+{{< img src="/tracing/service_catalog/scorecard-create-rule-ui.png" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
 
 ## How services are evaluated
 
@@ -122,6 +136,8 @@ To create a Report:
 
 Using this information, Datadog sends you reports on the highest and lowest scoring rules, services, and teams. 
 
+{{< img src="/tracing/service_catalog/scorecard-reports.png" alt="Scorecard reports creation modal showing how to create report for all services" style="width:90%;" >}}
+
 
 ### Managing Scorecard reports
 To edit or delete a Workflow, click **Manage Reports** on the Scorecards page and select the Workflow. Make edits to the Workflow or delete it using the Settings menu. 
@@ -140,3 +156,4 @@ To edit or delete a Workflow, click **Manage Reports** on the Scorecards page an
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: https://app.datadoghq.com/services/scorecard
 [9]: /service_management/workflows/
+[10]: /api/latest/service-scorecards/
