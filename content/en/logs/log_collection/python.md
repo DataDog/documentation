@@ -77,6 +77,47 @@ If logs are in JSON format, Datadog automatically [parses the log messages][10] 
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
 
+If logs are in JSON format, these values will automatically be extracted if at the top level of the JSON, `extra`, or `record.extra` blocks.
+
+```json
+{
+  "message":"Hello from the private method",
+  "dd.trace_id":"18287620314539322434",
+  "dd.span_id":"8440638443344356350",
+  "dd.env":"dev",
+  "dd.service":"logs",
+  "dd.version":"1.0.0"
+}
+```
+
+```json
+{
+  "message":"Hello from the private method",
+  "extra":{
+    "dd.trace_id":"18287620314539322434",
+    "dd.span_id":"8440638443344356350",
+    "dd.env":"dev",
+    "dd.service":"logs",
+    "dd.version":"1.0.0"
+  }
+}
+```
+
+```json
+{
+"message":"Hello from the private method",
+  "record":{
+    "extra":{
+      "dd.trace_id":"1734396609740561719",
+      "dd.span_id":"17877262712156101004",
+      "dd.env":"dev",
+      "dd.service":"logs",
+      "dd.version":"1.0.0"
+    }
+  }
+}
+```
+
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
 Once this is done, the log should have the following format:
