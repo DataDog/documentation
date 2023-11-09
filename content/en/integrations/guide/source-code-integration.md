@@ -203,9 +203,11 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the Source Code Integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry to your source code, Datadog collects metadata for every commit SHA from your Git repository with the [`datadog-ci git-metadata upload`][1] command.
+To link telemetry to your source code, you can upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+
+Run this command for every commit that you need to be synchronized with Datadog.
 
 ### Validation
 
