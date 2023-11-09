@@ -50,7 +50,7 @@ Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available 
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
 **Default**: `true`<br>
 Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][2] for details.<br><br>
-**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
+**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
 
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
@@ -71,12 +71,12 @@ Default value sends traces to the Agent. Configuring with `LoggingWriter` instea
 `dd.agent.host`
 : **Environment Variable**: `DD_AGENT_HOST`<br>
 **Default**: `localhost`<br>
-Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][3] for more details.
+Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][5] for more details.
 
 `dd.trace.agent.port`
 : **Environment Variable**: `DD_TRACE_AGENT_PORT`<br>
 **Default**: `8126`<br>
-The port number the Agent is listening on for configured host. If the [Agent configuration][4] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
+The port number the Agent is listening on for configured host. If the [Agent configuration][6] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
 
 `dd.trace.agent.unix.domain.socket`
 : **Environment Variable**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
@@ -86,7 +86,7 @@ This can be used to direct trace traffic to a proxy, to later be sent to a remot
 `dd.trace.agent.url`
 : **Environment Variable**: `DD_TRACE_AGENT_URL`<br>
 **Default**: `null`<br>
-The URL to send traces to. If the [Agent configuration][4] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
+The URL to send traces to. If the [Agent configuration][6] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
 
 `dd.trace.agent.timeout`
 : **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
@@ -99,7 +99,7 @@ Timeout in seconds for network interactions with the Datadog Agent.
 **Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
 Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
 Prior to version 0.96.0 this setting only applied to request header tags. To change back to the old behavior, add the setting `-Ddd.trace.header.tags.legacy.parsing.enabled=true` or the environment variable `DD_TRACE_HEADER_TAGS_LEGACY_PARSING_ENABLED=true`.<br><br>
-**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
+**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][4] UI.
 
 `dd.trace.rate.limit`
 : **Environment Variable**: `DD_TRACE_RATE_LIMIT`<br>
@@ -129,7 +129,7 @@ Available since version 1.3.0.
 
 `dd.trace.annotations`
 : **Environment Variable**: `DD_TRACE_ANNOTATIONS`<br>
-**Default**: ([listed here][5])<br>
+**Default**: ([listed here][7])<br>
 **Example**: `com.some.Trace;io.other.Trace`<br>
 A list of method annotations to treat as `@Trace`.
 
@@ -253,6 +253,11 @@ Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an
 **Default**: `8125`<br>
 StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.
 
+`dd.jmxfetch.<integration-name>.enabled`
+: **Environment Variable**: `DD_JMXFETCH_<INTEGRATION_NAME>_ENABLED`<br>
+**Default**: `false`<br>
+JMX integration to enable (for example, Kafka or ActiveMQ).
+
 `dd.trace.obfuscation.query.string.regexp`
 : **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
 **Default**: `null`<br>
@@ -286,20 +291,20 @@ When `true`, user principal is collected. Available for versions 0.61+.
 `dd.instrumentation.telemetry.enabled`
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer collects [telemetry data][6]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
 - System properties can be used as JVM parameters.
-- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][7].
+- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][9].
 
-  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][8], and that port `8125` is open on the Agent container.
-  - In Kubernetes, [bind the DogStatsD port to a host port][9]; in ECS, [set the appropriate flags in your task definition][10].
+  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
+  - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
 
 ### Integrations
 
-See how to disable integrations in the [integrations][11] compatibility section.
+See how to disable integrations in the [integrations][13] compatibility section.
 
 ### Examples
 
@@ -419,10 +424,10 @@ Would produce the following result:
 
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example" >}}
 
-See the [Java integration documentation][12] to learn more about Java metrics collection with JMX fetch.
+See the [Java integration documentation][14] to learn more about Java metrics collection with JMX fetch.
 ### Headers extraction and injection
 
-For information about valid values and using the following configuration options, see [Propagating Java Trace Context][13].
+For information about valid values and using the following configuration options, see [Propagating Java Trace Context][15].
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -444,7 +449,7 @@ Available since version 1.9.0
 
 #### Deprecated extraction and injection settings
 
-These extraction and injection settings have been deprecated in favor of the `dd.trace.propagation.style.inject`, `dd.trace.propagation.style.extract`, and `dd.trace.propagation.style` settings since version 1.9.0. See [Propagating Java Trace Context][13]. The previous `b3` setting for both B3 multi header and B3 single header has been replaced with the new settings `b3multi` and `b3single`.
+These extraction and injection settings have been deprecated in favor of the `dd.trace.propagation.style.inject`, `dd.trace.propagation.style.extract`, and `dd.trace.propagation.style` settings since version 1.9.0. See [Propagating Java Trace Context][15]. The previous `b3` setting for both B3 multi header and B3 single header has been replaced with the new settings `b3multi` and `b3single`.
 
 `dd.propagation.style.inject`
 : **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -474,16 +479,16 @@ Available since version 1.10.0
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /agent/logs/advanced_log_collection
-[3]: /tracing/setup/docker/
-[4]: /agent/configuration/network/#configure-ports
-[5]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[6]: /tracing/configure_data_security/#telemetry-collection
-[7]: /developers/dogstatsd/#setup
-[8]: /agent/docker/#dogstatsd-custom-metrics
-[9]: /developers/dogstatsd/
-[10]: /agent/amazon_ecs/#create-an-ecs-task
-[11]: /tracing/compatibility_requirements/java#disabling-integrations
-[12]: /integrations/java/?tab=host#metric-collection
-[13]: /tracing/trace_collection/trace_context_propagation/java/
-[16]: /agent/remote_config/
-[17]: https://app.datadoghq.com/services
+[3]: /agent/remote_config/
+[4]: https://app.datadoghq.com/services
+[5]: /tracing/setup/docker/
+[6]: /agent/configuration/network/#configure-ports
+[7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[8]: /tracing/configure_data_security/#telemetry-collection
+[9]: /developers/dogstatsd/#setup
+[10]: /agent/docker/#dogstatsd-custom-metrics
+[11]: /developers/dogstatsd/
+[12]: /agent/amazon_ecs/#create-an-ecs-task
+[13]: /tracing/compatibility_requirements/java#disabling-integrations
+[14]: /integrations/java/?tab=host#metric-collection
+[15]: /tracing/trace_collection/trace_context_propagation/java/

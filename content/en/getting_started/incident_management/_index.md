@@ -32,6 +32,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
+    - link: 'https://www.datadoghq.com/blog/how-datadog-manages-incidents/'
+      tag: 'Blog'
+      text: 'How we manage incidents at Datadog'
 ---
 
 {{% site-region region="gov" %}}
