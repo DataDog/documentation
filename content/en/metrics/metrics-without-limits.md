@@ -57,7 +57,7 @@ When configuring tags for counts, rates, and gauges, the most frequently queried
 
 Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
 
-This is also available via API so you can [configure][13] and [delete][14] tags for multiple metrics. To configure a blocklist of tags for multiple metrics, set the parameter `exclude_tags_mode: true` using the [configure][13].
+This is also available via API so you can [configure][13] and [delete][14] tags for multiple metrics. To configure a blocklist of tags for multiple metrics, set the parameter `exclude_tags_mode: true` using the [configure][13] API.
 
 ### Refine and optimize your aggregations
 
