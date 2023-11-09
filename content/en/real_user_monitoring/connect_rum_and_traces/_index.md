@@ -164,9 +164,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         appContext: .init(),
         configuration: Datadog.Configuration
             .builderUsing(
-                rumApplicationID: "<rum_app_id>", 
-                clientToken: "<client_token>", 
-                environment: "<env_name>"
+                rumApplicationID: "<RUM_APP_ID>",
+                clientToken: "<CLIENT_TOKEN>",
+                environment: "<ENV_NAME>"
             )
             .trackURLSession(firstPartyHosts: ["example.com", "api.yourdomain.com"])
             .build()
@@ -239,11 +239,11 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 {{% /tab %}}
 {{% tab "Flutter RUM" %}}
 
-1. Set up [RUM Flutter Monitoring][1]. 
+1. Set up [RUM Flutter Monitoring][1].
 
 2. Follow the instructions under [Automatic Resource Tracking][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
     ```dart
-    final configuration = DdSdkConfiguration(
+    final configuration = DatadogConfiguration(
       // ...
       // added configuration
       firstPartyHosts: ['example.com', 'api.yourdomain.com'],
@@ -401,9 +401,9 @@ RUM supports several propagator types to connect resources with backends that ar
         appContext: .init(),
         configuration: Datadog.Configuration
             .builderUsing(
-                rumApplicationID: "<rum_app_id>", 
-                clientToken: "<client_token>", 
-                environment: "<env_name>"
+                rumApplicationID: "<RUM_APP_ID>",
+                clientToken: "<CLIENT_TOKEN>",
+                environment: "<ENV_NAME>"
             )
             .trackURLSession(
                 firstPartyHostsWithHeaderTypes: [
@@ -427,7 +427,7 @@ RUM supports several propagator types to connect resources with backends that ar
 
 2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins and the tracing header type to use as follows:
     ```java
-    val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT), 
+    val tracedHosts = mapOf("example.com" to setOf(TracingHeaderType.TRACECONTEXT),
                           "example.eu" to setOf(TracingHeaderType.DATADOG))
 
     val okHttpClient = OkHttpClient.Builder()
@@ -436,13 +436,13 @@ RUM supports several propagator types to connect resources with backends that ar
         .eventListenerFactory(DatadogEventListener.Factory())
        .build()
     ```
-    
+
     `TracingHeaderType` is an enum representing the following tracing header types:
       - `.DATADOG`: Datadog's propagator (`x-datadog-*`)
       - `.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-    
+
 {{% /tab %}}
 
 {{% tab "React Native RUM" %}}
@@ -458,21 +458,21 @@ RUM supports several propagator types to connect resources with backends that ar
         {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
     ];
     ```
-    
+
     `PropagatorType` is an enum representing the following tracing header types:
       - `PropagatorType.DATADOG`: Datadog's propagator (`x-datadog-*`)
       - `PropagatorType.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `PropagatorType.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `PropagatorType.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-    
-{{% /tab %}} 
+
+{{% /tab %}}
 
 {{% tab "Flutter RUM" %}}
 1. Set up RUM to connect with APM as described above.
 
-2. Use `firstPartyHostsWithTracingHeaders` instead of `firstPartyHosts` as follows: 
+2. Use `firstPartyHostsWithTracingHeaders` instead of `firstPartyHosts` as follows:
     ```dart
-    final configuration = DdSdkConfiguration(
+    final configuration = DatadogConfiguration(
       // ...
       // added configuration
       firstPartyHostsWithTracingHeaders: {
@@ -480,7 +480,7 @@ RUM supports several propagator types to connect resources with backends that ar
       },
     )..enableHttpTracking()
     ```
-    
+
     `firstPartyHostsWithTracingHeaders` takes `Map<String, Set<TracingHeaderType>>` as a parameter, where the key is a host and the value is a list of supported tracing header types.
 
     `TracingHeaderType` in an enum representing the following tracing header types:
@@ -488,7 +488,7 @@ RUM supports several propagator types to connect resources with backends that ar
       - `TracingHeaderType.tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
       - `TracingHeaderType.b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `TracingHeaderType.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
-      
+
 {{% /tab %}}
 
 {{< /tabs >}}

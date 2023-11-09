@@ -14,7 +14,7 @@ title: Flutter Crash Reporting and Error Tracking
 ---
 ## Overview
 
-Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. 
+Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
 
 Your crash reports appear in [**Error Tracking**][1].
 
@@ -29,19 +29,20 @@ Update your initialization snippet to enable native crash reporting for iOS and 
 For example:
 
 ```dart
-final configuration = DdSdkConfiguration(
-  clientToken: 'DD_CLIENT_TOKEN'
-  env: 'DD_ENV'
+final configuration = DatadogConfiguration(
+  clientToken: '<DD_CLIENT_TOKEN>'
+  env: '<DD_ENV>'
   site: DatadogSite.us1,
-  trackingConsent: TrackingConsent.granted,
   nativeCrashReportEnabled: true, // Set this flag
-  loggingConfiguration: LoggingConfiguration(),
-  rumConfiguration: 'DD_APP_ID',
+  loggingConfiguration: DatadogLoggingConfiguration(),
+  rumConfiguration: DatadogRumConfiguration(
+    applicationId: '<DD_APP_ID>',
+  ),
 );
 DatadogSdk.instance.initialize(configuration);
 ```
 
-If your application suffers a fatal crash, once your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data. 
+If your application suffers a fatal crash, after your application restarts, the Datadog Flutter SDK uploads a crash report to Datadog. For non-fatal errors, the Datadog Flutter SDK uploads these errors with other RUM data.
 
 
 ## Upload symbol files to Datadog
@@ -63,7 +64,7 @@ First, install the `datadog-ci` tool from the instructions above and create a `d
 
 Because this file contains your API key, it should not be checked in to version control.
 
-Alternately, you can set the `DATADOG_API_KEY` and `DATADOG_SITE` environment variables. 
+Alternately, you can set the `DATADOG_API_KEY` and `DATADOG_SITE` environment variables.
 
 Then, you can use the following command to upload all the necessary files for symbolication and deobfuscation of your crash reports:
 ```sh
@@ -76,15 +77,15 @@ For a full list of options, see the `datadog-ci` [Flutter Symbols documentation]
 
 ## Advanced Configuration - Flavors and Build Numbers
 
-Datadog uses the combination of the `service-name`, `version`, and `flavor` to locate the correct symbols for deobfuscation, so the parameters sent to the `datadog-ci` command and the parameters set in [DdSdkConfiguration][7]
+Datadog uses the combination of the `service-name`, `version`, and `flavor` to locate the correct symbols for deobfuscation, so the parameters sent to the `datadog-ci` command and the parameters set in [DatadogConfiguration][7]
 
-If you are using app [flavors][8] in Flutter, you will need to set the name of the flavor in [DdSdkConfiguration.flavor][9] since we cannot detect the flavor automatically. You can then pass this to the `--flavor` parameter of the `datadog-ci` command:
+If you are using app [flavors][8] in Flutter, you will need to set the name of the flavor in [DatadogConfiguration.flavor][9] since we cannot detect the flavor automatically. You can then pass this to the `--flavor` parameter of the `datadog-ci` command:
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --flavor my_flavor
 ```
 
-The Datadog SDK will automatically detect the version number of your application specified in your `pubspec.yaml` up to but not including the build number. If you are using build numbers as part of the version in your application and need to upload symbols for each build, you will need to add the version to [DdSdkConfiguration.version][10]. You can then pass this to the `--version` parameter of the `datadog-ci` command:
+The Datadog SDK will automatically detect the version number of your application specified in your `pubspec.yaml` up to but not including the build number. If you are using build numbers as part of the version in your application and need to upload symbols for each build, you will need to add the version to [DatadogConfiguration.version][10]. You can then pass this to the `--version` parameter of the `datadog-ci` command:
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --version 1.2.3+22
@@ -101,7 +102,7 @@ Note that Datadog uses tags for versions which do not allow `+`. All tooling aut
 [3]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
-[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [8]: https://docs.flutter.dev/deployment/flavors
-[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration/flavor.html
-[10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration/version.html
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
+[10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html

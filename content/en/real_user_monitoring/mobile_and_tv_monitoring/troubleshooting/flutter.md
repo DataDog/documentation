@@ -11,6 +11,31 @@ further_reading:
   text: Learn about Flutter Monitoring
 
 ---
+## Duplicate interface (iOS)
+
+If you see this error while building iOS after upgrading to `datadog_flutter_plugin` v2.0:
+
+```
+Semantic Issue (Xcode): Duplicate interface definition for class 'DatadogSdkPlugin'
+/Users/exampleuser/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
+```
+
+Try performing `flutter clean` && `flutter pub get` and rebuilding. This usually resolves the issue.
+
+## Duplicate classes (Android)
+
+If you see this error while building Android after the upgrading to `datadog_flutter_plugin` v2.0:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:checkDebugDuplicateClasses'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
+```
+
+Make sure that you've updated your version of Kotlin to at least 1.8 in your `build.gradle` file.
+
 ## Cocoapods issues
 
 If you have trouble building your iOS application after adding the Datadog SDK because of errors being thrown by Cocoapods, check which error you are getting. The most common error is an issue getting the most up-to-date native library from Cocoapods, which can be solved by running the following in your `ios` directory:
@@ -36,7 +61,7 @@ Follow the instructions in the [Flutter documentation][1] for working with Flutt
 If you're able to run your app, but you are not seeing the data you expect on the Datadog site, try adding the following to your code before calling `DatadogSdk.initialize`:
 
 ```dart
-DatadogSdk.instance.sdkVerbosity = Verbosity.verbose;
+DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 ```
 
 This causes the SDK to output additional information about what it's doing and what errors it's encountering, which may help you and Datadog Support narrow down your issue.
@@ -55,7 +80,7 @@ By default, the Datadog RUM Flutter SDK samples distributed traces at only 20% o
 ```dart
 final configuration = DdSdkConfiguration(
    //
-   rumConfiguration: RumConfiguration(
+   rumConfiguration: DatadogRumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
     tracingSamplingRate: 100.0
    ),
@@ -63,7 +88,7 @@ final configuration = DdSdkConfiguration(
 ```
 
 If you are still having issues, check that your `firstPartyHosts` property is set correctly. These should be hosts only, without schemas or paths, and they do not support regular expressions or wildcards. For example:
-    
+
     ✅ Good - 'example.com', 'api.example.com', 'us1.api.sample.com'
     ❌ Bad - 'https://example.com', '*.example.com', 'us1.sample.com/api/*', 'api.sample.com/api'
 
