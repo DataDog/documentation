@@ -1,6 +1,8 @@
 ---
 title: Build Apps
 kind: documentation
+aliases:
+- /app_builder/build
 disable_toc: false
 ---
 
@@ -36,7 +38,7 @@ To create an app:
 [1]: https://app.datadoghq.com/app-builder/apps/
 [2]: https://app.datadoghq.com/app-builder/blueprints
 
-### Build an app with JSON
+## Build an app with JSON
 
 Build or edit a workflow in JSON by clicking the cog (**Settings**) icon, and selecting **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
@@ -198,6 +200,27 @@ To delete or duplicate a component, select the component and click the three dot
 ## Queries
 
 Queries form the logic behind your app and enable interactions with Datadog integrations. To add a query, click the plus (**+**) icon in the **Queries** section and search for an action to add to your app.
+
+After you add a query to your app, ensure that you've entered any required inputs. Input fields with the variable button (**{{**) can take [variables](#variables).
+
+### Debounce
+
+Configuring debounce ensures that your query is only triggered once per user input. By default, debounce is set to 0 milliseconds (ms). To prevent a query from being called too frequently, increase the debounce. Configure debounce in the **Advanced** section of a query.
+
+### Conditional queries
+
+You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and contains at least one value, you can use the expression `${select0.value && select0.value.length > 0}`.
+
+### Post Query Transformation
+
+### Error notifications
+
+Use the **Advanced** section of the query to configure:
+- Debounce, which ensures that an action only triggers once per user input.
+- Conditions that must be met for the app to trigger. For example, 
+- 
+
+## Variables
 
 
 
