@@ -22,6 +22,8 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 2. Click the **New Application** button.
 3. Make sure JS is selected, then enter a name for your application and click **Create New RUM Application**. A `clientToken` and `applicationId` are automatically generated for your application.
 
+<div class="alert alert-info">When using `.env.local`, only variables prefixed with `NEXT_PUBLIC_` are included in the client bundle. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Bundling Environment Variables for the Browser</a> in the Next.js docs.</div>
+
 ### Instrument your application
 
 1. Choose your instrumentation type, then copy and paste the code snippet from the Datadog RUM UI into the appropriate file based on the instrumentation type.
@@ -31,7 +33,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
 
    If using NPM, you need to make a few small changes to the code snippet from the Datadog RUM UI before pasting it into either the root `layout.tsx` or custom `_app.tsx` file (Datadog supports both):
 
-   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file.
+   - If your application relies on the **newer** Next.js [App Router][1] (versions 13+), paste the snippet into the root [`layout.tsx`][2] file. The `use client` directive prevents server-side rendering, so it is recommended to use the CDN version instead.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], paste the snippet into the custom [`_app.tsx`][4] file.
 
   **Note**: Because the RUM SDK needs to run on the client to collect telemetry data, the file where it is initialized through the NPM package must be a [client component][5].
