@@ -207,7 +207,7 @@ To link telemetry to your source code, you can upload your repository metadata w
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
-This command needs to be run for every commit you need to be synched to Datadog.
+This command needs to be run for every commit you need to be synchronized to Datadog.
 
 ### Validation
 
