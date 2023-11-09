@@ -32,7 +32,14 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
         rules: [
           {
             // Provided by the Datadog Lambda layer and the Lambda Runtime.
-            exclude: ['/aws-sdk/', '/datadog-lambda-js/', '/dd-trace/'],
+            exclude: [
+              // AWS SDK v3
+              /^@aws-sdk.*/,
+              // AWS SDK v2
+              /aws-sdk/,
+              /datadog-lambda-js/,
+              /dd-trace/
+            ],
           }
         ]
       },
@@ -50,6 +57,9 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
         includeModules:
           # ... your existing configuration for includeModules
           forceExclude:
+            # @aws-sdk for the AWS SDK v3
+            - @aws-sdk
+            # aws-sdk for the AWS SDK v2
             - aws-sdk
             - datadog-lambda-js
             - dd-trace
@@ -65,6 +75,9 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     custom:
       webpack:
         forceExclude:
+          # @aws-sdk for the AWS SDK v3
+          - @aws-sdk
+          # aws-sdk for the AWS SDK v2
           - aws-sdk
           - datadog-lambda-js
           - dd-trace
@@ -96,7 +109,9 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     custom:
       esbuild:
         exclude: 
-          # aws-sdk is needed because it is the default value for `exclude`
+          # @aws-sdk for the AWS SDK v3
+          - @aws-sdk
+          # aws-sdk for the AWS SDK v2
           - aws-sdk
           - datadog-lambda-js
           - dd-trace
