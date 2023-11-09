@@ -256,7 +256,7 @@ See the [Lambda Log Collection Troubleshooting Guide][10]
 Check if logs appear in the [Datadog Live Tail][11].
 
 If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
-If they do not appear in the Live Tail, they might get dropped as their timestamp it outside the 18 hours ingestion window. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.drop_count` metric.
+If they do not appear in the Live Tail, they might have been dropped if their timestamp was further than 18 hours in the past. You can check which `service` and `source` may be impacted with the `datadog.estimated_usage.logs.drop_count` metric.
 
 ## Truncated logs
 
