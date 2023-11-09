@@ -38,7 +38,7 @@ Go to [Logs Explorer][2] to see new JSON logs with their mapped timestamp.
 
 ## Truncated logs
 
-Logs above 1MB will be truncated.
+Logs above 1MB are truncated.
 Fix the issue at the source by checking which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
 
 [1]: /help/
