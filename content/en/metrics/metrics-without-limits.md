@@ -49,7 +49,7 @@ There are also APIs available so you can [create][2], [edit][3], and [delete][4]
 
 {{< img src="metrics/mwl_example_tag_exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
-There are also APIs available so you [create][2], and [edit][3] a blocklist of tags by setting the parameter `exclude_tags_mode: true`. There is also an [API][4] to delete a tag configuration and an [API][5] for estimating the potential impact of your configuration.
+There are also APIs available so you can [create][2] and [edit][3] a blocklist of tags by setting the parameter `exclude_tags_mode: true`. There is also an [API][4] to delete a tag configuration and an [API][5] for estimating the potential impact of your configuration.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
