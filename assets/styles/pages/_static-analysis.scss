@@ -18,7 +18,7 @@
                 }
                 button.toggler {
                     height: 40px;
-                    padding: 0 8px;
+                    padding: 0 50px 0 8px;
                     border: 1px solid #C7C7C7;
                     background: $gray-lightest;
                     .selections {
@@ -28,6 +28,10 @@
                             column-gap: 7px;
                             background-color: #E6D6F9;
                             padding: 0 4px;
+                            .selection-name {
+                                position: relative;
+                                top: -1px
+                            }
                             i.icon-close-light_x {
                                 display: inherit;
                                 color: $brand-primary
@@ -52,7 +56,7 @@
                         height: 100%;
                         background: linear-gradient(90deg, rgba(246, 246, 246, 0.00) 6.25%, #F6F6F6 31.25%);
                         padding: 0 8px;
-                        
+
                         i.icon-cancel-circle {
                             display: inherit;
                             position: relative;
@@ -75,7 +79,15 @@
                     .filter-category-container {
                         display: flex;
                         align-items: center;
-                        column-gap: 4px;
+                        column-gap: 8px;
+                        input {
+                            width: 16px;
+                            height: 16px;
+                        }
+                        label {
+                            position: relative;
+                            top: -1px
+                        }
                     }
                 }
             }

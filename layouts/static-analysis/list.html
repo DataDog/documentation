@@ -242,10 +242,10 @@
                                 <div class="selection-container rounded d-flex align-items-center">
                                     {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "Docker" "variant" "avatar") }}
                                     {{ if $int_logo }}
-                                    <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                    <img src="{{ $int_logo }}" height="14" alt="{{$int_logo}}"/>
                                     {{ end }}
                                     <span class="selection-name">Docker</span>
-                                    {{ partial "icon" (dict "name" "close-light_x" "title" "close" ) }}
+                                    {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
                                 </div>
                                 {{ end }}
                             </div>
@@ -267,7 +267,7 @@
                                 <input id="{{ . }}" type="checkbox">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
                                 {{ if $int_logo }}
-                                <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                <img src="{{ $int_logo }}" height="16" alt="{{$int_logo}}"/>
                                 {{ end }}
                                 <label for="{{ . }}">{{.}}</label>
                             </div>
