@@ -2706,6 +2706,11 @@ main:
     parent: dbm
     identifier: dbm_data_collected
     weight: 30
+  - name: Exploring Database Hosts
+    url: database_monitoring/database_hosts/
+    parent: dbm
+    identifier: dbm_database_hosts
+    weight: 31
   - name: Exploring Query Metrics
     url: database_monitoring/query_metrics/
     parent: dbm
@@ -3136,7 +3141,7 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
-  - name: Audit Security Events
+  - name: Audit Trail
     url: security/audit_trail
     parent: security_platform
     identifier: security_audit_trail
@@ -3263,21 +3268,26 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 106
+  - name: Supported Frameworks
+    url: security/misconfigurations/supported_frameworks
+    parent: cspm
+    identifier: cspm_supported_frameworks
+    weight: 108
   - name: Misconfigurations Explorer
     url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
-    weight: 107
+    weight: 110
   - name: Signals Explorer
     url: /security/misconfigurations/signals_explorer/
     parent: cspm
     identifier: signals
-    weight: 108
+    weight: 112
   - name: Resource Catalog
     url: /security/misconfigurations/resource_catalog
     parent: cspm
     identifier: resource_catalog
-    weight: 109
+    weight: 114
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm
