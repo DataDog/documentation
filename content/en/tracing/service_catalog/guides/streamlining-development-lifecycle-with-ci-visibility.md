@@ -10,7 +10,7 @@ further_reading:
   text: "Datadog CI Pipeline Visibility"
 ---
 
-In the Delivery lens, you can view CI pipeline and static analysis results associated to your services.
+In the Delivery view in Service Catalog, you can view CI pipeline and static analysis results associated to your services.
 
 By default, your service is associated to [CI pipeline(s)][4] through repository URL. 
 You can edit the pipelines associated with each service by modifying the `ci-pipeline-fingerprints` field in your [service metadata][5].
