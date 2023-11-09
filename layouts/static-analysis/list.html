@@ -223,7 +223,7 @@
             </div>
         </div>
 
-        <nav id="static-analysis-nav" class="container w-100">
+        <nav id="static-analysis-nav" class="container px-0">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
             {{ $filterKeys := slice "Language" "Category" "Severity" }}
             <div class="filters-static-analysis row">
@@ -250,9 +250,7 @@
                                 {{ end }}
                             </div>
                             <div class="overflow-gradient d-flex align-items-center justify-content-end position-absolute top-0 end-0 rounded-end">
-                                <div class="cancel rounded-circle border border-primary d-flex align-items-center justify-content-center fw-semibold">
-                                    <span>x</span>
-                                </div>
+                                {{ partial "icon" (dict "name" "cancel-circle" "title" "remove filters" ) }}
                                 <div class="chevron chevron-down"></div>
                             </div>
                         </button>

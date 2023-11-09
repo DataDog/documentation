@@ -28,8 +28,9 @@
                             column-gap: 7px;
                             background-color: #E6D6F9;
                             padding: 0 4px;
-                            i {
-                                display: flex;
+                            i.icon-close-light_x {
+                                display: inherit;
+                                color: $brand-primary
                             }
                         }
                     }
@@ -51,15 +52,12 @@
                         height: 100%;
                         background: linear-gradient(90deg, rgba(246, 246, 246, 0.00) 6.25%, #F6F6F6 31.25%);
                         padding: 0 8px;
-                        .cancel {
-                            width: 16px;
-                            height: 16px;
-                            color: $gray-lightest;
-                            background-color: $ddpurple;
-                            span {
-                                position: relative;
-                                top: -2px;
-                            }
+                        
+                        i.icon-cancel-circle {
+                            display: inherit;
+                            position: relative;
+                            top: 1px;
+                            color: $brand-primary
                         }
                         .chevron {
                             position: relative;
