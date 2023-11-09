@@ -143,7 +143,7 @@ clusterAgent:
 ```
 ### Cluster Agent metrics provider
 
-To ensure autoscaling is resilient to failure, configure the Cluster Agent to selectively fetch any metrics you use for HPA (both Kubernetes and standard/custom application metrics) from multiple Datadog regions. Configure the Datadog Cluster Agent manifest with several endpoints:
+To ensure autoscaling is resilient to failure, configure the Cluster Agent to run your metric queries for the HPA against your multiple Datadog regions with dual-shipped data. Configure the Datadog Cluster Agent manifest with several endpoints:
 
 {{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" collapsible="true" >}}
 external_metrics_provider:
