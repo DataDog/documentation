@@ -51,21 +51,24 @@
                     }
 
                     .overflow-gradient {
-                        column-gap: 10px;
                         width: 70px;
-                        height: 100%;
                         background: linear-gradient(90deg, rgba(246, 246, 246, 0.00) 6.25%, #F6F6F6 31.25%);
-                        padding: 0 8px;
+                        padding-left: 8px;
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        align-items: center;
 
                         i.icon-cancel-circle {
                             display: inherit;
                             position: relative;
                             top: 1px;
-                            color: $brand-primary
+                            color: $brand-primary;
+                            grid-column: 2/span 1;
                         }
-                        .chevron {
-                            position: relative;
-                            top: -1px
+                        span {
+                            top: -1px;
+                            grid-column: 3/span 1;
+                            padding: 0 8px 
                         }
                     }
                 }

@@ -24,9 +24,9 @@
     class="static-analysis-main w-100 d-flex flex-column"
     x-data="{
         filterValue: {
-            language: '',
-            category: '',
-            severity: ''
+            languages: '',
+            categories: '',
+            severities: ''
         },
         searchValue: '',
         openedFilterForm: null,
@@ -180,9 +180,9 @@
                                     Severity: []
                                 }
                             */}}
-                            {{ $pad.SetInMap "filters" "Language" (union (index ($pad.Get "filters") "Language") (slice .Params.meta.language)) }}
-                            {{ $pad.SetInMap "filters" "Category" (union (index ($pad.Get "filters") "Category") (slice .Params.meta.category)) }}
-                            {{ $pad.SetInMap "filters" "Severity" (union (index ($pad.Get "filters") "Severity") (slice .Params.meta.severity)) }}
+                            {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice .Params.meta.language)) }}
+                            {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
+                            {{ $pad.SetInMap "filters" "Severities" (union (index ($pad.Get "filters") "Severities") (slice .Params.meta.severity)) }}
                             {{/*  
                                 build object of arrays with unique languages for each group-header (ruleset header)
                                 languagesByRuleset: {
@@ -225,12 +225,12 @@
 
         <nav id="static-analysis-nav" class="container px-0">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
-            {{ $filterKeys := slice "Language" "Category" "Severity" }}
+            {{ $filterEntries := (slice "Languages" "Categories" "Severities") }}
             <div class="filters-static-analysis row">
-                {{ range $filterKeys }}
-                {{ $filter := . | lower }}
-                <div class='filter-type flex-column col col-md-{{cond (eq $filter "language") "12" "6" }}' data-id="{{$filter}}" >
-                    <p class="filter-type-name fw-semibold">{{.}}</p>
+                {{ range $filterEntries }}
+                {{ $filter := . | lower}}
+                <div class='filter-type flex-column col col-md-{{cond (eq $filter "languages") "12" "6" }}' data-id="{{$filter}}" >
+                    <p class="filter-type-name fw-semibold">{{ . }}</p>
                     <div class="filter-component position-relative">
                         <button 
                         class="toggler w-100 rounded position-relative"
@@ -249,9 +249,11 @@
                                 </div>
                                 {{ end }}
                             </div>
-                            <div class="overflow-gradient d-flex align-items-center justify-content-end position-absolute top-0 end-0 rounded-end">
+                            <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
                                 {{ partial "icon" (dict "name" "cancel-circle" "title" "remove filters" ) }}
-                                <div class="chevron chevron-down"></div>
+                                <span class="d-flex align-items-center justify-content-center position-relative h-100">
+                                    <div class="chevron chevron-down"></div>
+                                </span>
                             </div>
                         </button>
                         <form 
