@@ -38,17 +38,18 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 
 {{< img src="metrics/mwl_example_include_tags-compressed.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
+There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
 
 #### Blocklist of tags 
 1. Click on any metric name to open its details side panel.
 2. Click **Manage Tags** -> **"Exclude Tags…"** to drop tags you don't want to query. 
-3. Define your blocklist of tags. These tags will **not** be queryable on dashboards and monitors. Hover over a tag to see if it has been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days. 
+3. Define your blocklist of tags. These tags will **not** be queryable on dashboards and monitors. Tags that have been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days will be distinguished with an icon.
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
 {{< img src="metrics/mwl_example_tag_exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
-There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
+Setting a blocklist of tags is availble via [API][2] with the parameter `filter[queried]=false`.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
