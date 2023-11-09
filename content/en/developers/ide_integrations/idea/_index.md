@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for the IntelliJ Platform (IDEA, GoLand, and PyCharm) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog plugin for the IntelliJ Platform is available for IDEA, GoLand, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
