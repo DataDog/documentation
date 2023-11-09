@@ -53,7 +53,7 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 {{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example" style="width:80%;">}}
 
-### Month before
+### 4 weeks before
 
 | Function         | Description                                                                                | Example                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
@@ -62,6 +62,17 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value shown as a thin, solid line.
 
 {{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="simple month before example" style="width:80%;">}}
+
+
+### Month before calendar shift
+
+| Function           | Description                                                                                   | Example                            |
+|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
+| `calendar_shift()` | Graph values from the previous day, week, or month from the current timestamp for the metric. | `calendar_shift(<METRIC_NAME>{*})` |
+
+The calendar shift compares the same metrics on the same timeframe (February 15 compared to March 15). Here is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from a month ago compared to the current value.
+
+{{< img src="dashboards/functions/timeshift/calendar_shift.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from a month ago and the present" style="width:100%;" >}}
 
 ## Other functions
 
