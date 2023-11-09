@@ -24,9 +24,9 @@
     class="static-analysis-main w-100 d-flex flex-column"
     x-data="{
         filterValue: {
-            languages: '',
-            categories: '',
-            severities: ''
+            languages: [],
+            categories: [],
+            severities: []
         },
         searchValue: '',
         openedFilterForm: null,
@@ -225,9 +225,9 @@
 
         <nav id="static-analysis-nav" class="container px-0">
             {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
-            {{ $filterEntries := (slice "Languages" "Categories" "Severities") }}
+            {{ $filterKeys := (slice "Languages" "Categories" "Severities") }}
             <div class="filters-static-analysis row">
-                {{ range $filterEntries }}
+                {{ range $filterKeys }}
                 {{ $filter := . | lower}}
                 <div class='filter-type flex-column col col-md-{{cond (eq $filter "languages") "12" "6" }}' data-id="{{$filter}}" >
                     <p class="filter-type-name fw-semibold">{{ . }}</p>
@@ -238,6 +238,11 @@
                         >
                             <div class="selections d-flex">
                                 {{/*  All  */}}
+                                {{/*  
+                                    For each filter key, I need to 
+                                    determine what values are in it's respective this.filterValue
+                                    for each item in the array, I need to render the int-logo and name for this div.selections    
+                                */}}
                                 {{ range seq 6 }}
                                 <div class="selection-container rounded d-flex align-items-center">
                                     {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "Docker" "variant" "avatar") }}
@@ -266,7 +271,7 @@
                             </div>
                             {{ range index ($pad.Get "filters") . }}
                             <div class="filter-category-container">
-                                <input id="{{ . }}" type="checkbox">
+                                <input id="{{ . }}" type="checkbox" value="{{ . }}" x-model="filterValue['{{$filter}}']">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
                                 {{ if $int_logo }}
                                 <img src="{{ $int_logo }}" height="16" alt="{{$int_logo}}"/>
