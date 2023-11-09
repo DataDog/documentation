@@ -199,6 +199,9 @@ The type of the service can be one of:
 
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
 
+### Updating service type and language
+With [Service Catalog metadata schema 2.2][25], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
+
 ## Changing service color
 
 Service color is used in trace visualizations. Click the service type icon to change it.
@@ -235,3 +238,4 @@ The services and resources statistics, and span summaries on the **Service List*
 [22]: /developers/guide/data-collection-resolution-retention/
 [23]: https://app.datadoghq.com/ci/pipelines
 [24]: https://app.datadoghq.com/ci/static-analysis
+[25]: /tracing/service_catalog/adding_metadata#service-definition-schema-v22
