@@ -260,7 +260,7 @@ If they do not appear in the Live Tail, they might have been dropped if their ti
 
 ## Truncated logs
 
-Logs above 1MB will be truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
+Logs above 1MB are truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
 
 
 ## Further Reading
