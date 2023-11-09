@@ -5,9 +5,12 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Service Catalog"
+- link: /api/latest/service-scorecards/
+  tag: "Documentation" 
+  text: "Service Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Improve service health and performance with Service Scorecards"
+  text: "Prioritize and promote service observability best practices with Service Scorecards"
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
