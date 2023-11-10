@@ -27,7 +27,7 @@ See [compatibility requirements][4] for information about what ASM features are 
 
 ## AWS Lambda
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Application Security Threat detection is done by using the Datadog's AWS Lambda Extension along with APM Tracing.</div>
 
 Configuring ASM for AWS Lambda involves:
 
@@ -37,15 +37,15 @@ Configuring ASM for AWS Lambda involves:
 
 ### Prerequisites
 
-- [Serverless APM][2] is configured on the Lambda function to send traces directly to Datadog. 
-- A tracing library is installed. X-Ray tracing, by itself, is not sufficient for ASM. Add the tracing library by following the steps below.
+- [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
+  X-Ray tracing, by itself, is not sufficient for ASM and requires APM Tracing to be enabled.
 
 ### Get started
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with ASM.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -53,17 +53,30 @@ To install and configure the Datadog Serverless Framework plugin:
    ```sh
    serverless plugin install --name serverless-plugin-datadog
    ```
-2. Enable ASM by updating your `serverless.yml` (or whichever way you set environment variables for your function):
+    
+2. Enable ASM by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
-   environment:
-     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
-     DD_SERVERLESS_APPSEC_ENABLED: true
+   custom:
+     datadog:
+       enableASM: true
    ```
-3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+   
+   Overall, your new `serverless.yml` file should contain at least:
+   ```yaml
+   custom:
+     datadog:
+       apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
+       enableDDTracing: true
+       enableASM: true
+   ```
+   See also the complete list of [plugin parameters][4] to further configure your lambda settings.
+   
+4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[4]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -328,13 +341,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-
-{{% /tab %}}
-{{% tab "Serverless Plugin" %}}
-
-Set the `enableASM` configuration parameter to `true` in your `serverless.yml` file. See the [Serverless integration][6] docs for more information.
-
-[6]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1002,3 +1008,4 @@ A few minutes after you enable your application and exercise it, **threat inform
 [4]: /security/application_security/enabling/compatibility/serverless
 [5]: /security/default_rules/security-scan-detected/
 [6]: /serverless/libraries_integrations/plugin/
+[apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/
