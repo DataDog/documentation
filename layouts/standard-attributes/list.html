@@ -8,7 +8,7 @@
 
 
 {{ define "partials/get-icon" }}
-  {{ $int_logo := partialCached "integrations-logo.html" (dict "context" .ctx "basename" .name "variant" "avatar") .name }}
+  {{ $int_logo := partialCached "integrations-logo.html" (dict "context" .ctx "basename" .name "variant" "avatar") .name "avatar" }}
   {{ if $int_logo }}
     <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
   {{ else }}
@@ -116,7 +116,7 @@
                     {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
 
                     {{/*  Get integration logos for android, ios, roku, and flutter  */}}
-                    {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") . }}
+                    {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") . "avatar" }}
                     {{ if $int_logo }}
                       <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}" title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"/>
                     {{ end }}
