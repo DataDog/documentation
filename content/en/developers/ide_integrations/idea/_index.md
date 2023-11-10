@@ -176,7 +176,7 @@ The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. F
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
-Additionally, all issues detected by this feature are listed in the standard `Problems` view.
+Additionally, all issues detected by this feature are listed in the standard **Problems** view.
 
 ### Getting started
 When you start editing a source file (Python and Docker files are supported), the plugin will check if the `static-analysis.datadog.yml` configuration file is present at the root of your source repository and prompt you to create it if necessary:
