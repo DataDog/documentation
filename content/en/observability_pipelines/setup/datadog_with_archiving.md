@@ -38,38 +38,12 @@ You can generate both of these in [Observability Pipelines][3].
 {{% tab "Docker" %}}
 Ensure that your machine is configured to run Docker.
 
-#### Set up an IAM policy to allows Workers to write to S3
-
-{{% op-datadog-archives-s3-setup %}}
-
-3. Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
-
-{{% site-region region="us,us3,us5" %}}
-See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-[1]: https://aws.amazon.com/s3/pricing/
-{{% /site-region %}}
-
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 
-#### Set up an IAM policy to allows Workers to write to S3
-
-{{% op-datadog-archives-s3-setup %}}
-
-3. [Create a service account][2] to use the policy you created above. Replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` in the Helm config with the service account name.
-
-{{% site-region region="us,us3,us5" %}}
-See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-[1]: https://aws.amazon.com/s3/pricing/
-{{% /site-region %}}
-
-#### Kubernetes node requirements
-
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
-* The [EBS CSI driver][3] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
+* The [EBS CSI driver][1] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
 
   ```shell
   kubectl get pods -n kube-system
@@ -81,9 +55,9 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
   kubectl get storageclass
   ```
 
-  If `io2` is not present, download [the StorageClass YAML][4] and `kubectl apply` it.
+  If `io2` is not present, download [the StorageClass YAML][2] and `kubectl apply` it.
 
-* The [AWS Load Balancer controller][5] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
+* The [AWS Load Balancer controller][3] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
 
   ```shell
   helm list -A
@@ -92,56 +66,23 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
 
 See [Best Practices for OPW Aggregator Architecture][6] for production-level requirements.
 
-[1]: https://aws.amazon.com/s3/pricing/
-[2]: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
-[3]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
-[4]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
-[5]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
+[3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 [6]: /observability_pipelines/architecture/
 
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 
-#### Set up an IAM policy to allows Workers to write to S3
-
-{{% op-datadog-archives-s3-setup %}}
-
-3. Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
-
-{{% site-region region="us,us3,us5" %}}
-See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-[1]: https://aws.amazon.com/s3/pricing/
-{{% /site-region %}}
+There are no provider-specific requirements for APT-based Linux.
 
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
-#### Set up an IAM policy to allows Workers to write to S3
 
-{{% op-datadog-archives-s3-setup %}}
-
-* Create an IAM user and attach the policy above to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
-
-{{% site-region region="us,us3,us5" %}}
-See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-[1]: https://aws.amazon.com/s3/pricing/
-{{% /site-region %}}
+There are no provider-specific requirements for APT-based Linux.
 
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-#### Set up an IAM policy to allows Workers to write to S3
-
-{{% op-datadog-archives-s3-setup %}}
-3. Attach the policy to the IAM Instance Profile that is created with Terraform, which you can find under the `iam-role-name` output.
-
-{{% site-region region="us,us3,us5" %}}
-See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-[1]: https://aws.amazon.com/s3/pricing/
-{{% /site-region %}}
-
-#### AWS account access requirements
 
 To run the Worker in your AWS account, you need administrative access to that account and the following information:
 
@@ -152,7 +93,57 @@ To run the Worker in your AWS account, you need administrative access to that ac
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Observability Pipelines Worker
+## Set up Log Archives
+
+The sample configuration you download later, when you [install the Observability Pipelines Worker](#install-the-observability-pipelines-worker), includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, create an S3 bucket for your archives and set up an IAM policy that allows the Workers to write to the S3 bucket. 
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% op-datadog-archives-s3-setup %}}
+
+3. Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+{{% /tab %}}
+{{% tab "AWS EKS" %}}
+
+{{% op-datadog-archives-s3-setup %}}
+
+3. [Create a service account][1] to use the policy you created above. Replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` in the Helm config with the service account name.
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
+
+{{% /tab %}}
+{{% tab "APT-based Linux" %}}
+
+{{% op-datadog-archives-s3-setup %}}
+
+3. Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+
+{{% op-datadog-archives-s3-setup %}}
+
+3. Create an IAM user and attach the policy above to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+
+{{% /tab %}}
+{{% tab "Terraform (AWS)" %}}
+
+{{% op-datadog-archives-s3-setup %}}
+
+3. Attach the policy to the IAM Instance Profile that is created with Terraform, which you can find under the `iam-role-name` output.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+
+[1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
+
+## Install the Observability Pipelines Worker
 
 {{< tabs >}}
 {{% tab "Docker" %}}
