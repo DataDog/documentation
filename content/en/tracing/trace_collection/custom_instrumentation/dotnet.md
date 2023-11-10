@@ -25,21 +25,21 @@ further_reading:
       text: '.NET code samples'
 ---
 
+<div class="alert alert-info">
+If you have not yet read the instructions for automatic instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET/.NET Core</a> or <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework</a> Setup Instructions.
+</div>
+
 This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2].
 
 There are several ways to get more than the [default automatic instrumentation][3]:
 
-- [Through configuration](#instrument-methods-through-configuration), which depends on automatic instrumentation and does not allow you to add specific tags.
-- [Using attributes](#instrument-methods-through-attributes), which depends on automatic instrumentation and allows you to customize operation and resource names.
-- [Using custom code](#custom-instrumentation-with-code), which can work alongside automatic instrumentation or without it. It gives you the most control on the spans.
+- [Through configuration](#instrument-methods-through-configuration), which does not allow you to add specific tags.
+- [Using attributes](#instrument-methods-through-attributes), which allows you to customize operation and resource names.
+- [Using custom code](#custom-instrumentation-with-code), which gives you the most control on the spans.
 
-You can combine these solutions with each other to achieve the instrumentation detail you want.
+You can combine these solutions with each other to achieve the instrumentation detail you want. However, automatic instrumentation must be setup first.
 
 ## Instrument methods through configuration
-
-<div class="alert alert-info">
-  <strong>Note</strong>: This feature requires enabling automatic instrumentation for your application. For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="/tracing/trace_collection/dd_libraries/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="/tracing/trace_collection/dd_libraries/dotnet-core/">.NET Core setup instructions</a>.
-</div>
 
 Using the `DD_TRACE_METHODS` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format for `DD_TRACE_METHODS`, see the [.NET Framework configuration instructions][8] or the [.NET Core configuration instructions][9]. For example, to instrument a method called `SaveSession` defined on the `Store.Managers.SessionManager` type, set:
 
@@ -52,10 +52,6 @@ The resulting span has an `operationName` attribute with the value `trace.annota
 If you want to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods through attributes](#instrument-methods-through-attributes) instead.
 
 ## Instrument methods through attributes
-
-<div class="alert alert-info">
-  <strong>Note</strong>: This feature requires adding the <a href="https://www.nuget.org/packages/Datadog.Trace.Annotations"><code>Datadog.Trace.Annotations</code> NuGet package</a> to your application and setting up automatic instrumentation. For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="/tracing/trace_collection/dd_libraries/dotnet-framework/">.NET Framework setup instructions</a> or the <a href="/tracing/trace_collection/dd_libraries/dotnet-core/">.NET Core setup instructions</a>.
-</div>
 
 Add `[Trace]` to methods for Datadog to trace them when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
