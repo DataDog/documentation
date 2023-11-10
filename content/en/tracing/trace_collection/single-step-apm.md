@@ -17,7 +17,7 @@ The following examples show how it works on each infrastructure type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-For example, on an Ubuntu host:
+For for an Ubuntu host:
 
 1. Run the one-line install command:
 
@@ -36,7 +36,7 @@ For example, on an Ubuntu host:
 
 {{% tab "Docker" %}}
 
-For example, for a Docker Linux container:
+For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
@@ -72,9 +72,9 @@ You can enable APM when installing the Agent with the [Datadog Operator](#operat
 
 The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-To enable APM instrumentation:
+For the Datadog Operator:
 
-1. Make sure you've [installed the Datadog Agent on Kubernetes][3].
+1. Make sure you've [installed the Datadog Operator on Kubernetes][3].
 2. Configure `datadog-agent.yaml` as shown in the following example:
 
 **TODO: UPDATE EXAMPLE**
@@ -86,9 +86,9 @@ To enable APM instrumentation:
 
 ### Helm Chart
 
-You can use the Datadog Helm chart to install the Datadog Agent to all nodes in your cluster with a DaemonSet.
+You can use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
 
-To enable APM instrumentation:
+For a Helm Chart:
 
 1. Make sure you've [installed the Datadog Agent on Kubernetes][4].
 2. Configure `datadog-values.yaml` as shown in the following example:
