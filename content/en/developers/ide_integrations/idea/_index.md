@@ -172,7 +172,7 @@ The **View in IntelliJ IDEA** feature provides a link from the Datadog platform 
 ## Static Analysis
 The Datadog plugin runs a set of [Static Analysis][12] rules on your source files as you edit them.  The goal is to detect and fix problems in your code before you commit your changes.
 
-The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. For these file types, issues are shown directly in the source code editor via the JetBrains inspection system, and suggested fixes can be applied easily:
+The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. For these file types, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
