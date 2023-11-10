@@ -32,7 +32,7 @@ See [compatibility requirements][4] for information about what ASM features are 
 Configuring ASM for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
-2. Setting up ASM instrumentation by using the Datadog CI, AWS CDK, [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
+2. Setting up ASM instrumentation by using the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ### Prerequisites
@@ -173,7 +173,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
-        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>", // or api_key
         enable_asm=True,
       )
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
