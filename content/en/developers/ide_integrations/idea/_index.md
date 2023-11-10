@@ -212,6 +212,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
-[12]: https://docs.datadoghq.com/continuous_integration/static_analysis/?tab=githubactions
-[13]: https://docs.datadoghq.com/continuous_integration/static_analysis/rules/#python-rules
-[14]: https://docs.datadoghq.com/continuous_integration/static_analysis/rules/#docker-rules
+[12]: /continuous_integration/static_analysis/?tab=githubactions
+[13]: /continuous_integration/static_analysis/rules/#python-rules
+[14]: /continuous_integration/static_analysis/rules/#docker-rules
