@@ -26,7 +26,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET/.NET Core</a> or <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework</a> Setup Instructions.
+If you have not yet read the instructions for automatic instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET/.NET Core</a> or <a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework</a> Setup Instructions.
 </div>
 
 This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2].
@@ -35,9 +35,9 @@ There are several ways to get more than the [default automatic instrumentation][
 
 - [Through configuration](#instrument-methods-through-configuration), which does not allow you to add specific tags.
 - [Using attributes](#instrument-methods-through-attributes), which allows you to customize operation and resource names.
-- [Using custom code](#custom-instrumentation-with-code). It gives you the most control on the spans.
+- [Using custom code](#custom-instrumentation-with-code), which gives you the most control on the spans.
 
-You can combine these solutions with each other to achieve the instrumentation detail you want. All those solutions require automatic instrumentation to be setup first.
+You can combine these solutions with each other to achieve the instrumentation detail you want. However, automatic instrumentation must be setup first.
 
 ## Instrument methods through configuration
 
