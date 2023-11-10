@@ -49,13 +49,13 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "DatadogUploadLogArchives",
+            "Sid": "DatadogUploadAndRehydrateLogArchives",
             "Effect": "Allow",
-            "Action": "s3:PutObject",
+            "Action": ["s3:PutObject", "s3:GetObject"],
             "Resource": "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*"
         },
         {
-            "Sid": "DatadogUploadLogArchives",
+            "Sid": "DatadogRehydrateLogArchivesListBucket",
             "Effect": "Allow",
             "Action": "s3:ListBucket",
             "Resource": "arn:aws:s3:::<MY_BUCKET_NAME>"
@@ -255,6 +255,8 @@ Replace `${DD_ARCHIVES_BUCKET}` and $`{DD_ARCHIVES_REGION}` parameters based on 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+If you are using Remote Configuration, deploy the change to your pipeline in the UI. For manual configuration, download the updated configuration and restart the worker.
 
 See [Datadog Archives reference][9] for details on all configuration options.
 
