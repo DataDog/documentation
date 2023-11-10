@@ -62,13 +62,11 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
 
-## Calendar alignment 
+## Rollup with calendar alignment 
 
-You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries:
+![calendar_aligned_queries](https://github.com/DataDog/documentation/assets/5199201/2f571284-ded6-4053-90ea-e4e0b97c1756)
 
-Image to be added to this line, provided separately
-
-This feature allows you the flexibility to define:
+You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
 
 * Calendar aligned monthly queries with adjustable start date / timezones
 * Weekly rollups with adjustable start date / timezones
