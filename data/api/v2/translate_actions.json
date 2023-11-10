@@ -706,7 +706,7 @@
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
-    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
     "summary": "Update a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
