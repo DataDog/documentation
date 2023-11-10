@@ -30,12 +30,12 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Deployment
 
-1. Install the [Datadog Agent (version 7.44 or above)][4].
+1. Install the [Datadog Agent (version 7.46 or above)][4].
 2. Enable CSM for for your cloud resources and infrastructure:
     - **CSM Threats**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
     - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
     - **CSM Identity Risks**: Enable [AWS resource collection][26] and [Cloudtrail logs forwarding][27].
-    - **CSM Infrastructure Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
+    - **CSM Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].

@@ -67,8 +67,8 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 </table>
 
 **Notes**: 
+You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
 
-- You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
 For setup instructions, see [Cloud Security Management Identity Risks][5] and [Setting up Cloud Security Management Vulnerabilities][6].
 
 ## Prerequisites
