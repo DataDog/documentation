@@ -126,6 +126,10 @@
         toggleFilterForm (selectedFilterFormEl) {
             const filterTypeID = selectedFilterFormEl.closest('.filter-type').dataset.id
             this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
+        },
+        deleteOneSelection(filterType, selection) {
+            console.log(filterType, selection)
+            this.filterValue[filterType] = this.filterValue[filterType].filter(s => s !== selection)
         }
     }"
     x-init="updateWithURLParams()">
@@ -240,10 +244,25 @@
                                 {{/*  All  */}}
                                 {{/*  
                                     For each filter key, I need to 
-                                    determine what values are in it's respective this.filterValue
+                                    determine what values are in it's respective this.filterValue['{{$filter}}']
                                     for each item in the array, I need to render the int-logo and name for this div.selections    
                                 */}}
-                                {{ range seq 6 }}
+                                <template x-if="!filterValue['{{$filter}}'].length">
+                                    <span class="all fw-semibold">All</span>
+                                </template>
+                                <template x-for="(filter, idx) in filterValue['{{$filter}}']" :key="idx">  
+                                <div class="selection-container rounded d-flex align-items-center">
+                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "javascript" "variant" "avatar") }}
+                                    {{ if $int_logo }}
+                                    <img src="{{ $int_logo }}" height="14" alt="{{$int_logo}}"/>
+                                    {{ end }}
+                                    <span class="selection-name" x-text="filter"></span>
+                                    <div class="" @click.stop="deleteOneSelection('{{ $filter }}', filter )">
+                                        {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
+                                    </div>
+                                </div>
+                                </template>
+                                {{/*  {{ range seq 6 }}
                                 <div class="selection-container rounded d-flex align-items-center">
                                     {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "Docker" "variant" "avatar") }}
                                     {{ if $int_logo }}
@@ -252,7 +271,7 @@
                                     <span class="selection-name">Docker</span>
                                     {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
                                 </div>
-                                {{ end }}
+                                {{ end }}  */}}
                             </div>
                             <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
                                 {{ partial "icon" (dict "name" "cancel-circle" "title" "remove filters" ) }}
