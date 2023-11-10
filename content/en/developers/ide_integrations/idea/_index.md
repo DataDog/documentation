@@ -170,7 +170,7 @@ The **View in IntelliJ IDEA** feature provides a link from the Datadog platform 
 <div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
 
 ## Static Analysis
-The Datadog plugin will analyze your code by running a set of [Static Analysis][12] rules against your source files as you edit them. The goal is to detect and fix problems in your code before you even commit your changes. 
+The Datadog plugin runs a set of [Static Analysis][12] rules on your source files as you edit them.  The goal is to detect and fix problems in your code before you commit your changes.
 
 The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. For these file types, issues are shown directly in the source code editor via the JetBrains inspection system, and suggested fixes can be applied easily:
 
