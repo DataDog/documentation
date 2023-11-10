@@ -18,6 +18,7 @@ cascade:
 {{< whatsnext desc="This section includes the following topics:">}}
 {{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Discover how to use the Datadog UI: Dashboards, infrastructure list, maps, and more.{{< /nextlink >}}
 {{< nextlink href="/getting_started/site" >}}<u>Datadog Site</u>: Select the appropriate Datadog site for your region and security requirements.{{< /nextlink >}}
+{{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps Bundles</u>: Get started with the APM DevSecOps and Infrastructure DevSecOps bundles.{{< /nextlink >}}
 {{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Send metrics and events from your hosts to Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}

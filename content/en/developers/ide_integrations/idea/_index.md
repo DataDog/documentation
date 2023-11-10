@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for the IntelliJ Platform (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog plugin for the IntelliJ Platform is available for IDEA, GoLand, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -150,7 +150,7 @@ The active Profiling tab also affects the project tree view, which is annotated 
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java or Go source files. Look for the **View Logs** links following the log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java, Go, and Python source files. Look for the **View Logs** links following the log statements in your source code:
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
@@ -158,7 +158,7 @@ Clicking the link opens the **Log Explorer** with a query that matches the logge
 
 ## View in IDE
 
-The **View in IntelliJ IDEA** feature provides a link from the Datadog platform directly to your Java source files (not yet available for Go). Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
