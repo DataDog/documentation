@@ -127,11 +127,12 @@ const updateIndex = (indexName) => {
     // Only the full nightly build re-indexes all language pages in Algolia.
     // Master/preview pipelines will re-index only English pages automatically.
     // This is done to improve performance as Docs continues scaling.
-    // if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
-    //     localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
-    // } else {
-    //     localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
-    // }
+    if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
+        localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
+        console.log(localAlgoliaSearchIndex)
+    } else {
+        localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
+    }
 
     const cb = (error, result) => {
         if (error) {
@@ -142,7 +143,7 @@ const updateIndex = (indexName) => {
         console.log(result);
     };
 
-    atomicalgolia(indexName, fullLocalAlogliaSearchIndex, { verbose: true }, cb);
+    atomicalgolia(indexName, fullLocalAlogliaSearchIndex, '', cb);
 };
 
 const sync = () => {
@@ -158,16 +159,16 @@ const sync = () => {
     const client = algoliasearch(appId, adminKey);
     const index = client.initIndex(indexName);
 
-    updateSettings(index)
-        .then(() => {
-            console.log(`${indexName} settings update complete`);
-            updateReplicas(client, indexName);
-        })
-        .catch((err) => console.error(err));
+    // updateSettings(index)
+    //     .then(() => {
+    //         console.log(`${indexName} settings update complete`);
+    //         updateReplicas(client, indexName);
+    //     })
+    //     .catch((err) => console.error(err));
 
-    updateSynonyms(index)
-        .then(() => console.log(`${indexName} synonyms update complete`))
-        .catch((err) => console.error(err));
+    // updateSynonyms(index)
+    //     .then(() => console.log(`${indexName} synonyms update complete`))
+    //     .catch((err) => console.error(err));
 
     updateIndex(indexName);
 };
