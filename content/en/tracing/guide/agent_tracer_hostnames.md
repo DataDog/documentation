@@ -29,13 +29,13 @@ When the Agent is deployed on a remote host, the Agent host is different from th
 
  Language | Config | Environment Variable
 ----------|--------|---------------------
-Ruby | `tracing.report_hostname` | DD_TRACE_REPORT_HOSTNAME
-C++ | `dd.trace.report-hostname` | DD_TRACE_REPORT_HOSTNAME
-Node.js | `reportHostname` | DD_TRACE_REPORT_HOSTNAME
-Go | - | DD_TRACE_REPORT_HOSTNAME
-Python | - | DD_TRACE_REPORT_HOSTNAME
-PHP | `datadog.trace.report_hostname` | DD_TRACE_REPORT_HOSTNAME
-Java |  `dd.trace.report-hostname` | DD_TRACE_REPORT_HOSTNAME
+Ruby | `tracing.report_hostname` | `DD_TRACE_REPORT_HOSTNAME`
+C++ | `dd.trace.report-hostname` | `DD_TRACE_REPORT_HOSTNAME`
+Node.js | `reportHostname` | `DD_TRACE_REPORT_HOSTNAME`
+Go | - | `DD_TRACE_REPORT_HOSTNAME`
+Python | - | `DD_TRACE_REPORT_HOSTNAME`
+PHP | `datadog.trace.report_hostname` | `DD_TRACE_REPORT_HOSTNAME`
+Java |  `dd.trace.report-hostname` | `DD_TRACE_REPORT_HOSTNAME`
 
 ### When does APM use host information? 
 
