@@ -42,7 +42,7 @@ This document walks you through the quickstart installation steps and then provi
   Remote configuration for Observability Pipelines is in private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> or your Customer Success Manager for access.
 </div>
 
-If you are enrolled in the private beta of [Remote Configuration][9], you can remotely roll out changes to your Workers from the Datadog UI, rather than make updates to your pipeline configuration in a text editor and then manually rolling out your changes. Choose your deployment method when you create a pipeline and install your Workers.
+If you are enrolled in the private beta of [Remote Configuration][8], you can remotely roll out changes to your Workers from the Datadog UI, rather than make updates to your pipeline configuration in a text editor and then manually rolling out your changes. Choose your deployment method when you create a pipeline and install your Workers.
 
 See [Updating deployment modes](#updating-deployment-modes) on how to change the deployment mode after a pipeline is deployed.
 
@@ -486,8 +486,6 @@ EOT
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Working with Data][6] for more information on transforming your data.
-
 ## Updating deployment modes
 
 After deploying a pipeline, you can switch deployment methods, such as going from a manually managed pipeline to a remote configuration enabled pipeline or vice versa. 
@@ -514,8 +512,8 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 For recommendations on deploying and scaling multiple Workers:
 
-- See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
-- See [Best Practices for OP Worker Aggregator Architecture][8].
+- See [Deployment Design and Principles][6] for information on what to consider when designing your Observability Pipelines architecture.
+- See [Best Practices for OP Worker Aggregator Architecture][7].
 
 ## Further reading
 
@@ -526,7 +524,6 @@ For recommendations on deploying and scaling multiple Workers:
 [3]: /observability_pipelines/setup/splunk/
 [4]: https://app.datadoghq.com/observability-pipelines
 [5]: /account_management/api-app-keys/#api-keys
-[6]: /observability_pipelines/working_with_data/
-[7]: /observability_pipelines/production_deployment_overview/
-[8]: /observability_pipelines/architecture/
-[9]: /agent/remote_config
+[6]: /observability_pipelines/production_deployment_overview/
+[7]: /observability_pipelines/architecture/
+[8]: /agent/remote_config
