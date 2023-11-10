@@ -138,7 +138,9 @@ Verify that metrics, traces, and logs are correctly reported in the app.
 For metrics, run the connectivity diagnostic command and verify that all checks pass:
 
 ```shell
-sudo -u dd-agent datadog-agent diagnose datadog-connectivity
+sudo -u dd-agent datadog-agent diagnose --include connectivity-datadog-core-endpoints
+# For Agent version < 7.48, run the following command:
+# sudo -u dd-agent datadog-agent diagnose datadog-connectivity
 ```
 
 If you don't see metrics, traces, or logs reported in the app, see the [Troubleshooting](#troubleshooting-a-bare-metal-or-vm-installation) section.
@@ -255,7 +257,9 @@ In the following example, the Datadog Agent FIPS Proxy is unable to bind a socke
 To check for network issues, check the logs at `/var/log/datadog/agent.log`, or run:
 
 ```shell
-datadog-agent diagnose datadog-connectivity
+datadog-agent diagnose --include connectivity-datadog-core-endpoints
+# For Agent version < 7.48, run the following command:
+# datadog-agent diagnose datadog-connectivity
 ```
 
 Look for errors such as:
