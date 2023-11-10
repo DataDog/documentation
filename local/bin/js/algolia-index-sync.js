@@ -129,7 +129,7 @@ const updateIndex = (indexName) => {
     // This is done to improve performance as Docs continues scaling.
     if (process.env.CI_PIPELINE_SOURCE.toLowerCase() !== 'schedule') {
         localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex.filter(record => record.language === "en")
-        console.log(localAlgoliaSearchIndex)
+        console.log(`EN only length: ${localAlgoliaSearchIndex.length}`)
     } else {
         localAlgoliaSearchIndex = fullLocalAlogliaSearchIndex
     }
