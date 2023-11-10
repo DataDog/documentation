@@ -98,4 +98,4 @@ Creating a new user with SCIM will trigger an email to the user. For first time 
 [3]: /account_management/org_settings/service_accounts
 [4]: /account_management/api-app-keys
 [5]: /account_management/scim/#email-verification
-[6]: /organization-settings/users
+[6]: https://app.datadoghq.com/organization-settings/users
