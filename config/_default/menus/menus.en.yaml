@@ -45,16 +45,21 @@ main:
     url: getting_started/site/
     parent: getting_started
     weight: 2
+  - name: DevSecOps
+    identifier: getting_started_devsecops
+    url: getting_started/devsecops
+    parent: getting_started
+    weight: 4
   - name: Agent
     identifier: getting_started_agent
     url: getting_started/agent/
     parent: getting_started
-    weight: 3
+    weight: 6
   - name: Containers
     identifier: getting_started_containers
     url: getting_started/containers/
     parent: getting_started
-    weight: 4
+    weight: 8
   - name: Autodiscovery
     identifier: getting_started_containers_autodiscovery
     url: getting_started/containers/autodiscovery
