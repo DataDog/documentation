@@ -62,9 +62,9 @@ Follow the below instructions to install the Worker and deploy a sample pipeline
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
-If you have Remote Configuration enabled, follow the steps in [Install the Worker using Remote Configuration](#install-the-worker-using-remote-configuration). Otherwise, follow the steps in [Install the Worker using manual configuration](#install-the-worker-using-manual-configuration).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-docker). Otherwise, follow the steps in [manual configuration](#manual-configuration-docker).
 
-### Install the Worker using Remote Configuration
+### Remote Configuration (Docker)
 
 Run the following command to start the Observability Pipelines Worker with Docker:
     
@@ -81,7 +81,7 @@ Run the following command to start the Observability Pipelines Worker with Docke
   
   Any ports that your configuration uses must also be manually specified. Use `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
 
-### Install the Worker using manual configuration
+### Manual configuration (Docker)
 
 1. Download the [sample pipeline configuration file][2]. This configuration emits demo data, parses and structures the data, and then sends them to the console and Datadog. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
 
