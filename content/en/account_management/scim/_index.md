@@ -11,7 +11,7 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 
 ### Supported capabilities
 
-- Create users in Datadog (Email verification is required for first login, see (email verification)[#5])
+- Create users in Datadog (Email verification is required for first login, see [email verification][5])
 - Remove users in Datadog when they no longer require access
 - Keep user attributes synchronized between Azure AD and Datadog
 - Single sign-on to Datadog (recommended)
@@ -91,7 +91,7 @@ To avoid losing access to your data, Datadog strongly recommends that you create
 
 ## Email verification
 
-Creating a new user with SCIM will trigger an email to the user. For first time accessm it is a required that the user logs in using the invite link shared by email. The link is active for 30days, if it expires, you can go to the (user settings page)[6] and select a user to resend an invite link.
+Creating a new user with SCIM will trigger an email to the user. For first time accessm it is a required that the user logs in using the invite link shared by email. The link stays active for 30 days, if it expires, you can go to the [user settings page][6] and select a user to resend an invite link.
 
 [1]: /account_management/scim/#using-a-service-account-with-scim
 [2]: https://app.datadoghq.com/organization-settings/application-keys
