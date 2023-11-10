@@ -37,7 +37,7 @@ if (window.DD_RUM) {
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
             allowedTracingOrigins: [window.location.origin],
-            internalAnalyticsSubdomain: 'iam-rum-intake'
+            internalAnalyticsSubdomain: process.env.IA_SUBDOMAIN
         });
 
         window.DD_RUM.startSessionReplayRecording();
