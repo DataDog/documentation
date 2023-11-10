@@ -515,6 +515,30 @@
     "request_description": "",
     "request_schema_description": "Payload schema for Fastly service requests."
   },
+  "ListOktaAccounts": {
+    "description": "List Okta accounts.",
+    "summary": "Okta Public - List accounts"
+  },
+  "CreateOktaAccount": {
+    "description": "Create an Okta account.",
+    "summary": "Okta Public - Add account",
+    "request_description": "",
+    "request_schema_description": "Request object for an Okta account."
+  },
+  "DeleteOktaAccount": {
+    "description": "Delete an Okta account.",
+    "summary": "Okta Public - Delete account"
+  },
+  "GetOktaAccount": {
+    "description": "Get an Okta account.",
+    "summary": "Okta Public - Get account"
+  },
+  "UpdateOktaAccount": {
+    "description": "Update an Okta account.",
+    "summary": "Okta Public - Update account",
+    "request_description": "",
+    "request_schema_description": "Request object for an Okta account."
+  },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
     "summary": "Get IP Allowlist"
