@@ -38,82 +38,34 @@ You can generate both of these in [Observability Pipelines][3].
 {{% tab "Docker" %}}
 Ensure that your machine is configured to run Docker.
 
-The sample configuration you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, set up an IAM policy that allows the Workers to write to S3.
+#### Set up an IAM policy to allows Workers to write to S3
 
-* Go into your AWS console and create an S3 bucket to send your archives to.
+{{% op-datadog-archives-s3-setup %}}
 
-  * Do not make your bucket publicly readable.
-  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+3. Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
 
-* Create a policy with the following permissions:
-
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "DatadogUploadLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:PutObject"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        ]
-      },
-      {
-        "Sid": "DatadogListLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:ListBucket"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME>"
-        ]
-      }
-    ]
-  }
-  ```
-
-* Edit the bucket name in the policy above to match your configuration.
-
-* Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
 
 [1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
+
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-The sample EKS configuration that you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, set up an IAM policy that allows the Workers to write to S3.
 
-* Go into your AWS console and create an S3 bucket to send your archives to.
+#### Set up an IAM policy to allows Workers to write to S3
 
-  * Do not make your bucket publicly readable.
-  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+{{% op-datadog-archives-s3-setup %}}
 
-* Create a policy with the following permissions:
+3. [Create a service account][2] to use the policy you created above. Replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` in the Helm config with the service account name.
 
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "DatadogUploadLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:PutObject"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        ]
-      },
-      {
-        "Sid": "DatadogListLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:ListBucket"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME>"
-        ]
-      }
-    ]
-  }
-  ```
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
 
-* Edit the bucket name in the policy above to match your configuration.
+[1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
 
-* [Create a service account][2] to use the policy you created above. Replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` in the Helm config with the service account name.
+#### Kubernetes node requirements
 
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
@@ -149,129 +101,54 @@ See [Best Practices for OPW Aggregator Architecture][6] for production-level req
 
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
-The sample configuration that you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, set up an IAM policy that allows the Workers to write to S3.
 
-* Go into your AWS console and create an S3 bucket to send your archives to.
+#### Set up an IAM policy to allows Workers to write to S3
 
-  * Do not make your bucket publicly readable.
-  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+{{% op-datadog-archives-s3-setup %}}
 
-* Create a policy with the following permissions:
+3. Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
 
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "DatadogUploadLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:PutObject"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        ]
-      },
-      {
-        "Sid": "DatadogListLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:ListBucket"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME>"
-        ]
-      }
-    ]
-  }
-  ```
-
-* Edit the bucket name in the policy above to match your configuration.
-
-* Create an IAM user and attach the above policy to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY`.
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
 
 [1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
+
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
-The sample configuration that you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, set up an IAM policy that allows the Workers to write to S3.
+#### Set up an IAM policy to allows Workers to write to S3
 
-* Go into your AWS console and create an S3 bucket to send your archives to.
-
-  * Do not make your bucket publicly readable.
-  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-* Create a policy with the following permissions:
-
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "DatadogUploadLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:PutObject"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        ]
-      },
-      {
-        "Sid": "DatadogListLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:ListBucket"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME>"
-        ]
-      }
-    ]
-  }
-  ```
-
-* Edit the bucket name in the policy above to match your configuration.
+{{% op-datadog-archives-s3-setup %}}
 
 * Create an IAM user and attach the policy above to it. Create access credentials for the IAM user. Save these credentials as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
 
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+
 [1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
+
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-The sample Terraform configuration that you download later includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, set up an IAM policy that allows the Workers to write to S3.
+#### Set up an IAM policy to allows Workers to write to S3
 
-* Go into your AWS console and create an S3 bucket to send your archives to.
+{{% op-datadog-archives-s3-setup %}}
+3. Attach the policy to the IAM Instance Profile that is created with Terraform, which you can find under the `iam-role-name` output.
 
-  * Do not make your bucket publicly readable.
-  * For US1, US3, and US5 sites, see [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
 
-* Create a policy with the following permissions:
+[1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
 
-  ```json
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "DatadogUploadLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:PutObject"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
-        ]
-      },
-      {
-        "Sid": "DatadogListLogArchives",
-        "Effect": "Allow",
-        "Action": ["s3:ListBucket"],
-        "Resource": [
-          "arn:aws:s3:::<MY_BUCKET_NAME>"
-        ]
-      }
-    ]
-  }
-  ```
+#### AWS account access requirements
 
-* Edit the bucket name in the policy above to match your configuration.
+To run the Worker in your AWS account, you need administrative access to that account and the following information:
 
-* Attach the policy to the IAM Instance Profile that is created with Terraform, which you can find under the `iam-role-name` output.
-
-In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
 * The VPC ID your instances will run in.
 * The subnet IDs your instances will run in.
 * The AWS region your VPC is located in.
 
-[1]: https://aws.amazon.com/s3/pricing/
 {{% /tab %}}
 {{< /tabs >}}
 
