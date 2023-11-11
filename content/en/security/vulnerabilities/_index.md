@@ -1,6 +1,8 @@
 ---
 title: Cloud Security Management Vulnerabilities
 kind: documentation
+aliases:
+    - /security/infrastructure_vulnerabilities
 further_reading:
 - link: "/security/cloud_security_management/setup"
   tag: "Documentation"
@@ -16,56 +18,40 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep observability context and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. Details are shown on the CSM [Vulnerability Explorer][1] identifying the context-based severity, affected containers and hosts, and remediation instructions to solve the most impacted infrastructure.
+Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep observability context and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
 
 **Note**: If you're looking for vulnerability management for your application libraries and custom application code, see [Application Vulnerability Management][5].
 
 ## Explore vulnerabilities
-The CSM Vulnerability Explorer shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, and offering grouping and filtering capabilities so you can investigate and prioritize problems. 
+The [Vulnerability Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
 (update screen shot when beta tags are removed)
 
 {{< img src="security/vulnerabilities/CSM_Vulnerabilities.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
 
-## Manage container vulnerabilities
-
-View your container images on the [container images][2] page. 
-Observe the number of vulnerabilities that exist in the container images (column name **vulnerabilities**). Additionally, sort by **source**, **image tag**, **repo digest**, and more.
+You can also view container images on the [container images][2] page. Observe the number of vulnerabilities that exist in the container images (column name **vulnerabilities**). Additionally, sort by **source**, **image tag**, **repo digest**, and more.
 
 {{< img src="security/vulnerabilities/container_images_tab.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab.
-
-Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps. On the details explorer, you can also view impacted resources in CSM to gain better insights to your overall risk.
+Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps. Click **See Impacted Resources in CSM** to view the resources that are impacted by the vulnerability.
 
 {{< img src="security/vulnerabilities/container_vulnerability_2.png" alt="Container Images overview page highlighting the vulnerabilities tab" width="100%">}}
 
-Within CSM, the severity of a vulnerability is modified from the base score to take into account the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.
+The severity of a vulnerability is modified from the base score to take into account the following:
 
-The Datadog Adjusted Vulnerability Score includes the full context of each impacted container or host:
+- If the underlying infrastructure is running and how wide-spread the impact is.
+- The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
+- Known active exploits for a given vulnerability from sources such as [CISA KEV catalog][9].
 
-- The original vulnerability severity
-- Environment the infrastructure is running in
-- Known public exploit
+The vulnerabilities also include a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 
-## Review and remediate
 
-View a consolidated list of vulnerabilities on the [Vulnerabilities][1] page in [Cloud Security Management][3]. Prioritize them for remediation using available facets, such as context-based **severity**, **resource type**, and **library**.</br>
-
-The vulnerabilities explorer also offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, and assign it to a team for further review. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
-
-**Note**: CSM vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediation to the vulnerability.
-
-{{< img src="security/vulnerabilities/CSM_vulnerabilities_assign_team.png" alt="CSM vulnerabilities explorer page highlighting the assign a team option" width="100%">}}
-
-[1]: https://app.datadoghq.com/security/infra-vulnerability
+[1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
 [5]: /security/application_security/vulnerability_management/
-[6]: https://app.datadoghq.com/security/issues
-[7]: /security/misconfigurations/
-[8]: /security/identity_risks/
+[9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 
 ## Further reading
 

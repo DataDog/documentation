@@ -45,6 +45,8 @@ further_reading:
 
 Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
 
+You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
+
 CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. Each package includes access to a specific set of features, as shown in the following table:
 
 <table>
@@ -65,11 +67,6 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
         <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
     </tr>
 </table>
-
-**Notes**: 
-You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
-
-For setup instructions, see [Cloud Security Management Identity Risks][5] and [Setting up Cloud Security Management Vulnerabilities][6].
 
 ## Prerequisites
 
@@ -155,4 +152,4 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 [3]: /security/cloud_security_management/setup/csm_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/identity_risks/#setup
-[6]: /security/cloud_security_management/setup
+
