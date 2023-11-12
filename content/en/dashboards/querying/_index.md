@@ -186,7 +186,7 @@ max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zo
 Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and logs with warning statuses.
 
 ```text
-min(status:error, status:warning)
+min(status:warn, status:error)
 ```
 
 {{< img src="dashboards/querying/minmax-different-products.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
