@@ -189,7 +189,7 @@ Additionally, you can also calculate the maximum (or minimum) between two querie
 min(status:warn, status:error)
 ```
 
-{{< img src="dashboards/querying/minmax-different-products.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_8.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
 ### Create an alias
 
