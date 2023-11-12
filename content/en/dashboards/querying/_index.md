@@ -183,6 +183,8 @@ max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zo
 
 {{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
 
+Additionally, you can also calculate the maximum (or minimum) between two queries on different products. 
+
 ### Create an alias
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
