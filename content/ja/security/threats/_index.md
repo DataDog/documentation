@@ -47,7 +47,7 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 
 ## セキュリティシグナルの調査と修復
 
-[セキュリティシグナルエクスプローラー][8]で、セキュリティシグナルを調査し、トリアージします。影響を受けたファイルやプロセス、関連するシグナルやログ、改善手順に関する詳細情報を表示します。
+[Threats Explorer][8] で、セキュリティシグナルを調査し、トリアージします。影響を受けたファイルやプロセス、関連するシグナルやログ、改善手順に関する詳細情報を表示します。
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats ページ" width="100%">}}
 
@@ -68,6 +68,6 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 [5]: /ja/security/notifications/#detection-rule-notifications
 [6]: /ja/security/threats/agent_expressions
 [7]: /ja/security/threats/setup
-[8]: /ja/security/explorer
+[8]: /ja/security/threats/security_signals
 [9]: /ja/network_monitoring/performance/
 [10]: /ja/security/threats/security_profiles
