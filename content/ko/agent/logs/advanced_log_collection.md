@@ -9,7 +9,7 @@ further_reading:
   text: 로그 처리 방법 알아보기
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 파싱에 대해 알아보기
 - link: /logs/live_tail/
   tag: 설명서
   text: Datadog 라이브 테일 기능
@@ -45,7 +45,7 @@ Datadog 에이전트에서 수집한 모든 로그에 처리 규칙을 적용하
 
 로그의 특정 하위 집합만 Datadog으로 보내려면 설정 파일의 `log_processing_rules` 파라미터를 **exclude_at_match** 또는 **include_at_match** `type`과 함께 사용합니다.
 
-### 매치에서 제외
+### 매치 시 제외
 
 | 파라미터          | 설명                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
@@ -70,7 +70,7 @@ logs:
 ```
 
 {{% /tab %}}
-{{% tab "도커(Docker)" %}}
+{{% tab "Docker" %}}
 
 Docker 환경의 경우 **필터링할 로그를 보내는 컨테이너**에서 라벨 `com.datadoghq.ad.logs`을 사용하여 `log_processing_rules`을 지정합니다. 예를 들어:
 
