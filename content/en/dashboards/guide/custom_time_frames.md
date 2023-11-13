@@ -4,6 +4,7 @@ kind: guide
 ---
 
 ## Overview
+
 <div class="alert alert-info">Queries are run in UTC time, but the query time range is selected according to your <strong>browser</strong>. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the <a href="/dashboards/#display-utc-time">Dashboard Settings documentation</a>.</div>
 
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
@@ -11,10 +12,6 @@ Many views in Datadog can be scoped to a specific time frame. Time controls incl
 To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys:
 
 {{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" alt="Increment time with arrow keys" video="true" width="500" >}}
-
-You can also type or paste custom dates and timestamps—including ones copied from elsewhere in Datadog:
-
-{{< img src="dashboards/guide/custom_time_frames/copy_and_paste.mp4" alt="Copy and paste time frame" video="true" >}}
 
 ## Supported syntaxes
 
