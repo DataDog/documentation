@@ -15,12 +15,12 @@ further_reading:
   text: 애플리케이션 성능 모니터링 소개
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
   tag: 블로그
-  text: Datadog의 지속적 프로파일러를 사용해 Akka 애플리케이션을 최적화하는 방법
+  text: Datadog의 연속 프로파일러를 사용해 Akka 애플리케이션을 최적화하는 방법
 - link: https://www.datadoghq.com/blog/request-latency-profiling/
   tag: 블로그
   text: 프로파일링을 통한 요청 지연 시간 이해
 kind: 설명서
-title: 연속적인 프로파일러 시작하기
+title: 연속 프로파일러 시작하기
 ---
 
 프로파일링을 사용하면 서비스를 더 빠르고 저렴하게 안정적으로 제공할 수 있지만, 이전에 사용해 본 적이 없다면 혼동이 올 수 있습니다.
