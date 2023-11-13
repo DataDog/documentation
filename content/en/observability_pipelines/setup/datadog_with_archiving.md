@@ -95,7 +95,9 @@ To run the Worker in your AWS account, you need administrative access to that ac
 
 ## Set up Log Archives
 
-The sample configuration you download later, when you [install the Observability Pipelines Worker](#install-the-observability-pipelines-worker), includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, create an S3 bucket for your archives and set up an IAM policy that allows the Workers to write to the S3 bucket. 
+The sample configuration you download later, when you [install the Observability Pipelines Worker](#install-the-observability-pipelines-worker), includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, create an S3 bucket for your archives and set up an IAM policy that allows the Workers to write to the S3 bucket. Then, connect the S3 bucket to Datadog Log Archives.
+
+### Create an S3 bucket and set up an IAM policy
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -142,6 +144,24 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
 
 [1]: https://aws.amazon.com/s3/pricing/
 {{% /site-region %}}
+
+### Connect the S3 bucket to Datadog Log Archives
+
+You need to connect the S3 bucket you created earlier to Datadog Log Archives so that you can rehydrate the archives later on.
+
+1. Navigate to Datadog [Log Forwarding][5].
+1. Click **Add a new archive**.
+1. Enter a descriptive archive name.
+1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. Select **AWS S3**.
+1. Select the AWS Account that your bucket is in.
+1. Enter the name of the S3 bucket.
+1. Optionally, enter a path.
+1. Check the confirmation statement.
+1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][6] for more information.
+1. Click **Save**.
+
+See the [Log Archives documentation][7] for additional information.
 
 ## Install the Observability Pipelines Worker
 
@@ -493,10 +513,17 @@ For Terraform installs, the `lb-dns` output provides the necessary value.
 
 At this point, your observability data should be going to the Worker and then sent along to your S3 archive.
 
+## Rehydrate your archives
+
+See [Rehydrating from Archives][4] for instructions on how to rehydrate your archive in Datadog so that you can start analyzing and investigating those logs.
+
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/observability-pipelines/create
+[4]: /logs/log_configuration/rehydrating/
+[5]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[6]: /logs/log_configuration/archives/#advanced-settings
+[7]: /logs/log_configuration/archives
