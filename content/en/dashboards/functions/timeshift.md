@@ -72,7 +72,7 @@ Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value s
 
 The calendar shift allows you to compare the same metric across equivalent timeframes. For example, using the calendar shift function on March 15 for a month ago gives the metric value on February 15. Here is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from a month ago compared to the current value.
 
-{{< img src="dashboards/functions/timeshift/calendar_shift_example.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from a month ago and the present" style="width:100%;" >}}
+{{< img src="dashboards/functions/timeshift/calendar_shift_example.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from a month ago and the present" style="width:80%;" >}}
 
 ## Other functions
 
