@@ -5,8 +5,6 @@ kind: documentation
 
 See the following instructions to synchronize your Datadog users with Azure Active Directory using SCIM.
 
-For prerequisites, capabilities, and limitations, see [SCIM][1].
-
 ## Add Datadog to the Azure AD application gallery
 
 1. In your Azure portal, go to **Azure Active Directory** -> **Enterprise Applications**
