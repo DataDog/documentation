@@ -18,7 +18,7 @@ Compared to the regular [Helm installation][4], there are certain differences wh
 * During Operator installation, images must be pulled only from the EKS repository. This can't be changed by the user.
 * Operator Helm Chart values, which can be overriden, are restricted to a [schema file][3].
 
-These restriction are necessary to make Operator compliant with the EKS add-on policies, allow EKS to ensure the safety of the installation, and disable features not yet supported in add-on environment.
+These restriction are necessary to make Operator compliant with the EKS add-on policies, allow EKS to ensure the safety of the installation, and disable features not yet supported in the add-on environment.
 
 ## Prerequisites
 
