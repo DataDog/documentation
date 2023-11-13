@@ -5,7 +5,7 @@ kind: guide
 
 ## Overview
 
-<div class="alert alert-info">Queries are run in UTC time, but the query time range is selected according to your <strong>browser</strong>. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the <a href="/dashboards/#display-utc-time">Dashboard Settings documentation</a>.</div>
+<div class="alert alert-info">Queries are run in UTC time, but the query time frame is selected according to your <strong>browser's time zone</strong>. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the <a href="/dashboards/#display-utc-time">Dashboard Settings documentation</a>.</div>
 
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
 
@@ -39,7 +39,7 @@ Any fixed date can be entered as part of a range. For example:
 
 ### Relative dates
 
-Relative dates **do not** update as time passes, they are calculated when entered.
+Relative dates **do not** update over time; they are calculated when entered.
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
 
@@ -62,7 +62,7 @@ The following strings are accepted for any `{unit}` in a relative date:
 
 ### Calendar aligned dates
 
-Calendar aligned dates update to reflect the current present day. For example, if you select `week to date` on November 2, on November 9, it displays data from November 1 - November 9.
+Calendar aligned dates update to reflect the current day. For example, if you select `week to date` on November 2, on November 9, it displays data from November 1 - November 9.
 
 | Format         | Examples                                                                         | Notes                                                     |
 |----------------|----------------------------------------------------------------------------------|-----------------------------------------------------------|
