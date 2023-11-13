@@ -1,6 +1,10 @@
 ---
 title: User Provisioning with SCIM
 kind: documentation
+further_reading:
+    - link: '/account_management/scim/azure/'
+      tag: 'Documentation'
+      text: 'Configure SCIM with Azure Active Directory'
 algolia:
   tags: ["scim", "identity provider", "IdP"]
 ---
@@ -39,6 +43,10 @@ To avoid losing access to your data, Datadog strongly recommends that you create
 ## Email verification
 
 Creating a new user with SCIM triggers an email to the user. For first time access, you are required to login through the the invite link shared by email. The link is active for 30 days. If it expires, go to the [user settings page][5] and select a user to resend an invite link.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/scim/#email-verification
 [2]: /account_management/scim/#using-a-service-account-with-scim
