@@ -107,7 +107,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
    ```
 
 
-## Uninstalling Operator
+## Uninstall the Operator
 
 If you want to uninstall the Agent and Operator, first delete the `DatadogAgent` custom resource:
 
