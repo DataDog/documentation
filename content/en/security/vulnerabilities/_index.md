@@ -4,9 +4,12 @@ kind: documentation
 aliases:
     - /security/infrastructure_vulnerabilities
 further_reading:
-- link: "/security/cloud_security_management/setup"
+- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities"
   tag: "Documentation"
-  text: "Setting up CSM Vulnerabilities"
+  text: "Setting up container vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#configure-csm-for-vulnerabilities"
+  tag: "Documentation"
+  text: "Setting up host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
   tag: "Blog"
   text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
@@ -29,21 +32,33 @@ The [Vulnerability Explorer][1] shows a complete list of vulnerabilities detecte
 
 {{< img src="security/vulnerabilities/CSM_Vulnerabilities.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
 
-You can also view container images on the [container images][2] page. Observe the number of vulnerabilities that exist in the container images (column name **vulnerabilities**). Additionally, sort by **source**, **image tag**, **repo digest**, and more.
-
-{{< img src="security/vulnerabilities/container_images_tab.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
-
-Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps. Click **See Impacted Resources in CSM** to view the resources that are impacted by the vulnerability.
-
-{{< img src="security/vulnerabilities/container_vulnerability_2.png" alt="Container Images overview page highlighting the vulnerabilities tab" width="100%">}}
-
+Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps.
 The severity of a vulnerability is modified from the base score to take into account the following:
 
 - If the underlying infrastructure is running and how wide-spread the impact is.
 - The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
 - Known active exploits for a given vulnerability from sources such as [CISA KEV catalog][9].
 
-The vulnerabilities also include a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+On the details explorer, you can also click **See Impacted Resources in CSM** to gain better insights into your overall risk.
+
+{{< img src="security/vulnerabilities/container_vulnerability_2.png" alt="Details of a specific vulnerability, highlighting next steps and severity breakdown" width="100%">}}
+
+## Manage container vulnerabilities
+
+(update screen shot when beta tags are removed)
+
+The [container images][2] page shows a complete list of container-based vulnerabilities, allowing you to order them by vulnerability **status**, and sort by **source**, **image tag**, **repo digest**, and more. You can also view additional details about any container-based vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab. 
+
+{{< img src="security/vulnerabilities/container_images_tab.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
+
+## Triage and remediate
+
+While on the [Vulnerability Explorer][1], you can change the status of a vulnerability, assign it to a team for further review, and view links and information sources to understand the context behind each vulnerability.
+
+(Also needs new screenshot)
+{{< img src="security/vulnerabilities/CSM_vulnerabilities_assign_team.png" alt="Details explorer of a specific vulnerability highlighting the ability to assign a team member" width="100%">}}
+
+**Note**: CSM vulnerabilities are auto-closed when the infrastructure is either no longer running, or contains the remediated fix to the previously-vulnerable package(s).
 
 
 [1]: https://app.datadoghq.com/security/csm/vm
