@@ -52,8 +52,6 @@ before_script:
   - export SLACK_URL=$(get_secret 'slack_url')
   - export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
   - export IA_SUBDOMAIN=$(in-isolation get_ia_subdomain)
-  - echo "Subdomain value is ..."
-  - echo $IA_SUBDOMAIN
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
   - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
   - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
