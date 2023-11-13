@@ -4,7 +4,7 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: 블로그
-  text: '모니터링의 기초: 중요한 경고만 받기'
+  text: '모니터링 101: 중요한 사항에 대한 알림'
 - link: https://learn.datadoghq.com/courses/introduction-to-observability
   tag: 학습 센터
   text: 통합가시성 소개
@@ -18,7 +18,7 @@ further_reading:
   tag: 기반 활성화
   text: 효과적인 모니터 생성을 위해 대화형 세션에 참여하세요.
 kind: 설명서
-title: 모니터링 시작하기
+title: 모니터 시작하기
 ---
 
 ## 개요
