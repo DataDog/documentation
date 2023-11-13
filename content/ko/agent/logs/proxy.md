@@ -2,10 +2,10 @@
 further_reading:
 - link: /logs/
   tag: 설명서
-  text: Collect your logs
+  text: \u0008로그를 수집하세요
 - link: /infrastructure/process/
   tag: 설명서
-  text: Collect your processes
+  text: 프로세스를 수집하세요
 - link: /tracing/
   tag: 설명서
   text: Collect your traces
@@ -41,7 +41,7 @@ logs_config:
 * 그런 다음 `<PROXY_PORT>`에서 수신 대기하고 수신한 로그를 전달하도록 프록시를 설정합니다. {{< region-param key="dd_site" code="true" >}}에 대해 {{< region-param key="tcp_endpoint_port" code="true" >}} 포트에서 {{< region-param key="tcp_endpoint" code="true" >}}를 사용하고 SSL 암호화를 활성화합니다.
 
 * 다음 명령을 사용하여 SSL 암호화를 위한 TLS 암호화용 `CA certificates`를 다운로드합니다:
-  - `sudo apt-get install ca-certificates` (데비안(Debian), 우분투(Ubuntu))
+  - `sudo apt-get install ca-certificates` (Debian, Ubuntu)
   - `yum install ca-certificates` (CentOS, Redhat)
 
   그리고 `/etc/ssl/certs/ca-certificates.crt` (Debian, Ubuntu) 또는 `/etc/ssl/certs/ca-bundle.crt` (CentOS, Redhat)에 위치한 인증서 파일을 사용합니다.
@@ -73,9 +73,9 @@ logs_config:
 
 `agent ---> haproxy ---> Datadog`
 
- Agent와 HAProxy 사이에는 암호화가 비활성화되어 있으며, 데이터를 Datadog으로 전송하기 전에 암호화하도록 구성됩니다.
+Agent와 HAProxy 사이에는 암호화가 비활성화되어 있으며, 데이터를 Datadog으로 전송하기 전에 암호화하도록 구성됩니다.
 
-#### 에이전트 설정
+#### Agent 설정
 
 `datadog.yaml` Agent 설정 파일을 편집하고 `logs_no_ssl`를 `true`로 설정합니다. 이는 HAProxy가 트래픽을 전달하지 않으며, Datadog 백엔드가 아니므로 동일한 인증서를 사용할 수 없기 때문입니다.
 
@@ -100,7 +100,7 @@ global
     log 127.0.0.1 local0
     maxconn 4096
     stats socket /tmp/haproxy
-# 몇 가지 정상적인 기본값
+# 몇 가지 정상 기본값
 defaults
     log     global
     option  dontlognull
@@ -117,9 +117,9 @@ listen stats
     mode http
     stats enable
     stats uri /
-# 이 섹션은 DNS 레코드를 다시 로드하는 섹션입니다.
+# 이 섹션에서 DNS 레코드를 다시 로드합니다.
 # <DNS_SERVER_IP>과<DNS_SECONDARY_SERVER_IP>를 DNS 서버 IP 주소로 교체하세요.
-# HAProxy 1.8 이상
+# HAProxy 1.8 이상인 경우
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
     nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
@@ -137,8 +137,8 @@ frontend logs_frontend
     option tcplog
     default_backend datadog-logs
 # Datadog 서버입니다. 실제로 위에 정의된 포워더 프런트엔드로 들어오는 
-# 모든 TCP 요청은 프록시됩니다.
-# Datadog의 퍼블릭 엔드포인트
+# 모든 TCP 요청은 
+# Datadog의 퍼블릭 엔드포인트로 프록시됩니다.
 backend datadog-logs
     balance roundrobin
     mode tcp
@@ -275,7 +275,7 @@ events {
 # Datadog Agent에 대한 TCP Proxy 
 stream {
     server {
-        listen 10514; #로그에 대한 listen 
+        listen 10514; #로그에 대한 수신 
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }
