@@ -135,7 +135,7 @@ To delete the add-on, run:
 {{% /tab %}}
 {{< /tabs >}}
 
- **Note:** If Operator add-on is uninstalled before deleting the `DatadogAgent` custom resource, agents will continue to run on the cluster. Deleting namespace will get stuck since the `DatadogAgent` can not be finalized without a running Operator. See this Github [issue][9] for a workaround.
+ **Note:** If you uninstall the Operator add-on before deleting the `DatadogAgent` custom resource, Agents continue to run on the cluster. Deleting the namespace fails since the `DatadogAgent` cannot be finalized without a running Operator. See this Github [issue][9] for a workaround.
 
 
 {{< partial name="whats-next/whats-next.html" >}}
