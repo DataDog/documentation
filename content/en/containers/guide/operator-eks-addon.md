@@ -12,7 +12,7 @@ further_reading:
 You can install the Datadog Agent on an Amazon EKS cluster by installing the [Datadog Operator](/containers/datadog_operator)
 as an [Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and applying the `DatadogAgent` manifest.
 
-Agent installed using Operator add-on will collect data only from pods running on EC2 instances, for pods running on AWS Fargate follow the [Amazon EKS on AWS Fargate documentation][10].
+Agents installed using the Operator add-on only collect data from pods running on EC2 instances. For pods running on AWS Fargate, follow the [Amazon EKS on AWS Fargate documentation][10].
 
 Compared to the regular [Helm installation][4], there are certain differences when installing as an add-on:
 * During Operator installation, images must be pulled only from the EKS repository. This can't be changed by the user.
