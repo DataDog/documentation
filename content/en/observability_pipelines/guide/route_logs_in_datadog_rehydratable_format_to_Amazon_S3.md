@@ -153,7 +153,7 @@ Attach the policy to the IAM Instance Profile that is created with Terraform, wh
 {{% /tab %}}
 {{< /tabs >}}
 
-### Route your logs to the archive bucket
+### Connect the S3 bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][4].
 1. Click **Add a new archive**.
