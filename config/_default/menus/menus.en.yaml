@@ -4510,7 +4510,12 @@ main:
   - name: SCIM
     url: account_management/scim/
     parent: account_management
+    identifier: account_management_scim
     weight: 5
+  - name: Azure
+    url: account_management/scim/azure
+    parent: account_management_scim
+    weight: 502
   - name: API and Application Keys
     url: account_management/api-app-keys/
     parent: account_management
