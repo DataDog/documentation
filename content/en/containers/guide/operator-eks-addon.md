@@ -58,7 +58,7 @@ After you have installed the Operator add-on, you can proceed to set up the Data
 
 Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` custom resource.
 
-1. Switch to Operator installation namespace, `datadog-agent` by default.
+1. Switch to the Operator installation namespace, which is `datadog-agent` by default.
    ```bash
    kubectl config set-context --current --namespace=datadog-agent
    ```
