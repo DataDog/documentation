@@ -51,7 +51,7 @@ You can access performance metrics for your views in:
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
 | [First Input Delay][8]        | Interactivity    | Time elapsed between a user's first interaction with the page and the browser's response.             | <100ms      |
 | [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
-| [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. | <200ms        |
+| [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
 
 ## All performance metrics
 
